@@ -1,0 +1,28 @@
+<head>
+    <link rel="stylesheet" href="./index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<div class='loading'>Loading&#8230;</div>
+
+<div class='body' data-role="page">
+    <script src="./index.js"></script>
+    <div class='menu' data-type="header">
+        <button class='pick' onclick="pick()">Pick Chunk</button>
+        <button class='roll2' onclick="roll2()">Roll 2</button>
+        <button class='center' onclick="center()">Center on Unlocked</button>
+    </div>
+    <div class='menu2'>
+        <div class='text'>Auto-select neighboring chunks</div>
+        <button id='toggleNeighbors' class='toggle on' onclick="toggleNeighbors()">ON</button>
+        <div class='text'>Remove selected chunks on pick</div>
+        <button id='toggleRemove' class='toggle off locked' onclick="toggleRemove()">OFF</button>
+    </div>
+    <div class='menu3'>
+        <div id='chunkInfo1' class='text'>Unlocked chunks: 0</div>
+        <div id='chunkInfo2' class='text'>Selected chunks: 0</div>
+    </div>
+    <img class='img' draggable="false" src='./osrs_world_map_may20_2019.png' />
+    <div class='outer'></div>
+</div>
