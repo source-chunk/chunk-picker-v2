@@ -1,5 +1,5 @@
 var clicked = false, clickY;
-var zoom = 300;
+var zoom = 350;
 var scale = 30;
 var fullSize = 1075;
 var rowSize = 43;
@@ -18,6 +18,37 @@ var unlockedChunks = 0;
 var selectedChunks = 0;
 var startingIndex = 4671;
 var skip = 213;
+var fontZoom = onMobile ? 35 : 15;
+var labelZoom = onMobile ? 70 : 50;
+
+var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
+hammertime.get('pinch').set({ enable: true });
+
+hammertime.on('pinchin pinchout', function(ev) {
+    if (onMobile) {
+	    $('.pick').text(ev.type);
+    }
+});
+
+hammertime.on('panstart', function(ev) {
+    if (onMobile) {
+        clickX = ev.changedPointers[0].pageX;
+        clickY = ev.changedPointers[0].pageY;
+    }
+});
+
+hammertime.on('panend', function(ev) {
+    if (onMobile) {
+        prevScrollLeft = prevScrollLeft + scrollLeft;
+        prevScrollTop = prevScrollTop + scrollTop;
+    }
+});
+
+hammertime.on('panleft panright panup pandown', function(ev) {
+    if (onMobile) {
+        updateScrollPos(ev.changedPointers[0]);
+    }
+});
 
 window.onload = function() {
     setTimeout(doneLoading, 1500);
@@ -25,6 +56,13 @@ window.onload = function() {
 
 var doneLoading = function() {
     convertFromUrl(window.location.href.split('?')[1]);
+    center('quick');
+    if (onMobile) {
+        console.log('mobile');
+        $('.pick, .roll2, .center').css({'height': '40px', 'font-size': '4vw'});
+        $('.text, .toggle').css('font-size', '3.5vw');
+        $('.label').css('font-size', '')
+    }
     $('.loading').remove();
 }
 
@@ -34,9 +72,8 @@ $( document ).ready(function() {
     }
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/15 + 'px');
-    $('.label').css('font-size', zoom/50 + 'vw');
-    scrollToPos(parseInt($('#591').attr('id')) % rowSize, Math.floor(parseInt($('#591').attr('id')) / rowSize), 0, 0);
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.label').css('font-size', zoom/labelZoom + 'vw');
 });
 
 $(document).on({
@@ -73,7 +110,7 @@ $(document).on({
             if ($(e.target).hasClass('gray')) {
                 $(e.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
-                $('.label').css('font-size', zoom/50 + 'vw');
+                $('.label').css('font-size', zoom/labelZoom + 'vw');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             } else if ($(e.target).hasClass('selected')) {
                 fixNums($(e.target).children().text());
@@ -83,9 +120,10 @@ $(document).on({
             } else if ($(e.target).hasClass('potential')) {
                 fixNums($(e.target).children().text());
                 $(e.target).toggleClass('potential unlocked').empty().append(e.target.id);
+                $('.potential > .label').css('color', 'white');
                 $('.potential').toggleClass('selected potential');
                 autoSelectNeighbors && selectNeighbors(e.target);
-                autoRemoveSelected && $('.selected').toggleClass('selected gray');
+                autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
                 $('.pick').text('Pick Chunk');
                 $('.roll2').show();
                 isPicking = false;
@@ -95,6 +133,7 @@ $(document).on({
                 $(e.target).toggleClass('gray unlocked');
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
             }
+            convertToUrl();
         }
         $('.outer').css('cursor', 'default');
     }
@@ -114,6 +153,7 @@ var pick = function() {
         var rand = Math.floor(Math.random() * el.length);
         sNum = $(el[rand]).children().text();
         $(el[rand]).toggleClass('potential unlocked').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+        $('.potential > .label').css('color', 'white');
         $('.potential').toggleClass('selected potential');
         isPicking = false;
         $('.pick').text('Pick Chunk');
@@ -121,9 +161,10 @@ var pick = function() {
     }
     fixNums(sNum);
     autoSelectNeighbors && selectNeighbors(el[rand]);
-    autoRemoveSelected && $('.selected').toggleClass('selected gray');
+    autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
     $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
     $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+    convertToUrl();
 }
 
 var roll2 = function() {
@@ -138,7 +179,9 @@ var roll2 = function() {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
         $(el[rand]).toggleClass('selected potential');
+        $('.potential > .label').css('color', 'black');
     }
+    convertToUrl();
 }
 
 var selectNeighbors = function(el) {
@@ -150,7 +193,7 @@ var selectNeighbors = function(el) {
             if (Math.floor((parseInt(el.id) + num) / rowSize) === Math.floor(parseInt(el.id) / rowSize) && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
                 $(`#${parseInt(el.id) + num}`).toggleClass('selected gray').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
-                $('.label').css('font-size', zoom/50 + 'vw');
+                $('.label').css('font-size', zoom/labelZoom + 'vw');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             }
         } else {
@@ -158,7 +201,7 @@ var selectNeighbors = function(el) {
             if (parseInt(el.id) + num >= 0 && parseInt(el.id) + num < fullSize && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
                 $(`#${parseInt(el.id) + num}`).toggleClass('selected gray').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
-                $('.label').css('font-size', zoom/50 + 'vw');
+                $('.label').css('font-size', zoom/labelZoom + 'vw');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             }
         }
@@ -222,8 +265,8 @@ $(".body").on('scroll mousewheel', function(e) {
     $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/15 + 'px');
-    $('.label').css('font-size', zoom/50 + 'vw');
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.label').css('font-size', zoom/labelZoom + 'vw');
 });
 
 var toggleNeighbors = function(e) {
@@ -254,10 +297,10 @@ var toggleRemove = function(e) {
     }
 }
 
-var center = function(e) {
+var center = function(extra) {
     let arr = $('.unlocked');
     if (arr.length < 1) {
-        scrollToPos(parseInt($('#591').attr('id')) % rowSize, Math.floor(parseInt($('#591').attr('id')) / rowSize), 0, 0);
+        scrollToPos(parseInt($('#591').attr('id')) % rowSize, Math.floor(parseInt($('#591').attr('id')) / rowSize), 0, 0, extra === 'quick');
         return;
     }
     let sumX = 0;
@@ -268,16 +311,15 @@ var center = function(e) {
         sumY += Math.floor(parseInt($(this).attr('id')) / rowSize);
         num++;
     });
-    scrollToPos(Math.floor(sumX/num), Math.floor(sumY/num), sumX/num - Math.floor(sumX/num), sumY/num - Math.floor(sumY/num));
-    convertToUrl();
+    scrollToPos(Math.floor(sumX/num), Math.floor(sumY/num), sumX/num - Math.floor(sumX/num), sumY/num - Math.floor(sumY/num), extra === 'quick');
 }
 
-var scrollToPos = function(x, y, xPart, yPart) {
+var scrollToPos = function(x, y, xPart, yPart, doQuick) {
     //zoom = 150;
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/15 + 'px');
-    $('.label').css('font-size', zoom/50 + 'vw');
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.label').css('font-size', zoom/labelZoom + 'vw');
     prevScrollLeft = -$('#' + (y * rowSize + x)).position().left + $(window).width() / 2 - $('#' + (rowSize + 1)).position().left * (xPart + .5);
     prevScrollTop = -$('#' + (y * rowSize + x)).position().top + $(window).height() / 2 - $('#' + (rowSize + 1)).position().top * (yPart + .5);
     if (prevScrollLeft > 0) {
@@ -292,8 +334,8 @@ var scrollToPos = function(x, y, xPart, yPart) {
     if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
         prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
     }
-    $('.img').animate({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
-    $('.outer').animate({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+    doQuick ? $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop}) : $('.img').animate({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+    doQuick ? $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop}) : $('.outer').animate({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
 }
 
 var fixNums = function(num) {
@@ -317,7 +359,7 @@ var convertFromUrl = function(url) {
         $('#' + el).toggleClass('gray unlocked');
         $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
     });
-    unlocked[0] !== "" && selected.forEach(function(el) {
+    selected[0] !== "" && selected.forEach(function(el) {
         $('#' + el).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
         selectedNum++;
         $('.label').css('font-size', zoom/60 + 'vw');
