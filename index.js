@@ -27,7 +27,7 @@ hammertime.get('pinch').set({ enable: true });
 hammertime.on('pinchin pinchout', function(ev) {
     $('.center').text('pinch');
     if (onMobile) {
-        $('.roll2').text('mobile');
+        $('.roll2').text(ev.type);
         let oldZoom = zoom;
         e.preventDefault();
         if (ev.type === 'pinchout') {
