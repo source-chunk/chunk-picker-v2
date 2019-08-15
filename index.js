@@ -19,7 +19,7 @@ var selectedChunks = 0;
 var startingIndex = 4671;
 var skip = 213;
 var fontZoom = onMobile ? 40 : 15;
-var labelZoom = onMobile ? 800 : 50;
+var labelZoom = onMobile ? 80 : 50;
 
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
@@ -79,34 +79,36 @@ hammertime.on('panleft panright panup pandown', function(ev) {
 });
 
 hammertime.on('tap', function(ev) {
-    console.log('tap');
-    if ($(ev.target).hasClass('gray')) {
-        $(ev.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
-        selectedNum++;
-        $('.label').css('font-size', zoom/labelZoom + 'vw');
-        $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-    } else if ($(ev.target).hasClass('selected')) {
-        fixNums($(ev.target).children().text());
-        $(ev.target).toggleClass('selected unlocked').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
-        $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
-        $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-    } else if ($(ev.target).hasClass('potential')) {
-        fixNums($(ev.target).children().text());
-        $(ev.target).toggleClass('potential unlocked').empty().append(ev.target.id);
-        $('.potential > .label').css('color', 'white');
-        $('.potential').toggleClass('selected potential');
-        autoSelectNeighbors && selectNeighbors(ev.target);
-        autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
-        $('.pick').text('Pick Chunk');
-        $('.roll2').show();
-        isPicking = false;
-        $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
-        $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-    } else {
-        $(ev.target).toggleClass('gray unlocked');
-        $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
+    if (onMobile) {
+        console.log('tap');
+        if ($(ev.target).hasClass('gray')) {
+            $(ev.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
+            selectedNum++;
+            $('.label').css('font-size', zoom/labelZoom + 'vw');
+            $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
+        } else if ($(ev.target).hasClass('selected')) {
+            fixNums($(ev.target).children().text());
+            $(ev.target).toggleClass('selected unlocked').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
+            $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+            $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+        } else if ($(ev.target).hasClass('potential')) {
+            fixNums($(ev.target).children().text());
+            $(ev.target).toggleClass('potential unlocked').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
+            $('.potential > .label').css('color', 'white');
+            $('.potential').toggleClass('selected potential');
+            autoSelectNeighbors && selectNeighbors(ev.target);
+            autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
+            $('.pick').text('Pick Chunk');
+            $('.roll2').show();
+            isPicking = false;
+            $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+            $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+        } else {
+            $(ev.target).toggleClass('gray unlocked');
+            $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
+        }
+        convertToUrl();
     }
-    convertToUrl();
 });
 
 window.onload = function() {
@@ -120,7 +122,7 @@ var doneLoading = function() {
         console.log('mobile');
         $('.pick, .roll2, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
         $('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
-        $('.box').toggleClass('mobile');
+        $('.box').addClass('mobile');
     }
     $('.loading').remove();
 }
@@ -181,7 +183,7 @@ $(document).on({
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             } else if ($(e.target).hasClass('potential')) {
                 fixNums($(e.target).children().text());
-                $(e.target).toggleClass('potential unlocked').empty().append(e.target.id);
+                $(e.target).toggleClass('potential unlocked').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
                 $('.potential > .label').css('color', 'white');
                 $('.potential').toggleClass('selected potential');
                 autoSelectNeighbors && selectNeighbors(e.target);
