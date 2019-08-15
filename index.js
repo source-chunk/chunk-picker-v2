@@ -25,11 +25,11 @@ var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
 
 hammertime.on('pinchin pinchout', function(ev) {
-    $('.center').text('pinch');
+    $('.center').text('pinchy');
     if (onMobile) {
         $('.roll2').text(ev.type);
         let oldZoom = zoom;
-        e.preventDefault();
+        ev.preventDefault();
         if (ev.type === 'pinchout') {
             $('.pick').text('zoom in');
             zoom += scale;
@@ -39,8 +39,8 @@ hammertime.on('pinchin pinchout', function(ev) {
             zoom -= scale;
             zoom < 100 ? zoom = 100 : zoom = zoom;
         }
-        prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + e.clientX)) + e.clientX;
-        prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + e.clientY)) + e.clientY;
+        prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + ev.clientX)) + ev.clientX;
+        prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + ev.clientY)) + ev.clientY;
         if (prevScrollLeft > 0) {
             prevScrollLeft = 0;
         }
