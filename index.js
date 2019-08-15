@@ -20,6 +20,8 @@ var startingIndex = 4671;
 var skip = 213;
 var fontZoom = onMobile ? 40 : 15;
 var labelZoom = onMobile ? 80 : 50;
+var minZoom = onMobile ? 200 : 100;
+var maxZoom = 550;
 
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
@@ -183,10 +185,10 @@ var zoomButton = function(dir) {
     let oldZoom = zoom;
     if (dir > 0) {
         zoom += scale;
-        zoom > 550 ? zoom = 550 : zoom = zoom;
+        zoom > maxZoom ? zoom = maxZoom : zoom = zoom;
     } else {
         zoom -= scale;
-        zoom < 100 ? zoom = 100 : zoom = zoom;
+        zoom < minZoom ? zoom = minZoom : zoom = zoom;
     }
     prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + $(window).width()/2)) + $(window).width()/2;
     prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + $(window).height()/2)) + $(window).height()/2;
@@ -313,10 +315,10 @@ $(".body").on('scroll mousewheel', function(e) {
     e.preventDefault();
     if (e.originalEvent.wheelDelta >= 0) {
         zoom += scale;
-        zoom > 550 ? zoom = 550 : zoom = zoom;
+        zoom > maxZoom ? zoom = maxZoom : zoom = zoom;
     } else {
         zoom -= scale;
-        zoom < 100 ? zoom = 100 : zoom = zoom;
+        zoom < minZoom ? zoom = minZoom : zoom = zoom;
     }
     prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + e.clientX)) + e.clientX;
     prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + e.clientY)) + e.clientY;
