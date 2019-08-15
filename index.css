@@ -224,6 +224,28 @@
     margin-bottom: 25px;
 }
 
+.menu4 {
+    position: fixed;
+    z-index: 99 !important;
+    bottom: 30px;
+    left: 10px;
+    min-width: 80px;
+    min-height: 40px;
+}
+
+.icon {
+    background-color: rgb(230, 230, 230);
+    font-size: 2vw;
+    color: black;
+    display: inline;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    min-width: 40px;
+    font-weight: bolder;
+}
+
 .locked {
     background-color: gray;
     cursor: not-allowed;

@@ -26,36 +26,7 @@ hammertime.get('pinch').set({ enable: true });
 
 hammertime.on('pinchin pinchout', function(ev) {
     if (onMobile) {
-        let oldZoom = zoom;
         ev.preventDefault();
-        if (ev.type === 'pinchout') {
-            zoom += scale;
-            zoom > 550 ? zoom = 550 : zoom = zoom;
-        } else {
-            zoom -= scale;
-            zoom < 100 ? zoom = 100 : zoom = zoom;
-        }
-        prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + ev.clientX)) + ev.clientX;
-        prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + ev.clientY)) + ev.clientY;
-        if (prevScrollLeft > 0) {
-            prevScrollLeft = 0;
-        }
-        if (prevScrollTop > 0) {
-            prevScrollTop = 0;
-        }
-        if (prevScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
-            prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
-        }
-        if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
-            prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
-        }
-        $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
-        $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
-        $('.img').width(zoom + 'vw');
-        $('.outer').width(zoom + 'vw');
-        $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
-        $('.label').css('font-size', zoom/labelZoom + 'vw');
-        center('quick');
     }
 });
 
@@ -123,6 +94,10 @@ var doneLoading = function() {
         $('.pick, .roll2, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
         $('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
         $('.box').addClass('mobile');
+        $('.body').append(`<div class='menu4'>
+            <button id='zoomIn' class='icon' onclick="zoomButton(1)">+</button>
+            <button id='zoomOut' class='icon' onclick="zoomButton(-1)">-</button>
+            </div>`);
     }
     $('.loading').remove();
 }
@@ -202,6 +177,38 @@ $(document).on({
         $('.outer').css('cursor', 'default');
     }
 });
+
+var zoomButton = function(dir) {
+    console.log(dir);
+    let oldZoom = zoom;
+    if (dir > 0) {
+        zoom += scale;
+        zoom > 550 ? zoom = 550 : zoom = zoom;
+    } else {
+        zoom -= scale;
+        zoom < 100 ? zoom = 100 : zoom = zoom;
+    }
+    prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + $(window).width()/2)) + $(window).width()/2;
+    prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + $(window).height()/2)) + $(window).height()/2;
+    if (prevScrollLeft > 0) {
+        prevScrollLeft = 0;
+    }
+    if (prevScrollTop > 0) {
+        prevScrollTop = 0;
+    }
+    if (prevScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
+        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
+    }
+    if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
+        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
+    }
+    $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+    $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+    $('.img').width(zoom + 'vw');
+    $('.outer').width(zoom + 'vw');
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.label').css('font-size', zoom/labelZoom + 'vw');
+}
 
 var pick = function() {
     var el;
