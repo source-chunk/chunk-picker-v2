@@ -27,6 +27,7 @@ hammertime.get('pinch').set({ enable: true });
 hammertime.on('pinchin pinchout', function(ev) {
     $('.center').text('pinch');
     if (onMobile) {
+        $('.roll2').text('mobile');
         let oldZoom = zoom;
         e.preventDefault();
         if (ev.type === 'pinchout') {
@@ -59,7 +60,7 @@ hammertime.on('pinchin pinchout', function(ev) {
         $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
         $('.label').css('font-size', zoom/labelZoom + 'vw');
     } else {
-        $('roll2').text('not mobile');
+        $('.roll2').text('not mobile');
     }
 });
 
