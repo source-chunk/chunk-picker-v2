@@ -30,7 +30,7 @@
     transition: background-color .25s linear;
 }
 
-.box:hover {
+.box:hover:not(.mobile) {
     background-color: rgba(200, 200, 200, .5);
     transition-duration: 0s;
 }
@@ -56,15 +56,15 @@
     box-shadow:inset 0px 0px 0px .5px black;
 }
 
-.potential:hover {
+.potential::not(.mobile) {
     background-color: rgba(255, 255, 100, .7);
 }
 
-.selected:hover {
+.selected:hover:not(.mobile) {
     background-color: rgba(100, 255, 100, .7);
 }
 
-.gray:hover {
+.gray:hover:not(.mobile) {
     background-color: rgba(150, 150, 150, .7);
 }
 

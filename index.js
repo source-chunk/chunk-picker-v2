@@ -18,15 +18,43 @@ var unlockedChunks = 0;
 var selectedChunks = 0;
 var startingIndex = 4671;
 var skip = 213;
-var fontZoom = onMobile ? 35 : 15;
-var labelZoom = onMobile ? 70 : 50;
+var fontZoom = onMobile ? 40 : 15;
+var labelZoom = onMobile ? 800 : 50;
 
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
 
 hammertime.on('pinchin pinchout', function(ev) {
     if (onMobile) {
-	    $('.pick').text(ev.type);
+        let oldZoom = zoom;
+        e.preventDefault();
+        if (e.originalEvent.wheelDelta >= 0) {
+            zoom += scale;
+            zoom > 550 ? zoom = 550 : zoom = zoom;
+        } else {
+            zoom -= scale;
+            zoom < 100 ? zoom = 100 : zoom = zoom;
+        }
+        prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + e.clientX)) + e.clientX;
+        prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + e.clientY)) + e.clientY;
+        if (prevScrollLeft > 0) {
+            prevScrollLeft = 0;
+        }
+        if (prevScrollTop > 0) {
+            prevScrollTop = 0;
+        }
+        if (prevScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
+            prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
+        }
+        if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
+            prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
+        }
+        $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+        $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+        $('.img').width(zoom + 'vw');
+        $('.outer').width(zoom + 'vw');
+        $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+        $('.label').css('font-size', zoom/labelZoom + 'vw');
     }
 });
 
@@ -50,6 +78,37 @@ hammertime.on('panleft panright panup pandown', function(ev) {
     }
 });
 
+hammertime.on('tap', function(ev) {
+    console.log('tap');
+    if ($(ev.target).hasClass('gray')) {
+        $(ev.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
+        selectedNum++;
+        $('.label').css('font-size', zoom/labelZoom + 'vw');
+        $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
+    } else if ($(ev.target).hasClass('selected')) {
+        fixNums($(ev.target).children().text());
+        $(ev.target).toggleClass('selected unlocked').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
+        $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+        $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+    } else if ($(ev.target).hasClass('potential')) {
+        fixNums($(ev.target).children().text());
+        $(ev.target).toggleClass('potential unlocked').empty().append(ev.target.id);
+        $('.potential > .label').css('color', 'white');
+        $('.potential').toggleClass('selected potential');
+        autoSelectNeighbors && selectNeighbors(ev.target);
+        autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
+        $('.pick').text('Pick Chunk');
+        $('.roll2').show();
+        isPicking = false;
+        $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+        $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+    } else {
+        $(ev.target).toggleClass('gray unlocked');
+        $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
+    }
+    convertToUrl();
+});
+
 window.onload = function() {
     setTimeout(doneLoading, 1500);
 }
@@ -59,9 +118,9 @@ var doneLoading = function() {
     center('quick');
     if (onMobile) {
         console.log('mobile');
-        $('.pick, .roll2, .center').css({'height': '40px', 'font-size': '4vw'});
-        $('.text, .toggle').css('font-size', '3.5vw');
-        $('.label').css('font-size', '')
+        $('.pick, .roll2, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
+        $('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
+        $('.box').toggleClass('mobile');
     }
     $('.loading').remove();
 }
@@ -107,6 +166,9 @@ $(document).on({
             prevScrollLeft = prevScrollLeft + scrollLeft;
             prevScrollTop = prevScrollTop + scrollTop;
         } else if ($(e.target).hasClass('box')) {
+            if (onMobile) {
+                return;
+            }
             if ($(e.target).hasClass('gray')) {
                 $(e.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
