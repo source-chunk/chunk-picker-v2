@@ -25,17 +25,13 @@ var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
 
 hammertime.on('pinchin pinchout', function(ev) {
-    $('.center').text('pinchy');
     if (onMobile) {
-        $('.roll2').text(ev.type);
         let oldZoom = zoom;
         ev.preventDefault();
         if (ev.type === 'pinchout') {
-            $('.pick').text('zoom in');
             zoom += scale;
             zoom > 550 ? zoom = 550 : zoom = zoom;
         } else {
-            $('.pick').text('zoom out');
             zoom -= scale;
             zoom < 100 ? zoom = 100 : zoom = zoom;
         }
@@ -59,8 +55,7 @@ hammertime.on('pinchin pinchout', function(ev) {
         $('.outer').width(zoom + 'vw');
         $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
         $('.label').css('font-size', zoom/labelZoom + 'vw');
-    } else {
-        $('.roll2').text('not mobile');
+        center('quick');
     }
 });
 
@@ -86,7 +81,6 @@ hammertime.on('panleft panright panup pandown', function(ev) {
 
 hammertime.on('tap', function(ev) {
     if (onMobile && $(ev.target).hasClass('box')) {
-        console.log('tap');
         if ($(ev.target).hasClass('gray')) {
             $(ev.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
             selectedNum++;
@@ -311,11 +305,9 @@ $(".body").on('scroll mousewheel', function(e) {
     let oldZoom = zoom;
     e.preventDefault();
     if (e.originalEvent.wheelDelta >= 0) {
-        $('.pick').text('scroll in');
         zoom += scale;
         zoom > 550 ? zoom = 550 : zoom = zoom;
     } else {
-        $('.pick').text('scroll out');
         zoom -= scale;
         zoom < 100 ? zoom = 100 : zoom = zoom;
     }
