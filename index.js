@@ -25,10 +25,11 @@ var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
 
 hammertime.on('pinchin pinchout', function(ev) {
+    $('.center').text('pinch');
     if (onMobile) {
         let oldZoom = zoom;
         e.preventDefault();
-        if (ev.type === 'pinchin') {
+        if (ev.type === 'pinchout') {
             $('.pick').text('zoom in');
             zoom += scale;
             zoom > 550 ? zoom = 550 : zoom = zoom;
