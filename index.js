@@ -58,6 +58,8 @@ hammertime.on('pinchin pinchout', function(ev) {
         $('.outer').width(zoom + 'vw');
         $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
         $('.label').css('font-size', zoom/labelZoom + 'vw');
+    } else {
+        $('roll2').text('not mobile');
     }
 });
 
@@ -308,11 +310,11 @@ $(".body").on('scroll mousewheel', function(e) {
     let oldZoom = zoom;
     e.preventDefault();
     if (e.originalEvent.wheelDelta >= 0) {
-        $('.roll2').text('scroll in');
+        $('.pick').text('scroll in');
         zoom += scale;
         zoom > 550 ? zoom = 550 : zoom = zoom;
     } else {
-        $('.roll2').text('scroll out');
+        $('.pick').text('scroll out');
         zoom -= scale;
         zoom < 100 ? zoom = 100 : zoom = zoom;
     }
