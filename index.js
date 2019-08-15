@@ -28,7 +28,7 @@ hammertime.on('pinchin pinchout', function(ev) {
     if (onMobile) {
         let oldZoom = zoom;
         e.preventDefault();
-        if (e.originalEvent.wheelDelta >= 0) {
+        if (ev.type === 'pinchin') {
             zoom += scale;
             zoom > 550 ? zoom = 550 : zoom = zoom;
         } else {
