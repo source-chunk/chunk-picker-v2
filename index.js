@@ -26,7 +26,7 @@ var maxZoom = 550;
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
 
-hammertime.on('pinchin pinchout', function(ev) {
+hammertime.on('pinchin pinchout doubletap', function(ev) {
     if (onMobile) {
         ev.preventDefault();
     }
@@ -181,7 +181,6 @@ $(document).on({
 });
 
 var zoomButton = function(dir) {
-    console.log(dir);
     let oldZoom = zoom;
     if (dir > 0) {
         zoom += scale;
