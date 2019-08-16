@@ -20,7 +20,7 @@ var startingIndex = 4671;
 var skip = 213;
 var fontZoom = onMobile ? 40 : 15;
 var labelZoom = onMobile ? 80 : 50;
-var minZoom = onMobile ? 200 : 100;
+var minZoom = onMobile ? 275 : 100;
 var maxZoom = 550;
 
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
