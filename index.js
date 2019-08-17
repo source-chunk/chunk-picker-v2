@@ -13,8 +13,8 @@ var clicked = false;                                                        // I
 var zoom = 350;                                                             // Starting zoom value
 var maxZoom = 550;                                                          // Furthest zoom in value
 var minZoom = onMobile ? 275 : 100;                                         // Smallest zoom out value
-var fontZoom = onMobile ? 40 : 15;                                          // Font size zoom
-var labelZoom = onMobile ? 800 : 50;                                         // Selected label font size zoom
+var fontZoom = onMobile ? 400 : 15;                                          // Font size zoom
+var labelZoom = onMobile ? 80 : 50;                                         // Selected label font size zoom
 var scale = 30;                                                             // Amount zoomed every 'zoom' action
 var fullSize = 1075;                                                        // Amount of chunks present
 var rowSize = 43;                                                           // Amount of chunks per row
@@ -32,6 +32,7 @@ var startingIndex = 4671;                                                   // I
 var skip = 213;                                                             // Number of indices to skip between columns for chunk numbering
 
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);    // Initialize Hammerjs [Mobile]
+hammertime.get('pinch').set({ enable: true });
 
 // ----------------------------------------------------------
 
