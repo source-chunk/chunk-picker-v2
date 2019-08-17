@@ -1,16 +1,17 @@
-var clicked = false, clickY;
+var clicked = false;
 var zoom = 350;
+var maxZoom = 550;
+var minZoom = onMobile ? 275 : 100;
+var fontZoom = onMobile ? 40 : 15;
+var labelZoom = onMobile ? 80 : 50;
 var scale = 30;
 var fullSize = 1075;
 var rowSize = 43;
-var onMobile = typeof window.orientation !== 'undefined';
-var isPicking = false;
-var autoSelectNeighbors = true;
-var autoRemoveSelected = false;
 var scrollLeft = 0;
 var prevScrollLeft = 0;
 var scrollTop = 0;
 var prevScrollTop = 0;
+
 var ratio = 4800 / 8256;
 var movedNum = 0;
 var selectedNum = 1;
@@ -18,24 +19,45 @@ var unlockedChunks = 0;
 var selectedChunks = 0;
 var startingIndex = 4671;
 var skip = 213;
-var fontZoom = onMobile ? 40 : 15;
-var labelZoom = onMobile ? 80 : 50;
-var minZoom = onMobile ? 275 : 100;
-var maxZoom = 550;
+
+var onMobile = typeof window.orientation !== 'undefined';
+var isPicking = false;
+var autoSelectNeighbors = true;
+var autoRemoveSelected = false;
 
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
 
+// ----------------------------------------------------------
+
+// Event Listeners
+
+// ----------------------------------------------------------
+
+// Shows loading screen while page sorts itself
 window.onload = function() {
     setTimeout(doneLoading, 1000);
 }
 
+// Creates board of boxes, sets initial sizes of scalable elements
+$( document ).ready(function() {
+    for (var i = 0; i < fullSize; i++) {
+        $('.outer').append(`<div id=${i} class='box gray'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</div>`);
+    }
+    $('.img').width(zoom + 'vw');
+    $('.outer').width(zoom + 'vw');
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.label').css('font-size', zoom/labelZoom + 'vw');
+});
+
+// [Mobile] Prevents normal mobile zooming methods
 hammertime.on('pinchin pinchout doubletap', function(ev) {
     if (onMobile) {
         ev.preventDefault();
     }
 });
 
+// [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
     if (onMobile) {
         clickX = ev.changedPointers[0].pageX;
@@ -43,6 +65,7 @@ hammertime.on('panstart', function(ev) {
     }
 });
 
+// [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 hammertime.on('panend', function(ev) {
     if (onMobile) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
@@ -50,12 +73,14 @@ hammertime.on('panend', function(ev) {
     }
 });
 
+// [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
 hammertime.on('panleft panright panup pandown', function(ev) {
     if (onMobile) {
         updateScrollPos(ev.changedPointers[0]);
     }
 });
 
+//[Mobile] Handles mobile 'clicks'
 hammertime.on('tap', function(ev) {
     if (onMobile && $(ev.target).hasClass('box')) {
         if ($(ev.target).hasClass('gray')) {
@@ -88,32 +113,7 @@ hammertime.on('tap', function(ev) {
     }
 });
 
-var doneLoading = function() {
-    convertFromUrl(window.location.href.split('?')[1]);
-    center('quick');
-    if (onMobile) {
-        console.log('mobile');
-        $('.pick, .roll2, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
-        $('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
-        $('.box').addClass('mobile');
-        $('.body').append(`<div class='menu4'>
-            <button id='zoomIn' class='icon' onclick="zoomButton(1)">+</button>
-            <button id='zoomOut' class='icon' onclick="zoomButton(-1)">-</button>
-            </div>`);
-    }
-    $('.loading').remove();
-}
-
-$( document ).ready(function() {
-    for (var i = 0; i < fullSize; i++) {
-        $('.outer').append(`<div id=${i} class='box gray'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</div>`);
-    }
-    $('.img').width(zoom + 'vw');
-    $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
-    $('.label').css('font-size', zoom/labelZoom + 'vw');
-});
-
+// Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
         if (e.button !== 0) {
@@ -180,135 +180,7 @@ $(document).on({
     }
 });
 
-var zoomButton = function(dir) {
-    let oldZoom = zoom;
-    if (dir > 0) {
-        zoom += scale;
-        zoom > maxZoom ? zoom = maxZoom : zoom = zoom;
-    } else {
-        zoom -= scale;
-        zoom < minZoom ? zoom = minZoom : zoom = zoom;
-    }
-    prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + $(window).width()/2)) + $(window).width()/2;
-    prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + $(window).height()/2)) + $(window).height()/2;
-    if (prevScrollLeft > 0) {
-        prevScrollLeft = 0;
-    }
-    if (prevScrollTop > 0) {
-        prevScrollTop = 0;
-    }
-    if (prevScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
-        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
-    }
-    if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
-        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
-    }
-    $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
-    $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
-    $('.img').width(zoom + 'vw');
-    $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
-    $('.label').css('font-size', zoom/labelZoom + 'vw');
-}
-
-var pick = function() {
-    var el;
-    var rand;
-    var sNum;
-    if (!isPicking) {
-        el = $('.selected');
-        rand = Math.floor(Math.random() * el.length);
-        sNum = $(el[rand]).children().text();
-        $(el[rand]).toggleClass('selected unlocked').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
-    } else {
-        el = $('.potential');
-        var rand = Math.floor(Math.random() * el.length);
-        sNum = $(el[rand]).children().text();
-        $(el[rand]).toggleClass('potential unlocked').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
-        $('.potential > .label').css('color', 'white');
-        $('.potential').toggleClass('selected potential');
-        isPicking = false;
-        $('.pick').text('Pick Chunk');
-        $('.roll2').show();
-    }
-    fixNums(sNum);
-    autoSelectNeighbors && selectNeighbors(el[rand]);
-    autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
-    $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
-    $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-    convertToUrl();
-}
-
-var roll2 = function() {
-    isPicking = true;
-    var el = $('.selected');
-    var rand;
-    if (el.length > 0) {
-        $('.roll2').hide();
-        $('.pick').text('Pick for me');
-    }
-    for (var i = 0; i < 2; i++) {
-        el = $('.selected');
-        rand = Math.floor(Math.random() * el.length);
-        $(el[rand]).toggleClass('selected potential');
-        $('.potential > .label').css('color', 'black');
-    }
-    convertToUrl();
-}
-
-var selectNeighbors = function(el) {
-    var ops = ['-x', '+x', '-y', '+y'];
-    var num;
-    for (var i = 0; i < 4; i++) {
-        if (ops[i].substring(1,2) === 'x') {
-            num = (i - 1) * 2 + 1;
-            if (Math.floor((parseInt(el.id) + num) / rowSize) === Math.floor(parseInt(el.id) / rowSize) && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
-                $(`#${parseInt(el.id) + num}`).toggleClass('selected gray').append('<span class="label">' + selectedNum + '</span>');
-                selectedNum++;
-                $('.label').css('font-size', zoom/labelZoom + 'vw');
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-            }
-        } else {
-            num = ((i - 3) * 2 + 1) * rowSize;
-            if (parseInt(el.id) + num >= 0 && parseInt(el.id) + num < fullSize && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
-                $(`#${parseInt(el.id) + num}`).toggleClass('selected gray').append('<span class="label">' + selectedNum + '</span>');
-                selectedNum++;
-                $('.label').css('font-size', zoom/labelZoom + 'vw');
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-            }
-        }
-    }
-}
-
-var updateScrollPos = function(e) {
-    let newScrollLeft = prevScrollLeft - (clickX - e.pageX);
-    let newScrollTop = prevScrollTop - (clickY - e.pageY);
-    if (newScrollLeft > 0) {
-        newScrollLeft = 0;
-        prevScrollLeft = 0;
-        clickX = e.pageX;
-    }
-    if (newScrollTop > 0) {
-        newScrollTop = 0;
-        prevScrollTop = 0;
-        clickY = e.pageY;
-    }
-    if (newScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
-        newScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
-        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
-        clickX = e.pageX;
-    }
-    if (newScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
-        newScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
-        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
-        clickY = e.pageY;
-    }
-    $('.img').css({marginLeft: newScrollLeft, marginTop: newScrollTop});
-    $('.outer').css({marginLeft: newScrollLeft, marginTop: newScrollTop});
-    scrollLeft = - (clickX - e.pageX);
-    scrollTop = - (clickY - e.pageY);
-}
-
+// Handles zooming
 $(".body").on('scroll mousewheel', function(e) {
     let oldZoom = zoom;
     e.preventDefault();
@@ -341,6 +213,92 @@ $(".body").on('scroll mousewheel', function(e) {
     $('.label').css('font-size', zoom/labelZoom + 'vw');
 });
 
+// ----------------------------------------------------------
+
+// Button Functions
+
+// ----------------------------------------------------------
+
+// [Mobile] Mobile zoom capabilities
+var zoomButton = function(dir) {
+    let oldZoom = zoom;
+    if (dir > 0) {
+        zoom += scale;
+        zoom > maxZoom ? zoom = maxZoom : zoom = zoom;
+    } else {
+        zoom -= scale;
+        zoom < minZoom ? zoom = minZoom : zoom = zoom;
+    }
+    prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + $(window).width()/2)) + $(window).width()/2;
+    prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + $(window).height()/2)) + $(window).height()/2;
+    if (prevScrollLeft > 0) {
+        prevScrollLeft = 0;
+    }
+    if (prevScrollTop > 0) {
+        prevScrollTop = 0;
+    }
+    if (prevScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
+        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
+    }
+    if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
+        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
+    }
+    $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+    $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+    $('.img').width(zoom + 'vw');
+    $('.outer').width(zoom + 'vw');
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.label').css('font-size', zoom/labelZoom + 'vw');
+}
+
+// Pick button: picks a random chunk from selected/potential
+var pick = function() {
+    var el;
+    var rand;
+    var sNum;
+    if (!isPicking) {
+        el = $('.selected');
+        rand = Math.floor(Math.random() * el.length);
+        sNum = $(el[rand]).children().text();
+        $(el[rand]).toggleClass('selected unlocked').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+    } else {
+        el = $('.potential');
+        var rand = Math.floor(Math.random() * el.length);
+        sNum = $(el[rand]).children().text();
+        $(el[rand]).toggleClass('potential unlocked').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+        $('.potential > .label').css('color', 'white');
+        $('.potential').toggleClass('selected potential');
+        isPicking = false;
+        $('.pick').text('Pick Chunk');
+        $('.roll2').show();
+    }
+    fixNums(sNum);
+    autoSelectNeighbors && selectNeighbors(el[rand]);
+    autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+    $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+    $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+    convertToUrl();
+}
+
+// Roll 2 button: rolls 2 chunks from all selected chunks
+var roll2 = function() {
+    isPicking = true;
+    var el = $('.selected');
+    var rand;
+    if (el.length > 0) {
+        $('.roll2').hide();
+        $('.pick').text('Pick for me');
+    }
+    for (var i = 0; i < 2; i++) {
+        el = $('.selected');
+        rand = Math.floor(Math.random() * el.length);
+        $(el[rand]).toggleClass('selected potential');
+        $('.potential > .label').css('color', 'black');
+    }
+    convertToUrl();
+}
+
+// Toggle functionality for if neighbors are to be selected on chunk pick
 var toggleNeighbors = function(e) {
     if ($('#toggleNeighbors').hasClass('locked')) {
         return;
@@ -355,6 +313,7 @@ var toggleNeighbors = function(e) {
     }
 }
 
+// Toggle functionality for if other selected chunks are set to unlocked after chunk pick
 var toggleRemove = function(e) {
     if ($('#toggleRemove').hasClass('locked')) {
         return;
@@ -369,6 +328,7 @@ var toggleRemove = function(e) {
     }
 }
 
+// Centers on average position of all unlocked chunks
 var center = function(extra) {
     let arr = $('.unlocked');
     if (arr.length < 1) {
@@ -386,8 +346,85 @@ var center = function(extra) {
     scrollToPos(Math.floor(sumX/num), Math.floor(sumY/num), sumX/num - Math.floor(sumX/num), sumY/num - Math.floor(sumY/num), extra === 'quick');
 }
 
+// ----------------------------------------------------------
+
+// Other Functions
+
+// ----------------------------------------------------------
+
+// Once page has loaded, page is centered and initial chunks are selected/unlocked (from url)
+var doneLoading = function() {
+    convertFromUrl(window.location.href.split('?')[1]);
+    center('quick');
+    if (onMobile) {
+        $('.pick, .roll2, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
+        $('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
+        $('.box').addClass('mobile').css({'height': zoom/rowSize + 'vw', 'width': zoom/rowSize + 'vw'});
+        $('.body').append(`<div class='menu4'>
+            <button id='zoomIn' class='icon' onclick="zoomButton(1)">+</button>
+            <button id='zoomOut' class='icon' onclick="zoomButton(-1)">-</button>
+            </div>`);
+    }
+    $('.loading').remove();
+}
+
+// Sets all neighbors of recently unlocked chunk to selected
+var selectNeighbors = function(el) {
+    var ops = ['-x', '+x', '-y', '+y'];
+    var num;
+    for (var i = 0; i < 4; i++) {
+        if (ops[i].substring(1,2) === 'x') {
+            num = (i - 1) * 2 + 1;
+            if (Math.floor((parseInt(el.id) + num) / rowSize) === Math.floor(parseInt(el.id) / rowSize) && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
+                $(`#${parseInt(el.id) + num}`).toggleClass('selected gray').append('<span class="label">' + selectedNum + '</span>');
+                selectedNum++;
+                $('.label').css('font-size', zoom/labelZoom + 'vw');
+                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
+            }
+        } else {
+            num = ((i - 3) * 2 + 1) * rowSize;
+            if (parseInt(el.id) + num >= 0 && parseInt(el.id) + num < fullSize && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
+                $(`#${parseInt(el.id) + num}`).toggleClass('selected gray').append('<span class="label">' + selectedNum + '</span>');
+                selectedNum++;
+                $('.label').css('font-size', zoom/labelZoom + 'vw');
+                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
+            }
+        }
+    }
+}
+
+// Scroll to new position (for panning/dragging)
+var updateScrollPos = function(e) {
+    let newScrollLeft = prevScrollLeft - (clickX - e.pageX);
+    let newScrollTop = prevScrollTop - (clickY - e.pageY);
+    if (newScrollLeft > 0) {
+        newScrollLeft = 0;
+        prevScrollLeft = 0;
+        clickX = e.pageX;
+    }
+    if (newScrollTop > 0) {
+        newScrollTop = 0;
+        prevScrollTop = 0;
+        clickY = e.pageY;
+    }
+    if (newScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
+        newScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
+        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
+        clickX = e.pageX;
+    }
+    if (newScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
+        newScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
+        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
+        clickY = e.pageY;
+    }
+    $('.img').css({marginLeft: newScrollLeft, marginTop: newScrollTop});
+    $('.outer').css({marginLeft: newScrollLeft, marginTop: newScrollTop});
+    scrollLeft = - (clickX - e.pageX);
+    scrollTop = - (clickY - e.pageY);
+}
+
+// Scrolls to position x.xPart, y.yPart
 var scrollToPos = function(x, y, xPart, yPart, doQuick) {
-    //zoom = 150;
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
     $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
@@ -410,6 +447,7 @@ var scrollToPos = function(x, y, xPart, yPart, doQuick) {
     doQuick ? $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop}) : $('.outer').animate({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
 }
 
+// Decreases selected number values on change
 var fixNums = function(num) {
     $('.label').each(function(index) {
         if (parseInt($(this).text()) >= num) {
@@ -419,6 +457,7 @@ var fixNums = function(num) {
     selectedNum--;
 }
 
+// Gather chunk initial state from url
 var convertFromUrl = function(url) {
     if (!url) {
         return;
@@ -450,6 +489,7 @@ var convertFromUrl = function(url) {
     }
 }
 
+// Convert chunk state to url
 var convertToUrl = function() {
     var str = '';
     $('.unlocked').each(function(index) {
