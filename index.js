@@ -371,6 +371,7 @@ var doneLoading = function() {
             <button id='zoomIn' class='icon' onclick="zoomButton(1)">+</button>
             <button id='zoomOut' class='icon' onclick="zoomButton(-1)">-</button>
             </div>`);
+        window.scrollTo(0,1);
     }
     $('.potential > .label').css('color', 'black');
     $('.loading').remove();
