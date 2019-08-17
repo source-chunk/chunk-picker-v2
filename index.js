@@ -1,32 +1,37 @@
-var onMobile = typeof window.orientation !== 'undefined';
-var isPicking = false;
-var autoSelectNeighbors = true;
-var autoRemoveSelected = false;
+/* Created by Source Link AKA Source Chunk
+ * Revision of an idea by Amehzyn
+ * With help from Slay to Stay for chunk Id's
+ * 8/17/2019
+ */
 
-var clicked = false;
-var zoom = 350;
-var maxZoom = 550;
-var minZoom = onMobile ? 275 : 100;
-var fontZoom = onMobile ? 40 : 15;
-var labelZoom = onMobile ? 80 : 50;
-var scale = 30;
-var fullSize = 1075;
-var rowSize = 43;
-var scrollLeft = 0;
-var prevScrollLeft = 0;
-var scrollTop = 0;
-var prevScrollTop = 0;
+var onMobile = typeof window.orientation !== 'undefined';                   // Is user on a mobile device
+var isPicking = false;                                                      // Has the user just rolled 2 chunks and is currently picking
+var autoSelectNeighbors = true;                                             // Toggle state for select neighbors button
+var autoRemoveSelected = false;                                             // Toggle state for remove selected button
+var clicked = false;                                                        // Is mouse being held down
 
-var ratio = 4800 / 8256;
-var movedNum = 0;
-var selectedNum = 1;
-var unlockedChunks = 0;
-var selectedChunks = 0;
-var startingIndex = 4671;
-var skip = 213;
+var zoom = 350;                                                             // Starting zoom value
+var maxZoom = 550;                                                          // Furthest zoom in value
+var minZoom = onMobile ? 275 : 100;                                         // Smallest zoom out value
+var fontZoom = onMobile ? 40 : 15;                                          // Font size zoom
+var labelZoom = onMobile ? 800 : 50;                                         // Selected label font size zoom
+var scale = 30;                                                             // Amount zoomed every 'zoom' action
+var fullSize = 1075;                                                        // Amount of chunks present
+var rowSize = 43;                                                           // Amount of chunks per row
+var scrollLeft = 0;                                                         // Amount the board is scrolled left offscreen
+var prevScrollLeft = 0;                                                     // Amount the board was previously scrolled left offscreen
+var scrollTop = 0;                                                          // Amount the board is scrolled up offscreen
+var prevScrollTop = 0;                                                      // Amount the board was previously scrolled up offscreen
 
-var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
-hammertime.get('pinch').set({ enable: true });
+var ratio = 4800 / 8256;                                                    // Image ratio
+var movedNum = 0;                                                           // Amount of times mouse is moved while dragging
+var selectedNum = 1;                                                        // Current index of selected chunks
+var unlockedChunks = 0;                                                     // Number of unlocked chunks
+var selectedChunks = 0;                                                     // Number of selected chunks
+var startingIndex = 4671;                                                   // Index to start chunk numbering at (based on ChunkLite numbers)
+var skip = 213;                                                             // Number of indices to skip between columns for chunk numbering
+
+var hammertime = new Hammer(document.getElementsByClassName('body')[0]);    // Initialize Hammerjs [Mobile]
 
 // ----------------------------------------------------------
 
@@ -330,7 +335,7 @@ var toggleRemove = function(e) {
 
 // Centers on average position of all unlocked chunks
 var center = function(extra) {
-    let arr = $('.unlocked');
+    let arr = $('.box.unlocked');
     if (arr.length < 1) {
         scrollToPos(parseInt($('#591').attr('id')) % rowSize, Math.floor(parseInt($('#591').attr('id')) / rowSize), 0, 0, extra === 'quick');
         return;
@@ -366,6 +371,7 @@ var doneLoading = function() {
             <button id='zoomOut' class='icon' onclick="zoomButton(-1)">-</button>
             </div>`);
     }
+    $('.potential > .label').css('color', 'black');
     $('.loading').remove();
 }
 
@@ -464,26 +470,46 @@ var convertFromUrl = function(url) {
         return;
     }
     var arr = url.split(';');
-    var unlocked = arr[0].split(',');
-    var selected = arr[1].split(',');
-    var potential = arr[2].split(',');
-    unlocked[0] !== "" && unlocked.forEach(function(el) {
-        $('#' + el).toggleClass('gray unlocked');
+    var unlocked = arr[0].match(/.{1,3}/g);
+    var selected = arr[1].match(/.{1,3}/g);
+    var potential = arr[2].match(/.{1,3}/g);
+    var i;
+
+    i = 0;
+    unlocked && unlocked.forEach(function(e) {
+        unlocked[i] = parseInt(e, 36);
+        i++;
+    });
+
+    i = 0;
+    selected && selected.forEach(function(e) {
+        selected[i] = parseInt(e, 36);
+        i++;
+    });
+
+    i = 0;
+    potential && potential.forEach(function(e) {
+        potential[i] = parseInt(e, 36);
+        i++;
+    });
+
+    unlocked && unlocked[0] !== "" && unlocked.forEach(function(el) {
+        $('.box:contains(' + el + ')').toggleClass('gray unlocked');
         $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
     });
-    selected[0] !== "" && selected.forEach(function(el) {
-        $('#' + el).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
+    selected && selected[0] !== "" && selected.forEach(function(el) {
+        $('.box:contains(' + el + ')').toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
         selectedNum++;
         $('.label').css('font-size', zoom/60 + 'vw');
         $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
     });
-    potential[0] !== "" && potential.forEach(function(el) {
-        $('#' + el).toggleClass('gray potential').append('<span class="label">' + selectedNum + '</span>');
+    potential && potential[0] !== "" && potential.forEach(function(el) {
+        $('.box:contains(' + el + ')').toggleClass('gray potential').append('<span class="label">' + selectedNum + '</span>');
         selectedNum++;
         $('.label').css('font-size', zoom/60 + 'vw');
         $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
     });
-    if (potential[0] !== "") {
+    if (potential && potential[0] !== "") {
         $('.roll2').hide();
         $('.pick').text('Pick for me');
         isPicking = true;
@@ -493,25 +519,16 @@ var convertFromUrl = function(url) {
 // Convert chunk state to url
 var convertToUrl = function() {
     var str = '';
-    $('.unlocked').each(function(index) {
-        str += $(this).attr('id') + ',';
+    Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
+        str += parseInt(el.childNodes[0].nodeValue).toString(36);
     });
-    if ($('.unlocked').length > 0) {
-        str = str.slice(0, -1);
-    }
     str += ';';
-    $('.selected').each(function(index) {
-        str += $(this).attr('id') + ',';
+    Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
+        str += parseInt(el.childNodes[0].nodeValue).toString(36);
     });
-    if ($('.selected').length > 0) {
-        str = str.slice(0, -1);
-    }
     str += ';';
-    $('.potential').each(function(index) {
-        str += $(this).attr('id') + ',';
+    Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
+        str += parseInt(el.childNodes[0].nodeValue).toString(36);
     });
-    if ($('.potential').length > 0) {
-        str = str.slice(0, -1);
-    }
     history.pushState({}, '', window.location.href.split('?')[0] + '?' + str);
 }
