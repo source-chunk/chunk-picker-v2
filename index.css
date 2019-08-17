@@ -20,9 +20,9 @@
 }
 
 .box {
-    -webkit-box-shadow:inset 0px 0px 0px .5px black;
-    -moz-box-shadow:inset 0px 0px 0px .5px black;
-    box-shadow:inset 0px 0px 0px .5px black;
+    -webkit-box-shadow:inset .5px .5px .5px .5px black;
+    -moz-box-shadow:inset .5px .5px .5px .5px black;
+    box-shadow:inset .5px .5px .5px .5px black;
     display: inline-grid;
     background-color: transparent;
     color: white;
