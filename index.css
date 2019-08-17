@@ -25,7 +25,7 @@
     box-shadow:inset .5px .5px .5px .5px black;
     display: inline-grid;
     background-color: transparent;
-    color: white;
+    color: yellow;
     font-size: 10px;
     transition: background-color .25s linear;
 }
