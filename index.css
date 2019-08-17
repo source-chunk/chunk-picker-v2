@@ -20,9 +20,10 @@
 }
 
 .box {
-    -webkit-box-shadow:inset .5px .5px .5px .5px black;
-    -moz-box-shadow:inset .5px .5px .5px .5px black;
-    box-shadow:inset .5px .5px .5px .5px black;
+    border: 0;
+    -webkit-box-shadow:inset 0 0 0 1.5px black;
+    -moz-box-shadow:inset 0 0 0 1.5px black;
+    box-shadow:inset 0 0 0 1.5px black;
     -webkit-appearance: none;
     display: inline-grid;
     background-color: transparent;
@@ -38,23 +39,26 @@
 
 .potential {
     background-color: rgba(255, 255, 100, .5);
-    -webkit-box-shadow:inset 0px 0px 0px .5px black;
-    -moz-box-shadow:inset 0px 0px 0px .5px black;
-    box-shadow:inset 0px 0px 0px .5px black;
+    border: 0;
+    -webkit-box-shadow:inset 0 0 0 1.5px black;
+    -moz-box-shadow:inset 0 0 0 1.5px black;
+    box-shadow:inset 0 0 0 1.5px black;
 }
 
 .selected {
     background-color: rgba(100, 255, 100, .5);
-    -webkit-box-shadow:inset 0px 0px 0px .5px black;
-    -moz-box-shadow:inset 0px 0px 0px .5px black;
-    box-shadow:inset 0px 0px 0px .5px black;
+    border: 0;
+    -webkit-box-shadow:inset 0 0 0 1.5px black;
+    -moz-box-shadow:inset 0 0 0 1.5px black;
+    box-shadow:inset 0 0 0 1.5px black;
 }
 
 .gray {
     background-color: rgba(150, 150, 150, .5);
-    -webkit-box-shadow:inset 0px 0px 0px .5px black;
-    -moz-box-shadow:inset 0px 0px 0px .5px black;
-    box-shadow:inset 0px 0px 0px .5px black;
+    border: 0;
+    -webkit-box-shadow:inset 0 0 0 1.5px black;
+    -moz-box-shadow:inset 0 0 0 1.5px black;
+    box-shadow:inset 0 0 0 1.5px black;
 }
 
 .potential::not(.mobile) {

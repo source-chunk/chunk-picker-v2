@@ -26,6 +26,10 @@ var maxZoom = 550;
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
 
+window.onload = function() {
+    setTimeout(doneLoading, 1000);
+}
+
 hammertime.on('pinchin pinchout doubletap', function(ev) {
     if (onMobile) {
         ev.preventDefault();
@@ -83,10 +87,6 @@ hammertime.on('tap', function(ev) {
         convertToUrl();
     }
 });
-
-window.onload = function() {
-    setTimeout(doneLoading, 1500);
-}
 
 var doneLoading = function() {
     convertFromUrl(window.location.href.split('?')[1]);
