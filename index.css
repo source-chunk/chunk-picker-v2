@@ -23,9 +23,10 @@
     -webkit-box-shadow:inset .5px .5px .5px .5px black;
     -moz-box-shadow:inset .5px .5px .5px .5px black;
     box-shadow:inset .5px .5px .5px .5px black;
+    -webkit-appearance: none;
     display: inline-grid;
     background-color: transparent;
-    color: yellow;
+    color: white;
     font-size: 10px;
     transition: background-color .25s linear;
 }
