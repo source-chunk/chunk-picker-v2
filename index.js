@@ -1,3 +1,8 @@
+var onMobile = typeof window.orientation !== 'undefined';
+var isPicking = false;
+var autoSelectNeighbors = true;
+var autoRemoveSelected = false;
+
 var clicked = false;
 var zoom = 350;
 var maxZoom = 550;
@@ -19,11 +24,6 @@ var unlockedChunks = 0;
 var selectedChunks = 0;
 var startingIndex = 4671;
 var skip = 213;
-
-var onMobile = typeof window.orientation !== 'undefined';
-var isPicking = false;
-var autoSelectNeighbors = true;
-var autoRemoveSelected = false;
 
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);
 hammertime.get('pinch').set({ enable: true });
@@ -357,6 +357,7 @@ var doneLoading = function() {
     convertFromUrl(window.location.href.split('?')[1]);
     center('quick');
     if (onMobile) {
+        console.log('mobile');
         $('.pick, .roll2, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
         $('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
         $('.box').addClass('mobile').css({'height': zoom/rowSize + 'vw', 'width': zoom/rowSize + 'vw'});
