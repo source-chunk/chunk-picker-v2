@@ -372,7 +372,7 @@ var doneLoading = function() {
             <button id='zoomOut' class='icon' onclick="zoomButton(-1)">-</button>
             </div>`);
         window.scrollTo(0,1);
-        console.log(zoom/rowSize);
+        $('.pick').text(zoom/rowSize);
     }
     $('.potential > .label').css('color', 'black');
     $('.loading').remove();
