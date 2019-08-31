@@ -17,15 +17,13 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: solid;
-    border-color: red;
 }
 
 .box {
     border: 0;
-    -webkit-box-shadow:inset 0 0 0 1.5px black;
-    -moz-box-shadow:inset 0 0 0 1.5px black;
-    box-shadow:inset 0 0 0 1.5px black;
+    -webkit-box-shadow:inset 0 0 0 .5p gray;
+    -moz-box-shadow:inset 0 0 0 .5px gray;
+    box-shadow:inset 0 0 0 .5px gray;
     -webkit-appearance: none;
     display: inline-grid;
     background-color: transparent;
@@ -35,38 +33,38 @@
 }
 
 .box:hover:not(.mobile) {
-    background-color: rgba(200, 200, 200, .5);
+    background-color: rgba(100, 100, 100, .3);
     transition-duration: 0s;
 }
 
 .potential {
     background-color: rgba(255, 255, 100, .5);
     border: 0;
-    -webkit-box-shadow:inset 0 0 0 1.5px black;
-    -moz-box-shadow:inset 0 0 0 1.5px black;
-    box-shadow:inset 0 0 0 1.5px black;
+    -webkit-box-shadow:inset 0 0 0 .5px black;
+    -moz-box-shadow:inset 0 0 0 .5px black;
+    box-shadow:inset 0 0 0 .5px black;
     -webkit-appearance: none;
 }
 
 .selected {
     background-color: rgba(100, 255, 100, .5);
     border: 0;
-    -webkit-box-shadow:inset 0 0 0 1.5px black;
-    -moz-box-shadow:inset 0 0 0 1.5px black;
-    box-shadow:inset 0 0 0 1.5px black;
+    -webkit-box-shadow:inset 0 0 0 .5px black;
+    -moz-box-shadow:inset 0 0 0 .5px black;
+    box-shadow:inset 0 0 0 .5px black;
     -webkit-appearance: none;
 }
 
 .gray {
-    background-color: rgba(150, 150, 150, .5);
+    background-color: rgba(150, 150, 150, .75);
     border: 0;
-    -webkit-box-shadow:inset 0 0 0 1.5px black;
-    -moz-box-shadow:inset 0 0 0 1.5px black;
-    box-shadow:inset 0 0 0 1.5px black;
+    -webkit-box-shadow:inset 0 0 0 .5px black;
+    -moz-box-shadow:inset 0 0 0 .5px black;
+    box-shadow:inset 0 0 0 .5px black;
     -webkit-appearance: none;
 }
 
-.potential::not(.mobile) {
+.potential:hover:not(.mobile) {
     background-color: rgba(255, 255, 100, .7);
 }
 
@@ -75,7 +73,7 @@
 }
 
 .gray:hover:not(.mobile) {
-    background-color: rgba(150, 150, 150, .7);
+    background-color: rgba(125, 125, 125, .7);
 }
 
 .menu {

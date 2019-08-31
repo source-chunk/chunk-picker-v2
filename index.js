@@ -119,6 +119,14 @@ hammertime.on('tap', function(ev) {
     }
 });
 
+$(document).on({
+    'keydown': function(e) {
+        if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
+            e.preventDefault();
+        }
+    }
+});
+
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
@@ -371,8 +379,6 @@ var doneLoading = function() {
             <button id='zoomIn' class='icon' onclick="zoomButton(1)">+</button>
             <button id='zoomOut' class='icon' onclick="zoomButton(-1)">-</button>
             </div>`);
-        window.scrollTo(0,1);
-        $('.pick').text(zoom/rowSize);
     }
     $('.potential > .label').css('color', 'black');
     $('.loading').remove();
