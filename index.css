@@ -24,6 +24,8 @@
     -webkit-box-shadow:inset 0 0 0 .5px gray;
     -moz-box-shadow:inset 0 0 0 .5px gray;
     box-shadow:inset 0 0 0 .5px gray;
+    -webkit-appearance: none;
+    border-radius: .5px;
     display: inline-grid;
     background-color: transparent;
     color: white;
@@ -43,6 +45,7 @@
     -moz-box-shadow:inset 0 0 0 .5px black;
     box-shadow:inset 0 0 0 .5px black;
     -webkit-appearance: none;
+    border-radius: .5px;
 }
 
 .selected {
@@ -52,6 +55,7 @@
     -moz-box-shadow:inset 0 0 0 .5px black;
     box-shadow:inset 0 0 0 .5px black;
     -webkit-appearance: none;
+    border-radius: .5px;
 }
 
 .gray {
@@ -61,6 +65,7 @@
     -moz-box-shadow:inset 0 0 0 .5px black;
     box-shadow:inset 0 0 0 .5px black;
     -webkit-appearance: none;
+    border-radius: .5px;
 }
 
 .potential:hover:not(.mobile) {
