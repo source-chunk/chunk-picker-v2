@@ -1,4 +1,5 @@
-/* Created by Source Link AKA Source Chunk
+/* 
+ * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Id's
  * 8/17/2019
@@ -119,6 +120,7 @@ hammertime.on('tap', function(ev) {
     }
 });
 
+// Prevent arrow key movement
 $(document).on({
     'keydown': function(e) {
         if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
