@@ -12,14 +12,16 @@
     <script src="./index.js"></script>
     <div class='menu' data-type="header">
         <button class='pick' onclick="pick()">Pick Chunk</button>
-        <button class='roll2' onclick="roll2()">Roll 22</button>
+        <button class='roll2' onclick="roll2()">Roll 2</button>
         <button class='center' onclick="center()">Center on Unlocked</button>
     </div>
     <div class='menu2'>
         <div class='text'>Auto-select neighboring chunks</div>
-        <button id='toggleNeighbors' class='toggle on' onclick="toggleNeighbors()">ON</button>
+        <button id='toggleNeighbors' class='toggle off' onclick="toggleNeighbors()">OFF</button>
         <div class='text'>Remove selected chunks on pick</div>
-        <button id='toggleRemove' class='toggle off locked' onclick="toggleRemove()">OFF</button>
+        <button id='toggleRemove' class='toggle off' onclick="toggleRemove()">OFF</button>
+        <div class='text'>Show chunk ID labels</div>
+        <button id='toggleIds' class='toggle off' onclick="toggleIds()">OFF</button>
     </div>
     <div class='menu3'>
         <div id='chunkInfo1' class='text'>Unlocked chunks: 0</div>

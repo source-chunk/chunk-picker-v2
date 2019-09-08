@@ -20,64 +20,62 @@
 }
 
 .box {
-    border: 0;
-    -webkit-box-shadow:inset 0 0 0 .5px gray;
-    -moz-box-shadow:inset 0 0 0 .5px gray;
-    box-shadow:inset 0 0 0 .5px gray;
-    -webkit-appearance: none;
-    border-radius: .5px;
+    -webkit-box-shadow:inset 0px 0px 0px .5px gray;
+    -moz-box-shadow:inset 0px 0px 0px .5px gray;
+    box-shadow:inset 0px 0px 0px .5px gray;
     display: inline-grid;
     background-color: transparent;
-    color: white;
+    color: rgba(255, 255, 255, 0);
     font-size: 10px;
     transition: background-color .25s linear;
 }
 
-.box:hover:not(.mobile) {
-    background-color: rgba(100, 100, 100, .3);
+.box:hover {
+    background-color: rgba(200, 200, 200, .5);
     transition-duration: 0s;
 }
 
 .potential {
     background-color: rgba(255, 255, 100, .5);
-    border: 0;
-    -webkit-box-shadow:inset 0 0 0 .5px black;
-    -moz-box-shadow:inset 0 0 0 .5px black;
-    box-shadow:inset 0 0 0 .5px black;
-    -webkit-appearance: none;
-    border-radius: .5px;
+    -webkit-box-shadow:inset 0px 0px 0px .5px black;
+    -moz-box-shadow:inset 0px 0px 0px .5px black;
+    box-shadow:inset 0px 0px 0px .5px black;
 }
 
 .selected {
     background-color: rgba(100, 255, 100, .5);
-    border: 0;
-    -webkit-box-shadow:inset 0 0 0 .5px black;
-    -moz-box-shadow:inset 0 0 0 .5px black;
-    box-shadow:inset 0 0 0 .5px black;
-    -webkit-appearance: none;
-    border-radius: .5px;
+    -webkit-box-shadow:inset 0px 0px 0px .5px black;
+    -moz-box-shadow:inset 0px 0px 0px .5px black;
+    box-shadow:inset 0px 0px 0px .5px black;
 }
 
 .gray {
-    background-color: rgba(150, 150, 150, .75);
-    border: 0;
-    -webkit-box-shadow:inset 0 0 0 .5px black;
-    -moz-box-shadow:inset 0 0 0 .5px black;
-    box-shadow:inset 0 0 0 .5px black;
-    -webkit-appearance: none;
-    border-radius: .5px;
+    background-color: rgba(150, 150, 150, .5);
+    -webkit-box-shadow:inset 0px 0px 0px .5px black;
+    -moz-box-shadow:inset 0px 0px 0px .5px black;
+    box-shadow:inset 0px 0px 0px .5px black;
 }
 
-.potential:hover:not(.mobile) {
+.potential:hover {
     background-color: rgba(255, 255, 100, .7);
 }
 
-.selected:hover:not(.mobile) {
+.selected:hover {
     background-color: rgba(100, 255, 100, .7);
 }
 
-.gray:hover:not(.mobile) {
-    background-color: rgba(125, 125, 125, .7);
+.gray:hover {
+    background-color: rgba(150, 150, 150, .7);
+}
+
+.recent {
+    background-color: rgba(255, 255, 0, .7);
+    animation: glowing 750ms infinite;
+}
+
+@keyframes glowing {
+  0%, 100% { box-shadow: 0 0 10px black; }
+  50% { box-shadow: 0 0 30px black; }
 }
 
 .menu {
@@ -90,7 +88,7 @@
 }
 
 .pick {
-    background-color: rgb(150, 220, 150);
+    background-color: rgb(115, 230, 115);
     width: 100%;
     height: 100%;
     font-size: 2vw;
@@ -100,10 +98,12 @@
     border-style: solid;
     border-color: black;
     outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
 }
 
 .pick:hover {
-    background-color: rgb(120, 255, 120);
+    background-color: rgb(80, 195, 80);
 }
 
 .pick:active {
@@ -111,7 +111,7 @@
 }
 
 .roll2 {
-    background-color: rgb(150, 150, 220);
+    background-color: rgb(100, 125, 225);
     width: 100%;
     height: 100%;
     font-size: 2vw;
@@ -121,10 +121,12 @@
     border-style: solid;
     border-color: black;
     outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
 }
 
 .roll2:hover {
-    background-color: rgb(120, 120, 255);
+    background-color: rgb(75, 100, 200);
 }
 
 .roll2:active {
@@ -144,6 +146,8 @@
     border-style: solid;
     border-color: black;
     outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
 }
 
 .center:hover {
@@ -206,6 +210,8 @@
     border-style: solid;
     border-color: black;
     outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
 }
 
 .toggle.on {
@@ -232,31 +238,8 @@
     background-color: rgb(180, 120, 120);
 }
 
-#toggleNeighbors {
+#toggleNeighbors, #toggleRemove {
     margin-bottom: 25px;
-}
-
-.menu4 {
-    position: fixed;
-    z-index: 99 !important;
-    bottom: 30px;
-    left: 10px;
-    min-width: 80px;
-    min-height: 40px;
-}
-
-.icon {
-    background-color: rgb(230, 230, 230);
-    font-size: 6.5vw;
-    color: black;
-    display: inline;
-    border-width: 1px 1px 1px 1px;
-    border-style: solid;
-    border-color: black;
-    outline: none;
-    min-width: 40px;
-    min-height: 40px;
-    font-weight: bolder;
 }
 
 .locked {

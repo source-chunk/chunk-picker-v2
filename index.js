@@ -7,8 +7,9 @@
 
 var onMobile = typeof window.orientation !== 'undefined';                   // Is user on a mobile device
 var isPicking = false;                                                      // Has the user just rolled 2 chunks and is currently picking
-var autoSelectNeighbors = true;                                             // Toggle state for select neighbors button
+var autoSelectNeighbors = false;                                             // Toggle state for select neighbors button
 var autoRemoveSelected = false;                                             // Toggle state for remove selected button
+var showChunkIds = false;                                                   // Toggle state for show chunk ids button
 var clicked = false;                                                        // Is mouse being held down
 
 var zoom = 350;                                                             // Starting zoom value
@@ -43,6 +44,7 @@ hammertime.get('pinch').set({ enable: true });
 
 // Shows loading screen while page sorts itself
 window.onload = function() {
+    loadCookies();
     setTimeout(doneLoading, 1000);
 }
 
@@ -129,6 +131,11 @@ $(document).on({
     }
 });
 
+// Remove recent class from boxes on mouseover
+$(document).on('mouseleave', '.recent', function() {
+    $(this).removeClass('recent');
+});
+
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
@@ -186,6 +193,8 @@ $(document).on({
                 isPicking = false;
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+            } else if ($(e.target).hasClass('recent')) {
+                $(e.target).removeClass('recent');
             } else {
                 $(e.target).toggleClass('gray unlocked');
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
@@ -276,12 +285,12 @@ var pick = function() {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
         sNum = $(el[rand]).children().text();
-        $(el[rand]).toggleClass('selected unlocked').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+        $(el[rand]).toggleClass('selected unlocked').addClass('recent').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
     } else {
         el = $('.potential');
         var rand = Math.floor(Math.random() * el.length);
         sNum = $(el[rand]).children().text();
-        $(el[rand]).toggleClass('potential unlocked').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+        $(el[rand]).toggleClass('potential unlocked').addClass('recent').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
         $('.potential > .label').css('color', 'white');
         $('.potential').toggleClass('selected potential');
         isPicking = false;
@@ -341,6 +350,20 @@ var toggleRemove = function(e) {
         $('#toggleRemove').text('ON');
     } else {
         $('#toggleRemove').text('OFF');
+    }
+}
+
+// Toggle functionality for showing chunk ids
+var toggleIds = function() {
+    showChunkIds = !showChunkIds;
+    setCookies();
+    $('#toggleIds').toggleClass('on off');
+    if ($('#toggleIds').hasClass('on')) {
+        $('#toggleIds').text('ON');
+        $('.box').css('color', 'rgba(255, 255, 255, 255)');
+    } else {
+        $('#toggleIds').text('OFF');
+        $('.box').css('color', 'rgba(255, 255, 255, 0)');
     }
 }
 
@@ -542,4 +565,24 @@ var convertToUrl = function() {
         str += parseInt(el.childNodes[0].nodeValue).toString(36);
     });
     history.pushState({}, '', window.location.href.split('?')[0] + '?' + str);
+}
+
+// Loads data from cookies
+var loadCookies = function() {
+    var cookiesJson = {};
+    var cookies = decodeURIComponent(document.cookie).split('; ');
+    cookies.forEach(function(cookie) {
+        var temp = cookie.split('=');
+        cookiesJson[temp[0]] = temp[1];
+    });
+    cookiesJson['neighbors'] === 'true' && toggleNeighbors();
+    cookiesJson['remove'] === 'true' && toggleRemove();
+    cookiesJson['ids'] === 'true' && toggleIds();
+}
+
+// Stores data in cookies
+var setCookies = function() {
+    document.cookie = 'neighbors=' + autoSelectNeighbors;
+    document.cookie = 'remove=' + autoRemoveSelected;
+    document.cookie = 'ids=' + showChunkIds;
 }
