@@ -6,6 +6,14 @@
     display: none;
 }
 
+.background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    z-index: -1;
+}
+
 .img {
     position: absolute;
     top: 0;
@@ -30,7 +38,6 @@
     display: inline-grid;
     background-color: transparent;
     color: rgba(255, 255, 255, 0);
-    font-size: 10px;
     transition: background-color .25s linear;
 }
 
@@ -85,8 +92,8 @@
 .menu {
     position: fixed;
     z-index: 99 !important;
-    width: 13%;
-    height: 8%;
+    width: 14vw;
+    height: 3.5vw;
 }
 
 .pick {
@@ -167,8 +174,8 @@
     position: fixed;
     z-index: 99 !important;
     right: 10px;
-    width: 13%;
-    height: 8.5%;
+    width: 12.5vw;
+    height: 3.5vw;
 }
 
 button.menu2 {
@@ -177,7 +184,6 @@ button.menu2 {
 
 .text:not(.home) {
     background-color: rgb(200, 200, 200);
-    width: 98.75%;
     height: 100%;
     font-size: 1.5vw;
     color: black;
@@ -197,8 +203,8 @@ button.menu2 {
     z-index: 99 !important;
     bottom: 50px;
     right: 10px;
-    width: 13%;
-    height: 4%;
+    width: 15vw;
+    height: 2vw;
 }
 
 #chunkInfo2 {
@@ -212,11 +218,9 @@ button.menu2 {
     width: 100%;
 }
 
-.lock-opened, .lock-closed {
-    float: left;
-    text-align: center;
-    width: 100%;
-    display: none;
+.icon {
+    width: 50px;
+    margin: 0px auto;
 }
 
 .lock-closed {
@@ -465,9 +469,6 @@ button.menu2 {
     }
 }
 
-
-
-
 .content, .content2a, .content2b, .content3a {
     border: solid;
     width: 30%;
@@ -475,6 +476,7 @@ button.menu2 {
     text-align: center;
     margin-top: 4%;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: white;
 }
 
 .title {
@@ -510,9 +512,9 @@ button.menu2 {
 
 .hr {
     display: inline-block;
-    width: 33%;
+    width: 8vw;
     border-color: lightgray;
-    margin-top: 20px;
+    margin-top: 1.5vw;
 }
 
 .button {

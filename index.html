@@ -3,13 +3,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDr94cgRwmo3glVTirQ9LPAA4HI9cyYUCg",
+            authDomain: "chunkpicker.firebaseapp.com",
+            databaseURL: "https://chunkpicker.firebaseio.com",
+            projectId: "chunkpicker",
+            storageBucket: "chunkpicker.appspot.com",
+            messagingSenderId: "149349257281",
+            appId: "1:149349257281:web:eb9aa70aec5e8ad6e7b6c0"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
     <title>Chunk Picker V2</title>
 </head>
 
 <div class='loading'>Loading&#8230;</div>
+
+<img class='background-img' draggable="false" src='./Background-chunk.PNG' />
 
 <div class='body' data-role="page">
     <script src="./index.js"></script>
@@ -31,8 +47,10 @@
         <div id='chunkInfo2' class='text'>Selected chunks: 0</div>
     </div>
     <div class='menu5'>
-        <i class="lock-closed zmdi zmdi-lock zmdi-hc-3x" onclick='unlock()'></i>
-        <i class="lock-opened zmdi zmdi-lock-open zmdi-hc-3x"></i>
+        <div class='icon'>
+            <i class="lock-closed zmdi zmdi-lock zmdi-hc-3x" onclick='unlock()'></i>
+            <i class="lock-opened zmdi zmdi-lock-open zmdi-hc-3x"></i>
+        </div>
         <div class='lock-box'>
             <div class='inner-lock'>
                 <input class='lock-pin' placeholder='PIN' />

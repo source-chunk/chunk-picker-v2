@@ -2,12 +2,12 @@
  * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Id's
- * 8/17/2019
+ * 9/11/2019
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                   // Is user on a mobile device
 var isPicking = false;                                                      // Has the user just rolled 2 chunks and is currently picking
-var autoSelectNeighbors = false;                                             // Toggle state for select neighbors button
+var autoSelectNeighbors = false;                                            // Toggle state for select neighbors button
 var autoRemoveSelected = false;                                             // Toggle state for remove selected button
 var showChunkIds = false;                                                   // Toggle state for show chunk ids button
 var clicked = false;                                                        // Is mouse being held down
@@ -15,8 +15,8 @@ var clicked = false;                                                        // I
 var zoom = 350;                                                             // Starting zoom value
 var maxZoom = 550;                                                          // Furthest zoom in value
 var minZoom = onMobile ? 275 : 100;                                         // Smallest zoom out value
-var fontZoom = onMobile ? 40 : 15;                                          // Font size zoom
-var labelZoom = onMobile ? 80 : 50;                                         // Selected label font size zoom
+var fontZoom = onMobile ? 40 : 175;                                         // Font size zoom
+var labelZoom = onMobile ? 80 : 60;                                         // Selected label font size zoom
 var scale = 30;                                                             // Amount zoomed every 'zoom' action
 var fullSize = 1075;                                                        // Amount of chunks present
 var rowSize = 43;                                                           // Amount of chunks per row
@@ -33,53 +33,30 @@ var selectedChunks = 0;                                                     // N
 var startingIndex = 4671;                                                   // Index to start chunk numbering at (based on ChunkLite numbers)
 var skip = 213;                                                             // Number of indices to skip between columns for chunk numbering
 
+var prevValueMid = '';                                                      // Preview value of map id at login
+var prevValuePinNew = '';                                                   // Preview value of pin id at signup
+var prevValuePinOld = '';                                                   // Preview value of pin id at login
+var prevValueLockPin = '';                                                  // Preview value of pin id at map login
+var mid;                                                                    // Current value of map id
+var pin;                                                                    // Current value of pin
+
+var midGood = false;                                                        // Is the map id valid
+var pinGood = true;                                                         // Is the pin valid
+var atHome;                                                                 // Is the user on the homepage
+var locked;                                                                 // Is the user not logged in
+var lockBoxOpen = false;                                                    // Is the lock box open
+
+var databaseRef = firebase.database().ref();                                // Firebase database reference
+var myRef;                                                                  // Firebase database reference for this map ID
+
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);    // Initialize Hammerjs [Mobile]
 hammertime.get('pinch').set({ enable: true });
-
-var databaseRef = new Firebase('https://chunkpicker.firebaseio.com/');      // Firebase database reference
-var myRef;                                                                  // Firebase database reference for this map
-
-var atHome;
-var locked;
-var lockBoxOpen = false;
 
 // ----------------------------------------------------------
 
 // Event Listeners
 
 // ----------------------------------------------------------
-
-// Shows loading screen while page sorts itself
-window.onload = function() {
-}
-
-// Creates board of boxes, sets initial sizes of scalable elements
-var setupMap = function() {
-    if (!atHome) {
-        setTimeout(doneLoading, 1500);
-        $('.body').show();
-        $('#page1').hide();
-        if (locked) {
-            $('.pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0);
-            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1);
-        }
-        if (locked === undefined) {
-            locked = true;
-            $('.lock-closed, .lock-opened').hide();
-            $('.pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0);
-            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1);
-            $('.lock-closed').show();
-        }
-        for (var i = 0; i < fullSize; i++) {
-            $('.outer').append(`<div id=${i} class='box gray'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</div>`);
-        }
-        $('.img').width(zoom + 'vw');
-        $('.outer').width(zoom + 'vw');
-        $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
-        $('.label').css('font-size', zoom/labelZoom + 'vw');
-        loadData();
-    }
-}
 
 // [Mobile] Prevents normal mobile zooming methods
 hammertime.on('pinchin pinchout doubletap', function(ev) {
@@ -144,6 +121,120 @@ hammertime.on('tap', function(ev) {
     }
 });
 
+// Once document is loaded, create listeners on page elements
+$(document).ready(function(){
+    !window.location.href.split('?')[1] && $('.loading').hide();
+    checkMID(window.location.href.split('?')[1]);
+
+    $('.mid').on('input', function(e) {
+        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 3) {
+            $(this).val(prevValueMid);
+        } else {
+            $(this).val(e.target.value.toUpperCase());
+            prevValueMid = e.target.value;
+            if (e.target.value.length === 3) {
+                midGood = true;
+                checkIfGood();
+            } else {
+                midGood = false;
+                $('#access').prop('disabled', true);
+            }
+        }
+    });
+
+    $('.mid').on('input', function(e) {
+        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 3) {
+            $(this).val(prevValueMid);
+        } else {
+            $(this).val(e.target.value.toUpperCase());
+            prevValueMid = e.target.value;
+            if (e.target.value.length === 3) {
+                midGood = true;
+                checkIfGood();
+            } else {
+                midGood = false;
+                $('#access').prop('disabled', true);
+            }
+        }
+    });
+    
+    $('.pin.new').on('input', function(e) {
+        if (isNaN(e.target.value) || e.target.value.length > 4) {
+            $(this).val(prevValuePinNew);
+        } else {
+            prevValuePinNew = e.target.value;
+            if (e.target.value.length === 4) {
+                $('#create2').prop('disabled', false);
+            } else {
+                $('#create2').prop('disabled', true);
+            }
+        }
+    });
+    
+    $('.pin.old').on('input', function(e) {
+        if (isNaN(e.target.value) || e.target.value.length > 4) {
+            $(this).val(prevValuePinOld);
+        } else {
+            prevValuePinOld = e.target.value;
+            if (e.target.value.length === 4 || e.target.value.length === 0) {
+                pinGood = true;
+                checkIfGood();
+            } else {
+                pinGood = false;
+                $('#access').prop('disabled', true);
+            }
+        }
+    });
+    
+    $('.lock-pin').on('input', function(e) {
+        if (isNaN(e.target.value) || e.target.value.length > 4) {
+            $(this).val(prevValueLockPin);
+        } else {
+            prevValueLockPin = e.target.value;
+            if (e.target.value.length === 4) {
+                $('#lock-unlock').prop('disabled', false);
+                $('.lock-pin').removeClass('wrong');
+            } else {
+                $('#lock-unlock').prop('disabled', true);
+            }
+        }
+    });
+    
+    $('.mid').on('keypress', function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13'){
+            $('.pin.old').select();
+        }
+    });
+    
+    $('.pin.new').on('keypress', function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13' && !$('#create2').prop('disabled')) {
+            $('#create2').click();	
+        }
+    });
+    
+    $('.pin.old').on('keypress', function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13' && !$('#access').prop('disabled')) {
+            $('#access').click();	
+        }
+    });
+    
+    $('.lock-pin').on('keypress', function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13' && !$('#lock-unlock').prop('disabled')) {
+            $('#lock-unlock').click();	
+        }
+    });
+
+    $('.lock-closed').hover(function () {
+        $(this).removeClass('zmdi-lock').addClass('zmdi-lock-open');
+    }, function () {
+        $(this).removeClass('zmdi-lock-open').addClass('zmdi-lock');
+    });
+});
+
 // Prevent arrow key movement
 $(document).on({
     'keydown': function(e) {
@@ -195,6 +286,10 @@ $(document).on({
                 if (lockBoxOpen) {
                     closePinBox();
                 }
+                $('.lock-closed').addClass('animated shake zmdi-hc-5x').removeClass('zmdi-hc-3x').css({'color': 'rgb(200, 75, 75)'});
+                setTimeout(function() {
+                    $('.lock-closed').removeClass('animated shake zmdi-hc-5x').addClass('zmdi-hc-3x').css({'color': 'black'});
+                }, 500);
                 return;
             }
             if ($(e.target).hasClass('gray')) {
@@ -263,7 +358,7 @@ $(".body").on('scroll mousewheel', function(e) {
     $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'vw');
     $('.label').css('font-size', zoom/labelZoom + 'vw');
 });
 
@@ -301,7 +396,7 @@ var zoomButton = function(dir) {
     $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'vw');
     $('.label').css('font-size', zoom/labelZoom + 'vw');
 }
 
@@ -428,6 +523,110 @@ var center = function(extra) {
     scrollToPos(Math.floor(sumX/num), Math.floor(sumY/num), sumX/num - Math.floor(sumX/num), sumY/num - Math.floor(sumY/num), extra === 'quick');
 }
 
+// Opens the lock box
+var unlock = function() {
+    lockBoxOpen = true;
+    $('.lock-box').show();
+    $('.lock-closed').hide();
+    $('.lock-pin').val('').removeClass('wrong').focus();
+}
+
+// Confirms if the pin entered is correct for the current map id
+var checkPin = function() {
+    var pin = $('.lock-pin').val();
+    myRef.once('value', function(snap) {
+        changeLocked(!(snap.val() && snap.val()['pin'] === pin));
+    });
+}
+
+// On the home page, advances to the next screen
+var nextPage = function(page) {
+    if (page === 'create') {
+        $('#create2').prop('disabled', true);
+        $('#page1').hide();
+        $('#page2a').show();
+        $('.pin').focus();
+    } else if (page === 'create2') {
+        $('#create2').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+        setTimeout(function() {
+            $('#page2a').hide();
+            $('#page3a').show();
+            pin = $('.pin').val();
+        }, 500);
+        !mid && rollMID();
+    } else if (page === 'mid') {
+        midGood = false;
+        pinGood = true;
+        $('#access').prop('disabled', true);
+        $('#page1').hide();
+        $('#page2b').show();
+        $('.mid').focus();
+    }
+}
+
+// On the home page, goes back to the previous page
+var prevPage = function(page) {
+    if (page === 'create2') {
+        $('#page2a').hide();
+        $('#page1').show();
+        pin = '';
+        $('.pin').val('');
+    } else if (page === 'create3') {
+        $('#page3a').hide();
+        $('#page2a').show();
+        $('.pin').focus();
+    } else if (page === 'mid') {
+        $('#page2b').hide();
+        $('#page1').show();
+        $('.mid').removeClass('wrong').val('');
+        $('.pin.old').removeClass('wrong').val('');
+        $('.mid-err').css('visibility', 'hidden');
+        $('.pin-err').css('visibility', 'hidden');
+    }
+}
+
+// Confirms that the map id exists, and that the pin is correct for that map id (if pin is filled in), and then advances to the map if all is correct
+var accessMap = function() {
+    $('#access').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    var mid = $('.mid').removeClass('wrong').val().toLowerCase();
+    var pin = $('.pin.old').removeClass('wrong').val();
+    databaseRef.child('maps/' + mid).once('value', function(snap) {
+        if (!snap.val()) {
+            setTimeout(function() {
+                $('.mid-err').css('visibility', 'visible');
+                $('.mid').addClass('wrong').select();
+                $('#access').text('Access my map');
+            }, 1000);
+            return;
+        }
+        if (pin && snap.val()['pin'] !== pin) {
+            setTimeout(function() {
+                $('.pin-err').css('visibility', 'visible');
+                $('.pin.old').addClass('wrong').select();
+                $('#access').text('Access my map');
+            }, 1000);
+            return;
+        }
+        if (pin) {
+            firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
+            window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
+            $('.lock-opened').show();
+            $('.lock-closed').hide();
+            locked = false;
+        } else {
+            window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
+            $('.lock-closed').show();
+            $('.lock-opened').hide();
+            locked = true;
+        }
+        myRef = firebase.database().ref('maps/' + mid);
+        atHome = false;
+        $('.loading').show();
+        $('#page2b').hide();
+        setupMap();
+    });
+}
+
 // ----------------------------------------------------------
 
 // Other Functions
@@ -448,6 +647,35 @@ var doneLoading = function() {
     }
     $('.potential > .label').css('color', 'black');
     $('.loading').remove();
+}
+
+// Creates board of boxes, sets initial sizes of scalable elements, and hides certain elements if needed
+var setupMap = function() {
+    firebase.auth().signOut();
+    if (!atHome) {
+        setTimeout(doneLoading, 1500);
+        $('.body').show();
+        $('#page1').hide();
+        if (locked) {
+            $('.pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0);
+            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1);
+        }
+        if (locked === undefined) {
+            locked = true;
+            $('.lock-closed, .lock-opened').hide();
+            $('.pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0);
+            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1);
+            $('.lock-closed').show();
+        }
+        for (var i = 0; i < fullSize; i++) {
+            $('.outer').append(`<div id=${i} class='box gray'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</div>`);
+        }
+        $('.img').width(zoom + 'vw');
+        $('.outer').width(zoom + 'vw');
+        $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'vw');
+        $('.label').css('font-size', zoom/labelZoom + 'vw');
+        loadData();
+    }
 }
 
 // Sets all neighbors of recently unlocked chunk to selected
@@ -509,7 +737,7 @@ var updateScrollPos = function(e) {
 var scrollToPos = function(x, y, xPart, yPart, doQuick) {
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'px');
+    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'vw');
     $('.label').css('font-size', zoom/labelZoom + 'vw');
     prevScrollLeft = -$('#' + (y * rowSize + x)).position().left + $(window).width() / 2 - $('#' + (rowSize + 1)).position().left * (xPart + .5);
     prevScrollTop = -$('#' + (y * rowSize + x)).position().top + $(window).height() / 2 - $('#' + (rowSize + 1)).position().top * (yPart + .5);
@@ -543,10 +771,10 @@ var checkMID = function(mid) {
     if (mid) {
         databaseRef.child('maps/' + mid).once('value', function(snap) {
             if (snap.val()) {
-                myRef = new Firebase('https://chunkpicker.firebaseio.com/maps/' + mid);
+                myRef = firebase.database().ref('maps/' + mid);
                 atHome = false;
             } else {
-                window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '');
+                window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', window.location.href.split('?')[0]);
                 atHome = true;
                 $('.loading, .ui-loader-header').remove();
             }
@@ -570,18 +798,18 @@ var loadData = function() {
         settings['remove'] && toggleRemove('startup');
         settings['ids'] && toggleIds('startup');
 
-        chunks['unlocked'] && Object.keys(chunks['unlocked']).forEach(function(id) {
+        chunks && chunks['unlocked'] && Object.keys(chunks['unlocked']).forEach(function(id) {
             $('.box:contains(' + id + ')').toggleClass('gray unlocked');
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
         });
 
-        chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b){return b-a}).forEach(function(id) {
+        chunks && chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b){return b-a}).forEach(function(id) {
             $('.box:contains(' + id + ')').toggleClass('gray selected').append('<span class="label">' + selectedNum++ + '</span>');
             $('.label').css('font-size', zoom/60 + 'vw');
             $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
         });
 
-        chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
+        chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
             picking = true;
             $('.box:contains(' + id + ')').toggleClass('gray potential').append('<span class="label">' + selectedNum++ + '</span>');
             $('.label').css('font-size', zoom/60 + 'vw');
@@ -621,61 +849,7 @@ var setData = function() {
     myRef.child('chunks/potential').set(tempJson);
 }
 
-// ---------------------------------------
-
-var prevValueMid = '';
-var prevValuePinNew = '';
-var prevValuePinOld = '';
-var prevValueLockPin = '';
-var mid;
-var pin;
-var midGood = false;
-var pinGood = true;
-
-var nextPage = function(page) {
-    if (page === 'create') {
-        $('#create2').prop('disabled', true);
-        $('#page1').hide();
-        $('#page2a').show();
-        $('.pin').focus();
-    } else if (page === 'create2') {
-        $('#create2').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
-        setTimeout(function() {
-            $('#page2a').hide();
-            $('#page3a').show();
-            pin = $('.pin').val();
-        }, 500);
-        !mid && rollMID();
-    } else if (page === 'mid') {
-        midGood = false;
-        pinGood = true;
-        $('#access').prop('disabled', true);
-        $('#page1').hide();
-        $('#page2b').show();
-        $('.mid').focus();
-    }
-}
-
-var prevPage = function(page) {
-    if (page === 'create2') {
-        $('#page2a').hide();
-        $('#page1').show();
-        pin = '';
-        $('.pin').val('');
-    } else if (page === 'create3') {
-        $('#page3a').hide();
-        $('#page2a').show();
-        $('.pin').focus();
-    } else if (page === 'mid') {
-        $('#page2b').hide();
-        $('#page1').show();
-        $('.mid').val('');
-        $('.pin.old').val('');
-        $('.mid-err').css('visibility', 'hidden');
-        $('.pin-err').css('visibility', 'hidden');
-    }
-}
-
+// Rolls until a new, unique map id is found
 var rollMID = function() {
     var char1, char2, char3, charSet;
     var badNums = true;
@@ -687,165 +861,21 @@ var rollMID = function() {
             charSet = char1 + char2 + char3;
             !snap.val()['maps'][charSet] && (badNums = false);
         }
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                var temp = snap.val()['template'];
+                temp.pin = pin;
+                databaseRef.child('maps/' + charSet).set(temp);
+            }
+        });
+        firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
         mid = charSet;
         $('#newmid').text(charSet.toUpperCase());
         $('.link').prop('href', 'https://source-chunk.github.io/chunk-picker-v2/?' + charSet).text('https://source-chunk.github.io/chunk-picker-v2/?' + charSet);
     });
 }
 
-$(document).ready(function(){
-    !window.location.href.split('?')[1] && $('.loading').hide();
-    checkMID(window.location.href.split('?')[1]);
-
-    $('.mid').on('input', function(e) {
-        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 3) {
-            $(this).val(prevValueMid);
-        } else {
-            $(this).val(e.target.value.toUpperCase());
-            prevValueMid = e.target.value;
-            if (e.target.value.length === 3) {
-                midGood = true;
-                checkIfGood();
-            } else {
-                midGood = false;
-                $('#access').prop('disabled', true);
-            }
-        }
-    });
-
-    $('.mid').on('input', function(e) {
-        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 3) {
-            $(this).val(prevValueMid);
-        } else {
-            $(this).val(e.target.value.toUpperCase());
-            prevValueMid = e.target.value;
-            if (e.target.value.length === 3) {
-                midGood = true;
-                checkIfGood();
-            } else {
-                midGood = false;
-                $('#access').prop('disabled', true);
-            }
-        }
-    });
-    
-    $('.pin.new').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
-            $(this).val(prevValuePinNew);
-        } else {
-            prevValuePinNew = e.target.value;
-            if (e.target.value.length === 4) {
-                $('#create2').prop('disabled', false);
-            } else {
-                $('#create2').prop('disabled', true);
-            }
-        }
-    });
-    
-    $('.pin.old').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
-            $(this).val(prevValuePinOld);
-        } else {
-            prevValuePinOld = e.target.value;
-            if (e.target.value.length === 4 || e.target.value.length === 0) {
-                pinGood = true;
-                checkIfGood();
-            } else {
-                pinGood = false;
-                $('#access').prop('disabled', true);
-            }
-        }
-    });
-    
-    $('.lock-pin').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
-            $(this).val(prevValueLockPin);
-        } else {
-            prevValueLockPin = e.target.value;
-            if (e.target.value.length === 4) {
-                $('#lock-unlock').prop('disabled', false);
-                $('.lock-pin').removeClass('wrong');
-            } else {
-                $('#lock-unlock').prop('disabled', true);
-            }
-        }
-    });
-    
-    $('.mid').on('keypress', function(e) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13'){
-            $('.pin.old').select();
-        }
-    });
-    
-    $('.pin.new').on('keypress', function(e) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13' && !$('#create2').prop('disabled')) {
-            $('#create2').click();	
-        }
-    });
-    
-    $('.pin.old').on('keypress', function(e) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13' && !$('#access').prop('disabled')) {
-            $('#access').click();	
-        }
-    });
-    
-    $('.lock-pin').on('keypress', function(e) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13' && !$('#lock-unlock').prop('disabled')) {
-            $('#lock-unlock').click();	
-        }
-    });
-
-    $('.lock-closed').hover(function () {
-        $(this).removeClass('zmdi-lock').addClass('zmdi-lock-open');
-    }, function () {
-        $(this).removeClass('zmdi-lock-open').addClass('zmdi-lock');
-    });
-});
-
-var accessMap = function() {
-    $('#access').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
-    var mid = $('.mid').val().toLowerCase();
-    var pin = $('.pin.old').val();
-    databaseRef.child('maps/' + mid).once('value', function(snap) {
-        if (!snap.val()) {
-            setTimeout(function() {
-                $('.mid-err').css('visibility', 'visible');
-                $('.mid').select();
-                $('#access').text('Access my map');
-            }, 1000);
-            return;
-        }
-        if (pin && snap.val()['pin'] !== pin) {
-            setTimeout(function() {
-                $('.pin-err').css('visibility', 'visible');
-                $('.pin.old').select();
-                $('#access').text('Access my map');
-            }, 1000);
-            return;
-        }
-        if (pin) {
-            window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
-            $('.lock-opened').show();
-            $('.lock-closed').hide();
-            locked = false;
-        } else {
-            window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
-            $('.lock-closed').show();
-            $('.lock-opened').hide();
-            locked = true;
-        }
-        myRef = new Firebase('https://chunkpicker.firebaseio.com/maps/' + mid);
-        atHome = false;
-        $('.loading').show();
-        $('#page2b').hide();
-        setupMap();
-    });
-}
-
+// Checks if both the map id and pin are correct, and hides their respective error messages/allows button clicks if so
 var checkIfGood = function() {
     if (midGood && pinGood) {
         $('#access').prop('disabled', false);
@@ -854,20 +884,7 @@ var checkIfGood = function() {
     }
 }
 
-var unlock = function() {
-    lockBoxOpen = true;
-    $('.lock-box').show();
-    $('.lock-closed').hide();
-    $('.lock-pin').val('').removeClass('wrong').focus();
-}
-
-var checkPin = function() {
-    var pin = $('.lock-pin').val();
-    myRef.once('value', function(snap) {
-        changeLocked(!(snap.val() && snap.val()['pin'] === pin));
-    });
-}
-
+// Changes the lock state if pin is correct, otherwise displays error
 var changeLocked = function(lock) {
     $('#lock-unlock').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
     setTimeout(function() {
@@ -875,6 +892,7 @@ var changeLocked = function(lock) {
             $('.lock-pin').addClass('animated shake wrong').select();
             $('#lock-unlock').prop('disabled', true).html('Unlock');
         } else {
+            firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             $('.lock-opened, .pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
@@ -892,6 +910,7 @@ var changeLocked = function(lock) {
     }, 1000);
 }
 
+// Closes the lock box
 var closePinBox = function() {
     $('.lock-box').animate({'opacity': 0});
     $('.lock-' + (locked ? 'closed' : 'opened')).css('opacity', 0).show();
