@@ -55,7 +55,6 @@ window.onload = function() {
 
 // Creates board of boxes, sets initial sizes of scalable elements
 var setupMap = function() {
-    console.log('map ' + atHome + ' ' + locked);
     if (!atHome) {
         setTimeout(doneLoading, 1500);
         $('.body').show();
@@ -557,7 +556,6 @@ var checkMID = function(mid) {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
         setupMap();
-        console.log('home');
     }
 }
 
@@ -830,13 +828,11 @@ var accessMap = function() {
             return;
         }
         if (pin) {
-            console.log('edit access granted');
             window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
             $('.lock-opened').show();
             $('.lock-closed').hide();
             locked = false;
         } else {
-            console.log('read access granted');
             window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
             $('.lock-closed').show();
             $('.lock-opened').hide();
@@ -845,6 +841,7 @@ var accessMap = function() {
         myRef = new Firebase('https://chunkpicker.firebaseio.com/maps/' + mid);
         atHome = false;
         $('.loading').show();
+        $('#page2b').hide();
         setupMap();
     });
 }
@@ -872,7 +869,6 @@ var checkPin = function() {
 }
 
 var changeLocked = function(lock) {
-    console.log('show');
     $('#lock-unlock').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
     setTimeout(function() {
         if (lock) {
