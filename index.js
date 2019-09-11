@@ -624,6 +624,7 @@ var accessMap = function() {
         atHome = false;
         $('.loading').show();
         $('#page2b').hide();
+        $('.background-img').hide();
         setupMap();
     });
 }
@@ -774,6 +775,7 @@ var checkMID = function(mid) {
             if (snap.val()) {
                 myRef = firebase.database().ref('maps/' + mid);
                 atHome = false;
+                $('.background-img').hide();
             } else {
                 window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', window.location.href.split('?')[0]);
                 atHome = true;
