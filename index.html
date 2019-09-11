@@ -3,6 +3,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
     <title>Chunk Picker V2</title>
 </head>
 
@@ -16,17 +19,78 @@
         <button class='center' onclick="center()">Center on Unlocked</button>
     </div>
     <div class='menu2'>
-        <div class='text'>Auto-select neighboring chunks</div>
+        <div class='toggleNeighbors text'>Auto-select neighboring chunks</div>
         <button id='toggleNeighbors' class='toggle off' onclick="toggleNeighbors()">OFF</button>
-        <div class='text'>Remove selected chunks on pick</div>
+        <div class='toggleRemove text'>Remove selected chunks on pick</div>
         <button id='toggleRemove' class='toggle off' onclick="toggleRemove()">OFF</button>
-        <div class='text'>Show chunk ID labels</div>
+        <div class='toggleIds text'>Show chunk ID labels</div>
         <button id='toggleIds' class='toggle off' onclick="toggleIds()">OFF</button>
     </div>
     <div class='menu3'>
         <div id='chunkInfo1' class='text'>Unlocked chunks: 0</div>
         <div id='chunkInfo2' class='text'>Selected chunks: 0</div>
     </div>
+    <div class='menu5'>
+        <i class="lock-closed zmdi zmdi-lock zmdi-hc-3x" onclick='unlock()'></i>
+        <i class="lock-opened zmdi zmdi-lock-open zmdi-hc-3x"></i>
+        <div class='lock-box'>
+            <div class='inner-lock'>
+                <input class='lock-pin' placeholder='PIN' />
+                <button id='lock-unlock' onclick='checkPin()'>Unlock</button>
+            </div>
+        </div>
+    </div>
     <img class='img' draggable="false" src='./osrs_world_map_may20_2019.png' />
     <div class='outer'></div>
+</div>
+
+<div id='home-menu'>
+  <div id='page1' class='content'>
+    <div class='block'>
+      <div class='title'>Chunk Picker V2</div>
+    </div>
+    <div class='block'>
+      <button id='create' class='button' onclick='nextPage(this.id)'>Create a new map</button>
+    </div>
+    <div class='block'>
+      <hr class='hr left' />
+      <span class='or'>Or</span>
+      <hr class='hr right' />
+      <button id='mid' class='button' onclick='nextPage(this.id)'>Enter your map ID</button>
+    </div>
+  </div>
+  <div id='page2a' class='content2a' style="display:none">
+    <div class='block'>
+      <div class='title back' onclick='prevPage("create2")'><i class="zmdi zmdi-long-arrow-left zmdi-hc-lg"></i></div>
+      <div class='home text'>Create a map PIN</div>
+      <p class='p desc'>
+        Your map PIN will allow you to roll new chunks and make changes to your map, and give you the ability to share your map with others without allowing them to edit it.
+      </p>
+      <br />
+      <div>PIN (4 digits):</div>
+      <input class='pin new' placeholder='PIN' />
+      <button id='create2' class='button' onclick='nextPage(this.id)' disabled>Create map</button>
+    </div>
+  </div>
+  <div id='page3a' class='content3a' style="display:none">
+    <div class='block'>
+      <div class='title' >Chunk Picker V2</div>
+      <div class='home text'>Your 3-letter map ID code is:</div>
+      <div id='newmid'>---</div>
+      <div class='home text'>You can access your map at:</div>
+      <div class='link-outer'><a class='a link'></a></div>
+    </div>
+  </div>
+  <div id='page2b' class='content2b' style="display:none">
+    <div class='block'>
+      <div class='title back' onclick='prevPage("mid")'><i class="zmdi zmdi-long-arrow-left zmdi-hc-lg"></i></div>
+    </div>
+    <div class='home text2'>Map ID:</div>
+    <input class='mid' spellcheck='false' placeholder='Map ID' />
+    <div class='mid-err'>Map ID does not exist.</div>
+    <div class='home text2'>PIN (optional):</div>
+    <input class='pin old' placeholder='PIN' />
+    <div class='pin-err'>PIN is incorrect.</div>
+    <button id='access' class='button' onclick='accessMap()' disabled>Access my map</button>
+  </div>
 </div>
