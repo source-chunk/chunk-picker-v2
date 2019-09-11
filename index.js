@@ -109,7 +109,7 @@ hammertime.on('tap', function(ev) {
             autoSelectNeighbors && selectNeighbors(ev.target);
             autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
             $('.pick').text('Pick Chunk');
-            $('.roll2').show();
+            $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             isPicking = false;
             $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
@@ -310,7 +310,7 @@ $(document).on({
                 autoSelectNeighbors && selectNeighbors(e.target);
                 autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
                 $('.pick').text('Pick Chunk');
-                $('.roll2').show();
+                $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
                 isPicking = false;
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
@@ -422,7 +422,7 @@ var pick = function() {
         $('.potential').toggleClass('selected potential');
         isPicking = false;
         $('.pick').text('Pick Chunk');
-        $('.roll2').show();
+        $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
     }
     fixNums(sNum);
     autoSelectNeighbors && selectNeighbors(el[rand]);
@@ -442,7 +442,7 @@ var roll2 = function() {
     var el = $('.selected');
     var rand;
     if (el.length > 0) {
-        $('.roll2').hide();
+        $('.roll2').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
         $('.pick').text('Pick for me');
     }
     for (var i = 0; i < 2; i++) {
@@ -659,14 +659,18 @@ var setupMap = function() {
         $('.body').show();
         $('#page1').hide();
         if (locked) {
-            $('.pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0);
-            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1);
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0).hide();
+            !isPicking && $('.roll2').css('opacity', 0).hide();
+            $('.center').css('top', '0vw');
+            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
         }
         if (locked === undefined) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0);
-            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1);
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0).hide();
+            $('.center').css('top', '0vw');
+            !isPicking && $('.roll2').css('opacity', 0).hide();
+            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.lock-closed').show();
         }
         for (var i = 0; i < fullSize; i++) {
@@ -820,7 +824,7 @@ var loadData = function() {
         });
 
         if (picking) {
-            $('.roll2').hide();
+            $('.roll2').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
             $('.pick').text('Pick for me');
             isPicking = true;
         }
@@ -896,11 +900,14 @@ var changeLocked = function(lock) {
             $('#lock-unlock').prop('disabled', true).html('Unlock');
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
-            $('.lock-opened, .pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0).show();
+            $('.center').css('top', '15vw');
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').css('opacity', 0).show();
+            !isPicking && $('.roll2').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, .roll2, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text').animate({'opacity': 1});
+                !isPicking && $('.roll2').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');
                 locked = lock;
                 lockBoxOpen = false;
