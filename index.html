@@ -29,6 +29,24 @@
 
 <div class='body' data-role="page">
     <script src="./index.js"></script>
+    <div id='entry-menu'>
+        <div class='entry-content'>
+            <div class='block'>
+                <div class='title'>Chunk Picker V2</div>
+            </div>
+            <div class='block'>
+                <div>Enter PIN to unlock:</div>
+                <input class='pin entry' placeholder='PIN' />
+                <button id='unlock-entry' class='button' onclick='unlockEntry()' disabled>Unlock map</button>
+            </div>
+            <div class='block'>
+                <hr class='hr left' />
+                <span class='or'>Or</span>
+                <hr class='hr right' />
+                <button id='proceed' class='button' onclick='proceed()'>Proceed to view-only map</button>
+            </div>
+        </div>
+    </div>
     <div class='menu' data-type="header">
         <button class='pick' onclick="pick()">Pick Chunk</button>
         <button class='roll2' onclick="roll2()">Roll 2</button>

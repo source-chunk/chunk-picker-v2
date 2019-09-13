@@ -42,7 +42,7 @@
 }
 
 .box:hover {
-    background-color: rgba(200, 200, 200, .5);
+    background-color: rgba(200, 200, 200, .25);
     transition-duration: 0s;
 }
 
@@ -61,22 +61,22 @@
 }
 
 .gray {
-    background-color: rgba(150, 150, 150, .5);
+    background-color: rgba(150, 150, 150, .75);
     -webkit-box-shadow:inset 0px 0px 0px .5px black;
     -moz-box-shadow:inset 0px 0px 0px .5px black;
     box-shadow:inset 0px 0px 0px .5px black;
 }
 
 .potential:hover {
-    background-color: rgba(255, 255, 100, .7);
+    background-color: rgba(255, 255, 100, .33);
 }
 
 .selected:hover {
-    background-color: rgba(100, 255, 100, .7);
+    background-color: rgba(100, 255, 100, .33);
 }
 
 .gray:hover {
-    background-color: rgba(150, 150, 150, .7);
+    background-color: rgba(150, 150, 150, .5);
 }
 
 .recent {
@@ -314,7 +314,7 @@ button.menu2 {
     background-color: rgb(75, 200, 75);
 }
 
-.toggle.off:not(.locked) {
+.toggle.off {
     background-color: rgb(200, 75, 75);
 }
 
@@ -322,7 +322,7 @@ button.menu2 {
     background-color: rgb(75, 255, 75);
 }
 
-.toggle.off:not(.locked):hover {
+.toggle.off:hover {
     background-color: rgb(255, 75, 75);
 }
 
@@ -330,17 +330,12 @@ button.menu2 {
     background-color: rgb(120, 180, 120);
 }
 
-.toggle.off:not(.locked):active {
+.toggle.off:active {
     background-color: rgb(180, 120, 120);
 }
 
 #toggleNeighbors, #toggleRemove {
     margin-bottom: 25px;
-}
-
-.locked {
-    background-color: gray;
-    cursor: not-allowed;
 }
 
 .label {
@@ -532,22 +527,26 @@ button.menu2 {
     user-select: none;
 }
 
-#create {
+#unlock-entry {
+    height: 4vw;
+}
+
+#create, #unlock-entry {
     border: 2px solid rgb(50, 50, 150);
     background-color: rgb(100, 100, 255);
     color: white;
 }
 
-#create:hover {
+#create:hover, #unlock-entry:hover {
     background-color: rgb(75, 75, 225);
 }
 
-#mid {
+#mid, #proceed {
     border: 2px solid rgb(50, 50, 50);
     background-color: rgb(255, 255, 255);
 }
 
-#mid:hover {
+#mid:hover, #proceed:hover {
     background-color: rgb(240, 240, 240);
 }
 
@@ -561,7 +560,7 @@ button.menu2 {
     background-color: rgb(75, 75, 225);
 }
 
-#create2:disabled {
+#create2:disabled, #unlock-entry:disabled {
     border: 2px solid rgb(150, 150, 150);
     background-color: rgb(225, 225, 225);
     color: black;
@@ -594,6 +593,19 @@ button.menu2 {
     width: 33%;
     margin: auto;
     margin-bottom: 25px;
+}
+
+.entry-content {
+    position: fixed;
+    z-index: 9999 !important;
+    border: solid;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    -ms-transform: translate(115%, 35%);
+    transform: translate(115%, 35%);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: white;
 }
 
 .home.text {
@@ -633,6 +645,14 @@ button.menu2 {
     background-color: rgb(75, 75, 225);
     color: white;
     border-color: black;
+}
+
+.pin.entry {
+    width: 40%;
+    font-size: 2.5vw;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 25px;
 }
 
 .mid, .pin.old {
