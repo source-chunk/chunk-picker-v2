@@ -2,6 +2,20 @@
     display: none;
 }
 
+#beta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 999 !important;
+    font-weight: bolder;
+    font-size: 5vw;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+}
+
 .body {
     display: none;
 }
