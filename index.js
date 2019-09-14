@@ -615,10 +615,10 @@ var nextPage = function(page) {
         $('.pin').focus();
     } else if (page === 'create2') {
         $('#create2').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+        pin = $('.pin.new').val();
         setTimeout(function() {
             $('#page2a').hide();
             $('#page3a').show();
-            pin = $('.pin').val();
         }, 500);
         !mid && rollMID();
     } else if (page === 'mid') {
@@ -939,9 +939,11 @@ var rollMID = function() {
             charSet = char1 + char2 + char3;
             !snap.val()['maps'][charSet] && (badNums = false);
         }
+        console.log('1 '+pin);
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 var temp = snap.val()['template'];
+                console.log('2 '+pin);
                 temp.pin = pin;
                 databaseRef.child('maps/' + charSet).set(temp);
             }

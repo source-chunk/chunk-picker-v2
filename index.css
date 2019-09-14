@@ -319,11 +319,11 @@ button.menu2 {
 }
 
 .toggle.on:hover {
-    background-color: rgb(75, 255, 75);
+    background-color: rgb(50, 175, 50);
 }
 
 .toggle.off:hover {
-    background-color: rgb(255, 75, 75);
+    background-color: rgb(175, 50, 50);
 }
 
 .toggle.on:active {
@@ -341,8 +341,10 @@ button.menu2 {
 .label {
     pointer-events: none;
     color: white;
-    margin: 0 auto;
+    margin: auto;
     transform: translateY(-20%);
+    width: 100%;
+    text-align: center;
 }
 
 .ui-loader-header {
