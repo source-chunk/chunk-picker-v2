@@ -267,6 +267,10 @@ button.menu2 {
     margin-bottom: 20px;
     margin-top: 20px;
     height: 4vw;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    line-height: .75vw;
 }
 
 .exit {
@@ -626,6 +630,10 @@ button.menu2 {
 
 #unlock-entry {
     height: 4vw;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    line-height: .75vw;
 }
 
 #create, #unlock-entry {
@@ -737,6 +745,10 @@ button.menu2 {
 .desc {
     width: 90%;
     margin: auto;
+}
+
+.warning {
+    font-size: 1.5vw;
 }
 
 .pin.new {
