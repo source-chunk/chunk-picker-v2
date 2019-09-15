@@ -241,6 +241,7 @@ button.menu2 {
     top: 20px;
     width: 100%;
     text-align: center;
+    pointer-events: none;
 }
 
 .gitgeddes {
