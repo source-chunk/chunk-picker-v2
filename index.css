@@ -2,6 +2,10 @@
     display: none;
 }
 
+a, a:visited {
+    color: black;
+  }
+
 #beta {
     position: absolute;
     bottom: 0;
@@ -229,6 +233,83 @@ button.menu2 {
     z-index: 99 !important;
     bottom: 20px;
     width: 100%;
+}
+
+.menu6 {
+    position: fixed;
+    z-index: 99 !important;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.gitgeddes {
+    word-break: break-all;
+}
+
+.description {
+    font-size: 1.25vw;
+    width: 90%;
+    margin: auto;
+}
+
+.url {
+    margin-top: 25px;
+    font-size: 2vw;
+    border: solid;
+    border-width: 1px;
+}
+
+#import2 {
+    border: 2px solid rgb(50, 50, 150);
+    background-color: rgb(100, 100, 255);
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 4vw;
+}
+
+.exit {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+#import2:hover {
+    background-color: rgb(75, 75, 225);
+}
+
+#import2:disabled {
+    border: 2px solid rgb(150, 150, 150);
+    background-color: rgb(225, 225, 225);
+    color: black;
+    cursor: not-allowed;
+}
+
+.import {
+    background-color: rgb(200, 125, 200);
+    width: 17vw;
+    height: 100%;
+    font-size: 2vw;
+    color: white;
+    display: block;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: auto;
+}
+
+.import:hover {
+    background-color: rgb(175, 100, 175);
+}
+
+.import:active {
+    background-color: rgb(150, 125, 150);
 }
 
 .icon {
@@ -618,8 +699,21 @@ button.menu2 {
     width: 30%;
     margin: auto;
     text-align: center;
-    -ms-transform: translate(115%, 35%);
-    transform: translate(115%, 35%);
+    -ms-transform: translate(112.5%, 35%);
+    transform: translate(112.5%, 35%);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: white;
+}
+
+.import-content {
+    position: absolute;
+    z-index: 9999 !important;
+    border: solid;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    -ms-transform: translate(112.5%, 35%);
+    transform: translate(112.5%, 35%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: white;
 }
@@ -678,7 +772,7 @@ button.menu2 {
     margin-top: 5px;
 }
 
-.mid-err, .pin-err {
+.mid-err, .pin-err, .url-err {
     color: red;
     visibility: hidden;
     margin-bottom: 10px;
