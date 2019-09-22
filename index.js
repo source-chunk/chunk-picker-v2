@@ -283,7 +283,7 @@ $(document).ready(function() {
 
 // Credit to Amehzyn
 // Handles zooming
-$(".body").on('scroll mousewheel', function(e) {
+$(".body").on('scroll mousewheel DOMMouseScroll', function(e) {
     if (atHome || inEntry || importMenuOpen) {
         return;
     }
@@ -291,8 +291,19 @@ $(".body").on('scroll mousewheel', function(e) {
     var imageDiv = document.getElementById("imgDiv");
     // Calculate the direction of scrolling
     var dir;
-    if (e.originalEvent.wheelDelta > 0) dir = .1; // Zoom out
-    else dir = -.1; // Zoom in
+    if (e.type === 'DOMMouseScroll') {
+        if (e.detail < 0) {
+            dir = .1
+        } else {
+            dir = -.1;
+        }
+    } else {
+        if (e.originalEvent.wheelDelta > 0) {
+            dir = .1
+        } else {
+            dir = -.1;
+        }
+    }
 
     // Set minimum and maximum zoom of map
     var minWidth = Math.floor(0.95 * window.innerWidth);
@@ -456,19 +467,19 @@ var zoomButton = function(dir) {
         zoom -= scale;
         zoom < minZoom ? zoom = minZoom : zoom = zoom;
     }
-    prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + $(window).width()/2)) + $(window).width()/2;
-    prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + $(window).height()/2)) + $(window).height()/2;
+    prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + window.innerWidth/2)) + window.innerWidth/2;
+    prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + window.innerHeight/2)) + window.innerHeight/2;
     if (prevScrollLeft > 0) {
         prevScrollLeft = 0;
     }
     if (prevScrollTop > 0) {
         prevScrollTop = 0;
     }
-    if (prevScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
-        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
+    if (prevScrollLeft - window.innerWidth < -zoom / 100 * window.innerWidth) {
+        prevScrollLeft = -(zoom / 100 * window.innerWidth) + window.innerWidth;
     }
-    if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
-        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
+    if (prevScrollTop - window.innerHeight < -zoom / 100 * window.innerWidth * ratio) {
+        prevScrollTop = -(zoom / 100 * window.innerWidth * ratio) + window.innerHeight;
     }
     $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
     $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
@@ -1021,19 +1032,19 @@ var updateScrollPos = function(e) {
 // Scrolls to position x.xPart, y.yPart
 var scrollToPos = function(x, y, xPart, yPart, doQuick) {
     zoom = $('.imgDiv').width();
-    prevScrollLeft = -$('#' + (y * rowSize + x)).position().left + $(window).width() / 2 - $('#' + (rowSize + 1)).position().left * (xPart + .5);
-    prevScrollTop = -$('#' + (y * rowSize + x)).position().top + $(window).height() / 2 - $('#' + (rowSize + 1)).position().top * (yPart + .5);
+    prevScrollLeft = -$('#' + (y * rowSize + x)).position().left + window.innerWidth / 2 - $('#' + (rowSize + 1)).position().left * (xPart + .5);
+    prevScrollTop = -$('#' + (y * rowSize + x)).position().top + window.innerHeight / 2 - $('#' + (rowSize + 1)).position().top * (yPart + .5);
     if (prevScrollLeft > 0) {
         prevScrollLeft = 0;
     }
     if (prevScrollTop > 0) {
         prevScrollTop = 0;
     }
-    if (prevScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
-        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
+    if (prevScrollLeft - window.innerWidth < -zoom / 100 * window.innerWidth) {
+        prevScrollLeft = -(zoom / 100 * window.innerWidth) + window.innerWidth;
     }
-    if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
-        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
+    if (prevScrollTop - window.innerHeight < -zoom / 100 * window.innerWidth * ratio) {
+        prevScrollTop = -(zoom / 100 * window.innerWidth * ratio) + window.innerHeight;
     }
     doQuick ? $('.imgDiv').css({left: prevScrollLeft, top: prevScrollTop}) : $('.imgDiv').animate({left: prevScrollLeft, top: prevScrollTop});
 }

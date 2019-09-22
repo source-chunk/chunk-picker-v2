@@ -2,6 +2,10 @@
     display: none;
 }
 
+@-moz-document url-prefix() {
+    html,body{overflow: hidden !important;}
+}
+
 a, a:visited {
     color: black;
   }
@@ -50,9 +54,7 @@ a, a:visited {
 }
 
 .box {
-    -webkit-box-shadow:inset 0px 0px 0px .05vw gray;
-    -moz-box-shadow:inset 0px 0px 0px .05vw gray;
-    box-shadow:inset 0px 0px 0px .05vw gray;
+    box-shadow:inset .075vw .075vw .075vw .075vw gray;
     display: inline-grid;
     background-color: transparent;
     color: rgba(255, 255, 255, 0);
@@ -66,23 +68,17 @@ a, a:visited {
 
 .potential {
     background-color: rgba(255, 255, 100, .5);
-    -webkit-box-shadow:inset 0px 0px 0px .05vw black;
-    -moz-box-shadow:inset 0px 0px 0px .05vw black;
-    box-shadow:inset 0px 0px 0px .05vw black;
+    box-shadow:inset .075vw .075vw .075vw .075vw black;
 }
 
 .selected {
     background-color: rgba(100, 255, 100, .5);
-    -webkit-box-shadow:inset 0px 0px 0px .05vw black;
-    -moz-box-shadow:inset 0px 0px 0px .05vw black;
-    box-shadow:inset 0px 0px 0px .05vw black;
+    box-shadow:inset .075vw .075vw .075vw .075vw black;
 }
 
 .gray {
     background-color: rgba(150, 150, 150, .75);
-    -webkit-box-shadow:inset 0px 0px 0px .05vw black;
-    -moz-box-shadow:inset 0px 0px 0px .05vw black;
-    box-shadow:inset 0px 0px 0px .05vw black;
+    box-shadow:inset .075vw .075vw .075vw .075vw black;
 }
 
 .potential:hover {
