@@ -27,79 +27,93 @@
 
 <div class='loading'>Loading&#8230;</div>
 
-<img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-
 <div class='body' data-role="page">
-    <script src="./index.js"></script>
-    <div id='entry-menu'>
-        <div class='entry-content'>
-            <div class='block'>
-                <div class='title'>Chunk Picker V2</div>
-            </div>
-            <div class='block'>
-                <div>Enter PIN to unlock:</div>
-                <input class='pin entry' placeholder='PIN' />
-                <button id='unlock-entry' class='button' onclick='unlockEntry()' disabled>Unlock map</button>
-            </div>
-            <div class='block'>
-                <hr class='hr left' />
-                <span class='or'>Or</span>
-                <hr class='hr right' />
-                <button id='proceed' class='button' onclick='proceed()'>Proceed to view-only map</button>
-            </div>
-        </div>
-    </div>
-    <div id='import-menu'>
-      <div class='import-content'>
-        <span class='exit' onclick='exitImportMenu()'><i class="zmdi zmdi-close zmdi-hc-lg"></i></span>
-        <div class='block'>
-          <div class='title'>Import from URL</div>
-        </div>
-        <div class='block'>
-          <p class='description'>
-            If you have a chunk map from <a class='gitgeddes' target='_blank' href='https://gitgeddes.github.io/ChunkPicker/'>https://gitgeddes.github.io/ChunkPicker/</a> and wish to import your chunks into this map, click on the 'Generate and copy URL' button, and paste your URL below.
-          </p>
-          <div class='warning'><b>Warning: This action will replace your entire current map with the map from the url.</b></div>
-          <input class='url' placeholder='Enter URL' />
-          <div class='url-err'>URL is formatted incorrectly.</div>
-          <button id='import2' class='button' onclick='importFromURL()' disabled>Import</button>
-        </div>
+  <script src="./index.js"></script>
+  <div class='escape-hint'>Press escape to exit screenshot mode</div>
+  <div class='topnav'>
+      <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><i class="gohome zmdi zmdi-home zmdi-hc-3x"></i></a></div>
+      <div class='toptitle'>Chunk Picker V2</div>
+      <div><i class="settings zmdi zmdi-settings zmdi-hc-3x" onclick='settings()'></i></div>
+  </div>
+  <div id='entry-menu'>
+    <div class='entry-content'>
+      <div class='block'>
+        <div class='title'>Chunk Picker V2</div>
+      </div>
+      <div class='block'>
+        <div>Enter PIN to unlock:</div>
+        <input class='pin entry' placeholder='PIN' />
+        <button id='unlock-entry' class='button' onclick='unlockEntry()' disabled>Unlock map</button>
+      </div>
+      <div class='block'>
+        <hr class='hr left' />
+        <span class='or'>Or</span>
+        <hr class='hr right' />
+        <button id='proceed' class='button' onclick='proceed()'>Proceed to view-only map</button>
       </div>
     </div>
-    <div class='menu' data-type="header">
-        <button class='pick' onclick="pick()">Pick Chunk</button>
-        <button class='roll2' onclick="roll2()">Roll 2</button>
-        <button class='center' onclick="center()">Center on Unlocked</button>
+  </div>
+  <div id='import-menu'>
+    <div class='import-content'>
+      <span class='exit' onclick='exitImportMenu()'><i class="zmdi zmdi-close zmdi-hc-lg"></i></span>
+      <div class='block'>
+        <div class='title'>Import from URL</div>
+      </div>
+      <div class='block'>
+        <p class='description'>
+          If you have a chunk map from <a class='gitgeddes' target='_blank' href='https://gitgeddes.github.io/ChunkPicker/'>https://gitgeddes.github.io/ChunkPicker/</a> and wish to import your chunks into this map, click on the 'Generate and copy URL' button, and paste your URL below.
+        </p>
+        <div class='warning'><b>Warning: This action will replace your entire current map with the map from the url.</b></div>
+        <input class='url' placeholder='Enter URL' />
+        <div class='url-err'>URL is formatted incorrectly.</div>
+        <button id='import2' class='button' onclick='importFromURL()' disabled>Import</button>
+      </div>
     </div>
-    <div class='menu2'>
-        <div class='toggleNeighbors text'>Auto-select neighboring chunks</div>
-        <button id='toggleNeighbors' class='toggle off' onclick="toggleNeighbors()">OFF</button>
-        <div class='toggleRemove text'>Remove selected chunks on pick</div>
-        <button id='toggleRemove' class='toggle off' onclick="toggleRemove()">OFF</button>
-        <div class='toggleIds text'>Show chunk ID labels</div>
-        <button id='toggleIds' class='toggle off' onclick="toggleIds()">OFF</button>
+  </div>
+  <div class='menu' data-type="header">
+    <button class='pick' onclick="pick()">Pick Chunk</button>
+    <button class='roll2' onclick="roll2()">Roll 2</button>
+    <button class='unpick' onclick="unpick()">Unpick Chunk</button>
+    <button class='center' onclick="center()">Center on Unlocked</button>
+  </div>
+  <div class='menu2'>
+    <div class='toggleNeighbors text'>Auto-select neighboring chunks</div>
+    <button id='toggleNeighbors' class='toggle off' onclick="toggleNeighbors()">OFF</button>
+    <div class='toggleRemove text'>Remove selected chunks on pick</div>
+    <button id='toggleRemove' class='toggle off' onclick="toggleRemove()">OFF</button>
+    <div class='toggleIds text'>Show chunk ID labels</div>
+    <button id='toggleIds' class='toggle off' onclick="toggleIds()">OFF</button>
+  </div>
+  <div class='menu3'>
+    <div id='chunkInfo1' class='text'>Unlocked chunks: 0</div>
+    <div id='chunkInfo2' class='text'>Selected chunks: 0</div>
+  </div>
+  <div class='menu5'>
+    <div class='icon'>
+      <i class="lock-closed zmdi zmdi-lock zmdi-hc-3x" onclick='unlock()'></i>
+      <i class="lock-opened zmdi zmdi-lock-open zmdi-hc-3x"></i>
     </div>
-    <div class='menu3'>
-        <div id='chunkInfo1' class='text'>Unlocked chunks: 0</div>
-        <div id='chunkInfo2' class='text'>Selected chunks: 0</div>
+    <div class='lock-box'>
+      <div class='inner-lock'>
+        <input class='lock-pin' placeholder='PIN' />
+        <button id='lock-unlock' onclick='checkPin()'>Unlock</button>
+      </div>
     </div>
-    <div class='menu5'>
-        <div class='icon'>
-            <i class="lock-closed zmdi zmdi-lock zmdi-hc-3x" onclick='unlock()'></i>
-            <i class="lock-opened zmdi zmdi-lock-open zmdi-hc-3x"></i>
-        </div>
-        <div class='lock-box'>
-            <div class='inner-lock'>
-                <input class='lock-pin' placeholder='PIN' />
-                <button id='lock-unlock' onclick='checkPin()'>Unlock</button>
-            </div>
-        </div>
+  </div>
+  <div class='menu6'>
+    <button class='import' onclick="importFunc()">Import from URL</button>
+  </div>
+  <div>
+    <div class="imgDiv" id="imgDiv">
+      <img class="map" id="map" src="osrs_world_map_may20_2019.png">
+      <div class="btnDiv" id="btnDiv"></div>
     </div>
-    <div class='menu6'>
-      <button class='import' onclick="importFunc()">Import from URL</button>
-    </div>
-    <img class='img' draggable="false" src='./osrs_world_map_may20_2019.png' />
-    <div class='outer'></div>
+  </div>
+  <div class='settings-menu'>
+    <div class='item' onclick="enableScreenshotMode()">Screenshot mode<i class="pic zmdi zmdi-camera zmdi-hc-lg"></i></div>
+    <div class='item roll2toggle item-off' onclick="toggleRoll2()">Roll 2<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
+    <div class='item unpicktoggle item-off' onclick="toggleUnpick()">Unpick chunk<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
+  </div>
 </div>
 
 <div id='home-menu'>

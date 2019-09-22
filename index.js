@@ -1,61 +1,65 @@
 /* 
  * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
- * With help from Slay to Stay for chunk Id's
- * 9/14/2019
+ * With help from Slay to Stay for chunk Id's and Amehzyn for smoother zooming/url decoding
+ * 9/21/2019
  */
 
-var onMobile = typeof window.orientation !== 'undefined';                   // Is user on a mobile device
-var isPicking = false;                                                      // Has the user just rolled 2 chunks and is currently picking
-var autoSelectNeighbors = false;                                            // Toggle state for select neighbors button
-var autoRemoveSelected = false;                                             // Toggle state for remove selected button
-var showChunkIds = false;                                                   // Toggle state for show chunk ids button
-var clicked = false;                                                        // Is mouse being held down
+var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
+var isPicking = false;                                                          // Has the user just rolled 2 chunks and is currently picking
+var autoSelectNeighbors = false;                                                // Toggle state for select neighbors button
+var autoRemoveSelected = false;                                                 // Toggle state for remove selected button
+var showChunkIds = false;                                                       // Toggle state for show chunk ids button
+var clicked = false;                                                            // Is mouse being held down
+var screenshotMode = false;                                                     // Is screenshot mode on
+var settingsOpen = false;                                                       // Is the settings menu open
+var roll2On = false;                                                            // Is the roll2 button enabled
+var unpickOn = false;                                                           // Is the unpick button enabled
 
-var zoom = 350;                                                             // Starting zoom value
-var maxZoom = 550;                                                          // Furthest zoom in value
-var minZoom = onMobile ? 275 : 100;                                         // Smallest zoom out value
-var fontZoom = 175;                                                         // Font size zoom
-var labelZoom = 60;                                                         // Selected label font size zoom
-var scale = 30;                                                             // Amount zoomed every 'zoom' action
-var fullSize = 1075;                                                        // Amount of chunks present
-var rowSize = 43;                                                           // Amount of chunks per row
-var scrollLeft = 0;                                                         // Amount the board is scrolled left offscreen
-var prevScrollLeft = 0;                                                     // Amount the board was previously scrolled left offscreen
-var scrollTop = 0;                                                          // Amount the board is scrolled up offscreen
-var prevScrollTop = 0;                                                      // Amount the board was previously scrolled up offscreen
+var zoom = 350;                                                                 // Starting zoom value
+var maxZoom = 550;                                                              // Furthest zoom in value
+var minZoom = onMobile ? 275 : 100;                                             // Smallest zoom out value
+var fontZoom = 16;                                                              // Font size zoom
+var labelZoom = 96;                                                             // Selected label font size zoom
+var scale = 30;                                                                 // Amount zoomed every 'zoom' action
+var fullSize = 1075;                                                            // Amount of chunks present
+var rowSize = 43;                                                               // Amount of chunks per row
+var scrollLeft = 0;                                                             // Amount the board is scrolled left offscreen
+var prevScrollLeft = 0;                                                         // Amount the board was previously scrolled left offscreen
+var scrollTop = 0;                                                              // Amount the board is scrolled up offscreen
+var prevScrollTop = 0;                                                          // Amount the board was previously scrolled up offscreen
 
-var ratio = 4800 / 8256;                                                    // Image ratio
-var movedNum = 0;                                                           // Amount of times mouse is moved while dragging
-var selectedNum = 1;                                                        // Current index of selected chunks
-var unlockedChunks = 0;                                                     // Number of unlocked chunks
-var selectedChunks = 0;                                                     // Number of selected chunks
-var startingIndex = 4671;                                                   // Index to start chunk numbering at (based on ChunkLite numbers)
-var skip = 213;                                                             // Number of indices to skip between columns for chunk numbering
+var ratio = 4800 / 8256;                                                        // Image ratio
+var movedNum = 0;                                                               // Amount of times mouse is moved while dragging
+var selectedNum = 1;                                                            // Current index of selected chunks
+var unlockedChunks = 0;                                                         // Number of unlocked chunks
+var selectedChunks = 0;                                                         // Number of selected chunks
+var startingIndex = 4671;                                                       // Index to start chunk numbering at (based on ChunkLite numbers)
+var skip = 213;                                                                 // Number of indices to skip between columns for chunk numbering
 
-var prevValueMid = '';                                                      // Preview value of map id at login
-var prevValuePinNew = '';                                                   // Preview value of pin id at signup
-var prevValuePinOld = '';                                                   // Preview value of pin id at login
-var prevValueLockPin = '';                                                  // Preview value of pin id at map login
-var mid;                                                                    // Current value of map id
-var pin;                                                                    // Current value of pin
+var prevValueMid = '';                                                          // Preview value of map id at login
+var prevValuePinNew = '';                                                       // Preview value of pin id at signup
+var prevValuePinOld = '';                                                       // Preview value of pin id at login
+var prevValueLockPin = '';                                                      // Preview value of pin id at map login
+var mid;                                                                        // Current value of map id
+var pin;                                                                        // Current value of pin
 
-var midGood = false;                                                        // Is the map id valid
-var pinGood = true;                                                         // Is the pin valid
-var atHome;                                                                 // Is the user on the homepage
-var locked;                                                                 // Is the user not logged in
-var lockBoxOpen = false;                                                    // Is the lock box open
-var inEntry = false;                                                        // Is the entry menu open
-var importMenuOpen = false;                                                 // Is the import menu open
+var midGood = false;                                                            // Is the map id valid
+var pinGood = true;                                                             // Is the pin valid
+var atHome;                                                                     // Is the user on the homepage
+var locked;                                                                     // Is the user not logged in
+var lockBoxOpen = false;                                                        // Is the lock box open
+var inEntry = false;                                                            // Is the entry menu open
+var importMenuOpen = false;                                                     // Is the import menu open
 
-var databaseRef = firebase.database().ref();                                // Firebase database reference
-var myRef;                                                                  // Firebase database reference for this map ID
+var databaseRef = firebase.database().ref();                                    // Firebase database reference
+var myRef;                                                                      // Firebase database reference for this map ID
 
-var hammertime = new Hammer(document.getElementsByClassName('body')[0]);    // Initialize Hammerjs [Mobile]
+var BASE10 = "0123456789";                                                      // Base 10 alphabet
+var BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";  // Base 62 alphabet
+
+var hammertime = new Hammer(document.getElementsByClassName('body')[0]);        // Initialize Hammerjs [Mobile]
 hammertime.get('pinch').set({ enable: true });
-
-var BASE10 = "0123456789";
-var BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // ----------------------------------------------------------
 
@@ -99,7 +103,7 @@ hammertime.on('tap', function(ev) {
         if ($(ev.target).hasClass('gray')) {
             $(ev.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
             selectedNum++;
-            $('.label').css('font-size', zoom/labelZoom + 'vw');
+            $('.label').css('font-size', labelZoom + 'px');
             $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
         } else if ($(ev.target).hasClass('selected')) {
             fixNums($(ev.target).children().text());
@@ -114,7 +118,7 @@ hammertime.on('tap', function(ev) {
             autoSelectNeighbors && selectNeighbors(ev.target);
             autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) && (selectedChunks = 1) && (selectedNum = 1);
             $('.pick').text('Pick Chunk');
-            $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+            $('.roll2, .settings').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             isPicking = false;
             $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
@@ -123,6 +127,7 @@ hammertime.on('tap', function(ev) {
             $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
         }
         setData();
+        chunkBorders();
     }
 });
 
@@ -276,10 +281,63 @@ $(document).ready(function() {
     });
 });
 
+// Credit to Amehzyn
+// Handles zooming
+$(".body").on('scroll mousewheel', function(e) {
+    if (atHome || inEntry || importMenuOpen) {
+        return;
+    }
+    e.preventDefault();
+    var imageDiv = document.getElementById("imgDiv");
+    // Calculate the direction of scrolling
+    var dir;
+    if (e.originalEvent.wheelDelta > 0) dir = .1; // Zoom out
+    else dir = -.1; // Zoom in
+
+    // Set minimum and maximum zoom of map
+    var minWidth = Math.floor(0.95 * window.innerWidth);
+    var maxWidth = Math.floor(10 * window.innerWidth);
+    if (imageDiv.offsetWidth <= minWidth && dir < 0) {
+        // Zooming out would do nothing
+        return;
+    }
+    else if (imageDiv.offsetWidth >= maxWidth && dir > 0) {
+        // Zooming in would do nothing
+        return;
+    }
+    else if (imageDiv.offsetWidth * (1 + dir) <= minWidth) {
+        // Calculate the percent difference between the previous and new width
+        dir = (minWidth - imageDiv.offsetWidth) / imageDiv.offsetWidth;
+        imageDiv.style.width = minWidth + "px";
+    }
+    else if (imageDiv.offsetWidth * (1 + dir) >= maxWidth) {
+        // Calculate the percent difference between the previous and new width
+        dir = (maxWidth - imageDiv.offsetWidth) / imageDiv.offsetWidth;
+        imageDiv.style.width = maxWidth + "px";
+    }
+    else {
+        imageDiv.style.width = (imageDiv.offsetWidth * (1 + dir)) + "px";
+    }
+    
+    // Zoom on the mouse position
+    zoomOnMouse(e, dir, imageDiv);
+    // Fix the location of the map because it could go off-screen
+    fixMapEdges(imageDiv);
+    labelZoom = $('.box').width();
+    fontZoom = $('.box').width() / 6;
+    $('.label').css('font-size', labelZoom + 'px');
+    $('.box').css('font-size', fontZoom + 'px');
+});
+
 // Prevent arrow key movement
 $(document).on({
     'keydown': function(e) {
-        if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32)) {
+        if (e.keyCode === 27 && screenshotMode) {
+            screenshotMode = false;
+            $('.escape-hint').hide();
+            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .topnav, #beta').show();
+            settings();
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32)) {
             e.preventDefault();
         }
     }
@@ -334,75 +392,51 @@ $(document).on({
                     $('.lock-closed').removeClass('animated shake zmdi-hc-5x').addClass('zmdi-hc-3x').css({'color': 'black'});
                 }, 500);
                 return;
+            } else if (screenshotMode) {
+                screenshotMode = false;
+                settings();
+                $('.escape-hint').hide();
+                $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .topnav').show();
+                return;
+            } else if (settingsOpen) {
+                settings();
+                return;
             }
             if ($(e.target).hasClass('gray')) {
-                $(e.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
+                $(e.target).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
-                $('.label').css('font-size', zoom/labelZoom + 'vw');
+                $('.label').css('font-size', labelZoom + 'px');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             } else if ($(e.target).hasClass('selected')) {
                 fixNums($(e.target).children().text());
-                $(e.target).toggleClass('selected unlocked').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
+                $(e.target).addClass('unlocked').removeClass('selected').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             } else if ($(e.target).hasClass('potential')) {
                 fixNums($(e.target).children().text());
-                $(e.target).toggleClass('potential unlocked').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
+                $(e.target).addClass('unlocked').removeClass('potential').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
                 $('.potential > .label').css('color', 'white');
-                $('.potential').toggleClass('selected potential');
+                $('.potential').addClass('selected').removeClass('potential');
                 autoSelectNeighbors && selectNeighbors(e.target);
-                autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) && (selectedChunks = 1) && (selectedNum = 1);
+                autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) && (selectedChunks = 1) && (selectedNum = 1);
                 $('.pick').text('Pick Chunk');
-                $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+                roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+                unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
                 isPicking = false;
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             } else if ($(e.target).hasClass('recent')) {
                 // ----
             } else {
-                $(e.target).toggleClass('gray unlocked');
+                $(e.target).addClass('gray').removeClass('unlocked').css('border-width', 0);
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
+                
             }
             setData();
+            chunkBorders();
         }
         $('.outer').css('cursor', 'default');
     }
-});
-
-// Handles zooming
-$(".body").on('scroll mousewheel', function(e) {
-    if (atHome || inEntry || importMenuOpen) {
-        return;
-    }
-    let oldZoom = zoom;
-    e.preventDefault();
-    if (e.originalEvent.wheelDelta >= 0) {
-        zoom += scale;
-        zoom > maxZoom ? zoom = maxZoom : zoom = zoom;
-    } else {
-        zoom -= scale;
-        zoom < minZoom ? zoom = minZoom : zoom = zoom;
-    }
-    prevScrollLeft = -((zoom/oldZoom) * (-prevScrollLeft + e.clientX)) + e.clientX;
-    prevScrollTop = -((zoom/oldZoom) * (-prevScrollTop + e.clientY)) + e.clientY;
-    if (prevScrollLeft > 0) {
-        prevScrollLeft = 0;
-    }
-    if (prevScrollTop > 0) {
-        prevScrollTop = 0;
-    }
-    if (prevScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
-        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
-    }
-    if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
-        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
-    }
-    $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
-    $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
-    $('.img').width(zoom + 'vw');
-    $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'vw');
-    $('.label').css('font-size', zoom/labelZoom + 'vw');
 });
 
 // ----------------------------------------------------------
@@ -413,6 +447,7 @@ $(".body").on('scroll mousewheel', function(e) {
 
 // [Mobile] Mobile zoom capabilities
 var zoomButton = function(dir) {
+    console.log('zoom button');
     let oldZoom = zoom;
     if (dir > 0) {
         zoom += scale;
@@ -439,8 +474,8 @@ var zoomButton = function(dir) {
     $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'vw');
-    $('.label').css('font-size', zoom/labelZoom + 'vw');
+    $('.box').css('font-size', fontZoom + 'px');
+    $('.label').css('font-size', labelZoom + 'px');
 }
 
 // Pick button: picks a random chunk from selected/potential
@@ -455,25 +490,27 @@ var pick = function() {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
         sNum = $(el[rand]).children().text();
-        $(el[rand]).toggleClass('selected unlocked').addClass('recent').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+        $(el[rand]).addClass('unlocked recent').removeClass('selected').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
     } else {
         el = $('.potential');
         var rand = Math.floor(Math.random() * el.length);
         sNum = $(el[rand]).children().text();
-        $(el[rand]).toggleClass('potential unlocked').addClass('recent').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+        $(el[rand]).addClass('unlocked recent').removeClass('potential').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
         $('.potential > .label').css('color', 'white');
-        $('.potential').toggleClass('selected potential');
+        $('.potential').addClass('selected').removeClass('potential recent');
         isPicking = false;
         $('.pick').text('Pick Chunk');
-        $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+        roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+        unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
     }
     fixNums(sNum);
     autoSelectNeighbors && selectNeighbors(el[rand]);
-    autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) && (selectedChunks = 1) && (selectedNum = 1);
+    autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) && (selectedChunks = 1) && (selectedNum = 1);
     $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
     $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
     scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
     setData();
+    chunkBorders();
 }
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
@@ -485,13 +522,13 @@ var roll2 = function() {
     var el = $('.selected');
     var rand;
     if (el.length > 0) {
-        $('.roll2').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
+        $('.roll2, .unpick').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
         $('.pick').text('Pick for me');
     }
     for (var i = 0; i < 2; i++) {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
-        $(el[rand]).toggleClass('selected potential');
+        $(el[rand]).addClass('potential recent').removeClass('selected');
         $('.potential > .label').css('color', 'black');
     }
     setData();
@@ -503,7 +540,7 @@ var toggleNeighbors = function(extra) {
         return;
     }
     autoSelectNeighbors = !autoSelectNeighbors;
-    $('#toggleNeighbors').toggleClass('on').toggleClass('off');
+    $('#toggleNeighbors').toggleClass('on off');
     if ($('#toggleNeighbors').hasClass('on')) {
         $('#toggleNeighbors').text('ON');
     } else {
@@ -521,7 +558,7 @@ var toggleRemove = function(extra) {
         return;
     }
     autoRemoveSelected = !autoRemoveSelected;
-    $('#toggleRemove').toggleClass('on').toggleClass('off');
+    $('#toggleRemove').toggleClass('on off');
     if ($('#toggleRemove').hasClass('on')) {
         $('#toggleRemove').text('ON');
     } else {
@@ -598,9 +635,10 @@ var importFromURL = function() {
             var unlocked = stringToChunkIndexes(chunkStrSplit[0]);
             var selected = chunkStrSplit[1] ? stringToChunkIndexes(chunkStrSplit[1]) : null;
 
-            $('.box').removeClass('selected potential unlocked recent').addClass('gray');
+            $('.box').removeClass('selected potential unlocked recent').addClass('gray').css('border-width', 0);
             $('.label').remove();
-            $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+            roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+            unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             isPicking = false;
             selectedChunks = 0;
             unlockedChunks = 0;
@@ -609,7 +647,7 @@ var importFromURL = function() {
             selected && selected.sort(function(a, b){return b-a}).forEach(function(id) {
                 id.startsWith('0') && (id = id.substr(1));
                 $('#' + id).addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
-                $('.label').css('font-size', zoom/60 + 'vw');
+                $('.label').css('font-size', labelZoom + 'px');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             });
 
@@ -619,6 +657,7 @@ var importFromURL = function() {
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             });
             setData();
+            chunkBorders();
             $('#import-menu').css({'opacity': 0}).hide();
             $('.import').css('opacity', 0).show();
             $('.import').animate({'opacity': 1});
@@ -673,13 +712,16 @@ var unlockEntry = function() {
             } else {
                 firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
                 $('.center').css('top', '15vw');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import').css('opacity', 0).show();
-                !isPicking && $('.roll2').css('opacity', 0).show();
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').css('opacity', 0).show();
+                !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
+                !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                 $('#entry-menu').animate({'opacity': 0});
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import').animate({'opacity': 1});
-                    !isPicking && $('.roll2').animate({'opacity': 1});
+                    $('.pin.entry').val('');
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').animate({'opacity': 1});
+                    !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
+                    !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                     $('#unlock-entry').prop('disabled', false).html('Unlock');
                     locked = false;
                     inEntry = false;
@@ -795,6 +837,76 @@ var accessMap = function() {
     });
 }
 
+// Unpicks a random unlocked chunk
+var unpick = function() {
+    if (locked || importMenuOpen) {
+        return;
+    }
+    var el = $('.unlocked');
+    if (el.length <= 0) {
+        return;
+    }
+    var rand = Math.floor(Math.random() * el.length);
+    $(el[rand]).addClass('selected').removeClass('unlocked').addClass('recent').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex).append('<span class="label">' + selectedNum + '</span>');
+    selectedNum++;
+    $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
+    $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
+    scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
+    setData();
+    chunkBorders();
+    $(el[rand]).css('border-width', '0px');
+}
+
+// Opens the settings menu
+var settings = function() {
+    settingsOpen = !settingsOpen;
+    if (settingsOpen) {
+        $('.settings-menu').css('opacity', 0).show();
+        $('.settings-menu').animate({'opacity': 1});
+        $('.settings').addClass('whirl').animate({'color': 'rgb(150, 150, 150)'});
+    } else {
+        $('.settings-menu').animate({'opacity': 0});
+        $('.settings').removeClass('whirl').addClass('smallspin').animate({'color': 'black'});
+        setTimeout(function() {
+            $('.settings-menu').hide();
+            $('.settings').removeClass('smallspin')
+        }, 500);
+    }
+}
+
+// Enables screenshot mode
+var enableScreenshotMode = function() {
+    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .settings-menu, .topnav, #beta').hide();
+    screenshotMode = true;
+    $('.escape-hint').css('opacity', 1).show();
+    setTimeout(function() {
+        $('.escape-hint').animate({'opacity': 0});
+        setTimeout(function() {
+            $('.escape-hint').hide();
+        }, 500);
+    }, 1000);
+}
+
+// Toggles the visibility of the roll2 button
+var toggleRoll2 = function(extra) {
+    roll2On = !roll2On;
+    roll2On ? $('.roll2').show() : $('.roll2').hide();
+    extra !== 'startup' && $('.roll2').css('opacity', 1);
+    $('.roll2toggle').toggleClass('item-off item-on');
+    $('.roll2toggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    extra !== 'startup' && !locked && setData();
+}
+
+// Toggles the visibility of the unpick button
+var toggleUnpick = function(extra) {
+    unpickOn = !unpickOn;
+    unpickOn ? $('.unpick').show() : $('.unpick').hide();
+    extra !== 'startup' && $('.unpick').css('opacity', 1);
+    $('.unpicktoggle').toggleClass('item-off item-on');
+    $('.unpicktoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    extra !== 'startup' && !locked && setData();
+}
+
 // ----------------------------------------------------------
 
 // Other Functions
@@ -805,7 +917,7 @@ var accessMap = function() {
 var doneLoading = function() {
     if (onMobile) {
         console.log('mobile');
-        $('.pick, .roll2, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
+        $('.pick, .roll2, .unpick, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
         $('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
         $('.box').addClass('mobile').css({'height': zoom/rowSize + 'vw', 'width': zoom/rowSize + 'vw'});
         $('.body').append(`<div class='menu4'>
@@ -825,8 +937,8 @@ var setupMap = function() {
         $('.body').show();
     $('#page1, #import-menu').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import').css('opacity', 0).hide();
-            !isPicking && $('.roll2').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').css('opacity', 0).hide();
+            !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
@@ -836,20 +948,19 @@ var setupMap = function() {
         if (locked === undefined) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
-            !isPicking && $('.roll2').css('opacity', 0).hide();
+            !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
         }
         for (var i = 0; i < fullSize; i++) {
-            $('.outer').append(`<div id=${i} class='box gray'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</div>`);
+            $('.btnDiv').append(`<div id=${i} class='box gray'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</div>`);
         }
-        $('.img').width(zoom + 'vw');
-        $('.outer').width(zoom + 'vw');
-        $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'vw');
-        $('.label').css('font-size', zoom/labelZoom + 'vw');
+        $('.box').css('font-size', fontZoom + 'px');
+        $('.label').css('font-size', labelZoom + 'px');
         loadData();
+        center('quick');
     }
 }
 
@@ -861,17 +972,17 @@ var selectNeighbors = function(el) {
         if (ops[i].substring(1,2) === 'x') {
             num = (i - 1) * 2 + 1;
             if (Math.floor((parseInt(el.id) + num) / rowSize) === Math.floor(parseInt(el.id) / rowSize) && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
-                $(`#${parseInt(el.id) + num}`).toggleClass('selected gray').append('<span class="label">' + selectedNum + '</span>');
+                $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
-                $('.label').css('font-size', zoom/labelZoom + 'vw');
+                $('.label').css('font-size', labelZoom + 'px');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             }
         } else {
             num = ((i - 3) * 2 + 1) * rowSize;
             if (parseInt(el.id) + num >= 0 && parseInt(el.id) + num < fullSize && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
-                $(`#${parseInt(el.id) + num}`).toggleClass('selected gray').append('<span class="label">' + selectedNum + '</span>');
+                $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
-                $('.label').css('font-size', zoom/labelZoom + 'vw');
+                $('.label').css('font-size', labelZoom + 'px');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             }
         }
@@ -882,38 +993,34 @@ var selectNeighbors = function(el) {
 var updateScrollPos = function(e) {
     let newScrollLeft = prevScrollLeft - (clickX - e.pageX);
     let newScrollTop = prevScrollTop - (clickY - e.pageY);
-    if (newScrollLeft > 0) {
-        newScrollLeft = 0;
-        prevScrollLeft = 0;
+    if (newScrollLeft > 100) {
+        newScrollLeft = 100;
+        prevScrollLeft = 100;
         clickX = e.pageX;
     }
-    if (newScrollTop > 0) {
-        newScrollTop = 0;
-        prevScrollTop = 0;
+    if (newScrollTop > 150) {
+        newScrollTop = 150;
+        prevScrollTop = 150;
         clickY = e.pageY;
     }
-    if (newScrollLeft - $(window).width() < -zoom / 100 * $(window).width()) {
-        newScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
-        prevScrollLeft = -(zoom / 100 * $(window).width()) + $(window).width();
+    if (newScrollLeft + $('.imgDiv').width() + 100 < window.innerWidth) {
+        newScrollLeft = -$('.imgDiv').width() + window.innerWidth - 100;
+        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 100;
         clickX = e.pageX;
     }
-    if (newScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
-        newScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
-        prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
+    if (newScrollTop + $('.imgDiv').height() + 100 < window.innerHeight) {
+        newScrollTop = -$('.imgDiv').height() + window.innerHeight - 100;
+        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 100;
         clickY = e.pageY;
     }
-    $('.img').css({marginLeft: newScrollLeft, marginTop: newScrollTop});
-    $('.outer').css({marginLeft: newScrollLeft, marginTop: newScrollTop});
+    $('.imgDiv').css({left: newScrollLeft, top: newScrollTop});
     scrollLeft = - (clickX - e.pageX);
     scrollTop = - (clickY - e.pageY);
 }
 
 // Scrolls to position x.xPart, y.yPart
 var scrollToPos = function(x, y, xPart, yPart, doQuick) {
-    $('.img').width(zoom + 'vw');
-    $('.outer').width(zoom + 'vw');
-    $('.box').width(zoom/rowSize + 'vw').height(zoom/rowSize + 'vw').css('font-size', zoom/fontZoom + 'vw');
-    $('.label').css('font-size', zoom/labelZoom + 'vw');
+    zoom = $('.imgDiv').width();
     prevScrollLeft = -$('#' + (y * rowSize + x)).position().left + $(window).width() / 2 - $('#' + (rowSize + 1)).position().left * (xPart + .5);
     prevScrollTop = -$('#' + (y * rowSize + x)).position().top + $(window).height() / 2 - $('#' + (rowSize + 1)).position().top * (yPart + .5);
     if (prevScrollLeft > 0) {
@@ -928,8 +1035,7 @@ var scrollToPos = function(x, y, xPart, yPart, doQuick) {
     if (prevScrollTop - $(window).height() < -zoom / 100 * $(window).width() * ratio) {
         prevScrollTop = -(zoom / 100 * $(window).width() * ratio) + $(window).height();
     }
-    doQuick ? $('.img').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop}) : $('.img').animate({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
-    doQuick ? $('.outer').css({marginLeft: prevScrollLeft, marginTop: prevScrollTop}) : $('.outer').animate({marginLeft: prevScrollLeft, marginTop: prevScrollTop});
+    doQuick ? $('.imgDiv').css({left: prevScrollLeft, top: prevScrollTop}) : $('.imgDiv').animate({left: prevScrollLeft, top: prevScrollTop});
 }
 
 // Decreases selected number values on change
@@ -974,17 +1080,19 @@ var loadData = function() {
         settings['neighbors'] && toggleNeighbors('startup');
         settings['remove'] && toggleRemove('startup');
         settings['ids'] && toggleIds('startup');
+        settings['roll2'] && toggleRoll2('startup');
+        settings['unpick'] && toggleUnpick('startup');
 
         chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
             picking = true;
             $('.box:contains(' + id + ')').addClass('potential').removeClass('gray selected unlocked').append('<span class="label">' + selectedNum++ + '</span>');
-            $('.label').css('font-size', zoom/60 + 'vw');
+            $('.label').css('font-size', labelZoom + 'px');
             $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
         });
 
         chunks && chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b){return b-a}).forEach(function(id) {
             $('.box:contains(' + id + ')').addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
-            $('.label').css('font-size', zoom/60 + 'vw');
+            $('.label').css('font-size', labelZoom + 'px');
             $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
         });
 
@@ -994,18 +1102,17 @@ var loadData = function() {
         });
 
         if (picking) {
-            $('.roll2').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
+            $('.roll2, .unpick').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
             $('.pick').text('Pick for me');
             isPicking = true;
         }
-        
-        center('quick');
+        chunkBorders();
     });
 }
 
 // Stores data in Firebase
 var setData = function() {
-    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'ids': showChunkIds});
+    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'ids': showChunkIds, 'roll2': roll2On, 'unpick': unpickOn});
 
     var tempJson = {};
     Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
@@ -1025,6 +1132,56 @@ var setData = function() {
     });
     myRef.child('chunks/potential').set(tempJson);
 }
+
+// Credit to Amehzyn
+// Shifts offset to zoom in on mouse location 
+function zoomOnMouse(event, dir, imageDiv) {
+    // Pull number out of string, cut "px" off end
+    var leftNumber = Number(imageDiv.style.left.slice(0, -2));
+    var topNumber = Number(imageDiv.style.top.slice(0, -2));
+
+    var currentMouseX = Math.round(event.clientX);
+    var currentMouseY = Math.round(event.clientY);
+
+    // As image zooms, shift top-left corner closer to or further from mouse position
+    var offsetX = (currentMouseX - leftNumber) * dir;
+    var offsetY = (currentMouseY - topNumber) * dir;
+
+    prevScrollLeft = leftNumber - offsetX;
+    prevScrollTop = topNumber - offsetY;
+
+    imageDiv.style.left = prevScrollLeft + "px";
+    imageDiv.style.top = prevScrollTop + "px";
+}
+
+// Credit to Amehzyn
+// Prevents zooming from pulling map too off-center screen
+function fixMapEdges(imageDiv) {
+	// Take the "px" off the end and cast from a String to a Number
+	var leftNumber = Number(imageDiv.style.left.slice(0, -2));
+	var topNumber = Number(imageDiv.style.top.slice(0, -2));
+	var rightEdge = leftNumber + imageDiv.offsetWidth;
+	var bottomEdge = topNumber + imageDiv.offsetHeight;
+
+	var margins = [150, 100, 100, 100];
+	if (topNumber > margins[0]) {
+        prevScrollTop = margins[0];
+		imageDiv.style.top = prevScrollTop + "px";
+	}
+	if (rightEdge < window.innerWidth - margins[1]) {
+        prevScrollLeft = (window.innerWidth - margins[1]) - imageDiv.offsetWidth;
+		imageDiv.style.left = prevScrollLeft + "px";
+	}
+	if (bottomEdge < window.innerHeight - margins[2]) {
+        prevScrollTop = (window.innerHeight - margins[2]) - imageDiv.offsetHeight;
+		imageDiv.style.top = prevScrollTop + "px";
+	}
+	if (leftNumber > margins[3]) {
+        prevScrollLeft = margins[3];
+		imageDiv.style.left = prevScrollLeft + "px";
+    }
+}
+
 
 // Rolls until a new, unique map id is found
 var rollMID = function() {
@@ -1071,13 +1228,15 @@ var changeLocked = function(lock) {
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             $('.center').css('top', '15vw');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import').css('opacity', 0).show();
-            !isPicking && $('.roll2').css('opacity', 0).show();
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').css('opacity', 0).show();
+            !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
+            !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import').animate({'opacity': 1});
-                !isPicking && $('.roll2').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').animate({'opacity': 1});
+                !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
+                !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');
                 locked = lock;
                 lockBoxOpen = false;
@@ -1152,4 +1311,16 @@ function stringToChunkIndexes(request) {
         }
     }
     return chunks;
+}
+
+// Highlights outside borders of unlocked areas
+var chunkBorders = function() {
+    $('.unlocked').each(function() {
+        var num = parseInt($(this).prop('id'));
+        var skipp = 43;
+        !$('#' + (num - skipp)).hasClass('unlocked') ? $(this).css('border-top', '1px solid red') : $(this).css('border-top-width', '0px');
+        !$('#' + (num + skipp)).hasClass('unlocked') ? $(this).css('border-bottom', '1px solid red') : $(this).css('border-bottom-width', '0px');
+        !$('#' + (num - 1)).hasClass('unlocked') ? $(this).css('border-left', '1px solid red') : $(this).css('border-left-width', '0px');
+        !$('#' + (num + 1)).hasClass('unlocked') ? $(this).css('border-right', '1px solid red') : $(this).css('border-right-width', '0px');
+    });
 }
