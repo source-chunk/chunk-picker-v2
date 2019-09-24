@@ -1102,6 +1102,7 @@ var loadData = function() {
         settings['neighbors'] && toggleNeighbors('startup');
         settings['remove'] && toggleRemove('startup');
         settings['ids'] && toggleIds() && $('.box').addClass('quality');
+        !settings['ids'] && $('.chunkId').hide();
         settings['roll2'] && toggleRoll2('startup');
         settings['unpick'] && toggleUnpick('startup');
 

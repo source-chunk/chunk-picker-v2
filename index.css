@@ -486,6 +486,7 @@ button.menu2 {
 }
 
 .box:not(.quality) > .chunkId {
+    display: none;
     height: 0;
 }
 
