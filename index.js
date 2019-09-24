@@ -2,7 +2,7 @@
  * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Id's and Amehzyn for smoother zooming/url decoding
- * 9/21/2019
+ * 9/24/2019
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -106,19 +106,19 @@ hammertime.on('tap', function(ev) {
             $('.label').css('font-size', labelZoom + 'px');
             $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
         } else if ($(ev.target).hasClass('selected')) {
-            fixNums($(ev.target).children().text());
-            $(ev.target).toggleClass('selected unlocked').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
+            fixNums($($(ev.target).children()[1]).text());
+            $(ev.target).toggleClass('selected unlocked').empty().append("<span class='chunkId'>" + (Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) + "</span>");
             $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
         } else if ($(ev.target).hasClass('potential')) {
-            fixNums($(ev.target).children().text());
-            $(ev.target).toggleClass('potential unlocked').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex);
+            fixNums($($(ev.target).children()[1]).text());
+            $(ev.target).toggleClass('potential unlocked').empty().append("<span class='chunkId'>" + (Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) + "</span>");
             $('.potential > .label').css('color', 'white');
             $('.potential').toggleClass('selected potential');
             autoSelectNeighbors && selectNeighbors(ev.target);
-            autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append(Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) && (selectedChunks = 1) && (selectedNum = 1);
+            autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append("<span class='chunkId'>" + (Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) + "</span>") && (selectedChunks = 1) && (selectedNum = 1);
             $('.pick').text('Pick Chunk');
-            $('.roll2, .settings').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+            $('.roll2, .roll2toggle, .unpicktoggle').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             isPicking = false;
             $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
@@ -126,6 +126,7 @@ hammertime.on('tap', function(ev) {
             $(ev.target).toggleClass('gray unlocked');
             $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
         }
+        !showChunkIds && $('.chunkId').hide();
         setData();
         chunkBorders();
     }
@@ -283,8 +284,9 @@ $(document).ready(function() {
 
 // Credit to Amehzyn
 // Handles zooming
-$(".body").on('scroll mousewheel DOMMouseScroll', function(e) {
+$('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     if (atHome || inEntry || importMenuOpen) {
+        e.preventDefault();
         return;
     }
     e.preventDefault();
@@ -419,17 +421,17 @@ $(document).on({
                 $('.label').css('font-size', labelZoom + 'px');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             } else if ($(e.target).hasClass('selected')) {
-                fixNums($(e.target).children().text());
-                $(e.target).addClass('unlocked').removeClass('selected').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
+                fixNums($($(e.target).children()[1]).text());
+                $(e.target).addClass('unlocked').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) + "</span>");
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             } else if ($(e.target).hasClass('potential')) {
-                fixNums($(e.target).children().text());
-                $(e.target).addClass('unlocked').removeClass('potential').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
+                fixNums($($(e.target).children()[1]).text());
+                $(e.target).addClass('unlocked').removeClass('potential').empty().append("<span class='chunkId'>" + (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) + "</span>");
                 $('.potential > .label').css('color', 'white');
-                $('.potential').addClass('selected').removeClass('potential');
+                $('.potential').addClass('selected').removeClass('potential recent');
                 autoSelectNeighbors && selectNeighbors(e.target);
-                autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected').empty().append(Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) && (selectedChunks = 1) && (selectedNum = 1);
+                autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) + "</span>") && (selectedChunks = 1) && (selectedNum = 1);
                 $('.pick').text('Pick Chunk');
                 roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
                 unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
@@ -458,7 +460,6 @@ $(document).on({
 
 // [Mobile] Mobile zoom capabilities
 var zoomButton = function(dir) {
-    console.log('zoom button');
     let oldZoom = zoom;
     if (dir > 0) {
         zoom += scale;
@@ -501,12 +502,12 @@ var pick = function() {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
         sNum = $(el[rand]).children().text();
-        $(el[rand]).addClass('unlocked recent').removeClass('selected').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+        $(el[rand]).addClass('unlocked recent').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>");
     } else {
         el = $('.potential');
         var rand = Math.floor(Math.random() * el.length);
-        sNum = $(el[rand]).children().text();
-        $(el[rand]).addClass('unlocked recent').removeClass('potential').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex);
+        sNum = $($(el[rand]).children()[1]).text();
+        $(el[rand]).addClass('unlocked recent').removeClass('potential').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>");
         $('.potential > .label').css('color', 'white');
         $('.potential').addClass('selected').removeClass('potential recent');
         isPicking = false;
@@ -516,10 +517,11 @@ var pick = function() {
     }
     fixNums(sNum);
     autoSelectNeighbors && selectNeighbors(el[rand]);
-    autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) && (selectedChunks = 1) && (selectedNum = 1);
+    autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>") && (selectedChunks = 1) && (selectedNum = 1);
     $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
     $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
     scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
+    !showChunkIds && $('.chunkId').hide();
     setData();
     chunkBorders();
 }
@@ -542,6 +544,7 @@ var roll2 = function() {
         $(el[rand]).addClass('potential recent').removeClass('selected');
         $('.potential > .label').css('color', 'black');
     }
+    !showChunkIds && $('.chunkId').hide();
     setData();
 }
 
@@ -582,17 +585,19 @@ var toggleRemove = function(extra) {
 }
 
 // Toggle functionality for showing chunk ids
-var toggleIds = function(extra) {
+var toggleIds = function() {
     showChunkIds = !showChunkIds;
+    document.cookie = "ids=" + showChunkIds;
     $('#toggleIds').toggleClass('on off');
     if ($('#toggleIds').hasClass('on')) {
+        $('.chunkId').show();
         $('#toggleIds').text('ON');
-        $('.box').css('color', 'rgba(255, 255, 255, 255)');
+        $('.box').css('color', 'rgba(255, 255, 255, 255)').addClass('quality');
     } else {
+        $('.chunkId').hide();
         $('#toggleIds').text('OFF');
-        $('.box').css('color', 'rgba(255, 255, 255, 0)');
+        $('.box').css('color', 'rgba(255, 255, 255, 0)').removeClass('quality');
     }
-    extra !== 'startup' && !locked && setData();
 }
 
 // Centers on average position of all unlocked chunks
@@ -667,6 +672,7 @@ var importFromURL = function() {
                 $('#' + id).addClass('unlocked').removeClass('gray selected potential');
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             });
+            !showChunkIds && $('.chunkId').hide();
             setData();
             chunkBorders();
             $('#import-menu').css({'opacity': 0}).hide();
@@ -723,14 +729,14 @@ var unlockEntry = function() {
             } else {
                 firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
                 $('.center').css('top', '15vw');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').css('opacity', 0).show();
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                 $('#entry-menu').animate({'opacity': 0});
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
                     $('.pin.entry').val('');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').animate({'opacity': 1});
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').animate({'opacity': 1});
                     !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                     !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                     $('#unlock-entry').prop('disabled', false).html('Unlock');
@@ -858,11 +864,13 @@ var unpick = function() {
         return;
     }
     var rand = Math.floor(Math.random() * el.length);
-    $(el[rand]).addClass('selected').removeClass('unlocked').addClass('recent').empty().append(Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex).append('<span class="label">' + selectedNum + '</span>');
+    $(el[rand]).addClass('selected').removeClass('unlocked').addClass('recent').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>").append('<span class="label">' + selectedNum + '</span>');
+    $('.label').css('font-size', labelZoom + 'px');
     selectedNum++;
     $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
     $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
     scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
+    !showChunkIds && $('.chunkId').hide();
     setData();
     chunkBorders();
     $(el[rand]).css('border-width', '0px');
@@ -948,7 +956,7 @@ var setupMap = function() {
         $('.body').show();
     $('#page1, #import-menu').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -959,14 +967,14 @@ var setupMap = function() {
         if (locked === undefined) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
         }
         for (var i = 0; i < fullSize; i++) {
-            $('.btnDiv').append(`<div id=${i} class='box gray'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</div>`);
+            $('.btnDiv').append(`<div id=${i} class='box gray'><span class='chunkId'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</span></div>`);
         }
         $('.box').css('font-size', fontZoom + 'px');
         $('.label').css('font-size', labelZoom + 'px');
@@ -1087,10 +1095,13 @@ var loadData = function() {
         var picking = false;
         var settings = snap.val()['settings'];
         var chunks = snap.val()['chunks'];
+        settings['ids'] = document.cookie.split(';').filter(function(item) {
+            return item.indexOf('ids=true') >= 0
+        }).length > 0;
 
         settings['neighbors'] && toggleNeighbors('startup');
         settings['remove'] && toggleRemove('startup');
-        settings['ids'] && toggleIds('startup');
+        settings['ids'] && toggleIds() && $('.box').addClass('quality');
         settings['roll2'] && toggleRoll2('startup');
         settings['unpick'] && toggleUnpick('startup');
 
@@ -1123,23 +1134,24 @@ var loadData = function() {
 
 // Stores data in Firebase
 var setData = function() {
-    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'ids': showChunkIds, 'roll2': roll2On, 'unpick': unpickOn});
+    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn});
+    document.cookie = "ids=" + showChunkIds;
 
     var tempJson = {};
     Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
-        tempJson[el.childNodes[0].nodeValue] = el.childNodes[0].nodeValue;
+        tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
     });
     myRef.child('chunks/unlocked').set(tempJson);
 
     tempJson = {};
     Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
-        tempJson[el.childNodes[0].nodeValue] = el.childNodes[0].nodeValue;
+        tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
     });
     myRef.child('chunks/selected').set(tempJson);
 
     tempJson = {};
     Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
-        tempJson[el.childNodes[0].nodeValue] = el.childNodes[0].nodeValue;
+        tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
     });
     myRef.child('chunks/potential').set(tempJson);
 }
@@ -1239,13 +1251,13 @@ var changeLocked = function(lock) {
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             $('.center').css('top', '15vw');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').css('opacity', 0).show();
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .settings').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').animate({'opacity': 1});
                 !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');
@@ -1329,9 +1341,9 @@ var chunkBorders = function() {
     $('.unlocked').each(function() {
         var num = parseInt($(this).prop('id'));
         var skipp = 43;
-        !$('#' + (num - skipp)).hasClass('unlocked') ? $(this).css('border-top', '1px solid red') : $(this).css('border-top-width', '0px');
-        !$('#' + (num + skipp)).hasClass('unlocked') ? $(this).css('border-bottom', '1px solid red') : $(this).css('border-bottom-width', '0px');
-        !$('#' + (num - 1)).hasClass('unlocked') ? $(this).css('border-left', '1px solid red') : $(this).css('border-left-width', '0px');
-        !$('#' + (num + 1)).hasClass('unlocked') ? $(this).css('border-right', '1px solid red') : $(this).css('border-right-width', '0px');
+        !$('#' + (num - skipp)).hasClass('unlocked') ? $(this).css('border-top', '.175vw solid red') : $(this).css('border-top-width', '0px');
+        !$('#' + (num + skipp)).hasClass('unlocked') ? $(this).css('border-bottom', '.175vw solid red') : $(this).css('border-bottom-width', '0px');
+        !$('#' + (num - 1)).hasClass('unlocked') ? $(this).css('border-left', '.175vw solid red') : $(this).css('border-left-width', '0px');
+        !$('#' + (num + 1)).hasClass('unlocked') ? $(this).css('border-right', '.175vw solid red') : $(this).css('border-right-width', '0px');
     });
 }

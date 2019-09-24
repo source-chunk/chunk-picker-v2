@@ -473,9 +473,20 @@ button.menu2 {
     pointer-events: none;
     color: white;
     margin: auto;
-    transform: translateY(-20%);
     width: 100%;
     text-align: center;
+}
+
+.box:not(.quality) > .label {
+    transform: translateY(-5%);
+}
+
+.box.quality > .label {
+    transform: translateY(-20%);
+}
+
+.box:not(.quality) > .chunkId {
+    height: 0;
 }
 
 .ui-loader-header {
@@ -1069,5 +1080,9 @@ button.menu2 {
     width: 100%;
     text-align: center;
     position: absolute;
+    pointer-events: none;
+}
+
+.chunkId {
     pointer-events: none;
 }
