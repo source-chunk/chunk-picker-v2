@@ -415,7 +415,9 @@ $(document).on({
                 settings();
                 return;
             }
-            if ($(e.target).hasClass('gray')) {
+            if ($(e.target).hasClass('recent')) {
+                // ----
+            } else if ($(e.target).hasClass('gray')) {
                 $(e.target).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
                 $('.label').css('font-size', labelZoom + 'px');
@@ -438,8 +440,6 @@ $(document).on({
                 isPicking = false;
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-            } else if ($(e.target).hasClass('recent')) {
-                // ----
             } else {
                 $(e.target).addClass('gray').removeClass('unlocked').css('border-width', 0);
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
@@ -501,12 +501,12 @@ var pick = function() {
     if (!isPicking) {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
-        sNum = $(el[rand]).children().text();
+        sNum = $(el[rand]).children()[1].innerText;
         $(el[rand]).addClass('unlocked recent').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>");
     } else {
         el = $('.potential');
         var rand = Math.floor(Math.random() * el.length);
-        sNum = $($(el[rand]).children()[1]).text();
+        sNum = $(el[rand]).children()[1].innerText;
         $(el[rand]).addClass('unlocked recent').removeClass('potential').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>");
         $('.potential > .label').css('color', 'white');
         $('.potential').addClass('selected').removeClass('potential recent');
@@ -954,7 +954,7 @@ var setupMap = function() {
     if (!atHome) {
         setTimeout(doneLoading, 1500);
         $('.body').show();
-    $('#page1, #import-menu').hide();
+        $('#page1, #import-menu').hide();
         if (locked) {
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
@@ -979,7 +979,6 @@ var setupMap = function() {
         $('.box').css('font-size', fontZoom + 'px');
         $('.label').css('font-size', labelZoom + 'px');
         loadData();
-        center('quick');
     }
 }
 
@@ -1130,6 +1129,7 @@ var loadData = function() {
             isPicking = true;
         }
         chunkBorders();
+        center('quick');
     });
 }
 

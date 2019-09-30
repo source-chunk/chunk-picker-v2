@@ -103,6 +103,10 @@ a, a:visited {
     animation: glowing 750ms infinite;
 }
 
+.recent:hover {
+    background-color: rgba(200, 200, 200, .25);
+}
+
 @keyframes glowing {
     0%, 100% { box-shadow: 0 0 10px black; }
     50% { box-shadow: 0 0 30px black; }
