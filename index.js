@@ -2,7 +2,7 @@
  * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Id's and Amehzyn for smoother zooming/url decoding
- * 9/24/2019
+ * 10/06/2019
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -15,7 +15,7 @@ var screenshotMode = false;                                                     
 var settingsOpen = false;                                                       // Is the settings menu open
 var roll2On = false;                                                            // Is the roll2 button enabled
 var unpickOn = false;                                                           // Is the unpick button enabled
-
+var highVisibilityMode = false;                                                 // Is high visibility mode enabled
 var zoom = 350;                                                                 // Starting zoom value
 var maxZoom = 550;                                                              // Furthest zoom in value
 var minZoom = onMobile ? 275 : 100;                                             // Smallest zoom out value
@@ -118,7 +118,7 @@ hammertime.on('tap', function(ev) {
             autoSelectNeighbors && selectNeighbors(ev.target);
             autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append("<span class='chunkId'>" + (Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) + "</span>") && (selectedChunks = 1) && (selectedNum = 1);
             $('.pick').text('Pick Chunk');
-            $('.roll2, .roll2toggle, .unpicktoggle').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+            $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             isPicking = false;
             $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
@@ -405,19 +405,11 @@ $(document).on({
                     $('.lock-closed').removeClass('animated shake zmdi-hc-5x').addClass('zmdi-hc-3x').css({'color': 'black'});
                 }, 500);
                 return;
-            } else if (screenshotMode) {
-                screenshotMode = false;
-                settings();
-                $('.escape-hint').hide();
-                $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .topnav').show();
-                return;
-            } else if (settingsOpen) {
+            } else if (settingsOpen && !screenshotMode) {
                 settings();
                 return;
             }
-            if ($(e.target).hasClass('recent')) {
-                // ----
-            } else if ($(e.target).hasClass('gray')) {
+            if ($(e.target).hasClass('gray')) {
                 $(e.target).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
                 selectedNum++;
                 $('.label').css('font-size', labelZoom + 'px');
@@ -440,6 +432,8 @@ $(document).on({
                 isPicking = false;
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+            } else if ($(e.target).hasClass('recent')) {
+                // ----
             } else {
                 $(e.target).addClass('gray').removeClass('unlocked').css('border-width', 0);
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
@@ -501,12 +495,12 @@ var pick = function() {
     if (!isPicking) {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
-        sNum = $(el[rand]).children()[1].innerText;
+        sNum = $(el[rand]).children().text();
         $(el[rand]).addClass('unlocked recent').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>");
     } else {
         el = $('.potential');
         var rand = Math.floor(Math.random() * el.length);
-        sNum = $(el[rand]).children()[1].innerText;
+        sNum = $($(el[rand]).children()[1]).text();
         $(el[rand]).addClass('unlocked recent').removeClass('potential').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>");
         $('.potential > .label').css('color', 'white');
         $('.potential').addClass('selected').removeClass('potential recent');
@@ -729,14 +723,14 @@ var unlockEntry = function() {
             } else {
                 firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
                 $('.center').css('top', '15vw');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).show();
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                 $('#entry-menu').animate({'opacity': 0});
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
                     $('.pin.entry').val('');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').animate({'opacity': 1});
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').animate({'opacity': 1});
                     !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                     !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                     $('#unlock-entry').prop('disabled', false).html('Unlock');
@@ -906,6 +900,19 @@ var enableScreenshotMode = function() {
     }, 1000);
 }
 
+// Redirects to change pin page
+var changePin = function() {
+    console.log('redirect pin');
+}
+
+// Toggles high visibility mode
+var toggleVisibility = function(extra) {
+    highVisibilityMode = !highVisibilityMode;
+    highVisibilityMode ? $('.box').addClass('visible') : $('.box').removeClass('visible');
+    $('.visibilitytoggle').toggleClass('item-off item-on');
+    extra !== 'startup' && !locked && setData();
+}
+
 // Toggles the visibility of the roll2 button
 var toggleRoll2 = function(extra) {
     roll2On = !roll2On;
@@ -954,9 +961,9 @@ var setupMap = function() {
     if (!atHome) {
         setTimeout(doneLoading, 1500);
         $('.body').show();
-        $('#page1, #import-menu').hide();
+    $('#page1, #import-menu').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -967,7 +974,7 @@ var setupMap = function() {
         if (locked === undefined) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -1041,17 +1048,17 @@ var scrollToPos = function(x, y, xPart, yPart, doQuick) {
     zoom = $('.imgDiv').width();
     prevScrollLeft = -$('#' + (y * rowSize + x)).position().left + window.innerWidth / 2 - $('#' + (rowSize + 1)).position().left * (xPart + .5);
     prevScrollTop = -$('#' + (y * rowSize + x)).position().top + window.innerHeight / 2 - $('#' + (rowSize + 1)).position().top * (yPart + .5);
-    if (prevScrollLeft > 0) {
-        prevScrollLeft = 0;
+    if (prevScrollLeft > 100) {
+        prevScrollLeft = 100;
     }
-    if (prevScrollTop > 0) {
-        prevScrollTop = 0;
+    if (prevScrollTop > 150) {
+        prevScrollTop = 150;
     }
-    if (prevScrollLeft - window.innerWidth < -zoom / 100 * window.innerWidth) {
-        prevScrollLeft = -(zoom / 100 * window.innerWidth) + window.innerWidth;
+    if (prevScrollLeft + $('.imgDiv').width() + 100 < window.innerWidth) {
+        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 100;
     }
-    if (prevScrollTop - window.innerHeight < -zoom / 100 * window.innerWidth * ratio) {
-        prevScrollTop = -(zoom / 100 * window.innerWidth * ratio) + window.innerHeight;
+    if (prevScrollTop + $('.imgDiv').height() + 100 < window.innerHeight) {
+        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 100;
     }
     doQuick ? $('.imgDiv').css({left: prevScrollLeft, top: prevScrollTop}) : $('.imgDiv').animate({left: prevScrollLeft, top: prevScrollTop});
 }
@@ -1252,13 +1259,13 @@ var changeLocked = function(lock) {
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             $('.center').css('top', '15vw');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').css('opacity', 0).show();
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .roll2toggle, .unpicktoggle').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').animate({'opacity': 1});
                 !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');

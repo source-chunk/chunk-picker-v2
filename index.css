@@ -54,42 +54,54 @@ a, a:visited {
 }
 
 .box {
-    box-shadow:inset .075vw .075vw .075vw .075vw gray;
+    box-shadow: inset .075vw .075vw .075vw .075vw gray;
     display: inline-grid;
     background-color: transparent;
     color: rgba(255, 255, 255, 0);
     transition: background-color .25s linear;
 }
 
-.box:hover {
+.box:not(.visible):hover {
     background-color: rgba(200, 200, 200, .25);
     transition-duration: 0s;
 }
 
 .potential {
     background-color: rgba(255, 255, 100, .5);
-    box-shadow:inset .075vw .075vw .075vw .075vw black;
+    box-shadow: inset .075vw .075vw .075vw .075vw black;
+}
+
+.potential.visible {
+    background-color: rgba(255, 255, 100, .25);
 }
 
 .selected {
     background-color: rgba(100, 255, 100, .5);
-    box-shadow:inset .075vw .075vw .075vw .075vw black;
+    box-shadow: inset .075vw .075vw .075vw .075vw black;
+}
+
+.selected.visible {
+    background-color: rgba(100, 255, 100, .25);
 }
 
 .gray {
     background-color: rgba(150, 150, 150, .75);
-    box-shadow:inset .075vw .075vw .075vw .075vw black;
+    box-shadow: inset .075vw .075vw .075vw .075vw black;
 }
 
-.potential:hover {
+.gray.visible {
+    background-color: rgba(150, 150, 150, .5);
+}
+
+.potential:not(.visible):hover {
     background-color: rgba(255, 255, 100, .33);
 }
 
-.selected:hover {
+.selected:not(.visible):hover {
     background-color: rgba(100, 255, 100, .33);
 }
 
-.gray:hover {
+.gray:not(.visible):hover {
     background-color: rgba(150, 150, 150, .5);
 }
 
@@ -101,10 +113,6 @@ a, a:visited {
 .recent.selected {
     background-color: rgba(255, 0, 0, .7);
     animation: glowing 750ms infinite;
-}
-
-.recent:hover {
-    background-color: rgba(200, 200, 200, .25);
 }
 
 @keyframes glowing {
@@ -921,6 +929,7 @@ button.menu2 {
     user-select: none;
     color: white;
     text-align: center;
+    pointer-events: none;
 }
 
 .settings {
@@ -954,7 +963,7 @@ button.menu2 {
 .settings-menu {
     z-index: 999 !important;
     display: none;
-    width: 15vw;
+    width: 16vw;
     font-size: 1.5vw;
     background-color: rgb(230, 230, 230);
     position: absolute;
