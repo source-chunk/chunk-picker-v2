@@ -2,7 +2,7 @@
  * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Id's and Amehzyn for smoother zooming/url decoding
- * 10/06/2019
+ * 10/24/2019
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -37,15 +37,21 @@ var selectedChunks = 0;                                                         
 var startingIndex = 4671;                                                       // Index to start chunk numbering at (based on ChunkLite numbers)
 var skip = 213;                                                                 // Number of indices to skip between columns for chunk numbering
 
-var prevValueMid = '';                                                          // Preview value of map id at login
-var prevValuePinNew = '';                                                       // Preview value of pin id at signup
-var prevValuePinOld = '';                                                       // Preview value of pin id at login
-var prevValueLockPin = '';                                                      // Preview value of pin id at map login
+var prevValueMid = '';                                                          // Previous value of map id at login
+var prevValuePinNew = '';                                                       // Previous value of pin at signup
+var prevValuePinOld = '';                                                       // Previous value of pin at login
+var prevValueLockPin = '';                                                      // Previous value of pin at map login
+var prevValueMid2 = '';                                                         // Previous value of map id at pin change
+var prevValuePinOld2 = '';                                                      // Previous value of pin at pin change
+var prevValuePinOld2Second = '';                                                // Previous valye of pin 2 at pin change
 var mid;                                                                        // Current value of map id
 var pin;                                                                        // Current value of pin
 
 var midGood = false;                                                            // Is the map id valid
 var pinGood = true;                                                             // Is the pin valid
+var mid2Good = false;                                                           // Is the map id valid (change pin)
+var pin2Good = false;                                                           // Is the pin valid (change pin)
+var pin2SecondGood = false;                                                     // Is the pin 2 valid (change pin)
 var atHome;                                                                     // Is the user on the homepage
 var locked;                                                                     // Is the user not logged in
 var lockBoxOpen = false;                                                        // Is the lock box open
@@ -152,22 +158,6 @@ $(document).ready(function() {
             }
         }
     });
-
-    $('.mid').on('input', function(e) {
-        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 3) {
-            $(this).val(prevValueMid);
-        } else {
-            $(this).val(e.target.value.toUpperCase());
-            prevValueMid = e.target.value;
-            if (e.target.value.length === 3) {
-                midGood = true;
-                checkIfGood();
-            } else {
-                midGood = false;
-                $('#access').prop('disabled', true);
-            }
-        }
-    });
     
     $('.pin.new').on('input', function(e) {
         if (isNaN(e.target.value) || e.target.value.length > 4) {
@@ -225,6 +215,52 @@ $(document).ready(function() {
         }
     });
 
+    $('.mid-old').on('input', function(e) {
+        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 3) {
+            $(this).val(prevValueMid2);
+        } else {
+            $(this).val(e.target.value.toUpperCase());
+            prevValueMid2 = e.target.value;
+            if (e.target.value.length === 3) {
+                mid2Good = true;
+                checkIfGood2();
+            } else {
+                mid2Good = false;
+                $('#change-pin').prop('disabled', true);
+            }
+        }
+    });
+    
+    $('.pin.old2.first').on('input', function(e) {
+        if (isNaN(e.target.value) || e.target.value.length > 4) {
+            $(this).val(prevValuePinOld2);
+        } else {
+            prevValuePinOld2 = e.target.value;
+            if (e.target.value.length === 4) {
+                pin2Good = true;
+                checkIfGood2();
+            } else {
+                pin2Good = false;
+                $('#change-pin').prop('disabled', true);
+            }
+        }
+    });
+
+    $('.pin.old2.second').on('input', function(e) {
+        if (isNaN(e.target.value) || e.target.value.length > 4) {
+            $(this).val(prevValuePinOld2Second);
+        } else {
+            prevValuePinOld2Second = e.target.value;
+            if (e.target.value.length === 4) {
+                pin2SecondGood = true;
+                checkIfGood2();
+            } else {
+                pin2SecondGood = false;
+                $('#change-pin').prop('disabled', true);
+            }
+        }
+    });
+
     $('.url').on('input', function(e) {
         if (e.target.value.length < 1) {
             $('#import2').prop('disabled', true);
@@ -265,6 +301,27 @@ $(document).ready(function() {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13' && !$('#unlock-entry').prop('disabled')) {
             $('#unlock-entry').click();	
+        }
+    });
+
+    $('.mid-old').on('keypress', function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13'){
+            $('.pin.old2.first').select();
+        }
+    });
+    
+    $('.pin.old2.first').on('keypress', function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            $('.pin.old2.second').select();	
+        }
+    });
+    
+    $('.pin.old2.second').on('keypress', function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13' && !$('#change-pin').prop('disabled')) {
+            $('#change-pin').click();	
         }
     });
 
@@ -848,6 +905,45 @@ var accessMap = function() {
     });
 }
 
+// Confirms that the map id exists, and that the pin is correct for that map id (if pin is filled in), then changes the pin, and then finally advances to the map if all is correct
+var changePin = function() {
+    $('#change-pin').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    var mid = $('.mid-old').removeClass('wrong').val().toLowerCase();
+    var pinOld = $('.pin.old2.first').removeClass('wrong').val();
+    var pinNew = $('.pin.old2.second').val();
+    databaseRef.child('maps/' + mid).once('value', function(snap) {
+        if (!snap.val()) {
+            setTimeout(function() {
+                $('.mid-err').css('visibility', 'visible');
+                $('.mid-old').addClass('wrong').select();
+                $('#change-pin').text('Change PIN');
+            }, 1000);
+            return;
+        }
+        if (pinOld && snap.val()['pin'] !== pinOld) {
+            setTimeout(function() {
+                $('.pin-err').css('visibility', 'visible');
+                $('.pin.old2.first').addClass('wrong').select();
+                $('#change-pin').text('Change PIN');
+            }, 1000);
+            return;
+        }
+        firebase.auth().signInAnonymously().then(function() {
+            myRef = firebase.database().ref('maps/' + mid);
+            myRef.child('pin').set(pinNew);
+            window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
+            $('.lock-closed, .lock-opened').hide();
+            locked = true;
+            inEntry = true;
+            atHome = false;
+            $('.loading').show();
+            $('#page8').hide();
+            $('.background-img').hide();
+            setupMap();
+        }).catch(function(error) {console.log(error)});
+    });
+}
+
 // Unpicks a random unlocked chunk
 var unpick = function() {
     if (locked || importMenuOpen) {
@@ -898,11 +994,6 @@ var enableScreenshotMode = function() {
             $('.escape-hint').hide();
         }, 500);
     }, 1000);
-}
-
-// Redirects to change pin page
-var changePin = function() {
-    console.log('redirect pin');
 }
 
 // Toggles high visibility mode
@@ -961,7 +1052,7 @@ var setupMap = function() {
     if (!atHome) {
         setTimeout(doneLoading, 1500);
         $('.body').show();
-    $('#page1, #import-menu').hide();
+        $('#page1, #import-menu').hide();
         if (locked) {
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
@@ -1074,12 +1165,19 @@ var fixNums = function(num) {
 }
 
 var checkMID = function(mid) {
-    if (mid) {
+    if (mid === 'change-pin') {
+        atHome = true;
+        $('.loading, .ui-loader-header').remove();
+        $('#home-menu').hide();
+        $('#pin-menu').show();
+        $('.mid-old').focus();
+    } else if (mid) {
         databaseRef.child('maps/' + mid).once('value', function(snap) {
             if (snap.val()) {
                 myRef = firebase.database().ref('maps/' + mid);
                 atHome = false;
                 $('.background-img').hide();
+                $('.toptitle2').text(mid.toUpperCase());
                 inEntry = true;
             } else {
                 window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', window.location.href.split('?')[0]);
@@ -1244,6 +1342,15 @@ var rollMID = function() {
 var checkIfGood = function() {
     if (midGood && pinGood) {
         $('#access').prop('disabled', false);
+        $('.mid-err').css('visibility', 'hidden');
+        $('.pin-err').css('visibility', 'hidden');
+    }
+}
+
+// Checks if the map id, the old pin, and the new pid are valid, and hides their respective error messages/allows button clicks if so
+var checkIfGood2 = function() {
+    if (mid2Good && pin2Good && pin2SecondGood) {
+        $('#change-pin').prop('disabled', false);
         $('.mid-err').css('visibility', 'hidden');
         $('.pin-err').css('visibility', 'hidden');
     }

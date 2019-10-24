@@ -34,7 +34,7 @@
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='topnav'>
       <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><i class="gohome zmdi zmdi-home zmdi-hc-3x"></i></a></div>
-      <div class='toptitle'>Chunk Picker V2</div>
+      <div class='toptitle2'></div>
       <div><i class="settings zmdi zmdi-settings zmdi-hc-3x" onclick='settings()'></i></div>
   </div>
   <div id='entry-menu'>
@@ -112,6 +112,7 @@
     </div>
   </div>
   <div class='settings-menu'>
+    <a class='none' href='https://source-chunk.github.io/chunk-picker-v2/?change-pin'><div class='item'>Change PIN<i class="pic zmdi zmdi-edit zmdi-hc-lg"></i></div></a>
     <div class='item' onclick="enableScreenshotMode()">Screenshot mode<i class="pic zmdi zmdi-camera zmdi-hc-lg"></i></div>
     <div class='item visibilitytoggle item-off' onclick="toggleVisibility()">High visibility mode<i class="pic zmdi zmdi-brightness-7 zmdi-hc-lg"></i></div>
     <div class='item roll2toggle item-off' onclick="toggleRoll2()">Roll 2<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
@@ -167,5 +168,22 @@
     <input class='pin old' placeholder='PIN' />
     <div class='pin-err'>PIN is incorrect.</div>
     <button id='access' class='button' onclick='accessMap()' disabled>Access my map</button>
+  </div>
+</div>
+
+<div id='pin-menu' style="display:none">
+  <div id='page8' class='content8'>
+    <div class='block'>
+      <div class='title'>Change PIN</div>
+    </div>
+    <div class='home text2'>Map ID:</div>
+    <input class='mid-old' spellcheck='false' placeholder='Map ID' />
+    <div class='mid-err'>Map ID does not exist.</div>
+    <div class='home text2'>Old PIN:</div>
+    <input class='pin old2 first' placeholder='PIN' />
+    <div class='pin-err'>PIN is incorrect.</div>
+    <div class='home text2'>New PIN:</div>
+    <input class='pin old2 second' placeholder='PIN' />
+    <button id='change-pin' class='button' onclick='changePin()' disabled>Change PIN</button>
   </div>
 </div>
