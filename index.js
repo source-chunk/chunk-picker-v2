@@ -864,7 +864,7 @@ var prevPage = function(page) {
 // Confirms that the map id exists, and that the pin is correct for that map id (if pin is filled in), and then advances to the map if all is correct
 var accessMap = function() {
     $('#access').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
-    var mid = $('.mid').removeClass('wrong').val().toLowerCase();
+    mid = $('.mid').removeClass('wrong').val().toLowerCase();
     var pin = $('.pin.old').removeClass('wrong').val();
     databaseRef.child('maps/' + mid).once('value', function(snap) {
         if (!snap.val()) {
@@ -1076,6 +1076,8 @@ var setupMap = function() {
         }
         $('.box').css('font-size', fontZoom + 'px');
         $('.label').css('font-size', labelZoom + 'px');
+        !mid && (mid = window.location.href.split('?')[1]);
+        $('.toptitle2').text(mid.toUpperCase());
         loadData();
     }
 }
@@ -1177,7 +1179,6 @@ var checkMID = function(mid) {
                 myRef = firebase.database().ref('maps/' + mid);
                 atHome = false;
                 $('.background-img').hide();
-                $('.toptitle2').text(mid.toUpperCase());
                 inEntry = true;
             } else {
                 window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', window.location.href.split('?')[0]);
