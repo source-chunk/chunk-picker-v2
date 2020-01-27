@@ -1037,7 +1037,7 @@ var toggleVisibility = function(extra) {
 // Toggles the visibility of the roll2 button
 var toggleRoll2 = function(extra) {
     roll2On = !roll2On;
-    roll2On ? $('.roll2').show() : $('.roll2').hide();
+    roll2On && !isPicking ? $('.roll2').show() : $('.roll2').hide();
     extra !== 'startup' && $('.roll2').css('opacity', 1);
     $('.roll2toggle').toggleClass('item-off item-on');
     $('.roll2toggle > .pic').toggleClass('zmdi-plus zmdi-minus');
@@ -1047,7 +1047,7 @@ var toggleRoll2 = function(extra) {
 // Toggles the visibility of the unpick button
 var toggleUnpick = function(extra) {
     unpickOn = !unpickOn;
-    unpickOn ? $('.unpick').show() : $('.unpick').hide();
+    unpickOn && !isPicking ? $('.unpick').show() : $('.unpick').hide();
     extra !== 'startup' && $('.unpick').css('opacity', 1);
     $('.unpicktoggle').toggleClass('item-off item-on');
     $('.unpicktoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
