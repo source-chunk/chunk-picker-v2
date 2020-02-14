@@ -291,6 +291,24 @@ button.menu2 {
     pointer-events: none;
 }
 
+.menu7 {
+    display: none;
+    position: fixed;
+    z-index: 99 !important;
+    bottom: 11vw;
+    width: 14vw;
+    height: 2vw;
+}
+
+#recentChunksTitle {
+    background-color: rgb(100, 100, 100);
+    color: rgb(240, 240, 240);
+}
+
+#recentChunks1, #recentChunks2, #recentChunks3, #recentChunks4, #recentChunks5 {
+    border-width: 0px 1px 1px 1px;
+}
+
 .gitgeddes {
     word-break: break-all;
 }
@@ -1135,4 +1153,13 @@ button.menu2 {
 
 .none {
     text-decoration: none;
+}
+
+.chunk {
+    cursor: pointer;
+    color: blue;
+}
+
+.chunk:hover {
+    text-decoration: underline;
 }

@@ -2,7 +2,7 @@
  * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Id's and Amehzyn for smoother zooming/url decoding
- * 10/24/2019
+ * 1/26/2019
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -15,7 +15,9 @@ var screenshotMode = false;                                                     
 var settingsOpen = false;                                                       // Is the settings menu open
 var roll2On = false;                                                            // Is the roll2 button enabled
 var unpickOn = false;                                                           // Is the unpick button enabled
+var recentOn = false;                                                           // Is the recent chunks section enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
+var recent = [];                                                                // Recently picked chunks
 var zoom = 350;                                                                 // Starting zoom value
 var maxZoom = 550;                                                              // Furthest zoom in value
 var minZoom = onMobile ? 275 : 100;                                             // Smallest zoom out value
@@ -489,6 +491,18 @@ $(document).on({
                 isPicking = false;
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+                let tempChunk1;
+                let tempChunk2;
+                for (let count = 1; count <= 5; count++) {
+                    tempChunk1 = recent[count - 1];
+                    if (count === 1) {
+                        recent[count - 1] = (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
+                    } else {
+                        recent[count - 1] = tempChunk2;
+                    }
+                    tempChunk2 = tempChunk1;
+                    $('#recentChunks' + count).html('<span class="chunk" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
+                }
             } else if ($(e.target).hasClass('recent')) {
                 // ----
             } else {
@@ -552,7 +566,7 @@ var pick = function() {
     if (!isPicking) {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
-        sNum = $(el[rand]).children().text();
+        sNum = $($(el[rand]).children()[1]).text();
         $(el[rand]).addClass('unlocked recent').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>");
     } else {
         el = $('.potential');
@@ -573,6 +587,18 @@ var pick = function() {
     $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
     scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
     !showChunkIds && $('.chunkId').hide();
+    let tempChunk1;
+    let tempChunk2;
+    for (let count = 1; count <= 5; count++) {
+        tempChunk1 = recent[count - 1];
+        if (count === 1) {
+            recent[count - 1] = parseInt($(el[rand]).text());
+        } else {
+            recent[count - 1] = tempChunk2;
+        }
+        tempChunk2 = tempChunk1;
+        $('#recentChunks' + count).html('<span class="chunk" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
+    }
     setData();
     chunkBorders();
 }
@@ -706,6 +732,7 @@ var importFromURL = function() {
             $('.label').remove();
             roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+            recentOn && $('.menu7').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             isPicking = false;
             selectedChunks = 0;
             unlockedChunks = 0;
@@ -780,14 +807,14 @@ var unlockEntry = function() {
             } else {
                 firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
                 $('.center').css('top', '15vw');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).show();
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                 $('#entry-menu').animate({'opacity': 0});
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
                     $('.pin.entry').val('');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').animate({'opacity': 1});
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').animate({'opacity': 1});
                     !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                     !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                     $('#unlock-entry').prop('disabled', false).html('Unlock');
@@ -885,13 +912,15 @@ var accessMap = function() {
         }
         if (pin) {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
-            window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
+            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
+            document.title = mid.toUpperCase() + ' - Chunk Picker V2';
             $('#entry-menu').hide();
             $('.lock-opened').show();
             $('.lock-closed').hide();
             locked = false;
         } else {
-            window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
+            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
+            document.title = mid.toUpperCase() + ' - Chunk Picker V2';
             $('.lock-closed, .lock-opened').hide();
             locked = true;
             inEntry = true;
@@ -931,7 +960,8 @@ var changePin = function() {
         firebase.auth().signInAnonymously().then(function() {
             myRef = firebase.database().ref('maps/' + mid);
             myRef.child('pin').set(pinNew);
-            window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', '?' + mid);
+            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
+            document.title = mid.toUpperCase() + ' - Chunk Picker V2';
             $('.lock-closed, .lock-opened').hide();
             locked = true;
             inEntry = true;
@@ -1024,6 +1054,23 @@ var toggleUnpick = function(extra) {
     extra !== 'startup' && !locked && setData();
 }
 
+// Toggles the visibility of the recent chunks section
+var toggleRecent = function(extra) {
+    recentOn = !recentOn;
+    recentOn ? $('.menu7').show() : $('.menu7').hide();
+    extra !== 'startup' && $('.menu7').css('opacity', 1);
+    $('.recenttoggle').toggleClass('item-off item-on');
+    $('.recenttoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    extra !== 'startup' && !locked && setData();
+}
+
+// Centers on the clicked recent chunk and highlights it
+var recentChunk = function(el) {
+    let id = parseInt($($(el).children()).text());
+    let box = $('.box:contains(' + id + ')').addClass('recent');
+    scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
+}
+
 // ----------------------------------------------------------
 
 // Other Functions
@@ -1054,7 +1101,7 @@ var setupMap = function() {
         $('.body').show();
         $('#page1, #import-menu').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -1065,7 +1112,7 @@ var setupMap = function() {
         if (locked === undefined) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -1077,6 +1124,7 @@ var setupMap = function() {
         $('.box').css('font-size', fontZoom + 'px');
         $('.label').css('font-size', labelZoom + 'px');
         !mid && (mid = window.location.href.split('?')[1]);
+        document.title = mid.toUpperCase() + ' - Chunk Picker V2';
         $('.toptitle2').text(mid.toUpperCase());
         loadData();
     }
@@ -1166,6 +1214,7 @@ var fixNums = function(num) {
     selectedNum--;
 }
 
+// Checks the MID from the url
 var checkMID = function(mid) {
     if (mid === 'change-pin') {
         atHome = true;
@@ -1200,9 +1249,14 @@ var loadData = function() {
         var picking = false;
         var settings = snap.val()['settings'];
         var chunks = snap.val()['chunks'];
+        recent = snap.val()['recent'] || [];
         settings['ids'] = document.cookie.split(';').filter(function(item) {
             return item.indexOf('ids=true') >= 0
         }).length > 0;
+        
+        for (let count = 1; count <= 5; count++) {
+            $('#recentChunks' + count).html('<span class="chunk" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
+        }
 
         settings['neighbors'] && toggleNeighbors('startup');
         settings['remove'] && toggleRemove('startup');
@@ -1210,6 +1264,7 @@ var loadData = function() {
         !settings['ids'] && $('.chunkId').hide();
         settings['roll2'] && toggleRoll2('startup');
         settings['unpick'] && toggleUnpick('startup');
+        settings['recent'] && toggleRecent('startup');
 
         chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
             picking = true;
@@ -1241,7 +1296,8 @@ var loadData = function() {
 
 // Stores data in Firebase
 var setData = function() {
-    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn});
+    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn});
+    myRef.update({'recent': recent});
     document.cookie = "ids=" + showChunkIds;
 
     var tempJson = {};
@@ -1367,13 +1423,13 @@ var changeLocked = function(lock) {
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             $('.center').css('top', '15vw');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').css('opacity', 0).show();
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').animate({'opacity': 1});
                 !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');
