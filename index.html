@@ -23,8 +23,6 @@
     <title>Chunk Picker V2</title>
 </head>
 
-<div id='beta'>BETA</div>
-
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
 
 <div class='loading'>Loading&#8230;</div>
@@ -105,6 +103,14 @@
   <div class='menu6'>
     <button class='import' onclick="importFunc()">Import from URL</button>
   </div>
+    <div class='menu7'>
+        <div id='recentChunksTitle' class='text'><b>Recently Unlocked</b></div>
+        <div id='recentChunks1' class='text'></div>
+        <div id='recentChunks2' class='text'></div>
+        <div id='recentChunks3' class='text'></div>
+        <div id='recentChunks4' class='text'></div>
+        <div id='recentChunks5' class='text'></div>
+  </div>
   <div>
     <div class="imgDiv" id="imgDiv">
       <img class="map" id="map" src="osrs_world_map_may20_2019.png">
@@ -117,6 +123,7 @@
     <div class='item visibilitytoggle item-off' onclick="toggleVisibility()">High visibility mode<i class="pic zmdi zmdi-brightness-7 zmdi-hc-lg"></i></div>
     <div class='item roll2toggle item-off' onclick="toggleRoll2()">Roll 2<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
     <div class='item unpicktoggle item-off' onclick="toggleUnpick()">Unpick chunk<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
+    <div class='item recenttoggle item-off' onclick="toggleRecent()">Recent chunks<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
   </div>
 </div>
 
