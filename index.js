@@ -736,6 +736,9 @@ var importFromURL = function() {
             selectedChunks = 0;
             unlockedChunks = 0;
             selectedNum = 1;
+            
+            $('#chunkInfo1').text('Unlocked chunks: ' + unlockedChunks);
+            $('#chunkInfo2').text('Selected chunks: ' + selectedChunks);
 
             selected && selected.sort(function(a, b){return b-a}).forEach(function(id) {
                 while (id.startsWith('0') && id.length > 1) {
