@@ -307,6 +307,7 @@ button.menu2 {
 
 #recentChunks1, #recentChunks2, #recentChunks3, #recentChunks4, #recentChunks5 {
     border-width: 0px 1px 1px 1px;
+    cursor: default;
 }
 
 .gitgeddes {

@@ -727,7 +727,6 @@ var importFromURL = function() {
             var chunkStrSplit = url.split('?')[1].split(';');
             var unlocked = stringToChunkIndexes(chunkStrSplit[0]);
             var selected = chunkStrSplit[1] ? stringToChunkIndexes(chunkStrSplit[1]) : null;
-
             $('.box').removeClass('selected potential unlocked recent').addClass('gray').css('border-width', 0);
             $('.label').remove();
             roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
@@ -739,18 +738,26 @@ var importFromURL = function() {
             selectedNum = 1;
 
             selected && selected.sort(function(a, b){return b-a}).forEach(function(id) {
-                id.startsWith('0') && (id = id.substr(1));
+                while (id.startsWith('0') && id.length > 1) {
+                    id = id.substr(1);
+                }
                 $('#' + id).addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
                 $('.label').css('font-size', labelZoom + 'px');
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             });
 
             unlocked && unlocked.forEach(function(id) {
-                id.startsWith('0') && (id = id.substr(1));
+                while (id.startsWith('0') && id.length > 1) {
+                    id = id.substr(1);
+                }
                 $('#' + id).addClass('unlocked').removeClass('gray selected potential');
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             });
             !showChunkIds && $('.chunkId').hide();
+            for (let count = 1; count <= 5; count++) {
+                recent[count - 1] = null;
+                $('#recentChunks' + count).html('<span class="chunknone" onclick="recentChunk(recentChunks' + count + ')">-</span>');
+            }
             setData();
             chunkBorders();
             $('#import-menu').css({'opacity': 0}).hide();
