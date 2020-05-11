@@ -232,6 +232,22 @@ a, a:visited {
     background-color: rgb(130, 150, 150);
 }
 
+#leader {
+    background-color: rgb(0, 165, 165);
+    color: white;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition: background-color 0.4s;
+    transition: background-color 0.4s;
+    cursor: pointer;
+}
+
+#leader:hover {
+    background-color: rgb(0, 190, 190);
+}
+
 .menu2 {
     position: fixed;
     z-index: 99 !important;
@@ -666,6 +682,16 @@ button.menu2 {
     background-color: white;
 }
 
+.content9 {
+    border: solid;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    margin-top: 4%;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: white;
+}
+
 .title {
     font-size: 3vw;
     border-bottom: solid;
@@ -677,6 +703,10 @@ button.menu2 {
 .block {
     margin-bottom: 22px;
     width: 100%;
+}
+
+#page1extra > .block {
+    margin-top: 22px;
 }
 
 .or {
@@ -1022,7 +1052,7 @@ button.menu2 {
 }
 
 .item:hover {
-    background-color: rgb(200, 200, 200)
+    background-color: rgb(200, 200, 200);
 }
 
 .pic {
@@ -1128,6 +1158,18 @@ button.menu2 {
     color: rgb(100, 100, 255);
 }
 
+.goleaderboard {
+    position: absolute;
+    transition-duration: .5s;
+    cursor: pointer;
+    top: .15vw;
+    left: 6vw;
+}
+
+.goleaderboard:hover {
+    color: rgb(100, 100, 255);
+}
+
 .toptitle {
     font-size: 40px;
     top: .15vw;
@@ -1172,4 +1214,14 @@ button.menu2 {
 
 .none > .chunk:hover {
     text-decoration: none;
+}
+
+.rank-rows {
+    font-size: 2.5vw; 
+    width: 100%;
+}
+
+.blank {
+    cursor: default;
+    background-color: rgb(200, 200, 200);
 }

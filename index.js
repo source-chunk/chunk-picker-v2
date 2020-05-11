@@ -16,6 +16,7 @@ var settingsOpen = false;                                                       
 var roll2On = false;                                                            // Is the roll2 button enabled
 var unpickOn = false;                                                           // Is the unpick button enabled
 var recentOn = false;                                                           // Is the recent chunks section enabled
+var leaderboardEnabled = false;                                                 // Is leaderboard tracking enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
 var recent = [];                                                                // Recently picked chunks
 var zoom = 350;                                                                 // Starting zoom value
@@ -677,8 +678,15 @@ var toggleIds = function() {
     }
 }
 
+var test = function() {
+    databaseRef.child('maps').orderByChild('rsn').startAt("").once('value', function(snap) {
+        console.log(snap.val());
+    });
+}
+
 // Centers on average position of all unlocked chunks
 var center = function(extra) {
+    test();
     let arr = $('.box.unlocked');
     if (arr.length < 1) {
         scrollToPos(parseInt($('#591').attr('id')) % rowSize, Math.floor(parseInt($('#591').attr('id')) / rowSize), 0, 0, extra === 'quick');
@@ -817,14 +825,14 @@ var unlockEntry = function() {
             } else {
                 firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
                 $('.center').css('top', '15vw');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').css('opacity', 0).show();
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                 $('#entry-menu').animate({'opacity': 0});
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
                     $('.pin.entry').val('');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').animate({'opacity': 1});
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').animate({'opacity': 1});
                     !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                     !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                     $('#unlock-entry').prop('disabled', false).html('Unlock');
@@ -856,7 +864,7 @@ var proceed = function() {
 var nextPage = function(page) {
     if (page === 'create') {
         $('#create2').prop('disabled', true);
-        $('#page1').hide();
+        $('#page1, #page1extra').hide();
         $('#page2a').show();
         $('.pin').focus();
     } else if (page === 'create2') {
@@ -871,7 +879,7 @@ var nextPage = function(page) {
         midGood = false;
         pinGood = true;
         $('#access').prop('disabled', true);
-        $('#page1').hide();
+        $('#page1, #page1extra').hide();
         $('#page2b').show();
         $('.mid').focus();
     }
@@ -881,7 +889,7 @@ var nextPage = function(page) {
 var prevPage = function(page) {
     if (page === 'create2') {
         $('#page2a').hide();
-        $('#page1').show();
+        $('#page1, #page1extra').show();
         pin = '';
         $('.pin').val('');
     } else if (page === 'create3') {
@@ -890,7 +898,7 @@ var prevPage = function(page) {
         $('.pin').focus();
     } else if (page === 'mid') {
         $('#page2b').hide();
-        $('#page1').show();
+        $('#page1, #page1extra').show();
         $('.mid').removeClass('wrong').val('');
         $('.pin.old').removeClass('wrong').val('');
         $('.mid-err').css('visibility', 'hidden');
@@ -1074,6 +1082,15 @@ var toggleRecent = function(extra) {
     extra !== 'startup' && !locked && setData();
 }
 
+// Enabled leaderboard tracking
+var enableLeaderboard = function(extra) {
+    if (!leaderboardEnabled) {
+        leaderboardEnabled = true;
+        $('.leaderboardtoggle').text('Leaderboard enabled').addClass('blank');
+        extra !== 'startup' && !locked && setData();
+    }
+}
+
 // Centers on the clicked recent chunk and highlights it
 var recentChunk = function(el) {
     if ($($(el).children()).text() === '-' || inEntry) {
@@ -1112,9 +1129,9 @@ var setupMap = function() {
     if (!atHome) {
         setTimeout(doneLoading, 1500);
         $('.body').show();
-        $('#page1, #import-menu').hide();
+        $('#page1, #page1extra, #import-menu').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -1125,7 +1142,7 @@ var setupMap = function() {
         if (locked === undefined) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -1227,6 +1244,23 @@ var fixNums = function(num) {
     selectedNum--;
 }
 
+// Gets data from all maps and creates leaderboard
+var createLeaderboard = function() {
+    databaseRef.child('leaderboard').once('value', function(snap) {
+        let result = [];
+        for (var i in snap.val()) {
+            result.push({...snap.val()[i], id: i});
+        }
+        result.sort((a, b) => b.chunks - a.chunks);
+        let rank = 0;
+        result.forEach((d) => {
+            rank++;
+            $('.rank-rows').append('<tr><th>' + rank + '.</th><th><a href=\'https://source-chunk.github.io/chunk-picker-v2/?' + d.id + '\'>' + d.id.toUpperCase() + '</a></th> <th>' + d.chunks + '</th></tr>')
+        });
+        $('.loading, .ui-loader-header').remove();
+    });
+}
+
 // Checks the MID from the url
 var checkMID = function(mid) {
     if (mid === 'change-pin') {
@@ -1235,6 +1269,11 @@ var checkMID = function(mid) {
         $('#home-menu').hide();
         $('#pin-menu').show();
         $('.mid-old').focus();
+    } else if (mid === 'leaderboard') {
+        atHome = true;
+        $('#home-menu').hide();
+        $('#leaderboard-menu').show();
+        createLeaderboard();
     } else if (mid) {
         databaseRef.child('maps/' + mid).once('value', function(snap) {
             if (snap.val()) {
@@ -1274,6 +1313,7 @@ var loadData = function() {
 
         settings['neighbors'] && toggleNeighbors('startup');
         settings['remove'] && toggleRemove('startup');
+        settings['leaderboardEnabled'] && enableLeaderboard('startup');
         settings['ids'] && toggleIds() && $('.box').addClass('quality');
         !settings['ids'] && $('.chunkId').hide();
         settings['roll2'] && toggleRoll2('startup');
@@ -1313,7 +1353,7 @@ var loadData = function() {
 
 // Stores data in Firebase
 var setData = function() {
-    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn});
+    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'leaderboardEnabled': leaderboardEnabled});
     myRef.update({recent});
     document.cookie = "ids=" + showChunkIds;
 
@@ -1334,6 +1374,8 @@ var setData = function() {
         tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
     });
     myRef.child('chunks/potential').set(tempJson);
+
+    leaderboardEnabled && databaseRef.child('leaderboard/' + mid + '/chunks').set(unlockedChunks);
 }
 
 // Credit to Amehzyn
@@ -1440,13 +1482,13 @@ var changeLocked = function(lock) {
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             $('.center').css('top', '15vw');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').css('opacity', 0).show();
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').animate({'opacity': 1});
                 !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');
