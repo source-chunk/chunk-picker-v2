@@ -43,7 +43,7 @@
       </div>
       <div class='block'>
         <div>Enter PIN to unlock:</div>
-        <input class='pin entry' placeholder='PIN' />
+        <input class='pin entry' placeholder='PIN' type='password' />
         <button id='unlock-entry' class='button' onclick='unlockEntry()' disabled>Unlock map</button>
       </div>
       <div class='block'>
@@ -96,7 +96,7 @@
     </div>
     <div class='lock-box'>
       <div class='inner-lock'>
-        <input class='lock-pin' placeholder='PIN' />
+        <input class='lock-pin' placeholder='PIN' type='password' />
         <button id='lock-unlock' onclick='checkPin()'>Unlock</button>
       </div>
     </div>
@@ -158,7 +158,7 @@
       </p>
       <br />
       <div>PIN (4 digits):</div>
-      <input class='pin new' placeholder='PIN' />
+      <input class='pin new' placeholder='PIN' type='password' />
       <button id='create2' class='button' onclick='nextPage(this.id)' disabled>Create map</button>
     </div>
   </div>
@@ -179,7 +179,7 @@
     <input class='mid' spellcheck='false' placeholder='Map ID' />
     <div class='mid-err'>Map ID does not exist.</div>
     <div class='home text2'>PIN (optional):</div>
-    <input class='pin old' placeholder='PIN' />
+    <input class='pin old' placeholder='PIN' type='password' />
     <div class='pin-err'>PIN is incorrect.</div>
     <button id='access' class='button' onclick='accessMap()' disabled>Access my map</button>
   </div>

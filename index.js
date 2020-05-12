@@ -678,15 +678,8 @@ var toggleIds = function() {
     }
 }
 
-var test = function() {
-    databaseRef.child('maps').orderByChild('rsn').startAt("").once('value', function(snap) {
-        console.log(snap.val());
-    });
-}
-
 // Centers on average position of all unlocked chunks
 var center = function(extra) {
-    test();
     let arr = $('.box.unlocked');
     if (arr.length < 1) {
         scrollToPos(parseInt($('#591').attr('id')) % rowSize, Math.floor(parseInt($('#591').attr('id')) / rowSize), 0, 0, extra === 'quick');
