@@ -1356,7 +1356,8 @@ var loadData = function() {
 
 // Sets browser cookie
 var setCookies = function() {
-    document.cookie = "ids=" + showChunkIds + "; highvis=" + highVisibilityMode;
+    document.cookie = "ids=" + showChunkIds;
+    document.cookie = "highvis=" + highVisibilityMode;
 }
 
 // Stores data in Firebase
