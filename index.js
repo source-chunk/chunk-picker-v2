@@ -6,6 +6,7 @@
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
+var viewOnly = false;                                                           // View only mode active
 var isPicking = false;                                                          // Has the user just rolled 2 chunks and is currently picking
 var autoSelectNeighbors = false;                                                // Toggle state for select neighbors button
 var autoRemoveSelected = false;                                                 // Toggle state for remove selected button
@@ -163,7 +164,7 @@ $(document).ready(function() {
     });
     
     $('.pin.new').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
             $(this).val(prevValuePinNew);
         } else {
             prevValuePinNew = e.target.value;
@@ -176,7 +177,7 @@ $(document).ready(function() {
     });
     
     $('.pin.old').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
             $(this).val(prevValuePinOld);
         } else {
             prevValuePinOld = e.target.value;
@@ -191,7 +192,7 @@ $(document).ready(function() {
     });
     
     $('.lock-pin').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
             $(this).val(prevValueLockPin);
         } else {
             prevValueLockPin = e.target.value;
@@ -205,7 +206,7 @@ $(document).ready(function() {
     });
 
     $('.pin.entry').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
             $(this).val(prevValueLockPin);
         } else {
             prevValueLockPin = e.target.value;
@@ -235,7 +236,7 @@ $(document).ready(function() {
     });
     
     $('.pin.old2.first').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
             $(this).val(prevValuePinOld2);
         } else {
             prevValuePinOld2 = e.target.value;
@@ -250,7 +251,7 @@ $(document).ready(function() {
     });
 
     $('.pin.old2.second').on('input', function(e) {
-        if (isNaN(e.target.value) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
             $(this).val(prevValuePinOld2Second);
         } else {
             prevValuePinOld2Second = e.target.value;
@@ -408,7 +409,7 @@ $(document).on({
         if (e.keyCode === 27 && screenshotMode) {
             screenshotMode = false;
             $('.escape-hint').hide();
-            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .topnav, #beta').show();
+            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .topnav, #beta').show();
             settings();
         } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32)) {
             e.preventDefault();
@@ -665,7 +666,7 @@ var toggleRemove = function(extra) {
 // Toggle functionality for showing chunk ids
 var toggleIds = function() {
     showChunkIds = !showChunkIds;
-    document.cookie = "ids=" + showChunkIds;
+    setCookies();
     $('#toggleIds').toggleClass('on off');
     if ($('#toggleIds').hasClass('on')) {
         $('.chunkId').show();
@@ -846,7 +847,7 @@ var proceed = function() {
     $('.lock-closed').css('opacity', 0).show();
     setTimeout(function() {
         $('#entry-menu').css('opacity', 1).hide();
-        $('.lock-closed').animate({'opacity': 1});
+        !viewOnly ? $('.lock-closed').animate({'opacity': 1}) : $('.lock-closed').hide();
         $('#unlock-entry').prop('disabled', false).html('Unlock');
         locked = true;
         inEntry = false;
@@ -924,14 +925,14 @@ var accessMap = function() {
         if (pin) {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
-            document.title = mid.toUpperCase() + ' - Chunk Picker V2';
+            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
             $('#entry-menu').hide();
             $('.lock-opened').show();
             $('.lock-closed').hide();
             locked = false;
         } else {
             window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
-            document.title = mid.toUpperCase() + ' - Chunk Picker V2';
+            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
             $('.lock-closed, .lock-opened').hide();
             locked = true;
             inEntry = true;
@@ -972,7 +973,7 @@ var changePin = function() {
             myRef = firebase.database().ref('maps/' + mid);
             myRef.child('pin').set(pinNew);
             window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
-            document.title = mid.toUpperCase() + ' - Chunk Picker V2';
+            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
             $('.lock-closed, .lock-opened').hide();
             locked = true;
             inEntry = true;
@@ -1026,7 +1027,7 @@ var settings = function() {
 
 // Enables screenshot mode
 var enableScreenshotMode = function() {
-    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .settings-menu, .topnav, #beta').hide();
+    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .settings-menu, .topnav, #beta').hide();
     screenshotMode = true;
     $('.escape-hint').css('opacity', 1).show();
     setTimeout(function() {
@@ -1038,11 +1039,11 @@ var enableScreenshotMode = function() {
 }
 
 // Toggles high visibility mode
-var toggleVisibility = function(extra) {
+var toggleVisibility = function() {
     highVisibilityMode = !highVisibilityMode;
+    setCookies();
     highVisibilityMode ? $('.box').addClass('visible') : $('.box').removeClass('visible');
     $('.visibilitytoggle').toggleClass('item-off item-on');
-    extra !== 'startup' && !locked && setData();
 }
 
 // Toggles the visibility of the roll2 button
@@ -1147,8 +1148,8 @@ var setupMap = function() {
         $('.box').css('font-size', fontZoom + 'px');
         $('.label').css('font-size', labelZoom + 'px');
         !mid && (mid = window.location.href.split('?')[1]);
-        document.title = mid.toUpperCase() + ' - Chunk Picker V2';
-        $('.toptitle2').text(mid.toUpperCase());
+        document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
+        $('.toptitle2').text(mid.split('-')[0].toUpperCase());
         loadData();
     }
 }
@@ -1268,6 +1269,11 @@ var checkMID = function(mid) {
         $('#leaderboard-menu').show();
         createLeaderboard();
     } else if (mid) {
+        if (mid.split('-')[1] === 'view') {
+            mid = mid.split('-')[0];
+            viewOnly = true;
+            proceed();
+        }
         databaseRef.child('maps/' + mid).once('value', function(snap) {
             if (snap.val()) {
                 myRef = firebase.database().ref('maps/' + mid);
@@ -1318,19 +1324,19 @@ var loadData = function() {
 
         chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
             picking = true;
-            $('.box:contains(' + id + ')').addClass('potential').removeClass('gray selected unlocked').append('<span class="label">' + selectedNum++ + '</span>');
+            $('.box > .chunkId:contains(' + id + ')').parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label">' + selectedNum++ + '</span>');
             $('.label').css('font-size', labelZoom + 'px');
             $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
         });
 
         chunks && chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b){return b-a}).forEach(function(id) {
-            $('.box:contains(' + id + ')').addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
+            $('.box > .chunkId:contains(' + id + ')').parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
             $('.label').css('font-size', labelZoom + 'px');
             $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
         });
 
         chunks && chunks['unlocked'] && Object.keys(chunks['unlocked']).forEach(function(id) {
-            $('.box:contains(' + id + ')').addClass('unlocked').removeClass('gray selected potential');
+            $('.box > .chunkId:contains(' + id + ')').parent().addClass('unlocked').removeClass('gray selected potential');
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
         });
 
@@ -1344,11 +1350,15 @@ var loadData = function() {
     });
 }
 
+// Sets browser cookie
+var setCookies = function() {
+    document.cookie = "ids=" + showChunkIds + "; highvis=" + highVisibilityMode;
+}
+
 // Stores data in Firebase
 var setData = function() {
     myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'leaderboardEnabled': leaderboardEnabled});
     myRef.update({recent});
-    document.cookie = "ids=" + showChunkIds;
 
     var tempJson = {};
     Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
