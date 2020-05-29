@@ -148,12 +148,12 @@ $(document).ready(function() {
     checkMID(window.location.href.split('?')[1]);
 
     $('.mid').on('input', function(e) {
-        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 3) {
+        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 4) {
             $(this).val(prevValueMid);
         } else {
             $(this).val(e.target.value.toUpperCase());
             prevValueMid = e.target.value;
-            if (e.target.value.length === 3) {
+            if (e.target.value.length === 3 || e.target.value.length === 4) {
                 midGood = true;
                 checkIfGood();
             } else {
@@ -220,12 +220,12 @@ $(document).ready(function() {
     });
 
     $('.mid-old').on('input', function(e) {
-        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 3) {
+        if ((!/^[a-zA-Z]+$/.test(e.target.value) && e.target.value !== '') || e.target.value.length > 4) {
             $(this).val(prevValueMid2);
         } else {
             $(this).val(e.target.value.toUpperCase());
             prevValueMid2 = e.target.value;
-            if (e.target.value.length === 3) {
+            if (e.target.value.length === 3 || e.target.value.length === 4) {
                 mid2Good = true;
                 checkIfGood2();
             } else {
@@ -1438,15 +1438,18 @@ function fixMapEdges(imageDiv) {
 
 // Rolls until a new, unique map id is found
 var rollMID = function() {
-    var char1, char2, char3, charSet;
+    var char1, char2, char3, char4, charSet;
     var badNums = true;
+    var rollCount = 0;
     databaseRef.once('value', function(snap) {
         while (badNums) {
             char1 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char2 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char3 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
-            charSet = char1 + char2 + char3;
+            char4 = rollCount > 10 ? String.fromCharCode(97 + Math.floor(Math.random() * 26)) : '';
+            charSet = char1 + char2 + char3 + char4;
             !snap.val()['maps'][charSet] && (badNums = false);
+            rollCount++;
         }
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
