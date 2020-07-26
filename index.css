@@ -26,6 +26,7 @@ a, a:visited {
 
 .body {
     display: none;
+    touch-action: manipulation;
 }
 
 .background-img {
@@ -112,12 +113,12 @@ a, a:visited {
     background-color: rgba(150, 150, 150, .5);
 }
 
-.recent.unlocked, .recent.potential {
+.recent.unlocked:not(.mobile), .recent.potential:not(.mobile) {
     background-color: rgba(255, 255, 0, .7);
     animation: glowing 750ms infinite;
 }
 
-.recent.selected {
+.recent.selected:not(.mobile) {
     background-color: rgba(255, 0, 0, .7);
     animation: glowing 750ms infinite;
 }
@@ -729,7 +730,7 @@ button.menu2 {
 
 .hr {
     display: inline-block;
-    width: 8vw;
+    width: 6vw;
     border-color: lightgray;
     margin-top: 1.5vw;
 }

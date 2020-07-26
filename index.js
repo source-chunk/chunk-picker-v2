@@ -32,6 +32,8 @@ var scrollLeft = 0;                                                             
 var prevScrollLeft = 0;                                                         // Amount the board was previously scrolled left offscreen
 var scrollTop = 0;                                                              // Amount the board is scrolled up offscreen
 var prevScrollTop = 0;                                                          // Amount the board was previously scrolled up offscreen
+var clickX;                                                                     // Spot clicked x-value
+var clickY;                                                                     // Spot clicked y-value
 
 var ratio = 4800 / 8256;                                                        // Image ratio
 var movedNum = 0;                                                               // Amount of times mouse is moved while dragging
@@ -77,13 +79,6 @@ hammertime.get('pinch').set({ enable: true });
 
 // ----------------------------------------------------------
 
-// [Mobile] Prevents normal mobile zooming methods
-hammertime.on('pinchin pinchout doubletap', function(ev) {
-    if (onMobile) {
-        ev.preventDefault();
-    }
-});
-
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
     if (onMobile && !atHome && !inEntry && !importMenuOpen) {
@@ -104,41 +99,6 @@ hammertime.on('panend', function(ev) {
 hammertime.on('panleft panright panup pandown', function(ev) {
     if (onMobile && !atHome && !inEntry && !importMenuOpen) {
         updateScrollPos(ev.changedPointers[0]);
-    }
-});
-
-//[Mobile] Handles mobile 'clicks'
-hammertime.on('tap', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && $(ev.target).hasClass('box') && !locked) {
-        if ($(ev.target).hasClass('gray')) {
-            $(ev.target).toggleClass('gray selected').append('<span class="label">' + selectedNum + '</span>');
-            selectedNum++;
-            $('.label').css('font-size', labelZoom + 'px');
-            $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-        } else if ($(ev.target).hasClass('selected')) {
-            fixNums($($(ev.target).children()[1]).text());
-            $(ev.target).toggleClass('selected unlocked').empty().append("<span class='chunkId'>" + (Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) + "</span>");
-            $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
-            $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-        } else if ($(ev.target).hasClass('potential')) {
-            fixNums($($(ev.target).children()[1]).text());
-            $(ev.target).toggleClass('potential unlocked').empty().append("<span class='chunkId'>" + (Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) + "</span>");
-            $('.potential > .label').css('color', 'white');
-            $('.potential').toggleClass('selected potential');
-            autoSelectNeighbors && selectNeighbors(ev.target);
-            autoRemoveSelected && $('.selected').toggleClass('selected gray').empty().append("<span class='chunkId'>" + (Math.floor(ev.target.id % rowSize) * (skip + rowSize) - Math.floor(ev.target.id / rowSize) + startingIndex) + "</span>") && (selectedChunks = 1) && (selectedNum = 1);
-            $('.pick').text('Pick Chunk');
-            $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
-            isPicking = false;
-            $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
-            $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-        } else {
-            $(ev.target).toggleClass('gray unlocked');
-            $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
-        }
-        !showChunkIds && $('.chunkId').hide();
-        setData();
-        chunkBorders();
     }
 });
 
@@ -454,9 +414,7 @@ $(document).on({
             prevScrollLeft = prevScrollLeft + scrollLeft;
             prevScrollTop = prevScrollTop + scrollTop;
         } else if ($(e.target).hasClass('box')) {
-            if (onMobile) {
-                return;
-            } else if (locked) {
+            if (locked) {
                 $('.outer').css('cursor', 'default');
                 if (lockBoxOpen) {
                     closePinBox();
@@ -1105,13 +1063,19 @@ var recentChunk = function(el) {
 var doneLoading = function() {
     if (onMobile) {
         console.log('mobile');
-        $('.pick, .roll2, .unpick, .center').css({'height': '40px', 'font-size': zoom/fontZoom*1.5 + 'px'});
-        $('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
-        $('.box').addClass('mobile').css({'height': zoom/rowSize + 'vw', 'width': zoom/rowSize + 'vw'});
-        $('.body').append(`<div class='menu4'>
-            <button id='zoomIn' class='icon' onclick="zoomButton(1)">+</button>
-            <button id='zoomOut' class='icon' onclick="zoomButton(-1)">-</button>
-        </div>`);
+        $('.center').css({'height': '40px', 'width': '90px', 'font-size': '12px'});
+        $('.pick, .roll2, .unpick').css({'height': '20px', 'width': '90px', 'font-size': '12px'});
+        $('.menu2, .menu6, .menu7, .settings').hide().remove();
+        $('.hr').css({'width': '25px'});
+        $('.goleaderboard').css({'right': '3vw', 'left': 'auto'});
+        $('.block, .block > .title').css({'font-size': '18px'});
+        $('.block > button').css({'font-size': '10px'});
+        $('.menu3').css({'width': '110px', 'height': '15px'});
+        $('#chunkInfo1, #chunkInfo2, .or').css({'font-size': '12px'});
+        $('.box').addClass('mobile').css({'min-height': '96px', 'min-width': '96px', 'max-height': '96px', 'max-width': '96px'});
+        center('quick');
+        //$('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
+        //$('.box').addClass('mobile').css({'height': zoom/rowSize + 'vw', 'width': zoom/rowSize + 'vw'});
     }
     $('.potential > .label').css('color', 'black');
     $('.loading').remove();
@@ -1181,6 +1145,9 @@ var selectNeighbors = function(el) {
 
 // Scroll to new position (for panning/dragging)
 var updateScrollPos = function(e) {
+    if (clickX === undefined) {
+        return;
+    }
     let newScrollLeft = prevScrollLeft - (clickX - e.pageX);
     let newScrollTop = prevScrollTop - (clickY - e.pageY);
     if (newScrollLeft > 100) {
@@ -1316,9 +1283,9 @@ var loadData = function() {
         settings['neighbors'] && toggleNeighbors('startup');
         settings['remove'] && toggleRemove('startup');
         settings['leaderboardEnabled'] && enableLeaderboard('startup');
-        settings['ids'] && toggleIds() && $('.box').addClass('quality');
+        (settings['ids'] || true) && toggleIds() && $('.box').addClass('quality');
         settings['highvis'] && toggleVisibility();
-        !settings['ids'] && $('.chunkId').hide();
+        (!settings['ids'] && false) && $('.chunkId').hide();
         settings['roll2'] && toggleRoll2('startup');
         settings['unpick'] && toggleUnpick('startup');
         if (settings['recent'] === undefined) {
