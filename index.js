@@ -1283,9 +1283,9 @@ var loadData = function() {
         settings['neighbors'] && toggleNeighbors('startup');
         settings['remove'] && toggleRemove('startup');
         settings['leaderboardEnabled'] && enableLeaderboard('startup');
-        (settings['ids'] || true) && toggleIds() && $('.box').addClass('quality');
+        settings['ids'] && toggleIds() && $('.box').addClass('quality');
         settings['highvis'] && toggleVisibility();
-        (!settings['ids'] && false) && $('.chunkId').hide();
+        !settings['ids'] && $('.chunkId').hide();
         settings['roll2'] && toggleRoll2('startup');
         settings['unpick'] && toggleUnpick('startup');
         if (settings['recent'] === undefined) {
