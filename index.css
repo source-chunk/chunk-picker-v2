@@ -123,6 +123,20 @@ a, a:visited {
     animation: glowing 750ms infinite;
 }
 
+.box.locked {
+    background-color: rgba(0, 255, 255, .33);
+    border: solid 3px rgb(0, 170, 170) !important;
+}
+
+.box.locked.visible {
+    background-color: rgba(0, 255, 255, .25);
+    border: solid 3px rgb(0, 170, 170) !important;
+}
+
+.box.locked:hover {
+    background-color: rgba(0, 255, 255, .25);
+}
+
 @keyframes glowing {
     0%, 100% { box-shadow: 0 0 10px black; }
     50% { box-shadow: 0 0 30px black; }
@@ -132,15 +146,15 @@ a, a:visited {
     position: fixed;
     top: 60px;
     z-index: 99 !important;
-    width: 14vw;
-    height: 3.5vw;
+    width: min(14vw, 150px);
+    height: min(3.5vw, 30px);
 }
 
 .pick {
     background-color: rgb(115, 230, 115);
     width: 100%;
     height: 100%;
-    font-size: 2vw;
+    font-size: min(2vw, 20px);
     color: white;
     display: block;
     border-width: 1px 1px 1px 1px;
@@ -164,7 +178,7 @@ a, a:visited {
     background-color: rgb(230, 115, 115);
     width: 100%;
     height: 100%;
-    font-size: 2vw;
+    font-size: min(2vw, 20px);
     color: white;
     display: none;
     border-width: 0px 1px 1px 1px;
@@ -188,7 +202,7 @@ a, a:visited {
     background-color: rgb(100, 125, 225);
     width: 100%;
     height: 100%;
-    font-size: 2vw;
+    font-size: min(2vw, 20px);
     color: white;
     display: none;
     border-width: 0px 1px 1px 1px;
@@ -213,7 +227,7 @@ a, a:visited {
     background-color: rgb(0, 165, 165);
     width: 100%;
     height: 175%;
-    font-size: 2vw;
+    font-size: min(2vw, 20px);
     color: white;
     display: block;
     border-width: 1px 1px 1px 1px;
@@ -254,8 +268,8 @@ a, a:visited {
     z-index: 99 !important;
     right: 10px;
     top: 60px;
-    width: 12.5vw;
-    height: 3.5vw;
+    width: min(12.5vw, 165px);
+    height: min(3.5vw, 30px);
 }
 
 button.menu2 {
@@ -264,8 +278,8 @@ button.menu2 {
 
 .text:not(.home) {
     background-color: rgb(200, 200, 200);
-    height: 100%;
-    font-size: 1.5vw;
+    height: auto;
+    font-size: min(1.5vw, 20px);
     color: black;
     display: block;
     border-width: 1px 1px 1px 1px;
@@ -281,9 +295,9 @@ button.menu2 {
 .menu3 {
     position: fixed;
     z-index: 99 !important;
-    bottom: 50px;
+    bottom: min(3.5vw, 30px);
     right: 10px;
-    width: 15vw;
+    width: min(15vw, 200px);
     height: 2vw;
 }
 
@@ -296,12 +310,12 @@ button.menu2 {
     z-index: 99 !important;
     bottom: 20px;
     width: 100%;
-    pointer-events: none;
 }
 
 .menu6 {
     position: fixed;
     z-index: 99 !important;
+    left: 0px;
     top: 60px;
     width: 100%;
     text-align: center;
@@ -312,8 +326,8 @@ button.menu2 {
     display: none;
     position: fixed;
     z-index: 99 !important;
-    bottom: 11vw;
-    width: 14vw;
+    bottom: min(11vw, 130px);
+    width: min(14vw, 175px);
     height: 2vw;
 }
 
@@ -325,6 +339,30 @@ button.menu2 {
 #recentChunks1, #recentChunks2, #recentChunks3, #recentChunks4, #recentChunks5 {
     border-width: 0px 1px 1px 1px;
     cursor: default;
+}
+
+.menu8 {
+    display: none;
+    position: fixed;
+    z-index: 99 !important;
+    bottom: 55vh;
+    right: 10px;
+    width: min(25vw, 400px);
+    height: 2vw;
+}
+
+.infostartup {
+    font-size: min(1.5vw, 22px);
+}
+
+.infoid, .infoname, .infomonsters, .infonpcs, .infoitems, .infofeatures, .infoquests {
+    display: none;
+    font-size: min(1.5vw, 18px);
+}
+
+.infocontribute {
+    border-top: solid 1px;
+    font-size: min(1.25vw, 15px);
 }
 
 .gitgeddes {
@@ -377,9 +415,9 @@ button.menu2 {
 
 .import {
     background-color: rgb(200, 125, 200);
-    width: 17vw;
+    width: min(17vw, 150px);
     height: 100%;
-    font-size: 2vw;
+    font-size: min(2vw, 16px);
     color: white;
     display: block;
     border-width: 1px 1px 1px 1px;
@@ -420,13 +458,13 @@ button.menu2 {
 }
 
 .inner-lock {
-    width: 8%;
+    width: min(8%, 100px);
     margin: auto;
 }
 
 .lock-pin {
     width: 85%;
-    font-size: 2.5vw;
+    font-size: min(2.5vw, 16px);
     text-align: center;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -454,17 +492,12 @@ button.menu2 {
 #lock-unlock {
     outline: none;
     width: 100%;
-    font-size: 2vw;
+    font-size: min(2vw, 18px);
+    z-index: 9999 !important;
     cursor: pointer;
     padding-top: 7.5px;
     padding-bottom: 7.5px;
     transition-duration: .5s;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     border: 2px solid rgb(50, 50, 150);
     background-color: rgb(100, 100, 255);
     color: white;
@@ -484,7 +517,7 @@ button.menu2 {
 .toggle {
     width: 100%;
     height: 100%;
-    font-size: 2vw;
+    font-size: min(2vw, 18px);
     color: white;
     display: block;
     border-width: 0px 1px 1px 1px;
@@ -538,6 +571,14 @@ button.menu2 {
 
 .box.quality > .label {
     transform: translateY(-20%);
+}
+
+.box.locked:not(.quality) > .label {
+    transform: translate(-2%, -8%);
+}
+
+.box.quality.locked > .label {
+    transform: translateY(-25%);
 }
 
 .box:not(.quality) > .chunkId {
@@ -1013,6 +1054,12 @@ button.menu2 {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+.settings:hover {
+    color: rgb(100, 100, 255) !important;
 }
 
 .settings.whirl {
@@ -1034,8 +1081,8 @@ button.menu2 {
 .settings-menu {
     z-index: 999 !important;
     display: none;
-    width: 16vw;
-    font-size: 1.5vw;
+    width: min(16vw, 200px);
+    font-size: min(1.5vw, 16px);
     background-color: rgb(230, 230, 230);
     position: absolute;
     right: .5vw;
@@ -1047,8 +1094,8 @@ button.menu2 {
     cursor: pointer;
     background-color: rgb(200, 200, 100);
     margin: 4px 4px 4px 4px;
-    height: 2vw;
-    line-height: 2vw;
+    height: min(2vw, 25px);
+    line-height: min(2vw, 25px);
     padding-left: 2px;
 }
 
@@ -1152,7 +1199,7 @@ button.menu2 {
     transition-duration: .5s;
     cursor: pointer;
     top: .15vw;
-    left: .5vw;
+    left: 5px;
 }
 
 .gohome:hover {
@@ -1164,7 +1211,7 @@ button.menu2 {
     transition-duration: .5s;
     cursor: pointer;
     top: .15vw;
-    left: 6vw;
+    left: 65px;
 }
 
 .goleaderboard:hover {

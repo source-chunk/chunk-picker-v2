@@ -2,7 +2,7 @@
  * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Id's and Amehzyn for smoother zooming/url decoding
- * 1/26/2019
+ * 01/27/2020
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -17,6 +17,7 @@ var settingsOpen = false;                                                       
 var roll2On = false;                                                            // Is the roll2 button enabled
 var unpickOn = false;                                                           // Is the unpick button enabled
 var recentOn = false;                                                           // Is the recent chunks section enabled
+var chunkInfoOn = false;                                                        // Is the chunk info panel enabled
 var leaderboardEnabled = false;                                                 // Is leaderboard tracking enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
 var recent = [];                                                                // Recently picked chunks
@@ -34,6 +35,8 @@ var scrollTop = 0;                                                              
 var prevScrollTop = 0;                                                          // Amount the board was previously scrolled up offscreen
 var clickX;                                                                     // Spot clicked x-value
 var clickY;                                                                     // Spot clicked y-value
+var chunkInfo = {};                                                             // Data of all chunk info
+var infoLockedId = -1;                                                          // Id of chunk locked for info
 
 var ratio = 4800 / 8256;                                                        // Image ratio
 var movedNum = 0;                                                               // Amount of times mouse is moved while dragging
@@ -78,6 +81,11 @@ hammertime.get('pinch').set({ enable: true });
 // Event Listeners
 
 // ----------------------------------------------------------
+
+// Prevent right-click menu from showing
+window.addEventListener('contextmenu', function (e) { 
+    e.preventDefault(); 
+  }, false);
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
@@ -369,7 +377,7 @@ $(document).on({
         if (e.keyCode === 27 && screenshotMode) {
             screenshotMode = false;
             $('.escape-hint').hide();
-            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .topnav, #beta').show();
+            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .topnav, #beta').show();
             settings();
         } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32)) {
             e.preventDefault();
@@ -406,7 +414,20 @@ $(document).on({
         clickY = e.pageY;
     },
     'mouseup': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen) {
+        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen) {
+            return;
+        } else if (e.button === 2) {
+            if ($(e.target).hasClass('box')) {
+                if (infoLockedId === $(e.target).children()[0].innerHTML) {
+                    infoLockedId = -1;
+                    $(e.target).removeClass('locked');
+                } else {
+                    $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
+                    infoLockedId = $(e.target).children()[0].innerHTML;
+                    $(e.target).addClass('locked');
+                }
+                updateChunkInfo();
+            }
             return;
         }
         clicked = false;
@@ -692,6 +713,7 @@ var importFromURL = function() {
             roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             recentOn && $('.menu7').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
+            chunkInfoOn && $('.menu8').css({'opacity': 1}).show();
             isPicking = false;
             selectedChunks = 0;
             unlockedChunks = 0;
@@ -780,6 +802,7 @@ var unlockEntry = function() {
                 $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
+                chunkInfoOn && $('.menu8').css('opacity', 0).show();
                 $('#entry-menu').animate({'opacity': 0});
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
@@ -787,6 +810,7 @@ var unlockEntry = function() {
                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').animate({'opacity': 1});
                     !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                     !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
+                    chunkInfoOn && $('.menu8').animate({'opacity': 1});
                     $('#unlock-entry').prop('disabled', false).html('Unlock');
                     locked = false;
                     inEntry = false;
@@ -966,26 +990,21 @@ var unpick = function() {
     $(el[rand]).css('border-width', '0px');
 }
 
-// Opens the settings menu
+// Opens/closes the settings menu
 var settings = function() {
     settingsOpen = !settingsOpen;
     if (settingsOpen) {
-        $('.settings-menu').css('opacity', 0).show();
-        $('.settings-menu').animate({'opacity': 1});
-        $('.settings').addClass('whirl').animate({'color': 'rgb(150, 150, 150)'});
+        $('.settings-menu').show();
+        $('.settings').css({'color': 'rgb(150, 150, 150)'});
     } else {
-        $('.settings-menu').animate({'opacity': 0});
-        $('.settings').removeClass('whirl').addClass('smallspin').animate({'color': 'black'});
-        setTimeout(function() {
-            $('.settings-menu').hide();
-            $('.settings').removeClass('smallspin')
-        }, 500);
+        $('.settings-menu').hide();
+        $('.settings').css({'color': 'black'});
     }
 }
 
 // Enables screenshot mode
 var enableScreenshotMode = function() {
-    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .settings-menu, .topnav, #beta').hide();
+    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .settings-menu, .topnav, #beta').hide();
     screenshotMode = true;
     $('.escape-hint').css('opacity', 1).show();
     setTimeout(function() {
@@ -1002,6 +1021,19 @@ var toggleVisibility = function() {
     setCookies();
     highVisibilityMode ? $('.box').addClass('visible') : $('.box').removeClass('visible');
     $('.visibilitytoggle').toggleClass('item-off item-on');
+}
+
+// Toggles the chunk info panel
+var toggleChunkInfo = function(extra) {
+    chunkInfoOn = !chunkInfoOn;
+    chunkInfoOn ? $('.menu8').show() : $('.menu8').hide();
+    extra !== 'startup' && $('menu8').css('opacity', 1);
+    $('.infotoggle').toggleClass('item-off item-on');
+    $('.infotoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    databaseRef.child('chunkinfo').once('value', function(snap) {
+        chunkInfo = snap.val();
+    });
+    extra !== 'startup' && !locked && setCookies();
 }
 
 // Toggles the visibility of the roll2 button
@@ -1062,10 +1094,9 @@ var recentChunk = function(el) {
 // Once page has loaded, page is centered and initial chunks are selected/unlocked (from url)
 var doneLoading = function() {
     if (onMobile) {
-        console.log('mobile');
         $('.center').css({'height': '40px', 'width': '90px', 'font-size': '12px'});
         $('.pick, .roll2, .unpick').css({'height': '20px', 'width': '90px', 'font-size': '12px'});
-        $('.menu2, .menu6, .menu7, .settings').hide().remove();
+        $('.menu2, .menu6, .menu7, .menu8, .settings').hide().remove();
         $('.hr').css({'width': '25px'});
         $('.goleaderboard').css({'right': '3vw', 'left': 'auto'});
         $('.block, .block > .title').css({'font-size': '18px'});
@@ -1074,8 +1105,6 @@ var doneLoading = function() {
         $('#chunkInfo1, #chunkInfo2, .or').css({'font-size': '12px'});
         $('.box').addClass('mobile').css({'min-height': '96px', 'min-width': '96px', 'max-height': '96px', 'max-width': '96px'});
         center('quick');
-        //$('.text, .toggle').css('font-size', zoom/fontZoom + 'px');
-        //$('.box').addClass('mobile').css({'height': zoom/rowSize + 'vw', 'width': zoom/rowSize + 'vw'});
     }
     $('.potential > .label').css('color', 'black');
     $('.loading').remove();
@@ -1205,6 +1234,43 @@ var fixNums = function(num) {
     selectedNum--;
 }
 
+// Update chunk info
+var updateChunkInfo = function() {
+    if (!inEntry && !importMenuOpen) {
+        let id = -1;
+        if (infoLockedId > 0) {
+            id = infoLockedId;
+        }
+        if ($('.infoid').is(':hidden') && id > 0) {
+            $('.infostartup').hide();
+            $('.infoid').show();
+            $('.infoname').show();
+            $('.infomonsters').show();
+            $('.infonpcs').show();
+            $('.infoitems').show();
+            $('.infofeatures').show();
+            $('.infoquests').show();
+        } else if (id === -1) {
+            $('.infostartup').show();
+            $('.infoid').hide();
+            $('.infoname').hide();
+            $('.infomonsters').hide();
+            $('.infonpcs').hide();
+            $('.infoitems').hide();
+            $('.infofeatures').hide();
+            $('.infoquests').hide();
+            return;
+        }
+        $('.infoid-content').text(id);
+        $('.infoname-content').text(chunkInfo[id]['infoname'] || '?');
+        $('.infomonsters-content').text(chunkInfo[id]['infomonsters'] || '?');
+        $('.infonpcs-content').text(chunkInfo[id]['infonpcs'] || '?');
+        $('.infoitems-content').text(chunkInfo[id]['infoitems'] || '?');
+        $('.infofeatures-content').text(chunkInfo[id]['infofeatures'] || '?');
+        $('.infoquests-content').text(chunkInfo[id]['infoquests'] || '?');
+    }
+}
+
 // Gets data from all maps and creates leaderboard
 var createLeaderboard = function() {
     databaseRef.child('leaderboard').once('value', function(snap) {
@@ -1274,6 +1340,9 @@ var loadData = function() {
         settings['highvis'] = document.cookie.split(';').filter(function(item) {
             return item.indexOf('highvis=true') >= 0
         }).length > 0;
+        settings['info'] = document.cookie.split(';').filter(function(item) {
+            return !(item.indexOf('info=false') >= 0)
+        }).length > 0;
         
         for (let count = 1; count <= 5; count++) {
             !recent[count - 1] && (recent[count - 1] = null);
@@ -1286,6 +1355,7 @@ var loadData = function() {
         settings['ids'] && toggleIds() && $('.box').addClass('quality');
         settings['highvis'] && toggleVisibility();
         !settings['ids'] && $('.chunkId').hide();
+        settings['info'] && toggleChunkInfo('startup');
         settings['roll2'] && toggleRoll2('startup');
         settings['unpick'] && toggleUnpick('startup');
         if (settings['recent'] === undefined) {
@@ -1325,6 +1395,7 @@ var loadData = function() {
 var setCookies = function() {
     document.cookie = "ids=" + showChunkIds;
     document.cookie = "highvis=" + highVisibilityMode;
+    document.cookie = "info=" + chunkInfoOn;
 }
 
 // Stores data in Firebase
@@ -1463,12 +1534,14 @@ var changeLocked = function(lock) {
             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
+            chunkInfoOn && $('.menu8').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
                 $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').animate({'opacity': 1});
                 !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
+                chunkInfoOn && $('.menu8').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');
                 locked = lock;
                 lockBoxOpen = false;

@@ -105,14 +105,27 @@
   <div class='menu6'>
     <button class='import' onclick="importFunc()">Import from URL</button>
   </div>
-    <div class='menu7'>
-        <div id='recentChunksTitle' class='text'><b>Recently Unlocked</b></div>
-        <div id='recentChunks1' class='text'></div>
-        <div id='recentChunks2' class='text'></div>
-        <div id='recentChunks3' class='text'></div>
-        <div id='recentChunks4' class='text'></div>
-        <div id='recentChunks5' class='text'></div>
+  <div class='menu7'>
+      <div id='recentChunksTitle' class='text'><b>Recently Unlocked</b></div>
+      <div id='recentChunks1' class='text'></div>
+      <div id='recentChunks2' class='text'></div>
+      <div id='recentChunks3' class='text'></div>
+      <div id='recentChunks4' class='text'></div>
+      <div id='recentChunks5' class='text'></div>
   </div>
+  <div class='menu8'>
+    <div class='infocontent text'>
+      <div class='infostartup'><b>Chunk Info Panel</b>: Right click a chunk to find out more information about it!</div>
+      <div class='infoid'><b>Chunk ID:</b> <span class='infoid-content'>?</span></div>
+      <div class='infoname'><b>Known as:</b> <span class='infoname-content'>?</span></div>
+      <div class='infomonsters'><b>Monsters:</b> <span class='infomonsters-content'>?</span></div>
+      <div class='infonpcs'><b>Notable NPCs:</b> <span class='infonpcs-content'>?</span></div>
+      <div class='infoitems'><b>Notable items/drops:</b> <span class='infoitems-content'>?</span></div>
+      <div class='infofeatures'><b>Features:</b> <span class='infofeatures-content'>?</span></div>
+      <div class='infoquests'><b>Quest progression:</b> <span class='infoquests-content'>?</span></div>
+      <div class='infocontribute'><i>We need your help to collect chunk data. Help by contributing any chunk information you have <a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><b>here</b></a>.</i></div>
+    </div>
+</div>
   <div>
     <div class="imgDiv" id="imgDiv">
       <img class="map" id="map" src="osrs_world_map.png">
@@ -127,6 +140,7 @@
     <div class='item roll2toggle item-off' onclick="toggleRoll2()">Roll 2<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
     <div class='item unpicktoggle item-off' onclick="toggleUnpick()">Unpick chunk<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
     <div class='item recenttoggle item-off' onclick="toggleRecent()">Recent chunks<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
+    <div class='item infotoggle item-off' onclick="toggleChunkInfo()">Chunk Info Panel<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
   </div>
 </div>
 
