@@ -1341,8 +1341,8 @@ var loadData = function() {
             return item.indexOf('highvis=true') >= 0
         }).length > 0;
         settings['info'] = document.cookie.split(';').filter(function(item) {
-            return !(item.indexOf('info=false') >= 0)
-        }).length > 0;
+            return item.indexOf('info=false') >= 0
+        }).length <= 0;
         
         for (let count = 1; count <= 5; count++) {
             !recent[count - 1] && (recent[count - 1] = null);
