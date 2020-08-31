@@ -1026,6 +1026,7 @@ var toggleVisibility = function() {
 // Toggles the chunk info panel
 var toggleChunkInfo = function(extra) {
     chunkInfoOn = !chunkInfoOn;
+    setCookies();
     chunkInfoOn ? $('.menu8').show() : $('.menu8').hide();
     extra !== 'startup' && $('menu8').css('opacity', 1);
     $('.infotoggle').toggleClass('item-off item-on');
@@ -1033,7 +1034,6 @@ var toggleChunkInfo = function(extra) {
     databaseRef.child('chunkinfo').once('value', function(snap) {
         chunkInfo = snap.val();
     });
-    extra !== 'startup' && !locked && setCookies();
 }
 
 // Toggles the visibility of the roll2 button
