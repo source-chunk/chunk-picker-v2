@@ -18,7 +18,7 @@ var roll2On = false;                                                            
 var unpickOn = false;                                                           // Is the unpick button enabled
 var recentOn = false;                                                           // Is the recent chunks section enabled
 var chunkInfoOn = false;                                                        // Is the chunk info panel enabled
-var leaderboardEnabled = false;                                                 // Is leaderboard tracking enabled
+var highscoreEnabled = false;                                                   // Is highscore tracking enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
 var recent = [];                                                                // Recently picked chunks
 var zoom = 350;                                                                 // Starting zoom value
@@ -37,6 +37,7 @@ var clickX;                                                                     
 var clickY;                                                                     // Spot clicked y-value
 var chunkInfo = {};                                                             // Data of all chunk info
 var infoLockedId = -1;                                                          // Id of chunk locked for info
+var userName = '';                                                              // Runescape Username of user
 
 var ratio = 4800 / 8256;                                                        // Image ratio
 var movedNum = 0;                                                               // Amount of times mouse is moved while dragging
@@ -66,6 +67,8 @@ var locked;                                                                     
 var lockBoxOpen = false;                                                        // Is the lock box open
 var inEntry = false;                                                            // Is the entry menu open
 var importMenuOpen = false;                                                     // Is the import menu open
+var highscoreMenuOpen = false;                                                  // Is the highscores menu open
+var stickerMenuOpen = false;                                                    // Is the sticker menu open
 
 var databaseRef = firebase.database().ref();                                    // Firebase database reference
 var myRef;                                                                      // Firebase database reference for this map ID
@@ -89,7 +92,7 @@ window.addEventListener('contextmenu', function (e) {
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !stickerMenuOpen) {
         clickX = ev.changedPointers[0].pageX;
         clickY = ev.changedPointers[0].pageY;
     }
@@ -97,7 +100,7 @@ hammertime.on('panstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 hammertime.on('panend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !stickerMenuOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -105,7 +108,7 @@ hammertime.on('panend', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
 hammertime.on('panleft panright panup pandown', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !stickerMenuOpen) {
         updateScrollPos(ev.changedPointers[0]);
     }
 });
@@ -240,6 +243,14 @@ $(document).ready(function() {
             $('#import2').prop('disabled', false);
         }
     });
+
+    $('.username').on('input', function(e) {
+        if (e.target.value.length < 1) {
+            $('#highscoreoptin').prop('disabled', true);
+        } else {
+            $('#highscoreoptin').prop('disabled', false);
+        }
+    });
     
     $('.mid').on('keypress', function(e) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -304,6 +315,13 @@ $(document).ready(function() {
         }
     });
 
+    $('.username').on('keypress', function(e) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13' && !$('#highscoreoptin').prop('disabled')) {
+            $('#highscoreoptin').click();	
+        }
+    });
+
     $('.lock-closed').hover(function () {
         $(this).removeClass('zmdi-lock').addClass('zmdi-lock-open');
     }, function () {
@@ -314,7 +332,7 @@ $(document).ready(function() {
 // Credit to Amehzyn
 // Handles zooming
 $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
-    if (atHome || inEntry || importMenuOpen) {
+    if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || stickerMenuOpen) {
         e.preventDefault();
         return;
     }
@@ -379,7 +397,7 @@ $(document).on({
             $('.escape-hint').hide();
             $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .topnav, #beta').show();
             settings();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32)) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !stickerMenuOpen) {
             e.preventDefault();
         }
     }
@@ -393,7 +411,7 @@ $(document).on('mouseleave', '.recent', function() {
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || stickerMenuOpen) {
             return;
         }
         if (clicked) {
@@ -404,7 +422,7 @@ $(document).on({
         }
     },
     'mousedown': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || stickerMenuOpen) {
             return;
         }
         clicked = true;
@@ -414,7 +432,7 @@ $(document).on({
         clickY = e.pageY;
     },
     'mouseup': function(e) {
-        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen) {
+        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || stickerMenuOpen) {
             return;
         } else if (e.button === 2) {
             if ($(e.target).hasClass('box')) {
@@ -538,7 +556,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function() {
-    if (locked || importMenuOpen) {
+    if (locked || importMenuOpen || highscoreMenuOpen || stickerMenuOpen) {
         return;
     }
     var el;
@@ -586,7 +604,7 @@ var pick = function() {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2 = function() {
-    if (locked || importMenuOpen) {
+    if (locked || importMenuOpen || highscoreMenuOpen || stickerMenuOpen) {
         return;
     }
     isPicking = true;
@@ -750,7 +768,7 @@ var importFromURL = function() {
             $('.import').animate({'opacity': 1});
             setTimeout(function() {
                 $('#import-menu').css('opacity', 1);
-                $('#import2').prop('disabled', false).html('Unlock');
+                $('#import2').prop('disabled', true).html('Unlock');
                 $('.url').val('');
                 importMenuOpen = false;
             }, 500);
@@ -771,11 +789,80 @@ var exitImportMenu = function() {
     $('.import').animate({'opacity': 1});
     setTimeout(function() {
         $('#import-menu').css('opacity', 1);
-        $('#import2').prop('disabled', false).html('Unlock');
+        $('#import2').prop('disabled', true).html('Unlock');
         $('.url').val('');
         $('.url').removeClass('wrong');
         $('.url-err').css('visibility', 'hidden');
         importMenuOpen = false;
+    }, 500);
+}
+
+// Opens the highscores menu
+var highscoreFunc = function() {
+    $('#highscore-menu').show();
+    $('.username').focus();
+    highscoreMenuOpen = true;
+    $('#highscore-menu').css('opacity', 1).show();
+    settings();
+}
+
+// Sets username for the highscores
+var highscoreOptIn = function() {
+    $('#highscoreoptin').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    let oldUsername = userName;
+    userName = $('.username').val();
+    setTimeout(function() {
+        setUsername(oldUsername);
+        $('.highscoretoggle').text('Change highscores username');
+        $('#highscore-menu').css({'opacity': 0}).hide();
+        setTimeout(function() {
+            $('#highscore-menu').css('opacity', 1);
+            $('#highscoreoptin').prop('disabled', true).html('Save Username');
+            $('.username').val('');
+            highscoreMenuOpen = false;
+        }, 500);
+    }, 1000);
+}
+
+// Exits the highscores menu
+var exitHighscoreMenu = function() {
+    $('#highscore-menu').css({'opacity': 0}).hide();
+    setTimeout(function() {
+        $('#highscore-menu').css('opacity', 1);
+        $('#highscoreoptin').prop('disabled', true).html('Save Username');
+        $('.username').val('');
+        highscoreMenuOpen = false;
+    }, 500);
+}
+
+// Opens the sticker menu
+var stickerFunc = function() {
+    $('#sticker-menu').show();
+    stickerMenuOpen = true;
+    $('#sticker-menu').css('opacity', 1).show();
+    settings();
+}
+
+// Sets stickers
+var stickerFunc2 = function() {
+    $('#sticker2').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    setTimeout(function() {
+        $('#sticker-menu').css({'opacity': 0}).hide();
+        setTimeout(function() {
+            $('#sticker-menu').css('opacity', 1);
+            $('#sticker2').prop('disabled', true).html('Done');
+            stickerMenuOpen = false;
+        }, 500);
+    }, 1000);
+}
+
+// Exits the sticker menu
+var exitStickerMenu = function() {
+    $('#sticker-menu').css({'opacity': 0}).hide();
+    setTimeout(function() {
+        $('#sticker-menu').css('opacity', 1);
+        $('#sticker2').prop('disabled', true).html('Done');
+        stickerMenuOpen = false;
     }, 500);
 }
 
@@ -799,7 +886,7 @@ var unlockEntry = function() {
             } else {
                 firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
                 $('.center').css('top', '15vw');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).show();
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .stickertoggle').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                 chunkInfoOn && $('.menu8').css('opacity', 0).show();
@@ -807,7 +894,7 @@ var unlockEntry = function() {
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
                     $('.pin.entry').val('');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').animate({'opacity': 1});
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .stickertoggle').animate({'opacity': 1});
                     !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                     !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                     chunkInfoOn && $('.menu8').animate({'opacity': 1});
@@ -970,7 +1057,7 @@ var changePin = function() {
 
 // Unpicks a random unlocked chunk
 var unpick = function() {
-    if (locked || importMenuOpen) {
+    if (locked || importMenuOpen || highscoreMenuOpen || stickerMenuOpen) {
         return;
     }
     var el = $('.unlocked');
@@ -1066,11 +1153,10 @@ var toggleRecent = function(extra) {
     extra !== 'startup' && !locked && setData();
 }
 
-// Enabled leaderboard tracking
-var enableLeaderboard = function(extra) {
-    if (!leaderboardEnabled) {
-        leaderboardEnabled = true;
-        $('.leaderboardtoggle').text('Leaderboard enabled').addClass('blank');
+// Enabled highscore tracking
+var enableHighscore = function(extra) {
+    if (!highscoreEnabled) {
+        highscoreEnabled = true;
         extra !== 'startup' && !locked && setData();
     }
 }
@@ -1098,7 +1184,7 @@ var doneLoading = function() {
         $('.pick, .roll2, .unpick').css({'height': '20px', 'width': '90px', 'font-size': '12px'});
         $('.menu2, .menu6, .menu7, .menu8, .settings').hide().remove();
         $('.hr').css({'width': '25px'});
-        $('.goleaderboard').css({'right': '3vw', 'left': 'auto'});
+        $('.gohighscore').css({'right': '3vw', 'left': 'auto'});
         $('.block, .block > .title').css({'font-size': '18px'});
         $('.block > button').css({'font-size': '10px'});
         $('.menu3').css({'width': '110px', 'height': '15px'});
@@ -1116,9 +1202,9 @@ var setupMap = function() {
     if (!atHome) {
         setTimeout(doneLoading, 1500);
         $('.body').show();
-        $('#page1, #page1extra, #import-menu').hide();
+        $('#page1, #page1extra, #import-menu, #highscore-menu, #sticker-menu').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .stickertoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -1129,7 +1215,7 @@ var setupMap = function() {
         if (locked === undefined) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .stickertoggle').css('opacity', 0).hide();
             $('.center').css('top', '0vw');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -1236,7 +1322,7 @@ var fixNums = function(num) {
 
 // Update chunk info
 var updateChunkInfo = function() {
-    if (!inEntry && !importMenuOpen) {
+    if (!inEntry && !importMenuOpen && !highscoreMenuOpen && !stickerMenuOpen) {
         let id = -1;
         if (infoLockedId > 0) {
             id = infoLockedId;
@@ -1271,23 +1357,6 @@ var updateChunkInfo = function() {
     }
 }
 
-// Gets data from all maps and creates leaderboard
-var createLeaderboard = function() {
-    databaseRef.child('leaderboard').once('value', function(snap) {
-        let result = [];
-        for (var i in snap.val()) {
-            result.push({...snap.val()[i], id: i});
-        }
-        result.sort((a, b) => b.chunks - a.chunks);
-        let rank = 0;
-        result.forEach((d) => {
-            rank++;
-            $('.rank-rows').append('<tr><th>' + rank + '.</th><th><a href=\'https://source-chunk.github.io/chunk-picker-v2/?' + d.id + '\'>' + d.id.toUpperCase() + '</a></th> <th>' + d.chunks + '</th></tr>')
-        });
-        $('.loading, .ui-loader-header').remove();
-    });
-}
-
 // Checks the MID from the url
 var checkMID = function(mid) {
     if (mid === 'change-pin') {
@@ -1296,11 +1365,6 @@ var checkMID = function(mid) {
         $('#home-menu').hide();
         $('#pin-menu').show();
         $('.mid-old').focus();
-    } else if (mid === 'leaderboard') {
-        atHome = true;
-        $('#home-menu').hide();
-        $('#leaderboard-menu').show();
-        createLeaderboard();
     } else if (mid) {
         if (mid.split('-')[1] === 'view') {
             mid = mid.split('-')[0];
@@ -1341,8 +1405,8 @@ var loadData = function() {
             return item.indexOf('highvis=true') >= 0
         }).length > 0;
         settings['info'] = document.cookie.split(';').filter(function(item) {
-            return item.indexOf('info=false') >= 0
-        }).length <= 0;
+            return item.indexOf('info=true') >= 0
+        }).length > 0;
         
         for (let count = 1; count <= 5; count++) {
             !recent[count - 1] && (recent[count - 1] = null);
@@ -1351,7 +1415,7 @@ var loadData = function() {
 
         settings['neighbors'] && toggleNeighbors('startup');
         settings['remove'] && toggleRemove('startup');
-        settings['leaderboardEnabled'] && enableLeaderboard('startup');
+        settings['highscoreEnabled'] && enableHighscore('startup');
         settings['ids'] && toggleIds() && $('.box').addClass('quality');
         settings['highvis'] && toggleVisibility();
         !settings['ids'] && $('.chunkId').hide();
@@ -1362,6 +1426,11 @@ var loadData = function() {
             settings['recent'] = true;
         }
         settings['recent'] && toggleRecent('startup');
+
+        if (settings['highscoreEnabled']) {
+            userName = snap.val()['userName'];
+            $('.highscoretoggle').text('Change highscores username');
+        }
 
         chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
             picking = true;
@@ -1399,8 +1468,19 @@ var setCookies = function() {
 }
 
 // Stores data in Firebase
+var setUsername = function(old) {
+    myRef.child('userName').set(userName);
+    if (!!old && old !== '') {
+        databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
+    }
+    databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid);
+    highscoreEnabled = true;
+    setData();
+}
+
+// Stores data in Firebase
 var setData = function() {
-    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'leaderboardEnabled': leaderboardEnabled});
+    myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled});
     myRef.update({recent});
 
     var tempJson = {};
@@ -1421,7 +1501,11 @@ var setData = function() {
     });
     myRef.child('chunks/potential').set(tempJson);
 
-    leaderboardEnabled && databaseRef.child('leaderboard/' + mid + '/chunks').set(unlockedChunks);
+    highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
+        mid: mid,
+        name: userName,
+        score: unlockedChunks,
+    });
 }
 
 // Credit to Amehzyn
@@ -1531,14 +1615,14 @@ var changeLocked = function(lock) {
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             $('.center').css('top', '15vw');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').css('opacity', 0).show();
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .stickertoggle').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
             chunkInfoOn && $('.menu8').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .leaderboardtoggle').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .stickertoggle').animate({'opacity': 1});
                 !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                 chunkInfoOn && $('.menu8').animate({'opacity': 1});
