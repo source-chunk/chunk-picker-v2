@@ -413,6 +413,61 @@ button.menu2 {
     cursor: not-allowed;
 }
 
+.username {
+    margin-top: 25px;
+    font-size: 2vw;
+    border: solid;
+    border-width: 1px;
+}
+
+#highscoreoptin {
+    border: 2px solid rgb(50, 50, 150);
+    background-color: rgb(100, 100, 255);
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 4vw;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    line-height: .75vw;
+}
+
+#highscoreoptin:hover {
+    background-color: rgb(75, 75, 225);
+}
+
+#highscoreoptin:disabled {
+    border: 2px solid rgb(150, 150, 150);
+    background-color: rgb(225, 225, 225);
+    color: black;
+    cursor: not-allowed;
+}
+
+#sticker2 {
+    border: 2px solid rgb(50, 50, 150);
+    background-color: rgb(100, 100, 255);
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 4vw;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    line-height: .75vw;
+}
+
+#sticker2:hover {
+    background-color: rgb(75, 75, 225);
+}
+
+#sticker2:disabled {
+    border: 2px solid rgb(150, 150, 150);
+    background-color: rgb(225, 225, 225);
+    color: black;
+    cursor: not-allowed;
+}
+
 .import {
     background-color: rgb(200, 125, 200);
     width: min(17vw, 150px);
@@ -890,6 +945,32 @@ button.menu2 {
     background-color: white;
 }
 
+.highscore-content {
+    position: absolute;
+    z-index: 9999 !important;
+    border: solid;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    -ms-transform: translate(112.5%, 35%);
+    transform: translate(112.5%, 35%);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: white;
+}
+
+.sticker-content {
+    position: absolute;
+    z-index: 9999 !important;
+    border: solid;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    -ms-transform: translate(112.5%, 35%);
+    transform: translate(112.5%, 35%);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: white;
+}
+
 .home.text {
     font-size: 2vw;
     padding-top: 10px;
@@ -1081,7 +1162,7 @@ button.menu2 {
 .settings-menu {
     z-index: 999 !important;
     display: none;
-    width: min(16vw, 200px);
+    width: min(19vw, 225px);
     font-size: min(1.5vw, 16px);
     background-color: rgb(230, 230, 230);
     position: absolute;
@@ -1206,7 +1287,7 @@ button.menu2 {
     color: rgb(100, 100, 255);
 }
 
-.goleaderboard {
+.gohighscore {
     position: absolute;
     transition-duration: .5s;
     cursor: pointer;
@@ -1214,7 +1295,7 @@ button.menu2 {
     left: 65px;
 }
 
-.goleaderboard:hover {
+.gohighscore:hover {
     color: rgb(100, 100, 255);
 }
 

@@ -33,7 +33,7 @@
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='topnav'>
       <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><i class="gohome zmdi zmdi-home zmdi-hc-3x"></i></a></div>
-      <div><a href='https://source-chunk.github.io/chunk-picker-v2/?leaderboard'><i class="goleaderboard zmdi zmdi-equalizer zmdi-hc-3x"></i></a></div>
+      <div><a href='https://chunk-stats.web.app'><i class="gohighscore zmdi zmdi-equalizer zmdi-hc-3x"></i></a></div>
       <div class='toptitle2'>---</div>
       <div><i class="settings zmdi zmdi-settings zmdi-hc-3x" onclick='settings()'></i></div>
   </div>
@@ -69,6 +69,21 @@
         <input class='url' placeholder='Enter URL' />
         <div class='url-err'>URL is formatted incorrectly.</div>
         <button id='import2' class='button' onclick='importFromURL()' disabled>Import</button>
+      </div>
+    </div>
+  </div>
+  <div id='highscore-menu'>
+    <div class='highscore-content'>
+      <span class='exit' onclick='exitHighscoreMenu()'><i class="zmdi zmdi-close zmdi-hc-lg"></i></span>
+      <div class='block'>
+        <div class='title'>Opt-in to Chunkman Highscores</div>
+      </div>
+      <div class='block'>
+        <p class='description'>
+          Opting in to the highscores allows you to be ranked on the chunkman highscores (separate from the official osrs hiscores). Your in-game username must be provided for the highscores lookup.
+        </p>
+        <input class='username' placeholder='Runescape Username' />
+        <button id='highscoreoptin' class='button' onclick='highscoreOptIn()' disabled>Save Username</button>
       </div>
     </div>
   </div>
@@ -133,7 +148,7 @@
     </div>
   </div>
   <div class='settings-menu'>
-    <div class='item leaderboardtoggle' onclick="enableLeaderboard()">Opt-in to leaderboard<i class="pic zmdi zmdi-equalizer zmdi-hc-lg"></i></div>
+    <div class='item highscoretoggle' onclick="highscoreFunc()">Opt-in to highscores<i class="pic zmdi zmdi-equalizer zmdi-hc-lg"></i></div>
     <a class='none' href='https://source-chunk.github.io/chunk-picker-v2/?change-pin'><div class='item'>Change PIN<i class="pic zmdi zmdi-edit zmdi-hc-lg"></i></div></a>
     <div class='item' onclick="enableScreenshotMode()">Screenshot mode<i class="pic zmdi zmdi-camera zmdi-hc-lg"></i></div>
     <div class='item visibilitytoggle item-off' onclick="toggleVisibility()">High visibility mode<i class="pic zmdi zmdi-brightness-7 zmdi-hc-lg"></i></div>
@@ -161,7 +176,7 @@
   </div>
   <div id='page1extra' class='content'>
     <div class='block'>
-      <a href='https://source-chunk.github.io/chunk-picker-v2/?leaderboard' target='_blank'><button id='leader' class='button'>Leaderboard</button></a>
+      <a href='https://chunk-stats.web.app' target='_blank'><button id='leader' class='button'>Highscores</button></a>
     </div>
   </div>
   <div id='page2a' class='content2a' style="display:none">
@@ -214,20 +229,5 @@
     <div class='home text2'>New PIN:</div>
     <input class='pin old2 second' placeholder='PIN' />
     <button id='change-pin' class='button' onclick='changePin()' disabled>Change PIN</button>
-  </div>
-</div>
-
-<div id='leaderboard-menu' style="display:none">
-  <div id='page9' class='content9'>
-    <div class='block'>
-      <div class='title'>Leaderboard</div>
-      <table class='rank-rows'>
-        <tr>
-          <th>Rank</th>
-          <th>Map ID</th>
-          <th># of Chunks</th>
-        </tr>
-      </table>
-    </div>
   </div>
 </div>
