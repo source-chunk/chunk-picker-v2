@@ -814,11 +814,12 @@ var highscoreOptIn = function() {
         setUsername(oldUsername);
         $('.highscoretoggle').text('Change highscores username');
         $('#highscore-menu').css({'opacity': 0}).hide();
+        $('#highscore-menu2').css({'opacity': 1}).show();
+        $('#populateButton').attr({'href': 'https://chunk-stats.web.app/user/' + userName});
         setTimeout(function() {
             $('#highscore-menu').css('opacity', 1);
             $('#highscoreoptin').prop('disabled', true).html('Save Username');
             $('.username').val('');
-            highscoreMenuOpen = false;
         }, 500);
     }, 1000);
 }
@@ -828,6 +829,17 @@ var exitHighscoreMenu = function() {
     $('#highscore-menu').css({'opacity': 0}).hide();
     setTimeout(function() {
         $('#highscore-menu').css('opacity', 1);
+        $('#highscoreoptin').prop('disabled', true).html('Save Username');
+        $('.username').val('');
+        highscoreMenuOpen = false;
+    }, 500);
+}
+
+// Exits the highscores menu2
+var exitHighscoreMenu2 = function() {
+    $('#highscore-menu2').css({'opacity': 0}).hide();
+    setTimeout(function() {
+        $('#highscore-menu2').css('opacity', 1);
         $('#highscoreoptin').prop('disabled', true).html('Save Username');
         $('.username').val('');
         highscoreMenuOpen = false;
@@ -1170,7 +1182,7 @@ var setupMap = function() {
     if (!atHome) {
         setTimeout(doneLoading, 1500);
         $('.body').show();
-        $('#page1, #page1extra, #import-menu, #highscore-menu').hide();
+        $('#page1, #page1extra, #import-menu, #highscore-menu, #highscore-menu2').hide();
         if (locked) {
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();

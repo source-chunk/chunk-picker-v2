@@ -444,7 +444,11 @@ button.menu2 {
     cursor: not-allowed;
 }
 
-#sticker2 {
+#populateButton {
+    text-decoration: none;
+}
+
+#highscoreoptin2 {
     border: 2px solid rgb(50, 50, 150);
     background-color: rgb(100, 100, 255);
     color: white;
@@ -457,15 +461,8 @@ button.menu2 {
     line-height: .75vw;
 }
 
-#sticker2:hover {
+#highscoreoptin2:hover {
     background-color: rgb(75, 75, 225);
-}
-
-#sticker2:disabled {
-    border: 2px solid rgb(150, 150, 150);
-    background-color: rgb(225, 225, 225);
-    color: black;
-    cursor: not-allowed;
 }
 
 .import {

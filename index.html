@@ -33,7 +33,7 @@
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='topnav'>
       <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><i class="gohome zmdi zmdi-home zmdi-hc-3x"></i></a></div>
-      <div><a href='https://chunk-stats.web.app'><i class="gohighscore zmdi zmdi-equalizer zmdi-hc-3x"></i></a></div>
+      <div><a href='https://chunk-stats.web.app' target='_blank'><i class="gohighscore zmdi zmdi-equalizer zmdi-hc-3x"></i></a></div>
       <div class='toptitle2'>---</div>
       <div><i class="settings zmdi zmdi-settings zmdi-hc-3x" onclick='settings()'></i></div>
   </div>
@@ -84,6 +84,20 @@
         </p>
         <input class='username' placeholder='Runescape Username' />
         <button id='highscoreoptin' class='button' onclick='highscoreOptIn()' disabled>Save Username</button>
+      </div>
+    </div>
+  </div>
+  <div id='highscore-menu2'>
+    <div class='highscore-content'>
+      <span class='exit' onclick='exitHighscoreMenu2()'><i class="zmdi zmdi-close zmdi-hc-lg"></i></span>
+      <div class='block'>
+        <div class='title'>Chunkman Highscores</div>
+      </div>
+      <div class='block'>
+        <p class='description'>
+          Your highscore data will not be populated until you visit your user page. Please click the button below to populate that data. This popup can be safely closed afterwards.
+        </p>
+        <a id='populateButton' target='_blank'><button id='highscoreoptin2' class='button'>Populate data</button></a>
       </div>
     </div>
   </div>
