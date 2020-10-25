@@ -345,7 +345,7 @@ button.menu2 {
     display: none;
     position: fixed;
     z-index: 99 !important;
-    bottom: 55vh;
+    bottom: 60vh;
     right: 10px;
     width: min(25vw, 400px);
     height: 2vw;
@@ -357,7 +357,7 @@ button.menu2 {
 
 .infoid, .infoname, .infomonsters, .infonpcs, .infoitems, .infofeatures, .infoquests {
     display: none;
-    font-size: min(1.5vw, 18px);
+    font-size: min(1.5vw, 14px);
 }
 
 .infocontribute {

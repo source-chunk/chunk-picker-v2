@@ -1098,7 +1098,7 @@ var toggleChunkInfo = function(extra) {
     extra !== 'startup' && $('menu8').css('opacity', 1);
     $('.infotoggle').toggleClass('item-off item-on');
     $('.infotoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
-    databaseRef.child('chunkinfo').once('value', function(snap) {
+    databaseRef.child('chunkinfonew').once('value', function(snap) {
         chunkInfo = snap.val();
     });
 }
@@ -1327,13 +1327,30 @@ var updateChunkInfo = function() {
             $('.infoquests').hide();
             return;
         }
+        let txt1 = '';
+        let txt2 = '';
+        let txt3 = '';
+        if (!!chunkInfo[id] && mid.split('-')[0] === 'dev') {
+            !!chunkInfo[id]['Monster'] && Object.keys(chunkInfo[id]['Monster']).forEach(name => {
+                txt1 += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + name + ', ';
+            });
+            txt1.length > 0 && (txt1 = txt1.substring(0, txt1.length - 2));
+            !!chunkInfo[id]['NPC'] && Object.keys(chunkInfo[id]['NPC']).forEach(name => {
+                txt2 += (chunkInfo[id]['NPC'][name] === 1 ? '' : chunkInfo[id]['NPC'][name] + ' ') + name + ', ';
+            });
+            txt2.length > 0 && (txt2 = txt2.substring(0, txt2.length - 2));
+            !!chunkInfo[id]['Object'] && Object.keys(chunkInfo[id]['Object']).forEach(name => {
+                txt3 += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + name + ', ';
+            });
+            txt3.length > 0 && (txt3 = txt3.substring(0, txt3.length - 2));
+        }
         $('.infoid-content').text(id);
-        $('.infoname-content').text(chunkInfo[id]['infoname'] || '?');
-        $('.infomonsters-content').text(chunkInfo[id]['infomonsters'] || '?');
-        $('.infonpcs-content').text(chunkInfo[id]['infonpcs'] || '?');
-        $('.infoitems-content').text(chunkInfo[id]['infoitems'] || '?');
-        $('.infofeatures-content').text(chunkInfo[id]['infofeatures'] || '?');
-        $('.infoquests-content').text(chunkInfo[id]['infoquests'] || '?');
+        $('.infoname-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoname'] : 'None') || 'None');
+        $('.infomonsters-content').text(txt1.replace(/\%2E/g, '.') || 'None');
+        $('.infonpcs-content').text(txt2.replace(/\%2E/g, '.') || 'None');
+        $('.infoitems-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoitems'] : 'None') || 'None');
+        $('.infofeatures-content').text(txt3.replace(/\%2E/g, '.') || 'None');
+        $('.infoquests-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoquests'] : 'None') || 'None');
     }
 }
 
