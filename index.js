@@ -1466,7 +1466,7 @@ var setCookies = function() {
 
 // Stores data in Firebase
 var setUsername = function(old) {
-    myRef.child('userName').set(userName);
+    myRef.child('userName').set(userName.toLowerCase());
     if (!!old && old !== '') {
         databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
     }
@@ -1500,7 +1500,7 @@ var setData = function() {
 
     highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
         mid: mid,
-        name: userName,
+        name: userName.toLowerCase(),
         score: unlockedChunks,
     });
 }
