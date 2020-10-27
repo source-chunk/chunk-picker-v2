@@ -418,6 +418,7 @@ $(document).on({
             $('.outer').css('cursor', 'grabbing');
             moved = true;
             movedNum++;
+            showChunkIds && $('.chunkId').hide();
         }
     },
     'mousedown': function(e) {
@@ -451,6 +452,7 @@ $(document).on({
         if (movedNum > 1) {
             prevScrollLeft = prevScrollLeft + scrollLeft;
             prevScrollTop = prevScrollTop + scrollTop;
+            showChunkIds && $('.chunkId').show();
         } else if ($(e.target).hasClass('box')) {
             if (locked) {
                 $('.outer').css('cursor', 'default');
@@ -1327,29 +1329,34 @@ var updateChunkInfo = function() {
             $('.infoquests').hide();
             return;
         }
-        let txt1 = '';
-        let txt2 = '';
-        let txt3 = '';
+        let monsterStr = '';
+        let npcStr = '';
+        let objectStr = '';
+        let itemStr = '';
         if (!!chunkInfo[id] && mid.split('-')[0] === 'dev') {
             !!chunkInfo[id]['Monster'] && Object.keys(chunkInfo[id]['Monster']).forEach(name => {
-                txt1 += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + name + ', ';
+                monsterStr += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + name + ', ';
             });
-            txt1.length > 0 && (txt1 = txt1.substring(0, txt1.length - 2));
+            monsterStr.length > 0 && (monsterStr = monsterStr.substring(0, monsterStr.length - 2));
             !!chunkInfo[id]['NPC'] && Object.keys(chunkInfo[id]['NPC']).forEach(name => {
-                txt2 += (chunkInfo[id]['NPC'][name] === 1 ? '' : chunkInfo[id]['NPC'][name] + ' ') + name + ', ';
+                npcStr += (chunkInfo[id]['NPC'][name] === 1 ? '' : chunkInfo[id]['NPC'][name] + ' ') + name + ', ';
             });
-            txt2.length > 0 && (txt2 = txt2.substring(0, txt2.length - 2));
+            npcStr.length > 0 && (npcStr = npcStr.substring(0, npcStr.length - 2));
             !!chunkInfo[id]['Object'] && Object.keys(chunkInfo[id]['Object']).forEach(name => {
-                txt3 += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + name + ', ';
+                objectStr += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + name + ', ';
             });
-            txt3.length > 0 && (txt3 = txt3.substring(0, txt3.length - 2));
+            objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
+            !!chunkInfo[id]['Item'] && Object.keys(chunkInfo[id]['Item']).forEach(name => {
+                itemStr += (chunkInfo[id]['Item'][name] === 1 ? '' : chunkInfo[id]['Item'][name] + ' ') + name + ', ';
+            });
+            itemStr.length > 0 && (itemStr = itemStr.substring(0, itemStr.length - 2));
         }
         $('.infoid-content').text(id);
         $('.infoname-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoname'] : 'None') || 'None');
-        $('.infomonsters-content').text(txt1.replace(/\%2E/g, '.') || 'None');
-        $('.infonpcs-content').text(txt2.replace(/\%2E/g, '.') || 'None');
-        $('.infoitems-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoitems'] : 'None') || 'None');
-        $('.infofeatures-content').text(txt3.replace(/\%2E/g, '.') || 'None');
+        $('.infomonsters-content').text(monsterStr.replace(/\%2E/g, '.') || 'None');
+        $('.infonpcs-content').text(npcStr.replace(/\%2E/g, '.') || 'None');
+        $('.infoitems-content').text(itemStr.replace(/\%2E/g, '.') || 'None');
+        $('.infofeatures-content').text(objectStr.replace(/\%2E/g, '.') || 'None');
         $('.infoquests-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoquests'] : 'None') || 'None');
     }
 }
