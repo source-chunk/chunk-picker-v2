@@ -1315,7 +1315,8 @@ var updateChunkInfo = function() {
             $('.infoname').show();
             $('.infomonsters').show();
             $('.infonpcs').show();
-            $('.infoitems').show();
+            $('.infospawns').show();
+            $('.infoshops').show();
             $('.infofeatures').show();
             $('.infoquests').show();
         } else if (id === -1) {
@@ -1324,7 +1325,8 @@ var updateChunkInfo = function() {
             $('.infoname').hide();
             $('.infomonsters').hide();
             $('.infonpcs').hide();
-            $('.infoitems').hide();
+            $('.infospawns').show();
+            $('.infoshops').hide();
             $('.infofeatures').hide();
             $('.infoquests').hide();
             return;
@@ -1332,7 +1334,8 @@ var updateChunkInfo = function() {
         let monsterStr = '';
         let npcStr = '';
         let objectStr = '';
-        let itemStr = '';
+        let spawnStr = '';
+        let shopStr = '';
         if (!!chunkInfo[id] && mid.split('-')[0] === 'dev') {
             !!chunkInfo[id]['Monster'] && Object.keys(chunkInfo[id]['Monster']).forEach(name => {
                 monsterStr += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + name + ', ';
@@ -1346,18 +1349,22 @@ var updateChunkInfo = function() {
                 objectStr += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + name + ', ';
             });
             objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
-            !!chunkInfo[id]['Item'] && Object.keys(chunkInfo[id]['Item']).forEach(name => {
-                itemStr += (chunkInfo[id]['Item'][name] === 1 ? '' : chunkInfo[id]['Item'][name] + ' ') + name + ', ';
+            !!chunkInfo[id]['Spawn'] && Object.keys(chunkInfo[id]['Spawn']).forEach(name => {
+                spawnStr += (chunkInfo[id]['Spawn'][name] === 1 ? '' : chunkInfo[id]['Spawn'][name] + ' ') + name + ', ';
             });
-            itemStr.length > 0 && (itemStr = itemStr.substring(0, itemStr.length - 2));
+            spawnStr.length > 0 && (spawnStr = spawnStr.substring(0, spawnStr.length - 2));
+            !!chunkInfo[id]['Shop'] && Object.keys(chunkInfo[id]['Shop']).forEach(name => {
+                shopStr += name + ', ';
+            });
+            shopStr.length > 0 && (shopStr = shopStr.substring(0, shopStr.length - 2));
         }
         $('.infoid-content').text(id);
         $('.infoname-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoname'] : 'None') || 'None');
-        $('.infomonsters-content').text(monsterStr.replace(/\%2E/g, '.') || 'None');
-        $('.infonpcs-content').text(npcStr.replace(/\%2E/g, '.') || 'None');
-        $('.infoitems-content').text(itemStr.replace(/\%2E/g, '.') || 'None');
-        $('.infofeatures-content').text(objectStr.replace(/\%2E/g, '.') || 'None');
-        $('.infoquests-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoquests'] : 'None') || 'None');
+        $('.infomonsters-content').text(monsterStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.infonpcs-content').text(npcStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.infospawns-content').text(spawnStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.infoshops-content').text(shopStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.infofeatures-content').text(objectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
     }
 }
 

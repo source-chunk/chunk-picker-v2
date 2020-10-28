@@ -355,7 +355,7 @@ button.menu2 {
     font-size: min(1.5vw, 22px);
 }
 
-.infoid, .infoname, .infomonsters, .infonpcs, .infoitems, .infofeatures, .infoquests {
+.infoid, .infoname, .infomonsters, .infonpcs, .infospawns, .infoshops, .infofeatures, .infoquests {
     display: none;
     font-size: min(1.5vw, 14px);
 }
