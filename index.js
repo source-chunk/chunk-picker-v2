@@ -497,6 +497,7 @@ $(document).on({
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
                 let tempChunk1;
                 let tempChunk2;
+                myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
                 for (let count = 1; count <= 5; count++) {
                     tempChunk1 = recent[count - 1];
                     if (count === 1) {
@@ -593,6 +594,7 @@ var pick = function() {
     !showChunkIds && $('.chunkId').hide();
     let tempChunk1;
     let tempChunk2;
+    myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
     for (let count = 1; count <= 5; count++) {
         tempChunk1 = recent[count - 1];
         if (count === 1) {
