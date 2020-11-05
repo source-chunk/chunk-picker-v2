@@ -432,6 +432,7 @@ $(document).on({
         clickY = e.pageY;
     },
     'mouseup': function(e) {
+        let tempClicked = clicked;
         if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen) {
             return;
         } else if (e.button === 2) {
@@ -455,6 +456,9 @@ $(document).on({
             showChunkIds && $('.chunkId').show();
         } else if ($(e.target).hasClass('box')) {
             if (locked) {
+                if (!tempClicked) {
+                    return;
+                }
                 $('.outer').css('cursor', 'default');
                 if (lockBoxOpen) {
                     closePinBox();
@@ -1194,7 +1198,7 @@ var setupMap = function() {
         } else {
             $('.center').css('top', '15vw');
         }
-        if (locked === undefined) {
+        if (locked === undefined || locked) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).hide();
@@ -1387,7 +1391,7 @@ var checkMID = function(mid) {
                 myRef = firebase.database().ref('maps/' + mid);
                 atHome = false;
                 $('.background-img').hide();
-                inEntry = true;
+                inEntry = true && !viewOnly;
             } else {
                 window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', window.location.href.split('?')[0]);
                 atHome = true;
