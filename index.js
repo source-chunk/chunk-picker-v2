@@ -427,7 +427,6 @@ $(document).on({
             $('.outer').css('cursor', 'grabbing');
             moved = true;
             movedNum++;
-            showChunkIds && $('.chunkId').hide();
         }
     },
     'mousedown': function(e) {
@@ -462,7 +461,6 @@ $(document).on({
         if (movedNum > 1) {
             prevScrollLeft = prevScrollLeft + scrollLeft;
             prevScrollTop = prevScrollTop + scrollTop;
-            showChunkIds && $('.chunkId').show();
         } else if ($(e.target).hasClass('box')) {
             if (locked) {
                 if (!tempClicked) {
