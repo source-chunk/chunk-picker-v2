@@ -55,7 +55,7 @@ a, a:visited {
 }
 
 .box {
-    box-shadow: inset .075vw .075vw .075vw .075vw gray;
+    box-shadow: inset 0vw 0vw 0vw .075vw gray;
     display: inline-grid;
     background-color: transparent;
     color: rgba(255, 255, 255, 0);
@@ -73,7 +73,7 @@ a, a:visited {
 
 .potential {
     background-color: rgba(255, 255, 100, .5);
-    box-shadow: inset .075vw .075vw .075vw .075vw black;
+    box-shadow: inset 0vw 0vw 0vw .075vw black;
 }
 
 .potential.visible {
@@ -83,7 +83,7 @@ a, a:visited {
 
 .selected {
     background-color: rgba(100, 255, 100, .5);
-    box-shadow: inset .075vw .075vw .075vw .075vw black;
+    box-shadow: inset 0vw 0vw 0vw .075vw black;
 }
 
 .selected.visible {
@@ -92,12 +92,12 @@ a, a:visited {
 }
 
 .gray {
-    background-color: rgba(150, 150, 150, .75);
-    box-shadow: inset .075vw .075vw .075vw .075vw black;
+    background-color: rgba(150, 150, 150, .6);
+    box-shadow: inset 0vw 0vw 0vw .075vw black;
 }
 
 .gray.visible {
-    background-color: rgba(150, 150, 150, .5);
+    background-color: rgba(150, 150, 150, .4);
     box-shadow: inset .025vw .025vw .025vw .025vw black;
 }
 
@@ -110,7 +110,7 @@ a, a:visited {
 }
 
 .gray:not(.visible):hover {
-    background-color: rgba(150, 150, 150, .5);
+    background-color: rgba(150, 150, 150, .4);
 }
 
 .recent.unlocked:not(.mobile), .recent.potential:not(.mobile) {
@@ -125,12 +125,12 @@ a, a:visited {
 
 .box.locked {
     background-color: rgba(0, 255, 255, .33);
-    border: solid 3px rgb(0, 170, 170) !important;
+    box-shadow: inset 0vw 0vw 0vw .15vw rgb(0, 170, 170);
 }
 
 .box.locked.visible {
     background-color: rgba(0, 255, 255, .25);
-    border: solid 3px rgb(0, 170, 170) !important;
+    box-shadow: inset 0vw 0vw 0vw .05vw rgb(0, 170, 170);
 }
 
 .box.locked:hover {
@@ -296,7 +296,7 @@ button.menu2 {
     position: fixed;
     z-index: 99 !important;
     bottom: min(3.5vw, 30px);
-    right: 10px;
+    left: 10px;
     width: min(15vw, 200px);
     height: 2vw;
 }
@@ -329,6 +329,7 @@ button.menu2 {
     bottom: min(11vw, 130px);
     width: min(14vw, 175px);
     height: 2vw;
+    right: 10px;
 }
 
 #recentChunksTitle {
@@ -345,19 +346,23 @@ button.menu2 {
     display: none;
     position: fixed;
     z-index: 99 !important;
-    bottom: 60vh;
-    right: 10px;
+    top: 25vh;
+    left: 10px;
     width: min(25vw, 400px);
     height: 2vw;
 }
 
 .infostartup {
     font-size: min(1.5vw, 22px);
+    margin-right: 15px;
 }
 
-.infoid, .infoname, .infomonsters, .infonpcs, .infospawns, .infoshops, .infofeatures, .infoquests {
+.infoid, #infomonsters, #infonpcs, #infospawns, #infoshops, #infofeatures, #infoquests {
     display: none;
-    font-size: min(1.5vw, 14px);
+}
+
+.infoid {
+    font-size: 24px;
 }
 
 .infocontribute {
@@ -1350,4 +1355,45 @@ button.menu2 {
 .blank {
     cursor: default;
     background-color: rgb(200, 200, 200);
+}
+
+.panel:not(.visible) {
+    max-height: 0;
+    overflow: hidden;
+}
+
+.panel.visible {
+    max-height: 500px;
+    font-size: min(1.5vw, 18px);
+    text-align: left;
+    padding-left: 10px;
+}
+
+.exp {
+    display: inline-block;
+    min-width: 20px;
+    padding-right: 10px;
+}
+
+.accordion {
+    border-top: solid 1px;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 24px;
+    transition: 0.4s;
+    text-align: left;
+    padding-left: 25px;
+}
+
+.accordion:hover {
+    background-color: rgb(150, 150, 150);
+}
+
+.panel-close {
+    cursor: pointer;
+    margin-top: 0px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }

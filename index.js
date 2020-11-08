@@ -69,6 +69,15 @@ var inEntry = false;                                                            
 var importMenuOpen = false;                                                     // Is the import menu open
 var highscoreMenuOpen = false;                                                  // Is the highscores menu open
 
+var panelVis = {
+    monsters: false,
+    npcs: false,
+    spawns: false,
+    shops: false,
+    features: false,
+    quests: false
+};                                                                              // JSON showing state of which chunk info panels are open/closed
+
 var databaseRef = firebase.database().ref();                                    // Firebase database reference
 var myRef;                                                                      // Firebase database reference for this map ID
 
@@ -873,7 +882,7 @@ var unlockEntry = function() {
                 $('#unlock-entry').prop('disabled', true).html('Unlock');
             } else {
                 firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
-                $('.center').css('top', '15vw');
+                $('.center').css('margin-top', '15px');
                 $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
@@ -1106,9 +1115,6 @@ var toggleChunkInfo = function(extra) {
     extra !== 'startup' && $('menu8').css('opacity', 1);
     $('.infotoggle').toggleClass('item-off item-on');
     $('.infotoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
-    databaseRef.child('chunkinfonew').once('value', function(snap) {
-        chunkInfo = snap.val();
-    });
 }
 
 // Toggles the visibility of the roll2 button
@@ -1159,6 +1165,21 @@ var recentChunk = function(el) {
     scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
 }
 
+// Toggles the accordion panels of the chunk info panel
+var togglePanel = function(pnl) {
+    panelVis[pnl] = !panelVis[pnl];
+    Object.keys(panelVis).forEach(uniqKey => {
+      if (uniqKey === pnl) {
+        panelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
+        panelVis[pnl] ? $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i>') : $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+      } else {
+        $('.panel-' + uniqKey).removeClass('visible');
+        $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+        panelVis[uniqKey] = false;
+      }
+    });
+}
+
 // ----------------------------------------------------------
 
 // Other Functions
@@ -1194,17 +1215,17 @@ var setupMap = function() {
         if (locked) {
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
-            $('.center').css('top', '0vw');
+            $('.center').css('margin-top', '0px');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
         } else {
-            $('.center').css('top', '15vw');
+            $('.center').css('margin-top', '15px');
         }
         if (locked === undefined || locked) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).hide();
-            $('.center').css('top', '0vw');
+            $('.center').css('margin-top', '0px');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
@@ -1315,26 +1336,38 @@ var updateChunkInfo = function() {
         if (infoLockedId > 0) {
             id = infoLockedId;
         }
+        let visible = '';
+        Object.keys(panelVis).forEach(id => {
+            if (panelVis[id]) {
+                visible = id;
+            }
+        });
         if ($('.infoid').is(':hidden') && id > 0) {
             $('.infostartup').hide();
             $('.infoid').show();
-            $('.infoname').show();
-            $('.infomonsters').show();
-            $('.infonpcs').show();
-            $('.infospawns').show();
-            $('.infoshops').show();
-            $('.infofeatures').show();
-            $('.infoquests').show();
+            $('#infoname').show();
+            $('#infomonsters').show();
+            $('#infonpcs').show();
+            $('#infospawns').show();
+            $('#infoshops').show();
+            $('#infofeatures').show();
+            $('#infoquests').show();
+            if (visible !== '') {
+                $('.panel-' + visible).show();
+            }
         } else if (id === -1) {
             $('.infostartup').show();
             $('.infoid').hide();
-            $('.infoname').hide();
-            $('.infomonsters').hide();
-            $('.infonpcs').hide();
-            $('.infospawns').show();
-            $('.infoshops').hide();
-            $('.infofeatures').hide();
-            $('.infoquests').hide();
+            $('#infoname').hide();
+            $('#infomonsters').hide();
+            $('#infonpcs').hide();
+            $('#infospawns').hide();
+            $('#infoshops').hide();
+            $('#infofeatures').hide();
+            $('#infoquests').hide();
+            if (visible !== '') {
+                $('.panel-' + visible).hide();
+            }
             return;
         }
         let monsterStr = '';
@@ -1342,35 +1375,40 @@ var updateChunkInfo = function() {
         let objectStr = '';
         let spawnStr = '';
         let shopStr = '';
-        if (!!chunkInfo[id] && mid.split('-')[0] === 'dev') {
+        let questStr = '';
+        if (!!chunkInfo[id]) {
             !!chunkInfo[id]['Monster'] && Object.keys(chunkInfo[id]['Monster']).forEach(name => {
-                monsterStr += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + name + ', ';
+                monsterStr += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name)} target="_blank">` + name + '</a>, ';
             });
             monsterStr.length > 0 && (monsterStr = monsterStr.substring(0, monsterStr.length - 2));
             !!chunkInfo[id]['NPC'] && Object.keys(chunkInfo[id]['NPC']).forEach(name => {
-                npcStr += (chunkInfo[id]['NPC'][name] === 1 ? '' : chunkInfo[id]['NPC'][name] + ' ') + name + ', ';
+                npcStr += (chunkInfo[id]['NPC'][name] === 1 ? '' : chunkInfo[id]['NPC'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name)} target="_blank">` + name + '</a>, ';
             });
             npcStr.length > 0 && (npcStr = npcStr.substring(0, npcStr.length - 2));
-            !!chunkInfo[id]['Object'] && Object.keys(chunkInfo[id]['Object']).forEach(name => {
-                objectStr += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + name + ', ';
-            });
-            objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
             !!chunkInfo[id]['Spawn'] && Object.keys(chunkInfo[id]['Spawn']).forEach(name => {
-                spawnStr += (chunkInfo[id]['Spawn'][name] === 1 ? '' : chunkInfo[id]['Spawn'][name] + ' ') + name + ', ';
+                spawnStr += (chunkInfo[id]['Spawn'][name] === 1 ? '' : chunkInfo[id]['Spawn'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name)} target="_blank">` + name + '</a>, ';
             });
             spawnStr.length > 0 && (spawnStr = spawnStr.substring(0, spawnStr.length - 2));
             !!chunkInfo[id]['Shop'] && Object.keys(chunkInfo[id]['Shop']).forEach(name => {
-                shopStr += name + ', ';
+                shopStr += `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name)} target="_blank">` + name + '</a>, ';
             });
             shopStr.length > 0 && (shopStr = shopStr.substring(0, shopStr.length - 2));
+            !!chunkInfo[id]['Object'] && Object.keys(chunkInfo[id]['Object']).forEach(name => {
+                objectStr += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name)} target="_blank">` + name + '</a>, ';
+            });
+            objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
+            !!chunkInfo[id]['Quest'] && Object.keys(chunkInfo[id]['Quest']).forEach(name => {
+                questStr += (chunkInfo[id]['Quest'][name] === 1 ? '' : chunkInfo[id]['Quest'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name)} target="_blank">` + name + '</a>, ';
+            });
+            questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
         }
-        $('.infoid-content').text(id);
-        $('.infoname-content').text((!!chunkInfo[id] ? chunkInfo[id]['infoname'] : 'None') || 'None');
-        $('.infomonsters-content').text(monsterStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
-        $('.infonpcs-content').text(npcStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
-        $('.infospawns-content').text(spawnStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
-        $('.infoshops-content').text(shopStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
-        $('.infofeatures-content').text(objectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.infoid-content').html(id);
+        $('.panel-monsters').html(monsterStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.panel-npcs').html(npcStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.panel-spawns').html(spawnStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.panel-shops').html(shopStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.panel-features').html(objectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'None');
+        $('.panel-quests').html(questStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#') || 'Being added soon :)'); //TO BE CHANGED
     }
 }
 
@@ -1410,6 +1448,9 @@ var checkMID = function(mid) {
 
 // Loads data from Firebase
 var loadData = function() {
+    databaseRef.child('chunkinfonew').once('value', function(snap) {
+        chunkInfo = snap.val();
+    });
     myRef.once('value', function(snap) {
         var picking = false;
         var settings = snap.val()['settings'];
@@ -1631,7 +1672,7 @@ var changeLocked = function(lock) {
             $('#lock-unlock').prop('disabled', true).html('Unlock');
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
-            $('.center').css('top', '15vw');
+            $('.center').css('margin-top', '15px');
             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
