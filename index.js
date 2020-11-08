@@ -1462,8 +1462,8 @@ var loadData = function() {
         settings['highvis'] = document.cookie.split(';').filter(function(item) {
             return item.indexOf('highvis=true') >= 0
         }).length > 0;
-        settings['info'] = document.cookie.split(';').filter(function(item) {
-            return item.indexOf('info=true') >= 0
+        settings['info'] = !document.cookie.split(';').filter(function(item) {
+            return item.indexOf('newinfo=false') >= 0
         }).length > 0;
         
         for (let count = 1; count <= 5; count++) {
@@ -1522,7 +1522,7 @@ var loadData = function() {
 var setCookies = function() {
     document.cookie = "ids=" + showChunkIds;
     document.cookie = "highvis=" + highVisibilityMode;
-    document.cookie = "info=" + chunkInfoOn;
+    document.cookie = "newinfo=" + chunkInfoOn;
 }
 
 // Stores data in Firebase
