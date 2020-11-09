@@ -630,14 +630,6 @@ button.menu2 {
     transform: translateY(-20%);
 }
 
-.box.locked:not(.quality) > .label {
-    transform: translate(-2%, -8%);
-}
-
-.box.quality.locked > .label {
-    transform: translateY(-25%);
-}
-
 .box:not(.quality) > .chunkId {
     display: none;
     height: 0;
