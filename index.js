@@ -1396,7 +1396,7 @@ var updateChunkInfo = function() {
             });
             objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
             !!chunkInfo[id]['Quest'] && Object.keys(chunkInfo[id]['Quest']).forEach(name => {
-                questStr += `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+                questStr += `<a class='${(chunkInfo[id]['Quest'][name] === 'first' ? 'bold' : '')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
         }

@@ -1389,3 +1389,7 @@ button.menu2 {
     top: 0;
     right: 0;
 }
+
+.bold {
+    font-weight: bolder;
+}
