@@ -8,7 +8,7 @@
 
 a, a:visited {
     color: black;
-  }
+}
 
 #beta {
     position: absolute;
@@ -357,7 +357,7 @@ button.menu2 {
     margin-right: 15px;
 }
 
-.infoid, #infomonsters, #infonpcs, #infospawns, #infoshops, #infofeatures, #infoquests {
+.infoid, #infomonsters, #infonpcs, #infospawns, #infoshops, #infofeatures, #infoquests, #infoconnections {
     display: none;
 }
 
@@ -1392,4 +1392,14 @@ button.menu2 {
 
 .bold {
     font-weight: bolder;
+}
+
+.link {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.maplink {
+    color: blue !important;
 }

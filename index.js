@@ -1350,6 +1350,7 @@ var updateChunkInfo = function() {
             $('#infoshops').show();
             $('#infofeatures').show();
             $('#infoquests').show();
+            $('#infoconnections').show();
             if (visible !== '') {
                 $('.panel-' + visible).show();
             }
@@ -1363,6 +1364,7 @@ var updateChunkInfo = function() {
             $('#infoshops').hide();
             $('#infofeatures').hide();
             $('#infoquests').hide();
+            $('#infoconnections').hide();
             if (visible !== '') {
                 $('.panel-' + visible).hide();
             }
@@ -1374,6 +1376,7 @@ var updateChunkInfo = function() {
         let spawnStr = '';
         let shopStr = '';
         let questStr = '';
+        let connectStr = '';
         if (!!chunkInfo[id]) {
             !!chunkInfo[id]['Monster'] && Object.keys(chunkInfo[id]['Monster']).forEach(name => {
                 monsterStr += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
@@ -1399,15 +1402,33 @@ var updateChunkInfo = function() {
                 questStr += `<a class='${(chunkInfo[id]['Quest'][name] === 'first' ? 'bold' : '')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
+            !!chunkInfo[id]['Connect'] && Object.keys(chunkInfo[id]['Connect']).forEach(name => {
+                let x = Math.floor(name / 256) * 64;
+                let y = (name % 256) * 64;
+            connectStr += `<span class='link' onclick=test(${name})>${parseInt(y/64) > 64 ? ('[' + x/64 + ',' + y/64 + ']') : name}</span>${parseInt(y/64) > 64 ?`<a class='maplink' href=${"https://mejrs.github.io/osrs.html?m=-1&z=2&p=0&x=" + (x + 32) + "&y=" + (y + 32) + "&layer=grid"} target='_blank'>(map)</a>` : ''}` + ', ';
+            });
+            connectStr.length > 0 && (connectStr = connectStr.substring(0, connectStr.length - 2));
         }
-        $('.infoid-content').html(id);
+        if (!mid.includes('dev')) {
+            connectStr = 'Coming soon!';
+        }
+        $('.infoid-content').html(id + '[' + (Math.floor(id/256)) + ',' + (id % 256) + ']');
         $('.panel-monsters').html(monsterStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-npcs').html(npcStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-spawns').html(spawnStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-shops').html(shopStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-features').html(objectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-quests').html(questStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
+        $('.panel-connections').html(connectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
     }
+}
+
+var test = function(name) {
+    $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
+    $('.box > .chunkId:contains(' + name + ')').parent().addClass('locked');
+    ((name % 256) < 65) && scrollToPos(parseInt($('.box > .chunkId:contains(' + name + ')').parent().attr('id')) % rowSize, Math.floor(parseInt($('.box > .chunkId:contains(' + name + ')').parent().attr('id')) / rowSize), 0, 0);
+    infoLockedId = name.toString();
+    updateChunkInfo();
 }
 
 // Checks the MID from the url
