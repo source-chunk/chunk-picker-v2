@@ -1331,8 +1331,8 @@ var fixNums = function(num) {
 var updateChunkInfo = function() {
     if (!inEntry && !importMenuOpen && !highscoreMenuOpen) {
         let id = -1;
-        if (infoLockedId > 0) {
-            id = infoLockedId;
+        if (infoLockedId !== -1) {
+            id = infoLockedId.replace(/\./g, '%2E').replace(/\#/g, '%2F').replace(/\//g, '%2G');
         }
         let visible = '';
         Object.keys(panelVis).forEach(id => {
@@ -1402,17 +1402,27 @@ var updateChunkInfo = function() {
                 questStr += `<a class='${(chunkInfo[id]['Quest'][name] === 'first' ? 'bold' : '')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
+            let namesList = {};
             !!chunkInfo[id]['Connect'] && Object.keys(chunkInfo[id]['Connect']).forEach(name => {
-                let x = Math.floor(name / 256) * 64;
-                let y = (name % 256) * 64;
-            connectStr += `<span class='link' onclick=test(${name})>${parseInt(y/64) > 64 ? ('[' + x/64 + ',' + y/64 + ']') : name}</span>${parseInt(y/64) > 64 ?`<a class='maplink' href=${"https://mejrs.github.io/osrs.html?m=-1&z=2&p=0&x=" + (x + 32) + "&y=" + (y + 32) + "&layer=grid"} target='_blank'>(map)</a>` : ''}` + ', ';
+                let realName = name;
+                let passedName = name;
+                if (!!chunkInfo[name]['Name']) {
+                    realName = chunkInfo[name]['Name'];
+                    passedName = chunkInfo[name]['Name'];
+                } else if (!!chunkInfo[name]['Nickname']) {
+                    realName = chunkInfo[name]['Nickname'] + '(' + name + ')';
+                }
+                if (namesList[realName] !== realName) {
+                    namesList[realName] = realName;
+                    connectStr += `<span class='link' onclick=test('${encodeURI(passedName)}')>${realName.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/')}</span>` + ', ';
+                }
             });
             connectStr.length > 0 && (connectStr = connectStr.substring(0, connectStr.length - 2));
         }
         if (!mid.includes('dev')) {
             connectStr = 'Coming soon!';
         }
-        $('.infoid-content').html(id + '[' + (Math.floor(id/256)) + ',' + (id % 256) + ']');
+        $('.infoid-content').html((!!chunkInfo[id] && !!chunkInfo[id]['Nickname']) ? (chunkInfo[id]['Nickname'] + ' (' + id + ')') : id.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'));
         $('.panel-monsters').html(monsterStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-npcs').html(npcStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-spawns').html(spawnStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
@@ -1424,10 +1434,11 @@ var updateChunkInfo = function() {
 }
 
 var test = function(name) {
+    let realName = decodeURI(name);
     $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
-    $('.box > .chunkId:contains(' + name + ')').parent().addClass('locked');
-    ((name % 256) < 65) && scrollToPos(parseInt($('.box > .chunkId:contains(' + name + ')').parent().attr('id')) % rowSize, Math.floor(parseInt($('.box > .chunkId:contains(' + name + ')').parent().attr('id')) / rowSize), 0, 0);
-    infoLockedId = name.toString();
+    $('.box > .chunkId:contains(' + realName + ')').parent().addClass('locked');
+    ((realName % 256) < 65) && scrollToPos(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) % rowSize, Math.floor(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) / rowSize), 0, 0);
+    infoLockedId = realName.toString();
     updateChunkInfo();
 }
 
