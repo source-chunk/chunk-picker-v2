@@ -1414,12 +1414,12 @@ var updateChunkInfo = function() {
                 }
                 if (namesList[realName] !== realName) {
                     namesList[realName] = realName;
-                    connectStr += `<span class='link' onclick=test('${encodeURI(passedName)}')>${realName.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/')}</span>` + ', ';
+                    connectStr += `<span class='link' onclick=redirectPanel('${encodeURI(passedName)}')>${realName.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/')}</span>` + ', ';
                 }
             });
             connectStr.length > 0 && (connectStr = connectStr.substring(0, connectStr.length - 2));
         }
-        if (!mid.includes('dev')) {
+        if (!(mid.includes('dev') || mid.includes('bea'))) {
             connectStr = 'Coming soon!';
         }
         $('.infoid-content').html((!!chunkInfo[id] && !!chunkInfo[id]['Nickname']) ? (chunkInfo[id]['Nickname'] + ' (' + id + ')') : id.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'));
@@ -1433,12 +1433,19 @@ var updateChunkInfo = function() {
     }
 }
 
-var test = function(name) {
+// Re-update chunk info panel
+var redirectPanel = function(name) {
+    console.log('1');
     let realName = decodeURI(name);
+    console.log('2');
     $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
+    console.log('3');
     $('.box > .chunkId:contains(' + realName + ')').parent().addClass('locked');
+    console.log('4');
     ((realName % 256) < 65) && scrollToPos(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) % rowSize, Math.floor(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) / rowSize), 0, 0);
+    console.log('5');
     infoLockedId = realName.toString();
+    console.log('6');
     updateChunkInfo();
 }
 

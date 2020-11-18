@@ -1357,7 +1357,7 @@ button.menu2 {
 
 .panel.visible {
     max-height: 500px;
-    font-size: min(1.5vw, 18px);
+    font-size: min(1.5vw, 14.5px);
     text-align: left;
     padding-left: 10px;
 }
