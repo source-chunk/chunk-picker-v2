@@ -2,7 +2,7 @@
  * Created by Source Link AKA Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Id's and Amehzyn for smoother zooming/url decoding
- * 01/27/2020
+ * 11/19/2020
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -342,6 +342,8 @@ $(document).ready(function() {
 $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     if (atHome || inEntry || importMenuOpen || highscoreMenuOpen) {
         e.preventDefault();
+        return;
+    } else if (e.target.className.includes('panel') || e.target.className.includes('link')) {
         return;
     }
     e.preventDefault();
@@ -1110,9 +1112,27 @@ var toggleChunkInfo = function(extra) {
     chunkInfoOn = !chunkInfoOn;
     setCookies();
     chunkInfoOn ? $('.menu8').show() : $('.menu8').hide();
+    $('.hiddenInfo').hide();
     extra !== 'startup' && $('menu8').css('opacity', 1);
     $('.infotoggle').toggleClass('item-off item-on');
     $('.infotoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    updateChunkInfo();
+}
+
+// Temporarily hides chunk info panel
+var hideChunkInfo = function() {
+    chunkInfoOn && $('.menu8').hide();
+    chunkInfoOn && $('.hiddenInfo').show();
+    $('.box.locked').removeClass('locked');
+    infoLockedId = -1;
+}
+
+// Re-shows chunk info panel
+var showChunkInfo = function() {
+    chunkInfoOn && $('.menu8').show();
+    chunkInfoOn && $('.hiddenInfo').hide();
+    infoLockedId = -1;
+    updateChunkInfo();
 }
 
 // Toggles the visibility of the roll2 button
@@ -1330,6 +1350,8 @@ var fixNums = function(num) {
 // Update chunk info
 var updateChunkInfo = function() {
     if (!inEntry && !importMenuOpen && !highscoreMenuOpen) {
+        chunkInfoOn && $('.menu8').show();
+        chunkInfoOn && $('.hiddenInfo').hide();
         let id = -1;
         if (infoLockedId !== -1) {
             id = infoLockedId.replace(/\./g, '%2E').replace(/\#/g, '%2F').replace(/\//g, '%2G');
@@ -1350,6 +1372,7 @@ var updateChunkInfo = function() {
             $('#infoshops').show();
             $('#infofeatures').show();
             $('#infoquests').show();
+            $('#infodiaries').show();
             $('#infoconnections').show();
             if (visible !== '') {
                 $('.panel-' + visible).show();
@@ -1364,6 +1387,7 @@ var updateChunkInfo = function() {
             $('#infoshops').hide();
             $('#infofeatures').hide();
             $('#infoquests').hide();
+            $('#infodiaries').hide();
             $('#infoconnections').hide();
             if (visible !== '') {
                 $('.panel-' + visible).hide();
@@ -1376,32 +1400,37 @@ var updateChunkInfo = function() {
         let spawnStr = '';
         let shopStr = '';
         let questStr = '';
+        let diaryStr = '';
         let connectStr = '';
         if (!!chunkInfo[id]) {
             !!chunkInfo[id]['Monster'] && Object.keys(chunkInfo[id]['Monster']).forEach(name => {
-                monsterStr += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+                monsterStr += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             monsterStr.length > 0 && (monsterStr = monsterStr.substring(0, monsterStr.length - 2));
             !!chunkInfo[id]['NPC'] && Object.keys(chunkInfo[id]['NPC']).forEach(name => {
-                npcStr += (chunkInfo[id]['NPC'][name] === 1 ? '' : chunkInfo[id]['NPC'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+                npcStr += (chunkInfo[id]['NPC'][name] === 1 ? '' : chunkInfo[id]['NPC'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             npcStr.length > 0 && (npcStr = npcStr.substring(0, npcStr.length - 2));
             !!chunkInfo[id]['Spawn'] && Object.keys(chunkInfo[id]['Spawn']).forEach(name => {
-                spawnStr += (chunkInfo[id]['Spawn'][name] === 1 ? '' : chunkInfo[id]['Spawn'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+                spawnStr += (chunkInfo[id]['Spawn'][name] === 1 ? '' : chunkInfo[id]['Spawn'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             spawnStr.length > 0 && (spawnStr = spawnStr.substring(0, spawnStr.length - 2));
             !!chunkInfo[id]['Shop'] && Object.keys(chunkInfo[id]['Shop']).forEach(name => {
-                shopStr += `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+                shopStr += `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             shopStr.length > 0 && (shopStr = shopStr.substring(0, shopStr.length - 2));
             !!chunkInfo[id]['Object'] && Object.keys(chunkInfo[id]['Object']).forEach(name => {
-                objectStr += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + `<a href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+                objectStr += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
             !!chunkInfo[id]['Quest'] && Object.keys(chunkInfo[id]['Quest']).forEach(name => {
-                questStr += `<a class='${(chunkInfo[id]['Quest'][name] === 'first' ? 'bold' : '')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+                questStr += `<a class='${(chunkInfo[id]['Quest'][name] === 'first' ? 'bold link' : 'link')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
+            !!chunkInfo[id]['Diary'] && Object.keys(chunkInfo[id]['Diary']).forEach(name => {
+                diaryStr += `<a class='bold link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name + ' Diary').replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + ' Diary</a>' + ': ' + chunkInfo[id]['Diary'][name];
+            });
+            diaryStr.length > 0 && (diaryStr = diaryStr.substring(0, diaryStr.length - 2));
             let namesList = {};
             !!chunkInfo[id]['Connect'] && Object.keys(chunkInfo[id]['Connect']).forEach(name => {
                 let realName = name;
@@ -1418,6 +1447,10 @@ var updateChunkInfo = function() {
                 }
             });
             connectStr.length > 0 && (connectStr = connectStr.substring(0, connectStr.length - 2));
+            connectStr = connectStr.split(', ').sort((a,b) => {
+                return $(a).text() > $(b).text() ? 1 : -1;
+            });
+            connectStr = connectStr.join(', ');
         }
         if (!(mid.includes('dev') || mid.includes('bea'))) {
             connectStr = 'Coming soon!';
@@ -1429,24 +1462,29 @@ var updateChunkInfo = function() {
         $('.panel-shops').html(shopStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-features').html(objectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-quests').html(questStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
+        $('.panel-diaries').html(diaryStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-connections').html(connectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
     }
 }
 
 // Re-update chunk info panel
 var redirectPanel = function(name) {
-    console.log('1');
     let realName = decodeURI(name);
-    console.log('2');
     $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
-    console.log('3');
     $('.box > .chunkId:contains(' + realName + ')').parent().addClass('locked');
-    console.log('4');
     ((realName % 256) < 65) && scrollToPos(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) % rowSize, Math.floor(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) / rowSize), 0, 0);
-    console.log('5');
     infoLockedId = realName.toString();
-    console.log('6');
     updateChunkInfo();
+    $('.infoid').addClass('new');
+    setTimeout(function() {
+        $('.infoid').removeClass('new');
+        setTimeout(function() {
+            $('.infoid').addClass('new');
+            setTimeout(function() {
+                $('.infoid').removeClass('new');
+            }, 1000);
+        }, 1000);
+    }, 1000);
 }
 
 // Checks the MID from the url

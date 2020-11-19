@@ -142,13 +142,13 @@
       <div id='recentChunks4' class='text'></div>
       <div id='recentChunks5' class='text'></div>
   </div>
-  <div class='menu8'>
+  <div class='menu8' onmouseover="document.body.style.overflow='hidden';"  onmouseout="document.body.style.overflow='auto';">
     <div class='infocontent text'>
-      <div class='infostartup'><span><b>Chunk Info</b>: Right click a chunk to find out more information about it!</span><i class="panel-close pic zmdi zmdi-close" onclick="toggleChunkInfo()"></i></div>
-      <div class='infoid'><b><span class='infoid-content'></span></b><i class="panel-close pic zmdi zmdi-close" onclick="toggleChunkInfo()"></i></div>
+      <div class='infostartup'><span><b>Chunk Info</b>: Right click a chunk to find out more information about it!</span><i class="panel-close pic zmdi zmdi-close" onclick="hideChunkInfo()"></i></div>
+      <div class='infoid'><b><span class='infoid-content'></span></b><i class="panel-close pic zmdi zmdi-close" onclick="hideChunkInfo()"></i></div>
       <div id='infomonsters' class='accordion' onclick="togglePanel('monsters')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Monsters</div>
       <div class="panel panel-monsters"></div>
-      <div id='infonpcs' class='accordion' onclick="togglePanel('npcs')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>NPC's</div>
+      <div id='infonpcs' class='accordion' onclick="togglePanel('npcs')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>NPCs</div>
       <div class="panel panel-npcs"></div>
       <div id='infospawns' class='accordion' onclick="togglePanel('spawns')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Item Spawns</div>
       <div class="panel panel-spawns"></div>
@@ -158,12 +158,15 @@
       <div class="panel panel-features"></div>
       <div id='infoquests' class='accordion' onclick="togglePanel('quests')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Quest progression</div>
       <div class="panel panel-quests"></div>
+      <div id='infodiaries' class='accordion' onclick="togglePanel('diaries')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Diary tasks</div>
+      <div class="panel panel-diaries"></div>
       <div id='infoconnections' class='accordion' onclick="togglePanel('connections')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Connections</div>
       <div class="panel panel-connections"></div>
       <div class='infocontribute'><i>Information wrong or missing? Submit feedback <a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><b>here</b></a>.</i></div>
     </div>
 </div>
-  <div>
+<div class='hiddenInfo' onclick='showChunkInfo()'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
+  <div id='outerImgDiv'>
     <div class="imgDiv" id="imgDiv">
       <img class="map" id="map" src="osrs_world_map.png">
       <div class="btnDiv" id="btnDiv"></div>
