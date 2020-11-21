@@ -1452,9 +1452,6 @@ var updateChunkInfo = function() {
             });
             connectStr = connectStr.join(', ');
         }
-        if (!(mid.includes('dev') || mid.includes('bea'))) {
-            connectStr = 'Coming soon!';
-        }
         $('.infoid-content').html((!!chunkInfo[id] && !!chunkInfo[id]['Nickname']) ? (chunkInfo[id]['Nickname'] + ' (' + id + ')') : id.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'));
         $('.panel-monsters').html(monsterStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
         $('.panel-npcs').html(npcStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
