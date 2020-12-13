@@ -108,10 +108,6 @@
     <button class='center' onclick="center()">Center on Unlocked</button>
   </div>
   <div class='menu2'>
-    <div class='toggleNeighbors text'>Auto-select neighboring chunks</div>
-    <button id='toggleNeighbors' class='toggle off' onclick="toggleNeighbors()">OFF</button>
-    <div class='toggleRemove text'>Remove selected chunks on pick</div>
-    <button id='toggleRemove' class='toggle off' onclick="toggleRemove()">OFF</button>
     <div class='toggleIds text'>Show chunk ID labels</div>
     <button id='toggleIds' class='toggle off' onclick="toggleIds()">OFF</button>
   </div>
@@ -142,28 +138,48 @@
       <div id='recentChunks4' class='text'></div>
       <div id='recentChunks5' class='text'></div>
   </div>
-  <div class='menu8' onmouseover="document.body.style.overflow='hidden';"  onmouseout="document.body.style.overflow='auto';">
+  <div class='menu8' onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
     <div class='infocontent text'>
       <div class='infostartup'><span><b>Chunk Info</b>: Right click a chunk to find out more information about it!</span><i class="panel-close pic zmdi zmdi-close" onclick="hideChunkInfo()"></i></div>
       <div class='infoid'><b><span class='infoid-content'></span></b><i class="panel-close pic zmdi zmdi-close" onclick="hideChunkInfo()"></i></div>
-      <div id='infomonsters' class='accordion' onclick="togglePanel('monsters')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Monsters</div>
+      <div id='infomonsters' class='accordion' onclick="toggleInfoPanel('monsters')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Monsters</div>
       <div class="panel panel-monsters"></div>
-      <div id='infonpcs' class='accordion' onclick="togglePanel('npcs')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>NPCs</div>
+      <div id='infonpcs' class='accordion' onclick="toggleInfoPanel('npcs')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>NPCs</div>
       <div class="panel panel-npcs"></div>
-      <div id='infospawns' class='accordion' onclick="togglePanel('spawns')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Item Spawns</div>
+      <div id='infospawns' class='accordion' onclick="toggleInfoPanel('spawns')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Item Spawns</div>
       <div class="panel panel-spawns"></div>
-      <div id='infoshops' class='accordion' onclick="togglePanel('shops')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Shops</div>
+      <div id='infoshops' class='accordion' onclick="toggleInfoPanel('shops')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Shops</div>
       <div class="panel panel-shops"></div>
-      <div id='infofeatures' class='accordion' onclick="togglePanel('features')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Features</div>
+      <div id='infofeatures' class='accordion' onclick="toggleInfoPanel('features')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Features</div>
       <div class="panel panel-features"></div>
-      <div id='infoquests' class='accordion' onclick="togglePanel('quests')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Quest progression</div>
+      <div id='infoquests' class='accordion' onclick="toggleInfoPanel('quests')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Quest progression <span class='help'>?<span class="tooltiptext">Quests in <b>bold</b> indicate the quest is started in this chunk.</span></span></div>
       <div class="panel panel-quests"></div>
-      <div id='infodiaries' class='accordion' onclick="togglePanel('diaries')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Diary tasks</div>
+      <div id='infodiaries' class='accordion' onclick="toggleInfoPanel('diaries')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Diary tasks</div>
       <div class="panel panel-diaries"></div>
-      <div id='infoconnections' class='accordion' onclick="togglePanel('connections')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Connections</div>
+      <div id='infoconnections' class='accordion' onclick="toggleInfoPanel('connections')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Connections</div>
       <div class="panel panel-connections"></div>
+      <div id='infochallenges' class='accordion' onclick="toggleInfoPanel('challenges')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Potential chunk tasks</div>
+      <div class="panel panel-challenges"></div>
       <div class='infocontribute'><i>Information wrong or missing? Submit feedback <a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><b>here</b></a>.</i></div>
     </div>
+</div>
+<div class='menu9-beta' onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+  <div class='challengecontent text'>
+    <div id='challengesactive' class='accordion' onclick="toggleChallengesPanel('active')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Active Chunk Tasks</div>
+    <div class="panel panel-active">None</div>
+    <div id='challengesareas' class='accordion' onclick="toggleChallengesPanel('areas')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Areas</div>
+    <div class="panel panel-areas">None</div>
+    <div id='challengesbacklog' class='accordion' onclick="toggleChallengesPanel('backlog')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Backlog</div>
+    <div class="panel panel-backlog">None</div>
+  </div>
+</div>
+<div class='menu10' onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+  <div>
+    <div class='questcontent text'>
+      <div class='questname'><b><span class='questname-content'></span></b><i class="panel-close pic zmdi zmdi-close" onclick="toggleQuestInfo()"></i></div>
+      <div class="panel panel-questdata visible">None</div>
+    </div>
+  </div>
 </div>
 <div class='hiddenInfo' onclick='showChunkInfo()'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
   <div id='outerImgDiv'>
@@ -177,6 +193,8 @@
     <a class='none' href='https://source-chunk.github.io/chunk-picker-v2/?change-pin'><div class='item'>Change PIN<i class="pic zmdi zmdi-edit zmdi-hc-lg"></i></div></a>
     <div class='item' onclick="enableScreenshotMode()">Screenshot mode<i class="pic zmdi zmdi-camera zmdi-hc-lg"></i></div>
     <div class='item visibilitytoggle item-off' onclick="toggleVisibility()">High visibility mode<i class="pic zmdi zmdi-brightness-7 zmdi-hc-lg"></i></div>
+    <div class='item toggleNeighbors item-off' onclick="toggleNeighbors()">Auto-select neighboring chunks<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
+    <div class='item toggleRemove item-off' onclick="toggleRemove()">Remove selected chunks on pick<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
     <div class='item roll2toggle item-off' onclick="toggleRoll2()">Roll 2<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
     <div class='item unpicktoggle item-off' onclick="toggleUnpick()">Unpick chunk<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
     <div class='item recenttoggle item-off' onclick="toggleRecent()">Recent chunks<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>

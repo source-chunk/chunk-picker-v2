@@ -2,6 +2,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+body {
+    background-color: black;
+}
+
 @-moz-document url-prefix() {
     html,body{overflow: hidden !important;}
 }
@@ -120,6 +124,11 @@ a, a:visited {
 
 .recent.selected:not(.mobile) {
     background-color: rgba(255, 0, 0, .7);
+    animation: glowing 750ms infinite;
+}
+
+.recent.gray:not(.mobile) {
+    background-color: rgba(255, 255, 255, 0.7);
     animation: glowing 750ms infinite;
 }
 
@@ -357,7 +366,7 @@ button.menu2 {
     margin-right: 15px;
 }
 
-.infoid, #infomonsters, #infonpcs, #infospawns, #infoshops, #infofeatures, #infoquests, #infodiaries, #infoconnections {
+.infoid, #infomonsters, #infonpcs, #infospawns, #infoshops, #infofeatures, #infoquests, #infodiaries, #infoconnections, #infochallenges {
     display: none;
 }
 
@@ -376,6 +385,41 @@ button.menu2 {
 .infocontribute {
     border-top: solid 1px;
     font-size: min(1.25vw, 15px);
+}
+
+.menu9-beta {
+    display: none;
+    position: fixed;
+    z-index: 99 !important;
+    top: 25vh;
+    right: 10px;
+    width: min(25vw, 400px);
+    height: 2vw;
+}
+
+.menu10 {
+    display: none;
+    position: fixed;
+    z-index: 99 !important;
+    bottom: 0px;
+    left: 50%;
+    width: 300px;
+    height: 75px;
+    transform: translateX(-50%);
+}
+
+.menu10 > div {
+    position: relative;
+}
+
+.questcontent {
+    position: absolute;
+    bottom: 0;
+    width: 300px;
+}
+
+.questname {
+    border-bottom: 1px solid black;
 }
 
 .gitgeddes {
@@ -1164,7 +1208,7 @@ button.menu2 {
 .settings-menu {
     z-index: 999 !important;
     display: none;
-    width: min(19vw, 225px);
+    width: min(23vw, 250px);
     font-size: min(1.5vw, 16px);
     background-color: rgb(230, 230, 230);
     position: absolute;
@@ -1368,6 +1412,17 @@ button.menu2 {
     text-align: left;
     padding-left: 10px;
     overflow-y: auto;
+    margin-bottom: 5px;
+}
+
+.challenge > input:disabled, .area > input:disabled {
+    cursor: not-allowed;
+}
+
+.arrow {
+    font-weight: bold;
+    cursor: pointer;
+    color: #2d2d79;
 }
 
 .exp {
@@ -1381,7 +1436,7 @@ button.menu2 {
     padding: 0px 5px 10px 5px;
     cursor: pointer;
     font-weight: bolder;
-    font-size: 24px;
+    font-size: min(2.15vw, 24px);
     transition: 0.4s;
     text-align: left;
     padding-left: 25px;
@@ -1398,6 +1453,10 @@ button.menu2 {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+#challengesactive {
+    border-top: none !important;
 }
 
 .bold {
@@ -1429,4 +1488,51 @@ button.menu2 {
 
 .hiddenInfo:hover {
     background-color: rgba(200, 200, 200, .25);
+}
+
+.help {
+    position: relative;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    color: #666666;
+}
+
+.help .tooltiptext {
+    visibility: hidden;
+    width: 220px;
+    background-color: rgb(179, 179, 179);
+    color: black;
+    text-align: center;
+    border: 1px black solid;
+    padding: 5px 0;
+    font-size: 14px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+    left: 150%;
+}
+
+.help:hover .tooltiptext {
+    visibility: visible;
+}
+
+.quest-icon {
+    cursor: pointer;
+    transition: color .5s;
+}
+
+.quest-icon:hover {
+    color: grey;
+}
+
+.valid-chunk {
+    color: rgb(50, 150, 50);
+}
+
+.click {
+    cursor: pointer;
+    text-decoration: underline;
 }

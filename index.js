@@ -18,6 +18,7 @@ var roll2On = false;                                                            
 var unpickOn = false;                                                           // Is the unpick button enabled
 var recentOn = false;                                                           // Is the recent chunks section enabled
 var chunkInfoOn = false;                                                        // Is the chunk info panel enabled
+var infoCollapse = false;                                                       // Is the chunk info panel collapsed
 var highscoreEnabled = false;                                                   // Is highscore tracking enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
 var recent = [];                                                                // Recently picked chunks
@@ -69,7 +70,7 @@ var inEntry = false;                                                            
 var importMenuOpen = false;                                                     // Is the import menu open
 var highscoreMenuOpen = false;                                                  // Is the highscores menu open
 
-var panelVis = {
+var infoPanelVis = {
     monsters: false,
     npcs: false,
     spawns: false,
@@ -78,14 +79,67 @@ var panelVis = {
     quests: false
 };                                                                              // JSON showing state of which chunk info panels are open/closed
 
+var challengePanelVis = {
+    active: false,
+    backlog: false
+};                                                                              // JSON showing state of which challenge panels are open/closed
+
 var databaseRef = firebase.database().ref();                                    // Firebase database reference
 var myRef;                                                                      // Firebase database reference for this map ID
 
 var BASE10 = "0123456789";                                                      // Base 10 alphabet
 var BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";  // Base 62 alphabet
 
+const skillNames = [
+    "Slayer",
+    "Thieving",
+    "Attack",
+    "Defence",
+    "Strength",
+    "Hitpoints",
+    "Ranged",
+    "Prayer",
+    "Runecraft",
+    "Magic",
+    "Farming",
+    "Herblore",
+    "Hunter",
+    "Cooking",
+    "Woodcutting",
+    "Firemaking",
+    "Fletching",
+    "Fishing",
+    "Mining",
+    "Smithing",
+    "Crafting",
+    "Agility",
+    "Construction"
+];                                                                              // Names of all skills
+
 var hammertime = new Hammer(document.getElementsByClassName('body')[0]);        // Initialize Hammerjs [Mobile]
 hammertime.get('pinch').set({ enable: true });
+
+
+//TEST VARS
+
+let rules = {
+    "Skillcape": false,
+    "Rare Drop": false,
+}
+let globalValids = {};
+let challengeArr = [];
+let checkedChallenges = {};
+let backlog = {
+};
+let completedChallenges = {
+};
+let possibleAreas = {
+    "Lumbridge Castle%2FCellar": true,
+    "H%2EA%2EM%2E Hideout": true
+}
+let rareDropNum = 1/1000;
+let highestCurrent = {
+};
 
 // ----------------------------------------------------------
 
@@ -340,10 +394,10 @@ $(document).ready(function() {
 // Credit to Amehzyn
 // Handles zooming
 $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
-    if (atHome || inEntry || importMenuOpen || highscoreMenuOpen) {
-        e.preventDefault();
+    if (e.target.className.includes('panel') || e.target.className.includes('link') || e.target.className.includes('noscroll')) {
         return;
-    } else if (e.target.className.includes('panel') || e.target.className.includes('link')) {
+    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen) {
+        e.preventDefault();
         return;
     }
     e.preventDefault();
@@ -352,21 +406,21 @@ $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     var dir;
     if (e.type === 'DOMMouseScroll') {
         if (e.detail < 0) {
-            dir = .1
+            dir = .2;
         } else {
-            dir = -.1;
+            dir = -.2;
         }
     } else {
         if (e.originalEvent.wheelDelta > 0) {
-            dir = .1
+            dir = .2;
         } else {
-            dir = -.1;
+            dir = -.2;
         }
     }
 
     // Set minimum and maximum zoom of map
     var minWidth = Math.floor(0.95 * window.innerWidth);
-    var maxWidth = Math.floor(10 * window.innerWidth);
+    var maxWidth = Math.floor(15 * window.innerWidth);
     if (imageDiv.offsetWidth <= minWidth && dir < 0) {
         // Zooming out would do nothing
         return;
@@ -405,7 +459,8 @@ $(document).on({
         if (e.keyCode === 27 && screenshotMode) {
             screenshotMode = false;
             $('.escape-hint').hide();
-            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .topnav, #beta').show();
+            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta').show();
+            toggleQuestInfo();
             settings();
         } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen) {
             e.preventDefault();
@@ -517,6 +572,7 @@ $(document).on({
                     tempChunk2 = tempChunk1;
                     $('#recentChunks' + count).html('<span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
                 }
+                completeChallenges();
             } else if ($(e.target).hasClass('recent')) {
                 // ----
             } else {
@@ -524,6 +580,7 @@ $(document).on({
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
                 
             }
+            calcCurrentChallenges();
             setData();
             chunkBorders();
         }
@@ -614,6 +671,8 @@ var pick = function() {
         tempChunk2 = tempChunk1;
         $('#recentChunks' + count).html('<span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
     }
+    completeChallenges();
+    calcCurrentChallenges();
     setData();
     chunkBorders();
 }
@@ -646,12 +705,8 @@ var toggleNeighbors = function(extra) {
         return;
     }
     autoSelectNeighbors = !autoSelectNeighbors;
-    $('#toggleNeighbors').toggleClass('on off');
-    if ($('#toggleNeighbors').hasClass('on')) {
-        $('#toggleNeighbors').text('ON');
-    } else {
-        $('#toggleNeighbors').text('OFF');
-    }
+    $('.toggleNeighbors').toggleClass('item-off item-on');
+    $('.toggleNeighbors > .pic').toggleClass('zmdi-plus zmdi-minus');
     if (autoRemoveSelected && autoSelectNeighbors) {
         toggleRemove();
     }
@@ -664,12 +719,8 @@ var toggleRemove = function(extra) {
         return;
     }
     autoRemoveSelected = !autoRemoveSelected;
-    $('#toggleRemove').toggleClass('on off');
-    if ($('#toggleRemove').hasClass('on')) {
-        $('#toggleRemove').text('ON');
-    } else {
-        $('#toggleRemove').text('OFF');
-    }
+    $('.toggleRemove').toggleClass('item-off item-on');
+    $('.toggleRemove > .pic').toggleClass('zmdi-plus zmdi-minus');
     if (autoSelectNeighbors && autoRemoveSelected) {
         toggleNeighbors();
     }
@@ -883,21 +934,20 @@ var unlockEntry = function() {
             } else {
                 firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
                 $('.center').css('margin-top', '15px');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).show();
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
-                chunkInfoOn && $('.menu8').css('opacity', 0).show();
                 $('#entry-menu').animate({'opacity': 0});
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
                     $('.pin.entry').val('');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').animate({'opacity': 1});
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').animate({'opacity': 1});
                     !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                     !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
-                    chunkInfoOn && $('.menu8').animate({'opacity': 1});
                     $('#unlock-entry').prop('disabled', false).html('Unlock');
                     locked = false;
                     inEntry = false;
+                    calcCurrentChallenges();
                 }, 500);
             }
             setTimeout(function() {
@@ -1009,6 +1059,7 @@ var accessMap = function() {
         $('#page2b').hide();
         $('.background-img').hide();
         setupMap();
+        calcCurrentChallenges();
     });
 }
 
@@ -1088,7 +1139,7 @@ var settings = function() {
 
 // Enables screenshot mode
 var enableScreenshotMode = function() {
-    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .settings-menu, .topnav, #beta').hide();
+    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta').hide();
     screenshotMode = true;
     $('.escape-hint').css('opacity', 1).show();
     setTimeout(function() {
@@ -1120,11 +1171,13 @@ var toggleChunkInfo = function(extra) {
 }
 
 // Temporarily hides chunk info panel
-var hideChunkInfo = function() {
+var hideChunkInfo = function(extra) {
     chunkInfoOn && $('.menu8').hide();
     chunkInfoOn && $('.hiddenInfo').show();
     $('.box.locked').removeClass('locked');
     infoLockedId = -1;
+    infoCollapse = true;
+    extra !== 'startup' && setCookies();
 }
 
 // Re-shows chunk info panel
@@ -1184,16 +1237,31 @@ var recentChunk = function(el) {
 }
 
 // Toggles the accordion panels of the chunk info panel
-var togglePanel = function(pnl) {
-    panelVis[pnl] = !panelVis[pnl];
-    Object.keys(panelVis).forEach(uniqKey => {
+var toggleInfoPanel = function(pnl) {
+    infoPanelVis[pnl] = !infoPanelVis[pnl];
+    Object.keys(infoPanelVis).forEach(uniqKey => {
       if (uniqKey === pnl) {
-        panelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
-        panelVis[pnl] ? $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i>') : $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+        infoPanelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
+        infoPanelVis[pnl] ? $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i>') : $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
       } else {
         $('.panel-' + uniqKey).removeClass('visible');
         $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
-        panelVis[uniqKey] = false;
+        infoPanelVis[uniqKey] = false;
+      }
+    });
+}
+
+// Toggles the accordion panels of the challenges panel
+var toggleChallengesPanel = function(pnl) {
+    challengePanelVis[pnl] = !challengePanelVis[pnl];
+    Object.keys(challengePanelVis).forEach(uniqKey => {
+      if (uniqKey === pnl) {
+        challengePanelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
+        challengePanelVis[pnl] ? $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i>') : $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+      } else {
+        $('.panel-' + uniqKey).removeClass('visible');
+        $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+        challengePanelVis[uniqKey] = false;
       }
     });
 }
@@ -1209,7 +1277,7 @@ var doneLoading = function() {
     if (onMobile) {
         $('.center').css({'height': '40px', 'width': '90px', 'font-size': '12px'});
         $('.pick, .roll2, .unpick').css({'height': '20px', 'width': '90px', 'font-size': '12px'});
-        $('.menu2, .menu6, .menu7, .menu8, .settings').hide().remove();
+        $('.menu2, .menu6, .menu7, .menu8, .menu9, .menu10, .settings').hide().remove();
         $('.hr').css({'width': '25px'});
         $('.gohighscore').css({'right': '3vw', 'left': 'auto'});
         $('.block, .block > .title').css({'font-size': '18px'});
@@ -1231,10 +1299,10 @@ var setupMap = function() {
         $('.body').show();
         $('#page1, #page1extra, #import-menu, #highscore-menu, #highscore-menu2').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
-            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
+            $('.center, #toggleIds, .toggleIds.text, .menu9').css('opacity', 1).show();
             $('.pin.entry').focus();
         } else {
             $('.center').css('margin-top', '15px');
@@ -1242,10 +1310,10 @@ var setupMap = function() {
         if (locked === undefined || locked) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
-            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
+            $('.center, #toggleIds, .toggleIds.text, .menu9').css('opacity', 1).show();
             $('.pin.entry').focus();
         }
         for (var i = 0; i < fullSize; i++) {
@@ -1256,6 +1324,7 @@ var setupMap = function() {
         !mid && (mid = window.location.href.split('?')[1]);
         document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
         $('.toptitle2').text(mid.split('-')[0].toUpperCase());
+        toggleChallengesPanel('active');
         loadData();
     }
 }
@@ -1292,24 +1361,24 @@ var updateScrollPos = function(e) {
     }
     let newScrollLeft = prevScrollLeft - (clickX - e.pageX);
     let newScrollTop = prevScrollTop - (clickY - e.pageY);
-    if (newScrollLeft > 100) {
-        newScrollLeft = 100;
-        prevScrollLeft = 100;
+    if (newScrollLeft > 300) {
+        newScrollLeft = 300;
+        prevScrollLeft = 300;
         clickX = e.pageX;
     }
-    if (newScrollTop > 150) {
-        newScrollTop = 150;
-        prevScrollTop = 150;
+    if (newScrollTop > 350) {
+        newScrollTop = 350;
+        prevScrollTop = 350;
         clickY = e.pageY;
     }
-    if (newScrollLeft + $('.imgDiv').width() + 100 < window.innerWidth) {
-        newScrollLeft = -$('.imgDiv').width() + window.innerWidth - 100;
-        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 100;
+    if (newScrollLeft + $('.imgDiv').width() + 300 < window.innerWidth) {
+        newScrollLeft = -$('.imgDiv').width() + window.innerWidth - 300;
+        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 300;
         clickX = e.pageX;
     }
-    if (newScrollTop + $('.imgDiv').height() + 100 < window.innerHeight) {
-        newScrollTop = -$('.imgDiv').height() + window.innerHeight - 100;
-        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 100;
+    if (newScrollTop + $('.imgDiv').height() + 300 < window.innerHeight) {
+        newScrollTop = -$('.imgDiv').height() + window.innerHeight - 300;
+        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 300;
         clickY = e.pageY;
     }
     $('.imgDiv').css({left: newScrollLeft, top: newScrollTop});
@@ -1354,11 +1423,11 @@ var updateChunkInfo = function() {
         chunkInfoOn && $('.hiddenInfo').hide();
         let id = -1;
         if (infoLockedId !== -1) {
-            id = infoLockedId.replace(/\./g, '%2E').replace(/\#/g, '%2F').replace(/\//g, '%2G');
+            id = infoLockedId.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G');
         }
         let visible = '';
-        Object.keys(panelVis).forEach(id => {
-            if (panelVis[id]) {
+        Object.keys(infoPanelVis).forEach(id => {
+            if (infoPanelVis[id]) {
                 visible = id;
             }
         });
@@ -1374,6 +1443,7 @@ var updateChunkInfo = function() {
             $('#infoquests').show();
             $('#infodiaries').show();
             $('#infoconnections').show();
+            $('#infochallenges').show();
             if (visible !== '') {
                 $('.panel-' + visible).show();
             }
@@ -1389,6 +1459,7 @@ var updateChunkInfo = function() {
             $('#infoquests').hide();
             $('#infodiaries').hide();
             $('#infoconnections').hide();
+            $('#infochallenges').hide();
             if (visible !== '') {
                 $('.panel-' + visible).hide();
             }
@@ -1402,48 +1473,49 @@ var updateChunkInfo = function() {
         let questStr = '';
         let diaryStr = '';
         let connectStr = '';
-        if (!!chunkInfo[id]) {
-            !!chunkInfo[id]['Monster'] && Object.keys(chunkInfo[id]['Monster']).forEach(name => {
-                monsterStr += (chunkInfo[id]['Monster'][name] === 1 ? '' : chunkInfo[id]['Monster'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+        let challengeStr = '';
+        if (!!chunkInfo['chunks'][id]) {
+            !!chunkInfo['chunks'][id]['Monster'] && Object.keys(chunkInfo['chunks'][id]['Monster']).forEach(name => {
+                monsterStr += (chunkInfo['chunks'][id]['Monster'][name] === 1 ? '' : chunkInfo['chunks'][id]['Monster'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             monsterStr.length > 0 && (monsterStr = monsterStr.substring(0, monsterStr.length - 2));
-            !!chunkInfo[id]['NPC'] && Object.keys(chunkInfo[id]['NPC']).forEach(name => {
-                npcStr += (chunkInfo[id]['NPC'][name] === 1 ? '' : chunkInfo[id]['NPC'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+            !!chunkInfo['chunks'][id]['NPC'] && Object.keys(chunkInfo['chunks'][id]['NPC']).forEach(name => {
+                npcStr += (chunkInfo['chunks'][id]['NPC'][name] === 1 ? '' : chunkInfo['chunks'][id]['NPC'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             npcStr.length > 0 && (npcStr = npcStr.substring(0, npcStr.length - 2));
-            !!chunkInfo[id]['Spawn'] && Object.keys(chunkInfo[id]['Spawn']).forEach(name => {
-                spawnStr += (chunkInfo[id]['Spawn'][name] === 1 ? '' : chunkInfo[id]['Spawn'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+            !!chunkInfo['chunks'][id]['Spawn'] && Object.keys(chunkInfo['chunks'][id]['Spawn']).forEach(name => {
+                spawnStr += (chunkInfo['chunks'][id]['Spawn'][name] === 1 ? '' : chunkInfo['chunks'][id]['Spawn'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             spawnStr.length > 0 && (spawnStr = spawnStr.substring(0, spawnStr.length - 2));
-            !!chunkInfo[id]['Shop'] && Object.keys(chunkInfo[id]['Shop']).forEach(name => {
-                shopStr += `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+            !!chunkInfo['chunks'][id]['Shop'] && Object.keys(chunkInfo['chunks'][id]['Shop']).forEach(name => {
+                shopStr += `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             shopStr.length > 0 && (shopStr = shopStr.substring(0, shopStr.length - 2));
-            !!chunkInfo[id]['Object'] && Object.keys(chunkInfo[id]['Object']).forEach(name => {
-                objectStr += (chunkInfo[id]['Object'][name] === 1 ? '' : chunkInfo[id]['Object'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+            !!chunkInfo['chunks'][id]['Object'] && Object.keys(chunkInfo['chunks'][id]['Object']).forEach(name => {
+                objectStr += (chunkInfo['chunks'][id]['Object'][name] === 1 ? '' : chunkInfo['chunks'][id]['Object'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
             });
             objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
-            !!chunkInfo[id]['Quest'] && Object.keys(chunkInfo[id]['Quest']).forEach(name => {
-                questStr += `<a class='${(chunkInfo[id]['Quest'][name] === 'first' ? 'bold link' : 'link')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
+            !!chunkInfo['chunks'][id]['Quest'] && Object.keys(chunkInfo['chunks'][id]['Quest']).forEach(name => {
+                questStr += `<a class='${(chunkInfo['chunks'][id]['Quest'][name] === 'first' ? 'bold link' : 'link')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + `</a> <span onclick="getQuestInfo('` + name.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + `')"><i class="quest-icon zmdi zmdi-collection-text"></i></span>, `;
             });
             questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
-            !!chunkInfo[id]['Diary'] && Object.keys(chunkInfo[id]['Diary']).forEach(name => {
-                diaryStr += `<a class='bold link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name + ' Diary').replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'))} target="_blank">` + name + ' Diary</a>' + ': ' + chunkInfo[id]['Diary'][name];
+            !!chunkInfo['chunks'][id]['Diary'] && Object.keys(chunkInfo['chunks'][id]['Diary']).forEach(name => {
+                diaryStr += `<a class='bold link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name + ' Diary').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + ' Diary</a>' + ': ' + chunkInfo['chunks'][id]['Diary'][name];
             });
             diaryStr.length > 0 && (diaryStr = diaryStr.substring(0, diaryStr.length - 2));
             let namesList = {};
-            !!chunkInfo[id]['Connect'] && Object.keys(chunkInfo[id]['Connect']).forEach(name => {
+            !!chunkInfo['chunks'][id]['Connect'] && Object.keys(chunkInfo['chunks'][id]['Connect']).forEach(name => {
                 let realName = name;
                 let passedName = name;
-                if (!!chunkInfo[name]['Name']) {
-                    realName = chunkInfo[name]['Name'];
-                    passedName = chunkInfo[name]['Name'];
-                } else if (!!chunkInfo[name]['Nickname']) {
-                    realName = chunkInfo[name]['Nickname'] + '(' + name + ')';
+                if (!!chunkInfo['chunks'][name]['Name']) {
+                    realName = chunkInfo['chunks'][name]['Name'];
+                    passedName = chunkInfo['chunks'][name]['Name'];
+                } else if (!!chunkInfo['chunks'][name]['Nickname']) {
+                    realName = chunkInfo['chunks'][name]['Nickname'] + '(' + name + ')';
                 }
                 if (namesList[realName] !== realName) {
                     namesList[realName] = realName;
-                    connectStr += `<span class='link' onclick=redirectPanel('${encodeURI(passedName)}')>${realName.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/')}</span>` + ', ';
+                    connectStr += `<span class='link' onclick=redirectPanel('${encodeURI(passedName)}')>${realName.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')}</span>` + ', ';
                 }
             });
             connectStr.length > 0 && (connectStr = connectStr.substring(0, connectStr.length - 2));
@@ -1451,17 +1523,463 @@ var updateChunkInfo = function() {
                 return $(a).text() > $(b).text() ? 1 : -1;
             });
             connectStr = connectStr.join(', ');
+            challengeStr = calcFutureChallenges();
         }
-        $('.infoid-content').html((!!chunkInfo[id] && !!chunkInfo[id]['Nickname']) ? (chunkInfo[id]['Nickname'] + ' (' + id + ')') : id.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/'));
-        $('.panel-monsters').html(monsterStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
-        $('.panel-npcs').html(npcStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
-        $('.panel-spawns').html(spawnStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
-        $('.panel-shops').html(shopStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
-        $('.panel-features').html(objectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
-        $('.panel-quests').html(questStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
-        $('.panel-diaries').html(diaryStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
-        $('.panel-connections').html(connectStr.replace(/\%2E/g, '.').replace(/\%2F/g, '#').replace(/\%2G/g, '/') || 'None');
+        challengeStr = 'Coming Soon ;)'; //TEMP
+        $('.infoid-content').html((!!chunkInfo['chunks'][id] && !!chunkInfo['chunks'][id]['Nickname']) ? (chunkInfo['chunks'][id]['Nickname'] + ' (' + id + ')') : id.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'));
+        $('.panel-monsters').html(monsterStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-npcs').html(npcStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-spawns').html(spawnStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-shops').html(shopStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-features').html(objectStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-quests').html(questStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-diaries').html(diaryStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-connections').html(connectStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-challenges').html(challengeStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
     }
+}
+
+// Checks if skill has primary training
+var checkPrimaryMethod = function(skill, valids) {
+    let valid = false;
+    if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
+        valid = true;
+    } else {
+        Object.keys(valids[skill]).forEach(challenge => {
+            if (chunkInfo['challenges'][skill][challenge]['Primary'] && !chunkInfo['challenges'][skill][challenge]['Secondary'] && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill][challenge])) {
+                valid = true;
+            }
+        });
+    }
+    return valid;
+}
+
+// Finds the current challenge in each skill
+var calcCurrentChallenges = function() {
+    let chunks = {};
+    challengeArr = [];
+    $('.unlocked').each(function() {
+        chunks[parseInt($(this).text())] = true;
+    });
+    let i = 0;
+    let temp = {};
+    while (i < Object.keys(chunks).length) {
+        !!chunkInfo['chunks'][Object.keys(chunks)[i]] && !!chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect']).forEach(id => {
+            if (!!chunkInfo['chunks'][parseInt(id)]['Name'] && possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
+                chunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = true;
+                temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] || false;
+            } else if (!!chunkInfo['chunks'][parseInt(id)]['Name']) {
+                temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] || false;
+            }
+        });
+        i++;
+    }
+    possibleAreas = temp;
+    globalValids = calcChallenges(chunks);
+    checkOffChallenges();
+
+    Object.keys(globalValids).forEach(skill => {
+        let highestCompletedLevel = 0;
+        !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
+            if (completedChallenges[skill][name]['Level'] > highestCompletedLevel) {
+                highestCompletedLevel = completedChallenges[skill][name]['Level'];
+            }
+        });
+        let highestChallenge;
+        checkPrimaryMethod(skill, globalValids) && Object.keys(globalValids[skill]).forEach(challenge => {
+            if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel) {
+                if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
+                    highestChallenge = challenge;
+                } else if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                    highestChallenge = challenge;
+                }
+            }
+        });
+        !highestChallenge || (chunkInfo['challenges'][skill][highestChallenge]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge]['Primary']) && (highestChallenge = undefined);
+        !!highestChallenge && challengeArr.push(`<div class="challenge ${skill + '-challenge'}"><input type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner">' + skill + ': ' + highestChallenge.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('') + '</a>' + highestChallenge.split('~')[2] + (viewOnly || inEntry ? '' : '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + highestChallenge + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span>') + '</div>');
+        highestCurrent[skill] = highestChallenge;
+    });
+    let backlogArr = [];
+    Object.keys(backlog).forEach(skill => {
+        Object.keys(backlog[skill]).forEach(name => {
+            backlogArr.push(`<div class="challenge ${skill + '-challenge'}"> [` + chunkInfo['challenges'][skill][name]['Level'] + '] ' + skill + ': ' + name.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('') + '</a>' + name.split('~')[2] + (viewOnly || inEntry ? '' : ' <span class="arrow" onclick="unbacklogChallenge(' + "'" + name + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-up zmdi-hc-lg"></i></span>') + '</div>');
+        });
+    });
+    if (backlogArr.length < 1) {
+        backlogArr.push('No challenges currently backlogged.');
+    }
+    setCurrentChallenges(backlogArr);
+};
+
+// Finds the future challenge in each skill given a possible new chunk
+var calcFutureChallenges = function() {
+    let chunks = {};
+    let challengeStr = '';
+    $('.unlocked > .chunkId, .locked > .chunkId').each(function() {
+        chunks[parseInt($(this).text())] = true;
+    });
+    let i = 0;
+    while (i < Object.keys(chunks).length) {
+        !!chunkInfo['chunks'][Object.keys(chunks)[i]] && !!chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect']).forEach(id => {
+            if (!!chunkInfo['chunks'][parseInt(id)]['Name'] && possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
+                chunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = true;
+            }
+        });
+        i++;
+    }
+    let valids = calcChallenges(chunks);
+
+    Object.keys(valids).forEach(skill => {
+        let highestCompletedLevel = 0;
+        !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
+            if (completedChallenges[skill][name]['Level'] > highestCompletedLevel) {
+                highestCompletedLevel = completedChallenges[skill][name]['Level'];
+            }
+        });
+        if (!!highestCurrent[skill]) {
+            if (globalValids[skill][highestCurrent[skill]] > highestCompletedLevel) {
+                highestCompletedLevel = globalValids[skill][highestCurrent[skill]];
+            }
+        }
+        let highestChallenge;
+        checkPrimaryMethod(skill, valids) && Object.keys(valids[skill]).forEach(challenge => {
+            if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel || (highestCompletedLevel <= 1)) {
+                if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
+                    highestChallenge = challenge;
+                } else if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                    highestChallenge = challenge;
+                }
+            }
+        });
+        !highestChallenge || (chunkInfo['challenges'][skill][highestChallenge]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge]['Primary']) && (highestChallenge = undefined);
+        !!highestChallenge && (challengeStr += `<span class="challenge ${skill + '-challenge'}">` + highestChallenge.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('') + '</a>' + highestChallenge.split('~')[2] + '</span>, ');
+    });
+    challengeStr.length > 0 && (challengeStr = challengeStr.substring(0, challengeStr.length - 2));
+    return challengeStr;
+};
+
+// Calculates all the possible challenges
+var calcChallenges = function(chunks) {
+    //console.log(possibleAreas);
+    let baseChunkData = gatherChunksInfo(chunks);
+    let items = {...baseChunkData['items'], 'Bronze pickaxe': true, 'Hammer': true};
+    let objects = baseChunkData['objects'];
+    let valids = {};
+
+    let itemsPlus = {
+        'Axe+': ['Bronze axe', 'Iron axe', 'Steel axe', 'Black axe', 'Mithril axe', 'Adamant axe', 'Rune axe', 'Dragon axe', '3rd age axe', 'Infernal axe', 'Crystal axe'],
+        'Machete+': ['Machete', 'Opal machete', 'Jade machete', 'Red topaz machete'],
+        'Pickaxe+': ['Bronze pickaxe', 'Iron pickaxe', 'Steel pickaxe', 'Black pickaxe', 'Mithril pickaxe', 'Adamant pickaxe', 'Rune pickaxe', 'Dragon pickaxe', '3rd age pickaxe', 'Infernal pickaxe', 'Crystal pickaxe'],
+        'Lumberjack+': ['Lumberjack hat', 'Lumberjack top', 'Lumberjack legs', 'Lumberjack boots'],
+        'Hammer+': ['Hammer'],
+        'Spirit sigil+': ['Arcane sigil', 'Elysian sigil', 'Spectral sigil']
+    };
+
+    let objectsPlus = {
+        'Tree+': ["Tree", "Dead tree", "Evegreen", "Dying tree", "Jungle tree"],
+        'Clay+': ['Clay rock', 'Clay vein'],
+        'Copper+': ['Copper rock', 'Copper vein'],
+        'Tin+': ['Tin rock', 'Tin vein'],
+        'Iron+': ['Iron rock', 'Iron vein'],
+        'Silver+': ['Silver rock'],
+        'Coal+': ['Coal rock', 'Coal vein'],
+        'Gold+': ['Gold rock', 'Mineral vein'],
+        'Mithril+': ['Mithril rock', 'Mithril vein'],
+        'Adamantite+': ['Adamantite rock', 'Adamantite vein'],
+        'Runite+': ['Runite rock'],
+        'Anvil+': ['Anvil'],
+        'Rusted anvil+': ['Rusted anvil', 'Anvil'],
+        'Furnace+': ['Furnace']
+    };
+
+    let chunksPlus = {
+        'Gold chunks+': ['10804', 'Keldagrim']
+    };
+
+    skillNames.forEach(skill => {
+        valids[skill] = {};
+        !!chunkInfo['challenges'][skill] && Object.keys(chunkInfo['challenges'][skill]).sort(function(a, b){return chunkInfo['challenges'][skill][a]['Level']-chunkInfo['challenges'][skill][b]['Level']}).forEach(name => {
+            let validChallenge = true;
+            let validObjects = {};
+            !!chunkInfo['challenges'][skill][name]['Chunks'] && chunkInfo['challenges'][skill][name]['Chunks'].forEach(chunkId => {
+                if (chunkId.includes('+')) {
+                    if (!chunksPlus[chunkId]) {
+                        validChallenge = false;
+                    } else {
+                        let tempValid = false;
+                        Object.keys(chunks).forEach(name => {
+                            chunksPlus[chunkId].forEach(plus => {
+                                if (plus === name) {
+                                    tempValid = true;
+                                }
+                            });
+                        });
+                        if (!tempValid) {
+                            validChallenge = false;
+                        }
+                    }
+                } else {
+                    let tempValid = false;
+                    Object.keys(chunks).forEach(name => {
+                        if (chunkId === name) {
+                            tempValid = true;
+                        }
+                    });
+                    if (!tempValid) {
+                        validChallenge = false;
+                    }
+                }
+            });
+            !!chunkInfo['challenges'][skill][name]['Items'] && chunkInfo['challenges'][skill][name]['Items'].forEach(item => {
+                if (item.replaceAll(/\*/g, '').includes('+')) {
+                    if (!itemsPlus[item.replaceAll(/\*/g, '')]) {
+                        validChallenge = false;
+                    } else {
+                        let tempValid = false;
+                        itemsPlus[item.replaceAll(/\*/g, '')].forEach(plus => {
+                            if (!!items[plus]) {
+                                tempValid = true;
+                            }
+                        });
+                        if (!tempValid) {
+                            validChallenge = false;
+                        }
+                    }
+                } else {
+                    if (!items[item.replaceAll(/\*/g, '')]) {
+                        validChallenge = false;
+                    }
+                }
+                if (item.includes('*') && !!items[item.replaceAll(/\*/g, '')]) {
+                    let secondary = true;
+                    Object.keys(items[item.replaceAll(/\*/g, '')]).forEach(source => {
+                        if (!items[item.replaceAll(/\*/g, '')][source].includes('drop') || items[item.replaceAll(/\*/g, '')][source] === 'primary-drop') {
+                            secondary = false;
+                        }
+                    });
+                    chunkInfo['challenges'][skill][name]['Secondary'] = secondary;
+                }
+            });
+            !!chunkInfo['challenges'][skill][name]['Objects'] && chunkInfo['challenges'][skill][name]['Objects'].forEach(object => {
+                if (object.includes('+')) {
+                    if (!objectsPlus[object]) {
+                        validChallenge = false;
+                    } else {
+                        let tempValid = false;
+                        objectsPlus[object].forEach(plus => {
+                            if (!!objects[plus]) {
+                                tempValid = true;
+                            } else if (checkPrimaryMethod(skill, valids)) {
+                                validObjects[plus] = true;
+                            }
+                        });
+                        if (!tempValid) {
+                            validChallenge = false;
+                        }
+                    }
+                } else {
+                    if (!objects[object]) {
+                        validChallenge = false;
+                    } else if (checkPrimaryMethod(skill, valids)) {
+                        validObjects[object] = true;
+                    }
+                }
+            });
+            !!chunkInfo['challenges'][skill][name]['Category'] && Object.keys(rules).forEach(rule => {
+                if (chunkInfo['challenges'][skill][name]['Category'].includes(rule) && !rules[rule]) {
+                    validChallenge = false;
+                }
+            });
+            if (validChallenge) {
+                valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                Object.keys(validObjects).forEach(object => {
+                    !!chunkInfo['objectItems'][object] && Object.keys(chunkInfo['objectItems'][object]).forEach(item => {
+                        if (!items[item]) {
+                            items[item] = {};
+                        }
+                        items[item][object.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = 'object';
+                    });
+                });
+            }
+        });
+    });
+    //console.log(valids);
+    //console.log(chunkInfo['challenges']);
+    return valids;
+}
+
+// Displays the current challenges, areas, and backlog
+var setCurrentChallenges = function(backlogArr) {
+    $('.panel-active').empty();
+    challengeArr.forEach(line => {
+        $('.panel-active').append(line);
+    });
+    $('.panel-areas').empty();
+    Object.keys(possibleAreas).sort(function(a, b) { return a.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').localeCompare(b.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')) }).forEach(area => {
+        $('.panel-areas').append(`<div class="area ${area.replaceAll(' ', '_').replaceAll('%', '') + '-area'} noscroll"><input type='checkbox' ${possibleAreas[area] && "checked"} onclick="checkOffAreas()" ${(viewOnly || inEntry) && "disabled"} /> <a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(area.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + area.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a></div>')
+    });
+    $('.panel-backlog').empty();
+    backlogArr.forEach(line => {
+        $('.panel-backlog').append(line);
+    });
+}
+
+// Sends a challenge to the backlog
+var backlogChallenge = function(challenge, skill) {
+    if (!backlog[skill]) {
+        backlog[skill] = {};
+    }
+    backlog[skill][challenge] = chunkInfo['challenges'][skill][challenge];
+    let highestCompletedLevel = 0;
+    !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
+        if (completedChallenges[skill][name]['Level'] > highestCompletedLevel) {
+            highestCompletedLevel = completedChallenges[skill][name]['Level'];
+        }
+    });
+    let highestChallenge;
+    Object.keys(globalValids[skill]).forEach(challenge => {
+        if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel) {
+            if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
+                highestChallenge = challenge;
+            } else if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                highestChallenge = challenge;
+            }
+        }
+    });
+    !highestChallenge || (chunkInfo['challenges'][skill][highestChallenge]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge]['Primary']) && (highestChallenge = undefined);
+    !!highestChallenge ? $('.' + skill + '-challenge').html(`<div class="challenge ${skill + '-challenge'}"><input type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />` + skill + ': <span class="inner">' + highestChallenge.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('') + '</a>' + highestChallenge.split('~')[2] + '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + highestChallenge + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span></div>') : $('.' + skill + '-challenge').remove();
+    calcCurrentChallenges();
+}
+
+// Removes a challenge from the backlog
+var unbacklogChallenge = function(challenge, skill) {
+    delete backlog[skill][challenge];
+    if (backlog[skill] === {}) {
+        delete backlog[skill];
+    }
+    calcCurrentChallenges();
+}
+
+// Marks checked off challenges to save for later
+var checkOffChallenges = function() {
+    checkedChallenges = {};
+    Object.keys(globalValids).forEach(skill => {
+        if ($('.' + skill + '-challenge > input').prop('checked')) {
+            Object.keys(globalValids[skill]).forEach(challenge => {
+                if (challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '') === $('.' + skill + '-challenge > .inner').text().split(': ')[1]) {
+                    if (!checkedChallenges[skill]) {
+                        checkedChallenges[skill] = {};
+                    }
+                    checkedChallenges[skill][challenge] = chunkInfo['challenges'][skill][challenge];
+                }
+            });
+        }
+    });
+}
+
+// Marks checked off areas to unlock
+var checkOffAreas = function() {
+    Object.keys(possibleAreas).forEach(area => {
+        possibleAreas[area] = $('.' + area.replaceAll(' ', '_').replaceAll('%', '') + '-area > input').prop('checked');
+    });
+    calcCurrentChallenges();
+}
+
+// Moves checked off challenges to completed
+var completeChallenges = function() {
+    Object.keys(checkedChallenges).forEach(skill => {
+        Object.keys(checkedChallenges[skill]).forEach(name => {
+            if (!completedChallenges[skill]) {
+                completedChallenges[skill] = {};
+            }
+            completedChallenges[skill][name] = checkedChallenges[skill][name];
+        });
+    });
+    checkedChallenges = {};
+}
+
+// Gathers item/object info on all chunk ids passed in
+var gatherChunksInfo = function(chunks) {
+    let items = {};
+    let objects = {};
+    Object.keys(chunks).forEach(num => {
+        !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Monster'] && Object.keys(chunkInfo['chunks'][num]['Monster']).forEach(monster => {
+            !!chunkInfo['drops'][monster] && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
+                if (rules['Rare Drop'] || isNaN(parseInt(chunkInfo['drops'][monster][drop].split('/')[0]) / parseInt(chunkInfo['drops'][monster][drop].split('/')[1])) || (parseInt(chunkInfo['drops'][monster][drop].split('/')[0]) / parseInt(chunkInfo['drops'][monster][drop].split('/')[1])) > rareDropNum) {
+                    if (!items[drop]) {
+                        items[drop] = {};
+                    }
+                    if (chunkInfo['drops'][monster][drop] === 'Always') {
+                        items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = 'primary-drop';
+                    } else {
+                        items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = 'drop';
+                    }
+                }
+            });
+        });
+
+        !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Shop'] && Object.keys(chunkInfo['chunks'][num]['Shop']).forEach(shop => {
+            !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).forEach(item => {
+                if (!items[item]) {
+                    items[item] = {};
+                }
+                items[item][shop.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = 'shop';
+            });
+        });
+
+        !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Spawn'] && Object.keys(chunkInfo['chunks'][num]['Spawn']).forEach(spawn => {
+            if (!items[spawn]) {
+                items[spawn] = {};
+            }
+            items[spawn][num] = 'spawn';
+        });
+
+        !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Object'] && Object.keys(chunkInfo['chunks'][num]['Object']).forEach(object => {
+            if (!objects[object]) {
+                objects[object] = {};
+            }
+            objects[object][num] = true;
+        });
+    });
+    //console.log({items: items, objects: objects});
+    return {items: items, objects: objects};
+}
+
+// Gets and displays info on the gievn quest
+var getQuestInfo = function(quest) {
+    $('.menu10').css('opacity', 1).show();
+    quest = quest.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G');
+    $('.questname-content').html(quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'));
+    $('.panel-questdata').empty();
+    let unlocked = {...possibleAreas};
+    $('.unlocked').each(function() {
+        unlocked[parseInt($(this).text())] = true;
+    });
+    chunkInfo['quests'][quest].split(', ').forEach(chunkId => {
+        let chunkName = chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/');
+        let aboveground = false;
+        !!chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")] && !!chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")]['Nickname'] && (aboveground = true);
+        if (aboveground) {
+            chunkName = chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")]['Nickname'] + ' (' + chunkName + ')';
+        }
+        $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] && ' + valid-chunk'}"><span class="${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
+    });
+}
+
+// Toggles the quest info panel on and off
+var toggleQuestInfo = function() {
+    if (parseInt($('.menu10').css('opacity')) === 1) {
+        $('.menu10').css('opacity', 0).hide();
+        $('.questname-content').html('');
+    } else if (!!$('.questname-content').html() && $('.questname-content').html().length > 0) {
+        $('.menu10').css('opacity', 1).show();
+    }
+}
+
+// Scrolls to chunk with given id
+var scrollToChunk = function(id) {
+    let box = $('.box:contains(' + id + ')').addClass('recent');
+    scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
 }
 
 // Re-update chunk info panel
@@ -1520,7 +2038,7 @@ var checkMID = function(mid) {
 
 // Loads data from Firebase
 var loadData = function() {
-    databaseRef.child('chunkinfonew').once('value', function(snap) {
+    databaseRef.child('chunkinfo').once('value', function(snap) {
         chunkInfo = snap.val();
     });
     myRef.once('value', function(snap) {
@@ -1537,6 +2055,9 @@ var loadData = function() {
         settings['info'] = !document.cookie.split(';').filter(function(item) {
             return item.indexOf('newinfo=false') >= 0
         }).length > 0;
+        settings['infocollapse'] = document.cookie.split(';').filter(function(item) {
+            return item.indexOf('infocollapse=true') >= 0
+        }).length > 0;
         
         for (let count = 1; count <= 5; count++) {
             !recent[count - 1] && (recent[count - 1] = null);
@@ -1550,6 +2071,7 @@ var loadData = function() {
         settings['highvis'] && toggleVisibility();
         !settings['ids'] && $('.chunkId').hide();
         settings['info'] && toggleChunkInfo('startup');
+        settings['infocollapse'] && hideChunkInfo();
         settings['roll2'] && toggleRoll2('startup');
         settings['unpick'] && toggleUnpick('startup');
         if (settings['recent'] === undefined) {
@@ -1586,6 +2108,7 @@ var loadData = function() {
             isPicking = true;
         }
         chunkBorders();
+        calcCurrentChallenges();
         center('quick');
     });
 }
@@ -1595,6 +2118,7 @@ var setCookies = function() {
     document.cookie = "ids=" + showChunkIds;
     document.cookie = "highvis=" + highVisibilityMode;
     document.cookie = "newinfo=" + chunkInfoOn;
+    document.cookie = "infocollapse=" + infoCollapse;
 }
 
 // Stores data in Firebase
@@ -1745,20 +2269,19 @@ var changeLocked = function(lock) {
         } else {
             firebase.auth().signInAnonymously().catch(function(error) {console.log(error)});
             $('.center').css('margin-top', '15px');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).show();
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
-            chunkInfoOn && $('.menu8').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle').animate({'opacity': 1});
                 !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
-                chunkInfoOn && $('.menu8').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');
                 locked = lock;
                 lockBoxOpen = false;
+                calcCurrentChallenges();
             }, 500);
         }
         setTimeout(function() {
