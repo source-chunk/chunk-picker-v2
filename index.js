@@ -2004,7 +2004,7 @@ var getQuestInfo = function(quest) {
             questChunks.push(chunkName);
             chunkName = chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")]['Nickname'] + ' (' + chunkName + ')';
         }
-        $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] && ' + valid-chunk'}"><span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
+        $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] && ' + valid-chunk'}">` + `<span onclick="redirectPanel('` + chunkId + `')"><i class="quest-icon zmdi zmdi-collection-text"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
     });
 }
 
@@ -2033,11 +2033,13 @@ var scrollToChunk = function(id) {
 
 // Re-update chunk info panel
 var redirectPanel = function(name) {
+    console.log(name);
     let realName = decodeURI(name);
     $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
     $('.box > .chunkId:contains(' + realName + ')').parent().addClass('locked');
     ((realName % 256) < 65) && scrollToPos(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) % rowSize, Math.floor(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) / rowSize), 0, 0);
     infoLockedId = realName.toString();
+    console.log(infoLockedId);
     updateChunkInfo();
     $('.infoid').addClass('new');
     setTimeout(function() {
