@@ -140,6 +140,33 @@ let possibleAreas = {
 let rareDropNum = 1/1000;
 let highestCurrent = {
 };
+let universalPrimary = {
+    "Slayer": ["Primary+"],
+    "Thieving": ["Primary+"],
+    "Attack": ["Monster+"],
+    "Defence": ["Monster+"],
+    "Strength": ["Monster+"],
+    "Hitpoints": ["Monster+"],
+    "Ranged": ["Ranged+", "Monster+"],
+    "Prayer": ["Bones+"],
+    "Runecraft": ["Primary+"],
+    "Magic": ["Primary+"],
+    "Farming": ["Primary+"],
+    "Herblore": ["Primary+"],
+    "Hunter": ["Primary+"],
+    "Cooking": ["Primary+"],
+    "Woodcutting": ["Primary+"],
+    "Firemaking": ["Primary+"],
+    "Fletching": ["Primary+"],
+    "Fishing": ["Primary+"],
+    "Mining": ["Primary+"],
+    "Smithing": ["Primary+"],
+    "Crafting": ["Primary+"],
+    "Agility": ["Primary+"],
+    "Construction": ["Primary+"]
+}
+let monsterExists = false;
+let questChunks = [];
 
 // ----------------------------------------------------------
 
@@ -1525,7 +1552,7 @@ var updateChunkInfo = function() {
             connectStr = connectStr.join(', ');
             challengeStr = calcFutureChallenges();
         }
-        challengeStr = 'Coming Soon ;)'; //TEMP
+        challengeStr = 'Coming Soon ;)';
         $('.infoid-content').html((!!chunkInfo['chunks'][id] && !!chunkInfo['chunks'][id]['Nickname']) ? (chunkInfo['chunks'][id]['Nickname'] + ' (' + id + ')') : id.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'));
         $('.panel-monsters').html(monsterStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
         $('.panel-npcs').html(npcStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
@@ -1545,9 +1572,21 @@ var checkPrimaryMethod = function(skill, valids) {
     if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
         valid = true;
     } else {
-        Object.keys(valids[skill]).forEach(challenge => {
-            if (chunkInfo['challenges'][skill][challenge]['Primary'] && !chunkInfo['challenges'][skill][challenge]['Secondary'] && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill][challenge])) {
-                valid = true;
+        let tempValid = true;
+        Object.keys(universalPrimary[skill]).forEach(line => {
+            if (line === 'Primary+') {
+                Object.keys(valids[skill]).forEach(challenge => {
+                    if (!(chunkInfo['challenges'][skill][challenge]['Primary'] && !chunkInfo['challenges'][skill][challenge]['Secondary'] && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill][challenge]))) {
+                        tempValid = false;
+                    }
+                });
+            } else if (line === 'Monster+') {
+                if (!monsterExists) {
+                    tempValid = false;
+                }
+            }
+            if (tempValid) {
+                valid = tempValid;
             }
         });
     }
@@ -1595,6 +1634,7 @@ var calcCurrentChallenges = function() {
                 }
             }
         });
+        console.log(highestChallenge);
         !highestChallenge || (chunkInfo['challenges'][skill][highestChallenge]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge]['Primary']) && (highestChallenge = undefined);
         !!highestChallenge && challengeArr.push(`<div class="challenge ${skill + '-challenge'}"><input type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner">' + skill + ': ' + highestChallenge.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('') + '</a>' + highestChallenge.split('~')[2] + (viewOnly || inEntry ? '' : '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + highestChallenge + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span>') + '</div>');
         highestCurrent[skill] = highestChallenge;
@@ -1955,11 +1995,13 @@ var getQuestInfo = function(quest) {
     $('.unlocked').each(function() {
         unlocked[parseInt($(this).text())] = true;
     });
+    questChunks = [];
     chunkInfo['quests'][quest].split(', ').forEach(chunkId => {
         let chunkName = chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/');
         let aboveground = false;
         !!chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")] && !!chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")]['Nickname'] && (aboveground = true);
         if (aboveground) {
+            questChunks.push(chunkName);
             chunkName = chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")]['Nickname'] + ' (' + chunkName + ')';
         }
         $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] && ' + valid-chunk'}"><span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
@@ -1974,6 +2016,13 @@ var toggleQuestInfo = function() {
     } else if (!!$('.questname-content').html() && $('.questname-content').html().length > 0) {
         $('.menu10').css('opacity', 1).show();
     }
+}
+
+// Highlights array of chunk ids for current quest
+var highlightAllQuest = function() {
+    questChunks.forEach(id => {
+        $('.box:contains(' + id + ')').addClass('recent');
+    });
 }
 
 // Scrolls to chunk with given id

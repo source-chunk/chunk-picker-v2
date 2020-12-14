@@ -418,10 +418,6 @@ button.menu2 {
     width: 300px;
 }
 
-.questname {
-    border-bottom: 1px solid black;
-}
-
 .gitgeddes {
     word-break: break-all;
 }
@@ -1535,4 +1531,20 @@ button.menu2 {
 .click {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.highlightAllQuest {
+    border-bottom: solid 1px black;
+}
+
+.highlightAllQuest > span {
+    font-size: 14px;
+    cursor: pointer;
+    color: rgb(61, 61, 61);
+    transition: color .5s;
+    text-decoration: underline;
+}
+
+.highlightAllQuest >span:hover {
+    color: black;
 }
