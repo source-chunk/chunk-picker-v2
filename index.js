@@ -1501,8 +1501,6 @@ var updateChunkInfo = function() {
         let diaryStr = '';
         let connectStr = '';
         let challengeStr = '';
-        console.log(id);
-        console.log(chunkInfo['chunks']);
         if (!!chunkInfo['chunks'][id]) {
             !!chunkInfo['chunks'][id]['Monster'] && Object.keys(chunkInfo['chunks'][id]['Monster']).forEach(name => {
                 monsterStr += (chunkInfo['chunks'][id]['Monster'][name] === 1 ? '' : chunkInfo['chunks'][id]['Monster'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + '</a>, ';
@@ -1544,7 +1542,7 @@ var updateChunkInfo = function() {
                 }
                 if (namesList[realName] !== realName) {
                     namesList[realName] = realName;
-                    connectStr += `<span class='link' onclick=redirectPanel('${encodeURI(passedName)}')>${realName.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')}</span>` + ', ';
+                    connectStr += `<span class='link' onclick=redirectPanel('${encodeURI(passedName.replaceAll(/\'/g, '%2H'))}')>${realName.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')}</span>` + ', ';
                 }
             });
             connectStr.length > 0 && (connectStr = connectStr.substring(0, connectStr.length - 2));
@@ -1636,7 +1634,6 @@ var calcCurrentChallenges = function() {
                 }
             }
         });
-        console.log(highestChallenge);
         !highestChallenge || (chunkInfo['challenges'][skill][highestChallenge]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge]['Primary']) && (highestChallenge = undefined);
         !!highestChallenge && challengeArr.push(`<div class="challenge ${skill + '-challenge'}"><input type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner">' + skill + ': ' + highestChallenge.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('') + '</a>' + highestChallenge.split('~')[2] + (viewOnly || inEntry ? '' : '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + highestChallenge + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span>') + '</div>');
         highestCurrent[skill] = highestChallenge;
@@ -2035,7 +2032,7 @@ var scrollToChunk = function(id) {
 
 // Re-update chunk info panel
 var redirectPanel = function(name) {
-    let realName = decodeURI(name.replaceAll(/\%2H/g, "'"));
+    let realName = decodeURI(name).replaceAll(/\%2H/g, "'");
     $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
     $('.box > .chunkId:contains(' + realName + ')').parent().addClass('locked');
     ((realName % 256) < 65) && scrollToPos(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) % rowSize, Math.floor(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) / rowSize), 0, 0);
