@@ -1408,7 +1408,7 @@ button.menu2 {
     text-align: left;
     padding-left: 10px;
     overflow-y: auto;
-    margin-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .challenge > input:disabled, .area > input:disabled {

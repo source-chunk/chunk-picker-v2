@@ -135,7 +135,8 @@ let completedChallenges = {
 };
 let possibleAreas = {
     "Lumbridge Castle%2FCellar": true,
-    "H%2EA%2EM%2E Hideout": true
+    "H%2EA%2EM%2E Hideout": true,
+    "Ancient Cavern": true
 }
 let rareDropNum = 1/1000;
 let highestCurrent = {
@@ -164,6 +165,31 @@ let universalPrimary = {
     "Crafting": ["Primary+"],
     "Agility": ["Primary+"],
     "Construction": ["Primary+"]
+}
+let processingSkill = {
+    "Slayer": false,
+    "Thieving": false,
+    "Attack": false,
+    "Defence": false,
+    "Strength": false,
+    "Hitpoints": false,
+    "Ranged": false,
+    "Prayer": false,
+    "Runecraft": false,
+    "Magic": true,
+    "Farming": true,
+    "Herblore": true,
+    "Hunter": false,
+    "Cooking": true,
+    "Woodcutting": false,
+    "Firemaking": true,
+    "Fletching": true,
+    "Fishing": false,
+    "Mining": false,
+    "Smithing": true,
+    "Crafting": true,
+    "Agility": false,
+    "Construction": true
 }
 let monsterExists = false;
 let questChunks = [];
@@ -421,9 +447,9 @@ $(document).ready(function() {
 // Credit to Amehzyn
 // Handles zooming
 $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
-    if (e.target.className.includes('panel') || e.target.className.includes('link') || e.target.className.includes('noscroll')) {
+    if (e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
         return;
-    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen) {
+    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || e.target.className.split(' ').includes('noscrollhard')) {
         e.preventDefault();
         return;
     }
@@ -655,7 +681,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen) {
+    if (locked || importMenuOpen || highscoreMenuOpen || $('.selected').length < 1) {
         return;
     }
     var el;
@@ -706,7 +732,7 @@ var pick = function() {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2 = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen) {
+    if (locked || importMenuOpen || highscoreMenuOpen || $('.selected').length < 1) {
         return;
     }
     isPicking = true;
@@ -1132,7 +1158,7 @@ var changePin = function() {
 
 // Unpicks a random unlocked chunk
 var unpick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen) {
+    if (locked || importMenuOpen || highscoreMenuOpen || $('.unlocked').length < 1) {
         return;
     }
     var el = $('.unlocked');
@@ -1552,7 +1578,7 @@ var updateChunkInfo = function() {
             connectStr = connectStr.join(', ');
             challengeStr = calcFutureChallenges();
         }
-        challengeStr = 'Coming Soon ;)';
+        //challengeStr = 'Coming Soon ;)';
         $('.infoid-content').html((!!chunkInfo['chunks'][id] && !!chunkInfo['chunks'][id]['Nickname']) ? (chunkInfo['chunks'][id]['Nickname'] + ' (' + id + ')') : id.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'));
         $('.panel-monsters').html(monsterStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
         $('.panel-npcs').html(npcStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
@@ -1572,24 +1598,24 @@ var checkPrimaryMethod = function(skill, valids) {
     if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
         valid = true;
     } else {
-        let tempValid = true;
-        Object.keys(universalPrimary[skill]).forEach(line => {
+        let tempValid = false;
+        universalPrimary[skill].forEach(line => {
             if (line === 'Primary+') {
                 Object.keys(valids[skill]).forEach(challenge => {
-                    if (!(chunkInfo['challenges'][skill][challenge]['Primary'] && !chunkInfo['challenges'][skill][challenge]['Secondary'] && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill][challenge]))) {
-                        tempValid = false;
+                    if (chunkInfo['challenges'][skill][challenge]['Primary'] && !chunkInfo['challenges'][skill][challenge]['Secondary'] && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill][challenge])) {
+                        tempValid = true;
                     }
                 });
             } else if (line === 'Monster+') {
-                if (!monsterExists) {
-                    tempValid = false;
+                let monsterExists = true; //TEMP
+                if (monsterExists) {
+                    tempValid = true;
                 }
             }
-            if (tempValid) {
-                valid = tempValid;
-            }
         });
+        valid = tempValid;
     }
+    valid = true;
     return valid;
 }
 
@@ -1617,6 +1643,9 @@ var calcCurrentChallenges = function() {
     globalValids = calcChallenges(chunks);
     checkOffChallenges();
 
+    let tempChallengeArr = {};
+    let highestChallenge = {};
+
     Object.keys(globalValids).forEach(skill => {
         let highestCompletedLevel = 0;
         !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
@@ -1624,24 +1653,62 @@ var calcCurrentChallenges = function() {
                 highestCompletedLevel = completedChallenges[skill][name]['Level'];
             }
         });
-        let highestChallenge;
         checkPrimaryMethod(skill, globalValids) && Object.keys(globalValids[skill]).forEach(challenge => {
             if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel) {
-                if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
-                    highestChallenge = challenge;
-                } else if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
-                    highestChallenge = challenge;
+                if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
+                    if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+                        let tempValid = true;
+                        Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+                            if (!checkPrimaryMethod(subSkill, globalValids)) {
+                                tempValid = false;
+                            }
+                        });
+                        if (tempValid) {
+                            highestChallenge[skill] = challenge;
+                        }
+                    } else {
+                        highestChallenge[skill] = challenge;
+                    }
+                } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                    if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+                        let tempValid = true;
+                        Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+                            if (!checkPrimaryMethod(subSkill, globalValids)) {
+                                tempValid = false;
+                            }
+                        });
+                        if (tempValid) {
+                            highestChallenge[skill] = challenge;
+                        }
+                    } else {
+                        highestChallenge[skill] = challenge;
+                    }
                 }
             }
         });
-        !highestChallenge || (chunkInfo['challenges'][skill][highestChallenge]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge]['Primary']) && (highestChallenge = undefined);
-        !!highestChallenge && challengeArr.push(`<div class="challenge ${skill + '-challenge'}"><input type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner">' + skill + ': ' + highestChallenge.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('') + '</a>' + highestChallenge.split('~')[2] + (viewOnly || inEntry ? '' : '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + highestChallenge + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span>') + '</div>');
-        highestCurrent[skill] = highestChallenge;
+        !highestChallenge[skill] || (chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge[skill]]['Primary']) && (highestChallenge[skill] = undefined);
+        !!highestChallenge[skill] && (tempChallengeArr[skill] = highestChallenge[skill]);
+        highestCurrent[skill] = highestChallenge[skill];
+        if (!!highestChallenge[skill] && !!chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills']) {
+            Object.keys(chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills']).forEach(subSkill => {
+                if (!highestChallenge[subSkill] || chunkInfo['challenges'][subSkill][highestChallenge[subSkill]]['Level'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills'][subSkill]) {
+                    highestChallenge[subSkill] = highestChallenge[skill];
+                    tempChallengeArr[subSkill] = highestChallenge[subSkill];
+                    highestCurrent[subSkill] = highestChallenge[subSkill];
+                }
+            });
+        }
     });
+    Object.keys(tempChallengeArr).sort().forEach(skill => {
+        challengeArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscrollhard" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + ': ' + tempChallengeArr[skill].split('~')[0] + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('') + '</a>' + tempChallengeArr[skill].split('~')[2] + (viewOnly || inEntry ? '' : '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + tempChallengeArr[skill] + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span>') + '</div>');
+    });
+    if (challengeArr.length < 1) {
+        challengeArr.push('No current challenges.');
+    }
     let backlogArr = [];
     Object.keys(backlog).forEach(skill => {
         Object.keys(backlog[skill]).forEach(name => {
-            backlogArr.push(`<div class="challenge ${skill + '-challenge'}"> [` + chunkInfo['challenges'][skill][name]['Level'] + '] ' + skill + ': ' + name.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('') + '</a>' + name.split('~')[2] + (viewOnly || inEntry ? '' : ' <span class="arrow" onclick="unbacklogChallenge(' + "'" + name + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-up zmdi-hc-lg"></i></span>') + '</div>');
+            backlogArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"> [` + chunkInfo['challenges'][skill][name]['Level'] + '] ' + skill + ': ' + name.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('') + '</a>' + name.split('~')[2] + (viewOnly || inEntry ? '' : ' <span class="arrow" onclick="unbacklogChallenge(' + "'" + name + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-up zmdi-hc-lg"></i></span>') + '</div>');
         });
     });
     if (backlogArr.length < 1) {
@@ -1667,6 +1734,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     let valids = calcChallenges(chunks);
+    let highestChallenge = {};
 
     Object.keys(valids).forEach(skill => {
         let highestCompletedLevel = 0;
@@ -1680,18 +1748,17 @@ var calcFutureChallenges = function() {
                 highestCompletedLevel = globalValids[skill][highestCurrent[skill]];
             }
         }
-        let highestChallenge;
         checkPrimaryMethod(skill, valids) && Object.keys(valids[skill]).forEach(challenge => {
             if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel || (highestCompletedLevel <= 1)) {
-                if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
-                    highestChallenge = challenge;
-                } else if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
-                    highestChallenge = challenge;
+                if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
+                    highestChallenge[skill] = challenge;
+                } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                    highestChallenge[skill] = challenge;
                 }
             }
         });
-        !highestChallenge || (chunkInfo['challenges'][skill][highestChallenge]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge]['Primary']) && (highestChallenge = undefined);
-        !!highestChallenge && (challengeStr += `<span class="challenge ${skill + '-challenge'}">` + highestChallenge.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('') + '</a>' + highestChallenge.split('~')[2] + '</span>, ');
+        !highestChallenge[skill] || (chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge[skill]]['Primary']) && (highestChallenge[skill] = undefined);
+        !!highestChallenge[skill] && (challengeStr += `<span class="challenge ${skill + '-challenge'}">` + highestChallenge[skill].split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge[skill].split('~')[1].split('|').join('') + '</a>' + highestChallenge[skill].split('~')[2] + '</span>, ');
     });
     challengeStr.length > 0 && (challengeStr = challengeStr.substring(0, challengeStr.length - 2));
     return challengeStr;
@@ -1701,9 +1768,11 @@ var calcFutureChallenges = function() {
 var calcChallenges = function(chunks) {
     //console.log(possibleAreas);
     let baseChunkData = gatherChunksInfo(chunks);
-    let items = {...baseChunkData['items'], 'Bronze pickaxe': true, 'Hammer': true};
+    let items = {...baseChunkData['items'], 'Bronze pickaxe': true, 'Hammer': true, 'Tinderbox': true};
     let objects = baseChunkData['objects'];
     let valids = {};
+
+    //console.log(items);
 
     let itemsPlus = {
         'Axe+': ['Bronze axe', 'Iron axe', 'Steel axe', 'Black axe', 'Mithril axe', 'Adamant axe', 'Rune axe', 'Dragon axe', '3rd age axe', 'Infernal axe', 'Crystal axe'],
@@ -1711,11 +1780,33 @@ var calcChallenges = function(chunks) {
         'Pickaxe+': ['Bronze pickaxe', 'Iron pickaxe', 'Steel pickaxe', 'Black pickaxe', 'Mithril pickaxe', 'Adamant pickaxe', 'Rune pickaxe', 'Dragon pickaxe', '3rd age pickaxe', 'Infernal pickaxe', 'Crystal pickaxe'],
         'Lumberjack+': ['Lumberjack hat', 'Lumberjack top', 'Lumberjack legs', 'Lumberjack boots'],
         'Hammer+': ['Hammer'],
-        'Spirit sigil+': ['Arcane sigil', 'Elysian sigil', 'Spectral sigil']
+        'Spirit sigil+': ['Arcane sigil', 'Elysian sigil', 'Spectral sigil'],
+        'BronzeWep+': ['Bronze dagger', 'Bronze pickaxe', 'Bronze axe', 'Bronze mace', 'Bronze sword', 'Bronze scimitar', 'Bronze longsword', 'Bronze warhammer', 'Bronze battleaxe', 'Bronze claws', 'Bronze spear', 'Bronze 2h sword'],
+        'IronWep+': ['Iron dagger', 'Iron pickaxe', 'Iron axe', 'Iron mace', 'Iron sword', 'Iron scimitar', 'Iron longsword', 'Iron warhammer', 'Iron battleaxe', 'Iron claws', 'Iron spear', 'Iron 2h sword'],
+        'BoneWep+': ['Bone club', 'Bone spear', 'Bone dagger'],
+        'Mjolnir+': ['Saradomin mjolnir', 'Zamorak mjolnir', 'Guthix mjolnir'],
+        'SteelWep+': ['Steel dagger', 'Steel pickaxe', 'Steel axe', 'Steel mace', 'Steel sword', 'Steel scimitar', 'Steel longsword', 'Steel warhammer', 'Steel battleaxe', 'Steel claws', 'Steel spear', 'Steel 2h sword'],
+        'BlackWep+': ['Black dagger', 'Black pickaxe', 'Black axe', 'Black mace', 'Black sword', 'Black scimitar', 'Black longsword', 'Black warhammer', 'Black battleaxe', 'Black claws', 'Black spear', 'Black 2h sword'],
+        'WhiteWep+': ['White dagger', 'White mace', 'White sword', 'White scimitar', 'White longsword', 'White warhammer', 'White battleaxe', 'White claws', 'White 2h sword'],
+        'MithrilWep+': ['Mithril dagger', 'Mithril pickaxe', 'Mithril axe', 'Mithril mace', 'Mithril sword', 'Mithril scimitar', 'Mithril longsword', 'Mithril warhammer', 'Mithril battleaxe', 'Mithril claws', 'Mithril spear', 'Mithril 2h sword'],
+        'AdamantWep+': ['Adamant dagger', 'Adamant pickaxe', 'Adamant axe', 'Adamant mace', 'Adamant sword', 'Adamant scimitar', 'Adamant longsword', 'Adamant warhammer', 'Adamant battleaxe', 'Adamant claws', 'Adamant spear', 'Adamant 2h sword'],
+        'Battlestaff+': ['Battlestaff', 'Air battlestaff', 'Water battlestaff', 'Earth battlestaff', 'Fire battlestaff', 'Lava battlestaff', 'Mud battlestaff', 'Steam battlestaff', 'Smoke battlestaff', 'Mist battlestaff', 'Dust battlestaff'],
+        'RuneWep+': ['Rune dagger', 'Rune pickaxe', 'Rune axe', 'Rune mace', 'Rune sword', 'Rune scimitar', 'Rune longsword', 'Rune warhammer', 'Rune battleaxe', 'Rune claws', 'Rune spear', 'Rune 2h sword'],
+        'Mystic staff+': ['Mystic air staff', 'Mystic water staff', 'earth staff', 'Mystic fire staff', 'Mystic lava staff', 'Mystic mud staff', 'Mystic steam staff', 'Mystic smoke staff', 'Mystic mist staff', 'Mystic dust staff'],
+        'Void Knight equipment+': ['Void melee helm', 'Void ranger helm', 'Void mage helm', 'Void knight gloves', 'Void knight robe', 'Void knight top'],
+        'GraniteWep+': ['Granite maul', 'Granite longsword', 'Granite hammer'],
+        'DragonWep+': ['Dragon dagger', 'Dragon harpoon', 'Dragon pickaxe', 'Dragon axe', 'Dragon mace', 'Dragon hasta', 'Dragon sword', 'Dragon scimitar', 'Dragon longsword', 'Dragon warhammer', 'Dragon battleaxe', 'Dragon claws', 'Dragon spear', 'Dragon 2h sword'],
+        'Godsword+': ['Saradomin godsword', 'Zamorak godsword', 'Armadyl godsword', 'Bandos godsword'],
+        'Feather+': ['Feather', 'Red feather', 'Orange feather', 'Yellow feather', 'Blue feather', 'Stripy feather'],
+        'Pyre bones+': ['Mangled bones', 'Chewed bones'],
+        'Phrin remains+': ['Loar remains', 'Phrin remains'],
+        'Riyl remains+': ['Loar remains', 'Phrin remains', 'Riyl remains'],
+        'Asyn remains+': ['Loar remains', 'Phrin remains', 'Riyl remains', 'Asyn remains'],
+        'Fiyr remains+': ['Loar remains', 'Phrin remains', 'Riyl remains', 'Asyn remains', 'Fiyr remains']
     };
 
     let objectsPlus = {
-        'Tree+': ["Tree", "Dead tree", "Evegreen", "Dying tree", "Jungle tree"],
+        'Tree+': ['Tree', 'Dead tree', 'Evegreen', 'Dying tree', 'Jungle tree'],
         'Clay+': ['Clay rock', 'Clay vein'],
         'Copper+': ['Copper rock', 'Copper vein'],
         'Tin+': ['Tin rock', 'Tin vein'],
@@ -1732,14 +1823,69 @@ var calcChallenges = function(chunks) {
     };
 
     let chunksPlus = {
-        'Gold chunks+': ['10804', 'Keldagrim']
+        'Gold chunks+': ['10804', 'Keldagrim'],
+        'Woodcutting guild+': ['6198', '6454']
     };
 
+    let tools = {
+        'Ammo mould': true,
+        'Amulet mould': true,
+        'Barb-tail harpoon': true,
+        'Barbarian rod': true,
+        'Big fishing net': true,
+        'Bolt mould': true,
+        'Bracelet mould': true,
+        'Chisel': true,
+        'Crystal saw': true,
+        'Dark fishing bait': true,
+        'Dragon harpoon': true,
+        'Drift net': true,
+        'Fishing bait': true,
+        'Fishing rod': true,
+        'Fly fishing rod': true,
+        'Hammer': true,
+        'Harpoon': true,
+        'Holy mould': true,
+        'Infernal harpoon': true,
+        'Jade machete': true,
+        'Karambwan vessel': true,
+        'Knife': true,
+        'Lobster pot': true,
+        'Machete': true,
+        'Necklace mould': true,
+        'Needle': true,
+        'Oily fishing rod': true,
+        'Oily pearl fishing rod': true,
+        'Opal machete': true,
+        'Pearl barbarian rod': true,
+        'Pearl fishing rod': true,
+        'Pearl fly fishing rod': true,
+        'Pestle and mortar': true,
+        'Red topaz machete': true,
+        'Ring mould': true,
+        'Saw': true,
+        'Secateurs': true,
+        'Shears': true,
+        'Sickle mould': true,
+        'Small fishing net': true,
+        'Thread': true,
+        'Tiara mould': true,
+        'Tinderbox': true,
+        'Trowel': true,
+        'Unholy mould': true
+    }
+
+    let tempItemSkill = {};
+
     skillNames.forEach(skill => {
+        tempItemSkill[skill] = {};
         valids[skill] = {};
         !!chunkInfo['challenges'][skill] && Object.keys(chunkInfo['challenges'][skill]).sort(function(a, b){return chunkInfo['challenges'][skill][a]['Level']-chunkInfo['challenges'][skill][b]['Level']}).forEach(name => {
             let validChallenge = true;
             let validObjects = {};
+            //delete items['Logs'];
+            //delete items['Oak logs'];
+            //delete items['Willow logs'];
             !!chunkInfo['challenges'][skill][name]['Chunks'] && chunkInfo['challenges'][skill][name]['Chunks'].forEach(chunkId => {
                 if (chunkId.includes('+')) {
                     if (!chunksPlus[chunkId]) {
@@ -1808,8 +1954,9 @@ var calcChallenges = function(chunks) {
                         objectsPlus[object].forEach(plus => {
                             if (!!objects[plus]) {
                                 tempValid = true;
-                            } else if (checkPrimaryMethod(skill, valids)) {
-                                validObjects[plus] = true;
+                                if (checkPrimaryMethod(skill, valids)) {
+                                    validObjects[plus] = true;
+                                }
                             }
                         });
                         if (!tempValid) {
@@ -1830,7 +1977,31 @@ var calcChallenges = function(chunks) {
                 }
             });
             if (validChallenge) {
-                valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                if (!processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items']) {
+                    valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                } else {
+                    !!chunkInfo['challenges'][skill][name]['Items'] && chunkInfo['challenges'][skill][name]['Items'].forEach(item => {
+                        if (item.replaceAll(/\*/g, '').includes('+')) {
+                            itemsPlus[item.replaceAll(/\*/g, '')].forEach(plus => {
+                                if (!!items[plus]) {
+                                    if (!tools[plus]) {
+                                        if (!tempItemSkill[skill][plus]) {
+                                            tempItemSkill[skill][plus] = [];
+                                        }
+                                        tempItemSkill[skill][plus].push(name);
+                                    }
+                                }
+                            });
+                        } else {
+                            if (!tools[item.replaceAll(/\*/g, '')]) {
+                                if (!tempItemSkill[skill][item.replaceAll(/\*/g, '')]) {
+                                    tempItemSkill[skill][item.replaceAll(/\*/g, '')] = [];
+                                }
+                                tempItemSkill[skill][item.replaceAll(/\*/g, '')].push(name);
+                            }
+                        }
+                    });
+                }
                 Object.keys(validObjects).forEach(object => {
                     !!chunkInfo['objectItems'][object] && Object.keys(chunkInfo['objectItems'][object]).forEach(item => {
                         if (!items[item]) {
@@ -1842,8 +2013,22 @@ var calcChallenges = function(chunks) {
             }
         });
     });
+    
+    Object.keys(tempItemSkill).forEach(skill => {
+        Object.keys(tempItemSkill[skill]).forEach(item => {
+            let lowestItem;
+            let lowestName;
+            !!items[item] && tempItemSkill[skill][item].forEach(name => {
+                let challenge = chunkInfo['challenges'][skill][name];
+                if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
+                    lowestItem = challenge;
+                    lowestName = name;
+                }
+            });
+            !!lowestName && (valids[skill][lowestName] = chunkInfo['challenges'][skill][lowestName]['Level']);
+        });
+    });
     //console.log(valids);
-    //console.log(chunkInfo['challenges']);
     return valids;
 }
 
@@ -1854,9 +2039,12 @@ var setCurrentChallenges = function(backlogArr) {
         $('.panel-active').append(line);
     });
     $('.panel-areas').empty();
-    Object.keys(possibleAreas).sort(function(a, b) { return a.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').localeCompare(b.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')) }).forEach(area => {
-        $('.panel-areas').append(`<div class="area ${area.replaceAll(' ', '_').replaceAll('%', '') + '-area'} noscroll"><input type='checkbox' ${possibleAreas[area] && "checked"} onclick="checkOffAreas()" ${(viewOnly || inEntry) && "disabled"} /> <a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(area.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + area.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a></div>')
+    !!possibleAreas && Object.keys(possibleAreas).length > 0 && Object.keys(possibleAreas).sort(function(a, b) { return a.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').localeCompare(b.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')) }).forEach(area => {
+        $('.panel-areas').append(`<div class="area ${area.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H') + '-area'} noscroll"><input class="noscrollhard" type='checkbox' ${possibleAreas[area] && "checked"} onclick="checkOffAreas()" ${(viewOnly || inEntry) && "disabled"} /> <a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(area.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + area.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a></div>')
     });
+    if (!possibleAreas || Object.keys(possibleAreas).length <= 0) {
+        $('.panel-areas').append('No areas currently available.');
+    }
     $('.panel-backlog').empty();
     backlogArr.forEach(line => {
         $('.panel-backlog').append(line);
@@ -1869,24 +2057,14 @@ var backlogChallenge = function(challenge, skill) {
         backlog[skill] = {};
     }
     backlog[skill][challenge] = chunkInfo['challenges'][skill][challenge];
-    let highestCompletedLevel = 0;
-    !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
-        if (completedChallenges[skill][name]['Level'] > highestCompletedLevel) {
-            highestCompletedLevel = completedChallenges[skill][name]['Level'];
-        }
-    });
-    let highestChallenge;
-    Object.keys(globalValids[skill]).forEach(challenge => {
-        if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel) {
-            if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
-                highestChallenge = challenge;
-            } else if ((!highestChallenge || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
-                highestChallenge = challenge;
+    if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+        Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+            if (!backlog[subSkill]) {
+                backlog[subSkill] = {};
             }
-        }
-    });
-    !highestChallenge || (chunkInfo['challenges'][skill][highestChallenge]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge]['Primary']) && (highestChallenge = undefined);
-    !!highestChallenge ? $('.' + skill + '-challenge').html(`<div class="challenge ${skill + '-challenge'}"><input type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />` + skill + ': <span class="inner">' + highestChallenge.split('~')[0] + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('') + '</a>' + highestChallenge.split('~')[2] + '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + highestChallenge + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span></div>') : $('.' + skill + '-challenge').remove();
+            backlog[subSkill][challenge] = chunkInfo['challenges'][subSkill][challenge];
+        });
+    }
     calcCurrentChallenges();
 }
 
@@ -1895,6 +2073,14 @@ var unbacklogChallenge = function(challenge, skill) {
     delete backlog[skill][challenge];
     if (backlog[skill] === {}) {
         delete backlog[skill];
+    }
+    if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+        Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+            delete backlog[subSkill][challenge];
+            if (backlog[subSkill] === {}) {
+                delete backlog[subSkill];
+            }
+        });
     }
     calcCurrentChallenges();
 }
@@ -1919,7 +2105,7 @@ var checkOffChallenges = function() {
 // Marks checked off areas to unlock
 var checkOffAreas = function() {
     Object.keys(possibleAreas).forEach(area => {
-        possibleAreas[area] = $('.' + area.replaceAll(' ', '_').replaceAll('%', '') + '-area > input').prop('checked');
+        possibleAreas[area] = $('.' + area.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H') + '-area > input').prop('checked');
     });
     calcCurrentChallenges();
 }
@@ -1980,7 +2166,6 @@ var gatherChunksInfo = function(chunks) {
             objects[object][num] = true;
         });
     });
-    //console.log({items: items, objects: objects});
     return {items: items, objects: objects};
 }
 
