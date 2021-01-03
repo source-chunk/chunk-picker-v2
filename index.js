@@ -1578,7 +1578,7 @@ var updateChunkInfo = function() {
             connectStr = connectStr.join(', ');
             challengeStr = calcFutureChallenges();
         }
-        //challengeStr = 'Coming Soon ;)';
+        challengeStr = 'Coming Soon ;)';
         $('.infoid-content').html((!!chunkInfo['chunks'][id] && !!chunkInfo['chunks'][id]['Nickname']) ? (chunkInfo['chunks'][id]['Nickname'] + ' (' + id + ')') : id.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'));
         $('.panel-monsters').html(monsterStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
         $('.panel-npcs').html(npcStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
@@ -1772,7 +1772,7 @@ var calcChallenges = function(chunks) {
     let objects = baseChunkData['objects'];
     let valids = {};
 
-    //console.log(items);
+    console.log(items);
 
     let itemsPlus = {
         'Axe+': ['Bronze axe', 'Iron axe', 'Steel axe', 'Black axe', 'Mithril axe', 'Adamant axe', 'Rune axe', 'Dragon axe', '3rd age axe', 'Infernal axe', 'Crystal axe'],
@@ -2028,7 +2028,7 @@ var calcChallenges = function(chunks) {
             !!lowestName && (valids[skill][lowestName] = chunkInfo['challenges'][skill][lowestName]['Level']);
         });
     });
-    //console.log(valids);
+    console.log(valids);
     return valids;
 }
 
