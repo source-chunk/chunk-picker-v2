@@ -153,7 +153,7 @@ a, a:visited {
 
 .menu {
     position: fixed;
-    top: 75px; /* 60px */
+    top: 60px;
     z-index: 99 !important;
     width: min(14vw, 150px);
     height: min(3.5vw, 30px);
@@ -276,7 +276,7 @@ a, a:visited {
     position: fixed;
     z-index: 99 !important;
     right: 10px;
-    top: 75px; /* 60px */
+    top: 60px;
     width: min(12.5vw, 165px);
     height: min(3.5vw, 30px);
 }
@@ -325,7 +325,7 @@ button.menu2 {
     position: fixed;
     z-index: 99 !important;
     left: 0px;
-    top: 75px; /* 60px */
+    top: 60px;
     width: 100%;
     text-align: center;
     pointer-events: none;
@@ -1547,105 +1547,4 @@ button.menu2 {
 
 .highlightAllQuest >span:hover {
     color: black;
-}
-
-
-
-
-
-.lightrope {
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  position: absolute;
-  z-index: 1;
-  margin: -15px 0 0 0;
-  padding: 0;
-  pointer-events: none;
-  width: 100%;
-  margin-top: 30px;
-  left: 0px;
-}
-
-.lightrope > li {
-    position: relative;
-    animation-fill-mode: both; 
-    animation-iteration-count:infinite;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: block;
-    width: 12px;
-    height: 28px;
-    border-radius: 50%;
-    margin: 40px/2;
-    display: inline-block;
-    background: rgba(0,255,0,1);
-    box-shadow: 0px 28px/6 12px*2 3px rgba(0,255,0,1);
-    animation-name: flash-1;
-    animation-duration: 2s;
-}
-
-.lightrope > li:nth-child(3n+1) {
-    background: rgb(0, 0, 255);
-    box-shadow: 0px 28px/6 12px*2 3px rgba(0,0,255,0.5);
-    animation-name: flash-2;
-    animation-duration: 0.4s;
-}
-.lightrope > li:nth-child(3n+2) {
-    background: rgb(247, 0, 0);
-    box-shadow: 0px 28px/6 12px*2 3px rgb(247, 0, 0);
-    animation-name: flash-3;
-    animation-duration: 1.1s;
-}
-.lightrope > li:nth-child(odd) {
-    animation-duration: 1.8s;
-}
-.lightrope > li:nth-child(3n+1) {
-    animation-duration: 1.4s;
-}
-.lightrope > li:before {
-    content: "";
-    position: absolute;
-    background: #222;
-    width: (12px - 2);
-    height: 28px/3;
-    border-radius: 3px;
-    top: (0 - (28px/6));
-    left: 1px;
-}
-.lightrope > li:after {
-    content: "";
-    top: (0 - 28px/2);
-    left: 12px - 3;
-    position: absolute;
-    width: 40px + 12;
-    height: (28px/3 * 2);
-    border-bottom: solid #222 2px;
-    border-radius: 50%;
-}
-.lightrope > li:last-child:after {
-    content: none;
-}
-.lightrope > li:first-child {
-    margin-left: -40px;
-}
-
-@keyframes flash-1 { 
-    0%, 100% { background: rgba(0,255,0,1);
-    box-shadow: 0px 28px/6 12px*2 3px rgba(0,255,0,1);} 
-    50% { background: rgba(0,255,0,0.4);
-    box-shadow: 0px 28px/6 12px*2 3px rgba(0,255,0,0.2);}
-}
-@keyframes flash-2 { 
-    0%, 100% { background: rgba(0,0,255,1);
-    box-shadow: 0px 28px/6 12px*2 3px rgba(0,0,255,1);} 
-    50% { background: rgba(0,0,255,0.4);
-    box-shadow: 0px 28px/6 12px*2 3px rgba(0,0,255,0.2);}
-}
-@keyframes flash-3 { 
-    0%, 100% { background: rgb(247, 0, 0);
-    box-shadow: 0px 28px/6 12px*2 3px rgb(247, 0, 0);} 
-    50% { background: rgba(247, 0, 0, 0.4);
-    box-shadow: 0px 28px/6 12px*2 3px rgba(247, 0, 0, 0.2);}
 }

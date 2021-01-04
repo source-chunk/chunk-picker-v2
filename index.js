@@ -1686,12 +1686,12 @@ var calcCurrentChallenges = function() {
                 }
             }
         });
-        !highestChallenge[skill] || (chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge[skill]]['Primary']) && (highestChallenge[skill] = undefined);
-        !!highestChallenge[skill] && (tempChallengeArr[skill] = highestChallenge[skill]);
+        (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]] || (chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge[skill]]['Primary'])) && (highestChallenge[skill] = undefined);
+        tempChallengeArr[skill] = highestChallenge[skill];
         highestCurrent[skill] = highestChallenge[skill];
-        if (!!highestChallenge[skill] && !!chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills']) {
+        if (!!highestChallenge[skill] && !!chunkInfo['challenges'][skill][highestChallenge[skill]] && !!chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills']) {
             Object.keys(chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills']).forEach(subSkill => {
-                if (!highestChallenge[subSkill] || chunkInfo['challenges'][subSkill][highestChallenge[subSkill]]['Level'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills'][subSkill]) {
+                if ((!highestChallenge[subSkill] || chunkInfo['challenges'][subSkill][highestChallenge[subSkill]]['Level'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills'][subSkill]) && Object.keys(chunkInfo['challenges'][subSkill]).length > 0) {
                     highestChallenge[subSkill] = highestChallenge[skill];
                     tempChallengeArr[subSkill] = highestChallenge[subSkill];
                     highestCurrent[subSkill] = highestChallenge[subSkill];
@@ -1700,7 +1700,7 @@ var calcCurrentChallenges = function() {
         }
     });
     Object.keys(tempChallengeArr).sort().forEach(skill => {
-        challengeArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscrollhard" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + ': ' + tempChallengeArr[skill].split('~')[0] + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('') + '</a>' + tempChallengeArr[skill].split('~')[2] + (viewOnly || inEntry ? '' : '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + tempChallengeArr[skill] + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span>') + '</div>');
+        !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscrollhard" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + ': ' + tempChallengeArr[skill].split('~')[0] + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('') + '</a>' + tempChallengeArr[skill].split('~')[2] + (viewOnly || inEntry ? '' : '</span> <span class="arrow" onclick="backlogChallenge(' + "'" + tempChallengeArr[skill] + "', " + "'" + skill + "'" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg"></i></span>') + '</div>');
     });
     if (challengeArr.length < 1) {
         challengeArr.push('No current challenges.');
@@ -1772,7 +1772,7 @@ var calcChallenges = function(chunks) {
     let objects = baseChunkData['objects'];
     let valids = {};
 
-    console.log(items);
+    //console.log(items);
 
     let itemsPlus = {
         'Axe+': ['Bronze axe', 'Iron axe', 'Steel axe', 'Black axe', 'Mithril axe', 'Adamant axe', 'Rune axe', 'Dragon axe', '3rd age axe', 'Infernal axe', 'Crystal axe'],
@@ -1802,7 +1802,9 @@ var calcChallenges = function(chunks) {
         'Phrin remains+': ['Loar remains', 'Phrin remains'],
         'Riyl remains+': ['Loar remains', 'Phrin remains', 'Riyl remains'],
         'Asyn remains+': ['Loar remains', 'Phrin remains', 'Riyl remains', 'Asyn remains'],
-        'Fiyr remains+': ['Loar remains', 'Phrin remains', 'Riyl remains', 'Asyn remains', 'Fiyr remains']
+        'Fiyr remains+': ['Loar remains', 'Phrin remains', 'Riyl remains', 'Asyn remains', 'Fiyr remains'],
+        'Crossbow+': ['Bronze crossbow', 'Blurite crossbow', 'Iron crossbow', 'Steel crossbow', 'Mithril crossbow', 'Adamant crossbow', 'Rune crossbow', 'Dragon crossbow', 'Crossbow', 'Phoenix crossbow', 'Dorgeshuun crossbow', `Hunters' crossbow`, `Karil's crossbow`, 'Dragon hunter crossbow', 'Armadyl crossbow'],
+        'Barbarian bait+': ['Feather', 'Fishing bait', 'Fish offcuts', 'Roe', 'Caviar']
     };
 
     let objectsPlus = {
@@ -1824,7 +1826,9 @@ var calcChallenges = function(chunks) {
 
     let chunksPlus = {
         'Gold chunks+': ['10804', 'Keldagrim'],
-        'Woodcutting guild+': ['6198', '6454']
+        'Woodcutting guild+': ['6198', '6454'],
+        'Trollheim medium scramble+': ['11321', '11577'],
+        'Tirannwn log balance+': ['8754', '9010']
     };
 
     let tools = {
@@ -2028,7 +2032,7 @@ var calcChallenges = function(chunks) {
             !!lowestName && (valids[skill][lowestName] = chunkInfo['challenges'][skill][lowestName]['Level']);
         });
     });
-    console.log(valids);
+    //console.log(valids);
     return valids;
 }
 
@@ -2273,6 +2277,12 @@ var checkMID = function(mid) {
 var loadData = function() {
     databaseRef.child('chunkinfo').once('value', function(snap) {
         chunkInfo = snap.val();
+        //TEMP
+        skillNames.forEach(skill => {
+            if (!chunkInfo['challenges'][skill]) {
+                chunkInfo['challenges'][skill] = {};
+            }
+        });
     });
     myRef.once('value', function(snap) {
         var picking = false;
