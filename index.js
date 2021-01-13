@@ -1594,6 +1594,7 @@ var updateChunkInfo = function() {
 // Checks if skill has primary training
 var checkPrimaryMethod = function(skill, valids) {
     let valid = false;
+	return true;
     if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
         valid = true;
     } else {
