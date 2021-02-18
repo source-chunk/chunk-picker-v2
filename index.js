@@ -2275,6 +2275,10 @@ var checkMID = function(mid) {
 
 // Loads data from Firebase
 var loadData = function() {
+	console.log('testing...');
+	$.getJSON('./chunkpicker-chunkinfo-export.json', function(data) {
+		console.log(data);
+	});
     databaseRef.child('chunkinfo').once('value', function(snap) {
         chunkInfo = snap.val();
         //TEMP
