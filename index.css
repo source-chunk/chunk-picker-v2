@@ -827,14 +827,16 @@ button.menu2 {
 .content9 {
     border: solid;
     width: 60%;
+    height: 100%;
     min-width: 500px;
     max-width: 750px;
     margin: auto;
     text-align: center;
-    margin-top: 4%;
+    margin-top: 2vh;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: white;
     font-size: 18px;
+    overflow-y: scroll;
 }
 
 .inner-content9 {
