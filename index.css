@@ -826,8 +826,9 @@ button.menu2 {
 
 .content9 {
     border: solid;
-    width: 40%;
+    width: 60%;
     min-width: 500px;
+    max-width: 750px;
     margin: auto;
     text-align: center;
     margin-top: 4%;
