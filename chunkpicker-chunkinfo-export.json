@@ -8440,7 +8440,7 @@
       "Grow a ~|spirit tree|~" : {
         "Category" : [ "Normal Farming" ],
         "Items" : [ "Empty plant pot", "Gardening trowel", "Rake", "Spirit seed" ],
-        "Level" : 85,
+        "Level" : 83,
         "Objects" : [ "Spirit Tree Patch" ],
         "Primary" : false
       },
