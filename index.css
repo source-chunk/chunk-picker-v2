@@ -1,9 +1,12 @@
+
 body::-webkit-scrollbar {
     display: none;
 }
 
 body {
     background-color: black;
+    overflow: hidden !important;
+    font-family: 'Calibri', 'Arial', sans-serif;
 }
 
 @-moz-document url-prefix() {
@@ -160,7 +163,7 @@ a, a:visited {
 }
 
 .pick {
-    background-color: rgb(115, 230, 115);
+    background-color: rgb(115, 220, 115);
     width: 100%;
     height: 100%;
     font-size: min(2vw, 20px);
@@ -336,7 +339,7 @@ button.menu2 {
     position: fixed;
     z-index: 99 !important;
     bottom: min(11vw, 130px);
-    width: min(14vw, 175px);
+    width: min(15vw, 200px);
     height: 2vw;
     right: 10px;
 }
@@ -371,7 +374,7 @@ button.menu2 {
 }
 
 .infoid {
-    font-size: 24px;
+    font-size: min(2.15vw, 24px);
     padding-right: 16px;
     -webkit-transition: background-color 1000ms ease-in-out;
     -ms-transition: background-color 1000ms ease-in-out;
@@ -387,7 +390,7 @@ button.menu2 {
     font-size: min(1.25vw, 15px);
 }
 
-.menu9-beta {
+.menu9 {
     display: none;
     position: fixed;
     z-index: 99 !important;
@@ -671,7 +674,7 @@ button.menu2 {
 }
 
 .box:not(.quality) > .label {
-    transform: translateY(-5%);
+    transform: translateY(-10%);
 }
 
 .box.quality > .label {
@@ -824,15 +827,44 @@ button.menu2 {
 .content9 {
     border: solid;
     width: 40%;
+    min-width: 500px;
     margin: auto;
     text-align: center;
     margin-top: 4%;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: white;
+    font-size: 18px;
+}
+
+.inner-content9 {
+    padding: 0px 20px 0px 20px;
+    text-align: left;
+}
+
+.inner-content9 > .indent {
+    text-indent: 25px;
+}
+.inner-content9 > .centered {
+    text-align: center;
+}
+
+.inner-content9 h2, .inner-content9 p {
+    margin-block-start: 15px;
+    margin-block-end: 15px;
+}
+
+
+.avatar > img {
+    border-radius: 100%;
+    border: solid;
+}
+
+.paypal-button {
+    text-align: center;
 }
 
 .title {
-    font-size: 3vw;
+    font-size: 3.5vw;
     border-bottom: solid;
     background-color: rgb(230, 230, 230);
     padding-top: 10px;
@@ -998,6 +1030,48 @@ button.menu2 {
     transform: translate(112.5%, 35%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: white;
+}
+
+.help-content {
+    position: fixed;
+    z-index: 999 !important;
+    border: solid;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    -ms-transform: translate(112.5%, 35%);
+    transform: translate(112.5%, 35%);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: white;
+}
+
+.help-link-block {
+    margin: auto;
+    width: 80%;
+    padding-bottom: 20px;
+    font-size: 1.25vw;
+}
+
+.text-link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.or-help {
+    display: inline-block;
+    font-size: 2.5vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dismiss-help {
+    cursor: pointer;
+    transition-duration: .25s;
+    text-decoration: underline;
+}
+
+.dismiss-help:hover {
+    color: rgb(100, 100, 255);
 }
 
 .sticker-content {
@@ -1170,7 +1244,7 @@ button.menu2 {
 .settings {
     display: none;
     position: absolute;
-    top: .15vw;
+    top: 2px;
     right: .5vw;
     z-index: 999 !important;
     -webkit-user-select: none;
@@ -1321,8 +1395,9 @@ button.menu2 {
     position: absolute;
     transition-duration: .5s;
     cursor: pointer;
-    top: .15vw;
-    left: 5px;
+    top: 2px;
+    left: 65px;
+    font-size: 40px;
 }
 
 .gohome:hover {
@@ -1333,17 +1408,57 @@ button.menu2 {
     position: absolute;
     transition-duration: .5s;
     cursor: pointer;
-    top: .15vw;
-    left: 65px;
+    top: 2px;
+    right: 60px;
 }
 
 .gohighscore:hover {
     color: rgb(100, 100, 255);
 }
 
+.gobugreport {
+    position: absolute;
+    transition-duration: .5s;
+    cursor: pointer;
+    top: 2px;
+    right: 105px;
+}
+
+.gobugreport:hover {
+    color: rgb(100, 100, 255);
+}
+
+.about-button {
+    position: absolute;
+    transition-duration: .5s;
+    cursor: pointer;
+    left: 5px;
+    font-size: 42px;
+    text-decoration: none;
+}
+
+.about-button:hover {
+    color: rgb(100, 100, 255);
+    -webkit-filter: brightness(0.5);
+    filter: brightness(0.5);
+}
+
+.help-button {
+    position: absolute;
+    transition-duration: .5s;
+    cursor: pointer;
+    right: 150px;
+    font-size: 44px;
+    text-decoration: none;
+}
+
+.help-button:hover {
+    color: rgb(100, 100, 255);
+}
+
 .toptitle {
     font-size: 40px;
-    top: .15vw;
+    top: 2px;
     width: 100%;
     margin-left: 4vw;
     text-align: left;
@@ -1351,9 +1466,9 @@ button.menu2 {
     pointer-events: none;
 }
 
-.toptitle2 {
+.toptitle2-outer {
     font-size: 40px;
-    top: .15vw;
+    top: 2px;
     width: 100%;
     text-align: center;
     position: absolute;
@@ -1429,10 +1544,10 @@ button.menu2 {
 
 .accordion {
     border-top: solid 1px;
-    padding: 0px 5px 10px 5px;
+    padding: 0px 5px 8px 5px;
     cursor: pointer;
     font-weight: bolder;
-    font-size: min(2.15vw, 24px);
+    font-size: min(2.15vw, 26px);
     transition: 0.4s;
     text-align: left;
     padding-left: 25px;
@@ -1489,7 +1604,6 @@ button.menu2 {
 .help {
     position: relative;
     float: right;
-    margin-top: 5px;
     margin-right: 10px;
     color: #666666;
 }
@@ -1547,4 +1661,79 @@ button.menu2 {
 
 .highlightAllQuest >span:hover {
     color: black;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 200px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    position: relative;
+    background-color: rgb(200, 200, 200);
+    margin: auto;
+    width: 30%;
+    height: 30%;
+    border: solid;
+}
+
+.manual-close {
+    cursor: pointer;
+    margin-top: 0px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.challenge-data {
+    overflow-y: scroll;
+    height: 82%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#searchManual {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 35%;
+    font-size: 20px;
+}
+
+.open-manual-container {
+    border-top: 1px solid;
+    display: none;
+}
+
+.open-manual {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.beta-text {
+    position: absolute;
+    right: -15px;
+    top: 2px;
+    transform: rotate(33deg);
+    font-weight: bold;
+    color: red;
+    font-size: 30px;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+    pointer-events: none;
+}
+
+.exp .pic {
+    line-height: .5;
+}
+
+.mini.avatar img {
+    border: solid 2px;
 }

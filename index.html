@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
@@ -41,15 +42,27 @@
   <script src="./index.js"></script>
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='topnav'>
-      <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><i class="gohome zmdi zmdi-home zmdi-hc-3x"></i></a></div>
+      <div><a href='?about' target="_blank" class="about-button"><div class="mini avatar"><img src="https://cdn.discordapp.com/attachments/411234915284156439/811794024192671814/fc55ab793a4ff74d203f9274dcd32f09.png" /></div></a></div>
+      <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><span class="gohome">Chunk Picker V2</span></a></div>
       <div><a href='https://chunk-stats.web.app' target='_blank'><i class="gohighscore zmdi zmdi-equalizer zmdi-hc-3x"></i></a></div>
-      <div class='toptitle2'>---</div>
+      <div class='toptitle2-outer'><span class='toptitle2'>---</span></div>
+      <div><span class="help-button" onclick="helpFunc()">?</span></div>
+      <div><a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><i class="gobugreport zmdi zmdi-bug zmdi-hc-3x"></i></a></div>
       <div><i class="settings zmdi zmdi-settings zmdi-hc-3x" onclick='settings()'></i></div>
+  </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content noscroll">
+      <span class='beta-text'>BETA</span>
+      <i class="manual-close pic zmdi zmdi-close noscrollhard" onclick="closeManualAdd()"></i>
+      <input type="text" placeholder="Filter tasks..." id="searchManual" class="noscrollhard" oninput="searchManualTasks()"/>
+      <span><input type="checkbox" onclick="changeFilterBy()" />Show checked only</span>
+      <div id="challenge-data" class="challenge-data noscroll"></div>
+    </div>
   </div>
   <div id='entry-menu'>
     <div class='entry-content'>
       <div class='block'>
-        <div class='title'>Chunk Picker V2</div>
+        <div class='title'>Unlock Map</div>
       </div>
       <div class='block'>
         <div>Enter PIN to unlock:</div>
@@ -110,6 +123,27 @@
       </div>
     </div>
   </div>
+  <div id='help-menu'>
+    <div class='help-content'>
+      <span class='beta-text'>BETA</span>
+      <div class='block'>
+        <div class='title'>New Features!</div>
+      </div>
+      <div class='block'>
+        <p class='description'>
+          Recently the Chunk Picker has been updated with a brand new feature: the Chunk Tasks panel! <b>This panel will display all skill tasks required for your current map, calculated programmatically!</b> The tasks can be checked off as you progress thorugh each chunk, and then any new ones will populate as you unlock new chunks.
+        </p>
+      </div>
+      <div class='block help-link-block'>
+        <div class="text-link"><b><a target='_blank' href='https://youtu.be/awRQjpEB9_E'>Watch a quick [4:19] video to get you up to speed on how to use the Chunk Tasks panel</a></b></div>
+        <span class='or-help'>Or</span>
+        <div class="text-link"><b><a target='_blank' href='https://docs.google.com/document/d/e/2PACX-1vS3v8yTxCgbDZLhXT6RNPyq-hO-suBDPRBr0tKS9dD4NVl1QB3CIYpuw3vn32p9xbHufmGnHBddViKd/pub#h.rgg9isg0zvy8'>Take a look at a brief PDF that demonstrates (with images) how to use the Chunk Tasks panel</a></b></div>
+      </div>
+      <div class='block'>
+        <div><span class="dismiss-help" onclick="dismissHelp()">Dismiss</span></div>
+      </div>
+    </div>
+  </div>
   <div class='menu' data-type="header">
     <button class='pick' onclick="pick()">Pick Chunk</button>
     <button class='roll2' onclick="roll2()">Roll 2</button>
@@ -151,38 +185,44 @@
     <div class='infocontent text'>
       <div class='infostartup'><span><b>Chunk Info</b>: Right click a chunk to find out more information about it!</span><i class="panel-close pic zmdi zmdi-close" onclick="hideChunkInfo()"></i></div>
       <div class='infoid'><b><span class='infoid-content'></span></b><i class="panel-close pic zmdi zmdi-close" onclick="hideChunkInfo()"></i></div>
-      <div id='infomonsters' class='accordion' onclick="toggleInfoPanel('monsters')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Monsters</div>
+      <div id='infomonsters' class='accordion' onclick="toggleInfoPanel('monsters')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Monsters</span></div>
       <div class="panel panel-monsters"></div>
-      <div id='infonpcs' class='accordion' onclick="toggleInfoPanel('npcs')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>NPCs</div>
+      <div id='infonpcs' class='accordion' onclick="toggleInfoPanel('npcs')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">NPCs</span></div>
       <div class="panel panel-npcs"></div>
-      <div id='infospawns' class='accordion' onclick="toggleInfoPanel('spawns')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Item Spawns</div>
+      <div id='infospawns' class='accordion' onclick="toggleInfoPanel('spawns')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Item Spawns</span></div>
       <div class="panel panel-spawns"></div>
-      <div id='infoshops' class='accordion' onclick="toggleInfoPanel('shops')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Shops</div>
+      <div id='infoshops' class='accordion' onclick="toggleInfoPanel('shops')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Shops</span></div>
       <div class="panel panel-shops"></div>
-      <div id='infofeatures' class='accordion' onclick="toggleInfoPanel('features')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Features</div>
+      <div id='infofeatures' class='accordion' onclick="toggleInfoPanel('features')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Features</span></div>
       <div class="panel panel-features"></div>
-      <div id='infoquests' class='accordion' onclick="toggleInfoPanel('quests')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Quest progression <span class='help'>?<span class="tooltiptext">Quests in <b>bold</b> indicate the quest is started in this chunk.</span></span></div>
+      <div id='infoquests' class='accordion' onclick="toggleInfoPanel('quests')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Quest progression <span class='help'>?<span class="tooltiptext">Quests in <b>bold</b> indicate the quest is started in this chunk.</span></span></span></div>
       <div class="panel panel-quests"></div>
-      <div id='infodiaries' class='accordion' onclick="toggleInfoPanel('diaries')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Diary tasks</div>
+      <div id='infodiaries' class='accordion' onclick="toggleInfoPanel('diaries')"><span class='exp'><i class="acc zmdi pic zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Diary tasks</span></div>
       <div class="panel panel-diaries"></div>
-      <div id='infoconnections' class='accordion' onclick="toggleInfoPanel('connections')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Connections</div>
+      <div id='infoconnections' class='accordion' onclick="toggleInfoPanel('connections')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Connections</span></div>
       <div class="panel panel-connections"></div>
-      <div id='infochallenges' class='accordion' onclick="toggleInfoPanel('challenges')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Potential chunk tasks</div>
+      <div id='infochallenges' class='accordion' onclick="toggleInfoPanel('challenges')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Potential chunk tasks</span></div>
       <div class="panel panel-challenges"></div>
       <div class='infocontribute'><i>Information wrong or missing? Submit feedback <a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><b>here</b></a>.</i></div>
     </div>
 </div>
-<div class='menu9-beta' onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+<div class='menu9'>
   <div class='challengecontent text'>
-    <div id='challengesactive' class='accordion' onclick="toggleChallengesPanel('active')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Active Chunk Tasks</div>
+    <span class='beta-text'>BETA</span>
+    <div id='challengesactive' class='accordion' onclick="toggleChallengesPanel('active')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Active Chunk Tasks</span></span></div>
     <div class="panel panel-active noscroll">None</div>
-    <div id='challengesareas' class='accordion' onclick="toggleChallengesPanel('areas')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Areas</div>
+    <div id='challengesareas' class='accordion' onclick="toggleChallengesPanel('areas')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Areas</span></div>
     <div class="panel panel-areas noscroll">None</div>
-    <div id='challengesbacklog' class='accordion' onclick="toggleChallengesPanel('backlog')"><span class='exp'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></span>Backlog</div>
+    <div id='challengesbacklog' class='accordion' onclick="toggleChallengesPanel('backlog')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Backlog</span></div>
     <div class="panel panel-backlog noscroll">None</div>
+    <div id='challengescompleted' class='accordion' onclick="toggleChallengesPanel('completed')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Completed Tasks</span></div>
+    <div class="panel panel-completed noscroll">None</div>
+    <!--<div id='challengesrules' class='accordion' onclick="toggleChallengesPanel('rules')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Custom Rules</span></div>
+    <div class="panel panel-rules noscroll">None</div>-->
+    <div class="open-manual-container"><span class="open-manual" onclick="openManualAdd()">Manually Add Tasks</span></div>
   </div>
 </div>
-<div class='menu10' onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+<div class='menu10'>
   <div>
     <div class='questcontent text'>
       <div class='questname'><b><span class='questname-content'></span></b><i class="panel-close pic zmdi zmdi-close" onclick="toggleQuestInfo()"></i></div>
@@ -282,5 +322,30 @@
     <div class='home text2'>New PIN:</div>
     <input class='pin old2 second' placeholder='PIN' />
     <button id='change-pin' class='button' onclick='changePin()' disabled>Change PIN</button>
+  </div>
+</div>
+
+<div id='about-menu' style="display:none">
+  <div id='page9' class='content9'>
+    <div class='block'>
+      <div class='title'>About Me</div>
+    </div>
+    <div class='inner-content9'>
+      <div class="centered avatar"><img src="https://cdn.discordapp.com/avatars/143753161906061313/fc55ab793a4ff74d203f9274dcd32f09.png" /></div>
+      <p class="indent">Hi, I'm <b>Source Link</b> <i>aka</i> <b>Source Chunk</b>! I'm a Software Engineer from the US that likes to make websites and tools for his friends. I've been involved in the OneChunkMan community since June/July of 2019, and I've been making tools for this community basically since I joined.</p>
+      <u class="centered"><h2>Contact</h2></u>
+      <p><b>Need to contact me about something?</b></p>
+      <p>Message me on <b>Discord</b> at <i>whitecatblack#0890</i> (preferred).</p>
+      <div>Don't have a Discord? You should get one and join the <b><a href="https://discord.gg/dg6wubYS8e" target='_blank'>OneChunkMan Discord Server</a></b> and talk to everyone there!</div>
+      <p>You can also email me at <a href="mailto:duosource.iron@gmail.com">duosource.iron@gmail.com</a></p>
+      <u class="centered"><h2>Donate</h2></u>
+      <p class="indent">If you'd like to donate to me (for some reason), I have that set up now. Please don't feel obligated or pressured to donate just because you used something that I created; the stuff I make for this community is and always will be <b>free</b>.</p>
+      <p class="centered">That being said, if you do decide to still donate, I greatly appreciate your support. The money will be going directly towards server/storage costs and other website costs.</p>
+      <form action="https://www.paypal.com/donate" class="paypal-button" method="post" target="_top">
+        <input type="hidden" name="hosted_button_id" value="D6J2TEM8E2XN2" />
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+      </form>
+    </div>
   </div>
 </div>
