@@ -14440,7 +14440,8 @@
         "Primary" : false,
         "Skills" : {
           "Defence" : 70
-        }
+        },
+		"ManualInvalid": true
       },
       "Activate ~|Chivalry|~" : {
         "Chunks" : [ "11062" ],
@@ -14448,7 +14449,8 @@
         "Primary" : false,
         "Skills" : {
           "Defence" : 65
-        }
+        },
+		"ManualInvalid": true
       },
       "Activate ~|Piety|~" : {
         "Chunks" : [ "11062" ],
@@ -14456,12 +14458,14 @@
         "Primary" : false,
         "Skills" : {
           "Defence" : 70
-        }
+        },
+		"ManualInvalid": true
       },
       "Activate ~|Preserve|~" : {
         "Items" : [ "Torn prayer scroll" ],
         "Level" : 55,
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Activate ~|Rigour|~" : {
         "Items" : [ "Dexterous prayer scroll" ],
@@ -14469,7 +14473,8 @@
         "Primary" : false,
         "Skills" : {
           "Defence" : 70
-        }
+        },
+		"ManualInvalid": true
       },
       "Add a ~|spectral sigil|~ to a blessed spirit shield" : {
         "Items" : [ "Hammer", "Blessed spirit shield", "Spectral sigil" ],
@@ -14479,7 +14484,8 @@
         "Primary" : false,
         "Skills" : {
           "Smithing" : 85
-        }
+        },
+		"ManualInvalid": true
       },
       "Add an ~|arcane sigil|~ to a blessed spirit shield" : {
         "Items" : [ "Hammer", "Blessed spirit shield", "Arcane sigil" ],
