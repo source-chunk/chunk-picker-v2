@@ -3049,7 +3049,7 @@ var setCodeItems = function() {
 
 // Loads data from Firebase
 var loadData = function() {
-    $.getJSON('./chunkpicker-chunkinfo-export.json', function(data) {
+    $.getJSON('./chunkpicker-chunkinfo-export.json?v=3.0.4', function(data) {
         chunkInfo = data;
         setCodeItems();
         skillNames.forEach(skill => {
