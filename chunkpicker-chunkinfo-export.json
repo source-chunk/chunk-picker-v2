@@ -27522,7 +27522,7 @@
         "Man" : 28,
         "Young impling" : 10
       },
-      "Name" : "Puro Puro",
+      "Name" : "Puro-Puro",
       "Object" : {
         "Magical wheat" : 908,
         "Portal" : 4
@@ -44548,7 +44548,8 @@
         "Greater demon" : 7,
         "Iron dragon" : 3,
         "Lesser demon" : 4,
-        "Skeleton%2FPlain" : 4
+        "Skeleton%2FPlain" : 3,
+		"Skeleton%2FArmed" : 1
       },
       "Object" : {
         "Adamantite rock" : 2,
@@ -46101,7 +46102,7 @@
         "Teleport Platform" : 1
       }
     },
-    "Puro Puro" : {
+    "Puro-Puro" : {
       "Connect" : {
         "9541" : true
       },
@@ -46122,7 +46123,11 @@
       "Object" : {
         "Magical wheat" : 908,
         "Portal" : 4
-      }
+      },
+	  "Spawn": {
+		"Butterfly net": 1,
+		"Impling jar": 7
+	  }
     },
     "Pyramid Plunder" : {
       "Connect" : {
