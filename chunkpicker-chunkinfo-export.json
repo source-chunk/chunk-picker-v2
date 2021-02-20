@@ -11367,42 +11367,48 @@
         "Items" : [ "Bird house", "Birdhouse seed+" ],
         "Level" : 5,
         "Output" : "Bird house tracking",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Use a ~|magic bird house|~" : {
         "Chunks" : [ "Birdhouse+" ],
         "Items" : [ "Magic bird house", "Birdhouse seed+" ],
         "Level" : 74,
         "Output" : "Bird house trapping",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Use a ~|mahogany bird house|~" : {
         "Chunks" : [ "Birdhouse+" ],
         "Items" : [ "Mahogany bird house", "Birdhouse seed+" ],
         "Level" : 49,
         "Output" : "Bird house trapping",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Use a ~|maple bird house|~" : {
         "Chunks" : [ "Birdhouse+" ],
         "Items" : [ "Maple bird house", "Birdhouse seed+" ],
         "Level" : 44,
         "Output" : "Bird house trapping",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Use a ~|redwood bird house|~" : {
         "Chunks" : [ "Birdhouse+" ],
         "Items" : [ "Redwood bird house", "Birdhouse seed+" ],
         "Level" : 89,
         "Output" : "Bird house trapping",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Use a ~|teak bird house|~" : {
         "Chunks" : [ "Birdhouse+" ],
         "Items" : [ "Teak bird house", "Birdhouse seed+" ],
         "Level" : 34,
         "Output" : "Bird house trapping",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Use a ~|torch|~ to smoke a trap" : {
         "Items" : [ "Unlit torch", "Tinderbox" ],
@@ -11414,21 +11420,24 @@
         "Items" : [ "Willow bird house", "Birdhouse seed+" ],
         "Level" : 24,
         "Output" : "Bird house trapping",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Use a ~|yew bird house|~" : {
         "Chunks" : [ "Birdhouse+" ],
         "Items" : [ "Yew bird house", "Birdhouse seed+" ],
         "Level" : 59,
         "Output" : "Bird house trapping",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Use an ~|oak bird house|~" : {
         "Chunks" : [ "Birdhouse+" ],
         "Items" : [ "Oak bird house", "Birdhouse seed+" ],
         "Level" : 14,
         "Output" : "Bird house trapping",
-        "Primary" : false
+        "Primary" : false,
+		"ManualInvalid": true
       },
       "Wear a ~|spotted cape|~" : {
         "Items" : [ "Spotted cape" ],
@@ -44186,7 +44195,6 @@
     },
     "God Wars Dungeon" : {
       "Connect" : {
-        "9033" : true,
         "11578" : true
       },
       "Diary" : {
@@ -46551,7 +46559,6 @@
     },
     "Smoke Devil Dungeon" : {
       "Connect" : {
-        "9033" : true,
         "9519" : true
       },
       "Diary" : {

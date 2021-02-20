@@ -2176,7 +2176,7 @@ var printTaskItems = function() {
 
 // Does the work to calculate all the possible challenges
 var calcChallengesWork = function(chunks, baseChunkData) {
-    let items = {...baseChunkData['items'], 'Dragonstone ring': {'my test thing': 'secondary-Crafting'}};
+    let items = {...baseChunkData['items']};
     let objects = baseChunkData['objects'];
     let monsters = baseChunkData['monsters'];
     let npcs = baseChunkData['npcs'];
@@ -2206,6 +2206,9 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             });
             let validChallenge = true;
             let tempSecondary = false;
+            if (!!chunkInfo['challenges'][skill][name]['ManualInvalid'] && chunkInfo['challenges'][skill][name]['ManualInvalid']) {
+                validChallenge = false;
+            }
             !!chunkInfo['challenges'][skill][name]['Chunks'] && chunkInfo['challenges'][skill][name]['Chunks'].forEach(chunkId => {
                 if (chunkId.includes('+')) {
                     if (!chunksPlus[chunkId]) {
@@ -2548,16 +2551,20 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 if (!!items[plus] && !Object.values(items[plus]).includes('primary-' + skill) && !Object.values(items[plus]).includes('secondary-' + skill) && !Object.values(items[plus]).includes('primary-Farming')) {
                                     if (!tools[plus]) {
                                         let nonskill = "";
+                                        let tempNonValid = true;
                                         !!items[plus] && Object.keys(items[plus]).forEach(source => {
                                             if (items[plus][source].includes('Nonskill') && !source.includes('*')) {
                                                 nonskill = source;
+                                            }
+                                            if (!(items[plus][source] === ('primary-' + skill)) && !(items[plus][source] === ('secondary-' + skill)) && !(items[plus][source] === ('primary-Farming'))) {
+                                                tempNonValid = false;
                                             }
                                         });
                                         if (nonskill.length > 0) {
                                             !!chunkInfo['challenges']['Nonskill'][nonskill]['Items'] && chunkInfo['challenges']['Nonskill'][nonskill]['Items'].forEach(it => {
                                                 itemList.push(it);
                                             });
-                                        } else {
+                                        } else if (!tempNonValid) {
                                             if (!tempItemSkill[skill][plus]) {
                                                 tempItemSkill[skill][plus] = [];
                                             }
@@ -2567,18 +2574,22 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 }
                             });
                         } else {
-                            if (!!items && !tools[item.replaceAll(/\*/g, '')] && !!items[item.replaceAll(/\*/g, '')] && !Object.values(items[item.replaceAll(/\*/g, '')]).includes('primary-' + skill) && !Object.values(items[item.replaceAll(/\*/g, '')]).includes('secondary-' + skill) && !Object.values(items[item.replaceAll(/\*/g, '')]).includes('primary-Farming')) {
+                            if (!!items && !tools[item.replaceAll(/\*/g, '')] && !!items[item.replaceAll(/\*/g, '')]) {
                                 let nonskill = "";
+                                let tempNonValid = true;
                                 !!items[item.replaceAll(/\*/g, '')] && Object.keys(items[item.replaceAll(/\*/g, '')]).forEach(source => {
                                     if (items[item.replaceAll(/\*/g, '')][source].includes('Nonskill') && !source.includes('*')) {
                                         nonskill = source;
+                                    }
+                                    if (!(items[item.replaceAll(/\*/g, '')][source] === ('primary-' + skill)) && !(items[item.replaceAll(/\*/g, '')][source] === ('secondary-' + skill)) && !(items[item.replaceAll(/\*/g, '')][source] === ('primary-Farming'))) {
+                                        tempNonValid = false;
                                     }
                                 });
                                 if (nonskill.length > 0) {
                                     !!chunkInfo['challenges']['Nonskill'][nonskill]['Items'] && chunkInfo['challenges']['Nonskill'][nonskill]['Items'].forEach(it => {
                                         itemList.push(it);
                                     });
-                                } else {
+                                } else if (!tempNonValid) {
                                     if (!tempItemSkill[skill][item.replaceAll(/\*/g, '')]) {
                                         tempItemSkill[skill][item.replaceAll(/\*/g, '')] = [];
                                     }
@@ -2592,7 +2603,6 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             }
         });
     });
-    
     Object.keys(tempItemSkill).forEach(skill => {
         Object.keys(tempItemSkill[skill]).forEach(item => {
             let lowestItem;
