@@ -268,6 +268,11 @@ let fullChallengeArr = {};
 
 // ----------------------------------------------------------
 
+// Prevent caching of json get
+$(document).ready(function() {
+    $.ajaxSetup({ cache: false });
+});
+
 // Prevent right-click menu from showing
 window.addEventListener('contextmenu', function (e) { 
     e.preventDefault(); 
@@ -3049,7 +3054,7 @@ var setCodeItems = function() {
 
 // Loads data from Firebase
 var loadData = function() {
-    $.getJSON('./chunkpicker-chunkinfo-export.json?v=3.0.4', function(data) {
+    $.getJSON('./chunkpicker-chunkinfo-export.json', function(data) {
         chunkInfo = data;
         setCodeItems();
         skillNames.forEach(skill => {
