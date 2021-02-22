@@ -18,6 +18,7 @@ var roll2On = false;                                                            
 var unpickOn = false;                                                           // Is the unpick button enabled
 var recentOn = false;                                                           // Is the recent chunks section enabled
 var chunkInfoOn = false;                                                        // Is the chunk info panel enabled
+var chunkTasksOn = false;                                                       // Is the chunk tasks panel enabled
 var infoCollapse = false;                                                       // Is the chunk info panel collapsed
 var highscoreEnabled = false;                                                   // Is highscore tracking enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
@@ -587,13 +588,16 @@ $(document).on({
         if (e.keyCode === 27 && screenshotMode) {
             screenshotMode = false;
             $('.escape-hint').hide();
-            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu9, .topnav, #beta').show();
+            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .topnav, #beta').show();
             if (infoCollapse && chunkInfoOn) {
                 $('.menu8').hide();
                 $('.hiddenInfo').show();
             } else if (chunkInfoOn) {
                 $('.menu8').show();
                 $('.hiddenInfo').hide();
+            }
+            if (chunkTasksOn) {
+                $('.menu9').show();
             }
             toggleQuestInfo();
             settings();
@@ -968,6 +972,7 @@ var importFromURL = function() {
             unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             recentOn && $('.menu7').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             chunkInfoOn && $('.menu8').css({'opacity': 1}).show();
+            chunkTasksOn && $('.menu9').css({'opacity': 1}).show();
             isPicking = false;
             selectedChunks = 0;
             unlockedChunks = 0;
@@ -1118,14 +1123,14 @@ var unlockEntry = function() {
             } else {
                 firebase.auth().signInAnonymously().then(function() {signedIn = true}).catch(function(error) {console.log(error)});
                 $('.center').css('margin-top', '15px');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .open-manual-container').css('opacity', 0).show();
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .taskstoggle, .open-manual-container').css('opacity', 0).show();
                 !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
                 !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                 $('#entry-menu').animate({'opacity': 0});
                 setTimeout(function() {
                     $('#entry-menu').css('opacity', 1).hide();
                     $('.pin.entry').val('');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .open-manual-container').animate({'opacity': 1});
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .taskstoggle, .open-manual-container').animate({'opacity': 1});
                     !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                     !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                     $('#unlock-entry').prop('disabled', false).html('Unlock');
@@ -1383,6 +1388,16 @@ var showChunkInfo = function(extra) {
     extra !== 'startup' && setCookies();
 }
 
+// Toggles the chunk tasks panel
+var toggleChunkTasks = function(extra) {
+    chunkTasksOn = !chunkTasksOn;
+    chunkTasksOn ? $('.menu9').show() : $('.menu9').hide();
+    extra !== 'startup' && $('menu9').css('opacity', 1);
+    $('.taskstoggle').toggleClass('item-off item-on');
+    $('.taskstoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    extra !== 'startup' && !locked && setData();
+}
+
 // Toggles the visibility of the roll2 button
 var toggleRoll2 = function(extra) {
     roll2On = !roll2On;
@@ -1494,22 +1509,21 @@ var setupMap = function() {
         $('.body').show();
         $('#page1, #page1extra, #import-menu, #highscore-menu, #highscore-menu2, #help-menu').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .open-manual-container').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .taskstoggle, .open-manual-container').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
-            $('.center, #toggleIds, .toggleIds.text, .menu9').css('opacity', 1).show();
+            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
         } else {
             $('.center').css('margin-top', '15px');
-            $('.menu9').css('opacity', 1).show();
         }
         if (locked === undefined || locked) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .open-manual-container').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .taskstoggle, .open-manual-container').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
-            $('.center, #toggleIds, .toggleIds.text, .menu9').css('opacity', 1).show();
+            $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
         }
         for (var i = 0; i < fullSize; i++) {
@@ -3109,6 +3123,7 @@ var loadData = function() {
             settings['infocollapse'] && hideChunkInfo();
             settings['roll2'] && toggleRoll2('startup');
             settings['unpick'] && toggleUnpick('startup');
+            (settings['chunkTasks'] !== false) && toggleChunkTasks('startup');
             if (settings['recent'] === undefined) {
                 settings['recent'] = true;
             }
@@ -3187,7 +3202,7 @@ var setUsername = function(old) {
 // Stores data in Firebase
 var setData = function() {
     signedIn && firebase.auth().signInAnonymously().then(function() {
-        myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled});
+        myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn});
         if (!helpMenuOpen && !helpMenuOpenSoon) {
             myRef.child('settings').update({'help': false});
         }
@@ -3332,13 +3347,13 @@ var changeLocked = function(lock) {
         } else {
             firebase.auth().signInAnonymously().then(function() {signedIn = true}).catch(function(error) {console.log(error)});
             $('.center').css('margin-top', '15px');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .open-manual-container').css('opacity', 0).show();
+            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .open-manual-container').css('opacity', 0).show();
             !isPicking && roll2On && $('.roll2').css('opacity', 0).show();
             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
             $('.lock-box').animate({'opacity': 0});
             setTimeout(function() {
                 $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .open-manual-container').animate({'opacity': 1});
+                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .open-manual-container').animate({'opacity': 1});
                 !isPicking && roll2On && $('.roll2').animate({'opacity': 1});
                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                 $('#lock-unlock').prop('disabled', false).html('Unlock');
