@@ -1438,10 +1438,10 @@ var enableHighscore = function(extra) {
 
 // Centers on the clicked recent chunk and highlights it
 var recentChunk = function(el) {
-    if ($($(el).children()).text() === '-' || inEntry) {
+    if ($($(el).children('.chunk')).text() === '-' || inEntry) {
         return;
     }
-    let id = parseInt($($(el).children()).text());
+    let id = parseInt($($(el).children('.chunk')).text());
     let box = $('.box:contains(' + id + ')').addClass('recent');
     scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
 }
