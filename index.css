@@ -1529,6 +1529,10 @@ button.menu2 {
     padding-bottom: 5px;
 }
 
+.challenge.hide-backlog > span.arrow {
+    display: none;
+}
+
 .challenge > input:disabled, .area > input:disabled {
     cursor: not-allowed;
 }

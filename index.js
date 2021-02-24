@@ -2833,10 +2833,13 @@ var checkOffChallenges = function() {
     checkedChallenges = {};
     Object.keys(highestCurrent).forEach(skill => {
         if ($('.' + skill + '-challenge > input').prop('checked')) {
+            $('.' + skill + '-challenge').addClass('hide-backlog');
             if (!checkedChallenges[skill]) {
                 checkedChallenges[skill] = {};
             }
             checkedChallenges[skill][highestCurrent[skill]] = true;
+        } else {
+            $('.' + skill + '-challenge').removeClass('hide-backlog');
         }
     });
     setData();
