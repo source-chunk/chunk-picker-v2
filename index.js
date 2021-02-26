@@ -172,6 +172,7 @@ let rules = {
     "CoX": false,
     "Tithe Farm": false,
     "Kill X": false,
+    "Sorceress's Garden": false,
 }
 let ruleNames = {
     "Skillcape": "Must obtain skillcapes",
@@ -186,7 +187,8 @@ let ruleNames = {
     "Raking": "Allow raking patches to count as a primary method for training",
     "CoX": "Allow methods inside the Chambers of Xeric to count for chunk tasks/primary training methods",
     "Tithe Farm": "Allow Tithe Farm to count as a primary method of training",
-    "Kill X": "Kill X-amount of every unique monster"
+    "Kill X": "Kill X-amount of every unique monster",
+    "Sorceress's Garden": "Allow Sorceress's Garden to count as primary training for Farming"
 }
 let maybePrimary = [
     "Normal Farming",
