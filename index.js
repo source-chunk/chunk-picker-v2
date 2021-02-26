@@ -692,6 +692,8 @@ $(document).on({
                 $(e.target).addClass('unlocked').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) + "</span>");
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+                $('.panel-active').html('Calculating...');
+                challengePanelVis['active'] && toggleChallengesPanel('active');
             } else if ($(e.target).hasClass('potential')) {
                 fixNums($($(e.target).children()[1]).text());
                 $(e.target).addClass('unlocked').removeClass('potential').empty().append("<span class='chunkId'>" + (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) + "</span>");
@@ -733,14 +735,16 @@ $(document).on({
                     $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
                 }
                 completeChallenges();
+                $('.panel-active').html('Calculating...');
+                challengePanelVis['active'] && toggleChallengesPanel('active');
             } else if ($(e.target).hasClass('recent')) {
                 // ----
             } else {
                 $(e.target).addClass('gray').removeClass('unlocked').css('border-width', 0);
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
-                
+                $('.panel-active').html('Calculating...');
+                challengePanelVis['active'] && toggleChallengesPanel('active');
             }
-            calcCurrentChallenges();
             setData();
             chunkBorders();
         }
@@ -847,7 +851,8 @@ var pick = function() {
         $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
     }
     completeChallenges();
-    calcCurrentChallenges();
+    $('.panel-active').html('Calculating...');
+    challengePanelVis['active'] && toggleChallengesPanel('active');
     setData();
     chunkBorders();
 }
@@ -1139,7 +1144,6 @@ var unlockEntry = function() {
                     locked = false;
                     inEntry = false;
                     helpMenuOpenSoon && helpFunc();
-                    calcCurrentChallenges();
                 }, 500);
             }
             setTimeout(function() {
@@ -1252,7 +1256,6 @@ var accessMap = function() {
         $('#page2b').hide();
         $('.background-img').hide();
         setupMap();
-        calcCurrentChallenges();
     });
 }
 
@@ -1455,6 +1458,12 @@ var toggleInfoPanel = function(pnl) {
         if (uniqKey === pnl) {
             infoPanelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
             infoPanelVis[pnl] ? $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i>') : $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+            if (infoPanelVis[pnl] && pnl === 'challenges' && $('.panel-challenges').html() === 'Calculating...') {
+                setTimeout(function() {
+                    let challengeStr = calcFutureChallenges();
+                    $('.panel-challenges').html(challengeStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+                }, 10);
+            }
         } else {
             $('.panel-' + uniqKey).removeClass('visible');
             $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
@@ -1470,6 +1479,11 @@ var toggleChallengesPanel = function(pnl) {
         if (uniqKey === pnl) {
             challengePanelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
             challengePanelVis[pnl] ? $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i>') : $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+            if (challengePanelVis[pnl] && pnl === 'active' && $('.panel-active').html() === 'Calculating...') {
+                setTimeout(function() {
+                    calcCurrentChallenges();
+                }, 10);
+            } // TEMP
         } else {
             $('.panel-' + uniqKey).removeClass('visible');
             $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
@@ -1756,7 +1770,6 @@ var updateChunkInfo = function() {
                 return $(a).text() > $(b).text() ? 1 : -1;
             });
             connectStr = connectStr.join(', ');
-            challengeStr = calcFutureChallenges();
         }
         $('.infoid-content').html((!!chunkInfo['chunks'][id] && !!chunkInfo['chunks'][id]['Nickname']) ? (chunkInfo['chunks'][id]['Nickname'] + ' (' + id + ')') : id.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'));
         $('.panel-monsters').html(monsterStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
@@ -1767,7 +1780,8 @@ var updateChunkInfo = function() {
         $('.panel-quests').html(questStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
         $('.panel-diaries').html(diaryStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
         $('.panel-connections').html(connectStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
-        $('.panel-challenges').html(challengeStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None');
+        $('.panel-challenges').html('Calculating...');
+        infoPanelVis['challenges'] && toggleInfoPanel('challenges');
     }
 }
 
@@ -1783,7 +1797,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
         !!universalPrimary[skill] && universalPrimary[skill].forEach(line => {
             if (line === 'Primary+') {
                 let primaryValid = false;
-                Object.keys(valids[skill]).forEach(challenge => {
+                !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
                     if ((chunkInfo['challenges'][skill][challenge]['Primary'] && !chunkInfo['challenges'][skill][challenge]['Secondary'] && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill][challenge])) || chunkInfo['challenges'][skill][challenge]['Manual']) {
                         primaryValid = true;
                     }
@@ -1797,7 +1811,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
             } else if (line === 'Bones+') {
                 let bonesExists = false;
                 !!baseChunkData['items'] && boneItems.forEach(bone => {
-                    if (Object.keys(baseChunkData['items']).includes(bone)) {
+                    if (!!baseChunkData['items'] && Object.keys(baseChunkData['items']).includes(bone)) {
                         bonesExists = true;
                     }
                 });
@@ -1819,7 +1833,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
                 !!baseChunkData['items'] && rangedItems.forEach(set => {
                     let innerValid = true;
                     set.forEach(item => {
-                        if (!Object.keys(baseChunkData['items']).includes(item.replaceAll(/\*/g, ''))) {
+                        if (!!baseChunkData['items'] && !Object.keys(baseChunkData['items']).includes(item.replaceAll(/\*/g, ''))) {
                             innerValid = false;
                         } else {
                             let tempSecondary = true;
@@ -1847,44 +1861,8 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
 
 // Finds the current challenge in each skill
 var calcCurrentChallenges = function() {
-    let chunks = {};
+    let chunks = getChunkAreas();
     challengeArr = [];
-    $('.unlocked').each(function() {
-        chunks[parseInt($(this).text())] = true;
-    });
-    let i = 0;
-    let temp = {};
-    let temp2 = {};
-    while (i < Object.keys(chunks).length) {
-        !!chunkInfo['chunks'][Object.keys(chunks)[i]] && !!chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect']).forEach(id => {
-            if (!!chunkInfo['chunks'][parseInt(id)]['Name'] && possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] && !chunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
-                chunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = true;
-                temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] || false;
-                if (!!possibleAreas[Object.keys(chunks)[i]]) {
-                    if (!temp2[Object.keys(chunks)[i]] || !temp2[Object.keys(chunks)[i]][chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
-                        if (!temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
-                            temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = {};
-                        }
-                        let depth = 1;
-                        temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')][Object.keys(chunks)[i]] = true;
-                    }
-                }
-            } else if (!!chunkInfo['chunks'][parseInt(id)]['Name']) {
-                temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] || false;
-                if (!!possibleAreas[Object.keys(chunks)[i]]) {
-                    if (!temp2[Object.keys(chunks)[i]] || !temp2[Object.keys(chunks)[i]][chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
-                        if (!temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
-                            temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = {};
-                        }
-                        temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')][Object.keys(chunks)[i]] = true;
-                    }
-                }
-            }
-        });
-        i++;
-    }
-    possibleAreas = temp;
-    areasStructure = temp2;
     let baseChunkData = gatherChunksInfo(chunks);
     globalValids = calcChallenges(chunks, baseChunkData);
 
@@ -1946,16 +1924,30 @@ var calcCurrentChallenges = function() {
             }
         }
     });
-    Object.keys(tempChallengeArr).sort().forEach(skill => {
-        !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} /><b>[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
-    });
-    !!globalValids['Extra'] && Object.keys(globalValids['Extra']).forEach(challenge => {
-        if ((!backlog['Extra'] || !backlog['Extra'][challenge]) && (!completedChallenges['Extra'] || !completedChallenges['Extra'][challenge])) {
-            challengeArr.push(`<div class="challenge noscroll ${'extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />` + '<span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
+    setupCurrentChallenges(tempChallengeArr);
+    checkOffChallenges();
+    updateChunkInfo();
+};
+
+// Sets up data for displaying
+setupCurrentChallenges = function(tempChallengeArr) {
+    if (tempChallengeArr !== false) {
+        Object.keys(tempChallengeArr).sort().forEach(skill => {
+            !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} /><b>[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
+        });
+        Object.keys(highestCurrent).forEach(skill => {
+            if (!!checkedChallenges[skill] && Object.keys(checkedChallenges[skill])[0] === highestCurrent[skill]) {
+                $('.' + skill + '-challenge > input').prop('checked', true);
+            }
+        });
+        !!globalValids['Extra'] && Object.keys(globalValids['Extra']).forEach(challenge => {
+            if ((!backlog['Extra'] || !backlog['Extra'][challenge]) && (!completedChallenges['Extra'] || !completedChallenges['Extra'][challenge])) {
+                challengeArr.push(`<div class="challenge noscroll ${'extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />` + '<span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
+            }
+        });
+        if (challengeArr.length < 1) {
+            challengeArr.push('No current challenges.');
         }
-    });
-    if (challengeArr.length < 1) {
-        challengeArr.push('No current challenges.');
     }
     let backlogArr = [];
     Object.keys(backlog).forEach(skill => {
@@ -1988,14 +1980,7 @@ var calcCurrentChallenges = function() {
         completedArr.push('No challenges currently completed.');
     }
     setCurrentChallenges(backlogArr, completedArr);
-    Object.keys(highestCurrent).forEach(skill => {
-        if (!!checkedChallenges[skill] && Object.keys(checkedChallenges[skill])[0] === highestCurrent[skill]) {
-            $('.' + skill + '-challenge > input').prop('checked', true);
-        }
-    });
-    checkOffChallenges();
-    updateChunkInfo();
-};
+}
 
 // Finds the future challenge in each skill given a possible new chunk
 var calcFutureChallenges = function() {
@@ -2004,6 +1989,9 @@ var calcFutureChallenges = function() {
     $('.unlocked > .chunkId').each(function() {
         chunks[parseInt($(this).text())] = true;
     });
+    if (chunks[infoLockedId.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
+        return challengeStr;
+    }
     chunks[infoLockedId.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = true;
     let i = 0;
     while (i < Object.keys(chunks).length) {
@@ -2706,7 +2694,8 @@ var addManualTask = function(challenge) {
             }
         }
     });
-    calcCurrentChallenges();
+    $('.panel-active').html('Calculating...');
+    challengePanelVis['active'] && toggleChallengesPanel('active');
 }
 
 // Closes the manual add tasks modal
@@ -2721,6 +2710,63 @@ var setCurrentChallenges = function(backlogArr, completedArr) {
     challengeArr.forEach(line => {
         $('.panel-active').append(line);
     });
+    setAreas();
+    $('.panel-backlog').empty();
+    backlogArr.forEach(line => {
+        $('.panel-backlog').append(line);
+    });
+    $('.panel-completed').empty();
+    completedArr.forEach(line => {
+        $('.panel-completed').append(line);
+    });
+    $('.panel-rules').empty();
+    !!rules && Object.keys(rules).length > 0 && Object.keys(rules).sort(function(a, b) { return a.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').localeCompare(b.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')) }).forEach(rule => {
+        $('.panel-rules').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><input class="noscroll" type='checkbox' ${rules[rule] && "checked"} onclick="checkOffRules()" ${(viewOnly || inEntry) && "disabled"} />` + ruleNames[rule].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</div>');
+    });
+}
+
+var getChunkAreas = function() {
+    let chunks = {};
+    $('.unlocked').each(function() {
+        chunks[parseInt($(this).text())] = true;
+    });
+    let i = 0;
+    let temp = {};
+    let temp2 = {};
+    while (i < Object.keys(chunks).length) {
+        !!chunkInfo['chunks'][Object.keys(chunks)[i]] && !!chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect']).forEach(id => {
+            if (!!chunkInfo['chunks'][parseInt(id)]['Name'] && possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] && !chunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
+                chunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = true;
+                temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] || false;
+                if (!!possibleAreas[Object.keys(chunks)[i]]) {
+                    if (!temp2[Object.keys(chunks)[i]] || !temp2[Object.keys(chunks)[i]][chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
+                        if (!temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
+                            temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = {};
+                        }
+                        let depth = 1;
+                        temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')][Object.keys(chunks)[i]] = true;
+                    }
+                }
+            } else if (!!chunkInfo['chunks'][parseInt(id)]['Name']) {
+                temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] || false;
+                if (!!possibleAreas[Object.keys(chunks)[i]]) {
+                    if (!temp2[Object.keys(chunks)[i]] || !temp2[Object.keys(chunks)[i]][chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
+                        if (!temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
+                            temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = {};
+                        }
+                        temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')][Object.keys(chunks)[i]] = true;
+                    }
+                }
+            }
+        });
+        i++;
+    }
+    possibleAreas = temp;
+    areasStructure = temp2;
+    return chunks;
+}
+
+var setAreas = function() {
     $('.panel-areas').empty();
     let newAreas = [];
     !!possibleAreas && Object.keys(possibleAreas).length > 0 && Object.keys(possibleAreas).sort(function(a, b) { return a.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').localeCompare(b.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')) }).forEach(area => {
@@ -2757,18 +2803,6 @@ var setCurrentChallenges = function(backlogArr, completedArr) {
     if (!possibleAreas || Object.keys(possibleAreas).length <= 0) {
         $('.panel-areas').append('No areas currently available.');
     }
-    $('.panel-backlog').empty();
-    backlogArr.forEach(line => {
-        $('.panel-backlog').append(line);
-    });
-    $('.panel-completed').empty();
-    completedArr.forEach(line => {
-        $('.panel-completed').append(line);
-    });
-    $('.panel-rules').empty();
-    !!rules && Object.keys(rules).length > 0 && Object.keys(rules).sort(function(a, b) { return a.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').localeCompare(b.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')) }).forEach(rule => {
-        $('.panel-rules').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><input class="noscroll" type='checkbox' ${rules[rule] && "checked"} onclick="checkOffRules()" ${(viewOnly || inEntry) && "disabled"} />` + ruleNames[rule].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</div>');
-    });
 }
 
 // Sends a challenge to the backlog
@@ -2789,7 +2823,25 @@ var backlogChallenge = function(challenge, skill) {
     } else {
         backlog[skill][challenge] = true;
     }
-    calcCurrentChallenges();
+    let highestChallenge;
+    let highestChallengeLevel = 0;
+    Object.keys(globalValids[skill]).forEach(challenge => {
+        if ((!backlog[skill] || !backlog[skill][challenge]) && globalValids[skill][challenge] > highestChallengeLevel) {
+            highestChallenge = challenge;
+            highestChallengeLevel = globalValids[skill][challenge];
+        }
+    });
+    challengeArr.forEach(line => {
+        if (line.includes(skill + '-challenge')) {
+            let index = challengeArr.indexOf(line);
+            challengeArr.splice(index, 1);
+            if (highestChallengeLevel > 0) {
+                challengeArr.splice(index, 0, `<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} /><b>[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
+            }
+        } 
+    });
+    setupCurrentChallenges(false);
+    setData();
 }
 
 // Removes a challenge from the backlog
@@ -2808,7 +2860,9 @@ var unbacklogChallenge = function(challenge, skill) {
             });
         }
     }
-    calcCurrentChallenges();
+    setupCurrentChallenges(false);
+    $('.panel-active').html('Calculating...');
+    setData();
 }
 
 // Removes a challenge from completed
@@ -2827,7 +2881,9 @@ var uncompleteChallenge = function(challenge, skill) {
             });
         }
     }
-    calcCurrentChallenges();
+    setupCurrentChallenges(false);
+    $('.panel-active').html('Calculating...');
+    setData();
 }
 
 // Marks checked off challenges to save for later
@@ -2835,13 +2891,13 @@ var checkOffChallenges = function() {
     checkedChallenges = {};
     Object.keys(highestCurrent).forEach(skill => {
         if ($('.' + skill + '-challenge > input').prop('checked')) {
-            $('.' + skill + '-challenge').addClass('hide-backlog');
+            $('.panel-active > .' + skill + '-challenge').addClass('hide-backlog');
             if (!checkedChallenges[skill]) {
                 checkedChallenges[skill] = {};
             }
             checkedChallenges[skill][highestCurrent[skill]] = true;
         } else {
-            $('.' + skill + '-challenge').removeClass('hide-backlog');
+            $('.panel-active > .' + skill + '-challenge').removeClass('hide-backlog');
         }
     });
     setData();
@@ -2850,7 +2906,10 @@ var checkOffChallenges = function() {
 // Marks checked off areas to unlock
 var checkOffAreas = function(obj, area) {
     possibleAreas[area] = obj.checked;
-    calcCurrentChallenges();
+    $('.panel-active').html('Calculating...');
+    getChunkAreas();
+    setAreas();
+    setData();
 }
 
 // Marks checked off rules
@@ -2858,7 +2917,9 @@ var checkOffRules = function() {
     Object.keys(rules).forEach(rule => {
         rules[rule] = $('.' + rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule > input').prop('checked');
     });
-    calcCurrentChallenges();
+    setupCurrentChallenges(false);
+    $('.panel-active').html('Calculating...');
+    setData();
 }
 
 // Moves checked off challenges to completed
@@ -3365,7 +3426,6 @@ var changeLocked = function(lock) {
                 locked = lock;
                 helpMenuOpenSoon && helpFunc();
                 lockBoxOpen = false;
-                calcCurrentChallenges();
             }, 500);
         }
         setTimeout(function() {
