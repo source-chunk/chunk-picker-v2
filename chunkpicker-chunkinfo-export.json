@@ -7227,7 +7227,8 @@
         "Primary" : false,
         "Skills" : {
           "Prayer" : 77
-        }
+        },
+		"ManualInvalid": true
       },
       "Activate ~|Chivalry|~" : {
         "Chunks" : [ "11062" ],
@@ -7235,7 +7236,8 @@
         "Primary" : false,
         "Skills" : {
           "Prayer" : 60
-        }
+        },
+		"ManualInvalid": true
       },
       "Activate ~|Piety|~" : {
         "Chunks" : [ "11062" ],
@@ -7243,7 +7245,8 @@
         "Primary" : false,
         "Skills" : {
           "Prayer" : 70
-        }
+        },
+		"ManualInvalid": true
       },
       "Activate ~|Rigour|~" : {
         "Items" : [ "Dexterous prayer scroll" ],
@@ -7251,7 +7254,8 @@
         "Primary" : false,
         "Skills" : {
           "Prayer" : 74
-        }
+        },
+		"ManualInvalid": true
       },
       "Buy the ~|Defence cape|~" : {
         "Category" : [ "Skillcape" ],
