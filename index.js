@@ -1931,8 +1931,8 @@ var calcCurrentChallenges = function() {
 
 // Sets up data for displaying
 setupCurrentChallenges = function(tempChallengeArr) {
-    challengeArr = [];
     if (tempChallengeArr !== false) {
+        challengeArr = [];
         Object.keys(tempChallengeArr).sort().forEach(skill => {
             !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} /><b>[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
         });
