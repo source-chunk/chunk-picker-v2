@@ -9440,7 +9440,7 @@
         "Primary" : true
       },
       "Fletch a ~|blurite crossbow (u)|~" : {
-        "Items" : [ "Oak stock", "Blurite limbs" ],
+        "Items" : [ "Hammer", "Oak stock", "Blurite limbs" ],
         "Level" : 24,
         "Output" : "Blurite crossbow (u)",
         "Primary" : true
@@ -9456,7 +9456,7 @@
         "Primary" : true
       },
       "Fletch a ~|bronze crossbow (u)|~" : {
-        "Items" : [ "Wooden stock", "Bronze limbs" ],
+        "Items" : [ "Hammer", "Wooden stock", "Bronze limbs" ],
         "Level" : 9,
         "Output" : "Bronze crossbow (u)",
         "Primary" : true
@@ -9477,7 +9477,7 @@
         "Primary" : true
       },
       "Fletch a ~|dragon crossbow (u)|~" : {
-        "Items" : [ "Magic stock", "Dragon limbs" ],
+        "Items" : [ "Hammer", "Magic stock", "Dragon limbs" ],
         "Level" : 78,
         "Output" : "Dragon crossbow (u)",
         "Primary" : true
@@ -9584,7 +9584,7 @@
         "Primary" : true
       },
       "Fletch a ~|mithril crossbow (u)|~" : {
-        "Items" : [ "Maple stock", "Mithril limbs" ],
+        "Items" : [ "Hammer", "Maple stock", "Mithril limbs" ],
         "Level" : 54,
         "Output" : "Mithril crossbow (u)",
         "Primary" : true
@@ -9622,7 +9622,7 @@
         "Primary" : true
       },
       "Fletch a ~|rune crossbow (u)|~" : {
-        "Items" : [ "Yew stock", "Rune limbs" ],
+        "Items" : [ "Hammer", "Yew stock", "Rune limbs" ],
         "Level" : 69,
         "Output" : "Rune crossbow (u)",
         "Primary" : true
@@ -9654,7 +9654,7 @@
         "Primary" : true
       },
       "Fletch a ~|steel crossbow (u)|~" : {
-        "Items" : [ "Teak stock", "Steel limbs" ],
+        "Items" : [ "Hammer", "Teak stock", "Steel limbs" ],
         "Level" : 46,
         "Output" : "Steel crossbow (u)",
         "Primary" : true
@@ -9751,7 +9751,7 @@
         "Primary" : true
       },
       "Fletch an ~|adamant crossbow (u)|~" : {
-        "Items" : [ "Mahogany stock", "Adamant limbs" ],
+        "Items" : [ "Hammer", "Mahogany stock", "Adamant limbs" ],
         "Level" : 61,
         "Output" : "Adamant crossbow (u)",
         "Primary" : true
@@ -9793,7 +9793,7 @@
         "Primary" : true
       },
       "Fletch an ~|iron crossbow (u)|~" : {
-        "Items" : [ "Willow stock", "Iron limbs" ],
+        "Items" : [ "Hammer", "Willow stock", "Iron limbs" ],
         "Level" : 39,
         "Output" : "Iron crossbow (u)",
         "Primary" : true
@@ -33230,7 +33230,6 @@
     },
     "11825" : {
       "Diary" : {
-        "Falador" : "EA11",
         "Karamja" : "EA4"
       },
       "Monster" : {
@@ -33475,6 +33474,9 @@
       "Connect" : {
         "10307" : true
       },
+	  "Diary" : {
+		"Falador" : "EA11"
+	  },
       "Monster" : {
         "Cuffs" : 1,
         "Dwarf" : 2,
