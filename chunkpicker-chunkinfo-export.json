@@ -15684,7 +15684,7 @@
         "Primary" : false
       },
       "Infuse a splitbark body into a ~|swampbark body|~" : {
-        "Chunks" : [ "Nature Grotto Cave" ],
+        "Chunks" : [ "Nature altar" ],
         "Items" : [ "Splitbark body", "Tree wizards' journal", "Nature rune" ],
         "Level" : 48,
         "Output" : "Swampbark body",
@@ -15698,7 +15698,7 @@
         "Primary" : false
       },
       "Infuse a splitbark helm into a ~|swampbark helm|~" : {
-        "Chunks" : [ "Nature Grotto Cave" ],
+        "Chunks" : [ "Nature altar" ],
         "Items" : [ "Splitbark helm", "Tree wizards' journal", "Nature rune" ],
         "Level" : 46,
         "Output" : "Swampbark helm",
@@ -15736,7 +15736,7 @@
         "Primary" : false
       },
       "Infuse splitbark boots into ~|swampbark boots|~" : {
-        "Chunks" : [ "Nature Grotto Cave" ],
+        "Chunks" : [ "Nature altar" ],
         "Items" : [ "Splitbark boots", "Tree wizards' journal", "Nature rune" ],
         "Level" : 42,
         "Output" : "Swampbark boots",
@@ -15750,7 +15750,7 @@
         "Primary" : false
       },
       "Infuse splitbark gauntlets into ~|swampbark gauntlets|~" : {
-        "Chunks" : [ "Nature Grotto Cave" ],
+        "Chunks" : [ "Nature altar" ],
         "Items" : [ "Splitbark gauntlets", "Tree wizards' journal", "Nature rune" ],
         "Level" : 42,
         "Output" : "Swampbark gauntlets",
@@ -15764,7 +15764,7 @@
         "Primary" : false
       },
       "Infuse splitbark legs into ~|swampbark legs|~" : {
-        "Chunks" : [ "Nature Grotto Cave" ],
+        "Chunks" : [ "Nature altar" ],
         "Items" : [ "Splitbark legs", "Tree wizards' journal", "Nature rune" ],
         "Level" : 48,
         "Output" : "Swampbark legs",
