@@ -6522,6 +6522,36 @@
         "Output" : "Broken bark snelm",
         "Primary" : true
       },
+	  "Craft a ~|splitbark body|~" : {
+        "Items" : [ "Bark", "Fine cloth", "Needle", "Thread" ],
+        "Level" : 60,
+        "Output" : "Splitbark body",
+        "Primary" : true
+      },
+	  "Craft a ~|splitbark boots|~" : {
+        "Items" : [ "Bark", "Fine cloth", "Needle", "Thread" ],
+        "Level" : 60,
+        "Output" : "Splitbark boots",
+        "Primary" : true
+      },
+	  "Craft a ~|splitbark gauntlets|~" : {
+        "Items" : [ "Bark", "Fine cloth", "Needle", "Thread" ],
+        "Level" : 60,
+        "Output" : "Splitbark gauntlets",
+        "Primary" : true
+      },
+	  "Craft a ~|splitbark helm|~" : {
+        "Items" : [ "Bark", "Fine cloth", "Needle", "Thread" ],
+        "Level" : 61,
+        "Output" : "Splitbark helm",
+        "Primary" : true
+      },
+	  "Craft a ~|splitbark legs|~" : {
+        "Items" : [ "Bark", "Fine cloth", "Needle", "Thread" ],
+        "Level" : 62,
+        "Output" : "Splitbark legs",
+        "Primary" : true
+      },
       "Craft a ~|strip of cloth|~" : {
         "Items" : [ "Ball of wool" ],
         "Level" : 10,
@@ -13212,6 +13242,13 @@
         "Objects" : [ "Ore vein" ],
         "Primary" : true
       },
+	  "Mine ~|pure essence|~" : {
+        "Items" : [ "Pickaxe+" ],
+        "Level" : 30,
+        "Objects" : [ "Rune Essence rock" ],
+        "Output" : "Pure essence",
+        "Primary" : true
+      },
       "Mine ~|rune essence|~" : {
         "Items" : [ "Pickaxe+" ],
         "Level" : 1,
@@ -14246,6 +14283,31 @@
         "Chunks" : [ "10553" ],
         "Items" : [ "Circular hide", "Dagannoth hide" ],
         "Output" : "Spined helm"
+      },
+	  "Craft a ~|splitbark body|~" : {
+		"Chunks" : [ "12337" ],
+        "Items" : [ "Bark", "Fine cloth" ],
+        "Output" : "Splitbark body"
+      },
+	  "splitbark boots" : {
+		"Chunks" : [ "12337" ],
+        "Items" : [ "Bark", "Fine cloth" ],
+        "Output" : "Splitbark boots"
+      },
+	  "splitbark gauntlets" : {
+		"Chunks" : [ "12337" ],
+        "Items" : [ "Bark", "Fine cloth" ],
+        "Output" : "Splitbark gauntlets"
+      },
+	  "splitbark helm" : {
+		"Chunks" : [ "12337" ],
+        "Items" : [ "Bark", "Fine cloth" ],
+        "Output" : "Splitbark helm"
+      },
+	  "splitbark legs" : {
+		"Chunks" : [ "12337" ],
+        "Items" : [ "Bark", "Fine cloth" ],
+        "Output" : "Splitbark legs"
       },
       "spoils of war*" : {
         "Items" : [ "Spoils of war" ],
