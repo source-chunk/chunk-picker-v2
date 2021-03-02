@@ -17282,8 +17282,7 @@
         "Output" : "Elf (Thieving)",
         "Primary" : true
       },
-      "Steal a ~|autumn sq'irk|~ from the Sorceress's Garden minigame" : {
-        "Category" : [ "Sorceress's Garden" ],
+      "Steal an ~|autumn sq'irk|~ from the Sorceress's Garden minigame" : {
         "Chunks" : [ "Sorceress's Garden", "13105" ],
         "Items" : [ "Pestle and mortar", "Beer glass" ],
         "Level" : 45,
@@ -17302,21 +17301,18 @@
         "Primary" : true
       },
       "Steal a ~|spring sq'irk|~ from the Sorceress's Garden minigame" : {
-        "Category" : [ "Sorceress's Garden" ],
         "Chunks" : [ "Sorceress's Garden", "13105" ],
         "Items" : [ "Pestle and mortar", "Beer glass" ],
         "Level" : 25,
         "Primary" : true
       },
       "Steal a ~|summer sq'irk|~ from the Sorceress's Garden minigame" : {
-        "Category" : [ "Sorceress's Garden" ],
         "Chunks" : [ "Sorceress's Garden", "13105" ],
         "Items" : [ "Pestle and mortar", "Beer glass" ],
         "Level" : 65,
         "Primary" : true
       },
       "Steal a ~|winter sq'irk|~ from the Sorceress's Garden minigame" : {
-        "Category" : [ "Sorceress's Garden" ],
         "Chunks" : [ "Sorceress's Garden", "13105" ],
         "Items" : [ "Pestle and mortar", "Beer glass" ],
         "Level" : 1,
