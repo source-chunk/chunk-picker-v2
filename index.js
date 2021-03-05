@@ -581,6 +581,7 @@ $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     fontZoom = $('.box').width() / 6;
     $('.label').css('font-size', labelZoom + 'px');
     $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
+    $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
     $('.box').css('font-size', fontZoom + 'px');
 });
 
@@ -678,7 +679,10 @@ $(document).on({
                 return;
             }
             if ($(e.target).hasClass('gray')) {
-                if (selectedNum > 99) {
+                if (selectedNum > 999) {
+                    $(e.target).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
+                    $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
+                } else if (selectedNum > 99) {
                     $(e.target).addClass('selected').removeClass('gray').append('<span class="label long">' + selectedNum + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
                 } else {
@@ -688,7 +692,9 @@ $(document).on({
                 selectedNum++;
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             } else if ($(e.target).hasClass('selected')) {
-                fixNums($($(e.target).children()[1]).text());
+                if (selectedChunks < 300) {
+                    fixNums($($(e.target).children()[1]).text());
+                }
                 $(e.target).addClass('unlocked').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) + "</span>");
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
@@ -697,7 +703,9 @@ $(document).on({
                 $('.panel-active').html('Calculating...');
                 challengePanelVis['active'] && toggleChallengesPanel('active');
             } else if ($(e.target).hasClass('potential')) {
-                fixNums($($(e.target).children()[1]).text());
+                if (selectedChunks < 300) {
+                    fixNums($($(e.target).children()[1]).text());
+                }
                 $(e.target).addClass('unlocked').removeClass('potential').empty().append("<span class='chunkId'>" + (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) + "</span>");
                 $('.potential > .label').css('color', 'white');
                 $('.potential').addClass('selected').removeClass('potential recent');
@@ -795,6 +803,7 @@ var zoomButton = function(dir) {
     $('.box').css('font-size', fontZoom + 'px');
     $('.label').css('font-size', labelZoom + 'px');
     $('.label.long').css('font-size', (labelZoom *(2/3)) + 'px');
+    $('.label.extralong').css('font-size', (labelZoom *(1/2)) + 'px');
 }
 
 // Pick button: picks a random chunk from selected/potential
@@ -822,7 +831,9 @@ var pick = function() {
         roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
         unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
     }
-    fixNums(sNum);
+    if (el.length < 300) {
+        fixNums(sNum);
+    }
     autoSelectNeighbors && selectNeighbors(el[rand]);
     autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>") && (selectedChunks = 1) && (selectedNum = 1);
     $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
@@ -1318,7 +1329,10 @@ var unpick = function() {
         return;
     }
     var rand = Math.floor(Math.random() * el.length);
-    if (selectedNum > 99) {
+    if (selectedNum > 999) {
+        $(el[rand]).addClass('selected').removeClass('unlocked').addClass('recent').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>").append('<span class="label extralong">' + selectedNum + '</span>');
+        $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
+    } else if (selectedNum > 99) {
         $(el[rand]).addClass('selected').removeClass('unlocked').addClass('recent').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>").append('<span class="label long">' + selectedNum + '</span>');
         $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
     } else {
@@ -1454,7 +1468,7 @@ var recentChunk = function(el) {
         return;
     }
     let id = parseInt($($(el).children('.chunk')).text());
-    let box = $('.box:contains(' + id + ')').addClass('recent');
+    let box = $('.box:contains(' + id + ')').filter(function() { return $(this).text() === id; }).addClass('recent');
     scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
 }
 
@@ -1555,6 +1569,7 @@ var setupMap = function() {
         $('.box').css('font-size', fontZoom + 'px');
         $('.label').css('font-size', labelZoom + 'px');
         $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
+        $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
         !mid && (mid = window.location.href.split('?')[1]);
         document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
         $('.toptitle2').text(mid.split('-')[0].toUpperCase());
@@ -1571,7 +1586,10 @@ var selectNeighbors = function(el) {
         if (ops[i].substring(1,2) === 'x') {
             num = (i - 1) * 2 + 1;
             if (Math.floor((parseInt(el.id) + num) / rowSize) === Math.floor(parseInt(el.id) / rowSize) && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
-                if (selectedNum > 99) {
+                if (selectedNum > 999) {
+                    $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
+                    $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
+                } else if (selectedNum > 99) {
                     $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span class="label long">' + selectedNum + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
                 } else {
@@ -1584,7 +1602,10 @@ var selectNeighbors = function(el) {
         } else {
             num = ((i - 3) * 2 + 1) * rowSize;
             if (parseInt(el.id) + num >= 0 && parseInt(el.id) + num < fullSize && $(`#${parseInt(el.id)  + num}`).hasClass('gray')) {
-                if (selectedNum > 99) {
+                if (selectedNum > 999) {
+                    $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
+                    $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
+                } else if (selectedNum > 99) {
                     $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span class="label long">' + selectedNum + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
                 } else {
@@ -1654,13 +1675,16 @@ var scrollToPos = function(x, y, xPart, yPart, doQuick) {
 var fixNums = function(num) {
     $('.label').each(function(index) {
         if (parseInt($(this).text()) >= num) {
-            if (parseInt($(this).text()) === 100) {
+            if (parseInt($(this).text()) === 1000) {
+                $(this).text(parseInt($(this).text()) - 1).removeClass('extralong').addClass('long');
+            } else if (parseInt($(this).text()) === 100) {
                 $(this).text(parseInt($(this).text()) - 1).removeClass('long');
             } else {
                 $(this).text(parseInt($(this).text()) - 1);
             }
             $('.label').css('font-size', labelZoom + 'px');
             $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
+            $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
         }
     });
     selectedNum--;
@@ -3064,13 +3088,13 @@ var toggleQuestInfo = function() {
 // Highlights array of chunk ids for current quest
 var highlightAllQuest = function() {
     questChunks.forEach(id => {
-        $('.box:contains(' + id + ')').addClass('recent');
+        $('.box:contains(' + id + ')').filter(function() { return $(this).text() === id; }).addClass('recent');
     });
 }
 
 // Scrolls to chunk with given id
 var scrollToChunk = function(id) {
-    let box = $('.box:contains(' + id + ')').addClass('recent');
+    let box = $('.box:contains(' + id + ')').filter(function() { return $(this).text() === id; }).addClass('recent');
     scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
 }
 
@@ -3224,29 +3248,35 @@ var loadData = function() {
     
             chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
                 picking = true;
-                if (selectedNum > 99) {
-                    $('.box > .chunkId:contains(' + id + ')').parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
+                if (selectedNum > 999) {
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label extralong">' + selectedNum++ + '</span>');
+                    $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
+                } else if (selectedNum > 99) {
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
                 } else {
-                    $('.box > .chunkId:contains(' + id + ')').parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label">' + selectedNum++ + '</span>');
                     $('.label').css('font-size', labelZoom + 'px');
                 }
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             });
     
             chunks && chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b){return b-a}).forEach(function(id) {
-                if (selectedNum > 99) {
-                    $('.box > .chunkId:contains(' + id + ')').parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
+                if (selectedNum > 999) {
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label extralong">' + selectedNum++ + '</span>');
+                    $('.label.extralong').css('font-size', (labelZoom * (1/2))+ 'px');
+                } else if (selectedNum > 99) {
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2/3))+ 'px');
                 } else {
-                    $('.box > .chunkId:contains(' + id + ')').parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
                     $('.label').css('font-size', labelZoom + 'px');
                 }
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             });
     
             chunks && chunks['unlocked'] && Object.keys(chunks['unlocked']).forEach(function(id) {
-                $('.box > .chunkId:contains(' + id + ')').parent().addClass('unlocked').removeClass('gray selected potential');
+                $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('unlocked').removeClass('gray selected potential');
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             });
     
@@ -3256,7 +3286,7 @@ var loadData = function() {
                 isPicking = true;
             }
             chunkBorders();
-            calcCurrentChallenges();
+            chunkTasksOn && calcCurrentChallenges();
             center('quick');
         });
     });
