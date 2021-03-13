@@ -76,6 +76,17 @@ var helpMenuOpenSoon = false;                                                   
 var signedIn = false;                                                           // Is the user signed in
 var filterByChecked = false;                                                    // Are we filtering by checked only
 var extraOutputItems = {};                                                      // List of extra items obtainable from skill output
+var baseChunkData = {};                                                         // Chunk data global list
+
+var activeContextMenuChallenge = null;                                          // Challenge saved of active ellipsis
+var activeContextMenuSkill = null;                                              // Skill saved of active ellipsis
+var activeContextMenuChallengeOld = null;                                       // Challenge saved of active ellipsis old
+var activeContextMenuSkillOld = null;                                           // Skill saved of active ellipsis old
+
+var backlogContextMenuChallenge = null;                                          // Challenge saved of backlog ellipsis
+var backlogContextMenuSkill = null;                                              // Skill saved of backlog ellipsis
+var backlogContextMenuChallengeOld = null;                                       // Challenge saved of backlog ellipsis old
+var backlogContextMenuSkillOld = null;                                           // Skill saved of backlog ellipsis old
 
 var infoPanelVis = {
     monsters: false,
@@ -264,6 +275,10 @@ let questChunks = [];
 let manualModalOpen = false;
 let manualTasks = {};
 let fullChallengeArr = {};
+let detailsModalOpen = false;
+let notesModalOpen = false;
+let notesChallenge = null;
+let notesSkill = null;
 
 // ----------------------------------------------------------
 
@@ -283,7 +298,7 @@ window.addEventListener('contextmenu', function (e) {
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen) {
         clickX = ev.changedPointers[0].pageX;
         clickY = ev.changedPointers[0].pageY;
     }
@@ -291,7 +306,7 @@ hammertime.on('panstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 hammertime.on('panend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -299,7 +314,7 @@ hammertime.on('panend', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
 hammertime.on('panleft panright panup pandown', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen) {
         updateScrollPos(ev.changedPointers[0]);
     }
 });
@@ -514,9 +529,9 @@ $(document).ready(function() {
     });
 
     $('.lock-closed').hover(function () {
-        $(this).removeClass('zmdi-lock').addClass('zmdi-lock-open');
+        $(this).removeClass('fa-lock').addClass('fa-unlock-alt');
     }, function () {
-        $(this).removeClass('zmdi-lock-open').addClass('zmdi-lock');
+        $(this).removeClass('fa-unlock-alt').addClass('fa-lock');
     });
 });
 
@@ -526,7 +541,7 @@ $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     if (e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
         $('body').scrollTop(0);
         return;
-    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
+    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
         e.preventDefault();
         return;
     }
@@ -604,7 +619,7 @@ $(document).on({
             }
             toggleQuestInfo();
             settings();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen) {
             e.preventDefault();
         }
     }
@@ -618,7 +633,7 @@ $(document).on('mouseleave', '.recent', function() {
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen) {
             return;
         }
         if (clicked) {
@@ -629,7 +644,7 @@ $(document).on({
         }
     },
     'mousedown': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen) {
             return;
         }
         clicked = true;
@@ -639,8 +654,22 @@ $(document).on({
         clickY = e.pageY;
     },
     'mouseup': function(e) {
+        if (!$(e.target).parents(".active-context-menu").length > 0) {
+            activeContextMenuChallengeOld = activeContextMenuChallenge;
+            activeContextMenuSkillOld = activeContextMenuSkill;
+            activeContextMenuChallenge = null;
+            activeContextMenuSkill = null;
+            $(".active-context-menu").hide(100);
+        }
+        if (!$(e.target).parents(".backlog-context-menu").length > 0) {
+            backlogContextMenuChallengeOld = backlogContextMenuChallenge;
+            backlogContextMenuSkillOld = backlogContextMenuSkill;
+            backlogContextMenuChallenge = null;
+            backlogContextMenuSkill = null;
+            $(".backlog-context-menu").hide(100);
+        }
         let tempClicked = clicked;
-        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen) {
+        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen) {
             return;
         } else if (e.button === 2) {
             if ($(e.target).hasClass('box')) {
@@ -669,9 +698,9 @@ $(document).on({
                 if (lockBoxOpen) {
                     closePinBox();
                 }
-                $('.lock-closed').addClass('animated shake zmdi-hc-5x').removeClass('zmdi-hc-3x').css({'color': 'rgb(200, 75, 75)'});
+                $('.lock-closed').addClass('animated shake').removeClass('').css({'color': 'rgb(200, 75, 75)'});
                 setTimeout(function() {
-                    $('.lock-closed').removeClass('animated shake zmdi-hc-5x').addClass('zmdi-hc-3x').css({'color': 'black'});
+                    $('.lock-closed').removeClass('animated shake').addClass('').css({'color': 'black'});
                 }, 500);
                 return;
             } else if (settingsOpen && !screenshotMode) {
@@ -698,10 +727,10 @@ $(document).on({
                 $(e.target).addClass('unlocked').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex) + "</span>");
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-                getChunkAreas();
-                setupCurrentChallenges(false);
-                $('.panel-active').html('Calculating...');
-                challengePanelVis['active'] && toggleChallengesPanel('active');
+                !onMobile && getChunkAreas();
+                !onMobile && setupCurrentChallenges(false);
+                !onMobile && $('.panel-active').html('Calculating...');
+                challengePanelVis['active'] && !onMobile && toggleChallengesPanel('active');
             } else if ($(e.target).hasClass('potential')) {
                 if (selectedChunks < 300) {
                     fixNums($($(e.target).children()[1]).text());
@@ -745,19 +774,19 @@ $(document).on({
                     $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
                 }
                 completeChallenges();
-                getChunkAreas();
-                setupCurrentChallenges(false);
-                $('.panel-active').html('Calculating...');
-                challengePanelVis['active'] && toggleChallengesPanel('active');
+                !onMobile && getChunkAreas();
+                !onMobile && setupCurrentChallenges(false);
+                !onMobile && $('.panel-active').html('Calculating...');
+                challengePanelVis['active'] && !onMobile && toggleChallengesPanel('active');
             } else if ($(e.target).hasClass('recent')) {
                 // ----
             } else {
                 $(e.target).addClass('gray').removeClass('unlocked').css('border-width', 0);
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
-                getChunkAreas();
-                setupCurrentChallenges(false);
-                $('.panel-active').html('Calculating...');
-                challengePanelVis['active'] && toggleChallengesPanel('active');
+                !onMobile && getChunkAreas();
+                !onMobile && setupCurrentChallenges(false);
+                !onMobile && $('.panel-active').html('Calculating...');
+                challengePanelVis['active'] && !onMobile && toggleChallengesPanel('active');
             }
             setData();
             chunkBorders();
@@ -808,7 +837,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || $('.selected').length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || $('.selected').length < 1) {
         return;
     }
     var el;
@@ -868,15 +897,15 @@ var pick = function() {
         $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
     }
     completeChallenges();
-    $('.panel-active').html('Calculating...');
-    challengePanelVis['active'] && toggleChallengesPanel('active');
+    !onMobile && $('.panel-active').html('Calculating...');
+    challengePanelVis['active'] && !onMobile && toggleChallengesPanel('active');
     setData();
     chunkBorders();
 }
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2 = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || $('.selected').length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || $('.selected').length < 1) {
         return;
     }
     isPicking = true;
@@ -903,7 +932,7 @@ var toggleNeighbors = function(extra) {
     }
     autoSelectNeighbors = !autoSelectNeighbors;
     $('.toggleNeighbors').toggleClass('item-off item-on');
-    $('.toggleNeighbors > .pic').toggleClass('zmdi-plus zmdi-minus');
+    $('.toggleNeighbors > .pic').toggleClass('fa-plus fa-minus');
     if (autoRemoveSelected && autoSelectNeighbors) {
         toggleRemove();
     }
@@ -917,7 +946,7 @@ var toggleRemove = function(extra) {
     }
     autoRemoveSelected = !autoRemoveSelected;
     $('.toggleRemove').toggleClass('item-off item-on');
-    $('.toggleRemove > .pic').toggleClass('zmdi-plus zmdi-minus');
+    $('.toggleRemove > .pic').toggleClass('fa-plus fa-minus');
     if (autoSelectNeighbors && autoRemoveSelected) {
         toggleNeighbors();
     }
@@ -981,7 +1010,7 @@ var importFunc = function() {
 
 // Checks if URL is formatted correctly, then imports it into the map
 var importFromURL = function() {
-    $('#import2').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    $('#import2').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
     $('.url').removeClass('wrong');
     $('.url-err').css('visibility', 'hidden');
     var url = $('.url').val();
@@ -1074,7 +1103,7 @@ var highscoreFunc = function() {
 
 // Sets username for the highscores
 var highscoreOptIn = function() {
-    $('#highscoreoptin').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    $('#highscoreoptin').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
     let oldUsername = userName;
     userName = $('.username').val();
     setTimeout(function() {
@@ -1139,7 +1168,7 @@ var checkPin = function() {
 var unlockEntry = function() {
     var pin = $('.pin.entry').val();
     myRef.once('value', function(snap) {
-        $('#unlock-entry').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+        $('#unlock-entry').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
         setTimeout(function() {
             if ((snap.val() && snap.val()['pin'] !== pin)) {
                 $('.pin.entry').addClass('animated shake wrong').select();
@@ -1161,7 +1190,7 @@ var unlockEntry = function() {
                     locked = false;
                     inEntry = false;
                     helpMenuOpenSoon && helpFunc();
-                    unlockChallenges();
+                    !onMobile && unlockChallenges();
                 }, 500);
             }
             setTimeout(function() {
@@ -1192,7 +1221,7 @@ var nextPage = function(page) {
         $('#page2a').show();
         $('.pin').focus();
     } else if (page === 'create2') {
-        $('#create2').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+        $('#create2').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
         pin = $('.pin.new').val();
         setTimeout(function() {
             $('#page2a').hide();
@@ -1232,7 +1261,7 @@ var prevPage = function(page) {
 
 // Confirms that the map id exists, and that the pin is correct for that map id (if pin is filled in), and then advances to the map if all is correct
 var accessMap = function() {
-    $('#access').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    $('#access').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
     mid = $('.mid').removeClass('wrong').val().toLowerCase();
     var pin = $('.pin.old').removeClass('wrong').val();
     databaseRef.child('maps/' + mid).once('value', function(snap) {
@@ -1279,7 +1308,7 @@ var accessMap = function() {
 
 // Confirms that the map id exists, and that the pin is correct for that map id (if pin is filled in), then changes the pin, and then finally advances to the map if all is correct
 var changePin = function() {
-    $('#change-pin').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    $('#change-pin').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
     var mid = $('.mid-old').removeClass('wrong').val().toLowerCase();
     var pinOld = $('.pin.old2.first').removeClass('wrong').val();
     var pinNew = $('.pin.old2.second').val();
@@ -1321,7 +1350,7 @@ var changePin = function() {
 
 // Unpicks a random unlocked chunk
 var unpick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || $('.unlocked').length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || $('.unlocked').length < 1) {
         return;
     }
     var el = $('.unlocked');
@@ -1390,7 +1419,7 @@ var toggleChunkInfo = function(extra) {
     $('.hiddenInfo').hide();
     extra !== 'startup' && $('menu8').css('opacity', 1);
     $('.infotoggle').toggleClass('item-off item-on');
-    $('.infotoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    $('.infotoggle > .pic').toggleClass('fa-plus fa-minus');
     updateChunkInfo();
 }
 
@@ -1420,7 +1449,7 @@ var toggleChunkTasks = function(extra) {
     chunkTasksOn ? $('.menu9').show() : $('.menu9').hide();
     extra !== 'startup' && $('menu9').css('opacity', 1);
     $('.taskstoggle').toggleClass('item-off item-on');
-    $('.taskstoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    $('.taskstoggle > .pic').toggleClass('fa-plus fa-minus');
     extra !== 'startup' && !locked && setData();
 }
 
@@ -1430,7 +1459,7 @@ var toggleRoll2 = function(extra) {
     roll2On && !isPicking ? $('.roll2').show() : $('.roll2').hide();
     extra !== 'startup' && $('.roll2').css('opacity', 1);
     $('.roll2toggle').toggleClass('item-off item-on');
-    $('.roll2toggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    $('.roll2toggle > .pic').toggleClass('fa-plus fa-minus');
     extra !== 'startup' && !locked && setData();
 }
 
@@ -1440,7 +1469,7 @@ var toggleUnpick = function(extra) {
     unpickOn && !isPicking ? $('.unpick').show() : $('.unpick').hide();
     extra !== 'startup' && $('.unpick').css('opacity', 1);
     $('.unpicktoggle').toggleClass('item-off item-on');
-    $('.unpicktoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    $('.unpicktoggle > .pic').toggleClass('fa-plus fa-minus');
     extra !== 'startup' && !locked && setData();
 }
 
@@ -1450,7 +1479,7 @@ var toggleRecent = function(extra) {
     recentOn ? $('.menu7').show() : $('.menu7').hide();
     extra !== 'startup' && $('.menu7').css('opacity', 1);
     $('.recenttoggle').toggleClass('item-off item-on');
-    $('.recenttoggle > .pic').toggleClass('zmdi-plus zmdi-minus');
+    $('.recenttoggle > .pic').toggleClass('fa-plus fa-minus');
     extra !== 'startup' && !locked && setData();
 }
 
@@ -1468,7 +1497,7 @@ var recentChunk = function(el) {
         return;
     }
     let id = parseInt($($(el).children('.chunk')).text());
-    let box = $('.box:contains(' + id + ')').filter(function() { return $(this).text() === id; }).addClass('recent');
+    let box = $('.box:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).addClass('recent');
     scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
 }
 
@@ -1478,7 +1507,7 @@ var toggleInfoPanel = function(pnl) {
     Object.keys(infoPanelVis).forEach(uniqKey => {
         if (uniqKey === pnl) {
             infoPanelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
-            infoPanelVis[pnl] ? $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i>') : $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+            infoPanelVis[pnl] ? $('#info' + uniqKey + ' > .exp').html('<i class="pic fas fa-minus"></i>') : $('#info' + uniqKey + ' > .exp').html('<i class="pic fas fa-plus"></i>');
             if (infoPanelVis[pnl] && pnl === 'challenges' && $('.panel-challenges').html() === 'Calculating...') {
                 setTimeout(function() {
                     let challengeStr = calcFutureChallenges();
@@ -1487,7 +1516,7 @@ var toggleInfoPanel = function(pnl) {
             }
         } else {
             $('.panel-' + uniqKey).removeClass('visible');
-            $('#info' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+            $('#info' + uniqKey + ' > .exp').html('<i class="pic fas fa-plus"></i>');
             infoPanelVis[uniqKey] = false;
         }
     });
@@ -1499,7 +1528,7 @@ var toggleChallengesPanel = function(pnl) {
     Object.keys(challengePanelVis).forEach(uniqKey => {
         if (uniqKey === pnl) {
             challengePanelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
-            challengePanelVis[pnl] ? $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i>') : $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+            challengePanelVis[pnl] ? $('#challenges' + uniqKey + ' > .exp').html('<i class="pic fas fa-minus"></i>') : $('#challenges' + uniqKey + ' > .exp').html('<i class="pic fas fa-plus"></i>');
             if (challengePanelVis[pnl] && pnl === 'active' && $('.panel-active').html() === 'Calculating...') {
                 setTimeout(function() {
                     calcCurrentChallenges();
@@ -1507,7 +1536,7 @@ var toggleChallengesPanel = function(pnl) {
             } // TEMP
         } else {
             $('.panel-' + uniqKey).removeClass('visible');
-            $('#challenges' + uniqKey + ' > .exp').html('<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i>');
+            $('#challenges' + uniqKey + ' > .exp').html('<i class="pic fas fa-plus"></i>');
             challengePanelVis[uniqKey] = false;
         }
     });
@@ -1524,7 +1553,7 @@ var doneLoading = function() {
     if (onMobile) {
         $('.center').css({'height': '40px', 'width': '90px', 'font-size': '12px'});
         $('.pick, .roll2, .unpick').css({'height': '20px', 'width': '90px', 'font-size': '12px'});
-        $('.menu2, .menu6, .menu7, .menu8, .menu9, .menu10, .settings').hide().remove();
+        $('.menu2, .menu6, .menu7, .menu8, .menu9, .menu10, .settings, .gohighscore, .gobugreport, .godiscord, .help-button, .toptitle2-outer').hide().remove();
         $('.hr').css({'width': '25px'});
         $('.gohighscore').css({'right': '3vw', 'left': 'auto'});
         $('.block, .block > .title').css({'font-size': '18px'});
@@ -1573,7 +1602,7 @@ var setupMap = function() {
         !mid && (mid = window.location.href.split('?')[1]);
         document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
         $('.toptitle2').text(mid.split('-')[0].toUpperCase());
-        toggleChallengesPanel('active');
+        !onMobile && toggleChallengesPanel('active');
         loadData();
     }
 }
@@ -1692,7 +1721,7 @@ var fixNums = function(num) {
 
 // Update chunk info
 var updateChunkInfo = function() {
-    if (!inEntry && !importMenuOpen && !manualModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+    if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
         let id = -1;
         if (infoLockedId !== -1) {
             id = infoLockedId.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G');
@@ -1708,8 +1737,13 @@ var updateChunkInfo = function() {
         } else {
             infoCollapse = false;
         }
-        chunkInfoOn && $('.menu8').show();
-        chunkInfoOn && $('.hiddenInfo').hide();
+        if (infoCollapse && chunkInfoOn) {
+            $('.menu8').hide();
+            $('.hiddenInfo').show();
+        } else if (chunkInfoOn) {
+            $('.menu8').show();
+            $('.hiddenInfo').hide();
+        }
         if ($('.infoid').is(':hidden') && id > 0) {
             $('.infostartup').hide();
             $('.infoid').show();
@@ -1775,7 +1809,7 @@ var updateChunkInfo = function() {
             });
             objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
             !!chunkInfo['chunks'][id]['Quest'] && Object.keys(chunkInfo['chunks'][id]['Quest']).forEach(name => {
-                questStr += `<a class='${(chunkInfo['chunks'][id]['Quest'][name] === 'first' ? 'bold link' : 'link')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + `</a> <span onclick="getQuestInfo('` + name.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + `')"><i class="quest-icon zmdi zmdi-collection-text"></i></span>, `;
+                questStr += `<a class='${(chunkInfo['chunks'][id]['Quest'][name] === 'first' ? 'bold link' : 'link')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name + `</a> <span onclick="getQuestInfo('` + name.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + `')"><i class="quest-icon fas fa-info-circle"></i></span>, `;
             });
             questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
             !!chunkInfo['chunks'][id]['Diary'] && Object.keys(chunkInfo['chunks'][id]['Diary']).forEach(name => {
@@ -1829,7 +1863,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
             if (line === 'Primary+') {
                 let primaryValid = false;
                 !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
-                    if ((chunkInfo['challenges'][skill][challenge]['Primary'] && !chunkInfo['challenges'][skill][challenge]['Secondary'] && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill][challenge])) || chunkInfo['challenges'][skill][challenge]['Manual']) {
+                    if ((chunkInfo['challenges'][skill][challenge]['Primary'] && !chunkInfo['challenges'][skill][challenge]['Secondary'] && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
                         primaryValid = true;
                     }
                 });
@@ -1893,7 +1927,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
 // Finds the current challenge in each skill
 var calcCurrentChallenges = function() {
     let chunks = getChunkAreas();
-    let baseChunkData = gatherChunksInfo(chunks);
+    baseChunkData = gatherChunksInfo(chunks);
     globalValids = calcChallenges(chunks, baseChunkData);
 
     let tempChallengeArr = {};
@@ -1909,7 +1943,7 @@ var calcCurrentChallenges = function() {
             });
             checkPrimaryMethod(skill, globalValids, baseChunkData) && Object.keys(globalValids[skill]).forEach(challenge => {
                 if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel) {
-                    if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
+                    if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
                             Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
@@ -1923,7 +1957,7 @@ var calcCurrentChallenges = function() {
                         } else {
                             highestChallenge[skill] = challenge;
                         }
-                    } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                    } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
                             Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
@@ -1964,7 +1998,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
     if (tempChallengeArr !== false) {
         challengeArr = [];
         Object.keys(tempChallengeArr).sort().forEach(skill => {
-            !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && 'hide-backlog'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
+            !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && 'hide-backlog'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h"></i></span>') + '</div>');
         });
         Object.keys(highestCurrent).forEach(skill => {
             if (!!checkedChallenges[skill] && Object.keys(checkedChallenges[skill])[0] === highestCurrent[skill]) {
@@ -1972,8 +2006,8 @@ setupCurrentChallenges = function(tempChallengeArr) {
             }
         });
         !!globalValids['Extra'] && Object.keys(globalValids['Extra']).forEach(challenge => {
-            if ((!backlog['Extra'] || !backlog['Extra'][challenge]) && (!completedChallenges['Extra'] || !completedChallenges['Extra'][challenge])) {
-                challengeArr.push(`<div class="challenge noscroll ${'extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />` + '<span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
+            if ((!backlog['Extra'] || !backlog['Extra'].hasOwnProperty(challenge)) && (!completedChallenges['Extra'] || !completedChallenges['Extra'][challenge])) {
+                challengeArr.push(`<div class="challenge noscroll ${'extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />` + '<span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h"></i></span>') + '</div>');
             }
         });
         if (challengeArr.length < 1) {
@@ -1984,11 +2018,11 @@ setupCurrentChallenges = function(tempChallengeArr) {
     Object.keys(backlog).forEach(skill => {
         if (skill !== 'Extra') {
             !!chunkInfo['challenges'][skill] && Object.keys(backlog[skill]).forEach(name => {
-                !!chunkInfo['challenges'][skill][name] && backlogArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"> <b class="noscroll">[` + chunkInfo['challenges'][skill][name]['Level'] + '] ' + skill + '</b>: ' + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : ' <span class="arrow noscroll" onclick="unbacklogChallenge(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-up zmdi-hc-lg noscroll"></i></span>') + '</div>');
+                !!chunkInfo['challenges'][skill][name] && backlogArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"> <b class="noscroll">[` + chunkInfo['challenges'][skill][name]['Level'] + '] ' + skill + '</b>: ' + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : ' <span class="burger noscroll" onclick="openBacklogContextMenu(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
             });
         } else {
             Object.keys(backlog[skill]).forEach(name => {
-                backlogArr.push(`<div class="challenge noscroll ${'extra-' + name.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}">` + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : ' <span class="arrow noscroll" onclick="unbacklogChallenge(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-up zmdi-hc-lg noscroll"></i></span>') + '</div>');
+                backlogArr.push(`<div class="challenge noscroll ${'extra-' + name.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}">` + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : ' <span class="burger noscroll" onclick="openBacklogContextMenu(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
             });
         }
     });
@@ -1999,11 +2033,11 @@ setupCurrentChallenges = function(tempChallengeArr) {
     Object.keys(completedChallenges).forEach(skill => {
         if (skill !== 'Extra') {
             !!chunkInfo['challenges'][skill] && Object.keys(completedChallenges[skill]).forEach(name => {
-                !!chunkInfo['challenges'][skill][name] && completedArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"> <b class="noscroll">[` + chunkInfo['challenges'][skill][name]['Level'] + '] ' + skill + '</b>: ' + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : ' <span class="arrow noscroll" onclick="uncompleteChallenge(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-up zmdi-hc-lg noscroll"></i></span>') + '</div>');
+                !!chunkInfo['challenges'][skill][name] && completedArr.push(`<div class="challenge noscroll ${skill + '-challenge'}"> <b class="noscroll">[` + chunkInfo['challenges'][skill][name]['Level'] + '] ' + skill + '</b>: ' + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : ' <span class="arrow noscroll" onclick="uncompleteChallenge(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="fas fa-undo-alt noscroll"></i></span>') + '</div>');
             });
         } else {
             Object.keys(completedChallenges[skill]).forEach(name => {
-                completedArr.push(`<div class="challenge noscroll ${'extra-' + name.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}">` + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : ' <span class="arrow noscroll" onclick="uncompleteChallenge(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-up zmdi-hc-lg noscroll"></i></span>') + '</div>');
+                completedArr.push(`<div class="challenge noscroll ${'extra-' + name.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}">` + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : ' <span class="arrow noscroll" onclick="uncompleteChallenge(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="fas fa-undo-alt noscroll"></i></span>') + '</div>');
             });
         }
     });
@@ -2033,8 +2067,8 @@ var calcFutureChallenges = function() {
         });
         i++;
     }
-    let baseChunkData = gatherChunksInfo(chunks);
-    let valids = calcChallenges(chunks, baseChunkData);
+    let baseChunkDataLocal = gatherChunksInfo(chunks);
+    let valids = calcChallenges(chunks, baseChunkDataLocal);
     let highestChallenge = {};
 
     Object.keys(valids).forEach(skill => {
@@ -2049,13 +2083,13 @@ var calcFutureChallenges = function() {
                 highestCompletedLevel = globalValids[skill][highestCurrent[skill]];
             }
         }
-        checkPrimaryMethod(skill, valids, baseChunkData) && Object.keys(valids[skill]).forEach(challenge => {
+        checkPrimaryMethod(skill, valids, baseChunkDataLocal) && Object.keys(valids[skill]).forEach(challenge => {
             if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel || (highestCompletedLevel < 1)) {
-                if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!backlog[skill] || !backlog[skill][challenge])) {
+                if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                     if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                         let tempValid = true;
                         Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
-                            if (!checkPrimaryMethod(subSkill, globalValids, baseChunkData)) {
+                            if (!checkPrimaryMethod(subSkill, globalValids, baseChunkDataLocal)) {
                                 tempValid = false;
                             }
                         });
@@ -2065,11 +2099,11 @@ var calcFutureChallenges = function() {
                     } else {
                         highestChallenge[skill] = challenge;
                     }
-                } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                     if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                         let tempValid = true;
                         Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
-                            if (!checkPrimaryMethod(subSkill, globalValids, baseChunkData)) {
+                            if (!checkPrimaryMethod(subSkill, globalValids, baseChunkDataLocal)) {
                                 tempValid = false;
                             }
                         });
@@ -2122,7 +2156,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         Object.keys(tempChallenges).forEach(skill => {
             checkPrimaryMethod(skill, tempChallenges, baseChunkData) && Object.keys(tempChallenges[skill]).forEach(challenge => {
                 if (skill !== 'Extra') {
-                    if (!!chunkInfo['challenges'][skill][challenge]['Output'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                    if (!!chunkInfo['challenges'][skill][challenge]['Output'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         let output = chunkInfo['challenges'][skill][challenge]['Output'];
                         !!chunkInfo['skillItems'][skill] && !!chunkInfo['skillItems'][skill][output] && Object.keys(chunkInfo['skillItems'][skill][output]).forEach(item => {
                             if (rules['Rare Drop'] || isNaN(parseInt(chunkInfo['skillItems'][skill][output][item].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['skillItems'][skill][output][item].split('/')[1])) || (parseInt(chunkInfo['skillItems'][skill][output][item].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['skillItems'][skill][output][item].split('/')[1])) > (parseInt(rareDropNum.split('/')[0].replaceAll('~', '')) / parseInt(rareDropNum.split('/')[1]))) {
@@ -2147,7 +2181,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                             }
                         }
                     }
-                    if (!!chunkInfo['challenges'][skill][challenge]['Output Object'] && (!backlog[skill] || !backlog[skill][challenge])) {
+                    if (!!chunkInfo['challenges'][skill][challenge]['Output Object'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         let outputObject = chunkInfo['challenges'][skill][challenge]['Output Object'];
                         if (!outputObjects[outputObject.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')]) {
                             outputObjects[outputObject.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = {};
@@ -2249,16 +2283,22 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             if (!!chunkInfo['challenges'][skill][name]['ManualInvalid'] && chunkInfo['challenges'][skill][name]['ManualInvalid']) {
                 validChallenge = false;
             }
+            chunkInfo['challenges'][skill][name]['ItemsDetails'] = [];
+            chunkInfo['challenges'][skill][name]['ObjectsDetails'] = [];
+            chunkInfo['challenges'][skill][name]['MonstersDetails'] = [];
+            chunkInfo['challenges'][skill][name]['NPCsDetails'] = [];
+            chunkInfo['challenges'][skill][name]['ChunksDetails'] = [];
             !!chunkInfo['challenges'][skill][name]['Chunks'] && chunkInfo['challenges'][skill][name]['Chunks'].forEach(chunkId => {
                 if (chunkId.includes('+')) {
                     if (!chunksPlus[chunkId]) {
                         validChallenge = false;
                     } else {
                         let tempValid = false;
-                        Object.keys(chunks).forEach(name => {
+                        Object.keys(chunks).forEach(cName => {
                             chunksPlus[chunkId].forEach(plus => {
-                                if (plus === name) {
+                                if (plus === cName) {
                                     tempValid = true;
+                                    chunkInfo['challenges'][skill][name]['ChunksDetails'].push(plus);
                                 }
                             });
                         });
@@ -2268,9 +2308,10 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     }
                 } else {
                     let tempValid = false;
-                    Object.keys(chunks).forEach(name => {
-                        if (chunkId === name) {
+                    Object.keys(chunks).forEach(cName => {
+                        if (chunkId === cName) {
                             tempValid = true;
+                            chunkInfo['challenges'][skill][name]['ChunksDetails'].push(cName);
                         }
                     });
                     if (!tempValid) {
@@ -2292,6 +2333,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         itemsPlus[item.replaceAll(/\*/g, '')].forEach(plus => {
                             if (!!items[plus]) {
                                 tempValid = true;
+                                chunkInfo['challenges'][skill][name]['ItemsDetails'].push(plus);
                                 if (item.includes('*')) {
                                     Object.keys(items[plus]).forEach(source => {
                                         if (!items[plus.replaceAll(/\*/g, '')][source].includes('secondary-') || items[plus.replaceAll(/\*/g, '')][source].includes('primary-') || items[plus.replaceAll(/\*/g, '')][source] === 'shop') {
@@ -2325,6 +2367,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!items[item.replaceAll(/\*/g, '')]) {
                         validChallenge = false;
                     } else {
+                        chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                         if (item.includes('*') && !!items[item.replaceAll(/\*/g, '')]) {
                             Object.keys(items[item.replaceAll(/\*/g, '')]).forEach(source => {
                                 if (!items[item.replaceAll(/\*/g, '')][source].includes('secondary-') || items[item.replaceAll(/\*/g, '')][source].includes('primary-') || items[item.replaceAll(/\*/g, '')][source] === 'shop') {
@@ -2471,6 +2514,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         objectsPlus[object].forEach(plus => {
                             if (!!objects[plus]) {
                                 tempValid = true;
+                                chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(plus);
                                 Object.keys(objects[plus.replaceAll(/\*/g, '')]).forEach(source => {
                                     if (!source.includes('secondary-')) {
                                         secondary = false;
@@ -2486,6 +2530,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!objects[object]) {
                         validChallenge = false;
                     } else {
+                        chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(object);
                         Object.keys(objects[object]).forEach(source => {
                             if (!source.includes('secondary-')) {
                                 secondary = false;
@@ -2507,6 +2552,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         let tempValid = false;
                         monstersPlus[monster].forEach(plus => {
                             if (!!monsters[plus]) {
+                                chunkInfo['challenges'][skill][name]['MonstersDetails'].push(plus);
                                 tempValid = true;
                             }
                         });
@@ -2517,6 +2563,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                 } else {
                     if (!monsters[monster]) {
                         validChallenge = false;
+                    } else {
+                        chunkInfo['challenges'][skill][name]['MonstersDetails'].push(monster);
                     }
                 }
             });
@@ -2528,6 +2576,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         let tempValid = false;
                         npcsPlus[npc].forEach(plus => {
                             if (!!npcs[plus]) {
+                                chunkInfo['challenges'][skill][name]['NPCsDetails'].push(plus);
                                 tempValid = true;
                             }
                         });
@@ -2538,6 +2587,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                 } else {
                     if (!npcs[npc]) {
                         validChallenge = false;
+                    } else {
+                        chunkInfo['challenges'][skill][name]['NPCsDetails'].push(npc);
                     }
                 }
             });
@@ -2549,6 +2600,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         let tempValid = false;
                         mixPlus[mix].forEach(plus => {
                             if (!!monsters[plus] || !!npcs[plus]) {
+                                chunkInfo['challenges'][skill][name]['MonstersDetails'].push(plus);
+                                chunkInfo['challenges'][skill][name]['NPCsDetails'].push(plus);
                                 tempValid = true;
                             }
                         });
@@ -2559,6 +2612,9 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                 } else {
                     if (!monsters[mix] && !npcs[mix]) {
                         validChallenge = false;
+                    } else {
+                        chunkInfo['challenges'][skill][name]['MonstersDetails'].push(mix);
+                        chunkInfo['challenges'][skill][name]['NPCsDetails'].push(mix);
                     }
                 }
             });
@@ -2725,14 +2781,26 @@ var addManualTask = function(challenge) {
             }
         }
     });
-    $('.panel-active').html('Calculating...');
-    challengePanelVis['active'] && toggleChallengesPanel('active');
+    !onMobile && $('.panel-active').html('Calculating...');
+    challengePanelVis['active'] && !onMobile && toggleChallengesPanel('active');
 }
 
 // Closes the manual add tasks modal
 var closeManualAdd = function() {
     manualModalOpen = false;
     $('#myModal').hide();
+}
+
+// Closes the challenge details modal
+var closeChallengeDetails = function() {
+    detailsModalOpen = false;
+    $('#myModal2').hide();
+}
+
+// Closes the challenge notes modal
+var closeChallengeNotes = function() {
+    notesModalOpen = false;
+    $('#myModal3').hide();
 }
 
 // Unlocks various parts of the chunk tasks panel
@@ -2841,23 +2909,132 @@ var setAreas = function() {
     }
 }
 
+// Opens the context menu for an active challenge
+var openActiveContextMenu = function(challenge, skill) {
+    if (activeContextMenuChallengeOld !== challenge) {
+        activeContextMenuChallenge = challenge;
+        activeContextMenuSkill = skill;
+        let x = event.pageX + $(".active-context-menu").width() + 5 > $(window).width() ? $(window).width() - $(".active-context-menu").width() - 5 : event.pageX - 5;
+        let y = event.pageY + $(".active-context-menu").height() + 5 > $(window).height() ? $(window).height() - $(".active-context-menu").height() - 5 : event.pageY - 5;
+        $(".active-context-menu").finish().toggle(100).css({
+            top: y + "px",
+            left: x + "px"
+        });
+    }
+}
+
+// Opens the context menu for a backlogged challenge
+var openBacklogContextMenu = function(challenge, skill) {
+    if (backlogContextMenuChallengeOld !== challenge) {
+        backlogContextMenuChallenge = challenge;
+        backlogContextMenuSkill = skill;
+        let x = event.pageX + $(".backlog-context-menu").width() + 5 > $(window).width() ? $(window).width() - $(".backlog-context-menu").width() - 5 : event.pageX - 5;
+        let y = event.pageY + $(".backlog-context-menu").height() + 5 > $(window).height() ? $(window).height() - $(".backlog-context-menu").height() - 5 : event.pageY - 5;
+        $(".backlog-context-menu").finish().toggle(100).css({
+            top: y + "px",
+            left: x + "px"
+        });
+    }
+}
+
+// Shows challenge details
+var showDetails = function(challenge, skill) {
+    let detailsKeys = ['ItemsDetails', 'ObjectsDetails', 'MonstersDetails', 'NPCsDetails', 'ChunksDetails'];
+    let skills = skillNames;
+    skills.push('Nonskill');
+    detailsModalOpen = true;
+    $('#details-data').empty();
+    $('#details-title').html(`<b class="noscroll">${challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')}</b>`);
+    detailsKeys.forEach(key => {
+        $('#details-data').append(`<span class="details-subtitle noscroll"><u class="noscroll"><b class="noscroll">${key.split('Details')[0].toLowerCase()}</b></u></span><br />`);
+        !!chunkInfo['challenges'][skill][challenge][key] && chunkInfo['challenges'][skill][challenge][key].forEach(el => {
+            let formattedSource = '';
+            if (key === 'ChunksDetails') {
+                formattedSource = '   ';
+            } else if (!!baseChunkData[key.split('Details')[0].toLowerCase()]) {
+                formattedSource = ': ';
+                !!baseChunkData[key.split('Details')[0].toLowerCase()][el] && Object.keys(baseChunkData[key.split('Details')[0].toLowerCase()][el]).forEach(source => {
+                    if (typeof baseChunkData[key.split('Details')[0].toLowerCase()][el][source] === "boolean" || !skills.includes(baseChunkData[key.split('Details')[0].toLowerCase()][el][source].split('-')[1])) {
+                        formattedSource += source.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/');
+                    }
+                    if (typeof baseChunkData[key.split('Details')[0].toLowerCase()][el][source] !== "boolean" && skills.includes(baseChunkData[key.split('Details')[0].toLowerCase()][el][source].split('-')[1])) {
+                        formattedSource += baseChunkData[key.split('Details')[0].toLowerCase()][el][source].split('-')[1];
+                        formattedSource += ` (${source.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\*/g, '')})`
+                    } else if (typeof baseChunkData[key.split('Details')[0].toLowerCase()][el][source] !== "boolean" && !baseChunkData[key.split('Details')[0].toLowerCase()][el][source].includes('primary') && !baseChunkData[key.split('Details')[0].toLowerCase()][el][source].includes('secondary') && !baseChunkData[key.split('Details')[0].toLowerCase()][el][source] === 'shop') {
+                        formattedSource += `-${baseChunkData[key.split('Details')[0].toLowerCase()][el][source]}`;
+                    } else if (typeof baseChunkData[key.split('Details')[0].toLowerCase()][el][source] !== "boolean") {
+                        formattedSource += ` (${baseChunkData[key.split('Details')[0].toLowerCase()][el][source].replaceAll('primary-', '').replaceAll('secondary-', '')})`;
+                    }
+                    formattedSource += ', ';
+                });
+            }
+            formattedSource = formattedSource.slice(0, -2);
+            if (formattedSource !== '') {
+                $('#details-data').append(`<span class="noscroll"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')}</b></span><span class="noscroll">${formattedSource}</span><br />`);
+            }
+        });
+        if (chunkInfo['challenges'][skill][challenge][key].length === 0) {
+            $('#details-data').append('<span class="noscroll">None</span><br />');
+        }
+    });
+    $('#myModal2').show();
+    document.getElementById('details-data').scrollTop = 0;
+}
+
+// Shows challenge notes
+var showNotes = function(challenge, skill, note) {
+    if (note === true) {
+        note = '';
+    }
+    $('#notes-title').html(`<b class="noscroll">Add note to:</b><br />${challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')}`);
+    notesModalOpen = true;
+    $('#myModal3').show();
+    $('#notes-data > textarea').val(note).focus();
+    notesChallenge = challenge;
+    notesSkill = skill;
+}
+
+var submitNotes = function() {
+    backlogChallenge(notesChallenge, notesSkill, $('#notes-data > textarea').val());
+    closeChallengeNotes();
+}
+
+// Selects correct active context menu item
+var switchActiveContext = function(opt) {
+    switch(opt) {
+        case "backlog": backlogChallenge(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
+        case "backlog note": showNotes(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
+        case "details": showDetails(activeContextMenuChallenge, activeContextMenuSkill); break;
+    }
+    $(".active-context-menu").hide(100);
+}
+
+// Selects correct backlog context menu item
+var switchBacklogContext = function(opt) {
+    switch(opt) {
+        case "unbacklog": unbacklogChallenge(backlogContextMenuChallenge, backlogContextMenuSkill); break;
+        case "edit note": showNotes(backlogContextMenuChallenge, backlogContextMenuSkill, backlog[backlogContextMenuSkill][backlogContextMenuChallenge]); break;
+    }
+    $(".backlog-context-menu").hide(100);
+}
+
 // Sends a challenge to the backlog
-var backlogChallenge = function(challenge, skill) {
+var backlogChallenge = function(challenge, skill, note) {
     if (!backlog[skill]) {
         backlog[skill] = {};
     }
     if (skill !== 'Extra') {
-        backlog[skill][challenge] = true;
+        backlog[skill][challenge] = note;
         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
             Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
                 if (!backlog[subSkill]) {
                     backlog[subSkill] = {};
                 }
-                backlog[subSkill][challenge] = true;
+                backlog[subSkill][challenge] = note;
             });
         }
     } else {
-        backlog[skill][challenge] = true;
+        backlog[skill][challenge] = note;
     }
     let highestCompletedLevel = 0;
     !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
@@ -2868,7 +3045,7 @@ var backlogChallenge = function(challenge, skill) {
     let highestChallenge;
     let highestChallengeLevel = 0;
     Object.keys(globalValids[skill]).forEach(chal => {
-        if ((!backlog[skill] || !backlog[skill][chal]) && globalValids[skill][chal] > highestChallengeLevel && globalValids[skill][chal] > highestCompletedLevel) {
+        if ((!backlog[skill] || !backlog[skill].hasOwnProperty(chal)) && globalValids[skill][chal] > highestChallengeLevel && globalValids[skill][chal] > highestCompletedLevel) {
             highestChallenge = chal;
             highestChallengeLevel = globalValids[skill][chal];
         }
@@ -2878,11 +3055,11 @@ var backlogChallenge = function(challenge, skill) {
             let index = challengeArr.indexOf(line);
             challengeArr.splice(index, 1);
             if (highestChallengeLevel > 0) {
-                challengeArr.splice(index, 0, `<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="arrow noscroll" onclick="backlogChallenge(' + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="zmdi zmdi-long-arrow-down zmdi-hc-lg noscroll"></i></span>') + '</div>');
+                challengeArr.splice(index, 0, `<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h"></i></span>') + '</div>');
             }
         } 
     });
-    setupCurrentChallenges(false);
+    !onMobile && setupCurrentChallenges(false);
     setData();
 }
 
@@ -2902,8 +3079,8 @@ var unbacklogChallenge = function(challenge, skill) {
             });
         }
     }
-    setupCurrentChallenges(false);
-    $('.panel-active').html('Calculating...');
+    !onMobile && setupCurrentChallenges(false);
+    !onMobile && $('.panel-active').html('Calculating...');
     setData();
 }
 
@@ -2923,8 +3100,8 @@ var uncompleteChallenge = function(challenge, skill) {
             });
         }
     }
-    setupCurrentChallenges(false);
-    $('.panel-active').html('Calculating...');
+    !onMobile && setupCurrentChallenges(false);
+    !onMobile && $('.panel-active').html('Calculating...');
     setData();
 }
 
@@ -2948,7 +3125,7 @@ var checkOffChallenges = function() {
 // Marks checked off areas to unlock
 var checkOffAreas = function(obj, area) {
     possibleAreas[area] = obj.checked;
-    $('.panel-active').html('Calculating...');
+    !onMobile && $('.panel-active').html('Calculating...');
     getChunkAreas();
     setAreas();
     setData();
@@ -2960,7 +3137,7 @@ var checkOffRules = function() {
         rules[rule] = $('.' + rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule > input').prop('checked');
     });
     setupCurrentChallenges(false);
-    $('.panel-active').html('Calculating...');
+    !onMobile && $('.panel-active').html('Calculating...');
     setData();
 }
 
@@ -3071,7 +3248,7 @@ var getQuestInfo = function(quest) {
             questChunks.push(chunkName);
             chunkName = chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")]['Nickname'] + ' (' + chunkName + ')';
         }
-        $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] && ' + valid-chunk'}">` + `<span onclick="redirectPanel(encodeURI('` + chunkId.replaceAll(/\'/g, "%2H") + `'))"><i class="quest-icon zmdi zmdi-collection-text"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
+        $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] && ' + valid-chunk'}">` + `<span onclick="redirectPanel(encodeURI('` + chunkId.replaceAll(/\'/g, "%2H") + `'))"><i class="quest-icon fas fa-crosshairs"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
     });
 }
 
@@ -3088,13 +3265,13 @@ var toggleQuestInfo = function() {
 // Highlights array of chunk ids for current quest
 var highlightAllQuest = function() {
     questChunks.forEach(id => {
-        $('.box:contains(' + id + ')').filter(function() { return $(this).text() === id; }).addClass('recent');
+        $('.box:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).addClass('recent');
     });
 }
 
 // Scrolls to chunk with given id
 var scrollToChunk = function(id) {
-    let box = $('.box:contains(' + id + ')').filter(function() { return $(this).text() === id; }).addClass('recent');
+    let box = $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('recent');
     scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
 }
 
@@ -3249,13 +3426,13 @@ var loadData = function() {
             chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
                 picking = true;
                 if (selectedNum > 999) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label extralong">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label extralong">' + selectedNum++ + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
                 } else if (selectedNum > 99) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
                 } else {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span class="label">' + selectedNum++ + '</span>');
                     $('.label').css('font-size', labelZoom + 'px');
                 }
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
@@ -3263,20 +3440,20 @@ var loadData = function() {
     
             chunks && chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b){return b-a}).forEach(function(id) {
                 if (selectedNum > 999) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label extralong">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label extralong">' + selectedNum++ + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1/2))+ 'px');
                 } else if (selectedNum > 99) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2/3))+ 'px');
                 } else {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
                     $('.label').css('font-size', labelZoom + 'px');
                 }
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             });
     
             chunks && chunks['unlocked'] && Object.keys(chunks['unlocked']).forEach(function(id) {
-                $('.box > .chunkId:contains(' + id + ')').filter(function() { return $(this).text() === id; }).parent().addClass('unlocked').removeClass('gray selected potential');
+                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('unlocked').removeClass('gray selected potential');
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             });
     
@@ -3453,7 +3630,7 @@ var checkIfGood2 = function() {
 
 // Changes the lock state if pin is correct, otherwise displays error
 var changeLocked = function(lock) {
-    $('#lock-unlock').prop('disabled', true).html('<i class="spin zmdi zmdi-spinner"></i>');
+    $('#lock-unlock').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
     setTimeout(function() {
         if (lock) {
             $('.lock-pin').addClass('animated shake wrong').select();

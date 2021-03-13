@@ -551,6 +551,7 @@ button.menu2 {
     width: 50px;
     margin: 0px auto;
     pointer-events: none;
+    font-size: 44px;
 }
 
 .lock-closed {
@@ -1247,7 +1248,7 @@ button.menu2 {
 .settings {
     display: none;
     position: absolute;
-    top: 2px;
+    top: 4px;
     right: .5vw;
     z-index: 999 !important;
     -webkit-user-select: none;
@@ -1256,6 +1257,7 @@ button.menu2 {
     user-select: none;
     cursor: pointer;
     transition-duration: .5s;
+    font-size: 44px;
 }
 
 .settings:hover {
@@ -1305,7 +1307,7 @@ button.menu2 {
 
 .pic {
     float: right;
-    margin-top: .25vw;
+    margin-top: .33vw;
     margin-right: .25vw;
 }
 
@@ -1411,8 +1413,9 @@ button.menu2 {
     position: absolute;
     transition-duration: .5s;
     cursor: pointer;
-    top: 2px;
+    top: 4px;
     right: 60px;
+    font-size: 44px;
 }
 
 .gohighscore:hover {
@@ -1423,11 +1426,25 @@ button.menu2 {
     position: absolute;
     transition-duration: .5s;
     cursor: pointer;
-    top: 2px;
-    right: 105px;
+    top: 4px;
+    right: 120px;
+    font-size: 44px;
 }
 
 .gobugreport:hover {
+    color: rgb(100, 100, 255);
+}
+
+.godiscord {
+    position: absolute;
+    transition-duration: .5s;
+    cursor: pointer;
+    top: 4px;
+    right: 175px;
+    font-size: 44px;
+}
+
+.godiscord:hover {
     color: rgb(100, 100, 255);
 }
 
@@ -1450,7 +1467,8 @@ button.menu2 {
     position: absolute;
     transition-duration: .5s;
     cursor: pointer;
-    right: 150px;
+    top: 3px;
+    right: 225px;
     font-size: 44px;
     text-decoration: none;
 }
@@ -1543,6 +1561,18 @@ button.menu2 {
     color: #2d2d79;
 }
 
+
+.burger {
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 5px;
+    transition: color .5s;
+}
+
+.burger:hover {
+    color: grey;
+}
+
 .exp {
     display: inline-block;
     min-width: 20px;
@@ -1594,6 +1624,7 @@ button.menu2 {
 
 .hiddenInfo {
     position: fixed;
+    display: none;
     top: 25vh;
     z-index: 100;
     border: dashed 2px black;
@@ -1744,4 +1775,119 @@ button.menu2 {
 
 .mini.avatar img {
     border: solid 2px;
+}
+
+.active-context-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid #CCC;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.active-context-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+    transition: all .3s ease;
+    user-select: none;
+}
+
+.active-context-menu li:hover {
+    background-color: #DEF;
+}
+
+.backlog-context-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid #CCC;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.backlog-context-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+    transition: all .3s ease;
+    user-select: none;
+}
+
+.backlog-context-menu li:hover {
+    background-color: #DEF;
+}
+
+.details-title {
+    font-size: 24;
+    padding-top: 10px;
+    padding-left: 10px;
+    max-height: 60px;
+    min-height: 60px;
+}
+
+.details-subtitle {
+    text-transform: capitalize;
+    font-size: 20px;
+}
+
+.details-data {
+    overflow-y: scroll;
+    height: 71%;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.notes-title {
+    font-size: min(2vw, 24px);
+    padding: 10px;
+    height: 80px;
+}
+
+.notes-data {
+    text-align: center;
+}
+
+.notes-data > textarea {
+    resize: none;
+    width: 90%;
+    height: 48%;
+}
+
+#cancel-notes-button {
+    float: right;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#submit-notes-button {
+    background-color: grey;
+    width: 100px;
+    font-size: 20px;
+    color: white;
+    float: right;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#submit-notes-button:hover {
+    background-color: rgb(200, 200, 200);
 }

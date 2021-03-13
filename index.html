@@ -1,37 +1,37 @@
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8P0V9GSFJ2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8P0V9GSFJ2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-        gtag('config', 'G-8P0V9GSFJ2');
-    </script>
-    <link rel="stylesheet" href="./index.css?v=3.1.5" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyDr94cgRwmo3glVTirQ9LPAA4HI9cyYUCg",
-            authDomain: "chunkpicker.firebaseapp.com",
-            databaseURL: "https://chunkpicker.firebaseio.com",
-            projectId: "chunkpicker",
-            storageBucket: "chunkpicker.appspot.com",
-            messagingSenderId: "149349257281",
-            appId: "1:149349257281:web:eb9aa70aec5e8ad6e7b6c0"
-        };
-        firebase.initializeApp(firebaseConfig);
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
-    <title>Chunk Picker V2</title>
-    <link rel="shortcut icon" href="./favicon.png" />
+    gtag('config', 'G-8P0V9GSFJ2');
+  </script>
+  <link rel="stylesheet" href="./index.css?v=3.2.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDr94cgRwmo3glVTirQ9LPAA4HI9cyYUCg",
+      authDomain: "chunkpicker.firebaseapp.com",
+      databaseURL: "https://chunkpicker.firebaseio.com",
+      projectId: "chunkpicker",
+      storageBucket: "chunkpicker.appspot.com",
+      messagingSenderId: "149349257281",
+      appId: "1:149349257281:web:eb9aa70aec5e8ad6e7b6c0"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://kit.fontawesome.com/947b03aa8e.js" crossorigin="anonymous"></script>
+  <title>Chunk Picker V2</title>
+  <link rel="shortcut icon" href="./favicon.png" />
 </head>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
@@ -39,24 +39,65 @@
 <div class='loading'>Loading&#8230;</div>
 
 <div class='body' data-role="page">
-  <script src="./index.js?v=3.1.5"></script>
+  <script src="./index.js?v=3.2.0"></script>
+  <ul class='active-context-menu'>
+    <li onclick="switchActiveContext('backlog')">Backlog</li>
+    <li onclick="switchActiveContext('backlog note')">Backlog w/ Note</li>
+    <li onclick="switchActiveContext('details')">Details</li>
+  </ul>
+  <ul class='backlog-context-menu'>
+    <li onclick="switchBacklogContext('unbacklog')">Un-backlog</li>
+    <li onclick="switchBacklogContext('edit note')">View/Edit Note</li>
+  </ul>
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='topnav'>
-      <div><a href='?about' target="_blank" class="about-button"><div class="mini avatar"><img src="https://cdn.discordapp.com/attachments/411234915284156439/811794024192671814/fc55ab793a4ff74d203f9274dcd32f09.png" /></div></a></div>
-      <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><span class="gohome">Chunk Picker V2</span></a></div>
-      <div><a href='https://chunk-stats.web.app' target='_blank'><i class="gohighscore zmdi zmdi-equalizer zmdi-hc-3x"></i></a></div>
-      <div class='toptitle2-outer'><span class='toptitle2'>---</span></div>
-      <div><span class="help-button" onclick="helpFunc()">?</span></div>
-      <div><a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><i class="gobugreport zmdi zmdi-bug zmdi-hc-3x"></i></a></div>
-      <div><i class="settings zmdi zmdi-settings zmdi-hc-3x" onclick='settings()'></i></div>
+    <div><a href='?about' target="_blank" class="about-button">
+        <div class="mini avatar"><img
+            src="https://cdn.discordapp.com/attachments/411234915284156439/811794024192671814/fc55ab793a4ff74d203f9274dcd32f09.png" />
+        </div>
+      </a></div>
+    <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><span class="gohome">Chunk Picker V2</span></a></div>
+    <div><a href='https://chunk-stats.web.app' target='_blank'><i
+          class="gohighscore fas fa-trophy"></i></a></div>
+    <div class='toptitle2-outer'><span class='toptitle2'>---</span></div>
+    <div><span><i class="help-button fas fa-question" onclick='helpFunc()'></i></span></div>
+    <div><a
+        href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link'
+        target='_blank'><i class="gobugreport fas fa-bug"></i></a></div>
+    <div><a
+      href='https://discord.gg/kXRgpxnBxu'
+      target='_blank'><i class="godiscord fab fa-discord"></i></a></div>
+    <div><i class="settings fas fa-cog" onclick='settings()'></i></div>
   </div>
   <div id="myModal" class="modal">
     <div class="modal-content noscroll">
       <span class='beta-text'>BETA</span>
-      <i class="manual-close pic zmdi zmdi-close noscrollhard" onclick="closeManualAdd()"></i>
-      <input type="text" placeholder="Filter tasks..." id="searchManual" class="noscrollhard" oninput="searchManualTasks()"/>
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeManualAdd()"></i>
+      <input type="text" placeholder="Filter tasks..." id="searchManual" class="noscrollhard"
+        oninput="searchManualTasks()" />
       <span><input type="checkbox" onclick="changeFilterBy()" />Show checked only</span>
       <div id="challenge-data" class="challenge-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal2" class="modal">
+    <div class="modal-content noscroll">
+      <span class='beta-text'>BETA</span>
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeChallengeDetails()"></i>
+      <div id="details-title" class="details-title noscroll"></div>
+      <div id="details-data" class="details-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal3" class="modal">
+    <div class="modal-content noscroll">
+      <span class='beta-text'>BETA</span>
+      <div id="notes-title" class="notes-title noscroll"></div>
+      <div id="notes-data" class="notes-data noscroll">
+        <textarea maxlength="128"></textarea>
+      </div>
+      <div id="notes-footer" class="notes-footer noscroll">
+        <button id='submit-notes-button' class='modal-button' onclick='submitNotes()'>Save</button>
+        <span id='cancel-notes-button' onclick='closeChallengeNotes()'>Cancel</span>
+      </div>
     </div>
   </div>
   <div id='entry-menu'>
@@ -79,15 +120,18 @@
   </div>
   <div id='import-menu'>
     <div class='import-content'>
-      <span class='exit' onclick='exitImportMenu()'><i class="zmdi zmdi-close zmdi-hc-lg"></i></span>
+      <span class='exit' onclick='exitImportMenu()'><i class="fas fa-times"></i></span>
       <div class='block'>
         <div class='title'>Import from URL</div>
       </div>
       <div class='block'>
         <p class='description'>
-          If you have a chunk map from <a class='gitgeddes' target='_blank' href='https://gitgeddes.github.io/ChunkPicker/'>https://gitgeddes.github.io/ChunkPicker/</a> and wish to import your chunks into this map, click on the 'Generate and copy URL' button, and paste your URL below.
+          If you have a chunk map from <a class='gitgeddes' target='_blank'
+            href='https://gitgeddes.github.io/ChunkPicker/'>https://gitgeddes.github.io/ChunkPicker/</a> and wish to
+          import your chunks into this map, click on the 'Generate and copy URL' button, and paste your URL below.
         </p>
-        <div class='warning'><b>Warning: This action will replace your entire current map with the map from the url.</b></div>
+        <div class='warning'><b>Warning: This action will replace your entire current map with the map from the url.</b>
+        </div>
         <input class='url' placeholder='Enter URL' />
         <div class='url-err'>URL is formatted incorrectly.</div>
         <button id='import2' class='button' onclick='importFromURL()' disabled>Import</button>
@@ -96,13 +140,14 @@
   </div>
   <div id='highscore-menu'>
     <div class='highscore-content'>
-      <span class='exit' onclick='exitHighscoreMenu()'><i class="zmdi zmdi-close zmdi-hc-lg"></i></span>
+      <span class='exit' onclick='exitHighscoreMenu()'><i class="fas fa-times"></i></span>
       <div class='block'>
         <div class='title'>Opt-in to Chunkman Highscores</div>
       </div>
       <div class='block'>
         <p class='description'>
-          Opting in to the highscores allows you to be ranked on the chunkman highscores (separate from the official osrs hiscores). Your in-game username must be provided for the highscores lookup.
+          Opting in to the highscores allows you to be ranked on the chunkman highscores (separate from the official
+          osrs hiscores). Your in-game username must be provided for the highscores lookup.
         </p>
         <input class='username' placeholder='Runescape Username' />
         <button id='highscoreoptin' class='button' onclick='highscoreOptIn()' disabled>Save Username</button>
@@ -111,13 +156,14 @@
   </div>
   <div id='highscore-menu2'>
     <div class='highscore-content'>
-      <span class='exit' onclick='exitHighscoreMenu2()'><i class="zmdi zmdi-close zmdi-hc-lg"></i></span>
+      <span class='exit' onclick='exitHighscoreMenu2()'><i class="fas fa-times"></i></span>
       <div class='block'>
         <div class='title'>Chunkman Highscores</div>
       </div>
       <div class='block'>
         <p class='description'>
-          Your highscore data will not be populated until you visit your user page. Please click the button below to populate that data. This popup can be safely closed afterwards.
+          Your highscore data will not be populated until you visit your user page. Please click the button below to
+          populate that data. This popup can be safely closed afterwards.
         </p>
         <a id='populateButton' target='_blank'><button id='highscoreoptin2' class='button'>Populate data</button></a>
       </div>
@@ -131,13 +177,18 @@
       </div>
       <div class='block'>
         <p class='description'>
-          Recently the Chunk Picker has been updated with a brand new feature: the Chunk Tasks panel! <b>This panel will display all skill tasks required for your current map, calculated programmatically!</b> The tasks can be checked off as you progress thorugh each chunk, and then any new ones will populate as you unlock new chunks.
+          Recently the Chunk Picker has been updated with a brand new feature: the Chunk Tasks panel! <b>This panel will
+            display all skill tasks required for your current map, calculated programmatically!</b> The tasks can be
+          checked off as you progress thorugh each chunk, and then any new ones will populate as you unlock new chunks.
         </p>
       </div>
       <div class='block help-link-block'>
-        <div class="text-link"><b><a target='_blank' href='https://youtu.be/awRQjpEB9_E'>Watch a quick [4:19] video to get you up to speed on how to use the Chunk Tasks panel</a></b></div>
+        <div class="text-link"><b><a target='_blank' href='https://youtu.be/Xb_HnZD0-fw'>Watch a quick [5:36] video to
+              get you up to speed on how to use the Chunk Tasks panel</a></b></div>
         <span class='or-help'>Or</span>
-        <div class="text-link"><b><a target='_blank' href='https://docs.google.com/document/d/e/2PACX-1vS3v8yTxCgbDZLhXT6RNPyq-hO-suBDPRBr0tKS9dD4NVl1QB3CIYpuw3vn32p9xbHufmGnHBddViKd/pub#h.rgg9isg0zvy8'>Take a look at a brief PDF that demonstrates (with images) how to use the Chunk Tasks panel</a></b></div>
+        <div class="text-link"><b><a target='_blank'
+              href='https://docs.google.com/document/d/e/2PACX-1vS3v8yTxCgbDZLhXT6RNPyq-hO-suBDPRBr0tKS9dD4NVl1QB3CIYpuw3vn32p9xbHufmGnHBddViKd/pub#h.rgg9isg0zvy8'>Take
+              a look at a brief PDF that demonstrates (with images) how to use the Chunk Tasks panel</a></b></div>
       </div>
       <div class='block'>
         <div><span class="dismiss-help" onclick="dismissHelp()">Dismiss</span></div>
@@ -160,8 +211,8 @@
   </div>
   <div class='menu5'>
     <div class='icon'>
-      <i class="lock-closed zmdi zmdi-lock zmdi-hc-3x" onclick='unlock()'></i>
-      <i class="lock-opened zmdi zmdi-lock-open zmdi-hc-3x"></i>
+      <i class="lock-closed fas fa-lock" onclick='unlock()'></i>
+      <i class="lock-opened fas fa-unlock-alt"></i>
     </div>
     <div class='lock-box'>
       <div class='inner-lock'>
@@ -174,64 +225,89 @@
     <button class='import' onclick="importFunc()">Import from URL</button>
   </div>
   <div class='menu7'>
-      <div id='recentChunksTitle' class='text'><b>Recently Unlocked</b></div>
-      <div id='recentChunks1' class='text'></div>
-      <div id='recentChunks2' class='text'></div>
-      <div id='recentChunks3' class='text'></div>
-      <div id='recentChunks4' class='text'></div>
-      <div id='recentChunks5' class='text'></div>
+    <div id='recentChunksTitle' class='text'><b>Recently Unlocked</b></div>
+    <div id='recentChunks1' class='text'></div>
+    <div id='recentChunks2' class='text'></div>
+    <div id='recentChunks3' class='text'></div>
+    <div id='recentChunks4' class='text'></div>
+    <div id='recentChunks5' class='text'></div>
   </div>
-  <div class='menu8' onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+  <div class='menu8' onmouseover="document.body.style.overflow='hidden';"
+    onmouseout="document.body.style.overflow='auto';">
     <div class='infocontent text'>
-      <div class='infostartup'><span><b>Chunk Info</b>: Right click a chunk to find out more information about it!</span><i class="panel-close pic zmdi zmdi-close" onclick="hideChunkInfo()"></i></div>
-      <div class='infoid'><b><span class='infoid-content'></span></b><i class="panel-close pic zmdi zmdi-close" onclick="hideChunkInfo()"></i></div>
-      <div id='infomonsters' class='accordion' onclick="toggleInfoPanel('monsters')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Monsters</span></div>
+      <div class='infostartup'><span><b>Chunk Info</b>: Right click a chunk to find out more information about
+          it!</span><i class="panel-close pic fas fa-times" onclick="hideChunkInfo()"></i></div>
+      <div class='infoid'><b><span class='infoid-content'></span></b><i class="panel-close pic fas fa-times"
+          onclick="hideChunkInfo()"></i></div>
+      <div id='infomonsters' class='accordion' onclick="toggleInfoPanel('monsters')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Monsters</span></div>
       <div class="panel panel-monsters"></div>
-      <div id='infonpcs' class='accordion' onclick="toggleInfoPanel('npcs')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">NPCs</span></div>
+      <div id='infonpcs' class='accordion' onclick="toggleInfoPanel('npcs')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">NPCs</span></div>
       <div class="panel panel-npcs"></div>
-      <div id='infospawns' class='accordion' onclick="toggleInfoPanel('spawns')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Item Spawns</span></div>
+      <div id='infospawns' class='accordion' onclick="toggleInfoPanel('spawns')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Item Spawns</span></div>
       <div class="panel panel-spawns"></div>
-      <div id='infoshops' class='accordion' onclick="toggleInfoPanel('shops')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Shops</span></div>
+      <div id='infoshops' class='accordion' onclick="toggleInfoPanel('shops')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Shops</span></div>
       <div class="panel panel-shops"></div>
-      <div id='infofeatures' class='accordion' onclick="toggleInfoPanel('features')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Features</span></div>
+      <div id='infofeatures' class='accordion' onclick="toggleInfoPanel('features')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Features</span></div>
       <div class="panel panel-features"></div>
-      <div id='infoquests' class='accordion' onclick="toggleInfoPanel('quests')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Quest progression <span class='help'>?<span class="tooltiptext">Quests in <b>bold</b> indicate the quest is started in this chunk.</span></span></span></div>
+      <div id='infoquests' class='accordion' onclick="toggleInfoPanel('quests')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Quest progression <span
+            class='help'>?<span class="tooltiptext">Quests in <b>bold</b> indicate the quest is started in this
+              chunk.</span></span></span></div>
       <div class="panel panel-quests"></div>
-      <div id='infodiaries' class='accordion' onclick="toggleInfoPanel('diaries')"><span class='exp'><i class="acc zmdi pic zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Diary tasks</span></div>
+      <div id='infodiaries' class='accordion' onclick="toggleInfoPanel('diaries')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Diary tasks</span></div>
       <div class="panel panel-diaries"></div>
-      <div id='infoconnections' class='accordion' onclick="toggleInfoPanel('connections')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Connections</span></div>
+      <div id='infoconnections' class='accordion' onclick="toggleInfoPanel('connections')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Connections</span></div>
       <div class="panel panel-connections"></div>
-      <div id='infochallenges' class='accordion' onclick="toggleInfoPanel('challenges')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Potential chunk tasks</span></div>
+      <div id='infochallenges' class='accordion' onclick="toggleInfoPanel('challenges')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Potential chunk
+          tasks</span></div>
       <div class="panel panel-challenges"></div>
-      <div class='infocontribute'><i>Information wrong or missing? Submit feedback <a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><b>here</b></a>.</i></div>
+      <div class='infocontribute'><i>Information wrong or missing? Submit feedback <a
+            href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link'
+            target='_blank'><b>here</b></a>.</i></div>
     </div>
-</div>
-<div class='menu9'>
-  <div class='challengecontent text'>
-    <span class='beta-text'>BETA</span>
-    <div id='challengesactive' class='accordion' onclick="toggleChallengesPanel('active')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Active Chunk Tasks</span></span></div>
-    <div class="panel panel-active noscroll">None</div>
-    <div id='challengesareas' class='accordion' onclick="toggleChallengesPanel('areas')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Areas</span></div>
-    <div class="panel panel-areas noscroll">None</div>
-    <div id='challengesbacklog' class='accordion' onclick="toggleChallengesPanel('backlog')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Backlog</span></div>
-    <div class="panel panel-backlog noscroll">None</div>
-    <div id='challengescompleted' class='accordion' onclick="toggleChallengesPanel('completed')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Completed Tasks</span></div>
-    <div class="panel panel-completed noscroll">None</div>
-    <!--<div id='challengesrules' class='accordion' onclick="toggleChallengesPanel('rules')"><span class='exp'><i class="acc pic zmdi zmdi-plus zmdi-hc-lg"></i></span><span class="accordion-title">Custom Rules</span></div>
+  </div>
+  <div class='menu9'>
+    <div class='challengecontent text'>
+      <span class='beta-text'>BETA</span>
+      <div id='challengesactive' class='accordion' onclick="toggleChallengesPanel('active')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Active Chunk
+          Tasks</span></span></div>
+      <div class="panel panel-active noscroll">None</div>
+      <div id='challengesareas' class='accordion' onclick="toggleChallengesPanel('areas')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Areas</span></div>
+      <div class="panel panel-areas noscroll">None</div>
+      <div id='challengesbacklog' class='accordion' onclick="toggleChallengesPanel('backlog')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Backlog</span></div>
+      <div class="panel panel-backlog noscroll">None</div>
+      <div id='challengescompleted' class='accordion' onclick="toggleChallengesPanel('completed')"><span class='exp'><i
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Completed Tasks</span>
+      </div>
+      <div class="panel panel-completed noscroll">None</div>
+      <!--<div id='challengesrules' class='accordion' onclick="toggleChallengesPanel('rules')"><span class='exp'><i class="acc pic fas fa-plus"></i></span><span class="accordion-title">Custom Rules</span></div>
     <div class="panel panel-rules noscroll">None</div>-->
-    <div class="open-manual-container"><span class="open-manual" onclick="openManualAdd()">Manually Add Tasks</span></div>
-  </div>
-</div>
-<div class='menu10'>
-  <div>
-    <div class='questcontent text'>
-      <div class='questname'><b><span class='questname-content'></span></b><i class="panel-close pic zmdi zmdi-close" onclick="toggleQuestInfo()"></i></div>
-      <div class="highlightAllQuest"><span onclick="highlightAllQuest()">Highlight all</span></div>
-      <div class="panel panel-questdata visible">None</div>
+      <div class="open-manual-container"><span class="open-manual" onclick="openManualAdd()">Manually Add Tasks</span>
+      </div>
     </div>
   </div>
-</div>
-<div class='hiddenInfo' onclick='showChunkInfo()'><i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
+  <div class='menu10'>
+    <div>
+      <div class='questcontent text'>
+        <div class='questname'><b><span class='questname-content'></span></b><i class="panel-close pic fas fa-times"
+            onclick="toggleQuestInfo()"></i></div>
+        <div class="highlightAllQuest"><span onclick="highlightAllQuest()">Highlight all</span></div>
+        <div class="panel panel-questdata visible">None</div>
+      </div>
+    </div>
+  </div>
+  <div class='hiddenInfo' onclick='showChunkInfo()'><i class="pic fas fa-plus"></i></div>
   <div id='outerImgDiv'>
     <div class="imgDiv" id="imgDiv">
       <img class="map" id="map" src="osrs_world_map.png">
@@ -239,17 +315,25 @@
     </div>
   </div>
   <div class='settings-menu'>
-    <div class='item highscoretoggle' onclick="highscoreFunc()">Opt-in to highscores<i class="pic zmdi zmdi-equalizer zmdi-hc-lg"></i></div>
-    <a class='none' href='https://source-chunk.github.io/chunk-picker-v2/?change-pin'><div class='item'>Change PIN<i class="pic zmdi zmdi-edit zmdi-hc-lg"></i></div></a>
-    <div class='item' onclick="enableScreenshotMode()">Screenshot mode<i class="pic zmdi zmdi-camera zmdi-hc-lg"></i></div>
-    <div class='item visibilitytoggle item-off' onclick="toggleVisibility()">High visibility mode<i class="pic zmdi zmdi-brightness-7 zmdi-hc-lg"></i></div>
-    <div class='item toggleNeighbors item-off' onclick="toggleNeighbors()">Auto-select neighboring chunks<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
-    <div class='item toggleRemove item-off' onclick="toggleRemove()">Remove selected chunks on pick<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
-    <div class='item roll2toggle item-off' onclick="toggleRoll2()">Roll 2<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
-    <div class='item unpicktoggle item-off' onclick="toggleUnpick()">Unpick chunk<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
-    <div class='item recenttoggle item-off' onclick="toggleRecent()">Recent chunks<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
-    <div class='item infotoggle item-off' onclick="toggleChunkInfo()">Chunk Info Panel<i class="pic zmdi zmdi-plus zmdi-hc-lg"></i></div>
-    <div class='item taskstoggle item-off' onclick="toggleChunkTasks()">Chunk Tasks Panel<i class="pic zmdi zmdi-minus zmdi-hc-lg"></i></div>
+    <div class='item highscoretoggle' onclick="highscoreFunc()">Opt-in to highscores<i class="pic fas fa-trophy"></i>
+    </div>
+    <a class='none' href='https://source-chunk.github.io/chunk-picker-v2/?change-pin'>
+      <div class='item'>Change PIN<i class="pic fas fa-pen"></i></div>
+    </a>
+    <div class='item' onclick="enableScreenshotMode()">Screenshot mode<i class="pic fas fa-camera"></i></div>
+    <div class='item visibilitytoggle item-off' onclick="toggleVisibility()">High visibility mode<i
+        class="pic fas fa-sun"></i></div>
+    <div class='item toggleNeighbors item-off' onclick="toggleNeighbors()">Auto-select neighboring chunks<i
+        class="pic fas fa-plus"></i></div>
+    <div class='item toggleRemove item-off' onclick="toggleRemove()">Remove selected chunks on pick<i
+        class="pic fas fa-plus"></i></div>
+    <div class='item roll2toggle item-off' onclick="toggleRoll2()">Roll 2<i class="pic fas fa-plus"></i></div>
+    <div class='item unpicktoggle item-off' onclick="toggleUnpick()">Unpick chunk<i class="pic fas fa-plus"></i></div>
+    <div class='item recenttoggle item-off' onclick="toggleRecent()">Recent chunks<i class="pic fas fa-plus"></i></div>
+    <div class='item infotoggle item-off' onclick="toggleChunkInfo()">Chunk Info Panel<i class="pic fas fa-plus"></i>
+    </div>
+    <div class='item taskstoggle item-off' onclick="toggleChunkTasks()">Chunk Tasks Panel<i
+        class="pic fas fa-minus"></i></div>
   </div>
 </div>
 
@@ -275,10 +359,11 @@
   </div>
   <div id='page2a' class='content2a' style="display:none">
     <div class='block'>
-      <div class='title back' onclick='prevPage("create2")'><i class="zmdi zmdi-long-arrow-left zmdi-hc-lg"></i></div>
+      <div class='title back' onclick='prevPage("create2")'><i class="fas fa-long-arrow-alt-left"></i></div>
       <div class='home text'>Create a map PIN</div>
       <p class='p desc'>
-        Your map PIN will allow you to roll new chunks and make changes to your map, and give you the ability to share your map with others without allowing them to edit it.
+        Your map PIN will allow you to roll new chunks and make changes to your map, and give you the ability to share
+        your map with others without allowing them to edit it.
       </p>
       <br />
       <div>Alphanumeric PIN:</div>
@@ -288,7 +373,7 @@
   </div>
   <div id='page3a' class='content3a' style="display:none">
     <div class='block'>
-      <div class='title' >Chunk Picker V2</div>
+      <div class='title'>Chunk Picker V2</div>
       <div class='home text'>Your unique map ID code is:</div>
       <div id='newmid'></div>
       <div class='home text'>You can access your map at:</div>
@@ -297,7 +382,7 @@
   </div>
   <div id='page2b' class='content2b' style="display:none">
     <div class='block'>
-      <div class='title back' onclick='prevPage("mid")'><i class="zmdi zmdi-long-arrow-left zmdi-hc-lg"></i></div>
+      <div class='title back' onclick='prevPage("mid")'><i class="fas fa-long-arrow-alt-left"></i></div>
     </div>
     <div class='home text2'>Map ID:</div>
     <input class='mid' spellcheck='false' placeholder='Map ID' />
@@ -332,19 +417,31 @@
       <div class='title'>About Me</div>
     </div>
     <div class='inner-content9'>
-      <div class="centered avatar"><img src="https://cdn.discordapp.com/avatars/143753161906061313/fc55ab793a4ff74d203f9274dcd32f09.png" /></div>
-      <p class="indent">Hi, I'm <b>Source Link</b> <i>aka</i> <b>Source Chunk</b>! I'm a Software Engineer from the US that likes to make websites and tools for his friends. I've been involved in the OneChunkMan community since June/July of 2019, and I've been making tools for this community basically since I joined.</p>
-      <u class="centered"><h2>Contact</h2></u>
+      <div class="centered avatar"><img
+          src="https://cdn.discordapp.com/avatars/143753161906061313/fc55ab793a4ff74d203f9274dcd32f09.png" /></div>
+      <p class="indent">Hi, I'm <b>Source Link</b> <i>aka</i> <b>Source Chunk</b>! I'm a Software Engineer from the US
+        that likes to make websites and tools for his friends. I've been involved in the OneChunkMan community since
+        June/July of 2019, and I've been making tools for this community basically since I joined.</p>
+      <u class="centered">
+        <h2>Contact</h2>
+      </u>
       <p><b>Need to contact me about something?</b></p>
       <p>Message me on <b>Discord</b> at <i>whitecatblack#0890</i> (preferred).</p>
-      <div>Don't have a Discord? You should get one and join the <b><a href="https://discord.gg/dg6wubYS8e" target='_blank'>OneChunkMan Discord Server</a></b> and talk to everyone there!</div>
+      <div>Don't have a Discord? You should get one and join the <b><a href="https://discord.gg/dg6wubYS8e"
+            target='_blank'>OneChunkMan Discord Server</a></b> and talk to everyone there!</div>
       <p>You can also email me at <a href="mailto:duosource.iron@gmail.com">duosource.iron@gmail.com</a></p>
-      <u class="centered"><h2>Donate</h2></u>
-      <p class="indent">If you'd like to donate to me (for some reason), I have that set up now. Please don't feel obligated or pressured to donate just because you used something that I created; the stuff I make for this community is and always will be <b>free</b>.</p>
-      <p class="centered">That being said, if you do decide to still donate, I greatly appreciate your support. The money will be going directly towards server/storage costs and other website costs.</p>
+      <u class="centered">
+        <h2>Donate</h2>
+      </u>
+      <p class="indent">If you'd like to donate to me (for some reason), I have that set up now. Please don't feel
+        obligated or pressured to donate just because you used something that I created; the stuff I make for this
+        community is and always will be <b>free</b>.</p>
+      <p class="centered">That being said, if you do decide to still donate, I greatly appreciate your support. The
+        money will be going directly towards server/storage costs and other website costs.</p>
       <form action="https://www.paypal.com/donate" class="paypal-button" method="post" target="_top">
         <input type="hidden" name="hosted_button_id" value="D6J2TEM8E2XN2" />
-        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit"
+          title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
         <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
       </form>
     </div>
