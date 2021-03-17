@@ -13411,1090 +13411,1090 @@
       }
     },
     "Nonskill" : {
-      "abyssal bludgeon" : {
+      "Combine Abyssal Bludgeon pieces" : {
         "Chunks" : [ "Abyssal Nexus" ],
         "Items" : [ "Bludgeon axon", "Bludgeon claw", "Bludgeon spine" ],
         "Output" : "Abyssal bludgeon"
       },
-      "air rune from pack" : {
+      "Air rune pack" : {
         "Items" : [ "Air rune pack" ],
         "Output" : "Air rune"
       },
-      "amylase from pack" : {
+      "Amylase pack" : {
         "Items" : [ "Amylase pack" ],
         "Output" : "Amylase crystal"
       },
-      "apple mush" : {
+      "Press cooking apples" : {
         "Chunks" : [ "Apple press+" ],
         "Items" : [ "Cooking apple", "Bucket" ],
         "Output" : "Apple mush"
       },
-      "arcane spirit shield" : {
+      "Attach arcane sigil" : {
         "Chunks" : [ "12086" ],
         "Items" : [ "Arcane sigil", "Blessed spirit shield" ],
         "Output" : "Arcane spirit shield"
       },
-      "armadyl godsword" : {
+      "Attach Armadyl hilt" : {
         "Items" : [ "Godsword blade", "Armadyl hilt" ],
         "Output" : "Armadyl godsword"
       },
-      "arthur portrait*" : {
+      "Buy Arthur portrait*" : {
         "Chunks" : [ "11828" ],
-        "Output" : "Aruthur portrait"
+        "Output" : "Arthur portrait"
       },
-      "bag full of gems loot*" : {
+      "Bag full of gems loot*" : {
         "Items" : [ "Bag full of gems" ],
         "Output" : "Bag full of gems loot"
       },
-      "bandos godsword" : {
+      "Attach Bandos hilt" : {
         "Items" : [ "Godsword blade", "Bandos hilt" ],
         "Output" : "Bandos godsword"
       },
-      "barbarian assault rewards*" : {
+      "Barbarian Assault rewards*" : {
         "Chunks" : [ "Barbarian Assault%2FBasement", "10039" ],
         "Output" : "Barbarian Assault%2GRewards"
       },
-      "barley malt" : {
+      "Cook barley" : {
         "Items" : [ "Barley" ],
         "Objects" : [ "Cooking range+" ],
         "Output" : "Barley malt"
       },
-      "barrel cooking apples*" : {
+      "Loot from barrel of cooking apples*" : {
         "Chunks" : [ "8763" ],
         "Output" : "Barrel (cooking apples)"
       },
-      "barrel rotten apples*" : {
+      "Loot from barrel of rotten apples*" : {
         "Chunks" : [ "8763" ],
         "Output" : "Barrel (rotten apples)"
       },
-      "bird snare from pack" : {
+      "Bird snare pack" : {
         "Items" : [ "Bird snare pack" ],
         "Output" : "Bird snare"
       },
-      "black dragon leather" : {
+      "Tan black dragonhide" : {
         "Chunks" : [ "Tanner+" ],
         "Items" : [ "Black dragonhide" ],
         "Output" : "Black dragon leather"
       },
-      "black key loot*" : {
+      "Black key loot*" : {
         "Chunks" : [ "Shade Catacombs" ],
         "Items" : [ "Black key+" ],
         "Output" : "Black key loot"
       },
-      "blue dragon leather" : {
+      "Tan blue dragonhide" : {
         "Chunks" : [ "Tanner+" ],
         "Items" : [ "Blue dragonhide" ],
         "Output" : "Blue dragon leather"
       },
-      "bone bolts from pack" : {
+      "Bone bolt pack" : {
         "Items" : [ "Bone bolt pack" ],
         "Output" : "Bone bolts"
       },
-      "boots of brimstone" : {
+      "Craft boots of brimstone" : {
         "Items" : [ "Boots of stone", "Drake's claw" ],
         "Output" : "Boots of brimstone"
       },
-      "bowl of fish loot*" : {
+      "Bowl of fish loot*" : {
         "Items" : [ "Bowl of fish" ],
         "Output" : "Bowl of fish loot"
       },
-      "bowl of hot water" : {
+      "Heat bowl of water" : {
         "Items" : [ "Bowl of water" ],
         "Objects" : [ "Cooking object+" ],
         "Output" : "Bowl of hot water"
       },
-      "bowl of water*" : {
+      "Fill bowl with water*" : {
         "Items" : [ "Bowl" ],
         "Objects" : [ "Water source+" ],
         "Output" : "Bowl of water"
       },
-      "box trap from pack" : {
+      "Box trap pack" : {
         "Items" : [ "Box trap pack" ],
         "Output" : "Box trap"
       },
-      "bread dough" : {
+      "Make bread dough" : {
         "Items" : [ "Pot of flour", "Water item+" ],
         "Output" : "Bread dough"
       },
-      "broad arrowheads from pack" : {
+      "Broad arrowheads pack" : {
         "Items" : [ "Broad arrowhead pack" ],
         "Output" : "Broad arrowheads"
       },
-      "broken staff loot*" : {
+      "Broken staff loot*" : {
         "Chunks" : [ "Player-owned house" ],
         "Items" : [ "Broken staff" ],
         "Output" : "Broken staff loot"
       },
-      "bronze key loot*" : {
+      "Bronze key loot*" : {
         "Chunks" : [ "Shade Catacombs" ],
         "Items" : [ "Bronze key+" ],
         "Output" : "Bronze key loot"
       },
-      "bucket from pack" : {
+      "Bucket pack" : {
         "Items" : [ "Empty bucket pack" ],
         "Output" : "Bucket"
       },
-      "bucket of milk*" : {
+      "Milk dairy cow*" : {
         "Items" : [ "Bucket" ],
         "Objects" : [ "Dairy cow" ],
         "Output" : "Bucket of milk"
       },
-      "bucket of sand*" : {
+      "Fill bucket with sand*" : {
         "Items" : [ "Bucket" ],
         "Objects" : [ "Sand pit" ],
         "Output" : "Bucket of sand"
       },
-      "bucket of slime*" : {
+      "Fill bucket with slime*" : {
         "Chunks" : [ "14646" ],
         "Items" : [ "Bucket" ],
         "Output" : "Bucket of slime"
       },
-      "bucket of water*" : {
+      "Fill bucket with water*" : {
         "Items" : [ "Bucket" ],
         "Objects" : [ "Water bucket+" ],
         "Output" : "Bucket of water"
       },
-      "cabbage from object*" : {
+      "Pick cabbage*" : {
         "Objects" : [ "Cabbage" ],
         "Output" : "Cabbage"
       },
-      "casket loot*" : {
+      "Casket loot*" : {
         "Items" : [ "Casket" ],
         "Output" : "Casket loot"
       },
-      "caviar*" : {
+      "Slice barbarian fish for caviar*" : {
         "Items" : [ "Leaping trout", "Knife" ],
         "Output" : "Caviar"
       },
-      "chambers of xeric*" : {
+      "Chambers of Xeric loot*" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Chambers of Xeric" ],
         "Output" : "Chambers of Xeric"
       },
-      "chaos rune from pack" : {
+      "Chaos rune pack" : {
         "Items" : [ "Chaos rune pack" ],
         "Output" : "Chaos rune"
       },
-      "chest barrows*" : {
+      "Chest Barrows loot*" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Barrows Crypts" ],
         "Output" : "Chest (Barrows)"
       },
-      "chocolate dust" : {
+      "Grind chocolate bar" : {
         "Items" : [ "Chocolate bar", "Pestle and mortar" ],
         "Output" : "Chocolate dust"
       },
-      "chopped garlic" : {
+      "Chop garlic" : {
         "Items" : [ "Garlic", "Bowl", "Knife" ],
         "Output" : "Chopped garlic"
       },
-      "chopped onions" : {
+      "Chop onion" : {
         "Items" : [ "Onion", "Bowl", "Knife" ],
         "Output" : "Chopped onions"
       },
-      "coconut milk" : {
+      "Fill vial with coconut milk" : {
         "Items" : [ "Vial", "Coconut", "Hammer" ],
         "Output" : "Coconut milk"
       },
-      "coconut shell" : {
+      "Crack coconut" : {
         "Items" : [ "Vial", "Coconut", "Hammer" ],
         "Output" : "Coconut shell"
       },
-      "compost from pack" : {
+      "Compost pack" : {
         "Items" : [ "Compost pack" ],
         "Output" : "Compost"
       },
-      "compost*" : {
+      "Fill compost from bin*" : {
         "Items" : [ "Bucket" ],
         "Objects" : [ "Compost Bin+" ],
         "Output" : "Compost"
       },
-      "crushed nest" : {
+      "Crush bird nest" : {
         "Items" : [ "Pestle and mortar", "Bird nest" ],
         "Output" : "Crushed nest"
       },
-      "crushed superior dragon bones" : {
+      "Crush superior dragon bones" : {
         "Items" : [ "Pestle and mortar", "Superior dragon bones" ],
         "Output" : "Crushed superior dragon bones"
       },
-      "crystal chest*" : {
+      "Crystal chest loot*" : {
         "Chunks" : [ "11573" ],
         "Items" : [ "Crystal key" ],
         "Output" : "Crystal chest"
       },
-      "crystal dust" : {
+      "Grind crystal shard" : {
         "Items" : [ "Pestle and mortar", "Crystal shard" ],
         "Output" : "Crystal dust"
       },
-      "crystal key" : {
+      "Combine crystal key halves" : {
         "Items" : [ "Loop half of key", "Tooth half of key" ],
         "Output" : "Crystal key"
       },
-      "cup of hot water" : {
+      "Fill cup with hot water" : {
         "Items" : [ "Bowl of hot water", "Empty cup" ],
         "Output" : "Cup of hot water"
       },
-      "curator's medallion*" : {
+      "Trade-in for curator's medallion*" : {
         "Chunks" : [ "12853" ],
         "Items" : [ "Ruby", "Fire rune", "Cosmic rune", "Digsite pendant" ],
         "Output" : "Curator's medallion"
       },
-      "cured yak-hide" : {
+      "Cure yak-hide" : {
         "Chunks" : [ "9275" ],
         "Items" : [ "Yak-hide" ],
         "Output" : "Cured yak-hide"
       },
-      "damaged armour loot*" : {
+      "Damaged armour loot*" : {
         "Chunks" : [ "Player-owned house" ],
         "Items" : [ "Damaged armour" ],
         "Output" : "Damaged armour loot"
       },
-      "dark chest*" : {
+      "Dark chest loot*" : {
         "Chunks" : [ "Crumbling Tower%2FBasement" ],
         "Items" : [ "Dark key" ],
         "Output" : "Dark chest"
       },
-      "desert camo legs" : {
+      "Buy desert camo legs" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Desert devil fur" ],
         "Output" : "Desert camo legs"
       },
-      "desert camo top" : {
+      "Buy desert camo top" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Desert devil fur" ],
         "Output" : "Desert camo top"
       },
-      "desert painting*" : {
+      "Buy desert painting*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Desert painting"
       },
-      "digsite level 1*" : {
+      "Digsite level 1 loot*" : {
         "Chunks" : [ "13365" ],
         "Items" : [ "Trowel", "Leather gloves", "Leather boots", "Specimen jar" ],
         "Output" : "Digsite (level 1)"
       },
-      "digsite level 2*" : {
+      "Digsite level 2 loot*" : {
         "Chunks" : [ "13365" ],
         "Items" : [ "Rock pick" ],
         "Output" : "Digsite (level 2)"
       },
-      "digsite level 3*" : {
+      "Digsite level 3 loot*" : {
         "Chunks" : [ "13365" ],
         "Items" : [ "Trowel", "Brush", "Specimen jar" ],
         "Output" : "Digsite (level 3)"
       },
-      "digsite training*" : {
+      "Digsite training loot*" : {
         "Chunks" : [ "13365" ],
         "Items" : [ "Trowel" ],
         "Output" : "Digsite (training)"
       },
-      "dragon scale dust" : {
+      "Grind blue dragon scale" : {
         "Items" : [ "Blue dragon scale", "Pestle and mortar" ],
         "Output" : "Dragon scale dust"
       },
-      "dynamite" : {
+      "Make dynamite" : {
         "Items" : [ "Volcanic sulphur", "Juniper charcoal", "Saltpetre", "Pot", "Ball of wool" ],
         "Output" : "Dynamite"
       },
-      "earth rune from pack" : {
+      "Earth rune pack" : {
         "Items" : [ "Earth rune pack" ],
         "Output" : "Earth rune"
       },
-      "elena portrait*" : {
+      "Buy Elena portrait*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Elena portrait"
       },
-      "elven crystal chest*" : {
+      "Elven crystal chest loot*" : {
         "Chunks" : [ "Prifddinas" ],
         "Items" : [ "Crystal key" ],
         "Output" : "Elven Crystal Chest"
       },
-      "elysian spirit shield" : {
+      "Attach elysian sigil" : {
         "Chunks" : [ "12086" ],
         "Items" : [ "Elysian sigil", "Blessed spirit shield" ],
         "Output" : "Elysian spirit shield"
       },
-      "emerald lantern" : {
+      "Add emerald lens to lantern" : {
         "Items" : [ "Bullseye lantern", "Emerald lens" ],
         "Output" : "Emerald lantern"
       },
-      "expert mining gloves*" : {
+      "Combine mining gloves*" : {
         "Chunks" : [ "Dwarven Mines" ],
         "Items" : [ "Mining gloves", "Superior mining gloves" ],
         "Output" : "Expert mining gloves"
       },
-      "eye of newt from pack" : {
+      "Eye of newt pack" : {
         "Items" : [ "Eye of newt pack" ],
         "Output" : "Eye of newt"
       },
-      "feather from pack" : {
+      "Feather pack" : {
         "Items" : [ "Feather pack" ],
         "Output" : "Feather"
       },
-      "ferocious gloves" : {
+      "Craft ferocious gloves" : {
         "Chunks" : [ "Lithkren Vault" ],
         "Items" : [ "Hydra leather" ],
         "Output" : "Ferocious gloves"
       },
-      "fire rune from pack" : {
+      "Fire rune pack" : {
         "Items" : [ "Fire rune pack" ],
         "Output" : "Fire rune"
       },
-      "fish offcuts" : {
+      "Slice barbarian fish for offcuts" : {
         "Items" : [ "Leaping trout", "Knife" ],
         "Output" : "Fish offcuts"
       },
-      "fishing bait from pack" : {
+      "Fishing bait pack" : {
         "Items" : [ "Bait pack" ],
         "Output" : "Fishing bait"
       },
-      "flax from object*" : {
+      "Pick flax*" : {
         "Objects" : [ "Flax" ],
         "Output" : "Flax"
       },
-      "giant egg sac loot*" : {
+      "Giant egg sac loot*" : {
         "Items" : [ "Giant egg sac", "Knife" ],
         "Output" : "Giant egg sac loot"
       },
-      "gloves of silence" : {
+      "Buy gloves of silence" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Dark kebbit fur" ],
         "Output" : "Gloves of silence"
       },
-      "gnome restaurant*" : {
+      "Gnome Restaurant loot*" : {
         "Chunks" : [ "9782" ],
         "Output" : "Gnome Restaurant"
       },
-      "goat horn dust" : {
+      "Grind desert goat horn" : {
         "Items" : [ "Desert goat horn", "Pestle and mortar" ],
         "Output" : "Goat horn dust"
       },
-      "gold key loot*" : {
+      "Gold key loot*" : {
         "Chunks" : [ "Shade Catacombs" ],
         "Items" : [ "Gold key+" ],
         "Output" : "Gold key loot"
       },
-      "gorak claw powder" : {
+      "Grind gorak claws" : {
         "Items" : [ "Gorak claws", "Pestle and mortar" ],
         "Output" : "Gorak claw dust"
       },
-      "goutweed loot*" : {
+      "Goutweed loot*" : {
         "Chunks" : [ "11573" ],
         "Items" : [ "Goutweed" ],
         "Output" : "Goutweed loot"
       },
-      "graahk headdress" : {
+      "Buy graahk headdress" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Graahk fur" ],
         "Output" : "Graahk hat"
       },
-      "graahk legs" : {
+      "Buy graahk legs" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Graahk fur" ],
         "Output" : "Graahk legs"
       },
-      "graahk top" : {
+      "Buy graahk top" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Graahk fur" ],
         "Output" : "Graahk top"
       },
-      "grain from object*" : {
+      "Pick wheat*" : {
         "Objects" : [ "Wheat" ],
         "Output" : "Grain"
       },
-      "green dragon leather" : {
+      "Tan green dragonhide" : {
         "Chunks" : [ "Tanner+" ],
         "Items" : [ "Green dragonhide" ],
         "Output" : "Green dragon leather"
       },
-      "grubby chest*" : {
+      "Grubby chest loot*" : {
         "Chunks" : [ "Forthos Dungeon" ],
         "Items" : [ "Grubby key" ],
         "Output" : "Grubby Chest"
       },
-      "guardian boots" : {
+      "Craft guardian boots" : {
         "Items" : [ "Bandos boots", "Black tourmaline core" ],
         "Output" : "Guardian boots"
       },
-      "hallowed sack loot*" : {
+      "Hallowed sack loot*" : {
         "Items" : [ "Hallowed sack" ],
         "Output" : "Hallowed sack loot"
       },
-      "hard leather" : {
+      "Tan hard leather" : {
         "Chunks" : [ "Tanner+" ],
         "Items" : [ "Cowhide" ],
         "Output" : "Hard leather"
       },
-      "hay sack*" : {
+      "Fill sack with hay*" : {
         "Items" : [ "Empty sack" ],
         "Objects" : [ "Hay+" ],
         "Output" : "Hay sack"
       },
-      "haystack*" : {
+      "Haystack loot*" : {
         "Objects" : [ "Haystack" ],
         "Output" : "Haystack"
       },
-      "herb box loot*" : {
+      "Herb box loot*" : {
         "Items" : [ "Herb box" ],
         "Output" : "Herb box loot"
       },
-      "hunter kit loot*" : {
+      "Hunter kit loot*" : {
         "Items" : [ "Hunter kit" ],
         "Output" : "Hunter kit loot"
       },
-      "impling jar*" : {
+      "Craft impling jar*" : {
         "Chunks" : [ "11570" ],
         "Items" : [ "Anchovies", "Pestle and mortar", "Vial", "Mixed flowers", "Butterfly jar" ],
         "Output" : "Impling jar"
       },
-      "infernal eel loot*" : {
+      "Infernal eel loot*" : {
         "Items" : [ "Infernal eel", "Hammer" ],
         "Output" : "Infernal eel loot"
       },
-      "isafdar painting*" : {
+      "Buy Isafdar painting*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Isafdar painting"
       },
-      "jug from pack" : {
+      "Jug pack" : {
         "Items" : [ "Empty jug pack" ],
         "Output" : "Jug"
       },
-      "jug of water*" : {
+      "Fill jug with water*" : {
         "Items" : [ "Jug" ],
         "Objects" : [ "Water source+" ],
         "Output" : "Jug of water"
       },
-      "jungle camo legs" : {
+      "Buy jungle camo legs" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Feldip weasel fur" ],
         "Output" : "Jungle camo legs"
       },
-      "jungle camo top" : {
+      "Buy jungle camo top" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Feldip weasel fur" ],
         "Output" : "Jungle camo top"
       },
-      "juniper charcoal*" : {
+      "Process juniper logs*" : {
         "Chunks" : [ "6710" ],
         "Items" : [ "Juniper logs" ],
         "Output" : "Juniper charcoal"
       },
-      "karamja painting*" : {
+      "Buy Karamja painting*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Karamja painting"
       },
-      "kebbit teeth dust" : {
+      "Grind kebbit teeth" : {
         "Items" : [ "Kebbit teeth", "Pestle and mortar" ],
         "Output" : "Kebbit teeth dust"
       },
-      "keldagrim portrait*" : {
+      "Buy Keldagrim portrait*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Keldagrim portrait"
       },
-      "kodai wand" : {
+      "Combine kodai insignia" : {
         "Items" : [ "Master wand", "Kodai insignia" ],
         "Output" : "Kodai wand"
       },
-      "kyatt hat" : {
+      "Buy kyatt hat" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Kyatt fur" ],
         "Output" : "Kyatt hat"
       },
-      "kyatt legs" : {
+      "Buy kyatt legs" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Kyatt fur" ],
         "Output" : "Kyatt legs"
       },
-      "kyatt top" : {
+      "Buy kyatt top" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Kyatt fur" ],
         "Output" : "Kyatt top"
       },
-      "large map (item)*" : {
+      "Buy large map (item)*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Large map (item)"
       },
-      "larupia hat" : {
+      "Buy larupia hat" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Larupia fur" ],
         "Output" : "Larupia hat"
       },
-      "larupia legs" : {
+      "Buy larupia legs" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Larupia fur" ],
         "Output" : "Larupia legs"
       },
-      "larupia top" : {
+      "Buy larupia top" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Larupia fur" ],
         "Output" : "Larupia top"
       },
-      "lava scale shard" : {
+      "Grind lava scale" : {
         "Items" : [ "Lava scale", "Pestle and mortar" ],
         "Output" : "Lava scale shard"
       },
-      "leather" : {
+      "Tan leather" : {
         "Chunks" : [ "Tanner+" ],
         "Items" : [ "Cowhide" ],
         "Output" : "Leather"
       },
-      "lemon chunks" : {
+      "Cut lemon chunks" : {
         "Items" : [ "Knife", "Lemon" ],
         "Output" : "Lemon chunks"
       },
-      "lemon slices" : {
+      "Cut lemon slices" : {
         "Items" : [ "Knife", "Lemon" ],
         "Output" : "Pineapple slices"
       },
-      "lime chunks" : {
+      "Cut lime chunks" : {
         "Items" : [ "Knife", "Lime" ],
         "Output" : "Lime chunks"
       },
-      "lime slices" : {
+      "Cut lime slices" : {
         "Items" : [ "Knife", "Lime" ],
         "Output" : "Lime slices"
       },
-      "lumbridge painting*" : {
+      "Buy Lumbridge painting*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Lumbridge painting"
       },
-      "magic box from pack" : {
+      "Magic imp box pack" : {
         "Items" : [ "Magic imp box pack" ],
         "Output" : "Magic box"
       },
-      "mahogany plank" : {
+      "Process mahogany logs" : {
         "Chunks" : [ "Sawmill+" ],
         "Items" : [ "Mahogany logs" ],
         "Output" : "Mahogany plank"
       },
-      "malediction ward" : {
+      "Forge malediction ward" : {
         "Chunks" : [ "13373" ],
         "Items" : [ "Malediction shard 1", "Malediction shard 2", "Malediction shard 3" ],
         "Output" : "Malediction ward"
       },
-      "medium map (item)*" : {
+      "Buy medium map (item)*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Medium map (item)"
       },
-      "mind rune from pack" : {
+      "Mind rune pack" : {
         "Items" : [ "Mind rune pack" ],
         "Output" : "Mind rune"
       },
-      "misc%2E portrait*" : {
+      "Buy Misc%2E portrait*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Misc. portrait"
       },
-      "mole part*" : {
+      "Trade-in mole part*" : {
         "Chunks" : [ "12084" ],
         "Items" : [ "Mole part+" ],
         "Output" : "Mole part"
       },
-      "mort myre fungus*" : {
+      "Bloom mort myre fungus*" : {
         "Chunks" : [ "Swamp+" ],
         "Items" : [ "Silver sickle" ],
         "Output" : "Mort myre fungus"
       },
-      "morytania painting*" : {
+      "Buy Morytania painting*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Morytania painting"
       },
-      "muddy chest*" : {
+      "Muddy chest loot*" : {
         "Chunks" : [ "12348" ],
         "Items" : [ "Muddy key" ],
         "Output" : "Muddy chest"
       },
-      "museum camp loot*" : {
+      "Museum camp loot*" : {
         "Chunks" : [ "14907" ],
         "Items" : [ "Grubby key", "Trowel", "Rock pick", "Specimen brush", "Leather gloves", "Leather boots" ],
         "Output" : "Museum Camp loot"
       },
-      "mystic air battlestaff*" : {
+      "Upgrade air battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Air battlestaff" ],
         "Output" : "Mystic air battlestaff"
       },
-      "mystic dust battlestaff*" : {
+      "Upgrade dust battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Dust battlestaff" ],
         "Output" : "Mystic dust battlestaff"
       },
-      "mystic earth battlestaff*" : {
+      "Upgrade earth battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Earth battlestaff" ],
         "Output" : "Mystic earth battlestaff"
       },
-      "mystic fire battlestaff*" : {
+      "Upgrade fire battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Fire battlestaff" ],
         "Output" : "Mystic fire battlestaff"
       },
-      "mystic lava battlestaff*" : {
+      "Upgrade lava battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Lava battlestaff" ],
         "Output" : "Mystic lava battlestaff"
       },
-      "mystic mud battlestaff*" : {
+      "Upgrade mud battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Mud battlestaff" ],
         "Output" : "Mystic mud battlestaff"
       },
-      "mystic smoke battlestaff*" : {
+      "Upgrade smoke battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Smoke battlestaff" ],
         "Output" : "Mystic smoke battlestaff"
       },
-      "mystic steam battlestaff*" : {
+      "Upgrade steam battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Steam battlestaff" ],
         "Output" : "Mystic steam battlestaff"
       },
-      "mystic water battlestaff*" : {
+      "Upgrade water battlestaff*" : {
         "Chunks" : [ "10805" ],
         "Items" : [ "Water battlestaff" ],
         "Output" : "Mystic water battlestaff"
       },
-      "oak plank" : {
+      "Process oak logs" : {
         "Chunks" : [ "Sawmill+" ],
         "Items" : [ "Oak logs" ],
         "Output" : "Oak plank"
       },
-      "odium ward" : {
+      "Forge odium ward" : {
         "Chunks" : [ "13373" ],
         "Items" : [ "Odium shard 1", "Odium shard 2", "Odium shard 3" ],
         "Output" : "Odium ward"
       },
-      "olive oil from pack" : {
+      "Olive oil pack" : {
         "Items" : [ "Olive oil pack" ],
         "Output" : "Olive oil"
       },
-      "onion from object*" : {
+      "Pick onion*" : {
         "Objects" : [ "Onion" ],
         "Output" : "Onion"
       },
-      "orange chunks" : {
+      "Cut orange chunks" : {
         "Items" : [ "Knife", "Orange" ],
         "Output" : "Orange chunks"
       },
-      "orange slices" : {
+      "Cut orange slices" : {
         "Items" : [ "Knife", "Orange" ],
         "Output" : "Orange slices"
       },
-      "oyster*" : {
+      "Oyster loot*" : {
         "Items" : [ "Oyster" ],
         "Output" : "Oyster"
       },
-      "pastry dough" : {
+      "Make pastry dough" : {
         "Items" : [ "Pot of flour", "Water item+" ],
         "Output" : "Pastry dough"
       },
-      "pineapple chunks" : {
+      "Cut pineapple chunks" : {
         "Items" : [ "Knife", "Pineapple+" ],
         "Output" : "Pineapple chunks"
       },
-      "pineapple ring" : {
+      "Cut pineapple ring" : {
         "Items" : [ "Knife", "Pineapple+" ],
         "Output" : "Pineapple ring"
       },
-      "pitta dough" : {
+      "Make pitta dough" : {
         "Items" : [ "Pot of flour", "Water item+" ],
         "Output" : "Pitta dough"
       },
-      "pizza base" : {
+      "Make pizza base" : {
         "Items" : [ "Pot of flour", "Water item+" ],
         "Output" : "Pizza base"
       },
-      "plank" : {
+      "Process logs" : {
         "Chunks" : [ "Sawmill+" ],
         "Items" : [ "Logs" ],
         "Output" : "Plank"
       },
-      "platinum token*" : {
+      "Trade-in for platinum token*" : {
         "Chunks" : [ "12598" ],
         "Items" : [ "Coins" ],
         "Output" : "Platinum token"
       },
-      "polar camo legs" : {
+      "Buy polar camo legs" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Polar kebbit fur" ],
         "Output" : "Polar camo legs"
       },
-      "polar camo top" : {
+      "Buy polar camo top" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Polar kebbit fur" ],
         "Output" : "Polar camo top"
       },
-      "pot of flour" : {
+      "Fill pot with flour" : {
         "Items" : [ "Pot", "Grain" ],
         "Objects" : [ "Hopper controls" ],
         "Output" : "Pot of flour"
       },
-      "potato from object*" : {
+      "Pick potato*" : {
         "Objects" : [ "Potato" ],
         "Output" : "Potato"
       },
-      "red dragon leather" : {
+      "Tan red dragonhide" : {
         "Chunks" : [ "Tanner+" ],
         "Items" : [ "Red dragonhide" ],
         "Output" : "Red dragon leather"
       },
-      "reward chest the gauntlet*" : {
+      "Reward chest The Gauntlet loot*" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Gauntlet Lobby" ],
         "Output" : "Reward Chest (The Gauntlet)"
       },
-      "rock-shell helm" : {
+      "Buy rock-shell helm" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Rock-shell chunk", "Dagannoth hide" ],
         "Output" : "Rock-shell helm"
       },
-      "rock-shell legs" : {
+      "Buy rock-shell legs" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Rock-shell splinter", "Dagannoth hide" ],
         "Output" : "Rock-shell legs"
       },
-      "rock-shell plate" : {
+      "Buy rock-shell plate" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Rock-shell shard", "Dagannoth hide" ],
         "Output" : "Rock-shell plate"
       },
-      "roe*" : {
+      "Slice barbarian fish for roe*" : {
         "Items" : [ "Leaping trout", "Knife" ],
         "Output" : "Roe"
       },
-      "rope from ned" : {
+      "Rope from Ned" : {
         "Chunks" : [ "12338" ],
         "Items" : [ "Ball of wool" ],
         "Output" : "Rope"
       },
-      "rusty sword loot from house*" : {
+      "Rusty sword loot from house*" : {
         "Chunks" : [ "Player-owned house" ],
         "Items" : [ "Rusty sword" ],
         "Output" : "Rusty sword loot"
       },
-      "rusty sword loot from marchant*" : {
+      "Rusty sword loot from marchant*" : {
         "Chunks" : [ "10545" ],
         "Items" : [ "Rusty sword" ],
         "Output" : "Rusty sword loot"
       },
-      "sapphire lantern" : {
+      "Add sapphire lens to lantern" : {
         "Items" : [ "Bullseye lantern", "Sapphire" ],
         "Output" : "Sapphire lantern"
       },
-      "saradomin godsword" : {
+      "Attach Saradomin hilt" : {
         "Items" : [ "Godsword blade", "Saradomin hilt" ],
         "Output" : "Saradomin godsword"
       },
-      "serum 207 loot*" : {
+      "Serum 207 loot*" : {
         "Chunks" : [ "13875" ],
         "Items" : [ "Serum 207 (3)" ],
         "Output" : "Serum 207 loot"
       },
-      "serum 208 loot*" : {
+      "Serum 208 loot*" : {
         "Chunks" : [ "13875" ],
         "Items" : [ "Serum 207 (3)" ],
         "Output" : "Serum 208 loot"
       },
-      "silver key loot*" : {
+      "Silver key loot*" : {
         "Chunks" : [ "Shade Catacombs" ],
         "Items" : [ "Silver key+" ],
         "Output" : "Silver key loot"
       },
-      "sinister chest*" : {
+      "Sinister chest loot*" : {
         "Chunks" : [ "Yanille Agility Dungeon & Wizards' Guild#Basement" ],
         "Items" : [ "Sinister key" ],
         "Output" : "Sinister chest"
       },
-      "skeletal bottoms" : {
+      "Buy skeletal bottoms" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Fibula piece", "Dagannoth hide" ],
         "Output" : "Skeletal bottoms"
       },
-      "skeletal helm" : {
+      "Buy skeletal helm" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Skull piece", "Dagannoth hide" ],
         "Output" : "Skeletal helm"
       },
-      "skeletal top" : {
+      "Buy skeletal top" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Ribcage piece", "Dagannoth hide" ],
         "Output" : "Skeletal top"
       },
-      "slayer's staff (e)" : {
+      "Enchant slayer's staff" : {
         "Items" : [ "Slayer's staff", "Slayer's enchantment" ],
         "Output" : "Slayer's staff (e)"
       },
-      "sliced mushrooms" : {
+      "Slice mushroom" : {
         "Items" : [ "Mushroom", "Bowl", "Knife" ],
         "Output" : "Sliced mushrooms"
       },
-      "small chest*" : {
+      "Small chest loot*" : {
         "Chunks" : [ "H%2EA%2EM%2E storeroom" ],
         "Items" : [ "Ham key+" ],
         "Output" : "Small chest"
       },
-      "small map (item)*" : {
+      "Buy small map (item)*" : {
         "Chunks" : [ "11828" ],
         "Output" : "Small map (item)"
       },
-      "snakeskin from normal" : {
+      "Tan normal snake hide" : {
         "Chunks" : [ "Tanner+" ],
         "Items" : [ "Snake hide" ],
         "Output" : "Snakeskin"
       },
-      "snakeskin from swamp" : {
+      "Tan swamp snake hide" : {
         "Chunks" : [ "Tanner+" ],
         "Items" : [ "Snake hide (swamp)" ],
         "Output" : "Snakeskin"
       },
-      "soda ash" : {
+      "Cook seaweed" : {
         "Items" : [ "Seaweed+" ],
         "Objects" : [ "Cooking range+" ],
         "Output" : "Soda ash"
       },
-      "soft clay from item*" : {
+      "Wet clay with item*" : {
         "Items" : [ "Clay", "Water item+" ],
         "Output" : "Soft clay"
       },
-      "soft clay from object*" : {
+      "Wet clay with object*" : {
         "Items" : [ "Clay" ],
         "Objects" : [ "Water source+" ],
         "Output" : "Soft clay"
       },
-      "soft clay from pack" : {
+      "Soft clay pack" : {
         "Items" : [ "Soft clay pack" ],
         "Output" : "Soft clay"
       },
-      "spectral spirit shield" : {
+      "Attach spectral sigil" : {
         "Chunks" : [ "12086" ],
         "Items" : [ "Spectral sigil", "Blessed spirit shield" ],
         "Output" : "Spectral spirit shield"
       },
-      "spined body" : {
+      "Buy spined body" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Flattened hide", "Dagannoth hide" ],
         "Output" : "Spined plate"
       },
-      "spined chaps" : {
+      "Buy spined chaps" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Stretched hide", "Dagannoth hide" ],
         "Output" : "Spined legs"
       },
-      "spined helm" : {
+      "Buy spined helm" : {
         "Chunks" : [ "10553" ],
         "Items" : [ "Circular hide", "Dagannoth hide" ],
         "Output" : "Spined helm"
       },
-	  "Craft a ~|splitbark body|~" : {
+	  "Buy splitbark body" : {
 		"Chunks" : [ "12337" ],
         "Items" : [ "Bark", "Fine cloth" ],
         "Output" : "Splitbark body"
       },
-	  "splitbark boots" : {
+	  "Buy splitbark boots" : {
 		"Chunks" : [ "12337" ],
         "Items" : [ "Bark", "Fine cloth" ],
         "Output" : "Splitbark boots"
       },
-	  "splitbark gauntlets" : {
+	  "Buy splitbark gauntlets" : {
 		"Chunks" : [ "12337" ],
         "Items" : [ "Bark", "Fine cloth" ],
         "Output" : "Splitbark gauntlets"
       },
-	  "splitbark helm" : {
+	  "Buy splitbark helm" : {
 		"Chunks" : [ "12337" ],
         "Items" : [ "Bark", "Fine cloth" ],
         "Output" : "Splitbark helm"
       },
-	  "splitbark legs" : {
+	  "Buy splitbark legs" : {
 		"Chunks" : [ "12337" ],
         "Items" : [ "Bark", "Fine cloth" ],
         "Output" : "Splitbark legs"
       },
-      "spoils of war*" : {
+      "Spoils of war loot*" : {
         "Items" : [ "Spoils of war" ],
         "Output" : "Spoils of war"
       },
-      "spotted cape" : {
+      "Buy spotted cape" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Spotted kebbit fur" ],
         "Output" : "Spotted cape"
       },
-      "spottier cape" : {
+      "Buy spottier cape" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Dashing kebbit fur" ],
         "Output" : "Spottier cape"
       },
-      "staff of balance" : {
+      "Attach Guthixian icon" : {
         "Items" : [ "Staff of the dead", "Guthixian icon" ],
         "Output" : "Staff of balance"
       },
-      "staff of light" : {
+      "Attach Saradomin's light" : {
         "Items" : [ "Staff of the dead", "Saradomin's light" ],
         "Output" : "Staff of light"
       },
-      "star flower*" : {
+      "Pick star flower*" : {
         "Chunks" : [ "Cosmic entity's plane" ],
         "Output" : "Star flower"
       },
-      "steel key loot*" : {
+      "Steel key loot*" : {
         "Chunks" : [ "Shade Catacombs" ],
         "Items" : [ "Steel key+" ],
         "Output" : "Steel key loot"
       },
-      "stuffed abyssal head" : {
+      "Stuff abyssal head" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Abyssal head" ],
         "Output" : "Stuffed abyssal head"
       },
-      "stuffed basilisk head" : {
+      "Stuff basilisk head" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Basilisk head" ],
         "Output" : "Stuffed basilisk head"
       },
-      "stuffed big bass" : {
+      "Stuff big bass" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Big bass" ],
         "Output" : "Stuffed big bass"
       },
-      "stuffed big shark" : {
+      "Stuff big shark" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Big shark" ],
         "Output" : "Stuffed big shark"
       },
-      "stuffed big swordfish" : {
+      "Stuff big swordfish" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Big swordfish" ],
         "Output" : "Stuffed big swordfish"
       },
-      "stuffed cockatrice head" : {
+      "Stuff cockatrice head" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Cockatrice head" ],
         "Output" : "Stuffed cockatrice head"
       },
-      "stuffed crawling hand" : {
+      "Stuff crawling hand" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Crawling head" ],
         "Output" : "Stuffed crawling hand"
       },
-      "stuffed hydra heads" : {
+      "Stuff Alchemical hydra heads" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Alchemical hydra heads" ],
         "Output" : "Stuffed kydra heads"
       },
-      "stuffed kbd heads" : {
+      "Stuff kbd heads" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Kbd heads" ],
         "Output" : "Kbd heads"
       },
-      "stuffed kurask head" : {
+      "Stuff kurask head" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Kurask head" ],
         "Output" : "Stuffed kurask head"
       },
-      "supercompost*" : {
+      "Fill supercompost from bin*" : {
         "Items" : [ "Bucket", "Supercompost item+" ],
         "Objects" : [ "Compost Bin+" ],
         "Output" : "Supercompost"
       },
-      "supply crate loot*" : {
+      "Supply crate loot*" : {
         "Items" : [ "Supply crate" ],
         "Output" : "Supply crate loot"
       },
-      "supply crate mahogany homes loot*" : {
+      "Supply crate Mahogany Homes loot*" : {
         "Items" : [ "Supply crate (Mahogany Homes)" ],
         "Output" : "Supply crate (Mahogany Homes) loot"
       },
-      "teak plank" : {
+      "Process teak logs" : {
         "Chunks" : [ "Sawmill+" ],
         "Items" : [ "Teak logs" ],
         "Output" : "Teak plank"
       },
-      "theatre of blood*" : {
+      "Theatre of Blood loot*" : {
         "Chunks" : [ "Theatre of Blood" ],
         "Output" : "Theatre of Blood"
       },
-      "training bow" : {
+      "Buy training bow" : {
         "Chunks" : [ "12850" ],
         "Output" : "Training bow"
       },
-      "training shield" : {
+      "Buy training shield" : {
         "Chunks" : [ "12850" ],
         "Output" : "Training shield"
       },
-      "training sword" : {
+      "Buy training sword" : {
         "Chunks" : [ "12850" ],
         "Output" : "Training sword"
       },
-      "trident of the seas" : {
+      "Charge trident of the seas" : {
         "Items" : [ "Uncharged trident", "Death rune", "Chaos rune", "Fire rune" ],
         "Output" : "Trident of the seas"
       },
-      "uncleaned find loot*" : {
+      "Uncleaned find loot*" : {
         "Chunks" : [ "Varrock Museum+" ],
         "Output" : "Uncleaned find loot"
       },
-      "uncut zenyte" : {
+      "Craft uncut zenyte" : {
         "Chunks" : [ "Temple of Marimbo Dungeon" ],
         "Items" : [ "Onyx", "Zenyte shard" ],
         "Output" : "Uncut zenyte"
       },
-      "unfinished broad bolts from pack" : {
+      "Unfinished broad bolts pack" : {
         "Items" : [ "Unfinished broad bolt pack" ],
         "Output" : "Unfinished broad bolts"
       },
-      "unicorn horn dust" : {
+      "Grind unicorn horn" : {
         "Items" : [ "Unicorn horn", "Pestle and mortar" ],
         "Output" : "Unicorn horn dust"
       },
-      "vampyre juvenile loot*" : {
+      "Vampyre juvenile loot*" : {
         "Monsters" : [ "Vampyre Juvenile" ],
         "Output" : "Vampyre Juvenile loot"
       },
-      "vampyre juvinate loot*" : {
+      "Vampyre juvinate loot*" : {
         "Monsters" : [ "Vampyre Juvinate" ],
         "Output" : "Vampyre Juvinate loot"
       },
-      "vial from pack" : {
+      "Vial pack" : {
         "Items" : [ "Empty vial pack" ],
         "Output" : "Vial"
       },
-      "vial of water from pack" : {
+      "Vial of water pack" : {
         "Items" : [ "Water-filled vial pack" ],
         "Output" : "Vial of water"
       },
-      "vial of water*" : {
+      "Fill vial with water*" : {
         "Items" : [ "Vial" ],
         "Objects" : [ "Water source+" ],
         "Output" : "Vial of water"
       },
-      "vorkath's stuffed head" : {
+      "Stuff Vorkath's head" : {
         "Chunks" : [ "13878" ],
         "Items" : [ "Vorkath's head" ],
         "Output" : "Vorkath's stuffed head"
       },
-      "water rune from pack" : {
+      "Water rune pack" : {
         "Items" : [ "Water rune pack" ],
         "Output" : "Water rune"
       },
-      "wise old man tasks*" : {
+      "Wise old man tasks*" : {
         "Chunks" : [ "12338" ],
         "Output" : "Wise Old Man tasks"
       },
-      "wood camo legs" : {
+      "Buy wood camo legs" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Common kebbit fur" ],
         "Output" : "Wood camo legs"
       },
-      "wood camo top" : {
+      "Buy wood camo top" : {
         "Chunks" : [ "13109" ],
         "Items" : [ "Common kebbit fur" ],
         "Output" : "Wood camo top"
       },
-      "wool*" : {
+      "Shear sheep*" : {
         "Items" : [ "Shears" ],
         "NPCs" : [ "Sheep" ],
         "Output" : "Wool"
       },
-      "zamorak godsword" : {
+      "Attach Zamorak hilt" : {
         "Items" : [ "Godsword blade", "Zamorak hilt" ],
         "Output" : "Zamorak godsword"
       }
@@ -14794,7 +14794,7 @@
           "Strength" : 70
         }
       },
-      "Access the ~|Rangind Guild|~" : {
+      "Access the ~|Ranging Guild|~" : {
         "Chunks" : [ "10549" ],
         "Level" : 40,
         "Primary" : false
@@ -36222,6 +36222,7 @@
       },
       "Spawn" : {
         "Beer" : 1,
+		"Bones": 1,
         "Broken glass" : 1,
         "Bronze dagger" : 1,
         "Bucket of water" : 1
