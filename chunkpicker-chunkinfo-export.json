@@ -7173,19 +7173,19 @@
       },
       "String a ~|diamond amulet (u)|~" : {
         "Items" : [ "Diamond amulet (u)", "Ball of wool" ],
-        "Level" : 70,
+        "Level" : 1,
         "Output" : "Diamond amulet",
         "Primary" : true
       },
       "String a ~|gold amulet|~" : {
         "Items" : [ "Gold amulet (u)", "Ball of wool" ],
-        "Level" : 8,
+        "Level" : 1,
         "Output" : "Gold amulet",
         "Primary" : true
       },
       "String a ~|jade amulet (u)|~" : {
         "Items" : [ "Jade amulet (u)", "Ball of wool" ],
-        "Level" : 34,
+        "Level" : 1,
         "Output" : "Jade amulet",
         "Primary" : true
       },
@@ -7201,15 +7201,15 @@
         "Output" : "Ruby amulet",
         "Primary" : true
       },
-      "String a ~|sapphire amulet|~" : {
+      "String a ~|sapphire amulet (u)|~" : {
         "Items" : [ "Sapphire amulet (u)", "Ball of wool" ],
-        "Level" : 24,
+        "Level" : 1,
         "Output" : "Sapphire amulet",
         "Primary" : true
       },
       "String a ~|topaz amulet (u)|~" : {
         "Items" : [ "Topaz amulet (u)", "Ball of wool" ],
-        "Level" : 45,
+        "Level" : 1,
         "Output" : "Topaz amulet",
         "Primary" : true
       },
@@ -7227,25 +7227,25 @@
       },
       "String a ~|zenyte amulet (u)|~" : {
         "Items" : [ "Zenyte amulet (u)", "Ball of wool" ],
-        "Level" : 98,
+        "Level" : 1,
         "Output" : "Zenyte amulet",
         "Primary" : true
       },
       "String an ~|emerald amulet (u)|~" : {
         "Items" : [ "Emerald amulet (u)", "Ball of wool" ],
-        "Level" : 31,
+        "Level" : 1,
         "Output" : "Emerald amulet",
         "Primary" : true
       },
       "String an ~|onyx amulet (u)|~" : {
         "Items" : [ "Onyx amulet (u)", "Ball of wool" ],
-        "Level" : 90,
+        "Level" : 1,
         "Output" : "Onyx amulet",
         "Primary" : true
       },
       "String an ~|opal amulet (u)|~" : {
         "Items" : [ "Opal amulet (u)", "Ball of wool" ],
-        "Level" : 27,
+        "Level" : 1,
         "Output" : "Opal amulet",
         "Primary" : true
       }
@@ -18193,6 +18193,7 @@
       "Object" : {
         "Bookcase" : 3,
         "Broken cart wheel" : 1,
+		"Cooking pot" : 1,
         "Crates" : 1,
         "Dairy cow" : 1,
         "Dead tree" : 5,
@@ -22400,7 +22401,10 @@
         "Gangplank" : 2,
         "Stepping stone" : 1,
         "Tree" : 27
-      }
+      },
+	  "Shop": {
+		"Trader Stan's Trading Post": true
+	  }
     },
     "8497" : {
       "Nickname" : "West Tyras Camp",
@@ -22442,7 +22446,10 @@
         "Fishing spot (cage, harpoon)" : 2,
         "Gangplank" : 2,
         "Tree" : 34
-      }
+      },
+	  "Shop": {
+		"Trader Stan's Trading Post": true
+	  }
     },
     "8501" : {
       "Monster" : {
@@ -26947,6 +26954,9 @@
         "Jungle Tree" : 4,
         "Stairs" : 2
       },
+	  "Shop" : {
+		"Trader Stan's Trading Post": true
+	  },
       "Quest" : {
         "The Corsair Curse" : "step"
       }
@@ -27080,6 +27090,7 @@
         "Cage" : 3,
         "Climbing rocks" : 1,
         "Closed chest" : 1,
+		"Cooking pot" : 1,
         "Crate" : 16,
         "Crates" : 1,
         "Cupboard" : 1,
@@ -27148,6 +27159,7 @@
         "Broken cart" : 2,
         "Chest" : 1,
         "Closed chest" : 2,
+		"Cooking pot" : 1,
         "Crate" : 2,
         "Cupboard" : 1,
         "Dead tree" : 20,
@@ -27192,6 +27204,7 @@
         "Broken cart" : 1,
         "Bush Patch" : 1,
         "Coal rock" : 4,
+		"Cooking pot" : 1,
         "Crate" : 31,
         "Fireplace" : 2,
         "Iron rock" : 13,
@@ -27360,6 +27373,7 @@
         "Boxes" : 2,
         "Cabbage" : 5,
         "Cabinet" : 1,
+		"Cooking pot" : 1,
         "Crate" : 2,
         "Cupboard" : 1,
         "Dead tree" : 20,
@@ -28142,6 +28156,7 @@
         "Boxes" : 7,
         "Broken cart" : 1,
         "Clay rock" : 4,
+		"Cooking pot" : 1,
         "Copper rock" : 4,
         "Crate" : 5,
         "Dead tree" : 21,
@@ -28162,7 +28177,8 @@
         "Recipe for Disaster%2GFreeing Pirate Pete" : "step"
       },
       "Shop" : {
-        "Khazard General Store" : true
+        "Khazard General Store" : true,
+		"Trader Stan's Trading Post": true
       },
       "Spawn" : {
         "Plank" : 1
@@ -28339,6 +28355,7 @@
         "Allotment" : 2,
         "Closed chest" : 1,
         "Compost Bin" : 1,
+		"Cooking pot" : 1,
         "Crate" : 11,
         "Dairy churn" : 1,
         "Dairy cow" : 1,
@@ -30408,7 +30425,8 @@
         "Travel cart" : 1
       },
       "Shop" : {
-        "Farming shops" : true
+        "Farming shops" : true,
+		"Trader Stan's Trading Post": true
       }
     },
     "11059" : {
@@ -30502,6 +30520,7 @@
         "Bookcase" : 3,
         "Boxes" : 3,
         "Closed chest" : 1,
+		"Cooking pot" : 1,
         "Crate" : 26,
         "Crates" : 4,
         "Dead tree" : 31,
@@ -30523,7 +30542,8 @@
       },
       "Shop" : {
         "Arhein Store" : true,
-        "Candle Shop" : true
+        "Candle Shop" : true,
+		"Trader Stan's Trading Post": true
       },
       "Spawn" : {
         "Bucket" : 1,
@@ -33264,6 +33284,9 @@
         "Monkey Madness I" : "step",
         "The Grand Tree" : "step"
       },
+	  "Shop": {
+		"Trader Stan's Trading Post": true
+	  },
       "Spawn" : {
         "Hammer" : 1
       }
@@ -33314,6 +33337,9 @@
         "Tree" : 9,
         "Willow" : 17
       },
+	  "Shop" : {
+		"Trader Stan's Trading Post": true
+	  },
       "Quest" : {
         "Skippy and the Mogres" : "first",
         "The Giant Dwarf" : "step",
@@ -34005,7 +34031,10 @@
       "Quest" : {
         "Dragon Slayer" : "step",
         "Enchanted Key" : "step"
-      }
+      },
+	  "Shop": {
+		"Trader Stan's Trading Post": true
+	  }
     },
     "12082" : {
       "Connect" : {
@@ -35962,6 +35991,7 @@
       "Nickname" : "Lumbridge Mill",
       "Object" : {
         "Closed chest" : 1,
+		"Cooking pot" : 1,
         "Crate" : 2,
         "Dairy churn" : 1,
         "Dairy cow" : 1,
@@ -36896,6 +36926,7 @@
         "Church organ" : 1,
         "Closed chest" : 1,
         "Cooking range" : 1,
+		"Cooking pot" : 1,
         "Crate" : 12,
         "Dead tree" : 15,
         "Drawers" : 1,
@@ -36972,6 +37003,7 @@
       "Nickname" : "Groats' Farm",
       "Object" : {
         "Boxes" : 1,
+		"Cooking pot" : 1,
         "Crate" : 5,
         "Dairy churn" : 1,
         "Dairy cow" : 2,
@@ -41357,7 +41389,10 @@
       "Nickname" : "Pirate Pier",
       "Object" : {
         "Gangplank" : 2
-      }
+      },
+	  "Shop" : {
+		"Trader Stan's Trading Post": true
+	  }
     },
     "14638" : {
       "Connect" : {
@@ -41605,7 +41640,8 @@
       },
       "Shop" : {
         "Ak-Haranu's Exotic Shop%2E" : true,
-        "Port Phasmatys General Store" : true
+        "Port Phasmatys General Store" : true,
+		"Trader Stan's Trading Post": true
       }
     },
     "14647" : {
@@ -45517,6 +45553,7 @@
         "STASH (medium)" : 1,
         "Shop Counter" : 2,
         "Silver rock" : 9,
+		"Sulphur vent" : 193,
         "Viewing orb" : 1
       },
       "Shop" : {
@@ -48492,8 +48529,8 @@
       "Coal+" : [ "Coal rock", "Coal vein" ],
       "Compost Bin+" : [ "Compost Bin", "Big Compost Bin" ],
       "Cooking fire+" : [ "Fire", "Fireplace", "Player fire" ],
-      "Cooking object+" : [ "Cooking range", "Range", "Stove", "Fire", "Fireplace", "Player fire" ],
-      "Cooking range+" : [ "Cooking range", "Range", "Stove" ],
+      "Cooking object+" : [ "Cooking range", "Range", "Stove", "Clay oven", "Fire", "Fireplace", "Player fire", "Cooking pot", "Sulphur vent" ],
+      "Cooking range+" : [ "Cooking range", "Range", "Stove", "Clay oven" ],
       "Copper+" : [ "Copper rock", "Copper vein" ],
       "Crafting stall+" : [ "Crafting stall", "Crafting Stall", "Craft stall" ],
       "Furnace+" : [ "Furnace" ],
