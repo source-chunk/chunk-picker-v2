@@ -32275,6 +32275,7 @@
         "Banana Tree" : 33,
         "Boxes" : 2,
         "Crate" : 2,
+		"Fishing spot (cage, harpoon)" : 3,
         "Fishing spot (small net, bait)" : 3,
         "STASH (hard)" : 1,
         "Sacks" : 1,
@@ -40251,7 +40252,7 @@
     "13873" : {
       "Nickname" : "South Burgh de Rott",
       "Object" : {
-        "Fishing spot (cage, harpoon)" : 12
+        "Fishing spot (big net, harpoon)" : 12
       },
       "Spawn" : {
         "Small fishing net" : 1
@@ -40661,7 +40662,7 @@
       },
       "Nickname" : "Burgh de Rott Pier",
       "Object" : {
-        "Fishing spot (cage, harpoon)" : 9
+        "Fishing spot (big net, harpoon)" : 9
       },
       "Quest" : {
         "Darkness of Hallowvale" : "step",
