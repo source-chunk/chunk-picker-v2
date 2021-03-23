@@ -347,6 +347,10 @@ button.menu2 {
 #recentChunksTitle {
     background-color: rgb(100, 100, 100);
     color: rgb(240, 240, 240);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 5px;
 }
 
 #recentChunks1, #recentChunks2, #recentChunks3, #recentChunks4, #recentChunks5 {

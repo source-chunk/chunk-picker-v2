@@ -2255,6 +2255,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
     let monsters = baseChunkData['monsters'];
     let npcs = baseChunkData['npcs'];
     let valids = {};
+    //console.log(baseChunkData);
     extraOutputItems = {};
 
     let tempItemSkill = {};
@@ -2671,19 +2672,31 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             });
                         } else {
                             if (!!items && !tools[item.replaceAll(/\*/g, '')] && !!items[item.replaceAll(/\*/g, '')]) {
-                                let nonskill = "";
+                                let nonskill = {};
                                 let tempNonValid = true;
                                 !!items[item.replaceAll(/\*/g, '')] && Object.keys(items[item.replaceAll(/\*/g, '')]).forEach(source => {
                                     if (items[item.replaceAll(/\*/g, '')][source].includes('Nonskill') && !source.includes('*')) {
-                                        nonskill = source;
+                                        if (!nonskill['Nonskill']) {
+                                            nonskill['Nonskill'] = {};
+                                        }
+                                        nonskill['Nonskill'][source] = true;
+                                    } else if (items[item.replaceAll(/\*/g, '')][source].includes(skill) && processingSkill[skill] && !source.includes('*')) {
+                                        if (!nonskill[skill]) {
+                                            nonskill[skill] = {};
+                                        }
+                                        nonskill[skill][source] = true;
                                     }
                                     if (!(items[item.replaceAll(/\*/g, '')][source] === ('primary-' + skill)) && !(items[item.replaceAll(/\*/g, '')][source] === ('secondary-' + skill)) && !(items[item.replaceAll(/\*/g, '')][source] === ('primary-Farming'))) {
                                         tempNonValid = false;
                                     }
                                 });
-                                if (nonskill.length > 0) {
-                                    !!chunkInfo['challenges']['Nonskill'][nonskill]['Items'] && chunkInfo['challenges']['Nonskill'][nonskill]['Items'].forEach(it => {
-                                        itemList.push(it);
+                                if (Object.keys(nonskill).length > 0) {
+                                    !!nonskill && Object.keys(nonskill).forEach(skill => {
+                                        !!nonskill[skill] && Object.keys(nonskill[skill]).forEach(src => {
+                                            !!chunkInfo['challenges'][skill][src]['Items'] && chunkInfo['challenges'][skill][src]['Items'].forEach(it => {
+                                                itemList.push(it);
+                                            });
+                                        });
                                     });
                                 } else if (!tempNonValid) {
                                     if (!tempItemSkill[skill][item.replaceAll(/\*/g, '')]) {
@@ -2699,6 +2712,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             }
         });
     });
+    //console.log(tempItemSkill);
     Object.keys(tempItemSkill).forEach(skill => {
         Object.keys(tempItemSkill[skill]).forEach(item => {
             let lowestItem;
@@ -2909,13 +2923,23 @@ var setAreas = function() {
     }
 }
 
+// Firefox functionality for browser dimensions
+function getBrowserDim() {
+    if (window.innerHeight) {
+        return { w: window.innerWidth, h: window.innerHeight};
+    } else {
+        return { w: document.body.clientWidth, h: document.body.clientHeight };
+    }
+}
+
 // Opens the context menu for an active challenge
 var openActiveContextMenu = function(challenge, skill) {
     if (activeContextMenuChallengeOld !== challenge) {
         activeContextMenuChallenge = challenge;
         activeContextMenuSkill = skill;
-        let x = event.pageX + $(".active-context-menu").width() + 5 > $(window).width() ? $(window).width() - $(".active-context-menu").width() - 5 : event.pageX - 5;
-        let y = event.pageY + $(".active-context-menu").height() + 5 > $(window).height() ? $(window).height() - $(".active-context-menu").height() - 5 : event.pageY - 5;
+        let dims = getBrowserDim();
+        let x = event.pageX + $(".active-context-menu").width() + 5 > dims['w'] ? dims['w'] - $(".active-context-menu").width() - 5 : event.pageX - 5;
+        let y = event.pageY + $(".active-context-menu").height() + 5 > dims['h'] ? dims['h'] - $(".active-context-menu").height() - 5 : event.pageY - 5;
         $(".active-context-menu").finish().toggle(100).css({
             top: y + "px",
             left: x + "px"
@@ -3092,8 +3116,8 @@ var uncompleteChallenge = function(challenge, skill) {
     }
     if (skill !== 'Extra') {
         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
-            Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
-                delete completedChallenges[subSkill][challenge];
+            !!chunkInfo['challenges'][skill][challenge]['Skills'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+                !!completedChallenges[subSkill] && delete completedChallenges[subSkill][challenge];
                 if (completedChallenges[subSkill] === {}) {
                     delete completedChallenges[subSkill];
                 }

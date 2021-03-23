@@ -5585,12 +5585,6 @@
         "Output" : "Murng bat (5)",
         "Primary" : true
       },
-      "Cook a ~|mushroom & onion|~" : {
-        "Items" : [ "Fried mushrooms", "Fried onions" ],
-        "Level" : 57,
-        "Output" : "Mushroom & onion",
-        "Primary" : true
-      },
       "Cook a ~|mycil fish|~" : {
         "Category" : [ "CoX" ],
         "Chunks" : [ "Chambers of Xeric" ],
@@ -13493,6 +13487,10 @@
       "Craft boots of brimstone" : {
         "Items" : [ "Boots of stone", "Drake's claw" ],
         "Output" : "Boots of brimstone"
+      },
+	  "Combine fried mushroom and onion into ~|mushroom & onion|~" : {
+        "Items" : [ "Fried mushrooms", "Fried onions" ],
+        "Output" : "Mushroom & onion"
       },
       "Bowl of fish loot*" : {
         "Items" : [ "Bowl of fish" ],
@@ -33979,6 +33977,9 @@
         "Bones" : 1
       }
     },
+	"12078" : {
+      "Nickname": "~WIP~ Tempoross Arena"
+    },
     "12079" : {
       "Object" : {
         "Oak" : 5,
@@ -34968,6 +34969,9 @@
         "Wine of zamorak" : 1
       }
     },
+	"12332" : {
+      "Nickname" : "~WIP~ Sea Spirit Boat"
+    },
     "12335" : {
       "Object" : {
         "Oak" : 3,
@@ -35777,6 +35781,12 @@
         "Gold ring" : 1,
         "Uncut sapphire" : 1
       }
+    },
+	"12587" : {
+      "Nickname" : "~WIP~ South Unkah Ruins"
+    },
+	"12588" : {
+      "Nickname" : "~WIP~ Ruins of Unkah"
     },
     "12589" : {
       "Connect" : {
