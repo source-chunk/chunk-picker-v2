@@ -9082,6 +9082,11 @@
         "Level" : 68,
         "Primary" : false
       },
+	  "Access the ~|Tempoross|~" : {
+        "Chunks" : [ "12078" ],
+        "Level" : 35,
+        "Primary" : false
+      },
       "Buy the ~|Fishing cape|~" : {
         "Category" : [ "Skillcape" ],
         "Chunks" : [ "10293" ],
@@ -14392,6 +14397,10 @@
         "Items" : [ "Bucket", "Supercompost item+" ],
         "Objects" : [ "Compost Bin+" ],
         "Output" : "Supercompost"
+      },
+	  "Reward pool loot*" : {
+        "Chunks" : [ "12078" ],
+        "Output" : "Reward pool loot"
       },
       "Supply crate loot*" : {
         "Items" : [ "Supply crate" ],
@@ -33978,8 +33987,26 @@
       }
     },
 	"12078" : {
-      "Nickname": "~WIP~ Tempoross Arena"
-    },
+	  "NPC" : {
+	    "Captain Dudi": 1,
+		"First Mate Deri": 1,
+		"First Mate Peri": 1
+	  },
+	  "Nickname" : "Tempoross Arena",
+	  "Object" : {
+	    "Fishing spot (Tempoross)": 4,
+	    "Mast": 2,
+	    "Shrine": 2,
+		"Totem pole": 2,
+		"Water pump": 4
+	  },
+	  "Spawn" : {
+	    "Bucket": 4,
+		"Hammer": 2,
+		"Harpoon": 2,
+		"Rope": 2
+	  }
+	},
     "12079" : {
       "Object" : {
         "Oak" : 5,
@@ -34970,8 +34997,11 @@
       }
     },
 	"12332" : {
-      "Nickname" : "~WIP~ Sea Spirit Boat"
-    },
+	  "NPC" : {
+		"Captain Dudi": 1
+	  },
+	  "Nickname" : "Sea Spirit Boat"
+	},
     "12335" : {
       "Object" : {
         "Oak" : 3,
@@ -35783,11 +35813,67 @@
       }
     },
 	"12587" : {
-      "Nickname" : "~WIP~ South Unkah Ruins"
-    },
+	  "Monster" : {
+	    "Billy Goat": 5,
+		"Goat": 5
+	  },
+	  "Nickname" : "South Unkah Ruins",
+	  "Object" : {
+	    "Fishing spot (cage, harpoon)": 3,
+		"Kharidian cactus(healthy)": 36
+	  }
+	},
 	"12588" : {
-      "Nickname" : "~WIP~ Ruins of Unkah"
-    },
+	  "Monster" : {
+	    "Crocodile": 4,
+	    "Scorpion": 6,
+	    "Seagull": 4
+	  },
+	  "NPC" : {
+	    "Captain Pudi": 1,
+	    "Ferryman Nathwood": 1,
+	    "Gita Prymes": 1,
+	    "Ishmael": 1,
+	    "Koanee": 1,
+	    "Lauretta": 1,
+	    "Retired sailor": 1,
+	    "Sailor": 1,
+	    "Shantay Guard": 2,
+		"Spirit Angler": 5,
+		"Taiman": 1,
+		"Timallus": 1
+	  },
+	  "Nickname" : "Ruins of Unkah",
+	  "Object" : {
+	    "Bank chest": 1,
+	    "Bank deposit box": 1,
+	    "Book table": 1,
+	    "Coal rock": 1,
+	    "Copper rock": 1,
+		"Ferry": 1,
+		"Fire": 2,
+		"Iron rock": 5,
+		"Kharidian cactus(healthy)": 25,
+		"Poll booth": 1,
+		"Shantay pass": 2,
+		"Silver rock": 2,
+		"Spirit Angler stats": 1,
+		"Tin rock": 1
+	  },
+	  "Shop" : {
+		"Ishmael's Fish He Sells": true
+	  },
+	  "Spawn" : {
+	    "Bronze pickaxe": 1,
+		"Fishing rod": 1,
+		"Harpoon": 1,
+		"Iron dagger": 1,
+		"Lobster pot": 1,
+		"Rope": 1,
+		"Small fishing net": 1,
+		"Waterskin(0)": 1
+	  }
+	},
     "12589" : {
       "Connect" : {
         "12433" : true
@@ -38213,6 +38299,7 @@
         "Dommik" : 1,
         "Ellis" : 1,
         "Father Reen" : 1,
+		"Ferryman Sathwood": 1,
         "Hassan" : 1,
         "Karim" : 1,
         "Louie Legs" : 1,
@@ -38232,6 +38319,7 @@
         "Closed chest" : 6,
         "Crate" : 14,
         "Drawers" : 3,
+		"Ferry": 1,
         "Fireplace" : 1,
         "Fishing spot (small net, bait)" : 2,
         "Fountain" : 1,
@@ -60614,6 +60702,9 @@
       "Raw swordfish" : true,
       "Raw tuna" : true
     },
+	"Fishing spot (Tempoross)" : {
+		"Raw harpoonfish" : true
+	},
     "Fishing spot (aerial fishing)" : {
       "Bluegill" : true,
       "Common tench" : true,
@@ -62761,6 +62852,18 @@
     "Irksol (Shop)" : {
       "Ruby ring" : true
     },
+	"Ishmael's Fish He Sells": {
+	  "Bait pack" : true,
+      "Feather" : true,
+      "Feather pack" : true,
+      "Fishing bait" : true,
+      "Fishing rod" : true,
+      "Fly fishing rod" : true,
+      "Harpoon" : true,
+      "Lobster pot" : true,
+      "Raw sardine" : true,
+      "Small fishing net" : true
+	},
     "Island Fishmonger" : {
       "Bait pack" : true,
       "Big fishing net" : true,
@@ -66301,6 +66404,13 @@
         "Uncut sapphire" : "1/24",
         "Water rune" : "1/27",
         "Youngllef" : "1/800"
+      },
+	  "Reward pool loot" : {
+		"Spirit flake": "Common",
+		"Fish Barrel": "Rare",
+		"Tackle Box": "Rare",
+		"Large harpoonfish": "Rare",
+		"Tome of water": "Rare"
       },
       "Rusty sword loot" : {
         "Black longsword" : "2/96",
