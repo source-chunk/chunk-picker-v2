@@ -17231,7 +17231,7 @@
       },
       "Pickpocket a ~|man|~" : {
         "Level" : 1,
-        "Monsters" : [ "Man" ],
+        "Monsters" : [ "Man+" ],
         "Output" : "Man",
         "Primary" : true
       },
@@ -48610,6 +48610,7 @@
       "Fossil Island wyvern+" : [ "Long-tailed Wyvern", "Spitting Wyvern", "Taloned Wyvern" ],
       "Guard+" : [ "Guard", "Town Guard (Hosidius)" ],
       "Jelly+" : [ "Jelly", "Warped Jelly" ],
+	  "Man+" : [ "Man", "Drunken man" ],
       "Nechryael+" : [ "Nechryael", "Greater Nechryael" ],
       "Pyrefiend+" : [ "Pyrefiend", "Pyrelord" ],
       "Sea snake+" : [ "Sea Snake Hatchling", "Sea Snake Young" ],
