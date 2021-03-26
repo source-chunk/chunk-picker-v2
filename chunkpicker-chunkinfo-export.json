@@ -17163,9 +17163,9 @@
         "Output" : "H%2EA%2EM%2E Member",
         "Primary" : true
       },
-      "Pickpocket a ~|Menaphite thug|~" : {
+      "Pickpocket a ~|Menaphite Thug|~" : {
         "Level" : 65,
-        "Monsters" : [ "Menaphite thug" ],
+        "Monsters" : [ "Menaphite Thug" ],
         "Output" : "Menaphite Thug",
         "Primary" : true
       },
