@@ -17187,9 +17187,9 @@
         "Output" : "Bandit (Pollnivneach)",
         "Primary" : true
       },
-      "Pickpocket a ~|bandit (Pollnivneach)%2FNo Beard|~" : {
+      "Pickpocket a ~|bandit (Pollnivneach)%2FNo beard|~" : {
         "Level" : 55,
-        "Monsters" : [ "Bandit (Pollnivneach)%2FNo Beard" ],
+        "Monsters" : [ "Bandit (Pollnivneach)%2FNo beard" ],
         "Output" : "Bandit (Pollnivneach)",
         "Primary" : true
       },
