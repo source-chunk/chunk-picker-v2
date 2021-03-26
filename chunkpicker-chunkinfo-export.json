@@ -26304,6 +26304,7 @@
       },
       "Quest" : {
         "Dragon Slayer II" : "step",
+		"Dwarf Cannon" : "step",
         "Roving Elves" : "step",
         "Waterfall Quest" : "first"
       },
@@ -60935,7 +60936,7 @@
     "Dragon Slayer II" : "5943, 5944, 8253, 8508, 9023, 9772, 10038, 10291, 10553, 11314, 11565, 11569, 11828, 12340, 12854, 13099, 14142, 14646, 14652, 14907, 14908, Ancient Cavern, Lithkren Vault, Crandor and Karamja Dungeon, Ungael Laboratory, Shayzien Crypts",
     "Dream Mentor" : "8253, 8508, 8509, Lunar Isle mine",
     "Druidic Ritual" : "11573, 11574, Taverly Dungeon & Entrana Dungeon",
-    "Dwarf Cannon" : "10292, 10293, 10294, 12085, Goblin Cave",
+    "Dwarf Cannon" : "10292, 10038, 10293, 10294, 12085, Goblin Cave",
     "Eadgar's Ruse" : "10291, 11321, 11573, 11577, Troll Stronghold",
     "Eagles' Peak" : "9270, 10291, 13109, Eagles' Peak Dungeon",
     "Elemental Workshop I" : "10806, Elemental Workshop",
