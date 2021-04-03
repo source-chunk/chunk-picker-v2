@@ -7165,46 +7165,10 @@
         "Level" : 64,
         "Primary" : false
       },
-      "String a ~|diamond amulet (u)|~" : {
-        "Items" : [ "Diamond amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Diamond amulet",
-        "Primary" : true
-      },
-      "String a ~|gold amulet|~" : {
-        "Items" : [ "Gold amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Gold amulet",
-        "Primary" : true
-      },
-      "String a ~|jade amulet (u)|~" : {
-        "Items" : [ "Jade amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Jade amulet",
-        "Primary" : true
-      },
       "String a ~|rabbit-foot necklace|~" : {
         "Items" : [ "Rabbit foot", "Ball of wool" ],
         "Level" : 37,
         "Output" : "Rabbit-foot necklace",
-        "Primary" : true
-      },
-      "String a ~|ruby amulet (u)|~" : {
-        "Items" : [ "Ruby amulet (u)", "Ball of wool" ],
-        "Level" : 50,
-        "Output" : "Ruby amulet",
-        "Primary" : true
-      },
-      "String a ~|sapphire amulet (u)|~" : {
-        "Items" : [ "Sapphire amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Sapphire amulet",
-        "Primary" : true
-      },
-      "String a ~|topaz amulet (u)|~" : {
-        "Items" : [ "Topaz amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Topaz amulet",
         "Primary" : true
       },
       "String a ~|unstrung emblem|~" : {
@@ -7217,30 +7181,6 @@
         "Items" : [ "Unstrung symbol", "Ball of wool" ],
         "Level" : 16,
         "Output" : "Unblessed symbol",
-        "Primary" : true
-      },
-      "String a ~|zenyte amulet (u)|~" : {
-        "Items" : [ "Zenyte amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Zenyte amulet",
-        "Primary" : true
-      },
-      "String an ~|emerald amulet (u)|~" : {
-        "Items" : [ "Emerald amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Emerald amulet",
-        "Primary" : true
-      },
-      "String an ~|onyx amulet (u)|~" : {
-        "Items" : [ "Onyx amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Onyx amulet",
-        "Primary" : true
-      },
-      "String an ~|opal amulet (u)|~" : {
-        "Items" : [ "Opal amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Opal amulet",
         "Primary" : true
       }
     },
