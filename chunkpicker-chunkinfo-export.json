@@ -5029,7 +5029,7 @@
         "Output" : "Dragonfruit pie",
         "Primary" : true
       },
-      "Bake a ~|egg potato|~" : {
+      "Bake an ~|egg potato|~" : {
         "Items" : [ "Potato with butter", "Tomato", "Scrambled egg" ],
         "Level" : 51,
         "Output" : "Egg potato",
@@ -6612,14 +6612,14 @@
         "Output" : "Trident of the swamp",
         "Primary" : true
       },
-      "Craft a ~|unstrung emblem|~" : {
+      "Craft an ~|unstrung emblem|~" : {
         "Items" : [ "Silver bar", "Unholy mould" ],
         "Level" : 17,
         "Objects" : [ "Furnace+" ],
         "Output" : "Unstrung emblem",
         "Primary" : true
       },
-      "Craft a ~|unstrung symbol|~" : {
+      "Craft an ~|unstrung symbol|~" : {
         "Items" : [ "Silver bar", "Holy mould" ],
         "Level" : 16,
         "Objects" : [ "Furnace+" ],
@@ -7171,13 +7171,13 @@
         "Output" : "Rabbit-foot necklace",
         "Primary" : true
       },
-      "String a ~|unstrung emblem|~" : {
+      "String an ~|unstrung emblem|~" : {
         "Items" : [ "Unstrung emblem", "Ball of wool" ],
         "Level" : 17,
         "Output" : "Unpowered emblem",
         "Primary" : true
       },
-      "String a ~|unstrung symbol|~" : {
+      "String an ~|unstrung symbol|~" : {
         "Items" : [ "Unstrung symbol", "Ball of wool" ],
         "Level" : 16,
         "Output" : "Unblessed symbol",
@@ -9568,7 +9568,7 @@
         "Level" : 47,
         "Primary" : true
       },
-      "Fletch a ~|oak stock|~" : {
+      "Fletch an ~|oak stock|~" : {
         "Items" : [ "Knife", "Oak logs" ],
         "Level" : 24,
         "Output" : "Oak stock",
@@ -10275,7 +10275,7 @@
         "Output" : "Zamorak brew(3)",
         "Primary" : true
       },
-      "Mix a ~|anti-poison supermix|~" : {
+      "Mix an ~|anti-poison supermix|~" : {
         "Items" : [ "Superantipoison(3)", "Caviar" ],
         "Level" : 51,
         "Primary" : true
@@ -10433,7 +10433,7 @@
         "Level" : 58,
         "Primary" : true
       },
-      "Mix a ~|irit potion (unf)|~" : {
+      "Mix an ~|irit potion (unf)|~" : {
         "Items" : [ "Irit leaf", "Vial of water" ],
         "Level" : 44,
         "Output" : "Irit potion (unf)",
@@ -10679,7 +10679,7 @@
         "Output" : "Torstol potion (unf)",
         "Primary" : false
       },
-      "Mix a ~|unfinished potion (Rogue's Purse)|~" : {
+      "Mix an ~|unfinished potion (Rogue's Purse)|~" : {
         "Items" : [ "Rogue's purse", "Vial of water" ],
         "Level" : 8,
         "Output" : "Unfinished potion (Rogue's Purse)",
@@ -15971,7 +15971,7 @@
         "Monsters" : [ "Hydra" ],
         "Primary" : false
       },
-      "Slay a ~|infernal mage|~" : {
+      "Slay an ~|infernal mage|~" : {
         "Level" : 45,
         "Monsters" : [ "Infernal Mage" ],
         "Primary" : false
@@ -16133,7 +16133,7 @@
         "Level" : 1,
         "Primary" : false
       },
-      "Wear a ~|earmuffs|~" : {
+      "Wear ~|earmuffs|~" : {
         "Category" : [ "Slayer Equipment" ],
         "Items" : [ "Earmuffs" ],
         "Level" : 15,
