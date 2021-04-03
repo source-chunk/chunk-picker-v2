@@ -14507,6 +14507,11 @@
       }
     },
     "Prayer" : {
+	  "Access the upper floor of the ~|Edgeville Monastery|~" : {
+        "Chunks" : [ "12086" ],
+        "Level" : 31,
+        "Primary" : false
+      },
       "Activate ~|Augury|~" : {
         "Items" : [ "Arcane prayer scroll" ],
         "Level" : 77,
@@ -29195,7 +29200,8 @@
         "Holy Grail" : "step"
       },
       "Spawn" : {
-        "Cake" : 1
+        "Cake" : 1,
+		"Gold ore" : 1
       }
     },
     "10803" : {
