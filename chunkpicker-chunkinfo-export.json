@@ -17882,7 +17882,7 @@
         "Nettles" : 10,
         "Oak" : 16,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Shelves" : 1,
         "Sink" : 1,
         "Tree" : 21,
@@ -18978,7 +18978,7 @@
         "Crate" : 9,
         "Crates" : 4,
         "Evergreen" : 5,
-        "Rod Fishing spot (lure, bait)" : 3,
+        "Fishing spot (lure, bait)" : 3,
         "STASH (elite)" : 1,
         "Stairs" : 2,
         "Tree" : 1
@@ -19303,7 +19303,7 @@
         "Oak" : 16,
         "Pinboard" : 1,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Spinning wheel" : 1,
         "Stepping stone" : 2,
         "Stile" : 1,
@@ -19810,7 +19810,7 @@
         "Crate" : 9,
         "Dead tree" : 5,
         "Oak" : 20,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Rotten Apple Pile" : 8,
         "Tree" : 46
       }
@@ -19846,7 +19846,7 @@
         "Oak" : 17,
         "Oven" : 2,
         "Range" : 2,
-        "Rod Fishing spot (lure, bait)" : 3,
+        "Fishing spot (lure, bait)" : 3,
         "Sink" : 6,
         "Tree" : 41,
         "Yew" : 5,
@@ -22852,7 +22852,7 @@
         "Leaves" : 9,
         "Log balance" : 2,
         "Loom" : 1,
-        "Rod Fishing spot (lure, bait)" : 4,
+        "Fishing spot (lure, bait)" : 4,
         "STASH (master)" : 1,
         "Sticks" : 1,
         "Tree" : 106
@@ -23180,7 +23180,7 @@
         "Fire remains" : 1,
         "Leaves" : 18,
         "Log balance" : 4,
-        "Rod Fishing spot (lure, bait)" : 5,
+        "Fishing spot (lure, bait)" : 5,
         "Sticks" : 2,
         "Tree" : 138,
         "Tripwire" : 3
@@ -24204,7 +24204,7 @@
         "Flax" : 24,
         "Magic tree" : 1,
         "Oak" : 23,
-        "Rod Fishing spot (lure, bait)" : 7,
+        "Fishing spot (lure, bait)" : 7,
         "Tree" : 75,
         "Willow" : 10
       },
@@ -25047,7 +25047,7 @@
         "Orrery" : 1,
         "Potential fire" : 1,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 5,
+        "Fishing spot (lure, bait)" : 5,
         "STASH (medium)" : 1,
         "Stairs" : 4,
         "Star chart" : 8,
@@ -25515,7 +25515,7 @@
       },
       "Name" : "Mor Ul Rek",
       "Object" : {
-        "Rod Fishing spot" : 3
+        "Fishing spot" : 3
       },
       "Shop" : {
         "TzHaar-Hur-Zal's Equipment Store" : true
@@ -26201,7 +26201,7 @@
         "Hay bales" : 1,
         "Haystack" : 1,
         "Oak" : 17,
-        "Rod Fishing spot (lure, bait)" : 6,
+        "Fishing spot (lure, bait)" : 6,
         "Tree" : 34
       },
       "Quest" : {
@@ -26528,7 +26528,7 @@
         "Coal rock" : 4,
         "Gold rock" : 7,
         "Iron rock" : 3,
-        "Rod Fishing spot" : 2,
+        "Fishing spot" : 2,
         "Runite rock" : 3,
         "Shop Counter" : 2,
         "Silver rock" : 6
@@ -27340,7 +27340,7 @@
         "Mud patch" : 3,
         "Oak" : 9,
         "Potato" : 5,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Sink" : 1,
         "Tree" : 9,
         "Wheat" : 2,
@@ -28714,7 +28714,7 @@
         "Oak" : 14,
         "Potato" : 66,
         "Range" : 1,
-        "Rod Fishing spot" : 3,
+        "Fishing spot" : 3,
         "Tree" : 49,
         "Wheat" : 60
       },
@@ -29398,7 +29398,7 @@
         "Oak" : 1,
         "Potato" : 5,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 4,
+        "Fishing spot (lure, bait)" : 4,
         "STASH (easy)" : 1,
         "Sacks" : 2,
         "Sinclair family beehive" : 1,
@@ -29811,7 +29811,7 @@
         "Fire remains" : 1,
         "Leaves" : 18,
         "Log balance" : 4,
-        "Rod Fishing spot" : 5,
+        "Fishing spot" : 5,
         "Sticks" : 2,
         "Tree" : 138,
         "Tripwire" : 3
@@ -31076,7 +31076,7 @@
         "Broken cart" : 1,
         "Crate" : 2,
         "Gem rock" : 7,
-        "Rod Fishing spot (lure, bait)" : 3,
+        "Fishing spot (lure, bait)" : 3,
         "STASH (hard)" : 1,
         "Sand" : 3,
         "Stepping stone" : 1,
@@ -31252,7 +31252,7 @@
         "Oak" : 6,
         "Potato" : 6,
         "Range" : 3,
-        "Rod Fishing spot (lure, bait)" : 4,
+        "Fishing spot (lure, bait)" : 4,
         "STASH (master)" : 1,
         "Sand pit" : 1,
         "Tree" : 28,
@@ -35274,7 +35274,7 @@
         "Oak" : 8,
         "Potter's Wheel" : 2,
         "Pottery Oven" : 1,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "STASH (medium)" : 1,
         "Sacks" : 2,
         "Spinning wheel" : 1,
@@ -36982,7 +36982,7 @@
         "Fountain" : 2,
         "Furnace" : 1,
         "Oak" : 7,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Rusted anvil" : 1,
         "STASH (beginner)" : 1,
         "Sacks" : 5,
@@ -37549,7 +37549,7 @@
         "Leaves" : 9,
         "Log balance" : 2,
         "Loom" : 1,
-        "Rod Fishing spot" : 4,
+        "Fishing spot" : 4,
         "STASH (master)" : 1,
         "Sticks" : 1,
         "Tree" : 106
@@ -38808,7 +38808,7 @@
         "Fire remains" : 1,
         "Leaves" : 18,
         "Log balance" : 4,
-        "Rod Fishing spot" : 5,
+        "Fishing spot" : 5,
         "Sticks" : 2,
         "Tree" : 138,
         "Tripwire" : 3
@@ -39682,7 +39682,7 @@
       "Name" : "Water Ravine Dungeon",
       "Object" : {
         "Fire" : 1,
-        "Rod Fishing spot" : 7
+        "Fishing spot" : 7
       }
     },
     "13462" : {
@@ -44193,7 +44193,7 @@
         "Oak" : 14,
         "Potato" : 66,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 3,
+        "Fishing spot (lure, bait)" : 3,
         "Tree" : 49,
         "Wheat" : 60
       },
@@ -45597,7 +45597,7 @@
         "Gold rock" : 10,
         "Iron rock" : 3,
         "Lava forge" : 2,
-        "Rod Fishing spot (infernal eel)" : 5,
+        "Fishing spot (infernal eel)" : 5,
         "Runite rock" : 3,
         "STASH (master)" : 1,
         "STASH (medium)" : 1,
@@ -47723,7 +47723,7 @@
       },
       "Object" : {
         "Fire" : 1,
-        "Rod Fishing spot (lure, bait)" : 7
+        "Fishing spot (lure, bait)" : 7
       },
       "Quest" : {
         "Spirits of the Elid" : "step"
@@ -60792,11 +60792,11 @@
     "Redwood" : {
       "Redwood logs" : true
     },
-    "Rod Fishing spot (infernal eel)" : {
+    "Fishing spot (infernal eel)" : {
       "Lava scale shard" : true,
       "Onyx bolt tips" : true
     },
-    "Rod Fishing spot (lure, bait)" : {
+    "Fishing spot (lure, bait)" : {
       "Raw pike" : true,
       "Raw rainbow fish" : true,
       "Raw salmon" : true,
