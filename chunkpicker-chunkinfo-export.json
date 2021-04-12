@@ -17305,6 +17305,13 @@
         "Output" : "Sorceress",
         "Primary" : true
       },
+	  "Steal artifacts for ~|Captain Khaled|~" : {
+        "Chunks" : [ "7226", "6970" ],
+		"Items" : [ "Lockpick+" ],
+        "Level" : 49,
+        "Output" : "Coins",
+        "Primary" : true
+      },
       "Steal from a ~|Shop Counter (gems)|~" : {
         "Chunks" : [ "Mor Ul Rek" ],
         "Level" : 75,
