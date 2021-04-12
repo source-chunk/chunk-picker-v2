@@ -1178,7 +1178,7 @@ var highscoreOptIn = function() {
     userName = $('.username').val();
     setTimeout(function() {
         setUsername(oldUsername);
-        $('.highscoretoggle').text('Change highscores username');
+        $('.highscoretoggle').text('Change chunk stats username');
         $('#highscore-menu').css({'opacity': 0}).hide();
         $('#highscore-menu2').css({'opacity': 1}).show();
         $('#populateButton').attr({'href': 'https://chunk-stats.web.app/user/' + userName});
@@ -3559,7 +3559,7 @@ var loadData = function() {
     
             if (settings['highscoreEnabled']) {
                 userName = snap.val()['userName'];
-                $('.highscoretoggle').text('Change highscores username');
+                $('.highscoretoggle').text('Change chunk stats username');
             }
     
             chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
