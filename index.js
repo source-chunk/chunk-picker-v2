@@ -270,6 +270,10 @@ let processingSkill = {
     "Construction": true,
     "Combat": false
 }
+let questUrl = {
+    "Cook's Assistant": "https://docs.google.com/document/d/1weSK3xoGQiqkYPJL4JYQu_BhxVn2W06kbxuTHYR0s5o/edit#heading=h.myywef2ieubh",
+    "Dragon Slayer 1": "https://docs.google.com/document/d/1weSK3xoGQiqkYPJL4JYQu_BhxVn2W06kbxuTHYR0s5o/edit#heading=h.5f4brbkvkqj6"
+};
 let monsterExists = false;
 let questChunks = [];
 let manualModalOpen = false;
@@ -2006,17 +2010,16 @@ var calcCurrentChallenges = function() {
     let highestChallenge = {};
 
     Object.keys(globalValids).forEach(skill => {
-        if (skill !== 'Extra') {
+        if (skill !== 'Extra' && skill !== 'Quest') {
             let highestCompletedLevel = 0;
             !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
-                //console.log(name);
                 if (chunkInfo['challenges'][skill][name]['Level'] > highestCompletedLevel) {
                     highestCompletedLevel = chunkInfo['challenges'][skill][name]['Level'];
                 }
             });
             checkPrimaryMethod(skill, globalValids, baseChunkData) && Object.keys(globalValids[skill]).forEach(challenge => {
                 if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel) {
-                    if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                    if (((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
                             Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
@@ -2068,6 +2071,7 @@ var calcCurrentChallenges = function() {
 
 // Sets up data for displaying
 setupCurrentChallenges = function(tempChallengeArr) {
+    //console.log(tempChallengeArr);
     if (tempChallengeArr !== false) {
         challengeArr = [];
         Object.keys(tempChallengeArr).sort().forEach(skill => {
@@ -2081,6 +2085,11 @@ setupCurrentChallenges = function(tempChallengeArr) {
         !!globalValids['Extra'] && Object.keys(globalValids['Extra']).forEach(challenge => {
             if ((!backlog['Extra'] || !backlog['Extra'].hasOwnProperty(challenge)) && (!completedChallenges['Extra'] || !completedChallenges['Extra'][challenge])) {
                 challengeArr.push(`<div class="challenge noscroll ${'extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />` + '<span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h"></i></span>') + '</div>');
+            }
+        });
+        !!globalValids['Quest'] && Object.keys(globalValids['Quest']).forEach(challenge => {
+            if ((!backlog['Quest'] || !backlog['Quest'].hasOwnProperty(challenge)) && (!completedChallenges['Quest'] || !completedChallenges['Quest'][challenge]) && globalValids['Quest'][challenge]) {
+                challengeArr.push(`<div class="challenge noscroll ${'quest-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry) && "disabled"} />` + '<span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<b>[Quest] <a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a></b>: <a href="' + questUrl[chunkInfo['challenges']['Quest'][challenge]['BaseQuest']] + '" target="_blank">Step ' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + (viewOnly || inEntry ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h"></i></span>') + '</div>');
             }
         });
         if (challengeArr.length < 1) {
@@ -2158,7 +2167,7 @@ var calcFutureChallenges = function() {
         }
         checkPrimaryMethod(skill, valids, baseChunkDataLocal) && Object.keys(valids[skill]).forEach(challenge => {
             if (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel || (highestCompletedLevel < 1)) {
-                if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                if (((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                     if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                         let tempValid = true;
                         Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
@@ -2294,20 +2303,26 @@ var calcChallenges = function(chunks, baseChunkData) {
                 newValids[skill][challenge] = manualTasks[skill][challenge];
             });
         });
+        let fullyValid;
         Object.keys(newValids).forEach(skill => {
             checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(newValids[skill]).forEach(challenge => {
                 //!!chunkInfo['challenges'][skill][challenge]['Tasks'] && console.log(challenge);
-                !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach(subTask => {
-                    //console.log(subTask);
-                    //console.log(chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]);
-                    //console.log(!!newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask]);
-                    if (!newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask]) {
+                fullyValid = true;
+                !!chunkInfo['challenges'][skill][challenge]['Tasks'] && chunkInfo['challenges'][skill][challenge]['Tasks'].forEach(subTask => {
+                    if (!newValids[skill].hasOwnProperty(subTask)) {
+                        fullyValid = false;
                         delete newValids[skill][challenge];
                         if (Object.keys(newValids[skill]).length <= 0) {
                             delete newValids[skill];
                         }
                     }
                 });
+                if (fullyValid) {
+                    !!chunkInfo['challenges'][skill][challenge]['Tasks'] && chunkInfo['challenges'][skill][challenge]['Tasks'].forEach(subTask => {
+                        //console.log('settin to false ' + subTask);
+                        newValids[skill][subTask] = false;
+                    });
+                }
             });
         });
     } while (!_.isEqual(valids, newValids) && i < 5);
@@ -2359,7 +2374,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
         });
     }
 
-    !!chunkInfo['challenges'] && [...skillNames, 'Nonskill'].forEach(skill => {
+    !!chunkInfo['challenges'] && [...skillNames, 'Nonskill', 'Quest'].forEach(skill => {
         tempItemSkill[skill] = {};
         valids[skill] = {};
         !!chunkInfo['challenges'][skill] && Object.keys(chunkInfo['challenges'][skill]).sort(function(a, b){return chunkInfo['challenges'][skill][a]['Level']-chunkInfo['challenges'][skill][b]['Level']}).forEach(name => {
@@ -2716,7 +2731,11 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             });
             if (validChallenge) {
                 if (!processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items']) {
-                    valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                    if (skill !== 'Quest') {
+                        valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                    } else {
+                        valids[skill][name] = true;
+                    }
                 } else {
                     let itemList = [];
                     !!chunkInfo['challenges'][skill][name]['Items'] && chunkInfo['challenges'][skill][name]['Items'].forEach(item => {
@@ -2815,6 +2834,9 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     extraOutputItems[skill][name] = challenge['Output'];
                 }
                 if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
+                    lowestItem = challenge;
+                    lowestName = name;
+                } else if (lowestItem['Level'] === challenge['Level'] && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem['Priority'])) {
                     lowestItem = challenge;
                     lowestName = name;
                 }
@@ -3042,8 +3064,9 @@ var openBacklogContextMenu = function(challenge, skill) {
     if (backlogContextMenuChallengeOld !== challenge) {
         backlogContextMenuChallenge = challenge;
         backlogContextMenuSkill = skill;
-        let x = event.pageX + $(".backlog-context-menu").width() + 5 > $(window).width() ? $(window).width() - $(".backlog-context-menu").width() - 5 : event.pageX - 5;
-        let y = event.pageY + $(".backlog-context-menu").height() + 5 > $(window).height() ? $(window).height() - $(".backlog-context-menu").height() - 5 : event.pageY - 5;
+        let dims = getBrowserDim();
+        let x = event.pageX + $(".backlog-context-menu").width() + 5 > dims['w'] ? dims['w'] - $(".backlog-context-menu").width() - 5 : event.pageX - 5;
+        let y = event.pageY + $(".backlog-context-menu").height() + 5 > dims['h'] ? dims['h'] - $(".backlog-context-menu").height() - 5 : event.pageY - 5;
         $(".backlog-context-menu").finish().toggle(100).css({
             top: y + "px",
             left: x + "px"

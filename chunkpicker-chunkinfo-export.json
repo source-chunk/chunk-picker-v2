@@ -6192,7 +6192,8 @@
         "Level" : 43,
         "Objects" : [ "Furnace+" ],
         "Output" : "Diamond ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|dragon necklace|~" : {
         "Items" : [ "Dragonstone", "Gold bar", "Necklace mould" ],
@@ -6213,7 +6214,8 @@
         "Level" : 55,
         "Objects" : [ "Furnace+" ],
         "Output" : "Dragonstone ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|drift net|~" : {
         "Items" : [ "Jute fibre" ],
@@ -6318,7 +6320,8 @@
         "Level" : 14,
         "Objects" : [ "Furnace+" ],
         "Output" : "Jade ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|lantern lens|~" : {
         "Items" : [ "Molten glass", "Glassblowing pipe" ],
@@ -6434,7 +6437,8 @@
         "Level" : 34,
         "Objects" : [ "Furnace+" ],
         "Output" : "Ruby ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|sapphire amulet (u)|~" : {
         "Items" : [ "Sapphire", "Gold bar", "Amulet mould" ],
@@ -6462,7 +6466,8 @@
         "Level" : 20,
         "Objects" : [ "Furnace+" ],
         "Output" : "Sapphire ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|serpentine helm|~" : {
         "Items" : [ "Chisel", "Serpentine visage" ],
@@ -6482,7 +6487,8 @@
         "Level" : 75,
         "Objects" : [ "Furnace+" ],
         "Output" : "Slayer ring (eternal)",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|slayer ring|~" : {
         "Category" : [ "Slayer Equipment" ],
@@ -6490,7 +6496,8 @@
         "Level" : 75,
         "Objects" : [ "Furnace+" ],
         "Output" : "Slayer ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Craft a ~|snakeskin bandana|~" : {
         "Items" : [ "Snakeskin", "Needle", "Thread" ],
@@ -6598,7 +6605,8 @@
         "Level" : 16,
         "Objects" : [ "Furnace+" ],
         "Output" : "Topaz ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|toxic staff of the dead|~" : {
         "Items" : [ "Uncharged trident", "Magic fang", "Chisel" ],
@@ -6694,7 +6702,8 @@
         "Level" : 89,
         "Objects" : [ "Furnace+" ],
         "Output" : "Zenyte ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft an ~|air battlestaff|~" : {
         "Items" : [ "Air orb", "Battlestaff" ],
@@ -6734,7 +6743,8 @@
         "Level" : 27,
         "Objects" : [ "Furnace+" ],
         "Output" : "Emerald ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft an ~|empty candle lantern|~" : {
         "Items" : [ "Molten glass", "Glassblowing pipe" ],
@@ -6867,21 +6877,21 @@
       "Craft an ~|unfired bowl|~" : {
         "Items" : [ "Soft clay" ],
         "Level" : 8,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired bowl",
         "Primary" : true
       },
       "Craft an ~|unfired pie dish|~" : {
         "Items" : [ "Soft clay" ],
         "Level" : 7,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired pie dish",
         "Primary" : true
       },
       "Craft an ~|unfired plant pot|~" : {
         "Items" : [ "Soft clay" ],
         "Level" : 19,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired plant pot",
         "Primary" : true
       },
@@ -6889,14 +6899,14 @@
         "Chunks" : [ "11310", "12341" ],
         "Items" : [ "Soft clay" ],
         "Level" : 25,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired pot lid",
         "Primary" : true
       },
       "Craft an ~|unfired pot|~" : {
         "Items" : [ "Soft clay*" ],
         "Level" : 1,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired pot",
         "Primary" : true
       },
@@ -7072,61 +7082,71 @@
         "Items" : [ "Chisel", "Uncut diamond" ],
         "Level" : 43,
         "Output" : "Diamond",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|dragonstone|~" : {
         "Items" : [ "Chisel", "Uncut dragonstone" ],
         "Level" : 55,
         "Output" : "Dragonstone",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|jade|~" : {
         "Items" : [ "Chisel", "Uncut jade" ],
         "Level" : 13,
         "Output" : "Jade",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|red topaz|~" : {
         "Items" : [ "Chisel", "Uncut red topaz" ],
         "Level" : 16,
         "Output" : "Red topaz",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|ruby|~" : {
         "Items" : [ "Chisel", "Uncut ruby" ],
         "Level" : 34,
         "Output" : "Ruby",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|sapphire|~" : {
         "Items" : [ "Chisel", "Uncut sapphire" ],
         "Level" : 20,
         "Output" : "Sapphire",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|zenyte|~" : {
         "Items" : [ "Chisel", "Uncut zenyte" ],
         "Level" : 89,
         "Output" : "Zenyte",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut an ~|emerald|~" : {
         "Items" : [ "Chisel", "Uncut emerald" ],
         "Level" : 27,
         "Output" : "Emerald",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut an ~|onyx|~" : {
         "Items" : [ "Chisel", "Uncut onyx" ],
         "Level" : 67,
         "Output" : "Onyx",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut an ~|opal|~" : {
         "Items" : [ "Chisel", "Uncut opal*" ],
         "Level" : 1,
         "Output" : "Opal",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Extract sinew from a ~|damaged monkey tail|~" : {
         "Items" : [ "Damaged monkey tail", "Knife" ],
@@ -15918,7 +15938,8 @@
       "Slay a ~|cave kraken|~" : {
         "Level" : 87,
         "Monsters" : [ "Cave kraken" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay a ~|cave slime|~" : {
         "Level" : 17,
@@ -15963,7 +15984,8 @@
       "Slay a ~|gargoyle|~" : {
         "Level" : 75,
         "Monsters" : [ "Gargoyle" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay a ~|harpy bug swarm|~" : {
         "Level" : 33,
@@ -15973,7 +15995,8 @@
       "Slay a ~|hydra|~" : {
         "Level" : 95,
         "Monsters" : [ "Hydra" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay an ~|infernal mage|~" : {
         "Level" : 45,
@@ -16038,7 +16061,8 @@
       "Slay a ~|smoke devil|~" : {
         "Level" : 93,
         "Monsters" : [ "Smoke devil" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay a ~|spiritual mage|~" : {
         "Level" : 83,
@@ -16088,7 +16112,8 @@
       "Slay an ~|abyssal demon|~" : {
         "Level" : 85,
         "Monsters" : [ "Abyssal demon" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay an ~|ancient wyvern|~" : {
         "Level" : 82,
@@ -16099,31 +16124,36 @@
         "Category" : [ "Boss" ],
         "Chunks" : [ "Abyssal Nexus" ],
         "Level" : 85,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay the ~|Alchemical Hydra|~" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Karuulm Slayer Dungeon" ],
         "Level" : 95,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay the ~|Grotesque Guardians|~" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Grotesque Guardians' Lair" ],
         "Level" : 75,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay the ~|Kraken|~" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Kraken Cove" ],
         "Level" : 87,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay the ~|thermonuclear smoke devil|~" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Smoke Devil Dungeon" ],
         "Level" : 93,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay ~|Cerberus|~" : {
         "Category" : [ "Boss" ],
@@ -22280,7 +22310,7 @@
       "Nickname" : "Isle Pottery Base",
       "Object" : {
         "Fishing spot (small net, bait)" : 1,
-        "Potter's wheel" : 1,
+        "Potter's Wheel" : 1,
         "Tree" : 35,
         "Well" : 1
       },
@@ -38070,7 +38100,7 @@
         "Craft stall" : 1,
         "Crate" : 1,
         "Hole" : 1,
-        "Potter's wheel" : 1,
+        "Potter's Wheel" : 1,
         "STASH (hard)" : 1,
         "Sink" : 4,
         "Spice stall" : 1,
