@@ -797,6 +797,13 @@ $(document).on({
                 !onMobile && $('.panel-active').html('Calculating...');
                 challengePanelVis['active'] && !onMobile && toggleChallengesPanel('active');
             }
+            if (isPicking) {
+                $('.pick').text('Pick for me');
+            } else if (unlockedChunks === 0 && selectedChunks === 0) {
+                $('.pick').text('Random Start?');
+            } else  {
+                $('.pick').text('Pick Chunk');
+            }
             setData();
             chunkBorders();
         }
@@ -847,12 +854,13 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || (unlockedChunks !== 0 && selectedChunks === 0)) {
         return;
     }
     var el;
     var rand;
     var sNum;
+    let didRandomStart = false;
     if (both && isPicking) {
         for (let temp = 0; temp < 2; temp++) {
             el = $('.potential');
@@ -906,6 +914,17 @@ var pick = function(both) {
         setData();
         chunkBorders();
         return;
+    } else if (unlockedChunks === 0 && selectedChunks === 0) {
+        chunkInfo['walkableChunks'].forEach(id => {
+            $('.box:contains(' + id + ')').addClass('walkable');
+        });
+        el = $('.walkable');
+        rand = Math.floor(Math.random() * el.length);
+        sNum = $($(el[rand]).children()[1]).text();
+        selectedChunks++;
+        didRandomStart = true;
+        $(el[rand]).addClass('unlocked recent').removeClass('gray walkable').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>");
+        $('.pick').text('Pick Chunk');
     } else if (!isPicking) {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
@@ -926,7 +945,7 @@ var pick = function(both) {
     if (el.length < 300) {
         fixNums(sNum);
     }
-    autoSelectNeighbors && selectNeighbors(el[rand]);
+    autoSelectNeighbors && !didRandomStart && selectNeighbors(el[rand]);
     autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected').empty().append("<span class='chunkId'>" + (Math.floor(el[rand].id % rowSize) * (skip + rowSize) - Math.floor(el[rand].id / rowSize) + startingIndex) + "</span>") && (selectedChunks = 1) && (selectedNum = 1);
     $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
     $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
@@ -3603,6 +3622,8 @@ var loadData = function() {
                 $('.pick').text('Pick for me');
                 $('.roll2').text('Unlock both');
                 isPicking = true;
+            } else if (unlockedChunks === 0 && selectedChunks === 0) {
+                $('.pick').text('Random Start?');
             }
             chunkBorders();
             chunkTasksOn && calcCurrentChallenges();
