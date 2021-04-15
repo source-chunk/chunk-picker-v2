@@ -1007,6 +1007,11 @@
           "Strength" : 40
         }
       },
+	  "Wield a ~|barronite mace|~" : {
+        "Items" : [ "Barronite mace" ],
+        "Level" : 40,
+        "Primary" : false
+      },
       "Wield a ~|battlestaff|~ variation" : {
         "Items" : [ "Battlestaff+" ],
         "Level" : 30,
@@ -5029,7 +5034,7 @@
         "Output" : "Dragonfruit pie",
         "Primary" : true
       },
-      "Bake a ~|egg potato|~" : {
+      "Bake an ~|egg potato|~" : {
         "Items" : [ "Potato with butter", "Tomato", "Scrambled egg" ],
         "Level" : 51,
         "Output" : "Egg potato",
@@ -5856,6 +5861,34 @@
         "Level" : 18,
         "Output" : "Wizard blizzard",
         "Primary" : true
+      },
+	  "Prepare a ~|catfish|~" : {
+        "Items" : [ "Raw catfish", "Knife" ],
+        "Level" : 46,
+        "Objects" : [ "Preperation Table" ],
+        "Output" : "Catfish",
+        "Primary" : true
+      },
+	  "Prepare a ~|cavefish|~" : {
+        "Items" : [ "Raw cavefish", "Knife" ],
+        "Level" : 20,
+        "Objects" : [ "Preperation Table" ],
+        "Output" : "Cavefish",
+        "Primary" : true
+      },
+	  "Prepare a ~|guppy|~" : {
+        "Items" : [ "Raw guppy", "Knife" ],
+        "Level" : 7,
+        "Objects" : [ "Preperation Table" ],
+        "Output" : "Guppy",
+        "Primary" : true
+      },
+	  "Prepare a ~|tetra|~" : {
+        "Items" : [ "Raw tetra", "Knife" ],
+        "Level" : 33,
+        "Objects" : [ "Preperation Table" ],
+        "Output" : "Tetra",
+        "Primary" : true
       }
     },
     "Crafting" : {
@@ -6192,7 +6225,8 @@
         "Level" : 43,
         "Objects" : [ "Furnace+" ],
         "Output" : "Diamond ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|dragon necklace|~" : {
         "Items" : [ "Dragonstone", "Gold bar", "Necklace mould" ],
@@ -6213,7 +6247,8 @@
         "Level" : 55,
         "Objects" : [ "Furnace+" ],
         "Output" : "Dragonstone ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|drift net|~" : {
         "Items" : [ "Jute fibre" ],
@@ -6318,7 +6353,8 @@
         "Level" : 14,
         "Objects" : [ "Furnace+" ],
         "Output" : "Jade ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|lantern lens|~" : {
         "Items" : [ "Molten glass", "Glassblowing pipe" ],
@@ -6434,7 +6470,8 @@
         "Level" : 34,
         "Objects" : [ "Furnace+" ],
         "Output" : "Ruby ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|sapphire amulet (u)|~" : {
         "Items" : [ "Sapphire", "Gold bar", "Amulet mould" ],
@@ -6462,7 +6499,8 @@
         "Level" : 20,
         "Objects" : [ "Furnace+" ],
         "Output" : "Sapphire ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|serpentine helm|~" : {
         "Items" : [ "Chisel", "Serpentine visage" ],
@@ -6482,7 +6520,8 @@
         "Level" : 75,
         "Objects" : [ "Furnace+" ],
         "Output" : "Slayer ring (eternal)",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|slayer ring|~" : {
         "Category" : [ "Slayer Equipment" ],
@@ -6490,7 +6529,8 @@
         "Level" : 75,
         "Objects" : [ "Furnace+" ],
         "Output" : "Slayer ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Craft a ~|snakeskin bandana|~" : {
         "Items" : [ "Snakeskin", "Needle", "Thread" ],
@@ -6598,7 +6638,8 @@
         "Level" : 16,
         "Objects" : [ "Furnace+" ],
         "Output" : "Topaz ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft a ~|toxic staff of the dead|~" : {
         "Items" : [ "Uncharged trident", "Magic fang", "Chisel" ],
@@ -6612,14 +6653,14 @@
         "Output" : "Trident of the swamp",
         "Primary" : true
       },
-      "Craft a ~|unstrung emblem|~" : {
+      "Craft an ~|unstrung emblem|~" : {
         "Items" : [ "Silver bar", "Unholy mould" ],
         "Level" : 17,
         "Objects" : [ "Furnace+" ],
         "Output" : "Unstrung emblem",
         "Primary" : true
       },
-      "Craft a ~|unstrung symbol|~" : {
+      "Craft an ~|unstrung symbol|~" : {
         "Items" : [ "Silver bar", "Holy mould" ],
         "Level" : 16,
         "Objects" : [ "Furnace+" ],
@@ -6694,7 +6735,8 @@
         "Level" : 89,
         "Objects" : [ "Furnace+" ],
         "Output" : "Zenyte ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft an ~|air battlestaff|~" : {
         "Items" : [ "Air orb", "Battlestaff" ],
@@ -6734,7 +6776,8 @@
         "Level" : 27,
         "Objects" : [ "Furnace+" ],
         "Output" : "Emerald ring",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 2
       },
       "Craft an ~|empty candle lantern|~" : {
         "Items" : [ "Molten glass", "Glassblowing pipe" ],
@@ -6867,21 +6910,21 @@
       "Craft an ~|unfired bowl|~" : {
         "Items" : [ "Soft clay" ],
         "Level" : 8,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired bowl",
         "Primary" : true
       },
       "Craft an ~|unfired pie dish|~" : {
         "Items" : [ "Soft clay" ],
         "Level" : 7,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired pie dish",
         "Primary" : true
       },
       "Craft an ~|unfired plant pot|~" : {
         "Items" : [ "Soft clay" ],
         "Level" : 19,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired plant pot",
         "Primary" : true
       },
@@ -6889,14 +6932,14 @@
         "Chunks" : [ "11310", "12341" ],
         "Items" : [ "Soft clay" ],
         "Level" : 25,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired pot lid",
         "Primary" : true
       },
       "Craft an ~|unfired pot|~" : {
         "Items" : [ "Soft clay*" ],
         "Level" : 1,
-        "Objects" : [ "Potter's wheel" ],
+        "Objects" : [ "Potter's Wheel" ],
         "Output" : "Unfired pot",
         "Primary" : true
       },
@@ -7072,61 +7115,71 @@
         "Items" : [ "Chisel", "Uncut diamond" ],
         "Level" : 43,
         "Output" : "Diamond",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|dragonstone|~" : {
         "Items" : [ "Chisel", "Uncut dragonstone" ],
         "Level" : 55,
         "Output" : "Dragonstone",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|jade|~" : {
         "Items" : [ "Chisel", "Uncut jade" ],
         "Level" : 13,
         "Output" : "Jade",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|red topaz|~" : {
         "Items" : [ "Chisel", "Uncut red topaz" ],
         "Level" : 16,
         "Output" : "Red topaz",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|ruby|~" : {
         "Items" : [ "Chisel", "Uncut ruby" ],
         "Level" : 34,
         "Output" : "Ruby",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|sapphire|~" : {
         "Items" : [ "Chisel", "Uncut sapphire" ],
         "Level" : 20,
         "Output" : "Sapphire",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut a ~|zenyte|~" : {
         "Items" : [ "Chisel", "Uncut zenyte" ],
         "Level" : 89,
         "Output" : "Zenyte",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut an ~|emerald|~" : {
         "Items" : [ "Chisel", "Uncut emerald" ],
         "Level" : 27,
         "Output" : "Emerald",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut an ~|onyx|~" : {
         "Items" : [ "Chisel", "Uncut onyx" ],
         "Level" : 67,
         "Output" : "Onyx",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Cut an ~|opal|~" : {
         "Items" : [ "Chisel", "Uncut opal*" ],
         "Level" : 1,
         "Output" : "Opal",
-        "Primary" : true
+        "Primary" : true,
+		"Priority" : 1
       },
       "Extract sinew from a ~|damaged monkey tail|~" : {
         "Items" : [ "Damaged monkey tail", "Knife" ],
@@ -7165,82 +7218,22 @@
         "Level" : 64,
         "Primary" : false
       },
-      "String a ~|diamond amulet (u)|~" : {
-        "Items" : [ "Diamond amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Diamond amulet",
-        "Primary" : true
-      },
-      "String a ~|gold amulet|~" : {
-        "Items" : [ "Gold amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Gold amulet",
-        "Primary" : true
-      },
-      "String a ~|jade amulet (u)|~" : {
-        "Items" : [ "Jade amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Jade amulet",
-        "Primary" : true
-      },
       "String a ~|rabbit-foot necklace|~" : {
         "Items" : [ "Rabbit foot", "Ball of wool" ],
         "Level" : 37,
         "Output" : "Rabbit-foot necklace",
         "Primary" : true
       },
-      "String a ~|ruby amulet (u)|~" : {
-        "Items" : [ "Ruby amulet (u)", "Ball of wool" ],
-        "Level" : 50,
-        "Output" : "Ruby amulet",
-        "Primary" : true
-      },
-      "String a ~|sapphire amulet (u)|~" : {
-        "Items" : [ "Sapphire amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Sapphire amulet",
-        "Primary" : true
-      },
-      "String a ~|topaz amulet (u)|~" : {
-        "Items" : [ "Topaz amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Topaz amulet",
-        "Primary" : true
-      },
-      "String a ~|unstrung emblem|~" : {
+      "String an ~|unstrung emblem|~" : {
         "Items" : [ "Unstrung emblem", "Ball of wool" ],
         "Level" : 17,
         "Output" : "Unpowered emblem",
         "Primary" : true
       },
-      "String a ~|unstrung symbol|~" : {
+      "String an ~|unstrung symbol|~" : {
         "Items" : [ "Unstrung symbol", "Ball of wool" ],
         "Level" : 16,
         "Output" : "Unblessed symbol",
-        "Primary" : true
-      },
-      "String a ~|zenyte amulet (u)|~" : {
-        "Items" : [ "Zenyte amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Zenyte amulet",
-        "Primary" : true
-      },
-      "String an ~|emerald amulet (u)|~" : {
-        "Items" : [ "Emerald amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Emerald amulet",
-        "Primary" : true
-      },
-      "String an ~|onyx amulet (u)|~" : {
-        "Items" : [ "Onyx amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Onyx amulet",
-        "Primary" : true
-      },
-      "String an ~|opal amulet (u)|~" : {
-        "Items" : [ "Opal amulet (u)", "Ball of wool" ],
-        "Level" : 1,
-        "Output" : "Opal amulet",
         "Primary" : true
       }
     },
@@ -9234,11 +9227,25 @@
         "Output" : "Raw bass",
         "Primary" : true
       },
+	  "Catch a ~|raw catfish|~" : {
+		"Items" : [ "Big fishing net" ],
+        "Level" : 46,
+		"Objects" : [ "Fishing spot (Camdozaal)" ],
+        "Output" : "Raw catfish loot",
+        "Primary" : true
+      },
       "Catch a ~|raw cave eel|~" : {
         "Items" : [ "Fishing rod+", "Fishing bait" ],
         "Level" : 38,
         "Objects" : [ "Swamp eel spot+" ],
         "Output" : "Raw cave eel",
+        "Primary" : true
+      },
+	  "Catch a ~|raw cavefish|~" : {
+		"Items" : [ "Small fishing net" ],
+        "Level" : 20,
+		"Objects" : [ "Fishing spot (Camdozaal)" ],
+        "Output" : "Raw cavefish loot",
         "Primary" : true
       },
       "Catch a ~|raw cod|~" : {
@@ -9253,6 +9260,13 @@
         "Level" : 85,
         "Objects" : [ "Fishing spot (dark crab)" ],
         "Output" : "Raw dark crab",
+        "Primary" : true
+      },
+	  "Catch a ~|raw guppy|~" : {
+		"Items" : [ "Small fishing net" ],
+        "Level" : 7,
+		"Objects" : [ "Fishing spot (Camdozaal)" ],
+        "Output" : "Raw guppy loot",
         "Primary" : true
       },
       "Catch a ~|raw herring|~" : {
@@ -9363,6 +9377,13 @@
         "Level" : 50,
         "Objects" : [ "Fishing spot (cage, harpoon)" ],
         "Output" : "Raw swordfish",
+        "Primary" : true
+      },
+	  "Catch a ~|raw tetra|~" : {
+		"Items" : [ "Tetra fishing net+" ],
+        "Level" : 33,
+		"Objects" : [ "Fishing spot (Camdozaal)" ],
+        "Output" : "Raw tetra loot",
         "Primary" : true
       },
       "Catch a ~|raw trout|~" : {
@@ -9628,7 +9649,7 @@
         "Level" : 47,
         "Primary" : true
       },
-      "Fletch a ~|oak stock|~" : {
+      "Fletch an ~|oak stock|~" : {
         "Items" : [ "Knife", "Oak logs" ],
         "Level" : 24,
         "Output" : "Oak stock",
@@ -10335,7 +10356,7 @@
         "Output" : "Zamorak brew(3)",
         "Primary" : true
       },
-      "Mix a ~|anti-poison supermix|~" : {
+      "Mix an ~|anti-poison supermix|~" : {
         "Items" : [ "Superantipoison(3)", "Caviar" ],
         "Level" : 51,
         "Primary" : true
@@ -10493,7 +10514,7 @@
         "Level" : 58,
         "Primary" : true
       },
-      "Mix a ~|irit potion (unf)|~" : {
+      "Mix an ~|irit potion (unf)|~" : {
         "Items" : [ "Irit leaf", "Vial of water" ],
         "Level" : 44,
         "Output" : "Irit potion (unf)",
@@ -10739,7 +10760,7 @@
         "Output" : "Torstol potion (unf)",
         "Primary" : false
       },
-      "Mix a ~|unfinished potion (Rogue's Purse)|~" : {
+      "Mix an ~|unfinished potion (Rogue's Purse)|~" : {
         "Items" : [ "Rogue's purse", "Vial of water" ],
         "Level" : 8,
         "Output" : "Unfinished potion (Rogue's Purse)",
@@ -13116,6 +13137,13 @@
         "Output" : "Gem rock",
         "Primary" : true
       },
+	  "Mine from ~|rocks (Barronite)|~" : {
+        "Items" : [ "Pickaxe+" ],
+        "Level" : 15,
+        "Objects" : [ "Rocks (Barronite)" ],
+        "Output" : "Rocks (Barronite)",
+        "Primary" : true
+      },
       "Mine ~|adamantite ore|~" : {
         "Items" : [ "Pickaxe+" ],
         "Level" : 70,
@@ -13414,6 +13442,21 @@
         "Chunks" : [ "Abyssal Nexus" ],
         "Items" : [ "Bludgeon axon", "Bludgeon claw", "Bludgeon spine" ],
         "Output" : "Abyssal bludgeon"
+      },
+	  "Combine barronite mace pieces" : {
+        "Chunks" : [ "Ruins of Camdozaal" ],
+        "Items" : [ "Barronite handle", "Barronite head", "Barronite guard", "Barronite shards" ],
+        "Output" : "Barronite mace"
+      },
+	  "Fix imcando hammer" : {
+        "Chunks" : [ "Ruins of Camdozaal" ],
+        "Items" : [ "Imcando hammer (broken)", "Barronite shards" ],
+        "Output" : "Imcando hammer"
+      },
+	  "Loot the Camdozaal Vault" : {
+        "Chunks" : [ "Ruins of Camdozaal" ],
+        "Items" : [ "Barronite shards" ],
+        "Output" : "Camdozaal Vault loot"
       },
       "Air rune pack" : {
         "Items" : [ "Air rune pack" ],
@@ -14402,6 +14445,10 @@
         "Chunks" : [ "12078" ],
         "Output" : "Reward pool loot"
       },
+	  "Casket (Reward pool) loot*" : {
+		"Items" : [ "Casket (Reward pool)" ],
+        "Output" : "Casket (Reward pool) loot"
+      },
       "Supply crate loot*" : {
         "Items" : [ "Supply crate" ],
         "Output" : "Supply crate loot"
@@ -14605,6 +14652,30 @@
         "Chunks" : [ "12086" ],
         "Level" : 99,
         "Primary" : false
+      },
+	  "Offer a ~|catfish|~" : {
+        "Items" : [ "Catfish" ],
+        "Level" : 1,
+        "Objects" : [ "Altar (Camdozaal)" ],
+        "Primary" : true
+      },
+	  "Offer a ~|cavefish|~" : {
+        "Items" : [ "Cavefish" ],
+        "Level" : 1,
+        "Objects" : [ "Altar (Camdozaal)" ],
+        "Primary" : true
+      },
+	  "Offer a ~|guppy|~" : {
+        "Items" : [ "Guppy" ],
+        "Level" : 1,
+        "Objects" : [ "Altar (Camdozaal)" ],
+        "Primary" : true
+      },
+	  "Offer a ~|tetra|~" : {
+        "Items" : [ "Tetra" ],
+        "Level" : 1,
+        "Objects" : [ "Altar (Camdozaal)" ],
+        "Primary" : true
       },
       "Sacrifice Vampyre dust in the ~|Hallowed Sepulchre|~" : {
         "Chunks" : [ "Hallowed Sepulchre" ],
@@ -15750,6 +15821,27 @@
         "Level" : 9,
         "Primary" : true
       },
+	  "Imbue a ~|body core|~ at the Body Altar" : {
+        "Chunks" : [ "Body Altar" ],
+        "Items" : [ "Body core" ],
+        "Level" : 20,
+        "Output" : "Body rune",
+        "Primary" : true
+      },
+	  "Imbue a ~|chaos core|~ at the Chaos Altar" : {
+        "Chunks" : [ "Chaos Altar" ],
+        "Items" : [ "Chaos core" ],
+        "Level" : 35,
+        "Output" : "Chaos rune",
+        "Primary" : true
+      },
+	  "Imbue a ~|mind core|~ at the Mind Altar" : {
+        "Chunks" : [ "Mind Altar" ],
+        "Items" : [ "Mind core" ],
+        "Level" : 2,
+        "Output" : "Mind rune",
+        "Primary" : true
+      },
       "Infuse a splitbark body into a ~|bloodbark body|~" : {
         "Chunks" : [ "6715" ],
         "Items" : [ "Splitbark body", "Bloody notes", "Blood rune" ],
@@ -15974,7 +16066,8 @@
       "Slay a ~|cave kraken|~" : {
         "Level" : 87,
         "Monsters" : [ "Cave kraken" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay a ~|cave slime|~" : {
         "Level" : 17,
@@ -16019,7 +16112,8 @@
       "Slay a ~|gargoyle|~" : {
         "Level" : 75,
         "Monsters" : [ "Gargoyle" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay a ~|harpy bug swarm|~" : {
         "Level" : 33,
@@ -16029,9 +16123,10 @@
       "Slay a ~|hydra|~" : {
         "Level" : 95,
         "Monsters" : [ "Hydra" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
-      "Slay a ~|infernal mage|~" : {
+      "Slay an ~|infernal mage|~" : {
         "Level" : 45,
         "Monsters" : [ "Infernal Mage" ],
         "Primary" : false
@@ -16094,7 +16189,8 @@
       "Slay a ~|smoke devil|~" : {
         "Level" : 93,
         "Monsters" : [ "Smoke devil" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay a ~|spiritual mage|~" : {
         "Level" : 83,
@@ -16144,7 +16240,8 @@
       "Slay an ~|abyssal demon|~" : {
         "Level" : 85,
         "Monsters" : [ "Abyssal demon" ],
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 1
       },
       "Slay an ~|ancient wyvern|~" : {
         "Level" : 82,
@@ -16155,31 +16252,36 @@
         "Category" : [ "Boss" ],
         "Chunks" : [ "Abyssal Nexus" ],
         "Level" : 85,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay the ~|Alchemical Hydra|~" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Karuulm Slayer Dungeon" ],
         "Level" : 95,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay the ~|Grotesque Guardians|~" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Grotesque Guardians' Lair" ],
         "Level" : 75,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay the ~|Kraken|~" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Kraken Cove" ],
         "Level" : 87,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay the ~|thermonuclear smoke devil|~" : {
         "Category" : [ "Boss" ],
         "Chunks" : [ "Smoke Devil Dungeon" ],
         "Level" : 93,
-        "Primary" : false
+        "Primary" : false,
+		"Priority" : 2
       },
       "Slay ~|Cerberus|~" : {
         "Category" : [ "Boss" ],
@@ -16193,7 +16295,7 @@
         "Level" : 1,
         "Primary" : false
       },
-      "Wear a ~|earmuffs|~" : {
+      "Wear ~|earmuffs|~" : {
         "Category" : [ "Slayer Equipment" ],
         "Items" : [ "Earmuffs" ],
         "Level" : 15,
@@ -16556,6 +16658,13 @@
         "Items" : [ "Hammer+", "Iron bar*" ],
         "Level" : 15,
         "Objects" : [ "Anvil+" ],
+        "Primary" : true
+      },
+	  "Smash open a ~|barronite deposit|~" : {
+        "Items" : [ "Barronite deposit" ],
+        "Level" : 15,
+        "Objects" : [ "Barronite Crusher" ],
+        "Output" : "Barronite deposit loot",
         "Primary" : true
       },
       "Smelt a ~|blurite bar|~" : {
@@ -17331,6 +17440,13 @@
         "Output" : "Sorceress",
         "Primary" : true
       },
+	  "Steal artifacts for ~|Captain Khaled|~" : {
+        "Chunks" : [ "7226", "6970" ],
+		"Items" : [ "Lockpick+" ],
+        "Level" : 49,
+        "Output" : "Coins",
+        "Primary" : true
+      },
       "Steal from a ~|Shop Counter (gems)|~" : {
         "Chunks" : [ "Mor Ul Rek" ],
         "Level" : 75,
@@ -17938,7 +18054,7 @@
         "Nettles" : 10,
         "Oak" : 16,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Shelves" : 1,
         "Sink" : 1,
         "Tree" : 21,
@@ -19034,7 +19150,7 @@
         "Crate" : 9,
         "Crates" : 4,
         "Evergreen" : 5,
-        "Rod Fishing spot (lure, bait)" : 3,
+        "Fishing spot (lure, bait)" : 3,
         "STASH (elite)" : 1,
         "Stairs" : 2,
         "Tree" : 1
@@ -19359,7 +19475,7 @@
         "Oak" : 16,
         "Pinboard" : 1,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Spinning wheel" : 1,
         "Stepping stone" : 2,
         "Stile" : 1,
@@ -19866,7 +19982,7 @@
         "Crate" : 9,
         "Dead tree" : 5,
         "Oak" : 20,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Rotten Apple Pile" : 8,
         "Tree" : 46
       }
@@ -19902,7 +20018,7 @@
         "Oak" : 17,
         "Oven" : 2,
         "Range" : 2,
-        "Rod Fishing spot (lure, bait)" : 3,
+        "Fishing spot (lure, bait)" : 3,
         "Sink" : 6,
         "Tree" : 41,
         "Yew" : 5,
@@ -22336,7 +22452,7 @@
       "Nickname" : "Isle Pottery Base",
       "Object" : {
         "Fishing spot (small net, bait)" : 1,
-        "Potter's wheel" : 1,
+        "Potter's Wheel" : 1,
         "Tree" : 35,
         "Well" : 1
       },
@@ -22908,7 +23024,7 @@
         "Leaves" : 9,
         "Log balance" : 2,
         "Loom" : 1,
-        "Rod Fishing spot (lure, bait)" : 4,
+        "Fishing spot (lure, bait)" : 4,
         "STASH (master)" : 1,
         "Sticks" : 1,
         "Tree" : 106
@@ -23236,7 +23352,7 @@
         "Fire remains" : 1,
         "Leaves" : 18,
         "Log balance" : 4,
-        "Rod Fishing spot (lure, bait)" : 5,
+        "Fishing spot (lure, bait)" : 5,
         "Sticks" : 2,
         "Tree" : 138,
         "Tripwire" : 3
@@ -24260,7 +24376,7 @@
         "Flax" : 24,
         "Magic tree" : 1,
         "Oak" : 23,
-        "Rod Fishing spot (lure, bait)" : 7,
+        "Fishing spot (lure, bait)" : 7,
         "Tree" : 75,
         "Willow" : 10
       },
@@ -25103,7 +25219,7 @@
         "Orrery" : 1,
         "Potential fire" : 1,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 5,
+        "Fishing spot (lure, bait)" : 5,
         "STASH (medium)" : 1,
         "Stairs" : 4,
         "Star chart" : 8,
@@ -25482,7 +25598,7 @@
         "Larrissa" : 1
       },
       "Object" : {
-        "Basalt rock" : 8,
+        "Basalt rocks" : 8,
         "Beach" : 1,
         "Bookcase" : 1,
         "Crate" : 1,
@@ -25571,7 +25687,7 @@
       },
       "Name" : "Mor Ul Rek",
       "Object" : {
-        "Rod Fishing spot" : 3
+        "Fishing spot" : 3
       },
       "Shop" : {
         "TzHaar-Hur-Zal's Equipment Store" : true
@@ -26257,7 +26373,7 @@
         "Hay bales" : 1,
         "Haystack" : 1,
         "Oak" : 17,
-        "Rod Fishing spot (lure, bait)" : 6,
+        "Fishing spot (lure, bait)" : 6,
         "Tree" : 34
       },
       "Quest" : {
@@ -26384,7 +26500,7 @@
       },
       "Nickname" : "Lighthouse",
       "Object" : {
-        "Basalt rock" : 8,
+        "Basalt rocks" : 8,
         "Beach" : 1,
         "Bookcase" : 1,
         "Crate" : 1,
@@ -26584,7 +26700,7 @@
         "Coal rock" : 4,
         "Gold rock" : 7,
         "Iron rock" : 3,
-        "Rod Fishing spot" : 2,
+        "Fishing spot" : 2,
         "Runite rock" : 3,
         "Shop Counter" : 2,
         "Silver rock" : 6
@@ -27059,7 +27175,6 @@
     },
     "10288" : {
       "Connect" : {
-        "9033" : true,
         "10307" : true,
         "10388" : true,
         "11595" : true
@@ -27396,7 +27511,7 @@
         "Mud patch" : 3,
         "Oak" : 9,
         "Potato" : 5,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Sink" : 1,
         "Tree" : 9,
         "Wheat" : 2,
@@ -28770,7 +28885,7 @@
         "Oak" : 14,
         "Potato" : 66,
         "Range" : 1,
-        "Rod Fishing spot" : 3,
+        "Fishing spot" : 3,
         "Tree" : 49,
         "Wheat" : 60
       },
@@ -29454,7 +29569,7 @@
         "Oak" : 1,
         "Potato" : 5,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 4,
+        "Fishing spot (lure, bait)" : 4,
         "STASH (easy)" : 1,
         "Sacks" : 2,
         "Sinclair family beehive" : 1,
@@ -29867,7 +29982,7 @@
         "Fire remains" : 1,
         "Leaves" : 18,
         "Log balance" : 4,
-        "Rod Fishing spot" : 5,
+        "Fishing spot" : 5,
         "Sticks" : 2,
         "Tree" : 138,
         "Tripwire" : 3
@@ -31132,7 +31247,7 @@
         "Broken cart" : 1,
         "Crate" : 2,
         "Gem rock" : 7,
-        "Rod Fishing spot (lure, bait)" : 3,
+        "Fishing spot (lure, bait)" : 3,
         "STASH (hard)" : 1,
         "Sand" : 3,
         "Stepping stone" : 1,
@@ -31308,7 +31423,7 @@
         "Oak" : 6,
         "Potato" : 6,
         "Range" : 3,
-        "Rod Fishing spot (lure, bait)" : 4,
+        "Fishing spot (lure, bait)" : 4,
         "STASH (master)" : 1,
         "Sand pit" : 1,
         "Tree" : 28,
@@ -33540,6 +33655,7 @@
       },
       "Quest" : {
         "Alfred Grimhand's Barcrawl" : "step",
+		"Below Ice Mountain" : "step",
         "Black Knights' Fortress" : "first",
         "Devious Minds" : "step",
         "Dragon Slayer II" : "step",
@@ -33599,13 +33715,15 @@
         "Wheat" : 28
       },
       "Quest" : {
+		"Below Ice Mountain" : "first",
         "Devious Minds" : "step",
         "Doric's Quest" : "first"
       }
     },
     "11830" : {
       "Connect" : {
-        "11083" : true
+        "11083" : true,
+		"11866" : true
       },
       "Diary" : {
         "Falador" : "EA7"
@@ -33640,6 +33758,7 @@
       },
       "Quest" : {
         "Another Slice of H%2EA%2EM%2E" : "step",
+		"Below Ice Mountain" : "step",
         "Garden of Tranquillity" : "step",
         "Goblin Diplomacy" : "first",
         "Grim Tales" : "step",
@@ -33863,6 +33982,12 @@
       "Object" : {
         "Exit" : 1
       }
+    },
+	"11866" : {
+      "Name" : "Ruins of Camdozaal",
+	  "Connect" : {
+		  "11830" : true
+	  }
     },
     "11924" : {
       "Monster" : {
@@ -35330,7 +35455,7 @@
         "Oak" : 8,
         "Potter's Wheel" : 2,
         "Pottery Oven" : 1,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "STASH (medium)" : 1,
         "Sacks" : 2,
         "Spinning wheel" : 1,
@@ -35338,6 +35463,7 @@
         "Tree" : 26
       },
       "Quest" : {
+		"Below Ice Mountain" : "step",
         "One Small Favour" : "step"
       },
       "Shop" : {
@@ -35412,6 +35538,7 @@
         "Yew" : 2
       },
       "Quest" : {
+		"Below Ice Mountain" : "step",
         "Family Crest" : "step",
         "Garden of Tranquillity" : "step",
         "Recipe for Disaster%2GFreeing Evil Dave" : "step",
@@ -37038,7 +37165,7 @@
         "Fountain" : 2,
         "Furnace" : 1,
         "Oak" : 7,
-        "Rod Fishing spot (lure, bait)" : 2,
+        "Fishing spot (lure, bait)" : 2,
         "Rusted anvil" : 1,
         "STASH (beginner)" : 1,
         "Sacks" : 5,
@@ -37185,6 +37312,7 @@
         "Yew" : 1
       },
       "Quest" : {
+		"Below Ice Mountain" : "step",
         "Demon Slayer" : "step",
         "Enter the Abyss" : "step",
         "Heroes' Quest" : "step",
@@ -37308,6 +37436,7 @@
       },
       "Quest" : {
         "Alfred Grimhand's Barcrawl" : "step",
+		"Below Ice Mountain" : "step",
         "Bone Voyage" : "first",
         "Daddy's Home" : "step",
         "Demon Slayer" : "first",
@@ -37605,7 +37734,7 @@
         "Leaves" : 9,
         "Log balance" : 2,
         "Loom" : 1,
-        "Rod Fishing spot" : 4,
+        "Fishing spot" : 4,
         "STASH (master)" : 1,
         "Sticks" : 1,
         "Tree" : 106
@@ -38127,7 +38256,7 @@
         "Craft stall" : 1,
         "Crate" : 1,
         "Hole" : 1,
-        "Potter's wheel" : 1,
+        "Potter's Wheel" : 1,
         "STASH (hard)" : 1,
         "Sink" : 4,
         "Spice stall" : 1,
@@ -38864,7 +38993,7 @@
         "Fire remains" : 1,
         "Leaves" : 18,
         "Log balance" : 4,
-        "Rod Fishing spot" : 5,
+        "Fishing spot" : 5,
         "Sticks" : 2,
         "Tree" : 138,
         "Tripwire" : 3
@@ -39738,7 +39867,7 @@
       "Name" : "Water Ravine Dungeon",
       "Object" : {
         "Fire" : 1,
-        "Rod Fishing spot" : 7
+        "Fishing spot" : 7
       }
     },
     "13462" : {
@@ -44249,7 +44378,7 @@
         "Oak" : 14,
         "Potato" : 66,
         "Range" : 1,
-        "Rod Fishing spot (lure, bait)" : 3,
+        "Fishing spot (lure, bait)" : 3,
         "Tree" : 49,
         "Wheat" : 60
       },
@@ -45653,7 +45782,7 @@
         "Gold rock" : 10,
         "Iron rock" : 3,
         "Lava forge" : 2,
-        "Rod Fishing spot (infernal eel)" : 5,
+        "Fishing spot (infernal eel)" : 5,
         "Runite rock" : 3,
         "STASH (master)" : 1,
         "STASH (medium)" : 1,
@@ -46528,6 +46657,43 @@
         "Flash powder" : 1,
         "Tiles (Rogues' Den)" : 1
       }
+    },
+	"Ruins of Camdozaal" : {
+      "Connect" : {
+        "11830" : true
+      },
+	  "Monster" : {
+		"Body Golem" : 1,
+		"Chaos Golem" : 1,
+		"Flawed Golem" : 1,
+		"Mind Golem" : 1
+	  },
+      "NPC" : {
+		"Ghost (Ruins of Camdozaal)" : 3,
+        "Ramarno" : 1
+      },
+      "Object" : {
+		"Altar (Camdozaal)" : 1,
+        "Anvil" : 2,
+		"Bank chest" : 1,
+		"Barronite Crusher" : 1,
+		"Clay rock" : 3,
+		"Copper rock" : 3,
+		"Fishing spot (Camdozaal)" : 4,
+		"Preperation Table" : 2,
+		"Rocks (Barronite)" : 18,
+		"Rubble" : 26,
+		"Ruins Exit" : 1,
+		"Sacred Forge" : 1,
+		"Security Barrier" : 5,
+		"Willow's bag" : 1,
+		"Tin rock" : 3
+      },
+	  "Spawn": {
+		"Bronze pickaxe" : 5,
+		"Hammer" : 1,
+		"Knife" : 1
+	  }
     },
     "Rune essence mine" : {
       "Object" : {
@@ -47779,7 +47945,7 @@
       },
       "Object" : {
         "Fire" : 1,
-        "Rod Fishing spot (lure, bait)" : 7
+        "Fishing spot (lure, bait)" : 7
       },
       "Quest" : {
         "Spirits of the Elid" : "step"
@@ -48588,7 +48754,8 @@
       "Super strength+" : [ "Super strength(1)", "Super strength(2)", "Super strength(3)", "Super strength(4)" ],
       "Supercompost item+" : [ "Pineapple", "Tenti pineapple", "Watermelon", "Coconut", "Coconut shell", "Papaya fruit", "Mushroom", "Poison ivy berries", "Jangerberries", "White berries", "Snaoe grass", "Toadflax", "Avantoe", "Kwuarm", "Snapdragon", "Cadantine", "Lantadyme", "Dwarf weed", "Torstol", "Oak roots", "Willow roots", "Maple roots", "Yew roots", "Magic roots", "Celastrus bark", "Calquat fruit", "White tree fruit", "White lily" ],
       "Swampbark armour+" : [ "Swampbark helm", "Swampbark body", "Swampbark legs", "Swampbark gauntlets", "Swampbark boots" ],
-      "Tinderbox+" : [ "Tinderbox" ],
+      "Tetra fishing net+" : [ "Small fishing net", "Big fishing net" ],
+	  "Tinderbox+" : [ "Tinderbox" ],
       "Unholy book+" : [ "Unholy book", "Book of balance" ],
       "Urium remains+" : [ "Loar remains", "Phrin remains", "Riyl remains", "Asyn remains", "Fiyr remains", "Urium remains" ],
       "Void Knight equipment+" : [ "Void melee helm", "Void ranger helm", "Void mage helm", "Void knight gloves", "Void knight robe", "Void knight top" ],
@@ -50119,6 +50286,10 @@
       "Steel platelegs" : "4/128",
       "Water rune" : "8/128"
     },
+	"Body Golem" : {
+      "Barronite guard" : "Uncommon",
+	  "Body core" : "Common"
+    },
     "Boris" : {
       "Blamish oil" : "1/512",
       "Bucket" : "25/512",
@@ -50905,6 +51076,10 @@
       "Steel full helm" : "2/128",
       "Tomato" : "1/128",
       "Water rune" : "1/128"
+    },
+	"Chaos Golem" : {
+      "Barronite guard" : "Uncommon",
+	  "Chaos core" : "Common"
     },
     "Chaotic death spawn" : {
       "Ashes" : "Always"
@@ -52470,6 +52645,9 @@
       "Steel boots" : "1/128",
       "Steel full helm" : "4/128",
       "SuperiorDropTable" : "1/142.2"
+    },
+	"Flawed golem" : {
+      "Barronite guard" : "Rare"
     },
     "Flesh Crawler" : {
       "Ashes" : "4/100",
@@ -55667,6 +55845,10 @@
       "White berries" : "2/512",
       "Wine of zamorak" : "2/512",
       "Wolf bones" : "Always"
+    },
+	"Mind Golem" : {
+      "Barronite guard" : "Rare",
+	  "Mind core" : "Common"
     },
     "Minotaur" : {
       "Bones" : "Always",
@@ -60705,6 +60887,12 @@
     "Evergreen" : {
       "Bucket of sap" : true
     },
+	"Fishing spot (Camdozaal)" : {
+      "Raw guppy" : true,
+	  "Raw cavefish" : true,
+	  "Raw tetra" : true,
+	  "Raw catfish" : true
+    },
     "Fishing spot (Piscatoris Fishing Colony)" : {
       "Raw monkfish" : true,
       "Raw swordfish" : true,
@@ -60848,11 +61036,11 @@
     "Redwood" : {
       "Redwood logs" : true
     },
-    "Rod Fishing spot (infernal eel)" : {
+    "Fishing spot (infernal eel)" : {
       "Lava scale shard" : true,
       "Onyx bolt tips" : true
     },
-    "Rod Fishing spot (lure, bait)" : {
+    "Fishing spot (lure, bait)" : {
       "Raw pike" : true,
       "Raw rainbow fish" : true,
       "Raw salmon" : true,
@@ -60917,6 +61105,7 @@
     "Another Slice of H%2EA%2EM%2E" : "11830, 12593, 12850, Lumbridge Swamp Caves, Dorgesh-Kaan",
     "Architectural Alliance" : "5944, 5947, 6457, 6458, 7226",
     "Bear your Soul" : "6459, 6715, 7228, 11573, Cerberus' Lair",
+	"Below Ice Mountain" : "11829, 12341, 12852, 12853, 12342, 11828, 11830",
     "Between a Rock%2E%2E%2E" : "10810, 11318, 12085, Dondakan's mine, Dwarven Mine, Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement, Keldagrim",
     "Big Chompy Bird Hunting" : "10286, 10542, Rantz's cave",
     "Biohazard" : "10035, 10036, 10291, 10292, 11570, 13108",
@@ -65217,7 +65406,23 @@
         "Raw swordfish" : "Varies",
         "Raw tuna" : "Varies",
         "Rusty sword" : "Varies"
-      }
+      },
+	  "Raw catfish loot" : {
+		"Raw catfish" : "Always",
+		"Barronite handle" : "Rare"
+	  },
+	  "Raw cavefish loot" : {
+		"Raw cavefish" : "Always",
+		"Barronite handle" : "Rare"
+	  },
+	  "Raw guppy loot" : {
+		"Raw guppy" : "Always",
+		"Barronite handle" : "Rare"
+	  },
+	  "Raw tetra loot" : {
+		"Raw tetra" : "Always",
+		"Barronite handle" : "Rare"
+	  }
     },
     "Hunter" : {
       "Baby impling jar" : {
@@ -65650,6 +65855,10 @@
         "Granite (500g)" : "Common",
         "Granite (5kg)" : "Common"
       },
+	  "Rocks (Barronite)" : {
+        "Barronite deposit" : "Rare",
+        "Barronite shards" : "Always"
+      },
       "Sandstone" : {
         "Sandstone (10kg)" : "Common",
         "Sandstone (1kg)" : "Common",
@@ -65870,6 +66079,9 @@
         "Swamp paste" : "Common",
         "Tree wizards' journal" : "Rare"
       },
+	  "Camdozaal Vault loot" : {
+		"Nothing" : "Always"
+	  },
       "Casket loot" : {
         "Coins" : "10/128",
         "Cosmic talisman" : "8/128",
@@ -66414,12 +66626,71 @@
         "Youngllef" : "1/800"
       },
 	  "Reward pool loot" : {
-		"Spirit flake": "Common",
-		"Fish Barrel": "Rare",
-		"Tackle Box": "Rare",
-		"Large harpoonfish": "Rare",
-		"Tome of water": "Rare"
+		"Spirit flake": "40/160",
+		"Casket (Reward pool)": "8/160",
+		"Plank": "7/160",
+		"Oak plank": "5/160",
+		"Steel nails": "2/160",
+		"Seaweed": "4/160",
+		"Feather": "2/160",
+		"Fishing bait": "2/160",
+		"Raw manta ray": "Common",
+		"Raw sea turtle": "Common",
+		"Raw shark": "Common",
+		"Raw swordfish": "Common",
+		"Raw bass": "Common",
+		"Raw lobster": "Common",
+		"Raw tuna": "Common",
+		"Raw salmon": "Common",
+		"Raw pike": "Common",
+		"Raw mackerel": "Common",
+		"Raw herring": "Common",
+		"Soaked page": "149/8000",
+		"Fish Barrel": "1/400",
+		"Tackle Box": "1/400",
+		"Tiny tempor": "Very rare",
+		"Big harpoonfish": "1/1600",
+		"Tome of water": "1/1600",
+		"Dragon harpoon": "1/8000"
       },
+	  "Casket (Reward pool) loot" : {
+		"Rune med helm" : "1/25.56",
+		"Rune full helm" : "9/230",
+		"Rune chainbody" : "9/230",
+		"Rune platebody" : "1/230",
+		"Rune platelegs" : "1/230",
+		"Rune plateskirt" : "1/230",
+		"Rune sq shield" : "1/230",
+		"Rune kiteshield" : "1/230",
+		"Sapphire ring" : "9/230",
+		"Emerald ring" : "9/230",
+		"Ruby ring" : "9/230",
+		"Diamond ring" : "9/230",
+		"Sapphire necklace" : "9/230",
+		"Emerald necklace" : "9/230",
+		"Ruby necklace" : "9/230",
+		"Diamond necklace" : "9/230",
+		"Sapphire bracelet" : "9/230",
+		"Emerald bracelet" : "9/230",
+		"Ruby bracelet" : "9/230",
+		"Diamond bracelet" : "9/230",
+		"Silver bar" : "9/230",
+		"Gold bar" : "9/230",
+		"Uncut opal" : "9/230",
+		"Uncut jade" : "9/230",
+		"Uncut red topaz" : "9/230",
+		"Uncut sapphire" : "1/230",
+		"Uncut emerald" : "1/230",
+		"Uncut ruby" : "1/230",
+		"Uncut diamond" : "1/230",
+		"Uncut dragonstone" : "1/230",
+		"Coins" : "9/230",
+		"Loop half of key" : "9/230",
+		"Tooth half of key" : "9/230",
+		"Clue scroll (easy)" : "Unknown",
+		"Clue scroll (medium)" : "Unknown",
+		"Clue scroll (hard)" : "Unknown"
+	  },
       "Rusty sword loot" : {
         "Black longsword" : "2/96",
         "Black sword" : "3/96",
@@ -66879,6 +67150,18 @@
         "Yanillian seed" : "Uncommon"
       }
     },
+	"Smithing" : {
+		"Barronite deposit loot" : {
+			"Ancient astroscope" : "Uncommon",
+			"Ancient carcanet" : "Uncommon",
+			"Ancient globe" : "Uncommon",
+			"Ancient ledger" : "Uncommon",
+			"Ancient treatise" : "Uncommon",
+			"Barronite head" : "Rare",
+			"Barronite shards" : "Common",
+			"Imcando hammer (broken)" : "Rare"
+		}
+	},
     "Thieving" : {
       "'Black-eye'" : {
         "Triangle sandwich" : "Always"
@@ -67628,5 +67911,482 @@
         "Unidentified small fossil" : "Rare"
       }
     }
-  }
+  },
+  "walkableChunks" : [
+	"9023",
+	"10559",
+	"6462",
+	"9790",
+	"10558",
+	"11326",
+	"14142",
+	"14398",
+	"6205",
+	"6461",
+	"6717",
+	"6973",
+	"8253",
+	"8509",
+	"11325",
+	"11581",
+	"11837",
+	"12093",
+	"12349",
+	"12605",
+	"12861",
+	"13117",
+	"13373",
+	"5180",
+	"5692",
+	"5948",
+	"6204",
+	"6460",
+	"6716",
+	"6972",
+	"7228",
+	"8252",
+	"8508",
+	"9276",
+	"9532",
+	"10044",
+	"10300",
+	"11068",
+	"11324",
+	"11836",
+	"12092",
+	"12348",
+	"12604",
+	"12860",
+	"13116",
+	"13372",
+	"14652",
+	"14908",
+	"15164",
+	"4667",
+	"4923",
+	"5179",
+	"5435",
+	"5691",
+	"5947",
+	"6203",
+	"6459",
+	"6715",
+	"6971",
+	"7227",
+	"8763",
+	"9275",
+	"9531",
+	"10043",
+	"10811",
+	"11067",
+	"11323",
+	"11835",
+	"12091",
+	"12347",
+	"12603",
+	"12859",
+	"13115",
+	"13371",
+	"14651",
+	"14907",
+	"15163",
+	"4666",
+	"4922",
+	"5178",
+	"5434",
+	"5690",
+	"5946",
+	"6202",
+	"6458",
+	"6714",
+	"6970",
+	"7226",
+	"10042",
+	"10298",
+	"10554",
+	"10810",
+	"11066",
+	"11322",
+	"11578",
+	"11834",
+	"12090",
+	"12346",
+	"12602",
+	"12858",
+	"13114",
+	"13370",
+	"14650",
+	"14906",
+	"15162",
+	"4665",
+	"4921",
+	"5177",
+	"5433",
+	"5689",
+	"5945",
+	"6201",
+	"6457",
+	"6713",
+	"6969",
+	"7225",
+	"9017",
+	"9273",
+	"10297",
+	"10553",
+	"10809",
+	"11065",
+	"11321",
+	"11577",
+	"11833",
+	"12089",
+	"12345",
+	"12601",
+	"12857",
+	"13113",
+	"13369",
+	"14649",
+	"4664",
+	"4920",
+	"5176",
+	"5432",
+	"5688",
+	"5944",
+	"6200",
+	"6456",
+	"6712",
+	"6968",
+	"7224",
+	"9016",
+	"9272",
+	"9528",
+	"10040",
+	"10296",
+	"10552",
+	"10808",
+	"11064",
+	"11320",
+	"11576",
+	"11832",
+	"12088",
+	"12344",
+	"12600",
+	"12856",
+	"13112",
+	"13368",
+	"13624",
+	"4663",
+	"4919",
+	"5175",
+	"5431",
+	"5687",
+	"5943",
+	"6199",
+	"6455",
+	"6711",
+	"6967",
+	"7223",
+	"7479",
+	"9015",
+	"9271",
+	"9527",
+	"9783",
+	"10039",
+	"10295",
+	"10551",
+	"10807",
+	"11063",
+	"11319",
+	"11575",
+	"11831",
+	"12087",
+	"12343",
+	"12599",
+	"12855",
+	"13111",
+	"13367",
+	"13623",
+	"13879",
+	"14135",
+	"14391",
+	"14647",
+	"15159",
+	"4662",
+	"4918",
+	"5174",
+	"5430",
+	"5686",
+	"5942",
+	"6198",
+	"6454",
+	"6710",
+	"6966",
+	"7222",
+	"7478",
+	"9014",
+	"9270",
+	"9526",
+	"9782",
+	"10038",
+	"10294",
+	"10550",
+	"10806",
+	"11062",
+	"11318",
+	"11574",
+	"11830",
+	"12086",
+	"12342",
+	"12598",
+	"12854",
+	"13110",
+	"13366",
+	"13622",
+	"13878",
+	"14134",
+	"14390",
+	"14646",
+	"14902",
+	"5941",
+	"6197",
+	"6453",
+	"6965",
+	"7221",
+	"8501",
+	"8757",
+	"9013",
+	"9269",
+	"9525",
+	"9781",
+	"10037",
+	"10293",
+	"10549",
+	"10805",
+	"11061",
+	"11317",
+	"11573",
+	"11829",
+	"12085",
+	"12341",
+	"12597",
+	"12853",
+	"13109",
+	"13365",
+	"13621",
+	"13877",
+	"14133",
+	"14389",
+	"14645",
+	"14901",
+	"8500",
+	"8756",
+	"9012",
+	"9268",
+	"9524",
+	"9780",
+	"10036",
+	"10292",
+	"10548",
+	"10804",
+	"11060",
+	"11316",
+	"11572",
+	"11828",
+	"12084",
+	"12340",
+	"12596",
+	"12852",
+	"13108",
+	"13364",
+	"13620",
+	"13876",
+	"14132",
+	"14388",
+	"14644",
+	"14900",
+	"8499",
+	"8755",
+	"9011",
+	"9267",
+	"9523",
+	"9779",
+	"10035",
+	"10291",
+	"10547",
+	"10803",
+	"11059",
+	"11315",
+	"11571",
+	"11827",
+	"12083",
+	"12339",
+	"12595",
+	"12851",
+	"13107",
+	"13363",
+	"13619",
+	"13875",
+	"14131",
+	"14387",
+	"14643",
+	"14899",
+	"8498",
+	"8754",
+	"9010",
+	"9266",
+	"9522",
+	"9778",
+	"10034",
+	"10290",
+	"10546",
+	"10802",
+	"11058",
+	"11314",
+	"11570",
+	"11826",
+	"12082",
+	"12338",
+	"12594",
+	"12850",
+	"13106",
+	"13362",
+	"13618",
+	"13874",
+	"14130",
+	"14386",
+	"14642",
+	"14898",
+	"8497",
+	"8753",
+	"9009",
+	"9265",
+	"9521",
+	"9777",
+	"10033",
+	"10289",
+	"10545",
+	"10801",
+	"11057",
+	"11313",
+	"11569",
+	"11825",
+	"12081",
+	"12337",
+	"12593",
+	"12849",
+	"13105",
+	"13361",
+	"13617",
+	"13873",
+	"14129",
+	"14385",
+	"14641",
+	"14897",
+	"8496",
+	"8752",
+	"9008",
+	"9264",
+	"9520",
+	"9776",
+	"10032",
+	"10288",
+	"10544",
+	"11056",
+	"11312",
+	"11568",
+	"11824",
+	"12848",
+	"13104",
+	"13360",
+	"13616",
+	"13872",
+	"8495",
+	"8751",
+	"9007",
+	"9263",
+	"9519",
+	"9775",
+	"10031",
+	"10287",
+	"11055",
+	"11311",
+	"11567",
+	"11823",
+	"12591",
+	"12847",
+	"13103",
+	"13359",
+	"13615",
+	"14639",
+	"14895",
+	"15151",
+	"15407",
+	"8238",
+	"8494",
+	"8750",
+	"9006",
+	"9262",
+	"9774",
+	"10030",
+	"10286",
+	"10542",
+	"11054",
+	"11310",
+	"11566",
+	"11822",
+	"12078",
+	"12590",
+	"12846",
+	"13102",
+	"13358",
+	"13614",
+	"14638",
+	"14894",
+	"15150",
+	"15406",
+	"8237",
+	"8493",
+	"8749",
+	"9005",
+	"9261",
+	"9773",
+	"10029",
+	"10285",
+	"11053",
+	"11309",
+	"11565",
+	"11821",
+	"12589",
+	"12845",
+	"13101",
+	"13357",
+	"13613",
+	"14637",
+	"8236",
+	"8492",
+	"8748",
+	"9004",
+	"9260",
+	"9772",
+	"10028",
+	"10284",
+	"12332",
+	"12588",
+	"12844",
+	"13100",
+	"13356",
+	"15148",
+	"8491",
+	"8747",
+	"9003",
+	"10795",
+	"11051",
+	"12587",
+	"12843",
+	"13099",
+	"10794",
+	"11050",
+	"11562",
+	"10537",
+	"10536"
+  ]
 }
