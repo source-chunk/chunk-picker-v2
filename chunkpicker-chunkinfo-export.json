@@ -1007,6 +1007,11 @@
           "Strength" : 40
         }
       },
+	  "Wield a ~|barronite mace|~" : {
+        "Items" : [ "Barronite mace" ],
+        "Level" : 40,
+        "Primary" : false
+      },
       "Wield a ~|battlestaff|~ variation" : {
         "Items" : [ "Battlestaff+" ],
         "Level" : 30,
@@ -5856,6 +5861,34 @@
         "Level" : 18,
         "Output" : "Wizard blizzard",
         "Primary" : true
+      },
+	  "Prepare a ~|catfish|~" : {
+        "Items" : [ "Raw catfish", "Knife" ],
+        "Level" : 46,
+        "Objects" : [ "Preperation Table" ],
+        "Output" : "Catfish",
+        "Primary" : true
+      },
+	  "Prepare a ~|cavefish|~" : {
+        "Items" : [ "Raw cavefish", "Knife" ],
+        "Level" : 20,
+        "Objects" : [ "Preperation Table" ],
+        "Output" : "Cavefish",
+        "Primary" : true
+      },
+	  "Prepare a ~|guppy|~" : {
+        "Items" : [ "Raw guppy", "Knife" ],
+        "Level" : 7,
+        "Objects" : [ "Preperation Table" ],
+        "Output" : "Guppy",
+        "Primary" : true
+      },
+	  "Prepare a ~|tetra|~" : {
+        "Items" : [ "Raw tetra", "Knife" ],
+        "Level" : 33,
+        "Objects" : [ "Preperation Table" ],
+        "Output" : "Tetra",
+        "Primary" : true
       }
     },
     "Crafting" : {
@@ -9194,11 +9227,25 @@
         "Output" : "Raw bass",
         "Primary" : true
       },
+	  "Catch a ~|raw catfish|~" : {
+		"Items" : [ "Big fishing net" ],
+        "Level" : 46,
+		"Objects" : [ "Fishing spot (Camdozaal)" ],
+        "Output" : "Raw catfish loot",
+        "Primary" : true
+      },
       "Catch a ~|raw cave eel|~" : {
         "Items" : [ "Fishing rod+", "Fishing bait" ],
         "Level" : 38,
         "Objects" : [ "Swamp eel spot+" ],
         "Output" : "Raw cave eel",
+        "Primary" : true
+      },
+	  "Catch a ~|raw cavefish|~" : {
+		"Items" : [ "Small fishing net" ],
+        "Level" : 20,
+		"Objects" : [ "Fishing spot (Camdozaal)" ],
+        "Output" : "Raw cavefish loot",
         "Primary" : true
       },
       "Catch a ~|raw cod|~" : {
@@ -9213,6 +9260,13 @@
         "Level" : 85,
         "Objects" : [ "Fishing spot (dark crab)" ],
         "Output" : "Raw dark crab",
+        "Primary" : true
+      },
+	  "Catch a ~|raw guppy|~" : {
+		"Items" : [ "Small fishing net" ],
+        "Level" : 7,
+		"Objects" : [ "Fishing spot (Camdozaal)" ],
+        "Output" : "Raw guppy loot",
         "Primary" : true
       },
       "Catch a ~|raw herring|~" : {
@@ -9323,6 +9377,13 @@
         "Level" : 50,
         "Objects" : [ "Fishing spot (cage, harpoon)" ],
         "Output" : "Raw swordfish",
+        "Primary" : true
+      },
+	  "Catch a ~|raw tetra|~" : {
+		"Items" : [ "Tetra fishing net+" ],
+        "Level" : 33,
+		"Objects" : [ "Fishing spot (Camdozaal)" ],
+        "Output" : "Raw tetra loot",
         "Primary" : true
       },
       "Catch a ~|raw trout|~" : {
@@ -13076,6 +13137,13 @@
         "Output" : "Gem rock",
         "Primary" : true
       },
+	  "Mine from ~|rocks (Barronite)|~" : {
+        "Items" : [ "Pickaxe+" ],
+        "Level" : 15,
+        "Objects" : [ "Rocks (Barronite)" ],
+        "Output" : "Rocks (Barronite)",
+        "Primary" : true
+      },
       "Mine ~|adamantite ore|~" : {
         "Items" : [ "Pickaxe+" ],
         "Level" : 70,
@@ -13374,6 +13442,21 @@
         "Chunks" : [ "Abyssal Nexus" ],
         "Items" : [ "Bludgeon axon", "Bludgeon claw", "Bludgeon spine" ],
         "Output" : "Abyssal bludgeon"
+      },
+	  "Combine barronite mace pieces" : {
+        "Chunks" : [ "Ruins of Camdozaal" ],
+        "Items" : [ "Barronite handle", "Barronite head", "Barronite guard", "Barronite shards" ],
+        "Output" : "Barronite mace"
+      },
+	  "Fix imcando hammer" : {
+        "Chunks" : [ "Ruins of Camdozaal" ],
+        "Items" : [ "Imcando hammer (broken)", "Barronite shards" ],
+        "Output" : "Imcando hammer"
+      },
+	  "Loot the Camdozaal Vault" : {
+        "Chunks" : [ "Ruins of Camdozaal" ],
+        "Items" : [ "Barronite shards" ],
+        "Output" : "Camdozaal Vault loot"
       },
       "Air rune pack" : {
         "Items" : [ "Air rune pack" ],
@@ -14570,6 +14653,30 @@
         "Level" : 99,
         "Primary" : false
       },
+	  "Offer a ~|catfish|~" : {
+        "Items" : [ "Catfish" ],
+        "Level" : 1,
+        "Objects" : [ "Altar (Camdozaal)" ],
+        "Primary" : true
+      },
+	  "Offer a ~|cavefish|~" : {
+        "Items" : [ "Cavefish" ],
+        "Level" : 1,
+        "Objects" : [ "Altar (Camdozaal)" ],
+        "Primary" : true
+      },
+	  "Offer a ~|guppy|~" : {
+        "Items" : [ "Guppy" ],
+        "Level" : 1,
+        "Objects" : [ "Altar (Camdozaal)" ],
+        "Primary" : true
+      },
+	  "Offer a ~|tetra|~" : {
+        "Items" : [ "Tetra" ],
+        "Level" : 1,
+        "Objects" : [ "Altar (Camdozaal)" ],
+        "Primary" : true
+      },
       "Sacrifice Vampyre dust in the ~|Hallowed Sepulchre|~" : {
         "Chunks" : [ "Hallowed Sepulchre" ],
         "Items" : [ "Vampyre dust" ],
@@ -15714,6 +15821,27 @@
         "Level" : 9,
         "Primary" : true
       },
+	  "Imbue a ~|body core|~ at the Body Altar" : {
+        "Chunks" : [ "Body Altar" ],
+        "Items" : [ "Body core" ],
+        "Level" : 20,
+        "Output" : "Body rune",
+        "Primary" : true
+      },
+	  "Imbue a ~|chaos core|~ at the Chaos Altar" : {
+        "Chunks" : [ "Chaos Altar" ],
+        "Items" : [ "Chaos core" ],
+        "Level" : 35,
+        "Output" : "Chaos rune",
+        "Primary" : true
+      },
+	  "Imbue a ~|mind core|~ at the Mind Altar" : {
+        "Chunks" : [ "Mind Altar" ],
+        "Items" : [ "Mind core" ],
+        "Level" : 2,
+        "Output" : "Mind rune",
+        "Primary" : true
+      },
       "Infuse a splitbark body into a ~|bloodbark body|~" : {
         "Chunks" : [ "6715" ],
         "Items" : [ "Splitbark body", "Bloody notes", "Blood rune" ],
@@ -16530,6 +16658,13 @@
         "Items" : [ "Hammer+", "Iron bar*" ],
         "Level" : 15,
         "Objects" : [ "Anvil+" ],
+        "Primary" : true
+      },
+	  "Smash open a ~|barronite deposit|~" : {
+        "Items" : [ "Barronite deposit" ],
+        "Level" : 15,
+        "Objects" : [ "Barronite Crusher" ],
+        "Output" : "Barronite deposit loot",
         "Primary" : true
       },
       "Smelt a ~|blurite bar|~" : {
@@ -25463,7 +25598,7 @@
         "Larrissa" : 1
       },
       "Object" : {
-        "Basalt rock" : 8,
+        "Basalt rocks" : 8,
         "Beach" : 1,
         "Bookcase" : 1,
         "Crate" : 1,
@@ -26365,7 +26500,7 @@
       },
       "Nickname" : "Lighthouse",
       "Object" : {
-        "Basalt rock" : 8,
+        "Basalt rocks" : 8,
         "Beach" : 1,
         "Bookcase" : 1,
         "Crate" : 1,
@@ -33520,6 +33655,7 @@
       },
       "Quest" : {
         "Alfred Grimhand's Barcrawl" : "step",
+		"Below Ice Mountain" : "step",
         "Black Knights' Fortress" : "first",
         "Devious Minds" : "step",
         "Dragon Slayer II" : "step",
@@ -33579,13 +33715,15 @@
         "Wheat" : 28
       },
       "Quest" : {
+		"Below Ice Mountain" : "first",
         "Devious Minds" : "step",
         "Doric's Quest" : "first"
       }
     },
     "11830" : {
       "Connect" : {
-        "11083" : true
+        "11083" : true,
+		"11866" : true
       },
       "Diary" : {
         "Falador" : "EA7"
@@ -33620,6 +33758,7 @@
       },
       "Quest" : {
         "Another Slice of H%2EA%2EM%2E" : "step",
+		"Below Ice Mountain" : "step",
         "Garden of Tranquillity" : "step",
         "Goblin Diplomacy" : "first",
         "Grim Tales" : "step",
@@ -33843,6 +33982,12 @@
       "Object" : {
         "Exit" : 1
       }
+    },
+	"11866" : {
+      "Name" : "Ruins of Camdozaal",
+	  "Connect" : {
+		  "11830" : true
+	  }
     },
     "11924" : {
       "Monster" : {
@@ -35318,6 +35463,7 @@
         "Tree" : 26
       },
       "Quest" : {
+		"Below Ice Mountain" : "step",
         "One Small Favour" : "step"
       },
       "Shop" : {
@@ -35392,6 +35538,7 @@
         "Yew" : 2
       },
       "Quest" : {
+		"Below Ice Mountain" : "step",
         "Family Crest" : "step",
         "Garden of Tranquillity" : "step",
         "Recipe for Disaster%2GFreeing Evil Dave" : "step",
@@ -37165,6 +37312,7 @@
         "Yew" : 1
       },
       "Quest" : {
+		"Below Ice Mountain" : "step",
         "Demon Slayer" : "step",
         "Enter the Abyss" : "step",
         "Heroes' Quest" : "step",
@@ -37288,6 +37436,7 @@
       },
       "Quest" : {
         "Alfred Grimhand's Barcrawl" : "step",
+		"Below Ice Mountain" : "step",
         "Bone Voyage" : "first",
         "Daddy's Home" : "step",
         "Demon Slayer" : "first",
@@ -46509,6 +46658,43 @@
         "Tiles (Rogues' Den)" : 1
       }
     },
+	"Ruins of Camdozaal" : {
+      "Connect" : {
+        "11830" : true
+      },
+	  "Monster" : {
+		"Body Golem" : 1,
+		"Chaos Golem" : 1,
+		"Flawed Golem" : 1,
+		"Mind Golem" : 1
+	  },
+      "NPC" : {
+		"Ghost (Ruins of Camdozaal)" : 3,
+        "Ramarno" : 1
+      },
+      "Object" : {
+		"Altar (Camdozaal)" : 1,
+        "Anvil" : 2,
+		"Bank chest" : 1,
+		"Barronite Crusher" : 1,
+		"Clay rock" : 3,
+		"Copper rock" : 3,
+		"Fishing spot (Camdozaal)" : 4,
+		"Preperation Table" : 2,
+		"Rocks (Barronite)" : 18,
+		"Rubble" : 26,
+		"Ruins Exit" : 1,
+		"Sacred Forge" : 1,
+		"Security Barrier" : 5,
+		"Willow's bag" : 1,
+		"Tin rock" : 3
+      },
+	  "Spawn": {
+		"Bronze pickaxe" : 5,
+		"Hammer" : 1,
+		"Knife" : 1
+	  }
+    },
     "Rune essence mine" : {
       "Object" : {
         "Broken ladder" : 3,
@@ -48568,7 +48754,8 @@
       "Super strength+" : [ "Super strength(1)", "Super strength(2)", "Super strength(3)", "Super strength(4)" ],
       "Supercompost item+" : [ "Pineapple", "Tenti pineapple", "Watermelon", "Coconut", "Coconut shell", "Papaya fruit", "Mushroom", "Poison ivy berries", "Jangerberries", "White berries", "Snaoe grass", "Toadflax", "Avantoe", "Kwuarm", "Snapdragon", "Cadantine", "Lantadyme", "Dwarf weed", "Torstol", "Oak roots", "Willow roots", "Maple roots", "Yew roots", "Magic roots", "Celastrus bark", "Calquat fruit", "White tree fruit", "White lily" ],
       "Swampbark armour+" : [ "Swampbark helm", "Swampbark body", "Swampbark legs", "Swampbark gauntlets", "Swampbark boots" ],
-      "Tinderbox+" : [ "Tinderbox" ],
+      "Tetra fishing net+" : [ "Small fishing net", "Big fishing net" ],
+	  "Tinderbox+" : [ "Tinderbox" ],
       "Unholy book+" : [ "Unholy book", "Book of balance" ],
       "Urium remains+" : [ "Loar remains", "Phrin remains", "Riyl remains", "Asyn remains", "Fiyr remains", "Urium remains" ],
       "Void Knight equipment+" : [ "Void melee helm", "Void ranger helm", "Void mage helm", "Void knight gloves", "Void knight robe", "Void knight top" ],
@@ -50099,6 +50286,10 @@
       "Steel platelegs" : "4/128",
       "Water rune" : "8/128"
     },
+	"Body Golem" : {
+      "Barronite guard" : "Uncommon",
+	  "Body core" : "Common"
+    },
     "Boris" : {
       "Blamish oil" : "1/512",
       "Bucket" : "25/512",
@@ -50885,6 +51076,10 @@
       "Steel full helm" : "2/128",
       "Tomato" : "1/128",
       "Water rune" : "1/128"
+    },
+	"Chaos Golem" : {
+      "Barronite guard" : "Uncommon",
+	  "Chaos core" : "Common"
     },
     "Chaotic death spawn" : {
       "Ashes" : "Always"
@@ -52450,6 +52645,9 @@
       "Steel boots" : "1/128",
       "Steel full helm" : "4/128",
       "SuperiorDropTable" : "1/142.2"
+    },
+	"Flawed golem" : {
+      "Barronite guard" : "Rare"
     },
     "Flesh Crawler" : {
       "Ashes" : "4/100",
@@ -55647,6 +55845,10 @@
       "White berries" : "2/512",
       "Wine of zamorak" : "2/512",
       "Wolf bones" : "Always"
+    },
+	"Mind Golem" : {
+      "Barronite guard" : "Rare",
+	  "Mind core" : "Common"
     },
     "Minotaur" : {
       "Bones" : "Always",
@@ -60685,6 +60887,12 @@
     "Evergreen" : {
       "Bucket of sap" : true
     },
+	"Fishing spot (Camdozaal)" : {
+      "Raw guppy" : true,
+	  "Raw cavefish" : true,
+	  "Raw tetra" : true,
+	  "Raw catfish" : true
+    },
     "Fishing spot (Piscatoris Fishing Colony)" : {
       "Raw monkfish" : true,
       "Raw swordfish" : true,
@@ -60897,6 +61105,7 @@
     "Another Slice of H%2EA%2EM%2E" : "11830, 12593, 12850, Lumbridge Swamp Caves, Dorgesh-Kaan",
     "Architectural Alliance" : "5944, 5947, 6457, 6458, 7226",
     "Bear your Soul" : "6459, 6715, 7228, 11573, Cerberus' Lair",
+	"Below Ice Mountain" : "11829, 12341, 12852, 12853, 12342, 11828, 11830",
     "Between a Rock%2E%2E%2E" : "10810, 11318, 12085, Dondakan's mine, Dwarven Mine, Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement, Keldagrim",
     "Big Chompy Bird Hunting" : "10286, 10542, Rantz's cave",
     "Biohazard" : "10035, 10036, 10291, 10292, 11570, 13108",
@@ -65197,7 +65406,23 @@
         "Raw swordfish" : "Varies",
         "Raw tuna" : "Varies",
         "Rusty sword" : "Varies"
-      }
+      },
+	  "Raw catfish loot" : {
+		"Raw catfish" : "Always",
+		"Barronite handle" : "Rare"
+	  },
+	  "Raw cavefish loot" : {
+		"Raw cavefish" : "Always",
+		"Barronite handle" : "Rare"
+	  },
+	  "Raw guppy loot" : {
+		"Raw guppy" : "Always",
+		"Barronite handle" : "Rare"
+	  },
+	  "Raw tetra loot" : {
+		"Raw tetra" : "Always",
+		"Barronite handle" : "Rare"
+	  }
     },
     "Hunter" : {
       "Baby impling jar" : {
@@ -65630,6 +65855,10 @@
         "Granite (500g)" : "Common",
         "Granite (5kg)" : "Common"
       },
+	  "Rocks (Barronite)" : {
+        "Barronite deposit" : "Rare",
+        "Barronite shards" : "Always"
+      },
       "Sandstone" : {
         "Sandstone (10kg)" : "Common",
         "Sandstone (1kg)" : "Common",
@@ -65850,6 +66079,9 @@
         "Swamp paste" : "Common",
         "Tree wizards' journal" : "Rare"
       },
+	  "Camdozaal Vault loot" : {
+		"Nothing" : "Always"
+	  },
       "Casket loot" : {
         "Coins" : "10/128",
         "Cosmic talisman" : "8/128",
@@ -66442,18 +66674,6 @@
 		"Emerald bracelet" : "9/230",
 		"Ruby bracelet" : "9/230",
 		"Diamond bracelet" : "9/230",
-		"Sapphire ring" : "1/230",
-		"Emerald ring" : "1/230",
-		"Ruby ring" : "1/230",
-		"Diamond ring" : "1/230",
-		"Sapphire necklace" : "1/230",
-		"Emerald necklace" : "1/230",
-		"Ruby necklace" : "1/230",
-		"Diamond necklace" : "1/230",
-		"Sapphire bracelet" : "1/230",
-		"Emerald bracelet" : "1/230",
-		"Ruby bracelet" : "1/230",
-		"Diamond bracelet" : "1/230",
 		"Silver bar" : "9/230",
 		"Gold bar" : "9/230",
 		"Uncut opal" : "9/230",
@@ -66930,6 +67150,18 @@
         "Yanillian seed" : "Uncommon"
       }
     },
+	"Smithing" : {
+		"Barronite deposit loot" : {
+			"Ancient astroscope" : "Uncommon",
+			"Ancient carcanet" : "Uncommon",
+			"Ancient globe" : "Uncommon",
+			"Ancient ledger" : "Uncommon",
+			"Ancient treatise" : "Uncommon",
+			"Barronite head" : "Rare",
+			"Barronite shards" : "Common",
+			"Imcando hammer (broken)" : "Rare"
+		}
+	},
     "Thieving" : {
       "'Black-eye'" : {
         "Triangle sandwich" : "Always"
