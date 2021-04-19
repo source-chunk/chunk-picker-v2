@@ -16587,6 +16587,16 @@
           "Crafting" : 72
         }
       },
+	  "Craft an ~|enhanced crystal key|~" : {
+        "Items" : [ "Crystal key", "Crystal shard" ],
+        "Level" : 80,
+        "Objects" : [ "Singing bowl" ],
+        "Output" : "Enhanced crystal key",
+        "Primary" : false,
+        "Skills" : {
+          "Crafting" : 80
+        }
+      },
       "Create an ~|infernal pickaxe|~" : {
         "Items" : [ "Smouldering stone", "Dragon pickaxe" ],
         "Level" : 85,
@@ -33948,11 +33958,6 @@
       },
       "Name" : "Abyssal Nexus"
     },
-    "11852" : {
-      "Quest" : {
-        "Merlin's Crystal" : "step"
-      }
-    },
     "11854" : {
       "NPC" : {
         "Rogue Guard" : 3
@@ -37316,6 +37321,7 @@
         "Demon Slayer" : "step",
         "Enter the Abyss" : "step",
         "Heroes' Quest" : "step",
+		"Merlin's Crystal" : "step",
         "Shield of Arrav" : "step",
         "Wanted!" : "step"
       },
@@ -61172,7 +61178,7 @@
     "Lunar Diplomacy" : "8252, 8253, 8508, 8509, 8763, 10297, 10553, Fire altar, Water altar, Earth altar, Air altar, Lunar Isle mine",
     "Making Friends with My Arm" : "10810, 11321, 11325, 12338, 12597, Troll Stronghold",
     "Making History" : "9777, 9780, 10291, 10547, 10553, 14646",
-    "Merlin's Crystal" : "10806, 11061, 11062, 11573, 11852, 12082",
+    "Merlin's Crystal" : "10806, 11061, 11062, 11573, 12082, 12852",
     "Misthalin Mystery" : "12849",
     "Monk's Friend" : "10290, Clock Tower Dungeon",
     "Monkey Madness I" : "9782, 10291, 10795, 11050, 11051, 11562, 11823, Ape Atoll Dungeon",
