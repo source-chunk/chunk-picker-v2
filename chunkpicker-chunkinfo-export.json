@@ -13443,17 +13443,17 @@
         "Items" : [ "Bludgeon axon", "Bludgeon claw", "Bludgeon spine" ],
         "Output" : "Abyssal bludgeon"
       },
-	  "Combine barronite mace pieces" : {
+	  "Combine barronite mace pieces*" : {
         "Chunks" : [ "Ruins of Camdozaal" ],
         "Items" : [ "Barronite handle", "Barronite head", "Barronite guard", "Barronite shards" ],
         "Output" : "Barronite mace"
       },
-	  "Fix imcando hammer" : {
+	  "Fix imcando hammer*" : {
         "Chunks" : [ "Ruins of Camdozaal" ],
         "Items" : [ "Imcando hammer (broken)", "Barronite shards" ],
         "Output" : "Imcando hammer"
       },
-	  "Loot the Camdozaal Vault" : {
+	  "Loot the Camdozaal Vault*" : {
         "Chunks" : [ "Ruins of Camdozaal" ],
         "Items" : [ "Barronite shards" ],
         "Output" : "Camdozaal Vault loot"
@@ -14695,12 +14695,12 @@
       },
       "Wear a ~|bonecrusher necklace|~" : {
         "Items" : [ "Bonecrusher", "Dragonbone necklace", "Hydra tail" ],
-        "Level" : 80,
+        "Level" : 70,
         "Primary" : false
       },
       "Wear a ~|dragonbone necklace|~" : {
         "Items" : [ "Dragonbone necklace" ],
-        "Level" : 80,
+        "Level" : 70,
         "Primary" : false
       },
       "Wear a ~|soul cape|~" : {
@@ -17030,6 +17030,16 @@
           "Attack" : 10
         }
       },
+	  "Wield a ~|black warhammer|~" : {
+        "Items" : [ "Black warhammer" ],
+        "Level" : 10,
+        "Primary" : false
+      },
+	  "Wield a ~|bronze warhammer|~" : {
+        "Items" : [ "Bronze warhammer" ],
+        "Level" : 1,
+        "Primary" : false
+      },
       "Wield a ~|crystal halberd|~" : {
         "Items" : [ "Crystal halberd" ],
         "Level" : 35,
@@ -17047,6 +17057,11 @@
           "Attack" : 60
         }
       },
+	  "Wield a ~|dragon warhammer|~" : {
+        "Items" : [ "Dragon warhammer" ],
+        "Level" : 60,
+        "Primary" : false
+      },
       "Wield a ~|granite weapon|~" : {
         "Items" : [ "GraniteWep+" ],
         "Level" : 50,
@@ -17063,6 +17078,11 @@
           "Attack" : 20
         }
       },
+	  "Wield a ~|mithril warhammer|~" : {
+        "Items" : [ "Mithril warhammer" ],
+        "Level" : 20,
+        "Primary" : false
+      },
       "Wield a ~|rune halberd|~" : {
         "Items" : [ "Rune halberd" ],
         "Level" : 20,
@@ -17071,6 +17091,16 @@
           "Attack" : 40
         }
       },
+	  "Wield a ~|rune warhammer|~" : {
+        "Items" : [ "Rune warhammer" ],
+        "Level" : 40,
+        "Primary" : false
+      },
+	  "Wield a ~|steel warhammer|~" : {
+        "Items" : [ "Steel warhammer" ],
+        "Level" : 5,
+        "Primary" : false
+      },
       "Wield a ~|white halberd|~" : {
         "Items" : [ "White halberd" ],
         "Level" : 5,
@@ -17078,6 +17108,11 @@
         "Skills" : {
           "Attack" : 10
         }
+      },
+	  "Wield a ~|white warhammer|~" : {
+        "Items" : [ "White warhammer" ],
+        "Level" : 10,
+        "Primary" : false
       },
       "Wield an ~|abyssal bludgeon|~" : {
         "Items" : [ "Abyssal bludgeon" ],
@@ -17095,6 +17130,11 @@
           "Attack" : 30
         }
       },
+	  "Wield an ~|adamant warhammer|~" : {
+        "Items" : [ "Adamant warhammer" ],
+        "Level" : 30,
+        "Primary" : false
+      },
       "Wield an ~|elder maul|~" : {
         "Items" : [ "Elder maul" ],
         "Level" : 75,
@@ -17102,6 +17142,11 @@
         "Skills" : {
           "Attack" : 75
         }
+      },
+	  "Wield an ~|iron warhammer|~" : {
+        "Items" : [ "Iron warhammer" ],
+        "Level" : 1,
+        "Primary" : false
       },
       "Wield ~|Torag's hammers|~" : {
         "Items" : [ "Torag's hammers" ],
@@ -46698,7 +46743,8 @@
 	  "Spawn": {
 		"Bronze pickaxe" : 5,
 		"Hammer" : 1,
-		"Knife" : 1
+		"Knife" : 1,
+		"Small fishing net" : 1
 	  }
     },
     "Rune essence mine" : {
@@ -48621,7 +48667,7 @@
     },
     "itemsPlus" : {
       "Adamant armour+" : [ "Adamant boots", "Adamant med helm", "Adamant full helm", "Adamant sq shield", "Adamant plateskirt", "Adamant kiteshield", "Adamant platelegs", "Adamant chainbody", "Adamant platebody" ],
-      "AdamantWep+" : [ "Adamant dagger", "Adamant pickaxe", "Adamant axe", "Adamant mace", "Adamant sword", "Adamant scimitar", "Adamant longsword", "Adamant warhammer", "Adamant battleaxe", "Adamant claws", "Adamant spear", "Adamant 2h sword" ],
+      "AdamantWep+" : [ "Adamant dagger", "Adamant pickaxe", "Adamant axe", "Adamant mace", "Adamant sword", "Adamant scimitar", "Adamant longsword", "Adamant battleaxe", "Adamant claws", "Adamant spear", "Adamant 2h sword" ],
       "Air rune+" : [ "Air rune", "Dust rune", "Mist rune", "Smoke rune" ],
       "Ancestral robes+" : [ "Ancestral hat", "Ancestral robe top", "Ancestral robe bottom" ],
       "Angler outfit+" : [ "Angler hat", "Angler top", "Angler waders", "Angler boots" ],
@@ -48643,14 +48689,14 @@
       "Black armour+" : [ "Black boots", "Black med helm", "Black full helm", "Black sq shield", "Black plateskirt", "Black kiteshield", "Black platelegs", "Black chainbody", "Black platebody" ],
       "Black dragonhide armour+" : [ "Black d'hide chaps", "Black d'hide vambraces" ],
       "Black key+" : [ "Black key red", "Black key brown", "Black key crimson", "Black key black", "Black key purple" ],
-      "BlackWep+" : [ "Black dagger", "Black pickaxe", "Black axe", "Black mace", "Black sword", "Black scimitar", "Black longsword", "Black warhammer", "Black battleaxe", "Black claws", "Black spear", "Black 2h sword" ],
+      "BlackWep+" : [ "Black dagger", "Black pickaxe", "Black axe", "Black mace", "Black sword", "Black scimitar", "Black longsword", "Black battleaxe", "Black claws", "Black spear", "Black 2h sword" ],
       "Blessed dragonhide armour+" : [ "Guthix chaps" ],
       "Bloodbark armour+" : [ "Bloodbark helm", "Bloodbark body", "Bloodbark legs", "Bloodbark gauntlets", "Bloodbark boots" ],
       "Blue dragonhide armour+" : [ "Blue d'hide chaps", "Blue d'hide vambraces" ],
       "BoneWep+" : [ "Bone club", "Bone spear", "Bone dagger" ],
       "Bronze armour+" : [ "Bronze boots", "Bronze med helm", "Bronze full helm", "Bronze sq shield", "Bronze plateskirt", "Bronze kiteshield", "Bronze platelegs", "Bronze chainbody", "Bronze platebody" ],
       "Bronze key+" : [ "Bronze key red", "Bronze key brown", "Bronze key crimson", "Bronze key black", "Bronze key purple" ],
-      "BronzeWep+" : [ "Bronze dagger", "Bronze pickaxe", "Bronze axe", "Bronze mace", "Bronze sword", "Bronze scimitar", "Bronze longsword", "Bronze warhammer", "Bronze battleaxe", "Bronze claws", "Bronze spear", "Bronze 2h sword" ],
+      "BronzeWep+" : [ "Bronze dagger", "Bronze pickaxe", "Bronze axe", "Bronze mace", "Bronze sword", "Bronze scimitar", "Bronze longsword", "Bronze battleaxe", "Bronze claws", "Bronze spear", "Bronze 2h sword" ],
       "Broodoo shield+" : [ "Broodoo shield (blue)", "Broodoo shield (orange)", "Broodoo shield (green)" ],
       "Butterfly net+" : [ "Butterfly net", "Magic butterfly net" ],
       "Cooked stew+" : [ "Cooked meat", "Cooked chicken" ],
@@ -48662,7 +48708,7 @@
       "Diamond Jewellery+" : [ "Diamond ring", "Diamond necklace", "Diamond bracelet", "Diamond amulet" ],
       "Dragon armour+" : [ "Dragon boots", "Dragon med helm", "Dragon full helm", "Dragon sq shield", "Dragon plateskirt", "Dragon kiteshield", "Dragon platelegs", "Dragon chainbody", "Dragon platebody" ],
       "Dragon tool+" : [ "Dragon harpoon", "Dragon pickaxe", "Dragon axe" ],
-      "DragonWep+" : [ "Dragon dagger", "Dragon harpoon", "Dragon pickaxe", "Dragon axe", "Dragon mace", "Dragon hasta", "Dragon sword", "Dragon scimitar", "Dragon longsword", "Dragon warhammer", "Dragon battleaxe", "Dragon claws", "Dragon spear", "Dragon 2h sword" ],
+      "DragonWep+" : [ "Dragon dagger", "Dragon harpoon", "Dragon pickaxe", "Dragon axe", "Dragon mace", "Dragon hasta", "Dragon sword", "Dragon scimitar", "Dragon longsword", "Dragon battleaxe", "Dragon claws", "Dragon spear", "Dragon 2h sword" ],
       "Dragonstone Jewellery+" : [ "Dragonstone ring", "Dragonstone necklace", "Dragonstone bracelet", "Dragonstone amulet" ],
       "Earth rune+" : [ "Earth rune", "Dust rune", "Mud rune", "Lava rune" ],
       "Elder chaos druid robes+" : [ "Elder chaos hood", "Elder chaos top", "Elder chaos robe" ],
@@ -48693,7 +48739,7 @@
       "Initiate+" : [ "Initiate sallet", "Initiate hauberk", "Initiate cuisse" ],
       "InquisitorArmour+" : [ "Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt" ],
       "Iron armour+" : [ "Iron boots", "Iron med helm", "Iron full helm", "Iron sq shield", "Iron plateskirt", "Iron kiteshield", "Iron platelegs", "Iron chainbody", "Iron platebody" ],
-      "IronWep+" : [ "Iron dagger", "Iron pickaxe", "Iron axe", "Iron mace", "Iron sword", "Iron scimitar", "Iron longsword", "Iron warhammer", "Iron battleaxe", "Iron claws", "Iron spear", "Iron 2h sword" ],
+      "IronWep+" : [ "Iron dagger", "Iron pickaxe", "Iron axe", "Iron mace", "Iron sword", "Iron scimitar", "Iron longsword", "Iron battleaxe", "Iron claws", "Iron spear", "Iron 2h sword" ],
       "Jungle camo+" : [ "Jungle camo top", "Jungle camo legs" ],
       "Justiciar armour+" : [ "Justiciar faceguard", "Justiciar chestguard", "Justiciar legguards" ],
       "Kyatt gear+" : [ "Kyatt hat", "Kyatt top", "Kyatt legs" ],
@@ -48705,7 +48751,7 @@
       "Machete+" : [ "Machete", "Opal machete", "Jade machete", "Red topaz machete" ],
       "Magic potion+" : [ "Magic potion(1)", "Magic potion(2)", "Magic potion(3)", "Magic potion(4)" ],
       "Mithril armour+" : [ "Mithril boots", "Mithril med helm", "Mithril full helm", "Mithril sq shield", "Mithril plateskirt", "Mithril kiteshield", "Mithril platelegs", "Mithril chainbody", "Mithril platebody" ],
-      "MithrilWep+" : [ "Mithril dagger", "Mithril pickaxe", "Mithril axe", "Mithril mace", "Mithril sword", "Mithril scimitar", "Mithril longsword", "Mithril warhammer", "Mithril battleaxe", "Mithril claws", "Mithril spear", "Mithril 2h sword" ],
+      "MithrilWep+" : [ "Mithril dagger", "Mithril pickaxe", "Mithril axe", "Mithril mace", "Mithril sword", "Mithril scimitar", "Mithril longsword", "Mithril battleaxe", "Mithril claws", "Mithril spear", "Mithril 2h sword" ],
       "Mjolnir+" : [ "Saradomin mjolnir", "Zamorak mjolnir", "Guthix mjolnir" ],
       "Mole part+" : [ "Mole claw", "Mole skin" ],
       "Mystic robes+" : [ "Mystic hat (light)", "Mystic robe top (light)", "Mystic robe bottom (light)", "Mystic gloves (light)", "Mystic boots (light)", "Mystic hat", "Mystic robe top", "Mystic robe bottom", "Mystic gloves", "Mystic boots", "Mystic hat (dark)", "Mystic robe top (dark)", "Mystic robe bottom (dark)", "Mystic gloves (dark)", "Mystic boots (dark)", "Mystic hat (dusk)", "Mystic robe top (dusk)", "Mystic robe bottom (dusk)", "Mystic gloves (dusk)", "Mystic boots (dusk)" ],
@@ -48734,7 +48780,7 @@
       "Ruby Topaz Jewellery+" : [ "Ruby ring", "Ruby necklace", "Ruby bracelet", "Ruby amulet", "Topaz ring", "Topaz bracelet", "Topaz necklace", "Topaz amulet" ],
       "Rune armour+" : [ "Rune boots", "Rune med helm", "Rune full helm", "Rune sq shield", "Rune plateskirt", "Rune kiteshield", "Rune platelegs", "Rune chainbody", "Rune platebody" ],
       "Rune essence+" : [ "Rune essence", "Pure essence" ],
-      "RuneWep+" : [ "Rune dagger", "Rune pickaxe", "Rune axe", "Rune mace", "Rune sword", "Rune scimitar", "Rune longsword", "Rune warhammer", "Rune battleaxe", "Rune claws", "Rune spear", "Rune 2h sword" ],
+      "RuneWep+" : [ "Rune dagger", "Rune pickaxe", "Rune axe", "Rune mace", "Rune sword", "Rune scimitar", "Rune longsword", "Rune battleaxe", "Rune claws", "Rune spear", "Rune 2h sword" ],
       "Samurai armour+" : [ "Samurai kasa", "Samurai shirt", "Samurai greaves", "Samurai gloves", "Samurai boots" ],
       "Sapphire Opal Jewellery+" : [ "Sapphire ring", "Sapphire necklace", "Sapphire bracelet", "Sapphire amulet", "Opal ring", "Opal bracelet", "Opal necklace", "Opal amulet" ],
       "Saw+" : [ "Saw" ],
@@ -48751,7 +48797,7 @@
       "Splitbark armour+" : [ "Splitbark helm", "Splitbark body", "Splitbark legs", "Splitbark gauntlets", "Splitbark boots" ],
       "Steel armour+" : [ "Steel boots", "Steel med helm", "Steel full helm", "Steel sq shield", "Steel plateskirt", "Steel kiteshield", "Steel platelegs", "Steel chainbody", "Steel platebody" ],
       "Steel key+" : [ "Steel key red", "Steel key brown", "Steel key crimson", "Steel key black", "Steel key purple" ],
-      "SteelWep+" : [ "Steel dagger", "Steel pickaxe", "Steel axe", "Steel mace", "Steel sword", "Steel scimitar", "Steel longsword", "Steel warhammer", "Steel battleaxe", "Steel claws", "Steel spear", "Steel 2h sword" ],
+      "SteelWep+" : [ "Steel dagger", "Steel pickaxe", "Steel axe", "Steel mace", "Steel sword", "Steel scimitar", "Steel longsword", "Steel battleaxe", "Steel claws", "Steel spear", "Steel 2h sword" ],
       "Stuffed hq head+" : [ "Stuffed kq head", "Stuffed kq head (tattered)" ],
       "Super attack+" : [ "Super attack(1)", "Super attack(2)", "Super attack(3)", "Super attack(4)" ],
       "Super defence+" : [ "Super defence(1)", "Super defence(2)", "Super defence(3)", "Super defence(4)" ],
@@ -48770,7 +48816,7 @@
       "Watering can+" : [ "Watering can", "Watering can(1)", "Watering can(2)", "Watering can(3)", "Watering can(4)", "Watering can(5)", "Watering can(6)", "Watering can(7)", "Watering can(8)", "Gricoller's can" ],
       "White armour+" : [ "White gloves", "White boots", "White med helm", "White full helm", "White sq shield", "White plateskirt", "White kiteshield", "White platelegs", "White chainbody", "White platebody" ],
       "White decorative armour+" : [ "Decorative armour (white platebody)", "Decorative armour (white platelegs)", "Decorative armour (white plateskirt)", "Decorative boots (white)", "Decorative full helm (white)", "Decorative helm (white)", "Decorative shield (white)" ],
-      "WhiteWep+" : [ "White dagger", "White mace", "White sword", "White scimitar", "White longsword", "White warhammer", "White battleaxe", "White claws", "White 2h sword" ],
+      "WhiteWep+" : [ "White dagger", "White mace", "White sword", "White scimitar", "White longsword", "White battleaxe", "White claws", "White 2h sword" ],
       "Wizards robes+" : [ "Blue wizard hat", "Wizard hat", "Blue wizard robe", "Black robe" ],
       "Woodland camo+" : [ "Woodland camo top", "Woodland camo legs" ],
       "Xerician robes+" : [ "Xerician hat", "Xerician top", "Xerician robe" ],
@@ -50293,8 +50339,19 @@
       "Water rune" : "8/128"
     },
 	"Body Golem" : {
-      "Barronite guard" : "Uncommon",
-	  "Body core" : "Common"
+      "Clay" : "Common",
+	  "Copper ore" : "Common",
+	  "Tin ore" : "Common",
+	  "Iron ore" : "Common",
+	  "Rune essence" : "Common",
+	  "Body rune" : "Common",
+	  "Uncut sapphire" : "Common",
+	  "Uncut emerald" : "Common",
+	  "Uncut ruby" : "Uncommon",
+	  "Body core" : "Uncommon",
+	  "Barronite shards" : "Common",
+	  "Barronite guard" : "Rare",
+	  "Clue scroll (beginner)" : "Unknown"
     },
     "Boris" : {
       "Blamish oil" : "1/512",
@@ -51084,8 +51141,21 @@
       "Water rune" : "1/128"
     },
 	"Chaos Golem" : {
-      "Barronite guard" : "Uncommon",
-	  "Chaos core" : "Common"
+      "Clay" : "Common",
+	  "Iron ore" : "Common",
+	  "Silver ore" : "Common",
+	  "Gold ore" : "Common",
+	  "Rune essence" : "Common",
+	  "Chaos rune" : "Common",
+	  "Uncut sapphire" : "Common",
+	  "Uncut emerald" : "Common",
+	  "Uncut ruby" : "Uncommon",
+	  "Chaos talisman" : "Uncommon",
+	  "Uncut diamond" : "Rare",
+	  "Chaos core" : "Common",
+	  "Barronite shards" : "Common",
+	  "Barronite guard" : "Uncommon",
+	  "Clue scroll (beginner)" : "Unknown"
     },
     "Chaotic death spawn" : {
       "Ashes" : "Always"
@@ -52653,7 +52723,15 @@
       "SuperiorDropTable" : "1/142.2"
     },
 	"Flawed golem" : {
-      "Barronite guard" : "Rare"
+      "Clay" : "Common",
+	  "Rune essence" : "Common",
+	  "Tin ore" : "Common",
+	  "Copper ore" : "Common",
+	  "Uncut sapphire" : "Common",
+	  "Uncut emerald" : "Uncommon",
+	  "Barronite shards" : "Common",
+	  "Barronite guard" : "Rare",
+	  "Clue scroll (beginner)" : "Rare"
     },
     "Flesh Crawler" : {
       "Ashes" : "4/100",
@@ -55853,8 +55931,19 @@
       "Wolf bones" : "Always"
     },
 	"Mind Golem" : {
-      "Barronite guard" : "Rare",
-	  "Mind core" : "Common"
+      "Clay" : "Common",
+	  "Copper ore" : "Common",
+	  "Tin ore" : "Common",
+	  "Iron ore" : "Common",
+	  "Rune essence" : "Common",
+	  "Mind rune" : "Common",
+	  "Uncut sapphire" : "Common",
+	  "Uncut emerald" : "Uncommon",
+	  "Uncut ruby" : "Uncommon",
+	  "Mind core" : "1/10",
+	  "Barronite shards" : "Common",
+	  "Barronite guard" : "Rare",
+	  "Clue scroll (beginner)" : "Unknown"
     },
     "Minotaur" : {
       "Bones" : "Always",
@@ -66086,7 +66175,53 @@
         "Tree wizards' journal" : "Rare"
       },
 	  "Camdozaal Vault loot" : {
-		"Nothing" : "Always"
+		"Feather" : "Common",
+		"Logs" : "Common",
+		"Oak logs" : "Common",
+		"Iron ore" : "Common",
+		"Fishing bait" : "Unknown",
+		"Fishing rod" : "Unknown",
+		"Coppor ore" : "Unknown",
+		"Tin ore" : "Unknown",
+		"Soft clay" : "Unknown",
+		"Tinderbox" : "Unknown",
+		"Iron platebody" : "Unknown",
+		"Iron kiteshield" : "Unknown",
+		"Steel mace" : "Unknown",
+		"Steel plateskirt" : "Unknown",
+		"Coins" : "Unknown",
+		"Iron pickaxe" : "Unknown",
+		"Steel axe" : "Unknown",
+		"Steel kiteshield" : "Unknown",
+		"Steel sword" : "Unknown",
+		"Black platelegs" : "Unknown",
+		"Energy potion(4)" : "Unknown",
+		"Coal" : "Unknown",
+		"Silver bar" : "Unknown",
+		"Steel arrow" : "Unknown",
+		"Plank" : "Unknown",
+		"Blue wizard hat" : "Unknown",
+		"Uncut sapphire" : "Unknown",
+		"Fire rune" : "Unknown",
+		"Water rune" : "Unknown",
+		"Law rune" : "Unknown",
+		"Nature rune" : "Unknown",
+		"Air talisman" : "Unknown",
+		"Water talisman" : "Unknown",
+		"Earth talisman" : "Unknown",
+		"Fire talisman" : "Unknown",
+		"Wizard hat" : "Unknown",
+		"Black mace" : "Unknown",
+		"Mithril kiteshield" : "Unknown",
+		"Mithril plateskirt" : "Unknown",
+		"Mithril mace" : "Unknown",
+		"Adamant sword" : "Unknown",
+		"Energy potion(2)" : "Unknown",
+		"Body talisman" : "Unknown",
+		"Mind talisman" : "Unknown",
+		"Uncut emerald" : "Unknown",
+		"Uncut ruby" : "Unknown",
+		"Uncut diamond" : "Unknown"
 	  },
       "Casket loot" : {
         "Coins" : "10/128",
