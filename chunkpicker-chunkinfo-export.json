@@ -34470,7 +34470,7 @@
         "12185" : true
       },
       "Monster" : {
-        "Black Guard" : 4,
+        "Black Guard#Ice Mountain" : 4,
         "Dwarf" : 8
       },
       "NPC" : {
@@ -50069,6 +50069,26 @@
       "Steel warhammer" : "1/128",
       "Tin ore" : "1/128"
     },
+	"Black Guard#Ice Mountain" : {
+	  "Bones" : "Always",
+      "Bronze bar" : "7/128",
+      "Bronze battleaxe" : "2/128",
+      "Bronze bolts" : "7/128",
+      "Bronze med helm" : "4/128",
+      "Bronze pickaxe" : "13/128",
+      "Chaos rune" : "4/128",
+      "Clue scroll (beginner)" : "1/100",
+      "Coal" : "2/128",
+      "Coins" : "2/128",
+      "Copper ore" : "3/128",
+      "Hammer" : "10/128",
+      "Iron bar" : "3/128",
+      "Iron battleaxe" : "1/128",
+      "Iron ore" : "4/128",
+      "Nature rune" : "4/128",
+      "Nothing" : "23/128",
+      "Tin ore" : "3/128"
+	},
     "Black Guard Berserker" : {
       "Beer" : "1/128",
       "Black warhammer" : "2/128",
