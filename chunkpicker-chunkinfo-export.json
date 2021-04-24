@@ -45133,7 +45133,10 @@
         "9814" : true,
         "10061" : true,
         "10810" : true,
-        "11066" : true
+        "11066" : true,
+		"11418" : true,
+		"11929" : true,
+		"12598" : true
       },
       "Diary" : {
         "Fremennik" : "EA5, EA7, HD4"
