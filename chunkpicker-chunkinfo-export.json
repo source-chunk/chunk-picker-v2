@@ -17338,9 +17338,9 @@
         "Output" : "Menaphite Thug",
         "Primary" : true
       },
-      "Pickpocket a ~|Tzhaar-Hur|~" : {
+      "Pickpocket a ~|TzHaar-Hur|~" : {
         "Level" : 90,
-        "Monsters" : [ "Tzhaar-Hur" ],
+        "Monsters" : [ "TzHaar-Hur" ],
         "Output" : "Tzhaar-Hur",
         "Primary" : true
       },
