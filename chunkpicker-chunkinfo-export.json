@@ -26399,6 +26399,9 @@
         "Plague City" : "step",
         "Song of the Elves" : "step"
       },
+	  "Shop" : {
+        "Armoury" : true  
+	  },
       "Spawn" : {
         "Beer" : 1,
         "Rotten apple" : 1
@@ -27518,8 +27521,7 @@
       },
       "Shop" : {
         "Aemad's Adventuring Supplies%2E" : true,
-        "Flying Horse Inn" : true,
-        "Zenesha's Plate Mail Body Shop%2E" : true
+        "Flying Horse Inn" : true
       },
       "Spawn" : {
         "Black scimitar" : 1,
@@ -28495,8 +28497,8 @@
         "Ardougne Fur Stall%2E" : true,
         "Ardougne Gem Stall%2E" : true,
         "Ardougne Silver Stall%2E" : true,
-        "Ardougne Spice Stall%2E" : true,
-        "Armoury" : true
+        "Ardougne Spice Stall%2E" : true
+		"Zenesha's Plate Mail Body Shop%2E" : true
       },
       "Spawn" : {
         "Chisel" : 1,
