@@ -12059,8 +12059,8 @@
         "Level" : 21,
         "Primary" : true
       },
-      "Cast ~|lumbridge graveyard teleport|~" : {
-        "Chunks" : [ "6716", "12849" ],
+      "Cast ~|arceuus library teleport|~" : {
+        "Chunks" : [ "6716", "6459" ],
         "Items" : [ "Earth rune+", "Law rune" ],
         "Level" : 6,
         "Primary" : true
@@ -12161,136 +12161,28 @@
         "Level" : 86,
         "Primary" : true
       },
-      "Cast ~|reanimate abyssal creature|~" : {
+      "Cast ~|basic reanimation|~" : {
         "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Blood rune", "Soul rune", "Ensouled abyssal head" ],
-        "Level" : 85,
-        "Primary" : true
-      },
-      "Cast ~|reanimate aviansie|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Blood rune", "Soul rune", "Ensouled aviansie head" ],
-        "Level" : 78,
-        "Primary" : true
-      },
-      "Cast ~|reanimate bear|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled bear head" ],
-        "Level" : 21,
-        "Primary" : true
-      },
-      "Cast ~|reanimate bloodveld|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Blood rune", "Soul rune", "Ensouled bloodveld head" ],
-        "Level" : 65,
-        "Primary" : true
-      },
-      "Cast ~|reanimate chaos druid|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled chaos druid head" ],
-        "Level" : 30,
-        "Primary" : true
-      },
-      "Cast ~|reanimate dagannoth|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled dagannoth head" ],
-        "Level" : 62,
-        "Primary" : true
-      },
-      "Cast ~|reanimate demon|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Blood rune", "Soul rune", "Ensouled demon head" ],
-        "Level" : 72,
-        "Primary" : true
-      },
-      "Cast ~|reanimate dog|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled dog head" ],
-        "Level" : 26,
-        "Primary" : true
-      },
-      "Cast ~|reanimate dragon|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Blood rune", "Soul rune", "Ensouled dragon head" ],
-        "Level" : 93,
-        "Primary" : true
-      },
-      "Cast ~|reanimate elf|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled elf head" ],
-        "Level" : 43,
-        "Primary" : true
-      },
-      "Cast ~|reanimate giant|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled giant head" ],
-        "Level" : 37,
-        "Primary" : true
-      },
-      "Cast ~|reanimate goblin|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Ensouled goblin head" ],
-        "Level" : 3,
-        "Primary" : true
-      },
-      "Cast ~|reanimate horror|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled horror head" ],
-        "Level" : 52,
-        "Primary" : true
-      },
-      "Cast ~|reanimate imp|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Ensouled imp head" ],
-        "Level" : 12,
-        "Primary" : true
-      },
-      "Cast ~|reanimate kalphite|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled kalphite head" ],
-        "Level" : 57,
-        "Primary" : true
-      },
-      "Cast ~|reanimate minotaur|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Ensouled minotaur head" ],
+        "Items" : [ "Body rune", "Nature rune", "Basic head+" ],
         "Level" : 16,
         "Primary" : true
       },
-      "Cast ~|reanimate monkey|~" : {
+      "Cast ~|adept reanimation|~" : {
         "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Ensouled monkey head" ],
-        "Level" : 7,
+        "Items" : [ "Body rune", "Nature rune", "Soul rune", "Adept head+" ],
+        "Level" : 41,
         "Primary" : true
       },
-      "Cast ~|reanimate ogre|~" : {
+	  "Cast ~|expert reanimation|~" : {
         "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled ogre head" ],
-        "Level" : 40,
+        "Items" : [ "Blood rune", "Nature rune", "Soul rune", "Expert head+" ],
+        "Level" : 72,
         "Primary" : true
       },
-      "Cast ~|reanimate scorpion|~" : {
+	  "Cast ~|master reanimation|~" : {
         "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Soul rune", "Ensouled scorpion head" ],
-        "Level" : 19,
-        "Primary" : true
-      },
-      "Cast ~|reanimate troll|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled troll head" ],
-        "Level" : 46,
-        "Primary" : true
-      },
-      "Cast ~|reanimate tzhaar|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Blood rune", "Soul rune", "Ensouled tzhaar head" ],
-        "Level" : 69,
-        "Primary" : true
-      },
-      "Cast ~|reanimate unicorn|~" : {
-        "Chunks" : [ "6716" ],
-        "Items" : [ "Nature rune", "Body rune", "Soul rune", "Ensouled unicorn head" ],
-        "Level" : 22,
+        "Items" : [ "Blood rune", "Nature rune", "Soul rune", "Master head+" ],
+        "Level" : 90,
         "Primary" : true
       },
       "Cast ~|recharge dragonstone|~" : {
@@ -48827,7 +48719,11 @@
       "Woodland camo+" : [ "Woodland camo top", "Woodland camo legs" ],
       "Xerician robes+" : [ "Xerician hat", "Xerician top", "Xerician robe" ],
       "Yak-hide armour+" : [ "Yak-hide armour (top)", "Yak-hide armour (legs)" ],
-      "Zenyte Jewellery+" : [ "Zenyte ring", "Zenyte necklace", "Zenyte bracelet", "Zenyte amulet" ]
+      "Zenyte Jewellery+" : [ "Zenyte ring", "Zenyte necklace", "Zenyte bracelet", "Zenyte amulet" ],
+	  "Basic head+" : [ "Ensouled goblin head", "Ensouled monkey head", "Ensouled imp head", "Ensouled minotaur head", "Ensouled scorpion head", "Ensouled bear head", "Ensouled unicorn head" ],
+	  "Adept head+" : [ "Ensouled dog head", "Ensouled chaos druid head", "Ensouled ogre head", "Ensouled giant head", "Ensouled elf head", "Ensouled troll head", "Ensouled horror head" ],
+	  "Expert head+" : [ "Ensouled kalphite head", "Ensouled dagannoth head", "Ensouled bloodveld head", "Ensouled tzhaar head", "Ensouled demon head" ],
+	  "Master head+" : [ "Ensouled aviansie head", "Ensouled abyssal head", "Ensouled dragon head" ]
     },
     "mixPlus" : {
       "Fremennik citizen+" : [ "Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa" ],
