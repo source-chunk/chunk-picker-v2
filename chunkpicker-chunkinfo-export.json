@@ -925,6 +925,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["11057"],
 				"Level": 99,
+				"Output": "Agility cape(t)",
 				"Primary": false
 			},
 			"Catch a ~|leaping salmon|~": {
@@ -1016,6 +1017,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["11319"],
 				"Level": 99,
+				"Output": "Attack cape(t)",
 				"Primary": false
 			},
 			"Wear ~|Void Knight equipment|~": {
@@ -5503,6 +5505,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["EstateAgent+"],
 				"Level": 99,
+				"Output": "Construction cape(t)",
 				"Primary": false,
 				"Priority": 1
 			},
@@ -6095,6 +6098,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["12597"],
 				"Level": 99,
+				"Output": "Cooking cape(t)",
 				"Primary": false
 			},
 			"Churn a ~|pat of butter|~": {
@@ -6835,6 +6839,7 @@
 				"Chunks": ["11571"],
 				"Items": ["Brown apron"],
 				"Level": 99,
+				"Output": "Crafting cape(t)",
 				"Primary": false
 			},
 			"Craft a ~|ball of wool|~": {
@@ -8247,6 +8252,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["12850"],
 				"Level": 99,
+				"Output": "Defence cape(t)",
 				"Primary": false
 			},
 			"Wear a ~|berserker helm|~": {
@@ -9190,6 +9196,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["12338"],
 				"Level": 99,
+				"Output": "Farming cape(t)",
 				"Primary": false
 			},
 			"Grow a ~|banana tree|~": {
@@ -10153,6 +10160,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["10805"],
 				"Level": 99,
+				"Output": "Firemaking cape(t)",
 				"Primary": false
 			},
 			"Light a ~|bullseye lantern|~": {
@@ -10224,6 +10232,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["10293"],
 				"Level": 99,
+				"Output": "Fishing cape(t)",
 				"Primary": false
 			},
 			"Catch a ~|bluegill|~": {
@@ -10668,6 +10677,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["11317"],
 				"Level": 99,
+				"Output": "Fletching cape(t)",
 				"Primary": false
 			},
 			"Fletch a ~|battlestaff|~": {
@@ -11534,6 +11544,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["11574"],
 				"Level": 99,
+				"Output": "Herblore cape(t)",
 				"Primary": false,
 				"Priority": 1
 			},
@@ -12377,6 +12388,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["13363"],
 				"Level": 99,
+				"Output": "Hitpoints cape(t)",
 				"Primary": false
 			},
 			"Wear a piece of enchanted ~|zenyte|~ jewellery": {
@@ -12452,6 +12464,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["10029"],
 				"Level": 99,
+				"Output": "Hunter cape(t)",
 				"Primary": false,
 				"Priority": 1
 			},
@@ -13267,6 +13280,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["10288"],
 				"Level": 99,
+				"Output": "Magic cape(t)",
 				"Primary": false
 			},
 			"Cast ~|annakarl teleport|~": {
@@ -15317,6 +15331,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["12084"],
 				"Level": 99,
+				"Output": "Mining cape(t)",
 				"Primary": false
 			},
 			"Create an ~|infernal pickaxe|~": {
@@ -17375,6 +17390,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["12086"],
 				"Level": 99,
+				"Output": "Prayer cape(t)",
 				"Primary": false
 			},
 			"Offer a ~|catfish|~": {
@@ -17630,6 +17646,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["10549"],
 				"Level": 99,
+				"Output": "Ranged cape(t)",
 				"Primary": false
 			},
 			"Wear a ~|black d'hide body|~": {
@@ -18385,6 +18402,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["12853"],
 				"Level": 99,
+				"Output": "Runecraft cape(t)",
 				"Primary": false
 			},
 			"Craft a ~|blood rune|~": {
@@ -18848,6 +18866,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["11310"],
 				"Level": 99,
+				"Output": "Slayer cape(t)",
 				"Primary": false
 			},
 			"Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris": {
@@ -19547,6 +19566,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["11825"],
 				"Level": 99,
+				"Output": "Smithing cape(t)",
 				"Primary": false,
 				"Priority": 1
 			},
@@ -21490,6 +21510,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["11319"],
 				"Level": 99,
+				"Output": "Strength cape(t)",
 				"Primary": false
 			},
 			"Catch a ~|leaping salmon|~": {
@@ -21826,6 +21847,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["Rogues' Den"],
 				"Level": 99,
+				"Output": "Thieving cape(t)",
 				"Primary": false
 			},
 			"Crack a ~|wall safe|~ insde the Rogues' Den": {
@@ -22371,6 +22393,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["12850"],
 				"Level": 99,
+				"Output": "Woodcutting cape(t)",
 				"Primary": false
 			},
 			"Carve a ~log |canoe|~": {
@@ -72375,8 +72398,7 @@
 			"Rope": true,
 			"Steel claws": true,
 			"Steel knife": true,
-			"Stethoscope": true,
-			"Thieving cape": true
+			"Stethoscope": true
 		},
 		"Miltog's Lamps": {
 			"Bullseye lantern (empty)": true,
