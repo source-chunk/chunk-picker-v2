@@ -695,7 +695,7 @@ let futureChunkData = {};
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.0.2");
+const myWorker = new Worker("./worker.js?v=4.0.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
