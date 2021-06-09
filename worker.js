@@ -76,7 +76,7 @@ onmessage = function(e) {
     baseChunkData = gatherChunksInfo(chunks);
     globalValids = calcChallenges(chunks, baseChunkData);
     calcBIS();
-    //console.log(globalValids);
+    console.log(globalValids);
 
     let tempChallengeArr;
     type === 'current' && (tempChallengeArr = calcCurrentChallenges2());
@@ -259,7 +259,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         //console.log(i);
     } while (!_.isEqual(valids, newValids) && i < 10);
     valids = newValids;
-    //console.log(baseChunkData);
+    console.log(baseChunkData);
     return valids;
 }
 
@@ -1171,7 +1171,7 @@ var calcBIS = function() {
                         }
                     }
                 } else if (skill === 'Flinch') {
-                    if (chunkInfo['equipment'][equip].attack_speed > 0) {
+                    if (chunkInfo['equipment'][equip].attack_speed > 0 || chunkInfo['equipment'][equip].slot === 'shield') {
                         if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || ((Math.max(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) + chunkInfo['equipment'][equip].melee_strength) > (Math.max(chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_crush, chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_slash, chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_stab) + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength))) && Math.max(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) > 0 && chunkInfo['equipment'][equip].melee_strength > 0) {
                             let tempTempValid = false;
                             Object.keys(baseChunkData['items'][equip]).forEach(source => {
@@ -1189,33 +1189,62 @@ var calcBIS = function() {
         });
         let twoHPower = 0;
         let weaponShieldPower = 0;
-        if (skill === 'Melee' || skill === 'Flinch') {
-            if (!!bestEquipment['2h']) {
+        if (skill === 'Melee') {
+            if (bestEquipment.hasOwnProperty('2h')) {
                 twoHPower = (Math.max(chunkInfo['equipment'][bestEquipment['2h']].attack_crush, chunkInfo['equipment'][bestEquipment['2h']].attack_slash, chunkInfo['equipment'][bestEquipment['2h']].attack_stab) + chunkInfo['equipment'][bestEquipment['2h']].melee_strength + 64) / chunkInfo['equipment'][bestEquipment['2h']].attack_speed;
             }
-            if (!!bestEquipment['weapon'] && !!bestEquipment['shield']) {
-                weaponShieldPower = (Math.max((chunkInfo['equipment'][bestEquipment['weapon']].attack_crush + chunkInfo['equipment'][bestEquipment['shield']].attack_crush), (chunkInfo['equipment'][bestEquipment['weapon']].attack_slash + chunkInfo['equipment'][bestEquipment['shield']].attack_slash), (chunkInfo['equipment'][bestEquipment['weapon']].attack_stab + chunkInfo['equipment'][bestEquipment['shield']].attack_stab)) + (chunkInfo['equipment'][bestEquipment['weapon']].melee_strength + chunkInfo['equipment'][bestEquipment['shield']].melee_strength) + 64) / chunkInfo['equipment'][bestEquipment['weapon']].attack_speed;
+            if (bestEquipment.hasOwnProperty('weapon')) {
+                if (bestEquipment.hasOwnProperty('shield')) {
+                    weaponShieldPower = (Math.max((chunkInfo['equipment'][bestEquipment['weapon']].attack_crush + chunkInfo['equipment'][bestEquipment['shield']].attack_crush), (chunkInfo['equipment'][bestEquipment['weapon']].attack_slash + chunkInfo['equipment'][bestEquipment['shield']].attack_slash), (chunkInfo['equipment'][bestEquipment['weapon']].attack_stab + chunkInfo['equipment'][bestEquipment['shield']].attack_stab)) + (chunkInfo['equipment'][bestEquipment['weapon']].melee_strength + chunkInfo['equipment'][bestEquipment['shield']].melee_strength) + 64) / chunkInfo['equipment'][bestEquipment['weapon']].attack_speed;
+                } else {
+                    weaponShieldPower = (Math.max(chunkInfo['equipment'][bestEquipment['weapon']].attack_crush, chunkInfo['equipment'][bestEquipment['weapon']].attack_slash, chunkInfo['equipment'][bestEquipment['weapon']].attack_stab) + chunkInfo['equipment'][bestEquipment['weapon']].melee_strength + 64) / chunkInfo['equipment'][bestEquipment['weapon']].attack_speed;
+                }
             }
         } else if (skill === 'Ranged') {
-            if (!!bestEquipment['2h']) {
+            if (bestEquipment.hasOwnProperty('2h')) {
                 twoHPower = (chunkInfo['equipment'][bestEquipment['2h']].attack_ranged + chunkInfo['equipment'][bestEquipment['2h']].ranged_strength + 64) / chunkInfo['equipment'][bestEquipment['2h']].attack_speed;
             }
-            if (!!bestEquipment['weapon'] && !!bestEquipment['shield']) {
-                weaponShieldPower = ((chunkInfo['equipment'][bestEquipment['weapon']].attack_ranged + chunkInfo['equipment'][bestEquipment['shield']].attack_ranged) + (chunkInfo['equipment'][bestEquipment['weapon']].ranged_strength + chunkInfo['equipment'][bestEquipment['shield']].ranged_strength) + 64) / chunkInfo['equipment'][bestEquipment['weapon']].attack_speed;
+            if (bestEquipment.hasOwnProperty('weapon')) {
+                if (bestEquipment.hasOwnProperty('shield')) {
+                    weaponShieldPower = ((chunkInfo['equipment'][bestEquipment['weapon']].attack_ranged + chunkInfo['equipment'][bestEquipment['shield']].attack_ranged) + (chunkInfo['equipment'][bestEquipment['weapon']].ranged_strength + chunkInfo['equipment'][bestEquipment['shield']].ranged_strength) + 64) / chunkInfo['equipment'][bestEquipment['weapon']].attack_speed;
+                } else {
+                    weaponShieldPower = (chunkInfo['equipment'][bestEquipment['weapon']].attack_ranged + chunkInfo['equipment'][bestEquipment['weapon']].ranged_strength + 64) / chunkInfo['equipment'][bestEquipment['weapon']].attack_speed;
+                }
             }
         } else if (skill === 'Magic') {
-            if (!!bestEquipment['2h']) {
+            if (bestEquipment.hasOwnProperty('2h')) {
                 twoHPower = chunkInfo['equipment'][bestEquipment['2h']].attack_magic;
             }
-            if (!!bestEquipment['weapon'] && !!bestEquipment['shield']) {
-                weaponShieldPower = chunkInfo['equipment'][bestEquipment['weapon']].attack_magic + chunkInfo['equipment'][bestEquipment['shield']].attack_magic;
+            if (bestEquipment.hasOwnProperty('weapon')) {
+                if (bestEquipment.hasOwnProperty('shield')) {
+                    weaponShieldPower = chunkInfo['equipment'][bestEquipment['weapon']].attack_magic + chunkInfo['equipment'][bestEquipment['shield']].attack_magic;
+                } else {
+                    weaponShieldPower = chunkInfo['equipment'][bestEquipment['weapon']].attack_magic;
+                }
             }
         } else if (skill === 'Prayer') {
-            if (!!bestEquipment['2h']) {
+            if (bestEquipment.hasOwnProperty('2h')) {
                 twoHPower = chunkInfo['equipment'][bestEquipment['2h']].prayer;
             }
-            if (!!bestEquipment['weapon'] && !!bestEquipment['shield']) {
-                weaponShieldPower = chunkInfo['equipment'][bestEquipment['weapon']].prayer + chunkInfo['equipment'][bestEquipment['shield']].prayer;
+            if (bestEquipment.hasOwnProperty('weapon') || bestEquipment.hasOwnProperty('shield')) {
+                if (bestEquipment.hasOwnProperty('weapon') && !bestEquipment.hasOwnProperty('shield')) {
+                    weaponShieldPower = chunkInfo['equipment'][bestEquipment['weapon']].prayer;
+                } else if (bestEquipment.hasOwnProperty('shield') && !bestEquipment.hasOwnProperty('weapon')) {
+                    weaponShieldPower = chunkInfo['equipment'][bestEquipment['shield']].prayer;
+                } else {
+                    weaponShieldPower = chunkInfo['equipment'][bestEquipment['weapon']].prayer + chunkInfo['equipment'][bestEquipment['shield']].prayer;
+                }
+            }
+        } else if (skill === 'Flinch') {
+            if (bestEquipment.hasOwnProperty('2h')) {
+                twoHPower = Math.max(chunkInfo['equipment'][bestEquipment['2h']].attack_crush, chunkInfo['equipment'][bestEquipment['2h']].attack_slash, chunkInfo['equipment'][bestEquipment['2h']].attack_stab) + chunkInfo['equipment'][bestEquipment['2h']].melee_strength;
+            }
+            if (bestEquipment.hasOwnProperty('weapon')) {
+                if (bestEquipment.hasOwnProperty('shield')) {
+                    weaponShieldPower = Math.max((chunkInfo['equipment'][bestEquipment['weapon']].attack_crush + chunkInfo['equipment'][bestEquipment['shield']].attack_crush), (chunkInfo['equipment'][bestEquipment['weapon']].attack_slash + chunkInfo['equipment'][bestEquipment['shield']].attack_slash), (chunkInfo['equipment'][bestEquipment['weapon']].attack_stab + chunkInfo['equipment'][bestEquipment['shield']].attack_stab)) + (chunkInfo['equipment'][bestEquipment['weapon']].melee_strength + chunkInfo['equipment'][bestEquipment['shield']].melee_strength);
+                } else {
+                    weaponShieldPower = Math.max(chunkInfo['equipment'][bestEquipment['weapon']].attack_crush, chunkInfo['equipment'][bestEquipment['weapon']].attack_slash, chunkInfo['equipment'][bestEquipment['weapon']].attack_stab) + chunkInfo['equipment'][bestEquipment['weapon']].melee_strength;
+                }
             }
         }
         if (twoHPower > weaponShieldPower) {
