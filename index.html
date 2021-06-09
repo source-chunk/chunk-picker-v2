@@ -8,7 +8,7 @@
 
     gtag('config', 'G-8P0V9GSFJ2');
   </script>
-  <link rel="stylesheet" href="./index.css?v=3.2.4" />
+  <link rel="stylesheet" href="./index.css?v=4.0.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
@@ -39,7 +39,7 @@
 <div class='loading'>Loading&#8230;</div>
 
 <div class='body' data-role="page">
-  <script src="./index.js?v=3.2.4"></script>
+  <script src="./index.js?v=4.0.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext('backlog')">Backlog</li>
     <li onclick="switchActiveContext('backlog note')">Backlog w/ Note</li>
@@ -48,33 +48,39 @@
   <ul class='backlog-context-menu'>
     <li onclick="switchBacklogContext('unbacklog')">Un-backlog</li>
     <li onclick="switchBacklogContext('edit note')">View/Edit Note</li>
+    <li onclick="switchBacklogContext('details')">Details</li>
   </ul>
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='topnav'>
-    <div><a href='?about' target="_blank" class="about-button">
+    <div><a href='?about' target="_blank" class="about-button" title='About Me'>
         <div class="mini avatar"><img
             src="https://cdn.discordapp.com/attachments/411234915284156439/811794024192671814/fc55ab793a4ff74d203f9274dcd32f09.png" />
         </div>
       </a></div>
     <div><a href='https://source-chunk.github.io/chunk-picker-v2/'><span class="gohome">Chunk Picker V2</span></a></div>
-    <div><a href='https://chunk-stats.web.app' target='_blank'><i
+    <div><a href='https://chunk-stats.web.app' target='_blank' title='Chunk Stats'><i
           class="gohighscore fas fa-trophy"></i></a></div>
+    <div><a href='https://www.paypal.com/donate?hosted_button_id=D6J2TEM8E2XN2&source=url' target='_blank' title='Support Me'><i
+          class="gopaypal fab fa-paypal"></i></a></div>
     <div class='toptitle2-outer'><span class='toptitle2'>---</span></div>
-    <div><span><i class="help-button fas fa-question" onclick='helpFunc()'></i></span></div>
+    <!--<div><span><i class="help-button fas fa-question" onclick='helpFunc()' title='Help'></i></span></div>-->
     <div><a
         href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link'
-        target='_blank'><i class="gobugreport fas fa-bug"></i></a></div>
+        target='_blank'><i class="gobugreport fas fa-bug" title='Report a Bug'></i></a></div>
+    <div><a
+        href='https://docs.google.com/document/d/e/2PACX-1vS3v8yTxCgbDZLhXT6RNPyq-hO-suBDPRBr0tKS9dD4NVl1QB3CIYpuw3vn32p9xbHufmGnHBddViKd/pub'
+        target='_blank'><i class="godocumentation fas fa-book" title='Documentation'></i></a></div>
     <div><a
       href='https://discord.gg/kXRgpxnBxu'
-      target='_blank'><i class="godiscord fab fa-discord"></i></a></div>
-    <div><i class="settings fas fa-cog" onclick='settings()'></i></div>
+      target='_blank'><i class="godiscord fab fa-discord" title='Join the Discord'></i></a></div>
+    <div><i class="settings fas fa-cog" onclick='settingsMenu()'></i></div>
   </div>
   <div id="myModal" class="modal">
     <div class="modal-content noscroll">
       <span class='beta-text'>BETA</span>
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeManualAdd()"></i>
       <input type="text" placeholder="Filter tasks..." id="searchManual" class="noscrollhard"
-        oninput="searchManualTasks()" />
+        oninput="searchManualTasks()" autocomplete="off" />
       <span><input type="checkbox" onclick="changeFilterBy()" />Show checked only</span>
       <div id="challenge-data" class="challenge-data noscroll"></div>
     </div>
@@ -97,6 +103,54 @@
       <div id="notes-footer" class="notes-footer noscroll">
         <button id='submit-notes-button' class='modal-button' onclick='submitNotes()'>Save</button>
         <span id='cancel-notes-button' onclick='closeChallengeNotes()'>Cancel</span>
+      </div>
+    </div>
+  </div>
+  <div id="myModal4" class="modal">
+    <div class="modal-content noscroll">
+      <span class='beta-text'>BETA</span>
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeRules()"></i>
+      <div id="rules-title" class="rules-title noscroll">Chunk Rules</div>
+      <div id="rules-subtitle" class="rules-subtitle noscroll">Pick and choose how you want to shape *your* <b>Chunk Experience</b>. Select rules to define what tasks you want to see, how those tasks are generated, and other special rulings.</div>
+      <div id="rules-data" class="rules-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal5" class="modal">
+    <div class="modal-content noscroll">
+      <div id="preset-title" class="preset-title noscroll"></div>
+      <div id="preset-subtitle" class="preset-subtitle noscroll">Applying this preset will overwrite any existing rules with the pre-selected rules for the <span class='specific-preset'></span> preset.<div class="preset-warn"><b>Are you sure you wish to proceed?</b></div></div>
+      <div id="preset-data" class="preset-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal6" class="modal">
+    <div class="modal-content noscroll">
+      <div id="random-title" class="random-title noscroll">Add Random Event & Other Loot</div>
+      <div id="random-subtitle" class="random-subtitle noscroll">Select the loot recieved from a random event/bird nest/mining gem and confirm to add the item into the calculation of chunk tasks.</div>
+      <div id="random-dropdown-container" class="random-dropdown-container noscroll" onchange="randomChange()"><select id="random-dropdown"></select></div>
+      <div id="random-data" class="random-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal7" class="modal">
+    <div class="modal-content noscroll">
+      <span class='beta-text'>BETA</span>
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeSettings()"></i>
+      <div id="settings-title" class="settings-title noscroll">Settings</div>
+      <div id="settings-data" class="settings-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal8" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeRandomList()"></i>
+      <div id="randomlist-title" class="randomlist-title noscroll">Added Items</div>
+      <div id="randomlist-data" class="randomlist-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal9" class="modal">
+    <div class="modal-content noscroll">
+      <div id="statserror-title" class="statserror-title noscroll">Username already on Chunk Stats</div>
+      <div id="statserror-subtitle" class="statserror-subtitle noscroll">This username is already in use on Chunk Stats. If this is a mistake, please contact <b>whitecatblack#0890</b> on Discord.</div>
+      <div id="statserror-footer" class="statserror-footer noscroll">
+        <button id='submit-statserror-button' class='modal-button' onclick='closeStatsError()'>Okay</button>
       </div>
     </div>
   </div>
@@ -172,22 +226,16 @@
     <div class='help-content'>
       <span class='beta-text'>BETA</span>
       <div class='block'>
-        <div class='title'>New Features!</div>
+        <div class='title'>Whoa there!</div>
       </div>
       <div class='block'>
         <p class='description'>
-          Recently the Chunk Picker has been updated with a brand new feature: the Chunk Tasks panel! <b>This panel will
-            display all skill tasks required for your current map, calculated programmatically!</b> The tasks can be
-          checked off as you progress thorugh each chunk, and then any new ones will populate as you unlock new chunks.
+          Before you start picking chunks or editing your map, make sure you select some Chunk Rules first! 
+          These rules define how you'll play your chunk account, and they can be changed at any time as you go about your Chunk Journey.
+          <br />
+          <br />
+          <b>You can edit your Chunk Rules by clicking the Chunk Rules text on the right side of the screen, at the bottom of the Active Chunk Tasks panel.</b>
         </p>
-      </div>
-      <div class='block help-link-block'>
-        <div class="text-link"><b><a target='_blank' href='https://youtu.be/Xb_HnZD0-fw'>Watch a quick [5:36] video to
-              get you up to speed on how to use the Chunk Tasks panel</a></b></div>
-        <span class='or-help'>Or</span>
-        <div class="text-link"><b><a target='_blank'
-              href='https://docs.google.com/document/d/e/2PACX-1vS3v8yTxCgbDZLhXT6RNPyq-hO-suBDPRBr0tKS9dD4NVl1QB3CIYpuw3vn32p9xbHufmGnHBddViKd/pub#h.rgg9isg0zvy8'>Take
-              a look at a brief PDF that demonstrates (with images) how to use the Chunk Tasks panel</a></b></div>
       </div>
       <div class='block'>
         <div><span class="dismiss-help" onclick="dismissHelp()">Dismiss</span></div>
@@ -279,7 +327,7 @@
       <div id='challengesactive' class='accordion' onclick="toggleChallengesPanel('active')"><span class='exp'><i
             class="acc pic fas fa-plus"></i></span><span class="accordion-title">Active Chunk
           Tasks</span></span></div>
-      <div class="panel panel-active noscroll">None</div>
+      <div class="panel panel-active noscroll calculating"><i class="fas fa-spinner fa-spin"></i></div>
       <div id='challengesareas' class='accordion' onclick="toggleChallengesPanel('areas')"><span class='exp'><i
             class="acc pic fas fa-plus"></i></span><span class="accordion-title">Areas</span></div>
       <div class="panel panel-areas noscroll">None</div>
@@ -290,9 +338,11 @@
             class="acc pic fas fa-plus"></i></span><span class="accordion-title">Completed Tasks</span>
       </div>
       <div class="panel panel-completed noscroll">None</div>
-      <!--<div id='challengesrules' class='accordion' onclick="toggleChallengesPanel('rules')"><span class='exp'><i class="acc pic fas fa-plus"></i></span><span class="accordion-title">Custom Rules</span></div>
-    <div class="panel panel-rules noscroll">None</div>-->
-      <div class="open-manual-container"><span class="open-manual" onclick="openManualAdd()">Manually Add Tasks</span>
+      <div class="open-rules-container"><span class="open-rules" onclick="showRules()"><i class="fas fa-edit"></i>Chunk Rules</span>
+      </div>
+      <div class="open-manual-container"><span class="open-manual" onclick="openManualAdd()"><i class="fas fa-plus-circle"></i>Manually Add Tasks</span>
+      </div>
+      <div class="open-random-container"><span class="open-random" onclick="openRandomAdd()"><i class="fas fa-plus-circle"></i>Add Random Event & Other Loot</span>
       </div>
     </div>
   </div>
@@ -320,19 +370,7 @@
       <div class='item'>Change PIN<i class="pic fas fa-pen"></i></div>
     </a>
     <div class='item' onclick="enableScreenshotMode()">Screenshot mode<i class="pic fas fa-camera"></i></div>
-    <div class='item visibilitytoggle item-off' onclick="toggleVisibility()">High visibility mode<i
-        class="pic fas fa-sun"></i></div>
-    <div class='item toggleNeighbors item-off' onclick="toggleNeighbors()">Auto-select neighboring chunks<i
-        class="pic fas fa-plus"></i></div>
-    <div class='item toggleRemove item-off' onclick="toggleRemove()">Remove selected chunks on pick<i
-        class="pic fas fa-plus"></i></div>
-    <div class='item roll2toggle item-off' onclick="toggleRoll2()">Roll 2<i class="pic fas fa-plus"></i></div>
-    <div class='item unpicktoggle item-off' onclick="toggleUnpick()">Unpick chunk<i class="pic fas fa-plus"></i></div>
-    <div class='item recenttoggle item-off' onclick="toggleRecent()">Recent chunks<i class="pic fas fa-plus"></i></div>
-    <div class='item infotoggle item-off' onclick="toggleChunkInfo()">Chunk Info Panel<i class="pic fas fa-plus"></i>
-    </div>
-    <div class='item taskstoggle item-off' onclick="toggleChunkTasks()">Chunk Tasks Panel<i
-        class="pic fas fa-minus"></i></div>
+    <div class='item settingstoggle' onclick="showSettings()">Settings<i class="pic fas fa-cog"></i></div>
   </div>
 </div>
 
@@ -432,11 +470,9 @@
       <u class="centered">
         <h2>Donate</h2>
       </u>
-      <p class="indent">If you'd like to donate to me (for some reason), I have that set up now. Please don't feel
-        obligated or pressured to donate just because you used something that I created; the stuff I make for this
-        community is and always will be <b>free</b>.</p>
-      <p class="centered">That being said, if you do decide to still donate, I greatly appreciate your support. The
-        money will be going directly towards server/storage costs and other website costs.</p>
+      <p class="indent">If you use and enjoy the work that I have put into the Chunk Picker, and have the means to support me, please consider donating.
+        It helps me continue running the site and lets me know that the work I put into it is appreciated.
+      </p>
       <form action="https://www.paypal.com/donate" class="paypal-button" method="post" target="_top">
         <input type="hidden" name="hosted_button_id" value="D6J2TEM8E2XN2" />
         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit"
