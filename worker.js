@@ -76,7 +76,7 @@ onmessage = function(e) {
     baseChunkData = gatherChunksInfo(chunks);
     globalValids = calcChallenges(chunks, baseChunkData);
     calcBIS();
-    console.log(globalValids);
+    //console.log(globalValids);
 
     let tempChallengeArr;
     type === 'current' && (tempChallengeArr = calcCurrentChallenges2());
@@ -259,7 +259,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         //console.log(i);
     } while (!_.isEqual(valids, newValids) && i < 10);
     valids = newValids;
-    console.log(baseChunkData);
+    //console.log(baseChunkData);
     return valids;
 }
 
