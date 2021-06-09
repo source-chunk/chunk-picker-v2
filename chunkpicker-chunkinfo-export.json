@@ -5501,11 +5501,11 @@
 				"Primary": true,
 				"Priority": 457
 			},
-			"Buy the ~|Construction cape|~": {
+			"Buy the ~|Construct. cape|~": {
 				"Category": ["Skillcape"],
 				"Chunks": ["EstateAgent+"],
 				"Level": 99,
-				"Output": "Construction cape(t)",
+				"Output": "Construct. cape(t)",
 				"Primary": false,
 				"Priority": 1
 			},
@@ -17642,11 +17642,11 @@
 				"Primary": false,
 				"Priority": 6
 			},
-			"Buy the ~|Ranged cape|~": {
+			"Buy the ~|Ranging cape|~": {
 				"Category": ["Skillcape"],
 				"Chunks": ["10549"],
 				"Level": 99,
-				"Output": "Ranged cape(t)",
+				"Output": "Ranging cape(t)",
 				"Primary": false
 			},
 			"Wear a ~|black d'hide body|~": {
@@ -70027,7 +70027,6 @@
 			"Leather chaps": true,
 			"Leather cowl": true,
 			"Leather vambraces": true,
-			"Ranging cape": true,
 			"Studded body": true,
 			"Studded chaps": true
 		},
@@ -71681,7 +71680,6 @@
 			"Bronze arrowtips": true,
 			"Bronze bolts": true,
 			"Crossbow": true,
-			"Fletching cape": true,
 			"Iron arrow": true,
 			"Iron arrowtips": true,
 			"Longbow": true,
@@ -72337,7 +72335,6 @@
 			"Zamorak staff": true
 		},
 		"Magic Guild Store (Mystic Robes)": {
-			"Magic cape": true,
 			"Mystic boots": true,
 			"Mystic gloves": true,
 			"Mystic hat": true,
