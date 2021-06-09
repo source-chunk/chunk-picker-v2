@@ -22393,7 +22393,7 @@
 				"Category": ["Skillcape"],
 				"Chunks": ["12850"],
 				"Level": 99,
-				"Output": "Woodcutting cape(t)",
+				"Output": "Woodcut. cape(t)",
 				"Primary": false
 			},
 			"Carve a ~log |canoe|~": {
