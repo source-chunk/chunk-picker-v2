@@ -898,10 +898,6 @@ button.menu2 {
     border: solid;
 }
 
-.paypal-button {
-    text-align: center;
-}
-
 .title {
     font-size: 3.5vw;
     border-bottom: solid;
@@ -1493,22 +1489,6 @@ button.menu2 {
 }
 
 .godiscord:hover {
-    color: rgb(100, 100, 255);
-}
-
-.gopaypal {
-    position: absolute;
-    transition-duration: .5s;
-    cursor: pointer;
-    top: 4px;
-    right: 275px;
-    font-size: 44px;
-    color: rgb(255, 198, 58);
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
-}
-
-.gopaypal:hover {
     color: rgb(100, 100, 255);
 }
 

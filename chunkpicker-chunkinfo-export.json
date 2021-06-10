@@ -45378,6 +45378,9 @@
 			}
 		},
 		"12588": {
+			"Diary": {
+				"Desert": "EA4"
+			},
 			"Monster": {
 				"Crocodile": 4,
 				"Scorpion": 6,
@@ -45415,7 +45418,8 @@
 				"Tin rock": 1
 			},
 			"Shop": {
-				"Ishmael's Fish He Sells": true
+				"Ishmael's Fish He Sells": true,
+				"Shantay Pass Shop": true
 			},
 			"Spawn": {
 				"Bronze pickaxe": 1,
