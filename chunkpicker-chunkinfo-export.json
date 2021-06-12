@@ -8134,6 +8134,12 @@
 				"Primary": true,
 				"Priority": 4
 			},
+			"Dye a ~|cape|~": {
+				"Items": ["Cape+*", "Dye+*"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 9
+			},
 			"Extract sinew from a ~|damaged monkey tail|~": {
 				"Items": ["Damaged monkey tail", "Knife"],
 				"Level": 10,
@@ -16065,6 +16071,26 @@
 			"Get woad leaves from Wyson": {
 				"Chunks": ["12084"],
 				"Output": "Woad leaf"
+			},
+			"Combine dyes into a green dye": {
+				"Items": ["Blue dye", "Yellow dye"],
+				"Output": "Green dye"
+			},
+			"Combine dyes into an orange dye": {
+				"Items": ["Red dye", "Yellow dye"],
+				"Output": "Orange dye"
+			},
+			"Combine dyes into a purple dye": {
+				"Items": ["Blue dye", "Red dye"],
+				"Output": "Purple dye"
+			},
+			"Pick a black mushroom": {
+				"Objects": ["Black mushrooms"],
+				"Output": "Black mushroom"
+			},
+			"Make black mushroom ink": {
+				"Items": ["Pestle and mortar", "Vial", "Black mushroom"],
+				"Output": "Black mushroom ink"
 			},
 			"Trade for blue dye": {
 				"Chunks": ["Dye Trader+"],
@@ -58321,7 +58347,9 @@
 			"Battlemage potion+": ["Battlemage potion(1)", "Battlemage potion(2)", "Battlemage potion(3)", "Battlemage potion(4)"],
 			"Super combat potion+": ["Super combat potion(1)", "Super combat potion(2)", "Super combat potion(3)", "Super combat potion(4)"],
 			"Super restore+": ["Super restore(1)", "Super restore(2)", "Super restore(3)", "Super restore(4)"],
-			"Wizard robes+": ["Blue wizard hat", "Blue wizard robe", "Wizard hat", "Black robe"]
+			"Wizard robes+": ["Blue wizard hat", "Blue wizard robe", "Wizard hat", "Black robe"],
+			"Cape+": ["Black cape", "Blue cape", "Green cape", "Orange cape", "Pink cape", "Purple cape", "Red cape", "Yellow cape"],
+			"Dye+": ["Black mushroom ink", "Blue dye", "Green dye", "Orange dye", "Pink dye", "Purple dye", "Red dye", "Yellow dye"]
 		},
 		"mixPlus": {
 			"Fremennik citizen+": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"],
@@ -58811,7 +58839,6 @@
 			"Fire battlestaff": "1/50",
 			"Fire rune": "5/50",
 			"HerbDropTable+": "5/50",
-			"Looting bag": "1/3",
 			"Prayer potion(4)": "2/50",
 			"Pure essence": "7/50",
 			"Runite bolts": "5/50",
@@ -58944,7 +58971,6 @@
 			"HerbDropTable+": "3/100",
 			"Law rune": "6/100",
 			"Left skull half": "3/100",
-			"Looting bag": "1/3",
 			"Mithril ore": "2/100",
 			"Pure essence": "5/100",
 			"Reward casket (elite)": "Always",
@@ -58964,7 +58990,6 @@
 			"Dark fishing bait": "53/95",
 			"Death rune": "3/95",
 			"HerbDropTable+": "3/95",
-			"Looting bag": "1/3",
 			"Mithril ore": "2/95",
 			"Monkfish": "1/95",
 			"Reward casket (elite)": "Always",
@@ -59010,7 +59035,6 @@
 			"Hammer": "5/128",
 			"Headless arrow": "10/128",
 			"HerbDropTable+": "10/128",
-			"Looting bag": "1/3",
 			"Nature rune": "5/128",
 			"Rune spear": "1/128",
 			"Rune thrownaxe": "3/128",
@@ -59146,7 +59170,6 @@
 			"Death rune": "2/128",
 			"HerbDropTable+": "41/128",
 			"Law rune": "2/128",
-			"Looting bag": "1/3",
 			"Mithril axe": "1/128",
 			"Mithril sq shield": "2/128",
 			"Nature rune": "1/128",
@@ -59165,7 +59188,6 @@
 			"HerbDropTable+": "37/128",
 			"Iron scimitar": "4/128",
 			"Law rune": "2/128",
-			"Looting bag": "1/3",
 			"Mind rune": "1/128",
 			"Nature rune": "1/128",
 			"Nothing": "3/128",
@@ -59187,7 +59209,6 @@
 			"Death rune": "2/128",
 			"HerbDropTable+": "41/128",
 			"Law rune": "2/128",
-			"Looting bag": "1/3",
 			"Mithril axe": "1/128",
 			"Mithril sq shield": "2/128",
 			"Nature rune": "1/128",
@@ -59208,7 +59229,6 @@
 			"Hammer": "5/128",
 			"Headless arrow": "10/128",
 			"HerbDropTable+": "10/128",
-			"Looting bag": "1/3",
 			"Nature rune": "5/128",
 			"Rune spear": "1/128",
 			"Rune thrownaxe": "3/128",
@@ -59281,12 +59301,10 @@
 		},
 		"Bat": {
 			"Bat bones": "Always",
-			"Bat wing": "1/4",
-			"Looting bag": "1/15"
+			"Bat wing": "1/4"
 		},
 		"Battle mage": {
-			"Bones": "Always",
-			"Looting bag": "1/3"
+			"Bones": "Always"
 		},
 		"Bear Cub": {
 			"Bear fur": "Always",
@@ -59451,7 +59469,6 @@
 			"Coins": "2/128",
 			"HerbDropTable+": "15/128",
 			"Law rune": "4/128",
-			"Looting bag": "1/4",
 			"Nature rune": "4/128",
 			"Nothing": "3/128",
 			"Silver ore": "11/128",
@@ -59475,7 +59492,6 @@
 			"Iron full helm": "2/128",
 			"Iron sword": "4/128",
 			"Law rune": "2/128",
-			"Looting bag": "1/9",
 			"Mind rune": "1/128",
 			"Mithril arrow": "4/128",
 			"Nothing": "2/128",
@@ -59527,7 +59543,6 @@
 			"Bones": "Always",
 			"Clue scroll (beginner)": "1/90",
 			"Ensouled bear head": "1/25",
-			"Looting bag": "1/7",
 			"Raw bear meat": "Always"
 		},
 		"Black demon": {
@@ -59547,7 +59562,6 @@
 			"HerbDropTable+": "23/128",
 			"Law rune": "1/128",
 			"Lobster": "3/128",
-			"Looting bag": "1/3",
 			"Mithril kiteshield": "1/128",
 			"Rune chainbody": "1/128",
 			"Rune med helm": "1/128",
@@ -59571,7 +59585,6 @@
 			"Ensouled demon head": "1/35",
 			"HerbDropTable+": "23/128",
 			"Law rune": "1/128",
-			"Looting bag": "1/3",
 			"Rune chainbody": "1/128",
 			"Rune dagger": "1/128",
 			"Rune full helm": "1/128",
@@ -59599,7 +59612,6 @@
 			"Ensouled dragon head": "1/35",
 			"Fire rune": "8/128",
 			"Law rune": "5/128",
-			"Looting bag": "1/3",
 			"Mithril 2h sword": "4/128",
 			"Mithril axe": "3/128",
 			"Mithril battleaxe": "3/128",
@@ -59626,7 +59638,6 @@
 			"Dragon javelin heads": "6/128",
 			"Ensouled dragon head": "1/35",
 			"Law rune": "5/128",
-			"Looting bag": "1/3",
 			"Monkfish": "3/128",
 			"Rune axe": "3/128",
 			"Rune kiteshield": "1/128",
@@ -59642,7 +59653,6 @@
 		"Black unicorn": {
 			"Bones": "Always",
 			"Ensouled unicorn head": "1/35",
-			"Looting bag": "1/5",
 			"Unicorn bone": "Always",
 			"Unicorn horn": "Always"
 		},
@@ -59763,7 +59773,6 @@
 			"Earth battlestaff": "1/50",
 			"Earth rune": "5/50",
 			"HerbDropTable+": "5/50",
-			"Looting bag": "1/3",
 			"Prayer potion(4)": "2/50",
 			"Pure essence": "7/50",
 			"Staff of earth": "1/50",
@@ -60020,7 +60029,6 @@
 			"Grimy toadflax": "1/128",
 			"Limpwurt root": "5/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Magic logs": "5/128",
 			"Magic seed": "1/128",
 			"Mahogany logs": "6/128",
@@ -60173,7 +60181,6 @@
 			"Dragon dagger": "11/128",
 			"Dragon pickaxe": "1/256",
 			"HerbDropTable+": "4/128",
-			"Looting bag": "1/3",
 			"Mithril dart": "10/128",
 			"Pet chaos elemental": "1/300",
 			"Rune arrow": "10/128",
@@ -60201,7 +60208,6 @@
 			"Coins": "18/128",
 			"Fire rune": "4/128",
 			"Grimy lantadyme": "8/128",
-			"Looting bag": "1/3",
 			"Malediction shard 1": "1/128",
 			"Monkfish": "8/128",
 			"Odium shard 1": "1/128",
@@ -60234,7 +60240,6 @@
 			"Ensouled chaos druid head": "1/35",
 			"HerbDropTable+": "46/128",
 			"Law rune": "7/128",
-			"Looting bag": "1/11",
 			"Mind rune": "2/128",
 			"Mithril bolts": "4/128",
 			"Nature rune": "1/128",
@@ -60275,7 +60280,6 @@
 			"Cosmic rune": "2/128",
 			"Death rune": "1/128",
 			"Law rune": "4/128",
-			"Looting bag": "1/3",
 			"Mind rune": "3/128",
 			"Mithril bar": "6/128",
 			"Mithril longsword": "1/128",
@@ -60372,8 +60376,7 @@
 		},
 		"Chronozon": {
 			"Ashes": "Always",
-			"Crest part (Johnathon)": "Always",
-			"Looting bag": "1/3"
+			"Crest part (Johnathon)": "Always"
 		},
 		"Clivet": {
 			"Bones": "Always"
@@ -60638,7 +60641,6 @@
 			"Fedora": "1/128",
 			"Grimy dwarf weed": "8/128",
 			"Long bone": "2/128",
-			"Looting bag": "1/3",
 			"Malediction shard 2": "1/64",
 			"Mud rune": "4/128",
 			"Muddy key": "4/128",
@@ -61115,7 +61117,6 @@
 			"HerbDropTable+": "3/128",
 			"Iron mace": "1/128",
 			"Iron ore": "1/128",
-			"Looting bag": "1/3",
 			"Mind rune": "3/128",
 			"Mithril mace": "1/128",
 			"Nature rune": "2/128",
@@ -61137,7 +61138,6 @@
 			"Fire rune": "2/128",
 			"Fire talisman": "2/128",
 			"Law rune": "1/128",
-			"Looting bag": "1/7",
 			"Mind rune": "2/128",
 			"Nature rune": "7/128",
 			"Nothing": "16/128",
@@ -61147,8 +61147,7 @@
 			"Wizard hat": "6/128"
 		},
 		"Deadly red spider": {
-			"Clue scroll (beginner)": "1/128",
-			"Looting bag": "1/4"
+			"Clue scroll (beginner)": "1/128"
 		},
 		"Death spawn": {
 			"Ashes": "Always"
@@ -61163,16 +61162,13 @@
 			"Bones": "Always"
 		},
 		"Demon of Balance": {
-			"Demon's heart (balance)": "Always",
-			"Looting bag": "1/30"
+			"Demon's heart (balance)": "Always"
 		},
 		"Demon of Darkness": {
-			"Demon's heart (darkness)": "Always",
-			"Looting bag": "1/30"
+			"Demon's heart (darkness)": "Always"
 		},
 		"Demon of Light": {
-			"Demon's heart (light)": "Always",
-			"Looting bag": "1/30"
+			"Demon's heart (light)": "Always"
 		},
 		"Demonic gorilla": {
 			"Adamantite bar": "20/500",
@@ -61242,8 +61238,7 @@
 			"GemDropTable+": "1/21.33"
 		},
 		"Derwen": {
-			"Ent's roots": "Always",
-			"Looting bag": "1/3"
+			"Ent's roots": "Always"
 		},
 		"Desert Wolf": {
 			"Wolf bone": "1/4",
@@ -61280,7 +61275,6 @@
 			"Coins": "2/128",
 			"HerbDropTable+": "15/128",
 			"Law rune": "4/128",
-			"Looting bag": "1/4",
 			"Nature rune": "4/128",
 			"Nothing": "3/128",
 			"Silver ore": "11/128",
@@ -61295,8 +61289,7 @@
 			"Ashes": "Always"
 		},
 		"Double agent": {
-			"Bones": "Always",
-			"Looting bag": "1/3"
+			"Bones": "Always"
 		},
 		"Druid": {
 			"Antipoison(3)": "1/128",
@@ -61398,7 +61391,6 @@
 			"Earth warrior champion scroll": "1/5000",
 			"HerbDropTable+": "14/128",
 			"Law rune": "6/128",
-			"Looting bag": "1/3",
 			"Nature rune": "9/128",
 			"Nothing": "28/128",
 			"Staff of earth": "2/128",
@@ -61458,7 +61450,6 @@
 			"Ensouled chaos druid head": "1/20",
 			"HerbDropTable+": "55/129",
 			"Law rune": "7/129",
-			"Looting bag": "1/3",
 			"Mind rune": "5/129",
 			"Mithril bolts": "6/129",
 			"Nature rune": "1/129",
@@ -61644,7 +61635,6 @@
 			"Earth talisman": "2/128",
 			"Ecumenical key": "1/60",
 			"HerbDropTable+": "10/128",
-			"Looting bag": "1/3",
 			"Nothing": "16/128",
 			"UncommonSeedDropTable+": "19/128",
 			"Vampyre dust": "Always",
@@ -61715,7 +61705,6 @@
 			"Law rune": "1/128",
 			"Lobster": "3/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Mithril sq shield": "2/128",
 			"Rune arrow": "5/128",
 			"Rune scimitar": "1/128",
@@ -61744,7 +61733,6 @@
 			"Fire rune": "8/128",
 			"Gold ore": "8/128",
 			"Jug of wine": "2/128",
-			"Looting bag": "1/3",
 			"Mithril chainbody": "2/128",
 			"Staff of fire": "3/128",
 			"Steel axe": "4/128",
@@ -62049,8 +62037,7 @@
 			"GemDropTable+": "1/128"
 		},
 		"Ghost": {
-			"Clue scroll (beginner)": "1/90",
-			"Looting bag": "1/7"
+			"Clue scroll (beginner)": "1/90"
 		},
 		"Ghost (Melzar's Maze)": {
 			"Key (orange)": "Always"
@@ -62150,8 +62137,7 @@
 		},
 		"Giant bat": {
 			"Bat bones": "Always",
-			"Giant bat wing": "Always",
-			"Looting bag": "1/5"
+			"Giant bat wing": "Always"
 		},
 		"Giant crypt rat": {
 			"Bones": "Always",
@@ -62210,7 +62196,6 @@
 			"Bones": "Always",
 			"Clue scroll (beginner)": "1/128",
 			"Giant rat bone": "Always",
-			"Looting bag": "1/15",
 			"Raw rat meat": "Always"
 		},
 		"Giant rockslug": {
@@ -62304,8 +62289,7 @@
 			"Snail shell": "Always"
 		},
 		"Giant spider": {
-			"Clue scroll (beginner)": "1/128",
-			"Looting bag": "1/15"
+			"Clue scroll (beginner)": "1/128"
 		},
 		"Glod": {
 			"Big bones": "Always",
@@ -62384,7 +62368,6 @@
 			"Grapes": "1/128",
 			"Hammer": "9/128",
 			"HerbDropTable+": "2/128",
-			"Looting bag": "1/11",
 			"Mind rune": "3/128",
 			"Nature rune": "1/128",
 			"Red cape": "1/128",
@@ -62440,7 +62423,6 @@
 			"Iron 2h sword": "3/128",
 			"Iron halberd": "3/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Mithril arrow(p++)": "2/128",
 			"Mithril thrownaxe": "3/128",
 			"Ring of life": "1/128",
@@ -62457,7 +62439,6 @@
 		},
 		"Greater Skeleton Hellhound": {
 			"Bones": "Always",
-			"Looting bag": "1/3",
 			"Skeleton champion scroll": "1/5000"
 		},
 		"Greater abyssal demon": {
@@ -62502,7 +62483,6 @@
 			"Ensouled demon head": "1/40",
 			"Fire rune": "1/128",
 			"Gold bar": "2/128",
-			"Looting bag": "1/3",
 			"Mithril kiteshield": "1/128",
 			"Nothing": "2/128",
 			"Rune full helm": "1/128",
@@ -62528,7 +62508,6 @@
 			"Ensouled demon head": "1/40",
 			"Gold bar": "3/128",
 			"Gold ore": "1/128",
-			"Looting bag": "1/3",
 			"Monkfish": "1/128",
 			"Rune full helm": "1/128",
 			"Shark": "2/128"
@@ -62559,7 +62538,6 @@
 			"HerbDropTable+": "15/128",
 			"Key (elite)": "Always",
 			"Law rune": "3/128",
-			"Looting bag": "1/3",
 			"Mithril axe": "3/128",
 			"Mithril kiteshield": "1/128",
 			"Mithril spear": "2/128",
@@ -62586,7 +62564,6 @@
 			"HerbDropTable+": "15/128",
 			"Key (elite)": "Always",
 			"Law rune": "3/128",
-			"Looting bag": "1/3",
 			"Mithril 2h sword": "5/128",
 			"Mithril battleaxe": "1/128",
 			"Mithril ore": "3/128",
@@ -62600,7 +62577,6 @@
 			"Bones": "Always",
 			"Clue scroll (beginner)": "1/90",
 			"Ensouled bear head": "1/25",
-			"Looting bag": "1/7",
 			"Raw bear meat": "Always"
 		},
 		"Grizzly bear cub": {
@@ -62715,8 +62691,7 @@
 			"Bones": "Always"
 		},
 		"Guard Bandit": {
-			"Bones": "Always",
-			"Looting bag": "1/6"
+			"Bones": "Always"
 		},
 		"Guard dog": {
 			"Bones": "Always",
@@ -62854,7 +62829,6 @@
 			"Brimstone key": "1/95",
 			"Clue scroll (elite)": "Always",
 			"Clue scroll (hard)": "1/64",
-			"Looting bag": "1/3",
 			"Reward casket (elite)": "Always",
 			"Smouldering stone": "1/32768"
 		},
@@ -62862,7 +62836,6 @@
 			"Bones": "Always",
 			"Clue scroll (elite)": "Always",
 			"Clue scroll (hard)": "1/64",
-			"Looting bag": "1/3",
 			"Reward casket (elite)": "Always",
 			"Smouldering stone": "1/16384"
 		},
@@ -62961,7 +62934,6 @@
 			"Law rune": "3/128",
 			"Limpwurt root": "11/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/5",
 			"Mind rune": "2/128",
 			"Nature rune": "2/128",
 			"Nothing": "1/128",
@@ -63020,7 +62992,6 @@
 			"Iron sword": "3/128",
 			"Law rune": "3/128",
 			"Limpwurt root": "21/128",
-			"Looting bag": "1/3",
 			"Nature rune": "2/128",
 			"Nothing": "4/128",
 			"Steel dagger": "3/128",
@@ -63087,7 +63058,6 @@
 			"Jug of wine": "3/128",
 			"Law rune": "2/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Mind rune": "3/128",
 			"Mithril mace": "1/128",
 			"Mithril ore": "1/128",
@@ -63119,7 +63089,6 @@
 			"Jug of wine": "3/128",
 			"Law rune": "2/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Mithril axe": "4/128",
 			"Mithril ore": "1/128",
 			"Mithril platelegs": "1/128",
@@ -63129,8 +63098,7 @@
 			"UncommonSeedDropTable+": "13/128"
 		},
 		"Ice spider": {
-			"Clue scroll (beginner)": "1/128",
-			"Looting bag": "1/3"
+			"Clue scroll (beginner)": "1/128"
 		},
 		"Ice troll": {
 			"Adamant axe": "2/128",
@@ -63334,7 +63302,6 @@
 			"HerbDropTable+": "10/128",
 			"Iron battleaxe": "3/128",
 			"Law rune": "7/128",
-			"Looting bag": "1/3",
 			"Mithril arrow": "5/128",
 			"Mithril mace": "1/128",
 			"Nature rune": "10/128",
@@ -63351,7 +63318,6 @@
 			"Clue scroll (easy)": "1/128",
 			"Coins": "4/128",
 			"Ecumenical key": "1/60",
-			"Looting bag": "1/8",
 			"Water rune": "4/128",
 			"GemDropTable+": "1/42.67"
 		},
@@ -63386,7 +63352,6 @@
 			"Imp champion scroll": "1/5000",
 			"Jug": "2/128",
 			"Jug of water": "2/128",
-			"Looting bag": "1/15",
 			"Mind talisman": "7/128",
 			"Pot": "2/128",
 			"Pot of flour": "2/128",
@@ -63762,8 +63727,7 @@
 			"Spider carcass": "Always"
 		},
 		"Justiciar Zachariah": {
-			"Justiciar's hand": "Always",
-			"Looting bag": "1/3"
+			"Justiciar's hand": "Always"
 		},
 		"K'ril Tsutsaroth": {
 			"Adamant arrow(p++)": "8/127",
@@ -63997,8 +63961,7 @@
 		},
 		"King Scorpion": {
 			"Clue scroll (beginner)": "1/100",
-			"Ensouled scorpion head": "1/25",
-			"Looting bag": "1/4"
+			"Ensouled scorpion head": "1/25"
 		},
 		"King kurask": {
 			"Adamant platebody": "3/124",
@@ -64032,8 +63995,7 @@
 		"Knight of Saradomin": {
 			"Bones": "Always",
 			"Clue scroll (hard)": "1/128",
-			"Ecumenical key": "1/60",
-			"Looting bag": "1/3"
+			"Ecumenical key": "1/60"
 		},
 		"Kourend guard": {
 			"Air rune": "2/128",
@@ -64212,7 +64174,6 @@
 			"Lava rune": "4/128",
 			"Lava scale": "Always",
 			"Law rune": "5/128",
-			"Looting bag": "1/3",
 			"Onyx bolt tips": "5/128",
 			"Rune axe": "2/128",
 			"Rune dart": "6/128",
@@ -64264,7 +64225,6 @@
 			"HerbDropTable+": "1/128",
 			"Jug of wine": "3/128",
 			"Lesser demon champion scroll": "1/5000",
-			"Looting bag": "1/3",
 			"Mithril chainbody": "1/128",
 			"Mithril sq shield": "1/128",
 			"Rune med helm": "1/128",
@@ -64292,7 +64252,6 @@
 			"HerbDropTable+": "1/128",
 			"Jug of wine": "3/128",
 			"Lesser demon champion scroll": "1/5000",
-			"Looting bag": "1/3",
 			"Mithril axe": "4/128",
 			"Rune med helm": "1/128"
 		},
@@ -64491,7 +64450,6 @@
 			"Adamant battleaxe": "4/500",
 			"Clue scroll (medium)": "1/256",
 			"Iron battleaxe": "475/500",
-			"Looting bag": "1/3",
 			"Mithril battleaxe": "10/500",
 			"Rune battleaxe": "1/500",
 			"Steel battleaxe": "10/500"
@@ -64537,7 +64495,6 @@
 			"Limpwurt seed": "5/128",
 			"Lobster": "3/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Onion seed": "20/640",
 			"Orange tree seed": "10/640",
 			"Papaya tree seed": "1/640",
@@ -64575,7 +64532,6 @@
 			"HerbDropTable+": "23/128",
 			"Iron dagger": "1/128",
 			"Key (medium)": "Always",
-			"Looting bag": "1/15",
 			"Mind rune": "2/128",
 			"Nothing": "8/128"
 		},
@@ -64772,7 +64728,6 @@
 		"Monk of Zamorak": {
 			"Bones": "Always",
 			"Golden key": "Always",
-			"Looting bag": "1/6",
 			"Nothing": "18/20",
 			"Zamorak monk bottom": "1/20",
 			"Zamorak monk top": "1/20"
@@ -64846,7 +64801,6 @@
 			"Iron arrow": "2/128",
 			"Law rune": "4/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Magic staff": "2/128",
 			"Mithril spear": "2/128",
 			"Mithril sword": "2/128",
@@ -64883,7 +64837,6 @@
 			"HerbDropTable+": "5/128",
 			"Law rune": "4/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Mithril arrow": "1/128",
 			"Mithril bar": "6/128",
 			"Mithril kiteshield": "1/128",
@@ -65269,7 +65222,6 @@
 			"Ecumenical key": "1/60",
 			"Ensouled ogre head": "1/30",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Nothing": "109/128",
 			"Ogre ribs": "1/4",
 			"UncommonSeedDropTable+": "19/128"
@@ -65375,7 +65327,6 @@
 			"Iron scimitar": "5/128",
 			"Iron spear": "4/128",
 			"Knife": "5/128",
-			"Looting bag": "1/3",
 			"Steel axe": "5/128",
 			"Steel dagger": "5/128",
 			"Steel mace": "5/128",
@@ -65542,7 +65493,6 @@
 			"Iron platebody": "1/128",
 			"Key (medium)": "Always",
 			"Law rune": "1/128",
-			"Looting bag": "1/6",
 			"Nature rune": "5/128",
 			"Nothing": "8/128",
 			"Right eye patch": "12/128",
@@ -65560,15 +65510,13 @@
 			"Ensouled scorpion head": "1/25"
 		},
 		"Poison spider": {
-			"Clue scroll (beginner)": "rare",
-			"Looting bag": "1/3"
+			"Clue scroll (beginner)": "rare"
 		},
 		"Poltenip": {
 			"Bones": "Always"
 		},
 		"Porazdir": {
-			"Demon's heart": "Always",
-			"Looting bag": "1/3"
+			"Demon's heart": "Always"
 		},
 		"Possessed Priest": {
 			"Agility potion(4)": "Random",
@@ -65610,7 +65558,6 @@
 		},
 		"Rat": {
 			"Bones": "Always",
-			"Looting bag": "1/15",
 			"Rat bone": "1/4",
 			"Rat's tail": "Always"
 		},
@@ -66292,7 +66239,6 @@
 			"HerbDropTable+": "23/128",
 			"Iron dagger": "1/128",
 			"Iron dagger(p)": "1/128",
-			"Looting bag": "1/10",
 			"Mind rune": "2/128",
 			"Nothing": "8/128"
 		},
@@ -66451,8 +66397,7 @@
 		"Saradomin priest": {
 			"Bones": "Always",
 			"Clue scroll (hard)": "1/128",
-			"Ecumenical key": "1/60",
-			"Looting bag": "1/3"
+			"Ecumenical key": "1/60"
 		},
 		"Saradomin wizard": {
 			"Air battlestaff": "2/128",
@@ -66548,7 +66493,6 @@
 			"Dust rune": "4/128",
 			"Ensouled scorpion head": "1/18",
 			"Grimy kwuarm": "8/128",
-			"Looting bag": "1/3",
 			"Malediction shard 3": "1/128",
 			"Odium shard 3": "1/128",
 			"Phoenix necklace": "7/128",
@@ -66572,19 +66516,16 @@
 			"GemDropTable+": "1/32"
 		},
 		"Scorpia's guardian": {
-			"Ensouled scorpion head": "1/25",
-			"Looting bag": "1/3"
+			"Ensouled scorpion head": "1/25"
 		},
 		"Scorpia's offspring (monster)": {
 			"Clue scroll (beginner)": "1/100",
-			"Ensouled scorpion head": "1/25",
-			"Looting bag": "1/10"
+			"Ensouled scorpion head": "1/25"
 		},
 		"Scorpion": {
 			"Book page 1": "Always",
 			"Clue scroll (beginner)": "1/100",
-			"Ensouled scorpion head": "1/25",
-			"Looting bag": "1/10"
+			"Ensouled scorpion head": "1/25"
 		},
 		"Screaming banshee": {
 			"Air rune": "3/128",
@@ -66749,8 +66690,7 @@
 			"GemDropTable+": "3 × 1/76"
 		},
 		"Shadow spider": {
-			"Clue scroll (beginner)": "1/128",
-			"Looting bag": "1/3"
+			"Clue scroll (beginner)": "1/128"
 		},
 		"Shadow warrior": {
 			"Adamant spear": "1/128",
@@ -67060,7 +67000,6 @@
 		},
 		"Skeleton Hellhound (Vet'ion)": {
 			"Bones": "Always",
-			"Looting bag": "1/3",
 			"Skeleton champion scroll": "1/5000"
 		},
 		"Skeleton Mage": {
@@ -67310,7 +67249,6 @@
 			"Iron scimitar": "1/128",
 			"Iron sword": "4/128",
 			"Law rune": "2/128",
-			"Looting bag": "1/14",
 			"Nothing": "8/128",
 			"Skeleton champion scroll": "1/5000",
 			"Water rune": "3/128",
@@ -67318,7 +67256,6 @@
 		},
 		"Skeleton%2FPlain": {
 			"Bones": "Always",
-			"Looting bag": "1/6",
 			"Skeleton champion scroll": "1/5000"
 		},
 		"Skeleton%2FUnarmed": {
@@ -67336,7 +67273,6 @@
 			"Iron arrow": "4/128",
 			"Iron dagger": "6/128",
 			"Iron ore": "1/128",
-			"Looting bag": "1/14",
 			"Nature rune": "1/128",
 			"Nothing": "18/128",
 			"Skeleton champion scroll": "1/5000",
@@ -67565,7 +67501,6 @@
 			"Coins": "2/128",
 			"HerbDropTable+": "15/128",
 			"Law rune": "4/128",
-			"Looting bag": "1/4",
 			"Nature rune": "4/128",
 			"Nothing": "3/128",
 			"Silver ore": "11/128",
@@ -67576,8 +67511,7 @@
 			"GemDropTable+": "1/64"
 		},
 		"Spider": {
-			"Clue scroll (beginner)": "1/128",
-			"Looting bag": "1/15"
+			"Clue scroll (beginner)": "1/128"
 		},
 		"Spider (Ape Atoll)": {
 			"Clue scroll (beginner)": "Rare"
@@ -67934,7 +67868,6 @@
 			"Iron med helm": "4/128",
 			"Iron ore": "4/128",
 			"Law rune": "1/128",
-			"Looting bag": "1/15",
 			"Nature rune": "13/128",
 			"Nothing": "30/128",
 			"Steel axe": "1/128"
@@ -68425,7 +68358,6 @@
 			"Grimy snapdragon": "1/128",
 			"Limpwurt root": "5/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Magic logs": "5/128",
 			"Magic seed": "1/128",
 			"Onyx bolt tips": "5/128",
@@ -68504,7 +68436,6 @@
 			"Grimy ranarr weed": "1/128",
 			"Limpwurt root": "5/128",
 			"Long bone": "1/400",
-			"Looting bag": "1/3",
 			"Magic logs": "5/128",
 			"Magic seed": "1/128",
 			"Mort myre fungus": "2/128",
@@ -68816,7 +68747,6 @@
 			"Grey wolf fur": "100/512",
 			"HerbDropTable+": "3/512",
 			"Jug of wine": "20/512",
-			"Looting bag": "1/3",
 			"Mithril chainbody": "10/512",
 			"Mithril sq shield": "10/512",
 			"Nothing": "2/512",
@@ -68925,7 +68855,6 @@
 			"GemDropTable+": "1/64"
 		},
 		"White wolf": {
-			"Looting bag": "1/3",
 			"Wolf bone": "1/4",
 			"Wolf bones": "Always"
 		},
@@ -68979,7 +68908,6 @@
 		},
 		"Wolf": {
 			"Clue scroll (beginner)": "Rare",
-			"Looting bag": "1/6",
 			"Wolf bone": "1/4",
 			"Wolf bones": "Always"
 		},
@@ -69174,7 +69102,6 @@
 			"Fire battlestaff": "1/128",
 			"Fire rune": "2/128",
 			"Law rune": "1/128",
-			"Looting bag": "1/3",
 			"Nature rune": "7/128",
 			"Water battlestaff": "3/128",
 			"Water rune": "2/128",
@@ -70591,7 +70518,6 @@
 			"Kharyrll teleport (tablet)": true,
 			"Lassar teleport (tablet)": true,
 			"Lava staff upgrade kit": true,
-			"Looting bag": true,
 			"Looting bag note": true,
 			"Magic potion(4)": true,
 			"Magic shortbow scroll": true,
@@ -71930,7 +71856,6 @@
 			"Kharyrll teleport (tablet)": true,
 			"Lassar teleport (tablet)": true,
 			"Lava staff upgrade kit": true,
-			"Looting bag": true,
 			"Looting bag note": true,
 			"Magic shortbow scroll": true,
 			"Ornate maul handle": true,
