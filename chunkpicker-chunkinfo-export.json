@@ -27319,6 +27319,71 @@
 				"Category": ["Untracked Uniques"],
 				"Label": "Untracked Uniques",
 				"Items": ["Gardening boots"]
+			},
+			"(Stuffables) Obtain a ~|big bass|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Big bass"]
+			},
+			"(Stuffables) Obtain a ~|big swordfish|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Big swordfish"]
+			},
+			"(Stuffables) Obtain a ~|big harpoonfish|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Big harpoonfish"]
+			},
+			"(Stuffables) Obtain a ~|big shark|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Big shark"]
+			},
+			"(Stuffables) Obtain a ~|crawling hand (item)|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Crawling hand (item)"]
+			},
+			"(Stuffables) Obtain a ~|cockatrice head|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Cockatrice head"]
+			},
+			"(Stuffables) Obtain a ~|basilisk head|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Basilisk head"]
+			},
+			"(Stuffables) Obtain a ~|kurask head|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Kurask head"]
+			},
+			"(Stuffables) Obtain an ~|abyssal head|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Abyssal head"]
+			},
+			"(Stuffables) Obtain ~|kbd heads|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Kbd heads"]
+			},
+			"(Stuffables) Obtain a ~|kq head|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Kq head+"]
+			},
+			"(Stuffables) Obtain a ~|vorkath's head|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Vorkath's head"]
+			},
+			"(Stuffables) Obtain ~|alchemical hydra heads|~": {
+				"Category": ["Stuffables"],
+				"Label": "Stuffables",
+				"Items": ["Alchemical hydra heads"]
 			}
 		}
 	},
@@ -58372,6 +58437,7 @@
 			"Steel armour+": ["Steel boots", "Steel med helm", "Steel full helm", "Steel sq shield", "Steel plateskirt", "Steel kiteshield", "Steel platelegs", "Steel chainbody", "Steel platebody"],
 			"Steel key+": ["Steel key red", "Steel key brown", "Steel key crimson", "Steel key black", "Steel key purple"],
 			"SteelWep+": ["Steel dagger", "Steel pickaxe", "Steel axe", "Steel mace", "Steel sword", "Steel scimitar", "Steel longsword", "Steel battleaxe", "Steel claws", "Steel spear", "Steel 2h sword"],
+			"Kq head+": ["Kq head", "Kq head (tattered)"],
 			"Stuffed kq head+": ["Stuffed kq head", "Stuffed kq head (tattered)"],
 			"Super attack+": ["Super attack(1)", "Super attack(2)", "Super attack(3)", "Super attack(4)"],
 			"Super defence+": ["Super defence(1)", "Super defence(2)", "Super defence(3)", "Super defence(4)"],

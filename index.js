@@ -226,6 +226,7 @@ let rules = {
     "Primary Spawns": false,
     "Smithing by Smelting": false,
     "Pets": false,
+    "Stuffables": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -279,6 +280,7 @@ let ruleNames = {
     "Primary Spawns": "Item spawns count as primary access to an item, and can be used as a primary way to train a skill if needed",
     "Smithing by Smelting": "Smelting ore counts as a primary Smithing training method",
     "Pets": "Obtaining pets is included in the collection log tasks",
+    "Stuffables": "Must obtain stuffable items (big fish, slayer heads)",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -413,6 +415,7 @@ let ruleStructure = {
         "BIS Skilling": true,
         "Collection Log": ["Collection Log Bosses", "Collection Log Raids", "Collection Log Minigames", "Collection Log Other", "Pets"],
         "Untracked Uniques": true,
+        "Stuffables": true,
         "Random Event Loot": true,
         "Manually Add Tasks": true
     }
@@ -697,7 +700,7 @@ let futureChunkData = {};
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.1.0");
+const myWorker = new Worker("./worker.js?v=4.1.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
