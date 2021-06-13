@@ -8,7 +8,7 @@
 
     gtag('config', 'G-8P0V9GSFJ2');
   </script>
-  <link rel="stylesheet" href="./index.css?v=4.0.5" />
+  <link rel="stylesheet" href="./index.css?v=4.1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
@@ -39,7 +39,7 @@
 <div class='loading'>Loading&#8230;</div>
 
 <div class='body' data-role="page">
-  <script src="./index.js?v=4.0.5"></script>
+  <script src="./index.js?v=4.1.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext('backlog')">Backlog</li>
     <li onclick="switchActiveContext('backlog note')">Backlog w/ Note</li>
@@ -75,14 +75,17 @@
       href='https://discord.gg/kXRgpxnBxu'
       target='_blank'><i class="godiscord fab fa-discord" title='Join the Discord'></i></a></div>
     <div><i class="settings fas fa-cog" onclick='settingsMenu()'></i></div>
+    <div><span onclick='openSearch()'><i class="gosearch fas fa-search" title='Search My Chunks'></i></span></div>
   </div>
   <div id="myModal" class="modal">
     <div class="modal-content noscroll">
       <span class='beta-text'>BETA</span>
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeManualAdd()"></i>
-      <input type="text" placeholder="Filter tasks..." id="searchManual" class="noscrollhard"
-        oninput="searchManualTasks()" autocomplete="off" />
-      <span><input type="checkbox" onclick="changeFilterBy()" />Show checked only</span>
+      <div class='challenge-title'>
+        <input type="text" placeholder="Filter tasks..." id="searchManual" class="noscrollhard"
+          oninput="searchManualTasks()" autocomplete="off" />
+        <span><input type="checkbox" onclick="changeFilterBy()" />Show checked only</span>
+      </div>
       <div id="challenge-data" class="challenge-data noscroll"></div>
     </div>
   </div>
@@ -153,6 +156,25 @@
       <div id="statserror-footer" class="statserror-footer noscroll">
         <button id='submit-statserror-button' class='modal-button' onclick='closeStatsError()'>Okay</button>
       </div>
+    </div>
+  </div>
+  <div id="myModal10" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeSearch()"></i>
+      <div id="searchchunks-title" class="searchchunks-title noscroll">Search within your chunks</div>
+      <div id="searchchunks-subtitle" class="searchchunks-subtitle noscroll">Search for items, npcs, monsters, and objects to see where you have access to each within your unlocked chunks.</div>
+      <div id="searchchunks-searchcontainer" class="searchchunks-searchcontainer noscroll">
+        <input type="text" placeholder="Search name..." id="searchChunks" class="noscrollhard"
+          oninput="searchWithinChunks()" autocomplete="off" />
+      </div>
+      <div id="searchchunks-data" class="searchchunks-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal11" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeSearchDetails()"></i>
+      <div id="searchdetails-title" class="searchdetails-title noscroll"></div>
+      <div id="searchdetails-data" class="searchdetails-data noscroll"></div>
     </div>
   </div>
   <div id='entry-menu'>

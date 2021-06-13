@@ -1284,17 +1284,18 @@ var calcBIS = function() {
 var calcCurrentChallenges2 = function() {
     let tempChallengeArr = {};
     let highestChallenge = {};
+    let highestChallengeLevelArr = {};
 
     Object.keys(globalValids).forEach(skill => {
         if (skill !== 'Extra' && skill !== 'Quest' && skill !== 'BiS') {
-            let highestCompletedLevel = 0;
+            highestChallengeLevelArr[skill] = 0;
             !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
-                if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name]['Level'] > highestCompletedLevel) {
-                    highestCompletedLevel = chunkInfo['challenges'][skill][name]['Level'];
+                if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name]['Level'] > highestChallengeLevelArr[skill]) {
+                    highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'];
                 }
             });
             checkPrimaryMethod(skill, globalValids, baseChunkData) && Object.keys(globalValids[skill]).forEach(challenge => {
-                if (globalValids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel)) {
+                if (globalValids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > highestChallengeLevelArr[skill])) {
                     if (((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
@@ -1331,7 +1332,7 @@ var calcCurrentChallenges2 = function() {
             highestCurrent[skill] = highestChallenge[skill];
             if (!!highestChallenge[skill] && !!chunkInfo['challenges'][skill][highestChallenge[skill]] && !!chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills']) {
                 Object.keys(chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills']).forEach(subSkill => {
-                    if ((!highestChallenge[subSkill] || chunkInfo['challenges'][subSkill][highestChallenge[subSkill]]['Level'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills'][subSkill]) && Object.keys(chunkInfo['challenges'][subSkill]).length > 0) {
+                    if ((!highestChallenge[subSkill] || chunkInfo['challenges'][subSkill][highestChallenge[subSkill]]['Level'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills'][subSkill]) && Object.keys(chunkInfo['challenges'][subSkill]).length > 0 && chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills'][subSkill] > highestChallengeLevelArr[subSkill]) {
                         highestChallenge[subSkill] = highestChallenge[skill];
                         tempChallengeArr[subSkill] = highestChallenge[subSkill];
                         highestCurrent[subSkill] = highestChallenge[subSkill];
@@ -1340,6 +1341,7 @@ var calcCurrentChallenges2 = function() {
             }
         }
     });
+    //console.log(tempChallengeArr);
     return tempChallengeArr;
 }
 
