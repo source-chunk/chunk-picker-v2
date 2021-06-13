@@ -179,7 +179,7 @@
 			},
 			"Access the Corsair Cove Dungeon ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Corsair Cove Dungeon & Myth's Guild%2FBasement"],
+				"Chunks": ["Corsair Cove Dungeon"],
 				"Level": 15,
 				"Primary": true,
 				"Priority": 1
@@ -456,28 +456,28 @@
 			},
 			"Access the Stronghold Slayer Cave narrow tunnel ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Stronghold Slayer Cave & Brimstail's cave"],
+				"Chunks": ["Stronghold Slayer Cave"],
 				"Level": 72,
 				"Primary": false,
 				"Priority": 1
 			},
 			"Access the Taverly Dungeon lesser demon fence ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Taverly Dungeon & Entrana Dungeon"],
+				"Chunks": ["Taverly Dungeon"],
 				"Level": 63,
 				"Primary": false,
 				"Priority": 2
 			},
 			"Access the Taverly Dungeon pipe squeeze to Blue dragon lair ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Taverly Dungeon & Entrana Dungeon"],
+				"Chunks": ["Taverly Dungeon"],
 				"Level": 70,
 				"Primary": true,
 				"Priority": 5
 			},
 			"Access the Taverly Dungeon spiked blades jump ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Taverly Dungeon & Entrana Dungeon"],
+				"Chunks": ["Taverly Dungeon"],
 				"Level": 80,
 				"Primary": true,
 				"Priority": 2
@@ -563,14 +563,14 @@
 			},
 			"Access the Yanille Agility Dungeon balance ledge ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Yanille Agility Dungeon & Wizards' Guild%2FBasement"],
+				"Chunks": ["Yanille Agility Dungeon"],
 				"Level": 40,
 				"Primary": true,
 				"Priority": 3
 			},
 			"Access the Yanille Agility Dungeon's rubble climb ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Yanille Agility Dungeon & Wizards' Guild%2FBasement"],
+				"Chunks": ["Yanille Agility Dungeon"],
 				"Level": 67,
 				"Primary": false,
 				"Priority": 2
@@ -595,7 +595,7 @@
 			},
 			"Access the contortion in Yanille Agility Dungeon small room ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Yanille Agility Dungeon & Wizards' Guild%2FBasement"],
+				"Chunks": ["Yanille Agility Dungeon"],
 				"Level": 49,
 				"Primary": false,
 				"Priority": 1
@@ -679,14 +679,14 @@
 			},
 			"Access the monkey bars under Edgeville ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Varrock Sewers & Edgeville Dungeon"],
+				"Chunks": ["Edgeville Dungeon"],
 				"Level": 15,
 				"Primary": true,
 				"Priority": 1
 			},
 			"Access the monkey bars under Yanille ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Yanille Agility Dungeon & Wizards' Guild%2FBasement"],
+				"Chunks": ["Yanille Agility Dungeon"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 1
@@ -712,7 +712,7 @@
 			},
 			"Access the pipe from Edgeville Dungeon to Varrock Sewers ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["Varrock Sewers & Edgeville Dungeon"],
+				"Chunks": ["Varrock Sewers", "Edgeville Dungeon"],
 				"Level": 51,
 				"Primary": true
 			},
@@ -11542,7 +11542,7 @@
 		"Herblore": {
 			"Unlock ~|Herblore|~": {
 				"Category": ["Herblore Unlocked"],
-				"Chunks": ["11573", "11574", "Taverly Dungeon & Entrana Dungeon"],
+				"Chunks": ["11573", "11574", "Taverly Dungeon"],
 				"Level": 1,
 				"Primary": true
 			},
@@ -13456,7 +13456,7 @@
 				"Priority": 2
 			},
 			"Cast ~|charge earth orb|~": {
-				"Chunks": ["Varrock Sewers & Edgeville Dungeon"],
+				"Chunks": ["Edgeville Dungeon"],
 				"Items": ["Earth rune+", "Cosmic rune", "Unpowered orb"],
 				"Level": 60,
 				"Output": "Earth orb",
@@ -13464,7 +13464,7 @@
 				"Priority": 1
 			},
 			"Cast ~|charge fire orb|~": {
-				"Chunks": ["Taverly Dungeon & Entrana Dungeon"],
+				"Chunks": ["Taverly Dungeon"],
 				"Items": ["Fire rune+", "Cosmic rune", "Unpowered orb"],
 				"Level": 63,
 				"Output": "Fire orb",
@@ -14319,7 +14319,7 @@
 			},
 			"Cast ~|paddewwa teleport|~": {
 				"Category": ["Combat and Teleport Spells"],
-				"Chunks": ["Jaldraocht Pyramid", "Varrock Sewers & Edgeville Dungeon"],
+				"Chunks": ["Jaldraocht Pyramid", "Edgeville Dungeon"],
 				"Items": ["Fire rune+", "Air rune+", "Law rune"],
 				"Level": 54,
 				"Primary": true
@@ -15777,6 +15777,10 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Buy climbing boots from Tenzing": {
+				"Chunks": ["11575", "11319"],
+				"Output": "Climbing boots"
+			},
 			"Search the crate in Land's End for a bird snare": {
 				"Chunks": ["5941"],
 				"Output": "Bird snare"
@@ -16990,7 +16994,7 @@
 				"Output": "Silver key loot"
 			},
 			"Sinister chest loot*": {
-				"Chunks": ["Yanille Agility Dungeon & Wizards' Guild%2FBasement"],
+				"Chunks": ["Yanille Agility Dungeon"],
 				"Items": ["Sinister key"],
 				"Output": "Sinister chest"
 			},
@@ -18944,7 +18948,7 @@
 				"Priority": 7
 			},
 			"Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon": {
-				"Chunks": ["Varrock Sewers & Edgeville Dungeon"],
+				"Chunks": ["Edgeville Dungeon"],
 				"Level": 1,
 				"Primary": true,
 				"Priority": 8
@@ -22367,7 +22371,7 @@
 				"Priority": 2
 			},
 			"Unlock the ~|Yanille Agility Dungeon|~ door": {
-				"Chunks": ["Yanille Agility Dungeon & Wizards' Guild%2FBasement"],
+				"Chunks": ["Yanille Agility Dungeon"],
 				"Items": ["Lockpick"],
 				"Level": 82,
 				"Primary": true,
@@ -31021,7 +31025,7 @@
 				"Baby red dragon": 2,
 				"Red dragon": 3
 			},
-			"Name": "Corsair Cove Dungeon & Myth's Guild%2FBasement"
+			"Name": "Myth's Guild%2FBasement"
 		},
 		"7748": {
 			"Connect": {
@@ -31346,18 +31350,11 @@
 			"Monster": {
 				"Black dragon%2FLevel 227": 2,
 				"Blue dragon": 5,
-				"Giant spider": 3,
-				"Green dragon": 2,
-				"Ogress Shaman": 2,
-				"Ogress Warrior": 2
+				"Green dragon": 2
 			},
-			"NPC": {
-				"Ponts the Bridgemaster": 1
-			},
-			"Name": "Corsair Cove Dungeon & Myth's Guild%2FBasement",
+			"Name": "Myth's Guild%2FBasement",
 			"Object": {
-				"Adamantite rock": 4,
-				"Cave": 1,
+				"Adamantite rock": 3,
 				"Fountain of Uhld": 1,
 				"Magical Barrier": 2,
 				"Pillar": 1,
@@ -31375,7 +31372,7 @@
 				"Ogress Shaman": 6,
 				"Ogress Warrior": 6
 			},
-			"Name": "Corsair Cove Dungeon & Myth's Guild%2FBasement",
+			"Name": "Corsair Cove Dungeon",
 			"Object": {
 				"Adamantite rock": 1,
 				"Anvil": 1,
@@ -31679,7 +31676,7 @@
 			"NPC": {
 				"Chief Tess": 1
 			},
-			"Name": "Corsair Cove Dungeon & Myth's Guild%2FBasement",
+			"Name": "Corsair Cove Dungeon",
 			"Object": {
 				"Fire": 2
 			},
@@ -31866,7 +31863,7 @@
 			"NPC": {
 				"Francois": 1
 			},
-			"Name": "Corsair Cove Dungeon & Myth's Guild%2FBasement",
+			"Name": "Corsair Cove Dungeon",
 			"Spawn": {
 				"Gold bar": 1,
 				"Gold necklace": 1,
@@ -33781,7 +33778,8 @@
 		},
 		"9525": {
 			"Connect": {
-				"9625": true
+				"9625": true,
+				"9881": true
 			},
 			"Diary": {
 				"Western Provinces": "EA11"
@@ -34367,19 +34365,16 @@
 				"Fire giant": 12,
 				"Hellhound": 8
 			},
-			"Name": "Stronghold Slayer Cave & Brimstail's cave"
+			"Name": "Stronghold Slayer Cave"
 		},
 		"9625": {
 			"Connect": {
 				"9525": true
 			},
-			"Monster": {
-				"Hellhound": 3
-			},
 			"NPC": {
 				"Brimstail": 1
 			},
-			"Name": "Stronghold Slayer Cave & Brimstail's cave",
+			"Name": "Brimstail's cave",
 			"Object": {
 				"Aspidistra plant": 1,
 				"Broken cogs": 1,
@@ -35342,7 +35337,7 @@
 				"Aberrant spectre": 11,
 				"Hellhound": 2
 			},
-			"Name": "Stronghold Slayer Cave & Brimstail's cave"
+			"Name": "Stronghold Slayer Cave"
 		},
 		"9881": {
 			"Monster": {
@@ -35350,7 +35345,7 @@
 				"Ankou": 8,
 				"Bloodveld": 12
 			},
-			"Name": "Stronghold Slayer Cave & Brimstail's cave",
+			"Name": "Stronghold Slayer Cave",
 			"Object": {
 				"Tunnel": 2
 			}
@@ -35455,7 +35450,8 @@
 		},
 		"10029": {
 			"Connect": {
-				"10129": true
+				"10129": true,
+				"10130": true
 			},
 			"Monster": {
 				"Carnivorous chinchompa": 11
@@ -36310,12 +36306,21 @@
 			"Monster": {
 				"Carnivorous chinchompa": 15
 			},
+			"Name": "Red chinchompa hunting ground",
+			"Object": {
+				"Cave": 1
+			}
+		},
+		"10130": {
+			"Connect": {
+				"10029": true
+			},
 			"NPC": {
 				"Jungle eagle": 2
 			},
-			"Name": "Red chinchompa hunting ground & Jungle eagle lair",
+			"Name": "Jungle eagle lair",
 			"Object": {
-				"Cave": 3
+				"Cave": 2
 			}
 		},
 		"10131": {
@@ -37408,45 +37413,21 @@
 		},
 		"10388": {
 			"Connect": {
-				"10288": true,
-				"10389": true
+				"10288": true
 			},
 			"Monster": {
-				"Chaos druid": 11,
-				"Chaos druid warrior": 9,
-				"Giant bat": 8,
-				"Salarin the twisted": 1,
-				"Skeleton": 6,
 				"Zombie": 8
 			},
 			"NPC": {
-				"Sigbert the Adventurer": 1,
 				"Wizard Frumscone": 1
 			},
-			"Name": "Yanille Agility Dungeon & Wizards' Guild%2FBasement",
-			"Object": {
-				"Balancing ledge": 2,
-				"Chaos altar": 1,
-				"Closed chest": 1,
-				"Crate": 4,
-				"Monkeybars": 4,
-				"Obstacle pipe": 2,
-				"Pile of rubble": 1,
-				"Sacks": 2
-			},
-			"Spawn": {
-				"Herring": 1,
-				"Knife": 1
-			}
+			"Name": "Wizards' Guild%2FBasement"
 		},
 		"10389": {
-			"Connect": {
-				"10388": true
-			},
 			"Monster": {
 				"Poison spider": 18
 			},
-			"Name": "Yanille Agility Dungeon & Wizards' Guild%2FBasement",
+			"Name": "Yanille Agility Dungeon",
 			"Object": {
 				"Crate": 3,
 				"Pile of rubble": 1,
@@ -38524,7 +38505,8 @@
 		},
 		"10646": {
 			"Connect": {
-				"10291": true
+				"10291": true,
+				"10647": true
 			},
 			"NPC": {
 				"Claude": 1,
@@ -38532,18 +38514,19 @@
 				"Rat": 16,
 				"Topsy": 1
 			},
-			"Name": "Ardougne Sewers & Rat Pits"
+			"Name": "Ardougne Rat Pits"
 		},
 		"10647": {
 			"Connect": {
-				"10547": true
+				"10547": true,
+				"10646": true
 			},
 			"Monster": {
 				"Giant rat": 8,
 				"Rat": 5,
 				"Zombie": 3
 			},
-			"Name": "Ardougne Sewers & Rat Pits",
+			"Name": "Ardougne Sewers",
 			"Object": {
 				"Coal rock": 5,
 				"Iron rock": 5,
@@ -40575,7 +40558,7 @@
 			"Monster": {
 				"Black dragon%2FLevel 227": 12
 			},
-			"Name": "Taverly Dungeon & Entrana Dungeon"
+			"Name": "Taverly Dungeon"
 		},
 		"11164": {
 			"Connect": {
@@ -40941,7 +40924,8 @@
 		"11318": {
 			"Connect": {
 				"10307": true,
-				"11418": true
+				"11418": true,
+				"11419": true
 			},
 			"Monster": {
 				"Big Wolf": 1,
@@ -40983,6 +40967,9 @@
 			}
 		},
 		"11319": {
+			"Connect": {
+				"11675": true
+			},
 			"Diary": {
 				"Falador": "HD10"
 			},
@@ -41479,7 +41466,7 @@
 				"Greater demon": 2,
 				"Zombie": 5
 			},
-			"Name": "Taverly Dungeon & Entrana Dungeon",
+			"Name": "Entrana Dungeon",
 			"Object": {
 				"Dramen tree": 1
 			}
@@ -41502,7 +41489,7 @@
 				"Kharid Scorpion": 1,
 				"Slieve": 1
 			},
-			"Name": "Taverly Dungeon & Entrana Dungeon",
+			"Name": "Taverly Dungeon",
 			"Object": {
 				"Cave": 3,
 				"Coffin": 2,
@@ -41516,9 +41503,7 @@
 				"11678": true
 			},
 			"Monster": {
-				"Dwarf": 8,
-				"Ice spider": 1,
-				"Ice warrior": 5
+				"Dwarf": 8
 			},
 			"NPC": {
 				"Captain Ninto": 1,
@@ -41527,7 +41512,7 @@
 				"Khorvak, a dwarven engineer": 1,
 				"Rohak": 2
 			},
-			"Name": "Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement",
+			"Name": "White Wolf Tunnel",
 			"Object": {
 				"Crate": 8,
 				"Fire": 2,
@@ -41542,15 +41527,12 @@
 			}
 		},
 		"11419": {
-			"Connect": {
-				"11319": true
-			},
 			"Monster": {
 				"Ice Queen": 1,
 				"Ice spider": 6,
 				"Ice warrior": 9
 			},
-			"Name": "Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement"
+			"Name": "Ice Queen's Lair"
 		},
 		"11421": {
 			"Connect": {
@@ -42567,7 +42549,7 @@
 				"Lord Daquarius": 1,
 				"Velrak the explorer": 1
 			},
-			"Name": "Taverly Dungeon & Entrana Dungeon",
+			"Name": "Taverly Dungeon",
 			"Object": {
 				"Boxes": 1,
 				"Closed chest": 8,
@@ -42586,7 +42568,7 @@
 				"Hill Giant": 5,
 				"Poison Scorpion": 5
 			},
-			"Name": "Taverly Dungeon & Entrana Dungeon",
+			"Name": "Taverly Dungeon",
 			"Object": {
 				"Fire remains": 8,
 				"Fishing spot": 3,
@@ -42616,7 +42598,7 @@
 			"NPC": {
 				"Eve": 1
 			},
-			"Name": "Taverly Dungeon & Entrana Dungeon",
+			"Name": "Taverly Dungeon",
 			"Object": {
 				"Dead tree": 4,
 				"Fire remains": 9,
@@ -42666,15 +42648,13 @@
 				"11319": true
 			},
 			"Monster": {
-				"Cyclops%2FWarriors' Guild Basement": 23,
-				"Ice giant": 7,
-				"Ice spider": 2
+				"Cyclops%2FWarriors' Guild Basement": 23
 			},
 			"NPC": {
 				"Lorelai": 1,
 				"Rory": 1
 			},
-			"Name": "Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement"
+			"Name": "Warrior's Guild%2FBasement"
 		},
 		"11676": {
 			"Connect": {
@@ -45300,7 +45280,7 @@
 			"Monster": {
 				"Hill Giant": 12
 			},
-			"Name": "Varrock Sewers & Edgeville Dungeon",
+			"Name": "Edgeville Dungeon",
 			"Object": {
 				"Crate": 5,
 				"Rocks": 4
@@ -45322,12 +45302,7 @@
 				"Skeleton": 13,
 				"Zombie": 4
 			},
-			"NPC": {
-				"Evil Dave": 1,
-				"Hell-Rat": 18,
-				"Hell-Rat Behemoth": 2
-			},
-			"Name": "Varrock Sewers & Edgeville Dungeon",
+			"Name": "Edgeville Dungeon",
 			"Object": {
 				"Cellar stairs": 1,
 				"Closed chest": 2,
@@ -45361,7 +45336,7 @@
 				"Skeleton": 7,
 				"Thug": 9
 			},
-			"Name": "Varrock Sewers & Edgeville Dungeon",
+			"Name": "Edgeville Dungeon",
 			"Object": {
 				"Closed chest": 3,
 				"Monkeybars": 4,
@@ -45380,7 +45355,7 @@
 			"NPC": {
 				"Mysterious ghost": 1
 			},
-			"Name": "Varrock Sewers & Edgeville Dungeon",
+			"Name": "Edgeville Dungeon",
 			"Spawn": {
 				"Steel arrowtips": 1
 			}
@@ -46322,7 +46297,7 @@
 			"NPC": {
 				"Vannaka": 1
 			},
-			"Name": "Varrock Sewers & Edgeville Dungeon",
+			"Name": "Edgeville Dungeon",
 			"Object": {
 				"Adamantite rock": 2,
 				"Coal rock": 3,
@@ -47528,7 +47503,7 @@
 				"Grimesquit": 1,
 				"Phingspet": 1
 			},
-			"Name": "Varrock Sewers & Edgeville Dungeon",
+			"Name": "Varrock Sewers",
 			"Object": {
 				"Barrel": 1,
 				"Crate": 7,
@@ -47549,7 +47524,7 @@
 			"Monster": {
 				"Bryophyta": 1
 			},
-			"Name": "Varrock Sewers & Edgeville Dungeon",
+			"Name": "Varrock Sewers",
 			"Object": {
 				"Fire": 1,
 				"Logs": 1,
@@ -52487,26 +52462,32 @@
 				"Bones (Ape Atoll)": 1
 			}
 		},
-		"Ardougne Sewers & Rat Pits": {
+		"Ardougne Sewers": {
 			"Connect": {
-				"10291": true,
-				"10547": true
+				"10547": true,
+				"10646": true
 			},
 			"Monster": {
 				"Giant rat": 8,
 				"Rat": 5,
 				"Zombie%2FArmed": 3
 			},
+			"Object": {
+				"Coal rock": 5,
+				"Iron rock": 5,
+				"Swamp bubbles": 22
+			}
+		},
+		"Ardougne Rat Pits": {
+			"Connect": {
+				"10291": true,
+				"10647": true
+			},
 			"NPC": {
 				"Claude": 1,
 				"Gamer": 5,
 				"Rat": 16,
 				"Topsy": 1
-			},
-			"Object": {
-				"Coal rock": 5,
-				"Iron rock": 5,
-				"Swamp bubbles": 22
 			}
 		},
 		"Asgarnian Ice Dungeon": {
@@ -52974,24 +52955,16 @@
 				"Passage": 2
 			}
 		},
-		"Corsair Cove Dungeon & Myth's Guild%2FBasement": {
+		"Corsair Cove Dungeon": {
 			"Connect": {
-				"9772": true,
+				"7820": true,
 				"9773": true,
 				"10028": true
 			},
 			"Monster": {
-				"Baby black dragon": 1,
-				"Baby blue dragon": 3,
-				"Baby green dragon": 1,
-				"Baby red dragon": 2,
-				"Black dragon%2FLevel 227": 2,
-				"Blue dragon": 5,
 				"Giant spider": 3,
-				"Green dragon": 2,
 				"Ogress Shaman": 16,
-				"Ogress Warrior": 16,
-				"Red dragon": 3
+				"Ogress Warrior": 16
 			},
 			"NPC": {
 				"Chief Tess": 1,
@@ -52999,23 +52972,18 @@
 				"Ponts the Bridgemaster": 1
 			},
 			"Object": {
-				"Adamantite rock": 5,
+				"Adamantite rock": 1,
 				"Anvil": 1,
 				"Cave": 2,
-				"Coal rock": 5,
-				"Fire": 3,
-				"Fountain of Uhld": 1,
-				"Magical Barrier": 2,
+				"Coal rock": 4,
+				"Fire": 1,
 				"Mithril rock": 2,
-				"Ogre fire": 1,
-				"Pillar": 1,
-				"Runite rock": 2
+				"Ogre fire": 1
 			},
 			"Quest": {
 				"The Corsair Curse": "step"
 			},
 			"Spawn": {
-				"Blue dragon scale": 1,
 				"Bread": 1,
 				"Bucket": 1,
 				"Burnt shrimp": 1,
@@ -53029,6 +52997,34 @@
 				"Rope": 1,
 				"Small fishing net": 1,
 				"Spade": 1
+			}
+		},
+		"Myth's Guild%2FBasement": {
+			"Connect": {
+				"7821": true,
+				"9772": true
+			},
+			"Monster": {
+				"Baby black dragon": 1,
+				"Baby blue dragon": 3,
+				"Baby green dragon": 1,
+				"Baby red dragon": 2,
+				"Black dragon%2FLevel 227": 2,
+				"Blue dragon": 5,
+				"Green dragon": 2,
+				"Red dragon": 3
+			},
+			"Object": {
+				"Adamantite rock": 4,
+				"Coal rock": 1,
+				"Fire": 2,
+				"Fountain of Uhld": 1,
+				"Magical Barrier": 2,
+				"Pillar": 1,
+				"Runite rock": 2
+			},
+			"Spawn": {
+				"Blue dragon scale": 1
 			}
 		},
 		"Cosmic altar": {
@@ -54266,28 +54262,34 @@
 				"Hespori patch": 1
 			}
 		},
-		"Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement": {
+		"Ice Queen's Lair": {
 			"Connect": {
-				"11318": true,
-				"11319": true,
-				"11678": true
+				"11318": true
 			},
 			"Monster": {
-				"Cyclops%2FWarriors' Guild Basement": 23,
-				"Dwarf": 8,
 				"Ice Queen": 1,
 				"Ice giant": 7,
 				"Ice spider": 9,
 				"Ice warrior": 14
+			},
+			"Quest": {
+				"Heroes' Quest": "step"
+			}
+		},
+		"White Wolf Tunnel": {
+			"Connect": {
+				"11318": true,
+				"11678": true
+			},
+			"Monster": {
+				"Dwarf": 8
 			},
 			"NPC": {
 				"Captain Ninto": 1,
 				"Cart conductor": 1,
 				"Holoy": 1,
 				"Khorvak, a dwarven engineer": 1,
-				"Lorelai": 1,
-				"Rohak": 2,
-				"Rory": 1
+				"Rohak": 2
 			},
 			"Object": {
 				"Crate": 8,
@@ -54298,7 +54300,6 @@
 			"Quest": {
 				"Between a Rock%2E%2E%2E": "step",
 				"Forgettable Tale…": "step",
-				"Heroes' Quest": "step",
 				"Recipe for Disaster%2GFreeing the Mountain Dwarf": "step"
 			},
 			"Shop": {
@@ -54306,6 +54307,18 @@
 			},
 			"Spawn": {
 				"Dwarven stout": 1
+			}
+		},
+		"Warrior's Guild%2FBasement": {
+			"Connect": {
+				"11319": true
+			},
+			"Monster": {
+				"Cyclops%2FWarriors' Guild Basement": 23
+			},
+			"NPC": {
+				"Lorelai": 1,
+				"Rory": 1
 			}
 		},
 		"Ice Troll Caves": {
@@ -56039,18 +56052,26 @@
 				"Big Chompy Bird Hunting": "step"
 			}
 		},
-		"Red chinchompa hunting ground & Jungle eagle lair": {
+		"Red chinchompa hunting ground": {
 			"Connect": {
 				"10029": true
 			},
 			"Monster": {
 				"Carnivorous chinchompa": 15
 			},
+			"Object": {
+				"Cave": 1
+			}
+		},
+		"Jungle eagle lair": {
+			"Connect": {
+				"10029": true
+			},
 			"NPC": {
 				"Jungle eagle": 2
 			},
 			"Object": {
-				"Cave": 3
+				"Cave": 2
 			}
 		},
 		"Rellekka Slayer Cave": {
@@ -56516,13 +56537,9 @@
 				"A Porcine of Interest": "step"
 			}
 		},
-		"Stronghold Slayer Cave & Brimstail's cave": {
+		"Stronghold Slayer Cave": {
 			"Connect": {
-				"9525": true,
-				"11595": true
-			},
-			"Diary": {
-				"Western Provinces": "EA9, MD12"
+				"9525": true
 			},
 			"Monster": {
 				"Aberrant spectre": 13,
@@ -56530,6 +56547,15 @@
 				"Bloodveld": 12,
 				"Fire giant": 12,
 				"Hellhound": 13
+			}
+		},
+		"Brimstail's cave": {
+			"Connect": {
+				"9525": true,
+				"11595": true
+			},
+			"Diary": {
+				"Western Provinces": "EA9, MD12"
 			},
 			"NPC": {
 				"Brimstail": 1
@@ -56650,12 +56676,11 @@
 				"Stairs": 4
 			}
 		},
-		"Taverly Dungeon & Entrana Dungeon": {
+		"Taverly Dungeon": {
 			"Connect": {
 				"5139": true,
 				"11317": true,
-				"11573": true,
-				"12858": true
+				"11573": true
 			},
 			"Diary": {
 				"Falador": "EL5"
@@ -56672,7 +56697,6 @@
 				"Dwarf": 2,
 				"Ghost": 14,
 				"Giant bat": 9,
-				"Greater demon": 2,
 				"Hellhound": 13,
 				"Hill Giant": 5,
 				"Ice spider": 9,
@@ -56686,8 +56710,7 @@
 				"Skeleton%2FArmed": 1,
 				"Skeleton%2FPlain": 5,
 				"Skeleton%2FUnarmed": 1,
-				"Spider": 3,
-				"Zombie (Entrana Dungeon)": 5
+				"Spider": 3
 			},
 			"NPC": {
 				"Eve": 1,
@@ -56722,8 +56745,6 @@
 			"Quest": {
 				"Druidic Ritual": "step",
 				"Heroes' Quest": "step",
-				"Lost City": "step",
-				"Recipe for Disaster%2GFreeing Sir Amik Varze": "step",
 				"Scorpion Catcher": "step",
 				"Wanted!": "step"
 			},
@@ -56732,6 +56753,19 @@
 				"Bones": 1,
 				"Coins": 1,
 				"Dusty key": 1
+			}
+		},
+		"Entrana Dungeon": {
+			"Connect": {
+				"12858": true
+			},
+			"Monster": {
+				"Greater demon": 2,
+				"Zombie (Entrana Dungeon)": 5
+			},
+			"Quest": {
+				"Lost City": "step",
+				"Recipe for Disaster%2GFreeing Sir Amik Varze": "step"
 			}
 		},
 		"Temple of Ikov": {
@@ -57269,12 +57303,63 @@
 				"Treacle": 1
 			}
 		},
-		"Varrock Sewers & Edgeville Dungeon": {
+		"Varrock Sewers": {
+			"Connect": {
+				"12698": true,
+				"12854": true
+			},
+			"Diary": {
+				"Varrock": "HD10"
+			},
+			"Monster": {
+				"Bryophyta": 1,
+				"Deadly red spider": 9,
+				"Ghost": 3,
+				"Giant rat": 6,
+				"Giant spider": 5,
+				"Moss giant": 10,
+				"Rat": 29,
+				"Scorpion": 2,
+				"Skeleton%2FArmed": 1,
+				"Skeleton%2FPlain": 5,
+				"Skeleton%2FUnarmed": 4,
+				"Zombie%2FArmed": 4,
+				"Zombie%2FUnarmed": 2
+			},
+			"NPC": {
+				"Grimesquit": 1,
+				"Phingspet": 1
+			},
+			"Object": {
+				"Barrel": 1,
+				"Crate": 7,
+				"Dead tree": 3,
+				"Fire": 1,
+				"Logs": 1,
+				"Sewer pipe": 1,
+				"Web": 1
+			},
+			"Quest": {
+				"Demon Slayer": "step",
+				"Ratcatchers": "first"
+			},
+			"Spawn": {
+				"Body rune": 1,
+				"Coins": 3,
+				"Earth rune": 1,
+				"Iron axe": 1,
+				"Knife": 1,
+				"Mind rune": 1,
+				"Red spiders' eggs": 2,
+				"Rope": 1
+			}
+		},
+		"Edgeville Dungeon": {
 			"Connect": {
 				"12341": true,
 				"12342": true,
 				"12343": true,
-				"12854": true
+				"12954": true
 			},
 			"Diary": {
 				"Varrock": "MD9, HD10",
@@ -57282,53 +57367,38 @@
 			},
 			"Monster": {
 				"Black demon": 3,
-				"Bryophyta": 1,
 				"Chaos druid": 11,
 				"Chronozon": 1,
-				"Deadly red spider": 18,
+				"Deadly red spider": 9,
 				"Earth warrior": 11,
-				"Ghost": 3,
-				"Giant rat": 10,
-				"Giant spider": 7,
+				"Giant rat": 6,
+				"Giant spider": 2,
 				"Hill Giant": 12,
 				"Hobgoblin": 5,
-				"Moss giant": 10,
 				"Obor": 1,
 				"Poison spider": 3,
-				"Rat": 25,
-				"Scorpion": 2,
-				"Skeleton%2FArmed": 11,
-				"Skeleton%2FPlain": 18,
-				"Skeleton%2FUnarmed": 6,
+				"Rat": 2,
+				"Skeleton%2FArmed": 10,
+				"Skeleton%2FPlain": 4,
+				"Skeleton%2FUnarmed": 2,
 				"Spider": 9,
 				"Thug": 9,
-				"Zombie": 20,
-				"Zombie%2FArmed": 8,
-				"Zombie%2FPlain": 10,
-				"Zombie%2FUnarmed": 2
+				"Zombie%2FArmed": 4,
+				"Zombie%2FPlain": 10
 			},
 			"NPC": {
-				"Evil Dave": 1,
-				"Grimesquit": 1,
-				"Hell-Rat": 18,
-				"Hell-Rat Behemoth": 2,
-				"Mysterious ghost": 1,
-				"Phingspet": 1,
 				"Vannaka": 1
 			},
 			"Object": {
 				"Adamantite rock": 2,
-				"Barrel": 1,
-				"Cellar stairs": 1,
 				"Closed chest": 5,
 				"Coal rock": 6,
 				"Copper rock": 2,
-				"Crate": 26,
-				"Dead tree": 5,
-				"Fire": 2,
+				"Crate": 19,
+				"Dead tree": 2,
+				"Fire": 1,
 				"Fire remains": 1,
 				"Iron rock": 3,
-				"Logs": 1,
 				"Mithril rock": 1,
 				"Monkeybars": 4,
 				"Obstacle pipe": 2,
@@ -57336,34 +57406,23 @@
 				"Rock Pile": 1,
 				"Rocks": 4,
 				"Sacks": 3,
-				"Sewer pipe": 1,
 				"Silver rock": 3,
-				"Tin rock": 2,
-				"Web": 1
+				"Tin rock": 2
 			},
 			"Quest": {
 				"Demon Slayer": "step",
 				"Family Crest": "step",
-				"Ratcatchers": "first",
-				"Recipe for Disaster%2GFreeing Evil Dave": "step"
+				"Ratcatchers": "first"
 			},
 			"Shop": {
 				"Slayer Equipment (shop)": true
 			},
 			"Spawn": {
-				"Body rune": 1,
 				"Bones": 4,
 				"Brass key": 1,
 				"Brass necklace": 1,
 				"Bronze arrow": 1,
-				"Coins": 3,
-				"Earth rune": 1,
-				"Iron axe": 1,
-				"Knife": 1,
-				"Mind rune": 1,
-				"Red spiders' eggs": 2,
-				"Rope": 1,
-				"Steel arrowtips": 1
+				"Red spiders' eggs": 6
 			}
 		},
 		"Varrock West Bank%2FBasement": {
@@ -57726,7 +57785,7 @@
 				"Fossil Storage": 1
 			}
 		},
-		"Yanille Agility Dungeon & Wizards' Guild%2FBasement": {
+		"Yanille Agility Dungeon": {
 			"Connect": {
 				"10288": true
 			},
@@ -57739,12 +57798,10 @@
 				"Giant bat": 8,
 				"Poison spider": 18,
 				"Salarin the twisted": 1,
-				"Skeleton%2FArmed": 6,
-				"Zombie%2FArmed": 8
+				"Skeleton%2FArmed": 6
 			},
 			"NPC": {
-				"Sigbert the Adventurer": 1,
-				"Wizard Frumscone": 1
+				"Sigbert the Adventurer": 1
 			},
 			"Object": {
 				"Balancing ledge": 2,
@@ -57757,12 +57814,23 @@
 				"Sacks": 5,
 				"Swamp bubbles": 3
 			},
-			"Quest": {
-				"Swan Song": "step"
-			},
 			"Spawn": {
 				"Herring": 1,
 				"Knife": 1
+			}
+		},
+		"Wizards' Guild%2FBasement": {
+			"Connect": {
+				"10288": true
+			},
+			"Monster": {
+				"Zombie%2FArmed": 8
+			},
+			"NPC": {
+				"Wizard Frumscone": 1
+			},
+			"Quest": {
+				"Swan Song": "step"
 			}
 		},
 		"Zalcano's Lair": {
@@ -58599,7 +58667,6 @@
 		},
 		"Abhorrent spectre": {
 			"Adamant platelegs": "1/128",
-			"Brimstone key": "1/55",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/128",
 			"HerbDropTable+": "78/128",
@@ -58681,7 +58748,6 @@
 			"Adamant platebody": "9/110",
 			"Adamantite bar": "4/110",
 			"Adamantite ore": "6/110",
-			"Brimstone key": "1/52",
 			"Chaos rune": "7/110",
 			"Clue scroll (elite)": "1/320",
 			"Death rune": "7/110",
@@ -58728,9 +58794,6 @@
 		"Agrith-Na-Na": {
 			"Banana": "Always",
 			"Bones": "Always"
-		},
-		"Ahrim the Blighted": {
-			"Brimstone key": "1/100"
 		},
 		"Air elemental": {
 			"Air rune": "3/128",
@@ -58960,7 +59023,6 @@
 			"Black robe": "1/100",
 			"Blood rune": "3/100",
 			"Bones": "Always",
-			"Brimstone key": "1/225",
 			"Clue scroll (elite)": "Always",
 			"Clue scroll (hard)": "1/512",
 			"Coins": "1/100",
@@ -59076,7 +59138,6 @@
 			"Blood rune": "2/128",
 			"Body rune": "2/128",
 			"Bones": "Always",
-			"Brimstone key": "1/292",
 			"Chaos rune": "1/128",
 			"Clue scroll (hard)": "1/128",
 			"Ecumenical key": "1/60",
@@ -59098,20 +59159,17 @@
 			"Bones": "Always"
 		},
 		"Baby black dragon": {
-			"Babydragon bones": "Always",
-			"Brimstone key": "1/157"
+			"Babydragon bones": "Always"
 		},
 		"Baby blue dragon": {
 			"Baby dragon bone": "1/4",
-			"Babydragon bones": "Always",
-			"Brimstone key": "1/640"
+			"Babydragon bones": "Always"
 		},
 		"Baby green dragon": {
 			"Babydragon bones": "Always"
 		},
 		"Baby red dragon": {
 			"Babydragon bones": "Always",
-			"Brimstone key": "1/640",
 			"Grubby key": "1/80",
 			"Tattered moon page": "1/25",
 			"Tattered sun page": "1/25",
@@ -59277,7 +59335,6 @@
 			"Basilisk jaw": "1/1,000",
 			"Big bones": "Always",
 			"Blood rune": "3/52",
-			"Brimstone key": "1/40",
 			"Clue scroll (hard)": "10/192",
 			"Coins": "7/52",
 			"Curved bone": "1/5012.5",
@@ -59322,7 +59379,6 @@
 			"Adamant warhammer": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/268",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -59552,7 +59608,6 @@
 			"Black axe": "2/128",
 			"Black sword": "4/128",
 			"Blood rune": "1/128",
-			"Brimstone key": "1/85",
 			"Chaos rune": "7/128",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "6/128",
@@ -59577,7 +59632,6 @@
 			"Adamantite ore": "1/128",
 			"Ashes": "Always",
 			"Blood rune": "1/128",
-			"Brimstone key": "1/85",
 			"Chaos rune": "7/128",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "6/128",
@@ -59600,7 +59654,6 @@
 			"Air rune": "1/128",
 			"Black dragonhide": "Always",
 			"Blood rune": "3/128",
-			"Brimstone key": "1/74",
 			"Chocolate cake": "3/128",
 			"Clue scroll (elite)": "1/500",
 			"Clue scroll (hard)": "1/128",
@@ -59672,7 +59725,6 @@
 			"Adamantite ore": "3/128",
 			"Bass": "3/128",
 			"Blue dragonhide": "Always",
-			"Brimstone key": "1/97",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/128",
 			"Dragon bones": "Always",
@@ -59824,7 +59876,6 @@
 			"Adamant platebody": "1/128",
 			"Adamantite bar": "3/128",
 			"Blood rune": "3/128",
-			"Brimstone key": "1/93",
 			"Bronze bar": "Always",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/128",
@@ -59865,7 +59916,6 @@
 			"Blue d'hide vambraces": "1/128",
 			"Blue dragon scale": "4/128",
 			"Blue dragonhide": "Always",
-			"Brimstone key": "1/65",
 			"Chaos rune": "8/128",
 			"Clue scroll (elite)": "1/750",
 			"Clue scroll (hard)": "1/128",
@@ -59933,7 +59983,6 @@
 			"Adamant platelegs": "7/128",
 			"Air rune": "7/128",
 			"Blood rune": "7/128",
-			"Brimstone key": "1/62",
 			"Clue scroll (elite)": "1/500",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "2/128",
@@ -60012,7 +60061,6 @@
 		"Callisto": {
 			"Big bones": "Always",
 			"Blood rune": "7/128",
-			"Brimstone key": "1/50",
 			"Callisto cub": "1/2000",
 			"Cannonball": "4/128",
 			"Chaos rune": "7/128",
@@ -60171,7 +60219,6 @@
 			"Big bones": "1/10",
 			"Blood rune": "10/128",
 			"Bones": "1/10",
-			"Brimstone key": "1/59",
 			"Chaos rune": "10/128",
 			"Clue scroll (elite)": "1/200",
 			"Coins": "8/128",
@@ -60201,7 +60248,6 @@
 			"Battlestaff": "5/128",
 			"Blood rune": "4/128",
 			"Bones": "Always",
-			"Brimstone key": "1/79",
 			"Chaos rune": "4/128",
 			"Chaos talisman": "6/128",
 			"Clue scroll (hard)": "1/128",
@@ -60347,7 +60393,6 @@
 			"Air battlestaff": "2/128",
 			"Black d'hide vambraces": "1/128",
 			"Bones": "Always",
-			"Brimstone key": "1/53",
 			"Chaos rune": "7/128",
 			"Coins": "32/128",
 			"Dragon chainbody": "1/32768",
@@ -60433,7 +60478,6 @@
 			"Battlestaff": "2/128",
 			"Black d'hide chaps": "3/128",
 			"Blood rune": "9/128",
-			"Brimstone key": "1/46",
 			"Chaos rune": "9/128",
 			"Clue scroll (elite)": "1/512",
 			"Clue scroll (hard)": "1/128",
@@ -60478,7 +60522,6 @@
 			"Adamant platebody": "8/127",
 			"Armadyl crossbow": "1/508",
 			"Bones": "Always",
-			"Brimstone key": "1/50",
 			"Clue scroll (elite)": "1/250",
 			"Coins": "31.2/127",
 			"Diamond": "8/127",
@@ -60612,7 +60655,6 @@
 		},
 		"Cow": {
 			"Bones": "Always",
-			"Brimstone key": "1/2020",
 			"Clue scroll (beginner)": "1/128",
 			"Cowhide": "Always",
 			"Raw beef": "Always"
@@ -60633,7 +60675,6 @@
 			"Amulet of power": "7/128",
 			"Anchovy pizza": "4/128",
 			"Bones": "Always",
-			"Brimstone key": "1/79",
 			"Cannonball": "4/128",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "18/128",
@@ -60873,7 +60914,6 @@
 		},
 		"Dagannoth": {
 			"Bones": "Always",
-			"Brimstone key": "1/235",
 			"Bronze spear": "5/128",
 			"Casket": "1/128",
 			"Clue scroll (medium)": "1/128",
@@ -60905,7 +60945,6 @@
 			"Berserker helm": "1/2048",
 			"Blood rune": "2/128",
 			"Bones": "Always",
-			"Brimstone key": "1/120",
 			"Casket": "5/128",
 			"Circular hide": "2/128",
 			"Clue scroll (medium)": "1/128",
@@ -60951,7 +60990,6 @@
 			"Air talisman": "7/128",
 			"Battlestaff": "1/128",
 			"Blood rune": "2/128",
-			"Brimstone key": "1/59",
 			"Clue scroll (elite)": "1/750",
 			"Clue scroll (hard)": "1/42",
 			"Coins": "3/128",
@@ -60993,7 +61031,6 @@
 			"Antifire potion(2)": "1/128",
 			"Bass": "7/128",
 			"Berserker ring": "1/128",
-			"Brimstone key": "1/59",
 			"Clue scroll (elite)": "1/750",
 			"Clue scroll (hard)": "1/42",
 			"Coal": "2/128",
@@ -61036,7 +61073,6 @@
 			"Adamant dart": "5/128",
 			"Archer helm": "1/128",
 			"Archers ring": "1/128",
-			"Brimstone key": "1/59",
 			"Clue scroll (elite)": "1/750",
 			"Clue scroll (hard)": "1/42",
 			"Coins": "10/128",
@@ -61073,8 +61109,7 @@
 			"GemDropTable+": "1/12.8"
 		},
 		"Dagannoth fledgeling": {
-			"Bones": "Always",
-			"Brimstone key": "1/280"
+			"Bones": "Always"
 		},
 		"Dagannoth mother": {
 			"Bones": "Always",
@@ -61082,7 +61117,6 @@
 		},
 		"Dagannoth spawn": {
 			"Bones": "Always",
-			"Brimstone key": "1/772",
 			"Clue scroll (easy)": "1/128",
 			"Coins": "10/128",
 			"Feather": "38/128",
@@ -61253,9 +61287,6 @@
 		},
 		"Dessous": {
 			"Vampyre dust": "Always"
-		},
-		"Dharok the Wretched": {
-			"Brimstone key": "1/97"
 		},
 		"Dire Wolf": {
 			"Wolf bone": "1/4",
@@ -61692,7 +61723,6 @@
 		"Fire giant": {
 			"Big bones": "Always",
 			"Blood rune": "4/128",
-			"Brimstone key": "1/139",
 			"Chaos rune": "7/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -61770,7 +61800,6 @@
 			"Armadyl chestplate": "1/16129",
 			"Armadyl helmet": "1/16129",
 			"Bones": "Always",
-			"Brimstone key": "1/88",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "70/127",
 			"Crushed nest": "8/127",
@@ -61790,7 +61819,6 @@
 			"Armadyl chestplate": "1/16129",
 			"Armadyl helmet": "1/16129",
 			"Bones": "Always",
-			"Brimstone key": "1/90",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "70/127",
 			"Crushed nest": "8/127",
@@ -61968,7 +61996,6 @@
 			"Bandos hilt": "1/508",
 			"Bandos tassets": "1/381",
 			"Big bones": "Always",
-			"Brimstone key": "1/50",
 			"Clue scroll (elite)": "1/250",
 			"Coal": "8/127",
 			"Coins": "1.25/127",
@@ -62058,7 +62085,6 @@
 			"Baby mole": "1/3000",
 			"Big bones": "Always",
 			"Blood rune": "19/128",
-			"Brimstone key": "1/74",
 			"Clue scroll (elite)": "1/500",
 			"Curved bone": "1/5012.5",
 			"Death rune": "3/128",
@@ -62451,7 +62477,6 @@
 			"Black axe": "2/128",
 			"Black sword": "4/128",
 			"Blood rune": "4/128",
-			"Brimstone key": "1/40",
 			"Chaos rune": "6/128",
 			"Chaos talisman": "1/128",
 			"Clue scroll (elite)": "1/120",
@@ -62475,7 +62500,6 @@
 		"Greater demon": {
 			"Adamant platelegs": "1/128",
 			"Ashes": "Always",
-			"Brimstone key": "1/112",
 			"Chaos rune": "3/128",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/128",
@@ -62704,7 +62728,6 @@
 		},
 		"Guardian Drake": {
 			"Black d'hide vambraces": "1/85",
-			"Brimstone key": "1/40",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/85",
 			"Death rune": "10/85",
@@ -62763,9 +62786,6 @@
 			"Mind rune": "2/128",
 			"Nothing": "33/128",
 			"GemDropTable+": "1/128"
-		},
-		"Guthan the Infested": {
-			"Brimstone key": "1/97"
 		},
 		"H%2EA%2EM%2E Guard": {
 			"Bones": "Always",
@@ -62826,7 +62846,6 @@
 		},
 		"Hellhound": {
 			"Bones": "Always",
-			"Brimstone key": "1/95",
 			"Clue scroll (elite)": "Always",
 			"Clue scroll (hard)": "1/64",
 			"Reward casket (elite)": "Always",
@@ -62914,7 +62933,6 @@
 			"Beer": "6/128",
 			"Big bones": "Always",
 			"Body talisman": "2/128",
-			"Brimstone key": "1/1136",
 			"Chaos rune": "1/128",
 			"Clue scroll (beginner)": "1/50",
 			"Coins": "2/128",
@@ -63415,7 +63433,6 @@
 			"Black boots": "1/128",
 			"Blood rune": "1/128",
 			"Bones": "10/128",
-			"Brimstone key": "1/63",
 			"Clue scroll (hard)": "10/256",
 			"Coins": "1/128",
 			"Ensouled bloodveld head": "Always",
@@ -63443,7 +63460,6 @@
 			"Blood rune": "10/128",
 			"Bones": "Always",
 			"Bow string": "4/128",
-			"Brimstone key": "1/51",
 			"Clue scroll (hard)": "10/128",
 			"Coins": "3/128",
 			"Crystal shard": "Always",
@@ -63554,7 +63570,6 @@
 			"Adamant sq shield": "1/128",
 			"Adamantite bar": "3/128",
 			"Blood rune": "19/128",
-			"Brimstone key": "1/82",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/128",
 			"Curry": "3/128",
@@ -63734,7 +63749,6 @@
 			"Adamant platebody": "8/127",
 			"Ashes": "Always",
 			"Blood rune": "8/127",
-			"Brimstone key": "1/50",
 			"Clue scroll (elite)": "1/250",
 			"Coins": "36.7/127",
 			"Death rune": "8/127",
@@ -63760,7 +63774,6 @@
 			"Adamant dagger": "2/128",
 			"Air rune": "8/128",
 			"Blood rune": "4/128",
-			"Brimstone key": "1/91",
 			"Chaos rune": "7/128",
 			"Coins": "1/128",
 			"Defence potion(3)": "1/128",
@@ -63781,7 +63794,6 @@
 		"Kalphite Queen": {
 			"Battlestaff": "5/128",
 			"Blood rune": "6/128",
-			"Brimstone key": "1/53",
 			"Bucket of sand": "4/128",
 			"Cactus spine": "3/128",
 			"Clue scroll (elite)": "1/100",
@@ -63832,7 +63844,6 @@
 		},
 		"Kalphite Soldier": {
 			"Adamant med helm": "1/128",
-			"Brimstone key": "1/145",
 			"Chaos rune": "5/128",
 			"Coins": "1/128",
 			"Death rune": "3/128",
@@ -63850,7 +63861,6 @@
 		},
 		"Kalphite Worker": {
 			"Body rune": "2/128",
-			"Brimstone key": "1/1136",
 			"Chaos rune": "2/128",
 			"Coins": "4/128",
 			"Cosmic rune": "1/128",
@@ -63874,9 +63884,6 @@
 		},
 		"Karamel": {
 			"Choc-ice": "Always"
-		},
-		"Karil the Tainted": {
-			"Brimstone key": "1/100"
 		},
 		"Kebbit": {
 			"Bones": "Always",
@@ -63904,7 +63911,6 @@
 			"Amulet of power": "7/128",
 			"Black dragonhide": "Always",
 			"Blood rune": "5/128",
-			"Brimstone key": "1/64",
 			"Clue scroll (elite)": "1/450",
 			"Draconic visage": "1/5000",
 			"Dragon arrowtips": "5/128",
@@ -63938,7 +63944,6 @@
 			"Black platebody": "5/128",
 			"Black warhammer": "5/128",
 			"Bones": "Always",
-			"Brimstone key": "1/98",
 			"Casket": "2/128",
 			"Clue scroll (medium)": "1/128",
 			"Coins": "10/128",
@@ -63967,7 +63972,6 @@
 			"Adamant platebody": "3/124",
 			"Big bones": "5/124",
 			"Bones": "Always",
-			"Brimstone key": "1/48",
 			"Clue scroll (hard)": "10/128",
 			"Coconut": "4/124",
 			"Coins": "5/124",
@@ -64046,7 +64050,6 @@
 			"Adamant sq shield": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/116",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -64072,7 +64075,6 @@
 			"Armadyl hilt": "1/508",
 			"Big bones": "Always",
 			"Black d'hide body": "8/127",
-			"Brimstone key": "1/50",
 			"Clue scroll (elite)": "1/250",
 			"Coins": "1.25/127",
 			"Crystal key": "1/127",
@@ -64315,7 +64317,6 @@
 		},
 		"Lizardman brute": {
 			"Bones": "Always",
-			"Brimstone key": "1/245",
 			"Lizardman fang": "14/67",
 			"UncommonSeedDropTable+": "15/67",
 			"Xeric's talisman (inert)": "1/250",
@@ -64324,7 +64325,6 @@
 		"Lizardman shaman": {
 			"Air rune": "12.5/250",
 			"Big bones": "Always",
-			"Brimstone key": "1/90",
 			"Chaos rune": "12.5/250",
 			"Chilli potato": "15/250",
 			"Clue scroll (elite)": "1/1200",
@@ -64364,7 +64364,6 @@
 		},
 		"Lizardman%2FLevel 53": {
 			"Bones": "Always",
-			"Brimstone key": "1/541",
 			"Lizardman fang": "10/78",
 			"UncommonSeedDropTable+": "15/87",
 			"Xeric's talisman (inert)": "1/250",
@@ -64372,7 +64371,6 @@
 		},
 		"Lizardman%2FLevel 62": {
 			"Bones": "Always",
-			"Brimstone key": "1/388",
 			"Lizardman fang": "14/78",
 			"UncommonSeedDropTable+": "15/78",
 			"Xeric's talisman (inert)": "1/250",
@@ -64567,7 +64565,6 @@
 		"Marble gargoyle": {
 			"Adamant boots": "1/128",
 			"Adamant platelegs": "4/128",
-			"Brimstone key": "1/40",
 			"Brittle key": "1/150",
 			"Chaos rune": "8/128",
 			"Clue scroll (hard)": "10/128",
@@ -64693,7 +64690,6 @@
 		"Mithril dragon": {
 			"Ancient page": "2/128",
 			"Blood rune": "19/128",
-			"Brimstone key": "1/59",
 			"Chewed bones": "3/128",
 			"Clue scroll (elite)": "1/350",
 			"Coins": "7/128",
@@ -64758,7 +64754,6 @@
 			"Basilisk bone": "1/4",
 			"Basilisk head": "1/2000",
 			"Bones": "Always",
-			"Brimstone key": "1/74",
 			"Coins": "1/128",
 			"HerbDropTable+": "35/128",
 			"Law rune": "3/128",
@@ -64853,7 +64848,6 @@
 			"Adamant warhammer": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/292",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -64991,7 +64985,6 @@
 			"Air rune": "6/128",
 			"Ashes": "Always",
 			"Blood rune": "10/128",
-			"Brimstone key": "1/48",
 			"Chaos rune": "10/128",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "8/128",
@@ -65046,7 +65039,6 @@
 			"Big bones": "Always",
 			"Black battleaxe": "3/128",
 			"Blood rune": "4/128",
-			"Brimstone key": "1/40",
 			"Chaos rune": "7/128",
 			"Clue scroll (elite)": "1/120",
 			"Clue scroll (hard)": "10/128",
@@ -65135,7 +65127,6 @@
 			"Air rune": "4/128",
 			"Ashes": "Always",
 			"Black d'hide vambraces": "3/128",
-			"Brimstone key": "1/51",
 			"Clue scroll (elite)": "10/750",
 			"Clue scroll (hard)": "10/128",
 			"Coal": "3/128",
@@ -65408,7 +65399,6 @@
 			"Adamant sq shield": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/116",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -65565,7 +65555,6 @@
 			"Adamant platebody": "1/128",
 			"Adamantite bar": "1/128",
 			"Blood rune": "4/128",
-			"Brimstone key": "1/89",
 			"Chocolate cake": "3/128",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/128",
@@ -65597,7 +65586,6 @@
 			"Adamantite ore": "5/128",
 			"Battlestaff": "5/128",
 			"Black platelegs": "5/128",
-			"Brimstone key": "1/42",
 			"Clue scroll (hard)": "10/128",
 			"HerbDropTable+": "46/128",
 			"Lava battlestaff": "1/128",
@@ -66140,7 +66128,6 @@
 			"Adamant sq shield": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/97",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -66251,7 +66238,6 @@
 			"Bones": "Always"
 		},
 		"Rune dragon": {
-			"Brimstone key": "1/50",
 			"Chaos rune": "7/127",
 			"Clue scroll (elite)": "1/300",
 			"Death rune": "7/127",
@@ -66320,7 +66306,6 @@
 			"GemDropTable+": "1/128"
 		},
 		"Sand Crab": {
-			"Brimstone key": "1/1545",
 			"Bronze pickaxe": "6/128",
 			"Bucket of sand": "6/128",
 			"Casket": "1/128",
@@ -66345,7 +66330,6 @@
 			"Adamantite ore": "3/100",
 			"Battlestaff": "2/100",
 			"Blood rune": "5/100",
-			"Brimstone key": "1/56",
 			"Chaos rune": "5/100",
 			"Clue scroll (elite)": "1/60",
 			"Clue scroll (hard)": "1/40",
@@ -66484,7 +66468,6 @@
 		"Scorpia": {
 			"Admiral pie": "8/128",
 			"Anchovy pizza": "4/128",
-			"Brimstone key": "1/75",
 			"Bucket of sand": "6/128",
 			"Cactus spine": "6/128",
 			"Clue scroll (hard)": "1/100",
@@ -66552,7 +66535,6 @@
 			"Air battlestaff": "2/128",
 			"Air rune": "5/256",
 			"Battlestaff": "5/128",
-			"Brimstone key": "1/72",
 			"Chaos rune": "1/128",
 			"Clue scroll (hard)": "10/128",
 			"Coins": "7/128",
@@ -66666,7 +66648,6 @@
 			"Adamant sq shield": "2/76",
 			"Bass": "7/76",
 			"Blood rune": "5/76",
-			"Brimstone key": "1/52",
 			"Clue scroll (hard)": "1/256",
 			"Coins": "8/76",
 			"Dragon dagger": "1/76",
@@ -67289,7 +67270,6 @@
 			"Ashes": "Always",
 			"Battlestaff": "7/100",
 			"Blood rune": "7/100",
-			"Brimstone key": "1/55",
 			"Clue scroll (elite)": "1/5",
 			"Clue scroll (hard)": "Always",
 			"Dark claw": "1/25",
@@ -67522,7 +67502,6 @@
 		"Spiked Turoth": {
 			"Adamant full helm": "1/128",
 			"Bones": "Always",
-			"Brimstone key": "1/56",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/128",
 			"HerbDropTable+": "31/128",
@@ -67565,7 +67544,6 @@
 		"Steel dragon": {
 			"Adamant kiteshield": "2/128",
 			"Blood rune": "19/128",
-			"Brimstone key": "1/70",
 			"Clue scroll (elite)": "1/500",
 			"Clue scroll (hard)": "1/64",
 			"Coins": "5/128",
@@ -67596,7 +67574,6 @@
 			"Adamant sq shield": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/99",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -67715,7 +67692,6 @@
 			"Adamant longsword": "4/100",
 			"Adamant med helm": "4/100",
 			"Air rune": "5/100",
-			"Brimstone key": "1/225",
 			"Chaos rune": "2/100",
 			"Clue scroll (hard)": "1/200",
 			"Coins": "17/100",
@@ -67831,7 +67807,6 @@
 			"Adamant warhammer": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/317",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -67871,9 +67846,6 @@
 			"Nature rune": "13/128",
 			"Nothing": "30/128",
 			"Steel axe": "1/128"
-		},
-		"Torag the Corrupted": {
-			"Brimstone key": "1/97"
 		},
 		"Tortoise%2FLevel 79": {
 			"Bones": "Always",
@@ -68067,7 +68039,6 @@
 			"Adamant sq shield": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/97",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -68131,7 +68102,6 @@
 			"Adamant warhammer": "1/128",
 			"Big bones": "Always",
 			"Black warhammer": "3/128",
-			"Brimstone key": "1/268",
 			"Coal": "3/128",
 			"Coins": "1/128",
 			"Curved bone": "1/5012.5",
@@ -68243,7 +68213,6 @@
 			"Amulet of strength": "5/100",
 			"Blood rune": "3/100",
 			"Bones": "Always",
-			"Brimstone key": "1/99",
 			"Chaos rune": "3/100",
 			"Clue scroll (hard)": "1/100",
 			"Coins": "6/100",
@@ -68342,7 +68311,6 @@
 		"Venenatis": {
 			"Antidote++(4)": "3/128",
 			"Blood rune": "7/128",
-			"Brimstone key": "1/50",
 			"Cannonball": "4/128",
 			"Chaos rune": "7/128",
 			"Clue scroll (elite)": "1/100",
@@ -68407,9 +68375,6 @@
 			"Wolf bones": "Always",
 			"GemDropTable+": "1/512"
 		},
-		"Verac the Defiled": {
-			"Brimstone key": "1/97"
-		},
 		"Vespula": {
 			"Prayer enhance (+)(4)": "Always",
 			"Revitalisation (+)(4)": "Always",
@@ -68420,7 +68385,6 @@
 			"Ancient staff": "3/128",
 			"Big bones": "Always",
 			"Blood rune": "7/128",
-			"Brimstone key": "1/50",
 			"Cannonball": "4/128",
 			"Chaos rune": "7/128",
 			"Clue scroll (elite)": "1/100",
@@ -68458,7 +68422,6 @@
 			"Yew seed": "1/128"
 		},
 		"Vitreous Jelly": {
-			"Brimstone key": "1/62",
 			"Chaos rune": "5/128",
 			"Clue scroll (hard)": "10/128",
 			"Coins": "2/128",
@@ -68479,7 +68442,6 @@
 			"Adamant axe": "3/128",
 			"Adamant battleaxe": "11/128",
 			"Black 2h sword": "5/128",
-			"Brimstone key": "1/56",
 			"Chaos rune": "5/128",
 			"Clue scroll (hard)": "10/64",
 			"Coins": "2/128",
@@ -68498,7 +68460,6 @@
 			"Battlestaff": "4/150",
 			"Black dragonhide": "7/150",
 			"Blue dragonhide": "8/150",
-			"Brimstone key": "1/50",
 			"Chaos rune": "6/150",
 			"Clue scroll (elite)": "1/65",
 			"Coins": "5/150",
@@ -68550,7 +68511,6 @@
 			"Adamantite ore": "2/96",
 			"Bark": "4/96",
 			"Blood rune": "10/96",
-			"Brimstone key": "1/133",
 			"Clue scroll (hard)": "1/128",
 			"Coal": "4/96",
 			"Coins": "15/96",
@@ -68590,7 +68550,6 @@
 			"Adamant platelegs": "6/93",
 			"Bark": "4/93",
 			"Blood rune": "10/93",
-			"Brimstone key": "1/89",
 			"Clue scroll (hard)": "1/128",
 			"Coal": "4/93",
 			"Coins": "21/93",
@@ -68696,7 +68655,6 @@
 			"Adamant warhammer": "2/128",
 			"Blood rune": "3/128",
 			"Blue d'hide vambraces": "1/128",
-			"Brimstone key": "1/97",
 			"Clue scroll (elite)": "Always",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "15/128",
@@ -68870,7 +68828,6 @@
 			"Armadyl chestplate": "1/16129",
 			"Armadyl helmet": "1/16129",
 			"Bones": "Always",
-			"Brimstone key": "1/91",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "70/127",
 			"Crushed nest": "8/127",
@@ -69449,7 +69406,6 @@
 			"Adamantite bar": "8/248",
 			"Antidote++(4)": "9/248",
 			"Battlestaff": "10/248",
-			"Brimstone key": "1/50",
 			"Calquat tree seed": "6/248",
 			"Chaos rune": "12/248",
 			"Clue scroll (elite)": "1/75",
@@ -69789,7 +69745,7 @@
 		"Architectural Alliance": "5944, 5947, 6457, 6458, 7226",
 		"Bear your Soul": "6459, 6715, 7228, 11573, Cerberus' Lair",
 		"Below Ice Mountain": "11829, 12341, 12852, 12853, 12342, 11828, 11830",
-		"Between a Rock%2E%2E%2E": "10810, 11318, 12085, Dondakan's mine, Dwarven Mine, Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement, Keldagrim",
+		"Between a Rock%2E%2E%2E": "10810, 11318, 12085, Dondakan's mine, Dwarven Mine, White Wolf Tunnel, Keldagrim",
 		"Big Chompy Bird Hunting": "10286, 10542, Rantz's cave",
 		"Biohazard": "10035, 10036, 10291, 10292, 11570, 13108",
 		"Black Knights' Fortress": "11828, 12086",
@@ -69806,14 +69762,14 @@
 		"Darkness of Hallowvale": "12854, 13622, 13874, 14129, 14132, 14385, 14386, 14387, Meiyerditch mine, Myreque hideout%2FBurgh De Rott Hideout, Myreque hideout%2FMeiyerditch Hideout, Meiyerditch Laboratories",
 		"Death Plateau": "11319, 11320, 11575",
 		"Death to the Dorgeshuun": "12594, 12850, 12851, H%2EA%2EM%2E Hideout, H%2EA%2EM%2E Store room, Lumbridge Swamp Caves",
-		"Demon Slayer": "12337, 12852, 12853, 12854, Varrock Sewers & Edgeville Dungeon",
+		"Demon Slayer": "12337, 12852, 12853, 12854, Varrock Sewers",
 		"Desert Treasure": "10037, 11316, 11322, 11323, 12338, 12339, 12590, 12591, 12845, 12846, 13102, 13364, 13878, 14133, Shadow Dungeon, Jaldraocht Pyramid, Smoke Dungeon",
 		"Devious Minds": "11316, 11828, 11829, 12343, 13622, Law altar, Abyss",
 		"Doric's Quest": "11829",
 		"Dragon Slayer": "11314, 11315, 11570, 12081, 12082, 12084, 12085, 12086, 12338, 12596, 12850, Crandor and Karamja Dungeon, Dwarven Mine, Melzar's Maze%2FBasement",
 		"Dragon Slayer II": "5943, 5944, 8253, 8508, 9023, 9772, 10038, 10291, 10553, 11314, 11565, 11569, 11828, 12340, 12854, 13099, 14142, 14646, 14652, 14907, 14908, Ancient Cavern, Lithkren Vault, Crandor and Karamja Dungeon, Ungael Laboratory, Shayzien Crypts",
 		"Dream Mentor": "8253, 8508, 8509, Lunar Isle mine",
-		"Druidic Ritual": "11573, 11574, Taverly Dungeon & Entrana Dungeon",
+		"Druidic Ritual": "11573, 11574, Taverly Dungeon",
 		"Dwarf Cannon": "10292, 10038, 10293, 10294, 12085, Goblin Cave",
 		"Eadgar's Ruse": "10291, 11321, 11573, 11577, Troll Stronghold",
 		"Eagles' Peak": "9270, 10291, 13109, Eagles' Peak Dungeon",
@@ -69826,11 +69782,11 @@
 		"Ernest the Chicken": "12340",
 		"Fairytale I - Growing Pains": "11572, 11827, 12338, 12340, 13620, Zanaris, Nature Grotto Cave",
 		"Fairytale II - Cure a Queen": "8752, 10802, 12338, Zanaris, Fairy Resistance Hideout, Cosmic entity's plane, Gorak Plane",
-		"Family Crest": "10803, 11317, 12342, 13106, 13107, 13109, 13110, Witchaven Dungeon, Varrock Sewers & Edgeville Dungeon, Dwarven Mine",
+		"Family Crest": "10803, 11317, 12342, 13106, 13107, 13109, 13110, Witchaven Dungeon, Edgeville Dungeon, Dwarven Mine",
 		"Family Pest": "11317, 13107, 13109, 13110",
 		"Fight Arena": "10289",
 		"Fishing Contest": "10549, 10550, 11318",
-		"Forgettable Tale…": "10810, 11318, Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement, Keldagrim",
+		"Forgettable Tale…": "10810, 11318, White Wolf Tunnel, Keldagrim",
 		"Garden of Tranquillity": "10548, 11062, 11573, 11575, 11828, 11830, 12083, 12086, 12338, 12342, 12850, 12854, 14391",
 		"Gertrude's Cat": "12597, 12853, 13110",
 		"Getting Ahead": "4664, 4921",
@@ -69839,7 +69795,7 @@
 		"Grim Tales": "11318, 11573, 11574, 11830",
 		"Haunted Mine": "13618, Abandoned Mine",
 		"Hazeel Cult": "10290, 10291",
-		"Heroes' Quest": "11057, 11316, 11318, 11573, 11574, 12082, 12091, 12596, 12852, Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement, Taverly Dungeon & Entrana Dungeon",
+		"Heroes' Quest": "11057, 11316, 11318, 11573, 11574, 12082, 12091, 12596, 12852, Ice Queen's Lair, Taverly Dungeon",
 		"Holy Grail": "10294, 10802, 10806, 11062, 11316, 11830, 12340, Fisher Realm",
 		"Horror from the Deep": "10039, 10040, 10296, Lighthouse%2FDungeon",
 		"Icthlarin's Little Helper": "13099, 13100",
@@ -69851,7 +69807,7 @@
 		"King's Ransom": "10547, 10806, 10807, 11062, 12086",
 		"Lair of Tarn Razorlor": "13618, Tarn's Lair",
 		"Legends' Quest": "10804, 11053, 11055, 11309, 11312, 11565, Viyeldi caves",
-		"Lost City": "11316, 12594, 12849, Taverly Dungeon & Entrana Dungeon",
+		"Lost City": "11316, 12594, 12849, Entrana Dungeon",
 		"Lunar Diplomacy": "8252, 8253, 8508, 8509, 8763, 10297, 10553, Fire altar, Water altar, Earth altar, Air altar, Lunar Isle mine",
 		"Making Friends with My Arm": "10810, 11321, 11325, 12338, 12597, Troll Stronghold",
 		"Making History": "9777, 9780, 10291, 10547, 10553, 14646",
@@ -69875,16 +69831,16 @@
 		"Prince Ali Rescue": "12338, 13105",
 		"Rag and Bone Man": "12338, 13366",
 		"Rag and Bone Man II": "12338, 13366",
-		"Ratcatchers": "10291, 10810, 12082, 12597, 12854, 13108, 13109, 13358, Varrock Sewers & Edgeville Dungeon, Keldagrim, Port Sarim Rat Pits",
+		"Ratcatchers": "10291, 10810, 12082, 12597, 12854, 13108, 13109, 13358, Varrock Sewers, Keldagrim, Port Sarim Rat Pits",
 		"Recipe for Disaster": "12850",
-		"Recipe for Disaster%2GFreeing Evil Dave": "12342, Varrock Sewers & Edgeville Dungeon",
+		"Recipe for Disaster%2GFreeing Evil Dave": "12342",
 		"Recipe for Disaster%2GFreeing King Awowogei": "10795, 11050, 11051, 11562",
 		"Recipe for Disaster%2GFreeing Pirate Pete": "10545",
-		"Recipe for Disaster%2GFreeing Sir Amik Varze": "11309, 11316, 12338, Evil Chicken's Lair, Taverly Dungeon & Entrana Dungeon",
+		"Recipe for Disaster%2GFreeing Sir Amik Varze": "11309, 11316, 12338, Evil Chicken's Lair, Entrana Dungeon",
 		"Recipe for Disaster%2GFreeing Skrach Uglogwee": "10542, 11056",
 		"Recipe for Disaster%2GFreeing the Goblin generals": "11830",
 		"Recipe for Disaster%2GFreeing the Lumbridge Guide": "12337",
-		"Recipe for Disaster%2GFreeing the Mountain Dwarf": "11318, 11828, Ice Queen's Lair & White Wolf Tunnel & Warrior's Guild%2FBasement",
+		"Recipe for Disaster%2GFreeing the Mountain Dwarf": "11318, 11828, White Wolf Tunnel",
 		"Recruitment Drive": "11828",
 		"Regicide": "8753, 8754, 9009, 9010, 9266, 10291, 11570",
 		"Romeo & Juliet": "12597, 12853, 12854",
@@ -69892,7 +69848,7 @@
 		"Royal Trouble": "10044, 10300, 10553, Miscellania and Etceteria Dungeon",
 		"Rum Deal": "14647, Braindeath Island",
 		"Rune Mysteries": "12850, 12853, Wizards' Tower%2FBasement",
-		"Scorpion Catcher": "10039, 10805, 10806, 11573, 12086, Taverly Dungeon & Entrana Dungeon",
+		"Scorpion Catcher": "10039, 10805, 10806, 11573, 12086, Taverly Dungeon",
 		"Sea Slug": "10803, 11059",
 		"Shades of Mort'ton": "13875",
 		"Shadow of the Storm": "13105, 13872",
@@ -69904,16 +69860,16 @@
 		"Skippy and the Mogres": "11825",
 		"Song of the Elves": "8751, 8752, 8754, 9008, 9009, 9011, 9265, 9266, 9779, 10035, 10036, 10037, 10291, 10292, 10547, Enchanted Valley, Mourner Tunnels & Temple of Light, Underground Pass, Waterfall Dungeon",
 		"Spirits of the Elid": "13357, 13360, 13613, Genie's Cave, Water Ravine Dungeon",
-		"Swan Song": "9275, 10288, 11571, 11827, 12338, Yanille Agility Dungeon & Wizards' Guild%2FBasement",
+		"Swan Song": "9275, 10288, 11571, 11827, 12338, Wizards' Guild%2FBasement",
 		"Tai Bwo Wannai Trio": "11054, 11055, 11056, 11057, 11311, 11568, 11569",
 		"Tale of the Righteous": "4663, 4919, 5944, 6199, 6205, 6459",
 		"Tears of Guthix": "Lumbridge Swamp Caves",
 		"Temple of Ikov": "10291, 10549, 12342, Temple of Ikov",
 		"The Ascent of Arceuus": "5179, 5434, 6203, 6457, 6714, 6716, Karuulm Slayer Dungeon",
-		"The Corsair Curse": "10028, 10284, 11570, 12083, Corsair Cove Dungeon & Myth's Guild%2FBasement",
+		"The Corsair Curse": "10028, 10284, 11570, 12083, Corsair Cove Dungeon",
 		"The Depths of Despair": "6453, 6459, 6967, Crabclaw Caves",
 		"The Dig Site": "12853, 13364, 13365, Digsite Dungeon",
-		"The Eyes of Glouphrie": "9525, 9526, 9780, 9781, 9782, 10544, Stronghold Slayer Cave & Brimstail's cave",
+		"The Eyes of Glouphrie": "9525, 9526, 9780, 9781, 9782, 10544, Brimstail's cave",
 		"The Feud": "13106, 13358",
 		"The Forsaken Tower": "5435, 5946, 6461",
 		"The Fremennik Exiles": "8253, 8508, 8509, 9790, 10552, 10553, 10808, 11065, Lunar Isle mine, Jormungand's Prison",
@@ -69941,7 +69897,7 @@
 		"Troll Stronghold": "11321, 11575, 11576, Troll Stronghold",
 		"Underground Pass": "9779, 10291, Underground Pass",
 		"Vampyre Slayer": "12339, 12340, 12853",
-		"Wanted!": "11573, 11828, 12852, 13878, Rune essence mine, Taverly Dungeon & Entrana Dungeon",
+		"Wanted!": "11573, 11828, 12852, 13878, Rune essence mine, Taverly Dungeon",
 		"Watchtower": "10030, 10031, 10032, 10287, Skavid caves, Ogre Enclave",
 		"Waterfall Quest": "10033, 10037, 10038, Tree Gnome Village dungeon, Waterfall Dungeon, Glarial's Tomb",
 		"What Lies Below": "12342, 12854, 13108, 13110, Tunnel of Chaos",
@@ -76254,7 +76210,6 @@
 				"Air battlestaff": "2/128",
 				"Air rune": "5/256",
 				"Battlestaff": "5/128",
-				"Brimstone key": "1/99",
 				"Chaos rune": "1/128",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "7/128",
@@ -76484,7 +76439,6 @@
 				"Basilisk bone": "1/4",
 				"Basilisk head": "1/2000",
 				"Bones": "Always",
-				"Brimstone key": "1/323",
 				"Clue scroll (elite)": "Always",
 				"Coins": "1/128",
 				"HerbDropTable+": "35/128",
@@ -76576,7 +76530,6 @@
 			},
 			"Sulphur Lizard": {
 				"Bones": "Always",
-				"Brimstone key": "1/480",
 				"Clue scroll (medium)": "1/128",
 				"Coal": "13/128",
 				"Copper ore": "3/128",
@@ -76616,7 +76569,6 @@
 				"Air rune": "2/128",
 				"Blood rune": "2/128",
 				"Bones": "Always",
-				"Brimstone key": "1/224",
 				"Brine sabre": "1/512",
 				"Clue scroll (medium)": "1/128",
 				"Coins": "3/128",
@@ -76636,7 +76588,6 @@
 				"Black boots": "1/128",
 				"Blood rune": "1/128",
 				"Bones": "10/128",
-				"Brimstone key": "1/172",
 				"Clue scroll (elite)": "Always",
 				"Clue scroll (hard)": "1/256",
 				"Coins": "1/128",
@@ -76667,7 +76618,6 @@
 				"Blood rune": "10/128",
 				"Bones": "Always",
 				"Bow string": "4/128",
-				"Brimstone key": "1/76",
 				"Clue scroll (elite)": "Always",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "3/128",
@@ -76691,7 +76641,6 @@
 				"GemDropTable+": "1/64"
 			},
 			"Jelly": {
-				"Brimstone key": "1/156",
 				"Chaos rune": "5/128",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "2/128",
@@ -76711,7 +76660,6 @@
 				"Adamant axe": "3/128",
 				"Adamant battleaxe": "11/128",
 				"Black 2h sword": "5/128",
-				"Brimstone key": "1/77",
 				"Chaos rune": "5/128",
 				"Clue scroll (hard)": "1/64",
 				"Coins": "2/128",
@@ -76727,7 +76675,6 @@
 			"Turoth": {
 				"Adamant full helm": "1/128",
 				"Bones": "Always",
-				"Brimstone key": "1/125",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "1/128",
 				"HerbDropTable+": "31/128",
@@ -76745,7 +76692,6 @@
 			},
 			"Zygomite": {
 				"Ashes": "Always",
-				"Brimstone key": "1/111",
 				"Clay": "7/140",
 				"Coins": "2/140",
 				"Earth rune": "5/140",
@@ -76765,7 +76711,6 @@
 				"GemDropTable+": "1/35"
 			},
 			"Ancient Zygomite": {
-				"Brimstone key": "1/78",
 				"Calcite": "~1/6",
 				"Celastrus seed": "Rare",
 				"Clue scroll (medium)": "1/128",
@@ -76828,7 +76773,6 @@
 			},
 			"Aberrant spectre": {
 				"Adamant platelegs": "1/128",
-				"Brimstone key": "1/82",
 				"Clue scroll (elite)": "Always",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "1/128",
@@ -76847,7 +76791,6 @@
 				"Adamantite ore": "5/128",
 				"Battlestaff": "5/128",
 				"Black platelegs": "5/128",
-				"Brimstone key": "1/68",
 				"Clue scroll (elite)": "Always",
 				"Clue scroll (hard)": "1/128",
 				"HerbDropTable+": "46/128",
@@ -76871,7 +76814,6 @@
 				"Basilisk jaw": "1/5000",
 				"Big bones": "Always",
 				"Blood rune": "3/52",
-				"Brimstone key": "1/63",
 				"Clue scroll (hard)": "1/192",
 				"Coins": "7/52",
 				"Curved bone": "1/5012.5",
@@ -76897,7 +76839,6 @@
 				"Adamant sq shield": "2/76",
 				"Bass": "7/76",
 				"Blood rune": "5/76",
-				"Brimstone key": "1/80",
 				"Clue scroll (hard)": "1/256",
 				"Coins": "8/76",
 				"Dragon dagger": "1/76",
@@ -77002,7 +76943,6 @@
 				"Air battlestaff": "2/128",
 				"Black d'hide vambraces": "1/128",
 				"Bones": "Always",
-				"Brimstone key": "1/87",
 				"Chaos rune": "7/128",
 				"Coins": "32/128",
 				"Dragon chainbody": "1/32768",
@@ -77033,7 +76973,6 @@
 				"Air battlestaff": "4/123",
 				"Battlestaff": "3/123",
 				"Blood rune": "4/123",
-				"Brimstone key": "1/71",
 				"Calcite": "2/123",
 				"Celastrus seed": "1/7688",
 				"Chaos rune": "4/123",
@@ -77095,7 +77034,6 @@
 				"Air battlestaff": "4/123",
 				"Battlestaff": "3/123",
 				"Blood rune": "4/123",
-				"Brimstone key": "1/73",
 				"Calcite": "2/123",
 				"Celastrus seed": "1/7688",
 				"Chaos rune": "4/123",
@@ -77157,7 +77095,6 @@
 				"Air battlestaff": "4/123",
 				"Battlestaff": "3/123",
 				"Blood rune": "4/123",
-				"Brimstone key": "1/72",
 				"Calcite": "2/123",
 				"Celastrus seed": "1/7688",
 				"Chaos rune": "4/123",
@@ -77216,7 +77153,6 @@
 				"Air battlestaff": "4/132",
 				"Battlestaff": "4/132",
 				"Blood rune": "4/132",
-				"Brimstone key": "1/62",
 				"Clue scroll (elite)": "1/350",
 				"Coins": "7/132",
 				"Death rune": "4/132",
@@ -77267,7 +77203,6 @@
 				"Air rune": "6/128",
 				"Battlestaff": "3/128",
 				"Blood rune": "4/128",
-				"Brimstone key": "1/73",
 				"Chaos rune": "4/128",
 				"Clue scroll (elite)": "1/350",
 				"Coins": "12/128",
@@ -77306,7 +77241,6 @@
 				"Adamant platebody": "3/124",
 				"Big bones": "5/124",
 				"Bones": "Always",
-				"Brimstone key": "1/78",
 				"Clue scroll (hard)": "1/128",
 				"Coconut": "4/124",
 				"Coins": "5/124",
@@ -77330,7 +77264,6 @@
 			"Gargoyle": {
 				"Adamant boots": "1/128",
 				"Adamant platelegs": "4/128",
-				"Brimstone key": "1/77",
 				"Brittle key": "1/150",
 				"Chaos rune": "8/128",
 				"Clue scroll (hard)": "1/128",
@@ -77357,7 +77290,6 @@
 				"Black d'hide vambraces": "1/128",
 				"Black dragonhide": "Always",
 				"Blood rune": "8/128",
-				"Brimstone key": "1/56",
 				"Clue scroll (elite)": "1/250",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "2/128",
@@ -77398,7 +77330,6 @@
 				"Adamant platelegs": "4/116",
 				"Ashes": "Always",
 				"Blood rune": "4/116",
-				"Brimstone key": "1/77",
 				"Chaos rune": "8/116",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "1/116",
@@ -77420,7 +77351,6 @@
 				"Air rune": "6/128",
 				"Ashes": "Always",
 				"Blood rune": "10/128",
-				"Brimstone key": "1/64",
 				"Chaos rune": "10/128",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "8/128",
@@ -77444,7 +77374,6 @@
 			},
 			"Drake": {
 				"Black d'hide vambraces": "1/85",
-				"Brimstone key": "1/64",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "1/85",
 				"Death rune": "10/85",
@@ -77485,7 +77414,6 @@
 				"Black axe": "2/128",
 				"Black sword": "4/128",
 				"Blood rune": "4/128",
-				"Brimstone key": "1/76",
 				"Chaos rune": "6/128",
 				"Chaos talisman": "1/128",
 				"Clue scroll (elite)": "1/1200",
@@ -77510,7 +77438,6 @@
 				"Antidote++(4)": "6/200",
 				"Battlestaff": "4/200",
 				"Blood rune": "8/200",
-				"Brimstone key": "1/75",
 				"Bucket": "1/240",
 				"Chaos rune": "16/200",
 				"Clue scroll (elite)": "1/1200",
@@ -77549,7 +77476,6 @@
 				"Big bones": "Always",
 				"Black battleaxe": "3/128",
 				"Blood rune": "4/128",
-				"Brimstone key": "1/66",
 				"Chaos rune": "7/128",
 				"Clue scroll (elite)": "1/1200",
 				"Clue scroll (hard)": "1/128",
@@ -77579,7 +77505,6 @@
 				"Air rune": "4/128",
 				"Ashes": "Always",
 				"Black d'hide vambraces": "3/128",
-				"Brimstone key": "1/70",
 				"Clue scroll (elite)": "1/750",
 				"Clue scroll (hard)": "1/128",
 				"Coal": "3/128",
@@ -77610,7 +77535,6 @@
 				"Battlestaff": "2/128",
 				"Black d'hide chaps": "3/128",
 				"Blood rune": "9/128",
-				"Brimstone key": "1/64",
 				"Chaos rune": "9/128",
 				"Clue scroll (elite)": "1/512",
 				"Clue scroll (hard)": "1/128",
@@ -77654,7 +77578,6 @@
 				"Adamant boots": "1/137",
 				"Adamantite bar": "6/137",
 				"Black tourmaline core": "1/1000",
-				"Brimstone key": "1/43",
 				"Chaos rune": "8/137",
 				"Clue scroll (elite)": "1/230",
 				"Coal": "6/137",
@@ -77696,7 +77619,6 @@
 				"Antidote++(4)": "2/128",
 				"Battlestaff": "4/128",
 				"Blood rune": "10/128",
-				"Brimstone key": "1/48",
 				"Bucket": "1/128",
 				"Chaos rune": "10/128",
 				"Clue scroll (elite)": "1/500",
@@ -77739,7 +77661,6 @@
 				"Air rune": "8/128",
 				"Ancient staff": "1/128",
 				"Ashes": "Always",
-				"Brimstone key": "1/47",
 				"Bullseye lantern": "3/128",
 				"Clue scroll (elite)": "1/500",
 				"Clue scroll (hard)": "1/96",
@@ -77789,7 +77710,6 @@
 				"Battlestaff": "3/128",
 				"Black d'hide body": "3/128",
 				"Blood rune": "4/128",
-				"Brimstone key": "1/56",
 				"Cannonball": "4/128",
 				"Clue scroll (elite)": "1/100",
 				"Coal": "6/128",
@@ -77839,7 +77759,6 @@
 				"Bludgeon axon": "1/206",
 				"Bludgeon claw": "1/206",
 				"Bludgeon spine": "1/206",
-				"Brimstone key": "1/40",
 				"Cannonball": "4/139",
 				"Chilli potato": "7/139",
 				"Clue scroll (elite)": "1/180",
@@ -77881,7 +77800,6 @@
 				"Battlestaff": "5/101",
 				"Black d'hide body": "5/101",
 				"Blood rune": "6/101",
-				"Brimstone key": "1/40",
 				"Chaos rune": "6/101",
 				"Clue scroll (elite)": "1/256",
 				"Clue scroll (hard)": "1/100",
