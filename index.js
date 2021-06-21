@@ -692,6 +692,16 @@ let gotData = false;
 let questPointTotal = 0;
 let oldChallengeArr = {};
 let futureChunkData = {};
+let highestOverall = {};
+
+// Patreon Test Server Data
+let onTestServer = false;
+let patreonMaps = {
+    'test': true, // testing
+    'dev': true, // testing
+    'src': true, // Source Chunk
+    'kaa': true, // Chagohod
+};
 
 // ----------------------------------------------------------
 
@@ -700,7 +710,7 @@ let futureChunkData = {};
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.1.1");
+const myWorker = new Worker("./worker.js?v=4.1.2");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -713,8 +723,9 @@ myWorker.onmessage = function(e) {
         globalValids = e.data[1];
         baseChunkData = e.data[2];
         highestCurrent = e.data[4];
-        //console.log(highestCurrent);
         questPointTotal = e.data[6];
+        highestOverall = e.data[7];
+        //console.log(highestOverall);
         calcCurrentChallenges2(e.data[5]);
     }
 }
@@ -1202,7 +1213,9 @@ $(document).on({
                 let tempChunkTime1;
                 let tempChunkTime2;
                 signedIn && firebase.auth().signInAnonymously().then(function() {
-                    myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
+                    if (!onTestServer) {
+                        myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
+                    }
                 }).catch(function(error) {console.log(error)});
                 for (let count = 1; count <= 5; count++) {
                     tempChunk1 = recent[count - 1];
@@ -1343,7 +1356,9 @@ var pick = function(both) {
             let tempChunkTime1;
             let tempChunkTime2;
             signedIn && firebase.auth().signInAnonymously().then(function() {
-                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+                if (!onTestServer) {
+                    myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+                }
             }).catch(function(error) {console.log(error)});
             for (let count = 1; count <= 5; count++) {
                 tempChunk1 = recent[count - 1];
@@ -1433,7 +1448,9 @@ var pick = function(both) {
     let tempChunkTime1;
     let tempChunkTime2;
     signedIn && firebase.auth().signInAnonymously().then(function() {
-        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+        if (!onTestServer) {
+            myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+        }
     }).catch(function(error) {console.log(error)});
     for (let count = 1; count <= 5; count++) {
         tempChunk1 = recent[count - 1];
@@ -1563,13 +1580,8 @@ var unlock = function() {
 var importFunc = function() {
     $('#import-menu').show();
     $('.url').focus();
-    $('.import').hide();
     importMenuOpen = true;
-    $('.import').animate({'opacity': 0});
     $('#import-menu').css('opacity', 1).show();
-    setTimeout(function() {
-        $('.import').css('opacity', 1).hide();
-    }, 500);
 }
 
 // Checks if URL is formatted correctly, then imports it into the map
@@ -1652,8 +1664,6 @@ var importFromURL = function() {
 // Exits the import menu
 var exitImportMenu = function() {
     $('#import-menu').css({'opacity': 0}).hide();
-    $('.import').css('opacity', 0).show();
-    $('.import').animate({'opacity': 1});
     setTimeout(function() {
         $('#import-menu').css('opacity', 1);
         $('#import2').prop('disabled', true).html('Unlock');
@@ -1912,9 +1922,14 @@ var changePin = function() {
             return;
         }
         firebase.auth().signInAnonymously().then(function() {
+            if (onTestServer) {
+                return;
+            }
             signedIn = true;
             myRef = firebase.database().ref('maps/' + mid);
-            myRef.child('pin').set(pinNew);
+            if (!onTestServer) {
+                myRef.child('pin').set(pinNew);
+            }
             window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
             document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
             $('.lock-closed, .lock-opened').hide();
@@ -3044,6 +3059,12 @@ var openSearchDetails = function(category, name) {
     document.getElementById('searchdetails-data').scrollTop = 0;
 }
 
+// Opens the highest modal
+var openHighest = function() {
+    highestModalOpen = true;
+    $('#myModal12').show();
+}
+
 // Closes the manual add tasks modal
 var closeManualAdd = function() {
     manualModalOpen = false;
@@ -3096,6 +3117,12 @@ var closeSearch = function() {
 var closeSearchDetails = function() {
     searchDetailsModalOpen = false;
     $('#myModal11').hide();
+}
+
+// Closes the highest modal
+var closeHighest = function() {
+    highestModalOpen = false;
+    $('#myModal12').hide();
 }
 
 // Unlocks various parts of the chunk tasks panel
@@ -3801,7 +3828,7 @@ var checkMID = function(mid) {
             proceed();
         }
         databaseRef.child('maps/' + mid).once('value', function(snap) {
-            if (snap.val()) {
+            if (snap.val() && (!onTestServer || patreonMaps[mid])) {
                 myRef = firebase.database().ref('maps/' + mid);
                 atHome = false;
                 $('.background-img').hide();
@@ -3986,6 +4013,9 @@ var loadData = function() {
 
 // Sets browser cookie
 var setCookies = function() {
+    if (onTestServer) {
+        return;
+    }
     document.cookie = "ids=" + showChunkIds;
     document.cookie = "highvis=" + highVisibilityMode;
     document.cookie = "newinfo=" + chunkInfoOn;
@@ -3994,6 +4024,9 @@ var setCookies = function() {
 
 // Stores data in Firebase
 var setUsername = function(old) {
+    if (onTestServer) {
+        return;
+    }
     signedIn && firebase.auth().signInAnonymously().then(function() {
         myRef.child('userName').set(userName.toLowerCase());
         if (!!old && old !== '') {
@@ -4007,6 +4040,9 @@ var setUsername = function(old) {
 
 // Stores data in Firebase
 var setData = function() {
+    if (onTestServer) {
+        return;
+    }
     signedIn && firebase.auth().signInAnonymously().then(function() {
         myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
         Object.keys(rules).forEach(rule => {
@@ -4108,6 +4144,9 @@ var rollMID = function() {
     var char1, char2, char3, char4, charSet;
     var badNums = true;
     var rollCount = 0;
+    if (onTestServer) {
+        return;
+    }
     databaseRef.once('value', function(snap) {
         while (badNums) {
             char1 = String.fromCharCode(97 + Math.floor(Math.random() * 26));

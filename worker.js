@@ -2,6 +2,7 @@ importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js');
 let nonValids = {}; //
 let globalValids;
 let eGlobal;
+let highestOverall = {};
 
 let type;
 let chunks;
@@ -83,7 +84,7 @@ onmessage = function(e) {
 
     //console.log(nonValids);
 
-    postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 0]);
+    postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 0, highestOverall]);
 }
 
 // Calculates all the possible challenges
@@ -1254,6 +1255,7 @@ var calcBIS = function() {
             delete bestEquipment['2h'];
         }
         Object.keys(bestEquipment).forEach(slot => {
+            highestOverall[skill + '-' + slot] = bestEquipment[slot];
             let article = vowels.includes(bestEquipment[slot].toLowerCase().charAt(0)) ? ' an ' : ' a ';
             article = bestEquipment[slot].toLowerCase().charAt(bestEquipment[slot].toLowerCase().length - 1) === 's' ? ' ' : article;
             if (!!globalValids['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~']) {
@@ -1292,6 +1294,7 @@ var calcCurrentChallenges2 = function() {
             !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
                 if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name]['Level'] > highestChallengeLevelArr[skill]) {
                     highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'];
+                    highestOverall[skill] = name;
                 }
             });
             checkPrimaryMethod(skill, globalValids, baseChunkData) && Object.keys(globalValids[skill]).forEach(challenge => {
@@ -1341,7 +1344,11 @@ var calcCurrentChallenges2 = function() {
             }
         }
     });
-    //console.log(tempChallengeArr);
+    Object.keys(tempChallengeArr).forEach(skill => {
+        if (!!tempChallengeArr[skill]) {
+            highestOverall[skill] = tempChallengeArr[skill];
+        }
+    });
     return tempChallengeArr;
 }
 

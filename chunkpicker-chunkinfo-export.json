@@ -257,7 +257,8 @@
 				"Category": ["Shortcut"],
 				"Chunks": ["11572"],
 				"Level": 5,
-				"Primary": true
+				"Primary": true,
+				"Priority": 2
 			},
 			"Access the Forthos Dungeon jump ~|shortcut|~": {
 				"Category": ["Shortcut"],
@@ -655,7 +656,7 @@
 				"Chunks": ["10808"],
 				"Level": 48,
 				"Primary": false,
-				"Priority": 2
+				"Priority": 3
 			},
 			"Access the low-level obstacles at the ~|Brimhaven Agility Arena|~": {
 				"Category": ["Minigame"],
@@ -901,6 +902,19 @@
 				"Output": "Mark of grace",
 				"Primary": true,
 				"Priority": 1
+			},
+			"Access the ~|Shayzien Basic Course|~": {
+				"Chunks": ["6200", "5944"],
+				"Level": 5,
+				"Primary": true,
+				"Priority": 1
+			},
+			"Access the ~|Shayzien Advanced Course|~": {
+				"Chunks": ["6200", "5944"],
+				"Level": 48,
+				"Items": ["Crossbow+", "Mith grapple"],
+				"Primary": true,
+				"Priority": 2
 			},
 			"Access the ~|Varrock Rooftop Course|~": {
 				"Chunks": ["12853", "12597"],
@@ -13725,14 +13739,16 @@
 				"Items": ["Air rune+", "Fire rune+", "Death rune"],
 				"Level": 59,
 				"Monsters": ["Monster+"],
-				"Primary": true
+				"Primary": true,
+				"Priority": 1
 			},
 			"Cast ~|fire bolt|~": {
 				"Category": ["Combat and Teleport Spells"],
 				"Items": ["Air rune+", "Fire rune+", "Chaos rune"],
 				"Level": 35,
 				"Monsters": ["Monster+"],
-				"Primary": true
+				"Primary": true,
+				"Priority": 1
 			},
 			"Cast ~|fire strike|~": {
 				"Category": ["Combat and Teleport Spells"],
@@ -14358,6 +14374,209 @@
 				"Primary": true,
 				"Priority": 2
 			},
+			"Cast ~|ghostly grasp|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716"],
+				"Items": ["Air rune+", "Chaos rune"],
+				"Level": 35,
+				"Primary": true,
+				"Priority": 2
+			},
+			"Cast ~|skeletal grasp|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Earth rune+", "Death rune"],
+				"Level": 56,
+				"Primary": true,
+				"Priority": 3
+			},
+			"Cast ~|undead grasp|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Fire rune+", "Blood rune"],
+				"Level": 79,
+				"Primary": true,
+				"Priority": 4
+			},
+			"Cast ~|inferior demonbane|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716"],
+				"Items": ["Fire rune+", "Chaos rune"],
+				"Level": 44,
+				"Monsters": ["Demonic+"],
+				"Primary": true
+			},
+			"Cast ~|superior demonbane|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Fire rune+", "Soul rune"],
+				"Level": 62,
+				"Monsters": ["Demonic+"],
+				"Primary": true,
+				"Priority": 3
+			},
+			"Cast ~|dark demonbane|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Fire rune+", "Soul rune"],
+				"Level": 82,
+				"Monsters": ["Demonic+"],
+				"Primary": true,
+				"Priority": 4
+			},
+			"Cast ~|lesser corruption|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Death rune", "Soul rune"],
+				"Level": 64,
+				"Primary": true,
+				"Priority": 3
+			},
+			"Cast ~|greater corruption|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Blood rune", "Soul rune"],
+				"Level": 85,
+				"Primary": true,
+				"Priority": 4
+			},
+			"Cast ~|resurrect lesser ghost|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Air rune+", "Cosmic rune", "Mind rune"],
+				"Level": 38,
+				"Primary": true,
+				"Priority": 1
+			},
+			"Cast ~|resurrect lesser skeleton|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Air rune+", "Cosmic rune", "Mind rune"],
+				"Level": 38,
+				"Primary": true,
+				"Priority": 2
+			},
+			"Cast ~|resurrect lesser zombie|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Air rune+", "Cosmic rune", "Mind rune"],
+				"Level": 38,
+				"Primary": true,
+				"Priority": 3
+			},
+			"Cast ~|resurrect superior ghost|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Earth rune+", "Cosmic rune", "Death rune"],
+				"Level": 57,
+				"Primary": true,
+				"Priority": 7
+			},
+			"Cast ~|resurrect superior skeleton|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Earth rune+", "Cosmic rune", "Death rune"],
+				"Level": 57,
+				"Primary": true,
+				"Priority": 8
+			},
+			"Cast ~|resurrect superior zombie|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Earth rune+", "Cosmic rune", "Death rune"],
+				"Level": 57,
+				"Primary": true,
+				"Priority": 9
+			},
+			"Cast ~|resurrect greater ghost|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Fire rune+", "Blood rune", "Cosmic rune"],
+				"Level": 76,
+				"Primary": true,
+				"Priority": 4
+			},
+			"Cast ~|resurrect greater skeleton|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Fire rune+", "Blood rune", "Cosmic rune"],
+				"Level": 76,
+				"Primary": true,
+				"Priority": 5
+			},
+			"Cast ~|resurrect greater zombie|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Fire rune+", "Blood rune", "Cosmic rune"],
+				"Level": 76,
+				"Primary": true,
+				"Priority": 6
+			},
+			"Cast ~|mark of darkness|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Cosmic rune", "Soul rune"],
+				"Level": 59,
+				"Primary": true,
+				"Priority": 2
+			},
+			"Cast ~|ward of arceuus|~": {
+				"Category": ["Combat and Teleport Spells"],
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Cosmic rune", "Nature rune", "Soul rune"],
+				"Level": 73,
+				"Primary": true,
+				"Priority": 2
+			},
+			"Cast ~|demonic offering|~": {
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Soul rune", "Wrath rune"],
+				"Level": 84,
+				"Primary": true,
+				"Priority": 3
+			},
+			"Cast ~|sinister offering|~": {
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Blood rune", "Wrath rune"],
+				"Level": 92,
+				"Primary": true,
+				"Priority": 3
+			},
+			"Cast ~|shadow veil|~": {
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Earth rune+", "Fire rune+", "Cosmic rune"],
+				"Level": 47,
+				"Primary": true,
+				"Priority": 2
+			},
+			"Cast ~|dark lure|~": {
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Death rune", "Nature rune"],
+				"Level": 50,
+				"Primary": true,
+				"Priority": 5
+			},
+			"Cast ~|vile vigour|~": {
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Air rune+", "Soul rune"],
+				"Level": 66,
+				"Primary": true,
+				"Priority": 7
+			},
+			"Cast ~|degrime|~": {
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Earth rune+", "Nature rune"],
+				"Level": 70,
+				"Primary": true,
+				"Priority": 3
+			},
+			"Cast ~|death charge|~": {
+				"Chunks": ["6716", "6713", "6457", "6202", "7225", "6459", "6711", "6204", "6969", "5178", "4920", "6203", "6967", "5946", "5944", "6199", "6461", "6197", "5943", "6715", "5689", "7223", "Lizardman Temple", "The Warrens", "Karuulm Slayer Dungeon", "Shayzien Prison"],
+				"Items": ["Blood rune", "Death rune", "Soul rune"],
+				"Level": 80,
+				"Primary": true,
+				"Priority": 5
+			},
 			"Cast ~|recharge dragonstone|~": {
 				"Chunks": ["8252", "8253", "8508", "8509"],
 				"Items": ["Water rune+", "Soul rune", "Astral rune"],
@@ -14697,7 +14916,8 @@
 				"Items": ["Air rune+", "Water rune+", "Death rune"],
 				"Level": 47,
 				"Monsters": ["Monster+"],
-				"Primary": true
+				"Primary": true,
+				"Priority": 1
 			},
 			"Cast ~|water bolt|~": {
 				"Category": ["Combat and Teleport Spells"],
@@ -15776,6 +15996,11 @@
 			"Make a fish sack barrel": {
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
+			},
+			"Ask Murky Matt to enchant a ruby ring": {
+				"Chunks": ["12598"],
+				"Items": ["Ruby ring"],
+				"Output": "Ring of forging"
 			},
 			"Buy climbing boots from Tenzing": {
 				"Chunks": ["11575", "11319"],
@@ -27320,67 +27545,67 @@
 				"Label": "Untracked Uniques",
 				"Items": ["Gardening boots"]
 			},
-			"(Stuffables) Obtain a ~|big bass|~": {
+			"Obtain a ~|big bass|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Big bass"]
 			},
-			"(Stuffables) Obtain a ~|big swordfish|~": {
+			"Obtain a ~|big swordfish|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Big swordfish"]
 			},
-			"(Stuffables) Obtain a ~|big harpoonfish|~": {
+			"Obtain a ~|big harpoonfish|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Big harpoonfish"]
 			},
-			"(Stuffables) Obtain a ~|big shark|~": {
+			"Obtain a ~|big shark|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Big shark"]
 			},
-			"(Stuffables) Obtain a ~|crawling hand (item)|~": {
+			"Obtain a ~|crawling hand (item)|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Crawling hand (item)"]
 			},
-			"(Stuffables) Obtain a ~|cockatrice head|~": {
+			"Obtain a ~|cockatrice head|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Cockatrice head"]
 			},
-			"(Stuffables) Obtain a ~|basilisk head|~": {
+			"Obtain a ~|basilisk head|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Basilisk head"]
 			},
-			"(Stuffables) Obtain a ~|kurask head|~": {
+			"Obtain a ~|kurask head|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Kurask head"]
 			},
-			"(Stuffables) Obtain an ~|abyssal head|~": {
+			"Obtain an ~|abyssal head|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Abyssal head"]
 			},
-			"(Stuffables) Obtain ~|kbd heads|~": {
+			"Obtain ~|kbd heads|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Kbd heads"]
 			},
-			"(Stuffables) Obtain a ~|kq head|~": {
+			"Obtain a ~|kq head|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Kq head+"]
 			},
-			"(Stuffables) Obtain a ~|vorkath's head|~": {
+			"Obtain a ~|vorkath's head|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Vorkath's head"]
 			},
-			"(Stuffables) Obtain ~|alchemical hydra heads|~": {
+			"Obtain ~|alchemical hydra heads|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
 				"Items": ["Alchemical hydra heads"]
@@ -27528,6 +27753,9 @@
 				"Fire": 17,
 				"Lizardman lair": 4,
 				"Swamp bubbles": 41
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
 			}
 		},
 		"4921": {
@@ -27837,6 +28065,9 @@
 				"Tree": 38,
 				"Wheat": 4,
 				"Willow": 7
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
 			},
 			"Spawn": {
 				"Grain": 1,
@@ -28187,51 +28418,66 @@
 				"Skeleton%2FArmed": 1,
 				"Skeleton%2FPlain": 4
 			},
-			"Nickname": "South Shayzien Shore",
+			"Nickname": "Ruins of Morra",
 			"Object": {
-				"Broken crossbow": 2,
-				"Dead tree": 20,
-				"Tree": 14
+				"Dead tree": 37
+			},
+			"Spawn": {
+				"Iron scimitar": 1
 			}
 		},
 		"5687": {
+			"Connect": {
+				"6041": true
+			},
 			"Monster": {
 				"Giant spider": 1,
-				"Kourend guard": 10,
-				"Kourend head guard": 3
+				"Guard (Shayzien)": 2,
+				"Head Guard": 1,
+				"Lynx": 10,
+				"Soldier (Shayzien)": 6,
+				"Sergeant (Shayzien)": 2
 			},
 			"NPC": {
 				"Captain Sdiar": 1
 			},
 			"Nickname": "Shayziens' Gate",
 			"Object": {
-				"Broken crossbow": 2,
-				"Cellar stairs": 2,
-				"Dead tree": 42,
-				"Tree": 1
+				"Dead tree": 6,
+				"Fountain": 2
 			},
 			"Spawn": {
-				"Bones": 1,
+				"Bones": 16,
 				"Skull (item)": 1
 			}
 		},
 		"5688": {
+			"Connect": {
+				"5785": true
+			},
 			"Monster": {
-				"Bat": 3,
-				"Giant spider": 1,
-				"Hill Giant": 12
+				"Hill Giant": 13,
+				"Sergeant (Shayzien)": 1,
+				"Soldier (Shayzien)": 2
 			},
 			"NPC": {
-				"Grave digger": 1
+				"Grave digger": 1,
+				"Jessie": 1
 			},
 			"Nickname": "Shayzien Dock",
 			"Object": {
-				"Broken mace trap": 1,
-				"Dead tree": 12,
-				"Tree": 1
+				"Dead tree": 19,
+				"Oak": 1,
+				"Range": 1,
+				"Water barrel": 1
 			},
 			"Spawn": {
-				"Burnt bones": 1
+				"Big bones": 3,
+				"Bones": 11,
+				"Burnt bones": 1,
+				"Coins": 1,
+				"Iron nails": 1,
+				"Old note": 1
 			}
 		},
 		"5689": {
@@ -28242,12 +28488,12 @@
 			},
 			"Monster": {
 				"Imp": 6,
-				"Kourend guard": 3,
-				"Kourend head guard": 3,
 				"Lizardman": 4,
 				"Lizardman brute": 1,
 				"Lizardman shaman": 2,
-				"Soldier (Lizardman Canyon)": 4
+				"Soldier (Lizardman Canyon)": 4,
+				"Sergeant (Shayzien)": 3,
+				"Soldier (Shayzien)": 7
 			},
 			"NPC": {
 				"Disciple of Yama": 1,
@@ -28256,22 +28502,20 @@
 			},
 			"Nickname": "Chasm of Fire",
 			"Object": {
-				"Broken battering ram": 3,
-				"Broken catapult": 2,
-				"Broken crossbow": 6,
 				"Chasm": 1,
-				"Dead tree": 19,
+				"Dead tree": 11,
 				"Fairy ring": 1,
-				"Fire": 59,
-				"Handholds": 3,
-				"Tree": 9
+				"Handholds": 3
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
 			}
 		},
 		"5690": {
 			"Monster": {
 				"Giant rat": 2,
-				"Kourend guard": 5,
-				"Kourend head guard": 1,
+				"Guard (Shayzien)": 5,
+				"Head Guard": 1,
 				"Lizardman shaman": 1,
 				"Rat": 1,
 				"Skeleton%2FArmed": 1,
@@ -28339,6 +28583,24 @@
 			},
 			"Shop": {
 				"Toothy's Pickaxes": true
+			}
+		},
+		"5785": {
+			"Connect": {
+				"5688": true,
+				"6812": true
+			},
+			"Monster": {
+				"Fire giant": 9,
+				"Hill giant": 8,
+				"Moss giant": 10
+			},
+			"Name": "Giant Cave",
+			"NPC": {
+				"Farolt": 1
+			},
+			"Object": {
+				"Strange wall": 1
 			}
 		},
 		"5789": {
@@ -28436,76 +28698,125 @@
 				"6043": true
 			},
 			"Monster": {
-				"Bat": 10,
-				"Dark warrior": 1,
-				"Dark wizard": 2,
+				"Bat": 3,
+				"Dark warrior": 2,
+				"Guard (Shayzien)": 14,
+				"Man": 1,
+				"Necromancer": 1,
+				"Woman": 2,
 				"Zombie%2FArmed": 4
 			},
 			"NPC": {
-				"New recruit Tony": 1
+				"Captain Bruce": 1,
+				"Cat": 1,
+				"Commisioner Anwar": 1,
+				"Father Eysseric": 1,
+				"Mia": 1,
+				"New Recruit Tony": 1,
+				"Old man": 1,
+				"Sergeant Ricardo": 1,
+				"Shayda": 1
 			},
 			"Nickname": "Graveyard of Heroes",
 			"Object": {
-				"Dead tree": 18
+				"Altar": 1,
+				"Dead tree": 17,
+				"Range": 2,
+				"Sink": 1,
+				"Tree": 10,
+				"Yew": 2
 			},
 			"Quest": {
-				"Dragon Slayer II": "step"
+				"A Kingdom Divided": "step",
+				"Architectural Alliance": "step"
 			},
 			"Spawn": {
-				"Bones": 1
+				"Bones": 4,
+				"Leather gloves": 1,
+				"Skull (item)": 1
 			}
 		},
 		"5944": {
 			"Monster": {
-				"Kourend guard": 20,
-				"Kourend head guard": 5
+				"Guard (Shayzien)": 5,
+				"Head Guard": 1,
+				"Sergeant (Shayzien)": 2,
+				"Soldier (Shayzien)": 20,
+				"Woman": 1
 			},
 			"NPC": {
-				"Amelia": 1,
-				"Banker": 7,
+				"Banker": 3,
+				"Captain Ginea": 1,
+				"General Babacus": 1,
+				"General Kilian": 1,
+				"General Salara": 1,
+				"Lord Shiro Shayzien": 1,
+				"Jennifer": 1,
+				"Kaston": 1,
 				"Osten": 1,
-				"Phileas Rimor": 1,
-				"Shayda": 1
+				"Robyn": 1,
+				"Wounded soldier": 16
 			},
-			"Nickname": "Shayzien House",
+			"Nickname": "South Shayzien Encampment",
 			"Object": {
-				"Bank Deposit Box": 1,
-				"Bank booth": 7,
-				"Bookcase": 4,
-				"Broken Bed": 1,
-				"Broken Brazier": 2,
-				"Broken Plantpot": 1,
-				"Broken battering ram": 1,
-				"Broken crossbow": 10,
-				"Broken table": 4,
-				"Drawers": 3,
-				"STASH (medium)": 1
+				"Bank booth": 3,
+				"Bank chest": 2,
+				"Bank deposit box": 1,
+				"Bar": 1,
+				"Beam": 2,
+				"Crate": 1,
+				"Edge": 2,
+				"Fountain": 1,
+				"Informtation": 1,
+				"Medpoack Box": 15,
+				"Notice board": 2,
+				"Poll booth": 2,
+				"STASH (elite)": 1,
+				"Sink": 1,
+				"Tightrope": 1,
+				"Water barrel": 5,
+				"Zipline": 1
 			},
 			"Quest": {
-				"Architectural Alliance": "step",
-				"Dragon Slayer II": "step",
-				"Tale of the Righteous": "first"
+				"A Kingdom Divided": "step",
+				"Client of Kourend": "step",
+				"Tale of the Righteous": "step"
+			},
+			"Shop": {
+				"Jennifer's General Supplies": true,
+				"Shayzien Styles": true
 			},
 			"Spawn": {
-				"Spade": 1
+				"Beer glass": 1,
+				"Bucket": 1,
+				"Bucket of water": 1,
+				"Coins": 1,
+				"Leather": 1,
+				"Orange dye": 1,
+				"Pot": 1,
+				"Silver needle": 1,
+				"Saw": 1,
+				"Thread": 1,
+				"Tinderbox": 1,
+				"Wizard hat": 1
 			}
 		},
 		"5945": {
 			"Monster": {
-				"Lizardman": 16,
+				"Lizardman": 30,
 				"Lizardman brute": 12,
-				"Soldier (Lizardman Canyon)": 10
+				"Lynx Tamer": 2,
+				"Sergeant (Shayzien)": 6,
+				"Soldier (Lizardman Canyon)": 10,
+				"Soldier (Shayzien)": 19
 			},
-			"Nickname": "West Lizardman Canyon",
+			"Nickname": "North Shayzien Encampment",
 			"Object": {
-				"Broken battering ram": 3,
-				"Broken catapult": 2,
-				"Broken crossbow": 7,
-				"Fire": 215,
-				"Handholds": 1
+				"Water barrel": 1
 			},
 			"Spawn": {
-				"Burnt bones": 1
+				"Burnt bones": 7,
+				"Spade": 1
 			}
 		},
 		"5946": {
@@ -28534,7 +28845,11 @@
 				"Sink": 2
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"The Forsaken Tower": "first"
+			},
+			"Spawn": {
+				"Burnt bones": 13
 			}
 		},
 		"5947": {
@@ -28585,6 +28900,21 @@
 				"Tree": 6
 			}
 		},
+		"6041": {
+			"Connect": {
+				"5687": true
+			},
+			"Monster": {
+				"Guard (Shayzien)": 5,
+				"Head Guard": 1
+			},
+			"Name": "Shayzien Prison",
+			"Object": {
+				"Gate": 1,
+				"Range": 1,
+				"Sink": 1
+			}
+		},
 		"6043": {
 			"Connect": {
 				"5943": true
@@ -28612,6 +28942,9 @@
 				"Oak": 4,
 				"Tree": 18,
 				"Yew": 4
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
 			}
 		},
 		"6198": {
@@ -28637,106 +28970,113 @@
 			}
 		},
 		"6199": {
-			"NPC": {
-				"Captain Babacus": 1,
-				"Captain Kilian": 1,
-				"Captain Salara": 1,
-				"Drill instructor": 1,
-				"Lord Shiro Shayzien": 1,
-				"Nurse Boubou": 1,
-				"Soldier": 83
+			"Monster": {
+				"Guard (Shayzien)": 8,
+				"Head Guard": 1,
+				"Man": 4,
+				"Woman": 3
 			},
-			"Nickname": "War Tent",
+			"NPC": {
+				"Amelia": 1,
+				"Blair": 1,
+				"Daryl": 1,
+				"Drunken soldier": 1,
+				"Elijah": 1,
+				"Farmer": 1,
+				"Oswald": 1,
+				"Phileas Rimor": 1,
+				"Sheryl": 1,
+				"Soldier": 2
+			},
+			"Nickname": "Shayzien Town Center",
 			"Object": {
-				"Crate": 9,
-				"Crates": 4,
-				"Evergreen": 5,
+				"Anvil": 1,
+				"Fireplace": 1,
 				"Fishing spot (lure, bait)": 3,
-				"STASH (elite)": 1,
-				"Stairs": 2,
-				"Tree": 1
+				"Range": 2,
+				"Sink": 3,
+				"Water barrel": 1,
+				"Waterpump": 1,
+				"Yew": 4
 			},
 			"Quest": {
-				"Tale of the Righteous": "step"
+				"A Kingdom Divided": "step",
+				"Dragon Slayer II": "step",
+				"Tale of the Righteous": "first"
+			},
+			"Shop": {
+				"Blair's Armour": true,
+				"Briget's Weapons": true,
+				"Daryl's Ranging Surplus": true,
+				"The Cloak and Stagger": true
 			},
 			"Spawn": {
-				"Broken glass": 1
+				"Bucket": 1,
+				"Iron sword": 1,
+				"Papyrus": 1
 			}
 		},
 		"6200": {
-			"Diary": {
-				"Kourend & Kebos": "EA10, MD8"
-			},
 			"Monster": {
-				"Bear Cub": 4,
-				"Grizzly bear": 1,
+				"Bandit%2FLevel 22": 6,
+				"Guard (Shayzien)": 5,
+				"Head Guard": 1,
+				"Sergeant (Shayzien)": 2,
+				"Soldier (tier 1)": 1,
+				"Soldier (tier 2)": 1,
+				"Soldier (tier 3)": 1,
+				"Soldier (tier 4)": 1,
+				"Soldier (tier 5)": 1,
+				"Soldier (Shayzien)": 6
+			},
+			"NPC": {
+				"Mogrim": 1,
+				"Soldier": 1,
 				"Soldier (tier 1)": 1,
 				"Soldier (tier 2)": 1,
 				"Soldier (tier 3)": 1,
 				"Soldier (tier 4)": 1,
 				"Soldier (tier 5)": 1
 			},
-			"NPC": {
-				"Captain Ginea": 1,
-				"Jennifer": 1,
-				"Mogrim": 1,
-				"Nurse Inn'Juree": 1,
-				"Nurse Wooned": 1,
-				"Quartermaster Briget": 1,
-				"Soldier": 13,
-				"Soldier (tier 1)": 1,
-				"Soldier (tier 2)": 1,
-				"Soldier (tier 3)": 1,
-				"Soldier (tier 4)": 1,
-				"Soldier (tier 5)": 1,
-				"Wounded soldier": 19
-			},
 			"Nickname": "Combat Ring",
 			"Object": {
-				"Information": 1,
-				"Maple tree": 7,
-				"Stairs": 6,
-				"Tree": 19
+				"Campfire": 1,
+				"Gap": 1,
+				"Maple tree": 9,
+				"Monkeybars": 1,
+				"Sack": 3,
+				"STASH (medium)": 1,
+				"Tightrope": 2,
+				"Yew": 4
 			},
-			"Quest": {
-				"Client of Kourend": "step"
-			},
-			"Shop": {
-				"Briget's Armour": true,
-				"Briget's Weapons": true,
-				"Jennifer's General Field Supplies": true
+			"Spawn": {
+				"Beer": 1,
+				"Bucket of water": 1,
+				"Iron warhammer": 1
 			}
 		},
 		"6201": {
 			"Monster": {
-				"Kourend guard": 30,
-				"Kourend head guard": 14,
-				"Lizardman": 18,
-				"Lizardman brute": 7
+				"Boar": 26,
+				"Giant rat": 3,
+				"Giant spider": 4,
+				"Sergeant (Shayzien)": 2,
+				"Solider (Shayzien)": 12
 			},
 			"NPC": {
-				"Archer": 4,
 				"Captain Rachelle": 1
 			},
-			"Nickname": "East Lizardman Canyon",
+			"Nickname": "Kourend Castle Rear",
 			"Object": {
-				"Adamantite rock": 2,
 				"Anvil": 1,
-				"Broken battering ram": 1,
-				"Broken catapult": 3,
-				"Broken crossbow": 11,
-				"Clay rock": 3,
-				"Coal rock": 4,
-				"Crate": 7,
-				"Crates": 7,
-				"Dead tree": 1,
-				"Fire": 55,
-				"Iron rock": 4,
-				"Mithril rock": 2
+				"Dead tree": 19,
+				"Oak": 1,
+				"Tree": 43,
+				"Water barrel": 1
 			},
 			"Spawn": {
-				"Bronze arrow": 1,
-				"Burnt bones": 1
+				"Bronze arrow": 7,
+				"Logs": 4
 			}
 		},
 		"6202": {
@@ -28745,9 +29085,13 @@
 			},
 			"Monster": {
 				"Bat": 7,
+				"Dark warrior": 6,
 				"Dwarf": 2,
+				"Giant rat": 1,
+				"Necromancer": 2,
 				"Rat": 3,
-				"Spider": 7
+				"Spider": 7,
+				"Zombie%2FArmed": 4
 			},
 			"NPC": {
 				"Fuggy": 1,
@@ -28757,15 +29101,22 @@
 			},
 			"Nickname": "The Deeper Lode",
 			"Object": {
+				"Dead tree": 92,
 				"Sack": 2,
-				"Sink": 2
+				"Sink": 2,
+				"Tree": 3
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"Client of Kourend": "step"
 			},
 			"Shop": {
 				"Little Munty's Little Shop": true,
 				"The Deeper Lode": true
+			},
+			"Spawn": {
+				"Bones": 3,
+				"Skull (item)": 1
 			}
 		},
 		"6203": {
@@ -28790,6 +29141,7 @@
 				"Stairs": 4
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"The Ascent of Arceuus": "step"
 			}
 		},
@@ -28803,6 +29155,9 @@
 			"Object": {
 				"Evergreen": 11,
 				"Tree": 15
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
 			}
 		},
 		"6205": {
@@ -28952,8 +29307,8 @@
 			"Monster": {
 				"Farmer": 1,
 				"Imp": 3,
-				"Kourend guard": 3,
-				"Kourend head guard": 1,
+				"Guard (Shayzien)": 3,
+				"Head Guard": 1,
 				"Man": 1,
 				"Rabbit": 5,
 				"Woman": 1
@@ -29009,11 +29364,16 @@
 			},
 			"Nickname": "Mess",
 			"Object": {
+				"Adamantite rock": 2,
 				"Clay oven": 1,
+				"Clay rock": 3,
+				"Coal rock": 4,
 				"Crate": 7,
 				"Drawers": 1,
 				"Food cupboard": 1,
+				"Iron rock": 3,
 				"Maple tree": 12,
+				"Mithril rock": 2,
 				"Oak": 5,
 				"Onion": 10,
 				"Potato": 10,
@@ -29040,8 +29400,8 @@
 				"Dark wizard": 2,
 				"Guard dog": 1,
 				"Imp": 1,
-				"Kourend guard": 25,
-				"Kourend head guard": 2,
+				"Guard (Shayzien)": 25,
+				"Head Guard": 2,
 				"Lesser demon": 1
 			},
 			"NPC": {
@@ -29091,6 +29451,7 @@
 				"Yew": 4
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"Architectural Alliance": "first",
 				"The Ascent of Arceuus": "step"
 			},
@@ -29105,9 +29466,10 @@
 		"6458": {
 			"Monster": {
 				"Bat": 2,
+				"Dark warrior": 3,
 				"Giant bat": 1,
-				"Kourend guard": 7,
-				"Kourend head guard": 2,
+				"Guard (Shayzien)": 7,
+				"Head Guard": 2,
 				"Rat": 1
 			},
 			"NPC": {
@@ -29119,6 +29481,7 @@
 			"Object": {
 				"Bank Deposit Box": 1,
 				"Bank booth": 8,
+				"Dead tree": 45,
 				"Stairs": 10
 			},
 			"Quest": {
@@ -29148,6 +29511,7 @@
 				"Stairs": 20
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"Bear your Soul": "first",
 				"In Search of Knowledge": "step",
 				"Tale of the Righteous": "step",
@@ -29191,6 +29555,7 @@
 				"Poll booth": 1
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"The Forsaken Tower": "step"
 			}
 		},
@@ -29450,6 +29815,9 @@
 				"Water Barrel": 1,
 				"Yew": 3
 			},
+			"Quest": {
+				"A Kingdom Divided": "step"
+			},
 			"Shop": {
 				"Farming shops": true
 			},
@@ -29493,8 +29861,8 @@
 				"Bat": 3,
 				"Giant bat": 1,
 				"Imp": 2,
-				"Kourend guard": 21,
-				"Kourend head guard": 1,
+				"Guard (Shayzien)": 21,
+				"Head Guard": 1,
 				"Lesser demon": 1,
 				"Man": 8,
 				"Rabbit": 4,
@@ -29526,6 +29894,7 @@
 				"campfire": 1
 			},
 			"Quest": {
+				"A Kingdom Divided": "first",
 				"The Queen of Thieves": "step"
 			},
 			"Spawn": {
@@ -29590,6 +29959,7 @@
 				"Stairs": 14
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"Bear your Soul": "step"
 			}
 		},
@@ -29942,6 +30312,7 @@
 				"Wheat": 22
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"The Depths of Despair": "first"
 			},
 			"Shop": {
@@ -30032,8 +30403,8 @@
 			"Monster": {
 				"Highwayman": 1,
 				"Imp": 3,
-				"Kourend guard": 7,
-				"Kourend head guard": 2,
+				"Guard (Shayzien)": 7,
+				"Head Guard": 2,
 				"Man": 1,
 				"Rat": 1,
 				"Spider": 1
@@ -30057,6 +30428,9 @@
 				"Oak": 14,
 				"Tree": 27,
 				"Willow": 14
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
 			},
 			"Shop": {
 				"The Legless Faun": true
@@ -30378,6 +30752,9 @@
 				"Vine patch": 12,
 				"Water Barrel": 1,
 				"Willow": 12
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
 			}
 		},
 		"7224": {
@@ -30452,6 +30829,7 @@
 				"Gangplank": 2
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"Client of Kourend": "first"
 			}
 		},
@@ -45737,6 +46115,7 @@
 				"Willow": 6
 			},
 			"Quest": {
+				"Cold War": "step",
 				"One Small Favour": "step",
 				"Sheep Shearer": "first"
 			},
@@ -54634,6 +55013,7 @@
 				"Tunnel": 1
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"The Ascent of Arceuus": "step"
 			}
 		},
@@ -55019,6 +55399,9 @@
 			"Object": {
 				"Stone chest": 4,
 				"Strange hole": 1
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
 			}
 		},
 		"Lumbridge Castle%2FCellar": {
@@ -56367,6 +56750,23 @@
 				"Dragon Slayer II": "step"
 			}
 		},
+		"Shayzien Prison": {
+			"Connect": {
+				"5687": true
+			},
+			"Monster": {
+				"Guard (Shayzien)": 5,
+				"Head Guard": 1
+			},
+			"Object": {
+				"Gate": 1,
+				"Range": 1,
+				"Sink": 1
+			},
+			"Quest": {
+				"A Kingdom Divided": "step"
+			}
+		},
 		"Shilo Village mine%2FUnderground": {
 			"Connect": {
 				"11310": true
@@ -56960,6 +57360,7 @@
 				"Range": 1
 			},
 			"Quest": {
+				"A Kingdom Divided": "step",
 				"The Queen of Thieves": "step"
 			},
 			"Shop": {
@@ -58040,7 +58441,7 @@
 		}
 	},
 	"codeItems": {
-		"boneItems": ["Bones", "Burnt bones", "Wolf bones", "Monkey bones", "Bat bones", "Big bones", "Jogre bones", "Zogre bones", "Shaikahan bones", "Babydragon bones", "Wyrm bones", "Dragon bones", "Wyvern bones", "Drake bones", "Fayrg bones", "Lava dragon bones", "Raurg bones", "Hydra bones", "Dagannoth bones", "Ourg bones"],
+		"boneItems": ["Bones", "Burnt bones", "Wolf bones", "Monkey bones", "Bat bones", "Big bones", "Jogre bones", "Zogre bones", "Shaikahan bones", "Babydragon bones", "Wyrm bones", "Dragon bones", "Wyvern bones", "Drake bones", "Fayrg bones", "Lava dragon bones", "Raurg bones", "Hydra bones", "Dagannoth bones", "Ourg bones", "Fiendish ashes", "Vile ashes", "Malicious ashes", "Abyssal ashes", "Infernal ashes"],
 		"chunksPlus": {
 			"10Coin+": ["10547", "10291", "Rogues' Den", "12605", "10553", "12093"],
 			"50Coin+": ["10547", "Mourner Tunnels & Temple of Light", "12093"],
@@ -58494,8 +58895,9 @@
 			"Banshee+": ["Banshee", "Twisted Banshee"],
 			"Bloodveld+": ["Bloodveld", "Mutated Bloodveld"],
 			"Cave bug+": ["Cave bug%2FLevel 6", "Cave bug%2FLevel 96"],
+			"Demonic+": ["Abyssal Sire", "Abyssal demon", "Balfrug Kreeyath", "Black demon", "Black demon%2FWilderness Slayer Cave", "Bloodveld", "Bouncer", "Cerberus", "Demonic gorilla", "Doomion", "Flaming pyrelord", "Greater Nechryael", "Greater abyssal demon", "Greater demon", "Greater demon%2FWilderness Slayer Cave", "Hellhound", "Holthion", "Icefiend", "Imp", "Infernal pyrelord", "Insatiable Bloodveld", "Insatiable mutated Bloodveld", "Judge of Yama", "Jungle Demon", "K'ril Tsutsaroth", "Lesser demon", "Lesser demon (Melzar's Maze)", "Lesser demon%2FWilderness Slayer Cave", "Mutated Bloodveld", "Nechryael", "Nechryarch", "Othainian", "Porazdir", "Pyrefiend", "Pyrelord", "Skeleton Hellhound", "Skotizo", "Tstanon Karlak", "Waterfiend", "Zakl'n Gritch"],
 			"Desert lizard+": ["Desert Lizard", "Lizard", "Small Lizard"],
-			"Guard+": ["Guard", "Town Guard (Hosidius)"],
+			"Guard+": ["Guard", "Town Guard (Hosidius)", "Guard (Shayzien)", "Head guard"],
 			"Jelly+": ["Jelly", "Warped Jelly"],
 			"Man+": ["Man", "Drunken man"],
 			"Nechryael+": ["Nechryael", "Greater Nechryael"],
@@ -58744,11 +59146,11 @@
 			"Rune full helm": "1/128",
 			"Steel axe": "3/128",
 			"SuperiorDropTable": "1/94.2",
-			"GemDropTable+": "3 × 1/25.6"
+			"GemDropTable+": "1/25.6"
 		},
 		"Abyssal guardian": {
 			"Air talisman": "5/256",
-			"Ashes": "Always",
+			"Vile ashes": "Always",
 			"Binding necklace": "3/256",
 			"Body talisman": "5/256",
 			"Chaos talisman": "2/256",
@@ -58855,7 +59257,7 @@
 			"Nothing": "8/128"
 		},
 		"Agrith Naar": {
-			"Ashes": "Always"
+			"Vile ashes": "Always"
 		},
 		"Agrith-Na-Na": {
 			"Banana": "Always",
@@ -59245,7 +59647,7 @@
 			"Leaves": "Always"
 		},
 		"Balfrug Kreeyath": {
-			"Ashes": "Always",
+			"Malicious ashes": "Always",
 			"Blood rune": "8/127",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "66/127",
@@ -59670,7 +60072,7 @@
 		"Black demon": {
 			"Adamantite bar": "2/128",
 			"Air rune": "8/128",
-			"Ashes": "Always",
+			"Malicious ashes": "Always",
 			"Black axe": "2/128",
 			"Black sword": "4/128",
 			"Blood rune": "1/128",
@@ -59696,7 +60098,7 @@
 			"Adamant platebody": "1/128",
 			"Adamantite bar": "2/128",
 			"Adamantite ore": "1/128",
-			"Ashes": "Always",
+			"Malicious ashes": "Always",
 			"Blood rune": "1/128",
 			"Chaos rune": "7/128",
 			"Clue scroll (hard)": "1/128",
@@ -59808,6 +60210,9 @@
 			"Water rune": "8/128",
 			"GemDropTable+": "1/25.6"
 		},
+		"Boar": {
+			"Bones": "Always"
+		},
 		"Body Golem": {
 			"Clay": "Common",
 			"Copper ore": "Common",
@@ -59880,7 +60285,7 @@
 			"GemDropTable+": "1/512"
 		},
 		"Bouncer": {
-			"Bones": "Always"
+			"Vile ashes": "Always"
 		},
 		"Brassican Mage": {
 			"Air rune": "5/50",
@@ -60440,7 +60845,7 @@
 			"Unicorn horn dust": "2/128",
 			"Vial of water": "13/128",
 			"White berries": "5/128",
-			"GemDropTable+": "3 × 1/128"
+			"GemDropTable+": "1/128"
 		},
 		"Chicken": {
 			"Bones": "Always",
@@ -60478,7 +60883,7 @@
 			"Soul rune": "1/128",
 			"SuperiorDropTable": "1/84.8",
 			"Ugthanki kebab": "2/128",
-			"GemDropTable+": "3 × 1/16"
+			"GemDropTable+": "1/16"
 		},
 		"Chompy bird": {
 			"Bones": "Always",
@@ -60486,7 +60891,7 @@
 			"Raw chompy": "Always"
 		},
 		"Chronozon": {
-			"Ashes": "Always",
+			"Vile ashes": "Always",
 			"Crest part (Johnathon)": "Always"
 		},
 		"Clivet": {
@@ -60653,7 +61058,7 @@
 			"Watermelon seed": "15/512",
 			"White berries": "17/512",
 			"Jar of spirits": "1/1000",
-			"GemDropTable+": "10 × 1/42.67"
+			"GemDropTable+": "1/42.67"
 		},
 		"Corrupt Lizardman": {
 			"Bones": "Always",
@@ -60790,7 +61195,7 @@
 			"SuperiorDropTable": "1/171.2",
 			"Teal gloves": "2/128",
 			"Yellow gloves": "2/128",
-			"GemDropTable+": "3 × 1/64"
+			"GemDropTable+": "1/64"
 		},
 		"Crypt rat": {
 			"Bones": "Always",
@@ -61250,7 +61655,7 @@
 			"Clue scroll (beginner)": "1/128"
 		},
 		"Death spawn": {
-			"Ashes": "Always"
+			"Fiendish ashes": "Always"
 		},
 		"Death wing": {
 			"Clue scroll (beginner)": "Rare"
@@ -61272,7 +61677,7 @@
 		},
 		"Demonic gorilla": {
 			"Adamantite bar": "20/500",
-			"Ashes": "Always",
+			"Malicious ashes": "Always",
 			"Ballista limbs": "1/500",
 			"Ballista spring": "1/500",
 			"Clue scroll (elite)": "1/500",
@@ -61383,7 +61788,7 @@
 		},
 		"Doomion": {
 			"Amulet of doomion": "Always",
-			"Ashes": "Always"
+			"Vile ashes": "Always"
 		},
 		"Double agent": {
 			"Bones": "Always"
@@ -61820,7 +62225,7 @@
 		},
 		"Flaming pyrelord": {
 			"Adamant med helm": "1/128",
-			"Ashes": "Always",
+			"Fiendish ashes": "Always",
 			"Chaos rune": "5/128",
 			"Clue scroll (medium)": "10/128",
 			"Coins": "2/128",
@@ -62539,7 +62944,7 @@
 			"Abyssal whip": "1/512",
 			"Adamantite bar": "2/128",
 			"Air rune": "8/128",
-			"Ashes": "Always",
+			"Abyssal ashes": "Always",
 			"Black axe": "2/128",
 			"Black sword": "4/128",
 			"Blood rune": "4/128",
@@ -62565,7 +62970,7 @@
 		},
 		"Greater demon": {
 			"Adamant platelegs": "1/128",
-			"Ashes": "Always",
+			"Vile ashes": "Always",
 			"Chaos rune": "3/128",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "1/128",
@@ -62589,7 +62994,7 @@
 			"Adamant battleaxe": "2/128",
 			"Adamant kiteshield": "1/128",
 			"Adamant platelegs": "1/128",
-			"Ashes": "Always",
+			"Vile ashes": "Always",
 			"Blood rune": "1/128",
 			"Chaos rune": "5/128",
 			"Clue scroll (hard)": "1/128",
@@ -62823,7 +63228,7 @@
 			"Rune full helm": "3/85",
 			"SuperiorDropTable": "1/45.432",
 			"Swordfish": "4/85",
-			"GemDropTable+": "3 × 1/85"
+			"GemDropTable+": "1/85"
 		},
 		"Guardian of Armadyl": {
 			"Armadyl pendant": "Common",
@@ -62911,14 +63316,14 @@
 			"Long bone": "1/400"
 		},
 		"Hellhound": {
-			"Bones": "Always",
+			"Vile ashes": "Always",
 			"Clue scroll (elite)": "Always",
 			"Clue scroll (hard)": "1/64",
 			"Reward casket (elite)": "Always",
 			"Smouldering stone": "1/32768"
 		},
 		"Hellhound%2FWilderness Slayer Cave": {
-			"Bones": "Always",
+			"Vile ashes": "Always",
 			"Clue scroll (elite)": "Always",
 			"Clue scroll (hard)": "1/64",
 			"Reward casket (elite)": "Always",
@@ -63088,7 +63493,7 @@
 		},
 		"Holthion": {
 			"Amulet of holthion": "Always",
-			"Ashes": "Always"
+			"Vile ashes": "Always"
 		},
 		"Hoop Snake": {
 			"Bones": "Always",
@@ -63402,6 +63807,7 @@
 			"Clue scroll (easy)": "1/128",
 			"Coins": "4/128",
 			"Ecumenical key": "1/60",
+			"Fiendish ashes": "Always",
 			"Water rune": "4/128",
 			"GemDropTable+": "1/42.67"
 		},
@@ -63411,7 +63817,7 @@
 			"Long bone": "1/400"
 		},
 		"Imp": {
-			"Ashes": "6/128",
+			"Fiendish ashes": "Always",
 			"Ball of wool": "8/128",
 			"Black bead": "5/128",
 			"Blue wizard hat": "8/128",
@@ -63478,7 +63884,7 @@
 		},
 		"Infernal pyrelord": {
 			"Adamant med helm": "1/128",
-			"Ashes": "Always",
+			"Fiendish ashes": "Always",
 			"Chaos rune": "5/128",
 			"Clue scroll (medium)": "10/104",
 			"Coins": "2/128",
@@ -63513,7 +63919,8 @@
 			"Steel full helm": "4/128",
 			"Steel scimitar": "2/128",
 			"SuperiorDropTable": "1/111.8",
-			"GemDropTable+": "3 × 1/32"
+			"GemDropTable+": "1/32",
+			"Vile ashes": "Always"
 		},
 		"Insatiable mutated Bloodveld": {
 			"Adamant chainbody": "3/128",
@@ -63545,7 +63952,8 @@
 			"Soul rune": "7/128",
 			"SuperiorDropTable": "1/111.8",
 			"RareDropTable+": "1/42.67",
-			"GemDropTable+": "3 × 1/64"
+			"GemDropTable+": "1/64",
+			"Vile ashes": "Always"
 		},
 		"Invrigar the Necromancer": {
 			"Bones": "Always"
@@ -63776,7 +64184,7 @@
 			"Raw jubbly": "Always"
 		},
 		"Jungle Demon": {
-			"Ashes": "Always"
+			"Malicious ashes": "Always"
 		},
 		"Jungle Wolf": {
 			"Wolf bone": "1/4",
@@ -63813,7 +64221,7 @@
 		"K'ril Tsutsaroth": {
 			"Adamant arrow(p++)": "8/127",
 			"Adamant platebody": "8/127",
-			"Ashes": "Always",
+			"Infernal ashes": "Always",
 			"Blood rune": "8/127",
 			"Clue scroll (elite)": "1/250",
 			"Coins": "36.7/127",
@@ -64057,7 +64465,7 @@
 			"Rune longsword": "3/124",
 			"SuperiorDropTable": "1/75",
 			"White berries": "6/124",
-			"GemDropTable+": "3 × 1/20.67"
+			"GemDropTable+": "1/20.67"
 		},
 		"Knight of Ardougne": {
 			"Bones": "Always"
@@ -64067,7 +64475,7 @@
 			"Clue scroll (hard)": "1/128",
 			"Ecumenical key": "1/60"
 		},
-		"Kourend guard": {
+		"Guard (Shayzien)": {
 			"Air rune": "2/128",
 			"Blood rune": "1/128",
 			"Body talisman": "3/128",
@@ -64087,7 +64495,7 @@
 			"Nothing": "10/128",
 			"Steel arrow": "1/128"
 		},
-		"Kourend head guard": {
+		"Head Guard": {
 			"Air rune": "2/128",
 			"Blood rune": "1/128",
 			"Body talisman": "3/128",
@@ -64283,7 +64691,7 @@
 			"GemDropTable+": "1/512"
 		},
 		"Lesser demon": {
-			"Ashes": "Always",
+			"Vile ashes": "Always",
 			"Chaos rune": "5/128",
 			"Coins": "1/128",
 			"Death rune": "1/128",
@@ -64302,14 +64710,14 @@
 			"GemDropTable+": "1/32"
 		},
 		"Lesser demon (Melzar's Maze)": {
-			"Ashes": "Always",
+			"Vile ashes": "Always",
 			"Key (green)": "Always"
 		},
 		"Lesser demon%2FWilderness Slayer Cave": {
 			"Adamant chainbody": "1/128",
 			"Adamant dagger": "1/128",
 			"Adamant platebody": "1/128",
-			"Ashes": "Always",
+			"Vile ashes": "Always",
 			"Black full helm": "4/128",
 			"Blood rune": "1/128",
 			"Chaos rune": "5/128",
@@ -64510,6 +64918,29 @@
 		"Lost barbarian": {
 			"Mangled bones": "Always"
 		},
+		"Lynx": {
+			"Bones": "Always"
+		},
+		"Lynx Tamer": {
+			"Air rune": "2/128",
+			"Blood rune": "1/128",
+			"Body talisman": "3/128",
+			"Bones": "Always",
+			"Bronze arrow": "3/128",
+			"Chaos rune": "1/128",
+			"Clue scroll (medium)": "1/128",
+			"Coins": "Always",
+			"Earth rune": "2/128",
+			"Fire rune": "2/128",
+			"GeneralSeedDropTable+": "18/128",
+			"Grain": "1/128",
+			"Iron bolts": "10/128",
+			"Iron dagger": "6/128",
+			"Iron ore": "1/128",
+			"Nature rune": "1/128",
+			"Nothing": "10/128",
+			"Steel arrow": "1/128"
+		},
 		"Magic axe": {
 			"Adamant battleaxe": "4/500",
 			"Clue scroll (medium)": "1/256",
@@ -64650,7 +65081,7 @@
 			"Runite ore": "2/128",
 			"Steel bar": "6/128",
 			"SuperiorDropTable": "1/64.8",
-			"GemDropTable+": "3 × 1/25.6"
+			"GemDropTable+": "1/25.6"
 		},
 		"Market Guard": {
 			"Bear fur": "1/128",
@@ -64832,7 +65263,7 @@
 			"Steel battleaxe": "3/128",
 			"SuperiorDropTable": "1/127.8",
 			"Water rune": "8/128",
-			"GemDropTable+": "3 × 1/25.6"
+			"GemDropTable+": "1/25.6"
 		},
 		"Mosquito swarm": {
 			"Proboscis": "Always"
@@ -65079,24 +65510,7 @@
 			"GemDropTable+": "1/23.2"
 		},
 		"Necromancer": {
-			"Air rune": "2/128",
-			"Blood rune": "2/128",
-			"Body rune": "2/128",
-			"Bones": "Always",
-			"Chaos rune": "6/128",
-			"Coins": "3/128",
-			"Cosmic rune": "1/128",
-			"Earth rune": "2/128",
-			"Fire rune": "2/128",
-			"Law rune": "1/128",
-			"Mind rune": "2/128",
-			"Nature rune": "7/128",
-			"Nothing": "16/128",
-			"Staff": "8/128",
-			"Staff of fire": "1/128",
-			"Water rune": "2/128",
-			"Zamorak monk bottom": "4/128",
-			"Zamorak monk top": "3/128"
+			"Bones": "Always"
 		},
 		"Night beast": {
 			"Adamant sq shield": "1/128",
@@ -65126,7 +65540,7 @@
 			"Shark": "1/128",
 			"SuperiorDropTable": "1/31.8",
 			"RareDropTable+": "1/42.67",
-			"GemDropTable+": "3 × 1/42.67"
+			"GemDropTable+": "1/42.67"
 		},
 		"Nikita": {
 			"Blamish oil": "1/512",
@@ -65218,7 +65632,7 @@
 			"SuperiorDropTable": "1/24.768",
 			"Ugthanki kebab": "2/128",
 			"RareDropTable+": "1/32",
-			"GemDropTable+": "3 × 1/32"
+			"GemDropTable+": "1/32"
 		},
 		"Obor": {
 			"Big bones": "8/118",
@@ -65391,7 +65805,7 @@
 		},
 		"Othainian": {
 			"Amulet of othanian": "Always",
-			"Ashes": "Always"
+			"Vile ashes": "Always"
 		},
 		"Otherworldly being": {
 			"Blood rune": "1/128",
@@ -65662,7 +66076,7 @@
 			"Rune chainbody": "1/128",
 			"Rune full helm": "2/128",
 			"SuperiorDropTable": "1/94.2",
-			"GemDropTable+": "3 × 1/4"
+			"GemDropTable+": "1/4"
 		},
 		"Revenant cyclops": {
 			"Revenant ether": "Always",
@@ -66529,7 +66943,7 @@
 			"Tinderbox": "Common"
 		},
 		"Scion": {
-			"Ashes": "Always"
+			"Fiendish ashes": "Always"
 		},
 		"Scorpia": {
 			"Admiral pie": "8/128",
@@ -66593,7 +67007,7 @@
 			"Mystic gloves (dark)": "1/512",
 			"Pure essence": "22/128",
 			"SuperiorDropTable": "1/160.8",
-			"GemDropTable+": "3 × 1/64"
+			"GemDropTable+": "1/64"
 		},
 		"Screaming twisted banshee": {
 			"Adamant kiteshield": "1/128",
@@ -66617,7 +67031,7 @@
 			"Rune med helm": "2/128",
 			"SuperiorDropTable": "1/160.8",
 			"Swordfish": "5/128",
-			"GemDropTable+": "3 × 1/64"
+			"GemDropTable+": "1/64"
 		},
 		"Sea troll": {
 			"Big bones": "Always",
@@ -66628,6 +67042,30 @@
 		"Seagull": {
 			"Bones": "Always",
 			"Seagull wing": "1/4"
+		},
+		"Sergeant (Shayzien)": {
+			"Air rune": "2/128",
+			"Blood rune": "1/128",
+			"Body talisman": "3/128",
+			"Bones": "Always",
+			"Bronze arrow": "3/128",
+			"Chaos rune": "1/128",
+			"Clue scroll (medium)": "1/128",
+			"Coins": "2/128",
+			"Earth rune": "2/128",
+			"Fire rune": "2/128",
+			"GeneralSeedDropTable+": "8730/107520",
+			"GeneralSeedDropTable2+": "4374/107520",
+			"GeneralSeedDropTable3+": "2016/107520",
+			"Grain": "1/128",
+			"Iron bolts": "10/128",
+			"Iron dagger": "6/128",
+			"Iron ore": "1/128",
+			"Nature rune": "1/128",
+			"Nothing": "10/128",
+			"Rune kiteshield": "1/512",
+			"Rune scimitar": "1/512",
+			"Steel arrow": "1/128"
 		},
 		"Sergeant Grimspike": {
 			"Bandos boots": "1/16129",
@@ -66734,7 +67172,7 @@
 			"Soul rune": "5/76",
 			"SuperiorDropTable": "1/90.488",
 			"Wyrm bones": "Always",
-			"GemDropTable+": "3 × 1/76"
+			"GemDropTable+": "1/76"
 		},
 		"Shadow spider": {
 			"Clue scroll (beginner)": "1/128"
@@ -67333,7 +67771,7 @@
 		"Skotizo": {
 			"Adamantite ore": "7/100",
 			"Ancient shard": "1/100",
-			"Ashes": "Always",
+			"Infernal ashes": "Always",
 			"Battlestaff": "7/100",
 			"Blood rune": "7/100",
 			"Clue scroll (elite)": "1/5",
@@ -67427,6 +67865,26 @@
 			"Steel claws": "2/128",
 			"Steel full helm": "1/128",
 			"GemDropTable+": "1/64"
+		},
+		"Soldier (Shayzien)": {
+			"Air rune": "2/128",
+			"Blood rune": "1/128",
+			"Body talisman": "3/128",
+			"Bones": "Always",
+			"Bronze arrow": "3/128",
+			"Chaos rune": "1/128",
+			"Clue scroll (medium)": "1/128",
+			"Coins": "Always",
+			"Earth rune": "2/128",
+			"Fire rune": "2/128",
+			"GeneralSeedDropTable+": "18/128",
+			"Grain": "1/128",
+			"Iron bolts": "10/128",
+			"Iron dagger": "6/128",
+			"Iron ore": "1/128",
+			"Nature rune": "1/128",
+			"Nothing": "10/128",
+			"Steel arrow": "1/128"
 		},
 		"Soldier (Yanille)": {
 			"Air rune": "2/128",
@@ -67537,7 +67995,7 @@
 			"GemDropTable+": "1/22"
 		},
 		"Spawn": {
-			"Ashes": "Always"
+			"Fiendish ashes": "Always"
 		},
 		"Speedy Keith": {
 			"Body rune": "3/128",
@@ -68146,7 +68604,7 @@
 			"GemDropTable+": "1/25.6"
 		},
 		"Tstanon Karlak": {
-			"Ashes": "Always",
+			"Malicious ashes": "Always",
 			"Blood rune": "8/127",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "66/127",
@@ -68501,7 +68959,7 @@
 			"Steel battleaxe": "11/128",
 			"SuperiorDropTable": "1/108.408",
 			"Thread": "1/128",
-			"GemDropTable+": "3 × 1/32"
+			"GemDropTable+": "1/32"
 		},
 		"Vitreous warped Jelly": {
 			"Adamant 2h sword": "2/128",
@@ -68519,7 +68977,7 @@
 			"Rune kiteshield": "2/128",
 			"SuperiorDropTable": "1/108.408",
 			"Thread": "1/128",
-			"GemDropTable+": "3 × 1/32"
+			"GemDropTable+": "1/32"
 		},
 		"Vorkath": {
 			"Adamantite ore": "7/150",
@@ -68726,6 +69184,7 @@
 			"Coins": "15/128",
 			"Crystal shard": "1/24",
 			"Death rune": "5/128",
+			"Fiendish ashes": "Always",
 			"HerbDropTable+": "9/128",
 			"Mist battlestaff": "1/3000",
 			"Mist rune": "2/128",
@@ -69022,7 +69481,7 @@
 			"GemDropTable+": "1/512"
 		},
 		"Zakl'n Gritch": {
-			"Ashes": "Always",
+			"Malicious ashes": "Always",
 			"Blood rune": "8/127",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "66/127",
@@ -69801,6 +70260,7 @@
 		}
 	},
 	"quests": {
+		"A Kingdom Divided": "6713, 6457, 6202, 7225, 6459, 6711, 6204, 6969, 5178, 4920, 6203, 6967, 5946, 5944, 6199, 6461, 6197, 5943, 6715, 5689, 7223, Lizardman Temple, The Warrens, Karuulm Slayer Dungeon, Shayzien Prison",
 		"A Porcine of Interest": "12083, 12338, 12339, 12596, Sourhog Cave",
 		"A Soul's Bane": "13109",
 		"A Tail of Two Cats": "11575, 12597, 12854, 13099",
@@ -69819,7 +70279,7 @@
 		"Cabin Fever": "14638, 14646, 14902",
 		"Client of Kourend": "6200, 6202, 6714, 6716, 6968, 7225, 7226",
 		"Clock Tower": "10290, Clock Tower Dungeon",
-		"Cold War": "10291, 10558, 10559, 10810, 12850, Penguin Base",
+		"Cold War": "10291, 10558, 10559, 10810, 12850, 12595, Penguin Base",
 		"Contact!": "13099, 13105, Sophanem Dungeon",
 		"Cook's Assistant": "12850",
 		"Creature of Fenkenstrain": "13878, 13879, 14135, 14390, Experiment Cave",
@@ -69833,7 +70293,7 @@
 		"Devious Minds": "11316, 11828, 11829, 12343, 13622, Law altar, Abyss",
 		"Doric's Quest": "11829",
 		"Dragon Slayer": "11314, 11315, 11570, 12081, 12082, 12084, 12085, 12086, 12338, 12596, 12850, Crandor and Karamja Dungeon, Dwarven Mine, Melzar's Maze%2FBasement",
-		"Dragon Slayer II": "5943, 5944, 8253, 8508, 9023, 9772, 10038, 10291, 10553, 11314, 11565, 11569, 11828, 12340, 12854, 13099, 14142, 14646, 14652, 14907, 14908, Ancient Cavern, Lithkren Vault, Crandor and Karamja Dungeon, Ungael Laboratory, Shayzien Crypts",
+		"Dragon Slayer II": "6199, 8253, 8508, 9023, 9772, 10038, 10291, 10553, 11314, 11565, 11569, 11828, 12340, 12854, 13099, 14142, 14646, 14652, 14907, 14908, Ancient Cavern, Lithkren Vault, Crandor and Karamja Dungeon, Ungael Laboratory, Shayzien Crypts",
 		"Dream Mentor": "8253, 8508, 8509, Lunar Isle mine",
 		"Druidic Ritual": "11573, 11574, Taverly Dungeon",
 		"Dwarf Cannon": "10292, 10038, 10293, 10294, 12085, Goblin Cave",
@@ -70451,6 +70911,20 @@
 			"Steel dagger": true,
 			"Steel scimitar": true
 		},
+		"Blair's Armour": {
+			"Bronze chainbody": true,
+			"Iron chainbody": true,
+			"Steel chainbody": true,
+			"Bronze platelegs": true,
+			"Iron platelegs": true,
+			"Steel platelegs": true,
+			"Bronze plateskirt": true,
+			"Iron plateskirt": true,
+			"Steel plateskirt": true,
+			"Bronze med helm": true,
+			"Iron med helm": true,
+			"Steel med helm": true
+		},
 		"Blue Moon Inn": {
 			"Beer": true
 		},
@@ -70614,20 +71088,6 @@
 			"Iron battleaxe": true,
 			"Mithril battleaxe": true,
 			"Steel battleaxe": true
-		},
-		"Briget's Armour": {
-			"Bronze chainbody": true,
-			"Bronze med helm": true,
-			"Bronze platelegs": true,
-			"Bronze plateskirt": true,
-			"Iron chainbody": true,
-			"Iron med helm": true,
-			"Iron platelegs": true,
-			"Iron plateskirt": true,
-			"Steel chainbody": true,
-			"Steel med helm": true,
-			"Steel platelegs": true,
-			"Steel plateskirt": true
 		},
 		"Briget's Weapons": {
 			"Adamant 2h sword": true,
@@ -70963,6 +71423,25 @@
 			"Team-34 cape": true,
 			"Team-4 cape": true,
 			"Team-44 cape": true
+		},
+		"Daryl's Ranging Surplus": {
+			"Adamant arrow": true,
+			"Bronze arrow": true,
+			"Bronze bolts": true,
+			"Crossbow": true,
+			"Iron arrow": true,
+			"Iron bolts": true,
+			"Longbow": true,
+			"Maple longbow": true,
+			"Maple shortbow": true,
+			"Mithril arrow": true,
+			"Oak longbow": true,
+			"Oak shortbow": true,
+			"Rune arrow": true,
+			"Shortbow": true,
+			"Steel arrow": true,
+			"Willow longbow": true,
+			"Willow shortbow": true
 		},
 		"Dead Man's Chest": {
 			"Grog": true,
@@ -71786,7 +72265,7 @@
 			"Vial of water": true,
 			"Water-filled vial pack": true
 		},
-		"Jennifer's General Field Supplies": {
+		"Jennifer's General Supplies": {
 			"Bowl": true,
 			"Bronze axe": true,
 			"Bucket": true,
@@ -73069,6 +73548,20 @@
 			"Waterskin(0)": true,
 			"Waterskin(4)": true
 		},
+		"Shayzien Styles": {
+			"Black cape": true,
+			"Black skirt": true,
+			"Blue cape": true,
+			"Blue skirt": true,
+			"Brown apron": true,
+			"Chef's hat": true,
+			"Leather body": true,
+			"Leather boots": true,
+			"Leather gloves": true,
+			"Red cape": true,
+			"White apron": true,
+			"Yellow cape": true
+		},
 		"Shop of Distaste": {
 			"Rotten tomato": true
 		},
@@ -73189,6 +73682,13 @@
 		},
 		"The Big Heist Lodge": {
 			"Bandit's brew": true
+		},
+		"The Cloak and Stagger": {
+			"Beer": true,
+			"Lizardkicker": true,
+			"Jug of wine": true,
+			"Cup of tea": true,
+			"Stew": true
 		},
 		"The Crypt": {
 			"Blood pint": true
@@ -76370,7 +76870,7 @@
 			},
 			"Pyrefiend": {
 				"Adamant med helm": "1/128",
-				"Ashes": "Always",
+				"Fiendish ashes": "Always",
 				"Chaos rune": "5/128",
 				"Clue scroll (medium)": "1/128",
 				"Coins": "2/128",
@@ -76389,7 +76889,7 @@
 			},
 			"Pyrelord": {
 				"Adamant med helm": "1/128",
-				"Ashes": "Always",
+				"Fiendish ashes": "Always",
 				"Chaos rune": "5/128",
 				"Clue scroll (medium)": "1/104",
 				"Coins": "2/128",
@@ -76671,7 +77171,8 @@
 				"Steel axe": "4/128",
 				"Steel full helm": "4/128",
 				"Steel scimitar": "2/128",
-				"GemDropTable+": "1/32"
+				"GemDropTable+": "1/32",
+				"Vile ashes": "Always"
 			},
 			"Mutated Bloodveld": {
 				"Adamant chainbody": "3/128",
@@ -76682,7 +77183,7 @@
 				"Black boots": "1/128",
 				"Black med helm": "5/128",
 				"Blood rune": "10/128",
-				"Bones": "Always",
+				"Vile ashes": "Always",
 				"Bow string": "4/128",
 				"Clue scroll (elite)": "Always",
 				"Clue scroll (hard)": "1/128",
@@ -77394,7 +77895,7 @@
 			"Nechryael": {
 				"Adamant kiteshield": "2/116",
 				"Adamant platelegs": "4/116",
-				"Ashes": "Always",
+				"Malicious ashes": "Always",
 				"Blood rune": "4/116",
 				"Chaos rune": "8/116",
 				"Clue scroll (hard)": "1/128",
@@ -77415,7 +77916,7 @@
 				"Adamant battleaxe": "5/128",
 				"Adamant kiteshield": "7/128",
 				"Air rune": "6/128",
-				"Ashes": "Always",
+				"Malicious ashes": "Always",
 				"Blood rune": "10/128",
 				"Chaos rune": "10/128",
 				"Clue scroll (hard)": "1/128",
@@ -77476,7 +77977,7 @@
 				"Abyssal whip": "1/512",
 				"Adamantite bar": "2/128",
 				"Air rune": "8/128",
-				"Ashes": "Always",
+				"Abyssal ashes": "Always",
 				"Black axe": "2/128",
 				"Black sword": "4/128",
 				"Blood rune": "4/128",
@@ -77810,7 +78311,8 @@
 				"Uncut diamond": "3/128",
 				"Unholy symbol": "5/128",
 				"Wine of zamorak": "5/128",
-				"RareDropTable+": "1/42.67"
+				"RareDropTable+": "1/42.67",
+				"Infernal ashes": "Always"
 			},
 			"Abyssal Sire": {
 				"Abyssal dagger": "1/492",
@@ -77818,7 +78320,7 @@
 				"Abyssal orphan": "1/2560",
 				"Abyssal whip": "1/1066",
 				"Air battlestaff": "2/139",
-				"Ashes": "Always",
+				"Abyssal ashes": "Always",
 				"Battlestaff": "6/139",
 				"Binding necklace": "4/139",
 				"Blood rune": "5/139",
@@ -78231,6 +78733,9 @@
 			"Guard": {
 				"Coins": "Always"
 			},
+			"Guard (Shayzien)": {
+				"Coins": "Always"
+			},
 			"Guard (H%2EA%2EM%2E storeroom)": {
 				"Bronze arrow": "9/500",
 				"Bronze axe": "9/500",
@@ -78319,6 +78824,9 @@
 				"Uncut jade": "2/100",
 				"Uncut opal": "2/100"
 			},
+			"Head Guard": {
+				"Coins": "Always"
+			},
 			"Hengel": {
 				"Coins": "Always"
 			},
@@ -78341,9 +78849,6 @@
 				"Coins": "Always"
 			},
 			"Knight of Ardougne": {
-				"Coins": "Always"
-			},
-			"Kourend guard": {
 				"Coins": "Always"
 			},
 			"Lanzig": {

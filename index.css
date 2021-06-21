@@ -556,8 +556,8 @@ button.menu2 {
     background-color: rgb(75, 75, 225);
 }
 
-.import {
-    background-color: rgb(200, 125, 200);
+.highest {
+    background-color: rgb(100, 100, 225);
     width: min(17vw, 150px);
     height: 100%;
     font-size: min(2vw, 16px);
@@ -574,12 +574,12 @@ button.menu2 {
     pointer-events: auto;
 }
 
-.import:hover {
-    background-color: rgb(175, 100, 175);
+.highest:hover {
+    background-color: rgb(75, 75, 200);
 }
 
-.import:active {
-    background-color: rgb(150, 125, 150);
+.highest:active {
+    background-color: rgb(125, 125, 175);
 }
 
 .icon-lock {
@@ -1870,6 +1870,12 @@ button.menu2 {
 
 #myModal11 > .modal-content {
     margin-top: 5%;
+}
+
+
+#myModal12 > .modal-content {
+    height: 60%;
+    width: 45%;
 }
 
 .manual-close {
