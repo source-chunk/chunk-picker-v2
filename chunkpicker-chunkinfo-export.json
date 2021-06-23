@@ -15627,7 +15627,7 @@
 				"Priority": 1
 			},
 			"Mine ~|clay|~": {
-				"Items": ["Pickaxe+"],
+				"Items": ["Iron pickaxe+"],
 				"Level": 1,
 				"Objects": ["Clay+"],
 				"Output": "Clay",
@@ -15643,7 +15643,7 @@
 				"Priority": 1
 			},
 			"Mine ~|copper ore|~": {
-				"Items": ["Pickaxe+"],
+				"Items": ["Iron pickaxe+"],
 				"Level": 1,
 				"Objects": ["Copper+"],
 				"Output": "Copper ore",
@@ -15745,7 +15745,7 @@
 				"Priority": 2
 			},
 			"Mine ~|rune essence|~": {
-				"Items": ["Pickaxe+"],
+				"Items": ["Iron pickaxe+"],
 				"Level": 1,
 				"Objects": ["Rune Essence rock"],
 				"Output": "Rune essence",
@@ -15784,7 +15784,7 @@
 				"Priority": 4
 			},
 			"Mine ~|tin ore|~": {
-				"Items": ["Pickaxe+"],
+				"Items": ["Iron pickaxe+"],
 				"Level": 1,
 				"Objects": ["Tin+"],
 				"Output": "Tin ore",
@@ -58780,6 +58780,7 @@
 			"InquisitorArmour+": ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"],
 			"Iron armour+": ["Iron boots", "Iron med helm", "Iron full helm", "Iron sq shield", "Iron plateskirt", "Iron kiteshield", "Iron platelegs", "Iron chainbody", "Iron platebody"],
 			"Iron axe+": ["Bronze axe", "Iron axe"],
+			"Iron pickaxe+": ["Bronze pickaxe", "Iron pickaxe"],
 			"IronWep+": ["Iron dagger", "Iron pickaxe", "Iron axe", "Iron mace", "Iron sword", "Iron scimitar", "Iron longsword", "Iron battleaxe", "Iron claws", "Iron spear", "Iron 2h sword"],
 			"Jungle camo+": ["Jungle camo top", "Jungle camo legs"],
 			"Justiciar armour+": ["Justiciar faceguard", "Justiciar chestguard", "Justiciar legguards"],
