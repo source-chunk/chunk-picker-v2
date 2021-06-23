@@ -263,7 +263,7 @@ let ruleNames = {
     "Multi Step Processing": "Items must be fully processed, even multiple times within the same skill if needed (e.g. Ore -> Bar -> Smithed Item)",
     "Shooting Star": "Shooting stars count as skill tasks",
     "Puro-Puro": "Allow implings from Puro-Puro & their drops to count towards chunk tasks",
-    "Random Event Loot": "Allow any random event rewards/bird nest loot/gems from mining obtained to count towards chunk tasks",
+    "Random Event Loot": "Allow any random event rewards/bird nest loot/gems from mining/RareDropTable & GemDropTable obtained to count towards chunk tasks",
     "Manually Add Tasks": "Allow the ability to manually add active chunk tasks",
     "Collection Log Bosses": "<b>[Collection log]</b> Obtain items in the 'Bosses' tab",
     "Collection Log Raids": "<b>[Collection log]</b> Obtain items in the 'Raids' tab",
@@ -710,7 +710,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.1.2");
+const myWorker = new Worker("./worker.js?v=4.1.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -725,7 +725,6 @@ myWorker.onmessage = function(e) {
         highestCurrent = e.data[4];
         questPointTotal = e.data[6];
         highestOverall = e.data[7];
-        //console.log(highestOverall);
         calcCurrentChallenges2(e.data[5]);
     }
 }
@@ -2598,25 +2597,25 @@ setupCurrentChallenges = function(tempChallengeArr) {
     }
     challengeArr = challengeArr.filter(line => !line.includes('Extra-') && !line.includes('BiS-') && !line.includes('Quest-') && !line.includes('marker-extra') && !line.includes('marker-bis') && !line.includes('marker-quest'));
     !!globalValids['BiS'] && Object.keys(globalValids['BiS']).length > 0 && rules['Show Best in Slot Tasks'] && challengeArr.push(`<div class="marker marker-bis noscroll" onclick="expandActive('bis')"><i class="expand-button fas ${activeSubTabs['bis'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">BiS Tasks</span></div>`);
-    !!globalValids['BiS'] && rules['Show Best in Slot Tasks']  && Object.keys(globalValids['BiS']).forEach(challenge => {
+    !!globalValids['BiS'] && rules['Show Best in Slot Tasks'] && Object.keys(globalValids['BiS']).forEach(challenge => {
         if ((!backlog['BiS'] || !backlog['BiS'].hasOwnProperty(challenge)) && (!completedChallenges['BiS'] || !completedChallenges['BiS'][challenge])) {
-            challengeArr.push(`<div class="challenge bis-challenge noscroll ${'BiS-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'} ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][tempChallengeArr['BiS']]) && 'hide-backlog'} ${!activeSubTabs['bis'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges']['BiS'][challenge]['Label'] + ']</b> <span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'BiS' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
+            challengeArr.push(`<div class="challenge bis-challenge noscroll ${'BiS-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'} ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge]) && 'hide-backlog'} ${!activeSubTabs['bis'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges']['BiS'][challenge]['Label'] + ']</b> <span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'BiS' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
         }
     });
     !!globalValids['Quest'] && Object.keys(globalValids['Quest']).length > 0 && rules['Show Quest Tasks'] && challengeArr.push(`<div class="marker marker-quest noscroll" onclick="expandActive('quest')"><i class="expand-button fas ${activeSubTabs['quest'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Quest Tasks</span></div>`);
     !!globalValids['Quest'] && rules['Show Quest Tasks'] && Object.keys(globalValids['Quest']).forEach(challenge => {
         if ((!backlog['Quest'] || !backlog['Quest'].hasOwnProperty(challenge)) && (!completedChallenges['Quest'] || !completedChallenges['Quest'][challenge]) && globalValids['Quest'][challenge]) {
             if (chunkInfo['challenges']['Quest'][challenge].hasOwnProperty('QuestPoints')) {
-                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][tempChallengeArr['Quest']]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} />` + '<span class="inner noscroll">' + `<b class="noscroll">[Quest] ` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</b>: <a class="link" href="' + questUrl[chunkInfo['challenges']['Quest'][challenge]['BaseQuest']] + '" target="_blank">Complete the quest</a>' + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
+                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} />` + '<span class="inner noscroll">' + `<b class="noscroll">[Quest] ` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</b>: <a class="link" href="' + questUrl[chunkInfo['challenges']['Quest'][challenge]['BaseQuest']] + '" target="_blank">Complete the quest</a>' + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
             } else if (!rules['Show Quest Tasks Complete']) {
-                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][tempChallengeArr['Quest']]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} />` + '<span class="inner noscroll">' + `<b class="noscroll">[Quest] ` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</b>: <a class="link" href="' + questUrl[chunkInfo['challenges']['Quest'][challenge]['BaseQuest']] + '" target="_blank">Up to step ' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
+                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} />` + '<span class="inner noscroll">' + `<b class="noscroll">[Quest] ` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</b>: <a class="link" href="' + questUrl[chunkInfo['challenges']['Quest'][challenge]['BaseQuest']] + '" target="_blank">Up to step ' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
             }
         }
     });
     !!globalValids['Extra'] && Object.keys(globalValids['Extra']).length > 0 && challengeArr.push(`<div class="marker marker-extra noscroll" onclick="expandActive('extra')"><i class="expand-button fas ${activeSubTabs['extra'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Other Tasks</span></div>`);
     !!globalValids['Extra'] && Object.keys(globalValids['Extra']).forEach(challenge => {
         if ((!backlog['Extra'] || !backlog['Extra'].hasOwnProperty(challenge)) && (!completedChallenges['Extra'] || !completedChallenges['Extra'][challenge])) {
-            challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][tempChallengeArr['Extra']]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges']['Extra'][challenge]['Label'] + ']</b> <span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
+            challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges']['Extra'][challenge]['Label'] + ']</b> <span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
         }
     });
     if (challengeArr.length < 1) {
@@ -2670,6 +2669,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
         completedArr.push('No challenges currently completed.');
     }
     setCurrentChallenges(backlogArr, completedArr);
+    changeChallengeColor();
 }
 
 // Toggles the subtabs for the active tasks tab
@@ -3062,7 +3062,45 @@ var openSearchDetails = function(category, name) {
 // Opens the highest modal
 var openHighest = function() {
     highestModalOpen = true;
+    //console.log(highestOverall);
+    let combatStyles = ['Melee', 'Ranged', 'Magic'];
+    if (rules['Show Best in Slot Prayer Tasks']) {
+        combatStyles.push('Prayer');
+    }
+    if (rules['Show Best in Slot Defensive Tasks']) {
+        combatStyles.push('Melee Tank');
+        combatStyles.push('Ranged Tank');
+        combatStyles.push('Magic Tank');
+    }
+    if (rules['Show Best in Slot Flinching Tasks']) {
+        combatStyles.push('Flinch');
+    }
+    let slots = ['Head', 'Neck', 'Cape', 'Body', 'Legs', 'Weapon', 'Shield', 'Ammo', 'Hands', 'Feet', 'Ring'];
+    $('.highest-title').empty();
+    $('.highest-data').empty();
+    combatStyles.forEach(combatStyle => {
+        $('.highest-title').append(`<div class='noscroll style-button ${combatStyle.replaceAll(' ', '_')}-button' onclick='switchHighestTab("${combatStyle.replaceAll(' ', '_')}")'><span class='noscroll'>${combatStyle}</span></div>`);
+        $('.highest-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'>${combatStyle}</div>`);
+        slots.forEach(slot => {
+            if (highestOverall.hasOwnProperty(combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase())) {
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='nonscroll'><span class='slot'>${slot}</span>: ${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]}</div>`);
+            } else if (slot === 'Weapon' || slot === 'Shield' || combatStyle !== 'Flinch') {
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='nonscroll'><span class='slot'>${slot}</span>: None</div>`);
+            }
+        });
+    });
+    $('.style-body').hide();
+    $(`.${combatStyles[0]}-button`).addClass('active-tab');
+    $(`.${combatStyles[0]}-body`).show();
     $('#myModal12').show();
+}
+
+// Switches Highest Tab
+var switchHighestTab = function(tab) {
+    $('.style-body').hide();
+    $(`.style-button`).removeClass('active-tab');
+    $(`.${tab}-button`).addClass('active-tab');
+    $(`.${tab}-body`).show();
 }
 
 // Closes the manual add tasks modal
@@ -3128,7 +3166,6 @@ var closeHighest = function() {
 // Unlocks various parts of the chunk tasks panel
 var unlockChallenges = function() {
     (workerOut === 0) && setupCurrentChallenges(highestCurrent);
-    (workerOut === 0) && changeChallengeColor();
 }
 
 // Displays the current challenges, areas, backlog, and completed challenges

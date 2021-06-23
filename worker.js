@@ -940,13 +940,17 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
 
 var calcBIS = function() {
     let combatStyles = ['Melee', 'Ranged', 'Magic'];
+    let primarySkill = {};
+    skillNames.forEach(skill => {
+        primarySkill[skill] = checkPrimaryMethod(skill, globalValids, baseChunkData);
+    });
     if (rules['Show Best in Slot Prayer Tasks']) {
         combatStyles.push('Prayer');
     }
     if (rules['Show Best in Slot Defensive Tasks']) {
-        combatStyles.push('Melee Defence');
-        combatStyles.push('Ranged Defence');
-        combatStyles.push('Magic Defence');
+        combatStyles.push('Melee Tank');
+        combatStyles.push('Ranged Tank');
+        combatStyles.push('Magic Tank');
     }
     if (rules['Show Best in Slot Flinching Tasks']) {
         combatStyles.push('Flinch');
@@ -960,11 +964,18 @@ var calcBIS = function() {
         }
     });
     let notFresh = {};
+    highestOverall = {};
     let vowels = ['a', 'e', 'i', 'o', 'u'];
     combatStyles.forEach(skill => {
         let bestEquipment = {};
         Object.keys(chunkInfo['equipment']).forEach(equip => {
-            if (!!baseChunkData['items'][equip]) {
+            let validWearable = true;
+            !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
+                if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                    validWearable = false;
+                }
+            });
+            if (!!baseChunkData['items'][equip] && validWearable) {
                 if (skill === 'Melee') {
                     if (chunkInfo['equipment'][equip].attack_speed > 0) {
                         if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (((Math.max(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) + chunkInfo['equipment'][equip].melee_strength + 64) / chunkInfo['equipment'][equip].attack_speed) > ((Math.max(chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_crush, chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_slash, chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_stab) + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength + 64) / chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_speed))) && Math.max(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) > 0 && chunkInfo['equipment'][equip].melee_strength > 0) {
@@ -1129,7 +1140,7 @@ var calcBIS = function() {
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
                         }
                     }
-                } else if (skill === 'Melee Defence') {
+                } else if (skill === 'Melee Tank') {
                     if (Math.max(chunkInfo['equipment'][equip].defence_crush, chunkInfo['equipment'][equip].defence_slash, chunkInfo['equipment'][equip].defence_stab) > 0) {
                         if (!bestEquipment[chunkInfo['equipment'][equip].slot] || ((chunkInfo['equipment'][equip].defence_crush + chunkInfo['equipment'][equip].defence_slash + chunkInfo['equipment'][equip].defence_stab) > (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_crush + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_slash + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_stab))) {
                             let tempTempValid = false;
@@ -1143,7 +1154,7 @@ var calcBIS = function() {
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
                         }
                     }
-                } else if (skill === 'Ranged Defence') {
+                } else if (skill === 'Ranged Tank') {
                     if (chunkInfo['equipment'][equip].defence_ranged > 0) {
                         if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].defence_ranged > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_ranged)) {
                             let tempTempValid = false;
@@ -1157,7 +1168,7 @@ var calcBIS = function() {
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
                         }
                     }
-                } else if (skill === 'Magic Defence') {
+                } else if (skill === 'Magic Tank') {
                     if (chunkInfo['equipment'][equip].defence_magic > 0) {
                         if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].defence_magic > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_magic)) {
                             let tempTempValid = false;
@@ -1255,7 +1266,12 @@ var calcBIS = function() {
             delete bestEquipment['2h'];
         }
         Object.keys(bestEquipment).forEach(slot => {
-            highestOverall[skill + '-' + slot] = bestEquipment[slot];
+            if (slot === '2h') {
+                highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = bestEquipment[slot];
+                highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
+            } else {
+                highestOverall[skill.replaceAll(' ', '_') + '-' + slot] = bestEquipment[slot];
+            }
             let article = vowels.includes(bestEquipment[slot].toLowerCase().charAt(0)) ? ' an ' : ' a ';
             article = bestEquipment[slot].toLowerCase().charAt(bestEquipment[slot].toLowerCase().length - 1) === 's' ? ' ' : article;
             if (!!globalValids['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~']) {
@@ -1269,12 +1285,12 @@ var calcBIS = function() {
             if (!!chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~'] && notFresh['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~']) {
                 chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~'] = {
                     'ItemsDetails': [bestEquipment[slot]],
-                    'Label': skill + '/' + chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~']['Label']
+                    'Label': `<span class='noscroll ${skill}-bis-highlight'>` + skill + '</span>/' + chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~']['Label']
                 }
             } else {
                 chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~'] = {
                     'ItemsDetails': [bestEquipment[slot]],
-                    'Label': skill + ' BiS ' + slot
+                    'Label': `<span class='noscroll ${skill}-bis-highlight'>` + skill + '</span> BiS ' + slot
                 }
                 notFresh['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~'] = true;
             }

@@ -2641,3 +2641,23 @@ input#searchChunks {
     background-color: rgb(220, 220, 220);
     margin-right: 15px;
 }
+
+.highest-title {
+    font-size: 18px;
+    display: inline-flex;
+    width: 95%;
+}
+
+.style-button {
+    border: solid;
+    border-width: 0px 1px 1px 0px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.style-button.active-tab {
+    border-bottom: 0px;
+}
