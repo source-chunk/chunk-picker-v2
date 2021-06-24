@@ -28699,7 +28699,7 @@
 			},
 			"Monster": {
 				"Bat": 3,
-				"Dark warrior": 2,
+				"Dark warrior%2FZeah": 2,
 				"Guard (Shayzien)": 14,
 				"Man": 1,
 				"Necromancer": 1,
@@ -29085,7 +29085,7 @@
 			},
 			"Monster": {
 				"Bat": 7,
-				"Dark warrior": 6,
+				"Dark warrior%2FZeah": 6,
 				"Dwarf": 2,
 				"Giant rat": 1,
 				"Necromancer": 2,
@@ -29466,7 +29466,7 @@
 		"6458": {
 			"Monster": {
 				"Bat": 2,
-				"Dark warrior": 3,
+				"Dark warrior%2FZeah": 2,
 				"Giant bat": 1,
 				"Guard (Shayzien)": 7,
 				"Head Guard": 2,
@@ -37062,6 +37062,7 @@
 			"Connect": {
 				"10307": true,
 				"10388": true,
+				"10389": true,
 				"11595": true
 			},
 			"Diary": {
@@ -44389,7 +44390,8 @@
 				"Wilderness": "EA4"
 			},
 			"Monster": {
-				"Dark warrior": 32,
+				"Dark warrior%2FLevel 8": 15,
+				"Dark warrior%2FLevel 145": 17,
 				"Skeleton%2FPlain": 10,
 				"Skeleton%2FUnarmed": 3
 			},
@@ -52504,13 +52506,6 @@
 				"Fire remains": 1
 			}
 		},
-		"15246": {
-			"NPC": {
-				"Ankou": 3,
-				"Dark warrior": 72,
-				"Skeleton": 10
-			}
-		},
 		"15248": {
 			"Connect": {
 				"15148": true
@@ -52622,13 +52617,6 @@
 		},
 		"15407": {
 			"Nickname": "Northeast Mos Le'Harmless Shore"
-		},
-		"15502": {
-			"NPC": {
-				"Ankou": 4,
-				"Dark warrior": 72,
-				"Skeleton": 11
-			}
 		},
 		"15511": {
 			"Name": "Sisterhood Sanctuary",
@@ -61611,20 +61599,54 @@
 		"Dark energy core": {
 			"Ashes": "Always"
 		},
-		"Dark warrior": {
-			"Adamant med helm": "3/128",
+		"Dark warrior%2FLevel 8": {
 			"Black mace": "1/128",
 			"Black med helm": "1/128",
 			"Bones": "Always",
 			"Bronze arrow": "4/128",
 			"Bronze med helm": "3/128",
 			"Chaos rune": "1/128",
+			"Coins": "2/128",
+			"Earth rune": "1/128",
+			"HerbDropTable+": "3/128",
+			"Iron mace": "1/128",
+			"Iron ore": "1/128",
+			"Mind rune": "3/128",
+			"Nature rune": "2/128",
+			"Nothing": "16/128",
+			"Sardine": "1/128",
+			"Water rune": "2/128"
+		},
+		"Dark warrior%2FZeah": {
+			"Black mace": "1/128",
+			"Black med helm": "1/128",
+			"Bones": "Always",
+			"Bronze arrow": "4/128",
+			"Chaos rune": "1/128",
+			"Clue scroll (medium)": "1/96",
+			"Coins": "6/128",
+			"Earth rune": "1/128",
+			"HerbDropTable+": "3/128",
+			"Iron ore": "1/128",
+			"Mind rune": "3/128",
+			"Nature rune": "2/128",
+			"Sardine": "1/128",
+			"Steel mace": "1/128",
+			"Steel med helm": "3/128",
+			"Water rune": "2/128"
+		},
+		"Dark warrior%2FLevel 145": {
+			"Adamant med helm": "3/128",
+			"Black mace": "1/128",
+			"Black med helm": "1/128",
+			"Bones": "Always",
+			"Bronze arrow": "4/128",
+			"Chaos rune": "1/128",
 			"Clue scroll (hard)": "1/128",
 			"Coins": "2/128",
 			"Dark fishing bait": "2/128",
 			"Earth rune": "1/128",
 			"HerbDropTable+": "3/128",
-			"Iron mace": "1/128",
 			"Iron ore": "1/128",
 			"Mind rune": "3/128",
 			"Mithril mace": "1/128",
