@@ -1507,6 +1507,12 @@
 				"Primary": false,
 				"Priority": 3
 			},
+			"Wield a ~|vesta's blighted longsword|~": {
+				"Items": ["Vesta's blighted longsword"],
+				"Level": 75,
+				"Primary": false,
+				"Priority": 12
+			},
 			"Wield a ~|viggora's chainmace|~": {
 				"Items": ["Viggora's chainmace"],
 				"Level": 60,
@@ -16004,6 +16010,10 @@
 			"Make a fish sack barrel": {
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
+			},
+			"Activate a vesta's blighted longsword": {
+				"Items": ["Vesta's longsword (inactive)"],
+				"Output": "Vesta's blighted longsword"
 			},
 			"Imbue a black mask": {
 				"Category": ["Minigame"],
