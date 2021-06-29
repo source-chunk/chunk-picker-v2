@@ -713,7 +713,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.2.1");
+const myWorker = new Worker("./worker.js?v=4.2.2");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2488,102 +2488,105 @@ var updateChunkInfo = function() {
 var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
     let valid = false;
     let methods = [];
+    let hardValid = false;
     if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
-        valid = true;
+        hardValid = true;
     } else if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
-        valid = true;
+        hardValid = true;
         methods.push('Manually added skill');
-    } else {
-        let tempValid = true;
-        !!universalPrimary[skill] && universalPrimary[skill].forEach(line => {
-            if (line === 'Primary+') {
-                let primaryValid = false;
-                !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
-                    if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
-                        if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil')) {
-                            primaryValid = true;
-                            methods.push(challenge);
-                        }
+    }
+    let tempValid = true;
+    !!universalPrimary[skill] && universalPrimary[skill].forEach(line => {
+        if (line === 'Primary+') {
+            let primaryValid = false;
+            !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
+                if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
+                    if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil')) {
+                        primaryValid = true;
+                        methods.push(challenge);
                     }
-                });
-                !primaryValid && (tempValid = false);
-            } else if (line === 'Monster+') {
-                let monsterExists = !!baseChunkData['monsters'] && Object.keys(baseChunkData['monsters']).length > 0;
-                if (!monsterExists) {
-                    tempValid = false;
-                } else {
-                    methods.push('Attack monsters');
-                }
-            } else if (line === 'Bones+') {
-                let bonesExists = false;
-                !!baseChunkData['items'] && boneItems.forEach(bone => {
-                    if (!!baseChunkData['items'] && Object.keys(baseChunkData['items']).includes(bone)) {
-                        bonesExists = true;
-                    }
-                });
-                if (!bonesExists) {
-                    tempValid = false;
-                } else {
-                    methods.push('Bury bones');
-                }
-            } else if (line === 'Combat+') {
-                let combatExists = false;
-                combatSkills.forEach(skill2 => {
-                    if (checkPrimaryMethod(skill2, valids, baseChunkData)) {
-                        combatExists = true;
-                    }
-                });
-                if (!combatExists) {
-                    tempValid = false;
-                } else {
-                    methods.push('Train combat');
-                }
-            } else if (line === 'Ranged+') {
-                let validRanged = false;
-                !!baseChunkData['items'] && rangedItems.forEach(set => {
-                    let innerValid = true;
-                    set.forEach(item => {
-                        if (!!baseChunkData['items'] && !Object.keys(baseChunkData['items']).includes(item.replaceAll(/\*/g, ''))) {
-                            innerValid = false;
-                        } else if (item.includes('*')) {
-                            let tempSecondary = true;
-                            item.includes('*') && !!baseChunkData['items'][item.replaceAll(/\*/g, '')] && Object.keys(baseChunkData['items'][item.replaceAll(/\*/g, '')]).forEach(source => {
-                                if ((!baseChunkData['items'][item.replaceAll(/\*/g, '')][source].includes('secondary-') && !processingSkill[baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]]) || (baseChunkData['items'][item.replaceAll(/\*/g, '')][source].includes('primary-') && !processingSkill[baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]]) || baseChunkData['items'][item.replaceAll(/\*/g, '')][source] === 'shop' || rules['Secondary Primary']) {
-                                    tempSecondary = false;
-                                }
-                            });
-                            tempSecondary && (innerValid = false);
-                        }
-                    });
-                    innerValid && (validRanged = true);
-                    innerValid && methods.push(set);
-                });
-                if (!validRanged) {
-                    tempValid = false;
-                }
-            } else {
-                tempValid = false;
-            }
-        });
-        if (Array.isArray(methods[0])) {
-            let tempMethods = [];
-            let i = 0;
-            methods.forEach(method => {
-                if (Array.isArray(method)) {
-                    tempMethods[i] = '';
-                    method.forEach(it => {
-                        tempMethods[i] += it.replaceAll('*', '') + ' + ';
-                    });
-                    tempMethods[i] += methods[methods.length - 1];
-                    i++;
                 }
             });
-            methods = tempMethods;
+            !primaryValid && (tempValid = false);
+        } else if (line === 'Monster+') {
+            let monsterExists = !!baseChunkData['monsters'] && Object.keys(baseChunkData['monsters']).length > 0;
+            if (!monsterExists) {
+                tempValid = false;
+            } else {
+                methods.push('Attack monsters');
+            }
+        } else if (line === 'Bones+') {
+            let bonesExists = false;
+            !!baseChunkData['items'] && boneItems.forEach(bone => {
+                if (!!baseChunkData['items'] && Object.keys(baseChunkData['items']).includes(bone)) {
+                    bonesExists = true;
+                }
+            });
+            if (!bonesExists) {
+                tempValid = false;
+            } else {
+                methods.push('Bury bones');
+            }
+        } else if (line === 'Combat+') {
+            let combatExists = false;
+            combatSkills.forEach(skill2 => {
+                if (checkPrimaryMethod(skill2, valids, baseChunkData)) {
+                    combatExists = true;
+                }
+            });
+            if (!combatExists) {
+                tempValid = false;
+            } else {
+                methods.push('Train combat');
+            }
+        } else if (line === 'Ranged+') {
+            let validRanged = false;
+            !!baseChunkData['items'] && rangedItems.forEach(set => {
+                let innerValid = true;
+                set.forEach(item => {
+                    if (!!baseChunkData['items'] && !Object.keys(baseChunkData['items']).includes(item.replaceAll(/\*/g, ''))) {
+                        innerValid = false;
+                    } else if (item.includes('*')) {
+                        let tempSecondary = true;
+                        item.includes('*') && !!baseChunkData['items'][item.replaceAll(/\*/g, '')] && Object.keys(baseChunkData['items'][item.replaceAll(/\*/g, '')]).forEach(source => {
+                            if ((!baseChunkData['items'][item.replaceAll(/\*/g, '')][source].includes('secondary-') && !processingSkill[baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]]) || (baseChunkData['items'][item.replaceAll(/\*/g, '')][source].includes('primary-') && !processingSkill[baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]]) || baseChunkData['items'][item.replaceAll(/\*/g, '')][source] === 'shop' || rules['Secondary Primary']) {
+                                tempSecondary = false;
+                            }
+                        });
+                        tempSecondary && (innerValid = false);
+                    }
+                });
+                innerValid && (validRanged = true);
+                innerValid && methods.push(set);
+            });
+            if (!validRanged) {
+                tempValid = false;
+            }
+        } else {
+            tempValid = false;
         }
-        valid = tempValid;
-        if (!valid) {
-            methods = [];
-        }
+    });
+    if (Array.isArray(methods[0])) {
+        let tempMethods = [];
+        let i = 0;
+        methods.forEach(method => {
+            if (Array.isArray(method)) {
+                tempMethods[i] = '';
+                method.forEach(it => {
+                    tempMethods[i] += it.replaceAll('*', '') + ' + ';
+                });
+                tempMethods[i] += methods[methods.length - 1];
+                i++;
+            }
+        });
+        methods = tempMethods;
+    }
+    valid = tempValid;
+    if (hardValid) {
+        valid = true;
+    }
+    if (!valid) {
+        methods = [];
     }
     if (wantMethods) {
         return methods;
