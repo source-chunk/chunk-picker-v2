@@ -9490,6 +9490,7 @@
 				"Level": 75,
 				"Objects": ["Tree patch"],
 				"Output": "Magic roots",
+				"Output Object": "Magic tree",
 				"Primary": false
 			},
 			"Grow a ~|mahogany tree|~": {
@@ -9497,6 +9498,7 @@
 				"Items": ["Empty plant pot", "Gardening trowel", "Rake", "Mahogany seed"],
 				"Level": 55,
 				"Objects": ["Hardwood tree patch"],
+				"Output Object": "Mahogany",
 				"Primary": false,
 				"Priority": 2
 			},
@@ -9506,6 +9508,7 @@
 				"Level": 45,
 				"Objects": ["Tree patch"],
 				"Output": "Maple roots",
+				"Output Object": "Maple tree",
 				"Primary": false,
 				"Priority": 2
 			},
@@ -9579,6 +9582,7 @@
 				"Items": ["Empty plant pot", "Gardening trowel", "Rake", "Redwood tree seed"],
 				"Level": 90,
 				"Objects": ["Redwood tree patch"],
+				"Output Object": "Redwood",
 				"Primary": false
 			},
 			"Grow a ~|rosemary|~": {
@@ -9617,6 +9621,7 @@
 				"Items": ["Empty plant pot", "Gardening trowel", "Rake", "Teak seed"],
 				"Level": 35,
 				"Objects": ["Hardwood tree patch"],
+				"Output Object": "Teak",
 				"Primary": false
 			},
 			"Grow a ~|tomato|~": {
@@ -9649,6 +9654,7 @@
 				"Level": 30,
 				"Objects": ["Tree patch"],
 				"Output": "Willow tree loot",
+				"Output Object": "Willow",
 				"Primary": false
 			},
 			"Grow a ~|woad leaf|~": {
@@ -9665,6 +9671,7 @@
 				"Level": 60,
 				"Objects": ["Tree patch"],
 				"Output": "Yew roots",
+				"Output Object": "Yew",
 				"Primary": false
 			},
 			"Grow an ~|apple tree|~": {
@@ -9698,6 +9705,7 @@
 				"Level": 15,
 				"Objects": ["Tree patch"],
 				"Output": "Oak roots",
+				"Output Object": "Oak",
 				"Primary": false
 			},
 			"Grow an ~|onion|~": {
@@ -15997,6 +16005,84 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Imbue a black mask": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Black mask (10)"],
+				"Output": "Black mask (10) (i)"
+			},
+			"Imbue a slayer helmet": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Slayer helmet"],
+				"Output": "Slayer helmet (i)"
+			},
+			"Imbue a salve amulet": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Salve amulet"],
+				"Output": "Salve amulet(i)"
+			},
+			"Imbue a salve amulet (e)": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Salve amulet (e)"],
+				"Output": "Salve amulet(ei)"
+			},
+			"Imbue a ring of the gods": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Ring of the gods"],
+				"Output": "Ring of the gods (i)"
+			},
+			"Imbue a ring of suffering": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Ring of suffering"],
+				"Output": "Ring of suffering (i)"
+			},
+			"Imbue a berserker ring": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Berserker ring"],
+				"Output": "Berserker ring (i)"
+			},
+			"Imbue a warrior ring": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Warrior ring"],
+				"Output": "Warrior ring (i)"
+			},
+			"Imbue a archers ring": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Archers ring"],
+				"Output": "Archers ring (i)"
+			},
+			"Imbue a seers ring": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Seers ring"],
+				"Output": "Seers ring (i)"
+			},
+			"Imbue a tyrannical ring": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Tyrannical ring"],
+				"Output": "Tyrannical ring (i)"
+			},
+			"Imbue a treasonous ring": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Treasonous ring"],
+				"Output": "Treasonous ring (i)"
+			},
+			"Imbue a granite ring": {
+				"Category": ["Minigame"],
+				"Chunks": ["10288"],
+				"Items": ["Granite ring"],
+				"Output": "Granite ring (i)"
+			},
 			"Ask Murky Matt to enchant a ruby ring": {
 				"Chunks": ["12598"],
 				"Items": ["Ruby ring"],
@@ -19094,25 +19180,25 @@
 				"Category": ["Pouch"],
 				"Items": ["Giant pouch"],
 				"Level": 75,
-				"Primary": true
+				"Primary": false
 			},
 			"Store essence in a ~|large pouch|~": {
 				"Category": ["Pouch"],
 				"Items": ["Large pouch"],
 				"Level": 50,
-				"Primary": true
+				"Primary": false
 			},
 			"Store essence in a ~|medium pouch|~": {
 				"Category": ["Pouch"],
 				"Items": ["Medium pouch"],
 				"Level": 25,
-				"Primary": true
+				"Primary": false
 			},
 			"Store essence in a ~|small pouch|~": {
 				"Category": ["Pouch"],
 				"Items": ["Small pouch"],
 				"Level": 1,
-				"Primary": true,
+				"Primary": false,
 				"Priority": 3
 			}
 		},
@@ -22914,22 +23000,26 @@
 			"Obtain a ~|small pouch|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Small pouch"]
+				"Items": ["Small pouch"],
+				"Requirements": ["Runecraft"]
 			},
 			"Obtain a ~|medium pouch|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Medium pouch"]
+				"Items": ["Medium pouch"],
+				"Requirements": ["Runecraft"]
 			},
 			"Obtain a ~|large pouch|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Large pouch"]
+				"Items": ["Large pouch"],
+				"Requirements": ["Runecraft"]
 			},
 			"Obtain a ~|giant pouch|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Giant pouch"]
+				"Items": ["Giant pouch"],
+				"Requirements": ["Runecraft"]
 			},
 			"Obtain an ~|Imcando hammer|~": {
 				"Category": ["BIS Skilling"],
@@ -22959,7 +23049,8 @@
 			"Obtain a ~|ring of endurance|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Ring of endurance (uncharged)"]
+				"Items": ["Ring of endurance (uncharged)"],
+				"Requirements": ["Agility"]
 			},
 			"Obtain the ~|rogue equipment|~": {
 				"Category": ["BIS Skilling"],
@@ -22969,7 +23060,8 @@
 			"Obtain ~|gloves of silence|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Gloves of silence"]
+				"Items": ["Gloves of silence"],
+				"Requirements": ["Hunter"]
 			},
 			"Obtain a ~|seed box|~": {
 				"Category": ["BIS Skilling"],
@@ -22984,13 +23076,15 @@
 			"Obtain a ~|herb sack|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Herb sack"]
+				"Items": ["Herb sack"],
+				"Requirements": ["Herblore"]
 			},
 			"Obtain a ~|crystal pickaxe|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
 				"Items": ["Crystal pickaxe"],
 				"Priority": 1,
+				"Requirements": ["Mining"],
 				"Set": "BIS Pickaxe"
 			},
 			"Obtain an ~|infernal pickaxe|~": {
@@ -22998,6 +23092,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Infernal pickaxe"],
 				"Priority": 2,
+				"Requirements": ["Mining"],
 				"Set": "BIS Pickaxe"
 			},
 			"Obtain a ~|dragon pickaxe|~": {
@@ -23005,6 +23100,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Dragon pickaxe"],
 				"Priority": 3,
+				"Requirements": ["Mining"],
 				"Set": "BIS Pickaxe"
 			},
 			"Obtain a ~|rune pickaxe|~": {
@@ -23012,6 +23108,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Rune pickaxe"],
 				"Priority": 4,
+				"Requirements": ["Mining"],
 				"Set": "BIS Pickaxe"
 			},
 			"Obtain an ~|adamant pickaxe|~": {
@@ -23019,6 +23116,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Adamant pickaxe"],
 				"Priority": 5,
+				"Requirements": ["Mining"],
 				"Set": "BIS Pickaxe"
 			},
 			"Obtain a ~|mithril pickaxe|~": {
@@ -23026,6 +23124,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Mithril pickaxe"],
 				"Priority": 6,
+				"Requirements": ["Mining"],
 				"Set": "BIS Pickaxe"
 			},
 			"Obtain a ~|black pickaxe|~": {
@@ -23033,6 +23132,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Black pickaxe"],
 				"Priority": 7,
+				"Requirements": ["Mining"],
 				"Set": "BIS Pickaxe"
 			},
 			"Obtain a ~|steel pickaxe|~": {
@@ -23040,6 +23140,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Steel pickaxe"],
 				"Priority": 8,
+				"Requirements": ["Mining"],
 				"Set": "BIS Pickaxe"
 			},
 			"Obtain an ~|iron pickaxe|~": {
@@ -23091,6 +23192,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Crystal harpoon"],
 				"Priority": 1,
+				"Requirements": ["Fishing"],
 				"Set": "BIS Harpoon"
 			},
 			"Obtain an ~|infernal harpoon|~": {
@@ -23098,6 +23200,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Infernal harpoon"],
 				"Priority": 2,
+				"Requirements": ["Fishing"],
 				"Set": "BIS Harpoon"
 			},
 			"Obtain a ~|dragon harpoon|~": {
@@ -23105,6 +23208,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Dragon harpoon"],
 				"Priority": 3,
+				"Requirements": ["Fishing"],
 				"Set": "BIS Harpoon"
 			},
 			"Obtain a ~|barb-tail harpoon|~": {
@@ -23112,6 +23216,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Barb-tail harpoon"],
 				"Priority": 4,
+				"Requirements": ["Fishing"],
 				"Set": "BIS Harpoon"
 			},
 			"Obtain the ~|angler's outfit|~": {
@@ -23157,6 +23262,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Crystal axe"],
 				"Priority": 1,
+				"Requirements": ["Woodcutting"],
 				"Set": "BIS Axe"
 			},
 			"Obtain an ~|infernal axe|~": {
@@ -23164,6 +23270,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Infernal axe"],
 				"Priority": 2,
+				"Requirements": ["Woodcutting"],
 				"Set": "BIS Axe"
 			},
 			"Obtain a ~|dragon axe|~": {
@@ -23171,6 +23278,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Dragon axe"],
 				"Priority": 3,
+				"Requirements": ["Woodcutting"],
 				"Set": "BIS Axe"
 			},
 			"Obtain a ~|rune axe|~": {
@@ -23178,6 +23286,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Rune axe"],
 				"Priority": 4,
+				"Requirements": ["Woodcutting"],
 				"Set": "BIS Axe"
 			},
 			"Obtain an ~|adamant axe|~": {
@@ -23185,6 +23294,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Adamant axe"],
 				"Priority": 5,
+				"Requirements": ["Woodcutting"],
 				"Set": "BIS Axe"
 			},
 			"Obtain a ~|mithril axe|~": {
@@ -23192,6 +23302,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Mithril axe"],
 				"Priority": 6,
+				"Requirements": ["Woodcutting"],
 				"Set": "BIS Axe"
 			},
 			"Obtain a ~|black axe|~": {
@@ -23199,6 +23310,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Black axe"],
 				"Priority": 7,
+				"Requirements": ["Woodcutting"],
 				"Set": "BIS Axe"
 			},
 			"Obtain a ~|steel axe|~": {
@@ -23206,6 +23318,7 @@
 				"Label": "BIS Skilling",
 				"Items": ["Steel axe"],
 				"Priority": 8,
+				"Requirements": ["Woodcutting"],
 				"Set": "BIS Axe"
 			},
 			"Obtain an ~|iron axe|~": {
@@ -23225,12 +23338,14 @@
 			"Obtain the ~|lumberjack outfit|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Lumberjack+"]
+				"Items": ["Lumberjack+"],
+				"Requirements": ["Woodcutting"]
 			},
 			"Obtain the ~|farmer's outfit|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Farmer's+"]
+				"Items": ["Farmer's+"],
+				"Requirements": ["Woodcutting"]
 			},
 			"Obtain ~|Gricoller's can|~": {
 				"Category": ["BIS Skilling"],
@@ -28456,7 +28571,7 @@
 				"5785": true
 			},
 			"Monster": {
-				"Hill Giant": 13,
+				"Hill Giant": 12,
 				"Sergeant (Shayzien)": 1,
 				"Soldier (Shayzien)": 2
 			},
@@ -28591,11 +28706,11 @@
 				"6812": true
 			},
 			"Monster": {
-				"Fire giant": 9,
-				"Hill giant": 8,
+				"Fire giant": 8,
+				"Hill Giant (Dark)": 8,
 				"Moss giant": 10
 			},
-			"Name": "Giant Cave",
+			"Name": "Giant's Den",
 			"NPC": {
 				"Farolt": 1
 			},
@@ -43309,8 +43424,7 @@
 			},
 			"Monster": {
 				"Giant rat": 2,
-				"Man": 1,
-				"Skippy": 1
+				"Man": 1
 			},
 			"NPC": {
 				"A pile of broken glass": 1,
@@ -53228,7 +53342,7 @@
 				"Greater Nechryael": 14,
 				"Greater demon": 10,
 				"Hellhound": 9,
-				"Hill Giant": 13,
+				"Hill Giant (Dark)": 13,
 				"Iron dragon": 2,
 				"Lesser demon": 8,
 				"Magic axe": 4,
@@ -54367,6 +54481,23 @@
 			},
 			"Spawn": {
 				"Lamp (Spirits of the Elid)": 1
+			}
+		},
+		"Giant's Den": {
+			"Connect": {
+				"5688": true,
+				"6812": true
+			},
+			"Monster": {
+				"Fire giant": 8,
+				"Hill Giant (Dark)": 8,
+				"Moss giant": 10
+			},
+			"NPC": {
+				"Farolt": 1
+			},
+			"Object": {
+				"Strange wall": 1
 			}
 		},
 		"Glarial's Tomb": {
@@ -58931,7 +59062,6 @@
 		"rangedItems": [
 			["Crossbow", "Bronze bolts*"],
 			["Phoenix crossbow", "Bronze bolts*"],
-			["Phoenix crossbow", "Bronze bolts*"],
 			["Shortbow", "Bronze arrow*"],
 			["Shortbow", "Iron arrow*"],
 			["Longbow", "Bronze arrow*"],
@@ -63427,6 +63557,37 @@
 			"Nothing": "95/100"
 		},
 		"Hill Giant": {
+			"Beer": "6/128",
+			"Big bones": "Always",
+			"Body talisman": "2/128",
+			"Chaos rune": "1/128",
+			"Clue scroll (beginner)": "1/50",
+			"Coins": "2/128",
+			"Cosmic rune": "2/128",
+			"Curved bone": "1/5012.5",
+			"Death rune": "1/128",
+			"Ensouled giant head": "1/25",
+			"Fire rune": "3/128",
+			"GeneralSeedDropTable+": "18/128",
+			"Giant champion scroll": "1/5000",
+			"Giant key": "1/128",
+			"HerbDropTable+": "7/128",
+			"Iron arrow": "6/128",
+			"Iron dagger": "4/128",
+			"Iron full helm": "5/128",
+			"Iron kiteshield": "3/128",
+			"Law rune": "3/128",
+			"Limpwurt root": "11/128",
+			"Long bone": "1/400",
+			"Mind rune": "2/128",
+			"Nature rune": "2/128",
+			"Nothing": "1/128",
+			"Steel arrow": "2/128",
+			"Steel longsword": "2/128",
+			"Water rune": "3/128",
+			"GemDropTable+": "1/42.67"
+		},
+		"Hill Giant (Dark)": {
 			"Beer": "6/128",
 			"Big bones": "Always",
 			"Body talisman": "2/128",

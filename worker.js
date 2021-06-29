@@ -193,40 +193,55 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         let fullyValid;
         Object.keys(newValids).forEach(skill => {
-            skill !== 'Extra' && skill !== 'BiS' && checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(newValids[skill]).forEach(challenge => {
-                fullyValid = true;
-                !!chunkInfo['challenges'][skill][challenge]['Tasks'] && chunkInfo['challenges'][skill][challenge]['Tasks'].forEach(subTask => {
-                    if ((!!valids[skill] && (!valids[skill].hasOwnProperty(subTask) || !newValids[skill].hasOwnProperty(subTask))) || (backlog[skill] && backlog[skill].hasOwnProperty(subTask))) {
-                        fullyValid = false;
-                        delete newValids[skill][challenge];
-                        delete valids[skill][challenge];
-                        if (Object.keys(newValids[skill]).length <= 0) {
-                            delete newValids[skill];
-                        }
-                        if (Object.keys(valids[skill]).length <= 0) {
-                            delete valids[skill];
-                        }
-                    }
-                });
-                if (!!chunkInfo['challenges'][skill][challenge]['BackupParent']) {
-                    if ((!!valids[skill] && (valids[skill].hasOwnProperty(chunkInfo['challenges'][skill][challenge]['BackupParent']) || newValids[skill].hasOwnProperty(chunkInfo['challenges'][skill][challenge]['BackupParent']))) || (backlog[skill] && backlog[skill].hasOwnProperty(chunkInfo['challenges'][skill][challenge]['BackupParent']))) {
-                        fullyValid = false;
-                        delete newValids[skill][challenge];
-                        delete valids[skill][challenge];
-                        if (Object.keys(newValids[skill]).length <= 0) {
-                            delete newValids[skill];
-                        }
-                        if (Object.keys(valids[skill]).length <= 0) {
-                            delete valids[skill];
-                        }
-                    }
-                }
-                if (fullyValid) {
+            skill !== 'BiS' && checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(newValids[skill]).forEach(challenge => {
+                if (skill !== 'Extra' || chunkInfo['challenges'][skill][challenge].hasOwnProperty('Requirements')) {
+                    fullyValid = true;
                     !!chunkInfo['challenges'][skill][challenge]['Tasks'] && chunkInfo['challenges'][skill][challenge]['Tasks'].forEach(subTask => {
-                        if (!!chunkInfo['challenges'][skill][challenge]['BaseQuest'] && !!chunkInfo['challenges'][skill][subTask]['BaseQuest'] && chunkInfo['challenges'][skill][challenge]['BaseQuest'] === chunkInfo['challenges'][skill][subTask]['BaseQuest'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
-                            newValids[skill].hasOwnProperty(subTask) && (newValids[skill][subTask] = false);
+                        if ((!!valids[skill] && (!valids[skill].hasOwnProperty(subTask) || !newValids[skill].hasOwnProperty(subTask))) || (backlog[skill] && backlog[skill].hasOwnProperty(subTask))) {
+                            fullyValid = false;
+                            delete newValids[skill][challenge];
+                            delete valids[skill][challenge];
+                            if (Object.keys(newValids[skill]).length <= 0) {
+                                delete newValids[skill];
+                            }
+                            if (Object.keys(valids[skill]).length <= 0) {
+                                delete valids[skill];
+                            }
                         }
                     });
+                    if (!!chunkInfo['challenges'][skill][challenge]['BackupParent']) {
+                        if ((!!valids[skill] && (valids[skill].hasOwnProperty(chunkInfo['challenges'][skill][challenge]['BackupParent']) || newValids[skill].hasOwnProperty(chunkInfo['challenges'][skill][challenge]['BackupParent']))) || (backlog[skill] && backlog[skill].hasOwnProperty(chunkInfo['challenges'][skill][challenge]['BackupParent']))) {
+                            fullyValid = false;
+                            delete newValids[skill][challenge];
+                            delete valids[skill][challenge];
+                            if (Object.keys(newValids[skill]).length <= 0) {
+                                delete newValids[skill];
+                            }
+                            if (Object.keys(valids[skill]).length <= 0) {
+                                delete valids[skill];
+                            }
+                        }
+                    }
+                    !!chunkInfo['challenges'][skill][challenge]['Requirements'] && chunkInfo['challenges'][skill][challenge]['Requirements'].forEach(req => {
+                        if (!checkPrimaryMethod(req, newValids, baseChunkData)) {
+                            fullyValid = false;
+                            delete newValids[skill][challenge];
+                            delete valids[skill][challenge];
+                            if (Object.keys(newValids[skill]).length <= 0) {
+                                delete newValids[skill];
+                            }
+                            if (Object.keys(valids[skill]).length <= 0) {
+                                delete valids[skill];
+                            }
+                        }
+                    });
+                    if (fullyValid) {
+                        !!chunkInfo['challenges'][skill][challenge]['Tasks'] && chunkInfo['challenges'][skill][challenge]['Tasks'].forEach(subTask => {
+                            if (!!chunkInfo['challenges'][skill][challenge]['BaseQuest'] && !!chunkInfo['challenges'][skill][subTask]['BaseQuest'] && chunkInfo['challenges'][skill][challenge]['BaseQuest'] === chunkInfo['challenges'][skill][subTask]['BaseQuest'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                                newValids[skill].hasOwnProperty(subTask) && (newValids[skill][subTask] = false);
+                            }
+                        });
+                    }
                 }
             });
             let extraSets = {};
@@ -293,11 +308,11 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             valids['Extra'] = {};
         }
         Object.keys(monsters).sort().forEach(monster => {
-            valids['Extra']['Kill ~|' + monster + '|~'] = 'Kill X';
+            valids['Extra']['Kill X ~|' + monster + '|~'] = 'Kill X';
             if (!chunkInfo['challenges']['Extra']) {
                 chunkInfo['challenges']['Extra'] = {};
             }
-            chunkInfo['challenges']['Extra']['Kill ~|' + monster + '|~'] = {
+            chunkInfo['challenges']['Extra']['Kill X ~|' + monster + '|~'] = {
                 'Category': ['Kill X'],
                 'Monsters': [monster],
                 'MonstersDetails': [monster],
@@ -322,7 +337,6 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             'Label': 'Skillcapes'
         }
     }
-
 
     !!chunkInfo['challenges'] && [...skillNames, 'Nonskill', 'Quest', 'Extra'].forEach(skill => {
         tempItemSkill[skill] = {};
