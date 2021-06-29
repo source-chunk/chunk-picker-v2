@@ -698,7 +698,7 @@ let futureChunkData = {};
 let highestOverall = {};
 
 // Patreon Test Server Data
-let onTestServer = true;
+let onTestServer = false;
 let patreonMaps = {
     'test': true, // testing
     'dev': true, // testing
@@ -713,7 +713,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.2.0");
+const myWorker = new Worker("./worker.js?v=4.2.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
