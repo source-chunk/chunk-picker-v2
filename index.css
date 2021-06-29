@@ -352,7 +352,6 @@ button.menu2 {
     z-index: 99 !important;
     bottom: 20px;
     width: 100%;
-    pointer-events: none;
 }
 
 .menu6 {

@@ -713,7 +713,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.2.2");
+const myWorker = new Worker("./worker.js?v=4.2.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2489,11 +2489,11 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
     let valid = false;
     let methods = [];
     let hardValid = false;
-    if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
-        hardValid = true;
-    } else if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
+    if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
         hardValid = true;
         methods.push('Manually added skill');
+    } else if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
+        hardValid = true;
     }
     let tempValid = true;
     !!universalPrimary[skill] && universalPrimary[skill].forEach(line => {
@@ -3014,7 +3014,7 @@ var addManualTask = function(challenge) {
             if (!manualTasks[skill]) {
                 manualTasks[skill] = {};
             }
-            manualTasks[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'];
+            manualTasks[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'] || true;
             chunkInfo['challenges'][skill][challenge]['Manual'] = true;
         } else {
             delete manualTasks[skill][challenge];
@@ -3244,7 +3244,7 @@ var closeHighest = function() {
 
 // Closes the methods modal
 var closeMethods = function() {
-    methodModalOpen = false;
+    methodsModalOpen = false;
     $('#myModal13').hide();
 }
 
