@@ -704,6 +704,7 @@ let patreonMaps = {
     'dev': true, // testing
     'src': true, // Source Chunk
     'kaa': true, // Chagohod
+    'jlo': true, // JLo
 };
 
 // ----------------------------------------------------------
@@ -713,7 +714,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.2.3");
+const myWorker = new Worker("./worker.js?v=4.2.4");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
