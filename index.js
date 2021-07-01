@@ -2,7 +2,7 @@
  * Created by Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Ids and Amehzyn for smoother zooming/url decoding
- * 06/09/2021
+ * 07/01/2021
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -59,6 +59,7 @@ var prevValuePinOld2 = '';                                                      
 var prevValuePinOld2Second = '';                                                // Previous valye of pin 2 at pin change
 var mid;                                                                        // Current value of map id
 var pin;                                                                        // Current value of pin
+var savedPin;                                                                   // Pin saved off from entry
 
 var midGood = false;                                                            // Is the map id valid
 var pinGood = true;                                                             // Is the pin valid
@@ -714,7 +715,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.2.4");
+const myWorker = new Worker("./worker.js?v=4.3.0");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -790,11 +791,11 @@ $(document).ready(function() {
     });
     
     $('.pin.new').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
             $(this).val(prevValuePinNew);
         } else {
             prevValuePinNew = e.target.value;
-            if (e.target.value.length === 4) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
                 $('#create2').prop('disabled', false);
             } else {
                 $('#create2').prop('disabled', true);
@@ -803,11 +804,11 @@ $(document).ready(function() {
     });
     
     $('.pin.old').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
             $(this).val(prevValuePinOld);
         } else {
             prevValuePinOld = e.target.value;
-            if (e.target.value.length === 4 || e.target.value.length === 0) {
+            if ((e.target.value.length >= 4 && e.target.value.length <= 8) || e.target.value.length === 0) {
                 pinGood = true;
                 checkIfGood();
             } else {
@@ -818,11 +819,11 @@ $(document).ready(function() {
     });
     
     $('.lock-pin').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
             $(this).val(prevValueLockPin);
         } else {
             prevValueLockPin = e.target.value;
-            if (e.target.value.length === 4) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
                 $('#lock-unlock').prop('disabled', false);
                 $('.lock-pin').removeClass('wrong');
             } else {
@@ -832,11 +833,11 @@ $(document).ready(function() {
     });
 
     $('.pin.entry').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
             $(this).val(prevValueLockPin);
         } else {
             prevValueLockPin = e.target.value;
-            if (e.target.value.length === 4) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
                 $('#unlock-entry').prop('disabled', false);
                 $('.pin.entry').removeClass('wrong');
             } else {
@@ -862,11 +863,11 @@ $(document).ready(function() {
     });
     
     $('.pin.old2.first').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
             $(this).val(prevValuePinOld2);
         } else {
             prevValuePinOld2 = e.target.value;
-            if (e.target.value.length === 4) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
                 pin2Good = true;
                 checkIfGood2();
             } else {
@@ -877,11 +878,11 @@ $(document).ready(function() {
     });
 
     $('.pin.old2.second').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 4) {
+        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
             $(this).val(prevValuePinOld2Second);
         } else {
             prevValuePinOld2Second = e.target.value;
-            if (e.target.value.length === 4) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
                 pin2SecondGood = true;
                 checkIfGood2();
             } else {
@@ -1217,11 +1218,9 @@ $(document).on({
                 let tempChunk2;
                 let tempChunkTime1;
                 let tempChunkTime2;
-                signedIn && firebase.auth().signInAnonymously().then(function() {
-                    if (!onTestServer) {
-                        myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
-                    }
-                }).catch(function(error) {console.log(error)});
+                if (signedIn && !onTestServer) {
+                    myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
+                }
                 for (let count = 1; count <= 5; count++) {
                     tempChunk1 = recent[count - 1];
                     tempChunkTime1 = recentTime[count - 1];
@@ -1360,11 +1359,9 @@ var pick = function(both) {
             let tempChunk2;
             let tempChunkTime1;
             let tempChunkTime2;
-            signedIn && firebase.auth().signInAnonymously().then(function() {
-                if (!onTestServer) {
-                    myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
-                }
-            }).catch(function(error) {console.log(error)});
+            if (signedIn && !onTestServer) {
+                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+            }
             for (let count = 1; count <= 5; count++) {
                 tempChunk1 = recent[count - 1];
                 tempChunkTime1 = recentTime[count - 1];
@@ -1452,11 +1449,9 @@ var pick = function(both) {
     let tempChunk2;
     let tempChunkTime1;
     let tempChunkTime2;
-    signedIn && firebase.auth().signInAnonymously().then(function() {
-        if (!onTestServer) {
-            myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
-        }
-    }).catch(function(error) {console.log(error)});
+    if (signedIn && !onTestServer) {
+        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+    }
     for (let count = 1; count <= 5; count++) {
         tempChunk1 = recent[count - 1];
         tempChunkTime1 = recentTime[count - 1];
@@ -1751,49 +1746,101 @@ var dismissHelp = function() {
 
 // Confirms if the pin entered is correct for the current map id
 var checkPin = function() {
-    var pin = $('.lock-pin').val();
+    savedPin = $('.lock-pin').val();
     myRef.once('value', function(snap) {
-        changeLocked(!(snap.val() && snap.val()['pin'] === pin));
+        changeLocked();
     });
 }
 
 // Confirms if the pin is entered correctly in the entry menu, and acts accordingly
 var unlockEntry = function() {
-    var pin = $('.pin.entry').val();
-    myRef.once('value', function(snap) {
-        $('#unlock-entry').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
-        setTimeout(function() {
-            if ((snap.val() && snap.val()['pin'] !== pin)) {
-                $('.pin.entry').addClass('animated shake wrong').select();
-                $('#unlock-entry').prop('disabled', true).html('Unlock');
-            } else {
-                firebase.auth().signInAnonymously().then(function() {signedIn = true}).catch(function(error) {console.log(error)});
-                $('.center').css('margin-top', '15px');
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').css('opacity', 0).show();
-                roll2On && $('.roll2').css('opacity', 0).show();
-                !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
-                rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
-                rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
-                $('#entry-menu').animate({'opacity': 0});
-                setTimeout(function() {
-                    $('#entry-menu').css('opacity', 1).hide();
-                    $('.pin.entry').val('');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').animate({'opacity': 1});
-                    roll2On && $('.roll2').animate({'opacity': 1});
-                    !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
-                    rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
-                    rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
-                    $('#unlock-entry').prop('disabled', false).html('Unlock');
-                    locked = false;
-                    inEntry = false;
-                    helpMenuOpenSoon && helpFunc();
-                    !onMobile && unlockChallenges();
-                }, 500);
-            }
+    savedPin = $('.pin.entry').val();
+    $('#unlock-entry').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
+    firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
+        if (!!methods && methods.length > 0) {
             setTimeout(function() {
-                $('.pin.entry').removeClass('animated shake');
-            }, 500);
-        }, 1000);
+                firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                    signedIn = true;
+                    $('.center').css('margin-top', '15px');
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').css('opacity', 0).show();
+                    roll2On && $('.roll2').css('opacity', 0).show();
+                    !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
+                    rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
+                    rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                    $('#entry-menu').animate({'opacity': 0});
+                    setTimeout(function() {
+                        $('#entry-menu').css('opacity', 1).hide();
+                        $('.pin.entry').val('');
+                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').animate({'opacity': 1});
+                        roll2On && $('.roll2').animate({'opacity': 1});
+                        !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
+                        rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
+                        rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
+                        $('#unlock-entry').prop('disabled', false).html('Unlock');
+                        locked = false;
+                        inEntry = false;
+                        helpMenuOpenSoon && helpFunc();
+                        !onMobile && unlockChallenges();
+                    }, 500);
+                }).catch((error) => {
+                    $('.pin.entry').addClass('animated shake wrong').select();
+                    $('#unlock-entry').prop('disabled', true).html('Unlock');
+                });
+                setTimeout(function() {
+                    $('.pin.entry').removeClass('animated shake');
+                }, 500);
+            }, 1000);
+        } else {
+            myRef.once('value', function(snap) {
+                if ((snap.val() && snap.val()['pin'] === savedPin)) {
+                    setTimeout(function() {
+                        firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                            signedIn = true;
+                            myRef.child('pin').remove();
+                            myRef.child('uid').set(userCredential.user.uid);
+                            userCredential.user.updateProfile({
+                                displayName: mid
+                            });
+                            $('.center').css('margin-top', '15px');
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').css('opacity', 0).show();
+                            roll2On && $('.roll2').css('opacity', 0).show();
+                            !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
+                            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
+                            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                            $('#entry-menu').animate({'opacity': 0});
+                            setTimeout(function() {
+                                $('#entry-menu').css('opacity', 1).hide();
+                                $('.pin.entry').val('');
+                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').animate({'opacity': 1});
+                                roll2On && $('.roll2').animate({'opacity': 1});
+                                !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
+                                rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
+                                rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
+                                $('#unlock-entry').prop('disabled', false).html('Unlock');
+                                locked = false;
+                                inEntry = false;
+                                helpMenuOpenSoon && helpFunc();
+                                !onMobile && unlockChallenges();
+                            }, 500);
+                        }).catch((error) => {
+                            $('.pin.entry').addClass('animated shake wrong').select();
+                            $('#unlock-entry').prop('disabled', true).html('Unlock');
+                        });
+                    }, 1000);
+                    setTimeout(function() {
+                        $('.pin.entry').removeClass('animated shake');
+                    }, 500);
+                } else {
+                    setTimeout(function() {
+                        $('.pin.entry').addClass('animated shake wrong').select();
+                        $('#unlock-entry').prop('disabled', true).html('Unlock');
+                        setTimeout(function() {
+                            $('.pin.entry').removeClass('animated shake');
+                        }, 500);
+                    }, 1000);
+                }
+            });
+        }
     });
 }
 
@@ -1860,7 +1907,7 @@ var prevPage = function(page) {
 var accessMap = function() {
     $('#access').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
     mid = $('.mid').removeClass('wrong').val().toLowerCase();
-    var pin = $('.pin.old').removeClass('wrong').val();
+    savedPin = $('.pin.old').removeClass('wrong').val();
     databaseRef.child('maps/' + mid).once('value', function(snap) {
         if (!snap.val()) {
             setTimeout(function() {
@@ -1870,36 +1917,93 @@ var accessMap = function() {
             }, 1000);
             return;
         }
-        if (pin && snap.val()['pin'] !== pin) {
-            setTimeout(function() {
-                $('.pin-err').css('visibility', 'visible');
-                $('.pin.old').addClass('wrong').select();
-                $('#access').text('Access my map');
-            }, 1000);
-            return;
-        }
-        if (pin) {
-            firebase.auth().signInAnonymously().then(function() {signedIn = true}).catch(function(error) {console.log(error)});
-            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
-            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
-            $('#entry-menu').hide();
-            $('.lock-opened').show();
-            $('.lock-closed').hide();
-            locked = false;
-            helpMenuOpenSoon && helpFunc();
+        if ($('.pin.old').val()) {
+            firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
+                myRef = firebase.database().ref('maps/' + mid);
+                if (!!methods && methods.length > 0) {
+                    setTimeout(function() {
+                        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                            signedIn = true;
+                            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
+                            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
+                            $('#entry-menu').hide();
+                            $('.lock-opened').show();
+                            $('.lock-closed').hide();
+                            locked = false;
+                            helpMenuOpenSoon && helpFunc();
+                            atHome = false;
+                            $('.loading').show();
+                            $('#page2b').hide();
+                            $('.background-img').hide();
+                            setupMap();
+                        }).catch((error) => {
+                            $('.pin-err').css('visibility', 'visible');
+                            $('.pin.old').addClass('wrong').select();
+                            $('#access').text('Access my map');
+                        });
+                        setTimeout(function() {
+                            $('.pin.entry').removeClass('animated shake');
+                        }, 500);
+                    }, 1000);
+                } else {
+                    myRef.once('value', function(snap) {
+                        if ((snap.val() && snap.val()['pin'] === savedPin)) {
+                            setTimeout(function() {
+                                firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                                    signedIn = true;
+                                    myRef.child('pin').remove();
+                                    myRef.child('uid').set(userCredential.user.uid);
+                                    userCredential.user.updateProfile({
+                                        displayName: mid
+                                    });
+                                    window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
+                                    document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
+                                    $('#entry-menu').hide();
+                                    $('.lock-opened').show();
+                                    $('.lock-closed').hide();
+                                    locked = false;
+                                    helpMenuOpenSoon && helpFunc();
+                                    myRef = firebase.database().ref('maps/' + mid);
+                                    atHome = false;
+                                    $('.loading').show();
+                                    $('#page2b').hide();
+                                    $('.background-img').hide();
+                                    setupMap();
+                                }).catch((error) => {
+                                    $('.pin-err').css('visibility', 'visible');
+                                    $('.pin.old').addClass('wrong').select();
+                                    $('#access').text('Access my map');
+                                });
+                            }, 1000);
+                            setTimeout(function() {
+                                $('.pin.entry').removeClass('animated shake');
+                            }, 500);
+                        } else {
+                            setTimeout(function() {
+                                $('.pin-err').css('visibility', 'visible');
+                                $('.pin.old').addClass('wrong').select();
+                                $('#access').text('Access my map');
+                                setTimeout(function() {
+                                    $('.pin.entry').removeClass('animated shake');
+                                }, 500);
+                            }, 1000);
+                        }
+                    });
+                }
+            });
         } else {
             window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
             document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
             $('.lock-closed, .lock-opened').hide();
             locked = true;
             inEntry = true;
+            myRef = firebase.database().ref('maps/' + mid);
+            atHome = false;
+            $('.loading').show();
+            $('#page2b').hide();
+            $('.background-img').hide();
+            setupMap();
         }
-        myRef = firebase.database().ref('maps/' + mid);
-        atHome = false;
-        $('.loading').show();
-        $('#page2b').hide();
-        $('.background-img').hide();
-        setupMap();
     });
 }
 
@@ -1918,35 +2022,34 @@ var changePin = function() {
             }, 1000);
             return;
         }
-        if (pinOld && snap.val()['pin'] !== pinOld) {
-            setTimeout(function() {
-                $('.pin-err').css('visibility', 'visible');
-                $('.pin.old2.first').addClass('wrong').select();
-                $('#change-pin').text('Change PIN');
-            }, 1000);
-            return;
-        }
-        firebase.auth().signInAnonymously().then(function() {
+
+        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pinOld + mid).then((userCredential) => {
             if (onTestServer) {
                 return;
             }
             signedIn = true;
             myRef = firebase.database().ref('maps/' + mid);
             if (!onTestServer) {
-                myRef.child('pin').set(pinNew);
+                firebase.auth().currentUser.updatePassword(pinNew + mid).then(() => {
+                    window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
+                    document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
+                    $('.lock-closed, .lock-opened').hide();
+                    locked = true;
+                    inEntry = true;
+                    atHome = false;
+                    helpMenuOpenSoon && helpFunc();
+                    $('.loading').show();
+                    $('#page8').hide();
+                    $('.background-img').hide();
+                    setupMap();
+                }).catch((error) => {console.log(error)});
             }
-            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
-            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
-            $('.lock-closed, .lock-opened').hide();
-            locked = true;
-            inEntry = true;
-            atHome = false;
-            helpMenuOpenSoon && helpFunc();
-            $('.loading').show();
-            $('#page8').hide();
-            $('.background-img').hide();
-            setupMap();
-        }).catch(function(error) {console.log(error)});
+        }).catch((error) => {
+            $('.pin-err').css('visibility', 'visible');
+            $('.pin.old2.first').addClass('wrong').select();
+            $('#change-pin').text('Change PIN');
+            return;
+        });
     });
 }
 
@@ -2329,7 +2432,7 @@ var fixNums = function(num) {
         }
     });
     innerLooped && selectedNum--;
-    if (isBroken || Object.keys(nums).filter(num => num > selectedChunks).length > 0) {
+    if (isBroken || Object.keys(nums).filter(num => num > selectedChunks).length > 0 || Object.keys(nums).length === 0) {
         resetNums();
     }
 }
@@ -4170,7 +4273,7 @@ var setUsername = function(old) {
     if (onTestServer) {
         return;
     }
-    signedIn && firebase.auth().signInAnonymously().then(function() {
+    signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
         myRef.child('userName').set(userName.toLowerCase());
         if (!!old && old !== '') {
             databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
@@ -4186,7 +4289,7 @@ var setData = function() {
     if (onTestServer) {
         return;
     }
-    signedIn && firebase.auth().signInAnonymously().then(function() {
+    if (signedIn && firebase.auth().currentUser) {
         myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
         Object.keys(rules).forEach(rule => {
             if (rules[rule] === undefined) {
@@ -4229,7 +4332,52 @@ var setData = function() {
             name: userName.toLowerCase(),
             score: unlockedChunks,
         });
-    }).catch(function(error) {console.log(error)});
+    } else if (signedIn && !firebase.auth().currentUser) {
+        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+            myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
+            Object.keys(rules).forEach(rule => {
+                if (rules[rule] === undefined) {
+                    rules[rule] = false;
+                }
+            });
+            myRef.update({rules});
+            if (!helpMenuOpen && !helpMenuOpenSoon) {
+                myRef.child('settings').update({'help': false});
+            }
+            myRef.update({recent});
+            myRef.update({recentTime});
+            myRef.update({randomLoot});
+            myRef.child('chunkinfo').update({checkedChallenges});
+            myRef.child('chunkinfo').update({completedChallenges});
+            myRef.child('chunkinfo').update({backlog});
+            myRef.child('chunkinfo').update({possibleAreas});
+            myRef.child('chunkinfo').update({manualTasks});
+
+            var tempJson = {};
+            Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
+                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            });
+            myRef.child('chunks/unlocked').set(tempJson);
+
+            tempJson = {};
+            Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
+                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            });
+            myRef.child('chunks/selected').set(tempJson);
+
+            tempJson = {};
+            Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
+                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            });
+            myRef.child('chunks/potential').set(tempJson);
+
+            highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
+                mid: mid,
+                name: userName.toLowerCase(),
+                score: unlockedChunks,
+            });
+        }).catch(function(error) {console.log(error)});
+    }
 }
 
 // Credit to Amehzyn
@@ -4287,10 +4435,13 @@ var rollMID = function() {
     var char1, char2, char3, char4, charSet;
     var badNums = true;
     var rollCount = 0;
+    savedPin = pin;
     if (onTestServer) {
         return;
     }
+    console.log('1');
     databaseRef.once('value', function(snap) {
+        console.log('2');
         while (badNums) {
             char1 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char2 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
@@ -4299,19 +4450,24 @@ var rollMID = function() {
             charSet = char1 + char2 + char3 + char4;
             !snap.val()['maps'][charSet] && (badNums = false);
             rollCount++;
+            console.log('2.x');
         }
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                var temp = snap.val()['template'];
-                temp.pin = pin;
-                databaseRef.child('maps/' + charSet).set(temp);
-            }
-        });
-        firebase.auth().signInAnonymously().then(function() {signedIn = true}).catch(function(error) {console.log(error)});
         mid = charSet;
+        console.log('3');
+        firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+            console.log('4');
+            signedIn = true;
+            var temp = snap.val()['template'];
+            temp.uid = userCredential.user.uid;
+            databaseRef.child('maps/' + charSet).set(temp);
+            userCredential.user.updateProfile({
+                displayName: mid
+            });
+        }).catch((error) => {console.log(error)});
+        
         $('#newmid').text(charSet.toUpperCase());
         $('.link').prop('href', 'https://source-chunk.github.io/chunk-picker-v2/?' + charSet).text('https://source-chunk.github.io/chunk-picker-v2/?' + charSet);
-    });
+    }).catch((error) => {console.log(error)});
 }
 
 // Checks if both the map id and pin are correct, and hides their respective error messages/allows button clicks if so
@@ -4333,40 +4489,92 @@ var checkIfGood2 = function() {
 }
 
 // Changes the lock state if pin is correct, otherwise displays error
-var changeLocked = function(lock) {
+var changeLocked = function() {
     $('#lock-unlock').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
-    setTimeout(function() {
-        if (lock) {
-            $('.lock-pin').addClass('animated shake wrong').select();
-            $('#lock-unlock').prop('disabled', true).html('Unlock');
-        } else {
-            firebase.auth().signInAnonymously().then(function() {signedIn = true}).catch(function(error) {console.log(error)});
-            $('.center').css('margin-top', '15px');
-            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .open-rules-container, .highest').css('opacity', 0).show();
-            roll2On && $('.roll2').css('opacity', 0).show();
-            !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
-            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
-            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
-            $('.lock-box').animate({'opacity': 0});
+    firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
+        if (!!methods && methods.length > 0) {
             setTimeout(function() {
-                $('.lock-box').css('opacity', 1).hide();
-                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .open-rules-container, .highest').animate({'opacity': 1});
-                roll2On && $('.roll2').animate({'opacity': 1});
-                !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
-                rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
-                rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
-                $('#lock-unlock').prop('disabled', false).html('Unlock');
-                locked = lock;
-                helpMenuOpenSoon && helpFunc();
-                unlockChallenges();
-                lockBoxOpen = false;
-            }, 500);
+                firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                    signedIn = true;
+                    $('.center').css('margin-top', '15px');
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .open-rules-container, .highest').css('opacity', 0).show();
+                    roll2On && $('.roll2').css('opacity', 0).show();
+                    !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
+                    rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
+                    rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                    $('.lock-box').animate({'opacity': 0});
+                    setTimeout(function() {
+                        $('.lock-box').css('opacity', 1).hide();
+                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .open-rules-container, .highest').animate({'opacity': 1});
+                        roll2On && $('.roll2').animate({'opacity': 1});
+                        !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
+                        rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
+                        rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
+                        $('#lock-unlock').prop('disabled', false).html('Unlock');
+                        locked = false;
+                        helpMenuOpenSoon && helpFunc();
+                        unlockChallenges();
+                        lockBoxOpen = false;
+                    }, 500);
+                }).catch((error) => {
+                    $('.lock-pin').addClass('animated shake wrong').select();
+                    $('#lock-unlock').prop('disabled', true).html('Unlock');
+                });
+                setTimeout(function() {
+                    $('.lock-pin').removeClass('animated shake');
+                }, 500);
+            }, 1000);
+        } else {
+            myRef.once('value', function(snap) {
+                if ((snap.val() && snap.val()['pin'] === savedPin)) {
+                    setTimeout(function() {
+                        firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                            signedIn = true;
+                            myRef.child('pin').remove();
+                            myRef.child('uid').set(userCredential.user.uid);
+                            userCredential.user.updateProfile({
+                                displayName: mid
+                            });
+                            $('.center').css('margin-top', '15px');
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .open-rules-container, .highest').css('opacity', 0).show();
+                            roll2On && $('.roll2').css('opacity', 0).show();
+                            !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
+                            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
+                            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                            $('.lock-box').animate({'opacity': 0});
+                            setTimeout(function() {
+                                $('.lock-box').css('opacity', 1).hide();
+                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .open-rules-container, .highest').animate({'opacity': 1});
+                                roll2On && $('.roll2').animate({'opacity': 1});
+                                !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
+                                rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
+                                rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
+                                $('#lock-unlock').prop('disabled', false).html('Unlock');
+                                locked = false;
+                                helpMenuOpenSoon && helpFunc();
+                                unlockChallenges();
+                                lockBoxOpen = false;
+                            }, 500);
+                        }).catch((error) => {
+                            $('.lock-pin').addClass('animated shake wrong').select();
+                            $('#lock-unlock').prop('disabled', true).html('Unlock');
+                        });
+                    }, 1000);
+                    setTimeout(function() {
+                        $('.lock-pin').removeClass('animated shake');
+                    }, 500);
+                } else {
+                    setTimeout(function() {
+                        $('.lock-pin').addClass('animated shake wrong').select();
+                        $('#lock-unlock').prop('disabled', true).html('Unlock');
+                        setTimeout(function() {
+                            $('.lock-pin').removeClass('animated shake');
+                        }, 500);
+                    }, 1000);
+                }
+            });
         }
-        setTimeout(function() {
-            $('.lock-pin').removeClass('animated shake');
-            locked = lock;
-        }, 500);
-    }, 1000);
+    });
 }
 
 // Closes the lock box
