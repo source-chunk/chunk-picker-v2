@@ -2566,7 +2566,7 @@
 				"Primary": true,
 				"Priority": 94
 			},
-			"Build a ~|fency hedge|~": {
+			"Build a ~|fancy hedge|~": {
 				"Category": ["InsidePOH"],
 				"Chunks": ["Player-owned house"],
 				"Items": ["Watering can+", "Fancy hedge (bagged)"],
