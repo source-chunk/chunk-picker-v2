@@ -73,6 +73,10 @@ onmessage = function(e) {
     bossMonsters = eGlobal.data[30];
     minigameShops = eGlobal.data[31];
 
+    if (rareDropNum === "1/0") {
+        rareDropNum = "1/999999999999999";
+    }
+
     type === 'current' && (chunks = getChunkAreas(chunks));
     baseChunkData = gatherChunksInfo(chunks);
     globalValids = calcChallenges(chunks, baseChunkData);

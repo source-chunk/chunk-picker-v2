@@ -233,7 +233,7 @@ let rules = {
 
 let ruleNames = {
     "Skillcape": "Must obtain skillcapes",
-    "Rare Drop": "Chunk tasks only use drop more common than 1/X",
+    "Rare Drop": "Chunk tasks only use drop more common than 1/X (set to 0 to include all drops)",
     "Pouch": "Using Runecraft pouches count as chunk tasks",
     "InsidePOH": "Crafting furniture inside a POH can count as a chunk task",
     "Construction Milestone": "Miscellaneous Construction milestones (e.g. House location/style, servants, etc) can count for chunk tasks",
@@ -715,7 +715,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.1");
+const myWorker = new Worker("./worker.js?v=4.3.2");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3635,7 +3635,7 @@ var showRules = function() {
                 if (rule === 'Kill X') {
                     $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><input class="noscroll" type='checkbox' ${rules[rule] && "checked"} onclick="checkOffRules()" ${(viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /><span class='noscroll'>` + ruleNames[rule].split('X-amount')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<input type='number' class='x-num-input' min='1' value="${rules['Kill X Amount']}" onchange="checkOffRules()" /> ` + ruleNames[rule].split('X-amount')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</span></div>');
                 } else if (rule === 'Rare Drop') {
-                    $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><span class='noscroll'>` + ruleNames[rule].split('/X')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + ` / <input type='number' class='rare-num-input' min='1' value="${rules['Rare Drop Amount']}" onchange="checkOffRules()" /> ` + ruleNames[rule].split('/X')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</span></div>');
+                    $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><span class='noscroll'>` + ruleNames[rule].split('/X')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + ` / <input type='number' class='rare-num-input' min='0' value="${rules['Rare Drop Amount']}" onchange="checkOffRules()" /> ` + ruleNames[rule].split('/X')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</span></div>');
                 } else {
                     $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><input class="noscroll" type='checkbox' ${rules[rule] && "checked"} onclick="checkOffRules()" ${(viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /><span class='noscroll'>` + ruleNames[rule].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</span></div>');
                 }
@@ -3916,8 +3916,8 @@ var checkOffRules = function(didRedo, startup) {
             }
             rules[rule] = $('.x-num-input').val();
         } else if (rule === 'Rare Drop Amount') {
-            if ($('.rare-num-input').val() < 1) {
-                $('.rare-num-input').val(1);
+            if ($('.rare-num-input').val() < 0) {
+                $('.rare-num-input').val(0);
             }
             rules[rule] = $('.rare-num-input').val();
         } else {
