@@ -233,7 +233,7 @@ let rules = {
 
 let ruleNames = {
     "Skillcape": "Must obtain skillcapes",
-    "Rare Drop": "Drops greater than 1/X can count for chunk tasks",
+    "Rare Drop": "Chunk tasks only use drop more common than 1/X",
     "Pouch": "Using Runecraft pouches count as chunk tasks",
     "InsidePOH": "Crafting furniture inside a POH can count as a chunk task",
     "Construction Milestone": "Miscellaneous Construction milestones (e.g. House location/style, servants, etc) can count for chunk tasks",
@@ -715,7 +715,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.0");
+const myWorker = new Worker("./worker.js?v=4.3.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1796,8 +1796,9 @@ var unlockEntry = function() {
                     setTimeout(function() {
                         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                             signedIn = true;
-                            myRef.child('pin').remove();
-                            myRef.child('uid').set(userCredential.user.uid);
+                            myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                myRef.child('pin').remove();
+                            });
                             userCredential.user.updateProfile({
                                 displayName: mid
                             });
@@ -1951,8 +1952,9 @@ var accessMap = function() {
                             setTimeout(function() {
                                 firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                                     signedIn = true;
-                                    myRef.child('pin').remove();
-                                    myRef.child('uid').set(userCredential.user.uid);
+                                    myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                        myRef.child('pin').remove();
+                                    });
                                     userCredential.user.updateProfile({
                                         displayName: mid
                                     });
@@ -3633,7 +3635,7 @@ var showRules = function() {
                 if (rule === 'Kill X') {
                     $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><input class="noscroll" type='checkbox' ${rules[rule] && "checked"} onclick="checkOffRules()" ${(viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /><span class='noscroll'>` + ruleNames[rule].split('X-amount')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<input type='number' class='x-num-input' min='1' value="${rules['Kill X Amount']}" onchange="checkOffRules()" /> ` + ruleNames[rule].split('X-amount')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</span></div>');
                 } else if (rule === 'Rare Drop') {
-                    $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><input class="noscroll" type='checkbox' ${rules[rule] && "checked"} onclick="checkOffRules()" ${(viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /><span class='noscroll'>` + ruleNames[rule].split('/X')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + ` / <input type='number' class='rare-num-input' min='1' value="${rules['Rare Drop Amount']}" onchange="checkOffRules()" /> ` + ruleNames[rule].split('/X')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</span></div>');
+                    $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><span class='noscroll'>` + ruleNames[rule].split('/X')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + ` / <input type='number' class='rare-num-input' min='1' value="${rules['Rare Drop Amount']}" onchange="checkOffRules()" /> ` + ruleNames[rule].split('/X')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</span></div>');
                 } else {
                     $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><input class="noscroll" type='checkbox' ${rules[rule] && "checked"} onclick="checkOffRules()" ${(viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /><span class='noscroll'>` + ruleNames[rule].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</span></div>');
                 }
@@ -4439,9 +4441,7 @@ var rollMID = function() {
     if (onTestServer) {
         return;
     }
-    console.log('1');
     databaseRef.once('value', function(snap) {
-        console.log('2');
         while (badNums) {
             char1 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char2 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
@@ -4450,18 +4450,16 @@ var rollMID = function() {
             charSet = char1 + char2 + char3 + char4;
             !snap.val()['maps'][charSet] && (badNums = false);
             rollCount++;
-            console.log('2.x');
         }
         mid = charSet;
-        console.log('3');
         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
-            console.log('4');
             signedIn = true;
-            var temp = snap.val()['template'];
-            temp.uid = userCredential.user.uid;
-            databaseRef.child('maps/' + charSet).set(temp);
             userCredential.user.updateProfile({
                 displayName: mid
+            }).then(() => {
+                var temp = snap.val()['template'];
+                temp.uid = userCredential.user.uid;
+                databaseRef.child('maps/' + charSet).set(temp);
             });
         }).catch((error) => {console.log(error)});
         
@@ -4530,8 +4528,9 @@ var changeLocked = function() {
                     setTimeout(function() {
                         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                             signedIn = true;
-                            myRef.child('pin').remove();
-                            myRef.child('uid').set(userCredential.user.uid);
+                            myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                myRef.child('pin').remove();
+                            });
                             userCredential.user.updateProfile({
                                 displayName: mid
                             });
