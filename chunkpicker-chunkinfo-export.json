@@ -28706,8 +28706,8 @@
 		"5690": {
 			"Monster": {
 				"Giant rat": 2,
-				"Guard (Shayzien)": 5,
-				"Head Guard": 1,
+				"Sergeant (Shayzien)": 1,
+				"Soldier (Shayzien)": 5,
 				"Lizardman shaman": 1,
 				"Rat": 1,
 				"Skeleton%2FArmed": 1,
@@ -29252,6 +29252,8 @@
 				"Boar": 26,
 				"Giant rat": 3,
 				"Giant spider": 4,
+				"Guard (Shayzien)": 12,
+				"Head Guard": 3,
 				"Sergeant (Shayzien)": 2,
 				"Soldier (Shayzien)": 12
 			},
@@ -29592,7 +29594,7 @@
 				"Dark wizard": 2,
 				"Guard dog": 1,
 				"Imp": 1,
-				"Guard (Shayzien)": 25,
+				"Guard (Shayzien)": 22,
 				"Head Guard": 2,
 				"Lesser demon": 1
 			},
@@ -30634,6 +30636,7 @@
 		},
 		"6970": {
 			"Monster": {
+				"Guard (Shayzien)": 1,
 				"Man": 4,
 				"Mugger": 1,
 				"Pirate%2FPlain": 4,
@@ -30669,6 +30672,7 @@
 		},
 		"6971": {
 			"Monster": {
+				"Guard (Shayzien)": 1,
 				"Rat": 6
 			},
 			"NPC": {
