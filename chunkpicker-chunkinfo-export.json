@@ -30636,7 +30636,7 @@
 			"Monster": {
 				"Man": 4,
 				"Mugger": 1,
-				"Pirate": 4,
+				"Pirate%2FPlain": 4,
 				"Rat": 13,
 				"Woman": 5
 			},
@@ -30990,7 +30990,7 @@
 				"Imp": 2,
 				"Man": 5,
 				"Mugger": 1,
-				"Pirate": 3,
+				"Pirate%2FPlain": 3,
 				"Seagull": 7,
 				"Spider": 6,
 				"Woman": 2
@@ -31035,7 +31035,7 @@
 			"Monster": {
 				"Man": 4,
 				"Mugger": 1,
-				"Pirate": 7,
+				"Pirate%2FPlain": 7,
 				"Rat": 12,
 				"Spider": 3,
 				"Woman": 1
@@ -66228,6 +66228,9 @@
 			"Nothing": "8/128",
 			"Right eye patch": "12/128",
 			"GemDropTable+": "1/128"
+		},
+		"Pirate%2FPlain": {
+			"Bones": "Always"
 		},
 		"Pirate Guard": {
 			"Bones": "Always"
