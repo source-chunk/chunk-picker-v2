@@ -13334,6 +13334,12 @@
 				"Primary": false,
 				"Priority": 2
 			},
+			"Turn in books at the ~|Arceuus Library|~ for Magic xp": {
+				"Chunks": ["6459"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 2
+			},
 			"Buy the ~|Magic cape|~": {
 				"Category": ["Skillcape"],
 				"Chunks": ["10288"],
@@ -18792,6 +18798,12 @@
 				"Output": "Runecraft cape(t)",
 				"Primary": false
 			},
+			"Turn in books at the ~|Arceuus Library|~ for Runecraft xp": {
+				"Chunks": ["6459"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 3
+			},
 			"Craft a ~|blood rune|~": {
 				"Chunks": ["6715"],
 				"Items": ["Dense essence block"],
@@ -19245,7 +19257,7 @@
 				"Items": ["Small pouch"],
 				"Level": 1,
 				"Primary": false,
-				"Priority": 3
+				"Priority": 4
 			}
 		},
 		"Slayer": {
@@ -65775,7 +65787,25 @@
 			"GemDropTable+": "1/23.2"
 		},
 		"Necromancer": {
-			"Bones": "Always"
+			"Air rune": "1/13",
+			"Air talisman": "1/52",
+			"Blood rune": "1/26",
+			"Body rune": "1/13",
+			"Bones": "Always",
+			"Chaos rune": "3/52",
+			"Coins": "1/26",
+			"Cosmic rune": "3/52",
+			"Death rune": "1/26",
+			"Earth rune": "1/13",
+			"Earth talisman": "1/52",
+			"Fire rune": "1/13",
+			"Fire talisman": "1/52",
+			"Law rune": "3/52",
+			"Mind rune": "1/13",
+			"Nature rune": "3/52",
+			"Staff": "1/26",
+			"Water rune": "1/13",
+			"Water talisman": "1/52"
 		},
 		"Night beast": {
 			"Adamant sq shield": "1/128",
