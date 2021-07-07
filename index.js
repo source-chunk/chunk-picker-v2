@@ -716,7 +716,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.3");
+const myWorker = new Worker("./worker.js?v=4.3.4");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2463,6 +2463,10 @@ var resetNums = function() {
 
 // Update chunk info
 var updateChunkInfo = function() {
+    if (infoCollapse) {
+        $('.menu8').hide();
+        $('.hiddenInfo').show();
+    }
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
         let id = -1;
         if (infoLockedId !== -1) {
@@ -2474,15 +2478,7 @@ var updateChunkInfo = function() {
                 visible = id;
             }
         });
-        if (id === -1 && infoCollapse) {
-            return;
-        } else {
-            infoCollapse = false;
-        }
-        if (infoCollapse && chunkInfoOn) {
-            $('.menu8').hide();
-            $('.hiddenInfo').show();
-        } else if (chunkInfoOn) {
+        if (chunkInfoOn) {
             $('.menu8').show();
             $('.hiddenInfo').hide();
         }
@@ -2517,6 +2513,10 @@ var updateChunkInfo = function() {
             $('#infochallenges').hide();
             if (visible !== '') {
                 $('.panel-' + visible).hide();
+            }
+            if (infoCollapse) {
+                $('.menu8').hide();
+                $('.hiddenInfo').show();
             }
             return;
         }
@@ -4183,7 +4183,8 @@ var loadData = function() {
             settingsTemp['highscoreEnabled'] && enableHighscore('startup');
             settingsTemp['ids'] && toggleIds() && $('.box').addClass('quality');
             !settingsTemp['ids'] && $('.chunkId').hide();
-            settingsTemp['infocollapse'] && hideChunkInfo();
+            settingsTemp['infocollapse'] && hideChunkInfo('startup');
+            infoCollapse = settingsTemp['infocollapse'];
             if (settingsTemp['recent'] === undefined) {
                 settingsTemp['recent'] = true;
             }
