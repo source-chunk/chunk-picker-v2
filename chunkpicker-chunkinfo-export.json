@@ -18788,6 +18788,12 @@
 					"Slayer": 55
 				},
 				"Priority": 3
+			},
+			"Wield ~|runite bolts|~": {
+				"Items": ["Runite bolts"],
+				"Level": 61,
+				"Primary": false,
+				"Priority": 5
 			}
 		},
 		"Runecraft": {
