@@ -57401,7 +57401,6 @@
 				"Coffin": 2,
 				"Crate": 10,
 				"Dead tree": 4,
-				"Dramen tree": 1,
 				"Fire remains": 17,
 				"Fishing spot (lava eel)": 3,
 				"Grill": 1,
@@ -57436,6 +57435,9 @@
 			"Monster": {
 				"Greater demon": 2,
 				"Zombie (Entrana Dungeon)": 5
+			},
+			"Object": {
+				"Dramen tree": 1
 			},
 			"Quest": {
 				"Lost City": "step",

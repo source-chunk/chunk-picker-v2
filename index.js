@@ -229,6 +229,7 @@ let rules = {
     "Stuffables": false,
     "Kill X Amount": "1",
     "Rare Drop Amount": "1000",
+    "Manually Complete Tasks": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -283,6 +284,7 @@ let ruleNames = {
     "Smithing by Smelting": "Smelting ores into bars counts as a primary method for training Smithing",
     "Pets": "Obtaining pets is included in the collection log tasks",
     "Stuffables": "Must obtain stuffable items that can be mounted in the POH (big fish, slayer heads)",
+    "Manually Complete Tasks": "<b>For maps that allow manually choosing new chunks</b>, allow the ability to manually move completed active tasks"
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -420,7 +422,8 @@ let ruleStructure = {
         "Untracked Uniques": true,
         "Stuffables": true,
         "Random Event Loot": true,
-        "Manually Add Tasks": true
+        "Manually Add Tasks": true,
+        "Manually Complete Tasks": true
     }
 };                                                                              // Structure of rules
 
@@ -692,6 +695,7 @@ let searchModalOpen = false;
 let searchDetailsModalOpen = false;
 let highestModalOpen = false;
 let methodsModalOpen = false;
+let completeModalOpen = false;
 let workerOut = 0;
 let gotData = false;
 let questPointTotal = 0;
@@ -716,7 +720,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.4");
+const myWorker = new Worker("./worker.js?v=4.3.5");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -749,7 +753,7 @@ window.addEventListener('contextmenu', function (e) {
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen) {
         clickX = ev.changedPointers[0].pageX;
         clickY = ev.changedPointers[0].pageY;
     }
@@ -757,7 +761,7 @@ hammertime.on('panstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 hammertime.on('panend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -765,7 +769,7 @@ hammertime.on('panend', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
 hammertime.on('panleft panright panup pandown', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen) {
         updateScrollPos(ev.changedPointers[0]);
     }
 });
@@ -992,7 +996,7 @@ $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     if (e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
         $('body').scrollTop(0);
         return;
-    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
+    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
         e.preventDefault();
         return;
     }
@@ -1071,7 +1075,7 @@ $(document).on({
             }
             toggleQuestInfo();
             settingsMenu();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !notesModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen) {
             e.preventDefault();
         }
     }
@@ -1085,7 +1089,7 @@ $(document).on('mouseleave', '.recent', function() {
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen) {
             return;
         }
         if (clicked) {
@@ -1096,7 +1100,7 @@ $(document).on({
         }
     },
     'mousedown': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen) {
             return;
         }
         clicked = true;
@@ -1121,7 +1125,7 @@ $(document).on({
             $(".backlog-context-menu").hide(100);
         }
         let tempClicked = clicked;
-        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen) {
+        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen) {
             return;
         } else if (e.button === 2) {
             if ($(e.target).hasClass('box')) {
@@ -1322,7 +1326,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || (unlockedChunks !== 0 && selectedChunks === 0)) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || (unlockedChunks !== 0 && selectedChunks === 0)) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1488,7 +1492,7 @@ var pick = function(both) {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2 = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1768,6 +1772,7 @@ var unlockEntry = function() {
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                     rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
                     rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                    rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                     $('#entry-menu').animate({'opacity': 0});
                     setTimeout(function() {
                         $('#entry-menu').css('opacity', 1).hide();
@@ -1777,6 +1782,7 @@ var unlockEntry = function() {
                         !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                         rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
                         rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
+                        rules['Manually Complete Tasks'] && $('.open-complete-container').animate({'opacity': 1});
                         $('#unlock-entry').prop('disabled', false).html('Unlock');
                         locked = false;
                         inEntry = false;
@@ -1809,6 +1815,7 @@ var unlockEntry = function() {
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                             rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
                             rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                             $('#entry-menu').animate({'opacity': 0});
                             setTimeout(function() {
                                 $('#entry-menu').css('opacity', 1).hide();
@@ -1818,6 +1825,7 @@ var unlockEntry = function() {
                                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                                 rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
                                 rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
+                                rules['Manually Complete Tasks'] && $('.open-complete-container').animate({'opacity': 1});
                                 $('#unlock-entry').prop('disabled', false).html('Unlock');
                                 locked = false;
                                 inEntry = false;
@@ -2058,7 +2066,7 @@ var changePin = function() {
 
 // Unpicks a random unlocked chunk
 var unpick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || $('.unlocked').length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || $('.unlocked').length < 1) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -2278,6 +2286,7 @@ var setupMap = function() {
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).hide();
             rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).hide();
+            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
             $('.pin.entry').focus();
         } else {
             $('.center').css('margin-top', '15px');
@@ -2290,6 +2299,7 @@ var setupMap = function() {
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).hide();
             rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).hide();
+            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
         }
@@ -3135,6 +3145,12 @@ var addManualTask = function(challenge) {
     calcCurrentChallenges();
 }
 
+// Opens the manual complete tasks modal
+var openManualComplete = function() {
+    completeModalOpen = true;
+    $('#myModal14').show();
+}
+
 // Opens the search within my chunks modal
 var openSearch = function() {
     searchModalOpen = true;
@@ -3353,6 +3369,20 @@ var closeHighest = function() {
 var closeMethods = function() {
     methodsModalOpen = false;
     $('#myModal13').hide();
+}
+
+// Closes the complete modal
+var closeComplete = function() {
+    completeModalOpen = false;
+    $('#myModal14').hide();
+}
+
+// Manually completes checked-off tasks
+var submitCompleteTasks = function() {
+    completeChallenges();
+    !onMobile && setCalculating('.panel-active');
+    completeModalOpen = false;
+    $('#myModal14').hide();
 }
 
 // Unlocks various parts of the chunk tasks panel
@@ -3950,8 +3980,10 @@ var checkOffRules = function(didRedo, startup) {
         calcCurrentChallenges();
         rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
         rules['Random Event Loot'] && $('.open-random-container').css('opacity', 1).show();
+        rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
         !rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).hide();
         !rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).hide();
+        !rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
         setData();
     }
 }
@@ -4510,6 +4542,7 @@ var changeLocked = function() {
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                     rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
                     rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                    rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                     $('.lock-box').animate({'opacity': 0});
                     setTimeout(function() {
                         $('.lock-box').css('opacity', 1).hide();
@@ -4518,6 +4551,7 @@ var changeLocked = function() {
                         !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                         rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
                         rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
+                        rules['Manually Complete Tasks'] && $('.open-complete-container').animate({'opacity': 1});
                         $('#lock-unlock').prop('disabled', false).html('Unlock');
                         locked = false;
                         helpMenuOpenSoon && helpFunc();
@@ -4550,6 +4584,7 @@ var changeLocked = function() {
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                             rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
                             rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                             $('.lock-box').animate({'opacity': 0});
                             setTimeout(function() {
                                 $('.lock-box').css('opacity', 1).hide();
@@ -4558,6 +4593,7 @@ var changeLocked = function() {
                                 !isPicking && unpickOn && $('.unpick').animate({'opacity': 1});
                                 rules['Manually Add Tasks'] && $('.open-manual-container').animate({'opacity': 1});
                                 rules['Random Event Loot'] && $('.open-random-container').animate({'opacity': 1});
+                                rules['Manually Complete Tasks'] && $('.open-complete-container').animate({'opacity': 1});
                                 $('#lock-unlock').prop('disabled', false).html('Unlock');
                                 locked = false;
                                 helpMenuOpenSoon && helpFunc();

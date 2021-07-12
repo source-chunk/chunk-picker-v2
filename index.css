@@ -1881,6 +1881,12 @@ button.menu2 {
     margin-top: 5%;
 }
 
+#myModal14 > .modal-content {
+    height: 25%;
+    width: 25%;
+    margin-top: 1.5%;
+}
+
 .manual-close {
     cursor: pointer;
     margin-top: 0px;
@@ -1965,6 +1971,26 @@ button.menu2 {
 }
 
 .open-random > i {
+    margin-right: 5px;
+}
+
+.open-complete-container {
+    border-top: 1px solid;
+    display: none;
+}
+
+.open-complete {
+    cursor: pointer;
+    text-decoration: underline;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.open-complete:hover {
+    color: rgb(100, 100, 255);
+}
+
+.open-complete > i {
     margin-right: 5px;
 }
 
@@ -2664,6 +2690,49 @@ input#searchChunks {
     font-weight: bold;
     text-align: center;
     padding: 10px;
+}
+
+.complete-title {
+    font-size: 36px;
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 20%;
+    min-height: 20%;
+    line-height: 50px;
+    text-align: center;
+    background-color: #c8c8c8;
+}
+
+.complete-data {
+    margin: 0px 15px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    height: 60%;
+}
+
+.complete-footer {
+    height: 20%;
+}
+
+#submit-complete-button {
+    background-color: rgb(75, 200, 75);
+    width: 125px;
+    font-size: 20px;
+    color: white;
+    float: right;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#submit-complete-button:hover {
+    background-color: rgb(50, 175, 50);
 }
 
 .style-button {
