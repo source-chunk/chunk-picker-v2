@@ -720,7 +720,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.6");
+const myWorker = new Worker("./worker.js?v=4.3.7");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3434,7 +3434,7 @@ var setCurrentChallenges = function(backlogArr, completedArr) {
 var checkFalseRules = function() {
     var all_false = true;
     for (var s in rules) {
-        if (rules[s]) {
+        if (rules[s] === true) {
             all_false = false;
             break;
         }
