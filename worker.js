@@ -776,7 +776,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                                 }
                                                 nonskill[items[plus][source].split('-')[1]][source] = true;
                                             }
-                                            if ((skill !== items[plus][source].split('-')[1] || rules['Multi Step Processing']) && (!items[plus][source].includes('-Farming') || rules['Farming Primary'])) {
+                                            if ((!processingSkill[items[plus][source].split('-')[1]] || rules['Multi Step Processing']) && (!items[plus][source].includes('-Farming') || rules['Farming Primary'])) {
                                                 tempNonValid = false;
                                             }
                                         });
@@ -814,7 +814,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                         }
                                         nonskill[items[item.replaceAll(/\*/g, '')][source].split('-')[1]][source] = true;
                                     }
-                                    if ((skill !== items[item.replaceAll(/\*/g, '')][source].split('-')[1] || rules['Multi Step Processing']) && (!items[item.replaceAll(/\*/g, '')][source].includes('-Farming') || rules['Farming Primary'])) {
+                                    if ((!processingSkill[items[item.replaceAll(/\*/g, '')][source].split('-')[1]] || rules['Multi Step Processing']) && (!items[item.replaceAll(/\*/g, '')][source].includes('-Farming') || rules['Farming Primary'])) {
                                         tempNonValid = false;
                                     }
                                 });
