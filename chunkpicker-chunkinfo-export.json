@@ -18789,6 +18789,12 @@
 				},
 				"Priority": 3
 			},
+			"Wield ~|dragonstone bolts (e)|~": {
+				"Items": ["Dragonstone bolts (e)"],
+				"Level": 61,
+				"Primary": false,
+				"Priority": 6
+			},
 			"Wield ~|runite bolts|~": {
 				"Items": ["Runite bolts"],
 				"Level": 61,
