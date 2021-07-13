@@ -7148,7 +7148,8 @@
 				"Level": 26,
 				"Objects": ["Loom"],
 				"Output": "Drift net",
-				"Primary": true
+				"Primary": true,
+				"Priority": 2
 			},
 			"Craft a ~|fire battlestaff|~": {
 				"Items": ["Fire orb", "Battlestaff"],
@@ -7738,6 +7739,13 @@
 				"Level": 12,
 				"Output": "Empty oil lamp",
 				"Primary": true
+			},
+			"Craft an ~|empty oil lantern|~": {
+				"Items": ["Empty oil lamp", "Oil lantern frame"],
+				"Level": 26,
+				"Output": "Empty oil lantern",
+				"Primary": true,
+				"Priority": 1
 			},
 			"Craft an ~|empty plant pot|~": {
 				"Items": ["Unfired plant pot"],
@@ -16041,6 +16049,29 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Add a lens to a bullseye lantern (unf)": {
+				"Items": ["Bullseye lantern (unf)", "Lantern lens"],
+				"Output": "Bullseye lantern (empty)"
+			},
+			"Add a black candle to an empty candle lantern": {
+				"Items": ["Empty candle lantern", "Black candle"],
+				"Output": "Candle lantern"
+			},
+			"Add lamp oil to an empty oil lantern": {
+				"Items": ["Empty oil lantern", "Swamp tar"],
+				"Objects": ["Lamp still"],
+				"Output": "Oil lantern"
+			},
+			"Add lamp oil to an empty oil lamp": {
+				"Items": ["Empty oil lamp", "Swamp tar"],
+				"Objects": ["Lamp still"],
+				"Output": "Oil lamp"
+			},
+			"Add lamp oil to an bullseye lantern (empty)": {
+				"Items": ["Bullseye lantern (empty)", "Swamp tar"],
+				"Objects": ["Lamp still"],
+				"Output": "Bullseye lantern"
+			},
 			"Activate a vesta's blighted longsword": {
 				"Items": ["Vesta's longsword (inactive)"],
 				"Output": "Vesta's blighted longsword"
@@ -17320,7 +17351,7 @@
 				"Items": ["Rusty sword"],
 				"Output": "Rusty sword loot"
 			},
-			"Add sapphire lens to lantern": {
+			"Add a sapphire lens to a bullseye lantern": {
 				"Items": ["Bullseye lantern", "Sapphire"],
 				"Output": "Sapphire lantern"
 			},
@@ -20815,7 +20846,7 @@
 				"Items": ["Hammer+", "Steel bar"],
 				"Level": 49,
 				"Objects": ["Anvil+"],
-				"Output": "bullseye lantern (unf)",
+				"Output": "Bullseye lantern (unf)",
 				"Primary": true,
 				"Priority": 1
 			},
@@ -42549,6 +42580,7 @@
 				"Fireplace": 1,
 				"Fractionalising still": 1,
 				"Gangplank": 4,
+				"Lamp still": 1,
 				"Oak": 3,
 				"Sacks": 11,
 				"Tree": 17,
@@ -54044,6 +54076,7 @@
 				"Chest": 25,
 				"Fire": 1,
 				"Fountain": 4,
+				"Lamp still": 1,
 				"Range": 2,
 				"Sand pit": 1,
 				"Sink": 2,
