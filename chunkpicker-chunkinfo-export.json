@@ -150,6 +150,13 @@
 				"Level": 33,
 				"Primary": true
 			},
+			"Access the Asgarnian Ice Dungeon wyvern-tunnel ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["Asgarnian Ice Dungeon"],
+				"Level": 72,
+				"Primary": false,
+				"Priority": 2
+			},
 			"Access the Brimhaven Dungeon eastern stepping stones ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["Brimhaven Dungeon"],
@@ -799,7 +806,7 @@
 				"Level": 72,
 				"Output": "Coffin (Hallowed Sepulchre)",
 				"Primary": true,
-				"Priority": 2
+				"Priority": 3
 			},
 			"Access the ~|Agility Pyramid Course|~": {
 				"Chunks": ["13356"],
@@ -6633,6 +6640,14 @@
 				"Output": "Shrimps",
 				"Primary": true,
 				"Priority": 11
+			},
+			"Cook ~|raw swamp paste|~": {
+				"Items": ["Raw swamp paste"],
+				"Level": 1,
+				"Objects": ["Cooking fire+"],
+				"Output": "Swamp paste",
+				"Primary": true,
+				"Priority": 14
 			},
 			"Cook ~|raw ugthanki meat|~": {
 				"Items": ["Raw ugthanki meat*"],
@@ -16048,6 +16063,10 @@
 			"Make a fish sack barrel": {
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
+			},
+			"Make raw swamp paste": {
+				"Items": ["Swamp tar", "Pot of flour"],
+				"Output": "Raw swamp paste"
 			},
 			"Add a lens to a bullseye lantern (unf)": {
 				"Items": ["Bullseye lantern (unf)", "Lantern lens"],
@@ -100874,7 +100893,7 @@
 			"attack_speed": 0,
 			"attack_crush": 0,
 			"attack_magic": -3,
-			"attack_ranged": -1,
+			"attack_ranged": 0,
 			"attack_slash": 0,
 			"attack_stab": 0,
 			"defence_crush": 6,
@@ -100892,7 +100911,7 @@
 			"attack_speed": 0,
 			"attack_crush": 0,
 			"attack_magic": -3,
-			"attack_ranged": -1,
+			"attack_ranged": 0,
 			"attack_slash": 0,
 			"attack_stab": 0,
 			"defence_crush": 9,
@@ -100910,7 +100929,7 @@
 			"attack_speed": 0,
 			"attack_crush": 0,
 			"attack_magic": -3,
-			"attack_ranged": -1,
+			"attack_ranged": 0,
 			"attack_slash": 0,
 			"attack_stab": 0,
 			"defence_crush": 13,
