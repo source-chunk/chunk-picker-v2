@@ -36690,7 +36690,8 @@
 		"10044": {
 			"Connect": {
 				"9541": true,
-				"10144": true
+				"10144": true,
+				"10307": true
 			},
 			"Diary": {
 				"Fremennik": "MD5"
@@ -47400,6 +47401,9 @@
 			}
 		},
 		"12852": {
+			"Connect": {
+				"10307": true
+			},
 			"Diary": {
 				"Varrock": "EA6"
 			},

@@ -720,7 +720,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.8");
+const myWorker = new Worker("./worker.js?v=4.3.9");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3927,7 +3927,11 @@ var checkOffChallenges = function() {
                         if (!checkedChallenges['Extra']) {
                             checkedChallenges['Extra'] = {};
                         }
-                        checkedChallenges['Extra'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~')] = true;
+                        if ($(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').match(/Kill .* ~|.*|~/)) {
+                            checkedChallenges['Extra'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').replace(/Kill .* ~/, 'Kill X ~')] = true;
+                        } else {
+                            checkedChallenges['Extra'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~')] = true;
+                        }
                     } else {
                         $('.panel-active > .' + skillLine).removeClass('hide-backlog');
                     }
