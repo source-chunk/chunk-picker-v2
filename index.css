@@ -142,6 +142,25 @@ a, a:visited {
     animation: glowing 750ms infinite;
 }
 
+.blacklisted {
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0vw 0vw 0vw .075vw black;
+}
+
+.blacklisted.visible {
+    background-color: rgba(0, 0, 0, .4);
+    box-shadow: inset .025vw .025vw .025vw .025vw black;
+}
+
+.blacklisted:not(.visible):hover {
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.recent.blacklisted:not(.mobile) {
+    background-color: rgba(0, 0, 0, .85);
+    animation: glowing 750ms infinite;
+}
+
 .box.locked {
     background-color: rgba(0, 255, 255, .33);
     box-shadow: inset 0vw 0vw 0vw .15vw rgb(0, 170, 170);
@@ -392,9 +411,9 @@ button.menu2 {
     display: none;
     position: fixed;
     z-index: 99 !important;
-    top: 25vh;
+    top: max(25vh, 225px);
     left: 10px;
-    width: min(25vw, 400px);
+    width: min(30vw, 400px);
     height: 2vw;
 }
 

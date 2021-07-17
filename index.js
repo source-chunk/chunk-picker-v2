@@ -720,7 +720,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.7");
+const myWorker = new Worker("./worker.js?v=4.3.8");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1170,21 +1170,25 @@ $(document).on({
                 return;
             }
             if ($(e.target).hasClass('gray')) {
-                if (selectedNum > 999) {
-                    $(e.target).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
-                    $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
-                } else if (selectedNum > 99) {
-                    $(e.target).addClass('selected').removeClass('gray').append('<span class="label long">' + selectedNum + '</span>');
-                    $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
+                if (e.ctrlKey) {
+                    $(e.target).addClass('blacklisted').removeClass('gray');
                 } else {
-                    $(e.target).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
-                    $('.label').css('font-size', labelZoom + 'px');
-                }
-                $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                selectedNum++;
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-                if (selectedChunks < 300) {
-                    fixNums(99999);
+                    if (selectedNum > 999) {
+                        $(e.target).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
+                        $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
+                    } else if (selectedNum > 99) {
+                        $(e.target).addClass('selected').removeClass('gray').append('<span class="label long">' + selectedNum + '</span>');
+                        $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
+                    } else {
+                        $(e.target).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
+                        $('.label').css('font-size', labelZoom + 'px');
+                    }
+                    $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
+                    selectedNum++;
+                    $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
+                    if (selectedChunks < 300) {
+                        fixNums(99999);
+                    }
                 }
             } else if ($(e.target).hasClass('selected')) {
                 if (selectedChunks < 300) {
@@ -1259,6 +1263,10 @@ $(document).on({
                 calcCurrentChallenges();
             } else if ($(e.target).hasClass('recent')) {
                 // ----
+            } else if ($(e.target).hasClass('blacklisted')) {
+                if (e.ctrlKey) {
+                    $(e.target).addClass('gray').removeClass('blacklisted');
+                }
             } else {
                 $(e.target).addClass('gray').removeClass('unlocked').css('border-width', 0);
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
@@ -1619,7 +1627,7 @@ var importFromURL = function() {
                 while (id.startsWith('0') && id.length > 1) {
                     id = id.substr(1);
                 }
-                $('#' + id).addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
+                $('#' + id).addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span class="label">' + selectedNum++ + '</span>');
                 $('.label').css('font-size', labelZoom + 'px');
                 $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
                 $('.label.long').css('font-size', (labelZoom *(2/3)) + 'px');
@@ -1631,7 +1639,7 @@ var importFromURL = function() {
                 while (id.startsWith('0') && id.length > 1) {
                     id = id.substr(1);
                 }
-                $('#' + id).addClass('unlocked').removeClass('gray selected potential');
+                $('#' + id).addClass('unlocked').removeClass('gray selected potential blacklisted');
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             });
             !showChunkIds && $('.chunkId').hide();
@@ -4021,7 +4029,11 @@ var completeChallenges = function() {
             if (!completedChallenges[skill]) {
                 completedChallenges[skill] = {};
             }
-            completedChallenges[skill][name] = checkedChallenges[skill][name];
+            if (skill === 'Extra' && name.match(/Kill .* ~|.*|~/)) {
+                completedChallenges[skill][name.replace(/Kill .* ~/, 'Kill X ~')] = checkedChallenges[skill][name];
+            } else {
+                completedChallenges[skill][name] = checkedChallenges[skill][name];
+            }
         });
     });
     checkedChallenges = {};
@@ -4267,13 +4279,13 @@ var loadData = function() {
     
             chunks && chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b){return b-a}).forEach(function(id) {
                 if (selectedNum > 999) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label extralong">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span class="label extralong">' + selectedNum++ + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1/2))+ 'px');
                 } else if (selectedNum > 99) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label long">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span class="label long">' + selectedNum++ + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2/3))+ 'px');
                 } else {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked').append('<span class="label">' + selectedNum++ + '</span>');
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span class="label">' + selectedNum++ + '</span>');
                     $('.label').css('font-size', labelZoom + 'px');
                 }
                 $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
@@ -4281,8 +4293,12 @@ var loadData = function() {
             });
     
             chunks && chunks['unlocked'] && Object.keys(chunks['unlocked']).forEach(function(id) {
-                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('unlocked').removeClass('gray selected potential');
+                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('unlocked').removeClass('gray selected potential blacklisted');
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+            });
+
+            chunks && chunks['blacklisted'] && Object.keys(chunks['blacklisted']).forEach(function(id) {
+                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('blacklisted').removeClass('gray selected potential');
             });
     
             if (picking) {
@@ -4370,6 +4386,12 @@ var setData = function() {
             tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
         });
         myRef.child('chunks/potential').set(tempJson);
+
+        tempJson = {};
+        Array.prototype.forEach.call(document.getElementsByClassName('blacklisted'), function(el) {
+            tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+        });
+        myRef.child('chunks/blacklisted').set(tempJson);
 
         highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
             mid: mid,

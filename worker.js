@@ -312,15 +312,17 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             valids['Extra'] = {};
         }
         Object.keys(monsters).sort().forEach(monster => {
-            valids['Extra']['Kill X ~|' + monster + '|~'] = 'Kill X';
-            if (!chunkInfo['challenges']['Extra']) {
-                chunkInfo['challenges']['Extra'] = {};
-            }
-            chunkInfo['challenges']['Extra']['Kill X ~|' + monster + '|~'] = {
-                'Category': ['Kill X'],
-                'Monsters': [monster],
-                'MonstersDetails': [monster],
-                'Label': 'Kill X'
+            if (!backlog['Extra'] || !backlog['Extra']['Kill X ~|' + monster + '|~']) {
+                valids['Extra']['Kill X ~|' + monster + '|~'] = 'Kill X';
+                if (!chunkInfo['challenges']['Extra']) {
+                    chunkInfo['challenges']['Extra'] = {};
+                }
+                chunkInfo['challenges']['Extra']['Kill X ~|' + monster + '|~'] = {
+                    'Category': ['Kill X'],
+                    'Monsters': [monster],
+                    'MonstersDetails': [monster],
+                    'Label': 'Kill X'
+                }
             }
         });
     }

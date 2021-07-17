@@ -76341,9 +76341,24 @@
 				"Iron ore": "1/2"
 			},
 			"Seed pack loot": {
-				"Sweetcorn seed": "1/2",
-				"Tomato seed": "1/2",
-				"Limpwurt seed": "1/2"
+				"Potato seed": "200/1061",
+				"Sweetcorn seed": "120/1061",
+				"Tomato seed": "110/1061",
+				"Limpwurt seed": "100/1061",
+				"Cabbage seed": "100/1061",
+				"Onion seed": "100/1061",
+				"Strawberry seed": "90/1061",
+				"Watermelon seed": "90/1061",
+				"Snape grass seed": "60/1061",
+				"Acorn": "30/1061",
+				"Willow seed": "20/1061",
+				"Ranarr seed": "20/1061",
+				"Maple seed": "10/1061",
+				"Yew seed": "80/1061",
+				"Spirit seed": "1/1061",
+				"Magic seed": "1/1061",
+				"Celastrus seed": "1/2122",
+				"Redwood tree seed": "1/2122"
 			},
 			"Haystack": {
 				"Needle": "1/10"
