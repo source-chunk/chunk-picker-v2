@@ -1,8 +1,9 @@
 importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js');
-let nonValids = {}; //
+let nonValids = {};
 let globalValids;
 let eGlobal;
 let highestOverall = {};
+let dropRatesGlobal = {};
 
 let type;
 let chunks;
@@ -305,6 +306,11 @@ var calcChallengesWork = function(chunks, baseChunkData) {
 
     let tempItemSkill = {};
 
+    !!chunkInfo['challenges'] && !!chunkInfo['challenges']['Extra'] && Object.keys(chunkInfo['challenges']['Extra']).forEach(name => {
+        if (chunkInfo['challenges']['Extra'][name].hasOwnProperty('Permanent') && !chunkInfo['challenges']['Extra'][name]['Permanent']) {
+            delete chunkInfo['challenges']['Extra'][name];
+        }
+    });
 
     // Kill X
     if (rules['Kill X']) {
@@ -321,9 +327,67 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     'Category': ['Kill X'],
                     'Monsters': [monster],
                     'MonstersDetails': [monster],
-                    'Label': 'Kill X'
+                    'Label': 'Kill X',
+                    'Permanent': false
                 }
             }
+        });
+    }
+
+    // Every Drop
+    if (rules['Every Drop']) {
+        let drops = {};
+        if (!valids['Extra']) {
+            valids['Extra'] = {};
+        }
+        !!completedChallenges['Extra'] && Object.keys(completedChallenges['Extra']).forEach(line => {
+            if (line.match(/.*: ~\|.*\|~ \(.*\)/)) {
+                drops[line.split('|')[1]] = true;
+            }
+        });
+        Object.keys(items).sort().forEach(item => {
+            !!items[item] && Object.keys(items[item]).forEach(source => {
+                let realSource = source.replaceAll('#', '%2F');
+                if ((items[item][source].includes('-drop') || items[item][source].includes('-Slayer')) && !drops[item]) {
+                    if (source.includes('Slay')) {
+                        let monster = chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')]['Output'];
+                        realSource = chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')]['Output'];
+                        Object.keys(chunkInfo['skillItems']['Slayer'][monster]).forEach(drop => {
+                            if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
+                                Object.keys(dropTables[drop]).forEach(item => {
+                                    if ((rules['Rare Drop'] || isNaN(parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) || ((parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1]) * parseInt(dropTables[drop][item].split('/')[0].replaceAll('~', '')) / parseInt(dropTables[drop][item].split('/')[1]))) > (parseInt(rareDropNum.split('/')[0].replaceAll('~', '')) / parseInt(rareDropNum.split('/')[1]))) &&
+                                        (rules['Boss'] || !bossMonsters.hasOwnProperty(monster))) {
+                                        if (!dropRatesGlobal[monster]) {
+                                            dropRatesGlobal[monster] = {};
+                                        }
+                                        dropRatesGlobal[monster][item] = findFraction(parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1]));
+                                    }
+                                });
+                            } else if ((rules['Rare Drop'] || isNaN(parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) || (parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) > (parseInt(rareDropNum.split('/')[0].replaceAll('~', '')) / parseInt(rareDropNum.split('/')[1]))) &&
+                                    (rules['Boss'] || !bossMonsters.hasOwnProperty(monster))) {
+                                if (!dropRatesGlobal[monster]) {
+                                    dropRatesGlobal[monster] = {};
+                                }
+                                dropRatesGlobal[monster][drop] = chunkInfo['skillItems']['Slayer'][monster][drop];
+                            }
+                        });
+                    }
+                    if (!!dropRatesGlobal[realSource][item] && (!backlog['Extra'] || !backlog['Extra'].hasOwnProperty(realSource.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F') + '|~ (' + dropRatesGlobal[realSource][item].replaceAll('/', '%2G') + ')'))) {
+                        drops[item] = true;
+                        valids['Extra'][realSource.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F') + '|~ (' + dropRatesGlobal[realSource][item].replaceAll('/', '%2G') + ')'] = 'Every Drop';
+                        if (!chunkInfo['challenges']['Extra']) {
+                            chunkInfo['challenges']['Extra'] = {};
+                        }
+                        chunkInfo['challenges']['Extra'][realSource.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F') + '|~ (' + dropRatesGlobal[realSource][item].replaceAll('/', '%2G') + ')'] = {
+                            'Category': ['Every Drop'],
+                            'Items': [item],
+                            'ItemsDetails': [item],
+                            'Label': 'Every Drop',
+                            'Permanent': false
+                        }
+                    }
+                }
+            });
         });
     }
 
@@ -340,7 +404,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             'Category': ['Skillcape'],
             'Chunks': ['11063'],
             'ChunksDetails': ['11063'],
-            'Label': 'Skillcapes'
+            'Label': 'Skillcapes',
+            'Permanent': false
         }
     }
 
@@ -1388,6 +1453,25 @@ var calcCurrentChallenges2 = function() {
     return tempChallengeArr;
 }
 
+var gcd = function(a, b) {
+    if (b < 0.0000001) return a;
+
+    return gcd(b, Math.floor(a % b));
+};
+  
+var findFraction = function(fraction) {
+    var len = fraction.toString().length - 2;
+
+    var denominator = Math.pow(10, len);
+    var numerator = fraction * denominator;
+
+    var divisor = gcd(numerator, denominator);
+
+    numerator /= divisor;
+    denominator /= divisor;
+    return numerator + '/' + denominator
+}
+
 // Gathers item/object info on all chunk ids passed in
 var gatherChunksInfo = function(chunks) {
     let items = {};
@@ -1418,6 +1502,10 @@ var gatherChunksInfo = function(chunks) {
                                 } else {
                                     items[item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = 'secondary-drop';
                                 }
+                                if (!dropRatesGlobal[monster]) {
+                                    dropRatesGlobal[monster] = {};
+                                }
+                                dropRatesGlobal[monster][item] = findFraction(parseInt(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['drops'][monster][drop].split('/')[1]));
                             }
                         });
                     } else if ((rules['Rare Drop'] || isNaN(parseInt(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['drops'][monster][drop].split('/')[1])) || (parseInt(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseInt(chunkInfo['drops'][monster][drop].split('/')[1])) > (parseInt(rareDropNum.split('/')[0].replaceAll('~', '')) / parseInt(rareDropNum.split('/')[1]))) &&
@@ -1430,6 +1518,10 @@ var gatherChunksInfo = function(chunks) {
                         } else {
                             items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = 'secondary-drop';
                         }
+                        if (!dropRatesGlobal[monster]) {
+                            dropRatesGlobal[monster] = {};
+                        }
+                        dropRatesGlobal[monster][drop] = chunkInfo['drops'][monster][drop];
                     }
                 });
             });
