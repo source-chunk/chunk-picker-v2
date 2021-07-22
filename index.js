@@ -723,7 +723,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.10");
+const myWorker = new Worker("./worker.js?v=4.3.11");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1956,6 +1956,13 @@ var accessMap = function() {
                             $('.loading').show();
                             $('#page2b').hide();
                             $('.background-img').hide();
+                            $('.center').css('margin-top', '15px');
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').css('opacity', 1).show();
+                            roll2On && $('.roll2').css('opacity', 1).show();
+                            !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
+                            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
+                            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 1).show();
+                            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
                             setupMap();
                         }).catch((error) => {
                             $('.pin-err').css('visibility', 'visible');
@@ -1990,6 +1997,13 @@ var accessMap = function() {
                                     $('.loading').show();
                                     $('#page2b').hide();
                                     $('.background-img').hide();
+                                    $('.center').css('margin-top', '15px');
+                                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').css('opacity', 1).show();
+                                    roll2On && $('.roll2').css('opacity', 1).show();
+                                    !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
+                                    rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
+                                    rules['Random Event Loot'] && $('.open-random-container').css('opacity', 1).show();
+                                    rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
                                     setupMap();
                                 }).catch((error) => {
                                     $('.pin-err').css('visibility', 'visible');
@@ -2286,7 +2300,6 @@ var doneLoading = function() {
 
 // Creates board of boxes, sets initial sizes of scalable elements, and hides certain elements if needed
 var setupMap = function() {
-    firebase.auth().signOut();
     if (!atHome) {
         $('.body').show();
         $('#page1, #page1extra, #import-menu, #highscore-menu, #highscore-menu2, #help-menu').hide();
