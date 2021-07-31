@@ -109,6 +109,7 @@ var activeSubTabs = {
     skill: true,
     bis: true,
     quest: true,
+    diary: true,
     extra: true
 }
 
@@ -231,6 +232,7 @@ let rules = {
     "Rare Drop Amount": "1000",
     "Manually Complete Tasks": false,
     "Every Drop": false,
+    "Herblore Unlocked Snake Weed": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -273,7 +275,7 @@ let ruleNames = {
     "Collection Log Raids": "<b>[Collection log]</b> Obtain items in the 'Raids' tab",
     "Collection Log Minigames": "<b>[Collection log]</b> Obtain items in the 'Minigames' tab",
     "Collection Log Other": "<b>[Collection log]</b> Obtain items in the 'Other' tab",
-    "Herblore Unlocked": "Herblore tasks are required once Druidic Ritual is completable (Herblore tasks won't be displayed otherwise)",
+    "Herblore Unlocked": "Herblore tasks are automatically required once Druidic Ritual is completable",
     "Farming Primary": "Farming products (herbs, vegetables, etc.) can count as primary item sources for chunk tasks",
     "Tertiary Keys": "Allow loot from tertiary slayer keys (brimstone/larran's) to count towards chunk tasks",
     "Wandering implings": "Allow implings that randomly wander the world & their drops to count towards chunk tasks",
@@ -286,7 +288,8 @@ let ruleNames = {
     "Pets": "Obtaining pets is included in the collection log tasks",
     "Stuffables": "Must obtain stuffable items that can be mounted in the POH (big fish, slayer heads)",
     "Manually Complete Tasks": "<b>For maps that allow manually choosing new chunks</b>, allow the ability to manually move completed active tasks",
-    "Every Drop": "Must obtain every monster drop at least once"
+    "Every Drop": "Must obtain every monster drop at least once",
+    "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to snake weed (the only primary training for Herblore in the game)",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -388,6 +391,7 @@ let ruleStructure = {
         "Farming Primary": true
     },
     "Herblore": {
+        "Herblore Unlocked Snake Weed": true,
         "Herblore Unlocked": true
     },
     "Hunter": {
@@ -723,7 +727,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.11");
+const myWorker = new Worker("./worker.js?v=4.3.12");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1262,6 +1266,7 @@ $(document).on({
                 !onMobile && !activeSubTabs['skill'] && expandActive('skill');
                 !onMobile && !activeSubTabs['bis'] && expandActive('bis');
                 !onMobile && !activeSubTabs['quest'] && expandActive('quest');
+                !onMobile && !activeSubTabs['diary'] && expandActive('diary');
                 !onMobile && !activeSubTabs['extra'] && expandActive('extra');
                 calcCurrentChallenges();
             } else if ($(e.target).hasClass('recent')) {
@@ -1410,6 +1415,7 @@ var pick = function(both) {
         !onMobile && !activeSubTabs['skill'] && expandActive('skill');
         !onMobile && !activeSubTabs['bis'] && expandActive('bis');
         !onMobile && !activeSubTabs['quest'] && expandActive('quest');
+        !onMobile && !activeSubTabs['diary'] && expandActive('diary');
         !onMobile && !activeSubTabs['extra'] && expandActive('extra');
         calcCurrentChallenges();
         setData();
@@ -1495,6 +1501,7 @@ var pick = function(both) {
     !onMobile && !activeSubTabs['skill'] && expandActive('skill');
     !onMobile && !activeSubTabs['bis'] && expandActive('bis');
     !onMobile && !activeSubTabs['quest'] && expandActive('quest');
+    !onMobile && !activeSubTabs['diary'] && expandActive('diary');
     !onMobile && !activeSubTabs['extra'] && expandActive('extra');
     calcCurrentChallenges();
     setData();
@@ -2795,6 +2802,12 @@ setupCurrentChallenges = function(tempChallengeArr) {
             }
         }
     });
+    !!globalValids['Diary'] && Object.keys(globalValids['Diary']).length > 0 && rules['Show Diary Tasks'] && challengeArr.push(`<div class="marker marker-diary noscroll" onclick="expandActive('diary')"><i class="expand-button fas ${activeSubTabs['diary'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Diary Tasks</span></div>`);
+    !!globalValids['Diary'] && rules['Show Diary Tasks'] && Object.keys(globalValids['Diary']).forEach(challenge => {
+        if ((!backlog['Diary'] || !backlog['Diary'].hasOwnProperty(challenge)) && (!completedChallenges['Diary'] || !completedChallenges['Diary'][challenge]) && globalValids['Diary'][challenge]) {
+            challengeArr.push(`<div class="challenge diary-challenge noscroll ${'Diary-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '') + '-challenge'} ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) && 'hide-backlog'} ${!activeSubTabs['diary'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} />` + `<b class="noscroll">[Diary]</b> ` + '<span class="inner noscroll">' + '<b class="noscroll"><a class="link" href="' + `${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))}` + `" target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a></b>: ' + `${challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')}` + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Diary' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
+        }
+    });
     !!globalValids['Extra'] && Object.keys(globalValids['Extra']).length > 0 && challengeArr.push(`<div class="marker marker-extra noscroll" onclick="expandActive('extra')"><i class="expand-button fas ${activeSubTabs['extra'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Other Tasks</span></div>`);
     !!globalValids['Extra'] && Object.keys(globalValids['Extra']).sort().forEach(challenge => {
         if ((!backlog['Extra'] || !backlog['Extra'].hasOwnProperty(challenge)) && (!completedChallenges['Extra'] || !completedChallenges['Extra'][challenge])) {
@@ -2817,6 +2830,10 @@ setupCurrentChallenges = function(tempChallengeArr) {
         } else if (skill === 'Quest') {
             Object.keys(backlog[skill]).forEach(name => {
                 backlogArr.push(`<div class="challenge noscroll ${'Quest-' + name.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '') + '-challenge'}">` + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<b class='noscroll'>[Quest] ` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</b>: <a class="link" href="' + questUrl[chunkInfo['challenges']['Quest'][name]['BaseQuest']] + '" target="_blank">Up to step ' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + (viewOnly || inEntry || locked ? '' : ' <span class="burger noscroll" onclick="openBacklogContextMenu(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
+            });
+        } else if (skill === 'Diary') {
+            Object.keys(backlog[skill]).forEach(name => {
+                backlogArr.push(`<div class="challenge noscroll ${'Diary-' + name.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '') + '-challenge'}">` + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<b class='noscroll'>[Diary]</b> ` + '<b class="noscroll"><a class="link" href="' + `${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))}` + '" target="_blank">' + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a></b>: ' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : ' <span class="burger noscroll" onclick="openBacklogContextMenu(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
             });
         } else if (skill === 'BiS') {
             Object.keys(backlog[skill]).forEach(name => {
@@ -2841,6 +2858,10 @@ setupCurrentChallenges = function(tempChallengeArr) {
             Object.keys(completedChallenges[skill]).forEach(name => {
                 let questStepName = questLastStep.hasOwnProperty(name) ? questLastStep[name] : name;
                 completedArr.push(`<div class="challenge noscroll ${'Quest-' + name.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '') + '-challenge'}">` + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<b class='noscroll'>[Quest] ` + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</b>: <a class="link" href="' + questUrl[chunkInfo['challenges']['Quest'][questStepName]['BaseQuest']] + '" target="_blank">' + (name === questStepName ? 'Up to step ' : ' ') + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + (viewOnly || inEntry || locked ? '' : ' <span class="arrow noscroll" onclick="uncompleteChallenge(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="fas fa-undo-alt noscroll"></i></span>') + '</div>');
+            });
+        } else if (skill === 'Diary') {
+            Object.keys(completedChallenges[skill]).forEach(name => {
+                completedArr.push(`<div class="challenge noscroll ${'Diary-' + name.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '') + '-challenge'}">` + name.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<b class='noscroll'>[Diary]</b> ` + '<b class="noscroll"><a class="link" href="' + `${"https://oldschool.runescape.wiki/w/" + encodeURI((name.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))}` + '" target="_blank">' + name.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a></b>: ' + name.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : ' <span class="arrow noscroll" onclick="uncompleteChallenge(' + "`" + name + "`, " + "`" + skill + "`" + ')"><i class="fas fa-undo-alt noscroll"></i></span>') + '</div>');
             });
         } else if (skill === 'BiS') {
             Object.keys(completedChallenges[skill]).forEach(name => {
@@ -2914,10 +2935,22 @@ var calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
             }
         }
         checkPrimaryMethod(skill, valids, baseChunkDataLocal) && Object.keys(valids[skill]).forEach(challenge => {
-            if (skill === 'Quest' || skill === 'BiS' || skill === 'Extra') {
+            if (skill === 'Quest' || skill === 'Diary' || skill === 'BiS' || skill === 'Extra') {
                 if (!globalValids[skill].hasOwnProperty(challenge) && valids[skill][challenge]) {
                     if ((skill === 'Quest' && rules["Show Quest Tasks"] && (chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') || !rules["Show Quest Tasks Complete"])) || (skill === 'BiS' && rules["Show Best in Slot Tasks"]) || (skill === 'Extra')) {
-                        challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">` + challenge.split('~')[0] + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('') + '</a>' + (chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])  + ` <span class='noscroll' onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + `', '` + skill + `', 'future')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span>` + '</span>, '
+                        if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+                            let tempValid = true;
+                            Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+                                if (!checkPrimaryMethod(subSkill, globalValids, baseChunkDataLocal)) {
+                                    tempValid = false;
+                                }
+                            });
+                            if (tempValid) {
+                                challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">` + challenge.split('~')[0] + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('') + '</a>' + (chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])  + ` <span class='noscroll' onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + `', '` + skill + `', 'future')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span>` + '</span>, '
+                            }
+                        } else {
+                            challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">` + challenge.split('~')[0] + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('') + '</a>' + (chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])  + ` <span class='noscroll' onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + `', '` + skill + `', 'future')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span>` + '</span>, '
+                        }
                     }
                 }
             } else {
@@ -2956,7 +2989,7 @@ var calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
         });
         !highestChallenge[skill] || (chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge[skill]]['Primary']) && (highestChallenge[skill] = undefined);
         if (!!highestChallenge[skill] && skill !== 'Quest' && skill !== 'Nonskill') { 
-            if (skill !== 'Quest' && skill !== 'BiS' && skill !== 'Extra' && rules["Show Skill Tasks"]) {
+            if (skill !== 'Quest' && skill !== 'Diary' && skill !== 'BiS' && skill !== 'Extra' && rules["Show Skill Tasks"]) {
                 challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">` + highestChallenge[skill].split('~')[0] + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge[skill].split('~')[1].split('|').join('') + '</a>' + highestChallenge[skill].split('~')[2] + ` <span class='noscroll' onclick="showDetails('` + highestChallenge[skill].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + `', '` + skill + `', 'future')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span>` + '</span>, ';
             }
         }
@@ -3430,6 +3463,9 @@ var setCurrentChallenges = function(backlogArr, completedArr) {
     if ($('.quest-challenge').length === 0) {
         $('.marker-quest').remove();
     }
+    if ($('.diary-challenge').length === 0) {
+        $('.marker-diary').remove();
+    }
     if ($('.extra-challenge').length === 0) {
         $('.marker-extra').remove();
     }
@@ -3589,6 +3625,7 @@ var showDetails = function(challenge, skill, type) {
     detailsModalOpen = true;
     $('#details-data').empty();
     $('#details-title').html(`<b class="noscroll">${challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2H/g, "'")}</b>`);
+    chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")]['Description']}</i></span><br />`);
     detailsKeys.forEach(key => {
         $('#details-data').append(`<span class="details-subtitle noscroll"><u class="noscroll"><b class="noscroll">${key.split('Details')[0].toLowerCase()}</b></u></span><br />`);
         !!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key].forEach(el => {
@@ -3774,7 +3811,15 @@ var backlogChallenge = function(challenge, skill, note) {
     if (!backlog[skill]) {
         backlog[skill] = {};
     }
-    if (skill === 'Extra' || skill === 'Quest' || skill === 'BiS') {
+    if (skill === 'Extra' || skill === 'Quest' || skill === 'Diary' || skill === 'BiS') {
+        if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+            Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+                if (!backlog[subSkill]) {
+                    backlog[subSkill] = {};
+                }
+                backlog[subSkill][challenge] = note;
+            });
+        }
         backlog[skill][challenge] = note;
         challengeArr = challengeArr.filter(function(line) {
             return !line.includes(skill + '-');
@@ -3784,15 +3829,15 @@ var backlogChallenge = function(challenge, skill, note) {
         });
         !!globalValids[skill] && Object.keys(globalValids[skill]).forEach(challenge => {
             fullyValid = true;
-            !!chunkInfo['challenges'][skill][challenge]['Tasks'] && chunkInfo['challenges'][skill][challenge]['Tasks'].forEach(subTask => {
-                if (!globalValids[skill].hasOwnProperty(subTask) || (backlog[skill] && backlog[skill].hasOwnProperty(subTask))) {
+            !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach(subTask => {
+                if (!globalValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask) || (backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] && backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask))) {
                     fullyValid = false;
                 }
             });
             if (fullyValid) {
-                !!chunkInfo['challenges'][skill][challenge]['Tasks'] && chunkInfo['challenges'][skill][challenge]['Tasks'].forEach(subTask => {
-                    if (!!chunkInfo['challenges'][skill][challenge]['BaseQuest'] && !!chunkInfo['challenges'][skill][subTask]['BaseQuest'] && chunkInfo['challenges'][skill][challenge]['BaseQuest'] === chunkInfo['challenges'][skill][subTask]['BaseQuest'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
-                        globalValids[skill][subTask] = false;
+                !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach(subTask => {
+                    if (!!chunkInfo['challenges'][skill][challenge]['BaseQuest'] && !!chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask]['BaseQuest'] && chunkInfo['challenges'][skill][challenge]['BaseQuest'] === chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask]['BaseQuest'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                        globalValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask] = false;
                     }
                 });
             }
@@ -3832,7 +3877,7 @@ var backlogChallenge = function(challenge, skill, note) {
                     oldChallengeArr[skill] = highestChallenge;
                     challengeArr.splice(index, 0, `<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
                 }
-            } 
+            }
         });
         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
             Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
@@ -3880,7 +3925,7 @@ var uncompleteChallenge = function(challenge, skill) {
     if (completedChallenges[skill] === {}) {
         delete completedChallenges[skill];
     }
-    if (skill !== 'Extra' && skill !== 'Quest' && skill !== 'BiS') {
+    if (skill !== 'Extra' && skill !== 'BiS') {
         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
             !!chunkInfo['challenges'][skill][challenge]['Skills'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
                 !!completedChallenges[subSkill] && delete completedChallenges[subSkill][challenge];
@@ -3933,6 +3978,17 @@ var checkOffChallenges = function() {
                         }
                         let questStepName = questLastStep.hasOwnProperty('~|' + $(line).find('.inner').text().replaceAll(/\[.*] /g, '').replaceAll(': ', '').split($(line).find('a.link').text()).join('|~' + $(line).find('a.link').text()).replaceAll('Up to step ', '')) ? questLastStep['~|' + $(line).find('.inner').text().replaceAll(/\[.*] /g, '').replaceAll(': ', '').split($(line).find('a.link').text()).join('|~' + $(line).find('a.link').text()).replaceAll('Up to step ', '')] : '~|' + $(line).find('.inner').text().replaceAll(/\[.*] /g, '').replaceAll(': ', '').split($(line).find('a.link').text()).join('|~' + $(line).find('a.link').text()).replaceAll('Up to step ', '');
                         checkedChallenges['Quest'][questStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')] = true;
+                    } else {
+                        $('.panel-active > .' + skillLine).removeClass('hide-backlog');
+                    }
+                } else if (cl.includes('Diary-')) {
+                    let skillLine = cl;
+                    if ($('.' + skillLine + ' > input').prop('checked')) {
+                        $('.panel-active > .' + skillLine).addClass('hide-backlog');
+                        if (!checkedChallenges['Diary']) {
+                            checkedChallenges['Diary'] = {};
+                        }
+                        checkedChallenges['Diary'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\: /g, '')] = true;
                     } else {
                         $('.panel-active > .' + skillLine).removeClass('hide-backlog');
                     }

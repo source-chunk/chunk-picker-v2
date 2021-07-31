@@ -11615,9 +11615,15 @@
 			}
 		},
 		"Herblore": {
-			"Unlock ~|Herblore|~": {
+			"Unlock ~|Herblore|~ after Druidic Ritual": {
 				"Category": ["Herblore Unlocked"],
 				"Chunks": ["11573", "11574", "Taverly Dungeon"],
+				"Level": 1,
+				"Primary": true
+			},
+			"Unlock ~|Herblore|~ with snake weed": {
+				"Category": ["Herblore Unlocked Snake Weed"],
+				"Chunks": ["11573", "11574", "Taverly Dungeon", "11056", "11055"],
 				"Level": 1,
 				"Primary": true
 			},
@@ -11735,6 +11741,27 @@
 				"Items": ["Grimy snake weed"],
 				"Level": 3,
 				"Output": "Snake weed",
+				"Primary": true,
+				"Priority": 3
+			},
+			"Clean a ~|grimy ardrigal|~": {
+				"Items": ["Grimy ardrigal"],
+				"Level": 3,
+				"Output": "Ardrigal",
+				"Primary": true,
+				"Priority": 3
+			},
+			"Clean a ~|grimy sito foil|~": {
+				"Items": ["Grimy sito foil"],
+				"Level": 3,
+				"Output": "Sito foil",
+				"Primary": true,
+				"Priority": 3
+			},
+			"Clean a ~|grimy volencia moss|~": {
+				"Items": ["Grimy volencia moss"],
+				"Level": 3,
+				"Output": "Volencia moss",
 				"Primary": true,
 				"Priority": 3
 			},
@@ -16063,6 +16090,43 @@
 			"Make a fish sack barrel": {
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
+			},
+			"Pick grimy snake weed off a vine": {
+				"Chunks": ["11056", "11055"],
+				"Output": "Grimy snake weed"
+			},
+			"Pick grimy ardrigal from a tree": {
+				"Chunks": ["11056", "11055", "11312"],
+				"Output": "Grimy ardrigal"
+			},
+			"Pick grimy sito foil from the scorched earth": {
+				"Chunks": ["11056", "11055", "11312"],
+				"Output": "Grimy sito foil"
+			},
+			"Pick grimy volencia moss from a rock": {
+				"Chunks": ["11056", "11055", "11312", "11311"],
+				"Output": "Grimy volencia moss"
+			},
+			"Pick grimy rogue's purse from the wall": {
+				"Chunks": ["11056", "11055", "11312", "11311", "Pothole Dungeon"],
+				"Output": "Grimy rogue's purse"
+			},
+			"String a salve shard": {
+				"Items": ["Salve shard", "Ball of wool"],
+				"Output": "Salve amulet"
+			},
+			"Chisel off a salve shard": {
+				"Chunks": ["Abandoned Mine"],
+				"Items": ["Chisel"],
+				"Output": "Salve shard"
+			},
+			"Pick redberries from a bush": {
+				"Objects": ["Redberry bush"],
+				"Output": "Redberries"
+			},
+			"Pick cadava berries from a bush": {
+				"Objects": ["Cadava bush"],
+				"Output": "Cadava berries"
 			},
 			"Make raw swamp paste": {
 				"Items": ["Swamp tar", "Pot of flour"],
@@ -22315,6 +22379,30 @@
 				},
 				"Priority": 1
 			},
+			"Access the autumn room of the ~|Sorceress's Garden|~ minigame": {
+				"Chunks": ["Sorceress's Garden"],
+				"Level": 45,
+				"Primary": false,
+				"Priority": 4
+			},
+			"Access the spring room of the ~|Sorceress's Garden|~ minigame": {
+				"Chunks": ["Sorceress's Garden"],
+				"Level": 25,
+				"Primary": false,
+				"Priority": 5
+			},
+			"Access the summer room of the ~|Sorceress's Garden|~ minigame": {
+				"Chunks": ["Sorceress's Garden"],
+				"Level": 65,
+				"Primary": false,
+				"Priority": 7
+			},
+			"Access the winter room of the ~|Sorceress's Garden|~ minigame": {
+				"Chunks": ["Sorceress's Garden"],
+				"Level": 1,
+				"Primary": false,
+				"Priority": 8
+			},
 			"Buy the ~|Thieving cape|~": {
 				"Category": ["Skillcape"],
 				"Chunks": ["Rogues' Den"],
@@ -28217,7 +28305,7 @@
 		"5174": {
 			"Monster": {
 				"Big frog%2FLevel 24": 5,
-				"Goblin%2FUnarmed": 6,
+				"Goblin%2FLevel 2": 6,
 				"Rabbit": 4,
 				"Rat": 1
 			},
@@ -30493,7 +30581,7 @@
 		"6966": {
 			"Monster": {
 				"Giant bat": 3,
-				"Goblin%2FUnarmed": 5,
+				"Goblin%2FLevel 2": 5,
 				"Imp": 9,
 				"Monk": 7,
 				"Woman": 1
@@ -34468,7 +34556,7 @@
 			"Monster": {
 				"Giant spider": 10,
 				"Gnome": 3,
-				"Goblin%2FArmed": 3,
+				"Goblin%2FLevel 5": 3,
 				"Grizzly bear": 4,
 				"Wolf": 4
 			},
@@ -36322,8 +36410,8 @@
 				"Black bear": 1,
 				"Giant rat": 2,
 				"Gnome": 7,
-				"Goblin%2FArmed": 6,
-				"Goblin%2FUnarmed": 4,
+				"Goblin%2FLevel 5": 6,
+				"Goblin%2FLevel 2": 4,
 				"Hill Giant": 3,
 				"Ogre": 1,
 				"Rat": 9,
@@ -37693,8 +37781,7 @@
 		"10293": {
 			"Monster": {
 				"Duck": 53,
-				"Goblin%2FArmed": 3,
-				"Goblin%2FUnarmed": 23,
+				"Goblin%2FArmed Level 2": 26,
 				"Man": 1,
 				"Rat": 1
 			},
@@ -37740,7 +37827,7 @@
 			},
 			"Monster": {
 				"Giant bat": 7,
-				"Goblin%2FUnarmed": 1,
+				"Goblin%2FArmed Level 2": 1,
 				"Rat": 3
 			},
 			"NPC": {
@@ -43614,7 +43701,7 @@
 			},
 			"Monster": {
 				"Anja": 1,
-				"Goblin%2FUnarmed": 12,
+				"Goblin%2FLevel 2": 12,
 				"Hengel": 1,
 				"Rat": 4
 			},
@@ -43862,8 +43949,7 @@
 			},
 			"Monster": {
 				"Black bear": 4,
-				"Goblin%2FArmed": 13,
-				"Goblin%2FUnarmed": 12,
+				"Goblin (Goblin Village)": 25,
 				"Icefiend": 11,
 				"Man": 1
 			},
@@ -45452,7 +45538,7 @@
 				"12439": true
 			},
 			"Monster": {
-				"Goblin%2FUnarmed": 2,
+				"Goblin%2FLevel 2": 2,
 				"Highwayman": 1,
 				"Man": 1,
 				"Rat": 2,
@@ -45563,7 +45649,7 @@
 			},
 			"Monster": {
 				"Barbarian": 17,
-				"Goblin%2FUnarmed": 5,
+				"Goblin%2FLevel 5": 5,
 				"Gunthor the brave": 1,
 				"Unicorn": 2
 			},
@@ -46293,8 +46379,8 @@
 			"Monster": {
 				"Giant rat": 4,
 				"Giant spider": 8,
-				"Goblin%2FArmed": 1,
-				"Goblin%2FUnarmed": 21,
+				"Goblin%2FLevel 5": 1,
+				"Goblin%2FLevel 2": 21,
 				"Mugger": 1,
 				"Rat": 4,
 				"Spider": 7,
@@ -46346,7 +46432,7 @@
 				"Duck": 2,
 				"Duckling": 2,
 				"Farmer": 4,
-				"Goblin%2FUnarmed": 51,
+				"Goblin%2FLevel 2": 51,
 				"Ram": 3
 			},
 			"NPC": {
@@ -47234,7 +47320,7 @@
 				"Cow": 5,
 				"Duck": 11,
 				"Giant spider": 8,
-				"Goblin%2FUnarmed": 53,
+				"Goblin%2FLevel 2": 53,
 				"Imp": 1,
 				"Man": 11,
 				"Ram": 1,
@@ -47354,7 +47440,7 @@
 				"Cow calf": 11,
 				"Duck": 17,
 				"Farmer": 3,
-				"Goblin%2FUnarmed": 2,
+				"Goblin%2FLevel 2": 2,
 				"Imp": 2
 			},
 			"NPC": {
@@ -47409,7 +47495,7 @@
 			},
 			"Monster": {
 				"Dark wizard": 11,
-				"Goblin%2FUnarmed": 1,
+				"Goblin%2FLevel 5": 1,
 				"Guard": 3,
 				"Imp": 2,
 				"Man": 1,
@@ -48725,7 +48811,7 @@
 			"Monster": {
 				"Black bear": 1,
 				"Giant rat": 3,
-				"Goblin%2FUnarmed": 1,
+				"Goblin%2FLevel 5": 1,
 				"Unicorn": 2
 			},
 			"NPC": {
@@ -53490,7 +53576,7 @@
 				"Brutal black dragon": 4,
 				"Brutal blue dragon": 2,
 				"Brutal red dragon": 3,
-				"Cyclops": 6,
+				"Cyclops%2FCatacombs of Kourend": 6,
 				"Dagannoth": 14,
 				"Deviant spectre": 12,
 				"Dust devil": 13,
@@ -53619,8 +53705,8 @@
 			"Monster": {
 				"Dungeon rat": 12,
 				"Giant spider": 15,
-				"Goblin%2FArmed": 6,
-				"Goblin%2FUnarmed": 8,
+				"Goblin%2FLevel 2": 8,
+				"Goblin%2FLevel 5": 6,
 				"Head Thief": 1,
 				"Hobgoblin": 2,
 				"Ogre": 3,
@@ -54707,8 +54793,7 @@
 			"Monster": {
 				"Dungeon rat": 5,
 				"Giant bat": 6,
-				"Goblin%2FArmed": 2,
-				"Goblin%2FUnarmed": 22,
+				"Goblin%2FArmed Level 2": 24,
 				"Rat": 19
 			},
 			"NPC": {
@@ -54743,13 +54828,12 @@
 				"Bloodveld": 14,
 				"Bree": 1,
 				"Commander Zilyana": 1,
-				"Cyclops": 13,
+				"Cyclops%2FGod Wars Dungeon": 13,
 				"Feral Vampyre": 13,
 				"Flight Kilisa": 1,
 				"Flockleader Geerin": 1,
 				"General Graardor": 1,
-				"Goblin%2FArmed": 4,
-				"Goblin%2FUnarmed": 12,
+				"Goblin (God Wars Dungeon)": 16,
 				"Gorak": 12,
 				"Growler": 1,
 				"Hellhound": 5,
@@ -56139,8 +56223,8 @@
 			"Monster": {
 				"Deadly red spider": 2,
 				"Giant rat": 7,
-				"Goblin%2FArmed": 1,
-				"Goblin%2FUnarmed": 2,
+				"Goblin%2FLevel 2": 2,
+				"Goblin%2FLevel 5": 1,
 				"Hobgoblin": 2,
 				"Poison spider": 2,
 				"Rat": 17
@@ -56243,8 +56327,8 @@
 				"9777": true
 			},
 			"Monster": {
-				"Goblin%2FArmed": 13,
-				"Goblin%2FUnarmed": 18,
+				"Goblin%2FLevel 2": 18,
+				"Goblin%2FLevel 5": 13,
 				"Rat": 4
 			},
 			"NPC": {
@@ -57331,7 +57415,7 @@
 				"Ghost": 31,
 				"Giant rat": 10,
 				"Giant spider": 45,
-				"Goblin%2FArmed": 34,
+				"Goblin (Vault of War)": 34,
 				"Minotaur": 39,
 				"Rat": 116,
 				"Scorpion": 8,
@@ -57852,8 +57936,8 @@
 				"Disciple of Iban": 13,
 				"Doomion": 1,
 				"Giant bat": 11,
-				"Goblin%2FArmed": 9,
-				"Goblin%2FUnarmed": 1,
+				"Goblin%2FLevel 2": 1,
+				"Goblin%2FLevel 5": 9,
 				"Holthion": 1,
 				"Kalrag": 1,
 				"Ogre": 2,
@@ -58399,8 +58483,7 @@
 				"Aviansie": 8,
 				"Bloodveld": 5,
 				"Feral Vampyre": 2,
-				"Goblin%2FArmed": 1,
-				"Goblin%2FUnarmed": 1,
+				"Goblin (God Wars Dungeon)": 2,
 				"Gorak": 2,
 				"Icefiend": 2,
 				"Imp": 3,
@@ -58741,7 +58824,8 @@
 			"Trollheim medium scramble+": ["11321", "11577"],
 			"Woodcutting guild+": ["6198", "6454"],
 			"X Marks the Spot 5+": ["12338", "12339"],
-			"Tanner+": ["13105", "11571", "10549", "13878", "Forthos Dungeon", "4921"]
+			"Tanner+": ["13105", "11571", "10549", "13878", "Forthos Dungeon", "4921"],
+			"ArdyHard9+": ["10545", "10288", "10036"]
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {
@@ -59049,7 +59133,7 @@
 			"GraniteWep+": ["Granite maul", "Granite longsword", "Granite hammer"],
 			"Green dragonhide armour+": ["Green d'hide chaps", "Green d'hide vambraces", "Green d'hide body", "Green spiky vambraces"],
 			"Ham key+": ["Bronze key (H.A.M.)", "Iron key (H.A.M.)", "Silver key (H.A.M.)", "Steel key (H.A.M.)"],
-			"Hammer+": ["Hammer"],
+			"Hammer+": ["Hammer", "Imcando hammer"],
 			"Harpoon+": ["Harpoon", "Dragon harpoon", "Crystal harpoon", "Infernal harpoon", "Barb-tail harpoon"],
 			"Heraldic helmet+": ["Steel full helm", "Adamant full helm", "Rune full helm"],
 			"Heraldic kiteshield+": ["Steel kiteshield", "Adamant kiteshield", "Rune kiteshield"],
@@ -59165,7 +59249,8 @@
 			"Super restore+": ["Super restore(1)", "Super restore(2)", "Super restore(3)", "Super restore(4)"],
 			"Wizard robes+": ["Blue wizard hat", "Blue wizard robe", "Wizard hat", "Black robe"],
 			"Cape+": ["Black cape", "Blue cape", "Green cape", "Orange cape", "Pink cape", "Purple cape", "Red cape", "Yellow cape"],
-			"Dye+": ["Black mushroom ink", "Blue dye", "Green dye", "Orange dye", "Pink dye", "Purple dye", "Red dye", "Yellow dye"]
+			"Dye+": ["Black mushroom ink", "Blue dye", "Green dye", "Orange dye", "Pink dye", "Purple dye", "Red dye", "Yellow dye"],
+			"LegendsJewellery+": ["Skills necklace", "Combat bracelet"]
 		},
 		"mixPlus": {
 			"Fremennik citizen+": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"],
@@ -61623,6 +61708,66 @@
 			"Steel arrow": "2/128",
 			"Water rune": "3/128"
 		},
+		"Cyclops%2FCatacombs of Kourend": {
+			"Adamant 2h sword": "1/100",
+			"Adamant mace": "1/100",
+			"Big bones": "Always",
+			"Black 2h sword": "1/100",
+			"Black dagger": "1/100",
+			"Black knife": "16/100",
+			"Black longsword": "1/100",
+			"Black sword": "1/100",
+			"Clue scroll (hard)": "1/512",
+			"Coins": "10/100",
+			"Curved bone": "1/5012.5",
+			"HerbDropTable+": "3/128",
+			"Iron 2h sword": "2/100",
+			"Iron chainbody": "2/100",
+			"Long bone": "1/400",
+			"Mithril dagger": "1/100",
+			"Mithril longsword": "1/100",
+			"Steel 2h sword": "2/100",
+			"Steel battleaxe": "2/100",
+			"Steel chainbody": "2/100",
+			"Steel dagger": "2/100",
+			"Steel longsword": "2/128",
+			"Steel mace": "2/100",
+			"Steel med helm": "2/100",
+			"Steel sword": "2/100",
+			"UncommonSeedDropTable+": "1/100",
+			"RareDropTable+": "1/50",
+			"GemDropTable+": "1/50"
+		},
+		"Cyclops%2FGod Wars Dungeon": {
+			"Adamant 2h sword": "1/100",
+			"Adamant mace": "1/100",
+			"Big bones": "Always",
+			"Black 2h sword": "1/100",
+			"Black dagger": "1/100",
+			"Black knife": "16/100",
+			"Black longsword": "1/100",
+			"Black sword": "1/100",
+			"Clue scroll (hard)": "1/512",
+			"Coins": "10/100",
+			"Curved bone": "1/5012.5",
+			"HerbDropTable+": "3/128",
+			"Iron 2h sword": "2/100",
+			"Iron chainbody": "2/100",
+			"Long bone": "1/400",
+			"Mithril dagger": "1/100",
+			"Mithril longsword": "1/100",
+			"Steel 2h sword": "2/100",
+			"Steel battleaxe": "2/100",
+			"Steel chainbody": "2/100",
+			"Steel dagger": "2/100",
+			"Steel longsword": "2/128",
+			"Steel mace": "2/100",
+			"Steel med helm": "2/100",
+			"Steel sword": "2/100",
+			"UncommonSeedDropTable+": "1/100",
+			"RareDropTable+": "1/50",
+			"GemDropTable+": "1/50"
+		},
 		"Cyclops%2FWarriors' Guild Basement": {
 			"Adamant 2h sword": "4/100",
 			"Adamant dagger": "5/100",
@@ -63143,7 +63288,7 @@
 			"Snape grass": "",
 			"Toad's legs": ""
 		},
-		"Goblin%2FArmed": {
+		"Goblin (Goblin Village)": {
 			"Body rune": "3/128",
 			"Bones": "Always",
 			"Bronze arrow": "3/128",
@@ -63162,14 +63307,67 @@
 			"Goblin mail": "10/128",
 			"Goblin skull": "1/4",
 			"Grapes": "1/128",
-			"Hammer": "9/128",
 			"HerbDropTable+": "2/128",
 			"Mind rune": "3/128",
 			"Nature rune": "1/128",
 			"Red cape": "1/128",
 			"Tin ore": "1/128"
 		},
-		"Goblin%2FUnarmed": {
+		"Goblin (God Wars Dungeon)": {
+			"Body rune": "3/128",
+			"Bones": "Always",
+			"Bronze arrow": "3/128",
+			"Bronze axe": "3/128",
+			"Bronze javelin": "2/128",
+			"Bronze scimitar": "1/128",
+			"Bronze spear": "9/128",
+			"Chaos rune": "1/128",
+			"Clue scroll (beginner)": "1/80",
+			"Clue scroll (easy)": "1/128",
+			"Coins": "2/128",
+			"Earth rune": "3/128",
+			"Ensouled goblin head": "1/30",
+			"Goblin book": "2/128",
+			"Goblin champion scroll": "1/5000",
+			"Goblin mail": "10/128",
+			"Goblin skull": "1/4",
+			"Grapes": "1/128",
+			"HerbDropTable+": "2/128",
+			"Mind rune": "3/128",
+			"Nature rune": "1/128",
+			"Red cape": "1/128",
+			"Tin ore": "1/128"
+		},
+		"Goblin (Vault of War)": {
+			"Body rune": "3/128",
+			"Bones": "Always",
+			"Bronze arrow": "3/128",
+			"Bronze axe": "3/128",
+			"Bronze javelin": "2/128",
+			"Bronze scimitar": "1/128",
+			"Bronze spear": "9/128",
+			"Chaos rune": "1/128",
+			"Clue scroll (beginner)": "1/80",
+			"Clue scroll (easy)": "1/128",
+			"Coins": "2/128",
+			"Earth rune": "3/128",
+			"Ensouled goblin head": "1/30",
+			"Goblin book": "2/128",
+			"Goblin champion scroll": "1/5000",
+			"Goblin mail": "10/128",
+			"Goblin skull": "1/4",
+			"Grapes": "1/128",
+			"HerbDropTable+": "2/128",
+			"Mind rune": "3/128",
+			"Nature rune": "1/128",
+			"Red cape": "1/128",
+			"Tin ore": "1/128"
+		},
+		"Goblin%2FArmed Level 2": {
+			"Bones": "Always",
+			"Goblin champion scroll": "1/5000"
+		},
+		"Goblin%2FLevel 2": {
 			"Air talisman": "1/128",
 			"Beer": "2/128",
 			"Body rune": "3/128",
@@ -63191,6 +63389,31 @@
 			"Hammer": "9/128",
 			"Nothing": "38/128",
 			"Water rune": "6/128"
+		},
+		"Goblin%2FLevel 5": {
+			"Body rune": "3/128",
+			"Bones": "Always",
+			"Bronze arrow": "3/128",
+			"Bronze axe": "3/128",
+			"Bronze javelin": "2/128",
+			"Bronze scimitar": "1/128",
+			"Bronze spear": "9/128",
+			"Chaos rune": "1/128",
+			"Clue scroll (beginner)": "1/80",
+			"Clue scroll (easy)": "1/128",
+			"Coins": "2/128",
+			"Earth rune": "3/128",
+			"Ensouled goblin head": "1/30",
+			"Goblin book": "2/128",
+			"Goblin champion scroll": "1/5000",
+			"Goblin mail": "10/128",
+			"Goblin skull": "1/4",
+			"Grapes": "1/128",
+			"HerbDropTable+": "2/128",
+			"Mind rune": "3/128",
+			"Nature rune": "1/128",
+			"Red cape": "1/128",
+			"Tin ore": "1/128"
 		},
 		"Golem": {
 			"Imbued tephra": "Always"
