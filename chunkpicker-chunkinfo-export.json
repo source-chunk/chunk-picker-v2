@@ -3974,7 +3974,7 @@
 				"Primary": true,
 				"Priority": 265
 			},
-			"Build a ~|skull torches|~": {
+			"Build ~|skull torches|~": {
 				"Category": ["InsidePOH"],
 				"Chunks": ["Player-owned house"],
 				"Items": ["Hammer+", "Saw+", "Oak plank", "Unlit torch", "Tinderbox", "Skull (item)"],
@@ -4124,7 +4124,7 @@
 				"Primary": true,
 				"Priority": 284
 			},
-			"Build a ~|steel candlesticks|~": {
+			"Build ~|steel candlesticks|~": {
 				"Category": ["InsidePOH"],
 				"Chunks": ["Player-owned house"],
 				"Items": ["Hammer+", "Saw+", "Steel bar", "Candle"],
@@ -4140,7 +4140,7 @@
 				"Primary": true,
 				"Priority": 286
 			},
-			"Build a ~|steel framed workbencg|~": {
+			"Build a ~|steel framed workbench|~": {
 				"Category": ["InsidePOH"],
 				"Chunks": ["Player-owned house"],
 				"Items": ["Hammer+", "Saw+", "Oak plank", "Steel bar"],
@@ -24434,7 +24434,7 @@
 				"Items": ["Malediction shard 3"]
 			},
 			"(Skotizo) Obtain a ~|skotos|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
 				"Label": "Collection Log",
 				"Items": ["Skotos"]
 			},
@@ -53117,7 +53117,8 @@
 				"10571": true,
 				"10827": true,
 				"11083": true,
-				"11339": true
+				"11339": true,
+				"12106": true
 			},
 			"Monster": {
 				"Abyssal guardian": 18,
