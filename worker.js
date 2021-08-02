@@ -37,7 +37,9 @@ let randomLoot;
 let magicTools;
 let bossLogs;
 let bossMonsters;
-let minigameShops
+let minigameShops;
+let manualEquipment;
+let checkedChallenges;
 
 onmessage = function(e) {
     eGlobal = e;
@@ -73,6 +75,8 @@ onmessage = function(e) {
     bossLogs = eGlobal.data[29];
     bossMonsters = eGlobal.data[30];
     minigameShops = eGlobal.data[31];
+    manualEquipment = eGlobal.data[32];
+    checkedChallenges = eGlobal.data[33];
 
     if (rareDropNum === "1/0") {
         rareDropNum = "1/999999999999999";
@@ -133,7 +137,15 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 if (!outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')]) {
                                     outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = {};
                                 }
-                                if (chunkInfo['skillItems'][skill][output][item] === 'Always' && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
+                                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Source')) {
+                                    if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop') {
+                                        outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = chunkInfo['challenges'][skill][challenge]['Source'];
+                                    } else if (chunkInfo['skillItems'][skill][output][item] === 'Always' && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
+                                        outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'primary-' + chunkInfo['challenges'][skill][challenge]['Source'];
+                                    } else {
+                                        outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'secondary-' + chunkInfo['challenges'][skill][challenge]['Source'];
+                                    }
+                                } else if (chunkInfo['skillItems'][skill][output][item] === 'Always' && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
                                     outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'primary-' + skill;
                                 } else {
                                     outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'secondary-' + skill;
@@ -144,7 +156,15 @@ var calcChallenges = function(chunks, baseChunkData) {
                             if (!outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')]) {
                                 outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = {};
                             }
-                            if (!chunkInfo['challenges'][skill][challenge]['Secondary']) {
+                            if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Source')) {
+                                if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop') {
+                                    outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = chunkInfo['challenges'][skill][challenge]['Source'];
+                                } else if (!chunkInfo['challenges'][skill][challenge]['Secondary']) {
+                                    outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'primary-' + chunkInfo['challenges'][skill][challenge]['Source'];
+                                } else {
+                                    outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'secondary-' + chunkInfo['challenges'][skill][challenge]['Source'];
+                                }
+                            } else if (!chunkInfo['challenges'][skill][challenge]['Secondary']) {
                                 outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'primary-' + skill;
                             } else {
                                 outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'secondary-' + skill;
@@ -1048,12 +1068,21 @@ var calcBIS = function() {
             delete globalValids['BiS'][name];
         }
     });
+    let completedEquipment = {};
+    !!completedChallenges['BiS'] && Object.keys(completedChallenges['BiS']).forEach(equipLine => {
+        let equip = equipLine.split('|')[1].charAt(0).toUpperCase() + equipLine.split('|')[1].slice(1);
+        completedEquipment[equip] = chunkInfo['equipment'][equip];
+    });
+    !!checkedChallenges['BiS'] && Object.keys(checkedChallenges['BiS']).forEach(equipLine => {
+        let equip = equipLine.split('|')[1].charAt(0).toUpperCase() + equipLine.split('|')[1].slice(1);
+        completedEquipment[equip] = chunkInfo['equipment'][equip];
+    });
     let notFresh = {};
     highestOverall = {};
     let vowels = ['a', 'e', 'i', 'o', 'u'];
     combatStyles.forEach(skill => {
         let bestEquipment = {};
-        Object.keys(chunkInfo['equipment']).forEach(equip => {
+        Object.keys({...completedEquipment, ...chunkInfo['equipment']}).forEach(equip => {
             let validWearable = true;
             !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
                 if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
@@ -1498,6 +1527,13 @@ var gatherChunksInfo = function(chunks) {
             items[item] = {};
         }
         items[item]['Random Event Loot'] = 'secondary-drop';
+    });
+
+    !!manualEquipment && Object.keys(manualEquipment).forEach(item => {
+        if (!items[item]) {
+            items[item] = {};
+        }
+        items[item]['Manually Added Equipment'] = 'secondary-drop';
     });
 
     Object.keys(chunks).forEach(num => {

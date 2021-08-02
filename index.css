@@ -1887,7 +1887,9 @@ button.menu2 {
 }
 
 #myModal11 > .modal-content {
-    margin-top: 5%;
+    margin-top: -2.5%;
+    width: 30%;
+    height: 40%;
 }
 
 #myModal12 > .modal-content {
@@ -1904,6 +1906,12 @@ button.menu2 {
     height: 25%;
     width: 25%;
     margin-top: 1.5%;
+}
+
+#myModal15 > .modal-content {
+    height: 60%;
+    width: 40%;
+    margin-top: -2.5%;
 }
 
 .manual-close {
@@ -2871,4 +2879,82 @@ input#searchChunks {
 
 .rare-num-input {
     width: 75px;
+}
+
+.addEquipment {
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.addEquipment:hover {
+    color: rgb(100, 100, 255);
+}
+
+.add-equipment-title {
+    font-size: min(2vw, 24px);
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 7%;
+    min-height: 7%;
+    line-height: 50px;
+    text-align: center;
+}
+
+.add-equipment-subtitle {
+    padding: 0px 15px;
+    font-size: min(1.15vw, 16px);
+    text-align: center;
+    height: 15%;
+}
+
+.add-equipment-searchcontainer {
+    height: 8%;
+    padding: 0px 15px;
+}
+
+input#searchAddEquipment {
+    font-size: 20px;
+}
+
+.add-equipment-data {
+    height: 70%;
+    padding: 0px 25px;
+    overflow-y: auto;
+}
+
+.add-equipment-data > .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.add-equipment-data > .search-equipment-result {
+    border: solid 1px rgb(200, 200, 200);
+    border-radius: 5px;
+    margin: 3px;
+    padding: 2px;
+    padding-left: 5px;
+    background-color: rgb(220, 220, 220);
+    margin-right: 15px;
+}
+
+.search-equipment-result > span {
+    margin-left: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.search-equipment-result input {
+    margin-right: 10px;
+}
+
+.tosearchdetails {
+    cursor: pointer;
+    text-decoration: underline;
 }

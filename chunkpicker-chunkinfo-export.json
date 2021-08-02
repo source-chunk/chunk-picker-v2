@@ -16163,78 +16163,91 @@
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Black mask (10)"],
+				"Source": "shop",
 				"Output": "Black mask (10) (i)"
 			},
 			"Imbue a slayer helmet": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Slayer helmet"],
+				"Source": "shop",
 				"Output": "Slayer helmet (i)"
 			},
 			"Imbue a salve amulet": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Salve amulet"],
+				"Source": "shop",
 				"Output": "Salve amulet(i)"
 			},
 			"Imbue a salve amulet (e)": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Salve amulet (e)"],
+				"Source": "shop",
 				"Output": "Salve amulet(ei)"
 			},
 			"Imbue a ring of the gods": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Ring of the gods"],
+				"Source": "shop",
 				"Output": "Ring of the gods (i)"
 			},
 			"Imbue a ring of suffering": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Ring of suffering"],
+				"Source": "shop",
 				"Output": "Ring of suffering (i)"
 			},
 			"Imbue a berserker ring": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Berserker ring"],
+				"Source": "shop",
 				"Output": "Berserker ring (i)"
 			},
 			"Imbue a warrior ring": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Warrior ring"],
+				"Source": "shop",
 				"Output": "Warrior ring (i)"
 			},
 			"Imbue a archers ring": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Archers ring"],
+				"Source": "shop",
 				"Output": "Archers ring (i)"
 			},
 			"Imbue a seers ring": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Seers ring"],
+				"Source": "shop",
 				"Output": "Seers ring (i)"
 			},
 			"Imbue a tyrannical ring": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Tyrannical ring"],
+				"Source": "shop",
 				"Output": "Tyrannical ring (i)"
 			},
 			"Imbue a treasonous ring": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Treasonous ring"],
+				"Source": "shop",
 				"Output": "Treasonous ring (i)"
 			},
 			"Imbue a granite ring": {
 				"Category": ["Minigame"],
 				"Chunks": ["10288"],
 				"Items": ["Granite ring"],
+				"Source": "shop",
 				"Output": "Granite ring (i)"
 			},
 			"Ask Murky Matt to enchant a ruby ring": {
@@ -16244,6 +16257,7 @@
 			},
 			"Buy climbing boots from Tenzing": {
 				"Chunks": ["11575", "11319"],
+				"Source": "shop",
 				"Output": "Climbing boots"
 			},
 			"Search the crate in Land's End for a bird snare": {
@@ -16283,34 +16297,40 @@
 				"Items": ["Bird's egg"],
 				"Output": "Evil chicken outfit loot"
 			},
-			"Summon a newtroost": {
+			"Newtroost": {
 				"Chunks": ["Tower of Life%2FBasement"],
 				"Items": ["Eye of newt", "Feather"],
+				"Source": "drop",
 				"Output": "Newtroost loot"
 			},
-			"Summon a unicow": {
+			"Unicow": {
 				"Chunks": ["Tower of Life%2FBasement"],
 				"Items": ["Cowhide", "Unicorn horn"],
+				"Source": "drop",
 				"Output": "Unicow loot"
 			},
-			"Summon a spidine": {
+			"Spidine": {
 				"Chunks": ["Tower of Life%2FBasement"],
 				"Items": ["Red spiders' eggs", "Raw sardine"],
+				"Source": "drop",
 				"Output": "Spidine loot"
 			},
-			"Summon a swordchick": {
+			"Swordchick": {
 				"Chunks": ["Tower of Life%2FBasement"],
 				"Items": ["Raw swordfish", "Raw chicken"],
+				"Source": "drop",
 				"Output": "Swordchick loot"
 			},
-			"Summon a jubster": {
+			"Jubster": {
 				"Chunks": ["Tower of Life%2FBasement"],
 				"Items": ["Raw jubbly", "Raw lobster"],
+				"Source": "drop",
 				"Output": "Jubster loot"
 			},
-			"Summon a frogeel": {
+			"Frogeel": {
 				"Chunks": ["Tower of Life%2FBasement"],
 				"Items": ["Raw cave eel", "Giant frog legs"],
+				"Source": "drop",
 				"Output": "Frogeel loot"
 			},
 			"Claim the champion's cape*": {
@@ -16328,20 +16348,24 @@
 				"Items": ["Void knight robe"],
 				"Output": "Elite void robe"
 			},
-			"Buy items from Spria's shop (post-quest)*": {
-				"Chunks": ["12338", "12083", "12596", "Sourhog Cave"],
-				"Output": "Spria's shop (post-quest)"
+			"Slayer Equipment (shop)#Spria*": {
+				"Chunks": ["12338", "12339", "12083", "12596", "Sourhog Cave"],
+				"Source": "shop",
+				"Output": "Spria's Shop (post-quest)"
 			},
-			"Buy runes from Ali's Wares (post-quest)*": {
+			"Ali's Discount Wares.#Runes*": {
 				"Chunks": ["13106", "13358", "12853", "12850", "Wizards' Tower%2FBasement"],
+				"Source": "shop",
 				"Output": "Ali's Runes (post-quest)"
 			},
-			"Buy blackjacks from Ali's Wares (post-quest)*": {
+			"Ali's Discount Wares.#Blackjacks*": {
 				"Chunks": ["13106", "13358"],
+				"Source": "shop",
 				"Output": "Ali's Blackjacks (post-quest)"
 			},
-			"Buy clothing from Ali's Wares (post-quest)*": {
+			"Ali's Discount Wares.#Clothing*": {
 				"Chunks": ["13106", "13358", "13099"],
+				"Source": "shop",
 				"Output": "Ali's Clothing (post-quest)"
 			},
 			"Craft a toxic staff of the dead": {
@@ -19453,6 +19477,7 @@
 				"Monsters": ["Spitting Wyvern"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Spitting Wyvern"
 			},
 			"Slay a ~|taloned wyvern|~": {
@@ -19460,6 +19485,7 @@
 				"Monsters": ["Taloned Wyvern"],
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Taloned Wyvern"
 			},
 			"Slay a ~|long-tailed wyvern|~": {
@@ -19467,6 +19493,7 @@
 				"Monsters": ["Long-tailed Wyvern"],
 				"Primary": false,
 				"Priority": 3,
+				"Source": "drop",
 				"Output": "Long-tailed Wyvern"
 			},
 			"Slay a ~|banshee|~": {
@@ -19474,6 +19501,7 @@
 				"Monsters": ["Banshee"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Banshee"
 			},
 			"Slay a ~|twisted banshee|~": {
@@ -19481,12 +19509,14 @@
 				"Monsters": ["Twisted Banshee"],
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Twisted Banshee"
 			},
 			"Slay a ~|basilisk knight|~": {
 				"Level": 60,
 				"Monsters": ["Basilisk Knight"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Basilisk Knight",
 				"Priority": 3
 			},
@@ -19494,6 +19524,7 @@
 				"Level": 40,
 				"Monsters": ["Basilisk"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Basilisk",
 				"Priority": 1
 			},
@@ -19502,6 +19533,7 @@
 				"Monsters": ["Bloodveld"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Bloodveld"
 			},
 			"Slay a ~|mutated bloodveld|~": {
@@ -19509,30 +19541,35 @@
 				"Monsters": ["Mutated Bloodveld"],
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Mutated Bloodveld"
 			},
 			"Slay a ~|brine rat|~": {
 				"Level": 47,
 				"Monsters": ["Brine rat"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Brine rat"
 			},
 			"Slay a ~|brutal black dragon|~": {
 				"Level": 77,
 				"Monsters": ["Brutal black dragon"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Brutal black dragon"
 			},
 			"Slay a ~|cave bug|~": {
 				"Level": 7,
 				"Monsters": ["Cave bug+"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Cave bug+"
 			},
 			"Slay a ~|cave crawler|~": {
 				"Level": 10,
 				"Monsters": ["Cave crawler"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Cave crawler",
 				"Priority": 1
 			},
@@ -19540,6 +19577,7 @@
 				"Level": 58,
 				"Monsters": ["Cave horror"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Cave horror"
 			},
 			"Slay a ~|cave kraken|~": {
@@ -19547,18 +19585,21 @@
 				"Monsters": ["Cave kraken"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Cave kraken"
 			},
 			"Slay a ~|cave slime|~": {
 				"Level": 17,
 				"Monsters": ["Cave slime"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Cave slime"
 			},
 			"Slay a ~|cockatrice|~": {
 				"Level": 25,
 				"Monsters": ["Cockatrice"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Cockatrice",
 				"Priority": 1
 			},
@@ -19566,30 +19607,35 @@
 				"Level": 5,
 				"Monsters": ["Crawling Hand"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Crawling Hand"
 			},
 			"Slay a ~|dark beast|~": {
 				"Level": 90,
 				"Monsters": ["Dark beast"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Dark beast"
 			},
 			"Slay a ~|desert lizard|~": {
 				"Level": 22,
 				"Monsters": ["Desert lizard+"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Desert lizard+"
 			},
 			"Slay a ~|drake|~": {
 				"Level": 84,
 				"Monsters": ["Drake"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Drake"
 			},
 			"Slay a ~|dust devil|~": {
 				"Level": 65,
 				"Monsters": ["Dust devil"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Dust devil",
 				"Priority": 1
 			},
@@ -19597,6 +19643,7 @@
 				"Level": 42,
 				"Monsters": ["Fever spider"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Fever spider",
 				"Priority": 1
 			},
@@ -19605,12 +19652,14 @@
 				"Monsters": ["Gargoyle"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Gargoyle"
 			},
 			"Slay a ~|harpie bug swarm|~": {
 				"Level": 33,
 				"Monsters": ["Harpie Bug Swarm"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Harpie Bug Swarm",
 				"Priority": 1
 			},
@@ -19619,12 +19668,14 @@
 				"Monsters": ["Hydra"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Hydra"
 			},
 			"Slay an ~|infernal mage|~": {
 				"Level": 45,
 				"Monsters": ["Infernal Mage"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Infernal Mage"
 			},
 			"Slay a ~|jelly|~": {
@@ -19632,6 +19683,7 @@
 				"Monsters": ["Jelly"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Jelly"
 			},
 			"Slay a ~|warped jelly|~": {
@@ -19639,12 +19691,14 @@
 				"Monsters": ["Warped Jelly"],
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Warped Jelly"
 			},
 			"Slay a ~|killerwatt|~": {
 				"Level": 37,
 				"Monsters": ["Killerwatt"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Killerwatt",
 				"Priority": 1
 			},
@@ -19652,18 +19706,21 @@
 				"Level": 70,
 				"Monsters": ["Kurask"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Kurask"
 			},
 			"Slay a ~|mogre|~": {
 				"Chunks": ["11824"],
 				"Level": 32,
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Mogre"
 			},
 			"Slay a ~|molanisk|~": {
 				"Chunks": ["Dorgesh-Kaan South Dungeon"],
 				"Level": 39,
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Molanisk"
 			},
 			"Slay a ~|mutated zygomite|~": {
@@ -19671,6 +19728,7 @@
 				"Monsters": ["Fungi"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Zygomite"
 			},
 			"Slay an ~|ancient zygomite|~": {
@@ -19678,6 +19736,7 @@
 				"Monsters": ["Ancient Fungi"],
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Ancient Zygomite"
 			},
 			"Slay a ~|nechryael|~": {
@@ -19685,6 +19744,7 @@
 				"Monsters": ["Nechryael"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Nechryael"
 			},
 			"Slay a ~|greater nechryael|~": {
@@ -19692,6 +19752,7 @@
 				"Monsters": ["Greater Nechryael"],
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Greater Nechryael"
 			},
 			"Slay a ~|pyrefiend|~": {
@@ -19699,6 +19760,7 @@
 				"Monsters": ["Pyrefiend"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Pyrefiend"
 			},
 			"Slay a ~|pyrelord|~": {
@@ -19706,18 +19768,21 @@
 				"Monsters": ["Pyrelord"],
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Pyrelord"
 			},
 			"Slay a ~|rockslug|~": {
 				"Level": 20,
 				"Monsters": ["Rockslug"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Rockslug"
 			},
 			"Slay a ~|sea snake|~": {
 				"Level": 40,
 				"Monsters": ["Sea snake+"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Sea snake+",
 				"Priority": 3
 			},
@@ -19725,6 +19790,7 @@
 				"Level": 72,
 				"Monsters": ["Skeletal Wyvern"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Skeletal Wyvern"
 			},
 			"Slay a ~|smoke devil|~": {
@@ -19732,30 +19798,35 @@
 				"Monsters": ["Smoke devil"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Smoke devil"
 			},
 			"Slay a ~|spiritual mage|~": {
 				"Level": 83,
 				"Monsters": ["Spiritual mage"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Spiritual mage"
 			},
 			"Slay a ~|spiritual ranger|~": {
 				"Level": 63,
 				"Monsters": ["Spiritual ranger"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Spiritual ranger"
 			},
 			"Slay a ~|spiritual warrior|~": {
 				"Level": 68,
 				"Monsters": ["Spiritual warrior"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Spiritual warrior"
 			},
 			"Slay a ~|sulphur lizard|~": {
 				"Level": 44,
 				"Monsters": ["Sulphur Lizard"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Sulphur Lizard",
 				"Priority": 1
 			},
@@ -19763,6 +19834,7 @@
 				"Level": 40,
 				"Monsters": ["Terror dog+"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Terror dog+",
 				"Priority": 2
 			},
@@ -19770,6 +19842,7 @@
 				"Level": 55,
 				"Monsters": ["Turoth"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Turoth",
 				"Priority": 1
 			},
@@ -19777,6 +19850,7 @@
 				"Chunks": ["Lumbridge Swamp Caves"],
 				"Level": 35,
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Wall beast",
 				"Priority": 1
 			},
@@ -19784,12 +19858,14 @@
 				"Level": 62,
 				"Monsters": ["Wyrm"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Wyrm"
 			},
 			"Slay an ~|aberrant spectre|~": {
 				"Level": 60,
 				"Monsters": ["Aberrant spectre"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Aberrant spectre",
 				"Priority": 1
 			},
@@ -19797,6 +19873,7 @@
 				"Level": 60,
 				"Monsters": ["Deviant spectre"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Deviant spectre",
 				"Priority": 2
 			},
@@ -19805,12 +19882,14 @@
 				"Monsters": ["Abyssal demon"],
 				"Primary": false,
 				"Priority": 1,
+				"Source": "drop",
 				"Output": "Abyssal demon"
 			},
 			"Slay an ~|ancient wyvern|~": {
 				"Level": 82,
 				"Monsters": ["Ancient Wyvern"],
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Ancient Wyvern"
 			},
 			"Slay the ~|Abyssal Sire|~": {
@@ -19819,6 +19898,7 @@
 				"Level": 85,
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Abyssal Sire"
 			},
 			"Slay the ~|Alchemical Hydra|~": {
@@ -19827,6 +19907,7 @@
 				"Level": 95,
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Alchemical Hydra"
 			},
 			"Slay the ~|Grotesque Guardians|~": {
@@ -19835,6 +19916,7 @@
 				"Level": 75,
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Grotesque Guardians"
 			},
 			"Slay the ~|Kraken|~": {
@@ -19843,6 +19925,7 @@
 				"Level": 87,
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Kraken"
 			},
 			"Slay the ~|thermonuclear smoke devil|~": {
@@ -19851,6 +19934,7 @@
 				"Level": 93,
 				"Primary": false,
 				"Priority": 2,
+				"Source": "drop",
 				"Output": "Thermonuclear smoke devil"
 			},
 			"Slay ~|Cerberus|~": {
@@ -19858,6 +19942,7 @@
 				"Chunks": ["Cerberus' Lair"],
 				"Level": 91,
 				"Primary": false,
+				"Source": "drop",
 				"Output": "Cerberus"
 			},
 			"Use an ~|enchanted gem|~": {
@@ -45649,7 +45734,7 @@
 			},
 			"Monster": {
 				"Barbarian": 17,
-				"Goblin%2FLevel 5": 5,
+				"Goblin%2FLevel 2": 5,
 				"Gunthor the brave": 1,
 				"Unicorn": 2
 			},
@@ -47495,7 +47580,7 @@
 			},
 			"Monster": {
 				"Dark wizard": 11,
-				"Goblin%2FLevel 5": 1,
+				"Goblin%2FLevel 2": 1,
 				"Guard": 3,
 				"Imp": 2,
 				"Man": 1,
@@ -48811,7 +48896,7 @@
 			"Monster": {
 				"Black bear": 1,
 				"Giant rat": 3,
-				"Goblin%2FLevel 5": 1,
+				"Goblin%2FLevel 2": 1,
 				"Unicorn": 2
 			},
 			"NPC": {
@@ -58257,7 +58342,6 @@
 		},
 		"Varrock West Bank%2FBasement": {
 			"Connect": {
-				"12342": true,
 				"12597": true
 			},
 			"Object": {
@@ -75662,33 +75746,33 @@
 				"Menaphite red top": "Always"
 			},
 			"Spria's Shop (post-quest)": {
-				"Bag of salt": true,
-				"Boots of stone": true,
-				"Broad arrowhead pack": true,
-				"Broad arrowheads": true,
-				"Broad arrows": true,
-				"Earmuffs": true,
-				"Enchanted gem": true,
-				"Facemask": true,
-				"Fishing explosive": true,
-				"Fungicide": true,
-				"Fungicide spray": true,
-				"Ice cooler": true,
-				"Insulated boots": true,
-				"Leaf-bladed spear": true,
-				"Mirror shield": true,
-				"Nose peg": true,
-				"Reinforced goggles": true,
-				"Rock hammer": true,
-				"Rock thrownhammer": true,
-				"Slayer bell": true,
-				"Slayer gloves": true,
-				"Slayer's staff": true,
-				"Spiny helmet": true,
-				"Unfinished broad bolt pack": true,
-				"Unfinished broad bolts": true,
-				"Unlit bug lantern": true,
-				"Witchwood icon": true
+				"Bag of salt": "Always",
+				"Boots of stone": "Always",
+				"Broad arrowhead pack": "Always",
+				"Broad arrowheads": "Always",
+				"Broad arrows": "Always",
+				"Earmuffs": "Always",
+				"Enchanted gem": "Always",
+				"Facemask": "Always",
+				"Fishing explosive": "Always",
+				"Fungicide": "Always",
+				"Fungicide spray": "Always",
+				"Ice cooler": "Always",
+				"Insulated boots": "Always",
+				"Leaf-bladed spear": "Always",
+				"Mirror shield": "Always",
+				"Nose peg": "Always",
+				"Reinforced goggles": "Always",
+				"Rock hammer": "Always",
+				"Rock thrownhammer": "Always",
+				"Slayer bell": "Always",
+				"Slayer gloves": "Always",
+				"Slayer's staff": "Always",
+				"Spiny helmet": "Always",
+				"Unfinished broad bolt pack": "Always",
+				"Unfinished broad bolts": "Always",
+				"Unlit bug lantern": "Always",
+				"Witchwood icon": "Always"
 			},
 			"Bag full of gems loot": {
 				"Uncut diamond": "309/10000",
@@ -77224,33 +77308,37 @@
 			"Swordchick loot": {
 				"Black satchel": "3/20",
 				"Bones": "Always",
+				"Feather": "Always",
 				"Tea flask": "1/10"
 			},
 			"Unicow loot": {
 				"Bones": "Always",
 				"Green satchel": "3/20",
-				"Tea flask": "1/10"
+				"Tea flask": "1/10",
+				"Unicorn horn": "Always"
 			},
 			"Frogeel loot": {
 				"Bones": "Always",
-				"Curved bone": "1/5012.5",
-				"Long bone": "1/400",
 				"Plain satchel": "3/20",
+				"Raw cave eel": "Always",
 				"Tea flask": "1/10"
 			},
 			"Jubster loot": {
 				"Bones": "Always",
 				"Gold satchel": "3/20",
+				"Raw jubbly": "Always",
 				"Tea flask": "1/10"
 			},
 			"Newtroost loot": {
 				"Bones": "Always",
+				"Eye of newt": "Always",
 				"Rune satchel": "3/20",
 				"Tea flask": "1/10"
 			},
 			"Spidine loot": {
 				"Bones": "Always",
 				"Red satchel": "3/20",
+				"Red spiders' eggs": "Always",
 				"Tea flask": "1/10"
 			},
 			"Amulet of glory loot": {
