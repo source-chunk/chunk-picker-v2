@@ -730,7 +730,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.13");
+const myWorker = new Worker("./worker.js?v=4.3.14");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -758,8 +758,8 @@ $(document).ready(function() {
 
 // Prevent right-click menu from showing
 window.addEventListener('contextmenu', function (e) { 
-    e.preventDefault(); 
-  }, false);
+    e.preventDefault();
+}, false);
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
@@ -1238,7 +1238,9 @@ $(document).on({
                 let tempChunkTime1;
                 let tempChunkTime2;
                 if (signedIn && !onTestServer) {
-                    myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
+                    signedIn && regainConnectivity(() => {
+                        myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
+                    });
                 }
                 for (let count = 1; count <= 5; count++) {
                     tempChunk1 = recent[count - 1];
@@ -1384,7 +1386,9 @@ var pick = function(both) {
             let tempChunkTime1;
             let tempChunkTime2;
             if (signedIn && !onTestServer) {
-                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+                signedIn && regainConnectivity(() => {
+                    myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+                });
             }
             for (let count = 1; count <= 5; count++) {
                 tempChunk1 = recent[count - 1];
@@ -1475,7 +1479,9 @@ var pick = function(both) {
     let tempChunkTime1;
     let tempChunkTime2;
     if (signedIn && !onTestServer) {
-        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+        signedIn && regainConnectivity(() => {
+            myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+        });
     }
     for (let count = 1; count <= 5; count++) {
         tempChunk1 = recent[count - 1];
@@ -1824,11 +1830,13 @@ var unlockEntry = function() {
                     setTimeout(function() {
                         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                             signedIn = true;
-                            myRef.child('uid').set(userCredential.user.uid, function(error) {
-                                myRef.child('pin').remove();
-                            });
-                            userCredential.user.updateProfile({
-                                displayName: mid
+                            signedIn && regainConnectivity(() => {
+                                myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                    myRef.child('pin').remove();
+                                });
+                                userCredential.user.updateProfile({
+                                    displayName: mid
+                                });
                             });
                             $('.center').css('margin-top', '15px');
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').css('opacity', 0).show();
@@ -1989,11 +1997,13 @@ var accessMap = function() {
                             setTimeout(function() {
                                 firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                                     signedIn = true;
-                                    myRef.child('uid').set(userCredential.user.uid, function(error) {
-                                        myRef.child('pin').remove();
-                                    });
-                                    userCredential.user.updateProfile({
-                                        displayName: mid
+                                    signedIn && regainConnectivity(() => {
+                                        myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                            myRef.child('pin').remove();
+                                        });
+                                        userCredential.user.updateProfile({
+                                            displayName: mid
+                                        });
                                     });
                                     window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
                                     document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
@@ -4286,6 +4296,18 @@ var checkMID = function(mid) {
     }
 }
 
+// Regains connectivity to firebase
+var regainConnectivity = function(_callback) {
+    databaseRef.child('.info/connected').once('value', function(connectedSnap) {
+        if (connectedSnap.val() !== true) {
+            firebase.auth().signOut();
+            _callback();
+        } else {
+            _callback();
+        }
+    });
+}
+
 // Loads data from codeItems into various data structures
 var setCodeItems = function() {
     let codeItems = chunkInfo['codeItems'];
@@ -4472,15 +4494,17 @@ var setUsername = function(old) {
     if (onTestServer) {
         return;
     }
-    signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
-        myRef.child('userName').set(userName.toLowerCase());
-        if (!!old && old !== '') {
-            databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
-        }
-        databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid);
-        highscoreEnabled = true;
-        setData();
-    }).catch(function(error) {console.log(error)});
+    signedIn && regainConnectivity(() => {
+        signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+            myRef.child('userName').set(userName.toLowerCase());
+            if (!!old && old !== '') {
+                databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
+            }
+            databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid);
+            highscoreEnabled = true;
+            setData();
+        }).catch(function(error) {console.log(error)});
+    });
 }
 
 // Stores data in Firebase
@@ -4488,58 +4512,8 @@ var setData = function() {
     if (onTestServer) {
         return;
     }
-    if (signedIn && firebase.auth().currentUser) {
-        myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
-        Object.keys(rules).forEach(rule => {
-            if (rules[rule] === undefined) {
-                rules[rule] = false;
-            }
-        });
-        myRef.update({rules});
-        if (!helpMenuOpen && !helpMenuOpenSoon) {
-            myRef.child('settings').update({'help': false});
-        }
-        myRef.update({recent});
-        myRef.update({recentTime});
-        myRef.update({randomLoot});
-        myRef.child('chunkinfo').update({checkedChallenges});
-        myRef.child('chunkinfo').update({completedChallenges});
-        myRef.child('chunkinfo').update({backlog});
-        myRef.child('chunkinfo').update({possibleAreas});
-        myRef.child('chunkinfo').update({manualTasks});
-        myRef.child('chunkinfo').update({manualEquipment});
-
-        var tempJson = {};
-        Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
-            tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-        });
-        myRef.child('chunks/unlocked').set(tempJson);
-
-        tempJson = {};
-        Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
-            tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-        });
-        myRef.child('chunks/selected').set(tempJson);
-
-        tempJson = {};
-        Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
-            tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-        });
-        myRef.child('chunks/potential').set(tempJson);
-
-        tempJson = {};
-        Array.prototype.forEach.call(document.getElementsByClassName('blacklisted'), function(el) {
-            tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-        });
-        myRef.child('chunks/blacklisted').set(tempJson);
-
-        highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
-            mid: mid,
-            name: userName.toLowerCase(),
-            score: unlockedChunks,
-        });
-    } else if (signedIn && !firebase.auth().currentUser) {
-        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+    signedIn && regainConnectivity(() => {
+        if (signedIn && firebase.auth().currentUser) {
             myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
             Object.keys(rules).forEach(rule => {
                 if (rules[rule] === undefined) {
@@ -4578,13 +4552,65 @@ var setData = function() {
             });
             myRef.child('chunks/potential').set(tempJson);
 
+            tempJson = {};
+            Array.prototype.forEach.call(document.getElementsByClassName('blacklisted'), function(el) {
+                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            });
+            myRef.child('chunks/blacklisted').set(tempJson);
+
             highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
                 mid: mid,
                 name: userName.toLowerCase(),
                 score: unlockedChunks,
             });
-        }).catch(function(error) {console.log(error)});
-    }
+        } else if (signedIn && !firebase.auth().currentUser) {
+            firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+                myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
+                Object.keys(rules).forEach(rule => {
+                    if (rules[rule] === undefined) {
+                        rules[rule] = false;
+                    }
+                });
+                myRef.update({rules});
+                if (!helpMenuOpen && !helpMenuOpenSoon) {
+                    myRef.child('settings').update({'help': false});
+                }
+                myRef.update({recent});
+                myRef.update({recentTime});
+                myRef.update({randomLoot});
+                myRef.child('chunkinfo').update({checkedChallenges});
+                myRef.child('chunkinfo').update({completedChallenges});
+                myRef.child('chunkinfo').update({backlog});
+                myRef.child('chunkinfo').update({possibleAreas});
+                myRef.child('chunkinfo').update({manualTasks});
+                myRef.child('chunkinfo').update({manualEquipment});
+
+                var tempJson = {};
+                Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
+                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                });
+                myRef.child('chunks/unlocked').set(tempJson);
+
+                tempJson = {};
+                Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
+                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                });
+                myRef.child('chunks/selected').set(tempJson);
+
+                tempJson = {};
+                Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
+                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                });
+                myRef.child('chunks/potential').set(tempJson);
+
+                highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
+                    mid: mid,
+                    name: userName.toLowerCase(),
+                    score: unlockedChunks,
+                });
+            }).catch(function(error) {console.log(error)});
+        }
+    });
 }
 
 // Credit to Amehzyn
@@ -4735,8 +4761,10 @@ var changeLocked = function() {
                     setTimeout(function() {
                         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                             signedIn = true;
-                            myRef.child('uid').set(userCredential.user.uid, function(error) {
-                                myRef.child('pin').remove();
+                            signedIn && regainConnectivity(() => {
+                                myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                    myRef.child('pin').remove();
+                                });
                             });
                             userCredential.user.updateProfile({
                                 displayName: mid

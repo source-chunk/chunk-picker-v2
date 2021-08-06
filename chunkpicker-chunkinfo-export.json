@@ -16368,6 +16368,11 @@
 				"Source": "shop",
 				"Output": "Ali's Clothing (post-quest)"
 			},
+			"White Knight Armoury*": {
+				"Chunks": ["11573", "11828", "12852", "13878", "Rune essence mine", "Taverly Dungeon"],
+				"Source": "shop",
+				"Output": "White Knight Armoury"
+			},
 			"Craft a toxic staff of the dead": {
 				"Items": ["Uncharged trident", "Magic fang", "Chisel"],
 				"Output": "Toxic staff of the dead"
@@ -22441,6 +22446,9 @@
 				"Chunks": ["Rogues' Den"],
 				"Level": 80,
 				"Primary": true,
+				"Skills": {
+					"Agility": 50
+				},
 				"Priority": 2
 			},
 			"Access the sixth room of ~|Pyramid Plunder|~": {
@@ -50911,7 +50919,6 @@
 				"Swamp bubbles": 32
 			},
 			"Quest": {
-				"In Search of the Myreque": "step",
 				"Shades of Mort'ton": "first"
 			},
 			"Shop": {
@@ -51259,6 +51266,9 @@
 				"Swamp Boaty": 1,
 				"Swamp bubbles": 7,
 				"Waterpump": 1
+			},
+			"Quest": {
+				"In Search of the Myreque": "step"
 			},
 			"Spawn": {
 				"Crumbling tome": 1,
@@ -70961,7 +70971,7 @@
 		"Imp Catcher": "12337",
 		"In Aid of the Myreque": "13622, 13874, 14130, Myreque hideout%2FBurgh De Rott Hideout, Myreque hideout%2FCanifis%2GMort Myre Hideout",
 		"In Search of Knowledge": "6459, Forthos Dungeon",
-		"In Search of the Myreque": "13875, 13876, 13877, 13878, Myreque hideout%2FCanifis%2GMort Myre Hideout",
+		"In Search of the Myreque": "14131, 13876, 13877, 13878, Myreque hideout%2FCanifis%2GMort Myre Hideout",
 		"Jungle Potion": "11055, 11056, 11311, 11312, Pothole Dungeon",
 		"King's Ransom": "10547, 10806, 10807, 11062, 12086",
 		"Lair of Tarn Razorlor": "13618, Tarn's Lair",
@@ -73436,8 +73446,7 @@
 			"Carpenter's shirt": true,
 			"Carpenter's trousers": true,
 			"Hosidius blueprints": true,
-			"Plank sack": true,
-			"Supply crate (Mahogany Homes)": true
+			"Plank sack": true
 		},
 		"Mairin's Market": {
 			"Bowl of fish": true,
@@ -74862,27 +74871,6 @@
 			"Tinderbox": true
 		},
 		"White Knight Armoury": {
-			"White 2h sword": true,
-			"White battleaxe": true,
-			"White boots": true,
-			"White chainbody": true,
-			"White claws": true,
-			"White dagger": true,
-			"White full helm": true,
-			"White gloves": true,
-			"White halberd": true,
-			"White kiteshield": true,
-			"White longsword": true,
-			"White mace": true,
-			"White magic staff": true,
-			"White med helm": true,
-			"White platebody": true,
-			"White platelegs": true,
-			"White plateskirt": true,
-			"White scimitar": true,
-			"White sq shield": true,
-			"White sword": true,
-			"White warhammer": true
 		},
 		"William's Wilderness Cape Shop%2E": {
 			"Team-1 cape": true,
@@ -77351,6 +77339,29 @@
 				"Evil chicken wings": "1/300",
 				"Evil chicken legs": "1/300",
 				"Evil chicken feet": "1/300"
+			},
+			"White Knight Armoury": {
+				"White 2h sword": "Always",
+				"White battleaxe": "Always",
+				"White boots": "Always",
+				"White chainbody": "Always",
+				"White claws": "Always",
+				"White dagger": "Always",
+				"White full helm": "Always",
+				"White gloves": "Always",
+				"White halberd": "Always",
+				"White kiteshield": "Always",
+				"White longsword": "Always",
+				"White mace": "Always",
+				"White magic staff": "Always",
+				"White med helm": "Always",
+				"White platebody": "Always",
+				"White platelegs": "Always",
+				"White plateskirt": "Always",
+				"White scimitar": "Always",
+				"White sq shield": "Always",
+				"White sword": "Always",
+				"White warhammer": "Always"
 			}
 		},
 		"Slayer": {
