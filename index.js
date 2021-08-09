@@ -730,7 +730,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.14");
+const myWorker = new Worker("./worker.js?v=4.3.15");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1238,8 +1238,10 @@ $(document).on({
                 let tempChunkTime1;
                 let tempChunkTime2;
                 if (signedIn && !onTestServer) {
-                    signedIn && regainConnectivity(() => {
-                        myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
+                    myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex), (error) => {
+                        regainConnectivity(() => {
+                            myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
+                        });
                     });
                 }
                 for (let count = 1; count <= 5; count++) {
@@ -1386,8 +1388,10 @@ var pick = function(both) {
             let tempChunkTime1;
             let tempChunkTime2;
             if (signedIn && !onTestServer) {
-                signedIn && regainConnectivity(() => {
-                    myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()), (error) => {
+                    regainConnectivity(() => {
+                        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+                    });
                 });
             }
             for (let count = 1; count <= 5; count++) {
@@ -1479,8 +1483,10 @@ var pick = function(both) {
     let tempChunkTime1;
     let tempChunkTime2;
     if (signedIn && !onTestServer) {
-        signedIn && regainConnectivity(() => {
-            myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()), (error) => {
+            regainConnectivity(() => {
+                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+            });
         });
     }
     for (let count = 1; count <= 5; count++) {
@@ -1830,13 +1836,17 @@ var unlockEntry = function() {
                     setTimeout(function() {
                         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                             signedIn = true;
-                            signedIn && regainConnectivity(() => {
-                                myRef.child('uid').set(userCredential.user.uid, function(error) {
+                            myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                if (error) {
+                                    regainConnectivity(() => {
+                                        myRef.child('pin').remove();
+                                    });
+                                } else {
                                     myRef.child('pin').remove();
-                                });
-                                userCredential.user.updateProfile({
-                                    displayName: mid
-                                });
+                                }
+                            });
+                            userCredential.user.updateProfile({
+                                displayName: mid
                             });
                             $('.center').css('margin-top', '15px');
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .open-rules-container, .highest').css('opacity', 0).show();
@@ -1997,13 +2007,17 @@ var accessMap = function() {
                             setTimeout(function() {
                                 firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                                     signedIn = true;
-                                    signedIn && regainConnectivity(() => {
-                                        myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                    myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                        if (error) {
+                                            regainConnectivity(() => {
+                                                myRef.child('pin').remove();
+                                            });
+                                        } else {
                                             myRef.child('pin').remove();
-                                        });
-                                        userCredential.user.updateProfile({
-                                            displayName: mid
-                                        });
+                                        }
+                                    });
+                                    userCredential.user.updateProfile({
+                                        displayName: mid
                                     });
                                     window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
                                     document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
@@ -3519,19 +3533,19 @@ var setCurrentChallenges = function(backlogArr, completedArr) {
     (challengeArr.length > 0 || workerOut === 0) && challengeArr.forEach(line => {
         $('.panel-active').append(line);
     });
-    if ($('.skill-challenge').length === 0) {
+    if ($('.panel-active .skill-challenge').length === 0) {
         $('.marker-skill').remove();
     }
-    if ($('.bis-challenge').length === 0) {
+    if ($('.panel-active .bis-challenge').length === 0) {
         $('.marker-bis').remove();
     }
-    if ($('.quest-challenge').length === 0) {
+    if ($('.panel-active .quest-challenge').length === 0) {
         $('.marker-quest').remove();
     }
-    if ($('.diary-challenge').length === 0) {
+    if ($('.panel-active .diary-challenge').length === 0) {
         $('.marker-diary').remove();
     }
-    if ($('.extra-challenge').length === 0) {
+    if ($('.panel-active .extra-challenge').length === 0) {
         $('.marker-extra').remove();
     }
     if ($('.panel-active').children().length === 0) {
@@ -4298,13 +4312,9 @@ var checkMID = function(mid) {
 
 // Regains connectivity to firebase
 var regainConnectivity = function(_callback) {
-    databaseRef.child('.info/connected').once('value', function(connectedSnap) {
-        if (connectedSnap.val() !== true) {
-            firebase.auth().signOut();
-            _callback();
-        } else {
-            _callback();
-        }
+    firebase.auth().signOut();
+    firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(() => {
+        _callback();
     });
 }
 
@@ -4494,8 +4504,16 @@ var setUsername = function(old) {
     if (onTestServer) {
         return;
     }
-    signedIn && regainConnectivity(() => {
-        signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+    signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+        myRef.child('userName').set(userName.toLowerCase());
+        if (!!old && old !== '') {
+            databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
+        }
+        databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid);
+        highscoreEnabled = true;
+        setData();
+    }).catch(function(error) {
+        regainConnectivity(() => {
             myRef.child('userName').set(userName.toLowerCase());
             if (!!old && old !== '') {
                 databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
@@ -4503,7 +4521,7 @@ var setUsername = function(old) {
             databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid);
             highscoreEnabled = true;
             setData();
-        }).catch(function(error) {console.log(error)});
+        });
     });
 }
 
@@ -4512,59 +4530,14 @@ var setData = function() {
     if (onTestServer) {
         return;
     }
-    signedIn && regainConnectivity(() => {
-        if (signedIn && firebase.auth().currentUser) {
-            myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
-            Object.keys(rules).forEach(rule => {
-                if (rules[rule] === undefined) {
-                    rules[rule] = false;
-                }
-            });
-            myRef.update({rules});
-            if (!helpMenuOpen && !helpMenuOpenSoon) {
-                myRef.child('settings').update({'help': false});
-            }
-            myRef.update({recent});
-            myRef.update({recentTime});
-            myRef.update({randomLoot});
-            myRef.child('chunkinfo').update({checkedChallenges});
-            myRef.child('chunkinfo').update({completedChallenges});
-            myRef.child('chunkinfo').update({backlog});
-            myRef.child('chunkinfo').update({possibleAreas});
-            myRef.child('chunkinfo').update({manualTasks});
-            myRef.child('chunkinfo').update({manualEquipment});
-
-            var tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-            });
-            myRef.child('chunks/unlocked').set(tempJson);
-
-            tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-            });
-            myRef.child('chunks/selected').set(tempJson);
-
-            tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-            });
-            myRef.child('chunks/potential').set(tempJson);
-
-            tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('blacklisted'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-            });
-            myRef.child('chunks/blacklisted').set(tempJson);
-
-            highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
-                mid: mid,
-                name: userName.toLowerCase(),
-                score: unlockedChunks,
-            });
-        } else if (signedIn && !firebase.auth().currentUser) {
-            firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+    if (signedIn && firebase.auth().currentUser) {
+        myRef.child('test').set(null, (error) => {
+            if (error) {
+                regainConnectivity(() => {
+                    setData();
+                    return;
+                });
+            } else {
                 myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
                 Object.keys(rules).forEach(rule => {
                     if (rules[rule] === undefined) {
@@ -4603,14 +4576,66 @@ var setData = function() {
                 });
                 myRef.child('chunks/potential').set(tempJson);
 
+                tempJson = {};
+                Array.prototype.forEach.call(document.getElementsByClassName('blacklisted'), function(el) {
+                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                });
+                myRef.child('chunks/blacklisted').set(tempJson);
+
                 highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
                     mid: mid,
                     name: userName.toLowerCase(),
                     score: unlockedChunks,
                 });
-            }).catch(function(error) {console.log(error)});
-        }
-    });
+            }
+        });
+    } else if (signedIn && !firebase.auth().currentUser) {
+        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+            myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
+            Object.keys(rules).forEach(rule => {
+                if (rules[rule] === undefined) {
+                    rules[rule] = false;
+                }
+            });
+            myRef.update({rules});
+            if (!helpMenuOpen && !helpMenuOpenSoon) {
+                myRef.child('settings').update({'help': false});
+            }
+            myRef.update({recent});
+            myRef.update({recentTime});
+            myRef.update({randomLoot});
+            myRef.child('chunkinfo').update({checkedChallenges});
+            myRef.child('chunkinfo').update({completedChallenges});
+            myRef.child('chunkinfo').update({backlog});
+            myRef.child('chunkinfo').update({possibleAreas});
+            myRef.child('chunkinfo').update({manualTasks});
+            myRef.child('chunkinfo').update({manualEquipment});
+
+            var tempJson = {};
+            Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
+                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            });
+            myRef.child('chunks/unlocked').set(tempJson);
+
+            tempJson = {};
+            Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
+                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            });
+            myRef.child('chunks/selected').set(tempJson);
+
+            tempJson = {};
+            Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
+                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            });
+            myRef.child('chunks/potential').set(tempJson);
+
+            highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
+                mid: mid,
+                name: userName.toLowerCase(),
+                score: unlockedChunks,
+            });
+        }).catch(function(error) {console.log(error)});
+    }
 }
 
 // Credit to Amehzyn
@@ -4761,10 +4786,14 @@ var changeLocked = function() {
                     setTimeout(function() {
                         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                             signedIn = true;
-                            signedIn && regainConnectivity(() => {
-                                myRef.child('uid').set(userCredential.user.uid, function(error) {
+                            signedIn && myRef.child('uid').set(userCredential.user.uid, function(error) {
+                                if (error) {
+                                    regainConnectivity(() => {
+                                        myRef.child('pin').remove();
+                                    });
+                                } else {
                                     myRef.child('pin').remove();
-                                });
+                                }
                             });
                             userCredential.user.updateProfile({
                                 displayName: mid

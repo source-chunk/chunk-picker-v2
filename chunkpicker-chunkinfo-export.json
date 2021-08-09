@@ -19427,19 +19427,19 @@
 				"Chunks": ["Zanaris"],
 				"Level": 1,
 				"Primary": true,
-				"Priority": 1
+				"Priority": 6
 			},
 			"Receive a Slayer assignment from ~|Duradel|~ in Shilo Village": {
 				"Chunks": ["11310"],
 				"Level": 50,
 				"Primary": true,
-				"Priority": 3
+				"Priority": 9
 			},
 			"Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm": {
 				"Chunks": ["5179"],
 				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 7
 			},
 			"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": {
 				"Chunks": ["12342"],
@@ -19457,25 +19457,25 @@
 				"Chunks": ["9781"],
 				"Level": 1,
 				"Primary": true,
-				"Priority": 5
+				"Priority": 8
 			},
 			"Receive a Slayer assignment from ~|Spria|~ in Draynor Village": {
 				"Chunks": ["12339", "Sourhog Cave"],
 				"Level": 1,
 				"Primary": true,
-				"Priority": 6
+				"Priority": 2
 			},
 			"Receive a Slayer assignment from ~|Turael|~ in Burthorpe": {
 				"Chunks": ["11575"],
 				"Level": 1,
 				"Primary": true,
-				"Priority": 7
+				"Priority": 1
 			},
 			"Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon": {
 				"Chunks": ["Edgeville Dungeon"],
 				"Level": 1,
 				"Primary": true,
-				"Priority": 8
+				"Priority": 5
 			},
 			"Slay a ~|spitting wyvern|~": {
 				"Level": 66,
@@ -30833,6 +30833,7 @@
 			"Shop": {
 				"Little Shop of Horace": true,
 				"Logava Gricoller's Cooking Supplies": true,
+				"Pelters' Veg Stall": true,
 				"The Golden Field": true,
 				"Vannah's Farming Stall": true
 			},
@@ -37593,7 +37594,8 @@
 				"Frenita's Cookery Shop%2E": true,
 				"Leon's Prototype Crossbow%2E": true,
 				"Magic Guild Store (Mystic Robes)": true,
-				"Magic Guild Store (Runes and Staves)": true
+				"Magic Guild Store (Runes and Staves)": true,
+				"Pelters' Veg Stall": true
 			},
 			"Spawn": {
 				"Cup of tea": 1,
@@ -38931,6 +38933,9 @@
 			},
 			"Quest": {
 				"Fishing Contest": "step"
+			},
+			"Shop": {
+				"Pelters' Veg Stall": true
 			},
 			"Spawn": {
 				"Dwellberries": 1
@@ -47777,6 +47782,7 @@
 				"Blue Moon Inn": true,
 				"Horvik's Armour Shop%2E": true,
 				"Lowe's Archery Emporium": true,
+				"Pelters' Veg Stall": true,
 				"Thessalia's Fine Clothes%2E": true,
 				"Varrock General Store": true,
 				"Varrock Swordshop": true,
@@ -58364,6 +58370,7 @@
 				"Coins": 1,
 				"Gold bar": 1,
 				"Gold necklace": 1,
+				"Gold ore": 1,
 				"Ruby ring": 1
 			}
 		},
@@ -73733,6 +73740,9 @@
 			"Beer": true,
 			"Jug of wine": true,
 			"Paramaya ticket": true
+		},
+		"Pelters' Veg Stall": {
+			"Rotten tomato": true
 		},
 		"Perry's Chop-chop Shop": {
 			"Adamant axe": true,
