@@ -1300,6 +1300,27 @@ button.menu2 {
     pointer-events: none;
 }
 
+.test-hint {
+    display: none;
+    position: absolute;
+    top: 6vw;
+    font-size: 52px;
+    z-index: 999 !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    text-align: center;
+    pointer-events: none;
+    width: 100%;
+}
+
+.test-hint .subtext {
+    display: block;
+    font-size: 24px;
+}
+
 .settings {
     display: none;
     position: absolute;

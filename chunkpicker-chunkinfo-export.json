@@ -1740,6 +1740,117 @@
 				"Priority": 3
 			}
 		},
+		"Combat": {
+			"Access the novice lander for ~|Pest Control|~": {
+				"Chunks": ["10537"],
+				"Level": 40,
+				"Primary": true,
+				"Priority": 2
+			},
+			"Access the intermediate lander for ~|Pest Control|~": {
+				"Category": ["HigherLander"],
+				"Chunks": ["10537"],
+				"Level": 70,
+				"Primary": true,
+				"Priority": 2
+			},
+			"Access the veteran lander for ~|Pest Control|~": {
+				"Category": ["HigherLander"],
+				"Chunks": ["10537"],
+				"Level": 100,
+				"Primary": true,
+				"Priority": 2
+			},
+			"Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris": {
+				"Chunks": ["Zanaris"],
+				"Level": 70,
+				"Items": ["Enchanted gem"],
+				"Primary": true,
+				"Priority": 6,
+				"Slayer": {
+					"Slayer": 1
+				}
+			},
+			"Receive a Slayer assignment from ~|Duradel|~ in Shilo Village": {
+				"Chunks": ["11310"],
+				"Level": 100,
+				"Items": ["Enchanted gem"],
+				"Primary": true,
+				"Priority": 9,
+				"Skills": {
+					"Slayer": 50
+				}
+			},
+			"Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm": {
+				"Chunks": ["5179"],
+				"Level": 75,
+				"Items": ["Enchanted gem"],
+				"Primary": true,
+				"Priority": 7,
+				"Skills": {
+					"Slayer": 1
+				}
+			},
+			"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": {
+				"Chunks": ["12342"],
+				"Level": 3,
+				"Items": ["Enchanted gem"],
+				"Primary": true,
+				"Priority": 3,
+				"Skills": {
+					"Slayer": 1
+				}
+			},
+			"Receive a Slayer assignment from ~|Mazchna|~ in Canifis": {
+				"Chunks": ["13878"],
+				"Level": 20,
+				"Primary": true,
+				"Priority": 4,
+				"Skills": {
+					"Slayer": 1
+				}
+			},
+			"Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold": {
+				"Chunks": ["9781"],
+				"Level": 85,
+				"Items": ["Enchanted gem"],
+				"Primary": true,
+				"Priority": 8,
+				"Skills": {
+					"Slayer": 1
+				}
+			},
+			"Receive a Slayer assignment from ~|Spria|~ in Draynor Village": {
+				"Chunks": ["12339", "Sourhog Cave"],
+				"Level": 3,
+				"Items": ["Enchanted gem"],
+				"Primary": true,
+				"Priority": 2,
+				"Skills": {
+					"Slayer": 1
+				}
+			},
+			"Receive a Slayer assignment from ~|Turael|~ in Burthorpe": {
+				"Chunks": ["11575"],
+				"Level": 3,
+				"Items": ["Enchanted gem"],
+				"Primary": true,
+				"Priority": 1,
+				"Skills": {
+					"Slayer": 1
+				}
+			},
+			"Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon": {
+				"Chunks": ["Edgeville Dungeon"],
+				"Level": 40,
+				"Items": ["Enchanted gem"],
+				"Primary": true,
+				"Priority": 5,
+				"Skills": {
+					"Slayer": 1
+				}
+			}
+		},
 		"Construction": {
 			"Build a beginner ~|STASH|~ unit": {
 				"Items": ["Hammer+", "Saw+", "Plank", "Nails+"],
@@ -19426,56 +19537,91 @@
 			"Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris": {
 				"Chunks": ["Zanaris"],
 				"Level": 1,
+				"Items": ["Enchanted gem"],
 				"Primary": true,
-				"Priority": 6
+				"Priority": 6,
+				"Skills": {
+					"Combat": 70
+				}
 			},
 			"Receive a Slayer assignment from ~|Duradel|~ in Shilo Village": {
 				"Chunks": ["11310"],
 				"Level": 50,
+				"Items": ["Enchanted gem"],
 				"Primary": true,
-				"Priority": 9
+				"Priority": 9,
+				"Skills": {
+					"Combat": 100
+				}
 			},
 			"Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm": {
 				"Chunks": ["5179"],
 				"Level": 1,
+				"Items": ["Enchanted gem"],
 				"Primary": true,
-				"Priority": 7
+				"Priority": 7,
+				"Skills": {
+					"Combat": 75
+				}
 			},
 			"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": {
 				"Chunks": ["12342"],
 				"Level": 1,
+				"Items": ["Enchanted gem"],
 				"Primary": true,
-				"Priority": 3
+				"Priority": 3,
+				"Skills": {
+					"Combat": 3
+				}
 			},
 			"Receive a Slayer assignment from ~|Mazchna|~ in Canifis": {
 				"Chunks": ["13878"],
 				"Level": 1,
 				"Primary": true,
-				"Priority": 4
+				"Priority": 4,
+				"Skills": {
+					"Combat": 20
+				}
 			},
 			"Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold": {
 				"Chunks": ["9781"],
 				"Level": 1,
+				"Items": ["Enchanted gem"],
 				"Primary": true,
-				"Priority": 8
+				"Priority": 8,
+				"Skills": {
+					"Combat": 85
+				}
 			},
 			"Receive a Slayer assignment from ~|Spria|~ in Draynor Village": {
 				"Chunks": ["12339", "Sourhog Cave"],
 				"Level": 1,
+				"Items": ["Enchanted gem"],
 				"Primary": true,
-				"Priority": 2
+				"Priority": 2,
+				"Skills": {
+					"Combat": 3
+				}
 			},
 			"Receive a Slayer assignment from ~|Turael|~ in Burthorpe": {
 				"Chunks": ["11575"],
 				"Level": 1,
+				"Items": ["Enchanted gem"],
 				"Primary": true,
-				"Priority": 1
+				"Priority": 1,
+				"Skills": {
+					"Combat": 3
+				}
 			},
 			"Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon": {
 				"Chunks": ["Edgeville Dungeon"],
 				"Level": 1,
+				"Items": ["Enchanted gem"],
 				"Primary": true,
-				"Priority": 5
+				"Priority": 5,
+				"Skills": {
+					"Combat": 40
+				}
 			},
 			"Slay a ~|spitting wyvern|~": {
 				"Level": 66,
@@ -111838,7 +111984,7 @@
 		"Brimstone ring": {
 			"attack_speed": 0,
 			"attack_crush": 4,
-			"attack_magic": 6,
+			"attack_magic": 9,
 			"attack_ranged": 4,
 			"attack_slash": 4,
 			"attack_stab": 4,
@@ -114207,7 +114353,7 @@
 		"Tome of fire": {
 			"attack_speed": 0,
 			"attack_crush": 0,
-			"attack_magic": 8,
+			"attack_magic": 22,
 			"attack_ranged": 0,
 			"attack_slash": 0,
 			"attack_stab": 0,
@@ -114226,7 +114372,7 @@
 		"Tome of fire (empty)": {
 			"attack_speed": 0,
 			"attack_crush": 0,
-			"attack_magic": 8,
+			"attack_magic": 22,
 			"attack_ranged": 0,
 			"attack_slash": 0,
 			"attack_stab": 0,
@@ -114986,7 +115132,7 @@
 		"Tome of water": {
 			"attack_speed": 0,
 			"attack_crush": 0,
-			"attack_magic": 8,
+			"attack_magic": 21,
 			"attack_ranged": 0,
 			"attack_slash": 0,
 			"attack_stab": 0,
@@ -115005,7 +115151,7 @@
 		"Tome of water (empty)": {
 			"attack_speed": 0,
 			"attack_crush": 0,
-			"attack_magic": 8,
+			"attack_magic": 21,
 			"attack_ranged": 0,
 			"attack_slash": 0,
 			"attack_stab": 0,

@@ -13,6 +13,7 @@ var autoRemoveSelected = false;                                                 
 var showChunkIds = false;                                                       // Toggle state for show chunk ids button
 var clicked = false;                                                            // Is mouse being held down
 var screenshotMode = false;                                                     // Is screenshot mode on
+var testMode = false;                                                           // Is test mode on
 var settingsOpen = false;                                                       // Is the settings menu open
 var roll2On = false;                                                            // Is the roll2 button enabled
 var unpickOn = false;                                                           // Is the unpick button enabled
@@ -234,6 +235,7 @@ let rules = {
     "Manually Complete Tasks": false,
     "Every Drop": false,
     "Herblore Unlocked Snake Weed": false,
+    "HigherLander": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -291,6 +293,7 @@ let ruleNames = {
     "Manually Complete Tasks": "<b>For maps that allow manually choosing new chunks</b>, allow the ability to manually move completed active tasks",
     "Every Drop": "Must obtain every monster drop at least once",
     "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to snake weed (the only primary training for Herblore in the game)",
+    "HigherLander": "Accessing the intermediate and veteran landers for Pest Control are required tasks (only novice lander is required otherwise)",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -379,6 +382,9 @@ let ruleStructure = {
     "Agility": {
         "Shortcut": true,
         "Shortcut Task": true
+    },
+    "Combat": {
+        "HigherLander": true
     },
     "Construction": {
         "InsidePOH": true,
@@ -655,7 +661,7 @@ let processingSkill = {
     "Crafting": true,
     "Agility": false,
     "Construction": true,
-    "Combat": false
+    "Combat": true
 }                                                                               // Is each skill a processing skill
 
 let questUrl = {
@@ -730,7 +736,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.3.15");
+const myWorker = new Worker("./worker.js?v=4.4.0");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1085,6 +1091,10 @@ $(document).on({
             }
             toggleQuestInfo();
             settingsMenu();
+        } else if (e.keyCode === 27 && testMode) {
+            testMode = false;
+            loadData();
+            $('.test-hint').hide();
         } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen) {
             e.preventDefault();
         }
@@ -1159,7 +1169,7 @@ $(document).on({
             prevScrollLeft = prevScrollLeft + scrollLeft;
             prevScrollTop = prevScrollTop + scrollTop;
         } else if ($(e.target).hasClass('box')) {
-            if (locked) {
+            if (locked && !testMode) {
                 if (!tempClicked) {
                     return;
                 }
@@ -1237,7 +1247,7 @@ $(document).on({
                 let tempChunk2;
                 let tempChunkTime1;
                 let tempChunkTime2;
-                if (signedIn && !onTestServer) {
+                if (signedIn && !onTestServer && !testMode) {
                     myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex), (error) => {
                         regainConnectivity(() => {
                             myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
@@ -1387,7 +1397,7 @@ var pick = function(both) {
             let tempChunk2;
             let tempChunkTime1;
             let tempChunkTime2;
-            if (signedIn && !onTestServer) {
+            if (signedIn && !onTestServer && !testMode) {
                 myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()), (error) => {
                     regainConnectivity(() => {
                         myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
@@ -1482,7 +1492,7 @@ var pick = function(both) {
     let tempChunk2;
     let tempChunkTime1;
     let tempChunkTime2;
-    if (signedIn && !onTestServer) {
+    if (signedIn && !onTestServer && !testMode) {
         myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()), (error) => {
             regainConnectivity(() => {
                 myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
@@ -1620,6 +1630,7 @@ var importFunc = function() {
     $('.url').focus();
     importMenuOpen = true;
     $('#import-menu').css('opacity', 1).show();
+    settingsMenu();
 }
 
 // Checks if URL is formatted correctly, then imports it into the map
@@ -2094,12 +2105,12 @@ var changePin = function() {
         }
 
         firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pinOld + mid).then((userCredential) => {
-            if (onTestServer) {
+            if (onTestServer || testMode) {
                 return;
             }
             signedIn = true;
             myRef = firebase.database().ref('maps/' + mid);
-            if (!onTestServer) {
+            if (!onTestServer && !testMode) {
                 firebase.auth().currentUser.updatePassword(pinNew + mid).then(() => {
                     window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
                     document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
@@ -2187,6 +2198,16 @@ var enableScreenshotMode = function() {
             $('.escape-hint').hide();
         }, 500);
     }, 1000);
+}
+
+// Toggles test mode
+var enableTestMode = function() {
+    testMode = !testMode;
+    testMode ? $('.test-hint').css('opacity', 1).show() : $('.test-hint').css('opacity', 0).hide();
+    if (!testMode) {
+        loadData();
+    }
+    settingsMenu();
 }
 
 // Toggles high visibility mode
@@ -2373,7 +2394,7 @@ var setupMap = function() {
         document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
         $('.toptitle2').text(mid.split('-')[0].toUpperCase());
         !onMobile && toggleChallengesPanel('active');
-        loadData();
+        loadData(true);
     }
 }
 
@@ -4340,7 +4361,7 @@ var setCodeItems = function() {
 }
 
 // Loads data from Firebase
-var loadData = function() {
+var loadData = function(startup) {
     $.getJSON('./chunkpicker-chunkinfo-export.json', function(data) {
         gotData = true;
         chunkInfo = data;
@@ -4432,6 +4453,14 @@ var loadData = function() {
             toggleChunkInfo(settings['info'], 'startup');
             toggleChunkTasks(settings['chunkTasks'], 'startup');
     
+            $('.box').removeClass('selected potential unlocked recent').addClass('gray').css('border-width', 0);
+            $('.label').remove();
+            selectedChunks = 0;
+            unlockedChunks = 0;
+            selectedNum = 1;
+            
+            $('#chunkInfo1').text('Unlocked chunks: ' + unlockedChunks);
+            $('#chunkInfo2').text('Selected chunks: ' + selectedChunks);
             chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b){return b-a}).forEach(function(id) {
                 picking = true;
                 if (selectedNum > 999) {
@@ -4482,7 +4511,7 @@ var loadData = function() {
             }
             chunkBorders();
             chunkTasksOn && calcCurrentChallenges();
-            center('quick');
+            startup && center('quick');
             doneLoading();
         });
     });
@@ -4490,7 +4519,7 @@ var loadData = function() {
 
 // Sets browser cookie
 var setCookies = function() {
-    if (onTestServer) {
+    if (onTestServer || testMode) {
         return;
     }
     document.cookie = "ids=" + showChunkIds;
@@ -4501,7 +4530,7 @@ var setCookies = function() {
 
 // Stores data in Firebase
 var setUsername = function(old) {
-    if (onTestServer) {
+    if (onTestServer || testMode) {
         return;
     }
     signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
@@ -4527,7 +4556,7 @@ var setUsername = function(old) {
 
 // Stores data in Firebase
 var setData = function() {
-    if (onTestServer) {
+    if (onTestServer || testMode) {
         return;
     }
     if (signedIn && firebase.auth().currentUser) {
@@ -4694,7 +4723,7 @@ var rollMID = function() {
     var badNums = true;
     var rollCount = 0;
     savedPin = pin;
-    if (onTestServer) {
+    if (onTestServer || testMode) {
         return;
     }
     databaseRef.once('value', function(snap) {
