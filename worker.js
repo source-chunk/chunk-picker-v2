@@ -1390,7 +1390,7 @@ var calcBIS = function() {
                 let maxHit = Math.floor(.5 + (110 * (equipment_bonus_str + 64) / 640));
                 let maxAttackRoll = Math.floor(107 * (Math.max(equipment_bonus_att['crush'], equipment_bonus_att['slash'], equipment_bonus_att['stab']) + 64));
                 let hitChance = 1 - (578 / (2 * (maxAttackRoll + 1)));
-                bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : chunkInfo['equipment'][bestEquipment['weapon']].attack_speed) * .6);
+                bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
             }
             // Void Melee
             if (baseChunkData['items'].hasOwnProperty('Void melee helm') && baseChunkData['items'].hasOwnProperty('Void knight top') && baseChunkData['items'].hasOwnProperty('Void knight robe') && baseChunkData['items'].hasOwnProperty('Void knight gloves')) {
@@ -1417,7 +1417,7 @@ var calcBIS = function() {
                     itemList.forEach(item => { equipment_bonus_att['crush'] += chunkInfo['equipment'][item].attack_crush; equipment_bonus_att['slash'] += chunkInfo['equipment'][item].attack_slash; equipment_bonus_att['stab'] += chunkInfo['equipment'][item].attack_stab; equipment_bonus_str += chunkInfo['equipment'][item].melee_strength });
                     let maxHit = Math.floor(.5 + (121 * (equipment_bonus_str + 64) / 640));
                     let hitChance = 1 - (578 / (2 * (Math.floor(117.7 * (Math.max(equipment_bonus_att['crush'], equipment_bonus_att['slash'], equipment_bonus_att['stab']) + 64)) + 1)));
-                    let newDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : chunkInfo['equipment'][bestEquipment['weapon']].attack_speed) * .6);
+                    let newDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
                     if (newDps > bestDps) {
                         bestDps = newDps;
                         itemList.forEach(item => {
@@ -1485,7 +1485,7 @@ var calcBIS = function() {
                 let maxHit = Math.floor(.5 + (110 * (equipment_bonus_str + 64) / 640));
                 let maxAttackRoll = Math.floor(107 * (equipment_bonus_att['ranged'] + 64));
                 let hitChance = 1 - (578 / (2 * (maxAttackRoll + 1)));
-                bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : chunkInfo['equipment'][bestEquipment['weapon']].attack_speed) * .6);
+                bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
             }
             // Void Ranged
             if (baseChunkData['items'].hasOwnProperty('Void ranger helm') && baseChunkData['items'].hasOwnProperty('Void knight top') && baseChunkData['items'].hasOwnProperty('Void knight robe') && baseChunkData['items'].hasOwnProperty('Void knight gloves')) {
@@ -1550,7 +1550,7 @@ var calcBIS = function() {
                     itemList.forEach(item => { equipment_bonus_att['ranged'] += chunkInfo['equipment'][item].attack_ranged; equipment_bonus_str += chunkInfo['equipment'][item].ranged_strength });
                     let maxHit = Math.floor(.5 + ((elite ? 123.75 : 121) * (equipment_bonus_str + 64) / 640));
                     let hitChance = 1 - (578 / (2 * (Math.floor((elite ? 120.375 : 117.7) * (equipment_bonus_att['ranged'] + 64)) + 1)));
-                    let newDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : chunkInfo['equipment'][bestEquipment['weapon']].attack_speed) * .6);
+                    let newDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
                     if (newDps > bestDps) {
                         bestDps = newDps;
                         itemList.forEach(item => {
@@ -1623,7 +1623,7 @@ var calcBIS = function() {
                 let maxHit = Math.floor(.5 + (110 * (equipment_bonus_str + 64) / 640));
                 let maxAttackRoll = Math.floor(107 * (equipment_bonus_att['magic'] + 64));
                 let hitChance = 1 - (578 / (2 * (maxAttackRoll + 1)));
-                bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : chunkInfo['equipment'][bestEquipment['weapon']].attack_speed) * .6);
+                bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
             }
             // Void Magic
             if (baseChunkData['items'].hasOwnProperty('Void mage helm') && baseChunkData['items'].hasOwnProperty('Void knight top') && baseChunkData['items'].hasOwnProperty('Void knight robe') && baseChunkData['items'].hasOwnProperty('Void knight gloves')) {
@@ -1688,7 +1688,7 @@ var calcBIS = function() {
                     itemList.forEach(item => { equipment_bonus_att['magic'] += chunkInfo['equipment'][item].attack_magic; equipment_bonus_str += chunkInfo['equipment'][item].magic_damage });
                     let maxHit = Math.floor(.5 + (110 * (equipment_bonus_str + 64) / 640));
                     let hitChance = 1 - (578 / (2 * (Math.floor((elite ? 155.15 : 157.825) * (equipment_bonus_att['magic'] + 64)) + 1)));
-                    let newDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : chunkInfo['equipment'][bestEquipment['weapon']].attack_speed) * .6);
+                    let newDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
                     if (newDps > bestDps) {
                         bestDps = newDps;
                         itemList.forEach(item => {
