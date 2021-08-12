@@ -1043,7 +1043,7 @@
 			},
 			"Wear ~|Void Knight equipment|~": {
 				"Category": ["Minigame"],
-				"Chunks": ["10537"],
+				"Chunks": ["10537", "10536"],
 				"Level": 42,
 				"Primary": false,
 				"Skills": {
@@ -8640,7 +8640,7 @@
 			},
 			"Wear ~|Void Knight equipment|~": {
 				"Category": ["Minigame"],
-				"Chunks": ["10537"],
+				"Chunks": ["10537", "10536"],
 				"Level": 42,
 				"Primary": false,
 				"Skills": {
@@ -12617,7 +12617,7 @@
 			},
 			"Wear ~|Void Knight equipment|~": {
 				"Category": ["Minigame"],
-				"Chunks": ["10537"],
+				"Chunks": ["10537", "10536"],
 				"Level": 42,
 				"Primary": false,
 				"Skills": {
@@ -15280,7 +15280,7 @@
 			},
 			"Wear ~|Void Knight equipment|~": {
 				"Category": ["Minigame"],
-				"Chunks": ["10537"],
+				"Chunks": ["10537", "10536"],
 				"Level": 42,
 				"Primary": false,
 				"Skills": {
@@ -17196,7 +17196,7 @@
 			},
 			"Trade in Void Knight commendation points*": {
 				"Category": ["Minigame"],
-				"Chunks": ["10537"],
+				"Chunks": ["10537", "10536"],
 				"Output": "Void Knight commendation points loot"
 			},
 			"Open herb pack*": {
@@ -18096,7 +18096,7 @@
 			},
 			"Wear ~|Void Knight equipment|~": {
 				"Category": ["Minigame"],
-				"Chunks": ["10537"],
+				"Chunks": ["10537", "10536"],
 				"Level": 22,
 				"Primary": false,
 				"Skills": {
@@ -18367,7 +18367,7 @@
 			},
 			"Wear ~|Void Knight equipment|~": {
 				"Category": ["Minigame"],
-				"Chunks": ["10537"],
+				"Chunks": ["10537", "10536"],
 				"Level": 42,
 				"Primary": false,
 				"Skills": {
@@ -22337,7 +22337,7 @@
 			},
 			"Wear ~|Void Knight equipment|~": {
 				"Category": ["Minigame"],
-				"Chunks": ["10537"],
+				"Chunks": ["10537", "10536"],
 				"Level": 42,
 				"Primary": false,
 				"Skills": {
