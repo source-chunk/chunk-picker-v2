@@ -736,7 +736,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.1");
+const myWorker = new Worker("./worker.js?v=4.4.2");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1694,6 +1694,7 @@ var importFromURL = function() {
             } else {
                 $('.pick').text('Pick Chunk');
             }
+            calcCurrentChallenges();
             setTimeout(function() {
                 $('#import-menu').css('opacity', 1);
                 $('#import2').prop('disabled', true).html('Unlock');
