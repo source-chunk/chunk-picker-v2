@@ -712,12 +712,16 @@ let highestModalOpen = false;
 let methodsModalOpen = false;
 let completeModalOpen = false;
 let addEquipmentModalOpen = false;
+let stickerModalOpen = false;
 let workerOut = 0;
 let gotData = false;
 let questPointTotal = 0;
 let oldChallengeArr = {};
 let futureChunkData = {};
 let highestOverall = {};
+let savedBox = null;
+let stickered = {};
+let stickerChoices = ['unset', 'skull', 'skull-crossbones', 'bomb', 'exclamation-circle', 'dice', 'poo', 'frown', 'grin-alt', 'heart', 'star', 'gem', 'award', 'crown', 'flag', 'asterisk', 'clock', 'hourglass', 'link', 'map-marker-alt', 'radiation-alt', 'shoe-prints', 'thumbs-down', 'thumbs-up', 'crow'];
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -736,7 +740,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.2");
+const myWorker = new Worker("./worker.js?v=4.4.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -763,13 +767,67 @@ $(document).ready(function() {
 });
 
 // Prevent right-click menu from showing
-window.addEventListener('contextmenu', function (e) { 
+window.addEventListener('contextmenu', function (e) {
     e.preventDefault();
+}, false);
+
+// keydown listener
+window.addEventListener('keydown', function (e) {
+    if (e.key === 'Control' && signedIn && savedBox !== null) {
+        let i = savedBox.id;
+        let stickerExists = false;
+        savedBox.childNodes.forEach(el => {
+            if (el.className.includes('chunk-sticker')) {
+                stickerExists = true;
+            }
+        });
+        !stickerExists && $(savedBox).append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
+        $('.hidden-sticker').show();
+        $('.chunk-sticker').addClass('clicky').css('font-size', fontZoom * (3/2) + 'px');
+        if (savedBox.className.includes('gray')) {
+            let blacklistLabelExists = false;
+            savedBox.childNodes.forEach(el => {
+                if (el.className.includes('blacklist-label')) {
+                    blacklistLabelExists = true;
+                    if ($(el).text() === 'Un-Blacklist') {
+                        $(el).remove();
+                        $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="blacklist(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})">Blacklist</span>`);
+                    }
+                }
+            });
+            !blacklistLabelExists && $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="blacklist(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})">Blacklist</span>`);
+            $('.hidden-blacklist-label').show();
+        } else if (savedBox.className.includes('blacklisted')) {
+            let blacklistLabelExists = false;
+            savedBox.childNodes.forEach(el => {
+                if (el.className.includes('blacklist-label')) {
+                    blacklistLabelExists = true;
+                    if ($(el).text() === 'Blacklist') {
+                        $(el).remove();
+                        $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="unblacklist(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})">Un-Blacklist</span>`);
+                    }
+                }
+            });
+            !blacklistLabelExists && $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="unblacklist(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})">Un-Blacklist</span>`);
+            $('.hidden-blacklist-label').show();
+        } else {
+            $('.hidden-blacklist-label').hide().remove();
+        }
+    }
+}, false);
+
+// keyup listener
+window.addEventListener('keyup', function (e) {
+    if (e.key === 'Control' && signedIn) {
+        $('.hidden-sticker').hide().remove();
+        $('.chunk-sticker.clicky').removeClass('clicky');
+        $('.hidden-blacklist-label').hide().remove();
+    }
 }, false);
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen) {
         clickX = ev.changedPointers[0].pageX;
         clickY = ev.changedPointers[0].pageY;
     }
@@ -777,7 +835,7 @@ hammertime.on('panstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 hammertime.on('panend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -785,7 +843,7 @@ hammertime.on('panend', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
 hammertime.on('panleft panright panup pandown', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen) {
         updateScrollPos(ev.changedPointers[0]);
     }
 });
@@ -1012,7 +1070,7 @@ $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     if (e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
         $('body').scrollTop(0);
         return;
-    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
+    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
         e.preventDefault();
         return;
     }
@@ -1070,6 +1128,7 @@ $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
     $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
     $('.box').css('font-size', fontZoom + 'px');
+    $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
 });
 
 // Prevent arrow key movement
@@ -1095,7 +1154,7 @@ $(document).on({
             testMode = false;
             loadData();
             $('.test-hint').hide();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen) {
             e.preventDefault();
         }
     }
@@ -1109,7 +1168,7 @@ $(document).on('mouseleave', '.recent', function() {
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen) {
             return;
         }
         if (clicked) {
@@ -1117,10 +1176,12 @@ $(document).on({
             $('.outer').css('cursor', 'grabbing');
             moved = true;
             movedNum++;
+        } else if (e.target.className.includes('box')) {
+            savedBox = e.target;
         }
     },
     'mousedown': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen) {
             return;
         }
         clicked = true;
@@ -1145,7 +1206,7 @@ $(document).on({
             $(".backlog-context-menu").hide(100);
         }
         let tempClicked = clicked;
-        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen) {
+        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen) {
             return;
         } else if (e.button === 2) {
             if ($(e.target).hasClass('box')) {
@@ -1190,25 +1251,21 @@ $(document).on({
                 return;
             }
             if ($(e.target).hasClass('gray')) {
-                if (e.ctrlKey) {
-                    $(e.target).addClass('blacklisted').removeClass('gray');
+                if (selectedNum > 999) {
+                    $(e.target).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
+                    $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
+                } else if (selectedNum > 99) {
+                    $(e.target).addClass('selected').removeClass('gray').append('<span class="label long">' + selectedNum + '</span>');
+                    $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
                 } else {
-                    if (selectedNum > 999) {
-                        $(e.target).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
-                        $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
-                    } else if (selectedNum > 99) {
-                        $(e.target).addClass('selected').removeClass('gray').append('<span class="label long">' + selectedNum + '</span>');
-                        $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
-                    } else {
-                        $(e.target).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
-                        $('.label').css('font-size', labelZoom + 'px');
-                    }
-                    $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                    selectedNum++;
-                    $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-                    if (selectedChunks < 300) {
-                        fixNums(99999);
-                    }
+                    $(e.target).addClass('selected').removeClass('gray').append('<span class="label">' + selectedNum + '</span>');
+                    $('.label').css('font-size', labelZoom + 'px');
+                }
+                $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
+                selectedNum++;
+                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
+                if (selectedChunks < 300) {
+                    fixNums(99999);
                 }
             } else if ($(e.target).hasClass('selected')) {
                 if (selectedChunks < 300) {
@@ -1289,9 +1346,7 @@ $(document).on({
             } else if ($(e.target).hasClass('recent')) {
                 // ----
             } else if ($(e.target).hasClass('blacklisted')) {
-                if (e.ctrlKey) {
-                    $(e.target).addClass('gray').removeClass('blacklisted');
-                }
+                // ----
             } else {
                 $(e.target).addClass('gray').removeClass('unlocked').css('border-width', 0);
                 $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
@@ -1351,6 +1406,7 @@ var zoomButton = function(dir) {
     $('.img').width(zoom + 'vw');
     $('.outer').width(zoom + 'vw');
     $('.box').css('font-size', fontZoom + 'px');
+    $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
     $('.label').css('font-size', labelZoom + 'px');
     $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
     $('.label.long').css('font-size', (labelZoom *(2/3)) + 'px');
@@ -1359,7 +1415,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || (unlockedChunks !== 0 && selectedChunks === 0)) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || (unlockedChunks !== 0 && selectedChunks === 0)) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1535,7 +1591,7 @@ var pick = function(both) {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2 = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1644,7 +1700,7 @@ var importFromURL = function() {
             var chunkStrSplit = url.split('?')[1].split(';');
             var unlocked = stringToChunkIndexes(chunkStrSplit[0]);
             var selected = chunkStrSplit[1] ? stringToChunkIndexes(chunkStrSplit[1]) : null;
-            $('.box').removeClass('selected potential unlocked recent').addClass('gray').css('border-width', 0);
+            $('.box').removeClass('selected potential unlocked recent blacklisted').addClass('gray').css('border-width', 0);
             $('.label').remove();
             roll2On && $('.roll2').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
             unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
@@ -2137,7 +2193,7 @@ var changePin = function() {
 
 // Unpicks a random unlocked chunk
 var unpick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || $('.unlocked').length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || $('.unlocked').length < 1) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -2387,6 +2443,7 @@ var setupMap = function() {
             $('.btnDiv').append(`<div id=${i} class='box gray'><span class='chunkId'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</span></div>`);
         }
         $('.box').css('font-size', fontZoom + 'px');
+        $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
         $('.label').css('font-size', labelZoom + 'px');
         $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
         $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
@@ -3437,6 +3494,46 @@ var addManualEquipment = function(equip) {
     calcCurrentChallenges();
 }
 
+// Opens the sticker menu
+var openStickers = function(id) {
+    stickerModalOpen = true;
+    $('.sticker-data').empty();
+    $('#myModal16').show();
+    $('.sticker-chunk').text(chunkInfo['chunks'][id]['Nickname'] + ' (' + id + ')');
+    stickerChoices.forEach(sticker => {
+        let stickerName = sticker.split('-alt').join('').split('-').join(' ');
+        if (sticker !== 'unset') {
+            $('.sticker-data').append(`<span class='noscroll sticker-option-container ${sticker}-tag' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fas fa-${sticker}" style="transform: scaleX(-1)"></i></span>`);
+        } else {
+            $('.sticker-data').append(`<span class='noscroll sticker-option-container unset-option' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fas fa-ban" style="transform: scaleX(-1)"></i></span>`);
+        }
+    });
+    if (stickered.hasOwnProperty(id)) {
+        $(`.sticker-data > .sticker-option-container.${stickered[id]}-tag`).addClass('selected-sticker');
+    }
+}
+
+// Sets the given sticker on the given chunk
+var setSticker = function(id, sticker) {
+    $('.selected-sticker').removeClass('selected-sticker');
+    if (sticker !== 'unset') {
+        $('.hidden-sticker').hide().remove();
+        $('.chunk-sticker.clicky').removeClass('clicky');
+        if (stickered.hasOwnProperty(id)) {
+            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').children('i').removeClass().addClass('fas fa-' + sticker);
+        } else {
+            $('.box > .chunkId:contains(' + id + ')').parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${sticker}" style="transform: scaleX(-1)"></i></span>`);
+        }
+        $(`.sticker-data > .sticker-option-container.${sticker}-tag`).addClass('selected-sticker');
+        stickered[id] = sticker;
+    } else {
+        delete stickered[id];
+        $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').removeClass('permanent-sticker').addClass('hidden-sticker').children('i').removeClass().addClass('fas fa-tag');
+    }
+    $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
+    setData();
+}
+
 // Opens the methods modal
 var viewPrimaryMethods = function(skill) {
     methodsModalOpen = true;
@@ -3535,6 +3632,12 @@ var closeAddEquipment = function() {
     $('#myModal15').hide();
 }
 
+// Closes the add equipment modal
+var closeSticker = function() {
+    stickerModalOpen = false;
+    $('#myModal16').hide();
+}
+
 // Manually completes checked-off tasks
 var submitCompleteTasks = function() {
     completeChallenges();
@@ -3601,6 +3704,18 @@ var checkFalseRules = function() {
         }
     }
     return all_false;
+}
+
+// Blacklists the given chunk
+var blacklist = function(chunkId) {
+    $('.box > .chunkId:contains(' + chunkId + ')').filter(function() { return parseInt($(this).text()) === parseInt(chunkId); }).parent().addClass('blacklisted').removeClass('gray');
+    setData();
+}
+
+// Un-Blacklists the given chunk
+var unblacklist = function(chunkId) {
+    $('.box > .chunkId:contains(' + chunkId + ')').filter(function() { return parseInt($(this).text()) === parseInt(chunkId); }).parent().addClass('gray').removeClass('blacklisted');
+    setData();
 }
 
 // Get all possible areas within unlocked chunks
@@ -3767,7 +3882,7 @@ var showDetails = function(challenge, skill, type) {
                 });
             }
             formattedSource = formattedSource.slice(0, -2);
-            if (Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).length > 10) {
+            if (!!baseChunkDataIn[key.split('Details')[0].toLowerCase()] && Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).length > 10) {
                 formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + key.split('Details')[0].toLowerCase().replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + '`, `' + el.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + '`)">' +  'Many sources (' + Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).length + ')</span>';
             }
             if (formattedSource !== '') {
@@ -4229,7 +4344,7 @@ var completeChallenges = function() {
 var getQuestInfo = function(quest) {
     $('.menu10').css('opacity', 1).show();
     quest = quest.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G');
-    $('.questname-content').html(quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'));
+    $('.questname-content').html(`<a class='link noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))}' target='_blank'>${quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')}</a>`);
     $('.panel-questdata').empty();
     let unlocked = {...possibleAreas};
     $('.unlocked').each(function() {
@@ -4244,7 +4359,7 @@ var getQuestInfo = function(quest) {
             questChunks.push(chunkName);
             chunkName = chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")]['Nickname'] + ' (' + chunkName + ')';
         }
-        $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] && ' + valid-chunk'}">` + `<span onclick="redirectPanel(encodeURI('` + chunkId.replaceAll(/\'/g, "%2H") + `'))"><i class="quest-icon fas fa-crosshairs"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
+        $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId] && ' + valid-chunk'}">` + `<span onclick="redirectPanel(encodeURI('` + chunkId.replaceAll(/\'/g, "%2H") + `'))"><i class="quest-icon fas fa-crosshairs"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
     });
 }
 
@@ -4454,7 +4569,7 @@ var loadData = function(startup) {
             toggleChunkInfo(settings['info'], 'startup');
             toggleChunkTasks(settings['chunkTasks'], 'startup');
     
-            $('.box').removeClass('selected potential unlocked recent').addClass('gray').css('border-width', 0);
+            $('.box').removeClass('selected potential unlocked recent blacklisted').addClass('gray').css('border-width', 0);
             $('.label').remove();
             selectedChunks = 0;
             unlockedChunks = 0;
@@ -4499,8 +4614,15 @@ var loadData = function(startup) {
             });
 
             chunks && chunks['blacklisted'] && Object.keys(chunks['blacklisted']).forEach(function(id) {
-                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('blacklisted').removeClass('gray selected potential');
+                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('blacklisted').removeClass('gray selected potential unlocked');
             });
+
+            $('.chunk-sticker').remove();
+            chunks && chunks['stickered'] && Object.keys(chunks['stickered']).forEach(function(id) {
+                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i></span>`);
+            });
+            $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
+            stickered = chunks['stickered'] || {};
     
             if (picking) {
                 $('.unpick').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
@@ -4611,6 +4733,8 @@ var setData = function() {
                     tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
                 });
                 myRef.child('chunks/blacklisted').set(tempJson);
+
+                myRef.child('chunks/stickered').set(stickered);
 
                 highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
                     mid: mid,

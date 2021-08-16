@@ -28210,6 +28210,9 @@
 			"Nickname": "West Quidamortem Path"
 		},
 		"4663": {
+			"Monster": {
+				"Rock Crab": 23
+			},
 			"NPC": {
 				"Rocks": 23
 			},
@@ -28222,6 +28225,9 @@
 			}
 		},
 		"4664": {
+			"Monster": {
+				"Rock Crab": 5
+			},
 			"NPC": {
 				"Crimson swift": 5,
 				"Ket'sal K'uk": 1,
@@ -30352,6 +30358,7 @@
 		},
 		"6710": {
 			"Monster": {
+				"Sand Crab": 18,
 				"Spider": 1,
 				"Woman": 1
 			},
@@ -30727,6 +30734,9 @@
 			"Connect": {
 				"6808": true
 			},
+			"Monster": {
+				"Sand Crab": 14
+			},
 			"NPC": {
 				"Sandy Boulder": 8,
 				"Sandy rocks": 14
@@ -30811,6 +30821,9 @@
 			}
 		},
 		"6965": {
+			"Monster": {
+				"Sand Crab": 14
+			},
 			"NPC": {
 				"Sandicrahb": 1,
 				"Sandy rocks": 47
@@ -30823,6 +30836,7 @@
 				"Goblin%2FLevel 2": 5,
 				"Imp": 9,
 				"Monk": 7,
+				"Sand Crab": 27,
 				"Woman": 1
 			},
 			"NPC": {
@@ -31307,6 +31321,7 @@
 				"Fox": 1,
 				"Imp": 1,
 				"Rabbit": 5,
+				"Sand Crab": 11,
 				"Snake": 1
 			},
 			"NPC": {
@@ -31694,6 +31709,9 @@
 			"Nickname": "East Hosidius Shore"
 		},
 		"7479": {
+			"Monster": {
+				"Sand Crab": 22
+			},
 			"NPC": {
 				"Hopleez": 1,
 				"Sandy rocks": 22
@@ -33684,7 +33702,7 @@
 		},
 		"9003": {
 			"Monster": {
-				"Sand crab": 15
+				"Sand Crab": 15
 			},
 			"Nickname": "Soul Isle Crabs",
 			"Object": {
@@ -36997,7 +37015,8 @@
 				"Fremennik": "EA6, MD8"
 			},
 			"Monster": {
-				"Hobgoblin": 2
+				"Hobgoblin": 2,
+				"Rock Crab": 19
 			},
 			"NPC": {
 				"Askeladden": 1,
@@ -39247,7 +39266,8 @@
 		},
 		"10554": {
 			"Monster": {
-				"Hobgoblin": 5
+				"Hobgoblin": 5,
+				"Rock Crab": 20
 			},
 			"NPC": {
 				"Rocks": 20
@@ -40123,6 +40143,9 @@
 				"9541": true,
 				"10910": true,
 				"11166": true
+			},
+			"Monster": {
+				"Rock Crab": 14
 			},
 			"NPC": {
 				"Cerulean twitch": 8,
@@ -51853,6 +51876,7 @@
 				"Leech": 5,
 				"Myre Blamish Snail": 1,
 				"Ochre Blamish Snail": 2,
+				"Swamp Crab": 19,
 				"Vyrewatch": 1
 			},
 			"NPC": {
@@ -52290,6 +52314,9 @@
 			}
 		},
 		"14645": {
+			"Monster": {
+				"Swamp Crab": 5
+			},
 			"NPC": {
 				"Ghost guard": 2,
 				"Swamp lizard": 23,
@@ -52658,6 +52685,7 @@
 				"15000": true
 			},
 			"Monster": {
+				"Swamp Crab": 6,
 				"Vampyre Juvenile": 3,
 				"Vyrewatch": 10
 			},
@@ -54093,6 +54121,9 @@
 		"Crabclaw Caves": {
 			"Connect": {
 				"6453": true
+			},
+			"Monster": {
+				"Sand Crab": 14
 			},
 			"NPC": {
 				"Sandy Boulder": 8,
@@ -58625,6 +58656,7 @@
 				"Dagannoth Supreme": 1,
 				"Dagannoth fledgeling": 5,
 				"Giant Rock Crab": 3,
+				"Rock Crab": 18,
 				"Spinolyp": 10,
 				"Suspicious water": 15,
 				"Wallasalki": 47
@@ -124417,25 +124449,6 @@
 			"slot": "weapon",
 			"requirements": ["magic"]
 		},
-		"Vesta's longsword": {
-			"attack_speed": 5,
-			"attack_crush": -2,
-			"attack_magic": 0,
-			"attack_ranged": 0,
-			"attack_slash": 121,
-			"attack_stab": 106,
-			"defence_crush": 3,
-			"defence_magic": 0,
-			"defence_ranged": 0,
-			"defence_slash": 4,
-			"defence_stab": 1,
-			"magic_damage": 0,
-			"melee_strength": 118,
-			"prayer": 0,
-			"ranged_strength": 0,
-			"slot": "weapon",
-			"requirements": ["attack"]
-		},
 		"Statius's warhammer": {
 			"attack_speed": 5,
 			"attack_crush": 123,
@@ -125514,25 +125527,6 @@
 			"defence_stab": 0,
 			"magic_damage": 0,
 			"melee_strength": 89,
-			"prayer": 0,
-			"ranged_strength": 0,
-			"slot": "weapon",
-			"requirements": ["attack"]
-		},
-		"Vesta's blighted longsword": {
-			"attack_speed": 5,
-			"attack_crush": -2,
-			"attack_magic": 0,
-			"attack_ranged": 0,
-			"attack_slash": 121,
-			"attack_stab": 106,
-			"defence_crush": 3,
-			"defence_magic": 0,
-			"defence_ranged": 0,
-			"defence_slash": 4,
-			"defence_stab": 1,
-			"magic_damage": 0,
-			"melee_strength": 118,
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "weapon",

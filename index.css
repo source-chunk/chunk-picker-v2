@@ -74,6 +74,7 @@ a, a:visited {
     background-color: transparent;
     color: rgba(255, 255, 255, 0);
     transition: background-color .25s linear;
+    position: relative;
 }
 
 .box.visible {
@@ -1935,6 +1936,11 @@ button.menu2 {
     margin-top: -2.5%;
 }
 
+#myModal16 > .modal-content {
+    height: 50%;
+    width: 35%;
+}
+
 .manual-close {
     cursor: pointer;
     margin-top: 0px;
@@ -2978,4 +2984,102 @@ input#searchAddEquipment {
 .tosearchdetails {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.chunk-sticker {
+    color: black;
+    width: auto;
+    height: auto;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    transition-property: color;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.chunk-sticker.clicky {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.chunk-sticker.clicky:hover {
+    color: rgb(100, 100, 100);
+}
+
+.chunk-sticker.hidden-sticker {
+    opacity: 0;
+    display: none;
+}
+
+.box:hover .chunk-sticker {
+    opacity: 1;
+}
+
+.sticker-chunk {
+    font-weight: bold;
+    display: block;
+}
+
+.sticker-title {
+    font-size: 30px;
+    text-align: center;
+    max-height: 25%;
+    min-height: 25%;
+    padding: 0px 10px;
+}
+
+.sticker-data {
+    font-size: 30px;
+    text-align: center;
+    max-height: 75%;
+    min-height: 75%;
+    padding: 0px 10px;
+    overflow-y: auto;
+}
+
+.sticker-option-container {
+    padding: 10px;
+    border: solid;
+    margin: 10px;
+    cursor: pointer;
+    display: inline-block;
+    width: 35px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.sticker-option-container.unset-option {
+    color: rgb(100, 100, 100);
+    border: dashed;
+}
+
+.selected-sticker {
+    color: rgb(50, 175, 50);
+}
+
+.sticker-option-container:hover {
+    color: rgb(75, 75, 225);
+}
+
+.blacklist-label {
+    color: white;
+    margin: auto;
+    z-index: 1;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, .75);
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.blacklist-label.hidden-blacklist-label {
+    opacity: 0;
+    display: none;
+}
+
+.box:hover .blacklist-label {
+    opacity: 1;
 }
