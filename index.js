@@ -740,7 +740,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.3");
+const myWorker = new Worker("./worker.js?v=4.4.4");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1280,7 +1280,7 @@ $(document).on({
                 !onMobile && setCalculating('.panel-active');
                 !onMobile && setCalculating('.panel-areas');
                 !onMobile && setCalculating('.panel-completed');
-                calcCurrentChallenges();
+                !onMobile && calcCurrentChallenges();
             } else if ($(e.target).hasClass('potential')) {
                 if (selectedChunks < 300) {
                     fixNums($($(e.target).children('.label')).text());
@@ -1342,7 +1342,7 @@ $(document).on({
                 !onMobile && !activeSubTabs['quest'] && expandActive('quest');
                 !onMobile && !activeSubTabs['diary'] && expandActive('diary');
                 !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-                calcCurrentChallenges();
+                !onMobile && calcCurrentChallenges();
             } else if ($(e.target).hasClass('recent')) {
                 // ----
             } else if ($(e.target).hasClass('blacklisted')) {
@@ -1355,7 +1355,7 @@ $(document).on({
                 !onMobile && setCalculating('.panel-active');
                 !onMobile && setCalculating('.panel-areas');
                 !onMobile && setCalculating('.panel-completed');
-                calcCurrentChallenges();
+                !onMobile && calcCurrentChallenges();
             }
             if (isPicking) {
                 $('.pick').text('Pick for me');
@@ -1494,7 +1494,7 @@ var pick = function(both) {
         !onMobile && !activeSubTabs['quest'] && expandActive('quest');
         !onMobile && !activeSubTabs['diary'] && expandActive('diary');
         !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-        calcCurrentChallenges();
+        !onMobile && calcCurrentChallenges();
         setData();
         chunkBorders();
         if (el.length < 300) {
@@ -1584,7 +1584,7 @@ var pick = function(both) {
     !onMobile && !activeSubTabs['quest'] && expandActive('quest');
     !onMobile && !activeSubTabs['diary'] && expandActive('diary');
     !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-    calcCurrentChallenges();
+    !onMobile && calcCurrentChallenges();
     setData();
     chunkBorders();
 }
@@ -2396,7 +2396,7 @@ var doneLoading = function() {
     if (onMobile) {
         $('.center').css({'height': '40px', 'width': '90px', 'font-size': '12px'});
         $('.pick, .roll2, .unpick').css({'height': '20px', 'width': '90px', 'font-size': '12px'});
-        $('.menu2, .menu6, .menu7, .menu8, .menu9, .menu10, .settings, .gohighscore, .gobugreport, .godiscord, .help-button, .toptitle2-outer').hide().remove();
+        $('.menu2, .menu6, .menu7, .menu8, .menu9, .menu10, .settings, .gohighscore, .gobugreport, .godiscord, .gopatreon, .godocumentation, .gosearch, .hiddenInfo, .help-button, .toptitle2-outer').hide().remove();
         $('.hr').css({'width': '25px'});
         $('.gohighscore').css({'right': '3vw', 'left': 'auto'});
         $('.block, .block > .title').css({'font-size': '18px'});
@@ -3196,7 +3196,7 @@ var removeRandomLoot = function(item) {
             $('#randomlist-data').append(`<div class="noscroll results"><span class="noscroll">No items</span></div>`);
         }
         !onMobile && setCalculating('.panel-active');
-        calcCurrentChallenges();
+        !onMobile && calcCurrentChallenges();
         setData();
     }
 }
@@ -3222,7 +3222,7 @@ var addRandomLoot = function(close) {
             if (loot !== '') {
                 randomLoot[loot] = true;
                 !onMobile && setCalculating('.panel-active');
-                calcCurrentChallenges();
+                !onMobile && calcCurrentChallenges();
                 setData();
             }
             $('#myModal6').hide();
@@ -3305,7 +3305,7 @@ var addManualTask = function(challenge) {
         }
     });
     !onMobile && setCalculating('.panel-active');
-    calcCurrentChallenges();
+    !onMobile && calcCurrentChallenges();
 }
 
 // Opens the manual complete tasks modal
@@ -3491,7 +3491,7 @@ var addManualEquipment = function(equip) {
         delete manualEquipment[equip];
     }
     !onMobile && setCalculating('.panel-active');
-    calcCurrentChallenges();
+    !onMobile && calcCurrentChallenges();
 }
 
 // Opens the sticker menu
@@ -4113,9 +4113,9 @@ var backlogChallenge = function(challenge, skill, note) {
             });
         }
     }
-    calcCurrentChallenges();
+    !onMobile && calcCurrentChallenges();
     !onMobile && setupCurrentChallenges(oldChallengeArr);
-    checkOffChallenges();
+    !onMobile && checkOffChallenges();
     setData();
 }
 
@@ -4137,8 +4137,8 @@ var unbacklogChallenge = function(challenge, skill) {
     }
     !onMobile && setupCurrentChallenges(false);
     !onMobile && setCalculating('.panel-active');
-    calcCurrentChallenges();
-    checkOffChallenges();
+    !onMobile && calcCurrentChallenges();
+    !onMobile && checkOffChallenges();
     setData();
 }
 
@@ -4160,7 +4160,7 @@ var uncompleteChallenge = function(challenge, skill) {
     }
     !onMobile && setupCurrentChallenges(false);
     !onMobile && setCalculating('.panel-active');
-    calcCurrentChallenges();
+    !onMobile && calcCurrentChallenges();
     setData();
 }
 
@@ -4244,7 +4244,7 @@ var checkOffAreas = function(obj, area) {
     !onMobile && setCalculating('.panel-active');
     getChunkAreas();
     setAreas();
-    calcCurrentChallenges();
+    !onMobile && calcCurrentChallenges();
     setData();
 }
 
@@ -4284,7 +4284,7 @@ var checkOffRules = function(didRedo, startup) {
     if (!startup) {
         setupCurrentChallenges(false);
         !onMobile && setCalculating('.panel-active');
-        calcCurrentChallenges();
+        !onMobile && calcCurrentChallenges();
         rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
         rules['Random Event Loot'] && $('.open-random-container').css('opacity', 1).show();
         rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
@@ -4337,7 +4337,7 @@ var completeChallenges = function() {
     });
     checkedChallenges = {};
     !onMobile && setCalculating('.panel-completed');
-    calcCurrentChallenges();
+    !onMobile && calcCurrentChallenges();
 }
 
 // Gets and displays info on the gievn quest
@@ -4633,7 +4633,7 @@ var loadData = function(startup) {
                 $('.pick').text('Random Start?');
             }
             chunkBorders();
-            chunkTasksOn && calcCurrentChallenges();
+            chunkTasksOn && !onMobile &&  calcCurrentChallenges();
             startup && center('quick');
             doneLoading();
         });
@@ -4923,7 +4923,7 @@ var changeLocked = function() {
                         $('#lock-unlock').prop('disabled', false).html('Unlock');
                         locked = false;
                         helpMenuOpenSoon && helpFunc();
-                        unlockChallenges();
+                        !onMobile && unlockChallenges();
                         lockBoxOpen = false;
                     }, 500);
                 }).catch((error) => {
@@ -4971,7 +4971,7 @@ var changeLocked = function() {
                                 $('#lock-unlock').prop('disabled', false).html('Unlock');
                                 locked = false;
                                 helpMenuOpenSoon && helpFunc();
-                                unlockChallenges();
+                                !onMobile && unlockChallenges();
                                 lockBoxOpen = false;
                             }, 500);
                         }).catch((error) => {
