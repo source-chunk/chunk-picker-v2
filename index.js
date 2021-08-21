@@ -740,7 +740,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.4");
+const myWorker = new Worker("./worker.js?v=4.4.5");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -4622,7 +4622,7 @@ var loadData = function(startup) {
                 $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i></span>`);
             });
             $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
-            stickered = chunks['stickered'] || {};
+            stickered = (chunks ? chunks['stickered'] : {}) || {};
     
             if (picking) {
                 $('.unpick').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
@@ -4715,6 +4715,15 @@ var setData = function() {
                     tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
                 });
                 myRef.child('chunks/unlocked').set(tempJson);
+                let walkableUnlockedChunks;
+                if (highscoreEnabled || true) {
+                    walkableUnlockedChunks = 0;
+                    chunkInfo['walkableChunks'].forEach(chunkId => {
+                        if (tempJson.hasOwnProperty(chunkId)) {
+                            walkableUnlockedChunks++;
+                        }
+                    });
+                }
 
                 tempJson = {};
                 Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
@@ -4739,55 +4748,72 @@ var setData = function() {
                 highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
                     mid: mid,
                     name: userName.toLowerCase(),
-                    score: unlockedChunks,
+                    score: walkableUnlockedChunks,
                 });
             }
         });
     } else if (signedIn && !firebase.auth().currentUser) {
         firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
             myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
-            Object.keys(rules).forEach(rule => {
-                if (rules[rule] === undefined) {
-                    rules[rule] = false;
+                Object.keys(rules).forEach(rule => {
+                    if (rules[rule] === undefined) {
+                        rules[rule] = false;
+                    }
+                });
+                myRef.update({rules});
+                if (!helpMenuOpen && !helpMenuOpenSoon) {
+                    myRef.child('settings').update({'help': false});
                 }
-            });
-            myRef.update({rules});
-            if (!helpMenuOpen && !helpMenuOpenSoon) {
-                myRef.child('settings').update({'help': false});
-            }
-            myRef.update({recent});
-            myRef.update({recentTime});
-            myRef.update({randomLoot});
-            myRef.child('chunkinfo').update({checkedChallenges});
-            myRef.child('chunkinfo').update({completedChallenges});
-            myRef.child('chunkinfo').update({backlog});
-            myRef.child('chunkinfo').update({possibleAreas});
-            myRef.child('chunkinfo').update({manualTasks});
-            myRef.child('chunkinfo').update({manualEquipment});
+                myRef.update({recent});
+                myRef.update({recentTime});
+                myRef.update({randomLoot});
+                myRef.child('chunkinfo').update({checkedChallenges});
+                myRef.child('chunkinfo').update({completedChallenges});
+                myRef.child('chunkinfo').update({backlog});
+                myRef.child('chunkinfo').update({possibleAreas});
+                myRef.child('chunkinfo').update({manualTasks});
+                myRef.child('chunkinfo').update({manualEquipment});
 
-            var tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-            });
-            myRef.child('chunks/unlocked').set(tempJson);
+                var tempJson = {};
+                Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
+                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                });
+                myRef.child('chunks/unlocked').set(tempJson);
+                let walkableUnlockedChunks;
+                if (highscoreEnabled || true) {
+                    walkableUnlockedChunks = 0;
+                    chunkInfo['walkableChunks'].forEach(chunkId => {
+                        if (tempJson.hasOwnProperty(chunkId)) {
+                            walkableUnlockedChunks++;
+                        }
+                    });
+                }
 
-            tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-            });
-            myRef.child('chunks/selected').set(tempJson);
+                tempJson = {};
+                Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
+                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                });
+                myRef.child('chunks/selected').set(tempJson);
 
-            tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
-            });
-            myRef.child('chunks/potential').set(tempJson);
+                tempJson = {};
+                Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
+                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                });
+                myRef.child('chunks/potential').set(tempJson);
 
-            highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
-                mid: mid,
-                name: userName.toLowerCase(),
-                score: unlockedChunks,
-            });
+                tempJson = {};
+                Array.prototype.forEach.call(document.getElementsByClassName('blacklisted'), function(el) {
+                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                });
+                myRef.child('chunks/blacklisted').set(tempJson);
+
+                myRef.child('chunks/stickered').set(stickered);
+
+                highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
+                    mid: mid,
+                    name: userName.toLowerCase(),
+                    score: walkableUnlockedChunks,
+                });
         }).catch(function(error) {console.log(error)});
     }
 }
