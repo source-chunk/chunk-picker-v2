@@ -459,6 +459,7 @@ let settings = {
     "chunkTasks": true,
     "completedTaskColor": '#0D8219',
     "completedTaskStrikethrough": true,
+    'randomStartAlways': false,
 };                                                                              // Current state of all settings
 
 let settingNames = {
@@ -471,13 +472,15 @@ let settingNames = {
     "info": "<b>[Chunk Info]</b> The chunk info panel shows you an array of information on every chunk in the game (monsters, npcs, item spawns, shops, and more). Hint: Right-click a chunk to bring up info on that chunk",
     "chunkTasks": "<b>[Chunk Tasks]</b> The chunk tasks panel shows you an automatically made list of active tasks you need to do to finish your chunk. This is essential for any Chunker to keep track of what needs to get done",
     "completedTaskColor": "Change the color of checked-off chunk tasks",
-    "completedTaskStrikethrough": "Cross-off chunk tasks as you complete them"
+    "completedTaskStrikethrough": "Cross-off chunk tasks as you complete them",
+    "randomStartAlways": "Change the 'Pick Chunk' button to always be a 'Random Start' button; every chunk roll picks a random walkable chunk (that isn't already unlocked)",
 };                                                                              // Descriptions of the settings
 
 let settingStructure = {
     "Chunk Rolling Alternatives": {
         "roll2": true,
-        "unpick": true
+        "unpick": true,
+        "randomStartAlways": true
     },
     "Chunk Neighbors": {
         "neighbors": true,
@@ -721,7 +724,10 @@ let futureChunkData = {};
 let highestOverall = {};
 let savedBox = null;
 let stickered = {};
+let stickeredNotes = {};
 let stickerChoices = ['unset', 'skull', 'skull-crossbones', 'bomb', 'exclamation-circle', 'dice', 'poo', 'frown', 'grin-alt', 'heart', 'star', 'gem', 'award', 'crown', 'flag', 'asterisk', 'clock', 'hourglass', 'link', 'map-marker-alt', 'radiation-alt', 'shoe-prints', 'thumbs-down', 'thumbs-up', 'crow'];
+let savedStickerId;
+let savedStickerSticker;
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -740,7 +746,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.5");
+const myWorker = new Worker("./worker.js?v=4.4.6");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1359,7 +1365,7 @@ $(document).on({
             }
             if (isPicking) {
                 $('.pick').text('Pick for me');
-            } else if (unlockedChunks === 0 && selectedChunks === 0) {
+            } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
                 $('.pick').text('Random Start?');
             } else  {
                 $('.pick').text('Pick Chunk');
@@ -1415,7 +1421,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || (unlockedChunks !== 0 && selectedChunks === 0)) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1501,17 +1507,17 @@ var pick = function(both) {
             fixNums(9999);
         }
         return;
-    } else if (unlockedChunks === 0 && selectedChunks === 0) {
+    } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
         chunkInfo['walkableChunks'].forEach(id => {
             $('.box:contains(' + id + ')').addClass('walkable');
         });
-        el = $('.walkable');
+        el = $('.walkable:not(.unlocked)');
         rand = Math.floor(Math.random() * el.length);
         sNum = $($(el[rand]).children('.label')).text();
         selectedChunks++;
         didRandomStart = true;
         $(el[rand]).children('.label').remove();
-        $(el[rand]).addClass('unlocked recent').removeClass('gray walkable');
+        $(el[rand]).addClass('unlocked recent').removeClass('gray selected potential walkable');
         $('.pick').text('Pick Chunk');
     } else if (!isPicking) {
         el = $('.selected');
@@ -1745,7 +1751,7 @@ var importFromURL = function() {
             $('#import-menu').css({'opacity': 0}).hide();
             $('.import').css('opacity', 0).show();
             $('.import').animate({'opacity': 1});
-            if (unlockedChunks === 0 && selectedChunks === 0) {
+            if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
                 $('.pick').text('Random Start?');
             } else {
                 $('.pick').text('Pick Chunk');
@@ -2558,6 +2564,14 @@ var fixNums = function(num) {
     let nums = {};
     let innerLooped = false;
     $('.label').each(function(index) {
+        if (parseInt($(this).text()) !== num) {
+            if (parseInt($(this).text()) <= 0 || nums.hasOwnProperty(parseInt($(this).text()))) {
+                isBroken = true;
+            }
+            nums[parseInt($(this).text())] = true;
+        } else {
+            innerLooped = true;
+        }
         if (parseInt($(this).text()) > num) {
             innerLooped = true;
             if (parseInt($(this).text()) === 1000) {
@@ -2571,14 +2585,6 @@ var fixNums = function(num) {
             $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
             $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
             $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
-        }
-        if (parseInt($(this).text()) !== num) {
-            if (parseInt($(this).text()) <= 0 || nums.hasOwnProperty(parseInt($(this).text()))) {
-                isBroken = true;
-            }
-            nums[parseInt($(this).text())] = true;
-        } else {
-            innerLooped = true;
         }
     });
     innerLooped && selectedNum--;
@@ -3508,14 +3514,19 @@ var openStickers = function(id) {
             $('.sticker-data').append(`<span class='noscroll sticker-option-container unset-option' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fas fa-ban" style="transform: scaleX(-1)"></i></span>`);
         }
     });
+    savedStickerId = id;
     if (stickered.hasOwnProperty(id)) {
         $(`.sticker-data > .sticker-option-container.${stickered[id]}-tag`).addClass('selected-sticker');
+        savedStickerSticker = stickered[id];
+    } else {
+        savedStickerSticker = 'unset';
     }
+    $('#sticker-notes-data > textarea').val(stickeredNotes[id]);
 }
 
-// Sets the given sticker on the given chunk
-var setSticker = function(id, sticker) {
-    $('.selected-sticker').removeClass('selected-sticker');
+var submitSticker = function() {
+    let id = savedStickerId;
+    let sticker  = savedStickerSticker;
     if (sticker !== 'unset') {
         $('.hidden-sticker').hide().remove();
         $('.chunk-sticker.clicky').removeClass('clicky');
@@ -3524,14 +3535,26 @@ var setSticker = function(id, sticker) {
         } else {
             $('.box > .chunkId:contains(' + id + ')').parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${sticker}" style="transform: scaleX(-1)"></i></span>`);
         }
-        $(`.sticker-data > .sticker-option-container.${sticker}-tag`).addClass('selected-sticker');
         stickered[id] = sticker;
+        stickeredNotes[id] = $('#sticker-notes-data > textarea').val();
     } else {
         delete stickered[id];
+        delete stickeredNotes[id];
         $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').removeClass('permanent-sticker').addClass('hidden-sticker').children('i').removeClass().addClass('fas fa-tag');
     }
     $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
     setData();
+    closeSticker();
+}
+
+// Sets the given sticker on the given chunk
+var setSticker = function(id, sticker) {
+    savedStickerId = id;
+    savedStickerSticker = sticker;
+    $('.selected-sticker').removeClass('selected-sticker');
+    if (sticker !== 'unset') {
+        $(`.sticker-data > .sticker-option-container.${sticker}-tag`).addClass('selected-sticker');
+    }
 }
 
 // Opens the methods modal
@@ -4319,6 +4342,13 @@ var checkOffSettings = function(startup) {
     if (!startup) {
         setData();
     }
+    if (isPicking) {
+        $('.pick').text('Pick for me');
+    } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
+        $('.pick').text('Random Start?');
+    } else  {
+        $('.pick').text('Pick Chunk');
+    }
 }
 
 // Moves checked off challenges to completed
@@ -4623,13 +4653,14 @@ var loadData = function(startup) {
             });
             $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
             stickered = (chunks ? chunks['stickered'] : {}) || {};
+            stickeredNotes = (chunks ? chunks['stickeredNotes'] : {}) || {};
     
             if (picking) {
                 $('.unpick').css({'opacity': 0, 'cursor': 'default'}).prop('disabled', true).hide();
                 $('.pick').text('Pick for me');
                 $('.roll2').text('Unlock both');
                 isPicking = true;
-            } else if (unlockedChunks === 0 && selectedChunks === 0) {
+            } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
                 $('.pick').text('Random Start?');
             }
             chunkBorders();
@@ -4690,7 +4721,7 @@ var setData = function() {
                     return;
                 });
             } else {
-                myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough']});
+                myRef.child('settings').update({'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'randomStartAlways': settings['randomStartAlways']});
                 Object.keys(rules).forEach(rule => {
                     if (rules[rule] === undefined) {
                         rules[rule] = false;
@@ -4744,6 +4775,7 @@ var setData = function() {
                 myRef.child('chunks/blacklisted').set(tempJson);
 
                 myRef.child('chunks/stickered').set(stickered);
+                myRef.child('chunks/stickeredNotes').set(stickeredNotes);
 
                 highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
                     mid: mid,
@@ -4808,6 +4840,7 @@ var setData = function() {
                 myRef.child('chunks/blacklisted').set(tempJson);
 
                 myRef.child('chunks/stickered').set(stickered);
+                myRef.child('chunks/stickeredNotes').set(stickeredNotes);
 
                 highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
                     mid: mid,

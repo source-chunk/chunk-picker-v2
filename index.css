@@ -2485,7 +2485,7 @@ button.menu2 {
 }
 
 #submit-notes-button:hover {
-    background-color: rgb(200, 200, 200);
+    background-color: rgb(80, 80, 80);
 }
 
 .marker {
@@ -3029,15 +3029,17 @@ input#searchAddEquipment {
     max-height: 25%;
     min-height: 25%;
     padding: 0px 10px;
+    border-bottom: 1px solid;
 }
 
-.sticker-data {
+.sticker-data-container {
     font-size: 30px;
     text-align: center;
-    max-height: 75%;
-    min-height: 75%;
+    max-height: 63%;
+    min-height: 63%;
     padding: 0px 10px;
     overflow-y: auto;
+    background-color: rgb(230, 230, 230);
 }
 
 .sticker-option-container {
@@ -3062,6 +3064,51 @@ input#searchAddEquipment {
 
 .sticker-option-container:hover {
     color: rgb(75, 75, 225);
+}
+
+.sticker-notes-data {
+    text-align: center;
+    height: 20%;
+    margin-top: 15px;
+}
+
+.sticker-notes-data > textarea {
+    resize: none;
+    width: 90%;
+    height: 100%;
+    font-size: 18px;
+}
+
+.sticker-footer {
+    height: 13%;
+    border-top: 1px solid;
+}
+
+#cancel-sticker-button {
+    float: right;
+    padding: 20px 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#submit-sticker-button {
+    background-color: grey;
+    width: 100px;
+    font-size: 20px;
+    color: white;
+    float: right;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 20px 10px;
+}
+
+#submit-sticker-button:hover {
+    background-color: rgb(80, 80, 80);
 }
 
 .blacklist-label {
