@@ -274,10 +274,10 @@ let ruleNames = {
     "Puro-Puro": "Allow implings from Puro-Puro & their drops to count towards chunk tasks",
     "Random Event Loot": "Allow any random event rewards/bird nest loot/gems from mining/RareDropTable & GemDropTable obtained to count towards chunk tasks",
     "Manually Add Tasks": "Allow the ability to manually add active chunk tasks (useful if you decide to lamp up a skill to start training it)",
-    "Collection Log Bosses": "<b>[Collection log]</b> Obtain items in the 'Bosses' tab",
-    "Collection Log Raids": "<b>[Collection log]</b> Obtain items in the 'Raids' tab",
-    "Collection Log Minigames": "<b>[Collection log]</b> Obtain items in the 'Minigames' tab",
-    "Collection Log Other": "<b>[Collection log]</b> Obtain items in the 'Other' tab",
+    "Collection Log Bosses": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Bosses' tab",
+    "Collection Log Raids": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Raids' tab",
+    "Collection Log Minigames": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Minigames' tab",
+    "Collection Log Other": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Other' tab",
     "Herblore Unlocked": "Herblore tasks are automatically required once Druidic Ritual is completable",
     "Farming Primary": "Farming products (herbs, vegetables, etc.) can count as primary item sources for chunk tasks",
     "Tertiary Keys": "Allow loot from tertiary slayer keys (brimstone/larran's) to count towards chunk tasks",
@@ -290,7 +290,7 @@ let ruleNames = {
     "Smithing by Smelting": "Smelting ores into bars counts as a primary method for training Smithing",
     "Pets": "Obtaining pets is included in the collection log tasks",
     "Stuffables": "Must obtain stuffable items that can be mounted in the POH (big fish, slayer heads)",
-    "Manually Complete Tasks": "<b>For maps that allow manually choosing new chunks</b>, allow the ability to manually move completed active tasks",
+    "Manually Complete Tasks": "<b class='noscroll'>For maps that allow manually choosing new chunks</b>, allow the ability to manually move completed active tasks",
     "Every Drop": "Must obtain every monster drop at least once",
     "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to snake weed (the only primary training for Herblore in the game)",
     "HigherLander": "Accessing the intermediate and veteran landers for Pest Control are required tasks (only novice lander is required otherwise)",
@@ -468,9 +468,9 @@ let settingNames = {
     "remove": "After a new chunk is rolled, mark all locked chunks as not-rollable",
     "roll2": "Enable the roll 2 button, allowing you to roll two chunks and pick between the two",
     "unpick": "Enable the unpick chunk button, allowing you to unpick, and therefore re-lock, a randomly selected unlocked chunk (useful for forfeits)",
-    "recent": "<b>[Recent Chunks]</b> The recent chunks panel shows you the 5 most recently rolled chunks on your map, the dates you rolled them, how long it's been (in days) since your last roll, and more",
-    "info": "<b>[Chunk Info]</b> The chunk info panel shows you an array of information on every chunk in the game (monsters, npcs, item spawns, shops, and more). Hint: Right-click a chunk to bring up info on that chunk",
-    "chunkTasks": "<b>[Chunk Tasks]</b> The chunk tasks panel shows you an automatically made list of active tasks you need to do to finish your chunk. This is essential for any Chunker to keep track of what needs to get done",
+    "recent": "<b class='noscroll'>[Recent Chunks]</b> The recent chunks panel shows you the 5 most recently rolled chunks on your map, the dates you rolled them, how long it's been (in days) since your last roll, and more",
+    "info": "<b class='noscroll'>[Chunk Info]</b> The chunk info panel shows you an array of information on every chunk in the game (monsters, npcs, item spawns, shops, and more). Hint: Right-click a chunk to bring up info on that chunk",
+    "chunkTasks": "<b class='noscroll'>[Chunk Tasks]</b> The chunk tasks panel shows you an automatically made list of active tasks you need to do to finish your chunk. This is essential for any Chunker to keep track of what needs to get done",
     "completedTaskColor": "Change the color of checked-off chunk tasks",
     "completedTaskStrikethrough": "Cross-off chunk tasks as you complete them",
     "randomStartAlways": "Change the 'Pick Chunk' button to always be a 'Random Start' button; every chunk roll picks a random walkable chunk (that isn't already unlocked)",
@@ -746,7 +746,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.6");
+const myWorker = new Worker("./worker.js?v=4.4.7");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2457,6 +2457,9 @@ var setupMap = function() {
         !mid && (mid = window.location.href.split('?')[1]);
         document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
         $('.toptitle2').text(mid.split('-')[0].toUpperCase());
+        if (mid === 'jvb') { // Chunky Boys
+            $('.toptitle2').text('(not a sponsor)');
+        }
         !onMobile && toggleChallengesPanel('active');
         loadData(true);
     }
@@ -3505,7 +3508,9 @@ var openStickers = function(id) {
     stickerModalOpen = true;
     $('.sticker-data').empty();
     $('#myModal16').show();
-    $('.sticker-chunk').text(chunkInfo['chunks'][id]['Nickname'] + ' (' + id + ')');
+    document.getElementById('sticker-data').scrollTop = 0;
+    let chunkNickname = chunkInfo['chunks'].hasOwnProperty(id) ? chunkInfo['chunks'][id]['Nickname'] + ' ' : '';
+    $('.sticker-chunk').text(chunkNickname + '(' + id + ')');
     stickerChoices.forEach(sticker => {
         let stickerName = sticker.split('-alt').join('').split('-').join(' ');
         if (sticker !== 'unset') {
@@ -4389,7 +4394,7 @@ var getQuestInfo = function(quest) {
             questChunks.push(chunkName);
             chunkName = chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replace("'", "’")]['Nickname'] + ' (' + chunkName + ')';
         }
-        $('.panel-questdata').append(`<b><div class="noscroll ${!!unlocked[chunkId] && ' + valid-chunk'}">` + `<span onclick="redirectPanel(encodeURI('` + chunkId.replaceAll(/\'/g, "%2H") + `'))"><i class="quest-icon fas fa-crosshairs"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
+        $('.panel-questdata').append(`<b class="noscroll"><div class="noscroll ${!!unlocked[chunkId] && ' + valid-chunk'}">` + `<span onclick="redirectPanel(encodeURI('` + chunkId.replaceAll(/\'/g, "%2H") + `'))"><i class="quest-icon fas fa-crosshairs"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
     });
 }
 
