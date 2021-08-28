@@ -726,6 +726,7 @@ let savedBox = null;
 let stickered = {};
 let stickeredNotes = {};
 let stickerChoices = ['unset', 'skull', 'skull-crossbones', 'bomb', 'exclamation-circle', 'dice', 'poo', 'frown', 'grin-alt', 'heart', 'star', 'gem', 'award', 'crown', 'flag', 'asterisk', 'clock', 'hourglass', 'link', 'map-marker-alt', 'radiation-alt', 'shoe-prints', 'thumbs-down', 'thumbs-up', 'crow'];
+let stickerChoicesOsrs = ['attack', 'hitpoints', 'mining', 'strength', 'agility', 'smithing', 'defence', 'herblore', 'fishing', 'ranged', 'thieving', 'cooking', 'prayer', 'fletching', 'firemaking', 'magic', 'crafting', 'woodcutting', 'runecraft', 'slayer', 'farming', 'construction', 'hunter', 'quest', 'diary'];
 let savedStickerId;
 let savedStickerSticker;
 
@@ -746,7 +747,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.7");
+const myWorker = new Worker("./worker.js?v=4.4.8");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1135,6 +1136,7 @@ $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
     $('.box').css('font-size', fontZoom + 'px');
     $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
+    $('.chunk-sticker > img').parent().css('width', fontZoom * (3/2) + 'px');
 });
 
 // Prevent arrow key movement
@@ -1413,6 +1415,7 @@ var zoomButton = function(dir) {
     $('.outer').width(zoom + 'vw');
     $('.box').css('font-size', fontZoom + 'px');
     $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
+    $('.chunk-sticker > img').parent().css('width', fontZoom * (3/2) + 'px');
     $('.label').css('font-size', labelZoom + 'px');
     $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
     $('.label.long').css('font-size', (labelZoom *(2/3)) + 'px');
@@ -2450,6 +2453,7 @@ var setupMap = function() {
         }
         $('.box').css('font-size', fontZoom + 'px');
         $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
+        $('.chunk-sticker > img').parent().css('width', fontZoom * (3/2) + 'px');
         $('.label').css('font-size', labelZoom + 'px');
         $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
         $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
@@ -3519,6 +3523,11 @@ var openStickers = function(id) {
             $('.sticker-data').append(`<span class='noscroll sticker-option-container unset-option' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fas fa-ban" style="transform: scaleX(-1)"></i></span>`);
         }
     });
+    $('.sticker-data').append(`<div class='noscroll sticker-data-subheader'>OSRS Stickers</div>`);
+    stickerChoicesOsrs.forEach(sticker => {
+        let stickerName = sticker.split('-').join(' ');
+        $('.sticker-data').append(`<span class='noscroll sticker-option-container ${sticker}-tag' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><img class="noscroll" src="./resources/SVG/${sticker}-osrs.svg"></span>`);
+    });
     savedStickerId = id;
     if (stickered.hasOwnProperty(id)) {
         $(`.sticker-data > .sticker-option-container.${stickered[id]}-tag`).addClass('selected-sticker');
@@ -3536,18 +3545,23 @@ var submitSticker = function() {
         $('.hidden-sticker').hide().remove();
         $('.chunk-sticker.clicky').removeClass('clicky');
         if (stickered.hasOwnProperty(id)) {
-            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').children('i').removeClass().addClass('fas fa-' + sticker);
-        } else {
+            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').remove();
+        }
+        if (stickerChoices.includes(sticker)) {
             $('.box > .chunkId:contains(' + id + ')').parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${sticker}" style="transform: scaleX(-1)"></i></span>`);
+        } else if (stickerChoicesOsrs.includes(sticker)) {
+            $('.box > .chunkId:contains(' + id + ')').parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${sticker}-osrs.svg"></span>`);
         }
         stickered[id] = sticker;
         stickeredNotes[id] = $('#sticker-notes-data > textarea').val();
     } else {
+        $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').remove();
         delete stickered[id];
         delete stickeredNotes[id];
-        $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').removeClass('permanent-sticker').addClass('hidden-sticker').children('i').removeClass().addClass('fas fa-tag');
+        $('.box > .chunkId:contains(' + id + ')').parent().append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${id})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
     }
     $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
+    $('.chunk-sticker > img').parent().css('width', fontZoom * (3/2) + 'px');
     setData();
     closeSticker();
 }
@@ -4654,9 +4668,14 @@ var loadData = function(startup) {
 
             $('.chunk-sticker').remove();
             chunks && chunks['stickered'] && Object.keys(chunks['stickered']).forEach(function(id) {
-                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i></span>`);
+                if (stickerChoices.includes(chunks['stickered'][id])) {
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i></span>`);
+                } else if (stickerChoicesOsrs.includes(chunks['stickered'][id])) {
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${chunks['stickered'][id]}-osrs.svg"></span>`);
+                }
             });
             $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
+            $('.chunk-sticker > img').parent().css('width', fontZoom * (3/2) + 'px');
             stickered = (chunks ? chunks['stickered'] : {}) || {};
             stickeredNotes = (chunks ? chunks['stickeredNotes'] : {}) || {};
     
