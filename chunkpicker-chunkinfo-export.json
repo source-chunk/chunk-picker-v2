@@ -31054,7 +31054,7 @@
 			"Monster": {
 				"Guard (Shayzien)": 1,
 				"Man": 4,
-				"Mugger": 1,
+				"Mugger%2FPlain": 1,
 				"Pirate%2FPlain": 4,
 				"Rat": 13,
 				"Woman": 5
@@ -31346,7 +31346,7 @@
 		},
 		"7223": {
 			"Monster": {
-				"Mugger": 1
+				"Mugger%2FPlain": 1
 			},
 			"NPC": {
 				"Flies": 5,
@@ -31410,7 +31410,7 @@
 			"Monster": {
 				"Imp": 2,
 				"Man": 5,
-				"Mugger": 1,
+				"Mugger%2FPlain": 1,
 				"Pirate%2FPlain": 3,
 				"Seagull": 7,
 				"Spider": 6,
@@ -31455,7 +31455,7 @@
 			},
 			"Monster": {
 				"Man": 4,
-				"Mugger": 1,
+				"Mugger%2FPlain": 1,
 				"Pirate%2FPlain": 7,
 				"Rat": 12,
 				"Spider": 3,
@@ -66207,6 +66207,9 @@
 			"Nothing": "13/128",
 			"Rope": "40/128",
 			"Water rune": "2/128"
+		},
+		"Mugger%2FPlain": {
+			"Bones": "Always"
 		},
 		"Mummy": {
 			"Ancient staff": "1/513",
