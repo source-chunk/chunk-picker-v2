@@ -1834,7 +1834,7 @@ var findFraction = function(fraction) {
 
     numerator /= divisor;
     denominator /= divisor;
-    return 1 + '/' + +(Math.round((denominator/numerator) + "e+2")  + "e-2");
+    return 1 + '/' + (+(Math.round((denominator/numerator) + "e+2")  + "e-2")).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // Gathers item/object info on all chunk ids passed in
