@@ -356,6 +356,7 @@ let rulePresets = {
         "Smithing by Smelting": true,
         "Pets": true,
         "Rare Drop Amount": "0",
+        "HigherLander": true,
     },
 };                                                                              // List of rules that are part of each preset
 
@@ -747,7 +748,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.8");
+const myWorker = new Worker("./worker.js?v=4.4.9");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
