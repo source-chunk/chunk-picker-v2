@@ -23,6 +23,7 @@ var chunkTasksOn = false;                                                       
 var infoCollapse = false;                                                       // Is the chunk info panel collapsed
 var highscoreEnabled = false;                                                   // Is highscore tracking enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
+var darkMode = false;                                                           // Is dark mode enabled
 var recent = [];                                                                // Recently picked chunks
 var recentTime = [];                                                            // Recently picked chunks time
 var zoom = 350;                                                                 // Starting zoom value
@@ -461,6 +462,7 @@ let settings = {
     "completedTaskColor": '#0D8219',
     "completedTaskStrikethrough": true,
     'randomStartAlways': false,
+    "darkmode": false,
 };                                                                              // Current state of all settings
 
 let settingNames = {
@@ -475,6 +477,7 @@ let settingNames = {
     "completedTaskColor": "Change the color of checked-off chunk tasks",
     "completedTaskStrikethrough": "Cross-off chunk tasks as you complete them",
     "randomStartAlways": "Change the 'Pick Chunk' button to always be a 'Random Start' button; every chunk roll picks a random walkable chunk (that isn't already unlocked)",
+    "darkmode": "Enable <b class='noscroll'>Dark Mode</b>",
 };                                                                              // Descriptions of the settings
 
 let settingStructure = {
@@ -494,6 +497,7 @@ let settingStructure = {
     },
     "Customization": {
         "highvis": true,
+        "darkmode": true,
         "completedTaskStrikethrough": true,
         "completedTaskColor": true
     }
@@ -748,7 +752,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.4.10");
+const myWorker = new Worker("./worker.js?v=4.5.0");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2250,7 +2254,7 @@ var settingsMenu = function() {
         $('.settings').css({'color': 'rgb(150, 150, 150)'});
     } else {
         $('.settings-menu').hide();
-        $('.settings').css({'color': 'black'});
+        $('.settings').css({'color': 'var(--colorText)'});
     }
 }
 
@@ -2282,6 +2286,39 @@ var toggleVisibility = function(value) {
     highVisibilityMode = value;
     setCookies();
     highVisibilityMode ? $('.box').addClass('visible') : $('.box').removeClass('visible');
+}
+
+// Toggles dark mode
+var toggleDarkMode = function(value) {
+    darkMode = value;
+    setCookies();
+    if (darkMode) {
+        $("body").get(0).style.setProperty("--color1", "rgb(22, 27, 34)");
+        $("body").get(0).style.setProperty("--color2", "rgb(13, 17, 23)");
+        $("body").get(0).style.setProperty("--color3", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--color4", "rgb(56, 60, 69)");
+        $("body").get(0).style.setProperty("--color5", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--color6", "rgb(22, 27, 34)");
+        $("body").get(0).style.setProperty("--color7", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--color8", "rgb(61, 65, 74)");
+        $("body").get(0).style.setProperty("--color9", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--colorText", "rgb(201, 209, 217)");
+        $("body").get(0).style.setProperty("--colorLink", "rgb(88, 166, 255)");
+        $(".map").addClass('dark');
+    } else {
+        $("body").get(0).style.setProperty("--color1", "rgb(200, 200, 200)");
+        $("body").get(0).style.setProperty("--color2", "rgb(180, 180, 180)");
+        $("body").get(0).style.setProperty("--color3", "rgb(220, 220, 220)");
+        $("body").get(0).style.setProperty("--color4", "rgb(230, 230, 230)");
+        $("body").get(0).style.setProperty("--color5", "rgb(200, 200, 100)");
+        $("body").get(0).style.setProperty("--color6", "rgb(255, 255, 255)");
+        $("body").get(0).style.setProperty("--color7", "rgb(240, 240, 240)");
+        $("body").get(0).style.setProperty("--color8", "rgb(150, 150, 150)");
+        $("body").get(0).style.setProperty("--color9", "rgb(120, 120, 120)");
+        $("body").get(0).style.setProperty("--colorText", "rgb(0, 0, 0)");
+        $("body").get(0).style.setProperty("--colorLink", "rgb(0, 0, 255)");
+        $(".map").removeClass('dark');
+    }
 }
 
 // Toggles the chunk info panel
@@ -2417,7 +2454,7 @@ var doneLoading = function() {
         center('quick');
     }
     $('.potential > .label').css('color', 'black');
-    $('.loading').remove();
+    $('.loading').fadeOut(1000);
 }
 
 // Creates board of boxes, sets initial sizes of scalable elements, and hides certain elements if needed
@@ -4041,8 +4078,8 @@ var changeChallengeColor = function() {
     $('.challenge-color-rule').length && (settings['completedTaskColor'] = $('.challenge-color-rule').val());
     $('.challenge.hide-backlog').css({'color': settings['completedTaskColor'], 'text-decoration': settings['completedTaskStrikethrough'] ? 'line-through' : 'none'});
     $('.challenge.hide-backlog a').css({'color': settings['completedTaskColor'], 'text-decoration': settings['completedTaskStrikethrough'] ? 'line-through' : 'underline'});
-    $('.challenge:not(.hide-backlog)').css({'color': 'black', 'text-decoration': 'none'});
-    $('.challenge:not(.hide-backlog) a').css({'color': 'black', 'text-decoration': 'underline'});
+    $('.challenge:not(.hide-backlog)').css({'color': 'var(--colorText)', 'text-decoration': 'none'});
+    $('.challenge:not(.hide-backlog) a').css({'color': 'var(--colorText)', 'text-decoration': 'underline'});
     setData();
 }
 
@@ -4351,6 +4388,7 @@ var checkOffSettings = function(startup) {
         });
     });
     toggleVisibility(settings['highvis'], startup);
+    toggleDarkMode(settings['darkmode'], startup);
     toggleNeighbors(settings['neighbors'], startup);
     toggleRemove(settings['remove'], startup);
     toggleRoll2(settings['roll2'], startup);
@@ -4553,6 +4591,9 @@ var loadData = function(startup) {
             settingsTemp['highvis'] = document.cookie.split(';').filter(function(item) {
                 return item.indexOf('highvis=true') >= 0
             }).length > 0;
+            settingsTemp['darkmode'] = document.cookie.split(';').filter(function(item) {
+                return item.indexOf('darkmode=true') >= 0
+            }).length > 0;
             settingsTemp['info'] = !document.cookie.split(';').filter(function(item) {
                 return item.indexOf('newinfo=false') >= 0
             }).length > 0;
@@ -4611,6 +4652,7 @@ var loadData = function(startup) {
                 settings[setting] = settingsTemp[setting];
             });
             toggleVisibility(settings['highvis'], 'startup');
+            toggleDarkMode(settings['darkmode'], 'startup');
             toggleNeighbors(settings['neighbors'], 'startup');
             toggleRemove(settings['remove'], 'startup');
             toggleRoll2(settings['roll2'], 'startup');
@@ -4703,6 +4745,7 @@ var setCookies = function() {
     }
     document.cookie = "ids=" + showChunkIds;
     document.cookie = "highvis=" + highVisibilityMode;
+    document.cookie = "darkmode=" + darkMode;
     document.cookie = "newinfo=" + chunkInfoOn;
     document.cookie = "infocollapse=" + infoCollapse;
 }

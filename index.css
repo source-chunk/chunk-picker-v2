@@ -3,6 +3,36 @@
     src: url('fa-regular-400.ttf')  format('truetype');
 }
 
+:root {
+    /* Light */
+    --color1: rgb(200, 200, 200);
+    --color2: rgb(180, 180, 180);
+    --color3: rgb(220, 220, 220);
+    --color4: rgb(230, 230, 230);
+    --color5: rgb(200, 200, 100);
+    --color6: rgb(255, 255, 255);
+    --color7: rgb(240, 240, 240);
+    --color8: rgb(150, 150, 150);
+    --color9: rgb(120, 120, 120);
+    --colorText: rgb(0, 0, 0);
+    --colorLink: rgb(0, 0, 255);
+
+    /* Dark */
+    /*
+    --color1: rgb(22, 27, 34);
+    --color2: rgb(13, 17, 23);
+    --color3: rgb(46, 50, 59);
+    --color4: rgb(56, 60, 69);
+    --color5: rgb(46, 50, 59);
+    --color6: rgb(22, 27, 34);
+    --color7: rgb(46, 50, 59);
+    --color8: rgb(61, 65, 74);
+    --color9: rgb(46, 50, 59);
+    --colorText: rgb(201, 209, 217);
+    --colorLink: rgb(88, 166, 255);
+    */
+}
+
 body::-webkit-scrollbar {
     display: none;
 }
@@ -13,6 +43,7 @@ body::-webkit-scrollbar {
 
 body {
     background-color: black;
+    color: var(--colorText);
     overflow: hidden !important;
 }
 
@@ -21,7 +52,7 @@ body {
 }
 
 a, a:visited {
-    color: black;
+    color: var(--colorText);
 }
 
 #beta {
@@ -339,10 +370,10 @@ button.menu2 {
 }
 
 .text:not(.home) {
-    background-color: rgb(200, 200, 200);
+    background-color: var(--color1);
     height: auto;
     font-size: min(1.5vw, 20px);
-    color: black;
+    color: var(--colorText);
     display: block;
     border-width: 1px 1px 1px 1px;
     border-style: solid;
@@ -517,9 +548,9 @@ button.menu2 {
 }
 
 #import2:disabled {
-    border: 2px solid rgb(150, 150, 150);
+    border: 2px solid var(--color8);
     background-color: rgb(225, 225, 225);
-    color: black;
+    color: var(--colorText);
     cursor: not-allowed;
 }
 
@@ -548,9 +579,9 @@ button.menu2 {
 }
 
 #highscoreoptin:disabled {
-    border: 2px solid rgb(150, 150, 150);
+    border: 2px solid var(--color8);
     background-color: rgb(225, 225, 225);
-    color: black;
+    color: var(--colorText);
     cursor: not-allowed;
 }
 
@@ -606,6 +637,7 @@ button.menu2 {
     margin: 0px auto;
     pointer-events: none;
     font-size: 44px;
+    color: black;
 }
 
 .lock-closed {
@@ -671,9 +703,9 @@ button.menu2 {
 }
 
 #lock-unlock:disabled {
-    border: 2px solid rgb(150, 150, 150);
+    border: 2px solid var(--color8);
     background-color: rgb(225, 225, 225);
-    color: black;
+    color: var(--colorText);
     cursor: not-allowed;
 }
 
@@ -747,51 +779,70 @@ button.menu2 {
 
 .loading {
     position: fixed;
-    z-index: 999;
-    height: 2em;
-    width: 2em;
+    z-index: 99999 !important;
     overflow: visible;
     margin: auto;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-}
-
-.loading:before {
-    content: '';
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(200, 200, 200, 1);
+    background-color: rgb(22, 27, 34);
 }
 
-.loading:not(:required) {
-    font: 0/0 a;
-    color: transparent;
-    text-shadow: none;
-    background-color: transparent;
-    border: 0;
-}
-
-.loading:not(:required):after {
-    content: '';
+.loading-inner {
     display: block;
-    font-size: 50px;
-    width: 1em;
-    height: 1em;
-    margin-top: -0.5em;
-    -webkit-animation: spinner 1500ms infinite linear;
-    -moz-animation: spinner 1500ms infinite linear;
-    -ms-animation: spinner 1500ms infinite linear;
-    -o-animation: spinner 1500ms infinite linear;
-    animation: spinner 1500ms infinite linear;
-    border-radius: 0.5em;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
-    box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+    margin: auto;
+    width: 15vh;
+    height: 15vh;
+    position: relative;
+    border: 10px solid rgb(201, 209, 217);
+    background-color: aliceblue;
+    top: 42.5vh;
+    animation: loader 3s infinite ease;
+}
+
+.loading-hint-1 {
+    text-align: center;
+    margin-top: 32vh;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    font-size: 48px;
+    color: rgb(201, 209, 217);
+}
+
+.loading-hint-2 {
+    text-align: center;
+    margin-top: 65vh;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    font-size: 24px;
+    color: rgb(201, 209, 217);
+}
+  
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(90deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    75% {
+        transform: rotate(270deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @-webkit-keyframes spinner {
@@ -926,7 +977,7 @@ button.menu2 {
 .title {
     font-size: 3.5vw;
     border-bottom: solid;
-    background-color: rgb(230, 230, 230);
+    background-color: var(--color4);
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -1001,11 +1052,12 @@ button.menu2 {
 
 #mid, #proceed {
     border: 2px solid rgb(50, 50, 50);
-    background-color: rgb(255, 255, 255);
+    background-color: var(--color6);
+    color: var(--colorText);
 }
 
 #mid:hover, #proceed:hover {
-    background-color: rgb(240, 240, 240);
+    background-color: var(--color7);
 }
 
 #create2 {
@@ -1019,7 +1071,7 @@ button.menu2 {
 }
 
 #create2:disabled, #unlock-entry:disabled {
-    border: 2px solid rgb(150, 150, 150);
+    border: 2px solid var(--color8);
     background-color: rgb(225, 225, 225);
     color: black;
     cursor: not-allowed;
@@ -1037,9 +1089,9 @@ button.menu2 {
 }
 
 #access:disabled, #change-pin:disabled {
-    border: 2px solid rgb(150, 150, 150);
+    border: 2px solid var(--color8);
     background-color: rgb(225, 225, 225);
-    color: black;
+    color: var(--colorText);
     cursor: not-allowed;
 }
 
@@ -1063,7 +1115,7 @@ button.menu2 {
     -ms-transform: translate(112.5%, 35%);
     transform: translate(112.5%, 35%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
-    background-color: white;
+    background-color: var(--color6);
 }
 
 .import-content {
@@ -1076,7 +1128,7 @@ button.menu2 {
     -ms-transform: translate(112.5%, 35%);
     transform: translate(112.5%, 35%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
-    background-color: white;
+    background-color: var(--color6);
 }
 
 .highscore-content {
@@ -1089,7 +1141,7 @@ button.menu2 {
     -ms-transform: translate(112.5%, 35%);
     transform: translate(112.5%, 35%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
-    background-color: white;
+    background-color: var(--color6);
 }
 
 .help-content {
@@ -1286,6 +1338,10 @@ button.menu2 {
     width: 100%;
 }
 
+.map.dark {
+    filter: brightness(.66); /* Dark */
+}
+
 .escape-hint {
     display: none;
     position: absolute;
@@ -1362,7 +1418,7 @@ button.menu2 {
     display: none;
     width: min(23vw, 250px);
     font-size: min(1.5vw, 16px);
-    background-color: rgb(230, 230, 230);
+    background-color: var(--color4);
     position: absolute;
     right: .5vw;
     top: 51px;
@@ -1371,7 +1427,7 @@ button.menu2 {
 
 .item {
     cursor: pointer;
-    background-color: rgb(200, 200, 100);
+    background-color: var(--color5);
     margin: 4px 4px 4px 4px;
     height: min(2vw, 25px);
     line-height: min(2vw, 25px);
@@ -1379,7 +1435,7 @@ button.menu2 {
 }
 
 .item:hover {
-    background-color: rgb(200, 200, 200);
+    background-color: var(--color1);
 }
 
 .pic {
@@ -1405,7 +1461,7 @@ button.menu2 {
     width: 100%;
     border: solid;
     border-width: 0 0 2px 0;
-    background-color: rgb(235, 235, 235);
+    background-color: var(--color1);
 }
 
 @-webkit-keyframes spinner2 {
@@ -1626,7 +1682,7 @@ button.menu2 {
 
 .chunk {
     cursor: pointer;
-    color: blue;
+    color: var(--colorLink);
 }
 
 .chunk:hover {
@@ -1635,7 +1691,7 @@ button.menu2 {
 
 .none > .chunk {
     cursor: default;
-    color: black;
+    color: var(--colorText);
 }
 
 .none > .chunk:hover {
@@ -1649,7 +1705,7 @@ button.menu2 {
 
 .blank {
     cursor: default;
-    background-color: rgb(200, 200, 200);
+    background-color: var(--color1);
 }
 
 .panel:not(.visible) {
@@ -1668,12 +1724,12 @@ button.menu2 {
 }
 
 .panel-active .challenge {
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
     margin-right: 15px;
 }
 
@@ -1690,12 +1746,12 @@ button.menu2 {
 }
 
 .area {
-    border: solid 1px rgb(180, 180, 180);
+    border: solid 1px var(--color2);
     border-radius: 5px;
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
 }
 
 .arrow {
@@ -1734,7 +1790,7 @@ button.menu2 {
 }
 
 .accordion:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: var(--color8);
 }
 
 .panel-close {
@@ -1762,7 +1818,7 @@ button.menu2 {
 }
 
 .link {
-    color: black;
+    color: var(--colorText);
     text-decoration: underline;
     cursor: pointer;
 }
@@ -1783,6 +1839,7 @@ button.menu2 {
     cursor: pointer;
     background-color: rgba(200, 200, 200, .75);
     transition: .5s;
+    color: black;
 }
 
 .hiddenInfo:hover {
@@ -1800,7 +1857,7 @@ button.menu2 {
     visibility: hidden;
     width: 220px;
     background-color: rgb(179, 179, 179);
-    color: black;
+    color: var(--colorText);
     text-align: center;
     border: 1px black solid;
     padding: 5px 0;
@@ -1857,7 +1914,7 @@ button.menu2 {
 }
 
 .highlightAllQuest >span:hover {
-    color: black;
+    color: var(--colorText);
 }
 
 .modal {
@@ -1875,11 +1932,11 @@ button.menu2 {
 
 .modal-content {
     position: relative;
-    background-color: rgb(200, 200, 200);
+    background-color: var(--color1);
     margin: auto;
     width: 30%;
     height: 30%;
-    border: solid;
+    border: solid black;
 }
 
 #myModal4 {
@@ -1889,7 +1946,8 @@ button.menu2 {
 #myModal4 > .modal-content {
     height: 60%;
     width: 45%;
-    background-color: #e6e6e6;
+    background-color: var(--color1);
+    color: var(--colorText);
 }
 
 #myModal > .modal-content {
@@ -2166,7 +2224,7 @@ button.menu2 {
     max-height: 9%;
     min-height: 9%;
     text-align: center;
-    background-color: #c8c8c8;
+    background-color: var(--color1);
 }
 
 .settings-data {
@@ -2190,11 +2248,11 @@ button.menu2 {
 .setting {
     font-size: 18px;
     font-weight: normal;
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 5px;
     padding: 2px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
     position: relative;
 }
 
@@ -2229,12 +2287,12 @@ button.menu2 {
     max-height: 9%;
     min-height: 9%;
     text-align: center;
-    background-color: #c8c8c8;
+    background-color: var(--color2);
 }
 
 .rules-subtitle {
     padding: 0px 15px;
-    background-color: #c8c8c8;
+    background-color: var(--color2);
     font-size: 15px;
     text-align: center;
     max-height: 10%;
@@ -2262,11 +2320,11 @@ button.menu2 {
 .rule {
     font-size: 18px;
     font-weight: normal;
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 5px;
     padding: 2px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
     position: relative;
 }
 
@@ -2305,13 +2363,13 @@ button.menu2 {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    background-color: #e6e6e6;
+    background-color: var(--color1);
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
 
 .preset-button:hover {
-    background-color: #c8c8c8;
+    background-color: var(--color4);
 }
 
 .preset-button > span {
@@ -2323,7 +2381,7 @@ button.menu2 {
 #myModal7 > .modal-content {
     height: 60%;
     width: 45%;
-    background-color: #e6e6e6;
+    background-color: var(--color4);
     max-width: 600px;
 }
 
@@ -2349,12 +2407,12 @@ button.menu2 {
     min-height: 20%;
     line-height: 50px;
     text-align: center;
-    background-color: #c8c8c8;
+    background-color: var(--color1);
 }
 
 .preset-subtitle {
     padding: 0px 15px;
-    background-color: #e6e6e6;
+    background-color: var(--color4);
     font-size: 18px;
     text-align: center;
     border-top: solid 1px;
@@ -2403,12 +2461,12 @@ button.menu2 {
     min-height: 20%;
     line-height: 50px;
     text-align: center;
-    background-color: #c8c8c8;
+    background-color: var(--color1);
 }
 
 .random-subtitle {
     padding: 0px 15px;
-    background-color: #e6e6e6;
+    background-color: var(--color4);
     font-size: 16px;
     text-align: center;
     border-top: solid 1px;
@@ -2492,7 +2550,7 @@ button.menu2 {
     font-size: min(1.8vw, 20px);
     font-weight: bold;
     cursor: pointer;
-    background-color: rgb(180, 180, 180);
+    background-color: var(--color2);
     margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -2503,7 +2561,7 @@ button.menu2 {
 }
 
 .marker:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: var(--color8);
 }
 
 .challenge.stay-hidden {
@@ -2632,7 +2690,7 @@ button.menu2 {
 }
 
 #submit-statserror-button:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: var(--color8);
 }
 
 .searchchunks-title {
@@ -2706,22 +2764,22 @@ input#searchChunks {
 }
 
 .searchdetails-data > .results {
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
     margin-right: 15px;
 }
 
 .searchchunks-data > .search-result {
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
     margin-right: 15px;
 }
 
@@ -2731,7 +2789,7 @@ input#searchChunks {
     width: 100%;
     font-weight: bold;
     height: 7%;
-    background-color: rgb(180,180,180);
+    background-color: var(--color2);
 }
 
 .highest-data {
@@ -2754,7 +2812,7 @@ input#searchChunks {
     min-height: 20%;
     line-height: 50px;
     text-align: center;
-    background-color: #c8c8c8;
+    background-color: var(--color1);
 }
 
 .complete-data {
@@ -2800,22 +2858,22 @@ input#searchChunks {
 }
 
 .style-button:hover {
-    background-color: rgb(150, 150, 150);
+    background-color: var(--color8);
 }
 
 .style-button.active-tab {
-    background-color: rgb(120, 120, 120);
+    background-color: var(--color9);
 }
 
 .style-body > .row {
     display: flex;
     align-items: center;
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
     width: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -2826,7 +2884,7 @@ input#searchChunks {
 }
 
 .SKills-body > .row.row-header {
-    background-color: rgb(180,180,180);
+    background-color: var(--color2);
 }
 
 .slot-text {
@@ -2839,8 +2897,8 @@ input#searchChunks {
     margin-left: 10px;
     font-size: 20px;
     width: 65%;
-    border-left: solid 1px rgb(150, 150, 150);
-    border-right: solid 1px rgb(150, 150, 150);
+    border-left: solid 1px var(--color8);
+    border-right: solid 1px var(--color8);
 }
 
 .skill-icon-wrapper {
@@ -2872,8 +2930,8 @@ input#searchChunks {
     font-size: 18px;
     font-weight: bold;
     width: 65%;
-    border-left: solid 1px rgb(150, 150, 150);
-    border-right: solid 1px rgb(150, 150, 150);
+    border-left: solid 1px var(--color8);
+    border-right: solid 1px var(--color8);
 }
 
 .button-table-header {
@@ -2892,12 +2950,12 @@ input#searchChunks {
 .methods-data > .skill-method {
     display: flex;
     align-items: center;
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 10px;
     padding: 2px;
     padding-left: 5px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
 }
 
 .x-num-input {
@@ -2961,12 +3019,12 @@ input#searchAddEquipment {
 }
 
 .add-equipment-data > .search-equipment-result {
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--color3);
     margin-right: 15px;
 }
 
@@ -2987,7 +3045,7 @@ input#searchAddEquipment {
 }
 
 .chunk-sticker {
-    color: black;
+    color: var(--colorText);
     width: auto;
     height: auto;
     position: absolute;
@@ -3039,7 +3097,7 @@ input#searchAddEquipment {
     min-height: 63%;
     padding: 0px 10px;
     overflow-y: auto;
-    background-color: rgb(230, 230, 230);
+    background-color: var(--color4);
 }
 
 .sticker-option-container {
