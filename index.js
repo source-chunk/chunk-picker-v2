@@ -752,7 +752,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.5.0");
+const myWorker = new Worker("./worker.js?v=4.5.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1281,23 +1281,30 @@ $(document).on({
                     fixNums(99999);
                 }
             } else if ($(e.target).hasClass('selected')) {
-                if (selectedChunks < 300) {
-                    fixNums($($(e.target).children('.label')).text());
+                if (e.shiftKey) {
+                    if (selectedChunks < 300) {
+                        fixNums($($(e.target).children('.label')).text());
+                    }
+                    $(e.target).children('.label').remove();
+                    $(e.target).addClass('gray').removeClass('selected');
+                    $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+                } else {
+                    if (selectedChunks < 300) {
+                        fixNums($($(e.target).children('.label')).text());
+                    }
+                    $(e.target).children('.label').remove();
+                    $(e.target).addClass('unlocked').removeClass('selected');
+                    $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+                    $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+                    !onMobile && getChunkAreas();
+                    !onMobile && setupCurrentChallenges(false);
+                    !onMobile && setCalculating('.panel-active');
+                    !onMobile && setCalculating('.panel-areas');
+                    !onMobile && setCalculating('.panel-completed');
+                    !onMobile && calcCurrentChallenges();
                 }
-                $(e.target).children('.label').remove();
-                $(e.target).addClass('unlocked').removeClass('selected');
-                $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
-                $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-                !onMobile && getChunkAreas();
-                !onMobile && setupCurrentChallenges(false);
-                !onMobile && setCalculating('.panel-active');
-                !onMobile && setCalculating('.panel-areas');
-                !onMobile && setCalculating('.panel-completed');
-                !onMobile && calcCurrentChallenges();
             } else if ($(e.target).hasClass('potential')) {
-                if (selectedChunks < 300) {
-                    fixNums($($(e.target).children('.label')).text());
-                }
+                let savedNum = $($(e.target).children('.label')).text();
                 $(e.target).children('.label').remove();
                 $(e.target).addClass('unlocked').removeClass('potential');
                 $('.potential > .label').css('color', 'white');
@@ -1307,6 +1314,9 @@ $(document).on({
                 autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
                 autoRemoveSelected && (selectedChunks = 1);
                 autoRemoveSelected && (selectedNum = 1);
+                if (selectedChunks < 300) {
+                    fixNums(savedNum);
+                }
                 $('.pick').text('Pick Chunk');
                 roll2On && $('.roll2').text('Roll 2');
                 unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
@@ -1451,14 +1461,14 @@ var pick = function(both) {
             }
             $(el[rand]).children('.label').remove();
             $(el[rand]).addClass('unlocked recent').removeClass('potential');
-            if (el.length < 300) {
-                fixNums(sNum);
-            }
             autoSelectNeighbors && selectNeighbors(el[rand]);
             autoRemoveSelected && $('.selected > .label').remove();
             autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
             autoRemoveSelected && (selectedChunks = 1);
             autoRemoveSelected && (selectedNum = 1);
+            if (el.length < 300) {
+                fixNums(sNum);
+            }
             $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
@@ -1546,14 +1556,14 @@ var pick = function(both) {
         roll2On && $('.roll2').text('Roll 2');
         unpickOn && $('.unpick').css({'opacity': 1, 'cursor': 'pointer'}).prop('disabled', false).show();
     }
-    if (el.length < 300) {
-        fixNums(sNum);
-    }
     autoSelectNeighbors && !didRandomStart && selectNeighbors(el[rand]);
     autoRemoveSelected && $('.selected > .label').remove();
     autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
     autoRemoveSelected && (selectedChunks = 1);
     autoRemoveSelected && (selectedNum = 1);
+    if (el.length < 300) {
+        fixNums(sNum);
+    }
     $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
     $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
     scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
