@@ -752,7 +752,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.5.1");
+const myWorker = new Worker("./worker.js?v=4.5.2");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2408,7 +2408,7 @@ var recentChunk = function(el) {
         return;
     }
     let id = parseInt($($(el).children('.chunk')).text());
-    let box = $('.box:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).addClass('recent');
+    let box = $('.box:contains(' + id + ')').filter(function() { return parseInt($(this).children('.chunkId').text()) === parseInt(id); }).addClass('recent');
     scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
 }
 
@@ -2499,13 +2499,15 @@ var setupMap = function() {
         for (var i = 0; i < fullSize; i++) {
             $('.btnDiv').append(`<div id=${i} class='box gray'><span class='chunkId'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</span></div>`);
         }
-        $('.box').css('font-size', fontZoom + 'px');
-        $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
-        $('.chunk-sticker > img').parent().css('width', fontZoom * (3/2) + 'px');
+        labelZoom = $('.box').width();
+        fontZoom = $('.box').width() / 6;
         $('.label').css('font-size', labelZoom + 'px');
         $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
         $('.label.long').css('font-size', (labelZoom * (2/3)) + 'px');
         $('.label.extralong').css('font-size', (labelZoom * (1/2)) + 'px');
+        $('.box').css('font-size', fontZoom + 'px');
+        $('.chunk-sticker').css('font-size', fontZoom * (3/2) + 'px');
+        $('.chunk-sticker > img').parent().css('width', fontZoom * (3/2) + 'px');
         !mid && (mid = window.location.href.split('?')[1]);
         document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
         $('.toptitle2').text(mid.split('-')[0].toUpperCase());
@@ -2981,7 +2983,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
             if (!!chunkInfo['challenges']['Extra'][challenge] && chunkInfo['challenges']['Extra'][challenge]['Label'] === 'Kill X') {
                 challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges']['Extra'][challenge]['Label'] + ']</b> <span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(' X ', ' ' + rules['Kill X Amount'] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
             } else {
-                challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} />` + `<b class="noscroll">[` + (!!chunkInfo['challenges']['Extra'][challenge] ? (chunkInfo['challenges']['Extra'][challenge]['Label'] + `]</b> `) : '') + '<span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
+                challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge.replaceAll(/\./g, '%2E')]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge.replaceAll(/\./g, '%2E')]) && "checked"} onclick="checkOffChallenges()" ${(viewOnly || inEntry || locked) && "disabled"} />` + `<b class="noscroll">[` + (!!chunkInfo['challenges']['Extra'][challenge] ? (chunkInfo['challenges']['Extra'][challenge]['Label'] + `]</b> `) : '') + '<span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') + (viewOnly || inEntry || locked ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
             }
         }
     });
@@ -4474,7 +4476,7 @@ var toggleQuestInfo = function() {
 // Highlights array of chunk ids for current quest
 var highlightAllQuest = function() {
     questChunks.forEach(id => {
-        $('.box:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).addClass('recent');
+        $('.box:contains(' + id + ')').filter(function() { return parseInt($(this).children('.chunkId').text()) === parseInt(id); }).addClass('recent');
     });
 }
 
