@@ -1154,7 +1154,7 @@ button.menu2 {
     -ms-transform: translate(112.5%, 35%);
     transform: translate(112.5%, 35%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
-    background-color: white;
+    background-color: var(--color6);
 }
 
 .help-link-block {
@@ -1857,7 +1857,7 @@ button.menu2 {
     visibility: hidden;
     width: 220px;
     background-color: rgb(179, 179, 179);
-    color: var(--colorText);
+    color: black;
     text-align: center;
     border: 1px black solid;
     padding: 5px 0;
@@ -2274,6 +2274,14 @@ button.menu2 {
 }
 
 .reset-challenge-color {
+    position: absolute;
+    font-size: 14px;
+    margin-left: 50px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.reset-default-sticker-color {
     position: absolute;
     font-size: 14px;
     margin-left: 50px;
@@ -3045,7 +3053,6 @@ input#searchAddEquipment {
 }
 
 .chunk-sticker {
-    color: var(--colorText);
     width: auto;
     height: auto;
     position: absolute;
@@ -3064,12 +3071,13 @@ input#searchAddEquipment {
 }
 
 .chunk-sticker.clicky:hover {
-    color: rgb(100, 100, 100);
+    color: rgb(220, 220, 220);
 }
 
 .chunk-sticker.hidden-sticker {
     opacity: 0;
     display: none;
+    color: var(--colorText);
 }
 
 .box:hover .chunk-sticker {
@@ -3110,6 +3118,7 @@ input#searchAddEquipment {
     min-height: 30px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    border-color: var(--colorText);
 }
 
 .sticker-option-container.unset-option {
@@ -3118,11 +3127,11 @@ input#searchAddEquipment {
 }
 
 .selected-sticker {
-    color: rgb(50, 175, 50);
+    border-color: rgb(50, 175, 50);
 }
 
 .sticker-option-container:hover {
-    color: rgb(75, 75, 225);
+    border-color: rgb(75, 75, 225);
 }
 
 .sticker-notes-data {
@@ -3188,4 +3197,12 @@ input#searchAddEquipment {
 
 .box:hover .blacklist-label {
     opacity: 1;
+}
+
+.sticker-color-data {
+    padding: 10px;
+}
+
+.sticker-color-picker-label {
+    font-size: 24px;
 }
