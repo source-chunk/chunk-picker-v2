@@ -16206,6 +16206,38 @@
 				"Items": ["Compost"],
 				"Output": "Bucket"
 			},
+			"Empty a bucket of slime": {
+				"Items": ["Bucket of slime"],
+				"Output": "Bucket"
+			},
+			"Empty a bucket of water": {
+				"Items": ["Bucket of water"],
+				"Output": "Bucket"
+			},
+			"Empty a bucket of sand": {
+				"Items": ["Bucket of sand"],
+				"Output": "Bucket"
+			},
+			"Empty a bucket of milk": {
+				"Items": ["Bucket of milk"],
+				"Output": "Bucket"
+			},
+			"Empty a bucket of supercompost": {
+				"Items": ["Supercompost"],
+				"Output": "Bucket"
+			},
+			"Empty a vial of water": {
+				"Items": ["Vial of water"],
+				"Output": "Vial"
+			},
+			"Empty a bowl of water": {
+				"Items": ["Bowl of water"],
+				"Output": "Bowl"
+			},
+			"Empty a jug of water": {
+				"Items": ["Jug of water"],
+				"Output": "Jug"
+			},
 			"Pick grimy snake weed off a vine": {
 				"Chunks": ["11056", "11055"],
 				"Output": "Grimy snake weed"
