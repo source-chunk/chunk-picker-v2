@@ -16202,6 +16202,10 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Empty a bucket of compost": {
+				"Items": ["Compost"],
+				"Output": "Bucket"
+			},
 			"Pick grimy snake weed off a vine": {
 				"Chunks": ["11056", "11055"],
 				"Output": "Grimy snake weed"
