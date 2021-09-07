@@ -23661,6 +23661,30 @@
 				"Label": "BIS Skilling",
 				"Items": ["Celestial ring"]
 			},
+			"Obtain ~|expert mining gloves|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Expert mining gloves"],
+				"Priority": 1,
+				"Requirements": ["Mining"],
+				"Set": "BIS Mining Gloves"
+			},
+			"Obtain ~|superior mining gloves|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Superior mining gloves"],
+				"Priority": 2,
+				"Requirements": ["Mining"],
+				"Set": "BIS Mining Gloves"
+			},
+			"Obtain ~|mining gloves|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Mining gloves"],
+				"Priority": 3,
+				"Requirements": ["Mining"],
+				"Set": "BIS Mining Gloves"
+			},
 			"Obtain a ~|pearl fishing rod|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
@@ -29563,7 +29587,7 @@
 		},
 		"6197": {
 			"Monster": {
-				"Barbarian": 5
+				"Barbarian (Barbarian Camp)": 5
 			},
 			"NPC": {
 				"Copper longtail": 6
@@ -60431,6 +60455,33 @@
 			"GemDropTable+": "1/14.22"
 		},
 		"Barbarian": {
+			"Amulet mould": "1/128",
+			"Bear fur": "1/128",
+			"Beer": "1/128",
+			"Bones": "Always",
+			"Bronze arrow": "4/128",
+			"Bronze axe": "6/128",
+			"Bronze battleaxe": "4/128",
+			"Chaos rune": "4/128",
+			"Clue scroll (beginner)": "1/55",
+			"Clue scroll (easy)": "1/128",
+			"Coins": "3/128",
+			"Cooked meat": "1/128",
+			"Earth rune": "3/128",
+			"Fire rune": "2/128",
+			"Flier": "1/128",
+			"Iron arrow": "3/128",
+			"Iron axe": "6/128",
+			"Iron mace": "1/128",
+			"Law rune": "1/128",
+			"Mind rune": "2/128",
+			"Nothing": "33/128",
+			"Ring mould": "1/128",
+			"Staff": "4/128",
+			"Tin ore": "1/128",
+			"GemDropTable+": "1/128"
+		},
+		"Barbarian (Barbarian Camp)": {
 			"Amulet mould": "1/128",
 			"Bear fur": "1/128",
 			"Beer": "1/128",
