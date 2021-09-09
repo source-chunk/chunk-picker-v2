@@ -3230,6 +3230,7 @@ input#searchAddEquipment {
 .tooltiptext-sticker {
     visibility: hidden;
     max-width: 220px;
+    width: max-content;
     background-color: rgb(179, 179, 179);
     color: black;
     text-align: center;
