@@ -16202,6 +16202,42 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Search the crate in Wintertodt for a bronze axe": {
+				"Chunks": ["6462"],
+				"Output": "Bronze axe"
+			},
+			"Search the crate in Wintertodt for a hammer": {
+				"Chunks": ["6462"],
+				"Output": "Hammer"
+			},
+			"Search the crate in Wintertodt for a knife": {
+				"Chunks": ["6462"],
+				"Output": "Knife"
+			},
+			"Search the crate in Wintertodt for a tinderbox": {
+				"Chunks": ["6462"],
+				"Output": "Tinderbox"
+			},
+			"Search the crate in Wintertodt for a rejuvenation potion (unf)": {
+				"Chunks": ["6462"],
+				"Output": "Rejuvenation potion (unf)"
+			},
+			"Starting items: bronze axe": {
+				"Category": ["Starting Items"],
+				"Output": "Bronze axe"
+			},
+			"Starting items: tinderbox": {
+				"Category": ["Starting Items"],
+				"Output": "Tinderbox"
+			},
+			"Starting items: small fishing net": {
+				"Category": ["Starting Items"],
+				"Output": "Small fishing net"
+			},
+			"Starting items: bronze pickaxe": {
+				"Category": ["Starting Items"],
+				"Output": "Bronze pickaxe"
+			},
 			"Empty a bucket of compost": {
 				"Items": ["Compost"],
 				"Output": "Bucket"
@@ -30008,9 +30044,6 @@
 			}
 		},
 		"6456": {
-			"Connect": {
-				"10307": true
-			},
 			"Monster": {
 				"Rat": 4
 			},

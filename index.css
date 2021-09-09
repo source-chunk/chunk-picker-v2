@@ -16,6 +16,7 @@
     --color9: rgb(120, 120, 120);
     --colorText: rgb(0, 0, 0);
     --colorLink: rgb(0, 0, 255);
+    --disabled: #959495;
 
     /* Dark */
     /*
@@ -1729,16 +1730,23 @@ button.menu2 {
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
+    padding-right: 10%;
     background-color: var(--color3);
     margin-right: 15px;
+    position: relative;
 }
 
-.challenge.hide-backlog > span.burger {
+.challenge.hide-backlog span.burger {
     display: none;
 }
 
 .challenge > input:disabled, .area > input:disabled {
     cursor: not-allowed;
+}
+
+.challenge .link {
+    pointer-events: all;
+    color: inherit;
 }
 
 .panel-areas > div {
@@ -1765,10 +1773,19 @@ button.menu2 {
     font-size: 15px;
     margin-left: 5px;
     transition: color .5s;
+    pointer-events: all;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 3%;
 }
 
 .burger:hover {
     color: grey;
+}
+
+.panel-backlog .burger {
+    position: unset;
 }
 
 .exp {
@@ -2048,7 +2065,6 @@ button.menu2 {
 
 .open-rules-container {
     border-top: 1px solid;
-    display: none;
 }
 
 .open-rules {
@@ -2124,7 +2140,7 @@ button.menu2 {
 }
 
 .mini.avatar img {
-    border: solid 2px;
+    border: solid 2px black;
 }
 
 .active-context-menu {
@@ -2968,10 +2984,12 @@ input#searchChunks {
 
 .x-num-input {
     width: 75px;
+    pointer-events: all;
 }
 
 .rare-num-input {
     width: 75px;
+    pointer-events: all;
 }
 
 .addEquipment {
@@ -3062,12 +3080,14 @@ input#searchAddEquipment {
     transition-duration: 0.3s;
     transition-property: color;
     pointer-events: none;
-    z-index: 1;
 }
 
 .chunk-sticker.clicky {
-    cursor: pointer;
     pointer-events: auto;
+}
+
+.chunk-sticker.clicky.signedIn {
+    cursor: pointer;
 }
 
 .chunk-sticker.clicky:hover {
@@ -3205,4 +3225,78 @@ input#searchAddEquipment {
 
 .sticker-color-picker-label {
     font-size: 24px;
+}
+
+.tooltiptext-sticker {
+    visibility: hidden;
+    max-width: 220px;
+    background-color: rgb(179, 179, 179);
+    color: black;
+    text-align: center;
+    border: 1px black solid;
+    padding: 5px;
+    font-size: 14px;
+    position: absolute;
+    top: 5px;
+    left: 150%;
+    word-wrap: break-word;
+    z-index: 1;
+}
+
+.chunk-sticker:hover .tooltiptext-sticker {
+    visibility: visible;
+}
+  
+.checkbox {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-gap: 0.25em;
+    font-weight: normal;
+    pointer-events: none;
+}
+  
+.checkbox--disabled {
+    color: var(--disabled);
+}
+  
+.checkbox__control {
+    display: inline-grid;
+    width: .9em;
+    height: .9em;
+    margin: .15em .3em;
+    border-radius: 0.25em;
+    border: 0.1em solid currentColor;
+}
+
+.checkbox__control svg {
+    transition: transform 0.1s ease-in 25ms;
+    transform: scale(0);
+    transform-origin: bottom left;
+}
+  
+.checkbox__input {
+    display: grid;
+    grid-template-areas: "checkbox";
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.checkbox__input > * {
+    grid-area: checkbox;
+    cursor: pointer;
+}
+
+.checkbox__input input {
+    opacity: 0;
+    width: 1em;
+    height: 1em;
+}
+
+.checkbox__input input:checked + .checkbox__control svg {
+    transform: scale(1);
+}
+
+.checkbox--disabled .checkbox__input, .checkbox__input input:disabled + .checkbox__control, .checkbox__input input:disabled, .checkbox__input input:disabled > * {
+    color: var(--disabled);
+    cursor: not-allowed;
 }
