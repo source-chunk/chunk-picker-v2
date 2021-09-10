@@ -759,7 +759,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.6.2");
+const myWorker = new Worker("./worker.js?v=4.6.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -4771,7 +4771,7 @@ var loadData = function(startup) {
             $('.chunk-sticker').remove();
             chunks && chunks['stickered'] && Object.keys(chunks['stickered']).forEach(function(id) {
                 if (stickerChoices.includes(chunks['stickered'][id])) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span style='color:${(chunks.hasOwnProperty('stickeredColors') && chunks['stickeredColors'][id]) || settings['defaultStickerColor'] || '#000000'}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i>${!!chunks.hasOwnProperty('stickeredNotes') && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
+                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span style='color:${(chunks.hasOwnProperty('stickeredColors') && chunks['stickeredColors'][id]) || settings['defaultStickerColor'] || '#000000'}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i>${chunks.hasOwnProperty('stickeredNotes') && chunks['stickeredNotes'].hasOwnProperty(id) && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
                 } else if (stickerChoicesOsrs.includes(chunks['stickered'][id])) {
                     $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${chunks['stickered'][id]}-osrs.svg">${!!chunks['stickeredNotes'][id] && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
                 }
