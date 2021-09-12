@@ -536,6 +536,7 @@ let randomLootChoices = [
     "Calquat tree seed",
     "Celastrus seed",
     "Chaos rune",
+    "Chocolate bar",
     "Coal",
     "Cosmic talisman",
     "Curry tree seed",
@@ -568,6 +569,7 @@ let randomLootChoices = [
     "Magic seed",
     "Mahogany seed",
     "Maple seed",
+    "Meat pie",
     "Mithril arrowtips",
     "Mithril ore",
     "Nature rune",
@@ -759,7 +761,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.6.3");
+const myWorker = new Worker("./worker.js?v=4.6.4");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1090,7 +1092,7 @@ $(document).ready(function() {
 // Credit to Amehzyn
 // Handles zooming
 $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
-    if (e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
+    if (!e.target.className || e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
         $('body').scrollTop(0);
         return;
     } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
@@ -1903,7 +1905,7 @@ var unlockEntry = function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                     signedIn = true;
                     $('.center').css('margin-top', '15px');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .highest').css('opacity', 0).show();
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 0).show();
                     roll2On && $('.roll2').css('opacity', 0).show();
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                     rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
@@ -1913,7 +1915,7 @@ var unlockEntry = function() {
                     setTimeout(function() {
                         $('#entry-menu').css('opacity', 1).hide();
                         $('.pin.entry').val('');
-                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .highest').animate({ 'opacity': 1 });
+                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').animate({ 'opacity': 1 });
                         roll2On && $('.roll2').animate({ 'opacity': 1 });
                         !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                         rules['Manually Add Tasks'] && $('.open-manual-container').animate({ 'opacity': 1 });
@@ -1952,7 +1954,7 @@ var unlockEntry = function() {
                                 displayName: mid
                             });
                             $('.center').css('margin-top', '15px');
-                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .highest').css('opacity', 0).show();
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 0).show();
                             roll2On && $('.roll2').css('opacity', 0).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                             rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
@@ -1962,7 +1964,7 @@ var unlockEntry = function() {
                             setTimeout(function() {
                                 $('#entry-menu').css('opacity', 1).hide();
                                 $('.pin.entry').val('');
-                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, highest').animate({ 'opacity': 1 });
+                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').animate({ 'opacity': 1 });
                                 roll2On && $('.roll2').animate({ 'opacity': 1 });
                                 !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                                 rules['Manually Add Tasks'] && $('.open-manual-container').animate({ 'opacity': 1 });
@@ -2088,7 +2090,7 @@ var accessMap = function() {
                             $('#page2b').hide();
                             $('.background-img').hide();
                             $('.center').css('margin-top', '15px');
-                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .highest').css('opacity', 1).show();
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 1).show();
                             roll2On && $('.roll2').css('opacity', 1).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
                             rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
@@ -2135,7 +2137,7 @@ var accessMap = function() {
                                     $('#page2b').hide();
                                     $('.background-img').hide();
                                     $('.center').css('margin-top', '15px');
-                                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .highest').css('opacity', 1).show();
+                                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 1).show();
                                     roll2On && $('.roll2').css('opacity', 1).show();
                                     !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
                                     rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
@@ -2269,13 +2271,15 @@ var unpick = function() {
 
 // Opens/closes the settings menu
 var settingsMenu = function() {
+    if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
     settingsOpen = !settingsOpen;
-    if (settingsOpen) {
-        $('.settings-menu').show();
-        $('.settings').css({ 'color': 'rgb(150, 150, 150)' });
-    } else {
-        $('.settings-menu').hide();
-        $('.settings').css({ 'color': 'var(--colorText)' });
+        if (settingsOpen) {
+            $('.settings-menu').show();
+            $('.settings').css({ 'color': 'rgb(150, 150, 150)' });
+        } else {
+            $('.settings-menu').hide();
+            $('.settings').css({ 'color': 'var(--colorText)' });
+        }
     }
 }
 
@@ -2486,7 +2490,7 @@ var setupMap = function() {
         $('.body').show();
         $('#page1, #page1extra, #import-menu, #highscore-menu, #highscore-menu2, #help-menu').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .highest').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -2500,7 +2504,7 @@ var setupMap = function() {
         if (locked === undefined || locked) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle, .highest').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).hide();
@@ -3473,59 +3477,61 @@ var openSearchDetails = function(category, name) {
 
 // Opens the highest modal
 var openHighest = function() {
-    highestModalOpen = true;
-    let combatStyles = [];
-    let primarySkill = [];
-    if (rules['Show Skill Tasks']) {
-        combatStyles.push('Skills');
-        skillNames.forEach(skill => {
-            primarySkill[skill] = checkPrimaryMethod(skill, globalValids, baseChunkData);
-        });
-    }
-    if (rules['Show Best in Slot Tasks']) {
-        combatStyles.push('Melee');
-        combatStyles.push('Ranged');
-        combatStyles.push('Magic');
-    }
-    if (rules['Show Best in Slot Prayer Tasks']) {
-        combatStyles.push('Prayer');
-    }
-    if (rules['Show Best in Slot Defensive Tasks']) {
-        combatStyles.push('Melee Tank');
-        combatStyles.push('Ranged Tank');
-        combatStyles.push('Magic Tank');
-    }
-    if (rules['Show Best in Slot Flinching Tasks']) {
-        combatStyles.push('Flinch');
-    }
-    let slots = ['Head', 'Neck', 'Cape', 'Body', 'Legs', 'Weapon', 'Shield', 'Ammo', 'Hands', 'Feet', 'Ring'];
-    $('.highest-title').empty();
-    $('.highest-data').empty();
-    combatStyles.forEach(combatStyle => {
-        $('.highest-title').append(`<div class='noscroll style-button ${combatStyle.replaceAll(' ', '_')}-button' onclick='switchHighestTab("${combatStyle.replaceAll(' ', '_')}")' title='${combatStyle}'><span class='noscroll'><img class='noscroll slot-icon' src='./resources/${combatStyle.replaceAll(' ', '_')}_combat.png' /></span></div>`);
-        $('.highest-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle} ${combatStyle !== 'Skills' ? `<div class='noscroll'><span class='noscroll addEquipment' onclick='addEquipment()'>Add additional equipment</span></div>` : ''}</div></div>`);
-        if (combatStyle === 'Skills') {
-            $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll icon-table-header'>Skill</span><span class='noscroll text-table-header'>Highest Task</span><span class='noscroll button-table-header'>Primary Training</span></div>`);
-            skillNames.filter(skill => { return skill !== 'Combat' }).sort().forEach(skill => {
-                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text'>${(!!highestOverall[skill] ? '<b class="noscroll">[' + chunkInfo['challenges'][skill][highestOverall[skill]]['Level'] + ']</b> ' : '') + (highestOverall[skill] || 'None').replaceAll('~', '').replaceAll('|', '')}</span><span class='noscroll skill-button ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll' onclick='viewPrimaryMethods("${skill}")'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}</div>`);
-            });
-        } else {
-            slots.forEach(slot => {
-                if (highestOverall.hasOwnProperty(combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()) && highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()] !== 'N/A') {
-                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'><a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]}</a></span></div>`);
-                } else if (highestOverall.hasOwnProperty(combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()) && highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()] === 'N/A') {
-                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'>${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]}</span></div>`);
-                } else if (slot === 'Weapon' || slot === 'Shield' || combatStyle !== 'Flinch') {
-                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'>None</span></div>`);
-                }
+    if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
+        highestModalOpen = true;
+        let combatStyles = [];
+        let primarySkill = [];
+        if (rules['Show Skill Tasks']) {
+            combatStyles.push('Skills');
+            skillNames.forEach(skill => {
+                primarySkill[skill] = checkPrimaryMethod(skill, globalValids, baseChunkData);
             });
         }
-    });
-    $('.style-body').hide();
-    $(`.${combatStyles[0]}-button`).addClass('active-tab');
-    $(`.${combatStyles[0]}-body`).show();
-    $('#myModal12').show();
-    document.getElementById('highest-data').scrollTop = 0;
+        if (rules['Show Best in Slot Tasks']) {
+            combatStyles.push('Melee');
+            combatStyles.push('Ranged');
+            combatStyles.push('Magic');
+        }
+        if (rules['Show Best in Slot Prayer Tasks']) {
+            combatStyles.push('Prayer');
+        }
+        if (rules['Show Best in Slot Defensive Tasks']) {
+            combatStyles.push('Melee Tank');
+            combatStyles.push('Ranged Tank');
+            combatStyles.push('Magic Tank');
+        }
+        if (rules['Show Best in Slot Flinching Tasks']) {
+            combatStyles.push('Flinch');
+        }
+        let slots = ['Head', 'Neck', 'Cape', 'Body', 'Legs', 'Weapon', 'Shield', 'Ammo', 'Hands', 'Feet', 'Ring'];
+        $('.highest-title').empty();
+        $('.highest-data').empty();
+        combatStyles.forEach(combatStyle => {
+            $('.highest-title').append(`<div class='noscroll style-button ${combatStyle.replaceAll(' ', '_')}-button' onclick='switchHighestTab("${combatStyle.replaceAll(' ', '_')}")' title='${combatStyle}'><span class='noscroll'><img class='noscroll slot-icon' src='./resources/${combatStyle.replaceAll(' ', '_')}_combat.png' /></span></div>`);
+            $('.highest-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle} ${(testMode || !(viewOnly || inEntry || locked)) && combatStyle !== 'Skills' ? `<div class='noscroll'><span class='noscroll addEquipment' onclick='addEquipment()'>Add additional equipment</span></div>` : ''}</div></div>`);
+            if (combatStyle === 'Skills') {
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll icon-table-header'>Skill</span><span class='noscroll text-table-header'>Highest Task</span><span class='noscroll button-table-header'>Primary Training</span></div>`);
+                skillNames.filter(skill => { return skill !== 'Combat' }).sort().forEach(skill => {
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text'>${(!!highestOverall[skill] ? '<b class="noscroll">[' + chunkInfo['challenges'][skill][highestOverall[skill]]['Level'] + ']</b> ' : '') + (highestOverall[skill] || 'None').replaceAll('~', '').replaceAll('|', '')}</span><span class='noscroll skill-button ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll' onclick='viewPrimaryMethods("${skill}")'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}</div>`);
+                });
+            } else {
+                slots.forEach(slot => {
+                    if (highestOverall.hasOwnProperty(combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()) && highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()] !== 'N/A') {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'><a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()].replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/'))} target="_blank">${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]}</a></span></div>`);
+                    } else if (highestOverall.hasOwnProperty(combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()) && highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()] === 'N/A') {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'>${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]}</span></div>`);
+                    } else if (slot === 'Weapon' || slot === 'Shield' || combatStyle !== 'Flinch') {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'>None</span></div>`);
+                    }
+                });
+            }
+        });
+        $('.style-body').hide();
+        $(`.${combatStyles[0]}-button`).addClass('active-tab');
+        $(`.${combatStyles[0]}-body`).show();
+        $('#myModal12').show();
+        document.getElementById('highest-data').scrollTop = 0;
+    }
 }
 
 // Opens the add equipment modal
@@ -5100,7 +5106,7 @@ var changeLocked = function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                     signedIn = true;
                     $('.center').css('margin-top', '15px');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .highest').css('opacity', 0).show();
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle').css('opacity', 0).show();
                     roll2On && $('.roll2').css('opacity', 0).show();
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                     rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
@@ -5109,7 +5115,7 @@ var changeLocked = function() {
                     $('.lock-box').animate({ 'opacity': 0 });
                     setTimeout(function() {
                         $('.lock-box').css('opacity', 1).hide();
-                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .highest').animate({ 'opacity': 1 });
+                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle').animate({ 'opacity': 1 });
                         roll2On && $('.roll2').animate({ 'opacity': 1 });
                         !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                         rules['Manually Add Tasks'] && $('.open-manual-container').animate({ 'opacity': 1 });
@@ -5148,7 +5154,7 @@ var changeLocked = function() {
                                 displayName: mid
                             });
                             $('.center').css('margin-top', '15px');
-                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .highest').css('opacity', 0).show();
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle').css('opacity', 0).show();
                             roll2On && $('.roll2').css('opacity', 0).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                             rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
@@ -5157,7 +5163,7 @@ var changeLocked = function() {
                             $('.lock-box').animate({ 'opacity': 0 });
                             setTimeout(function() {
                                 $('.lock-box').css('opacity', 1).hide();
-                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .highest').animate({ 'opacity': 1 });
+                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle').animate({ 'opacity': 1 });
                                 roll2On && $('.roll2').animate({ 'opacity': 1 });
                                 !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                                 rules['Manually Add Tasks'] && $('.open-manual-container').animate({ 'opacity': 1 });

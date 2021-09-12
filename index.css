@@ -404,6 +404,7 @@ button.menu2 {
     z-index: 99 !important;
     bottom: 20px;
     width: 100%;
+    pointer-events: none;
 }
 
 .menu6 {
@@ -1744,7 +1745,7 @@ button.menu2 {
     cursor: not-allowed;
 }
 
-.challenge .link {
+.challenge .link, .area .link {
     pointer-events: all;
     color: inherit;
 }
@@ -1954,6 +1955,15 @@ button.menu2 {
     width: 30%;
     height: 30%;
     border: solid black;
+}
+
+.modal .topbar {
+    height: 7%;
+    background-color: var(--color2);
+    border-bottom: solid black 1px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 #myModal4 {

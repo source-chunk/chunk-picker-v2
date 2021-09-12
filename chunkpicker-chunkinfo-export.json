@@ -16202,6 +16202,50 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Eat an admiral pie": {
+				"Items": ["Admiral pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a fish pie": {
+				"Items": ["Fish pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a redberry pie": {
+				"Items": ["Redberry pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a meat pie": {
+				"Items": ["Meat pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a apple pie": {
+				"Items": ["Apple pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a garden pie": {
+				"Items": ["Garden pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a botanical pie": {
+				"Items": ["Botanical pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a mushroom pie": {
+				"Items": ["Mushroom pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a dragonfruit pie": {
+				"Items": ["Dragonfruit pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a wild pie": {
+				"Items": ["Wild pie"],
+				"Output": "Pie dish"
+			},
+			"Eat a summer pie": {
+				"Items": ["Summer pie"],
+				"Output": "Pie dish"
+			},
 			"Search the crate in Wintertodt for a bronze axe": {
 				"Chunks": ["6462"],
 				"Output": "Bronze axe"
@@ -16531,22 +16575,22 @@
 				"Items": ["Void knight robe"],
 				"Output": "Elite void robe"
 			},
-			"Slayer Equipment (shop)#Spria*": {
+			"Slayer Equipment (shop)%2FSpria*": {
 				"Chunks": ["12338", "12339", "12083", "12596", "Sourhog Cave"],
 				"Source": "shop",
 				"Output": "Spria's Shop (post-quest)"
 			},
-			"Ali's Discount Wares.#Runes*": {
+			"Ali's Discount Wares.%2FRunes*": {
 				"Chunks": ["13106", "13358", "12853", "12850", "Wizards' Tower%2FBasement"],
 				"Source": "shop",
 				"Output": "Ali's Runes (post-quest)"
 			},
-			"Ali's Discount Wares.#Blackjacks*": {
+			"Ali's Discount Wares.%2FBlackjacks*": {
 				"Chunks": ["13106", "13358"],
 				"Source": "shop",
 				"Output": "Ali's Blackjacks (post-quest)"
 			},
-			"Ali's Discount Wares.#Clothing*": {
+			"Ali's Discount Wares.%2FClothing*": {
 				"Chunks": ["13106", "13358", "13099"],
 				"Source": "shop",
 				"Output": "Ali's Clothing (post-quest)"
@@ -44996,7 +45040,7 @@
 				"12185": true
 			},
 			"Monster": {
-				"Black Guard#Ice Mountain": 4,
+				"Black Guard%2FIce Mountain": 4,
 				"Dwarf": 8
 			},
 			"NPC": {
@@ -60698,7 +60742,7 @@
 			"Tin ore": "1/128",
 			"GemDropTable+": "1/128"
 		},
-		"Black Guard#Ice Mountain": {
+		"Black Guard%2FIce Mountain": {
 			"Bones": "Always",
 			"Bronze bar": "7/128",
 			"Bronze battleaxe": "2/128",
