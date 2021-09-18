@@ -4,6 +4,8 @@
 }
 
 :root {
+    --disabled: #959495;
+
     /* Light */
     --color1: rgb(200, 200, 200);
     --color2: rgb(180, 180, 180);
@@ -16,7 +18,7 @@
     --color9: rgb(120, 120, 120);
     --colorText: rgb(0, 0, 0);
     --colorLink: rgb(0, 0, 255);
-    --disabled: #959495;
+    --colorFlash: rgb(255, 255, 0.7);
 
     /* Dark */
     /*
@@ -31,6 +33,7 @@
     --color9: rgb(46, 50, 59);
     --colorText: rgb(201, 209, 217);
     --colorLink: rgb(88, 166, 255);
+    --colorFlash: rgb(150, 150, 0.7);
     */
 }
 
@@ -161,7 +164,7 @@ a, a:visited {
 }
 
 .recent.unlocked:not(.mobile), .recent.potential:not(.mobile) {
-    background-color: rgba(255, 255, 0, .7);
+    background-color: var(--colorFlash);
     animation: glowing 750ms infinite;
 }
 
@@ -469,7 +472,7 @@ button.menu2 {
 }
 
 .infoid.new {
-    background-color:  rgb(255, 255, 0);
+    background-color:  var(--colorFlash);
 }
 
 .infocontribute {
@@ -2734,16 +2737,19 @@ button.menu2 {
     min-height: 10%;
     font-weight: bold;
     padding: 0px 10px;
+    background-color: var(--color2);
 }
 
 .searchchunks-subtitle {
     height: 10%;
     padding: 0px 15px;
+    background-color: var(--color2);
 }
 
 .searchchunks-searchcontainer {
     height: 8%;
     padding: 0px 15px;
+    background-color: var(--color2);
 }
 
 input#searchChunks {
@@ -2976,7 +2982,7 @@ input#searchChunks {
 }
 
 .methods-data {
-    height: 100%;
+    height: 93%;
     overflow-y: auto;
     font-size: 24px;
 }

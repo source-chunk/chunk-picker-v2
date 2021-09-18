@@ -5888,7 +5888,8 @@
 				"Items": ["Cake", "Chocolate bar"],
 				"Level": 50,
 				"Output": "Chocolate cake",
-				"Primary": true
+				"Primary": true,
+				"Priority": 1
 			},
 			"Bake a ~|dragonfruit pie|~": {
 				"Items": ["Pie dish", "Pastry dough", "Dragonfruit"],
@@ -6042,7 +6043,8 @@
 				"Level": 85,
 				"Objects": ["Cooking range+"],
 				"Output": "Wild pie",
-				"Primary": true
+				"Primary": true,
+				"Priority": 1
 			},
 			"Bake a ~|worm batta|~": {
 				"Items": ["Batta tin", "Gianne dough", "King worm", "Cheese", "Equa leaves", "Gnome spice"],
@@ -6712,6 +6714,14 @@
 				"Output": "Anglerfish",
 				"Primary": true
 			},
+			"Cook an ~|oomlie wrap|~": {
+				"Items": ["Wrapped oomlie"],
+				"Level": 50,
+				"Objects": ["Cooking object+"],
+				"Output": "Cooked oomlie wrap",
+				"Primary": true,
+				"Priority": 2
+			},
 			"Cook an ~|ugthanki kebab|~": {
 				"Items": ["Kebab mix*", "Pitta bread*"],
 				"Level": 1,
@@ -6775,6 +6785,16 @@
 				"Output": "Sinew",
 				"Primary": true,
 				"Priority": 13
+			},
+			"Create an ~|infernal harpoon|~": {
+				"Items": ["Smouldering stone", "Dragon harpoon"],
+				"Level": 85,
+				"Primary": false,
+				"Output": "Infernal harpoon",
+				"Skills": {
+					"Fishing": 75
+				},
+				"Priority": 2
 			},
 			"Dissect a ~|sacred eel|~": {
 				"Items": ["Knife", "Sacred eel"],
@@ -7846,10 +7866,10 @@
 				"Output": "Empty candle lantern",
 				"Primary": true
 			},
-			"Craft an ~|empty fishbowl|~": {
+			"Craft a ~|fishbowl|~": {
 				"Items": ["Molten glass", "Glassblowing pipe"],
 				"Level": 42,
-				"Output": "Empty fishbowl",
+				"Output": "Fishbowl",
 				"Primary": true,
 				"Priority": 2
 			},
@@ -9710,7 +9730,7 @@
 				"Output": "Papaya",
 				"Primary": false
 			},
-			"Grow a ~|pineapple tree|~": {
+			"Grow a ~|pineapple plant|~": {
 				"Category": ["Normal Farming"],
 				"Items": ["Empty plant pot", "Gardening trowel", "Rake", "Pineapple seed"],
 				"Level": 51,
@@ -16202,6 +16222,18 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Make a dark totem": {
+				"Items": ["Dark totem top", "Dark totem middle", "Dark totem base"],
+				"Output": "Dark totem"
+			},
+			"Make a wrapped oomlie": {
+				"Items": ["Raw oomlie", "Palm leaf"],
+				"Output": "Wrapped oomlie"
+			},
+			"Shake a leafy palm tree": {
+				"Objects": ["Leafy Palm Tree"],
+				"Output": "Palm leaf"
+			},
 			"Eat an admiral pie": {
 				"Items": ["Admiral pie"],
 				"Output": "Pie dish"
@@ -20242,7 +20274,7 @@
 			},
 			"Wear a ~|slayer helmet|~": {
 				"Category": ["Slayer Equipment"],
-				"Items": ["Black mask (10)", "Earmuffs", "Facemask", "Nose peg", "Spiny helmet", "Enchanted gem"],
+				"Items": ["Slayer helmet"],
 				"Level": 35,
 				"Primary": false,
 				"Priority": 3
@@ -30518,6 +30550,7 @@
 				"Mature juniper tree": 6,
 				"Nettles": 5,
 				"Oak": 3,
+				"Saltpetre (deposit)": 3,
 				"Tree": 18,
 				"Yew": 2
 			},
@@ -30550,6 +30583,7 @@
 				"Maple tree": 2,
 				"Mature juniper tree": 7,
 				"Oak": 3,
+				"Saltpetre (deposit)": 2,
 				"Spirit Tree Patch": 1,
 				"Stepping stone": 1,
 				"Tree": 22,
@@ -37070,7 +37104,8 @@
 				"Kandarin": "MD1, HD9, EL1"
 			},
 			"Monster": {
-				"Barbarian": 7,
+				"Barbarian%2FHigher level": 4,
+				"Barbarian%2FLower level": 3,
 				"Chicken": 3
 			},
 			"NPC": {
@@ -40252,9 +40287,6 @@
 			}
 		},
 		"10809": {
-			"Connect": {
-				"11166": true
-			},
 			"Monster": {
 				"Black unicorn": 2,
 				"Black unicorn Foal": 4
@@ -46052,7 +46084,8 @@
 				"Varrock": "EA10, EA13"
 			},
 			"Monster": {
-				"Barbarian": 17,
+				"Barbarian%2FHigher level": 6,
+				"Barbarian%2FLower level": 11,
 				"Goblin%2FLevel 2": 5,
 				"Gunthor the brave": 1,
 				"Unicorn": 2
@@ -47968,7 +48001,7 @@
 				"Varrock": "EA1, EA2, EA8, EA11, HD2"
 			},
 			"Monster": {
-				"Barbarian": 1,
+				"Barbarian%2FLower level": 1,
 				"Jonny the beard": 1,
 				"Man": 6,
 				"Rat": 1,
@@ -59234,7 +59267,20 @@
 			"Woodcutting guild+": ["6198", "6454"],
 			"X Marks the Spot 5+": ["12338", "12339"],
 			"Tanner+": ["13105", "11571", "10549", "13878", "Forthos Dungeon", "4921"],
-			"ArdyHard9+": ["10545", "10288", "10036"]
+			"ArdyHard9+": ["10545", "10288", "10036"],
+			"ShantayChunks+": ["13104", "12588"],
+			"DesertChunks+": ["12587", "12588", "12589", "12590", "12591", "12843", "12844", "12845", "12846", "12847", "12848", "13099", "13100", "13101", "13102", "13103", "13104", "13356", "13357", "13358", "13359", "13360", "13613", "13614", "13615", "13616", "13617", "13872", "13873"],
+			"FaladorChunks+": ["11827", "11828", "11829", "12084"],
+			"RockCrabChunks+": ["10554", "10810"],
+			"FremennikEasy10+": ["10296", "10552", "10808", "10809", "11064"],
+			"FremmyHard3+": ["10296", "10297", "10552", "10553", "10554", "10808", "10809", "11064"],
+			"KandarinDiaryArea+": ["10806", "11061", "11062", "11317", "11318"],
+			"KaramjaChunks+": ["10801", "10802", "11053", "11054", "11055", "11056", "11057", "11058", "11309", "11310", "11311", "11312", "11313", "11565", "11566", "11567", "11568", "11569", "11821", "11822", "11823", "11825"],
+			"KaramjaMedium14+": ["11054", "11055"],
+			"KaramjaMedium18+": ["8496", "8500", "10284", "10545", "11058", "11061", "11825", "12081", "14637", "14646"],
+			"KKEasy1+": ["4923", "5179"],
+			"OrganizedCrime+": ["6202", "6203", "5947", "5946", "7226", "6970", "5689", "5943", "5688", "6200", "6457", "6197", "5941", "6458", "6715", "6714", "6968", "6456", "6966", "6455", "6969", "6967", "6711"],
+			"KKHard10+": ["4918", "4919"]
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {
@@ -59489,6 +59535,7 @@
 			"Bandos armour+": ["Bandos chestplate", "Bandos tassets", "Bandos boots"],
 			"Barbarian bait+": ["Feather", "Fishing bait", "Fish offcuts", "Roe", "Caviar"],
 			"Barbarian rod+": ["Barbarian rod", "Pearl barbarian rod"],
+			"BarbarianBow+": ["Training bow", "Shortbow", "Longbow", "Oak shortbow", "Oak longbow", "Willow shortbow", "Willow longbow", "Maple shortbow", "Maple longbow", "Yew shortbow", "Yew longbow", "Seercull", "Magic shortbow", "Magic longbow"],
 			"Barrows magic+": ["Ahrim's hood"],
 			"Barrows melee+": ["Dharok's helm"],
 			"Barrows ranged+": ["Karil's coif"],
@@ -59500,6 +59547,7 @@
 			"Black dragonhide armour+": ["Black d'hide chaps", "Black d'hide vambraces", "Black d'hide body", "Black spiky vambraces"],
 			"Black key+": ["Black key red", "Black key brown", "Black key crimson", "Black key black", "Black key purple"],
 			"BlackWep+": ["Black dagger", "Black pickaxe", "Black axe", "Black mace", "Black sword", "Black scimitar", "Black longsword", "Black battleaxe", "Black claws", "Black spear", "Black 2h sword"],
+			"Blackjack+": ["Oak blackjack", "Oak blackjack(o)", "Oak blackjack(d)", "Willow blackjack", "Willow blackjack(o)", "Willow blackjack(d)", "Maple blackjack", "Maple blackjack(o)", "Maple blackjack(d)"],
 			"Blessed dragonhide armour+": ["Guthix chaps"],
 			"Bloodbark armour+": ["Bloodbark helm", "Bloodbark body", "Bloodbark legs", "Bloodbark gauntlets", "Bloodbark boots"],
 			"Blue dragonhide armour+": ["Blue d'hide chaps", "Blue d'hide vambraces", "Blue d'hide body", "Blue spiky vambraces"],
@@ -59541,6 +59589,7 @@
 			"GraniteArmour+": ["Granite helm", "Granite body", "Granite legs", "Granite gloves", "Granite boots", "Granite shield", "Granite ring"],
 			"GraniteWep+": ["Granite maul", "Granite longsword", "Granite hammer"],
 			"Green dragonhide armour+": ["Green d'hide chaps", "Green d'hide vambraces", "Green d'hide body", "Green spiky vambraces"],
+			"GrimyHerb+": ["Grimy guam leaf", "Grimy marrentill", "Grimy tarromin", "Grimy harralander", "Grimy ranarr weed", "Grimy toadflax", "Grimy irit leaf", "Grimy avantoe", "Grimy kwuarm", "Grimy snapdragon", "Grimy cadantine", "Grimy lantadyme", "Grimy dwarf weed", "Grimy torstol"],
 			"Ham key+": ["Bronze key (H.A.M.)", "Iron key (H.A.M.)", "Silver key (H.A.M.)", "Steel key (H.A.M.)"],
 			"Hammer+": ["Hammer", "Imcando hammer"],
 			"Harpoon+": ["Harpoon", "Dragon harpoon", "Crystal harpoon", "Infernal harpoon", "Barb-tail harpoon"],
@@ -59563,6 +59612,7 @@
 			"Lumberjack+": ["Lumberjack hat", "Lumberjack top", "Lumberjack legs", "Lumberjack boots"],
 			"Lunar equipment+": ["Lunar boots", "Lunar cape", "Lunar gloves", "Lunar legs", "Lunar torso"],
 			"Machete+": ["Machete", "Opal machete", "Jade machete", "Red topaz machete"],
+			"MacheteGem+": ["Uncut opal", "Opal", "Uncut jade", "Jade", "Uncut red topaz", "Red topaz"],
 			"Magic potion+": ["Magic potion(1)", "Magic potion(2)", "Magic potion(3)", "Magic potion(4)"],
 			"Mithril armour+": ["Mithril boots", "Mithril med helm", "Mithril full helm", "Mithril sq shield", "Mithril plateskirt", "Mithril kiteshield", "Mithril platelegs", "Mithril chainbody", "Mithril platebody"],
 			"MithrilWep+": ["Mithril dagger", "Mithril pickaxe", "Mithril axe", "Mithril mace", "Mithril sword", "Mithril scimitar", "Mithril longsword", "Mithril battleaxe", "Mithril claws", "Mithril spear", "Mithril 2h sword"],
@@ -59626,6 +59676,7 @@
 			"Unholy book+": ["Unholy book", "Book of balance"],
 			"Urium remains+": ["Loar remains", "Phrin remains", "Riyl remains", "Asyn remains", "Fiyr remains", "Urium remains"],
 			"Void Knight equipment+": ["Void melee helm", "Void ranger helm", "Void mage helm", "Void knight gloves", "Void knight robe", "Void knight top"],
+			"Waterskin+": ["Waterskin", "Waterskin(4)", "Waterskin(3)", "Waterskin(2)", "Waterskin(1)", "Waterskin(0)"],
 			"Water item+": ["Bucket of water", "Jug of water", "Bowl of water"],
 			"Water rune+": ["Water rune", "Mist rune", "Mud rune", "Steam rune"],
 			"Watering can+": ["Watering can", "Watering can(1)", "Watering can(2)", "Watering can(3)", "Watering can(4)", "Watering can(5)", "Watering can(6)", "Watering can(7)", "Watering can(8)", "Gricoller's can"],
@@ -59659,7 +59710,8 @@
 			"Wizard robes+": ["Blue wizard hat", "Blue wizard robe", "Wizard hat", "Black robe"],
 			"Cape+": ["Black cape", "Blue cape", "Green cape", "Orange cape", "Pink cape", "Purple cape", "Red cape", "Yellow cape"],
 			"Dye+": ["Black mushroom ink", "Blue dye", "Green dye", "Orange dye", "Pink dye", "Purple dye", "Red dye", "Yellow dye"],
-			"LegendsJewellery+": ["Skills necklace", "Combat bracelet"]
+			"LegendsJewellery+": ["Skills necklace", "Combat bracelet"],
+			"Facemask+": ["Face mask", "Gas mask", "Slayer helmet"]
 		},
 		"mixPlus": {
 			"Fremennik citizen+": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"],
@@ -59681,7 +59733,8 @@
 			"Terror dog+": ["Terror dog%2FLevel 100", "Terror dog%2FLevel 110"],
 			"Undead+": ["Aberrant spectre", "Deviant spectre", "Ankou%2FWilderness Slayer Cave", "Twisted banshee", "Ankou", "Banshee", "Crawling hand", "Ghast", "Ghost", "Mummy", "Shade", "Skeleton", "Skogre", "Summoned Zombie", "Tortured soul", "Undead chicken", "Undead cow", "Undead one", "Zogre", "Zombified Spawn", "Zombie", "Zombie rat"],
 			"Woman+": ["Woman", "Anja"],
-			"Zygomite+": ["Fungi", "Ancient Fungi"]
+			"Zygomite+": ["Fungi", "Ancient Fungi"],
+			"Lizardman+": ["Lizardman", "Lizardman shaman"]
 		},
 		"npcsPlus": {
 			"Elf+": ["Arvel", "Goreu", "Kelyn", "Mawrth", "Anaire", "Aranwe", "Aredhel", "Caranthir", "Celebrian", "Celegorm", "Cirdan", "Curufin", "Earwen", "Edrahil", "Elenwe", "Elladan", "Enel", "Erestor", "Enerdhil", "Enelye", "Feanor", "Findis", "Finduilas", "Fingolfin", "Fingon", "Galathil", "Gelmir", "Glorfindel", "Guilin", "Hendor (elf)", "Idril", "Imin", "Iminye", "Indis", "Ingwe", "Ingwion", "Lenwe", "Lindir", "Maeglin", "Mahtan", "Miriel", "Mithrellas", "Nellas", "Nerdanel", "Nimloth", "Oropher", "Orophin", "Saeros", "Salgant", "Tatie", "Thingol", "Turgon", "Vaire"],
@@ -59727,6 +59780,10 @@
 			["Iron knife*"],
 			["Iron thrownaxe*"]
 		],
+		"tasksPlus": {
+			"KaramjaEasy7+": ["Catch ~|raw shrimps|~", "Catch ~|raw anchovies|~", "Catch a ~|raw herring|~", "Catch a ~|raw sardine|~", "Catch a ~|raw lobster|~", "Catch a ~|raw tuna|~", "Catch a ~|raw swordfish|~"],
+			"KaramjaMedium13+": ["Grow an ~|apple tree|~", "Grow a ~|banana tree|~", "Grow an ~|orange tree|~", "Grow a ~|curry tree|~", "Grow a ~|pineapple plant|~", "Grow a ~|papaya tree|~", "Grow a ~|palm tree|~", "Grow a ~|dragonfruit tree|~"]
+		},
 		"tools": {
 			"Ammo mould": true,
 			"Amulet mould": true,
@@ -60531,13 +60588,35 @@
 			"Shark": "3/128",
 			"GemDropTable+": "1/14.22"
 		},
-		"Barbarian": {
-			"Amulet mould": "1/128",
+		"Barbarian%2FLower level": {
 			"Bear fur": "1/128",
 			"Beer": "1/128",
 			"Bones": "Always",
 			"Bronze arrow": "4/128",
 			"Bronze axe": "6/128",
+			"Chaos rune": "4/128",
+			"Clue scroll (beginner)": "1/55",
+			"Clue scroll (easy)": "1/128",
+			"Coins": "3/128",
+			"Cooked meat": "1/128",
+			"Earth rune": "3/128",
+			"Fire rune": "2/128",
+			"Flier": "1/128",
+			"Iron mace": "1/128",
+			"Law rune": "1/128",
+			"Mind rune": "2/128",
+			"Nothing": "33/128",
+			"Ring mould": "1/128",
+			"Staff": "4/128",
+			"Tin ore": "1/128",
+			"GemDropTable+": "1/128"
+		},
+		"Barbarian%2FHigher level": {
+			"Amulet mould": "1/128",
+			"Bear fur": "1/128",
+			"Beer": "1/128",
+			"Bones": "Always",
+			"Bronze arrow": "4/128",
 			"Bronze battleaxe": "4/128",
 			"Chaos rune": "4/128",
 			"Clue scroll (beginner)": "1/55",
@@ -60553,9 +60632,6 @@
 			"Law rune": "1/128",
 			"Mind rune": "2/128",
 			"Nothing": "33/128",
-			"Ring mould": "1/128",
-			"Staff": "4/128",
-			"Tin ore": "1/128",
 			"GemDropTable+": "1/128"
 		},
 		"Barbarian (Barbarian Camp)": {
