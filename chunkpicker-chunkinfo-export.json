@@ -2401,6 +2401,17 @@
 				"Primary": true,
 				"Priority": 60
 			},
+			"Build a ~|crafting table 2|~ for making clockwork": {
+				"Chunks": ["Player-owned house"],
+				"Items": ["Hammer+", "Saw+", "Oak plank", "Molten glass"],
+				"Level": 25,
+				"Primary": true,
+				"Priority": 1000,
+				"Tasks": {
+					"Craft a ~|clockwork|~ on a crafting table 2": "Crafting"
+				},
+				"AlwaysValid": true
+			},
 			"Build a ~|crafting table 3|~": {
 				"Category": ["InsidePOH"],
 				"Chunks": ["Player-owned house"],
@@ -7100,13 +7111,17 @@
 				"Primary": true,
 				"Priority": 2
 			},
-			"Craft a ~|clockwork|~": {
+			"Craft a ~|clockwork|~ on a crafting table 2": {
 				"Chunks": ["Player-owned house"],
 				"Items": ["Steel bar"],
 				"Level": 8,
-				"Output": "Clockwork",
+				"Reward": "Clockwork",
 				"Primary": true,
-				"Priority": 4
+				"Priority": 4,
+				"Tasks": {
+					"Build a ~|crafting table 2|~ for making clockwork": "Construction"
+				},
+				"AlwaysValid": true
 			},
 			"Craft a ~|coif|~": {
 				"Items": ["Leather", "Needle", "Thread"],
