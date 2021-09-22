@@ -18567,6 +18567,12 @@
 				},
 				"Priority": 9
 			},
+			"Wear ~|blessed dragonhide chaps|~": {
+				"Items": ["Blessed dragonhide chaps+"],
+				"Level": 70,
+				"Primary": false,
+				"Priority": 10
+			},
 			"Wear ~|blue dragonhide armour|~": {
 				"Items": ["Blue dragonhide armour+"],
 				"Level": 50,
@@ -59551,9 +59557,9 @@
 			"Barbarian bait+": ["Feather", "Fishing bait", "Fish offcuts", "Roe", "Caviar"],
 			"Barbarian rod+": ["Barbarian rod", "Pearl barbarian rod"],
 			"BarbarianBow+": ["Training bow", "Shortbow", "Longbow", "Oak shortbow", "Oak longbow", "Willow shortbow", "Willow longbow", "Maple shortbow", "Maple longbow", "Yew shortbow", "Yew longbow", "Seercull", "Magic shortbow", "Magic longbow"],
-			"Barrows magic+": ["Ahrim's hood"],
-			"Barrows melee+": ["Dharok's helm"],
-			"Barrows ranged+": ["Karil's coif"],
+			"Barrows magic+": ["Ahrim's hood", "Ahrim's robe top", "Ahrim's robe skirt"],
+			"Barrows melee+": ["Dharok's helm", "Dharok's platebody", "Dharok's platelegs", "Guthan's helm", "Guthan's platebody", "Guthan's chainskirt", "Torag's helm", "Torag's platebody", "Torag's platelegs", "Verac's helm", "Verac's brassard", "Verac's plateskirt"],
+			"Barrows ranged+": ["Karil's coif", "Karil's leathertop", "Karil's leatherskirt"],
 			"Battlestaff+": ["Battlestaff", "Air battlestaff", "Water battlestaff", "Earth battlestaff", "Fire battlestaff", "Lava battlestaff", "Mud battlestaff", "Steam battlestaff", "Smoke battlestaff", "Mist battlestaff", "Dust battlestaff"],
 			"BelowIceMountainBeer+": ["Beer", "Asgarnian ale", "Dwarven stout", "Wizard’s mind bomb"],
 			"Big bones+": ["Bones", "Big bones"],
@@ -59563,7 +59569,8 @@
 			"Black key+": ["Black key red", "Black key brown", "Black key crimson", "Black key black", "Black key purple"],
 			"BlackWep+": ["Black dagger", "Black pickaxe", "Black axe", "Black mace", "Black sword", "Black scimitar", "Black longsword", "Black battleaxe", "Black claws", "Black spear", "Black 2h sword"],
 			"Blackjack+": ["Oak blackjack", "Oak blackjack(o)", "Oak blackjack(d)", "Willow blackjack", "Willow blackjack(o)", "Willow blackjack(d)", "Maple blackjack", "Maple blackjack(o)", "Maple blackjack(d)"],
-			"Blessed dragonhide armour+": ["Guthix chaps"],
+			"Blessed dragonhide armour+": ["Saradomin coif", "Saradomin body", "Saradomin bracers", "Saradomin boots", "Saradomin shield", "Guthix coif", "Guthix body", "Guthix bracers", "Guthix boots", "Guthix shield", "Zamorak coif", "Zamorak body", "Zamorak bracers", "Zamorak boots", "Zamorak shield", "Armadyl coif", "Armadyl body", "Armadyl bracers", "Armadyl boots", "Armadyl shield", "Bandos coif", "Bandos body", "Bandos bracers", "Bandos boots", "Bandos shield", "Ancient coif", "Ancient body", "Ancient bracers", "Ancient boots", "Ancient shield"],
+			"Blessed dragonhide chaps+": ["Saradomin chaps", "Guthix chaps", "Zamorak chaps", "Armadyl chaps", "Bandos chaps", "Ancient chaps"],
 			"Bloodbark armour+": ["Bloodbark helm", "Bloodbark body", "Bloodbark legs", "Bloodbark gauntlets", "Bloodbark boots"],
 			"Blue dragonhide armour+": ["Blue d'hide chaps", "Blue d'hide vambraces", "Blue d'hide body", "Blue spiky vambraces"],
 			"Bones+": ["Bones", "Bat bones", "Big bones", "Burnt bones", "Burnt jogre bones", "Baby dragon bones", "Dragon bones", "Monkey bones", "Small ninja monkey bones", "Medium ninja monkey bones", "Gorilla bones", "Bearded gorilla bones", "Skeletal gorilla bones", "Small zombie monkey bones", "Large zombie monkey bones", "Jogre bones", "Zogre bones", "Fayrg bones", "Raurg bones", "Ourg bones", "Shaikahan bones", "Dagannoth bones", "Wyvern bones", "Lava dragon bones", "Superior dragon bones", "Wyrm bones", "Drake bones", "Hydra bones"],
