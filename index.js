@@ -764,7 +764,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.6.7");
+const myWorker = new Worker("./worker.js?v=4.6.8");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -4832,7 +4832,7 @@ var loadData = function(startup) {
             stickeredNotes = (chunks ? chunks['stickeredNotes'] : {}) || {};
             stickeredColors = (chunks ? chunks['stickeredColors'] : {}) || {};
 
-            roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
+            mid === roll5Mid && $('.roll2').text('Roll 5');
             if (picking) {
                 $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
                 $('.pick').text('Pick for me');
