@@ -755,6 +755,8 @@ let patreonMaps = {
     'jlo': true, // JLo
 };
 
+let roll5Mid = 'rfr'; //Semanari
+
 // ----------------------------------------------------------
 
 // Event Listeners
@@ -762,7 +764,7 @@ let patreonMaps = {
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.6.6");
+const myWorker = new Worker("./worker.js?v=4.6.7");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1339,6 +1341,7 @@ $(document).on({
                     $('.pick').text('Pick Chunk');
                 }
                 roll2On && $('.roll2').text('Roll 2');
+                roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
                 unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
                 isPicking = false;
                 $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
@@ -1471,7 +1474,8 @@ var pick = function(both) {
     var sNum;
     let didRandomStart = false;
     if (both && isPicking) {
-        for (let temp = 0; temp < 2; temp++) {
+        let numToRoll = mid === roll5Mid ? 5 : 2;
+        for (let temp = 0; temp < numToRoll; temp++) {
             el = $('.potential');
             rand = 0;
             sNum = $($(el[rand]).children('.label')).text();
@@ -1534,6 +1538,7 @@ var pick = function(both) {
             $('.pick').text('Pick Chunk');
         }
         roll2On && $('.roll2').text('Roll 2');
+        roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
         unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
         completeChallenges();
         !onMobile && setCalculating('.panel-active');
@@ -1592,6 +1597,7 @@ var pick = function(both) {
             $('.pick').text('Pick Chunk');
         }
         roll2On && $('.roll2').text('Roll 2');
+        roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
         unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
     }
     autoSelectNeighbors && !didRandomStart && selectNeighbors(el[rand]);
@@ -1671,8 +1677,10 @@ var roll2 = function() {
         $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
         $('.pick').text('Pick for me');
         $('.roll2').text('Unlock both');
+        mid === roll5Mid && $('.roll2').text('Unlock all');
     }
-    for (var i = 0; i < 2; i++) {
+    let numToRoll = mid === roll5Mid ? 5 : 2;
+    for (var i = 0; i < numToRoll; i++) {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
         $(el[rand]).addClass('potential recent').removeClass('selected');
@@ -4824,10 +4832,12 @@ var loadData = function(startup) {
             stickeredNotes = (chunks ? chunks['stickeredNotes'] : {}) || {};
             stickeredColors = (chunks ? chunks['stickeredColors'] : {}) || {};
 
+            roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
             if (picking) {
                 $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
                 $('.pick').text('Pick for me');
                 $('.roll2').text('Unlock both');
+                mid === roll5Mid && $('.roll2').text('Unlock all');
                 isPicking = true;
             } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
                 $('.pick').text('Random Start?');
