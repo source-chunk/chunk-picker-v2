@@ -660,6 +660,7 @@ button.menu2 {
 .inner-lock {
     width: min(8%, 100px);
     margin: auto;
+    pointer-events: all;
 }
 
 .lock-pin {
