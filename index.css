@@ -1767,6 +1767,10 @@ button.menu2 {
     background-color: var(--color3);
 }
 
+.area .radio__label {
+    color: var(--colorText);
+}
+
 .arrow {
     font-weight: bold;
     cursor: pointer;
