@@ -85054,7 +85054,7 @@
 			"prayer": 0,
 			"ranged_strength": 16,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Bronze fire arrow": {
 			"attack_speed": 0,
@@ -85073,7 +85073,7 @@
 			"prayer": 0,
 			"ranged_strength": 7,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Bronze javelin": {
 			"attack_speed": 0,
@@ -85092,7 +85092,7 @@
 			"prayer": 0,
 			"ranged_strength": 25,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron javelin": {
 			"attack_speed": 0,
@@ -85111,7 +85111,7 @@
 			"prayer": 0,
 			"ranged_strength": 42,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel javelin": {
 			"attack_speed": 0,
@@ -85206,7 +85206,7 @@
 			"prayer": 0,
 			"ranged_strength": 25,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron javelin(p)": {
 			"attack_speed": 0,
@@ -85225,7 +85225,7 @@
 			"prayer": 0,
 			"ranged_strength": 42,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel javelin(p)": {
 			"attack_speed": 0,
@@ -85320,7 +85320,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Bronze bolts (p)": {
 			"attack_speed": 0,
@@ -85339,7 +85339,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Opal bolts": {
 			"attack_speed": 0,
@@ -85358,7 +85358,7 @@
 			"prayer": 0,
 			"ranged_strength": 14,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Pearl bolts": {
 			"attack_speed": 0,
@@ -85377,7 +85377,7 @@
 			"prayer": 0,
 			"ranged_strength": 48,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Barbed bolts": {
 			"attack_speed": 0,
@@ -85396,7 +85396,7 @@
 			"prayer": 0,
 			"ranged_strength": 12,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Bronze arrow": {
 			"attack_speed": 0,
@@ -85415,7 +85415,7 @@
 			"prayer": 0,
 			"ranged_strength": 7,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Bronze arrow(p)": {
 			"attack_speed": 0,
@@ -85434,7 +85434,7 @@
 			"prayer": 0,
 			"ranged_strength": 7,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron arrow": {
 			"attack_speed": 0,
@@ -85453,7 +85453,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron arrow(p)": {
 			"attack_speed": 0,
@@ -85472,7 +85472,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel arrow": {
 			"attack_speed": 0,
@@ -85643,7 +85643,7 @@
 			"prayer": 0,
 			"ranged_strength": 7,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron fire arrow": {
 			"attack_speed": 0,
@@ -85662,7 +85662,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron fire arrow (lit)": {
 			"attack_speed": 0,
@@ -85681,7 +85681,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel fire arrow": {
 			"attack_speed": 0,
@@ -85890,7 +85890,7 @@
 			"prayer": 0,
 			"ranged_strength": 55,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Bronze brutal": {
 			"attack_speed": 0,
@@ -85909,7 +85909,7 @@
 			"prayer": 0,
 			"ranged_strength": 11,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron brutal": {
 			"attack_speed": 0,
@@ -85928,7 +85928,7 @@
 			"prayer": 0,
 			"ranged_strength": 13,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel brutal": {
 			"attack_speed": 0,
@@ -86042,7 +86042,7 @@
 			"prayer": 0,
 			"ranged_strength": 7,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron arrow(p+)": {
 			"attack_speed": 0,
@@ -86061,7 +86061,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel arrow(p+)": {
 			"attack_speed": 0,
@@ -86156,7 +86156,7 @@
 			"prayer": 0,
 			"ranged_strength": 7,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron arrow(p++)": {
 			"attack_speed": 0,
@@ -86175,7 +86175,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel arrow(p++)": {
 			"attack_speed": 0,
@@ -86270,7 +86270,7 @@
 			"prayer": 0,
 			"ranged_strength": 25,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron javelin(p+)": {
 			"attack_speed": 0,
@@ -86289,7 +86289,7 @@
 			"prayer": 0,
 			"ranged_strength": 42,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel javelin(p+)": {
 			"attack_speed": 0,
@@ -86384,7 +86384,7 @@
 			"prayer": 0,
 			"ranged_strength": 25,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Iron javelin(p++)": {
 			"attack_speed": 0,
@@ -86403,7 +86403,7 @@
 			"prayer": 0,
 			"ranged_strength": 42,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Steel javelin(p++)": {
 			"attack_speed": 0,
@@ -86498,7 +86498,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Bronze bolts (p++)": {
 			"attack_speed": 0,
@@ -86517,7 +86517,7 @@
 			"prayer": 0,
 			"ranged_strength": 10,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Bone bolts": {
 			"attack_speed": 0,
@@ -86688,7 +86688,7 @@
 			"prayer": 0,
 			"ranged_strength": 14,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Jade bolts (e)": {
 			"attack_speed": 0,
@@ -86726,7 +86726,7 @@
 			"prayer": 0,
 			"ranged_strength": 48,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Topaz bolts (e)": {
 			"attack_speed": 0,
@@ -87429,7 +87429,7 @@
 			"prayer": 0,
 			"ranged_strength": 7,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Guam tar": {
 			"attack_speed": 0,
@@ -87448,7 +87448,7 @@
 			"prayer": 0,
 			"ranged_strength": 16,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Marrentill tar": {
 			"attack_speed": 0,
@@ -87467,7 +87467,7 @@
 			"prayer": 0,
 			"ranged_strength": 22,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Tarromin tar": {
 			"attack_speed": 0,
@@ -87486,7 +87486,7 @@
 			"prayer": 0,
 			"ranged_strength": 31,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Harralander tar": {
 			"attack_speed": 0,
@@ -87505,7 +87505,7 @@
 			"prayer": 0,
 			"ranged_strength": 49,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Kebbit bolts": {
 			"attack_speed": 0,
@@ -88550,7 +88550,7 @@
 			"prayer": 0,
 			"ranged_strength": 125,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Field arrow": {
 			"attack_speed": 0,
@@ -88569,7 +88569,7 @@
 			"prayer": 0,
 			"ranged_strength": 125,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Blunt arrow": {
 			"attack_speed": 0,
@@ -88588,7 +88588,7 @@
 			"prayer": 0,
 			"ranged_strength": 125,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Barbed arrow": {
 			"attack_speed": 0,
@@ -88607,7 +88607,7 @@
 			"prayer": 0,
 			"ranged_strength": 125,
 			"slot": "ammo",
-			"requirements": []
+			"requirements": ["ranged"]
 		},
 		"Rada's blessing 2": {
 			"attack_speed": 0,
