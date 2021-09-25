@@ -764,7 +764,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.6.10");
+const myWorker = new Worker("./worker.js?v=4.6.11");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2972,7 +2972,7 @@ var calcCurrentChallenges = function() {
     if (gotData) {
         let chunks = {};
         $('.unlocked').each(function() {
-            chunks[parseInt($(this).text())] = true;
+            chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
         });
         myWorker.postMessage(['current', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges]);
         workerOut++;
@@ -3125,7 +3125,7 @@ var calcFutureChallenges = function() {
     let chunks = {};
     let challengeStr = '';
     $('.unlocked > .chunkId').each(function() {
-        chunks[parseInt($(this).text())] = true;
+        chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
     });
     if (chunks[infoLockedId.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G')]) {
         $('.panel-challenges').html(challengeStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/') || 'None (chunk is already unlocked)');
@@ -3885,7 +3885,7 @@ var unblacklist = function(chunkId) {
 var getChunkAreas = function() {
     let chunks = {};
     $('.unlocked').each(function() {
-        chunks[parseInt($(this).text())] = true;
+        chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
     });
     let i = 0;
     let temp = {};
@@ -4004,8 +4004,27 @@ var showDetails = function(challenge, skill, type) {
     detailsModalOpen = true;
     $('#details-data').empty();
     $('#details-title').html(`<b class="noscroll">${challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2H/g, "'")}</b>`);
+    if (!chunkInfo['challenges'].hasOwnProperty(skill)) {
+        chunkInfo['challenges'][skill] = {};
+    }
+    if (!chunkInfo['challenges'][skill].hasOwnProperty(challenge.replaceAll(/\%2H/g, "'"))) {
+        if (skill === 'BiS') {
+            chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")] = {
+                'ItemsDetails': [challenge.replaceAll(/\%2H/g, "'").split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\%2H/g, "'").split('|')[1].slice(1)],
+                'Label': skill
+            }
+        } else if (skill === 'Extra') {
+            if (challenge.replaceAll(/\%2H/g, "'").includes('Kill X')) {
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")] = {
+                    'MonstersDetails': [challenge.replaceAll(/\%2H/g, "'").split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\%2H/g, "'").split('|')[1].slice(1)],
+                    'Label': skill
+                }
+            }
+        }
+    }
     chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")]['Description']}</i></span><br />`);
     detailsKeys.forEach(key => {
+        let written = false;
         $('#details-data').append(`<span class="details-subtitle noscroll"><u class="noscroll"><b class="noscroll">${key.split('Details')[0].toLowerCase()}</b></u></span><br />`);
         !!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key].forEach(el => {
             let formattedSource = '';
@@ -4014,7 +4033,7 @@ var showDetails = function(challenge, skill, type) {
             } else if (!!baseChunkDataIn[key.split('Details')[0].toLowerCase()]) {
                 formattedSource = ': ';
                 !!baseChunkDataIn[key.split('Details')[0].toLowerCase()][el] && Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).forEach(source => {
-                    if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")]['NonShop'] || baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || !processingSkill[baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].split('-')[1]])) {
+                    if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")]['NonShop'] || baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || (typeof baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] !== 'string' || !processingSkill[baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].split('-')[1]]))) {
                         if (typeof baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] === "boolean" || !skills.includes(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].split('-')[1])) {
                             if (chunkInfo['chunks'].hasOwnProperty(source)) {
                                 let realName = source;
@@ -4045,14 +4064,15 @@ var showDetails = function(challenge, skill, type) {
                 });
             }
             formattedSource = formattedSource.slice(0, -2);
-            if (!!baseChunkDataIn[key.split('Details')[0].toLowerCase()] && Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).length > 10) {
+            if (!!baseChunkDataIn[key.split('Details')[0].toLowerCase()] && !!baseChunkDataIn[key.split('Details')[0].toLowerCase()][el] && Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).length > 10) {
                 formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + key.split('Details')[0].toLowerCase().replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + '`, `' + el.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).length + ')</span>';
             }
             if (formattedSource !== '') {
+                written = true;
                 $('#details-data').append(`<span class="noscroll"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2H/g, "'")}</b></span><span class="noscroll">${formattedSource}</span><br />`);
             }
         });
-        if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key].length === 0) {
+        if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key].length === 0 || !written) {
             $('#details-data').append('<span class="noscroll">None</span><br />');
         }
     });
@@ -4544,7 +4564,7 @@ var getQuestInfo = function(quest) {
     $('.panel-questdata').empty();
     let unlocked = { ...possibleAreas };
     $('.unlocked').each(function() {
-        unlocked[parseInt($(this).text())] = true;
+        unlocked[parseInt($($(this).children('.chunkId')[0]).text())] = true;
     });
     questChunks = [];
     chunkInfo['quests'][quest].split(', ').forEach(chunkId => {
