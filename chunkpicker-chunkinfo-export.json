@@ -16237,6 +16237,10 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Loot stronghold notes from the dead explorer": {
+				"Chunks": ["Stronghold of Security"],
+				"Output": "Stronghold notes"
+			},
 			"Make a dark totem": {
 				"Items": ["Dark totem top", "Dark totem middle", "Dark totem base"],
 				"Output": "Dark totem"

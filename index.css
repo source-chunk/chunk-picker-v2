@@ -1344,7 +1344,7 @@ button.menu2 {
     width: 100%;
 }
 
-.map.dark {
+.btnDiv.dark .gray {
     filter: brightness(.66); /* Dark */
 }
 
@@ -1579,7 +1579,7 @@ button.menu2 {
     transition-duration: .5s;
     cursor: pointer;
     top: 4px;
-    right: 225px;
+    right: 240px;
     font-size: 44px;
 }
 
@@ -1605,7 +1605,7 @@ button.menu2 {
     transition-duration: .5s;
     cursor: pointer;
     top: 4px;
-    right: 275px;
+    right: 290px;
     font-size: 44px;
     color: #f96854;
     -webkit-text-stroke-width: 2px;
