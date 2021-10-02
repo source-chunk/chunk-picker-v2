@@ -31572,7 +31572,8 @@
 		"7224": {
 			"Monster": {
 				"Giant rat": 1,
-				"Hobgoblin": 22,
+				"Hobgoblin%2FArmed": 10,
+				"Hobgoblin%2FUnarmed": 12,
 				"Man": 1,
 				"Unicorn": 1,
 				"Unicorn Foal": 2,
@@ -36006,7 +36007,8 @@
 		"9780": {
 			"Monster": {
 				"Gnome guard": 4,
-				"Hobgoblin": 8,
+				"Hobgoblin%2FArmed": 6,
+				"Hobgoblin%2FUnarmed": 2,
 				"Mounted terrorbird gnome": 4,
 				"Wolf": 5
 			},
@@ -37213,7 +37215,7 @@
 				"Fremennik": "EA6, MD8"
 			},
 			"Monster": {
-				"Hobgoblin": 2,
+				"Hobgoblin%2FUnarmed": 2,
 				"Rock Crab": 19
 			},
 			"NPC": {
@@ -39464,7 +39466,7 @@
 		},
 		"10554": {
 			"Monster": {
-				"Hobgoblin": 5,
+				"Hobgoblin%2FArmed": 5,
 				"Rock Crab": 20
 			},
 			"NPC": {
@@ -41049,7 +41051,7 @@
 			},
 			"Monster": {
 				"Chicken": 4,
-				"Hobgoblin": 3,
+				"Hobgoblin%2FKaramja": 3,
 				"Jungle spider": 2,
 				"Tribesman": 4
 			},
@@ -42058,7 +42060,7 @@
 		},
 		"11315": {
 			"Monster": {
-				"Hobgoblin": 5,
+				"Hobgoblin%2FUnarmed": 5,
 				"King Scorpion": 6,
 				"Lesser demon": 2
 			},
@@ -43175,7 +43177,8 @@
 			"Monster": {
 				"Cow": 10,
 				"Cow calf": 2,
-				"Hobgoblin": 10,
+				"Hobgoblin%2FArmed": 1,
+				"Hobgoblin%2FUnarmed": 9,
 				"Ram": 2
 			},
 			"NPC": {
@@ -46327,7 +46330,7 @@
 		},
 		"12346": {
 			"Monster": {
-				"Hobgoblin": 26
+				"Hobgoblin%2FUnarmed": 26
 			},
 			"Nickname": "Bandit Camp Mine",
 			"Object": {
@@ -53751,7 +53754,8 @@
 				"Falador": "HD4"
 			},
 			"Monster": {
-				"Hobgoblin": 7,
+				"Hobgoblin%2FArmed": 1,
+				"Hobgoblin%2FUnarmed": 6,
 				"Ice giant": 3,
 				"Ice warrior": 11,
 				"Mugger": 4,
@@ -54172,7 +54176,7 @@
 				"Goblin%2FLevel 2": 8,
 				"Goblin%2FLevel 5": 6,
 				"Head Thief": 1,
-				"Hobgoblin": 2,
+				"Hobgoblin%2FUnarmed": 2,
 				"Ogre": 3,
 				"Rat": 26,
 				"Thief": 2
@@ -55304,7 +55308,7 @@
 				"Gorak": 12,
 				"Growler": 1,
 				"Hellhound": 5,
-				"Hobgoblin": 11,
+				"Hobgoblin%2FArmed": 11,
 				"Icefiend": 5,
 				"Imp": 7,
 				"Jogre": 12,
@@ -56692,7 +56696,8 @@
 				"Giant rat": 7,
 				"Goblin%2FLevel 2": 2,
 				"Goblin%2FLevel 5": 1,
-				"Hobgoblin": 2,
+				"Hobgoblin%2FArmed": 1,
+				"Hobgoblin%2FUnarmed": 1,
 				"Poison spider": 2,
 				"Rat": 17
 			},
@@ -58271,7 +58276,7 @@
 			},
 			"Monster": {
 				"Giant bat": 6,
-				"Hobgoblin": 16,
+				"Hobgoblin%2FUnarmed": 9,
 				"Zombie%2FArmed": 6
 			},
 			"NPC": {
@@ -58670,7 +58675,8 @@
 				"Giant rat": 6,
 				"Giant spider": 2,
 				"Hill Giant": 12,
-				"Hobgoblin": 5,
+				"Hobgoblin%2FArmed": 3,
+				"Hobgoblin%2FUnarmed": 2,
 				"Obor": 1,
 				"Poison spider": 3,
 				"Rat": 2,
@@ -58992,7 +58998,7 @@
 			"Monster": {
 				"Giant Lobster": 7,
 				"Hellhound": 8,
-				"Hobgoblin": 8,
+				"Hobgoblin%2FArmed": 8,
 				"Ogre": 6
 			},
 			"NPC": {
@@ -64542,7 +64548,30 @@
 			"Water rune": "3/128",
 			"GemDropTable+": "1/42.67"
 		},
-		"Hobgoblin": {
+		"Hobgoblin%2FArmed": {
+			"Body rune": "2/128",
+			"Bones": "Always",
+			"Chaos rune": "2/128",
+			"Clue scroll (beginner)": "1/70",
+			"Coins": "1/128",
+			"Cosmic rune": "1/128",
+			"Fire rune": "2/128",
+			"Goblin mail": "5/128",
+			"HerbDropTable+": "7/128",
+			"Hobgoblin champion scroll": "1/5000",
+			"Iron javelin": "1/128",
+			"Iron sword": "3/128",
+			"Law rune": "3/128",
+			"Limpwurt root": "21/128",
+			"Nature rune": "2/128",
+			"Nothing": "4/128",
+			"Steel dagger": "3/128",
+			"Steel longsword": "1/128",
+			"UncommonSeedDropTable+": "12/128",
+			"Water rune": "2/128",
+			"GemDropTable+": "1/64"
+		},
+		"Hobgoblin%2FUnarmed": {
 			"Body rune": "2/128",
 			"Bones": "Always",
 			"Bronze spear": "3/128",
@@ -64555,18 +64584,41 @@
 			"Goblin mail": "5/128",
 			"HerbDropTable+": "7/128",
 			"Hobgoblin champion scroll": "1/5000",
-			"Iron javelin": "1/128",
 			"Iron spear": "2/128",
 			"Iron sword": "3/128",
 			"Law rune": "3/128",
 			"Limpwurt root": "21/128",
 			"Nature rune": "2/128",
-			"Nothing": "4/128",
+			"Nothing": "1/128",
+			"Steel dagger": "3/128",
+			"Steel longsword": "1/128",
+			"Steel spear": "2/128",
+			"Water rune": "2/128",
+			"GemDropTable+": "1/64"
+		},
+		"Hobgoblin%2FKaramja": {
+			"Body rune": "2/128",
+			"Bones": "Always",
+			"Bronze spear": "3/128",
+			"Chaos rune": "2/128",
+			"Clue scroll (beginner)": "1/70",
+			"Coins": "1/128",
+			"Cosmic rune": "1/128",
+			"Fire rune": "2/128",
+			"GeneralSeedDropTable+": "18/128",
+			"Goblin mail": "5/128",
+			"HerbDropTable+": "7/128",
+			"Hobgoblin champion scroll": "1/5000",
+			"Iron spear": "2/128",
+			"Iron sword": "3/128",
+			"Law rune": "3/128",
+			"Limpwurt root": "21/128",
+			"Nature rune": "2/128",
+			"Nothing": "1/128",
 			"Steel dagger": "3/128",
 			"Steel longsword": "1/128",
 			"Steel spear": "2/128",
 			"Trading sticks": "4/128",
-			"UncommonSeedDropTable+": "12/128",
 			"Water rune": "2/128",
 			"GemDropTable+": "1/64"
 		},
