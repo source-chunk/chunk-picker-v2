@@ -2034,6 +2034,12 @@ button.menu2 {
     width: 35%;
 }
 
+#myModal17 > .modal-content {
+    height: 60%;
+    width: 40%;
+    margin-top: -2.5%;
+}
+
 .manual-close {
     cursor: pointer;
     margin-top: 0px;
@@ -2051,6 +2057,16 @@ button.menu2 {
     height: 91%;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.challenge-data > .result-item {
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    margin: 3px;
+    padding: 2px;
+    padding-left: 5px;
+    background-color: var(--color3);
+    margin-right: 15px;
 }
 
 #searchManual {
@@ -3083,6 +3099,86 @@ input#searchAddEquipment {
 }
 
 .search-equipment-result input {
+    margin-right: 10px;
+}
+
+.backlogSources-container {
+    text-align: center;
+    padding: 5px;
+}
+
+.backlogSources {
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.backlogSources:hover {
+    color: rgb(100, 100, 255);
+}
+
+.backlogSources > i {
+    margin-right: 5px;
+}
+
+.backlog-sources-title {
+    font-size: min(3vw, 36px);
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 7%;
+    min-height: 7%;
+    line-height: 50px;
+    text-align: center;
+}
+
+.backlog-sources-subtitle {
+    padding: 0px 15px;
+    font-size: min(1.15vw, 16px);
+    text-align: center;
+    height: 10%;
+}
+
+.backlog-sources-searchcontainer {
+    height: 8%;
+    padding: 0px 15px;
+}
+
+input#searchBacklogSources {
+    font-size: 20px;
+}
+
+.backlog-sources-data {
+    height: 70%;
+    padding: 0px 25px;
+    overflow-y: auto;
+}
+
+.backlog-sources-data > .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.backlog-sources-data > .search-sources-result {
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    margin: 3px;
+    padding: 2px;
+    padding-left: 5px;
+    background-color: var(--color3);
+    margin-right: 15px;
+}
+
+.search-sources-result > span {
+    margin-left: 5px;
+    font-size: 24px;
+}
+
+.search-sources-result input {
     margin-right: 10px;
 }
 

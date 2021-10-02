@@ -40,6 +40,7 @@ let bossMonsters;
 let minigameShops;
 let manualEquipment;
 let checkedChallenges;
+let backloggedSources;
 
 onmessage = function(e) {
     eGlobal = e;
@@ -78,6 +79,7 @@ onmessage = function(e) {
     minigameShops = eGlobal.data[32];
     manualEquipment = eGlobal.data[33];
     checkedChallenges = eGlobal.data[34];
+    backloggedSources = eGlobal.data[35];
 
     if (rareDropNum === "1/0") {
         rareDropNum = "1/999999999999999";
@@ -139,11 +141,15 @@ var calcChallenges = function(chunks, baseChunkData) {
                                     outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')] = {};
                                 }
                                 if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Source')) {
-                                    if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop') {
+                                    if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop' && (!backloggedSources['shops'] || !backloggedSources['shops'][challenge])) {
                                         outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = chunkInfo['challenges'][skill][challenge]['Source'];
-                                    } else if (chunkInfo['skillItems'][skill][output][item] === 'Always' && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
+                                        if (!baseChunkData['shops'].hasOwnProperty(challenge)) {
+                                            baseChunkData['shops'][challenge] = {};
+                                        }
+                                        baseChunkData['shops'][challenge][chunkInfo['challenges'][skill][challenge].hasOwnProperty('Chunks') ? chunkInfo['challenges'][skill][challenge]['Chunks'][0] : 'Nonskill'] = true;
+                                    } else if (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop' && chunkInfo['skillItems'][skill][output][item] === 'Always' && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
                                         outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'primary-' + chunkInfo['challenges'][skill][challenge]['Source'];
-                                    } else {
+                                    } else if (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop') {
                                         outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/')][challenge] = 'secondary-' + chunkInfo['challenges'][skill][challenge]['Source'];
                                     }
                                 } else if (chunkInfo['skillItems'][skill][output][item] === 'Always' && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
@@ -1466,6 +1472,8 @@ var calcBIS = function() {
         }
         let bestDps = -1;
         let resultingAdditions = {};
+        let validWearable;
+        let tempEquipment;
         if (skill === 'Melee') {
             // Non-set DPS
             if (bestDps === -1) {
@@ -1478,7 +1486,17 @@ var calcBIS = function() {
                 bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
             }
             // Void Melee
-            if (baseChunkData['items'].hasOwnProperty('Void melee helm') && baseChunkData['items'].hasOwnProperty('Void knight top') && baseChunkData['items'].hasOwnProperty('Void knight robe') && baseChunkData['items'].hasOwnProperty('Void knight gloves')) {
+            validWearable = true;
+            tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
+            tempEquipment.forEach(equip => {
+                !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
+                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                        validWearable = false;
+                    }
+                });
+            });
+            if (validWearable) {
                 let itemList = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
                 let slotMapping = {'head': true, 'body': true, 'legs': true, 'hands': true};
                 let allValid = true;
@@ -1512,7 +1530,17 @@ var calcBIS = function() {
                 }
             }
             // Obsidian
-            if (baseChunkData['items'].hasOwnProperty('Obsidian helmet') && baseChunkData['items'].hasOwnProperty('Obsidian platebody') && baseChunkData['items'].hasOwnProperty('Obsidian platelegs') && baseChunkData['items'].hasOwnProperty('Toktz-xil-ak')) {
+            validWearable = true;
+            tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs', 'Toktz-xil-ak'];
+            tempEquipment.forEach(equip => {
+                !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
+                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                        validWearable = false;
+                    }
+                });
+            });
+            if (validWearable) {
                 let itemList = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs', 'Toktz-xil-ak'];
                 let slotMapping = {'head': true, 'body': true, 'legs': true, 'weapon': true};
                 let allValid = true;
@@ -1573,7 +1601,17 @@ var calcBIS = function() {
                 bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
             }
             // Void Ranged
-            if (baseChunkData['items'].hasOwnProperty('Void ranger helm') && baseChunkData['items'].hasOwnProperty('Void knight top') && baseChunkData['items'].hasOwnProperty('Void knight robe') && baseChunkData['items'].hasOwnProperty('Void knight gloves')) {
+            validWearable = true;
+            tempEquipment = ['Void ranger helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
+            tempEquipment.forEach(equip => {
+                !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
+                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                        validWearable = false;
+                    }
+                });
+            });
+            if (validWearable) {
                 let itemList = ['Void ranger helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
                 let slotMapping = {'head': true, 'body': true, 'legs': true, 'hands': true};
                 let allValid = true;
@@ -1645,7 +1683,17 @@ var calcBIS = function() {
                 }
             }
             // Crystal
-            if (baseChunkData['items'].hasOwnProperty('Crystal helm') && baseChunkData['items'].hasOwnProperty('Crystal body') && baseChunkData['items'].hasOwnProperty('Crystal legs') && baseChunkData['items'].hasOwnProperty('Crystal bow')) {
+            validWearable = true;
+            tempEquipment = ['Crystal helm', 'Crystal body', 'Crystal legs', 'Crystal bow'];
+            tempEquipment.forEach(equip => {
+                !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
+                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                        validWearable = false;
+                    }
+                });
+            });
+            if (validWearable) {
                 let itemList = ['Crystal helm', 'Crystal body', 'Crystal legs', 'Crystal bow'];
                 let slotMapping = {'head': true, 'body': true, 'legs': true, '2h': true};
                 let allValid = true;
@@ -1711,9 +1759,20 @@ var calcBIS = function() {
                 let maxHit = 2 * (1 + equipment_bonus_str);
                 let maxAttackRoll = Math.floor(107 * (equipment_bonus_att['magic'] + 64));
                 let hitChance = 1 - (578 / (2 * maxAttackRoll + 1));
+                bestDps = (hitChance * maxHit) / 3;
             }
             // Void Magic
-            if (baseChunkData['items'].hasOwnProperty('Void mage helm') && baseChunkData['items'].hasOwnProperty('Void knight top') && baseChunkData['items'].hasOwnProperty('Void knight robe') && baseChunkData['items'].hasOwnProperty('Void knight gloves')) {
+            validWearable = true;
+            tempEquipment = ['Void mage helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
+            tempEquipment.forEach(equip => {
+                !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
+                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                        validWearable = false;
+                    }
+                });
+            });
+            if (validWearable) {
                 let itemList = ['Void mage helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
                 let slotMapping = {'head': true, 'body': true, 'legs': true, 'hands': true};
                 let allValid = true;
@@ -1939,6 +1998,7 @@ var gatherChunksInfo = function(chunks) {
     let objects = {};
     let monsters = {};
     let npcs = {};
+    let shops = {};
 
     !!randomLoot && Object.keys(randomLoot).forEach(item => {
         if (!items[item]) {
@@ -1957,11 +2017,11 @@ var gatherChunksInfo = function(chunks) {
     Object.keys(chunks).forEach(num => {
         if (rules['Puro-Puro'] || num !== 'Puro-Puro') {
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Monster'] && Object.keys(chunkInfo['chunks'][num]['Monster']).forEach(monster => {
-                !!chunkInfo['drops'][monster] && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
+                !!chunkInfo['drops'][monster] && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
                     if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
                         Object.keys(dropTables[drop]).forEach(item => {
                             if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) || ((parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1]) * parseFloat(dropTables[drop][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
-                                (rules['Boss'] || !bossMonsters.hasOwnProperty(monster))) {
+                                (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
                                 if (!items[item]) {
                                     items[item] = {};
                                 }
@@ -1977,7 +2037,7 @@ var gatherChunksInfo = function(chunks) {
                             }
                         });
                     } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
-                            (rules['Boss'] || !bossMonsters.hasOwnProperty(monster))) {
+                            (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][drop])) {
                         if (!items[drop]) {
                             items[drop] = {};
                         }
@@ -1995,8 +2055,8 @@ var gatherChunksInfo = function(chunks) {
             });
 
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Shop'] && Object.keys(chunkInfo['chunks'][num]['Shop']).forEach(shop => {
-                !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).forEach(item => {
-                    if (!minigameShops[shop] || rules['Minigame']) {
+                !!chunkInfo['shopItems'][shop] && (!backloggedSources['shops'] || !backloggedSources['shops'][shop]) && Object.keys(chunkInfo['shopItems'][shop]).forEach(item => {
+                    if ((!minigameShops[shop] || rules['Minigame']) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
                         if (!items[item]) {
                             items[item] = {};
                         }
@@ -2006,34 +2066,52 @@ var gatherChunksInfo = function(chunks) {
             });
 
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Spawn'] && Object.keys(chunkInfo['chunks'][num]['Spawn']).forEach(spawn => {
-                if (!items[spawn]) {
-                    items[spawn] = {};
+                if (!backloggedSources['items'] || !backloggedSources['items'][spawn]) {
+                    if (!items[spawn]) {
+                        items[spawn] = {};
+                    }
+                    items[spawn][num] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
                 }
-                items[spawn][num] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
             });
 
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Object'] && Object.keys(chunkInfo['chunks'][num]['Object']).forEach(object => {
-                if (!objects[object]) {
-                    objects[object] = {};
+                if (!backloggedSources['objects'] || !backloggedSources['objects'][object]) {
+                    if (!objects[object]) {
+                        objects[object] = {};
+                    }
+                    objects[object][num] = true;
                 }
-                objects[object][num] = true;
             });
 
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Monster'] && Object.keys(chunkInfo['chunks'][num]['Monster']).forEach(monster => {
-                if (!monsters[monster]) {
-                    monsters[monster] = {};
+                if (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) {
+                    if (!monsters[monster]) {
+                        monsters[monster] = {};
+                    }
+                    monsters[monster][num] = true;
                 }
-                monsters[monster][num] = true;
             });
+
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['NPC'] && Object.keys(chunkInfo['chunks'][num]['NPC']).forEach(npc => {
-                if (!npcs[npc]) {
-                    npcs[npc] = {};
+                if (!backloggedSources['npcs'] || !backloggedSources['npcs'][npc]) {
+                    if (!npcs[npc]) {
+                        npcs[npc] = {};
+                    }
+                    npcs[npc][num] = true;
                 }
-                npcs[npc][num] = true;
+            });
+
+            !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Shop'] && Object.keys(chunkInfo['chunks'][num]['Shop']).forEach(shop => {
+                if (!backloggedSources['shops'] || !backloggedSources['shops'][shop]) {
+                    if (!shops[shop]) {
+                        shops[shop] = {};
+                    }
+                    shops[shop][num] = true;
+                }
             });
         }
     });
-    return {items: items, objects: objects, monsters: monsters, npcs: npcs};
+    return {items: items, objects: objects, monsters: monsters, npcs: npcs, shops: shops};
 }
 
 var getChunkAreas = function(chunks) {

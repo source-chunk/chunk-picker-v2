@@ -17355,10 +17355,11 @@
 				"Items": ["Stardust"],
 				"Output": "Stardust loot"
 			},
-			"Trade in Pizazz points*": {
+			"Pizazz points*": {
 				"Category": ["Minigame"],
 				"Chunks": ["13363"],
 				"Items": ["Progress hat"],
+				"Source": "shop",
 				"Output": "Pizazz points loot"
 			},
 			"Trade in Void Knight commendation points*": {
