@@ -20172,7 +20172,7 @@
 				"Priority": 1
 			},
 			"Slay a ~|wall beast|~": {
-				"Chunks": ["Lumbridge Swamp Caves"],
+				"NPCs": ["Hole in the wall"],
 				"Level": 35,
 				"Primary": false,
 				"Source": "drop",
