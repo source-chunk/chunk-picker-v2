@@ -63097,6 +63097,7 @@
 			"Ashes": "Always"
 		},
 		"Farmer": {
+			"AllotmentSeedDropTable+": "27/128",
 			"Bones": "Always",
 			"Bronze arrow": "3/128",
 			"Bronze med helm": "2/128",
