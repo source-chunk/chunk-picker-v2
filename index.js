@@ -538,6 +538,7 @@ let randomLootChoices = [
     "Calquat tree seed",
     "Celastrus seed",
     "Chaos rune",
+    "Chaos talisman",
     "Chocolate bar",
     "Coal",
     "Cosmic talisman",
@@ -767,7 +768,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.7.2");
+const myWorker = new Worker("./worker.js?v=4.7.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
