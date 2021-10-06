@@ -298,7 +298,7 @@ let ruleNames = {
     "Every Drop": "Must obtain every monster drop at least once",
     "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to snake weed (the only primary training for Herblore in the game)",
     "HigherLander": "Accessing the intermediate and veteran landers for Pest Control are required tasks (only novice lander is required otherwise)",
-    "Starting Items": "Allow tools gained from leaving Tutorial Island to be used within your chunks (aka not dropping your starting items). Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net",
+    "Starting Items": "Allow tools gained from leaving Tutorial Island to be used within your chunks (aka not dropping your starting items). Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net, shortbow",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -768,7 +768,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.7.3");
+const myWorker = new Worker("./worker.js?v=4.7.4");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);

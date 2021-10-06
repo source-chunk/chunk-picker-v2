@@ -602,7 +602,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             wrongThings.push(item);
                         }
                     }
-                    if (skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) {
+                    if ((skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) || ((skill === 'Quest' || skill === 'Diary') && (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic')) && (chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\+/g.test(e))))) {
                         missingItems.push(item);
                     }
                 } else {
@@ -629,7 +629,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             !tempTempValid && (wrongThings.push(item));
                         }
                     }
-                    if (skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) {
+                    if ((skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) || ((skill === 'Quest' || skill === 'Diary') && (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic')) && (chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\+/g.test(e))))) {
                         missingItems.push(item);
                     }
                 }
