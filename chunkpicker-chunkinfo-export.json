@@ -59320,7 +59320,9 @@
 			"KKHard10+": ["4918", "4919"],
 			"LumbridgeEasy7+": ["12594", "12595", "12850", "12851"],
 			"LumbridgeMedium7+": ["12850", "12851"],
-			"MorytaniaChunks+": ["13618", "13619", "13620", "13621", "13622", "13623", "13873", "13874", "13875", "13876", "13877", "13878", "13879", "14129", "14130", "14131", "14132", "14133", "14134", "14135", "14385", "14386", "14387", "14388", "14389", "14390", "14391", "14641", "14642", "14643", "14644", "14645", "14646", "14647", "14897", "14898", "14899", "14900", "14901"]
+			"MorytaniaChunks+": ["13618", "13619", "13620", "13621", "13622", "13623", "13873", "13874", "13875", "13876", "13877", "13878", "13879", "14129", "14130", "14131", "14132", "14133", "14134", "14135", "14385", "14386", "14387", "14388", "14389", "14390", "14391", "14641", "14642", "14643", "14644", "14645", "14646", "14647", "14897", "14898", "14899", "14900", "14901"],
+			"MorytaniaElite1+": ["13873", "14129"],
+			"VarrockChunks+": ["12596", "12597", "12598", "12852", "12853", "12854", "13108", "13109", "13110"]
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {
@@ -59824,7 +59826,10 @@
 		],
 		"tasksPlus": {
 			"KaramjaEasy7+": ["Catch ~|raw shrimps|~", "Catch ~|raw anchovies|~", "Catch a ~|raw herring|~", "Catch a ~|raw sardine|~", "Catch a ~|raw lobster|~", "Catch a ~|raw tuna|~", "Catch a ~|raw swordfish|~"],
-			"KaramjaMedium13+": ["Grow an ~|apple tree|~", "Grow a ~|banana tree|~", "Grow an ~|orange tree|~", "Grow a ~|curry tree|~", "Grow a ~|pineapple plant|~", "Grow a ~|papaya tree|~", "Grow a ~|palm tree|~", "Grow a ~|dragonfruit tree|~"]
+			"KaramjaMedium13+": ["Grow an ~|apple tree|~", "Grow a ~|banana tree|~", "Grow an ~|orange tree|~", "Grow a ~|curry tree|~", "Grow a ~|pineapple plant|~", "Grow a ~|papaya tree|~", "Grow a ~|palm tree|~", "Grow a ~|dragonfruit tree|~"],
+			"MorytaniaHard1One+": ["Build a ~|teleport focus|~", "Build a ~|greater teleport focus|~", "Build a ~|scrying pool|~"],
+			"MorytaniaHard1Two+": ["Build a ~|teak portal|~", "Build a ~|mahogany portal|~", "Build a ~|marble portal|~"],
+			"MorytaniaElite2+": ["Burn ~|magic pyre logs|~", "Burn ~|redwood pyre logs|~"]
 		},
 		"tools": {
 			"Ammo mould": true,
