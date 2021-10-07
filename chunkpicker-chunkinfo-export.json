@@ -38245,7 +38245,8 @@
 		"10293": {
 			"Monster": {
 				"Duck": 53,
-				"Goblin%2FArmed Level 2": 26,
+				"Goblin%2FArmed Level 2": 13,
+				"Goblin%Level 2": 13,
 				"Man": 1,
 				"Rat": 1
 			},
@@ -55269,7 +55270,8 @@
 			"Monster": {
 				"Dungeon rat": 5,
 				"Giant bat": 6,
-				"Goblin%2FArmed Level 2": 24,
+				"Goblin%2FArmed Level 2": 10,
+				"Goblin%Level 2": 14,
 				"Rat": 19
 			},
 			"NPC": {
