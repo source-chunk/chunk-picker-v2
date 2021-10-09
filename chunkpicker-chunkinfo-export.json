@@ -601,6 +601,13 @@
 				"Level": 12,
 				"Primary": true
 			},
+			"Access the broken Lighthouse bridge ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["10296"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 6
+			},
 			"Access the contortion in Yanille Agility Dungeon small room ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["Yanille Agility Dungeon"],
@@ -987,7 +994,7 @@
 				"Chunks": ["9526"],
 				"Level": 1,
 				"Primary": false,
-				"Priority": 6
+				"Priority": 7
 			},
 			"Play ~|Werewolf Skullball|~": {
 				"Chunks": ["Werewolf Agility Dungeon"],
