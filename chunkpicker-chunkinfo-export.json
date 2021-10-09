@@ -16237,6 +16237,10 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Make a skull sceptre": {
+				"Items": ["Right skull half", "Bottom of sceptre", "Top of sceptre", "Left skull half"],
+				"Output": "Skull sceptre"
+			},
 			"Loot stronghold notes from the dead explorer": {
 				"Chunks": ["Stronghold of Security"],
 				"Output": "Stronghold notes"
@@ -24273,7 +24277,7 @@
 				"Label": "Collection Log",
 				"Items": ["Hellpuppy"]
 			},
-			"(Cerberus) Obtain a ~|eternal crystal|~": {
+			"(Cerberus) Obtain an ~|eternal crystal|~": {
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Eternal crystal"]
@@ -24338,7 +24342,7 @@
 				"Label": "Collection Log",
 				"Items": ["Pet zilyana"]
 			},
-			"(Commander Zilyana) Obtain a ~|armadyl crossbow|~": {
+			"(Commander Zilyana) Obtain an ~|armadyl crossbow|~": {
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Armadyl crossbow"]
@@ -24970,7 +24974,7 @@
 				"Label": "Collection Log",
 				"Items": ["Pet smoke devil"]
 			},
-			"(Thermonuclear smoke devil) Obtain a ~|occult necklace|~": {
+			"(Thermonuclear smoke devil) Obtain an ~|occult necklace|~": {
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Occult necklace"]
@@ -25332,7 +25336,7 @@
 				"Label": "Collection Log",
 				"Chunks": ["Theatre of Blood"]
 			},
-			"(ToB) Obtain a ~|avernic defender hilt|~": {
+			"(ToB) Obtain an ~|avernic defender hilt|~": {
 				"Category": ["Collection Log", "Collection Log Raids"],
 				"Label": "Collection Log",
 				"Chunks": ["Theatre of Blood"]
@@ -25678,22 +25682,22 @@
 				"Label": "Collection Log",
 				"Items": ["Guthix halo"]
 			},
-			"(Fishing Trawler) Obtain a ~|angler hat|~": {
+			"(Fishing Trawler) Obtain an ~|angler hat|~": {
 				"Category": ["Collection Log", "Collection Log Minigames"],
 				"Label": "Collection Log",
 				"Items": ["Angler hat"]
 			},
-			"(Fishing Trawler) Obtain a ~|angler top|~": {
+			"(Fishing Trawler) Obtain an ~|angler top|~": {
 				"Category": ["Collection Log", "Collection Log Minigames"],
 				"Label": "Collection Log",
 				"Items": ["Angler top"]
 			},
-			"(Fishing Trawler) Obtain a ~|angler waders|~": {
+			"(Fishing Trawler) Obtain ~|angler waders|~": {
 				"Category": ["Collection Log", "Collection Log Minigames"],
 				"Label": "Collection Log",
 				"Items": ["Angler waders"]
 			},
-			"(Fishing Trawler) Obtain a ~|angler boots|~": {
+			"(Fishing Trawler) Obtain ~|angler boots|~": {
 				"Category": ["Collection Log", "Collection Log Minigames"],
 				"Label": "Collection Log",
 				"Items": ["Angler boots"]
@@ -25893,7 +25897,7 @@
 				"Label": "Collection Log",
 				"Items": ["Granite clamp"]
 			},
-			"(Last Man Standing) Obtain a ~|ornate maul handle|~": {
+			"(Last Man Standing) Obtain an ~|ornate maul handle|~": {
 				"Category": ["Collection Log", "Collection Log Minigames"],
 				"Label": "Collection Log",
 				"Items": ["Ornate maul handle"]
@@ -26208,7 +26212,7 @@
 				"Label": "Collection Log",
 				"Items": ["Soul cape"]
 			},
-			"(Soul Wars) Obtain a ~|ectoplasmator|~": {
+			"(Soul Wars) Obtain an ~|ectoplasmator|~": {
 				"Category": ["Collection Log", "Collection Log Minigames"],
 				"Label": "Collection Log",
 				"Items": ["Ectoplasmator"]
@@ -26618,7 +26622,7 @@
 				"Label": "Collection Log",
 				"Items": ["Pet snakeling"]
 			},
-			"(All Pets) Obtain a ~|olmlet|~": {
+			"(All Pets) Obtain an ~|olmlet|~": {
 				"Category": ["Collection Log", "Collection Log Other", "Pets"],
 				"Label": "Collection Log",
 				"Items": ["Olmlet"]
@@ -26738,32 +26742,32 @@
 				"Label": "Collection Log",
 				"Items": ["Barronite guard"]
 			},
-			"(Camdozaal) Obtain a ~|ancient globe|~": {
+			"(Camdozaal) Obtain an ~|ancient globe|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient globe"]
 			},
-			"(Camdozaal) Obtain a ~|ancient ledger|~": {
+			"(Camdozaal) Obtain an ~|ancient ledger|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient ledger"]
 			},
-			"(Camdozaal) Obtain a ~|ancient astroscope|~": {
+			"(Camdozaal) Obtain an ~|ancient astroscope|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient astroscope"]
 			},
-			"(Camdozaal) Obtain a ~|ancient treatise|~": {
+			"(Camdozaal) Obtain an ~|ancient treatise|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient treatise"]
 			},
-			"(Camdozaal) Obtain a ~|ancient carcanet|~": {
+			"(Camdozaal) Obtain an ~|ancient carcanet|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient carcanet"]
 			},
-			"(Camdozaal) Obtain a ~|imcando hammer|~": {
+			"(Camdozaal) Obtain an ~|imcando hammer|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Imcando hammer"]
@@ -27018,12 +27022,12 @@
 				"Label": "Collection Log",
 				"Chunks": ["14908"]
 			},
-			"(Cyclopes) Obtain a ~|ancient note|~": {
+			"(Cyclopes) Obtain an ~|ancient note|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["14908"]
 			},
-			"(Cyclopes) Obtain a ~|ancient writings|~": {
+			"(Cyclopes) Obtain ~|ancient writings|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["14908"]
@@ -27048,7 +27052,7 @@
 				"Label": "Collection Log",
 				"Chunks": ["14908"]
 			},
-			"(Cyclopes) Obtain a ~|old writing|~": {
+			"(Cyclopes) Obtain an ~|old writing|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["14908"]
@@ -27148,132 +27152,132 @@
 				"Label": "Collection Log",
 				"Items": ["Prospector boots"]
 			},
-			"(My Notes) Obtain a ~|ancient page (1)|~": {
+			"(My Notes) Obtain an ~|ancient page (1)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (2)|~": {
+			"(My Notes) Obtain an ~|ancient page (2)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (3)|~": {
+			"(My Notes) Obtain an ~|ancient page (3)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (4)|~": {
+			"(My Notes) Obtain an ~|ancient page (4)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (5)|~": {
+			"(My Notes) Obtain an ~|ancient page (5)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (6)|~": {
+			"(My Notes) Obtain an ~|ancient page (6)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (7)|~": {
+			"(My Notes) Obtain an ~|ancient page (7)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (8)|~": {
+			"(My Notes) Obtain an ~|ancient page (8)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (9)|~": {
+			"(My Notes) Obtain an ~|ancient page (9)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (10)|~": {
+			"(My Notes) Obtain an ~|ancient page (10)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (11)|~": {
+			"(My Notes) Obtain an ~|ancient page (11)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (12)|~": {
+			"(My Notes) Obtain an ~|ancient page (12)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (13)|~": {
+			"(My Notes) Obtain an ~|ancient page (13)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (14)|~": {
+			"(My Notes) Obtain an ~|ancient page (14)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (15)|~": {
+			"(My Notes) Obtain an ~|ancient page (15)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (16)|~": {
+			"(My Notes) Obtain an ~|ancient page (16)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (17)|~": {
+			"(My Notes) Obtain an ~|ancient page (17)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (18)|~": {
+			"(My Notes) Obtain an ~|ancient page (18)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (19)|~": {
+			"(My Notes) Obtain an ~|ancient page (19)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (20)|~": {
+			"(My Notes) Obtain an ~|ancient page (20)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (21)|~": {
+			"(My Notes) Obtain an ~|ancient page (21)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (22)|~": {
+			"(My Notes) Obtain an ~|ancient page (22)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (23)|~": {
+			"(My Notes) Obtain an ~|ancient page (23)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (24)|~": {
+			"(My Notes) Obtain an ~|ancient page (24)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (25)|~": {
+			"(My Notes) Obtain an ~|ancient page (25)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
 			},
-			"(My Notes) Obtain a ~|ancient page (26)|~": {
+			"(My Notes) Obtain an ~|ancient page (26)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient page"]
@@ -27408,7 +27412,7 @@
 				"Label": "Collection Log",
 				"Items": ["Thammaron's sceptre"]
 			},
-			"(Revenants) Obtain a ~|amulet of avarice|~": {
+			"(Revenants) Obtain an ~|amulet of avarice|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Amulet of avarice"]
@@ -27418,37 +27422,37 @@
 				"Label": "Collection Log",
 				"Items": ["Bracelet of ethereum (uncharged)"]
 			},
-			"(Revenants) Obtain a ~|ancient crystal|~": {
+			"(Revenants) Obtain an ~|ancient crystal|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient crystal"]
 			},
-			"(Revenants) Obtain a ~|ancient relic|~": {
+			"(Revenants) Obtain an ~|ancient relic|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient relic"]
 			},
-			"(Revenants) Obtain a ~|ancient effigy|~": {
+			"(Revenants) Obtain an ~|ancient effigy|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient effigy"]
 			},
-			"(Revenants) Obtain a ~|ancient medallion|~": {
+			"(Revenants) Obtain an ~|ancient medallion|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient medallion"]
 			},
-			"(Revenants) Obtain a ~|ancient statuette|~": {
+			"(Revenants) Obtain an ~|ancient statuette|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient statuette"]
 			},
-			"(Revenants) Obtain a ~|ancient totem|~": {
+			"(Revenants) Obtain an ~|ancient totem|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient totem"]
 			},
-			"(Revenants) Obtain a ~|ancient emblem|~": {
+			"(Revenants) Obtain an ~|ancient emblem|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Ancient emblem"]
@@ -59324,7 +59328,8 @@
 			"LumbridgeMedium7+": ["12850", "12851"],
 			"MorytaniaChunks+": ["13618", "13619", "13620", "13621", "13622", "13623", "13873", "13874", "13875", "13876", "13877", "13878", "13879", "14129", "14130", "14131", "14132", "14133", "14134", "14135", "14385", "14386", "14387", "14388", "14389", "14390", "14391", "14641", "14642", "14643", "14644", "14645", "14646", "14647", "14897", "14898", "14899", "14900", "14901"],
 			"MorytaniaElite1+": ["13873", "14129"],
-			"VarrockChunks+": ["12596", "12597", "12598", "12852", "12853", "12854", "13108", "13109", "13110"]
+			"VarrockChunks+": ["12596", "12597", "12598", "12852", "12853", "12854", "13108", "13109", "13110"],
+			"VarrockElite4+": ["12597", "12853"]
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {

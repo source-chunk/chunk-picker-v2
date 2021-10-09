@@ -19,6 +19,8 @@
     --colorText: rgb(0, 0, 0);
     --colorLink: rgb(0, 0, 255);
     --colorFlash: rgb(255, 255, 0.7);
+    --colorBox: rgba(150, 150, 150, .6);
+    --colorBoxLight: rgba(150, 150, 150, .4);
 
     /* Dark */
     /*
@@ -34,6 +36,8 @@
     --colorText: rgb(201, 209, 217);
     --colorLink: rgb(88, 166, 255);
     --colorFlash: rgb(150, 150, 0.7);
+    --colorBox: rgba(50, 50, 50, .6);
+    --colorBoxLight: rgba(50, 50, 50, .4);
     */
 }
 
@@ -142,12 +146,12 @@ a, a:visited {
 }
 
 .gray {
-    background-color: rgba(150, 150, 150, .6);
+    background-color: var(--colorBox);
     box-shadow: inset 0vw 0vw 0vw .075vw black;
 }
 
 .gray.visible {
-    background-color: rgba(150, 150, 150, .4);
+    background-color: var(--colorBoxLight);
     box-shadow: inset .025vw .025vw .025vw .025vw black;
 }
 
@@ -160,7 +164,7 @@ a, a:visited {
 }
 
 .gray:not(.visible):hover {
-    background-color: rgba(150, 150, 150, .4);
+    background-color: var(--colorBoxLight);
 }
 
 .recent.unlocked:not(.mobile), .recent.potential:not(.mobile) {
@@ -1344,10 +1348,6 @@ button.menu2 {
     width: 100%;
 }
 
-.btnDiv.dark .gray {
-    filter: brightness(.66); /* Dark */
-}
-
 .escape-hint {
     display: none;
     position: absolute;
@@ -2320,13 +2320,13 @@ button.menu2 {
 }
 
 .extraspace {
-    padding-left: 70px !important;
+    padding-left: 80px !important;
 }
 
 .reset-challenge-color {
     position: absolute;
     font-size: 14px;
-    margin-left: 50px;
+    margin-left: 60px;
     margin-top: 5px;
     cursor: pointer;
 }
@@ -2334,7 +2334,7 @@ button.menu2 {
 .reset-default-sticker-color {
     position: absolute;
     font-size: 14px;
-    margin-left: 50px;
+    margin-left: 60px;
     margin-top: 5px;
     cursor: pointer;
 }

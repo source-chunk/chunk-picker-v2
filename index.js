@@ -768,7 +768,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.7.5");
+const myWorker = new Worker("./worker.js?v=4.7.6");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2372,6 +2372,8 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorText", "rgb(201, 209, 217)");
         $("body").get(0).style.setProperty("--colorLink", "rgb(88, 166, 255)");
         $("body").get(0).style.setProperty("--colorFlash", "rgba(150, 150, 0, 0.7)");
+        $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
+        $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
         $(".btnDiv").addClass('dark');
     } else {
         $("body").get(0).style.setProperty("--color1", "rgb(200, 200, 200)");
@@ -2386,6 +2388,8 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorText", "rgb(0, 0, 0)");
         $("body").get(0).style.setProperty("--colorLink", "rgb(0, 0, 255)");
         $("body").get(0).style.setProperty("--colorFlash", "rgba(255, 255, 0, 0.7)");
+        $("body").get(0).style.setProperty("--colorBox", "rgba(150, 150, 150, .6)");
+        $("body").get(0).style.setProperty("--colorBoxLight", "rgba(150, 150, 150, .4)");
         $(".btnDiv").removeClass('dark');
     }
 }
