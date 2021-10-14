@@ -16244,6 +16244,18 @@
 				"Items": ["Fish barrel", "Fish sack"],
 				"Output": "Fish sack barrel"
 			},
+			"Enter the Wilderness God Wars Dungeon via Strength": {
+				"Chunks": ["Wilderness God Wars Dungeon"],
+				"Skills": {
+					"Strength": 60
+				}
+			},
+			"Enter the Wilderness God Wars Dungeon via Agility": {
+				"Chunks": ["Wilderness God Wars Dungeon"],
+				"Skills": {
+					"Agility": 60
+				}
+			},
 			"Make a skull sceptre": {
 				"Items": ["Right skull half", "Bottom of sceptre", "Top of sceptre", "Left skull half"],
 				"Output": "Skull sceptre"
@@ -17377,10 +17389,23 @@
 				"Source": "shop",
 				"Output": "Pizazz points loot"
 			},
-			"Trade in Void Knight commendation points*": {
+			"Castle Wars Ticket Exchange": {
+				"Category": ["Minigame"],
+				"Chunks": ["9520", "9776"],
+				"Source": "shop",
+				"Output": "Castle Wars tickets loot"
+			},
+			"Void Knight commendation points": {
 				"Category": ["Minigame"],
 				"Chunks": ["10537", "10536"],
+				"Source": "shop",
 				"Output": "Void Knight commendation points loot"
+			},
+			"Honest Jimmy's House of Stuff%2E": {
+				"Category": ["Minigame"],
+				"Chunks": ["15151", "15150"],
+				"Source": "shop",
+				"Output": "Pieces of eight loot"
 			},
 			"Open herb pack*": {
 				"Category": ["Minigame"],
@@ -34188,7 +34213,7 @@
 		},
 		"9033": {
 			"Connect": {
-				"12192": true
+				"12092": true
 			},
 			"Monster": {
 				"King Black Dragon": 1
@@ -35540,7 +35565,6 @@
 		},
 		"9619": {
 			"Connect": {
-				"9033": true,
 				"9519": true
 			},
 			"Monster": {
@@ -42559,9 +42583,6 @@
 			}
 		},
 		"11346": {
-			"Connect": {
-				"9033": true
-			},
 			"Monster": {
 				"Aviansie": 36,
 				"Bloodveld": 2,
@@ -42587,9 +42608,6 @@
 			}
 		},
 		"11347": {
-			"Connect": {
-				"9033": true
-			},
 			"Monster": {
 				"Bloodveld": 2,
 				"Cyclops": 13,
@@ -43651,7 +43669,6 @@
 		},
 		"11602": {
 			"Connect": {
-				"9033": true,
 				"11578": true
 			},
 			"Monster": {
@@ -43678,9 +43695,6 @@
 			}
 		},
 		"11603": {
-			"Connect": {
-				"9033": true
-			},
 			"Monster": {
 				"Balfrug Kreeyath": 1,
 				"Bloodveld": 10,
@@ -45322,6 +45336,7 @@
 		},
 		"12092": {
 			"Connect": {
+				"9033": true,
 				"12192": true
 			},
 			"Diary": {
@@ -45796,7 +45811,6 @@
 		},
 		"12192": {
 			"Connect": {
-				"9033": true,
 				"12092": true
 			},
 			"Monster": {
@@ -52956,6 +52970,7 @@
 			"NPC": {
 				"Bill Teach": 1
 			},
+			"Nickname": "School Boat",
 			"Object": {
 				"Climbing Net": 1
 			},
@@ -56072,7 +56087,7 @@
 		},
 		"King Black Dragon's Lair": {
 			"Connect": {
-				"12192": true
+				"12092": true
 			},
 			"Monster": {
 				"King Black Dragon": 1
@@ -56141,7 +56156,6 @@
 		},
 		"Lava Maze Dungeon": {
 			"Connect": {
-				"9033": true,
 				"12092": true
 			},
 			"Monster": {
@@ -59336,7 +59350,18 @@
 			"MorytaniaChunks+": ["13618", "13619", "13620", "13621", "13622", "13623", "13873", "13874", "13875", "13876", "13877", "13878", "13879", "14129", "14130", "14131", "14132", "14133", "14134", "14135", "14385", "14386", "14387", "14388", "14389", "14390", "14391", "14641", "14642", "14643", "14644", "14645", "14646", "14647", "14897", "14898", "14899", "14900", "14901"],
 			"MorytaniaElite1+": ["13873", "14129"],
 			"VarrockChunks+": ["12596", "12597", "12598", "12852", "12853", "12854", "13108", "13109", "13110"],
-			"VarrockElite4+": ["12597", "12853"]
+			"VarrockElite4+": ["12597", "12853"],
+			"WesternEasy10+": ["9525", "9526", "9780", "9781", "9782"],
+			"WesternMedium3+": ["10029", "10285"],
+			"WesternElite1+": ["8495", "8496", "8497", "8498", "8499", "8500", "8751", "8752", "8753", "8754", "8755", "9007", "9008", "9009", "9010", "9011", "9265", "9266"],
+			"WildernessEasy2+": ["12342", "10291"],
+			"WildernessEasy10+": ["12093", "12343", "12346", "12605"],
+			"WildernessChunks+": ["11831", "11832", "11833", "11834", "11835", "11836", "11837", "12087", "12088", "12089", "12090", "12091", "12092", "12093", "12343", "12344", "12345", "12346", "12347", "12348", "12349", "12599", "12600", "12601", "12602", "12603", "12604", "12605", "12855", "12856", "12857", "12858", "12859", "12860", "12861", "13111", "13112", "13113", "13114", "13115", "13116", "13117", "13367", "13368", "13369", "13370", "13371", "13372", "13373"],
+			"WildernessMedium1+": ["12093", "12346", "12605"],
+			"WildernessMedium2+": ["12857", "13112"],
+			"WildernessMedium5+": ["11832", "12347", "12601", "13369"],
+			"WildernessMedium6+": ["11834", "Wilderness Slayer Cave"],
+			"WildernessHard5+": ["12603", "12859", "12860"]
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {
@@ -59588,6 +59613,7 @@
 			"Armadyl armour+": ["Armadyl helmet", "Armadyl chestplate", "Armadyl chainskirt"],
 			"Asyn remains+": ["Loar remains", "Phrin remains", "Riyl remains", "Asyn remains"],
 			"Axe+": ["Bronze axe", "Iron axe", "Steel axe", "Black axe", "Mithril axe", "Adamant axe", "Rune axe", "Dragon axe", "3rd age axe", "Infernal axe", "Crystal axe"],
+			"Rune axe+": ["Rune axe", "Dragon axe", "3rd age axe", "Infernal axe", "Crystal axe"],
 			"Bandos armour+": ["Bandos chestplate", "Bandos tassets", "Bandos boots"],
 			"Barbarian bait+": ["Feather", "Fishing bait", "Fish offcuts", "Roe", "Caviar"],
 			"Barbarian rod+": ["Barbarian rod", "Pearl barbarian rod"],
@@ -59769,7 +59795,9 @@
 			"Dye+": ["Black mushroom ink", "Blue dye", "Green dye", "Orange dye", "Pink dye", "Purple dye", "Red dye", "Yellow dye"],
 			"LegendsJewellery+": ["Skills necklace", "Combat bracelet"],
 			"Facemask+": ["Face mask", "Gas mask", "Slayer helmet"],
-			"TannableHide+": ["Cowhide", "Snake hide", "Snake hide (swamp)", "Green dragonhide", "Blue dragonhide", "Red dragonhide", "Black dragonhide"]
+			"TannableHide+": ["Cowhide", "Snake hide", "Snake hide (swamp)", "Green dragonhide", "Blue dragonhide", "Red dragonhide", "Black dragonhide"],
+			"Void helm+": ["Void mage helm", "Void ranger helm", "Void malee helm"],
+			"TeamCape+": ["Team-1 cape", "Team-2 cape", "Team-3 cape", "Team-4 cape", "Team-5 cape", "Team-6 cape", "Team-7 cape", "Team-8 cape", "Team-9 cape", "Team-10 cape", "Team-11 cape", "Team-12 cape", "Team-13 cape", "Team-14 cape", "Team-15 cape", "Team-16 cape", "Team-17 cape", "Team-18 cape", "Team-19 cape", "Team-20 cape", "Team-21 cape", "Team-22 cape", "Team-23 cape", "Team-24 cape", "Team-25 cape", "Team-26 cape", "Team-27 cape", "Team-28 cape", "Team-29 cape", "Team-30 cape", "Team-31 cape", "Team-32 cape", "Team-33 cape", "Team-34 cape", "Team-35 cape", "Team-36 cape", "Team-37 cape", "Team-38 cape", "Team-39 cape", "Team-40 cape", "Team-41 cape", "Team-42 cape", "Team-43 cape", "Team-44 cape", "Team-45 cape", "Team-46 cape", "Team-47 cape", "Team-48 cape", "Team-49 cape", "Team-50 cape"]
 		},
 		"mixPlus": {
 			"Fremennik citizen+": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"],
@@ -59843,7 +59871,8 @@
 			"KaramjaMedium13+": ["Grow an ~|apple tree|~", "Grow a ~|banana tree|~", "Grow an ~|orange tree|~", "Grow a ~|curry tree|~", "Grow a ~|pineapple plant|~", "Grow a ~|papaya tree|~", "Grow a ~|palm tree|~", "Grow a ~|dragonfruit tree|~"],
 			"MorytaniaHard1One+": ["Build a ~|teleport focus|~", "Build a ~|greater teleport focus|~", "Build a ~|scrying pool|~"],
 			"MorytaniaHard1Two+": ["Build a ~|teak portal|~", "Build a ~|mahogany portal|~", "Build a ~|marble portal|~"],
-			"MorytaniaElite2+": ["Burn ~|magic pyre logs|~", "Burn ~|redwood pyre logs|~"]
+			"MorytaniaElite2+": ["Burn ~|magic pyre logs|~", "Burn ~|redwood pyre logs|~"],
+			"WildernessMedium3+": ["Enter the Wilderness God Wars Dungeon via Strength", "Enter the Wilderness God Wars Dungeon via Agility"]
 		},
 		"tools": {
 			"Ammo mould": true,
@@ -72349,47 +72378,6 @@
 			"Iron sq shield": true,
 			"Wooden shield": true
 		},
-		"Castle Wars Ticket Exchange": {
-			"Castlewars cloak (Saradomin)": true,
-			"Castlewars cloak (Zamorak)": true,
-			"Castlewars hood (Saradomin)": true,
-			"Castlewars hood (Zamorak)": true,
-			"Decorative armour (gold platebody)": true,
-			"Decorative armour (gold platelegs)": true,
-			"Decorative armour (gold plateskirt)": true,
-			"Decorative armour (magic hat)": true,
-			"Decorative armour (magic legs)": true,
-			"Decorative armour (magic top)": true,
-			"Decorative armour (quiver)": true,
-			"Decorative armour (ranged legs)": true,
-			"Decorative armour (ranged top)": true,
-			"Decorative armour (red platebody)": true,
-			"Decorative armour (red platelegs)": true,
-			"Decorative armour (red plateskirt)": true,
-			"Decorative armour (white platebody)": true,
-			"Decorative armour (white platelegs)": true,
-			"Decorative armour (white plateskirt)": true,
-			"Decorative boots (gold)": true,
-			"Decorative boots (red)": true,
-			"Decorative boots (white)": true,
-			"Decorative full helm (gold)": true,
-			"Decorative full helm (red)": true,
-			"Decorative full helm (white)": true,
-			"Decorative helm (gold)": true,
-			"Decorative helm (red)": true,
-			"Decorative helm (white)": true,
-			"Decorative shield (gold)": true,
-			"Decorative shield (red)": true,
-			"Decorative shield (white)": true,
-			"Decorative sword (gold)": true,
-			"Decorative sword (red)": true,
-			"Decorative sword (white)": true,
-			"Guthix halo": true,
-			"Saradomin banner": true,
-			"Saradomin halo": true,
-			"Zamorak banner": true,
-			"Zamorak halo": true
-		},
 		"Construction supplies": {
 			"Bolt of cloth": true,
 			"Bronze nails": true,
@@ -73293,38 +73281,6 @@
 			"Steel arrowtips": true,
 			"Studded body": true,
 			"Studded chaps": true
-		},
-		"Honest Jimmy's House of Stuff%2E": {
-			"Black naval shirt": true,
-			"Black navy slacks": true,
-			"Black tricorn hat": true,
-			"Blue naval shirt": true,
-			"Blue navy slacks": true,
-			"Blue tricorn hat": true,
-			"Bronze fist flag": true,
-			"Brown naval shirt": true,
-			"Brown navy slacks": true,
-			"Brown tricorn hat": true,
-			"Clue scroll (medium)": true,
-			"Cutthroat flag": true,
-			"Gilded smile flag": true,
-			"Green naval shirt": true,
-			"Green navy slacks": true,
-			"Green tricorn hat": true,
-			"Grey naval shirt": true,
-			"Grey navy slacks": true,
-			"Grey tricorn hat": true,
-			"Lucky shot flag": true,
-			"Phasmatys flag": true,
-			"Purple naval shirt": true,
-			"Purple navy slacks": true,
-			"Purple tricorn hat": true,
-			"Red naval shirt": true,
-			"Red navy slacks": true,
-			"Red tricorn hat": true,
-			"Rum (Trouble Brewing)": true,
-			"The stuff": true,
-			"Treasure flag": true
 		},
 		"Horvik's Armour Shop%2E": {
 			"Black platebody": true,
@@ -77114,6 +77070,79 @@
 				"Mineral pack": "Always",
 				"Seed pack": "Always"
 			},
+			"Castle Wars tickets loot": {
+				"Castlewars cloak (Saradomin)": "Always",
+				"Castlewars cloak (Zamorak)": "Always",
+				"Castlewars hood (Saradomin)": "Always",
+				"Castlewars hood (Zamorak)": "Always",
+				"Decorative armour (gold platebody)": "Always",
+				"Decorative armour (gold platelegs)": "Always",
+				"Decorative armour (gold plateskirt)": "Always",
+				"Decorative armour (magic hat)": "Always",
+				"Decorative armour (magic legs)": "Always",
+				"Decorative armour (magic top)": "Always",
+				"Decorative armour (quiver)": "Always",
+				"Decorative armour (ranged legs)": "Always",
+				"Decorative armour (ranged top)": "Always",
+				"Decorative armour (red platebody)": "Always",
+				"Decorative armour (red platelegs)": "Always",
+				"Decorative armour (red plateskirt)": "Always",
+				"Decorative armour (white platebody)": "Always",
+				"Decorative armour (white platelegs)": "Always",
+				"Decorative armour (white plateskirt)": "Always",
+				"Decorative boots (gold)": "Always",
+				"Decorative boots (red)": "Always",
+				"Decorative boots (white)": "Always",
+				"Decorative full helm (gold)": "Always",
+				"Decorative full helm (red)": "Always",
+				"Decorative full helm (white)": "Always",
+				"Decorative helm (gold)": "Always",
+				"Decorative helm (red)": "Always",
+				"Decorative helm (white)": "Always",
+				"Decorative shield (gold)": "Always",
+				"Decorative shield (red)": "Always",
+				"Decorative shield (white)": "Always",
+				"Decorative sword (gold)": "Always",
+				"Decorative sword (red)": "Always",
+				"Decorative sword (white)": "Always",
+				"Guthix halo": "Always",
+				"Saradomin banner": "Always",
+				"Saradomin halo": "Always",
+				"Zamorak banner": "Always",
+				"Zamorak halo": "Always"
+			},
+			"Pieces of eight loot": {
+				"Black naval shirt": "Always",
+				"Black navy slacks": "Always",
+				"Black tricorn hat": "Always",
+				"Blue naval shirt": "Always",
+				"Blue navy slacks": "Always",
+				"Blue tricorn hat": "Always",
+				"Bronze fist flag": "Always",
+				"Brown naval shirt": "Always",
+				"Brown navy slacks": "Always",
+				"Brown tricorn hat": "Always",
+				"Clue scroll (medium)": "Always",
+				"Cutthroat flag": "Always",
+				"Gilded smile flag": "Always",
+				"Green naval shirt": "Always",
+				"Green navy slacks": "Always",
+				"Green tricorn hat": "Always",
+				"Grey naval shirt": "Always",
+				"Grey navy slacks": "Always",
+				"Grey tricorn hat": "Always",
+				"Lucky shot flag": "Always",
+				"Phasmatys flag": "Always",
+				"Purple naval shirt": "Always",
+				"Purple navy slacks": "Always",
+				"Purple tricorn hat": "Always",
+				"Red naval shirt": "Always",
+				"Red navy slacks": "Always",
+				"Red tricorn hat": "Always",
+				"Rum (Trouble Brewing)": "Always",
+				"The stuff": "Always",
+				"Treasure flag": "Always"
+			},
 			"Herb pack loot": {
 				"Grimy harralander": "1/2",
 				"Grimy ranarr": "1/2",
@@ -80392,7 +80421,7 @@
 			}
 		}
 	},
-	"walkableChunks": ["9023", "10559", "6462", "9790", "10558", "11326", "14142", "14398", "6205", "6461", "6717", "6973", "8253", "8509", "11325", "11581", "11837", "12093", "12349", "12605", "12861", "13117", "13373", "5180", "5692", "5948", "6204", "6460", "6716", "6972", "7228", "8252", "8508", "9276", "9532", "10044", "10300", "11068", "11324", "11836", "12092", "12348", "12604", "12860", "13116", "13372", "14652", "14908", "15164", "4667", "4923", "5179", "5435", "5691", "5947", "6203", "6459", "6715", "6971", "7227", "8763", "9275", "9531", "10043", "10811", "11067", "11323", "11835", "12091", "12347", "12603", "12859", "13115", "13371", "14651", "14907", "15163", "4666", "4922", "5178", "5434", "5690", "5946", "6202", "6458", "6714", "6970", "7226", "10042", "10554", "10810", "11066", "11322", "11578", "11834", "12090", "12346", "12602", "12858", "13114", "13370", "14650", "14906", "15162", "4665", "4921", "5177", "5433", "5689", "5945", "6201", "6457", "6713", "6969", "7225", "9017", "9273", "10297", "10553", "10809", "11065", "11321", "11577", "11833", "12089", "12345", "12601", "12857", "13113", "13369", "14649", "4664", "4920", "5176", "5432", "5688", "5944", "6200", "6456", "6712", "6968", "7224", "9016", "9272", "9528", "10040", "10296", "10552", "10808", "11064", "11320", "11576", "11832", "12088", "12344", "12600", "12856", "13112", "13368", "13624", "4663", "4919", "5175", "5431", "5687", "5943", "6199", "6455", "6711", "6967", "7223", "7479", "9015", "9271", "9527", "9783", "10039", "10551", "10807", "11063", "11319", "11575", "11831", "12087", "12343", "12599", "12855", "13111", "13367", "13623", "13879", "14135", "14391", "14647", "15159", "4662", "4918", "5174", "5430", "5686", "5942", "6198", "6454", "6710", "6966", "7222", "7478", "9014", "9270", "9526", "9782", "10038", "10294", "10550", "10806", "11062", "11318", "11574", "11830", "12086", "12342", "12598", "12854", "13110", "13366", "13622", "13878", "14134", "14390", "14646", "5941", "6197", "6453", "6965", "7221", "8501", "8757", "9013", "9269", "9525", "9781", "10037", "10293", "10549", "10805", "11061", "11317", "11573", "11829", "12085", "12341", "12597", "12853", "13109", "13365", "13621", "13877", "14133", "14389", "14645", "14901", "8500", "8756", "9012", "9268", "9524", "9780", "10036", "10292", "10548", "10804", "11060", "11316", "11572", "11828", "12084", "12340", "12596", "12852", "13108", "13364", "13620", "13876", "14132", "14388", "14644", "14900", "8499", "8755", "9011", "9267", "9523", "9779", "10035", "10291", "10547", "10803", "11059", "11315", "11571", "11827", "12083", "12339", "12595", "12851", "13107", "13363", "13619", "13875", "14131", "14387", "14643", "14899", "8498", "8754", "9010", "9266", "9778", "10034", "10290", "10546", "10802", "11058", "11314", "11570", "11826", "12082", "12338", "12594", "12850", "13106", "13362", "13618", "13874", "14130", "14386", "14642", "14898", "8497", "8753", "9009", "9265", "9521", "9777", "10033", "10289", "10545", "10801", "11057", "11313", "11569", "11825", "12081", "12337", "12593", "12849", "13105", "13361", "13617", "13873", "14129", "14385", "14641", "8496", "8752", "9008", "9264", "9520", "9776", "10032", "10288", "10544", "11056", "11312", "11568", "11824", "12848", "13104", "13360", "13616", "13872", "8495", "8751", "9007", "9263", "9519", "9775", "10031", "10287", "11055", "11311", "11567", "11823", "12591", "12847", "13103", "13359", "13615", "14639", "14895", "15151", "15407", "8238", "8494", "8750", "9006", "9262", "9774", "10030", "10286", "10542", "11054", "11310", "11566", "11822", "12078", "12590", "12846", "13102", "13358", "13614", "14638", "14894", "15150", "15406", "8237", "8493", "8749", "9005", "9261", "9773", "10029", "10285", "11053", "11309", "11565", "11821", "12589", "12845", "13101", "13357", "13613", "14637", "8236", "8492", "8748", "9004", "9260", "9772", "10028", "10284", "12332", "12588", "12844", "13100", "13356", "15148", "8491", "8747", "9003", "10795", "11051", "12587", "12843", "13099", "10794", "11050", "11562", "10537", "10536", "10543"],
+	"walkableChunks": ["9023", "10559", "6462", "9790", "10558", "11326", "14142", "14398", "6205", "6461", "6717", "6973", "8253", "8509", "11325", "11581", "11837", "12093", "12349", "12605", "12861", "13117", "13373", "5180", "5692", "5948", "6204", "6460", "6716", "6972", "7228", "8252", "8508", "9276", "9532", "10044", "10300", "11068", "11324", "11836", "12092", "12348", "12604", "12860", "13116", "13372", "14652", "14908", "15164", "4667", "4923", "5179", "5435", "5691", "5947", "6203", "6459", "6715", "6971", "7227", "8763", "9275", "9531", "10043", "10811", "11067", "11323", "11835", "12091", "12347", "12603", "12859", "13115", "13371", "14651", "14907", "15163", "4666", "4922", "5178", "5434", "5690", "5946", "6202", "6458", "6714", "6970", "7226", "10042", "10554", "10810", "11066", "11322", "11578", "11834", "12090", "12346", "12602", "12858", "13114", "13370", "14650", "14906", "15162", "4665", "4921", "5177", "5433", "5689", "5945", "6201", "6457", "6713", "6969", "7225", "9017", "9273", "10297", "10553", "10809", "11065", "11321", "11577", "11833", "12089", "12345", "12601", "12857", "13113", "13369", "14649", "4664", "4920", "5176", "5432", "5688", "5944", "6200", "6456", "6712", "6968", "7224", "9016", "9272", "9528", "10040", "10296", "10552", "10808", "11064", "11320", "11576", "11832", "12088", "12344", "12600", "12856", "13112", "13368", "13624", "4663", "4919", "5175", "5431", "5687", "5943", "6199", "6455", "6711", "6967", "7223", "7479", "9015", "9271", "9527", "9783", "10039", "10551", "10807", "11063", "11319", "11575", "11831", "12087", "12343", "12599", "12855", "13111", "13367", "13623", "13879", "14135", "14391", "14647", "15159", "4662", "4918", "5174", "5430", "5686", "5942", "6198", "6454", "6710", "6966", "7222", "7478", "9014", "9270", "9526", "9782", "10038", "10294", "10550", "10806", "11062", "11318", "11574", "11830", "12086", "12342", "12598", "12854", "13110", "13366", "13622", "13878", "14134", "14390", "14646", "5941", "6197", "6453", "6965", "7221", "8501", "8757", "9013", "9269", "9525", "9781", "10037", "10293", "10549", "10805", "11061", "11317", "11573", "11829", "12085", "12341", "12597", "12853", "13109", "13365", "13621", "13877", "14133", "14389", "14645", "14901", "8500", "8756", "9012", "9268", "9524", "9780", "10036", "10292", "10548", "10804", "11060", "11316", "11572", "11828", "12084", "12340", "12596", "12852", "13108", "13364", "13620", "13876", "14132", "14388", "14644", "14900", "8499", "8755", "9011", "9267", "9523", "9779", "10035", "10291", "10547", "10803", "11059", "11315", "11571", "11827", "12083", "12339", "12595", "12851", "13107", "13363", "13619", "13875", "14131", "14387", "14643", "14899", "8498", "8754", "9010", "9266", "9778", "10034", "10290", "10546", "10802", "11058", "11314", "11570", "11826", "12082", "12338", "12594", "12850", "13106", "13362", "13618", "13874", "14130", "14386", "14642", "14898", "8497", "8753", "9009", "9265", "9521", "9777", "10033", "10289", "10545", "10801", "11057", "11313", "11569", "11825", "12081", "12337", "12593", "12849", "13105", "13361", "13617", "13873", "14129", "14385", "14641", "8496", "8752", "9008", "9264", "9520", "9776", "10032", "10288", "10544", "11056", "11312", "11568", "11824", "12848", "13104", "13360", "13616", "13872", "8495", "8751", "9007", "9263", "9519", "9775", "10031", "10287", "11055", "11311", "11567", "11823", "12591", "12847", "13103", "13359", "13615", "14639", "14895", "15151", "15407", "8238", "8494", "8750", "9006", "9262", "9774", "10030", "10286", "10542", "11054", "11310", "11566", "11822", "12078", "12590", "12846", "13102", "13358", "13614", "14638", "14894", "15150", "15406", "8237", "8493", "8749", "9005", "9261", "9773", "10029", "10285", "11053", "11309", "11565", "11821", "12589", "12845", "13101", "13357", "13613", "14637", "8236", "8492", "8748", "9004", "9260", "9772", "10028", "10284", "12332", "12588", "12844", "13100", "13356", "15148", "8491", "8747", "9003", "10795", "11051", "12587", "12843", "13099", "10794", "11050", "11562", "10537", "10536", "10543", "14902"],
 	"equipment": {
 		"Longbow": {
 			"attack_speed": 6,
