@@ -7250,7 +7250,7 @@
 			"Craft a ~|diamond amulet (u)|~": {
 				"Items": ["Diamond", "Gold bar", "Amulet mould"],
 				"Level": 70,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Diamond amulet (u)",
 				"Primary": true,
 				"Priority": 1
@@ -7258,7 +7258,7 @@
 			"Craft a ~|diamond bracelet|~": {
 				"Items": ["Diamond", "Gold bar", "Bracelet mould"],
 				"Level": 58,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Diamond bracelet",
 				"Primary": true,
 				"Priority": 1
@@ -7266,7 +7266,7 @@
 			"Craft a ~|diamond necklace|~": {
 				"Items": ["Diamond", "Gold bar", "Necklace mould"],
 				"Level": 56,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Diamond necklace",
 				"Primary": true,
 				"Priority": 1
@@ -7274,7 +7274,7 @@
 			"Craft a ~|diamond ring|~": {
 				"Items": ["Diamond", "Gold bar", "Ring mould"],
 				"Level": 43,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Diamond ring",
 				"Primary": true,
 				"Priority": 2
@@ -7282,7 +7282,7 @@
 			"Craft a ~|dragonstone amulet (u)|~": {
 				"Items": ["Dragonstone", "Gold bar", "Amulet mould"],
 				"Level": 80,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Dragonstone amulet (u)",
 				"Primary": true,
 				"Priority": 1
@@ -7290,7 +7290,7 @@
 			"Craft a ~|dragon necklace|~": {
 				"Items": ["Dragonstone", "Gold bar", "Necklace mould"],
 				"Level": 72,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Dragon necklace",
 				"Primary": true,
 				"Priority": 1
@@ -7298,7 +7298,7 @@
 			"Craft a ~|dragonstone bracelet|~": {
 				"Items": ["Dragonstone", "Gold bar", "Bracelet mould"],
 				"Level": 74,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Dragonstone bracelet",
 				"Primary": true,
 				"Priority": 1
@@ -7306,7 +7306,7 @@
 			"Craft a ~|dragonstone ring|~": {
 				"Items": ["Dragonstone", "Gold bar", "Ring mould"],
 				"Level": 55,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Dragonstone ring",
 				"Primary": true,
 				"Priority": 2
@@ -7329,7 +7329,7 @@
 			"Craft a ~|gold amulet (u)|~": {
 				"Items": ["Gold bar", "Amulet mould"],
 				"Level": 8,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Gold amulet",
 				"Primary": true,
 				"Priority": 2
@@ -7337,7 +7337,7 @@
 			"Craft a ~|gold bracelet|~": {
 				"Items": ["Gold bar", "Bracelet mould"],
 				"Level": 7,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Gold bracelet",
 				"Primary": true,
 				"Priority": 1
@@ -7345,14 +7345,14 @@
 			"Craft a ~|gold necklace|~": {
 				"Items": ["Gold bar", "Necklace mould"],
 				"Level": 6,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Gold necklace",
 				"Primary": true
 			},
 			"Craft a ~|gold ring|~": {
 				"Items": ["Gold bar", "Ring mould"],
 				"Level": 5,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Gold ring",
 				"Primary": true,
 				"Priority": 1
@@ -7400,7 +7400,7 @@
 			"Craft a ~|jade amulet (u)|~": {
 				"Items": ["Jade", "Silver bar", "Amulet mould"],
 				"Level": 34,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Jade amulet (u)",
 				"Primary": true,
 				"Priority": 3
@@ -7408,7 +7408,7 @@
 			"Craft a ~|jade bracelet|~": {
 				"Items": ["Jade", "Silver bar", "Bracelet mould"],
 				"Level": 29,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Jade bracelet",
 				"Primary": true,
 				"Priority": 1
@@ -7416,7 +7416,7 @@
 			"Craft a ~|jade necklace|~": {
 				"Items": ["Jade", "Silver bar", "Necklace mould"],
 				"Level": 25,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Jade necklace",
 				"Primary": true,
 				"Priority": 1
@@ -7424,7 +7424,7 @@
 			"Craft a ~|jade ring|~": {
 				"Items": ["Jade", "Silver bar", "Ring mould"],
 				"Level": 13,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Jade ring",
 				"Primary": true,
 				"Priority": 2
@@ -7531,7 +7531,7 @@
 			"Craft a ~|ruby amulet (u)|~": {
 				"Items": ["Ruby", "Gold bar", "Amulet mould"],
 				"Level": 50,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Ruby amulet (u)",
 				"Primary": true,
 				"Priority": 1
@@ -7539,7 +7539,7 @@
 			"Craft a ~|ruby bracelet|~": {
 				"Items": ["Ruby", "Gold bar", "Bracelet mould"],
 				"Level": 42,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Ruby bracelet",
 				"Primary": true,
 				"Priority": 1
@@ -7547,7 +7547,7 @@
 			"Craft a ~|ruby necklace|~": {
 				"Items": ["Ruby", "Gold bar", "Necklace mould"],
 				"Level": 40,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Ruby necklace",
 				"Primary": true,
 				"Priority": 2
@@ -7555,7 +7555,7 @@
 			"Craft a ~|ruby ring|~": {
 				"Items": ["Ruby", "Gold bar", "Ring mould"],
 				"Level": 34,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Ruby ring",
 				"Primary": true,
 				"Priority": 2
@@ -7563,14 +7563,14 @@
 			"Craft a ~|sapphire amulet (u)|~": {
 				"Items": ["Sapphire", "Gold bar", "Amulet mould"],
 				"Level": 24,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Sapphire amulet (u)",
 				"Primary": true
 			},
 			"Craft a ~|sapphire bracelet|~": {
 				"Items": ["Sapphire", "Gold bar", "Bracelet mould"],
 				"Level": 23,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Sapphire bracelet",
 				"Primary": true,
 				"Priority": 2
@@ -7578,7 +7578,7 @@
 			"Craft a ~|sapphire necklace|~": {
 				"Items": ["Sapphire", "Gold bar", "Necklace mould"],
 				"Level": 22,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Sapphire necklace",
 				"Primary": true,
 				"Priority": 1
@@ -7586,7 +7586,7 @@
 			"Craft a ~|sapphire ring|~": {
 				"Items": ["Sapphire", "Gold bar", "Ring mould"],
 				"Level": 20,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Sapphire ring",
 				"Primary": true,
 				"Priority": 2
@@ -7609,7 +7609,7 @@
 				"Category": ["Slayer Equipment"],
 				"Items": ["Eternal gem", "Gold bar", "Ring mould"],
 				"Level": 75,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Slayer ring (eternal)",
 				"Primary": true,
 				"Priority": 3
@@ -7618,7 +7618,7 @@
 				"Category": ["Slayer Equipment"],
 				"Items": ["Enchanted gem", "Gold bar", "Ring mould"],
 				"Level": 75,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Slayer ring",
 				"Primary": true,
 				"Priority": 2
@@ -7708,7 +7708,7 @@
 			"Craft a ~|tiara|~": {
 				"Items": ["Silver bar", "Tiara mould"],
 				"Level": 23,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Tiara",
 				"Primary": true,
 				"Priority": 1
@@ -7716,7 +7716,7 @@
 			"Craft a ~|topaz amulet (u)|~": {
 				"Items": ["Red topaz", "Silver bar", "Amulet mould"],
 				"Level": 45,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Topaz amulet (u)",
 				"Primary": true,
 				"Priority": 1
@@ -7724,7 +7724,7 @@
 			"Craft a ~|topaz bracelet|~": {
 				"Items": ["Red topaz", "Silver bar", "Bracelet mould"],
 				"Level": 38,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Topaz bracelet",
 				"Primary": true,
 				"Priority": 2
@@ -7732,7 +7732,7 @@
 			"Craft a ~|topaz necklace|~": {
 				"Items": ["Red topaz", "Silver bar", "Necklace mould"],
 				"Level": 32,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Topaz necklace",
 				"Primary": true,
 				"Priority": 1
@@ -7740,7 +7740,7 @@
 			"Craft a ~|topaz ring|~": {
 				"Items": ["Red topaz", "Silver bar", "Ring mould"],
 				"Level": 16,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Topaz ring",
 				"Primary": true,
 				"Priority": 2
@@ -7748,7 +7748,7 @@
 			"Craft an ~|unstrung emblem|~": {
 				"Items": ["Silver bar", "Unholy mould"],
 				"Level": 17,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Unstrung emblem",
 				"Primary": true,
 				"Priority": 1
@@ -7756,7 +7756,7 @@
 			"Craft an ~|unstrung symbol|~": {
 				"Items": ["Silver bar", "Holy mould"],
 				"Level": 16,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Unstrung symbol",
 				"Primary": true,
 				"Priority": 3
@@ -7811,28 +7811,28 @@
 			"Craft a ~|zenyte amulet (u)|~": {
 				"Items": ["Zenyte", "Gold bar", "Amulet mould"],
 				"Level": 98,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Zenyte amulet (u)",
 				"Primary": true
 			},
 			"Craft a ~|zenyte bracelet|~": {
 				"Items": ["Zenyte", "Gold bar", "Bracelet mould"],
 				"Level": 95,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Zenyte bracelet",
 				"Primary": true
 			},
 			"Craft a ~|zenyte necklace|~": {
 				"Items": ["Zenyte", "Gold bar", "Necklace mould"],
 				"Level": 92,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Zenyte necklace",
 				"Primary": true
 			},
 			"Craft a ~|zenyte ring|~": {
 				"Items": ["Zenyte", "Gold bar", "Ring mould"],
 				"Level": 89,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Zenyte ring",
 				"Primary": true,
 				"Priority": 3
@@ -7854,14 +7854,14 @@
 			"Craft an ~|emerald amulet (u)|~": {
 				"Items": ["Emerald", "Gold bar", "Amulet mould"],
 				"Level": 31,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Emerald amulet (u)",
 				"Primary": true
 			},
 			"Craft an ~|emerald bracelet|~": {
 				"Items": ["Emerald", "Gold bar", "Bracelet mould"],
 				"Level": 30,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Emerald bracelet",
 				"Primary": true,
 				"Priority": 1
@@ -7869,7 +7869,7 @@
 			"Craft an ~|emerald necklace|~": {
 				"Items": ["Emerald", "Gold bar", "Necklace mould"],
 				"Level": 29,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Emerald necklace",
 				"Primary": true,
 				"Priority": 2
@@ -7877,7 +7877,7 @@
 			"Craft an ~|emerald ring|~": {
 				"Items": ["Emerald", "Gold bar", "Ring mould"],
 				"Level": 27,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Emerald ring",
 				"Primary": true,
 				"Priority": 2
@@ -7963,7 +7963,7 @@
 			"Craft an ~|onyx amulet (u)|~": {
 				"Items": ["Onyx", "Gold bar", "Amulet mould"],
 				"Level": 90,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Onyx amulet (u)",
 				"Primary": true,
 				"Priority": 1
@@ -7971,7 +7971,7 @@
 			"Craft an ~|onyx bracelet|~": {
 				"Items": ["Onyx", "Gold bar", "Bracelet mould"],
 				"Level": 84,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Onyx bracelet",
 				"Primary": true,
 				"Priority": 2
@@ -7979,7 +7979,7 @@
 			"Craft an ~|onyx necklace|~": {
 				"Items": ["Onyx", "Gold bar", "Necklace mould"],
 				"Level": 82,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Onyx necklace",
 				"Primary": true,
 				"Priority": 1
@@ -7987,7 +7987,7 @@
 			"Craft an ~|onyx ring|~": {
 				"Items": ["Onyx", "Gold bar", "Ring mould"],
 				"Level": 67,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Onyx ring",
 				"Primary": true,
 				"Priority": 2
@@ -7995,7 +7995,7 @@
 			"Craft an ~|opal amulet (u)|~": {
 				"Items": ["Opal", "Silver bar", "Amulet mould"],
 				"Level": 27,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Opal amulet (u)",
 				"Primary": true,
 				"Priority": 3
@@ -8003,7 +8003,7 @@
 			"Craft an ~|opal bracelet|~": {
 				"Items": ["Opal", "Silver bar", "Bracelet mould"],
 				"Level": 22,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Opal bracelet",
 				"Primary": true,
 				"Priority": 2
@@ -8011,7 +8011,7 @@
 			"Craft an ~|opal necklace|~": {
 				"Items": ["Opal", "Silver bar", "Necklace mould"],
 				"Level": 16,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Opal necklace",
 				"Primary": true,
 				"Priority": 4
@@ -8019,7 +8019,7 @@
 			"Craft an ~|opal ring|~": {
 				"Items": ["Opal*", "Silver bar*", "Ring mould"],
 				"Level": 1,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Opal ring",
 				"Primary": true,
 				"Priority": 8
@@ -8189,7 +8189,7 @@
 			"Craft ~|molten glass|~": {
 				"Items": ["Bucket of sand*", "Soda ash*"],
 				"Level": 1,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Molten glass",
 				"Primary": true,
 				"Priority": 5
@@ -8216,7 +8216,7 @@
 			"Craft ~|silver bolts (unf)|~": {
 				"Items": ["Silver bar", "Bolt mould"],
 				"Level": 21,
-				"Objects": ["Furnace+"],
+				"Objects": ["Furnace"],
 				"Output": "Silver bolts (unf)",
 				"Primary": true,
 				"Priority": 2
@@ -53871,6 +53871,7 @@
 				"Anvil": 3,
 				"Bank Deposit Box": 1,
 				"Bank chest": 1,
+				"Blast Furnace": 1,
 				"Boxes": 4,
 				"Coke": 1,
 				"Conveyor belt": 1,
@@ -56001,7 +56002,6 @@
 				"Dwarf MultiCannon": 1,
 				"Fire": 8,
 				"Fireplace": 19,
-				"Furnace": 1,
 				"Gem Stall": 1,
 				"Iron rock": 4,
 				"Kelda Hops Patch": 16,
@@ -59837,7 +59837,7 @@
 			"Cooking range+": ["Cooking range", "Range", "Stove", "Clay oven"],
 			"Copper+": ["Copper rock", "Copper vein"],
 			"Crafting stall+": ["Crafting stall", "Crafting Stall", "Craft stall"],
-			"Furnace+": ["Furnace"],
+			"Furnace+": ["Furnace", "Blast Furnace"],
 			"Gold+": ["Gold rock", "Mineral vein"],
 			"Hay+": ["Hay bales", "Hay bale", "Haystack"],
 			"Iron+": ["Iron rock", "Iron vein"],
