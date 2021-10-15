@@ -17855,7 +17855,7 @@
 			},
 			"Cook seaweed": {
 				"Items": ["Seaweed+"],
-				"Objects": ["Cooking range+"],
+				"Objects": ["Cooking object+"],
 				"Output": "Soda ash"
 			},
 			"Wet clay with item*": {
