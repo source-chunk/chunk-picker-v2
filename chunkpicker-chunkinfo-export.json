@@ -19284,6 +19284,13 @@
 				"Primary": true,
 				"Priority": 3
 			},
+			"Craft runes at the ~|Ourania Altar|~": {
+				"Chunks": ["Ourania Cave"],
+				"Items": ["Pure essence"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 4
+			},
 			"Craft a ~|blood rune|~": {
 				"Chunks": ["6715"],
 				"Items": ["Dense essence block"],
@@ -19302,10 +19309,10 @@
 			},
 			"Craft a ~|body tiara|~": {
 				"Chunks": ["Body altar"],
-				"Items": ["Tiara"],
-				"Level": 20,
+				"Items": ["Tiara*", "Body talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 5
 			},
 			"Craft a ~|chaos rune|~": {
 				"Chunks": ["Chaos altar"],
@@ -19317,10 +19324,10 @@
 			},
 			"Craft a ~|chaos tiara|~": {
 				"Chunks": ["Chaos altar"],
-				"Items": ["Tiara"],
-				"Level": 35,
+				"Items": ["Tiara*", "Chaos talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 6
 			},
 			"Craft a ~|cosmic rune|~": {
 				"Chunks": ["Cosmic altar"],
@@ -19332,10 +19339,10 @@
 			},
 			"Craft a ~|cosmic tiara|~": {
 				"Chunks": ["Cosmic altar"],
-				"Items": ["Tiara"],
-				"Level": 27,
+				"Items": ["Tiara*", "Cosmic talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 7
 			},
 			"Craft a ~|death rune|~": {
 				"Chunks": ["Death altar"],
@@ -19347,10 +19354,10 @@
 			},
 			"Craft a ~|death tiara|~": {
 				"Chunks": ["Death altar"],
-				"Items": ["Tiara"],
-				"Level": 65,
+				"Items": ["Tiara*", "Death talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 8
 			},
 			"Craft a ~|dust rune|~ at the Air altar": {
 				"Chunks": ["Air altar"],
@@ -19378,10 +19385,10 @@
 			},
 			"Craft a ~|fire tiara|~": {
 				"Chunks": ["Fire altar"],
-				"Items": ["Tiara"],
-				"Level": 14,
+				"Items": ["Tiara*", "Fire talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 9
 			},
 			"Craft a ~|lava rune|~ at the Earth altar": {
 				"Chunks": ["Earth altar"],
@@ -19409,10 +19416,10 @@
 			},
 			"Craft a ~|law tiara|~": {
 				"Chunks": ["Law altar"],
-				"Items": ["Tiara"],
-				"Level": 54,
+				"Items": ["Tiara*", "Law talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 10
 			},
 			"Craft a ~|mind rune|~": {
 				"Chunks": ["Mind altar"],
@@ -19424,10 +19431,10 @@
 			},
 			"Craft a ~|mind tiara|~": {
 				"Chunks": ["Mind altar"],
-				"Items": ["Tiara"],
-				"Level": 2,
+				"Items": ["Tiara*", "Mind talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 11
 			},
 			"Craft a ~|mist rune|~ at the Air altar": {
 				"Chunks": ["Air altar"],
@@ -19471,10 +19478,10 @@
 			},
 			"Craft a ~|nature tiara|~": {
 				"Chunks": ["Nature altar"],
-				"Items": ["Tiara"],
-				"Level": 44,
+				"Items": ["Tiara*", "Nature talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 12
 			},
 			"Craft a ~|smoke rune|~ at the Air altar": {
 				"Chunks": ["Air altar"],
@@ -19525,10 +19532,10 @@
 			},
 			"Craft a ~|water tiara|~": {
 				"Chunks": ["Water altar"],
-				"Items": ["Tiara"],
-				"Level": 5,
+				"Items": ["Tiara*", "Water talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 13
 			},
 			"Craft a ~|wrath rune|~": {
 				"Chunks": ["Wrath altar"],
@@ -19540,10 +19547,10 @@
 			},
 			"Craft a ~|wrath tiara|~": {
 				"Chunks": ["Wrath altar"],
-				"Items": ["Tiara"],
-				"Level": 95,
+				"Items": ["Tiara*", "Wrath talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 14
 			},
 			"Craft an ~|air rune|~": {
 				"Chunks": ["Air altar"],
@@ -19555,7 +19562,7 @@
 			},
 			"Craft an ~|air tiara|~": {
 				"Chunks": ["Air altar"],
-				"Items": ["Tiara"],
+				"Items": ["Tiara*", "Air talisman*"],
 				"Level": 1,
 				"Primary": true,
 				"Priority": 2
@@ -19577,10 +19584,10 @@
 			},
 			"Craft an ~|earth tiara|~": {
 				"Chunks": ["Earth altar"],
-				"Items": ["Tiara"],
-				"Level": 9,
+				"Items": ["Tiara*", "Earth talisman*"],
+				"Level": 1,
 				"Primary": true,
-				"Priority": 2
+				"Priority": 15
 			},
 			"Imbue a ~|body core|~ at the Body altar": {
 				"Chunks": ["Body altar"],
@@ -19737,7 +19744,7 @@
 				"Items": ["Small pouch"],
 				"Level": 1,
 				"Primary": false,
-				"Priority": 4
+				"Priority": 16
 			}
 		},
 		"Slayer": {
@@ -60593,8 +60600,7 @@
 			"Law rune": "2/128",
 			"Nature rune": "2/128",
 			"Steel axe": "1/128",
-			"Steel bar": "5/128",
-			"GemDropTable+": "1/42.67"
+			"Steel bar": "5/128"
 		},
 		"Bandit (Pollnivneach)": {
 			"Bones": "Always",
@@ -95427,6 +95433,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "cape",
+			"weight": -4,
 			"requirements": ["agility"]
 		},
 		"Agility cape(t)": {
@@ -95446,6 +95453,7 @@
 			"prayer": 4,
 			"ranged_strength": 0,
 			"slot": "cape",
+			"weight": -4,
 			"requirements": ["agility"]
 		},
 		"Herblore cape": {
@@ -96016,6 +96024,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "cape",
+			"weight": -2.2,
 			"requirements": ["hunter"]
 		},
 		"Spottier cape": {
@@ -96035,6 +96044,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "cape",
+			"weight": -4.5,
 			"requirements": ["hunter"]
 		},
 		"Saradomin cloak": {
@@ -96377,6 +96387,7 @@
 			"prayer": 4,
 			"ranged_strength": 0,
 			"slot": "cape",
+			"weight": -4,
 			"requirements": ["attack", "strength", "defence", "hitpoints", "ranged", "prayer", "magic", "cooking", "woodcutting", "fletching", "fishing", "firemaking", "crafting", "smithing", "mining", "herblore", "agility", "thieving", "slayer", "farming", "runecraft", "hunter", "construction"]
 		},
 		"Fire max cape": {
@@ -97251,6 +97262,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "feet",
+			"weight": -4.5,
 			"requirements": []
 		},
 		"Pink boots": {
@@ -100136,6 +100148,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "hands",
+			"weight": -4.5,
 			"requirements": ["defence"]
 		},
 		"Combat bracelet": {
@@ -126377,6 +126390,126 @@
 			"prayer": 1,
 			"ranged_strength": 0,
 			"slot": "feet",
+			"requirements": []
+		},
+		"Graceful hood": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "head",
+			"weight": -3,
+			"requirements": []
+		},
+		"Graceful top": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "body",
+			"weight": -5,
+			"requirements": []
+		},
+		"Graceful legs": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "legs",
+			"weight": -6,
+			"requirements": []
+		},
+		"Graceful gloves": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "hands",
+			"weight": -3,
+			"requirements": []
+		},
+		"Graceful boots": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "feet",
+			"weight": -4,
+			"requirements": []
+		},
+		"Graceful cape": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "cape",
+			"weight": -4,
 			"requirements": []
 		}
 	}
