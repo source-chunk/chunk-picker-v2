@@ -29863,7 +29863,7 @@
 		},
 		"6200": {
 			"Monster": {
-				"Bandit%2FLevel 22": 6,
+				"Bandit (Shayzien)": 6,
 				"Guard (Shayzien)": 5,
 				"Head Guard": 1,
 				"Sergeant (Shayzien)": 2,
@@ -60605,6 +60605,21 @@
 		"Bandit (Pollnivneach)": {
 			"Bones": "Always",
 			"Coins": "Common"
+		},
+		"Bandit (Shayzien)": {
+			"Air rune": "5/128",
+			"Bones": "Always",
+			"Chaos rune": "5/128",
+			"Clue scroll (medium)": "9/128",
+			"Coins": "27/128",
+			"GemDropTable+": "3/128",
+			"HerbDropTable+": "15/128",
+			"Mind rune": "1/128",
+			"Nothing": "2/128",
+			"Steel longsword": "2/128",
+			"Steel pickaxe": "1/128",
+			"Steel scimitar": "9/128",
+			"Water rune": "5/128"
 		},
 		"Bandit%2FLevel 130": {
 			"Adamant scimitar": "4/128",
