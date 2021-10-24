@@ -43374,7 +43374,7 @@
 			"Monster": {
 				"Druid": 5,
 				"Monk of Zamorak": 7,
-				"White Knight%2FLevel 42": 1
+				"White Knight%2FPlain": 1
 			},
 			"NPC": {
 				"Achietties": 1,
@@ -70558,6 +70558,9 @@
 			"Steel sword": "2/128",
 			"Water rune": "3/128",
 			"GemDropTable+": "1/64"
+		},
+		"White Knight%2FPlain": {
+			"Bones": "Always"
 		},
 		"White wolf": {
 			"Wolf bone": "1/4",
