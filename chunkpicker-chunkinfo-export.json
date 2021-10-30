@@ -1,7 +1,7 @@
 {
 	"challenges": {
 		"Agility": {
-			"Access Lumbridge Swamp Caves stepping stones ~|shortcut|~": {
+			"Access the Lumbridge Swamp Caves stepping stones ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["Lumbridge Swamp Caves"],
 				"Level": 1,
@@ -35030,10 +35030,6 @@
 				"Saradomin Standard": 1,
 				"Stepping stone": 11,
 				"Zamorak Standard": 1
-			},
-			"Spawn": {
-				"Bucket": 2,
-				"Tinderbox": 4
 			}
 		},
 		"9521": {
