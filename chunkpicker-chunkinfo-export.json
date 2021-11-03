@@ -22896,7 +22896,7 @@
 				"Primary": true
 			},
 			"Loot a ~|chest (Ardougne Castle)|~": {
-				"Chunks": ["10291"],
+				"Chunks": ["10291", "10803"],
 				"Level": 72,
 				"Output": "Chest (Ardougne Castle)",
 				"Primary": true
