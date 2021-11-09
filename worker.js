@@ -41,6 +41,9 @@ let minigameShops;
 let manualEquipment;
 let checkedChallenges;
 let backloggedSources;
+let altChallenges;
+let manualMonsters;
+let slayerLocked;
 
 onmessage = function(e) {
     eGlobal = e;
@@ -80,6 +83,9 @@ onmessage = function(e) {
     manualEquipment = eGlobal.data[33];
     checkedChallenges = eGlobal.data[34];
     backloggedSources = eGlobal.data[35];
+    altChallenges = eGlobal.data[36];
+    manualMonsters = eGlobal.data[37];
+    slayerLocked = eGlobal.data[38];
 
     if (rareDropNum === "1/0") {
         rareDropNum = "1/999999999999999";
@@ -104,10 +110,12 @@ var calcChallenges = function(chunks, baseChunkData) {
     let valids = calcChallengesWork(chunks, baseChunkData);
     Object.keys(manualTasks).forEach(skill => {
         Object.keys(manualTasks[skill]).forEach(challenge => {
-            if (!valids[skill]) {
-                valids[skill] = {};
+            if (!!chunkInfo['challenges'][skill][challenge]) {
+                if (!valids[skill]) {
+                    valids[skill] = {};
+                }
+                valids[skill][challenge] = manualTasks[skill][challenge];
             }
-            valids[skill][challenge] = manualTasks[skill][challenge];
         });
     });
     let outputs = {};
@@ -151,6 +159,8 @@ var calcChallenges = function(chunks, baseChunkData) {
                                         outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')][challenge] = 'primary-' + chunkInfo['challenges'][skill][challenge]['Source'];
                                     } else if (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop') {
                                         outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')][challenge] = 'secondary-' + chunkInfo['challenges'][skill][challenge]['Source'];
+                                    } else {
+                                        delete outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
                                     }
                                 } else if (chunkInfo['skillItems'][skill][output][item] === 'Always' && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
                                     outputs[item.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')][challenge] = 'primary-' + skill;
@@ -164,11 +174,11 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = {};
                             }
                             if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Source')) {
-                                if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop') {
+                                if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop' && (!backloggedSources['shops'] || !backloggedSources['shops'][challenge])) {
                                     outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')][challenge] = chunkInfo['challenges'][skill][challenge]['Source'];
-                                } else if (!chunkInfo['challenges'][skill][challenge]['Secondary']) {
+                                } else if (!chunkInfo['challenges'][skill][challenge]['Secondary'] && (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop' || !backloggedSources['shops'] || !backloggedSources['shops'][challenge])) {
                                     outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')][challenge] = 'primary-' + chunkInfo['challenges'][skill][challenge]['Source'];
-                                } else {
+                                } else if (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop' || !backloggedSources['shops'] || !backloggedSources['shops'][challenge]) {
                                     outputs[output.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')][challenge] = 'secondary-' + chunkInfo['challenges'][skill][challenge]['Source'];
                                 }
                             } else if (!chunkInfo['challenges'][skill][challenge]['Secondary']) {
@@ -217,10 +227,12 @@ var calcChallenges = function(chunks, baseChunkData) {
         newValids = calcChallengesWork(chunks, baseChunkData);
         Object.keys(manualTasks).forEach(skill => {
             Object.keys(manualTasks[skill]).forEach(challenge => {
-                if (!newValids[skill]) {
-                    newValids[skill] = {};
+                if (!!chunkInfo['challenges'][skill][challenge]) {
+                    if (!newValids[skill]) {
+                        newValids[skill] = {};
+                    }
+                    newValids[skill][challenge] = manualTasks[skill][challenge];
                 }
-                newValids[skill][challenge] = manualTasks[skill][challenge];
             });
         });
         let fullyValid;
@@ -229,7 +241,8 @@ var calcChallenges = function(chunks, baseChunkData) {
                 if (skill !== 'Extra' || chunkInfo['challenges'][skill][challenge].hasOwnProperty('Requirements')) {
                     fullyValid = true;
                     !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach(subTask => {
-                        if (subTask.includes('+')) {
+                        if (chunkInfo['challenges'][skill][challenge]['Tasks'][subTask] === 'Quest') { //TEMP
+                        } else if (subTask.includes('+')) {
                             if (!tasksPlus[subTask]) {
                                 fullyValid = false;
                                 !!newValids[skill] && delete newValids[skill][challenge];
@@ -244,6 +257,8 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 let tempValid = false;
                                 tasksPlus[subTask].forEach(plus => {
                                     if (!(!checkPrimaryMethod(chunkInfo['challenges'][skill][challenge]['Tasks'][subTask], newValids, baseChunkData) || (!!valids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] && (!valids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(plus.split('--')[0]) && !newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(plus.split('--')[0]))) || (backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] && backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(plus.split('--')[0])))) {
+                                        tempValid = true;
+                                    } else if (rules['Show Diary Tasks Any'] && skill === 'Diary' && chunkInfo['challenges'][skill][challenge]['Tasks'][subTask] === 'Diary' && chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(plus.split('--')[0]) && chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][plus.split('--')[0]].hasOwnProperty('Reward') && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('Reward')) {
                                         tempValid = true;
                                     }
                                 });
@@ -261,14 +276,16 @@ var calcChallenges = function(chunks, baseChunkData) {
                             }
                         } else {
                             if (!checkPrimaryMethod(chunkInfo['challenges'][skill][challenge]['Tasks'][subTask], newValids, baseChunkData) || (!!valids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] && (!valids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) && !newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]))) || (backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] && backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]))) {
-                                fullyValid = false;
-                                !!newValids[skill] && delete newValids[skill][challenge];
-                                !!valids[skill] && delete valids[skill][challenge];
-                                if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                    delete newValids[skill];
-                                }
-                                if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                    delete valids[skill];
+                                if (!(rules['Show Diary Tasks Any'] && skill === 'Diary' && chunkInfo['challenges'][skill][challenge]['Tasks'][subTask] === 'Diary' && chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) && chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]].hasOwnProperty('Reward') && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('Reward'))) {
+                                    fullyValid = false;
+                                    !!newValids[skill] && delete newValids[skill][challenge];
+                                    !!valids[skill] && delete valids[skill][challenge];
+                                    if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
+                                        delete newValids[skill];
+                                    }
+                                    if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
+                                        delete valids[skill];
+                                    }
                                 }
                             }
                         }
@@ -301,7 +318,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     });
                     if (fullyValid) {
                         !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach(subTask => {
-                            if (!!chunkInfo['challenges'][skill][challenge]['BaseQuest'] && !!chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]] && !!chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]]['BaseQuest'] && chunkInfo['challenges'][skill][challenge]['BaseQuest'] === chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]]['BaseQuest'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                            if (chunkInfo['challenges'][skill][challenge]['Tasks'][subTask] !== 'Quest' && !!chunkInfo['challenges'][skill][challenge]['BaseQuest'] && !!chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]] && !!chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]]['BaseQuest'] && chunkInfo['challenges'][skill][challenge]['BaseQuest'] === chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]]['BaseQuest'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge)) && !chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]]['Reward']) {//TEMP
                                 newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) && (newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]][subTask.split('--')[0]] = false);
                             }
                         });
@@ -460,16 +477,21 @@ var calcChallengesWork = function(chunks, baseChunkData) {
         });
     }
 
+    // Secondary MTA
+    if (!!chunkInfo['challenges']['Magic'] && !!chunkInfo['challenges']['Magic']['Participate in all parts of the ~|Magic Training Arena|~']) {
+        chunkInfo['challenges']['Magic']['Participate in all parts of the ~|Magic Training Arena|~']['forcedPrimary'] = !rules['Secondary MTA'];
+    }
+
     // Max Cape
     if (rules['Skillcape'] && !!chunks && chunks.hasOwnProperty('11063')) {
         if (!valids['Extra']) {
             valids['Extra'] = {};
         }
-        valids['Extra']['Buy the ~|Max cape|~. Nerd.'] = 'Skillcapes';
+        valids['Extra']['Buy the ~|Max cape|~%2E Nerd%2E'] = 'Skillcapes';
         if (!chunkInfo['challenges']['Extra']) {
             chunkInfo['challenges']['Extra'] = {};
         }
-        chunkInfo['challenges']['Extra']['Buy the ~|Max cape|~. Nerd.'] = {
+        chunkInfo['challenges']['Extra']['Buy the ~|Max cape|~%2E Nerd%2E'] = {
             'Category': ['Skillcape'],
             'Chunks': ['11063'],
             'ChunksDetails': ['11063'],
@@ -516,6 +538,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!chunksPlus[chunkId]) {
                         validChallenge = false;
                         wrongThings.push(chunkId);
+                        chunkInfo['challenges'][skill][name]['ChunksDetails'].push(chunkId);
                     } else {
                         let tempValid = false;
                         Object.keys(chunks).forEach(cName => {
@@ -535,6 +558,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(chunkId);
+                            chunkInfo['challenges'][skill][name]['ChunksDetails'].push(chunkId);
                         }
                     }
                 } else {
@@ -554,6 +578,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!tempValid) {
                         validChallenge = false;
                         wrongThings.push(chunkId);
+                        chunkInfo['challenges'][skill][name]['ChunksDetails'].push(chunkId);
                     }
                 }
             });
@@ -567,6 +592,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!itemsPlus[item.replaceAll(/\*/g, '')]) {
                         validChallenge = false;
                         wrongThings.push(item);
+                        chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                     } else {
                         let tempValid = false;
                         let tempTempValid = false;
@@ -600,6 +626,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(item);
+                            chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                         }
                     }
                     if ((skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) || ((skill === 'Quest' || skill === 'Diary') && (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic')) && (chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\+/g.test(e))))) {
@@ -609,6 +636,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!items[item.replaceAll(/\*/g, '')] || (chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') && chunkInfo['challenges'][skill][name]['NonShop'] && onlyShop(items[item.replaceAll(/\*/g, '')]))) {
                         validChallenge = false;
                         wrongThings.push(item);
+                        chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                     } else {
                         chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                         if (item.includes('*') && !!items[item.replaceAll(/\*/g, '')]) {
@@ -739,6 +767,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!objectsPlus[object]) {
                         validChallenge = false;
                         wrongThings.push(object);
+                        chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(object);
                     } else {
                         let tempValid = false;
                         objectsPlus[object].forEach(plus => {
@@ -755,12 +784,14 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(object);
+                            chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(object);
                         }
                     }
                 } else {
                     if (!objects[object]) {
                         validChallenge = false;
                         wrongThings.push(object);
+                        chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(object);
                     } else {
                         chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(object);
                         Object.keys(objects[object]).forEach(source => {
@@ -778,9 +809,11 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         if (monster !== 'Monster+') {
                             validChallenge = false;
                             wrongThings.push(monster);
+                            chunkInfo['challenges'][skill][name]['MonstersDetails'].push(monster);
                         } else if (!monsters || Object.keys(monsters).length <= 0) {
                             validChallenge = false;
                             wrongThings.push(monster);
+                            chunkInfo['challenges'][skill][name]['MonstersDetails'].push(monster);
                         }
                     } else {
                         let tempValid = false;
@@ -793,12 +826,14 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(monster);
+                            chunkInfo['challenges'][skill][name]['MonstersDetails'].push(monster);
                         }
                     }
                 } else {
                     if (!monsters[monster]) {
                         validChallenge = false;
                         wrongThings.push(monster);
+                        chunkInfo['challenges'][skill][name]['MonstersDetails'].push(monster);
                     } else {
                         chunkInfo['challenges'][skill][name]['MonstersDetails'].push(monster);
                     }
@@ -809,6 +844,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!npcsPlus[npc]) {
                         validChallenge = false;
                         wrongThings.push(npc);
+                        chunkInfo['challenges'][skill][name]['NPCsDetails'].push(npc);
                     } else {
                         let tempValid = false;
                         npcsPlus[npc].forEach(plus => {
@@ -820,12 +856,14 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(npc);
+                            chunkInfo['challenges'][skill][name]['NPCsDetails'].push(npc);
                         }
                     }
                 } else {
                     if (!npcs[npc]) {
                         validChallenge = false;
                         wrongThings.push(npc);
+                        chunkInfo['challenges'][skill][name]['NPCsDetails'].push(npc);
                     } else {
                         chunkInfo['challenges'][skill][name]['NPCsDetails'].push(npc);
                     }
@@ -836,6 +874,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!mixPlus[mix]) {
                         validChallenge = false;
                         wrongThings.push(mix);
+                        chunkInfo['challenges'][skill][name]['MonstersDetails'].push(mix);
+                        chunkInfo['challenges'][skill][name]['NPCsDetails'].push(mix);
                     } else {
                         let tempValid = false;
                         mixPlus[mix].forEach(plus => {
@@ -848,12 +888,16 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(mix);
+                            chunkInfo['challenges'][skill][name]['MonstersDetails'].push(mix);
+                            chunkInfo['challenges'][skill][name]['NPCsDetails'].push(mix);
                         }
                     }
                 } else {
                     if (!monsters[mix] && !npcs[mix]) {
                         validChallenge = false;
                         wrongThings.push(mix);
+                        chunkInfo['challenges'][skill][name]['MonstersDetails'].push(mix);
+                        chunkInfo['challenges'][skill][name]['NPCsDetails'].push(mix);
                     } else {
                         chunkInfo['challenges'][skill][name]['MonstersDetails'].push(mix);
                         chunkInfo['challenges'][skill][name]['NPCsDetails'].push(mix);
@@ -861,6 +905,21 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                 }
             });
             chunkInfo['challenges'][skill][name]['Secondary'] = tempSecondary;
+            chunkInfo['challenges'][skill][name]['forcedPrimary'] && chunkInfo['challenges'][skill][name]['Secondary'] && (validChallenge = false);
+            if (!!slayerLocked && skill === 'Slayer' && chunkInfo['challenges'][skill][name]['Level'] > slayerLocked['level']) {
+                let stillLocked = true;
+                if (!!chunkInfo['codeItems']['slayerTasks'] && chunkInfo['codeItems']['slayerTasks'].hasOwnProperty(slayerLocked['monster'])) {
+                    !!chunkInfo['codeItems']['slayerTasks'][slayerLocked['monster']] && Object.keys(chunkInfo['codeItems']['slayerTasks'][slayerLocked['monster']]).forEach(monster => {
+                        if (!!baseChunkData['monsters'] && baseChunkData['monsters'].hasOwnProperty(monster)) {
+                            stillLocked = false;
+                        }
+                    });
+                }
+                if (stillLocked) {
+                    validChallenge = false;
+                    wrongThings.push('Slayer Locked');
+                }
+            }
             !!chunkInfo['challenges'][skill][name]['Category'] && Object.keys(rules).forEach(rule => {
                 if (chunkInfo['challenges'][skill][name]['Category'].includes(rule) && !maybePrimary.includes(rule) && !rules[rule]) {
                     validChallenge = false;
@@ -900,6 +959,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 if (!!items[plus] && (!Object.values(items[plus]).includes('primary-Farming') || rules['Farming Primary'])) {
                                     if (!tools[plus] && (skill !== 'Magic' || !magicTools[plus])) {
                                         let nonskill = {};
+                                        let tempNonValid = true;
                                         !!items[plus] && Object.keys(items[plus]).forEach(source => {
                                             if (items[plus][source].includes('Nonskill') && !source.includes('*')) {
                                                 if (!nonskill['Nonskill']) {
@@ -1016,7 +1076,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
         });
     });
     Object.keys(valids).forEach(skill => {
-        Object.keys(valids[skill]).filter((index) => { return chunkInfo['challenges'][skill][index].hasOwnProperty('Skills') }).forEach(name => {
+        Object.keys(valids[skill]).filter((index) => { return chunkInfo['challenges'][skill][index].hasOwnProperty('Skills') && !chunkInfo['challenges'][skill][index].hasOwnProperty('ClueTier') }).forEach(name => {
             Object.keys(chunkInfo['challenges'][skill][name]['Skills']).forEach(subSkill => {
                 if (!chunkInfo['challenges'][subSkill]) {
                     chunkInfo['challenges'][subSkill] = {};
@@ -1151,6 +1211,9 @@ var calcBIS = function() {
     if (rules['Show Best in Slot Flinching Tasks']) {
         combatStyles.push('Flinch');
     }
+    if (rules['Show Best in Slot Weight Tasks']) {
+        combatStyles.push('Weight Reducing');
+    }
     if (!globalValids['BiS']) {
         globalValids['BiS'] = {};
     }
@@ -1173,6 +1236,7 @@ var calcBIS = function() {
     let vowels = ['a', 'e', 'i', 'o', 'u'];
     combatStyles.forEach(skill => {
         let bestEquipment = {};
+        let bestEquipmentAlts = {};
         Object.keys({...completedEquipment, ...chunkInfo['equipment']}).forEach(equip => {
             let validWearable = true;
             !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
@@ -1193,6 +1257,21 @@ var calcBIS = function() {
                             let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                        } else if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (((Math.max(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) + chunkInfo['equipment'][equip].melee_strength + 64) / chunkInfo['equipment'][equip].attack_speed) === ((Math.max(chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_crush, chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_slash, chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_stab) + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength + 64) / chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_speed))) && Math.max(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) > 0 && chunkInfo['equipment'][equip].melee_strength > 0) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
                         }
                     } else {
                         if ((Math.min(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) >= 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
@@ -1228,6 +1307,23 @@ var calcBIS = function() {
                                 let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                                 article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                                 tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                            } else if ((chunkInfo['equipment'][equip].melee_strength === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength) &&
+                            ((chunkInfo['equipment'][equip].attack_crush + chunkInfo['equipment'][equip].attack_slash + chunkInfo['equipment'][equip].attack_stab) === (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_crush + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_slash + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_stab)) &&
+                            ((chunkInfo['equipment'][equip].defence_crush + chunkInfo['equipment'][equip].defence_magic + chunkInfo['equipment'][equip].defence_ranged + chunkInfo['equipment'][equip].defence_slash + chunkInfo['equipment'][equip].defence_stab) === (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_crush + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_magic + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_slash + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_stab))) {
+                                let tempTempValid = false;
+                                Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                    if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                        tempTempValid = true;
+                                    }
+                                });
+                                let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                                article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                                if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                    if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                        bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                    }
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                                }
                             }
                         }
                     }
@@ -1243,41 +1339,87 @@ var calcBIS = function() {
                             let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                        } else if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (((chunkInfo['equipment'][equip].attack_ranged + chunkInfo['equipment'][equip].ranged_strength + 64) / chunkInfo['equipment'][equip].attack_speed) === ((chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength + 64) / chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_speed))) && chunkInfo['equipment'][equip].attack_ranged > 0) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
                         }
                     } else {
                         if (chunkInfo['equipment'][equip].attack_ranged >= 0 || chunkInfo['equipment'][equip].ranged_strength > 0) {
-                            if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].ranged_strength > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength)) {
-                                let tempTempValid = false;
-                                Object.keys(baseChunkData['items'][equip]).forEach(source => {
-                                    if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
-                                        tempTempValid = true;
-                                    }
+                            let validAmmo = true;
+                            if (chunkInfo['equipment'][equip].slot === 'ammo') {
+                                let tempAmmoValid = false;
+                                !!chunkInfo['codeItems']['ammoTools'][equip] && Object.keys(chunkInfo['codeItems']['ammoTools'][equip]).forEach(tool => {
+                                    !!baseChunkData['items'][tool] && Object.keys(baseChunkData['items'][tool]).forEach(source => {
+                                        if (!baseChunkData['items'][tool][source].includes('-') || !processingSkill[baseChunkData['items'][tool][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][tool][source].split('-')[1] === 'Slayer') {
+                                            tempAmmoValid = true;
+                                        }
+                                    });
                                 });
-                                let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
-                                article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
-                                tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
-                            } else if ((chunkInfo['equipment'][equip].ranged_strength === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength) && (chunkInfo['equipment'][equip].attack_ranged > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged)) {
-                                let tempTempValid = false;
-                                Object.keys(baseChunkData['items'][equip]).forEach(source => {
-                                    if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
-                                        tempTempValid = true;
+                                !tempAmmoValid && (validAmmo = false);
+                            }
+                            if (validAmmo) {
+                                if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].ranged_strength > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength)) {
+                                    let tempTempValid = false;
+                                    Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                        if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                            tempTempValid = true;
+                                        }
+                                    });
+                                    let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                                    article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                                    tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                                } else if ((chunkInfo['equipment'][equip].ranged_strength === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength) && (chunkInfo['equipment'][equip].attack_ranged > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged)) {
+                                    let tempTempValid = false;
+                                    Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                        if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                            tempTempValid = true;
+                                        }
+                                    });
+                                    let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                                    article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                                    tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                                } else if ((chunkInfo['equipment'][equip].ranged_strength === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength) &&
+                                (chunkInfo['equipment'][equip].attack_ranged === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged) &&
+                                ((chunkInfo['equipment'][equip].defence_crush + chunkInfo['equipment'][equip].defence_magic + chunkInfo['equipment'][equip].defence_ranged + chunkInfo['equipment'][equip].defence_slash + chunkInfo['equipment'][equip].defence_stab) > (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_crush + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_magic + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_slash + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_stab))) {
+                                    let tempTempValid = false;
+                                    Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                        if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                            tempTempValid = true;
+                                        }
+                                    });
+                                    let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                                    article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                                    tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                                } else if ((chunkInfo['equipment'][equip].ranged_strength === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength) &&
+                                (chunkInfo['equipment'][equip].attack_ranged === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged) &&
+                                ((chunkInfo['equipment'][equip].defence_crush + chunkInfo['equipment'][equip].defence_magic + chunkInfo['equipment'][equip].defence_ranged + chunkInfo['equipment'][equip].defence_slash + chunkInfo['equipment'][equip].defence_stab) === (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_crush + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_magic + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_slash + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_stab))) {
+                                    let tempTempValid = false;
+                                    Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                        if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                            tempTempValid = true;
+                                        }
+                                    });
+                                    let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                                    article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                                    if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                        if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                            bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                        }
+                                        bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
                                     }
-                                });
-                                let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
-                                article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
-                                tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
-                            } else if ((chunkInfo['equipment'][equip].ranged_strength === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength) &&
-                            (chunkInfo['equipment'][equip].attack_ranged === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged) &&
-                            ((chunkInfo['equipment'][equip].defence_crush + chunkInfo['equipment'][equip].defence_magic + chunkInfo['equipment'][equip].defence_ranged + chunkInfo['equipment'][equip].defence_slash + chunkInfo['equipment'][equip].defence_stab) > (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_crush + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_magic + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_slash + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_stab))) {
-                                let tempTempValid = false;
-                                Object.keys(baseChunkData['items'][equip]).forEach(source => {
-                                    if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
-                                        tempTempValid = true;
-                                    }
-                                });
-                                let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
-                                article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
-                                tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                                }
                             }
                         }
                     }
@@ -1293,6 +1435,21 @@ var calcBIS = function() {
                             let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                        } else if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].attack_magic === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_magic)) && chunkInfo['equipment'][equip].attack_magic > 0) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
                         }
                     } else {
                         if ((chunkInfo['equipment'][equip].attack_magic >= 0 || chunkInfo['equipment'][equip].magic_damage > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
@@ -1328,6 +1485,23 @@ var calcBIS = function() {
                                 let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                                 article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                                 tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                            } else if ((chunkInfo['equipment'][equip].magic_damage === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].magic_damage) &&
+                            (chunkInfo['equipment'][equip].attack_magic === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_magic) &&
+                            ((chunkInfo['equipment'][equip].defence_crush + chunkInfo['equipment'][equip].defence_magic + chunkInfo['equipment'][equip].defence_ranged + chunkInfo['equipment'][equip].defence_slash + chunkInfo['equipment'][equip].defence_stab) === (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_crush + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_magic + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_slash + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_stab))) {
+                                let tempTempValid = false;
+                                Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                    if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                        tempTempValid = true;
+                                    }
+                                });
+                                let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                                article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                                if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                    if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                        bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                    }
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                                }
                             }
                         }
                     }
@@ -1344,6 +1518,23 @@ var calcBIS = function() {
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
                         }
+                    } else if (chunkInfo['equipment'][equip].prayer > 0) {
+                        if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].prayer === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].prayer)) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
+                        }
                     }
                 } else if (skill === 'Melee Tank') {
                     if (Math.max(chunkInfo['equipment'][equip].defence_crush, chunkInfo['equipment'][equip].defence_slash, chunkInfo['equipment'][equip].defence_stab) > 0) {
@@ -1357,6 +1548,21 @@ var calcBIS = function() {
                             let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                        } else if (!bestEquipment[chunkInfo['equipment'][equip].slot] || ((chunkInfo['equipment'][equip].defence_crush + chunkInfo['equipment'][equip].defence_slash + chunkInfo['equipment'][equip].defence_stab) === (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_crush + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_slash + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_stab))) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
                         }
                     }
                 } else if (skill === 'Ranged Tank') {
@@ -1371,6 +1577,21 @@ var calcBIS = function() {
                             let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                        } else if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].defence_ranged === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_ranged)) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
                         }
                     }
                 } else if (skill === 'Magic Tank') {
@@ -1385,6 +1606,21 @@ var calcBIS = function() {
                             let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                        } else if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].defence_magic === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].defence_magic)) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
                         }
                     }
                 } else if (skill === 'Flinch') {
@@ -1399,6 +1635,50 @@ var calcBIS = function() {
                             let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                        } else if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || ((Math.max(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) + chunkInfo['equipment'][equip].melee_strength) === (Math.max(chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_crush, chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_slash, chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_stab) + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength))) && Math.max(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) > 0 && chunkInfo['equipment'][equip].melee_strength > 0) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
+                        }
+                    }
+                } else if (skill === 'Weight Reducing') {
+                    if (chunkInfo['equipment'][equip].hasOwnProperty('weight')) {
+                        if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].weight < chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].weight)) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
+                        } else if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].weight === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].weight)) {
+                            let tempTempValid = false;
+                            Object.keys(baseChunkData['items'][equip]).forEach(source => {
+                                if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
+                                    tempTempValid = true;
+                                }
+                            });
+                            let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                            article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
+                            if (tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~'))) {
+                                if (!bestEquipmentAlts[chunkInfo['equipment'][equip].slot]) {
+                                    bestEquipmentAlts[chunkInfo['equipment'][equip].slot] = {};
+                                }
+                                bestEquipmentAlts[chunkInfo['equipment'][equip].slot][equip] = bestEquipment[chunkInfo['equipment'][equip].slot];
+                            }
                         }
                     }
                 }
@@ -1886,6 +2166,44 @@ var calcBIS = function() {
                 notFresh['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~'] = true;
             }
         });
+        Object.keys(bestEquipmentAlts).forEach(slot => {
+            Object.keys(bestEquipmentAlts[slot]).forEach(item => {
+                if (!!altChallenges['BiS']) {
+                    if ((slot === '2h' && altChallenges['BiS'].hasOwnProperty(skill.replaceAll(' ', '_') + '-weapon') && altChallenges['BiS'][skill.replaceAll(' ', '_') + '-weapon'] === item.toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')) || (altChallenges['BiS'].hasOwnProperty(skill.replaceAll(' ', '_') + '-' + slot) && altChallenges['BiS'][skill.replaceAll(' ', '_') + '-' + slot] === item.toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))) {
+                        if (slot === '2h') {
+                            highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
+                            highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
+                        } else {
+                            highestOverall[skill.replaceAll(' ', '_') + '-' + slot] = item;
+                        }
+                    }
+                }
+                if (bestEquipmentAlts[slot][item] === bestEquipment[slot]) {
+                    let article = vowels.includes(item.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                    article = item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' ? ' ' : article;
+                    if (!!globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~']) {
+                        globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + '/' + globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'];
+                    } else {
+                        globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + ' BiS ' + slot;
+                    }
+                    if (!chunkInfo['challenges']['BiS']) {
+                        chunkInfo['challenges']['BiS'] = {};
+                    }
+                    if (!!chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] && notFresh['Obtain' + article + '~|' + item.toLowerCase() + '|~']) {
+                        chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = {
+                            'ItemsDetails': [item],
+                            'Label': `<span class='noscroll ${skill}-bis-highlight'>` + skill + '</span>/' + chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~']['Label']
+                        }
+                    } else {
+                        chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = {
+                            'ItemsDetails': [item],
+                            'Label': `<span class='noscroll ${skill}-bis-highlight'>` + skill + '</span> BiS ' + slot
+                        }
+                        notFresh['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = true;
+                    }
+                }
+            });
+        });
         //console.log(bestEquipment);
     });
 }
@@ -2054,6 +2372,44 @@ var gatherChunksInfo = function(chunks) {
                 });
             });
 
+            !!manualMonsters && Object.keys(manualMonsters).forEach(monster => {
+                !!chunkInfo['drops'][monster] && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
+                    if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
+                        Object.keys(dropTables[drop]).forEach(item => {
+                            if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) || ((parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1]) * parseFloat(dropTables[drop][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                                (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                                if (!items[item]) {
+                                    items[item] = {};
+                                }
+                                if (chunkInfo['drops'][monster][item] === 'Always') {
+                                    items[item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
+                                } else {
+                                    items[item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
+                                }
+                                if (!dropRatesGlobal[monster]) {
+                                    dropRatesGlobal[monster] = {};
+                                }
+                                dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1] * dropTables[drop][item].split('/')[1].replaceAll('~', '')));
+                            }
+                        });
+                    } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                            (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][drop])) {
+                        if (!items[drop]) {
+                            items[drop] = {};
+                        }
+                        if (chunkInfo['drops'][monster][drop] === 'Always') {
+                            items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
+                        } else {
+                            items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
+                        }
+                        if (!dropRatesGlobal[monster]) {
+                            dropRatesGlobal[monster] = {};
+                        }
+                        dropRatesGlobal[monster][drop] = (chunkInfo['drops'][monster][drop].split('/').length <= 1) ? chunkInfo['drops'][monster][drop] : findFraction(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1].replaceAll('~', '')));
+                    }
+                });
+            });
+
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Shop'] && Object.keys(chunkInfo['chunks'][num]['Shop']).forEach(shop => {
                 !!chunkInfo['shopItems'][shop] && (!backloggedSources['shops'] || !backloggedSources['shops'][shop]) && Object.keys(chunkInfo['shopItems'][shop]).forEach(item => {
                     if ((!minigameShops[shop] || rules['Minigame']) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
@@ -2089,6 +2445,15 @@ var gatherChunksInfo = function(chunks) {
                         monsters[monster] = {};
                     }
                     monsters[monster][num] = true;
+                }
+            });
+
+            !!manualMonsters && Object.keys(manualMonsters).forEach(monster => {
+                if (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) {
+                    if (!monsters[monster]) {
+                        monsters[monster] = {};
+                    }
+                    monsters[monster]['Manually Added'] = true;
                 }
             });
 

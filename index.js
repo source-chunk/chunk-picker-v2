@@ -2,7 +2,7 @@
  * Created by Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Ids and Amehzyn for smoother zooming/url decoding
- * 09/09/2021
+ * 11/09/2021
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -26,6 +26,7 @@ var highVisibilityMode = false;                                                 
 var darkMode = false;                                                           // Is dark mode enabled
 var recent = [];                                                                // Recently picked chunks
 var recentTime = [];                                                            // Recently picked chunks time
+var chunkOrder = [];                                                            // Full picked chunks order
 var zoom = 350;                                                                 // Starting zoom value
 var maxZoom = 550;                                                              // Furthest zoom in value
 var minZoom = onMobile ? 275 : 100;                                             // Smallest zoom out value
@@ -80,6 +81,7 @@ var signedIn = false;                                                           
 var filterByChecked = false;                                                    // Are we filtering by checked only
 var filterByCheckedEquipment = false;                                           // Are we filtering equipment by checked only
 var filterByCheckedSources = false;                                             // Are we filtering sources by checked only
+var filterByCheckedMonsters = false;                                            // Are we filtering monsters by checked only
 var extraOutputItems = {};                                                      // List of extra items obtainable from skill output
 var baseChunkData = {};                                                         // Chunk data global list
 
@@ -158,6 +160,46 @@ const combatSkills = [
     'Magic',
     'Prayer'
 ];                                                                              // Names of all combat skills
+const clueTiers = [
+    'Beginner',
+    'Easy',
+    'Medium',
+    'Hard',
+    'Elite',
+    'Master'
+];
+const clueStepAmounts = {
+    'Beginner': {
+        '1': .1,
+        '2': .45,
+        '3': .45
+    },
+    'Easy': {
+        '2': .33,
+        '3': .33,
+        '4': .33
+    },
+    'Medium': {
+        '3': .33,
+        '4': .33,
+        '5': .33
+    },
+    'Hard': {
+        '4': .33,
+        '5': .33,
+        '6': .33
+    },
+    'Elite': {
+        '5': .33,
+        '6': .33,
+        '7': .33
+    },
+    'Master': {
+        '6': .33,
+        '7': .33,
+        '8': .33
+    }
+};
 
 
 // Imported data
@@ -175,6 +217,10 @@ let tools = {};
 let magicTools = {};
 let dropTables = {};
 let elementalStaves = {};
+let bossLogs = {};
+let bossMonsters = {};
+let minigameShops = {};
+let slayerTasks = {};
 
 let questLastStep = {};
 
@@ -203,8 +249,10 @@ let rules = {
     "Show Best in Slot Prayer Tasks": false,
     "Show Best in Slot Defensive Tasks": false,
     "Show Best in Slot Flinching Tasks": false,
+    "Show Best in Slot Weight Tasks": false,
     "Show Quest Tasks Complete": false,
     "Show Diary Tasks Complete": false,
+    "Show Diary Tasks Any": false,
     "Highest Level": false,
     "BIS Skilling": false,
     "Collection Log": false,
@@ -215,8 +263,6 @@ let rules = {
     "Multi Step Processing": false,
     "Shooting Star": false,
     "Puro-Puro": false,
-    "Random Event Loot": false,
-    "Manually Add Tasks": false,
     "Collection Log Bosses": false,
     "Collection Log Raids": false,
     "Collection Log Minigames": false,
@@ -240,6 +286,8 @@ let rules = {
     "Herblore Unlocked Snake Weed": false,
     "HigherLander": false,
     "Starting Items": false,
+    "Tutor Ammo": false,
+    "Secondary MTA": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -259,13 +307,15 @@ let ruleNames = {
     "Sorceress's Garden": "Allow Sorceress's Garden to count as primary training for training Farming",
     "Show Skill Tasks": "Show Skill Tasks (e.g. Get 43 Crafting to cut a diamond)",
     "Show Quest Tasks": "Show Quest Tasks (coming soon)",//
-    "Show Diary Tasks": "Show Diary Tasks (coming soon)",//
+    "Show Diary Tasks": "Show Diary Tasks",
     "Show Best in Slot Tasks": "Show Best in Slot (Accuracy + Strength, or secondarily Defense) Tasks",
     "Show Best in Slot Prayer Tasks": "Show Best in Slot Tasks for Prayer-boosting gear",
     "Show Best in Slot Defensive Tasks": "Show Best in Slot Tasks for Tank gear (Melee/Ranged/Magic)",
     "Show Best in Slot Flinching Tasks": "Show Best in Slot Tasks for Flinching weapons (pure offensive stats and strength, no speed)",
+    "Show Best in Slot Weight Tasks": "Show Best in Slot Tasks for weight-reducing gear (only pieces with negative weight)",
     "Show Quest Tasks Complete": "Show Quest Tasks only when the whole quest is completable",//
-    "Show Diary Tasks Complete": "Show Diary Tasks only when the whole diary tier (easy, medium, etc.) is completable",//
+    "Show Diary Tasks Complete": "Show Diary Tasks only when the whole diary tier (easy, medium, etc.) is completable",
+    "Show Diary Tasks Any": "Show all diary tasks possible, regardless of tier",
     "Highest Level": "Require processing skill tasks to be the highest level of processing, rather than the lowest (e.g. must smith a rune bar fully into a platebody rather than just into a dagger)",
     "BIS Skilling": "Must obtain items that are best-in-slot/add quality-of-life for skilling (e.g. Dragon Pickaxe, Angler Outfit, wieldable saw, etc.)",
     "Collection Log": "Must obtain items with slots in the collection log (works in conjuction with the Rare Drop rule and the Boss Drops rule)",
@@ -276,8 +326,6 @@ let ruleNames = {
     "Multi Step Processing": "Items must be fully processed, even multiple times within the same skill if needed (e.g. Ore -> Bar -> Smithed Item)",
     "Shooting Star": "Getting the level to mine all tiers of shooting stars count as Mining skill tasks",
     "Puro-Puro": "Allow implings from Puro-Puro & their drops to count towards chunk tasks",
-    "Random Event Loot": "Allow any random event rewards/bird nest loot/gems from mining/RareDropTable & GemDropTable obtained to count towards chunk tasks",
-    "Manually Add Tasks": "Allow the ability to manually add active chunk tasks (useful if you decide to lamp up a skill to start training it)",
     "Collection Log Bosses": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Bosses' tab",
     "Collection Log Raids": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Raids' tab",
     "Collection Log Minigames": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Minigames' tab",
@@ -299,6 +347,8 @@ let ruleNames = {
     "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to snake weed (the only primary training for Herblore in the game)",
     "HigherLander": "Accessing the intermediate and veteran landers for Pest Control are required tasks (only novice lander is required otherwise)",
     "Starting Items": "Allow tools gained from leaving Tutorial Island to be used within your chunks (aka not dropping your starting items). Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net, shortbow",
+    "Tutor Ammo": "Items from the Magic/Ranged Combat Tutors in Lumbridge count as a way to train those respective skills (Air/Mind runes and Training bow/arrows)",
+    "Secondary MTA": "Allow MTA to be required with secondary sources of nature/law/cosmic runes",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -335,6 +385,7 @@ let rulePresets = {
         "Show Skill Tasks": true,
         "Show Quest Tasks": true,
         "Show Diary Tasks": true,
+        "Show Diary Tasks Any": true,
         "Show Best in Slot Tasks": true,
         "Show Best in Slot Prayer Tasks": true,
         "Highest Level": true,
@@ -345,8 +396,6 @@ let rulePresets = {
         "Multi Step Processing": true,
         "Shooting Star": true,
         "Puro-Puro": true,
-        "Random Event Loot": true,
-        "Manually Add Tasks": true,
         "Herblore Unlocked": true,
         "Farming Primary": true,
         "Tertiary Keys": true,
@@ -362,6 +411,7 @@ let rulePresets = {
         "Pets": true,
         "Rare Drop Amount": "0",
         "HigherLander": true,
+        "Secondary MTA": true,
     },
 };                                                                              // List of rules that are part of each preset
 
@@ -374,8 +424,8 @@ let ruleStructure = {
     "Visible Tasks": {
         "Show Skill Tasks": true,
         "Show Quest Tasks": false,
-        "Show Diary Tasks": false,
-        "Show Best in Slot Tasks": ["Show Best in Slot Prayer Tasks", "Show Best in Slot Defensive Tasks", "Show Best in Slot Flinching Tasks"]
+        "Show Diary Tasks": ["Show Diary Tasks Complete", "Show Diary Tasks Any"],
+        "Show Best in Slot Tasks": ["Show Best in Slot Prayer Tasks", "Show Best in Slot Defensive Tasks", "Show Best in Slot Flinching Tasks", "Show Best in Slot Weight Tasks"]
     },
     "Overall Skill": {
         "Starting Items": true,
@@ -413,7 +463,8 @@ let ruleStructure = {
         "Wandering implings": true
     },
     "Magic": {
-        "Combat and Teleport Spells": true
+        "Combat and Teleport Spells": true,
+        "Secondary MTA": true
     },
     "Mining": {
         "Shooting Star": true
@@ -427,12 +478,13 @@ let ruleStructure = {
     "Smithing": {
         "Smithing by Smelting": true
     },
-    "Drops": {
+    "Item Sources": {
         "Boss": true,
         "Rare Drop": true,
         "RDT": true,
         "Tertiary Keys": true,
-        "Primary Spawns": true
+        "Primary Spawns": true,
+        "Tutor Ammo": true
     },
     "Miscellaneous": {
         "Minigame": true,
@@ -441,8 +493,6 @@ let ruleStructure = {
         "Collection Log": ["Collection Log Bosses", "Collection Log Raids", "Collection Log Minigames", "Collection Log Other", "Pets"],
         "Untracked Uniques": true,
         "Stuffables": true,
-        "Random Event Loot": true,
-        "Manually Add Tasks": true,
         "Manually Complete Tasks": true,
         "Every Drop": true
     }
@@ -466,9 +516,10 @@ let settings = {
     "chunkTasks": true,
     "completedTaskColor": '#0D8219',
     "completedTaskStrikethrough": true,
-    'randomStartAlways': false,
+    "randomStartAlways": false,
     "darkmode": false,
     "defaultStickerColor": '#000000',
+    "walkableRollable": true,
 };                                                                              // Current state of all settings
 
 let settingNames = {
@@ -485,6 +536,7 @@ let settingNames = {
     "randomStartAlways": "Change the 'Pick Chunk' button to always be a 'Random Start' button; every chunk roll picks a random walkable chunk (that isn't already unlocked)",
     "darkmode": "Enable <b class='noscroll'>Dark Mode</b>",
     "defaultStickerColor": "Change the default color of chunk stickers",
+    "walkableRollable": "Only automatically mark <b class='noscroll'>walkable</b> chunks"
 };                                                                              // Descriptions of the settings
 
 let settingStructure = {
@@ -494,7 +546,7 @@ let settingStructure = {
         "randomStartAlways": true
     },
     "Chunk Neighbors": {
-        "neighbors": true,
+        "neighbors": ["walkableRollable"],
         "remove": true
     },
     "Information Panels": {
@@ -510,6 +562,10 @@ let settingStructure = {
         "defaultStickerColor": true
     }
 };                                                                              // Structure of the settings
+
+let subSettingDefault = {
+    "neighbors": true
+};                                                                              // Default value of sub-setting when parent is checked
 
 let settingsStructureConflict = {
     "neighbors": ["remove"],
@@ -717,12 +773,16 @@ let manualTasks = {};
 let manualEquipment = {};
 let backloggedSources = {};
 let fullChallengeArr = {};
+let manualMonsters = {};
+let slayerLocked = null;
 let detailsModalOpen = false;
 let notesModalOpen = false;
 let notesChallenge = null;
 let notesSkill = null;
 let rulesModalOpen = false;
 let settingsModalOpen = false;
+let chunkHistoryModalOpen = false;
+let challengeAltsModalOpen = false;
 let randomModalOpen = false;
 let randomListModalOpen = false;
 let statsErrorModalOpen = false;
@@ -734,6 +794,9 @@ let completeModalOpen = false;
 let addEquipmentModalOpen = false;
 let stickerModalOpen = false;
 let backlogSourcesModalOpen = false;
+let manualOuterModalOpen = false;
+let monsterModalOpen = false;
+let slayerLockedModalOpen = false;
 let workerOut = 0;
 let gotData = false;
 let questPointTotal = 0;
@@ -748,6 +811,9 @@ let stickerChoices = ['unset', 'skull', 'skull-crossbones', 'bomb', 'exclamation
 let stickerChoicesOsrs = ['attack', 'hitpoints', 'mining', 'strength', 'agility', 'smithing', 'defence', 'herblore', 'fishing', 'ranged', 'thieving', 'cooking', 'prayer', 'fletching', 'firemaking', 'magic', 'crafting', 'woodcutting', 'runecraft', 'slayer', 'farming', 'construction', 'hunter', 'quest', 'diary'];
 let savedStickerId;
 let savedStickerSticker;
+let altChallenges = {};
+let numClueTasks = {};
+let numClueTasksPossible = {};
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -768,7 +834,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.7.6");
+const myWorker = new Worker("./worker.js?v=4.8.0");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -784,8 +850,33 @@ myWorker.onmessage = function(e) {
         questPointTotal = e.data[6];
         highestOverall = e.data[7];
         calcCurrentChallenges2(e.data[5]);
+        numClueTasks = {
+            'beginner': 0,
+            'easy': 0,
+            'medium': 0,
+            'hard': 0,
+            'elite': 0,
+            'master': 0
+        };
+        numClueTasksPossible = {
+            'beginner': 0,
+            'easy': 0,
+            'medium': 0,
+            'hard': 0,
+            'elite': 0,
+            'master': 0
+        };
+        !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).forEach(task => {
+            if (!!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier')) {
+                numClueTasks[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
+                if (globalValids['Nonskill'].hasOwnProperty(task)) {
+                    numClueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
+                }
+            }
+        });
         searchModalOpen && searchWithinChunks();
         highestModalOpen && openHighest();
+        checkSlayerLocked();
     }
 }
 
@@ -859,7 +950,7 @@ window.addEventListener('keyup', function(e) {
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 hammertime.on('panstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen) {
         clickX = ev.changedPointers[0].pageX;
         clickY = ev.changedPointers[0].pageY;
     }
@@ -867,7 +958,7 @@ hammertime.on('panstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 hammertime.on('panend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -875,7 +966,7 @@ hammertime.on('panend', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
 hammertime.on('panleft panright panup pandown', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen) {
         updateScrollPos(ev.changedPointers[0]);
     }
 });
@@ -1102,7 +1193,7 @@ $('.body').on('scroll mousewheel DOMMouseScroll', function(e) {
     if (!e.target.className || e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
         $('body').scrollTop(0);
         return;
-    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
+    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
         e.preventDefault();
         return;
     }
@@ -1187,7 +1278,7 @@ $(document).on({
             testMode = false;
             loadData();
             $('.test-hint').hide();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen) {
             e.preventDefault();
         }
     }
@@ -1201,7 +1292,7 @@ $(document).on('mouseleave', '.recent', function() {
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen) {
             return;
         }
         if (clicked) {
@@ -1214,7 +1305,7 @@ $(document).on({
         }
     },
     'mousedown': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen) {
             return;
         }
         clicked = true;
@@ -1239,7 +1330,7 @@ $(document).on({
             $(".backlog-context-menu").hide(100);
         }
         let tempClicked = clicked;
-        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen) {
+        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen) {
             return;
         } else if (e.button === 2) {
             if ($(e.target).hasClass('box')) {
@@ -1466,7 +1557,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1663,7 +1754,7 @@ var pick = function(both) {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2 = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1760,7 +1851,9 @@ var importFunc = function() {
     $('.url').focus();
     importMenuOpen = true;
     $('#import-menu').css('opacity', 1).show();
-    settingsMenu();
+    settingsOpen = false;
+    $('.settings-menu').hide();
+    $('.settings').css({ 'color': 'var(--colorText)' });
 }
 
 // Checks if URL is formatted correctly, then imports it into the map
@@ -1859,7 +1952,9 @@ var highscoreFunc = function() {
     $('.username').focus();
     highscoreMenuOpen = true;
     $('#highscore-menu').css('opacity', 1).show();
-    settingsMenu();
+    settingsOpen = false;
+    $('.settings-menu').hide();
+    $('.settings').css({ 'color': 'var(--colorText)' });
 }
 
 // Sets username for the highscores
@@ -1874,7 +1969,7 @@ var highscoreOptIn = function() {
         } else {
             setTimeout(function() {
                 setUsername(oldUsername);
-                $('.highscoretoggle').text('Change chunk stats username');
+                $('.highscoretoggle').text('Change chunk stats username<i class="pic fas fa-trophy"></i>');
                 $('#highscore-menu').css({ 'opacity': 0 }).hide();
                 $('#highscore-menu2').css({ 'opacity': 1 }).show();
                 $('#populateButton').attr({ 'href': 'https://chunk-stats.web.app/user/' + userName });
@@ -1945,8 +2040,7 @@ var unlockEntry = function() {
                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 0).show();
                     roll2On && $('.roll2').css('opacity', 0).show();
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
-                    rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
-                    rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                    $('.open-manual-outer-container').css('opacity', 0).show();
                     rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                     $('#entry-menu').animate({ 'opacity': 0 });
                     setTimeout(function() {
@@ -1955,8 +2049,7 @@ var unlockEntry = function() {
                         $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').animate({ 'opacity': 1 });
                         roll2On && $('.roll2').animate({ 'opacity': 1 });
                         !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
-                        rules['Manually Add Tasks'] && $('.open-manual-container').animate({ 'opacity': 1 });
-                        rules['Random Event Loot'] && $('.open-random-container').animate({ 'opacity': 1 });
+                        $('.open-manual-outer-container').animate({ 'opacity': 1 });
                         rules['Manually Complete Tasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
                         $('#unlock-entry').prop('disabled', false).html('Unlock');
                         locked = false;
@@ -1994,8 +2087,7 @@ var unlockEntry = function() {
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 0).show();
                             roll2On && $('.roll2').css('opacity', 0).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
-                            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
-                            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                            $('.open-manual-outer-container').css('opacity', 0).show();
                             rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                             $('#entry-menu').animate({ 'opacity': 0 });
                             setTimeout(function() {
@@ -2004,8 +2096,7 @@ var unlockEntry = function() {
                                 $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').animate({ 'opacity': 1 });
                                 roll2On && $('.roll2').animate({ 'opacity': 1 });
                                 !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
-                                rules['Manually Add Tasks'] && $('.open-manual-container').animate({ 'opacity': 1 });
-                                rules['Random Event Loot'] && $('.open-random-container').animate({ 'opacity': 1 });
+                                $('.open-manual-outer-container').animate({ 'opacity': 1 });
                                 rules['Manually Complete Tasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
                                 $('#unlock-entry').prop('disabled', false).html('Unlock');
                                 locked = false;
@@ -2130,8 +2221,7 @@ var accessMap = function() {
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 1).show();
                             roll2On && $('.roll2').css('opacity', 1).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
-                            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
-                            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 1).show();
+                            $('.open-manual-outer-container').css('opacity', 1).show();
                             rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
                             setupMap();
                         }).catch((error) => {
@@ -2177,8 +2267,7 @@ var accessMap = function() {
                                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 1).show();
                                     roll2On && $('.roll2').css('opacity', 1).show();
                                     !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
-                                    rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
-                                    rules['Random Event Loot'] && $('.open-random-container').css('opacity', 1).show();
+                                    $('.open-manual-outer-container').css('opacity', 1).show();
                                     rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
                                     setupMap();
                                 }).catch((error) => {
@@ -2267,7 +2356,7 @@ var changePin = function() {
 
 // Unpicks a random unlocked chunk
 var unpick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || $('.unlocked').length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || $('.unlocked').length < 1) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -2309,7 +2398,7 @@ var unpick = function() {
 // Opens/closes the settings menu
 var settingsMenu = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
-    settingsOpen = !settingsOpen;
+        settingsOpen = !settingsOpen;
         if (settingsOpen) {
             $('.settings-menu').show();
             $('.settings').css({ 'color': 'rgb(150, 150, 150)' });
@@ -2341,8 +2430,7 @@ var enableTestMode = function() {
         loadData();
     } else {
         unlockChallenges();
-        rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
-        rules['Random Event Loot'] && $('.open-random-container').css('opacity', 1).show();
+        $('.open-manual-outer-container').css('opacity', 1).show();
         rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
     }
     settingsMenu();
@@ -2370,6 +2458,7 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--color8", "rgb(61, 65, 74)");
         $("body").get(0).style.setProperty("--color9", "rgb(46, 50, 59)");
         $("body").get(0).style.setProperty("--colorText", "rgb(201, 209, 217)");
+        $("body").get(0).style.setProperty("--colorTextAlt", "rgb(181, 189, 197)");
         $("body").get(0).style.setProperty("--colorLink", "rgb(88, 166, 255)");
         $("body").get(0).style.setProperty("--colorFlash", "rgba(150, 150, 0, 0.7)");
         $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
@@ -2386,6 +2475,7 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--color8", "rgb(150, 150, 150)");
         $("body").get(0).style.setProperty("--color9", "rgb(120, 120, 120)");
         $("body").get(0).style.setProperty("--colorText", "rgb(0, 0, 0)");
+        $("body").get(0).style.setProperty("--colorTextAlt", "rgb(30, 30, 30)");
         $("body").get(0).style.setProperty("--colorLink", "rgb(0, 0, 255)");
         $("body").get(0).style.setProperty("--colorFlash", "rgba(255, 255, 0, 0.7)");
         $("body").get(0).style.setProperty("--colorBox", "rgba(150, 150, 150, .6)");
@@ -2540,8 +2630,7 @@ var setupMap = function() {
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
-            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).hide();
-            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).hide();
+            $('.open-manual-outer-container').css('opacity', 0).hide();
             rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
             $('.pin.entry').focus();
         } else {
@@ -2553,8 +2642,7 @@ var setupMap = function() {
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .taskstoggle').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
-            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).hide();
-            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).hide();
+            $('.open-manual-outer-container').css('opacity', 0).hide();
             rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
@@ -2589,7 +2677,7 @@ var selectNeighbors = function(el) {
     for (var i = 0; i < 4; i++) {
         if (ops[i].substring(1, 2) === 'x') {
             num = (i - 1) * 2 + 1;
-            if (Math.floor((parseInt(el.id) + num) / rowSize) === Math.floor(parseInt(el.id) / rowSize) && $(`#${parseInt(el.id) + num}`).hasClass('gray')) {
+            if (Math.floor((parseInt(el.id) + num) / rowSize) === Math.floor(parseInt(el.id) / rowSize) && $(`#${parseInt(el.id) + num}`).hasClass('gray') && (!settings['walkableRollable'] || chunkInfo['walkableChunks'].includes($($(`#${parseInt(el.id) + num}`).children('.chunkId')[0]).text()))) {
                 if (selectedNum > 999) {
                     $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
@@ -2606,7 +2694,7 @@ var selectNeighbors = function(el) {
             }
         } else {
             num = ((i - 3) * 2 + 1) * rowSize;
-            if (parseInt(el.id) + num >= 0 && parseInt(el.id) + num < fullSize && $(`#${parseInt(el.id) + num}`).hasClass('gray')) {
+            if (parseInt(el.id) + num >= 0 && parseInt(el.id) + num < fullSize && $(`#${parseInt(el.id) + num}`).hasClass('gray') && (!settings['walkableRollable'] || chunkInfo['walkableChunks'].includes($($(`#${parseInt(el.id) + num}`).children('.chunkId')[0]).text()))) {
                 if (selectedNum > 999) {
                     $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span class="label extralong">' + selectedNum + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
@@ -2632,24 +2720,24 @@ var updateScrollPos = function(e) {
     }
     let newScrollLeft = prevScrollLeft - (clickX - e.pageX);
     let newScrollTop = prevScrollTop - (clickY - e.pageY);
-    if (newScrollLeft > 300) {
-        newScrollLeft = 300;
-        prevScrollLeft = 300;
+    if (newScrollLeft > 400) {
+        newScrollLeft = 400;
+        prevScrollLeft = 400;
         clickX = e.pageX;
     }
-    if (newScrollTop > 350) {
-        newScrollTop = 350;
-        prevScrollTop = 350;
+    if (newScrollTop > 450) {
+        newScrollTop = 450;
+        prevScrollTop = 450;
         clickY = e.pageY;
     }
-    if (newScrollLeft + $('.imgDiv').width() + 300 < window.innerWidth) {
-        newScrollLeft = -$('.imgDiv').width() + window.innerWidth - 300;
-        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 300;
+    if (newScrollLeft + $('.imgDiv').width() + 400 < window.innerWidth) {
+        newScrollLeft = -$('.imgDiv').width() + window.innerWidth - 400;
+        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 400;
         clickX = e.pageX;
     }
-    if (newScrollTop + $('.imgDiv').height() + 300 < window.innerHeight) {
-        newScrollTop = -$('.imgDiv').height() + window.innerHeight - 300;
-        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 300;
+    if (newScrollTop + $('.imgDiv').height() + 400 < window.innerHeight) {
+        newScrollTop = -$('.imgDiv').height() + window.innerHeight - 400;
+        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 400;
         clickY = e.pageY;
     }
     $('.imgDiv').css({ left: newScrollLeft, top: newScrollTop });
@@ -2662,17 +2750,17 @@ var scrollToPos = function(x, y, xPart, yPart, doQuick) {
     zoom = $('.imgDiv').width();
     prevScrollLeft = -$('#' + (y * rowSize + x)).position().left + window.innerWidth / 2 - $('#' + (rowSize + 1)).position().left * (xPart + .5);
     prevScrollTop = -$('#' + (y * rowSize + x)).position().top + window.innerHeight / 2 - $('#' + (rowSize + 1)).position().top * (yPart + .5);
-    if (prevScrollLeft > 100) {
-        prevScrollLeft = 100;
+    if (prevScrollLeft > 400) {
+        prevScrollLeft = 400;
     }
-    if (prevScrollTop > 150) {
-        prevScrollTop = 150;
+    if (prevScrollTop > 450) {
+        prevScrollTop = 450;
     }
-    if (prevScrollLeft + $('.imgDiv').width() + 100 < window.innerWidth) {
-        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 100;
+    if (prevScrollLeft + $('.imgDiv').width() + 400 < window.innerWidth) {
+        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 400;
     }
-    if (prevScrollTop + $('.imgDiv').height() + 100 < window.innerHeight) {
-        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 100;
+    if (prevScrollTop + $('.imgDiv').height() + 400 < window.innerHeight) {
+        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 400;
     }
     doQuick ? $('.imgDiv').css({ left: prevScrollLeft, top: prevScrollTop }) : $('.imgDiv').animate({ left: prevScrollLeft, top: prevScrollTop });
 }
@@ -2982,7 +3070,7 @@ var calcCurrentChallenges = function() {
         $('.unlocked').each(function() {
             chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
         });
-        myWorker.postMessage(['current', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources]);
+        myWorker.postMessage(['current', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked]);
         workerOut++;
     }
 }
@@ -3009,7 +3097,11 @@ setupCurrentChallenges = function(tempChallengeArr) {
         challengeArr = [];
         rules['Show Skill Tasks'] && challengeArr.push(`<div class="marker marker-skill noscroll" onclick="expandActive('skill')"><i class="expand-button fas ${activeSubTabs['skill'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Skill Tasks</span></div>`);
         rules['Show Skill Tasks'] && Object.keys(tempChallengeArr).sort().forEach(skill => {
-            !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge skill-challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + (!testMode && (viewOnly || inEntry || locked) ? '' : ' <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + `</div>`);
+            if (!!tempChallengeArr[skill] && !!altChallenges[skill] && altChallenges[skill].hasOwnProperty(chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'])) {
+                !!altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']] && challengeArr.push(`<div class="challenge skill-challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + (!testMode && (viewOnly || inEntry || locked) ? '' : ' <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']] + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + `</div>`);
+            } else {
+                !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge skill-challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + (!testMode && (viewOnly || inEntry || locked) ? '' : ' <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + `</div>`);
+            }
         });
         rules['Show Skill Tasks'] && Object.keys(highestCurrent).forEach(skill => {
             if (!!checkedChallenges[skill] && Object.keys(checkedChallenges[skill])[0] === highestCurrent[skill]) {
@@ -3021,7 +3113,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
     !!globalValids['BiS'] && Object.keys(globalValids['BiS']).length > 0 && rules['Show Best in Slot Tasks'] && challengeArr.push(`<div class="marker marker-bis noscroll" onclick="expandActive('bis')"><i class="expand-button fas ${activeSubTabs['bis'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">BiS Tasks</span></div>`);
     !!globalValids['BiS'] && rules['Show Best in Slot Tasks'] && Object.keys(globalValids['BiS']).forEach(challenge => {
         challenge = challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I');
-        if ((!backlog['BiS'] || !backlog['BiS'].hasOwnProperty(challenge)) && (!completedChallenges['BiS'] || !completedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J')])) {
+        if ((!backlog['BiS'] || !backlog['BiS'].hasOwnProperty(challenge)) && (!completedChallenges['BiS'] || !completedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J')]) && Object.values(highestOverall).map(function(y) { return y.toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') }).includes(challenge.split('|')[1].toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))) {
             challengeArr.push(`<div class="challenge bis-challenge noscroll ${'BiS-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J')]) && 'hide-backlog'} ${!activeSubTabs['bis'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J')]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges']['BiS'][challenge.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',')]['Label'] + ']</b> <span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + (!testMode && (viewOnly || inEntry || locked) ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'BiS' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
         }
     });
@@ -3039,7 +3131,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
     !!globalValids['Diary'] && Object.keys(globalValids['Diary']).length > 0 && rules['Show Diary Tasks'] && challengeArr.push(`<div class="marker marker-diary noscroll" onclick="expandActive('diary')"><i class="expand-button fas ${activeSubTabs['diary'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Diary Tasks</span></div>`);
     !!globalValids['Diary'] && rules['Show Diary Tasks'] && Object.keys(globalValids['Diary']).forEach(challenge => {
         challenge = challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I');
-        if ((!backlog['Diary'] || !backlog['Diary'].hasOwnProperty(challenge)) && (!completedChallenges['Diary'] || !completedChallenges['Diary'][challenge]) && globalValids['Diary'][challenge]) {
+        if ((!backlog['Diary'] || !backlog['Diary'].hasOwnProperty(challenge)) && (!completedChallenges['Diary'] || !completedChallenges['Diary'][challenge]) && globalValids['Diary'][challenge] && (!rules['Show Diary Tasks Complete'] || chunkInfo['challenges']['Diary'][challenge].hasOwnProperty('Reward'))) {
             challengeArr.push(`<div class="challenge diary-challenge noscroll ${'Diary-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) && 'hide-backlog'} ${!activeSubTabs['diary'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Diary] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + (!testMode && (viewOnly || inEntry || locked) ? '' : '</span> <span class="burger noscroll" onclick="openActiveContextMenu(' + "`" + challenge + "`, " + "`" + 'Diary' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>');
         }
     });
@@ -3149,7 +3241,7 @@ var calcFutureChallenges = function() {
         });
         i++;
     }
-    myWorker.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources]);
+    myWorker.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked]);
     workerOut++;
 }
 
@@ -3295,6 +3387,8 @@ var setCalculating = function(panelClass) {
 
 // Opens the add random event loot modal
 var openRandomAdd = function() {
+    manualOuterModalOpen = false;
+    $('#myModal20').hide();
     randomModalOpen = true;
     $('#random-data').html('<div><div class="random-list" onclick="openRandomList()">Show Added Items</div><div class="random-cancel" onclick="addRandomLoot(true)">Cancel</div><div class="random-proceed disabled" onclick="addRandomLoot()">Add item</div></div>');
     $('#random-dropdown').empty().append(`<option value='${'Select an item'}'>${'Select an item'}</option>`);
@@ -3361,8 +3455,116 @@ var addRandomLoot = function(close) {
     }
 }
 
+// Opens the add locked slayer task modal
+var openSlayerLocked = function() {
+    slayerLockedModalOpen = true;
+    $('#slayer-locked-input').val('');
+    $('#slayer-locked-data').html('<div><div class="slayer-locked-cancel" onclick="addSlayerLocked(true)">Cancel</div><div class="slayer-locked-proceed disabled" onclick="addSlayerLocked()">Lock Slayer</div></div>');
+    $('#slayer-locked-dropdown').empty().append(`<option value='${'Select a task'}'>${'Select a task'}</option>`);
+    $('#slayer-locked-dropdown').append(`<option value="${'Manually Locked'}">${"Manually Locked"}</option>`);
+    Object.keys(slayerTasks).forEach(task => {
+        $('#slayer-locked-dropdown').append(`<option value="${task}">${task}</option>`);
+    });
+    $('#myModal22').show();
+}
+
+// Triggers onchange of slayer locked selection to validate submit button
+var slayerLockedChange = function() {
+    let val = $('#slayer-locked-dropdown').val();
+    let val2 = $('#slayer-locked-input').val();
+    if (val !== 'Select a task') {
+        if (!!val2 && parseInt(val2) !== NaN && parseInt(val2) >= 0 && parseInt(val2) <= 99 && parseInt(val2) % 1 === 0) {
+            $('.slayer-locked-proceed').removeClass('disabled');
+        } else {
+            $('.slayer-locked-proceed').addClass('disabled');
+        }
+    } else {
+        $('.slayer-locked-proceed').addClass('disabled');
+    }
+}
+
+// Submits picked slayer task/level if one is chosen, then closes modal either way
+var addSlayerLocked = function(close) {
+    if (close) {
+        $('#myModal22').hide();
+        slayerLockedModalOpen = false;
+    } else {
+        let task = $('#slayer-locked-dropdown').val();
+        let level = !!$('#slayer-locked-input').val() ? parseInt($('#slayer-locked-input').val()) : NaN;
+        if (task !== 'Select a task' && level !== NaN && level >= 0 && level <= 99 && level % 1 === 0) {
+            if (task !== '') {
+                slayerLocked = {};
+                slayerLocked['monster'] = task;
+                slayerLocked['level'] = level;
+                !onMobile && setCalculating('.panel-active');
+                !onMobile && calcCurrentChallenges();
+                setData();
+            }
+            $('#myModal22').hide();
+            slayerLockedModalOpen = false;
+        }
+    }
+}
+
+// Opens the outer manual modal
+var openManualAddOuter = function() {
+    manualOuterModalOpen = true;
+    $('#myModal20').show();
+}
+
+// Opens the manual add monsters modal
+var openMonstersAdd = function() {
+    manualOuterModalOpen = false;
+    $('#myModal20').hide();
+    monsterModalOpen = true;
+    $('#myModal21').show();
+    $('#searchMonsters').val('').focus();
+    searchMonsters();
+}
+
+// Searches for matching names within monsters
+var searchMonsters = function() {
+    let searchTemp = $('#searchMonsters').val().toLowerCase();
+    $('.monsters-data').empty();
+    let monstersList = {...chunkInfo['drops'], ...chunkInfo['skillItems']['Slayer']};
+    if ((Object.keys(monstersList).length > 0 && Object.keys(monstersList).filter(monster => monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp)).length <= 200) || filterByCheckedMonsters) {
+        Object.keys(monstersList).filter(monster => monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp) && (!filterByCheckedMonsters || (!!manualMonsters && !!manualMonsters[monster]))).length > 0 && Object.keys(monstersList).filter(monster => monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp) && (!filterByCheckedMonsters || (!!manualMonsters && !!manualMonsters[monster]))).sort().forEach(monster => {
+            $('.monsters-data').append(`<div class="search-monsters-result noscroll"><span class='noscroll'><input class="noscroll" ${!!manualMonsters && !!manualMonsters[monster] && "checked"} type="checkbox" onclick="checkOffMonster('` + monster.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\~/g, '').replaceAll(/\|/g, '').replaceAll(' ', '_').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '-2P').replaceAll(/\)/g, '-2Q') + `')" /><a class='noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replace(/[!'()*]/g, escape))}' target='_blank'>${monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</a></span></div>`);
+        });
+    } else if (Object.keys(monstersList).length > 0) {
+        $('.monsters-data').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">Too many results (${Object.keys(monstersList).filter(monster => monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp)).length})</span><br /><span class="noscroll bottomline">Try refining your search to narrow down the results.</span></span></div>`);
+    }
+    if ($('.monsters-data').children().length === 0) {
+        $('.monsters-data').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No results found (0)</span></span></div>`);
+    }
+}
+
+// Toggle filtering of monsters by checked-only
+var changeMonstersFilterBy = function() {
+    filterByCheckedMonsters = !filterByCheckedMonsters;
+    searchMonsters();
+}
+
+// Checks off the given monster
+var checkOffMonster = function(monster) {
+    monster = monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')');
+    if (!manualMonsters[monster.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')]) {
+        manualMonsters[monster.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')] = true;
+    } else {
+        delete manualMonsters[monster.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')];
+        if (!manualMonsters) {
+            delete manualMonsters;
+        }
+    }
+    setData();
+    !onMobile && setCalculating('.panel-active');
+    !onMobile && calcCurrentChallenges();
+}
+
 // Opens the manual add tasks modal
 var openManualAdd = function() {
+    manualOuterModalOpen = false;
+    $('#myModal20').hide();
     fullChallengeArr = {};
     Object.keys(chunkInfo['challenges']).forEach(skill => {
         if (skill !== 'Nonskill') {
@@ -3379,7 +3581,7 @@ var openManualAdd = function() {
     if (Object.keys(fullChallengeArr).length <= 100) {
         Object.keys(fullChallengeArr).sort().forEach(challenge => {
             if (!filterByChecked || (!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge])) {
-                $('.challenge-data').append(`<div class="noscroll result-item"><input class="noscroll" ${!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge] && "checked"} type="checkbox" onclick="addManualTask('` + challenge.replaceAll(/\'/g, '-2H') + `')" />` + challenge.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '') + `</div>`);
+                $('.challenge-data').append(`<div class="noscroll result-item"><input class="noscroll" ${!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge] && "checked"} type="checkbox" onclick="addManualTask('` + challenge.replaceAll(/\'/g, '-2H') + `')" />` + challenge.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '') + `<span onclick="showDetails('` + challenge.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '') + `', '`+ fullChallengeArr[challenge][0] + `', '')"><i class="info-icon fas fa-info-circle"></i></span></div>`);
             }
         });
     } else {
@@ -3399,7 +3601,7 @@ var searchManualTasks = function() {
     if (Object.keys(fullChallengeArr).filter(challenge => challenge.toLowerCase().replaceAll('~', '').replaceAll('|', '').includes(searchTemp)).length <= 100 || filterByChecked) {
         Object.keys(fullChallengeArr).filter(challenge => challenge.toLowerCase().replaceAll('~', '').replaceAll('|', '').includes(searchTemp)).sort().forEach(challenge => {
             if (!filterByChecked || (!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge])) {
-                $('.challenge-data').append(`<div class="noscroll result-item"><input class="noscroll" ${!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge] && "checked"} type="checkbox" onclick="addManualTask('` + challenge.replaceAll(/\'/g, '-2H') + `')" />` + challenge.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '') + `</div>`);
+                $('.challenge-data').append(`<div class="noscroll result-item"><input class="noscroll" ${!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge] && "checked"} type="checkbox" onclick="addManualTask('` + challenge.replaceAll(/\'/g, '-2H') + `')" />` + challenge.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '') + `<span onclick="showDetails('` + challenge.replaceAll(/\'/g, '-2H') + `', '`+ fullChallengeArr[challenge][0] + `', '')"><i class="info-icon fas fa-info-circle"></i></span></div>`);
             }
         });
     } else {
@@ -3537,6 +3739,8 @@ var openHighest = function() {
         let primarySkill = [];
         if (rules['Show Skill Tasks']) {
             combatStyles.push('Skills');
+            combatStyles.push('Slayer');
+            combatStyles.push('Clues');
             skillNames.forEach(skill => {
                 primarySkill[skill] = checkPrimaryMethod(skill, globalValids, baseChunkData);
             });
@@ -3557,16 +3761,33 @@ var openHighest = function() {
         if (rules['Show Best in Slot Flinching Tasks']) {
             combatStyles.push('Flinch');
         }
+        if (rules['Show Best in Slot Weight Tasks']) {
+            combatStyles.push('Weight Reducing');
+        }
         let slots = ['Head', 'Neck', 'Cape', 'Body', 'Legs', 'Weapon', 'Shield', 'Ammo', 'Hands', 'Feet', 'Ring'];
         $('.highest-title').empty();
         $('.highest-data').empty();
         combatStyles.forEach(combatStyle => {
             $('.highest-title').append(`<div class='noscroll style-button ${combatStyle.replaceAll(' ', '_')}-button' onclick='switchHighestTab("${combatStyle.replaceAll(' ', '_')}")' title='${combatStyle}'><span class='noscroll'><img class='noscroll slot-icon' src='./resources/${combatStyle.replaceAll(' ', '_')}_combat.png' /></span></div>`);
-            $('.highest-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle} ${(testMode || !(viewOnly || inEntry || locked)) && combatStyle !== 'Skills' ? `<div class='noscroll'><span class='noscroll addEquipment' onclick='addEquipment()'>Add additional equipment</span></div>` : ''}</div></div>`);
+            $('.highest-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle} ${(testMode || !(viewOnly || inEntry || locked)) && combatStyle !== 'Skills' && combatStyle !== 'Slayer' ? `<div class='noscroll'><span class='noscroll addEquipment' onclick='addEquipment()'>Add additional equipment</span></div>` : ''}</div></div>`);
             if (combatStyle === 'Skills') {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll icon-table-header'>Skill</span><span class='noscroll text-table-header'>Highest Task</span><span class='noscroll button-table-header'>Primary Training</span></div>`);
                 skillNames.filter(skill => { return skill !== 'Combat' }).sort().forEach(skill => {
-                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text'>${(!!highestOverall[skill] ? '<b class="noscroll">[' + chunkInfo['challenges'][skill][highestOverall[skill]]['Level'] + ']</b> ' : '') + (highestOverall[skill] || 'None').replaceAll('~', '').replaceAll('|', '')}</span><span class='noscroll skill-button ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll' onclick='viewPrimaryMethods("${skill}")'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}</div>`);
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text'>${(!!highestOverall[skill] ? '<b class="noscroll">[' + chunkInfo['challenges'][skill][highestOverall[skill]]['Level'] + ']</b> ' : '') + (highestOverall[skill] || 'None').replaceAll('~', '').replaceAll('|', '')}</span><span class='noscroll skill-button ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll methods-button' onclick='viewPrimaryMethods("${skill}")'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}</div>`);
+                });
+            } else if (combatStyle === 'Slayer') {
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-header'>Slayer is currently <b class='noscroll slayer-locked-status ${!!slayerLocked ? 'red' : 'green'}'>${!!slayerLocked ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-unlock"></i>'} ${!!slayerLocked ? 'LOCKED' : 'UNLOCKED'}</b> ${!!slayerLocked ? '(' + `<a class='noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(slayerLocked['monster'].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replace(/[!'()*]/g, escape))}' target='_blank'>${slayerLocked['monster'].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</a>` + ')' : ''} ${!!slayerLocked ? ' at Level ' + slayerLocked['level'] : ''}</div>`);
+                (testMode || !(viewOnly || inEntry || locked)) && !!slayerLocked && $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-unlock-container'><span class='noscroll slayer-unlock-button' onclick='unlockSlayer()'><i class="fas fa-unlock"></i>Manually Unlock</span></div>`);
+                (testMode || !(viewOnly || inEntry || locked)) && $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-lock-container'><span class='noscroll slayer-lock-button' onclick='openSlayerLocked()'>${!!slayerLocked ? '<i class="fas fa-edit"></i>' : '<i class="fas fa-lock"></i>'}${!!slayerLocked ? 'Change Locked Monster' : 'Lock Slayer'}</span></div>`);
+            } else if (combatStyle === 'Clues') {
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll tier-table-header'>Tier</span><span class='noscroll possible-table-header'>Possible Steps</span><span class='noscroll percent-table-header'>% to Complete a Clue</span></div>`);
+                clueTiers.forEach(tier => {
+                    let chance = 0;
+                    let baseChance = (numClueTasksPossible[tier.toLowerCase()] / numClueTasks[tier.toLowerCase()]);
+                    Object.keys(clueStepAmounts[tier]).forEach(numSteps => {
+                        chance += Math.pow(baseChance, parseInt(numSteps)) * clueStepAmounts[tier][numSteps];
+                    });
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll clue-tier'><img class='noscroll tier-icon' src='./resources/${tier}_clue.png' title='${tier}' />${tier}</span><span class='noscroll clue-possible'>${numClueTasksPossible[tier.toLowerCase()]} / ${numClueTasks[tier.toLowerCase()]} (${Math.round((baseChance * 100) * 100) / 100}%)</span><span class='noscroll clue-percent'> ${(Math.round((chance * 100) * 100) / 100).toLocaleString(undefined, {minimumIntegerDigits: 2, minimumFractionDigits: 2})}%</span></div>`);
                 });
             } else {
                 slots.forEach(slot => {
@@ -3585,6 +3806,26 @@ var openHighest = function() {
         $(`.${combatStyles[0]}-body`).show();
         $('#myModal12').show();
         document.getElementById('highest-data').scrollTop = 0;
+    }
+}
+
+// Unlocks training Slayer
+var unlockSlayer = function() {
+    slayerLocked = null;
+    setData();
+    !onMobile && setCalculating('.panel-active');
+    !onMobile && calcCurrentChallenges();
+}
+
+// Checks if slayer locked monster is unlocked
+var checkSlayerLocked = function() {
+    if (!!slayerLocked && !!slayerTasks && slayerTasks.hasOwnProperty(slayerLocked['monster'])) {
+        !!slayerTasks[slayerLocked['monster']] && Object.keys(slayerTasks[slayerLocked['monster']]).forEach(monster => {
+            if (!!baseChunkData['monsters'] && baseChunkData['monsters'].hasOwnProperty(monster)) {
+                unlockSlayer();
+                return;
+            }
+        });
     }
 }
 
@@ -3701,7 +3942,7 @@ var searchBacklogSources = function() {
     }
 }
 
-// Toggle filtering of equipment by checked-only
+// Toggle filtering of sources by checked-only
 var changeSourcesFilterBy = function() {
     filterByCheckedSources = !filterByCheckedSources;
     searchBacklogSources();
@@ -3913,6 +4154,30 @@ var closeSticker = function() {
 var closeBacklogSources = function() {
     backlogSourcesModalOpen = false;
     $('#myModal17').hide();
+}
+
+// Closes the chunk history modal
+var closeChunkHistory = function() {
+    chunkHistoryModalOpen = false;
+    $('#myModal18').hide();
+}
+
+// Closes the challenge alts modal
+var closeChallengeAlts = function() {
+    challengeAltsModalOpen = false;
+    $('#myModal19').hide();
+}
+
+// Closes the outer add modal
+var closeOuterAdd = function() {
+    manualOuterModalOpen = false;
+    $('#myModal20').hide();
+}
+
+// Closes the monsters add modal
+var closeMonstersAdd = function() {
+    monsterModalOpen = false;
+    $('#myModal21').hide();
 }
 
 // Manually completes checked-off tasks
@@ -4149,7 +4414,11 @@ var showDetails = function(challenge, skill, type) {
         !!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key].forEach(el => {
             let formattedSource = '';
             if (key === 'ChunksDetails') {
-                formattedSource = '   ';
+                if (!!el.match(/[0-9]+/g) && $('.box > .chunkId:contains(' + el.match(/[0-9]+/g)[0] + ')').filter(function() { return parseInt($(this).text()) === parseInt(el.match(/[0-9]+/g)[0]); }).parent().hasClass('unlocked')) {
+                    formattedSource = '   ';
+                } else if (possibleAreas[el]) {
+                    formattedSource = '   ';
+                }
             } else if (!!baseChunkDataIn[key.split('Details')[0].toLowerCase()]) {
                 formattedSource = ': ';
                 !!baseChunkDataIn[key.split('Details')[0].toLowerCase()][el] && Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).forEach(source => {
@@ -4190,6 +4459,9 @@ var showDetails = function(challenge, skill, type) {
             if (formattedSource !== '') {
                 written = true;
                 $('#details-data').append(`<span class="noscroll"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><span class="noscroll">${formattedSource}</span><br />`);
+            } else {
+                written = true;
+                $('#details-data').append(`<span class="noscroll red"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><br />`);
             }
         });
         if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'")][key].length === 0 || !written) {
@@ -4198,6 +4470,48 @@ var showDetails = function(challenge, skill, type) {
     });
     $('#myModal2').show();
     document.getElementById('details-data').scrollTop = 0;
+}
+
+// Shows challenge alternatives
+var showAlternatives = function(challenge, skill, type) {
+    challengeAltsModalOpen = true;
+    $('#alts-data').empty();
+    !!globalValids[skill] && Object.keys(globalValids[skill]).forEach(chal => {
+        if (globalValids[skill][chal] === globalValids[skill][challenge]) {
+            if (skill === 'BiS') {
+                $('#alts-data').append(`<div class="alt-challenge noscroll ${skill + '-alt-challenge'}"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" ${(!!highestOverall && Object.values(highestOverall).map(function(y) { return y.toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') }).includes(chal.split('|')[1].toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))) ? "checked" : ''} class='noscroll' onclick="checkOffAltChallenge('${skill}', '${chal}', '${challenge}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">` + '<span class="inner noscroll">' + skill + '</b>: ' + chal.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((chal.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + chal.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + chal.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label></div>`);
+            } else if (skill !== 'Quest' && skill !== 'Diary' && skill !== 'Extra') {
+                $('#alts-data').append(`<div class="alt-challenge noscroll ${skill + '-alt-challenge'}"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" ${(chal === challenge) ? "checked" : ''} class='noscroll' onclick="checkOffAltChallenge('${skill}', '${chal}', '${challenge}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">` + '<span class="inner noscroll">' + skill + '</b>: ' + chal.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((chal.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + chal.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + chal.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label></div>`);
+            } else {
+                $('#alts-data').empty();
+                $('#alts-data').append(`<div class="alt-challenge noscroll ${skill + '-alt-challenge'}"><div class='noscroll results'><span class='noscroll holder'><span class='noscroll topline'>No Alternatives</span></span></div></div>`);
+            }
+        }
+    });
+    if (!$('#alts-data').children() || $('#alts-data').children().length < 2) {
+        $('#alts-data').empty();
+        $('#alts-data').append(`<div class='noscroll results'><span class='noscroll holder'><span class='noscroll topline'>No Alternatives</span></span></div>`);
+    }
+    $('#myModal19').show();
+}
+
+// Switches active challenge to alt
+var checkOffAltChallenge = function(skill, chal, mainChal) {
+    if (!altChallenges[skill]) {
+        altChallenges[skill] = {};
+    }
+    if (skill === 'BiS') {
+        Object.keys(highestOverall).forEach(key => {
+            if (highestOverall[key].toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') === mainChal.split('|')[1].toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')) {
+                altChallenges[skill][key] = chal.split('|')[1].toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+');
+            }
+        });
+    } else {
+        !!chunkInfo['challenges'][skill][chal] && (altChallenges[skill][chunkInfo['challenges'][skill][chal]['Level']] = chal);
+    }
+    !onMobile && setCalculating('.panel-active');
+    !onMobile && calcCurrentChallenges();
+    setData();
 }
 
 // Shows challenge notes
@@ -4251,6 +4565,7 @@ var showRules = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
         rulesModalOpen = true;
         $('#rules-data').empty();
+        $('#rules-data').append(`<div class="rule-category intro-category noscroll">Basic Rules</div><div class="rule-subcategory intro-subcategory noscroll">If you're unfamiliar with the basic rules of a OneChunkMan account, check out a basic description of the rules and guidelines <a class='noscroll' href='https://docs.google.com/document/d/1ia1wiRSYs8GznzHM5D7SynNG-PWM9-9Jv3JKGV6Y28Q' target='_blank'>here</a>!</div>`);
         if ((!viewOnly && !inEntry && !locked) || testMode) {
             $('#rules-data').append(`<div class="rule-category presets-category noscroll">Rule Presets</div><div class="rule-subcategory presets-subcategory noscroll">Pick a preset to get started, and then turn on and off different rules to suit your playstyle!</div><div id="rules-presets" class="rules-presets noscroll"></div>`);
             Object.keys(rulePresets).forEach(preset => {
@@ -4294,10 +4609,13 @@ var showSettings = function() {
             } else {
                 $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><label class="checkbox noscroll ${(viewOnly || inEntry || locked || settingStructure[category][setting] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${settings[setting] ? "checked" : ''} class='noscroll' onclick="checkOffSettings()" ${(viewOnly || inEntry || locked || settingStructure[category][setting] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${settingNames[setting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
             }
+            Array.isArray(settingStructure[category][setting]) && settingStructure[category][setting].forEach(subSetting => {
+                $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').append(`<div class="setting ${subSetting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting subsetting'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || settingStructure[category][subSetting] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${settings[subSetting] ? "checked" : ''} class='noscroll' onclick="checkOffSettings()" ${!testMode && (viewOnly || inEntry || locked || settingStructure[category][subSetting] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${settingNames[subSetting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
+            });
         });
     });
     document.getElementById('settings-data').scrollTop = 0;
-    checkOffSettings('startup');
+    checkOffSettings(false, 'startup');
     $('#myModal7').show();
     settingsMenu();
 }
@@ -4330,11 +4648,31 @@ var resetDefaultStickerColor = function() {
     changeDefaultStickerColor();
 }
 
+
+// Shows chunk history
+var showChunkHistory = function() {
+    chunkHistoryModalOpen = true;
+    $('#chunkhistory-data').empty();
+    let tempDate = new Date();
+    let newChunkOrder = {};
+    Object.keys(chunkOrder).sort(function(a, b) { return b - a }).forEach(time => {
+        if (!newChunkOrder.hasOwnProperty(chunkOrder[time])) {
+            newChunkOrder[chunkOrder[time]] = time;
+            tempDate.setTime(time);
+            $('#chunkhistory-data').append(`<div class="history-item ${chunkOrder[time] + '-chunk-history-item'} noscroll"><span class='noscroll item1'>${"<b class='noscroll'>" + tempDate.toLocaleDateString([], { year: 'numeric', month: 'long', day: '2-digit' }) + '</b> (' + tempDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) + ') '}</span><span class='noscroll item2'>${"<b class='noscroll'>" + ((chunkInfo['chunks'].hasOwnProperty(parseInt(chunkOrder[time])) && chunkInfo['chunks'][parseInt(chunkOrder[time])].hasOwnProperty('Nickname')) ? chunkInfo['chunks'][parseInt(chunkOrder[time])]['Nickname'] : 'Unknown chunk') + '</b>' + ' (' + chunkOrder[time] + ')'}</span></div>`);
+        }
+    });
+    document.getElementById('chunkhistory-data').scrollTop = 0;
+    $('#myModal18').show();
+    settingsMenu();
+}
+
 // Selects correct active context menu item
 var switchActiveContext = function(opt) {
     switch (opt) {
         case "backlog": backlogChallenge(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
         case "backlog note": showNotes(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
+        case "alternatives": showAlternatives(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
         case "details": showDetails(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
     }
     $(".active-context-menu").hide(100);
@@ -4613,21 +4951,35 @@ var checkOffRules = function(didRedo, startup) {
         setupCurrentChallenges(false);
         !onMobile && setCalculating('.panel-active');
         !onMobile && calcCurrentChallenges();
-        rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 1).show();
-        rules['Random Event Loot'] && $('.open-random-container').css('opacity', 1).show();
         rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
-        !rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).hide();
-        !rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).hide();
         !rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
         setData();
     }
 }
 
 // Marks checked off settings
-var checkOffSettings = function(startup) {
+var checkOffSettings = function(didRedo, startup) {
+    let redo = false;
     Object.keys(settings).forEach(setting => {
+        if (subSettingDefault[setting] && settings[setting] !== $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting input').prop('checked')) {
+            $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').children('.checkbox').children('.checkbox__input').children('input').prop('checked', subSettingDefault[setting]);
+            redo = true;
+        }
         if (setting !== 'completedTaskColor' && setting !== 'defaultStickerColor' && settingNames.hasOwnProperty(setting)) {
             settings[setting] = $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting input').prop('checked');
+        }
+        if ($('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').length) {
+            if (settings[setting] && (!(viewOnly || inEntry || locked) || testMode)) {
+                $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').children('.checkbox').removeClass('checkbox--disabled');
+                $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').children('.checkbox').children('.checkbox__input').children('input').prop('disabled', false);
+            } else {
+                $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').children('.checkbox').addClass('checkbox--disabled');
+                $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').children('.checkbox').children('.checkbox__input').children('input').prop('disabled', true);
+            }
+            if (!settings[setting]) {
+                $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').children('.checkbox').children('.checkbox__input').children('input').prop('checked', false);
+                redo = true;
+            }
         }
     });
     !!settingsStructureConflict && Object.keys(settingsStructureConflict).forEach(setting => {
@@ -4635,6 +4987,10 @@ var checkOffSettings = function(startup) {
             $('.' + subSetting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting input').prop('disabled', settings[setting]);
         });
     });
+    if (redo && !didRedo) {
+        checkOffSettings(true, startup);
+        return;
+    }
     toggleVisibility(settings['highvis'], startup);
     toggleDarkMode(settings['darkmode'], startup);
     toggleNeighbors(settings['neighbors'], startup);
@@ -4811,6 +5167,7 @@ var setCodeItems = function() {
     bossLogs = codeItems['bossLogs'];
     bossMonsters = codeItems['bossMonsters'];
     minigameShops = codeItems['minigameShops'];
+    slayerTasks = codeItems['slayerTasks'];
 }
 
 // Loads data from Firebase
@@ -4837,6 +5194,7 @@ var loadData = function(startup) {
             var chunks = snap.val()['chunks'];
             recent = snap.val()['recent'] || [];
             recentTime = snap.val()['recentTime'] || [];
+            chunkOrder = snap.val()['chunkOrder'] || [];
             settingsTemp['highvis'] = document.cookie.split(';').filter(function(item) {
                 return item.indexOf('highvis=true') >= 0
             }).length > 0;
@@ -4872,6 +5230,9 @@ var loadData = function(startup) {
             manualTasks = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualTasks'] ? snap.val()['chunkinfo']['manualTasks'] : {};
             manualEquipment = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualEquipment'] ? snap.val()['chunkinfo']['manualEquipment'] : {};
             backloggedSources = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['backloggedSources'] ? snap.val()['chunkinfo']['backloggedSources'] : {};
+            altChallenges = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['altChallenges'] ? snap.val()['chunkinfo']['altChallenges'] : {};
+            manualMonsters = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualMonsters'] ? snap.val()['chunkinfo']['manualMonsters'] : {};
+            slayerLocked = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['slayerLocked'] ? snap.val()['chunkinfo']['slayerLocked'] : null;
             settingsTemp['highscoreEnabled'] && enableHighscore('startup');
             settingsTemp['ids'] && toggleIds() && $('.box').addClass('quality');
             !settingsTemp['ids'] && $('.chunkId').hide();
@@ -4890,7 +5251,7 @@ var loadData = function(startup) {
 
             if (settingsTemp['highscoreEnabled']) {
                 userName = snap.val()['userName'];
-                $('.highscoretoggle').text('Change chunk stats username');
+                $('.highscoretoggle').html('Change chunk stats username<i class="pic fas fa-trophy"></i>');
             }
 
             !!rulesTemp && Object.keys(rulesTemp).forEach(rule => {
@@ -4987,8 +5348,6 @@ var loadData = function(startup) {
             chunkTasksOn && !onMobile && calcCurrentChallenges();
             startup && center('quick');
             if (!startup) {
-                rules['Manually Add Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-manual-container').css('opacity', 1).show() : $('.open-manual-container').css('opacity', 0).hide();
-                rules['Random Event Loot'] && !viewOnly && !inEntry && !locked ? $('.open-random-container').css('opacity', 1).show() : $('.open-random-container').css('opacity', 0).hide();
                 rules['Manually Complete Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
             }
             doneLoading();
@@ -5047,7 +5406,7 @@ var setData = function() {
                     return;
                 });
             } else {
-                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'randomStartAlways': settings['randomStartAlways'], 'defaultStickerColor': settings['defaultStickerColor'] });
+                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'randomStartAlways': settings['randomStartAlways'], 'defaultStickerColor': settings['defaultStickerColor'], 'walkableRollable': settings['walkableRollable'] });
                 Object.keys(rules).forEach(rule => {
                     if (rules[rule] === undefined) {
                         rules[rule] = false;
@@ -5067,6 +5426,9 @@ var setData = function() {
                 myRef.child('chunkinfo').update({ manualTasks });
                 myRef.child('chunkinfo').update({ manualEquipment });
                 myRef.child('chunkinfo').update({ backloggedSources });
+                myRef.child('chunkinfo').update({ altChallenges });
+                myRef.child('chunkinfo').update({ manualMonsters });
+                myRef.child('chunkinfo').update({ slayerLocked });
 
                 var tempJson = {};
                 Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
@@ -5134,6 +5496,9 @@ var setData = function() {
             myRef.child('chunkinfo').update({ manualTasks });
             myRef.child('chunkinfo').update({ manualEquipment });
             myRef.child('chunkinfo').update({ backloggedSources });
+            myRef.child('chunkinfo').update({ altChallenges });
+            myRef.child('chunkinfo').update({ manualMonsters });
+            myRef.child('chunkinfo').update({ slayerLocked });
 
             var tempJson = {};
             Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
@@ -5211,7 +5576,7 @@ function fixMapEdges(imageDiv) {
     var rightEdge = leftNumber + imageDiv.offsetWidth;
     var bottomEdge = topNumber + imageDiv.offsetHeight;
 
-    var margins = [150, 100, 100, 100];
+    var margins = [450, 400, 400, 400];
     if (topNumber > margins[0]) {
         prevScrollTop = margins[0];
         imageDiv.style.top = prevScrollTop + "px";
@@ -5297,8 +5662,7 @@ var changeLocked = function() {
                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle').css('opacity', 0).show();
                     roll2On && $('.roll2').css('opacity', 0).show();
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
-                    rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
-                    rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                    $('.open-manual-outer-container').css('opacity', 0).show();
                     rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                     $('.lock-box').animate({ 'opacity': 0 });
                     setTimeout(function() {
@@ -5306,8 +5670,7 @@ var changeLocked = function() {
                         $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle').animate({ 'opacity': 1 });
                         roll2On && $('.roll2').animate({ 'opacity': 1 });
                         !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
-                        rules['Manually Add Tasks'] && $('.open-manual-container').animate({ 'opacity': 1 });
-                        rules['Random Event Loot'] && $('.open-random-container').animate({ 'opacity': 1 });
+                        $('.open-manual-outer-container').animate({ 'opacity': 1 });
                         rules['Manually Complete Tasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
                         $('#lock-unlock').prop('disabled', false).html('Unlock');
                         locked = false;
@@ -5345,8 +5708,7 @@ var changeLocked = function() {
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle').css('opacity', 0).show();
                             roll2On && $('.roll2').css('opacity', 0).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
-                            rules['Manually Add Tasks'] && $('.open-manual-container').css('opacity', 0).show();
-                            rules['Random Event Loot'] && $('.open-random-container').css('opacity', 0).show();
+                            $('.open-manual-outer-container').css('opacity', 0).show();
                             rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                             $('.lock-box').animate({ 'opacity': 0 });
                             setTimeout(function() {
@@ -5354,8 +5716,7 @@ var changeLocked = function() {
                                 $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle').animate({ 'opacity': 1 });
                                 roll2On && $('.roll2').animate({ 'opacity': 1 });
                                 !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
-                                rules['Manually Add Tasks'] && $('.open-manual-container').animate({ 'opacity': 1 });
-                                rules['Random Event Loot'] && $('.open-random-container').animate({ 'opacity': 1 });
+                                $('.open-manual-outer-container').animate({ 'opacity': 1 });
                                 rules['Manually Complete Tasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
                                 $('#lock-unlock').prop('disabled', false).html('Unlock');
                                 locked = false;
