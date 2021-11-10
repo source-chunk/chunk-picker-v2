@@ -834,7 +834,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.8.0");
+const myWorker = new Worker("./worker.js?v=4.8.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3567,7 +3567,7 @@ var openManualAdd = function() {
     $('#myModal20').hide();
     fullChallengeArr = {};
     Object.keys(chunkInfo['challenges']).forEach(skill => {
-        if (skill !== 'Nonskill') {
+        if (skill !== 'Nonskill' && skill !== 'BiS') {
             Object.keys(chunkInfo['challenges'][skill]).forEach(challenge => {
                 if (!fullChallengeArr[challenge]) {
                     fullChallengeArr[challenge] = [];

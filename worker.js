@@ -110,7 +110,7 @@ var calcChallenges = function(chunks, baseChunkData) {
     let valids = calcChallengesWork(chunks, baseChunkData);
     Object.keys(manualTasks).forEach(skill => {
         Object.keys(manualTasks[skill]).forEach(challenge => {
-            if (!!chunkInfo['challenges'][skill][challenge]) {
+            if (!!chunkInfo['challenges'][skill] && !!chunkInfo['challenges'][skill][challenge]) {
                 if (!valids[skill]) {
                     valids[skill] = {};
                 }
