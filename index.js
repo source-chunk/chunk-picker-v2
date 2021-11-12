@@ -307,7 +307,7 @@ let ruleNames = {
     "Sorceress's Garden": "Allow Sorceress's Garden to count as primary training for training Farming",
     "Show Skill Tasks": "Show Skill Tasks (e.g. Get 43 Crafting to cut a diamond)",
     "Show Quest Tasks": "Show Quest Tasks (coming soon)",//
-    "Show Diary Tasks": "Show Diary Tasks",
+    "Show Diary Tasks": "Show Diary Tasks (coming soon)",
     "Show Best in Slot Tasks": "Show Best in Slot (Accuracy + Strength, or secondarily Defense) Tasks",
     "Show Best in Slot Prayer Tasks": "Show Best in Slot Tasks for Prayer-boosting gear",
     "Show Best in Slot Defensive Tasks": "Show Best in Slot Tasks for Tank gear (Melee/Ranged/Magic)",
@@ -834,7 +834,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.8.1");
+const myWorker = new Worker("./worker.js?v=4.8.2");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
