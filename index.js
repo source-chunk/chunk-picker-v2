@@ -834,7 +834,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.8.2");
+const myWorker = new Worker("./worker.js?v=4.8.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3622,13 +3622,13 @@ var changeFilterBy = function() {
 var addManualTask = function(challenge) {
     challenge = challenge.replaceAll(/\-2H/g, "'");
     fullChallengeArr[challenge].forEach(skill => {
-        if (!manualTasks[skill] || !manualTasks[skill][challenge]) {
+        if (skill !== 'BiS' && (!manualTasks[skill] || !manualTasks[skill][challenge])) {
             if (!manualTasks[skill]) {
                 manualTasks[skill] = {};
             }
             manualTasks[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'] || true;
             chunkInfo['challenges'][skill][challenge]['Manual'] = true;
-        } else {
+        } else if (skill !== 'BiS') {
             delete manualTasks[skill][challenge];
             delete chunkInfo['challenges'][skill][challenge]['Manual'];
             if (Object.keys(manualTasks[skill]).length === 0) {

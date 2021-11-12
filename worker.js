@@ -109,7 +109,7 @@ onmessage = function(e) {
 var calcChallenges = function(chunks, baseChunkData) {
     let valids = calcChallengesWork(chunks, baseChunkData);
     Object.keys(manualTasks).forEach(skill => {
-        Object.keys(manualTasks[skill]).forEach(challenge => {
+        skill !== 'BiS' && Object.keys(manualTasks[skill]).forEach(challenge => {
             if (!!chunkInfo['challenges'][skill] && !!chunkInfo['challenges'][skill][challenge]) {
                 if (!valids[skill]) {
                     valids[skill] = {};
@@ -226,7 +226,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         newValids = calcChallengesWork(chunks, baseChunkData);
         Object.keys(manualTasks).forEach(skill => {
-            Object.keys(manualTasks[skill]).forEach(challenge => {
+            skill !== 'BiS' && Object.keys(manualTasks[skill]).forEach(challenge => {
                 if (!!chunkInfo['challenges'][skill][challenge]) {
                     if (!newValids[skill]) {
                         newValids[skill] = {};
