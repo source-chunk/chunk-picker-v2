@@ -18789,12 +18789,12 @@
 				"ClueTier": "medium",
 				"ClueType": "Cecilia"
 			},
-			"Cecilia: Scorpia Dances": {
+			"Cecilia: Scorpia Dances (medium)": {
 				"Chunks": ["11828", "Scorpia's Lair"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia"
 			},
-			"Cecilia: Subterranea": {
+			"Cecilia: Subterranea (medium)": {
 				"Chunks": ["11828", "Subterranea+"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia"
@@ -18834,12 +18834,12 @@
 				"ClueTier": "hard",
 				"ClueType": "Cecilia"
 			},
-			"Cecilia: Scorpia Dances": {
+			"Cecilia: Scorpia Dances (hard)": {
 				"Chunks": ["11828", "Scorpia's Lair"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia"
 			},
-			"Cecilia: Subterranea": {
+			"Cecilia: Subterranea (hard)": {
 				"Chunks": ["11828", "Subterranea+"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia"
@@ -34239,28 +34239,31 @@
 				"Kourend & Kebos": "EA12"
 			},
 			"Monster": {
+				"Bear Cub": 1,
 				"Chicken": 8,
 				"Cow": 2,
 				"Cow calf": 1,
+				"Grizzly bear": 1,
 				"Rat": 5
 			},
 			"NPC": {
 				"Gordon": 1,
 				"Mary": 1,
-				"Shayzien archer": 1,
-				"Shayzien sergeant": 1,
-				"Shayzien soldier": 2
+				"Sergeant (Kebos Lowlands)": 1
 			},
 			"Nickname": "River Molch",
 			"Object": {
+				"Barrel of flour": 1,
 				"Cabbage": 12,
 				"Crate": 3,
+				"Dairy cow": 1,
 				"Drawers": 2,
 				"Fire": 2,
 				"Lizardman lair": 2,
 				"Maple tree": 5,
 				"Nettles": 10,
 				"Oak": 16,
+				"Onion": 16,
 				"Range": 1,
 				"Fishing spot (lure, bait)": 2,
 				"Shelves": 1,
@@ -34274,11 +34277,16 @@
 				"Getting Ahead": "first"
 			},
 			"Spawn": {
+				"Bucket": 2,
 				"Egg": 1,
 				"Feather": 1,
 				"Grey toy horsey": 1,
 				"Hammer": 1,
+				"Knife": 1,
 				"Needle": 1,
+				"Pot": 2,
+				"Pot of flour": 1,
+				"Saw": 1,
 				"Thread": 1,
 				"Tinderbox": 1
 			}
@@ -34315,9 +34323,7 @@
 				"Rosie": 1,
 				"Ruby harvest": 3,
 				"Sapphire glacialis": 2,
-				"Shayzien archer": 1,
-				"Shayzien sergeant": 1,
-				"Shayzien soldier": 2,
+				"Sergeant (Kebos Lowlands)": 1,
 				"Snowy knight": 2,
 				"Taylor": 1,
 				"Tool Leprechaun": 4
@@ -34491,9 +34497,7 @@
 			"NPC": {
 				"Crow": 2,
 				"Ek'ans Chan": 1,
-				"Shayzien archer": 1,
-				"Shayzien sergeant": 1,
-				"Shayzien soldier": 2
+				"Sergeant (Kebos Lowlands)": 1
 			},
 			"Nickname": "Molch",
 			"Object": {
@@ -38320,24 +38324,41 @@
 				"Ogre fire": 1
 			}
 		},
-		"8008": {
+		"8007": {
 			"Connect": {
+				"8008": true,
 				"10035": true
 			},
 			"Monster": {
-				"Dark beast": 19,
 				"Mourner%2FLevel 108": 4
 			},
 			"NPC": {
 				"Essyllt": 1,
 				"Gnome": 1,
-				"Mourner": 3,
+				"Mourner": 1
+			},
+			"Name": "Mourner Headquarters",
+			"Object": {
+				"Chest": 2,
+				"Closed Chest": 2
+			},
+			"Quest": {
+				"Mourning's End Part I": "step"
+			}
+		},
+		"8008": {
+			"Connect": {
+				"8007": true
+			},
+			"Monster": {
+				"Dark beast": 19
+			},
+			"NPC": {
+				"Mourner": 2,
 				"Slave": 4
 			},
 			"Name": "Mourner Tunnels & Temple of Light",
 			"Object": {
-				"Chest": 2,
-				"Closed Chest": 2,
 				"Fire": 1,
 				"Runite rock": 1
 			}
@@ -42615,7 +42636,7 @@
 		},
 		"10035": {
 			"Connect": {
-				"8008": true
+				"8007": true
 			},
 			"Monster": {
 				"Ghost": 2,
@@ -58182,6 +58203,9 @@
 			}
 		},
 		"14645": {
+			"Connect": {
+				"14745": true
+			},
 			"Monster": {
 				"Swamp Crab": 5
 			},
@@ -58426,6 +58450,16 @@
 			"Spawn": {
 				"Steel pickaxe": 1
 			}
+		},
+		"14745": {
+			"Connect": {
+				"14645": true
+			},
+			"Monster": {
+				"Spider (araxyte)%2FLevel 87": 17,
+				"Spider (araxyte)%2FLevel 123": 12
+			},
+			"Name": "Morytania Spider Nest"
 		},
 		"14746": {
 			"Connect": {
@@ -62307,29 +62341,46 @@
 				"Prospector Percy's Nugget Shop": true
 			}
 		},
-		"Mourner Tunnels & Temple of Light": {
+		"Mourner Headquarters": {
 			"Connect": {
-				"8519": true,
-				"8779": true,
-				"9369": true,
-				"9823": true,
+				"8008": true,
 				"10035": true
 			},
 			"Monster": {
-				"Dark beast": 19,
-				"Mourner%2FLevel 108": 4,
-				"Shadow": 94
+				"Mourner%2FLevel 108": 4
 			},
 			"NPC": {
 				"Essyllt": 1,
 				"Gnome": 1,
-				"Mourner": 3,
+				"Mourner": 1
+			},
+			"Object": {
+				"Chest": 2,
+				"Closed Chest": 2
+			},
+			"Quest": {
+				"Mourning's End Part I": "step",
+				"Song of the Elves": "step"
+			}
+		},
+		"Mourner Tunnels & Temple of Light": {
+			"Connect": {
+				"8007": true,
+				"8519": true,
+				"8779": true,
+				"9369": true,
+				"9823": true
+			},
+			"Monster": {
+				"Dark beast": 19,
+				"Shadow": 94
+			},
+			"NPC": {
+				"Mourner": 2,
 				"Slave": 4,
 				"Thorgel": 1
 			},
 			"Object": {
-				"Chest": 2,
-				"Closed Chest": 2,
 				"Closed chest": 5,
 				"Crystal dispenser": 2,
 				"Fire": 1,
@@ -62342,9 +62393,16 @@
 				"Tunnel": 1
 			},
 			"Quest": {
-				"Mourning's End Part I": "step",
-				"Mourning's End Part II": "step",
-				"Song of the Elves": "step"
+				"Mourning's End Part II": "step"
+			}
+		},
+		"Morytania Spider Nest": {
+			"Connect": {
+				"14645": true
+			},
+			"Monster": {
+				"Spider (araxyte)%2FLevel 87": 17,
+				"Spider (araxyte)%2FLevel 123": 12
 			}
 		},
 		"Myreque hideout%2FBurgh De Rott Hideout": {
@@ -63827,7 +63885,7 @@
 				"Swamp snake": 1,
 				"Giant snail": 1
 			},
-			"NPCs": {
+			"NPC": {
 				"Abidor Crank": 1
 			}
 		},
@@ -77148,6 +77206,45 @@
 		"Spider (Ungael)": {
 			"Clue scroll (beginner)": "Rare"
 		},
+		"Spider (araxyte)%2FLevel 87": {
+			"Adamant med helm": "5/110",
+			"Adamant longsword": "5/110",
+			"Air rune": "10/110",
+			"Blood rune": "5/110",
+			"Clue scroll (hard)": "1/192",
+			"Chaos rune": "5/110",
+			"Cosmic rune": "5/110",
+			"Death rune": "5/110",
+			"Earth rune": "10/110",
+			"Fire rune": "10/110",
+			"GeneralSeedDropTable": "10/110",
+			"HerbDropTable+": "10/110",
+			"Law rune": "5/110",
+			"Nature rune": "5/110",
+			"Rune dagger": "3/110",
+			"Rune med helm": "2/110",
+			"Soul rune": "5/110",
+			"Water rune": "10/110"
+		},
+		"Spider (araxyte)%2FLevel 123": {
+			"Adamant med helm": "5/110",
+			"Adamant longsword": "5/110",
+			"Air rune": "10/110",
+			"Blood rune": "5/110",
+			"Clue scroll (hard)": "1/192",
+			"Chaos rune": "5/110",
+			"Cosmic rune": "5/110",
+			"Death rune": "5/110",
+			"Earth rune": "10/110",
+			"Fire rune": "10/110",
+			"GeneralSeedDropTable": "10/110",
+			"Law rune": "5/110",
+			"Nature rune": "5/110",
+			"Rune dagger": "3/110",
+			"Rune med helm": "2/110",
+			"Soul rune": "5/110",
+			"Water rune": "10/110"
+		},
 		"Spiked Turoth": {
 			"Adamant full helm": "1/128",
 			"Bones": "Always",
@@ -79469,7 +79566,7 @@
 		"Monkey Madness I": "9782, 10291, 10795, 11050, 11051, 11562, 11823, Ape Atoll Dungeon",
 		"Monkey Madness II": "9526, 9781, 9782, 9783, 10031, 10795, 11050, 11051, 11060, 11321, Crash Site (MM2), Crash Site Cavern, Kruk's Dungeon, Troll Stronghold",
 		"Mountain Daughter": "10553, 10809, 11065, 11318",
-		"Mourning's End Part I": "8753, 9009, 9265, 9524, 9780, 10035, 10292, 11573, Mourner Tunnels & Temple of Light",
+		"Mourning's End Part I": "8753, 9009, 9265, 9524, 9780, 10035, 10292, 11573, Mourner Headquarters",
 		"Mourning's End Part II": "9265, 10035, Mourner Tunnels & Temple of Light, Death altar",
 		"Murder Mystery": "10806, 10807",
 		"My Arm's Big Adventure": "11056, 11320, 11321, Troll Stronghold",
@@ -79510,7 +79607,7 @@
 		"Shilo Village": "11054, 11056, 11566, 11568",
 		"Sins of the Father": "13622, 13874, 14129, 14135, 14386, 14388, 14641, 14899, 14898",
 		"Skippy and the Mogres": "11825",
-		"Song of the Elves": "8751, 8752, 8754, 9008, 9009, 9011, 9265, 9266, 9779, 10035, 10036, 10037, 10291, 10292, 10547, Enchanted Valley, Mourner Tunnels & Temple of Light, Underground Pass, Waterfall Dungeon",
+		"Song of the Elves": "8751, 8752, 8754, 9008, 9009, 9011, 9265, 9266, 9779, 10035, 10036, 10037, 10291, 10292, 10547, Enchanted Valley, Mourner Headquarters, Underground Pass, Waterfall Dungeon",
 		"Spirits of the Elid": "13357, 13360, 13613, Genie's Cave, Water Ravine Dungeon",
 		"Swan Song": "9273, 10288, 11571, 11827, 12338, Wizards' Guild%2FBasement",
 		"Tai Bwo Wannai Trio": "11054, 11055, 11056, 11057, 11311, 11568, 11569",
