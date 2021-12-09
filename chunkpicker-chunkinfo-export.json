@@ -38422,6 +38422,9 @@
 				"Skills": {
 					"Thieving": 25
 				},
+				"Tasks": {
+					"Plough the fields in Hosidius": "Nonskill"
+				},
 				"BaseQuest": "Kourend and Kebos Diary"
 			},
 			"~|Kourend and Kebos Diary%2FEasy|~ Task 5": {
@@ -38554,7 +38557,8 @@
 				"Description": "Switch to the Arceuus spellbook via Tyss.",
 				"Chunks": ["6716"],
 				"Tasks": {
-					"~|Kourend and Kebos Diary%2FEasy|~ Complete the Easy Diary": "Diary"
+					"~|Kourend and Kebos Diary%2FEasy|~ Complete the Easy Diary": "Diary",
+					"Turn in books at the Arceuus Library": "Nonskill"
 				},
 				"BaseQuest": "Kourend and Kebos Diary"
 			},
@@ -38687,7 +38691,8 @@
 				"Description": "Kill a lizardman shaman in the Lizardman Temple.",
 				"Chunks": ["Lizardman Temple"],
 				"Tasks": {
-					"~|Kourend and Kebos Diary%2FMedium|~ Complete the Medium Diary": "Diary"
+					"~|Kourend and Kebos Diary%2FMedium|~ Complete the Medium Diary": "Diary",
+					"Heal wounded soldiers in Shayzien": "Nonskill"
 				},
 				"BaseQuest": "Kourend and Kebos Diary"
 			},
@@ -38699,7 +38704,8 @@
 					"Mining": 65
 				},
 				"Tasks": {
-					"~|Kourend and Kebos Diary%2FMedium|~ Complete the Medium Diary": "Diary"
+					"~|Kourend and Kebos Diary%2FMedium|~ Complete the Medium Diary": "Diary",
+					"Mine ~|volcanic sulphur|~": "Mining"
 				},
 				"BaseQuest": "Kourend and Kebos Diary"
 			},
@@ -38800,7 +38806,8 @@
 					"Crafting": 38
 				},
 				"Tasks": {
-					"~|Kourend and Kebos Diary%2FHard|~ Complete the Hard Diary": "Diary"
+					"~|Kourend and Kebos Diary%2FHard|~ Complete the Hard Diary": "Diary",
+					"Turn in books at the Arceuus Library": "Nonskill"
 				},
 				"BaseQuest": "Kourend and Kebos Diary"
 			},
@@ -38812,7 +38819,8 @@
 					"Woodcutting": 90
 				},
 				"Tasks": {
-					"~|Kourend and Kebos Diary%2FHard|~ Complete the Hard Diary": "Diary"
+					"~|Kourend and Kebos Diary%2FHard|~ Complete the Hard Diary": "Diary",
+					"Plough the fields in Hosidius": "Nonskill"
 				},
 				"BaseQuest": "Kourend and Kebos Diary"
 			},
