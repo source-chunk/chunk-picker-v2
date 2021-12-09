@@ -862,7 +862,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 baseChunkData['items'][output] = {};
             }
             Object.keys(outputs[output]).forEach(source => {
-                if (outputs[output][source].split('-').length <= 1 || (newValids.hasOwnProperty(outputs[output][source].split('-')[1]) && newValids[outputs[output][source].split('-')[1]].hasOwnProperty(source))) {
+                if (outputs[output][source].split('-').length <= 1 || ((newValids.hasOwnProperty(outputs[output][source].split('-')[1]) && newValids[outputs[output][source].split('-')[1]].hasOwnProperty(source)) || (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(source)))) {
                     baseChunkData['items'][output][source] = outputs[output][source];
                 }
             });
