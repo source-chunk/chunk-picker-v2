@@ -855,7 +855,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.0");
+const myWorker = new Worker("./worker.js?v=4.9.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3608,13 +3608,13 @@ var openRollChunk = function(el, rand, sNum) {
     elArr = shuffle(elArr);
     xCoord = (parseInt($(elArr[elArr.length - 1]).attr('id')) % rowSize) + 1;
     yCoord = Math.floor(parseInt($(elArr[elArr.length - 1]).attr('id')) / rowSize) + 1;
-    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$($(elArr[elArr.length - 1]).children('.chunkId')[0]).text()}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'/resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$($(elArr[elArr.length - 1]).children('.chunkId')[0]).text()}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
         for (let j = 0; j < elArr.length; j++) {
             let num = $($(elArr[j]).children('.chunkId')[0]).text();
             xCoord = (parseInt($(elArr[j]).attr('id')) % rowSize) + 1;
             yCoord = Math.floor(parseInt($(elArr[j]).attr('id')) / rowSize) + 1;
-            $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'/resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+            $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
             if (num === chosen && i + 1 >= Math.ceil(numSlots / elArr.length)) {
                 topNum = (-15.998 * ((i * elArr.length) + j)) + 'vh';
             }
@@ -3623,7 +3623,7 @@ var openRollChunk = function(el, rand, sNum) {
     xCoord = (parseInt($(elArr[0]).attr('id')) % rowSize) + 1;
     yCoord = Math.floor(parseInt($(elArr[0]).attr('id')) / rowSize) + 1;
     let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
-    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$($(elArr[0]).children('.chunkId')[0]).text()}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'/resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$($(elArr[0]).children('.chunkId')[0]).text()}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     setTimeout(function() {
         $('.roll-chunk-outer').animate({
             top: topNum
