@@ -33896,97 +33896,154 @@
 			"(Chompy Birds) Obtain a ~|chompy chick|~": {
 				"Category": ["Collection Log", "Collection Log Other", "Pets"],
 				"Label": "Collection Log",
-				"Items": ["Chompy chick"]
+				"Items": ["Chompy chick"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre bowman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (bowman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre yeoman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (yeoman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre marksman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (marksman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre woodsman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (woodsman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre forester)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (forester)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre bowmaster)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (bowmaster)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre expert)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (expert)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre dragon archer)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (dragon archer)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (expert ogre dragon archer)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (expert dragon archer)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"]
+				"Chunks": ["10542"],
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"(Creature Creation) Obtain a ~|tea flask|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
@@ -34146,32 +34203,50 @@
 			"(Monkey Backpacks) Obtain a ~|karamja monkey|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["11050", "10794"]
+				"Chunks": ["11050", "10794"],
+				"Tasks": {
+					"~|Monkey Madness II|~ Complete the quest": "Quest"
+				}
 			},
 			"(Monkey Backpacks) Obtain a ~|kruk jr|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["11050", "10794"]
+				"Chunks": ["11050", "10794"],
+				"Tasks": {
+					"~|Monkey Madness II|~ Complete the quest": "Quest"
+				}
 			},
 			"(Monkey Backpacks) Obtain a ~|maniacal monkey|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["11050", "10794"]
+				"Chunks": ["11050", "10794"],
+				"Tasks": {
+					"~|Monkey Madness II|~ Complete the quest": "Quest"
+				}
 			},
 			"(Monkey Backpacks) Obtain a ~|princely monkey|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["11050", "10794"]
+				"Chunks": ["11050", "10794"],
+				"Tasks": {
+					"~|Monkey Madness II|~ Complete the quest": "Quest"
+				}
 			},
 			"(Monkey Backpacks) Obtain a ~|skeleton monkey|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["11050", "10794"]
+				"Chunks": ["11050", "10794"],
+				"Tasks": {
+					"~|Monkey Madness II|~ Complete the quest": "Quest"
+				}
 			},
 			"(Monkey Backpacks) Obtain a ~|zombie monkey|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["11050", "10794"]
+				"Chunks": ["11050", "10794"],
+				"Tasks": {
+					"~|Monkey Madness II|~ Complete the quest": "Quest"
+				}
 			},
 			"(Motherlode Mine) Obtain a ~|coal bag|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
@@ -88617,7 +88692,7 @@
 			"Sapphire Opal jewellery+": ["Sapphire ring", "Sapphire necklace", "Sapphire bracelet", "Sapphire amulet (u)", "Opal ring", "Opal bracelet", "Opal necklace", "Opal amulet (u)"],
 			"Saw+": ["Saw"],
 			"Seaweed+": ["Seaweed", "Giant seaweed", "Swamp weed", "Edible seaweed"],
-			"Shayzien armour+": ["Shayzien boots (1)"],
+			"Shayzien armour+": ["Shayzien gloves (1)", "Shayzien boots (1)", "Shayzien helm (1)", "Shayzien greaves (1)", "Shayzien platebody (1)", "Shayzien gloves (2)", "Shayzien boots (2)", "Shayzien helm (2)", "Shayzien greaves (2)", "Shayzien platebody (2)", "Shayzien gloves (3)", "Shayzien boots (3)", "Shayzien helm (3)", "Shayzien greaves (3)", "Shayzien platebody (3)", "Shayzien gloves (4)", "Shayzien boots (4)", "Shayzien helm (4)", "Shayzien greaves (4)", "Shayzien platebody (4)", "Shayzien gloves (5)", "Shayzien boots (5)", "Shayzien helm (5)", "Shayzien greaves (5)", "Shayzien platebody (5)"],
 			"Silver key+": ["Silver key red", "Silver key brown", "Silver key crimson", "Silver key black", "Silver key purple"],
 			"Skeletal armour+": ["Skeletal helm", "Skeletal top", "Skeletal bottoms", "Skeletal gloves", "Skeletal boots"],
 			"Slayer's staff+": ["Slayer's staff", "Staff of the dead", "Toxic staff of the dead", "Staff of light", "Staff of balance"],
