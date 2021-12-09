@@ -17373,7 +17373,10 @@
 			},
 			"Get an ogre bow from Rantz": {
 				"Chunks": ["10542"],
-				"Output": "Ogre bow"
+				"Output": "Ogre bow",
+				"Tasks": {
+					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
+				}
 			},
 			"Prime a mind bar": {
 				"Chunks": ["Elemental Workshop"],
@@ -33896,154 +33899,97 @@
 			"(Chompy Birds) Obtain a ~|chompy chick|~": {
 				"Category": ["Collection Log", "Collection Log Other", "Pets"],
 				"Label": "Collection Log",
-				"Items": ["Chompy chick"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Items": ["Chompy chick"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre bowman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (bowman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre yeoman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (yeoman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre marksman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (marksman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre woodsman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (woodsman)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre forester)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (forester)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre bowmaster)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (bowmaster)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre expert)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (expert)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (ogre dragon archer)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (dragon archer)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (expert ogre dragon archer)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Chompy Birds) Obtain a ~|chompy bird hat (expert dragon archer)|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
-				"Chunks": ["10542"],
-				"Tasks": {
-					"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"
-				}
+				"Monsters": ["Chompy bird"]
 			},
 			"(Creature Creation) Obtain a ~|tea flask|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
@@ -111770,6 +111716,9 @@
 			"Chicken": {
 				"12596": [{"Champions Guild Questpoints": "Nonskill"}]
 			},
+			"Chompy bird": {
+				"10542": [{"~|Big Chompy Bird Hunting|~ Complete the quest": "Quest"}]
+			},
 			"Crab": {
 				"11570": [{"~|Recipe for Disaster%2GFreeing Pirate Pete|~ 4": "Quest"}]
 			},
@@ -111778,6 +111727,9 @@
 			},
 			"Ghost (Melzar's Maze)": {
 				"11570": [{"~|Dragon Slayer I|~ 5b2": "Quest"}]
+			},
+			"Jubbly bird": {
+				"10542": [{"~|Recipe for Disaster%2GFreeing Skrach Uglogwee|~ Complete the quest": "Quest"}]
 			},
 			"Lizardman%2FLevel 53": {
 				"5945": [{"Heal wounded soldiers in Shayzien": "Nonskill"}],
