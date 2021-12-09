@@ -16850,6 +16850,14 @@
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rock"
 			},
+			"Grab a bronze axe from Fred the Farmer's stump": {
+				"Chunks": ["12595"],
+				"Output": "Bronze axe"
+			},
+			"Grab a bronze axe from Seth Groat's stump": {
+				"Chunks": ["12851"],
+				"Output": "Bronze axe"
+			},
 			"Create sulphurous fertiliser": {
 				"Items": ["Compost", "Saltpetre"],
 				"Tasks": {
