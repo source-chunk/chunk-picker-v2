@@ -16850,6 +16850,10 @@
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rock"
 			},
+			"Make a skewer stick": {
+				"Items": ["ThatchSpar+", "Machete+"],
+				"Output": "Skewer stick"
+			},
 			"Grab a bronze axe from Fred the Farmer's stump": {
 				"Chunks": ["12595"],
 				"Output": "Bronze axe"
@@ -88746,7 +88750,8 @@
 			"DreamMentorFood+": ["Shrimps", "Sardine", "Karambwanji", "Herring", "Anchovies", "Mackerel", "Trout", "Cod", "Pike", "Cooked slimy eel", "Salmon", "Tuna", "Rainbow fish", "Cave eel", "Lobster", "Bass", "Swordfish", "Monkfish", "Cooked karambwan", "Shark", "Sea turtle", "Manta ray", "Anglerfish", "Dark crab", "Cooked chicken", "Cooked meat", "Ugthanki meat", "Cooked mystery meat", "Cooked rabbit", "Roast bird meat", "Cooked crab meat", "Roast beast meat", "Cooked chompy", "Cooked jubbly", "Thin snail meat", "Lean snail meat", "Fat snail meat", "Cabbage", "Onion", "Potato", "Sweetcorn"],
 			"FairyTaleI9+": ["White berries", "Mort myre pear", "Mort myre stem", "Mort myre fungus", "Nature talisman", "Avantoe", "Irit leaf", "Blue dragon scale", "Proboscis", "Jangerberries", "Potato cactus", "Crushed gem", "Snapdragon", "Supercompost", "Volencia moss", "Babydragon bones", "Uncut diamond", "Raw cave eel", "Edible seaweed", "Oyster", "Charcoal", "Red vine worm", "Fat snail", "Red spiders' eggs", "Raw slimy eel", "Grapes", "Uncut ruby", "Jogre bones", "King worm", "Snape grass", "Lime"],
 			"CrushedGem+": ["Uncut jade", "Uncut opal", "Uncut red topaz"],
-			"DarkClothing+": ["Desert shirt", "Desert robe", "Black gloves", "Black boots", "Black defender", "Black med helm", "Black full helm", "Black sq shield", "Black kiteshield", "Black platelegs", "Black plateskirt", "Black chainbody", "Black platebody", "Priest gown (top)", "Priest gown (bottom)", "Mystic hat (dark)", "Mystic robe top (dark)", "Mystic robe bottom (dark)", "Mystic gloves (dark)", "Mystic boots (dark)", "Ghostly boots", "Ghostly cloak", "Ghostly gloves", "Ghostly hood", "Ghostly robe (bottom)", "Ghostly robe (top)", "Shade robe top", "Shade robe", "Black d'hide body", "Black d'hide chaps", "Black d'hide vambraces", "Black d'hide shield", "Antisanta mask", "Antisanta jacket", "Antisanta pantaloons", "Antisanta gloves", "Antisanta boots", "Wizard hat", "Black cape", "Black partyhat", "Black santa hat", "Black h'ween mask", "Black dragon mask", "Black unicorn mask"]
+			"DarkClothing+": ["Desert shirt", "Desert robe", "Black gloves", "Black boots", "Black defender", "Black med helm", "Black full helm", "Black sq shield", "Black kiteshield", "Black platelegs", "Black plateskirt", "Black chainbody", "Black platebody", "Priest gown (top)", "Priest gown (bottom)", "Mystic hat (dark)", "Mystic robe top (dark)", "Mystic robe bottom (dark)", "Mystic gloves (dark)", "Mystic boots (dark)", "Ghostly boots", "Ghostly cloak", "Ghostly gloves", "Ghostly hood", "Ghostly robe (bottom)", "Ghostly robe (top)", "Shade robe top", "Shade robe", "Black d'hide body", "Black d'hide chaps", "Black d'hide vambraces", "Black d'hide shield", "Antisanta mask", "Antisanta jacket", "Antisanta pantaloons", "Antisanta gloves", "Antisanta boots", "Wizard hat", "Black cape", "Black partyhat", "Black santa hat", "Black h'ween mask", "Black dragon mask", "Black unicorn mask"],
+			"ThatchSpar+": ["Thatch spar light", "Thatch spar med", "Thatch spar dense"]
 		},
 		"mixPlus": {
 			"Fremennik citizen+": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"],
