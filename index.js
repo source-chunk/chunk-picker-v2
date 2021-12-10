@@ -855,7 +855,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.5");
+const myWorker = new Worker("./worker.js?v=4.9.6");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -5455,7 +5455,6 @@ var checkMID = function(mid) {
             setupMap();
         });
     } else {
-        console.log('heyo');
         atHome = true;
         $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').hide();
         $('.loading, .ui-loader-header').remove();
