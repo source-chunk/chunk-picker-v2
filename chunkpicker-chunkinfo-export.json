@@ -35575,7 +35575,7 @@
 				"Chunks": ["10547"],
 				"Tasks": {
 					"~|Ardougne Diary%2FEasy|~ Complete the Easy Diary": "Diary",
-					"~|Fairytale II - Cure a Queen|~ 2": "Quest"
+					"FairyRings+": "Quest"
 				},
 				"BaseQuest": "Ardougne Diary"
 			},
@@ -35696,7 +35696,7 @@
 				"Chunks": ["10802"],
 				"Tasks": {
 					"~|Ardougne Diary%2FEasy|~ Complete the Easy Diary": "Diary",
-					"~|Fairytale II - Cure a Queen|~ 2": "Quest"
+					"FairyRings+": "Quest"
 				},
 				"BaseQuest": "Ardougne Diary"
 			},
@@ -37094,7 +37094,7 @@
 				"Chunks": ["10044"],
 				"Tasks": {
 					"~|Fremennik Diary%2FEasy|~ Complete the Easy Diary": "Diary",
-					"~|Fairytale II - Cure a Queen|~ 2": "Quest"
+					"FairyRings+": "Quest"
 				},
 				"BaseQuest": "Fremennik Diary"
 			},
@@ -37608,7 +37608,7 @@
 				"Chunks": ["10550"],
 				"Tasks": {
 					"~|Kandarin Diary%2FEasy|~ Complete the Easy Diary": "Diary",
-					"~|Fairytale II - Cure a Queen|~ 2": "Quest"
+					"FairyRings+": "Quest"
 				},
 				"BaseQuest": "Kandarin Diary"
 			},
@@ -38512,7 +38512,7 @@
 				"Chunks": ["5178"],
 				"Tasks": {
 					"~|Kourend and Kebos Diary%2FEasy|~ Complete the Easy Diary": "Diary",
-					"~|Fairytale II - Cure a Queen|~ 2": "Quest"
+					"FairyRings+": "Quest"
 				},
 				"BaseQuest": "Kourend and Kebos Diary"
 			},
@@ -39071,7 +39071,7 @@
 				"Chunks": ["12337"],
 				"Tasks": {
 					"~|Lumbridge and Draynor Diary%2FEasy|~ Complete the Easy Diary": "Diary",
-					"~|Fairytale II - Cure a Queen|~ 2": "Quest"
+					"FairyRings+": "Quest"
 				},
 				"BaseQuest": "Lumbridge and Draynor Diary"
 			},
@@ -46070,7 +46070,7 @@
 				"Description": "Travel to the first fairy ring (AIR)",
 				"Chunks": ["10802"],
 				"Tasks": {
-					"~|Fairytale II - Cure a Queen|~ 2": "Quest"
+					"FairyRings+": "Quest"
 				}
 			},
 			"~|Fairytale II - Cure a Queen|~ 4": {
@@ -88829,7 +88829,8 @@
 			"HeroesQuestCandlestick+": ["~|Heroes' Quest|~ 2c1d", "~|Heroes' Quest|~ 2c2d"],
 			"CurseOfTheEmptyLordFinal+": ["~|Curse of the Empty Lord|~ 2a5", "~|Curse of the Empty Lord|~ 2b5", "~|Curse of the Empty Lord|~ 2c5"],
 			"HazeelCultFinal+": ["~|Hazeel Cult|~ 3a", "~|Hazeel Cult|~ 6b"],
-			"RFDSubquest+": ["~|Recipe for Disaster%2GFreeing the Mountain Dwarf|~ Complete the quest", "~|Recipe for Disaster%2GFreeing the Goblin generals|~ Complete the quest", "~|Recipe for Disaster%2GFreeing Pirate Pete|~ Complete the quest", "~|Recipe for Disaster%2GFreeing the Lumbridge Guide|~ Complete the quest", "~|Recipe for Disaster%2GFreeing Evil Dave|~ Complete the quest", "~|Recipe for Disaster%2GFreeing King Awowogei|~ Complete the quest", "~|Recipe for Disaster%2GFreeing Sir Amik Varze|~ Complete the quest", "~|Recipe for Disaster%2GFreeing Skrach Uglogwee|~ Complete the quest"]
+			"RFDSubquest+": ["~|Recipe for Disaster%2GFreeing the Mountain Dwarf|~ Complete the quest", "~|Recipe for Disaster%2GFreeing the Goblin generals|~ Complete the quest", "~|Recipe for Disaster%2GFreeing Pirate Pete|~ Complete the quest", "~|Recipe for Disaster%2GFreeing the Lumbridge Guide|~ Complete the quest", "~|Recipe for Disaster%2GFreeing Evil Dave|~ Complete the quest", "~|Recipe for Disaster%2GFreeing King Awowogei|~ Complete the quest", "~|Recipe for Disaster%2GFreeing Sir Amik Varze|~ Complete the quest", "~|Recipe for Disaster%2GFreeing Skrach Uglogwee|~ Complete the quest"],
+			"FairyRings+": ["~|Fairytale II - Cure a Queen|~ 2", "~|Fairytale II - Cure a Queen|~ 3", "~|Fairytale II - Cure a Queen|~ 4", "~|Fairytale II - Cure a Queen|~ 5", "~|Fairytale II - Cure a Queen|~ 6", "~|Fairytale II - Cure a Queen|~ 7", "~|Fairytale II - Cure a Queen|~ 8", "~|Fairytale II - Cure a Queen|~ 9", "~|Fairytale II - Cure a Queen|~ 10", "~|Fairytale II - Cure a Queen|~ 11", "~|Fairytale II - Cure a Queen|~ Complete the quest"]
 		},
 		"tools": {
 			"Ammo mould": true,
