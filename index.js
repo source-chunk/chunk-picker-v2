@@ -855,7 +855,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.2");
+const myWorker = new Worker("./worker.js?v=4.9.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -5177,7 +5177,7 @@ var checkOffChallenges = function() {
                             checkedChallenges['Quest'] = {};
                         }
                         let questStepName = '~|' + $(line).find('a.link').text() + '|~' + ($(line).find('a.internal-link').length ? $(line).find('a.internal-link').text().replaceAll('step ', '').replaceAll('  ', ' ') : ' ' + $(line).text().split(': ')[1].trim());
-                        checkedChallenges['Quest'][questStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
+                        checkedChallenges['Quest'][questStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')] = true;
                     } else {
                         $('.panel-active > .' + skillLine).removeClass('hide-backlog');
                     }
@@ -5189,7 +5189,7 @@ var checkOffChallenges = function() {
                             checkedChallenges['Diary'] = {};
                         }
                         let diaryStepName = '~|' + $(line).find('a.link').text() + '|~' + ($(line).find('a.internal-link').length ? $(line).find('a.internal-link').text().replaceAll('  ', ' ') : ' ' + $(line).text().split(': ')[1].trim());
-                        checkedChallenges['Diary'][diaryStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
+                        checkedChallenges['Diary'][diaryStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')] = true;
                     } else {
                         $('.panel-active > .' + skillLine).removeClass('hide-backlog');
                     }
