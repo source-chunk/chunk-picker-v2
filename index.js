@@ -351,7 +351,7 @@ let ruleNames = {
     "Stuffables": "Must obtain stuffable items that can be mounted in the POH (big fish, slayer heads)",
     "Manually Complete Tasks": "<b class='noscroll'>For maps that allow manually choosing new chunks</b>, allow the ability to manually move completed active tasks",
     "Every Drop": "Must obtain every monster drop at least once",
-    "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to snake weed (the only primary training for Herblore in the game)",
+    "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to any level 3 herbs (Guam, Snake weed, Ardrigal, Sito foil, Rogue's purse, Volencia moss)",
     "HigherLander": "Accessing the intermediate and veteran landers for Pest Control are required tasks (only novice lander is required otherwise)",
     "Starting Items": "Allow tools gained from leaving Tutorial Island to be used within your chunks (aka not dropping your starting items). Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net, shortbow",
     "Tutor Ammo": "Items from the Magic/Ranged Combat Tutors in Lumbridge count as a way to train those respective skills (Air/Mind runes and Training bow/arrows)",
@@ -855,7 +855,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.4");
+const myWorker = new Worker("./worker.js?v=4.9.5");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1157,7 +1157,8 @@ $(document).ready(function() {
     $('.mid').on('keypress', function(e) {
         var keycode = (e.keyCode ? e.keyCode : e.which);
         if (keycode == '13') {
-            $('.pin.old').select();
+            //$('.pin.old').select();
+            $('#access').click();
         }
     });
 
@@ -2327,6 +2328,7 @@ var accessMap = function() {
                             $('.background-img').hide();
                             $('.center').css('margin-top', '15px');
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 1).show();
+                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').show();
                             roll2On && $('.roll2').css('opacity', 1).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
                             $('.open-manual-outer-container').css('opacity', 1).show();
@@ -2374,6 +2376,7 @@ var accessMap = function() {
                                     $('.background-img').hide();
                                     $('.center').css('margin-top', '15px');
                                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 1).show();
+                                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').show();
                                     roll2On && $('.roll2').css('opacity', 1).show();
                                     !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
                                     $('.open-manual-outer-container').css('opacity', 1).show();
@@ -2402,8 +2405,8 @@ var accessMap = function() {
                 }
             });
         } else {
-            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
-            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
+            window.location.href = window.location.href.split('?')[0] + '?' + mid;
+            /*document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
             $('.lock-closed, .lock-opened').hide();
             locked = true;
             inEntry = true;
@@ -2412,7 +2415,7 @@ var accessMap = function() {
             $('.loading').show();
             $('#page2b').hide();
             $('.background-img').hide();
-            setupMap();
+            setupMap();*/
         }
     });
 }
@@ -5452,7 +5455,9 @@ var checkMID = function(mid) {
             setupMap();
         });
     } else {
+        console.log('heyo');
         atHome = true;
+        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').hide();
         $('.loading, .ui-loader-header').remove();
         setupMap();
     }
@@ -5508,7 +5513,7 @@ var loadData = function(startup) {
         myRef.once('value', function(snap) {
             var picking = false;
             var settingsTemp = snap.val()['settings'];
-            var rulesTemp = snap.val()['rules'];
+            var rulesTemp = snap.val()['rules'] || {};
             randomLoot = snap.val()['randomLoot'] || {};
             var chunks = snap.val()['chunks'];
             recent = snap.val()['recent'] || [];

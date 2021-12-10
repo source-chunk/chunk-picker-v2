@@ -12051,6 +12051,15 @@
 					"~|Druidic Ritual|~ Complete the quest": "Quest"
 				}
 			},
+			"Unlock ~|Herblore|~ with guam leaf": {
+				"Category": ["Herblore Unlocked Snake Weed", "Primary Spawns"],
+				"Chunks": ["Deep WIlderness Dungeon"],
+				"Level": 1,
+				"Primary": true,
+				"Tasks": {
+					"~|Druidic Ritual|~ Complete the quest": "Quest"
+				}
+			},
 			"Buy the ~|Herblore cape|~": {
 				"Category": ["Skillcape"],
 				"Chunks": ["11574"],
