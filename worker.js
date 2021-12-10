@@ -123,12 +123,13 @@ var calcChallenges = function(chunks, baseChunkData) {
     let outputs = {};
     let outputObjects = {};
     let newValids = {};
+    let tempItemSkill = {};
     let i = 0;
 
     do {
         i++;
         valids = newValids;
-        newValids = calcChallengesWork(chunks, baseChunkData);
+        [newValids, tempItemSkill] = calcChallengesWork(chunks, baseChunkData);
         Object.keys(manualTasks).forEach(skill => {
             skill !== 'BiS' && Object.keys(manualTasks[skill]).forEach(challenge => {
                 if (!!chunkInfo['challenges'][skill][challenge]) {
@@ -619,6 +620,37 @@ var calcChallenges = function(chunks, baseChunkData) {
                             delete valids[skill];
                         }
                     }
+                }
+            });
+        });
+        Object.keys(tempItemSkill).forEach(skill => {
+            Object.keys(tempItemSkill[skill]).forEach(item => {
+                if (!rules["Highest Level"]) {
+                    let lowestItem;
+                    let lowestName;
+                    !!baseChunkData['items'][item] && tempItemSkill[skill][item].forEach(name => {
+                        let challenge = chunkInfo['challenges'][skill][name];
+                        if (!!challenge && (!challenge.hasOwnProperty('Tasks') || (newValids.hasOwnProperty(skill) && newValids[skill].hasOwnProperty(name)))) {
+                            if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
+                                lowestItem = challenge;
+                                lowestName = name;
+                            } else if (lowestItem['Level'] === challenge['Level'] && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem['Priority'])) {
+                                lowestItem = challenge;
+                                lowestName = name;
+                            }
+                        }
+                        if (!!challenge && challenge.hasOwnProperty('Tasks')) {
+                            !!newValids[skill] && delete newValids[skill][name];
+                            !!valids[skill] && delete valids[skill][name];
+                            if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
+                                delete newValids[skill];
+                            }
+                            if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
+                                delete valids[skill];
+                            }
+                        }
+                    });
+                    !!lowestName && (newValids[skill][lowestName] = chunkInfo['challenges'][skill][lowestName]['Level']);
                 }
             });
         });
@@ -1744,16 +1776,15 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                 let lowestName;
                 !!items[item] && tempItemSkill[skill][item].forEach(name => {
                     let challenge = chunkInfo['challenges'][skill][name];
-                    if (challenge['AlwaysValid']) {
-                        valids[skill][name] = challenge['Level'];
-                    }
                     if (!!challenge && !!challenge['Output']) {
                         if (!extraOutputItems[skill]) {
                             extraOutputItems[skill] = {};
                         }
                         extraOutputItems[skill][name] = challenge['Output'];
                     }
-                    if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
+                    if (challenge['AlwaysValid'] || challenge.hasOwnProperty('Tasks')) {
+                        valids[skill][name] = challenge['Level'];
+                    } else if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
                         lowestItem = challenge;
                         lowestName = name;
                     } else if (lowestItem['Level'] === challenge['Level'] && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem['Priority'])) {
@@ -1766,7 +1797,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
         });
     });
     //console.log(JSON.parse(JSON.stringify(valids)));
-    return valids;
+    return [valids, tempItemSkill];
 }
 
 // Checks if skill has primary training
