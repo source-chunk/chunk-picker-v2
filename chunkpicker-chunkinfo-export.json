@@ -1966,6 +1966,52 @@
 				"Primary": false,
 				"Priority": 1
 			},
+			"Build the ~|bank chest|~ on Fossil Island": {
+				"Items": ["Hammer+", "Oak plank", "Iron bar", "Nails+"],
+				"Level": 21,
+				"Chunks": ["14907"],
+				"Primary": false,
+				"Priority": 1
+			},
+			"Build the ~|cleaning bench|~ on Fossil Island": {
+				"Items": ["Hammer+", "Plank", "Nails+"],
+				"Level": 5,
+				"Chunks": ["14907"],
+				"Primary": false,
+				"Priority": 1
+			},
+			"Build the ~|well|~ on Fossil Island": {
+				"Items": ["Hammer+", "Oak plank", "Bucket", "Rope", "Nails+"],
+				"Level": 22,
+				"Chunks": ["14907"],
+				"Primary": false,
+				"Priority": 1,
+				"Output Object": "Well"
+			},
+			"Build the ~|cooking pot|~ on Fossil Island": {
+				"Items": ["Hammer+", "Logs", "Iron bar", "Tinderbox", "Soft clay"],
+				"Level": 24,
+				"Chunks": ["14907"],
+				"Primary": false,
+				"Priority": 1,
+				"Output Object": "Cooking pot"
+			},
+			"Build the ~|spinning wheel|~ on Fossil Island": {
+				"Items": ["Hammer+", "Oak plank", "Iron bar", "Nails+"],
+				"Level": 28,
+				"Chunks": ["14907"],
+				"Primary": false,
+				"Priority": 1,
+				"Output Object": "Spinning wheel"
+			},
+			"Build the ~|loom|~ on Fossil Island": {
+				"Items": ["Hammer+", "Oak plank", "Rope", "Nails+"],
+				"Level": 29,
+				"Chunks": ["14907"],
+				"Primary": false,
+				"Priority": 1,
+				"Output Object": "Loom"
+			},
 			"Build a ~|4-poster|~": {
 				"Category": ["InsidePOH"],
 				"Chunks": ["Player-owned house"],
@@ -16859,6 +16905,17 @@
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rock"
 			},
+			"Access ~|Grace|~'s shop": {
+				"Chunks": ["Rogues' Den"],
+				"Items": ["Mark of grace"]
+			},
+			"Access ~|Martin Thwait|~'s shop": {
+				"Chunks": ["Rogues' Den"],
+				"Skills": {
+					"Agility": 50,
+					"Thieving": 50
+				}
+			},
 			"Make a skewer stick": {
 				"Items": ["ThatchSpar+", "Machete+"],
 				"Output": "Skewer stick"
@@ -17483,13 +17540,13 @@
 				"Chunks": ["Temple of Marimbo Dungeon"],
 				"Output": "M'amulet mould"
 			},
-			"Enter the Wilderness God Wars Dungeon via Strength": {
+			"Enter the ~|Wilderness God Wars Dungeon|~ via Strength": {
 				"Chunks": ["Wilderness God Wars Dungeon"],
 				"Skills": {
 					"Strength": 60
 				}
 			},
-			"Enter the Wilderness God Wars Dungeon via Agility": {
+			"Enter the ~|Wilderness God Wars Dungeon|~ via Agility": {
 				"Chunks": ["Wilderness God Wars Dungeon"],
 				"Skills": {
 					"Agility": 60
@@ -26717,12 +26774,21 @@
 				"Source": "drop",
 				"Output": "Brutal black dragon"
 			},
-			"Slay a ~|cave bug|~": {
+			"Slay a ~|cave bug%2FLevel 6|~": {
 				"Level": 7,
-				"Monsters": ["Cave bug+"],
+				"Monsters": ["Cave bug%2FLevel 6"],
 				"Primary": false,
 				"Source": "drop",
-				"Output": "Cave bug+"
+				"Output": "Cave bug%2FLevel 6",
+				"Priority": 1
+			},
+			"Slay a ~|cave bug%2FLevel 96|~": {
+				"Level": 7,
+				"Monsters": ["Cave bug%2FLevel 96"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Cave bug%2FLevel 96",
+				"Priority": 2
 			},
 			"Slay a ~|cave crawler|~": {
 				"Level": 10,
@@ -26776,12 +26842,21 @@
 				"Source": "drop",
 				"Output": "Dark beast"
 			},
-			"Slay a ~|desert lizard|~": {
+			"Slay a small ~|desert lizard|~": {
 				"Level": 22,
-				"Monsters": ["Desert lizard+"],
+				"Monsters": ["Desert lizard small+"],
 				"Primary": false,
 				"Source": "drop",
-				"Output": "Desert lizard+"
+				"Output": "Desert lizard small+",
+				"Priority": 1
+			},
+			"Slay a big ~|desert lizard|~": {
+				"Level": 22,
+				"Monsters": ["Lizard"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Lizard",
+				"Priority": 2
 			},
 			"Slay a ~|drake|~": {
 				"Level": 84,
@@ -26944,13 +27019,21 @@
 				"Source": "drop",
 				"Output": "Rockslug"
 			},
-			"Slay a ~|sea snake|~": {
+			"Slay a ~|sea snake hatchling|~": {
 				"Level": 40,
-				"Monsters": ["Sea snake+"],
+				"Monsters": ["Sea Snake Hatchling"],
 				"Primary": false,
 				"Source": "drop",
-				"Output": "Sea snake+",
+				"Output": "Sea Snake Hatchling",
 				"Priority": 3
+			},
+			"Slay a ~|sea snake young|~": {
+				"Level": 40,
+				"Monsters": ["Sea Snake Young"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Sea Snake Young",
+				"Priority": 4
 			},
 			"Slay a ~|skeletal wyvern|~": {
 				"Level": 72,
@@ -26996,13 +27079,21 @@
 				"Output": "Sulphur Lizard",
 				"Priority": 1
 			},
-			"Slay a ~|terror dog|~": {
+			"Slay a ~|terror dog%2FLevel 100|~": {
 				"Level": 40,
-				"Monsters": ["Terror dog+"],
+				"Monsters": ["Terror dog%2FLevel 100"],
 				"Primary": false,
 				"Source": "drop",
-				"Output": "Terror dog+",
+				"Output": "Terror dog%2FLevel 100",
 				"Priority": 2
+			},
+			"Slay a ~|terror dog%2FLevel 110|~": {
+				"Level": 40,
+				"Monsters": ["Terror dog%2FLevel 110"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Terror dog%2FLevel 110",
+				"Priority": 3
 			},
 			"Slay a ~|turoth|~": {
 				"Level": 55,
@@ -38531,7 +38622,7 @@
 			},
 			"~|Kourend and Kebos Diary%2FMedium|~ Task 2": {
 				"Description": "Kill a lizardman.",
-				"Monsters": ["Lizardman+"],
+				"Monsters": ["Lizardman"],
 				"Tasks": {
 					"~|Kourend and Kebos Diary%2FEasy|~ Complete the Easy Diary": "Diary"
 				},
@@ -88394,13 +88485,15 @@
 				"Uncut sapphire": "1/4",
 				"Uncut emerald": "1/8",
 				"Uncut ruby": "1/16",
-				"Rune spear": "1/2048",
-				"Shield left half": "1/4096",
 				"Nature talisman": "1/42.67",
 				"Chaos talisman": "1/42.67",
-				"Dragon spear": "1/5461",
 				"Uncut diamond": "1/64",
 				"Rune javelin": "1/2048"
+			},
+			"GemDropTableLegends+": {
+				"Rune spear": "1/2048",
+				"Shield left half": "1/4096",
+				"Dragon spear": "1/5461"
 			},
 			"SuperiorDropTable+": {
 				"Dust battlestaff": "3/8",
@@ -88768,22 +88861,14 @@
 		},
 		"monstersPlus": {
 			"Aberrant spectre+": ["Aberrant spectre", "Deviant spectre"],
-			"Banshee+": ["Banshee", "Twisted Banshee"],
 			"Bloodveld+": ["Bloodveld", "Mutated Bloodveld"],
-			"Cave bug+": ["Cave bug%2FLevel 6", "Cave bug%2FLevel 96"],
 			"Demonic+": ["Abyssal Sire", "Abyssal demon", "Balfrug Kreeyath", "Black demon", "Black demon%2FWilderness Slayer Cave", "Bloodveld", "Bouncer", "Cerberus", "Demonic gorilla", "Doomion", "Flaming pyrelord", "Greater Nechryael", "Greater abyssal demon", "Greater demon", "Greater demon%2FWilderness Slayer Cave", "Hellhound", "Holthion", "Icefiend", "Imp", "Infernal pyrelord", "Insatiable Bloodveld", "Insatiable mutated Bloodveld", "Judge of Yama", "Jungle Demon", "K'ril Tsutsaroth", "Lesser demon", "Lesser demon (Melzar's Maze)", "Lesser demon%2FWilderness Slayer Cave", "Mutated Bloodveld", "Nechryael", "Nechryarch", "Othainian", "Porazdir", "Pyrefiend", "Pyrelord", "Skeleton Hellhound", "Skotizo", "Tstanon Karlak", "Waterfiend", "Zakl'n Gritch"],
 			"Desert lizard+": ["Desert Lizard", "Lizard", "Small Lizard"],
+			"Desert lizard small+": ["Desert Lizard", "Small Lizard"],
 			"Guard+": ["Guard", "Town Guard (Hosidius)", "Guard (Shayzien)", "Head guard"],
-			"Jelly+": ["Jelly", "Warped Jelly"],
 			"Man+": ["Man", "Drunken man", "Hengel"],
-			"Nechryael+": ["Nechryael", "Greater Nechryael"],
-			"Pyrefiend+": ["Pyrefiend", "Pyrelord"],
-			"Sea snake+": ["Sea Snake Hatchling", "Sea Snake Young"],
-			"Terror dog+": ["Terror dog%2FLevel 100", "Terror dog%2FLevel 110"],
 			"Undead+": ["Aberrant spectre", "Deviant spectre", "Ankou%2FWilderness Slayer Cave", "Twisted banshee", "Ankou", "Banshee", "Crawling hand", "Ghast", "Ghost", "Mummy", "Shade", "Skeleton", "Skogre", "Summoned Zombie", "Tortured soul", "Undead chicken", "Undead cow", "Undead one", "Zogre", "Zombified Spawn", "Zombie", "Zombie rat"],
 			"Woman+": ["Woman", "Anja"],
-			"Zygomite+": ["Zygomite", "Ancient Zygomite"],
-			"Lizardman+": ["Lizardman", "Lizardman shaman"],
 			"Ankou+": ["Ankou", "Ankou%2FWilderness Slayer Cave"],
 			"Basilisk+": ["Basilisk", "Basilisk Knight"]
 		},
@@ -109241,24 +109326,40 @@
 				"Yellow gloves": "2/128",
 				"GemDropTable+": "1/64"
 			},
-			"Cave bug+": {
+			"Cave bug%2FLevel 6": {
 				"Candle": "5/128",
-				"Coins": "14/128",
+				"Coins": "1/16",
 				"Earth rune": "2/128",
 				"Empty candle lantern": "1/128",
 				"Eye of newt": "2/128",
 				"Grimy guam leaf": "16/128",
 				"HerbDropTable+": "23/128",
 				"Limpwurt root": "1/128",
-				"Nature rune": "1/128",
+				"Nature rune": "5/128",
+				"Nothing": "1/2",
 				"Red spiders' eggs": "2/128",
 				"Snape grass": "1/128",
 				"Tinderbox": "3/128",
 				"Unicorn horn dust": "2/128",
-				"Water rune": "2/128",
+				"Water rune": "5/128"
+			},
+			"Cave bug%2FLevel 96": {
+				"Candle": "5/128",
+				"Coins": "14/128",
+				"Earth rune": "15/128",
+				"Empty candle lantern": "1/128",
+				"Eye of newt": "2/128",
+				"Grimy guam leaf": "16/128",
+				"HerbDropTable+": "19/128",
+				"Limpwurt root": "1/128",
+				"Red spiders' eggs": "2/128",
+				"Snape grass": "1/128",
+				"Tinderbox": "3/128",
+				"Unicorn horn dust": "2/128",
+				"Water rune": "14/128",
 				"Clue scroll (easy)": "1/128",
-				"Fire rune": "2/128",
-				"Swamp weed": "10/128",
+				"Fire rune": "13/128",
+				"Swamp weed": "14/128",
 				"Water battlestaff": "1/128",
 				"GemDropTable+": "1/25.6"
 			},
@@ -109352,8 +109453,25 @@
 				"Tin ore": "8/128",
 				"GemDropTable+": "1/21.33"
 			},
-			"Desert lizard+": {
+			"Desert lizard small+": {
 				"Bones": "Always",
+				"Coal": "13/128",
+				"Copper ore": "3/128",
+				"Fire rune": "14/128",
+				"GeneralSeedDropTable+": "9/128",
+				"HerbDropTable+": "10/128",
+				"Iron ore": "22/128",
+				"Kebab": "13/128",
+				"Mithril ore": "1/128",
+				"Mystic gloves (light)": "1/512",
+				"Nature rune": "4/128",
+				"Silver bar": "2/128",
+				"Silver ore": "3/128",
+				"Tin ore": "4/128",
+				"Waterskin(0)": "13/128",
+				"GemDropTable+": "6/128"
+			},
+			"Lizard": {
 				"Coal": "13/128",
 				"Copper ore": "3/128",
 				"Fire rune": "14/128",
@@ -109372,7 +109490,7 @@
 				"Curved bone": "1/5012.5",
 				"Desert lizard bone": "1/4",
 				"Long bone": "1/400",
-				"GemDropTable+": "1/21.33"
+				"GemDropTable+": "6/128"
 			},
 			"Cockatrice": {
 				"Bones": "Always",
@@ -109545,11 +109663,31 @@
 				"Water rune": "8/128",
 				"GemDropTable+": "1/25.6"
 			},
-			"Terror dog+": {
+			"Terror dog%2FLevel 100": {
 				"Adamant full helm": "1/128",
 				"Adamantite ore": "3/128",
 				"Bass": "2/128",
 				"Bones": "Always",
+				"Clue scroll (hard)": "1/128",
+				"Coins": "1/128",
+				"Fire rune": "1/128",
+				"Granite helm": "1/128",
+				"HerbDropTable+": "15/128",
+				"Law rune": "3/128",
+				"Mithril axe": "3/128",
+				"Mithril kiteshield": "1/128",
+				"Mithril spear": "2/128",
+				"Nature rune": "5/128",
+				"Rune dagger": "1/128",
+				"Steel battleaxe": "3/128",
+				"Steel platelegs": "4/128",
+				"Water rune": "8/128",
+				"GemDropTable+": "1/25.6"
+			},
+			"Terror dog%2FLevel 110": {
+				"Adamant full helm": "1/128",
+				"Adamantite ore": "3/128",
+				"Bass": "2/128",
 				"Clue scroll (hard)": "1/128",
 				"Coins": "1/128",
 				"Fire rune": "1/128",
@@ -109587,20 +109725,17 @@
 				"Seaweed": "2/128",
 				"Water orb": "3/128",
 				"Water rune": "2/128",
-				"Big bones": "Always",
-				"Curved bone": "1/5012.5",
-				"Long bone": "1/400",
 				"GemDropTable+": "1/128"
 			},
 			"Sea Snake Young": {
 				"Adamant dart tip": "10/128",
-				"Bones": "Always",
 				"Broad arrows": "2/128",
 				"Casket": "1/128",
 				"Clue scroll (medium)": "1/128",
 				"Coins": "7/128",
 				"Edible seaweed": "2/128",
 				"Fishing bait": "4/128",
+				"HerbDropTable+": "5/128",
 				"Mist rune": "2/128",
 				"Oyster pearl": "1/128",
 				"Oyster pearls": "1/128",
@@ -109608,6 +109743,7 @@
 				"Raw bass": "4/128",
 				"Raw lobster": "2/128",
 				"Seaweed": "2/128",
+				"UncommonSeedDropTable+": "14/128",
 				"Water orb": "3/128",
 				"Water rune": "2/128",
 				"Big bones": "Always",
@@ -112042,6 +112178,9 @@
 			"Frankie's Fishing Emporium": {
 				"7226": [{"Repair a crane at ~|Port Piscarilius|~": "Crafting"}]
 			},
+			"Grace's Graceful Clothing": {
+				"Rogues' Den": [{"Access ~|Grace|~'s shop": "Nonskill"}]
+			},
 			"Happy Heroes' H'emporium%2E": {
 				"11574": [{"~|Heroes' Quest|~ Complete the quest": "Quest"}]
 			},
@@ -112062,6 +112201,9 @@
 			},
 			"Magic Guild Store (Runes and Staves)": {
 				"10288": [{"~|The Hand in the Sand|~ Complete the quest": "Quest"}]
+			},
+			"Martin Thwait's Lost and Found%2E": {
+				"Rogues' Den": [{"Access ~|Martin Thwait|~'s shop": "Nonskill"}]
 			},
 			"Multicannon parts for sale": {
 				"12085": [{"~|Dwarf Cannon|~ Complete the quest": "Quest"}]
@@ -112143,6 +112285,74 @@
 		"Slayer's staff": 55,
 		"Slayer's staff (e)": 55,
 		"Nose peg": 60
+	},
+	"slayerMonsters": {
+		"Crawling Hand": 5,
+		"Cave bug%2FLevel 6": 7,
+		"Cave bug%2FLevel 96": 7,
+		"Cave crawler": 10,
+		"Banshee": 15,
+		"Twisted Banshee": 15,
+		"Cave slime": 17,
+		"Rockslug": 20,
+		"Small Lizard": 22,
+		"Desert Lizard": 22,
+		"Lizard": 22,
+		"Cockatrice": 25,
+		"Pyrefiend": 30,
+		"Pyrelord": 30,
+		"Mogre": 32,
+		"Harpie Bug Swarm": 33,
+		"Wall beast": 35,
+		"Killerwatt": 37,
+		"Molanisk": 39,
+		"Basilisk": 40,
+		"Terror dog%2FLevel 100": 40,
+		"Terror dog%2FLevel 110": 40,
+		"Sea Snake Hatchling": 40,
+		"Sea Snake Young": 40,
+		"Fever spider": 42,
+		"Sulphur Lizard": 44,
+		"Infernal Mage": 45,
+		"Brine rat": 47,
+		"Bloodveld": 50,
+		"Mutated Bloodveld": 50,
+		"Jelly": 52,
+		"Warped Jelly": 52,
+		"Turoth": 55,
+		"Mutated Zygomite": 57,
+		"Ancient Zygomite": 57,
+		"Cave horror": 58,
+		"Aberrant spectre": 60,
+		"Deviant spectre": 60,
+		"Basilisk Knight": 60,
+		"Wyrm": 62,
+		"Spiritual ranger": 63,
+		"Dust devil": 65,
+		"Spitting Wyvern": 65,
+		"Taloned Wyvern": 65,
+		"Long-tailed Wyvern": 65,
+		"Spiritual warrior": 68,
+		"Kurask": 70,
+		"Skeletal Wyvern": 72,
+		"Gargoyle": 75,
+		"Grotesque Guardians": 75,
+		"Brutal black dragon": 77,
+		"Nechryael": 80,
+		"Greater Nechryael": 80,
+		"Ancient Wyvern": 82,
+		"Spiritual mage": 83,
+		"Drake": 84,
+		"Abyssal demon": 85,
+		"Abyssal Sire": 85,
+		"Cave kraken": 87,
+		"Kraken": 87,
+		"Dark beast": 90,
+		"Cerberus": 91,
+		"Smoke devil": 93,
+		"Thermonuclear Smoke Devil": 93,
+		"Hydra": 95,
+		"Alchemical Hydra": 95
 	},
 	"walkableChunks": ["9023", "10559", "6462", "9790", "10558", "11326", "14142", "14398", "6205", "6461", "6717", "6973", "8253", "8509", "11325", "11581", "11837", "12093", "12349", "12605", "12861", "13117", "13373", "5180", "5692", "5948", "6204", "6460", "6716", "6972", "7228", "8252", "8508", "9276", "9532", "10044", "10300", "11068", "11324", "11836", "12092", "12348", "12604", "12860", "13116", "13372", "14652", "14908", "15164", "4667", "4923", "5179", "5435", "5691", "5947", "6203", "6459", "6715", "6971", "7227", "8763", "9275", "9531", "10043", "10811", "11067", "11323", "11835", "12091", "12347", "12603", "12859", "13115", "13371", "14651", "14907", "15163", "4666", "4922", "5178", "5434", "5690", "5946", "6202", "6458", "6714", "6970", "7226", "10042", "10554", "10810", "11066", "11322", "11578", "11834", "12090", "12346", "12602", "12858", "13114", "13370", "14650", "14906", "15162", "4665", "4921", "5177", "5433", "5689", "5945", "6201", "6457", "6713", "6969", "7225", "9017", "9273", "10297", "10553", "10809", "11065", "11321", "11577", "11833", "12089", "12345", "12601", "12857", "13113", "13369", "14649", "4664", "4920", "5176", "5432", "5688", "5944", "6200", "6456", "6712", "6968", "7224", "9016", "9272", "9528", "10040", "10296", "10552", "10808", "11064", "11320", "11576", "11832", "12088", "12344", "12600", "12856", "13112", "13368", "13624", "4663", "4919", "5175", "5431", "5687", "5943", "6199", "6455", "6711", "6967", "7223", "7479", "9015", "9271", "9527", "9783", "10039", "10551", "10807", "11063", "11319", "11575", "11831", "12087", "12343", "12599", "12855", "13111", "13367", "13623", "13879", "14135", "14391", "14647", "15159", "4662", "4918", "5174", "5430", "5686", "5942", "6198", "6454", "6710", "6966", "7222", "7478", "9014", "9270", "9526", "9782", "10038", "10294", "10550", "10806", "11062", "11318", "11574", "11830", "12086", "12342", "12598", "12854", "13110", "13366", "13622", "13878", "14134", "14390", "14646", "5941", "6197", "6453", "6965", "7221", "8501", "8757", "9013", "9269", "9525", "9781", "10037", "10293", "10549", "10805", "11061", "11317", "11573", "11829", "12085", "12341", "12597", "12853", "13109", "13365", "13621", "13877", "14133", "14389", "14645", "14901", "8500", "8756", "9012", "9268", "9524", "9780", "10036", "10292", "10548", "10804", "11060", "11316", "11572", "11828", "12084", "12340", "12596", "12852", "13108", "13364", "13620", "13876", "14132", "14388", "14644", "14900", "8499", "8755", "9011", "9267", "9523", "9779", "10035", "10291", "10547", "10803", "11059", "11315", "11571", "11827", "12083", "12339", "12595", "12851", "13107", "13363", "13619", "13875", "14131", "14387", "14643", "14899", "8498", "8754", "9010", "9266", "9778", "10034", "10290", "10546", "10802", "11058", "11314", "11570", "11826", "12082", "12338", "12594", "12850", "13106", "13362", "13618", "13874", "14130", "14386", "14642", "14898", "8497", "8753", "9009", "9265", "9521", "9777", "10033", "10289", "10545", "10801", "11057", "11313", "11569", "11825", "12081", "12337", "12593", "12849", "13105", "13361", "13617", "13873", "14129", "14385", "14641", "8496", "8752", "9008", "9264", "9520", "9776", "10032", "10288", "10544", "11056", "11312", "11568", "11824", "12848", "13104", "13360", "13616", "13872", "8495", "8751", "9007", "9263", "9519", "9775", "10031", "10287", "11055", "11311", "11567", "11823", "12591", "12847", "13103", "13359", "13615", "14639", "14895", "15151", "15407", "8238", "8494", "8750", "9006", "9262", "9774", "10030", "10286", "10542", "11054", "11310", "11566", "11822", "12078", "12590", "12846", "13102", "13358", "13614", "14638", "14894", "15150", "15406", "8237", "8493", "8749", "9005", "9261", "9773", "10029", "10285", "11053", "11309", "11565", "11821", "12589", "12845", "13101", "13357", "13613", "14637", "8236", "8492", "8748", "9004", "9260", "9772", "10028", "10284", "12332", "12588", "12844", "13100", "13356", "15148", "8491", "8747", "9003", "10795", "11051", "12587", "12843", "13099", "10794", "11050", "11562", "10537", "10536", "10543", "14902"],
 	"equipment": {

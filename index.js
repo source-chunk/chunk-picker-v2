@@ -855,7 +855,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.6");
+const myWorker = new Worker("./worker.js?v=4.9.7");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -892,7 +892,7 @@ myWorker.onmessage = function(e) {
         !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).forEach(task => {
             if (!!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier')) {
                 numClueTasks[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
-                if (globalValids['Nonskill'].hasOwnProperty(task)) {
+                if (globalValids.hasOwnProperty('Nonskill') && globalValids['Nonskill'].hasOwnProperty(task)) {
                     numClueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
                 }
             }
@@ -3889,6 +3889,7 @@ var addManualTask = function(challenge) {
         } else if (skill !== 'BiS') {
             delete manualTasks[skill][challenge];
             delete chunkInfo['challenges'][skill][challenge]['Manual'];
+            delete chunkInfo['challenges'][skill][challenge]['ManualValid'];
             if (Object.keys(manualTasks[skill]).length === 0) {
                 delete manualTasks[skill];
             }
