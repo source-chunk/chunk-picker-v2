@@ -1828,7 +1828,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             }
                         });
                     }
-                    if (!!dropRatesGlobal[realSource] && !!dropRatesGlobal[realSource][item] && (!backlog['Extra'] || !backlog['Extra'].hasOwnProperty(realSource.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + dropRatesGlobal[realSource][item].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'))) {
+                    if (!!dropRatesGlobal[realSource] && !!dropRatesGlobal[realSource][item] && (!backlog['Extra'] || !backlog['Extra'].hasOwnProperty(realSource.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + dropRatesGlobal[realSource][item].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')')) && !dropTables.hasOwnProperty(item)) {
                         drops[item] = true;
                         valids['Extra'][realSource.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + dropRatesGlobal[realSource][item].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'] = 'Every Drop';
                         if (!chunkInfo['challenges']['Extra']) {
