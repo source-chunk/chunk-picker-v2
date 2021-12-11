@@ -146,7 +146,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         let validsList = {};
         let savedValids = {};
         let passedByTasks = {};
-        while (leftoversCount < 10 && (Object.keys(leftovers).length > 0 && !_.isEqual(leftovers, validsList) || !_.isEqual(newValids, savedValids))) {
+        while (leftoversCount < 10 && (Object.keys(leftovers).length > 0 && (!_.isEqual(leftovers, validsList) || !_.isEqual(newValids, savedValids)))) {
             validsList = {...leftovers};
             savedValids = JSON.parse(JSON.stringify(newValids));
             leftovers = {};
@@ -495,7 +495,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 }
                             }
                         } else {
-                            if (!checkPrimaryMethod(chunkInfo['challenges'][skill][challenge]['Tasks'][subTask], newValids, baseChunkData) || (!valids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] || (!valids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) && !newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]))) || (backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] && backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]))) {
+                            if (!checkPrimaryMethod(chunkInfo['challenges'][skill][challenge]['Tasks'][subTask], newValids, baseChunkData) || (!valids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] || !newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] || (!valids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) && !newValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]))) || (backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] && backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]))) {
                                 if (!(rules['Show Diary Tasks Any'] && skill === 'Diary' && (chunkInfo['challenges'][skill][challenge]['Tasks'][subTask] === 'Diary' || subTask.includes('--')) && chunkInfo['challenges'][chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) && !chunkInfo['challenges'][skill][challenge]['ManualShow']) && !chunkInfo['challenges'][skill][challenge]['ManualValid']) {
                                     if (!nonValids.hasOwnProperty(challenge)) {
                                         nonValids[challenge] = [];
@@ -675,12 +675,12 @@ var calcChallenges = function(chunks, baseChunkData) {
                     tempValid = false;
                 }
             });
-            if (!tempValid && baseChunkData['items'].hasOwnProperty(item)) {
-                !!baseChunkData['items'] && (baseChunkData['items'][item + '*'] = {...baseChunkData['items'][item]});
-                !!baseChunkData['items'] && delete baseChunkData['items'][item];
-            } else if (tempValid && baseChunkData['items'].hasOwnProperty(item + '*')) {
-                !!baseChunkData['items'] && (baseChunkData['items'][item] = {...baseChunkData['items'][item + '*']});
-                !!baseChunkData['items'] && delete baseChunkData['items'][item + '*'];
+            if (!tempValid && !!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) {
+                baseChunkData['items'][item + '*'] = {...baseChunkData['items'][item]};
+                delete baseChunkData['items'][item];
+            } else if (tempValid && !!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + '*')) {
+                baseChunkData['items'][item] = {...baseChunkData['items'][item + '*']};
+                delete baseChunkData['items'][item + '*'];
             }
         });
         if (rules['RDT'] && baseChunkData['items']['GemDropTable+'] && newValids && newValids['Quest'] && newValids['Quest'].hasOwnProperty("~|Legends' Quest|~ Complete the quest")) {
@@ -947,7 +947,11 @@ var calcChallenges = function(chunks, baseChunkData) {
             }
             Object.keys(outputs[output]).forEach(source => {
                 if (outputs[output][source].split('-').length <= 1 || ((newValids.hasOwnProperty(outputs[output][source].split('-')[1]) && newValids[outputs[output][source].split('-')[1]].hasOwnProperty(source)) || (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(source)))) {
-                    baseChunkData['items'][output][source] = outputs[output][source];
+                    if (baseChunkData['items'].hasOwnProperty(output + '*')) {
+                        baseChunkData['items'][output + '*'][source] = outputs[output][source];
+                    } else {
+                        baseChunkData['items'][output][source] = outputs[output][source];
+                    }
                 }
             });
             if (baseChunkData['items'][output] === {}) {
@@ -1033,7 +1037,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             });
         });
         //console.log(i);
-    } while (!_.isEqual(valids, newValids) && i < 10);
+    } while ((!_.isEqual(valids, newValids) && i < 10) || i < 3);
     valids = newValids;
     //console.log(baseChunkData);
     return valids;
@@ -1973,6 +1977,11 @@ var calcBIS = function() {
             let validWearable = true;
             !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
                 if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                    validWearable = false;
+                }
+            });
+            chunkInfo['taskUnlocks']['Items'].hasOwnProperty(equip) && chunkInfo['taskUnlocks']['Items'][equip].forEach(task => {
+                if (!globalValids || !globalValids[Object.values(task)[0]] || !globalValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
                     validWearable = false;
                 }
             });
