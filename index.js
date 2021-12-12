@@ -855,7 +855,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.9");
+const myWorker = new Worker("./worker.js?v=4.9.10");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -5427,6 +5427,7 @@ var checkMID = function(mid) {
     if (mid === 'change-pin') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
+        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').hide();
         $('#home-menu').hide();
         $('#pin-menu').show();
         $('.mid-old').focus();
