@@ -855,7 +855,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.10");
+const myWorker = new Worker("./worker.js?v=4.9.11");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2453,6 +2453,7 @@ var changePin = function() {
                     $('.loading').show();
                     $('#page8').hide();
                     $('.background-img').hide();
+                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').show();
                     setupMap();
                 }).catch((error) => { console.log(error) });
             }
