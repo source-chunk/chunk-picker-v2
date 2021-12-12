@@ -2549,17 +2549,6 @@
 				"Primary": true,
 				"Priority": 60
 			},
-			"Build a ~|crafting table 2|~ for making clockwork": {
-				"Chunks": ["Player-owned house"],
-				"Items": ["Hammer+", "Saw+", "Oak plank", "Molten glass"],
-				"Level": 25,
-				"Primary": true,
-				"Priority": 1000,
-				"Tasks": {
-					"Craft a ~|clockwork|~ on a crafting table 2": "Crafting"
-				},
-				"AlwaysValid": true
-			},
 			"Build a ~|crafting table 3|~": {
 				"Category": ["InsidePOH"],
 				"Chunks": ["Player-owned house"],
@@ -7306,11 +7295,14 @@
 				"Chunks": ["Player-owned house"],
 				"Items": ["Steel bar"],
 				"Level": 8,
-				"Reward": ["Clockwork"],
+				"Output": "Clockwork",
 				"Primary": true,
 				"Priority": 4,
+				"Skills": {
+					"Construction": 25
+				},
 				"Tasks": {
-					"Build a ~|crafting table 2|~ for making clockwork": "Construction"
+					"Crafting Table 2 materials": "Nonskill"
 				},
 				"AlwaysValid": true
 			},
@@ -16904,6 +16896,9 @@
 			"Kill a runite golem": {
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rock"
+			},
+			"Crafting Table 2 materials": {
+				"Items": ["Hammer+", "Saw+", "Oak plank", "Molten glass"]
 			},
 			"Access ~|Grace|~'s shop": {
 				"Chunks": ["Rogues' Den"],
@@ -58379,6 +58374,7 @@
 			},
 			"Spawn": {
 				"Bones": 4,
+				"Leather boots": 1,
 				"Leather gloves": 1,
 				"Skull (item)": 1
 			}
@@ -67895,7 +67891,8 @@
 			"Monster": {
 				"Imp": 9,
 				"Invrigar the Necromancer": 1,
-				"Necromancer": 1
+				"Necromancer (Necromancer Tower)": 1,
+				"Summoned Zombie": 1
 			},
 			"NPC": {
 				"'Black-eye'": 1,
@@ -95657,6 +95654,7 @@
 			"Bronze axe": "3/110",
 			"Bronze dagger": "3/110",
 			"Bronze pickaxe": "3/110",
+			"Buttons": "4/110",
 			"Clue scroll (easy)": "1/55",
 			"Coal": "2/110",
 			"Coins": "13.5/110",
@@ -98022,6 +98020,25 @@
 			"Staff": "1/26",
 			"Water rune": "1/13",
 			"Water talisman": "1/52"
+		},
+		"Necromancer (Necromancer Tower)": {
+			"Air rune": "3/128",
+			"Blood rune": "2/128",
+			"Body rune": "3/128",
+			"Bones": "Always",
+			"Chaos rune": "6/128",
+			"Coins": "17/128",
+			"Cosmic rune": "1/128",
+			"Earth rune": "4/128",
+			"Law rune": "1/128",
+			"Mind rune": "43128",
+			"Nature rune": "7/128",
+			"Nothing": "16/128",
+			"Staff": "8/128",
+			"Staff of fire": "1/128",
+			"Water rune": "3/128",
+			"Zamorak monk bottom": "4/128",
+			"Zamorak monk top": "3/128"
 		},
 		"Night beast": {
 			"Adamant sq shield": "1/128",

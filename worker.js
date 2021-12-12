@@ -668,6 +668,24 @@ var calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
+        !rules["Highest Level"] && Object.keys(tempItemSkill).forEach(skill => {
+            let lowestName;
+            let lowestLevel;
+            !!newValids[skill] && Object.keys(newValids[skill]).forEach(challenge => {
+                if ((!lowestLevel || (lowestLevel < newValids[skill][challenge])) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                    lowestName = challenge;
+                    lowestLevel = newValids[skill][challenge];
+                }
+            });
+            !!lowestName && Object.keys(tempItemSkill[skill]).forEach(item => {
+                !!baseChunkData['items'][item] && tempItemSkill[skill][item].forEach(name => {
+                    if (chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= chunkInfo['challenges'][skill][lowestName]['Level'])) {
+                        !newValids[skill] && (newValids[skill] = {});
+                        newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                    }
+                });
+            });
+        });
         Object.keys(chunkInfo['taskUnlocks']['Items']).forEach(item => {
             let tempValid = true;
             chunkInfo['taskUnlocks']['Items'][item].forEach(task => {
@@ -865,7 +883,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
-        let tempChallenges = JSON.parse(JSON.stringify(valids));
+        let tempChallenges = JSON.parse(JSON.stringify(newValids));
         Object.keys(extraOutputItems).forEach(skill => {
             Object.keys(extraOutputItems[skill]).forEach(challenge => {
                 if (!tempChallenges[skill]) {
@@ -878,7 +896,13 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         Object.keys(tempChallenges).forEach(skill => {
             checkPrimaryMethod(skill, tempChallenges, baseChunkData) && Object.keys(tempChallenges[skill]).forEach(challenge => {
-                if (skill !== 'Extra' && skill !== 'BiS') {
+                let subSkillValid = true;
+                chunkInfo['challenges'][skill][challenge].hasOwnProperty('Skills') && Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+                    if (!checkPrimaryMethod(subSkill, tempChallenges, baseChunkData)) {
+                        subSkillValid = false;
+                    }
+                });
+                if (subSkillValid && skill !== 'Extra' && skill !== 'BiS') {
                     if (!!chunkInfo['challenges'][skill][challenge]['Output'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         let output = chunkInfo['challenges'][skill][challenge]['Output'];
                         !!chunkInfo['skillItems'][skill] && !!chunkInfo['skillItems'][skill][output] && Object.keys(chunkInfo['skillItems'][skill][output]).forEach(item => {
@@ -1868,7 +1892,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
                 let primaryValid = false;
                 !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
                     if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
-                        if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil')) {
+                        if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil') || baseChunkData['objects'].hasOwnProperty('Rusted anvil')) {
                             primaryValid = true;
                         }
                     }

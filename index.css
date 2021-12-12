@@ -3636,6 +3636,10 @@ input#searchMonsters {
     transition-duration: 0.3s;
     transition-property: color;
     pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .chunk-sticker.clicky {
@@ -3764,6 +3768,10 @@ input#searchMonsters {
     border-radius: 10px;
     padding: 5px;
     cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .blacklist-label.hidden-blacklist-label {
