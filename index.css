@@ -1489,6 +1489,22 @@ button.menu2 {
     border: solid;
     border-width: 0 0 2px 0;
     background-color: var(--color1);
+    background: repeating-linear-gradient(45deg, #00a151, #00a151 20px, #ffffff 20px, #ffffff 25px, #e4272b 25px, #e4272b 45px, #ffffff 45px, #ffffff 50px);
+    color: black;
+}
+
+.topnav a {
+    color: black;
+}
+
+.topnav i {
+    -webkit-text-fill-color: black;
+    -webkit-text-stroke-width: 0.045em;
+    -webkit-text-stroke-color: #868080;
+}
+
+.topnav i:hover {
+    -webkit-text-stroke-color: rgb(100, 100, 255);
 }
 
 @-webkit-keyframes spinner2 {
@@ -1563,10 +1579,11 @@ button.menu2 {
     top: 2px;
     left: 65px;
     font-size: 40px;
+    font-weight: bold;
 }
 
 .gohome:hover {
-    color: rgb(100, 100, 255);
+    color: rgb(50, 50, 205);
 }
 
 .gohighscore {
@@ -1629,12 +1646,14 @@ button.menu2 {
     right: 290px;
     font-size: 44px;
     color: #f96854;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-fill-color: #f96854 !important;
+    -webkit-text-stroke-width: 3px !important;
+    -webkit-text-stroke-color: black !important;
 }
 
 .gopatreon:hover {
     color: rgb(100, 100, 255);
+    -webkit-text-stroke-color: rgb(50, 50, 205) !important;
 }
 
 .gosearch {
@@ -1642,7 +1661,7 @@ button.menu2 {
     transition-duration: .5s;
     cursor: pointer;
     top: 4px;
-    left: 335px;
+    left: 345px;
     font-size: 44px;
 }
 
@@ -2294,6 +2313,8 @@ button.menu2 {
 
 .mini.avatar img {
     border: solid 2px black;
+    width: 45px;
+    height: 45px;
 }
 
 .active-context-menu {
@@ -3868,8 +3889,11 @@ input#searchMonsters {
     margin-right: 5px;
 }
 
-.modal#myModal23 {
-    background-color: var(--color2);
+.background-img-23 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    filter: blur(1px) brightness(50%);
 }
 
 .roll-chunk-title {
@@ -3921,8 +3945,7 @@ input#searchMonsters {
 .roll-chunk-window-outer {
     position: absolute;
     left: calc(50% - 8vh);
-    border: solid 1px;
-    padding: 16vh 0px 16vh 0px;
+    border: solid 3px;
     height: 48vh;
     width: 16vh;
     box-sizing: border-box;
@@ -3931,43 +3954,173 @@ input#searchMonsters {
     overflow: hidden;
 }
 
-.roll-chunk-window {
-    border-top: solid 5px black;
-    border-bottom: solid 5px black;
+.roll-chunk-window1 {
     width: 16vh;
-    height: 15.5vh;
+    height: 16vh;
     margin-top: -.1vh;
     margin-left: -.1vh;
     z-index: 2;
     position: absolute;
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.25) 100%);
 }
 
-.roll-chunk-window::before {
-    font-family: "FontAwesome";
-    content: "\f101";
-    color: var(--colorText);
-    position: fixed;
-    margin-left: -12vh;
-    margin-top: 2vh;
-    -webkit-text-fill-color: var(--colorText);
-    -webkit-text-stroke-width: .033em;
-    -webkit-text-stroke-color: rgba(0, 0, 0, .75);
-    pointer-events: none;
-    font-size: 84px;
+.roll-chunk-window2 {
+    border-top: solid 0.5vh;
+    border-bottom: solid 0.5vh;
+    width: 16vh;
+    height: 15.5vh;
+    margin-top: 15.9vh;
+    margin-left: -0.1vh;
+    z-index: 3;
+    position: absolute;
 }
 
-.roll-chunk-window::after {
+.roll-chunk-window3 {
+    width: 16vh;
+    height: 16vh;
+    margin-top: 31.9vh;
+    margin-left: -.1vh;
+    z-index: 2;
+    position: absolute;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.25) 100%);
+}
+
+.chunk-window-child1::before {
     font-family: "FontAwesome";
-    content: "\f100";
+    content: "\f054";
     color: var(--colorText);
     position: fixed;
-    margin-left: 20vh;
+    margin-left: -5.75vh;
     margin-top: 2vh;
     -webkit-text-fill-color: var(--colorText);
-    -webkit-text-stroke-width: .033em;
-    -webkit-text-stroke-color: rgba(0, 0, 0, .75);
+    -webkit-text-stroke-width: .045em;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     pointer-events: none;
     font-size: 84px;
+    animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url("./christmas-stripes.jpg");
+}
+
+.chunk-window-child1::after {
+    font-family: "FontAwesome";
+    content: "\f053";
+    color: var(--colorText);
+    position: fixed;
+    margin-left: 15.75vh;
+    margin-top: 2vh;
+    -webkit-text-fill-color: var(--colorText);
+    -webkit-text-stroke-width: .045em;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+    pointer-events: none;
+    font-size: 84px;
+    animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url("./christmas-stripes.jpg");
+}
+
+.chunk-window-child2::before {
+    font-family: "FontAwesome";
+    content: "\f054";
+    color: var(--colorText);
+    position: fixed;
+    margin-left: -9.75vh;
+    margin-top: 2vh;
+    -webkit-text-fill-color: var(--colorText);
+    -webkit-text-stroke-width: .045em;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+    pointer-events: none;
+    font-size: 84px;
+    animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url("./christmas-stripes.jpg");
+}
+
+.chunk-window-child2::after {
+    font-family: "FontAwesome";
+    content: "\f053";
+    color: var(--colorText);
+    position: fixed;
+    margin-left: 19.75vh;
+    margin-top: 2vh;
+    -webkit-text-fill-color: var(--colorText);
+    -webkit-text-stroke-width: .045em;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+    pointer-events: none;
+    font-size: 84px;
+    animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url("./christmas-stripes.jpg");
+}
+
+.chunk-window-child3::before {
+    font-family: "FontAwesome";
+    content: "\f054";
+    color: var(--colorText);
+    position: fixed;
+    margin-left: -13.75vh;
+    margin-top: 2vh;
+    -webkit-text-fill-color: var(--colorText);
+    -webkit-text-stroke-width: .045em;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+    pointer-events: none;
+    font-size: 84px;
+    animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url("./christmas-stripes.jpg");
+}
+
+.chunk-window-child3::after {
+    font-family: "FontAwesome";
+    content: "\f053";
+    color: var(--colorText);
+    position: fixed;
+    margin-left: 23.75vh;
+    margin-top: 2vh;
+    -webkit-text-fill-color: var(--colorText);
+    -webkit-text-stroke-width: .045em;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 1);
+    pointer-events: none;
+    font-size: 84px;
+    animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url("./christmas-stripes.jpg");
+}
+
+@keyframes wave-horizontal {
+    10%, 30%, 50%, 70%, 90% {
+        -webkit-transform: translateX(-3px);
+                transform: translateX(-3px);
+    }
+
+    0%, 20%, 40%, 60%, 80%, 100% {
+        -webkit-transform: translateX(3px);
+                transform: translateX(3px);
+    }
+}
+
+@keyframes wave-invert-horizontal {
+    10%, 30%, 50%, 70%, 90% {
+        -webkit-transform: translateX(3px);
+                transform: translateX(3px);
+    }
+
+    0%, 20%, 40%, 60%, 80%, 100% {
+        -webkit-transform: translateX(-3px);
+                transform: translateX(-3px);
+    }
 }
 
 .roll-chunk-inner img {

@@ -855,7 +855,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.12");
+const myWorker = new Worker("./worker.js?v=4.9.13");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1346,7 +1346,7 @@ $(document).on({
             }
             toggleQuestInfo();
             settingsMenu();
-        } else if (e.keyCode === 27 && testMode) {
+        } else if (e.keyCode === 27 && testMode && !rollChunkModalOpen) {
             testMode = false;
             locked && $('.open-manual-outer-container').css('opacity', 0).hide();
             loadData();
@@ -3609,7 +3609,7 @@ var openRollChunk = function(el, rand, sNum) {
     $('.roll-chunk-title').text('Rolling your next chunk...');
     $('.roll-chunk-subtitle').text('');
     $('.roll-chunk-outer').empty().css('top', '0');
-    $('#submit-roll-chunk-button').attr('disabled', true);
+    $('#submit-roll-chunk-button').hide();
     pickedNum = rand;
     let numSlots = 500;
     let elArr = [...el];
@@ -3645,7 +3645,7 @@ var openRollChunk = function(el, rand, sNum) {
             complete: function() {
                 $('.roll-chunk-title').text((chunkInfo['chunks'].hasOwnProperty(chosen) && chunkInfo['chunks'][chosen].hasOwnProperty('Nickname') ? chunkInfo['chunks'][chosen]['Nickname'] : 'Unknown') + '(' + chosen + ')');
                 !!sNum && !isNaN(sNum) && $('.roll-chunk-subtitle').text('[Rolled number: ' + sNum + ']');
-                $('#submit-roll-chunk-button').attr('disabled', false);
+                $('#submit-roll-chunk-button').show();
             }
         });
     }, 1000);
@@ -3662,7 +3662,7 @@ var takeMeToChunk = function() {
     $('.roll-chunk-title').text('Rolling your next chunk...');
     $('.roll-chunk-subtitle').text('');
     $('.roll-chunk-outer').empty().css('top', '0');
-    $('#submit-roll-chunk-button').attr('disabled', true);
+    $('#submit-roll-chunk-button').hide();
     $('#myModal23').hide();
 }
 
