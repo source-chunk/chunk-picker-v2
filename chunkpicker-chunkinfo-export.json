@@ -68345,7 +68345,7 @@
 				"Fremennik Fish Monger": true,
 				"Fremennik Fur Trader": true,
 				"Rellekka Longhall Bar": true,
-				"Sigmund the Merchant (Shop)": true,
+				"Sigmund the Merchant (shop)": true,
 				"Skulgrimen's Battle Gear": true,
 				"Yrsa's Accoutrements": true
 			},
@@ -106097,7 +106097,7 @@
 			"Yew longbow": true,
 			"Yew shortbow": true
 		},
-		"Sigmund the Merchant (Shop)": {
+		"Sigmund the Merchant (shop)": {
 			"Bread": true,
 			"Bucket": true,
 			"Bucket of water": true,
@@ -112197,6 +112197,9 @@
 			"Frankie's Fishing Emporium": {
 				"7226": [{"Repair a crane at ~|Port Piscarilius|~": "Crafting"}]
 			},
+			"Fremennik Fish Monger": {
+				"10553": [{"~|The Fremennik Trials|~ Complete the quest": "Quest"}]
+			},
 			"Grace's Graceful Clothing": {
 				"Rogues' Den": [{"Access ~|Grace|~'s shop": "Nonskill"}]
 			},
@@ -112260,11 +112263,17 @@
 			"Slayer Equipment (shop)": {
 				"11310": [{"~|Shilo Village|~ Complete the quest": "Quest"}]
 			},
+			"Sigmund the Merchant (shop)": {
+				"10553": [{"~|The Fremennik Trials|~ Complete the quest": "Quest"}]
+			},
 			"Sir Tiffy Cashien (Recruitment Drive)": {
 				"11828": [{"~|Recruitment Drive|~ Complete the quest": "Quest"}]
 			},
 			"Sir Tiffy Cashien (The Slug Menace)": {
 				"11828": [{"~|The Slug Menace|~ Complete the quest": "Quest"}]
+			},
+			"Skulgrimen's Battle Gear": {
+				"10553": [{"~|The Fremennik Trials|~ Complete the quest": "Quest"}]
 			},
 			"Tamayu's Spear Stall": {
 				"11055": [{"~|Tai Bwo Wannai Trio|~ Complete the quest": "Quest"}]
@@ -112283,6 +112292,9 @@
 			},
 			"White Knight Armoury": {
 				"11828": [{"~|Wanted!|~ Complete the quest": "Quest"}]
+			},
+			"Yrsa's Accoutrements": {
+				"10553": [{"~|The Fremennik Trials|~ Complete the quest": "Quest"}]
 			}
 		}
 	},
