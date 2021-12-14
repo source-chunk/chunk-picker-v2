@@ -1770,6 +1770,7 @@ button.menu2 {
     text-align: left;
     padding-left: 10px;
     overflow-y: auto;
+    overflow-x: clip;
     padding-bottom: 5px;
 }
 
@@ -4451,6 +4452,7 @@ input#searchMonsters {
     grid-gap: 0.25em;
     font-weight: normal;
     pointer-events: none;
+    overflow-wrap: break-word;
 }
   
 .checkbox--disabled {

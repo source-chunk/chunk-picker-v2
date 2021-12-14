@@ -294,6 +294,7 @@ let rules = {
     "Starting Items": false,
     "Tutor Ammo": false,
     "Secondary MTA": false,
+    "Fossil Island Tasks": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -356,6 +357,7 @@ let ruleNames = {
     "Starting Items": "Allow tools gained from leaving Tutorial Island to be used within your chunks (aka not dropping your starting items). Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net, shortbow",
     "Tutor Ammo": "Items from the Magic/Ranged Combat Tutors in Lumbridge count as a way to train those respective skills (Air/Mind runes and Training bow/arrows)",
     "Secondary MTA": "Allow MTA to be required with secondary sources of nature/law/cosmic runes",
+    "Fossil Island Tasks": "Require the Fossil Island Mini-Task List be completed, similar to diary tasks",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -394,6 +396,7 @@ let rulePresets = {
         "Show Quest Tasks": true,
         "Show Diary Tasks": true,
         "Show Diary Tasks Any": true,
+        "Fossil Island Tasks": true,
         "Show Best in Slot Tasks": true,
         "Show Best in Slot Prayer Tasks": true,
         "Highest Level": true,
@@ -432,7 +435,7 @@ let ruleStructure = {
     "Visible Tasks": {
         "Show Skill Tasks": true,
         "Show Quest Tasks": ["Show Quest Tasks Complete"],
-        "Show Diary Tasks": ["Show Diary Tasks Complete", "Show Diary Tasks Any"],
+        "Show Diary Tasks": ["Show Diary Tasks Complete", "Show Diary Tasks Any", "Fossil Island Tasks"],
         "Show Best in Slot Tasks": ["Show Best in Slot Prayer Tasks", "Show Best in Slot Defensive Tasks", "Show Best in Slot Flinching Tasks", "Show Best in Slot Weight Tasks"]
     },
     "Overall Skill": {
@@ -773,7 +776,11 @@ let diaryTierAbr = {
     'Easy': 'EA',
     'Medium': 'MD',
     'Hard': 'HD',
-    'Elite': 'EL'
+    'Elite': 'EL',
+    'Museum Camp': 'MC',
+    'Northern Reaches': 'NR',
+    'Southern Swamps': 'SS',
+    'Mountainous East': 'ME'
 };                                                                                  // Abbreviations for diary tiers
 
 // Misc. modal and task variables
@@ -855,7 +862,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.15");
+const myWorker = new Worker("./worker.js?v=4.9.16");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -971,29 +978,6 @@ window.addEventListener('keyup', function(e) {
     }
 }, false);
 
-// [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
-hammertime.on('panstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
-        clickX = ev.changedPointers[0].pageX;
-        clickY = ev.changedPointers[0].pageY;
-    }
-});
-
-// [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
-hammertime.on('panend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
-        prevScrollLeft = prevScrollLeft + scrollLeft;
-        prevScrollTop = prevScrollTop + scrollTop;
-    }
-});
-
-// [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
-hammertime.on('panleft panright panup pandown', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
-        updateScrollPos(ev.changedPointers[0]);
-    }
-});
-
 jQuery.event.special.touchstart = {
     setup: function( _, ns, handle ) {
         this.addEventListener("touchstart", handle, { passive: !ns.includes("noPreventDefault") });
@@ -1002,6 +986,11 @@ jQuery.event.special.touchstart = {
 jQuery.event.special.touchmove = {
     setup: function( _, ns, handle ) {
         this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
+    }
+};
+jQuery.event.special.touchend = {
+    setup: function( _, ns, handle ) {
+        this.addEventListener("touchend", handle, { passive: !ns.includes("noPreventDefault") });
     }
 };
 jQuery.event.special.wheel = {
@@ -1257,6 +1246,32 @@ $(document).ready(function() {
             $('#submit-friend-button').prop('disabled', true);
         }
     });
+});
+
+// [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
+$('body').on('touchstart', function(ev) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
+        ev.preventDefault();
+        clickX = ev.changedTouches[0].pageX;
+        clickY = ev.changedTouches[0].pageY;
+    }
+});
+
+// [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
+$('body').on('touchend', function(ev) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
+        ev.preventDefault();
+        prevScrollLeft = prevScrollLeft + scrollLeft;
+        prevScrollTop = prevScrollTop + scrollTop;
+    }
+});
+
+// [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
+$('body').on('touchmove', function(ev) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
+        ev.preventDefault();
+        updateScrollPos(ev.changedTouches[0]);
+    }
 });
 
 // Credit to Amehzyn
@@ -1739,7 +1754,7 @@ var pick = function(both) {
         el = $('.walkable:not(.unlocked)');
         rand = Math.floor(Math.random() * el.length);
         sNum = $($(el[rand]).children('.label')).text();
-        if (settings['cinematicRoll']) {
+        if (settings['cinematicRoll'] && !onMobile) {
             openRollChunk(el, rand, sNum);
         }
         selectedChunks++;
@@ -1757,7 +1772,7 @@ var pick = function(both) {
         el = $('.selected');
         rand = Math.floor(Math.random() * el.length);
         sNum = $($(el[rand]).children('.label')).text();
-        if (settings['cinematicRoll']) {
+        if (settings['cinematicRoll'] && !onMobile) {
             openRollChunk(el, rand, sNum);
         }
         $(el[rand]).children('.label').remove();
@@ -1766,7 +1781,7 @@ var pick = function(both) {
         el = $('.potential');
         rand = Math.floor(Math.random() * el.length);
         sNum = $($(el[rand]).children('.label')).text();
-        if (settings['cinematicRoll']) {
+        if (settings['cinematicRoll'] && !onMobile) {
             openRollChunk(el, rand, sNum);
         }
         $(el[rand]).children('.label').remove();
@@ -1795,7 +1810,7 @@ var pick = function(both) {
     }
     $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
     $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-    !settings['cinematicRoll'] && scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
+    !settings['cinematicRoll'] || onMobile && scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
     !showChunkIds && $('.chunkId').hide();
     let tempChunk1;
     let tempChunk2;
@@ -3668,8 +3683,8 @@ var takeMeToChunk = function() {
 
 // Opens the quest steps modal
 var openQuestSteps = function(skill, challenge) {
-    challenge = challenge.replaceAll('-', '%').replaceAll('/', '%2G').replaceAll('%2Q', '!').replaceAll('%2H', "'");
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
+        challenge = challenge.replaceAll('-', '%').replaceAll('/', '%2G').replaceAll('%2Q', '!').replaceAll('%2H', "'");
         questStepsModalOpen = true;
         let quest = skill === 'Diary' ? challenge.split('~')[1].split('|').join('').split('%2F')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')') : challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')');
         $('.quest-steps-title').html(`<a class='noscroll link' href="${"https://oldschool.runescape.wiki/w/" + encodeURI(quest)}" target='_blank'>${quest}</a>`);
@@ -3967,7 +3982,7 @@ var findFraction = function(fraction) {
 
     numerator /= divisor;
     denominator /= divisor;
-    return 1 + '/' + (+(Math.round((denominator/numerator) + "e+2")  + "e-2")).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    return 1 + '/' + (+(Math.round((denominator/numerator) + "e+2")  + "e-2")).toString().replace(/\B(?!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // Opens the search details modal

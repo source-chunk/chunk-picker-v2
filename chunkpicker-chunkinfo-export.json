@@ -7224,7 +7224,7 @@
 			"Craft a ~|bird house|~": {
 				"Items": ["Chisel", "Hammer", "Logs", "Clockwork"],
 				"Level": 5,
-				"Output": "Bird house",
+				"Output": "Bird house (item)",
 				"Primary": true,
 				"Priority": 2
 			},
@@ -13729,9 +13729,9 @@
 			},
 			"Use a ~|bird house|~": {
 				"Chunks": ["Birdhouse+"],
-				"Items": ["Bird house", "Birdhouse seed+"],
+				"Items": ["Bird house (item)", "Birdhouse seed+"],
 				"Level": 5,
-				"Output": "Bird house tracking",
+				"Output": "Bird house trapping",
 				"Primary": false,
 				"ManualInvalid": true,
 				"Priority": 2
@@ -16438,9 +16438,11 @@
 			"Access the ~|Volcanic Mine|~": {
 				"Category": ["Minigame"],
 				"Chunks": ["15163"],
+				"Items": ["Numulite"],
 				"Level": 50,
 				"Primary": false,
-				"Priority": 1
+				"Priority": 1,
+				"KudosNeeded": 150
 			},
 			"Buy the ~|Mining cape|~": {
 				"Category": ["Skillcape"],
@@ -41472,6 +41474,296 @@
 				},
 				"BaseQuest": "Wilderness Diary",
 				"Reward": ["Wilderness sword 4"],
+				"ManualShow": true
+			},
+			"~|Fossil Island Diary%2FMuseum Camp|~ Task 1": {
+				"Description": "Construct the bank chest.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Hammer+", "Oak plank", "Iron bar", "Nails+"],
+				"Skills": {
+					"Construction": 21
+				},
+				"Chunks": ["14907"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMuseum Camp|~ Task 2": {
+				"Description": "Construct the archaeologists' cleaning bench.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Hammer+", "Plank", "Nails+"],
+				"Skills": {
+					"Construction": 5
+				},
+				"Chunks": ["14907"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMuseum Camp|~ Task 3": {
+				"Description": "Construct the well.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Hammer+", "Oak plank", "Bucket", "Rope", "Nails+"],
+				"Skills": {
+					"Construction": 22
+				},
+				"Chunks": ["14907"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMuseum Camp|~ Task 4": {
+				"Description": "Construct the cooking pot.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Hammer+", "Logs", "Iron bar", "Tinderbox", "Soft clay"],
+				"Skills": {
+					"Construction": 24
+				},
+				"Chunks": ["14907"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMuseum Camp|~ Task 5": {
+				"Description": "Construct the spinning wheel.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Hammer+", "Oak plank", "Iron bar", "Nails+"],
+				"Skills": {
+					"Construction": 28
+				},
+				"Chunks": ["14907"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMuseum Camp|~ Task 6": {
+				"Description": "Construct the loom.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Hammer+", "Oak plank", "Rope", "Nails+"],
+				"Skills": {
+					"Construction": 29
+				},
+				"Chunks": ["14907"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMuseum Camp|~ Complete the Museum Camp Section": {
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14907"],
+				"Tasks": {
+					"~|Fossil Island Diary%2FMuseum Camp|~ Task 1": "Diary",
+					"~|Fossil Island Diary%2FMuseum Camp|~ Task 2": "Diary",
+					"~|Fossil Island Diary%2FMuseum Camp|~ Task 3": "Diary",
+					"~|Fossil Island Diary%2FMuseum Camp|~ Task 4": "Diary",
+					"~|Fossil Island Diary%2FMuseum Camp|~ Task 5": "Diary",
+					"~|Fossil Island Diary%2FMuseum Camp|~ Task 6": "Diary"
+				},
+				"BaseQuest": "Fossil Island Diary",
+				"Reward": ["Unidentified small fossil"],
+				"ManualShow": true
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Task 1": {
+				"Description": "Unlock the Mushtree of Mushroom Meadow.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14652"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Task 2": {
+				"Description": "Feed an enriched bone into the machine in the House on the Hill.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Unidentified fossil+", "Calcite", "Pyrophosphite"],
+				"Chunks": ["14652"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Task 3": {
+				"Description": "Find an Ancient Diary in the House on the Hill.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14908"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Task 4": {
+				"Description": "Unlock the Mushtree of the House on the Hill.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14908"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Task 5": {
+				"Description": "Visit the task-only Wyvern cave.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["Task Only Wyvern Cave"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Task 6": {
+				"Description": "Collect mermaid tears underwater.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["Underwater Fossil Island"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Task 7": {
+				"Description": "Set up a drift net to catch fish.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["Underwater Fossil Island"],
+				"Items": ["Drift net", "Numulite"],
+				"Skills": {
+					"Hunter": 44,
+					"Fishing": 47
+				},
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Task 8": {
+				"Description": "Harvest seaweed from an underwater Farming patch.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Seed dibber", "Rake", "Seaweed spore"],
+				"Objects": ["Seaweed patch"],
+				"Skills": {
+					"Farming": 23
+				},
+				"Chunks": ["Underwater Fossil Island"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FNorthern Reaches|~ Complete the Northern Reaches Section": {
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14907"],
+				"Tasks": {
+					"~|Fossil Island Diary%2FNorthern Reaches|~ Task 1": "Diary",
+					"~|Fossil Island Diary%2FNorthern Reaches|~ Task 2": "Diary",
+					"~|Fossil Island Diary%2FNorthern Reaches|~ Task 3": "Diary",
+					"~|Fossil Island Diary%2FNorthern Reaches|~ Task 4": "Diary",
+					"~|Fossil Island Diary%2FNorthern Reaches|~ Task 5": "Diary",
+					"~|Fossil Island Diary%2FNorthern Reaches|~ Task 6": "Diary",
+					"~|Fossil Island Diary%2FNorthern Reaches|~ Task 7": "Diary",
+					"~|Fossil Island Diary%2FNorthern Reaches|~ Task 8": "Diary"
+				},
+				"BaseQuest": "Fossil Island Diary",
+				"Reward": ["Unidentified small fossil"],
+				"ManualShow": true
+			},
+			"~|Fossil Island Diary%2FSouthern Swamps|~ Task 1": {
+				"Description": "Unlock the Mushtree of the Sticky Swamp.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14650"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FSouthern Swamps|~ Task 2": {
+				"Description": "Find the diary of Charles Charlington.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Knife", "Bread"],
+				"Chunks": ["14650"],
+				"Tasks": {
+					"~|Recipe for Disaster%2GFreeing Pirate Pete|~ 5": "Quest"
+				},
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FSouthern Swamps|~ Task 3": {
+				"Description": "Fill a pit with Bittercap mushrooms.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Mushroom"],
+				"Chunks": ["14650"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FSouthern Swamps|~ Task 4": {
+				"Description": "Successfully chop a sulliuscep.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Axe+"],
+				"Objects": ["Sulliuscep"],
+				"Skills": {
+					"Woodcutting": 65
+				},
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FSouthern Swamps|~ Task 5": {
+				"Description": "Poison a sulliuscep with fungicide and a proboscis.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Fungicide spray", "Proboscis"],
+				"Objects": ["Sulliuscep"],
+				"Skills": {
+					"Woodcutting": 65
+				},
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FSouthern Swamps|~ Task 6": {
+				"Description": "Stun a tar monster.",
+				"Category": ["Fossil Island Tasks"],
+				"Monsters": ["Hoop Snake"],
+				"NPCs": ["Tar Bubbles"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FSouthern Swamps|~ Task 7": {
+				"Description": "Kill the Deranged archaeologist.",
+				"Category": ["Fossil Island Tasks"],
+				"Monsters": ["Deranged archaeologist"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FSouthern Swamps|~ Complete the Southern Swamps Section": {
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14907"],
+				"Tasks": {
+					"~|Fossil Island Diary%2FSouthern Swamps|~ Task 1": "Diary",
+					"~|Fossil Island Diary%2FSouthern Swamps|~ Task 2": "Diary",
+					"~|Fossil Island Diary%2FSouthern Swamps|~ Task 3": "Diary",
+					"~|Fossil Island Diary%2FSouthern Swamps|~ Task 4": "Diary",
+					"~|Fossil Island Diary%2FSouthern Swamps|~ Task 5": "Diary",
+					"~|Fossil Island Diary%2FSouthern Swamps|~ Task 6": "Diary",
+					"~|Fossil Island Diary%2FSouthern Swamps|~ Task 7": "Diary"
+				},
+				"BaseQuest": "Fossil Island Diary",
+				"Reward": ["Unidentified medium fossil"],
+				"ManualShow": true
+			},
+			"~|Fossil Island Diary%2FMountainous East|~ Task 1": {
+				"Description": "Unlock the Mushtree of the Verdant Valley.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14906"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMountainous East|~ Task 2": {
+				"Description": "Catch birds in a birdhouse in the Verdant Valley.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14906"],
+				"Items": ["Birdhouse+", "Birdhouse seed+"],
+				"Skills": {
+					"Hunter": 5
+				},
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMountainous East|~ Task 3": {
+				"Description": "Mine some volcanic ash.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Pickaxe+"],
+				"Objects": ["Ash pile"],
+				"Skills": {
+					"Mining": 22
+				},
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMountainous East|~ Task 4": {
+				"Description": "Make ultracompost from volcanic ash.",
+				"Category": ["Fossil Island Tasks"],
+				"Items": ["Volcanic ash", "Supercompost"],
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMountainous East|~ Task 5": {
+				"Description": "Enter the Volcanic Mine.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["Volcanic Mine"],
+				"Items": ["Numulite"],
+				"Skills": {
+					"Mining": 50
+				},
+				"KudosNeeded": 150,
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMountainous East|~ Task 6": {
+				"Description": "Use the rope shortcut on the volcano's north-west slope.",
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["15163"],
+				"Skills": {
+					"Agility": 64
+				},
+				"BaseQuest": "Fossil Island Diary"
+			},
+			"~|Fossil Island Diary%2FMountainous East|~ Complete the Mountainous East Section": {
+				"Category": ["Fossil Island Tasks"],
+				"Chunks": ["14907"],
+				"Tasks": {
+					"~|Fossil Island Diary%2FMountainous East|~ Task 1": "Diary",
+					"~|Fossil Island Diary%2FMountainous East|~ Task 2": "Diary",
+					"~|Fossil Island Diary%2FMountainous East|~ Task 3": "Diary",
+					"~|Fossil Island Diary%2FMountainous East|~ Task 4": "Diary",
+					"~|Fossil Island Diary%2FMountainous East|~ Task 5": "Diary",
+					"~|Fossil Island Diary%2FMountainous East|~ Task 6": "Diary"
+				},
+				"BaseQuest": "Fossil Island Diary",
+				"Reward": ["Unidentified medium fossil"],
 				"ManualShow": true
 			}
 		},
@@ -88614,6 +88906,7 @@
 			"Battlestaff+": ["Battlestaff", "Air battlestaff", "Water battlestaff", "Earth battlestaff", "Fire battlestaff", "Lava battlestaff", "Mud battlestaff", "Steam battlestaff", "Smoke battlestaff", "Mist battlestaff", "Dust battlestaff"],
 			"BelowIceMountainBeer+": ["Beer", "Asgarnian ale", "Dwarven stout", "Wizard’s mind bomb"],
 			"Big bones+": ["Bones", "Big bones"],
+			"Birdhouse+": ["Bird house (item)", "Oak bird house", "Willow bird house", "Teak bird house", "Maple bird house", "Mahogany bird house", "Yew bird house", "Magic bird house", "Redwood bird house"],
 			"Birdhouse seed+": ["Barley seed", "Hammerstone seed", "Asgarnian seed", "Jute seed", "Yanillian seed", "Krandorian seed", "Wildblood seed", "Guam seed", "Marrentill seed", "Tarromin seed", "Harralander seed", "Ranarr seed", "Toadflax seed", "Irit seed", "Avantoe seed", "Kwuarm seed", "Snapdragon seed", "Cadantine seed", "Lantadyme seed", "Dwarf weed seed", "Torstol seed"],
 			"Black armour+": ["Black boots", "Black med helm", "Black full helm", "Black sq shield", "Black plateskirt", "Black kiteshield", "Black platelegs", "Black chainbody", "Black platebody"],
 			"Black dragonhide armour+": ["Black d'hide chaps", "Black d'hide vambraces", "Black d'hide body", "Black spiky vambraces"],
@@ -88850,7 +89143,8 @@
 			"FairyTaleI9+": ["White berries", "Mort myre pear", "Mort myre stem", "Mort myre fungus", "Nature talisman", "Avantoe", "Irit leaf", "Blue dragon scale", "Proboscis", "Jangerberries", "Potato cactus", "Crushed gem", "Snapdragon", "Supercompost", "Volencia moss", "Babydragon bones", "Uncut diamond", "Raw cave eel", "Edible seaweed", "Oyster", "Charcoal", "Red vine worm", "Fat snail", "Red spiders' eggs", "Raw slimy eel", "Grapes", "Uncut ruby", "Jogre bones", "King worm", "Snape grass", "Lime"],
 			"CrushedGem+": ["Uncut jade", "Uncut opal", "Uncut red topaz"],
 			"DarkClothing+": ["Desert shirt", "Desert robe", "Black gloves", "Black boots", "Black defender", "Black med helm", "Black full helm", "Black sq shield", "Black kiteshield", "Black platelegs", "Black plateskirt", "Black chainbody", "Black platebody", "Priest gown (top)", "Priest gown (bottom)", "Mystic hat (dark)", "Mystic robe top (dark)", "Mystic robe bottom (dark)", "Mystic gloves (dark)", "Mystic boots (dark)", "Ghostly boots", "Ghostly cloak", "Ghostly gloves", "Ghostly hood", "Ghostly robe (bottom)", "Ghostly robe (top)", "Shade robe top", "Shade robe", "Black d'hide body", "Black d'hide chaps", "Black d'hide vambraces", "Black d'hide shield", "Antisanta mask", "Antisanta jacket", "Antisanta pantaloons", "Antisanta gloves", "Antisanta boots", "Wizard hat", "Black cape", "Black partyhat", "Black santa hat", "Black h'ween mask", "Black dragon mask", "Black unicorn mask"],
-			"ThatchSpar+": ["Thatch spar light", "Thatch spar med", "Thatch spar dense"]
+			"ThatchSpar+": ["Thatch spar light", "Thatch spar med", "Thatch spar dense"],
+			"Unidentified fossil+": ["Unidentified small fossil", "Unidentified medium fossil", "Unidentified large fossil", "Unidentified rare fossil"]
 		},
 		"mixPlus": {
 			"Fremennik citizen+": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"],
