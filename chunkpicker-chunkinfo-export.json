@@ -1966,6 +1966,24 @@
 				"Primary": false,
 				"Priority": 1
 			},
+			"Build the ~|potter's wheel|~ on the Isle of Souls": {
+				"Items": ["Hammer+", "Plank", "Iron bar", "Soft clay"],
+				"Level": 2,
+				"Chunks": ["8491"],
+				"Objects": ["Broken Potter's Wheel"],
+				"Primary": false,
+				"Priority": 1,
+				"Output Object": "Potter's Wheel"
+			},
+			"Build the ~|spinning wheel|~ on the Isle of Souls": {
+				"Items": ["Hammer+", "Plank", "Iron bar", "Ball of wool"],
+				"Level": 5,
+				"Chunks": ["8494"],
+				"Objects": ["Broken Spinning Wheel"],
+				"Primary": false,
+				"Priority": 1,
+				"Output Object": "Spinning wheel"
+			},
 			"Build the ~|bank chest|~ on Fossil Island": {
 				"Items": ["Hammer+", "Oak plank", "Iron bar", "Nails+"],
 				"Level": 21,
@@ -1978,7 +1996,7 @@
 				"Level": 5,
 				"Chunks": ["14907"],
 				"Primary": false,
-				"Priority": 1
+				"Priority": 2
 			},
 			"Build the ~|well|~ on Fossil Island": {
 				"Items": ["Hammer+", "Oak plank", "Bucket", "Rope", "Nails+"],
@@ -62303,7 +62321,7 @@
 			"Nickname": "Isle Pottery Base",
 			"Object": {
 				"Fishing spot (small net, bait)": 1,
-				"Potter's Wheel": 1,
+				"Broken Potter's Wheel": 1,
 				"Tree": 35,
 				"Well": 1
 			},
@@ -62346,7 +62364,7 @@
 			"Nickname": "Crumbling Tower",
 			"Object": {
 				"Flax": 2,
-				"Spinning wheel": 1,
+				"Broken Spinning Wheel": 1,
 				"Tree": 108,
 				"Yew": 4
 			},
