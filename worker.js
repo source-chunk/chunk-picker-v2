@@ -165,12 +165,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 nonValids[challenge] = [...nonValids[challenge], subSkill];
                                 !!newValids[skill] && delete newValids[skill][challenge];
                                 !!valids[skill] && delete valids[skill][challenge];
-                                if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                    delete newValids[skill];
-                                }
-                                if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                    delete valids[skill];
-                                }
                             }
                         });
                     }
@@ -188,12 +182,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                         fullyValid = false;
                                         !!newValids[skill] && delete newValids[skill][challenge];
                                         !!valids[skill] && delete valids[skill][challenge];
-                                        if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                            delete newValids[skill];
-                                        }
-                                        if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                            delete valids[skill];
-                                        }
                                     } else {
                                         let tempValid = false;
                                         tasksPlus[xSubTask].forEach(plus => {
@@ -228,12 +216,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                         fullyValid = false;
                                         !!newValids[skill] && delete newValids[skill][challenge];
                                         !!valids[skill] && delete valids[skill][challenge];
-                                        if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                            delete newValids[skill];
-                                        }
-                                        if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                            delete valids[skill];
-                                        }
                                     } else {
                                         let tempValid = false;
                                         tasksPlus[subTask].forEach(plus => {
@@ -282,12 +264,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                         fullyValid = false;
                                         !!newValids[skill] && delete newValids[skill][challenge];
                                         !!valids[skill] && delete valids[skill][challenge];
-                                        if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                            delete newValids[skill];
-                                        }
-                                        if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                            delete valids[skill];
-                                        }
                                     }
                                 }
                             }
@@ -301,12 +277,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 fullyValid = false;
                                 !!newValids[skill] && delete newValids[skill][challenge];
                                 !!valids[skill] && delete valids[skill][challenge];
-                                if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                    delete newValids[skill];
-                                }
-                                if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                    delete valids[skill];
-                                }
                             }
                         }
                         !!chunkInfo['challenges'][skill][challenge]['Requirements'] && chunkInfo['challenges'][skill][challenge]['Requirements'].forEach(req => {
@@ -318,12 +288,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 fullyValid = false;
                                 !!newValids[skill] && delete newValids[skill][challenge];
                                 !!valids[skill] && delete valids[skill][challenge];
-                                if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                    delete newValids[skill];
-                                }
-                                if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                    delete valids[skill];
-                                }
                             }
                         });
                         if (fullyValid) {
@@ -376,12 +340,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                             nonValids[extraSets[newValids[skill][challenge]['Set']]] = [...nonValids[extraSets[newValids[skill][challenge]['Set']]], 'extraSets'];
                             !!newValids[skill] && delete newValids[skill][extraSets[newValids[skill][challenge]['Set']]];
                             !!valids[skill] && delete valids[skill][extraSets[newValids[skill][challenge]['Set']]];
-                            if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                delete newValids[skill];
-                            }
-                            if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                delete valids[skill];
-                            }
                             extraSets[chunkInfo['challenges'][skill][challenge]['Set']] = challenge;
                         } else if (!chunkInfo['challenges'][skill][challenge]['ManualValid']) {
                             if (!nonValids.hasOwnProperty(challenge)) {
@@ -390,12 +348,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                             nonValids[challenge] = [...nonValids[challenge], 'extraSets'];
                             !!newValids[skill] && delete newValids[skill][challenge];
                             !!valids[skill] && delete valids[skill][challenge];
-                            if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                delete newValids[skill];
-                            }
-                            if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                delete valids[skill];
-                            }
                         }
                     }
                 });
@@ -420,12 +372,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                     fullyValid = false;
                                     !!newValids[skill] && delete newValids[skill][challenge];
                                     !!valids[skill] && delete valids[skill][challenge];
-                                    if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                        delete newValids[skill];
-                                    }
-                                    if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                        delete valids[skill];
-                                    }
                                 } else {
                                     let tempValid = false;
                                     tasksPlus[xSubTask].forEach(plus => {
@@ -445,12 +391,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                         fullyValid = false;
                                         !!newValids[skill] && delete newValids[skill][challenge];
                                         !!valids[skill] && delete valids[skill][challenge];
-                                        if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                            delete newValids[skill];
-                                        }
-                                        if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                            delete valids[skill];
-                                        }
                                     }
                                 }
                             } else {
@@ -462,12 +402,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                     fullyValid = false;
                                     !!newValids[skill] && delete newValids[skill][challenge];
                                     !!valids[skill] && delete valids[skill][challenge];
-                                    if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                        delete newValids[skill];
-                                    }
-                                    if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                        delete valids[skill];
-                                    }
                                 } else {
                                     let tempValid = false;
                                     tasksPlus[subTask].forEach(plus => {
@@ -485,12 +419,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                         fullyValid = false;
                                         !!newValids[skill] && delete newValids[skill][challenge];
                                         !!valids[skill] && delete valids[skill][challenge];
-                                        if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                            delete newValids[skill];
-                                        }
-                                        if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                            delete valids[skill];
-                                        }
                                     }
                                 }
                             }
@@ -504,12 +432,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                     fullyValid = false;
                                     !!newValids[skill] && delete newValids[skill][challenge];
                                     !!valids[skill] && delete valids[skill][challenge];
-                                    if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                        delete newValids[skill];
-                                    }
-                                    if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                        delete valids[skill];
-                                    }
                                 } else if (!chunkInfo['challenges'][skill][challenge]['ManualValid']) {
                                     if (!nonValids.hasOwnProperty(challenge)) {
                                         nonValids[challenge] = [];
@@ -518,12 +440,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                     fullyValid = false;
                                     !!newValids[skill] && delete newValids[skill][challenge];
                                     !!valids[skill] && delete valids[skill][challenge];
-                                    if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                        delete newValids[skill];
-                                    }
-                                    if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                        delete valids[skill];
-                                    }
                                 }
                             }
                         }
@@ -537,12 +453,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                             fullyValid = false;
                             !!newValids[skill] && delete newValids[skill][challenge];
                             !!valids[skill] && delete valids[skill][challenge];
-                            if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                delete newValids[skill];
-                            }
-                            if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                delete valids[skill];
-                            }
                         }
                     }
                     !!chunkInfo['challenges'][skill][challenge]['Requirements'] && chunkInfo['challenges'][skill][challenge]['Requirements'].forEach(req => {
@@ -554,12 +464,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                             fullyValid = false;
                             !!newValids[skill] && delete newValids[skill][challenge];
                             !!valids[skill] && delete valids[skill][challenge];
-                            if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                delete newValids[skill];
-                            }
-                            if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                delete valids[skill];
-                            }
                         }
                     });
                     if (fullyValid) {
@@ -612,12 +516,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                         nonValids[challenge] = [...nonValids[challenge], 'extraSets'];
                         !!newValids[skill] && delete newValids[skill][extraSets[newValids[skill][challenge]['Set']]];
                         !!valids[skill] && delete valids[skill][extraSets[newValids[skill][challenge]['Set']]];
-                        if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                            delete newValids[skill];
-                        }
-                        if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                            delete valids[skill];
-                        }
                         extraSets[chunkInfo['challenges'][skill][challenge]['Set']] = challenge;
                     } else if (!chunkInfo['challenges'][skill][challenge]['ManualValid']) {
                         if (!nonValids.hasOwnProperty(challenge)) {
@@ -626,12 +524,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                         nonValids[challenge] = [...nonValids[challenge], 'extraSets'];
                         !!newValids[skill] && delete newValids[skill][challenge];
                         !!valids[skill] && delete valids[skill][challenge];
-                        if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                            delete newValids[skill];
-                        }
-                        if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                            delete valids[skill];
-                        }
                     }
                 }
             });
@@ -655,12 +547,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                         if (!!challenge && challenge.hasOwnProperty('Tasks')) {
                             !!newValids[skill] && delete newValids[skill][name];
                             !!valids[skill] && delete valids[skill][name];
-                            if (!!newValids[skill] && Object.keys(newValids[skill]).length <= 0) {
-                                delete newValids[skill];
-                            }
-                            if (!!valids[skill] && Object.keys(valids[skill]).length <= 0) {
-                                delete valids[skill];
-                            }
                         }
                     });
                     !!lowestName && !newValids[skill] && (newValids[skill] = {});
