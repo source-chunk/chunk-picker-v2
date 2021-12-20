@@ -432,14 +432,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                     fullyValid = false;
                                     !!newValids[skill] && delete newValids[skill][challenge];
                                     !!valids[skill] && delete valids[skill][challenge];
-                                } else if (!chunkInfo['challenges'][skill][challenge]['ManualValid']) {
-                                    if (!nonValids.hasOwnProperty(challenge)) {
-                                        nonValids[challenge] = [];
-                                    }
-                                    nonValids[challenge] = [...nonValids[challenge], subTask];
-                                    fullyValid = false;
-                                    !!newValids[skill] && delete newValids[skill][challenge];
-                                    !!valids[skill] && delete valids[skill][challenge];
                                 }
                             }
                         }

@@ -17039,13 +17039,6 @@
 					"~|Western Provinces Diary%2FHard|~ Complete the Hard Diary": "Diary"
 				}
 			},
-			"Buy a battlestaff from Zaff": {
-				"Chunks": ["12853"],
-				"Reward": ["Battlestaff"],
-				"Tasks": {
-					"~|Varrock Diary%2FEasy|~ Complete the Easy Diary": "Diary"
-				}
-			},
 			"Have Zahur clean a grimy guam leaf": {
 				"NPCs": ["Zahur"],
 				"Items": ["Grimy guam leaf*"],
@@ -17670,6 +17663,18 @@
 			"Starting items: shortbow": {
 				"Category": ["Starting Items"],
 				"Output": "Shortbow"
+			},
+			"Starting items: bronze dagger": {
+				"Category": ["Starting Items"],
+				"Output": "Bronze dagger"
+			},
+			"Starting items: bronze sword": {
+				"Category": ["Starting Items"],
+				"Output": "Bronze sword"
+			},
+			"Starting items: wooden shield": {
+				"Category": ["Starting Items"],
+				"Output": "Wooden shield"
 			},
 			"Empty a bucket of compost": {
 				"Items": ["Compost*"],
@@ -31222,7 +31227,7 @@
 				"Items": ["Bludgeon axon"]
 			},
 			"(Abyssal Sire) Obtain a ~|jar of miasma|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of miasma"]
 			},
@@ -31282,7 +31287,7 @@
 				"Items": ["Dragon thrownaxe"]
 			},
 			"(Alchemical Hydra) Obtain a ~|jar of chemicals|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of chemicals"]
 			},
@@ -31463,7 +31468,7 @@
 				"Items": ["Primordial crystal"]
 			},
 			"(Cerberus) Obtain a ~|jar of souls|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of souls"]
 			},
@@ -31578,7 +31583,7 @@
 				"Items": ["Spirit shield"]
 			},
 			"(Corporeal Beast) Obtain a ~|jar of spirits|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of spirits"]
 			},
@@ -31764,7 +31769,7 @@
 				"Items": ["Granite hammer"]
 			},
 			"(Grotesque Guardians) Obtain a ~|jar of stone|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of stone"]
 			},
@@ -31814,7 +31819,7 @@
 				"Items": ["Kq head"]
 			},
 			"(Kalphite Queen) Obtain a ~|jar of sand|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of sand"]
 			},
@@ -31864,7 +31869,7 @@
 				"Items": ["Trident of the seas (full)"]
 			},
 			"(Kraken) Obtain a ~|jar of dirt|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of dirt"]
 			},
@@ -31994,7 +31999,7 @@
 				"Items": ["Eldritch orb"]
 			},
 			"(The Nightmare) Obtain a ~|jar of dreams|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of dreams"]
 			},
@@ -32019,7 +32024,7 @@
 				"Items": ["Sraracha"]
 			},
 			"(Sarachnis) Obtain a ~|jar of eyes|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of eyes"]
 			},
@@ -32054,7 +32059,7 @@
 				"Items": ["Skotos"]
 			},
 			"(Skotizo) Obtain a ~|jar of darkness|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of darkness"]
 			},
@@ -32160,7 +32165,7 @@
 				"Items": ["Dragon chainbody"]
 			},
 			"(Thermonuclear smoke devil) Obtain a ~|jar of smoke|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of smoke"]
 			},
@@ -32225,7 +32230,7 @@
 				"Items": ["Skeletal visage"]
 			},
 			"(Vorkath) Obtain a ~|jar of decay|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of decay"]
 			},
@@ -32321,7 +32326,7 @@
 				"Items": ["Magma mutagen"]
 			},
 			"(Zulrah) Obtain a ~|jar of swamp|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of swamp"]
 			},
@@ -70620,6 +70625,9 @@
 				"Holy Grail": "first",
 				"King's Ransom": "step",
 				"Merlin's Crystal": "first"
+			},
+			"Shops": {
+				"Farming shops": true
 			},
 			"Spawn": {
 				"Fire rune": 1

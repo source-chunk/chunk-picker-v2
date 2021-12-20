@@ -284,6 +284,7 @@ let rules = {
     "Primary Spawns": false,
     "Smithing by Smelting": false,
     "Pets": false,
+    "Jars": false,
     "Stuffables": false,
     "Kill X Amount": "1",
     "Rare Drop Amount": "1000",
@@ -349,12 +350,13 @@ let ruleNames = {
     "Primary Spawns": "Item spawns count as primary access to an item, and can be used as a primary way to train a skill if needed",
     "Smithing by Smelting": "Smelting ores into bars counts as a primary method for training Smithing",
     "Pets": "Obtaining pets is included in the collection log tasks",
+    "Jars": "Obtaining jars is included in the collection log tasks",
     "Stuffables": "Must obtain stuffable items that can be mounted in the POH (big fish, slayer heads)",
     "Manually Complete Tasks": "<b class='noscroll'>For maps that allow manually choosing new chunks</b>, allow the ability to manually move completed active tasks",
     "Every Drop": "Must obtain every monster drop at least once",
     "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to any level 3 herbs (Guam, Snake weed, Ardrigal, Sito foil, Rogue's purse, Volencia moss)",
     "HigherLander": "Accessing the intermediate and veteran landers for Pest Control are required tasks (only novice lander is required otherwise)",
-    "Starting Items": "Allow tools gained from leaving Tutorial Island to be used within your chunks (aka not dropping your starting items). Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net, shortbow",
+    "Starting Items": "Allow tools gained from leaving Tutorial Island to be used within your chunks (aka not dropping your starting items). Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net, shortbow, bronze dagger, bronze sword, wooden shield",
     "Tutor Ammo": "Items from the Magic/Ranged Combat Tutors in Lumbridge count as a way to train those respective skills (Air/Mind runes and Training bow/arrows)",
     "Secondary MTA": "Allow MTA to be required with secondary sources of nature/law/cosmic runes",
     "Fossil Island Tasks": "Require the Fossil Island Mini-Task List be completed, similar to diary tasks",
@@ -420,6 +422,7 @@ let rulePresets = {
         "Untracked Uniques": true,
         "Smithing by Smelting": true,
         "Pets": true,
+        "Jars": true,
         "Rare Drop Amount": "0",
         "HigherLander": true,
         "Secondary MTA": true,
@@ -502,7 +505,7 @@ let ruleStructure = {
         "Minigame": true,
         "Kill X": true,
         "BIS Skilling": true,
-        "Collection Log": ["Collection Log Bosses", "Collection Log Raids", "Collection Log Minigames", "Collection Log Other", "Pets"],
+        "Collection Log": ["Collection Log Bosses", "Collection Log Raids", "Collection Log Minigames", "Collection Log Other", "Pets", "Jars"],
         "Untracked Uniques": true,
         "Stuffables": true,
         "Manually Complete Tasks": true,
@@ -862,7 +865,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.9.16");
+const myWorker = new Worker("./worker.js?v=4.9.17");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -5599,6 +5602,10 @@ var loadData = function(startup) {
 
             if (!rulesTemp.hasOwnProperty('Show Diary Tasks Any')) {
                 rulesTemp['Show Diary Tasks Any'] = rulesTemp.hasOwnProperty('Skillcape') ? rulesTemp['Skillcape'] : false;
+            }
+
+            if (!rulesTemp.hasOwnProperty('Jars')) {
+                rulesTemp['Jars'] = rulesTemp.hasOwnProperty('Pets') ? rulesTemp['Pets'] : false;
             }
 
             !!rulesTemp && Object.keys(rulesTemp).forEach(rule => {
