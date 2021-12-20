@@ -13062,6 +13062,12 @@
 					"~|Eagles' Peak|~ Complete the quest": "Quest"
 				}
 			},
+			"Catch implings in ~|Puro-Puro|~ after reaching 17 Hunter": {
+				"Chunks": ["Puro-Puro"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 1
+			},
 			"Access ~|Puro-Puro|~": {
 				"Chunks": ["Puro-Puro"],
 				"Level": 17,
