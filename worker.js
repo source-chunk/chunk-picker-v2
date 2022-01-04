@@ -46,6 +46,8 @@ let altChallenges;
 let manualMonsters;
 let slayerLocked;
 
+let clueTasksPossible = {};
+
 onmessage = function(e) {
     eGlobal = e;
     type = eGlobal.data[0];
@@ -125,6 +127,228 @@ var calcChallenges = function(chunks, baseChunkData) {
     let newValids = {};
     let tempItemSkill = {};
     let i = 0;
+
+    Object.keys(chunkInfo['taskUnlocks']['Spawns']).forEach(item => {
+        Object.keys(chunkInfo['taskUnlocks']['Spawns'][item]).forEach(chunk => {
+            let tempValid = true;
+            chunkInfo['taskUnlocks']['Spawns'][item][chunk].forEach(task => {
+                if (!newValids || !newValids[Object.values(task)[0]] || !newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
+                    tempValid = false;
+                }
+            });
+            if (!chunks.hasOwnProperty(chunk)) {
+                tempValid = false;
+            }
+            if (!tempValid && baseChunkData['items'].hasOwnProperty(item) && baseChunkData['items'][item].hasOwnProperty(chunk)) {
+                !!baseChunkData['items'][item] && delete baseChunkData['items'][item][chunk];
+                if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
+                    delete baseChunkData['items'][item];
+                }
+            } else if (tempValid) {
+                if (!baseChunkData['items'][item]) {
+                    baseChunkData['items'][item] = {};
+                }
+                baseChunkData['items'][item][chunk] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
+            }
+        });
+    });
+    Object.keys(chunkInfo['taskUnlocks']['Monsters']).forEach(monster => {
+        Object.keys(chunkInfo['taskUnlocks']['Monsters'][monster]).forEach(chunk => {
+            let tempValid = true;
+            chunkInfo['taskUnlocks']['Monsters'][monster][chunk].forEach(task => {
+                if (!newValids || !newValids[Object.values(task)[0]] || !newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
+                    tempValid = false;
+                }
+            });
+            if (!chunks.hasOwnProperty(chunk)) {
+                tempValid = false;
+            }
+            if (!tempValid && baseChunkData['monsters'].hasOwnProperty(monster) && baseChunkData['monsters'][monster].hasOwnProperty(chunk)) {
+                !!baseChunkData['monsters'][monster] && delete baseChunkData['monsters'][monster][chunk];
+                if (!!baseChunkData['monsters'][monster] && Object.keys(baseChunkData['monsters'][monster]).length === 0) {
+                    delete baseChunkData['monsters'][monster];
+                }
+                !!chunkInfo['drops'][monster] && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
+                    if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
+                        Object.keys(dropTables[drop]).forEach(item => {
+                            !!baseChunkData['items'][item] && delete baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                            if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
+                                delete baseChunkData['items'][item];
+                            }
+                            !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][item];
+                            if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
+                                delete dropRatesGlobal[monster];
+                            }
+                        });
+                    } else {
+                        !!baseChunkData['items'][drop] && delete baseChunkData['items'][drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                        if (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).length <= 0) {
+                            delete baseChunkData['items'][drop];
+                        }
+                        !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][drop];
+                        if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
+                            delete dropRatesGlobal[monster];
+                        }
+                    }
+                });
+            } else if (tempValid) {
+                if (!baseChunkData['monsters'].hasOwnProperty(monster)) {
+                    baseChunkData['monsters'][monster] = {};
+                }
+                baseChunkData['monsters'][monster][chunk] = true;
+                !!chunkInfo['drops'][monster] && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
+                    if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
+                        Object.keys(dropTables[drop]).forEach(item => {
+                            if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) || ((parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1]) * parseFloat(dropTables[drop][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                                (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                                if (!baseChunkData['items'][item]) {
+                                    baseChunkData['items'][item] = {};
+                                }
+                                if (chunkInfo['drops'][monster][item] === 'Always') {
+                                    baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
+                                } else {
+                                    baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
+                                }
+                                if (!dropRatesGlobal[monster]) {
+                                    dropRatesGlobal[monster] = {};
+                                }
+                                dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1] * dropTables[drop][item].split('/')[1].replaceAll('~', '')));
+                            }
+                        });
+                    } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                            (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][drop])) {
+                        if (!baseChunkData['items'][drop]) {
+                            baseChunkData['items'][drop] = {};
+                        }
+                        if (chunkInfo['drops'][monster][drop] === 'Always') {
+                            baseChunkData['items'][drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
+                        } else {
+                            baseChunkData['items'][drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
+                        }
+                        if (!dropRatesGlobal[monster]) {
+                            dropRatesGlobal[monster] = {};
+                        }
+                        dropRatesGlobal[monster][drop] = (chunkInfo['drops'][monster][drop].split('/').length <= 1) ? chunkInfo['drops'][monster][drop] : findFraction(parseFloat(chunkInfo['drops'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop].split('/')[1].replaceAll('~', '')));
+                    }
+                });
+            }
+        });
+    });
+    Object.keys(chunkInfo['taskUnlocks']['Objects']).forEach(object => {
+        Object.keys(chunkInfo['taskUnlocks']['Objects'][object]).forEach(chunk => {
+            let tempValid = true;
+            chunkInfo['taskUnlocks']['Objects'][object][chunk].forEach(task => {
+                if (!newValids || !newValids[Object.values(task)[0]] || !newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
+                    tempValid = false;
+                }
+            });
+            if (!chunks.hasOwnProperty(chunk)) {
+                tempValid = false;
+            }
+            if (!tempValid && baseChunkData['objects'].hasOwnProperty(object) && baseChunkData['objects'][object].hasOwnProperty(chunk)) {
+                !!baseChunkData['objects'][object] && delete baseChunkData['objects'][object][chunk];
+                if (!!baseChunkData['objects'][object] && Object.keys(baseChunkData['objects'][object]).length === 0) {
+                    delete baseChunkData['objects'][object];
+                }
+            } else if (tempValid) {
+                if (!baseChunkData['objects'].hasOwnProperty(object)) {
+                    baseChunkData['objects'][object] = {};
+                }
+                baseChunkData['objects'][object][chunk] = true;
+            }
+        });
+    });
+    Object.keys(chunkInfo['taskUnlocks']['Shops']).forEach(shop => {
+        Object.keys(chunkInfo['taskUnlocks']['Shops'][shop]).forEach(chunk => {
+            let tempValid = true;
+            chunkInfo['taskUnlocks']['Shops'][shop][chunk].forEach(task => {
+                if (!newValids || !newValids[Object.values(task)[0]] || !newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
+                    tempValid = false;
+                }
+            });
+            if (!chunks.hasOwnProperty(chunk)) {
+                tempValid = false;
+            }
+            if (!tempValid && baseChunkData['shops'].hasOwnProperty(shop) && baseChunkData['shops'][shop].hasOwnProperty(chunk)) {
+                !!baseChunkData['shops'][shop] && delete baseChunkData['shops'][shop][chunk];
+                if (!!baseChunkData['shops'][shop] && Object.keys(baseChunkData['shops'][shop]).length === 0) {
+                    delete baseChunkData['shops'][shop];
+                }
+                !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).forEach(item => {
+                    !!baseChunkData['items'][item] && delete baseChunkData['items'][item][shop.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                    if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
+                        delete baseChunkData['items'][item];
+                    }
+                });
+            } else if (tempValid) {
+                if (!baseChunkData['shops'].hasOwnProperty(shop)) {
+                    baseChunkData['shops'][shop] = {};
+                }
+                baseChunkData['shops'][shop][chunk] = true;
+                !!chunkInfo['shopItems'][shop] && (!backloggedSources['shops'] || !backloggedSources['shops'][shop]) && Object.keys(chunkInfo['shopItems'][shop]).forEach(item => {
+                    if ((!minigameShops[shop] || rules['Minigame']) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                        if (!baseChunkData['items'][item]) {
+                            baseChunkData['items'][item] = {};
+                        }
+                        baseChunkData['items'][item][shop.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'shop';
+                    }
+                });
+            }
+        });
+    });
+    Object.keys(chunkInfo['taskUnlocks']['Items']).forEach(item => {
+        let tempValid = true;
+        chunkInfo['taskUnlocks']['Items'][item].forEach(task => {
+            if (!newValids || !newValids[Object.values(task)[0]] || !newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
+                tempValid = false;
+            }
+        });
+        if (!tempValid && !!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) {
+            baseChunkData['items'][item + '*'] = {...baseChunkData['items'][item]};
+            delete baseChunkData['items'][item];
+        } else if (tempValid && !!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + '*')) {
+            baseChunkData['items'][item] = {...baseChunkData['items'][item + '*']};
+            delete baseChunkData['items'][item + '*'];
+        }
+    });
+    if (rules['RDT'] && baseChunkData['items']['GemDropTable+'] && newValids && newValids['Quest'] && newValids['Quest'].hasOwnProperty("~|Legends' Quest|~ Complete the quest")) {
+        Object.keys(baseChunkData['items']['GemDropTable+']).forEach(monster => {
+            monster = monster.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J');
+            Object.keys(dropTables['GemDropTableLegends+']).forEach(item => {
+                if (chunkInfo['drops'].hasOwnProperty(monster) && (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1])) || ((parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1]) * parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                    (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                    if (!baseChunkData['items'][item]) {
+                        baseChunkData['items'][item] = {};
+                    }
+                    if (chunkInfo['drops'][monster][item] === 'Always') {
+                        baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
+                    } else {
+                        baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
+                    }
+                    if (!dropRatesGlobal[monster]) {
+                        dropRatesGlobal[monster] = {};
+                    }
+                    dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '') * dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1] * dropTables['GemDropTableLegends+'][item].split('/')[1].replaceAll('~', '')));
+                } else if (!chunkInfo['drops'].hasOwnProperty(monster) && monster.includes('Slay') && chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')].hasOwnProperty('Output') && chunkInfo['skillItems']['Slayer'].hasOwnProperty(chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output'])) {
+                    if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1])) || ((parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1]) * parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                        (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                        if (!baseChunkData['items'][item]) {
+                            baseChunkData['items'][item] = {};
+                        }
+                        if (chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']][item] === 'Always') {
+                            baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
+                        } else {
+                            baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
+                        }
+                        if (!dropRatesGlobal[monster]) {
+                            dropRatesGlobal[monster] = {};
+                        }
+                        dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '') * dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1] * dropTables['GemDropTableLegends+'][item].split('/')[1].replaceAll('~', '')));
+                    }
+                }
+            });
+        });
+    }
 
     do {
         i++;
@@ -355,6 +579,9 @@ var calcChallenges = function(chunks, baseChunkData) {
             leftoversCount++;
         }
         Object.keys(newValids).forEach(skill => {
+            if (!checkPrimaryMethod(skill, newValids, baseChunkData)) {
+                newValids[skill] = {};
+            }
             skill !== 'BiS' && checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(newValids[skill]).forEach(challenge => {
                 if (skill !== 'Extra' || chunkInfo['challenges'][skill][challenge].hasOwnProperty('Requirements')) {
                     fullyValid = true;
@@ -564,59 +791,30 @@ var calcChallenges = function(chunks, baseChunkData) {
                 });
             });
         });
-        Object.keys(chunkInfo['taskUnlocks']['Items']).forEach(item => {
-            let tempValid = true;
-            chunkInfo['taskUnlocks']['Items'][item].forEach(task => {
-                if (!newValids || !newValids[Object.values(task)[0]] || !newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
-                    tempValid = false;
-                }
-            });
-            if (!tempValid && !!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) {
-                baseChunkData['items'][item + '*'] = {...baseChunkData['items'][item]};
-                delete baseChunkData['items'][item];
-            } else if (tempValid && !!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + '*')) {
-                baseChunkData['items'][item] = {...baseChunkData['items'][item + '*']};
-                delete baseChunkData['items'][item + '*'];
-            }
-        });
-        if (rules['RDT'] && baseChunkData['items']['GemDropTable+'] && newValids && newValids['Quest'] && newValids['Quest'].hasOwnProperty("~|Legends' Quest|~ Complete the quest")) {
-            Object.keys(baseChunkData['items']['GemDropTable+']).forEach(monster => {
-                monster = monster.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J');
-                Object.keys(dropTables['GemDropTableLegends+']).forEach(item => {
-                    if (chunkInfo['drops'].hasOwnProperty(monster) && (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1])) || ((parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1]) * parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
-                        (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
-                        if (!baseChunkData['items'][item]) {
-                            baseChunkData['items'][item] = {};
-                        }
-                        if (chunkInfo['drops'][monster][item] === 'Always') {
-                            baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
-                        } else {
-                            baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
-                        }
-                        if (!dropRatesGlobal[monster]) {
-                            dropRatesGlobal[monster] = {};
-                        }
-                        dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '') * dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1] * dropTables['GemDropTableLegends+'][item].split('/')[1].replaceAll('~', '')));
-                    } else if (!chunkInfo['drops'].hasOwnProperty(monster) && monster.includes('Slay') && chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')].hasOwnProperty('Output') && chunkInfo['skillItems']['Slayer'].hasOwnProperty(chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output'])) {
-                        if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1])) || ((parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1]) * parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
-                            (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
-                            if (!baseChunkData['items'][item]) {
-                                baseChunkData['items'][item] = {};
-                            }
-                            if (chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']][item] === 'Always') {
-                                baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
-                            } else {
-                                baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
-                            }
-                            if (!dropRatesGlobal[monster]) {
-                                dropRatesGlobal[monster] = {};
-                            }
-                            dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '') * dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1] * dropTables['GemDropTableLegends+'][item].split('/')[1].replaceAll('~', '')));
-                        }
+        Object.keys(chunkInfo['taskUnlocks']['Spawns']).forEach(item => {
+            Object.keys(chunkInfo['taskUnlocks']['Spawns'][item]).forEach(chunk => {
+                let tempValid = true;
+                chunkInfo['taskUnlocks']['Spawns'][item][chunk].forEach(task => {
+                    if (!newValids || !newValids[Object.values(task)[0]] || !newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
+                        tempValid = false;
                     }
                 });
+                if (!chunks.hasOwnProperty(chunk)) {
+                    tempValid = false;
+                }
+                if (!tempValid && baseChunkData['items'].hasOwnProperty(item) && baseChunkData['items'][item].hasOwnProperty(chunk)) {
+                    !!baseChunkData['items'][item] && delete baseChunkData['items'][item][chunk];
+                    if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
+                        delete baseChunkData['items'][item];
+                    }
+                } else if (tempValid) {
+                    if (!baseChunkData['items'][item]) {
+                        baseChunkData['items'][item] = {};
+                    }
+                    baseChunkData['items'][item][chunk] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
+                }
             });
-        }
+        });
         Object.keys(chunkInfo['taskUnlocks']['Monsters']).forEach(monster => {
             Object.keys(chunkInfo['taskUnlocks']['Monsters'][monster]).forEach(chunk => {
                 let tempValid = true;
@@ -761,6 +959,59 @@ var calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
+        Object.keys(chunkInfo['taskUnlocks']['Items']).forEach(item => {
+            let tempValid = true;
+            chunkInfo['taskUnlocks']['Items'][item].forEach(task => {
+                if (!newValids || !newValids[Object.values(task)[0]] || !newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) {
+                    tempValid = false;
+                }
+            });
+            if (!tempValid && !!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) {
+                baseChunkData['items'][item + '*'] = {...baseChunkData['items'][item]};
+                delete baseChunkData['items'][item];
+            } else if (tempValid && !!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + '*')) {
+                baseChunkData['items'][item] = {...baseChunkData['items'][item + '*']};
+                delete baseChunkData['items'][item + '*'];
+            }
+        });
+        if (rules['RDT'] && baseChunkData['items']['GemDropTable+'] && newValids && newValids['Quest'] && newValids['Quest'].hasOwnProperty("~|Legends' Quest|~ Complete the quest")) {
+            Object.keys(baseChunkData['items']['GemDropTable+']).forEach(monster => {
+                monster = monster.replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J');
+                Object.keys(dropTables['GemDropTableLegends+']).forEach(item => {
+                    if (chunkInfo['drops'].hasOwnProperty(monster) && (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1])) || ((parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1]) * parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                        (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                        if (!baseChunkData['items'][item]) {
+                            baseChunkData['items'][item] = {};
+                        }
+                        if (chunkInfo['drops'][monster][item] === 'Always') {
+                            baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
+                        } else {
+                            baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
+                        }
+                        if (!dropRatesGlobal[monster]) {
+                            dropRatesGlobal[monster] = {};
+                        }
+                        dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[0].replaceAll('~', '') * dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster]['GemDropTable+'].split('/')[1] * dropTables['GemDropTableLegends+'][item].split('/')[1].replaceAll('~', '')));
+                    } else if (!chunkInfo['drops'].hasOwnProperty(monster) && monster.includes('Slay') && chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')].hasOwnProperty('Output') && chunkInfo['skillItems']['Slayer'].hasOwnProperty(chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output'])) {
+                        if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1])) || ((parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1]) * parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables['GemDropTableLegends+'][item].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                            (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                            if (!baseChunkData['items'][item]) {
+                                baseChunkData['items'][item] = {};
+                            }
+                            if (chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']][item] === 'Always') {
+                                baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
+                            } else {
+                                baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
+                            }
+                            if (!dropRatesGlobal[monster]) {
+                                dropRatesGlobal[monster] = {};
+                            }
+                            dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[0].replaceAll('~', '') * dropTables['GemDropTableLegends+'][item].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][monster.replaceAll('#', '%2F')]['Output']]['GemDropTable+'].split('/')[1] * dropTables['GemDropTableLegends+'][item].split('/')[1].replaceAll('~', '')));
+                        }
+                    }
+                });
+            });
+        }
         let tempChallenges = JSON.parse(JSON.stringify(newValids));
         Object.keys(extraOutputItems).forEach(skill => {
             Object.keys(extraOutputItems[skill]).forEach(challenge => {
@@ -780,7 +1031,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         subSkillValid = false;
                     }
                 });
-                if (subSkillValid && skill !== 'Extra' && skill !== 'BiS') {
+                if (subSkillValid && skill !== 'BiS') {
                     if (!!chunkInfo['challenges'][skill][challenge]['Output'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         let output = chunkInfo['challenges'][skill][challenge]['Output'];
                         !!chunkInfo['skillItems'][skill] && !!chunkInfo['skillItems'][skill][output] && Object.keys(chunkInfo['skillItems'][skill][output]).forEach(item => {
@@ -937,6 +1188,21 @@ var calcChallenges = function(chunks, baseChunkData) {
             !!newValids && !!newValids[skill] && Object.keys(newValids[skill]).filter(challenge => { return (chunkInfo['challenges'][skill].hasOwnProperty(challenge) && chunkInfo['challenges'][skill][challenge].hasOwnProperty('Kudos')) }).forEach(line => {
                 kudosTotal += chunkInfo['challenges'][skill][line]['Kudos'];
             });
+        });
+        clueTasksPossible = {
+            'beginner': true,
+            'easy': true,
+            'medium': true,
+            'hard': true,
+            'elite': true,
+            'master': true
+        };
+        !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).forEach(task => {
+            if (!!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier')) {
+                if (!newValids.hasOwnProperty('Nonskill') || !newValids['Nonskill'].hasOwnProperty(task)) {
+                    clueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']] = false;
+                }
+            }
         });
         //console.log(i);
     } while ((!_.isEqual(valids, newValids) && i < 10) || i < 3);
@@ -1515,9 +1781,19 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     validChallenge = false;
                     wrongThings.push(rule);
                 }
+                if (rule === 'Collection Log Clues' && chunkInfo['challenges'][skill][name]['Category'].includes('Collection Log Clues') && rules[rule]) {
+                    if (!clueTasksPossible.hasOwnProperty(name.split(' ')[0].substring(1).toLowerCase()) || !clueTasksPossible[name.split(' ')[0].substring(1).toLowerCase()]) {
+                        validChallenge = false;
+                        wrongThings.push('Collection Log Clues');
+                    }
+                }
                 if (rule === 'Shortcut Task' && chunkInfo['challenges'][skill][name]['Category'].includes('Shortcut') && !rules[rule] && chunkInfo['challenges'][skill][name]['Level'] > 1) {
                     validChallenge = false;
                     wrongThings.push('Shortcut');
+                }
+                if (rule === 'InsidePOH' && chunkInfo['challenges'][skill][name]['Category'].includes('InsidePOH Primary') && !rules[rule] && chunkInfo['challenges'][skill][name]['Level'] > 1) {
+                    validChallenge = false;
+                    wrongThings.push('InsidePOH Primary');
                 }
             });
             chunkInfo['challenges'][skill][name]['ManualValid'] && (validChallenge = true);
@@ -1759,76 +2035,81 @@ var calcChallengesWork = function(chunks, baseChunkData) {
 // Checks if skill has primary training
 var checkPrimaryMethod = function(skill, valids, baseChunkData) {
     let valid = false;
-    if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
-        valid = true;
-    } else if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
-        valid = true;
-    } else {
-        let tempValid = true;
-        !!universalPrimary[skill] && universalPrimary[skill].forEach(line => {
-            if (line === 'Primary+') {
-                let primaryValid = false;
-                !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
-                    if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
-                        if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil') || baseChunkData['objects'].hasOwnProperty('Rusted anvil')) {
-                            primaryValid = true;
-                        }
+    let tempValid = true;
+    !!universalPrimary[skill] && universalPrimary[skill].forEach(line => {
+        if (line === 'Primary+') {
+            let primaryValid = false;
+            !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
+                if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
+                    if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil') || baseChunkData['objects'].hasOwnProperty('Rusted anvil')) {
+                        primaryValid = true;
                     }
-                });
-                !primaryValid && (tempValid = false);
-            } else if (line === 'Monster+') {
-                let monsterExists = !!baseChunkData['monsters'] && Object.keys(baseChunkData['monsters']).length > 0;
-                if (!monsterExists) {
-                    tempValid = false;
                 }
-            } else if (line === 'Bones+') {
-                let bonesExists = false;
-                !!baseChunkData['items'] && boneItems.forEach(bone => {
-                    if (!!baseChunkData['items'] && Object.keys(baseChunkData['items']).includes(bone)) {
-                        bonesExists = true;
-                    }
-                });
-                if (!bonesExists) {
-                    tempValid = false;
-                }
-            } else if (line === 'Combat+') {
-                let combatExists = false;
-                combatSkills.forEach(skill2 => {
-                    if (checkPrimaryMethod(skill2, valids, baseChunkData)) {
-                        combatExists = true;
-                    }
-                });
-                if (!combatExists) {
-                    tempValid = false;
-                }
-            } else if (line === 'Ranged+') {
-                let validRanged = false;
-                !!baseChunkData['items'] && rangedItems.forEach(set => {
-                    let innerValid = true;
-                    set.forEach(item => {
-                        if (!!baseChunkData['items'] && !Object.keys(baseChunkData['items']).includes(item.replaceAll(/\*/g, ''))) {
-                            innerValid = false;
-                        } else if (item.includes('*')) {
-                            let tempSecondary = true;
-                            item.includes('*') && !!baseChunkData['items'][item.replaceAll(/\*/g, '')] && Object.keys(baseChunkData['items'][item.replaceAll(/\*/g, '')]).forEach(source => {
-                                if ((!baseChunkData['items'][item.replaceAll(/\*/g, '')][source].includes('secondary-') && (!processingSkill[baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] || rules['Wield Crafted Items'])) || (baseChunkData['items'][item.replaceAll(/\*/g, '')][source]['primary-'] && (!processingSkill[baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] || rules['Wield Crafted Items'])) || baseChunkData['items'][item.replaceAll(/\*/g, '')][source] === 'shop' || rules['Secondary Primary']) {
-                                    tempSecondary = false;
-                                }
-                            });
-                            tempSecondary && (innerValid = false);
-                        }
-                    });
-                    innerValid && (validRanged = true);
-                });
-                if (!validRanged) {
-                    tempValid = false;
-                }
-            } else {
+            });
+            !primaryValid && (tempValid = false);
+        } else if (line === 'Monster+') {
+            let monsterExists = !!baseChunkData['monsters'] && Object.keys(baseChunkData['monsters']).length > 0;
+            if (!monsterExists) {
                 tempValid = false;
             }
+        } else if (line === 'Bones+') {
+            let bonesExists = false;
+            !!baseChunkData['items'] && boneItems.forEach(bone => {
+                if (!!baseChunkData['items'] && Object.keys(baseChunkData['items']).includes(bone)) {
+                    bonesExists = true;
+                }
+            });
+            if (!bonesExists) {
+                tempValid = false;
+            }
+        } else if (line === 'Combat+') {
+            let combatExists = false;
+            combatSkills.forEach(skill2 => {
+                if (checkPrimaryMethod(skill2, valids, baseChunkData)) {
+                    combatExists = true;
+                }
+            });
+            if (!combatExists) {
+                tempValid = false;
+            }
+        } else if (line === 'Ranged+') {
+            let validRanged = false;
+            !!baseChunkData['items'] && rangedItems.forEach(set => {
+                let innerValid = true;
+                set.forEach(item => {
+                    if (!!baseChunkData['items'] && !Object.keys(baseChunkData['items']).includes(item.replaceAll(/\*/g, ''))) {
+                        innerValid = false;
+                    } else if (item.includes('*')) {
+                        let tempSecondary = true;
+                        item.includes('*') && !!baseChunkData['items'][item.replaceAll(/\*/g, '')] && Object.keys(baseChunkData['items'][item.replaceAll(/\*/g, '')]).forEach(source => {
+                            if ((!baseChunkData['items'][item.replaceAll(/\*/g, '')][source].includes('secondary-') && (!processingSkill[baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] || rules['Wield Crafted Items'])) || (baseChunkData['items'][item.replaceAll(/\*/g, '')][source]['primary-'] && (!processingSkill[baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] || rules['Wield Crafted Items'])) || baseChunkData['items'][item.replaceAll(/\*/g, '')][source] === 'shop' || rules['Secondary Primary']) {
+                                tempSecondary = false;
+                            }
+                        });
+                        tempSecondary && (innerValid = false);
+                    }
+                });
+                innerValid && (validRanged = true);
+            });
+            if (!validRanged) {
+                tempValid = false;
+            }
+        } else {
+            tempValid = false;
+        }
+    });
+    if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
+        Object.keys(manualTasks[skill]).forEach(challenge => {
+            let primaryValid = false;
+            if (((chunkInfo['challenges'][skill][challenge] && chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || (chunkInfo['challenges'][skill][challenge] && chunkInfo['challenges'][skill][challenge]['Manual'])) {
+                if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil') || baseChunkData['objects'].hasOwnProperty('Rusted anvil')) {
+                    primaryValid = true;
+                }
+            }
+            primaryValid && (tempValid = true);
         });
-        valid = tempValid;
     }
+    valid = tempValid;
     return valid;
 }
 
@@ -2865,35 +3146,38 @@ var calcCurrentChallenges2 = function() {
                     highestOverall[skill] = name;
                 }
             });
-            checkPrimaryMethod(skill, globalValids, baseChunkData) && Object.keys(globalValids[skill]).forEach(challenge => {
-                if (globalValids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > highestChallengeLevelArr[skill])) {
-                    if (((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
-                        if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
-                            let tempValid = true;
-                            Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
-                                if (!checkPrimaryMethod(subSkill, globalValids, baseChunkData)) {
-                                    tempValid = false;
+            let isPrimary = checkPrimaryMethod(skill, globalValids, baseChunkData);
+            Object.keys(globalValids[skill]).forEach(challenge => {
+                if (isPrimary || (manualTasks.hasOwnProperty(skill) && manualTasks[skill].hasOwnProperty(challenge))) {
+                    if (globalValids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > highestChallengeLevelArr[skill])) {
+                        if (((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                            if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+                                let tempValid = true;
+                                Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+                                    if (!checkPrimaryMethod(subSkill, globalValids, baseChunkData)) {
+                                        tempValid = false;
+                                    }
+                                });
+                                if (tempValid) {
+                                    highestChallenge[skill] = challenge;
                                 }
-                            });
-                            if (tempValid) {
+                            } else {
                                 highestChallenge[skill] = challenge;
                             }
-                        } else {
-                            highestChallenge[skill] = challenge;
-                        }
-                    } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Priority'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
-                        if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
-                            let tempValid = true;
-                            Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
-                                if (!checkPrimaryMethod(subSkill, globalValids, baseChunkData)) {
-                                    tempValid = false;
+                        } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Priority'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                            if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+                                let tempValid = true;
+                                Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
+                                    if (!checkPrimaryMethod(subSkill, globalValids, baseChunkData)) {
+                                        tempValid = false;
+                                    }
+                                });
+                                if (tempValid) {
+                                    highestChallenge[skill] = challenge;
                                 }
-                            });
-                            if (tempValid) {
+                            } else {
                                 highestChallenge[skill] = challenge;
                             }
-                        } else {
-                            highestChallenge[skill] = challenge;
                         }
                     }
                 }

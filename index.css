@@ -625,12 +625,12 @@ button.menu2 {
 }
 
 .highest {
-    background-color: rgb(100, 100, 225);
-    width: min(12vw, 175px);
+    background-color: rgb(255, 50, 150);
+    width: min(8vw, 125px);
     height: 100%;
     font-size: min(1.2vw, 20px);
     color: white;
-    display: block;
+    display: inline;
     border-width: 1px 1px 1px 1px;
     border-style: solid;
     border-color: black;
@@ -643,10 +643,36 @@ button.menu2 {
 }
 
 .highest:hover {
-    background-color: rgb(75, 75, 200);
+    background-color: rgb(225, 25, 125);
 }
 
 .highest:active {
+    background-color: rgb(200, 75, 175);
+}
+
+.highest2 {
+    background-color: rgb(100, 100, 225);
+    width: min(8vw, 125px);
+    height: 100%;
+    font-size: min(1.2vw, 20px);
+    color: white;
+    display: inline;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: auto;
+    pointer-events: auto;
+}
+
+.highest2:hover {
+    background-color: rgb(75, 75, 200);
+}
+
+.highest2:active {
     background-color: rgb(125, 125, 175);
 }
 
@@ -1489,12 +1515,6 @@ button.menu2 {
     border: solid;
     border-width: 0 0 2px 0;
     background-color: var(--color1);
-    background: repeating-linear-gradient(45deg, #00a151, #00a151 20px, #ffffff 20px, #ffffff 25px, #e4272b 25px, #e4272b 45px, #ffffff 45px, #ffffff 50px);
-    color: black;
-}
-
-.topnav a {
-    color: black;
 }
 
 .topnav i {
@@ -1924,6 +1944,14 @@ button.menu2 {
     color: #666666;
 }
 
+.help2 {
+    position: relative;
+    float: none;
+    font-weight: bold;
+    margin-right: 0px;
+    color: var(--colorLink);
+}
+
 .help .tooltiptext {
     visibility: hidden;
     width: 220px;
@@ -2063,6 +2091,12 @@ button.menu2 {
 }
 
 #myModal12 > .modal-content {
+    height: 67%;
+    width: 45%;
+    margin-top: -5%;
+}
+
+#myModal12_2 > .modal-content {
     height: 67%;
     width: 45%;
     margin-top: -5%;
@@ -3204,6 +3238,28 @@ input#searchChunks {
     padding: 10px;
 }
 
+.highest2-title {
+    font-size: 1.2vw;
+    display: inline-flex;
+    width: 100%;
+    font-weight: bold;
+    height: 7%;
+    background-color: var(--color2);
+    overflow-x: auto;
+}
+
+.highest2-data {
+    overflow-y: auto;
+    height: 93%;
+}
+
+.highest2-subtitle {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
 .complete-title {
     font-size: 36px;
     font-weight: bold;
@@ -3999,10 +4055,6 @@ input#searchMonsters {
     pointer-events: none;
     font-size: 84px;
     animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: url("./christmas-stripes.jpg");
 }
 
 .chunk-window-child1::after {
@@ -4018,10 +4070,6 @@ input#searchMonsters {
     pointer-events: none;
     font-size: 84px;
     animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: url("./christmas-stripes.jpg");
 }
 
 .chunk-window-child2::before {
@@ -4037,10 +4085,6 @@ input#searchMonsters {
     pointer-events: none;
     font-size: 84px;
     animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: url("./christmas-stripes.jpg");
 }
 
 .chunk-window-child2::after {
@@ -4056,10 +4100,6 @@ input#searchMonsters {
     pointer-events: none;
     font-size: 84px;
     animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: url("./christmas-stripes.jpg");
 }
 
 .chunk-window-child3::before {
@@ -4075,10 +4115,6 @@ input#searchMonsters {
     pointer-events: none;
     font-size: 84px;
     animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: url("./christmas-stripes.jpg");
 }
 
 .chunk-window-child3::after {
@@ -4094,10 +4130,6 @@ input#searchMonsters {
     pointer-events: none;
     font-size: 84px;
     animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: url("./christmas-stripes.jpg");
 }
 
 @keyframes wave-horizontal {
