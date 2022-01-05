@@ -17003,6 +17003,21 @@
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rock"
 			},
+			"Have the Apothecary make a strength potion": {
+				"Chunks": ["12597"],
+				"Items": ["Limpwurt root", "Red spiders' eggs"],
+				"Output": "Strength potion(4)"
+			},
+			"Have the Apothecary make an energy potion": {
+				"Chunks": ["12597"],
+				"Items": ["Limpwurt root", "Chocolate dust"],
+				"Output": "Energy potion(4)"
+			},
+			"Have the Apothecary make an antipoison potion": {
+				"Chunks": ["12597"],
+				"Items": ["Limpwurt root", "Cadava berries"],
+				"Output": "Antipoison(4)"
+			},
 			"Make an arclight": {
 				"Chunks": ["Catacombs of Kourend"],
 				"Items": ["Darklight", "Ancient shard"],
@@ -74560,7 +74575,7 @@
 				"Lesser demon": 6,
 				"Skeleton": 5
 			},
-			"Name": "Crandor and Karamja Dungeon",
+			"Name": "Crandor and Karamja Dungeon%2FSouth",
 			"Object": {
 				"Climbing rope": 1,
 				"Gold rock": 4
@@ -74585,7 +74600,7 @@
 			"NPC": {
 				"Dallas Jones": 1
 			},
-			"Name": "Crandor and Karamja Dungeon",
+			"Name": "Crandor and Karamja Dungeon%2FNorth",
 			"Object": {
 				"Climbing rope": 1,
 				"Rocks": 1
@@ -86284,32 +86299,26 @@
 				"The Depths of Despair": "step"
 			}
 		},
-		"Crandor and Karamja Dungeon": {
+		"Crandor and Karamja Dungeon%2FNorth": {
 			"Connect": {
-				"9808": true,
-				"11313": true,
 				"11314": true,
-				"11415": true
+				"11413": true
 			},
 			"Diary": {
 				"Karamja": "MD2"
 			},
 			"Monster": {
-				"Deadly red spider": 5,
 				"Elvarg": 1,
-				"Giant bat": 3,
-				"Lesser demon": 11,
+				"Lesser demon": 5,
 				"Rat": 2,
 				"Skeleton%2FArmed": 6,
-				"Skeleton%2FPlain": 11,
-				"Skeleton%2FUnarmed": 2
+				"Skeleton%2FPlain": 8
 			},
 			"NPC": {
 				"Dallas Jones": 1
 			},
 			"Object": {
-				"Climbing rope": 2,
-				"Gold rock": 4,
+				"Climbing rope": 1,
 				"Rocks": 1
 			},
 			"Quest": {
@@ -86317,8 +86326,31 @@
 				"Dragon Slayer II": "step"
 			},
 			"Spawn": {
+				"Coins": 1
+			}
+		},
+		"Crandor and Karamja Dungeon%2FSouth": {
+			"Connect": {
+				"9808": true,
+				"11313": true,
+				"11414": true
+			},
+			"Diary": {
+				"Karamja": "MD2"
+			},
+			"Monster": {
+				"Deadly red spider": 5,
+				"Giant bat": 3,
+				"Lesser demon": 6,
+				"Skeleton%2FPlain": 3,
+				"Skeleton%2FUnarmed": 2
+			},
+			"Object": {
+				"Climbing rope": 1,
+				"Gold rock": 4
+			},
+			"Spawn": {
 				"Bones": 1,
-				"Coins": 1,
 				"Fire rune": 1,
 				"Red spiders' eggs": 1
 			}
