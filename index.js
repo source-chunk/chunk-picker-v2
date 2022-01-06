@@ -874,7 +874,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.10.0");
+const myWorker = new Worker("./worker.js?v=4.10.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2087,7 +2087,7 @@ var highscoreOptIn = function() {
         } else {
             setTimeout(function() {
                 setUsername(oldUsername);
-                $('.highscoretoggle').text('Change chunk stats username<i class="pic fas fa-trophy"></i>');
+                $('.highscoretoggle').html('Change chunk stats username<i class="pic fas fa-trophy"></i>');
                 $('#highscore-menu').css({ 'opacity': 0 }).hide();
                 $('#highscore-menu2').css({ 'opacity': 1 }).show();
                 $('#populateButton').attr({ 'href': 'https://chunk-stats.web.app/user/' + userName });

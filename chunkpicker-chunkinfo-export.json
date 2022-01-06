@@ -17016,6 +17016,14 @@
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rock"
 			},
+			"Grab a rake from inside the Lumbridge Swamp shack": {
+				"Chunks": ["12849"],
+				"Output": "Rake"
+			},
+			"Grab a spade from inside the Lumbridge Swamp shack": {
+				"Chunks": ["12849"],
+				"Output": "Spade"
+			},
 			"Break down a bandos chestplate": {
 				"Items": ["Bandosian chestplate", "Hammer"],
 				"Objects": ["Ancient Forge"],
