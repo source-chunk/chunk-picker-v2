@@ -12449,9 +12449,22 @@
 				"Primary": true,
 				"Priority": 2
 			},
+			"Mix an ~|ancient brew|~": {
+				"Items": ["Dwarf weed potion (unf)", "Nihil dust"],
+				"Level": 85,
+				"Output": "Ancient brew(3)",
+				"Primary": true
+			},
+			"Mix an ~|ancient mix|~": {
+				"Items": ["Ancient brew(3)", "Caviar"],
+				"Level": 92,
+				"Output": "Ancient mix(2)",
+				"Primary": true
+			},
 			"Mix an ~|anti-poison supermix|~": {
 				"Items": ["Superantipoison(3)", "Caviar"],
 				"Level": 51,
+				"Output": "anti-poison supermix(2)",
 				"Primary": true
 			},
 			"Mix a ~|bastion potion|~": {
@@ -17003,6 +17016,32 @@
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rock"
 			},
+			"Break down a bandos chestplate": {
+				"Items": ["Bandosian chestplate", "Hammer"],
+				"Objects": ["Ancient Forge"],
+				"Output": "Bandosian components"
+			},
+			"Break down bandos tassets": {
+				"Items": ["Bandosian tassets", "Hammer"],
+				"Objects": ["Ancient Forge"],
+				"Output": "Bandosian components"
+			},
+			"Combine ecumenical key shards into a key": {
+				"Items": ["Ecumenical key shard"],
+				"Output": "Ecumenical key"
+			},
+			"Grind a nihil shard": {
+				"Items": ["Nihil shard"],
+				"Output": "Nihil dust"
+			},
+			"Make a zaryte crossbow": {
+				"Items": ["Armadyl crossbow", "Nihil horn", "Nihil shard"],
+				"Output": "Zaryte crossbow"
+			},
+			"Attach Ancient hilt": {
+				"Items": ["Godsword blade*", "Ancient hilt*"],
+				"Output": "Ancient godsword"
+			},
 			"Have the Apothecary make a strength potion": {
 				"Chunks": ["12597"],
 				"Items": ["Limpwurt root", "Red spiders' eggs"],
@@ -17067,8 +17106,7 @@
 			"Rogues' Den loot": {
 				"Category": ["Minigame"],
 				"Tasks": {
-					"Access the ~|Rogues' Den|~ minigame": "Agility",
-					"Access the ~|Rogues' Den|~ minigame": "Thieving"
+					"Access the ~|Rogues' Den|~ minigame": "Agility"
 				},
 				"Output": "Rogues' Den loot"
 			},
@@ -27244,21 +27282,48 @@
 				"Monsters": ["Spiritual mage"],
 				"Primary": false,
 				"Source": "drop",
-				"Output": "Spiritual mage"
+				"Output": "Spiritual mage",
+				"Priority": 1
 			},
 			"Slay a ~|spiritual ranger|~": {
 				"Level": 63,
 				"Monsters": ["Spiritual ranger"],
 				"Primary": false,
 				"Source": "drop",
-				"Output": "Spiritual ranger"
+				"Output": "Spiritual ranger",
+				"Priority": 1
 			},
 			"Slay a ~|spiritual warrior|~": {
 				"Level": 68,
 				"Monsters": ["Spiritual warrior"],
 				"Primary": false,
 				"Source": "drop",
-				"Output": "Spiritual warrior"
+				"Output": "Spiritual warrior",
+				"Priority": 1
+			},
+			"Slay a ~|spiritual mage%2FAncient Prison|~": {
+				"Level": 83,
+				"Monsters": ["Spiritual mage%2FAncient Prison"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Spiritual mage%2FAncient Prison",
+				"Priority": 2
+			},
+			"Slay a ~|spiritual ranger%2FAncient Prison|~": {
+				"Level": 63,
+				"Monsters": ["Spiritual ranger%2FAncient Prison"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Spiritual ranger%2FAncient Prison",
+				"Priority": 2
+			},
+			"Slay a ~|spiritual warrior%2FAncient Prison|~": {
+				"Level": 68,
+				"Monsters": ["Spiritual warrior%2FAncient Prison"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Spiritual warrior%2FAncient Prison",
+				"Priority": 2
 			},
 			"Slay a ~|sulphur lizard|~": {
 				"Level": 44,
@@ -27624,6 +27689,30 @@
 					"Prayer": 90
 				},
 				"Priority": 5
+			},
+			"Repair a ~|torva full helm|~": {
+				"Items": ["Hammer", "Torva full helm (damaged)", "Bandosian components"],
+				"Level": 90,
+				"Objects": ["Anvil+"],
+				"Output": "Torva full helm",
+				"Primary": false,
+				"Priority": 8
+			},
+			"Repair a ~|torva platebody|~": {
+				"Items": ["Hammer", "Torva platebody (damaged)", "Bandosian components"],
+				"Level": 90,
+				"Objects": ["Anvil+"],
+				"Output": "Torva platebody",
+				"Primary": false,
+				"Priority": 9
+			},
+			"Repair ~|torva platelegs|~": {
+				"Items": ["Hammer", "Torva platelegs (damaged)", "Bandosian components"],
+				"Level": 90,
+				"Objects": ["Anvil+"],
+				"Output": "Torva platelegs",
+				"Primary": false,
+				"Priority": 10
 			},
 			"Buy the ~|Smithing cape|~": {
 				"Category": ["Skillcape"],
@@ -31007,6 +31096,11 @@
 				"Items": ["Giant pouch"],
 				"Requirements": ["Runecraft"]
 			},
+			"Obtain a ~|blood essence|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Blood essence"]
+			},
 			"Obtain an ~|Imcando hammer|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
@@ -32123,6 +32217,46 @@
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Godsword shard 3"]
+			},
+			"(Nex) Obtain a ~|nexling|~": {
+				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Nexling"]
+			},
+			"(Nex) Obtain an ~|ancient hilt|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Ancient hilt"]
+			},
+			"(Nex) Obtain a ~|nihil horn|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Nihil horn"]
+			},
+			"(Nex) Obtain a ~|zaryte vambraces|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Zaryte vambraces"]
+			},
+			"(Nex) Obtain a ~|torva full helm (damaged)|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Torva full helm (damaged)"]
+			},
+			"(Nex) Obtain a ~|torva platebody (damaged)|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Torva platebody (damaged)"]
+			},
+			"(Nex) Obtain a ~|torva platelegs (damaged)|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Torva platelegs (damaged)"]
+			},
+			"(Nex) Obtain a ~|nihil shard|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Nihil shard"]
 			},
 			"(The Nightmare) Obtain a ~|little nightmare|~": {
 				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
@@ -36587,6 +36721,11 @@
 				"Category": ["Collection Log", "Collection Log Other", "Pets"],
 				"Label": "Collection Log",
 				"Items": ["Tiny tempor"]
+			},
+			"(All Pets) Obtain a ~|nexling|~": {
+				"Category": ["Collection Log", "Collection Log Other", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Nexling"]
 			},
 			"(Camdozaal) Obtain a ~|barronite mace|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
@@ -59964,6 +60103,91 @@
 				"BaseQuest": "Family Pest",
 				"Chunks": ["13109"]
 			},
+			"~|The Frozen Door|~ 1": {
+				"BaseQuest": "The Frozen Door",
+				"Description": "Read the important letter from the Messenger",
+				"Chunks": ["12845"]
+			},
+			"~|The Frozen Door|~ 2a": {
+				"BaseQuest": "The Frozen Door",
+				"Description": "Kill Kree'arra for the frozen key piece (armadyl)",
+				"Chunks": ["God Wars Dungeon"],
+				"Tasks": {
+					"~|The Frozen Door|~ 1": "Quest"
+				},
+				"Skills": {
+					"Ranged": 70
+				}
+			},
+			"~|The Frozen Door|~ 2b": {
+				"BaseQuest": "The Frozen Door",
+				"Description": "Kill General Graardor for the frozen key piece (bandos)",
+				"Chunks": ["God Wars Dungeon"],
+				"Items": ["Hammer"],
+				"Tasks": {
+					"~|The Frozen Door|~ 1": "Quest"
+				},
+				"Skills": {
+					"Strength": 70
+				}
+			},
+			"~|The Frozen Door|~ 2c": {
+				"BaseQuest": "The Frozen Door",
+				"Description": "Kill Commander Zilyana for the frozen key piece (saradomin)",
+				"Chunks": ["God Wars Dungeon"],
+				"Items": ["Rope"],
+				"Tasks": {
+					"~|The Frozen Door|~ 1": "Quest"
+				},
+				"Skills": {
+					"Agility": 70
+				}
+			},
+			"~|The Frozen Door|~ 2d": {
+				"BaseQuest": "The Frozen Door",
+				"Description": "Kill K'ril Tsutsaroth for the frozen key piece (zamorak)",
+				"Chunks": ["God Wars Dungeon"],
+				"Tasks": {
+					"~|The Frozen Door|~ 1": "Quest"
+				},
+				"Skills": {
+					"Hitpoints": 70
+				}
+			},
+			"~|The Frozen Door|~ 3": {
+				"BaseQuest": "The Frozen Door",
+				"Description": "Assemble the frozen key",
+				"Tasks": {
+					"~|The Frozen Door|~ 2a": "Quest",
+					"~|The Frozen Door|~ 2b": "Quest",
+					"~|The Frozen Door|~ 2c": "Quest",
+					"~|The Frozen Door|~ 2d": "Quest"
+				}
+			},
+			"~|The Frozen Door|~ 4": {
+				"BaseQuest": "The Frozen Door",
+				"Description": "Open the frozen door",
+				"Chunks": ["God Wars Dungeon"],
+				"Tasks": {
+					"~|The Frozen Door|~ 3": "Quest"
+				}
+			},
+			"~|The Frozen Door|~ 5": {
+				"BaseQuest": "The Frozen Door",
+				"Description": "Talk to Ashuelot Reis",
+				"Chunks": ["Ancient Prison"],
+				"Tasks": {
+					"~|The Frozen Door|~ 4": "Quest"
+				}
+			},
+			"~|The Frozen Door|~ Complete the quest": {
+				"Tasks": {
+					"~|The Frozen Door|~ 5": "Quest"
+				},
+				"QuestPoints": 0,
+				"BaseQuest": "The Frozen Door",
+				"Chunks": ["Ancient Prison"]
+			},
 			"~|The General's Shadow|~ 1": {
 				"BaseQuest": "The General's Shadow",
 				"Description": "Talk to the ghost of General Khazard",
@@ -74446,6 +74670,24 @@
 				"Yew": 2
 			}
 		},
+		"11345": {
+			"Connect": {
+				"11602": true
+			},
+			"Monster": {
+				"Blood Reaver": 1,
+				"Spiritual mage%2FAncient Prison": 1,
+				"Spiritual ranger%2FAncient Prison": 1,
+				"Spiritual warrior%2FAncient Prison": 1
+			},
+			"Object": {
+				"Ancient Forge": 1
+			},
+			"Quest": {
+				"The Frozen Door": "step"
+			},
+			"Name": "Ancient Prison"
+		},
 		"11346": {
 			"Monster": {
 				"Aviansie": 36,
@@ -75531,6 +75773,26 @@
 				"Treacle": 1
 			},
 			"Name": "Varrock Rat Pits"
+		},
+		"11601": {
+			"Monster": {
+				"Blood Reaver": 1,
+				"Cruor": 1,
+				"Fumus": 1,
+				"Glacies": 1,
+				"Nex": 1,
+				"Spiritual mage%2FAncient Prison": 1,
+				"Spiritual ranger%2FAncient Prison": 1,
+				"Spiritual warrior%2FAncient Prison": 1,
+				"Umbra": 1
+			},
+			"NPC": {
+				"Ashuelot Reis": 1
+			},
+			"Object": {
+				"Anvil": 1
+			},
+			"Name": "Ancient Prison"
 		},
 		"11602": {
 			"Connect": {
@@ -85628,6 +85890,32 @@
 				"Dragon Slayer II": "step"
 			}
 		},
+		"Ancient Prison": {
+			"Connect": {
+				"11602": true
+			},
+			"Monster": {
+				"Blood Reaver": 1,
+				"Cruor": 1,
+				"Fumus": 1,
+				"Glacies": 1,
+				"Nex": 1,
+				"Spiritual mage%2FAncient Prison": 1,
+				"Spiritual ranger%2FAncient Prison": 1,
+				"Spiritual warrior%2FAncient Prison": 1,
+				"Umbra": 1
+			},
+			"NPC": {
+				"Ashuelot Reis": 1
+			},
+			"Object": {
+				"Ancient Forge": 1,
+				"Anvil": 1
+			},
+			"Quest": {
+				"The Frozen Door": "step"
+			}
+		},
 		"Ape Atoll Dungeon": {
 			"Connect": {
 				"11050": true
@@ -87277,6 +87565,7 @@
 		},
 		"God Wars Dungeon": {
 			"Connect": {
+				"11345": true,
 				"11578": true
 			},
 			"Diary": {
@@ -87332,6 +87621,9 @@
 				"STASH (master)": 1,
 				"Saradomin altar": 1,
 				"Zamorak altar": 1
+			},
+			"Quest": {
+				"The Frozen Door": "first"
 			}
 		},
 		"Gorak Plane": {
@@ -91667,7 +91959,7 @@
 			"ChocolateDustTool+": ["Pestle and mortar", "Knife"],
 			"Cooked stew+": ["Cooked meat", "Cooked chicken"],
 			"Compost+": ["Compost", "Supercompost", "Ultracompost"],
-			"Crossbow+": ["Bronze crossbow", "Blurite crossbow", "Iron crossbow", "Steel crossbow", "Mithril crossbow", "Adamant crossbow", "Rune crossbow", "Dragon crossbow", "Crossbow", "Phoenix crossbow", "Dorgeshuun crossbow", "Hunters' crossbow", "Karil's crossbow", "Dragon hunter crossbow", "Armadyl crossbow"],
+			"Crossbow+": ["Bronze crossbow", "Blurite crossbow", "Iron crossbow", "Steel crossbow", "Mithril crossbow", "Adamant crossbow", "Rune crossbow", "Dragon crossbow", "Crossbow", "Phoenix crossbow", "Dorgeshuun crossbow", "Hunters' crossbow", "Karil's crossbow", "Dragon hunter crossbow", "Armadyl crossbow", "Zaryte crossbow"],
 			"Crystal armour+": ["Crystal helm", "Crystal body", "Crystal legs"],
 			"Curry spice+": ["Spice", "Curry leaves"],
 			"Dagon'hai robes+": ["Dagon'hai hat", "Dagon'hai robe top", "Dagon'hai robe bottom"],
@@ -92127,7 +92419,12 @@
 			"Zulrah": true,
 			"Vorkath": true,
 			"Corporeal Beast": true,
-			"The Nightmare": true
+			"The Nightmare": true,
+			"Nex": true,
+			"Cruor": true,
+			"Glacies": true,
+			"Umbra": true,
+			"Fumus": true
 		},
 		"minigameShops": {
 			"Brimhaven Agility Arena Ticket Exchange": true,
@@ -92235,7 +92532,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Bronze bolts (p)": {
 				"Crossbow": true,
@@ -92249,7 +92547,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Opal bolts": {
 				"Crossbow": true,
@@ -92263,7 +92562,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Pearl bolts": {
 				"Iron crossbow": true,
@@ -92273,7 +92573,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Barbed bolts": {
 				"Bronze crossbow": true,
@@ -92285,7 +92586,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Bronze arrow": {
 				"Shortbow": true,
@@ -93002,7 +93304,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Bronze bolts (p++)": {
 				"Crossbow": true,
@@ -93016,7 +93319,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Bone bolts": {
 				"Dorgeshuun crossbow": true
@@ -93030,7 +93334,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Iron bolts": {
 				"Iron crossbow": true,
@@ -93040,7 +93345,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Steel bolts": {
 				"Steel crossbow": true,
@@ -93049,7 +93355,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Mithril bolts": {
 				"Mithril crossbow": true,
@@ -93057,20 +93364,23 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Adamant bolts": {
 				"Adamant crossbow": true,
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Runite bolts": {
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Silver bolts": {
 				"Iron crossbow": true,
@@ -93080,7 +93390,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Opal bolts (e)": {
 				"Crossbow": true,
@@ -93094,7 +93405,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Jade bolts (e)": {
 				"Blurite crossbow": true,
@@ -93105,7 +93417,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Pearl bolts (e)": {
 				"Iron crossbow": true,
@@ -93115,7 +93428,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Topaz bolts (e)": {
 				"Steel crossbow": true,
@@ -93124,7 +93438,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Sapphire bolts (e)": {
 				"Mithril crossbow": true,
@@ -93132,7 +93447,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Emerald bolts (e)": {
 				"Mithril crossbow": true,
@@ -93140,33 +93456,38 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Ruby bolts (e)": {
 				"Adamant crossbow": true,
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Diamond bolts (e)": {
 				"Adamant crossbow": true,
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Dragonstone bolts (e)": {
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Onyx bolts (e)": {
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Blurite bolts (p)": {
 				"Blurite crossbow": true,
@@ -93177,7 +93498,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Iron bolts (p)": {
 				"Iron crossbow": true,
@@ -93187,7 +93509,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Steel bolts (p)": {
 				"Steel crossbow": true,
@@ -93196,7 +93519,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Mithril bolts (p)": {
 				"Mithril crossbow": true,
@@ -93204,20 +93528,23 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Adamant bolts (p)": {
 				"Adamant crossbow": true,
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Runite bolts (p)": {
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Silver bolts (p)": {
 				"Iron crossbow": true,
@@ -93227,7 +93554,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Blurite bolts (p+)": {
 				"Blurite crossbow": true,
@@ -93238,7 +93566,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Iron bolts (p+)": {
 				"Iron crossbow": true,
@@ -93248,7 +93577,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Steel bolts (p+)": {
 				"Steel crossbow": true,
@@ -93257,7 +93587,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Mithril bolts (p+)": {
 				"Mithril crossbow": true,
@@ -93265,20 +93596,23 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Adamant bolts (p+)": {
 				"Adamant crossbow": true,
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Runite bolts (p+)": {
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Silver bolts (p+)": {
 				"Iron crossbow": true,
@@ -93288,7 +93622,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Blurite bolts (p++)": {
 				"Blurite crossbow": true,
@@ -93299,7 +93634,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Iron bolts (p++)": {
 				"Iron crossbow": true,
@@ -93309,7 +93645,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Steel bolts (p++)": {
 				"Steel crossbow": true,
@@ -93318,7 +93655,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Mithril bolts (p++)": {
 				"Mithril crossbow": true,
@@ -93326,20 +93664,23 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Adamant bolts (p++)": {
 				"Adamant crossbow": true,
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Runite bolts (p++)": {
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Silver bolts (p++)": {
 				"Iron crossbow": true,
@@ -93349,7 +93690,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Jade bolts": {
 				"Blurite crossbow": true,
@@ -93360,7 +93702,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Topaz bolts": {
 				"Steel crossbow": true,
@@ -93369,7 +93712,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Sapphire bolts": {
 				"Mithril crossbow": true,
@@ -93377,7 +93721,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Emerald bolts": {
 				"Mithril crossbow": true,
@@ -93385,33 +93730,38 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Ruby bolts": {
 				"Adamant crossbow": true,
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Diamond bolts": {
 				"Adamant crossbow": true,
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Dragonstone bolts": {
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Onyx bolts": {
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Training arrows": {
 				"Training bow": true
@@ -93468,7 +93818,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Dragon javelin": {
 				"Light ballista": true,
@@ -93490,7 +93841,8 @@
 				"Rune crossbow": true,
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Amethyst javelin": {
 				"Light ballista": true,
@@ -93571,122 +93923,146 @@
 			"Dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Dragon bolts (p)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Dragon bolts (p+)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Dragon bolts (p++)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Opal dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Jade dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Pearl dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Topaz dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Sapphire dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Emerald dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Ruby dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Diamond dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Dragonstone dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Onyx dragon bolts (e)": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Opal dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Jade dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Pearl dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Topaz dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Sapphire dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Emerald dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Ruby dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Diamond dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Dragonstone dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			},
 			"Onyx dragon bolts": {
 				"Dragon crossbow": true,
 				"Dragon hunter crossbow": true,
-				"Armadyl crossbow": true
+				"Armadyl crossbow": true,
+				"Zaryte crossbow": true
 			}
 		},
 		"slayerTasks": {
@@ -94234,7 +94610,10 @@
 			"Spiritual creatures": {
 				"Spiritual mage": true,
 				"Spiritual warrior": true,
-				"Spiritual ranger": true
+				"Spiritual ranger": true,
+				"Spiritual mage%2FAncient Prison": true,
+				"Spiritual warrior%2FAncient Prison": true,
+				"Spiritual ranger%2FAncient Prison": true
 			},
 			"Steel dragons": {
 				"Steel dragon": true
@@ -95460,6 +95839,37 @@
 			"Blamish red shell (round)": "Always",
 			"Fat snail": "Always"
 		},
+		"Blood Reaver": {
+			"Adamantite bar": "1/16",
+			"Air rune": "2/128",
+			"Ancient ceremonial mask": "1/640",
+			"Ancient ceremonial top": "1/640",
+			"Ancient ceremonial legs": "1/640",
+			"Ancient ceremonial gloves": "1/640",
+			"Ancient ceremonial boots": "1/640",
+			"Astral rune": "1/8.533",
+			"Blood essence": "1/128",
+			"Blood rune": "1/64",
+			"Chaos rune": "1/42.67",
+			"Clue scroll (hard)": "Unknown",
+			"Coal": "1/16",
+			"Coins": "1/14.22",
+			"GemDropTable+": "1/128",
+			"Grimy avantoe": "3.125/128",
+			"Grimy ranarr weed": "2.5/128",
+			"Grimy snapdragon": "2.5/128",
+			"Grimy torstol": "1.875/128",
+			"Magic potion(1)": "1/11.64",
+			"Malicious ashes": "Always",
+			"Mind rune": "1/32",
+			"Mud rune": "7/128",
+			"Nature rune": "1/32",
+			"Nihil shard": "1/128",
+			"Potato cactus": "1/18.29",
+			"Prayer potion(2)": "1/14.22",
+			"Pure essence": "1/16",
+			"Super defence(1)": "1/64"
+		},
 		"Blue dragon": {
 			"Adamant full helm": "1/128",
 			"Adamantite ore": "3/128",
@@ -96447,6 +96857,13 @@
 		},
 		"Crocodile": {
 			"Bones": "Always"
+		},
+		"Cruor": {
+			"Ancient ceremonial mask": "Unknown",
+			"Ancient ceremonial top": "Unknown",
+			"Ancient ceremonial legs": "Unknown",
+			"Ancient ceremonial gloves": "Unknown",
+			"Ancient ceremonial boots": "Unknown"
 		},
 		"Crushing hand": {
 			"Bones": "Always",
@@ -97728,6 +98145,13 @@
 		"Frog": {
 			"Bones": "Always"
 		},
+		"Fumus": {
+			"Ancient ceremonial mask": "Unknown",
+			"Ancient ceremonial top": "Unknown",
+			"Ancient ceremonial legs": "Unknown",
+			"Ancient ceremonial gloves": "Unknown",
+			"Ancient ceremonial boots": "Unknown"
+		},
 		"Galina": {
 			"Blamish oil": "1/512",
 			"Bucket": "25/512",
@@ -98148,6 +98572,13 @@
 		},
 		"Giant spider": {
 			"Clue scroll (beginner)": "1/128"
+		},
+		"Glacies": {
+			"Ancient ceremonial mask": "Unknown",
+			"Ancient ceremonial top": "Unknown",
+			"Ancient ceremonial legs": "Unknown",
+			"Ancient ceremonial gloves": "Unknown",
+			"Ancient ceremonial boots": "Unknown"
 		},
 		"Glod": {
 			"Big bones": "Always",
@@ -101079,6 +101510,42 @@
 			"Water rune": "3/128",
 			"Zamorak monk bottom": "4/128",
 			"Zamorak monk top": "3/128"
+		},
+		"Nex": {
+			"Air orb": "Common",
+			"Air rune": "Uncommon",
+			"Ancient hilt": "1/400",
+			"Ancient": "1/400",
+			"Big bones": "Always",
+			"Blood essence": "Common",
+			"Blood rune": "Common",
+			"Cannonball": "Common",
+			"Clue scroll (elite)": "Common",
+			"Coal": "Uncommon",
+			"Coins": "Uncommon",
+			"Death rune": "Common",
+			"Dragon bolts (unf)": "Common",
+			"Ecumenical key shard": "Common",
+			"Fire rune": "Uncommon",
+			"Nexling": "1/500",
+			"Nihil horn": "1/250",
+			"Nihil shard": "Common",
+			"Onyx bolts (e)": "Uncommon",
+			"Prayer potion(4)": "Common",
+			"Rune sword": "Rare",
+			"Runite ore": "Uncommon",
+			"Saradomin brew(4)": "Common",
+			"Shark": "Common",
+			"Soul rune": "Common",
+			"Super restore(4)": "Common",
+			"Torva full helm (damaged)": "1/250",
+			"Torva platebody (damaged)": "1/250",
+			"Torva platelegs (damaged)": "1/250",
+			"Uncut diamond": "Common",
+			"Uncut ruby": "Common",
+			"Water rune": "Uncommon",
+			"Wine of zamorak": "Common",
+			"Zaryte vambraces": "1/160"
 		},
 		"Night beast": {
 			"Adamant sq shield": "1/128",
@@ -104338,6 +104805,13 @@
 		"Ulfric": {
 			"Bones": "Always"
 		},
+		"Umbra": {
+			"Ancient ceremonial mask": "Unknown",
+			"Ancient ceremonial top": "Unknown",
+			"Ancient ceremonial legs": "Unknown",
+			"Ancient ceremonial gloves": "Unknown",
+			"Ancient ceremonial boots": "Unknown"
+		},
 		"Undead Druid": {
 			"Air battlestaff": "2/100",
 			"Air rune": "5/100",
@@ -106013,6 +106487,7 @@
 		"The Fremennik Exiles": "8253, 8508, 8509, 9790, 10552, 10553, 10808, 11065, Lunar Isle mine, Jormungand's Prison",
 		"The Fremennik Isles": "9275, 9276, 9531, 9532, 10553, Ice Troll Caves",
 		"The Fremennik Trials": "10552, 10553, 10806, 10808, 11064",
+		"The Frozen Door": "God Wars Dungeon, Ancient Prison",
 		"The General's Shadow": "9780, 10292, 10806, 10808, 11311, 12340, 13104, Goblin Cave",
 		"The Giant Dwarf": "10810, 11825, 12854, Keldagrim",
 		"The Golem": "12853, 13364, 13872",
@@ -113184,6 +113659,38 @@
 				"Water rune": "7/128",
 				"GemDropTable+": "1/64"
 			},
+			"Spiritual mage%2FAncient Prison": {
+				"Adamantite bar": "1/16",
+				"Air rune": "2/128",
+				"Ancient brew(2)": "1/11.64",
+				"Ancient brew(3)": "1/32",
+				"Ancient ceremonial mask": "1/640",
+				"Ancient ceremonial top": "1/640",
+				"Ancient ceremonial legs": "1/640",
+				"Ancient ceremonial gloves": "1/640",
+				"Ancient ceremonial boots": "1/640",
+				"Astral rune": "1/8.533",
+				"Blood essence": "1/128",
+				"Blood rune": "1/64",
+				"Bones": "Always",
+				"Clue scroll (hard)": "Unknown",
+				"Coal": "1/16",
+				"Coins": "1/14.22",
+				"Death rune": "1/32",
+				"GemDropTable+": "1/128",
+				"Grimy avantoe": "3.125/128",
+				"Grimy ranarr weed": "2.5/128",
+				"Grimy snapdragon": "2.5/128",
+				"Grimy torstol": "1.875/128",
+				"Lava rune": "1/14.22",
+				"Mud rune": "7/128",
+				"Nihil shard": "1/128",
+				"Pure essence": "1/16",
+				"Smoke rune": "1/64",
+				"Soul rune": "1/42.67",
+				"Super defence(3)": "1/14.22",
+				"Super restore(3)": "1/64"
+			},
 			"Spiritual ranger": {
 				"Adamant arrow": "1/128",
 				"Adamant arrow(p++)": "3/128",
@@ -113210,6 +113717,37 @@
 				"Steel arrow": "4/128",
 				"Steel crossbow": "3/128"
 			},
+			"Spiritual ranger%2FAncient Prison": {
+				"Adamant bolts": "1/18.29",
+				"Adamantite bar": "1/16",
+				"Ancient ceremonial mask": "1/640",
+				"Ancient ceremonial top": "1/640",
+				"Ancient ceremonial legs": "1/640",
+				"Ancient ceremonial gloves": "1/640",
+				"Ancient ceremonial boots": "1/640",
+				"Blue dragon scale": "1/18.29",
+				"Bones": "Always",
+				"Chaos rune": "3/128",
+				"Clue scroll (hard)": "Unknown",
+				"Coal": "1/16",
+				"Coins": "1/14.22",
+				"GemDropTable+": "1/128",
+				"Green d'hide body": "1/18.29",
+				"Grimy avantoe": "3.125/128",
+				"Grimy ranarr weed": "2.5/128",
+				"Grimy snapdragon": "2.5/128",
+				"Grimy torstol": "1.875/128",
+				"Mithril longsword": "1/8.533",
+				"Nature rune": "4/128",
+				"Nihil shard": "1/128",
+				"Prayer potion(2)": "1/14.22",
+				"Pure essence": "1/16",
+				"Ranging potion(2)": "1/11.64",
+				"Rune arrow": "1/64",
+				"Shark": "1/128",
+				"Super defence(1)": "1/64",
+				"Uncut diamond": "1/32"
+			},
 			"Spiritual warrior": {
 				"Adamant 2h sword": "1/127",
 				"Adamant battleaxe": "2/127",
@@ -113235,6 +113773,38 @@
 				"Steel longsword": "15/127",
 				"Steel sword": "7/127",
 				"GemDropTable+": "1/31.75"
+			},
+			"Spiritual warrior%2FAncient Prison": {
+				"Adamant chainbody": "1/18.29",
+				"Adamantite bar": "1/16",
+				"Air rune": "2/128",
+				"Ancient ceremonial mask": "1/640",
+				"Ancient ceremonial top": "1/640",
+				"Ancient ceremonial legs": "1/640",
+				"Ancient ceremonial gloves": "1/640",
+				"Ancient ceremonial boots": "1/640",
+				"Bones": "Always",
+				"Chaos rune": "3/128",
+				"Clue scroll (hard)": "Unknown",
+				"Coal": "1/16",
+				"Coins": "1/14.22",
+				"GemDropTable+": "1/128",
+				"Grimy avantoe": "3.125/128",
+				"Grimy ranarr weed": "2.5/128",
+				"Grimy snapdragon": "2.5/128",
+				"Grimy torstol": "1.875/128",
+				"Lobster": "1/128",
+				"Mind rune": "7/128",
+				"Mithril longsword": "1/8.533",
+				"Mud rune": "7/128",
+				"Nature rune": "4/128",
+				"Nihil shard": "1/128",
+				"Potato cactus": "1/18.29",
+				"Prayer potion(1)": "1/14.22",
+				"Pure essence": "1/16",
+				"Super attack(1)": "1/11.64",
+				"Super defence(1)": "1/64",
+				"Super strength(1)": "1/64"
 			},
 			"Dust devil": {
 				"Adamant axe": "3/128",
@@ -115469,11 +116039,13 @@
 		"Basilisk Knight": 60,
 		"Wyrm": 62,
 		"Spiritual ranger": 63,
+		"Spiritual ranger%2FAncient Prison": 63,
 		"Dust devil": 65,
 		"Spitting Wyvern": 65,
 		"Taloned Wyvern": 65,
 		"Long-tailed Wyvern": 65,
 		"Spiritual warrior": 68,
+		"Spiritual warrior%2FAncient Prison": 68,
 		"Kurask": 70,
 		"Skeletal Wyvern": 72,
 		"Gargoyle": 75,
@@ -115483,6 +116055,7 @@
 		"Greater Nechryael": 80,
 		"Ancient Wyvern": 82,
 		"Spiritual mage": 83,
+		"Spiritual mage%2FAncient Prison": 83,
 		"Drake": 84,
 		"Abyssal demon": 85,
 		"Abyssal Sire": 85,
@@ -115815,6 +116388,10 @@
 			"Agility potion(2)": true,
 			"Agility potion(3)": true,
 			"Agility potion(4)": true,
+			"Ancient brew(1)": true,
+			"Ancient brew(2)": true,
+			"Ancient brew(3)": true,
+			"Ancient brew(4)": true,
 			"Spicy stew": true,
 			"Summer pie": true,
 			"Attack cape(t)": true,
@@ -116129,7 +116706,9 @@
 			"Tarromin": true,
 			"Toadflax": true,
 			"Torstol": true,
-			"Volencia moss": true
+			"Volencia moss": true,
+			"Nihil shard": true,
+			"Nihil dust": true
 		}
 	},
 	"walkableChunks": ["9023", "10559", "6462", "9790", "10558", "11326", "14142", "14398", "6205", "6461", "6717", "6973", "8253", "8509", "11325", "11581", "11837", "12093", "12349", "12605", "12861", "13117", "13373", "5180", "5692", "5948", "6204", "6460", "6716", "6972", "7228", "8252", "8508", "9276", "9532", "10044", "10300", "11068", "11324", "11836", "12092", "12348", "12604", "12860", "13116", "13372", "14652", "14908", "15164", "4667", "4923", "5179", "5435", "5691", "5947", "6203", "6459", "6715", "6971", "7227", "8763", "9275", "9531", "10043", "10811", "11067", "11323", "11835", "12091", "12347", "12603", "12859", "13115", "13371", "14651", "14907", "15163", "4666", "4922", "5178", "5434", "5690", "5946", "6202", "6458", "6714", "6970", "7226", "10042", "10554", "10810", "11066", "11322", "11578", "11834", "12090", "12346", "12602", "12858", "13114", "13370", "14650", "14906", "15162", "4665", "4921", "5177", "5433", "5689", "5945", "6201", "6457", "6713", "6969", "7225", "9017", "9273", "10297", "10553", "10809", "11065", "11321", "11577", "11833", "12089", "12345", "12601", "12857", "13113", "13369", "14649", "4664", "4920", "5176", "5432", "5688", "5944", "6200", "6456", "6712", "6968", "7224", "9016", "9272", "9528", "10040", "10296", "10552", "10808", "11064", "11320", "11576", "11832", "12088", "12344", "12600", "12856", "13112", "13368", "13624", "4663", "4919", "5175", "5431", "5687", "5943", "6199", "6455", "6711", "6967", "7223", "7479", "9015", "9271", "9527", "9783", "10039", "10551", "10807", "11063", "11319", "11575", "11831", "12087", "12343", "12599", "12855", "13111", "13367", "13623", "13879", "14135", "14391", "14647", "15159", "4662", "4918", "5174", "5430", "5686", "5942", "6198", "6454", "6710", "6966", "7222", "7478", "9014", "9270", "9526", "9782", "10038", "10294", "10550", "10806", "11062", "11318", "11574", "11830", "12086", "12342", "12598", "12854", "13110", "13366", "13622", "13878", "14134", "14390", "14646", "5941", "6197", "6453", "6965", "7221", "8501", "8757", "9013", "9269", "9525", "9781", "10037", "10293", "10549", "10805", "11061", "11317", "11573", "11829", "12085", "12341", "12597", "12853", "13109", "13365", "13621", "13877", "14133", "14389", "14645", "14901", "8500", "8756", "9012", "9268", "9524", "9780", "10036", "10292", "10548", "10804", "11060", "11316", "11572", "11828", "12084", "12340", "12596", "12852", "13108", "13364", "13620", "13876", "14132", "14388", "14644", "14900", "8499", "8755", "9011", "9267", "9523", "9779", "10035", "10291", "10547", "10803", "11059", "11315", "11571", "11827", "12083", "12339", "12595", "12851", "13107", "13363", "13619", "13875", "14131", "14387", "14643", "14899", "8498", "8754", "9010", "9266", "9778", "10034", "10290", "10546", "10802", "11058", "11314", "11570", "11826", "12082", "12338", "12594", "12850", "13106", "13362", "13618", "13874", "14130", "14386", "14642", "14898", "8497", "8753", "9009", "9265", "9521", "9777", "10033", "10289", "10545", "10801", "11057", "11313", "11569", "11825", "12081", "12337", "12593", "12849", "13105", "13361", "13617", "13873", "14129", "14385", "14641", "8496", "8752", "9008", "9264", "9520", "9776", "10032", "10288", "10544", "11056", "11312", "11568", "11824", "12848", "13104", "13360", "13616", "13872", "8495", "8751", "9007", "9263", "9519", "9775", "10031", "10287", "11055", "11311", "11567", "11823", "12591", "12847", "13103", "13359", "13615", "14639", "14895", "15151", "15407", "8238", "8494", "8750", "9006", "9262", "9774", "10030", "10286", "10542", "11054", "11310", "11566", "11822", "12078", "12590", "12846", "13102", "13358", "13614", "14638", "14894", "15150", "15406", "8237", "8493", "8749", "9005", "9261", "9773", "10029", "10285", "11053", "11309", "11565", "11821", "12589", "12845", "13101", "13357", "13613", "14637", "8236", "8492", "8748", "9004", "9260", "9772", "10028", "10284", "12332", "12588", "12844", "13100", "13356", "15148", "8491", "8747", "9003", "10795", "11051", "12587", "12843", "13099", "10794", "11050", "11562", "10537", "10536", "10543", "14902"],
@@ -162368,6 +162947,215 @@
 			"ranged_strength": 0,
 			"slot": "hands",
 			"requirements": []
+		},
+		"Ancient godsword": {
+			"attack_speed": 6,
+			"attack_crush": 80,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 132,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 132,
+			"prayer": 8,
+			"ranged_strength": 0,
+			"slot": "2h",
+			"requirements": ["Attack"]
+		},
+		"Zaryte crossbow": {
+			"attack_speed": 6,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 110,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 12,
+			"defence_magic": 15,
+			"defence_ranged": 16,
+			"defence_slash": 14,
+			"defence_stab": 14,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 1,
+			"ranged_strength": 0,
+			"slot": "weapon",
+			"requirements": ["Ranged"]
+		},
+		"Torva full helm": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -5,
+			"attack_ranged": -5,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 62,
+			"defence_magic": -2,
+			"defence_ranged": 57,
+			"defence_slash": 60,
+			"defence_stab": 59,
+			"magic_damage": 0,
+			"melee_strength": 8,
+			"prayer": 1,
+			"ranged_strength": 0,
+			"slot": "head",
+			"requirements": ["Defence"]
+		},
+		"Torva platebody": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -18,
+			"attack_ranged": -14,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 117,
+			"defence_magic": -11,
+			"defence_ranged": 142,
+			"defence_slash": 111,
+			"defence_stab": 117,
+			"magic_damage": 0,
+			"melee_strength": 6,
+			"prayer": 1,
+			"ranged_strength": 0,
+			"slot": "body",
+			"requirements": ["Defence"]
+		},
+		"Torva platelegs": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -24,
+			"attack_ranged": -11,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 79,
+			"defence_magic": -9,
+			"defence_ranged": 102,
+			"defence_slash": 78,
+			"defence_stab": 87,
+			"magic_damage": 0,
+			"melee_strength": 4,
+			"prayer": 1,
+			"ranged_strength": 0,
+			"slot": "legs",
+			"requirements": ["Defence"]
+		},
+		"Ancient ceremonial mask": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 2,
+			"ranged_strength": 0,
+			"slot": "head",
+			"requirements": []
+		},
+		"Ancient ceremonial top": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 6,
+			"ranged_strength": 0,
+			"slot": "body",
+			"requirements": []
+		},
+		"Ancient ceremonial legs": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 5,
+			"ranged_strength": 0,
+			"slot": "legs",
+			"requirements": []
+		},
+		"Ancient ceremonial gloves": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 1,
+			"ranged_strength": 0,
+			"slot": "hands",
+			"requirements": []
+		},
+		"Ancient ceremonial boots": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 1,
+			"ranged_strength": 0,
+			"slot": "feet",
+			"requirements": []
+		},
+		"Ancient ceremonial gloves": {
+			"attack_speed": 0,
+			"attack_crush": -8,
+			"attack_magic": 0,
+			"attack_ranged": 18,
+			"attack_slash": -8,
+			"attack_stab": -8,
+			"defence_crush": 8,
+			"defence_magic": 5,
+			"defence_ranged": 8,
+			"defence_slash": 8,
+			"defence_stab": 8,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 1,
+			"ranged_strength": 2,
+			"slot": "hands",
+			"requirements": ["Ranged", "Defence"]
 		}
 	}
 }
