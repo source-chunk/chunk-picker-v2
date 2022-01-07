@@ -26457,7 +26457,7 @@
 			},
 			"Craft a ~|lava rune|~ at the Fire altar": {
 				"Chunks": ["Fire altar"],
-				"Items": ["Pure essence", "Fire rune", "Fire talisman"],
+				"Items": ["Pure essence", "Earth rune", "Earth talisman"],
 				"Level": 23,
 				"Output": "Lava rune",
 				"Primary": false,
