@@ -60114,7 +60114,10 @@
 			"~|The Frozen Door|~ 1": {
 				"BaseQuest": "The Frozen Door",
 				"Description": "Read the important letter from the Messenger",
-				"Chunks": ["12845"]
+				"Chunks": ["12845"],
+				"Tasks": {
+					"~|Desert Treasure|~ Complete the quest": "Quest"
+				}
 			},
 			"~|The Frozen Door|~ 2a": {
 				"BaseQuest": "The Frozen Door",
