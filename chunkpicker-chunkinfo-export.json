@@ -15809,28 +15809,28 @@
 				"Priority": 1
 			},
 			"Cast ~|teleother camelot|~": {
-				"Category": ["Combat and Teleport Spells"],
+				"Category": ["Combat and Teleport Spells", "PVP-Only Spells"],
 				"Items": ["Soul rune", "Law rune"],
 				"Level": 90,
 				"Primary": true,
 				"Priority": 3
 			},
 			"Cast ~|teleother falador|~": {
-				"Category": ["Combat and Teleport Spells"],
+				"Category": ["Combat and Teleport Spells", "PVP-Only Spells"],
 				"Items": ["Water rune+", "Soul rune", "Law rune"],
 				"Level": 82,
 				"Primary": true,
 				"Priority": 3
 			},
 			"Cast ~|teleother lumbridge|~": {
-				"Category": ["Combat and Teleport Spells"],
+				"Category": ["Combat and Teleport Spells", "PVP-Only Spells"],
 				"Items": ["Earth rune+", "Soul rune", "Law rune"],
 				"Level": 74,
 				"Primary": true,
 				"Priority": 3
 			},
 			"Cast ~|teleport block|~": {
-				"Category": ["Combat and Teleport Spells"],
+				"Category": ["Combat and Teleport Spells", "PVP-Only Spells"],
 				"Items": ["Chaos rune", "Death rune", "Law rune"],
 				"Level": 85,
 				"Primary": true,
@@ -23173,7 +23173,7 @@
 				"Items": ["Spade"]
 			},
 			"Mine was the strangest birth under the sun. I left the crimson sack, yet life had not begun. Entered the world, and yet was seen by none.": {
-				"Chunks": ["Crandor and Karamja Dungeon"],
+				"Chunks": ["Crandor and Karamja Dungeon%2FSouth"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"]
@@ -40953,7 +40953,7 @@
 			},
 			"~|Karamja Diary%2FMedium|~ Task 2": {
 				"Description": "Discover hidden wall in the dungeon below the volcano.",
-				"Chunks": ["Crandor and Karamja Dungeon"],
+				"Chunks": ["Crandor and Karamja Dungeon%2FNorth", "Crandor and Karamja Dungeon%2FSouth"],
 				"Tasks": {
 					"~|Karamja Diary%2FEasy|~ Complete the Easy Diary": "Diary",
 					"~|Dragon Slayer I|~ 7": "Quest"
@@ -40962,7 +40962,7 @@
 			},
 			"~|Karamja Diary%2FMedium|~ Task 3": {
 				"Description": "Visit the Isle of Crandor via the dungeon below the volcano.",
-				"Chunks": ["Crandor and Karamja Dungeon", "11314"],
+				"Chunks": ["Crandor and Karamja Dungeon%2FNorth", "11314"],
 				"Tasks": {
 					"~|Karamja Diary%2FEasy|~ Complete the Easy Diary": "Diary",
 					"~|Dragon Slayer I|~ 7": "Quest"
@@ -45120,9 +45120,8 @@
 			"~|Dragon Slayer I|~ 7": {
 				"BaseQuest": "Dragon Slayer I",
 				"Description": "Go to Crandor and kill Elvarg",
-				"Chunks": ["Crandor and Karamja Dungeon"],
+				"Chunks": ["Crandor and Karamja Dungeon%2FNorth"],
 				"Tasks": {
-					"~|Dragon Slayer I|~ 4": "Quest",
 					"~|Dragon Slayer I|~ 6": "Quest"
 				}
 			},
@@ -48035,7 +48034,7 @@
 			"~|Dragon Slayer II|~ 3": {
 				"BaseQuest": "Dragon Slayer II",
 				"Description": "Talk to Dallas Jones in Elvarg's Lair",
-				"Chunks": ["Crandor and Karamja Dungeon"],
+				"Chunks": ["Crandor and Karamja Dungeon%2FNorth"],
 				"Tasks": {
 					"~|Dragon Slayer II|~ 2": "Quest"
 				}
@@ -48043,7 +48042,7 @@
 			"~|Dragon Slayer II|~ 4": {
 				"BaseQuest": "Dragon Slayer II",
 				"Description": "Use pickaxe to clear blockage, inspect the mural and talk to Dallas Jones",
-				"Chunks": ["Crandor and Karamja Dungeon"],
+				"Chunks": ["Crandor and Karamja Dungeon%2FNorth"],
 				"Items": ["Pickaxe+"],
 				"Tasks": {
 					"~|Dragon Slayer II|~ 3": "Quest"

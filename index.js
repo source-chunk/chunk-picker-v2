@@ -298,6 +298,7 @@ let rules = {
     "Tutor Ammo": false,
     "Secondary MTA": false,
     "Fossil Island Tasks": false,
+    "PVP-Only Spells": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -364,6 +365,7 @@ let ruleNames = {
     "Tutor Ammo": "Items from the Magic/Ranged Combat Tutors in Lumbridge count as a way to train those respective skills (Air/Mind runes and Training bow/arrows)",
     "Secondary MTA": "Allow MTA to be required with secondary sources of nature/law/cosmic runes",
     "Fossil Island Tasks": "Require the Fossil Island Mini-Task List be completed, similar to diary tasks",
+    "PVP-Only Spells": "Requre spells that can only be cast on PVP Worlds/in the Wilderness (Teleother/Teleblock)",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -380,6 +382,7 @@ let rulePresets = {
         "Shortcut": true,
         "Puro-Puro": true,
         "Combat and Teleport Spells": true,
+        "PVP-Only Spells": true,
         "Smithing by Smelting": true,
         "Rare Drop Amount": "0",
     },
@@ -485,6 +488,7 @@ let ruleStructure = {
     },
     "Magic": {
         "Combat and Teleport Spells": true,
+        "PVP-Only Spells": true,
         "Secondary MTA": true
     },
     "Mining": {
@@ -863,6 +867,7 @@ let patreonMaps = {
     'src': true, // Source Chunk
     'kaa': true, // Chagohod
     'jlo': true, // JLo
+    'pri': true, // invalidCards
 };
 
 let roll5Mid = 'rfr'; //Semanari
@@ -874,7 +879,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.10.2");
+const myWorker = new Worker("./worker.js?v=4.10.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
