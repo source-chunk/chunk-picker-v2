@@ -44654,8 +44654,8 @@
 			},
 			"~|Below Ice Mountain|~ 2c1": {
 				"BaseQuest": "Below Ice Mountain",
-				"Description": "Talk to Marley",
-				"Chunks": ["12342"],
+				"Description": "Talk to Charlie",
+				"Chunks": ["12852"],
 				"Tasks": {
 					"~|Below Ice Mountain|~ 1": "Quest"
 				}
