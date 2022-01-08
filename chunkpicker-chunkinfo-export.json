@@ -17012,15 +17012,15 @@
 			}
 		},
 		"Nonskill": {
-			"Kill a runite golem": {
+			"Kill a runite golem*": {
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rock"
 			},
-			"Grab a rake from inside the Lumbridge Swamp shack": {
+			"Grab a rake from inside the Lumbridge Swamp shack*": {
 				"Chunks": ["12849"],
 				"Output": "Rake"
 			},
-			"Grab a spade from inside the Lumbridge Swamp shack": {
+			"Grab a spade from inside the Lumbridge Swamp shack*": {
 				"Chunks": ["12849"],
 				"Output": "Spade"
 			},
@@ -17086,32 +17086,32 @@
 				"Items": ["Sliced mushrooms"],
 				"Output": "Bowl"
 			},
-			"Buy silk from the silk trader": {
+			"Buy silk from the silk trader*": {
 				"Chunks": ["13106"],
 				"Output": "Silk"
 			},
-			"Fishing Trawler loot": {
+			"Fishing Trawler loot*": {
 				"Category": ["Minigame"],
 				"Tasks": {
 					"Catch fish on the ~|Fishing Trawler|~": "Fishing"
 				},
 				"Output": "Fishing Trawler loot"
 			},
-			"Coffin (Hallowed Sepulchre) loot": {
+			"Coffin (Hallowed Sepulchre) loot*": {
 				"Category": ["Minigame"],
 				"Tasks": {
 					"Steal from a ~|coffin (Hallowed Sepulchre)|~": "Thieving"
 				},
 				"Output": "Coffin (Hallowed Sepulchre) loot"
 			},
-			"Grand Hallowed Coffin loot": {
+			"Grand Hallowed Coffin loot*": {
 				"Category": ["Minigame"],
 				"Tasks": {
 					"Access the fifth floor of the ~|Hallowed Sepulchre|~": "Agility"
 				},
 				"Output": "Grand Hallowed Coffin loot"
 			},
-			"Rogues' Den loot": {
+			"Rogues' Den loot*": {
 				"Category": ["Minigame"],
 				"Tasks": {
 					"Access the ~|Rogues' Den|~ minigame": "Agility"
@@ -17144,15 +17144,15 @@
 				"Items": ["ThatchSpar+", "Machete+"],
 				"Output": "Skewer stick"
 			},
-			"Grab a bronze pickaxe from the Kebos Lowlands mine rocks": {
+			"Grab a bronze pickaxe from the Kebos Lowlands mine rocks*": {
 				"Chunks": ["4921"],
 				"Output": "Bronze pickaxe"
 			},
-			"Grab a bronze axe from Fred the Farmer's stump": {
+			"Grab a bronze axe from Fred the Farmer's stump*": {
 				"Chunks": ["12595"],
 				"Output": "Bronze axe"
 			},
-			"Grab a bronze axe from Seth Groat's stump": {
+			"Grab a bronze axe from Seth Groat's stump*": {
 				"Chunks": ["12851"],
 				"Output": "Bronze axe"
 			},
@@ -17163,7 +17163,7 @@
 				},
 				"Output": "Sulphurous fertiliser"
 			},
-			"Dig up saltpetre": {
+			"Dig up saltpetre*": {
 				"Objects": ["Saltpetre (deposit)"],
 				"Items": ["Spade"],
 				"Output": "Saltpetre"
@@ -17220,7 +17220,7 @@
 			"Turn in books at the Arceuus Library": {
 				"Chunks": ["6459"]
 			},
-			"Dig up a red vine worm": {
+			"Dig up a red vine worm*": {
 				"Chunks": ["10550"],
 				"Items": ["Spade"],
 				"Output": "Red vine worm"
@@ -17229,23 +17229,23 @@
 				"Items": ["Chisel", "CrushedGem+"],
 				"Output": "Crushed gem"
 			},
-			"Kill monsters for a dark totem top": {
+			"Kill monsters for a dark totem top*": {
 				"Chunks": ["Catacombs of Kourend"],
 				"Output": "Dark totem top"
 			},
-			"Kill monsters for a dark totem middle": {
+			"Kill monsters for a dark totem middle*": {
 				"Chunks": ["Catacombs of Kourend"],
 				"Output": "Dark totem middle"
 			},
-			"Kill monsters for a dark totem base": {
+			"Kill monsters for a dark totem base*": {
 				"Chunks": ["Catacombs of Kourend"],
 				"Output": "Dark totem base"
 			},
-			"Kill monsters for an ancient shard": {
+			"Kill monsters for an ancient shard*": {
 				"Chunks": ["Catacombs of Kourend"],
 				"Output": "Ancient shard"
 			},
-			"Buy a crystal halberd from Islwyn": {
+			"Buy a crystal halberd from Islwyn*": {
 				"Chunks": ["ElunedChunks+"],
 				"Output": "Crystal halberd",
 				"Tasks": {
@@ -17434,7 +17434,7 @@
 					"~|Desert Diary%2FHard|~ Complete the Hard Diary": "Diary"
 				}
 			},
-			"Zaff's Superior Staffs!": {
+			"Zaff's Superior Staffs!*": {
 				"Chunks": ["12853"],
 				"Source": "shop",
 				"Reward": ["Battlestaff"],
@@ -17500,7 +17500,7 @@
 				},
 				"Output": "Salve amulet (e)"
 			},
-			"Buy a law talisman from Dunstan after Troll Stronghold": {
+			"Buy a law talisman from Dunstan after Troll Stronghold*": {
 				"Chunks": ["11575"],
 				"Output": "Law talisman",
 				"Tasks": {
@@ -17595,7 +17595,7 @@
 				},
 				"Output": "Mystic steam staff"
 			},
-			"Get an unholy symbol bless by the Spirit of Scorpius": {
+			"Get an unholy symbol blessed by the Spirit of Scorpius*": {
 				"Chunks": ["9778"],
 				"Items": ["Unpowered symbol*"],
 				"Tasks": {
@@ -17603,7 +17603,7 @@
 				},
 				"Output": "Unholy symbol"
 			},
-			"Get an unholy mould from the Spirit of Scorpius": {
+			"Get an unholy mould from the Spirit of Scorpius*": {
 				"Chunks": ["9778"],
 				"Tasks": {
 					"~|Observatory Quest|~ Complete the quest": "Quest"
@@ -17623,11 +17623,11 @@
 				"Chunks": ["12340"],
 				"Output": "Ava's assembler"
 			},
-			"Get warrior guild tokens": {
+			"Get warrior guild tokens*": {
 				"Chunks": ["11319"],
 				"Output": "Warrior guild token"
 			},
-			"Buy red hot sauce": {
+			"Buy red hot sauce*": {
 				"Chunks": ["13358"],
 				"Output": "Red hot sauce"
 			},
@@ -17645,22 +17645,22 @@
 				"Items": ["Astral rune*", "Hammer", "Pestle and mortar"],
 				"Output": "Ground astral rune"
 			},
-			"Collect a mort myre fungus": {
+			"Collect a mort myre fungus*": {
 				"Items": ["Silver sickle (b)"],
 				"Objects": ["Rotting log"],
 				"Output": "Mort myre fungus"
 			},
-			"Collect a mort myre pear": {
+			"Collect a mort myre pear*": {
 				"Items": ["Silver sickle (b)"],
 				"Objects": ["Small bush"],
 				"Output": "Mort myre pear"
 			},
-			"Collect a mort myre stem": {
+			"Collect a mort myre stem*": {
 				"Items": ["Silver sickle (b)"],
 				"Objects": ["Rotting branch"],
 				"Output": "Mort myre stem"
 			},
-			"Trade Thorgel for a death talisman": {
+			"Trade Thorgel for a death talisman*": {
 				"Chunks": ["Mourner Tunnels & Temple of Light"],
 				"Items": ["Babydragon bones", "Ball of wool", "Bronze bar", "Bronze med helm", "Bucket of milk", "Cake tin", "Cheese", "Chisel", "Cooked meat", "Egg", "Facemask", "Fishing rod", "Flax", "Gold ring", "Hammer", "Iron axe", "Iron nails", "Iron pickaxe", "Jug of wine", "Kebab", "Knife", "Leather boots", "Leather gloves", "Lobster pot", "Lockpick", "Necklace mould", "Needle", "Oak logs", "Pie dish", "Plank", "Pot of flour", "Potato cactus", "Potatoes(10)", "Pure essence", "Redberries", "Rope", "Rotten tomato", "Shears", "Skull (item)", "Spade", "Swamp paste", "Thread", "Tinderbox", "Unicorn horn dust", "Vial of water", "White apron", "White berries", "Mourning Ticket+", "Mourning Book+", "Mourning Key+"],
 				"Output": "Death talisman"
@@ -17670,7 +17670,7 @@
 				"Items": ["Vial", "Red spiders' eggs", "Kwuarm"],
 				"Output": "Rat poison"
 			},
-			"Get an ogre bow from Rantz": {
+			"Get an ogre bow from Rantz*": {
 				"Chunks": ["10542"],
 				"Output": "Ogre bow",
 				"Tasks": {
@@ -17682,25 +17682,25 @@
 				"Items": ["Elemental metal*"],
 				"Output": "Primed mind bar"
 			},
-			"Get a strange device (beginner) from Reldo": {
+			"Get a strange device (beginner) from Reldo*": {
 				"Chunks": ["12854"],
 				"Output": "Strange device (beginner)"
 			},
-			"Get a strange device (master) from Jorral": {
+			"Get a strange device (master) from Jorral*": {
 				"Chunks": ["9780"],
 				"Output": "Strange device (master)"
 			},
-			"Get air runes from the magic combat tutor": {
+			"Get air runes from the magic combat tutor*": {
 				"Category": ["Tutor Ammo"],
 				"Chunks": ["12850"],
 				"Output": "Air rune"
 			},
-			"Get mind runes from the magic combat tutor": {
+			"Get mind runes from the magic combat tutor*": {
 				"Category": ["Tutor Ammo"],
 				"Chunks": ["12850"],
 				"Output": "Mind rune"
 			},
-			"Get training arrows from the ranged combat tutor": {
+			"Get training arrows from the ranged combat tutor*": {
 				"Category": ["Tutor Ammo"],
 				"Chunks": ["12850"],
 				"Output": "Training arrows"
@@ -17709,15 +17709,15 @@
 				"Items": ["Fish barrel*", "Fish sack*"],
 				"Output": "Fish sack barrel"
 			},
-			"Buy a cabbage from the Blue Moon Inn cook": {
+			"Buy a cabbage from the Blue Moon Inn cook*": {
 				"Chunks": ["12853"],
 				"Output": "Cabbage"
 			},
-			"Get a bronze pickaxe from the mining tutor": {
+			"Get a bronze pickaxe from the mining tutor*": {
 				"Chunks": ["12849"],
 				"Output": "Bronze pickaxe"
 			},
-			"Get a small fishing net from the fishing tutor": {
+			"Get a small fishing net from the fishing tutor*": {
 				"Chunks": ["12849"],
 				"Output": "Small fishing net"
 			},
