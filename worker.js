@@ -45,6 +45,7 @@ let backloggedSources;
 let altChallenges;
 let manualMonsters;
 let slayerLocked;
+let passiveSkill;
 
 let clueTasksPossible = {};
 
@@ -89,6 +90,7 @@ onmessage = function(e) {
     altChallenges = eGlobal.data[36];
     manualMonsters = eGlobal.data[37];
     slayerLocked = eGlobal.data[38];
+    passiveSkill = eGlobal.data[39];
 
     if (rareDropNum === "1/0") {
         rareDropNum = "1/999999999999999";
@@ -785,7 +787,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 lowestLevel = newValids[skill][challenge];
             });
             !!lowestName && Object.keys(tempItemSkill[skill]).forEach(item => {
-                !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= chunkInfo['challenges'][skill][lowestName]['Level'])}).forEach(name => {
+                !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name].hasOwnProperty('Task') && (chunkInfo['challenges'][skill][name]['Level'] <= chunkInfo['challenges'][skill][lowestName]['Level'])}).forEach(name => {
                     !newValids[skill] && (newValids[skill] = {});
                     newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
                 });
@@ -1288,6 +1290,26 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                 nonValids[name] = wrongThings;
                 return;
             }
+            if (!!slayerLocked && skill === 'Slayer' && chunkInfo['challenges'][skill][name]['Level'] > slayerLocked['level']) {
+                let stillLocked = true;
+                if (!!chunkInfo['codeItems']['slayerTasks'] && chunkInfo['codeItems']['slayerTasks'].hasOwnProperty(slayerLocked['monster'])) {
+                    (!!chunkInfo['codeItems']['slayerTasks'][slayerLocked['monster']] && Object.keys(chunkInfo['codeItems']['slayerTasks'][slayerLocked['monster']]).filter((monster) => { return !!baseChunkData['monsters'] && baseChunkData['monsters'].hasOwnProperty(monster) }).length > 0) && (stillLocked = false);
+                }
+                if (stillLocked) {
+                    validChallenge = false;
+                    wrongThings.push('Slayer Locked');
+                    nonValids[name] = wrongThings;
+                    return;
+                }
+            }
+            if (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && chunkInfo['challenges'][skill][name]['Level'] > passiveSkill[skill]) {
+                if (!checkPrimaryMethod(skill, valids, baseChunkData, true)) {
+                    validChallenge = false;
+                    wrongThings.push('Passive');
+                    nonValids[name] = wrongThings;
+                    return;
+                }
+            }
             !!chunkInfo['challenges'][skill][name]['Chunks'] && chunkInfo['challenges'][skill][name]['Chunks'].forEach(chunkId => {
                 if (chunkId.includes('+')) {
                     if (chunkId.includes('+x')) {
@@ -1777,18 +1799,6 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             }
             chunkInfo['challenges'][skill][name]['Secondary'] = tempSecondary;
             chunkInfo['challenges'][skill][name]['forcedPrimary'] && chunkInfo['challenges'][skill][name]['Secondary'] && (validChallenge = false);
-            if (!!slayerLocked && skill === 'Slayer' && chunkInfo['challenges'][skill][name]['Level'] > slayerLocked['level']) {
-                let stillLocked = true;
-                if (!!chunkInfo['codeItems']['slayerTasks'] && chunkInfo['codeItems']['slayerTasks'].hasOwnProperty(slayerLocked['monster'])) {
-                    (!!chunkInfo['codeItems']['slayerTasks'][slayerLocked['monster']] && Object.keys(chunkInfo['codeItems']['slayerTasks'][slayerLocked['monster']]).filter((monster) => { return !!baseChunkData['monsters'] && baseChunkData['monsters'].hasOwnProperty(monster) }).length > 0) && (stillLocked = false);
-                }
-                if (stillLocked) {
-                    validChallenge = false;
-                    wrongThings.push('Slayer Locked');
-                    nonValids[name] = wrongThings;
-                    return;
-                }
-            }
             chunkInfo['challenges'][skill][name]['ManualValid'] && (validChallenge = true);
             if (validChallenge) {
                 delete nonValids[name];
@@ -2011,7 +2021,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
 }
 
 // Checks if skill has primary training
-var checkPrimaryMethod = function(skill, valids, baseChunkData) {
+var checkPrimaryMethod = function(skill, valids, baseChunkData, notPassive) {
     let valid = false;
     let tempValid = true;
     !!universalPrimary[skill] && universalPrimary[skill].forEach(line => {
@@ -2064,6 +2074,9 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
             }
             primaryValid && (tempValid = true);
         });
+    }
+    if (!notPassive && !!passiveSkill && passiveSkill.hasOwnProperty(skill)) {
+        tempValid = true;
     }
     valid = tempValid;
     return valid;

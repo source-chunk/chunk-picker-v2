@@ -546,6 +546,8 @@ let settings = {
     "defaultStickerColor": '#000000',
     "walkableRollable": true,
     "cinematicRoll": true,
+    "taskSidebar": false,
+    "ids": false,
 };                                                                              // Current state of all settings
 
 let settingNames = {
@@ -563,7 +565,9 @@ let settingNames = {
     "darkmode": "Enable <b class='noscroll'>Dark Mode</b>",
     "defaultStickerColor": "Change the default color of chunk stickers",
     "walkableRollable": "Only automatically mark <b class='noscroll'>walkable</b> chunks",
-    "cinematicRoll": "Enable fancier rolling of chunks"
+    "cinematicRoll": "Enable fancier rolling of chunks",
+    "taskSidebar": "Expand the task panel into a large sidebar, to show more tasks at once",
+    "ids": "Show an overlay of Chunk ID's for each chunk",
 };                                                                              // Descriptions of the settings
 
 let settingStructure = {
@@ -579,9 +583,10 @@ let settingStructure = {
     "Information Panels": {
         "recent": true,
         "info": true,
-        "chunkTasks": true
+        "chunkTasks": ["taskSidebar"]
     },
     "Customization": {
+        "ids": true,
         "cinematicRoll": true,
         "highvis": true,
         "darkmode": true,
@@ -592,7 +597,8 @@ let settingStructure = {
 };                                                                              // Structure of the settings
 
 let subSettingDefault = {
-    "neighbors": true
+    "neighbors": true,
+    "chunkTasks": false
 };                                                                              // Default value of sub-setting when parent is checked
 
 let settingsStructureConflict = {
@@ -807,6 +813,7 @@ let backloggedSources = {};
 let fullChallengeArr = {};
 let manualMonsters = {};
 let slayerLocked = null;
+let passiveSkill = {};
 let detailsModalOpen = false;
 let notesModalOpen = false;
 let notesChallenge = null;
@@ -830,6 +837,7 @@ let backlogSourcesModalOpen = false;
 let manualOuterModalOpen = false;
 let monsterModalOpen = false;
 let slayerLockedModalOpen = false;
+let passiveSkillModalOpen = false;
 let rollChunkModalOpen = false;
 let questStepsModalOpen = false;
 let friendsListModalOpen = false;
@@ -855,7 +863,7 @@ let pickedNum;
 let highestTab;
 let highestTab2;
 let dropRatesGlobal = {};
-let currentVersion = '4.10.0';
+let currentVersion = '4.11.0';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -879,7 +887,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.10.3");
+const myWorker = new Worker("./worker.js?v=4.11.0");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1268,7 +1276,7 @@ $(document).ready(function() {
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 $('body').on('touchstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen) {
         ev.preventDefault();
         clickX = ev.changedTouches[0].pageX;
         clickY = ev.changedTouches[0].pageY;
@@ -1277,7 +1285,7 @@ $('body').on('touchstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 $('body').on('touchend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen) {
         ev.preventDefault();
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
@@ -1286,7 +1294,7 @@ $('body').on('touchend', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
 $('body').on('touchmove', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen) {
         ev.preventDefault();
         updateScrollPos(ev.changedTouches[0]);
     }
@@ -1298,7 +1306,7 @@ $('body').on('scroll mousewheel DOMMouseScroll', function(e) {
     if (!e.target.className || typeof e.target.className !== 'string' || e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
         $('body').scrollTop(0);
         return;
-    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
+    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
         e.preventDefault();
         return;
     }
@@ -1384,7 +1392,7 @@ $(document).on({
             locked && $('.open-manual-outer-container').css('opacity', 0).hide();
             loadData();
             $('.test-hint').hide();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen) {
             e.preventDefault();
         }
     }
@@ -1398,7 +1406,7 @@ $(document).on('mouseleave', '.recent', function() {
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen) {
             return;
         }
         if (clicked) {
@@ -1419,7 +1427,7 @@ $(document).on({
         }
     },
     'mousedown': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen) {
             return;
         }
         clicked = true;
@@ -1444,7 +1452,7 @@ $(document).on({
             $(".backlog-context-menu").hide(100);
         }
         let tempClicked = clicked;
-        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen) {
+        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen) {
             return;
         } else if (e.button === 2) {
             if ($(e.target).hasClass('box')) {
@@ -1671,7 +1679,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1877,7 +1885,7 @@ var pick = function(both) {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2 = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1927,17 +1935,14 @@ var toggleRemove = function(value, extra) {
 }
 
 // Toggle functionality for showing chunk ids
-var toggleIds = function() {
-    showChunkIds = !showChunkIds;
+var toggleIds = function(value) {
+    showChunkIds = value;
     setCookies();
-    $('#toggleIds').toggleClass('on off');
-    if ($('#toggleIds').hasClass('on')) {
+    if (showChunkIds) {
         $('.chunkId').show();
-        $('#toggleIds').text('ON');
         $('.box').css('color', 'rgba(255, 255, 255, 255)').addClass('quality');
     } else {
         $('.chunkId').hide();
-        $('#toggleIds').text('OFF');
         $('.box').css('color', 'rgba(255, 255, 255, 0)').removeClass('quality');
     }
 }
@@ -2501,7 +2506,7 @@ var changePin = function() {
 
 // Unpicks a random unlocked chunk
 var unpick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || $('.unlocked').length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || $('.unlocked').length < 1) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -2609,6 +2614,7 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorFlash", "rgba(150, 150, 0, 0.7)");
         $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
         $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
+        $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
         $(".btnDiv").addClass('dark');
     } else {
         $("body").get(0).style.setProperty("--color1", "rgb(200, 200, 200)");
@@ -2626,6 +2632,7 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorFlash", "rgba(255, 255, 0, 0.7)");
         $("body").get(0).style.setProperty("--colorBox", "rgba(150, 150, 150, .6)");
         $("body").get(0).style.setProperty("--colorBoxLight", "rgba(150, 150, 150, .4)");
+        $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(200, 200, 200, .4)");
         $(".btnDiv").removeClass('dark');
     }
 }
@@ -2669,6 +2676,15 @@ var toggleChunkTasks = function(value, extra) {
     extra !== 'startup' && !locked && setData();
 }
 
+// Toggles the task sidebar
+var toggleTaskSidebar = function(value, extra) {
+    $('.menu9 .background-sidebar').remove();
+    value ? $('.menu9').addClass('sidebar') : $('.menu9').removeClass('sidebar');
+    value ? $('.menu9').append(`<span class='noscroll background-sidebar'></span>`) : $('.menu9 .background-sidebar').remove();
+    toggleRecent(recentOn, extra);
+    extra !== 'startup' && !locked && setData();
+}
+
 // Toggles the visibility of the roll2 button
 var toggleRoll2 = function(value, extra) {
     roll2On = value;
@@ -2688,7 +2704,7 @@ var toggleUnpick = function(value, extra) {
 // Toggles the visibility of the recent chunks section
 var toggleRecent = function(value, extra) {
     recentOn = value;
-    recentOn ? $('.menu7').show() : $('.menu7').hide();
+    (recentOn && !settings['taskSidebar']) ? $('.menu7').show() : $('.menu7').hide();
     extra !== 'startup' && $('.menu7').css('opacity', 1);
     extra !== 'startup' && !locked && setData();
 }
@@ -3101,11 +3117,11 @@ var updateChunkInfo = function() {
 // Checks if skill has primary training
 var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
     let valid = false;
-    let methods = [];
+    let methods = {};
     let hardValid = false;
     if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
         hardValid = true;
-        methods.push('Manually added skill');
+        methods['Manually added skill'] = 1;
     } else if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
         hardValid = true;
     }
@@ -3114,10 +3130,10 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
         if (line === 'Primary+') {
             let primaryValid = false;
             !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
-                if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && chunkInfo['challenges'][skill][challenge]['Level'] === 1 && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
+                if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && (chunkInfo['challenges'][skill][challenge]['Level'] === 1 || wantMethods) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
                     if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil')) {
                         primaryValid = true;
-                        methods.push(challenge);
+                        methods[challenge] = chunkInfo['challenges'][skill][challenge]['Level'];
                     }
                 }
             });
@@ -3127,7 +3143,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
             if (!monsterExists) {
                 tempValid = false;
             } else {
-                methods.push('Attack monsters');
+                methods['Attack monsters'] = 1;
             }
         } else if (line === 'Bones+') {
             let bonesExists = false;
@@ -3139,7 +3155,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
             if (!bonesExists) {
                 tempValid = false;
             } else {
-                methods.push('Bury bones');
+                methods['Bury bones'] = 1;
             }
         } else if (line === 'Combat+') {
             let combatExists = false;
@@ -3151,7 +3167,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
             if (!combatExists) {
                 tempValid = false;
             } else {
-                methods.push('Train combat');
+                methods['Train combat'] = 1;
             }
         } else if (line === 'Ranged+') {
             let validRanged = false;
@@ -3171,7 +3187,16 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
                     }
                 });
                 innerValid && (validRanged = true);
-                innerValid && methods.push(set);
+                if (innerValid) {
+                    let tempIt = '';
+                    set.forEach(it => {
+                        if (tempIt !== '') {
+                            tempIt += ' + ';
+                        }
+                        tempIt += it;
+                    });
+                    methods[tempIt] = 1;
+                }
             });
             if (!validRanged) {
                 tempValid = false;
@@ -3180,21 +3205,6 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
             tempValid = false;
         }
     });
-    if (Array.isArray(methods[0])) {
-        let tempMethods = [];
-        let i = 0;
-        methods.forEach(method => {
-            if (Array.isArray(method)) {
-                tempMethods[i] = '';
-                method.forEach(it => {
-                    tempMethods[i] += it.replaceAll('*', '') + ' + ';
-                });
-                tempMethods[i] += methods[methods.length - 1];
-                i++;
-            }
-        });
-        methods = tempMethods;
-    }
     valid = tempValid;
     if (hardValid) {
         valid = true;
@@ -3216,7 +3226,7 @@ var calcCurrentChallenges = function() {
         $('.unlocked').each(function() {
             chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
         });
-        myWorker.postMessage(['current', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked]);
+        myWorker.postMessage(['current', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill]);
         workerOut++;
     }
 }
@@ -3388,7 +3398,7 @@ var calcFutureChallenges = function() {
         });
         i++;
     }
-    myWorker.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked]);
+    myWorker.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill]);
     workerOut++;
 }
 
@@ -3712,7 +3722,11 @@ var openQuestSteps = function(skill, challenge) {
             $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'") ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
         });
         $('#myModal25').show();
-        document.getElementById('quest-steps-data').scrollTop = 0;
+        $('.quest-steps-data .highlighted')[0].scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+        });
     }
 }
 
@@ -4147,12 +4161,12 @@ var openHighest2 = function() {
         $('.highest2-data').empty();
         combatStyles.forEach(combatStyle => {
             $('.highest2-title').append(`<div class='noscroll style-button ${combatStyle.replaceAll(' ', '_')}-button' onclick='switchHighest2Tab("${combatStyle.replaceAll(' ', '_')}")' title='${combatStyle}'><span class='noscroll'><img class='noscroll slot-icon' src='./resources/${combatStyle.replaceAll(' ', '_')}_combat.png' /></span></div>`);
-            $('.highest2-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle} ${(testMode || !(viewOnly || inEntry || locked)) && combatStyle !== 'Skills' && combatStyle !== 'Slayer' ? `<div class='noscroll'><span class='noscroll addEquipment' onclick='addEquipment()'>Add additional equipment</span></div>` : ''}</div></div>`);
+            $('.highest2-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle}</div></div>`);
             if (combatStyle === 'Skills') {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll qps'>Quest Points: ${questPointTotal}</div>`);
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll icon-table-header'>Skill</span><span class='noscroll text-table-header'>Highest Task</span><span class='noscroll button-table-header'>Primary Training</span></div>`);
                 skillNames.filter(skill => { return skill !== 'Combat' }).sort().forEach(skill => {
-                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text'>${(!!highestOverall[skill] ? '<b class="noscroll">[' + chunkInfo['challenges'][skill][highestOverall[skill]]['Level'] + ']</b> ' : '') + (highestOverall[skill] || 'None').replaceAll('~', '').replaceAll('|', '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span><span class='noscroll skill-button ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll methods-button' onclick='viewPrimaryMethods("${skill}")'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}</div>`);
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text'>${(testMode || !(viewOnly || inEntry || locked)) ? `<span class='noscroll edit-highest' onclick='openPassiveModal("${skill}")'><i class="noscroll fas fa-edit"></i></span>` : ''}${(!!highestOverall[skill] ? '<b class="noscroll">[' + chunkInfo['challenges'][skill][highestOverall[skill]]['Level'] + ']</b> ' : '') + (highestOverall[skill] || 'None').replaceAll('~', '').replaceAll('|', '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span><span class='noscroll skill-button ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll methods-button' onclick='viewPrimaryMethods("${skill}")'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}</div>`);
                 });
             } else if (combatStyle === 'Slayer') {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-header'>Slayer is currently <b class='noscroll slayer-locked-status ${!!slayerLocked ? 'red' : 'green'}'>${!!slayerLocked ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-unlock"></i>'} ${!!slayerLocked ? 'LOCKED' : 'UNLOCKED'}</b> ${!!slayerLocked ? '(' + `<a class='noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(slayerLocked['monster'].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replace(/[!'()*]/g, escape))}' target='_blank'>${slayerLocked['monster'].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</a>` + ')' : ''} ${!!slayerLocked ? ' at Level ' + slayerLocked['level'] : ''}</div>`);
@@ -4178,6 +4192,47 @@ var openHighest2 = function() {
         $(`.${highestTab2}-body`).show();
         $('#myModal12_2').show();
         document.getElementById('highest2-data').scrollTop = 0;
+    }
+}
+
+// Opens the add passive skill modal
+var openPassiveModal = function(skill) {
+    passiveSkillModalOpen = true;
+    $('#passive-skill-input').val('');
+    $('.passive-skill-name').text(skill);
+    $('#passive-skill-data').html(`<div><div class="passive-skill-cancel" onclick="addPassiveSkill(true)">Cancel</div><div class="passive-skill-proceed disabled" onclick="addPassiveSkill(false, '${skill}')">Add Passive Levels</div></div>`);
+    $('#myModal28').show();
+    $('#passive-skill-input').focus();
+}
+
+// Triggers onchange of passive skill selection to validate submit button
+var passiveLockedChange = function() {
+    let val = $('#passive-skill-input').val();
+    if (!!val && parseInt(val) !== NaN && parseInt(val) >= 0 && parseInt(val) <= 99 && parseInt(val) % 1 === 0) {
+        $('.passive-skill-proceed').removeClass('disabled');
+    } else {
+        $('.passive-skill-proceed').addClass('disabled');
+    }
+}
+
+// Adds passive skill
+var addPassiveSkill = function(close, skill) {
+    if (close) {
+        $('#myModal28').hide();
+        passiveSkillModalOpen = false;
+    } else {
+        let level = !!$('#passive-skill-input').val() ? parseInt($('#passive-skill-input').val()) : NaN;
+        if (level !== NaN && level >= 0 && level <= 99 && level % 1 === 0) {
+            if (!passiveSkill) {
+                passiveSkill = {};
+            }
+            passiveSkill[skill] = level;
+            !onMobile && setCalculating('.panel-active');
+            !onMobile && calcCurrentChallenges();
+            setData();
+            $('#myModal28').hide();
+            passiveSkillModalOpen = false;
+        }
     }
 }
 
@@ -4423,18 +4478,8 @@ var viewPrimaryMethods = function(skill) {
     methodsModalOpen = true;
     let methods = checkPrimaryMethod(skill, globalValids, baseChunkData, true);
     $('.methods-data').empty();
-    methods.forEach(method => {
-        if (Array.isArray(method)) {
-            let tempStr = '';
-            method.forEach((it) => {
-                if (tempStr !== '') {
-                    tempStr += ' + ';
-                }
-                tempStr += it.replaceAll('*', '');
-            });
-            method = tempStr;
-        }
-        $('.methods-data').append(`<div class='noscroll skill-method'>${method.replaceAll('~', '').replaceAll('|', '')}</div>`)
+    Object.keys(methods).sort(function(a, b) { return methods[a] - methods[b] }).forEach(method => {
+        $('.methods-data').append(`<div class='noscroll skill-method'>[${methods[method]}]: ${method.replaceAll('~', '').replaceAll('|', '').replaceAll('*', '')}</div>`)
     });
     $('#myModal13').show();
     document.getElementById('methods-data').scrollTop = 0;
@@ -5416,6 +5461,7 @@ var checkOffSettings = function(didRedo, startup) {
         checkOffSettings(true, startup);
         return;
     }
+    toggleIds(settings['ids'], startup);
     toggleVisibility(settings['highvis'], startup);
     toggleDarkMode(settings['darkmode'], startup);
     toggleNeighbors(settings['neighbors'], startup);
@@ -5425,6 +5471,7 @@ var checkOffSettings = function(didRedo, startup) {
     toggleRecent(settings['recent'], startup);
     toggleChunkInfo(settings['info'], startup);
     toggleChunkTasks(settings['chunkTasks'], startup);
+    toggleTaskSidebar(settings['taskSidebar'], startup);
     changeChallengeColor();
     if (!startup) {
         setData();
@@ -5662,9 +5709,8 @@ var loadData = function(startup) {
             altChallenges = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['altChallenges'] ? snap.val()['chunkinfo']['altChallenges'] : {};
             manualMonsters = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualMonsters'] ? snap.val()['chunkinfo']['manualMonsters'] : {};
             slayerLocked = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['slayerLocked'] ? snap.val()['chunkinfo']['slayerLocked'] : null;
+            passiveSkill = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['passiveSkill'] ? snap.val()['chunkinfo']['passiveSkill'] : null;
             settingsTemp['highscoreEnabled'] && enableHighscore('startup');
-            settingsTemp['ids'] && toggleIds() && $('.box').addClass('quality');
-            !settingsTemp['ids'] && $('.chunkId').hide();
             settingsTemp['infocollapse'] && hideChunkInfo('startup');
             infoCollapse = settingsTemp['infocollapse'];
             if (settingsTemp['recent'] === undefined) {
@@ -5705,6 +5751,7 @@ var loadData = function(startup) {
             Object.keys(settingsTemp).forEach(setting => {
                 settings[setting] = settingsTemp[setting];
             });
+            toggleIds(settings['ids'], 'startup');
             toggleVisibility(settings['highvis'], 'startup');
             toggleDarkMode(settings['darkmode'], 'startup');
             toggleNeighbors(settings['neighbors'], 'startup');
@@ -5714,6 +5761,7 @@ var loadData = function(startup) {
             toggleRecent(settings['recent'], 'startup');
             toggleChunkInfo(settings['info'], 'startup');
             toggleChunkTasks(settings['chunkTasks'], 'startup');
+            toggleTaskSidebar(settings['taskSidebar'], 'startup');
 
             $('.box').removeClass('selected potential unlocked recent blacklisted').addClass('gray').css('border-width', 0);
             $('.label').remove();
@@ -5851,7 +5899,7 @@ var setData = function() {
                     return;
                 });
             } else {
-                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'randomStartAlways': settings['randomStartAlways'], 'defaultStickerColor': settings['defaultStickerColor'], 'walkableRollable': settings['walkableRollable'], 'cinematicRoll': settings['cinematicRoll'] });
+                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'randomStartAlways': settings['randomStartAlways'], 'defaultStickerColor': settings['defaultStickerColor'], 'walkableRollable': settings['walkableRollable'], 'cinematicRoll': settings['cinematicRoll'], 'taskSidebar': settings['taskSidebar'] });
                 Object.keys(rules).forEach(rule => {
                     if (rules[rule] === undefined) {
                         rules[rule] = false;
@@ -5878,6 +5926,7 @@ var setData = function() {
                 myRef.child('chunkinfo').update({ altChallenges });
                 myRef.child('chunkinfo').update({ manualMonsters });
                 myRef.child('chunkinfo').update({ slayerLocked });
+                myRef.child('chunkinfo').update({ passiveSkill });
 
                 var tempJson = {};
                 Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
@@ -5925,7 +5974,7 @@ var setData = function() {
         });
     } else if (signedIn && !firebase.auth().currentUser) {
         firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
-            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'] });
+            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'] });
             Object.keys(rules).forEach(rule => {
                 if (rules[rule] === undefined) {
                     rules[rule] = false;
@@ -5952,6 +6001,7 @@ var setData = function() {
             myRef.child('chunkinfo').update({ altChallenges });
             myRef.child('chunkinfo').update({ manualMonsters });
             myRef.child('chunkinfo').update({ slayerLocked });
+            myRef.child('chunkinfo').update({ passiveSkill });
 
             var tempJson = {};
             Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
