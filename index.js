@@ -365,7 +365,7 @@ let ruleNames = {
     "Tutor Ammo": "Items from the Magic/Ranged Combat Tutors in Lumbridge count as a way to train those respective skills (Air/Mind runes and Training bow/arrows)",
     "Secondary MTA": "Allow MTA to be required with secondary sources of nature/law/cosmic runes",
     "Fossil Island Tasks": "Require the Fossil Island Mini-Task List be completed, similar to diary tasks",
-    "PVP-Only Spells": "Requre spells that can only be cast on PVP Worlds/in the Wilderness (Teleother/Teleblock)",
+    "PVP-Only Spells": "Require spells that can only be cast on PVP Worlds/in the Wilderness (Teleother/Teleblock)",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -887,7 +887,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.11.0");
+const myWorker = new Worker("./worker.js?v=4.11.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
