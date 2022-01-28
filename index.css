@@ -506,7 +506,7 @@ button.menu2 {
 }
 
 .menu9 .panel.visible {
-    max-height: 50vh !important;
+    max-height: 48vh !important;
 }
 
 .menu10 {
@@ -2610,6 +2610,12 @@ button.menu2 {
 .rule-category {
     font-size: 28px;
     font-weight: bold;
+    text-decoration: underline;
+}
+
+.rule-minicategory {
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .rule-subcategory {
@@ -4596,6 +4602,32 @@ input#searchMonsters {
 
 .edit-highest:hover {
     color: rgb(100, 100, 255);
+}
+
+.rule-asterisk {
+    color: var(--colorLink);
+}
+
+.rule-key {
+    border: 1px solid var(--colorLink);
+    padding: 5px;
+    margin: 10px;
+    background-color: var(--color2);
+    display: inline-block;
+}
+
+.hover-copy {
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.hover-copy:hover {
+    color: rgb(100, 100, 255);
+}
+
+.hover-copy:active {
+    color: rgb(60, 60, 215);
 }
 
 /* ------------------------------ */

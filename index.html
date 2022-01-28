@@ -8,7 +8,7 @@
 
     gtag('config', 'G-8P0V9GSFJ2');
   </script>
-  <link rel="stylesheet" href="./index.css?v=4.11.1" />
+  <link rel="stylesheet" href="./index.css?v=4.12.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -40,7 +40,7 @@
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'>Now with Quests & Diaries!</div></div>
 
 <div class='body' data-role="page" ondragstart="return false;" ondrop="return false;">
-  <script src="./index.js?v=4.11.1"></script>
+  <script src="./index.js?v=4.12.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext('backlog')">Backlog</li>
     <li onclick="switchActiveContext('backlog note')">Backlog w/ Note</li>
@@ -155,7 +155,7 @@
   <div id="myModal9" class="modal">
     <div class="modal-content noscroll">
       <div id="statserror-title" class="statserror-title noscroll">Username already on Chunk Stats</div>
-      <div id="statserror-subtitle" class="statserror-subtitle noscroll">This username is already in use on Chunk Stats. If this is a mistake, please contact <b>whitecatblack#0890</b> on Discord.</div>
+      <div id="statserror-subtitle" class="statserror-subtitle noscroll">This username is already in use on Chunk Stats. If this is a mistake, please contact <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack#0890')">whitecatblack#0890  <i class="fas fa-copy noscroll"></i></i> on Discord.</div>
       <div id="statserror-footer" class="statserror-footer noscroll">
         <button id='submit-statserror-button' class='modal-button' onclick='closeStatsError()'>Okay</button>
       </div>
@@ -284,7 +284,7 @@
       <div id="add-data" class="add-data noscroll">
         <div class="add-item"><span class="open-manual" onclick="openManualAdd()">Tasks</span>
         </div>
-        <div class="add-item"><span class="open-monsters" onclick="openMonstersAdd()">Monsters</span>
+        <div class="add-item"><span class="open-monsters" onclick="openMonstersAdd()">Items/Monsters/NPCs/Objects</span>
         </div>
         <div class="add-item"><span class="open-random" onclick="openRandomAdd()">Random Event & Other Loot</span>
         </div>
@@ -294,10 +294,10 @@
   <div id="myModal21" class="modal">
     <div class="modal-content noscroll">
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeMonstersAdd()"></i>
-      <div id="monsters-title" class="monsters-title noscroll">Manually Add Monsters</div>
-      <div id="monsters-subtitle" class="monsters-subtitle noscroll">Select the monster you want to add to your chunks. Useful if your rules allow you to lure monsters from other chunks into your own.</div>
+      <div id="monsters-title" class="monsters-title noscroll">Manually Add Stuff</div>
+      <div id="monsters-subtitle" class="monsters-subtitle noscroll">Select the Item/Monster/NPC/Object you want to add to your chunks. Useful if your rules allow you to lure monsters/npcs from other chunks into your own, or to add items gained from clue scrolls or wandering implings.</div>
       <div id="monsters-searchcontainer" class="monsters-searchcontainer noscroll">
-        <input type="text" placeholder="Search monsters..." id="searchMonsters" class="noscrollhard"
+        <input type="text" placeholder="Search..." id="searchMonsters" class="noscrollhard"
           oninput="searchMonsters()" autocomplete="off" />
           <span><input type="checkbox" onclick="changeMonstersFilterBy()" />Show checked only</span>
       </div>
@@ -334,27 +334,37 @@
   <div id="myModal24" class="modal">
     <div class="modal-content noscroll">
       <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">01/14/2022 (4.11.0)</div>
+      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">01/28/2022 (4.12.0)</div>
       <div id="patch-notes-data" class="patch-notes-data noscroll">
         <h2 class='noscroll'>Changes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Added the ability to add 'passively' trained skills. This feature is useful for skills that you don't have access to a primary training method yet, but want to train the skill anyway to unlock something or for a quest requirement. You can add passively trained skills in the 'Activity Info' window.</li>
-          <li class='noscroll'>Added the option to fully expand the Chunk Tasks panel into a full-height sidebar. You can turn this setting on within the Settings window. As part of this change, the "Show Chunk ID's" button was moved to the settings menu as well, and allowed the default view of the Chunk Tasks panel to be larger as well.</li>
-          <li class='noscroll'>Added all levels of primary training methods within the Activity Info window, instead of only level 1 methods like before.</li>
-          <li class='noscroll'>Added more ~filters to the 'Search Within my Chunks' window, including most skills (~crafting, ~mining, ~construction, etc).</li>
+          <li class='noscroll'>Added a new Chunk Rules preset - Supreme Chunker! This new ruleset is like Xtreme, but even harder, for those of you that want a even harder challenge. If things like required skilling pets, every single drop from every droptable, and more, definitely try it out! (And check out <a class='noscroll link' target='_blank' href='https://www.youtube.com/channel/UCVQ6zS9RXucM-kCd9XvHm5A'>BuzRS on Youtube</a>, who this rule exists thanks to)</li>
+          <li class='noscroll'>Added symbols within the Chunk Rules window to visually indicate if a rule is Xtreme or Supreme, to help with some clarity and confusion</li>
+          <li class='noscroll'>Reworked the way Ranged BIS gear is calculated, so now it considers a pairing of ranged weapon & ammo together rather than separately</li>
+          <li class='noscroll'>Changed the 'Manually Add Monsters' feature to includes Items, NPCs, and Objects</li>
+          <li class='noscroll'>Changed the Clue Scroll tab to be static instead of dynamically generated, so it will always be visible, even when a chunk is already unlocked</li>
+          <li class='noscroll'>Separated the Outer and Inner areas of Mor Ul Rek from each other into 2 distinct areas (you'll need to re-select them if you had access previously)</li>
+          <li class='noscroll'>Added tasks to get 70 Prayer to get a god crest in Falador</li>
         </ul>
         <h2 class='noscroll'>Bug Fixes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Fixed the ankou droptable outside the Stronghold of Security (thanks Haegr)</li>
-          <li class='noscroll'>Fixed a bug where chunk id's would always be turned off when leaving Sandbox Mode (thanks Land Ender)</li>
-          <li class='noscroll'>Fixed a bug where some instances would cause Magic tasks to appear from the wrong spellbook before they were unlocked</li>
-          <li class='noscroll'>Fixed a bug where clicking on a quest step wouldn't scroll to the correct part of the page</li>
-          <li class='noscroll'>Fixed a bug where Magic primary methods were not being displayed fully</li>
-          <li class='noscroll'>Fixed a missing way to get flour from a barrel of flour</li>
-          <li class='noscroll'>Fixed a Fremennik Diary task that was bound by the incorrect area requirements</li>
-          <li class='noscroll'>Fixed New droprates after the drop rate nerf</li>
+          <li class='noscroll'>Fixed a bug with improper task assignment on users with the 'Multi-step Processing' and 'Wield BIS' rules turned on, but the 'Highest Level Processing' turned off (thanks osrsmcfs)</li>
+          <li class='noscroll'>Fixed the Charge task showing before having access to a god staff</li>
+          <li class='noscroll'>Fixed collection log tasks for Mahogany Homes showing up before being able to do the minigame</li>
+          <li class='noscroll'>Fixed the chompy pet being obtainable before the diary was completable</li>
+          <li class='noscroll'>Fixed strung amulets not appearing properly</li>
+          <li class='noscroll'>Fixed missing skillcapes for the Falador Elite Diary task</li>
+          <li class='noscroll'>Fixed missing iron med helm spawn in Shayzien (thanks leerlingnummer2)</li>
+          <li class='noscroll'>Fixed a bug with exiting Sandbox mode while inside the Chunk Rules window</li>
+          <li class='noscroll'>Fixed the Amulet of the damned not correctly counting with Karil's for BIS calculations</li>
+          <li class='noscroll'>Fixed Prayer training methods that weren't bone-burying not being counted correctly</li>
+          <li class='noscroll'>Fixed the way training methods are shown for Ranged in the 'Activity Info' window</li>
+          <li class='noscroll'>Fixed many, many monster variants or area-specific drops being shown when actually inaccessible</li>
+          <li class='noscroll'>Fixed some minor issues around processing skill products</li>
+          <li class='noscroll'>Fixed the quest cape being unobtainable</li>
+          <li class='noscroll'>Fixed a spelling mistake in the Warriors' Guild Basement</li>
         </ul>
-        <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll'>whitecatblack#0890</i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
+        <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack#0890')">whitecatblack#0890  <i class="fas fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
       </div>
       <div id="patch-notes-footer" class="patch-notes-footer noscroll">
         <button id='submit-patch-notes-button' class='modal-button' onclick='dismissPatchNotes()'>Dismiss</button>
@@ -704,7 +714,7 @@
         <h2>Contact</h2>
       </u>
       <p><b>Need to contact me about something?</b></p>
-      <p>Message me on <b>Discord</b> at <i>whitecatblack#0890</i> (preferred).</p>
+      <p>Message me on <b>Discord</b> at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack#0890')">whitecatblack#0890  <i class="fas fa-copy noscroll"></i></i> (preferred).</p>
       <div>Don't have a Discord? You should get one and join the <b><a href="https://discord.gg/dg6wubYS8e"
             target='_blank'>OneChunkMan Discord Server</a></b> and talk to everyone there!</div>
       <p>You can also email me at <a href="mailto:duosource.iron@gmail.com">duosource.iron@gmail.com</a></p>
