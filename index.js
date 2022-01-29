@@ -962,7 +962,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.1");
+const myWorker = new Worker("./worker.js?v=4.12.2");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -5284,7 +5284,7 @@ var backlogChallenge = function(challenge, skill, note) {
         backlog[skill] = {};
     }
     if (skill === 'Extra' || skill === 'Quest' || skill === 'Diary' || skill === 'BiS') {
-        if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
+        if (!!chunkInfo['challenges'][skill][challenge] && !!chunkInfo['challenges'][skill][challenge]['Skills']) {
             skill !== 'Quest' && skill !== 'Diary' && Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
                 if (!backlog[subSkill]) {
                     backlog[subSkill] = {};
