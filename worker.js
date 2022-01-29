@@ -2019,7 +2019,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 });
                                 if (Object.keys(nonskill).length > 0) {
                                     !!nonskill && Object.keys(nonskill).filter((skill) => { return !!nonskill[skill] }).forEach(skill => {
-                                        Object.keys(nonskill[skill]).filter((src) => { return !!chunkInfo['challenges'][skill][src]['Items'] }).forEach(src => {
+                                        Object.keys(nonskill[skill]).filter((src) => { return !!chunkInfo['challenges'][skill][src] && !!chunkInfo['challenges'][skill][src]['Items'] }).forEach(src => {
                                             chunkInfo['challenges'][skill][src]['Items'].forEach(it => {
                                                 itemList.push(it);
                                             });
@@ -2055,7 +2055,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 });
                                 if (Object.keys(nonskill).length > 0) {
                                     !!nonskill && Object.keys(nonskill).filter((skill) => { return !!nonskill[skill] }).forEach(skill => {
-                                        Object.keys(nonskill[skill]).filter((src) => { return !!chunkInfo['challenges'][skill][src]['Items'] }).forEach(src => {
+                                        Object.keys(nonskill[skill]).filter((src) => { return !!chunkInfo['challenges'][skill][src] && !!chunkInfo['challenges'][skill][src]['Items'] }).forEach(src => {
                                             chunkInfo['challenges'][skill][src]['Items'].forEach(it => {
                                                 itemList.push(it);
                                             });

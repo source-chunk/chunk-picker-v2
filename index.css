@@ -499,7 +499,7 @@ button.menu2 {
     display: none;
     position: fixed;
     z-index: 99 !important;
-    top: calc(60px + min(3.5vw, 30px));
+    top: 60px;
     right: 10px;
     width: min(25vw, 400px);
     height: 2vw;
@@ -1171,8 +1171,8 @@ button.menu2 {
     width: 30%;
     margin: auto;
     text-align: center;
-    -ms-transform: translate(112.5%, 35%);
-    transform: translate(112.5%, 35%);
+    -ms-transform: translate(112.5%, 20%);
+    transform: translate(112.5%, 20%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: var(--color6);
 }
@@ -1184,8 +1184,8 @@ button.menu2 {
     width: 30%;
     margin: auto;
     text-align: center;
-    -ms-transform: translate(112.5%, 35%);
-    transform: translate(112.5%, 35%);
+    -ms-transform: translate(112.5%, 20%);
+    transform: translate(112.5%, 20%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: var(--color6);
 }
@@ -1197,8 +1197,8 @@ button.menu2 {
     width: 30%;
     margin: auto;
     text-align: center;
-    -ms-transform: translate(112.5%, 35%);
-    transform: translate(112.5%, 35%);
+    -ms-transform: translate(112.5%, 20%);
+    transform: translate(112.5%, 20%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: var(--color6);
 }
@@ -1210,8 +1210,8 @@ button.menu2 {
     width: 30%;
     margin: auto;
     text-align: center;
-    -ms-transform: translate(112.5%, 35%);
-    transform: translate(112.5%, 35%);
+    -ms-transform: translate(112.5%, 20%);
+    transform: translate(112.5%, 20%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: var(--color6);
 }
@@ -1252,8 +1252,8 @@ button.menu2 {
     width: 30%;
     margin: auto;
     text-align: center;
-    -ms-transform: translate(112.5%, 35%);
-    transform: translate(112.5%, 35%);
+    -ms-transform: translate(112.5%, 20%);
+    transform: translate(112.5%, 20%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: white;
 }
@@ -1700,7 +1700,7 @@ button.menu2 {
     transition-duration: .5s;
     cursor: pointer;
     left: 5px;
-    font-size: 42px;
+    font-size: 4.5vh;
     text-decoration: none;
 }
 
@@ -1800,6 +1800,10 @@ button.menu2 {
     padding-bottom: 5px;
 }
 
+.menu8 .panel.visible {
+    max-height: min(10vh, 200px);
+}
+
 .panel-active .challenge {
     border: solid 1px var(--color1);
     border-radius: 5px;
@@ -1850,7 +1854,7 @@ button.menu2 {
 
 .burger {
     cursor: pointer;
-    font-size: 15px;
+    font-size: max(1.65vh, 14px);
     margin-left: 5px;
     transition: color .5s;
     pointer-events: all;
@@ -1879,11 +1883,11 @@ button.menu2 {
     padding: 0px 5px 8px 5px;
     cursor: pointer;
     font-weight: bolder;
-    font-size: min(2.15vw, 26px);
+    font-size: min(2.15vw, 3.5vh, 26px);
     transition: 0.4s;
     text-align: left;
     padding-left: 25px;
-    max-height: 25px;
+    max-height: 3vh;
 }
 
 .accordion:hover {
@@ -1927,7 +1931,7 @@ button.menu2 {
 .hiddenInfo {
     position: fixed;
     display: none;
-    top: 25vh;
+    top: max(25vh, 225px);
     z-index: 100;
     border: dashed 2px black;
     padding: 7px 10px 11px 14px;
@@ -2036,7 +2040,7 @@ button.menu2 {
     display: none;
     position: fixed;
     z-index: 9999;
-    padding-top: 200px;
+    padding-top: 21vh;
     left: 0;
     top: 0;
     width: 100%;
@@ -2064,7 +2068,7 @@ button.menu2 {
 }
 
 #myModal4 {
-    padding-top: 150px !important;
+    padding-top:16vh !important;
 }
 
 #myModal4 > .modal-content {
@@ -2072,6 +2076,10 @@ button.menu2 {
     width: 45%;
     background-color: var(--color1);
     color: var(--colorText);
+}
+
+#myModa20 > .modal-content {
+    height: 25%;
 }
 
 #myModal > .modal-content {
@@ -2136,7 +2144,7 @@ button.menu2 {
 }
 
 #myModal18 {
-    padding-top: 150px !important;
+    padding-top:16vh !important;
 }
 
 #myModal18 > .modal-content {
@@ -2147,7 +2155,7 @@ button.menu2 {
 }
 
 #myModal26 {
-    padding-top: 150px !important;
+    padding-top:16vh !important;
 }
 
 #myModal26 > .modal-content {
@@ -2179,6 +2187,7 @@ button.menu2 {
 
 .challenge-title {
     height: 9%;
+    font-size: 1.7vh;
 }
 
 .challenge-data {
@@ -2203,7 +2212,7 @@ button.menu2 {
     margin-left: 20px;
     margin-bottom: 10px;
     width: 35%;
-    font-size: 20px;
+    font-size: 2vh;
 }
 
 .open-manual-outer-outer-container {
@@ -2214,6 +2223,7 @@ button.menu2 {
 .open-manual-outer-container {
     border-top: 1px solid;
     display: none;
+    font-size: min(2.15vw, 2.75vh, 26px);
 }
 
 .open-manual-outer {
@@ -2229,11 +2239,6 @@ button.menu2 {
 
 .open-manual-outer > i {
     margin-right: 5px;
-}
-
-.open-manual-outer-container {
-    border-top: 1px solid;
-    display: none;
 }
 
 .open-manual-container {
@@ -2258,6 +2263,7 @@ button.menu2 {
 
 .open-rules-container {
     border-top: 1px solid;
+    font-size: min(2.15vw, 2.75vh, 26px);
 }
 
 .open-rules {
@@ -2318,6 +2324,7 @@ button.menu2 {
 .open-complete-container {
     border-top: 1px solid;
     display: none;
+    font-size: min(2.15vw, 2.75vh, 26px);
 }
 
 .open-complete {
@@ -2411,7 +2418,7 @@ button.menu2 {
 }
 
 .details-title {
-    font-size: 24;
+    font-size: 2.6vh;
     padding-left: 10px;
     max-height: 20%;
     min-height: 20%;
@@ -2468,7 +2475,7 @@ button.menu2 {
 }
 
 .add-title {
-    font-size: 36;
+    font-size: 3.8vh;
     padding-left: 10px;
     max-height: 20%;
     min-height: 20%;
@@ -2485,7 +2492,7 @@ button.menu2 {
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
-    font-size: 32px;
+    font-size: 3.5vh;
     text-align: center;
 }
 
@@ -2511,7 +2518,7 @@ button.menu2 {
 }
 
 .settings-title {
-    font-size: 42px;
+    font-size: 4.5vh;
     padding-left: 10px;
     max-height: 9%;
     min-height: 9%;
@@ -2582,7 +2589,7 @@ button.menu2 {
 }
 
 .rules-title {
-    font-size: 42px;
+    font-size: 4.5vh;
     padding-left: 10px;
     max-height: 9%;
     min-height: 9%;
@@ -2593,7 +2600,7 @@ button.menu2 {
 .rules-subtitle {
     padding: 0px 15px;
     background-color: var(--color2);
-    font-size: 15px;
+    font-size: 1.65vh;
     text-align: center;
     max-height: 10%;
     min-height: 10%;
@@ -2685,7 +2692,7 @@ button.menu2 {
 }
 
 .chunkhistory-title {
-    font-size: 42px;
+    font-size: 4.5vh;
     padding-left: 10px;
     max-height: 9%;
     min-height: 9%;
@@ -2696,7 +2703,7 @@ button.menu2 {
 .chunkhistory-subtitle {
     padding: 0px 15px;
     background-color: var(--color2);
-    font-size: 15px;
+    font-size: 1.65vh;
     text-align: center;
     max-height: 10%;
     min-height: 10%;
@@ -2832,7 +2839,7 @@ button.menu2 {
     padding-top: 0px;
     max-height: 20%;
     min-height: 20%;
-    line-height: 50px;
+    line-height: 6vh;
     text-align: center;
     background-color: var(--color2);
 }
@@ -2840,7 +2847,7 @@ button.menu2 {
 .random-subtitle {
     padding: 0px 15px;
     background-color: var(--color1);
-    font-size: 16px;
+    font-size: max(1.7vh, 12px);
     text-align: center;
     border-top: solid 1px;
     height: 80%;
@@ -2861,7 +2868,7 @@ button.menu2 {
 }
 
 #random-dropdown {
-    font-size: 24px;
+    font-size: 2.55vh;
     width: 200px;
 }
 
@@ -2893,12 +2900,12 @@ button.menu2 {
 }
 
 .slayer-locked-title {
-    font-size: 24px;
+    font-size: 3vh;
     font-weight: bold;
     padding-top: 0px;
     max-height: 15%;
     min-height: 15%;
-    line-height: 50px;
+    line-height: 5vh;
     text-align: center;
     background-color: var(--color2);
 }
@@ -2906,7 +2913,7 @@ button.menu2 {
 .slayer-locked-subtitle {
     padding: 0px 15px;
     background-color: var(--color1);
-    font-size: 16px;
+    font-size: 1.7vh;
     text-align: center;
     border-top: solid 1px;
     height: 85%;
@@ -2915,19 +2922,20 @@ button.menu2 {
 .slayer-locked-data > div {
     float: right;
     margin-right: 10px;
-    margin-top: -55px;
+    margin-top: -7vh;
     display: flex;
+    height: 15%;
 }
 
 #slayer-locked-dropdown-container {
     text-align: center;
     position: absolute;
     width: 100%;
-    top: 50%;
+    top: 45%;
 }
 
 #slayer-locked-dropdown {
-    font-size: 24px;
+    font-size: 2.65vh;
     width: 200px;
 }
 
@@ -2935,13 +2943,13 @@ button.menu2 {
     text-align: center;
     position: absolute;
     width: 100%;
-    top: 65%;
+    top: 60%;
     font-size: 20px;
 }
 
 .slayer-locked-cancel {
     padding: 10px;
-    font-size: 18px;
+    font-size: 2vh;
     margin-right: 10px;
     cursor: pointer;
 }
@@ -2949,9 +2957,9 @@ button.menu2 {
 .slayer-locked-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
-    padding: 10px;
+    padding: 1vh;
     color: white;
-    font-size: 18px;
+    font-size: 2vh;
     cursor: pointer;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -2967,12 +2975,12 @@ button.menu2 {
 }
 
 .passive-skill-title {
-    font-size: 24px;
+    font-size: 3vh;
     font-weight: bold;
     padding-top: 0px;
     max-height: 15%;
     min-height: 15%;
-    line-height: 50px;
+    line-height: 5vh;
     text-align: center;
     background-color: var(--color2);
 }
@@ -2980,7 +2988,7 @@ button.menu2 {
 .passive-skill-subtitle {
     padding: 0px 15px;
     background-color: var(--color1);
-    font-size: 16px;
+    font-size: 1.7vh;
     text-align: center;
     border-top: solid 1px;
     height: 85%;
@@ -2989,21 +2997,22 @@ button.menu2 {
 .passive-skill-data > div {
     float: right;
     margin-right: 10px;
-    margin-top: -55px;
+    margin-top: -7vh;
     display: flex;
+    height: 15%;
 }
 
 #passive-skill-input-container {
     text-align: center;
     position: absolute;
     width: 100%;
-    top: 65%;
+    top: 55%;
     font-size: 20px;
 }
 
 .passive-skill-cancel {
     padding: 10px;
-    font-size: 18px;
+    font-size: 2vh;
     margin-right: 10px;
     cursor: pointer;
 }
@@ -3011,9 +3020,9 @@ button.menu2 {
 .passive-skill-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
-    padding: 10px;
+    padding: 1vh;
     color: white;
-    font-size: 18px;
+    font-size: 2vh;
     cursor: pointer;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -3203,7 +3212,7 @@ button.menu2 {
 }
 
 .searchchunks-title {
-    font-size: 30px;
+    font-size: 3.25vh;
     text-align: center;
     max-height: 10%;
     min-height: 10%;
@@ -3216,16 +3225,18 @@ button.menu2 {
     height: 10%;
     padding: 0px 15px;
     background-color: var(--color2);
+    font-size: 1.7vh;
 }
 
 .searchchunks-searchcontainer {
     height: 8%;
     padding: 0px 15px;
     background-color: var(--color2);
+    font-size: 1.7vh;
 }
 
 input#searchChunks {
-    font-size: 20px;
+    font-size: 2.1vh;
 }
 
 .searchchunks-data {
@@ -3340,32 +3351,32 @@ input#searchChunks {
 }
 
 .complete-title {
-    font-size: 36px;
+    font-size: 3.9vh;
     font-weight: bold;
     padding-top: 0px;
     max-height: 20%;
     min-height: 20%;
-    line-height: 50px;
+    line-height: 5.5vh;
     text-align: center;
     background-color: var(--color1);
 }
 
 .complete-data {
     margin: 0px 15px;
-    font-size: 18px;
+    font-size: 2vh;
     display: flex;
     align-items: center;
-    height: 60%;
+    height: 55%;
 }
 
 .complete-footer {
-    height: 20%;
+    height: 25%;
 }
 
 #submit-complete-button {
     background-color: rgb(75, 200, 75);
     width: 125px;
-    font-size: 20px;
+    font-size: 2.2vh;
     color: white;
     float: right;
     border-width: 1px 1px 1px 1px;
@@ -3579,18 +3590,18 @@ input#searchChunks {
 }
 
 .add-equipment-title {
-    font-size: min(2vw, 24px);
+    font-size: min(2vw, 4vh, 24px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 7%;
     min-height: 7%;
-    line-height: 50px;
+    line-height: 5vh;
     text-align: center;
 }
 
 .add-equipment-subtitle {
     padding: 0px 15px;
-    font-size: min(1.15vw, 16px);
+    font-size: min(1.15vw, 1.75vh, 16px);
     text-align: center;
     height: 15%;
 }
@@ -3598,10 +3609,11 @@ input#searchChunks {
 .add-equipment-searchcontainer {
     height: 8%;
     padding: 0px 15px;
+    font-size: 1.7vh;
 }
 
 input#searchAddEquipment {
-    font-size: 20px;
+    font-size: 2.1vh;
 }
 
 .add-equipment-data {
@@ -3661,18 +3673,18 @@ input#searchAddEquipment {
 }
 
 .backlog-sources-title {
-    font-size: min(3vw, 36px);
+    font-size: min(3vw, 4vh, 36px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 7%;
     min-height: 7%;
-    line-height: 50px;
+    line-height: 5vh;
     text-align: center;
 }
 
 .backlog-sources-subtitle {
     padding: 0px 15px;
-    font-size: min(1.15vw, 16px);
+    font-size: min(1.15vw, 1.75vh, 16px);
     text-align: center;
     height: 10%;
 }
@@ -3680,14 +3692,15 @@ input#searchAddEquipment {
 .backlog-sources-searchcontainer {
     height: 8%;
     padding: 0px 15px;
+    font-size: 1.7vh;
 }
 
 input#searchBacklogSources {
-    font-size: 20px;
+    font-size: 2.1vh;
 }
 
 .backlog-sources-data {
-    height: 70%;
+    height: 75%;
     padding: 0px 25px;
     overflow-y: auto;
 }
@@ -3720,7 +3733,7 @@ input#searchBacklogSources {
 }
 
 .monsters-title {
-    font-size: min(3vw, 36px);
+    font-size: min(3vw, 3.7vh, 36px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 7%;
@@ -3731,7 +3744,7 @@ input#searchBacklogSources {
 
 .monsters-subtitle {
     padding: 0px 15px;
-    font-size: min(1.15vw, 16px);
+    font-size: min(1.15vw, 1.75vh, 16px);
     text-align: center;
     height: 10%;
 }
@@ -3739,14 +3752,15 @@ input#searchBacklogSources {
 .monsters-searchcontainer {
     height: 8%;
     padding: 0px 15px;
+    font-size: 1.7vh;
 }
 
 input#searchMonsters {
-    font-size: 20px;
+    font-size: 2.1vh;
 }
 
 .monsters-data {
-    height: 70%;
+    height: 75%;
     padding: 0px 25px;
     overflow-y: auto;
 }
@@ -4128,13 +4142,13 @@ input#searchMonsters {
     content: "\f054";
     color: var(--colorText);
     position: fixed;
-    margin-left: -5.75vh;
-    margin-top: 2vh;
+    margin-left: -9vh;
+    margin-top: 1px;
     -webkit-text-fill-color: var(--colorText);
     -webkit-text-stroke-width: .045em;
     -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     pointer-events: none;
-    font-size: 84px;
+    font-size: 15vh;
     animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 
@@ -4143,13 +4157,13 @@ input#searchMonsters {
     content: "\f053";
     color: var(--colorText);
     position: fixed;
-    margin-left: 15.75vh;
-    margin-top: 2vh;
+    margin-left: 15vh;
+    margin-top: 1px;
     -webkit-text-fill-color: var(--colorText);
     -webkit-text-stroke-width: .045em;
     -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     pointer-events: none;
-    font-size: 84px;
+    font-size: 15vh;
     animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 
@@ -4158,13 +4172,13 @@ input#searchMonsters {
     content: "\f054";
     color: var(--colorText);
     position: fixed;
-    margin-left: -9.75vh;
-    margin-top: 2vh;
+    margin-left: -14vh;
+    margin-top: 1px;
     -webkit-text-fill-color: var(--colorText);
     -webkit-text-stroke-width: .045em;
     -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     pointer-events: none;
-    font-size: 84px;
+    font-size: 15vh;
     animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 
@@ -4173,13 +4187,13 @@ input#searchMonsters {
     content: "\f053";
     color: var(--colorText);
     position: fixed;
-    margin-left: 19.75vh;
-    margin-top: 2vh;
+    margin-left: 20vh;
+    margin-top: 1px;
     -webkit-text-fill-color: var(--colorText);
     -webkit-text-stroke-width: .045em;
     -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     pointer-events: none;
-    font-size: 84px;
+    font-size: 15vh;
     animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 
@@ -4188,13 +4202,13 @@ input#searchMonsters {
     content: "\f054";
     color: var(--colorText);
     position: fixed;
-    margin-left: -13.75vh;
-    margin-top: 2vh;
+    margin-left: -19vh;
+    margin-top: 1px;
     -webkit-text-fill-color: var(--colorText);
     -webkit-text-stroke-width: .045em;
     -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     pointer-events: none;
-    font-size: 84px;
+    font-size: 15vh;
     animation: wave-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 
@@ -4203,13 +4217,13 @@ input#searchMonsters {
     content: "\f053";
     color: var(--colorText);
     position: fixed;
-    margin-left: 23.75vh;
-    margin-top: 2vh;
+    margin-left: 25vh;
+    margin-top: 1px;
     -webkit-text-fill-color: var(--colorText);
     -webkit-text-stroke-width: .045em;
     -webkit-text-stroke-color: rgba(0, 0, 0, 1);
     pointer-events: none;
-    font-size: 84px;
+    font-size: 15vh;
     animation: wave-invert-horizontal 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 
@@ -4285,7 +4299,7 @@ input#searchMonsters {
 
 .patch-notes-subtitle {
     padding: 0px 15px;
-    font-size: min(1.15vw, 16px);
+    font-size: min(1.15vw, 1.75vh, 16px);
     text-align: center;
     max-height: 4%;
     min-height: 4%;
@@ -4360,7 +4374,7 @@ input#searchMonsters {
 }
 
 .quest-steps-title {
-    font-size: 42px;
+    font-size: 4.5vh;
     padding-left: 10px;
     max-height: 9%;
     min-height: 9%;
@@ -4428,7 +4442,7 @@ input#searchMonsters {
 }
 
 .friends-list-title {
-    font-size: 42px;
+    font-size: 4.5vh;
     padding-left: 10px;
     max-height: 9%;
     min-height: 9%;
@@ -4439,7 +4453,7 @@ input#searchMonsters {
 .friends-list-subtitle {
     padding: 0px 15px;
     background-color: var(--color2);
-    font-size: 15px;
+    font-size: 1.65vh;
     text-align: center;
     max-height: 10%;
     min-height: 10%;
@@ -4496,34 +4510,34 @@ input#searchMonsters {
 }
 
 .friends-add-title {
-    font-size: 32px;
+    font-size: 3.4vh;
     padding: 0px 10px;
     height: 20%;
     text-align: center;
 }
 
 .friends-add-data {
-    height: 56.5%;
+    height: 51.5%;
     text-align: center;
 }
 
 .friends-add-data input {
     display: block;
-    margin-bottom: 50px;
+    margin-bottom: 5vh;
     margin-left: auto;
     margin-right: auto;
-    font-size: 32px;
+    font-size: 3.4vh;
     text-align: center;
 }
 
 .friends-add-footer {
-    height: 23%;
+    height: 28%;
 }
 
 #submit-friend-button {
     background-color: gray;
     width: 100px;
-    font-size: 20px;
+    font-size: 2.25vh;
     color: white;
     float: right;
     border-width: 1px 1px 1px 1px;
@@ -4548,7 +4562,7 @@ input#searchMonsters {
     float: right;
     padding: 20px 10px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 2.25vh;
 }
 
 .qps {

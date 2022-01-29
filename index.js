@@ -962,7 +962,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.0");
+const myWorker = new Worker("./worker.js?v=4.12.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -6231,14 +6231,14 @@ var rollMID = function() {
     if (onTestServer || testMode) {
         return;
     }
-    databaseRef.once('value', function(snap) {
+    databaseRef.child('mapids').once('value', function(snap) {
         while (badNums) {
             char1 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char2 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char3 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char4 = rollCount > 10 ? String.fromCharCode(97 + Math.floor(Math.random() * 26)) : '';
             charSet = char1 + char2 + char3 + char4;
-            !snap.val()['maps'][charSet] && (badNums = false);
+            !snap.val()[charSet] && (badNums = false);
             rollCount++;
         }
         mid = charSet;
@@ -6247,9 +6247,12 @@ var rollMID = function() {
             userCredential.user.updateProfile({
                 displayName: mid
             }).then(() => {
-                var temp = snap.val()['template'];
-                temp.uid = userCredential.user.uid;
-                databaseRef.child('maps/' + charSet).set(temp);
+                databaseRef.child('template').once('value', function(snap2) {
+                    var temp = snap2.val();
+                    temp.uid = userCredential.user.uid;
+                    databaseRef.child('maps/' + charSet).set(temp);
+                    databaseRef.child('mapids/' + charSet).set(true);
+                });
             });
         }).catch((error) => { console.log(error) });
 
