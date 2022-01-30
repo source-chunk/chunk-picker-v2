@@ -962,7 +962,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.2");
+const myWorker = new Worker("./worker.js?v=4.12.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3920,16 +3920,19 @@ var searchMonsters = function() {
         Object.keys(chunkInfo['challenges'][skill]).forEach(challenge => {
             Object.keys(baseChunkDataTotal).forEach(section => {
                 chunkInfo['challenges'][skill][challenge].hasOwnProperty(section) && chunkInfo['challenges'][skill][challenge][section].forEach(el => {
-                    if (!chunkInfo['codeItems'][section.toLowerCase() + 'Plus'].hasOwnProperty(el)) {
+                    if (!chunkInfo['codeItems'][section.toLowerCase() + 'Plus'].hasOwnProperty(el.replaceAll('*', ''))) {
                         baseChunkDataTotal[section][el.replaceAll('*', '')] = true;
                     } else {
-                        chunkInfo['codeItems'][section.toLowerCase() + 'Plus'][el].forEach(plus => {
+                        chunkInfo['codeItems'][section.toLowerCase() + 'Plus'][el.replaceAll('*', '')].forEach(plus => {
                             baseChunkDataTotal[section][plus.replaceAll('*', '')] = true;
                         });
                     }
                 });
             });
         });
+    });
+    Object.keys(chunkInfo['equipment']).forEach(equip => {
+        baseChunkDataTotal['Items'][equip] = true;
     });
     let monstersList = {...chunkInfo['drops'], ...chunkInfo['skillItems']['Slayer']};
     Object.keys(monstersList).forEach(monster => {

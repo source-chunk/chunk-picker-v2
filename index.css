@@ -2492,7 +2492,7 @@ button.menu2 {
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
-    font-size: 3.5vh;
+    font-size: 3.25vh;
     text-align: center;
 }
 
@@ -3746,7 +3746,7 @@ input#searchBacklogSources {
     padding: 0px 15px;
     font-size: min(1.15vw, 1.75vh, 16px);
     text-align: center;
-    height: 10%;
+    height: 12%;
 }
 
 .monsters-searchcontainer {
@@ -3760,7 +3760,7 @@ input#searchMonsters {
 }
 
 .monsters-data {
-    height: 75%;
+    height: 73%;
     padding: 0px 25px;
     overflow-y: auto;
 }
