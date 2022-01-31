@@ -962,7 +962,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.3");
+const myWorker = new Worker("./worker.js?v=4.12.4");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3800,7 +3800,7 @@ var openQuestSteps = function(skill, challenge) {
             $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'") ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
         });
         $('#myModal25').show();
-        $('.quest-steps-data .highlighted')[0].scrollIntoView({
+        !!$('.quest-steps-data .highlighted')[0] && $('.quest-steps-data .highlighted')[0].scrollIntoView({
             behavior: 'auto',
             block: 'center',
             inline: 'center'
