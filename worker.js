@@ -1596,7 +1596,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             itemsPlus[xItem.replaceAll(/\*/g, '')].forEach(plus => {
                                 if (!!items[plus] && (!chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][name]['NonShop'] || !onlyShop(items[plus]))) {
                                     tempValid = true;
-                                    xResults++
+                                    xResults++;
                                     chunkInfo['challenges'][skill][name]['ItemsDetails'].push(plus);
                                     Object.keys(items[plus]).forEach(source => {
                                         if (xItem.includes('*')) {
@@ -1638,7 +1638,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             itemsPlus[item.replaceAll(/\*/g, '')].filter((plus) => { return !!items[plus] && (!chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][name]['NonShop'] || !onlyShop(items[plus])) }).forEach(plus => {
                                 tempValid = true;
                                 chunkInfo['challenges'][skill][name]['ItemsDetails'].push(plus);
-                                Object.keys(items[plus]).filter((source) => { return item.includes('*') }).forEach(source => {
+                                item.includes('*') && Object.keys(items[plus]).forEach(source => {
                                     if (!items[plus][source].includes('secondary-') || items[plus][source].includes('primary-') || items[plus][source] === 'shop') {
                                         secondary = false;
                                     } else if (item === 'Air rune+*') {
@@ -3599,7 +3599,7 @@ var gatherChunksInfo = function(chunks) {
                                     if (!items[item]) {
                                         items[item] = {};
                                     }
-                                    if (chunkInfo['drops'][monster][item] === 'Always') {
+                                    if (chunkInfo['drops'][monster][drop][quantity] === 'Always' && dropTables[drop][item].split('@')[0] === 'Always') {
                                         items[item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
                                     } else {
                                         items[item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
@@ -3622,7 +3622,7 @@ var gatherChunksInfo = function(chunks) {
                             if (!items[drop]) {
                                 items[drop] = {};
                             }
-                            if (chunkInfo['drops'][monster][drop] === 'Always') {
+                            if (chunkInfo['drops'][monster][drop][quantity] === 'Always') {
                                 items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
                             } else {
                                 items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
@@ -3643,7 +3643,7 @@ var gatherChunksInfo = function(chunks) {
                             if (!items[drop]) {
                                 items[drop] = {};
                             }
-                            if (chunkInfo['drops'][monster][drop] === 'Always') {
+                            if (chunkInfo['drops'][monster][drop][quantity] === 'Always') {
                                 items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
                             } else {
                                 items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
@@ -3674,7 +3674,7 @@ var gatherChunksInfo = function(chunks) {
                                     if (!items[item]) {
                                         items[item] = {};
                                     }
-                                    if (chunkInfo['drops'][monster][item] === 'Always') {
+                                    if (chunkInfo['drops'][monster][drop][quantity] === 'Always' && dropTables[drop][item].split('@')[0] === 'Always') {
                                         items[item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
                                     } else {
                                         items[item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
@@ -3697,7 +3697,7 @@ var gatherChunksInfo = function(chunks) {
                             if (!items[drop]) {
                                 items[drop] = {};
                             }
-                            if (chunkInfo['drops'][monster][drop] === 'Always') {
+                            if (chunkInfo['drops'][monster][drop][quantity] === 'Always') {
                                 items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
                             } else {
                                 items[drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
