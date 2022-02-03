@@ -2223,7 +2223,7 @@ button.menu2 {
 .open-manual-outer-container {
     border-top: 1px solid;
     display: none;
-    font-size: min(2.15vw, 2.75vh, 26px);
+    font-size: min(1.75vw, 2.75vh, 26px);
 }
 
 .open-manual-outer {
@@ -2263,7 +2263,7 @@ button.menu2 {
 
 .open-rules-container {
     border-top: 1px solid;
-    font-size: min(2.15vw, 2.75vh, 26px);
+    font-size: min(1.75vw, 2.75vh, 26px);
 }
 
 .open-rules {
@@ -2324,7 +2324,7 @@ button.menu2 {
 .open-complete-container {
     border-top: 1px solid;
     display: none;
-    font-size: min(2.15vw, 2.75vh, 26px);
+    font-size: min(1.75vw, 2.75vh, 26px);
 }
 
 .open-complete {
