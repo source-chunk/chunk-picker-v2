@@ -371,7 +371,7 @@ let ruleNames = {
     "Fossil Island Tasks": "Require the Fossil Island Mini-Task List be completed, similar to diary tasks",
     "PVP-Only Spells": "Require spells that can only be cast on PVP Worlds/in the Wilderness (Teleother/Teleblock)",
     "Skilling Pets": "Require skilling pets be obtained as soon as the relevant skill is trainable <span class='rule-asterisk noscroll'>†</span>",
-    "Money Unlockables": "Require money-unlockable options be bought (money crest in POH, angelic gravestone, additional bank space) <span class='rule-asterisk noscroll'>†</span>",
+    "Money Unlockables": "Require permanently unlockable options be unlocked (angelic gravestone, additional bank space, infinitely charged lyre, etc.) <span class='rule-asterisk noscroll'>†</span>",
     "Prayers": "Must be able to activate all prayers possible <span class='rule-asterisk noscroll'>†</span>",
     "All Droptables": "Must obtain every drop from every unique monster's droptable <span class='rule-asterisk noscroll'>†</span>",
 };                                                                              // List of rule definitions
@@ -962,7 +962,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.6");
+const myWorker = new Worker("./worker.js?v=4.12.7");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3466,7 +3466,6 @@ var expandActive = function(subTab) {
 var calcFutureChallenges = function() {
     let chunks = {};
     let challengeStr = '';
-    let clueStr = '';
     $('.unlocked').each(function() {
         chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
     });
