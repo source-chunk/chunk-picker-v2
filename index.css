@@ -4577,7 +4577,7 @@ input#searchMonsters {
 }
 
 .menu9.sidebar .panel.visible {
-    max-height: calc(100vh - 7.8vh - 195px) !important;
+    max-height: calc(100vh - 8vh - 225px) !important;
     font-size: min(1.5vw, 14.5px);
     text-align: left;
     padding-left: 10px;
