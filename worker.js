@@ -2788,9 +2788,7 @@ var calcBIS = function() {
                             let article = vowels.includes(equip.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                             article = equip.toLowerCase().charAt(equip.toLowerCase().length - 1) === 's' ? ' ' : article;
                             tempTempValid && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + equip.toLowerCase() + '|~')) && (bestEquipment[chunkInfo['equipment'][equip].slot] = equip);
-                        }
-                    } else if (chunkInfo['equipment'][equip].prayer > 0) {
-                        if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].prayer === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].prayer)) {
+                        } else if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].prayer === chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].prayer)) {
                             let tempTempValid = false;
                             Object.keys(baseChunkData['items'][equip]).forEach(source => {
                                 if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer') {
@@ -3507,6 +3505,12 @@ var calcBIS = function() {
                     article = item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' ? ' ' : article;
                     if (!!globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~']) {
                         globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + '/' + globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'];
+                        if (slot === '2h') {
+                            highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
+                            highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
+                        } else {
+                            highestOverall[skill.replaceAll(' ', '_') + '-' + slot] = item;
+                        }
                     } else {
                         globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + ' BiS ' + slot;
                     }
