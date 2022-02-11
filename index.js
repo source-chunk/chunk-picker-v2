@@ -986,7 +986,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.13");
+const myWorker = new Worker("./worker.js?v=4.12.14");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -4851,9 +4851,9 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
                 $('.panel-active').append('No cached chunk tasks.');
             }
         }
-        $('label.checkbox').addClass('checkbox--disabled');
-        $('span.checkbox__input > input').attr('disabled', true);
-        $('span.burger').remove();
+        $('.panel-active label.checkbox').addClass('checkbox--disabled');
+        $('.panel-active span.checkbox__input > input').attr('disabled', true);
+        $('.panel-active span.burger').remove();
         changeChallengeColor();
     } else {
         (challengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();

@@ -313,7 +313,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             monster = item.split('^')[1];
             item = item.split('^')[0];
         }
-        if (!tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^') && baseChunkData['monsters'].hasOwnProperty(monster)))) {
+        if (!tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
             if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
                 !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return source === monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') }).forEach(source => {
                     delete baseChunkData['items'][item][source];
@@ -348,7 +348,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
                 delete baseChunkData['items'][item];
             }
-        } else if (tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + asterisk)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^') && baseChunkData['monsters'].hasOwnProperty(monster)))) {
+        } else if (tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + asterisk)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
             if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
                 if ((chunkInfo['drops'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))) || (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) {
                     if (!baseChunkData['items'].hasOwnProperty(item)) {
@@ -1075,7 +1075,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 monster = item.split('^')[1];
                 item = item.split('^')[0];
             }
-            if (!tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^') && baseChunkData['monsters'].hasOwnProperty(monster)))) {
+            if (!tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
                 if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
                     !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return source === monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') }).forEach(source => {
                         delete baseChunkData['items'][item][source];
@@ -1110,7 +1110,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
                     delete baseChunkData['items'][item];
                 }
-            } else if (tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + asterisk)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^') && baseChunkData['monsters'].hasOwnProperty(monster)))) {
+            } else if (tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + asterisk)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
                 if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
                     if ((chunkInfo['drops'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))) || (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) {
                         if (!baseChunkData['items'].hasOwnProperty(item)) {
@@ -2261,7 +2261,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         }
                     });
                 }
-                if (!drops[item] && !!dropRatesGlobal[realSource] && !!dropRatesGlobal[realSource][item] && !dropTables.hasOwnProperty(item)) {
+                if (!drops[item] && !!dropRatesGlobal[realSource] && !!dropRatesGlobal[realSource][item] && !dropTables.hasOwnProperty(item) && !item.includes('^')) {
                     drops[item] = true;
                     valids['Extra'][realSource.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + dropRatesGlobal[realSource][item].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'] = 'Every Drop';
                     if (!chunkInfo['challenges']['Extra']) {
@@ -3505,11 +3505,13 @@ var calcBIS = function() {
                     article = item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' ? ' ' : article;
                     if (!!globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~']) {
                         globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + '/' + globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'];
-                        if (slot === '2h') {
-                            highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
-                            highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
-                        } else {
-                            highestOverall[skill.replaceAll(' ', '_') + '-' + slot] = item;
+                        if (Object.values(highestOverall).includes(item)) {
+                            if (slot === '2h') {
+                                highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
+                                highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
+                            } else {
+                                highestOverall[skill.replaceAll(' ', '_') + '-' + slot] = item;
+                            }
                         }
                     } else {
                         globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + ' BiS ' + slot;
