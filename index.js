@@ -986,7 +986,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.11");
+const myWorker = new Worker("./worker.js?v=4.12.12");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -5514,47 +5514,35 @@ var checkOffChallenges = function() {
         }
     });
     !!challengeArr && challengeArr.forEach(line => {
-        if (line !== "No current chunk tasks." && $(line).find('input').prop('checked')) {
-            $(line).attr('class').split(/\s+/).filter(cl => { return cl.includes('-challenge') }).forEach(cl => {
-                if (cl.includes('BiS-')) {
-                    let skillLine = cl;
-                    if ($('.' + skillLine + ' input').prop('checked')) {
+        if (line !== "No current chunk tasks.") {
+            if ($('.' + $(line).attr('class').trim().split(' ').join('.') + ' input:checked').length > 0) {
+                $(line).attr('class').split(/\s+/).filter(cl => { return cl.includes('-challenge') }).forEach(cl => {
+                    if (cl.includes('BiS-')) {
+                        let skillLine = cl;
                         $('.panel-active > .' + skillLine).addClass('hide-backlog');
                         if (!checkedChallenges['BiS']) {
                             checkedChallenges['BiS'] = {};
                         }
                         checkedChallenges['BiS'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
-                    } else {
-                        $('.panel-active > .' + skillLine).removeClass('hide-backlog');
-                    }
-                } else if (cl.includes('Quest-')) {
-                    let skillLine = cl;
-                    if ($('.' + skillLine + ' input').prop('checked')) {
+                    } else if (cl.includes('Quest-')) {
+                        let skillLine = cl;
                         $('.panel-active > .' + skillLine).addClass('hide-backlog');
                         if (!checkedChallenges['Quest']) {
                             checkedChallenges['Quest'] = {};
                         }
                         let questStepName = '~|' + $(line).find('a.link').text() + '|~' + ($(line).find('a.internal-link').length ? $(line).find('a.internal-link').text().replaceAll('step ', '').replaceAll('  ', ' ') : ' ' + $(line).text().split(': ')[1].trim());
                         checkedChallenges['Quest'][questStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')] = true;
-                    } else {
-                        $('.panel-active > .' + skillLine).removeClass('hide-backlog');
-                    }
-                } else if (cl.includes('Diary-')) {
-                    let skillLine = cl;
-                    if ($('.' + skillLine + ' input').prop('checked')) {
+                    } else if (cl.includes('Diary-')) {
+                        let skillLine = cl;
                         $('.panel-active > .' + skillLine).addClass('hide-backlog');
                         if (!checkedChallenges['Diary']) {
                             checkedChallenges['Diary'] = {};
                         }
                         let diaryStepName = '~|' + $(line).find('a.link').text() + '|~' + ($(line).find('a.internal-link').length ? $(line).find('a.internal-link').text().replaceAll('  ', ' ') : ' ' + $(line).text().split(': ')[1].trim());
                         checkedChallenges['Diary'][diaryStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')] = true;
-                    } else {
-                        $('.panel-active > .' + skillLine).removeClass('hide-backlog');
-                    }
-                } else if (cl.includes('Extra-')) {
-                    let skillLine = cl;
-                    if ($('.' + skillLine + ' input').prop('checked')) {
-                        $('.panel-active > .' + skillLine).addClass('hide-backlog');
+                    } else if (cl.includes('Extra-')) {
+                        let skillLine = cl;
+                            $('.panel-active > .' + skillLine).addClass('hide-backlog');
                         if (!checkedChallenges['Extra']) {
                             checkedChallenges['Extra'] = {};
                         }
@@ -5563,11 +5551,11 @@ var checkOffChallenges = function() {
                         } else {
                             checkedChallenges['Extra'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
                         }
-                    } else {
-                        $('.panel-active > .' + skillLine).removeClass('hide-backlog');
                     }
-                }
-            });
+                });
+            } else {
+                $('.panel-active .' + $(line).attr('class').trim().split(' ').join('.')).removeClass('hide-backlog');
+            }
         }
     });
     changeChallengeColor();
