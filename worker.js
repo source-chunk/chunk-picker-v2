@@ -329,7 +329,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     dropTablesGlobal[monster][item + asterisk] = JSON.parse(JSON.stringify(dropTablesGlobal[monster][item]));
                     delete dropTablesGlobal[monster][item];
                 }
-            } else if (asterisk.includes('^') && monster === '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
+            } else if (asterisk.includes('^') && monster === '') {
                 baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
                 delete baseChunkData['items'][item];
                 !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item) }).forEach(monster => {
@@ -364,7 +364,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         delete dropTablesGlobal[monster][item + asterisk];
                     }
                 }
-            } else if (asterisk.includes('^') && monster === '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
+            } else if (asterisk.includes('^') && monster === '') {
                 baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk])));
                 delete baseChunkData['items'][item + asterisk];
                 !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item + asterisk) }).forEach(monster => {
@@ -1091,7 +1091,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         dropTablesGlobal[monster][item + asterisk] = JSON.parse(JSON.stringify(dropTablesGlobal[monster][item]));
                         delete dropTablesGlobal[monster][item];
                     }
-                } else if (asterisk.includes('^') && monster === '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
+                } else if (asterisk.includes('^') && monster === '') {
                     baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
                     delete baseChunkData['items'][item];
                     !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item) }).forEach(monster => {
@@ -1126,7 +1126,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                             delete dropTablesGlobal[monster][item + asterisk];
                         }
                     }
-                } else if (asterisk.includes('^') && monster === '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
+                } else if (asterisk.includes('^') && monster === '') {
                     baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk])));
                     delete baseChunkData['items'][item + asterisk];
                     !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item + asterisk) }).forEach(monster => {
