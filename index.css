@@ -1864,6 +1864,10 @@ button.menu2 {
     right: 3%;
 }
 
+.burger.hidden-burger {
+    display: none;
+}
+
 .burger:hover {
     color: gray;
 }
