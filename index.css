@@ -1868,6 +1868,10 @@ button.menu2 {
     display: none;
 }
 
+.panel-completed .arrow.hidden-burger {
+    display: none;
+}
+
 .burger:hover {
     color: gray;
 }
