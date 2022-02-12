@@ -975,6 +975,7 @@ let patreonMaps = {
     'kaa': true, // Chagohod
     'jlo': true, // JLo
     'pri': true, // invalidCards
+    'mory': true, // Pearion
 };
 
 let roll5Mid = 'rfr'; //Semanari
@@ -986,7 +987,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.16");
+const myWorker = new Worker("./worker.js?v=4.12.17");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);

@@ -344,11 +344,12 @@ var calcChallenges = function(chunks, baseChunkData) {
                         delete dropTablesGlobal[monster][item];
                     }
                 });
-            } else {
+            } else if (!asterisk.includes('^')) {
                 baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
                 delete baseChunkData['items'][item];
             }
         } else if (tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + asterisk)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
+            item === 'Bones' && console.log('3');
             if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
                 if ((chunkInfo['drops'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))) || (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) {
                     if (!baseChunkData['items'].hasOwnProperty(item)) {
@@ -379,7 +380,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         delete dropTablesGlobal[monster][item + asterisk];
                     }
                 });
-            } else {
+            } else if (!asterisk.includes('^')) {
                 baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk])));
                 delete baseChunkData['items'][item + asterisk];
             }
@@ -1106,7 +1107,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                             delete dropTablesGlobal[monster][item];
                         }
                     });
-                } else {
+                } else if (!asterisk.includes('^')) {
                     baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
                     delete baseChunkData['items'][item];
                 }
@@ -1141,7 +1142,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                             delete dropTablesGlobal[monster][item + asterisk];
                         }
                     });
-                } else {
+                } else if (!asterisk.includes('^')) {
                     baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk])));
                     delete baseChunkData['items'][item + asterisk];
                 }
