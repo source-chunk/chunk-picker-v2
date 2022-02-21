@@ -50,7 +50,7 @@ body::-webkit-scrollbar {
 }
 
 * {
-    font-family: 'Calibri', 'Arial', sans-serif;
+    font-family: 'Calibri', 'Roboto', sans-serif;
 }
 
 body {
@@ -804,6 +804,7 @@ button.menu2 {
 }
 
 .label {
+    font-family: 'Calibri', 'Roboto Condensed', sans-serif;
     pointer-events: none;
     color: white;
     margin: auto;
