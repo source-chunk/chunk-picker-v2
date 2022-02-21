@@ -999,7 +999,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.20");
+const myWorker = new Worker("./worker.js?v=4.12.21");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -4767,7 +4767,7 @@ var submitSticker = function() {
             stickeredNotes[id] = $('#sticker-notes-data > textarea').val();
             stickeredColors[id] = $('.sticker-color-picker').val();
         }
-    } else {
+    } else if (!!id && id.length > 0) {
         $('.box#' + id).children('.chunk-sticker').remove();
         delete stickered[id];
         delete stickeredNotes[id];
