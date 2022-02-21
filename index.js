@@ -672,7 +672,7 @@ let settingNames = {
     "walkableRollable": "Only automatically mark <b class='noscroll'>walkable</b> chunks",
     "cinematicRoll": "Enable fancier rolling of chunks",
     "taskSidebar": "Expand the task panel into a large sidebar, to show more tasks at once",
-    "ids": "Show an overlay of Chunk ID's for each chunk",
+    "ids": "<b class='noscroll'>#Temporarily Disabled#</b> Show an overlay of Chunk ID's for each chunk",
     "startingChunk": "Starting Chunk",
 };                                                                              // Descriptions of the settings
 
@@ -999,7 +999,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.21");
+const myWorker = new Worker("./worker.js?v=4.12.22");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
