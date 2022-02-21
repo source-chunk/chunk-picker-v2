@@ -61,6 +61,7 @@ var prevValueMid2 = '';                                                         
 var prevValuePinOld2 = '';                                                      // Previous value of pin at pin change
 var prevValuePinOld2Second = '';                                                // Previous valye of pin 2 at pin change
 var prevValueMidFriend = '';                                                    // Previous value of map id at friend change
+var prevStartingChunkValue = '';                                                // Previous value of starting chunk id
 var mid;                                                                        // Current value of map id
 var pin;                                                                        // Current value of pin
 var savedPin;                                                                   // Pin saved off from entry
@@ -81,7 +82,9 @@ var highscoreMenuOpen = false;                                                  
 var helpMenuOpen = false;                                                       // Is the help menu open
 var helpMenuOpenSoon = false;                                                   // Will the help menu be opened once logged in
 var patchNotesOpen = false;                                                     // Are the patch notes open
-var patchNotesOpenSoon = false;                                                 // Will the patche notes be opened once logged in
+var patchNotesOpenSoon = false;                                                 // Will the patch notes be opened once logged in
+var mapIntroOpen = false;                                                       // Is the map intro modal open
+var mapIntroOpenSoon = false;                                                   // Will the map intro be opened once logged in
 var signedIn = false;                                                           // Is the user signed in
 var filterByChecked = false;                                                    // Are we filtering by checked only
 var filterByCheckedEquipment = false;                                           // Are we filtering equipment by checked only
@@ -322,6 +325,7 @@ let rules = {
     "All Droptables": false,
     "F2P": false,
     "Fill Stash": false,
+    "Herblore Unlocked Exception": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -395,6 +399,7 @@ let ruleNames = {
     "All Droptables": "Must obtain every drop from every unique monster's droptable <span class='rule-asterisk noscroll'>†</span>",
     "F2P": "Restrict to F2P skills/items/tasks only",
     "Fill Stash": "Must build and fill S.T.A.S.H. units as soon as you're able to",
+    "Herblore Unlocked Exception": "Unlock Herblore immediately without Druidic Ritual (for accounts that make exceptions and complete the quest outside their chunks)",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -570,7 +575,8 @@ let ruleStructure = {
     },
     "Herblore": {
         "Herblore Unlocked Snake Weed": true,
-        "Herblore Unlocked": true
+        "Herblore Unlocked": true,
+        "Herblore Unlocked Exception": true
     },
     "Hunter": {
         "Puro-Puro": ["Extra implings"],
@@ -646,6 +652,7 @@ let settings = {
     "cinematicRoll": true,
     "taskSidebar": false,
     "ids": false,
+    "startingChunk": '',
 };                                                                              // Current state of all settings
 
 let settingNames = {
@@ -666,6 +673,7 @@ let settingNames = {
     "cinematicRoll": "Enable fancier rolling of chunks",
     "taskSidebar": "Expand the task panel into a large sidebar, to show more tasks at once",
     "ids": "Show an overlay of Chunk ID's for each chunk",
+    "startingChunk": "Starting Chunk",
 };                                                                              // Descriptions of the settings
 
 let settingStructure = {
@@ -684,6 +692,7 @@ let settingStructure = {
         "chunkTasks": ["taskSidebar"]
     },
     "Customization": {
+        "startingChunk": true,
         "ids": true,
         "cinematicRoll": true,
         "highvis": true,
@@ -962,6 +971,9 @@ let highestTab;
 let highestTab2;
 let dropRatesGlobal = {};
 let oldSavedChallengeArr = [];
+let introRollSelected = false;
+let introFancySelected = false;
+let introDarkSelected = false;
 let currentVersion = '4.12.8';
 
 // Patreon Test Server Data
@@ -987,7 +999,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.18");
+const myWorker = new Worker("./worker.js?v=4.12.19");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1375,8 +1387,7 @@ $(document).ready(function() {
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 $('body').on('touchstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen) {
-        ev.preventDefault();
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen) {
         clickX = ev.changedTouches[0].pageX;
         clickY = ev.changedTouches[0].pageY;
     }
@@ -1384,8 +1395,7 @@ $('body').on('touchstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 $('body').on('touchend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen) {
-        ev.preventDefault();
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -1393,8 +1403,7 @@ $('body').on('touchend', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
 $('body').on('touchmove', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen) {
-        ev.preventDefault();
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen) {
         updateScrollPos(ev.changedTouches[0]);
     }
 });
@@ -1405,7 +1414,7 @@ $('body').on('scroll mousewheel DOMMouseScroll', function(e) {
     if (!e.target.className || typeof e.target.className !== 'string' || e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
         $('body').scrollTop(0);
         return;
-    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || e.target.className.split(' ').includes('noscrollhard')) {
+    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || e.target.className.split(' ').includes('noscrollhard')) {
         e.preventDefault();
         return;
     }
@@ -1491,7 +1500,7 @@ $(document).on({
             locked && $('.open-manual-outer-container').css('opacity', 0).hide();
             loadData();
             $('.test-hint').hide();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen) {
             e.preventDefault();
         }
     }
@@ -1505,7 +1514,7 @@ $(document).on('mouseleave', '.recent', function() {
 // Handles dragging and clicks
 $(document).on({
     'mousemove': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
             return;
         }
         if (clicked) {
@@ -1526,7 +1535,7 @@ $(document).on({
         }
     },
     'mousedown': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen) {
+        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
             return;
         }
         clicked = true;
@@ -1551,7 +1560,7 @@ $(document).on({
             $(".backlog-context-menu").hide(100);
         }
         let tempClicked = clicked;
-        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen) {
+        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
             return;
         } else if (e.button === 2) {
             if ($(e.target).hasClass('box')) {
@@ -1633,7 +1642,7 @@ $(document).on({
                     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
                     !onMobile && setCalculating('.panel-areas');
                     !onMobile && setCalculating('.panel-completed');
-                    !onMobile && calcCurrentChallenges();
+                    calcCurrentChallenges();
                 }
             } else if ($(e.target).hasClass('potential')) {
                 let savedNum = $($(e.target).children('.label')).text();
@@ -1704,7 +1713,7 @@ $(document).on({
                 !onMobile && !activeSubTabs['quest'] && expandActive('quest');
                 !onMobile && !activeSubTabs['diary'] && expandActive('diary');
                 !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-                !onMobile && calcCurrentChallenges();
+                calcCurrentChallenges();
             } else if ($(e.target).hasClass('recent')) {
                 // ----
             } else if ($(e.target).hasClass('blacklisted')) {
@@ -1717,7 +1726,7 @@ $(document).on({
                 !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
                 !onMobile && setCalculating('.panel-areas');
                 !onMobile && setCalculating('.panel-completed');
-                !onMobile && calcCurrentChallenges();
+                calcCurrentChallenges();
             }
             if (isPicking) {
                 $('.pick').text('Pick for me');
@@ -1778,7 +1787,7 @@ var zoomButton = function(dir) {
 
 // Pick button: picks a random chunk from selected/potential
 var pick = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1865,7 +1874,7 @@ var pick = function(both) {
         !onMobile && !activeSubTabs['quest'] && expandActive('quest');
         !onMobile && !activeSubTabs['diary'] && expandActive('diary');
         !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-        !onMobile && calcCurrentChallenges();
+        calcCurrentChallenges();
         setData();
         chunkBorders();
         if (el.length < 300) {
@@ -1990,7 +1999,7 @@ var pick = function(both) {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2 = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -2281,6 +2290,121 @@ var dismissPatchNotes = function() {
     !locked && setData();
 }
 
+// Opens the map intro modal
+var openMapIntroModal = function(justStartingChunk) {
+    if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
+        mapIntroOpen = true;
+        $('.intro-data-2').hide();
+        $('#cancel-intro-button').hide();
+        $('#myModal29').show();
+        justStartingChunk && nextIntroPage(justStartingChunk);
+    }
+}
+
+// Exits the map intro modal
+var closeMapIntroModal = function() {
+    $('#myModal29').hide();
+    mapIntroOpen = false;
+    mapIntroOpenSoon = false;
+    settings['mapIntro'] = true;
+    removeStartingChunk();
+    settings['startingChunk'] = prevStartingChunkValue;
+    !locked && setData();
+    settingsModalOpen && showSettings(true);
+    setStartingChunk();
+}
+
+// Next page in intro modal
+var nextIntroPage = function(justStartingChunk) {
+    if ($('.intro-data-1').is(":visible") || justStartingChunk) {
+        $('.intro-data-1').hide();
+        $('.intro-data-2').show();
+        $('#submit-intro-button').text('All Done!').prop('disabled', true);
+        $('#starting-chunk-input').val((settings['startingChunk'] === '0000' || settings['startingChunk'] === '00000') ? '' : settings['startingChunk']);
+        !justStartingChunk && $('#cancel-intro-button').show();
+        checkStartingChunkFormat();
+    } else {
+        closeMapIntroModal();
+    }
+}
+
+// Previous page in intro modal
+var previousIntroPage = function() {
+    if ($('.intro-data-2').length) {
+        $('.intro-data-2').hide();
+        $('.intro-data-1').show();
+        $('#submit-intro-button').text('Next');
+        $('#cancel-intro-button').hide();
+        checkIntroPage1();
+    }
+}
+
+// Handles selecting roll
+var handleRoll = function(self) {
+    settings['roll2'] = (self.value === 'roll2');
+    introRollSelected = true;
+    checkIntroPage1();
+    toggleRoll2(settings['roll2']);
+}
+
+// Handles selecting fancy
+var handleFancy = function(self) {
+    settings['cinematicRoll'] = (self.value === 'fancy');
+    introFancySelected = true;
+    checkIntroPage1();
+}
+
+// Handles selecting color scheme
+var handleDark = function(self) {
+    settings['darkmode'] = (self.value === 'dark');
+    introDarkSelected = true;
+    checkIntroPage1();
+    toggleDarkMode(settings['darkmode']);
+}
+
+// Checks if intro page 1 is valid to move on
+var checkIntroPage1 = function() {
+    $('#submit-intro-button').prop('disabled', !(introRollSelected && introFancySelected && introDarkSelected));
+}
+
+// Verifies starting chunk is valid format
+var checkStartingChunkFormat = function() {
+    if (!$('#starting-chunk-input').val().match(/^[0-9]*$/i) || $('#starting-chunk-input').val().length > 5) {
+        $('#starting-chunk-input').val(prevStartingChunkValue);
+        if ($('#starting-chunk-input').val().length !== 5 && $('#starting-chunk-input').val().length !== 4) {
+            $('#submit-intro-button').prop('disabled', true);
+        } else {
+            $('#submit-intro-button').prop('disabled', false);
+        }
+    } else {
+        if ($('#starting-chunk-input').val().length !== 5 && $('#starting-chunk-input').val().length !== 4) {
+            prevStartingChunkValue = $('#starting-chunk-input').val();
+            $('#submit-intro-button').prop('disabled', true);
+        } else {
+            prevStartingChunkValue = $('#starting-chunk-input').val();
+            $('#submit-intro-button').prop('disabled', false);
+        }
+    }
+}
+
+// Removes the starting chunk on the map
+var removeStartingChunk = function() {
+    if (settings['startingChunk'] !== '0000' && settings['startingChunk'] !== '00000') {
+        savedStickerId = settings['startingChunk'];
+        savedStickerSticker = 'unset';
+        submitSticker();
+    }
+}
+
+// Sets the starting chunk on the map
+var setStartingChunk = function() {
+    if (settings['startingChunk'] !== '0000' && settings['startingChunk'] !== '00000') {
+        savedStickerId = settings['startingChunk'];
+        savedStickerSticker = '1st';
+        submitSticker();
+    }
+}
+
 // Confirms if the pin entered is correct for the current map id
 var checkPin = function() {
     savedPin = $('.lock-pin').val();
@@ -2318,7 +2442,8 @@ var unlockEntry = function() {
                         inEntry = false;
                         helpMenuOpenSoon && helpFunc();
                         patchNotesOpenSoon && openPatchNotesModal();
-                        !onMobile && unlockChallenges();
+                        mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
+                        unlockChallenges();
                     }, 500);
                 }).catch((error) => {
                     $('.pin.entry').addClass('animated shake wrong').select();
@@ -2366,7 +2491,8 @@ var unlockEntry = function() {
                                 inEntry = false;
                                 helpMenuOpenSoon && helpFunc();
                                 patchNotesOpenSoon && openPatchNotesModal();
-                                !onMobile && unlockChallenges();
+                                mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
+                                unlockChallenges();
                             }, 500);
                         }).catch((error) => {
                             $('.pin.entry').addClass('animated shake wrong').select();
@@ -2478,6 +2604,7 @@ var accessMap = function() {
                             locked = false;
                             helpMenuOpenSoon && helpFunc();
                             patchNotesOpenSoon && openPatchNotesModal();
+                            mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
                             atHome = false;
                             $('.loading').show();
                             $('#page2b').hide();
@@ -2525,6 +2652,7 @@ var accessMap = function() {
                                     locked = false;
                                     helpMenuOpenSoon && helpFunc();
                                     patchNotesOpenSoon && openPatchNotesModal();
+                                    mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
                                     myRef = firebase.database().ref('maps/' + mid);
                                     atHome = false;
                                     $('.loading').show();
@@ -2624,7 +2752,7 @@ var changePin = function() {
 
 // Unpicks a random unlocked chunk
 var unpick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || $('.unlocked').length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || $('.unlocked').length < 1) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -2884,17 +3012,26 @@ var toggleChallengesPanel = function(pnl) {
 // Once page has loaded, page is centered and initial chunks are selected/unlocked (from url)
 var doneLoading = function() {
     if (onMobile) {
+        $('.modal, .entry-content, .menu9, .menu9 .accordion, .menu9 .panel, .modal-content, .open-rules-container, .help-content').addClass('mobile');
         $('.center').css({ 'height': '40px', 'width': '90px', 'font-size': '12px' });
         $('.pick, .roll2, .unpick').css({ 'height': '20px', 'width': '90px', 'font-size': '12px' });
-        $('.menu2, .menu6, .menu7, .menu8, .menu9, .menu10, .settings, .gohighscore, .gobugreport, .godiscord, .gopatreon, .godocumentation, .gosearch, .hiddenInfo, .help-button, .toptitle2-outer').hide().remove();
-        $('.hr').css({ 'width': '25px' });
-        $('.gohighscore').css({ 'right': '3vw', 'left': 'auto' });
-        $('.block, .block > .title').css({ 'font-size': '18px' });
-        $('.block > button').css({ 'font-size': '10px' });
-        $('.menu3').css({ 'width': '110px', 'height': '15px' });
-        $('#chunkInfo1, #chunkInfo2, .or').css({ 'font-size': '12px' });
+        $('.gohighscore, .gobugreport, .godiscord, .gopatreon, .godocumentation, .gosearch, .hiddenInfo, .help-button, .gohome, .about-button, .open-manual-outer-container, .open-complete-container').hide().remove();
+        $('.menu2, .menu6, .menu7, .menu8, .menu9, .menu10, .settings').hide();
+        $('.hr').css({ 'width': '10vw' });
+        $('.block, .block > .title, .block button').css({ 'font-size': '5vw' });
+        $('.menu3').css({ 'width': '110px', 'height': '15px', 'bottom': '30px' });
+        $('#chunkInfo1, #chunkInfo2').css({ 'font-size': '12px' });
+        $('.or').css({ 'font-size': '4vw' });
+        $('.block > .description').css({ 'font-size': '4vw' });
+        $('.block .pin.entry').css({ 'font-size': '5vw', 'width': '60%' });
+        $('.lock-pin').css({ 'font-size': '3vw', 'width': '100%' });
+        $('#lock-unlock').css({ 'padding': '0' });
+        $('.gomobiletasks').show();
+        $('#unlock-entry').height('4vh');
         $('.box').addClass('mobile').css({ 'min-height': '96px', 'min-width': '96px', 'max-height': '96px', 'max-width': '96px' });
         center('quick');
+    } else {
+        $('.gomobiletasks').hide();
     }
     $('.potential > .label').css('color', 'black');
     $('.loading').fadeOut(1000);
@@ -2945,8 +3082,17 @@ var setupMap = function() {
         if (mid === 'jvb') { // Chunky Boys
             $('.toptitle2').text('(not a sponsor)');
         }
-        !onMobile && toggleChallengesPanel('active');
+        toggleChallengesPanel('active');
         loadData(true);
+    }
+}
+
+// Toggles the tasks window on mobile
+var openMobileTasks = function() {
+    if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        $('.menu9').toggle();
+        $('.gomobiletasks').toggleClass('fa-tasks').toggleClass('fa-map');
+        $('.gomobiletasks').attr('title', $('.gomobiletasks').hasClass('fa-tasks') ? 'Tasks' : 'Map');
     }
 }
 
@@ -3723,7 +3869,7 @@ var removeRandomLoot = function(item) {
             $('#randomlist-data').append(`<div class="noscroll results"><span class="noscroll">No items</span></div>`);
         }
         !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        !onMobile && calcCurrentChallenges();
+        calcCurrentChallenges();
         setData();
     }
 }
@@ -3749,7 +3895,7 @@ var addRandomLoot = function(close) {
             if (loot !== '') {
                 randomLoot[loot] = true;
                 !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                !onMobile && calcCurrentChallenges();
+                calcCurrentChallenges();
                 setData();
             }
             $('#myModal6').hide();
@@ -3825,7 +3971,7 @@ var takeMeToChunk = function() {
     rollChunkModalOpen = false;
     scrollToPos(parseInt($('.box.recent').attr('id')) % rowSize, Math.floor(parseInt($('.box.recent').attr('id')) / rowSize), 0, 0, false);
     $('.recent').removeClass('recent');
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
     $('.roll-chunk-title').text('Rolling your next chunk...');
     $('.roll-chunk-subtitle').text('');
     $('.roll-chunk-outer').empty().css('top', '0');
@@ -3927,7 +4073,7 @@ var addSlayerLocked = function(close) {
                 slayerLocked['monster'] = task;
                 slayerLocked['level'] = level;
                 !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                !onMobile && calcCurrentChallenges();
+                calcCurrentChallenges();
                 setData();
             }
             $('#myModal22').hide();
@@ -4031,7 +4177,7 @@ var checkOffMonster = function(monster, type) {
     }
     setData();
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
 }
 
 // Opens the manual add tasks modal
@@ -4111,7 +4257,7 @@ var addManualTask = function(challenge) {
         }
     });
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
 }
 
 // Opens the manual complete tasks modal
@@ -4395,7 +4541,7 @@ var addPassiveSkill = function(close, skill) {
             }
             passiveSkill[skill] = level;
             !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-            !onMobile && calcCurrentChallenges();
+            calcCurrentChallenges();
             setData();
             $('#myModal28').hide();
             passiveSkillModalOpen = false;
@@ -4408,7 +4554,7 @@ var unlockSlayer = function() {
     slayerLocked = null;
     setData();
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
 }
 
 // Checks if slayer locked monster is unlocked
@@ -4463,7 +4609,7 @@ var addManualEquipment = function(equip) {
     }
     setData();
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
 }
 
 // Opens the backlog sources modal
@@ -4558,7 +4704,7 @@ var backlogManualSource = function(category, source) {
     }
     setData();
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
 }
 
 // Opens the sticker menu
@@ -4595,6 +4741,7 @@ var openStickers = function(id) {
     }
 }
 
+// Submits the sticker modal
 var submitSticker = function() {
     let id = savedStickerId;
     let sticker = savedStickerSticker;
@@ -4605,19 +4752,26 @@ var submitSticker = function() {
             $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').remove();
         }
         if (stickerChoices.includes(sticker)) {
-            $('.box > .chunkId:contains(' + id + ')').parent().append(`<span style='color:${$('.sticker-color-picker').val()}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${sticker}" style="transform: scaleX(-1)"></i>${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
+            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span style='color:${$('.sticker-color-picker').val()}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${sticker}" style="transform: scaleX(-1)"></i>${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
         } else if (stickerChoicesOsrs.includes(sticker)) {
-            $('.box > .chunkId:contains(' + id + ')').parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${sticker}-osrs.svg">${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
+            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${sticker}-osrs.svg">${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
         }
-        stickered[id] = sticker;
-        stickeredNotes[id] = $('#sticker-notes-data > textarea').val();
-        stickeredColors[id] = $('.sticker-color-picker').val();
+        if (sticker === '1st') {
+            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span style='color:#00FF00' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-flag" style="transform: scaleX(-1)"></i><span class="tooltiptext-sticker">${"Starting Chunk"}</span></span>`);
+            stickered[id] = 'flag';
+            stickeredNotes[id] = 'Starting Chunk';
+            stickeredColors[id] = '#00FF00';
+        } else {
+            stickered[id] = sticker;
+            stickeredNotes[id] = $('#sticker-notes-data > textarea').val();
+            stickeredColors[id] = $('.sticker-color-picker').val();
+        }
     } else {
         $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').remove();
         delete stickered[id];
         delete stickeredNotes[id];
         delete stickeredColors[id];
-        $('.box > .chunkId:contains(' + id + ')').parent().append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${id})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
+        $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${id})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
     }
     $('.chunk-sticker').css('font-size', fontZoom * (3 / 2) + 'px');
     $('.chunk-sticker > img').parent().css('width', fontZoom * (3 / 2) + 'px');
@@ -5078,8 +5232,14 @@ var showDetails = function(challenge, skill, type) {
     }
     chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Description']}</i></span><br />`);
     detailsKeys.forEach(key => {
+        let type = key.split('Details')[0].toLowerCase();
         let written = false;
-        $('#details-data').append(`<span class="details-subtitle noscroll"><u class="noscroll"><b class="noscroll">${key.split('Details')[0].toLowerCase()}</b></u></span><br />`);
+        $('#details-data').append(`<span class="details-subtitle noscroll"><u class="noscroll"><b class="noscroll">${type}</b></u></span><br />`);
+        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]]) {
+            chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]].forEach(typeEl => {
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].push(typeEl);
+            });
+        }
         !!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
             let formattedSource = '';
             if (key === 'ChunksDetails') {
@@ -5088,49 +5248,106 @@ var showDetails = function(challenge, skill, type) {
                 } else if (possibleAreas[el]) {
                     formattedSource = '   ';
                 }
-            } else if (!!baseChunkDataIn[key.split('Details')[0].toLowerCase()]) {
+            } else if (!!baseChunkDataIn[type]) {
+                let els = [];
                 formattedSource = ': ';
-                !!baseChunkDataIn[key.split('Details')[0].toLowerCase()][el] && Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).forEach(source => {
-                    if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] !== 'string' || !processingSkill[baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].split('-')[1]]))) {
-                        if (typeof baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] === "boolean" || !skills.includes(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].split('-')[1])) {
-                            if (chunkInfo['chunks'].hasOwnProperty(source)) {
-                                let realName = source;
-                                if (!!chunkInfo['chunks'][source]['Name']) {
-                                    realName = chunkInfo['chunks'][source]['Name'];
-                                } else if (!!chunkInfo['chunks'][source]['Nickname']) {
-                                    realName = chunkInfo['chunks'][source]['Nickname'] + '(' + source + ')';
+                if (!!chunkInfo['codeItems'][type + 'Plus'] && !!chunkInfo['codeItems'][type + 'Plus'][el]) {
+                    let validElem = false;
+                    chunkInfo['codeItems'][type + 'Plus'][el].forEach(elem => {
+                        if (!!baseChunkDataIn[type][elem]) {
+                            els.push(elem);
+                            validElem = true;
+                        }
+                    });
+                    !validElem && els.push(el);
+                    $('#details-data').append(`<span class="noscroll"><b class="noscroll">${chunkInfo['codeItems'][type + 'PlusNames'][el].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}:</b></span></br />`);
+                    els.length > 0 && els.forEach(element => {
+                        formattedSource = ': ';
+                        !!baseChunkDataIn[type][element] && Object.keys(baseChunkDataIn[type][element]).forEach(source => {
+                            if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][element][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][element][source] !== 'string' || !processingSkill[baseChunkDataIn[type][element][source].split('-')[1]]))) {
+                                if (typeof baseChunkDataIn[type][element][source] === "boolean" || !skills.includes(baseChunkDataIn[type][element][source].split('-')[1])) {
+                                    if (chunkInfo['chunks'].hasOwnProperty(source)) {
+                                        let realName = source;
+                                        if (!!chunkInfo['chunks'][source]['Name']) {
+                                            realName = chunkInfo['chunks'][source]['Name'];
+                                        } else if (!!chunkInfo['chunks'][source]['Nickname']) {
+                                            realName = chunkInfo['chunks'][source]['Nickname'] + '(' + source + ')';
+                                        }
+                                        formattedSource += realName.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '');
+                                    } else {
+                                        let shownSource = source;
+                                        if (shownSource.includes('|')) {
+                                            shownSource = shownSource.split('|')[1].charAt(0).toUpperCase() + shownSource.split('|')[1].slice(1);
+                                        }
+                                        formattedSource += `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(shownSource.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, ''))} target="_blank">${shownSource.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '')}</a>`;
+                                    }
                                 }
-                                formattedSource += realName.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '');
-                            } else {
-                                let shownSource = source;
-                                if (shownSource.includes('|')) {
-                                    shownSource = shownSource.split('|')[1].charAt(0).toUpperCase() + shownSource.split('|')[1].slice(1);
+                                if (typeof baseChunkDataIn[type][element][source] !== "boolean" && skills.includes(baseChunkDataIn[type][element][source].split('-')[1])) {
+                                    formattedSource += baseChunkDataIn[type][element][source].split('-')[1].replaceAll(/\*/g, '');
+                                    formattedSource += ` (${source.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\*/g, '').replaceAll(/\%2H/g, "'")})`
+                                } else if (typeof baseChunkDataIn[type][element][source] !== "boolean" && !baseChunkDataIn[type][element][source].includes('primary') && !baseChunkDataIn[type][element][source].includes('secondary') && !baseChunkDataIn[type][element][source] === 'shop') {
+                                    formattedSource += `-${baseChunkDataIn[type][element][source].replaceAll(/\*/g, '')}`;
+                                } else if (typeof baseChunkDataIn[type][element][source] !== "boolean") {
+                                    formattedSource += ` (${baseChunkDataIn[type][element][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')})`;
                                 }
-                                formattedSource += `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(shownSource.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, ''))} target="_blank">${shownSource.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '')}</a>`;
+                                formattedSource += ', ';
                             }
+                        });
+                        formattedSource = formattedSource.slice(0, -2);
+                        if (!!baseChunkDataIn[type] && !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).length > 10) {
+                            formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + type.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`, `' + element.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[type][el]).length + ')</span>';
                         }
-                        if (typeof baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] !== "boolean" && skills.includes(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].split('-')[1])) {
-                            formattedSource += baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].split('-')[1].replaceAll(/\*/g, '');
-                            formattedSource += ` (${source.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\*/g, '').replaceAll(/\%2H/g, "'")})`
-                        } else if (typeof baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] !== "boolean" && !baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].includes('primary') && !baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].includes('secondary') && !baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] === 'shop') {
-                            formattedSource += `-${baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].replaceAll(/\*/g, '')}`;
-                        } else if (typeof baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source] !== "boolean") {
-                            formattedSource += ` (${baseChunkDataIn[key.split('Details')[0].toLowerCase()][el][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')})`;
+                        if (formattedSource !== '') {
+                            written = true;
+                            $('#details-data').append(`<span class="noscroll"><b class="noscroll"><span class='noscroll special'>-</span> ${element.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><span class="noscroll">${formattedSource}</span><br />`);
+                        } else {
+                            written = true;
+                            $('#details-data').append(`<span class="noscroll red"><b class="noscroll">- None</b></span><br />`);
                         }
-                        formattedSource += ', ';
+                    });
+                } else {
+                    !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).forEach(source => {
+                        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][el][source] !== 'string' || !processingSkill[baseChunkDataIn[type][el][source].split('-')[1]]))) {
+                            if (typeof baseChunkDataIn[type][el][source] === "boolean" || !skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
+                                if (chunkInfo['chunks'].hasOwnProperty(source)) {
+                                    let realName = source;
+                                    if (!!chunkInfo['chunks'][source]['Name']) {
+                                        realName = chunkInfo['chunks'][source]['Name'];
+                                    } else if (!!chunkInfo['chunks'][source]['Nickname']) {
+                                        realName = chunkInfo['chunks'][source]['Nickname'] + '(' + source + ')';
+                                    }
+                                    formattedSource += realName.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '');
+                                } else {
+                                    let shownSource = source;
+                                    if (shownSource.includes('|')) {
+                                        shownSource = shownSource.split('|')[1].charAt(0).toUpperCase() + shownSource.split('|')[1].slice(1);
+                                    }
+                                    formattedSource += `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(shownSource.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, ''))} target="_blank">${shownSource.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '')}</a>`;
+                                }
+                            }
+                            if (typeof baseChunkDataIn[type][el][source] !== "boolean" && skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
+                                formattedSource += baseChunkDataIn[type][el][source].split('-')[1].replaceAll(/\*/g, '');
+                                formattedSource += ` (${source.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\*/g, '').replaceAll(/\%2H/g, "'")})`
+                            } else if (typeof baseChunkDataIn[type][el][source] !== "boolean" && !baseChunkDataIn[type][el][source].includes('primary') && !baseChunkDataIn[type][el][source].includes('secondary') && !baseChunkDataIn[type][el][source] === 'shop') {
+                                formattedSource += `-${baseChunkDataIn[type][el][source].replaceAll(/\*/g, '')}`;
+                            } else if (typeof baseChunkDataIn[type][el][source] !== "boolean") {
+                                formattedSource += ` (${baseChunkDataIn[type][el][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')})`;
+                            }
+                            formattedSource += ', ';
+                        }
+                    });
+                    formattedSource = formattedSource.slice(0, -2);
+                    if (!!baseChunkDataIn[type] && !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).length > 10) {
+                        formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + type.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`, `' + el.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[type][el]).length + ')</span>';
                     }
-                });
-            }
-            formattedSource = formattedSource.slice(0, -2);
-            if (!!baseChunkDataIn[key.split('Details')[0].toLowerCase()] && !!baseChunkDataIn[key.split('Details')[0].toLowerCase()][el] && Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).length > 10) {
-                formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + key.split('Details')[0].toLowerCase().replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`, `' + el.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[key.split('Details')[0].toLowerCase()][el]).length + ')</span>';
-            }
-            if (formattedSource !== '') {
-                written = true;
-                $('#details-data').append(`<span class="noscroll"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><span class="noscroll">${formattedSource}</span><br />`);
-            } else {
-                written = true;
-                $('#details-data').append(`<span class="noscroll red"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><br />`);
+                    if (formattedSource !== '') {
+                        written = true;
+                        $('#details-data').append(`<span class="noscroll"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><span class="noscroll">${formattedSource}</span><br />`);
+                    } else {
+                        written = true;
+                        $('#details-data').append(`<span class="noscroll red"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><br />`);
+                    }
+                }
             }
         });
         if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length === 0 || !written) {
@@ -5179,7 +5396,7 @@ var checkOffAltChallenge = function(skill, chal, mainChal) {
         !!chunkInfo['challenges'][skill][chal] && (altChallenges[skill][chunkInfo['challenges'][skill][chal]['Level']] = chal);
     }
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
     setData();
 }
 
@@ -5239,7 +5456,7 @@ var warnPreset = function(preset) {
 
 // Shows challenge details
 var showRules = function() {
-    if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
+    if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         rulesModalOpen = true;
         $('#rules-data').empty();
         $('#rules-data').append(`<div class="rule-category intro-category noscroll">Basic Rules</div><div class="rule-subcategory intro-subcategory noscroll">If you're unfamiliar with the basic rules of a OneChunkMan account, check out a basic description of the rules and guidelines <a class='noscroll' href='https://docs.google.com/document/d/1ia1wiRSYs8GznzHM5D7SynNG-PWM9-9Jv3JKGV6Y28Q' target='_blank'>here</a>!</div>`);
@@ -5276,7 +5493,7 @@ var showRules = function() {
 }
 
 // Shows settings details
-var showSettings = function() {
+var showSettings = function(keepSettingsClosed) {
     settingsModalOpen = true;
     $('#settings-data').empty();
     Object.keys(settingStructure).forEach(category => {
@@ -5286,6 +5503,8 @@ var showSettings = function() {
                 $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><input class="challenge-color-rule" type="color" value="${settings[setting]}" onchange="changeChallengeColor()" /><i class="fas fa-undo-alt noscroll reset-challenge-color" title="Reset Color" onclick="resetChallengeColor()"></i><span class='noscroll extraspace'>` + settingNames[setting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</span></div>');
             } else if (setting === 'defaultStickerColor') {
                 $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><input class="sticker-color-rule" type="color" value="${settings[setting]}" onchange="changeDefaultStickerColor()" /><i class="fas fa-undo-alt noscroll reset-default-sticker-color" title="Reset Color" onclick="resetDefaultStickerColor()"></i><span class='noscroll extraspace'>` + settingNames[setting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</span></div>');
+            } else if (setting === 'startingChunk') {
+                $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><span class='noscroll'>` + settingNames[setting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `: ${settings[setting]}<i class="fas fa-edit noscroll change-starting-chunk" title="Change Starting Chunk" onclick="openMapIntroModal(${true})"></i></span></div>`);
             } else {
                 $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><label class="checkbox noscroll ${(viewOnly || inEntry || locked || settingStructure[category][setting] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${settings[setting] ? "checked" : ''} class='noscroll' onclick="checkOffSettings()" ${(viewOnly || inEntry || locked || settingStructure[category][setting] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${settingNames[setting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
             }
@@ -5297,7 +5516,7 @@ var showSettings = function() {
     document.getElementById('settings-data').scrollTop = 0;
     checkOffSettings(false, 'startup');
     $('#myModal7').show();
-    settingsMenu();
+    !keepSettingsClosed && settingsMenu();
 }
 
 // Changes the active challenges color
@@ -5453,7 +5672,7 @@ var backlogChallenge = function(challenge, skill, note) {
             });
         }
     }
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
     !onMobile && setupCurrentChallenges(oldChallengeArr);
     !onMobile && checkOffChallenges();
     setData();
@@ -5477,7 +5696,7 @@ var unbacklogChallenge = function(challenge, skill) {
     }
     !onMobile && setupCurrentChallenges(false);
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
     !onMobile && checkOffChallenges();
     setData();
 }
@@ -5500,7 +5719,7 @@ var uncompleteChallenge = function(challenge, skill) {
     }
     !onMobile && setupCurrentChallenges(false);
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
     setData();
 }
 
@@ -5573,7 +5792,7 @@ var checkOffAreas = function(obj, area) {
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
     getChunkAreas();
     setAreas();
-    !onMobile && calcCurrentChallenges();
+    calcCurrentChallenges();
     setData();
 }
 
@@ -5619,7 +5838,7 @@ var checkOffRules = function(didRedo, startup) {
     if (!startup) {
         setupCurrentChallenges(false);
         !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        !onMobile && calcCurrentChallenges();
+        calcCurrentChallenges();
         rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
         !rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
         setData();
@@ -5634,7 +5853,7 @@ var checkOffSettings = function(didRedo, startup) {
             $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').children('.checkbox').children('.checkbox__input').children('input').prop('checked', subSettingDefault[setting]);
             redo = true;
         }
-        if (setting !== 'completedTaskColor' && setting !== 'defaultStickerColor' && settingNames.hasOwnProperty(setting)) {
+        if (setting !== 'completedTaskColor' && setting !== 'defaultStickerColor' && setting !== 'startingChunk' && settingNames.hasOwnProperty(setting)) {
             settings[setting] = $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting input').prop('checked');
         }
         if ($('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').length) {
@@ -5922,8 +6141,12 @@ var loadData = function(startup) {
             if (settingsTemp['chunkTasks'] === undefined) {
                 settingsTemp['chunkTasks'] = true;
             }
-            settingsTemp['help'] && (helpMenuOpenSoon = true);
-            (!settingsTemp['patchNotes'] || (settingsTemp['patchNotes'] !== currentVersion)) && (patchNotesOpenSoon = true);
+            (!settingsTemp['mapIntro'] || (!settingsTemp['startingChunk'] || settingsTemp['startingChunk'] === '0000' || settingsTemp['startingChunk'] === '00000')) && (mapIntroOpenSoon = true);
+            justStartingChunkSet = (settingsTemp['mapIntro'] && (!settingsTemp['startingChunk'] || settingsTemp['startingChunk'] === '0000' || settingsTemp['startingChunk'] === '00000'));
+            if (!mapIntroOpenSoon) {
+                settingsTemp['help'] && (helpMenuOpenSoon = true);
+                (!settingsTemp['patchNotes'] || (settingsTemp['patchNotes'] !== currentVersion)) && (patchNotesOpenSoon = true);
+            }
 
             if (settingsTemp['highscoreEnabled']) {
                 userName = snap.val()['userName'];
@@ -6043,7 +6266,7 @@ var loadData = function(startup) {
             } else {
                 chunkTasksOn && !onMobile && setCalculating('.panel-active');
             }
-            chunkTasksOn && !onMobile && calcCurrentChallenges();
+            chunkTasksOn && calcCurrentChallenges();
             startup && center('quick');
             rulesModalOpen && showRules();
             if (!startup) {
@@ -6105,7 +6328,7 @@ var setData = function() {
                     return;
                 });
             } else {
-                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'randomStartAlways': settings['randomStartAlways'], 'defaultStickerColor': settings['defaultStickerColor'], 'walkableRollable': settings['walkableRollable'], 'cinematicRoll': settings['cinematicRoll'], 'taskSidebar': settings['taskSidebar'] });
+                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'randomStartAlways': settings['randomStartAlways'], 'defaultStickerColor': settings['defaultStickerColor'], 'walkableRollable': settings['walkableRollable'], 'cinematicRoll': settings['cinematicRoll'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'] });
                 Object.keys(rules).forEach(rule => {
                     if (rules[rule] === undefined) {
                         rules[rule] = false;
@@ -6117,6 +6340,9 @@ var setData = function() {
                 }
                 if (!patchNotesOpen && !patchNotesOpenSoon) {
                     myRef.child('settings').update({ 'patchNotes': currentVersion });
+                }
+                if (!mapIntroOpen && !mapIntroOpenSoon) {
+                    myRef.child('settings').update({ 'mapIntro': true });
                 }
                 myRef.update({ recent });
                 myRef.update({ recentTime });
@@ -6181,7 +6407,7 @@ var setData = function() {
         });
     } else if (signedIn && !firebase.auth().currentUser) {
         firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
-            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'] });
+            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'] });
             Object.keys(rules).forEach(rule => {
                 if (rules[rule] === undefined) {
                     rules[rule] = false;
@@ -6193,6 +6419,9 @@ var setData = function() {
             }
             if (!patchNotesOpen && !patchNotesOpenSoon) {
                 myRef.child('settings').update({ 'patchNotes': currentVersion });
+            }
+            if (!mapIntroOpen && !mapIntroOpenSoon) {
+                myRef.child('settings').update({ 'mapIntro': true });
             }
             myRef.update({ recent });
             myRef.update({ recentTime });
@@ -6399,7 +6628,8 @@ var changeLocked = function() {
                         locked = false;
                         helpMenuOpenSoon && helpFunc();
                         patchNotesOpenSoon && openPatchNotesModal();
-                        !onMobile && unlockChallenges();
+                        mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
+                        unlockChallenges();
                         lockBoxOpen = false;
                     }, 500);
                 }).catch((error) => {
@@ -6446,7 +6676,8 @@ var changeLocked = function() {
                                 locked = false;
                                 helpMenuOpenSoon && helpFunc();
                                 patchNotesOpenSoon && openPatchNotesModal();
-                                !onMobile && unlockChallenges();
+                                mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
+                                unlockChallenges();
                                 lockBoxOpen = false;
                             }, 500);
                         }).catch((error) => {

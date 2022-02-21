@@ -349,7 +349,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                 delete baseChunkData['items'][item];
             }
         } else if (tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + asterisk)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
-            item === 'Bones' && console.log('3');
             if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
                 if ((chunkInfo['drops'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))) || (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) {
                     if (!baseChunkData['items'].hasOwnProperty(item)) {
@@ -1674,7 +1673,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             validChallenge = false;
                             wrongThings.push(xItem);
                             nonValids[name] = wrongThings;
-                            chunkInfo['challenges'][skill][name]['ItemsDetails'].push(xItem.replaceAll(/\*/g, ''));
+                            chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                             return;
                         } else {
                             let tempValid = false;
@@ -1683,7 +1682,6 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 if (!!items[plus] && (!chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][name]['NonShop'] || !onlyShop(items[plus]))) {
                                     tempValid = true;
                                     xResults++;
-                                    chunkInfo['challenges'][skill][name]['ItemsDetails'].push(plus);
                                     Object.keys(items[plus]).forEach(source => {
                                         if (xItem.includes('*')) {
                                             if (!items[plus][source].includes('secondary-') || items[plus][source].includes('primary-') || items[plus][source] === 'shop') {
@@ -1709,6 +1707,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 nonValids[name] = wrongThings;
                                 chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                                 return;
+                            } else {
+                                chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                             }
                         }
                     } else {
@@ -1723,7 +1723,6 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             let tempTempValid = false;
                             itemsPlus[item.replaceAll(/\*/g, '')].filter((plus) => { return !!items[plus] && (!chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][name]['NonShop'] || !onlyShop(items[plus])) }).forEach(plus => {
                                 tempValid = true;
-                                chunkInfo['challenges'][skill][name]['ItemsDetails'].push(plus);
                                 item.includes('*') && Object.keys(items[plus]).forEach(source => {
                                     if (!items[plus][source].includes('secondary-') || items[plus][source].includes('primary-') || items[plus][source] === 'shop') {
                                         secondary = false;
@@ -1746,6 +1745,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 nonValids[name] = wrongThings;
                                 chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                                 return;
+                            } else {
+                                chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                             }
                         }
                     }
@@ -1900,7 +1901,6 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         let tempValid = false;
                         objectsPlus[object].filter((plus) => { return !!objects[plus] }).forEach(plus => {
                             tempValid = true;
-                            chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(plus);
                             (Object.keys(objects[plus.replaceAll(/\*/g, '')]).filter((source) => { return !source.includes('secondary-') }).length > 0) && (secondary = false);
                         });
                         if (!tempValid) {
@@ -1909,6 +1909,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             nonValids[name] = wrongThings;
                             chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(object);
                             return;
+                        } else {
+                            chunkInfo['challenges'][skill][name]['ObjectsDetails'].push(object);
                         }
                     }
                 } else {
@@ -1947,16 +1949,15 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         }
                     } else {
                         let tempValid = false;
-                        monstersPlus[monster].filter((plus) => { return !!monsters[plus] }).forEach(plus => {
-                            chunkInfo['challenges'][skill][name]['MonstersDetails'].push(plus);
-                            tempValid = true;
-                        });
+                        monstersPlus[monster].filter((plus) => { return !!monsters[plus] }).length > 0 && (tempValid = true);
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(monster);
                             nonValids[name] = wrongThings;
                             chunkInfo['challenges'][skill][name]['MonstersDetails'].push(monster);
                             return;
+                        } else {
+                            chunkInfo['challenges'][skill][name]['MonstersDetails'].push(monster);
                         }
                     }
                 } else {
@@ -1985,16 +1986,15 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         return;
                     } else {
                         let tempValid = false;
-                        npcsPlus[npc].filter((plus) => { return !!npcs[plus] }).forEach(plus => {
-                            chunkInfo['challenges'][skill][name]['NPCsDetails'].push(plus);
-                            tempValid = true;
-                        });
+                        npcsPlus[npc].filter((plus) => { return !!npcs[plus] }).length > 0 && (tempValid = true);
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(npc);
                             nonValids[name] = wrongThings;
                             chunkInfo['challenges'][skill][name]['NPCsDetails'].push(npc);
                             return;
+                        } else {
+                            chunkInfo['challenges'][skill][name]['NPCsDetails'].push(npc);
                         }
                     }
                 } else {
@@ -2024,11 +2024,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         return;
                     } else {
                         let tempValid = false;
-                        mixPlus[mix].filter((plus) => { return !!monsters[plus] || !!npcs[plus] }).forEach(plus => {
-                            chunkInfo['challenges'][skill][name]['MonstersDetails'].push(plus);
-                            chunkInfo['challenges'][skill][name]['NPCsDetails'].push(plus);
-                            tempValid = true;
-                        });
+                        mixPlus[mix].filter((plus) => { return !!monsters[plus] || !!npcs[plus] }).length > 0 && (tempValid = true);
                         if (!tempValid) {
                             validChallenge = false;
                             wrongThings.push(mix);
@@ -2036,6 +2032,9 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             chunkInfo['challenges'][skill][name]['MonstersDetails'].push(mix);
                             chunkInfo['challenges'][skill][name]['NPCsDetails'].push(mix);
                             return;
+                        } else {
+                            chunkInfo['challenges'][skill][name]['MonstersDetails'].push(mix);
+                            chunkInfo['challenges'][skill][name]['NPCsDetails'].push(mix);
                         }
                     }
                 } else {

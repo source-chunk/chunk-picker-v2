@@ -2145,6 +2145,11 @@ button.menu2 {
     width: 35%;
 }
 
+#myModal29 > .modal-content {
+    height: 50%;
+    width: 35%;
+}
+
 #myModal17 > .modal-content {
     height: 60%;
     width: 40%;
@@ -2447,6 +2452,10 @@ button.menu2 {
     color: red;
 }
 
+.details-data .special {
+    color: var(--colorLink);
+}
+
 .alts-title {
     font-size: 36;
     padding-left: 10px;
@@ -2672,7 +2681,6 @@ button.menu2 {
 
 .rules-presets {
     margin: 10px;
-    margin-bottom: 15px;
 }
 
 .preset-button {
@@ -2680,6 +2688,7 @@ button.menu2 {
     border: 1px solid black;
     padding: 5px;
     margin-right: 10px;
+    margin-bottom: 10px;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
@@ -3821,6 +3830,11 @@ input#searchMonsters {
     user-select: none;
 }
 
+.chunk-sticker i {
+    -webkit-text-stroke-width: 0.1em;
+    -webkit-text-stroke-color: black;
+}
+
 .chunk-sticker.clicky {
     pointer-events: auto;
 }
@@ -4652,7 +4666,152 @@ input#searchMonsters {
     color: rgb(60, 60, 215);
 }
 
+.intro-title {
+    font-size: 4vh;
+    text-align: center;
+    max-height: 10%;
+    min-height: 10%;
+    padding: 0px 10px;
+    border-bottom: 1px solid;
+}
+
+.intro-data-container {
+    font-size: 30px;
+    text-align: center;
+    max-height: 78%;
+    min-height: 78%;
+    padding: 0px 10px;
+    overflow-y: auto;
+    background-color: var(--color2);
+}
+
+.intro-data-main-title {
+    font-size: 2vh;
+    color: var(--colorTextAlt);
+    margin-top: 5px;
+}
+
+.intro-data-title {
+    font-size: 4vh;
+}
+
+.intro-data-subtitle {
+    font-size: 1.75vh;
+    margin-bottom: 10px;
+}
+
+#starting-chunk-input {
+    width: 40%;
+    font-size: 2.5vw;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.intro-footer {
+    height: 13%;
+    border-top: 1px solid;
+}
+
+#cancel-intro-button {
+    float: right;
+    padding: 20px 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#submit-intro-button {
+    width: 100px;
+    font-size: 20px;
+    color: white;
+    float: right;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 20px 10px;
+}
+
+#submit-intro-button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+#submit-intro-button:disabled:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+#submit-intro-button:not(:disabled) {
+    background-color: rgb(115, 220, 115);
+}
+
+#submit-intro-button:not(:disabled):hover {
+    background-color: rgb(80, 195, 80);
+}
+
+.change-starting-chunk {
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    margin-left: 10px;
+}
+
+.change-starting-chunk:hover {
+    color: rgb(75, 75, 225);
+}
+
 /* ------------------------------ */
+
+.switch-field-outer {
+    display: inline-block;
+}
+
+.switch-field {
+	display: flex;
+	overflow: hidden;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #e4e4e4;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 3vh;
+	line-height: 1;
+	text-align: center;
+	padding: 8px 16px;
+	margin-right: -1px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+	background-color: #a5dc86;
+	box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}
   
 .checkbox {
     display: grid;
@@ -4761,4 +4920,63 @@ input#searchMonsters {
 .radio--disabled .radio__input, .radio__input input:disabled + .radio__control, .radio__input input:disabled, .radio__input input:disabled > * {
     color: var(--disabled);
     cursor: not-allowed;
+}
+
+/* Mobile */
+
+.entry-content.mobile {
+    width: 50%;
+    transform: none;
+    left: 25%;
+    top: 20%;
+}
+
+.gomobiletasks {
+    display: none;
+    position: absolute;
+    transition-duration: .5s;
+    cursor: pointer;
+    top: 4px;
+    right: 10px;
+    font-size: 44px;
+}
+
+.menu9.mobile {
+    width: 100%;
+    right: 0;
+    top: 52px;
+    height: 100%;
+    background-color: var(--color2);
+}
+
+.accordion.mobile {
+    font-size: 5vw;
+}
+
+.panel.mobile.visible {
+    max-height: 65vh !important;
+    font-size: 4vw;
+}
+
+.panel.mobile.visible .marker {
+    font-size: 4vw;
+}
+
+.open-rules-container.mobile {
+    font-size: 7vw;
+}
+
+.modal-content.mobile {
+    width: 95%;
+}
+
+#myModal4 > .modal-content.mobile {
+    width: 95%;
+}
+
+.help-content.mobile {
+    width: 50%;
+    transform: none;
+    left: 25%;
+    top: 20%;
 }
