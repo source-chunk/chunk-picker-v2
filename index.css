@@ -3831,7 +3831,7 @@ input#searchMonsters {
 }
 
 .chunk-sticker i {
-    -webkit-text-stroke-width: 0.1em;
+    -webkit-text-stroke-width: 0.05em;
     -webkit-text-stroke-color: black;
 }
 

@@ -693,7 +693,7 @@ let settingStructure = {
     },
     "Customization": {
         "startingChunk": true,
-        "ids": true,
+        "ids": false,
         "cinematicRoll": true,
         "highvis": true,
         "darkmode": true,
@@ -999,7 +999,7 @@ let roll5Mid = 'rfr'; //Semanari
 // ----------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.19");
+const myWorker = new Worker("./worker.js?v=4.12.20");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1067,7 +1067,7 @@ window.addEventListener('keydown', function(e) {
                 stickerExists = true;
             }
         });
-        !stickerExists && $(savedBox).append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
+        !stickerExists && $(savedBox).append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${i})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
         $('.hidden-sticker').show();
         $('.chunk-sticker').addClass('clicky signedIn').css('font-size', fontZoom * (3 / 2) + 'px');
         if (savedBox.className.includes('gray')) {
@@ -1077,11 +1077,11 @@ window.addEventListener('keydown', function(e) {
                     blacklistLabelExists = true;
                     if ($(el).text() === 'Un-Blacklist') {
                         $(el).remove();
-                        $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="blacklist(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})">Blacklist</span>`);
+                        $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="blacklist(${i})">Blacklist</span>`);
                     }
                 }
             });
-            !blacklistLabelExists && $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="blacklist(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})">Blacklist</span>`);
+            !blacklistLabelExists && $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="blacklist(${i})">Blacklist</span>`);
             $('.hidden-blacklist-label').show();
         } else if (savedBox.className.includes('blacklisted')) {
             let blacklistLabelExists = false;
@@ -1090,11 +1090,11 @@ window.addEventListener('keydown', function(e) {
                     blacklistLabelExists = true;
                     if ($(el).text() === 'Blacklist') {
                         $(el).remove();
-                        $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="unblacklist(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})">Un-Blacklist</span>`);
+                        $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="unblacklist(${i})">Un-Blacklist</span>`);
                     }
                 }
             });
-            !blacklistLabelExists && $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="unblacklist(${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex})">Un-Blacklist</span>`);
+            !blacklistLabelExists && $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="unblacklist(${i})">Un-Blacklist</span>`);
             $('.hidden-blacklist-label').show();
         } else {
             $('.hidden-blacklist-label').hide().remove();
@@ -1564,14 +1564,14 @@ $(document).on({
             return;
         } else if (e.button === 2) {
             if ($(e.target).hasClass('box')) {
-                if (infoLockedId === $(e.target).children('.chunkId').text()) {
+                if (infoLockedId === $(e.target).attr('id')) {
                     infoLockedId = -1;
                     $(e.target).removeClass('locked');
                     $('.icon').remove();
                 } else {
-                    $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
+                    $('.box#' + infoLockedId).removeClass('locked');
                     $('.icon').remove();
-                    infoLockedId = $(e.target).children('.chunkId').text();
+                    infoLockedId = $(e.target).attr('id');
                     $(e.target).addClass('locked').append("<span class='icon'></span>");
                     $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
                 }
@@ -1653,7 +1653,7 @@ $(document).on({
                 autoSelectNeighbors && selectNeighbors(e.target);
                 autoRemoveSelected && $('.selected > .label').remove();
                 autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
-                autoRemoveSelected && (selectedChunks = 1);
+                autoRemoveSelected && (selectedChunks = 2);
                 autoRemoveSelected && (selectedNum = 1);
                 if (selectedChunks < 300) {
                     fixNums(savedNum);
@@ -1669,16 +1669,16 @@ $(document).on({
                 roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
                 unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
                 isPicking = false;
-                $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+                $('#chunkInfo2').text('Selected chunks: ' + (!autoRemoveSelected ? --selectedChunks : 0));
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
                 let tempChunk1;
                 let tempChunk2;
                 let tempChunkTime1;
                 let tempChunkTime2;
                 if (signedIn && !onTestServer && !testMode) {
-                    myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex), (error) => {
+                    myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % 256) * (skip + 256) - Math.floor(e.target.id / 256) + startingIndex), (error) => {
                         regainConnectivity(() => {
-                            myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex));
+                            myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % 256) * (skip + 256) - Math.floor(e.target.id / 256) + startingIndex));
                         });
                     });
                 }
@@ -1686,7 +1686,7 @@ $(document).on({
                     tempChunk1 = recent[count - 1];
                     tempChunkTime1 = recentTime[count - 1];
                     if (count === 1) {
-                        recent[count - 1] = (Math.floor(e.target.id % rowSize) * (skip + rowSize) - Math.floor(e.target.id / rowSize) + startingIndex);
+                        recent[count - 1] = (Math.floor(e.target.id % 256) * (skip + 256) - Math.floor(e.target.id / 256) + startingIndex);
                         recentTime[count - 1] = new Date().getTime();
                     } else {
                         recent[count - 1] = tempChunk2;
@@ -1813,23 +1813,23 @@ var pick = function(both) {
             autoSelectNeighbors && selectNeighbors(el[rand]);
             autoRemoveSelected && $('.selected > .label').remove();
             autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
-            autoRemoveSelected && (selectedChunks = 1);
+            autoRemoveSelected && (selectedChunks = 2);
             autoRemoveSelected && (selectedNum = 1);
             if (el.length < 300) {
                 fixNums(sNum);
             }
-            $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+            $('#chunkInfo2').text('Selected chunks: ' + (!autoRemoveSelected ? --selectedChunks : 0));
             $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-            scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
+            scrollToPos(parseInt($(el[rand]).attr('id')) % 256, Math.floor(parseInt($(el[rand]).attr('id')) / 256), 0, 0, false);
             !showChunkIds && $('.chunkId').hide();
             let tempChunk1;
             let tempChunk2;
             let tempChunkTime1;
             let tempChunkTime2;
             if (signedIn && !onTestServer && !testMode) {
-                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()), (error) => {
+                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).attr('id')), (error) => {
                     regainConnectivity(() => {
-                        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+                        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).attr('id')));
                     });
                 });
             }
@@ -1837,7 +1837,7 @@ var pick = function(both) {
                 tempChunk1 = recent[count - 1];
                 tempChunkTime1 = recentTime[count - 1];
                 if (count === 1) {
-                    recent[count - 1] = parseInt($(el[rand]).text());
+                    recent[count - 1] = parseInt($(el[rand]).attr('id'));
                     recentTime[count - 1] = new Date().getTime();
                 } else {
                     recent[count - 1] = tempChunk2;
@@ -1884,11 +1884,11 @@ var pick = function(both) {
     } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
         if (rules['F2P']) {
             chunkInfo['walkableChunksF2P'].forEach(id => {
-                $('.box:contains(' + id + ')').addClass('walkable');
+                $('.box#' + id).addClass('walkable');
             });
         } else {
             chunkInfo['walkableChunks'].forEach(id => {
-                $('.box:contains(' + id + ')').addClass('walkable');
+                $('.box#' + id).addClass('walkable');
             });
         }
         el = $('.walkable:not(.unlocked)');
@@ -1943,23 +1943,23 @@ var pick = function(both) {
     autoSelectNeighbors && !didRandomStart && selectNeighbors(el[rand]);
     autoRemoveSelected && $('.selected > .label').remove();
     autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
-    autoRemoveSelected && (selectedChunks = 1);
+    autoRemoveSelected && (selectedChunks = 2);
     autoRemoveSelected && (selectedNum = 1);
     if (el.length < 300) {
         fixNums(sNum);
     }
-    $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
+    $('#chunkInfo2').text('Selected chunks: ' + (!autoRemoveSelected ? --selectedChunks : 0));
     $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-    (!settings['cinematicRoll'] || onMobile) && scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
+    (!settings['cinematicRoll'] || onMobile) && scrollToPos(parseInt($(el[rand]).attr('id')) % 256, Math.floor(parseInt($(el[rand]).attr('id')) / 256), 0, 0, false);
     !showChunkIds && $('.chunkId').hide();
     let tempChunk1;
     let tempChunk2;
     let tempChunkTime1;
     let tempChunkTime2;
     if (signedIn && !onTestServer && !testMode) {
-        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()), (error) => {
+        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).attr('id')), (error) => {
             regainConnectivity(() => {
-                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).text()));
+                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).attr('id')));
             });
         });
     }
@@ -1967,7 +1967,7 @@ var pick = function(both) {
         tempChunk1 = recent[count - 1];
         tempChunkTime1 = recentTime[count - 1];
         if (count === 1) {
-            recent[count - 1] = parseInt($(el[rand]).text());
+            recent[count - 1] = parseInt($(el[rand]).attr('id'));
             recentTime[count - 1] = new Date().getTime();
         } else {
             recent[count - 1] = tempChunk2;
@@ -2065,15 +2065,15 @@ var toggleIds = function(value) {
 var center = function(extra) {
     let arr = $('.box.unlocked');
     if (arr.length < 1) {
-        scrollToPos(parseInt($('#591').attr('id')) % rowSize, Math.floor(parseInt($('#591').attr('id')) / rowSize), 0, 0, extra === 'quick');
+        scrollToPos(parseInt($('#12850').attr('id')) % 256, Math.floor(parseInt($('#12850').attr('id')) / 256), 0, 0, extra === 'quick');
         return;
     }
     let sumX = 0;
     let sumY = 0;
     let num = 0;
     arr.each(function(index) {
-        sumX += parseInt($(this).attr('id')) % rowSize;
-        sumY += Math.floor(parseInt($(this).attr('id')) / rowSize);
+        sumX += parseInt($(this).attr('id')) % 256;
+        sumY += Math.floor(parseInt($(this).attr('id')) / 256);
         num++;
     });
     scrollToPos(Math.floor(sumX / num), Math.floor(sumY / num), sumX / num - Math.floor(sumX / num), sumY / num - Math.floor(sumY / num), extra === 'quick');
@@ -2090,8 +2090,8 @@ var unlock = function() {
 // Copies unlocked chunks to clipboard
 var exportFunc = function() {
     let unlockedChunksTemp = '';
-    $('.box.unlocked > .chunkId').each(function(index) {
-        unlockedChunksTemp += $(this).text() + ',';
+    $('.box.unlocked').each(function(index) {
+        unlockedChunksTemp += $(this).attr('id') + ',';
     });
     unlockedChunksTemp = unlockedChunksTemp.slice(0, -1);
     navigator.clipboard.writeText(unlockedChunksTemp);
@@ -2784,7 +2784,7 @@ var unpick = function() {
     selectedNum++;
     $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
     $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-    scrollToPos(parseInt($(el[rand]).attr('id')) % rowSize, Math.floor(parseInt($(el[rand]).attr('id')) / rowSize), 0, 0, false);
+    scrollToPos(parseInt($(el[rand]).attr('id')) % 256, Math.floor(parseInt($(el[rand]).attr('id')) / 256), 0, 0, false);
     !showChunkIds && $('.chunkId').hide();
     setData();
     chunkBorders();
@@ -2969,8 +2969,8 @@ var recentChunk = function(el) {
         return;
     }
     let id = parseInt($($(el).children('.chunk')).text());
-    let box = $('.box:contains(' + id + ')').filter(function() { return parseInt($(this).children('.chunkId').text()) === parseInt(id); }).addClass('recent');
-    scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
+    let box = $('.box#' + id).addClass('recent');
+    scrollToPos(parseInt(box.attr('id')) % 256, Math.floor(parseInt(box.attr('id')) / 256), 0, 0, false);
 }
 
 // Toggles the accordion panels of the chunk info panel
@@ -3065,7 +3065,8 @@ var setupMap = function() {
             $('.pin.entry').focus();
         }
         for (var i = 0; i < fullSize; i++) {
-            $('.btnDiv').append(`<div id=${i} class='box gray'><span class='chunkId'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</span></div>`);
+            $('.btnDiv').append(`<div id=${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex} class='box gray'></div>`);
+            //<span class='chunkId'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</span>
         }
         labelZoom = $('.box').width();
         fontZoom = $('.box').width() / 6;
@@ -3102,8 +3103,8 @@ var selectNeighbors = function(el) {
     var num;
     for (var i = 0; i < 4; i++) {
         if (ops[i].substring(1, 2) === 'x') {
-            num = (i - 1) * 2 + 1;
-            if (Math.floor((parseInt(el.id) + num) / rowSize) === Math.floor(parseInt(el.id) / rowSize) && $(`#${parseInt(el.id) + num}`).hasClass('gray') && (!settings['walkableRollable'] || chunkInfo['walkableChunksF2P'].includes($($(`#${parseInt(el.id) + num}`).children('.chunkId')[0]).text()) || (!rules['F2P'] && chunkInfo['walkableChunks'].includes($($(`#${parseInt(el.id) + num}`).children('.chunkId')[0]).text())))) {
+            num = ((i - 1) * 2 + 1) * 256;
+            if ($(`#${parseInt(el.id) + num}`).length && $(`#${parseInt(el.id) + num}`).hasClass('gray') && (!settings['walkableRollable'] || chunkInfo['walkableChunksF2P'].includes(parseInt(el.id) + num) || (!rules['F2P'] && chunkInfo['walkableChunks'].includes((parseInt(el.id) + num).toString())))) {
                 if (selectedNum > 999) {
                     $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span draggable="false" class="label extralong">' + selectedNum + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
@@ -3119,8 +3120,8 @@ var selectNeighbors = function(el) {
                 $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
             }
         } else {
-            num = ((i - 3) * 2 + 1) * rowSize;
-            if (parseInt(el.id) + num >= 0 && parseInt(el.id) + num < fullSize && $(`#${parseInt(el.id) + num}`).hasClass('gray') && (!settings['walkableRollable'] || chunkInfo['walkableChunksF2P'].includes($($(`#${parseInt(el.id) + num}`).children('.chunkId')[0]).text()) || (!rules['F2P'] && chunkInfo['walkableChunks'].includes($($(`#${parseInt(el.id) + num}`).children('.chunkId')[0]).text())))) {
+            num = (i - 3) * 2 + 1;
+            if ($(`#${parseInt(el.id) + num}`).length && $(`#${parseInt(el.id) + num}`).hasClass('gray') && (!settings['walkableRollable'] || chunkInfo['walkableChunksF2P'].includes(parseInt(el.id) + num) || (!rules['F2P'] && chunkInfo['walkableChunks'].includes((parseInt(el.id) + num).toString())))) {
                 if (selectedNum > 999) {
                     $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span draggable="false" class="label extralong">' + selectedNum + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
@@ -3174,8 +3175,8 @@ var updateScrollPos = function(e) {
 // Scrolls to position x.xPart, y.yPart
 var scrollToPos = function(x, y, xPart, yPart, doQuick) {
     zoom = $('.imgDiv').width();
-    prevScrollLeft = -$('#' + (y * rowSize + x)).position().left + window.innerWidth / 2 - $('#' + (rowSize + 1)).position().left * (xPart + .5);
-    prevScrollTop = -$('#' + (y * rowSize + x)).position().top + window.innerHeight / 2 - $('#' + (rowSize + 1)).position().top * (yPart + .5);
+    prevScrollLeft = -$('#' + (y * 256 + x)).position().left + window.innerWidth / 2 - $('#4926').position().left * (xPart + .5);
+    prevScrollTop = -$('#' + (y * 256 + x)).position().top + window.innerHeight / 2 - $('#4926').position().top * (yPart + .5);
     if (prevScrollLeft > 400) {
         prevScrollLeft = 400;
     }
@@ -3501,7 +3502,7 @@ var calcCurrentChallenges = function() {
     if (gotData) {
         let chunks = {};
         $('.unlocked').each(function() {
-            chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
+            chunks[parseInt($(this).attr('id'))] = true;
         });
         myWorker.postMessage(['current', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills]);
         workerOut++;
@@ -3657,7 +3658,7 @@ var calcFutureChallenges = function() {
     let chunks = {};
     let challengeStr = '';
     $('.unlocked').each(function() {
-        chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
+        chunks[parseInt($(this).attr('id'))] = true;
     });
     if (chunks[infoLockedId.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) {
         $('.panel-challenges').html(challengeStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') || 'None (chunk is already unlocked)');
@@ -3929,26 +3930,26 @@ var openRollChunk = function(el, rand, sNum) {
     let topNum;
     let xCoord;
     let yCoord;
-    let chosen = $($(el[rand]).children('.chunkId')[0]).text();
+    let chosen = $(el[rand]).attr('id');
     elArr = shuffle(elArr);
-    xCoord = (parseInt($(elArr[elArr.length - 1]).attr('id')) % rowSize) + 1;
-    yCoord = Math.floor(parseInt($(elArr[elArr.length - 1]).attr('id')) / rowSize) + 1;
-    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$($(elArr[elArr.length - 1]).children('.chunkId')[0]).text()}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+    xCoord = Math.floor(parseInt($(elArr[elArr.length - 1]).attr('id')) / 256) - 17;
+    yCoord = 64 - (parseInt($(elArr[elArr.length - 1]).attr('id')) % 256);
+    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$(elArr[elArr.length - 1]).attr('id')}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
         for (let j = 0; j < elArr.length; j++) {
-            let num = $($(elArr[j]).children('.chunkId')[0]).text();
-            xCoord = (parseInt($(elArr[j]).attr('id')) % rowSize) + 1;
-            yCoord = Math.floor(parseInt($(elArr[j]).attr('id')) / rowSize) + 1;
+            let num = $(elArr[j]).attr('id');
+            xCoord = Math.floor(parseInt($(elArr[j]).attr('id')) / 256) - 17;
+            yCoord = 64 - (parseInt($(elArr[j]).attr('id')) % 256);
             $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
             if (num === chosen && i + 1 >= Math.ceil(numSlots / elArr.length)) {
                 topNum = (-15.998 * ((i * elArr.length) + j)) + 'vh';
             }
         };
     };
-    xCoord = (parseInt($(elArr[0]).attr('id')) % rowSize) + 1;
-    yCoord = Math.floor(parseInt($(elArr[0]).attr('id')) / rowSize) + 1;
+    xCoord = Math.floor(parseInt($(elArr[0]).attr('id')) / 256) - 17;
+    yCoord = 64 - (parseInt($(elArr[0]).attr('id')) % 256);
     let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
-    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$($(elArr[0]).children('.chunkId')[0]).text()}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$(elArr[0]).attr('id')}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     setTimeout(function() {
         $('.roll-chunk-outer').animate({
             top: topNum
@@ -3969,7 +3970,7 @@ var openRollChunk = function(el, rand, sNum) {
 // Delayed pick chunk after cinematic
 var takeMeToChunk = function() {
     rollChunkModalOpen = false;
-    scrollToPos(parseInt($('.box.recent').attr('id')) % rowSize, Math.floor(parseInt($('.box.recent').attr('id')) / rowSize), 0, 0, false);
+    scrollToPos(parseInt($('.box.recent').attr('id')) % 256, Math.floor(parseInt($('.box.recent').attr('id')) / 256), 0, 0, false);
     $('.recent').removeClass('recent');
     calcCurrentChallenges();
     $('.roll-chunk-title').text('Rolling your next chunk...');
@@ -4749,15 +4750,15 @@ var submitSticker = function() {
         $('.hidden-sticker').hide().remove();
         $('.chunk-sticker.clicky').removeClass('clicky signedIn');
         if (stickered.hasOwnProperty(id)) {
-            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').remove();
+            $('.box#' + id).children('.chunk-sticker').remove();
         }
         if (stickerChoices.includes(sticker)) {
-            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span style='color:${$('.sticker-color-picker').val()}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${sticker}" style="transform: scaleX(-1)"></i>${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
+            $('.box#' + id).append(`<span style='color:${$('.sticker-color-picker').val()}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${sticker}" style="transform: scaleX(-1)"></i>${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
         } else if (stickerChoicesOsrs.includes(sticker)) {
-            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${sticker}-osrs.svg">${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
+            $('.box#' + id).append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${sticker}-osrs.svg">${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
         }
         if (sticker === '1st') {
-            $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span style='color:#00FF00' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-flag" style="transform: scaleX(-1)"></i><span class="tooltiptext-sticker">${"Starting Chunk"}</span></span>`);
+            $('.box#' + id).append(`<span style='color:#00FF00' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-flag" style="transform: scaleX(-1)"></i><span class="tooltiptext-sticker">${"Starting Chunk"}</span></span>`);
             stickered[id] = 'flag';
             stickeredNotes[id] = 'Starting Chunk';
             stickeredColors[id] = '#00FF00';
@@ -4767,11 +4768,11 @@ var submitSticker = function() {
             stickeredColors[id] = $('.sticker-color-picker').val();
         }
     } else {
-        $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().children('.chunk-sticker').remove();
+        $('.box#' + id).children('.chunk-sticker').remove();
         delete stickered[id];
         delete stickeredNotes[id];
         delete stickeredColors[id];
-        $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${id})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
+        $('.box#' + id).append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${id})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
     }
     $('.chunk-sticker').css('font-size', fontZoom * (3 / 2) + 'px');
     $('.chunk-sticker > img').parent().css('width', fontZoom * (3 / 2) + 'px');
@@ -5074,13 +5075,13 @@ var checkFalseRules = function() {
 
 // Blacklists the given chunk
 var blacklist = function(chunkId) {
-    $('.box > .chunkId:contains(' + chunkId + ')').filter(function() { return parseInt($(this).text()) === parseInt(chunkId); }).parent().addClass('blacklisted').removeClass('gray');
+    $('.box#' + chunkId).addClass('blacklisted').removeClass('gray');
     setData();
 }
 
 // Un-Blacklists the given chunk
 var unblacklist = function(chunkId) {
-    $('.box > .chunkId:contains(' + chunkId + ')').filter(function() { return parseInt($(this).text()) === parseInt(chunkId); }).parent().addClass('gray').removeClass('blacklisted');
+    $('.box#' + chunkId).addClass('gray').removeClass('blacklisted');
     setData();
 }
 
@@ -5088,7 +5089,7 @@ var unblacklist = function(chunkId) {
 var getChunkAreas = function() {
     let chunks = {};
     $('.unlocked').each(function() {
-        chunks[parseInt($($(this).children('.chunkId')[0]).text())] = true;
+        chunks[parseInt($(this).attr('id'))] = true;
     });
     let i = 0;
     let temp = {};
@@ -5243,10 +5244,17 @@ var showDetails = function(challenge, skill, type) {
         !!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
             let formattedSource = '';
             if (key === 'ChunksDetails') {
-                if (!!el.match(/[0-9]+/g) && $('.box > .chunkId:contains(' + el.match(/[0-9]+/g)[0] + ')').filter(function() { return parseInt($(this).text()) === parseInt(el.match(/[0-9]+/g)[0]); }).parent().hasClass('unlocked')) {
-                    formattedSource = '   ';
-                } else if (possibleAreas[el]) {
-                    formattedSource = '   ';
+                if (possibleAreas[el]) {
+                    formattedSource = `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(el.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, ''))} target="_blank">${el.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '')}</a>`;
+                } else if (!!el.match(/[0-9]+/g) && $('.box#' + el.match(/[0-9]+/g)[0]).hasClass('unlocked')) {
+                    formattedSource = el.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '');
+                }
+                if (formattedSource !== '') {
+                    written = true;
+                    $('#details-data').append(`<span class="noscroll"><b class="noscroll">${formattedSource.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><br />`);
+                } else {
+                    written = true;
+                    $('#details-data').append(`<span class="noscroll red"><b class="noscroll">${formattedSource.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><br />`);
                 }
             } else if (!!baseChunkDataIn[type]) {
                 let els = [];
@@ -5930,7 +5938,7 @@ var getQuestInfo = function(quest) {
     $('.panel-questdata').empty();
     let unlocked = { ...possibleAreas };
     $('.unlocked').each(function() {
-        unlocked[parseInt($($(this).children('.chunkId')[0]).text())] = true;
+        unlocked[parseInt($(this).attr('id'))] = true;
     });
     questChunks = [];
     chunkInfo['quests'][quest].split(', ').forEach(chunkId => {
@@ -5958,24 +5966,24 @@ var toggleQuestInfo = function() {
 // Highlights array of chunk ids for current quest
 var highlightAllQuest = function() {
     questChunks.forEach(id => {
-        $('.box:contains(' + id + ')').filter(function() { return parseInt($(this).children('.chunkId').text()) === parseInt(id); }).addClass('recent');
+        $('.box#' + id).addClass('recent');
     });
 }
 
 // Scrolls to chunk with given id
 var scrollToChunk = function(id) {
-    let box = $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('recent');
-    scrollToPos(parseInt(box.attr('id')) % rowSize, Math.floor(parseInt(box.attr('id')) / rowSize), 0, 0, false);
+    let box = $('.box#' + id).addClass('recent');
+    scrollToPos(parseInt(box.attr('id')) % 256, Math.floor(parseInt(box.attr('id')) / 256), 0, 0, false);
 }
 
 // Re-update chunk info panel
 var redirectPanel = function(name) {
     let realName = decodeURI(name).replaceAll(/\%2H/g, "'");
-    $('.box > .chunkId:contains(' + infoLockedId + ')').parent().removeClass('locked');
+    infoLockedId.match(/^[0-9]*$/i) && $('.box#' + infoLockedId).removeClass('locked');
     $('.icon').remove();
-    $('.box > .chunkId:contains(' + realName + ')').parent().addClass('locked').append("<span class='icon'></span>");
+    realName.match(/^[0-9]*$/i) && $('.box#' + realName).addClass('locked').append("<span class='icon'></span>");
     $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-    ((realName % 256) < 65) && scrollToPos(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) % rowSize, Math.floor(parseInt($('.box > .chunkId:contains(' + realName + ')').parent().attr('id')) / rowSize), 0, 0);
+    ((realName % 256) < 65) && scrollToPos(parseInt($('.box#' + realName).attr('id')) % 256, Math.floor(parseInt($('.box#' + realName).attr('id')) / 256), 0, 0);
     infoLockedId = realName.toString().replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q');
     updateChunkInfo();
     $('.infoid').addClass('new');
@@ -6197,13 +6205,13 @@ var loadData = function(startup) {
             chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b) { return b - a }).forEach(function(id) {
                 picking = true;
                 if (selectedNum > 999) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label extralong">' + selectedNum++ + '</span>');
+                    $('.box#' + id).addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label extralong">' + selectedNum++ + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
                 } else if (selectedNum > 99) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label long">' + selectedNum++ + '</span>');
+                    $('.box#' + id).addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label long">' + selectedNum++ + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
                 } else {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label">' + selectedNum++ + '</span>');
+                    $('.box#' + id).addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label">' + selectedNum++ + '</span>');
                     $('.label').css('font-size', labelZoom + 'px');
                 }
                 $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
@@ -6212,13 +6220,13 @@ var loadData = function(startup) {
 
             chunks && chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b) { return b - a }).forEach(function(id) {
                 if (selectedNum > 999) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label extralong">' + selectedNum++ + '</span>');
+                    $('.box#' + id).addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label extralong">' + selectedNum++ + '</span>');
                     $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
                 } else if (selectedNum > 99) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label long">' + selectedNum++ + '</span>');
+                    $('.box#' + id).addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label long">' + selectedNum++ + '</span>');
                     $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
                 } else {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label">' + selectedNum++ + '</span>');
+                    $('.box#' + id).addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label">' + selectedNum++ + '</span>');
                     $('.label').css('font-size', labelZoom + 'px');
                 }
                 $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
@@ -6226,20 +6234,20 @@ var loadData = function(startup) {
             });
 
             chunks && chunks['unlocked'] && Object.keys(chunks['unlocked']).forEach(function(id) {
-                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('unlocked').removeClass('gray selected potential blacklisted');
+                $('.box#' + id).addClass('unlocked').removeClass('gray selected potential blacklisted');
                 $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
             });
 
             chunks && chunks['blacklisted'] && Object.keys(chunks['blacklisted']).forEach(function(id) {
-                $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().addClass('blacklisted').removeClass('gray selected potential unlocked');
+                $('.box#' + id).addClass('blacklisted').removeClass('gray selected potential unlocked');
             });
 
             $('.chunk-sticker').remove();
             chunks && chunks['stickered'] && Object.keys(chunks['stickered']).forEach(function(id) {
                 if (stickerChoices.includes(chunks['stickered'][id])) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span style='color:${(chunks.hasOwnProperty('stickeredColors') && chunks['stickeredColors'][id]) || settings['defaultStickerColor'] || '#000000'}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i>${chunks.hasOwnProperty('stickeredNotes') && chunks['stickeredNotes'].hasOwnProperty(id) && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
+                    $('.box#' + id).append(`<span style='color:${(chunks.hasOwnProperty('stickeredColors') && chunks['stickeredColors'][id]) || settings['defaultStickerColor'] || '#000000'}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i>${chunks.hasOwnProperty('stickeredNotes') && chunks['stickeredNotes'].hasOwnProperty(id) && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
                 } else if (stickerChoicesOsrs.includes(chunks['stickered'][id])) {
-                    $('.box > .chunkId:contains(' + id + ')').filter(function() { return parseInt($(this).text()) === parseInt(id); }).parent().append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${chunks['stickered'][id]}-osrs.svg">${!!chunks['stickeredNotes'][id] && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
+                    $('.box#' + id).append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${chunks['stickered'][id]}-osrs.svg">${!!chunks['stickeredNotes'][id] && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
                 }
             });
             $('.chunk-sticker').css('font-size', fontZoom * (3 / 2) + 'px');
@@ -6362,8 +6370,8 @@ var setData = function() {
                 myRef.child('chunkinfo').update({ oldSavedChallengeArr });
 
                 var tempJson = {};
-                Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
-                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                $('.unlocked').each(function() {
+                    tempJson[$(this).prop('id')] = $(this).prop('id');
                 });
                 myRef.child('chunks/unlocked').set(tempJson);
                 let walkableUnlockedChunks;
@@ -6377,20 +6385,20 @@ var setData = function() {
                 }
 
                 tempJson = {};
-                Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
-                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                $('.selected').each(function() {
+                    tempJson[$(this).prop('id')] = $(this).prop('id');
                 });
                 myRef.child('chunks/selected').set(tempJson);
 
                 tempJson = {};
-                Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
-                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                $('.potential').each(function() {
+                    tempJson[$(this).prop('id')] = $(this).prop('id');
                 });
                 myRef.child('chunks/potential').set(tempJson);
 
                 tempJson = {};
-                Array.prototype.forEach.call(document.getElementsByClassName('blacklisted'), function(el) {
-                    tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+                $('.blacklisted').each(function() {
+                    tempJson[$(this).prop('id')] = $(this).prop('id');
                 });
                 myRef.child('chunks/blacklisted').set(tempJson);
 
@@ -6441,8 +6449,8 @@ var setData = function() {
             myRef.child('chunkinfo').update({ oldSavedChallengeArr });
 
             var tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('unlocked'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            $('.unlocked').each(function() {
+                tempJson[$(this).prop('id')] = $(this).prop('id');
             });
             myRef.child('chunks/unlocked').set(tempJson);
             let walkableUnlockedChunks;
@@ -6456,20 +6464,20 @@ var setData = function() {
             }
 
             tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('selected'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            $('.selected').each(function() {
+                tempJson[$(this).prop('id')] = $(this).prop('id');
             });
             myRef.child('chunks/selected').set(tempJson);
 
             tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('potential'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            $('.potential').each(function() {
+                tempJson[$(this).prop('id')] = $(this).prop('id');
             });
             myRef.child('chunks/potential').set(tempJson);
 
             tempJson = {};
-            Array.prototype.forEach.call(document.getElementsByClassName('blacklisted'), function(el) {
-                tempJson[el.childNodes[0].childNodes[0].nodeValue] = el.childNodes[0].childNodes[0].nodeValue;
+            $('.blacklisted').each(function() {
+                tempJson[$(this).prop('id')] = $(this).prop('id');
             });
             myRef.child('chunks/blacklisted').set(tempJson);
 
@@ -6770,10 +6778,10 @@ function stringToChunkIndexes(request) {
 var chunkBorders = function() {
     $('.unlocked').each(function() {
         var num = parseInt($(this).prop('id'));
-        var skipp = 43;
-        !$('#' + (num - skipp)).hasClass('unlocked') ? $(this).css('border-top', '.175vw solid red') : $(this).css('border-top-width', '0px');
-        !$('#' + (num + skipp)).hasClass('unlocked') ? $(this).css('border-bottom', '.175vw solid red') : $(this).css('border-bottom-width', '0px');
-        !$('#' + (num - 1)).hasClass('unlocked') ? $(this).css('border-left', '.175vw solid red') : $(this).css('border-left-width', '0px');
-        !$('#' + (num + 1)).hasClass('unlocked') ? $(this).css('border-right', '.175vw solid red') : $(this).css('border-right-width', '0px');
+        var skipp = 256;
+        !$('#' + (num + 1)).hasClass('unlocked') ? $(this).css('border-top', '.175vw solid red') : $(this).css('border-top-width', '0px');
+        !$('#' + (num - 1)).hasClass('unlocked') ? $(this).css('border-bottom', '.175vw solid red') : $(this).css('border-bottom-width', '0px');
+        !$('#' + (num - skipp)).hasClass('unlocked') ? $(this).css('border-left', '.175vw solid red') : $(this).css('border-left-width', '0px');
+        !$('#' + (num + skipp)).hasClass('unlocked') ? $(this).css('border-right', '.175vw solid red') : $(this).css('border-right-width', '0px');
     });
 }
