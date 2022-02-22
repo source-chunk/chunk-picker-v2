@@ -809,6 +809,7 @@ button.menu2 {
     color: white;
     margin: auto;
     width: 100%;
+    line-height: 0;
     text-align: center;
     -webkit-user-select: none;
     -moz-user-select: none;
