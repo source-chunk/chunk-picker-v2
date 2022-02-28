@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'FontAwesome';
-    src: url('fa-regular-400.ttf')  format('truetype');
-}
-
 :root {
     --disabled: #959495;
 
@@ -4962,6 +4957,10 @@ input#searchMonsters {
 
 .panel.mobile.visible {
     max-height: 65vh !important;
+    font-size: 4vw;
+}
+
+.panel.mobile.visible > div {
     font-size: 4vw;
 }
 
