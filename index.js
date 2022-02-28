@@ -1041,12 +1041,35 @@ let imgNotLoaded = false;
 let hoveredChunk = 0;
 let colorBox = "rgba(150, 150, 150, .6)";
 let colorBoxLight = "rgba(150, 150, 150, .4)";
+let readyToDrawImage = false;
+let readyToDrawIcons = stickerChoicesOsrs.length;
+let pageReady = false;
 
 // Load osrs sticker images
 stickerChoicesOsrs.forEach(sticker => {
     osrsStickers[sticker] = new Image;
     osrsStickers[sticker].src = "resources/SVG/" + sticker + "-osrs.svg";
+    osrsStickers[sticker].onload = function() {
+        readyToDrawIcons--;
+        if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
+            drawCanvas();
+        }
+    }
 });
+
+// Load map image
+mapImg = document.getElementById('mapImg');
+mapImg.onload = function() {
+    imgW = mapImg.width;
+    imgH = mapImg.height;
+    readyToDrawImage = true;
+    if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
+        drawCanvas();
+    }
+};
+mapImg.onerror = function () {
+    console.error("Cannot load map image");
+}
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2175,17 +2198,6 @@ var chunkBordersCanvas = function() {
 
 // Loaded when page is ready
 $(document).ready(function() {
-    mapImg = document.getElementById('mapImg');
-    window.onload = function() {
-        imgW = mapImg.width;
-        imgH = mapImg.height;
-        drawCanvas();
-    };
-    mapImg.onload = function() {
-        imgW = mapImg.width;
-        imgH = mapImg.height;
-        drawCanvas();
-    };
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -2213,12 +2225,17 @@ $(document).ready(function() {
     $(document).on('touchstart', function(e){handleMouseDown(e);});
     $(document).on('touchmove', function(e){handleMouseMove(e);});
     $(document).on('touchend', function(e){handleMouseUp(e);});
+
+    pageReady = true;
+    if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
+        drawCanvas();
+    }
 });
 
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.3");
+const myWorker = new Worker("./worker.js?v=4.13.4");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
