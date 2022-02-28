@@ -3896,6 +3896,11 @@ input#searchMonsters {
     border-color: var(--colorText);
 }
 
+.sticker-option-container > i {
+    -webkit-text-stroke-width: 0.05em;
+    -webkit-text-stroke-color: black;
+}
+
 .sticker-option-container.unset-option {
     color: rgb(100, 100, 100);
     border: dashed;
@@ -4981,4 +4986,30 @@ input#searchMonsters {
     transform: none;
     left: 25%;
     top: 20%;
+}
+
+.display-button {
+    border: solid 1px;
+    width: 50%;
+    margin: auto;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.display-button:hover {
+    background-color: var(--color3);
+}
+
+/* --------------------------- */
+
+.canvasDiv {
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.canvasDiv > canvas {
+    background-color: black;
 }

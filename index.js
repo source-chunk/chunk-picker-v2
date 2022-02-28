@@ -109,7 +109,10 @@ var infoPanelVis = {
     spawns: false,
     shops: false,
     features: false,
-    quests: false
+    quests: false,
+    clues: false,
+    connections: false,
+    challenges: false
 };                                                                              // JSON showing state of which chunk info panels are open/closed
 
 var challengePanelVis = {
@@ -647,7 +650,7 @@ let settings = {
     "completedTaskStrikethrough": true,
     "randomStartAlways": false,
     "darkmode": false,
-    "defaultStickerColor": '#000000',
+    "defaultStickerColor": '#FFFFFF',
     "walkableRollable": true,
     "cinematicRoll": true,
     "taskSidebar": false,
@@ -672,7 +675,7 @@ let settingNames = {
     "walkableRollable": "Only automatically mark <b class='noscroll'>walkable</b> chunks",
     "cinematicRoll": "Enable fancier rolling of chunks",
     "taskSidebar": "Expand the task panel into a large sidebar, to show more tasks at once",
-    "ids": "<b class='noscroll'>#Temporarily Disabled#</b> Show an overlay of Chunk ID's for each chunk",
+    "ids": "Show an overlay of Chunk ID's for each chunk",
     "startingChunk": "Starting Chunk",
 };                                                                              // Descriptions of the settings
 
@@ -693,7 +696,7 @@ let settingStructure = {
     },
     "Customization": {
         "startingChunk": true,
-        "ids": false,
+        "ids": true,
         "cinematicRoll": true,
         "highvis": true,
         "darkmode": true,
@@ -970,6 +973,7 @@ let pickedNum;
 let highestTab;
 let highestTab2;
 let dropRatesGlobal = {};
+let tempChallengeArrSaved = {};
 let oldSavedChallengeArr = [];
 let introRollSelected = false;
 let introFancySelected = false;
@@ -998,8 +1002,1223 @@ let roll5Mid = 'rfr'; //Semanari
 
 // ----------------------------------------------------------
 
+var canvas;
+var ctx;
+var cw;
+var ch;
+var mapImg;
+var imgW;
+var imgH;
+var startX = 0;
+var startY = 0;
+var currentX = 0;
+var currentY = 0;
+var dragTotalX = 0;
+var dragTotalY = 0;
+var mouseDown = false;
+var totalZoom = .5;
+var zoomAmount = .15;
+var maxZoom = 3.5;
+var minZoom = .225;
+var movedNum = 0;
+var futureMoveX = 0;
+var futureMoveY = 0;
+var moveAmountX = 0;
+var moveAmountY = 0;
+let tempChunks = {};
+let tempSelectedChunks = [];
+let recentChunks = {};
+let animCount = 0;
+let removedRecent = 0;
+let controlChunk = 0;
+let stickerChunk = 0;
+let isHoveringBlacklist = false;
+let isHoveringSticker = false;
+let stickerChoicesContent = {'tag': '\uf02b', 'skull': '\uf54c', 'skull-crossbones': '\uf714', 'bomb': '\uf1e2', 'exclamation-circle': '\uf06a', 'dice': '\uf522', 'poo': '\uf2fe', 'frown': '\uf119', 'grin-alt': '\uf581', 'heart': '\uf004', 'star': '\uf005', 'gem': '\uf3a5', 'award': '\uf559', 'crown': '\uf521', 'flag': '\uf024', 'asterisk': '\uf069', 'clock': '\uf017', 'hourglass': '\uf254', 'link': '\uf0c1', 'map-marker-alt': '\uf3c5', 'radiation-alt': '\uf7ba', 'shoe-prints': '\uf54b', 'thumbs-down': '\uf165', 'thumbs-up': '\uf164', 'crow': '\uf520'};
+let osrsStickers = {};
+let chosenFromCinematic = null;
+let imgNotLoaded = false;
+let hoveredChunk = 0;
+let colorBox = "rgba(150, 150, 150, .6)";
+let colorBoxLight = "rgba(150, 150, 150, .4)";
+
+// Load osrs sticker images
+stickerChoicesOsrs.forEach(sticker => {
+    osrsStickers[sticker] = new Image;
+    osrsStickers[sticker].src = "resources/SVG/" + sticker + "-osrs.svg";
+});
+
+// Rounded rectangle
+CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+    if (w < 2 * r) r = w / 2;
+    if (h < 2 * r) r = h / 2;
+    this.beginPath();
+    this.moveTo(x+r, y);
+    this.arcTo(x+w, y,   x+w, y+h, r);
+    this.arcTo(x+w, y+h, x,   y+h, r);
+    this.arcTo(x,   y+h, x,   y,   r);
+    this.arcTo(x,   y,   x+w, y,   r);
+    this.closePath();
+    return this;
+}
+
+// Set offset of canvas from corner
+var reOffset = function() {
+    var BB = canvas.getBoundingClientRect();
+    offsetX = BB.left;
+    offsetY = BB.top;        
+}
+
+// Convert x and y values to chunkId
+var convertToChunkNum = function(x, y) {
+    return x * (skip + rowSize) - y + startingIndex;
+}
+
+// Convert chunkId to x and y values
+var convertToXY = function(chunkId) {
+    let x = Math.abs(Math.ceil((chunkId - startingIndex) / (skip + rowSize)));
+    let y;
+    if (chunkId <= startingIndex) {
+        y = startingIndex - chunkId;
+    } else if ((skip + rowSize) - ((chunkId - startingIndex) % (skip + rowSize)) === skip + rowSize) {
+        y = 0;
+    } else {
+        y = (skip + rowSize) - ((chunkId - startingIndex) % (skip + rowSize));
+    }
+    return {x: x, y: y};
+}
+
+// Canvas animation
+var drawCanvas = function() {
+    window.requestAnimationFrame(drawCanvas);
+    fixMapEdgesCanvas();
+    updateFutureMove();
+    selectedNum = tempSelectedChunks.length;
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(mapImg, dragTotalX, dragTotalY, totalZoom * imgW, totalZoom * imgH);
+
+    // Chunks
+    ctx.beginPath();
+    ctx.strokeStyle = "gray";
+    ctx.lineWidth = highVisibilityMode ? 1 : 2;
+    ctx.shadowColor = "transparent";
+    ctx.shadowBlur = 0;
+    for (let i = 0; i < rowSize; i++) {
+        for (let j = 0; j < (fullSize / rowSize); j++) {
+            let chunkId = convertToChunkNum(i, j).toString();
+            if (!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) {
+                if (hoveredChunk === chunkId) {
+                    ctx.fillStyle = "rgba(200, 200, 200, .25)";
+                    ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                }
+                ctx.strokeStyle = "gray";
+                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+            } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
+                if (highVisibilityMode) {
+                    ctx.fillStyle = "rgba(100, 255, 100, .25)";
+                } else if (hoveredChunk === chunkId) {
+                    ctx.fillStyle = "rgba(100, 255, 100, .33)";
+                } else {
+                    ctx.fillStyle = "rgba(100, 255, 100, .5)";
+                }
+                ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, .5)" : "black";
+                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                let heightOff;
+                if (tempSelectedChunks.indexOf(chunkId) + 1 > 999) {
+                    ctx.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto, sans-serif';
+                    heightOff = .65;
+                } else if (tempSelectedChunks.indexOf(chunkId) + 1 > 99) {
+                    ctx.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto, sans-serif';
+                    heightOff = .7;
+                } else {
+                    ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto, sans-serif';
+                    heightOff = .825;
+                }
+                ctx.fillStyle = "white";
+                ctx.textAlign = "center";
+                ctx.fillText(tempSelectedChunks.indexOf(chunkId) + 1, dragTotalX + (totalZoom * ((i + .5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
+            } else if (!!tempChunks['potential'] && tempChunks['potential'][chunkId]) {
+                if (highVisibilityMode) {
+                    ctx.fillStyle = "rgba(255, 255, 100, .25)";
+                } else if (hoveredChunk === chunkId) {
+                    ctx.fillStyle = "rgba(255, 255, 100, .33)";
+                } else {
+                    ctx.fillStyle = "rgba(255, 255, 100, .5)";
+                }
+                ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, .5)" : "black";
+                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                let heightOff;
+                if (selectedNum + 1 > 999) {
+                    ctx.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto, sans-serif';
+                    heightOff = .65;
+                } else if (selectedNum + 1 > 99) {
+                    ctx.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto, sans-serif';
+                    heightOff = .7;
+                } else {
+                    ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto, sans-serif';
+                    heightOff = .825;
+                }
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.fillText(++selectedNum, dragTotalX + (totalZoom * ((i + .5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
+            } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'][chunkId]) {
+                if (highVisibilityMode) {
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+                } else if (hoveredChunk === chunkId) {
+                    ctx.fillStyle = "rgba(0, 0, 0, .4)";
+                } else {
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+                }
+                ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, .5)" : "black";
+                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+            } else {
+                if (highVisibilityMode) {
+                    ctx.fillStyle = colorBoxLight;
+                } else if (hoveredChunk === chunkId) {
+                    ctx.fillStyle = colorBoxLight;
+                } else {
+                    ctx.fillStyle = colorBox;
+                }
+                ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, .5)" : "black";
+                ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+            }
+            if (showChunkIds && !onMobile) {
+                ctx.fillStyle = "white";
+                ctx.font = (totalZoom * (imgW / rowSize) * (1 / 5)) + 'px Calibri, Roboto, sans-serif';
+                ctx.textAlign = "left";
+                ctx.fillText(chunkId, dragTotalX + (totalZoom * ((i) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + .15) * imgH / (fullSize / rowSize))));
+            }
+        }
+    }
+
+    // Locked chunk
+    let {x, y} = convertToXY(infoLockedId);
+    if (highVisibilityMode) {
+        ctx.fillStyle = "rgba(0, 255, 255, .25)";
+    } else if (hoveredChunk === infoLockedId) {
+        ctx.fillStyle = "rgba(0, 255, 255, .25)";
+    } else {
+        ctx.fillStyle = "rgba(0, 255, 255, .33)";
+    }
+    ctx.strokeStyle = "rgb(0, 170, 170)";
+    ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+    ctx.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+    ctx.font = (totalZoom * (imgW / rowSize)) * (.9) + 'px FontAwesome';
+    ctx.fillStyle = "rgba(0, 255, 255, .75)";
+    ctx.strokeStyle = "rgba(0, 0, 0, .75)";
+    ctx.textAlign = "center";
+    ctx.fillText('\uf129', dragTotalX + (totalZoom * ((x + .5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + .825) * imgH / (fullSize / rowSize))));
+    ctx.strokeText('\uf129', dragTotalX + (totalZoom * ((x + .5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + .825) * imgH / (fullSize / rowSize))));
+
+    // Recent chunks
+    ctx.save();
+    !!recentChunks && !onMobile && Object.keys(recentChunks).forEach(chunkId => {
+        let {x, y} = convertToXY(chunkId);
+        ctx.shadowColor = 'white';
+        if ((!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) || (!!tempChunks['potential'] && tempChunks['potential'][chunkId])) {
+            ctx.fillStyle = "rgba(255, 255, 0, .5)";
+        } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
+            ctx.fillStyle = "rgba(255, 0, 0, .5)";
+        } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'][chunkId]) {
+            ctx.fillStyle = "rgba(0, 0, 0, .85)";
+        } else {
+            ctx.fillStyle = "rgba(255, 255, 255, .5)";
+        }
+        ctx.shadowBlur = Math.abs((Math.floor(animCount / 1.5) % 50) - 25) + 5;
+        ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+    });
+    ctx.restore();
+
+    // Control chunk
+    ctx.save();
+    if (controlChunk !== 0 && (!locked || testMode) && !onMobile) {
+        let {x, y} = convertToXY(controlChunk);
+        let heightOff = .55;
+        let blacklistText = (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(controlChunk)) ? "Un-Blacklist" : "Blacklist";
+        ctx.fillStyle = "rgba(0, 0, 0, .75)";
+        ctx.roundRect(dragTotalX + (totalZoom * ((x + .05) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + .375) * imgH / (fullSize / rowSize))), totalZoom * ((.9) * imgW / rowSize), totalZoom * ((.25) * imgH / (fullSize / rowSize)), totalZoom * ((.9) * imgW / rowSize)).fill();
+        ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto, sans-serif';
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.fillText(blacklistText, dragTotalX + (totalZoom * ((x + .5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + heightOff) * imgH / (fullSize / rowSize))));
+        if (!tempChunks['stickered'] || !tempChunks['stickered'].hasOwnProperty(controlChunk)) {
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 1.5;
+            ctx.font = '900 ' + (totalZoom * (imgW / rowSize)) * (.25) + 'px "Font Awesome 5 Free"';
+            ctx.fillStyle = "rgb(201, 209, 217)";
+            ctx.scale(-1, 1);
+            ctx.fillText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
+            ctx.strokeText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
+        }
+    }
+    ctx.restore();
+
+    // Stickered chunks
+    ctx.save();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 1.5;
+    ctx.font = '900 ' + (totalZoom * (imgW / rowSize)) * (.25) + 'px "Font Awesome 5 Free"';
+    !!tempChunks['stickered'] && Object.keys(tempChunks['stickered']).forEach(function(chunkId) {
+        ctx.scale(-1, 1);
+        let {x, y} = convertToXY(chunkId);
+        if (stickerChoices.includes(tempChunks['stickered'][chunkId])) {
+            ctx.fillStyle = tempChunks['stickeredColors'][chunkId];
+            ctx.fillText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
+            ctx.strokeText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
+            ctx.scale(-1, 1);
+        } else if (stickerChoicesOsrs.includes(tempChunks['stickered'][chunkId])) {
+            ctx.scale(-1, 1);
+            ctx.drawImage(osrsStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + .7) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .05) * imgH / (fullSize / rowSize))), (totalZoom * (imgW / rowSize)) * (.25), (totalZoom * (imgW / rowSize)) * (.25));
+        }
+    });
+    ctx.restore();
+
+    chunkBordersCanvas();
+
+    // Control sticker chunk
+    ctx.save();
+    if (stickerChunk !== 0 && !onMobile) {
+        if ((!tempChunks['stickered'] || !tempChunks['stickered'].hasOwnProperty(stickerChunk)) && (!locked || testMode)) {
+            let {x, y} = convertToXY(stickerChunk);
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 1.5;
+            ctx.font = '900 ' + (totalZoom * (imgW / rowSize)) * (.25) + 'px "Font Awesome 5 Free"';
+            ctx.fillStyle = "rgb(201, 209, 217)";
+            ctx.scale(-1, 1);
+            ctx.fillText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
+            ctx.strokeText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
+        }
+        if (isHoveringSticker && tempChunks['stickeredNotes'].hasOwnProperty(stickerChunk) && tempChunks['stickeredNotes'][stickerChunk] !== '') {
+            let {x, y} = convertToXY(stickerChunk);
+            ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto, sans-serif';
+            ctx.fillStyle = "rgb(201, 209, 217)";
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 1;
+            ctx.fillRect((dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))) - 5, dragTotalY + (totalZoom * ((y + .025) * imgH / (fullSize / rowSize))), ctx.measureText(tempChunks['stickeredNotes'][stickerChunk]).width + 10, (totalZoom * (.25 * imgH / (fullSize / rowSize))));
+            ctx.strokeRect((dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))) - 5, dragTotalY + (totalZoom * ((y + .025) * imgH / (fullSize / rowSize))), ctx.measureText(tempChunks['stickeredNotes'][stickerChunk]).width + 10, (totalZoom * (.25 * imgH / (fullSize / rowSize))));
+            ctx.fillStyle = "black";
+            ctx.textAlign = "left";
+            ctx.fillText(tempChunks['stickeredNotes'][stickerChunk], (dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .2) * imgH / (fullSize / rowSize))));
+        }
+    }
+    ctx.restore();
+
+    animCount++;
+}
+
+// Handles mouse down event
+var handleMouseDown = function(e) {
+    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
+        return;
+    }
+    if (!!e.touches) {
+        var touch = e.touches[0];
+
+        startX = touch.clientX - offsetX;
+        startY = touch.clientY - offsetY;
+    } else {
+        e.preventDefault();
+        e.stopPropagation();
+
+        startX = e.clientX - offsetX;
+        startY = e.clientY - offsetY;
+    }
+    mouseDown = true;
+    movedNum = 0;
+}
+
+// Handles mouse move event
+var handleMouseMove = function(e) {
+    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
+        return;
+    }
+    if (!highVisibilityMode && !onMobile) {
+        hoveredChunk = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize))))).toString();
+    } else {
+        hoveredChunk = 0;
+    }
+
+    if (!!e.touches) {
+        var touch = e.touches[0];
+
+        currentX = touch.clientX - offsetX;
+        currentY = touch.clientY - offsetY;
+
+        // Panning
+        if (mouseDown) {
+            movedNum++;
+
+            let xMove = currentX - startX;
+            let yMove = currentY - startY;
+            dragTotalX += xMove;
+            dragTotalY += yMove;
+
+            startX = currentX;
+            startY = currentY;
+        }
+    } else {
+        let hoverId = 0;
+
+        currentX = e.clientX - offsetX;
+        currentY = e.clientY - offsetY;
+
+        // Panning
+        if (mouseDown) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            movedNum++;
+
+            let xMove = currentX - startX;
+            let yMove = currentY - startY;
+            dragTotalX += xMove;
+            dragTotalY += yMove;
+
+            startX = currentX;
+            startY = currentY;
+        }
+
+        // Recent hover
+        if (!!recentChunks && Object.keys(recentChunks).length > 0) {
+            if (hoverId === 0) {
+                hoverId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
+            }
+            if (removedRecent !== hoverId && hoverId !== 0 && removedRecent !== 0) {
+                delete recentChunks[removedRecent];
+                hoverId = 0;
+                removedRecent = 0;
+            }
+            if (recentChunks.hasOwnProperty(hoverId)) {
+                removedRecent = hoverId;
+            }
+        }
+        
+        // Control
+        if (controlChunk !== 0 && controlChunk === convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))))) {
+            if ((currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) >= .05 && (currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) <= .95 &&
+                ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) >= .375 && ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) <= .625) {
+                isHoveringBlacklist = true;
+            } else {
+                isHoveringBlacklist = false;
+            }
+        } else {
+            isHoveringBlacklist = false;
+        }
+        if (stickerChunk !== 0 && stickerChunk === convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))))) {
+            if ((currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) >= .7 && (currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) <= .95 &&
+                ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) >= .05 && ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) <= .3) {
+                isHoveringSticker = true;
+            } else {
+                isHoveringSticker = false;
+            }
+        } else {
+            isHoveringSticker = false;
+        }
+        if ((isHoveringBlacklist || isHoveringSticker) && (!locked || testMode)) {
+            canvas.style.cursor = "pointer";
+        } else {
+            canvas.style.cursor = "default";
+        }
+    }
+}
+
+// Checks if chunk is locked
+var checkIfGray = function(chunkId) {
+    return (!tempChunks['unlocked'] || !tempChunks['unlocked'].hasOwnProperty(chunkId)) && (!tempChunks['selected'] || !tempChunks['selected'].hasOwnProperty(chunkId)) && (!tempChunks['potential'] || !tempChunks['potential'].hasOwnProperty(chunkId));
+}
+
+// Handles the key down event
+var handleKeyDown = function(e) {
+    let hoverId = 0;
+
+    // Control key
+    if (e.key === 'Control') {
+        if (hoverId === 0) {
+            hoverId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
+        }
+        if (checkIfGray(hoverId)) {
+            controlChunk = hoverId;
+            if (controlChunk !== 0) {
+                if ((currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) >= .05 && (currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) <= .95 &&
+                    ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) >= .375 && ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) <= .625) {
+                    isHoveringBlacklist = true;
+                } else {
+                    isHoveringBlacklist = false;
+                }
+            } else {
+                isHoveringBlacklist = false;
+            }
+        } else {
+            controlChunk = 0;
+        }
+        stickerChunk = hoverId;
+        if (stickerChunk !== 0) {
+            if ((currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) >= .7 && (currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) <= .95 &&
+                ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) >= .05 && ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) <= .3) {
+                isHoveringSticker = true;
+            } else {
+                isHoveringSticker = false;
+            }
+        } else {
+            isHoveringSticker = false;
+        }
+    } else {
+        controlChunk = 0;
+        stickerChunk = 0;
+    }
+    if ((isHoveringBlacklist || isHoveringSticker) && (!locked || testMode)) {
+        canvas.style.cursor = "pointer";
+    } else {
+        canvas.style.cursor = "default";
+    }
+}
+
+// Handles the kup up event
+var handleKeyUp = function(e) {
+    // Control key
+    if (e.key === 'Control') {
+        controlChunk = 0;
+        stickerChunk = 0;
+        isHoveringBlacklist = false;
+        isHoveringSticker = false;
+        canvas.style.cursor = "default";
+    }
+}
+
+// Handles the mouse up event
+var handleMouseUp = function(e) {
+    if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
+        return;
+    }
+    if (e.button === 2 && e.target.id === 'canvas') {
+        e.preventDefault();
+        e.stopPropagation();
+        currentX = e.clientX - offsetX;
+        currentY = e.clientY - offsetY;
+        let id = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
+        if (infoLockedId === id.toString()) {
+            infoLockedId = -1;
+        } else {
+            infoLockedId = id.toString();
+        }
+        updateChunkInfo();
+    } else if (e.button === 0) {
+        mouseDown = false;
+        if (settingsOpen && !screenshotMode && e.target.id === 'canvas') {
+            settingsMenu();
+            return;
+        } else if (locked && !testMode && e.target.id === 'canvas') {
+            if (movedNum > 1) {
+                return;
+            }
+            if (lockBoxOpen) {
+                closePinBox();
+            }
+            $('.lock-closed').addClass('animated shake').removeClass('').css({ 'color': 'rgb(200, 75, 75)' });
+            setTimeout(function() {
+                $('.lock-closed').removeClass('animated shake').addClass('').css({ 'color': 'black' });
+            }, 500);
+            return;
+        } else if (checkFalseRules() && chunkTasksOn && e.target.id === 'canvas') {
+            helpFunc();
+            return;
+        }
+        if (movedNum <= 1 && e.target.id === 'canvas') {
+            e.preventDefault();
+            e.stopPropagation();
+            currentX = e.clientX - offsetX;
+            currentY = e.clientY - offsetY;
+            let chunkId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
+            if (isHoveringBlacklist) {
+                blacklistCanvas(chunkId);
+            } else if (isHoveringSticker) {
+                openStickers(chunkId);
+            } else if (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(chunkId)) {
+                if (!recentChunks.hasOwnProperty(chunkId)) {
+                    delete tempChunks['unlocked'][chunkId];
+                    !onMobile && getChunkAreas();
+                    !onMobile && setupCurrentChallenges(false);
+                    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+                    !onMobile && setCalculating('.panel-areas');
+                    !onMobile && setCalculating('.panel-completed');
+                    calcCurrentChallengesCanvas();
+                }
+            } else if (!!tempChunks['selected'] && tempChunks['selected'].hasOwnProperty(chunkId)) {
+                if (e.shiftKey) {
+                    delete tempChunks['selected'][chunkId];
+                    tempSelectedChunks.splice(tempSelectedChunks.indexOf(chunkId.toString()), 1);
+                } else {
+                    delete tempChunks['selected'][chunkId];
+                    tempSelectedChunks.splice(tempSelectedChunks.indexOf(chunkId.toString()), 1);
+                    if (!tempChunks['unlocked']) {
+                        tempChunks['unlocked'] = {};
+                    }
+                    tempChunks['unlocked'][chunkId] = chunkId;
+                    !onMobile && getChunkAreas();
+                    !onMobile && setupCurrentChallenges(false);
+                    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+                    !onMobile && setCalculating('.panel-areas');
+                    !onMobile && setCalculating('.panel-completed');
+                    calcCurrentChallengesCanvas();
+                }
+            } else if (!!tempChunks['potential'] && tempChunks['potential'].hasOwnProperty(chunkId)) {
+                delete tempChunks['potential'][chunkId];
+                if (!tempChunks['unlocked']) {
+                    tempChunks['unlocked'] = {};
+                }
+                tempChunks['unlocked'][chunkId] = chunkId;
+                !!tempChunks['potential'] && Object.keys(tempChunks['potential']).forEach(otherChunkId => {
+                    delete tempChunks['potential'][otherChunkId];
+                    tempChunks['selected'][otherChunkId] = otherChunkId;
+                    tempSelectedChunks.push(otherChunkId.toString());
+                    delete recentChunks[otherChunkId.toString()];
+                });
+                delete tempChunks['potential'];
+                autoSelectNeighbors && selectNeighborsCanvas(parseInt(chunkId));
+                if (autoRemoveSelected) {
+                    delete tempSelectedChunks;
+                    !!tempChunks['selected'] && Object.keys(tempChunks['selected']).forEach(otherChunkId => {
+                        delete tempChunks['selected'][otherChunkId];
+                    });
+                }
+                isPicking = false;
+                if (isPicking) {
+                    $('.pick').text('Pick for me');
+                } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+                    $('.pick').text('Random Start?');
+                } else {
+                    $('.pick').text('Pick Chunk');
+                }
+                roll2On && $('.roll2').text('Roll 2');
+                roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
+                unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
+                setRecentRoll(chunkId);
+                !onMobile && getChunkAreas();
+                !onMobile && setupCurrentChallenges(false);
+                !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+                !onMobile && setCalculating('.panel-areas');
+                !onMobile && setCalculating('.panel-completed');
+                calcCurrentChallengesCanvas();
+            } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(chunkId)) {
+                // --
+            } else {
+                if (!tempChunks['selected']) {
+                    tempChunks['selected'] = {};
+                }
+                tempChunks['selected'][chunkId] = chunkId;
+                tempSelectedChunks.push(chunkId.toString());
+            }
+        }
+        $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
+        $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
+    }
+    setData();
+}
+
+// Sets all neighbors of recently unlocked chunk to selected
+var selectNeighborsCanvas = function(chunkId) {
+    var ops = ['-x', '+x', '-y', '+y'];
+    var newChunkId;
+    for (var i = 0; i < 4; i++) {
+        if (ops[i].substring(1, 2) === 'x') {
+            newChunkId = chunkId + (((i - 1) * 2 + 1) * 256);
+        } else {
+            newChunkId = chunkId + ((i - 3) * 2 + 1);
+        }
+        if (checkIfGray(newChunkId) && (!settings['walkableRollable'] || chunkInfo['walkableChunksF2P'].includes(newChunkId.toString()) || (!rules['F2P'] && chunkInfo['walkableChunks'].includes(newChunkId.toString())))) {
+            tempSelectedChunks.push(newChunkId.toString());
+            if (!tempChunks['selected']) { 
+                tempChunks['selected'] = {};
+            }
+            tempChunks['selected'][newChunkId] = newChunkId;
+        }
+    }
+}
+
+// Opens the roll chunk modal
+var openRollChunkCanvas = function(el, rand, sNum) {
+    rollChunkModalOpen = true;
+    $('.roll-chunk-title').text('Rolling your next chunk...');
+    $('.roll-chunk-subtitle').text('');
+    $('.roll-chunk-outer').empty().css('top', '0');
+    $('#submit-roll-chunk-button').hide();
+    pickedNum = rand;
+    let numSlots = 500;
+    let elArr = [...el];
+    let topNum;
+    let xCoord;
+    let yCoord;
+    chosenFromCinematic = el[rand];
+    elArr = shuffle(elArr);
+    xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 17;
+    yCoord = 64 - (parseInt(elArr[elArr.length - 1]) % 256);
+    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+    for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
+        for (let j = 0; j < elArr.length; j++) {
+            let num = elArr[j];
+            xCoord = Math.floor(parseInt(elArr[j]) / 256) - 17;
+            yCoord = 64 - (parseInt(elArr[j]) % 256);
+            $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+            if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
+                topNum = (-15.998 * ((i * elArr.length) + j)) + 'vh';
+            }
+        };
+    };
+    xCoord = Math.floor(parseInt(elArr[0]) / 256) - 17;
+    yCoord = 64 - (parseInt(elArr[0]) % 256);
+    let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
+    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+    setTimeout(function() {
+        $('.roll-chunk-outer').animate({
+            top: topNum
+        }, {
+            duration: randomDuration,
+            easing: "easeOutCubic",
+            complete: function() {
+                $('.roll-chunk-title').text((chunkInfo['chunks'].hasOwnProperty(chosenFromCinematic) && chunkInfo['chunks'][chosenFromCinematic].hasOwnProperty('Nickname') ? chunkInfo['chunks'][chosenFromCinematic]['Nickname'] : 'Unknown') + '(' + chosenFromCinematic + ')');
+                !!sNum && !isNaN(sNum) && $('.roll-chunk-subtitle').text('[Rolled number: ' + sNum + ']');
+                $('#submit-roll-chunk-button').show();
+            }
+        });
+    }, 1000);
+    setData();
+    $('#myModal23').show();
+}
+
+// Delayed pick chunk after cinematic
+var takeMeToChunkCanvas = function() {
+    rollChunkModalOpen = false;
+    scrollToChunkCanvas(chosenFromCinematic);
+    chosenFromCinematic = null;
+    $('.recent').removeClass('recent');
+    calcCurrentChallengesCanvas();
+    $('.roll-chunk-title').text('Rolling your next chunk...');
+    $('.roll-chunk-subtitle').text('');
+    $('.roll-chunk-outer').empty().css('top', '0');
+    $('#submit-roll-chunk-button').hide();
+    $('#myModal23').hide();
+}
+
+// Sets the recent roll in data
+var setRecentRoll = function(chunkId) {
+    let tempChunk1;
+    let tempChunk2;
+    let tempChunkTime1;
+    let tempChunkTime2;
+    if (signedIn && !onTestServer && !testMode) {
+        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt(chunkId), (error) => {
+            regainConnectivity(() => {
+                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt(chunkId));
+            });
+        });
+    }
+    chunkOrder[new Date().getTime()] = parseInt(chunkId);
+    for (let count = 1; count <= 5; count++) {
+        tempChunk1 = recent[count - 1];
+        tempChunkTime1 = recentTime[count - 1];
+        if (count === 1) {
+            recent[count - 1] = parseInt(chunkId);
+            recentTime[count - 1] = new Date().getTime();
+        } else {
+            recent[count - 1] = tempChunk2;
+            recentTime[count - 1] = tempChunkTime2;
+        }
+        tempChunk2 = tempChunk1;
+        tempChunkTime2 = tempChunkTime1;
+        let tempDate = new Date();
+        tempDate.setTime(recentTime[count - 1]);
+        tempDate > 0 && $('#recentChunks' + count).html('<span class="time">' + tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2] + ': </span><span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunkCanvas(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
+        tempDate <= 0 && $('#recentChunks' + count).html('<span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunkCanvas(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
+    }
+    if (!!recentTime[0]) {
+        $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
+    }
+    setData();
+}
+
+// Pick button: picks a random chunk from selected/potential
+var pickCanvas = function(both) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
+        return;
+    }
+    if (checkFalseRules() && chunkTasksOn) {
+        helpFunc();
+        return;
+    }
+    var el;
+    var rand;
+    var sNum;
+    let didRandomStart = false;
+    if (both && isPicking) {
+        let numToRoll = mid === roll5Mid ? 5 : 2;
+        for (let temp = 0; temp < numToRoll; temp++) {
+            el = Object.keys(tempChunks['potential']);
+            rand = 0;
+            delete tempChunks['potential'][el[rand]];
+            if (!tempChunks['unlocked']) {
+                tempChunks['unlocked'] = {};
+            }
+            tempChunks['unlocked'][el[rand]] = el[rand];
+            recentChunks[el[rand]] = el[rand];
+            scrollToChunkCanvas(el[rand]);
+            autoSelectNeighbors && !didRandomStart && selectNeighborsCanvas(parseInt(el[rand]));
+            setRecentRoll(el[rand]);
+        }
+        if (autoRemoveSelected) {
+            delete tempSelectedChunks;
+            !!tempChunks['selected'] && Object.keys(tempChunks['selected']).forEach(chunkId => {
+                delete tempChunks['selected'][chunkId];
+            });
+        }
+        $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
+        $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
+        isPicking = false;
+        if (isPicking) {
+            $('.pick').text('Pick for me');
+        } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+            $('.pick').text('Random Start?');
+        } else {
+            $('.pick').text('Pick Chunk');
+        }
+        roll2On && $('.roll2').text('Roll 2');
+        roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
+        unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
+        completeChallenges();
+        !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+        !onMobile && setCalculating('.panel-areas');
+        !onMobile && setCalculating('.panel-completed');
+        !onMobile && !activeSubTabs['skill'] && expandActive('skill');
+        !onMobile && !activeSubTabs['bis'] && expandActive('bis');
+        !onMobile && !activeSubTabs['quest'] && expandActive('quest');
+        !onMobile && !activeSubTabs['diary'] && expandActive('diary');
+        !onMobile && !activeSubTabs['extra'] && expandActive('extra');
+        !onMobile && calcCurrentChallengesCanvas();
+        setData();
+        return;
+    } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+        el = [];
+        if (rules['F2P']) {
+            chunkInfo['walkableChunksF2P'].filter(id => { return (!tempChunks['unlocked'] || !tempChunks['unlocked'][id]) && (!tempChunks['blacklisted'] || !tempChunks['blacklisted'][id]) }).forEach(id => {
+                el.push(id);
+            });
+        } else {
+            chunkInfo['walkableChunks'].filter(id => { return (!tempChunks['unlocked'] || !tempChunks['unlocked'][id]) && (!tempChunks['blacklisted'] || !tempChunks['blacklisted'][id]) }).forEach(id => {
+                el.push(id);
+            });
+        }
+        rand = Math.floor(Math.random() * el.length);
+        if (settings['cinematicRoll'] && !onMobile) {
+            openRollChunkCanvas(el, rand, 0);
+        }
+        didRandomStart = true;
+        !!tempChunks['selected'] && tempChunks['selected'].hasOwnProperty(el[rand]) && (delete tempChunks['selected'][el[rand]]);
+        !!tempChunks['potential'] && tempChunks['potential'].hasOwnProperty(el[rand]) && (delete tempChunks['potential'][el[rand]]);
+        !!tempSelectedChunks && tempSelectedChunks.includes(el[rand]) && (tempSelectedChunks.splice(tempSelectedChunks.indexOf(el[rand]), 1));
+        if (!tempChunks['unlocked']) {
+            tempChunks['unlocked'] = {};
+        }
+        tempChunks['unlocked'][el[rand]] = el[rand];
+        if (isPicking) {
+            $('.pick').text('Pick for me');
+        } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+            $('.pick').text('Random Start?');
+        } else {
+            $('.pick').text('Pick Chunk');
+        }
+    } else if (!isPicking) {
+        el = Object.keys(tempChunks['selected']) || [];
+        rand = Math.floor(Math.random() * el.length);
+        sNum = tempSelectedChunks.indexOf(el[rand]) + 1;
+        if (settings['cinematicRoll'] && !onMobile) {
+            openRollChunkCanvas(el, rand, sNum);
+        }
+        tempSelectedChunks.splice(sNum - 1, 1);
+        delete tempChunks['selected'][el[rand]];
+        tempChunks['unlocked'][el[rand]] = el[rand];
+    } else {
+        el = Object.keys(tempChunks['potential']);
+        rand = Math.floor(Math.random() * el.length);
+        delete tempChunks['potential'][el[rand]];
+        if (!tempChunks['unlocked']) {
+            tempChunks['unlocked'] = {};
+        }
+        tempChunks['unlocked'][el[rand]] = el[rand];
+        recentChunks[el[rand]] = el[rand];
+        !!tempChunks['potential'] && Object.keys(tempChunks['potential']).forEach(otherChunkId => {
+            delete tempChunks['potential'][otherChunkId];
+            tempChunks['selected'][otherChunkId] = otherChunkId;
+            tempSelectedChunks.push(otherChunkId.toString());
+            delete recentChunks[otherChunkId.toString()];
+        });
+        delete tempChunks['potential'];
+        scrollToChunkCanvas(el[rand]);
+        isPicking = false;
+        if (isPicking) {
+            $('.pick').text('Pick for me');
+        } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+            $('.pick').text('Random Start?');
+        } else {
+            $('.pick').text('Pick Chunk');
+        }
+        roll2On && $('.roll2').text('Roll 2');
+        roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
+        unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
+    }
+    if (!el[rand]) {
+        return;
+    }
+    autoSelectNeighbors && !didRandomStart && selectNeighborsCanvas(parseInt(el[rand]));
+    if (autoRemoveSelected) {
+        delete tempSelectedChunks;
+        !!tempChunks['selected'] && Object.keys(tempChunks['selected']).forEach(chunkId => {
+            delete tempChunks['selected'][chunkId];
+        });
+    }
+    (!settings['cinematicRoll'] || onMobile) && scrollToChunkCanvas(el[rand]);
+    setRecentRoll(el[rand]);
+    $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
+    $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
+    completeChallenges(true);
+    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+    !onMobile && setCalculating('.panel-areas');
+    !onMobile && setCalculating('.panel-completed');
+    !onMobile && !activeSubTabs['skill'] && expandActive('skill');
+    !onMobile && !activeSubTabs['bis'] && expandActive('bis');
+    !onMobile && !activeSubTabs['quest'] && expandActive('quest');
+    !onMobile && !activeSubTabs['diary'] && expandActive('diary');
+    !onMobile && !activeSubTabs['extra'] && expandActive('extra');
+    !onMobile && !settings['cinematicRoll'] && calcCurrentChallengesCanvas();
+    setData();
+}
+
+// Roll 2 button: rolls 2 chunks from all selected chunks
+var roll2Canvas = function() {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (((!tempChunks['selected'] || Object.keys(tempChunks['selected']).length < 1) && !isPicking) || ((!tempChunks['potential'] || Object.keys(tempChunks['potential']).length < 1) && isPicking))) {
+        return;
+    }
+    if (checkFalseRules() && chunkTasksOn) {
+        helpFunc();
+        return;
+    }
+    if (isPicking) {
+        pickCanvas(true);
+        return;
+    }
+    isPicking = true;
+    var el = Object.keys(tempChunks['selected']);
+    var rand;
+    if (el.length > 0) {
+        $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
+        $('.pick').text('Pick for me');
+        $('.roll2').text('Unlock both');
+        mid === roll5Mid && $('.roll2').text('Unlock all');
+    }
+    let numToRoll = mid === roll5Mid ? 5 : 2;
+    for (var i = 0; i < numToRoll; i++) {
+        el = Object.keys(tempChunks['selected']);
+        rand = Math.floor(Math.random() * el.length);
+        delete tempChunks['selected'][el[rand]];
+        if (!tempChunks['potential']) {
+            tempChunks['potential'] = {};
+        }
+        tempSelectedChunks.splice(tempSelectedChunks.indexOf(el[rand]), 1);
+        tempChunks['potential'][el[rand]] = el[rand];
+        recentChunks[el[rand]] = el[rand]
+    }
+    setData();
+}
+
+// Unpicks a random unlocked chunk
+var unpickCanvas = function() {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || Object.keys(tempChunks['unlocked']).length < 1) {
+        return;
+    }
+    if (checkFalseRules() && chunkTasksOn) {
+        helpFunc();
+        return;
+    }
+    var el = Object.keys(tempChunks['unlocked']);
+    if (el.length <= 0) {
+        return;
+    }
+    var rand = Math.floor(Math.random() * el.length);
+    delete tempChunks['unlocked'][el[rand]];
+    if (!tempChunks['selected']) {
+        tempChunks['selected'] = {};
+    }
+    tempChunks['selected'][el[rand]] = el[rand];
+    tempSelectedChunks.push(el[rand]);
+    recentChunks[el[rand]] = el[rand];
+    $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
+    $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
+    scrollToChunkCanvas(el[rand]);
+    setData();
+}
+
+// Sets up the selected order at map setup
+var setUpSelected = function() {
+    tempSelectedChunks = [];
+    !!tempChunks['selected'] && Object.keys(tempChunks['selected']).sort(function(a, b) { return b - a }).forEach(chunkId => {
+        tempSelectedChunks.push(chunkId);
+    });
+}
+
+// Finds the current challenge in each skill
+var calcCurrentChallengesCanvas = function() {
+    if (gotData) {
+        myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills]);
+        workerOut++;
+    }
+}
+
+// Handles mouse leaving the page
+var handleMouseOut = function(e) {
+    if (e.button !== 0) {
+        return
+    }
+    if (mouseDown) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        handleMouseMove(e);
+    }
+}
+
+
+// Handles mouse scroll zooming
+var handleMouseScroll = function(e) {
+    var dir;
+    if (e.type === 'DOMMouseScroll') {
+        if (e.detail < 0) {
+            dir = 1;
+        } else {
+            dir = -1;
+        }
+    } else {
+        if (e.originalEvent.wheelDelta > 0) {
+            dir = 1;
+        } else {
+            dir = -1;
+        }
+    }
+
+    var currentMouseX = e.clientX;
+    var currentMouseY = e.clientY;
+    
+    // As image zooms, shift top-left corner closer to or further from mouse position
+    var offsetX = (currentMouseX - dragTotalX) * (dir * zoomAmount);
+    var offsetY = (currentMouseY - dragTotalY) * (dir * zoomAmount);
+
+    if (totalZoom + (dir * zoomAmount * totalZoom) <= maxZoom && totalZoom + (dir * zoomAmount * totalZoom) >= minZoom) {
+        totalZoom += (dir * zoomAmount * totalZoom);
+        dragTotalX = dragTotalX - offsetX;
+        dragTotalY = dragTotalY - offsetY;
+    }
+}
+
+// Blacklists the given chunk
+var blacklistCanvas = function(chunkId) {
+    if (!tempChunks['blacklisted']) {
+        tempChunks['blacklisted'] = {};
+    }
+    if (tempChunks['blacklisted'].hasOwnProperty(chunkId)) {
+        delete tempChunks['blacklisted'][chunkId];
+    } else {
+        tempChunks['blacklisted'][chunkId] = chunkId;
+    }
+    setData();
+}
+
+// Prevents zooming from pulling map too off-center screen
+var fixMapEdgesCanvas = function() {
+    var leftNumber = dragTotalX;
+    var topNumber = dragTotalY;
+    var rightEdge = leftNumber + (totalZoom * imgW);
+    var bottomEdge = topNumber + (totalZoom * imgH);
+
+    var margins = [450, 400, 400, 400];
+    if (topNumber > margins[0]) {
+        dragTotalY = margins[0];
+    }
+    if (rightEdge < window.innerWidth - margins[1]) {
+        dragTotalX = (window.innerWidth - margins[1]) - (totalZoom * imgW);
+    }
+    if (bottomEdge < window.innerHeight - margins[2]) {
+        dragTotalY = (window.innerHeight - margins[2]) - (totalZoom * imgH);
+    }
+    if (leftNumber > margins[3]) {
+        dragTotalX = margins[3];
+    }
+}
+
+// Move towards point being centered on
+var updateFutureMove = function() {
+    if (Math.abs(moveAmountX) < Math.abs(futureMoveX)) {
+        let easing = (1 - (Math.abs(moveAmountX / futureMoveX) * Math.abs(moveAmountX / futureMoveX))) < .01 ? .01 : (1 - (Math.abs(moveAmountX / futureMoveX) * Math.abs(moveAmountX / futureMoveX)));
+        dragTotalX += -futureMoveX * .075 * easing;
+        moveAmountX += -futureMoveX * .075 * easing;
+    } else {
+        futureMoveX = 0;
+        moveAmountX = 0;
+    }
+    if (Math.abs(moveAmountY) < Math.abs(futureMoveY)) {
+        let easing = (1 - (Math.abs(moveAmountY / futureMoveY) * Math.abs(moveAmountY / futureMoveY))) < .01 ? .01 : (1 - (Math.abs(moveAmountY / futureMoveY) * Math.abs(moveAmountY / futureMoveY)));
+        dragTotalY += -futureMoveY * .075 * easing;
+        moveAmountY += -futureMoveY * .075 * easing;
+    } else {
+        futureMoveY = 0;
+        moveAmountY = 0;
+    }
+}
+
+// Scrolls to position x.xPart, y.yPart
+var scrollToPosCanvas = function(x, y, xPart, yPart, doQuick) {
+    let moveX = (totalZoom * (-(x + .5 + xPart) * imgW / rowSize)) + (window.innerWidth / 2);
+    let moveY = (totalZoom * (-(y + .5 + yPart) * imgH / (fullSize / rowSize))) + (window.innerHeight / 2);
+    if (doQuick) {
+        dragTotalX = moveX;
+        dragTotalY = moveY;
+    } else {
+        futureMoveX = dragTotalX - moveX;
+        futureMoveY = dragTotalY - moveY;
+    }
+}
+
+// Scrolls to chunk with given id
+var scrollToChunkCanvas = function(chunkId) {
+    recentChunks[chunkId] = chunkId;
+    scrollToPosCanvas(convertToXY(chunkId).x, convertToXY(chunkId).y, 0, 0, false);
+}
+
+// Highlights array of chunk ids for current quest
+var highlightAllQuestCanvas = function() {
+    questChunks.forEach(chunkId => {
+        recentChunks[chunkId] = chunkId;
+    });
+}
+
+// Centers on the clicked recent chunk and highlights it
+var recentChunkCanvas = function(el) {
+    if ($($(el).children('.chunk')).text() === '-' || inEntry) {
+        return;
+    }
+    let id = parseInt($($(el).children('.chunk')).text());
+    scrollToChunkCanvas(id);
+}
+
+// Centers on average position of all unlocked chunks
+var centerCanvas = function(extra) {
+    if (Object.keys(tempChunks['unlocked']).length < 1) {
+        scrollToPosCanvas(convertToXY(12850).x, convertToXY(12850).y, 0, 0, extra === 'quick');
+        return;
+    }
+    let sumX = 0;
+    let sumY = 0;
+    let num = 0;
+    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+        sumX += convertToXY(chunkId).x;
+        sumY += convertToXY(chunkId).y;
+        num++;
+    });
+    scrollToPosCanvas(Math.floor(sumX / num), Math.floor(sumY / num), sumX / num - Math.floor(sumX / num), sumY / num - Math.floor(sumY / num), extra === 'quick');
+}
+
+// Re-update chunk info panel
+var redirectPanelCanvas = function(name) {
+    let realName = decodeURI(name).replaceAll(/\%2H/g, "'");
+    ((realName % 256) < 65) && scrollToPosCanvas(convertToXY(parseInt(realName)).x, convertToXY(parseInt(realName)).y, 0, 0);
+    infoLockedId = realName.toString().replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q');
+    updateChunkInfo();
+    $('.infoid').addClass('new');
+    setTimeout(function() {
+        $('.infoid').removeClass('new');
+        setTimeout(function() {
+            $('.infoid').addClass('new');
+            setTimeout(function() {
+                $('.infoid').removeClass('new');
+            }, 1000);
+        }, 1000);
+    }, 1000);
+}
+
+// Highlights outside borders of unlocked areas
+var chunkBordersCanvas = function() {
+    ctx.beginPath();
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+    !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+        chunkCoords = convertToXY(chunkId);
+        if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) + 1)) {
+            ctx.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
+            ctx.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
+        }
+        if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) - 1)) {
+            ctx.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
+            ctx.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
+        }
+        if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) + skip + rowSize)) {
+            ctx.moveTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
+            ctx.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
+        }
+        if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) - skip - rowSize)) {
+            ctx.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
+            ctx.lineTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
+        }
+    });
+    ctx.stroke();
+}
+
+// Loaded when page is ready
+$(document).ready(function() {
+    mapImg = document.getElementById('mapImg');
+    window.onload = function() {
+        imgW = mapImg.width;
+        imgH = mapImg.height;
+        drawCanvas();
+    };
+    mapImg.onload = function() {
+        imgW = mapImg.width;
+        imgH = mapImg.height;
+        drawCanvas();
+    };
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    cw = canvas.width;
+    ch = canvas.height;
+
+    window.onresize = function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        cw = canvas.width;
+        ch = canvas.height;
+    }
+
+    reOffset();
+
+    $(document).mousedown(function(e){handleMouseDown(e);});
+    $(document).mousemove(function(e){handleMouseMove(e);});
+    $(document).mouseup(function(e){handleMouseUp(e);});
+    $(document).mouseout(function(e){handleMouseOut(e);});
+    $("#canvas").on('wheel', function(e){handleMouseScroll(e);});
+    $(document).keydown(function(e){handleKeyDown(e);});
+    $(document).keyup(function(e){handleKeyUp(e);});
+
+    $(document).on('touchstart', function(e){handleMouseDown(e);});
+    $(document).on('touchmove', function(e){handleMouseMove(e);});
+    $(document).on('touchend', function(e){handleMouseUp(e);});
+});
+
+// ------------------------------------------------------------
+
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.12.25");
+const myWorker = new Worker("./worker.js?v=4.13.0");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -1015,31 +2234,12 @@ myWorker.onmessage = function(e) {
         questPointTotal = e.data[6];
         highestOverall = e.data[7];
         dropRatesGlobal = e.data[8];
-        calcCurrentChallenges2(e.data[5]);
-        numClueTasks = {
-            'beginner': 0,
-            'easy': 0,
-            'medium': 0,
-            'hard': 0,
-            'elite': 0,
-            'master': 0
-        };
-        numClueTasksPossible = {
-            'beginner': 0,
-            'easy': 0,
-            'medium': 0,
-            'hard': 0,
-            'elite': 0,
-            'master': 0
-        };
-        !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).forEach(task => {
-            if (!!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier')) {
-                numClueTasks[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
-                if (globalValids.hasOwnProperty('Nonskill') && globalValids['Nonskill'].hasOwnProperty(task)) {
-                    numClueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
-                }
-            }
-        });
+        if (Object.keys(tempChunks['unlocked']).length < 100) {
+            calcCurrentChallenges2(e.data[5]);
+        } else {
+            tempChallengeArrSaved = e.data[5];
+            $('.panel-active > .calculating').html(`<div class='noscroll display-button' onclick='calcCurrentChallenges2()'>Show New Tasks</div>`);
+        }
         searchModalOpen && searchWithinChunks();
         highestModalOpen && openHighest();
         highest2ModalOpen && openHighest2();
@@ -1055,64 +2255,6 @@ $(document).ready(function() {
 // Prevent right-click menu from showing
 window.addEventListener('contextmenu', function(e) {
     e.preventDefault();
-}, false);
-
-// keydown listener
-window.addEventListener('keydown', function(e) {
-    if (e.key === 'Control' && (signedIn || testMode) && savedBox !== null) {
-        let i = savedBox.id;
-        let stickerExists = false;
-        savedBox.childNodes.forEach(el => {
-            if (!!el.className && el.className.includes('chunk-sticker')) {
-                stickerExists = true;
-            }
-        });
-        !stickerExists && $(savedBox).append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${i})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
-        $('.hidden-sticker').show();
-        $('.chunk-sticker').addClass('clicky signedIn').css('font-size', fontZoom * (3 / 2) + 'px');
-        if (savedBox.className.includes('gray')) {
-            let blacklistLabelExists = false;
-            savedBox.childNodes.forEach(el => {
-                if (el.className.includes('blacklist-label')) {
-                    blacklistLabelExists = true;
-                    if ($(el).text() === 'Un-Blacklist') {
-                        $(el).remove();
-                        $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="blacklist(${i})">Blacklist</span>`);
-                    }
-                }
-            });
-            !blacklistLabelExists && $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="blacklist(${i})">Blacklist</span>`);
-            $('.hidden-blacklist-label').show();
-        } else if (savedBox.className.includes('blacklisted')) {
-            let blacklistLabelExists = false;
-            savedBox.childNodes.forEach(el => {
-                if (el.className.includes('blacklist-label')) {
-                    blacklistLabelExists = true;
-                    if ($(el).text() === 'Blacklist') {
-                        $(el).remove();
-                        $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="unblacklist(${i})">Un-Blacklist</span>`);
-                    }
-                }
-            });
-            !blacklistLabelExists && $(savedBox).append(`<span class='blacklist-label hidden-blacklist-label' onclick="unblacklist(${i})">Un-Blacklist</span>`);
-            $('.hidden-blacklist-label').show();
-        } else {
-            $('.hidden-blacklist-label').hide().remove();
-        }
-    } else if (e.key === 'Control' && !signedIn && savedBox !== null) {
-        $('.chunk-sticker').addClass('clicky').css('font-size', fontZoom * (3 / 2) + 'px');
-    }
-}, false);
-
-// keyup listener
-window.addEventListener('keyup', function(e) {
-    if (e.key === 'Control' && (signedIn || testMode)) {
-        $('.hidden-sticker').hide().remove();
-        $('.chunk-sticker.clicky').removeClass('clicky signedIn');
-        $('.hidden-blacklist-label').hide().remove();
-    } else if (e.key === 'Control') {
-        $('.chunk-sticker.clicky').removeClass('clicky');
-    }
 }, false);
 
 jQuery.event.special.touchstart = {
@@ -1401,81 +2543,6 @@ $('body').on('touchend', function(ev) {
     }
 });
 
-// [Mobile] Mobile equivalent to 'mousemove', determines amount dragged since last trigger
-$('body').on('touchmove', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen) {
-        updateScrollPos(ev.changedTouches[0]);
-    }
-});
-
-// Credit to Amehzyn
-// Handles zooming
-$('body').on('scroll mousewheel DOMMouseScroll', function(e) {
-    if (!e.target.className || typeof e.target.className !== 'string' || e.target.className.split(' ').includes('panel') || e.target.className.split(' ').includes('link') || e.target.className.split(' ').includes('noscroll')) {
-        $('body').scrollTop(0);
-        return;
-    } else if (atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || e.target.className.split(' ').includes('noscrollhard')) {
-        e.preventDefault();
-        return;
-    }
-    e.preventDefault();
-    var imageDiv = document.getElementById("imgDiv");
-    // Calculate the direction of scrolling
-    var dir;
-    if (e.type === 'DOMMouseScroll') {
-        if (e.detail < 0) {
-            dir = .2;
-        } else {
-            dir = -.2;
-        }
-    } else {
-        if (e.originalEvent.wheelDelta > 0) {
-            dir = .2;
-        } else {
-            dir = -.2;
-        }
-    }
-
-    // Set minimum and maximum zoom of map
-    var minWidth = Math.floor(0.95 * window.innerWidth);
-    var maxWidth = Math.floor(15 * window.innerWidth);
-    if (imageDiv.offsetWidth <= minWidth && dir < 0) {
-        // Zooming out would do nothing
-        return;
-    }
-    else if (imageDiv.offsetWidth >= maxWidth && dir > 0) {
-        // Zooming in would do nothing
-        return;
-    }
-    else if (imageDiv.offsetWidth * (1 + dir) <= minWidth) {
-        // Calculate the percent difference between the previous and new width
-        dir = (minWidth - imageDiv.offsetWidth) / imageDiv.offsetWidth;
-        imageDiv.style.width = minWidth + "px";
-    }
-    else if (imageDiv.offsetWidth * (1 + dir) >= maxWidth) {
-        // Calculate the percent difference between the previous and new width
-        dir = (maxWidth - imageDiv.offsetWidth) / imageDiv.offsetWidth;
-        imageDiv.style.width = maxWidth + "px";
-    }
-    else {
-        imageDiv.style.width = (imageDiv.offsetWidth * (1 + dir)) + "px";
-    }
-
-    // Zoom on the mouse position
-    zoomOnMouse(e, dir, imageDiv);
-    // Fix the location of the map because it could go off-screen
-    fixMapEdges(imageDiv);
-    labelZoom = $('.box').width();
-    fontZoom = $('.box').width() / 6;
-    $('.label').css('font-size', labelZoom + 'px');
-    $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-    $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-    $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-    $('.box').css('font-size', fontZoom + 'px');
-    $('.chunk-sticker').css('font-size', fontZoom * (3 / 2) + 'px');
-    $('.chunk-sticker > img').parent().css('width', fontZoom * (3 / 2) + 'px');
-});
-
 // Prevent arrow key movement
 $(document).on({
     'keydown': function(e) {
@@ -1506,529 +2573,11 @@ $(document).on({
     }
 });
 
-// Remove recent class from boxes on mouseover
-$(document).on('mouseleave', '.recent', function() {
-    $(this).removeClass('recent');
-});
-
-// Handles dragging and clicks
-$(document).on({
-    'mousemove': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
-            return;
-        }
-        if (clicked) {
-            if (!e.buttons && !e.which) {
-                clicked = false;
-                if (movedNum > 1) {
-                    prevScrollLeft = prevScrollLeft + scrollLeft;
-                    prevScrollTop = prevScrollTop + scrollTop;
-                }
-            } else {
-                updateScrollPos(e);
-                $('.outer').css('cursor', 'grabbing');
-                moved = true;
-                movedNum++;
-            }
-        } else if (!!e.target.className && typeof e.target.className === 'string' && e.target.className.includes('box')) {
-            savedBox = e.target;
-        }
-    },
-    'mousedown': function(e) {
-        if (e.button !== 0 || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
-            return;
-        }
-        clicked = true;
-        moved = false;
-        movedNum = 0;
-        clickX = e.pageX;
-        clickY = e.pageY;
-    },
-    'mouseup': function(e) {
-        if (!$(e.target).parents(".active-context-menu").length > 0) {
-            activeContextMenuChallengeOld = activeContextMenuChallenge;
-            activeContextMenuSkillOld = activeContextMenuSkill;
-            activeContextMenuChallenge = null;
-            activeContextMenuSkill = null;
-            $(".active-context-menu").hide(100);
-        }
-        if (!$(e.target).parents(".backlog-context-menu").length > 0) {
-            backlogContextMenuChallengeOld = backlogContextMenuChallenge;
-            backlogContextMenuSkillOld = backlogContextMenuSkill;
-            backlogContextMenuChallenge = null;
-            backlogContextMenuSkill = null;
-            $(".backlog-context-menu").hide(100);
-        }
-        let tempClicked = clicked;
-        if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
-            return;
-        } else if (e.button === 2) {
-            if ($(e.target).hasClass('box')) {
-                if (infoLockedId === $(e.target).attr('id')) {
-                    infoLockedId = -1;
-                    $(e.target).removeClass('locked');
-                    $('.icon').remove();
-                } else {
-                    $('.box#' + infoLockedId).removeClass('locked');
-                    $('.icon').remove();
-                    infoLockedId = $(e.target).attr('id');
-                    $(e.target).addClass('locked').append("<span class='icon'></span>");
-                    $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                }
-                updateChunkInfo();
-            }
-            return;
-        }
-        clicked = false;
-        if (movedNum > 1) {
-            prevScrollLeft = prevScrollLeft + scrollLeft;
-            prevScrollTop = prevScrollTop + scrollTop;
-        } else if ($(e.target).hasClass('box')) {
-            if (locked && !testMode) {
-                if (!tempClicked) {
-                    return;
-                }
-                $('.outer').css('cursor', 'default');
-                if (lockBoxOpen) {
-                    closePinBox();
-                }
-                $('.lock-closed').addClass('animated shake').removeClass('').css({ 'color': 'rgb(200, 75, 75)' });
-                setTimeout(function() {
-                    $('.lock-closed').removeClass('animated shake').addClass('').css({ 'color': 'black' });
-                }, 500);
-                return;
-            } else if (settingsOpen && !screenshotMode) {
-                settingsMenu();
-                return;
-            } else if (checkFalseRules() && chunkTasksOn) {
-                helpFunc();
-                return;
-            }
-            if ($(e.target).hasClass('gray')) {
-                if (selectedNum > 999) {
-                    $(e.target).addClass('selected').removeClass('gray').append('<span draggable="false" class="label extralong">' + selectedNum + '</span>');
-                    $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-                } else if (selectedNum > 99) {
-                    $(e.target).addClass('selected').removeClass('gray').append('<span draggable="false" class="label long">' + selectedNum + '</span>');
-                    $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-                } else {
-                    $(e.target).addClass('selected').removeClass('gray').append('<span draggable="false" class="label">' + selectedNum + '</span>');
-                    $('.label').css('font-size', labelZoom + 'px');
-                }
-                $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                selectedNum++;
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-                if (selectedChunks < 300) {
-                    fixNums(99999);
-                }
-            } else if ($(e.target).hasClass('selected')) {
-                if (e.shiftKey) {
-                    if (selectedChunks < 300) {
-                        fixNums($($(e.target).children('.label')).text());
-                    }
-                    $(e.target).children('.label').remove();
-                    $(e.target).addClass('gray').removeClass('selected');
-                    $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
-                } else {
-                    if (selectedChunks < 300) {
-                        fixNums($($(e.target).children('.label')).text());
-                    }
-                    $(e.target).children('.label').remove();
-                    $(e.target).addClass('unlocked').removeClass('selected');
-                    $('#chunkInfo2').text('Selected chunks: ' + --selectedChunks);
-                    $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-                    !onMobile && getChunkAreas();
-                    !onMobile && setupCurrentChallenges(false);
-                    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                    !onMobile && setCalculating('.panel-areas');
-                    !onMobile && setCalculating('.panel-completed');
-                    calcCurrentChallenges();
-                }
-            } else if ($(e.target).hasClass('potential')) {
-                let savedNum = $($(e.target).children('.label')).text();
-                $(e.target).children('.label').remove();
-                $(e.target).addClass('unlocked').removeClass('potential');
-                $('.potential > .label').css('color', 'white');
-                $('.potential').addClass('selected').removeClass('potential recent');
-                autoSelectNeighbors && selectNeighbors(e.target);
-                autoRemoveSelected && $('.selected > .label').remove();
-                autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
-                autoRemoveSelected && (selectedChunks = 2);
-                autoRemoveSelected && (selectedNum = 1);
-                if (selectedChunks < 300) {
-                    fixNums(savedNum);
-                }
-                if (isPicking) {
-                    $('.pick').text('Pick for me');
-                } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
-                    $('.pick').text('Random Start?');
-                } else {
-                    $('.pick').text('Pick Chunk');
-                }
-                roll2On && $('.roll2').text('Roll 2');
-                roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
-                unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
-                isPicking = false;
-                $('#chunkInfo2').text('Selected chunks: ' + (!autoRemoveSelected ? --selectedChunks : 0));
-                $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-                let tempChunk1;
-                let tempChunk2;
-                let tempChunkTime1;
-                let tempChunkTime2;
-                if (signedIn && !onTestServer && !testMode) {
-                    myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % 256) * (skip + 256) - Math.floor(e.target.id / 256) + startingIndex), (error) => {
-                        regainConnectivity(() => {
-                            myRef.child('chunkOrder').child(new Date().getTime()).set((Math.floor(e.target.id % 256) * (skip + 256) - Math.floor(e.target.id / 256) + startingIndex));
-                        });
-                    });
-                }
-                for (let count = 1; count <= 5; count++) {
-                    tempChunk1 = recent[count - 1];
-                    tempChunkTime1 = recentTime[count - 1];
-                    if (count === 1) {
-                        recent[count - 1] = (Math.floor(e.target.id % 256) * (skip + 256) - Math.floor(e.target.id / 256) + startingIndex);
-                        recentTime[count - 1] = new Date().getTime();
-                    } else {
-                        recent[count - 1] = tempChunk2;
-                        recentTime[count - 1] = tempChunkTime2;
-                    }
-                    tempChunk2 = tempChunk1;
-                    tempChunkTime2 = tempChunkTime1;
-                    let tempDate = new Date();
-                    tempDate.setTime(recentTime[count - 1]);
-                    tempDate > 0 && $('#recentChunks' + count).html('<span class="time">' + tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2] + ': </span><span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
-                    tempDate <= 0 && $('#recentChunks' + count).html('<span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
-                }
-                if (!!recentTime[0]) {
-                    $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
-                }
-                completeChallenges();
-                !onMobile && getChunkAreas();
-                !onMobile && setupCurrentChallenges(false);
-                !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                !onMobile && setCalculating('.panel-areas');
-                !onMobile && setCalculating('.panel-completed');
-                !onMobile && !activeSubTabs['skill'] && expandActive('skill');
-                !onMobile && !activeSubTabs['bis'] && expandActive('bis');
-                !onMobile && !activeSubTabs['quest'] && expandActive('quest');
-                !onMobile && !activeSubTabs['diary'] && expandActive('diary');
-                !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-                calcCurrentChallenges();
-            } else if ($(e.target).hasClass('recent')) {
-                // ----
-            } else if ($(e.target).hasClass('blacklisted')) {
-                // ----
-            } else {
-                $(e.target).addClass('gray').removeClass('unlocked').css('border-width', 0);
-                $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
-                !onMobile && getChunkAreas();
-                !onMobile && setupCurrentChallenges(false);
-                !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                !onMobile && setCalculating('.panel-areas');
-                !onMobile && setCalculating('.panel-completed');
-                calcCurrentChallenges();
-            }
-            if (isPicking) {
-                $('.pick').text('Pick for me');
-            } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
-                $('.pick').text('Random Start?');
-            } else {
-                $('.pick').text('Pick Chunk');
-            }
-            setData();
-            chunkBorders();
-        }
-        $('.outer').css('cursor', 'default');
-    }
-});
-
 // ----------------------------------------------------------
 
 // Button Functions
 
 // ----------------------------------------------------------
-
-// [Mobile] Mobile zoom capabilities
-var zoomButton = function(dir) {
-    let oldZoom = zoom;
-    if (dir > 0) {
-        zoom += scale;
-        zoom > maxZoom ? zoom = maxZoom : zoom = zoom;
-    } else {
-        zoom -= scale;
-        zoom < minZoom ? zoom = minZoom : zoom = zoom;
-    }
-    prevScrollLeft = -((zoom / oldZoom) * (-prevScrollLeft + window.innerWidth / 2)) + window.innerWidth / 2;
-    prevScrollTop = -((zoom / oldZoom) * (-prevScrollTop + window.innerHeight / 2)) + window.innerHeight / 2;
-    if (prevScrollLeft > 0) {
-        prevScrollLeft = 0;
-    }
-    if (prevScrollTop > 0) {
-        prevScrollTop = 0;
-    }
-    if (prevScrollLeft - window.innerWidth < -zoom / 100 * window.innerWidth) {
-        prevScrollLeft = -(zoom / 100 * window.innerWidth) + window.innerWidth;
-    }
-    if (prevScrollTop - window.innerHeight < -zoom / 100 * window.innerWidth * ratio) {
-        prevScrollTop = -(zoom / 100 * window.innerWidth * ratio) + window.innerHeight;
-    }
-    $('.img').css({ marginLeft: prevScrollLeft, marginTop: prevScrollTop });
-    $('.outer').css({ marginLeft: prevScrollLeft, marginTop: prevScrollTop });
-    $('.img').width(zoom + 'vw');
-    $('.outer').width(zoom + 'vw');
-    $('.box').css('font-size', fontZoom + 'px');
-    $('.chunk-sticker').css('font-size', fontZoom * (3 / 2) + 'px');
-    $('.chunk-sticker > img').parent().css('width', fontZoom * (3 / 2) + 'px');
-    $('.label').css('font-size', labelZoom + 'px');
-    $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-    $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-    $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-}
-
-// Pick button: picks a random chunk from selected/potential
-var pick = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
-        return;
-    }
-    if (checkFalseRules() && chunkTasksOn) {
-        helpFunc();
-        return;
-    }
-    var el;
-    var rand;
-    var sNum;
-    let didRandomStart = false;
-    if (both && isPicking) {
-        let numToRoll = mid === roll5Mid ? 5 : 2;
-        for (let temp = 0; temp < numToRoll; temp++) {
-            el = $('.potential');
-            rand = 0;
-            sNum = $($(el[rand]).children('.label')).text();
-            if ($('.potential').length <= 0) {
-                fixNums(1);
-                break;
-            }
-            $(el[rand]).children('.label').remove();
-            $(el[rand]).addClass('unlocked recent').removeClass('potential');
-            autoSelectNeighbors && selectNeighbors(el[rand]);
-            autoRemoveSelected && $('.selected > .label').remove();
-            autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
-            autoRemoveSelected && (selectedChunks = 2);
-            autoRemoveSelected && (selectedNum = 1);
-            if (el.length < 300) {
-                fixNums(sNum);
-            }
-            $('#chunkInfo2').text('Selected chunks: ' + (!autoRemoveSelected ? --selectedChunks : 0));
-            $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-            scrollToPos(parseInt($(el[rand]).attr('id')) % 256, Math.floor(parseInt($(el[rand]).attr('id')) / 256), 0, 0, false);
-            !showChunkIds && $('.chunkId').hide();
-            let tempChunk1;
-            let tempChunk2;
-            let tempChunkTime1;
-            let tempChunkTime2;
-            if (signedIn && !onTestServer && !testMode) {
-                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).attr('id')), (error) => {
-                    regainConnectivity(() => {
-                        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).attr('id')));
-                    });
-                });
-            }
-            for (let count = 1; count <= 5; count++) {
-                tempChunk1 = recent[count - 1];
-                tempChunkTime1 = recentTime[count - 1];
-                if (count === 1) {
-                    recent[count - 1] = parseInt($(el[rand]).attr('id'));
-                    recentTime[count - 1] = new Date().getTime();
-                } else {
-                    recent[count - 1] = tempChunk2;
-                    recentTime[count - 1] = tempChunkTime2;
-                }
-                tempChunk2 = tempChunk1;
-                tempChunkTime2 = tempChunkTime1;
-                let tempDate = new Date();
-                tempDate.setTime(recentTime[count - 1]);
-                tempDate > 0 && $('#recentChunks' + count).html('<span class="time">' + tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2] + ': </span><span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
-                tempDate <= 0 && $('#recentChunks' + count).html('<span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
-            }
-            if (!!recentTime[0]) {
-                $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
-            }
-        }
-        isPicking = false;
-        if (isPicking) {
-            $('.pick').text('Pick for me');
-        } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
-            $('.pick').text('Random Start?');
-        } else {
-            $('.pick').text('Pick Chunk');
-        }
-        roll2On && $('.roll2').text('Roll 2');
-        roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
-        unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
-        completeChallenges();
-        !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        !onMobile && setCalculating('.panel-areas');
-        !onMobile && setCalculating('.panel-completed');
-        !onMobile && !activeSubTabs['skill'] && expandActive('skill');
-        !onMobile && !activeSubTabs['bis'] && expandActive('bis');
-        !onMobile && !activeSubTabs['quest'] && expandActive('quest');
-        !onMobile && !activeSubTabs['diary'] && expandActive('diary');
-        !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-        calcCurrentChallenges();
-        setData();
-        chunkBorders();
-        if (el.length < 300) {
-            fixNums(9999);
-        }
-        return;
-    } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
-        if (rules['F2P']) {
-            chunkInfo['walkableChunksF2P'].forEach(id => {
-                $('.box#' + id).addClass('walkable');
-            });
-        } else {
-            chunkInfo['walkableChunks'].forEach(id => {
-                $('.box#' + id).addClass('walkable');
-            });
-        }
-        el = $('.walkable:not(.unlocked)');
-        rand = Math.floor(Math.random() * el.length);
-        sNum = $($(el[rand]).children('.label')).text();
-        if (settings['cinematicRoll'] && !onMobile) {
-            openRollChunk(el, rand, sNum);
-        }
-        selectedChunks++;
-        didRandomStart = true;
-        $(el[rand]).children('.label').remove();
-        $(el[rand]).addClass('unlocked recent').removeClass('gray selected potential walkable');
-        if (isPicking) {
-            $('.pick').text('Pick for me');
-        } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
-            $('.pick').text('Random Start?');
-        } else {
-            $('.pick').text('Pick Chunk');
-        }
-    } else if (!isPicking) {
-        el = $('.selected');
-        rand = Math.floor(Math.random() * el.length);
-        sNum = $($(el[rand]).children('.label')).text();
-        if (settings['cinematicRoll'] && !onMobile) {
-            openRollChunk(el, rand, sNum);
-        }
-        $(el[rand]).children('.label').remove();
-        $(el[rand]).addClass('unlocked recent').removeClass('selected');
-    } else {
-        el = $('.potential');
-        rand = Math.floor(Math.random() * el.length);
-        sNum = $($(el[rand]).children('.label')).text();
-        if (settings['cinematicRoll'] && !onMobile) {
-            openRollChunk(el, rand, sNum);
-        }
-        $(el[rand]).children('.label').remove();
-        $(el[rand]).addClass('unlocked recent').removeClass('potential');
-        $('.potential > .label').css('color', 'white');
-        $('.potential').addClass('selected').removeClass('potential recent');
-        isPicking = false;
-        if (isPicking) {
-            $('.pick').text('Pick for me');
-        } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
-            $('.pick').text('Random Start?');
-        } else {
-            $('.pick').text('Pick Chunk');
-        }
-        roll2On && $('.roll2').text('Roll 2');
-        roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
-        unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
-    }
-    autoSelectNeighbors && !didRandomStart && selectNeighbors(el[rand]);
-    autoRemoveSelected && $('.selected > .label').remove();
-    autoRemoveSelected && $('.selected').addClass('gray').removeClass('selected');
-    autoRemoveSelected && (selectedChunks = 2);
-    autoRemoveSelected && (selectedNum = 1);
-    if (el.length < 300) {
-        fixNums(sNum);
-    }
-    $('#chunkInfo2').text('Selected chunks: ' + (!autoRemoveSelected ? --selectedChunks : 0));
-    $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-    (!settings['cinematicRoll'] || onMobile) && scrollToPos(parseInt($(el[rand]).attr('id')) % 256, Math.floor(parseInt($(el[rand]).attr('id')) / 256), 0, 0, false);
-    !showChunkIds && $('.chunkId').hide();
-    let tempChunk1;
-    let tempChunk2;
-    let tempChunkTime1;
-    let tempChunkTime2;
-    if (signedIn && !onTestServer && !testMode) {
-        myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).attr('id')), (error) => {
-            regainConnectivity(() => {
-                myRef.child('chunkOrder').child(new Date().getTime()).set(parseInt($(el[rand]).attr('id')));
-            });
-        });
-    }
-    for (let count = 1; count <= 5; count++) {
-        tempChunk1 = recent[count - 1];
-        tempChunkTime1 = recentTime[count - 1];
-        if (count === 1) {
-            recent[count - 1] = parseInt($(el[rand]).attr('id'));
-            recentTime[count - 1] = new Date().getTime();
-        } else {
-            recent[count - 1] = tempChunk2;
-            recentTime[count - 1] = tempChunkTime2;
-        }
-        tempChunk2 = tempChunk1;
-        tempChunkTime2 = tempChunkTime1;
-        let tempDate = new Date();
-        tempDate.setTime(recentTime[count - 1]);
-        tempDate > 0 && $('#recentChunks' + count).html('<span class="time">' + tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2] + ': </span><span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
-        tempDate <= 0 && $('#recentChunks' + count).html('<span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
-    }
-    if (!!recentTime[0]) {
-        $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
-    }
-    completeChallenges(true);
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    !onMobile && setCalculating('.panel-areas');
-    !onMobile && setCalculating('.panel-completed');
-    !onMobile && !activeSubTabs['skill'] && expandActive('skill');
-    !onMobile && !activeSubTabs['bis'] && expandActive('bis');
-    !onMobile && !activeSubTabs['quest'] && expandActive('quest');
-    !onMobile && !activeSubTabs['diary'] && expandActive('diary');
-    !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-    !onMobile && !settings['cinematicRoll'] && calcCurrentChallenges();
-    setData();
-    chunkBorders();
-}
-
-// Roll 2 button: rolls 2 chunks from all selected chunks
-var roll2 = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (($('.selected').length < 1 && !isPicking) || ($('.potential').length < 1 && isPicking))) {
-        return;
-    }
-    if (checkFalseRules() && chunkTasksOn) {
-        helpFunc();
-        return;
-    }
-    if (isPicking) {
-        pick(true);
-        return;
-    }
-    isPicking = true;
-    var el = $('.selected');
-    var rand;
-    if (el.length > 0) {
-        $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
-        $('.pick').text('Pick for me');
-        $('.roll2').text('Unlock both');
-        mid === roll5Mid && $('.roll2').text('Unlock all');
-    }
-    let numToRoll = mid === roll5Mid ? 5 : 2;
-    for (var i = 0; i < numToRoll; i++) {
-        el = $('.selected');
-        rand = Math.floor(Math.random() * el.length);
-        $(el[rand]).addClass('potential recent').removeClass('selected');
-        $('.potential > .label').css('color', 'black');
-    }
-    !showChunkIds && $('.chunkId').hide();
-    setData();
-}
 
 // Toggle functionality for if neighbors are to be selected on chunk pick
 var toggleNeighbors = function(value, extra) {
@@ -2052,31 +2601,6 @@ var toggleRemove = function(value, extra) {
 var toggleIds = function(value) {
     showChunkIds = value;
     setCookies();
-    if (showChunkIds) {
-        $('.chunkId').show();
-        $('.box').css('color', 'rgba(255, 255, 255, 255)').addClass('quality');
-    } else {
-        $('.chunkId').hide();
-        $('.box').css('color', 'rgba(255, 255, 255, 0)').removeClass('quality');
-    }
-}
-
-// Centers on average position of all unlocked chunks
-var center = function(extra) {
-    let arr = $('.box.unlocked');
-    if (arr.length < 1) {
-        scrollToPos(parseInt($('#12850').attr('id')) % 256, Math.floor(parseInt($('#12850').attr('id')) / 256), 0, 0, extra === 'quick');
-        return;
-    }
-    let sumX = 0;
-    let sumY = 0;
-    let num = 0;
-    arr.each(function(index) {
-        sumX += parseInt($(this).attr('id')) % 256;
-        sumY += Math.floor(parseInt($(this).attr('id')) / 256);
-        num++;
-    });
-    scrollToPos(Math.floor(sumX / num), Math.floor(sumY / num), sumX / num - Math.floor(sumX / num), sumY / num - Math.floor(sumY / num), extra === 'quick');
 }
 
 // Opens the lock box
@@ -2090,8 +2614,8 @@ var unlock = function() {
 // Copies unlocked chunks to clipboard
 var exportFunc = function() {
     let unlockedChunksTemp = '';
-    $('.box.unlocked').each(function(index) {
-        unlockedChunksTemp += $(this).attr('id') + ',';
+    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+        unlockedChunksTemp += chunkId + ',';
     });
     unlockedChunksTemp = unlockedChunksTemp.slice(0, -1);
     navigator.clipboard.writeText(unlockedChunksTemp);
@@ -2122,8 +2646,12 @@ var importFromURL = function() {
             var chunkStrSplit = url.split('?')[1].split(';');
             var unlocked = stringToChunkIndexes(chunkStrSplit[0]);
             var selected = chunkStrSplit[1] ? stringToChunkIndexes(chunkStrSplit[1]) : null;
-            $('.box').removeClass('selected potential unlocked recent blacklisted').addClass('gray').css('border-width', 0);
-            $('.label').remove();
+            tempChunks['selected'] = {};
+            tempChunks['potential'] = {};
+            tempChunks['unlocked'] = {};
+            tempChunks['blacklisted'] = {};
+            tempSelectedChunks = [];
+            recentChunks = {};
             roll2On && $('.roll2').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
             unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
             recentOn && $('.menu7').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
@@ -2134,45 +2662,37 @@ var importFromURL = function() {
             unlockedChunks = 0;
             selectedNum = 1;
 
-            $('#chunkInfo1').text('Unlocked chunks: ' + unlockedChunks);
-            $('#chunkInfo2').text('Selected chunks: ' + selectedChunks);
-
             selected && selected.sort(function(a, b) { return b - a }).forEach(function(id) {
                 while (id.startsWith('0') && id.length > 1) {
                     id = id.substr(1);
                 }
-                $('#' + id).addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label">' + selectedNum++ + '</span>');
-                $('.label').css('font-size', labelZoom + 'px');
-                $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-                $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
+                tempChunks['selected'][id] = id;
+                tempSelectedChunks.push(id);
             });
 
             unlocked && unlocked.forEach(function(id) {
                 while (id.startsWith('0') && id.length > 1) {
                     id = id.substr(1);
                 }
-                $('#' + id).addClass('unlocked').removeClass('gray selected potential blacklisted');
-                $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
+                tempChunks['unlocked'][id] = id;
             });
-            !showChunkIds && $('.chunkId').hide();
             for (let count = 1; count <= 5; count++) {
                 recent[count - 1] = null;
                 recentTime[count - 1] = null;
-                $('#recentChunks' + count).html('<span class="chunknone" onclick="recentChunk(recentChunks' + count + ')">-</span>');
+                $('#recentChunks' + count).html('<span class="chunknone" onclick="recentChunkCanvas(recentChunks' + count + ')">-</span>');
             }
+            $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
+            $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
             setData();
-            chunkBorders();
             $('#import-menu').css({ 'opacity': 0 }).hide();
             $('.import').css('opacity', 0).show();
             $('.import').animate({ 'opacity': 1 });
-            if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
+            if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
                 $('.pick').text('Random Start?');
             } else {
                 $('.pick').text('Pick Chunk');
             }
-            calcCurrentChallenges();
+            calcCurrentChallengesCanvas();
             setTimeout(function() {
                 $('#import-menu').css('opacity', 1);
                 $('#import2').prop('disabled', true).html('Unlock');
@@ -2611,7 +3131,7 @@ var accessMap = function() {
                             $('.background-img').hide();
                             $('.center').css('margin-top', '15px');
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 1).show();
-                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').show();
+                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
                             roll2On && $('.roll2').css('opacity', 1).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
                             $('.open-manual-outer-container').css('opacity', 1).show();
@@ -2660,7 +3180,7 @@ var accessMap = function() {
                                     $('.background-img').hide();
                                     $('.center').css('margin-top', '15px');
                                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 1).show();
-                                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').show();
+                                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
                                     roll2On && $('.roll2').css('opacity', 1).show();
                                     !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
                                     $('.open-manual-outer-container').css('opacity', 1).show();
@@ -2737,7 +3257,7 @@ var changePin = function() {
                     $('.loading').show();
                     $('#page8').hide();
                     $('.background-img').hide();
-                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').show();
+                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
                     setupMap();
                 }).catch((error) => { console.log(error) });
             }
@@ -2748,47 +3268,6 @@ var changePin = function() {
             return;
         });
     });
-}
-
-// Unpicks a random unlocked chunk
-var unpick = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || $('.unlocked').length < 1) {
-        return;
-    }
-    if (checkFalseRules() && chunkTasksOn) {
-        helpFunc();
-        return;
-    }
-    var el = $('.unlocked');
-    if (el.length <= 0) {
-        return;
-    }
-    var rand = Math.floor(Math.random() * el.length);
-    if (selectedNum > 999) {
-        $(el[rand]).append('<span draggable="false" class="label extralong">' + selectedNum + '</span>');
-        $(el[rand]).addClass('selected').removeClass('unlocked').addClass('recent');
-        $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-    } else if (selectedNum > 99) {
-        $(el[rand]).append('<span draggable="false" class="label long">' + selectedNum + '</span>');
-        $(el[rand]).addClass('selected').removeClass('unlocked').addClass('recent');
-        $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-    } else {
-        $(el[rand]).append('<span draggable="false" class="label">' + selectedNum + '</span>');
-        $(el[rand]).addClass('selected').removeClass('unlocked').addClass('recent');
-        $('.label').css('font-size', labelZoom + 'px');
-    }
-    if (el.length < 300) {
-        fixNums(selectedNum);
-    }
-    $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-    selectedNum++;
-    $('#chunkInfo1').text('Unlocked chunks: ' + --unlockedChunks);
-    $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-    scrollToPos(parseInt($(el[rand]).attr('id')) % 256, Math.floor(parseInt($(el[rand]).attr('id')) / 256), 0, 0, false);
-    !showChunkIds && $('.chunkId').hide();
-    setData();
-    chunkBorders();
-    $(el[rand]).css('border-width', '0px');
 }
 
 // Opens/closes the settings menu
@@ -2837,7 +3316,6 @@ var enableTestMode = function() {
 var toggleVisibility = function(value) {
     highVisibilityMode = value;
     setCookies();
-    highVisibilityMode ? $('.box').addClass('visible') : $('.box').removeClass('visible');
 }
 
 // Toggles dark mode
@@ -2862,6 +3340,8 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
         $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
         $(".btnDiv").addClass('dark');
+        colorBox = "rgba(50, 50, 50, .6)";
+        colorBoxLight = "rgba(50, 50, 50, .4)";
     } else {
         $("body").get(0).style.setProperty("--color1", "rgb(200, 200, 200)");
         $("body").get(0).style.setProperty("--color2", "rgb(180, 180, 180)");
@@ -2880,6 +3360,8 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorBoxLight", "rgba(150, 150, 150, .4)");
         $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(200, 200, 200, .4)");
         $(".btnDiv").removeClass('dark');
+        colorBox = "rgba(150, 150, 150, .6)";
+        colorBoxLight = "rgba(150, 150, 150, .4)";
     }
 }
 
@@ -2897,8 +3379,6 @@ var toggleChunkInfo = function(value, extra) {
 var hideChunkInfo = function(extra) {
     chunkInfoOn && $('.menu8').hide();
     chunkInfoOn && $('.hiddenInfo').show();
-    $('.box.locked').removeClass('locked');
-    $('.icon').remove();
     infoLockedId = -1;
     infoCollapse = true;
     extra !== 'startup' && setCookies();
@@ -2963,16 +3443,6 @@ var enableHighscore = function(extra) {
     }
 }
 
-// Centers on the clicked recent chunk and highlights it
-var recentChunk = function(el) {
-    if ($($(el).children('.chunk')).text() === '-' || inEntry) {
-        return;
-    }
-    let id = parseInt($($(el).children('.chunk')).text());
-    let box = $('.box#' + id).addClass('recent');
-    scrollToPos(parseInt(box.attr('id')) % 256, Math.floor(parseInt(box.attr('id')) / 256), 0, 0, false);
-}
-
 // Toggles the accordion panels of the chunk info panel
 var toggleInfoPanel = function(pnl) {
     infoPanelVis[pnl] = !infoPanelVis[pnl];
@@ -2980,6 +3450,9 @@ var toggleInfoPanel = function(pnl) {
         if (uniqKey === pnl) {
             infoPanelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
             infoPanelVis[pnl] ? $('#info' + uniqKey + ' > .exp').html('<i class="pic fas fa-minus"></i>') : $('#info' + uniqKey + ' > .exp').html('<i class="pic fas fa-plus"></i>');
+            if (pnl === 'challenges' && infoPanelVis[pnl]) {
+                calcFutureChallenges();
+            }
         } else {
             $('.panel-' + uniqKey).removeClass('visible');
             $('#info' + uniqKey + ' > .exp').html('<i class="pic fas fa-plus"></i>');
@@ -3028,12 +3501,10 @@ var doneLoading = function() {
         $('#lock-unlock').css({ 'padding': '0' });
         $('.gomobiletasks').show();
         $('#unlock-entry').height('4vh');
-        $('.box').addClass('mobile').css({ 'min-height': '96px', 'min-width': '96px', 'max-height': '96px', 'max-width': '96px' });
-        center('quick');
+        centerCanvas('quick');
     } else {
         $('.gomobiletasks').hide();
     }
-    $('.potential > .label').css('color', 'black');
     $('.loading').fadeOut(1000);
 }
 
@@ -3064,19 +3535,6 @@ var setupMap = function() {
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
         }
-        for (var i = 0; i < fullSize; i++) {
-            $('.btnDiv').append(`<div id=${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex} class='box gray'></div>`);
-            //<span class='chunkId'>${Math.floor(i % rowSize) * (skip + rowSize) - Math.floor(i / rowSize) + startingIndex}</span>
-        }
-        labelZoom = $('.box').width();
-        fontZoom = $('.box').width() / 6;
-        $('.label').css('font-size', labelZoom + 'px');
-        $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-        $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-        $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-        $('.box').css('font-size', fontZoom + 'px');
-        $('.chunk-sticker').css('font-size', fontZoom * (3 / 2) + 'px');
-        $('.chunk-sticker > img').parent().css('width', fontZoom * (3 / 2) + 'px');
         !mid && (mid = window.location.href.split('?')[1]);
         document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
         $('.toptitle2').text(mid.split('-')[0].toUpperCase());
@@ -3095,158 +3553,6 @@ var openMobileTasks = function() {
         $('.gomobiletasks').toggleClass('fa-tasks').toggleClass('fa-map');
         $('.gomobiletasks').attr('title', $('.gomobiletasks').hasClass('fa-tasks') ? 'Tasks' : 'Map');
     }
-}
-
-// Sets all neighbors of recently unlocked chunk to selected
-var selectNeighbors = function(el) {
-    var ops = ['-x', '+x', '-y', '+y'];
-    var num;
-    for (var i = 0; i < 4; i++) {
-        if (ops[i].substring(1, 2) === 'x') {
-            num = ((i - 1) * 2 + 1) * 256;
-            if ($(`#${parseInt(el.id) + num}`).length && $(`#${parseInt(el.id) + num}`).hasClass('gray') && (!settings['walkableRollable'] || chunkInfo['walkableChunksF2P'].includes(parseInt(el.id) + num) || (!rules['F2P'] && chunkInfo['walkableChunks'].includes((parseInt(el.id) + num).toString())))) {
-                if (selectedNum > 999) {
-                    $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span draggable="false" class="label extralong">' + selectedNum + '</span>');
-                    $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-                } else if (selectedNum > 99) {
-                    $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span draggable="false" class="label long">' + selectedNum + '</span>');
-                    $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-                } else {
-                    $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span draggable="false" class="label">' + selectedNum + '</span>');
-                    $('.label').css('font-size', labelZoom + 'px');
-                }
-                $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                selectedNum++;
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-            }
-        } else {
-            num = (i - 3) * 2 + 1;
-            if ($(`#${parseInt(el.id) + num}`).length && $(`#${parseInt(el.id) + num}`).hasClass('gray') && (!settings['walkableRollable'] || chunkInfo['walkableChunksF2P'].includes(parseInt(el.id) + num) || (!rules['F2P'] && chunkInfo['walkableChunks'].includes((parseInt(el.id) + num).toString())))) {
-                if (selectedNum > 999) {
-                    $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span draggable="false" class="label extralong">' + selectedNum + '</span>');
-                    $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-                } else if (selectedNum > 99) {
-                    $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span draggable="false" class="label long">' + selectedNum + '</span>');
-                    $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-                } else {
-                    $(`#${parseInt(el.id) + num}`).addClass('selected').removeClass('gray').append('<span draggable="false" class="label">' + selectedNum + '</span>');
-                    $('.label').css('font-size', labelZoom + 'px');
-                }
-                $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                selectedNum++;
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-            }
-        }
-    }
-}
-
-// Scroll to new position (for panning/dragging)
-var updateScrollPos = function(e) {
-    if (clickX === undefined) {
-        return;
-    }
-    let newScrollLeft = prevScrollLeft - (clickX - e.pageX);
-    let newScrollTop = prevScrollTop - (clickY - e.pageY);
-    if (newScrollLeft > 400) {
-        newScrollLeft = 400;
-        prevScrollLeft = 400;
-        clickX = e.pageX;
-    }
-    if (newScrollTop > 450) {
-        newScrollTop = 450;
-        prevScrollTop = 450;
-        clickY = e.pageY;
-    }
-    if (newScrollLeft + $('.imgDiv').width() + 400 < window.innerWidth) {
-        newScrollLeft = -$('.imgDiv').width() + window.innerWidth - 400;
-        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 400;
-        clickX = e.pageX;
-    }
-    if (newScrollTop + $('.imgDiv').height() + 400 < window.innerHeight) {
-        newScrollTop = -$('.imgDiv').height() + window.innerHeight - 400;
-        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 400;
-        clickY = e.pageY;
-    }
-    $('.imgDiv').css({ left: newScrollLeft, top: newScrollTop });
-    scrollLeft = - (clickX - e.pageX);
-    scrollTop = - (clickY - e.pageY);
-}
-
-// Scrolls to position x.xPart, y.yPart
-var scrollToPos = function(x, y, xPart, yPart, doQuick) {
-    zoom = $('.imgDiv').width();
-    prevScrollLeft = -$('#' + (y * 256 + x)).position().left + window.innerWidth / 2 - $('#4926').position().left * (xPart + .5);
-    prevScrollTop = -$('#' + (y * 256 + x)).position().top + window.innerHeight / 2 - $('#4926').position().top * (yPart + .5);
-    if (prevScrollLeft > 400) {
-        prevScrollLeft = 400;
-    }
-    if (prevScrollTop > 450) {
-        prevScrollTop = 450;
-    }
-    if (prevScrollLeft + $('.imgDiv').width() + 400 < window.innerWidth) {
-        prevScrollLeft = -$('.imgDiv').width() + window.innerWidth - 400;
-    }
-    if (prevScrollTop + $('.imgDiv').height() + 400 < window.innerHeight) {
-        prevScrollTop = -$('.imgDiv').height() + window.innerHeight - 400;
-    }
-    doQuick ? $('.imgDiv').css({ left: prevScrollLeft, top: prevScrollTop }) : $('.imgDiv').animate({ left: prevScrollLeft, top: prevScrollTop });
-}
-
-// Decreases selected number values on change
-var fixNums = function(num) {
-    num = parseInt(num);
-    let isBroken = false;
-    let nums = {};
-    let innerLooped = false;
-    $('.label').each(function(index) {
-        if (parseInt($(this).text()) !== num) {
-            if (parseInt($(this).text()) <= 0 || nums.hasOwnProperty(parseInt($(this).text()))) {
-                isBroken = true;
-            }
-            nums[parseInt($(this).text())] = true;
-        } else {
-            innerLooped = true;
-        }
-        if (parseInt($(this).text()) > num) {
-            innerLooped = true;
-            if (parseInt($(this).text()) === 1000) {
-                $(this).text(parseInt($(this).text()) - 1).removeClass('extralong').addClass('long');
-            } else if (parseInt($(this).text()) === 100) {
-                $(this).text(parseInt($(this).text()) - 1).removeClass('long');
-            } else {
-                $(this).text(parseInt($(this).text()) - 1);
-            }
-            $('.label').css('font-size', labelZoom + 'px');
-            $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-            $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-            $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-        }
-    });
-    innerLooped && selectedNum--;
-    if (isBroken || Object.keys(nums).filter(num => num > selectedChunks).length > 0 || Object.keys(nums).length === 0) {
-        resetNums();
-    }
-}
-
-// Resets selected number values if they are broken
-var resetNums = function() {
-    let num = 1;
-    $('.label').each(function(index) {
-        $(this).removeClass('extralong long');
-        $(this).text(num);
-        if (num >= 1000) {
-            $(this).addClass('extralong');
-        } else if (num >= 100) {
-            $(this).addClass('long');
-        }
-        num++;
-    });
-    $('.label').css('font-size', labelZoom + 'px');
-    $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-    $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-    $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-    selectedNum = num;
-    selectedChunks = num - 1;
 }
 
 // Update chunk info
@@ -3314,7 +3620,6 @@ var updateChunkInfo = function() {
         let spawnStr = '';
         let shopStr = '';
         let questStr = '';
-        let diaryStr = '';
         let connectStr = '';
         let clueStr = '';
         if (!!chunkInfo['chunks'][id]) {
@@ -3357,7 +3662,7 @@ var updateChunkInfo = function() {
                 }
                 if (namesList[realName] !== realName) {
                     namesList[realName] = realName;
-                    connectStr += `<span class='link' onclick=redirectPanel('${encodeURI(passedName.replaceAll(/\'/g, '%2H'))}')>${realName.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span>` + ', ';
+                    connectStr += `<span class='link' onclick=redirectPanelCanvas('${encodeURI(passedName.replaceAll(/\'/g, '%2H'))}')>${realName.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span>` + ', ';
                 }
             });
             connectStr.length > 0 && (connectStr = connectStr.substring(0, connectStr.length - 2));
@@ -3382,7 +3687,9 @@ var updateChunkInfo = function() {
         $('.panel-clues').html(clueStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') || 'None');
         $('.panel-connections').html(connectStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') || 'None');
         $('.panel-challenges').html('Calculating...');
-        calcFutureChallenges();
+        if (infoPanelVis['challenges']) {
+            calcFutureChallenges();
+        }
     }
 }
 
@@ -3497,23 +3804,33 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
     }
 }
 
-// Finds the current challenge in each skill
-var calcCurrentChallenges = function() {
-    if (gotData) {
-        let chunks = {};
-        $('.unlocked').each(function() {
-            chunks[parseInt($(this).attr('id'))] = true;
-        });
-        myWorker.postMessage(['current', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills]);
-        workerOut++;
-    }
-}
-
 // Finds the current challenge in each skill 2
 var calcCurrentChallenges2 = function(tempChallengeArr) {
+    !tempChallengeArr && (tempChallengeArr = tempChallengeArrSaved)
     setupCurrentChallenges(tempChallengeArr);
-    checkOffChallenges();
-    updateChunkInfo();
+    infoPanelVis['challenges'] && updateChunkInfo();
+    numClueTasks = {
+        'beginner': 0,
+        'easy': 0,
+        'medium': 0,
+        'hard': 0,
+        'elite': 0,
+        'master': 0
+    };
+    numClueTasksPossible = {
+        'beginner': 0,
+        'easy': 0,
+        'medium': 0,
+        'hard': 0,
+        'elite': 0,
+        'master': 0
+    };
+    !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter(task => { return chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier') }).forEach(task => {
+        numClueTasks[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
+        if (globalValids.hasOwnProperty('Nonskill') && globalValids['Nonskill'].hasOwnProperty(task)) {
+            numClueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
+        }
+    });
 };
 
 // Sets up data for displaying
@@ -3532,9 +3849,9 @@ setupCurrentChallenges = function(tempChallengeArr) {
         rules['Show Skill Tasks'] && challengeArr.push(`<div class="marker marker-skill noscroll" onclick="expandActive('skill')"><i class="expand-button fas ${activeSubTabs['skill'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Skill Tasks</span></div>`);
         rules['Show Skill Tasks'] && Object.keys(tempChallengeArr).sort().forEach(skill => {
             if (!!tempChallengeArr[skill] && !!altChallenges[skill] && altChallenges[skill].hasOwnProperty(chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'])) {
-                !!altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']] && challengeArr.push(`<div class="challenge skill-challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + ` <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']] + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>' + '</div>');
+                !!altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']] && challengeArr.push(`<div class="challenge skill-challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('${skill}', ` + "`" + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']] + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + ` <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + altChallenges[skill][chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level']] + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>' + '</div>');
             } else {
-                !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge skill-challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + ` <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + `</div>`;
+                !!tempChallengeArr[skill] && challengeArr.push(`<div class="challenge skill-challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][tempChallengeArr[skill]]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('${skill}', ` + "`" + tempChallengeArr[skill] + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][tempChallengeArr[skill]]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + tempChallengeArr[skill].split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((tempChallengeArr[skill].split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + tempChallengeArr[skill].split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + tempChallengeArr[skill].split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + ` <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + tempChallengeArr[skill] + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + `</div>`;
             }
         });
         rules['Show Skill Tasks'] && Object.keys(highestCurrent).forEach(skill => {
@@ -3548,7 +3865,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
     !!globalValids['BiS'] && rules['Show Best in Slot Tasks'] && Object.keys(globalValids['BiS']).forEach(challenge => {
         challenge = challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I');
         if ((!backlog['BiS'] || !backlog['BiS'].hasOwnProperty(challenge)) && (!completedChallenges['BiS'] || !completedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) && Object.values(highestOverall).map(function(y) { return y.toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') }).includes(challenge.split('|')[1].toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))) {
-            challengeArr.push(`<div class="challenge bis-challenge noscroll ${'BiS-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) && 'hide-backlog'} ${!activeSubTabs['bis'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges']['BiS'][challenge.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',')]['Label'] + ']</b> <span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'BiS' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+            challengeArr.push(`<div class="challenge bis-challenge noscroll ${'BiS-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) && 'hide-backlog'} ${!activeSubTabs['bis'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('BiS', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges']['BiS'][challenge.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',')]['Label'] + ']</b> <span class="inner noscroll">' + challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((challenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'BiS' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
         }
     });
     !!globalValids['Quest'] && Object.keys(globalValids['Quest']).length > 0 && rules['Show Quest Tasks'] && challengeArr.push(`<div class="marker marker-quest noscroll" onclick="expandActive('quest')"><i class="expand-button fas ${activeSubTabs['quest'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Quest Tasks</span></div>`);
@@ -3556,9 +3873,9 @@ setupCurrentChallenges = function(tempChallengeArr) {
         if ((!backlog['Quest'] || !backlog['Quest'].hasOwnProperty(challenge)) && (!completedChallenges['Quest'] || !completedChallenges['Quest'][challenge]) && globalValids['Quest'][challenge]) {
             challenge = challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I');
             if (chunkInfo['challenges']['Quest'][challenge].hasOwnProperty('QuestPoints')) {
-                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Quest] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').substring(1) + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Quest', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Quest] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').substring(1) + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             } else if (!rules['Show Quest Tasks Complete']) {
-                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Quest] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + `Up to <a href='javascript:openQuestSteps("Quest", "${challenge.replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}")' class='internal-link noscroll'>step ` + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</a></span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Quest', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Quest] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + `Up to <a href='javascript:openQuestSteps("Quest", "${challenge.replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}")' class='internal-link noscroll'>step ` + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</a></span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             }
         }
     });
@@ -3566,7 +3883,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
     !!globalValids['Diary'] && rules['Show Diary Tasks'] && Object.keys(globalValids['Diary']).forEach(challenge => {
         challenge = challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I');
         if ((!backlog['Diary'] || !backlog['Diary'].hasOwnProperty(challenge)) && (!completedChallenges['Diary'] || !completedChallenges['Diary'][challenge]) && globalValids['Diary'][challenge] && (!rules['Show Diary Tasks Complete'] || chunkInfo['challenges']['Diary'][challenge].hasOwnProperty('ManualShow'))) {
-            challengeArr.push(`<div class="challenge diary-challenge noscroll ${'Diary-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) && 'hide-backlog'} ${!activeSubTabs['diary'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Diary] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + `<a href='javascript:openQuestSteps("Diary", "${challenge.replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}")' class='internal-link noscroll'>` + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</a></span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Diary' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+            challengeArr.push(`<div class="challenge diary-challenge noscroll ${'Diary-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) && 'hide-backlog'} ${!activeSubTabs['diary'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Diary', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Diary] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + `<a href='javascript:openQuestSteps("Diary", "${challenge.replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}")' class='internal-link noscroll'>` + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</a></span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Diary' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
         }
     });
     !!globalValids['Extra'] && Object.keys(globalValids['Extra']).length > 0 && challengeArr.push(`<div class="marker marker-extra noscroll" onclick="expandActive('extra')"><i class="expand-button fas ${activeSubTabs['extra'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Other Tasks</span></div>`);
@@ -3574,9 +3891,9 @@ setupCurrentChallenges = function(tempChallengeArr) {
         challenge = challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I');
         if ((!backlog['Extra'] || !backlog['Extra'].hasOwnProperty(challenge)) && (!completedChallenges['Extra'] || !completedChallenges['Extra'][challenge])) {
             if (!!chunkInfo['challenges']['Extra'][challenge] && chunkInfo['challenges']['Extra'][challenge]['Label'] === 'Kill X') {
-                challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[${chunkInfo['challenges']['Extra'][challenge]['Label']}]</b> <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(' X ', ' ' + rules['Kill X Amount'] + ' ')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[${chunkInfo['challenges']['Extra'][challenge]['Label']}]</b> <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(' X ', ' ' + rules['Kill X Amount'] + ' ')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             } else {
-                challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge]['Label'] + `]</b> `) : '')} <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                challengeArr.push(`<div class="challenge extra-challenge noscroll ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge]['Label'] + `]</b> `) : '')} <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             }
         }
     });
@@ -3657,8 +3974,8 @@ var expandActive = function(subTab) {
 var calcFutureChallenges = function() {
     let chunks = {};
     let challengeStr = '';
-    $('.unlocked').each(function() {
-        chunks[parseInt($(this).attr('id'))] = true;
+    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+        chunks[parseInt(chunkId)] = true;
     });
     if (chunks[infoLockedId.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) {
         $('.panel-challenges').html(challengeStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') || 'None (chunk is already unlocked)');
@@ -3870,7 +4187,7 @@ var removeRandomLoot = function(item) {
             $('#randomlist-data').append(`<div class="noscroll results"><span class="noscroll">No items</span></div>`);
         }
         !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        calcCurrentChallenges();
+        calcCurrentChallengesCanvas();
         setData();
     }
 }
@@ -3896,7 +4213,7 @@ var addRandomLoot = function(close) {
             if (loot !== '') {
                 randomLoot[loot] = true;
                 !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                calcCurrentChallenges();
+                calcCurrentChallengesCanvas();
                 setData();
             }
             $('#myModal6').hide();
@@ -3915,69 +4232,6 @@ var shuffle = function(array) {
         array[randomIndex], array[currentIndex]];
     }
     return array;
-}
-
-// Opens the roll chunk modal
-var openRollChunk = function(el, rand, sNum) {
-    rollChunkModalOpen = true;
-    $('.roll-chunk-title').text('Rolling your next chunk...');
-    $('.roll-chunk-subtitle').text('');
-    $('.roll-chunk-outer').empty().css('top', '0');
-    $('#submit-roll-chunk-button').hide();
-    pickedNum = rand;
-    let numSlots = 500;
-    let elArr = [...el];
-    let topNum;
-    let xCoord;
-    let yCoord;
-    let chosen = $(el[rand]).attr('id');
-    elArr = shuffle(elArr);
-    xCoord = Math.floor(parseInt($(elArr[elArr.length - 1]).attr('id')) / 256) - 17;
-    yCoord = 64 - (parseInt($(elArr[elArr.length - 1]).attr('id')) % 256);
-    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$(elArr[elArr.length - 1]).attr('id')}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
-    for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
-        for (let j = 0; j < elArr.length; j++) {
-            let num = $(elArr[j]).attr('id');
-            xCoord = Math.floor(parseInt($(elArr[j]).attr('id')) / 256) - 17;
-            yCoord = 64 - (parseInt($(elArr[j]).attr('id')) % 256);
-            $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
-            if (num === chosen && i + 1 >= Math.ceil(numSlots / elArr.length)) {
-                topNum = (-15.998 * ((i * elArr.length) + j)) + 'vh';
-            }
-        };
-    };
-    xCoord = Math.floor(parseInt($(elArr[0]).attr('id')) / 256) - 17;
-    yCoord = 64 - (parseInt($(elArr[0]).attr('id')) % 256);
-    let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
-    $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${$(elArr[0]).attr('id')}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
-    setTimeout(function() {
-        $('.roll-chunk-outer').animate({
-            top: topNum
-        }, {
-            duration: randomDuration,
-            easing: "easeOutCubic",
-            complete: function() {
-                $('.roll-chunk-title').text((chunkInfo['chunks'].hasOwnProperty(chosen) && chunkInfo['chunks'][chosen].hasOwnProperty('Nickname') ? chunkInfo['chunks'][chosen]['Nickname'] : 'Unknown') + '(' + chosen + ')');
-                !!sNum && !isNaN(sNum) && $('.roll-chunk-subtitle').text('[Rolled number: ' + sNum + ']');
-                $('#submit-roll-chunk-button').show();
-            }
-        });
-    }, 1000);
-    setData();
-    $('#myModal23').show();
-}
-
-// Delayed pick chunk after cinematic
-var takeMeToChunk = function() {
-    rollChunkModalOpen = false;
-    scrollToPos(parseInt($('.box.recent').attr('id')) % 256, Math.floor(parseInt($('.box.recent').attr('id')) / 256), 0, 0, false);
-    $('.recent').removeClass('recent');
-    calcCurrentChallenges();
-    $('.roll-chunk-title').text('Rolling your next chunk...');
-    $('.roll-chunk-subtitle').text('');
-    $('.roll-chunk-outer').empty().css('top', '0');
-    $('#submit-roll-chunk-button').hide();
-    $('#myModal23').hide();
 }
 
 // Opens the quest steps modal
@@ -4074,7 +4328,7 @@ var addSlayerLocked = function(close) {
                 slayerLocked['monster'] = task;
                 slayerLocked['level'] = level;
                 !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                calcCurrentChallenges();
+                calcCurrentChallengesCanvas();
                 setData();
             }
             $('#myModal22').hide();
@@ -4178,7 +4432,7 @@ var checkOffMonster = function(monster, type) {
     }
     setData();
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
 }
 
 // Opens the manual add tasks modal
@@ -4258,7 +4512,7 @@ var addManualTask = function(challenge) {
         }
     });
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
 }
 
 // Opens the manual complete tasks modal
@@ -4542,7 +4796,7 @@ var addPassiveSkill = function(close, skill) {
             }
             passiveSkill[skill] = level;
             !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-            calcCurrentChallenges();
+            calcCurrentChallengesCanvas();
             setData();
             $('#myModal28').hide();
             passiveSkillModalOpen = false;
@@ -4555,7 +4809,7 @@ var unlockSlayer = function() {
     slayerLocked = null;
     setData();
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
 }
 
 // Checks if slayer locked monster is unlocked
@@ -4610,7 +4864,7 @@ var addManualEquipment = function(equip) {
     }
     setData();
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
 }
 
 // Opens the backlog sources modal
@@ -4705,7 +4959,7 @@ var backlogManualSource = function(category, source) {
     }
     setData();
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
 }
 
 // Opens the sticker menu
@@ -4747,18 +5001,7 @@ var submitSticker = function() {
     let id = savedStickerId;
     let sticker = savedStickerSticker;
     if (sticker !== 'unset') {
-        $('.hidden-sticker').hide().remove();
-        $('.chunk-sticker.clicky').removeClass('clicky signedIn');
-        if (stickered.hasOwnProperty(id)) {
-            $('.box#' + id).children('.chunk-sticker').remove();
-        }
-        if (stickerChoices.includes(sticker)) {
-            $('.box#' + id).append(`<span style='color:${$('.sticker-color-picker').val()}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${sticker}" style="transform: scaleX(-1)"></i>${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
-        } else if (stickerChoicesOsrs.includes(sticker)) {
-            $('.box#' + id).append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${sticker}-osrs.svg">${!!$('#sticker-notes-data > textarea').val() && $('#sticker-notes-data > textarea').val().length > 0 ? `<span class="tooltiptext-sticker">${$('#sticker-notes-data > textarea').val()}</span>` : ''}</span>`);
-        }
         if (sticker === '1st') {
-            $('.box#' + id).append(`<span style='color:#00FF00' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-flag" style="transform: scaleX(-1)"></i><span class="tooltiptext-sticker">${"Starting Chunk"}</span></span>`);
             stickered[id] = 'flag';
             stickeredNotes[id] = 'Starting Chunk';
             stickeredColors[id] = '#00FF00';
@@ -4768,14 +5011,10 @@ var submitSticker = function() {
             stickeredColors[id] = $('.sticker-color-picker').val();
         }
     } else if (!!id && id.length > 0) {
-        $('.box#' + id).children('.chunk-sticker').remove();
         delete stickered[id];
         delete stickeredNotes[id];
         delete stickeredColors[id];
-        $('.box#' + id).append(`<span class='chunk-sticker hidden-sticker' onclick="openStickers(${id})"><i class="fas fa-tag" style="transform: scaleX(-1)"></i></span>`);
     }
-    $('.chunk-sticker').css('font-size', fontZoom * (3 / 2) + 'px');
-    $('.chunk-sticker > img').parent().css('width', fontZoom * (3 / 2) + 'px');
     setData();
     closeSticker();
 }
@@ -4986,9 +5225,7 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
         (oldSavedChallengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
         (oldSavedChallengeArr.length > 0 || workerOut === 0) && $('.panel-active > i').css('line-height', '');
         setCalculating('.panel-active', useOld);
-        (oldSavedChallengeArr.length > 0 || workerOut === 0) && oldSavedChallengeArr.forEach(line => {
-            $('.panel-active').append(line);
-        });
+        (oldSavedChallengeArr.length > 0 || workerOut === 0) && $('.panel-active').append(...oldSavedChallengeArr);
         if ($('.panel-active .skill-challenge').length === 0) {
             $('.marker-skill').remove();
         }
@@ -5018,9 +5255,7 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
     } else {
         (challengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
         (challengeArr.length > 0 || workerOut === 0) && $('.panel-active > i').css('line-height', '');
-        (challengeArr.length > 0 || workerOut === 0) && challengeArr.forEach(line => {
-            $('.panel-active').append(line);
-        });
+        (challengeArr.length > 0 || workerOut === 0) && $('.panel-active').append(...challengeArr);
         if ($('.panel-active .skill-challenge').length === 0) {
             $('.marker-skill').remove();
         }
@@ -5049,15 +5284,11 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
         setAreas();
         $('.panel-backlog').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
         $('.panel-backlog > i').css('line-height', '');
-        (testMode || !(viewOnly || inEntry || locked)) && $('.panel-backlog').append(`<div class='noscroll backlogSources-container'><span class='noscroll backlogSources' onclick='backlogSources()'><i class="fas fa-archive"></i>Backlog Sources</span></div>`);
-        backlogArr.forEach(line => {
-            $('.panel-backlog').append(line);
-        });
+        (testMode || !(viewOnly || inEntry || locked)) && !onMobile && $('.panel-backlog').append(`<div class='noscroll backlogSources-container'><span class='noscroll backlogSources' onclick='backlogSources()'><i class="fas fa-archive"></i>Backlog Sources</span></div>`);
+        $('.panel-backlog').append(...backlogArr);
         $('.panel-completed').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
         $('.panel-completed > i').css('line-height', '');
-        completedArr.forEach(line => {
-            $('.panel-completed').append(line);
-        });
+        $('.panel-completed').append(...completedArr);
     }
 }
 
@@ -5073,23 +5304,11 @@ var checkFalseRules = function() {
     return all_false;
 }
 
-// Blacklists the given chunk
-var blacklist = function(chunkId) {
-    $('.box#' + chunkId).addClass('blacklisted').removeClass('gray');
-    setData();
-}
-
-// Un-Blacklists the given chunk
-var unblacklist = function(chunkId) {
-    $('.box#' + chunkId).addClass('gray').removeClass('blacklisted');
-    setData();
-}
-
 // Get all possible areas within unlocked chunks
 var getChunkAreas = function() {
     let chunks = {};
-    $('.unlocked').each(function() {
-        chunks[parseInt($(this).attr('id'))] = true;
+    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+        chunks[chunkId] = true;
     });
     let i = 0;
     let temp = {};
@@ -5246,7 +5465,7 @@ var showDetails = function(challenge, skill, type) {
             if (key === 'ChunksDetails') {
                 if (possibleAreas[el]) {
                     formattedSource = `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(el.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, ''))} target="_blank">${el.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '')}</a>`;
-                } else if (!!el.match(/[0-9]+/g) && $('.box#' + el.match(/[0-9]+/g)[0]).hasClass('unlocked')) {
+                } else if (!!el.match(/[0-9]+/g) && tempChunks['unlocked'].hasOwnProperty(el.match(/[0-9]+/g)[0])) {
                     formattedSource = el.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '');
                 }
                 if (formattedSource !== '') {
@@ -5404,7 +5623,7 @@ var checkOffAltChallenge = function(skill, chal, mainChal) {
         !!chunkInfo['challenges'][skill][chal] && (altChallenges[skill][chunkInfo['challenges'][skill][chal]['Level']] = chal);
     }
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
     setData();
 }
 
@@ -5665,7 +5884,7 @@ var backlogChallenge = function(challenge, skill, note) {
                 if (highestChallengeLevel > 0) {
                     oldChallengeArr[skill] = highestChallenge;
                     // Needs to be converted still TODO
-                    challengeArr.splice(index, 0, `<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenges()" ${(!testMode && (viewOnly || inEntry || locked)) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                    challengeArr.splice(index, 0, `<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenge('${skill}', ` + "`" + highestChallenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
                 }
             }
         });
@@ -5680,9 +5899,8 @@ var backlogChallenge = function(challenge, skill, note) {
             });
         }
     }
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
     !onMobile && setupCurrentChallenges(oldChallengeArr);
-    !onMobile && checkOffChallenges();
     setData();
 }
 
@@ -5704,8 +5922,7 @@ var unbacklogChallenge = function(challenge, skill) {
     }
     !onMobile && setupCurrentChallenges(false);
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallenges();
-    !onMobile && checkOffChallenges();
+    calcCurrentChallengesCanvas();
     setData();
 }
 
@@ -5727,69 +5944,22 @@ var uncompleteChallenge = function(challenge, skill) {
     }
     !onMobile && setupCurrentChallenges(false);
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
     setData();
 }
 
-// Marks checked off challenges to save for later
-var checkOffChallenges = function() {
-    checkedChallenges = {};
-    Object.keys(highestCurrent).forEach(skill => {
-        if ($('.' + skill + '-challenge input').prop('checked')) {
-            $('.panel-active > .' + skill + '-challenge').addClass('hide-backlog');
-            if (!checkedChallenges[skill]) {
-                checkedChallenges[skill] = {};
-            }
-            checkedChallenges[skill][highestCurrent[skill].replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
-        } else {
-            $('.panel-active > .' + skill + '-challenge').removeClass('hide-backlog');
+// Marks checked off challenge to save for later
+var checkOffChallenge = function(skill, line) {
+    if (!checkedChallenges.hasOwnProperty(skill) || !checkedChallenges[skill].hasOwnProperty(line)) {
+        if (!checkedChallenges.hasOwnProperty(skill)) {
+            checkedChallenges[skill] = {};
         }
-    });
-    !!challengeArr && challengeArr.forEach(line => {
-        if (line !== "No current chunk tasks.") {
-            if ($('.' + $(line).attr('class').trim().split(' ').join('.') + ' input:checked').length > 0) {
-                $(line).attr('class').split(/\s+/).filter(cl => { return cl.includes('-challenge') }).forEach(cl => {
-                    if (cl.includes('BiS-')) {
-                        let skillLine = cl;
-                        $('.panel-active > .' + skillLine).addClass('hide-backlog');
-                        if (!checkedChallenges['BiS']) {
-                            checkedChallenges['BiS'] = {};
-                        }
-                        checkedChallenges['BiS'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
-                    } else if (cl.includes('Quest-')) {
-                        let skillLine = cl;
-                        $('.panel-active > .' + skillLine).addClass('hide-backlog');
-                        if (!checkedChallenges['Quest']) {
-                            checkedChallenges['Quest'] = {};
-                        }
-                        let questStepName = '~|' + $(line).find('a.link').text() + '|~' + ($(line).find('a.internal-link').length ? $(line).find('a.internal-link').text().replaceAll('step ', '').replaceAll('  ', ' ') : ' ' + $(line).text().split(': ')[1].trim());
-                        checkedChallenges['Quest'][questStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')] = true;
-                    } else if (cl.includes('Diary-')) {
-                        let skillLine = cl;
-                        $('.panel-active > .' + skillLine).addClass('hide-backlog');
-                        if (!checkedChallenges['Diary']) {
-                            checkedChallenges['Diary'] = {};
-                        }
-                        let diaryStepName = '~|' + $(line).find('a.link').text() + '|~' + ($(line).find('a.internal-link').length ? $(line).find('a.internal-link').text().replaceAll('  ', ' ') : ' ' + $(line).text().split(': ')[1].trim());
-                        checkedChallenges['Diary'][diaryStepName.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J')] = true;
-                    } else if (cl.includes('Extra-')) {
-                        let skillLine = cl;
-                            $('.panel-active > .' + skillLine).addClass('hide-backlog');
-                        if (!checkedChallenges['Extra']) {
-                            checkedChallenges['Extra'] = {};
-                        }
-                        if ($(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').match(/Kill .* \~\|.*\|\~/)) {
-                            checkedChallenges['Extra'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').replace(/Kill .* \~/, 'Kill X ~').replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
-                        } else {
-                            checkedChallenges['Extra'][$(line).find('.inner').text().split($(line).find('a.link').text()).join('~|' + $(line).find('a.link').text() + '|~').replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
-                        }
-                    }
-                });
-            } else {
-                $('.panel-active .' + $(line).attr('class').trim().split(' ').join('.')).removeClass('hide-backlog');
-            }
-        }
-    });
+        checkedChallenges[skill][line] = true;
+    } else {
+        delete checkedChallenges[skill][line];
+    }
+    $('.panel-active .challenge:has(input:checked)').addClass('hide-backlog');
+    $('.panel-active .challenge:not(:has(input:checked))').removeClass('hide-backlog');
     changeChallengeColor();
     setData();
 }
@@ -5800,7 +5970,7 @@ var checkOffAreas = function(obj, area) {
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
     getChunkAreas();
     setAreas();
-    calcCurrentChallenges();
+    calcCurrentChallengesCanvas();
     setData();
 }
 
@@ -5846,7 +6016,7 @@ var checkOffRules = function(didRedo, startup) {
     if (!startup) {
         setupCurrentChallenges(false);
         !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        calcCurrentChallenges();
+        calcCurrentChallengesCanvas();
         rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
         !rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
         setData();
@@ -5904,7 +6074,7 @@ var checkOffSettings = function(didRedo, startup) {
     }
     if (isPicking) {
         $('.pick').text('Pick for me');
-    } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
+    } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
         $('.pick').text('Random Start?');
     } else {
         $('.pick').text('Pick Chunk');
@@ -5927,7 +6097,7 @@ var completeChallenges = function(noCalc) {
     });
     checkedChallenges = {};
     !onMobile && setCalculating('.panel-completed');
-    !onMobile && !noCalc && calcCurrentChallenges();
+    !onMobile && !noCalc && calcCurrentChallengesCanvas();
 }
 
 // Gets and displays info on the gievn quest
@@ -5937,8 +6107,8 @@ var getQuestInfo = function(quest) {
     $('.questname-content').html(`<a class='link noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))}' target='_blank'>${quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</a>`);
     $('.panel-questdata').empty();
     let unlocked = { ...possibleAreas };
-    $('.unlocked').each(function() {
-        unlocked[parseInt($(this).attr('id'))] = true;
+    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+        unlocked[parseInt(chunkId)] = true;
     });
     questChunks = [];
     chunkInfo['quests'][quest].split(', ').forEach(chunkId => {
@@ -5949,7 +6119,7 @@ var getQuestInfo = function(quest) {
             questChunks.push(chunkName);
             chunkName = chunkInfo['chunks'][chunkName.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replace("'", "’")]['Nickname'] + ' (' + chunkName + ')';
         }
-        $('.panel-questdata').append(`<b class="noscroll"><div class="noscroll ${!!unlocked[chunkId] && ' + valid-chunk'}">` + `<span onclick="redirectPanel(encodeURI('` + chunkId.replaceAll(/\'/g, "%2H") + `'))"><i class="quest-icon fas fa-crosshairs"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunk(${chunkId})"`}>` + chunkName + '</span></div></b>')
+        $('.panel-questdata').append(`<b class="noscroll"><div class="noscroll ${!!unlocked[chunkId] && ' + valid-chunk'}">` + `<span onclick="redirectPanelCanvas(encodeURI('` + chunkId.replaceAll(/\'/g, "%2H") + `'))"><i class="quest-icon fas fa-crosshairs"></i></span> ` + `<span class="noscroll ${aboveground && ' + click'}" ${aboveground && `onclick="scrollToChunkCanvas(${chunkId})"`}>` + chunkName + '</span></div></b>')
     });
 }
 
@@ -5963,54 +6133,19 @@ var toggleQuestInfo = function() {
     }
 }
 
-// Highlights array of chunk ids for current quest
-var highlightAllQuest = function() {
-    questChunks.forEach(id => {
-        $('.box#' + id).addClass('recent');
-    });
-}
-
-// Scrolls to chunk with given id
-var scrollToChunk = function(id) {
-    let box = $('.box#' + id).addClass('recent');
-    scrollToPos(parseInt(box.attr('id')) % 256, Math.floor(parseInt(box.attr('id')) / 256), 0, 0, false);
-}
-
-// Re-update chunk info panel
-var redirectPanel = function(name) {
-    let realName = decodeURI(name).replaceAll(/\%2H/g, "'");
-    infoLockedId.match(/^[0-9]*$/i) && $('.box#' + infoLockedId).removeClass('locked');
-    $('.icon').remove();
-    realName.match(/^[0-9]*$/i) && $('.box#' + realName).addClass('locked').append("<span class='icon'></span>");
-    $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-    ((realName % 256) < 65) && scrollToPos(parseInt($('.box#' + realName).attr('id')) % 256, Math.floor(parseInt($('.box#' + realName).attr('id')) / 256), 0, 0);
-    infoLockedId = realName.toString().replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q');
-    updateChunkInfo();
-    $('.infoid').addClass('new');
-    setTimeout(function() {
-        $('.infoid').removeClass('new');
-        setTimeout(function() {
-            $('.infoid').addClass('new');
-            setTimeout(function() {
-                $('.infoid').removeClass('new');
-            }, 1000);
-        }, 1000);
-    }, 1000);
-}
-
 // Checks the MID from the url
 var checkMID = function(mid) {
     if (mid === 'change-pin') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
-        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').hide();
+        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
         $('#home-menu').hide();
         $('#pin-menu').show();
         $('.mid-old').focus();
     } else if (mid === 'about') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
-        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').hide();
+        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
         $('#home-menu').hide();
         $('#about-menu').show();
     } else if (mid) {
@@ -6028,14 +6163,14 @@ var checkMID = function(mid) {
             } else {
                 window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', window.location.href.split('?')[0]);
                 atHome = true;
-                $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').hide();
+                $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
                 $('.loading, .ui-loader-header').remove();
             }
             setupMap();
         });
     } else {
         atHome = true;
-        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, #outerImgDiv').hide();
+        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
         $('.loading, .ui-loader-header').remove();
         setupMap();
     }
@@ -6094,6 +6229,7 @@ var loadData = function(startup) {
             var rulesTemp = snap.val()['rules'] || {};
             randomLoot = snap.val()['randomLoot'] || {};
             var chunks = snap.val()['chunks'];
+            tempChunks = chunks;
             recent = snap.val()['recent'] || [];
             recentTime = snap.val()['recentTime'] || [];
             chunkOrder = snap.val()['chunkOrder'] || [];
@@ -6119,8 +6255,8 @@ var loadData = function(startup) {
                 !recentTime[count - 1] && (recentTime[count - 1] = null);
                 let tempDate = new Date();
                 tempDate.setTime(recentTime[count - 1]);
-                tempDate > 0 && $('#recentChunks' + count).html('<span class="time">' + tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2] + ': </span><span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
-                tempDate <= 0 && $('#recentChunks' + count).html('<span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunk(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
+                tempDate > 0 && $('#recentChunks' + count).html('<span class="time">' + tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2] + ': </span><span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunkCanvas(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
+                tempDate <= 0 && $('#recentChunks' + count).html('<span class="chunk' + (recent[count - 1] ? '' : 'none') + '" onclick="recentChunkCanvas(recentChunks' + count + ')">' + (recent[count - 1] ? recent[count - 1] : "-") + '</span>');
             }
             if (!!recentTime[0]) {
                 $('#recentChunksTitle > b').text(Math.floor((new Date().getTime() - recentTime[0]) / (1000 * 3600 * 24)) + ' days since last roll');
@@ -6194,64 +6330,13 @@ var loadData = function(startup) {
             toggleChunkTasks(settings['chunkTasks'], 'startup');
             toggleTaskSidebar(settings['taskSidebar'], 'startup');
 
-            $('.box').removeClass('selected potential unlocked recent blacklisted').addClass('gray').css('border-width', 0);
-            $('.label').remove();
             selectedChunks = 0;
             unlockedChunks = 0;
             selectedNum = 1;
 
-            $('#chunkInfo1').text('Unlocked chunks: ' + unlockedChunks);
-            $('#chunkInfo2').text('Selected chunks: ' + selectedChunks);
-            chunks && chunks['potential'] && Object.keys(chunks['potential']).sort(function(a, b) { return b - a }).forEach(function(id) {
-                picking = true;
-                if (selectedNum > 999) {
-                    $('.box#' + id).addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label extralong">' + selectedNum++ + '</span>');
-                    $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-                } else if (selectedNum > 99) {
-                    $('.box#' + id).addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label long">' + selectedNum++ + '</span>');
-                    $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-                } else {
-                    $('.box#' + id).addClass('potential').removeClass('gray selected unlocked').append('<span draggable="false" class="label">' + selectedNum++ + '</span>');
-                    $('.label').css('font-size', labelZoom + 'px');
-                }
-                $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-            });
-
-            chunks && chunks['selected'] && Object.keys(chunks['selected']).sort(function(a, b) { return b - a }).forEach(function(id) {
-                if (selectedNum > 999) {
-                    $('.box#' + id).addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label extralong">' + selectedNum++ + '</span>');
-                    $('.label.extralong').css('font-size', (labelZoom * (1 / 2)) + 'px');
-                } else if (selectedNum > 99) {
-                    $('.box#' + id).addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label long">' + selectedNum++ + '</span>');
-                    $('.label.long').css('font-size', (labelZoom * (2 / 3)) + 'px');
-                } else {
-                    $('.box#' + id).addClass('selected').removeClass('gray potential unlocked blacklisted').append('<span draggable="false" class="label">' + selectedNum++ + '</span>');
-                    $('.label').css('font-size', labelZoom + 'px');
-                }
-                $('.box.locked .icon').css('font-size', labelZoom * (.9) + 'px');
-                $('#chunkInfo2').text('Selected chunks: ' + ++selectedChunks);
-            });
-
-            chunks && chunks['unlocked'] && Object.keys(chunks['unlocked']).forEach(function(id) {
-                $('.box#' + id).addClass('unlocked').removeClass('gray selected potential blacklisted');
-                $('#chunkInfo1').text('Unlocked chunks: ' + ++unlockedChunks);
-            });
-
-            chunks && chunks['blacklisted'] && Object.keys(chunks['blacklisted']).forEach(function(id) {
-                $('.box#' + id).addClass('blacklisted').removeClass('gray selected potential unlocked');
-            });
-
-            $('.chunk-sticker').remove();
-            chunks && chunks['stickered'] && Object.keys(chunks['stickered']).forEach(function(id) {
-                if (stickerChoices.includes(chunks['stickered'][id])) {
-                    $('.box#' + id).append(`<span style='color:${(chunks.hasOwnProperty('stickeredColors') && chunks['stickeredColors'][id]) || settings['defaultStickerColor'] || '#000000'}' class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><i class="fas fa-${chunks['stickered'][id]}" style="transform: scaleX(-1)"></i>${chunks.hasOwnProperty('stickeredNotes') && chunks['stickeredNotes'].hasOwnProperty(id) && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
-                } else if (stickerChoicesOsrs.includes(chunks['stickered'][id])) {
-                    $('.box#' + id).append(`<span class='chunk-sticker permanent-sticker' onclick="openStickers(${id})"><img src="./resources/SVG/${chunks['stickered'][id]}-osrs.svg">${!!chunks['stickeredNotes'][id] && chunks['stickeredNotes'][id].length > 0 ? `<span class="tooltiptext-sticker">${chunks['stickeredNotes'][id]}</span>` : ''}</span>`);
-                }
-            });
-            $('.chunk-sticker').css('font-size', fontZoom * (3 / 2) + 'px');
-            $('.chunk-sticker > img').parent().css('width', fontZoom * (3 / 2) + 'px');
+            $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
+            $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
+            chunks && chunks['potential'] && (picking = true);
 
             stickered = (chunks ? chunks['stickered'] : {}) || {};
             stickeredNotes = (chunks ? chunks['stickeredNotes'] : {}) || {};
@@ -6264,23 +6349,23 @@ var loadData = function(startup) {
                 $('.roll2').text('Unlock both');
                 mid === roll5Mid && $('.roll2').text('Unlock all');
                 isPicking = true;
-            } else if ((unlockedChunks === 0 && selectedChunks === 0) || settings['randomStartAlways']) {
+            } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
                 $('.pick').text('Random Start?');
             }
-            chunkBorders();
             oldSavedChallengeArr = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['oldSavedChallengeArr'] ? snap.val()['chunkinfo']['oldSavedChallengeArr'] : [];
             if (oldSavedChallengeArr.length > 0) {
                 chunkTasksOn && !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
             } else {
                 chunkTasksOn && !onMobile && setCalculating('.panel-active');
             }
-            chunkTasksOn && calcCurrentChallenges();
-            startup && center('quick');
+            chunkTasksOn && calcCurrentChallengesCanvas();
+            startup && centerCanvas('quick');
             rulesModalOpen && showRules();
             if (!startup) {
                 rules['Manually Complete Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
             }
             doneLoading();
+            setUpSelected();
         });
     });
 }
@@ -6370,8 +6455,8 @@ var setData = function() {
                 myRef.child('chunkinfo').update({ oldSavedChallengeArr });
 
                 var tempJson = {};
-                $('.unlocked').each(function() {
-                    tempJson[$(this).prop('id')] = $(this).prop('id');
+                !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+                    tempJson[chunkId] = chunkId;
                 });
                 myRef.child('chunks/unlocked').set(tempJson);
                 let walkableUnlockedChunks;
@@ -6385,20 +6470,20 @@ var setData = function() {
                 }
 
                 tempJson = {};
-                $('.selected').each(function() {
-                    tempJson[$(this).prop('id')] = $(this).prop('id');
+                !!tempChunks['selected'] && Object.keys(tempChunks['selected']).forEach(chunkId => {
+                    tempJson[chunkId] = chunkId;
                 });
                 myRef.child('chunks/selected').set(tempJson);
 
                 tempJson = {};
-                $('.potential').each(function() {
-                    tempJson[$(this).prop('id')] = $(this).prop('id');
+                !!tempChunks['potential'] && Object.keys(tempChunks['potential']).forEach(chunkId => {
+                    tempJson[chunkId] = chunkId;
                 });
                 myRef.child('chunks/potential').set(tempJson);
 
                 tempJson = {};
-                $('.blacklisted').each(function() {
-                    tempJson[$(this).prop('id')] = $(this).prop('id');
+                !!tempChunks['blacklisted'] && Object.keys(tempChunks['blacklisted']).forEach(chunkId => {
+                    tempJson[chunkId] = chunkId;
                 });
                 myRef.child('chunks/blacklisted').set(tempJson);
 
@@ -6449,8 +6534,8 @@ var setData = function() {
             myRef.child('chunkinfo').update({ oldSavedChallengeArr });
 
             var tempJson = {};
-            $('.unlocked').each(function() {
-                tempJson[$(this).prop('id')] = $(this).prop('id');
+            Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+                tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/unlocked').set(tempJson);
             let walkableUnlockedChunks;
@@ -6464,20 +6549,20 @@ var setData = function() {
             }
 
             tempJson = {};
-            $('.selected').each(function() {
-                tempJson[$(this).prop('id')] = $(this).prop('id');
+            Object.keys(tempChunks['selected']).forEach(chunkId => {
+                tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/selected').set(tempJson);
 
             tempJson = {};
-            $('.potential').each(function() {
-                tempJson[$(this).prop('id')] = $(this).prop('id');
+            Object.keys(tempChunks['potential']).forEach(chunkId => {
+                tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/potential').set(tempJson);
 
             tempJson = {};
-            $('.blacklisted').each(function() {
-                tempJson[$(this).prop('id')] = $(this).prop('id');
+            Object.keys(tempChunks['blacklisted']).forEach(chunkId => {
+                tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/blacklisted').set(tempJson);
 
@@ -6493,56 +6578,6 @@ var setData = function() {
         }).catch(function(error) { console.log(error) });
     }
 }
-
-// Credit to Amehzyn
-// Shifts offset to zoom in on mouse location 
-function zoomOnMouse(event, dir, imageDiv) {
-    // Pull number out of string, cut "px" off end
-    var leftNumber = Number(imageDiv.style.left.slice(0, -2));
-    var topNumber = Number(imageDiv.style.top.slice(0, -2));
-
-    var currentMouseX = Math.round(event.clientX);
-    var currentMouseY = Math.round(event.clientY);
-
-    // As image zooms, shift top-left corner closer to or further from mouse position
-    var offsetX = (currentMouseX - leftNumber) * dir;
-    var offsetY = (currentMouseY - topNumber) * dir;
-
-    prevScrollLeft = leftNumber - offsetX;
-    prevScrollTop = topNumber - offsetY;
-
-    imageDiv.style.left = prevScrollLeft + "px";
-    imageDiv.style.top = prevScrollTop + "px";
-}
-
-// Credit to Amehzyn
-// Prevents zooming from pulling map too off-center screen
-function fixMapEdges(imageDiv) {
-    // Take the "px" off the end and cast from a String to a Number
-    var leftNumber = Number(imageDiv.style.left.slice(0, -2));
-    var topNumber = Number(imageDiv.style.top.slice(0, -2));
-    var rightEdge = leftNumber + imageDiv.offsetWidth;
-    var bottomEdge = topNumber + imageDiv.offsetHeight;
-
-    var margins = [450, 400, 400, 400];
-    if (topNumber > margins[0]) {
-        prevScrollTop = margins[0];
-        imageDiv.style.top = prevScrollTop + "px";
-    }
-    if (rightEdge < window.innerWidth - margins[1]) {
-        prevScrollLeft = (window.innerWidth - margins[1]) - imageDiv.offsetWidth;
-        imageDiv.style.left = prevScrollLeft + "px";
-    }
-    if (bottomEdge < window.innerHeight - margins[2]) {
-        prevScrollTop = (window.innerHeight - margins[2]) - imageDiv.offsetHeight;
-        imageDiv.style.top = prevScrollTop + "px";
-    }
-    if (leftNumber > margins[3]) {
-        prevScrollLeft = margins[3];
-        imageDiv.style.left = prevScrollLeft + "px";
-    }
-}
-
 
 // Rolls until a new, unique map id is found
 var rollMID = function() {
@@ -6772,16 +6807,4 @@ function stringToChunkIndexes(request) {
         }
     }
     return chunks;
-}
-
-// Highlights outside borders of unlocked areas
-var chunkBorders = function() {
-    $('.unlocked').each(function() {
-        var num = parseInt($(this).prop('id'));
-        var skipp = 256;
-        !$('#' + (num + 1)).hasClass('unlocked') ? $(this).css('border-top', '.175vw solid red') : $(this).css('border-top-width', '0px');
-        !$('#' + (num - 1)).hasClass('unlocked') ? $(this).css('border-bottom', '.175vw solid red') : $(this).css('border-bottom-width', '0px');
-        !$('#' + (num - skipp)).hasClass('unlocked') ? $(this).css('border-left', '.175vw solid red') : $(this).css('border-left-width', '0px');
-        !$('#' + (num + skipp)).hasClass('unlocked') ? $(this).css('border-right', '.175vw solid red') : $(this).css('border-right-width', '0px');
-    });
 }
