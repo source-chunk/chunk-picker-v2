@@ -978,7 +978,7 @@ let oldSavedChallengeArr = [];
 let introRollSelected = false;
 let introFancySelected = false;
 let introDarkSelected = false;
-let currentVersion = '4.12.8';
+let currentVersion = '4.13.0';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -2218,7 +2218,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.0");
+const myWorker = new Worker("./worker.js?v=4.13.1");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
