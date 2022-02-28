@@ -1127,13 +1127,13 @@ var drawCanvas = function() {
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
                 if (tempSelectedChunks.indexOf(chunkId) + 1 > 999) {
-                    ctx.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto, sans-serif';
+                    ctx.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = .65;
                 } else if (tempSelectedChunks.indexOf(chunkId) + 1 > 99) {
-                    ctx.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto, sans-serif';
+                    ctx.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = .7;
                 } else {
-                    ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto, sans-serif';
+                    ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = .825;
                 }
                 ctx.fillStyle = "white";
@@ -1152,13 +1152,13 @@ var drawCanvas = function() {
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
                 if (selectedNum + 1 > 999) {
-                    ctx.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto, sans-serif';
+                    ctx.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = .65;
                 } else if (selectedNum + 1 > 99) {
-                    ctx.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto, sans-serif';
+                    ctx.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = .7;
                 } else {
-                    ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto, sans-serif';
+                    ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = .825;
                 }
                 ctx.fillStyle = "black";
@@ -1189,7 +1189,7 @@ var drawCanvas = function() {
             }
             if (showChunkIds && !onMobile) {
                 ctx.fillStyle = "white";
-                ctx.font = (totalZoom * (imgW / rowSize) * (1 / 5)) + 'px Calibri, Roboto, sans-serif';
+                ctx.font = (totalZoom * (imgW / rowSize) * (1 / 5)) + 'px Calibri, Roboto Condensed, sans-serif';
                 ctx.textAlign = "left";
                 ctx.fillText(chunkId, dragTotalX + (totalZoom * ((i) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + .15) * imgH / (fullSize / rowSize))));
             }
@@ -1242,7 +1242,7 @@ var drawCanvas = function() {
         let blacklistText = (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(controlChunk)) ? "Un-Blacklist" : "Blacklist";
         ctx.fillStyle = "rgba(0, 0, 0, .75)";
         ctx.roundRect(dragTotalX + (totalZoom * ((x + .05) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + .375) * imgH / (fullSize / rowSize))), totalZoom * ((.9) * imgW / rowSize), totalZoom * ((.25) * imgH / (fullSize / rowSize)), totalZoom * ((.9) * imgW / rowSize)).fill();
-        ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto, sans-serif';
+        ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto Condensed, sans-serif';
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.fillText(blacklistText, dragTotalX + (totalZoom * ((x + .5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + heightOff) * imgH / (fullSize / rowSize))));
@@ -1295,7 +1295,7 @@ var drawCanvas = function() {
         }
         if (isHoveringSticker && tempChunks['stickeredNotes'].hasOwnProperty(stickerChunk) && tempChunks['stickeredNotes'][stickerChunk] !== '') {
             let {x, y} = convertToXY(stickerChunk);
-            ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto, sans-serif';
+            ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto Condensed, sans-serif';
             ctx.fillStyle = "rgb(201, 209, 217)";
             ctx.strokeStyle = "black";
             ctx.lineWidth = 1;
@@ -2218,7 +2218,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.1");
+const myWorker = new Worker("./worker.js?v=4.13.2");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
