@@ -1757,7 +1757,7 @@ var pickCanvas = function(both) {
     if (both && isPicking) {
         let numToRoll = mid === roll5Mid ? 5 : 2;
         for (let temp = 0; temp < numToRoll; temp++) {
-            el = Object.keys(tempChunks['potential']);
+            el = Object.keys(tempChunks['potential']) || [];
             rand = 0;
             delete tempChunks['potential'][el[rand]];
             if (!tempChunks['unlocked']) {
@@ -1841,7 +1841,7 @@ var pickCanvas = function(both) {
         delete tempChunks['selected'][el[rand]];
         tempChunks['unlocked'][el[rand]] = el[rand];
     } else {
-        el = Object.keys(tempChunks['potential']);
+        el = Object.keys(tempChunks['potential']) || [];
         rand = Math.floor(Math.random() * el.length);
         delete tempChunks['potential'][el[rand]];
         if (!tempChunks['unlocked']) {
@@ -1910,7 +1910,7 @@ var roll2Canvas = function() {
         return;
     }
     isPicking = true;
-    var el = Object.keys(tempChunks['selected']);
+    var el = Object.keys(tempChunks['selected']) || [];
     var rand;
     if (el.length > 0) {
         $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
@@ -1920,7 +1920,7 @@ var roll2Canvas = function() {
     }
     let numToRoll = mid === roll5Mid ? 5 : 2;
     for (var i = 0; i < numToRoll; i++) {
-        el = Object.keys(tempChunks['selected']);
+        el = Object.keys(tempChunks['selected']) || [];
         rand = Math.floor(Math.random() * el.length);
         delete tempChunks['selected'][el[rand]];
         if (!tempChunks['potential']) {
@@ -1935,14 +1935,14 @@ var roll2Canvas = function() {
 
 // Unpicks a random unlocked chunk
 var unpickCanvas = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || Object.keys(tempChunks['unlocked']).length < 1) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 1)) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
         helpFunc();
         return;
     }
-    var el = Object.keys(tempChunks['unlocked']);
+    var el = Object.keys(tempChunks['unlocked']) || [];
     if (el.length <= 0) {
         return;
     }
@@ -2113,14 +2113,14 @@ var recentChunkCanvas = function(el) {
 
 // Centers on average position of all unlocked chunks
 var centerCanvas = function(extra) {
-    if (Object.keys(tempChunks['unlocked']).length < 1) {
+    if (!tempChunks['unlocked'] || !Object.keys(tempChunks['unlocked']).length < 1) {
         scrollToPosCanvas(convertToXY(12850).x, convertToXY(12850).y, 0, 0, extra === 'quick');
         return;
     }
     let sumX = 0;
     let sumY = 0;
     let num = 0;
-    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+    !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
         sumX += convertToXY(chunkId).x;
         sumY += convertToXY(chunkId).y;
         num++;
@@ -2218,7 +2218,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.2");
+const myWorker = new Worker("./worker.js?v=4.13.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2234,7 +2234,7 @@ myWorker.onmessage = function(e) {
         questPointTotal = e.data[6];
         highestOverall = e.data[7];
         dropRatesGlobal = e.data[8];
-        if (Object.keys(tempChunks['unlocked']).length < 100) {
+        if (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 100) {
             calcCurrentChallenges2(e.data[5]);
         } else {
             tempChallengeArrSaved = e.data[5];
@@ -2614,7 +2614,7 @@ var unlock = function() {
 // Copies unlocked chunks to clipboard
 var exportFunc = function() {
     let unlockedChunksTemp = '';
-    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+    !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
         unlockedChunksTemp += chunkId + ',';
     });
     unlockedChunksTemp = unlockedChunksTemp.slice(0, -1);
@@ -3974,7 +3974,7 @@ var expandActive = function(subTab) {
 var calcFutureChallenges = function() {
     let chunks = {};
     let challengeStr = '';
-    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+    !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
         chunks[parseInt(chunkId)] = true;
     });
     if (chunks[infoLockedId.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) {
@@ -5307,7 +5307,7 @@ var checkFalseRules = function() {
 // Get all possible areas within unlocked chunks
 var getChunkAreas = function() {
     let chunks = {};
-    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+    !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
         chunks[chunkId] = true;
     });
     let i = 0;
@@ -6107,7 +6107,7 @@ var getQuestInfo = function(quest) {
     $('.questname-content').html(`<a class='link noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))}' target='_blank'>${quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</a>`);
     $('.panel-questdata').empty();
     let unlocked = { ...possibleAreas };
-    Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+    !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
         unlocked[parseInt(chunkId)] = true;
     });
     questChunks = [];
@@ -6229,7 +6229,7 @@ var loadData = function(startup) {
             var rulesTemp = snap.val()['rules'] || {};
             randomLoot = snap.val()['randomLoot'] || {};
             var chunks = snap.val()['chunks'];
-            tempChunks = chunks;
+            tempChunks = chunks || {};
             recent = snap.val()['recent'] || [];
             recentTime = snap.val()['recentTime'] || [];
             chunkOrder = snap.val()['chunkOrder'] || [];
@@ -6534,7 +6534,7 @@ var setData = function() {
             myRef.child('chunkinfo').update({ oldSavedChallengeArr });
 
             var tempJson = {};
-            Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+            !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
                 tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/unlocked').set(tempJson);
@@ -6549,19 +6549,19 @@ var setData = function() {
             }
 
             tempJson = {};
-            Object.keys(tempChunks['selected']).forEach(chunkId => {
+            !!tempChunks['selected'] && Object.keys(tempChunks['selected']).forEach(chunkId => {
                 tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/selected').set(tempJson);
 
             tempJson = {};
-            Object.keys(tempChunks['potential']).forEach(chunkId => {
+            !!tempChunks['potential'] && Object.keys(tempChunks['potential']).forEach(chunkId => {
                 tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/potential').set(tempJson);
 
             tempJson = {};
-            Object.keys(tempChunks['blacklisted']).forEach(chunkId => {
+            !!tempChunks['blacklisted'] && Object.keys(tempChunks['blacklisted']).forEach(chunkId => {
                 tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/blacklisted').set(tempJson);
