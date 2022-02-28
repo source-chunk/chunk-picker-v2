@@ -2136,7 +2136,7 @@ var recentChunkCanvas = function(el) {
 
 // Centers on average position of all unlocked chunks
 var centerCanvas = function(extra) {
-    if (!tempChunks['unlocked'] || !Object.keys(tempChunks['unlocked']).length < 1) {
+    if (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 1) {
         scrollToPosCanvas(convertToXY(12850).x, convertToXY(12850).y, 0, 0, extra === 'quick');
         return;
     }
@@ -2235,7 +2235,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.4");
+const myWorker = new Worker("./worker.js?v=4.13.5");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
