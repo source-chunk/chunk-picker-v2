@@ -3891,7 +3891,7 @@ input#searchMonsters {
     border-color: var(--colorText);
 }
 
-.sticker-option-container > i {
+.sticker-option-container.black-outline > i {
     -webkit-text-stroke-width: 0.05em;
     -webkit-text-stroke-color: black;
 }

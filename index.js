@@ -1301,7 +1301,9 @@ var drawCanvas = function() {
         if (stickerChoices.includes(tempChunks['stickered'][chunkId])) {
             ctx.fillStyle = tempChunks['stickeredColors'][chunkId];
             ctx.fillText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
-            ctx.strokeText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
+            if (ctx.fillStyle !== '#000000') {
+                ctx.strokeText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + .85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + .25) * imgH / (fullSize / rowSize))));
+            }
             ctx.scale(-1, 1);
         } else if (stickerChoicesOsrs.includes(tempChunks['stickered'][chunkId])) {
             ctx.scale(-1, 1);
@@ -2244,7 +2246,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.8");
+const myWorker = new Worker("./worker.js?v=4.13.9");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -5001,9 +5003,9 @@ var openStickers = function(id) {
         stickerChoices.forEach(sticker => {
             let stickerName = sticker.split('-alt').join('').split('-').join(' ');
             if (sticker !== 'unset') {
-                $('.sticker-data').append(`<span style='color:${$('.sticker-color-picker').val()}' class='noscroll sticker-option-container ${sticker}-tag' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fas fa-${sticker}" style="transform: scaleX(-1)"></i></span>`);
+                $('.sticker-data').append(`<span style='color:${$('.sticker-color-picker').val()}' class='noscroll sticker-option-container color-sticker${$('.sticker-color-picker').val() !== '#000000' ? ' black-outline' : ''} ${sticker}-tag' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fas fa-${sticker}" style="transform: scaleX(-1)"></i></span>`);
             } else {
-                $('.sticker-data').append(`<span class='noscroll sticker-option-container unset-option' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fas fa-ban" style="transform: scaleX(-1)"></i></span>`);
+                $('.sticker-data').append(`<span class='noscroll sticker-option-container black-outline unset-option' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fas fa-ban" style="transform: scaleX(-1)"></i></span>`);
             }
         });
         $('.sticker-data').append(`<div class='noscroll sticker-data-subheader'>OSRS Stickers</div>`);
@@ -5057,6 +5059,11 @@ var setSticker = function(id, sticker) {
 // Changes the sticker options color
 var changeCurrentStickerColor = function() {
     $('.sticker-option-container:not(.unset-option)').css('color', $('.sticker-color-picker').val());
+    if ($('.sticker-color-picker').val() !== '#000000') {
+        $('.sticker-option-container.color-sticker').addClass('black-outline');
+    } else {
+        $('.sticker-option-container.color-sticker').removeClass('black-outline');
+    }
 }
 
 // Opens the methods modal
@@ -5841,6 +5848,7 @@ var switchBacklogContext = function(opt) {
 
 // Sends a challenge to the backlog
 var backlogChallenge = function(challenge, skill, note) {
+    console.log('backlog: ' + skill + '; ' + challenge);
     if (!backlog[skill]) {
         backlog[skill] = {};
     }
@@ -5924,8 +5932,9 @@ var backlogChallenge = function(challenge, skill, note) {
             });
         }
     }
-    calcCurrentChallengesCanvas();
     !onMobile && setupCurrentChallenges(oldChallengeArr);
+    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+    calcCurrentChallengesCanvas();
     setData();
 }
 
