@@ -28,8 +28,6 @@ var recent = [];                                                                
 var recentTime = [];                                                            // Recently picked chunks time
 var chunkOrder = [];                                                            // Full picked chunks order
 var zoom = 350;                                                                 // Starting zoom value
-var maxZoom = 550;                                                              // Furthest zoom in value
-var minZoom = onMobile ? 275 : 100;                                             // Smallest zoom out value
 var fontZoom = 16;                                                              // Font size zoom
 var labelZoom = 96;                                                             // Selected label font size zoom
 var scale = 30;                                                                 // Amount zoomed every 'zoom' action
@@ -1006,7 +1004,7 @@ var canvas;
 var ctx;
 var cw;
 var ch;
-var mapImg;
+var mapImg = new Image();
 var imgW;
 var imgH;
 var startX = 0;
@@ -1058,7 +1056,6 @@ stickerChoicesOsrs.forEach(sticker => {
 });
 
 // Load map image
-mapImg = document.getElementById('mapImg');
 mapImg.onload = function() {
     imgW = mapImg.width;
     imgH = mapImg.height;
@@ -1070,6 +1067,7 @@ mapImg.onload = function() {
 mapImg.onerror = function () {
     console.error("Cannot load map image");
 }
+mapImg.src = "osrs_world_map.png";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1113,7 +1111,18 @@ var convertToXY = function(chunkId) {
 
 // Canvas animation
 var drawCanvas = function() {
-    window.requestAnimationFrame(drawCanvas);
+    if (imgH === undefined) {
+        console.log('backup');
+        imgW = mapImg.width;
+        imgH = mapImg.height;
+        dragTotalX = 0;
+        dragTotalY = 0;
+        setUpSelected();
+        drawCanvas();
+        return;
+    } else {
+        window.requestAnimationFrame(drawCanvas);
+    }
     fixMapEdgesCanvas();
     updateFutureMove();
     selectedNum = tempSelectedChunks.length;
@@ -1136,7 +1145,7 @@ var drawCanvas = function() {
                     ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 }
                 ctx.strokeStyle = "gray";
-                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                (!highVisibilityMode || totalZoom > .3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
                 if (highVisibilityMode) {
                     ctx.fillStyle = "rgba(100, 255, 100, .25)";
@@ -1146,7 +1155,7 @@ var drawCanvas = function() {
                     ctx.fillStyle = "rgba(100, 255, 100, .5)";
                 }
                 ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, .5)" : "black";
-                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                (!highVisibilityMode || totalZoom > .3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
                 if (tempSelectedChunks.indexOf(chunkId) + 1 > 999) {
@@ -1171,7 +1180,7 @@ var drawCanvas = function() {
                     ctx.fillStyle = "rgba(255, 255, 100, .5)";
                 }
                 ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, .5)" : "black";
-                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                (!highVisibilityMode || totalZoom > .3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
                 if (selectedNum + 1 > 999) {
@@ -1196,7 +1205,7 @@ var drawCanvas = function() {
                     ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
                 }
                 ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, .5)" : "black";
-                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                (!highVisibilityMode || totalZoom > .3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             } else {
                 if (highVisibilityMode) {
@@ -1207,8 +1216,8 @@ var drawCanvas = function() {
                     ctx.fillStyle = colorBox;
                 }
                 ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, .5)" : "black";
+                (!highVisibilityMode || totalZoom > .3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-                ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             }
             if (showChunkIds && !onMobile) {
                 ctx.fillStyle = "white";
@@ -2235,7 +2244,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.7");
+const myWorker = new Worker("./worker.js?v=4.13.8");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2255,6 +2264,8 @@ myWorker.onmessage = function(e) {
             calcCurrentChallenges2(e.data[5]);
         } else {
             tempChallengeArrSaved = e.data[5];
+            $('.panel-active.calculating > i').remove();
+            $('.panel-active.calculating').removeClass('calculating').append(`<div class='calculating'></div>`);
             $('.panel-active > .calculating').html(`<div class='noscroll display-button' onclick='calcCurrentChallenges2()'>Show New Tasks</div>`);
         }
         searchModalOpen && searchWithinChunks();
