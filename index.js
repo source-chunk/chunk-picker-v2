@@ -1047,26 +1047,25 @@ let pageReady = false;
 stickerChoicesOsrs.forEach(sticker => {
     osrsStickers[sticker] = new Image;
     osrsStickers[sticker].src = "resources/SVG/" + sticker + "-osrs.svg";
-    osrsStickers[sticker].onload = function() {
+    osrsStickers[sticker].addEventListener("load", e => {
         readyToDrawIcons--;
         if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
             drawCanvas();
+        } else if (readyToDrawIcons === 0 && pageReady) {
+            mapImg.src = "osrs_world_map.png";
         }
-    }
+    });
 });
 
 // Load map image
-mapImg.onload = function() {
+mapImg.addEventListener("load", e => {
     imgW = mapImg.width;
     imgH = mapImg.height;
     readyToDrawImage = true;
     if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
         drawCanvas();
     }
-};
-mapImg.onerror = function () {
-    console.error("Cannot load map image");
-}
+});
 mapImg.src = "osrs_world_map.png";
 
 // Rounded rectangle
@@ -1112,7 +1111,7 @@ var convertToXY = function(chunkId) {
 // Canvas animation
 var drawCanvas = function() {
     if (imgH === undefined) {
-        console.log('backup');
+        console.log('Backup image loaded');
         imgW = mapImg.width;
         imgH = mapImg.height;
         dragTotalX = 0;
@@ -2250,13 +2249,15 @@ $(document).ready(function() {
     pageReady = true;
     if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
         drawCanvas();
+    } else if (readyToDrawIcons === 0 && pageReady) {
+        mapImg.src = "osrs_world_map.png";
     }
 });
 
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.10");
+const myWorker = new Worker("./worker.js?v=4.13.11");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
