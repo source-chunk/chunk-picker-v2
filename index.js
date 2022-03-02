@@ -1632,6 +1632,7 @@ var handleMouseUp = function(e) {
                 roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
                 unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
                 setRecentRoll(chunkId);
+                completeChallenges();
                 !onMobile && getChunkAreas();
                 !onMobile && setupCurrentChallenges(false);
                 !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
@@ -1956,13 +1957,22 @@ var roll2Canvas = function() {
     for (var i = 0; i < numToRoll; i++) {
         el = Object.keys(tempChunks['selected']) || [];
         rand = Math.floor(Math.random() * el.length);
-        delete tempChunks['selected'][el[rand]];
-        if (!tempChunks['potential']) {
-            tempChunks['potential'] = {};
+        if (el !== []) {
+            if (!tempChunks['selected'].hasOwnProperty(el[rand]) || isNaN(el[rand])) {
+                Object.keys(tempChunks['selected']).filter(chunk => { return isNaN(chunk) }).forEach(chunk => {
+                    delete tempChunks['selected'][chunk];
+                });
+                i--;
+            } else {
+                delete tempChunks['selected'][el[rand]];
+                if (!tempChunks['potential']) {
+                    tempChunks['potential'] = {};
+                }
+                tempSelectedChunks.splice(tempSelectedChunks.indexOf(el[rand]), 1);
+                tempChunks['potential'][el[rand]] = el[rand];
+                recentChunks[el[rand]] = el[rand];
+            }
         }
-        tempSelectedChunks.splice(tempSelectedChunks.indexOf(el[rand]), 1);
-        tempChunks['potential'][el[rand]] = el[rand];
-        recentChunks[el[rand]] = el[rand]
     }
     setData();
 }
@@ -2246,7 +2256,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.9");
+const myWorker = new Worker("./worker.js?v=4.13.10");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
