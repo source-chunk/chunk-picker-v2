@@ -2257,8 +2257,9 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.12");
+const myWorker = new Worker("./worker.js?v=4.13.13");
 myWorker.onmessage = function(e) {
+    drawCanvas();
     workerOut--;
     workerOut < 0 && (workerOut = 0);
     chunkInfo = e.data[3];
@@ -2982,6 +2983,7 @@ var unlockEntry = function() {
         if (!!methods && methods.length > 0) {
             setTimeout(function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                    drawCanvas();
                     signedIn = true;
                     $('.center').css('margin-top', '15px');
                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 0).show();
@@ -3079,6 +3081,7 @@ var unlockEntry = function() {
 
 // Hides the entry menu and displays map in locked mode
 var proceed = function() {
+    drawCanvas();
     $('#entry-menu').animate({ 'opacity': 0 });
     $('.lock-closed').css('opacity', 0).show();
     setTimeout(function() {
