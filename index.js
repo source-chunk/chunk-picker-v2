@@ -2257,7 +2257,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.11");
+const myWorker = new Worker("./worker.js?v=4.13.12");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -6294,6 +6294,12 @@ var loadData = function(startup) {
             settingsTemp['infocollapse'] = document.cookie.split(';').filter(function(item) {
                 return item.indexOf('infocollapse=true') >= 0
             }).length > 0;
+            
+            Object.keys(tempChunks).forEach(section => {
+                Object.keys(tempChunks[section]).filter(chunkId => { return tempChunks['unlocked'][chunkId] === 'undefined' || tempChunks['unlocked'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' }).forEach(chunkId => {
+                    delete tempChunks[section][chunkId];
+                });
+            });
 
             for (let count = 1; count <= 5; count++) {
                 !recent[count - 1] && (recent[count - 1] = null);
@@ -6500,7 +6506,7 @@ var setData = function() {
                 myRef.child('chunkinfo').update({ oldSavedChallengeArr });
 
                 var tempJson = {};
-                !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+                !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { return tempChunks['unlocked'][chunkId] !== 'undefined' && tempChunks['unlocked'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
                     tempJson[chunkId] = chunkId;
                 });
                 myRef.child('chunks/unlocked').set(tempJson);
@@ -6515,19 +6521,19 @@ var setData = function() {
                 }
 
                 tempJson = {};
-                !!tempChunks['selected'] && Object.keys(tempChunks['selected']).forEach(chunkId => {
+                !!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { return tempChunks['selected'][chunkId] !== 'undefined' && tempChunks['selected'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
                     tempJson[chunkId] = chunkId;
                 });
                 myRef.child('chunks/selected').set(tempJson);
 
                 tempJson = {};
-                !!tempChunks['potential'] && Object.keys(tempChunks['potential']).forEach(chunkId => {
+                !!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { return tempChunks['potential'][chunkId] !== 'undefined' && tempChunks['potential'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
                     tempJson[chunkId] = chunkId;
                 });
                 myRef.child('chunks/potential').set(tempJson);
 
                 tempJson = {};
-                !!tempChunks['blacklisted'] && Object.keys(tempChunks['blacklisted']).forEach(chunkId => {
+                !!tempChunks['blacklisted'] && Object.keys(tempChunks['blacklisted']).filter(chunkId => { return tempChunks['blacklisted'][chunkId] !== 'undefined' && tempChunks['blacklisted'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
                     tempJson[chunkId] = chunkId;
                 });
                 myRef.child('chunks/blacklisted').set(tempJson);
@@ -6579,7 +6585,7 @@ var setData = function() {
             myRef.child('chunkinfo').update({ oldSavedChallengeArr });
 
             var tempJson = {};
-            !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach(chunkId => {
+            !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { return tempChunks['unlocked'][chunkId] !== 'undefined' && tempChunks['unlocked'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
                 tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/unlocked').set(tempJson);
@@ -6594,19 +6600,19 @@ var setData = function() {
             }
 
             tempJson = {};
-            !!tempChunks['selected'] && Object.keys(tempChunks['selected']).forEach(chunkId => {
+            !!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { return tempChunks['selected'][chunkId] !== 'undefined' && tempChunks['selected'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
                 tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/selected').set(tempJson);
 
             tempJson = {};
-            !!tempChunks['potential'] && Object.keys(tempChunks['potential']).forEach(chunkId => {
+            !!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { return tempChunks['potential'][chunkId] !== 'undefined' && tempChunks['potential'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
                 tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/potential').set(tempJson);
 
             tempJson = {};
-            !!tempChunks['blacklisted'] && Object.keys(tempChunks['blacklisted']).forEach(chunkId => {
+            !!tempChunks['blacklisted'] && Object.keys(tempChunks['blacklisted']).filter(chunkId => { return tempChunks['blacklisted'][chunkId] !== 'undefined' && tempChunks['blacklisted'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
                 tempJson[chunkId] = chunkId;
             });
             myRef.child('chunks/blacklisted').set(tempJson);
