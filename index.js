@@ -1051,8 +1051,6 @@ stickerChoicesOsrs.forEach(sticker => {
         readyToDrawIcons--;
         if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
             drawCanvas();
-        } else if (readyToDrawIcons === 0 && pageReady) {
-            mapImg.src = "osrs_world_map.png";
         }
     });
 });
@@ -1063,7 +1061,7 @@ mapImg.addEventListener("load", e => {
     imgH = mapImg.height;
     readyToDrawImage = true;
     if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
-        drawCanvas();
+        centerCanvas('quick');
     }
 });
 mapImg.src = "osrs_world_map.png";
@@ -2130,6 +2128,7 @@ var scrollToPosCanvas = function(x, y, xPart, yPart, doQuick) {
         futureMoveX = dragTotalX - moveX;
         futureMoveY = dragTotalY - moveY;
     }
+    doQuick && drawCanvas();
 }
 
 // Scrolls to chunk with given id
@@ -2248,18 +2247,15 @@ $(document).ready(function() {
 
     pageReady = true;
     if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
-        drawCanvas();
-    } else if (readyToDrawIcons === 0 && pageReady) {
-        mapImg.src = "osrs_world_map.png";
+        centerCanvas('quick');
     }
 });
 
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.13");
+const myWorker = new Worker("./worker.js?v=4.13.14");
 myWorker.onmessage = function(e) {
-    drawCanvas();
     workerOut--;
     workerOut < 0 && (workerOut = 0);
     chunkInfo = e.data[3];
@@ -2983,7 +2979,6 @@ var unlockEntry = function() {
         if (!!methods && methods.length > 0) {
             setTimeout(function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
-                    drawCanvas();
                     signedIn = true;
                     $('.center').css('margin-top', '15px');
                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 0).show();
@@ -3081,7 +3076,6 @@ var unlockEntry = function() {
 
 // Hides the entry menu and displays map in locked mode
 var proceed = function() {
-    drawCanvas();
     $('#entry-menu').animate({ 'opacity': 0 });
     $('.lock-closed').css('opacity', 0).show();
     setTimeout(function() {
@@ -5862,7 +5856,6 @@ var switchBacklogContext = function(opt) {
 
 // Sends a challenge to the backlog
 var backlogChallenge = function(challenge, skill, note) {
-    console.log('backlog: ' + skill + '; ' + challenge);
     if (!backlog[skill]) {
         backlog[skill] = {};
     }
@@ -6413,7 +6406,6 @@ var loadData = function(startup) {
                 chunkTasksOn && !onMobile && setCalculating('.panel-active');
             }
             chunkTasksOn && calcCurrentChallengesCanvas();
-            startup && centerCanvas('quick');
             rulesModalOpen && showRules();
             if (!startup) {
                 rules['Manually Complete Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
