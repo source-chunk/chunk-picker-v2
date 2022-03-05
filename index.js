@@ -2254,7 +2254,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.14");
+const myWorker = new Worker("./worker.js?v=4.13.15");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -6292,7 +6292,7 @@ var loadData = function(startup) {
             }).length > 0;
             
             Object.keys(tempChunks).forEach(section => {
-                Object.keys(tempChunks[section]).filter(chunkId => { return tempChunks['unlocked'][chunkId] === 'undefined' || tempChunks['unlocked'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' }).forEach(chunkId => {
+                Object.keys(tempChunks[section]).filter(chunkId => { return tempChunks[section][chunkId] === 'undefined' || tempChunks[section][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' }).forEach(chunkId => {
                     delete tempChunks[section][chunkId];
                 });
             });
