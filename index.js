@@ -2007,6 +2007,7 @@ var setUpSelected = function() {
     !!tempChunks['selected'] && Object.keys(tempChunks['selected']).sort(function(a, b) { return b - a }).forEach(chunkId => {
         tempSelectedChunks.push(chunkId);
     });
+    centerCanvas('quick');
 }
 
 // Finds the current challenge in each skill
@@ -2254,7 +2255,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.16");
+const myWorker = new Worker("./worker.js?v=4.13.17");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
