@@ -349,9 +349,9 @@ let ruleNames = {
     "Show Skill Tasks": "Show Skill Tasks (e.g. Get 43 Crafting to cut a diamond)",
     "Show Quest Tasks": "Show Quest Tasks",
     "Show Diary Tasks": "Show Diary Tasks",
-    "Show Best in Slot Tasks": "Show Best in Slot (Accuracy + Strength, or secondarily Defense) Tasks",
+    "Show Best in Slot Tasks": "Show Best in Slot (Accuracy + Strength, or secondarily Defence) Tasks",
     "Show Best in Slot Prayer Tasks": "Show Best in Slot Tasks for Prayer-boosting gear",
-    "Show Best in Slot Defensive Tasks": "Show Best in Slot Tasks for Tank gear (Melee/Ranged/Magic)",
+    "Show Best in Slot Defensive Tasks": "Show Best in Slot Tasks for Tank gear (highest defence-only against Melee/Ranged/Magic)",
     "Show Best in Slot Flinching Tasks": "Show Best in Slot Tasks for Flinching weapons (pure offensive stats and strength, no speed)",
     "Show Best in Slot Weight Tasks": "Show Best in Slot Tasks for weight-reducing gear (only pieces with negative weight)",
     "Show Quest Tasks Complete": "Show Quest Tasks only when the whole quest is completable",
@@ -2255,7 +2255,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.17");
+const myWorker = new Worker("./worker.js?v=4.13.18");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3734,7 +3734,9 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
     let valid = false;
     let methods = {};
     let hardValid = false;
-    if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
+    if (skill === 'Quest' || skill === 'Diary' || skill === 'BiS' || skill === 'Extra') {
+        hardValid = true;
+    } else if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
         hardValid = true;
         methods['Manually added skill'] = 1;
     } else if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
