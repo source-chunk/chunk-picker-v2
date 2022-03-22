@@ -57,6 +57,12 @@
     <li onclick="switchBacklogContext('edit note')">View/Edit Note</li>
     <li onclick="switchBacklogContext('details')">Details</li>
   </ul>
+  <ul class='questfilter-context-menu'>
+    <li onclick="switchQuestFilterContext('all')">Show All</li>
+    <li onclick="switchQuestFilterContext('complete')">Show Completed</li>
+    <li onclick="switchQuestFilterContext('incomplete')">Show In Progress</li>
+    <li onclick="switchQuestFilterContext('unstarted')">Show Not Started</li>
+  </ul>
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='test-hint'><b><i class="fas fa-exclamation-triangle"></i> Sandbox Mode <i class="fas fa-exclamation-triangle"></i></b><span class='subtext'>All changes made inside sandbox mode are temporary</span></div>
   <div class='topnav'>
@@ -342,26 +348,28 @@
   <div id="myModal24" class="modal">
     <div class="modal-content noscroll">
       <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">02/28/2022 (4.13.0)</div>
+      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">03/22/2022 (4.14.0)</div>
       <div id="patch-notes-data" class="patch-notes-data noscroll">
-        <h2 class='noscroll'>Optimization Changes</h2>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Completely overhauled the underlying map technology, to improve smoothness and reduce lag</li>
-          <li class='noscroll'>Changed behavior when right-clicking chunks by delaying potential chunk tasks, reducing lag</li>
-          <li class='noscroll'>Re-enabled Chunk Id's after disabling them due to lag reasons</li>
-          <li class='noscroll'>Added non-automatic task rendering for maps with many unlocked chunks or many active tasks. These maps can still display tasks after they are loaded manually</li>
-          <li class='noscroll'>Overhauled the way that chunk tasks are processed when being checked-off</li>
+          <li class='noscroll'>Added Quest & Diary Progress tabs, where you can keep track of how far you've gotten in every quest and diary. You can even filter the quests to only see your completed ones, or only your in-progress ones, etc. Check out these new tabs in the 'Activity Info' window!</li>
+          <li class='noscroll'>Added quest xp rewards! Now when you're able to complete a quest in your chunks, the xp rewards from completing it are tracked, and might give you new, higher level tasks if they unlock a training method.</li>
+          <li class='noscroll'>In addition to normal quest xp rewards, some quest xp is given in the form of a choice between multiple skills, or a lamp to be used in any skill. These rewards are also tracked, and you'll be prompted to enter the choice you made after checking off relevant tasks.</li>
+          <li class='noscroll'>Overhauled the way that passive leveling works; now, setting a passively gained level in a skill will not only show tasks up to that level, but if you unlock a training method, now it'll show tasks above too!</li>
+          <li class='noscroll'>In addition to the previously mentioned change on passive leveling, now items that are produced at a level lower than your highest level task are tracked, and can now be used for things like quests/diaries/more.</li>
         </ul>
-        <h2 class='noscroll'>Other Changes</h2>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Changed some of the coloring and thickness/opacity in high visibility mode and dark mode</li>
-          <li class='noscroll'>Removed unusable fires from a chunk in Lovakengj (thanks SkyChunkis))</li>
-          <li class='noscroll'>Fixed some circular logic between Yu'biusk and the Dorgesh-Kaan South Dungeon</li>
-          <li class='noscroll'>Fixed bronze arrow amounts from shayzien soldiers</li>
-          <li class='noscroll'>Fixed an issue with area-specific items being required without their respective areas</li>
-          <li class='noscroll'>Added borders to the chunk sticker options</li>
-          <li class='noscroll'>Fixed an issue with sinew incorrectly being able to made on a fire (thanks Ynybody1)</li>
-          <li class='noscroll'>Added a missing walkable chunk on the eastern side of Etceteria</li>
+          <li class='noscroll'>Fixed maps not centering correctly if invalid chunks were unlocked.</li>
+          <li class='noscroll'>Fixed invalid chunks from being rollable if no chunks are selected (thanks Oponn).</li>
+          <li class='noscroll'>For darkmode users, added darkmode dropdown menus for backlogging a task and similar menus.</li>
+          <li class='noscroll'>Fixed some misnamed quests (you may have to re-complete these due to the renaming).</li>
+          <li class='noscroll'>Fixed Backlog Sources not showing when entering Sandbox mode.</li>
+          <li class='noscroll'>Added the plain thief variant to the Clock Tower Dungeon (thanks buckinbroncos69).</li>
+          <li class='noscroll'>Split the Witchaven Dungeon into a non-quest part, and a quest part (thanks Purityy).</li>
+          <li class='noscroll'>Locked Ava's store behind Animal Magnetism completion (thanks buckinbroncos69).</li>
+          <li class='noscroll'>Added Fishing Guild polled changes to store stock and spawn.</li>
+          <li class='noscroll'>Added missing walkable chunk by the Settlement Ruins in Zeah (thanks Slay Brother).</li>
         </ul>
         <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack#0890')">whitecatblack#0890  <i class="fas fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
       </div>
@@ -402,7 +410,7 @@
   <div id="myModal28" class="modal">
     <div class="modal-content noscroll">
       <div id="passive-skill-title" class="passive-skill-title noscroll">Add Passively Trained Skill</div>
-      <div id="passive-skill-subtitle" class="passive-skill-subtitle noscroll">Enter the level passively reached in <span class='noscroll passive-skill-name'></span>. Defining a passive skill this way will show Chunk Tasks for the skill up to your passively trained level, but no higher. If you want to be shown Chunk Tasks higher than your passively reached level, add them within the 'Manually Add X' window, under Tasks.</div>
+      <div id="passive-skill-subtitle" class="passive-skill-subtitle noscroll">Enter the level passively reached in <span class='noscroll passive-skill-name'></span> (through lamps/Tears of Guthix/quest rewards/etc). Defining a passive skill this way will show Chunk Tasks for the skill up to your passively trained level, and will show Tasks for higher levels if you unlock a consistent training method.</div>
       <div id="passive-skill-input-container" class="passive-skill-input-container noscroll">Current <span class='noscroll passive-skill-name'></span> Level: <input id="passive-skill-input" type="number" min="1" max="99" oninput="passiveLockedChange()"/></div>
       <div id="passive-skill-data" class="passive-skill-data noscroll"></div>
     </div>
@@ -468,6 +476,18 @@
       <div id="intro-footer" class="intro-footer noscroll">
         <button id='submit-intro-button' class='modal-button' onclick='nextIntroPage()' disabled>Next</button>
         <span id='cancel-intro-button' onclick='previousIntroPage()'>Back</span>
+      </div>
+    </div>
+  </div>
+  <div id="myModal30" class="modal">
+    <div class="modal-content noscroll">
+      <div id="xp-reward-title" class="xp-reward-title noscroll">XP Reward</div>
+      <div id="xp-reward-data-container" class="xp-reward-data-container noscroll">
+        <div id="xp-reward-data" class="xp-reward-data noscroll"></div>
+      </div>
+      <div id="xp-reward-footer" class="xp-reward-footer noscroll">
+        <button id='submit-xp-reward-button' class='modal-button' onclick='openXpRewardModal()'>Save</button>
+        <span id='cancel-xp-reward-button' onclick='closeXpRewardModal()'>Cancel</span>
       </div>
     </div>
   </div>

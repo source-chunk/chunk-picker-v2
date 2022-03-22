@@ -2,7 +2,7 @@
  * Created by Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Ids and Amehzyn for smoother zooming/url decoding
- * 01/28/2022
+ * 03/22/2022
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -83,6 +83,7 @@ var patchNotesOpen = false;                                                     
 var patchNotesOpenSoon = false;                                                 // Will the patch notes be opened once logged in
 var mapIntroOpen = false;                                                       // Is the map intro modal open
 var mapIntroOpenSoon = false;                                                   // Will the map intro be opened once logged in
+var xpRewardOpen = false;
 var signedIn = false;                                                           // Is the user signed in
 var filterByChecked = false;                                                    // Are we filtering by checked only
 var filterByCheckedEquipment = false;                                           // Are we filtering equipment by checked only
@@ -186,6 +187,31 @@ const f2pSkills = [
     'Firemaking',
     'Woodcutting'
 ];                                                                              // Names of all f2p skills
+const skillNamesXp = [
+    'Attack',
+    'Strength',
+    'Ranged',
+    'Magic',
+    'Defence',
+    'Hitpoints',
+    'Prayer',
+    'Agility',
+    'Herblore',
+    'Thieving',
+    'Crafting',
+    'Runecraft',
+    'Slayer',
+    'Farming',
+    'Mining',
+    'Smithing',
+    'Fishing',
+    'Cooking',
+    'Firemaking',
+    'Woodcutting',
+    'Fletching',
+    'Construction',
+    'Hunter'
+];                                                                              // Names of all lampable skills
 const clueTiers = [
     'Beginner',
     'Easy',
@@ -897,7 +923,11 @@ let processingSkill = {
     "Crafting": true,
     "Agility": false,
     "Construction": true,
-    "Combat": true
+    "Combat": true,
+    "Quest": false,
+    "Diary": false,
+    "Nonskill": false,
+    "Extra": false
 };                                                                                  // Is each skill a processing skill
 
 let diaryTierAbr = {
@@ -971,12 +1001,20 @@ let pickedNum;
 let highestTab;
 let highestTab2;
 let dropRatesGlobal = {};
+let questProgress = {};
+let diaryProgress = {};
+let skillQuestXp = {};
 let tempChallengeArrSaved = {};
 let oldSavedChallengeArr = [];
+let assignedXpRewards = {};
 let introRollSelected = false;
 let introFancySelected = false;
 let introDarkSelected = false;
-let currentVersion = '4.13.0';
+let questFilterType = 'all';
+let tempXpArr = null;
+let tempXpChoices = [];
+let tempSkillChoice = null;
+let currentVersion = '4.14.0';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -990,6 +1028,7 @@ let patreonMaps = {
     'jlo': true, // JLo
     'pri': true, // invalidCards
     'mory': true, // Pearion
+    'rob': true, // Oponn
 };
 
 let roll5Mid = 'rfr'; //Semanari
@@ -1109,7 +1148,7 @@ var convertToXY = function(chunkId) {
 // Canvas animation
 var drawCanvas = function() {
     if (imgH === undefined) {
-        console.log('Backup image loaded');
+        console.warn('Backup image loaded');
         imgW = mapImg.width;
         imgH = mapImg.height;
         dragTotalX = 0;
@@ -1344,7 +1383,7 @@ var drawCanvas = function() {
 
 // Handles mouse down event
 var handleMouseDown = function(e) {
-    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
+    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen) {
         return;
     }
     if (!!e.touches) {
@@ -1365,7 +1404,7 @@ var handleMouseDown = function(e) {
 
 // Handles mouse move event
 var handleMouseMove = function(e) {
-    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
+    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen) {
         return;
     }
     if (!highVisibilityMode && !onMobile) {
@@ -1523,7 +1562,7 @@ var handleKeyUp = function(e) {
 
 // Handles the mouse up event
 var handleMouseUp = function(e) {
-    if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen) {
+    if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen) {
         return;
     }
     if (e.button === 2 && e.target.id === 'canvas') {
@@ -1775,7 +1814,7 @@ var setRecentRoll = function(chunkId) {
 
 // Pick button: picks a random chunk from selected/potential
 var pickCanvas = function(both) {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways'])) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1789,7 +1828,10 @@ var pickCanvas = function(both) {
     if (both && isPicking) {
         let numToRoll = mid === roll5Mid ? 5 : 2;
         for (let temp = 0; temp < numToRoll; temp++) {
-            el = Object.keys(tempChunks['potential']) || [];
+            el = (!!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['potential'][chunkId] === 'undefined' || tempChunks['potential'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
+            if (!!el || el.length === 0) {
+                return;
+            }
             rand = 0;
             delete tempChunks['potential'][el[rand]];
             if (!tempChunks['unlocked']) {
@@ -1843,6 +1885,9 @@ var pickCanvas = function(both) {
                 el.push(id);
             });
         }
+        if (!!el || el.length === 0) {
+            return;
+        }
         rand = Math.floor(Math.random() * el.length);
         if (settings['cinematicRoll'] && !onMobile) {
             openRollChunkCanvas(el, rand, 0);
@@ -1863,7 +1908,10 @@ var pickCanvas = function(both) {
             $('.pick').text('Pick Chunk');
         }
     } else if (!isPicking) {
-        el = Object.keys(tempChunks['selected']) || [];
+        el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
+        if (!!el || el.length === 0) {
+            return;
+        }
         rand = Math.floor(Math.random() * el.length);
         sNum = tempSelectedChunks.indexOf(el[rand]) + 1;
         if (settings['cinematicRoll'] && !onMobile) {
@@ -1873,7 +1921,10 @@ var pickCanvas = function(both) {
         delete tempChunks['selected'][el[rand]];
         tempChunks['unlocked'][el[rand]] = el[rand];
     } else {
-        el = Object.keys(tempChunks['potential']) || [];
+        el = (!!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['potential'][chunkId] === 'undefined' || tempChunks['potential'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
+        if (!!el || el.length === 0) {
+            return;
+        }
         rand = Math.floor(Math.random() * el.length);
         delete tempChunks['potential'][el[rand]];
         if (!tempChunks['unlocked']) {
@@ -1930,7 +1981,7 @@ var pickCanvas = function(both) {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 var roll2Canvas = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (((!tempChunks['selected'] || Object.keys(tempChunks['selected']).length < 1) && !isPicking) || ((!tempChunks['potential'] || Object.keys(tempChunks['potential']).length < 1) && isPicking))) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || (((!tempChunks['selected'] || Object.keys(tempChunks['selected']).length < 1) && !isPicking) || ((!tempChunks['potential'] || Object.keys(tempChunks['potential']).length < 1) && isPicking))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -1942,7 +1993,10 @@ var roll2Canvas = function() {
         return;
     }
     isPicking = true;
-    var el = Object.keys(tempChunks['selected']) || [];
+    var el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
+    if (!!el || el.length === 0) {
+        return;
+    }
     var rand;
     if (el.length > 0) {
         $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
@@ -1952,7 +2006,10 @@ var roll2Canvas = function() {
     }
     let numToRoll = mid === roll5Mid ? 5 : 2;
     for (var i = 0; i < numToRoll; i++) {
-        el = Object.keys(tempChunks['selected']) || [];
+        el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
+        if (!!el || el.length === 0) {
+            return;
+        }
         rand = Math.floor(Math.random() * el.length);
         if (el !== []) {
             if (!tempChunks['selected'].hasOwnProperty(el[rand]) || isNaN(el[rand])) {
@@ -1976,15 +2033,15 @@ var roll2Canvas = function() {
 
 // Unpicks a random unlocked chunk
 var unpickCanvas = function() {
-    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 1)) {
+    if (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 1)) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
         helpFunc();
         return;
     }
-    var el = Object.keys(tempChunks['unlocked']) || [];
-    if (el.length <= 0) {
+    var el = (!!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['unlocked'][chunkId] === 'undefined' || tempChunks['unlocked'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
+    if (!!el || el.length === 0) {
         return;
     }
     var rand = Math.floor(Math.random() * el.length);
@@ -2013,7 +2070,7 @@ var setUpSelected = function() {
 // Finds the current challenge in each skill
 var calcCurrentChallengesCanvas = function() {
     if (gotData) {
-        myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills]);
+        myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards]);
         workerOut++;
     }
 }
@@ -2255,7 +2312,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.13.19");
+const myWorker = new Worker("./worker.js?v=4.14.0");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2271,6 +2328,9 @@ myWorker.onmessage = function(e) {
         questPointTotal = e.data[6];
         highestOverall = e.data[7];
         dropRatesGlobal = e.data[8];
+        questProgress = e.data[9];
+        diaryProgress = e.data[10];
+        skillQuestXp = e.data[11];
         if (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 100) {
             calcCurrentChallenges2(e.data[5]);
         } else {
@@ -2568,7 +2628,7 @@ $(document).ready(function() {
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 $('body').on('touchstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen) {
         clickX = ev.changedTouches[0].pageX;
         clickY = ev.changedTouches[0].pageY;
     }
@@ -2576,7 +2636,7 @@ $('body').on('touchstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 $('body').on('touchend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -2606,7 +2666,7 @@ $(document).on({
             locked && $('.open-manual-outer-container').css('opacity', 0).hide();
             loadData();
             $('.test-hint').hide();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen) {
             e.preventDefault();
         }
     }
@@ -2847,6 +2907,109 @@ var dismissPatchNotes = function() {
     patchNotesOpen = false;
     patchNotesOpenSoon = false;
     !locked && setData();
+}
+
+// Opens the xp reward modal
+var openXpRewardModal = function(skill, line, xpArr, num) {
+    if (tempSkillChoice !== null || num === 0) {
+        if (tempXpArr === null) {
+            tempXpArr = xpArr;
+        }
+        if ((num + 1) > tempXpArr.length) {
+            xpRewardOpen = false;
+            tempXpChoices.push({skill: tempSkillChoice, xp: tempXpArr[num - 1].xp});
+            if (!assignedXpRewards[skill]) {
+                assignedXpRewards[skill] = {};
+            }
+            assignedXpRewards[skill][line] = {};
+            tempXpChoices.forEach(choice => {
+                if (!assignedXpRewards[skill][line][choice.skill]) {
+                    assignedXpRewards[skill][line][choice.skill] = 0;
+                }
+                assignedXpRewards[skill][line][choice.skill] += choice.xp;
+            });
+            tempXpArr = null;
+            tempSkillChoice = null;
+            if (!checkedChallenges.hasOwnProperty(skill) || !checkedChallenges[skill].hasOwnProperty(line)) {
+                if (!checkedChallenges.hasOwnProperty(skill)) {
+                    checkedChallenges[skill] = {};
+                }
+                checkedChallenges[skill][line] = true;
+            } else {
+                delete checkedChallenges[skill][line];
+            }
+            let challengeLine = $('.' + skill + '-' + line.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge');
+            $(challengeLine).addClass('hide-backlog');
+            $($(challengeLine).find('input')[0]).prop('checked', true);
+            changeChallengeColor();
+            !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+            calcCurrentChallengesCanvas();
+            setData();
+            $('#myModal30').hide();
+        } else {
+            if (num === 0) {
+                xpRewardOpen = true;
+                tempXpChoices = [];
+                tempSkillChoice = null;
+            } else {
+                tempXpChoices.push({skill: tempSkillChoice, xp: tempXpArr[num - 1].xp});
+                $('.selected-xp-reward-skill').removeClass('selected-xp-reward-skill');
+                tempSkillChoice = null;
+            }
+            $('#xp-reward-title').text(`Select which skill the ${tempXpArr[num].xp} xp reward was used on (${num + 1} of ${tempXpArr.length})`);
+            $('#submit-xp-reward-button').text(num + 1 === tempXpArr.length ? 'Save' : 'Next');
+            $('#submit-xp-reward-button').removeAttr('onclick').addClass('disabled');
+            $('#submit-xp-reward-button').attr('onClick', `openXpRewardModal('${skill}', '${line}', '', ${num + 1});`);
+            $('.xp-reward-data').empty();
+            ['None', ...skillNamesXp.filter(skillOpt => { return (tempXpArr[num].skills.split('x')[0] === 'Any' || tempXpArr[num].skills.split('|').includes(skillOpt)) })].forEach(skillOpt => {
+                if (skillOpt !== 'None') {
+                    $('.xp-reward-data').append(`<span class='noscroll xp-reward-option-container ${skillOpt}-tag' title='${skillOpt.charAt(0).toUpperCase() + skillOpt.slice(1)}' onclick="setXpRewardSkill('${skillOpt}')"><img class="noscroll ${skillOpt}_xp" src="./resources/${skillOpt}_skill.png"></span>`);
+                } else {
+                    $('.xp-reward-data').append(`<span class='noscroll xp-reward-option-container black-outline unset-option' title='${skillOpt.charAt(0).toUpperCase() + skillOpt.slice(1)}' onclick="setXpRewardSkill('${skillOpt}')"><span class='noscroll none-xp-container'><i class="noscroll fas fa-ban" style="transform: scaleX(-1)"></i></span></span>`);
+                }
+                $('.' + skillOpt + '_xp').on('load', function() {
+                    $(this).css({'left': -$(this).width() / 2, 'top': -$(this).height() / 2});
+                });
+            });
+            $('#myModal30').show();
+        }
+    }
+}
+
+// Opens the xp reward modal, redirected from xp button
+var openXpRewardModalWithFormat = function(skill, line) {
+    let xpArr = [];
+    Object.keys(chunkInfo['challenges'][skill][line]['XpReward']).filter(skill => { return !skillNamesXp.includes(skill) }).forEach(xpLine => {
+        if (xpLine.match(/[A-Za-z|]+x[0-9]+/gm)) {
+            let count = parseInt(xpLine.split('x')[1]);
+            for (let i = 0; i < count; i++) {
+                xpArr.push({skills: xpLine.split('x')[0], xp: chunkInfo['challenges'][skill][line]['XpReward'][xpLine]});
+            }
+        } else {
+            xpArr.push({skills: xpLine, xp: chunkInfo['challenges'][skill][line]['XpReward'][xpLine]});
+        }
+    });
+    openXpRewardModal(skill, line, xpArr, 0);
+}
+
+// Sets the chosen skill for the xp reward
+var setXpRewardSkill = function(opt) {
+    tempSkillChoice = opt;
+    $('.selected-xp-reward-skill').removeClass('selected-xp-reward-skill');
+    if (opt !== 'None') {
+        $(`.xp-reward-data > .xp-reward-option-container.${opt}-tag`).addClass('selected-xp-reward-skill');
+    } else {
+        $(`.xp-reward-data > .xp-reward-option-container.unset-option`).addClass('selected-xp-reward-skill');
+    }
+    $('#submit-xp-reward-button').removeClass('disabled');
+}
+
+// Closes the xp reward modal
+var closeXpRewardModal = function() {
+    xpRewardOpen = false;
+    tempXpArr = null;
+    tempSkillChoice = null;
+    $('#myModal30').hide();
 }
 
 // Opens the map intro modal
@@ -3378,6 +3541,10 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
         $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
         $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(7, 173, 7)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBorderText", "rgb(200, 200, 0)");
         $(".btnDiv").addClass('dark');
         colorBox = "rgba(50, 50, 50, .6)";
         colorBoxLight = "rgba(50, 50, 50, .4)";
@@ -3398,6 +3565,10 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorBox", "rgba(150, 150, 150, .6)");
         $("body").get(0).style.setProperty("--colorBoxLight", "rgba(150, 150, 150, .4)");
         $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(200, 200, 200, .4)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(7, 173, 7)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(0, 0, 0)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(200, 200, 0)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBorderText", "rgb(0, 0, 0)");
         $(".btnDiv").removeClass('dark');
         colorBox = "rgba(150, 150, 150, .6)";
         colorBoxLight = "rgba(150, 150, 150, .4)";
@@ -3739,6 +3910,12 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
     } else if (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0) {
         hardValid = true;
         methods['Manually added skill'] = 1;
+    } else if (!!passiveSkill && passiveSkill.hasOwnProperty(skill)) {
+        hardValid = true;
+        methods['Passive Leveling'] = 1;
+    } else if (!!skillQuestXp && skillQuestXp.hasOwnProperty(skill)) {
+        hardValid = true;
+        methods['Quest Xp Rewards'] = 1;
     } else if (!!completedChallenges[skill] && Object.keys(completedChallenges[skill]).length > 0) {
         hardValid = true;
     }
@@ -3748,7 +3925,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
         if (line === 'Primary+') {
             let primaryValid = false;
             !!valids[skill] && Object.keys(valids[skill]).forEach(challenge => {
-                if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && (chunkInfo['challenges'][skill][challenge]['Level'] === 1 || wantMethods) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
+                if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && (chunkInfo['challenges'][skill][challenge]['Level'] === 1 || (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && chunkInfo['challenges'][skill][challenge]['Level'] <= passiveSkill[skill]) || ((skillQuestXp.hasOwnProperty(skill) && chunkInfo['challenges'][skill][challenge]['Level'] <= skillQuestXp[skill]['level'])) || wantMethods) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
                     if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil')) {
                         primaryValid = true;
                         methods[challenge] = chunkInfo['challenges'][skill][challenge]['Level'];
@@ -3913,7 +4090,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
             if (chunkInfo['challenges']['Quest'][challenge].hasOwnProperty('QuestPoints')) {
                 challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Quest', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Quest] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').substring(1) + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             } else if (!rules['Show Quest Tasks Complete']) {
-                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Quest', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Quest] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + `Up to <a href='javascript:openQuestSteps("Quest", "${challenge.replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}")' class='internal-link noscroll'>step ` + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</a></span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                challengeArr.push(`<div class="challenge quest-challenge noscroll ${'Quest-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Quest', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Quest] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + `Up to <a href='javascript:openQuestSteps("Quest", "${challenge.replaceAll(/\-/g, '=').replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}")' class='internal-link noscroll'>step ` + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</a></span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Quest' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             }
         }
     });
@@ -3921,7 +4098,7 @@ setupCurrentChallenges = function(tempChallengeArr) {
     !!globalValids['Diary'] && rules['Show Diary Tasks'] && Object.keys(globalValids['Diary']).forEach(challenge => {
         challenge = challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I');
         if ((!backlog['Diary'] || !backlog['Diary'].hasOwnProperty(challenge)) && (!completedChallenges['Diary'] || !completedChallenges['Diary'][challenge]) && globalValids['Diary'][challenge] && (!rules['Show Diary Tasks Complete'] || chunkInfo['challenges']['Diary'][challenge].hasOwnProperty('ManualShow'))) {
-            challengeArr.push(`<div class="challenge diary-challenge noscroll ${'Diary-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) && 'hide-backlog'} ${!activeSubTabs['diary'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Diary', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Diary] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + `<a href='javascript:openQuestSteps("Diary", "${challenge.replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}")' class='internal-link noscroll'>` + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</a></span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Diary' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+            challengeArr.push(`<div class="challenge diary-challenge noscroll ${'Diary-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) && 'hide-backlog'} ${!activeSubTabs['diary'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Diary', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Diary] <span class="inner noscroll"><a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a></b>: ' + `<a href='javascript:openQuestSteps("Diary", "${challenge.replaceAll(/\-/g, '=').replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}")' class='internal-link noscroll'>` + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</a></span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Diary' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
         }
     });
     !!globalValids['Extra'] && Object.keys(globalValids['Extra']).length > 0 && challengeArr.push(`<div class="marker marker-extra noscroll" onclick="expandActive('extra')"><i class="expand-button fas ${activeSubTabs['extra'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Other Tasks</span></div>`);
@@ -4029,7 +4206,7 @@ var calcFutureChallenges = function() {
         });
         i++;
     }
-    myWorker.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills]);
+    myWorker.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards]);
     workerOut++;
 }
 
@@ -4275,21 +4452,50 @@ var shuffle = function(array) {
 // Opens the quest steps modal
 var openQuestSteps = function(skill, challenge) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
-        challenge = challenge.replaceAll('-', '%').replaceAll('/', '%2G').replaceAll('%2Q', '!').replaceAll('%2H', "'");
+        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('/', '%2G').replaceAll('%2Q', '!').replaceAll('%2H', "'");
+        let tier = null;
+        if (challenge.includes('%2XX')) {
+            tier = challenge.split('|')[1].split('%2XX')[1];
+            challenge = challenge.replaceAll('%2XX' + tier, '');
+        }
         questStepsModalOpen = true;
         let quest = skill === 'Diary' ? challenge.split('~')[1].split('|').join('').split('%2F')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')') : challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')');
         $('.quest-steps-title').html(`<a class='noscroll link' href="${"https://oldschool.runescape.wiki/w/" + encodeURI(quest)}" target='_blank'>${quest}</a>`);
         $('.quest-steps-data').empty();
         $('.quest-steps-data').append(`<div class='noscroll step step-header'><span class='noscroll step-table-header'>Step</span><span class='noscroll description-table-header'>Description</span></div>`);
-        Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
-            $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'") ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
-        });
+        if (challenge.split('~').length > 2 && challenge.split('~')[2] === '') {
+            if (skill === 'Diary') {
+                Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
+                    $('.quest-steps-data').append(`<div class='noscroll step${diaryProgress.hasOwnProperty(challenge.split('|')[1]) && diaryProgress[challenge.split('|')[1]]['allTasks'].includes(line) ? ' highlighted' : ''}${line.split('|')[1].split('%2F')[1] === tier ? ' diary-start' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                });
+            } else {
+                if (questProgress[challenge.split('|')[1]] === 'Complete the quest') {
+                    Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
+                        $('.quest-steps-data').append(`<div class='noscroll step highlighted'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                    });
+                } else {
+                    Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
+                        $('.quest-steps-data').append(`<div class='noscroll step${questProgress.hasOwnProperty(challenge.split('|')[1]) && questProgress[challenge.split('|')[1]].includes(line) ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                    });
+                }
+            }
+        } else {
+            Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
+                $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'") ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+            });
+        }
         $('#myModal25').show();
-        !!$('.quest-steps-data .highlighted')[0] && $('.quest-steps-data .highlighted')[0].scrollIntoView({
-            behavior: 'auto',
-            block: 'center',
-            inline: 'center'
-        });
+        if (tier !== null) {
+            !!$('.quest-steps-data .diary-start')[0] && $('.quest-steps-data .diary-start')[0].scrollIntoView({
+                behavior: 'auto',
+            });
+        } else {
+            !!$('.quest-steps-data .highlighted')[0] && $('.quest-steps-data .highlighted')[0].scrollIntoView({
+                behavior: 'auto',
+                block: 'center',
+                inline: 'center'
+            });
+        }
     }
 }
 
@@ -4757,10 +4963,14 @@ var openHighest2 = function() {
         let primarySkill = [];
         if (rules['Show Skill Tasks']) {
             combatStyles.push('Skills');
-            combatStyles.push('Slayer');
             skillNames.forEach(skill => {
                 primarySkill[skill] = checkPrimaryMethod(skill, globalValids, baseChunkData);
             });
+        }
+        combatStyles.push('Quests');
+        combatStyles.push('Diaries');
+        if (rules['Show Skill Tasks']) {
+            combatStyles.push('Slayer');
         }
         combatStyles.push('Clues');
         $('.highest2-title').empty();
@@ -4778,6 +4988,33 @@ var openHighest2 = function() {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-header'>Slayer is currently <b class='noscroll slayer-locked-status ${!!slayerLocked ? 'red' : 'green'}'>${!!slayerLocked ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-unlock"></i>'} ${!!slayerLocked ? 'LOCKED' : 'UNLOCKED'}</b> ${!!slayerLocked ? '(' + `<a class='noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(slayerLocked['monster'].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replace(/[!'()*]/g, escape))}' target='_blank'>${slayerLocked['monster'].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</a>` + ')' : ''} ${!!slayerLocked ? ' at Level ' + slayerLocked['level'] : ''}</div>`);
                 (testMode || !(viewOnly || inEntry || locked)) && !!slayerLocked && $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-unlock-container'><span class='noscroll slayer-unlock-button' onclick='unlockSlayer()'><i class="fas fa-unlock"></i>Manually Unlock</span></div>`);
                 (testMode || !(viewOnly || inEntry || locked)) && $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-lock-container'><span class='noscroll slayer-lock-button' onclick='openSlayerLocked()'>${!!slayerLocked ? '<i class="fas fa-edit"></i>' : '<i class="fas fa-lock"></i>'}${!!slayerLocked ? 'Change Locked Monster' : 'Lock Slayer'}</span></div>`);
+            } else if (combatStyle === 'Quests') {
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll qps'>Quest Points: ${questPointTotal}<i class="noscroll fas fa-filter" title="Filter" onclick="openQuestFilterContextMenu()"></i></div>`);
+                Object.keys(chunkInfo['quests']).filter(quest => { return quest === 'break' || quest === 'break2' || questFilterType === 'all' || (questFilterType === 'complete' && questProgress.hasOwnProperty(quest) && (questProgress[quest] === 'Complete the quest')) || (questFilterType === 'incomplete' && questProgress.hasOwnProperty(quest) && Array.isArray(questProgress[quest])) || (questFilterType === 'unstarted' && !questProgress.hasOwnProperty(quest)) }).forEach(quest => {
+                    if (quest === 'break' || quest === 'break2') {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='noscroll' />`);
+                    } else {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row${questProgress.hasOwnProperty(quest) ? (questProgress[quest] === 'Complete the quest' ? ' complete' : ' incomplete') : ''}'><span class='noscroll quest-text internal-link' onclick="openQuestSteps('Quest', '~|${quest.replaceAll(/\-/g, '=').replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}|~')">${quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</span>${(testMode || !(viewOnly || inEntry || locked)) && (chunkInfo['challenges'].hasOwnProperty('Quest') && chunkInfo['challenges']['Quest'].hasOwnProperty(`~|${quest}|~ Complete the quest`) && chunkInfo['challenges']['Quest'][`~|${quest}|~ Complete the quest`].hasOwnProperty('XpReward') && Object.keys(chunkInfo['challenges']['Quest'][`~|${quest}|~ Complete the quest`]['XpReward']).filter(skill => { return !skillNames.includes(skill) }).length > 0 && questProgress.hasOwnProperty(quest) && questProgress[quest] === 'Complete the quest') ? `<span class='noscroll xp-button${(!assignedXpRewards.hasOwnProperty('Quest') || !assignedXpRewards['Quest'].hasOwnProperty(`~|${quest}|~ Complete the quest`) || Object.keys(assignedXpRewards['Quest'][`~|${quest}|~ Complete the quest`]).includes('None')) ? ' unset' : ''}' onclick="openXpRewardModalWithFormat('Quest', '~|${quest}|~ Complete the quest')">xp</span>` : ''}</div>`);
+                    }
+                });
+                if (Object.keys(chunkInfo['quests']).filter(quest => { return questFilterType === 'all' || (questFilterType === 'complete' && questProgress.hasOwnProperty(quest) && (questProgress[quest] === 'Complete the quest')) || (questFilterType === 'incomplete' && questProgress.hasOwnProperty(quest) && Array.isArray(questProgress[quest])) || (questFilterType === 'unstarted' && !questProgress.hasOwnProperty(quest)) }).length === 0) {
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).empty().append(`<div class='highest-subtitle noscroll'>${combatStyle}</div><div class='noscroll qps'>Quest Points: ${questPointTotal}<i class="noscroll fas fa-filter" title="Filter" onclick="openQuestFilterContextMenu()"></i></div>`).append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No quests ${questFilterType}</span></span></div>`);
+                }
+            } else if (combatStyle === 'Diaries') {
+                Object.keys(chunkInfo['diaries']).forEach(diary => {
+                    if (diary === 'Fossil Island Diary' && rules['Fossil Island Tasks']) {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='noscroll' />`);
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row ${diary.replaceAll(' ', '_')}'><span class='noscroll outer-diary-text'>${diary.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</div>`);
+                        chunkInfo['diaries'][diary].split(', ').forEach(tier => {
+                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll fossil${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${diary.replaceAll(/\-/g, '=').replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}%2XX${tier}|~')">${tier}</span></div>`);
+                        });
+                    } else if (diary !== 'Fossil Island Diary') {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row ${diary.replaceAll(' ', '_')}'><span class='noscroll outer-diary-text'>${diary.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</div>`);
+                        chunkInfo['diaries'][diary].split(', ').forEach(tier => {
+                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${diary.replaceAll(/\-/g, '=').replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}%2XX${tier}|~')">${tier}</span>${(testMode || !(viewOnly || inEntry || locked)) && (diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier) && diaryProgress[diary][tier]['done']) ? `<span class='noscroll xp-button${(!assignedXpRewards.hasOwnProperty('Diary') || !assignedXpRewards['Diary'].hasOwnProperty(`~|${diary}%2F${tier}|~ Complete the ${tier} Diary`) || Object.keys(assignedXpRewards['Diary'][`~|${diary}%2F${tier}|~ Complete the ${tier} Diary`]).includes('None')) ? ' unset' : ''}' onclick="openXpRewardModalWithFormat('Diary', '~|${diary}%2F${tier}|~ Complete the ${tier} Diary')">xp</span>` : ''}</div>`);
+                        });
+                    }
+                });
             } else if (combatStyle === 'Clues') {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll tier-table-header'>Tier</span><span class='noscroll possible-table-header'>Possible Steps</span><span class='noscroll percent-table-header'>% to Complete a Clue</span></div>`);
                 clueTiers.forEach(tier => {
@@ -4801,10 +5038,16 @@ var openHighest2 = function() {
     }
 }
 
+// Changes what the quests are filtered by
+var filterQuests = function(opt) {
+    questFilterType = opt;
+    openHighest2();
+}
+
 // Opens the add passive skill modal
 var openPassiveModal = function(skill) {
     passiveSkillModalOpen = true;
-    $('#passive-skill-input').val('');
+    $('#passive-skill-input').val((!!passiveSkill && passiveSkill[skill]) || 1);
     $('.passive-skill-name').text(skill);
     $('#passive-skill-data').html(`<div><div class="passive-skill-cancel" onclick="addPassiveSkill(true)">Cancel</div><div class="passive-skill-proceed disabled" onclick="addPassiveSkill(false, '${skill}')">Add Passive Levels</div></div>`);
     $('#myModal28').show();
@@ -5083,7 +5326,7 @@ var viewPrimaryMethods = function(skill) {
     let methods = checkPrimaryMethod(skill, globalValids, baseChunkData, true);
     $('.methods-data').empty();
     Object.keys(methods).sort(function(a, b) { return methods[a] - methods[b] }).forEach(method => {
-        $('.methods-data').append(`<div class='noscroll skill-method'>[${methods[method]}]: ${method.replaceAll('~', '').replaceAll('|', '').replaceAll('*', '')}</div>`)
+        $('.methods-data').append(`<div class='noscroll skill-method'>[${methods[method]}]: ${method.replaceAll('~', '').replaceAll('|', '').replaceAll('*', '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</div>`);
     });
     $('#myModal13').show();
     document.getElementById('methods-data').scrollTop = 0;
@@ -5105,6 +5348,7 @@ var switchHighest2Tab = function(tab) {
     $(`.style-button`).removeClass('active-tab');
     $(`.${tab}-button`).addClass('active-tab');
     $(`.${tab}-body`).show();
+    document.getElementById('highest2-data').scrollTop = 0;
 }
 
 // Closes the manual add tasks modal
@@ -5260,6 +5504,7 @@ var unlockChallenges = function() {
         $('.panel-active label.checkbox, .panel-areas label.checkbox').removeClass('checkbox--disabled');
         $('.panel-active label.checkbox input, .panel-areas label.checkbox input').attr('disabled', false);
     }
+    (testMode || !(viewOnly || inEntry || locked)) && !onMobile && $('.panel-backlog').prepend(`<div class='noscroll backlogSources-container'><span class='noscroll backlogSources' onclick='backlogSources()'><i class="fas fa-archive"></i>Backlog Sources</span></div>`);
 }
 
 // Displays the current challenges, areas, backlog, and completed challenges
@@ -5459,6 +5704,17 @@ var openBacklogContextMenu = function(challenge, skill) {
             left: x + "px"
         });
     }
+}
+
+// Opens the context menu for filtering quests
+var openQuestFilterContextMenu = function() {
+    let dims = getBrowserDim();
+    let x = event.pageX + $(".questfilter-context-menu").width() + 5 > dims['w'] ? dims['w'] - $(".questfilter-context-menu").width() - 5 : event.pageX - 5;
+    let y = event.pageY + $(".questfilter-context-menu").height() + 5 > dims['h'] ? dims['h'] - $(".questfilter-context-menu").height() - 5 : event.pageY - 5;
+    $(".questfilter-context-menu").finish().toggle(100).css({
+        top: y + "px",
+        left: x + "px"
+    });
 }
 
 // Shows challenge details
@@ -5857,6 +6113,12 @@ var switchBacklogContext = function(opt) {
     $(".backlog-context-menu").hide(100);
 }
 
+// Selects correct quest filter context menu item
+var switchQuestFilterContext = function(opt) {
+    filterQuests(opt);
+    $(".questfilter-context-menu").hide(100);
+}
+
 // Sends a challenge to the backlog
 var backlogChallenge = function(challenge, skill, note) {
     if (!backlog[skill]) {
@@ -5994,18 +6256,25 @@ var uncompleteChallenge = function(challenge, skill) {
 
 // Marks checked off challenge to save for later
 var checkOffChallenge = function(skill, line) {
-    if (!checkedChallenges.hasOwnProperty(skill) || !checkedChallenges[skill].hasOwnProperty(line)) {
-        if (!checkedChallenges.hasOwnProperty(skill)) {
-            checkedChallenges[skill] = {};
-        }
-        checkedChallenges[skill][line] = true;
+    if (chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(line) && chunkInfo['challenges'][skill][line].hasOwnProperty('XpReward') && Object.keys(chunkInfo['challenges'][skill][line]['XpReward']).filter(skill => { return !skillNamesXp.includes(skill) }).length > 0 && (!assignedXpRewards.hasOwnProperty(skill) || !assignedXpRewards[skill].hasOwnProperty(line)) && $($('.' + skill + '-' + line.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge').find('input')[0]).prop('checked')) {
+        let challengeLine = $('.' + skill + '-' + line.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge');
+        $(challengeLine).removeClass('hide-backlog');
+        $($(challengeLine).find('input')[0]).prop('checked', false);
+        openXpRewardModalWithFormat(skill, line);
     } else {
-        delete checkedChallenges[skill][line];
+        if (!checkedChallenges.hasOwnProperty(skill) || !checkedChallenges[skill].hasOwnProperty(line)) {
+            if (!checkedChallenges.hasOwnProperty(skill)) {
+                checkedChallenges[skill] = {};
+            }
+            checkedChallenges[skill][line] = true;
+        } else {
+            delete checkedChallenges[skill][line];
+        }
+        $('.panel-active .challenge:has(input:checked)').addClass('hide-backlog');
+        $('.panel-active .challenge:not(:has(input:checked))').removeClass('hide-backlog');
+        changeChallengeColor();
+        setData();
     }
-    $('.panel-active .challenge:has(input:checked)').addClass('hide-backlog');
-    $('.panel-active .challenge:not(:has(input:checked))').removeClass('hide-backlog');
-    changeChallengeColor();
-    setData();
 }
 
 // Marks checked off areas to unlock
@@ -6295,7 +6564,7 @@ var loadData = function(startup) {
             }).length > 0;
             
             Object.keys(tempChunks).forEach(section => {
-                Object.keys(tempChunks[section]).filter(chunkId => { return tempChunks[section][chunkId] === 'undefined' || tempChunks[section][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' }).forEach(chunkId => {
+                Object.keys(tempChunks[section]).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks[section][chunkId] === 'undefined' || tempChunks[section][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 }).forEach(chunkId => {
                     delete tempChunks[section][chunkId];
                 });
             });
@@ -6408,11 +6677,14 @@ var loadData = function(startup) {
             } else {
                 chunkTasksOn && !onMobile && setCalculating('.panel-active');
             }
+            assignedXpRewards = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['assignedXpRewards'] ? snap.val()['chunkinfo']['assignedXpRewards'] : {};
             chunkTasksOn && calcCurrentChallengesCanvas();
             rulesModalOpen && showRules();
             if (!startup) {
                 rules['Manually Complete Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
             }
+            questFilterType = 'all';
+            
             doneLoading();
             setUpSelected();
         });
@@ -6502,6 +6774,7 @@ var setData = function() {
                 myRef.child('chunkinfo').update({ slayerLocked });
                 myRef.child('chunkinfo').update({ passiveSkill });
                 myRef.child('chunkinfo').update({ oldSavedChallengeArr });
+                myRef.child('chunkinfo').update({ assignedXpRewards });
 
                 var tempJson = {};
                 !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { return tempChunks['unlocked'][chunkId] !== 'undefined' && tempChunks['unlocked'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
@@ -6581,6 +6854,7 @@ var setData = function() {
             myRef.child('chunkinfo').update({ slayerLocked });
             myRef.child('chunkinfo').update({ passiveSkill });
             myRef.child('chunkinfo').update({ oldSavedChallengeArr });
+            myRef.child('chunkinfo').update({ assignedXpRewards });
 
             var tempJson = {};
             !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { return tempChunks['unlocked'][chunkId] !== 'undefined' && tempChunks['unlocked'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {

@@ -18,6 +18,10 @@
     --colorBox: rgba(150, 150, 150, .6);
     --colorBoxLight: rgba(150, 150, 150, .4);
     --colorBackgroundSidebar: rgba(200, 200, 200, .4);
+    --colorQuestCompleteBackground: rgb(7, 173, 7);
+    --colorQuestCompleteBorderText: rgb(0, 0, 0);
+    --colorQuestIncompleteBackground: rgb(200, 200, 0);
+    --colorQuestIncompleteBorderText: rgb(0, 0, 0);
 
     /* Dark */
     /*
@@ -37,6 +41,10 @@
     --colorBox: rgba(50, 50, 50, .6);
     --colorBoxLight: rgba(50, 50, 50, .4);
     --colorBackgroundSidebar: rgba(22, 27, 34, .75);
+    --colorQuestCompleteBackground: rgb(46, 50, 59);
+    --colorQuestCompleteBorderText: rgb(7, 173, 7);
+    --colorQuestIncompleteBackground: rgb(46, 50, 59);
+    --colorQuestIncompleteBorderText: rgb(200, 200, 0);
     */
 }
 
@@ -2142,6 +2150,11 @@ button.menu2 {
     width: 35%;
 }
 
+#myModal30 > .modal-content {
+    height: 40%;
+    width: 35%;
+}
+
 #myModal29 > .modal-content {
     height: 50%;
     width: 35%;
@@ -2154,7 +2167,7 @@ button.menu2 {
 }
 
 #myModal18 {
-    padding-top:16vh !important;
+    padding-top: 16vh !important;
 }
 
 #myModal18 > .modal-content {
@@ -2380,11 +2393,11 @@ button.menu2 {
     z-index: 1000;
     position: absolute;
     overflow: hidden;
-    border: 1px solid #CCC;
+    border: 1px solid var(--color2);
     white-space: nowrap;
     font-family: sans-serif;
-    background: #FFF;
-    color: #333;
+    background: var(--color1);
+    color: var(--colorText);
     border-radius: 5px;
     padding: 0;
 }
@@ -2398,7 +2411,7 @@ button.menu2 {
 }
 
 .active-context-menu li:hover {
-    background-color: #DEF;
+    background-color: var(--color3);
 }
 
 .backlog-context-menu {
@@ -2406,11 +2419,11 @@ button.menu2 {
     z-index: 1000;
     position: absolute;
     overflow: hidden;
-    border: 1px solid #CCC;
+    border: 1px solid var(--color2);
     white-space: nowrap;
     font-family: sans-serif;
-    background: #FFF;
-    color: #333;
+    background: var(--color1);
+    color: var(--colorText);
     border-radius: 5px;
     padding: 0;
 }
@@ -2424,7 +2437,34 @@ button.menu2 {
 }
 
 .backlog-context-menu li:hover {
-    background-color: #DEF;
+    background-color: var(--color3);
+}
+
+.questfilter-context-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid var(--color2);
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: var(--color1);
+    color: var(--colorText);
+    border-radius: 5px;
+    padding: 0;
+    z-index: 99999;
+}
+
+.questfilter-context-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+    transition: all .3s ease;
+    user-select: none;
+}
+
+.questfilter-context-menu li:hover {
+    background-color: var(--color3);
 }
 
 .details-title {
@@ -3362,6 +3402,14 @@ input#searchChunks {
     font-weight: bold;
     text-align: center;
     padding: 10px;
+}
+
+.Quests-body > .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
 }
 
 .complete-title {
@@ -4763,6 +4811,263 @@ input#searchMonsters {
 
 .change-starting-chunk:hover {
     color: rgb(75, 75, 225);
+}
+
+.quest-text {
+    text-decoration: none;
+}
+
+.Quests-body {
+    position: relative;
+}
+
+.Quests-body > .row {
+    width: 90%;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    border: solid 1px var(--colorText);
+    position: relative;
+}
+
+.Quests-body > .row.complete {
+    background-color: var(--colorQuestCompleteBackground);
+    color: var(--colorQuestCompleteBorderText);
+    border: solid 1px var(--colorQuestCompleteBorderText);
+}
+
+.Quests-body > .row.incomplete {
+    background-color: var(--colorQuestIncompleteBackground);
+    color: var(--colorQuestIncompleteBorderText);
+    border: solid 1px var(--colorQuestIncompleteBorderText);
+}
+
+.Quests-body > hr {
+    width: 75%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.Quests-body > .row > .xp-button {
+    position: absolute;
+    right: 0px;
+    top: -5px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--colorText);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.Quests-body > .row > .xp-button.unset {
+    color: rgb(255, 255, 0.7);
+}
+
+.Quests-body > .row > .xp-button:hover {
+    color: var(--colorTextAlt);
+}
+
+.Quests-body > .row > .xp-button.unset:hover {
+    color: rgb(225, 225, 0.7);
+}
+
+.outer-diary-text {
+    text-decoration: none;
+    display: block;
+    width: auto;
+    margin: auto;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.diary-text {
+    text-decoration: none;
+}
+
+.Diaries-body {
+    position: relative;
+}
+
+.Diaries-body > .row {
+    width: 90%;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    border: solid 1px var(--colorText);
+}
+
+.Diaries-body > .row > div {
+    display: inline-block;
+    width: 7vw;
+    border-radius: 5px;
+    border: solid 1px;
+    margin: 10px 5px 10px 5px;
+    position: relative;
+}
+
+.Diaries-body > .row > div.fossil {
+    width: 110px;
+    overflow-wrap: anywhere;
+}
+
+.Diaries-body > .row > div.complete {
+    background-color: var(--colorQuestCompleteBackground);
+    color: var(--colorQuestCompleteBorderText);
+    border: solid 1px var(--colorQuestCompleteBorderText);
+}
+
+.Diaries-body > .row > div.incomplete {
+    background-color: var(--colorQuestIncompleteBackground);
+    color: var(--colorQuestIncompleteBorderText);
+    border: solid 1px var(--colorQuestIncompleteBorderText);
+}
+
+.Diaries-body > .row .xp-button {
+    position: absolute;
+    right: 0px;
+    top: -5px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--colorText);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.Diaries-body > .row .xp-button.unset {
+    color: rgb(255, 255, 0.7);
+}
+
+.Diaries-body > .row .xp-button:hover {
+    color: var(--colorTextAlt);
+}
+
+.Diaries-body > .row .xp-button.unset:hover {
+    color: rgb(225, 225, 0.7);
+}
+
+.Diaries-body > hr {
+    width: 75%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.qps > i {
+    position: absolute;
+    margin-left: 20px;
+    color: var(--colorText);
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.qps > i:hover {
+    color: var(--colorLink);
+}
+
+.xp-reward-title {
+    font-size: 32px;
+    text-align: center;
+    max-height: 25%;
+    min-height: 25%;
+    padding: 0px 10px;
+    border-bottom: 1px solid;
+}
+
+.xp-reward-data {
+    max-width: 600px;
+    margin: auto;
+}
+
+.xp-reward-data-container {
+    font-size: 30px;
+    text-align: center;
+    max-height: 63%;
+    min-height: 63%;
+    padding: 0px 10px;
+    overflow-y: auto;
+    background-color: var(--color4);
+}
+
+.xp-reward-option-container {
+    padding: 10px;
+    border: solid;
+    border-radius: 25px;
+    margin: 10px;
+    cursor: pointer;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-color: var(--colorText);
+    position: relative;
+}
+
+.xp-reward-option-container.selected-xp-reward-skill {
+    background-color: rgb(50, 175, 50) !important;
+}
+
+.xp-reward-option-container > img {
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 50%;
+}
+
+.xp-reward-option-container > .none-xp-container {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+}
+
+.xp-reward-option-container.black-outline i {
+    -webkit-text-stroke-width: 0.05em;
+    -webkit-text-stroke-color: black;
+}
+
+.xp-reward-option-container.unset-option {
+    color: rgb(100, 100, 100);
+    border: dashed;
+}
+
+.xp-reward-option-container:hover {
+    background-color: rgb(75, 75, 225);
+}
+
+.xp-reward-footer {
+    height: 13%;
+    border-top: 1px solid;
+}
+
+#cancel-xp-reward-button {
+    float: right;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#submit-xp-reward-button {
+    background-color: rgb(50, 175, 50);
+    width: 100px;
+    font-size: 20px;
+    color: white;
+    float: right;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 7px 10px;
+}
+
+#submit-xp-reward-button.disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+#submit-xp-reward-button:not(.disabled):hover {
+    background-color: rgb(30, 155, 30);
 }
 
 /* ------------------------------ */
