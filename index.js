@@ -1828,8 +1828,8 @@ var pickCanvas = function(both) {
     if (both && isPicking) {
         let numToRoll = mid === roll5Mid ? 5 : 2;
         for (let temp = 0; temp < numToRoll; temp++) {
-            el = (!!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['potential'][chunkId] === 'undefined' || tempChunks['potential'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
-            if (!!el || el.length === 0) {
+            el = (!!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['potential'][chunkId] === 'undefined' || tempChunks['potential'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
+            if (!el || el.length === 0) {
                 return;
             }
             rand = 0;
@@ -1885,7 +1885,7 @@ var pickCanvas = function(both) {
                 el.push(id);
             });
         }
-        if (!!el || el.length === 0) {
+        if (!el || el.length === 0) {
             return;
         }
         rand = Math.floor(Math.random() * el.length);
@@ -1908,8 +1908,8 @@ var pickCanvas = function(both) {
             $('.pick').text('Pick Chunk');
         }
     } else if (!isPicking) {
-        el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
-        if (!!el || el.length === 0) {
+        el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
+        if (!el || el.length === 0) {
             return;
         }
         rand = Math.floor(Math.random() * el.length);
@@ -1921,8 +1921,8 @@ var pickCanvas = function(both) {
         delete tempChunks['selected'][el[rand]];
         tempChunks['unlocked'][el[rand]] = el[rand];
     } else {
-        el = (!!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['potential'][chunkId] === 'undefined' || tempChunks['potential'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
-        if (!!el || el.length === 0) {
+        el = (!!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['potential'][chunkId] === 'undefined' || tempChunks['potential'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
+        if (!el || el.length === 0) {
             return;
         }
         rand = Math.floor(Math.random() * el.length);
@@ -1993,8 +1993,8 @@ var roll2Canvas = function() {
         return;
     }
     isPicking = true;
-    var el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
-    if (!!el || el.length === 0) {
+    var el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
+    if (!el || el.length === 0) {
         return;
     }
     var rand;
@@ -2006,8 +2006,8 @@ var roll2Canvas = function() {
     }
     let numToRoll = mid === roll5Mid ? 5 : 2;
     for (var i = 0; i < numToRoll; i++) {
-        el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
-        if (!!el || el.length === 0) {
+        el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
+        if (!el || el.length === 0) {
             return;
         }
         rand = Math.floor(Math.random() * el.length);
@@ -2040,8 +2040,8 @@ var unpickCanvas = function() {
         helpFunc();
         return;
     }
-    var el = (!!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks['unlocked'][chunkId] === 'undefined' || tempChunks['unlocked'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 })) || [];
-    if (!!el || el.length === 0) {
+    var el = (!!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['unlocked'][chunkId] === 'undefined' || tempChunks['unlocked'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
+    if (!el || el.length === 0) {
         return;
     }
     var rand = Math.floor(Math.random() * el.length);
@@ -2312,7 +2312,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.14.2");
+const myWorker = new Worker("./worker.js?v=4.14.3");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
