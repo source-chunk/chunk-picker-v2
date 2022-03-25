@@ -5300,6 +5300,7 @@ input#searchMonsters {
     cursor: pointer;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    font-size: min(1.5vw, 14.5px);
 }
 
 .display-button:hover {
