@@ -814,7 +814,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             if (!checkPrimaryMethod(skill, newValids, baseChunkData)) {
                 newValids[skill] = {};
             }
-            checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(newValids[skill]).forEach(challenge => {
+            checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(newValids[skill]).sort(function(a, b) { return a.localeCompare(b, 'en', { numeric: true }) }).forEach(challenge => {
                 fullyValid = true;
                 !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach(subTask => {
                     if (subTask.includes('+')) {
