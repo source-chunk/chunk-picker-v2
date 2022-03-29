@@ -107,6 +107,7 @@ let xpTable = {
     "98": 11805606,
     "99": 13034431
 };
+let diaryTierOrder = ['Easy', 'Medium', 'Hard', 'Elite', 'Museum Camp', 'Northern Reaches', 'Southern Swamps', 'Mountainous East'];
 
 let type;
 let chunks;
@@ -587,7 +588,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             savedValids = JSON.parse(JSON.stringify(newValids));
             leftovers = {};
             Object.keys(validsList).filter((skill) => { return skill !== 'BiS' }).forEach(skill => {
-                checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(validsList[skill]).sort(function(a, b) { return a.localeCompare(b, 'en', { numeric: true }) }).forEach(challenge => {
+                checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(validsList[skill]).sort(function(a, b) { return skill === 'Diary' ? ((diaryTierOrder.indexOf(a.split('|')[1].split('%2F')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('%2F')[1]) === 0) ? a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) : (diaryTierOrder.indexOf(a.split('|')[1].split('%2F')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('%2F')[1]))) : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) }).forEach(challenge => {
                     if (!passedByTasks[skill]) {
                         passedByTasks[skill] = {};
                     }
@@ -607,14 +608,16 @@ var calcChallenges = function(chunks, baseChunkData) {
                         return;
                     }
                     if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Skills')) {
-                        Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).filter((subSkill) => { return !checkPrimaryMethod(subSkill, newValids, baseChunkData) && !chunkInfo['challenges'][skill][challenge]['ManualValid'] }).forEach(subSkill => {
-                            if (!nonValids.hasOwnProperty(challenge)) {
-                                nonValids[challenge] = [];
+                        Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).filter((subSkill) => { return (!checkPrimaryMethod(subSkill, newValids, baseChunkData) || ((!!passiveSkill && passiveSkill.hasOwnProperty(subSkill) && passiveSkill[subSkill] > 1 && chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > passiveSkill[subSkill]) || (!!skillQuestXp && skillQuestXp.hasOwnProperty(subSkill) && chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > skillQuestXp[subSkill]['level']))) && !chunkInfo['challenges'][skill][challenge]['ManualValid'] }).forEach(subSkill => {
+                            if (!checkPrimaryMethod(subSkill, valids, baseChunkData, true)) {
+                                if (!nonValids.hasOwnProperty(challenge)) {
+                                    nonValids[challenge] = [];
+                                }
+                                nonValids[challenge] = [...nonValids[challenge], subSkill];
+                                !!newValids[skill] && delete newValids[skill][challenge];
+                                !!valids[skill] && delete valids[skill][challenge];
+                                !!leftovers[skill] && leftovers[skill][challenge] && delete leftovers[skill][challenge];
                             }
-                            nonValids[challenge] = [...nonValids[challenge], subSkill];
-                            !!newValids[skill] && delete newValids[skill][challenge];
-                            !!valids[skill] && delete valids[skill][challenge];
-                            !!leftovers[skill] && leftovers[skill][challenge] && delete leftovers[skill][challenge];
                         });
                         if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                             return;
