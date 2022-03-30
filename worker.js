@@ -3738,7 +3738,7 @@ var calcBIS = function() {
                     Object.keys(bestEquipment).forEach(slot => {
                         if (!slotMapping[slot]) {
                             equipment_bonus_att['magic'] += chunkInfo['equipment'][bestEquipment[slot]].attack_magic;
-                            equipment_bonus_str += chunkInfo['equipment'][bestEquipment[slot]].magic_damage
+                            equipment_bonus_str += chunkInfo['equipment'][bestEquipment[slot]].magic_damage;
                         }
                     });
                     itemList.forEach(item => {
@@ -3761,6 +3761,7 @@ var calcBIS = function() {
         }
         Object.keys(resultingAdditions).forEach(slot => {
             bestEquipment[slot] = resultingAdditions[slot];
+            delete bestEquipmentAlts[slot];
         });
         Object.keys(bestEquipment).forEach(slot => {
             if (slot === '2h') {
