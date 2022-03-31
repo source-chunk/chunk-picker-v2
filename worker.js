@@ -1480,7 +1480,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
-        Object.keys(outputs).forEach(output => {
+        Object.keys(outputs).filter((output) => { return !backloggedSources['items'] || !backloggedSources['items'][output] }).forEach(output => {
             Object.keys(outputs[output]).filter((source) => { return outputs[output][source].split('-').length <= 1 || ((newValids.hasOwnProperty(outputs[output][source].split('-')[1])) || (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(source))) }).forEach(source => {
                 if (baseChunkData['items'].hasOwnProperty(output + '*')) {
                     if (!baseChunkData['items'][output + '*']) {
