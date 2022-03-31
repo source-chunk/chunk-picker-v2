@@ -1059,6 +1059,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             !!lowestLevel && Object.keys(tempMultiStepSkill[skill]).filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= lowestLevel)}).forEach(name => {
                 !newValids[skill] && (newValids[skill] = {});
                 newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                chunkInfo['challenges'][skill][name]['Priority'] = 999;
             });
         });
         Object.keys(chunkInfo['taskUnlocks']['Spawns']).forEach(item => {
