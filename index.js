@@ -2312,7 +2312,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.14.9");
+const myWorker = new Worker("./worker.js?v=4.14.10");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -3505,7 +3505,7 @@ var enableTestMode = function() {
     testMode ? $('.test-hint').css('opacity', 1).show() : $('.test-hint').css('opacity', 0).hide();
     if (!testMode) {
         loadData();
-        $('.open-manual-outer-container').css('opacity', 0).hide();
+        (viewOnly || inEntry || locked) && $('.open-manual-outer-container').css('opacity', 0).hide();
     } else {
         unlockChallenges();
         $('.open-manual-outer-container').css('opacity', 1).show();
