@@ -296,6 +296,7 @@ let rules = {
     "Tithe Farm": false,
     "Kill X": false,
     "Sorceress's Garden": false,
+    "Spells": false,
     "Show Skill Tasks": false,
     "Show Quest Tasks": false,
     "Show Diary Tasks": false,
@@ -353,6 +354,8 @@ let rules = {
     "F2P": false,
     "Fill Stash": false,
     "Herblore Unlocked Exception": false,
+    "All Shops": false,
+    "Quest Skill Reqs": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -372,6 +375,7 @@ let ruleNames = {
     "Tithe Farm": "Allow Tithe Farm to count as a primary method for training Farming",
     "Kill X": "Kill X-amount of every new, unique monster you encounter",
     "Sorceress's Garden": "Allow Sorceress's Garden to count as primary training for training Farming",
+    "Spells": "Spells count as a way to process runes via Magic, and therefore can count as chunk tasks",
     "Show Skill Tasks": "Show Skill Tasks (e.g. Get 43 Crafting to cut a diamond)",
     "Show Quest Tasks": "Show Quest Tasks",
     "Show Diary Tasks": "Show Diary Tasks",
@@ -427,6 +431,8 @@ let ruleNames = {
     "F2P": "Restrict to F2P skills/items/tasks only",
     "Fill Stash": "Must build and fill S.T.A.S.H. units as soon as you're able to",
     "Herblore Unlocked Exception": "Unlock Herblore immediately without Druidic Ritual (for accounts that make exceptions and complete the quest outside their chunks)",
+    "All Shops": "Must buy every item from every shop within your chunks once <span class='rule-asterisk noscroll'>⁺</span>",
+    "Quest Skill Reqs": "Must get Quest skill requirements, regardless of if the Quest is startable or not <span class='rule-asterisk noscroll'>⁺</span>",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -442,6 +448,7 @@ let rulePresets = {
         "Shortcut Task": true,
         "Shortcut": true,
         "Puro-Puro": true,
+        "Spells": true,
         "Combat and Teleport Spells": true,
         "PVP-Only Spells": true,
         "Smithing by Smelting": true,
@@ -497,6 +504,7 @@ let rulePresets = {
         "Secondary MTA": true,
         "Primary Spawns": true,
         "Tutor Ammo":  true,
+        "Spells": true,
     },
     "Supreme Chunker": {
         "Skillcape": true,
@@ -547,6 +555,7 @@ let rulePresets = {
         "Rare Drop Amount": "0",
         "HigherLander": true,
         "Secondary MTA": true,
+        "Spells": true,
         "Combat and Teleport Spells": true,
         "PVP-Only Spells": true,
         "Skilling Pets": true,
@@ -578,7 +587,8 @@ let ruleStructure = {
         "Multi Step Processing": true,
         "Wield Crafted Items": true,
         "Secondary Primary": true,
-        "CoX": true
+        "CoX": true,
+        "Quest Skill Reqs": true
     },
     "Agility": {
         "Shortcut": true,
@@ -610,8 +620,7 @@ let ruleStructure = {
         "Wandering implings": true
     },
     "Magic": {
-        "Combat and Teleport Spells": true,
-        "PVP-Only Spells": true,
+        "Spells": ["Combat and Teleport Spells", "PVP-Only Spells"],
         "Secondary MTA": true
     },
     "Mining": {
@@ -650,15 +659,18 @@ let ruleStructure = {
         "Manually Complete Tasks": true,
         "Every Drop": true,
         "All Droptables": true,
+        "All Shops": true,
         "F2P": true
     }
 };                                                                              // Structure of rules
 
 let subRuleDefault = {
     "Show Quest Tasks": false,
+    "Show Diary Tasks": false,
     "Show Best in Slot Tasks": false,
     "Collection Log": true,
-    "Puro-Puro": false
+    "Puro-Puro": false,
+    "Spells": false,
 };                                                                              // Default value of sub-rule when parent is checked
 
 let settings = {
@@ -1014,7 +1026,7 @@ let questFilterType = 'all';
 let tempXpArr = null;
 let tempXpChoices = [];
 let tempSkillChoice = null;
-let currentVersion = '4.14.0';
+let currentVersion = '4.15.0';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -1612,7 +1624,6 @@ var handleMouseUp = function(e) {
                 if (!recentChunks.hasOwnProperty(chunkId)) {
                     delete tempChunks['unlocked'][chunkId];
                     !onMobile && getChunkAreas();
-                    !onMobile && setupCurrentChallenges(false);
                     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
                     !onMobile && setCalculating('.panel-areas');
                     !onMobile && setCalculating('.panel-completed');
@@ -1630,7 +1641,6 @@ var handleMouseUp = function(e) {
                     }
                     tempChunks['unlocked'][chunkId] = chunkId;
                     !onMobile && getChunkAreas();
-                    !onMobile && setupCurrentChallenges(false);
                     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
                     !onMobile && setCalculating('.panel-areas');
                     !onMobile && setCalculating('.panel-completed');
@@ -1657,20 +1667,12 @@ var handleMouseUp = function(e) {
                     });
                 }
                 isPicking = false;
-                if (isPicking) {
-                    $('.pick').text('Pick for me');
-                } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
-                    $('.pick').text('Random Start?');
-                } else {
-                    $('.pick').text('Pick Chunk');
-                }
                 roll2On && $('.roll2').text('Roll 2');
                 roll2On && mid === roll5Mid && $('.roll2').text('Roll 5');
                 unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
                 setRecentRoll(chunkId);
                 completeChallenges();
                 !onMobile && getChunkAreas();
-                !onMobile && setupCurrentChallenges(false);
                 !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
                 !onMobile && setCalculating('.panel-areas');
                 !onMobile && setCalculating('.panel-completed');
@@ -1683,6 +1685,13 @@ var handleMouseUp = function(e) {
                 }
                 tempChunks['selected'][chunkId] = chunkId;
                 tempSelectedChunks.push(chunkId.toString());
+            }
+            if (isPicking) {
+                $('.pick').text('Pick for me');
+            } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
+                $('.pick').text('Random Start?');
+            } else {
+                $('.pick').text('Pick Chunk');
             }
         }
         $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
@@ -1854,7 +1863,7 @@ var pickCanvas = function(both) {
         isPicking = false;
         if (isPicking) {
             $('.pick').text('Pick for me');
-        } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+        } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
             $('.pick').text('Random Start?');
         } else {
             $('.pick').text('Pick Chunk');
@@ -1874,7 +1883,7 @@ var pickCanvas = function(both) {
         !onMobile && calcCurrentChallengesCanvas();
         setData();
         return;
-    } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+    } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
         el = [];
         if (rules['F2P']) {
             chunkInfo['walkableChunksF2P'].filter(id => { return (!tempChunks['unlocked'] || !tempChunks['unlocked'][id]) && (!tempChunks['blacklisted'] || !tempChunks['blacklisted'][id]) }).forEach(id => {
@@ -1902,7 +1911,7 @@ var pickCanvas = function(both) {
         tempChunks['unlocked'][el[rand]] = el[rand];
         if (isPicking) {
             $('.pick').text('Pick for me');
-        } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+        } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
             $('.pick').text('Random Start?');
         } else {
             $('.pick').text('Pick Chunk');
@@ -1943,7 +1952,7 @@ var pickCanvas = function(both) {
         isPicking = false;
         if (isPicking) {
             $('.pick').text('Pick for me');
-        } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+        } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
             $('.pick').text('Random Start?');
         } else {
             $('.pick').text('Pick Chunk');
@@ -2312,7 +2321,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.14.10");
+const myWorker = new Worker("./worker.js?v=4.15.0");
 myWorker.onmessage = function(e) {
     workerOut--;
     workerOut < 0 && (workerOut = 0);
@@ -2786,7 +2795,7 @@ var importFromURL = function() {
             $('#import-menu').css({ 'opacity': 0 }).hide();
             $('.import').css('opacity', 0).show();
             $('.import').animate({ 'opacity': 1 });
-            if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+            if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
                 $('.pick').text('Random Start?');
             } else {
                 $('.pick').text('Pick Chunk');
@@ -4237,7 +4246,7 @@ var calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
         }
         checkPrimaryMethod(skill, valids, baseChunkDataLocal) && Object.keys(valids[skill]).forEach(challenge => {
             if (skill === 'Quest' || skill === 'Diary' || skill === 'BiS' || skill === 'Extra') {
-                if ((!globalValids.hasOwnProperty(skill) || !globalValids[skill].hasOwnProperty(challenge)) && valids[skill][challenge]) {
+                if ((!globalValids.hasOwnProperty(skill) || !globalValids[skill].hasOwnProperty(challenge)) && valids[skill][challenge] && !chunkInfo['challenges'][skill][challenge]['NeverShow']) {
                     if ((skill === 'Quest' && rules["Show Quest Tasks"] && (chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') || !rules["Show Quest Tasks Complete"])) || (skill === 'Diary' && rules["Show Diary Tasks"] && (chunkInfo['challenges'][skill][challenge].hasOwnProperty('ManualShow') || !rules["Show Diary Tasks Complete"])) || (skill === 'BiS' && rules["Show Best in Slot Tasks"]) || (skill === 'Extra')) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
@@ -4255,7 +4264,7 @@ var calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
                     }
                 }
             } else {
-                if (valids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel || (highestCompletedLevel < 1))) {
+                if (valids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > highestCompletedLevel || (highestCompletedLevel < 1)) && !chunkInfo['challenges'][skill][challenge]['NeverShow']) {
                     if (((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
@@ -4973,6 +4982,7 @@ var openHighest2 = function() {
             combatStyles.push('Slayer');
         }
         combatStyles.push('Clues');
+        combatStyles.push('Shooting Stars');
         $('.highest2-title').empty();
         $('.highest2-data').empty();
         combatStyles.forEach(combatStyle => {
@@ -5025,6 +5035,18 @@ var openHighest2 = function() {
                     });
                     $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll clue-tier'><img class='noscroll tier-icon' src='./resources/${tier}_clue.png' title='${tier}' />${tier}</span><span class='noscroll clue-possible'>${numClueTasksPossible[tier.toLowerCase()]} / ${numClueTasks[tier.toLowerCase()]} (${Math.round((baseChance * 100) * 100) / 100}%)</span><span class='noscroll clue-percent'> ${(Math.round((chance * 100) * 100) / 100).toLocaleString(undefined, {minimumIntegerDigits: 2, minimumFractionDigits: 2})}%</span></div>`);
                 });
+            } else if (combatStyle === 'Shooting Stars') {
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll region-table-header'>Region</span><span class='noscroll sites-table-header'>Possible Sites</span></div>`);
+                let totalSites = 0;
+                let totalPossibleSites = 0;
+                !!chunkInfo['starRegions'] && Object.keys(chunkInfo['starRegions']).forEach(region => {
+                    let possibleSites = chunkInfo['starRegions'][region].filter(chunk => { return !!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(chunk) }).length || 0;
+                    let baseChance = possibleSites / chunkInfo['starRegions'][region].length;
+                    totalSites += chunkInfo['starRegions'][region].length;
+                    totalPossibleSites += possibleSites;
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll star-region'>${region}</span><span class='noscroll star-sites'>${possibleSites} / ${chunkInfo['starRegions'][region].length} (${Math.round((baseChance * 100) * 100) / 100}%)</span></div>`);
+                });
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row total'><span class='noscroll star-region'>Total</span><span class='noscroll star-sites'>${totalPossibleSites} / ${totalSites} (${Math.round(((totalPossibleSites / totalSites) * 100) * 100) / 100}%)</span></div>`);
             }
         });
         if (highestTab2 === undefined) {
@@ -6188,8 +6210,7 @@ var backlogChallenge = function(challenge, skill, note) {
                 challengeArr.splice(index, 1);
                 if (highestChallengeLevel > 0) {
                     oldChallengeArr[skill] = highestChallenge;
-                    // Needs to be converted still TODO
-                    challengeArr.splice(index, 0, `<div class="challenge noscroll ${skill + '-challenge'}"><input class="noscroll" type='checkbox' ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && "checked"} onclick="checkOffChallenge('${skill}', ` + "`" + highestChallenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) && "disabled"} /><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                    challengeArr.splice(index, 0, `<div class="challenge skill-challenge noscroll ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('${skill}', ` + "`" + highestChallenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + ` <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>' + '</div>');
                 }
             }
         });
@@ -6204,7 +6225,6 @@ var backlogChallenge = function(challenge, skill, note) {
             });
         }
     }
-    !onMobile && setupCurrentChallenges(oldChallengeArr);
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
     calcCurrentChallengesCanvas();
     setData();
@@ -6226,7 +6246,6 @@ var unbacklogChallenge = function(challenge, skill) {
             });
         }
     }
-    !onMobile && setupCurrentChallenges(false);
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
     calcCurrentChallengesCanvas();
     setData();
@@ -6248,7 +6267,6 @@ var uncompleteChallenge = function(challenge, skill) {
             });
         }
     }
-    !onMobile && setupCurrentChallenges(false);
     !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
     calcCurrentChallengesCanvas();
     setData();
@@ -6327,7 +6345,6 @@ var checkOffRules = function(didRedo, startup) {
         return;
     }
     if (!startup) {
-        setupCurrentChallenges(false);
         !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
         calcCurrentChallengesCanvas();
         rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
@@ -6387,7 +6404,7 @@ var checkOffSettings = function(didRedo, startup) {
     }
     if (isPicking) {
         $('.pick').text('Pick for me');
-    } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+    } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
         $('.pick').text('Random Start?');
     } else {
         $('.pick').text('Pick Chunk');
@@ -6630,6 +6647,10 @@ var loadData = function(startup) {
                 rulesTemp['InsidePOH Primary'] = rulesTemp.hasOwnProperty('InsidePOH') ? rulesTemp['InsidePOH'] : false;
             }
 
+            if (!rulesTemp.hasOwnProperty('Spells')) {
+                rulesTemp['Spells'] = true;
+            }
+
             !!rulesTemp && Object.keys(rulesTemp).forEach(rule => {
                 rules[rule] = rulesTemp[rule];
             });
@@ -6668,7 +6689,7 @@ var loadData = function(startup) {
                 $('.roll2').text('Unlock both');
                 mid === roll5Mid && $('.roll2').text('Unlock all');
                 isPicking = true;
-            } else if (((!tempChunks['unlocked'] || tempChunks['unlocked'].length === 0) && (!tempChunks['selected'] || tempChunks['selected'].length === 0)) || settings['randomStartAlways']) {
+            } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
                 $('.pick').text('Random Start?');
             }
             oldSavedChallengeArr = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['oldSavedChallengeArr'] ? snap.val()['chunkinfo']['oldSavedChallengeArr'] : [];

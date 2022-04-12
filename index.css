@@ -1424,8 +1424,8 @@ button.menu2 {
 .test-hint {
     display: none;
     position: absolute;
-    top: 6vw;
-    font-size: 52px;
+    top: 10vh;
+    font-size: min(2.75vw, 52px);
     z-index: 999 !important;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1439,7 +1439,7 @@ button.menu2 {
 
 .test-hint .subtext {
     display: block;
-    font-size: 24px;
+    font-size: min(1.25vw, 24px);
 }
 
 .settings {
@@ -2211,6 +2211,7 @@ button.menu2 {
 .challenge-title {
     height: 9%;
     font-size: 1.7vh;
+    overflow-y: hidden;
 }
 
 .challenge-data {
@@ -2472,6 +2473,7 @@ button.menu2 {
     padding-left: 10px;
     max-height: 20%;
     min-height: 20%;
+    overflow-y: hidden;
 }
 
 .details-subtitle {
@@ -2500,6 +2502,7 @@ button.menu2 {
     min-height: 20%;
     text-align: center;
     font-weight: bold;
+    overflow-y: hidden;
 }
 
 .alts-data {
@@ -2535,6 +2538,7 @@ button.menu2 {
     min-height: 20%;
     text-align: center;
     font-weight: bold;
+    overflow-y: hidden;
 }
 
 .add-data {
@@ -2554,6 +2558,7 @@ button.menu2 {
     font-size: min(2vw, 24px);
     padding: 0px 10px;
     height: 30%;
+    overflow-y: hidden;
 }
 
 .notes-data {
@@ -2578,6 +2583,7 @@ button.menu2 {
     min-height: 9%;
     text-align: center;
     background-color: var(--color1);
+    overflow-y: hidden;
 }
 
 .settings-data {
@@ -2649,6 +2655,7 @@ button.menu2 {
     min-height: 9%;
     text-align: center;
     background-color: var(--color2);
+    overflow-y: hidden;
 }
 
 .rules-subtitle {
@@ -2752,6 +2759,7 @@ button.menu2 {
     min-height: 9%;
     text-align: center;
     background-color: var(--color2);
+    overflow-y: hidden;
 }
 
 .chunkhistory-subtitle {
@@ -2842,6 +2850,7 @@ button.menu2 {
     line-height: 50px;
     text-align: center;
     background-color: var(--color1);
+    overflow-y: hidden;
 }
 
 .preset-subtitle {
@@ -2896,6 +2905,7 @@ button.menu2 {
     line-height: 6vh;
     text-align: center;
     background-color: var(--color2);
+    overflow-y: hidden;
 }
 
 .random-subtitle {
@@ -2962,6 +2972,7 @@ button.menu2 {
     line-height: 5vh;
     text-align: center;
     background-color: var(--color2);
+    overflow-y: hidden;
 }
 
 .slayer-locked-subtitle {
@@ -3037,12 +3048,13 @@ button.menu2 {
     line-height: 5vh;
     text-align: center;
     background-color: var(--color2);
+    overflow-y: hidden;
 }
 
 .passive-skill-subtitle {
     padding: 0px 15px;
     background-color: var(--color1);
-    font-size: 1.7vh;
+    font-size: min(1.5vw, 16px);
     text-align: center;
     border-top: solid 1px;
     height: 85%;
@@ -3196,6 +3208,7 @@ button.menu2 {
     text-align: center;
     max-height: 20%;
     min-height: 20%;
+    overflow-y: hidden;
 }
 
 .randomlist-data {
@@ -3233,6 +3246,7 @@ button.menu2 {
     min-height: 50%;
     font-weight: bold;
     padding: 0px 10px;
+    overflow-y: hidden;
 }
 
 .statserror-subtitle {
@@ -3273,13 +3287,14 @@ button.menu2 {
     font-weight: bold;
     padding: 0px 10px;
     background-color: var(--color2);
+    overflow-y: hidden;
 }
 
 .searchchunks-subtitle {
     height: 10%;
     padding: 0px 15px;
     background-color: var(--color2);
-    font-size: 1.7vh;
+    font-size: min(1.35vw, 16px);
 }
 
 .searchchunks-searchcontainer {
@@ -3331,6 +3346,7 @@ input#searchChunks {
     min-height: 25%;
     font-weight: bold;
     padding: 0px 10px;
+    overflow-y: hidden;
 }
 
 .searchdetails-data {
@@ -3367,7 +3383,7 @@ input#searchChunks {
     font-weight: bold;
     height: 7%;
     background-color: var(--color2);
-    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .highest-data {
@@ -3389,7 +3405,7 @@ input#searchChunks {
     font-weight: bold;
     height: 7%;
     background-color: var(--color2);
-    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .highest2-data {
@@ -3503,6 +3519,14 @@ input#searchChunks {
     background-color: var(--color2);
 }
 
+.Shooting_Stars-body > .row {
+    width: 90%;
+}
+
+.Shooting_Stars-body > .row.row-header {
+    background-color: var(--color2);
+}
+
 .slot-text {
     margin-left: 20px;
     font-size: 24px;
@@ -3610,6 +3634,44 @@ input#searchChunks {
     font-weight: bold;
     text-align: center;
     width: 30%;
+}
+
+.star-sites {
+    padding-left: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+    width: 30%;
+    text-align: center;
+    border-left: solid 1px var(--color8);
+}
+
+.star-region {
+    width: 70%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.region-table-header {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 70%;
+}
+
+.sites-table-header {
+    padding-left: 10px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 30%;
+    border-left: solid 1px var(--color8);
+}
+
+.style-body > .row.total {
+    background-color: var(--color2);
+    border-color: rgb(200, 200, 0);
+    margin-bottom: 20px;
 }
 
 .methods-data {
@@ -3937,6 +3999,10 @@ input#searchMonsters {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     border-color: var(--colorText);
+}
+
+.sticker-option-container > img {
+    max-width: 35px;
 }
 
 .sticker-option-container.black-outline > i {
@@ -4452,6 +4518,7 @@ input#searchMonsters {
     min-height: 9%;
     text-align: center;
     background-color: var(--color2);
+    overflow-y: hidden;
 }
 
 .quest-steps-data {
@@ -4520,6 +4587,7 @@ input#searchMonsters {
     min-height: 9%;
     text-align: center;
     background-color: var(--color2);
+    overflow-y: hidden;
 }
 
 .friends-list-subtitle {
@@ -4586,6 +4654,7 @@ input#searchMonsters {
     padding: 0px 10px;
     height: 20%;
     text-align: center;
+    overflow-y: hidden;
 }
 
 .friends-add-data {
@@ -4723,6 +4792,7 @@ input#searchMonsters {
     min-height: 10%;
     padding: 0px 10px;
     border-bottom: 1px solid;
+    overflow-y: hidden;
 }
 
 .intro-data-container {
@@ -4739,10 +4809,12 @@ input#searchMonsters {
     font-size: 2vh;
     color: var(--colorTextAlt);
     margin-top: 5px;
+    overflow-y: hidden;
 }
 
 .intro-data-title {
     font-size: 4vh;
+    overflow-y: hidden;
 }
 
 .intro-data-subtitle {
@@ -4971,6 +5043,7 @@ input#searchMonsters {
     min-height: 25%;
     padding: 0px 10px;
     border-bottom: 1px solid;
+    overflow-y: hidden;
 }
 
 .xp-reward-data {
