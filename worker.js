@@ -2568,21 +2568,22 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     realSource = chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F').replaceAll('.', '%2E')]['Output'];
                     Object.keys(chunkInfo['skillItems']['Slayer'][monster]).forEach(drop => {
                         if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
-                            Object.keys(dropTables[drop]).filter((item) => { return (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) || ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1]) * parseFloat(dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) }).forEach(item => {
-                                if (!dropRatesGlobal[monster]) {
-                                    dropRatesGlobal[monster] = {};
-                                }
-                                !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach(quantity => {
-                                    dropRatesGlobal[monster][item] = findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[1]), drop.includes('GeneralSeedDropTable'));
+                            !!chunkInfo['skillItems']['Slayer'][monster][drop] && Object.keys(chunkInfo['skillItems']['Slayer'][monster][drop]).forEach(quantityDrop => {
+                                Object.keys(dropTables[drop]).filter((item) => { return (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1])) || ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1]) * parseFloat(dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) }).forEach(item => {
+                                    if (!dropRatesGlobal[monster]) {
+                                        dropRatesGlobal[monster] = {};
+                                    }
+                                    dropRatesGlobal[monster][item] = findFraction(parseFloat(dropTables[drop][item].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('/')[1].split('@')[0]), drop.includes('GeneralSeedDropTable'));
                                 });
                             });
-                        } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
-                                (rules['Boss'] || !bossMonsters.hasOwnProperty(monster))) {
-                            if (!dropRatesGlobal[monster]) {
-                                dropRatesGlobal[monster] = {};
-                            }
-                            !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach(quantity => {
-                                dropRatesGlobal[monster][drop] = (chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/').length <= 1) ? chunkInfo['skillItems']['Slayer'][monster][drop][quantity] : findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[1].replaceAll('~', '')));
+                        } else {
+                            !!chunkInfo['skillItems']['Slayer'][monster][drop] && Object.keys(chunkInfo['skillItems']['Slayer'][monster][drop]).forEach(quantityDrop => {
+                                if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossMonsters.hasOwnProperty(monster))) {
+                                    if (!dropRatesGlobal[monster]) {
+                                        dropRatesGlobal[monster] = {};
+                                    }
+                                    dropRatesGlobal[monster][drop] = (chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1].replaceAll('~', '')));
+                                }
                             });
                         }
                     });
