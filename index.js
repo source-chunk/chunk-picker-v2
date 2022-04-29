@@ -2335,7 +2335,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.16.0");
+const myWorker = new Worker("./worker.js?v=4.16.1");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -3216,6 +3216,7 @@ var unlockEntry = function() {
                         patchNotesOpenSoon && openPatchNotesModal();
                         mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
                         unlockChallenges();
+                        setRecentLogin();
                     }, 500);
                 }).catch((error) => {
                     $('.pin.entry').addClass('animated shake wrong').select();
@@ -3390,6 +3391,7 @@ var accessMap = function() {
                             !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
                             $('.open-manual-outer-container').css('opacity', 1).show();
                             rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
+                            setRecentLogin();
                             setupMap();
                         }).catch((error) => {
                             $('.pin-err').css('visibility', 'visible');
@@ -6816,6 +6818,20 @@ var setCookies = function() {
 }
 
 // Stores data in Firebase
+var setRecentLogin = function() {
+    if (onTestServer || testMode) {
+        return;
+    }
+    signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+        myRef.child('recentLoginTime').set(new Date().getTime());
+    }).catch(function(error) {
+        regainConnectivity(() => {
+            myRef.child('recentLoginTime').set(new Date().getTime());
+        });
+    });
+}
+
+// Stores data in Firebase
 var setUsername = function(old) {
     if (onTestServer || testMode) {
         return;
@@ -7095,6 +7111,7 @@ var changeLocked = function() {
                     $('.open-manual-outer-container').css('opacity', 0).show();
                     rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                     $('.lock-box').animate({ 'opacity': 0 });
+                    setRecentLogin();
                     setTimeout(function() {
                         $('.lock-box').css('opacity', 1).hide();
                         $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist').animate({ 'opacity': 1 });
