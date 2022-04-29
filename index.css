@@ -1920,7 +1920,32 @@ button.menu2 {
     overflow-y: hidden !important;
     text-align: center !important;
     min-height: 20px;
-    padding-top: 5px;
+}
+
+.outer-loading-bar {
+    border: solid;
+    border-width: 1px;
+    background-color: var(--color3);
+    margin: 5px 10px 0px 10px;
+    height: 10px;
+    position: relative;
+}
+
+.inner-loading-bar {
+    background-color: var(--colorTextAlt);
+    width: 0%;
+    height: 100%;
+    display: block;
+    -webkit-transition-duration: .4s;
+    transition-duration: .4s;
+}
+
+.loading-bar-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color2);
+    font-weight: bold;
 }
 
 #challengesactive {
@@ -3381,14 +3406,14 @@ input#searchChunks {
     display: inline-flex;
     width: 100%;
     font-weight: bold;
-    height: 7%;
+    height: 10%;
     background-color: var(--color2);
     overflow-y: hidden;
 }
 
 .highest-data {
     overflow-y: auto;
-    height: 93%;
+    height: 90%;
 }
 
 .highest-subtitle {
@@ -4580,6 +4605,28 @@ input#searchMonsters {
     border-left: solid 1px var(--color8);
 }
 
+.quest-steps-data hr {
+    width: 75%;
+}
+
+.combat-achievements .step-table-header {
+    width: 30%;
+}
+
+.combat-achievements .description-table-header {
+    width: 70%;
+}
+
+.combat-achievements .step-step {
+    width: 30%;
+    border-right: solid 1px var(--color8);
+}
+
+.combat-achievements .step-description {
+    width: 70%;
+    border-left: none;
+}
+
 .friends-list-title {
     font-size: 4.5vh;
     padding-left: 10px;
@@ -4970,7 +5017,7 @@ input#searchMonsters {
 
 .Diaries-body > .row > div {
     display: inline-block;
-    width: 7vw;
+    width: 8vw;
     border-radius: 5px;
     border: solid 1px;
     margin: 10px 5px 10px 5px;

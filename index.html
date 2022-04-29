@@ -8,7 +8,7 @@
 
     gtag('config', 'G-8P0V9GSFJ2');
   </script>
-  <link rel="stylesheet" href="./index.css?v=4.15.1" />
+  <link rel="stylesheet" href="./index.css?v=4.16.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -40,12 +40,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=4.15.1' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=4.16.0' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'>Now with Quests & Diaries!</div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=4.15.1"></script>
+  <script src="./index.js?v=4.16.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext('backlog')">Backlog</li>
     <li onclick="switchActiveContext('backlog note')">Backlog w/ Note</li>
@@ -180,7 +180,7 @@
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeSearch()"></i>
       <div id="searchchunks-title" class="searchchunks-title noscroll">Search within your chunks</div>
       <div id="searchchunks-subtitle" class="searchchunks-subtitle noscroll">Search for items, npcs, monsters, objects, and shops to see where you have access to each within your unlocked chunks. <span
-        class='help help2'>~<span class="tooltiptext">~food, ~boost, ~tool, ~herblore, ~agility, ~construction, ~cooking, ~crafting, ~farming, ~firemaking, ~fishing, ~fletching, ~hunter, ~mining, ~prayer, ~runecraft, ~slayer, ~smithing, ~thieving, ~woodcutting</span></span></div>
+        class='help help2'>~<span class="tooltiptext">~food, ~boost, ~tool, ~herblore, ~agility, ~construction, ~cooking, ~crafting, ~farming, ~firemaking, ~fishing, ~fletching, ~hunter, ~mining, ~  , ~runecraft, ~slayer, ~smithing, ~thieving, ~woodcutting</span></span></div>
       <div id="searchchunks-searchcontainer" class="searchchunks-searchcontainer noscroll">
         <input type="text" placeholder="Search name..." id="searchChunks" class="noscrollhard"
           oninput="searchWithinChunks()" autocomplete="off" />
@@ -348,30 +348,30 @@
   <div id="myModal24" class="modal">
     <div class="modal-content noscroll">
       <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">04/11/2022 (4.15.0)</div>
+      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">04/27/2022 (4.16.0)</div>
       <div id="patch-notes-data" class="patch-notes-data noscroll">
         <h2 class='noscroll'>Major Changes & New Features</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Added a new tab in the Activity Info window for Shooting Stars! Check how many locations you have access to mine them, split per region.</li>
-          <li class='noscroll'>Added a new rule for allowing spells to count as chunk tasks. Most accounts will want to keep this rule *on*, and as such, it is ON by default for everyone.</li>
-          <li class='noscroll'>Added a new rule for buying all items from shops within your chunks, for those of you out there that are extra-completionist with your chunks!</li>
-          <li class='noscroll'>Added a new rule to require Quest skill reqs must be gotten when unlocking a quest starting point, regardless of ability to start said quest (for Xtreme+ type accounts mostly).</li>
+          <li class='noscroll'>Added Combat Achievements! They can be turned on in Chunk Rules (they're off by default), under the Diary section near the top, and behave similarly to how any other Diary task would.</li>
+          <li class='noscroll'>Added stab/slash/crush options for melee BiS tasks. Replaces melee BiS tasks with specific tasks for each melee style instead. If you have flinch BiS or defensive BiS selected as well, they will also be replaced with stab/slash/crush variants.</li>
+          <li class='noscroll'>Added the new quest Beneath Cursed Sands, along with the quest rewards and newly accessible chunks in the southern desert that came with it.</li>
         </ul>
         <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Fixed an issue where the Falador hard diary task for getting a Saradomin crest didn't consider your Construction level properly.</li>
-          <li class='noscroll'>Fixed an issue when doing a Backlog Source on the LMS shop (thanks JLo).</li>
-          <li class='noscroll'>Fixed a man inside the Fishing Guild not being locked behind 68 Fishing (thanks Frozen).</li>
-          <li class='noscroll'>Fixed F2P-only drops for Farmers appearing for Farmers that were in members-only areas.</li>
-          <li class='noscroll'>Fixed a bug where Active Diary Tasks showed multiple times while loading new Chunk Tasks.</li>
-          <li class='noscroll'>Fixed an issue where skill chunk-stickers weren't showing in Firefox (thanks Land Ender).</li>
-          <li class='noscroll'>Fixed an issue with Agility shortcuts not counting as a training method in particular situations (thanks MCFS).</li>
-          <li class='noscroll'>Fixed an issue where LMS tasks were required before being able to play competetive LMS (thanks Ynybody1).</li>
-          <li class='noscroll'>Fixed some minor issues with UI scaling when at half-screen (thanks MCFS).</li>
-          <li class='noscroll'>Fixed rock-shell/skeletal/spined boots & gloves being incorrectly locked behind completion of The Fremennik Trials quest (thanks buckinbroncos69).</li>
-          <li class='noscroll'>Fixed an issue where wielding broad ammo would appear as a Ranged task even when Slayer-locked.</li>
-          <li class='noscroll'>Fixed an issue where the Pick Chunk button would get stuck displayed as "Random Start?" sometimes.</li>
-          <li class='noscroll'>Fixed an issue with Safari and regex's (thanks Han Tyumi).</li>
+          <li class='noscroll'>Added a total prayer bonus display to the Prayer BiS page.</li>
+          <li class='noscroll'>Added a progress bar for loading tasks for large maps.</li>
+          <li class='noscroll'>Added loot from turning in an unsired.</li>
+          <li class='noscroll'>Fixed crystal shards being obtainable outside of Prifddinas.</li>
+          <li class='noscroll'>Fixed items with multiple levels of rarity (e.g. monster -> 1/10 drop of casket -> 1/64 drop of uncut sapphire) not being computed properly with the Rare Drop Chunk Rule.</li>
+          <li class='noscroll'>Fixed bosses that require items to initiate the fight not requiring those items (Bryo, Obor, Skotizo).</li>
+          <li class='noscroll'>Fixed Krystilia needing you to get a normal Slayer task before assigning you Wilderness tasks (thanks Frozen).</li>
+          <li class='noscroll'>Fixed the 'Show New Tasks' button from appearing when performing multiple actions before they all finish.</li>
+          <li class='noscroll'>Fixed a bug that caused tasks not to load on iPhones.</li>
+          <li class='noscroll'>Fixed a bug that broke the map on Safari (thanks Han Tyumi).</li>
+          <li class='noscroll'>Fixed tasks being recalculated when the 'none' option was selected for xp rewards.</li>
+          <li class='noscroll'>Fixed noted items being incorrectly considered as unnotable when no banker/unnoting npc is present within unlocked chunks (thanks Kostrello).</li>
+          <li class='noscroll'>Fixed a bug with importing from an old map.</li>
+          <li class='noscroll'>Fixed a missing shooting star location in Lumbridge Swamp (thanks Ynybody1).</li>
         </ul>
         <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack#0890')">whitecatblack#0890  <i class="fas fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
       </div>

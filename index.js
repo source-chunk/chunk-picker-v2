@@ -305,6 +305,7 @@ let rules = {
     "Show Best in Slot Defensive Tasks": false,
     "Show Best in Slot Flinching Tasks": false,
     "Show Best in Slot Weight Tasks": false,
+    "Show Best in Slot Melee Style Tasks": false,
     "Show Quest Tasks Complete": false,
     "Show Diary Tasks Complete": false,
     "Show Diary Tasks Any": false,
@@ -346,6 +347,7 @@ let rules = {
     "Tutor Ammo": false,
     "Secondary MTA": false,
     "Fossil Island Tasks": false,
+    "Combat Diary Tasks": false,
     "PVP-Only Spells": false,
     "Skilling Pets": false,
     "Money Unlockables": false,
@@ -384,6 +386,7 @@ let ruleNames = {
     "Show Best in Slot Defensive Tasks": "Show Best in Slot Tasks for Tank gear (highest defence-only against Melee/Ranged/Magic)",
     "Show Best in Slot Flinching Tasks": "Show Best in Slot Tasks for Flinching weapons (pure offensive stats and strength, no speed)",
     "Show Best in Slot Weight Tasks": "Show Best in Slot Tasks for weight-reducing gear (only pieces with negative weight)",
+    "Show Best in Slot Melee Style Tasks": "Show Best in Slot Tasks for stab/slash/crush instead of overall melee",
     "Show Quest Tasks Complete": "Show Quest Tasks only when the whole quest is completable",
     "Show Diary Tasks Complete": "Show Diary Tasks only when the whole diary tier (easy, medium, etc.) is completable",
     "Show Diary Tasks Any": "Show all diary tasks possible, regardless of tier <span class='rule-asterisk noscroll'>*</span>",
@@ -423,6 +426,7 @@ let ruleNames = {
     "Tutor Ammo": "Items from the Magic/Ranged Combat Tutors in Lumbridge count as a way to train those respective skills (Air/Mind runes and Training bow/arrows)",
     "Secondary MTA": "Allow MTA to be required with secondary sources of nature/law/cosmic runes",
     "Fossil Island Tasks": "Require the Fossil Island Mini-Task List be completed, similar to diary tasks",
+    "Combat Diary Tasks": "Require the Combat Achievements be completed",
     "PVP-Only Spells": "Require spells that can only be cast on PVP Worlds/in the Wilderness (Teleother/Teleblock)",
     "Skilling Pets": "Require skilling pets be obtained as soon as the relevant skill is trainable <span class='rule-asterisk noscroll'>†</span>",
     "Money Unlockables": "Require permanently unlockable options be unlocked (angelic gravestone, additional bank space, infinitely charged lyre, etc.) <span class='rule-asterisk noscroll'>†</span>",
@@ -577,8 +581,8 @@ let ruleStructure = {
     "Visible Tasks": {
         "Show Skill Tasks": true,
         "Show Quest Tasks": ["Show Quest Tasks Complete"],
-        "Show Diary Tasks": ["Show Diary Tasks Complete", "Show Diary Tasks Any", "Fossil Island Tasks"],
-        "Show Best in Slot Tasks": ["Show Best in Slot Prayer Tasks", "Show Best in Slot Defensive Tasks", "Show Best in Slot Flinching Tasks", "Show Best in Slot Weight Tasks"]
+        "Show Diary Tasks": ["Show Diary Tasks Complete", "Show Diary Tasks Any", "Fossil Island Tasks", "Combat Diary Tasks"],
+        "Show Best in Slot Tasks": ["Show Best in Slot Prayer Tasks", "Show Best in Slot Defensive Tasks", "Show Best in Slot Flinching Tasks", "Show Best in Slot Weight Tasks", "Show Best in Slot Melee Style Tasks"]
     },
     "Overall Skill": {
         "Starting Items": true,
@@ -947,6 +951,8 @@ let diaryTierAbr = {
     'Medium': 'MD',
     'Hard': 'HD',
     'Elite': 'EL',
+    'Master': 'MS',
+    'Grandmaster': 'GM',
     'Museum Camp': 'MC',
     'Northern Reaches': 'NR',
     'Southern Swamps': 'SS',
@@ -1026,7 +1032,7 @@ let questFilterType = 'all';
 let tempXpArr = null;
 let tempXpChoices = [];
 let tempSkillChoice = null;
-let currentVersion = '4.15.0';
+let currentVersion = '4.16.0';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -1093,6 +1099,14 @@ let colorBoxLight = "rgba(150, 150, 150, .4)";
 let readyToDrawImage = false;
 let readyToDrawIcons = stickerChoicesOsrs.length;
 let pageReady = false;
+
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function replaceAll(str, match, replacement) {
+    return str.replace(new RegExp(escapeRegExp(match), 'g'), ()=>replacement);
+}
 
 // Load osrs sticker images
 stickerChoicesOsrs.forEach(sticker => {
@@ -2321,37 +2335,50 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.15.1");
+const myWorker = new Worker("./worker.js?v=4.16.0");
 myWorker.onmessage = function(e) {
-    workerOut--;
-    workerOut < 0 && (workerOut = 0);
-    chunkInfo = e.data[3];
-    if (e.data[0] === 'future') {
-        futureChunkData = e.data[2];
-        let challengeStr = calcFutureChallenges2(e.data[1], e.data[2]);
-        $('.panel-challenges').html(challengeStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') || 'None');
-    } else if (e.data[0] === 'current') {
-        globalValids = e.data[1];
-        baseChunkData = e.data[2];
-        highestCurrent = e.data[4];
-        questPointTotal = e.data[6];
-        highestOverall = e.data[7];
-        dropRatesGlobal = e.data[8];
-        questProgress = e.data[9];
-        diaryProgress = e.data[10];
-        skillQuestXp = e.data[11];
-        if (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 100) {
-            calcCurrentChallenges2(e.data[5]);
-        } else {
-            tempChallengeArrSaved = e.data[5];
-            $('.panel-active.calculating > i').remove();
-            $('.panel-active.calculating').removeClass('calculating').append(`<div class='calculating'></div>`);
-            $('.panel-active > .calculating').html(`<div class='noscroll display-button' onclick='calcCurrentChallenges2()'>Show New Tasks</div>`);
+    if (e.data[0] === 'error') {
+        $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
+        $('.panel-active > .outer-loading-bar').css('color', 'yellow');
+        $('.loading-bar-text').css('color', 'yellow').text('Error');
+        throw e.data[1];
+    } else if (!Array.isArray(e.data)) {
+        if (!!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).length >= 100) {
+            $('.panel-active > .calculating > .inner-loading-bar').css('width', e.data);
         }
-        searchModalOpen && searchWithinChunks();
-        highestModalOpen && openHighest();
-        highest2ModalOpen && openHighest2();
-        checkSlayerLocked();
+    } else {
+        workerOut--;
+        workerOut < 0 && (workerOut = 0);
+        if (workerOut === 0) {
+            chunkInfo = e.data[3];
+            if (e.data[0] === 'future') {
+                futureChunkData = e.data[2];
+                let challengeStr = calcFutureChallenges2(e.data[1], e.data[2]);
+                $('.panel-challenges').html(challengeStr.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') || 'None');
+            } else if (e.data[0] === 'current') {
+                globalValids = e.data[1];
+                baseChunkData = e.data[2];
+                highestCurrent = e.data[4];
+                questPointTotal = e.data[6];
+                highestOverall = e.data[7];
+                dropRatesGlobal = e.data[8];
+                questProgress = e.data[9];
+                diaryProgress = e.data[10];
+                skillQuestXp = e.data[11];
+                if (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 100) {
+                    calcCurrentChallenges2(e.data[5]);
+                } else {
+                    tempChallengeArrSaved = e.data[5];
+                    $('.panel-active.calculating > i').remove();
+                    $('.panel-active.calculating').removeClass('calculating').append(`<div class='calculating'></div>`);
+                    $('.panel-active > .calculating').removeClass('outer-loading-bar').html(`<div class='noscroll display-button' onclick='calcCurrentChallenges2()'>Show New Tasks</div>`);
+                }
+                searchModalOpen && searchWithinChunks();
+                highestModalOpen && openHighest();
+                highest2ModalOpen && openHighest2();
+                checkSlayerLocked();
+            }
+        }
     }
 }
 
@@ -2763,27 +2790,35 @@ var importFromURL = function() {
             roll2On && $('.roll2').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
             unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
             recentOn && $('.menu7').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
-            chunkInfoOn && $('.menu8').css({ 'opacity': 1 }).show();
             chunkTasksOn && $('.menu9').css({ 'opacity': 1 }).show();
             isPicking = false;
             selectedChunks = 0;
             unlockedChunks = 0;
             selectedNum = 1;
 
+            let tempX;
+            let tempY;
             selected && selected.sort(function(a, b) { return b - a }).forEach(function(id) {
                 while (id.startsWith('0') && id.length > 1) {
                     id = id.substr(1);
                 }
+                tempX = parseInt(id) % rowSize;
+                tempY = Math.floor(parseInt(id) / rowSize);
+                id = convertToChunkNum(tempX, tempY);
                 tempChunks['selected'][id] = id;
-                tempSelectedChunks.push(id);
+                tempSelectedChunks.push(id.toString());
             });
 
             unlocked && unlocked.forEach(function(id) {
                 while (id.startsWith('0') && id.length > 1) {
                     id = id.substr(1);
                 }
+                tempX = parseInt(id) % rowSize;
+                tempY = Math.floor(parseInt(id) / rowSize);
+                id = convertToChunkNum(tempX, tempY);
                 tempChunks['unlocked'][id] = id;
             });
+
             for (let count = 1; count <= 5; count++) {
                 recent[count - 1] = null;
                 recentTime[count - 1] = null;
@@ -2931,11 +2966,15 @@ var openXpRewardModal = function(skill, line, xpArr, num) {
                 assignedXpRewards[skill] = {};
             }
             assignedXpRewards[skill][line] = {};
+            allNone = true;
             tempXpChoices.forEach(choice => {
                 if (!assignedXpRewards[skill][line][choice.skill]) {
                     assignedXpRewards[skill][line][choice.skill] = 0;
                 }
                 assignedXpRewards[skill][line][choice.skill] += choice.xp;
+                if (choice.skill !== 'None') {
+                    allNone = false;
+                }
             });
             tempXpArr = null;
             tempSkillChoice = null;
@@ -2951,8 +2990,10 @@ var openXpRewardModal = function(skill, line, xpArr, num) {
             $(challengeLine).addClass('hide-backlog');
             $($(challengeLine).find('input')[0]).prop('checked', true);
             changeChallengeColor();
-            !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-            calcCurrentChallengesCanvas();
+            if (!allNone) {
+                !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+                calcCurrentChallengesCanvas();
+            }
             setData();
             $('#myModal30').hide();
         } else {
@@ -3179,6 +3220,7 @@ var unlockEntry = function() {
                 }).catch((error) => {
                     $('.pin.entry').addClass('animated shake wrong').select();
                     $('#unlock-entry').prop('disabled', true).html('Unlock');
+                    console.error('Incorrect map PIN');
                 });
                 setTimeout(function() {
                     $('.pin.entry').removeClass('animated shake');
@@ -3228,6 +3270,7 @@ var unlockEntry = function() {
                         }).catch((error) => {
                             $('.pin.entry').addClass('animated shake wrong').select();
                             $('#unlock-entry').prop('disabled', true).html('Unlock');
+                            console.error('Incorrect map PIN');
                         });
                     }, 1000);
                     setTimeout(function() {
@@ -3352,6 +3395,7 @@ var accessMap = function() {
                             $('.pin-err').css('visibility', 'visible');
                             $('.pin.old').addClass('wrong').select();
                             $('#access').text('Access my map');
+                            console.error('Incorrect map PIN');
                         });
                         setTimeout(function() {
                             $('.pin.entry').removeClass('animated shake');
@@ -3476,6 +3520,7 @@ var changePin = function() {
             $('.pin-err').css('visibility', 'visible');
             $('.pin.old2.first').addClass('wrong').select();
             $('#change-pin').text('Change PIN');
+            console.error('Incorrect map PIN');
             return;
         });
     });
@@ -4368,8 +4413,13 @@ var printTaskLevels = function() {
 // Sets given panel to a loading screen
 var setCalculating = function(panelClass, useOld) {
     if (useOld) {
-        $(panelClass).css({ 'min-height': $(panelClass).height() - 5 + 'px'}).html('<div class="noscroll calculating"><i class="noscroll fas fa-spinner fa-spin"></i></div>');
-        $(panelClass + ' > i').css('line-height', $(panelClass).height() + 'px');
+        if (!!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).length >= 100) {
+            $(panelClass).css({ 'min-height': $(panelClass).height() - 5 + 'px'}).html(`<div class="noscroll calculating outer-loading-bar"><span class='loading-bar-text'>Loading Tasks</span><span class='inner-loading-bar'></span></div>`);
+            $(panelClass + ' > i').css('line-height', $(panelClass).height() + 'px');
+        } else {
+            $(panelClass).css({ 'min-height': $(panelClass).height() - 5 + 'px'}).html('<div class="noscroll calculating"><i class="noscroll fas fa-spinner fa-spin"></i></div>');
+            $(panelClass + ' > i').css('line-height', $(panelClass).height() + 'px');
+        }
     } else if ($(panelClass).height() > 0) {
         $(panelClass).css({ 'min-height': $(panelClass).height() - 5 + 'px', 'font-size': 'max(min(10.4vw, 18px), ' + $(panelClass).height() / 5 + 'px)' }).addClass('calculating').html('<i class="fas fa-spinner fa-spin"></i>');
         $(panelClass + ' > i').css('line-height', $(panelClass).height() + 'px');
@@ -4461,7 +4511,7 @@ var shuffle = function(array) {
 // Opens the quest steps modal
 var openQuestSteps = function(skill, challenge) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
-        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('/', '%2G').replaceAll('%2Q', '!').replaceAll('%2H', "'");
+        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('%2G', '/').replaceAll('%2Q', '!').replaceAll('%2H', "'");
         let tier = null;
         if (challenge.includes('%2XX')) {
             tier = challenge.split('|')[1].split('%2XX')[1];
@@ -4474,7 +4524,14 @@ var openQuestSteps = function(skill, challenge) {
         $('.quest-steps-data').append(`<div class='noscroll step step-header'><span class='noscroll step-table-header'>Step</span><span class='noscroll description-table-header'>Description</span></div>`);
         if (challenge.split('~').length > 2 && challenge.split('~')[2] === '') {
             if (skill === 'Diary') {
+                let currentTier = null;
                 Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
+                    if (currentTier === null) {
+                        currentTier = line.split('~')[1].split('|').join('').split('%2F')[1];
+                    } else if (currentTier !== line.split('~')[1].split('|').join('').split('%2F')[1]) {
+                        $('.quest-steps-data').append(`<hr />`);
+                        currentTier = line.split('~')[1].split('|').join('').split('%2F')[1];
+                    }
                     $('.quest-steps-data').append(`<div class='noscroll step${diaryProgress.hasOwnProperty(challenge.split('|')[1]) && diaryProgress[challenge.split('|')[1]]['allTasks'].includes(line) ? ' highlighted' : ''}${line.split('|')[1].split('%2F')[1] === tier ? ' diary-start' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
                 });
             } else {
@@ -4489,9 +4546,21 @@ var openQuestSteps = function(skill, challenge) {
                 }
             }
         } else {
+            let currentTier = null;
             Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
-                $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'") ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                if (currentTier === null) {
+                    currentTier = line.split('~')[1].split('|').join('').split('%2F')[1];
+                } else if (currentTier !== line.split('~')[1].split('|').join('').split('%2F')[1]) {
+                    $('.quest-steps-data').append(`<hr />`);
+                    currentTier = line.split('~')[1].split('|').join('').split('%2F')[1];
+                }
+                $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'") ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary' ? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
             });
+        }
+        if (quest.replaceAll('/', '%2G') === 'Combat Achievements') {
+            $('.quest-steps-data').addClass('combat-achievements');
+        } else {
+            $('.quest-steps-data').removeClass('combat-achievements');
         }
         $('#myModal25').show();
         if (tier !== null) {
@@ -4937,23 +5006,39 @@ var openHighest = function() {
         if (rules['Show Best in Slot Weight Tasks']) {
             combatStyles.push('Weight Reducing');
         }
+        if (rules['Show Best in Slot Melee Style Tasks']) {
+            combatStyles.splice(combatStyles.indexOf('Melee'), 1, 'Stab', 'Slash', 'Crush');
+            if (rules['Show Best in Slot Defensive Tasks']) {
+                combatStyles.splice(combatStyles.indexOf('Melee Tank'), 1, 'Stab Tank', 'Slash Tank', 'Crush Tank');
+            }
+            if (rules['Show Best in Slot Flinching Tasks']) {
+                combatStyles.splice(combatStyles.indexOf('Flinch'), 1, 'Stab Flinch', 'Slash Flinch', 'Crush Flinch');
+            }
+        }
         let slots = ['Head', 'Neck', 'Cape', 'Body', 'Legs', 'Weapon', 'Shield', 'Ammo', 'Hands', 'Feet', 'Ring'];
         $('.highest-title').empty();
         $('.highest-data').empty();
         combatStyles.forEach(combatStyle => {
             $('.highest-title').append(`<div class='noscroll style-button ${combatStyle.replaceAll(' ', '_')}-button' onclick='switchHighestTab("${combatStyle.replaceAll(' ', '_')}")' title='${combatStyle}'><span class='noscroll'><img class='noscroll slot-icon' src='./resources/${combatStyle.replaceAll(' ', '_')}_combat.png' /></span></div>`);
             $('.highest-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle} ${(testMode || !(viewOnly || inEntry || locked)) && combatStyle !== 'Skills' && combatStyle !== 'Slayer' ? `<div class='noscroll'><span class='noscroll addEquipment' onclick='addEquipment()'>Add additional equipment</span></div>` : ''}</div></div>`);
+            let prayerBonus = 0;
             slots.forEach(slot => {
                 if (highestOverall.hasOwnProperty(combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()) && highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()] !== 'N/A') {
                     $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'><a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]}</a></span></div>`);
+                    !!chunkInfo['equipment'][highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]] && (prayerBonus += chunkInfo['equipment'][highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]]['prayer']);
                 } else if (highestOverall.hasOwnProperty(combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()) && highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()] === 'N/A') {
                     $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'>${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]}</span></div>`);
-                } else if (slot === 'Weapon' || slot === 'Shield' || combatStyle !== 'Flinch') {
+                    !!chunkInfo['equipment'][highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]] && (prayerBonus += chunkInfo['equipment'][highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]]['prayer']);
+                } else if (slot === 'Weapon' || slot === 'Shield' || (combatStyle !== 'Flinch' && combatStyle !== 'Stab Flinch' && combatStyle !== 'Slash Flinch' && combatStyle !== 'Crush Flinch')) {
                     $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'>None</span></div>`);
+                    !!chunkInfo['equipment'][highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]] && (prayerBonus += chunkInfo['equipment'][highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]]['prayer']);
                 }
             });
+            if (combatStyle === 'Prayer') {
+                $('.Prayer-body .highest-subtitle').append(`<div class="prayer-bonus"><img class='noscroll slot-icon' src='./resources/Prayer_combat.png' /> +${prayerBonus}</div>`);
+            }
         });
-        if (highestTab === undefined) {
+        if (highestTab === undefined || !combatStyles.includes(highestTab)) {
             highestTab = combatStyles[0];
         }
         $('.style-body').hide();
@@ -5018,7 +5103,13 @@ var openHighest2 = function() {
                         chunkInfo['diaries'][diary].split(', ').forEach(tier => {
                             $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll fossil${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${diary.replaceAll(/\-/g, '=').replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}%2XX${tier}|~')">${tier}</span></div>`);
                         });
-                    } else if (diary !== 'Fossil Island Diary') {
+                    } else if (diary === 'Combat Achievements' && rules['Combat Diary Tasks']) {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='noscroll' />`);
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row ${diary.replaceAll(' ', '_')}'><span class='noscroll outer-diary-text'>${diary.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</div>`);
+                        chunkInfo['diaries'][diary].split(', ').forEach(tier => {
+                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll combat${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${diary.replaceAll(/\-/g, '=').replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}%2XX${tier}|~')">${tier}</span></div>`);
+                        });
+                    } else if (diary !== 'Fossil Island Diary' && diary !== 'Combat Achievements') {
                         $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row ${diary.replaceAll(' ', '_')}'><span class='noscroll outer-diary-text'>${diary.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\~/g, '').replaceAll(/\|/g, '')}</div>`);
                         chunkInfo['diaries'][diary].split(', ').forEach(tier => {
                             $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${diary.replaceAll(/\-/g, '=').replaceAll(/\%/g, '-').replaceAll(/\./g, '-2E').replaceAll(/\,/g, '-2I').replaceAll(/\#/g, '-2F').replaceAll(/\//g, '-2G').replaceAll(/\+/g, '-2J').replaceAll(/\!/g, '-2Q').replaceAll(/\'/g, '-2H')}%2XX${tier}|~')">${tier}</span>${(testMode || !(viewOnly || inEntry || locked)) && (diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier) && diaryProgress[diary][tier]['done']) ? `<span class='noscroll xp-button${(!assignedXpRewards.hasOwnProperty('Diary') || !assignedXpRewards['Diary'].hasOwnProperty(`~|${diary}%2F${tier}|~ Complete the ${tier} Diary`) || Object.keys(assignedXpRewards['Diary'][`~|${diary}%2F${tier}|~ Complete the ${tier} Diary`]).includes('None')) ? ' unset' : ''}' onclick="openXpRewardModalWithFormat('Diary', '~|${diary}%2F${tier}|~ Complete the ${tier} Diary')">xp</span>` : ''}</div>`);
