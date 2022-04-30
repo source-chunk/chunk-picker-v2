@@ -108,6 +108,7 @@ let xpTable = {
     "99": 13034431
 };
 let diaryTierOrder = ['Easy', 'Medium', 'Hard', 'Elite', 'Museum Camp', 'Northern Reaches', 'Southern Swamps', 'Mountainous East'];
+let diaryHierarchy = ['Grandmaster', 'Master', 'Elite', 'Hard', 'Medium', 'Easy'];
 
 let type;
 let chunks;
@@ -156,6 +157,7 @@ let slayerLocked;
 let passiveSkill;
 let f2pSkills;
 let assignedXpRewards;
+let isDiary2Tier = false;
 
 let clueTasksPossible = {};
 
@@ -204,6 +206,20 @@ onmessage = function(e) {
         passiveSkill = eGlobal.data[39];
         f2pSkills = eGlobal.data[40];
         assignedXpRewards = eGlobal.data[41];
+        isDiary2Tier = eGlobal.data[42];
+
+        if (isDiary2Tier) {
+            !!chunkInfo['challenges']['Diary'] && Object.keys(chunkInfo['challenges']['Diary']).filter(task => { return !chunkInfo['challenges']['Diary'][task].hasOwnProperty('Reward') && diaryHierarchy.includes(task.split('|')[1].split('%2F')[1]) && chunkInfo['challenges']['Diary'][task].hasOwnProperty('Tasks') }).forEach(task => {
+                Object.keys(chunkInfo['challenges']['Diary'][task]['Tasks']).filter(subTask => { return chunkInfo['challenges']['Diary'][task]['Tasks'][subTask] === 'Diary' && diaryHierarchy.includes(subTask.split('|')[1].split('%2F')[1]) && subTask.includes('Complete the') }).forEach(subTask => {
+                    let newTier = diaryHierarchy[diaryHierarchy.indexOf(subTask.split('|')[1].split('%2F')[1]) + 1];
+                    !!newTier && (chunkInfo['challenges']['Diary'][task]['Tasks'][subTask.split(subTask.split('|')[1].split('%2F')[1]).join(newTier)] = 'Diary');
+                    delete chunkInfo['challenges']['Diary'][task]['Tasks'][subTask];
+                    if (Object.keys(chunkInfo['challenges']['Diary'][task]['Tasks']).length === 0) {
+                        delete chunkInfo['challenges']['Diary'][task]['Tasks'];
+                    }
+                });
+            });
+        }
 
         if (rareDropNum === "1/0") {
             rareDropNum = "1/999999999999999";
