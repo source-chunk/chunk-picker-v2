@@ -2336,7 +2336,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.16.3");
+const myWorker = new Worker("./worker.js?v=4.16.4");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -3181,9 +3181,7 @@ var setStartingChunk = function() {
 // Confirms if the pin entered is correct for the current map id
 var checkPin = function() {
     savedPin = $('.lock-pin').val();
-    myRef.once('value', function(snap) {
-        changeLocked();
-    });
+    changeLocked();
 }
 
 // Confirms if the pin is entered correctly in the entry menu, and acts accordingly
@@ -3229,8 +3227,8 @@ var unlockEntry = function() {
                 }, 500);
             }, 1000);
         } else {
-            myRef.once('value', function(snap) {
-                if ((snap.val() && snap.val()['pin'] === savedPin)) {
+            myRef.child('pin').once('value', function(snap) {
+                if ((snap.val() && snap.val() === savedPin)) {
                     setTimeout(function() {
                         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                             signedIn = true;
@@ -3356,7 +3354,7 @@ var accessMap = function() {
     $('#access').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
     mid = $('.mid').removeClass('wrong').val().toLowerCase();
     savedPin = $('.pin.old').removeClass('wrong').val();
-    databaseRef.child('maps/' + mid).once('value', function(snap) {
+    databaseRef.child('mapids/' + mid).once('value', function(snap) {
         if (!snap.val()) {
             setTimeout(function() {
                 $('.mid-err').css('visibility', 'visible');
@@ -3405,8 +3403,8 @@ var accessMap = function() {
                         }, 500);
                     }, 1000);
                 } else {
-                    myRef.once('value', function(snap) {
-                        if ((snap.val() && snap.val()['pin'] === savedPin)) {
+                    myRef.child('pin').once('value', function(snap) {
+                        if ((snap.val() && snap.val() === savedPin)) {
                             setTimeout(function() {
                                 firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                                     signedIn = true;
@@ -3517,7 +3515,7 @@ var changePin = function() {
                     $('.background-img').hide();
                     $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
                     setupMap();
-                }).catch((error) => { console.log(error) });
+                }).catch((error) => { console.error(error) });
             }
         }).catch((error) => {
             $('.pin-err').css('visibility', 'visible');
@@ -6578,7 +6576,7 @@ var checkMID = function(mid) {
             viewOnly = true;
             proceed();
         }
-        databaseRef.child('maps/' + mid).once('value', function(snap) {
+        databaseRef.child('mapids/' + mid).once('value', function(snap) {
             if (snap.val() && (!onTestServer || patreonMaps[mid])) {
                 myRef = firebase.database().ref('maps/' + mid);
                 atHome = false;
@@ -6871,39 +6869,14 @@ var setData = function() {
                     return;
                 });
             } else {
-                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'randomStartAlways': settings['randomStartAlways'], 'defaultStickerColor': settings['defaultStickerColor'], 'walkableRollable': settings['walkableRollable'], 'cinematicRoll': settings['cinematicRoll'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'] });
                 Object.keys(rules).forEach(rule => {
                     if (rules[rule] === undefined) {
                         rules[rule] = false;
                     }
                 });
-                myRef.update({ rules });
-                if (!helpMenuOpen && !helpMenuOpenSoon) {
-                    myRef.child('settings').update({ 'help': false });
-                }
-                if (!patchNotesOpen && !patchNotesOpenSoon) {
-                    myRef.child('settings').update({ 'patchNotes': currentVersion });
-                }
-                if (!mapIntroOpen && !mapIntroOpenSoon) {
-                    myRef.child('settings').update({ 'mapIntro': true });
-                }
-                myRef.update({ recent });
-                myRef.update({ recentTime });
-                myRef.update({ randomLoot });
-                myRef.update({ friends });
-                myRef.child('chunkinfo').update({ checkedChallenges });
-                myRef.child('chunkinfo').update({ completedChallenges });
-                myRef.child('chunkinfo').update({ backlog });
-                myRef.child('chunkinfo').update({ possibleAreas });
-                myRef.child('chunkinfo').update({ manualTasks });
-                myRef.child('chunkinfo').update({ manualEquipment });
-                myRef.child('chunkinfo').update({ backloggedSources });
-                myRef.child('chunkinfo').update({ altChallenges });
-                myRef.child('chunkinfo').update({ manualMonsters });
-                myRef.child('chunkinfo').update({ slayerLocked });
-                myRef.child('chunkinfo').update({ passiveSkill });
-                myRef.child('chunkinfo').update({ oldSavedChallengeArr });
-                myRef.child('chunkinfo').update({ assignedXpRewards });
+                myRef.update({ rules, recent, recentTime, randomLoot, friends });
+                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
+                myRef.child('chunkinfo').update({ checkedChallenges, completedChallenges, backlog, possibleAreas, manualTasks, manualEquipment, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, oldSavedChallengeArr, assignedXpRewards });
 
                 var tempJson = {};
                 !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { return tempChunks['unlocked'][chunkId] !== 'undefined' && tempChunks['unlocked'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
@@ -6951,39 +6924,14 @@ var setData = function() {
         });
     } else if (signedIn && !firebase.auth().currentUser) {
         firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
-            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'] });
             Object.keys(rules).forEach(rule => {
                 if (rules[rule] === undefined) {
                     rules[rule] = false;
                 }
             });
-            myRef.update({ rules });
-            if (!helpMenuOpen && !helpMenuOpenSoon) {
-                myRef.child('settings').update({ 'help': false });
-            }
-            if (!patchNotesOpen && !patchNotesOpenSoon) {
-                myRef.child('settings').update({ 'patchNotes': currentVersion });
-            }
-            if (!mapIntroOpen && !mapIntroOpenSoon) {
-                myRef.child('settings').update({ 'mapIntro': true });
-            }
-            myRef.update({ recent });
-            myRef.update({ recentTime });
-            myRef.update({ randomLoot });
-            myRef.update({ friends });
-            myRef.child('chunkinfo').update({ checkedChallenges });
-            myRef.child('chunkinfo').update({ completedChallenges });
-            myRef.child('chunkinfo').update({ backlog });
-            myRef.child('chunkinfo').update({ possibleAreas });
-            myRef.child('chunkinfo').update({ manualTasks });
-            myRef.child('chunkinfo').update({ manualEquipment });
-            myRef.child('chunkinfo').update({ backloggedSources });
-            myRef.child('chunkinfo').update({ altChallenges });
-            myRef.child('chunkinfo').update({ manualMonsters });
-            myRef.child('chunkinfo').update({ slayerLocked });
-            myRef.child('chunkinfo').update({ passiveSkill });
-            myRef.child('chunkinfo').update({ oldSavedChallengeArr });
-            myRef.child('chunkinfo').update({ assignedXpRewards });
+            myRef.update({ rules, recent, recentTime, randomLoot, friends });
+            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'help': !helpMenuOpen && !helpMenuOpenSoon, 'patchNotes': !patchNotesOpen && !patchNotesOpenSoon, 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
+            myRef.child('chunkinfo').update({ checkedChallenges, completedChallenges, backlog, possibleAreas, manualTasks, manualEquipment, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, oldSavedChallengeArr, assignedXpRewards });
 
             var tempJson = {};
             !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).filter(chunkId => { return tempChunks['unlocked'][chunkId] !== 'undefined' && tempChunks['unlocked'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach(chunkId => {
@@ -7027,7 +6975,7 @@ var setData = function() {
                 name: userName.toLowerCase(),
                 score: walkableUnlockedChunks,
             });
-        }).catch(function(error) { console.log(error) });
+        }).catch(function(error) { console.error(error) });
     }
 }
 
@@ -7063,11 +7011,11 @@ var rollMID = function() {
                     databaseRef.child('mapids/' + charSet).set(true);
                 });
             });
-        }).catch((error) => { console.log(error) });
+        }).catch((error) => { console.error(error) });
 
         $('#newmid').text(charSet.toUpperCase());
         $('.link').prop('href', 'https://source-chunk.github.io/chunk-picker-v2/?' + charSet).text('https://source-chunk.github.io/chunk-picker-v2/?' + charSet);
-    }).catch((error) => { console.log(error) });
+    }).catch((error) => { console.error(error) });
 }
 
 // Checks if both the map id and pin are correct, and hides their respective error messages/allows button clicks if so
@@ -7137,8 +7085,8 @@ var changeLocked = function() {
                 }, 500);
             }, 1000);
         } else {
-            myRef.once('value', function(snap) {
-                if ((snap.val() && snap.val()['pin'] === savedPin)) {
+            myRef.child('pin').once('value', function(snap) {
+                if ((snap.val() && snap.val() === savedPin)) {
                     setTimeout(function() {
                         firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                             signedIn = true;
