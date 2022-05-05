@@ -696,6 +696,7 @@ let settings = {
     "taskSidebar": false,
     "ids": false,
     "startingChunk": '',
+    "numTasksPercent": false,
 };                                                                              // Current state of all settings
 
 let settingNames = {
@@ -717,6 +718,7 @@ let settingNames = {
     "taskSidebar": "Expand the task panel into a large sidebar, to show more tasks at once",
     "ids": "Show an overlay of Chunk ID's for each chunk",
     "startingChunk": "Starting Chunk",
+    "numTasksPercent": "Show Active Task number as a percentage instead of a fraction",
 };                                                                              // Descriptions of the settings
 
 let settingStructure = {
@@ -740,6 +742,7 @@ let settingStructure = {
         "cinematicRoll": true,
         "highvis": true,
         "darkmode": true,
+        "numTasksPercent": true,
         "completedTaskStrikethrough": true,
         "completedTaskColor": true,
         "defaultStickerColor": true
@@ -1669,6 +1672,9 @@ var handleMouseUp = function(e) {
                 tempChunks['unlocked'][chunkId] = chunkId;
                 !!tempChunks['potential'] && Object.keys(tempChunks['potential']).forEach(otherChunkId => {
                     delete tempChunks['potential'][otherChunkId];
+                    if (!tempChunks['selected']) {
+                        tempChunks['selected'] = {};
+                    }
                     tempChunks['selected'][otherChunkId] = otherChunkId;
                     tempSelectedChunks.push(otherChunkId.toString());
                     delete recentChunks[otherChunkId.toString()];
@@ -1736,18 +1742,31 @@ var selectNeighborsCanvas = function(chunkId) {
 }
 
 // Opens the roll chunk modal
-var openRollChunkCanvas = function(el, rand, sNum) {
+var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2) {
     rollChunkModalOpen = true;
+    let rolling2 = typeof rand2 !== 'undefined' && typeof sNum2 !== 'undefined';
     $('.roll-chunk-title').text('Rolling your next chunk...');
     $('.roll-chunk-subtitle').text('');
     $('.roll-chunk-outer').empty().css('top', '0');
     $('#submit-roll-chunk-button').hide();
+    if (rolling2) {
+        let tempWindowOuter = $('.roll-chunk-window-outer').clone();
+        $(tempWindowOuter).addClass('roll-chunk-window-outer2').removeClass('roll-chunk-window-outer').find('.roll-chunk-outer').addClass('roll-chunk-outer2').removeClass('roll-chunk-outer');
+        $('.roll-chunk-data').append(tempWindowOuter);
+        $('.roll-chunk-window-outer').css('left', 'calc(30% - 8vh)');
+        $('.chunk-window-child1, .chunk-window-child2, .chunk-window-child3').hide();
+    } else {
+        $('.roll-chunk-window-outer2').remove();
+        $('.roll-chunk-window-outer').css('left', 'calc(50% - 8vh)');
+        $('.chunk-window-child1, .chunk-window-child2, .chunk-window-child3').show();
+    }
     pickedNum = rand;
     let numSlots = 500;
     let elArr = [...el];
     let topNum;
     let xCoord;
     let yCoord;
+    let tempVar = false;
     chosenFromCinematic = el[rand];
     elArr = shuffle(elArr);
     xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 17;
@@ -1775,12 +1794,60 @@ var openRollChunkCanvas = function(el, rand, sNum) {
             duration: randomDuration,
             easing: "easeOutCubic",
             complete: function() {
-                $('.roll-chunk-title').text((chunkInfo['chunks'].hasOwnProperty(chosenFromCinematic) && chunkInfo['chunks'][chosenFromCinematic].hasOwnProperty('Nickname') ? chunkInfo['chunks'][chosenFromCinematic]['Nickname'] : 'Unknown') + '(' + chosenFromCinematic + ')');
-                !!sNum && !isNaN(sNum) && $('.roll-chunk-subtitle').text('[Rolled number: ' + sNum + ']');
-                $('#submit-roll-chunk-button').show();
+                !rolling2 && $('.roll-chunk-title').text((chunkInfo['chunks'].hasOwnProperty(chosenFromCinematic) && chunkInfo['chunks'][chosenFromCinematic].hasOwnProperty('Nickname') ? chunkInfo['chunks'][chosenFromCinematic]['Nickname'] : 'Unknown') + '(' + chosenFromCinematic + ')');
+                !rolling2 && !!sNum && !isNaN(sNum) && $('.roll-chunk-subtitle').text('[Rolled number: ' + sNum + ']');
+                !rolling2 && $('#submit-roll-chunk-button').show();
+                if (rolling2 && tempVar) {
+                    $('.roll-chunk-title').text(el[rand] + ' and ' + el[rand2]);
+                    !!sNum && !isNaN(sNum) && !!sNum2 && !isNaN(sNum2) && $('.roll-chunk-subtitle').text('[Rolled numbers: ' + sNum + ' & ' + sNum2 + ']');
+                    $('#submit-roll-chunk-button').show();
+                } else if (rolling2) {
+                    tempVar = true;
+                }
             }
         });
     }, 1000);
+
+    if (rolling2) {
+        chosenFromCinematic = el[rand2];
+        elArr = shuffle(elArr);
+        xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 17;
+        yCoord = 64 - (parseInt(elArr[elArr.length - 1]) % 256);
+        $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+        for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
+            for (let j = 0; j < elArr.length; j++) {
+                let num = elArr[j];
+                xCoord = Math.floor(parseInt(elArr[j]) / 256) - 17;
+                yCoord = 64 - (parseInt(elArr[j]) % 256);
+                $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+                if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
+                    topNum = (-15.998 * ((i * elArr.length) + j)) + 'vh';
+                }
+            };
+        };
+        xCoord = Math.floor(parseInt(elArr[0]) / 256) - 17;
+        yCoord = 64 - (parseInt(elArr[0]) % 256);
+        let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
+        $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
+        setTimeout(function() {
+            $('.roll-chunk-outer2').animate({
+                top: topNum
+            }, {
+                duration: randomDuration,
+                easing: "easeOutCubic",
+                complete: function() {
+                    if (tempVar) {
+                        $('.roll-chunk-title').text(el[rand] + ' and ' + el[rand2]);
+                        !!sNum && !isNaN(sNum) && !!sNum2 && !isNaN(sNum2) && $('.roll-chunk-subtitle').text('[Rolled numbers: ' + sNum + ' & ' + sNum2 + ']');
+                        $('#submit-roll-chunk-button').show();
+                    } else {
+                        tempVar = true;
+                    }
+                }
+            });
+        }, 1000);
+    }
+
     setData();
     $('#myModal23').show();
 }
@@ -1795,6 +1862,9 @@ var takeMeToChunkCanvas = function() {
     $('.roll-chunk-title').text('Rolling your next chunk...');
     $('.roll-chunk-subtitle').text('');
     $('.roll-chunk-outer').empty().css('top', '0');
+    $('.roll-chunk-outer2').empty().css('top', '0');
+    $('.roll-chunk-window-outer2').remove();
+    $('.roll-chunk-window-outer').css('left', '');
     $('#submit-roll-chunk-button').hide();
     $('#myModal23').hide();
 }
@@ -2029,6 +2099,10 @@ var roll2Canvas = function() {
         mid === roll5Mid && $('.roll2').text('Unlock all');
     }
     let numToRoll = mid === roll5Mid ? 5 : 2;
+    let rands = [];
+    let sNums = [];
+    let savedEl = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
+    let savedTempSelectedChunks = JSON.parse(JSON.stringify(tempSelectedChunks));
     for (var i = 0; i < numToRoll; i++) {
         el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
         if (!el || el.length === 0) {
@@ -2042,6 +2116,8 @@ var roll2Canvas = function() {
                 });
                 i--;
             } else {
+                rands[i] = el[rand];
+                sNums[i] = savedTempSelectedChunks.indexOf(el[rand]) + 1;
                 delete tempChunks['selected'][el[rand]];
                 if (!tempChunks['potential']) {
                     tempChunks['potential'] = {};
@@ -2051,6 +2127,9 @@ var roll2Canvas = function() {
                 recentChunks[el[rand]] = el[rand];
             }
         }
+    }
+    if (settings['cinematicRoll'] && !onMobile && numToRoll === 2) {
+        openRollChunkCanvas(savedEl, savedEl.indexOf(rands[0]), sNums[0], savedEl.indexOf(rands[1]), sNums[1]);
     }
     setData();
 }
@@ -2078,7 +2157,11 @@ var unpickCanvas = function() {
     recentChunks[el[rand]] = el[rand];
     $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
     $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
-    scrollToChunkCanvas(el[rand]);
+    if (settings['cinematicRoll'] && !onMobile) {
+        openRollChunkCanvas(el, rand, null);
+    } else {
+        scrollToChunkCanvas(el[rand]);
+    }
     setData();
 }
 
@@ -2336,7 +2419,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.16.4");
+const myWorker = new Worker("./worker.js?v=4.16.5");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5654,6 +5737,7 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
         $('.panel-active span.checkbox__input > input').attr('disabled', true);
         $('.panel-active span.burger').addClass('hidden-burger');
         changeChallengeColor();
+        setTaskNum();
     } else {
         (challengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
         (challengeArr.length > 0 || workerOut === 0) && $('.panel-active > i').css('line-height', '');
@@ -5684,6 +5768,7 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
         setData();
         getChunkAreas();
         setAreas();
+        setTaskNum();
         $('.panel-backlog').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
         $('.panel-backlog > i').css('line-height', '');
         (testMode || !(viewOnly || inEntry || locked)) && !onMobile && $('.panel-backlog').append(`<div class='noscroll backlogSources-container'><span class='noscroll backlogSources' onclick='backlogSources()'><i class="fas fa-archive"></i>Backlog Sources</span></div>`);
@@ -5692,6 +5777,17 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
         $('.panel-completed > i').css('line-height', '');
         $('.panel-completed').append(...completedArr);
     }
+}
+
+// Sets the updated number of active task checked-off
+var setTaskNum = function() {
+    let numChecked = 0;
+    $('.panel-active input[type=checkbox]').each(function(index) {
+        $(this).is(':checked') && (numChecked++);
+    });
+    let taskColor = settings['completedTaskColor'] ? settings['completedTaskColor'] : 'rgb(7, 173, 7)';
+    $('#challengesactive .num-tasks').text(`(${!settings['numTasksPercent'] ? numChecked + '/' + $('.panel-active .challenge').length : (isNaN(Math.round((numChecked / $('.panel-active .challenge').length) * 100)) ? '100' : Math.round((numChecked / $('.panel-active .challenge').length) * 100)) + '%'})`);
+    (numChecked === $('.panel-active .challenge').length) ? $('#challengesactive .num-tasks').css('color', taskColor) : $('#challengesactive .num-tasks').css('color', 'var(--colorTextAlt)');
 }
 
 // Check if all rules are off
@@ -6167,6 +6263,7 @@ var changeChallengeColor = function() {
     $('.challenge:not(.hide-backlog) .checkbox').css({ 'color': 'var(--colorText)', 'text-decoration': 'none' });
     $('.challenge:not(.hide-backlog) a').css({ 'text-decoration': 'underline' });
     setData();
+    setTaskNum();
 }
 
 // Resets the active challenges color
@@ -6384,6 +6481,7 @@ var checkOffChallenge = function(skill, line) {
         $('.panel-active .challenge:not(:has(input:checked))').removeClass('hide-backlog');
         changeChallengeColor();
         setData();
+        setTaskNum();
     }
 }
 
@@ -6501,6 +6599,7 @@ var checkOffSettings = function(didRedo, startup) {
     } else {
         $('.pick').text('Pick Chunk');
     }
+    setTaskNum();
 }
 
 // Moves checked off challenges to completed
@@ -6875,7 +6974,7 @@ var setData = function() {
                     }
                 });
                 myRef.update({ rules, recent, recentTime, randomLoot, friends });
-                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
+                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
                 myRef.child('chunkinfo').update({ checkedChallenges, completedChallenges, backlog, possibleAreas, manualTasks, manualEquipment, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, oldSavedChallengeArr, assignedXpRewards });
 
                 var tempJson = {};
@@ -6930,7 +7029,7 @@ var setData = function() {
                 }
             });
             myRef.update({ rules, recent, recentTime, randomLoot, friends });
-            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'help': !helpMenuOpen && !helpMenuOpenSoon, 'patchNotes': !patchNotesOpen && !patchNotesOpenSoon, 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
+            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
             myRef.child('chunkinfo').update({ checkedChallenges, completedChallenges, backlog, possibleAreas, manualTasks, manualEquipment, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, oldSavedChallengeArr, assignedXpRewards });
 
             var tempJson = {};

@@ -1952,6 +1952,12 @@ button.menu2 {
     border-top: none !important;
 }
 
+#challengesactive .num-tasks {
+    color: var(--colorTextAlt);
+    font-size: min(1.55vw, 2.5vh, 20px);
+    margin-left: 10px;
+}
+
 .bold {
     font-weight: bolder;
 }
@@ -4242,6 +4248,13 @@ input#searchMonsters {
     z-index: 1;
 }
 
+.roll-chunk-outer2 {
+    position: absolute;
+    top: -.25vh;
+    left: calc(50% - 8vh);
+    z-index: 1;
+}
+
 .roll-chunk-inner {
     width: 16vh;
     height: 16vh;
@@ -4260,6 +4273,18 @@ input#searchMonsters {
 .roll-chunk-window-outer {
     position: absolute;
     left: calc(50% - 8vh);
+    border: solid 3px;
+    height: 48vh;
+    width: 16vh;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;
+}
+
+.roll-chunk-window-outer2 {
+    position: absolute;
+    left: calc(70% - 8vh);
     border: solid 3px;
     height: 48vh;
     width: 16vh;
