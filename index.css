@@ -1900,7 +1900,7 @@ button.menu2 {
     transition: 0.4s;
     text-align: left;
     padding-left: 25px;
-    max-height: 3vh;
+    margin-bottom: -3.5px;
 }
 
 .accordion:hover {
@@ -4790,7 +4790,7 @@ input#searchMonsters {
 }
 
 .menu9.sidebar .panel.visible {
-    max-height: calc(100vh - 8vh - 225px) !important;
+    max-height: calc(100vh - 8vh - 270px) !important;
     font-size: min(1.5vw, 14.5px);
     text-align: left;
     padding-left: 10px;
