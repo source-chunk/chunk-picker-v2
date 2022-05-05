@@ -2419,7 +2419,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.16.6");
+const myWorker = new Worker("./worker.js?v=4.16.7");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5935,41 +5935,41 @@ var showDetails = function(challenge, skill, type) {
     skills.push('Nonskill');
     detailsModalOpen = true;
     $('#details-data').empty();
-    $('#details-title').html(`<b class="noscroll">${challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b>`);
+    $('#details-title').html(`<b class="noscroll">${challenge.replaceAll(/\-2H/g, "'").replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b>`);
     if (!chunkInfo['challenges'].hasOwnProperty(skill)) {
         chunkInfo['challenges'][skill] = {};
     }
-    if (!chunkInfo['challenges'][skill].hasOwnProperty(challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F'))) {
+    if (!chunkInfo['challenges'][skill].hasOwnProperty(challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F'))) {
         if (skill === 'BiS') {
-            chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
-                'ItemsDetails': [challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
+            chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
+                'ItemsDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
                 'Label': skill
             }
         } else if (skill === 'Extra') {
-            if (challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').includes('Kill X')) {
-                chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
-                    'MonstersDetails': [challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
+            if (challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').includes('Kill X')) {
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
+                    'MonstersDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
                     'Label': skill
                 }
             } else if (challenge.match(/.*: ~\|.*\|~ \(.*\)/g)) {
-                chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
-                    'ItemsDetails': [challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
+                    'ItemsDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
                     'Label': skill
                 }
             }
         }
     }
-    chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Description']}</i></span><br />`);
+    chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Description']}</i></span><br />`);
     detailsKeys.forEach(key => {
         let type = key.split('Details')[0].toLowerCase();
         let written = false;
         $('#details-data').append(`<span class="details-subtitle noscroll"><u class="noscroll"><b class="noscroll">${type}</b></u></span><br />`);
-        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]]) {
-            chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]].forEach(typeEl => {
-                chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].push(typeEl);
+        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]]) {
+            chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]].forEach(typeEl => {
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].push(typeEl);
             });
         }
-        !!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
+        !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
             let formattedSource = '';
             if (key === 'ChunksDetails') {
                 if (possibleAreas[el]) {
@@ -6000,7 +6000,7 @@ var showDetails = function(challenge, skill, type) {
                     els.length > 0 && els.forEach(element => {
                         formattedSource = ': ';
                         !!baseChunkDataIn[type][element] && Object.keys(baseChunkDataIn[type][element]).forEach(source => {
-                            if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][element][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][element][source] !== 'string' || !processingSkill[baseChunkDataIn[type][element][source].split('-')[1]]))) {
+                            if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][element][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][element][source] !== 'string' || !processingSkill[baseChunkDataIn[type][element][source].split('-')[1]]))) {
                                 if (typeof baseChunkDataIn[type][element][source] === "boolean" || !skills.includes(baseChunkDataIn[type][element][source].split('-')[1])) {
                                     if (chunkInfo['chunks'].hasOwnProperty(source)) {
                                         let realName = source;
@@ -6043,7 +6043,7 @@ var showDetails = function(challenge, skill, type) {
                     });
                 } else {
                     !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).forEach(source => {
-                        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][el][source] !== 'string' || !processingSkill[baseChunkDataIn[type][el][source].split('-')[1]]))) {
+                        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][el][source] !== 'string' || !processingSkill[baseChunkDataIn[type][el][source].split('-')[1]]))) {
                             if (typeof baseChunkDataIn[type][el][source] === "boolean" || !skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
                                 if (chunkInfo['chunks'].hasOwnProperty(source)) {
                                     let realName = source;
@@ -6086,7 +6086,7 @@ var showDetails = function(challenge, skill, type) {
                 }
             }
         });
-        if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length === 0 || !written) {
+        if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length === 0 || !written) {
             $('#details-data').append('<span class="noscroll">None</span><br />');
         }
     });
@@ -6141,7 +6141,7 @@ var showNotes = function(challenge, skill, note) {
     if (note === true) {
         note = '';
     }
-    $('#notes-title').html(`<b class="noscroll">Add note to:</b><br />${challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}`);
+    $('#notes-title').html(`<b class="noscroll">Add note to:</b><br />${challenge.replaceAll(/\-2H/g, "'").replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}`);
     notesModalOpen = true;
     $('#myModal3').show();
     $('#notes-data > textarea').val(note).focus();

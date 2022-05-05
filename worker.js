@@ -317,53 +317,53 @@ var calcChallenges = function(chunks, baseChunkData) {
                 !!baseChunkData['monsters'][monster] && delete baseChunkData['monsters'][monster][chunk];
                 if (!!baseChunkData['monsters'][monster] && Object.keys(baseChunkData['monsters'][monster]).length === 0) {
                     delete baseChunkData['monsters'][monster];
-                }
-                let dropsObj = chunkInfo['drops'][monster];
-                if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
-                    dropsObj = chunkInfo['skillItems']['Slayer'][monster];
-                }
-                !!dropsObj && Object.keys(dropsObj).forEach(drop => {
-                    if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
-                        Object.keys(dropTables[drop]).forEach(item => {
-                            !!baseChunkData['items'][item] && delete baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
-                            if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
-                                delete baseChunkData['items'][item];
+                    let dropsObj = chunkInfo['drops'][monster];
+                    if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
+                        dropsObj = chunkInfo['skillItems']['Slayer'][monster];
+                    }
+                    !!dropsObj && Object.keys(dropsObj).forEach(drop => {
+                        if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
+                            Object.keys(dropTables[drop]).forEach(item => {
+                                !!baseChunkData['items'][item] && delete baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                                if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
+                                    delete baseChunkData['items'][item];
+                                }
+                                !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][item];
+                                if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
+                                    delete dropRatesGlobal[monster];
+                                }
+                                !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][item];
+                                if (!!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).length <= 0) {
+                                    delete dropTablesGlobal[monster];
+                                }
+                            });
+                        } else {
+                            if (!!baseChunkData['items'][drop]) {
+                                if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
+                                    let re = new RegExp(`/Slay .*\~|${monster}|\~/`,"gm");
+                                    let slayerTaskName = (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).find(value => re.test(value))) || (!!newValids['Slayer'] && Object.keys(newValids['Slayer']).find(value => re.test(value))) || "";
+                                    delete baseChunkData['items'][drop][slayerTaskName];
+                                    if (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(slayerTaskName)) {
+                                        delete newValids['Slayer'][slayerTaskName];
+                                    }
+                                } else {
+                                    delete baseChunkData['items'][drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                                }
                             }
-                            !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][item];
+                            if (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).length <= 0) {
+                                delete baseChunkData['items'][drop];
+                            }
+                            !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][drop];
                             if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
                                 delete dropRatesGlobal[monster];
                             }
-                            !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][item];
+                            !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][drop];
                             if (!!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).length <= 0) {
                                 delete dropTablesGlobal[monster];
                             }
-                        });
-                    } else {
-                        if (!!baseChunkData['items'][drop]) {
-                            if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
-                                let re = new RegExp(`/Slay .*\~|${monster}|\~/`,"gm");
-                                let slayerTaskName = (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).find(value => re.test(value))) || (!!newValids['Slayer'] && Object.keys(newValids['Slayer']).find(value => re.test(value))) || "";
-                                delete baseChunkData['items'][drop][slayerTaskName];
-                                if (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(slayerTaskName)) {
-                                    delete newValids['Slayer'][slayerTaskName];
-                                }
-                            } else {
-                                delete baseChunkData['items'][drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
-                            }
                         }
-                        if (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).length <= 0) {
-                            delete baseChunkData['items'][drop];
-                        }
-                        !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][drop];
-                        if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
-                            delete dropRatesGlobal[monster];
-                        }
-                        !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][drop];
-                        if (!!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).length <= 0) {
-                            delete dropTablesGlobal[monster];
-                        }
-                    }
-                });
+                    });
+                }
             } else if (tempValid && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster])) {
                 if (!baseChunkData['monsters'].hasOwnProperty(monster)) {
                     baseChunkData['monsters'][monster] = {};
@@ -1175,53 +1175,53 @@ var calcChallenges = function(chunks, baseChunkData) {
                     !!baseChunkData['monsters'][monster] && delete baseChunkData['monsters'][monster][chunk];
                     if (!!baseChunkData['monsters'][monster] && Object.keys(baseChunkData['monsters'][monster]).length === 0) {
                         delete baseChunkData['monsters'][monster];
-                    }
-                    let dropsObj = chunkInfo['drops'][monster];
-                    if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
-                        dropsObj = chunkInfo['skillItems']['Slayer'][monster];
-                    }
-                    !!dropsObj && Object.keys(dropsObj).forEach(drop => {
-                        if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
-                            Object.keys(dropTables[drop]).forEach(item => {
-                                !!baseChunkData['items'][item] && delete baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
-                                if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
-                                    delete baseChunkData['items'][item];
+                        let dropsObj = chunkInfo['drops'][monster];
+                        if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
+                            dropsObj = chunkInfo['skillItems']['Slayer'][monster];
+                        }
+                        !!dropsObj && Object.keys(dropsObj).forEach(drop => {
+                            if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
+                                Object.keys(dropTables[drop]).forEach(item => {
+                                    !!baseChunkData['items'][item] && delete baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                                    if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
+                                        delete baseChunkData['items'][item];
+                                    }
+                                    !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][item];
+                                    if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
+                                        delete dropRatesGlobal[monster];
+                                    }
+                                    !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][item];
+                                    if (!!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).length <= 0) {
+                                        delete dropTablesGlobal[monster];
+                                    }
+                                });
+                            } else {
+                                if (!!baseChunkData['items'][drop]) {
+                                    if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
+                                        let re = new RegExp(`/Slay .*\~|${monster}|\~/`,"gm");
+                                        let slayerTaskName = (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).find(value => re.test(value))) || (!!newValids['Slayer'] && Object.keys(newValids['Slayer']).find(value => re.test(value))) || "";
+                                        delete baseChunkData['items'][drop][slayerTaskName];
+                                        if (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(slayerTaskName)) {
+                                            delete newValids['Slayer'][slayerTaskName];
+                                        }
+                                    } else {
+                                        delete baseChunkData['items'][drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                                    }
                                 }
-                                !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][item];
+                                if (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).length <= 0) {
+                                    delete baseChunkData['items'][drop];
+                                }
+                                !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][drop];
                                 if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
                                     delete dropRatesGlobal[monster];
                                 }
-                                !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][item];
+                                !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][drop];
                                 if (!!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).length <= 0) {
                                     delete dropTablesGlobal[monster];
                                 }
-                            });
-                        } else {
-                            if (!!baseChunkData['items'][drop]) {
-                                if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
-                                    let re = new RegExp(`/Slay .*\~|${monster}|\~/`,"gm");
-                                    let slayerTaskName = (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).find(value => re.test(value))) || (!!newValids['Slayer'] && Object.keys(newValids['Slayer']).find(value => re.test(value))) || "";
-                                    delete baseChunkData['items'][drop][slayerTaskName];
-                                    if (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(slayerTaskName)) {
-                                        delete newValids['Slayer'][slayerTaskName];
-                                    }
-                                } else {
-                                    delete baseChunkData['items'][drop][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
-                                }
                             }
-                            if (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).length <= 0) {
-                                delete baseChunkData['items'][drop];
-                            }
-                            !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][drop];
-                            if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
-                                delete dropRatesGlobal[monster];
-                            }
-                            !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][drop];
-                            if (!!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).length <= 0) {
-                                delete dropTablesGlobal[monster];
-                            }
-                        }
-                    });
+                        });
+                    }
                 } else if (tempValid && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster])) {
                     if (!baseChunkData['monsters'].hasOwnProperty(monster)) {
                         baseChunkData['monsters'][monster] = {};
