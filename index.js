@@ -2419,7 +2419,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.16.7");
+const myWorker = new Worker("./worker.js?v=4.16.8");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -3439,12 +3439,18 @@ var accessMap = function() {
     savedPin = $('.pin.old').removeClass('wrong').val();
     databaseRef.child('mapids/' + mid).once('value', function(snap) {
         if (!snap.val()) {
-            setTimeout(function() {
-                $('.mid-err').css('visibility', 'visible');
-                $('.mid').addClass('wrong').select();
-                $('#access').text('Access my map');
-            }, 1000);
-            return;
+            databaseRef.child('maps/' + mid).once('value', function(snap) {
+                if (!snap.val()) {
+                    setTimeout(function() {
+                        $('.mid-err').css('visibility', 'visible');
+                        $('.mid').addClass('wrong').select();
+                        $('#access').text('Access my map');
+                    }, 1000);
+                    return;
+                } else {
+                    databaseRef.child('mapids/' + mid).set(true);
+                }
+            });
         }
         if ($('.pin.old').val()) {
             firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
@@ -6682,10 +6688,20 @@ var checkMID = function(mid) {
                 $('.background-img').hide();
                 inEntry = true && !viewOnly;
             } else {
-                window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', window.location.href.split('?')[0]);
-                atHome = true;
-                $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
-                $('.loading, .ui-loader-header').remove();
+                databaseRef.child('maps/' + mid).once('value', function(snap) {
+                    if (!snap.val()) {
+                        window.history.replaceState(window.location.href.split('?')[0], 'Chunk Picker V2', window.location.href.split('?')[0]);
+                        atHome = true;
+                        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
+                        $('.loading, .ui-loader-header').remove();
+                    } else {
+                        myRef = firebase.database().ref('maps/' + mid);
+                        atHome = false;
+                        $('.background-img').hide();
+                        inEntry = true && !viewOnly;
+                        databaseRef.child('mapids/' + mid).set(true);
+                    }
+                });
             }
             setupMap();
         });
