@@ -1811,6 +1811,7 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2) {
     if (rolling2) {
         chosenFromCinematic = el[rand2];
         elArr = shuffle(elArr);
+        let topNum2;
         xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 17;
         yCoord = 64 - (parseInt(elArr[elArr.length - 1]) % 256);
         $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
@@ -1821,7 +1822,7 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2) {
                 yCoord = 64 - (parseInt(elArr[j]) % 256);
                 $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
                 if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
-                    topNum = (-15.998 * ((i * elArr.length) + j)) + 'vh';
+                    topNum2 = (-15.998 * ((i * elArr.length) + j)) + 'vh';
                 }
             };
         };
@@ -1831,7 +1832,7 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2) {
         $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
         setTimeout(function() {
             $('.roll-chunk-outer2').animate({
-                top: topNum
+                top: topNum2
             }, {
                 duration: randomDuration,
                 easing: "easeOutCubic",
@@ -2419,7 +2420,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.16.10");
+const myWorker = new Worker("./worker.js?v=4.16.11");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
