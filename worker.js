@@ -1092,20 +1092,18 @@ var calcChallenges = function(chunks, baseChunkData) {
                 let lowestName;
                 tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] }).forEach(name => {
                     let challenge = chunkInfo['challenges'][skill][name];
-                    if (!((!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] > 1 && !!chunkInfo['challenges'][skill][name] && chunkInfo['challenges'][skill][name]['Level'] > passiveSkill[skill]) || (!!skillQuestXp && skillQuestXp.hasOwnProperty(skill) && chunkInfo['challenges'][skill][name] && chunkInfo['challenges'][skill][name]['Level'] > skillQuestXp[skill]['level']))) {
-                        if (!challenge.hasOwnProperty('Tasks') || (newValids.hasOwnProperty(skill) && newValids[skill].hasOwnProperty(name))) {
-                            if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
-                                lowestItem = challenge;
-                                lowestName = name;
-                            } else if (lowestItem['Level'] === challenge['Level'] && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem['Priority'])) {
-                                lowestItem = challenge;
-                                lowestName = name;
-                            }
+                    if (!challenge.hasOwnProperty('Tasks') || (newValids.hasOwnProperty(skill) && newValids[skill].hasOwnProperty(name))) {
+                        if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
+                            lowestItem = challenge;
+                            lowestName = name;
+                        } else if (lowestItem['Level'] === challenge['Level'] && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem['Priority'])) {
+                            lowestItem = challenge;
+                            lowestName = name;
                         }
-                        if (challenge.hasOwnProperty('Tasks')) {
-                            !!newValids[skill] && delete newValids[skill][name];
-                            !!valids[skill] && delete valids[skill][name];
-                        }
+                    }
+                    if (challenge.hasOwnProperty('Tasks')) {
+                        !!newValids[skill] && delete newValids[skill][name];
+                        !!valids[skill] && delete valids[skill][name];
                     }
                 });
                 !!lowestName && !newValids[skill] && (newValids[skill] = {});
