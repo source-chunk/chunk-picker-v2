@@ -2945,9 +2945,6 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, notPassive) {
             primaryValid && (tempValid = true);
         });
     }
-    if (!notPassive && ((!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] > 1) || (!!skillQuestXp && skillQuestXp.hasOwnProperty(skill)))) {
-        tempValid = true;
-    }
     valid = tempValid;
     return valid;
 }
