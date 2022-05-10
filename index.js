@@ -1054,6 +1054,7 @@ let patreonMaps = {
 
 let roll5Mid = 'rfr'; // Semanari
 let diary2Tier = 'bti'; // DarkR41d3r
+let unChunkMid = 'idyl'; // Idyl
 
 // ----------------------------------------------------------
 
@@ -1742,10 +1743,10 @@ var selectNeighborsCanvas = function(chunkId) {
 }
 
 // Opens the roll chunk modal
-var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2) {
+var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
     rollChunkModalOpen = true;
     let rolling2 = typeof rand2 !== 'undefined' && typeof sNum2 !== 'undefined';
-    $('.roll-chunk-title').text('Rolling your next chunk...');
+    $('.roll-chunk-title').text(isUnpick ? 'Unpicking your next chunk...' : 'Rolling your next chunk...');
     $('.roll-chunk-subtitle').text('');
     $('.roll-chunk-outer').empty().css('top', '0');
     $('#submit-roll-chunk-button').hide();
@@ -2150,16 +2151,18 @@ var unpickCanvas = function() {
     }
     var rand = Math.floor(Math.random() * el.length);
     delete tempChunks['unlocked'][el[rand]];
-    if (!tempChunks['selected']) {
-        tempChunks['selected'] = {};
+    if (mid !== unChunkMid) {
+        if (!tempChunks['selected']) {
+            tempChunks['selected'] = {};
+        }
+        tempChunks['selected'][el[rand]] = el[rand];
+        tempSelectedChunks.push(el[rand]);
     }
-    tempChunks['selected'][el[rand]] = el[rand];
-    tempSelectedChunks.push(el[rand]);
     recentChunks[el[rand]] = el[rand];
     $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
     $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
     if (settings['cinematicRoll'] && !onMobile) {
-        openRollChunkCanvas(el, rand, null);
+        openRollChunkCanvas(el, rand, null, undefined, undefined, true);
     } else {
         scrollToChunkCanvas(el[rand]);
     }
@@ -2420,7 +2423,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.16.13");
+const myWorker = new Worker("./worker.js?v=4.16.14");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
