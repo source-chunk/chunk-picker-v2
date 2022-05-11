@@ -1690,7 +1690,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             });
         });
         Object.keys(baseChunkData['items']).forEach(item => {
-            Object.keys(baseChunkData['items'][item]).filter((source) => { return baseChunkData['items'][item][source].split('-').length > 1 && [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'].includes(baseChunkData['items'][item][source].split('-')[1]) && (!newValids.hasOwnProperty(baseChunkData['items'][item][source].split('-')[1]) || !newValids[baseChunkData['items'][item][source].split('-')[1]].hasOwnProperty(source)) }).forEach(source => {
+            Object.keys(baseChunkData['items'][item]).filter((source) => { return baseChunkData['items'][item][source].split('-').length > 1 && [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'].includes(baseChunkData['items'][item][source].split('-')[1]) && (!newValids.hasOwnProperty(baseChunkData['items'][item][source].split('-')[1]) || !newValids[baseChunkData['items'][item][source].split('-')[1]].hasOwnProperty(source)) && (baseChunkData['items'][item][source].split('-')[1] !== 'Nonskill' || source !== 'Manually Added*') }).forEach(source => {
                 delete baseChunkData['items'][item][source];
                 if (baseChunkData['items'][item] === {}) {
                     delete baseChunkData['items'][item];
@@ -5329,42 +5329,6 @@ var gatherChunksInfo = function(chunks) {
                 }
             });
 
-            !!manualMonsters && !!manualMonsters['Items'] && Object.keys(manualMonsters['Items']).forEach(item => {
-                if (!backloggedSources['items'] || !backloggedSources['items'][item]) {
-                    if (!items[item]) {
-                        items[item] = {};
-                    }
-                    items[item]['Manually Added'] = 'secondary-Nonskill';
-                }
-            });
-
-            !!manualMonsters && !!manualMonsters['Monsters'] && Object.keys(manualMonsters['Monsters']).forEach(monster => {
-                if (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) {
-                    if (!monsters[monster]) {
-                        monsters[monster] = {};
-                    }
-                    monsters[monster]['Manually Added'] = true;
-                }
-            });
-
-            !!manualMonsters && !!manualMonsters['NPCs'] && Object.keys(manualMonsters['NPCs']).forEach(npc => {
-                if (!backloggedSources['npcs'] || !backloggedSources['npcs'][npc]) {
-                    if (!npcs[npc]) {
-                        npcs[npc] = {};
-                    }
-                    npcs[npc]['Manually Added'] = true;
-                }
-            });
-
-            !!manualMonsters && !!manualMonsters['Objects'] && Object.keys(manualMonsters['Objects']).forEach(object => {
-                if (!backloggedSources['objects'] || !backloggedSources['objects'][object]) {
-                    if (!objects[object]) {
-                        objects[object] = {};
-                    }
-                    objects[object]['Manually Added'] = true;
-                }
-            });
-
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['NPC'] && Object.keys(chunkInfo['chunks'][num]['NPC']).forEach(npc => {
                 if (!backloggedSources['npcs'] || !backloggedSources['npcs'][npc]) {
                     if (!npcs[npc]) {
@@ -5382,6 +5346,42 @@ var gatherChunksInfo = function(chunks) {
                     shops[shop][num] = true;
                 }
             });
+        }
+    });
+
+    !!manualMonsters && !!manualMonsters['Items'] && Object.keys(manualMonsters['Items']).forEach(item => {
+        if (!backloggedSources['items'] || !backloggedSources['items'][item]) {
+            if (!items[item]) {
+                items[item] = {};
+            }
+            items[item]['Manually Added*'] = 'secondary-Nonskill';
+        }
+    });
+
+    !!manualMonsters && !!manualMonsters['Monsters'] && Object.keys(manualMonsters['Monsters']).forEach(monster => {
+        if (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) {
+            if (!monsters[monster]) {
+                monsters[monster] = {};
+            }
+            monsters[monster]['Manually Added*'] = true;
+        }
+    });
+
+    !!manualMonsters && !!manualMonsters['NPCs'] && Object.keys(manualMonsters['NPCs']).forEach(npc => {
+        if (!backloggedSources['npcs'] || !backloggedSources['npcs'][npc]) {
+            if (!npcs[npc]) {
+                npcs[npc] = {};
+            }
+            npcs[npc]['Manually Added*'] = true;
+        }
+    });
+
+    !!manualMonsters && !!manualMonsters['Objects'] && Object.keys(manualMonsters['Objects']).forEach(object => {
+        if (!backloggedSources['objects'] || !backloggedSources['objects'][object]) {
+            if (!objects[object]) {
+                objects[object] = {};
+            }
+            objects[object]['Manually Added*'] = true;
         }
     });
     return {items: items, objects: objects, monsters: monsters, npcs: npcs, shops: shops};
