@@ -1670,6 +1670,11 @@ var calcChallenges = function(chunks, baseChunkData) {
                         baseChunkData['items'][output + '*^'] = {};
                     }
                     baseChunkData['items'][output + '*^'][source] = outputs[output][source];
+                } else if (baseChunkData['items'].hasOwnProperty(output + '*^^')) {
+                    if (!baseChunkData['items'][output + '*^^']) {
+                        baseChunkData['items'][output + '*^^'] = {};
+                    }
+                    baseChunkData['items'][output + '*^^'][source] = outputs[output][source];
                 } else {
                     if (!baseChunkData['items'][output]) {
                         baseChunkData['items'][output] = {};
