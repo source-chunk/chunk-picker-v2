@@ -8,12 +8,11 @@
 
     gtag('config', 'G-8P0V9GSFJ2');
   </script>
-  <link rel="stylesheet" href="./index.css?v=4.16.16" />
+  <link rel="stylesheet" href="./index.css?v=4.17.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
@@ -40,12 +39,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=4.16.16' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=4.17.0' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'>Join the ClanChat: 'OneChunkClan'!</div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=4.16.15"></script>
+  <script src="./index.js?v=4.17.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext('backlog')">Backlog</li>
     <li onclick="switchActiveContext('backlog note')">Backlog w/ Note</li>
@@ -134,7 +133,58 @@
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeRules()"></i>
       <div id="rules-title" class="rules-title noscroll">Chunk Rules</div>
       <div id="rules-subtitle" class="rules-subtitle noscroll">Pick and choose how you want to shape *your* <b>Chunk Experience</b>. Select rules to define what tasks you want to see, how those tasks are generated, and other special rulings.</div>
-      <div id="rules-data" class="rules-data noscroll"></div>
+      <div id="rules-data" class="rules-data noscroll">
+        <div id="rules-subdata" class="rules-subdata noscroll"></div>
+        <div id='rulesvisibletasks' class='accordion' onclick="toggleRulesPanel('visibletasks')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Visible Tasks</span></div>
+        <div class="panel panel-visibletasks"></div>
+        <div id='rulesoverallskill' class='accordion' onclick="toggleRulesPanel('overallskill')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Overall Skill</span></div>
+        <div class="panel panel-overallskill"></div>
+        <div id='rulesagility' class='accordion' onclick="toggleRulesPanel('agility')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Agility</span></div>
+        <div class="panel panel-agility"></div>
+        <div id='rulescombat' class='accordion' onclick="toggleRulesPanel('combat')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Combat</span></div>
+        <div class="panel panel-combat"></div>
+        <div id='rulesconstruction' class='accordion' onclick="toggleRulesPanel('construction')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Construction</span></div>
+        <div class="panel panel-construction"></div>
+        <div id='rulesfarming' class='accordion' onclick="toggleRulesPanel('farming')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Farming</span></div>
+        <div class="panel panel-farming"></div>
+        <div id='rulesherblore' class='accordion' onclick="toggleRulesPanel('herblore')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Herblore</span></div>
+        <div class="panel panel-herblore"></div>
+        <div id='ruleshunter' class='accordion' onclick="toggleRulesPanel('hunter')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Hunter</span></div>
+        <div class="panel panel-hunter"></div>
+        <div id='rulesmagic' class='accordion' onclick="toggleRulesPanel('magic')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Magic</span></div>
+        <div class="panel panel-magic"></div>
+        <div id='rulesmining' class='accordion' onclick="toggleRulesPanel('mining')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Mining</span></div>
+        <div class="panel panel-mining"></div>
+        <div id='rulesprayer' class='accordion' onclick="toggleRulesPanel('prayer')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Prayer</span></div>
+        <div class="panel panel-prayer"></div>
+        <div id='rulesrunecraft' class='accordion' onclick="toggleRulesPanel('runecraft')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Runecraft</span></div>
+        <div class="panel panel-runecraft"></div>
+        <div id='rulesslayer' class='accordion' onclick="toggleRulesPanel('slayer')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Slayer</span></div>
+        <div class="panel panel-slayer"></div>
+        <div id='rulessmithing' class='accordion' onclick="toggleRulesPanel('smithing')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Smithing</span></div>
+        <div class="panel panel-smithing"></div>
+        <div id='rulesitemsources' class='accordion' onclick="toggleRulesPanel('itemsources')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Item Sources</span></div>
+        <div class="panel panel-itemsources"></div>
+        <div id='rulesmiscellaneous' class='accordion' onclick="toggleRulesPanel('miscellaneous')"><span class='exp'><i
+          class="acc pic fas fa-plus"></i></span><span class="accordion-title">Miscellaneous</span></div>
+        <div class="panel panel-miscellaneous"></div>
+        <div class="bottom-spacing"></div>
+      </div>
     </div>
   </div>
   <div id="myModal5" class="modal">

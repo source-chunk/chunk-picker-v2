@@ -1909,6 +1909,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             'Chunks': ['11063'],
             'ChunksDetails': ['11063'],
             'Label': 'Skillcapes',
+            'Output': 'Max cape',
+            'TotalLevelNeeded': 2277,
             'Permanent': false
         }
     }
@@ -2553,7 +2555,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             chunkInfo['challenges'][skill][name]['ManualValid'] && (validChallenge = true);
             if (validChallenge) {
                 delete nonValids[name];
-                if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subChallenge) => { return subChallenge.includes('--') }).length > 0)) {
+                if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subChallenge) => { return subChallenge.includes('--') }).length > 0)) {
                     if (skill !== 'Quest' && skill !== 'Diary') {
                         valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'] || chunkInfo['challenges'][skill][name]['Label'] || true;
                     } else {

@@ -2706,6 +2706,72 @@ button.menu2 {
     border-top: solid 1px;
 }
 
+.show-rule-details-btn {
+    margin-top: 30px;
+}
+
+.show-rule-details-btn > span {
+    border: 1px solid black;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: var(--color4);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    margin: auto;
+    display: block;
+    width: 33%;
+}
+
+.show-rule-details-btn > span:hover {
+    background-color: var(--color3);
+}
+
+.intro-subcategory, .presets-subcategory {
+    margin-bottom: 20px;
+    font-size: 16px !important;
+    font-style: normal !important;
+}
+
+.show-rule-back-btn {
+    padding: 10px 0px;
+}
+
+.show-rule-back-btn > span {
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--colorLink);
+    text-decoration: underline;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.show-rule-back-btn > span:hover {
+    color: var(--colorTextAlt);
+}
+
+#rules-data > .panel.visible {
+    max-height: none;
+    padding-right: 10px;
+}
+
+#rules-data > .accordion {
+    background-color: var(--color2);
+    margin-bottom: -1px;
+    border: 1px solid;
+    padding-bottom: 5px;
+}
+
+#rules-data > .accordion:hover {
+    background-color: var(--color3);
+}
+
+#rules-data > .bottom-spacing {
+    padding: 10px;
+}
+
 .rule-category {
     font-size: 28px;
     font-weight: bold;
