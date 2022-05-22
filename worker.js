@@ -1,4 +1,4 @@
-importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js');
+importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.30/lodash.min.js');
 let nonValids = {};
 let globalValids;
 let eGlobal;
@@ -1957,7 +1957,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                 return;
             }
             if (chunkInfo['challenges'][skill][name].hasOwnProperty('QuestPointsNeeded')) {
-                if (questPointTotal < chunkInfo['challenges'][skill][name]['QuestPointsNeeded']) {
+                if (!questPointTotal || (questPointTotal < chunkInfo['challenges'][skill][name]['QuestPointsNeeded'])) {
                     validChallenge = false;
                     wrongThings.push('QPS');
                     nonValids[name] = wrongThings;
@@ -4644,7 +4644,7 @@ var calcBIS = function() {
                                 if (!baseChunkData['items'][item2][source].includes('-') || !processingSkill[baseChunkData['items'][item2][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][item2][source].split('-')[1] === 'Slayer') {
                                     let article = vowels.includes(item2.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                                     article = item2.toLowerCase().charAt(item2.toLowerCase().length - 1) === 's' ? ' ' : article;
-                                    !backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item2.toLowerCase() + '|~') && (tempTempTempValid = true);
+                                    (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item2.toLowerCase() + '|~')) && (tempTempTempValid = true);
                                 }
                             });
                             if (tempTempTempValid) {
@@ -4851,7 +4851,7 @@ var calcBIS = function() {
                                 if (!baseChunkData['items'][item2][source].includes('-') || !processingSkill[baseChunkData['items'][item2][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][item2][source].split('-')[1] === 'Slayer') {
                                     let article = vowels.includes(item2.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                                     article = item2.toLowerCase().charAt(item2.toLowerCase().length - 1) === 's' ? ' ' : article;
-                                    !backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item2.toLowerCase() + '|~') && (tempTempTempValid = true);
+                                    (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item2.toLowerCase() + '|~')) && (tempTempTempValid = true);
                                 }
                             });
                             if (tempTempTempValid) {
