@@ -1,4 +1,4 @@
-importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js');
+importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js');
 let nonValids = {};
 let globalValids;
 let eGlobal;
@@ -1092,7 +1092,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 let lowestName;
                 tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] }).forEach(name => {
                     let challenge = chunkInfo['challenges'][skill][name];
-                    if (!challenge.hasOwnProperty('Tasks') || (newValids.hasOwnProperty(skill) && newValids[skill].hasOwnProperty(name))) {
+                    if ((!challenge.hasOwnProperty('Tasks') || (newValids.hasOwnProperty(skill) && newValids[skill].hasOwnProperty(name))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(name))) {
                         if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
                             lowestItem = challenge;
                             lowestName = name;
@@ -1518,9 +1518,9 @@ var calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['items'][skillingPets[skill]]) {
                         baseChunkData['items'][skillingPets[skill]] = {};
                     }
-                    baseChunkData['items'][skillingPets[skill]][skill] = 'secondary-' + skill;
+                    baseChunkData['items'][skillingPets[skill]]['Manually Added*'] = 'secondary-' + skill;
                 } else {
-                    !!baseChunkData['items'][skillingPets[skill]] && delete baseChunkData['items'][skillingPets[skill]][skill];
+                    !!baseChunkData['items'][skillingPets[skill]] && delete baseChunkData['items'][skillingPets[skill]]['Manually Added*'];
                     if (!!baseChunkData['items'][skillingPets[skill]] && Object.keys(baseChunkData['items'][skillingPets[skill]]).length <= 0) {
                         delete baseChunkData['items'][skillingPets[skill]];
                     }
@@ -1695,7 +1695,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             });
         });
         Object.keys(baseChunkData['items']).forEach(item => {
-            Object.keys(baseChunkData['items'][item]).filter((source) => { return baseChunkData['items'][item][source].split('-').length > 1 && [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'].includes(baseChunkData['items'][item][source].split('-')[1]) && (!newValids.hasOwnProperty(baseChunkData['items'][item][source].split('-')[1]) || !newValids[baseChunkData['items'][item][source].split('-')[1]].hasOwnProperty(source)) && (baseChunkData['items'][item][source].split('-')[1] !== 'Nonskill' || source !== 'Manually Added*') }).forEach(source => {
+            Object.keys(baseChunkData['items'][item]).filter((source) => { return baseChunkData['items'][item][source].split('-').length > 1 && [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'].includes(baseChunkData['items'][item][source].split('-')[1]) && (!newValids.hasOwnProperty(baseChunkData['items'][item][source].split('-')[1]) || !newValids[baseChunkData['items'][item][source].split('-')[1]].hasOwnProperty(source)) && baseChunkData['items'][item][source].split('-')[1] !== 'Nonskill' && source !== 'Manually Added*' }).forEach(source => {
                 delete baseChunkData['items'][item][source];
                 if (baseChunkData['items'][item] === {}) {
                     delete baseChunkData['items'][item];
