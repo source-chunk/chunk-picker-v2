@@ -1,4 +1,4 @@
-importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.30/lodash.min.js');
+importScripts('https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js');
 let nonValids = {};
 let globalValids;
 let eGlobal;
