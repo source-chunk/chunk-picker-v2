@@ -2274,7 +2274,6 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                             !tempTempValid && (wrongThings.push(item));
                             if (!tempTempValid) {
                                 nonValids[name] = wrongThings;
-                                tempMultiStepSkill[skill][name] = true;
                                 return
                             };
                         }

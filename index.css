@@ -2907,6 +2907,15 @@ button.menu2 {
     text-align: center;
 }
 
+.canvas-graph-outer {
+    text-align: center;
+}
+
+#canvas-graph {
+    border: solid black;
+    margin: 25px;
+}
+
 #myModal7 > .modal-content {
     height: 60%;
     width: 45%;
