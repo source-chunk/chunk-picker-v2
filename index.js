@@ -6413,8 +6413,11 @@ var showChunkHistory = function() {
         });
         ctxGraph.lineTo((((Date.now() - startingWidth) / fullWidth) * (canvasGraph.width - (padding * 2) - 3)) + padding + 3, prevY);
         ctxGraph.stroke();
+        let numDays = Math.round((((fullWidth / Object.keys(newChunkOrder).length) / (1000 * 3600 * 24)) + Number.EPSILON) * 100) / 100;
+        $('.average-rolltime-title').show().text(`Average time between chunk rolls: ${numDays} days`);
     } else {
         $('.canvas-graph-outer').hide();
+        $('.average-rolltime-title').hide().text('');
     }
     document.getElementById('chunkhistory-data-inner').scrollTop = 0;
     $('#myModal18').show();

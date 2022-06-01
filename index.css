@@ -2916,6 +2916,12 @@ button.menu2 {
     margin: 25px;
 }
 
+.average-rolltime-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
 #myModal7 > .modal-content {
     height: 60%;
     width: 45%;
