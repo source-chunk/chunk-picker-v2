@@ -1838,6 +1838,20 @@ button.menu2 {
     margin-right: 10px;
 }
 
+.areas-tab-text {
+    font-size: min(1.75vw, 16px);
+}
+
+.open-manual-areas {
+    text-decoration: underline;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.open-manual-areas:hover {
+    color: rgb(100, 100, 255);
+}
+
 .area {
     border: solid 1px var(--color2);
     border-radius: 5px;
@@ -2231,6 +2245,13 @@ button.menu2 {
     margin-top: -5%;
 }
 
+#myModal31 > .modal-content {
+    height: 60%;
+    width: 45%;
+    background-color: var(--color1);
+    color: var(--colorText);
+}
+
 .manual-close {
     cursor: pointer;
     margin-top: 0px;
@@ -2527,7 +2548,7 @@ button.menu2 {
 }
 
 .alts-title {
-    font-size: 36;
+    font-size: 36px;
     padding-left: 10px;
     max-height: 20%;
     min-height: 20%;
@@ -2814,6 +2835,108 @@ button.menu2 {
 
 .subrule {
     margin-left: 20px;
+}
+
+.manual-areas-title {
+    font-size: 4.5vh;
+    padding-left: 10px;
+    max-height: 10%;
+    min-height: 10%;
+    text-align: center;
+    background-color: var(--color2);
+    overflow-y: hidden;
+}
+
+.manual-areas-data {
+    overflow-y: scroll;
+    height: 89.5%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: solid 1px;
+}
+
+.outer-manual-area {
+    font-size: 24px;
+    font-weight: normal;
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    margin: 5px;
+    padding: 2px;
+    background-color: var(--color3);
+    position: relative;
+    display: flow-root;
+}
+
+.manual-area-text {
+    float: right;
+    font-size: 24px;
+    font-weight: normal;
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    margin: 5px;
+    padding: 2px;
+    background-color: var(--color3);
+    max-width: 60%;
+}
+
+.manual-area-btn {
+    float: left;
+    font-size: 24px;
+    font-weight: normal;
+    border: solid 1px var(--color1);
+    margin: 5px;
+    padding: 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.manual-area-btn.locked {
+    cursor: not-allowed;
+}
+
+.manual-area-btn.grey-area {
+    background-color: rgb(100, 100, 100);
+}
+
+.manual-area-text.green {
+    color: rgb(15, 150, 15);
+}
+
+.enable-manual-area-btn {
+    background-color: rgb(30, 100, 30);
+}
+
+.enable-manual-area-btn:not(.locked):hover {
+    background-color: rgb(15, 150, 15);
+}
+
+.enable-manual-area-btn.selected-area {
+    background-color: rgb(15, 150, 15);
+}
+
+.enable-manual-area-btn.selected-area:hover {
+    background-color: rgb(30, 100, 30);
+}
+
+.disable-manual-area-btn {
+    background-color: rgb(100, 30, 30);
+}
+
+.disable-manual-area-btn:not(.locked):hover {
+    background-color: rgb(150, 15, 15);
+}
+
+.disable-manual-area-btn.selected-area {
+    background-color: rgb(150, 15, 15);
+}
+
+.disable-manual-area-btn.selected-area:hover {
+    background-color: rgb(100, 30, 30);
+}
+
+.grey-manual-area-btn {
+    background-color: rgb(100, 100, 100);
 }
 
 #myModal4 > .modal-content {
@@ -4557,7 +4680,7 @@ input#searchMonsters {
 }
 
 .patch-notes-title {
-    font-size: 36;
+    font-size: 36px;
     padding-left: 10px;
     max-height: 8%;
     min-height: 8%;
