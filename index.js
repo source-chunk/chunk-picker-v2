@@ -2436,7 +2436,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.0");
+const myWorker = new Worker("./worker.js?v=4.18.1");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4664,7 +4664,7 @@ var shuffle = function(array) {
 // Opens the quest steps modal
 var openQuestSteps = function(skill, challenge) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
-        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('%2G', '/').replaceAll('%2Q', '!').replaceAll('%2H', "'");
+        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('%2G', '/').replaceAll('%2Q', '!').replaceAll('%2H', "'").replaceAll('-2F', ',');
         let tier = null;
         if (challenge.includes('%2XX')) {
             tier = challenge.split('|')[1].split('%2XX')[1];
@@ -4707,7 +4707,7 @@ var openQuestSteps = function(skill, challenge) {
                     $('.quest-steps-data').append(`<hr />`);
                     currentTier = line.split('~')[1].split('|').join('').split('%2F')[1];
                 }
-                $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'") ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary' ? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll(/\%2I/g, ',') ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary' ? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
             });
         }
         if (quest.replaceAll('/', '%2G') === 'Combat Achievements') {
