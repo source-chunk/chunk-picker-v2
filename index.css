@@ -2847,12 +2847,31 @@ button.menu2 {
     overflow-y: hidden;
 }
 
+.manual-areas-searchcontainer {
+    height: 8%;
+    padding: 0px 15px;
+    font-size: 1.7vh;
+    background-color: var(--color2);
+}
+
+input#searchManualAreas {
+    font-size: 2.1vh;
+}
+
 .manual-areas-data {
     overflow-y: scroll;
-    height: 89.5%;
+    height: 81.5%;
     padding-left: 10px;
     padding-right: 10px;
     border-top: solid 1px;
+}
+
+.manual-areas-data > .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
 }
 
 .outer-manual-area {

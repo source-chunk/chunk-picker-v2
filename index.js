@@ -89,6 +89,7 @@ var filterByChecked = false;                                                    
 var filterByCheckedEquipment = false;                                           // Are we filtering equipment by checked only
 var filterByCheckedSources = false;                                             // Are we filtering sources by checked only
 var filterByCheckedMonsters = false;                                            // Are we filtering monsters by checked only
+var filterByUnlockedManualAreas = false;                                        // Are we filtering manual areas by unlocked only
 var extraOutputItems = {};                                                      // List of extra items obtainable from skill output
 var baseChunkData = {};                                                         // Chunk data global list
 
@@ -2436,7 +2437,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.1");
+const myWorker = new Worker("./worker.js?v=4.18.2");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4555,11 +4556,28 @@ var setCalculating = function(panelClass, useOld) {
 var openManualAreas = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
         manualAreasModalOpen = true;
-        $('#manual-areas-data').empty();
-        Object.keys(chunkInfo['challenges']['Nonskill']).filter(task => { return chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('UnlocksArea') }).sort().forEach(area => {
-            $('#manual-areas-data').append(`<div class='outer-manual-area noscroll'><span class='manual-area-btn enable-manual-area-btn noscroll${(!testMode && (viewOnly || inEntry || locked)) ? ' locked' : ''}${manualAreas.hasOwnProperty(area) && manualAreas[area] ? ' selected-area' : ''}${manualAreas.hasOwnProperty(area) && !manualAreas[area] ? ' grey-area' : ''}' onclick='setManualArea("${area.replaceAll(/\'/g, '-2H')}", ${true})'>Enable</span><span class='manual-area-btn disable-manual-area-btn noscroll${(!testMode && (viewOnly || inEntry || locked)) ? ' locked' : ''}${manualAreas.hasOwnProperty(area) && !manualAreas[area] ? ' selected-area' : ''}${manualAreas.hasOwnProperty(area) && manualAreas[area] ? ' grey-area' : ''}' onclick='setManualArea("${area.replaceAll(/\'/g, '-2H')}", ${false})'>Disable</span><span class='manual-area-text noscroll${possibleAreas.hasOwnProperty(area) && possibleAreas[area] ? ' green' : ''}'>${area.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')').replaceAll(/\#/g, '#\u200B').replaceAll(/\//g, '/\u200B')}</span></div>`);
-        });
+        $('#searchManualAreas').val('');
+        searchManualAreas();
         $('#myModal31').show();
+        $('#searchManualAreas').focus();
+    }
+}
+
+// Toggle filtering of manual areas by unlocked-only
+var changeManualAreasFilterBy = function() {
+    filterByUnlockedManualAreas = !filterByUnlockedManualAreas;
+    searchManualAreas();
+}
+
+// Searches for matching names within manual areas data
+var searchManualAreas = function() {
+    let searchTemp = $('#searchManualAreas').val().toLowerCase();
+    $('#manual-areas-data').empty();
+    Object.keys(chunkInfo['challenges']['Nonskill']).filter(task => { return chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('UnlocksArea') && task.toLowerCase().includes(searchTemp.toLowerCase()) && (!filterByUnlockedManualAreas || (possibleAreas.hasOwnProperty(task) && possibleAreas[task])) }).sort().forEach(area => {
+        $('#manual-areas-data').append(`<div class='outer-manual-area noscroll'><span class='manual-area-btn enable-manual-area-btn noscroll${(!testMode && (viewOnly || inEntry || locked)) ? ' locked' : ''}${manualAreas.hasOwnProperty(area) && manualAreas[area] ? ' selected-area' : ''}${manualAreas.hasOwnProperty(area) && !manualAreas[area] ? ' grey-area' : ''}' onclick='setManualArea("${area.replaceAll(/\'/g, '-2H')}", ${true})'>Enable</span><span class='manual-area-btn disable-manual-area-btn noscroll${(!testMode && (viewOnly || inEntry || locked)) ? ' locked' : ''}${manualAreas.hasOwnProperty(area) && !manualAreas[area] ? ' selected-area' : ''}${manualAreas.hasOwnProperty(area) && manualAreas[area] ? ' grey-area' : ''}' onclick='setManualArea("${area.replaceAll(/\'/g, '-2H')}", ${false})'>Disable</span><span class='manual-area-text noscroll${possibleAreas.hasOwnProperty(area) && possibleAreas[area] ? ' green' : ''}'>${area.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')').replaceAll(/\#/g, '#\u200B').replaceAll(/\//g, '/\u200B')}</span></div>`);
+    });
+    if ($('#manual-areas-data').children().length === 0) {
+        $('#manual-areas-data').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No results found (0)</span></span></div>`);
     }
 }
 
@@ -4573,8 +4591,8 @@ var setManualArea = function(area, value) {
             manualAreas[area] = value;
         }
         openManualAreas();
+        !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
         calcCurrentChallengesCanvas();
-        !onMobile && setCalculating('.panel-active');
         setData();
     }
 }
