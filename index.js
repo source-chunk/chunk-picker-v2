@@ -2437,7 +2437,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.2");
+const myWorker = new Worker("./worker.js?v=4.18.3");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -7162,6 +7162,10 @@ var setData = function() {
                     mid: mid,
                     name: userName.toLowerCase(),
                     score: walkableUnlockedChunks,
+                });
+
+                highscoreEnabled && databaseRef.child('highscores/playerskills/' + mid + '/85').update({
+                    0: walkableUnlockedChunks
                 });
             }
         });
