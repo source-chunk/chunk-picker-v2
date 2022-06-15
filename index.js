@@ -2437,7 +2437,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.5");
+const myWorker = new Worker("./worker.js?v=4.18.6");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -2482,7 +2482,7 @@ myWorker.onmessage = function(e) {
                 searchModalOpen && searchWithinChunks();
                 highestModalOpen && openHighest();
                 highest2ModalOpen && openHighest2();
-                manualAreasModalOpen && openManualAreas();
+                manualAreasModalOpen && searchManualAreas();
                 checkSlayerLocked();
             }
         }
@@ -4590,7 +4590,7 @@ var setManualArea = function(area, value) {
         } else {
             manualAreas[area] = value;
         }
-        openManualAreas();
+        searchManualAreas();
         !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
         calcCurrentChallengesCanvas();
         setData();
