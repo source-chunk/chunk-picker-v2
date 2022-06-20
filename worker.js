@@ -3075,6 +3075,10 @@ var calcBIS = function() {
             '2h': null
         }
         Object.keys({...completedEquipment, ...chunkInfo['equipment']}).forEach(equip => {
+            if (!!!chunkInfo['equipment'][equip]) {
+                console.error(equip + " doesn't exist in data.");
+                return;
+            }
             let validWearable = true;
             !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
                 if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
