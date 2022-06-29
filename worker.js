@@ -694,17 +694,13 @@ var calcChallenges = function(chunks, baseChunkData) {
             });
         });
         let fullyValid;
-        let leftovers = {...newValids};
         let leftoversCount = 0;
-        let validsList = {};
         let savedValids = {};
         let passedByTasks = {};
-        while (leftoversCount < 10 && (Object.keys(leftovers).length > 0 && (!_.isEqual(leftovers, validsList) || !_.isEqual(newValids, savedValids)))) {
-            validsList = {...leftovers};
+        while (leftoversCount < 10 && !_.isEqual(newValids, savedValids)) {
             savedValids = JSON.parse(JSON.stringify(newValids));
-            leftovers = {};
-            Object.keys(validsList).filter((skill) => { return skill !== 'BiS' }).forEach(skill => {
-                checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(validsList[skill]).sort(function(a, b) { return skill === 'Diary' ? ((diaryTierOrder.indexOf(a.split('|')[1].split('%2F')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('%2F')[1]) === 0) ? a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) : (diaryTierOrder.indexOf(a.split('|')[1].split('%2F')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('%2F')[1]))) : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) }).forEach(challenge => {
+            Object.keys(savedValids).filter((skill) => { return skill !== 'BiS' }).forEach(skill => {
+                checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(savedValids[skill]).sort(function(a, b) { return skill === 'Diary' ? ((diaryTierOrder.indexOf(a.split('|')[1].split('%2F')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('%2F')[1]) === 0) ? a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) : (diaryTierOrder.indexOf(a.split('|')[1].split('%2F')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('%2F')[1]))) : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) }).forEach(challenge => {
                     if (!passedByTasks[skill]) {
                         passedByTasks[skill] = {};
                     }
@@ -717,7 +713,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                             nonValids[challenge] = [...nonValids[challenge], 'Passive'];
                             !!newValids[skill] && delete newValids[skill][challenge];
                             !!valids[skill] && delete valids[skill][challenge];
-                            !!leftovers[skill] && leftovers[skill][challenge] && delete leftovers[skill][challenge];
                         }
                     }
                     if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
@@ -732,7 +727,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 nonValids[challenge] = [...nonValids[challenge], subSkill];
                                 !!newValids[skill] && delete newValids[skill][challenge];
                                 !!valids[skill] && delete valids[skill][challenge];
-                                !!leftovers[skill] && leftovers[skill][challenge] && delete leftovers[skill][challenge];
                             }
                         });
                         if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
@@ -843,7 +837,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 fullyValid = false;
                                 !!newValids[skill] && delete newValids[skill][challenge];
                                 !!valids[skill] && delete valids[skill][challenge];
-                                !!leftovers[skill] && leftovers[skill][challenge] && delete leftovers[skill][challenge];
                                 if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                                     return;
                                 }
@@ -857,7 +850,6 @@ var calcChallenges = function(chunks, baseChunkData) {
                             fullyValid = false;
                             !!newValids[skill] && delete newValids[skill][challenge];
                             !!valids[skill] && delete valids[skill][challenge];
-                            !!leftovers[skill] && leftovers[skill][challenge] && delete leftovers[skill][challenge];
                             if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                                 return;
                             }
