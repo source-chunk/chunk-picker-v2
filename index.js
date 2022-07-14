@@ -2,7 +2,7 @@
  * Created by Source Chunk
  * Revision of an idea by Amehzyn
  * With help from Slay to Stay for chunk Ids and Amehzyn for smoother zooming/url decoding
- * 03/22/2022
+ * 07/14/2022
  */
 
 var onMobile = typeof window.orientation !== 'undefined';                       // Is user on a mobile device
@@ -20,6 +20,7 @@ var unpickOn = false;                                                           
 var recentOn = false;                                                           // Is the recent chunks section enabled
 var chunkInfoOn = false;                                                        // Is the chunk info panel enabled
 var chunkTasksOn = false;                                                       // Is the chunk tasks panel enabled
+var topButtonsOn = false;                                                       // Are the top buttons enabled
 var infoCollapse = false;                                                       // Is the chunk info panel collapsed
 var highscoreEnabled = false;                                                   // Is highscore tracking enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
@@ -329,6 +330,7 @@ let rules = {
     "BIS Skilling": false,
     "Collection Log": false,
     "Minigame": false,
+    "PvP Minigame": false,
     "Shortcut Task": false,
     "Shortcut": false,
     "Wield Crafted Items": false,
@@ -410,6 +412,7 @@ let ruleNames = {
     "BIS Skilling": "Must obtain items that are best-in-slot/add quality-of-life for skilling (e.g. Dragon Pickaxe, Angler Outfit, wieldable saw, etc.)",
     "Collection Log": "Must obtain items with slots in the collection log (works in conjuction with the Rare Drop rule and the Boss Drops rule)",
     "Minigame": "Allow items obtained from minigame rewards to count towards chunk tasks",
+    "PvP Minigame": "Allow items obtained from PvP-heavy minigames (LMS, PvP Arena) to count towards chunk tasks",
     "Shortcut Task": "Allow agility shortcuts to count as an Agility skill task",
     "Shortcut": "Allow agility shortcuts to count as a primary method for training Agility",
     "Wield Crafted Items": "Crafted items (e.g. bows, metal armour/weapons, etc.) can count as BiS gear <span class='rule-asterisk noscroll'>*</span>",
@@ -466,6 +469,7 @@ let rulePresets = {
         "Show Best in Slot Tasks": true,
         "Show Best in Slot Prayer Tasks": true,
         "Minigame": true,
+        "PvP Minigame": true,
         "Shortcut Task": true,
         "Shortcut": true,
         "Puro-Puro": true,
@@ -499,6 +503,7 @@ let rulePresets = {
         "Show Best in Slot Prayer Tasks": true,
         "Highest Level": true,
         "Minigame": true,
+        "PvP Minigame": true,
         "Shortcut Task": true,
         "Shortcut": true,
         "Wield Crafted Items": true,
@@ -551,6 +556,7 @@ let rulePresets = {
         "Show Best in Slot Prayer Tasks": true,
         "Highest Level": true,
         "Minigame": true,
+        "PvP Minigame": true,
         "Shortcut Task": true,
         "Shortcut": true,
         "Wield Crafted Items": true,
@@ -668,7 +674,7 @@ let ruleStructure = {
         "Tutor Ammo": true
     },
     "Miscellaneous": {
-        "Minigame": true,
+        "Minigame": ["PvP Minigame"],
         "Kill X": true,
         "BIS Skilling": true,
         "Collection Log": ["Collection Log Bosses", "Collection Log Raids", "Collection Log Minigames", "Collection Log Other", "Pets", "Jars", "Collection Log Clues"],
@@ -692,6 +698,7 @@ let subRuleDefault = {
     "Collection Log": true,
     "Puro-Puro": false,
     "Spells": false,
+    "Minigame": true,
 };                                                                              // Default value of sub-rule when parent is checked
 
 let settings = {
@@ -703,6 +710,7 @@ let settings = {
     "recent": true,
     "info": true,
     "chunkTasks": true,
+    "topButtons": true,
     "completedTaskColor": '#0D8219',
     "completedTaskStrikethrough": true,
     "randomStartAlways": false,
@@ -725,6 +733,7 @@ let settingNames = {
     "recent": "<b class='noscroll'>[Recent Chunks]</b> The recent chunks panel shows you the 5 most recently rolled chunks on your map, the dates you rolled them, how long it's been (in days) since your last roll, and more",
     "info": "<b class='noscroll'>[Chunk Info]</b> The chunk info panel shows you an array of information on every chunk in the game (monsters, npcs, item spawns, shops, and more). Hint: Right-click a chunk to bring up info on that chunk",
     "chunkTasks": "<b class='noscroll'>[Chunk Tasks]</b> The chunk tasks panel shows you an automatically made list of active tasks you need to do to finish your chunk. This is essential for any Chunker to keep track of what needs to get done",
+    "topButtons": "<b class='noscroll'>[Current BIS & Activity Info]</b> These buttons allow access to many miscellaneous pieces of information and crucial functionality for locking slayer and seeing best-in-slot gear",
     "completedTaskColor": "Change the color of checked-off chunk tasks",
     "completedTaskStrikethrough": "Cross-off chunk tasks as you complete them",
     "randomStartAlways": "Change the 'Pick Chunk' button to always be a 'Random Start' button; every chunk roll picks a random walkable chunk (that isn't already unlocked)",
@@ -751,7 +760,8 @@ let settingStructure = {
     "Information Panels": {
         "recent": true,
         "info": true,
-        "chunkTasks": ["taskSidebar"]
+        "chunkTasks": ["taskSidebar"],
+        "topButtons": true
     },
     "Customization": {
         "startingChunk": true,
@@ -2437,7 +2447,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.10");
+const myWorker = new Worker("./worker.js?v=4.18.11");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -2802,6 +2812,9 @@ $(document).on({
             if (chunkTasksOn) {
                 $('.menu9').show();
             }
+            if (topButtonsOn) {
+                $('.menu6').show();
+            }
             toggleQuestInfo();
             settingsMenu();
         } else if (e.keyCode === 27 && testMode && !rollChunkModalOpen) {
@@ -2898,6 +2911,7 @@ var importFromURL = function() {
             unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
             recentOn && $('.menu7').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
             chunkTasksOn && $('.menu9').css({ 'opacity': 1 }).show();
+            topButtonsOn && $('.menu6').css({ 'opacity': 1 }).show();
             isPicking = false;
             selectedChunks = 0;
             unlockedChunks = 0;
@@ -3776,6 +3790,14 @@ var toggleChunkTasks = function(value, extra) {
     chunkTasksOn = value;
     chunkTasksOn ? $('.menu9').show() : $('.menu9').hide();
     extra !== 'startup' && $('menu9').css('opacity', 1);
+    extra !== 'startup' && !locked && setData();
+}
+
+// Toggles the top buttons
+var toggleTopButtons = function(value, extra) {
+    topButtonsOn = value;
+    topButtonsOn ? $('.menu6').show() : $('.menu6').hide();
+    extra !== 'startup' && $('menu6').css('opacity', 1);
     extra !== 'startup' && !locked && setData();
 }
 
@@ -6717,6 +6739,7 @@ var checkOffSettings = function(didRedo, startup) {
     toggleRecent(settings['recent'], startup);
     toggleChunkInfo(settings['info'], startup);
     toggleChunkTasks(settings['chunkTasks'], startup);
+    toggleTopButtons(settings['topButtons'], startup);
     toggleTaskSidebar(settings['taskSidebar'], startup);
     changeChallengeColor();
     if (!startup) {
@@ -6956,6 +6979,9 @@ var loadData = function(startup) {
             if (settingsTemp['chunkTasks'] === undefined) {
                 settingsTemp['chunkTasks'] = true;
             }
+            if (settingsTemp['topButtons'] === undefined) {
+                settingsTemp['topButtons'] = true;
+            }
             (!settingsTemp['mapIntro'] || (!settingsTemp['startingChunk'] || settingsTemp['startingChunk'] === '0000' || settingsTemp['startingChunk'] === '00000')) && (mapIntroOpenSoon = true);
             justStartingChunkSet = (settingsTemp['mapIntro'] && (!settingsTemp['startingChunk'] || settingsTemp['startingChunk'] === '0000' || settingsTemp['startingChunk'] === '00000'));
             if (!mapIntroOpenSoon) {
@@ -6986,6 +7012,10 @@ var loadData = function(startup) {
                 rulesTemp['Spells'] = true;
             }
 
+            if (!rulesTemp.hasOwnProperty('PvP Minigame')) {
+                rulesTemp['PvP Minigame'] = rulesTemp.hasOwnProperty('Minigame') ? rulesTemp['Minigame'] : false;
+            }
+
             !!rulesTemp && Object.keys(rulesTemp).forEach(rule => {
                 rules[rule] = rulesTemp[rule];
             });
@@ -7003,6 +7033,7 @@ var loadData = function(startup) {
             toggleRecent(settings['recent'], 'startup');
             toggleChunkInfo(settings['info'], 'startup');
             toggleChunkTasks(settings['chunkTasks'], 'startup');
+            toggleTopButtons(settings['topButtons'], startup);
             toggleTaskSidebar(settings['taskSidebar'], 'startup');
 
             selectedChunks = 0;
@@ -7118,7 +7149,7 @@ var setData = function() {
                     }
                 });
                 myRef.update({ rules, recent, recentTime, randomLoot, friends });
-                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
+                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'topButtons': topButtonsOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
                 myRef.child('chunkinfo').update({ checkedChallenges, completedChallenges, backlog, possibleAreas, manualTasks, manualEquipment, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, oldSavedChallengeArr, assignedXpRewards, manualAreas });
 
                 var tempJson = {};
@@ -7177,7 +7208,7 @@ var setData = function() {
                 }
             });
             myRef.update({ rules, recent, recentTime, randomLoot, friends });
-            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
+            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'topButtons': topButtonsOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
             myRef.child('chunkinfo').update({ checkedChallenges, completedChallenges, backlog, possibleAreas, manualTasks, manualEquipment, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, oldSavedChallengeArr, assignedXpRewards, manualAreas });
 
             var tempJson = {};

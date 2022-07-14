@@ -258,14 +258,17 @@ onmessage = function(e) {
     }
 }
 
+// replaceAll helper
 function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// Replaces all instances of match within str with replacement
 function replaceAll(str, match, replacement) {
     return str.replace(new RegExp(escapeRegExp(match), 'g'), ()=>replacement);
 }
 
+// Combines JSONs
 var combineJSONs = function(a, b) {
     let temp = {};
     Object.keys(a).forEach(sub => {
@@ -1143,6 +1146,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     lowestLevel = newValids[skill][challenge];
                 }
             });
+            !!lowestName && !!chunkInfo['challenges'][skill][lowestName] && (chunkInfo['challenges'][skill][lowestName]['Priority'] = -1);
             !!lowestName && Object.keys(tempItemSkill[skill]).forEach(item => {
                 !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= chunkInfo['challenges'][skill][lowestName]['Level'])}).forEach(name => {
                     !newValids[skill] && (newValids[skill] = {});
@@ -5180,7 +5184,7 @@ var gcd = function(a, b) {
     if (b < 0.0000001) return a;
 
     return gcd(b, Math.floor(a % b));
-};
+}
 
 // Finds even fraction
 var findFraction = function(fraction, isRoundedDenominator) {
