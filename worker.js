@@ -235,7 +235,7 @@ onmessage = function(e) {
         dropRatesGlobal = {};
         dropTablesGlobal = {};
 
-        type === 'current' && (chunks = getAllChunkAreas(chunks));
+        chunks = getAllChunkAreas(chunks);
         postMessage('5%');
         baseChunkData = gatherChunksInfo(chunks);
         postMessage('10%');
@@ -1146,7 +1146,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     lowestLevel = newValids[skill][challenge];
                 }
             });
-            !!lowestName && !!chunkInfo['challenges'][skill][lowestName] && (chunkInfo['challenges'][skill][lowestName]['Priority'] = -1);
+            !!lowestName && !!chunkInfo['challenges'][skill][lowestName] && (chunkInfo['challenges'][skill][lowestName]['Priority'] = -1 * i);
             !!lowestName && Object.keys(tempItemSkill[skill]).forEach(item => {
                 !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= chunkInfo['challenges'][skill][lowestName]['Level'])}).forEach(name => {
                     !newValids[skill] && (newValids[skill] = {});
@@ -5017,18 +5017,20 @@ var calcBIS = function() {
                 if (bestEquipmentAlts[slot][item] === bestEquipment[slot]) {
                     let article = vowels.includes(item.toLowerCase().charAt(0)) ? ' an ' : ' a ';
                     article = item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' ? ' ' : article;
-                    if (!!globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~']) {
-                        globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + '/​' + globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'];
-                        if (Object.values(highestOverall).includes(item)) {
-                            if (slot === '2h') {
-                                highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
-                                highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
-                            } else {
-                                highestOverall[skill.replaceAll(' ', '_') + '-' + slot] = item;
+                    if (type === 'current') {
+                        if (!!globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~']) {
+                            globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + '/​' + globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'];
+                            if (Object.values(highestOverall).includes(item)) {
+                                if (slot === '2h') {
+                                    highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
+                                    highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
+                                } else {
+                                    highestOverall[skill.replaceAll(' ', '_') + '-' + slot] = item;
+                                }
                             }
+                        } else {
+                            globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + ' BiS ' + slot;
                         }
-                    } else {
-                        globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + ' BiS ' + slot;
                     }
                     if (!chunkInfo['challenges']['BiS']) {
                         chunkInfo['challenges']['BiS'] = {};

@@ -2447,7 +2447,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.11");
+const myWorker = new Worker("./worker.js?v=4.18.12");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4478,7 +4478,7 @@ var calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
                                 clueData[chunkInfo['challenges'][skill][challenge]['ClueTier']]++;
                             }
                         }
-                    } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
+                    } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && chunkInfo['challenges'][skill][challenge]['Primary'] && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
                             Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
