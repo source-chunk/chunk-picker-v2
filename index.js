@@ -304,6 +304,7 @@ let rules = {
     "InsidePOH": false,
     "InsidePOH Primary": false,
     "Construction Milestone": false,
+    "Construction Minigame": false,
     "Boss": false,
     "Slayer Equipment": false,
     "Normal Farming": false,
@@ -386,6 +387,7 @@ let ruleNames = {
     "InsidePOH": "Crafting furniture inside a POH can count as a chunk task",
     "InsidePOH Primary": "Crafting furniture inside a POH counts as a primary training method for Construction",
     "Construction Milestone": "Miscellaneous Construction milestones (e.g. House location/style, servants, etc) can count for chunk tasks",
+    "Construction Minigame": "Xp from minigames/bosses (Fishing Trawler, Tempoross) can count as a primary way to train Construction",
     "Boss": "Killing a boss can be used for a chunk task (item on droptable, Slayer level to kill, etc.)",
     "Slayer Equipment": "Using Slayer equipment can count for chunk tasks",
     "Normal Farming": "Allow normal farming to count as a primary method for training Farming",
@@ -462,6 +464,8 @@ let ruleNames = {
 let rulePresets = {
     "Vanilla Chunker": {
         "Rare Drop": true,
+        "Construction Milestone": true,
+        "Construction Minigame": true,
         "Boss": true,
         "Show Skill Tasks": true,
         "Show Quest Tasks": true,
@@ -486,6 +490,7 @@ let rulePresets = {
         "InsidePOH": true,
         "InsidePOH Primary": true,
         "Construction Milestone": true,
+        "Construction Minigame": true,
         "Boss": true,
         "Slayer Equipment": true,
         "Normal Farming": true,
@@ -539,6 +544,7 @@ let rulePresets = {
         "InsidePOH": true,
         "InsidePOH Primary": true,
         "Construction Milestone": true,
+        "Construction Minigame": true,
         "Boss": true,
         "Slayer Equipment": true,
         "Normal Farming": true,
@@ -627,7 +633,8 @@ let ruleStructure = {
     "Construction": {
         "InsidePOH Primary": true,
         "InsidePOH": true,
-        "Construction Milestone": true
+        "Construction Milestone": true,
+        "Construction Minigame": true
     },
     "Farming": {
         "Normal Farming": true,
@@ -2447,7 +2454,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.12");
+const myWorker = new Worker("./worker.js?v=4.18.13");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
