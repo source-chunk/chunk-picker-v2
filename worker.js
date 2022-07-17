@@ -1146,7 +1146,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     lowestLevel = newValids[skill][challenge];
                 }
             });
-            !!lowestName && !!chunkInfo['challenges'][skill][lowestName] && (chunkInfo['challenges'][skill][lowestName]['Priority'] = -1 * i);
+            !!lowestName && !!chunkInfo['challenges'][skill][lowestName] && !chunkInfo['challenges'][skill][lowestName].hasOwnProperty('Set') && (chunkInfo['challenges'][skill][lowestName]['Priority'] = -1 * i);
             !!lowestName && Object.keys(tempItemSkill[skill]).forEach(item => {
                 !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= chunkInfo['challenges'][skill][lowestName]['Level'])}).forEach(name => {
                     !newValids[skill] && (newValids[skill] = {});
@@ -3024,7 +3024,7 @@ var calcBIS = function() {
     let combatStyles = ['Melee', 'Ranged', 'Magic'];
     let primarySkill = {};
     skillNames.forEach(skill => {
-        primarySkill[skill] = checkPrimaryMethod(skill, globalValids, baseChunkData);
+        primarySkill[skill] = checkPrimaryMethod(skill, globalValids, baseChunkData) || (!!manualTasks[skill] && Object.keys(manualTasks[skill]).length > 0);
     });
     if (rules['Show Best in Slot Prayer Tasks']) {
         combatStyles.push('Prayer');
