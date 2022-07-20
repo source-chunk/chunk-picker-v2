@@ -2047,6 +2047,9 @@ var pickCanvas = function(both) {
         }
         tempSelectedChunks.splice(sNum - 1, 1);
         delete tempChunks['selected'][el[rand]];
+        if (!tempChunks['unlocked']) {
+            tempChunks['unlocked'] = {};
+        }
         tempChunks['unlocked'][el[rand]] = el[rand];
     } else {
         el = (!!tempChunks['potential'] && Object.keys(tempChunks['potential']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['potential'][chunkId] === 'undefined' || tempChunks['potential'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
@@ -2062,6 +2065,9 @@ var pickCanvas = function(both) {
         recentChunks[el[rand]] = el[rand];
         !!tempChunks['potential'] && Object.keys(tempChunks['potential']).forEach(otherChunkId => {
             delete tempChunks['potential'][otherChunkId];
+            if (!tempChunks['selected']) {
+                tempChunks['selected'] = {};
+            }
             tempChunks['selected'][otherChunkId] = otherChunkId;
             tempSelectedChunks.push(otherChunkId.toString());
             delete recentChunks[otherChunkId.toString()];
@@ -2454,7 +2460,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.14");
+const myWorker = new Worker("./worker.js?v=4.18.15");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
