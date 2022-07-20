@@ -1140,6 +1140,7 @@ let colorBoxLight = "rgba(150, 150, 150, .4)";
 let readyToDrawImage = false;
 let readyToDrawIcons = stickerChoicesOsrs.length;
 let pageReady = false;
+let lastRegain = 0;
 
 function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -2460,7 +2461,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.15");
+const myWorker = new Worker("./worker.js?v=4.18.16");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -6875,10 +6876,13 @@ var checkMID = function(mid) {
 
 // Regains connectivity to firebase
 var regainConnectivity = function(_callback) {
-    firebase.auth().signOut();
-    firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(() => {
-        _callback();
-    });
+    if (Date.now() > lastRegain + 1000) {
+        lastRegain = Date.now();
+        firebase.auth().signOut();
+        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(() => {
+            _callback();
+        });
+    }
 }
 
 // Loads data from codeItems into various data structures
