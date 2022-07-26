@@ -1988,7 +1988,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
 
     let doneTempSkillItems = false;
 
-    !!chunkInfo['challenges'] && tempSkills.forEach(skill => {
+    !!chunkInfo['challenges'] && tempSkills.filter(skill => { return !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] > 0 }).forEach(skill => {
         doneTempSkillItems = false;
         tempItemSkill[skill] = {};
         tempMultiStepSkill[skill] = {};

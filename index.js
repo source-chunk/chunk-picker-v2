@@ -2461,7 +2461,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.16");
+const myWorker = new Worker("./worker.js?v=4.18.17");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5367,7 +5367,7 @@ var filterQuests = function(opt) {
 // Opens the add passive skill modal
 var openPassiveModal = function(skill) {
     passiveSkillModalOpen = true;
-    $('#passive-skill-input').val((!!passiveSkill && passiveSkill[skill]) || 1);
+    $('#passive-skill-input').val((!!passiveSkill && passiveSkill.hasOwnProperty(skill)) ? passiveSkill[skill] : 1);
     $('.passive-skill-name').text(skill);
     $('#passive-skill-data').html(`<div><div class="passive-skill-cancel" onclick="addPassiveSkill(true)">Cancel</div><div class="passive-skill-proceed disabled" onclick="addPassiveSkill(false, '${skill}')">Add Passive Levels</div></div>`);
     $('#myModal28').show();
