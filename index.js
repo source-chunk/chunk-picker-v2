@@ -2461,7 +2461,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.18");
+const myWorker = new Worker("./worker.js?v=4.18.19");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -6480,9 +6480,9 @@ var showChunkHistory = function() {
 }
 
 // Selects correct active context menu item
-var switchActiveContext = function(opt) {
+var switchActiveContext = function(e, opt) {
     switch (opt) {
-        case "backlog": backlogChallenge(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
+        case "backlog": backlogChallenge(activeContextMenuChallenge, activeContextMenuSkill, '', e.altKey); break;
         case "backlog note": showNotes(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
         case "alternatives": showAlternatives(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
         case "details": showDetails(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
@@ -6507,7 +6507,7 @@ var switchQuestFilterContext = function(opt) {
 }
 
 // Sends a challenge to the backlog
-var backlogChallenge = function(challenge, skill, note) {
+var backlogChallenge = function(challenge, skill, note, noUpdate) {
     if (!backlog[skill]) {
         backlog[skill] = {};
     }
@@ -6590,8 +6590,10 @@ var backlogChallenge = function(challenge, skill, note) {
             });
         }
     }
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    if (!noUpdate) {
+        !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
+        calcCurrentChallengesCanvas();
+    }
     setData();
 }
 
