@@ -2461,7 +2461,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.18.19");
+const myWorker = new Worker("./worker.js?v=4.19.0");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -2759,6 +2759,13 @@ $(document).ready(function() {
         }
     });
 
+    $('#searchPlayerMaps').on('keypress', function(e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
+        if (keycode == '13' && !$('#searchPlayerMapsButton').prop('disabled')) {
+            $('#searchPlayerMapsButton').click();
+        }
+    });
+
     $('.lock-closed').hover(function() {
         $(this).removeClass('fa-lock').addClass('fa-unlock-alt');
     }, function() {
@@ -2836,7 +2843,7 @@ $(document).on({
             locked && $('.open-manual-outer-container').css('opacity', 0).hide();
             loadData();
             $('.test-hint').hide();
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40 || e.keyCode === 32) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen) {
             e.preventDefault();
         }
     }
@@ -3441,7 +3448,7 @@ var proceed = function() {
 var nextPage = function(page) {
     if (page === 'create') {
         $('#create2').prop('disabled', true);
-        $('#page1, #page1extra').hide();
+        $('#page1, #page1extra, #page1search').hide();
         $('#page2a').show();
         $('.pin').focus();
     } else if (page === 'create2') {
@@ -3456,7 +3463,7 @@ var nextPage = function(page) {
         midGood = false;
         pinGood = true;
         $('#access').prop('disabled', true);
-        $('#page1, #page1extra').hide();
+        $('#page1, #page1extra, #page1search').hide();
         $('#page2b').show();
         $('.mid').focus();
     }
@@ -3466,7 +3473,7 @@ var nextPage = function(page) {
 var prevPage = function(page) {
     if (page === 'create2') {
         $('#page2a').hide();
-        $('#page1, #page1extra').show();
+        $('#page1, #page1extra, #page1search').show();
         pin = '';
         $('.pin').val('');
     } else if (page === 'create3') {
@@ -3475,7 +3482,7 @@ var prevPage = function(page) {
         $('.pin').focus();
     } else if (page === 'mid') {
         $('#page2b').hide();
-        $('#page1, #page1extra').show();
+        $('#page1, #page1extra, #page1search').show();
         $('.mid').removeClass('wrong').val('');
         $('.pin.old').removeClass('wrong').val('');
         $('.mid-err').css('visibility', 'hidden');
@@ -3940,7 +3947,7 @@ var doneLoading = function() {
 var setupMap = function() {
     if (!atHome) {
         $('.body').show();
-        $('#page1, #page1extra, #import-menu, #highscore-menu, #highscore-menu2, #help-menu').hide();
+        $('#page1, #page1extra, #page1search, #import-menu, #highscore-menu, #highscore-menu2, #help-menu').hide();
         if (locked) {
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 0).hide();
             !isPicking && $('.roll2, .unpick').css('opacity', 0).hide();
@@ -4631,6 +4638,25 @@ var setManualArea = function(area, value) {
         calcCurrentChallengesCanvas();
         setData();
     }
+}
+
+// Unsets incorrect search
+var searchingPlayerMaps = function() {
+    $('#searchPlayerMaps').removeClass('wrong');
+    $('#searchPlayerMapsButton').attr('disabled', false);
+}
+
+// Searches for player maps by player username
+var searchPlayerMaps = function() {
+    databaseRef.child('highscores/players/' + $('#searchPlayerMaps').val().toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' ')).once('value', function(snap) {
+        if (!!snap.val()) {
+            $('#searchPlayerMaps').removeClass('wrong');
+            window.location.assign(window.location.href.split('?')[0] + '?' + snap.val());
+        } else {
+            $('#searchPlayerMaps').addClass('wrong');
+            $('#searchPlayerMapsButton').attr('disabled', true);
+        }
+    });
 }
 
 // Opens the add random event loot modal
@@ -6851,12 +6877,18 @@ var checkMID = function(mid) {
                 $('.background-img').hide();
                 inEntry = true && !viewOnly;
             } else {
-                databaseRef.child('maps/' + mid).once('value', function(snap) {
-                    if (!snap.val()) {
-                        window.location.replace(window.location.href.split('?')[0]);
-                        atHome = true;
-                        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
-                        $('.loading, .ui-loader-header').remove();
+                databaseRef.child('maps/' + mid).once('value', function(snap2) {
+                    if (!snap2.val()) {
+                        databaseRef.child('highscores/players/' + mid.replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' ')).once('value', function(snap3) {
+                            if (!!snap3.val()) {
+                                window.location.replace(window.location.href.split('?')[0] + '?' + snap3.val());
+                            } else {
+                                window.location.replace(window.location.href.split('?')[0]);
+                                atHome = true;
+                                $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
+                                $('.loading, .ui-loader-header').remove();
+                            }
+                        });
                     } else {
                         myRef = firebase.database().ref('maps/' + mid);
                         atHome = false;

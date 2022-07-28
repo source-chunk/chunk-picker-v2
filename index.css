@@ -1055,6 +1055,21 @@ button.menu2 {
     margin-top: 22px;
 }
 
+#page1search {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 10px;
+    margin: 15px;
+    background-color: white;
+    font-size: 24px;
+    border: solid;
+}
+
+input#searchPlayerMaps {
+    font-size: 18px;
+}
+
 .or {
     display: inline-block;
     font-size: 2.5vw;
