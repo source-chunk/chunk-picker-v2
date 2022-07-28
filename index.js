@@ -2461,7 +2461,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.0");
+const myWorker = new Worker("./worker.js?v=4.19.1");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -6879,7 +6879,7 @@ var checkMID = function(mid) {
             } else {
                 databaseRef.child('maps/' + mid).once('value', function(snap2) {
                     if (!snap2.val()) {
-                        databaseRef.child('highscores/players/' + mid.replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' ')).once('value', function(snap3) {
+                        databaseRef.child('highscores/players/' + mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' ')).once('value', function(snap3) {
                             if (!!snap3.val()) {
                                 window.location.replace(window.location.href.split('?')[0] + '?' + snap3.val());
                             } else {
