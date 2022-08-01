@@ -2461,7 +2461,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.1");
+const myWorker = new Worker("./worker.js?v=4.19.2");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -6819,7 +6819,7 @@ var completeChallenges = function(noCalc) {
 // Gets and displays info on the gievn quest
 var getQuestInfo = function(quest) {
     $('.menu10').css('opacity', 1).show();
-    quest = quest.replaceAll(/\%2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q');
+    quest = quest.replaceAll(/\%2H/g, "'").replaceAll(/\%2Q/g, '!').replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J');
     $('.questname-content').html(`<a class='link noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))}' target='_blank'>${quest.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</a>`);
     $('.panel-questdata').empty();
     let unlocked = { ...possibleAreas };
