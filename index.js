@@ -1092,6 +1092,13 @@ let roll5Mid = 'rfr'; // Semanari
 let diary2Tier = 'bti'; // DarkR41d3r
 let unChunkMid = 'idyl'; // Idyl
 
+let contentCreators = {
+    'inoox': 'cna',
+    'slay brother': 'bea',
+    'slaybrother': 'bea',
+    'lsdbroski': 'gdd',
+};
+
 // ----------------------------------------------------------
 
 // Event Listeners
@@ -2461,7 +2468,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.2");
+const myWorker = new Worker("./worker.js?v=4.19.3");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4652,6 +4659,9 @@ var searchPlayerMaps = function() {
         if (!!snap.val()) {
             $('#searchPlayerMaps').removeClass('wrong');
             window.location.assign(window.location.href.split('?')[0] + '?' + snap.val());
+        } else if (contentCreators.hasOwnProperty($('#searchPlayerMaps').val().toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' '))) {
+            $('#searchPlayerMaps').removeClass('wrong');
+            window.location.assign(window.location.href.split('?')[0] + '?' + contentCreators[$('#searchPlayerMaps').val().toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' ')]);
         } else {
             $('#searchPlayerMaps').addClass('wrong');
             $('#searchPlayerMapsButton').attr('disabled', true);
@@ -6882,6 +6892,8 @@ var checkMID = function(mid) {
                         databaseRef.child('highscores/players/' + mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' ')).once('value', function(snap3) {
                             if (!!snap3.val()) {
                                 window.location.replace(window.location.href.split('?')[0] + '?' + snap3.val());
+                            } else if (contentCreators.hasOwnProperty(mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' '))) {
+                                window.location.assign(window.location.href.split('?')[0] + '?' + contentCreators[mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' ')]);
                             } else {
                                 window.location.replace(window.location.href.split('?')[0]);
                                 atHome = true;

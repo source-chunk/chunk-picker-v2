@@ -326,7 +326,7 @@ var calcChallenges = function(chunks, baseChunkData) {
 
     !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Spawns'] && Object.keys(chunkInfo['taskUnlocks']['Spawns']).forEach(item => {
         Object.keys(chunkInfo['taskUnlocks']['Spawns'][item]).forEach(chunk => {
-            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Spawns'][item][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Spawns'][item][chunk].length));
+            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Spawns'][item][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Spawns'][item][chunk].length));
             if (!chunks.hasOwnProperty(chunk)) {
                 tempValid = false;
             }
@@ -345,7 +345,7 @@ var calcChallenges = function(chunks, baseChunkData) {
     });
     !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Monsters'] && Object.keys(chunkInfo['taskUnlocks']['Monsters']).forEach(monster => {
         Object.keys(chunkInfo['taskUnlocks']['Monsters'][monster]).forEach(chunk => {
-            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Monsters'][monster][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Monsters'][monster][chunk].length));
+            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Monsters'][monster][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Monsters'][monster][chunk].length));
             if (!chunks.hasOwnProperty(chunk)) {
                 tempValid = false;
             }
@@ -461,7 +461,7 @@ var calcChallenges = function(chunks, baseChunkData) {
     });
     !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['NPCs'] && Object.keys(chunkInfo['taskUnlocks']['NPCs']).forEach(npc => {
         Object.keys(chunkInfo['taskUnlocks']['NPCs'][npc]).forEach(chunk => {
-            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['NPCs'][npc][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['NPCs'][npc][chunk].length));
+            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['NPCs'][npc][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['NPCs'][npc][chunk].length));
             if (!chunks.hasOwnProperty(chunk)) {
                 tempValid = false;
             }
@@ -480,7 +480,7 @@ var calcChallenges = function(chunks, baseChunkData) {
     });
     !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Objects'] && Object.keys(chunkInfo['taskUnlocks']['Objects']).forEach(object => {
         Object.keys(chunkInfo['taskUnlocks']['Objects'][object]).forEach(chunk => {
-            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Objects'][object][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Objects'][object][chunk].length));
+            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Objects'][object][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Objects'][object][chunk].length));
             if (!chunks.hasOwnProperty(chunk)) {
                 tempValid = false;
             }
@@ -499,7 +499,7 @@ var calcChallenges = function(chunks, baseChunkData) {
     });
     !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Shops'] && Object.keys(chunkInfo['taskUnlocks']['Shops']).forEach(shop => {
         Object.keys(chunkInfo['taskUnlocks']['Shops'][shop]).forEach(chunk => {
-            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Shops'][shop][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Shops'][shop][chunk].length));
+            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Shops'][shop][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Shops'][shop][chunk].length));
             if (!chunks.hasOwnProperty(chunk)) {
                 tempValid = false;
             }
@@ -529,7 +529,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
     });
     !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Items'] && Object.keys(chunkInfo['taskUnlocks']['Items']).forEach(item => {
-        let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Items'][item].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Items'][item].length));
+        let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Items'][item].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Items'][item].length));
         let monster = '';
         let asterisk = '*';
         if (item.includes('^')) {
@@ -1172,9 +1172,44 @@ var calcChallenges = function(chunks, baseChunkData) {
                 chunkInfo['challenges'][skill][name]['Priority'] = 999;
             });
         });
+        let areasAdded = {};
+        let tempChunkArray = [];
+        newValids.hasOwnProperty('Nonskill') && Object.keys(newValids['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('UnlocksArea') && (!manualAreas.hasOwnProperty(task) || manualAreas[task]) }).forEach(task => {
+            if (chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('SkillsNeeded')) {
+                let tempValidNeeded = true;
+                Object.keys(chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded']).forEach(taskSkill => {
+                    if (!checkPrimaryMethod(taskSkill, newValids, baseChunkData) && !(!!passiveSkill && passiveSkill.hasOwnProperty(taskSkill) && passiveSkill[taskSkill] > 1 && chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded'][taskSkill] <= passiveSkill[taskSkill])) {
+                        tempValidNeeded = false;
+                    }
+                });
+                if (tempValidNeeded) {
+                    tempChunkArray.push(task);
+                }
+            } else {
+                tempChunkArray.push(task);
+            }
+        });
+        let indexCount = 0;
+        let startingSize = tempChunkArray.length;
+        let deadChunkArray = [];
+        while (indexCount < tempChunkArray.length && indexCount < (startingSize * 2)) {
+            if (!chunks.hasOwnProperty(tempChunkArray[indexCount]) && possibleAreas.hasOwnProperty(tempChunkArray[indexCount])) {
+                if (Object.keys(areasStructure[tempChunkArray[indexCount]]).filter(subArea => { return chunks.hasOwnProperty(subArea) }).length > 0) {
+                    chunks[tempChunkArray[indexCount]] = true;
+                    areasAdded[tempChunkArray[indexCount]] = true;
+                } else if (Object.keys(areasStructure[tempChunkArray[indexCount]]).filter(subArea => { return tempChunkArray.includes(subArea) && possibleAreas.hasOwnProperty(subArea) }).length > 0 && !deadChunkArray.includes(tempChunkArray[indexCount])) {
+                    tempChunkArray.push(tempChunkArray[indexCount]);
+                    deadChunkArray.push(tempChunkArray[indexCount]);
+                }
+            }
+            indexCount++;
+        }
+        if (Object.keys(areasAdded).length > 0) {
+            baseChunkData = combineJSONs(baseChunkData, gatherChunksInfo(areasAdded));
+        }
         !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Spawns'] && Object.keys(chunkInfo['taskUnlocks']['Spawns']).forEach(item => {
             Object.keys(chunkInfo['taskUnlocks']['Spawns'][item]).forEach(chunk => {
-                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Spawns'][item][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Spawns'][item][chunk].length));
+                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Spawns'][item][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Spawns'][item][chunk].length));
                 if (!chunks.hasOwnProperty(chunk)) {
                     tempValid = false;
                 }
@@ -1193,7 +1228,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Monsters'] && Object.keys(chunkInfo['taskUnlocks']['Monsters']).forEach(monster => {
             Object.keys(chunkInfo['taskUnlocks']['Monsters'][monster]).forEach(chunk => {
-                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Monsters'][monster][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Monsters'][monster][chunk].length));
+                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Monsters'][monster][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Monsters'][monster][chunk].length));
                 if (!chunks.hasOwnProperty(chunk)) {
                     tempValid = false;
                 }
@@ -1309,7 +1344,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['NPCs'] && Object.keys(chunkInfo['taskUnlocks']['NPCs']).forEach(npc => {
             Object.keys(chunkInfo['taskUnlocks']['NPCs'][npc]).forEach(chunk => {
-                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['NPCs'][npc][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['NPCs'][npc][chunk].length));
+                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['NPCs'][npc][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['NPCs'][npc][chunk].length));
                 if (!chunks.hasOwnProperty(chunk)) {
                     tempValid = false;
                 }
@@ -1328,7 +1363,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Objects'] && Object.keys(chunkInfo['taskUnlocks']['Objects']).forEach(object => {
             Object.keys(chunkInfo['taskUnlocks']['Objects'][object]).forEach(chunk => {
-                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Objects'][object][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Objects'][object][chunk].length));
+                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Objects'][object][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Objects'][object][chunk].length));
                 if (!chunks.hasOwnProperty(chunk)) {
                     tempValid = false;
                 }
@@ -1347,7 +1382,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Shops'] && Object.keys(chunkInfo['taskUnlocks']['Shops']).forEach(shop => {
             Object.keys(chunkInfo['taskUnlocks']['Shops'][shop]).forEach(chunk => {
-                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Shops'][shop][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Shops'][shop][chunk].length));
+                let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Shops'][shop][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Shops'][shop][chunk].length));
                 if (!chunks.hasOwnProperty(chunk)) {
                     tempValid = false;
                 }
@@ -1377,7 +1412,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             });
         });
         !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Items'] && Object.keys(chunkInfo['taskUnlocks']['Items']).forEach(item => {
-            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Items'][item].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) }).length === chunkInfo['taskUnlocks']['Items'][item].length));
+            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Items'][item].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Items'][item].length));
             let monster = '';
             let asterisk = '*';
             if (item.includes('^')) {
@@ -1886,41 +1921,6 @@ var calcChallenges = function(chunks, baseChunkData) {
         !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier') && !newValids.hasOwnProperty('Nonskill') || !newValids['Nonskill'].hasOwnProperty(task) }).forEach(task => {
             clueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']] = false;
         });
-        let areasAdded = {};
-        let tempChunkArray = [];
-        newValids.hasOwnProperty('Nonskill') && Object.keys(newValids['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('UnlocksArea') && (!manualAreas.hasOwnProperty(task) || manualAreas[task]) }).forEach(task => {
-            if (chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('SkillsNeeded')) {
-                let tempValidNeeded = true;
-                Object.keys(chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded']).forEach(taskSkill => {
-                    if (!checkPrimaryMethod(taskSkill, newValids, baseChunkData) && !(!!passiveSkill && passiveSkill.hasOwnProperty(taskSkill) && passiveSkill[taskSkill] > 1 && chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded'][taskSkill] <= passiveSkill[taskSkill])) {
-                        tempValidNeeded = false;
-                    }
-                });
-                if (tempValidNeeded) {
-                    tempChunkArray.push(task);
-                }
-            } else {
-                tempChunkArray.push(task);
-            }
-        });
-        let indexCount = 0;
-        let startingSize = tempChunkArray.length;
-        let deadChunkArray = [];
-        while (indexCount < tempChunkArray.length && indexCount < (startingSize * 2)) {
-            if (!chunks.hasOwnProperty(tempChunkArray[indexCount]) && possibleAreas.hasOwnProperty(tempChunkArray[indexCount])) {
-                if (Object.keys(areasStructure[tempChunkArray[indexCount]]).filter(subArea => { return chunks.hasOwnProperty(subArea) }).length > 0) {
-                    chunks[tempChunkArray[indexCount]] = true;
-                    areasAdded[tempChunkArray[indexCount]] = true;
-                } else if (Object.keys(areasStructure[tempChunkArray[indexCount]]).filter(subArea => { return tempChunkArray.includes(subArea) && possibleAreas.hasOwnProperty(subArea) }).length > 0 && !deadChunkArray.includes(tempChunkArray[indexCount])) {
-                    tempChunkArray.push(tempChunkArray[indexCount]);
-                    deadChunkArray.push(tempChunkArray[indexCount]);
-                }
-            }
-            indexCount++;
-        }
-        if (Object.keys(areasAdded).length > 0) {
-            baseChunkData = combineJSONs(baseChunkData, gatherChunksInfo(areasAdded));
-        }
         !!baseChunkData && !!baseChunkData['items'] && Object.keys(baseChunkData['items']).filter(item => { return Object.keys(baseChunkData['items'][item]).length === 0 }).forEach(item => {
             delete baseChunkData['items'][item];
         });
