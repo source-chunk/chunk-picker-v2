@@ -1577,7 +1577,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 'Runecraft': 'Rift guardian'
             }
             Object.keys(skillingPets).forEach(skill => {
-                if (checkPrimaryMethod(skill, newValids, baseChunkData) && !!newValids && newValids[skill] && Object.keys(newValids[skill]).filter(task => { return !chunkInfo['challenges'][skill].hasOwnProperty(task) || !chunkInfo['challenges'][skill][task].hasOwnProperty('NoPet') }).length > 0) {
+                if (checkPrimaryMethod(skill, newValids, baseChunkData) && !!newValids && newValids[skill] && Object.keys(newValids[skill]).filter(task => { return chunkInfo['challenges'][skill].hasOwnProperty(task) && !chunkInfo['challenges'][skill][task].hasOwnProperty('NoPet') && !chunkInfo['challenges'][skill][task].hasOwnProperty('Description') }).length > 0) {
                     if (!baseChunkData['items'][skillingPets[skill]]) {
                         baseChunkData['items'][skillingPets[skill]] = {};
                     }
