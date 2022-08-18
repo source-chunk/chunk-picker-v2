@@ -1013,6 +1013,7 @@ let notesModalOpen = false;
 let notesChallenge = null;
 let notesSkill = null;
 let rulesModalOpen = false;
+let presetWarningModalOpen = false;
 let settingsModalOpen = false;
 let chunkHistoryModalOpen = false;
 let challengeAltsModalOpen = false;
@@ -1071,6 +1072,8 @@ let questFilterType = 'all';
 let tempXpArr = null;
 let tempXpChoices = [];
 let tempSkillChoice = null;
+let modalOutsideTime = 0;
+let readyToExitModal = false;
 let currentVersion = '4.18.0';
 
 // Patreon Test Server Data
@@ -1455,6 +1458,192 @@ var drawCanvas = function() {
 
     animCount++;
 }
+
+// Listen for click events on body for clicking out of modals
+document.body.addEventListener('mousedown', function (event) {
+    let rect;
+    let hasSet = false;
+    if (manualModalOpen) {
+        rect = $('#myModal .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (detailsModalOpen) {
+        rect = $('#myModal2 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (rulesModalOpen) {
+        rect = $('#myModal4 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (settingsModalOpen) {
+        rect = $('#myModal7 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (randomListModalOpen) {
+        rect = $('#myModal8 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (statsErrorModalOpen) {
+        rect = $('#myModal9 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (searchDetailsModalOpen) {
+        rect = $('#myModal11 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (searchModalOpen) {
+        rect = $('#myModal10 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (addEquipmentModalOpen) {
+        rect = $('#myModal15 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (highestModalOpen) {
+        rect = $('#myModal12 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (questStepsModalOpen) {
+        rect = $('#myModal25 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (methodsModalOpen) {
+        rect = $('#myModal13 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (highest2ModalOpen) {
+        rect = $('#myModal12_2 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (completeModalOpen) {
+        rect = $('#myModal14 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (stickerModalOpen) {
+        rect = $('#myModal16 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (backlogSourcesModalOpen) {
+        rect = $('#myModal17 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (chunkHistoryModalOpen) {
+        rect = $('#myModal18 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (challengeAltsModalOpen) {
+        rect = $('#myModal19 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (manualOuterModalOpen) {
+        rect = $('#myModal20 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (monsterModalOpen) {
+        rect = $('#myModal21 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (patchNotesOpen) {
+        rect = $('#myModal24 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (friendsListModalOpen) {
+        rect = $('#myModal26 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (manualAreasModalOpen) {
+        rect = $('#myModal31 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    }
+    // ------
+    if (hasSet && !(event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom) && (modalOutsideTime + 100 < Date.now())) {
+        readyToExitModal = true;
+        rect = null;
+    } else {
+        readyToExitModal = false;
+    }
+});
+
+// Listen for click events on body for clicking out of modals
+document.body.addEventListener('mouseup', function (event) {
+    let rect;
+    let hasSet = false;
+    if (manualModalOpen) {
+        rect = $('#myModal .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (detailsModalOpen) {
+        rect = $('#myModal2 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (rulesModalOpen) {
+        rect = $('#myModal4 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (settingsModalOpen) {
+        rect = $('#myModal7 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (randomListModalOpen) {
+        rect = $('#myModal8 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (statsErrorModalOpen) {
+        rect = $('#myModal9 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (searchDetailsModalOpen) {
+        rect = $('#myModal11 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (searchModalOpen) {
+        rect = $('#myModal10 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (addEquipmentModalOpen) {
+        rect = $('#myModal15 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (highestModalOpen) {
+        rect = $('#myModal12 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (questStepsModalOpen) {
+        rect = $('#myModal25 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (methodsModalOpen) {
+        rect = $('#myModal13 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (highest2ModalOpen) {
+        rect = $('#myModal12_2 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (completeModalOpen) {
+        rect = $('#myModal14 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (stickerModalOpen) {
+        rect = $('#myModal16 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (backlogSourcesModalOpen) {
+        rect = $('#myModal17 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (chunkHistoryModalOpen) {
+        rect = $('#myModal18 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (challengeAltsModalOpen) {
+        rect = $('#myModal19 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (manualOuterModalOpen) {
+        rect = $('#myModal20 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (monsterModalOpen) {
+        rect = $('#myModal21 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (patchNotesOpen) {
+        rect = $('#myModal24 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (friendsListModalOpen) {
+        rect = $('#myModal26 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    } else if (manualAreasModalOpen) {
+        rect = $('#myModal31 .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
+    }
+    // ------
+    if (hasSet && !(event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom) && (modalOutsideTime + 100 < Date.now()) && readyToExitModal) {
+        manualModalOpen && closeManualAdd();
+        detailsModalOpen && closeChallengeDetails();
+        rulesModalOpen && !presetWarningModalOpen && closeRules();
+        settingsModalOpen && closeSettings();
+        randomListModalOpen && closeRandomList();
+        statsErrorModalOpen && closeStatsError();
+        searchModalOpen && !searchDetailsModalOpen && closeSearch();
+        searchDetailsModalOpen && closeSearchDetails();
+        highestModalOpen && !addEquipmentModalOpen && closeHighest();
+        highest2ModalOpen && !methodsModalOpen && !questStepsModalOpen && closeHighest2();
+        methodsModalOpen && closeMethods();
+        completeModalOpen && closeComplete();
+        addEquipmentModalOpen && closeAddEquipment();
+        stickerModalOpen && closeSticker();
+        backlogSourcesModalOpen && closeBacklogSources();
+        chunkHistoryModalOpen && closeChunkHistory();
+        challengeAltsModalOpen && closeChallengeAlts();
+        manualOuterModalOpen && closeOuterAdd();
+        monsterModalOpen && closeMonstersAdd();
+        patchNotesOpen && dismissPatchNotes();
+        questStepsModalOpen && closeQuestSteps();
+        friendsListModalOpen && !friendsAddModalOpen && closeFriendsList();
+        manualAreasModalOpen && closeManualAreas();
+        rect = null;
+    }
+});
 
 // Handles mouse down event
 var handleMouseDown = function(e) {
@@ -2468,7 +2657,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.4");
+const myWorker = new Worker("./worker.js?v=4.19.5");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -3091,6 +3280,7 @@ var openPatchNotesModal = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
         patchNotesOpen = true;
         $('#myModal24').show();
+        modalOutsideTime = Date.now();
     }
 }
 
@@ -4609,6 +4799,7 @@ var openManualAreas = function() {
         $('#searchManualAreas').val('');
         searchManualAreas();
         $('#myModal31').show();
+        modalOutsideTime = Date.now();
         $('#searchManualAreas').focus();
     }
 }
@@ -4693,6 +4884,7 @@ var openRandomList = function() {
         $('#randomlist-data').append(`<div class="noscroll results"><span class="noscroll">No items</span></div>`);
     }
     $('#myModal8').show();
+    modalOutsideTime = Date.now();
 }
 
 // Removes passed item from added random loot
@@ -4806,6 +4998,7 @@ var openQuestSteps = function(skill, challenge) {
             $('.quest-steps-data').removeClass('combat-achievements');
         }
         $('#myModal25').show();
+        modalOutsideTime = Date.now();
         if (tier !== null) {
             !!$('.quest-steps-data .diary-start')[0] && $('.quest-steps-data .diary-start')[0].scrollIntoView({
                 behavior: 'auto',
@@ -4829,6 +5022,7 @@ var openFriendsList = function() {
         $('.friends-list-data').append(`<div class='noscroll friend-item'><a class='noscroll link' href='https://source-chunk.github.io/chunk-picker-v2/?${friendMid.toLowerCase()}' target='_blank'>${friends[friendMid]} (${friendMid})</a><i class="friend-item-x fas fa-times noscrollhard" onclick="removeFriend('${friendMid}')"></i></div>`);
     });
     $('#myModal26').show();
+    modalOutsideTime = Date.now();
     document.getElementById('friends-list-data').scrollTop = 0;
     settingsOpen && settingsMenu();
 }
@@ -4840,6 +5034,7 @@ var openFriendsListAdd = function() {
     $('.mid-friend').val('');
     $('.name-friend').val('');
     $('#myModal27').show();
+    modalOutsideTime = Date.now();
     $('.mid-friend').focus();
 }
 
@@ -4906,6 +5101,7 @@ var addSlayerLocked = function(close) {
 var openManualAddOuter = function() {
     manualOuterModalOpen = true;
     $('#myModal20').show();
+    modalOutsideTime = Date.now();
 }
 
 // Opens the manual add monsters modal
@@ -4914,6 +5110,7 @@ var openMonstersAdd = function() {
     $('#myModal20').hide();
     monsterModalOpen = true;
     $('#myModal21').show();
+    modalOutsideTime = Date.now();
     $('#searchMonsters').val('').focus();
     searchMonsters();
 }
@@ -5030,6 +5227,7 @@ var openManualAdd = function() {
         $('.challenge-data').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No results found (0)</span></span></div>`);
     }
     $('#myModal').show();
+    modalOutsideTime = Date.now();
     $('#searchManual').val('').focus();
 }
 
@@ -5084,6 +5282,7 @@ var addManualTask = function(challenge) {
 var openManualComplete = function() {
     completeModalOpen = true;
     $('#myModal14').show();
+    modalOutsideTime = Date.now();
 }
 
 // Opens the search within my chunks modal
@@ -5091,6 +5290,7 @@ var openSearch = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
         searchModalOpen = true;
         $('#myModal10').show();
+        modalOutsideTime = Date.now();
         $('#searchChunks').val('').focus();
         searchWithinChunks();
     }
@@ -5222,6 +5422,7 @@ var openSearchDetails = function(category, name) {
         $('.searchdetails-data').append(`<div class="noscroll results">${formattedSource.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\|\~/g, '').replaceAll(/\~\|/g, '').replaceAll(/\%2Y/g, "(").replaceAll(/\%2Z/g, ")")}</div>`);
     });
     $('#myModal11').show();
+    modalOutsideTime = Date.now();
     document.getElementById('searchdetails-data').scrollTop = 0;
 }
 
@@ -5288,6 +5489,7 @@ var openHighest = function() {
         $(`.${highestTab}-button`).addClass('active-tab');
         $(`.${highestTab}-body`).show();
         $('#myModal12').show();
+        modalOutsideTime = Date.now();
         document.getElementById('highest-data').scrollTop = 0;
     }
 }
@@ -5390,6 +5592,7 @@ var openHighest2 = function() {
         $(`.${highestTab2}-button`).addClass('active-tab');
         $(`.${highestTab2}-body`).show();
         $('#myModal12_2').show();
+        modalOutsideTime = Date.now();
         document.getElementById('highest2-data').scrollTop = 0;
     }
 }
@@ -5465,6 +5668,7 @@ var checkSlayerLocked = function() {
 var addEquipment = function() {
     addEquipmentModalOpen = true;
     $('#myModal15').show();
+    modalOutsideTime = Date.now();
     $('#searchAddEquipment').val('').focus();
     searchAddEquipment();
 }
@@ -5508,6 +5712,7 @@ var addManualEquipment = function(equip) {
 var backlogSources = function() {
     backlogSourcesModalOpen = true;
     $('#myModal17').show();
+    modalOutsideTime = Date.now();
     $('#searchBacklogSources').val('').focus();
     searchBacklogSources();
 }
@@ -5605,6 +5810,7 @@ var openStickers = function(id) {
         stickerModalOpen = true;
         $('.sticker-data').empty();
         $('#myModal16').show();
+        modalOutsideTime = Date.now();
         document.getElementById('sticker-data').scrollTop = 0;
         let chunkNickname = chunkInfo['chunks'].hasOwnProperty(id) ? chunkInfo['chunks'][id]['Nickname'] + ' ' : '';
         $('.sticker-chunk').text(chunkNickname + '(' + id + ')');
@@ -5685,6 +5891,7 @@ var viewPrimaryMethods = function(skill) {
         $('.methods-data').append(`<div class='noscroll skill-method'>[${methods[method]}]: ${method.replaceAll('~', '').replaceAll('|', '').replaceAll('*', '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</div>`);
     });
     $('#myModal13').show();
+    modalOutsideTime = Date.now();
     document.getElementById('methods-data').scrollTop = 0;
 }
 
@@ -5710,144 +5917,168 @@ var switchHighest2Tab = function(tab) {
 // Closes the manual add tasks modal
 var closeManualAdd = function() {
     manualModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal').hide();
 }
 
 // Closes the challenge details modal
 var closeChallengeDetails = function() {
     detailsModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal2').hide();
 }
 
 // Closes the challenge notes modal
 var closeChallengeNotes = function() {
     notesModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal3').hide();
 }
 
 // Closes the rules modal
 var closeRules = function() {
     rulesModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal4').hide();
 }
 
 // Closes the settings modal
 var closeSettings = function() {
     settingsModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal7').hide();
 }
 
 // Closes the random list modal
 var closeRandomList = function() {
     randomListModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal8').hide();
 }
 
 // Closes the stats error modal
 var closeStatsError = function() {
     statsErrorModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal9').hide();
 }
 
 // Closes the search modal
 var closeSearch = function() {
     searchModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal10').hide();
 }
 
 // Closes the search details modal
 var closeSearchDetails = function() {
     searchDetailsModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal11').hide();
 }
 
 // Closes the highest modal
 var closeHighest = function() {
     highestModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal12').hide();
 }
 
 // Closes the highest modal
 var closeHighest2 = function() {
     highest2ModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal12_2').hide();
 }
 
 // Closes the methods modal
 var closeMethods = function() {
     methodsModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal13').hide();
 }
 
 // Closes the complete modal
 var closeComplete = function() {
     completeModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal14').hide();
 }
 
 // Closes the add equipment modal
 var closeAddEquipment = function() {
     addEquipmentModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal15').hide();
 }
 
 // Closes the sticker modal
 var closeSticker = function() {
     stickerModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal16').hide();
 }
 
 // Closes the backlog sources modal
 var closeBacklogSources = function() {
     backlogSourcesModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal17').hide();
 }
 
 // Closes the chunk history modal
 var closeChunkHistory = function() {
     chunkHistoryModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal18').hide();
 }
 
 // Closes the challenge alts modal
 var closeChallengeAlts = function() {
     challengeAltsModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal19').hide();
 }
 
 // Closes the outer add modal
 var closeOuterAdd = function() {
     manualOuterModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal20').hide();
 }
 
 // Closes the monsters add modal
 var closeMonstersAdd = function() {
     monsterModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal21').hide();
 }
 
 // Closes the quest steps modal
 var closeQuestSteps = function() {
     questStepsModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal25').hide();
 }
 
 // Closes the friends list modal
 var closeFriendsList = function() {
     friendsListModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal26').hide();
 }
 
 // Closes the friends list add modal
 var closeFriendsListAdd = function() {
     friendsAddModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal27').hide();
 }
 
 // Closes the manual areas modal
 var closeManualAreas = function() {
     manualAreasModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal31').hide();
 }
 
@@ -5856,6 +6087,7 @@ var submitCompleteTasks = function() {
     completeChallenges();
     !onMobile && setCalculating('.panel-active');
     completeModalOpen = false;
+    modalOutsideTime = Date.now();
     $('#myModal14').hide();
 }
 
@@ -6221,6 +6453,8 @@ var showDetails = function(challenge, skill, type) {
         }
     });
     $('#myModal2').show();
+    modalOutsideTime = Date.now();
+    console.log(Date.now());
     document.getElementById('details-data').scrollTop = 0;
 }
 
@@ -6245,6 +6479,7 @@ var showAlternatives = function(challenge, skill, type) {
         $('#alts-data').append(`<div class='noscroll results'><span class='noscroll holder'><span class='noscroll topline'>No Alternatives</span></span></div>`);
     }
     $('#myModal19').show();
+    modalOutsideTime = Date.now();
 }
 
 // Switches active challenge to alt
@@ -6295,6 +6530,7 @@ var submitFriend = function() {
 
 // Apply the given rule preset
 var applyPreset = function(preset) {
+    presetWarningModalOpen = false;
     $('#myModal5').hide();
     !!rulePresets && !!rulePresets[preset] && Object.keys(rules).forEach(rule => {
         if (rule === 'Kill X Amount') {
@@ -6317,6 +6553,7 @@ var warnPreset = function(preset) {
     $('#preset-title').text('Apply the ' + preset + ' preset?');
     $('.specific-preset').text(preset);
     $('#preset-data').html('<div><div class="preset-cancel" onclick="applyPreset(``)">Cancel</div><div class="preset-proceed" onclick="applyPreset(`' + preset + '`)">Yes, proceed</div></div>');
+    presetWarningModalOpen = true;
     $('#myModal5').show();
 }
 
@@ -6370,6 +6607,7 @@ var showRules = function(isPage2) {
         checkOffRules(false, true);
         document.getElementById('rules-data').scrollTop = 0;
         $('#myModal4').show();
+        modalOutsideTime = Date.now();
     }
 }
 
@@ -6397,6 +6635,7 @@ var showSettings = function(keepSettingsClosed) {
     document.getElementById('settings-data').scrollTop = 0;
     checkOffSettings(false, 'startup');
     $('#myModal7').show();
+    modalOutsideTime = Date.now();
     !keepSettingsClosed && settingsMenu();
 }
 
@@ -6512,6 +6751,7 @@ var showChunkHistory = function() {
     }
     document.getElementById('chunkhistory-data-inner').scrollTop = 0;
     $('#myModal18').show();
+    modalOutsideTime = Date.now();
     settingsMenu();
 }
 

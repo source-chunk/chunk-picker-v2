@@ -1119,7 +1119,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 let lowestName;
                 tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] }).forEach(name => {
                     let challenge = chunkInfo['challenges'][skill][name];
-                    if ((!challenge.hasOwnProperty('Tasks') || (newValids.hasOwnProperty(skill) && newValids[skill].hasOwnProperty(name))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(name))) {
+                    if (((newValids.hasOwnProperty(skill) && newValids[skill].hasOwnProperty(name))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(name))) {
                         if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
                             lowestItem = challenge;
                             lowestName = name;
