@@ -378,6 +378,7 @@ let rules = {
     "Herblore Unlocked Exception": false,
     "All Shops": false,
     "Quest Skill Reqs": false,
+    "Cleaning Herbs": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -459,6 +460,7 @@ let ruleNames = {
     "Herblore Unlocked Exception": "Unlock Herblore immediately without Druidic Ritual (for accounts that make exceptions and complete the quest outside their chunks)",
     "All Shops": "Must buy every item from every shop within your chunks once <span class='rule-asterisk noscroll'>⁺</span>",
     "Quest Skill Reqs": "Must get Quest skill requirements, regardless of if the Quest is startable or not <span class='rule-asterisk noscroll'>⁺</span>",
+    "Cleaning Herbs": "Cleaning grimy herbs/making (unf) potions can count as chunk tasks"
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -482,6 +484,7 @@ let rulePresets = {
         "PVP-Only Spells": true,
         "Smithing by Smelting": true,
         "Rare Drop Amount": "0",
+        "Cleaning Herbs": true,
     },
     "Xtreme Chunker": {
         "Skillcape": true,
@@ -536,6 +539,7 @@ let rulePresets = {
         "Primary Spawns": true,
         "Tutor Ammo":  true,
         "Spells": true,
+        "Cleaning Herbs": true,
     },
     "Supreme Chunker": {
         "Skillcape": true,
@@ -597,6 +601,7 @@ let rulePresets = {
         "Money Unlockables": true,
         "Prayers": true,
         "All Droptables": true,
+        "Cleaning Herbs": true,
     },
 };                                                                              // List of rules that are part of each preset
 
@@ -647,7 +652,8 @@ let ruleStructure = {
     "Herblore": {
         "Herblore Unlocked Snake Weed": true,
         "Herblore Unlocked": true,
-        "Herblore Unlocked Exception": true
+        "Herblore Unlocked Exception": true,
+        "Cleaning Herbs": true
     },
     "Hunter": {
         "Puro-Puro": ["Extra implings"],
@@ -2657,7 +2663,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.6");
+const myWorker = new Worker("./worker.js?v=4.19.7");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -7317,6 +7323,10 @@ var loadData = function(startup) {
 
             if (!rulesTemp.hasOwnProperty('PvP Minigame')) {
                 rulesTemp['PvP Minigame'] = rulesTemp.hasOwnProperty('Minigame') ? rulesTemp['Minigame'] : false;
+            }
+
+            if (!rulesTemp.hasOwnProperty('Cleaning Herbs')) {
+                rulesTemp['Cleaning Herbs'] = true;
             }
 
             !!rulesTemp && Object.keys(rulesTemp).forEach(rule => {

@@ -2014,6 +2014,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             chunkInfo['challenges'][skill][name]['MonstersDetails'] = [];
             chunkInfo['challenges'][skill][name]['NPCsDetails'] = [];
             chunkInfo['challenges'][skill][name]['ChunksDetails'] = [];
+            delete chunkInfo['challenges'][skill][name]['NeverShow'];
             if (chunkInfo['challenges'][skill][name].hasOwnProperty('Not F2P') && rules['F2P']) {
                 validChallenge = false;
                 wrongThings.push('F2P');
@@ -2080,6 +2081,9 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     return;
                 }
             });
+            if (!rules['Cleaning Herbs'] && (name.includes('Clean a') || name.includes('(unf)')) && skill === 'Herblore' && chunkInfo['challenges'][skill][name]['Level'] > 1) {
+                chunkInfo['challenges'][skill][name]['NeverShow'] = true;
+            }
             if (wrongThings.length > 0) {
                 nonValids[name] = wrongThings;
                 return;
