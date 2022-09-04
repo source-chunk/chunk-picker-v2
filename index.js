@@ -2663,7 +2663,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.7");
+const myWorker = new Worker("./worker.js?v=4.19.8");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4803,6 +4803,8 @@ var openManualAreas = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
         manualAreasModalOpen = true;
         $('#searchManualAreas').val('');
+        filterByUnlockedManualAreas = false;
+        $('.changeManualAreasFilterBy').prop('checked', false);
         searchManualAreas();
         $('#myModal31').show();
         modalOutsideTime = Date.now();
@@ -6460,7 +6462,6 @@ var showDetails = function(challenge, skill, type) {
     });
     $('#myModal2').show();
     modalOutsideTime = Date.now();
-    console.log(Date.now());
     document.getElementById('details-data').scrollTop = 0;
 }
 
