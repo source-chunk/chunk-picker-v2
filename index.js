@@ -2663,7 +2663,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.8");
+const myWorker = new Worker("./worker.js?v=4.19.9");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -2697,10 +2697,10 @@ myWorker.onmessage = function(e) {
                 Object.keys(e.data[12]).filter(area => { return e.data[12][area] === true }).forEach(area => {
                     possibleAreas[area] = true;
                 });
+                tempChallengeArrSaved = e.data[5];
                 if (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 100) {
                     calcCurrentChallenges2(e.data[5]);
                 } else {
-                    tempChallengeArrSaved = e.data[5];
                     $('.panel-active.calculating > i').remove();
                     $('.panel-active.calculating').removeClass('calculating').append(`<div class='calculating'></div>`);
                     $('.panel-active > .calculating').removeClass('outer-loading-bar').html(`<div class='noscroll display-button' onclick='calcCurrentChallenges2()'>Show New Tasks</div>`);
@@ -4447,7 +4447,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
 
 // Finds the current challenge in each skill 2
 var calcCurrentChallenges2 = function(tempChallengeArr) {
-    !tempChallengeArr && (tempChallengeArr = tempChallengeArrSaved)
+    !tempChallengeArr && (tempChallengeArr = tempChallengeArrSaved);
     setupCurrentChallenges(tempChallengeArr);
     infoPanelVis['challenges'] && updateChunkInfo();
     numClueTasks = {
@@ -4475,7 +4475,7 @@ var calcCurrentChallenges2 = function(tempChallengeArr) {
 };
 
 // Sets up data for displaying
-setupCurrentChallenges = function(tempChallengeArr) {
+setupCurrentChallenges = function(tempChallengeArr, noDisplay) {
     !rules['Show Skill Tasks'] && challengeArr.forEach(line => {
         skillNames.forEach(skill => {
             if (line.includes(skill + '-challenge')) {
@@ -4595,8 +4595,12 @@ setupCurrentChallenges = function(tempChallengeArr) {
     if (completedArr.length < 1) {
         completedArr.push('No challenges currently completed.');
     }
-    setCurrentChallenges(backlogArr, completedArr);
-    changeChallengeColor();
+    if (noDisplay) {
+        oldSavedChallengeArr = challengeArr;
+    } else {
+        setCurrentChallenges(backlogArr, completedArr);
+        changeChallengeColor();
+    }
 }
 
 // Toggles the subtabs for the active tasks tab
@@ -6940,6 +6944,7 @@ var checkOffChallenge = function(skill, line) {
         }
         $('.panel-active .challenge:has(input:checked)').addClass('hide-backlog');
         $('.panel-active .challenge:not(:has(input:checked))').removeClass('hide-backlog');
+        setupCurrentChallenges(tempChallengeArrSaved, true);
         changeChallengeColor();
         setData();
         setTaskNum();
