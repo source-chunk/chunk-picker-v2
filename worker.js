@@ -306,6 +306,12 @@ var getLevelForXp = function(xp) {
 // Calculates all the possible challenges
 var calcChallenges = function(chunks, baseChunkData) {
     let valids = {};
+    let outputs = {};
+    let outputObjects = {};
+    let newValids = {};
+    let tempItemSkill = {};
+    let tempMultiStepSkill = {};
+    let i = 0;
     !!manualTasks && Object.keys(manualTasks).forEach(skill => {
         skill !== 'BiS' && Object.keys(manualTasks[skill]).forEach(challenge => {
             if (!!chunkInfo['challenges'][skill] && !!chunkInfo['challenges'][skill][challenge]) {
@@ -313,16 +319,14 @@ var calcChallenges = function(chunks, baseChunkData) {
                     valids[skill] = {};
                 }
                 valids[skill][challenge] = manualTasks[skill][challenge];
+                if (!newValids[skill]) {
+                    newValids[skill] = {};
+                }
+                newValids[skill][challenge] = manualTasks[skill][challenge];
                 chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(challenge) && (chunkInfo['challenges'][skill][challenge]['ManualValid'] = true);
             }
         });
     });
-    let outputs = {};
-    let outputObjects = {};
-    let newValids = {};
-    let tempItemSkill = {};
-    let tempMultiStepSkill = {};
-    let i = 0;
 
     !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Spawns'] && Object.keys(chunkInfo['taskUnlocks']['Spawns']).forEach(item => {
         Object.keys(chunkInfo['taskUnlocks']['Spawns'][item]).forEach(chunk => {
@@ -688,12 +692,19 @@ var calcChallenges = function(chunks, baseChunkData) {
         postMessage(((i + 1) * 7) + '%');
         valids = newValids;
         [newValids, tempItemSkill, tempMultiStepSkill] = calcChallengesWork(chunks, baseChunkData);
-        Object.keys(manualTasks).filter((skill) => { return skill !== 'BiS' }).forEach(skill => {
-            Object.keys(manualTasks[skill]).filter((challenge) => { return !!chunkInfo['challenges'][skill][challenge] }).forEach(challenge => {
-                if (!newValids[skill]) {
-                    newValids[skill] = {};
+        !!manualTasks && Object.keys(manualTasks).forEach(skill => {
+            skill !== 'BiS' && Object.keys(manualTasks[skill]).forEach(challenge => {
+                if (!!chunkInfo['challenges'][skill] && !!chunkInfo['challenges'][skill][challenge]) {
+                    if (!valids[skill]) {
+                        valids[skill] = {};
+                    }
+                    valids[skill][challenge] = manualTasks[skill][challenge];
+                    if (!newValids[skill]) {
+                        newValids[skill] = {};
+                    }
+                    newValids[skill][challenge] = manualTasks[skill][challenge];
+                    chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(challenge) && (chunkInfo['challenges'][skill][challenge]['ManualValid'] = true);
                 }
-                newValids[skill][challenge] = manualTasks[skill][challenge];
             });
         });
         let fullyValid;
@@ -1612,7 +1623,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
-        Object.keys(tempChallenges).filter((skill) => { return checkPrimaryMethod(skill, tempChallenges, baseChunkData) }).forEach(skill => {
+        Object.keys(tempChallenges).forEach(skill => {
             Object.keys(tempChallenges[skill]).forEach(challenge => {
                 let subSkillValid = !(chunkInfo['challenges'][skill][challenge].hasOwnProperty('Skills') && Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).filter((subSkill) => { return !checkPrimaryMethod(subSkill, tempChallenges, baseChunkData) || (subSkill === 'Slayer' && !!slayerLocked && chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > slayerLocked['level']) }).length > 0);
                 if (subSkillValid && skill !== 'BiS') {
