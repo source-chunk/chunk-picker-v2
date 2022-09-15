@@ -5087,7 +5087,7 @@ var calcCurrentChallenges2 = function() {
             highestChallengeLevelArr[skill] = 0;
             highestChallengeLevelBoost[skill] = 0;
             !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach(name => {
-                if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name]['Level'] > highestChallengeLevelArr[skill]) {
+                if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name]['Level'] > (highestChallengeLevelArr[skill] + highestChallengeLevelBoost[skill])) {
                     if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost')) {
                         let bestBoost = 0;
                         let hasCrystalSaw = false;
