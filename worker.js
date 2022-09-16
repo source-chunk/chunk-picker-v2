@@ -2333,21 +2333,25 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                         missingItems.push(item);
                     }
                 } else {
-                    if (!items[item.replaceAll(/\*/g, '')] || (chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') && chunkInfo['challenges'][skill][name]['NonShop'] && onlyShop(items[item.replaceAll(/\*/g, '')]))) {
+                    if ((!items[item.replaceAll(/\*/g, '')] && (!items[item.replaceAll(/\*/g, '') + '*'] || combatSkills.includes(skill))) || (chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') && chunkInfo['challenges'][skill][name]['NonShop'] && onlyShop(items[item.replaceAll(/\*/g, '')]))) {
                         validChallenge = false;
                         wrongThings.push(item);
                         nonValids[name] = wrongThings;
                         chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                         return;
                     } else {
-                        chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
-                        if (item.includes('*') && !!items[item.replaceAll(/\*/g, '')]) {
-                            (Object.keys(items[item.replaceAll(/\*/g, '')]).filter((source) => { return (!items[item.replaceAll(/\*/g, '')][source].includes('-Farming') || rules['Farming Primary']) && (!items[item.replaceAll(/\*/g, '')][source].includes('secondary-') || (items[item.replaceAll(/\*/g, '')][source].includes('primary-') && !processingSkill[items[item.replaceAll(/\*/g, '')][source].split('-')[1]]) || items[item.replaceAll(/\*/g, '')][source] === 'shop' )}).length > 0) && (secondary = false);
+                        let tempItem = item.replaceAll(/\*/g, '');
+                        if (items.hasOwnProperty(item.replaceAll(/\*/g, '') + '*') && !combatSkills.includes(skill)) {
+                            tempItem += '*';
+                        }
+                        chunkInfo['challenges'][skill][name]['ItemsDetails'].push(tempItem);
+                        if (item.includes('*') && !!items[tempItem]) {
+                            (Object.keys(items[tempItem]).filter((source) => { return (!items[tempItem][source].includes('-Farming') || rules['Farming Primary']) && (!items[tempItem][source].includes('secondary-') || (items[tempItem][source].includes('primary-') && !processingSkill[items[tempItem][source].split('-')[1]]) || items[tempItem][source] === 'shop' )}).length > 0) && (secondary = false);
                         }
                         if (combatSkills.includes(skill) || (chunkInfo['challenges'][skill][name].hasOwnProperty('Category') && chunkInfo['challenges'][skill][name]['Category'].includes('BIS Skilling'))) {
                             let tempTempValid = false;
-                            Object.keys(items[item.replaceAll(/\*/g, '')]).forEach(source => {
-                                if (!items[item.replaceAll(/\*/g, '')][source].includes('-') || !skillNames.includes(items[item.replaceAll(/\*/g, '')][source].split('-')[1]) || chunkInfo['challenges'][skill][name]['Not Equip'] || rules['Wield Crafted Items'] || items[item.replaceAll(/\*/g, '')][source].split('-')[1] === 'Slayer') {
+                            Object.keys(items[tempItem]).forEach(source => {
+                                if (!items[tempItem][source].includes('-') || !skillNames.includes(items[tempItem][source].split('-')[1]) || chunkInfo['challenges'][skill][name]['Not Equip'] || rules['Wield Crafted Items'] || items[tempItem][source].split('-')[1] === 'Slayer') {
                                     tempTempValid = true;
                                 } else if (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks')) {
                                     let questDiaryValid = false;
@@ -5122,7 +5126,7 @@ var calcCurrentChallenges2 = function() {
             let isPrimary = true || checkPrimaryMethod(skill, globalValids, baseChunkData);
             Object.keys(globalValids[skill]).forEach(challenge => {
                 if (isPrimary || (manualTasks.hasOwnProperty(skill) && manualTasks[skill].hasOwnProperty(challenge))) {
-                    if (globalValids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > (highestChallengeLevelArr[skill] + highestChallengeLevelBoost[skill])) && !chunkInfo['challenges'][skill][challenge]['NeverShow']) {
+                    if (globalValids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > (highestChallengeLevelArr[skill] + highestChallengeLevelBoost[skill])) && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill].hasOwnProperty(challenge))) {
                         if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) {
                             if (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge)) {
                                 if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
@@ -5225,7 +5229,7 @@ var calcCurrentChallenges2 = function() {
     });
     Object.keys(tempChallengeArr).forEach(skill => {
         let challenge = tempChallengeArr[skill] || highestOverall[skill];
-        if (!!challenge && rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost')) {
+        if (!!challenge && rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost') && (!completedChallenges[skill] || !completedChallenges[skill].hasOwnProperty(challenge))) {
             let bestBoost = 0;
             let bestBoostSource;
             let hasCrystalSaw = false;
