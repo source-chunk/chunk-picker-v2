@@ -1422,6 +1422,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
+        let slayerTaskLockedItems = {};
         !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Items'] && Object.keys(chunkInfo['taskUnlocks']['Items']).forEach(item => {
             let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Items'][item].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])) }).length === chunkInfo['taskUnlocks']['Items'][item].length));
             let monster = '';
@@ -1434,7 +1435,11 @@ var calcChallenges = function(chunks, baseChunkData) {
             }
             if (!tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
                 if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
-                    !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return source === monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') }).forEach(source => {
+                    if (!slayerTaskLockedItems[item]) {
+                        slayerTaskLockedItems[item] = {};
+                    }
+                    slayerTaskLockedItems[item][monster.toLowerCase()] = true;
+                    !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return (source === monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')) || (source.toLowerCase().includes(monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').toLowerCase()) && source.includes('Slay')) }).forEach(source => {
                         delete baseChunkData['items'][item][source];
                         if (Object.keys(baseChunkData['items'][item]).length === 0) {
                             delete baseChunkData['items'][item];
@@ -1733,7 +1738,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             });
         });
         Object.keys(outputs).filter((output) => { return !backloggedSources['items'] || !backloggedSources['items'][output] }).forEach(output => {
-            Object.keys(outputs[output]).filter((source) => { return outputs[output][source].split('-').length <= 1 || ((newValids.hasOwnProperty(outputs[output][source].split('-')[1])) || (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(source))) }).forEach(source => {
+            Object.keys(outputs[output]).filter((source) => { return outputs[output][source].split('-').length <= 1 || ((newValids.hasOwnProperty(outputs[output][source].split('-')[1])) || (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(source) && (!slayerTaskLockedItems.hasOwnProperty(output) || !slayerTaskLockedItems[output].hasOwnProperty(source.split('|')[1].toLowerCase())))) }).forEach(source => {
                 if (baseChunkData['items'].hasOwnProperty(output + '*')) {
                     if (!baseChunkData['items'][output + '*']) {
                         baseChunkData['items'][output + '*'] = {};
@@ -5270,7 +5275,11 @@ var calcCurrentChallenges2 = function() {
                         tempChallengeArr[skill] = challenge + `{${(bestBoost + (hasCrystalSaw ? 3 : 0))}}`;
                     }
                     highestOverall[skill] = challenge + `{${(bestBoost + (hasCrystalSaw ? 3 : 0))}}`;
+                } else if (!!tempChallengeArr[skill]) {
+                    highestOverall[skill] = tempChallengeArr[skill];
                 }
+            } else if (!!tempChallengeArr[skill]) {
+                highestOverall[skill] = tempChallengeArr[skill];
             }
         } else if (!!tempChallengeArr[skill]) {
             highestOverall[skill] = tempChallengeArr[skill];
