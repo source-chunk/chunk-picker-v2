@@ -1165,6 +1165,15 @@ let readyToDrawIcons = stickerChoicesOsrs.length;
 let pageReady = false;
 let lastRegain = 0;
 
+let hintTexts = [
+    "Join the ClanChat: 'OneChunkClan'!",
+    "Join the Chunk Chat Discord!",
+    "Celebrating over 3 years of Chunk Picking!",
+    "Check out our RS3 Sister-site!"
+];
+let hintNum = Math.floor(Math.random() * hintTexts.length);
+$('.loading-hint-2').text(hintTexts[hintNum]);
+
 function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -2677,12 +2686,14 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.19");
+const myWorker = new Worker("./worker.js?v=4.19.20");
 myWorker.onmessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
         $('.panel-active > .outer-loading-bar').css('color', 'yellow');
         $('.loading-bar-text').css('color', 'yellow').text('Error');
+        $('.panel-active > .calculating').css('color', 'red');
+        $('.panel-active > .calculating > i').removeClass('fa-spin');
         throw e.data[1];
     } else if (!Array.isArray(e.data)) {
         if (!!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).length >= 100) {
