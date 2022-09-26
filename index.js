@@ -2444,8 +2444,11 @@ var setUpSelected = function() {
 // Finds the current challenge in each skill
 var calcCurrentChallengesCanvas = function() {
     if (gotData) {
+        myWorker.terminate();
+        myWorker = new Worker("./worker.js?v=4.19.23");
+        myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas]);
-        workerOut++;
+        workerOut = 1;
     }
 }
 
@@ -2686,8 +2689,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-const myWorker = new Worker("./worker.js?v=4.19.22");
-myWorker.onmessage = function(e) {
+let myWorker = new Worker("./worker.js?v=4.19.23");
+let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
         $('.panel-active > .outer-loading-bar').css('color', 'yellow');
@@ -2702,6 +2705,9 @@ myWorker.onmessage = function(e) {
     } else {
         workerOut--;
         workerOut < 0 && (workerOut = 0);
+        if (e.data[0] === 'current') {
+            workerOut = 0;
+        }
         if (workerOut === 0) {
             chunkInfo = e.data[3];
             if (e.data[0] === 'future') {
@@ -5812,9 +5818,6 @@ var calculateSlayerTasks = function() {
                         tempDoable = true;
                     }
                 });
-                if (!slayerTasks.hasOwnProperty(monster)) {
-                    console.log(monster);
-                }
                 if (!tempDoable) {
                     isDoable = false;
                 }

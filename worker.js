@@ -5130,6 +5130,17 @@ var calcCurrentChallenges2 = function() {
             });
             let isPrimary = true || checkPrimaryMethod(skill, globalValids, baseChunkData);
             Object.keys(globalValids[skill]).forEach(challenge => {
+                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoXp') && !Object.keys(highestOverall).includes(chunkInfo['challenges'][skill][challenge]['Output']) && !rules["Highest Level"]) {
+                    delete globalValids[skill][challenge];
+                    if (!globalValids[skill]) {
+                        delete globalValids[skill];
+                    }
+                    delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']];
+                    if (!baseChunkData['items']) {
+                        delete baseChunkData['items'];
+                    }
+                    return;
+                }
                 if (isPrimary || (manualTasks.hasOwnProperty(skill) && manualTasks[skill].hasOwnProperty(challenge))) {
                     if (globalValids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > (highestChallengeLevelArr[skill] + highestChallengeLevelBoost[skill])) && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill].hasOwnProperty(challenge))) {
                         if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) {
