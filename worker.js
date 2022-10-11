@@ -1140,8 +1140,12 @@ var calcChallenges = function(chunks, baseChunkData) {
                         }
                     }
                     if (challenge.hasOwnProperty('Tasks')) {
-                        !!newValids[skill] && delete newValids[skill][name];
-                        !!valids[skill] && delete valids[skill][name];
+                        chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).forEach(subTask => {
+                            if (!newValids.hasOwnProperty(chunkInfo['challenges'][skill][name]['Tasks'][subTask]) || !newValids[chunkInfo['challenges'][skill][name]['Tasks'][subTask]].hasOwnProperty(subTask)) {
+                                !!newValids[skill] && delete newValids[skill][name];
+                                !!valids[skill] && delete valids[skill][name];
+                            }
+                        });
                     }
                 });
                 !!lowestName && !newValids[skill] && (newValids[skill] = {});
@@ -1160,8 +1164,16 @@ var calcChallenges = function(chunks, baseChunkData) {
             !!lowestName && !!chunkInfo['challenges'][skill][lowestName] && !chunkInfo['challenges'][skill][lowestName].hasOwnProperty('Set') && (chunkInfo['challenges'][skill][lowestName]['Priority'] = -1 * i);
             !!lowestName && Object.keys(tempItemSkill[skill]).forEach(item => {
                 !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= chunkInfo['challenges'][skill][lowestName]['Level'])}).forEach(name => {
-                    !newValids[skill] && (newValids[skill] = {});
-                    newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                    let stillValid = true;
+                    chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).forEach(subTask => {
+                        if (!newValids.hasOwnProperty(chunkInfo['challenges'][skill][name]['Tasks'][subTask]) || !newValids[chunkInfo['challenges'][skill][name]['Tasks'][subTask]].hasOwnProperty(subTask)) {
+                            stillValid = false;
+                        }
+                    });
+                    if (stillValid) {
+                        !newValids[skill] && (newValids[skill] = {});
+                        newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                    }
                 });
             });
         });
@@ -1178,9 +1190,17 @@ var calcChallenges = function(chunks, baseChunkData) {
                 lowestLevel = skillQuestXp[skill]['level'];
             }
             !!lowestLevel && Object.keys(tempMultiStepSkill[skill]).filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= lowestLevel)}).forEach(name => {
-                !newValids[skill] && (newValids[skill] = {});
-                newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
-                chunkInfo['challenges'][skill][name]['Priority'] = 999;
+                let stillValid = true;
+                chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).forEach(subTask => {
+                    if (!newValids.hasOwnProperty(chunkInfo['challenges'][skill][name]['Tasks'][subTask]) || !newValids[chunkInfo['challenges'][skill][name]['Tasks'][subTask]].hasOwnProperty(subTask)) {
+                        stillValid = false;
+                    }
+                });
+                if (stillValid) {
+                    !newValids[skill] && (newValids[skill] = {});
+                    newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                    chunkInfo['challenges'][skill][name]['Priority'] = 999;
+                }
             });
         });
         let areasAdded = {};
@@ -1952,6 +1972,28 @@ var calcChallenges = function(chunks, baseChunkData) {
     //console.log(baseChunkData);
     tempChunkData = baseChunkData;
     return valids;
+}
+
+function diff(obj1, obj2) {
+    const result = {};
+    if (Object.is(obj1, obj2)) {
+        return undefined;
+    }
+    if (!obj2 || typeof obj2 !== 'object') {
+        return obj2;
+    }
+    Object.keys(obj1 || {}).concat(Object.keys(obj2 || {})).forEach(key => {
+        if(obj2[key] !== obj1[key] && !Object.is(obj1[key], obj2[key])) {
+            result[key] = obj2[key];
+        }
+        if(typeof obj2[key] === 'object' && typeof obj1[key] === 'object') {
+            const value = diff(obj1[key], obj2[key]);
+            if (value !== undefined) {
+                result[key] = value;
+            }
+        }
+    });
+    return result;
 }
 
 // Checks if every source of an item is from a shop
@@ -2901,31 +2943,34 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             drops[line.split(':')[0]][line.split('|')[1]][line.split(' ~')[0].split(': ')[1]] = true;
         });
         Object.keys(items).filter((item) => { return !!items[item] }).sort().forEach(item => {
-            Object.keys(items[item]).filter((source) => { return items[item][source].includes('-Slayer') }).forEach(source => {
+            Object.keys(items[item]).filter((source) => { return source.includes('Slay ') }).forEach(source => {
                 let monster = chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F').replaceAll('.', '%2E')]['Output'];
                 Object.keys(chunkInfo['skillItems']['Slayer'][monster]).forEach(drop => {
                     if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
-                        Object.keys(dropTables[drop]).filter((item) => { return (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) || ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1]) * parseFloat(dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) }).forEach(item => {
-                            if (!dropTablesGlobal[monster]) {
-                                dropTablesGlobal[monster] = {};
-                            }
-                            if (!dropTablesGlobal[monster][drop]) {
-                                dropTablesGlobal[monster][drop] = {};
-                            }
-                            !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach(quantity => {
-                                dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : dropTables[drop][item].split('@')[1] * quantity] = findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[1]), drop.includes('GeneralSeedDropTable'));
+                        !!chunkInfo['skillItems']['Slayer'][monster][drop] && Object.keys(chunkInfo['skillItems']['Slayer'][monster][drop]).forEach(quantityDrop => {
+                            Object.keys(dropTables[drop]).filter((item) => { return (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1])) || ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1]) * parseFloat(dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) }).forEach(item => {
+                                if (!dropTablesGlobal[monster]) {
+                                    dropTablesGlobal[monster] = {};
+                                }
+                                if (!dropTablesGlobal[monster][drop]) {
+                                    dropTablesGlobal[monster][drop] = {};
+                                }
+                                !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach(quantity => {
+                                    dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : dropTables[drop][item].split('@')[1] * quantity] = findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[1]), drop.includes('GeneralSeedDropTable'));
+                                });
                             });
                         });
-                    } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
-                            (rules['Boss'] || !bossMonsters.hasOwnProperty(monster))) {
-                        if (!dropTablesGlobal[monster]) {
-                            dropTablesGlobal[monster] = {};
-                        }
-                        if (!dropTablesGlobal[monster][drop]) {
-                            dropTablesGlobal[monster][drop] = {};
-                        }
-                        !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach(quantity => {
-                            dropTablesGlobal[monster][drop][quantity] = (chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/').length <= 1) ? chunkInfo['skillItems']['Slayer'][monster][drop][quantity] : findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[1].replaceAll('~', '')));
+                    } else {
+                        !!chunkInfo['skillItems']['Slayer'][monster][drop] && Object.keys(chunkInfo['skillItems']['Slayer'][monster][drop]).forEach(quantityDrop => {
+                            if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossMonsters.hasOwnProperty(monster))) {
+                                if (!dropTablesGlobal[monster]) {
+                                    dropTablesGlobal[monster] = {};
+                                }
+                                if (!dropTablesGlobal[monster][drop]) {
+                                    dropTablesGlobal[monster][drop] = {};
+                                }
+                                dropTablesGlobal[monster][drop][quantityDrop] = (chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantityDrop].split('/')[1].replaceAll('~', '')));
+                            }
                         });
                     }
                 });
@@ -3107,8 +3152,8 @@ var calcBIS = function() {
                 return;
             }
             let validWearable = true;
-            !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+            !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                     validWearable = false;
                 }
             });
@@ -4235,8 +4280,8 @@ var calcBIS = function() {
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4280,8 +4325,8 @@ var calcBIS = function() {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs', 'Toktz-xil-ak'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4351,8 +4396,8 @@ var calcBIS = function() {
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4396,8 +4441,8 @@ var calcBIS = function() {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs', 'Toktz-xil-ak'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4467,8 +4512,8 @@ var calcBIS = function() {
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4512,8 +4557,8 @@ var calcBIS = function() {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs', 'Toktz-xil-ak'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4583,8 +4628,8 @@ var calcBIS = function() {
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4628,8 +4673,8 @@ var calcBIS = function() {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs', 'Toktz-xil-ak'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4699,8 +4744,8 @@ var calcBIS = function() {
             tempEquipment = ['Void ranger helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4782,8 +4827,8 @@ var calcBIS = function() {
             tempEquipment = ['Amulet of the damned (full)', "Karil's coif", "Karil's crossbow", "Karil's leatherskirt", "Karil's leathertop", 'Bolt rack'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4827,8 +4872,8 @@ var calcBIS = function() {
             tempEquipment = ['Crystal helm', 'Crystal body', 'Crystal legs', 'Crystal bow'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });
@@ -4906,8 +4951,8 @@ var calcBIS = function() {
             tempEquipment = ['Void mage helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
-                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && chunkInfo['equipment'][equip].requirements.forEach(skill => {
-                    if (!primarySkill[skill.charAt(0).toUpperCase() + skill.slice(1)]) {
+                baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
+                    if (!primarySkill[skill]) {
                         validWearable = false;
                     }
                 });

@@ -24,7 +24,7 @@ var topButtonsOn = false;                                                       
 var infoCollapse = false;                                                       // Is the chunk info panel collapsed
 var highscoreEnabled = false;                                                   // Is highscore tracking enabled
 var highVisibilityMode = false;                                                 // Is high visibility mode enabled
-var darkMode = false;                                                           // Is dark mode enabled
+var theme = 'light';                                                            // Theme value
 var recent = [];                                                                // Recently picked chunks
 var recentTime = [];                                                            // Recently picked chunks time
 var chunkOrder = [];                                                            // Full picked chunks order
@@ -61,7 +61,12 @@ var prevValuePinOld2 = '';                                                      
 var prevValuePinOld2Second = '';                                                // Previous valye of pin 2 at pin change
 var prevValueMidFriend = '';                                                    // Previous value of map id at friend change
 var prevStartingChunkValue = '';                                                // Previous value of starting chunk id
-var prevValueLevelInput = {'Combat': 3, 'Slayer': 1};                           // Previous values of combat and slayer level inputs
+var prevValueLevelInput = {
+    'Combat': 3,
+    'Slayer': 1,
+    'ignoreCombatLevel': false,
+    'krystiliaSlayerCreatures': false
+};                                                                              // Previous values of combat and slayer level inputs, and related checkboxes
 var mid;                                                                        // Current value of map id
 var pin;                                                                        // Current value of pin
 var savedPin;                                                                   // Pin saved off from entry
@@ -376,6 +381,7 @@ let rules = {
     "All Droptables": false,
     "F2P": false,
     "Fill Stash": false,
+    "Fill POH": false,
     "Herblore Unlocked Exception": false,
     "All Shops": false,
     "Quest Skill Reqs": false,
@@ -459,6 +465,7 @@ let ruleNames = {
     "All Droptables": "Must obtain every drop from every unique monster's droptable <span class='rule-asterisk noscroll'>†</span>",
     "F2P": "Restrict to F2P skills/items/tasks only",
     "Fill Stash": "Must build and fill S.T.A.S.H. units as soon as you're able to",
+    "Fill POH": "Must fill slots in the POH costume room",
     "Herblore Unlocked Exception": "Unlock Herblore immediately without Druidic Ritual (for accounts that make exceptions and complete the quest outside their chunks)",
     "All Shops": "Must buy every item from every shop within your chunks once <span class='rule-asterisk noscroll'>⁺</span>",
     "Quest Skill Reqs": "Must get Quest skill requirements, regardless of if the Quest is startable or not <span class='rule-asterisk noscroll'>⁺</span>",
@@ -699,6 +706,7 @@ let ruleStructure = {
         "Skilling Pets": true,
         "Stuffables": true,
         "Fill Stash": true,
+        "Fill POH": true,
         "Money Unlockables": true,
         "Manually Complete Tasks": true,
         "Every Drop": true,
@@ -731,7 +739,7 @@ let settings = {
     "completedTaskColor": '#0D8219',
     "completedTaskStrikethrough": true,
     "randomStartAlways": false,
-    "darkmode": false,
+    "theme": 'light',
     "defaultStickerColor": '#FFFFFF',
     "walkableRollable": true,
     "cinematicRoll": true,
@@ -754,7 +762,7 @@ let settingNames = {
     "completedTaskColor": "Change the color of checked-off chunk tasks",
     "completedTaskStrikethrough": "Cross-off chunk tasks as you complete them",
     "randomStartAlways": "Change the 'Pick Chunk' button to always be a 'Random Start' button; every chunk roll picks a random walkable chunk (that isn't already unlocked)",
-    "darkmode": "Enable <b class='noscroll'>Dark Mode</b>",
+    "theme": "Set <b class='noscroll'>Theme</b>",
     "defaultStickerColor": "Change the default color of chunk stickers",
     "walkableRollable": "Only automatically mark <b class='noscroll'>walkable</b> chunks",
     "cinematicRoll": "Enable fancier rolling of chunks",
@@ -781,11 +789,11 @@ let settingStructure = {
         "topButtons": true
     },
     "Customization": {
+        "theme": true,
         "startingChunk": true,
         "ids": true,
         "cinematicRoll": true,
         "highvis": true,
-        "darkmode": true,
         "numTasksPercent": true,
         "completedTaskStrikethrough": true,
         "completedTaskColor": true,
@@ -935,6 +943,7 @@ let possibleAreas = {};
 let manualAreas = {};
 let areasStructure = {}
 let highestCurrent = {};
+let savedChunks = {};
 
 let universalPrimary = {
     "Slayer": ["Primary+"],
@@ -1087,7 +1096,9 @@ let modalOutsideTime = 0;
 let readyToExitModal = false;
 let assignableSlayerTasks = {};
 let slayerTasksCalculated = false;
-let currentVersion = '4.18.0';
+let savedNotesType = null;
+let savedNotesEl = null;
+let currentVersion = '5.0.0';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -1169,7 +1180,8 @@ let hintTexts = [
     "Join the ClanChat: 'OneChunkClan'!",
     "Join the Chunk Chat Discord!",
     "Celebrating over 3 years of Chunk Picking!",
-    "Check out our RS3 Sister-site!"
+    "Check out our RS3 Sister-site!",
+    "Now with Custom Themes!"
 ];
 let hintNum = Math.floor(Math.random() * hintTexts.length);
 $('.loading-hint-2').text(hintTexts[hintNum]);
@@ -1905,9 +1917,7 @@ var handleMouseUp = function(e) {
                 if (!recentChunks.hasOwnProperty(chunkId)) {
                     delete tempChunks['unlocked'][chunkId];
                     !onMobile && getChunkAreas();
-                    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                    !onMobile && setCalculating('.panel-completed');
-                    calcCurrentChallengesCanvas();
+                    calcCurrentChallengesCanvas(true);
                 }
             } else if (!!tempChunks['selected'] && tempChunks['selected'].hasOwnProperty(chunkId)) {
                 if (e.shiftKey) {
@@ -1921,9 +1931,7 @@ var handleMouseUp = function(e) {
                     }
                     tempChunks['unlocked'][chunkId] = chunkId;
                     !onMobile && getChunkAreas();
-                    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                    !onMobile && setCalculating('.panel-completed');
-                    calcCurrentChallengesCanvas();
+                    calcCurrentChallengesCanvas(true);
                 }
             } else if (!!tempChunks['potential'] && tempChunks['potential'].hasOwnProperty(chunkId)) {
                 delete tempChunks['potential'][chunkId];
@@ -1957,7 +1965,7 @@ var handleMouseUp = function(e) {
                 !onMobile && getChunkAreas();
                 !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
                 !onMobile && setCalculating('.panel-completed');
-                calcCurrentChallengesCanvas();
+                calcCurrentChallengesCanvas(true, true);
             } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(chunkId)) {
                 // --
             } else {
@@ -2119,7 +2127,7 @@ var takeMeToChunkCanvas = function() {
     scrollToChunkCanvas(chosenFromCinematic);
     chosenFromCinematic = null;
     $('.recent').removeClass('recent');
-    calcCurrentChallengesCanvas();
+    calcCurrentChallengesCanvas(true, true);
     $('.roll-chunk-title').text('Rolling your next chunk...');
     $('.roll-chunk-subtitle').text('');
     $('.roll-chunk-outer').empty().css('top', '0');
@@ -2225,7 +2233,7 @@ var pickCanvas = function(both) {
         !onMobile && !activeSubTabs['quest'] && expandActive('quest');
         !onMobile && !activeSubTabs['diary'] && expandActive('diary');
         !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-        !onMobile && calcCurrentChallengesCanvas();
+        !onMobile && calcCurrentChallengesCanvas(true, true);
         setData();
         return;
     } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
@@ -2334,7 +2342,7 @@ var pickCanvas = function(both) {
     !onMobile && !activeSubTabs['quest'] && expandActive('quest');
     !onMobile && !activeSubTabs['diary'] && expandActive('diary');
     !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-    !onMobile && !settings['cinematicRoll'] && calcCurrentChallengesCanvas();
+    !onMobile && !settings['cinematicRoll'] && calcCurrentChallengesCanvas(true, true);
     setData();
 }
 
@@ -2442,10 +2450,18 @@ var setUpSelected = function() {
 }
 
 // Finds the current challenge in each skill
-var calcCurrentChallengesCanvas = function() {
-    if (gotData) {
+var calcCurrentChallengesCanvas = function(useOld, proceed) {
+    if (!proceed) {
+        $('.panel-active .calculating').remove();
+        $('.panel-active').prepend(`<div class="noscroll calculating"><div class='noscroll display-button' onclick='calcCurrentChallengesCanvas(${useOld}, true)'>Calculate Tasks</div></div>`);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=4.19.27");
+        return;
+    }
+    if (gotData) {
+        setCalculating('.panel-active', useOld);
+        setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true, true);
+        myWorker.terminate();
+        myWorker = new Worker("./worker.js?v=5.0.0");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas]);
         workerOut = 1;
@@ -2689,7 +2705,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=4.19.27");
+let myWorker = new Worker("./worker.js?v=5.0.0");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -2724,6 +2740,7 @@ let workerOnMessage = function(e) {
                 questProgress = e.data[9];
                 diaryProgress = e.data[10];
                 skillQuestXp = e.data[11];
+                savedChunks = e.data[12];
                 possibleAreas = {};
                 Object.keys(e.data[12]).filter(area => { return e.data[12][area] === true }).forEach(area => {
                     possibleAreas[area] = true;
@@ -3367,8 +3384,7 @@ var openXpRewardModal = function(skill, line, xpArr, num) {
             $($(challengeLine).find('input')[0]).prop('checked', true);
             changeChallengeColor();
             if (!allNone) {
-                !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                calcCurrentChallengesCanvas();
+                calcCurrentChallengesCanvas(true);
             }
             setData();
             $('#myModal30').hide();
@@ -3504,10 +3520,10 @@ var handleFancy = function(self) {
 
 // Handles selecting color scheme
 var handleDark = function(self) {
-    settings['darkmode'] = (self.value === 'dark');
+    settings['theme'] = self.value;
     introDarkSelected = true;
     checkIntroPage1();
-    toggleDarkMode(settings['darkmode']);
+    toggleTheme(settings['theme']);
 }
 
 // Checks if intro page 1 is valid to move on
@@ -3957,34 +3973,10 @@ var toggleVisibility = function(value) {
 }
 
 // Toggles dark mode
-var toggleDarkMode = function(value) {
-    darkMode = value;
-    setCookies();
-    if (darkMode) {
-        $("body").get(0).style.setProperty("--color1", "rgb(22, 27, 34)");
-        $("body").get(0).style.setProperty("--color2", "rgb(13, 17, 23)");
-        $("body").get(0).style.setProperty("--color3", "rgb(46, 50, 59)");
-        $("body").get(0).style.setProperty("--color4", "rgb(56, 60, 69)");
-        $("body").get(0).style.setProperty("--color5", "rgb(46, 50, 59)");
-        $("body").get(0).style.setProperty("--color6", "rgb(22, 27, 34)");
-        $("body").get(0).style.setProperty("--color7", "rgb(46, 50, 59)");
-        $("body").get(0).style.setProperty("--color8", "rgb(61, 65, 74)");
-        $("body").get(0).style.setProperty("--color9", "rgb(46, 50, 59)");
-        $("body").get(0).style.setProperty("--colorText", "rgb(201, 209, 217)");
-        $("body").get(0).style.setProperty("--colorTextAlt", "rgb(181, 189, 197)");
-        $("body").get(0).style.setProperty("--colorLink", "rgb(88, 166, 255)");
-        $("body").get(0).style.setProperty("--colorFlash", "rgba(150, 150, 0, 0.7)");
-        $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
-        $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
-        $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
-        $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(46, 50, 59)");
-        $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(7, 173, 7)");
-        $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(46, 50, 59)");
-        $("body").get(0).style.setProperty("--colorQuestIncompleteBorderText", "rgb(200, 200, 0)");
-        $(".btnDiv").addClass('dark');
-        colorBox = "rgba(50, 50, 50, .6)";
-        colorBoxLight = "rgba(50, 50, 50, .4)";
-    } else {
+var toggleTheme = function(value) {
+    theme = value;
+    setData();
+    if (theme === 'light') {
         $("body").get(0).style.setProperty("--color1", "rgb(200, 200, 200)");
         $("body").get(0).style.setProperty("--color2", "rgb(180, 180, 180)");
         $("body").get(0).style.setProperty("--color3", "rgb(220, 220, 220)");
@@ -4001,6 +3993,7 @@ var toggleDarkMode = function(value) {
         $("body").get(0).style.setProperty("--colorBox", "rgba(150, 150, 150, .6)");
         $("body").get(0).style.setProperty("--colorBoxLight", "rgba(150, 150, 150, .4)");
         $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(200, 200, 200, .4)");
+        $("body").get(0).style.setProperty("--colorQuestBorderText", "rgb(0, 0, 0)");
         $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(7, 173, 7)");
         $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(0, 0, 0)");
         $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(200, 200, 0)");
@@ -4008,6 +4001,131 @@ var toggleDarkMode = function(value) {
         $(".btnDiv").removeClass('dark');
         colorBox = "rgba(150, 150, 150, .6)";
         colorBoxLight = "rgba(150, 150, 150, .4)";
+    } else if (theme === 'dark') {
+        $("body").get(0).style.setProperty("--color1", "rgb(22, 27, 34)");
+        $("body").get(0).style.setProperty("--color2", "rgb(13, 17, 23)");
+        $("body").get(0).style.setProperty("--color3", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--color4", "rgb(56, 60, 69)");
+        $("body").get(0).style.setProperty("--color5", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--color6", "rgb(22, 27, 34)");
+        $("body").get(0).style.setProperty("--color7", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--color8", "rgb(61, 65, 74)");
+        $("body").get(0).style.setProperty("--color9", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--colorText", "rgb(201, 209, 217)");
+        $("body").get(0).style.setProperty("--colorTextAlt", "rgb(181, 189, 197)");
+        $("body").get(0).style.setProperty("--colorLink", "rgb(88, 166, 255)");
+        $("body").get(0).style.setProperty("--colorFlash", "rgba(150, 150, 0, 0.7)");
+        $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
+        $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
+        $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
+        $("body").get(0).style.setProperty("--colorQuestBorderText", "rgb(201, 209, 217)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(7, 173, 7)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(46, 50, 59)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBorderText", "rgb(200, 200, 0)");
+        $(".btnDiv").addClass('dark');
+        colorBox = "rgba(50, 50, 50, .6)";
+        colorBoxLight = "rgba(50, 50, 50, .4)";
+    } else if (theme === 'terminal') {
+        $("body").get(0).style.setProperty("--color1", "rgb(10, 10, 10)");
+        $("body").get(0).style.setProperty("--color2", "rgb(20, 20, 20)");
+        $("body").get(0).style.setProperty("--color3", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color4", "rgb(56, 60, 69)");
+        $("body").get(0).style.setProperty("--color5", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color6", "rgb(10, 10, 10)");
+        $("body").get(0).style.setProperty("--color7", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color8", "rgb(65, 65, 65)");
+        $("body").get(0).style.setProperty("--color9", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorText", "rgb(0, 255, 0)");
+        $("body").get(0).style.setProperty("--colorTextAlt", "rgb(102, 255, 0)");
+        $("body").get(0).style.setProperty("--colorLink", "rgb(255, 176, 0)");
+        $("body").get(0).style.setProperty("--colorFlash", "rgb(255, 204, 0)");
+        $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
+        $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
+        $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
+        $("body").get(0).style.setProperty("--colorQuestBorderText", "rgb(201, 209, 217)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(7, 173, 7)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBorderText", "rgb(200, 200, 0)");
+        $(".btnDiv").addClass('dark');
+        colorBox = "rgba(50, 50, 50, .6)";
+        colorBoxLight = "rgba(50, 50, 50, .4)";
+    } else if (theme === 'neon') {
+        $("body").get(0).style.setProperty("--color1", "rgb(7, 22, 55)");
+        $("body").get(0).style.setProperty("--color2", "rgb(20, 30, 60)");
+        $("body").get(0).style.setProperty("--color3", "rgb(24, 35, 54)");
+        $("body").get(0).style.setProperty("--color4", "rgb(31, 41, 63)");
+        $("body").get(0).style.setProperty("--color5", "rgb(24, 35, 54)");
+        $("body").get(0).style.setProperty("--color6", "rgb(7, 22, 55)");
+        $("body").get(0).style.setProperty("--color7", "rgb(24, 35, 54)");
+        $("body").get(0).style.setProperty("--color8", "rgb(38, 52, 73)");
+        $("body").get(0).style.setProperty("--color9", "rgb(24, 35, 54)");
+        $("body").get(0).style.setProperty("--colorText", "rgb(240, 5, 205)");
+        $("body").get(0).style.setProperty("--colorTextAlt", "rgb(179, 14, 163)");
+        $("body").get(0).style.setProperty("--colorLink", "rgb(251, 228, 136)");
+        $("body").get(0).style.setProperty("--colorFlash", "rgb(255, 204, 0)");
+        $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
+        $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
+        $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
+        $("body").get(0).style.setProperty("--colorQuestBorderText", "rgb(201, 209, 217)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(7, 173, 7)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBorderText", "rgb(200, 200, 0)");
+        $(".btnDiv").addClass('dark');
+        colorBox = "rgba(50, 50, 50, .6)";
+        colorBoxLight = "rgba(50, 50, 50, .4)";
+    } else if (theme === 'pumpkin') {
+        $("body").get(0).style.setProperty("--color1", "rgb(10, 10, 10)");
+        $("body").get(0).style.setProperty("--color2", "rgb(20, 20, 20)");
+        $("body").get(0).style.setProperty("--color3", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color4", "rgb(56, 60, 69)");
+        $("body").get(0).style.setProperty("--color5", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color6", "rgb(10, 10, 10)");
+        $("body").get(0).style.setProperty("--color7", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color8", "rgb(65, 65, 65)");
+        $("body").get(0).style.setProperty("--color9", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorText", "rgb(228, 95, 6)");
+        $("body").get(0).style.setProperty("--colorTextAlt", "rgb(235, 103, 16)");
+        $("body").get(0).style.setProperty("--colorLink", "rgb(255, 176, 0)");
+        $("body").get(0).style.setProperty("--colorFlash", "rgb(255, 204, 0)");
+        $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
+        $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
+        $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
+        $("body").get(0).style.setProperty("--colorQuestBorderText", "rgb(201, 209, 217)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(7, 173, 7)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBorderText", "rgb(200, 200, 0)");
+        $(".btnDiv").addClass('dark');
+        colorBox = "rgba(50, 50, 50, .6)";
+        colorBoxLight = "rgba(50, 50, 50, .4)";
+    } else if (theme === 'mono') {
+        $("body").get(0).style.setProperty("--color1", "rgb(10, 10, 10)");
+        $("body").get(0).style.setProperty("--color2", "rgb(20, 20, 20)");
+        $("body").get(0).style.setProperty("--color3", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color4", "rgb(56, 60, 69)");
+        $("body").get(0).style.setProperty("--color5", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color6", "rgb(10, 10, 10)");
+        $("body").get(0).style.setProperty("--color7", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--color8", "rgb(65, 65, 65)");
+        $("body").get(0).style.setProperty("--color9", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorText", "rgb(255, 255, 255)");
+        $("body").get(0).style.setProperty("--colorTextAlt", "rgb(220, 220, 220)");
+        $("body").get(0).style.setProperty("--colorLink", "rgb(185, 185, 185)");
+        $("body").get(0).style.setProperty("--colorFlash", "rgb(155, 155, 155)");
+        $("body").get(0).style.setProperty("--colorBox", "rgba(50, 50, 50, .6)");
+        $("body").get(0).style.setProperty("--colorBoxLight", "rgba(50, 50, 50, .4)");
+        $("body").get(0).style.setProperty("--colorBackgroundSidebar", "rgba(22, 27, 34, .75)");
+        $("body").get(0).style.setProperty("--colorQuestBorderText", "rgb(201, 209, 217)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBackground", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorQuestCompleteBorderText", "rgb(7, 173, 7)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBackground", "rgb(40, 40, 40)");
+        $("body").get(0).style.setProperty("--colorQuestIncompleteBorderText", "rgb(200, 200, 0)");
+        $(".btnDiv").addClass('dark');
+        colorBox = "rgba(50, 50, 50, .6)";
+        colorBoxLight = "rgba(50, 50, 50, .4)";
     }
 }
 
@@ -4506,7 +4624,7 @@ var calcCurrentChallenges2 = function(tempChallengeArr) {
 };
 
 // Sets up data for displaying
-setupCurrentChallenges = function(tempChallengeArr, noDisplay) {
+setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
     !rules['Show Skill Tasks'] && challengeArr.forEach(line => {
         skillNames.forEach(skill => {
             if (line.includes(skill + '-challenge')) {
@@ -4635,7 +4753,7 @@ setupCurrentChallenges = function(tempChallengeArr, noDisplay) {
     if (noDisplay) {
         oldSavedChallengeArr = challengeArr;
     } else {
-        setCurrentChallenges(backlogArr, completedArr);
+        setCurrentChallenges(backlogArr, completedArr, false, noClear);
         changeChallengeColor();
     }
 }
@@ -4881,8 +4999,7 @@ var setManualArea = function(area, value) {
             manualAreas[area] = value;
         }
         searchManualAreas();
-        !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        calcCurrentChallengesCanvas();
+        calcCurrentChallengesCanvas(true);
         setData();
     }
 }
@@ -4944,8 +5061,7 @@ var removeRandomLoot = function(item) {
         if ($('#randomlist-data').children().length === 0) {
             $('#randomlist-data').append(`<div class="noscroll results"><span class="noscroll">No items</span></div>`);
         }
-        !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        calcCurrentChallengesCanvas();
+        calcCurrentChallengesCanvas(true);
         setData();
     }
 }
@@ -4970,8 +5086,7 @@ var addRandomLoot = function(close) {
         if (loot !== 'Select an item') {
             if (loot !== '') {
                 randomLoot[loot] = true;
-                !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                calcCurrentChallengesCanvas();
+                calcCurrentChallengesCanvas(true);
                 setData();
             }
             $('#myModal6').hide();
@@ -5136,8 +5251,7 @@ var addSlayerLocked = function(close) {
                 slayerLocked = {};
                 slayerLocked['monster'] = task;
                 slayerLocked['level'] = level;
-                !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-                calcCurrentChallengesCanvas();
+                calcCurrentChallengesCanvas(true);
                 setData();
             }
             $('#myModal22').hide();
@@ -5251,8 +5365,7 @@ var checkOffMonster = function(monster, type) {
         }
     }
     setData();
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    calcCurrentChallengesCanvas(true);
 }
 
 // Opens the manual add tasks modal
@@ -5332,8 +5445,7 @@ var addManualTask = function(challenge) {
             }
         }
     });
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    calcCurrentChallengesCanvas(true);
 }
 
 // Opens the manual complete tasks modal
@@ -5594,7 +5706,7 @@ var openHighest2 = function() {
                 (testMode || !(viewOnly || inEntry || locked)) && $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-lock-container'><span class='noscroll slayer-lock-button' onclick='openSlayerLocked()'>${!!slayerLocked ? '<i class="fas fa-edit"></i>' : '<i class="fas fa-lock"></i>'}${!!slayerLocked ? 'Change Locked Monster' : 'Lock Slayer'}</span></div>`);
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='noscroll'>`);
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-task-calc-title'>Slayer Task Calculator</div>`);
-                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-calc-container'><span class="noscroll"><span class="noscroll combat-level-label">Combat Level:</span> <input class="noscroll combat-level-input" value="${prevValueLevelInput['Combat']}" /></span><span class="noscroll"><span class="noscroll combat-level-label">Slayer Level:</span> <input class="noscroll slayer-level-input" value="${prevValueLevelInput['Slayer']}" /></span><button class="noscroll calc-slayer-tasks-button" onclick="calculateSlayerTasks()">Calculate Doable Tasks</button></div>`);
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-calc-container'><span class="noscroll"><span class="noscroll combat-level-label">Combat Level:</span> <input class="noscroll combat-level-input" value="${prevValueLevelInput['Combat']}" /></span><span class="noscroll"><span class="noscroll combat-level-label">Slayer Level:</span> <input class="noscroll slayer-level-input" value="${prevValueLevelInput['Slayer']}" /></span><br /><span class="checkboxes noscroll">Ignore Combat Level: <input type="checkbox" class="noscroll ignore-combat-level-input" checked="${prevValueLevelInput['ignoreCombatLevel']}" /></span><span class="checkboxes noscroll">Krystilia Slayer Creatures: <input type="checkbox" class="noscroll krystilia-slayer-creatures-input" checked="${prevValueLevelInput['krystiliaSlayerCreatures']}" /></span><button class="noscroll calc-slayer-tasks-button" onclick="calculateSlayerTasks()">Calculate Doable Tasks</button></div>`);
                 $('.combat-level-input').on('input', function(e) {
                     if (!e.target.value.match(/^[0-9]*$/i)) {
                         $(this).val(prevValueLevelInput['Combat']);
@@ -5719,8 +5831,7 @@ var addPassiveSkill = function(close, skill) {
                 passiveSkill = {};
             }
             passiveSkill[skill] = level;
-            !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-            calcCurrentChallengesCanvas();
+            calcCurrentChallengesCanvas(true);
             setData();
             $('#myModal28').hide();
             passiveSkillModalOpen = false;
@@ -5732,8 +5843,7 @@ var addPassiveSkill = function(close, skill) {
 var unlockSlayer = function() {
     slayerLocked = null;
     setData();
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    calcCurrentChallengesCanvas(true);
 }
 
 // Checks if slayer locked monster is unlocked
@@ -5762,10 +5872,13 @@ var calculateSlayerTasks = function() {
         'Nieve': 'Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold',
         'Duradel': 'Receive a Slayer assignment from ~|Duradel|~ in Shilo Village'
     };
-    $(`.Slayer-body .row`).remove();
-    $(`.Slayer-body`).append(`<div class='noscroll row row-header'><span class='noscroll master-table-header'>Slayer Master</span><span class='noscroll tasks-table-header'>Possible Tasks</span><span class='noscroll info-table-header'>Info</span></div>`);
+    $(`.Slayer-body .row, .Slayer-body .slayer-table-wrapper`).remove();
+    $(`.Slayer-body`).append(`<div class='noscroll slayer-table-wrapper'></div>`);
+    $(`.Slayer-body .slayer-table-wrapper`).append(`<div class='noscroll row row-header'><span class='noscroll master-table-header'>Slayer Master</span><span class='noscroll tasks-table-header'>Possible Tasks</span><span class='noscroll info-table-header'>Info</span></div>`);
     prevValueLevelInput['Combat'] = ((prevValueLevelInput['Combat'] || 3) > 126) ? 126 : (((prevValueLevelInput['Combat'] || 3) < 3) ? 3 : (prevValueLevelInput['Combat'] || 3));
     prevValueLevelInput['Slayer'] = ((prevValueLevelInput['Slayer'] || 1) > 99) ? 99 : (((prevValueLevelInput['Slayer'] || 1) < 1) ? 1 : (prevValueLevelInput['Slayer'] || 1));
+    prevValueLevelInput['ignoreCombatLevel'] = $(`.ignore-combat-level-input`).is(":checked");
+    prevValueLevelInput['krystiliaSlayerCreatures'] = $(`.krystilia-slayer-creatures-input`).is(":checked");
     $('.combat-level-input').val(prevValueLevelInput['Combat']);
     $('.slayer-level-input').val(prevValueLevelInput['Slayer']);
     assignableSlayerTasks = {};
@@ -5779,29 +5892,28 @@ var calculateSlayerTasks = function() {
             let monsterDetails = chunkInfo['slayerMasterTasks'][master][monster];
             let isDoable = true;
             let isAssignable = true;
-            if (monsterDetails.hasOwnProperty('CombatLevel') && prevValueLevelInput['Combat'] < monsterDetails['CombatLevel']) {
+            if (!$(`.ignore-combat-level-input`).is(":checked") && monsterDetails.hasOwnProperty('CombatLevel') && prevValueLevelInput['Combat'] < monsterDetails['CombatLevel']) {
                 isAssignable = false;
             }
             if (monsterDetails.hasOwnProperty('Level') && prevValueLevelInput['Slayer'] < monsterDetails['Level']) {
                 isAssignable = false;
             }
-            monsterDetails.hasOwnProperty('Tasks') && Object.keys(monsterDetails['Tasks']).forEach(task => {
-                if (monsterDetails['Tasks'][task] === 'Quest') {
-                    if (task.includes('Complete the quest') && questProgress[task.split('|')[1]] !== 'Complete the quest') {
-                        isAssignable = false;
-                    } else if (!task.includes('Complete the quest') && questProgress[task.split('|')[1]] !== 'Complete the quest') {
-                        let tempValid = false;
-                        !!questProgress[task.split('|')[1]] && questProgress[task.split('|')[1]].forEach(step => {
-                            if (task === step) {
-                                tempValid = true;
-                            }
-                        });
-                        if (!tempValid) {
-                            isAssignable = false;
-                        }
-                    }
-                } else if (!globalValids.hasOwnProperty(monsterDetails['Tasks'][task]) || !globalValids[monsterDetails['Tasks'][task]].hasOwnProperty(slayerMasterGetTasks[master])) {
+            if (!$(`.krystilia-slayer-creatures-input`).is(":checked") && monsterDetails.hasOwnProperty('KrystiliaSlayerCreatures')) {
+                isAssignable = false;
+            }
+            monsterDetails.hasOwnProperty('Tasks') && Object.keys(monsterDetails['Tasks']).filter(task => { return monsterDetails['Tasks'][task] === 'Quest' && task !== '~|Song of the Elves|~ Complete the quest' }).forEach(task => {
+                if (task.includes('Complete the quest') && questProgress[task.split('|')[1]] !== 'Complete the quest') {
                     isAssignable = false;
+                } else if (!task.includes('Complete the quest') && questProgress[task.split('|')[1]] !== 'Complete the quest') {
+                    let tempValid = false;
+                    !!questProgress[task.split('|')[1]] && questProgress[task.split('|')[1]].forEach(step => {
+                        if (task === step) {
+                            tempValid = true;
+                        }
+                    });
+                    if (!tempValid) {
+                        isAssignable = false;
+                    }
                 }
             });
             monsterDetails.hasOwnProperty('Skills') && Object.keys(monsterDetails['Skills']).forEach(skill => {
@@ -5813,7 +5925,7 @@ var calculateSlayerTasks = function() {
                 assignableWeight += monsterDetails['Weight'];
 
                 let tempDoable = false;
-                slayerTasks.hasOwnProperty(monster) && Object.keys(slayerTasks[monster]).forEach(subMonster => {
+                slayerTasks.hasOwnProperty(monster.split(' - ')[0]) && Object.keys(slayerTasks[monster.split(' - ')[0]]).forEach(subMonster => {
                     if (baseChunkData.hasOwnProperty('monsters') && baseChunkData['monsters'].hasOwnProperty(subMonster)) {
                         tempDoable = true;
                     }
@@ -5821,6 +5933,19 @@ var calculateSlayerTasks = function() {
                 if (!tempDoable) {
                     isDoable = false;
                 }
+                monsterDetails.hasOwnProperty('Chunks') && monsterDetails['Chunks'].forEach(chunkId => {
+                    if (chunkId.includes('+') && (!chunksPlus[chunkId] || chunksPlus[chunkId].filter((plus) => { return savedChunks.hasOwnProperty(plus) }).length === 0)) {
+                        isDoable = false;
+                    } else if (!chunkId.includes('+') && !savedChunks.hasOwnProperty(chunkId)) {
+                        isDoable = false;
+                    }
+                });
+                
+                monsterDetails.hasOwnProperty('Tasks') && Object.keys(monsterDetails['Tasks']).filter(task => { return monsterDetails['Tasks'][task] !== 'Quest' || task === '~|Song of the Elves|~ Complete the quest' }).forEach(task => {
+                    if (!globalValids.hasOwnProperty(monsterDetails['Tasks'][task]) || !globalValids[monsterDetails['Tasks'][task]].hasOwnProperty(task)) {
+                        isDoable = false;
+                    }
+                });
                 
                 if (isDoable) {
                     doableWeight += monsterDetails['Weight'];
@@ -5832,7 +5957,7 @@ var calculateSlayerTasks = function() {
                 assignableSlayerTasks[master][monster] = null;
             }
         });
-        $(`.Slayer-body`).append(`<div class='noscroll row'><span class='noscroll slayer-master'>${master}</span><span class='noscroll slayer-task'>${Object.values(assignableSlayerTasks[master]).filter(el => { return el }).length} / ${Object.values(assignableSlayerTasks[master]).filter(el => { return el !== null }).length} (${(Math.round(((doableWeight/assignableWeight) * 100) * 100) / 100) || 0}% weighted)</span><span class='noscroll slayer-info'><span onclick="openSlayerMasterInfo('${master}')"><i class="slayer-info-icon fas fa-info-circle"></i></span></span></div>`);
+        $(`.Slayer-body .slayer-table-wrapper`).append(`<div class='noscroll row'><span class='noscroll slayer-master'>${master}</span><span class='noscroll slayer-task'>${Object.values(assignableSlayerTasks[master]).filter(el => { return el }).length} / ${Object.values(assignableSlayerTasks[master]).filter(el => { return el !== null }).length} (${(Math.round(((doableWeight/assignableWeight) * 100) * 100) / 100) || 0}% weighted)</span><span class='noscroll slayer-info'><span onclick="openSlayerMasterInfo('${master}')"><i class="slayer-info-icon fas fa-info-circle"></i></span></span></div>`);
     });
     setData();
 }
@@ -5843,7 +5968,11 @@ var openSlayerMasterInfo = function(master) {
     $('.slayermasterinfo-data').empty();
     $('.slayermasterinfo-title').text(master);
     Object.keys(assignableSlayerTasks[master]).forEach(monster => {
-        $('.slayermasterinfo-data').append(`<div class="noscroll results ${assignableSlayerTasks[master][monster]}"><a class='noscroll link' href='https://oldschool.runescape.wiki/w/Slayer_task/${monster}' target='_blank'>${monster}</a></div>`)
+        if (monster.includes(' - ')) {
+            $('.slayermasterinfo-data').append(`<div class="noscroll results ${assignableSlayerTasks[master][monster]}"><a class='noscroll link' href='https://oldschool.runescape.wiki/w/Slayer_task/${monster.split(' - ')[0]}' target='_blank'>${monster.split(' - ')[0]}</a> - <a class='noscroll link' href="https://oldschool.runescape.wiki/w/${encodeURI(monster.split(' - ')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')'))}" target='_blank'>${monster.split(' - ')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll('_', ' ').replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\-2Z/g, '&').replaceAll(/\-2P/g, '(').replaceAll(/\-2Q/g, ')')}</a></div>`)
+        } else {
+            $('.slayermasterinfo-data').append(`<div class="noscroll results ${assignableSlayerTasks[master][monster]}"><a class='noscroll link' href='https://oldschool.runescape.wiki/w/Slayer_task/${monster}' target='_blank'>${monster}</a></div>`)
+        }
     });
     $('#myModal32').show();
     document.getElementById('slayermasterinfo-data').scrollTop = 0;
@@ -5889,8 +6018,7 @@ var addManualEquipment = function(equip) {
         delete manualEquipment[equip];
     }
     setData();
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    calcCurrentChallengesCanvas(true);
 }
 
 // Opens the backlog sources modal
@@ -5985,8 +6113,7 @@ var backlogManualSource = function(category, source) {
         }
     }
     setData();
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    calcCurrentChallengesCanvas(true);
 }
 
 // Opens the sticker menu
@@ -6277,7 +6404,6 @@ var closeSlayerMasterInfo = function() {
 // Manually completes checked-off tasks
 var submitCompleteTasks = function() {
     completeChallenges();
-    !onMobile && setCalculating('.panel-active');
     completeModalOpen = false;
     modalOutsideTime = Date.now();
     $('#myModal14').hide();
@@ -6294,11 +6420,10 @@ var unlockChallenges = function() {
 }
 
 // Displays the current challenges, areas, backlog, and completed challenges
-var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
+var setCurrentChallenges = function(backlogArr, completedArr, useOld, noClear) {
     if (useOld) {
-        (oldSavedChallengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
-        (oldSavedChallengeArr.length > 0 || workerOut === 0) && $('.panel-active > i').css('line-height', '');
-        setCalculating('.panel-active', useOld);
+        !noClear && (oldSavedChallengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
+        !noClear && (oldSavedChallengeArr.length > 0 || workerOut === 0) && $('.panel-active > i').css('line-height', '');
         (oldSavedChallengeArr.length > 0 || workerOut === 0) && $('.panel-active').append(...oldSavedChallengeArr);
         if ($('.panel-active .skill-challenge').length === 0) {
             $('.marker-skill').remove();
@@ -6328,8 +6453,9 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld) {
         changeChallengeColor();
         setTaskNum();
     } else {
-        (challengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
-        (challengeArr.length > 0 || workerOut === 0) && $('.panel-active > i').css('line-height', '');
+        !noClear && (challengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
+        noClear && (challengeArr.length > 0 || workerOut === 0) && $('.panel-active .marker, .panel-active .challenge').remove();
+        !noClear && (challengeArr.length > 0 || workerOut === 0) && $('.panel-active > i').css('line-height', '');
         (challengeArr.length > 0 || workerOut === 0) && $('.panel-active').append(...challengeArr);
         if ($('.panel-active .skill-challenge').length === 0) {
             $('.marker-skill').remove();
@@ -6687,27 +6813,88 @@ var checkOffAltChallenge = function(skill, chal, mainChal) {
     } else {
         !!chunkInfo['challenges'][skill][chal] && (altChallenges[skill][chunkInfo['challenges'][skill][chal]['Level']] = chal);
     }
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    setupCurrentChallenges(tempChallengeArrSaved, false, true);
     setData();
 }
 
 // Shows challenge notes
 var showNotes = function(challenge, skill, note) {
+    let baseChunkDataIn = baseChunkData;
+    let detailsKeys = ['ItemsDetails', 'ObjectsDetails', 'MonstersDetails', 'NPCsDetails'];
     if (note === true) {
         note = '';
     }
-    $('#notes-title').html(`<b class="noscroll">Add note to:</b><br />${challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}`);
+    $('#notes-title').html(`<b class="noscroll">Backlogging:</b><br />${challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}`);
+    $('#notes-data').empty();
+    $('#notes-data').append(`<div class="notes-row noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" checked="true" class='noscroll' onclick="saveNotesData('task', null)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">Backlog just this task</b></span></label></div>`);
+    $('#notes-data').append(`<div class="noscroll">(Optional) Add notes:</div><div class='backlog-textarea-wrapper noscroll'><textarea maxlength="128"></textarea></div>`);
+    let sourceWritten = false;
+    detailsKeys.forEach(key => {
+        let keyWritten = false;
+        let type = key.split('Details')[0].toLowerCase();
+        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]]) {
+            chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]].forEach(typeEl => {
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].push(typeEl);
+            });
+        }
+        !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
+            let els = [];
+            if (!!chunkInfo['codeItems'][type + 'Plus'] && !!chunkInfo['codeItems'][type + 'Plus'][el]) {
+                let validElem = false;
+                chunkInfo['codeItems'][type + 'Plus'][el].forEach(elem => {
+                    if (!!baseChunkDataIn[type][elem]) {
+                        els.push(elem);
+                        validElem = true;
+                    }
+                });
+                !validElem && els.push(el);
+                if (!sourceWritten) {
+                    sourceWritten = true;
+                    $('#notes-data').append(`<div class="notes-or noscroll">-- Or --</div><div class="noscroll">Backlog source one of the task requirements.</div>`);
+                }
+                if (!keyWritten) {
+                    keyWritten = true;
+                    $('#notes-data').append(`<div class="notes-subtitle noscroll"><u class="noscroll"><b class="noscroll">${type}</b></u></div>`);
+                }
+                $('#notes-data').append(`<div class="noscroll"><b class="noscroll">${chunkInfo['codeItems'][type + 'PlusNames'][el].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}:</b></div>`);
+                els.length > 0 && els.forEach(element => {
+                    $('#notes-data').append(`<div class="notes-row indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData('${type}', '${element}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${element.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span></label></div>`);
+                });
+            } else {
+                if (!sourceWritten) {
+                    sourceWritten = true;
+                    $('#notes-data').append(`<div class="notes-or noscroll">-- Or --</div><div class="noscroll">Backlog source one of the task requirements.</div>`);
+                }
+                if (!keyWritten) {
+                    keyWritten = true;
+                    $('#notes-data').append(`<div class="notes-subtitle noscroll"><u class="noscroll"><b class="noscroll">${type}</b></u></div>`);
+                }
+                $('#notes-data').append(`<div class="notes-row noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData('${type}', '${el}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span></label></div>`);
+            }
+        });
+    });
     notesModalOpen = true;
     $('#myModal3').show();
     $('#notes-data > textarea').val(note).focus();
+    saveNotesData('task', null);
     notesChallenge = challenge;
     notesSkill = skill;
+    document.getElementById('notes-data').scrollTop = 0;
+}
+
+// Saves notes data for later submitting
+var saveNotesData = function(type, el) {
+    savedNotesType = type;
+    savedNotesEl = el;
 }
 
 // Submit notes for challenge
 var submitNotes = function() {
-    backlogChallenge(notesChallenge, notesSkill, $('#notes-data > textarea').val());
+    if (savedNotesType === 'task') {
+        backlogChallenge(notesChallenge, notesSkill, $('#notes-data textarea').val());
+    } else {
+        backlogManualSource(savedNotesType, savedNotesEl);
+    }
     closeChallengeNotes();
 }
 
@@ -6769,18 +6956,14 @@ var showRules = function(isPage2) {
         $('#rules-subdata').append(`<div class="rule-category rules-main-header noscroll">Rules</div>`);
         $('#rules-subdata').append(`<div class="rule-key noscroll"><b class='noscroll'><u class='noscroll'>KEY</u></b><br /><span class='rule-asterisk noscroll'>*</span> - Xtreme/Supreme Rule<br /><span class='rule-asterisk noscroll'>†</span> - Supreme Rule</div>`);
         Object.keys(ruleStructure).forEach(category => {
-            //$('#rules-subdata').append(`<div class="rule-minicategory ${category.replaceAll(/\ /g, '_')}-category noscroll">${category}</div>`);
             !!ruleStructure[category] && Object.keys(ruleStructure[category]).forEach(rule => {
                 if (rule !== 'Kill X Amount' && rule !== 'Rare Drop Amount') {
                     if (rule === 'Kill X') {
                         $(`.panel-${category.replaceAll(' ', '').toLowerCase()}`).append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[rule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[rule].split('X-amount')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<input type='number' class='x-num-input' min='1' value="${rules['Kill X Amount']}" onchange="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /> ${ruleNames[rule].split('X-amount')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
-                        //$('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[rule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[rule].split('X-amount')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<input type='number' class='x-num-input' min='1' value="${rules['Kill X Amount']}" onchange="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /> ${ruleNames[rule].split('X-amount')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
                     } else if (rule === 'Rare Drop') {
                         $(`.panel-${category.replaceAll(' ', '').toLowerCase()}`).append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><span class='noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}'>` + ruleNames[rule].split('/X')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + ` / <input type='number' class='rare-num-input' min='0' value="${rules['Rare Drop Amount']}" onchange="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /> ` + ruleNames[rule].split('/X')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</span></div>');
-                        //$('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><span class='noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}'>` + ruleNames[rule].split('/X')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + ` / <input type='number' class='rare-num-input' min='0' value="${rules['Rare Drop Amount']}" onchange="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /> ` + ruleNames[rule].split('/X')[1].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</span></div>');
                     } else {
                         $(`.panel-${category.replaceAll(' ', '').toLowerCase()}`).append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[rule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[rule].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
-                        //$('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="rule ${rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[rule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[rule].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
                     }
                     Array.isArray(ruleStructure[category][rule]) && ruleStructure[category][rule].forEach(subRule => {
                         $('.' + rule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule').append(`<div class="rule ${subRule.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-rule subrule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][subRule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[subRule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][subRule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[subRule].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
@@ -6815,6 +6998,8 @@ var showSettings = function(keepSettingsClosed) {
                 $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><input class="sticker-color-rule" type="color" value="${settings[setting]}" onchange="changeDefaultStickerColor()" /><i class="fas fa-undo-alt noscroll reset-default-sticker-color" title="Reset Color" onclick="resetDefaultStickerColor()"></i><span class='noscroll extraspace'>` + settingNames[setting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</span></div>');
             } else if (setting === 'startingChunk') {
                 $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><span class='noscroll'>` + settingNames[setting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `: ${settings[setting]}<i class="fas fa-edit noscroll change-starting-chunk" title="Change Starting Chunk" onclick="openMapIntroModal(${true})"></i></span></div>`);
+            } else if (setting === 'theme') {
+                $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><div class='noscroll theme-header'>Theme:</div><button class='theme-button light' onclick="toggleTheme('light')">Light</button><button class='theme-button dark' onclick="toggleTheme('dark')">Dark</button><button class='theme-button terminal' onclick="toggleTheme('terminal')">Terminal</button><button class='theme-button neon' onclick="toggleTheme('neon')">Neon</button><button class='theme-button pumpkin' onclick="toggleTheme('pumpkin')">Pumpkin</button><button class='theme-button mono' onclick="toggleTheme('mono')">Mono</button></div>`);
             } else {
                 $('.' + category.replaceAll(/\ /g, '_') + '-category').append(`<div class="setting ${setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting'} noscroll"><label class="checkbox noscroll ${(viewOnly || inEntry || locked || settingStructure[category][setting] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${settings[setting] ? "checked" : ''} class='noscroll' onclick="checkOffSettings()" ${(viewOnly || inEntry || locked || settingStructure[category][setting] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${settingNames[setting].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span></label></div>`);
             }
@@ -6988,8 +7173,9 @@ var backlogChallenge = function(challenge, skill, note, noUpdate) {
             });
         }
         backlog[skill][challenge] = note;
-        challengeArr = challengeArr.filter(function(line) {
-            return !line.includes(skill + '-');
+        challengeArr.filter(line => { return line.includes(skill + '-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge') }).forEach(function(line) {
+            let index = challengeArr.indexOf(line);
+            challengeArr.splice(index, 1);
         });
         !!globalValids[skill] && Object.keys(globalValids[skill]).forEach(challenge => {
             globalValids[skill][challenge] = true;
@@ -7009,6 +7195,7 @@ var backlogChallenge = function(challenge, skill, note, noUpdate) {
                 });
             }
         });
+        $(`.panel-active .challenge.${skill.toLowerCase() + '-challenge'}.${skill + '-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'}`).remove();
     } else {
         backlog[skill][challenge] = note;
         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
@@ -7056,10 +7243,25 @@ var backlogChallenge = function(challenge, skill, note, noUpdate) {
                 });
             });
         }
+        $(`.panel-active .challenge.skill-challenge.${skill + '-challenge'}`).html(`<label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('${skill}', ` + "`" + highestChallenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + ` <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>');
+    }
+    if ($('.panel-active .skill-challenge').length === 0) {
+        $('.marker-skill').remove();
+    }
+    if ($('.panel-active .bis-challenge').length === 0) {
+        $('.marker-bis').remove();
+    }
+    if ($('.panel-active .quest-challenge').length === 0) {
+        $('.marker-quest').remove();
+    }
+    if ($('.panel-active .diary-challenge').length === 0) {
+        $('.marker-diary').remove();
+    }
+    if ($('.panel-active .extra-challenge').length === 0) {
+        $('.marker-extra').remove();
     }
     if (!noUpdate) {
-        !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        calcCurrentChallengesCanvas();
+        calcCurrentChallengesCanvas(true);
     }
     setData();
 }
@@ -7080,8 +7282,16 @@ var unbacklogChallenge = function(challenge, skill) {
             });
         }
     }
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    if (skill === 'Extra' || skill === 'Quest' || skill === 'Diary' || skill === 'BiS') {
+        $(`.panel-backlog .challenge.${skill + '-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'}`).remove();
+    } else {
+        $(`.panel-backlog .challenge.${skill}-challenge`).each(function(index) {
+            if ($(this).text().includes(challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ','))) {
+                $(this).remove();
+            }
+        });
+    }
+    calcCurrentChallengesCanvas(true);
     setData();
 }
 
@@ -7101,8 +7311,16 @@ var uncompleteChallenge = function(challenge, skill) {
             });
         }
     }
-    !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-    calcCurrentChallengesCanvas();
+    if (skill === 'Extra' || skill === 'Quest' || skill === 'Diary' || skill === 'BiS') {
+        $(`.panel-completed .challenge.${skill + '-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'}`).remove();
+    } else {
+        $(`.panel-completed .challenge.${skill}-challenge`).each(function(index) {
+            if ($(this).text().includes(challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ','))) {
+                $(this).remove();
+            }
+        });
+    }
+    calcCurrentChallengesCanvas(true);
     setData();
 }
 
@@ -7171,8 +7389,7 @@ var checkOffRules = function(didRedo, startup) {
         return;
     }
     if (!startup) {
-        !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-        calcCurrentChallengesCanvas();
+        calcCurrentChallengesCanvas(true);
         rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
         !rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
         setData();
@@ -7187,7 +7404,7 @@ var checkOffSettings = function(didRedo, startup) {
             $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').children('.checkbox').children('.checkbox__input').children('input').prop('checked', subSettingDefault[setting]);
             redo = true;
         }
-        if (setting !== 'completedTaskColor' && setting !== 'defaultStickerColor' && setting !== 'startingChunk' && settingNames.hasOwnProperty(setting)) {
+        if (setting !== 'completedTaskColor' && setting !== 'defaultStickerColor' && setting !== 'startingChunk' && setting !== 'theme' && settingNames.hasOwnProperty(setting)) {
             settings[setting] = $('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting input').prop('checked');
         }
         if ($('.' + setting.replaceAll(' ', '_').replaceAll('%', '').replaceAll(/\'/g, '-2H').replaceAll(/\&/g, '-2Z').replaceAll(/\(/g, '').replaceAll(/\)/g, '') + '-setting').children('.subsetting').length) {
@@ -7213,9 +7430,9 @@ var checkOffSettings = function(didRedo, startup) {
         checkOffSettings(true, startup);
         return;
     }
-    toggleIds(settings['ids'], startup);
-    toggleVisibility(settings['highvis'], startup);
-    toggleDarkMode(settings['darkmode'], startup);
+    toggleIds(settings['ids']);
+    toggleVisibility(settings['highvis']);
+    toggleTheme(settings['theme']);
     toggleNeighbors(settings['neighbors'], startup);
     toggleRemove(settings['remove'], startup);
     toggleRoll2(settings['roll2'], startup);
@@ -7255,7 +7472,7 @@ var completeChallenges = function(noCalc) {
     });
     checkedChallenges = {};
     !onMobile && setCalculating('.panel-completed');
-    !onMobile && !noCalc && calcCurrentChallengesCanvas();
+    !onMobile && !noCalc && calcCurrentChallengesCanvas(true);
 }
 
 // Gets and displays info on the gievn quest
@@ -7419,9 +7636,6 @@ var loadData = function(startup) {
             settingsTemp['highvis'] = document.cookie.split(';').filter(function(item) {
                 return item.indexOf('highvis=true') >= 0
             }).length > 0;
-            settingsTemp['darkmode'] = document.cookie.split(';').filter(function(item) {
-                return item.indexOf('darkmode=true') >= 0
-            }).length > 0;
             settingsTemp['info'] = !document.cookie.split(';').filter(function(item) {
                 return item.indexOf('newinfo=false') >= 0
             }).length > 0;
@@ -7462,7 +7676,7 @@ var loadData = function(startup) {
             manualMonsters = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualMonsters'] ? snap.val()['chunkinfo']['manualMonsters'] : {};
             slayerLocked = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['slayerLocked'] ? snap.val()['chunkinfo']['slayerLocked'] : null;
             passiveSkill = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['passiveSkill'] ? snap.val()['chunkinfo']['passiveSkill'] : null;
-            prevValueLevelInput = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['prevValueLevelInput'] ? snap.val()['chunkinfo']['prevValueLevelInput'] : {'Combat': 3, 'Slayer': 1};
+            prevValueLevelInput = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['prevValueLevelInput'] ? snap.val()['chunkinfo']['prevValueLevelInput'] : {'Combat': 3, 'Slayer': 1, 'ignoreCombatLevel': false, 'krystiliaSlayerCreatures': false};
             settingsTemp['highscoreEnabled'] && enableHighscore('startup');
             settingsTemp['infocollapse'] && hideChunkInfo('startup');
             infoCollapse = settingsTemp['infocollapse'];
@@ -7523,18 +7737,18 @@ var loadData = function(startup) {
             Object.keys(settingsTemp).forEach(setting => {
                 settings[setting] = settingsTemp[setting];
             });
-            toggleIds(settings['ids'], 'startup');
-            toggleVisibility(settings['highvis'], 'startup');
-            toggleDarkMode(settings['darkmode'], 'startup');
-            toggleNeighbors(settings['neighbors'], 'startup');
-            toggleRemove(settings['remove'], 'startup');
-            toggleRoll2(settings['roll2'], 'startup');
-            toggleUnpick(settings['unpick'], 'startup');
-            toggleRecent(settings['recent'], 'startup');
-            toggleChunkInfo(settings['info'], 'startup');
-            toggleChunkTasks(settings['chunkTasks'], 'startup');
+            toggleIds(settings['ids']);
+            toggleVisibility(settings['highvis']);
+            toggleTheme(settings['theme']);
+            toggleNeighbors(settings['neighbors'], startup);
+            toggleRemove(settings['remove'], startup);
+            toggleRoll2(settings['roll2'], startup);
+            toggleUnpick(settings['unpick'], startup);
+            toggleRecent(settings['recent'], startup);
+            toggleChunkInfo(settings['info'], startup);
+            toggleChunkTasks(settings['chunkTasks'], startup);
             toggleTopButtons(settings['topButtons'], startup);
-            toggleTaskSidebar(settings['taskSidebar'], 'startup');
+            toggleTaskSidebar(settings['taskSidebar'], startup);
 
             selectedChunks = 0;
             unlockedChunks = 0;
@@ -7561,11 +7775,9 @@ var loadData = function(startup) {
             oldSavedChallengeArr = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['oldSavedChallengeArr'] ? snap.val()['chunkinfo']['oldSavedChallengeArr'] : [];
             if (oldSavedChallengeArr.length > 0) {
                 chunkTasksOn && !onMobile && setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true);
-            } else {
-                chunkTasksOn && !onMobile && setCalculating('.panel-active');
             }
             assignedXpRewards = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['assignedXpRewards'] ? snap.val()['chunkinfo']['assignedXpRewards'] : {};
-            chunkTasksOn && calcCurrentChallengesCanvas();
+            chunkTasksOn && calcCurrentChallengesCanvas(true, true);
             rulesModalOpen && showRules();
             if (!startup) {
                 rules['Manually Complete Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
@@ -7583,11 +7795,10 @@ var setCookies = function() {
     if (onTestServer || testMode) {
         return;
     }
-    document.cookie = "ids=" + showChunkIds;
-    document.cookie = "highvis=" + highVisibilityMode;
-    document.cookie = "darkmode=" + darkMode;
-    document.cookie = "newinfo=" + chunkInfoOn;
-    document.cookie = "infocollapse=" + infoCollapse;
+    document.cookie = "ids=" + showChunkIds + ";Max-Age=63072000";
+    document.cookie = "highvis=" + highVisibilityMode + ";Max-Age=63072000";
+    document.cookie = "newinfo=" + chunkInfoOn + ";Max-Age=63072000";
+    document.cookie = "infocollapse=" + infoCollapse + ";Max-Age=63072000";
 }
 
 // Stores data in Firebase
@@ -7649,7 +7860,7 @@ var setData = function() {
                     }
                 });
                 myRef.update({ rules, recent, recentTime, randomLoot, friends });
-                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'topButtons': topButtonsOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
+                myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'topButtons': topButtonsOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon, 'theme': theme });
                 myRef.child('chunkinfo').update({ checkedChallenges, completedChallenges, backlog, possibleAreas, manualTasks, manualEquipment, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, oldSavedChallengeArr, assignedXpRewards, manualAreas, prevValueLevelInput });
 
                 var tempJson = {};
@@ -7708,7 +7919,7 @@ var setData = function() {
                 }
             });
             myRef.update({ rules, recent, recentTime, randomLoot, friends });
-            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'topButtons': topButtonsOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon });
+            myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'topButtons': topButtonsOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? currentVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon, 'theme': theme });
             myRef.child('chunkinfo').update({ checkedChallenges, completedChallenges, backlog, possibleAreas, manualTasks, manualEquipment, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, oldSavedChallengeArr, assignedXpRewards, manualAreas, prevValueLevelInput });
 
             var tempJson = {};
