@@ -2952,11 +2952,11 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                 if (!dropTablesGlobal[monster]) {
                                     dropTablesGlobal[monster] = {};
                                 }
-                                if (!dropTablesGlobal[monster][drop]) {
-                                    dropTablesGlobal[monster][drop] = {};
+                                if (!dropTablesGlobal[monster][item]) {
+                                    dropTablesGlobal[monster][item] = {};
                                 }
-                                !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach(quantity => {
-                                    dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : dropTables[drop][item].split('@')[1] * quantity] = findFraction(parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][drop][quantity].split('/')[1]), drop.includes('GeneralSeedDropTable'));
+                                !!dropTables[drop][item] && Object.keys(dropTables[drop][item]).forEach(quantity => {
+                                    dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : dropTables[drop][item].split('@')[1] * quantity] = findFraction(parseFloat(dropTables[drop][item][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item][quantity].split('/')[1]), drop.includes('GeneralSeedDropTable'));
                                 });
                             });
                         });
