@@ -5669,7 +5669,7 @@ input#searchMonsters {
 .xp-reward-option-container > .none-xp-container {
     position: absolute;
     left: 8px;
-    top: 8px;
+    top: 6px;
 }
 
 .xp-reward-option-container.black-outline i {

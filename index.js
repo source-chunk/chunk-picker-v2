@@ -2461,7 +2461,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No challenges currently backlogged.'], ['No challenges currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.0.3");
+        myWorker = new Worker("./worker.js?v=5.0.4");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas]);
         workerOut = 1;
@@ -2705,7 +2705,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.0.3");
+let myWorker = new Worker("./worker.js?v=5.0.4");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -3401,7 +3401,7 @@ var openXpRewardModal = function(skill, line, xpArr, num) {
             $('#xp-reward-title').text(`Select which skill the ${tempXpArr[num].xp} xp reward was used on (${num + 1} of ${tempXpArr.length})`);
             $('#submit-xp-reward-button').text(num + 1 === tempXpArr.length ? 'Save' : 'Next');
             $('#submit-xp-reward-button').removeAttr('onclick').addClass('disabled');
-            $('#submit-xp-reward-button').attr('onClick', `openXpRewardModal('${skill}', '${line}', '', ${num + 1});`);
+            $('#submit-xp-reward-button').attr('onClick', `openXpRewardModal("${skill}", "${line}", "", ${num + 1});`);
             $('.xp-reward-data').empty();
             ['None', ...skillNamesXp.filter(skillOpt => { return (tempXpArr[num].skills.split('x')[0] === 'Any' || tempXpArr[num].skills.split('|').includes(skillOpt)) })].forEach(skillOpt => {
                 if (skillOpt !== 'None') {
