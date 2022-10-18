@@ -5338,6 +5338,9 @@ var calcCurrentChallenges2 = function() {
                     highestOverall[skill] = challenge + `{${(bestBoost + (hasCrystalSaw ? 3 : 0))}}`;
                 } else if (!!tempChallengeArr[skill]) {
                     highestOverall[skill] = tempChallengeArr[skill];
+                    if (!!completedChallenges[skill] && completedChallenges[skill].hasOwnProperty(tempChallengeArr[skill])) {
+                        tempChallengeArr[skill] = null;
+                    }
                 }
             } else if (!!tempChallengeArr[skill]) {
                 highestOverall[skill] = tempChallengeArr[skill];

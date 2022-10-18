@@ -2462,7 +2462,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.0.6");
+        myWorker = new Worker("./worker.js?v=5.0.7");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas]);
         workerOut = 1;
@@ -2706,7 +2706,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.0.6");
+let myWorker = new Worker("./worker.js?v=5.0.7");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4003,6 +4003,7 @@ var toggleTheme = function(value) {
         $(".btnDiv").removeClass('dark');
         colorBox = "rgba(150, 150, 150, .6)";
         colorBoxLight = "rgba(150, 150, 150, .4)";
+        $('#favicon-link').attr("href", "./resources/favicons/favicon-light.png");
     } else if (theme === 'dark') {
         $("body").get(0).style.setProperty("--color1", "rgb(22, 27, 34)");
         $("body").get(0).style.setProperty("--color2", "rgb(13, 17, 23)");
@@ -4028,6 +4029,7 @@ var toggleTheme = function(value) {
         $(".btnDiv").addClass('dark');
         colorBox = "rgba(50, 50, 50, .6)";
         colorBoxLight = "rgba(50, 50, 50, .4)";
+        $('#favicon-link').attr("href", "./resources/favicons/favicon-dark.png");
     } else if (theme === 'terminal') {
         $("body").get(0).style.setProperty("--color1", "rgb(10, 10, 10)");
         $("body").get(0).style.setProperty("--color2", "rgb(20, 20, 20)");
@@ -4053,6 +4055,7 @@ var toggleTheme = function(value) {
         $(".btnDiv").addClass('dark');
         colorBox = "rgba(50, 50, 50, .6)";
         colorBoxLight = "rgba(50, 50, 50, .4)";
+        $('#favicon-link').attr("href", "./resources/favicons/favicon-terminal.png");
     } else if (theme === 'neon') {
         $("body").get(0).style.setProperty("--color1", "rgb(7, 22, 55)");
         $("body").get(0).style.setProperty("--color2", "rgb(20, 30, 60)");
@@ -4078,6 +4081,7 @@ var toggleTheme = function(value) {
         $(".btnDiv").addClass('dark');
         colorBox = "rgba(50, 50, 50, .6)";
         colorBoxLight = "rgba(50, 50, 50, .4)";
+        $('#favicon-link').attr("href", "./resources/favicons/favicon-neon.png");
     } else if (theme === 'pumpkin') {
         $("body").get(0).style.setProperty("--color1", "rgb(10, 10, 10)");
         $("body").get(0).style.setProperty("--color2", "rgb(20, 20, 20)");
@@ -4103,6 +4107,7 @@ var toggleTheme = function(value) {
         $(".btnDiv").addClass('dark');
         colorBox = "rgba(50, 50, 50, .6)";
         colorBoxLight = "rgba(50, 50, 50, .4)";
+        $('#favicon-link').attr("href", "./resources/favicons/favicon-pumpkin.png");
     } else if (theme === 'mono') {
         $("body").get(0).style.setProperty("--color1", "rgb(10, 10, 10)");
         $("body").get(0).style.setProperty("--color2", "rgb(20, 20, 20)");
@@ -4128,6 +4133,7 @@ var toggleTheme = function(value) {
         $(".btnDiv").addClass('dark');
         colorBox = "rgba(50, 50, 50, .6)";
         colorBoxLight = "rgba(50, 50, 50, .4)";
+        $('#favicon-link').attr("href", "./resources/favicons/favicon-mono.png");
     }
 }
 
@@ -6405,7 +6411,7 @@ var closeSlayerMasterInfo = function() {
 
 // Manually completes checked-off tasks
 var submitCompleteTasks = function() {
-    completeChallenges();
+    completeChallenges(false, true);
     completeModalOpen = false;
     modalOutsideTime = Date.now();
     $('#myModal14').hide();
@@ -7469,7 +7475,7 @@ var checkOffSettings = function(didRedo, startup) {
 }
 
 // Moves checked off challenges to completed
-var completeChallenges = function(noCalc) {
+var completeChallenges = function(noCalc, proceed) {
     Object.keys(checkedChallenges).forEach(skill => {
         Object.keys(checkedChallenges[skill]).forEach(name => {
             if (!completedChallenges[skill]) {
@@ -7484,7 +7490,7 @@ var completeChallenges = function(noCalc) {
     });
     checkedChallenges = {};
     !onMobile && setCalculating('.panel-completed');
-    !onMobile && !noCalc && calcCurrentChallengesCanvas(true);
+    !onMobile && !noCalc && calcCurrentChallengesCanvas(true, proceed);
 }
 
 // Gets and displays info on the gievn quest
