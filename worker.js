@@ -1128,9 +1128,20 @@ var calcChallenges = function(chunks, baseChunkData) {
             Object.keys(tempItemSkill[skill]).filter((item) => { return !!baseChunkData['items'][item] }).forEach(item => {
                 let lowestItem;
                 let lowestName;
+                let taskIsRemoved;
                 tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] }).forEach(name => {
+                    taskIsRemoved = false;
                     let challenge = chunkInfo['challenges'][skill][name];
-                    if (((newValids.hasOwnProperty(skill) && newValids[skill].hasOwnProperty(name))) && (!backlog[skill] || !backlog[skill].hasOwnProperty(name))) {
+                    if (challenge.hasOwnProperty('Tasks')) {
+                        chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).forEach(subTask => {
+                            if (!newValids.hasOwnProperty(chunkInfo['challenges'][skill][name]['Tasks'][subTask]) || !newValids[chunkInfo['challenges'][skill][name]['Tasks'][subTask]].hasOwnProperty(subTask)) {
+                                !!newValids[skill] && delete newValids[skill][name];
+                                !!valids[skill] && delete valids[skill][name];
+                                taskIsRemoved = true;
+                            }
+                        });
+                    }
+                    if (!taskIsRemoved && (newValids.hasOwnProperty(skill) && Object.keys(newValids[skill]).length > 0) && (!backlog[skill] || !backlog[skill].hasOwnProperty(name))) {
                         if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
                             lowestItem = challenge;
                             lowestName = name;
@@ -1139,17 +1150,11 @@ var calcChallenges = function(chunks, baseChunkData) {
                             lowestName = name;
                         }
                     }
-                    if (challenge.hasOwnProperty('Tasks')) {
-                        chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).forEach(subTask => {
-                            if (!newValids.hasOwnProperty(chunkInfo['challenges'][skill][name]['Tasks'][subTask]) || !newValids[chunkInfo['challenges'][skill][name]['Tasks'][subTask]].hasOwnProperty(subTask)) {
-                                !!newValids[skill] && delete newValids[skill][name];
-                                !!valids[skill] && delete valids[skill][name];
-                            }
-                        });
-                    }
                 });
-                !!lowestName && !newValids[skill] && (newValids[skill] = {});
-                !!lowestName && (newValids[skill][lowestName] = chunkInfo['challenges'][skill][lowestName]['Level']);
+                if (!!lowestName) {
+                    !newValids[skill] && (newValids[skill] = {});
+                    newValids[skill][lowestName] = chunkInfo['challenges'][skill][lowestName]['Level'];
+                }
             });
         });
         !rules["Highest Level"] && Object.keys(tempItemSkill).forEach(skill => {

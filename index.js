@@ -1668,7 +1668,7 @@ document.body.addEventListener('mouseup', function (event) {
         searchModalOpen && !searchDetailsModalOpen && closeSearch();
         searchDetailsModalOpen && closeSearchDetails();
         highestModalOpen && !addEquipmentModalOpen && closeHighest();
-        highest2ModalOpen && !methodsModalOpen && !questStepsModalOpen && !slayerMasterInfoModalOpen && closeHighest2();
+        highest2ModalOpen && !methodsModalOpen && !questStepsModalOpen && !slayerMasterInfoModalOpen && !slayerLockedModalOpen && closeHighest2();
         methodsModalOpen && closeMethods();
         completeModalOpen && closeComplete();
         addEquipmentModalOpen && closeAddEquipment();
@@ -2462,7 +2462,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.0.9");
+        myWorker = new Worker("./worker.js?v=5.0.10");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas]);
         workerOut = 1;
@@ -2706,7 +2706,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.0.9");
+let myWorker = new Worker("./worker.js?v=5.0.10");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
