@@ -1141,7 +1141,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                             }
                         });
                     }
-                    if (!taskIsRemoved && (newValids.hasOwnProperty(skill) && Object.keys(newValids[skill]).length > 0) && (!backlog[skill] || !backlog[skill].hasOwnProperty(name))) {
+                    if (!taskIsRemoved && newValids.hasOwnProperty(skill) && checkPrimaryMethod(skill, newValids, baseChunkData) && (!backlog[skill] || !backlog[skill].hasOwnProperty(name))) {
                         if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
                             lowestItem = challenge;
                             lowestName = name;
