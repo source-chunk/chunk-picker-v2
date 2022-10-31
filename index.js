@@ -2252,7 +2252,7 @@ var pickCanvas = function(both) {
             return;
         }
         rand = Math.floor(Math.random() * el.length);
-        if (settings['cinematicRoll'] && !onMobile) {
+        if (settings['cinematicRoll'] && !onMobile && mid !== roll5Mid) {
             openRollChunkCanvas(el, rand, 0);
         }
         didRandomStart = true;
@@ -2277,7 +2277,7 @@ var pickCanvas = function(both) {
         }
         rand = Math.floor(Math.random() * el.length);
         sNum = tempSelectedChunks.indexOf(el[rand]) + 1;
-        if (settings['cinematicRoll'] && !onMobile) {
+        if (settings['cinematicRoll'] && !onMobile && mid !== roll5Mid) {
             openRollChunkCanvas(el, rand, sNum);
         }
         tempSelectedChunks.splice(sNum - 1, 1);
@@ -2331,7 +2331,7 @@ var pickCanvas = function(both) {
             delete tempChunks['selected'][chunkId];
         });
     }
-    (!settings['cinematicRoll'] || onMobile) && scrollToChunkCanvas(el[rand]);
+    (!settings['cinematicRoll'] || onMobile || mid === roll5Mid) && scrollToChunkCanvas(el[rand]);
     setRecentRoll(el[rand]);
     $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
     $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
@@ -2343,7 +2343,7 @@ var pickCanvas = function(both) {
     !onMobile && !activeSubTabs['quest'] && expandActive('quest');
     !onMobile && !activeSubTabs['diary'] && expandActive('diary');
     !onMobile && !activeSubTabs['extra'] && expandActive('extra');
-    !onMobile && !settings['cinematicRoll'] && calcCurrentChallengesCanvas(true, true);
+    !onMobile && (!settings['cinematicRoll'] || mid === roll5Mid) && calcCurrentChallengesCanvas(true, true);
     setData();
 }
 
@@ -2402,7 +2402,7 @@ var roll2Canvas = function() {
             }
         }
     }
-    if (settings['cinematicRoll'] && !onMobile && numToRoll === 2) {
+    if (settings['cinematicRoll'] && !onMobile && mid !== roll5Mid && numToRoll === 2) {
         openRollChunkCanvas(savedEl, savedEl.indexOf(rands[0]), sNums[0], savedEl.indexOf(rands[1]), sNums[1]);
     }
     setData();
@@ -2433,7 +2433,7 @@ var unpickCanvas = function() {
     recentChunks[el[rand]] = el[rand];
     $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
     $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
-    if (settings['cinematicRoll'] && !onMobile) {
+    if (settings['cinematicRoll'] && !onMobile && mid !== roll5Mid) {
         openRollChunkCanvas(el, rand, null, undefined, undefined, true);
     } else {
         scrollToChunkCanvas(el[rand]);
@@ -2462,7 +2462,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.0.11");
+        myWorker = new Worker("./worker.js?v=5.0.12");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas]);
         workerOut = 1;
@@ -2706,7 +2706,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.0.11");
+let myWorker = new Worker("./worker.js?v=5.0.12");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
