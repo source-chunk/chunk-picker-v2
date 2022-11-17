@@ -9,7 +9,7 @@
 
     gtag('config', 'G-8P0V9GSFJ2');
   </script>
-  <link rel="stylesheet" href="./index.css?v=5.0.12" />
+  <link rel="stylesheet" href="./index.css?v=5.1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -40,12 +40,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=5.0.12' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=5.1.0' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=5.0.12"></script>
+  <script src="./index.js?v=5.1.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -82,6 +82,9 @@
     <div><span
       class='noscroll'
       onclick="openPatchNotesModal()"><i class="godocumentation fas fa-file-alt" title='Patch Notes'></i></span></div>
+    <div><span
+      class='noscroll'
+      onclick="openChunkNotesModal()"><i class="gonotes fas fa-sticky-note" title='Notes'></i></span></div>
     <div><a
       href='https://www.patreon.com/bePatron?u=56906793'
       target='_blank'><i class="gopatreon fab fa-patreon" title='Support me on Patreon'></i></a></div>
@@ -104,6 +107,16 @@
         <span><input type="checkbox" onclick="changeFilterBy()" />Show checked only</span>
       </div>
       <div id="challenge-data" class="challenge-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal36" class="modal">
+    <div class="modal-content noscroll">
+      <div id="new-tasks-title" class="new-tasks-title noscroll">New Chunk Tasks</div>
+      <div id="new-tasks-data" class="new-tasks-data noscroll">
+      </div>
+      <div id="new-tasks-footer" class="new-tasks-footer noscroll">
+        <button id='close-new-tasks-button' class='modal-button' onclick='closeNewTasks()'>Close</button>
+      </div>
     </div>
   </div>
   <div id="myModal2" class="modal">
@@ -403,32 +416,46 @@
   <div id="myModal24" class="modal">
     <div class="modal-content noscroll">
       <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">10/11/2022 (5.0.0)</div>
+      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">11/17/2022 (5.1.0)</div>
       <div id="patch-notes-data" class="patch-notes-data noscroll">
         <h2 class='noscroll'>Major Changes & New Features</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Custom Themes - Now available in the settings window, custom themes for the website! Themes include the standard light and dark themes, as well as an old-school terminal theme, a neon 80's theme, a monochrome theme, and even a spooky pumpkin theme!</li>
-          <li class='noscroll'>Backlog Options - Replacing the previously available 'Backlog w/ Note' feature, Backlog Options can let you either backlog the single task, or directly backlog source any of the components, straight from the backlog window.</li>
-          <li class='noscroll'>Non-Auto Task Calculation - Chunk Tasks being automatically calculated on every change has been removed (in most cases). Now, when you backlog a task, or unlock an area, or change a rule, your tasks will not update until you click the 'Calculate Tasks' button at the top of your Active Chunk Tasks panel. This change has been added especially to help make backlogging multiple tasks smoother going forward.</li>
-          <li class='noscroll'>Fill POH Rule - This new Chunk Rule requires you to fill your POH Costume Room with all the possible non-quest gear that you can within your chunks. A perfect rule for any completionists out there!</li>
-          <li class='noscroll'>Small Calculation Optimization - Some small changes to the way tasks are calculated have been made to hopefully speed up medium-to-large map calculation times.</li>
+          <li class='noscroll'>New Themes - Just in time for the end of Autumn, there is now an Autumn theme, alongside a Winter theme, that can enhance your chunk map! Try them out in the Setting window.</li>
+          <li class='noscroll'>Notepad - There is now a notepad on the website, perfect for jotting down any notes you might have related to your map, both for yourself and for others to see! Access the notepad on the top bar, next to the Discord and Patreon icons.</li>
+          <li class='noscroll'>New Tasks for This Chunk - Do you have a long list of tasks, and want to know what tasks are new every time you roll a chunk? Now you can know! Turn the option on in the Settings window and see any new tasks you have after rolling your next chunk.</li>
+          <li class='noscroll'>Lock Mahogany Homes - When you unlock the Mahogany Homes minigame, and are assigned a task outside of your chunks, now you can lock those tasks from appearing until you gain access to that chunk. Try it out via the Activity Info window in the Mahogany Homes tab.</li>
         </ul>
         <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Added Krystilia and Konar to the Slayer Task Calculator.</li>
-          <li class='noscroll'>Added an option to tell the Slayer Task Calculator to ignore combat levels if you've done the same in-game.</li>
-          <li class='noscroll'>Fixed a bug where tasks that were un-backlogged or un-completed were not visually removed from the Backlog/Completed list right away.</li>
-          <li class='noscroll'>Fixed the frogspawn fishing loot to properly include swamp weed.</li>
-          <li class='noscroll'>Fixed an issue where the magic axe door Thieving task referenced the wrong chunk.</li>
-          <li class='noscroll'>Fixed an issue with Martin Thwait's shop being restricted wrongly.</li>
-          <li class='noscroll'>Fixed an issue with the All Drops rule and Slayer monsters.</li>
-          <li class='noscroll'>Fixed a miscategorizing of the goblins in chunk 10293.</li>
-          <li class='noscroll'>Fixed the cave goblin drop table to accurately reflect their drops after the Land of the Goblins update.</li>
-          <li class='noscroll'>Fixed a mispelling in a hot air balloon Firemaking task.</li>
-          <li class='noscroll'>Fixed the diary cape being unobtainable.</li>
-          <li class='noscroll'>Fixed graceful recolours being unobtainable.</li>
-          <li class='noscroll'>Fixed various other cosmetic changes to items being unobtainable.</li>
-          <li class='noscroll'>Fixed an issue with some Slayer tasks and Slayer Locking.</li>
+          <li class='noscroll'>Changed the way the Shooting Star tab works to account for special requirements, like access to the Crafting Guild (thanks Frozen).</li>
+          <li class='noscroll'>Added the ability to see what specific clue steps are doable in your chunk, via the Clues tab.</li>
+          <li class='noscroll'>Added the ability to see what chunks are needed to complete all clues of a given tier, via the Clues tab (thanks Marstead).</li>
+          <li class='noscroll'>Added customization for the Secondary Primary chunk rule, allowing you to specify how rare a drop can be and still count as primary for training purposes (thanks KingLagalot).</li>
+          <li class='noscroll'>Added tasks for casting spells with blighted sacks (thanks Entrana Bro).</li>
+          <li class='noscroll'>Added Thieving loot as part of the All Droptables and Every Drop chunk rules (thanks Chunky Beb)</li>
+          <li class='noscroll'>Added a way to obtain POH stat-boosting teas.</li>
+          <li class='noscroll'>Added a way to show multiple possible chunks for a quest in the quest panel (thanks Marstead).</li>
+          <li class='noscroll'>Added collapsable headers for each monster for the Every Droptable rule to condense the amount of room it takes up on the task list (thanks KingLagalot).</li>
+          <li class='noscroll'>Added a way to uncommonly get seeds from picking crops fields (thanks Chunk Nub).</li>
+          <li class='noscroll'>Added a missing knife in the sack by the mage bank.</li>
+          <li class='noscroll'>Added the mining glove variants and the fish sack barrel to the Fill Costume Room chunk rule.</li>
+          <li class='noscroll'>Updated the droprate of the jar of darkness from the Poll changes.</li>
+          <li class='noscroll'>Fixed the number of trees near the Fairy Ring south of Ardougne.</li>
+          <li class='noscroll'>Fixed previously missing Woodcutting tasks in the Brimhaven Dungeon.</li>
+          <li class='noscroll'>Fixed a bug where the area in Manual Areas weren't highlighted in green when unlocked.</li>
+          <li class='noscroll'>Fixed the cattleprod being obtainable before starting Sheep Herder (thanks invalidCards).</li>
+          <li class='noscroll'>Fixed a bug with noted drops and the All Droptables rule (thanks KingLagalot).</li>
+          <li class='noscroll'>Fixed an issue with the number of guards in Falador (thanks Marstead).</li>
+          <li class='noscroll'>Fixed the way that the Brimhaven Dungeon was being processed to now correctly account for your ability to access different sections of it.</li>
+          <li class='noscroll'>Fixed a bug with ale yeast being obtainable without ecto-tokens (thanks ChunkiCinni).</li>
+          <li class='noscroll'>Fixed the sorting with some Other Tasks in the task list.</li>
+          <li class='noscroll'>Fixed an issue where skewering meat with an iron spit didn't require Firemaking (thanks Chunkifer).</li>
+          <li class='noscroll'>Fixed a bug with a ghost variant near ZMI (thanks KingLagalot).</li>
+          <li class='noscroll'>Fixed a bug with wiki links on quests with apostrophes.</li>
+          <li class='noscroll'>Fixed a bug with processing a chocolate bar through Cooking before 40 Cooking (thanks Chunk Nub).</li>
+          <li class='noscroll'>Fixed the task definition for making a chocolate cake to allow for chocolate dust too.</li>
+          <li class='noscroll'>Fixed the list of items that can slash a web to include missing items.</li>
+          <li class='noscroll'>Fixed Fishing Trawler giving incorrect requirements for players without primary Fishing training methods.</li>
         </ul>
         <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack#0890')">whitecatblack#0890  <i class="fas fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
       </div>
@@ -567,6 +594,41 @@
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeSlayerMasterInfo()"></i>
       <div id="slayermasterinfo-title" class="slayermasterinfo-title noscroll"></div>
       <div id="slayermasterinfo-data" class="slayermasterinfo-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal33" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeDoableClueSteps()"></i>
+      <div id="doablecluesteps-title" class="doablecluesteps-title noscroll"></div>
+      <div id="doablecluesteps-subtitle" class="doablecluesteps-subtitle noscroll"></div>
+      <div id="doablecluesteps-data" class="doablecluesteps-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal34" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeClueChunks()"></i>
+      <div id="cluechunks-title" class="cluechunks-title noscroll"></div>
+      <div id="cluechunks-subtitle" class="cluechunks-subtitle noscroll"></div>
+      <div id="cluechunks-data" class="cluechunks-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal35" class="modal">
+    <div class="modal-content noscroll">
+      <div id="chunk-notes-title" class="chunk-notes-title noscroll">Notes</div>
+      <div id="chunk-notes-data" class="chunk-notes-data noscroll">
+        <textarea placeholder="Add notes here..."></textarea>
+      </div>
+      <div id="chunk-notes-footer" class="chunk-notes-footer noscroll">
+        <button id='save-chunk-notes-button' class='modal-button' onclick='saveChunkNotes()'>Save</button>
+      </div>
+    </div>
+  </div>
+  <div id="myModal37" class="modal">
+    <div class="modal-content noscroll">
+      <div id="construction-locked-title" class="construction-locked-title noscroll">Select Chunk</div>
+      <div id="construction-locked-subtitle" class="construction-locked-subtitle noscroll">Select the chunk that locks your Mahogany Homes progress. You won't be shown Mahogany Homes tasks until you unlock the chunk that is blocking you.</div>
+      <div id="construction-locked-dropdown-container" class="construction-locked-dropdown-container noscroll" onchange="constructionLockedChange()"><select id="construction-locked-dropdown"></select></div>
+      <div id="construction-locked-data" class="construction-locked-data noscroll"></div>
     </div>
   </div>
   <div id='entry-menu'>
