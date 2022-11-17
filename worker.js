@@ -1820,6 +1820,9 @@ var calcChallenges = function(chunks, baseChunkData) {
                             }
                         }
                     } else {
+                        if (!newValids.hasOwnProperty(subSkill)) {
+                            newValids[subSkill] = {};
+                        }
                         newValids[subSkill][name] = chunkInfo['challenges'][skill][name]['Skills'][subSkill];
                         chunkInfo['challenges'][subSkill][name] = {
                             ...chunkInfo['challenges'][skill][name],
