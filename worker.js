@@ -2888,7 +2888,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
         Object.keys(items).filter((item) => { return !!items[item] }).sort().forEach(item => {
             !drops[item] && Object.keys(items[item]).filter((source) => { return (items[item][source].includes('-drop') || items[item][source].includes('-Slayer') || items[item][source].includes('-Thieving')) }).forEach(source => {
                 let realSource = source.replaceAll('#', '%2F').replaceAll('.', '%2E');
-                if (source.includes('Slay')) {
+                if (source.includes('Slay ')) {
                     let monster = chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F').replaceAll('.', '%2E')]['Output'];
                     realSource = chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F').replaceAll('.', '%2E')]['Output'];
                     Object.keys(chunkInfo['skillItems']['Slayer'][monster]).forEach(drop => {
