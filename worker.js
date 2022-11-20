@@ -936,7 +936,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         Object.keys(newValids).filter((skill) => { return skill !== 'BiS' }).forEach(skill => {
             if (!checkPrimaryMethod(skill, newValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] <= 1)) {
                 tempValidsSkill = {};
-                !!newValids[skill] && Object.keys(newValids[skill]).forEach(task => {
+                !!newValids[skill] && Object.keys(newValids[skill]).filter(task => { return newValids[skill][task] === 1 }).forEach(task => {
                     tempValidsSkill[task] = newValids[skill][task];
                 });
                 newValids[skill] = tempValidsSkill;
