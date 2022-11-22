@@ -2770,6 +2770,10 @@ input#searchPlayerMaps {
     margin-left: 15px;
 }
 
+.notes-row.double-indent {
+    margin-left: 30px;
+}
+
 .backlog-textarea-wrapper {
     text-align: center;
     padding: 20px 0px;
