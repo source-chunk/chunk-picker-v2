@@ -1913,6 +1913,13 @@ input#searchPlayerMaps {
     background-color: var(--color3);
     margin-right: 15px;
     position: relative;
+    -webkit-transition-duration: .4s;
+    transition-duration: .4s;
+}
+
+.panel-active .challenge.clickable:hover {
+    background-color: var(--color8);
+    cursor: pointer;
 }
 
 .challenge.hide-backlog span.burger {
@@ -2223,6 +2230,10 @@ input#searchPlayerMaps {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+}
+
+#myModal2 > .modal-content.noscroll {
+    height: 33%;
 }
 
 #myModal3 > .modal-content.noscroll {
