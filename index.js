@@ -740,6 +740,40 @@ let subRuleDefault = {
     "Minigame": true,
 };                                                                              // Default value of sub-rule when parent is checked
 
+let taskGeneratingRules = {
+    "Kill X": true,
+    "Show Skill Tasks": true,
+    "Show Quest Tasks": true,
+    "Show Diary Tasks": true,
+    "Show Best in Slot Tasks": true,
+    "Show Best in Slot Prayer Tasks": true,
+    "Show Best in Slot Defensive Tasks": true,
+    "Show Best in Slot Flinching Tasks": true,
+    "Show Best in Slot Weight Tasks": true,
+    "Show Best in Slot Melee Style Tasks": true,
+    "Show Quest Tasks Complete": true,
+    "Show Diary Tasks Complete": true,
+    "Show Diary Tasks Any": true,
+    "Collection Log Bosses": true,
+    "Collection Log Raids": true,
+    "Collection Log Clues": true,
+    "Collection Log Minigames": true,
+    "Collection Log Other": true,
+    "Untracked Uniques": true,
+    "Pets": true,
+    "Jars": true,
+    "Stuffables": true,
+    "Every Drop": true,
+    "Fossil Island Tasks": true,
+    "Combat Diary Tasks": true,
+    "Skilling Pets": true,
+    "Money Unlockables": true,
+    "All Droptables": true,
+    "Fill Stash": true,
+    "Fill POH": true,
+    "All Shops": true,
+};                                                                              // List of rule that generate tasks
+
 let settings = {
     "highvis": false,
     "neighbors": true,
@@ -2514,7 +2548,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.1.15");
+        myWorker = new Worker("./worker.js?v=5.1.16");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked]);
         workerOut = 1;
@@ -2758,7 +2792,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.1.15");
+let myWorker = new Worker("./worker.js?v=5.1.16");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4431,7 +4465,7 @@ var doneLoading = function() {
         $('.modal, .entry-content, .menu9, .menu9 .accordion, .menu9 .panel, .modal-content, .open-rules-container, .help-content').addClass('mobile');
         $('.center').css({ 'height': '40px', 'width': '90px', 'font-size': '12px' });
         $('.pick, .roll2, .unpick').css({ 'height': '20px', 'width': '90px', 'font-size': '12px' });
-        $('.gohighscore, .gobugreport, .godiscord, .gopatreon, .godocumentation, .gosearch, .hiddenInfo, .help-button, .gohome, .about-button, .open-manual-outer-container, .open-complete-container').hide().remove();
+        $('.gohighscore, .gobugreport, .godiscord, .gopatreon, .godocumentation, .gosearch, .gonotes, .hiddenInfo, .help-button, .gohome, .about-button, .open-manual-outer-container, .open-complete-container').hide().remove();
         $('.menu2, .menu6, .menu7, .menu8, .menu9, .menu10, .settings').hide();
         $('.hr').css({ 'width': '10vw' });
         $('.block, .block > .title, .block button').css({ 'font-size': '5vw' });
@@ -4972,7 +5006,7 @@ setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
         setCurrentChallenges(backlogArr, completedArr, false, noClear);
         changeChallengeColor();
     }
-    $(`.panel-active .link, .panel-active .internal-link, .panel-active input`).click(function(e) {
+    $(`.panel-active .link, .panel-active .internal-link, .panel-active input, .panel-active .checkbox__control`).click(function(e) {
         e.stopPropagation();
     });
 }
@@ -6855,7 +6889,7 @@ var setTaskNum = function() {
 // Check if all rules are off
 var checkFalseRules = function() {
     var all_false = true;
-    for (var s in rules) {
+    for (var s in taskGeneratingRules) {
         if (rules[s] === true) {
             all_false = false;
             break;
@@ -7696,7 +7730,7 @@ var unbacklogChallenge = function(challenge, skill) {
         $(`.panel-backlog .challenge.${skill + '-' + challenge.replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'}`).remove();
     } else {
         $(`.panel-backlog .challenge.${skill}-challenge`).each(function(index) {
-            if ($(this).text().includes(challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ','))) {
+            if ($(this).text().includes(challenge.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ','))) {
                 $(this).remove();
             }
         });
