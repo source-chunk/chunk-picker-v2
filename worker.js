@@ -5959,8 +5959,12 @@ var calcCurrentChallenges2 = function() {
     let highestChallenge = {};
     let highestChallengeLevelArr = {};
     let highestChallengeLevelBoost = {};
+    let realLevel = {};
+    let noXpChallenges = {};
 
     Object.keys(globalValids).forEach(skill => {
+        realLevel[skill] = [];
+        noXpChallenges[skill] = [];
         if (skill !== 'Extra' && skill !== 'Quest' && skill !== 'Diary' && skill !== 'BiS') {
             highestChallengeLevelArr[skill] = 0;
             highestChallengeLevelBoost[skill] = 0;
@@ -5999,20 +6003,43 @@ var calcCurrentChallenges2 = function() {
             });
             let isPrimary = true || checkPrimaryMethod(skill, globalValids, baseChunkData);
             Object.keys(globalValids[skill]).forEach(challenge => {
-                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoXp') && !Object.keys(highestOverall).includes(chunkInfo['challenges'][skill][challenge]['Output']) && !rules["Highest Level"]) {
+                realLevel[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'];
+                if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost')) {
+                    let bestBoost = 0;
+                    let hasCrystalSaw = false;
+                    Object.keys(chunkInfo['codeItems']['boostItems'][skill]).forEach(boost => {
+                        if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0].replaceAll('#', '%2F')) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0].replaceAll('%2F', '#')))) {
+                            if (boost !== 'Crystal saw') {
+                                if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
+                                    let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
+                                    let possibleBoost = Math.floor(globalValids[skill][challenge] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                    possibleBoost = Math.floor((globalValids[skill][challenge] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                    if (possibleBoost > bestBoost) {
+                                        bestBoost = possibleBoost;
+                                    }
+                                } else if (chunkInfo['codeItems']['boostItems'][skill][boost] > bestBoost) {
+                                    bestBoost = chunkInfo['codeItems']['boostItems'][skill][boost];
+                                }
+                            } else if (skill === 'Construction') {
+                                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Items') && chunkInfo['challenges'][skill][challenge]['Items'].includes('Saw+')) {
+                                    hasCrystalSaw = true;
+                                }
+                            }
+                        }
+                    });
+                    realLevel[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0));
+                }
+                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoXp') && !Object.keys(highestOverall).includes(chunkInfo['challenges'][skill][challenge]['Output']) && !rules["Highest Level"] && Object.keys(baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]).length > 1) {
                     delete globalValids[skill][challenge];
                     if (!globalValids[skill]) {
                         delete globalValids[skill];
                     }
-                    delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']];
-                    if (!baseChunkData['items']) {
-                        delete baseChunkData['items'];
-                    }
+                    noXpChallenges[skill].push(challenge);
                     return;
                 }
                 if (isPrimary || (manualTasks.hasOwnProperty(skill) && manualTasks[skill].hasOwnProperty(challenge))) {
-                    if (globalValids[skill][challenge] !== false && (chunkInfo['challenges'][skill][challenge]['Level'] > (highestChallengeLevelArr[skill] + highestChallengeLevelBoost[skill])) && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill].hasOwnProperty(challenge))) {
-                        if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] > chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) || ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) {
+                    if (globalValids[skill][challenge] !== false && (realLevel[skill][challenge] > highestChallengeLevelArr[skill]) && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill].hasOwnProperty(challenge))) {
+                        if ((!highestChallenge[skill] || (realLevel[skill][challenge] > realLevel[skill][highestChallenge[skill]])) || ((!highestChallenge[skill] || (realLevel[skill][challenge] === realLevel[skill][highestChallenge[skill]])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'] || (!!chunkInfo['challenges'][skill][challenge]['Priority'] && chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])))) {
                             if (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge)) {
                                 if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                                     let tempValid = true;
@@ -6046,7 +6073,7 @@ var calcCurrentChallenges2 = function() {
                                     }
                                 });
                             }
-                        } else if ((!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Level'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'])) && (!highestChallenge[skill] || (chunkInfo['challenges'][skill][challenge]['Priority'] === chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])) && chunkInfo['challenges'][skill][challenge]['Primary']) {
+                        } else if ((!highestChallenge[skill] || (realLevel[skill][challenge] === realLevel[skill][highestChallenge[skill]])) && (!highestChallenge[skill] || !chunkInfo['challenges'][skill][challenge].hasOwnProperty('Priority') || !chunkInfo['challenges'][skill][highestChallenge[skill]].hasOwnProperty('Priority') || (chunkInfo['challenges'][skill][challenge]['Priority'] < chunkInfo['challenges'][skill][highestChallenge[skill]]['Priority'])) && chunkInfo['challenges'][skill][challenge]['Primary']) {
                             if (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge)) {
                                 if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                                     let tempValid = true;
@@ -6084,7 +6111,7 @@ var calcCurrentChallenges2 = function() {
                     }
                 }
             });
-            (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]] || (chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge[skill]]['Primary'])) && (highestChallenge[skill] = undefined);
+            (!highestChallenge[skill] || !chunkInfo['challenges'][skill][highestChallenge[skill]] || (realLevel[skill][highestChallenge[skill]] <= 1 && !chunkInfo['challenges'][skill][highestChallenge[skill]]['Primary'])) && (highestChallenge[skill] = undefined);
             tempChallengeArr[skill] = highestChallenge[skill];
             highestCurrent[skill] = highestChallenge[skill];
             if (!!highestChallenge[skill] && !!chunkInfo['challenges'][skill][highestChallenge[skill]] && !!chunkInfo['challenges'][skill][highestChallenge[skill]]['Skills']) {
@@ -6170,6 +6197,16 @@ var calcCurrentChallenges2 = function() {
         } else if (!!tempChallengeArr[skill]) {
             highestOverall[skill] = tempChallengeArr[skill];
         }
+        !!noXpChallenges[skill] && noXpChallenges[skill].filter(challenge => { return chunkInfo['challenges'][skill][highestOverall[skill]]['Level'] < realLevel[skill][challenge] }).forEach(challenge => {
+            delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']][challenge];
+            if (!baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]) {
+                delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']];
+                if (!baseChunkData['items']) {
+                    delete baseChunkData['items'];
+                }
+            }
+            return;
+        });
     });
     return tempChallengeArr;
 }

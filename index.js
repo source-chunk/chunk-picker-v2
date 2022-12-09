@@ -2548,7 +2548,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.1.16");
+        myWorker = new Worker("./worker.js?v=5.1.17");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked]);
         workerOut = 1;
@@ -2792,7 +2792,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.1.16");
+let myWorker = new Worker("./worker.js?v=5.1.17");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -2800,12 +2800,14 @@ let workerOnMessage = function(e) {
         $('.loading-bar-text').css('color', 'yellow').text('Error');
         $('.panel-active > .calculating').css('color', 'red');
         $('.panel-active > .calculating > i').removeClass('fa-spin');
-        let errObject = {
-            date: Date(),
-            map: mid,
-            error: e.data[1].stack
-        };
-        databaseRef.child('errorlogs').push(errObject);
+        if (!(location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+            let errObject = {
+                date: Date(),
+                map: mid,
+                error: e.data[1].stack
+            };
+            databaseRef.child('errorlogs').push(errObject);
+        }
         throw e.data[1];
     } else if (!Array.isArray(e.data)) {
         if (!!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).length >= 100) {
