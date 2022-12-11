@@ -5995,10 +5995,11 @@ var calcCurrentChallenges2 = function() {
                         });
                         highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0));
                         highestChallengeLevelBoost[skill] = bestBoost + (hasCrystalSaw ? 3 : 0);
+                        highestOverall[skill] = name + `{${(bestBoost + (hasCrystalSaw ? 3 : 0))}}`;
                     } else {
                         highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'];
+                        highestOverall[skill] = name
                     }
-                    highestOverall[skill] = name;
                 }
             });
             let isPrimary = true || checkPrimaryMethod(skill, globalValids, baseChunkData);
@@ -6141,6 +6142,7 @@ var calcCurrentChallenges2 = function() {
     });
     Object.keys(tempChallengeArr).forEach(skill => {
         let challenge = tempChallengeArr[skill] || highestOverall[skill];
+        !!challenge && (challenge = challenge.split('{')[0]);
         if (!!challenge && rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost') && (!completedChallenges[skill] || !completedChallenges[skill].hasOwnProperty(challenge))) {
             let bestBoost = 0;
             let bestBoostSource;
@@ -6197,7 +6199,7 @@ var calcCurrentChallenges2 = function() {
         } else if (!!tempChallengeArr[skill]) {
             highestOverall[skill] = tempChallengeArr[skill];
         }
-        !!noXpChallenges[skill] && noXpChallenges[skill].filter(challenge => { return chunkInfo['challenges'][skill][highestOverall[skill]]['Level'] < realLevel[skill][challenge] }).forEach(challenge => {
+        !!noXpChallenges[skill] && noXpChallenges[skill].filter(challenge => { return chunkInfo['challenges'][skill][highestOverall[skill].split('{')[0]]['Level'] < realLevel[skill][challenge] }).forEach(challenge => {
             delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']][challenge];
             if (!baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]) {
                 delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']];
