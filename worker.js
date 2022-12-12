@@ -749,7 +749,32 @@ var calcChallenges = function(chunks, baseChunkData) {
                         passedByTasks[skill] = {};
                     }
                     passedByTasks[skill][challenge] = true;
-                    if ((!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] > 1 && chunkInfo['challenges'][skill][challenge]['Level'] > passiveSkill[skill]) || (!!skillQuestXp && skillQuestXp.hasOwnProperty(skill) && chunkInfo['challenges'][skill][challenge]['Level'] > skillQuestXp[skill]['level'])) {
+                    let bestBoost = 0;
+                    let hasCrystalSaw = false;
+                    if (!!challenge && rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && (!chunkInfo['challenges'][skill].hasOwnProperty(challenge) ? !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost') : !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost')) && (!completedChallenges[skill] || !completedChallenges[skill].hasOwnProperty(challenge))) {
+                        Object.keys(chunkInfo['codeItems']['boostItems'][skill]).forEach(boost => {
+                            if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0].replaceAll('#', '%2F')) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0].replaceAll('%2F', '#')))) {
+                                if (boost !== 'Crystal saw') {
+                                    if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
+                                        let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
+                                        let possibleBoost = Math.floor(newValids[skill][challenge] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                        possibleBoost = Math.floor((newValids[skill][challenge] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                        if (possibleBoost > bestBoost) {
+                                            bestBoost = possibleBoost;
+                                        }
+                                    } else if (chunkInfo['codeItems']['boostItems'][skill][boost] > bestBoost) {
+                                        bestBoost = chunkInfo['codeItems']['boostItems'][skill][boost];
+                                    }
+                                } else if (skill === 'Construction') {
+                                    if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Items') && chunkInfo['challenges'][skill][challenge]['Items'].includes('Saw+')) {
+                                        hasCrystalSaw = true;
+                                        chunkInfo['challenges'][skill][challenge]['ItemsDetails'].push('Crystal saw');
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    if ((!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] > 1 && (chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > passiveSkill[skill]) || (!!skillQuestXp && skillQuestXp.hasOwnProperty(skill) && (chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > skillQuestXp[skill]['level'])) {
                         if (!checkPrimaryMethod(skill, valids, baseChunkData)) {
                             if (!nonValids.hasOwnProperty(challenge)) {
                                 nonValids[challenge] = [];
