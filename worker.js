@@ -764,7 +764,32 @@ var calcChallenges = function(chunks, baseChunkData) {
                     }
                     if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Skills')) {
                         Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).filter((subSkill) => { return (!checkPrimaryMethod(subSkill, newValids, baseChunkData) || (subSkill === 'Slayer' && !!slayerLocked && chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > slayerLocked['level']) || ((!!passiveSkill && passiveSkill.hasOwnProperty(subSkill) && passiveSkill[subSkill] > 1 && chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] <= passiveSkill[subSkill]) || (!!skillQuestXp && skillQuestXp.hasOwnProperty(subSkill) && chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > skillQuestXp[subSkill]['level']))) && !chunkInfo['challenges'][skill][challenge]['ManualValid'] }).forEach(subSkill => {
-                            if ((!checkPrimaryMethod(subSkill, valids, baseChunkData) || (subSkill === 'Slayer' && !!slayerLocked && chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > passiveSkill[subSkill])) {
+                            let bestBoost = 0;
+                            let hasCrystalSaw = false;
+                            if (!!challenge && rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(subSkill) && (!chunkInfo['challenges'][subSkill].hasOwnProperty(challenge) ? !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost') : !chunkInfo['challenges'][subSkill][challenge].hasOwnProperty('NoBoost')) && (!completedChallenges[subSkill] || !completedChallenges[subSkill].hasOwnProperty(challenge))) {
+                                Object.keys(chunkInfo['codeItems']['boostItems'][subSkill]).forEach(boost => {
+                                    if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0].replaceAll('#', '%2F')) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0].replaceAll('%2F', '#')))) {
+                                        if (boost !== 'Crystal saw') {
+                                            if (typeof chunkInfo['codeItems']['boostItems'][subSkill][boost] === 'string') {
+                                                let stringSplit = chunkInfo['codeItems']['boostItems'][subSkill][boost].split('%+');
+                                                let possibleBoost = Math.floor(newValids[subSkill][challenge] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                                possibleBoost = Math.floor((newValids[subSkill][challenge] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                                if (possibleBoost > bestBoost) {
+                                                    bestBoost = possibleBoost;
+                                                }
+                                            } else if (chunkInfo['codeItems']['boostItems'][subSkill][boost] > bestBoost) {
+                                                bestBoost = chunkInfo['codeItems']['boostItems'][subSkill][boost];
+                                            }
+                                        } else if (subSkill === 'Construction') {
+                                            if (chunkInfo['challenges'][subSkill][challenge].hasOwnProperty('Items') && chunkInfo['challenges'][subSkill][challenge]['Items'].includes('Saw+')) {
+                                                hasCrystalSaw = true;
+                                                chunkInfo['challenges'][subSkill][challenge]['ItemsDetails'].push('Crystal saw');
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                            if ((!checkPrimaryMethod(subSkill, valids, baseChunkData) && (subSkill === 'Slayer' && !!slayerLocked && (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > passiveSkill[subSkill])) {
                                 if (!nonValids.hasOwnProperty(challenge)) {
                                     nonValids[challenge] = [];
                                 }
@@ -6203,7 +6228,32 @@ var calcCurrentChallenges2 = function() {
                 if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                     let tempValid = true;
                     Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
-                        if (!checkPrimaryMethod(subSkill, globalValids, baseChunkData) || (subSkill === 'Slayer' && !!slayerLocked && chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > slayerLocked['level'])) {
+                        let bestBoost = 0;
+                        let hasCrystalSaw = false;
+                        if (!!challenge && rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(subSkill) && !chunkInfo['challenges'][subSkill][challenge].hasOwnProperty('NoBoost') && (!completedChallenges[subSkill] || !completedChallenges[subSkill].hasOwnProperty(challenge))) {
+                            Object.keys(chunkInfo['codeItems']['boostItems'][subSkill]).forEach(boost => {
+                                if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0].replaceAll('#', '%2F')) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0].replaceAll('%2F', '#')))) {
+                                    if (boost !== 'Crystal saw') {
+                                        if (typeof chunkInfo['codeItems']['boostItems'][subSkill][boost] === 'string') {
+                                            let stringSplit = chunkInfo['codeItems']['boostItems'][subSkill][boost].split('%+');
+                                            let possibleBoost = Math.floor(globalValids[subSkill][challenge] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                            possibleBoost = Math.floor((globalValids[subSkill][challenge] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                            if (possibleBoost > bestBoost) {
+                                                bestBoost = possibleBoost;
+                                            }
+                                        } else if (chunkInfo['codeItems']['boostItems'][subSkill][boost] > bestBoost) {
+                                            bestBoost = chunkInfo['codeItems']['boostItems'][subSkill][boost];
+                                        }
+                                    } else if (subSkill === 'Construction') {
+                                        if (chunkInfo['challenges'][subSkill][challenge].hasOwnProperty('Items') && chunkInfo['challenges'][subSkill][challenge]['Items'].includes('Saw+')) {
+                                            hasCrystalSaw = true;
+                                            chunkInfo['challenges'][subSkill][challenge]['ItemsDetails'].push('Crystal saw');
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        if ((!checkPrimaryMethod(subSkill, globalValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] < (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (hasCrystalSaw ? 3 : 0))))) || (subSkill === 'Slayer' && !!slayerLocked && (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > slayerLocked['level'])) {
                             tempValid = false;
                         }
                     });
