@@ -774,15 +774,13 @@ var calcChallenges = function(chunks, baseChunkData) {
                             }
                         });
                     }
-                    if ((!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] > 1 && (chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > passiveSkill[skill]) || (!!skillQuestXp && skillQuestXp.hasOwnProperty(skill) && (chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > skillQuestXp[skill]['level'])) {
-                        if (!checkPrimaryMethod(skill, valids, baseChunkData)) {
-                            if (!nonValids.hasOwnProperty(challenge)) {
-                                nonValids[challenge] = [];
-                            }
-                            nonValids[challenge] = [...nonValids[challenge], 'Passive'];
-                            !!newValids[skill] && delete newValids[skill][challenge];
-                            !!valids[skill] && delete valids[skill][challenge];
+                    if (!checkPrimaryMethod(skill, newValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] <= 1 || (chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > passiveSkill[skill]) && (!skillQuestXp || !skillQuestXp.hasOwnProperty(skill) || (chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > skillQuestXp[skill]['level'])) {
+                        if (!nonValids.hasOwnProperty(challenge)) {
+                            nonValids[challenge] = [];
                         }
+                        nonValids[challenge] = [...nonValids[challenge], 'Passive'];
+                        !!newValids[skill] && delete newValids[skill][challenge];
+                        !!valids[skill] && delete valids[skill][challenge];
                     }
                     if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                         return;
@@ -814,7 +812,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                     }
                                 });
                             }
-                            if ((!checkPrimaryMethod(subSkill, valids, baseChunkData) && (subSkill === 'Slayer' && !!slayerLocked && (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > passiveSkill[subSkill])) {
+                            if (!checkPrimaryMethod(subSkill, valids, baseChunkData) && ((subSkill !== 'Slayer' || !slayerLocked || (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (hasCrystalSaw ? 3 : 0))) > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > passiveSkill[subSkill])) {
                                 if (!nonValids.hasOwnProperty(challenge)) {
                                     nonValids[challenge] = [];
                                 }
@@ -1030,6 +1028,20 @@ var calcChallenges = function(chunks, baseChunkData) {
             }
             checkPrimaryMethod(skill, newValids, baseChunkData) && Object.keys(newValids[skill]).sort(function(a, b) { return a.localeCompare(b, 'en', { numeric: true }) }).forEach(challenge => {
                 fullyValid = true;
+                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoXp') && !rules["Highest Level"] && !!baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']] && Object.keys(baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]).length > 1) {
+                    delete newValids[skill][challenge];
+                    if (!newValids[skill]) {
+                        delete newValids[skill];
+                    }
+                    delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']][challenge];
+                    if (!baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]) {
+                        delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']];
+                        if (!baseChunkData['items']) {
+                            delete baseChunkData['items'];
+                        }
+                    }
+                    return;
+                }
                 !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach(subTask => {
                     if (subTask.includes('+')) {
                         if (subTask.includes('+x')) {
@@ -1218,7 +1230,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                 let lowestItem;
                 let lowestName;
                 let taskIsRemoved;
-                tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] }).forEach(name => {
+                tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] && !chunkInfo['challenges'][skill][name].hasOwnProperty('NoXp') }).forEach(name => {
                     taskIsRemoved = false;
                     let challenge = chunkInfo['challenges'][skill][name];
                     if (challenge.hasOwnProperty('Tasks')) {
@@ -6084,11 +6096,9 @@ var calcCurrentChallenges2 = function() {
     let highestChallengeLevelArr = {};
     let highestChallengeLevelBoost = {};
     let realLevel = {};
-    let noXpChallenges = {};
 
     Object.keys(globalValids).forEach(skill => {
         realLevel[skill] = [];
-        noXpChallenges[skill] = [];
         if (skill !== 'Extra' && skill !== 'Quest' && skill !== 'Diary' && skill !== 'BiS') {
             highestChallengeLevelArr[skill] = 0;
             highestChallengeLevelBoost[skill] = 0;
@@ -6153,14 +6163,6 @@ var calcCurrentChallenges2 = function() {
                         }
                     });
                     realLevel[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (hasCrystalSaw ? 3 : 0));
-                }
-                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoXp') && !Object.keys(highestOverall).includes(chunkInfo['challenges'][skill][challenge]['Output']) && !rules["Highest Level"] && Object.keys(baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]).length > 1) {
-                    delete globalValids[skill][challenge];
-                    if (!globalValids[skill]) {
-                        delete globalValids[skill];
-                    }
-                    noXpChallenges[skill].push(challenge);
-                    return;
                 }
                 if (isPrimary || (manualTasks.hasOwnProperty(skill) && manualTasks[skill].hasOwnProperty(challenge))) {
                     if (globalValids[skill][challenge] !== false && (realLevel[skill][challenge] > highestChallengeLevelArr[skill]) && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill].hasOwnProperty(challenge))) {
@@ -6348,16 +6350,6 @@ var calcCurrentChallenges2 = function() {
         } else if (!!tempChallengeArr[skill]) {
             highestOverall[skill] = tempChallengeArr[skill];
         }
-        !!noXpChallenges[skill] && noXpChallenges[skill].filter(challenge => { return chunkInfo['challenges'][skill][highestOverall[skill].split('{')[0]]['Level'] < realLevel[skill][challenge] }).forEach(challenge => {
-            delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']][challenge];
-            if (!baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]) {
-                delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']];
-                if (!baseChunkData['items']) {
-                    delete baseChunkData['items'];
-                }
-            }
-            return;
-        });
     });
     return tempChallengeArr;
 }
