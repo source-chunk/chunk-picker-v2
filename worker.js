@@ -803,7 +803,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                             } else if (chunkInfo['codeItems']['boostItems'][subSkill][boost] > bestBoost) {
                                                 bestBoost = chunkInfo['codeItems']['boostItems'][subSkill][boost];
                                             }
-                                        } else if (subSkill === 'Construction') {
+                                        } else if (subSkill === 'Construction' && chunkInfo['challenges'][subSkill].hasOwnProperty(challenge)) {
                                             if (chunkInfo['challenges'][subSkill][challenge].hasOwnProperty('Items') && chunkInfo['challenges'][subSkill][challenge]['Items'].includes('Saw+')) {
                                                 hasCrystalSaw = true;
                                                 chunkInfo['challenges'][subSkill][challenge]['ItemsDetails'].push('Crystal saw');
