@@ -3228,7 +3228,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
         });
     }
     //console.log(JSON.parse(JSON.stringify(tempItemSkill)));
-    console.log(JSON.parse(JSON.stringify(valids)));
+    //console.log(JSON.parse(JSON.stringify(valids)));
     return [valids, tempItemSkill, tempMultiStepSkill];
 }
 
