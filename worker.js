@@ -6162,7 +6162,7 @@ var calcCurrentChallenges2 = function() {
                         highestOverall[skill] = name + `{${(bestBoost + (hasCrystalSaw ? 3 : 0))}}`;
                     } else {
                         highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'];
-                        highestOverall[skill] = name
+                        highestOverall[skill] = name;
                     }
                 }
             });
