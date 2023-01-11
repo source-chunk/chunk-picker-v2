@@ -1151,6 +1151,23 @@ input#searchPlayerMaps {
     cursor: not-allowed;
 }
 
+.password-line {
+    position: relative;
+}
+
+.show-eye {
+    position: absolute;
+    font-size: 36px;
+    margin: 10px;
+    cursor: pointer;
+    -webkit-transition-duration: .4s;
+    transition-duration: .4s;
+}
+
+.show-eye:hover {
+    color: gray;
+}
+
 #newmid {
     border: solid;
     border-radius: 5px;
@@ -1981,7 +1998,8 @@ input#searchPlayerMaps {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 3%;
+    padding: 2%;
+    right: 1%;
 }
 
 .burger.hidden-burger {
@@ -2233,7 +2251,7 @@ input#searchPlayerMaps {
 }
 
 #myModal2 > .modal-content.noscroll {
-    height: 33%;
+    height: 35%;
 }
 
 #myModal3 > .modal-content.noscroll {
@@ -2673,7 +2691,7 @@ input#searchPlayerMaps {
     padding-left: 10px;
 }
 
-.details-data .red {
+.details-data .red, .details-data .red a {
     color: red;
 }
 
@@ -4022,7 +4040,7 @@ input#searchChunks {
 }
 
 .doablecluesteps-data {
-    margin-left: 5px;
+    padding-left: 5px;
     font-size: 20px;
     overflow-y: auto;
     height: 84%;
@@ -5520,6 +5538,11 @@ input#searchMonsters {
 .quest-steps-data .step.highlighted {
     border: solid 2px var(--colorFlash);
     background-color: var(--color6);
+}
+
+.quest-steps-info {
+    font-size: 18px;
+    margin: 0px 5px;
 }
 
 .step-table-header {

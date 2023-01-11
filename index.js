@@ -1160,8 +1160,9 @@ let savedNotesType = null;
 let savedNotesEl = null;
 let chunkJustRolled = false;
 let activeContextMenuOpen = false;
+let activeContextMenuOpenTime = 0;
 let backlogContextMenuOpen = false;
-let currentVersion = '5.1.0';
+let currentVersion = '5.2.0';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -1741,6 +1742,8 @@ document.body.addEventListener('mouseup', function (event) {
     // ------
     if (hasSet && !(event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom) && (modalOutsideTime + 100 < Date.now()) && readyToExitModal) {
         manualModalOpen && !detailsModalOpen && closeManualAdd();
+        highest2ModalOpen && !methodsModalOpen && !questStepsModalOpen && !slayerMasterInfoModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && closeHighest2();
+        questStepsModalOpen && !detailsModalOpen && closeQuestSteps();
         detailsModalOpen && !searchDetailsModalOpen && closeChallengeDetails();
         rulesModalOpen && !presetWarningModalOpen && closeRules();
         settingsModalOpen && closeSettings();
@@ -1749,7 +1752,6 @@ document.body.addEventListener('mouseup', function (event) {
         searchModalOpen && !searchDetailsModalOpen && closeSearch();
         searchDetailsModalOpen && closeSearchDetails();
         highestModalOpen && !addEquipmentModalOpen && closeHighest();
-        highest2ModalOpen && !methodsModalOpen && !questStepsModalOpen && !slayerMasterInfoModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && closeHighest2();
         methodsModalOpen && closeMethods();
         completeModalOpen && closeComplete();
         addEquipmentModalOpen && closeAddEquipment();
@@ -1760,7 +1762,6 @@ document.body.addEventListener('mouseup', function (event) {
         manualOuterModalOpen && closeOuterAdd();
         monsterModalOpen && closeMonstersAdd();
         patchNotesOpen && dismissPatchNotes();
-        questStepsModalOpen && closeQuestSteps();
         friendsListModalOpen && !friendsAddModalOpen && closeFriendsList();
         manualAreasModalOpen && closeManualAreas();
         slayerMasterInfoModalOpen && closeSlayerMasterInfo();
@@ -2548,7 +2549,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.1.35");
+        myWorker = new Worker("./worker.js?v=5.2.0");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked]);
         workerOut = 1;
@@ -2792,7 +2793,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.1.35");
+let myWorker = new Worker("./worker.js?v=5.2.0");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4603,32 +4604,32 @@ var updateChunkInfo = function() {
         let connectStr = '';
         let clueStr = '';
         if (!!chunkInfo['chunks'][id]) {
-            !!chunkInfo['chunks'][id]['Monster'] && Object.keys(chunkInfo['chunks'][id]['Monster']).forEach(name => {
+            !!chunkInfo['chunks'][id]['Monster'] && Object.keys(chunkInfo['chunks'][id]['Monster']).sort().forEach(name => {
                 monsterStr += (chunkInfo['chunks'][id]['Monster'][name] === 1 ? '' : chunkInfo['chunks'][id]['Monster'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             monsterStr.length > 0 && (monsterStr = monsterStr.substring(0, monsterStr.length - 2));
-            !!chunkInfo['chunks'][id]['NPC'] && Object.keys(chunkInfo['chunks'][id]['NPC']).forEach(name => {
+            !!chunkInfo['chunks'][id]['NPC'] && Object.keys(chunkInfo['chunks'][id]['NPC']).sort().forEach(name => {
                 npcStr += (chunkInfo['chunks'][id]['NPC'][name] === 1 ? '' : chunkInfo['chunks'][id]['NPC'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             npcStr.length > 0 && (npcStr = npcStr.substring(0, npcStr.length - 2));
-            !!chunkInfo['chunks'][id]['Spawn'] && Object.keys(chunkInfo['chunks'][id]['Spawn']).forEach(name => {
+            !!chunkInfo['chunks'][id]['Spawn'] && Object.keys(chunkInfo['chunks'][id]['Spawn']).sort().forEach(name => {
                 spawnStr += (chunkInfo['chunks'][id]['Spawn'][name] === 1 ? '' : chunkInfo['chunks'][id]['Spawn'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             spawnStr.length > 0 && (spawnStr = spawnStr.substring(0, spawnStr.length - 2));
-            !!chunkInfo['chunks'][id]['Shop'] && Object.keys(chunkInfo['chunks'][id]['Shop']).forEach(name => {
+            !!chunkInfo['chunks'][id]['Shop'] && Object.keys(chunkInfo['chunks'][id]['Shop']).sort().forEach(name => {
                 shopStr += `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             shopStr.length > 0 && (shopStr = shopStr.substring(0, shopStr.length - 2));
-            !!chunkInfo['chunks'][id]['Object'] && Object.keys(chunkInfo['chunks'][id]['Object']).forEach(name => {
+            !!chunkInfo['chunks'][id]['Object'] && Object.keys(chunkInfo['chunks'][id]['Object']).sort().forEach(name => {
                 objectStr += (chunkInfo['chunks'][id]['Object'][name] === 1 ? '' : chunkInfo['chunks'][id]['Object'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
-            !!chunkInfo['chunks'][id]['Quest'] && Object.keys(chunkInfo['chunks'][id]['Quest']).forEach(name => {
+            !!chunkInfo['chunks'][id]['Quest'] && Object.keys(chunkInfo['chunks'][id]['Quest']).sort().forEach(name => {
                 questStr += `<a class='${(chunkInfo['chunks'][id]['Quest'][name] === 'first' ? 'bold link' : 'link')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + `</a> <span onclick="getQuestInfo('` + name.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `')"><i class="quest-icon fas fa-info-circle"></i></span>, `;
             });
             questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
             let namesList = {};
-            !!chunkInfo['chunks'][id]['Connect'] && Object.keys(chunkInfo['chunks'][id]['Connect']).forEach(name => {
+            !!chunkInfo['chunks'][id]['Connect'] && Object.keys(chunkInfo['chunks'][id]['Connect']).sort().forEach(name => {
                 let realName = name;
                 let passedName = name;
                 if (!!chunkInfo['chunks'][name]['Name']) {
@@ -4647,7 +4648,7 @@ var updateChunkInfo = function() {
                 return $(a).text() > $(b).text() ? 1 : -1;
             });
             connectStr = connectStr.join(', ');
-            !!chunkInfo['chunks'][id]['Clue'] && clueTiers.forEach(tier => {
+            !!chunkInfo['chunks'][id]['Clue'] && clueTiers.sort().forEach(tier => {
                 if (chunkInfo['chunks'][id]['Clue'].hasOwnProperty(tier.toLowerCase())) {
                     clueStr += chunkInfo['chunks'][id]['Clue'][tier.toLowerCase()] + ' ' + tier + ', ';
                 }
@@ -4933,16 +4934,25 @@ setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
             if (!!chunkInfo['challenges']['Extra'][challenge] && chunkInfo['challenges']['Extra'][challenge]['Label'] === 'Kill X') {
                 challengeArr.push(`<div class="challenge extra-challenge noscroll clickable ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}" onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `', 'Extra', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[${chunkInfo['challenges']['Extra'][challenge]['Label']}]</b> <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(' X ', ' ' + rules['Kill X Amount'] + ' ')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             } else if (!!chunkInfo['challenges']['Extra'][challenge] && chunkInfo['challenges']['Extra'][challenge]['Label'] === 'All Droptables') {
-                if (!doneSubMarker[`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')}`]) {
-                    if (!activeSubTabs.hasOwnProperty(`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')}`)) {
-                        activeSubTabs[`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')}`] = true;
+                if (!doneSubMarker[`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`]) {
+                    if (!activeSubTabs.hasOwnProperty(`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`)) {
+                        activeSubTabs[`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`] = true;
                     }
-                    challengeArr.push(`<div class="marker submarker submarker-extra marker-AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')} noscroll" onclick="expandActive('AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')}', true)"><i class="expand-button fas ${activeSubTabs[`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')}`] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')} Droptable</span></div>`);
-                    doneSubMarker[`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')}`] = true;
+                    challengeArr.push(`<div class="marker submarker submarker-extra marker-AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')} ${!activeSubTabs['extra'] ? 'stay-hidden-sub' : ''} noscroll" onclick="expandActive('AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}', true)"><i class="expand-button fas ${activeSubTabs[`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')} Droptable</span></div>`);
+                    doneSubMarker[`AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`] = true;
                 }
-                challengeArr.push(`<div class="challenge extra-challenge noscroll clickable AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')}-challenge ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}" onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `', 'Extra', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge]['Label'] + `]</b> `) : '')} <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                challengeArr.push(`<div class="challenge extra-challenge noscroll clickable AllDroptables-${chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}-challenge ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${activeSubTabs.hasOwnProperty('AllDroptables-' + chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')) && !activeSubTabs['AllDroptables-' + chunkInfo['challenges']['Extra'][challenge]['Monsters'][0].replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')] ? 'stay-hidden' : ''} ${!activeSubTabs['extra'] ? 'stay-hidden-sub' : ''}" onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `', 'Extra', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge]['Label'] + `]</b> `) : '')} <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+            } else if (!!chunkInfo['challenges']['Extra'][challenge.replaceAll(/\%2E/g, '.')] && chunkInfo['challenges']['Extra'][challenge.replaceAll(/\%2E/g, '.')]['Label'] === 'All Shops') {
+                if (!doneSubMarker[`AllShops-${challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`]) {
+                    if (!activeSubTabs.hasOwnProperty(`AllShops-${challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`)) {
+                        activeSubTabs[`AllShops-${challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`] = true;
+                    }
+                    challengeArr.push(`<div class="marker submarker submarker-extra marker-AllShops-${challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '')} ${!activeSubTabs['extra'] ? 'stay-hidden-sub' : ''} noscroll" onclick="expandActive('AllShops-${challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}', true)"><i class="expand-button fas ${activeSubTabs[`AllShops-${challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">${challenge.split(':')[0].replaceAll(/\%2E/g, '.')} Stock</span></div>`);
+                    doneSubMarker[`AllShops-${challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')}`] = true;
+                }
+                challengeArr.push(`<div class="challenge extra-challenge noscroll clickable AllShops-${challenge.split(':')[0].replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '_').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${activeSubTabs.hasOwnProperty('AllShops-' + challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')) && !activeSubTabs['AllShops-' + challenge.split(':')[0].replaceAll(/\'/g, '').replaceAll(' ', '_').replaceAll('%', '_').replaceAll('(', '').replaceAll(')', '').replaceAll("'", '')] ? 'stay-hidden' : ''} ${!activeSubTabs['extra'] ? 'stay-hidden-sub' : ''}" onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `', 'Extra', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge.replaceAll(/\%2E/g, '.')] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge.replaceAll(/\%2E/g, '.')]['Label'] + `]</b> `) : '')} <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             } else {
-                challengeArr.push(`<div class="challenge extra-challenge noscroll clickable ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}" onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `', 'Extra', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge]['Label'] + `]</b> `) : '')} <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
+                challengeArr.push(`<div class="challenge extra-challenge noscroll clickable ${'Extra-' + challenge.replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\ /g, '_').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/\'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',') + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}" onclick="showDetails('` + challenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `', 'Extra', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', ` + "`" + challenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge.replaceAll(/\%2E/g, '.')] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge.replaceAll(/\%2E/g, '.')]['Label'] + `]</b> `) : '')} <span class="inner noscroll">${challenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + challenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + challenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + `</span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + challenge + "`, " + "`" + 'Extra' + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>') + '</div>';
             }
         }
     });
@@ -5009,7 +5019,7 @@ setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
         setCurrentChallenges(backlogArr, completedArr, false, noClear);
         changeChallengeColor();
     }
-    $(`.panel-active .link, .panel-active .internal-link, .panel-active input, .panel-active .checkbox__control`).click(function(e) {
+    $(`.panel-active .link, .panel-active .internal-link, .panel-active input, .panel-active .checkbox__control, .checkbox__input`).click(function(e) {
         e.stopPropagation();
     });
 }
@@ -5450,7 +5460,7 @@ var shuffle = function(array) {
 // Opens the quest steps modal
 var openQuestSteps = function(skill, challenge) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
-        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('%2G', '/').replaceAll('%2Q', '!').replaceAll('%2H', "'").replaceAll('-2F', ',');
+        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('%2Q', '!').replaceAll('%2H', "'").replaceAll('-2F', ',');
         let tier = null;
         if (challenge.includes('%2XX')) {
             tier = challenge.split('|')[1].split('%2XX')[1];
@@ -5476,11 +5486,11 @@ var openQuestSteps = function(skill, challenge) {
             } else {
                 if (questProgress[challenge.split('|')[1]] === 'Complete the quest') {
                     Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
-                        $('.quest-steps-data').append(`<div class='noscroll step highlighted'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                        $('.quest-steps-data').append(`<div class='noscroll step highlighted'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span><span class="quest-steps-info" onclick="showDetails('` + line.replaceAll(/\'/g, '-2H') + `', '`+ skill + `', '')"><i class="info-icon fas fa-info-circle"></i></span></div>`);
                     });
                 } else {
                     Object.keys(chunkInfo['challenges'][skill]).filter(line => chunkInfo['challenges'][skill][line]['BaseQuest'] === quest.replaceAll('/', '%2G') && chunkInfo['challenges'][skill][line].hasOwnProperty('Description')).forEach(line => {
-                        $('.quest-steps-data').append(`<div class='noscroll step${questProgress.hasOwnProperty(challenge.split('|')[1]) && questProgress[challenge.split('|')[1]].includes(line) ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                        $('.quest-steps-data').append(`<div class='noscroll step${questProgress.hasOwnProperty(challenge.split('|')[1]) && questProgress[challenge.split('|')[1]].includes(line) ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span><span class="quest-steps-info" onclick="showDetails('` + line.replaceAll(/\'/g, '-2H') + `', '`+ skill + `', '')"><i class="info-icon fas fa-info-circle"></i></span></div>`);
                     });
                 }
             }
@@ -7023,7 +7033,8 @@ function getBrowserDim() {
 
 // Opens the context menu for an active challenge
 var openActiveContextMenu = function(challenge, skill) {
-    activeContextMenuOpen = true;
+    activeContextMenuOpen = !activeContextMenuOpen;
+    activeContextMenuOpenTime = Date.now();
     if (activeContextMenuChallengeOld !== challenge) {
         activeContextMenuChallenge = challenge;
         activeContextMenuSkill = skill;
@@ -7039,7 +7050,7 @@ var openActiveContextMenu = function(challenge, skill) {
 
 // Opens the context menu for a backlogged challenge
 var openBacklogContextMenu = function(challenge, skill) {
-    backlogContextMenuOpen = true;
+    backlogContextMenuOpen = !backlogContextMenuOpen;
     if (backlogContextMenuChallengeOld !== challenge) {
         backlogContextMenuChallenge = challenge;
         backlogContextMenuSkill = skill;
@@ -7066,7 +7077,7 @@ var openQuestFilterContextMenu = function() {
 
 // Shows challenge details
 var showDetails = function(challenge, skill, type) {
-    if (!activeContextMenuOpen && !inEntry && !importMenuOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
+    if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
         let baseChunkDataIn = type === 'future' ? futureChunkData : baseChunkData;
         if (!baseChunkDataIn || Object.keys(baseChunkDataIn).length === 0) {
             return;
@@ -7076,41 +7087,41 @@ var showDetails = function(challenge, skill, type) {
         skills.push('Nonskill');
         detailsModalOpen = true;
         $('#details-data').empty();
-        $('#details-title').html(`<b class="noscroll">${challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b>`);
+        $('#details-title').html(`<b class="noscroll">${challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b>`);
         if (!chunkInfo['challenges'].hasOwnProperty(skill)) {
             chunkInfo['challenges'][skill] = {};
         }
-        if (!chunkInfo['challenges'][skill].hasOwnProperty(challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F'))) {
+        if (!chunkInfo['challenges'][skill].hasOwnProperty(challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F'))) {
             if (skill === 'BiS') {
-                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
-                    'ItemsDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
+                    'ItemsDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
                     'Label': skill
                 }
             } else if (skill === 'Extra') {
-                if (challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').includes('Kill X')) {
-                    chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
-                        'MonstersDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
+                if (challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').includes('Kill X')) {
+                    chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
+                        'MonstersDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
                         'Label': skill
                     }
                 } else if (challenge.match(/.*: ~\|.*\|~ \(.*\)/g)) {
-                    chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
-                        'ItemsDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
+                    chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')] = {
+                        'ItemsDetails': [challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].charAt(0).toUpperCase() + challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').split('|')[1].slice(1)],
                         'Label': skill
                     }
                 }
             }
         }
-        chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Description']}</i></span><br />`);
+        chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Description']}</i></span><br />`);
         detailsKeys.forEach(key => {
             let type = key.split('Details')[0].toLowerCase();
             let written = false;
             $('#details-data').append(`<span class="details-subtitle noscroll"><u class="noscroll"><b class="noscroll">${type}</b></u></span><br />`);
-            if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]]) {
-                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]].forEach(typeEl => {
-                    chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].push(typeEl);
+            if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]]) {
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]].forEach(typeEl => {
+                    chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].push(typeEl);
                 });
             }
-            !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
+            !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
                 let formattedSource = '';
                 if (key === 'ChunksDetails') {
                     if (possibleAreas[el]) {
@@ -7123,7 +7134,13 @@ var showDetails = function(challenge, skill, type) {
                         $('#details-data').append(`<span class="noscroll"><b class="noscroll">${formattedSource.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><br />`);
                     } else {
                         written = true;
-                        $('#details-data').append(`<span class="noscroll red"><b class="noscroll">${formattedSource.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><br />`);
+                        let realName = el;
+                        if (!!chunkInfo['chunks'][el]['Name']) {
+                            realName = chunkInfo['chunks'][el]['Name'];
+                        } else if (!!chunkInfo['chunks'][el]['Nickname']) {
+                            realName = chunkInfo['chunks'][el]['Nickname'] + '(' + el + ')';
+                        }
+                        $('#details-data').append(`<span class="noscroll red"><b class="noscroll">${realName.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'")}</b></span><br />`);
                     }
                 } else if (!!baseChunkDataIn[type]) {
                     let els = [];
@@ -7141,7 +7158,7 @@ var showDetails = function(challenge, skill, type) {
                         els.length > 0 && els.forEach(element => {
                             formattedSource = ': ';
                             !!baseChunkDataIn[type][element] && Object.keys(baseChunkDataIn[type][element]).forEach(source => {
-                                if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][element][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][element][source] !== 'string' || !processingSkill[baseChunkDataIn[type][element][source].split('-')[1]]))) {
+                                if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][element][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][element][source] !== 'string' || !processingSkill[baseChunkDataIn[type][element][source].split('-')[1]]))) {
                                     if (typeof baseChunkDataIn[type][element][source] === "boolean" || !skills.includes(baseChunkDataIn[type][element][source].split('-')[1])) {
                                         if (chunkInfo['chunks'].hasOwnProperty(source)) {
                                             let realName = source;
@@ -7172,7 +7189,7 @@ var showDetails = function(challenge, skill, type) {
                             });
                             formattedSource = formattedSource.slice(0, -2);
                             if (!!baseChunkDataIn[type] && !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).length > 10) {
-                                formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + type.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`, `' + element.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[type][el]).length + ')</span>';
+                                formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + type.replaceAll(/\%2E/g, '.').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`, `' + element.replaceAll(/\%2E/g, '.').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[type][el]).length + ')</span>';
                             }
                             if (formattedSource !== '') {
                                 written = true;
@@ -7184,7 +7201,7 @@ var showDetails = function(challenge, skill, type) {
                         });
                     } else {
                         !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).forEach(source => {
-                            if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][el][source] !== 'string' || !processingSkill[baseChunkDataIn[type][el][source].split('-')[1]]))) {
+                            if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['NonShop'] || baseChunkDataIn[type][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][el][source] !== 'string' || !processingSkill[baseChunkDataIn[type][el][source].split('-')[1]]))) {
                                 if (typeof baseChunkDataIn[type][el][source] === "boolean" || !skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
                                     if (chunkInfo['chunks'].hasOwnProperty(source)) {
                                         let realName = source;
@@ -7215,7 +7232,7 @@ var showDetails = function(challenge, skill, type) {
                         });
                         formattedSource = formattedSource.slice(0, -2);
                         if (!!baseChunkDataIn[type] && !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).length > 10) {
-                            formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + type.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`, `' + el.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[type][el]).length + ')</span>';
+                            formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + type.replaceAll(/\%2E/g, '.').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`, `' + el.replaceAll(/\%2E/g, '.').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[type][el]).length + ')</span>';
                         }
                         if (formattedSource !== '') {
                             written = true;
@@ -7231,7 +7248,7 @@ var showDetails = function(challenge, skill, type) {
                     }
                 }
             });
-            if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length === 0 || !written) {
+            if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length === 0 || !written) {
                 $('#details-data').append('<span class="noscroll">None</span><br />');
             }
         });
@@ -7305,7 +7322,7 @@ var showNotes = function(challenge, skill, note) {
     if (note === true) {
         note = '';
     }
-    $('#notes-title').html(`<b class="noscroll">Backlogging:</b><br />${challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}`);
+    $('#notes-title').html(`<b class="noscroll">Backlogging:</b><br />${challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}`);
     $('#notes-data').empty();
     $('#notes-data').append(`<div class="notes-row noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" checked="true" class='noscroll' onclick="saveNotesData('task', null)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">Backlog just this task</b></span></label></div>`);
     $('#notes-data').append(`<div class="noscroll">(Optional) Add notes:</div><div class='backlog-textarea-wrapper noscroll'><textarea maxlength="128"></textarea></div>`);
@@ -7313,12 +7330,12 @@ var showNotes = function(challenge, skill, note) {
     detailsKeys.forEach(key => {
         let keyWritten = false;
         let type = key.split('Details')[0].toLowerCase();
-        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]]) {
-            chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]].forEach(typeEl => {
-                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].push(typeEl);
+        if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]]) {
+            chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key.split('Details')[0]].forEach(typeEl => {
+                chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].push(typeEl);
             });
         }
-        !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
+        !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key] && chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F')][key].forEach(el => {
             let els = [];
             if (!!chunkInfo['codeItems'][type + 'Plus'] && !!chunkInfo['codeItems'][type + 'Plus'][el]) {
                 let validElem = false;
@@ -7378,7 +7395,7 @@ var showNotes = function(challenge, skill, note) {
     });
     notesModalOpen = true;
     $('#myModal3').show();
-    $('#notes-data > textarea').val(note).focus();
+    $('#notes-data textarea').val(note).focus();
     saveNotesData('task', null);
     notesChallenge = challenge;
     notesSkill = skill;
@@ -8045,6 +8062,18 @@ var toggleQuestInfo = function() {
     } else if (!!$('.questname-content').html() && $('.questname-content').html().length > 0) {
         $('.menu10').css('opacity', 1).show();
     }
+}
+
+// Toggles the visibility of the old map pin
+var toggleChangePinVis = function() {
+    $('.change-pin-eye1').toggleClass('fa-eye fa-eye-slash');
+    $('.pin.old2.first').attr('type', $('.pin.old2.first').attr('type') === 'text' ? 'password' : 'text');
+}
+
+// Toggles the visibility of the new map pin
+var toggleChangePinNewVis = function() {
+    $('.change-pin-eye2').toggleClass('fa-eye fa-eye-slash');
+    $('.pin.old2.second').attr('type', $('.pin.old2.second').attr('type') === 'text' ? 'password' : 'text');
 }
 
 // Checks the MID from the url

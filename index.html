@@ -9,7 +9,7 @@
 
     gtag('config', 'G-8P0V9GSFJ2');
   </script>
-  <link rel="stylesheet" href="./index.css?v=5.1.35" />
+  <link rel="stylesheet" href="./index.css?v=5.2.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -40,12 +40,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=5.1.35' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=5.2.0' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=5.1.35"></script>
+  <script src="./index.js?v=5.2.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -117,6 +117,20 @@
       <div id="new-tasks-footer" class="new-tasks-footer noscroll">
         <button id='close-new-tasks-button' class='modal-button' onclick='closeNewTasks()'>Close</button>
       </div>
+    </div>
+  </div>
+  <div id="myModal12_2" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeHighest2()"></i>
+      <div id="highest2-title" class="highest2-title noscroll"></div>
+      <div id="highest2-data" class="highest2-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal25" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeQuestSteps()"></i>
+      <div id="quest-steps-title" class="quest-steps-title noscroll">Quest Steps</div>
+      <div id="quest-steps-data" class="quest-steps-data noscroll"></div>
     </div>
   </div>
   <div id="myModal2" class="modal">
@@ -242,7 +256,7 @@
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeSearch()"></i>
       <div id="searchchunks-title" class="searchchunks-title noscroll">Search within your chunks</div>
       <div id="searchchunks-subtitle" class="searchchunks-subtitle noscroll">Search for items, npcs, monsters, objects, and shops to see where you have access to each within your unlocked chunks. <span
-        class='help help2'>~<span class="tooltiptext">~food, ~boost, ~tool, ~warm, ~saradomin, ~zamorak, ~bandos, ~armadyl, ~zaros, ~agility, ~construction, ~cooking, ~crafting, ~farming, ~firemaking, ~fishing, ~fletching, ~herblore, ~hunter, ~mining, ~prayer, ~runecraft, ~slayer, ~smithing, ~thieving, ~woodcutting</span></span></div>
+        class='help help2'>~<span class="tooltiptext">~food, ~boost, ~tool, ~warm, ~light, ~saradomin, ~zamorak, ~bandos, ~armadyl, ~zaros, ~agility, ~construction, ~cooking, ~crafting, ~farming, ~firemaking, ~fishing, ~fletching, ~herblore, ~hunter, ~mining, ~prayer, ~runecraft, ~slayer, ~smithing, ~thieving, ~woodcutting</span></span></div>
       <div id="searchchunks-searchcontainer" class="searchchunks-searchcontainer noscroll">
         <input type="text" placeholder="Search name..." id="searchChunks" class="noscrollhard"
           oninput="searchWithinChunks()" autocomplete="off" />
@@ -262,13 +276,6 @@
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeHighest()"></i>
       <div id="highest-title" class="highest-title noscroll"></div>
       <div id="highest-data" class="highest-data noscroll"></div>
-    </div>
-  </div>
-  <div id="myModal12_2" class="modal">
-    <div class="modal-content noscroll">
-      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeHighest2()"></i>
-      <div id="highest2-title" class="highest2-title noscroll"></div>
-      <div id="highest2-data" class="highest2-data noscroll"></div>
     </div>
   </div>
   <div id="myModal13" class="modal">
@@ -416,59 +423,39 @@
   <div id="myModal24" class="modal">
     <div class="modal-content noscroll">
       <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">11/17/2022 (5.1.0)</div>
+      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">1/11/2023 (5.2.0)</div>
       <div id="patch-notes-data" class="patch-notes-data noscroll">
         <h2 class='noscroll'>Major Changes & New Features</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>New Themes - Just in time for the end of Autumn, there is now an Autumn theme, alongside a Winter theme, that can enhance your chunk map! Try them out in the Setting window.</li>
-          <li class='noscroll'>Notepad - There is now a notepad on the website, perfect for jotting down any notes you might have related to your map, both for yourself and for others to see! Access the notepad on the top bar, next to the Discord and Patreon icons.</li>
-          <li class='noscroll'>New Tasks for This Chunk - Do you have a long list of tasks, and want to know what tasks are new every time you roll a chunk? Now you can know! Turn the option on in the Settings window and see any new tasks you have after rolling your next chunk.</li>
-          <li class='noscroll'>Lock Mahogany Homes - When you unlock the Mahogany Homes minigame, and are assigned a task outside of your chunks, now you can lock those tasks from appearing until you gain access to that chunk. Try it out via the Activity Info window in the Mahogany Homes tab.</li>
+          <li class='noscroll'>No major changes this week. <a class='link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>Let me know if you have any suggestions for a new feature!</a></li>
         </ul>
         <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Changed the way the Shooting Star tab works to account for special requirements, like access to the Crafting Guild (thanks Frozen).</li>
-          <li class='noscroll'>Added the ability to see what specific clue steps are doable in your chunk, via the Clues tab.</li>
-          <li class='noscroll'>Added the ability to see what chunks are needed to complete all clues of a given tier, via the Clues tab (thanks Marstead).</li>
-          <li class='noscroll'>Added customization for the Secondary Primary chunk rule, allowing you to specify how rare a drop can be and still count as primary for training purposes (thanks KingLagalot).</li>
-          <li class='noscroll'>Added tasks for casting spells with blighted sacks (thanks Entrana Bro).</li>
-          <li class='noscroll'>Added Thieving loot as part of the All Droptables and Every Drop chunk rules (thanks Chunky Beb)</li>
-          <li class='noscroll'>Added a way to obtain POH stat-boosting teas.</li>
-          <li class='noscroll'>Added a way to show multiple possible chunks for a quest in the quest panel (thanks Marstead).</li>
-          <li class='noscroll'>Added collapsable headers for each monster for the Every Droptable rule to condense the amount of room it takes up on the task list (thanks KingLagalot).</li>
-          <li class='noscroll'>Added a way to uncommonly get seeds from picking crops fields (thanks Chunk Nub).</li>
-          <li class='noscroll'>Added a missing knife in the sack by the mage bank.</li>
-          <li class='noscroll'>Added the mining glove variants and the fish sack barrel to the Fill Costume Room chunk rule.</li>
-          <li class='noscroll'>Updated the droprate of the jar of darkness from the Poll changes.</li>
-          <li class='noscroll'>Fixed the number of trees near the Fairy Ring south of Ardougne.</li>
-          <li class='noscroll'>Fixed previously missing Woodcutting tasks in the Brimhaven Dungeon.</li>
-          <li class='noscroll'>Fixed a bug where the area in Manual Areas weren't highlighted in green when unlocked.</li>
-          <li class='noscroll'>Fixed the cattleprod being obtainable before starting Sheep Herder (thanks invalidCards).</li>
-          <li class='noscroll'>Fixed a bug with noted drops and the All Droptables rule (thanks KingLagalot).</li>
-          <li class='noscroll'>Fixed an issue with the number of guards in Falador (thanks Marstead).</li>
-          <li class='noscroll'>Fixed the way that the Brimhaven Dungeon was being processed to now correctly account for your ability to access different sections of it.</li>
-          <li class='noscroll'>Fixed a bug with ale yeast being obtainable without ecto-tokens (thanks ChunkiCinni).</li>
-          <li class='noscroll'>Fixed the sorting with some Other Tasks in the task list.</li>
-          <li class='noscroll'>Fixed an issue where skewering meat with an iron spit didn't require Firemaking (thanks Chunkifer).</li>
-          <li class='noscroll'>Fixed a bug with a ghost variant near ZMI (thanks KingLagalot).</li>
-          <li class='noscroll'>Fixed a bug with wiki links on quests with apostrophes.</li>
-          <li class='noscroll'>Fixed a bug with processing a chocolate bar through Cooking before 40 Cooking (thanks Chunk Nub).</li>
-          <li class='noscroll'>Fixed the task definition for making a chocolate cake to allow for chocolate dust too.</li>
-          <li class='noscroll'>Fixed the list of items that can slash a web to include missing items.</li>
-          <li class='noscroll'>Fixed Fishing Trawler giving incorrect requirements for players without primary Fishing training methods.</li>
+          <li class='noscroll'>Added subheaders on the Active Tasks List for each shop in the Must Buy All Shop Items rule (thanks Makker).</li>
+          <li class='noscroll'>Added an info icon to the Quest Steps window that opens the Details window for that step (thanks TheBusyBard).</li>
+          <li class='noscroll'>Added a "~light" tag to the Search Within My Chunks window to search for any light-source items.</li>
+          <li class='noscroll'>Added the option to hide/show your pin on the Change Pin screen.</li>
+          <li class='noscroll'>Increased the clickbox size of the checkbox and burger icon in the Active Task List to help with misclicking (thanks Irchonkyman).</li>
+          <li class='noscroll'>Fixed a bug with Jogre drop tables overwriting other droptables.</li>
+          <li class='noscroll'>Fixed a bug with task Priority for tasks of the same level.</li>
+          <li class='noscroll'>Fixed a bug with collapsed subheaders in the Active Tasks List not saving on task calculation.</li>
+          <li class='noscroll'>Fixed a bug with the Must Buy All Shop Items rule where shops with a period/full stop in their name caused errors.</li>
+          <li class='noscroll'>Fixed the Rewards Guardian at MTA linking to the wrong wiki page (thanks Edgeville Nun).</li>
+          <li class='noscroll'>Added additional backup sorting to the ChunkInfo Panel data.</li>
+          <li class='noscroll'>Fixed parts of the Hand in the Sand quest not requiring the Wizards' Guild chunk.</li>
+          <li class='noscroll'>Fixed Uglug's shop and the surface-level ogre coffins not being locked behind starting Zogre Flesh Eaters (thanks West).</li>
+          <li class='noscroll'>Fixed a bug where any notes saved with a backlogged task weren't shown when attempting to view them.</li>
+          <li class='noscroll'>Fixed a bug with Quest Steps not properly highlighting for certain quests with special characters.</li>
+          <li class='noscroll'>Fixed a bug with the Mourning's End Part I quest where the Mourners were listed in the wrong chunk (thanks TheBusyBard).</li>
+          <li class='noscroll'>Fixed an issue with special characters in task subheaders (thanks Cherry Mix).</li>
+          <li class='noscroll'>Fixed a bug with the Stronghold of Security Zombie droptable (thanks Cherry Mix).</li>
+          <li class='noscroll'>Fixed a bug with the Task Details window not showing missing chunks correctly for not-possible tasks.</li>
         </ul>
         <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack#0890')">whitecatblack#0890  <i class="fas fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
       </div>
       <div id="patch-notes-footer" class="patch-notes-footer noscroll">
         <button id='submit-patch-notes-button' class='modal-button' onclick='dismissPatchNotes()'>Dismiss</button>
       </div>
-    </div>
-  </div>
-  <div id="myModal25" class="modal">
-    <div class="modal-content noscroll">
-      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeQuestSteps()"></i>
-      <div id="quest-steps-title" class="quest-steps-title noscroll">Quest Steps</div>
-      <div id="quest-steps-data" class="quest-steps-data noscroll"></div>
     </div>
   </div>
   <div id="myModal26" class="modal">
@@ -917,10 +904,10 @@
     <input class='mid-old' spellcheck='false' placeholder='Map ID' />
     <div class='mid-err'>Map ID does not exist.</div>
     <div class='home text2'>Old PIN:</div>
-    <input class='pin old2 first' placeholder='PIN' />
+    <span class='password-line'><input class='pin old2 first' placeholder='PIN' type='password' /><span class='show-eye' onclick="toggleChangePinVis()"><i class="change-pin-eye1 fas fa-eye"></i></span></span>
     <div class='pin-err'>PIN is incorrect.</div>
     <div class='home text2'>New PIN:</div>
-    <input class='pin old2 second' placeholder='PIN' />
+    <span class='password-line'><input class='pin old2 second' placeholder='PIN' type='password' /><span class='show-eye' onclick="toggleChangePinNewVis()"><i class="change-pin-eye2 fas fa-eye"></i></span></span>
     <button id='change-pin' class='button' onclick='changePin()' disabled>Change PIN</button>
   </div>
 </div>

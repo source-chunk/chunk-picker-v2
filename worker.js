@@ -259,7 +259,7 @@ onmessage = function(e) {
 
         //console.log(nonValids);
         //console.log(baseChunkData);
-        
+
         postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 0, highestOverall, type === 'current' ? dropRatesGlobal : {}, questProgress, diaryProgress, skillQuestXp, chunks]);
     } catch (err) {
         postMessage(['error', err]);
@@ -279,7 +279,7 @@ function replaceAll(str, match, replacement) {
 // Combines JSONs
 var combineJSONs = function(a, b) {
     let temp = {};
-    Object.keys(a).forEach(sub => {
+    !!a && Object.keys(a).forEach(sub => {
         if (typeof a[sub] === 'object') {
             if (!temp[sub]) {
                 temp[sub] = {};
@@ -289,7 +289,7 @@ var combineJSONs = function(a, b) {
             temp[sub] = a[sub];
         }
     });
-    Object.keys(b).forEach(sub => {
+    !!b && Object.keys(b).forEach(sub => {
         if (typeof b[sub] === 'object') {
             if (!temp[sub]) {
                 temp[sub] = {};
@@ -582,7 +582,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     }
                 });
             } else if (!asterisk.includes('^')) {
-                baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
+                baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = combineJSONs(baseChunkData['items'][item + asterisk], JSON.parse(JSON.stringify(baseChunkData['items'][item]))));
                 delete baseChunkData['items'][item];
             }
         } else if (tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + asterisk)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
@@ -602,7 +602,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     }
                 }
             } else if (asterisk.includes('^') && monster === '') {
-                baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk])));
+                baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = combineJSONs(baseChunkData['items'][item], JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk]))));
                 delete baseChunkData['items'][item + asterisk];
                 !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item + asterisk) }).forEach(monster => {
                     if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
@@ -617,7 +617,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     }
                 });
             } else if (!asterisk.includes('^')) {
-                baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk])));
+                baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = combineJSONs(baseChunkData['items'][item], JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk]))));
                 delete baseChunkData['items'][item + asterisk];
             }
         }
@@ -1273,7 +1273,6 @@ var calcChallenges = function(chunks, baseChunkData) {
             } else if (!!skillQuestXp && skillQuestXp.hasOwnProperty(skill) && skillQuestXp[skill]['level'] > lowestLevel) {
                 lowestLevel = skillQuestXp[skill]['level'];
             }
-            !!lowestName && !!chunkInfo['challenges'][skill][lowestName] && !chunkInfo['challenges'][skill][lowestName].hasOwnProperty('Set') && (chunkInfo['challenges'][skill][lowestName]['Priority'] = -1 * i);
             !!lowestName && Object.keys(tempItemSkill[skill]).forEach(item => {
                 !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= lowestLevel)}).forEach(name => {
                     let stillValid = true;
@@ -1586,7 +1585,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         delete dropTablesGlobal[monster][item];
                     }
                 } else if (asterisk.includes('^') && monster === '') {
-                    baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
+                    baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = combineJSONs(baseChunkData['items'][item + asterisk], JSON.parse(JSON.stringify(baseChunkData['items'][item]))));
                     delete baseChunkData['items'][item];
                     !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item) }).forEach(monster => {
                         if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item]) {
@@ -1621,7 +1620,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         }
                     }
                 } else if (asterisk.includes('^') && monster === '') {
-                    baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk])));
+                    baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = combineJSONs(baseChunkData['items'][item], JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk]))));
                     delete baseChunkData['items'][item + asterisk];
                     !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item + asterisk) }).forEach(monster => {
                         if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
@@ -1636,7 +1635,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         }
                     });
                 } else if (!asterisk.includes('^')) {
-                    baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk])));
+                    baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = combineJSONs(baseChunkData['items'][item], JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk]))));
                     delete baseChunkData['items'][item + asterisk];
                 }
             }
