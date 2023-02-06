@@ -1310,6 +1310,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     if (stillValid) {
                         !newValids[skill] && (newValids[skill] = {});
                         newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                        chunkInfo['challenges'][skill][name]['Priority'] = (chunkInfo['challenges'][skill][name].hasOwnProperty('Priority') ? chunkInfo['challenges'][skill][name]['Priority'] : -1) + 100;
                     }
                 });
             });
@@ -2256,7 +2257,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
             }
             wrongThings = [];
             !!chunkInfo['challenges'][skill][name]['Category'] && chunkInfo['challenges'][skill][name]['Category'].filter((category) => { return maybePrimary.includes(category) }).forEach(category => {
-                chunkInfo['challenges'][skill][name]['Primary'] = rules[category];
+                chunkInfo['challenges'][skill][name]['Primary'] = rules[category] && chunkInfo['challenges'][skill][name]['Primary'];
             });
             let validChallenge = true;
             let tempSecondary = false;
@@ -2920,7 +2921,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                             nonskill['Nonskill'] = {};
                                         }
                                         nonskill['Nonskill'][source] = true;
-                                    } else if ((!skillNames.includes(items[plus][source].split('-')[1]) || rules['Multi Step Processing']) && processingSkill[skill] && !source.includes('*') && processingSkill[items[plus][source].split('-')[1]]) {
+                                    } else if ((!skillNames.includes(items[plus][source].split('-')[1])) && processingSkill[skill] && !source.includes('*') && processingSkill[items[plus][source].split('-')[1]]) {
                                         if (!nonskill[items[plus][source].split('-')[1]]) {
                                             nonskill[items[plus][source].split('-')[1]] = {};
                                         }
@@ -2958,7 +2959,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                                             nonskill['Nonskill'] = {};
                                         }
                                         nonskill['Nonskill'][source] = true;
-                                    } else if ((!skillNames.includes(items[item.replaceAll(/\*/g, '')][source].split('-')[1]) || rules['Multi Step Processing']) && processingSkill[skill] && !source.includes('*') && processingSkill[items[item.replaceAll(/\*/g, '')][source].split('-')[1]]) {
+                                    } else if ((!skillNames.includes(items[item.replaceAll(/\*/g, '')][source].split('-')[1])) && processingSkill[skill] && !source.includes('*') && processingSkill[items[item.replaceAll(/\*/g, '')][source].split('-')[1]]) {
                                         if (!nonskill[items[item.replaceAll(/\*/g, '')][source].split('-')[1]]) {
                                             nonskill[items[item.replaceAll(/\*/g, '')][source].split('-')[1]] = {};
                                         }
@@ -4164,7 +4165,7 @@ var calcBIS = function() {
                             }
                         }
                     } else {
-                        if ((Math.min(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) >= 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
+                        if ((Math.min(chunkInfo['equipment'][equip].attack_crush, chunkInfo['equipment'][equip].attack_slash, chunkInfo['equipment'][equip].attack_stab) > 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
                             if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].melee_strength > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength)) {
                                 let tempTempValid = false;
                                 Object.keys(baseChunkData['items'][equip]).forEach(source => {
@@ -4217,7 +4218,7 @@ var calcBIS = function() {
                             }
                         }
                     } else {
-                        if ((chunkInfo['equipment'][equip].attack_stab >= 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
+                        if ((chunkInfo['equipment'][equip].attack_stab > 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
                             if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].melee_strength > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength)) {
                                 let tempTempValid = false;
                                 Object.keys(baseChunkData['items'][equip]).forEach(source => {
@@ -4270,7 +4271,7 @@ var calcBIS = function() {
                             }
                         }
                     } else {
-                        if ((chunkInfo['equipment'][equip].attack_slash >= 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
+                        if ((chunkInfo['equipment'][equip].attack_slash > 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
                             if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].melee_strength > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength)) {
                                 let tempTempValid = false;
                                 Object.keys(baseChunkData['items'][equip]).forEach(source => {
@@ -4323,7 +4324,7 @@ var calcBIS = function() {
                             }
                         }
                     } else {
-                        if ((chunkInfo['equipment'][equip].attack_crush >= 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
+                        if ((chunkInfo['equipment'][equip].attack_crush > 0 || chunkInfo['equipment'][equip].melee_strength > 0) && chunkInfo['equipment'][equip].slot !== 'ammo') {
                             if (!bestEquipment[chunkInfo['equipment'][equip].slot] || (chunkInfo['equipment'][equip].melee_strength > chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].melee_strength)) {
                                 let tempTempValid = false;
                                 Object.keys(baseChunkData['items'][equip]).forEach(source => {
