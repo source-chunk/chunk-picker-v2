@@ -2549,7 +2549,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.2.5");
+        myWorker = new Worker("./worker.js?v=5.2.6");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked]);
         workerOut = 1;
@@ -2793,7 +2793,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.2.5");
+let myWorker = new Worker("./worker.js?v=5.2.6");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -7577,8 +7577,10 @@ var showChunkHistory = function() {
     let tempDate = new Date();
     let newChunkOrder = {};
     Object.keys(chunkOrder).sort(function(a, b) { return b - a }).forEach(time => {
-        if (!newChunkOrder.hasOwnProperty(chunkOrder[time]) && tempChunks['unlocked'].hasOwnProperty(chunkOrder[time])) {
-            newChunkOrder[chunkOrder[time]] = time;
+        if (!newChunkOrder.hasOwnProperty(chunkOrder[time])) {
+            if (tempChunks['unlocked'].hasOwnProperty(chunkOrder[time])) {
+                newChunkOrder[chunkOrder[time]] = time;
+            }
             tempDate.setTime(time);
             $('#chunkhistory-data-inner').append(`<div class="history-item ${chunkOrder[time] + '-chunk-history-item'} noscroll"><span class='noscroll item1'>${"<b class='noscroll'>" + tempDate.toLocaleDateString([], { year: 'numeric', month: 'long', day: '2-digit' }) + '</b> (' + tempDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) + ') '}</span><span class='noscroll item2'>${"<b class='noscroll'>" + ((chunkInfo['chunks'].hasOwnProperty(parseInt(chunkOrder[time])) && chunkInfo['chunks'][parseInt(chunkOrder[time])].hasOwnProperty('Nickname')) ? chunkInfo['chunks'][parseInt(chunkOrder[time])]['Nickname'] : 'Unknown chunk') + '</b>' + ' (' + chunkOrder[time] + ')'}</span></div>`);
         }
@@ -7634,7 +7636,7 @@ var showChunkHistory = function() {
         ctxGraph.moveTo((((Object.keys(chunkOrder).sort(function(a, b) { return a - b })[0] - startingWidth) / fullWidth) * canvasGraph.width) + padding + 3, prevY);
         newChunkOrder = {};
         Object.keys(chunkOrder).sort(function(a, b) { return a - b }).forEach(time => {
-            if (!newChunkOrder.hasOwnProperty(chunkOrder[time])) {
+            if (!newChunkOrder.hasOwnProperty(chunkOrder[time]) && tempChunks['unlocked'].hasOwnProperty(chunkOrder[time])) {
                 newChunkOrder[chunkOrder[time]] = time;
                 count++;
                 ctxGraph.lineTo((((time - startingWidth) / fullWidth) * (canvasGraph.width - (padding * 2) - 3)) + padding + 3, prevY);
