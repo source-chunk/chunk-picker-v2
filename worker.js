@@ -2240,6 +2240,8 @@ var calcChallengesWork = function(chunks, baseChunkData) {
     let tempSkills;
     if (rules['F2P']) {
         tempSkills = [...f2pSkills, 'Nonskill', 'Quest', 'Extra'];
+    } else if (rules['Skiller']) {
+        tempSkills = [...skillNames.filter(x => !combatSkills.includes(x) && x !== 'Combat' && x !== 'Slayer'), 'Nonskill', 'Quest', 'Extra'];
     } else {
         tempSkills = [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'];
     }
@@ -3374,7 +3376,8 @@ var calcBIS = function() {
         let bestAmmoSaved = {
             'weapon': null,
             '2h': null
-        }
+        };
+        let savedWeaponBis = {};
         Object.keys({...completedEquipment, ...chunkInfo['equipment']}).filter(equip => { return !!baseChunkData['items'][equip] }).forEach(equip => {
             if (!!!chunkInfo['equipment'][equip]) {
                 console.error(equip + " doesn't exist in data.");
@@ -3382,7 +3385,7 @@ var calcBIS = function() {
             }
             let validWearable = true;
             !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
+                if ((rules['Skiller'] && chunkInfo['equipment'][equip].requirements[skill] > 1) || (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill]))) {
                     validWearable = false;
                 }
             });
@@ -4575,10 +4578,17 @@ var calcBIS = function() {
         let tempShield;
         if (twoHPower > weaponShieldPower) {
             tempShield = bestEquipment['shield'];
+            if (rules['Show Best in Slot 1H and 2H']) {
+                savedWeaponBis['weapon'] = bestEquipment['weapon'];
+                savedWeaponBis['shield'] = bestEquipment['shield'];
+            }
             delete bestEquipment['weapon'];
             delete bestEquipment['shield'];
             bestEquipment['ammo'] = bestAmmoSaved['2h'];
         } else {
+            if (rules['Show Best in Slot 1H and 2H']) {
+                savedWeaponBis['2h'] = bestEquipment['2h'];
+            }
             delete bestEquipment['2h'];
             bestEquipment['ammo'] = bestAmmoSaved['weapon'];
         }
@@ -6063,8 +6073,11 @@ var calcBIS = function() {
                 bestEquipment['shield'] = tempShield;
             }
         }
+        rules['Show Best in Slot 1H and 2H'] && !!savedWeaponBis && Object.keys(savedWeaponBis).filter(slot => !!savedWeaponBis[slot]).forEach(slot => {
+            bestEquipment[slot] = savedWeaponBis[slot];
+        });
         Object.keys(bestEquipment).forEach(slot => {
-            if (slot === '2h') {
+            if (slot === '2h' && !rules['Show Best in Slot 1H and 2H']) {
                 highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = bestEquipment[slot];
                 highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
             } else {
@@ -6480,7 +6493,7 @@ var gatherChunksInfo = function(chunks) {
     Object.keys(chunks).forEach(num => {
         if (rules['Puro-Puro'] || num !== 'Puro-Puro') {
             !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Monster'] && Object.keys(chunkInfo['chunks'][num]['Monster']).forEach(monster => {
-                !!chunkInfo['drops'][monster] && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
+                !rules['Skiller'] && !!chunkInfo['drops'][monster] && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
                     !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach(quantity => {
                         if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT']) && drop !== 'GemDropTableLegends+') {
                             Object.keys(dropTables[drop]).forEach(item => {
@@ -6555,7 +6568,7 @@ var gatherChunksInfo = function(chunks) {
             });
 
             !!manualMonsters && !!manualMonsters['Monsters'] && Object.keys(manualMonsters['Monsters']).forEach(monster => {
-                !!chunkInfo['drops'][monster] && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
+                !rules['Skiller'] && !!chunkInfo['drops'][monster] && (!backloggedSources['monsters'] || !backloggedSources['monsters'][monster]) && Object.keys(chunkInfo['drops'][monster]).forEach(drop => {
                     !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach(quantity => {
                         if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
                             Object.keys(dropTables[drop]).forEach(item => {
