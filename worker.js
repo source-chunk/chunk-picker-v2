@@ -3724,7 +3724,7 @@ var calcBIS = function() {
                         }
                     }
                 } else if (skill === 'Ranged') {
-                    if (chunkInfo['equipment'][equip].attack_speed > 0) {
+                    if (chunkInfo['equipment'][equip].attack_speed > 1) {
                         let bestAmmo = null;
                         Object.keys(chunkInfo['codeItems']['ammoTools']).filter(ammo => { return chunkInfo['codeItems']['ammoTools'][ammo].hasOwnProperty(equip) && !!baseChunkData['items'][ammo] }).forEach(ammo => {
                             if (bestAmmo === null || chunkInfo['equipment'][ammo].ranged_strength > chunkInfo['equipment'][bestAmmo].ranged_strength) {
@@ -3738,9 +3738,9 @@ var calcBIS = function() {
                                 articleAmmo = ammo.toLowerCase().charAt(ammo.toLowerCase().length - 1) === 's' ? ' ' : articleAmmo;
                                 tempTempValidAmmo && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + articleAmmo + '~|' + ammo.toLowerCase() + '|~')) && (bestAmmo = ammo);
                             }
-                        });
+                        });//
                         if (!(Object.keys(chunkInfo['codeItems']['ammoTools']).filter(ammo => { return chunkInfo['codeItems']['ammoTools'][ammo].hasOwnProperty(equip) }).length > 0) || bestAmmo !== null) {
-                            if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (((chunkInfo['equipment'][equip].attack_ranged + chunkInfo['equipment'][equip].ranged_strength + (!!bestAmmo ? chunkInfo['equipment'][bestAmmo].ranged_strength : 0) + 64) / chunkInfo['equipment'][equip].attack_speed) > ((chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength + (!!bestAmmoSaved[chunkInfo['equipment'][equip].slot] ? chunkInfo['equipment'][bestAmmoSaved[chunkInfo['equipment'][equip].slot]].ranged_strength : 0) + 64) / chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_speed))) && chunkInfo['equipment'][equip].attack_ranged > 0) {
+                            if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (((chunkInfo['equipment'][equip].attack_ranged + chunkInfo['equipment'][equip].ranged_strength + (!!bestAmmo ? chunkInfo['equipment'][bestAmmo].ranged_strength : 0) + 64) / (chunkInfo['equipment'][equip].attack_speed - 1)) > ((chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength + (!!bestAmmoSaved[chunkInfo['equipment'][equip].slot] ? chunkInfo['equipment'][bestAmmoSaved[chunkInfo['equipment'][equip].slot]].ranged_strength : 0) + 64) / (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_speed - 1)))) && chunkInfo['equipment'][equip].attack_ranged > 0) {
                                 let tempTempValid = false;
                                 Object.keys(baseChunkData['items'][equip]).forEach(source => {
                                     if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer' || (chunkInfo['challenges'].hasOwnProperty(baseChunkData['items'][equip][source].split('-')[1]) && chunkInfo['challenges'][baseChunkData['items'][equip][source].split('-')[1]].hasOwnProperty(source) && chunkInfo['challenges'][baseChunkData['items'][equip][source].split('-')[1]][source].hasOwnProperty('NoXp'))) {
@@ -3763,7 +3763,7 @@ var calcBIS = function() {
                                 } else if (bestEquipment[chunkInfo['equipment'][equip].slot] === equip) {
                                     delete bestAmmoSaved[chunkInfo['equipment'][equip].slot];
                                 }
-                            } else if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (((chunkInfo['equipment'][equip].attack_ranged + chunkInfo['equipment'][equip].ranged_strength + (!!bestAmmo ? chunkInfo['equipment'][bestAmmo].ranged_strength : 0) + 64) / chunkInfo['equipment'][equip].attack_speed) === ((chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength + (!!bestAmmoSaved[chunkInfo['equipment'][equip].slot] ? chunkInfo['equipment'][bestAmmoSaved[chunkInfo['equipment'][equip].slot]].ranged_strength : 0) + 64) / chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_speed))) && chunkInfo['equipment'][equip].attack_ranged > 0) {
+                            } else if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (((chunkInfo['equipment'][equip].attack_ranged + chunkInfo['equipment'][equip].ranged_strength + (!!bestAmmo ? chunkInfo['equipment'][bestAmmo].ranged_strength : 0) + 64) / (chunkInfo['equipment'][equip].attack_speed - 1)) === ((chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength + (!!bestAmmoSaved[chunkInfo['equipment'][equip].slot] ? chunkInfo['equipment'][bestAmmoSaved[chunkInfo['equipment'][equip].slot]].ranged_strength : 0) + 64) / (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_speed - 1)))) && chunkInfo['equipment'][equip].attack_ranged > 0) {
                                 let tempTempValid = false;
                                 Object.keys(baseChunkData['items'][equip]).forEach(source => {
                                     if (!baseChunkData['items'][equip][source].includes('-') || !processingSkill[baseChunkData['items'][equip][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][equip][source].split('-')[1] === 'Slayer' || (chunkInfo['challenges'].hasOwnProperty(baseChunkData['items'][equip][source].split('-')[1]) && chunkInfo['challenges'][baseChunkData['items'][equip][source].split('-')[1]].hasOwnProperty(source) && chunkInfo['challenges'][baseChunkData['items'][equip][source].split('-')[1]][source].hasOwnProperty('NoXp'))) {
@@ -4431,13 +4431,13 @@ var calcBIS = function() {
             }
         } else if (skill === 'Ranged') {
             if (bestEquipment.hasOwnProperty('2h')) {
-                twoHPower = (chunkInfo['equipment'][bestEquipment['2h']].attack_ranged + chunkInfo['equipment'][bestEquipment['2h']].ranged_strength + (!!bestAmmoSaved['2h'] ? chunkInfo['equipment'][bestAmmoSaved['2h']].ranged_strength : 0) + 64) / chunkInfo['equipment'][bestEquipment['2h']].attack_speed;
+                twoHPower = (chunkInfo['equipment'][bestEquipment['2h']].attack_ranged + chunkInfo['equipment'][bestEquipment['2h']].ranged_strength + (!!bestAmmoSaved['2h'] ? chunkInfo['equipment'][bestAmmoSaved['2h']].ranged_strength : 0) + 64) / (chunkInfo['equipment'][bestEquipment['2h']].attack_speed - 1);
             }
             if (bestEquipment.hasOwnProperty('weapon')) {
                 if (bestEquipment.hasOwnProperty('shield')) {
-                    weaponShieldPower = ((chunkInfo['equipment'][bestEquipment['weapon']].attack_ranged + chunkInfo['equipment'][bestEquipment['shield']].attack_ranged) + (chunkInfo['equipment'][bestEquipment['weapon']].ranged_strength + (!!bestAmmoSaved['weapon'] ? chunkInfo['equipment'][bestAmmoSaved['weapon']].ranged_strength : 0) + chunkInfo['equipment'][bestEquipment['shield']].ranged_strength) + 64) / chunkInfo['equipment'][bestEquipment['weapon']].attack_speed;
+                    weaponShieldPower = ((chunkInfo['equipment'][bestEquipment['weapon']].attack_ranged + chunkInfo['equipment'][bestEquipment['shield']].attack_ranged) + (chunkInfo['equipment'][bestEquipment['weapon']].ranged_strength + (!!bestAmmoSaved['weapon'] ? chunkInfo['equipment'][bestAmmoSaved['weapon']].ranged_strength : 0) + chunkInfo['equipment'][bestEquipment['shield']].ranged_strength) + 64) / (chunkInfo['equipment'][bestEquipment['weapon']].attack_speed - 1);
                 } else {
-                    weaponShieldPower = (chunkInfo['equipment'][bestEquipment['weapon']].attack_ranged + chunkInfo['equipment'][bestEquipment['weapon']].ranged_strength + (!!bestAmmoSaved['weapon'] ? chunkInfo['equipment'][bestAmmoSaved['weapon']].ranged_strength : 0) + 64) / chunkInfo['equipment'][bestEquipment['weapon']].attack_speed;
+                    weaponShieldPower = (chunkInfo['equipment'][bestEquipment['weapon']].attack_ranged + chunkInfo['equipment'][bestEquipment['weapon']].ranged_strength + (!!bestAmmoSaved['weapon'] ? chunkInfo['equipment'][bestAmmoSaved['weapon']].ranged_strength : 0) + 64) / (chunkInfo['equipment'][bestEquipment['weapon']].attack_speed - 1);
                 }
             }
         } else if (skill === 'Magic') {
@@ -5761,7 +5761,7 @@ var calcBIS = function() {
                 let maxHit = Math.floor(.5 + (110 * (equipment_bonus_str + 64) / 640));
                 let maxAttackRoll = Math.floor(107 * (equipment_bonus_att['ranged'] + 64));
                 let hitChance = 1 - (578 / (2 * (maxAttackRoll + 1)));
-                bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
+                bestDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? (chunkInfo['equipment'][bestEquipment['2h']].attack_speed - 1) : bestEquipment.hasOwnProperty('weapon') ? (chunkInfo['equipment'][bestEquipment['weapon']].attack_speed - 1) : 4) * .6);
             }
             // Void Ranged
             validWearable = true;
@@ -5836,7 +5836,7 @@ var calcBIS = function() {
                     itemList.forEach(item => { equipment_bonus_att['ranged'] += chunkInfo['equipment'][item].attack_ranged; equipment_bonus_str += chunkInfo['equipment'][item].ranged_strength });
                     let maxHit = Math.floor(.5 + ((elite ? 123.75 : 121) * (equipment_bonus_str + 64) / 640));
                     let hitChance = 1 - (578 / (2 * (Math.floor((elite ? 120.375 : 117.7) * (equipment_bonus_att['ranged'] + 64)) + 1)));
-                    let newDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? chunkInfo['equipment'][bestEquipment['2h']].attack_speed : bestEquipment.hasOwnProperty('weapon') ? chunkInfo['equipment'][bestEquipment['weapon']].attack_speed : 4) * .6);
+                    let newDps = hitChance * (maxHit / 2) / ((bestEquipment.hasOwnProperty('2h') ? (chunkInfo['equipment'][bestEquipment['2h']].attack_speed - 1) : bestEquipment.hasOwnProperty('weapon') ? (chunkInfo['equipment'][bestEquipment['weapon']].attack_speed - 1) : 4) * .6);
                     if (newDps > bestDps) {
                         bestDps = newDps;
                         resultingAdditions = {};
@@ -5881,7 +5881,7 @@ var calcBIS = function() {
                     itemList.forEach(item => { equipment_bonus_att['ranged'] += chunkInfo['equipment'][item].attack_ranged; equipment_bonus_str += chunkInfo['equipment'][item].ranged_strength });
                     let maxHit = Math.floor(Math.floor((.5 + (110 * (equipment_bonus_str + 64) / 640))) * 1.125);
                     let hitChance = 1 - (578 / (2 * ((Math.floor(107 * (equipment_bonus_att['ranged'] + 64))) + 1)));
-                    let newDps = hitChance * (maxHit / 2) / (chunkInfo['equipment']["Karil's crossbow"].attack_speed * .6);
+                    let newDps = hitChance * (maxHit / 2) / ((chunkInfo['equipment']["Karil's crossbow"].attack_speed - 1) * .6);
                     if (newDps > bestDps) {
                         bestDps = newDps;
                         resultingAdditions = {};
@@ -5946,7 +5946,7 @@ var calcBIS = function() {
                     itemList.forEach(item => { equipment_bonus_att['ranged'] += chunkInfo['equipment'][item].attack_ranged; equipment_bonus_str += chunkInfo['equipment'][item].ranged_strength });
                     let maxHit = Math.floor(Math.floor((.5 + (110 * (equipment_bonus_str + 64) / 640))) * 1.15);
                     let hitChance = 1 - (578 / (2 * ((Math.floor(107 * (equipment_bonus_att['ranged'] + 64)) * 1.3) + 1)));
-                    let newDps = hitChance * (maxHit / 2) / (chunkInfo['equipment'][weapon].attack_speed * .6);
+                    let newDps = hitChance * (maxHit / 2) / ((chunkInfo['equipment'][weapon].attack_speed - 1) * .6);
                     if (newDps > bestDps) {
                         bestDps = newDps;
                         resultingAdditions = {};
