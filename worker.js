@@ -3034,7 +3034,7 @@ var calcChallengesWork = function(chunks, baseChunkData) {
                     if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
                         lowestItem = challenge;
                         lowestName = name;
-                    } else if (lowestItem['Level'] === challenge['Level'] && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem['Priority'])) {
+                    } else if (lowestItem['Level'] === challenge['Level'] && (!lowestItem['Primary'] || lowestItem['Secondary']) && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem.hasOwnProperty('Priority'))) {
                         lowestItem = challenge;
                         lowestName = name;
                     }
