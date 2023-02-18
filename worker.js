@@ -2539,7 +2539,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                     }
                                 }
                                 if (rules['Multi Step Processing']) {
-                                    if (!!items[plus] && Object.keys(items[plus]).filter(source => items[plus][source].includes('-') && items[plus][source].split('-')[0] === 'multi' && combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')).length === 0) {
+                                    if (!!items[plus] && Object.keys(items[plus]).filter(source => !items[plus][source].includes('-') || items[plus][source].split('-')[0] !== 'multi').length > 0 && (!combatSkills.includes(skill) || !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) && skill !== 'Extra') {
                                         multiValid = true;
                                     }
                                 }
@@ -2589,7 +2589,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                     tempTempValid = true;
                                 }
                                 if (rules['Multi Step Processing']) {
-                                    if (!!items[plus] && Object.keys(items[plus]).filter(source => items[plus][source].includes('-') && items[plus][source].split('-')[0] === 'multi' && combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')).length === 0) {
+                                    if (!!items[plus] && Object.keys(items[plus]).filter(source => !items[plus][source].includes('-') || items[plus][source].split('-')[0] !== 'multi').length > 0 && (!combatSkills.includes(skill) || !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) && skill !== 'Extra') {
                                         multiValid = true;
                                     }
                                 }
@@ -2650,7 +2650,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             };
                         }
                         if (rules['Multi Step Processing']) {
-                            if (!!items[tempItem] && Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi' && combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')).length > 0) {
+                            if (!!items[tempItem] && Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi').length > 0 && ((combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) || skill === 'Extra')) {
                                 validChallenge = false;
                                 wrongThings.push('multi');
                                 nonValids[name] = wrongThings;
