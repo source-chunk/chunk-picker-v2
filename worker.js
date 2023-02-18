@@ -2554,9 +2554,9 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             } else {
                                 chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                             }
-                            if (!multiValid) {
+                            if (!multiValid && rules['Multi Step Processing']) {
                                 validChallenge = false;
-                                wrongThings.push(item);
+                                wrongThings.push('multi');
                                 nonValids[name] = wrongThings;
                                 return;
                             }
@@ -2604,9 +2604,9 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             } else {
                                 chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                             }
-                            if (!multiValid) {
+                            if (!multiValid && rules['Multi Step Processing']) {
                                 validChallenge = false;
-                                wrongThings.push(item);
+                                wrongThings.push('multi');
                                 nonValids[name] = wrongThings;
                                 return;
                             }
@@ -2652,7 +2652,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         if (rules['Multi Step Processing']) {
                             if (!!items[tempItem] && Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi' && combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')).length > 0) {
                                 validChallenge = false;
-                                wrongThings.push(item);
+                                wrongThings.push('multi');
                                 nonValids[name] = wrongThings;
                                 return;
                             }
