@@ -2248,6 +2248,29 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
         }
     }
 
+    // Questpoints Cape
+    if (!!chunks && chunks.hasOwnProperty('12338')) {
+        if (!valids['Nonskill']) {
+            valids['Nonskill'] = {};
+        }
+        valids['Nonskill']['Buy the quest point cape*'] = 'Skillcapes';
+        if (!chunkInfo['challenges']['Nonskill']) {
+            chunkInfo['challenges']['Nonskill'] = {};
+        }
+        let totalQuestPoints = 0;
+        !!chunkInfo['challenges'] && !!chunkInfo['challenges']['Quest'] && Object.keys(chunkInfo['challenges']['Quest']).filter(task => chunkInfo['challenges']['Quest'][task].hasOwnProperty('QuestPoints')).forEach(task => {
+            totalQuestPoints += chunkInfo['challenges']['Quest'][task]['QuestPoints'];
+        });
+        chunkInfo['challenges']['Nonskill']['Buy the quest point cape*'] = {
+            'Chunks': ['12338'],
+            'ChunksDetails': ['12338'],
+            'Output': 'Quest point cape (t)',
+            'QuestPointsNeeded': totalQuestPoints,
+            'Permanent': false,
+            "Not F2P": true
+        }
+    }
+
     let tempSkills;
     if (rules['F2P']) {
         tempSkills = [...f2pSkills, 'Nonskill', 'Quest', 'Extra'];
