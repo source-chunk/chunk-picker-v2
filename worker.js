@@ -170,52 +170,54 @@ let tempChunkData = {};
 onmessage = function(e) {
     try {
         eGlobal = e;
-        type = eGlobal.data[0];
-        chunks = eGlobal.data[1] || [];
-        rules = eGlobal.data[2];
-        chunkInfo = eGlobal.data[3];
-        skillNames = eGlobal.data[4];
-        processingSkill = eGlobal.data[5];
-        maybePrimary = eGlobal.data[6];
-        combatSkills = eGlobal.data[7];
-        monstersPlus = eGlobal.data[8];
-        objectsPlus = eGlobal.data[9];
-        chunksPlus = eGlobal.data[10];
-        itemsPlus = eGlobal.data[11];
-        mixPlus = eGlobal.data[12];
-        npcsPlus = eGlobal.data[13];
-        tasksPlus = eGlobal.data[14];
-        tools = eGlobal.data[15];
-        elementalRunes = eGlobal.data[16];
-        manualTasks = eGlobal.data[17];
-        completedChallenges = eGlobal.data[18];
-        backlog = eGlobal.data[19];
-        rareDropNum = eGlobal.data[20];
-        universalPrimary = eGlobal.data[21];
-        elementalStaves = eGlobal.data[22];
-        rangedItems = eGlobal.data[23];
-        boneItems = eGlobal.data[24];
-        highestCurrent = eGlobal.data[25];
-        dropTables = eGlobal.data[26];
-        possibleAreas = eGlobal.data[27];
-        randomLoot = eGlobal.data[28];
-        magicTools = eGlobal.data[29];
-        bossLogs = eGlobal.data[30];
-        bossMonsters = eGlobal.data[31];
-        minigameShops = eGlobal.data[32];
-        manualEquipment = eGlobal.data[33];
-        checkedChallenges = eGlobal.data[34];
-        backloggedSources = eGlobal.data[35];
-        altChallenges = eGlobal.data[36];
-        manualMonsters = eGlobal.data[37];
-        slayerLocked = eGlobal.data[38];
-        passiveSkill = eGlobal.data[39];
-        f2pSkills = eGlobal.data[40];
-        assignedXpRewards = eGlobal.data[41];
-        isDiary2Tier = eGlobal.data[42];
-        manualAreas = eGlobal.data[43];
-        secondaryPrimaryNum = eGlobal.data[44];
-        constructionLocked = eGlobal.data[45];
+        [
+            type,
+            chunks,
+            rules,
+            chunkInfo,
+            skillNames,
+            processingSkill,
+            maybePrimary,
+            combatSkills,
+            monstersPlus,
+            objectsPlus,
+            chunksPlus,
+            itemsPlus,
+            mixPlus,
+            npcsPlus,
+            tasksPlus,
+            tools,
+            elementalRunes,
+            manualTasks,
+            completedChallenges,
+            backlog,
+            rareDropNum,
+            universalPrimary,
+            elementalStaves,
+            rangedItems,
+            boneItems,
+            highestCurrent,
+            dropTables,
+            possibleAreas,
+            randomLoot,
+            magicTools,
+            bossLogs,
+            bossMonsters,
+            minigameShops,
+            manualEquipment,
+            checkedChallenges,
+            backloggedSources,
+            altChallenges,
+            manualMonsters,
+            slayerLocked,
+            passiveSkill,
+            f2pSkills,
+            assignedXpRewards,
+            isDiary2Tier,
+            manualAreas,
+            secondaryPrimaryNum,
+            constructionLocked,
+        ] = eGlobal.data;
 
         if (isDiary2Tier) {
             !!chunkInfo['challenges']['Diary'] && Object.keys(chunkInfo['challenges']['Diary']).filter(task => { return !chunkInfo['challenges']['Diary'][task].hasOwnProperty('Reward') && diaryHierarchy.includes(task.split('|')[1].split('%2F')[1]) && chunkInfo['challenges']['Diary'][task].hasOwnProperty('Tasks') }).forEach(task => {
@@ -837,7 +839,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                     highestCompletedLevel = chunkInfo['challenges'][subSkill][task]['Level'];
                                 }
                             });
-                            if (!checkPrimaryMethod(subSkill, valids, baseChunkData) && ((subSkill !== 'Slayer' || !slayerLocked || (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (ownsCrystalSaw ? 3 : 0))) > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > passiveSkill[subSkill]) && (highestCompletedLevel <= 1 || highestCompletedLevel <= chunkInfo['challenges'][skill][challenge]['Skills'][subSkill])) {
+                            if (!checkPrimaryMethod(subSkill, newValids, baseChunkData) && ((subSkill !== 'Slayer' || !slayerLocked || (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (ownsCrystalSaw ? 3 : 0))) > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > passiveSkill[subSkill]) && (highestCompletedLevel <= 1 || highestCompletedLevel <= chunkInfo['challenges'][skill][challenge]['Skills'][subSkill])) {
                                 if (!nonValids.hasOwnProperty(challenge)) {
                                     nonValids[challenge] = [];
                                 }
@@ -2965,11 +2967,11 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 return;
             }
             chunkInfo['challenges'][skill][name]['Secondary'] = tempSecondary;
-            chunkInfo['challenges'][skill][name]['forcedPrimary'] && chunkInfo['challenges'][skill][name]['Secondary'] && (validChallenge = false);
             chunkInfo['challenges'][skill][name]['ManualValid'] && (validChallenge = true);
+            chunkInfo['challenges'][skill][name]['forcedPrimary'] && chunkInfo['challenges'][skill][name]['Secondary'] && (validChallenge = false);
             if (validChallenge) {
                 delete nonValids[name];
-                if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subChallenge) => { return subChallenge.includes('--') }).length > 0)) {
+                if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subChallenge) => { return subChallenge.includes('--') }).length > 0) || chunkInfo['challenges'][skill][name]['ManualNonProcessing']) {
                     if (skill !== 'Quest' && skill !== 'Diary') {
                         valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'] || chunkInfo['challenges'][skill][name]['Label'] || true;
                     } else {
@@ -3336,6 +3338,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             });
         });
     }
+
     //console.log(JSON.parse(JSON.stringify(tempItemSkill)));
     //console.log(JSON.parse(JSON.stringify(valids)));
     return [valids, tempItemSkill, tempMultiStepSkill];

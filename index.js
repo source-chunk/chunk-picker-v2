@@ -400,6 +400,7 @@ let rules = {
     "Quest Skill Reqs": false,
     "Cleaning Herbs": false,
     "Boosting": false,
+    "Superheat Furnace": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -486,6 +487,7 @@ let ruleNames = {
     "Quest Skill Reqs": "Must get Quest skill requirements, regardless of if the Quest is startable or not <span class='rule-asterisk noscroll'>⁺</span>",
     "Cleaning Herbs": "Cleaning grimy herbs/making (unf) potions can count as chunk tasks",
     "Boosting": "Allow skill boosts to be considered for skill tasks",
+    "Superheat Furnace": "Allow the Superheat Item spell to act as a furnace for training Smithing",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -511,6 +513,7 @@ let rulePresets = {
         "Rare Drop Amount": "0",
         "Secondary Primary Amount": "1",
         "Cleaning Herbs": true,
+        "Superheat Furnace": true,
     },
     "Xtreme Chunker": {
         "Skillcape": true,
@@ -567,6 +570,7 @@ let rulePresets = {
         "Tutor Ammo":  true,
         "Spells": true,
         "Cleaning Herbs": true,
+        "Superheat Furnace": true,
     },
     "Supreme Chunker": {
         "Skillcape": true,
@@ -630,6 +634,7 @@ let rulePresets = {
         "Prayers": true,
         "All Droptables": true,
         "Cleaning Herbs": true,
+        "Superheat Furnace": true,
     },
 };                                                                              // List of rules that are part of each preset
 
@@ -705,7 +710,8 @@ let ruleStructure = {
         "Slayer Equipment": true
     },
     "Smithing": {
-        "Smithing by Smelting": true
+        "Smithing by Smelting": true,
+        "Superheat Furnace": true
     },
     "Item Sources": {
         "Boss": true,
@@ -2565,7 +2571,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.2.18");
+        myWorker = new Worker("./worker.js?v=5.2.19");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked]);
         workerOut = 1;
@@ -2809,7 +2815,7 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.2.18");
+let myWorker = new Worker("./worker.js?v=5.2.19");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -8345,6 +8351,10 @@ var loadData = function(startup) {
                 rulesTemp['Secondary Primary Amount'] = "0";
             } else if (!rulesTemp['Secondary Primary'] && !rulesTemp.hasOwnProperty('Secondary Primary Amount')) {
                 rulesTemp['Secondary Primary Amount'] = "1";
+            }
+
+            if (!rulesTemp.hasOwnProperty('Superheat Furnace')) {
+                rulesTemp['Superheat Furnace'] = true;
             }
 
             !!rulesTemp && Object.keys(rulesTemp).forEach(rule => {
