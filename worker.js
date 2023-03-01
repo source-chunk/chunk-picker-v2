@@ -242,6 +242,10 @@ onmessage = function(e) {
             return;
         }
 
+        if (!chunks) {
+            chunks = {};
+        }
+
         dropRatesGlobal = {};
         dropTablesGlobal = {};
 
