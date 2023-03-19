@@ -731,7 +731,7 @@ var calcChallenges = function(chunks, baseChunkData) {
             let skillMax = Math.max(...Object.values(newValids[skill]));
             !!tempItemSkill[skill] && Object.keys(tempItemSkill[skill]).forEach(item => {
                 !!tempItemSkill[skill][item] && !!tempItemSkill[skill][item].forEach(itemTask => {
-                    if (!newValids[skill] || !chunkInfo['challenges'][skill] || !chunkInfo['challenges'][skill][itemTask] || skillMax < chunkInfo['challenges'][skill][itemTask]['Level']) {
+                    if (!newValids[skill] || !chunkInfo['challenges'][skill] || !chunkInfo['challenges'][skill][itemTask] || (skillMax < chunkInfo['challenges'][skill][itemTask]['Level'] && !rules['Multi Step Processing'])) {
                         delete tempItemSkill[skill][item][tempItemSkill[skill][item].indexOf(itemTask)];
                     }
                 });
