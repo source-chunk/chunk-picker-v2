@@ -640,7 +640,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         if (!baseChunkData['items'][item]) {
                             baseChunkData['items'][item] = {};
                         }
-                        if (chunkInfo['drops'][monster][item] === 'Always') {
+                        if ((chunkInfo['drops'][monster][drop][quantity] === 'Always' && dropTables[drop][item].split('@')[0] === 'Always') || (parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')) >= parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))) {
                             baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
                         } else {
                             baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
@@ -1695,7 +1695,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                             if (!baseChunkData['items'][item]) {
                                 baseChunkData['items'][item] = {};
                             }
-                            if (chunkInfo['drops'][monster][item] === 'Always') {
+                            if ((chunkInfo['drops'][monster][drop][quantity] === 'Always' && dropTables[drop][item].split('@')[0] === 'Always') || (parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')) >= parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))) {
                                 baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'primary-drop';
                             } else {
                                 baseChunkData['items'][item][monster.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')] = 'secondary-drop';
@@ -6239,7 +6239,7 @@ var calcBIS = function() {
             Object.keys(bestEquipmentAlts[slot]).forEach(item => {
                 if (!!altChallenges['BiS']) {
                     if ((slot === '2h' && altChallenges['BiS'].hasOwnProperty(skill.replaceAll(' ', '_') + '-weapon') && altChallenges['BiS'][skill.replaceAll(' ', '_') + '-weapon'] === item.toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')) || (altChallenges['BiS'].hasOwnProperty(skill.replaceAll(' ', '_') + '-' + slot) && altChallenges['BiS'][skill.replaceAll(' ', '_') + '-' + slot] === item.toLowerCase().replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))) {
-                        if (slot === '2h') {
+                        if (slot === '2h' && !rules['Show Best in Slot 1H and 2H']) {
                             highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
                             highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
                         } else {
@@ -6254,7 +6254,7 @@ var calcBIS = function() {
                         if (!!globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~']) {
                             globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + '/​' + globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'];
                             if (Object.values(highestOverall).includes(item)) {
-                                if (slot === '2h') {
+                                if (slot === '2h' && !rules['Show Best in Slot 1H and 2H']) {
                                     highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
                                     highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
                                 } else {
