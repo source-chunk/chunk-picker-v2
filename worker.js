@@ -3355,7 +3355,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
 
     // All Shops
     if (rules['All Shops']) {
-        !!baseChunkData['items'] && Object.keys(baseChunkData['items']).filter(item => { return Object.values(baseChunkData['items'][item]).includes('shop') }).forEach(item => {
+        !!baseChunkData['items'] && Object.keys(baseChunkData['items']).filter(item => { return Object.values(baseChunkData['items'][item]).includes('shop') && !item.includes('^^') }).forEach(item => {
             !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return baseChunkData['items'][item][source] === 'shop' }).forEach(source => {
                 valids['Extra'][source + ': ~|' + item.replaceAll('*', '').replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~'] = 'All Shops';
                 if (!chunkInfo['challenges']['Extra']) {
@@ -6854,7 +6854,7 @@ var getAllChunkAreas = function(chunks) {
     let tempChunks = JSON.parse(JSON.stringify(chunks));
     while (i < Object.keys(tempChunks).length) {
         !!chunkInfo['chunks'][Object.keys(tempChunks)[i]] && !!chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Connect']).forEach(id => {
-            if (!!chunkInfo['chunks'][parseInt(id)]['Name']) {
+            if (chunkInfo['chunks'][parseInt(id)].hasOwnProperty('Name') && typeof chunkInfo['chunks'][parseInt(id)]['Name'] === 'string') {
                 tempChunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
                 temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] || false;
                 if (!!tempChunks[Object.keys(tempChunks)[i]]) {

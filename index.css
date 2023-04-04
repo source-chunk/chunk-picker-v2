@@ -1952,6 +1952,10 @@ input#searchPlayerMaps {
     color: inherit;
 }
 
+.challenge.doubletab {
+    margin-left: 12px;
+}
+
 .panel-areas > div {
     margin-right: 10px;
 }
