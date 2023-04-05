@@ -2720,7 +2720,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             };
                         }
                         if (rules['Multi Step Processing']) {
-                            if (!!items[tempItem] && Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi').length > 0 && ((combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) || skill === 'Extra')) {
+                            if (!!items[tempItem] && Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi').length > 0 && (((combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) || skill === 'Extra') || (chunkInfo['challenges'][skill][name]['Level'] < chunkInfo['challenges'][items[tempItem][Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi')[0]].split('-')[1]][Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi')[0]]['Level']))) {
                                 validChallenge = false;
                                 wrongThings.push('multi');
                                 nonValids[name] = wrongThings;
