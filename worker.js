@@ -1272,7 +1272,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         Object.keys(outputs).forEach(output => {
             Object.keys(outputs[output]).filter(source => outputs[output][source].includes('-') && chunkInfo['challenges'].hasOwnProperty(outputs[output][source].split('-')[1]) && chunkInfo['challenges'][outputs[output][source].split('-')[1]].hasOwnProperty(source) && chunkInfo['challenges'][outputs[output][source].split('-')[1]][source].hasOwnProperty('NoXp')).forEach(source => {
-                if (!!baseChunkData['items'][output] && Object.keys(baseChunkData['items'][output]).length > 0) {
+                if (!!baseChunkData['items'][output] && (Object.keys(baseChunkData['items'][output]).length > 1 || !baseChunkData['items'][output].hasOwnProperty(source))) {
                     delete newValids[outputs[output][source].split('-')[1]][source];
                     if (!newValids[outputs[output][source].split('-')[1]]) {
                         delete newValids[outputs[output][source].split('-')[1]];
