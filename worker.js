@@ -279,9 +279,9 @@ function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// Replaces all instances of match within str with replacement
-function replaceAll(str, match, replacement) {
-    return str.replace(new RegExp(escapeRegExp(match), 'g'), ()=>replacement);
+// Replaces all instances of match within string with replacement
+String.prototype.replaceAll = function(match, replacement) {
+    return this.split(match).join(replacement);
 }
 
 // Combines JSONs
@@ -6864,7 +6864,7 @@ var getAllChunkAreas = function(chunks) {
     let tempChunks = JSON.parse(JSON.stringify(chunks));
     while (i < Object.keys(tempChunks).length) {
         !!chunkInfo['chunks'][Object.keys(tempChunks)[i]] && !!chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Connect']).forEach(id => {
-            if (chunkInfo['chunks'][parseInt(id)].hasOwnProperty('Name') && typeof chunkInfo['chunks'][parseInt(id)]['Name'] === 'string') {
+            if (chunkInfo['chunks'][parseInt(id)].hasOwnProperty('Name') && !!chunkInfo['chunks'][parseInt(id)]['Name'] && typeof chunkInfo['chunks'][parseInt(id)]['Name'] === 'string') {
                 tempChunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
                 temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] || false;
                 if (!!tempChunks[Object.keys(tempChunks)[i]]) {
