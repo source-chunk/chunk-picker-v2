@@ -6402,6 +6402,18 @@ input#searchMonsters {
     background-color: var(--color3);
 }
 
+.tasks-checkmark {
+    cursor: pointer;
+    position: absolute;
+    font-size: 10px;
+    right: 5px;
+    display: none;
+}
+
+.tasks-checkmark:hover {
+    color: rgb(75, 75, 225);
+}
+
 /* --------------------------- */
 
 .canvasDiv {
