@@ -268,7 +268,7 @@ onmessage = function(e) {
         //console.log(nonValids);
         //console.log(baseChunkData);
 
-        postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 0, highestOverall, type === 'current' ? dropRatesGlobal : {}, questProgress, diaryProgress, skillQuestXp, chunks]);
+        postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 0, highestOverall, type === 'current' ? dropRatesGlobal : {}, questProgress, diaryProgress, skillQuestXp, chunks, type === 'current' ? dropTablesGlobal : {}]);
     } catch (err) {
         postMessage(['error', err]);
     }
@@ -3531,7 +3531,9 @@ var calcBIS = function() {
         let equip = equipLine.split('|')[1].charAt(0).toUpperCase() + equipLine.split('|')[1].slice(1);
         completedEquipment[equip.replaceAll(/\%2J/g, '+')] = chunkInfo['equipment'][equip.replaceAll(/\%2J/g, '+')];
     });
-    baseChunkData['items']['Unarmed'] = {'Built-in': 'secondary-Nonskill'};
+    if (Object.keys(chunks).length > 0) {
+        baseChunkData['items']['Unarmed'] = {'Built-in': 'secondary-Nonskill'};
+    }
     let notFresh = {};
     highestOverall = {};
     let vowels = ['a', 'e', 'i', 'o', 'u'];
@@ -3903,7 +3905,7 @@ var calcBIS = function() {
                                 articleAmmo = ammo.toLowerCase().charAt(ammo.toLowerCase().length - 1) === 's' ? ' ' : articleAmmo;
                                 tempTempValidAmmo && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + articleAmmo + '~|' + ammo.toLowerCase() + '|~')) && (bestAmmo = ammo);
                             }
-                        });//
+                        });
                         if (!(Object.keys(chunkInfo['codeItems']['ammoTools']).filter(ammo => { return chunkInfo['codeItems']['ammoTools'][ammo].hasOwnProperty(equip) }).length > 0) || bestAmmo !== null) {
                             if ((!bestEquipment[chunkInfo['equipment'][equip].slot] || (((chunkInfo['equipment'][equip].attack_ranged + chunkInfo['equipment'][equip].ranged_strength + (!!bestAmmo ? chunkInfo['equipment'][bestAmmo].ranged_strength : 0) + 64) / (chunkInfo['equipment'][equip].attack_speed - 1)) > ((chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_ranged + chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].ranged_strength + (!!bestAmmoSaved[chunkInfo['equipment'][equip].slot] ? chunkInfo['equipment'][bestAmmoSaved[chunkInfo['equipment'][equip].slot]].ranged_strength : 0) + 64) / (chunkInfo['equipment'][bestEquipment[chunkInfo['equipment'][equip].slot]].attack_speed - 1)))) && chunkInfo['equipment'][equip].attack_ranged > 0) {
                                 let tempTempValid = false;

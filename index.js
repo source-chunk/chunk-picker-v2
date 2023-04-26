@@ -1161,6 +1161,7 @@ let pickedNum;
 let highestTab;
 let highestTab2;
 let dropRatesGlobal = {};
+let dropTablesGlobal = {};
 let questProgress = {};
 let diaryProgress = {};
 let skillQuestXp = {};
@@ -1984,11 +1985,15 @@ var handleMouseUp = function(e) {
         e.stopPropagation();
         currentX = e.clientX - offsetX;
         currentY = e.clientY - offsetY;
-        let id = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
-        if (infoLockedId === id.toString()) {
+        let chunkId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
+        let coords = convertToXY(chunkId);
+        if (coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) {
+            return;
+        }
+        if (infoLockedId === chunkId.toString()) {
             infoLockedId = -1;
         } else {
-            infoLockedId = id.toString();
+            infoLockedId = chunkId.toString();
         }
         updateChunkInfo();
     } else if (e.button === 0) {
@@ -2018,7 +2023,10 @@ var handleMouseUp = function(e) {
             currentX = e.clientX - offsetX;
             currentY = e.clientY - offsetY;
             let chunkId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
-            if (isHoveringBlacklist) {
+            let coords = convertToXY(chunkId);
+            if (coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) {
+                return;
+            } else if (isHoveringBlacklist) {
                 blacklistCanvas(chunkId);
             } else if (isHoveringSticker) {
                 openStickers(chunkId);
@@ -2570,7 +2578,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.3.13");
+        myWorker = new Worker("./worker.js?v=5.3.14");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2814,7 +2822,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.3.13");
+let myWorker = new Worker("./worker.js?v=5.3.14");
+let myWorker2 = new Worker("./worker.js?v=5.3.14");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -2861,6 +2870,7 @@ let workerOnMessage = function(e) {
                 diaryProgress = e.data[10];
                 skillQuestXp = e.data[11];
                 savedChunks = e.data[12];
+                dropTablesGlobal = e.data[13];
                 possibleAreas = {};
                 Object.keys(e.data[12]).filter(area => { return e.data[12][area] === true }).forEach(area => {
                     possibleAreas[area] = true;
@@ -4429,7 +4439,7 @@ var toggleHiddenTasks = function(value) {
             $(`.${section}-challenge`).length <= 0 ? $('.marker-' + section).hide() : $('.marker-' + section).show();
         }
     });
-    if (value && $(`.challenge:not(.hide-backlog)`).length <= 0) {
+    if ((value && $(`.panel-active .challenge:not(.hide-backlog)`).length <= 0) || $(`.panel-active .challenge`).length <= 0) {
         $('.panel-active').append(`<span class="no-current">No current chunk tasks.</span>`);
     }
 }
@@ -5110,7 +5120,10 @@ var calcFutureChallenges = function() {
         });
         i++;
     }
-    myWorker.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
+    myWorker2.terminate();
+    myWorker2 = new Worker("./worker.js?v=5.3.14");
+    myWorker2.onmessage = workerOnMessage;
+    myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
 }
 
@@ -5990,6 +6003,7 @@ var openSearchDetails = function(category, name) {
     let formattedSources = [];
     Object.keys(baseChunkData[category][name]).forEach(source => {
         let formattedSource = '';
+        let alreadyPushed = false;
         if (typeof baseChunkData[category][name][source] === "boolean" || !skills.includes(baseChunkData[category][name][source].split('-')[1])) {
             if (chunkInfo['chunks'].hasOwnProperty(source)) {
                 let realName = source;
@@ -6013,7 +6027,15 @@ var openSearchDetails = function(category, name) {
         } else if (typeof baseChunkData[category][name][source] !== "boolean" && !baseChunkData[category][name][source].includes('primary') && !baseChunkData[category][name][source].includes('secondary') && !baseChunkData[category][name][source] === 'shop') {
             formattedSource += `-${baseChunkData[category][name][source].replaceAll(/\*/g, '')}`;
         } else if (typeof baseChunkData[category][name][source] !== "boolean") {
-            if (baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '') === 'drop' && dropRatesGlobal.hasOwnProperty(source.replaceAll(/\#/g, '%2F')) && dropRatesGlobal[source.replaceAll(/\#/g, '%2F')].hasOwnProperty(name)) {
+            if (baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '') === 'drop' && dropTablesGlobal.hasOwnProperty(source.replaceAll(/\#/g, '%2F')) && dropTablesGlobal[source.replaceAll(/\#/g, '%2F')].hasOwnProperty(name)) {
+                let tempFormattedSource;
+                !!dropTablesGlobal[source.replaceAll(/\#/g, '%2F')][name] && Object.keys(dropTablesGlobal[source.replaceAll(/\#/g, '%2F')][name]).forEach(amount => {
+                    tempFormattedSource = formattedSource;
+                    tempFormattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')}, qty: ${amount}, ${dropTablesGlobal[source.replaceAll(/\#/g, '%2F')][name][amount]})`;
+                    formattedSources.push(tempFormattedSource);
+                    alreadyPushed = true;
+                });
+            } else if (baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '') === 'drop' && dropRatesGlobal.hasOwnProperty(source.replaceAll(/\#/g, '%2F')) && dropRatesGlobal[source.replaceAll(/\#/g, '%2F')].hasOwnProperty(name)) {
                 formattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')}, ${dropRatesGlobal[source.replaceAll(/\#/g, '%2F')][name]})`;
             } else if (baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '') === 'drop' && chunkInfo['challenges']['Slayer'].hasOwnProperty(source.replaceAll('#', '%2F')) && chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')].hasOwnProperty('Output') && chunkInfo['skillItems']['Slayer'].hasOwnProperty(chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')]['Output']) && chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')]['Output']].hasOwnProperty(name)) {
                 let dropRate = isNaN(Object.values(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')]['Output']][name])[0]) ? Object.values(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')]['Output']][name])[0] : findFraction(parseFloat(Object.values(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')]['Output']][name])[0].split('/')[0].replaceAll('~', '')) / parseFloat(Object.values(chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][source.replaceAll('#', '%2F')]['Output']][name])[0].split('/')[1]));
@@ -6022,7 +6044,9 @@ var openSearchDetails = function(category, name) {
                 formattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')})`;
             }
         }
-        formattedSources.push(formattedSource);
+        if (!alreadyPushed) {
+            formattedSources.push(formattedSource);
+        }
     });
     formattedSources.sort().forEach(formattedSource => {
         $('.searchdetails-data').append(`<div class="noscroll results">${formattedSource.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\|\~/g, '').replaceAll(/\~\|/g, '').replaceAll(/\%2Y/g, "(").replaceAll(/\%2Z/g, ")")}</div>`);
@@ -7010,7 +7034,7 @@ var setCurrentChallenges = function(backlogArr, completedArr, useOld, noClear) {
             if (checkFalseRules()) {
                 $('.panel-active').append('Please select your Chunk Rules.');
             } else {
-                $('.panel-active').append('No current chunk tasks.');
+                $('.panel-active').append(`<span class="no-current">No current chunk tasks.</span>`);
             }
         }
         oldSavedChallengeArr = challengeArr;
@@ -7598,6 +7622,7 @@ var changeChallengeColor = function() {
     $('.challenge.hide-backlog a').css({ 'text-decoration': settings['completedTaskStrikethrough'] ? 'none' : 'underline' });
     $('.challenge:not(.hide-backlog) .checkbox').css({ 'color': 'var(--colorText)', 'text-decoration': 'none' });
     $('.challenge:not(.hide-backlog) a').css({ 'text-decoration': 'underline' });
+    $('.tasks-checkmark').css({ 'color': settings['completedTaskColor'] });
     setData();
     setTaskNum();
 }
@@ -7825,6 +7850,7 @@ var backlogChallenge = function(challenge, skill, note, noUpdate) {
         }
         if (!!highestChallenge) {
             $(`.panel-active .challenge.skill-challenge.${skill + '-challenge'}`).html(`<label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][highestChallenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('${skill}', ` + "`" + highestChallenge + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[` + chunkInfo['challenges'][skill][highestChallenge]['Level'] + '] <span class="inner noscroll">' + skill + '</b>: ' + highestChallenge.split('~')[0].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI((highestChallenge.split('|')[1]).replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + highestChallenge.split('~')[1].split('|').join('').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + '</a>' + highestChallenge.split('~')[2].replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+') + `</span></span></label>` + ` <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu(` + "`" + highestChallenge + "`, " + "`" + skill + "`" + ')"><i class="fas fa-sliders-h noscroll"></i></span>');
+            $(`.panel-active .challenge.skill-challenge.${skill + '-challenge'}`).attr('onclick', `showDetails('` + highestChallenge.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `', '` + skill + `', 'current')`);
         } else {
             $(`.panel-active .challenge.skill-challenge.${skill + '-challenge'}`).remove();
         }
@@ -7845,7 +7871,7 @@ var backlogChallenge = function(challenge, skill, note, noUpdate) {
         $('.marker-extra').remove();
     }
     if ($('.panel-active .challenge').length === 0) {
-        $('.panel-active').append('No current chunk tasks.');
+        $('.panel-active').append(`<span class="no-current">No current chunk tasks.</span>`);
     }
     if (!noUpdate) {
         calcCurrentChallengesCanvas(true);
@@ -7863,7 +7889,7 @@ var setupBacklogArr = function() {
     let backlogArr = [];
     !!backloggedSources && Object.keys(backloggedSources).forEach(type => {
         Object.keys(backloggedSources[type]).forEach(el => {
-            backlogArr.push(`<div class="noscroll"><b class="noscroll">[Source]:</b> ${el}</div>`);
+            backlogArr.push(`<div class="challenge noscroll"><b class="noscroll">[Source]:</b> ${el.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</div>`);
         });
     });
     !!backlog && Object.keys(backlog).forEach(skill => {
