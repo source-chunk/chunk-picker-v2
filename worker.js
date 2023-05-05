@@ -2084,7 +2084,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         diaryProgress = {};
         skillQuestXp = {};
         !!newValids && !!newValids['Quest'] && Object.keys(newValids['Quest']).forEach(line => {
-            if (chunkInfo['challenges']['Quest'].hasOwnProperty(line) && chunkInfo['challenges']['Quest'][line].hasOwnProperty('QuestPoints')) {
+            if (chunkInfo['challenges']['Quest'].hasOwnProperty(line) && chunkInfo['challenges']['Quest'][line].hasOwnProperty('QuestPoints') && (!backlog['Quest'] || !backlog['Quest'].hasOwnProperty(line))) {
                 questPointTotal += chunkInfo['challenges']['Quest'][line]['QuestPoints'];
                 questProgress[chunkInfo['challenges']['Quest'][line]['BaseQuest']] = 'Complete the quest';
             } else if (questProgress[chunkInfo['challenges']['Quest'][line]['BaseQuest']] !== 'Complete the quest') {
@@ -2135,7 +2135,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         let tier;
         !!newValids && !!newValids['Diary'] && Object.keys(newValids['Diary']).forEach(line => {
             tier = line.split('|')[1].split('%2F')[1];
-            if (chunkInfo['challenges']['Diary'].hasOwnProperty(line) && chunkInfo['challenges']['Diary'][line].hasOwnProperty('CombatPoints')) {
+            if (chunkInfo['challenges']['Diary'].hasOwnProperty(line) && chunkInfo['challenges']['Diary'][line].hasOwnProperty('CombatPoints') && (!backlog['Diary'] || !backlog['Diary'].hasOwnProperty(line))) {
                 combatPointTotal += chunkInfo['challenges']['Diary'][line]['CombatPoints'];
             }
             if (chunkInfo['challenges']['Diary'].hasOwnProperty(line) && chunkInfo['challenges']['Diary'][line].hasOwnProperty('Reward')) {
