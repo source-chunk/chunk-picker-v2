@@ -139,6 +139,7 @@ let boneItems;
 let highestCurrent;
 let dropTables;
 let questPointTotal;
+let combatPointTotal;
 let questProgress = {};
 let diaryProgress = {};
 let skillQuestXp = {};
@@ -2079,6 +2080,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         questPointTotal = 0;
         questProgress = {};
+        combatPointTotal = 0;
         diaryProgress = {};
         skillQuestXp = {};
         !!newValids && !!newValids['Quest'] && Object.keys(newValids['Quest']).forEach(line => {
@@ -2133,6 +2135,9 @@ var calcChallenges = function(chunks, baseChunkData) {
         let tier;
         !!newValids && !!newValids['Diary'] && Object.keys(newValids['Diary']).forEach(line => {
             tier = line.split('|')[1].split('%2F')[1];
+            if (chunkInfo['challenges']['Diary'].hasOwnProperty(line) && chunkInfo['challenges']['Diary'][line].hasOwnProperty('CombatPoints')) {
+                combatPointTotal += chunkInfo['challenges']['Diary'][line]['CombatPoints'];
+            }
             if (chunkInfo['challenges']['Diary'].hasOwnProperty(line) && chunkInfo['challenges']['Diary'][line].hasOwnProperty('Reward')) {
                 if (!diaryProgress[chunkInfo['challenges']['Diary'][line]['BaseQuest']]) {
                     diaryProgress[chunkInfo['challenges']['Diary'][line]['BaseQuest']] = {};
@@ -2385,6 +2390,14 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 if (!questPointTotal || (questPointTotal < chunkInfo['challenges'][skill][name]['QuestPointsNeeded'])) {
                     validChallenge = false;
                     wrongThings.push('QPS');
+                    nonValids[name] = wrongThings;
+                    return;
+                }
+            }
+            if (chunkInfo['challenges'][skill][name].hasOwnProperty('CombatPointsNeeded')) {
+                if (!combatPointTotal || (combatPointTotal < chunkInfo['challenges'][skill][name]['CombatPointsNeeded'])) {
+                    validChallenge = false;
+                    wrongThings.push('Combat Points');
                     nonValids[name] = wrongThings;
                     return;
                 }

@@ -2578,7 +2578,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.3.14");
+        myWorker = new Worker("./worker.js?v=5.3.14.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2822,8 +2822,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.3.14");
-let myWorker2 = new Worker("./worker.js?v=5.3.14");
+let myWorker = new Worker("./worker.js?v=5.3.14.1");
+let myWorker2 = new Worker("./worker.js?v=5.3.14.1");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5121,7 +5121,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.3.14");
+    myWorker2 = new Worker("./worker.js?v=5.3.14.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
@@ -5526,7 +5526,7 @@ var shuffle = function(array) {
 // Opens the quest steps modal
 var openQuestSteps = function(skill, challenge) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !onMobile && !helpMenuOpen) {
-        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('%2Q', '!').replaceAll('%2H', "'").replaceAll('-2F', ',');
+        challenge = challenge.replaceAll('-', '%').replaceAll('=', '-').replaceAll('%2Q', '!').replaceAll('%2H', "'").replaceAll('%2E', ".").replaceAll('-2F', ',');
         let tier = null;
         if (challenge.includes('%2XX')) {
             tier = challenge.split('|')[1].split('%2XX')[1];
@@ -5547,7 +5547,7 @@ var openQuestSteps = function(skill, challenge) {
                         $('.quest-steps-data').append(`<hr />`);
                         currentTier = line.split('~')[1].split('|').join('').split('%2F')[1];
                     }
-                    $('.quest-steps-data').append(`<div class='noscroll step${diaryProgress.hasOwnProperty(challenge.split('|')[1]) && diaryProgress[challenge.split('|')[1]]['allTasks'].includes(line) ? ' highlighted' : ''}${line.split('|')[1].split('%2F')[1] === tier ? ' diary-start' : ''}'><span class='noscroll step-step'>${skill === 'Diary'? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                    $('.quest-steps-data').append(`<div class='noscroll step${diaryProgress.hasOwnProperty(challenge.split('|')[1]) && diaryProgress[challenge.split('|')[1]]['allTasks'].includes(line) ? ' highlighted' : ''}${line.split('|')[1].split('%2F')[1] === tier ? ' diary-start' : ''}'><span class='noscroll step-step'>${skill === 'Diary' ? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]).replaceAll('%2E', ".") : line.split('|~')[1].replaceAll('%2E', ".")}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
                 });
             } else {
                 if (questProgress[challenge.split('|')[1]] === 'Complete the quest') {
@@ -5569,7 +5569,7 @@ var openQuestSteps = function(skill, challenge) {
                     $('.quest-steps-data').append(`<hr />`);
                     currentTier = line.split('~')[1].split('|').join('').split('%2F')[1];
                 }
-                $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll(/\%2I/g, ',') ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary' ? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]) : line.split('|~')[1]}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
+                $('.quest-steps-data').append(`<div class='noscroll step${line === challenge.replaceAll(/\-2H/g, "'").replaceAll(/\./g, '%2E').replaceAll(/\%2H/g, "'").replaceAll(/\%2I/g, ',') ? ' highlighted' : ''}'><span class='noscroll step-step'>${skill === 'Diary' ? line.split('|~')[1].replaceAll('Task ', diaryTierAbr[line.split('~')[1].split('|').join('').split('%2F')[1]]).replaceAll('%2E', ".") : line.split('|~')[1].replaceAll('%2E', ".")}</span><span class='noscroll step-description'>${chunkInfo['challenges'][skill][line]['Description']}</span></div>`);
             });
         }
         if (quest.replaceAll('/', '%2G') === 'Combat Achievements') {
