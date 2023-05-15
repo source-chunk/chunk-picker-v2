@@ -3236,6 +3236,10 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 'Label': 'Kill X',
                 'Permanent': false
             }
+            if (!!valids['Slayer'] && Object.keys(chunkInfo['challenges']['Slayer']).filter(name => chunkInfo['challenges']['Slayer'][name].hasOwnProperty('Output') && chunkInfo['challenges']['Slayer'][name]['Output'] === monster).length === 1) {
+                chunkInfo['challenges']['Extra']['Kill X ~|' + monster + '|~']['Tasks'] = {};
+                chunkInfo['challenges']['Extra']['Kill X ~|' + monster + '|~']['Tasks'][Object.keys(chunkInfo['challenges']['Slayer']).filter(name => chunkInfo['challenges']['Slayer'][name].hasOwnProperty('Output') && chunkInfo['challenges']['Slayer'][name]['Output'] === monster)[0]] = 'Slayer';
+            }
         });
     }
     // Every Drop
