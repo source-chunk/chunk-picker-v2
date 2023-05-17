@@ -556,13 +556,13 @@ var calcChallenges = function(chunks, baseChunkData) {
                 !!baseChunkData['shops'][shop] && delete baseChunkData['shops'][shop][chunk];
                 if (!!baseChunkData['shops'][shop] && Object.keys(baseChunkData['shops'][shop]).length === 0) {
                     delete baseChunkData['shops'][shop];
+                    !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).filter((item) => { return !!baseChunkData['items'][item] }).forEach(item => {
+                        delete baseChunkData['items'][item][shop.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                        if (Object.keys(baseChunkData['items'][item]).length <= 0) {
+                            delete baseChunkData['items'][item];
+                        }
+                    });
                 }
-                !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).filter((item) => { return !!baseChunkData['items'][item] }).forEach(item => {
-                    delete baseChunkData['items'][item][shop.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
-                    if (Object.keys(baseChunkData['items'][item]).length <= 0) {
-                        delete baseChunkData['items'][item];
-                    }
-                });
             } else if (tempValid && (!backloggedSources['shops'] || !backloggedSources['shops'][shop])) {
                 if (!baseChunkData['shops'].hasOwnProperty(shop)) {
                     baseChunkData['shops'][shop] = {};
@@ -1616,13 +1616,13 @@ var calcChallenges = function(chunks, baseChunkData) {
                     !!baseChunkData['shops'][shop] && delete baseChunkData['shops'][shop][chunk];
                     if (!!baseChunkData['shops'][shop] && Object.keys(baseChunkData['shops'][shop]).length === 0) {
                         delete baseChunkData['shops'][shop];
+                        !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).filter((item) => { return !!baseChunkData['items'][item] }).forEach(item => {
+                            delete baseChunkData['items'][item][shop.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
+                            if (Object.keys(baseChunkData['items'][item]).length <= 0) {
+                                delete baseChunkData['items'][item];
+                            }
+                        });
                     }
-                    !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).filter((item) => { return !!baseChunkData['items'][item] }).forEach(item => {
-                        delete baseChunkData['items'][item][shop.replaceAll(/\%2E/g, '.').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')];
-                        if (Object.keys(baseChunkData['items'][item]).length <= 0) {
-                            delete baseChunkData['items'][item];
-                        }
-                    });
                 } else if (tempValid && (!backloggedSources['shops'] || !backloggedSources['shops'][shop])) {
                     if (!baseChunkData['shops'].hasOwnProperty(shop)) {
                         baseChunkData['shops'][shop] = {};
