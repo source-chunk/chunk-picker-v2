@@ -2338,6 +2338,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             'Chunks': ['11063'],
             'ChunksDetails': ['11063'],
             'Label': 'Skillcapes',
+            'NPCs': ['Mac'],
             'Output': 'Max cape',
             'TotalLevelNeeded': 2277,
             'Permanent': false
@@ -2360,6 +2361,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
         chunkInfo['challenges']['Nonskill']['Buy the quest point cape*'] = {
             'Chunks': ['12338'],
             'ChunksDetails': ['12338'],
+            'NPCs': ['Wise Old Man'],
             'Output': 'Quest point cape (t)',
             'QuestPointsNeeded': totalQuestPoints,
             'Permanent': false,

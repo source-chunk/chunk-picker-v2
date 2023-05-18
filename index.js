@@ -1152,11 +1152,62 @@ let stickerChoicesOsrs = ['attack', 'hitpoints', 'mining', 'strength', 'agility'
 let savedStickerId;
 let savedStickerSticker;
 let altChallenges = {};
-let numClueTasks = {};
-let numClueTasksPossible = {};
-let possibleClueTasks = {};
-let starRegionsPossible = {};
-let starRegions = {};
+let numClueTasks = {
+    'beginner': 0,
+    'easy': 0,
+    'medium': 0,
+    'hard': 0,
+    'elite': 0,
+    'master': 0
+};
+let numClueTasksPossible = {
+    'beginner': 0,
+    'easy': 0,
+    'medium': 0,
+    'hard': 0,
+    'elite': 0,
+    'master': 0
+};
+let possibleClueTasks = {
+    'beginner': [],
+    'easy': [],
+    'medium': [],
+    'hard': [],
+    'elite': [],
+    'master': []
+};
+let starRegionsPossible = {
+    "Asgarnia": 0,
+    "Crandor and Karamja": 0,
+    "Feldip Hills and the Isle of Souls": 0,
+    "Fossil Island and Mos Le'Harmless": 0,
+    "Fremennik Lands and Lunar Isle": 0,
+    "Great Kourend": 0,
+    "Kandarin": 0,
+    "Kebos Lowlands": 0,
+    "Kharidian Desert": 0,
+    "Misthalin": 0,
+    "Morytania": 0,
+    "Piscatoris and the Gnome Stronghold": 0,
+    "Tirannwn": 0,
+    "Wilderness": 0
+};
+let starRegions = {
+    "Asgarnia": 0,
+    "Crandor and Karamja": 0,
+    "Feldip Hills and the Isle of Souls": 0,
+    "Fossil Island and Mos Le'Harmless": 0,
+    "Fremennik Lands and Lunar Isle": 0,
+    "Great Kourend": 0,
+    "Kandarin": 0,
+    "Kebos Lowlands": 0,
+    "Kharidian Desert": 0,
+    "Misthalin": 0,
+    "Morytania": 0,
+    "Piscatoris and the Gnome Stronghold": 0,
+    "Tirannwn": 0,
+    "Wilderness": 0
+};
 let pickedNum;
 let highestTab;
 let highestTab2;
@@ -2578,7 +2629,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.4.2");
+        myWorker = new Worker("./worker.js?v=5.4.3");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2822,8 +2873,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.4.2");
-let myWorker2 = new Worker("./worker.js?v=5.4.2");
+let myWorker = new Worker("./worker.js?v=5.4.3");
+let myWorker2 = new Worker("./worker.js?v=5.4.3");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -2876,6 +2927,75 @@ let workerOnMessage = function(e) {
                     possibleAreas[area] = true;
                 });
                 tempChallengeArrSaved = e.data[5];
+                numClueTasks = {
+                    'beginner': 0,
+                    'easy': 0,
+                    'medium': 0,
+                    'hard': 0,
+                    'elite': 0,
+                    'master': 0
+                };
+                numClueTasksPossible = {
+                    'beginner': 0,
+                    'easy': 0,
+                    'medium': 0,
+                    'hard': 0,
+                    'elite': 0,
+                    'master': 0
+                };
+                possibleClueTasks = {
+                    'beginner': [],
+                    'easy': [],
+                    'medium': [],
+                    'hard': [],
+                    'elite': [],
+                    'master': []
+                };
+                !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter(task => { return chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier') }).forEach(task => {
+                    numClueTasks[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
+                    if (globalValids.hasOwnProperty('Nonskill') && globalValids['Nonskill'].hasOwnProperty(task)) {
+                        numClueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
+                        possibleClueTasks[chunkInfo['challenges']['Nonskill'][task]['ClueTier']].push(task);
+                    }
+                });
+                starRegionsPossible = {
+                    "Asgarnia": 0,
+                    "Crandor and Karamja": 0,
+                    "Feldip Hills and the Isle of Souls": 0,
+                    "Fossil Island and Mos Le'Harmless": 0,
+                    "Fremennik Lands and Lunar Isle": 0,
+                    "Great Kourend": 0,
+                    "Kandarin": 0,
+                    "Kebos Lowlands": 0,
+                    "Kharidian Desert": 0,
+                    "Misthalin": 0,
+                    "Morytania": 0,
+                    "Piscatoris and the Gnome Stronghold": 0,
+                    "Tirannwn": 0,
+                    "Wilderness": 0
+                };
+                starRegions = {
+                    "Asgarnia": 0,
+                    "Crandor and Karamja": 0,
+                    "Feldip Hills and the Isle of Souls": 0,
+                    "Fossil Island and Mos Le'Harmless": 0,
+                    "Fremennik Lands and Lunar Isle": 0,
+                    "Great Kourend": 0,
+                    "Kandarin": 0,
+                    "Kebos Lowlands": 0,
+                    "Kharidian Desert": 0,
+                    "Misthalin": 0,
+                    "Morytania": 0,
+                    "Piscatoris and the Gnome Stronghold": 0,
+                    "Tirannwn": 0,
+                    "Wilderness": 0
+                };
+                !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter(task => { return chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('StarRegion') }).forEach(task => {
+                    starRegionsPossible[chunkInfo['challenges']['Nonskill'][task]['StarRegion']]++;
+                    if (globalValids.hasOwnProperty('Nonskill') && globalValids['Nonskill'].hasOwnProperty(task)) {
+                        starRegions[chunkInfo['challenges']['Nonskill'][task]['StarRegion']]++;
+                    }
+                });
                 if (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 100) {
                     calcCurrentChallenges2(e.data[5]);
                 } else {
@@ -4880,75 +5000,6 @@ var calcCurrentChallenges2 = function(tempChallengeArr) {
     !tempChallengeArr && (tempChallengeArr = tempChallengeArrSaved);
     setupCurrentChallenges(tempChallengeArr);
     infoPanelVis['challenges'] && updateChunkInfo();
-    numClueTasks = {
-        'beginner': 0,
-        'easy': 0,
-        'medium': 0,
-        'hard': 0,
-        'elite': 0,
-        'master': 0
-    };
-    numClueTasksPossible = {
-        'beginner': 0,
-        'easy': 0,
-        'medium': 0,
-        'hard': 0,
-        'elite': 0,
-        'master': 0
-    };
-    possibleClueTasks = {
-        'beginner': [],
-        'easy': [],
-        'medium': [],
-        'hard': [],
-        'elite': [],
-        'master': []
-    };
-    !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter(task => { return chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier') }).forEach(task => {
-        numClueTasks[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
-        if (globalValids.hasOwnProperty('Nonskill') && globalValids['Nonskill'].hasOwnProperty(task)) {
-            numClueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
-            possibleClueTasks[chunkInfo['challenges']['Nonskill'][task]['ClueTier']].push(task);
-        }
-    });
-    starRegionsPossible = {
-        "Asgarnia": 0,
-		"Crandor and Karamja": 0,
-		"Feldip Hills and the Isle of Souls": 0,
-		"Fossil Island and Mos Le'Harmless": 0,
-		"Fremennik Lands and Lunar Isle": 0,
-		"Great Kourend": 0,
-		"Kandarin": 0,
-		"Kebos Lowlands": 0,
-		"Kharidian Desert": 0,
-		"Misthalin": 0,
-		"Morytania": 0,
-		"Piscatoris and the Gnome Stronghold": 0,
-		"Tirannwn": 0,
-		"Wilderness": 0
-    };
-    starRegions = {
-        "Asgarnia": 0,
-		"Crandor and Karamja": 0,
-		"Feldip Hills and the Isle of Souls": 0,
-		"Fossil Island and Mos Le'Harmless": 0,
-		"Fremennik Lands and Lunar Isle": 0,
-		"Great Kourend": 0,
-		"Kandarin": 0,
-		"Kebos Lowlands": 0,
-		"Kharidian Desert": 0,
-		"Misthalin": 0,
-		"Morytania": 0,
-		"Piscatoris and the Gnome Stronghold": 0,
-		"Tirannwn": 0,
-		"Wilderness": 0
-    };
-    !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter(task => { return chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('StarRegion') }).forEach(task => {
-        starRegionsPossible[chunkInfo['challenges']['Nonskill'][task]['StarRegion']]++;
-        if (globalValids.hasOwnProperty('Nonskill') && globalValids['Nonskill'].hasOwnProperty(task)) {
-            starRegions[chunkInfo['challenges']['Nonskill'][task]['StarRegion']]++;
-        }
-    });
 };
 
 // Sets up data for displaying
@@ -5121,7 +5172,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.4.2");
+    myWorker2 = new Worker("./worker.js?v=5.4.3");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
@@ -6229,7 +6280,7 @@ var openHighest2 = function() {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll tier-table-header'>Tier</span><span class='noscroll possible-table-header'>Possible Steps</span><span class='noscroll percent-table-header'>% to Complete a Clue</span></div>`);
                 clueTiers.forEach(tier => {
                     let chance = 0;
-                    let baseChance = (numClueTasksPossible[tier.toLowerCase()] / numClueTasks[tier.toLowerCase()]);
+                    let baseChance = (numClueTasksPossible[tier.toLowerCase()] / numClueTasks[tier.toLowerCase()]) || 0;
                     Object.keys(clueStepAmounts[tier]).forEach(numSteps => {
                         chance += Math.pow(baseChance, parseInt(numSteps)) * clueStepAmounts[tier][numSteps];
                     });
@@ -6241,12 +6292,12 @@ var openHighest2 = function() {
                 let totalPossibleSites = 0;
                 !!starRegions && Object.keys(starRegions).forEach(region => {
                     let possibleSites = starRegions[region];
-                    let baseChance = possibleSites / starRegionsPossible[region];
+                    let baseChance = (possibleSites / starRegionsPossible[region]) || 0;
                     totalSites += starRegionsPossible[region];
                     totalPossibleSites += possibleSites;
                     $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll star-region'>${region}</span><span class='noscroll star-sites'>${possibleSites} / ${starRegionsPossible[region]} (${Math.round((baseChance * 100) * 100) / 100}%)</span></div>`);
                 });
-                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row total'><span class='noscroll star-region'>Total</span><span class='noscroll star-sites'>${totalPossibleSites} / ${totalSites} (${Math.round(((totalPossibleSites / totalSites) * 100) * 100) / 100}%)</span></div>`);
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row total'><span class='noscroll star-region'>Total</span><span class='noscroll star-sites'>${totalPossibleSites} / ${totalSites} (${Math.round((((totalPossibleSites / totalSites) || 0) * 100) * 100) / 100}%)</span></div>`);
             }
         });
         if (highestTab2 === undefined) {
