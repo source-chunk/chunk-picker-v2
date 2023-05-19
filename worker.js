@@ -1322,6 +1322,10 @@ var calcChallenges = function(chunks, baseChunkData) {
                             if (!newValids.hasOwnProperty(chunkInfo['challenges'][skill][name]['Tasks'][subTask]) || !newValids[chunkInfo['challenges'][skill][name]['Tasks'][subTask]].hasOwnProperty(subTask)) {
                                 !!newValids[skill] && delete newValids[skill][name];
                                 !!valids[skill] && delete valids[skill][name];
+                                !!tempItemSkill[skill][item] && tempItemSkill[skill][item].splice(tempItemSkill[skill][item].indexOf(name), 1);
+                                if (!!tempItemSkill[skill][item] && tempItemSkill[skill][item].length === 0) {
+                                    delete tempItemSkill[skill][item];
+                                }
                                 taskIsRemoved = true;
                             }
                         });
