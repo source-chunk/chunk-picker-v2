@@ -3491,7 +3491,10 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
             }
         } else if (line === 'Ranged+') {
             let validRanged = false;
-            !!baseChunkData['items'] && Object.keys(chunkInfo['codeItems']['ammoTools']).forEach(ammoItem => {
+            !!baseChunkData['items'] && Object.keys(chunkInfo['codeItems']['ammoTools']).every(ammoItem => {
+                if (validRanged) {
+                    return false;
+                }
                 let tempItem = ammoItem + '*';
                 let ammoValid = true;
                 if (ammoItem === 'No ammo') {
@@ -3504,7 +3507,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
                 }
                 if (ammoValid) {
                     let innerValid = false;
-                    Object.keys(chunkInfo['codeItems']['ammoTools'][ammoItem]).forEach(item => {
+                    Object.keys(chunkInfo['codeItems']['ammoTools'][ammoItem]).every(item => {
                         if (!!baseChunkData['items'] && Object.keys(baseChunkData['items']).includes(item.replaceAll(/\*/g, ''))) {
                             if (rangedItems.hasOwnProperty(item.replaceAll(/\*/g, '')) && (rangedItems[item.replaceAll(/\*/g, '')] === 1 || (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill['Ranged'] > 1 && rangedItems[item.replaceAll(/\*/g, '')] <= passiveSkill['Ranged']) || ((!!skillQuestXp && skillQuestXp.hasOwnProperty('Ranged') && rangedItems[item.replaceAll(/\*/g, '')] <= skillQuestXp['Ranged']['level'])))) {
                                 if (item.includes('*')) {
@@ -3515,9 +3518,14 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
                                 }
                             }
                         }
+                        if (innerValid) {
+                            validRanged = true;
+                            return false;
+                        }
+                        return true;
                     });
-                    innerValid && (validRanged = true);
                 }
+                return true;
             });
             let monsterExists = !!baseChunkData['monsters'] && Object.keys(baseChunkData['monsters']).length > 0;
             if (!validRanged || !monsterExists) {
