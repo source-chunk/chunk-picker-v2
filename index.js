@@ -32,7 +32,7 @@ var zoom = 350;                                                                 
 var fontZoom = 16;                                                              // Font size zoom
 var labelZoom = 96;                                                             // Selected label font size zoom
 var scale = 30;                                                                 // Amount zoomed every 'zoom' action
-var fullSize = 1075;                                                            // Amount of chunks present
+var fullSize = 1118;                                                            // Amount of chunks present
 var rowSize = 43;                                                               // Amount of chunks per row
 var scrollLeft = 0;                                                             // Amount the board is scrolled left offscreen
 var prevScrollLeft = 0;                                                         // Amount the board was previously scrolled left offscreen
@@ -44,12 +44,12 @@ var chunkInfo = {};                                                             
 var infoLockedId = -1;                                                          // Id of chunk locked for info
 var userName = '';                                                              // Runescape Username of user
 
-var ratio = 4800 / 8256;                                                        // Image ratio
+var ratio = 4992 / 8256;                                                        // Image ratio
 var movedNum = 0;                                                               // Amount of times mouse is moved while dragging
 var selectedNum = 1;                                                            // Current index of selected chunks
 var unlockedChunks = 0;                                                         // Number of unlocked chunks
 var selectedChunks = 0;                                                         // Number of selected chunks
-var startingIndex = 4671;                                                       // Index to start chunk numbering at (based on ChunkLite numbers)
+var startingIndex = 4672;                                                       // Index to start chunk numbering at (based on ChunkLite numbers)
 var skip = 213;                                                                 // Number of indices to skip between columns for chunk numbering
 
 var prevValueMid = '';                                                          // Previous value of map id at login
@@ -438,7 +438,7 @@ let ruleNames = {
     "BIS Skilling": "Must obtain items that are best-in-slot/add quality-of-life for skilling (e.g. Dragon Pickaxe, Angler Outfit, wieldable saw, etc.)",
     "Collection Log": "Must obtain items with slots in the collection log (works in conjuction with the Rare Drop rule and the Boss Drops rule)",
     "Minigame": "Allow items obtained from minigame rewards to count towards chunk tasks",
-    "PvP Minigame": "Allow items obtained from PvP-heavy minigames (LMS, PvP Arena) to count towards chunk tasks",
+    "PvP Minigame": "Allow items obtained from PvP-heavy minigames (LMS, PvP Arena, Bounty Hunter) to count towards chunk tasks",
     "Shortcut Task": "Allow agility shortcuts to count as an Agility skill task",
     "Shortcut": "Allow agility shortcuts to count as a primary method for training Agility",
     "Wield Crafted Items": "Crafted items (e.g. bows, metal armour/weapons, etc.) can count as BiS gear <span class='rule-asterisk noscroll'>*</span>",
@@ -2629,7 +2629,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.4.6");
+        myWorker = new Worker("./worker.js?v=5.4.7");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2873,8 +2873,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.4.6");
-let myWorker2 = new Worker("./worker.js?v=5.4.6");
+let myWorker = new Worker("./worker.js?v=5.4.7");
+let myWorker2 = new Worker("./worker.js?v=5.4.7");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5175,7 +5175,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.4.6");
+    myWorker2 = new Worker("./worker.js?v=5.4.7");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
@@ -7379,9 +7379,9 @@ var showDetails = function(challenge, skill, type) {
                             $('#details-data').append(`<span class="noscroll red"><b class="noscroll"><span class='noscroll special'>-</span> None</b></span><br />`);
                         }
                     } else {
-                        !!baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')] && Object.keys(baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')]).forEach(source => {
+                        !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).forEach(source => {
                             if ((chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && chunkInfo['codeItems']['boostItems'][skill].hasOwnProperty(el)) || ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',')].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',')]['NonShop'] || baseChunkDataIn[type][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2E/g, '.').replaceAll(/\%2H/g, "'").replaceAll('#', '%2F').replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',')]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][el][source] !== 'string' || !processingSkill[baseChunkDataIn[type][el][source].split('-')[1]])))) {
-                                if (typeof baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source] === "boolean" || !skills.includes(baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source].split('-')[1])) {
+                                if (typeof baseChunkDataIn[type][el][source] === "boolean" || !skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
                                     if (chunkInfo['chunks'].hasOwnProperty(source)) {
                                         let realName = source;
                                         if (!!chunkInfo['chunks'][source]['Name']) {
@@ -7398,19 +7398,19 @@ var showDetails = function(challenge, skill, type) {
                                         formattedSource += `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(shownSource.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, ''))} target="_blank">${shownSource.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\%2H/g, "'").replaceAll(/\*/g, '')}</a>`;
                                     }
                                 }
-                                if (typeof baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source] !== "boolean" && skills.includes(baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source].split('-')[1])) {
-                                    formattedSource += baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source].split('-')[1].replaceAll(/\*/g, '');
+                                if (typeof baseChunkDataIn[type][el][source] !== "boolean" && skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
+                                    formattedSource += baseChunkDataIn[type][el][source].split('-')[1].replaceAll(/\*/g, '');
                                     formattedSource += ` (${source.replaceAll(/\|/g, '').replaceAll(/\~/g, '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\*/g, '').replaceAll(/\%2H/g, "'")})`
-                                } else if (typeof baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source] !== "boolean" && !baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source].includes('primary') && !baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source].includes('secondary') && !baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source] === 'shop') {
-                                    formattedSource += `-${baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source].replaceAll(/\*/g, '')}`;
-                                } else if (typeof baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source] !== "boolean") {
-                                    formattedSource += ` (${baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')})`;
+                                } else if (typeof baseChunkDataIn[type][el][source] !== "boolean" && !baseChunkDataIn[type][el][source].includes('primary') && !baseChunkDataIn[type][el][source].includes('secondary') && !baseChunkDataIn[type][el][source] === 'shop') {
+                                    formattedSource += `-${baseChunkDataIn[type][el][source].replaceAll(/\*/g, '')}`;
+                                } else if (typeof baseChunkDataIn[type][el][source] !== "boolean") {
+                                    formattedSource += ` (${baseChunkDataIn[type][el][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')})`;
                                 }
                                 formattedSource += ', ';
                             }
                         });
                         formattedSource = formattedSource.slice(0, -2);
-                        if (!!baseChunkDataIn[type] && !!baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')] && Object.keys(baseChunkDataIn[type][el.replaceAll(/\%2F/g, '#')]).length > 10) {
+                        if (!!baseChunkDataIn[type] && !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).length > 10) {
                             formattedSource = ': <span class="noscroll tosearchdetails" onclick="openSearchDetails(`' + type.replaceAll(/\%2E/g, '.').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`, `' + el.replaceAll(/\%2E/g, '.').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + '`)">' + 'Many sources (' + Object.keys(baseChunkDataIn[type][el]).length + ')</span>';
                         }
                         if (formattedSource !== '') {

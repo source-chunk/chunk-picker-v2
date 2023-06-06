@@ -2460,6 +2460,15 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     return;
                 }
             }
+            if (chunkInfo['challenges'][skill][name].hasOwnProperty('CombatLevelNeeded')) {
+                let combatExists = combatSkills.filter((skill2) => { return checkPrimaryMethod(skill2, valids, baseChunkData) }).length > 0;
+                if (!combatExists) {
+                    validChallenge = false;
+                    wrongThings.push('Combat Level');
+                    nonValids[name] = wrongThings;
+                    return;
+                }
+            }
             if (skill === 'Extra' && chunkInfo['challenges'][skill][name].hasOwnProperty('Set')) {
                 if (!!backlog[skill] && backlog[skill].hasOwnProperty(name)) {
                     validChallenge = false;

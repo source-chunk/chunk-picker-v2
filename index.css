@@ -3748,7 +3748,7 @@ input#searchManualAreas {
 }
 
 .challenge.stay-hidden, .stay-hidden-sub {
-    display: none;
+    display: none !important;
 }
 
 .marker > span {
