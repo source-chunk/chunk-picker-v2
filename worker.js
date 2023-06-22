@@ -4003,7 +4003,7 @@ var calcBIS = function() {
                                             tempTempValidAmmo && (!backlog['BiS'] || !backlog['BiS'].hasOwnProperty('Obtain' + articleAmmo + '~|' + plus.toLowerCase() + '|~')) && (bestAmmo = plus);
                                         }
                                     });
-                                } else {
+                                } else if (chunkInfo['equipment'].hasOwnProperty(ammo)) {
                                     if (bestAmmo === null || chunkInfo['equipment'][ammo].ranged_strength > chunkInfo['equipment'][bestAmmo].ranged_strength) {
                                         let tempTempValidAmmo = false;
                                         !!baseChunkData['items'][ammo] && Object.keys(baseChunkData['items'][ammo]).forEach(source => {
