@@ -3100,6 +3100,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             !!itemsPlus[item.replaceAll(/\*/g, '')] && itemsPlus[item.replaceAll(/\*/g, '')].filter((plus) => { return !!items[plus] && (!Object.values(items[plus]).includes('primary-Farming') || rules['Farming Primary']) && !tools[plus] && (skill !== 'Magic' || !magicTools[plus]) }).forEach(plus => {
                                 let nonskill = {};
                                 let tempNonValid = true;
+                                let tempValidHard = false;
                                 !!items[plus] && Object.keys(items[plus]).filter(source => !nonskillGlobalTracker.hasOwnProperty(plus) || !nonskillGlobalTracker[plus].hasOwnProperty(source)).forEach(source => {
                                     if (items[plus][source].includes('Nonskill') && !source.includes('*')) {
                                         if (!nonskill['Nonskill']) {
