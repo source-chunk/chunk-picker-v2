@@ -1878,7 +1878,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     if (!!chunkInfo['challenges'][skill][challenge]['Output'] && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) {
                         let output = chunkInfo['challenges'][skill][challenge]['Output'];
                         let highestDropRate = 0;
-                        !!chunkInfo['challenges'][skill][challenge]['Items'] && chunkInfo['challenges'][skill][challenge]['Items'].forEach(item => {
+                        !!chunkInfo['challenges'][skill][challenge]['Items'] && chunkInfo['challenges'][skill][challenge]['Items'].filter(item => item.includes('*')).forEach(item => {
                             if (item.replaceAll(/\*/g, '').includes('+')) {
                                 let lowestPlusRate = 0;
                                 !!itemsPlus[item.replaceAll(/\*/g, '')] && itemsPlus[item.replaceAll(/\*/g, '')].forEach(plus => {
