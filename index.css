@@ -4706,6 +4706,13 @@ input#searchMonsters {
     height: 100%;
 }
 
+.monsters-data > .results-alt {
+    display: block;
+    text-align: center;
+    padding: 30px;
+    height: auto;
+}
+
 .monsters-data > .search-monsters-result {
     border: solid 1px var(--color1);
     border-radius: 5px;
