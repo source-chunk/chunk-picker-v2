@@ -3456,11 +3456,11 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
     if (rules['All Shops']) {
         !!baseChunkData['items'] && Object.keys(baseChunkData['items']).filter(item => { return Object.values(baseChunkData['items'][item]).includes('shop') && !item.includes('^^') }).forEach(item => {
             !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return baseChunkData['items'][item][source] === 'shop' }).forEach(source => {
-                valids['Extra'][source + ': ~|' + item.replaceAll('*', '').replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~'] = 'All Shops';
+                valids['Extra'][source.replaceAll('#', '%2F').replaceAll('.', '%2E') + ': ~|' + item.replaceAll('*', '').replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~'] = 'All Shops';
                 if (!chunkInfo['challenges']['Extra']) {
                     chunkInfo['challenges']['Extra'] = {};
                 }
-                chunkInfo['challenges']['Extra'][source + ': ~|' + item.replaceAll('*', '').replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~'] = {
+                chunkInfo['challenges']['Extra'][source.replaceAll('#', '%2F').replaceAll('.', '%2E') + ': ~|' + item.replaceAll('*', '').replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~'] = {
                     'Category': ['All Shops'],
                     'Items': [item],
                     'ItemsDetails': [item],
