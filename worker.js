@@ -2107,7 +2107,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['items'][reward]) {
                         baseChunkData['items'][reward] = {};
                     }
-                    baseChunkData['items'][reward][challenge] = skill;
+                    baseChunkData['items'][reward][challenge] = 'secondary-' + skill;
                 });
             });
         });
