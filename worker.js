@@ -4927,7 +4927,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -4973,7 +4973,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5071,7 +5071,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5117,7 +5117,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5215,7 +5215,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5261,7 +5261,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5359,7 +5359,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5405,7 +5405,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5503,7 +5503,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5549,7 +5549,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5647,7 +5647,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5693,7 +5693,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5791,7 +5791,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5837,7 +5837,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5935,7 +5935,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -5981,7 +5981,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -6079,7 +6079,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -6162,7 +6162,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -6207,7 +6207,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });
@@ -6286,7 +6286,7 @@ var calcBIS = function() {
             tempEquipment.forEach(equip => {
                 !baseChunkData['items'].hasOwnProperty(equip) && (validWearable = false);
                 baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).forEach(skill => {
-                    if (!primarySkill[skill]) {
+                    if (!primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) {
                         validWearable = false;
                     }
                 });

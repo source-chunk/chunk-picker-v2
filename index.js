@@ -2638,7 +2638,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.4.23");
+        myWorker = new Worker("./worker.js?v=5.4.24");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2882,8 +2882,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.4.23");
-let myWorker2 = new Worker("./worker.js?v=5.4.23");
+let myWorker = new Worker("./worker.js?v=5.4.24");
+let myWorker2 = new Worker("./worker.js?v=5.4.24");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5212,7 +5212,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.4.23");
+    myWorker2 = new Worker("./worker.js?v=5.4.24");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
@@ -7820,12 +7820,14 @@ var showChunkHistory = function() {
     chunkHistoryModalOpen = true;
     $('#chunkhistory-data-inner').empty();
     let tempDate = new Date();
+    let passedChunks = {};
     let newChunkOrder = {};
     Object.keys(chunkOrder).sort(function(a, b) { return b - a }).forEach(time => {
-        if (!newChunkOrder.hasOwnProperty(chunkOrder[time])) {
+        if (!passedChunks.hasOwnProperty(chunkOrder[time])) {
             if (tempChunks['unlocked'].hasOwnProperty(chunkOrder[time])) {
                 newChunkOrder[chunkOrder[time]] = time;
             }
+            passedChunks[chunkOrder[time]] = true;
             tempDate.setTime(time);
             $('#chunkhistory-data-inner').append(`<div class="history-item ${chunkOrder[time] + '-chunk-history-item'} noscroll"><span class='noscroll item1'>${"<b class='noscroll'>" + tempDate.toLocaleDateString([], { year: 'numeric', month: 'long', day: '2-digit' }) + '</b> (' + tempDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) + ') '}</span><span class='noscroll item2'>${"<b class='noscroll'>" + ((chunkInfo['chunks'].hasOwnProperty(parseInt(chunkOrder[time])) && chunkInfo['chunks'][parseInt(chunkOrder[time])].hasOwnProperty('Nickname')) ? chunkInfo['chunks'][parseInt(chunkOrder[time])]['Nickname'] : 'Unknown chunk') + '</b>' + ' (' + chunkOrder[time] + ')'}</span></div>`);
         }
@@ -8689,10 +8691,10 @@ var setCookies = function() {
     if (onTestServer || testMode) {
         return;
     }
-    document.cookie = "ids=" + showChunkIds + ";Max-Age=63072000";
-    document.cookie = "highvis=" + highVisibilityMode + ";Max-Age=63072000";
-    document.cookie = "newinfo=" + chunkInfoOn + ";Max-Age=63072000";
-    document.cookie = "infocollapse=" + infoCollapse + ";Max-Age=63072000";
+    document.cookie = "ids=" + showChunkIds + ";Max-Age=63072000;SameSite=Strict";
+    document.cookie = "highvis=" + highVisibilityMode + ";Max-Age=63072000;SameSite=Strict";
+    document.cookie = "newinfo=" + chunkInfoOn + ";Max-Age=63072000;SameSite=Strict";
+    document.cookie = "infocollapse=" + infoCollapse + ";Max-Age=63072000;SameSite=Strict";
 }
 
 // Stores data in Firebase
