@@ -1986,42 +1986,44 @@ var calcChallenges = function(chunks, baseChunkData) {
         outputTasks = {};
         Object.keys(outputs).filter((output) => { return !backloggedSources['items'] || !backloggedSources['items'][output] }).forEach(output => {
             Object.keys(outputs[output]).filter((source) => { return outputs[output][source].split('-').length <= 1 || ((newValids.hasOwnProperty(outputs[output][source].split('-')[1])) || (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(source) && (!slayerTaskLockedItems.hasOwnProperty(output) || !slayerTaskLockedItems[output].hasOwnProperty(source.split('|')[1].toLowerCase())))) || (outputs[output][source].split('-')[1] === 'drop' && !(newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(source))) }).forEach(source => {
-                if (baseChunkData['items'].hasOwnProperty(output + '*')) {
-                    if (!baseChunkData['items'][output + '*']) {
-                        baseChunkData['items'][output + '*'] = {};
+                if (outputs[output][source] !== 'shop' || (source.includes('~|') && source.includes('|~') && (!backloggedSources['shops'] || !backloggedSources['shops'][source.split('~|')[1].split('|~')[0]]))) {
+                    if (baseChunkData['items'].hasOwnProperty(output + '*')) {
+                        if (!baseChunkData['items'][output + '*']) {
+                            baseChunkData['items'][output + '*'] = {};
+                        }
+                        baseChunkData['items'][output + '*'][source] = outputs[output][source];
+                        if (!outputTasks.hasOwnProperty(outputs[output][source].split('-')[1])) {
+                            outputTasks[outputs[output][source].split('-')[1]] = {};
+                        }
+                        outputTasks[outputs[output][source].split('-')[1]][source] = output + '*';
+                    } else if (baseChunkData['items'].hasOwnProperty(output + '*^')) {
+                        if (!baseChunkData['items'][output + '*^']) {
+                            baseChunkData['items'][output + '*^'] = {};
+                        }
+                        baseChunkData['items'][output + '*^'][source] = outputs[output][source];
+                        if (!outputTasks.hasOwnProperty(outputs[output][source].split('-')[1])) {
+                            outputTasks[outputs[output][source].split('-')[1]] = {};
+                        }
+                        outputTasks[outputs[output][source].split('-')[1]][source] = output + '*^';
+                    } else if (baseChunkData['items'].hasOwnProperty(output + '*^^')) {
+                        if (!baseChunkData['items'][output + '*^^']) {
+                            baseChunkData['items'][output + '*^^'] = {};
+                        }
+                        baseChunkData['items'][output + '*^^'][source] = outputs[output][source];
+                        if (!outputTasks.hasOwnProperty(outputs[output][source].split('-')[1])) {
+                            outputTasks[outputs[output][source].split('-')[1]] = {};
+                        }
+                        outputTasks[outputs[output][source].split('-')[1]][source] = output + '*^^';
+                    } else {
+                        if (!baseChunkData['items'][output]) {
+                            baseChunkData['items'][output] = {};
+                        }
+                        baseChunkData['items'][output][source] = outputs[output][source];
+                        if (!outputTasks.hasOwnProperty(outputs[output][source].split('-')[1])) {
+                            outputTasks[outputs[output][source].split('-')[1]] = {};
+                        }
+                        outputTasks[outputs[output][source].split('-')[1]][source] = output;
                     }
-                    baseChunkData['items'][output + '*'][source] = outputs[output][source];
-                    if (!outputTasks.hasOwnProperty(outputs[output][source].split('-')[1])) {
-                        outputTasks[outputs[output][source].split('-')[1]] = {};
-                    }
-                    outputTasks[outputs[output][source].split('-')[1]][source] = output + '*';
-                } else if (baseChunkData['items'].hasOwnProperty(output + '*^')) {
-                    if (!baseChunkData['items'][output + '*^']) {
-                        baseChunkData['items'][output + '*^'] = {};
-                    }
-                    baseChunkData['items'][output + '*^'][source] = outputs[output][source];
-                    if (!outputTasks.hasOwnProperty(outputs[output][source].split('-')[1])) {
-                        outputTasks[outputs[output][source].split('-')[1]] = {};
-                    }
-                    outputTasks[outputs[output][source].split('-')[1]][source] = output + '*^';
-                } else if (baseChunkData['items'].hasOwnProperty(output + '*^^')) {
-                    if (!baseChunkData['items'][output + '*^^']) {
-                        baseChunkData['items'][output + '*^^'] = {};
-                    }
-                    baseChunkData['items'][output + '*^^'][source] = outputs[output][source];
-                    if (!outputTasks.hasOwnProperty(outputs[output][source].split('-')[1])) {
-                        outputTasks[outputs[output][source].split('-')[1]] = {};
-                    }
-                    outputTasks[outputs[output][source].split('-')[1]][source] = output + '*^^';
-                } else {
-                    if (!baseChunkData['items'][output]) {
-                        baseChunkData['items'][output] = {};
-                    }
-                    baseChunkData['items'][output][source] = outputs[output][source];
-                    if (!outputTasks.hasOwnProperty(outputs[output][source].split('-')[1])) {
-                        outputTasks[outputs[output][source].split('-')[1]] = {};
-                    }
-                    outputTasks[outputs[output][source].split('-')[1]][source] = output;
                 }
             });
             if (baseChunkData['items'][output] === {}) {
@@ -3456,6 +3458,9 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
     if (rules['All Shops']) {
         !!baseChunkData['items'] && Object.keys(baseChunkData['items']).filter(item => { return Object.values(baseChunkData['items'][item]).includes('shop') && !item.includes('^^') }).forEach(item => {
             !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return baseChunkData['items'][item][source] === 'shop' }).forEach(source => {
+                if (source.includes('~|') && source.includes('|~')) {
+                    source = source.split('~|')[1].split('|~')[0];
+                }
                 valids['Extra'][source.replaceAll('#', '%2F').replaceAll('.', '%2E') + ': ~|' + item.replaceAll('*', '').replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~'] = 'All Shops';
                 if (!chunkInfo['challenges']['Extra']) {
                     chunkInfo['challenges']['Extra'] = {};

@@ -1513,6 +1513,8 @@ input#searchPlayerMaps {
     transition-duration: 0.4s;
     cursor: pointer;
     margin: 20px 10px;
+    border: 2px solid;
+    border-radius: 3px;
 }
 
 .setting .theme-button.light {
@@ -2703,6 +2705,10 @@ input#searchPlayerMaps {
     color: var(--colorLink);
 }
 
+.details-data .green, .details-data .green > a {
+    color: rgb(7, 173, 7);
+  }
+
 .alts-title {
     font-size: 36px;
     padding-left: 10px;
@@ -2880,13 +2886,13 @@ input#searchPlayerMaps {
 }
 
 .extraspace {
-    padding-left: 80px !important;
+    padding-left: 90px !important;
 }
 
 .reset-challenge-color {
     position: absolute;
     font-size: 14px;
-    margin-left: 60px;
+    margin-left: 70px;
     margin-top: 5px;
     cursor: pointer;
 }
@@ -2894,7 +2900,7 @@ input#searchPlayerMaps {
 .reset-default-sticker-color {
     position: absolute;
     font-size: 14px;
-    margin-left: 60px;
+    margin-left: 70px;
     margin-top: 5px;
     cursor: pointer;
 }
@@ -4308,7 +4314,8 @@ input#searchChunks {
 }
 
 .skill-icon-wrapper {
-    width: 25px;
+    width: 5%;
+    min-width: 25px;
     text-align: center;
 }
 
@@ -4329,14 +4336,41 @@ input#searchChunks {
     color: var(--colorLink);
 }
 
+.skill-button2 {
+    width: 28%;
+    font-size: 19px;
+    text-align: center;
+    border-left: solid 1px var(--color8);
+}
+
+.skill-button2.active > .tasks-button {
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.skill-button2.active > .tasks-button.yellow {
+    color: rgb(200, 200, 0);
+}
+
+.skill-button2.active > .tasks-button.green {
+    color: rgb(7, 173, 7);
+}
+
+.skill-button2.active > .tasks-button:hover {
+    color: var(--colorLink);
+}
+
 .icon-table-header {
     font-size: 18px;
     font-weight: bold;
-    width: 25px;
+    width: 5%;
+    min-width: 25px;
 }
 
 .text-table-header {
-    padding-left: 10px;
+    padding-left: 12px;
     margin-left: 10px;
     font-size: 18px;
     font-weight: bold;
@@ -4350,6 +4384,14 @@ input#searchChunks {
     font-weight: bold;
     text-align: center;
     width: 28.2%;
+}
+
+.button2-table-header {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 28.2%;
+    border-left: solid 1px var(--color8);
 }
 
 .clue-possible {
@@ -4483,8 +4525,27 @@ input#searchChunks {
     margin-bottom: 20px;
 }
 
+.methods-topbar {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    height: 9% !important;
+}
+
+.methods-topbar > .yellow {
+    color: rgb(200, 200, 0);
+}
+
+.methods-topbar > .green {
+    color: rgb(7, 173, 7);
+}
+
+.methods-topbar > .manual-close {
+    font-size: 16px;
+}
+
 .methods-data {
-    height: 93%;
+    height: 91%;
     overflow-y: auto;
     font-size: 24px;
 }
@@ -4498,6 +4559,14 @@ input#searchChunks {
     padding: 2px;
     padding-left: 5px;
     background-color: var(--color3);
+}
+
+.methods-data > .skill-method > input {
+    margin-right: 5px;
+}
+
+.methods-data > .skill-method > input:disabled {
+    cursor: not-allowed;
 }
 
 .x-num-input {

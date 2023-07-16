@@ -9,7 +9,7 @@
 
     gtag('config', 'G-8P0V9GSFJ2');
   </script>
-  <link rel="stylesheet" href="./index.css?v=5.4.25" />
+  <link rel="stylesheet" href="./index.css?v=5.5.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -40,12 +40,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=5.4.25' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=5.5.0' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=5.4.25"></script>
+  <script src="./index.js?v=5.5.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -283,7 +283,7 @@
   </div>
   <div id="myModal13" class="modal">
     <div class="modal-content noscroll">
-      <div class="topbar noscroll">
+      <div class="methods-topbar topbar noscroll">
         <i class="manual-close pic fas fa-times noscrollhard" onclick="closeMethods()"></i>
       </div>
       <div id="methods-data" class="methods-data noscroll"></div>
@@ -426,33 +426,24 @@
   <div id="myModal24" class="modal">
     <div class="modal-content noscroll">
       <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">1/11/2023 (5.2.0)</div>
+      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">7/16/2023 (5.5.0)</div>
       <div id="patch-notes-data" class="patch-notes-data noscroll">
         <h2 class='noscroll'>Major Changes & New Features</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>No major changes this week. <a class='link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>Let me know if you have any suggestions for a new feature!</a></li>
+          <li class='noscroll'>Added the All Tasks option, which creates a list of all intermediate skill tasks to be checked off. The list can be turned on in the Settings window, and can be used in the Activity Info window.</li>
+          <li class='noscroll'>Added a setting to prevent accidentally unlocking chunks. Turn this setting on, and now chunks can only be click-unlocked when holding the Shift key! If you find yourself accidentally unlocking chunks, this might be the setting for you.</li>
         </ul>
         <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Added subheaders on the Active Tasks List for each shop in the Must Buy All Shop Items rule (thanks Makker).</li>
-          <li class='noscroll'>Added an info icon to the Quest Steps window that opens the Details window for that step (thanks TheBusyBard).</li>
-          <li class='noscroll'>Added a "~light" tag to the Search Within My Chunks window to search for any light-source items.</li>
-          <li class='noscroll'>Added the option to hide/show your pin on the Change Pin screen.</li>
-          <li class='noscroll'>Increased the clickbox size of the checkbox and burger icon in the Active Task List to help with misclicking (thanks Irchonkyman).</li>
-          <li class='noscroll'>Fixed a bug with Jogre drop tables overwriting other droptables.</li>
-          <li class='noscroll'>Fixed a bug with task Priority for tasks of the same level.</li>
-          <li class='noscroll'>Fixed a bug with collapsed subheaders in the Active Tasks List not saving on task calculation.</li>
-          <li class='noscroll'>Fixed a bug with the Must Buy All Shop Items rule where shops with a period/full stop in their name caused errors.</li>
-          <li class='noscroll'>Fixed the Rewards Guardian at MTA linking to the wrong wiki page (thanks Edgeville Nun).</li>
-          <li class='noscroll'>Added additional backup sorting to the ChunkInfo Panel data.</li>
-          <li class='noscroll'>Fixed parts of the Hand in the Sand quest not requiring the Wizards' Guild chunk.</li>
-          <li class='noscroll'>Fixed Uglug's shop and the surface-level ogre coffins not being locked behind starting Zogre Flesh Eaters (thanks West).</li>
-          <li class='noscroll'>Fixed a bug where any notes saved with a backlogged task weren't shown when attempting to view them.</li>
-          <li class='noscroll'>Fixed a bug with Quest Steps not properly highlighting for certain quests with special characters.</li>
-          <li class='noscroll'>Fixed a bug with the Mourning's End Part I quest where the Mourners were listed in the wrong chunk (thanks TheBusyBard).</li>
-          <li class='noscroll'>Fixed an issue with special characters in task subheaders (thanks Cherry Mix).</li>
-          <li class='noscroll'>Fixed a bug with the Stronghold of Security Zombie droptable (thanks Cherry Mix).</li>
-          <li class='noscroll'>Fixed a bug with the Task Details window not showing missing chunks correctly for not-possible tasks.</li>
+          <li class='noscroll'>Changed the 5 recently rolled chunks panel to use the same data as the Chunk Roll History window, instead of its own separate data.</li>
+          <li class='noscroll'>Added Shooting Star spawn location in the Chunk Info panel.</li>
+          <li class='noscroll'>Added a green-highlight to primary sources of items in the Task Details window (thanks Cinni).</li>
+          <li class='noscroll'>Fixed a bug where the Backlog Source button would appear multiple times.</li>
+          <li class='noscroll'>Fixed a bug where task headers would become broken and hide tasks until the page was reloaded (thanks Shadefang & Cinni)</li>
+          <li class='noscroll'>Fixed a bug where some shops in the All Shops rule didn't have subheaders.</li>
+          <li class='noscroll'>Fixed a bug where the Forestry Shop couldn't be Backlog Sourced (thanks West).</li>
+          <li class='noscroll'>Fixed a visual bug with the theme buttons.</li>
+          <li class='noscroll'>Fixed a visual bug with the spacing of the color pickers in the Settings window.</li>
         </ul>
         <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack')">whitecatblack  <i class="fas fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
       </div>
