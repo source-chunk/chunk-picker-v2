@@ -2643,7 +2643,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.5.0");
+        myWorker = new Worker("./worker.js?v=5.5.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2887,8 +2887,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.5.0");
-let myWorker2 = new Worker("./worker.js?v=5.5.0");
+let myWorker = new Worker("./worker.js?v=5.5.1");
+let myWorker2 = new Worker("./worker.js?v=5.5.1");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5218,7 +5218,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.5.0");
+    myWorker2 = new Worker("./worker.js?v=5.5.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
@@ -6302,7 +6302,7 @@ var openHighest2 = function() {
                         skillTask = highestOverall[skill].replaceAll(/\{[0-9]+\}/g, '');
                         boost = highestOverall[skill].match(/\{[0-9]+\}/g)[0].match(/\d+/)[0];
                     }
-                    let completedNum = checkedAllTasks.hasOwnProperty(skill) ? Object.keys(checkedAllTasks[skill]).length : 0;
+                    let completedNum = checkedAllTasks.hasOwnProperty(skill) ? Math.min(Object.keys(checkedAllTasks[skill]).length, Object.keys(globalValids[skill]).length) : 0;
                     $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text'>${(testMode || !(viewOnly || inEntry || locked)) ? `<span class='noscroll edit-highest' onclick='openPassiveModal("${skill}")'><i class="noscroll fas fa-edit"></i></span>` : ''}${(!!skillTask ? '<b class="noscroll">[' + (boost > 0 ? (chunkInfo['challenges'][skill][skillTask]['Level'] - boost) + '] (+' + boost + ')' : chunkInfo['challenges'][skill][skillTask]['Level'] + ']') + '</b> ' : '') + (skillTask || 'None').replaceAll('~', '').replaceAll('|', '').replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span><span class='noscroll skill-button ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll methods-button' onclick='viewPrimaryMethodsOrTasks("${skill}", false)'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}${settings['allTasks'] ? `<span class='noscroll skill-button2 ${(!!globalValids[skill] && Object.keys(globalValids[skill]).length > 0 ? 'active' : '')}'>${!!globalValids[skill] && Object.keys(globalValids[skill]).length > 0 ? `<div class='noscroll tasks-button ${skill}-tasks-button ${Object.keys(globalValids[skill]).length > completedNum ? 'yellow' : 'green'}' onclick='viewPrimaryMethodsOrTasks("${skill}", true)'>Tasks <span class='noscroll'>(${completedNum}/${Object.keys(globalValids[skill]).length})</span></div></span>` : `<div class='noscroll'>None</div></span>`}` : ''}</div>`);
                 });
             } else if (combatStyle === 'Slayer') {
@@ -6891,7 +6891,7 @@ function decodeQueryParam(p) {
 
 // Opens the methods modal
 var viewPrimaryMethodsOrTasks = function(skill, showTasks) {
-    let completedNum = checkedAllTasks.hasOwnProperty(skill) ? Object.keys(checkedAllTasks[skill]).length : 0;
+    let completedNum = checkedAllTasks.hasOwnProperty(skill) ? Math.min(Object.keys(checkedAllTasks[skill]).length, Object.keys(globalValids[skill]).length) : 0;
     methodsModalOpen = true;
     $('.methods-data').empty();
     if (showTasks) {
@@ -6925,7 +6925,7 @@ var checkOffAllTask = function(skill, task) {
     } else {
         checkedAllTasks[skill][task] = true;
     }
-    let completedNum = checkedAllTasks.hasOwnProperty(skill) ? Object.keys(checkedAllTasks[skill]).length : 0;
+    let completedNum = checkedAllTasks.hasOwnProperty(skill) ? Math.min(Object.keys(checkedAllTasks[skill]).length, Object.keys(globalValids[skill]).length) : 0;
     $('.methods-topbar').html(`${skill} Tasks <span class='noscroll ${Object.keys(globalValids[skill]).length > completedNum ? 'yellow' : 'green'}'>(${completedNum}/${Object.keys(globalValids[skill]).length})</span><i class="manual-close pic fas fa-times noscrollhard" onclick="closeMethods()"></i>`);
     $(`.${skill}-tasks-button`).removeClass('yellow green').addClass(Object.keys(globalValids[skill]).length > completedNum ? 'yellow' : 'green');
     $(`.${skill}-tasks-button > span`).html(`(${completedNum}/${Object.keys(globalValids[skill]).length})`);
