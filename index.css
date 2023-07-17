@@ -3287,6 +3287,12 @@ input#searchManualAreas {
     height: 35%;
 }
 
+#myModal38 > .modal-content {
+    height: 15%;
+    width: 25%;
+    margin-top: 1.5%;
+}
+
 #myModal28 > .modal-content {
     max-width: 400px;
     height: 35%;
@@ -4233,6 +4239,65 @@ input#searchChunks {
 
 #submit-complete-button:hover {
     background-color: rgb(50, 175, 50);
+}
+
+.clipboard-title {
+    font-size: 3.9vh;
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 20%;
+    min-height: 20%;
+    line-height: 5.5vh;
+    text-align: center;
+    background-color: var(--color1);
+}
+
+.clipboard-data {
+    margin: 0px 15px;
+    font-size: 2vh;
+    display: flex;
+    align-items: center;
+    height: 80%;
+}
+
+#chunks-clipboard-button {
+    background-color: rgb(75, 200, 75);
+    width: 125px;
+    font-size: 2.2vh;
+    color: white;
+    float: right;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#chunks-clipboard-button:hover {
+    background-color: rgb(50, 175, 50);
+}
+
+#tasks-clipboard-button {
+    background-color: rgb(100, 125, 225);
+    width: 125px;
+    font-size: 2.2vh;
+    color: white;
+    float: right;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#tasks-clipboard-button:hover {
+    background-color: rgb(75, 100, 200);
 }
 
 .style-button {
