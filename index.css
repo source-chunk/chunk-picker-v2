@@ -4242,7 +4242,7 @@ input#searchChunks {
 }
 
 .clipboard-title {
-    font-size: 3.9vh;
+    font-size: min(2.9vw, 3.9vh);
     font-weight: bold;
     padding-top: 0px;
     max-height: 20%;
@@ -4258,6 +4258,7 @@ input#searchChunks {
     display: flex;
     align-items: center;
     height: 80%;
+    justify-content: center;
 }
 
 #chunks-clipboard-button {
