@@ -2230,13 +2230,13 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
     chosenFromCinematic = el[rand];
     elArr = shuffle(elArr);
     xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 17;
-    yCoord = 64 - (parseInt(elArr[elArr.length - 1]) % 256);
+    yCoord = 65 - (parseInt(elArr[elArr.length - 1]) % 256);
     $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
         for (let j = 0; j < elArr.length; j++) {
             let num = elArr[j];
             xCoord = Math.floor(parseInt(elArr[j]) / 256) - 17;
-            yCoord = 64 - (parseInt(elArr[j]) % 256);
+            yCoord = 65 - (parseInt(elArr[j]) % 256);
             $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
             if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
                 topNum = (-15.998 * ((i * elArr.length) + j)) + 'vh';
@@ -2244,7 +2244,7 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
         };
     };
     xCoord = Math.floor(parseInt(elArr[0]) / 256) - 17;
-    yCoord = 64 - (parseInt(elArr[0]) % 256);
+    yCoord = 65 - (parseInt(elArr[0]) % 256);
     let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
     $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     setTimeout(function() {
@@ -2273,13 +2273,13 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
         elArr = shuffle(elArr);
         let topNum2;
         xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 17;
-        yCoord = 64 - (parseInt(elArr[elArr.length - 1]) % 256);
+        yCoord = 65 - (parseInt(elArr[elArr.length - 1]) % 256);
         $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
         for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
             for (let j = 0; j < elArr.length; j++) {
                 let num = elArr[j];
                 xCoord = Math.floor(parseInt(elArr[j]) / 256) - 17;
-                yCoord = 64 - (parseInt(elArr[j]) % 256);
+                yCoord = 65 - (parseInt(elArr[j]) % 256);
                 $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
                 if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
                     topNum2 = (-15.998 * ((i * elArr.length) + j)) + 'vh';
@@ -2287,7 +2287,7 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
             };
         };
         xCoord = Math.floor(parseInt(elArr[0]) / 256) - 17;
-        yCoord = 64 - (parseInt(elArr[0]) % 256);
+        yCoord = 65 - (parseInt(elArr[0]) % 256);
         let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
         $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
         setTimeout(function() {
@@ -2652,7 +2652,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.5.6");
+        myWorker = new Worker("./worker.js?v=5.5.7");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2896,8 +2896,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.5.6");
-let myWorker2 = new Worker("./worker.js?v=5.5.6");
+let myWorker = new Worker("./worker.js?v=5.5.7");
+let myWorker2 = new Worker("./worker.js?v=5.5.7");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -4836,31 +4836,139 @@ var updateChunkInfo = function() {
         let connectStr = '';
         let clueStr = '';
         if (!!chunkInfo['chunks'][id]) {
+            let monstersTemp = {};
+            !!chunkInfo['chunks'][id]['Sections'] && Object.keys(chunkInfo['chunks'][id]['Sections']).forEach(section => {
+                !!chunkInfo['chunks'][id]['Sections'][section]['Monster'] && Object.keys(chunkInfo['chunks'][id]['Sections'][section]['Monster']).sort().forEach(name => {
+                    if (!monstersTemp[name]) {
+                        monstersTemp[name] = 0;
+                    }
+                    monstersTemp[name] += chunkInfo['chunks'][id]['Sections'][section]['Monster'][name];
+                });
+            });
             !!chunkInfo['chunks'][id]['Monster'] && Object.keys(chunkInfo['chunks'][id]['Monster']).sort().forEach(name => {
-                monsterStr += (chunkInfo['chunks'][id]['Monster'][name] === 1 ? '' : chunkInfo['chunks'][id]['Monster'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
+                if (!monstersTemp[name]) {
+                    monstersTemp[name] = 0;
+                }
+                monstersTemp[name] += chunkInfo['chunks'][id]['Monster'][name];
+            });
+            !!monstersTemp && Object.keys(monstersTemp).sort().forEach(name => {
+                monsterStr += (monstersTemp[name] === 1 ? '' : monstersTemp[name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             monsterStr.length > 0 && (monsterStr = monsterStr.substring(0, monsterStr.length - 2));
+
+            let npcsTemp = {};
+            !!chunkInfo['chunks'][id]['Sections'] && Object.keys(chunkInfo['chunks'][id]['Sections']).forEach(section => {
+                !!chunkInfo['chunks'][id]['Sections'][section]['NPC'] && Object.keys(chunkInfo['chunks'][id]['Sections'][section]['NPC']).sort().forEach(name => {
+                    if (!npcsTemp[name]) {
+                        npcsTemp[name] = 0;
+                    }
+                    npcsTemp[name] += chunkInfo['chunks'][id]['Sections'][section]['NPC'][name];
+                });
+            });
             !!chunkInfo['chunks'][id]['NPC'] && Object.keys(chunkInfo['chunks'][id]['NPC']).sort().forEach(name => {
-                npcStr += (chunkInfo['chunks'][id]['NPC'][name] === 1 ? '' : chunkInfo['chunks'][id]['NPC'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
+                if (!npcsTemp[name]) {
+                    npcsTemp[name] = 0;
+                }
+                npcsTemp[name] += chunkInfo['chunks'][id]['NPC'][name];
+            });
+            !!npcsTemp && Object.keys(npcsTemp).sort().forEach(name => {
+                npcStr += (npcsTemp[name] === 1 ? '' : npcsTemp[name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             npcStr.length > 0 && (npcStr = npcStr.substring(0, npcStr.length - 2));
+
+            let spawnsTemp = {};
+            !!chunkInfo['chunks'][id]['Sections'] && Object.keys(chunkInfo['chunks'][id]['Sections']).forEach(section => {
+                !!chunkInfo['chunks'][id]['Sections'][section]['Spawn'] && Object.keys(chunkInfo['chunks'][id]['Sections'][section]['Spawn']).sort().forEach(name => {
+                    if (!spawnsTemp[name]) {
+                        spawnsTemp[name] = 0;
+                    }
+                    spawnsTemp[name] += chunkInfo['chunks'][id]['Sections'][section]['Spawn'][name];
+                });
+            });
             !!chunkInfo['chunks'][id]['Spawn'] && Object.keys(chunkInfo['chunks'][id]['Spawn']).sort().forEach(name => {
-                spawnStr += (chunkInfo['chunks'][id]['Spawn'][name] === 1 ? '' : chunkInfo['chunks'][id]['Spawn'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
+                if (!spawnsTemp[name]) {
+                    spawnsTemp[name] = 0;
+                }
+                spawnsTemp[name] += chunkInfo['chunks'][id]['Spawn'][name];
+            });
+            !!spawnsTemp && Object.keys(spawnsTemp).sort().forEach(name => {
+                spawnStr += (spawnsTemp[name] === 1 ? '' : spawnsTemp[name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             spawnStr.length > 0 && (spawnStr = spawnStr.substring(0, spawnStr.length - 2));
+
+            let shopsTemp = {};
+            !!chunkInfo['chunks'][id]['Sections'] && Object.keys(chunkInfo['chunks'][id]['Sections']).forEach(section => {
+                !!chunkInfo['chunks'][id]['Sections'][section]['Shop'] && Object.keys(chunkInfo['chunks'][id]['Sections'][section]['Shop']).sort().forEach(name => {
+                    shopsTemp[name] = true;
+                });
+            });
             !!chunkInfo['chunks'][id]['Shop'] && Object.keys(chunkInfo['chunks'][id]['Shop']).sort().forEach(name => {
+                shopsTemp[name] = true;
+            });
+            !!shopsTemp && Object.keys(shopsTemp).sort().forEach(name => {
                 shopStr += `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             shopStr.length > 0 && (shopStr = shopStr.substring(0, shopStr.length - 2));
+
+            let objectsTemp = {};
+            !!chunkInfo['chunks'][id]['Sections'] && Object.keys(chunkInfo['chunks'][id]['Sections']).forEach(section => {
+                !!chunkInfo['chunks'][id]['Sections'][section]['Object'] && Object.keys(chunkInfo['chunks'][id]['Sections'][section]['Object']).sort().forEach(name => {
+                    if (!objectsTemp[name]) {
+                        objectsTemp[name] = 0;
+                    }
+                    objectsTemp[name] += chunkInfo['chunks'][id]['Sections'][section]['Object'][name];
+                });
+            });
             !!chunkInfo['chunks'][id]['Object'] && Object.keys(chunkInfo['chunks'][id]['Object']).sort().forEach(name => {
-                objectStr += (chunkInfo['chunks'][id]['Object'][name] === 1 ? '' : chunkInfo['chunks'][id]['Object'][name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
+                if (!objectsTemp[name]) {
+                    objectsTemp[name] = 0;
+                }
+                objectsTemp[name] += chunkInfo['chunks'][id]['Object'][name];
+            });
+            !!objectsTemp && Object.keys(objectsTemp).sort().forEach(name => {
+                objectStr += (objectsTemp[name] === 1 ? '' : objectsTemp[name] + ' ') + `<a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + '</a>, ';
             });
             objectStr.length > 0 && (objectStr = objectStr.substring(0, objectStr.length - 2));
+
+            let questsTemp = {};
+            !!chunkInfo['chunks'][id]['Sections'] && Object.keys(chunkInfo['chunks'][id]['Sections']).forEach(section => {
+                !!chunkInfo['chunks'][id]['Sections'][section]['Quest'] && Object.keys(chunkInfo['chunks'][id]['Sections'][section]['Quest']).sort().forEach(name => {
+                    if (questsTemp[name] !== 'first') {
+                        questsTemp[name] = chunkInfo['chunks'][id]['Sections'][section]['Quest'][name];
+                    }
+                });
+            });
             !!chunkInfo['chunks'][id]['Quest'] && Object.keys(chunkInfo['chunks'][id]['Quest']).sort().forEach(name => {
-                questStr += `<a class='${(chunkInfo['chunks'][id]['Quest'][name] === 'first' ? 'bold link' : 'link')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + `</a> <span onclick="getQuestInfo('` + name.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `')"><i class="quest-icon fas fa-info-circle"></i></span>, `;
+                if (questsTemp[name] !== 'first') {
+                    questsTemp[name] = chunkInfo['chunks'][id]['Quest'][name];
+                }
+            });
+            !!questsTemp && Object.keys(questsTemp).sort().forEach(name => {
+                questStr += `<a class='${(questsTemp[name] === 'first' ? 'bold link' : 'link')}' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+'))} target="_blank">` + name + `</a> <span onclick="getQuestInfo('` + name.replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q').replaceAll(/\'/g, '%2H') + `')"><i class="quest-icon fas fa-info-circle"></i></span>, `;
             });
             questStr.length > 0 && (questStr = questStr.substring(0, questStr.length - 2));
+
             let namesList = {};
+            let connectsTemp = {};
+            !!chunkInfo['chunks'][id]['Sections'] && Object.keys(chunkInfo['chunks'][id]['Sections']).forEach(section => {
+                !!chunkInfo['chunks'][id]['Sections'][section]['Connect'] && Object.keys(chunkInfo['chunks'][id]['Sections'][section]['Connect']).sort().forEach(name => {
+                    let realName = name;
+                    let passedName = name;
+                    if (!!chunkInfo['chunks'][name]['Name']) {
+                        realName = chunkInfo['chunks'][name]['Name'];
+                        passedName = chunkInfo['chunks'][name]['Name'];
+                    } else if (!!chunkInfo['chunks'][name]['Nickname']) {
+                        realName = chunkInfo['chunks'][name]['Nickname'] + '(' + name + ')';
+                    }
+                    if (namesList[realName] !== realName) {
+                        namesList[realName] = realName;
+                        connectsTemp[name] = {
+                            realName,
+                            passedName
+                        };
+                    }
+                });
+            });
             !!chunkInfo['chunks'][id]['Connect'] && Object.keys(chunkInfo['chunks'][id]['Connect']).sort().forEach(name => {
                 let realName = name;
                 let passedName = name;
@@ -4872,17 +4980,40 @@ var updateChunkInfo = function() {
                 }
                 if (namesList[realName] !== realName) {
                     namesList[realName] = realName;
-                    connectStr += `<span class='link' onclick=redirectPanelCanvas('${encodeURI(passedName.replaceAll(/\'/g, '%2H'))}')>${realName.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span>` + ', ';
+                    connectsTemp[name] = {
+                        realName,
+                        passedName
+                    };
                 }
+            });
+            !!connectsTemp && Object.keys(connectsTemp).sort().forEach(name => {
+                let { realName, passedName } = connectsTemp[name];
+                connectStr += `<span class='link' onclick=redirectPanelCanvas('${encodeURI(passedName.replaceAll(/\'/g, '%2H'))}')>${realName.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+')}</span>` + ', ';
             });
             connectStr.length > 0 && (connectStr = connectStr.substring(0, connectStr.length - 2));
             connectStr = connectStr.split(', ').sort((a, b) => {
                 return $(a).text() > $(b).text() ? 1 : -1;
             });
             connectStr = connectStr.join(', ');
-            !!chunkInfo['chunks'][id]['Clue'] && clueTiers.forEach(tier => {
-                if (chunkInfo['chunks'][id]['Clue'].hasOwnProperty(tier.toLowerCase())) {
-                    clueStr += chunkInfo['chunks'][id]['Clue'][tier.toLowerCase()] + ' ' + tier + ', ';
+
+            let cluesTemp = {};
+            !!chunkInfo['chunks'][id]['Sections'] && Object.keys(chunkInfo['chunks'][id]['Sections']).forEach(section => {
+                !!chunkInfo['chunks'][id]['Sections'][section]['Clue'] && Object.keys(chunkInfo['chunks'][id]['Sections'][section]['Clue']).sort().forEach(name => {
+                    if (!cluesTemp[name]) {
+                        cluesTemp[name] = 0;
+                    }
+                    cluesTemp[name] += chunkInfo['chunks'][id]['Sections'][section]['Clue'][name];
+                });
+            });
+            !!chunkInfo['chunks'][id]['Clue'] && Object.keys(chunkInfo['chunks'][id]['Clue']).sort().forEach(name => {
+                if (!cluesTemp[name]) {
+                    cluesTemp[name] = 0;
+                }
+                cluesTemp[name] += chunkInfo['chunks'][id]['Clue'][name];
+            });
+            !!cluesTemp && clueTiers.forEach(tier => {
+                if (cluesTemp.hasOwnProperty(tier.toLowerCase())) {
+                    clueStr += cluesTemp[tier.toLowerCase()] + ' ' + tier + ', ';
                 }
             });
             clueStr.length > 0 && (clueStr = clueStr.substring(0, clueStr.length - 2));
@@ -5232,7 +5363,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.5.6");
+    myWorker2 = new Worker("./worker.js?v=5.5.7");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
