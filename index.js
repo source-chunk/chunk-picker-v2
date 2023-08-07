@@ -32,8 +32,8 @@ var zoom = 350;                                                                 
 var fontZoom = 16;                                                              // Font size zoom
 var labelZoom = 96;                                                             // Selected label font size zoom
 var scale = 30;                                                                 // Amount zoomed every 'zoom' action
-var fullSize = 1118;                                                            // Amount of chunks present
-var rowSize = 43;                                                               // Amount of chunks per row
+var fullSize = 1196;                                                            // Amount of chunks present
+var rowSize = 46;                                                               // Amount of chunks per row
 var scrollLeft = 0;                                                             // Amount the board is scrolled left offscreen
 var prevScrollLeft = 0;                                                         // Amount the board was previously scrolled left offscreen
 var scrollTop = 0;                                                              // Amount the board is scrolled up offscreen
@@ -44,13 +44,13 @@ var chunkInfo = {};                                                             
 var infoLockedId = -1;                                                          // Id of chunk locked for info
 var userName = '';                                                              // Runescape Username of user
 
-var ratio = 4992 / 8256;                                                        // Image ratio
+var ratio = 4992 / 8832;                                                        // Image ratio
 var movedNum = 0;                                                               // Amount of times mouse is moved while dragging
 var selectedNum = 1;                                                            // Current index of selected chunks
 var unlockedChunks = 0;                                                         // Number of unlocked chunks
 var selectedChunks = 0;                                                         // Number of selected chunks
-var startingIndex = 4672;                                                       // Index to start chunk numbering at (based on ChunkLite numbers)
-var skip = 213;                                                                 // Number of indices to skip between columns for chunk numbering
+var startingIndex = 4160;                                                       // Index to start chunk numbering at (based on ChunkLite numbers)
+var skip = 210;                                                                 // Number of indices to skip between columns for chunk numbering
 
 var prevValueMid = '';                                                          // Previous value of map id at login
 var prevValuePinNew = '';                                                       // Previous value of pin at signup
@@ -1269,6 +1269,7 @@ let patreonMaps = {
     'pri': true, // invalidCards
     'mory': true, // Pearion
     'rob': true, // Oponn
+    'ears': true, // ChunkyEars
 };
 
 let roll5Mid = 'rfr'; // Semanari
@@ -1307,7 +1308,7 @@ var mouseDown = false;
 var totalZoom = .5;
 var zoomAmount = .15;
 var maxZoom = 3.5;
-var minZoom = .225;
+var minZoom = .2;
 var movedNum = 0;
 var futureMoveX = 0;
 var futureMoveY = 0;
@@ -2652,7 +2653,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.5.8");
+        myWorker = new Worker("./worker.js?v=5.5.8.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2896,8 +2897,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.5.8");
-let myWorker2 = new Worker("./worker.js?v=5.5.8");
+let myWorker = new Worker("./worker.js?v=5.5.8.1");
+let myWorker2 = new Worker("./worker.js?v=5.5.8.1");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5363,7 +5364,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.5.8");
+    myWorker2 = new Worker("./worker.js?v=5.5.8.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
