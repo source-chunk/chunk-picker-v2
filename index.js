@@ -1374,7 +1374,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png";
+mapImg.src = "osrs_world_map.png?v=5.5.10";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2230,13 +2230,13 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
     let tempVar = false;
     chosenFromCinematic = el[rand];
     elArr = shuffle(elArr);
-    xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 17;
+    xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 15;
     yCoord = 65 - (parseInt(elArr[elArr.length - 1]) % 256);
     $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
         for (let j = 0; j < elArr.length; j++) {
             let num = elArr[j];
-            xCoord = Math.floor(parseInt(elArr[j]) / 256) - 17;
+            xCoord = Math.floor(parseInt(elArr[j]) / 256) - 15;
             yCoord = 65 - (parseInt(elArr[j]) % 256);
             $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
             if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
@@ -2244,7 +2244,7 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
             }
         };
     };
-    xCoord = Math.floor(parseInt(elArr[0]) / 256) - 17;
+    xCoord = Math.floor(parseInt(elArr[0]) / 256) - 15;
     yCoord = 65 - (parseInt(elArr[0]) % 256);
     let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
     $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
@@ -2273,13 +2273,13 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
         chosenFromCinematic = el[rand2];
         elArr = shuffle(elArr);
         let topNum2;
-        xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 17;
+        xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 15;
         yCoord = 65 - (parseInt(elArr[elArr.length - 1]) % 256);
         $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
         for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
             for (let j = 0; j < elArr.length; j++) {
                 let num = elArr[j];
-                xCoord = Math.floor(parseInt(elArr[j]) / 256) - 17;
+                xCoord = Math.floor(parseInt(elArr[j]) / 256) - 15;
                 yCoord = 65 - (parseInt(elArr[j]) % 256);
                 $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
                 if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
@@ -2287,7 +2287,7 @@ var openRollChunkCanvas = function(el, rand, sNum, rand2, sNum2, isUnpick) {
                 }
             };
         };
-        xCoord = Math.floor(parseInt(elArr[0]) / 256) - 17;
+        xCoord = Math.floor(parseInt(elArr[0]) / 256) - 15;
         yCoord = 65 - (parseInt(elArr[0]) % 256);
         let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
         $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
@@ -2653,7 +2653,7 @@ var calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.5.9");
+        myWorker = new Worker("./worker.js?v=5.5.10");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2897,8 +2897,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.5.9");
-let myWorker2 = new Worker("./worker.js?v=5.5.9");
+let myWorker = new Worker("./worker.js?v=5.5.10");
+let myWorker2 = new Worker("./worker.js?v=5.5.10");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5364,7 +5364,7 @@ var calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.5.9");
+    myWorker2 = new Worker("./worker.js?v=5.5.10");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
