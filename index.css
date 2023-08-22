@@ -2316,6 +2316,8 @@ input#searchPlayerMaps {
 
 #myModal13 > .modal-content {
     height: 55%;
+    width: 35%;
+    margin-top: -2.5%;
 }
 
 #myModal14 > .modal-content {
@@ -4622,9 +4624,15 @@ input#searchChunks {
     border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 10px;
-    padding: 2px;
-    padding-left: 5px;
+    padding: 2px 30px 2px 5px;
     background-color: var(--color3);
+    position: relative;
+}
+
+.methods-data > .skill-method .details-info {
+    position: absolute;
+    right: 0;
+    margin: 5px;
 }
 
 .methods-data > .skill-method > input {
