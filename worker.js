@@ -255,12 +255,11 @@ onmessage = function(e) {
         dropTablesGlobal = {};
 
         chunks = getAllChunkAreas(chunks);
-        postMessage('5%');
         baseChunkData = gatherChunksInfo(chunks);
-        postMessage('10%');
+        postMessage('5%');
         globalValids = calcChallenges(chunks, baseChunkData);
         baseChunkData = tempChunkData;
-        postMessage('90%');
+        postMessage('95%');
         calcBIS();
         postMessage('100%');
         //console.log(globalValids);
@@ -758,7 +757,7 @@ var calcChallenges = function(chunks, baseChunkData) {
 
     do {
         i++;
-        postMessage(((i + 1) * 7) + '%');
+        postMessage(((i + 1) * 6) + '%');
         !!tempItemSkill && Object.keys(tempItemSkill).forEach(skill => {
             let skillMax = Math.max(...Object.values(newValids[skill]));
             !!tempItemSkill[skill] && Object.keys(tempItemSkill[skill]).forEach(item => {
@@ -2232,7 +2231,7 @@ var calcChallenges = function(chunks, baseChunkData) {
         });
         globalValids = {...newValids};
         //console.log(i);
-    } while ((Object.keys(diff(valids, newValids) || {}).length !== 0 && i < 10) || i < 3);
+    } while ((Object.keys(diff(valids, newValids) || {}).length !== 0 && i < 15) || i < 3);
     valids = newValids;
     //console.log(baseChunkData);
     tempChunkData = baseChunkData;
