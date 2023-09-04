@@ -277,7 +277,7 @@ onmessage = function(e) {
 }
 
 // replaceAll helper
-function escapeRegExp(string) {
+let escapeRegExp = function(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
@@ -287,7 +287,7 @@ String.prototype.replaceAll = function(match, replacement) {
 }
 
 // Combines JSONs
-var combineJSONs = function(a, b) {
+let combineJSONs = function(a, b) {
     let temp = {};
     !!a && Object.keys(a).forEach(sub => {
         if (typeof a[sub] === 'object') {
@@ -313,7 +313,7 @@ var combineJSONs = function(a, b) {
 }
 
 // Returns level from input xp
-var getLevelForXp = function(xp) {
+let getLevelForXp = function(xp) {
     let level = 1
     while (xp >= xpTable[level + 1]) {
         level++;
@@ -322,7 +322,7 @@ var getLevelForXp = function(xp) {
 }
 
 // Calculates all the possible challenges
-var calcChallenges = function(chunks, baseChunkData) {
+let calcChallenges = function(chunks, baseChunkData) {
     let valids = {};
     let outputs = {};
     let outputObjects = {};
@@ -789,7 +789,9 @@ var calcChallenges = function(chunks, baseChunkData) {
         let leftoversCount = 0;
         let savedValids = JSON.parse(JSON.stringify(newValids));
         let passedByTasks = {};
-        while ((leftoversCount < 10 && Object.keys(diff(newValids, savedValids) || {}).length !== 0) || leftoversCount < 1) {
+        let tasksModified;
+        while ((leftoversCount < 10 && Object.keys(diff(newValids, savedValids) || {}).length !== 0) || leftoversCount < 1 || tasksModified) {
+            tasksModified = false;
             savedValids = JSON.parse(JSON.stringify(newValids));
             Object.keys(savedValids).filter((skill) => { return skill !== 'BiS' }).forEach(skill => {
                 Object.keys(savedValids[skill]).sort(function(a, b) { return skill === 'Diary' ? ((diaryTierOrder.indexOf(a.split('|')[1].split('%2F')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('%2F')[1]) === 0) ? (chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(a) && chunkInfo['challenges'][skill].hasOwnProperty(b) && chunkInfo['challenges'][skill][a].hasOwnProperty('ManualShow') !== chunkInfo['challenges'][skill][b].hasOwnProperty('ManualShow') ? chunkInfo['challenges'][skill][a].hasOwnProperty('ManualShow') - chunkInfo['challenges'][skill][b].hasOwnProperty('ManualShow') : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true })) : (diaryTierOrder.indexOf(a.split('|')[1].split('%2F')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('%2F')[1]))) : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) }).forEach(challenge => {
@@ -836,6 +838,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                             nonValids[challenge] = [...nonValids[challenge], 'Passive'];
                             !!newValids[skill] && delete newValids[skill][challenge];
                             !!valids[skill] && delete valids[skill][challenge];
+                            tasksModified = true;
                         }
                     }
                     if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
@@ -881,6 +884,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                 nonValids[challenge] = [...nonValids[challenge], subSkill];
                                 !!newValids[skill] && delete newValids[skill][challenge];
                                 !!valids[skill] && delete valids[skill][challenge];
+                                tasksModified = true;
                             }
                         });
                         if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
@@ -904,6 +908,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                         !!newValids[skill] && delete newValids[skill][challenge];
                                         !!valids[skill] && delete valids[skill][challenge];
                                         !!savedValids[skill] && delete savedValids[skill][challenge];
+                                        tasksModified = true;
                                         if ((!savedValids.hasOwnProperty(skill) || !savedValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                                             return;
                                         }
@@ -927,6 +932,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                             !!newValids[skill] && delete newValids[skill][challenge];
                                             !!valids[skill] && delete valids[skill][challenge];
                                             !!savedValids[skill] && delete savedValids[skill][challenge];
+                                            tasksModified = true;
                                             if ((!savedValids.hasOwnProperty(skill) || !savedValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                                                 return;
                                             }
@@ -963,6 +969,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                             !!newValids[skill] && delete newValids[skill][challenge];
                                             !!valids[skill] && delete valids[skill][challenge];
                                             !!savedValids[skill] && delete savedValids[skill][challenge];
+                                            tasksModified = true;
                                             if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                                                 return;
                                             }
@@ -986,6 +993,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                                         !!newValids[skill] && delete newValids[skill][challenge];
                                         !!valids[skill] && delete valids[skill][challenge];
                                         !!savedValids[skill] && delete savedValids[skill][challenge];
+                                        tasksModified = true;
                                         if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                                             return;
                                         }
@@ -1070,6 +1078,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         nonValids[extraSets[newValids[skill][challenge]['Set']]] = [...nonValids[extraSets[newValids[skill][challenge]['Set']]], 'extraSets'];
                         !!newValids[skill] && delete newValids[skill][extraSets[newValids[skill][challenge]['Set']]];
                         !!valids[skill] && delete valids[skill][extraSets[newValids[skill][challenge]['Set']]];
+                        tasksModified = true;
                         extraSets[chunkInfo['challenges'][skill][challenge]['Set']] = challenge;
                     } else if (!chunkInfo['challenges'][skill][challenge]['ManualValid']) {
                         if (!nonValids.hasOwnProperty(challenge)) {
@@ -1078,6 +1087,7 @@ var calcChallenges = function(chunks, baseChunkData) {
                         nonValids[challenge] = [...nonValids[challenge], 'extraSets'];
                         !!newValids[skill] && delete newValids[skill][challenge];
                         !!valids[skill] && delete valids[skill][challenge];
+                        tasksModified = true;
                     }
                     if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                         return;
@@ -2249,6 +2259,9 @@ let diff = function(obj1, obj2, isInner) {
     if (Object.is(obj1, obj2)) {
         return undefined;
     }
+    if (!obj1 || typeof obj1 !== 'object') {
+        return obj1;
+    }
     if (!obj2 || typeof obj2 !== 'object') {
         return obj2;
     }
@@ -2286,13 +2299,13 @@ let clearEmpties = function(obj) {
 }
 
 // Checks if every source of an item is from a shop
-var onlyShop = function(sources) {
+let onlyShop = function(sources) {
     let allShop = !(Object.keys(sources).filter((source) => { return sources[source] !== 'shop' }).length > 0);
     return allShop;
 }
 
 // Does the work to calculate all the possible challenges
-var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
+let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
     let items = {...baseChunkData['items']};
     let objects = {...baseChunkData['objects']};
     let monsters = {...baseChunkData['monsters']};
@@ -3481,7 +3494,7 @@ var calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
 }
 
 // Checks if skill has primary training
-var checkPrimaryMethod = function(skill, valids, baseChunkData) {
+let checkPrimaryMethod = function(skill, valids, baseChunkData) {
     let valid = false;
     let tempValid = false;
     !!universalPrimary[skill] && universalPrimary[skill].forEach(line => {
@@ -3587,7 +3600,7 @@ var checkPrimaryMethod = function(skill, valids, baseChunkData) {
 }
 
 // Calcs the BIS gear
-var calcBIS = function() {
+let calcBIS = function() {
     let combatStyles = ['Melee', 'Ranged', 'Magic'];
     let primarySkill = {};
     skillNames.forEach(skill => {
@@ -6484,7 +6497,7 @@ var calcBIS = function() {
 }
 
 // Calcs the current challenges to be displayed
-var calcCurrentChallenges2 = function() {
+let calcCurrentChallenges2 = function() {
     let tempChallengeArr = {};
     let highestChallenge = {};
     let highestChallengeLevelArr = {};
@@ -6783,23 +6796,23 @@ var calcCurrentChallenges2 = function() {
 }
 
 // Finds gcd
-var gcd = function(a, b) {
+let gcd = function(a, b) {
     if (b < 0.0000001) return a;
 
     return gcd(b, Math.floor(a % b));
 }
 
 // Finds even fraction
-var findFraction = function(fraction, isRoundedDenominator) {
+let findFraction = function(fraction, isRoundedDenominator) {
     if (isNaN(fraction)) {
         return fraction;
     } else {
-        var len = fraction.toString().length - 2;
+        let len = fraction.toString().length - 2;
 
-        var denominator = Math.pow(10, len);
-        var numerator = fraction * denominator;
+        let denominator = Math.pow(10, len);
+        let numerator = fraction * denominator;
 
-        var divisor = gcd(numerator, denominator);
+        let divisor = gcd(numerator, denominator);
 
         numerator /= divisor;
         denominator /= divisor;
@@ -6812,7 +6825,7 @@ var findFraction = function(fraction, isRoundedDenominator) {
 }
 
 // Gathers item/object info on all chunk ids passed in
-var gatherChunksInfo = function(chunks) {
+let gatherChunksInfo = function(chunks) {
     let items = {};
     let objects = {};
     let monsters = {};
@@ -7249,7 +7262,7 @@ var gatherChunksInfo = function(chunks) {
 }
 
 // Gets all possible chunk areas
-var getAllChunkAreas = function(chunks) {
+let getAllChunkAreas = function(chunks) {
     let i = 0;
     let temp = {};
     let temp2 = {};
