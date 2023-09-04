@@ -790,7 +790,7 @@ let calcChallenges = function(chunks, baseChunkData) {
         let savedValids = JSON.parse(JSON.stringify(newValids));
         let passedByTasks = {};
         let tasksModified;
-        while ((leftoversCount < 10 && Object.keys(diff(newValids, savedValids) || {}).length !== 0) || leftoversCount < 1 || tasksModified) {
+        while ((leftoversCount < 10 && (Object.keys(diff(newValids, savedValids) || {}).length !== 0 || tasksModified)) || leftoversCount < 1) {
             tasksModified = false;
             savedValids = JSON.parse(JSON.stringify(newValids));
             Object.keys(savedValids).filter((skill) => { return skill !== 'BiS' }).forEach(skill => {
@@ -1078,7 +1078,6 @@ let calcChallenges = function(chunks, baseChunkData) {
                         nonValids[extraSets[newValids[skill][challenge]['Set']]] = [...nonValids[extraSets[newValids[skill][challenge]['Set']]], 'extraSets'];
                         !!newValids[skill] && delete newValids[skill][extraSets[newValids[skill][challenge]['Set']]];
                         !!valids[skill] && delete valids[skill][extraSets[newValids[skill][challenge]['Set']]];
-                        tasksModified = true;
                         extraSets[chunkInfo['challenges'][skill][challenge]['Set']] = challenge;
                     } else if (!chunkInfo['challenges'][skill][challenge]['ManualValid']) {
                         if (!nonValids.hasOwnProperty(challenge)) {
@@ -1087,7 +1086,6 @@ let calcChallenges = function(chunks, baseChunkData) {
                         nonValids[challenge] = [...nonValids[challenge], 'extraSets'];
                         !!newValids[skill] && delete newValids[skill][challenge];
                         !!valids[skill] && delete valids[skill][challenge];
-                        tasksModified = true;
                     }
                     if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                         return;
