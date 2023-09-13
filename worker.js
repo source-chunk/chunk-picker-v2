@@ -6782,6 +6782,7 @@ let calcCurrentChallenges2 = function() {
                     stillValid = false;
                 }
             });
+            chunkInfo['challenges'][skill][challenge]['Items'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Items']).filter(item => !baseChunkData['items'][item.replaceAll(/\*/g, '')]).length > 0 && (stillValid = false);
             if (stillValid) {
                 if (!globalValids.hasOwnProperty(skill)) {
                     globalValids[skill] = {};
