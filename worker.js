@@ -281,6 +281,16 @@ let escapeRegExp = function(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// Encode string
+let encodeRFC5987ValueChars = function(str) {
+    return (encodeURIComponent(str).replace(/['()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`,).replace(/%(7C|60|5E)/g, (str, hex) => String.fromCharCode(parseInt(hex, 16)),));
+}
+
+// Decode string
+let decodeQueryParam = function(p) {
+    return decodeURIComponent(p.replace(/\+/g, " "));
+}
+
 // Replaces all instances of match within string with replacement
 String.prototype.replaceAll = function(match, replacement) {
     return this.split(match).join(replacement);
@@ -2033,7 +2043,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     }
                 }
             });
-            if (baseChunkData['items'][output] === {}) {
+            if (!baseChunkData['items'][output] || Object.keys(baseChunkData['items'][output]).length === 0) {
                 delete baseChunkData['items'][output];
             }
         });
@@ -2048,7 +2058,7 @@ let calcChallenges = function(chunks, baseChunkData) {
         Object.keys(baseChunkData['items']).forEach(item => {
             Object.keys(baseChunkData['items'][item]).filter((source) => { return baseChunkData['items'][item][source].split('-').length > 1 && [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'].includes(baseChunkData['items'][item][source].split('-')[1]) && (!newValids.hasOwnProperty(baseChunkData['items'][item][source].split('-')[1]) || !newValids[baseChunkData['items'][item][source].split('-')[1]].hasOwnProperty(source)) && baseChunkData['items'][item][source].split('-')[1] !== 'Nonskill' && source !== 'Manually Added*' }).forEach(source => {
                 delete baseChunkData['items'][item][source];
-                if (baseChunkData['items'][item] === {}) {
+                if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
                     delete baseChunkData['items'][item];
                 }
             });
@@ -6736,7 +6746,7 @@ let calcCurrentChallenges2 = function() {
                         if (!chunkInfo['challenges'][skill][challenge].hasOwnProperty((bestBoostSource.includes('~') ? (bestBoostSource.split('~')[1].charAt(0).toUpperCase() + bestBoostSource.split('~')[1].slice(1)) : 'Items') + 'Details')) {
                             chunkInfo['challenges'][skill][challenge][(bestBoostSource.includes('~') ? (bestBoostSource.split('~')[1].charAt(0).toUpperCase() + bestBoostSource.split('~')[1].slice(1)) : 'Items') + 'Details'] = [];
                         }
-                        chunkInfo['challenges'][skill][challenge][(bestBoostSource.includes('~') ? (bestBoostSource.split('~')[1].charAt(0).toUpperCase() + bestBoostSource.split('~')[1].slice(1)) : 'Items') + 'Details'].push(bestBoostSource.replaceAll(/\*/g, ''));
+                        chunkInfo['challenges'][skill][challenge][(bestBoostSource.includes('~') ? (bestBoostSource.split('~')[1].charAt(0).toUpperCase() + bestBoostSource.split('~')[1].slice(1)) : 'Items') + 'Details'].push(bestBoostSource.replaceAll(/\*/g, '').replaceAll(/\%2F/g, '#'));
                         tempChallengeArr[skill] = challenge + `{${(bestBoost + (ownsCrystalSaw ? 3 : 0))}}`;
                     }
                     highestOverall[skill] = challenge + `{${(bestBoost + (ownsCrystalSaw ? 3 : 0))}}`;

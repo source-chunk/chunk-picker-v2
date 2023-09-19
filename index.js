@@ -1337,7 +1337,7 @@ let lastRegain = 0;
 let hintTexts = [
     "Join the ClanChat: 'OneChunkClan'!",
     "Join the Chunk Chat Discord!",
-    "Celebrating over 3 years of Chunk Picking!",
+    "Celebrating over 4 years of Chunk Picking!",
     "Check out our RS3 Sister-site!",
     "Now with Custom Themes!"
 ];
@@ -1373,7 +1373,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=5.5.16";
+mapImg.src = "osrs_world_map.png?v=5.5.17";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2573,23 +2573,21 @@ let roll2Canvas = function() {
             return;
         }
         rand = Math.floor(Math.random() * el.length);
-        if (el !== []) {
-            if (!tempChunks['selected'].hasOwnProperty(el[rand]) || isNaN(el[rand])) {
-                Object.keys(tempChunks['selected']).filter(chunk => { return isNaN(chunk) }).forEach(chunk => {
-                    delete tempChunks['selected'][chunk];
-                });
-                i--;
-            } else {
-                rands[i] = el[rand];
-                sNums[i] = savedTempSelectedChunks.indexOf(el[rand]) + 1;
-                delete tempChunks['selected'][el[rand]];
-                if (!tempChunks['potential']) {
-                    tempChunks['potential'] = {};
-                }
-                tempSelectedChunks.splice(tempSelectedChunks.indexOf(el[rand]), 1);
-                tempChunks['potential'][el[rand]] = el[rand];
-                recentChunks[el[rand]] = el[rand];
+        if (!tempChunks['selected'].hasOwnProperty(el[rand]) || isNaN(el[rand])) {
+            Object.keys(tempChunks['selected']).filter(chunk => { return isNaN(chunk) }).forEach(chunk => {
+                delete tempChunks['selected'][chunk];
+            });
+            i--;
+        } else {
+            rands[i] = el[rand];
+            sNums[i] = savedTempSelectedChunks.indexOf(el[rand]) + 1;
+            delete tempChunks['selected'][el[rand]];
+            if (!tempChunks['potential']) {
+                tempChunks['potential'] = {};
             }
+            tempSelectedChunks.splice(tempSelectedChunks.indexOf(el[rand]), 1);
+            tempChunks['potential'][el[rand]] = el[rand];
+            recentChunks[el[rand]] = el[rand];
         }
     }
     if (settings['cinematicRoll'] && !onMobile && mid !== roll5Mid && numToRoll === 2) {
@@ -2652,7 +2650,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.5.16");
+        myWorker = new Worker("./worker.js?v=5.5.17");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2896,8 +2894,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.5.16");
-let myWorker2 = new Worker("./worker.js?v=5.5.16");
+let myWorker = new Worker("./worker.js?v=5.5.17");
+let myWorker2 = new Worker("./worker.js?v=5.5.17");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5363,7 +5361,7 @@ let calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.5.16");
+    myWorker2 = new Worker("./worker.js?v=5.5.17");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
@@ -7029,11 +7027,13 @@ let changeCurrentStickerColor = function() {
     }
 }
 
-function encodeRFC5987ValueChars(str) {
+// Encode string
+let encodeRFC5987ValueChars = function(str) {
     return (encodeURIComponent(str).replace(/['()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`,).replace(/%(7C|60|5E)/g, (str, hex) => String.fromCharCode(parseInt(hex, 16)),));
 }
 
-function decodeQueryParam(p) {
+// Decode string
+let decodeQueryParam = function(p) {
     return decodeURIComponent(p.replace(/\+/g, " "));
 }
 
@@ -7509,6 +7509,9 @@ let showDetails = function(challenge, skill, type) {
             let written = false;
             $('#details-data').append(`<span class="details-subtitle noscroll"><u class="noscroll"><b class="noscroll">${type}</b></u></span><br />`);
             if ((!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',').replaceAll(/\%2J/g, '+')][key] || chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',').replaceAll(/\%2J/g, '+')][key].length < 1) && !!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',').replaceAll(/\%2J/g, '+')][key.split('Details')[0]]) {
+                if (!chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',').replaceAll(/\%2J/g, '+')][key]) {
+                    chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',').replaceAll(/\%2J/g, '+')][key] = [];
+                }
                 chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',').replaceAll(/\%2J/g, '+')][key.split('Details')[0]].forEach(typeEl => {
                     chunkInfo['challenges'][skill][challenge.replaceAll(/\-2H/g, "'").replaceAll(/\%2H/g, "'").replaceAll(/\%2Q/g, '!').replaceAll(/\%2I/g, ',').replaceAll(/\%2J/g, '+')][key].push(typeEl);
                 });
@@ -8300,14 +8303,14 @@ let setupBacklogArr = function() {
 // Removes a challenge from the backlog
 let unbacklogChallenge = function(challenge, skill) {
     delete backlog[skill][challenge];
-    if (backlog[skill] === {}) {
+    if (Object.keys(backlog[skill]).length === 0) {
         !!backlog[skill] && delete backlog[skill];
     }
     if (skill !== 'Extra') {
         if (!!chunkInfo['challenges'][skill] && !!chunkInfo['challenges'][skill][challenge] && !!chunkInfo['challenges'][skill][challenge]['Skills']) {
             Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
                 !!backlog[subSkill] && delete backlog[subSkill][challenge];
-                if (!!backlog[subSkill] && backlog[subSkill] === {}) {
+                if (!!backlog[subSkill] && Object.keys(backlog[subSkill]).length === 0) {
                     delete backlog[subSkill];
                 }
             });
@@ -8332,14 +8335,14 @@ let unbacklogChallenge = function(challenge, skill) {
 // Removes a challenge from completed
 let uncompleteChallenge = function(challenge, skill) {
     delete completedChallenges[skill][challenge];
-    if (completedChallenges[skill] === {}) {
+    if (Object.keys(completedChallenges[skill]).length === 0) {
         delete completedChallenges[skill];
     }
     if (skill !== 'Extra' && skill !== 'BiS') {
         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
             !!chunkInfo['challenges'][skill][challenge]['Skills'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).forEach(subSkill => {
                 !!completedChallenges[subSkill] && delete completedChallenges[subSkill][challenge];
-                if (completedChallenges[subSkill] === {}) {
+                if (Object.keys(completedChallenges[subSkill]).length === 0) {
                     delete completedChallenges[subSkill];
                 }
             });
@@ -8615,10 +8618,16 @@ let checkMID = function(mid) {
                             } else if (contentCreators.hasOwnProperty(mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' '))) {
                                 window.location.assign(window.location.href.split('?')[0] + '?' + contentCreators[mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('+', ' ')]);
                             } else {
-                                window.location.replace(window.location.href.split('?')[0]);
-                                atHome = true;
-                                $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
-                                $('.loading, .ui-loader-header').remove();
+                                databaseRef.child('mapids/' + mid.toLowerCase()).once('value', function(snap4) {
+                                    if (!!snap4.val()) {
+                                        window.location.replace(window.location.href.split('?')[0] + '?' + mid.toLowerCase());
+                                    } else {
+                                        window.location.replace(window.location.href.split('?')[0]);
+                                        atHome = true;
+                                        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
+                                        $('.loading, .ui-loader-header').remove();
+                                    }
+                                });
                             }
                         });
                     } else {
