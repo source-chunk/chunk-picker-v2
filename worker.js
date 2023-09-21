@@ -6855,7 +6855,16 @@ let gatherChunksInfo = function(chunks) {
         items[item]['Manually Added Equipment'] = 'secondary-drop';
     });
 
+    let unlockedSections = {}; // TEMP (Sections not fully implemented yet)
+
     Object.keys(chunks).forEach(num => {
+
+        // TEMP (Sections not fully implemented yet)
+        unlockedSections[num] = {};
+        !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Sections'] && Object.keys(chunkInfo['chunks'][num]['Sections']).forEach(section => {
+            unlockedSections[num][section] = true;
+        });
+
         !!chunkInfo['chunks'][num] && !!chunkInfo['chunks'][num]['Sections'] && Object.keys(chunkInfo['chunks'][num]['Sections']).filter(section => !!unlockedSections[num] && unlockedSections[num][section]).forEach(section => {
             if (rules['Puro-Puro'] || num !== 'Puro-Puro') {
                 !!chunkInfo['chunks'][num]['Sections'][section] && !!chunkInfo['chunks'][num]['Sections'][section]['Monster'] && Object.keys(chunkInfo['chunks'][num]['Sections'][section]['Monster']).forEach(monster => {
@@ -7277,6 +7286,27 @@ let getAllChunkAreas = function(chunks) {
     let temp2 = {};
     let tempChunks = JSON.parse(JSON.stringify(chunks));
     while (i < Object.keys(tempChunks).length) {
+        !!chunkInfo['chunks'][Object.keys(tempChunks)[i]] && !!chunkInfo['chunks'][Object.keys(tempChunks)[i]].hasOwnProperty('Sections') && Object.keys(chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Sections']).forEach(section => {
+            !!chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Sections'][section] && !!chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Sections'][section]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Sections'][section]['Connect']).forEach(id => {
+                if (chunkInfo['chunks'][parseInt(id)].hasOwnProperty('Name') && !!chunkInfo['chunks'][parseInt(id)]['Name'] && typeof chunkInfo['chunks'][parseInt(id)]['Name'] === 'string') {
+                    tempChunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
+                    temp[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] || false;
+                    if (!!tempChunks[Object.keys(tempChunks)[i]]) {
+                        if (!temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) {
+                            temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = {};
+                        }
+                        temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\,/g, '%2I').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')][Object.keys(tempChunks)[i]] = true;
+                    }
+                }
+                if (!!chunkInfo['chunks'][parseInt(id)]['Name'] && !tempChunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]) {
+                    if (!chunkInfo['challenges']['Nonskill'] || !chunkInfo['challenges']['Nonskill'][chunkInfo['chunks'][parseInt(id)]['Name']] || Object.keys(chunkInfo['challenges']['Nonskill'][chunkInfo['chunks'][parseInt(id)]['Name']]).length <= 1) {
+                        if (temp2.hasOwnProperty(chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')) && Object.keys(temp2[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')]).filter(subArea => { chunks.hasOwnProperty(subArea) }).length > 1) {
+                            chunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;
+                        }
+                    }
+                }
+            });
+        });
         !!chunkInfo['chunks'][Object.keys(tempChunks)[i]] && !!chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(tempChunks)[i]]['Connect']).forEach(id => {
             if (chunkInfo['chunks'][parseInt(id)].hasOwnProperty('Name') && !!chunkInfo['chunks'][parseInt(id)]['Name'] && typeof chunkInfo['chunks'][parseInt(id)]['Name'] === 'string') {
                 tempChunks[chunkInfo['chunks'][parseInt(id)]['Name'].replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\+/g, '%2J').replaceAll(/\!/g, '%2Q')] = true;

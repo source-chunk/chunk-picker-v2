@@ -1373,7 +1373,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=5.5.17";
+mapImg.src = "osrs_world_map.png?v=5.5.18";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2650,7 +2650,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.5.17");
+        myWorker = new Worker("./worker.js?v=5.5.18");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2894,8 +2894,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.5.17");
-let myWorker2 = new Worker("./worker.js?v=5.5.17");
+let myWorker = new Worker("./worker.js?v=5.5.18");
+let myWorker2 = new Worker("./worker.js?v=5.5.18");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5361,7 +5361,7 @@ let calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.5.17");
+    myWorker2 = new Worker("./worker.js?v=5.5.18");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
@@ -5547,7 +5547,6 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
 // Prints all items from all tasks (debug)
 let printTaskItems = function() {
     let taskItems = {};
-
     !!chunkInfo['challenges'] && skillNames.forEach(skill => {
         !!chunkInfo['challenges'][skill] && Object.keys(chunkInfo['challenges'][skill]).sort(function(a, b) { return chunkInfo['challenges'][skill][a]['Level'] - chunkInfo['challenges'][skill][b]['Level'] }).forEach(name => {
             !!chunkInfo['challenges'][skill][name]['Items'] && chunkInfo['challenges'][skill][name]['Items'].forEach(item => {
@@ -5569,7 +5568,6 @@ let printTaskItems = function() {
 // Prints all levels for tasks (debug)
 let printTaskLevels = function() {
     let taskLevels = {};
-
     !!chunkInfo['challenges'] && skillNames.forEach(skill => {
         taskLevels[skill] = {};
         !!chunkInfo['challenges'][skill] && Object.keys(chunkInfo['challenges'][skill]).sort(function(a, b) { return chunkInfo['challenges'][skill][a]['Level'] - chunkInfo['challenges'][skill][b]['Level'] }).forEach(name => {
@@ -5597,7 +5595,6 @@ let printTaskLevels = function() {
 
 // Prints all untaken mapId's (debug)
 let printUntakenMids = function() {
-    console.log('Calculating untaken mids:');
     let char1, char2, char3, char4, charSet;
     let untakenMids = [];
     let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -5619,6 +5616,102 @@ let printUntakenMids = function() {
             }
         }
         console.log(JSON.stringify(untakenMids));
+    });
+}
+
+// Prints all differences with the split chunkinfo (debug)
+let printSplitChunksDiff = function() {
+    // Clears empty subobjects from object
+    let clearEmpties = function(obj) {
+        typeof obj === 'object' && Object.keys(obj).forEach(subObj => {
+            if (typeof obj[subObj] === 'object' && Object.keys(obj).length === 0) {
+                delete obj[subObj];
+            } else if (typeof obj[subObj] === 'object') {
+                obj[subObj] = clearEmpties(obj[subObj]);
+                if (obj[subObj] === null) {
+                    delete obj[subObj];
+                }
+            }
+        });
+        if (Object.keys(obj).length === 0) {
+            return null;
+        } else {
+            return obj;
+        }
+    }
+
+    // Gets diff between 2 objects
+    let diff = function(obj1, obj2, isInner) {
+        let result = {};
+        if (Object.is(obj1, obj2)) {
+            return undefined;
+        }
+        if (!obj1 || typeof obj1 !== 'object') {
+            return obj1;
+        }
+        if (!obj2 || typeof obj2 !== 'object') {
+            return obj2;
+        }
+        Object.keys(obj1 || {}).concat(Object.keys(obj2 || {})).forEach(key => {
+            if (obj2[key] !== obj1[key] && !Object.is(obj1[key], obj2[key])) {
+                result[key] = obj1[key] || obj2[key];
+            }
+            if (typeof obj2[key] === 'object' && typeof obj1[key] === 'object') {
+                const value = diff(obj1[key], obj2[key], true);
+                if (value !== undefined) {
+                    result[key] = value;
+                }
+            }
+        });
+        if (!isInner) {
+            result = JSON.parse(JSON.stringify((clearEmpties(result))));
+        }
+        return result;
+    }
+
+    let diffArr = {};
+    $.getJSON('./chunkpicker-chunkinfo-export-split.json', function(data) {
+        let chunkInfoSplit = data;
+        let chunks2 = {};
+        Object.keys(chunkInfoSplit['chunks']).forEach(chunk => {
+            chunks2[chunk] = {};
+            if (chunkInfoSplit['chunks'][chunk].hasOwnProperty('Sections')) {
+                let tempSections = chunkInfoSplit['chunks'][chunk]['Sections'];
+                delete chunkInfoSplit['chunks'][chunk]['Sections'];
+                chunks2[chunk] = {...chunkInfoSplit['chunks'][chunk]};
+                Object.keys(tempSections).forEach(section => {
+                    Object.keys(tempSections[section]).forEach(type => {
+                        if (!chunks2[chunk][type]) {
+                            chunks2[chunk][type] = {};
+                        }
+                        Object.keys(tempSections[section][type]).forEach(it => {
+                            if (!chunks2[chunk][type][it]) {
+                                if (type === 'Quest') {
+                                    chunks2[chunk][type][it] = tempSections[section][type][it];
+                                } else if (type === 'Diary') {
+                                    // ---
+                                } else if (type === 'Connect' || type === 'Shop') {
+                                    chunks2[chunk][type][it] = true;
+                                } else {
+                                    chunks2[chunk][type][it] = 0;
+                                }
+                            }
+                            if (type !== 'Quest' && type !== 'Diary' && type !== 'Connect' && type !== 'Shop') {
+                                chunks2[chunk][type][it] += tempSections[section][type][it];
+                            } else if (type === 'Diary') {
+                                delete chunkInfo['chunks'][chunk][type];
+                                delete chunks2[chunk][type];
+                            }
+                        });
+                    });
+                });
+            } else {
+                chunks2[chunk] = {...chunkInfoSplit['chunks'][chunk]};
+            }
+        });
+        chunkInfoSplit['chunks'] = {...chunks2};
+        diffArr = diff(chunkInfo, chunkInfoSplit);
+        console.log(diffArr);
     });
 }
 
