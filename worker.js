@@ -3518,8 +3518,8 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData) {
                             if (boost !== 'Crystal saw') {
                                 if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
                                     let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
-                                    let possibleBoost = Math.floor(globalValids[skill][challenge] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
-                                    possibleBoost = Math.floor((globalValids[skill][challenge] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                    let possibleBoost = Math.floor(valids[skill][challenge] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                    possibleBoost = Math.floor((valids[skill][challenge] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
                                     if (possibleBoost > bestBoost) {
                                         bestBoost = possibleBoost;
                                     }
