@@ -2700,7 +2700,11 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                     }
                                 }
                                 if (rules['Multi Step Processing']) {
-                                    if (!items[plus] || Object.keys(items[plus]).filter(source => !items[plus][source].includes('-') || items[plus][source].split('-')[0] !== 'multi').length > 0 || ((!combatSkills.includes(skill) || chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) && skill !== 'Extra')) {
+                                    let tempItemSources = {...items[plus]};
+                                    Object.keys(tempItemSources).filter(source => source === name).forEach(source => {
+                                        delete tempItemSources[source];
+                                    });
+                                    if (!tempItemSources || Object.keys(tempItemSources).filter(source => !tempItemSources[source].includes('-') || tempItemSources[source].split('-')[0] !== 'multi').length > 0 || ((!combatSkills.includes(skill) || chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) && skill !== 'Extra')) {
                                         multiValid = true;
                                     }
                                 }
@@ -2750,7 +2754,11 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                     tempTempValid = true;
                                 }
                                 if (rules['Multi Step Processing']) {
-                                    if (!items[plus] || Object.keys(items[plus]).filter(source => !items[plus][source].includes('-') || items[plus][source].split('-')[0] !== 'multi').length > 0 || ((!combatSkills.includes(skill) || chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) && skill !== 'Extra')) {
+                                    let tempItemSources = {...items[plus]};
+                                    Object.keys(tempItemSources).filter(source => source === name).forEach(source => {
+                                        delete tempItemSources[source];
+                                    });
+                                    if (!tempItemSources || Object.keys(tempItemSources).filter(source => !tempItemSources[source].includes('-') || tempItemSources[source].split('-')[0] !== 'multi').length > 0 || ((!combatSkills.includes(skill) || chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) && skill !== 'Extra')) {
                                         multiValid = true;
                                     }
                                 }
@@ -2811,7 +2819,11 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             };
                         }
                         if (rules['Multi Step Processing']) {
-                            if (!!items[tempItem] && Object.keys(items[tempItem]).filter(source => !items[tempItem][source].includes('-') || items[tempItem][source].split('-')[0] !== 'multi').length === 0 && (((combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) || skill === 'Extra') || (chunkInfo['challenges'][skill][name]['Level'] < chunkInfo['challenges'][items[tempItem][Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi')[0]].split('-')[1]][Object.keys(items[tempItem]).filter(source => items[tempItem][source].includes('-') && items[tempItem][source].split('-')[0] === 'multi')[0]]['Level']))) {
+                            let tempItemSources = {...items[tempItem]};
+                            Object.keys(tempItemSources).filter(source => source === name).forEach(source => {
+                                delete tempItemSources[source];
+                            });
+                            if (!!tempItemSources && Object.keys(tempItemSources).filter(source => !tempItemSources[source].includes('-') || tempItemSources[source].split('-')[0] !== 'multi').length === 0 && (((combatSkills.includes(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('Not Equip')) || skill === 'Extra' || skill === 'Nonskill') || (chunkInfo['challenges'][skill][name]['Level'] < chunkInfo['challenges'][tempItemSources[Object.keys(tempItemSources).filter(source => tempItemSources[source].includes('-') && tempItemSources[source].split('-')[0] === 'multi')[0]].split('-')[1]][Object.keys(tempItemSources).filter(source => tempItemSources[source].includes('-') && tempItemSources[source].split('-')[0] === 'multi')[0]]['Level']))) {
                                 validChallenge = false;
                                 wrongThings.push('multi');
                                 nonValids[name] = wrongThings;
