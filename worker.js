@@ -3515,7 +3515,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
 // Checks if skill has primary training
 let checkPrimaryMethod = function(skill, valids, baseChunkData) {
     let valid = false;
-    let tempValid = true;
+    let tempValid = false;
     !!universalPrimary[skill] && universalPrimary[skill].some(line => {
         let tempTempValid = true;
         if (line === 'Primary+') {
@@ -3629,8 +3629,8 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData) {
         } else {
             tempTempValid = false;
         }
-        if (!tempTempValid) {
-            tempValid = false;
+        if (tempTempValid) {
+            tempValid = true;
             return true;
         }
     });
