@@ -1337,6 +1337,26 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
+        let tempHighest = {}
+        Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach(skill => {
+            tempHighest[skill] = null;
+            !!newValids[skill] && Object.keys(newValids[skill]).forEach(challenge => {
+                if (!tempHighest[skill] || newValids[skill][challenge] > newValids[skill][tempHighest[skill]]) {
+                    tempHighest[skill] = challenge;
+                }
+            });
+        });
+        !!tempHighest && Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach(skill => {
+            Object.keys(newValids[skill]).filter(task => chunkInfo['challenges'][skill][task]['mustBeHighest'] && chunkInfo['challenges'][skill][task].hasOwnProperty('Tasks')).forEach(task => {
+                Object.keys(chunkInfo['challenges'][skill][task]['Tasks']).some(subTask => {
+                    if (subTask.split('--')[0] === task && tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] !== task) {
+                        delete newValids[skill][task];
+                        delete newValids[subTask.split('--')[1]][task];
+                        return true;
+                    }
+                });
+            });
+        });
         !rules["Highest Level"] && Object.keys(tempItemSkill).forEach(skill => {
             Object.keys(tempItemSkill[skill]).filter((item) => { return !!baseChunkData['items'][item] }).forEach(item => {
                 let lowestItem;
@@ -3128,12 +3148,15 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             chunkInfo['challenges'][skill][name]['forcedPrimary'] && chunkInfo['challenges'][skill][name]['Secondary'] && (validChallenge = false);
             if (validChallenge) {
                 delete nonValids[name];
-                if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subChallenge) => { return subChallenge.includes('--') }).length > 0) || chunkInfo['challenges'][skill][name]['ManualNonProcessing']) {
+                if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || chunkInfo['challenges'][skill][name]['ManualNonProcessing']) {
                     if (skill !== 'Quest' && skill !== 'Diary') {
                         valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'] || chunkInfo['challenges'][skill][name]['Label'] || true;
                     } else {
                         valids[skill][name] = true;
                     }
+                } else if (processingSkill.hasOwnProperty(skill) && processingSkill[skill] && chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subChallenge) => { return subChallenge.includes('--') }).length > 0) {
+                    chunkInfo['challenges'][skill][name]['mustBeHighest'] = true;
+                    valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'] || chunkInfo['challenges'][skill][name]['Label'] || true;
                 } else {
                     let itemList = [];
                     if (!!chunkInfo['challenges'][skill][name]['Items']) {
