@@ -1337,24 +1337,24 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
+        let highestChanged;
         let tempHighest = {}
         Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach(skill => {
-            tempHighest[skill] = null;
-            !!newValids[skill] && Object.keys(newValids[skill]).forEach(challenge => {
-                if (!tempHighest[skill] || newValids[skill][challenge] > newValids[skill][tempHighest[skill]]) {
-                    tempHighest[skill] = challenge;
-                }
-            });
-        });
-        !!tempHighest && Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach(skill => {
-            Object.keys(newValids[skill]).filter(task => chunkInfo['challenges'][skill][task]['mustBeHighest'] && chunkInfo['challenges'][skill][task].hasOwnProperty('Tasks')).forEach(task => {
-                Object.keys(chunkInfo['challenges'][skill][task]['Tasks']).some(subTask => {
-                    if (subTask.split('--')[0] === task && tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] !== task) {
+            tempHighest[skill] = Object.keys(newValids[skill]).sort((a, b) => newValids[skill][a] - newValids[skill][b]);
+            Object.keys(newValids[skill]).filter(task => chunkInfo['challenges'][skill][task]['mustBeHighest'] && chunkInfo['challenges'][skill][task].hasOwnProperty('Tasks')).sort((a, b) => newValids[skill][b] - newValids[skill][a]).some(task => {
+                highestChanged = false;
+                Object.keys(chunkInfo['challenges'][skill][task]['Tasks']).filter(subTask => skillNames.includes(chunkInfo['challenges'][skill][task]['Tasks'][subTask])).some(subTask => {
+                    if (subTask.split('--')[0] === task && !!tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] && tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]][tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].length - 1] !== task) {
                         delete newValids[skill][task];
                         delete newValids[subTask.split('--')[1]][task];
+                        tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].splice(-1, 1);
+                        highestChanged = true;
                         return true;
                     }
                 });
+                if (!highestChanged) {
+                    return true;
+                }
             });
         });
         !rules["Highest Level"] && Object.keys(tempItemSkill).forEach(skill => {
