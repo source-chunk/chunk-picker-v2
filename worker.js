@@ -166,6 +166,7 @@ let secondaryPrimaryNum;
 let constructionLocked;
 let isOnlyManualAreas = false;
 let bestEquipmentAltsGlobal = {};
+let manualSections = {};
 
 let clueTasksPossible = {};
 let areasStructure = {};
@@ -1342,6 +1343,23 @@ let calcChallenges = function(chunks, baseChunkData) {
         Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach(skill => {
             tempHighest[skill] = Object.keys(newValids[skill]).sort((a, b) => newValids[skill][a] - newValids[skill][b]);
             Object.keys(newValids[skill]).filter(task => chunkInfo['challenges'][skill][task]['mustBeHighest'] && chunkInfo['challenges'][skill][task].hasOwnProperty('Tasks')).sort((a, b) => newValids[skill][b] - newValids[skill][a]).some(task => {
+                let uniqueItem = !tempItemSkill.hasOwnProperty(skill);
+                tempItemSkill.hasOwnProperty(skill) && chunkInfo['challenges'][skill][task].hasOwnProperty('Items') && chunkInfo['challenges'][skill][task]['Items'].some(item => {
+                    if (item.replaceAll(/\*/g, '').includes('+')) {
+                        if (!!itemsPlus[item.replaceAll(/\*/g, '')] && itemsPlus[item.replaceAll(/\*/g, '')].filter((plus) => { return !!baseChunkData['items'][plus] && (!Object.values(baseChunkData['items'][plus]).includes('primary-Farming') || rules['Farming Primary']) && !tools[plus] && (skill !== 'Magic' || !magicTools[plus]) && !tempItemSkill[skill].hasOwnProperty(plus) }).length > 0) {
+                            uniqueItem = true;
+                            return true;
+                        }
+                    } else {
+                        if (!!baseChunkData['items'] && !tools[item.replaceAll(/\*/g, '')] && !!baseChunkData['items'][item.replaceAll(/\*/g, '')] && (skill !== 'Magic' || !magicTools[item.replaceAll(/\*/g, '')]) && !tempItemSkill[skill].hasOwnProperty(item.replaceAll(/\*/g, ''))) {
+                            uniqueItem = true;
+                            return true;
+                        }
+                    }
+                });
+                if (uniqueItem) {
+                    return true;
+                }
                 highestChanged = false;
                 Object.keys(chunkInfo['challenges'][skill][task]['Tasks']).filter(subTask => skillNames.includes(chunkInfo['challenges'][skill][task]['Tasks'][subTask])).some(subTask => {
                     if (subTask.split('--')[0] === task && !!tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] && tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]][tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].length - 1] !== task) {
@@ -6571,6 +6589,27 @@ let findFraction = function(fraction, isRoundedDenominator) {
     }
 }
 
+// Finds all connected sub-chunk sections based on inputted manual sections
+let findConnectedSections = function(chunks, sections) {
+    let added = false;
+    Object.keys(chunkInfo['sections']).filter(chunk => chunks.hasOwnProperty(chunk)).forEach(chunk => {
+        Object.keys(chunkInfo['sections'][chunk]).forEach(sec => {
+            chunkInfo['sections'][chunk][sec].filter(connection => (!sections.hasOwnProperty(chunk) || !sections[chunk].hasOwnProperty(sec)) && (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1])) : chunks.hasOwnProperty(connection))).forEach(connection => {
+                if (!sections[chunk]) {
+                    sections[chunk] = {};
+                }
+                sections[chunk][sec] = true;
+                added = true;
+            });
+        });
+    });
+    if (added) {
+        return findConnectedSections(chunks, sections);
+    } else {
+        return sections;
+    }
+}
+
 // Gathers item/object info on all chunk ids passed in
 let gatherChunksInfo = function(chunks) {
     let items = {};
@@ -6594,6 +6633,8 @@ let gatherChunksInfo = function(chunks) {
     });
 
     let unlockedSections = {}; // TEMP (Sections not fully implemented yet)
+    unlockedSections = { ...manualSections }; // TEMP
+    //unlockedSections = findConnectedSections(chunks, unlockedSections);
 
     Object.keys(chunks).forEach(num => {
 
