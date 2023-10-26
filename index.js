@@ -356,6 +356,7 @@ let rules = {
     "Multi Step Processing": false,
     "Shooting Star": false,
     "Forestry": false,
+    "ForestryXp": false,
     "Puro-Puro": false,
     "Extra implings": false,
     "Collection Log Bosses": false,
@@ -447,6 +448,7 @@ let ruleNames = {
     "Multi Step Processing": "Allow higher level processing of resources to enable other processing tasks <span class='rule-asterisk noscroll'>*</span>",
     "Shooting Star": "Getting the level to mine all tiers of shooting stars count as Mining skill tasks <span class='rule-asterisk noscroll'>*</span>",
     "Forestry": "Forestry events and rewards count as part of your chunks once you have access to the forestry kit",
+    "ForestryXp": "Forestry events count as a primary way to gain xp in Woodcutting/Farming/Construction/Fletching/Hunter/Thieving",
     "Puro-Puro": "Allow implings from Puro-Puro & their drops to count towards chunk tasks",
     "Extra implings": "Include implings that have non-guaranteed spawns in Puro-Puro as chunk tasks",
     "Collection Log Bosses": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Bosses' tab",
@@ -576,6 +578,7 @@ let rulePresets = {
         "Cleaning Herbs": true,
         "Superheat Furnace": true,
         "Forestry": true,
+        "ForestryXp": true,
     },
     "Supreme Chunker": {
         "Skillcape": true,
@@ -641,6 +644,7 @@ let rulePresets = {
         "Cleaning Herbs": true,
         "Superheat Furnace": true,
         "Forestry": true,
+        "ForestryXp": true,
     },
 };                                                                              // List of rules that are part of each preset
 
@@ -720,7 +724,7 @@ let ruleStructure = {
         "Superheat Furnace": true
     },
     "Woodcutting": {
-        "Forestry": true
+        "Forestry": ["ForestryXp"]
     },
     "Item Sources": {
         "Boss": true,
@@ -758,6 +762,7 @@ let subRuleDefault = {
     "Puro-Puro": false,
     "Spells": false,
     "Minigame": true,
+    "Forestry": false,
 };                                                                              // Default value of sub-rule when parent is checked
 
 let taskGeneratingRules = {
@@ -1373,7 +1378,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=5.5.30";
+mapImg.src = "osrs_world_map.png?v=5.5.30.1";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2650,7 +2655,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.5.30");
+        myWorker = new Worker("./worker.js?v=5.5.30.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2894,8 +2899,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.5.30");
-let myWorker2 = new Worker("./worker.js?v=5.5.30");
+let myWorker = new Worker("./worker.js?v=5.5.30.1");
+let myWorker2 = new Worker("./worker.js?v=5.5.30.1");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5388,7 +5393,7 @@ let calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.5.30");
+    myWorker2 = new Worker("./worker.js?v=5.5.30.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
