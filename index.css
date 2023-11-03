@@ -33,14 +33,14 @@ body::-webkit-scrollbar {
     font-family: 'Calibri', 'Roboto', sans-serif;
 }
 
-body {
+body:not(.about) {
     background-color: black;
     color: var(--colorText);
     overflow: hidden !important;
 }
 
 @-moz-document url-prefix() {
-    html,body{overflow: hidden !important;}
+    html:not(.about),body:not(.about){overflow: hidden !important;}
 }
 
 a, a:visited {
