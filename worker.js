@@ -918,7 +918,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                                     highestCompletedLevel = chunkInfo['challenges'][subSkill][task]['Level'];
                                 }
                             });
-                            if (!checkPrimaryMethod(subSkill, newValids, baseChunkData) && ((subSkill !== 'Slayer' || !slayerLocked || (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (ownsCrystalSaw ? 3 : 0))) > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] > passiveSkill[subSkill]) && (highestCompletedLevel <= 1 || highestCompletedLevel <= chunkInfo['challenges'][skill][challenge]['Skills'][subSkill])) {
+                            if (!checkPrimaryMethod(subSkill, newValids, baseChunkData) && ((subSkill !== 'Slayer' || !slayerLocked || (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (ownsCrystalSaw ? 3 : 0))) > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || (chunkInfo['challenges'][skill][challenge]['Skills'][subSkill] - (bestBoost + (ownsCrystalSaw ? 3 : 0))) > passiveSkill[subSkill]) && (highestCompletedLevel <= 1 || highestCompletedLevel <= chunkInfo['challenges'][skill][challenge]['Skills'][subSkill])) {
                                 if (!nonValids.hasOwnProperty(challenge)) {
                                     nonValids[challenge] = [];
                                 }
@@ -3416,6 +3416,20 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     });
                 });
             });
+            Object.keys(items[item]).filter((source) => { return items[item][source].includes('-Hunter') && source.includes('impling') && chunkInfo['challenges']['Hunter'].hasOwnProperty(source.replaceAll('#', '%2F').replaceAll('.', '%2E')) && chunkInfo['challenges']['Hunter'][source.replaceAll('#', '%2F').replaceAll('.', '%2E')].hasOwnProperty('Output') }).forEach(source => {
+                let monster = chunkInfo['challenges']['Hunter'][source.replaceAll('#', '%2F').replaceAll('.', '%2E')]['Output'];
+                !!chunkInfo['skillItems']['Hunter'][monster] && Object.keys(chunkInfo['skillItems']['Hunter'][monster]).forEach(drop => {
+                    !!chunkInfo['skillItems']['Hunter'][monster][drop] && Object.keys(chunkInfo['skillItems']['Hunter'][monster][drop]).filter(quantityDrop => (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Hunter'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Hunter'][monster][drop][quantityDrop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Hunter'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Hunter'][monster][drop][quantityDrop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))).forEach(quantityDrop => {
+                        if (!dropTablesGlobal[monster.replaceAll(' jar', '') + '-npc']) {
+                            dropTablesGlobal[monster.replaceAll(' jar', '') + '-npc'] = {};
+                        }
+                        if (!dropTablesGlobal[monster.replaceAll(' jar', '') + '-npc'][drop]) {
+                            dropTablesGlobal[monster.replaceAll(' jar', '') + '-npc'][drop] = {};
+                        }
+                        dropTablesGlobal[monster.replaceAll(' jar', '') + '-npc'][drop][quantityDrop] = (chunkInfo['skillItems']['Hunter'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Hunter'][monster][drop][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Hunter'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Hunter'][monster][drop][quantityDrop].split('/')[1].replaceAll('~', '')));
+                    });
+                });
+            });
         });
         Object.keys(dropTablesGlobal).forEach(monster => {
             dropTablesGlobal.hasOwnProperty(monster) && Object.keys(dropTablesGlobal[monster]).filter(item => { return !item.includes('^') }).forEach(item => {
@@ -3428,18 +3442,32 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             drops[monster][item] = {};
                         }
                         drops[monster][item][quantity] = true;
-                        valids['Extra'][monster.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'] = 'All Droptables';
                         if (!chunkInfo['challenges']['Extra']) {
                             chunkInfo['challenges']['Extra'] = {};
                         }
-                        chunkInfo['challenges']['Extra'][monster.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'] = {
-                            'Category': ['All Droptables'],
-                            'Items': [item],
-                            'ItemsDetails': [item],
-                            'Monsters': [monster],
-                            'MonstersDetails': [monster],
-                            'Label': 'All Droptables',
-                            'Permanent': false
+                        if (monster.includes('-npc')) {
+                            valids['Extra'][monster.replaceAll('-npc', '').replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'] = 'All Droptables';
+                            chunkInfo['challenges']['Extra'][monster.replaceAll('-npc', '').replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'] = {
+                                'Category': ['All Droptables'],
+                                'Items': [item],
+                                'ItemsDetails': [item],
+                                'Monsters': [monster.replaceAll('-npc', '')],
+                                'NPCs': [monster.replaceAll('-npc', '')],
+                                'NPCsDetails': [monster.replaceAll('-npc', '')],
+                                'Label': 'All Droptables',
+                                'Permanent': false
+                            }
+                        } else {
+                            valids['Extra'][monster.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'] = 'All Droptables';
+                            chunkInfo['challenges']['Extra'][monster.replaceAll('+', '') + ': ~|' + item.replaceAll('#', '%2F').replaceAll('.', '%2E') + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity].replaceAll('/', '%2G').replaceAll('.', '%2E').replaceAll(',', '%2I') + ')'] = {
+                                'Category': ['All Droptables'],
+                                'Items': [item],
+                                'ItemsDetails': [item],
+                                'Monsters': [monster],
+                                'MonstersDetails': [monster],
+                                'Label': 'All Droptables',
+                                'Permanent': false
+                            }
                         }
                     }
                 });
