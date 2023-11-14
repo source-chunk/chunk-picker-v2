@@ -1379,7 +1379,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=5.5.38";
+mapImg.src = "osrs_world_map.png?v=5.5.39";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2656,7 +2656,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=5.5.38");
+        myWorker = new Worker("./worker.js?v=5.5.39");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
         workerOut = 1;
@@ -2900,8 +2900,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=5.5.38");
-let myWorker2 = new Worker("./worker.js?v=5.5.38");
+let myWorker = new Worker("./worker.js?v=5.5.39");
+let myWorker2 = new Worker("./worker.js?v=5.5.39");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'error') {
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
@@ -5396,7 +5396,7 @@ let calcFutureChallenges = function() {
         i++;
     }
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=5.5.38");
+    myWorker2 = new Worker("./worker.js?v=5.5.39");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly]);
     workerOut++;
@@ -6407,9 +6407,14 @@ let findFraction = function(fraction) {
 }
 
 // Opens the search details modal
-let openSearchDetails = function(category, name) {
-    name = name.replaceAll(/\%2X/g, "'").replaceAll(/\%2Y/g, "(").replaceAll(/\%2Z/g, ")");
+let openSearchDetails = function(category, name, prevCategory, prevName) {
+    name = name.replaceAll(/\%2X/g, "'").replaceAll(/\%2Y/g, "(").replaceAll(/\%2Z/g, ")").replaceAll(/\./g, '%2E').replaceAll(/\#/g, '%2F').replaceAll(/\//g, '%2G').replaceAll(/\!/g, '%2Q');
     searchDetailsModalOpen = true;
+    if (prevCategory && prevName) {
+        $('.searchdetails-back').show().html(`<i class="fas fa-arrow-left noscrollhard" onclick="openSearchDetails('${prevCategory}', '${prevName}')"></i>`);
+    } else {
+        $('.searchdetails-back').hide();
+    }
     $('.searchdetails-data').empty();
     $('.searchdetails-title').text(name.replaceAll(/\%2E/g, '.').replaceAll(/\%2I/g, ',').replaceAll(/\%2F/g, '#').replaceAll(/\%2G/g, '/').replaceAll(/\%2J/g, '+').replaceAll(/\|\~/g, '').replaceAll(/\~\|/g, '').replaceAll(/\*/g, '').replaceAll(/\*/g, ''));
     let skills = [...skillNames];
@@ -6446,6 +6451,7 @@ let openSearchDetails = function(category, name) {
                 !!dropTablesGlobal[source.replaceAll(/\#/g, '%2F')][name] && Object.keys(dropTablesGlobal[source.replaceAll(/\#/g, '%2F')][name]).forEach(amount => {
                     tempFormattedSource = formattedSource;
                     tempFormattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')}, qty: ${amount}, ${dropTablesGlobal[source.replaceAll(/\#/g, '%2F')][name][amount]})`;
+                    tempFormattedSource += `<span class='double-search-icon' onclick='openSearchDetails("monsters", "${source.replaceAll(/\'/g, '%2X').replaceAll(/\(/g, '%2Y').replaceAll(/\)/g, '%2Z')}", "${category.replaceAll(/\'/g, '%2X').replaceAll(/\(/g, '%2Y').replaceAll(/\)/g, '%2Z')}", "${name.replaceAll(/\'/g, '%2X').replaceAll(/\(/g, '%2Y').replaceAll(/\)/g, '%2Z')}")'><i class="fas fa-search"></i></span>`;
                     formattedSources.push(tempFormattedSource);
                     alreadyPushed = true;
                 });

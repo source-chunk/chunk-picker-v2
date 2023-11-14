@@ -3987,6 +3987,27 @@ input#searchChunks {
     padding-left: 5px;
     background-color: var(--color3);
     margin-right: 15px;
+    position: relative;
+}
+
+.double-search-icon {
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+}
+
+.double-search-icon:hover {
+    color: var(--colorTextAlt);
+}
+
+.searchdetails-back {
+    font-size: 20px;
+    position: absolute;
+    margin: 5px;
+    cursor: pointer;
+}
+.searchdetails-back:hover {
+    color: var(--colorTextAlt);
 }
 
 .slayermasterinfo-title {
