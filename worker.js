@@ -2740,9 +2740,9 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         let multiValid = false;
                         let toolLevelValid = false;
                         itemsPlus[item.replaceAll(/\*/g, '')].filter((plus) => { return !!items[plus] && (!chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][name]['NonShop'] || !onlyShop(items[plus])) }).forEach((plus) => {
-                            if (((item === 'Axe[+]' && skill === 'Woodcutting') || (item === 'Pickaxe[+]' && skill === 'Mining')) && !!chunkInfo['toolLevels'] && chunkInfo['toolLevels'].hasOwnProperty(item) && chunkInfo['toolLevels'][item].hasOwnProperty(plus) && chunkInfo['toolLevels'][item][plus] > chunkInfo['challenges'][skill][name]['Level'] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['toolLevels'][item][plus])) {
+                            if (!toolLevelValid && ((item === 'Axe[+]' && skill === 'Woodcutting') || (item === 'Pickaxe[+]' && skill === 'Mining')) && !!chunkInfo['toolLevels'] && chunkInfo['toolLevels'].hasOwnProperty(item) && chunkInfo['toolLevels'][item].hasOwnProperty(plus) && chunkInfo['toolLevels'][item][plus] > chunkInfo['challenges'][skill][name]['Level'] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['toolLevels'][item][plus])) {
                                 if (!toolLevelChallenges[skill]) {
-                                    toolLevelChallenges[skill] = [];
+                                    toolLevelChallenges[skill] = {};
                                 }
                                 toolLevelChallenges[skill][name] = false;
                             } else {
