@@ -6586,10 +6586,10 @@ let findFraction = function(fraction, isRoundedDenominator) {
 let findConnectedSections = function(chunksIn, sections) {
     let added = false;
     Object.keys(chunkInfo['sections']).filter((chunk) => chunksIn.hasOwnProperty(chunk)).forEach((chunk) => {
-        Object.keys(chunkInfo['sections'][chunk]).filter((sec) => sec !== "0" && (!sections.hasOwnProperty(chunk) || !sections[chunk].hasOwnProperty(sec) || !sections[chunk][sec])).forEach((sec) => {
+        Object.keys(chunkInfo['sections'][chunk]).filter((sec) => sec !== "0" && (!sections || !sections.hasOwnProperty(chunk) || !sections[chunk].hasOwnProperty(sec) || !sections[chunk][sec])).forEach((sec) => {
             if (sections.hasOwnProperty(chunk) && sections[chunk].hasOwnProperty(sec) && sections[chunk][sec] === false) {
                 delete sections[chunk][sec];
-            } else if (!manualSections.hasOwnProperty(chunk) || !manualSections[chunk].hasOwnProperty(sec) || manualSections[chunk][sec] !== false) {
+            } else if (!manualSections || !manualSections.hasOwnProperty(chunk) || !manualSections[chunk].hasOwnProperty(sec) || manualSections[chunk][sec] !== false) {
                 if (optOutSections || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1])) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name'])).length > 0)) {
                     if (!sections[chunk]) {
                         sections[chunk] = {};
