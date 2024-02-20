@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=5.5.39.1" />
+  <link rel="stylesheet" href="./index.css?v=6.0.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -16,6 +16,7 @@
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     var firebaseConfig = {
       apiKey: "AIzaSyDr94cgRwmo3glVTirQ9LPAA4HI9cyYUCg",
@@ -29,22 +30,24 @@
     firebase.initializeApp(firebaseConfig);
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://kit.fontawesome.com/947b03aa8e.js" crossorigin="anonymous"></script>
   <title>Chunk Picker V2</title>
   <link id="favicon-link" rel="shortcut icon" href="./resources/favicons/favicon-default.png" />
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,600,300" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,600,300" rel="stylesheet" type="text/css">
+  <link href="resources/fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link href="resources/fontawesome/css/brands.css" rel="stylesheet">
+  <link href="resources/fontawesome/css/solid.css" rel="stylesheet">
 </head>
 
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=5.5.39.1' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.0.0' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=5.5.39.1"></script>
+  <script src="./index.js?v=6.0.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -80,7 +83,7 @@
         target='_blank'><i class="gobugreport fas fa-bug" title='Report a Bug'></i></a></div>
     <div><span
       class='noscroll'
-      onclick="openPatchNotesModal()"><i class="godocumentation fas fa-file-alt" title='Patch Notes'></i></span></div>
+      onclick="openPatchNotesModal(true)"><i class="godocumentation fas fa-file-alt" title='Patch Notes'></i></span></div>
     <div><span
       class='noscroll'
       onclick="openChunkNotesModal()"><i class="gonotes fas fa-sticky-note" title='Notes'></i></span></div>
@@ -98,7 +101,6 @@
   </div>
   <div id="myModal" class="modal">
     <div class="modal-content noscroll">
-      <span class='beta-text'>BETA</span>
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeManualAdd()"></i>
       <div class='challenge-title'>
         <input type="text" placeholder="Filter tasks..." id="searchManual" class="noscrollhard"
@@ -134,7 +136,6 @@
   </div>
   <div id="myModal3" class="modal">
     <div class="modal-content noscroll">
-      <span class='beta-text'>BETA</span>
       <div id="notes-title" class="notes-title noscroll"></div>
       <div id="notes-data" class="notes-data noscroll"></div>
       <div id="notes-footer" class="notes-footer noscroll">
@@ -252,6 +253,7 @@
       <div id="searchchunks-searchcontainer" class="searchchunks-searchcontainer noscroll">
         <input type="text" placeholder="Search name..." id="searchChunks" class="noscrollhard"
           oninput="searchWithinChunks()" autocomplete="off" />
+        <span id="searchchunks-initwarning" class="searchchunks-initwarning noscroll"><i class="noscroll">*Only partial data loaded*</i></span>
       </div>
       <div id="searchchunks-data" class="searchchunks-data noscroll"></div>
     </div>
@@ -273,7 +275,6 @@
   </div>
   <div id="myModal2" class="modal">
     <div class="modal-content noscroll">
-      <span class='beta-text'>BETA</span>
       <div class="topbar noscroll">
         <i class="manual-close pic fas fa-times noscrollhard" onclick="closeChallengeDetails()"></i>
       </div>
@@ -407,6 +408,7 @@
   </div>
   <div id="myModal23" class="modal">
     <img class='background-img-23' draggable="false" src='./Background-chunk.PNG' />
+    <div class='roll-chunk-spinner'><i class="noscroll fas fa-spinner fa-spin"></i></div>
     <div class="modal-content noscroll">
       <div id="roll-chunk-title" class="roll-chunk-title noscroll">Rolling your next chunk...</div>
       <div id="roll-chunk-subtitle" class="roll-chunk-subtitle noscroll"></div>
@@ -426,24 +428,61 @@
   <div id="myModal24" class="modal">
     <div class="modal-content noscroll">
       <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">7/16/2023 (5.5.0)</div>
+      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">2/20/2024 (6.0.0)</div>
       <div id="patch-notes-data" class="patch-notes-data noscroll">
         <h2 class='noscroll'>Major Changes & New Features</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Added the All Tasks option, which creates a list of all intermediate skill tasks to be checked off. The list can be turned on in the Settings window, and can be used in the Activity Info window.</li>
-          <li class='noscroll'>Added a setting to prevent accidentally unlocking chunks. Turn this setting on, and now chunks can only be click-unlocked when holding the Shift key! If you find yourself accidentally unlocking chunks, this might be the setting for you.</li>
+          <li class='noscroll'><b>Chunk Sections</b> - Chunk Sections are the parts that make up a whole chunk, created by a river or fence separating a chunk into pieces. Now that we are able to determine not just what chunks you have access to, but what part of those chunks you have access to, we can much more accurately generate tasks and more! (This feature was a very big undertaking, and surely will have some issues. Report any you find using the Bug Report link in the top bar).<br /><img style="width: 50%;display: flex;margin: auto;" src="https://i.imgur.com/dddnn67.gif" /><br /><i style="display:block;text-align: center;">An example of Chunk Sections in chunk 12596</i></li>
+          <li class='noscroll'><b>Mobile Support</b> - Added much better support for the Chunk Picker on mobile, allowing for nearly everything that can be done on the desktop site to be done on the mobile site too!</li>
+          <li class='noscroll'><b>BiS Images</b> - Added equipment images to the BiS Equipment window, to more easily check out what gear is listed there visually.</li>
+          <li class='noscroll'><b>Map Overlays</b> - Added an Overlays button at the bottom-left of the map, to show different overlays overtop your chunk map.</li>
+          <li class='noscroll'><b>Chunk Notes Markdown</b> - Changed the Chunk Notes window to have basic support for markdown, allowing more options to customize what you want to display there.</li>
+          <li class='noscroll'><b>Chunk Numbering</b> - Changed the way that Selected chunk numbering works, so now it stays the same between reloads of the page. This will cut out confusion when other people look at your map also, since the numbers will be the same for you and them.</li>
+          <li class='noscroll'><b>RS3 Friends</b> - Added the ability to add both OSRS and RS3 Chunk Maps to your Chunk Picker Friends List.</li>
+          <li class='noscroll'><b>Backend Logic</b> - Overhauled the underlying logic for handling special characters in task and item names.</li>
         </ul>
         <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Changed the 5 recently rolled chunks panel to use the same data as the Chunk Roll History window, instead of its own separate data.</li>
-          <li class='noscroll'>Added Shooting Star spawn location in the Chunk Info panel.</li>
-          <li class='noscroll'>Added a green-highlight to primary sources of items in the Task Details window (thanks Cinni).</li>
-          <li class='noscroll'>Fixed a bug where the Backlog Source button would appear multiple times.</li>
-          <li class='noscroll'>Fixed a bug where task headers would become broken and hide tasks until the page was reloaded (thanks Shadefang & Cinni)</li>
-          <li class='noscroll'>Fixed a bug where some shops in the All Shops rule didn't have subheaders.</li>
-          <li class='noscroll'>Fixed a bug where the Forestry Shop couldn't be Backlog Sourced (thanks West).</li>
-          <li class='noscroll'>Fixed a visual bug with the theme buttons.</li>
-          <li class='noscroll'>Fixed a visual bug with the spacing of the color pickers in the Settings window.</li>
+          <li class='noscroll'>Added a way to select the number of doable clue steps already obtained within the Clue window.</li>
+          <li class='noscroll'>Added support for pressing the Esc key to exit windows within the Chunk Picker (thanks Happery).</li>
+          <li class='noscroll'>Added pre-loading for chunk images before a fancy roll, to prevent them from being partially loaded as the roll happens.</li>
+          <li class='noscroll'>Added support for double-searching shops to see their chunk location.</li>
+          <li class='noscroll'>Added a task for raking the Keldagrim farming patch once (thanks ChunkDwarf).</li>
+          <li class='noscroll'>Added the ability to get anti poison from Sigmund's chest in Lumbridge.</li>
+          <li class='noscroll'>Added Scrubfoot's Cave as an Accessible Area.</li>
+          <li class='noscroll'>Added the ability to get uncut red topaz from special crates and boxes.</li>
+          <li class='noscroll'>Added the ability to search partial data before tasks load in the Search window.</li>
+          <li class='noscroll'>Added console info output of the current version number.</li>
+          <li class='noscroll'>Added new quest Children of the Sun, and removed Zeah favour.</li>
+          <li class='noscroll'>Added new boss Scurrius, the Rat King.</li>
+          <li class='noscroll'>Added Combat Achievemnts for Scurrius and Desert Treasure II bosses.</li>
+          <li class='noscroll'>Added the Poll 80 changes.</li>
+          <li class='noscroll'>Added Forestry Part 3 changes, including the removal of forestry event-spawning items.</li>
+          <li class='noscroll'>Added a setting to enable warnings when clicking the 'Pick Chunk' button (thanks Kono Tyran).</li>
+          <li class='noscroll'>Added the ability to get Rocky from Sorceress' Garden.</li>
+          <li class='noscroll'>Added Camdozaal lockbox loot to task calculation.</li>
+          <li class='noscroll'>Added wiki links to the Methods and All Tasks lists.</li>
+          <li class='noscroll'>Added various barrels throughout the game that can fill an empty glass with beer.</li>
+          <li class='noscroll'>Added bird nest loot to the All Droptables rule.</li>
+          <li class='noscroll'>Added partial product skills tasks for Xtreme-type accounts.</li>
+          <li class='noscroll'>Added missing burnt tree tasks.</li>
+          <li class='noscroll'>Added music and max icon options for Chunk Stickers (thanks ChunkLok9090).</li>
+          <li class='noscroll'>Added a permanent unlockables task to buy a POH (thanks Streammz).</li>
+          <li class='noscroll'>Locked the ore rocks within the Desert Mining Camp underground behind completion of The Tourist Trap.</li>
+          <li class='noscroll'>Locked aberrant sepctres and bloodvelds within the Stronghold Slayer Cave behind completion of Priest in Peril.</li>
+          <li class='noscroll'>Changed the logic with how level 1 woodcutting and mining tools are handled.</li>
+          <li class='noscroll'>Changed the fire in the Ruins of Unkah to be classified as a range for cooking.</li>
+          <li class='noscroll'>Overhauled many tasks to refer to NPCs or Objects instead of Chunks, where possible, to help with Backlogging.</li>
+          <li class='noscroll'>Renamed 'Connections' to 'Connected Areas' in the Chunk Info sidebar.</li>
+          <li class='noscroll'>Fixed Slayer-monster drops not working with double-search.</li>
+          <li class='noscroll'>Fixed an issue with special characters in the Search window.</li>
+          <li class='noscroll'>Fixed an issue with Every Drop tasks not including the correct title if the task name has special characters.</li>
+          <li class='noscroll'>Fixed an issue where Future Tasks were calculated too often.</li>
+          <li class='noscroll'>Fixed an issue with earth impling loot.</li>
+          <li class='noscroll'>Fixed an error in the 'Giant rat#Stronghold of Security' droptable.</li>
+          <li class='noscroll'>Fixed the dark wizard tower wizards not being excluded from f2p maps.</li>
+          <li class='noscroll'>Fixed an issue with missing items from slayer monsters in All Droptables and Every Drop rules.</li>
+          <li class='noscroll'>Fixed an issue with Inquisitor armour showing the wrong wielding requirements (thanks CmwCaelin1).</li>
         </ul>
         <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack')">whitecatblack  <i class="fas fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
       </div>
@@ -466,6 +505,7 @@
       <div id="friends-add-data" class="friends-add-data noscroll">
         <input class='mid-friend noscroll' spellcheck='false' placeholder='Map ID (3-4 letters)' maxlength="128" />
         <input class='name-friend noscroll' spellcheck='false' placeholder="Friend's Name/Note" />
+        <span class="altsite-friend noscroll" ><input class="altsite-friend-checkbox noscroll" type="checkbox" />Is this an RS3 map?</span>
       </div>
       <div id="friends-add-footer" class="friends-add-footer noscroll">
         <button id='submit-friend-button' class='modal-button noscroll' onclick='submitFriend()' disabled>Add</button>
@@ -563,7 +603,7 @@
       <div id="manual-areas-title" class="manual-areas-title noscroll">Accessible Areas</div>
       <div id="manual-areas-searchcontainer" class="manual-areas-searchcontainer noscroll">
         <input type="text" placeholder="Filter..." id="searchManualAreas" class="noscrollhard"
-          oninput="searchManualAreas()" autocomplete="off" />
+          oninput="searchManualAreas()" autocomplete="new-password" />
           <span><input class="changeManualAreasFilterBy" type="checkbox" onclick="changeManualAreasFilterBy()" />Show unlocked only</span>
       </div>
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeManualAreas()"></i>
@@ -595,9 +635,11 @@
   </div>
   <div id="myModal35" class="modal">
     <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeChunkNotes()"></i>
       <div id="chunk-notes-title" class="chunk-notes-title noscroll">Notes</div>
       <div id="chunk-notes-data" class="chunk-notes-data noscroll">
         <textarea placeholder="Add notes here..."></textarea>
+        <div id="chunk-notes-markdown-text" class="chunk-notes-markdown-text"></div>
       </div>
       <div id="chunk-notes-footer" class="chunk-notes-footer noscroll">
         <button id='save-chunk-notes-button' class='modal-button' onclick='saveChunkNotes()'>Save</button>
@@ -617,6 +659,63 @@
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeClipboard()"></i>
       <div id="clipboard-title" class="clipboard-title noscroll">Copy to clipboard:</div>
       <div id="clipboard-data" class="clipboard-data noscroll"><button id='chunks-clipboard-button' class='modal-button' onclick='exportFunc("chunks")'>Chunks</button><button id='tasks-clipboard-button' class='modal-button' onclick='exportFunc("tasks")'>Tasks</button></div>
+    </div>
+  </div>
+  <div id="myModal39" class="modal">
+    <div class="modal-content noscroll">
+      <div class="topbar noscroll">
+        <i class="manual-close pic fas fa-times noscrollhard" onclick="closeOverlays()"></i>
+      </div>
+      <div id="overlays-title" class="overlays-title noscroll">Map Overlays</div>
+      <div id="overlays-data" class="overlays-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal40" class="modal">
+    <div class="modal-content noscroll">
+      <div id="exitsandbox-title" class="exitsandbox-title noscroll">Exit Sandbox Mode?</div>
+      <div id="exitsandbox-subtitle" class="exitsandbox-subtitle noscroll">Exiting sandbox mode will discard all changes made while in sandbox mode.<div class="exitsandbox-warn"><b>Are you sure you wish to proceed?</b></div></div>
+      <div id="exitsandbox-data" class="exitsandbox-data noscroll"><div><div class="exitsandbox-cancel" onclick="enableTestMode(true, true)">Cancel</div><div class="exitsandbox-proceed" onclick="enableTestMode(false, true)">Yes, proceed</div></div></div>
+    </div>
+  </div>
+  <div id="myModal41" class="modal">
+    <div class="modal-content noscroll">
+      <div id="rollwarning-title" class="rollwarning-title noscroll">Pick a chunk?</div>
+      <div id="rollwarning-subtitle" class="rollwarning-subtitle noscroll">This action is not reversible.<div class="rollwarning-warn"><b>Are you sure you wish to proceed?</b></div></div>
+      <div id="rollwarning-data" class="rollwarning-data noscroll"><div><div class="rollwarning-cancel" onclick="cancelPickWarning()">Cancel</div><div class="rollwarning-proceed" onclick="pickCanvas(false, true)">Yes, proceed</div></div></div>
+    </div>
+  </div>
+  <div id="myModal42" class="modal">
+    <div class="modal-content noscroll">
+      <div id="chunk-sections-title" class="chunk-sections-title noscroll">Chunk Sections</div>
+      <div id="chunk-sections-searchcontainer" class="chunk-sections-searchcontainer noscroll">
+        <input type="text" placeholder="Filter..." id="searchChunkSections" class="noscrollhard"
+          oninput="searchChunkSections()" autocomplete="new-password" />
+      </div>
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeChunkSections()"></i>
+      <div id="chunk-sections-data" class="chunk-sections-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal43" class="modal">
+    <div class="modal-content noscroll">
+      <div id="chunk-section-picker-title" class="chunk-section-picker-title noscroll">Select Chunk Sections</div>
+      <div id="chunk-section-picker-subtitle" class="chunk-section-picker-subtitle noscroll">
+        Select the sections of the chunk you currently have access to. This helps the website be *much* more accurate at generating correct chunk tasks.
+        <span class="section-help noscroll">
+          <i class="fas fa-info-circle"></i>
+          <span class="tooltiptext"><i><b>What are Chunk Sections?</b></i> Chunk Sections are the little pieces that make up a whole chunk, for when a chunk is not fully continous. When a fence or river cuts through a chunk and prevents you from being able to access parts of it, that's a Chunk Section. Indicating what parts of a chunk you have access to helps the Chunk Task calculation be as accurate as it can be, not giving you tasks for things in your chunk you can't access.<br /><br />The website automatically figures out what parts of all your chunks you have access to, but sometimes it will get stuck and ask you to indicate what parts of a chunk you can access. <b>It is not necessary for you to manually do this for every chunk, only if the website asks you for help or if you need to correct something it got wrong.</b></b></span>
+        </span>
+      </div>
+      <div id="chunk-section-picker-data" class="chunk-section-picker-data noscroll">
+        <div class="chunk-section-picker-chunk-id noscroll"></div>
+          <div class="chunk-section-picker-container">
+            <canvas id='chunk-section-picker-canvas' width="192" height="192"></canvas>
+          </div>
+          <div><input id="chunk-section-picker-selectall-btn" type="checkbox" onclick="selectAllChunkSections()">I have access to the entire chunk</input></div>
+          <div class="chunk-section-picker-btns"></div>
+      </div>
+      <div id="chunk-section-picker-footer" class="chunk-section-picker-footer noscroll">
+        <button id='save-chunk-section-picker-button' class='modal-button' onclick='saveChunkSectionPicker()'>Save</button>
+      </div>
     </div>
   </div>
   <div id='entry-menu'>
@@ -689,7 +788,6 @@
   </div>
   <div id='help-menu'>
     <div class='help-content'>
-      <span class='beta-text'>BETA</span>
       <div class='block'>
         <div class='title'>Whoa there!</div>
       </div>
@@ -772,7 +870,7 @@
             class="acc pic fas fa-plus"></i></span><span class="accordion-title">Clue steps</span></div>
       <div class="panel panel-clues"></div>
       <div id='infoconnections' class='accordion' onclick="toggleInfoPanel('connections')"><span class='exp'><i
-            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Connections</span></div>
+            class="acc pic fas fa-plus"></i></span><span class="accordion-title">Connected areas</span></div>
       <div class="panel panel-connections"></div>
       <div id='infochallenges' class='accordion' onclick="toggleInfoPanel('challenges')"><span class='exp'><i
             class="acc pic fas fa-plus"></i></span><span class="accordion-title">Potential chunk
@@ -785,14 +883,13 @@
   </div>
   <div class='menu9'>
     <div class='challengecontent text'>
-      <span class='beta-text'>BETA</span>
       <div id='challengesactive' class='accordion' onclick="toggleChallengesPanel('active')"><span class='exp'><i
             class="acc pic fas fa-plus"></i></span><span class="accordion-title">Active Chunk
           Tasks</span><span class='num-tasks'></span><span class='tasks-checkmark' onclick="toggleHideCompletedTasks(event)"><i class="acc pic fas fa-eye"></i></span></span></div>
       <div class="panel panel-active noscroll calculating"><i class="fas fa-spinner fa-spin"></i></div>
       <div id='challengesareas' class='accordion' onclick="toggleChallengesPanel('areas')"><span class='exp'><i
             class="acc pic fas fa-plus"></i></span><span class="accordion-title">Accessible Areas</span></div>
-      <div class="panel panel-areas noscroll"><span class="noscroll areas-tab-text">Accessible Areas are now handled automatically by the website! If need be, you can <span class="noscroll open-manual-areas" onclick="openManualAreas()">manually add/remove areas</span> if the website gets it wrong.</span></div>
+      <div class="panel panel-areas noscroll"><span class="noscroll areas-tab-text">Accessible Areas and Chunk Sections are now handled automatically by the website! If need be, you can manually add/remove <span class="noscroll open-manual-areas" onclick="openManualAreas()">areas</span> or <span class="noscroll open-chunk-sections" onclick="openChunkSections()">sections</span> if the website gets it wrong.</span></div>
       <div id='challengesbacklog' class='accordion' onclick="toggleChallengesPanel('backlog')"><span class='exp'><i
             class="acc pic fas fa-plus"></i></span><span class="accordion-title">Backlog</span></div>
       <div class="panel panel-backlog noscroll">None</div>
@@ -816,6 +913,37 @@
         <div class="highlightAllQuest"><span onclick="highlightAllQuestCanvas()">Highlight all</span></div>
         <div class="panel panel-questdata visible">None</div>
       </div>
+    </div>
+  </div>
+  <div class='menu11'>
+    <div id='map-marker-btn' class='map-marker-btn noscroll' title="Overlays" onclick="showOverlays()"><i class="fas fa-map-marker-alt"></i></div>
+  </div>
+  <div class='menu12'>
+    <div id='mobile-zoomin-btn' class='mobile-zoomin-btn noscroll' title="Zoom In" onclick="handleMobileZoom(1)"><i class="fas fa-search-plus"></i></div>
+    <div id='mobile-zoomout-btn' class='mobile-zoomout-btn noscroll' title="Zoom Out" onclick="handleMobileZoom(-1)"><i class="fas fa-search-minus"></i></div>
+    <div id='mobile-menu-btn' class='mobile-menu-btn noscroll' title="Options" onclick="showMobileMenu()"><i class="fas fa-ellipsis-h"></i></div>
+  </div>
+  <div class='menu13'>
+    <div>
+      <div class='mobile-item-header noscroll'>Select Option</div>
+      <div class='mobile-item noscroll' onclick="openHighest2()">Activity Info</div>
+      <div class='mobile-item noscroll' onclick="openHighest()">Current BIS</div>
+      <div class='mobile-item noscroll' onclick="openSearch()">Search Within My Chunks</div>
+      <div class='mobile-item noscroll open-manual-outer-container' onclick="openManualAddOuter()">Manually Add To My Chunks</div>
+      <div class='mobile-item noscroll' onclick="showOverlays()">Show Overlays</div>
+      <div class='mobile-item noscroll' onclick="openClipboard()">Export to Clipboard</div>
+      <div class='mobile-item noscroll' onclick="showChunkHistory()">Chunk-roll History</div>
+      <div class='mobile-item noscroll friendslist' onclick="openFriendsList()">Friends list</div>
+      <div class='mobile-item noscroll' onclick="enableScreenshotMode()">Screenshot mode</div>
+      <div class='mobile-item noscroll' onclick="enableTestMode()">Sandbox mode</div>
+      <div class='mobile-item noscroll' onclick="openChunkNotesModal()">Notes</div>
+      <div class='mobile-item noscroll patchnotes-mobile' onclick="openPatchNotesModal(true)">Patch Notes</div>
+      <a href='https://www.patreon.com/bePatron?u=56906793' target='_blank'><div class='mobile-item noscroll'>Support me on Patreon<i class="external-link-icon fas fa-external-link-alt"></i></div></a>
+      <a href='https://discord.gg/kXRgpxnBxu' target='_blank'><div class='mobile-item noscroll'>Join the Discord<i class="external-link-icon fas fa-external-link-alt"></i></div></a>
+      <a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><div class='mobile-item noscroll'>Report a Bug<i class="external-link-icon fas fa-external-link-alt"></i></div></a>
+      <a href='https://chunk-stats.web.app' target='_blank'><div class='mobile-item noscroll'>Chunk Stats<i class="external-link-icon fas fa-external-link-alt"></i></div></a>
+      <div class='mobile-item noscroll settingstoggle' onclick="showSettings()">Settings</div>
+      <div class='mobile-item mobile-item-cancel noscroll' onclick="hideMobileMenu()">Cancel</div>
     </div>
   </div>
   <div class='hiddenInfo' onclick='showChunkInfo()'><i class="pic fas fa-plus"></i></div>
@@ -921,7 +1049,7 @@
     <div class='inner-content9'>
       <div class="centered avatar"><img
           src="./source-chunk-avatar.png" /></div>
-      <p class="indent">Hi, I'm <b>Source Link</b> <i>aka</i> <b>Source Chunk</b>! I'm a Software Engineer from the US
+      <p class="indent">Hi, I'm <b>Source Chunk</b>! I'm a Software Engineer from the US
         that likes to make websites and tools for his friends. I've been involved in the OneChunkMan community since
         June/July of 2019, and I've been making tools for this community basically since I joined.</p>
       <u class="centered">

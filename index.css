@@ -207,7 +207,7 @@ button {
 }
 
 .box.locked .icon::before {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     content: "\f129";
     color: rgba(0, 255, 255, .75);
     position: absolute;
@@ -266,6 +266,20 @@ button {
     background-color: rgb(150, 180, 150);
 }
 
+.pick-preloading {
+    background-color: rgb(225, 225, 225);
+    width: 100%;
+    height: 100%;
+    font-size: min(2vw, 20px);
+    color: white;
+    display: block;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    cursor: not-allowed;
+}
+
 .unpick {
     background-color: rgb(230, 115, 115);
     width: 100%;
@@ -290,6 +304,20 @@ button {
     background-color: rgb(180, 150, 150);
 }
 
+.unpick-preloading {
+    background-color: rgb(225, 225, 225);
+    width: 100%;
+    height: 100%;
+    font-size: min(2vw, 20px);
+    color: white;
+    display: none;
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    cursor: not-allowed;
+}
+
 .roll2 {
     background-color: rgb(100, 125, 225);
     width: 100%;
@@ -312,6 +340,20 @@ button {
 
 .roll2:active {
     background-color: rgb(150, 150, 180);
+}
+
+.roll2-preloading {
+    background-color: rgb(225, 225, 225);
+    width: 100%;
+    height: 100%;
+    font-size: min(2vw, 20px);
+    color: white;
+    display: none;
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    cursor: not-allowed;
 }
 
 .center {
@@ -510,6 +552,134 @@ button.menu2 {
     width: 300px;
 }
 
+.menu11 {
+    position: fixed;
+    z-index: 99 !important;
+    bottom: min(7vw, 90px);
+    left: 10px;
+    width: auto;
+    height: 2vw;
+}
+
+.map-marker-btn {
+    background-color: var(--color1);
+    height: auto;
+    font-size: min(2vw, 32px);
+    color: var(--colorText);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 1px 7px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.map-marker-btn:hover {
+    background-color: var(--color2);
+    color: var(--colorLink);
+}
+
+.menu12 {
+    position: fixed;
+    z-index: 98 !important;
+    bottom: min(28vw, 110px);
+    right: 10px;
+    width: auto;
+    height: 2vw;
+}
+
+.menu13 {
+    position: fixed;
+    z-index: 999 !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color1);
+    text-align: center;
+    overflow-y: auto;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.mobile-item-header {
+    font-size: min(10vw, 48px);
+    border-bottom: solid 1px;
+    margin-bottom: 10px;
+    background-color: var(--color2);
+}
+
+.mobile-item {
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    background-color: var(--color3);
+    position: relative;
+    margin: 5px 10px;
+    font-size: min(6vw, 32px);
+}
+
+.mobile-item-cancel {
+    background-color: var(--color8) !important;
+}
+
+.mobile-menu-btn {
+    background-color: var(--color1);
+    height: auto;
+    font-size: min(4vw, 32px);
+    color: var(--colorText);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px 7px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.mobile-zoomin-btn {
+    background-color: var(--color1);
+    height: auto;
+    font-size: min(4vw, 32px);
+    color: var(--colorText);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px 7px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    margin-bottom: 5px;
+}
+
+.mobile-zoomout-btn {
+    background-color: var(--color1);
+    height: auto;
+    font-size: min(4vw, 32px);
+    color: var(--colorText);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px 7px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    margin-bottom: 5px;
+}
+
 .gitgeddes {
     word-break: break-all;
 }
@@ -686,6 +856,10 @@ button.menu2 {
     width: min(8%, 100px);
     margin: auto;
     pointer-events: all;
+}
+
+.lock-pin.mobile {
+    margin-left: -4px;
 }
 
 .lock-pin {
@@ -1434,7 +1608,7 @@ input#searchPlayerMaps {
     display: none;
     position: absolute;
     top: 10vh;
-    font-size: min(2.75vw, 52px);
+    font-size: min(5vw, 40px);
     z-index: 999 !important;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1448,7 +1622,7 @@ input#searchPlayerMaps {
 
 .test-hint .subtext {
     display: block;
-    font-size: min(1.25vw, 24px);
+    font-size: min(2vw, 18px);
 }
 
 .settings {
@@ -1632,6 +1806,15 @@ input#searchPlayerMaps {
     -webkit-text-fill-color: black;
     -webkit-text-stroke-width: 0.045em;
     -webkit-text-stroke-color: #868080;
+}
+
+.topnav i.hasupdate {
+    -webkit-text-stroke-color: #57B872;
+    right: 234px;
+}
+
+.mobile-item.hasupdate {
+    color: #57B872;
 }
 
 .topnav i:hover {
@@ -1963,16 +2146,16 @@ input#searchPlayerMaps {
 }
 
 .areas-tab-text {
-    font-size: min(1.75vw, 16px);
+    font-size: min(6vw, 16px);
 }
 
-.open-manual-areas {
+.open-manual-areas, .open-chunk-sections {
     text-decoration: underline;
     cursor: pointer;
     transition-duration: 0.4s;
 }
 
-.open-manual-areas:hover {
+.open-manual-areas:hover, .open-chunk-sections:hover {
     color: var(--colorLink);
 }
 
@@ -2097,6 +2280,10 @@ input#searchPlayerMaps {
     margin-left: 10px;
 }
 
+#challengesactive.mobile .num-tasks {
+    font-size: 3.5vw !important;
+}
+
 .bold {
     font-weight: bolder;
 }
@@ -2105,6 +2292,11 @@ input#searchPlayerMaps {
     color: var(--colorText);
     text-decoration: underline;
     cursor: pointer;
+}
+
+.external-link-icon {
+    margin-left: 10px;
+    font-size: smaller;
 }
 
 .maplink {
@@ -2161,6 +2353,27 @@ input#searchPlayerMaps {
 }
 
 .help:hover .tooltiptext {
+    visibility: visible;
+}
+
+.section-help .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: var(--color2);
+    color: var(--colorText);
+    text-align: center;
+    border: 1px var(--colorText) solid;
+    padding: 5px;
+    font-size: 14px;
+    position: absolute;
+    z-index: 1;
+}
+
+.section-help:hover {
+    color: var(--colorLink);
+}
+
+.section-help:hover .tooltiptext {
     visibility: visible;
 }
 
@@ -2238,6 +2451,16 @@ input#searchPlayerMaps {
     background-color: rgba(0,0,0,0.4);
 }
 
+.modal.mobile {
+    padding-top: 0px !important;
+}
+
+.modal.mobile > .modal-content {
+    height: 100% !important;
+    width: 98.5% !important;
+    margin-top: 0 !important;
+}
+
 .modal-content {
     position: relative;
     background-color: var(--color1);
@@ -2265,7 +2488,7 @@ input#searchPlayerMaps {
     width: 35%;
 }
 
-#myModal4 {
+#myModal4:not(.mobile) {
     padding-top:16vh !important;
 }
 
@@ -2353,7 +2576,7 @@ input#searchPlayerMaps {
     margin-top: -2.5%;
 }
 
-#myModal18 {
+#myModal18:not(.mobile) {
     padding-top: 16vh !important;
 }
 
@@ -2364,8 +2587,8 @@ input#searchPlayerMaps {
     color: var(--colorText);
 }
 
-#myModal26 {
-    padding-top:16vh !important;
+#myModal26:not(.mobile) {
+    padding-top: 16vh !important;
 }
 
 #myModal26 > .modal-content {
@@ -2388,6 +2611,20 @@ input#searchPlayerMaps {
 }
 
 #myModal31 > .modal-content {
+    height: 60%;
+    width: 45%;
+    background-color: var(--color1);
+    color: var(--colorText);
+}
+
+#myModal42 > .modal-content {
+    height: 60%;
+    width: 45%;
+    background-color: var(--color1);
+    color: var(--colorText);
+}
+
+#myModal43 > .modal-content {
     height: 60%;
     width: 45%;
     background-color: var(--color1);
@@ -2418,6 +2655,10 @@ input#searchPlayerMaps {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.modal-content.mobile .manual-close {
+    font-size: min(6vw, 36px);
 }
 
 .challenge-title {
@@ -2456,7 +2697,7 @@ input#searchPlayerMaps {
     display: none;
 }
 
-.open-manual-outer-container {
+.open-manual-outer-container:not(.mobile-item) {
     border-top: 1px solid;
     display: none;
     font-size: min(1.75vw, 2.75vh, 26px);
@@ -2722,7 +2963,7 @@ input#searchPlayerMaps {
 }
 
 .alts-data {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 73%;
     padding-left: 10px;
 }
@@ -2736,6 +2977,46 @@ input#searchPlayerMaps {
 }
 
 .alt-challenge {
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    margin: 3px;
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 10%;
+    background-color: var(--color3);
+    margin-right: 15px;
+    position: relative;
+}
+
+.overlays-title {
+    font-size: 36px;
+    padding-left: 10px;
+    max-height: 20%;
+    min-height: 20%;
+    text-align: center;
+    font-weight: bold;
+    overflow-y: hidden;
+}
+
+.overlays-data {
+    overflow-y: auto;
+    height: 73%;
+    padding-left: 10px;
+}
+
+.overlays-data .link {
+    pointer-events: all;
+}
+
+.overlays-data > .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.overlay {
     border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 3px;
@@ -2771,7 +3052,7 @@ input#searchPlayerMaps {
 }
 
 .notes-title {
-    font-size: min(2vw, 32px);
+    font-size: min(6vw, 28px);
     padding: 0px 10px;
     height: 20%;
     overflow-y: hidden;
@@ -2908,7 +3189,7 @@ input#searchPlayerMaps {
 }
 
 .rules-title {
-    font-size: 4.5vh;
+    font-size: min(10vw, 40px);
     padding-left: 10px;
     max-height: 9%;
     min-height: 9%;
@@ -2920,7 +3201,7 @@ input#searchPlayerMaps {
 .rules-subtitle {
     padding: 0px 15px;
     background-color: var(--color2);
-    font-size: 1.65vh;
+    font-size: min(3.25vw, 14px);
     text-align: center;
     max-height: 10%;
     min-height: 10%;
@@ -2990,6 +3271,7 @@ input#searchPlayerMaps {
     margin-bottom: -1px;
     border: 1px solid;
     padding-bottom: 5px;
+    font-size: min(6vw, 26px);
 }
 
 #rules-data > .accordion:hover {
@@ -3082,7 +3364,7 @@ input#searchManualAreas {
 }
 
 .outer-manual-area {
-    font-size: 24px;
+    font-size: min(4vw, 24px);
     font-weight: normal;
     border: solid 1px var(--color1);
     border-radius: 5px;
@@ -3095,19 +3377,17 @@ input#searchManualAreas {
 
 .manual-area-text {
     float: right;
-    font-size: 24px;
     font-weight: normal;
     border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 5px;
     padding: 2px;
     background-color: var(--color3);
-    max-width: 60%;
+    max-width: 59%;
 }
 
 .manual-area-btn {
     float: left;
-    font-size: 24px;
     font-weight: normal;
     border: solid 1px var(--color1);
     color: black;
@@ -3164,6 +3444,208 @@ input#searchManualAreas {
 
 .grey-manual-area-btn {
     background-color: rgb(100, 100, 100);
+}
+
+.chunk-sections-title {
+    font-size: 4.5vh;
+    padding-left: 10px;
+    max-height: 10%;
+    min-height: 10%;
+    text-align: center;
+    background-color: var(--color2);
+    overflow-y: hidden;
+}
+
+.chunk-sections-searchcontainer {
+    height: 8%;
+    padding: 0px 15px;
+    font-size: 1.7vh;
+    background-color: var(--color2);
+}
+
+input#searchChunkSections {
+    font-size: 2.1vh;
+}
+
+.chunk-sections-data {
+    overflow-y: scroll;
+    height: 81.5%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: solid 1px;
+    text-align: center;
+}
+
+.chunk-sections-data > .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.outer-chunk-section {
+    font-size: min(4vw, 24px);
+    font-weight: normal;
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+    background-color: var(--color3);
+    position: relative;
+    display: inline-block;
+    width: 15%;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.outer-chunk-section:hover {
+    border-color: var(--colorFlash);
+    background-color: var(--color6);
+}
+
+.chunk-section-text {
+    font-weight: normal;
+}
+
+.chunk-section-picker-title {
+    font-size: 4.5vh;
+    max-height: 10%;
+    min-height: 10%;
+    text-align: center;
+    background-color: var(--color2);
+    overflow-y: hidden;
+}
+
+.chunk-section-picker-subtitle {
+    height: 10%;
+    padding: 0px 15px;
+    background-color: var(--color2);
+    font-size: min(4vw, 16px);
+    text-align: center;
+}
+
+.chunk-section-picker-data {
+    overflow-y: scroll;
+    height: 66.5%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: solid 1px;
+    text-align: center;
+}
+
+.chunk-section-picker-data > .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.chunk-section-picker-chunk-id {
+    font-weight: bold;
+    font-size: 36px;
+}
+  
+.chunk-section-picker-container {
+    border: solid black 2px;
+    width: 192px;
+    display: inline-block;
+    height: 192px;
+}
+
+.chunk-section-picker-btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.section-btn {
+    font-weight: normal;
+    border: solid 1px var(--color3);
+    margin: 5px;
+    padding: 2px;
+    cursor: pointer;
+    font-size: min(4vw, 24px);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.section-btn:not(.locked):hover {
+    background-color: var(--color3);
+}
+
+.section-btn.locked {
+    cursor: not-allowed;
+}
+
+.green-section-btn {
+    background-color: rgb(30, 100, 30);
+}
+
+.green-section-btn:not(.locked):hover {
+    background-color: rgb(15, 150, 15);
+}
+
+.green-section-btn.selected-area {
+    background-color: rgb(15, 150, 15);
+}
+
+.green-section-btn.selected-area:hover {
+    background-color: rgb(30, 100, 30);
+}
+
+.red-section-btn {
+    background-color: rgb(100, 30, 30);
+}
+
+.red-section-btn:not(.locked):hover {
+    background-color: rgb(150, 15, 15);
+}
+
+.red-section-btn.selected-area {
+    background-color: rgb(150, 15, 15);
+}
+
+.red-section-btn.selected-area:hover {
+    background-color: rgb(100, 30, 30);
+}
+
+.chunk-section-picker-footer {
+    height: 13%;
+    text-align: center;
+    background-color: var(--color2);
+}
+
+#save-chunk-section-picker-button {
+    background-color: rgb(30, 100, 30);
+    width: 200px;
+    height: 5vh;
+    font-size: 24px;
+    color: white;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 20px 10px;
+}
+
+#save-chunk-section-picker-button.disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+#save-chunk-section-picker-button:not(.disabled):hover {
+    background-color: rgb(15, 150, 15);
 }
 
 #myModal4 > .modal-content {
@@ -3261,6 +3743,11 @@ input#searchManualAreas {
     text-align: center;
 }
 
+.modal-content.mobile #canvas-graph {
+    margin: 10px;
+    width: 90%;
+}
+
 #canvas-graph {
     border: solid black;
     margin: 25px;
@@ -3304,6 +3791,10 @@ input#searchManualAreas {
     max-width: 400px;
 }
 
+#myModal40 > .modal-content {
+    max-width: 400px;
+}
+
 #myModal6 > .modal-content {
     max-width: 400px;
 }
@@ -3332,7 +3823,8 @@ input#searchManualAreas {
     font-size: 18px;
     text-align: center;
     border-top: solid 1px;
-    height: 80%;
+    height: 72%;
+    padding-top: 5%;
 }
 
 .preset-data > div {
@@ -3366,6 +3858,118 @@ input#searchManualAreas {
 }
 
 .preset-proceed:hover {
+    background-color: rgb(50, 175, 50);
+}
+
+.exitsandbox-title {
+    font-size: 24px;
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 20%;
+    min-height: 20%;
+    line-height: 50px;
+    text-align: center;
+    background-color: var(--color1);
+    overflow-y: hidden;
+}
+
+.exitsandbox-subtitle {
+    padding: 0px 15px;
+    background-color: var(--color4);
+    font-size: 18px;
+    text-align: center;
+    border-top: solid 1px;
+    height: 72%;
+    padding-top: 5%;
+}
+
+.exitsandbox-data > div {
+    float: right;
+    margin-right: 10px;
+    margin-top: -55px;
+    display: flex;
+}
+
+.exitsandbox-warn {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.exitsandbox-cancel {
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.exitsandbox-proceed {
+    border: solid 1px black;
+    background-color: rgb(75, 200, 75);
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.exitsandbox-proceed:hover {
+    background-color: rgb(50, 175, 50);
+}
+
+.rollwarning-title {
+    font-size: 24px;
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 20%;
+    min-height: 20%;
+    line-height: 50px;
+    text-align: center;
+    background-color: var(--color1);
+    overflow-y: hidden;
+}
+
+.rollwarning-subtitle {
+    padding: 0px 15px;
+    background-color: var(--color4);
+    font-size: 18px;
+    text-align: center;
+    border-top: solid 1px;
+    height: 72%;
+    padding-top: 5%;
+}
+
+.rollwarning-data > div {
+    float: right;
+    margin-right: 10px;
+    margin-top: -55px;
+    display: flex;
+}
+
+.rollwarning-warn {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.rollwarning-cancel {
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.rollwarning-proceed {
+    border: solid 1px black;
+    background-color: rgb(75, 200, 75);
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.rollwarning-proceed:hover {
     background-color: rgb(50, 175, 50);
 }
 
@@ -3437,7 +4041,7 @@ input#searchManualAreas {
 }
 
 .slayer-locked-title {
-    font-size: 3vh;
+    font-size: min(8vw, 28px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 15%;
@@ -3451,7 +4055,7 @@ input#searchManualAreas {
 .slayer-locked-subtitle {
     padding: 0px 15px;
     background-color: var(--color1);
-    font-size: 1.7vh;
+    font-size: min(5vw, 16px);
     text-align: center;
     border-top: solid 1px;
     height: 85%;
@@ -3581,7 +4185,7 @@ input#searchManualAreas {
 }
 
 .construction-locked-title {
-    font-size: 3vh;
+    font-size: min(8vw, 28px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 15%;
@@ -3595,7 +4199,7 @@ input#searchManualAreas {
 .construction-locked-subtitle {
     padding: 0px 15px;
     background-color: var(--color1);
-    font-size: 1.7vh;
+    font-size: min(5vw, 16px);
     text-align: center;
     border-top: solid 1px;
     height: 85%;
@@ -3657,7 +4261,7 @@ input#searchManualAreas {
 }
 
 .passive-skill-title {
-    font-size: 3vh;
+    font-size: min(8vw, 28px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 15%;
@@ -3671,7 +4275,7 @@ input#searchManualAreas {
 .passive-skill-subtitle {
     padding: 0px 15px;
     background-color: var(--color1);
-    font-size: min(1.5vw, 16px);
+    font-size: min(4vw, 16px);
     text-align: center;
     border-top: solid 1px;
     height: 85%;
@@ -3903,7 +4507,7 @@ input#searchManualAreas {
 }
 
 .searchchunks-title {
-    font-size: 3.25vh;
+    font-size: min(6.25vw, 30px);
     text-align: center;
     max-height: 10%;
     min-height: 10%;
@@ -3917,7 +4521,7 @@ input#searchManualAreas {
     height: 10%;
     padding: 0px 15px;
     background-color: var(--color2);
-    font-size: min(1.35vw, 16px);
+    font-size: min(4vw, 16px);
 }
 
 .searchchunks-searchcontainer {
@@ -3929,6 +4533,10 @@ input#searchManualAreas {
 
 input#searchChunks {
     font-size: 2.1vh;
+}
+
+.searchchunks-initwarning {
+    color: red;
 }
 
 .searchchunks-data {
@@ -3985,6 +4593,7 @@ input#searchChunks {
     margin: 3px;
     padding: 2px;
     padding-left: 5px;
+    padding-right: 30px;
     background-color: var(--color3);
     margin-right: 15px;
     position: relative;
@@ -3994,6 +4603,8 @@ input#searchChunks {
     position: absolute;
     right: 5px;
     cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .double-search-icon:hover {
@@ -4088,6 +4699,10 @@ input#searchChunks {
     overflow-y: auto;
     height: 84%;
     background-color: var(--color2);
+}
+
+.clue-steps-input {
+    width: 30px;
 }
 
 .doablecluesteps-data > .results {
@@ -4265,7 +4880,7 @@ input#searchChunks {
 }
 
 .clipboard-title {
-    font-size: min(2.9vw, 3.9vh);
+    font-size: min(10vw, 36px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 20%;
@@ -4324,6 +4939,10 @@ input#searchChunks {
     background-color: rgb(75, 100, 200);
 }
 
+.modal-content.mobile .style-button {
+    padding: 10px 3vw;
+}
+
 .style-button {
     padding: 10px 1vw;
     text-align: center;
@@ -4342,6 +4961,11 @@ input#searchChunks {
     background-color: var(--color9);
 }
 
+.highest-data .row {
+    display: grid !important;
+    grid-template-columns: min-content auto;
+}
+
 .style-body .row {
     display: flex;
     align-items: center;
@@ -4354,6 +4978,7 @@ input#searchChunks {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
 }
 
 .Skills-body .row {
@@ -4366,6 +4991,7 @@ input#searchChunks {
 
 .Clues-body .row {
     width: 90%;
+    font-size: min(4vw, 20px);
 }
 
 .Clues-body .row.row-header {
@@ -4388,9 +5014,37 @@ input#searchChunks {
     background-color: var(--color2);
 }
 
+#myModal12.mobile .row {
+    width: 85%;
+}
+
 .slot-text {
     margin-left: 20px;
     font-size: 24px;
+}
+
+.hidden-slot-icon {
+    opacity: 0%;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+}
+
+.hidden-slot-icon:hover {
+    opacity: 100%;
+}
+
+.item-pic {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-pic > img {
+    max-width: 36px;
+    max-height: 36px;
+    position: absolute;
 }
 
 .skill-text {
@@ -4406,6 +5060,10 @@ input#searchChunks {
     width: 5%;
     min-width: 25px;
     text-align: center;
+}
+
+.skill-button.mobile {
+    width: 48%;
 }
 
 .skill-button {
@@ -4468,6 +5126,10 @@ input#searchChunks {
     border-right: solid 1px var(--color8);
 }
 
+.button-table-header.mobile {
+    width: 48.2%;
+}
+
 .button-table-header {
     font-size: 18px;
     font-weight: bold;
@@ -4486,8 +5148,7 @@ input#searchChunks {
 .clue-possible {
     padding-left: 10px;
     margin-left: 10px;
-    font-size: 20px;
-    width: 45%;
+    width: 40%;
     text-align: center;
     border-left: solid 1px var(--color8);
     border-right: solid 1px var(--color8);
@@ -4495,7 +5156,6 @@ input#searchChunks {
 
 .clue-tier {
     width: 150px;
-    font-size: 20px;
 }
 
 .clue-tier .tier-icon {
@@ -4503,8 +5163,7 @@ input#searchChunks {
 }
 
 .clue-percent {
-    width: 30%;
-    font-size: 19px;
+    width: 35%;
     text-align: center;
 }
 
@@ -4521,7 +5180,7 @@ input#searchChunks {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    width: 45%;
+    width: 40%;
     border-left: solid 1px var(--color8);
     border-right: solid 1px var(--color8);
 }
@@ -4530,7 +5189,7 @@ input#searchChunks {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    width: 30%;
+    width: 35%;
 }
 
 .star-sites {
@@ -4614,6 +5273,10 @@ input#searchChunks {
     margin-bottom: 20px;
 }
 
+.modal-content.mobile .methods-topbar {
+    font-size: min(7vw, 26px);
+}
+
 .methods-topbar {
     font-size: 32px;
     font-weight: bold;
@@ -4654,6 +5317,8 @@ input#searchChunks {
     position: absolute;
     right: 0;
     margin: 5px;
+    top: 50%;
+    transform: translateY(-66%);
 }
 
 .methods-data > .skill-method > input {
@@ -4687,7 +5352,7 @@ input#searchChunks {
 }
 
 .add-equipment-title {
-    font-size: min(2vw, 4vh, 24px);
+    font-size: min(5.25vw, 30px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 7%;
@@ -4698,7 +5363,7 @@ input#searchChunks {
 
 .add-equipment-subtitle {
     padding: 0px 15px;
-    font-size: min(1.15vw, 1.75vh, 16px);
+    font-size: min(3.25vw, 16px);
     text-align: center;
     height: 15%;
 }
@@ -4770,7 +5435,7 @@ input#searchAddEquipment {
 }
 
 .backlog-sources-title {
-    font-size: min(3vw, 4vh, 36px);
+    font-size: min(10vw, 36px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 7%;
@@ -4781,7 +5446,7 @@ input#searchAddEquipment {
 
 .backlog-sources-subtitle {
     padding: 0px 15px;
-    font-size: min(1.15vw, 1.75vh, 16px);
+    font-size: min(3.25vw, 16px);
     text-align: center;
     height: 10%;
 }
@@ -4830,7 +5495,7 @@ input#searchBacklogSources {
 }
 
 .monsters-title {
-    font-size: min(3vw, 3.7vh, 36px);
+    font-size: min(9vw, 36px);
     font-weight: bold;
     padding-top: 0px;
     max-height: 7%;
@@ -4841,7 +5506,7 @@ input#searchBacklogSources {
 
 .monsters-subtitle {
     padding: 0px 15px;
-    font-size: min(1.15vw, 1.75vh, 16px);
+    font-size: min(3.5vw, 16px);
     text-align: center;
     height: 12%;
 }
@@ -5243,6 +5908,16 @@ input#searchMonsters {
     font-weight: bold;
 }
 
+.roll-chunk-spinner {
+    font-size: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    margin-top: -21vh;
+}
+
 .roll-chunk-data {
     max-height: 72%;
     min-height: 72%;
@@ -5334,7 +6009,7 @@ input#searchMonsters {
 }
 
 .chunk-window-child1::before {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     content: "\f054";
     color: var(--colorText);
     position: fixed;
@@ -5349,7 +6024,7 @@ input#searchMonsters {
 }
 
 .chunk-window-child1::after {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     content: "\f053";
     color: var(--colorText);
     position: fixed;
@@ -5364,7 +6039,7 @@ input#searchMonsters {
 }
 
 .chunk-window-child2::before {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     content: "\f054";
     color: var(--colorText);
     position: fixed;
@@ -5379,7 +6054,7 @@ input#searchMonsters {
 }
 
 .chunk-window-child2::after {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     content: "\f053";
     color: var(--colorText);
     position: fixed;
@@ -5394,7 +6069,7 @@ input#searchMonsters {
 }
 
 .chunk-window-child3::before {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     content: "\f054";
     color: var(--colorText);
     position: fixed;
@@ -5409,7 +6084,7 @@ input#searchMonsters {
 }
 
 .chunk-window-child3::after {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     content: "\f053";
     color: var(--colorText);
     position: fixed;
@@ -5495,7 +6170,7 @@ input#searchMonsters {
 
 .patch-notes-subtitle {
     padding: 0px 15px;
-    font-size: min(1.15vw, 1.75vh, 16px);
+    font-size: min(3.25vw, 16px);
     text-align: center;
     max-height: 4%;
     min-height: 4%;
@@ -5565,7 +6240,6 @@ input#searchMonsters {
     height: 75.5%;
     overflow-y: auto;
     padding: 10px;
-    text-align: center;
 }
 
 .chunk-notes-data textarea {
@@ -5865,11 +6539,16 @@ input#searchMonsters {
 
 .friends-add-data input {
     display: block;
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
     margin-left: auto;
     margin-right: auto;
     font-size: 3.4vh;
     text-align: center;
+}
+
+.altsite-friend-checkbox {
+    display: inline !important;
+    margin-right: 10px !important;
 }
 
 .friends-add-footer {
@@ -5907,7 +6586,7 @@ input#searchMonsters {
     font-size: 2.25vh;
 }
 
-.qps {
+.qps, .cps {
     text-align: center;
     font-size: 24px;
     color: var(--colorLink);
@@ -5921,7 +6600,7 @@ input#searchMonsters {
 .menu9.sidebar .panel.visible {
     max-height: calc(100vh - 8vh - 270px) !important;
     font-size: min(1.5vw, 14.5px);
-    text-align: left;
+    text-align: left !important;
     padding-left: 10px;
     overflow-y: auto;
     overflow-x: clip;
@@ -6170,6 +6849,10 @@ input#searchMonsters {
     font-size: 20px;
     border: solid 1px var(--colorQuestBorderText);
     color: var(--colorQuestBorderText);
+}
+
+.modal-content.mobile .Diaries-body .row > div {
+    width: 30vw;
 }
 
 .Diaries-body .row > div {
@@ -6466,8 +7149,8 @@ input#searchMonsters {
   
 .radio__control {
     display: inline-grid;
-    width: .9em;
-    height: .9em;
+    width: .825em;
+    height: .825em;
     margin: .15em .3em;
     border-radius: 0.5em;
     border: 0.1em solid currentColor;
@@ -6577,7 +7260,7 @@ input#searchMonsters {
     cursor: pointer;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
-    font-size: min(1.5vw, 14.5px);
+    font-size: min(4vw, 14.5px);
 }
 
 .display-button:hover {
