@@ -2744,7 +2744,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                 if (!toolLevelChallenges[skill]) {
                                     toolLevelChallenges[skill] = [];
                                 }
-                                toolLevelChallenges[skill].push(name);
+                                toolLevelChallenges[skill][name] = false;
                             } else {
                                 toolLevelValid = true;
                             }
@@ -3095,7 +3095,9 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             chunkInfo['challenges'][skill][name]['forcedPrimary'] && chunkInfo['challenges'][skill][name]['Secondary'] && (validChallenge = false);
             if (validChallenge) {
                 delete nonValids[name];
-                if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || chunkInfo['challenges'][skill][name]['ManualNonProcessing']) {
+                if (toolLevelChallenges.hasOwnProperty(skill) && toolLevelChallenges[skill].hasOwnProperty(name)) {
+                    toolLevelChallenges[skill][name] = true;
+                } else if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || chunkInfo['challenges'][skill][name]['ManualNonProcessing']) {
                     if (skill !== 'Quest' && skill !== 'Diary') {
                         valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'] || chunkInfo['challenges'][skill][name]['Label'] || true;
                     } else {
@@ -3293,7 +3295,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
     });
 
     !!toolLevelChallenges && Object.keys(toolLevelChallenges).forEach((skill) => {
-        checkPrimaryMethod(skill, valids, baseChunkData) && toolLevelChallenges[skill].forEach((name) => {
+        checkPrimaryMethod(skill, valids, baseChunkData) && Object.keys(toolLevelChallenges[skill]).filter((name) => toolLevelChallenges[skill][name]).forEach((name) => {
             valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'] || chunkInfo['challenges'][skill][name]['Label'] || true;
         });
     });
