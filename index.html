@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.0.13" />
+  <link rel="stylesheet" href="./index.css?v=6.0.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -42,12 +42,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.0.13' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.0.14' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.0.13"></script>
+  <script src="./index.js?v=6.0.14"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -1043,6 +1043,9 @@
     <div class='pin-err'>Password is incorrect.</div>
     <div class='home text2'>New password:</div>
     <span class='password-line'><input class='pin old2 second' placeholder='Password' type='password' /><span class='show-eye' onclick="toggleChangePinNewVis()"><i class="change-pin-eye2 fas fa-eye"></i></span></span>
+    <p class='password-reqs'>
+      <b>Passwords must be between 4 and 16 letters long, and can consist of uppercase letters, lowercase letters, numbers, and special characters.</b>
+    </p>
     <button id='change-pin' class='button' onclick='changePin()' disabled>Change Password</button>
   </div>
 </div>

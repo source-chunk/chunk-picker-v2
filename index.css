@@ -1179,10 +1179,12 @@ button.menu2 {
 
 .mobile #page8 {
     width: unset;
+    margin-top: 0px;
 }
 
 .mobile #page8 input {
     font-size: 8vw;
+    margin-bottom: 0px;
 }
 
 .mobile #change-pin {
@@ -1220,7 +1222,8 @@ button.menu2 {
 }
 
 .mobile .password-reqs {
-    font-size: 6vw;
+    font-size: 5vw;
+    margin: 10px auto;
 }
 
 .mobile #create2 {
@@ -1654,6 +1657,8 @@ input#searchPlayerMaps {
 
 .password-reqs {
     font-size: min(2vw, 20px);
+    width: 80%;
+    margin: 20px auto;
 }
 
 .warning {
