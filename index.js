@@ -406,6 +406,7 @@ let rules = {
     "Cleaning Herbs": false,
     "Boosting": false,
     "Superheat Furnace": false,
+    "Partial Products": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -464,7 +465,7 @@ let ruleNames = {
     "Wandering implings": "Allow implings that randomly wander the world & their drops to count towards chunk tasks <span class='rule-asterisk noscroll'>*</span>",
     "Secondary Primary": "Allow secondary training methods with drops/methods more common than 1/X (set to 0 to include all drops) to count as primary training methods (e.g. allow a 1/50 drop for a bronze bar be your required way to train Smithing) <span class='rule-asterisk noscroll'>*</span>",
     "RDT": "Allow items from the Rare Drop Table and the Gem Drop Table to count towards chunk tasks",
-    "Untracked Uniques": "Must obtain extra uniques that are untracked on the collection log (e.g. gardening boots from Farmers)",
+    "Untracked Uniques": "Must obtain extra uniques that are untracked on the collection log (e.g. gardening boots from Farmers, perfect shell from Tortoises, etc.)",
     "Combat and Teleport Spells": "Allow all spells to count as possible Magic skill tasks (otherwise only 'utility' spells like High Alchemy or Telegrab will count)",
     "Primary Spawns": "Item spawns count as primary access to an item, and can be used as a primary way to train a skill if needed <span class='rule-asterisk noscroll'>*</span>",
     "Smithing by Smelting": "Smelting ores into bars counts as a primary method for training Smithing",
@@ -485,7 +486,7 @@ let ruleNames = {
     "Money Unlockables": "Require permanently unlockable options be unlocked (angelic gravestone, additional bank space, infinitely charged lyre, etc.) <span class='rule-asterisk noscroll'>†</span>",
     "Prayers": "Must be able to activate all prayers possible <span class='rule-asterisk noscroll'>†</span>",
     "All Droptables": "Must obtain every drop from every unique monster's droptable (duplicates included, all quantities) <span class='rule-asterisk noscroll'>†</span>",
-    "All Droptables Nest": "Must include every drop from bird nests",
+    "All Droptables Nest": "Must include every drop from bird nests <span class='rule-asterisk noscroll'>†</span>",
     "F2P": "Restrict to F2P skills/items/tasks only",
     "Skiller": "Restrict tasks to only those doable on a level 3 skiller",
     "Fill Stash": "Must build and fill S.T.A.S.H. units as soon as you're able to",
@@ -495,7 +496,8 @@ let ruleNames = {
     "Quest Skill Reqs": "Must get Quest skill requirements, regardless of if the Quest is startable or not <span class='rule-asterisk noscroll'>⁺</span>",
     "Cleaning Herbs": "Cleaning grimy herbs/making (unf) potions can count as chunk tasks",
     "Boosting": "Allow skill boosts to be considered for skill tasks",
-    "Superheat Furnace": "Allow the Superheat Item spell to act as a furnace for training Smithing",
+    "Superheat Furnace": "Allow the Superheat Item spell to act as a furnace for training Smithing <span class='rule-asterisk noscroll'>*</span>",
+    "Partial Products": "Require making of partial products as a skill task (partially assembling pies - requires a skill level to make, but gives no xp) <span class='rule-asterisk noscroll'>*</span>"
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -582,6 +584,7 @@ let rulePresets = {
         "Superheat Furnace": true,
         "Forestry": true,
         "ForestryXp": true,
+        "Partial Products": true,
     },
     "Supreme Chunker": {
         "Skillcape": true,
@@ -648,6 +651,7 @@ let rulePresets = {
         "Superheat Furnace": true,
         "Forestry": true,
         "ForestryXp": true,
+        "Partial Products": true,
     },
 };                                                                              // List of rules that are part of each preset
 
@@ -673,6 +677,7 @@ let ruleStructure = {
         "Secondary Primary": true,
         "CoX": true,
         "Quest Skill Reqs": true,
+        "Partial Products": true,
         "Boosting": true
     },
     "Agility": {
@@ -1302,7 +1307,7 @@ let contextSection;
 let chunkSectionCalculateAfter = false;
 let signInAttempts = 0;
 
-let currentVersion = '6.0.14';
+let currentVersion = '6.0.15';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1425,7 +1430,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.14";
+mapImg.src = "osrs_world_map.png?v=6.0.15";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2847,7 +2852,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.14");
+        myWorker = new Worker("./worker.js?v=6.0.15");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3109,8 +3114,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.14");
-let myWorker2 = new Worker("./worker.js?v=6.0.14");
+let myWorker = new Worker("./worker.js?v=6.0.15");
+let myWorker2 = new Worker("./worker.js?v=6.0.15");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5746,7 +5751,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.14");
+    myWorker2 = new Worker("./worker.js?v=6.0.15");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -9959,6 +9964,10 @@ let loadData = function(startup) {
 
             if (!rulesTemp.hasOwnProperty('Forestry')) {
                 rulesTemp['Forestry'] = true;
+            }
+
+            if (!rulesTemp.hasOwnProperty('Partial Products')) {
+                rulesTemp['Partial Products'] = rulesTemp.hasOwnProperty('Highest Level') ? rulesTemp['Highest Level'] : false;
             }
 
             !!rulesTemp && Object.keys(rulesTemp).forEach((rule) => {
