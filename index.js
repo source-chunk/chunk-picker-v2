@@ -1300,8 +1300,9 @@ let sectionImgs = [];
 let canvasSection;
 let contextSection;
 let chunkSectionCalculateAfter = false;
+let signInAttempts = 0;
 
-let currentVersion = '6.0.12';
+let currentVersion = '6.0.13';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1424,7 +1425,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.12";
+mapImg.src = "osrs_world_map.png?v=6.0.13";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2846,7 +2847,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.12");
+        myWorker = new Worker("./worker.js?v=6.0.13");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3108,8 +3109,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.12");
-let myWorker2 = new Worker("./worker.js?v=6.0.12");
+let myWorker = new Worker("./worker.js?v=6.0.13");
+let myWorker2 = new Worker("./worker.js?v=6.0.13");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3333,11 +3334,11 @@ $(document).ready(function() {
     });
 
     $('.pin.new').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
+        if (!e.target.value.match(/^[a-z0-9\!\"\;\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\]\^\_\`\{\|\}\~]*$/i) || e.target.value.length > 16) {
             $(this).val(prevValuePinNew);
         } else {
             prevValuePinNew = e.target.value;
-            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 16) {
                 $('#create2').prop('disabled', false);
             } else {
                 $('#create2').prop('disabled', true);
@@ -3346,11 +3347,11 @@ $(document).ready(function() {
     });
 
     $('.pin.old').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
+        if (!e.target.value.match(/^[a-z0-9\!\"\;\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\]\^\_\`\{\|\}\~]*$/i) || e.target.value.length > 16) {
             $(this).val(prevValuePinOld);
         } else {
             prevValuePinOld = e.target.value;
-            if ((e.target.value.length >= 4 && e.target.value.length <= 8) || e.target.value.length === 0) {
+            if ((e.target.value.length >= 4 && e.target.value.length <= 16) || e.target.value.length === 0) {
                 pinGood = true;
                 checkIfGood();
             } else {
@@ -3361,11 +3362,11 @@ $(document).ready(function() {
     });
 
     $('.lock-pin').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
+        if (!e.target.value.match(/^[a-z0-9\!\"\;\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\]\^\_\`\{\|\}\~]*$/i) || e.target.value.length > 16) {
             $(this).val(prevValueLockPin);
         } else {
             prevValueLockPin = e.target.value;
-            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 16) {
                 $('#lock-unlock').prop('disabled', false);
                 $('.lock-pin').removeClass('wrong');
             } else {
@@ -3375,11 +3376,11 @@ $(document).ready(function() {
     });
 
     $('.pin.entry').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
+        if (!e.target.value.match(/^[a-z0-9\!\"\;\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\]\^\_\`\{\|\}\~]*$/i) || e.target.value.length > 16) {
             $(this).val(prevValueLockPin);
         } else {
             prevValueLockPin = e.target.value;
-            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 16) {
                 $('#unlock-entry').prop('disabled', false);
                 $('.pin.entry').removeClass('wrong');
             } else {
@@ -3405,12 +3406,13 @@ $(document).ready(function() {
     });
 
     $('.pin.old2.first').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
+        if (!e.target.value.match(/^[a-z0-9\!\"\;\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\]\^\_\`\{\|\}\~]*$/i) || e.target.value.length > 16) {
             $(this).val(prevValuePinOld2);
         } else {
             prevValuePinOld2 = e.target.value;
-            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 16) {
                 pin2Good = true;
+                $('.pin.old2.first').removeClass('wrong');
                 checkIfGood2();
             } else {
                 pin2Good = false;
@@ -3420,11 +3422,11 @@ $(document).ready(function() {
     });
 
     $('.pin.old2.second').on('input', function(e) {
-        if (!e.target.value.match(/^[a-z0-9]*$/i) || e.target.value.length > 8) {
+        if (!e.target.value.match(/^[a-z0-9\!\"\;\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\]\^\_\`\{\|\}\~]*$/i) || e.target.value.length > 16) {
             $(this).val(prevValuePinOld2Second);
         } else {
             prevValuePinOld2Second = e.target.value;
-            if (e.target.value.length >= 4 && e.target.value.length <= 8) {
+            if (e.target.value.length >= 4 && e.target.value.length <= 16) {
                 pin2SecondGood = true;
                 checkIfGood2();
             } else {
@@ -4207,7 +4209,16 @@ let unlockEntry = function() {
     savedPin = $('.pin.entry').val();
     $('#unlock-entry').prop('disabled', true).html('<i class="spin fas fa-spinner"></i>');
     firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
-        if (!!methods && methods.length > 0) {
+        if (signInAttempts > 15) {
+            setTimeout(function() {
+                $('.pin.entry').addClass('animated shake wrong').select();
+                $('#unlock-entry').prop('disabled', true).html('Unlock');
+                signInAttempts++;
+                setTimeout(function() {
+                    $('.pin.entry').removeClass('animated shake');
+                }, 500);
+            }, (1500 + signInAttempts * 10));
+        } else if (!!methods && methods.length > 0) {
             setTimeout(function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                     signedIn = true;
@@ -4238,7 +4249,8 @@ let unlockEntry = function() {
                 }).catch((error) => {
                     $('.pin.entry').addClass('animated shake wrong').select();
                     $('#unlock-entry').prop('disabled', true).html('Unlock');
-                    console.error('Incorrect map PIN');
+                    console.error('Incorrect map password');
+                    signInAttempts++;
                 });
                 setTimeout(function() {
                     $('.pin.entry').removeClass('animated shake');
@@ -4288,7 +4300,8 @@ let unlockEntry = function() {
                         }).catch((error) => {
                             $('.pin.entry').addClass('animated shake wrong').select();
                             $('#unlock-entry').prop('disabled', true).html('Unlock');
-                            console.error('Incorrect map PIN');
+                            console.error('Incorrect map password');
+                            signInAttempts++;
                         });
                     }, 1000);
                     setTimeout(function() {
@@ -4323,9 +4336,10 @@ let proceed = function() {
 
 // On the home page, advances to the next screen
 let nextPage = function(page) {
+    $('.entry-home-menu-container').hide();
     if (page === 'create') {
         $('#create2').prop('disabled', true);
-        $('#page1, #page1extra, #page1search').hide();
+        $('.entry-home-menu-container').hide();
         $('#page2a').show();
         $('.pin').focus();
     } else if (page === 'create2') {
@@ -4340,7 +4354,7 @@ let nextPage = function(page) {
         midGood = false;
         pinGood = true;
         $('#access').prop('disabled', true);
-        $('#page1, #page1extra, #page1search').hide();
+        $('.entry-home-menu-container').hide();
         $('#page2b').show();
         $('.mid').focus();
     }
@@ -4350,7 +4364,7 @@ let nextPage = function(page) {
 let prevPage = function(page) {
     if (page === 'create2') {
         $('#page2a').hide();
-        $('#page1, #page1extra, #page1search').show();
+        $('.entry-home-menu-container').show();
         pin = '';
         $('.pin').val('');
     } else if (page === 'create3') {
@@ -4359,7 +4373,7 @@ let prevPage = function(page) {
         $('.pin').focus();
     } else if (page === 'mid') {
         $('#page2b').hide();
-        $('#page1, #page1extra, #page1search').show();
+        $('.entry-home-menu-container').show();
         $('.mid').removeClass('wrong').val('');
         $('.pin.old').removeClass('wrong').val('');
         $('.mid-err').css('visibility', 'hidden');
@@ -4405,7 +4419,7 @@ let accessMap = function() {
                             mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
                             atHome = false;
                             $('.loading').show();
-                            $('#page2b').hide();
+                            $('#page2b, .entry-home-menu-container, .entry-home-menu-extra').hide();
                             $('.background-img').hide();
                             $('.center').css('margin-top', '15px');
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 1).show();
@@ -4420,7 +4434,7 @@ let accessMap = function() {
                             $('.pin-err').css('visibility', 'visible');
                             $('.pin.old').addClass('wrong').select();
                             $('#access').text('Access my map');
-                            console.error('Incorrect map PIN');
+                            console.error('Incorrect map password');
                         });
                         setTimeout(function() {
                             $('.pin.entry').removeClass('animated shake');
@@ -4456,7 +4470,7 @@ let accessMap = function() {
                                     myRef = firebase.database().ref('maps/' + mid);
                                     atHome = false;
                                     $('.loading').show();
-                                    $('#page2b').hide();
+                                    $('#page2b, .entry-home-menu-container, .entry-home-menu-extra').hide();
                                     $('.background-img').hide();
                                     $('.center').css('margin-top', '15px');
                                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 1).show();
@@ -4497,7 +4511,7 @@ let accessMap = function() {
             myRef = firebase.database().ref('maps/' + mid);
             atHome = false;
             $('.loading').show();
-            $('#page2b').hide();
+            $('#page2b, .entry-home-menu-container, .entry-home-menu-extra').hide();
             $('.background-img').hide();
             setupMap();*/
         }
@@ -4515,39 +4529,51 @@ let changePin = function() {
             setTimeout(function() {
                 $('.mid-err').css('visibility', 'visible');
                 $('.mid-old').addClass('wrong').select();
-                $('#change-pin').text('Change PIN');
+                $('#change-pin').text('Change Password');
             }, 1000);
             return;
         }
 
-        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pinOld + mid).then((userCredential) => {
-            if (onTestServer || testMode) {
-                return;
-            }
-            signedIn = true;
-            myRef = firebase.database().ref('maps/' + mid);
-            if (!onTestServer && !testMode) {
-                firebase.auth().currentUser.updatePassword(pinNew + mid).then(() => {
-                    window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
-                    document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
-                    $('.lock-closed, .lock-opened').hide();
-                    locked = true;
-                    inEntry = true;
-                    atHome = false;
-                    $('.loading').show();
-                    $('#page8').hide();
-                    $('.background-img').hide();
-                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
-                    setupMap();
-                }).catch((error) => { console.error(error) });
-            }
-        }).catch((error) => {
-            $('.pin-err').css('visibility', 'visible');
-            $('.pin.old2.first').addClass('wrong').select();
-            $('#change-pin').text('Change PIN');
-            console.error('Incorrect map PIN');
-            return;
-        });
+        if (signInAttempts > 15) {
+            setTimeout(function() {
+                $('.pin-err').css('visibility', 'visible');
+                $('.pin.old2.first').addClass('wrong').select();
+                $('#change-pin').text('Change Password');
+                signInAttempts++;
+            }, (1500 + signInAttempts * 10));
+        } else {
+            setTimeout(function() {
+                firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pinOld + mid).then((userCredential) => {
+                    if (onTestServer || testMode) {
+                        return;
+                    }
+                    signedIn = true;
+                    myRef = firebase.database().ref('maps/' + mid);
+                    if (!onTestServer && !testMode) {
+                        firebase.auth().currentUser.updatePassword(pinNew + mid).then(() => {
+                            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
+                            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
+                            $('.lock-closed, .lock-opened').hide();
+                            locked = true;
+                            inEntry = true;
+                            atHome = false;
+                            $('.loading').show();
+                            $('#page8').hide();
+                            $('.background-img').hide();
+                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
+                            setupMap();
+                        }).catch((error) => { console.error(error) });
+                    }
+                }).catch((error) => {
+                    $('.pin-err').css('visibility', 'visible');
+                    $('.pin.old2.first').addClass('wrong').select();
+                    $('#change-pin').text('Change Password');
+                    console.error('Incorrect map password');
+                    signInAttempts++;
+                    return;
+                });
+            }, 1000);
+        }
     });
 }
 
@@ -5046,7 +5072,7 @@ let doneLoading = function() {
 let setupMap = function() {
     if (!atHome) {
         $('.body').show();
-        $('#page1, #page1extra, #page1search, #import-menu, #highscore-menu, #highscore-menu2, #help-menu').hide();
+        $('#page1, #page1extra, #page1search, #import-menu, #highscore-menu, #highscore-menu2, #help-menu, .entry-home-menu-container, .entry-home-menu-extra').hide();
         if (locked) {
             $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 0).hide();
             $('.roll2, .unpick').css('opacity', 0).hide();
@@ -5720,7 +5746,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.12");
+    myWorker2 = new Worker("./worker.js?v=6.0.13");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -9579,6 +9605,12 @@ let toggleQuestInfo = function() {
     }
 }
 
+// Toggles the visibility of the create map pin
+let toggleChangePinCreateVis = function() {
+    $('.change-pin-eye0').toggleClass('fa-eye fa-eye-slash');
+    $('.pin.new').attr('type', $('.pin.new').attr('type') === 'text' ? 'password' : 'text');
+}
+
 // Toggles the visibility of the old map pin
 let toggleChangePinVis = function() {
     $('.change-pin-eye1').toggleClass('fa-eye fa-eye-slash');
@@ -9593,18 +9625,20 @@ let toggleChangePinNewVis = function() {
 
 // Checks the MID from the url
 let checkMID = function(mid) {
-    if (mid === 'change-pin') {
+    if (mid === 'change-password') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
         $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv, .menu11, .menu12, .menu13').hide();
-        $('#home-menu').hide();
+        $('#home-menu, .entry-home-menu-container, .entry-home-menu-extra').hide();
+        onMobile && $('#pin-menu').addClass('mobile');
         $('#pin-menu').show();
         $('.mid-old').focus();
     } else if (mid === 'about') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
-        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').hide();
-        $('#home-menu').hide();
+        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv, .menu11, .menu12, .menu13').hide();
+        $('#home-menu, .entry-home-menu-container, .entry-home-menu-extra').hide();
+        onMobile && $('#about-menu').addClass('mobile');
         $('#about-menu').show();
         $('html, body').addClass('about');
     } else if (mid) {
@@ -9655,7 +9689,8 @@ let checkMID = function(mid) {
         atHome = true;
         $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .menu11, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv, .gomobiletasks, .menu12, .menu13').hide();
         $('.loading, .ui-loader-header').remove();
-        onMobile && $('#page1search').remove();
+        onMobile && $('.entry-home-menu-container, #home-menu').addClass('mobile');
+        onMobile && $('#page1search, .entry-home-about').remove();
         setupMap();
     }
 }

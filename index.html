@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.0.12" />
+  <link rel="stylesheet" href="./index.css?v=6.0.13" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -42,12 +42,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable="false" src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.0.12' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.0.13' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.0.12"></script>
+  <script src="./index.js?v=6.0.13"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -68,11 +68,13 @@
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='test-hint'><b><i class="fas fa-exclamation-triangle"></i> Sandbox Mode <i class="fas fa-exclamation-triangle"></i></b><span class='subtext'>All changes made inside sandbox mode are temporary</span></div>
   <div class='topnav'>
-    <div><a href='?about' target="_blank" class="about-button" title='About Me'>
+    <div>
+      <a href='?about' target="_blank" class="about-button" title='About Me'>
         <div class="mini avatar"><img
             src="./source-chunk-avatar.png" />
         </div>
-      </a></div>
+      </a>
+    </div>
     <div><a href='./'><span class="gohome" title='Home'>Chunk Picker V2</span></a></div>
     <div><a href='https://chunk-stats.web.app' target='_blank' title='Chunk Stats'><i
           class="gohighscore fas fa-trophy"></i></a></div>
@@ -724,8 +726,8 @@
         <div class='title'>Unlock Map</div>
       </div>
       <div class='block'>
-        <div>Enter PIN to unlock:</div>
-        <input class='pin entry' placeholder='PIN' type='password' />
+        <div>Enter password to unlock:</div>
+        <input class='pin entry' placeholder='Password' type='password' />
         <button id='unlock-entry' class='button' onclick='unlockEntry()' disabled>Unlock map</button>
       </div>
       <div class='block'>
@@ -822,7 +824,7 @@
     </div>
     <div class='lock-box'>
       <div class='inner-lock'>
-        <input class='lock-pin' placeholder='PIN' type='password' />
+        <input class='lock-pin' placeholder='Password' type='password' />
         <button id='lock-unlock' onclick='checkPin()'>Unlock</button>
       </div>
     </div>
@@ -954,8 +956,8 @@
     <div class='item highscoretoggle' onclick="highscoreFunc()">Opt-in to chunk stats<i class="pic fas fa-trophy"></i></div>
     <div class='item import' onclick="importFunc()">Import from URL<i class="pic fas fa-upload"></i></div>
     <div class='item export' onclick="openClipboard()">Export to clipboard<i class="pic fas fa-download"></i></div>
-    <a class='none' href='?change-pin'>
-      <div class='item'>Change PIN<i class="pic fas fa-pen"></i></div>
+    <a class='none' href='?change-password'>
+      <div class='item'>Change Password<i class="pic fas fa-pen"></i></div>
     </a>
     <div class='item' onclick="showChunkHistory()">Chunk-roll history<i class="pic fas fa-history"></i></div>
     <div class='item friendslist' onclick="openFriendsList()">Friends list<i class="pic fas fa-user-friends"></i></div>
@@ -965,42 +967,46 @@
   </div>
 </div>
 
-<div id='home-menu'>
-  <div id='page1' class='content'>
-    <div class='block'>
-      <div class='title'>Chunk Picker V2</div>
-    </div>
-    <div class='block'>
-      <button id='create' class='button' onclick='nextPage(this.id)'>Create a new map</button>
-    </div>
-    <div class='block'>
-      <hr class='hr left' />
-      <span class='or'>Or</span>
-      <hr class='hr right' />
-      <button id='mid' class='button' onclick='nextPage(this.id)'>Enter your map ID</button>
-    </div>
-  </div>
-  <div id='page1extra' class='content'>
-    <div class='block'>
-      <a href='https://chunk-stats.web.app' target='_blank'><button id='leader' class='button'>Chunk Stats</button></a>
-    </div>
+<div class='entry-home-menu-extra'>
+  <div class='entry-home-about'>
+    <a href='?about' target="_blank" class="about-button" title='About Me'>
+      <div class="avatar"><img
+          src="./source-chunk-avatar.png" />
+      </div>
+    </a>
   </div>
   <div id='page1search'>
     <div>Search by username:</div>
     <input type="text" placeholder="Search..." id="searchPlayerMaps" class="noscrollhard" oninput="searchingPlayerMaps()" autocomplete="off" />
     <button id="searchPlayerMapsButton" onclick="searchPlayerMaps()">Search</button>
   </div>
+</div>
+
+<div class='entry-home-menu-container'>
+  <div class='entry-home-title'>Chunk Picker V2</div>
+  <div class='entry-home-outer-outer'>
+    <div class='entry-home-outer'>
+      <div class='entry-home1 entry-home' onclick='nextPage("create")'>Create a new map</div>
+      <div class='entry-home2 entry-home' onclick='nextPage("mid")'>Enter your map ID</div>
+      <div class='entry-home3 entry-home'><a href='https://chunk-stats.web.app' target='_blank'><div>Chunk Stats</div></a></div>
+    </div>
+  </div>
+</div>
+
+<div id='home-menu'>
   <div id='page2a' class='content2a' style="display:none">
     <div class='block'>
       <div class='title back' onclick='prevPage("create2")'><i class="fas fa-long-arrow-alt-left"></i></div>
-      <div class='home text'>Create a map PIN</div>
+      <div class='home text'>Create a map password</div>
       <p class='p desc'>
-        Your map PIN will allow you to roll new chunks and make changes to your map, and give you the ability to share
+        Your map password will allow you to roll new chunks and make changes to your map, and give you the ability to share
         your map with others without allowing them to edit it.
       </p>
       <br />
-      <div>Alphanumeric PIN (4-8 letters/digits):</div>
-      <input class='pin new' placeholder='PIN' />
+      <span class='password-line'><input class='pin new' placeholder='Password' type='password' /><span class='show-eye' onclick="toggleChangePinCreateVis()"><i class="change-pin-eye0 fas fa-eye"></i></span></span>
+      <p class='password-reqs'>
+        <b>Passwords must be between 4 and 16 letters long, and can consist of uppercase letters, lowercase letters, numbers, and special characters.</b>
+      </p>
       <button id='create2' class='button' onclick='nextPage(this.id)' disabled>Create map</button>
     </div>
   </div>
@@ -1027,17 +1033,17 @@
 <div id='pin-menu' style="display:none">
   <div id='page8' class='content8'>
     <div class='block'>
-      <div class='title'>Change PIN</div>
+      <div class='title'>Change Password</div>
     </div>
     <div class='home text2'>Map ID:</div>
     <input class='mid-old' spellcheck='false' placeholder='Map ID' />
     <div class='mid-err'>Map ID does not exist.</div>
-    <div class='home text2'>Old PIN:</div>
-    <span class='password-line'><input class='pin old2 first' placeholder='PIN' type='password' /><span class='show-eye' onclick="toggleChangePinVis()"><i class="change-pin-eye1 fas fa-eye"></i></span></span>
-    <div class='pin-err'>PIN is incorrect.</div>
-    <div class='home text2'>New PIN:</div>
-    <span class='password-line'><input class='pin old2 second' placeholder='PIN' type='password' /><span class='show-eye' onclick="toggleChangePinNewVis()"><i class="change-pin-eye2 fas fa-eye"></i></span></span>
-    <button id='change-pin' class='button' onclick='changePin()' disabled>Change PIN</button>
+    <div class='home text2'>Old password:</div>
+    <span class='password-line'><input class='pin old2 first' placeholder='Password' type='password' /><span class='show-eye' onclick="toggleChangePinVis()"><i class="change-pin-eye1 fas fa-eye"></i></span></span>
+    <div class='pin-err'>Password is incorrect.</div>
+    <div class='home text2'>New password:</div>
+    <span class='password-line'><input class='pin old2 second' placeholder='Password' type='password' /><span class='show-eye' onclick="toggleChangePinNewVis()"><i class="change-pin-eye2 fas fa-eye"></i></span></span>
+    <button id='change-pin' class='button' onclick='changePin()' disabled>Change Password</button>
   </div>
 </div>
 

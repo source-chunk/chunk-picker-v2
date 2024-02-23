@@ -1127,7 +1127,7 @@ button.menu2 {
 
 .content, .content2a, .content2b, .content3a {
     border: solid;
-    width: 30%;
+    width: 45%;
     margin: auto;
     text-align: center;
     margin-top: 4%;
@@ -1137,7 +1137,7 @@ button.menu2 {
 
 .content8 {
     border: solid;
-    width: 30%;
+    width: 45%;
     margin: auto;
     text-align: center;
     margin-top: 4%;
@@ -1177,6 +1177,83 @@ button.menu2 {
     margin-block-end: 15px;
 }
 
+.mobile #page8 {
+    width: unset;
+}
+
+.mobile #page8 input {
+    font-size: 8vw;
+}
+
+.mobile #change-pin {
+    font-size: 8vw;
+}
+
+.mobile #page9 {
+    width: unset;
+    min-width: unset;
+}
+
+.mobile #page2a {
+    height: 100%;
+    width: unset;
+}
+
+.mobile .title {
+    font-size: 10vw;
+}
+
+.mobile .home.text {
+    font-size: 8vw;
+}
+
+.mobile .p.desc {
+    font-size: 5vw;
+}
+
+.mobile .pin.new {
+    font-size: 8vw;
+}
+
+.mobile .show-eye {
+    font-size: 8vw;
+}
+
+.mobile .password-reqs {
+    font-size: 6vw;
+}
+
+.mobile #create2 {
+    font-size: 10vw;
+}
+
+.mobile #page3a {
+    width: unset;
+}
+
+.mobile #newmid {
+    font-size: 10vw;
+}
+
+.mobile .link-outer a {
+    font-size: 6vw;
+}
+
+.mobile #page2b {
+    width: unset;
+}
+
+.mobile .home.text2 {
+    font-size: 10vw;
+}
+
+.mobile .mid {
+    font-size: 10vw;
+}
+
+.mobile #access {
+    font-size: 10vw;
+}
 
 .avatar > img {
     border-radius: 100%;
@@ -1202,8 +1279,119 @@ button.menu2 {
     width: 100%;
 }
 
+.entry-home-about {
+    position: absolute;
+    z-index: 999;
+}
+
+.entry-home-title {
+    font-size: 72px;
+    position: absolute;
+    text-align: center;
+    width: 40%;
+    background-color: rgb(102, 51, 153);
+    color: white;
+    top: 50px;
+    left: 0px;
+    margin: 0px 30%;
+    border: solid black 1px;
+    border-radius: 50px;
+}
+
+.entry-home-outer-outer {
+    display: block;
+    height: 20%;
+    position: absolute;
+    width: 70%;
+    top: 0px;
+    left: 0px;
+    margin: 330px 15%;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.entry-home-outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.entry-home-outer a {
+    text-decoration: none;
+}
+
+.entry-home {
+    color: white;
+    border: solid black 1px;
+    margin: 20px;
+    font-size: 32px;
+    cursor: pointer;
+    -webkit-transition-duration: .4s;
+    transition-duration: .4s;
+}
+
+.entry-home1 {
+    background-color: rgb(100, 125, 225);
+    padding: 20px;
+}
+
+.entry-home1:hover {
+    background-color: rgb(75, 100, 200);
+}
+
+.entry-home2 {
+    background-color: rgb(115, 220, 115);
+    padding: 20px;
+}
+
+.entry-home2:hover {
+    background-color: rgb(80, 195, 80);
+}
+
+.entry-home3 {
+    background-color: rgb(0, 190, 190);
+}
+
+.entry-home3:hover {
+    background-color: rgb(0, 165, 165);
+}
+
+.entry-home3 div {
+    color: white;
+    padding: 20px;
+}
+
 #page1extra > .block {
     margin-top: 22px;
+}
+
+.mobile .entry-home-title {
+    font-size: 12vw;
+    width: 90%;
+    margin: 0px 5%;
+}
+
+.mobile .entry-home-outer-outer {
+    width: 100%;
+    margin: 300px 0px;
+    background: none;
+}
+
+.mobile .entry-home-outer {
+    display: block;
+}
+
+.mobile .entry-home {
+    font-size: 8vw;
+    margin: 5px;
 }
 
 #page1search {
@@ -1215,6 +1403,7 @@ button.menu2 {
     background-color: white;
     font-size: 24px;
     border: solid;
+    z-index: 999;
 }
 
 input#searchPlayerMaps {
@@ -1325,13 +1514,9 @@ input#searchPlayerMaps {
     cursor: not-allowed;
 }
 
-.password-line {
-    position: relative;
-}
-
 .show-eye {
     position: absolute;
-    font-size: 36px;
+    font-size: 2.5vw;
     margin: 10px;
     cursor: pointer;
     -webkit-transition-duration: .4s;
@@ -1369,7 +1554,7 @@ input#searchPlayerMaps {
     position: absolute;
     z-index: 9998 !important;
     border: solid;
-    width: 30%;
+    width: 45%;
     margin: auto;
     text-align: center;
     -ms-transform: translate(112.5%, 20%);
@@ -1382,7 +1567,7 @@ input#searchPlayerMaps {
     position: absolute;
     z-index: 9998 !important;
     border: solid;
-    width: 30%;
+    width: 45%;
     margin: auto;
     text-align: center;
     -ms-transform: translate(112.5%, 20%);
@@ -1395,7 +1580,7 @@ input#searchPlayerMaps {
     position: fixed;
     z-index: 999 !important;
     border: solid;
-    width: 30%;
+    width: 45%;
     margin: auto;
     text-align: center;
     -ms-transform: translate(112.5%, 20%);
@@ -1437,7 +1622,7 @@ input#searchPlayerMaps {
     position: absolute;
     z-index: 9998 !important;
     border: solid;
-    width: 30%;
+    width: 45%;
     margin: auto;
     text-align: center;
     -ms-transform: translate(112.5%, 20%);
@@ -1467,16 +1652,21 @@ input#searchPlayerMaps {
     margin: auto;
 }
 
+.password-reqs {
+    font-size: min(2vw, 20px);
+}
+
 .warning {
     font-size: 1.5vw;
 }
 
 .pin.new {
-    width: 40%;
+    width: 70%;
     font-size: 2.5vw;
     text-align: center;
-    margin-bottom: 30px;
-}
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
 
 .back {
     transition-duration: .5s;
@@ -1490,15 +1680,15 @@ input#searchPlayerMaps {
 }
 
 .pin.entry {
-    width: 40%;
-    font-size: 2.5vw;
+    width: 70%;
+    font-size: 2vw;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 25px;
 }
 
 .mid, .pin.old, .mid-old, .pin.old2 {
-    width: 40%;
+    width: 70%;
     font-size: 2.5vw;
     text-align: center;
     margin-top: 5px;
@@ -2465,7 +2655,7 @@ input#searchPlayerMaps {
     position: relative;
     background-color: var(--color1);
     margin: auto;
-    width: 30%;
+    width: 45%;
     height: 30%;
     border: solid black;
 }
