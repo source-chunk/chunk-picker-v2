@@ -1586,8 +1586,8 @@ input#searchPlayerMaps {
     width: 45%;
     margin: auto;
     text-align: center;
-    -ms-transform: translate(112.5%, 20%);
-    transform: translate(112.5%, 20%);
+    -ms-transform: translate(60%, 20%);
+    transform: translate(60%, 20%);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
     background-color: var(--color6);
 }
@@ -3760,7 +3760,7 @@ input#searchChunkSections {
 
 .section-btn {
     font-weight: normal;
-    border: solid 1px var(--color3);
+    border: solid 1px var(--colorText);
     margin: 5px;
     padding: 2px;
     cursor: pointer;
