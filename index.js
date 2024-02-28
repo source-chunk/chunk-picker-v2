@@ -483,7 +483,8 @@ let ruleNames = {
     "Combat Diary Tasks": "Require the Combat Achievements be completed",
     "PVP-Only Spells": "Require spells that can only be cast on PVP Worlds/in the Wilderness (Teleother/Teleblock)",
     "Skilling Pets": "Require skilling pets be obtained as soon as the relevant skill is trainable <span class='rule-asterisk noscroll'>†</span>",
-    "Money Unlockables": "Require permanently unlockable options be unlocked (angelic gravestone, additional bank space, infinitely charged lyre, etc.) <span class='rule-asterisk noscroll'>†</span>",
+    "Money Unlockables": "Require permanently unlockable options be unlocked (angelic gravestone, infinitely charged lyre, Giants' Foundry moulds, etc.) <span class='rule-asterisk noscroll'>*</span>",
+    "Additional Money Unlockables": "Require additional permanently unlockable options be unlocked that are less chunk-specific or permanent (additional bank space, money crest, etc.) <span class='rule-asterisk noscroll'>†</span>",
     "Prayers": "Must be able to activate all prayers possible <span class='rule-asterisk noscroll'>†</span>",
     "All Droptables": "Must obtain every drop from every unique monster's droptable (duplicates included, all quantities) <span class='rule-asterisk noscroll'>†</span>",
     "All Droptables Nest": "Must include every drop from bird nests <span class='rule-asterisk noscroll'>†</span>",
@@ -585,6 +586,7 @@ let rulePresets = {
         "Forestry": true,
         "ForestryXp": true,
         "Partial Products": true,
+        "Money Unlockables": true,
     },
     "Supreme Chunker": {
         "Skillcape": true,
@@ -645,6 +647,7 @@ let rulePresets = {
         "Primary Spawns": true,
         "Tutor Ammo":  true,
         "Money Unlockables": true,
+        "Additional Money Unlockables": true,
         "Prayers": true,
         "All Droptables": true,
         "Cleaning Herbs": true,
@@ -752,7 +755,7 @@ let ruleStructure = {
         "Stuffables": true,
         "Fill Stash": true,
         "Fill POH": true,
-        "Money Unlockables": true,
+        "Money Unlockables": ["Additional Money Unlockables"],
         "Manually Complete Tasks": true,
         "Every Drop": true,
         "All Droptables": ["All Droptables Nest"],
@@ -771,6 +774,7 @@ let subRuleDefault = {
     "Spells": false,
     "Minigame": true,
     "Forestry": false,
+    "Money Unlockables": false,
     "All Droptables": false,
 };                                                                              // Default value of sub-rule when parent is checked
 
@@ -803,6 +807,7 @@ let taskGeneratingRules = {
     "Combat Diary Tasks": true,
     "Skilling Pets": true,
     "Money Unlockables": true,
+    "Additional Money Unlockables": true,
     "All Droptables": true,
     "Fill Stash": true,
     "Fill POH": true,
@@ -1307,7 +1312,7 @@ let contextSection;
 let chunkSectionCalculateAfter = false;
 let signInAttempts = 0;
 
-let currentVersion = '6.0.17';
+let currentVersion = '6.0.18';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1430,7 +1435,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.17";
+mapImg.src = "osrs_world_map.png?v=6.0.18";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2852,7 +2857,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.17");
+        myWorker = new Worker("./worker.js?v=6.0.18");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3114,8 +3119,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.17");
-let myWorker2 = new Worker("./worker.js?v=6.0.17");
+let myWorker = new Worker("./worker.js?v=6.0.18");
+let myWorker2 = new Worker("./worker.js?v=6.0.18");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5752,7 +5757,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.17");
+    myWorker2 = new Worker("./worker.js?v=6.0.18");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -9969,6 +9974,10 @@ let loadData = function(startup) {
 
             if (!rulesTemp.hasOwnProperty('Partial Products')) {
                 rulesTemp['Partial Products'] = rulesTemp.hasOwnProperty('Highest Level') ? rulesTemp['Highest Level'] : false;
+            }
+
+            if (!rulesTemp.hasOwnProperty('Additional Money Unlockables')) {
+                rulesTemp['Additional Money Unlockables'] = rulesTemp.hasOwnProperty('Money Unlockables') ? rulesTemp['Money Unlockables'] : false;
             }
 
             !!rulesTemp && Object.keys(rulesTemp).forEach((rule) => {
