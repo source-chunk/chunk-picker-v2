@@ -1312,7 +1312,7 @@ let contextSection;
 let chunkSectionCalculateAfter = false;
 let signInAttempts = 0;
 
-let currentVersion = '6.0.18';
+let currentVersion = '6.0.19';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1435,7 +1435,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.18";
+mapImg.src = "osrs_world_map.png?v=6.0.19";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2857,7 +2857,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.18");
+        myWorker = new Worker("./worker.js?v=6.0.19");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3119,8 +3119,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.18");
-let myWorker2 = new Worker("./worker.js?v=6.0.18");
+let myWorker = new Worker("./worker.js?v=6.0.19");
+let myWorker2 = new Worker("./worker.js?v=6.0.19");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5757,7 +5757,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.18");
+    myWorker2 = new Worker("./worker.js?v=6.0.19");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -6998,7 +6998,32 @@ let searchWithinChunks = function() {
     let searchTemp = $('#searchChunks').val().toLowerCase();
     $('.searchchunks-data').empty();
     onlyInitialData ? $(`.searchchunks-initwarning`).show() : $(`.searchchunks-initwarning`).hide();
-    if (searchTemp.startsWith('~') && Object.keys(baseChunkData).length > 0) {
+    if (searchTemp.startsWith('~') && searchTemp.toLowerCase() === '~items' && Object.keys(baseChunkData).length > 0) {
+        Object.keys(baseChunkData['items']).length > 0 && $('.searchchunks-data').append(`<div class="search-header noscroll"><b class="noscroll">Items</b></div>`);
+        Object.keys(baseChunkData['items']).length > 0 && Object.keys(baseChunkData['items']).sort().forEach((item) => {
+            $('.searchchunks-data').append(`<div class="search-result noscroll"><span class='noscroll' onclick='openSearchDetails("items", "${encodeRFC5987ValueChars(item)}")'>${item.replaceAll(/~/g, '').replaceAll(/\|/g, '').replaceAll(/\*/g, '')}</span></div>`);
+        });
+    } else if (searchTemp.startsWith('~') && searchTemp.toLowerCase() === '~monsters' && Object.keys(baseChunkData).length > 0) {
+        Object.keys(baseChunkData['monsters']).length > 0 && $('.searchchunks-data').append(`<div class="search-header noscroll"><b class="noscroll">Monsters</b></div>`);
+        Object.keys(baseChunkData['monsters']).length > 0 && Object.keys(baseChunkData['monsters']).sort().forEach((monster) => {
+            $('.searchchunks-data').append(`<div class="search-result noscroll"><span class='noscroll' onclick='openSearchDetails("monsters", "${encodeRFC5987ValueChars(monster)}")'>${monster.replaceAll(/~/g, '').replaceAll(/\|/g, '')}</span></div>`);
+        });
+    } else if (searchTemp.startsWith('~') && searchTemp.toLowerCase() === '~npcs' && Object.keys(baseChunkData).length > 0) {
+        Object.keys(baseChunkData['npcs']).length > 0 && $('.searchchunks-data').append(`<div class="search-header noscroll"><b class="noscroll">Npcs</b></div>`);
+        Object.keys(baseChunkData['npcs']).length > 0 && Object.keys(baseChunkData['npcs']).sort().forEach((npc) => {
+            $('.searchchunks-data').append(`<div class="search-result noscroll"><span class='noscroll' onclick='openSearchDetails("npcs", "${encodeRFC5987ValueChars(npc)}")'>${npc.replaceAll(/~/g, '').replaceAll(/\|/g, '')}</span></div>`);
+        });
+    } else if (searchTemp.startsWith('~') && searchTemp.toLowerCase() === '~objects' && Object.keys(baseChunkData).length > 0) {
+        Object.keys(baseChunkData['objects']).length > 0 && $('.searchchunks-data').append(`<div class="search-header noscroll"><b class="noscroll">Objects</b></div>`);
+        Object.keys(baseChunkData['objects']).length > 0 && Object.keys(baseChunkData['objects']).sort().forEach((object) => {
+            $('.searchchunks-data').append(`<div class="search-result noscroll"><span class='noscroll' onclick='openSearchDetails("objects", "${encodeRFC5987ValueChars(object)}")'>${object.replaceAll(/~/g, '').replaceAll(/\|/g, '')}</span></div>`);
+        });
+    } else if (searchTemp.startsWith('~') && searchTemp.toLowerCase() === '~shops' && Object.keys(baseChunkData).length > 0) {
+        Object.keys(baseChunkData['shops']).length > 0 && $('.searchchunks-data').append(`<div class="search-header noscroll"><b class="noscroll">Shops</b></div>`);
+        Object.keys(baseChunkData['shops']).length > 0 && Object.keys(baseChunkData['shops']).sort().forEach((shop) => {
+            $('.searchchunks-data').append(`<div class="search-result noscroll"><span class='noscroll' onclick='openSearchDetails("shops", "${encodeRFC5987ValueChars(shop)}")'>${shop.replaceAll(/~/g, '').replaceAll(/\|/g, '').replaceAll(/\*/g, '')}</span></div>`);
+        });
+    } else if (searchTemp.startsWith('~') && Object.keys(baseChunkData).length > 0) {
         chunkInfo['searchTerms'].hasOwnProperty(searchTemp.substring(1).toLowerCase() + '|Items') && Object.keys(baseChunkData['items']).filter(item => chunkInfo['searchTerms'][searchTemp.substring(1).toLowerCase() + '|Items'].hasOwnProperty(item.replaceAll(/~/g, '').replaceAll(/\|/g, ''))) && Object.keys(baseChunkData['items']).filter(item => chunkInfo['searchTerms'][searchTemp.substring(1).toLowerCase() + '|Items'].hasOwnProperty(item.replaceAll(/~/g, '').replaceAll(/\|/g, ''))).length > 0 && $('.searchchunks-data').append(`<div class="search-header noscroll"><b class="noscroll">Items</b></div>`);
         chunkInfo['searchTerms'].hasOwnProperty(searchTemp.substring(1).toLowerCase() + '|Items') && Object.keys(baseChunkData['items']).filter(item => chunkInfo['searchTerms'][searchTemp.substring(1).toLowerCase() + '|Items'].hasOwnProperty(item.replaceAll(/~/g, '').replaceAll(/\|/g, ''))) && Object.keys(baseChunkData['items']).filter(item => chunkInfo['searchTerms'][searchTemp.substring(1).toLowerCase() + '|Items'].hasOwnProperty(item.replaceAll(/~/g, '').replaceAll(/\|/g, ''))).sort().forEach((item) => {
             $('.searchchunks-data').append(`<div class="search-result noscroll"><span class='noscroll' onclick='openSearchDetails("items", "${encodeRFC5987ValueChars(item)}")'>${item.replaceAll(/~/g, '').replaceAll(/\|/g, '').replaceAll(/\*/g, '')}</span></div>`);
