@@ -7112,7 +7112,7 @@ let gatherChunksInfo = function(chunksIn) {
         }
     });
 
-    !intitalDataPosted && postMessage(['initial-data', {items: items, objects: objects, monsters: monsters, npcs: npcs, shops: shops}]);
+    !intitalDataPosted && type === 'current' && postMessage(['initial-data', {items: items, objects: objects, monsters: monsters, npcs: npcs, shops: shops}]);
     intitalDataPosted = true;
     return {items: items, objects: objects, monsters: monsters, npcs: npcs, shops: shops};
 }
