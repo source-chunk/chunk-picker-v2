@@ -1557,7 +1557,7 @@ input#searchPlayerMaps {
     position: absolute;
     z-index: 9998 !important;
     border: solid;
-    width: 45%;
+    width: 30%;
     margin: auto;
     text-align: center;
     -ms-transform: translate(112.5%, 20%);
@@ -1570,7 +1570,7 @@ input#searchPlayerMaps {
     position: absolute;
     z-index: 9998 !important;
     border: solid;
-    width: 45%;
+    width: 30%;
     margin: auto;
     text-align: center;
     -ms-transform: translate(112.5%, 20%);
