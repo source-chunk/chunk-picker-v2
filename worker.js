@@ -2551,6 +2551,12 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 nonValids[name] = wrongThings;
                 return;
             }
+            if (chunkInfo['challenges'][skill][name].hasOwnProperty('Not Skiller') && rules['Skiller']) {
+                validChallenge = false;
+                wrongThings.push('Skiller');
+                nonValids[name] = wrongThings;
+                return;
+            }
             if (chunkInfo['challenges'][skill][name].hasOwnProperty('QuestPointsNeeded')) {
                 if (!questPointTotal || (questPointTotal < chunkInfo['challenges'][skill][name]['QuestPointsNeeded'])) {
                     validChallenge = false;

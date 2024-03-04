@@ -2850,6 +2850,7 @@ input#searchPlayerMaps {
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 1;
 }
 
 .modal-content.mobile .manual-close {
@@ -6425,6 +6426,16 @@ input#searchMonsters {
     text-align: center;
     font-weight: bold;
     background-color: var(--color2);
+    position: relative;
+}
+
+.markdown-sub-title {
+    font-size: 12px;
+    position: absolute;
+    margin: 10px 30px;
+    color: var(--colorTextAlt);
+    right: 0px;
+    max-width: 60px;
 }
 
 .chunk-notes-data {
