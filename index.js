@@ -1312,7 +1312,7 @@ let contextSection;
 let chunkSectionCalculateAfter = false;
 let signInAttempts = 0;
 
-let currentVersion = '6.0.23';
+let currentVersion = '6.0.24';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1435,7 +1435,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.23";
+mapImg.src = "osrs_world_map.png?v=6.0.24";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2857,7 +2857,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.23");
+        myWorker = new Worker("./worker.js?v=6.0.24");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3119,8 +3119,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.23");
-let myWorker2 = new Worker("./worker.js?v=6.0.23");
+let myWorker = new Worker("./worker.js?v=6.0.24");
+let myWorker2 = new Worker("./worker.js?v=6.0.24");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5759,7 +5759,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.23");
+    myWorker2 = new Worker("./worker.js?v=6.0.24");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -7216,6 +7216,7 @@ let openHighest = function() {
             let prayerBonus = 0;
             $('.highest-title').append(`<div class='noscroll style-button ${combatStyle.replaceAll(' ', '_')}-button' onclick='switchHighestTab("${combatStyle.replaceAll(' ', '_')}")' title='${combatStyle}'><span class='noscroll'><img class='noscroll slot-icon' src='./resources/${combatStyle.replaceAll(' ', '_')}_combat.png' /></span></div>`);
             $('.highest-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle}${combatStyle === 'Prayer' ? ` <span class="prayer-bonus">(<img class='noscroll slot-icon' src='./resources/Prayer_combat.png' /> +<span class="prayer-bonus-inner">${prayerBonus}</span>)</span>` : ''}${(testMode || !(viewOnly || inEntry || locked)) && combatStyle !== 'Skills' && combatStyle !== 'Slayer' ? `<div class='noscroll'><span class='noscroll addEquipment' onclick='addEquipment()'>Add additional equipment</span></div>` : ''}</div></div>`);
+            let veracs = {"Verac's helm": true, "Verac's brassard": true, "Verac's plateskirt": true, "Verac's flail": true, "Amulet of the damned (full)": true};
             slots.forEach((slot) => {
                 if (highestOverall.hasOwnProperty(combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()) && highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()] !== 'N/A') {
                     $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll item-pic'><img class='noscroll slot-icon' src='./resources/Clean_slot.png' title='${slot}' /><img class='noscroll' src="./resources/equipment_icons/${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()].replaceAll(/ /g, '_')}.png" onError='this.onerror=null;this.src="./resources/${slot}_slot.png"' /><img class='noscroll slot-icon hidden-slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /></span><span class='noscroll slot-text'><a class='link' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()])} target="_blank">${highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]}</a></span></div>`);
@@ -7227,8 +7228,14 @@ let openHighest = function() {
                     $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><img class='noscroll slot-icon' src='./resources/${slot}_slot.png' title='${slot}' /><span class='noscroll slot-text'>None</span></div>`);
                     !!chunkInfo['equipment'][highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]] && (prayerBonus += chunkInfo['equipment'][highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]]['prayer']);
                 }
+                if (combatStyle === 'Prayer' && !!highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()] && veracs.hasOwnProperty(highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()])) {
+                    delete veracs[highestOverall[combatStyle.replaceAll(' ', '_') + '-' + slot.toLowerCase()]];
+                }
             });
             if (combatStyle === 'Prayer') {
+                if (veracs.length === 0) {
+                    prayerBonus += 7;
+                }
                 $('.Prayer-body .prayer-bonus-inner').html(prayerBonus);
             }
         });

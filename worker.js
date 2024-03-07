@@ -6247,6 +6247,59 @@ let calcBIS = function() {
                     }
                 }
             }
+        } else if (skill === 'Prayer') {
+            // Non-set DPS
+            if (bestDps === -1) {
+                let prayerBonus = 0;
+                Object.keys(bestEquipment).forEach((slot) => { prayerBonus += chunkInfo['equipment'][bestEquipment[slot]].prayer;
+                });
+                bestDps = prayerBonus;
+            }
+            // Verac's
+            validWearable = true;
+            tempEquipment = ["Verac's helm", "Verac's brassard", "Verac's plateskirt", "Verac's flail", "Amulet of the damned (full)"];
+            tempEquipment.some(equip => {
+                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                    validWearable = false;
+                    return true;
+                }
+                if (baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).filter(skill => !primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])).length > 0) {
+                    validWearable = false;
+                    return true;
+                }
+            });
+            if (validWearable) {
+                let itemList = ["Verac's helm", "Verac's brassard", "Verac's plateskirt", "Verac's flail", "Amulet of the damned (full)"];
+                let slotMapping = {'head': true, 'body': true, 'legs': true, '2h': true, 'neck': true};
+                let allValid = true;
+                itemList.some(item => {
+                    let tempTempValid = false;
+                    if (Object.keys(baseChunkData['items'][item]).filter(source => !baseChunkData['items'][item][source].includes('-') || !processingSkill[baseChunkData['items'][item][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][item][source].split('-')[1] === 'Slayer').length > 0) {
+                        let article = vowels.includes(item.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                        article = (item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' || (item.toLowerCase().charAt(item.toLowerCase().length - 1) === ')' && item.toLowerCase().split('(')[0].trim().charAt(item.toLowerCase().split('(')[0].trim().length - 1) === 's')) ? ' ' : article;
+                        (!backlog['BiS'] || (!backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item.toLowerCase() + '|~') && !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item.toLowerCase().replaceAll('#', '/') + '|~'))) && (tempTempValid = true);
+                    }
+                    if (!tempTempValid) {
+                        allValid = false;
+                        return false;
+                    }
+                });
+                if (allValid) {
+                    let prayerBonus = 0;
+                    Object.keys(bestEquipment).filter(slot => !slotMapping[slot]).forEach((slot) => { prayerBonus += chunkInfo['equipment'][bestEquipment[slot]].prayer; });
+                    itemList.forEach((item) => {
+                        prayerBonus += chunkInfo['equipment'][item].prayer;
+                    });
+                    let newDps = prayerBonus;
+                    if (newDps > bestDps) {
+                        bestDps = newDps;
+                        resultingAdditions = {};
+                        itemList.forEach((item) => {
+                            resultingAdditions[chunkInfo['equipment'][item].slot] = item;
+                        });
+                    }
+                }
+            }
         }
         Object.keys(resultingAdditions).forEach((slot) => {
             bestEquipment[slot] = resultingAdditions[slot];
