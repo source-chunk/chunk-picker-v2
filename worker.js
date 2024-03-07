@@ -6056,7 +6056,7 @@ let calcBIS = function() {
             });
             if (validWearable) {
                 let itemList = ['Amulet of the damned (full)', "Karil's coif", "Karil's crossbow", "Karil's leatherskirt", "Karil's leathertop", 'Bolt rack'];
-                let slotMapping = {'neck': true, 'head': true, 'weapon': true, 'legs': true, 'body': true, 'ammo': true};
+                let slotMapping = {'neck': true, 'head': true, '2h': true, 'legs': true, 'body': true, 'ammo': true};
                 let allValid = true;
                 itemList.some(item => {
                     let tempTempValid = false;
