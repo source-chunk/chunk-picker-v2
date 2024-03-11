@@ -6056,7 +6056,7 @@ let calcBIS = function() {
             });
             if (validWearable) {
                 let itemList = ['Amulet of the damned (full)', "Karil's coif", "Karil's crossbow", "Karil's leatherskirt", "Karil's leathertop", 'Bolt rack'];
-                let slotMapping = {'neck': true, 'head': true, '2h': true, 'legs': true, 'body': true, 'ammo': true};
+                let slotMapping = {'neck': true, 'head': true, '2h': true, 'weapon': true, 'shield': true, 'legs': true, 'body': true, 'ammo': true};
                 let allValid = true;
                 itemList.some(item => {
                     let tempTempValid = false;
@@ -6102,7 +6102,7 @@ let calcBIS = function() {
             });
             if (validWearable) {
                 let itemList = ['Crystal helm', 'Crystal body', 'Crystal legs', 'Crystal bow'];
-                let slotMapping = {'head': true, 'body': true, 'legs': true, '2h': true};
+                let slotMapping = {'head': true, 'body': true, 'legs': true, '2h': true, 'weapon': true, 'shield': true};
                 let allValid = true;
                 let weapon = 'Crystal bow';
                 itemList.some(item => {
@@ -6270,7 +6270,7 @@ let calcBIS = function() {
             });
             if (validWearable) {
                 let itemList = ["Verac's helm", "Verac's brassard", "Verac's plateskirt", "Verac's flail", "Amulet of the damned (full)"];
-                let slotMapping = {'head': true, 'body': true, 'legs': true, '2h': true, 'neck': true};
+                let slotMapping = {'head': true, 'body': true, 'legs': true, '2h': true, 'neck': true, 'weapon': true, 'shield': true};
                 let allValid = true;
                 itemList.some(item => {
                     let tempTempValid = false;

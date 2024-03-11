@@ -2572,6 +2572,19 @@ input#searchPlayerMaps {
     visibility: visible;
 }
 
+.expand {
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    color: var(--colorTextAlt);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.expand:hover {
+    color: var(--colorLink);
+}
+
 .quest-icon {
     cursor: pointer;
     transition: color .5s;
@@ -2675,7 +2688,7 @@ input#searchPlayerMaps {
 }
 
 #myModal2 > .modal-content.noscroll {
-    height: 35%;
+    height: 42%;
 }
 
 #myModal3 > .modal-content.noscroll {

@@ -1311,8 +1311,9 @@ let canvasSection;
 let contextSection;
 let chunkSectionCalculateAfter = false;
 let signInAttempts = 0;
+let expandChallengeStr = '';
 
-let currentVersion = '6.0.24';
+let currentVersion = '6.0.25';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1435,7 +1436,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.24";
+mapImg.src = "osrs_world_map.png?v=6.0.25";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2857,7 +2858,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.24");
+        myWorker = new Worker("./worker.js?v=6.0.25");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3119,8 +3120,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.24");
-let myWorker2 = new Worker("./worker.js?v=6.0.24");
+let myWorker = new Worker("./worker.js?v=6.0.25");
+let myWorker2 = new Worker("./worker.js?v=6.0.25");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3158,7 +3159,9 @@ let workerOnMessage = function(e) {
             if (e.data[0] === 'future') {
                 futureChunkData = e.data[2];
                 let challengeStr = calcFutureChallenges2(e.data[1], e.data[2]);
+                expandChallengeStr = challengeStr;
                 $('.panel-challenges').html(challengeStr || 'None');
+                $('#infochallenges .expand').show();
             } else if (e.data[0] === 'current') {
                 if (settings['newTasks'] && chunkJustRolled) {
                     openNewTasksModal(calcFutureChallenges2(e.data[1], e.data[2]).replaceAll(", 'future'", ", ''").replaceAll('</span>,', '</span><br />') || 'None');
@@ -3971,8 +3974,9 @@ let saveChunkNotes = function() {
 }
 
 // Opens the new chunk tasks modal
-let openNewTasksModal = function(data) {
+let openNewTasksModal = function(data, expandFuture) {
     newTasksOpen = true;
+    $('.new-tasks-title').text(expandFuture ? 'Potential Chunk Tasks' : 'New Chunk Tasks');
     $('.new-tasks-data').html(data);
     $('#myModal36').show();
     modalOutsideTime = Date.now();
@@ -4988,8 +4992,10 @@ let toggleInfoPanel = function(pnl) {
         if (uniqKey === pnl) {
             infoPanelVis[pnl] ? $('.panel-' + pnl).addClass('visible') : $('.panel-' + pnl).removeClass('visible');
             infoPanelVis[pnl] ? $('#info' + uniqKey + ' > .exp').html('<i class="pic fas fa-minus"></i>') : $('#info' + uniqKey + ' > .exp').html('<i class="pic fas fa-plus"></i>');
-            if (pnl === 'challenges' && infoPanelVis[pnl]) {
+            if (pnl === 'challenges' && infoPanelVis[pnl] && expandChallengeStr === '') {
                 $('.panel-challenges').html(`<div class="noscroll calculating"><i class="noscroll fas fa-spinner fa-spin"></i></div>`);
+                $('#infochallenges .expand').hide();
+                expandChallengeStr = '';
                 calcFutureChallenges();
             }
         } else {
@@ -5389,6 +5395,8 @@ let updateChunkInfo = function() {
         $('.panel-clues').html(clueStr || 'None');
         $('.panel-connections').html(connectStr || 'None');
         $('.panel-challenges').html(`<div class="noscroll calculating"><div class='noscroll display-button' onclick='calcFutureChallenges()'>Calculate Tasks</div></div>`);
+        $('#infochallenges .expand').hide();
+        expandChallengeStr = '';
     }
 }
 
@@ -5733,9 +5741,13 @@ let calcFutureChallenges = function() {
     });
     if (chunks[infoLockedId]) {
         $('.panel-challenges').html(challengeStr || 'None (chunk is already unlocked)');
+        $('#infochallenges .expand').hide();
+        expandChallengeStr = '';
         return;
     }
     $('.panel-challenges').html(`<div class="noscroll calculating"><i class="noscroll fas fa-spinner fa-spin"></i></div>`);
+    $('#infochallenges .expand').hide();
+    expandChallengeStr = '';
     chunks[infoLockedId] = true;
     let i = 0;
     while (i < Object.keys(chunks).length) {
@@ -5759,7 +5771,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.24");
+    myWorker2 = new Worker("./worker.js?v=6.0.25");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -5884,7 +5896,7 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
                                 }
                             });
                             if (tempValid) {
-                                challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">${challenge.split('~')[0]}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))} target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${(chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', 'skill', 'future')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span></span>, `;
+                                challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">${challenge.split('~')[0]}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))} target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${(chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', '${skill}', 'future')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span></span>, `;
                             }
                         } else {
                             challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">${challenge.split('~')[0]}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))} target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${(chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', '${skill}', 'future')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span></span>, `;
@@ -5941,6 +5953,12 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
     challengeStr.length > 0 && (challengeStr = challengeStr.substring(0, challengeStr.length - 2));
     return challengeStr;
 };
+
+// Opens the expanded future challenges window
+let expandFutureChallenges = function(event) {
+    event.stopPropagation();
+    openNewTasksModal(expandChallengeStr.replaceAll('</span>,', '</span><br />') || 'None', true);
+}
 
 // Prints all items from all tasks (debug)
 let printTaskItems = function() {
@@ -9187,9 +9205,9 @@ let switchActiveContext = function(e, opt) {
     activeContextMenuOpen = false;
     switch (opt) {
         case "backlog": backlogChallenge(activeContextMenuChallenge, activeContextMenuSkill, '', e.altKey); break;
-        case "backlog note": showNotes(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
+        case "backlog note": showNotes(encodeRFC5987ValueChars(activeContextMenuChallenge), activeContextMenuSkill, ''); break;
         case "alternatives": showAlternatives(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
-        case "details": showDetails(activeContextMenuChallenge, activeContextMenuSkill, ''); break;
+        case "details": showDetails(encodeRFC5987ValueChars(activeContextMenuChallenge), activeContextMenuSkill, ''); break;
     }
     $(".active-context-menu").hide(100);
 }
@@ -9200,7 +9218,7 @@ let switchBacklogContext = function(opt) {
     switch (opt) {
         case "unbacklog": unbacklogChallenge(backlogContextMenuChallenge, backlogContextMenuSkill); break;
         case "edit note": showNotes(backlogContextMenuChallenge, backlogContextMenuSkill, backlog[backlogContextMenuSkill][backlogContextMenuChallenge]); break;
-        case "details": showDetails(backlogContextMenuChallenge, backlogContextMenuSkill, ''); break;
+        case "details": showDetails(encodeRFC5987ValueChars(backlogContextMenuChallenge), backlogContextMenuSkill, ''); break;
     }
     $(".backlog-context-menu").hide(100);
 }
@@ -10264,6 +10282,7 @@ let setData = function() {
 
 // Rolls until a new, unique map id is found
 let rollMID = function(count) {
+    const bannedIds = ['nig', 'anig', 'nigg', 'nigr', 'nggr', 'nigs', 'ngr', 'ngrs', 'niga', 'ngga', 'nigo', 'nigz', 'ngrz', 'gook', 'nazi', 'htlr', 'fag', 'afag', 'fgt', 'afgt', 'fgts', 'fagg', 'fago', 'fags', 'faag', 'ffag', 'fagz', 'fagt', 'dyke'];
     let rollMidCount = count || 0;
     let char1, char2, char3, char4, charSet;
     let badNums = true;
@@ -10273,13 +10292,15 @@ let rollMID = function(count) {
         return;
     }
     databaseRef.child('mapids').once('value', function(snap) {
-        while (badNums || rollCount > 100) {
+        while (badNums && rollCount < 250) {
             char1 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char2 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char3 = String.fromCharCode(97 + Math.floor(Math.random() * 26));
             char4 = rollCount > 10 ? String.fromCharCode(97 + Math.floor(Math.random() * 26)) : '';
             charSet = char1 + char2 + char3 + char4;
-            !snap.val()[charSet] && (badNums = false);
+            if (!snap.val()[charSet] && !bannedIds.includes(charSet)) {
+                badNums = false;
+            }
             rollCount++;
         }
         mid = charSet;
