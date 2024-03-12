@@ -1197,6 +1197,7 @@ let questPointTotal = 0;
 let combatPointTotal = 0;
 let oldChallengeArr = {};
 let futureChunkData = {};
+let futureUnlockedSections = {};
 let highestOverall = {};
 let savedBox = null;
 let stickered = {};
@@ -1313,7 +1314,7 @@ let chunkSectionCalculateAfter = false;
 let signInAttempts = 0;
 let expandChallengeStr = '';
 
-let currentVersion = '6.0.25';
+let currentVersion = '6.0.26';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1436,7 +1437,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.25";
+mapImg.src = "osrs_world_map.png?v=6.0.26";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2858,7 +2859,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.25");
+        myWorker = new Worker("./worker.js?v=6.0.26");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3120,8 +3121,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.25");
-let myWorker2 = new Worker("./worker.js?v=6.0.25");
+let myWorker = new Worker("./worker.js?v=6.0.26");
+let myWorker2 = new Worker("./worker.js?v=6.0.26");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3158,6 +3159,7 @@ let workerOnMessage = function(e) {
             chunkInfo = e.data[3];
             if (e.data[0] === 'future') {
                 futureChunkData = e.data[2];
+                futureUnlockedSections = e.data[15];
                 let challengeStr = calcFutureChallenges2(e.data[1], e.data[2]);
                 expandChallengeStr = challengeStr;
                 $('.panel-challenges').html(challengeStr || 'None');
@@ -5771,7 +5773,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.25");
+    myWorker2 = new Worker("./worker.js?v=6.0.26");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -8497,6 +8499,9 @@ let openQuestFilterContextMenu = function() {
 let showDetails = function(challenge, skill, type) {
     if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         let baseChunkDataIn = type === 'future' ? futureChunkData : baseChunkData;
+        let unlockedSectionsIn = type === 'future' ? futureUnlockedSections : unlockedSections;
+        let chunksIn = JSON.parse(JSON.stringify(tempChunks['unlocked']));
+        type === 'future' && (chunksIn[infoLockedId] = true);
         challenge = decodeQueryParam(challenge);
         if (!baseChunkDataIn || Object.keys(baseChunkDataIn).length === 0) {
             return;
@@ -8554,7 +8559,7 @@ let showDetails = function(challenge, skill, type) {
                     if (!!chunkInfo['codeItems'][type + 'Plus'] && !!chunkInfo['codeItems'][type + 'Plus'][el]) {
                         let validElem = false;
                         chunkInfo['codeItems'][type + 'Plus'][el].forEach((elem) => {
-                            if (tempChunks['unlocked'].hasOwnProperty(elem) || possibleAreas.hasOwnProperty(elem)) {
+                            if (chunksIn.hasOwnProperty(elem) || (chunksIn.hasOwnProperty(elem.match(/[0-9]+/g)[0]) && unlockedSectionsIn.hasOwnProperty(elem.match(/[0-9]+/g)[0]) && unlockedSectionsIn[elem.match(/[0-9]+/g)[0]][elem.match(/[0-9]+/g)[1]]) || possibleAreas.hasOwnProperty(elem)) {
                                 els.push(elem);
                                 validElem = true;
                             }
@@ -8568,7 +8573,7 @@ let showDetails = function(challenge, skill, type) {
                                 writtenPlus = true;
                                 formattedSource = `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeForUrl(element.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, ''))} target="_blank">${element.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</a>`;
                                 $('#details-data').append(`<span class="noscroll"><b class="noscroll"><span class='noscroll special'>-</span> ${formattedSource}</b></span><br />`);
-                            } else if (!!element.match(/[0-9]+/g) && tempChunks['unlocked'].hasOwnProperty(element.match(/[0-9]+/g)[0]) && (!element.match(/[0-9]+-[0-9]+/g) || !unlockedSections.hasOwnProperty(element.match(/[0-9]+/g)[0]) || unlockedSections[element.match(/[0-9]+/g)[0]][element.match(/[0-9]+/g)[1]])) {
+                            } else if (!!element.match(/[0-9]+/g) && chunksIn.hasOwnProperty(element.match(/[0-9]+/g)[0]) && (!element.match(/[0-9]+-[0-9]+/g) || !unlockedSectionsIn.hasOwnProperty(element.match(/[0-9]+/g)[0]) || unlockedSectionsIn[element.match(/[0-9]+/g)[0]][element.match(/[0-9]+/g)[1]])) {
                                 written = true;
                                 writtenPlus = true;
                                 let realName = element.match(/[0-9]+/g) ? element.match(/[0-9]+/g)[0] : element;
@@ -8594,7 +8599,7 @@ let showDetails = function(challenge, skill, type) {
                             written = true;
                             formattedSource = `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeForUrl(el.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, ''))} target="_blank">${el.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</a>`;
                             $('#details-data').append(`<span class="noscroll"><b class="noscroll">${formattedSource}</b></span><br />`);
-                        } else if (!!el.match(/[0-9]+/g) && tempChunks['unlocked'].hasOwnProperty(el.match(/[0-9]+/g)[0]) && (!el.match(/[0-9]+-[0-9]+/g) || !unlockedSections.hasOwnProperty(el.match(/[0-9]+/g)[0]) || unlockedSections[el.match(/[0-9]+/g)[0]][el.match(/[0-9]+/g)[1]])) {
+                        } else if (!!el.match(/[0-9]+/g) && chunksIn.hasOwnProperty(el.match(/[0-9]+/g)[0]) && (!el.match(/[0-9]+-[0-9]+/g) || !unlockedSectionsIn.hasOwnProperty(el.match(/[0-9]+/g)[0]) || unlockedSectionsIn[el.match(/[0-9]+/g)[0]][el.match(/[0-9]+/g)[1]])) {
                             written = true;
                             let realName = el.match(/[0-9]+/g) ? el.match(/[0-9]+/g)[0] : el;
                             if (el.match(/[A-Za-z ]+\([0-9]+\)/g)) {
