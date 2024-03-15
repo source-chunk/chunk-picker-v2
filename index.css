@@ -3714,6 +3714,10 @@ input#searchChunkSections {
     background-color: var(--color6);
 }
 
+.outer-chunk-section img {
+    width: 100%;
+}
+
 .chunk-section-text {
     font-weight: normal;
 }
