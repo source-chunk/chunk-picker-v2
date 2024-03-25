@@ -33,14 +33,14 @@ body::-webkit-scrollbar {
     font-family: 'Calibri', 'Roboto', sans-serif;
 }
 
-body:not(.about) {
+body:not(.about):not(.change-password) {
     background-color: black;
     color: var(--colorText);
     overflow: hidden !important;
 }
 
 @-moz-document url-prefix() {
-    html:not(.about),body:not(.about){overflow: hidden !important;}
+    html:not(.about):not(.change-password),body:not(.about):not(.change-password){overflow: hidden !important;}
 }
 
 a, a:visited {

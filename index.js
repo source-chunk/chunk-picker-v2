@@ -422,7 +422,7 @@ let ruleNames = {
     "Normal Farming": "Allow normal farming to count as a primary method for training Farming",
     "Raking": "Allow raking patches to count as a primary method for training Farming <span class='rule-asterisk noscroll'>*</span>",
     "Sulphurous Fertiliser": "Allow making supercompost via saltpetre (2xp each) to count as a primary method for training Farming",
-    "CoX": "Allow methods inside the Chambers of Xeric to count for chunk tasks/primary training methods (Fishing, Hunter, Cooking, Woodcutting, etc.)",
+    "CoX": "Allow methods inside the Chambers of Xeric/Neypotzli to count for chunk tasks/primary training methods (Fishing, Hunter, Cooking, Woodcutting, etc.)",
     "Tithe Farm": "Allow Tithe Farm to count as a primary method for training Farming",
     "Kill X": "Kill X-amount of every new, unique monster you encounter",
     "Sorceress's Garden": "Allow Sorceress's Garden to count as primary training for training Farming",
@@ -1247,6 +1247,7 @@ let starRegionsPossible = {
     "Morytania": 0,
     "Piscatoris and the Gnome Stronghold": 0,
     "Tirannwn": 0,
+    "Varlamore": 0,
     "Wilderness": 0
 };
 let starRegions = {
@@ -1263,6 +1264,7 @@ let starRegions = {
     "Morytania": 0,
     "Piscatoris and the Gnome Stronghold": 0,
     "Tirannwn": 0,
+    "Varlamore": 0,
     "Wilderness": 0
 };
 let pickedNum;
@@ -1315,7 +1317,7 @@ let chunkSectionCalculateAfter = false;
 let signInAttempts = 0;
 let expandChallengeStr = '';
 
-let currentVersion = '6.0.28';
+let currentVersion = '6.0.29';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1438,7 +1440,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.28";
+mapImg.src = "osrs_world_map.png?v=6.0.29";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2828,7 +2830,13 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
     }
 
     let tempSections = inputTempSections || {};
-    unlockedSections = JSON.parse(JSON.stringify(manualSections));
+    let manualSectionsModified = {};
+    !!manualSections && Object.keys(manualSections).forEach((chunk) => {
+        if (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(chunk)) {
+            manualSectionsModified[chunk] = manualSections[chunk];
+        }
+    });
+    unlockedSections = JSON.parse(JSON.stringify(manualSectionsModified));
     unlockedSections = combineJSONs(unlockedSections, findConnectedSections({...tempChunks['unlocked'], ...manualAreas} || {}, {...unlockedSections, ...tempSections}));
     let sectionsValid = true;
     !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).some((chunk) => {
@@ -2860,7 +2868,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.28");
+        myWorker = new Worker("./worker.js?v=6.0.29");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3122,8 +3130,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.28");
-let myWorker2 = new Worker("./worker.js?v=6.0.28");
+let myWorker = new Worker("./worker.js?v=6.0.29");
+let myWorker2 = new Worker("./worker.js?v=6.0.29");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3234,6 +3242,7 @@ let workerOnMessage = function(e) {
                     "Morytania": 0,
                     "Piscatoris and the Gnome Stronghold": 0,
                     "Tirannwn": 0,
+                    "Varlamore": 0,
                     "Wilderness": 0
                 };
                 starRegions = {
@@ -3250,6 +3259,7 @@ let workerOnMessage = function(e) {
                     "Morytania": 0,
                     "Piscatoris and the Gnome Stronghold": 0,
                     "Tirannwn": 0,
+                    "Varlamore": 0,
                     "Wilderness": 0
                 };
                 !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter(task => { return chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('StarRegion') }).forEach((task) => {
@@ -5087,6 +5097,21 @@ let doneLoading = function() {
     }
     $('#unlock-entry').prop('disabled', true);
     $('.loading').fadeOut(1000);
+    setTimeout(() => {
+        if ($('.pin.entry').is(':autofill')) {
+            if (!$('.pin.entry').val().match(/^[a-z0-9\!\"\;\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\]\^\_\`\{\|\}\~]*$/i) || $('.pin.entry').val().length > 16) {
+                $(this).val(prevValueLockPin);
+            } else {
+                prevValueLockPin = $('.pin.entry').val();
+                if ($('.pin.entry').val().length >= 4 && $('.pin.entry').val().length <= 16) {
+                    $('#unlock-entry').prop('disabled', false);
+                    $('.pin.entry').removeClass('wrong');
+                } else {
+                    $('#unlock-entry').prop('disabled', true);
+                }
+            }
+        }
+    }, 500);
 }
 
 // Creates board of boxes, sets initial sizes of scalable elements, and hides certain elements if needed
@@ -5762,7 +5787,13 @@ let calcFutureChallenges = function() {
         });
         i++;
     }
-    tempUnlockedSections = JSON.parse(JSON.stringify(manualSections));
+    let manualSectionsModified = {};
+    !!manualSections && Object.keys(manualSections).forEach((chunk) => {
+        if (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(chunk)) {
+            manualSectionsModified[chunk] = manualSections[chunk];
+        }
+    });
+    tempUnlockedSections = JSON.parse(JSON.stringify(manualSectionsModified));
     tempUnlockedSections = combineJSONs(tempUnlockedSections, findConnectedSections((Object.keys(chunks).length > 0 ? chunks : {...tempChunks['unlocked'], ...manualAreas}) || {}, tempUnlockedSections));
     let tempSections = {};
     if (!tempUnlockedSections.hasOwnProperty(infoLockedId) && chunkInfo['sections'].hasOwnProperty(infoLockedId) && Object.keys(chunkInfo['sections'][infoLockedId]).filter((section) => section !== "0").length > 0) {
@@ -5775,7 +5806,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.28");
+    myWorker2 = new Worker("./worker.js?v=6.0.29");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -8297,7 +8328,13 @@ let saveChunkSectionPicker = function() {
             unlockedSections[sectionChunkId][sec] = true;
         });
     }
-    unlockedSections = combineJSONs(unlockedSections, manualSections);
+    let manualSectionsModified = {};
+    !!manualSections && Object.keys(manualSections).forEach((chunk) => {
+        if (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(chunk)) {
+            manualSectionsModified[chunk] = manualSections[chunk];
+        }
+    });
+    unlockedSections = combineJSONs(unlockedSections, manualSectionsModified);
     unlockedSections = combineJSONs(unlockedSections, findConnectedSections((Object.keys(savedChunks).length > 0 ? savedChunks : {...tempChunks['unlocked'], ...manualAreas}) || {}, unlockedSections));
     modalOutsideTime = Date.now();
     $('#myModal43').hide();
@@ -8520,7 +8557,15 @@ let showDetails = function(challenge, skill, type) {
         skills.push('Nonskill');
         detailsModalOpen = true;
         $('#details-data').empty();
-        $('#details-title').html(`<b class="noscroll">${challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '')}</b>`);
+        let challengeLabelLine = '';
+        if (skillNames.includes(skill)) {
+            challengeLabelLine = `[${chunkInfo['challenges'][skill][challenge]['Level']}] ${skill}: `;
+        } else if (skill === 'BiS' || skill === 'Extra') {
+            challengeLabelLine = `[${chunkInfo['challenges'][skill][challenge]['Label']}]: `;
+        } else if (skill === 'Quest' || skill === 'Diary') {
+            challengeLabelLine = `[${skill}]: `;
+        }
+        $('#details-title').html(`<b class="noscroll">${challengeLabelLine}${challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '')}</b>`);
         if (!chunkInfo['challenges'].hasOwnProperty(skill)) {
             chunkInfo['challenges'][skill] = {};
         }
@@ -9713,6 +9758,7 @@ let checkMID = function(mid) {
         onMobile && $('#pin-menu').addClass('mobile');
         $('#pin-menu').show();
         $('.mid-old').focus();
+        $('html, body').addClass('change-password');
     } else if (mid === 'about') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
@@ -10320,7 +10366,7 @@ let rollMID = function(count) {
             rollCount++;
         }
         mid = charSet;
-        firebase.auth().fetchSignInMethodsForEmail ('sourcechunk+' + mid + '@yandex.com').then(providers => {
+        firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then(providers => {
             if (providers.length === 0) {
                 firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                     signedIn = true;
