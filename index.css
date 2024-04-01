@@ -2551,6 +2551,10 @@ input#searchPlayerMaps {
     visibility: visible;
 }
 
+#myModal43.mobile .section-help {
+    display: none;
+}
+
 .section-help .tooltiptext {
     visibility: hidden;
     width: 300px;
