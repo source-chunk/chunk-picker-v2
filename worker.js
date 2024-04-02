@@ -2520,7 +2520,10 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             }
             wrongThings = [];
             !!chunkInfo['challenges'][skill][name]['Category'] && chunkInfo['challenges'][skill][name]['Category'].filter((category) => { return maybePrimary.includes(category) }).forEach((category) => {
-                chunkInfo['challenges'][skill][name]['Primary'] = rules[category] && chunkInfo['challenges'][skill][name]['Primary'];
+                if (!chunkInfo['challenges'][skill][name].hasOwnProperty('OriginalPrimary')) {
+                    chunkInfo['challenges'][skill][name]['OriginalPrimary'] = chunkInfo['challenges'][skill][name]['Primary'];
+                }
+                chunkInfo['challenges'][skill][name]['Primary'] = rules[category] && chunkInfo['challenges'][skill][name]['OriginalPrimary'];
             });
             let validChallenge = true;
             let tempSecondary = false;
