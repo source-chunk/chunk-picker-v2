@@ -1317,8 +1317,9 @@ let contextSection;
 let chunkSectionCalculateAfter = false;
 let signInAttempts = 0;
 let expandChallengeStr = '';
+let detailsStack = [];
 
-let currentVersion = '6.0.36';
+let currentVersion = '6.1.0';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1441,7 +1442,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.0.36";
+mapImg.src = "osrs_world_map.png?v=6.1.0";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2608,7 +2609,7 @@ let pickCanvas = function(both, override) {
     } else if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
         el = [];
         if (rules['F2P']) {
-            chunkInfo['walkableChunksF2P'].filter(id => { return (!tempChunks['unlocked'] || !tempChunks['unlocked'][id]) && (!tempChunks['blacklisted'] || !tempChunks['blacklisted'][id]) }).forEach((id) => {
+            chunkInfo['walkableChunksF2P'].filter(id => { return (!tempChunks['unlocked'] || !tempChunks['unlocked'][id]) && (!tempChunks['blacklisted'] || !tempChunks['blacklisted'][id]) && !isNaN(id) }).forEach((id) => {
                 el.push(id);
             });
         } else {
@@ -2869,7 +2870,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.0.36");
+        myWorker = new Worker("./worker.js?v=6.1.0");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3131,8 +3132,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.0.36");
-let myWorker2 = new Worker("./worker.js?v=6.0.36");
+let myWorker = new Worker("./worker.js?v=6.1.0");
+let myWorker2 = new Worker("./worker.js?v=6.1.0");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5808,7 +5809,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.0.36");
+    myWorker2 = new Worker("./worker.js?v=6.1.0");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -8543,9 +8544,16 @@ let openQuestFilterContextMenu = function() {
     });
 }
 
+// Goes back to previous details window
+let goBackDetails = function(type) {
+    detailsStack.pop();
+    let el = detailsStack.pop();
+    showDetails(el[0], encodeRFC5987ValueChars(el[1]), type, detailsStack.length > 0);
+}
+
 // Shows challenge details
-let showDetails = function(challenge, skill, type) {
-    if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+let showDetails = function(challenge, skill, type, isNested) {
+    if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         let baseChunkDataIn = type === 'future' ? futureChunkData : baseChunkData;
         let unlockedSectionsIn = type === 'future' ? futureUnlockedSections : unlockedSections;
         let chunksIn = JSON.parse(JSON.stringify(tempChunks['unlocked']));
@@ -8567,7 +8575,12 @@ let showDetails = function(challenge, skill, type) {
         } else if (skill === 'Quest' || skill === 'Diary') {
             challengeLabelLine = `[${skill}]: `;
         }
-        $('#details-title').html(`<b class="noscroll">${challengeLabelLine}${challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '')}</b>`);
+        if (isNested) {
+            $('.details-back').show().html(`<i class="fas fa-arrow-left noscrollhard" onclick="goBackDetails('` + type + `')"></i>`);
+        } else {
+            $('.details-back').hide();
+        }
+        $('#details-title').html(`<b class="noscroll">${challengeLabelLine}${challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</b>`);
         if (!chunkInfo['challenges'].hasOwnProperty(skill)) {
             chunkInfo['challenges'][skill] = {};
         }
@@ -8781,7 +8794,7 @@ let showDetails = function(challenge, skill, type) {
                                 }
                                 if (typeof baseChunkDataIn[type][el][source] !== "boolean" && skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
                                     formattedSource += `<span class='noscroll ${baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop') ? 'green' : ''}'>${baseChunkDataIn[type][el][source].split('-')[1].replaceAll(/\*/g, '')}</span>`;
-                                    formattedSource += ` <span class='noscroll ${baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop') ? 'green' : ''}'>(${source.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')})</span>`;
+                                    formattedSource += ` <span class='noscroll ${baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop') ? 'green' : ''}'>(${source.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')})</span> <span onclick="showDetails('` + encodeRFC5987ValueChars(source) + `', '` + baseChunkDataIn[type][el][source].split('-')[1].replaceAll(/\*/g, '') + `', '` + type + `', true)"><i class="quest-icon fas fa-info-circle"></i></span>`;
                                 } else if (typeof baseChunkDataIn[type][el][source] !== "boolean" && !baseChunkDataIn[type][el][source].includes('primary') && !baseChunkDataIn[type][el][source].includes('secondary') && baseChunkDataIn[type][el][source] !== 'shop') {
                                     formattedSource += `<span class='noscroll ${baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop') ? 'green' : ''}'>-${baseChunkDataIn[type][el][source].replaceAll(/\*/g, '')}</span>`;
                                 } else if (typeof baseChunkDataIn[type][el][source] !== "boolean") {
@@ -8812,6 +8825,10 @@ let showDetails = function(challenge, skill, type) {
                 $('#details-data').append('<span class="noscroll">None</span><br />');
             }
         });
+        if (!isNested) {
+            detailsStack = [];
+        }
+        detailsStack.push([challenge, skill]);
         $('#myModal2').show();
         modalOutsideTime = Date.now();
         document.getElementById('details-data').scrollTop = 0;
@@ -9540,6 +9557,10 @@ let checkOffChallenge = function(skill, line) {
         }
         $('.panel-active .challenge:has(input:checked)').addClass('hide-backlog');
         $('.panel-active .challenge:not(:has(input:checked))').removeClass('hide-backlog');
+        oldSavedChallengeArr = [];
+        $('.panel-active').contents().each((i, val) => {
+            oldSavedChallengeArr.push($(val).html());
+        });
         setupCurrentChallenges(tempChallengeArrSaved, true);
         changeChallengeColor();
         setData();

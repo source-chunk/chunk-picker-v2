@@ -518,7 +518,21 @@ let calcChallenges = function(chunks, baseChunkData) {
                                     if (!dropTablesGlobal[monster][item]) {
                                         dropTablesGlobal[monster][item] = {};
                                     }
-                                    dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : dropTables[drop][item].split('@')[1] * quantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
+                                    let calcedQuantity;
+                                    if (dropTables[drop][item].split('@')[1].includes(' (noted)')) {
+                                        if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted) (F2P)';
+                                        } else {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)';
+                                        }
+                                    } else {
+                                        if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (F2P)')[0] * quantity + ' (F2P)';
+                                        } else {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1] * quantity;
+                                        }
+                                    }
+                                    dropTablesGlobal[monster][item][calcedQuantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
                                 }
                             });
                         } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
@@ -814,6 +828,30 @@ let calcChallenges = function(chunks, baseChunkData) {
                             delete baseChunkData['items'][item][monster];
                             if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
                                 delete baseChunkData['items'][item];
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    }
+    if (!!chunks) {
+        !!dropTablesGlobal && Object.keys(dropTablesGlobal).forEach((monster) => {
+            !!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).forEach((item) => {
+                !!dropTablesGlobal[monster][item] && Object.keys(dropTablesGlobal[monster][item]).forEach((quantity) => {
+                    if (quantity.includes('(F2P)') && baseChunkData['monsters'].hasOwnProperty(monster) && Object.keys(baseChunkData['monsters'][monster]).filter(chunk => { return chunkInfo['walkableChunksF2P'].includes(chunk) }).length === 0) {
+                        delete dropTablesGlobal[monster][item][quantity];
+                        if (!dropTablesGlobal[monster][item] || Object.keys(dropTablesGlobal[monster][item]).length === 0) {
+                            delete dropTablesGlobal[monster][item];
+                            if (!dropTablesGlobal[monster] || Object.keys(dropTablesGlobal[monster]).length === 0) {
+                                delete dropTablesGlobal[monster];
+                            }
+                            delete dropRatesGlobal[monster][item];
+                            if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
+                                delete baseChunkData['items'][item][monster];
+                                if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
+                                    delete baseChunkData['items'][item];
+                                }
                             }
                         }
                     }
@@ -1623,7 +1661,21 @@ let calcChallenges = function(chunks, baseChunkData) {
                                         if (!dropTablesGlobal[monster][item]) {
                                             dropTablesGlobal[monster][item] = {};
                                         }
-                                        dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : dropTables[drop][item].split('@')[1] * quantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
+                                        let calcedQuantity;
+                                        if (dropTables[drop][item].split('@')[1].includes(' (noted)')) {
+                                            if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted) (F2P)';
+                                            } else {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)';
+                                            }
+                                        } else {
+                                            if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (F2P)')[0] * quantity + ' (F2P)';
+                                            } else {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1] * quantity;
+                                            }
+                                        }
+                                        dropTablesGlobal[monster][item][calcedQuantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
                                     }
                                 });
                             } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
@@ -1932,6 +1984,30 @@ let calcChallenges = function(chunks, baseChunkData) {
                                 delete baseChunkData['items'][item][monster];
                                 if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
                                     delete baseChunkData['items'][item];
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        if (!!chunks) {
+            !!dropTablesGlobal && Object.keys(dropTablesGlobal).forEach((monster) => {
+                !!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).forEach((item) => {
+                    !!dropTablesGlobal[monster][item] && Object.keys(dropTablesGlobal[monster][item]).forEach((quantity) => {
+                        if (quantity.includes('(F2P)') && baseChunkData['monsters'].hasOwnProperty(monster) && Object.keys(baseChunkData['monsters'][monster]).filter(chunk => { return chunkInfo['walkableChunksF2P'].includes(chunk) }).length === 0) {
+                            delete dropTablesGlobal[monster][item][quantity];
+                            if (!dropTablesGlobal[monster][item] || Object.keys(dropTablesGlobal[monster][item]).length === 0) {
+                                delete dropTablesGlobal[monster][item];
+                                if (!dropTablesGlobal[monster] || Object.keys(dropTablesGlobal[monster]).length === 0) {
+                                    delete dropTablesGlobal[monster];
+                                }
+                                delete dropRatesGlobal[monster][item];
+                                if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
+                                    delete baseChunkData['items'][item][monster];
+                                    if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
+                                        delete baseChunkData['items'][item];
+                                    }
                                 }
                             }
                         }
@@ -3500,7 +3576,21 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             if (!dropTablesGlobal[monster][drop]) {
                                 dropTablesGlobal[monster][drop] = {};
                             }
-                            dropTablesGlobal[monster][drop][dropTables[item][drop].split('@')[1].includes(' (noted)') ? dropTables[item][drop].split('@')[1].split(' (noted)')[0] * quantityDrop + ' (noted)' : dropTables[item][drop].split('@')[1] * quantityDrop] = findFraction(parseFloat(dropTables[item][drop].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[item][drop].split('@')[0].split('/')[1]), item.includes('GeneralSeedDropTable'));
+                            let calcedQuantity;
+                            if (dropTables[item][drop].split('@')[1].includes(' (noted)')) {
+                                if (dropTables[item][drop].split('@')[1].includes(' (F2P)')) {
+                                    calcedQuantity = dropTables[item][drop].split('@')[1].split(' (noted)')[0] * quantityDrop + ' (noted) (F2P)';
+                                } else {
+                                    calcedQuantity = dropTables[item][drop].split('@')[1].split(' (noted)')[0] * quantityDrop + ' (noted)';
+                                }
+                            } else {
+                                if (dropTables[item][drop].split('@')[1].includes(' (F2P)')) {
+                                    calcedQuantity = dropTables[item][drop].split('@')[1].split(' (F2P)')[0] * quantityDrop + ' (F2P)';
+                                } else {
+                                    calcedQuantity = dropTables[item][drop].split('@')[1] * quantityDrop;
+                                }
+                            }
+                            dropTablesGlobal[monster][drop][calcedQuantity] = findFraction(parseFloat(dropTables[item][drop].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[item][drop].split('@')[0].split('/')[1]), item.includes('GeneralSeedDropTable'));
                         });
                     });
                 } else {
@@ -6781,6 +6871,9 @@ let gatherChunksInfo = function(chunksIn) {
                         !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach((quantity) => {
                             if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT']) && drop !== 'GemDropTableLegends+') {
                                 Object.keys(dropTables[drop]).forEach((item) => {
+                                    if ((drop === 'RareDropTable+' || drop === 'GemDropTable+') && item === 'Chaos talisman') {
+                                        return;
+                                    }
                                     if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) || ((parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1]) * parseFloat(dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
                                         (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
                                         if (!items[item]) {
@@ -6801,7 +6894,22 @@ let gatherChunksInfo = function(chunksIn) {
                                         if (!dropTablesGlobal[monster][item]) {
                                             dropTablesGlobal[monster][item] = {};
                                         }
-                                        dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : (dropTables[drop][item].split('@')[1].includes('-') ? dropTables[drop][item].split('@')[1] : dropTables[drop][item].split('@')[1] * quantity)] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
+                                        let calcedQuantity;
+                                        if (dropTables[drop][item].split('@')[1].includes(' (noted)')) {
+                                            if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted) (F2P)';
+                                            } else {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)';
+                                            }
+                                        } else {
+                                            (dropTables[drop][item].split('@')[1].includes('-') ? dropTables[drop][item].split('@')[1] : dropTables[drop][item].split('@')[1] * quantity)
+                                            if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (F2P)')[0].includes('-') ? dropTables[drop][item].split('@')[1].split(' (F2P)')[0] : dropTables[drop][item].split('@')[1].split(' (F2P)')[0] * quantity + ' (F2P)';
+                                            } else {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].includes('-') ? dropTables[drop][item].split('@')[1] : dropTables[drop][item].split('@')[1] * quantity;
+                                            }
+                                        }
+                                        dropTablesGlobal[monster][item][calcedQuantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
                                     }
                                 });
                             } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
@@ -6876,7 +6984,21 @@ let gatherChunksInfo = function(chunksIn) {
                                         if (!dropTablesGlobal[monster][item]) {
                                             dropTablesGlobal[monster][item] = {};
                                         }
-                                        dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : dropTables[drop][item].split('@')[1] * quantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
+                                        let calcedQuantity;
+                                        if (dropTables[drop][item].split('@')[1].includes(' (noted)')) {
+                                            if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted) (F2P)';
+                                            } else {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)';
+                                            }
+                                        } else {
+                                            if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1].split(' (F2P)')[0] * quantity + ' (F2P)';
+                                            } else {
+                                                calcedQuantity = dropTables[drop][item].split('@')[1] * quantity;
+                                            }
+                                        }
+                                        dropTablesGlobal[monster][item][calcedQuantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
                                     }
                                 });
                             } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
@@ -6968,6 +7090,9 @@ let gatherChunksInfo = function(chunksIn) {
                     !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach((quantity) => {
                         if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT']) && drop !== 'GemDropTableLegends+') {
                             Object.keys(dropTables[drop]).forEach((item) => {
+                                if ((drop === 'RareDropTable+' || drop === 'GemDropTable+') && ((!chunkInfo['chunks'][num].hasOwnProperty('Nickname') && item === 'Nature talisman') || (chunkInfo['chunks'][num].hasOwnProperty('Nickname') && item === 'Chaos talisman'))) {
+                                    return;
+                                }
                                 if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) || ((parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1]) * parseFloat(dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][item].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
                                     (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
                                     if (!items[item]) {
@@ -6988,7 +7113,22 @@ let gatherChunksInfo = function(chunksIn) {
                                     if (!dropTablesGlobal[monster][item]) {
                                         dropTablesGlobal[monster][item] = {};
                                     }
-                                    dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : (dropTables[drop][item].split('@')[1].includes('-') ? dropTables[drop][item].split('@')[1] : dropTables[drop][item].split('@')[1] * quantity)] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
+                                    let calcedQuantity;
+                                    if (dropTables[drop][item].split('@')[1].includes(' (noted)')) {
+                                        if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted) (F2P)';
+                                        } else {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)';
+                                        }
+                                    } else {
+                                        (dropTables[drop][item].split('@')[1].includes('-') ? dropTables[drop][item].split('@')[1] : dropTables[drop][item].split('@')[1] * quantity)
+                                        if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (F2P)')[0].includes('-') ? dropTables[drop][item].split('@')[1].split(' (F2P)')[0] : dropTables[drop][item].split('@')[1].split(' (F2P)')[0] * quantity + ' (F2P)';
+                                        } else {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].includes('-') ? dropTables[drop][item].split('@')[1] : dropTables[drop][item].split('@')[1] * quantity;
+                                        }
+                                    }
+                                    dropTablesGlobal[monster][item][calcedQuantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
                                 }
                             });
                         } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
@@ -7063,7 +7203,21 @@ let gatherChunksInfo = function(chunksIn) {
                                     if (!dropTablesGlobal[monster][item]) {
                                         dropTablesGlobal[monster][item] = {};
                                     }
-                                    dropTablesGlobal[monster][item][dropTables[drop][item].split('@')[1].includes(' (noted)') ? dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)' : dropTables[drop][item].split('@')[1] * quantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
+                                    let calcedQuantity;
+                                    if (dropTables[drop][item].split('@')[1].includes(' (noted)')) {
+                                        if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted) (F2P)';
+                                        } else {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (noted)')[0] * quantity + ' (noted)';
+                                        }
+                                    } else {
+                                        if (dropTables[drop][item].split('@')[1].includes(' (F2P)')) {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1].split(' (F2P)')[0] * quantity + ' (F2P)';
+                                        } else {
+                                            calcedQuantity = dropTables[drop][item].split('@')[1] * quantity;
+                                        }
+                                    }
+                                    dropTablesGlobal[monster][item][calcedQuantity] = findFraction(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '') * dropTables[drop][item].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1] * dropTables[drop][item].split('@')[0].split('/')[1].replaceAll('~', '')), drop.includes('GeneralSeedDropTable'));
                                 }
                             });
                         } else if ((rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) || (parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][drop][quantity].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
