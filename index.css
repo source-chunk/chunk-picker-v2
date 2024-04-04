@@ -3151,6 +3151,14 @@ input#searchPlayerMaps {
     overflow-y: hidden;
 }
 
+.details-title .external-info-link i {
+    font-size: 2vh;
+}
+
+.details-title .external-info-link:hover {
+    color: var(--colorLink);
+}
+
 .details-subtitle {
     text-transform: capitalize;
     font-size: 20px;

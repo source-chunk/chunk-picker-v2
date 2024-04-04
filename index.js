@@ -1319,7 +1319,7 @@ let signInAttempts = 0;
 let expandChallengeStr = '';
 let detailsStack = [];
 
-let currentVersion = '6.1.0';
+let currentVersion = '6.1.1';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1442,7 +1442,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.1.0";
+mapImg.src = "osrs_world_map.png?v=6.1.1";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1843,7 +1843,7 @@ document.body.addEventListener('mouseup', function (event) {
     if (searchDetailsModalOpen) {
         rect = $('#myModal11 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
-    }else if (detailsModalOpen) {
+    } else if (detailsModalOpen) {
         rect = $('#myModal2 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualModalOpen) {
@@ -1940,12 +1940,12 @@ document.body.addEventListener('mouseup', function (event) {
         highest2ModalOpen && !detailsModalOpen && !methodsModalOpen && !questStepsModalOpen && !slayerMasterInfoModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !passiveSkillModalOpen && closeHighest2();
         questStepsModalOpen && !detailsModalOpen && closeQuestSteps();
         methodsModalOpen && !detailsModalOpen && closeMethods();
+        searchModalOpen && !searchDetailsModalOpen && !detailsModalOpen && closeSearch();
         detailsModalOpen && !searchDetailsModalOpen && closeChallengeDetails();
         rulesModalOpen && !presetWarningModalOpen && closeRules();
         settingsModalOpen && !mapIntroOpen && closeSettings();
         randomListModalOpen && closeRandomList();
         statsErrorModalOpen && closeStatsError();
-        searchModalOpen && !searchDetailsModalOpen && closeSearch();
         searchDetailsModalOpen && closeSearchDetails();
         highestModalOpen && !addEquipmentModalOpen && closeHighest();
         completeModalOpen && closeComplete();
@@ -2870,7 +2870,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.1.0");
+        myWorker = new Worker("./worker.js?v=6.1.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3132,8 +3132,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.1.0");
-let myWorker2 = new Worker("./worker.js?v=6.1.0");
+let myWorker = new Worker("./worker.js?v=6.1.1");
+let myWorker2 = new Worker("./worker.js?v=6.1.1");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3651,12 +3651,12 @@ $(document).on({
             if (highest2ModalOpen && !detailsModalOpen && !methodsModalOpen && !questStepsModalOpen && !slayerMasterInfoModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !passiveSkillModalOpen) { closeHighest2(); modalJustClosed = true; }
             if (questStepsModalOpen && !detailsModalOpen) { closeQuestSteps(); modalJustClosed = true; }
             if (methodsModalOpen && !detailsModalOpen) { closeMethods(); modalJustClosed = true; }
+            if (searchModalOpen && !searchDetailsModalOpen && !detailsModalOpen) { closeSearch(); modalJustClosed = true; }
             if (detailsModalOpen && !searchDetailsModalOpen) { closeChallengeDetails(); modalJustClosed = true; }
             if (rulesModalOpen && !presetWarningModalOpen) { closeRules(); modalJustClosed = true; }
             if (settingsModalOpen && !mapIntroOpen) { closeSettings(); modalJustClosed = true; }
             if (randomListModalOpen) { closeRandomList(); modalJustClosed = true; }
             if (statsErrorModalOpen) { closeStatsError(); modalJustClosed = true; }
-            if (searchModalOpen && !searchDetailsModalOpen) { closeSearch(); modalJustClosed = true; }
             if (searchDetailsModalOpen) { closeSearchDetails(); modalJustClosed = true; }
             if (highestModalOpen && !addEquipmentModalOpen) { closeHighest(); modalJustClosed = true; }
             if (completeModalOpen) { closeComplete(); modalJustClosed = true; }
@@ -5809,7 +5809,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.1.0");
+    myWorker2 = new Worker("./worker.js?v=6.1.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -7197,7 +7197,8 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
         }
         if (typeof baseChunkData[category][name][source] !== "boolean" && skills.includes(baseChunkData[category][name][source].split('-')[1])) {
             formattedSource += baseChunkData[category][name][source].split('-')[1].replaceAll(/\*/g, '');
-            formattedSource += ` (${source.replaceAll(/~\|/g, '').replaceAll(/\|~/g, '').replaceAll(/\*/g, '')})`
+            formattedSource += ` (${source.replaceAll(/~\|/g, '').replaceAll(/\|~/g, '').replaceAll(/\*/g, '')})`;
+            formattedSource += `<span class='double-search-icon' onclick="showDetails('` + encodeRFC5987ValueChars(source).replaceAll(/\~/g, '\~\\').replaceAll(/\|/g, '\|\\') + `', '` + baseChunkData[category][name][source].split('-')[1].replaceAll(/\*/g, '') + `')"><i class="quest-icon fas fa-info-circle"></i></span>`;
         } else if (typeof baseChunkData[category][name][source] !== "boolean" && !baseChunkData[category][name][source].includes('primary') && !baseChunkData[category][name][source].includes('secondary') && baseChunkData[category][name][source] !== 'shop') {
             formattedSource += `-${baseChunkData[category][name][source].replaceAll(/\*/g, '')}`;
         } else if (typeof baseChunkData[category][name][source] !== "boolean") {
@@ -7228,7 +7229,7 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
         }
     });
     formattedSources.sort().forEach((formattedSource) => {
-        $('.searchdetails-data').append(`<div class="noscroll results">${formattedSource.replaceAll(/\|~/g, '').replaceAll(/~\|/g, '').replaceAll(/\*/g, '')}</div>`);
+        $('.searchdetails-data').append(`<div class="noscroll results">${formattedSource.replaceAll(/\|~/g, '').replaceAll(/~\|/g, '').replaceAll(/\*/g, '').replaceAll('\~\\', '~').replaceAll('\|\\', '|')}</div>`);
     });
     $('#myModal11').show();
     modalOutsideTime = Date.now();
@@ -8562,6 +8563,7 @@ let showDetails = function(challenge, skill, type, isNested) {
         if (!baseChunkDataIn || Object.keys(baseChunkDataIn).length === 0) {
             return;
         }
+        searchDetailsModalOpen && closeSearchDetails();
         let detailsKeys = ['ItemsDetails', 'ObjectsDetails', 'MonstersDetails', 'NPCsDetails', 'ChunksDetails', 'Skill RequirementsDetails'];
         let skills = [...skillNames];
         skills.push('Nonskill');
@@ -8580,7 +8582,7 @@ let showDetails = function(challenge, skill, type, isNested) {
         } else {
             $('.details-back').hide();
         }
-        $('#details-title').html(`<b class="noscroll">${challengeLabelLine}${challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</b>`);
+        $('#details-title').html(`<b class="noscroll">${challengeLabelLine}${challenge.split('~').length > 1 ? `${challenge.split('~')[0]}<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))} target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${challenge.split('~')[2]}` : `${challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}`}${chunkInfo['challenges'][skill][challenge].hasOwnProperty('InfoLink') ? ` (<a class='link external-info-link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeForUrl(chunkInfo['challenges'][skill][challenge]['InfoLink'])} target="_blank">Wiki <i class="fas fa-external-link-alt"></i></a>)` : ''}</b>`);
         if (!chunkInfo['challenges'].hasOwnProperty(skill)) {
             chunkInfo['challenges'][skill] = {};
         }
@@ -8749,7 +8751,7 @@ let showDetails = function(challenge, skill, type, isNested) {
                                     }
                                     if (typeof baseChunkDataIn[type][element][source] !== "boolean" && skills.includes(baseChunkDataIn[type][element][source].split('-')[1])) {
                                         formattedSource += `<span class='noscroll ${baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop') ? 'green' : ''}'>${baseChunkDataIn[type][element][source].split('-')[1].replaceAll(/\*/g, '')}</span>`;
-                                        formattedSource += ` <span class='noscroll ${baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop') ? 'green' : ''}'>(${source.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')})</span>`;
+                                        formattedSource += ` <span class='noscroll ${baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop') ? 'green' : ''}'>(${source.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')})</span> <span onclick="showDetails('` + encodeRFC5987ValueChars(source) + `', '` + baseChunkDataIn[type][element][source].split('-')[1].replaceAll(/\*/g, '') + `', '` + type + `', true)"><i class="quest-icon fas fa-info-circle"></i></span>`;
                                     } else if (typeof baseChunkDataIn[type][element][source] !== "boolean" && !baseChunkDataIn[type][element][source].includes('primary') && !baseChunkDataIn[type][element][source].includes('secondary') && baseChunkDataIn[type][element][source] !== 'shop') {
                                         formattedSource += `<span class='noscroll ${baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop') ? 'green' : ''}'>-${baseChunkDataIn[type][element][source].replaceAll(/\*/g, '')}</span>`;
                                     } else if (typeof baseChunkDataIn[type][element][source] !== "boolean") {
