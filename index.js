@@ -1319,7 +1319,7 @@ let signInAttempts = 0;
 let expandChallengeStr = '';
 let detailsStack = [];
 
-let currentVersion = '6.1.1';
+let currentVersion = '6.1.2';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1442,7 +1442,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.1.1";
+mapImg.src = "osrs_world_map.png?v=6.1.2";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2287,8 +2287,8 @@ let handleMouseUp = function(e) {
 // Sets all neighbors of recently unlocked chunk to selected
 let selectNeighborsCanvas = function(chunkId) {
     if (settings['autoWalkableRollable']) {
-        return
-    };
+        return;
+    }
     let ops = ['-x', '+x', '-y', '+y'];
     let newChunkId;
     for (let i = 0; i < 4; i++) {
@@ -2813,7 +2813,7 @@ let unpickCanvas = function() {
     setData();
 }
 
-// Sets up the selected order at map setup TODO
+// Sets up the selected order at map setup
 let setUpSelected = function() {
     tempSelectedChunks = [];
     !!tempChunks['selected'] && Object.keys(tempChunks['selected']).sort(function(a, b) { return typeof tempChunks['selected'][a] === 'string' && typeof tempChunks['selected'][b] === 'string' ? b - a : tempChunks['selected'][a] - tempChunks['selected'][b] }).forEach((chunkId) => {
@@ -2870,7 +2870,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.1.1");
+        myWorker = new Worker("./worker.js?v=6.1.2");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3132,8 +3132,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.1.1");
-let myWorker2 = new Worker("./worker.js?v=6.1.1");
+let myWorker = new Worker("./worker.js?v=6.1.2");
+let myWorker2 = new Worker("./worker.js?v=6.1.2");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3922,7 +3922,7 @@ let dismissHelp = function() {
     !locked && setData();
 }
 
-// Exits the patch notes
+// Exits the pick warning window
 let cancelPickWarning = function() {
     pickChunkWarningModalOpen = false;
     $('#myModal41').hide();
@@ -5809,7 +5809,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.1.1");
+    myWorker2 = new Worker("./worker.js?v=6.1.2");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -7192,7 +7192,7 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
                 if (shownSource.includes('|')) {
                     shownSource = shownSource.split('|')[1].charAt(0).toUpperCase() + shownSource.split('|')[1].slice(1);
                 }
-                formattedSource += `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(shownSource.replaceAll(/~\|/g, '').replaceAll(/\|~/g, '').replaceAll(/\*/g, ''))} target="_blank">${shownSource.replaceAll(/~\|/g, '').replaceAll(/\|~/g, '').replaceAll(/\*/g, '')}</a>`
+                formattedSource += `<a class='link noscroll' href=${"https://oldschool.runescape.wiki/w/" + encodeURI(shownSource.replaceAll(/~\|/g, '').replaceAll(/\|~/g, '').replaceAll(/\*/g, ''))} target="_blank">${shownSource.replaceAll(/~\|/g, '').replaceAll(/\|~/g, '').replaceAll(/\*/g, '')}</a>`;
             }
         }
         if (typeof baseChunkData[category][name][source] !== "boolean" && skills.includes(baseChunkData[category][name][source].split('-')[1])) {
@@ -8262,7 +8262,6 @@ let closeOverlays = function() {
     modalOutsideTime = Date.now();
     $('#myModal39').hide();
 }
-
 
 // Closes the outer add modal
 let closeOuterAdd = function() {
@@ -9967,7 +9966,7 @@ let loadData = function(startup) {
         });
         !!chunkInfo['challenges']['Quest'] && Object.keys(chunkInfo['challenges']['Quest']).forEach((name) => {
             if (chunkInfo['challenges']['Quest'][name].hasOwnProperty('QuestPoints')) {
-                questLastStep['~|' + chunkInfo['challenges']['Quest'][name]['BaseQuest'] + '|~ Complete the quest'] = name
+                questLastStep['~|' + chunkInfo['challenges']['Quest'][name]['BaseQuest'] + '|~ Complete the quest'] = name;
             }
         });
         myRef.once('value', function(snap) {
@@ -10338,7 +10337,7 @@ let setData = function() {
 
             tempJson = {};
             !!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { return tempChunks['selected'][chunkId] !== 'undefined' && tempChunks['selected'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach((chunkId) => {
-                tempJson[chunkId] = chunkId;
+                tempJson[chunkId] = tempSelectedChunks.indexOf(chunkId) + 1;
             });
             myRef.child('chunks/selected').set(tempJson);
 
