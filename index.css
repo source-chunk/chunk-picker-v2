@@ -79,10 +79,8 @@ button {
     left: 0;
     transform-origin: 0 0;
     z-index: -1;
-    background-image: url('Background-chunk.png');
-    width: 100%;
-    height: 100%;
-    background-size: cover;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .img {
