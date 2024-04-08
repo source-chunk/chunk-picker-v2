@@ -1319,7 +1319,7 @@ let signInAttempts = 0;
 let expandChallengeStr = '';
 let detailsStack = [];
 
-let currentVersion = '6.1.4';
+let currentVersion = '6.1.5';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1442,7 +1442,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.1.4";
+mapImg.src = "osrs_world_map.png?v=6.1.5";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2870,7 +2870,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.1.4");
+        myWorker = new Worker("./worker.js?v=6.1.5");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3132,8 +3132,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.1.4");
-let myWorker2 = new Worker("./worker.js?v=6.1.4");
+let myWorker = new Worker("./worker.js?v=6.1.5");
+let myWorker2 = new Worker("./worker.js?v=6.1.5");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5809,7 +5809,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.1.4");
+    myWorker2 = new Worker("./worker.js?v=6.1.5");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -5990,7 +5990,7 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
     });
     challengeStr.length > 0 && (challengeStr = challengeStr.substring(0, challengeStr.length - 2));
     return challengeStr;
-};
+}
 
 // Opens the expanded future challenges window
 let expandFutureChallenges = function(event) {
@@ -8562,12 +8562,12 @@ let goBackDetails = function(type) {
 }
 
 // Shows challenge details
-let showDetails = function(challenge, skill, type, isNested) {
+let showDetails = function(challenge, skill, dataType, isNested) {
     if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        let baseChunkDataIn = type === 'future' ? futureChunkData : baseChunkData;
-        let unlockedSectionsIn = type === 'future' ? futureUnlockedSections : unlockedSections;
+        let baseChunkDataIn = dataType === 'future' ? futureChunkData : baseChunkData;
+        let unlockedSectionsIn = dataType === 'future' ? futureUnlockedSections : unlockedSections;
         let chunksIn = JSON.parse(JSON.stringify(tempChunks['unlocked']));
-        type === 'future' && (chunksIn[infoLockedId] = true);
+        dataType === 'future' && (chunksIn[infoLockedId] = true);
         challenge = decodeQueryParam(challenge);
         if (!baseChunkDataIn || Object.keys(baseChunkDataIn).length === 0) {
             return;
@@ -8587,7 +8587,7 @@ let showDetails = function(challenge, skill, type, isNested) {
             challengeLabelLine = `[${skill}]: `;
         }
         if (isNested) {
-            $('.details-back').show().html(`<i class="fas fa-arrow-left noscrollhard" onclick="goBackDetails('` + type + `')"></i>`);
+            $('.details-back').show().html(`<i class="fas fa-arrow-left noscrollhard" onclick="goBackDetails('` + dataType + `')"></i>`);
         } else {
             $('.details-back').hide();
         }
@@ -8760,7 +8760,7 @@ let showDetails = function(challenge, skill, type, isNested) {
                                     }
                                     if (typeof baseChunkDataIn[type][element][source] !== "boolean" && skills.includes(baseChunkDataIn[type][element][source].split('-')[1])) {
                                         formattedSource += `<span class='noscroll ${baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop') ? 'green' : ''}'>${baseChunkDataIn[type][element][source].split('-')[1].replaceAll(/\*/g, '')}</span>`;
-                                        formattedSource += ` <span class='noscroll ${baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop') ? 'green' : ''}'>(${source.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')})</span> <span onclick="showDetails('` + encodeRFC5987ValueChars(source) + `', '` + baseChunkDataIn[type][element][source].split('-')[1].replaceAll(/\*/g, '') + `', '` + type + `', true)"><i class="quest-icon fas fa-info-circle"></i></span>`;
+                                        formattedSource += ` <span class='noscroll ${baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop') ? 'green' : ''}'>(${source.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')})</span> <span onclick="showDetails('` + encodeRFC5987ValueChars(source) + `', '` + baseChunkDataIn[type][element][source].split('-')[1].replaceAll(/\*/g, '') + `', '` + dataType + `', true)"><i class="quest-icon fas fa-info-circle"></i></span>`;
                                     } else if (typeof baseChunkDataIn[type][element][source] !== "boolean" && !baseChunkDataIn[type][element][source].includes('primary') && !baseChunkDataIn[type][element][source].includes('secondary') && baseChunkDataIn[type][element][source] !== 'shop') {
                                         formattedSource += `<span class='noscroll ${baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop') ? 'green' : ''}'>-${baseChunkDataIn[type][element][source].replaceAll(/\*/g, '')}</span>`;
                                     } else if (typeof baseChunkDataIn[type][element][source] !== "boolean") {
@@ -8805,7 +8805,7 @@ let showDetails = function(challenge, skill, type, isNested) {
                                 }
                                 if (typeof baseChunkDataIn[type][el][source] !== "boolean" && skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
                                     formattedSource += `<span class='noscroll ${baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop') ? 'green' : ''}'>${baseChunkDataIn[type][el][source].split('-')[1].replaceAll(/\*/g, '')}</span>`;
-                                    formattedSource += ` <span class='noscroll ${baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop') ? 'green' : ''}'>(${source.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')})</span> <span onclick="showDetails('` + encodeRFC5987ValueChars(source) + `', '` + baseChunkDataIn[type][el][source].split('-')[1].replaceAll(/\*/g, '') + `', '` + type + `', true)"><i class="quest-icon fas fa-info-circle"></i></span>`;
+                                    formattedSource += ` <span class='noscroll ${baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop') ? 'green' : ''}'>(${source.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')})</span> <span onclick="showDetails('` + encodeRFC5987ValueChars(source) + `', '` + baseChunkDataIn[type][el][source].split('-')[1].replaceAll(/\*/g, '') + `', '` + dataType + `', true)"><i class="quest-icon fas fa-info-circle"></i></span>`;
                                 } else if (typeof baseChunkDataIn[type][el][source] !== "boolean" && !baseChunkDataIn[type][el][source].includes('primary') && !baseChunkDataIn[type][el][source].includes('secondary') && baseChunkDataIn[type][el][source] !== 'shop') {
                                     formattedSource += `<span class='noscroll ${baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop') ? 'green' : ''}'>-${baseChunkDataIn[type][el][source].replaceAll(/\*/g, '')}</span>`;
                                 } else if (typeof baseChunkDataIn[type][el][source] !== "boolean") {
