@@ -2853,7 +2853,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                     }
                                 });
                                 if (combatSkills.includes(skill) || (chunkInfo['challenges'][skill][name].hasOwnProperty('Category') && chunkInfo['challenges'][skill][name]['Category'].includes('BIS Skilling'))) {
-                                    (Object.keys(items[plus]).filter((source) => { return !items[plus][source].includes('-') || !processingSkill[items[plus][source].split('-')[1]] || chunkInfo['challenges'][skill][name]['Not Equip'] || rules['Wield Crafted Items'] || items[plus][source].split('-')[1] === 'Slayer' }).length > 0) && (tempTempValid = true);
+                                    (Object.keys(items[plus]).filter((source) => { return !items[plus][source].includes('-') || !processingSkill[items[plus][source].split('-')[1]] || chunkInfo['challenges'][skill][name]['Not Equip'] || rules['Wield Crafted Items'] || items[plus][source].split('-')[1] === 'Slayer' || skill === 'Magic' }).length > 0) && (tempTempValid = true);
                                 } else {
                                     tempTempValid = true;
                                 }
@@ -2911,7 +2911,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                 }
                             });
                             if (combatSkills.includes(skill) || (chunkInfo['challenges'][skill][name].hasOwnProperty('Category') && chunkInfo['challenges'][skill][name]['Category'].includes('BIS Skilling'))) {
-                                (Object.keys(items[plus]).filter((source) => { return !items[plus][source].includes('-') || !processingSkill[items[plus][source].split('-')[1]] || chunkInfo['challenges'][skill][name]['Not Equip'] || rules['Wield Crafted Items'] || items[plus][source].split('-')[1] === 'Slayer' }).length > 0) && (tempTempValid = true);
+                                (Object.keys(items[plus]).filter((source) => { return !items[plus][source].includes('-') || !processingSkill[items[plus][source].split('-')[1]] || chunkInfo['challenges'][skill][name]['Not Equip'] || rules['Wield Crafted Items'] || items[plus][source].split('-')[1] === 'Slayer' || skill === 'Magic' }).length > 0) && (tempTempValid = true);
                             } else {
                                 tempTempValid = true;
                             }
@@ -2964,7 +2964,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         if (combatSkills.includes(skill) || (chunkInfo['challenges'][skill][name].hasOwnProperty('Category') && chunkInfo['challenges'][skill][name]['Category'].includes('BIS Skilling'))) {
                             let tempTempValid = false;
                             Object.keys(items[tempItem]).some(source => {
-                                if (!items[tempItem][source].includes('-') || !skillNames.includes(items[tempItem][source].split('-')[1]) || chunkInfo['challenges'][skill][name]['Not Equip'] || rules['Wield Crafted Items'] || items[tempItem][source].split('-')[1] === 'Slayer') {
+                                if (!items[tempItem][source].includes('-') || !skillNames.includes(items[tempItem][source].split('-')[1]) || chunkInfo['challenges'][skill][name]['Not Equip'] || rules['Wield Crafted Items'] || items[tempItem][source].split('-')[1] === 'Slayer' || skill === 'Magic') {
                                     tempTempValid = true;
                                     return true;
                                 } else if (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks')) {
