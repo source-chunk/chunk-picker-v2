@@ -262,12 +262,12 @@ onmessage = function(e) {
 
         chunks = getAllChunkAreas(chunks);
         baseChunkData = gatherChunksInfo(chunks);
-        postMessage('5%');
+        type === 'current' && postMessage('5%');
         globalValids = calcChallenges(chunks, baseChunkData);
         baseChunkData = tempChunkData;
-        postMessage('95%');
+        type === 'current' && postMessage('95%');
         calcBIS();
-        postMessage('100%');
+        type === 'current' && postMessage('100%');
         //console.log(globalValids);
 
         let tempChallengeArr;
@@ -862,7 +862,7 @@ let calcChallenges = function(chunks, baseChunkData) {
 
     do {
         i++;
-        postMessage(((i + 1) * 6) + '%');
+        type === 'current' && postMessage(((i + 1) * 6) + '%');
         !!tempItemSkill && Object.keys(tempItemSkill).forEach((skill) => {
             let skillMax = Math.max(...Object.values(newValids[skill]));
             !!tempItemSkill[skill] && Object.keys(tempItemSkill[skill]).forEach((item) => {
@@ -1034,6 +1034,19 @@ let calcChallenges = function(chunks, baseChunkData) {
                                             !!newValids[skill] && delete newValids[skill][challenge];
                                             !!valids[skill] && delete valids[skill][challenge];
                                             !!savedValids[skill] && delete savedValids[skill][challenge];
+                                            if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Output') && outputs.hasOwnProperty(chunkInfo['challenges'][skill][challenge]['Output']) && outputs[chunkInfo['challenges'][skill][challenge]['Output']].hasOwnProperty(challenge)) {
+                                                delete outputs[chunkInfo['challenges'][skill][challenge]['Output']][challenge];
+                                                if (Object.keys(outputs[chunkInfo['challenges'][skill][challenge]['Output']]).length === 0) {
+                                                    delete outputs[chunkInfo['challenges'][skill][challenge]['Output']];
+                                                }
+                                                delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']][challenge];
+                                                if (!baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]) {
+                                                    delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']];
+                                                    if (!baseChunkData['items']) {
+                                                        delete baseChunkData['items'];
+                                                    }
+                                                }
+                                            }
                                             tasksModified = true;
                                             if ((!savedValids.hasOwnProperty(skill) || !savedValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                                                 markSubTasks(newValids, skill, challenge, true);
@@ -1198,6 +1211,19 @@ let calcChallenges = function(chunks, baseChunkData) {
                                 fullyValid = false;
                                 !!newValids[skill] && delete newValids[skill][challenge];
                                 !!valids[skill] && delete valids[skill][challenge];
+                                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Output') && outputs.hasOwnProperty(chunkInfo['challenges'][skill][challenge]['Output']) && outputs[chunkInfo['challenges'][skill][challenge]['Output']].hasOwnProperty(challenge)) {
+                                    delete outputs[chunkInfo['challenges'][skill][challenge]['Output']][challenge];
+                                    if (Object.keys(outputs[chunkInfo['challenges'][skill][challenge]['Output']]).length === 0) {
+                                        delete outputs[chunkInfo['challenges'][skill][challenge]['Output']];
+                                    }
+                                    delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']][challenge];
+                                    if (!baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']]) {
+                                        delete baseChunkData['items'][chunkInfo['challenges'][skill][challenge]['Output']];
+                                        if (!baseChunkData['items']) {
+                                            delete baseChunkData['items'];
+                                        }
+                                    }
+                                }
                                 if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
                                     return;
                                 }
