@@ -4904,6 +4904,12 @@ let calcBIS = function() {
             if (rules['Show Best in Slot 1H and 2H']) {
                 savedWeaponBis['weapon'] = bestEquipment['weapon'];
                 savedWeaponBis['shield'] = bestEquipment['shield'];
+                if (bestAmmoSaved['weapon'] !== bestAmmoSaved['2h']) {
+                    savedWeaponBis['ammo'] = bestAmmoSaved['weapon'];
+                    savedWeaponBis['ammo (2h)'] = bestAmmoSaved['2h'];
+                } else {
+                    savedWeaponBis['ammo'] = bestAmmoSaved['2h'];
+                }
             }
             delete bestEquipment['weapon'];
             delete bestEquipment['shield'];
@@ -4911,6 +4917,12 @@ let calcBIS = function() {
         } else {
             if (rules['Show Best in Slot 1H and 2H']) {
                 savedWeaponBis['2h'] = bestEquipment['2h'];
+                if (bestAmmoSaved['weapon'] !== bestAmmoSaved['2h']) {
+                    savedWeaponBis['ammo'] = bestAmmoSaved['weapon'];
+                    savedWeaponBis['ammo (2h)'] = bestAmmoSaved['2h'];
+                } else {
+                    savedWeaponBis['ammo'] = bestAmmoSaved['weapon'];
+                }
             }
             delete bestEquipment['2h'];
             bestEquipment['ammo'] = bestAmmoSaved['weapon'];
@@ -6437,7 +6449,11 @@ let calcBIS = function() {
             }
         }
         rules['Show Best in Slot 1H and 2H'] && !!savedWeaponBis && Object.keys(savedWeaponBis).filter(slot => !!savedWeaponBis[slot]).forEach((slot) => {
-            bestEquipment[slot] = savedWeaponBis[slot];
+            if (slot === 'ammo (2h)' && !savedWeaponBis['ammo']) {
+                bestEquipment['ammo'] = savedWeaponBis['ammo (2h)'];
+            } else {
+                bestEquipment[slot] = savedWeaponBis[slot];
+            }
         });
         Object.keys(bestEquipment).forEach((slot) => {
             if (slot === '2h' && !rules['Show Best in Slot 1H and 2H']) {
