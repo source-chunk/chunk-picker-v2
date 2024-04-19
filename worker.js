@@ -1529,6 +1529,16 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
+        let sectionsAdded = false;
+        newValids.hasOwnProperty('Nonskill') && Object.keys(newValids['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ConnectsSections') }).forEach((task) => {
+            chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('Sections') && chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => section.includes('-') && (!unlockedSections[section.split('-')[0]] || !unlockedSections[section.split('-')[0]][section.split('-')[1]])).forEach((section) => {
+                if (!unlockedSections[section.split('-')[0]]) {
+                    unlockedSections[section.split('-')[0]] = {};
+                }
+                unlockedSections[section.split('-')[0]][section.split('-')[1]] = true;
+                sectionsAdded = true;
+            });
+        });
         let areasAdded = {};
         let tempChunkArray = [];
         !isOnlyManualAreas && newValids.hasOwnProperty('Nonskill') && Object.keys(newValids['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('UnlocksArea') && (!manualAreas.hasOwnProperty(task) || manualAreas[task]) }).forEach((task) => {
@@ -1578,7 +1588,7 @@ let calcChallenges = function(chunks, baseChunkData) {
             }
             indexCount++;
         }
-        if (Object.keys(areasAdded).length > 0) {
+        if (Object.keys(areasAdded).length > 0 || sectionsAdded) {
             baseChunkData = combineJSONs(baseChunkData, gatherChunksInfo(chunks));
         }
         let shouldDelete = {};
