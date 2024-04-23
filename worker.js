@@ -3939,11 +3939,21 @@ let calcBIS = function() {
     let completedEquipment = {};
     !!completedChallenges['BiS'] && Object.keys(completedChallenges['BiS']).forEach((equipLine) => {
         let equip = equipLine.split('|')[1].charAt(0).toUpperCase() + equipLine.split('|')[1].slice(1);
-        completedEquipment[equip] = chunkInfo['equipment'][equip];
+        if (Object.keys(chunkInfo['equipment']).map((eq) => eq.toLowerCase()).indexOf(equipLine.split('|')[1].toLowerCase())) {
+            let equipName = Object.keys(chunkInfo['equipment'])[Object.keys(chunkInfo['equipment']).map((eq) => eq.toLowerCase()).indexOf(equipLine.split('|')[1].toLowerCase())];
+            completedEquipment[equipName] = chunkInfo['equipment'][equipName];
+        } else {
+            completedEquipment[equip] = chunkInfo['equipment'][equip];
+        }
     });
     !!checkedChallenges['BiS'] && Object.keys(checkedChallenges['BiS']).forEach((equipLine) => {
         let equip = equipLine.split('|')[1].charAt(0).toUpperCase() + equipLine.split('|')[1].slice(1);
-        completedEquipment[equip] = chunkInfo['equipment'][equip];
+        if (Object.keys(chunkInfo['equipment']).map((eq) => eq.toLowerCase()).indexOf(equipLine.split('|')[1].toLowerCase())) {
+            let equipName = Object.keys(chunkInfo['equipment'])[Object.keys(chunkInfo['equipment']).map((eq) => eq.toLowerCase()).indexOf(equipLine.split('|')[1].toLowerCase())];
+            completedEquipment[equipName] = chunkInfo['equipment'][equipName];
+        } else {
+            completedEquipment[equip] = chunkInfo['equipment'][equip];
+        }
     });
     if (Object.keys(chunks).length > 0) {
         baseChunkData['items']['Unarmed'] = {'Built-in': 'secondary-Nonskill'};
@@ -6503,7 +6513,7 @@ let calcBIS = function() {
                     if (type === 'current') {
                         if (!!globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~']) {
                             globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'] = skill + '/​' + globalValids['BiS']['Obtain' + article + '~|' + item.toLowerCase() + '|~'];
-                            if (Object.values(highestOverall).includes(item)) {
+                            if (Object.values(highestOverall).includes(item) || completedEquipment.hasOwnProperty(item)) {
                                 if (slot === '2h' && !rules['Show Best in Slot 1H and 2H']) {
                                     highestOverall[skill.replaceAll(' ', '_') + '-weapon'] = item;
                                     highestOverall[skill.replaceAll(' ', '_') + '-shield'] = 'N/A';
