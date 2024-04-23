@@ -3719,7 +3719,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             valids['Extra'] = {};
         }
         !!Object.keys(baseChunkData['items']).filter(it => it.includes('Bird nest (')) && Object.keys(baseChunkData['items']).filter(it => it.includes('Bird nest (')).forEach(it => {
-            chunkInfo['skillItems']['Nonskill'].hasOwnProperty(it + ' loot') && Object.keys(chunkInfo['skillItems']['Nonskill'][it + ' loot']).forEach(drop => {
+            chunkInfo['skillItems']['Nonskill'].hasOwnProperty(it + ' loot') && chunkInfo['challenges']['Nonskill'].hasOwnProperty(it + ' loot') && (!rules['F2P'] || !chunkInfo['challenges']['Nonskill'][it + ' loot'].hasOwnProperty('Not F2P')) && Object.keys(chunkInfo['skillItems']['Nonskill'][it + ' loot']).forEach(drop => {
                 chunkInfo['skillItems']['Nonskill'][it + ' loot'].hasOwnProperty(drop) && Object.keys(chunkInfo['skillItems']['Nonskill'][it + ' loot'][drop]).forEach(quantity => {
                     valids['Extra'][it.replaceAll('[+]', '') + ': ~|' + drop + '|~ (' + (quantity || 'N/A') + ') (' + chunkInfo['skillItems']['Nonskill'][it + ' loot'][drop][quantity] + ')'] = 'All Droptables';
                     chunkInfo['challenges']['Extra'][it.replaceAll('[+]', '') + ': ~|' + drop + '|~ (' + (quantity || 'N/A') + ') (' + chunkInfo['skillItems']['Nonskill'][it + ' loot'][drop][quantity] + ')'] = {
