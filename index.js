@@ -845,7 +845,7 @@ let settings = {
 
 let settingNames = {
     "highvis": "Display the chunk map with higher visibility, allowing you to see better into locked chunks, with thinner chunk borders, more see-through chunk coloring, and more",
-    "neighbors": "After a new chunk is rolled, automatically mark neighboring chunks as rollable",
+    "neighbors": "After a new chunk is rolled, automatically mark neighbouring chunks as rollable",
     "remove": "After a new chunk is rolled, mark all locked chunks as not-rollable",
     "roll2": "Enable the roll 2 button, allowing you to roll two chunks and pick between the two",
     "unpick": "Enable the unpick chunk button, allowing you to unpick, and therefore re-lock, a randomly selected unlocked chunk (useful for forfeits)",
@@ -879,7 +879,7 @@ let settingStructure = {
         "unpick": true,
         "randomStartAlways": true
     },
-    "Chunk Neighbors": {
+    "Chunk Neighbours": {
         "neighbors": ["walkableRollable", "autoWalkableRollable"],
         "remove": true
     },
@@ -1319,7 +1319,7 @@ let expandChallengeStr = '';
 let detailsStack = [];
 let touchTime = 0;
 
-let currentVersion = '6.1.15';
+let currentVersion = '6.1.16';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1443,7 +1443,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.1.15";
+mapImg.src = "osrs_world_map.png?v=6.1.16";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2736,11 +2736,11 @@ let roll2Canvas = function() {
         pickCanvas(true);
         return;
     }
-    isPicking = true;
     let el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
     if (!el || el.length === 0) {
         return;
     }
+    isPicking = true;
     let rand;
     if (el.length > 0) {
         $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
@@ -2874,7 +2874,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.1.15");
+        myWorker = new Worker("./worker.js?v=6.1.16");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3136,8 +3136,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.1.15");
-let myWorker2 = new Worker("./worker.js?v=6.1.15");
+let myWorker = new Worker("./worker.js?v=6.1.16");
+let myWorker2 = new Worker("./worker.js?v=6.1.16");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5813,7 +5813,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.1.15");
+    myWorker2 = new Worker("./worker.js?v=6.1.16");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
