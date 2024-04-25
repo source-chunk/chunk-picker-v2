@@ -5067,6 +5067,10 @@ input#searchChunks {
     padding: 10px;
 }
 
+.highest-data .double-search-icon {
+    font-size: 24px;
+}
+
 .Quests-body > .results {
     display: flex;
     justify-content: center;
@@ -5218,6 +5222,10 @@ input#searchChunks {
     margin-left: auto;
     margin-right: auto;
     position: relative;
+}
+
+.highest-data .style-body .row {
+    padding-right: 30px;
 }
 
 .Skills-body .row {
