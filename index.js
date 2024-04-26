@@ -869,7 +869,7 @@ let settingNames = {
     "numTasksPercent": "Show Active Task number as a percentage instead of a fraction",
     "newTasks": "In addition to adding new tasks to the Active Chunk Tasks list, also show new chunk tasks in a popup window after every chunk roll",
     "shiftUnlock": "Prevent click-to-unlock chunks unless holding down the Shift-key (or long-pressing on mobile)",
-    "rollWarning": "Show a confirmation window after clicking the Pick Chunk button",
+    "rollWarning": "Show a confirmation window after clicking the Pick Chunk or Roll 2 button",
     "optOutSections": "Always assume all chunks are entirely accessible (opt out of chunk sections)",
 };                                                                              // Descriptions of the settings
 
@@ -1157,6 +1157,7 @@ let exitSandboxWarningModalOpen = false;
 let mobileMenuOpen = false;
 let mobileTasksOpen = false;
 let pickChunkWarningModalOpen = false;
+let roll2ChunkWarningModalOpen = false;
 let settingsModalOpen = false;
 let chunkHistoryModalOpen = false;
 let challengeAltsModalOpen = false;
@@ -1319,7 +1320,7 @@ let expandChallengeStr = '';
 let detailsStack = [];
 let touchTime = 0;
 
-let currentVersion = '6.1.17';
+let currentVersion = '6.1.18';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1443,7 +1444,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.1.17";
+mapImg.src = "osrs_world_map.png?v=6.1.18";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2724,7 +2725,7 @@ let pickCanvas = function(both, override) {
 }
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
-let roll2Canvas = function() {
+let roll2Canvas = function(override) {
     if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || (((!tempChunks['selected'] || Object.keys(tempChunks['selected']).length < 1) && !isPicking) || ((!tempChunks['potential'] || Object.keys(tempChunks['potential']).length < 1) && isPicking)))) {
         return;
     }
@@ -2732,8 +2733,13 @@ let roll2Canvas = function() {
         helpFunc();
         return;
     }
+    if (settings['rollWarning'] && !override) {
+        warnRoll2Chunk();
+        return;
+    }
+    override && cancelRoll2Warning();
     if (isPicking) {
-        pickCanvas(true);
+        pickCanvas(true, override);
         return;
     }
     let el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
@@ -2874,7 +2880,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.1.17");
+        myWorker = new Worker("./worker.js?v=6.1.18");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3136,8 +3142,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.1.17");
-let myWorker2 = new Worker("./worker.js?v=6.1.17");
+let myWorker = new Worker("./worker.js?v=6.1.18");
+let myWorker2 = new Worker("./worker.js?v=6.1.18");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3930,6 +3936,12 @@ let dismissHelp = function() {
 let cancelPickWarning = function() {
     pickChunkWarningModalOpen = false;
     $('#myModal41').hide();
+}
+
+// Exits the roll 2 warning window
+let cancelRoll2Warning = function() {
+    roll2ChunkWarningModalOpen = false;
+    $('#myModal44').hide();
 }
 
 // Opens the patch notes
@@ -5813,7 +5825,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.1.17");
+    myWorker2 = new Worker("./worker.js?v=6.1.18");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -9091,6 +9103,13 @@ let warnPickChunk = function(both) {
     pickChunkWarningModalOpen = true;
     $('.rollwarning-proceed').attr('onClick', `pickCanvas(${both}, true)`);
     $('#myModal41').show();
+}
+
+// Shows warning modal for rolling 2 chunks
+let warnRoll2Chunk = function() {
+    roll2ChunkWarningModalOpen = true;
+    $('.roll2warning-proceed').attr('onClick', `roll2Canvas(true)`);
+    $('#myModal44').show();
 }
 
 // Shows chunk rules

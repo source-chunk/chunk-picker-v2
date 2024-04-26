@@ -4156,7 +4156,7 @@ input#searchChunkSections {
     background-color: rgb(50, 175, 50);
 }
 
-.rollwarning-title {
+.rollwarning-title, .roll2warning-title {
     font-size: 24px;
     font-weight: bold;
     padding-top: 0px;
@@ -4168,36 +4168,39 @@ input#searchChunkSections {
     overflow-y: hidden;
 }
 
-.rollwarning-subtitle {
+.rollwarning-subtitle, .roll2warning-subtitle {
     padding: 0px 15px;
     background-color: var(--color4);
     font-size: 18px;
     text-align: center;
     border-top: solid 1px;
-    height: 72%;
-    padding-top: 5%;
+    height: 79.75%;
 }
 
-.rollwarning-data > div {
+.rollwarning-firsttext, .roll2warning-firsttext {
+    margin-top: 7%;
+}
+
+.rollwarning-data > div, .roll2warning-data > div {
     float: right;
     margin-right: 10px;
     margin-top: -55px;
     display: flex;
 }
 
-.rollwarning-warn {
+.rollwarning-warn, .roll2warning-warn {
     margin-top: 30px;
     font-size: 20px;
 }
 
-.rollwarning-cancel {
+.rollwarning-cancel, .roll2warning-cancel {
     padding: 10px;
     font-size: 18px;
     margin-right: 10px;
     cursor: pointer;
 }
 
-.rollwarning-proceed {
+.rollwarning-proceed, .roll2warning-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
     padding: 10px;
@@ -4208,7 +4211,7 @@ input#searchChunkSections {
     transition-duration: 0.4s;
 }
 
-.rollwarning-proceed:hover {
+.rollwarning-proceed:hover, .roll2warning-proceed:hover {
     background-color: rgb(50, 175, 50);
 }
 
