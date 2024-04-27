@@ -5304,12 +5304,21 @@ input#searchChunks {
     width: 65%;
     border-left: solid 1px var(--color8);
     border-right: solid 1px var(--color8);
+    position: relative;
 }
 
 .skill-icon-wrapper {
     width: 5%;
     min-width: 25px;
     text-align: center;
+}
+
+.task-info {
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .skill-button.mobile {
