@@ -1321,7 +1321,7 @@ let expandChallengeStr = '';
 let detailsStack = [];
 let touchTime = 0;
 
-let currentVersion = '6.1.22';
+let currentVersion = '6.1.23';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1393,6 +1393,7 @@ let controlChunk = 0;
 let stickerChunk = 0;
 let isHoveringBlacklist = false;
 let isHoveringSticker = false;
+let hoveredOverlayId = -1;
 let stickerChoicesContent = {'tag': '\uf02b', 'skull': '\uf54c', 'skull-crossbones': '\uf714', 'bomb': '\uf1e2', 'exclamation-circle': '\uf06a', 'dice': '\uf522', 'poo': '\uf2fe', 'frown': '\uf119', 'grin-alt': '\uf581', 'heart': '\uf004', 'star': '\uf005', 'gem': '\uf3a5', 'award': '\uf559', 'crown': '\uf521', 'flag': '\uf024', 'asterisk': '\uf069', 'clock': '\uf017', 'hourglass': '\uf254', 'link': '\uf0c1', 'map-marker-alt': '\uf3c5', 'radiation-alt': '\uf7ba', 'shoe-prints': '\uf54b', 'thumbs-down': '\uf165', 'thumbs-up': '\uf164', 'crow': '\uf520', 'utensil-spoon': '\uf2e5'};
 let osrsStickers = {};
 let numberStickers = {'zero': '0', 'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9'};
@@ -1446,7 +1447,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.1.22";
+mapImg.src = "osrs_world_map.png?v=6.1.23";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1725,8 +1726,8 @@ let drawCanvas = function() {
     // Overlays
     ctx.save();
     ctx.font = '900 ' + 32 + 'px "Font Awesome 5 Free"';
-    !!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl) => {
-        ctx.fillStyle = overlayEl.color;
+    !!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl, i) => {
+        ctx.fillStyle = hoveredOverlayId === i ? 'black' : overlayEl.color;
         ctx.textAlign = 'center';
         ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
         ctx.beginPath();
@@ -1734,6 +1735,22 @@ let drawCanvas = function() {
         ctx.fillStyle = 'white';
         ctx.fill();
     });
+    ctx.restore();
+
+    ctx.save();
+    if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && hoveredOverlayId !== -1) {
+        let overlayEl = chunkInfo['mapOverlays'][selectedOverlay][hoveredOverlayId];
+        let hoverText = `Point id ${hoveredOverlayId}`;
+        ctx.font = '24px Calibri, Roboto Condensed, sans-serif';
+        ctx.fillStyle = "rgb(201, 209, 217)";
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 1;
+        ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 52, ctx.measureText(hoverText).width + 10, 24);
+        ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 52, ctx.measureText(hoverText).width + 10, 24);
+        ctx.fillStyle = "black";
+        ctx.textAlign = "left";
+        ctx.fillText(hoverText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 32);
+    }
     ctx.restore();
 
     animCount++;
@@ -2068,6 +2085,19 @@ let handleMouseMove = function(e) {
             if (recentChunks.hasOwnProperty(hoverId)) {
                 removedRecent = hoverId;
             }
+        }
+
+        // Overlay hover
+        if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && false) { // Not implemented
+            hoveredOverlayId = -1;
+            let lowestDistance = 100;
+            chunkInfo['mapOverlays'][selectedOverlay].filter((overlayEl) => overlayEl.text).forEach((overlayEl, i) => {
+                let distance = Math.sqrt(Math.pow((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) - currentX, 2) + Math.pow((dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6 - 15) - currentY, 2));
+                if (distance < 15 && distance < lowestDistance) {
+                    hoveredOverlayId = i;
+                    distance = distance;
+                }
+            });
         }
 
         // Control
@@ -2888,7 +2918,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.1.22");
+        myWorker = new Worker("./worker.js?v=6.1.23");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3150,8 +3180,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.1.22");
-let myWorker2 = new Worker("./worker.js?v=6.1.22");
+let myWorker = new Worker("./worker.js?v=6.1.23");
+let myWorker2 = new Worker("./worker.js?v=6.1.23");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5833,7 +5863,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.1.22");
+    myWorker2 = new Worker("./worker.js?v=6.1.23");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
