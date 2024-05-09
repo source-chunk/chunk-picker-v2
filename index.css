@@ -3224,13 +3224,27 @@ input#searchPlayerMaps {
 }
 
 .overlays-title {
-    font-size: 36px;
+    font-size: min(10vw, 40px);
     padding-left: 10px;
     max-height: 20%;
     min-height: 20%;
     text-align: center;
     font-weight: bold;
     overflow-y: hidden;
+}
+
+.mobile .overlays-title .overlays-title-checkbox {
+    top: 100px;
+}
+
+.overlays-title .overlays-title-checkbox {
+    font-size: 14px;
+    position: absolute;
+    margin: 10px 10px;
+    color: var(--colorTextAlt);
+    right: 0px;
+    max-width: 150px;
+    text-align: left;
 }
 
 .overlays-data {
@@ -3261,6 +3275,10 @@ input#searchPlayerMaps {
     background-color: var(--color3);
     margin-right: 15px;
     position: relative;
+}
+
+.overlay.sub-overlay-entry {
+    margin-left: 15px;
 }
 
 .add-title {
@@ -7414,6 +7432,10 @@ input#searchMonsters {
     grid-gap: 0.25em;
     font-weight: normal;
     pointer-events: none;
+}
+
+.radio.extra-space {
+    margin-left: 5px;
 }
   
 .radio--disabled {

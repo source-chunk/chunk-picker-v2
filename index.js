@@ -281,7 +281,14 @@ const clueStepAmounts = {
         '8': 0.33
     }
 };
-
+let selectedOverlayClues = {
+    'Beginner': false,
+    'Easy': false,
+    'Medium': false,
+    'Hard': false,
+    'Elite': false,
+    'Master': false
+};
 
 // Imported data
 let boneItems = [];
@@ -1321,7 +1328,7 @@ let expandChallengeStr = '';
 let detailsStack = [];
 let touchTime = 0;
 
-let currentVersion = '6.1.23';
+let currentVersion = '6.2.0';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1393,7 +1400,19 @@ let controlChunk = 0;
 let stickerChunk = 0;
 let isHoveringBlacklist = false;
 let isHoveringSticker = false;
-let hoveredOverlayId = -1;
+let hoveredOverlayIds = [];
+let selectedOverlayIds = [];
+let selectedOverlayId = -1;
+let selectedOverlayIndex = 0;
+let overlayCloseLocation = -1;
+let overlayLeftLocation = -1;
+let overlayRightLocation = -1;
+let overlayMenuLocation = -1;
+let isHoveringClose = false;
+let isHoveringLeft = false;
+let isHoveringRight = false;
+let manualMouseMoveCheck = false;
+let unlockedOverlayOnly = false;
 let stickerChoicesContent = {'tag': '\uf02b', 'skull': '\uf54c', 'skull-crossbones': '\uf714', 'bomb': '\uf1e2', 'exclamation-circle': '\uf06a', 'dice': '\uf522', 'poo': '\uf2fe', 'frown': '\uf119', 'grin-alt': '\uf581', 'heart': '\uf004', 'star': '\uf005', 'gem': '\uf3a5', 'award': '\uf559', 'crown': '\uf521', 'flag': '\uf024', 'asterisk': '\uf069', 'clock': '\uf017', 'hourglass': '\uf254', 'link': '\uf0c1', 'map-marker-alt': '\uf3c5', 'radiation-alt': '\uf7ba', 'shoe-prints': '\uf54b', 'thumbs-down': '\uf165', 'thumbs-up': '\uf164', 'crow': '\uf520', 'utensil-spoon': '\uf2e5'};
 let osrsStickers = {};
 let numberStickers = {'zero': '0', 'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9'};
@@ -1447,7 +1466,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.1.23";
+mapImg.src = "osrs_world_map.png?v=6.2.0";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1489,6 +1508,26 @@ let convertToXY = function(chunkId) {
     return {x: x, y: y};
 }
 
+// Converts canvas text into lines
+let getLines = function(ctx, text, maxWidth) {
+    var words = text.split(' ');
+    var lines = [];
+    var currentLine = words[0];
+
+    for (var i = 1; i < words.length; i++) {
+        var word = words[i];
+        var width = ctx.measureText(currentLine + ' ' + word).width;
+        if (width < maxWidth) {
+            currentLine += ' ' + word;
+        } else {
+            lines.push(currentLine);
+            currentLine = word;
+        }
+    }
+    lines.push(currentLine);
+    return lines;
+}
+
 // Canvas animation
 let drawCanvas = function() {
     if (imgH === undefined) {
@@ -1512,29 +1551,29 @@ let drawCanvas = function() {
 
     // Chunks
     ctx.beginPath();
-    ctx.strokeStyle = "gray";
+    ctx.strokeStyle = 'gray';
     ctx.lineWidth = highVisibilityMode ? 1 : 2;
-    ctx.shadowColor = "transparent";
+    ctx.shadowColor = 'transparent';
     ctx.shadowBlur = 0;
     for (let i = 0; i < rowSize; i++) {
         for (let j = 0; j < (fullSize / rowSize); j++) {
             let chunkId = convertToChunkNum(i, j).toString();
             if (!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) {
                 if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = "rgba(200, 200, 200, 0.25)";
+                    ctx.fillStyle = 'rgba(200, 200, 200, 0.25)';
                     ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 }
-                ctx.strokeStyle = "gray";
+                ctx.strokeStyle = 'gray';
                 (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
                 if (highVisibilityMode) {
-                    ctx.fillStyle = "rgba(100, 255, 100, 0.25)";
+                    ctx.fillStyle = 'rgba(100, 255, 100, 0.25)';
                 } else if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = "rgba(100, 255, 100, 0.33)";
+                    ctx.fillStyle = 'rgba(100, 255, 100, 0.33)';
                 } else {
-                    ctx.fillStyle = "rgba(100, 255, 100, 0.5)";
+                    ctx.fillStyle = 'rgba(100, 255, 100, 0.5)';
                 }
-                ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, 0.5)" : "black";
+                ctx.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
                 (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
@@ -1548,18 +1587,18 @@ let drawCanvas = function() {
                     ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.825;
                 }
-                ctx.fillStyle = "white";
-                ctx.textAlign = "center";
+                ctx.fillStyle = 'white';
+                ctx.textAlign = 'center';
                 ctx.fillText(tempSelectedChunks.indexOf(chunkId) + 1, dragTotalX + (totalZoom * ((i + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
             } else if (!!tempChunks['potential'] && tempChunks['potential'][chunkId]) {
                 if (highVisibilityMode) {
-                    ctx.fillStyle = "rgba(255, 255, 100, 0.25)";
+                    ctx.fillStyle = 'rgba(255, 255, 100, 0.25)';
                 } else if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = "rgba(255, 255, 100, 0.33)";
+                    ctx.fillStyle = 'rgba(255, 255, 100, 0.33)';
                 } else {
-                    ctx.fillStyle = "rgba(255, 255, 100, 0.5)";
+                    ctx.fillStyle = 'rgba(255, 255, 100, 0.5)';
                 }
-                ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, 0.5)" : "black";
+                ctx.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
                 (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
@@ -1573,18 +1612,18 @@ let drawCanvas = function() {
                     ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.825;
                 }
-                ctx.fillStyle = "black";
-                ctx.textAlign = "center";
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
                 ctx.fillText(++selectedNum, dragTotalX + (totalZoom * ((i + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
             } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'][chunkId]) {
                 if (highVisibilityMode) {
-                    ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
                 } else if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
                 } else {
-                    ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
                 }
-                ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, 0.5)" : "black";
+                ctx.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
                 (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             } else {
@@ -1595,14 +1634,14 @@ let drawCanvas = function() {
                 } else {
                     ctx.fillStyle = colorBox;
                 }
-                ctx.strokeStyle = highVisibilityMode ? "rgba(0, 0, 0, 0.5)" : "black";
+                ctx.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
                 (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             }
             if (showChunkIds && !onMobile) {
-                ctx.fillStyle = "white";
+                ctx.fillStyle = 'white';
                 ctx.font = (totalZoom * (imgW / rowSize) * (1 / 5)) + 'px Calibri, Roboto Condensed, sans-serif';
-                ctx.textAlign = "left";
+                ctx.textAlign = 'left';
                 ctx.fillText(chunkId, dragTotalX + (totalZoom * ((i) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + 0.15) * imgH / (fullSize / rowSize))));
             }
         }
@@ -1612,19 +1651,19 @@ let drawCanvas = function() {
     if (infoLockedId !== -1) {
         let {x, y} = convertToXY(infoLockedId);
         if (highVisibilityMode) {
-            ctx.fillStyle = "rgba(0, 255, 255, 0.25)";
+            ctx.fillStyle = 'rgba(0, 255, 255, 0.25)';
         } else if (hoveredChunk === infoLockedId) {
-            ctx.fillStyle = "rgba(0, 255, 255, 0.25)";
+            ctx.fillStyle = 'rgba(0, 255, 255, 0.25)';
         } else {
-            ctx.fillStyle = "rgba(0, 255, 255, 0.33)";
+            ctx.fillStyle = 'rgba(0, 255, 255, 0.33)';
         }
-        ctx.strokeStyle = "rgb(0, 170, 170)";
+        ctx.strokeStyle = 'rgb(0, 170, 170)';
         ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
         ctx.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
         ctx.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.9) + 'px "Font Awesome 5 Free"';
-        ctx.fillStyle = "rgba(0, 255, 255, 0.75)";
-        ctx.strokeStyle = "rgba(0, 0, 0, 0.75)";
-        ctx.textAlign = "center";
+        ctx.fillStyle = 'rgba(0, 255, 255, 0.75)';
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.75)';
+        ctx.textAlign = 'center';
         ctx.fillText('\uf129', dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.825) * imgH / (fullSize / rowSize))));
         ctx.strokeText('\uf129', dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.825) * imgH / (fullSize / rowSize))));
     }
@@ -1635,13 +1674,13 @@ let drawCanvas = function() {
         let {x, y} = convertToXY(chunkId);
         ctx.shadowColor = 'white';
         if ((!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) || (!!tempChunks['potential'] && tempChunks['potential'][chunkId])) {
-            ctx.fillStyle = "rgba(255, 255, 0, 0.5)";
+            ctx.fillStyle = 'rgba(255, 255, 0, 0.5)';
         } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
-            ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
         } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'][chunkId]) {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
         } else {
-            ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
         }
         ctx.shadowBlur = Math.abs((Math.floor(animCount / 1.5) % 50) - 25) + 5;
         ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
@@ -1653,20 +1692,20 @@ let drawCanvas = function() {
     if (controlChunk !== 0 && (!locked || testMode) && !onMobile) {
         let {x, y} = convertToXY(controlChunk);
         let heightOff = 0.55;
-        let blacklistText = (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(controlChunk)) ? "Un-Blacklist" : "Blacklist";
-        ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
+        let blacklistText = (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(controlChunk)) ? 'Un-Blacklist' : 'Blacklist';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
         ctx.roundRect(dragTotalX + (totalZoom * ((x + 0.05) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.375) * imgH / (fullSize / rowSize))), totalZoom * ((0.9) * imgW / rowSize), totalZoom * ((0.25) * imgH / (fullSize / rowSize)), totalZoom * ((0.9) * imgW / rowSize)).fill();
         ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto Condensed, sans-serif';
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
+        ctx.fillStyle = 'white';
+        ctx.textAlign = 'center';
         ctx.fillText(blacklistText, dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + heightOff) * imgH / (fullSize / rowSize))));
     }
     ctx.restore();
 
     // Stickered chunks
     ctx.save();
-    ctx.strokeStyle = "black";
-    ctx.textAlign = "center";
+    ctx.strokeStyle = 'black';
+    ctx.textAlign = 'center';
     ctx.lineWidth = (totalZoom * (imgW / rowSize)) * (0.01);
     !!tempChunks['stickered'] && Object.keys(tempChunks['stickered']).forEach(function(chunkId) {
         let {x, y} = convertToXY(chunkId);
@@ -1699,11 +1738,11 @@ let drawCanvas = function() {
     if (stickerChunk !== 0) {
         if ((!tempChunks['stickered'] || !tempChunks['stickered'].hasOwnProperty(stickerChunk)) && (!locked || testMode)) {
             let {x, y} = convertToXY(stickerChunk);
-            ctx.strokeStyle = "black";
-            ctx.textAlign = "center";
+            ctx.strokeStyle = 'black';
+            ctx.textAlign = 'center';
             ctx.lineWidth = (totalZoom * (imgW / rowSize)) * (0.01);
             ctx.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.25) + 'px "Font Awesome 5 Free"';
-            ctx.fillStyle = "rgb(201, 209, 217)";
+            ctx.fillStyle = 'rgb(201, 209, 217)';
             ctx.scale(-1, 1);
             ctx.fillText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
             ctx.strokeText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
@@ -1711,13 +1750,13 @@ let drawCanvas = function() {
         if (isHoveringSticker && !!tempChunks['stickeredNotes'] && tempChunks['stickeredNotes'].hasOwnProperty(stickerChunk) && tempChunks['stickeredNotes'][stickerChunk] !== '') {
             let {x, y} = convertToXY(stickerChunk);
             ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto Condensed, sans-serif';
-            ctx.fillStyle = "rgb(201, 209, 217)";
-            ctx.strokeStyle = "black";
+            ctx.fillStyle = 'rgb(201, 209, 217)';
+            ctx.strokeStyle = 'black';
             ctx.lineWidth = 1;
             ctx.fillRect((dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))) - 5, dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), ctx.measureText(tempChunks['stickeredNotes'][stickerChunk]).width + 10, (totalZoom * (0.25 * imgH / (fullSize / rowSize))));
             ctx.strokeRect((dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))) - 5, dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), ctx.measureText(tempChunks['stickeredNotes'][stickerChunk]).width + 10, (totalZoom * (0.25 * imgH / (fullSize / rowSize))));
-            ctx.fillStyle = "black";
-            ctx.textAlign = "left";
+            ctx.fillStyle = 'black';
+            ctx.textAlign = 'left';
             ctx.fillText(tempChunks['stickeredNotes'][stickerChunk], (dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.2) * imgH / (fullSize / rowSize))));
         }
     }
@@ -1725,34 +1764,116 @@ let drawCanvas = function() {
 
     // Overlays
     ctx.save();
-    ctx.font = '900 ' + 32 + 'px "Font Awesome 5 Free"';
     !!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl, i) => {
-        ctx.fillStyle = hoveredOverlayId === i ? 'black' : overlayEl.color;
+        if ((selectedOverlay !== 'Clues' || selectedOverlayClues[overlayEl.type]) && (selectedOverlayIds.length === 0 || i !== selectedOverlayId) && overlayEl.x >= 1024 && overlayEl.x <= 3967 && overlayEl.y >= 2496 && overlayEl.y <= 4159 && (!unlockedOverlayOnly || (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(convertToChunkNum(Math.floor((overlayEl.x - 1024)/64), (fullSize / rowSize) - Math.floor((overlayEl.y - 2496)/64) - 1))))) {
+            ctx.textAlign = 'center';
+            ctx.font = '900 ' + 36 + 'px "Font Awesome 5 Free"';
+            ctx.fillStyle = 'white';
+            ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
+            ctx.font = '900 ' + 32 + 'px "Font Awesome 5 Free"';
+            ctx.fillStyle = hoveredOverlayIds.includes(i) && !isHoveringOverlayMenu ? 'black' : overlayEl.color;
+            ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+            if (selectedOverlayIds.length !== 0 && selectedOverlayIds.includes(i)) {
+                ctx.fillStyle = 'rgba(30, 30, 30, 0.5)';
+                ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+            }
+            ctx.beginPath();
+            ctx.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+        }
+    });
+    ctx.restore();
+
+    ctx.save();
+    if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && selectedOverlayIds.length !== 0) {
+        let overlayEl = chunkInfo['mapOverlays'][selectedOverlay][selectedOverlayId];
         ctx.textAlign = 'center';
+        ctx.font = '900 ' + 36 + 'px "Font Awesome 5 Free"';
+        ctx.fillStyle = 'white';
+        ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
+        ctx.font = '900 ' + 32 + 'px "Font Awesome 5 Free"';
+        ctx.fillStyle = hoveredOverlayIds.includes(selectedOverlayId) && !isHoveringOverlayMenu ? 'black' : overlayEl.color;
+        ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+        ctx.fillStyle = 'rgba(200, 200, 200, 0.25)';
         ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
         ctx.beginPath();
         ctx.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
         ctx.fillStyle = 'white';
         ctx.fill();
-    });
-    ctx.restore();
-
-    ctx.save();
-    if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && hoveredOverlayId !== -1) {
-        let overlayEl = chunkInfo['mapOverlays'][selectedOverlay][hoveredOverlayId];
-        let hoverText = `Point id ${hoveredOverlayId}`;
-        ctx.font = '24px Calibri, Roboto Condensed, sans-serif';
-        ctx.fillStyle = "rgb(201, 209, 217)";
-        ctx.strokeStyle = "black";
+        ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--color1');
+        ctx.strokeStyle = 'black';
         ctx.lineWidth = 1;
-        ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 52, ctx.measureText(hoverText).width + 10, 24);
-        ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 52, ctx.measureText(hoverText).width + 10, 24);
-        ctx.fillStyle = "black";
-        ctx.textAlign = "left";
-        ctx.fillText(hoverText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 32);
+        let topText = `${overlayEl.type} Step`;
+        if (overlayEl.hasOwnProperty('img')) {
+            ctx.font = 'bold 24px Calibri, Roboto Condensed, sans-serif';
+            ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
+            ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
+            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--colorText');
+            ctx.textAlign = 'left';
+            ctx.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            ctx.font = '900 ' + 18 + 'px "Font Awesome 5 Free"';
+            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctx.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctx.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            ctx.font = '900 ' + 24 + 'px "Font Awesome 5 Free"';
+            ctx.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--color1');
+            ctx.strokeStyle = 'black';
+            let overlayImg = new Image();
+            overlayImg.src = overlayEl.img;
+            ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
+            ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
+            ctx.drawImage(overlayImg, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 170, 190, 190);
+            overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180];
+            overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
+            overlayRightLocation = (selectedOverlayIndex < (selectedOverlayIds.length - 1) ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
+            overlayMenuLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20 + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + 200];
+        } else {
+            ctx.font = '18px Calibri, Roboto Condensed, sans-serif';
+            let hoverText = `${overlayEl.text}`;
+            let hoverTextLines = getLines(ctx, hoverText, 190);
+            ctx.font = 'bold 24px Calibri, Roboto Condensed, sans-serif';
+            ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
+            ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
+            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--colorText');
+            ctx.textAlign = 'left';
+            ctx.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            ctx.font = '900 ' + 18 + 'px "Font Awesome 5 Free"';
+            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctx.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctx.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            ctx.font = '900 ' + 24 + 'px "Font Awesome 5 Free"';
+            ctx.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--color1');
+            ctx.strokeStyle = 'black';
+            ctx.font = '18px Calibri, Roboto Condensed, sans-serif';
+            ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
+            ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
+            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--colorText');
+            ctx.textAlign = 'left';
+            hoverTextLines.forEach((hoverTextLine, i) => {
+                ctx.fillText(hoverTextLine, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 155 + (19 * i) + (200 - (hoverTextLines.length * 19 + 10)));
+            });
+            overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))];
+            overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))] : -1);
+            overlayRightLocation = (selectedOverlayIndex < (selectedOverlayIds.length - 1) ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))] : -1);
+            overlayMenuLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20 + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)) + (hoverTextLines.length * 19 + 10)];
+        }
+    } else {
+        overlayCloseLocation = -1;
+        overlayLeftLocation = -1;
+        overlayRightLocation = -1;
+        overlayMenuLocation = -1;
     }
     ctx.restore();
 
+    if (selectedOverlay !== 'None') {
+        $('#canvas').css('cursor', (hoveredOverlayIds.length !== 0 && !isHoveringOverlayMenu) || isHoveringClose || isHoveringLeft || isHoveringRight ? 'pointer' : 'auto');
+    }
+
+    if (manualMouseMoveCheck) {
+        handleMouseMove(manualMouseMoveCheck);
+        manualMouseMoveCheck = false;
+    }
     animCount++;
 }
 
@@ -2087,15 +2208,22 @@ let handleMouseMove = function(e) {
             }
         }
 
+        isHoveringClose = overlayCloseLocation.length === 2 && (overlayCloseLocation[0] - currentX) >= -19 && (overlayCloseLocation[0] - currentX) <= 0 && (overlayCloseLocation[1] - currentY) <= 19 && (overlayCloseLocation[1] - currentY) >= 0;
+        isHoveringLeft = overlayLeftLocation.length === 2 && (overlayLeftLocation[0] - currentX) >= -12 && (overlayLeftLocation[0] - currentX) <= 0 && (overlayLeftLocation[1] - currentY) <= 12 && (overlayLeftLocation[1] - currentY) >= 0 && selectedOverlayIndex > 0 && selectedOverlayIds.length > 1;
+        isHoveringRight = overlayRightLocation.length === 2 && (overlayRightLocation[0] - currentX) >= -12 && (overlayRightLocation[0] - currentX) <= 0 && (overlayRightLocation[1] - currentY) <= 12 && (overlayRightLocation[1] - currentY) >= 0 && selectedOverlayIndex < (selectedOverlayIds.length - 1);
+        isHoveringOverlayMenu = overlayMenuLocation.length === 4 && currentX >= overlayMenuLocation[0] && currentY >= overlayMenuLocation[1] && currentX <= overlayMenuLocation[2] && currentY <= overlayMenuLocation[3];
+
         // Overlay hover
-        if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && false) { // Not implemented
-            hoveredOverlayId = -1;
+        if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay]) {
+            hoveredOverlayIds = [];
             let lowestDistance = 100;
-            chunkInfo['mapOverlays'][selectedOverlay].filter((overlayEl) => overlayEl.text).forEach((overlayEl, i) => {
-                let distance = Math.sqrt(Math.pow((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) - currentX, 2) + Math.pow((dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6 - 15) - currentY, 2));
-                if (distance < 15 && distance < lowestDistance) {
-                    hoveredOverlayId = i;
-                    distance = distance;
+            e.target.id === 'canvas' && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl, i) => {
+                if ((overlayEl.text || overlayEl.img) && (selectedOverlay !== 'Clues' || selectedOverlayClues[overlayEl.type]) && overlayEl.x >= 1024 && overlayEl.x <= 3967 && overlayEl.y >= 2496 && overlayEl.y <= 4159 && (!unlockedOverlayOnly || (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(convertToChunkNum(Math.floor((overlayEl.x - 1024)/64), (fullSize / rowSize) - Math.ceil((overlayEl.y - 2495)/64)))))) {
+                    let distance = Math.sqrt(Math.pow((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) - currentX, 2) + Math.pow((dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6 - 15) - currentY, 2));
+                    if (distance < 15 && distance < lowestDistance) {
+                        hoveredOverlayIds.push(i);
+                        distance = distance;
+                    }
                 }
             });
         }
@@ -2216,7 +2344,38 @@ let handleMouseUp = function(e) {
         return;
     } else if (e.button === 0) {
         mouseDown = false;
-        if (settingsOpen && !screenshotMode && e.target.id === 'canvas') {
+        if (movedNum <= 1 && isHoveringClose) {
+            selectedOverlayIds = [];
+            selectedOverlayIndex = 0;
+            overlayCloseLocation = -1;
+            isHoveringClose = false;
+            return;
+        } else if (movedNum <= 1 && isHoveringLeft) {
+            if (selectedOverlayIndex > 0) {
+                selectedOverlayIndex--;
+            }
+            selectedOverlayId = selectedOverlayIds[selectedOverlayIndex];
+            manualMouseMoveCheck = e;
+            return;
+        } else if (movedNum <= 1 && isHoveringRight) {
+            if (selectedOverlayIndex < (selectedOverlayIds.length - 1)) {
+                selectedOverlayIndex++;
+            }
+            selectedOverlayId = selectedOverlayIds[selectedOverlayIndex];
+            manualMouseMoveCheck = e;
+            return;
+        } else if (isHoveringOverlayMenu) {
+            return;
+        } else if (movedNum <= 1 && hoveredOverlayIds.length !== 0 && e.target.id === 'canvas') {
+            let selectedHoveredValid = selectedOverlayIds.filter((el) => hoveredOverlayIds.includes(el)).length > 0;
+            selectedOverlayIds = selectedHoveredValid ? [] : [...hoveredOverlayIds];
+            selectedOverlayIndex = 0;
+            selectedOverlayId = selectedOverlayIds[selectedOverlayIndex];
+            if (selectedOverlayIds.length === 0) {
+                overlayCloseLocation = -1;
+            }
+            return;
+        } else if (settingsOpen && !screenshotMode && e.target.id === 'canvas') {
             settingsMenu();
             return;
         } else if (locked && !testMode && e.target.id === 'canvas') {
@@ -2918,7 +3077,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.1.23");
+        myWorker = new Worker("./worker.js?v=6.2.0");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -2967,6 +3126,7 @@ let handleMouseScroll = function(e) {
             dragTotalX = dragTotalX - offsetX;
             dragTotalY = dragTotalY - offsetY;
         }
+        manualMouseMoveCheck = e;
     }
 }
 
@@ -3180,8 +3340,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.1.23");
-let myWorker2 = new Worker("./worker.js?v=6.1.23");
+let myWorker = new Worker("./worker.js?v=6.2.0");
+let myWorker2 = new Worker("./worker.js?v=6.2.0");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3674,13 +3834,16 @@ $(document).on({
         if (e.keyCode === 27 && screenshotMode) {
             screenshotMode = false;
             $('.escape-hint').hide();
-            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu11, .topnav, #beta').show();
+            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu11, .topnav, #beta').show();
             if (infoCollapse && chunkInfoOn) {
                 $('.menu8').hide();
                 $('.hiddenInfo').show();
             } else if (chunkInfoOn) {
                 $('.menu8').show();
                 $('.hiddenInfo').hide();
+            }
+            if (recentOn && !settings['taskSidebar']) {
+                $('.menu7').show();
             }
             if (chunkTasksOn) {
                 $('.menu9').show();
@@ -3821,7 +3984,7 @@ let importFromURL = function() {
             recentChunks = {};
             roll2On && $('.roll2').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
             unpickOn && $('.unpick').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
-            recentOn && $('.menu7').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
+            recentOn && !settings['taskSidebar'] && $('.menu7').css({ 'opacity': 1, 'cursor': 'pointer' }).prop('disabled', false).show();
             chunkTasksOn && $('.menu9').css({ 'opacity': 1 }).show();
             topButtonsOn && $('.menu6').css({ 'opacity': 1 }).show();
             isPicking = false;
@@ -4508,9 +4671,10 @@ let accessMap = function() {
                             $('.background-img').hide();
                             $('.center').css('margin-top', '15px');
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 1).show();
-                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
+                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
                             roll2On && $('.roll2').css('opacity', 1).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
+                            recentOn && !settings['taskSidebar'] && $('.menu7').show();
                             $('.open-manual-outer-container').css('opacity', 1).show();
                             rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
                             setRecentLogin();
@@ -4559,9 +4723,10 @@ let accessMap = function() {
                                     $('.background-img').hide();
                                     $('.center').css('margin-top', '15px');
                                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .taskstoggle').css('opacity', 1).show();
-                                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
+                                    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
                                     roll2On && $('.roll2').css('opacity', 1).show();
                                     !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
+                                    recentOn && !settings['taskSidebar'] && $('.menu7').show();
                                     $('.open-manual-outer-container').css('opacity', 1).show();
                                     rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
                                     setupMap();
@@ -4645,7 +4810,8 @@ let changePin = function() {
                             $('.loading').show();
                             $('#page8').hide();
                             $('.background-img').hide();
-                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
+                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
+                            recentOn && !settings['taskSidebar'] && $('.menu7').show();
                             setupMap();
                         }).catch((error) => { console.error(error) });
                     }
@@ -5863,7 +6029,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.1.23");
+    myWorker2 = new Worker("./worker.js?v=6.2.0");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -8953,14 +9119,35 @@ let checkOffAltChallenge = function(skill, chal) {
     setData();
 }
 
-// Shows challenge alternatives
-let showOverlays = function() {
+// Selects/deselects the given cluetier
+let selectOverlayClues = function(clueTier) {
+    selectedOverlayClues[clueTier] = !selectedOverlayClues[clueTier];
+    if (Object.values(selectedOverlayClues).filter(val => val).length === 0) {
+        selectedOverlay = 'None';
+    }
+    showOverlays(true);
+}
+
+// Clears all overlay clues
+let clearOverlayClues = function() {
+    Object.keys(selectedOverlayClues).forEach((clueTier) => {
+        selectedOverlayClues[clueTier] = false;
+    });
+    showOverlays(true);
+}
+
+// Toggle overlay within chunks only
+let changeOverlayFilterBy = function() {
+    unlockedOverlayOnly = !unlockedOverlayOnly;
+}
+
+// Shows overlay options
+let showOverlays = function(fromHelper) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         onMobile && hideMobileMenu();
         overlaysModalOpen = true;
         $('#overlays-data').empty();
         let overlay;
-        let overlayLink;
         ['None', ...Object.keys(chunkInfo['mapOverlays'])].forEach((overlayText) => {
             if (overlayText.includes('|')) {
                 overlay = overlayText.split('|')[0];
@@ -8969,9 +9156,17 @@ let showOverlays = function() {
                 overlay = overlayText;
                 overlayLink = overlayText;
             }
-            $('#overlays-data').append(`<div class="overlay noscroll ${overlay.replaceAll(' ', '_') + '-overlay'}"><label class="radio noscroll"><span class="radio__input noscroll"><input type="radio" name="radio" ${(selectedOverlay === overlayText) ? "checked" : ''} class='noscroll' onclick="selectedOverlay='${overlayText}'"><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll">${overlay === 'None' ? overlay : `<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(overlayLink)}" target="_blank">${overlay}</a>`}</span></label></div>`);
+            if (overlay === 'Clues') {
+                $('#overlays-data').append(`<div class="overlay noscroll ${overlay.replaceAll(' ', '_') + '-overlay'}"><label class="radio noscroll extra-space"><span class="radio__label noscroll">${overlay === 'None' ? overlay : `<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(overlayLink)}" target="_blank">${overlay}</a>`}</span></label></div>`);
+                clueTiers.forEach((clueTier) => {
+                    $('#overlays-data').append(`<div class="overlay noscroll ${clueTier.replaceAll(' ', '_') + '-overlay'} sub-overlay-entry"><label class="checkbox noscroll"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${selectedOverlayClues[clueTier] ? "checked" : ''} class='noscroll' onclick="selectedOverlay='${overlay}'; selectOverlayClues('${clueTier}');"><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="checkbox__label noscroll">${overlay === 'None' ? overlay : `<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(`${clueTier} ${overlay.toLowerCase()}`)}" target="_blank">${clueTier} ${overlay}</a>`}</span></label></div>`);
+                });
+            } else {
+                $('#overlays-data').append(`<div class="overlay noscroll ${overlay.replaceAll(' ', '_') + '-overlay'}"><label class="radio noscroll"><span class="radio__input noscroll"><input type="radio" name="radio" ${(selectedOverlay === overlayText) ? "checked" : ''} class='noscroll' onclick="selectedOverlay='${overlayText}'; clearOverlayClues();"><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll">${overlay === 'None' ? overlay : `<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(overlayLink)}" target="_blank">${overlay}</a>`}</span></label></div>`);
+            }
         });
         $('#myModal39').show();
+        !fromHelper && (document.getElementById('overlays-data').scrollTop = 0);
         modalOutsideTime = Date.now();
     }
 }
@@ -9304,7 +9499,7 @@ let showChunkHistory = function() {
         let count = 0;
         let prevY = canvasGraph.height - padding - 2;
         ctxGraph.beginPath();
-        ctxGraph.strokeStyle = "black";
+        ctxGraph.strokeStyle = 'black';
         ctxGraph.lineWidth = 3;
         ctxGraph.moveTo(padding, padding);
         ctxGraph.lineTo(padding, canvasGraph.height - padding);
@@ -9323,13 +9518,13 @@ let showChunkHistory = function() {
         }
         ctxGraph.stroke();
         ctxGraph.font = '16px Calibri, Roboto Condensed, sans-serif';
-        ctxGraph.fillStyle = "black";
+        ctxGraph.fillStyle = 'black';
         ctxGraph.textAlign = "right";
         let offset = Object.keys(tempChunks['unlocked']).length - Object.keys(newChunkOrder).length;
         for (let lineNum = 0; lineNum <= 3; lineNum++) {
             ctxGraph.fillText(Math.floor(fullHeight / 3) * lineNum + offset, padding - 5, canvasGraph.height - padding + 4 - ((canvasGraph.height - padding * 2) * (Math.floor(fullHeight / 3) * lineNum / fullHeight)));
         }
-        ctxGraph.textAlign = "center";
+        ctxGraph.textAlign = 'center';
         for (let lineNum = 1; lineNum <= 6; lineNum++) {
             let tempDate = new Date();
             tempDate.setTime(parseInt(startingWidth) + (Math.floor(fullWidth / 6) * lineNum));
