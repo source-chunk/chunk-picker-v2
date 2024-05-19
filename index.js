@@ -1328,7 +1328,7 @@ let expandChallengeStr = '';
 let detailsStack = [];
 let touchTime = 0;
 
-let currentVersion = '6.2.1';
+let currentVersion = '6.2.2';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1467,7 +1467,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.2.1";
+mapImg.src = "osrs_world_map.png?v=6.2.2";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2724,7 +2724,7 @@ let setRecentRoll = function(chunkId) {
     for (let count = 1; count <= 5; count++) {
         notFound = true;
         while (notFound && innerCount < chunkOrderArr.length) {
-            if (innerCount === 0 || chunkOrder[chunkOrderArr[innerCount]] !== chunkOrder[chunkOrderArr[innerCount - 1]] || chunkOrderArr[innerCount - 1] - chunkOrderArr[innerCount] > 5000) {
+            if (innerCount === 0 || chunkOrder[chunkOrderArr[innerCount]] !== chunkOrder[chunkOrderArr[innerCount - 1]] || chunkOrderArr[innerCount - 1] - chunkOrderArr[innerCount] > 10000) {
                 let tempDate = new Date();
                 tempDate.setTime(chunkOrderArr[innerCount]);
                 $('#recentChunks' + count).html('<span class="time">' + tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2] + ': </span><span class="chunk' + (chunkOrder[chunkOrderArr[innerCount]] ? '' : 'none') + '" onclick="recentChunkCanvas(recentChunks' + count + ')">' + chunkOrder[chunkOrderArr[innerCount]] + '</span>');
@@ -3078,7 +3078,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.2.1");
+        myWorker = new Worker("./worker.js?v=6.2.2");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3341,8 +3341,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.2.1");
-let myWorker2 = new Worker("./worker.js?v=6.2.1");
+let myWorker = new Worker("./worker.js?v=6.2.2");
+let myWorker2 = new Worker("./worker.js?v=6.2.2");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -5704,7 +5704,7 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
                     }
                 }
                 if (((chunkInfo['challenges'][skill][challenge]['Primary'] && (!chunkInfo['challenges'][skill][challenge]['Secondary'] || rules['Secondary Primary'])) && (chunkInfo['challenges'][skill][challenge]['Level'] === 1 || (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && chunkInfo['challenges'][skill][challenge]['Level'] <= passiveSkill[skill] + bestBoost) || ((skillQuestXp.hasOwnProperty(skill) && chunkInfo['challenges'][skill][challenge]['Level'] <= skillQuestXp[skill]['level'] + bestBoost)) || wantMethods) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || chunkInfo['challenges'][skill][challenge]['Manual']) {
-                    if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil')) {
+                    if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil') || baseChunkData['objects'].hasOwnProperty('Rusted anvil')) {
                         primaryValid = true;
                         methods[challenge] = chunkInfo['challenges'][skill][challenge]['Level'];
                     }
@@ -6030,7 +6030,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.2.1");
+    myWorker2 = new Worker("./worker.js?v=6.2.2");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -10070,6 +10070,8 @@ let checkMID = function(mid) {
         onMobile && $('#about-menu').addClass('mobile');
         $('#about-menu').show();
         $('html, body').addClass('about');
+    } else if (mid === 'maps-list') {
+        window.location.replace(`https://docs.google.com/spreadsheets/d/e/2PACX-1vRdsOtdI264xc_c4rXKnSr9SVyz3tn7IiJvd5OQzOU5TgnNjiW5vizAwtK5vJzoaAFVBbOdruPCtPRM/pubhtml?gid=1831536443&single=true`);
     } else if (mid) {
         if (mid.split('-')[1] === 'view') {
             mid = mid.split('-')[0];
@@ -10290,7 +10292,7 @@ let loadData = function(startup) {
             for (let count = 1; count <= 5; count++) {
                 notFound = true;
                 while (notFound && innerCount < chunkOrderArr.length) {
-                    if (innerCount === 0 || chunkOrder[chunkOrderArr[innerCount]] !== chunkOrder[chunkOrderArr[innerCount - 1]] || chunkOrderArr[innerCount - 1] - chunkOrderArr[innerCount] > 5000) {
+                    if (innerCount === 0 || chunkOrder[chunkOrderArr[innerCount]] !== chunkOrder[chunkOrderArr[innerCount - 1]] || chunkOrderArr[innerCount - 1] - chunkOrderArr[innerCount] > 10000) {
                         let tempDate = new Date();
                         tempDate.setTime(chunkOrderArr[innerCount]);
                         $('#recentChunks' + count).html('<span class="time">' + tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2] + ': </span><span class="chunk' + (chunkOrder[chunkOrderArr[innerCount]] ? '' : 'none') + '" onclick="recentChunkCanvas(recentChunks' + count + ')">' + chunkOrder[chunkOrderArr[innerCount]] + '</span>');
