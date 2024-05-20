@@ -1328,7 +1328,7 @@ let expandChallengeStr = '';
 let detailsStack = [];
 let touchTime = 0;
 
-let currentVersion = '6.2.2';
+let currentVersion = '6.2.3';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1467,7 +1467,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.2.2";
+mapImg.src = "osrs_world_map.png?v=6.2.3";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1540,8 +1540,6 @@ let drawCanvas = function() {
         setUpSelected();
         drawCanvas();
         return;
-    } else {
-        window.requestAnimationFrame(drawCanvas);
     }
     fixMapEdgesCanvas();
     updateFutureMove();
@@ -1872,8 +1870,8 @@ let drawCanvas = function() {
     }
 
     if (manualMouseMoveCheck) {
-        handleMouseMove(manualMouseMoveCheck);
         manualMouseMoveCheck = false;
+        handleMouseMove(manualMouseMoveCheck);
     }
     animCount++;
 }
@@ -2122,6 +2120,7 @@ document.body.addEventListener('mouseup', function (event) {
 // Handles mouse down event
 let handleMouseDown = function(e) {
     if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen) {
+        drawCanvas();
         return;
     }
     if (!!e.touches) {
@@ -2141,11 +2140,13 @@ let handleMouseDown = function(e) {
     if (e.type === 'touchstart') {
         touchTime = Date.now();
     }
+    drawCanvas();
 }
 
 // Handles mouse move event
 let handleMouseMove = function(e) {
     if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen) {
+        drawCanvas();
         return;
     }
     if (!highVisibilityMode && !onMobile) {
@@ -2256,6 +2257,7 @@ let handleMouseMove = function(e) {
             canvas.style.cursor = "default";
         }
     }
+    drawCanvas();
 }
 
 // Checks if chunk is locked
@@ -2307,6 +2309,7 @@ let handleKeyDown = function(e) {
     } else {
         canvas.style.cursor = "default";
     }
+    drawCanvas();
 }
 
 // Handles the kup up event
@@ -2319,11 +2322,13 @@ let handleKeyUp = function(e) {
         isHoveringSticker = false;
         canvas.style.cursor = "default";
     }
+    drawCanvas();
 }
 
 // Handles the mouse up event
 let handleMouseUp = function(e) {
     if ((e.button !== 0 && e.button !== 2) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen) {
+        drawCanvas();
         return;
     }
     if (e.button === 2 && e.target.id === 'canvas') {
@@ -2334,6 +2339,7 @@ let handleMouseUp = function(e) {
         let chunkId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
         let coords = convertToXY(chunkId);
         if (coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) {
+            drawCanvas();
             return;
         }
         if (infoLockedId === chunkId.toString()) {
@@ -2342,6 +2348,7 @@ let handleMouseUp = function(e) {
             infoLockedId = chunkId.toString();
         }
         updateChunkInfo();
+        drawCanvas();
         return;
     } else if (e.button === 0) {
         mouseDown = false;
@@ -2350,6 +2357,7 @@ let handleMouseUp = function(e) {
             selectedOverlayIndex = 0;
             overlayCloseLocation = -1;
             isHoveringClose = false;
+            drawCanvas();
             return;
         } else if (movedNum <= 1 && isHoveringLeft) {
             if (selectedOverlayIndex > 0) {
@@ -2357,6 +2365,7 @@ let handleMouseUp = function(e) {
             }
             selectedOverlayId = selectedOverlayIds[selectedOverlayIndex];
             manualMouseMoveCheck = e;
+            drawCanvas();
             return;
         } else if (movedNum <= 1 && isHoveringRight) {
             if (selectedOverlayIndex < (selectedOverlayIds.length - 1)) {
@@ -2364,8 +2373,10 @@ let handleMouseUp = function(e) {
             }
             selectedOverlayId = selectedOverlayIds[selectedOverlayIndex];
             manualMouseMoveCheck = e;
+            drawCanvas();
             return;
         } else if (isHoveringOverlayMenu) {
+            drawCanvas();
             return;
         } else if (movedNum <= 1 && hoveredOverlayIds.length !== 0 && e.target.id === 'canvas') {
             let selectedHoveredValid = selectedOverlayIds.filter((el) => hoveredOverlayIds.includes(el)).length > 0;
@@ -2375,12 +2386,15 @@ let handleMouseUp = function(e) {
             if (selectedOverlayIds.length === 0) {
                 overlayCloseLocation = -1;
             }
+            drawCanvas();
             return;
         } else if (settingsOpen && !screenshotMode && e.target.id === 'canvas') {
             settingsMenu();
+            drawCanvas();
             return;
         } else if (locked && !testMode && e.target.id === 'canvas') {
             if (movedNum > 1) {
+                drawCanvas();
                 return;
             }
             if (lockBoxOpen) {
@@ -2390,9 +2404,11 @@ let handleMouseUp = function(e) {
             setTimeout(function() {
                 $('.lock-closed').removeClass('animated shake').addClass('').css({ 'color': 'black' });
             }, 500);
+            drawCanvas();
             return;
         } else if (checkFalseRules() && chunkTasksOn && e.target.id === 'canvas') {
             helpFunc();
+            drawCanvas();
             return;
         }
         if (movedNum <= 1 && e.target.id === 'canvas') {
@@ -2403,13 +2419,16 @@ let handleMouseUp = function(e) {
             let chunkId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
             let coords = convertToXY(chunkId);
             if (coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) {
+                drawCanvas();
                 return;
             } else if (isHoveringBlacklist) {
                 blacklistCanvas(chunkId);
             } else if (isHoveringSticker) {
                 openStickers(chunkId);
+                drawCanvas();
                 return;
             } else if (settings['shiftUnlock'] && !e.shiftKey && (!testMode || !locked) && (!onMobile || (Date.now() - touchTime) < 500)) {
+                drawCanvas();
                 return;
             } else if (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(chunkId)) {
                 if (!recentChunks.hasOwnProperty(chunkId)) {
@@ -2463,6 +2482,7 @@ let handleMouseUp = function(e) {
                 setCalculating('.panel-completed');
                 calcCurrentChallengesCanvas(true, true, true);
             } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(chunkId)) {
+                drawCanvas();
                 return;
             } else {
                 if (!tempChunks['selected']) {
@@ -2479,12 +2499,14 @@ let handleMouseUp = function(e) {
                 $('.pick').text('Pick Chunk');
             }
         } else {
+            drawCanvas();
             return;
         }
         $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
         $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
     }
     setData();
+    drawCanvas();
 }
 
 // Sets all neighbors of recently unlocked chunk to selected
@@ -2508,6 +2530,7 @@ let selectNeighborsCanvas = function(chunkId) {
             tempChunks['selected'][newChunkId] = tempSelectedChunks.indexOf(newChunkId.toString()) + 1;
         }
     }
+    drawCanvas();
 }
 
 // Sets all neighbors of all chunks to selected
@@ -2545,6 +2568,7 @@ let selectAllNeighborsCanvas = function() {
         }
     });
     sortSelectedChunks();
+    drawCanvas();
 }
 
 // Resorts the order/numbering of selected chunks
@@ -3078,7 +3102,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.2.2");
+        myWorker = new Worker("./worker.js?v=6.2.3");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
         workerOut = 1;
@@ -3088,6 +3112,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
 // Handles mouse leaving the page
 let handleMouseOut = function(e) {
     if (e.button !== 0) {
+        drawCanvas();
         return
     }
     if (mouseDown) {
@@ -3095,6 +3120,7 @@ let handleMouseOut = function(e) {
         e.stopPropagation();
         handleMouseMove(e);
     }
+    drawCanvas();
 }
 
 // Handles mouse scroll zooming
@@ -3129,6 +3155,7 @@ let handleMouseScroll = function(e) {
         }
         manualMouseMoveCheck = e;
     }
+    drawCanvas();
 }
 
 // Handles mobile zooming
@@ -3147,6 +3174,7 @@ let handleMobileZoom = function(dir) {
             dragTotalY = dragTotalY - offsetY;
         }
     }
+    drawCanvas();
 }
 
 // Blacklists the given chunk
@@ -3172,24 +3200,30 @@ let fixMapEdgesCanvas = function() {
     let margins = [450, 400, 400, 400];
     if (topNumber > margins[0]) {
         dragTotalY = margins[0];
+        drawCanvas();
     }
     if (rightEdge < window.innerWidth - margins[1]) {
         dragTotalX = (window.innerWidth - margins[1]) - (totalZoom * imgW);
+        drawCanvas();
     }
     if (bottomEdge < window.innerHeight - margins[2]) {
         dragTotalY = (window.innerHeight - margins[2]) - (totalZoom * imgH);
+        drawCanvas();
     }
     if (leftNumber > margins[3]) {
         dragTotalX = margins[3];
+        drawCanvas();
     }
 }
 
 // Move towards point being centered on
 let updateFutureMove = function() {
+    let didMove = false;
     if (Math.abs(moveAmountX) < Math.abs(futureMoveX)) {
         let easing = (1 - (Math.abs(moveAmountX / futureMoveX) * Math.abs(moveAmountX / futureMoveX))) < 0.01 ? 0.01 : (1 - (Math.abs(moveAmountX / futureMoveX) * Math.abs(moveAmountX / futureMoveX)));
         dragTotalX += -futureMoveX * 0.075 * easing;
         moveAmountX += -futureMoveX * 0.075 * easing;
+        didMove = true;
     } else {
         futureMoveX = 0;
         moveAmountX = 0;
@@ -3198,10 +3232,14 @@ let updateFutureMove = function() {
         let easing = (1 - (Math.abs(moveAmountY / futureMoveY) * Math.abs(moveAmountY / futureMoveY))) < 0.01 ? 0.01 : (1 - (Math.abs(moveAmountY / futureMoveY) * Math.abs(moveAmountY / futureMoveY)));
         dragTotalY += -futureMoveY * 0.075 * easing;
         moveAmountY += -futureMoveY * 0.075 * easing;
+        didMove = true;
     } else {
         futureMoveY = 0;
         moveAmountY = 0;
     }
+    didMove && setTimeout(function() {
+        drawCanvas();
+    }, 1);
 }
 
 // Scrolls to position x.xPart, y.yPart
@@ -3215,7 +3253,7 @@ let scrollToPosCanvas = function(x, y, xPart, yPart, doQuick) {
         futureMoveX = dragTotalX - moveX;
         futureMoveY = dragTotalY - moveY;
     }
-    doQuick && drawCanvas();
+    drawCanvas();
 }
 
 // Scrolls to chunk with given id
@@ -3263,6 +3301,7 @@ let redirectPanelCanvas = function(name) {
     ((realName % 256) < 65) && scrollToPosCanvas(convertToXY(parseInt(realName)).x, convertToXY(parseInt(realName)).y, 0, 0);
     infoLockedId = encodeRFC5987ValueChars(realName.toString());
     updateChunkInfo();
+    drawCanvas();
     $('.infoid').addClass('new');
     setTimeout(function() {
         $('.infoid').removeClass('new');
@@ -3341,8 +3380,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.2.2");
-let myWorker2 = new Worker("./worker.js?v=6.2.2");
+let myWorker = new Worker("./worker.js?v=6.2.3");
+let myWorker2 = new Worker("./worker.js?v=6.2.3");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3514,6 +3553,7 @@ let logError = function(err) {
 // Prevent caching of json get
 $(document).ready(function() {
     $.ajaxSetup({ cache: false });
+    window.onresize = drawCanvas();
 });
 
 // Prevent right-click menu from showing
@@ -5116,6 +5156,7 @@ let toggleTheme = function(value) {
         colorBoxLight = "rgba(50, 50, 50, 0.4)";
         $('#favicon-link').attr("href", "./resources/favicons/favicon-autumn.png");
     }
+    drawCanvas();
 }
 
 // Toggles the chunk info panel
@@ -6030,7 +6071,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.2.2");
+    myWorker2 = new Worker("./worker.js?v=6.2.3");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections']]);
     workerOut++;
@@ -9961,6 +10002,7 @@ let checkOffSettings = function(didRedo, startup) {
         $('.pick').text('Pick Chunk');
     }
     setTaskNum();
+    drawCanvas();
 }
 
 // Moves checked off challenges to completed
