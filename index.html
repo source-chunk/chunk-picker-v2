@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.2.5" />
+  <link rel="stylesheet" href="./index.css?v=6.2.6" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -42,12 +42,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.2.5' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.2.6' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.2.5"></script>
+  <script src="./index.js?v=6.2.6"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -204,6 +204,44 @@
         <div id='rulesmiscellaneous' class='accordion' onclick="toggleRulesPanel('miscellaneous')"><span class='exp'><i
           class="acc pic fas fa-plus"></i></span><span class="accordion-title">Miscellaneous</span></div>
         <div class="panel panel-miscellaneous"></div>
+        <div class="rules-names">
+          <div id='rulesvisibletasks' class='accordion-sidebar' onclick="toggleRulesPanel('visibletasks')"><span class="accordion-title">Visible Tasks</span></div>
+          <div id='rulesoverallskill' class='accordion-sidebar' onclick="toggleRulesPanel('overallskill')"><span class="accordion-title">Overall Skill</span></div>
+          <div id='rulesagility' class='accordion-sidebar' onclick="toggleRulesPanel('agility')"><span class="accordion-title">Agility</span></div>
+          <div id='rulescombat' class='accordion-sidebar' onclick="toggleRulesPanel('combat')"><span class="accordion-title">Combat</span></div>
+          <div id='rulesconstruction' class='accordion-sidebar' onclick="toggleRulesPanel('construction')"><span class="accordion-title">Construction</span></div>
+          <div id='rulesfarming' class='accordion-sidebar' onclick="toggleRulesPanel('farming')"><span class="accordion-title">Farming</span></div>
+          <div id='rulesherblore' class='accordion-sidebar' onclick="toggleRulesPanel('herblore')"><span class="accordion-title">Herblore</span></div>
+          <div id='ruleshunter' class='accordion-sidebar' onclick="toggleRulesPanel('hunter')"><span class="accordion-title">Hunter</span></div>
+          <div id='rulesmagic' class='accordion-sidebar' onclick="toggleRulesPanel('magic')"><span class="accordion-title">Magic</span></div>
+          <div id='rulesmining' class='accordion-sidebar' onclick="toggleRulesPanel('mining')"><span class="accordion-title">Mining</span></div>
+          <div id='rulesprayer' class='accordion-sidebar' onclick="toggleRulesPanel('prayer')"><span class="accordion-title">Prayer</span></div>
+          <div id='rulesrunecraft' class='accordion-sidebar' onclick="toggleRulesPanel('runecraft')"><span class="accordion-title">Runecraft</span></div>
+          <div id='rulesslayer' class='accordion-sidebar' onclick="toggleRulesPanel('slayer')"><span class="accordion-title">Slayer</span></div>
+          <div id='rulessmithing' class='accordion-sidebar' onclick="toggleRulesPanel('smithing')"><span class="accordion-title">Smithing</span></div>
+          <div id='ruleswoodcutting' class='accordion-sidebar' onclick="toggleRulesPanel('woodcutting')"><span class="accordion-title">Woodcutting</span></div>
+          <div id='rulesitemsources' class='accordion-sidebar' onclick="toggleRulesPanel('itemsources')"><span class="accordion-title">Item Sources</span></div>
+          <div id='rulesmiscellaneous' class='accordion-sidebar' onclick="toggleRulesPanel('miscellaneous')"><span class="accordion-title">Miscellaneous</span></div>
+        </div>
+        <div class="rules-content">
+          <div class="panel panel-visibletasks"></div>
+          <div class="panel panel-overallskill"></div>
+          <div class="panel panel-agility"></div>
+          <div class="panel panel-combat"></div>
+          <div class="panel panel-construction"></div>
+          <div class="panel panel-farming"></div>
+          <div class="panel panel-herblore"></div>
+          <div class="panel panel-hunter"></div>
+          <div class="panel panel-magic"></div>
+          <div class="panel panel-mining"></div>
+          <div class="panel panel-prayer"></div>
+          <div class="panel panel-runecraft"></div>
+          <div class="panel panel-slayer"></div>
+          <div class="panel panel-smithing"></div>
+          <div class="panel panel-woodcutting"></div>
+          <div class="panel panel-itemsources"></div>
+          <div class="panel panel-miscellaneous"></div>
+        </div>
         <div class="bottom-spacing"></div>
       </div>
     </div>
@@ -661,7 +699,7 @@
     <div class="modal-content noscroll">
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeClipboard()"></i>
       <div id="clipboard-title" class="clipboard-title noscroll">Copy to clipboard:</div>
-      <div id="clipboard-data" class="clipboard-data noscroll"><button id='chunks-clipboard-button' class='modal-button' onclick='exportFunc("chunks")'>Chunks</button><button id='tasks-clipboard-button' class='modal-button' onclick='exportFunc("tasks")'>Tasks</button></div>
+      <div id="clipboard-data" class="clipboard-data noscroll"><button id='chunks-clipboard-button' class='modal-button' onclick='exportFunc("chunks")'>Chunks</button><button id='tasks-clipboard-button' class='modal-button' onclick='exportFunc("tasks")'>Tasks</button><button id='rules-clipboard-button' class='modal-button' onclick='exportFunc("rules")'>Rules</button></div>
     </div>
   </div>
   <div id="myModal39" class="modal">
@@ -726,6 +764,23 @@
       <div id="roll2warning-title" class="roll2warning-title noscroll">Roll 2 chunks?</div>
       <div id="roll2warning-subtitle" class="roll2warning-subtitle noscroll"><div class="roll2warning-firsttext">This action is not reversible.</div><div class="roll2warning-warn"><b>Are you sure you wish to proceed?</b></div></div>
       <div id="roll2warning-data" class="roll2warning-data noscroll"><div><div class="roll2warning-cancel" onclick="cancelRoll2Warning()">Cancel</div><div class="roll2warning-proceed" onclick="warnRoll2Chunk(false, true)">Yes, proceed</div></div></div>
+    </div>
+  </div>
+  <div id="myModal45" class="modal">
+    <div class="modal-content noscroll">
+      <div id="rules-import-title" class="rules-import-title noscroll">Import Rules</div>
+      <div id="rules-import-subtitle" class="rules-import-subtitle noscroll">
+        <div id="rules-import-input" class="rules-import-input noscroll"><input class='rules-input' placeholder='Paste rules here' /></div>
+        <div class="rules-import-error">Invalid format</div>
+        Importing rules will overwrite any existing rules.
+        <div class="preset-warn"><b>Are you sure you wish to proceed?</b>
+        </div>
+      </div>
+      <div id="rules-import-data" class="rules-import-data noscroll">
+        <div>
+          <div class="preset-cancel" onclick="applyImportRules(false)">Cancel</div><div class="preset-proceed" onclick="applyImportRules(true)">Import</div>
+        </div>
+      </div>
     </div>
   </div>
   <div id='entry-menu'>
@@ -991,7 +1046,25 @@
 </div>
 
 <div class='entry-home-menu-container'>
-  <div class='entry-home-title'>Chunk Picker V2</div>
+  <div class="entry-home-menu-img-container">
+    <img src="./login-blank.png" />
+  </div>
+  <div class="entry-home-menu-img2-container">
+    <img src="./world-blank.png" />
+  </div>
+  <div class='entry-home-login2-outer'>
+    <div class='entry-home3-login entry-home-login'><a href='https://chunk-stats.web.app' target='_blank'><div>Chunk Stats</div></a></div>
+  </div>
+  <div class='entry-home-login-title-container'>
+    <div class="entry-home-login-title">Chunk Picker V2</div>
+  </div>
+  <div class='entry-home-login-outer-outer'>
+    <div class='entry-home-login-outer'>
+      <div class='entry-home1-login entry-home-login' onclick='nextPage("create")'>New Map</div>
+      <div class='entry-home2-login entry-home-login' onclick='nextPage("mid")'>Existing Map</div>
+    </div>
+  </div>
+  <div class="entry-home-title">Chunk Picker V2</div>
   <div class='entry-home-outer-outer'>
     <div class='entry-home-outer'>
       <div class='entry-home1 entry-home' onclick='nextPage("create")'>Create a new map</div>
