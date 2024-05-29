@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.2.7" />
+  <link rel="stylesheet" href="./index.css?v=6.2.8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -42,12 +42,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.2.7' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.2.8' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.2.7"></script>
+  <script src="./index.js?v=6.2.8"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -557,9 +557,11 @@
   </div>
   <div id="myModal28" class="modal">
     <div class="modal-content noscroll">
-      <div id="passive-skill-title" class="passive-skill-title noscroll">Add Passively Trained Skill</div>
+      <div id="passive-skill-title" class="passive-skill-title noscroll">Edit Passive Leveling/Highest Task</div>
       <div id="passive-skill-subtitle" class="passive-skill-subtitle noscroll">Enter the level passively reached in <span class='noscroll passive-skill-name'></span> (through lamps/Tears of Guthix/quest rewards/etc). Defining a passive skill this way will show Chunk Tasks for the skill up to your passively trained level, and will show Tasks for higher levels if you unlock a consistent training method.</div>
       <div id="passive-skill-input-container" class="passive-skill-input-container noscroll">Current <span class='noscroll passive-skill-name'></span> Level: <input id="passive-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()"/></div>
+      <div id="passive-skill-subtitle2" class="passive-skill-subtitle2 noscroll"><b class="noscroll">[Meme Grind Limiter]</b> Use this to set a maximum level for tasks in <span class='noscroll passive-skill-name'></span>. Useful to turn meme grinds into a reasonable challenge without backlogging them. Entering a number lower than 99 will artificially stop the Chunk Picker from showing skill tasks for this skill above the inputted level.</div>
+      <div id="passive-skill-input-container2" class="passive-skill-input-container2 noscroll">Highest <span class='noscroll passive-skill-name'></span> task allowed: <input id="max-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()"/></div>
       <div id="passive-skill-data" class="passive-skill-data noscroll"></div>
     </div>
   </div>

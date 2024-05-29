@@ -170,6 +170,7 @@ let bestEquipmentAltsGlobal = {};
 let manualSections = {};
 let unlockedSections = {};
 let optOutSections = false;
+let maxSkill;
 
 let clueTasksPossible = {};
 let areasStructure = {};
@@ -228,6 +229,7 @@ onmessage = function(e) {
             isOnlyManualAreas,
             manualSections,
             optOutSections,
+            maxSkill,
         ] = eGlobal.data;
 
         if (isDiary2Tier) {
@@ -2257,6 +2259,124 @@ let calcChallenges = function(chunks, baseChunkData) {
                 delete baseChunkData['items'][output];
             }
         });
+        !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Items'] && Object.keys(chunkInfo['taskUnlocks']['Items']).forEach((item) => {
+            let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Items'][item].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || (!backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0].replaceAll('#', '/')))) }).length === chunkInfo['taskUnlocks']['Items'][item].length));
+            let monster = '';
+            let asterisk = '*';
+            if (item.includes('^')) {
+                asterisk += '^';
+                monster = item.split('^')[1];
+                item = item.split('^')[0];
+                monster === '' && (asterisk += '^');
+            }
+            if (!tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
+                if (monster !== '' && monster.includes('-npc')) {
+                    !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return (source.toLowerCase().includes(monster.split('-npc')[0].toLowerCase())) }).forEach((source) => {
+                        delete baseChunkData['items'][item][source];
+                        if (Object.keys(baseChunkData['items'][item]).length === 0) {
+                            delete baseChunkData['items'][item];
+                        }
+                        delete outputs[item][source];
+                        if (Object.keys(outputs[item]).length === 0) {
+                            delete outputs[item];
+                        }
+                    });
+                    if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item]) {
+                        dropRatesGlobal[monster][item + asterisk] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item]));
+                        delete dropRatesGlobal[monster][item];
+                    }
+                    if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][item]) {
+                        dropTablesGlobal[monster][item + asterisk] = JSON.parse(JSON.stringify(dropTablesGlobal[monster][item]));
+                        delete dropTablesGlobal[monster][item];
+                    }
+                } else if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
+                    if (!slayerTaskLockedItems[item]) {
+                        slayerTaskLockedItems[item] = {};
+                    }
+                    slayerTaskLockedItems[item][monster.toLowerCase()] = true;
+                    !!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).filter(source => { return (source === monster) || (source.toLowerCase().includes(monster.toLowerCase()) && source.includes('Slay')) }).forEach((source) => {
+                        delete baseChunkData['items'][item][source];
+                        if (Object.keys(baseChunkData['items'][item]).length === 0) {
+                            delete baseChunkData['items'][item];
+                        }
+                    });
+                    if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item]) {
+                        dropRatesGlobal[monster][item + asterisk] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item]));
+                        delete dropRatesGlobal[monster][item];
+                    }
+                    if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][item]) {
+                        dropTablesGlobal[monster][item + asterisk] = JSON.parse(JSON.stringify(dropTablesGlobal[monster][item]));
+                        delete dropTablesGlobal[monster][item];
+                    }
+                } else if (asterisk.includes('^') && monster === '') {
+                    baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = combineJSONs(baseChunkData['items'][item + asterisk], JSON.parse(JSON.stringify(baseChunkData['items'][item]))));
+                    delete baseChunkData['items'][item];
+                    !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item) }).forEach((monster) => {
+                        if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item]) {
+                            dropRatesGlobal[monster][item + asterisk] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item]));
+                            delete dropRatesGlobal[monster][item];
+                        }
+                    });
+                    !!dropTablesGlobal && Object.keys(dropTablesGlobal).filter(monster => { return dropTablesGlobal[monster].hasOwnProperty(item) }).forEach((monster) => {
+                        if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][item]) {
+                            dropTablesGlobal[monster][item + asterisk] = JSON.parse(JSON.stringify(dropTablesGlobal[monster][item]));
+                            delete dropTablesGlobal[monster][item];
+                        }
+                    });
+                } else if (!asterisk.includes('^')) {
+                    baseChunkData['items'][item] && (baseChunkData['items'][item + asterisk] = JSON.parse(JSON.stringify(baseChunkData['items'][item])));
+                    delete baseChunkData['items'][item];
+                }
+            } else if (tempValid && ((!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(item + asterisk)) || (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) || (monster === '' && asterisk.includes('^')))) {
+                if (monster !== '' && monster.includes('-npc')) {
+                    if (!baseChunkData['items'].hasOwnProperty(item)) {
+                        baseChunkData['items'][item] = {};
+                    }
+                    baseChunkData['items'][item][monster.split('-npc')[0]] = 'secondary-drop';
+                    if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
+                        dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
+                        delete dropRatesGlobal[monster][item + asterisk];
+                    }
+                    if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][item + asterisk]) {
+                        dropTablesGlobal[monster][item] = JSON.parse(JSON.stringify(dropTablesGlobal[monster][item + asterisk]));
+                        delete dropTablesGlobal[monster][item + asterisk];
+                    }
+                } else if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
+                    if ((chunkInfo['drops'].hasOwnProperty(monster) && chunkInfo['drops'][monster].hasOwnProperty(item) && ((parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))) || (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) {
+                        if (!baseChunkData['items'].hasOwnProperty(item)) {
+                            baseChunkData['items'][item] = {};
+                        }
+                        baseChunkData['items'][item][monster] = 'secondary-drop';
+                        if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
+                            dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
+                            delete dropRatesGlobal[monster][item + asterisk];
+                        }
+                        if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][item + asterisk]) {
+                            dropTablesGlobal[monster][item] = JSON.parse(JSON.stringify(dropTablesGlobal[monster][item + asterisk]));
+                            delete dropTablesGlobal[monster][item + asterisk];
+                        }
+                    }
+                } else if (asterisk.includes('^') && monster === '') {
+                    baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = combineJSONs(baseChunkData['items'][item], JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk]))));
+                    delete baseChunkData['items'][item + asterisk];
+                    !!dropRatesGlobal && Object.keys(dropRatesGlobal).filter(monster => { return dropRatesGlobal[monster].hasOwnProperty(item + asterisk) }).forEach((monster) => {
+                        if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
+                            dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
+                            delete dropRatesGlobal[monster][item + asterisk];
+                        }
+                    });
+                    !!dropTablesGlobal && Object.keys(dropTablesGlobal).filter(monster => { return dropTablesGlobal[monster].hasOwnProperty(item + asterisk) }).forEach((monster) => {
+                        if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][item + asterisk]) {
+                            dropTablesGlobal[monster][item] = JSON.parse(JSON.stringify(dropTablesGlobal[monster][item + asterisk]));
+                            delete dropTablesGlobal[monster][item + asterisk];
+                        }
+                    });
+                } else if (!asterisk.includes('^')) {
+                    baseChunkData['items'][item + asterisk] && (baseChunkData['items'][item] = combineJSONs(baseChunkData['items'][item], JSON.parse(JSON.stringify(baseChunkData['items'][item + asterisk]))));
+                    delete baseChunkData['items'][item + asterisk];
+                }
+            }
+        });
         Object.keys(outputObjects).forEach((output) => {
             if (!baseChunkData['objects'][output]) {
                 baseChunkData['objects'][output] = {};
@@ -2660,6 +2780,12 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             }
 
             delete chunkInfo['challenges'][skill][name]['NeverShow'];
+            if (!!maxSkill && maxSkill.hasOwnProperty(skill) && chunkInfo['challenges'][skill][name].hasOwnProperty('Level') && maxSkill[skill] < chunkInfo['challenges'][skill][name]['Level']) {
+                validChallenge = false;
+                wrongThings.push('Max Skill');
+                nonValids[name] = wrongThings;
+                return;
+            }
             if (chunkInfo['challenges'][skill][name].hasOwnProperty('Not F2P') && rules['F2P']) {
                 validChallenge = false;
                 wrongThings.push('F2P');
@@ -3975,7 +4101,7 @@ let calcBIS = function() {
                 return;
             }
             let validWearable = true;
-            !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).filter(skill => (rules['Skiller'] && chunkInfo['equipment'][equip].requirements[skill] > 1) || (!primarySkill[skill] && chunkInfo['equipment'][equip].requirements[skill] > 1 && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill]))).length > 0 && (validWearable = false);
+            !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).filter(skill => (rules['Skiller'] && chunkInfo['equipment'][equip].requirements[skill] > 1) || (!primarySkill[skill] && chunkInfo['equipment'][equip].requirements[skill] > 1 && (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])) || (!!maxSkill && maxSkill.hasOwnProperty(skill) && maxSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])).length > 0 && (validWearable = false);
             chunkInfo['taskUnlocks']['Items'].hasOwnProperty(equip) && chunkInfo['taskUnlocks']['Items'][equip].filter(task => !globalValids || !globalValids[Object.values(task)[0]] || !globalValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])).length > 0 && (validWearable = false);
             if (validWearable) {
                 if (skill === 'Melee') {
@@ -5099,6 +5225,80 @@ let calcBIS = function() {
                     }
                 }
             }
+            // Inquisitor
+            validWearable = true;
+            tempEquipment = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
+            tempWeapons = ["Inquisitor's mace"];
+            tempEquipment.some(equip => {
+                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                    validWearable = false;
+                    return true;
+                }
+                if (baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).filter(skill => !primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])).length > 0) {
+                    validWearable = false;
+                    return true;
+                }
+            });
+            tempValidWearable = false;
+            tempWeapons.forEach((weapon) => {
+                !baseChunkData['items'].hasOwnProperty(weapon) && (validWearable = false);
+                baseChunkData['items'].hasOwnProperty(weapon) && !!chunkInfo['equipment'][weapon].requirements && Object.keys(chunkInfo['equipment'][weapon].requirements).forEach((skill) => {
+                    if (primarySkill[skill]) {
+                        tempValidWearable = true;
+                    } else {
+                        tempWeapons.splice(tempWeapons.indexOf(weapon), 1);
+                    }
+                });
+            });
+            if (!tempValidWearable) {
+                validWearable = false;
+            }
+            if (validWearable) {
+                let itemList = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
+                let slotMapping = {'head': true, 'body': true, 'legs': true, 'weapon': true};
+                let allValid = true;
+
+                let bestWeapon = null;
+                tempWeapons.forEach((weapon) => {
+                    if (!bestWeapon || ((Math.max(chunkInfo['equipment'][weapon].attack_crush, chunkInfo['equipment'][weapon].attack_slash, chunkInfo['equipment'][weapon].attack_stab) + chunkInfo['equipment'][weapon].melee_strength + 64) / chunkInfo['equipment'][weapon].attack_speed) > ((Math.max(chunkInfo['equipment'][bestWeapon].attack_crush, chunkInfo['equipment'][bestWeapon].attack_slash, chunkInfo['equipment'][bestWeapon].attack_stab) + chunkInfo['equipment'][bestWeapon].melee_strength + 64) / chunkInfo['equipment'][bestWeapon].attack_speed)) {
+                        bestWeapon = weapon;
+                    }
+                });
+                if (!!bestWeapon) {
+                    itemList.push(bestWeapon);
+                } else {
+                    allValid = false;
+                }
+
+                itemList.some(item => {
+                    let tempTempValid = false;
+                    if (Object.keys(baseChunkData['items'][item]).filter(source => !baseChunkData['items'][item][source].includes('-') || !processingSkill[baseChunkData['items'][item][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][item][source].split('-')[1] === 'Slayer').length > 0) {
+                        let article = vowels.includes(item.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                        article = (item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' || (item.toLowerCase().charAt(item.toLowerCase().length - 1) === ')' && item.toLowerCase().split('(')[0].trim().charAt(item.toLowerCase().split('(')[0].trim().length - 1) === 's')) ? ' ' : article;
+                        (!backlog['BiS'] || (!backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item.toLowerCase() + '|~') && !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item.toLowerCase().replaceAll('#', '/') + '|~'))) && (tempTempValid = true);
+                    }
+                    if (!tempTempValid) {
+                        allValid = false;
+                        return false;
+                    }
+                });
+                if (allValid) {
+                    let equipment_bonus_att = { 'crush': 0, 'slash': 0, 'stab': 0 };
+                    let equipment_bonus_str = 0;
+                    Object.keys(bestEquipment).filter(slot => !slotMapping[slot]).forEach((slot) => { equipment_bonus_att['crush'] += chunkInfo['equipment'][bestEquipment[slot]].attack_crush; equipment_bonus_att['slash'] += chunkInfo['equipment'][bestEquipment[slot]].attack_slash; equipment_bonus_att['stab'] += chunkInfo['equipment'][bestEquipment[slot]].attack_stab; equipment_bonus_str += chunkInfo['equipment'][bestEquipment[slot]].melee_strength });
+                    itemList.forEach((item) => { equipment_bonus_att['crush'] += chunkInfo['equipment'][item].attack_crush; equipment_bonus_att['slash'] += chunkInfo['equipment'][item].attack_slash; equipment_bonus_att['stab'] += chunkInfo['equipment'][item].attack_stab; equipment_bonus_str += chunkInfo['equipment'][item].melee_strength });
+                    let maxHit = Math.floor(Math.floor((0.5 + (112.75 * (equipment_bonus_str + 64) / 640))));
+                    let hitChance = 1 - (578 / (2 * (Math.floor(109.675 * (equipment_bonus_att['crush'] + 64)) + 1)));
+                    let newDps = hitChance * (maxHit / 2) / (chunkInfo['equipment'][bestWeapon].attack_speed * 0.6);
+                    if (newDps > bestDps) {
+                        bestDps = newDps;
+                        resultingAdditions = {};
+                        itemList.forEach((item) => {
+                            resultingAdditions[chunkInfo['equipment'][item].slot] = item;
+                        });
+                    }
+                }
+            }
         } else if (skill === 'Stab') {
             // Non-set DPS
             if (bestDps === -1) {
@@ -5233,6 +5433,80 @@ let calcBIS = function() {
                     itemList.forEach((item) => { equipment_bonus_att['stab'] += chunkInfo['equipment'][item].attack_stab; equipment_bonus_str += chunkInfo['equipment'][item].melee_strength });
                     let maxHit = Math.floor(Math.floor((0.5 + (110 * (equipment_bonus_str + 64) / 640))) * (slotMapping['neck'] ? 1.3 : 1.1));
                     let hitChance = 1 - (578 / (2 * ((Math.floor(107 * (equipment_bonus_att['stab'] + 64)) * (slotMapping['neck'] ? 1.3 : 1.1)) + 1)));
+                    let newDps = hitChance * (maxHit / 2) / (chunkInfo['equipment'][bestWeapon].attack_speed * 0.6);
+                    if (newDps > bestDps) {
+                        bestDps = newDps;
+                        resultingAdditions = {};
+                        itemList.forEach((item) => {
+                            resultingAdditions[chunkInfo['equipment'][item].slot] = item;
+                        });
+                    }
+                }
+            }
+            // Inquisitor
+            validWearable = true;
+            tempEquipment = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
+            tempWeapons = ["Inquisitor's mace"];
+            tempEquipment.some(equip => {
+                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                    validWearable = false;
+                    return true;
+                }
+                if (baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).filter(skill => !primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])).length > 0) {
+                    validWearable = false;
+                    return true;
+                }
+            });
+            tempValidWearable = false;
+            tempWeapons.forEach((weapon) => {
+                !baseChunkData['items'].hasOwnProperty(weapon) && (validWearable = false);
+                baseChunkData['items'].hasOwnProperty(weapon) && !!chunkInfo['equipment'][weapon].requirements && Object.keys(chunkInfo['equipment'][weapon].requirements).forEach((skill) => {
+                    if (primarySkill[skill]) {
+                        tempValidWearable = true;
+                    } else {
+                        tempWeapons.splice(tempWeapons.indexOf(weapon), 1);
+                    }
+                });
+            });
+            if (!tempValidWearable) {
+                validWearable = false;
+            }
+            if (validWearable) {
+                let itemList = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
+                let slotMapping = {'head': true, 'body': true, 'legs': true, 'weapon': true};
+                let allValid = true;
+
+                let bestWeapon = null;
+                tempWeapons.forEach((weapon) => {
+                    if (!bestWeapon || ((Math.max(chunkInfo['equipment'][weapon].attack_crush, chunkInfo['equipment'][weapon].attack_slash, chunkInfo['equipment'][weapon].attack_stab) + chunkInfo['equipment'][weapon].melee_strength + 64) / chunkInfo['equipment'][weapon].attack_speed) > ((Math.max(chunkInfo['equipment'][bestWeapon].attack_crush, chunkInfo['equipment'][bestWeapon].attack_slash, chunkInfo['equipment'][bestWeapon].attack_stab) + chunkInfo['equipment'][bestWeapon].melee_strength + 64) / chunkInfo['equipment'][bestWeapon].attack_speed)) {
+                        bestWeapon = weapon;
+                    }
+                });
+                if (!!bestWeapon) {
+                    itemList.push(bestWeapon);
+                } else {
+                    allValid = false;
+                }
+
+                itemList.some(item => {
+                    let tempTempValid = false;
+                    if (Object.keys(baseChunkData['items'][item]).filter(source => !baseChunkData['items'][item][source].includes('-') || !processingSkill[baseChunkData['items'][item][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][item][source].split('-')[1] === 'Slayer').length > 0) {
+                        let article = vowels.includes(item.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                        article = (item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' || (item.toLowerCase().charAt(item.toLowerCase().length - 1) === ')' && item.toLowerCase().split('(')[0].trim().charAt(item.toLowerCase().split('(')[0].trim().length - 1) === 's')) ? ' ' : article;
+                        (!backlog['BiS'] || (!backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item.toLowerCase() + '|~') && !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item.toLowerCase().replaceAll('#', '/') + '|~'))) && (tempTempValid = true);
+                    }
+                    if (!tempTempValid) {
+                        allValid = false;
+                        return false;
+                    }
+                });
+                if (allValid) {
+                    let equipment_bonus_att = { 'stab': 0 };
+                    let equipment_bonus_str = 0;
+                    Object.keys(bestEquipment).filter(slot => !slotMapping[slot]).forEach((slot) => { equipment_bonus_att['stab'] += chunkInfo['equipment'][bestEquipment[slot]].attack_stab; equipment_bonus_str += chunkInfo['equipment'][bestEquipment[slot]].melee_strength });
+                    itemList.forEach((item) => { equipment_bonus_att['stab'] += chunkInfo['equipment'][item].attack_stab; equipment_bonus_str += chunkInfo['equipment'][item].melee_strength });
+                    let maxHit = Math.floor(Math.floor((0.5 + (112.75 * (equipment_bonus_str + 64) / 640))));
+                    let hitChance = 1 - (578 / (2 * (Math.floor(109.675 * (equipment_bonus_att['stab'] + 64)) + 1)));
                     let newDps = hitChance * (maxHit / 2) / (chunkInfo['equipment'][bestWeapon].attack_speed * 0.6);
                     if (newDps > bestDps) {
                         bestDps = newDps;
@@ -5521,6 +5795,80 @@ let calcBIS = function() {
                     itemList.forEach((item) => { equipment_bonus_att['crush'] += chunkInfo['equipment'][item].attack_crush; equipment_bonus_str += chunkInfo['equipment'][item].melee_strength });
                     let maxHit = Math.floor(Math.floor((0.5 + (110 * (equipment_bonus_str + 64) / 640))) * (slotMapping['neck'] ? 1.3 : 1.1));
                     let hitChance = 1 - (578 / (2 * ((Math.floor(107 * (equipment_bonus_att['crush'] + 64)) * (slotMapping['neck'] ? 1.3 : 1.1)) + 1)));
+                    let newDps = hitChance * (maxHit / 2) / (chunkInfo['equipment'][bestWeapon].attack_speed * 0.6);
+                    if (newDps > bestDps) {
+                        bestDps = newDps;
+                        resultingAdditions = {};
+                        itemList.forEach((item) => {
+                            resultingAdditions[chunkInfo['equipment'][item].slot] = item;
+                        });
+                    }
+                }
+            }
+            // Inquisitor
+            validWearable = true;
+            tempEquipment = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
+            tempWeapons = ["Inquisitor's mace"];
+            tempEquipment.some(equip => {
+                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                    validWearable = false;
+                    return true;
+                }
+                if (baseChunkData['items'].hasOwnProperty(equip) && !!chunkInfo['equipment'][equip].requirements && Object.keys(chunkInfo['equipment'][equip].requirements).filter(skill => !primarySkill[skill] && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] < chunkInfo['equipment'][equip].requirements[skill])).length > 0) {
+                    validWearable = false;
+                    return true;
+                }
+            });
+            tempValidWearable = false;
+            tempWeapons.forEach((weapon) => {
+                !baseChunkData['items'].hasOwnProperty(weapon) && (validWearable = false);
+                baseChunkData['items'].hasOwnProperty(weapon) && !!chunkInfo['equipment'][weapon].requirements && Object.keys(chunkInfo['equipment'][weapon].requirements).forEach((skill) => {
+                    if (primarySkill[skill]) {
+                        tempValidWearable = true;
+                    } else {
+                        tempWeapons.splice(tempWeapons.indexOf(weapon), 1);
+                    }
+                });
+            });
+            if (!tempValidWearable) {
+                validWearable = false;
+            }
+            if (validWearable) {
+                let itemList = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
+                let slotMapping = {'head': true, 'body': true, 'legs': true, 'weapon': true};
+                let allValid = true;
+
+                let bestWeapon = null;
+                tempWeapons.forEach((weapon) => {
+                    if (!bestWeapon || ((Math.max(chunkInfo['equipment'][weapon].attack_crush, chunkInfo['equipment'][weapon].attack_slash, chunkInfo['equipment'][weapon].attack_stab) + chunkInfo['equipment'][weapon].melee_strength + 64) / chunkInfo['equipment'][weapon].attack_speed) > ((Math.max(chunkInfo['equipment'][bestWeapon].attack_crush, chunkInfo['equipment'][bestWeapon].attack_slash, chunkInfo['equipment'][bestWeapon].attack_stab) + chunkInfo['equipment'][bestWeapon].melee_strength + 64) / chunkInfo['equipment'][bestWeapon].attack_speed)) {
+                        bestWeapon = weapon;
+                    }
+                });
+                if (!!bestWeapon) {
+                    itemList.push(bestWeapon);
+                } else {
+                    allValid = false;
+                }
+
+                itemList.some(item => {
+                    let tempTempValid = false;
+                    if (Object.keys(baseChunkData['items'][item]).filter(source => !baseChunkData['items'][item][source].includes('-') || !processingSkill[baseChunkData['items'][item][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][item][source].split('-')[1] === 'Slayer').length > 0) {
+                        let article = vowels.includes(item.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+                        article = (item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' || (item.toLowerCase().charAt(item.toLowerCase().length - 1) === ')' && item.toLowerCase().split('(')[0].trim().charAt(item.toLowerCase().split('(')[0].trim().length - 1) === 's')) ? ' ' : article;
+                        (!backlog['BiS'] || (!backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item.toLowerCase() + '|~') && !backlog['BiS'].hasOwnProperty('Obtain' + article + '~|' + item.toLowerCase().replaceAll('#', '/') + '|~'))) && (tempTempValid = true);
+                    }
+                    if (!tempTempValid) {
+                        allValid = false;
+                        return false;
+                    }
+                });
+                if (allValid) {
+                    let equipment_bonus_att = { 'crush': 0 };
+                    let equipment_bonus_str = 0;
+                    Object.keys(bestEquipment).filter(slot => !slotMapping[slot]).forEach((slot) => { equipment_bonus_att['crush'] += chunkInfo['equipment'][bestEquipment[slot]].attack_crush; equipment_bonus_str += chunkInfo['equipment'][bestEquipment[slot]].melee_strength });
+                    itemList.forEach((item) => { equipment_bonus_att['crush'] += chunkInfo['equipment'][item].attack_crush; equipment_bonus_str += chunkInfo['equipment'][item].melee_strength });
+                    let maxHit = Math.floor(Math.floor((0.5 + (112.75 * (equipment_bonus_str + 64) / 640))));
+                    let hitChance = 1 - (578 / (2 * (Math.floor(109.675 * (equipment_bonus_att['crush'] + 64)) + 1)));
                     let newDps = hitChance * (maxHit / 2) / (chunkInfo['equipment'][bestWeapon].attack_speed * 0.6);
                     if (newDps > bestDps) {
                         bestDps = newDps;
@@ -6391,7 +6739,7 @@ let calcBIS = function() {
                         equipment_bonus_att['magic'] += chunkInfo['equipment'][item].attack_magic;
                         equipment_bonus_str += chunkInfo['equipment'][item].magic_damage;
                     });
-                    let maxHit = 2 * (1 + ((elite ? 2.5 : 0) + equipment_bonus_str));
+                    let maxHit = 2 * (1 + ((elite ? 5 : 0) + equipment_bonus_str));
                     let maxAttackRoll = Math.floor(155 * (equipment_bonus_att['magic'] + 64));
                     let hitChance = 1 - (578 / (2 * maxAttackRoll + 1));
                     let newDps = (hitChance * maxHit) / 3;
