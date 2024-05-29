@@ -2785,6 +2785,7 @@ input#searchPlayerMaps {
     width: 45%;
     height: 30%;
     border: solid black;
+    overflow-y: auto;
 }
 
 .modal .topbar {
@@ -4193,7 +4194,7 @@ input#searchChunkSections {
 }
 
 #myModal28 > .modal-content {
-    max-width: 400px;
+    max-width: 450px;
     height: 52%;
 }
 
@@ -4784,17 +4785,16 @@ input#searchChunkSections {
 }
 
 .passive-skill-data {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
+    height: 17%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 
 .passive-skill-data > div {
     float: right;
-    margin-right: 10px;
-    margin-bottom: 1vh;
+    margin-right: 15px;
     display: flex;
-    height: 15%;
 }
 
 #passive-skill-input-container {
