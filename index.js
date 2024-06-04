@@ -1329,7 +1329,7 @@ let expandChallengeStr = '';
 let detailsStack = [];
 let touchTime = 0;
 
-let currentVersion = '6.2.10';
+let currentVersion = '6.2.11';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1468,7 +1468,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.2.10";
+mapImg.src = "osrs_world_map.png?v=6.2.11";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3103,7 +3103,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.2.10");
+        myWorker = new Worker("./worker.js?v=6.2.11");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill]);
         workerOut = 1;
@@ -3382,8 +3382,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.2.10");
-let myWorker2 = new Worker("./worker.js?v=6.2.10");
+let myWorker = new Worker("./worker.js?v=6.2.11");
+let myWorker2 = new Worker("./worker.js?v=6.2.11");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -4846,18 +4846,7 @@ let changePin = function() {
                     myRef = firebase.database().ref('maps/' + mid);
                     if (!onTestServer && !testMode) {
                         firebase.auth().currentUser.updatePassword(pinNew + mid).then(() => {
-                            window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
-                            document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
-                            $('.lock-closed, .lock-opened').hide();
-                            locked = true;
-                            inEntry = true;
-                            atHome = false;
-                            $('.loading').show();
-                            $('#page8').hide();
-                            $('.background-img').hide();
-                            $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
-                            recentOn && !settings['taskSidebar'] && $('.menu7').show();
-                            setupMap();
+                            window.location.replace(window.location.href.split('?')[0] + '?' + mid);
                         }).catch((error) => { console.error(error) });
                     }
                 }).catch((error) => {
@@ -6085,7 +6074,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.2.10");
+    myWorker2 = new Worker("./worker.js?v=6.2.11");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill]);
     workerOut++;
@@ -9450,6 +9439,51 @@ let applyImportRules = function(proceed) {
     }
 }
 
+// Searches chunk rules
+let searchRules = function() {
+    let searchTemp = $('#searchRules').val().toLowerCase();
+    if (searchTemp.length !== 0) {
+        $('.intro-category, .presets-category, #rules-presets, .show-rule-details-btn, .intro-subcategory, .presets-subcategory, .rules-import-btn').hide();
+        $('.rules-main-header, .rule-key, .rule-minicategory, #rules-data > .accordion, .rules-names, .rules-content').hide();
+        $('.modal-content:not(.mobile) .rules-subdata.page2').css({'left': '10px', 'right': 'unset'});
+        $('.panel-search').empty().addClass('visible').show().scrollTop(0);
+        let filteredRules = Object.keys(ruleNames).filter((name) => name.toLowerCase().includes(searchTemp) || ruleNames[name].toLowerCase().includes(searchTemp));
+        let ruleObj;
+        Object.keys(ruleStructure).forEach((category) => {
+            !!ruleStructure[category] && Object.keys(ruleStructure[category]).forEach((rule) => {
+                if (rule !== 'Kill X Amount' && rule !== 'Rare Drop Amount' && rule !== 'Secondary Primary Amount') {
+                    if (rule === 'Kill X') {
+                        ruleObj = `<div class="rule ${rule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[rule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[rule].split('X-amount')[0]}<input type='number' class='x-num-input' min='1' value="${rules['Kill X Amount']}" onchange="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /> ${ruleNames[rule].split('X-amount')[1]}</span></label></div>`;
+                    } else if (rule === 'Rare Drop') {
+                        ruleObj = `<div class="rule ${rule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule'} noscroll"><span class='noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}'>` + ruleNames[rule].split('/X')[0] + ` / <input type='number' class='rare-num-input' min='0' value="${rules['Rare Drop Amount']}" onchange="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /> ` + ruleNames[rule].split('/X')[1] + '</span></div>';
+                    } else if (rule === 'Secondary Primary') {
+                        ruleObj = `<div class="rule ${rule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule'} noscroll"><span class='noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}'>` + ruleNames[rule].split('/X')[0] + ` / <input type='number' class='secondary-primary-input' min='0' value="${rules['Secondary Primary Amount']}" onchange="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''} /> ` + ruleNames[rule].split('/X')[1] + '</span></div>';
+                    } else {
+                        ruleObj = `<div class="rule ${rule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[rule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][rule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[rule]}</span></label></div>`;
+                    }
+                    if (filteredRules.includes(rule) || (Array.isArray(ruleStructure[category][rule]) && ruleStructure[category][rule].filter((subRule) => filteredRules.includes(subRule)).length > 0)) {
+                        $(`.panel-search`).append(ruleObj);
+                    } else {
+                        $(`.panel-search`).append($(ruleObj).addClass('hidden-rule'));
+                    }
+                    Array.isArray(ruleStructure[category][rule]) && ruleStructure[category][rule].forEach((subRule) => {
+                        if (filteredRules.includes(subRule)) {
+                            $('.' + rule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule').append(`<div class="rule ${subRule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule subrule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][subRule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[subRule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][subRule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[subRule]}</span></label></div>`);
+                        } else {
+                            $('.' + rule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule').append(`<div class="rule hidden-rule ${subRule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule subrule'} noscroll"><label class="checkbox noscroll ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][subRule] === false) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${rules[subRule] ? "checked" : ''} class='noscroll' onclick="checkOffRules()" ${!testMode && (viewOnly || inEntry || locked || ruleStructure[category][subRule] === false) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${ruleNames[subRule]}</span></label></div>`);
+                        }
+                    });
+                }
+            });
+        });
+        $('.hidden-rule').hide();
+    } else {
+        $('.modal-content:not(.mobile) .rules-subdata.page2').css({'right': '0px', 'left': 'unset'});
+        $('.panel-search').removeClass('visible').hide();
+        showRules(true);
+    }
+}
+
 // Shows chunk rules
 let showRules = function(isPage2) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
@@ -9475,6 +9509,10 @@ let showRules = function(isPage2) {
         }
         onMobile && $('#rules-subdata').append(`<div class="rule-category rules-main-header noscroll">Rules</div>`);
         $('#rules-subdata').append(`<div class="rule-key noscroll"><b class='noscroll'><u class='noscroll'>KEY</u></b><br /><span class='rule-asterisk noscroll'>*</span> - Xtreme/Supreme Rule<br /><span class='rule-asterisk noscroll'>†</span> - Supreme Rule</div>`);
+        !onMobile && $('#rules-subdata').append(`<div class="rule-search noscroll"><input type="text" placeholder="Search rules..." id="searchRules" class="noscrollhard" oninput="searchRules()" autocomplete="off" /></div>`);
+        $('#searchRules').val('').focus();
+        $('.modal-content:not(.mobile) .rules-subdata.page2').css({'right': '0px', 'left': 'unset'});
+        $('.panel-search').removeClass('visible').hide();
         if (onMobile) {
             Object.keys(ruleStructure).forEach((category) => {
                 !!ruleStructure[category] && Object.keys(ruleStructure[category]).forEach((rule) => {
@@ -9516,13 +9554,13 @@ let showRules = function(isPage2) {
         }
         if (isPage2) {
             $('.intro-category, .presets-category, #rules-presets, .show-rule-details-btn, .intro-subcategory, .presets-subcategory, .rules-import-btn').hide();
-            $('.rules-main-header, .rule-key, .rule-minicategory, #rules-data > .accordion, .rules-names, .rules-content').show();
+            $('.rules-main-header, .rule-key, .rule-search, .rule-minicategory, #rules-data > .accordion, .rules-names, .rules-content').show();
             !onMobile && $('#rules-data > .accordion, #rules-data > .panel').hide();
             onMobile && $('.rules-names, .rules-content').hide();
             $('.rules-subdata').addClass('page2');
         } else {
             $('.intro-category, .presets-category, #rules-presets, .show-rule-details-btn, .intro-subcategory, .presets-subcategory, .rules-import-btn').show();
-            $('.rules-main-header, .rule-key, .rule-minicategory, #rules-data > .accordion, .rules-names, .rules-content').hide();
+            $('.rules-main-header, .rule-key, .rule-search, .rule-minicategory, #rules-data > .accordion, .rules-names, .rules-content').hide();
             !onMobile && $('#rules-data > .accordion, #rules-data > .panel').hide();
             onMobile && $('.rules-names, .rules-content').hide();
             $('.rules-subdata').removeClass('page2');
@@ -9981,6 +10019,7 @@ let checkOffChallenge = function(skill, line) {
 // Marks checked off rules
 let checkOffRules = function(didRedo, startup) {
     let extraFilter = !onMobile ? '.rules-content ' : '';
+    $('.panel-search').hasClass('visible') && (extraFilter = '.panel-search ');
     let redo = false;
     Object.keys(rules).forEach((rule) => {
         if (subRuleDefault[rule] && rules[rule] !== $('.' + rule.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule input').prop('checked')) {

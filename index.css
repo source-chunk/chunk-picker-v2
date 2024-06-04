@@ -3619,11 +3619,15 @@ input#searchPlayerMaps {
 
 .show-rule-back-btn > span {
     cursor: pointer;
-    font-size: 18px;
+    font-size: min(1.5vw, 2.5vh, 20px);
     color: var(--colorLink);
     text-decoration: underline;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+}
+
+.mobile .show-rule-back-btn > span {
+    font-size: min(4.5vw, 2.5vh, 20px);
 }
 
 .show-rule-back-btn > span:hover {
@@ -7231,6 +7235,18 @@ input#searchMonsters {
     margin: 10px;
     background-color: var(--color2);
     display: inline-block;
+}
+
+#searchRules {
+    font-size: min(1.5vw, 2.5vh, 20px);
+}
+
+.panel-search {
+    margin-top: 8.5vh;
+    height: 40vh;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
 .hover-copy {
