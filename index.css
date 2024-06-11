@@ -2902,6 +2902,9 @@ input#searchPlayerMaps {
     width: 45%;
     background-color: var(--color1);
     color: var(--colorText);
+}
+
+#myModal18 > .modal-content:not(.mobile) {
     min-width: 650px;
 }
 
