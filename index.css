@@ -2902,6 +2902,7 @@ input#searchPlayerMaps {
     width: 45%;
     background-color: var(--color1);
     color: var(--colorText);
+    min-width: 650px;
 }
 
 #myModal26:not(.mobile) {
@@ -4151,6 +4152,14 @@ input#searchChunkSections {
 .history-item .item1 {
     border-right: solid 1px var(--color8);
     text-align: center;
+}
+
+.creation-date {
+    border: dashed 2px;
+    text-align: center;
+    font-size: 20px;
+    padding: 25px 0px;
+    margin: 2%;
 }
 
 .canvas-graph-outer {
