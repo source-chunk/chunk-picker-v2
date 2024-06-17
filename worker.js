@@ -1435,6 +1435,26 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
+        rules["Highest Level"] && Object.keys(tempItemSkill).forEach((skill) => {
+            Object.keys(tempItemSkill[skill]).filter((item) => { return !!baseChunkData['items'][item] }).forEach((item) => {
+                tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] && !chunkInfo['challenges'][skill][name].hasOwnProperty('NoXp') && !chunkInfo['challenges'][skill][name].hasOwnProperty('AllowMulti') }).forEach((name) => {
+                    let challenge = chunkInfo['challenges'][skill][name];
+                    if (challenge.hasOwnProperty('Tasks')) {
+                        Object.keys(challenge['Tasks']).some(subTask => {
+                            if (!newValids.hasOwnProperty(challenge['Tasks'][subTask]) || !newValids[challenge['Tasks'][subTask]].hasOwnProperty(subTask)) {
+                                !!newValids[skill] && delete newValids[skill][name];
+                                !!valids[skill] && delete valids[skill][name];
+                                !!tempItemSkill[skill][item] && tempItemSkill[skill][item].splice(tempItemSkill[skill][item].indexOf(name), 1);
+                                if (!!tempItemSkill[skill][item] && tempItemSkill[skill][item].length === 0) {
+                                    delete tempItemSkill[skill][item];
+                                }
+                                return true;
+                            }
+                        });
+                    }
+                });
+            });
+        });
         !rules["Highest Level"] && Object.keys(tempItemSkill).forEach((skill) => {
             Object.keys(tempItemSkill[skill]).filter((item) => { return !!baseChunkData['items'][item] }).forEach((item) => {
                 let lowestItem;
@@ -1444,8 +1464,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                     taskIsRemoved = false;
                     let challenge = chunkInfo['challenges'][skill][name];
                     if (challenge.hasOwnProperty('Tasks')) {
-                        chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).some(subTask => {
-                            if (!newValids.hasOwnProperty(chunkInfo['challenges'][skill][name]['Tasks'][subTask]) || !newValids[chunkInfo['challenges'][skill][name]['Tasks'][subTask]].hasOwnProperty(subTask)) {
+                        Object.keys(challenge['Tasks']).some(subTask => {
+                            if (!newValids.hasOwnProperty(challenge['Tasks'][subTask]) || !newValids[challenge['Tasks'][subTask]].hasOwnProperty(subTask)) {
                                 !!newValids[skill] && delete newValids[skill][name];
                                 !!valids[skill] && delete valids[skill][name];
                                 !!tempItemSkill[skill][item] && tempItemSkill[skill][item].splice(tempItemSkill[skill][item].indexOf(name), 1);
@@ -2657,7 +2677,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
         !!oldTempItemSkill[skill] && Object.keys(oldTempItemSkill[skill]).forEach((item) => {
             !!oldTempItemSkill[skill][item] && oldTempItemSkill[skill][item].filter(task => !!chunkInfo['challenges'][skill][task] && chunkInfo['challenges'][skill][task].hasOwnProperty('Output') && (!items.hasOwnProperty(chunkInfo['challenges'][skill][task]['Output']) || !items[chunkInfo['challenges'][skill][task]['Output']].hasOwnProperty(task))).forEach((task) => {
                 if (!items[chunkInfo['challenges'][skill][task]['Output']]) {
-                    items[chunkInfo['challenges'][skill][task]['Output']] = {}
+                    items[chunkInfo['challenges'][skill][task]['Output']] = {};
                 }
                 items[chunkInfo['challenges'][skill][task]['Output']][task] = 'multi-' + skill;
                 if (!multiTasks[chunkInfo['challenges'][skill][task]['Output']]) {
