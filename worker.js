@@ -3704,14 +3704,12 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 }
                 if (items[item][source].includes('-Thieving') && chunkInfo['challenges']['Thieving'].hasOwnProperty(source) && chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Output')) {
                     let monster = chunkInfo['challenges']['Thieving'][source]['Output'];
-                    realSource = chunkInfo['challenges']['Thieving'][source]['Output'];
-                    !!chunkInfo['skillItems']['Thieving'][monster] && Object.keys(chunkInfo['skillItems']['Thieving'][monster]).forEach((drop) => {
-                        !!chunkInfo['skillItems']['Thieving'][monster][drop] && Object.keys(chunkInfo['skillItems']['Thieving'][monster][drop]).filter(quantityDrop => (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))).forEach((quantityDrop) => {
-                            if (!dropRatesGlobal['[Thieving] ' + monster]) {
-                                dropRatesGlobal['[Thieving] ' + monster] = {};
-                            }
-                            dropRatesGlobal['[Thieving] ' + monster][drop] = (chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1].replaceAll('~', '')));
-                        });
+                    realSource = '[Thieving] ' + monster;
+                    !!chunkInfo['skillItems']['Thieving'][monster][item] && Object.keys(chunkInfo['skillItems']['Thieving'][monster][item]).filter(quantityDrop => (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Thieving'][monster][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][item][quantityDrop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Thieving'][monster][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][item][quantityDrop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))).forEach((quantityDrop) => {
+                        if (!dropRatesGlobal['[Thieving] ' + monster]) {
+                            dropRatesGlobal['[Thieving] ' + monster] = {};
+                        }
+                        dropRatesGlobal['[Thieving] ' + monster][item] = (chunkInfo['skillItems']['Thieving'][monster][item][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Thieving'][monster][item][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Thieving'][monster][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][item][quantityDrop].split('/')[1].replaceAll('~', '')));
                     });
                 }
                 if (!drops[item] && !!dropRatesGlobal[realSource] && !!dropRatesGlobal[realSource][item] && !dropTables.hasOwnProperty(item) && !item.includes('^')) {
