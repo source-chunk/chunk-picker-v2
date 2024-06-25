@@ -5342,6 +5342,14 @@ input#searchChunks {
     padding: 10px;
 }
 
+.show-completed-btn {
+    font-size: 18px;
+}
+
+.show-completed-btn > input {
+    margin-right: 5px;
+}
+
 .highest2-title {
     font-size: 1.2vw;
     display: inline-flex;
