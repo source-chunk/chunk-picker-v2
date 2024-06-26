@@ -699,7 +699,13 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if (!baseChunkData['items'].hasOwnProperty(item)) {
                     baseChunkData['items'][item] = {};
                 }
-                baseChunkData['items'][item][monster.split('-npc')[0]] = 'secondary-drop';
+                !!chunkInfo['drops'][monster.split('-npc')[0]][item] && chunkInfo['drops'][monster.split('-npc')[0]][item].forEach((quantity) => {
+                    if (chunkInfo['drops'][monster.split('-npc')[0]][item][quantity] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/').length <= 1 && (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])) < 1) || (!(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/').length <= 1) && (parseFloat(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/')[1].replaceAll('~', '')) >= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])))))) {
+                        baseChunkData['items'][item][monster.split('-npc')[0]] = 'primary-drop';
+                    } else {
+                        baseChunkData['items'][item][monster.split('-npc')[0]] = 'secondary-drop';
+                    }
+                });
                 if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
                     dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
                     delete dropRatesGlobal[monster][item + asterisk];
@@ -709,11 +715,17 @@ let calcChallenges = function(chunks, baseChunkData) {
                     delete dropTablesGlobal[monster][item + asterisk];
                 }
             } else if (monster !== '' && baseChunkData['monsters'].hasOwnProperty(monster)) {
-                if ((chunkInfo['drops'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))) || (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) {
+                if ((chunkInfo['drops'].hasOwnProperty(monster) && chunkInfo['drops'][monster].hasOwnProperty(item) && ((parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][Object.keys(chunkInfo['drops'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))) || (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster) && ((parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Slayer'][monster][item][Object.keys(chunkInfo['skillItems']['Slayer'][monster][item])[0]].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) {
                     if (!baseChunkData['items'].hasOwnProperty(item)) {
                         baseChunkData['items'][item] = {};
                     }
-                    baseChunkData['items'][item][monster] = 'secondary-drop';
+                    !!chunkInfo['drops'][monster][item] && Object.keys(chunkInfo['drops'][monster][item]).forEach((quantity) => {
+                        if (chunkInfo['drops'][monster][item][quantity] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['drops'][monster][item][quantity].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['drops'][monster][item][quantity].split('/').length <= 1 && (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])) < 1) || (!(chunkInfo['drops'][monster][item][quantity].split('/').length <= 1) && (parseFloat(chunkInfo['drops'][monster][item][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][quantity].split('/')[1].replaceAll('~', '')) >= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])))))) {
+                            baseChunkData['items'][item][monster] = 'primary-drop';
+                        } else {
+                            baseChunkData['items'][item][monster] = 'secondary-drop';
+                        }
+                    });
                     if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
                         dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
                         delete dropRatesGlobal[monster][item + asterisk];
@@ -1911,7 +1923,13 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['items'].hasOwnProperty(item)) {
                         baseChunkData['items'][item] = {};
                     }
-                    baseChunkData['items'][item][monster.split('-npc')[0]] = 'secondary-drop';
+                    !!chunkInfo['drops'][monster.split('-npc')[0]][item] && chunkInfo['drops'][monster.split('-npc')[0]][item].forEach((quantity) => {
+                        if (chunkInfo['drops'][monster.split('-npc')[0]][item][quantity] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/').length <= 1 && (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])) < 1) || (!(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/').length <= 1) && (parseFloat(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/')[1].replaceAll('~', '')) >= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])))))) {
+                            baseChunkData['items'][item][monster.split('-npc')[0]] = 'primary-drop';
+                        } else {
+                            baseChunkData['items'][item][monster.split('-npc')[0]] = 'secondary-drop';
+                        }
+                    });
                     if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
                         dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
                         delete dropRatesGlobal[monster][item + asterisk];
@@ -1925,7 +1943,13 @@ let calcChallenges = function(chunks, baseChunkData) {
                         if (!baseChunkData['items'].hasOwnProperty(item)) {
                             baseChunkData['items'][item] = {};
                         }
-                        baseChunkData['items'][item][monster] = 'secondary-drop';
+                        !!chunkInfo['drops'][monster][item] && Object.keys(chunkInfo['drops'][monster][item]).forEach((quantity) => {
+                            if (chunkInfo['drops'][monster][item][quantity] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['drops'][monster][item][quantity].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['drops'][monster][item][quantity].split('/').length <= 1 && (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])) < 1) || (!(chunkInfo['drops'][monster][item][quantity].split('/').length <= 1) && (parseFloat(chunkInfo['drops'][monster][item][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][quantity].split('/')[1].replaceAll('~', '')) >= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])))))) {
+                                baseChunkData['items'][item][monster] = 'primary-drop';
+                            } else {
+                                baseChunkData['items'][item][monster] = 'secondary-drop';
+                            }
+                        });
                         if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
                             dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
                             delete dropRatesGlobal[monster][item + asterisk];
@@ -2353,7 +2377,13 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['items'].hasOwnProperty(item)) {
                         baseChunkData['items'][item] = {};
                     }
-                    baseChunkData['items'][item][monster.split('-npc')[0]] = 'secondary-drop';
+                    !!chunkInfo['drops'][monster.split('-npc')[0]][item] && chunkInfo['drops'][monster.split('-npc')[0]][item].forEach((quantity) => {
+                        if (chunkInfo['drops'][monster.split('-npc')[0]][item][quantity] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/').length <= 1 && (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])) < 1) || (!(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/').length <= 1) && (parseFloat(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster.split('-npc')[0]][item][quantity].split('/')[1].replaceAll('~', '')) >= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])))))) {
+                            baseChunkData['items'][item][monster.split('-npc')[0]] = 'primary-drop';
+                        } else {
+                            baseChunkData['items'][item][monster.split('-npc')[0]] = 'secondary-drop';
+                        }
+                    });
                     if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
                         dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
                         delete dropRatesGlobal[monster][item + asterisk];
@@ -2367,7 +2397,13 @@ let calcChallenges = function(chunks, baseChunkData) {
                         if (!baseChunkData['items'].hasOwnProperty(item)) {
                             baseChunkData['items'][item] = {};
                         }
-                        baseChunkData['items'][item][monster] = 'secondary-drop';
+                        !!chunkInfo['drops'][monster][item] && Object.keys(chunkInfo['drops'][monster][item]).forEach((quantity) => {
+                            if (chunkInfo['drops'][monster][item][quantity] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['drops'][monster][item][quantity].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['drops'][monster][item][quantity].split('/').length <= 1 && (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])) < 1) || (!(chunkInfo['drops'][monster][item][quantity].split('/').length <= 1) && (parseFloat(chunkInfo['drops'][monster][item][quantity].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['drops'][monster][item][quantity].split('/')[1].replaceAll('~', '')) >= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])))))) {
+                                baseChunkData['items'][item][monster] = 'primary-drop';
+                            } else {
+                                baseChunkData['items'][item][monster] = 'secondary-drop';
+                            }
+                        });
                         if (!!dropRatesGlobal[monster] && !!dropRatesGlobal[monster][item + asterisk]) {
                             dropRatesGlobal[monster][item] = JSON.parse(JSON.stringify(dropRatesGlobal[monster][item + asterisk]));
                             delete dropRatesGlobal[monster][item + asterisk];
