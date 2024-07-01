@@ -7064,8 +7064,10 @@ let calcCurrentChallenges2 = function() {
                                 }
                             }
                         });
-                        highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
-                        highestOverall[skill] = name + `{${(bestBoost + (ownsCrystalSaw ? 3 : 0))}}`;
+                        if (chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) > highestChallengeLevelArr[skill]) {
+                            highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
+                            highestOverall[skill] = name + `{${(bestBoost + (ownsCrystalSaw ? 3 : 0))}}`;
+                        }
                     } else {
                         highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'];
                         highestOverall[skill] = name;
