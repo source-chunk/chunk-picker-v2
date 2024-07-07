@@ -332,6 +332,7 @@ let rules = {
     "Construction Milestone": false,
     "Construction Minigame": false,
     "Boss": false,
+    "Boss Level": false,
     "Slayer Equipment": false,
     "Normal Farming": false,
     "Raking": false,
@@ -426,7 +427,8 @@ let ruleNames = {
     "InsidePOH Primary": "Crafting furniture inside a POH counts as a primary training method for Construction",
     "Construction Milestone": "Miscellaneous Construction milestones (e.g. House style, servants, etc) can count for chunk tasks",
     "Construction Minigame": "Xp from minigames/bosses (Fishing Trawler, Tempoross) can count as a primary way to train Construction",
-    "Boss": "Killing a boss can be used for a chunk task (item on droptable, Slayer level to kill, etc.)",
+    "Boss": "Killing a boss can be used for a chunk task (item on droptable, activity within boss fight, etc.)",
+    "Boss Level": "Must get the Slayer level to kill Slayer Bosses (Cerberus, Abyssal Sire, etc.)",
     "Slayer Equipment": "Using Slayer equipment can count for chunk tasks",
     "Normal Farming": "Allow normal farming to count as a primary method for training Farming",
     "Raking": "Allow raking patches to count as a primary method for training Farming <span class='rule-asterisk noscroll'>*</span>",
@@ -517,6 +519,7 @@ let rulePresets = {
         "Construction Milestone": true,
         "Construction Minigame": true,
         "Boss": true,
+        "Boss Level": true,
         "Show Skill Tasks": true,
         "Show Quest Tasks": true,
         "Show Diary Tasks": true,
@@ -546,6 +549,7 @@ let rulePresets = {
         "Construction Milestone": true,
         "Construction Minigame": true,
         "Boss": true,
+        "Boss Level": true,
         "Slayer Equipment": true,
         "Normal Farming": true,
         "Raking": true,
@@ -608,6 +612,7 @@ let rulePresets = {
         "Construction Milestone": true,
         "Construction Minigame": true,
         "Boss": true,
+        "Boss Level": true,
         "Slayer Equipment": true,
         "Normal Farming": true,
         "Raking": true,
@@ -740,7 +745,8 @@ let ruleStructure = {
         "Pouch": true
     },
     "Slayer": {
-        "Slayer Equipment": true
+        "Slayer Equipment": true,
+        "Boss Level": true
     },
     "Smithing": {
         "Smithing by Smelting": true,
@@ -1337,7 +1343,7 @@ let detailsStack = [];
 let touchTime = 0;
 let pluginOutput = null;
 
-let currentVersion = '6.2.28';
+let currentVersion = '6.2.28.1';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1477,7 +1483,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.2.28";
+mapImg.src = "osrs_world_map.png?v=6.2.28.1";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3112,7 +3118,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.2.28");
+        myWorker = new Worker("./worker.js?v=6.2.28.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill]);
         workerOut = 1;
@@ -3395,8 +3401,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.2.28");
-let myWorker2 = new Worker("./worker.js?v=6.2.28");
+let myWorker = new Worker("./worker.js?v=6.2.28.1");
+let myWorker2 = new Worker("./worker.js?v=6.2.28.1");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -6151,7 +6157,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.2.28");
+    myWorker2 = new Worker("./worker.js?v=6.2.28.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill]);
     workerOut++;
@@ -10672,6 +10678,10 @@ let loadData = function(startup) {
 
             if (!rulesTemp.hasOwnProperty('Additional Money Unlockables')) {
                 rulesTemp['Additional Money Unlockables'] = rulesTemp.hasOwnProperty('Money Unlockables') ? rulesTemp['Money Unlockables'] : false;
+            }
+
+            if (!rulesTemp.hasOwnProperty('Boss Level')) {
+                rulesTemp['Boss Level'] = rulesTemp.hasOwnProperty('Boss') ? rulesTemp['Boss'] : false;
             }
 
             !!rulesTemp && Object.keys(rulesTemp).forEach((rule) => {
