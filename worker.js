@@ -468,7 +468,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                         } else {
                             if (!!baseChunkData['items'][drop]) {
                                 if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
-                                    let re = new RegExp(`/Slay .*\~|${monster}|\~/`,"gm");
+                                    let re = new RegExp(`/Slay .*\~|${monster}|\~.*/`,"gm");
                                     let slayerTaskName = (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).find(value => re.test(value))) || (!!newValids['Slayer'] && Object.keys(newValids['Slayer']).find(value => re.test(value))) || "";
                                     delete baseChunkData['items'][drop][slayerTaskName];
                                     if (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(slayerTaskName)) {
@@ -1699,7 +1699,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                             } else {
                                 if (!!baseChunkData['items'][drop]) {
                                     if (chunkInfo['skillItems']['Slayer'].hasOwnProperty(monster)) {
-                                        let re = new RegExp(`/Slay .*\~|${monster}|\~/`,"gm");
+                                        let re = new RegExp(`/Slay .*\~|${monster}|\~.*/`,"gm");
                                         let slayerTaskName = (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).find(value => re.test(value))) || (!!newValids['Slayer'] && Object.keys(newValids['Slayer']).find(value => re.test(value))) || "";
                                         delete baseChunkData['items'][drop][slayerTaskName];
                                         if (newValids.hasOwnProperty('Slayer') && newValids['Slayer'].hasOwnProperty(slayerTaskName)) {
