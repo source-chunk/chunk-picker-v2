@@ -1342,7 +1342,7 @@ let detailsStack = [];
 let touchTime = 0;
 let pluginOutput = null;
 
-let currentVersion = '6.2.29.3';
+let currentVersion = '6.2.30';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1483,7 +1483,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.2.29.3";
+mapImg.src = "osrs_world_map.png?v=6.2.30";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3118,7 +3118,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.2.29.3");
+        myWorker = new Worker("./worker.js?v=6.2.30");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill]);
         workerOut = 1;
@@ -3401,8 +3401,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.2.29.3");
-let myWorker2 = new Worker("./worker.js?v=6.2.29.3");
+let myWorker = new Worker("./worker.js?v=6.2.30");
+let myWorker2 = new Worker("./worker.js?v=6.2.30");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -6157,7 +6157,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.2.29.3");
+    myWorker2 = new Worker("./worker.js?v=6.2.30");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill]);
     workerOut++;
@@ -7541,12 +7541,14 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
         let formattedSource = '';
         let alreadyPushed = false;
         if (typeof baseChunkData[category][name][source] === "boolean" || !skills.includes(baseChunkData[category][name][source].split('-')[1])) {
-            if (chunkInfo['chunks'].hasOwnProperty(source)) {
-                let realName = source;
-                if (!!chunkInfo['chunks'][source]['Name']) {
-                    realName = chunkInfo['chunks'][source]['Name'];
-                } else if (!!chunkInfo['chunks'][source]['Nickname']) {
-                    realName = chunkInfo['chunks'][source]['Nickname'] + '(' + source + ')';
+            if (chunkInfo['chunks'].hasOwnProperty(source.split('-')[0])) {
+                let realName = source.match(/[0-9]+/g) ? source.match(/[0-9]+/g)[0] : source;
+                if (source.match(/[0-9]+-[0-9]+/g)) {
+                    realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname'] + '(' + source.match(/[0-9]+/g)[0] + ' - Section ' + source.split('-')[1] + ')';
+                } else if (source.match(/[0-9]+/g) && !!chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Name']) {
+                    realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Name'];
+                } else if (source.match(/[0-9]+/g) && !!chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname']) {
+                    realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname'] + '(' + source.match(/[0-9]+/g)[0] + ')';
                 }
                 formattedSource += realName.replaceAll(/~\|/g, '').replaceAll(/\|~/g, '').replaceAll(/\*/g, '');
             } else {
@@ -9128,12 +9130,14 @@ let showDetails = function(challenge, skill, dataType, isNested) {
                             !!baseChunkDataIn[type][element] && Object.keys(baseChunkDataIn[type][element]).forEach((source) => {
                                 if ((chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && chunkInfo['codeItems']['boostItems'][skill].hasOwnProperty(element)) || ((!chunkInfo['challenges'][skill][challenge].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge]['NonShop'] || baseChunkDataIn[type][element][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][element][source] !== 'string' || !processingSkill[baseChunkDataIn[type][element][source].split('-')[1]])))) {
                                     if (typeof baseChunkDataIn[type][element][source] === "boolean" || !skills.includes(baseChunkDataIn[type][element][source].split('-')[1])) {
-                                        if (chunkInfo['chunks'].hasOwnProperty(source)) {
-                                            let realName = source;
-                                            if (!!chunkInfo['chunks'][source]['Name']) {
-                                                realName = chunkInfo['chunks'][source]['Name'];
-                                            } else if (!!chunkInfo['chunks'][source]['Nickname']) {
-                                                realName = chunkInfo['chunks'][source]['Nickname'] + '(' + source + ')';
+                                        if (chunkInfo['chunks'].hasOwnProperty(source.split('-')[0])) {
+                                            let realName = source.match(/[0-9]+/g) ? source.match(/[0-9]+/g)[0] : source;
+                                            if (source.match(/[0-9]+-[0-9]+/g)) {
+                                                realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname'] + '(' + source.match(/[0-9]+/g)[0] + ' - Section ' + source.split('-')[1] + ')';
+                                            } else if (source.match(/[0-9]+/g) && !!chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Name']) {
+                                                realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Name'];
+                                            } else if (source.match(/[0-9]+/g) && !!chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname']) {
+                                                realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname'] + '(' + source.match(/[0-9]+/g)[0] + ')';
                                             }
                                             formattedSource += `<span class='noscroll ${typeof baseChunkDataIn[type][element][source] !== "boolean" && (baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop')) ? 'green' : ''}'>${realName.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</span>`;
                                         } else {
@@ -9173,12 +9177,14 @@ let showDetails = function(challenge, skill, dataType, isNested) {
                         !!baseChunkDataIn[type][el] && Object.keys(baseChunkDataIn[type][el]).forEach((source) => {
                             if ((chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && chunkInfo['codeItems']['boostItems'][skill].hasOwnProperty(el)) || ((!chunkInfo['challenges'][skill][challenge].hasOwnProperty('NonShop') || !chunkInfo['challenges'][skill][challenge]['NonShop'] || baseChunkDataIn[type][el][source] !== 'shop') && (rules['Wield Crafted Items'] || ![...combatSkills, 'BiS', 'Extra'].includes(skill) || chunkInfo['challenges'][skill][challenge]['Label'] === 'Fill Stashes' || (typeof baseChunkDataIn[type][el][source] !== 'string' || !processingSkill[baseChunkDataIn[type][el][source].split('-')[1]])))) {
                                 if (typeof baseChunkDataIn[type][el][source] === "boolean" || !skills.includes(baseChunkDataIn[type][el][source].split('-')[1])) {
-                                    if (chunkInfo['chunks'].hasOwnProperty(source)) {
-                                        let realName = source;
-                                        if (!!chunkInfo['chunks'][source]['Name']) {
-                                            realName = chunkInfo['chunks'][source]['Name'];
-                                        } else if (!!chunkInfo['chunks'][source]['Nickname']) {
-                                            realName = chunkInfo['chunks'][source]['Nickname'] + '(' + source + ')';
+                                    if (chunkInfo['chunks'].hasOwnProperty(source.split('-')[0])) {
+                                        let realName = source.match(/[0-9]+/g) ? source.match(/[0-9]+/g)[0] : source;
+                                        if (source.match(/[0-9]+-[0-9]+/g)) {
+                                            realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname'] + '(' + source.match(/[0-9]+/g)[0] + ' - Section ' + source.split('-')[1] + ')';
+                                        } else if (source.match(/[0-9]+/g) && !!chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Name']) {
+                                            realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Name'];
+                                        } else if (source.match(/[0-9]+/g) && !!chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname']) {
+                                            realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname'] + '(' + source.match(/[0-9]+/g)[0] + ')';
                                         }
                                         formattedSource += `<span class='noscroll ${typeof baseChunkDataIn[type][el][source] !== "boolean" && (baseChunkDataIn[type][el][source].includes('primary-') || baseChunkDataIn[type][el][source].includes('shop')) ? 'green' : ''}'>${realName.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</span>`;
                                     } else {

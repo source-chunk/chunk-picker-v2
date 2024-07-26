@@ -422,8 +422,8 @@ let calcChallenges = function(chunks, baseChunkData) {
             if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                 tempValid = false;
             }
-            if (!tempValid && baseChunkData['items'].hasOwnProperty(item) && baseChunkData['items'][item].hasOwnProperty(chunk.split('-')[0])) {
-                !!baseChunkData['items'][item] && delete baseChunkData['items'][item][chunk.split('-')[0]];
+            if (!tempValid && baseChunkData['items'].hasOwnProperty(item) && baseChunkData['items'][item].hasOwnProperty(chunk)) {
+                !!baseChunkData['items'][item] && delete baseChunkData['items'][item][chunk];
                 if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
                     delete baseChunkData['items'][item];
                 }
@@ -431,7 +431,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if (!baseChunkData['items'][item]) {
                     baseChunkData['items'][item] = {};
                 }
-                baseChunkData['items'][item][chunk.split('-')[0]] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
+                baseChunkData['items'][item][chunk] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
             }
         });
     });
@@ -441,8 +441,8 @@ let calcChallenges = function(chunks, baseChunkData) {
             if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                 tempValid = false;
             }
-            if (!tempValid && baseChunkData['monsters'].hasOwnProperty(monster) && baseChunkData['monsters'][monster].hasOwnProperty(chunk.split('-')[0])) {
-                !!baseChunkData['monsters'][monster] && delete baseChunkData['monsters'][monster][chunk.split('-')[0]];
+            if (!tempValid && baseChunkData['monsters'].hasOwnProperty(monster) && baseChunkData['monsters'][monster].hasOwnProperty(chunk)) {
+                !!baseChunkData['monsters'][monster] && delete baseChunkData['monsters'][monster][chunk];
                 if (!!baseChunkData['monsters'][monster] && Object.keys(baseChunkData['monsters'][monster]).length === 0) {
                     delete baseChunkData['monsters'][monster];
                     let dropsObj = chunkInfo['drops'][monster];
@@ -496,7 +496,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if (!baseChunkData['monsters'].hasOwnProperty(monster)) {
                     baseChunkData['monsters'][monster] = {};
                 }
-                baseChunkData['monsters'][monster][chunk.split('-')[0]] = true;
+                baseChunkData['monsters'][monster][chunk] = true;
                 !!chunkInfo['drops'][monster] && Object.keys(chunkInfo['drops'][monster]).forEach((drop) => {
                     !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach((quantity) => {
                         if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
@@ -571,8 +571,8 @@ let calcChallenges = function(chunks, baseChunkData) {
             if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                 tempValid = false;
             }
-            if (!tempValid && baseChunkData['npcs'].hasOwnProperty(npc) && baseChunkData['npcs'][npc].hasOwnProperty(chunk.split('-')[0])) {
-                !!baseChunkData['npcs'][npc] && delete baseChunkData['npcs'][npc][chunk.split('-')[0]];
+            if (!tempValid && baseChunkData['npcs'].hasOwnProperty(npc) && baseChunkData['npcs'][npc].hasOwnProperty(chunk)) {
+                !!baseChunkData['npcs'][npc] && delete baseChunkData['npcs'][npc][chunk];
                 if (!!baseChunkData['npcs'][npc] && Object.keys(baseChunkData['npcs'][npc]).length === 0) {
                     delete baseChunkData['npcs'][npc];
                 }
@@ -580,7 +580,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if (!baseChunkData['npcs'].hasOwnProperty(npc)) {
                     baseChunkData['npcs'][npc] = {};
                 }
-                baseChunkData['npcs'][npc][chunk.split('-')[0]] = true;
+                baseChunkData['npcs'][npc][chunk] = true;
             }
         });
     });
@@ -590,8 +590,8 @@ let calcChallenges = function(chunks, baseChunkData) {
             if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                 tempValid = false;
             }
-            if (!tempValid && baseChunkData['objects'].hasOwnProperty(object) && baseChunkData['objects'][object].hasOwnProperty(chunk.split('-')[0])) {
-                !!baseChunkData['objects'][object] && delete baseChunkData['objects'][object][chunk.split('-')[0]];
+            if (!tempValid && baseChunkData['objects'].hasOwnProperty(object) && baseChunkData['objects'][object].hasOwnProperty(chunk)) {
+                !!baseChunkData['objects'][object] && delete baseChunkData['objects'][object][chunk];
                 if (!!baseChunkData['objects'][object] && Object.keys(baseChunkData['objects'][object]).length === 0) {
                     delete baseChunkData['objects'][object];
                 }
@@ -599,7 +599,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if (!baseChunkData['objects'].hasOwnProperty(object)) {
                     baseChunkData['objects'][object] = {};
                 }
-                baseChunkData['objects'][object][chunk.split('-')[0]] = true;
+                baseChunkData['objects'][object][chunk] = true;
             }
         });
     });
@@ -609,8 +609,8 @@ let calcChallenges = function(chunks, baseChunkData) {
             if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                 tempValid = false;
             }
-            if (!tempValid && baseChunkData['shops'].hasOwnProperty(shop) && baseChunkData['shops'][shop].hasOwnProperty(chunk.split('-')[0])) {
-                !!baseChunkData['shops'][shop] && delete baseChunkData['shops'][shop][chunk.split('-')[0]];
+            if (!tempValid && baseChunkData['shops'].hasOwnProperty(shop) && baseChunkData['shops'][shop].hasOwnProperty(chunk)) {
+                !!baseChunkData['shops'][shop] && delete baseChunkData['shops'][shop][chunk];
                 if (!!baseChunkData['shops'][shop] && Object.keys(baseChunkData['shops'][shop]).length === 0) {
                     delete baseChunkData['shops'][shop];
                     !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).filter((item) => { return !!baseChunkData['items'][item] }).forEach((item) => {
@@ -624,7 +624,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if (!baseChunkData['shops'].hasOwnProperty(shop)) {
                     baseChunkData['shops'][shop] = {};
                 }
-                baseChunkData['shops'][shop][chunk.split('-')[0]] = true;
+                baseChunkData['shops'][shop][chunk] = true;
                 !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).filter((item) => { return (!minigameShops[shop] || rules['Minigame']) && (!backloggedSources['items'] || !backloggedSources['items'][item]) }).forEach((item) => {
                     if (!baseChunkData['items'][item]) {
                         baseChunkData['items'][item] = {};
@@ -1653,8 +1653,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                     tempValid = false;
                 }
-                if (!tempValid && baseChunkData['items'].hasOwnProperty(item) && baseChunkData['items'][item].hasOwnProperty(chunk.split('-')[0])) {
-                    !!baseChunkData['items'][item] && delete baseChunkData['items'][item][chunk.split('-')[0]];
+                if (!tempValid && baseChunkData['items'].hasOwnProperty(item) && baseChunkData['items'][item].hasOwnProperty(chunk)) {
+                    !!baseChunkData['items'][item] && delete baseChunkData['items'][item][chunk];
                     if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
                         delete baseChunkData['items'][item];
                     }
@@ -1662,7 +1662,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['items'][item]) {
                         baseChunkData['items'][item] = {};
                     }
-                    baseChunkData['items'][item][chunk.split('-')[0]] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
+                    baseChunkData['items'][item][chunk] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
                 }
             });
         });
@@ -1672,8 +1672,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                     tempValid = false;
                 }
-                if (!tempValid && baseChunkData['monsters'].hasOwnProperty(monster) && baseChunkData['monsters'][monster].hasOwnProperty(chunk.split('-')[0])) {
-                    !!baseChunkData['monsters'][monster] && delete baseChunkData['monsters'][monster][chunk.split('-')[0]];
+                if (!tempValid && baseChunkData['monsters'].hasOwnProperty(monster) && baseChunkData['monsters'][monster].hasOwnProperty(chunk)) {
+                    !!baseChunkData['monsters'][monster] && delete baseChunkData['monsters'][monster][chunk];
                     if (!!baseChunkData['monsters'][monster] && Object.keys(baseChunkData['monsters'][monster]).length === 0) {
                         delete baseChunkData['monsters'][monster];
                         let dropsObj = chunkInfo['drops'][monster];
@@ -1727,7 +1727,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['monsters'].hasOwnProperty(monster)) {
                         baseChunkData['monsters'][monster] = {};
                     }
-                    baseChunkData['monsters'][monster][chunk.split('-')[0]] = true;
+                    baseChunkData['monsters'][monster][chunk] = true;
                     !!chunkInfo['drops'][monster] && Object.keys(chunkInfo['drops'][monster]).forEach((drop) => {
                         !!chunkInfo['drops'][monster][drop] && Object.keys(chunkInfo['drops'][monster][drop]).forEach((quantity) => {
                             if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
@@ -1802,8 +1802,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                     tempValid = false;
                 }
-                if (!tempValid && baseChunkData['npcs'].hasOwnProperty(npc) && baseChunkData['npcs'][npc].hasOwnProperty(chunk.split('-')[0])) {
-                    !!baseChunkData['npcs'][npc] && delete baseChunkData['npcs'][npc][chunk.split('-')[0]];
+                if (!tempValid && baseChunkData['npcs'].hasOwnProperty(npc) && baseChunkData['npcs'][npc].hasOwnProperty(chunk)) {
+                    !!baseChunkData['npcs'][npc] && delete baseChunkData['npcs'][npc][chunk];
                     if (!!baseChunkData['npcs'][npc] && Object.keys(baseChunkData['npcs'][npc]).length === 0) {
                         delete baseChunkData['npcs'][npc];
                     }
@@ -1811,7 +1811,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['npcs'].hasOwnProperty(npc)) {
                         baseChunkData['npcs'][npc] = {};
                     }
-                    baseChunkData['npcs'][npc][chunk.split('-')[0]] = true;
+                    baseChunkData['npcs'][npc][chunk] = true;
                 }
             });
         });
@@ -1821,8 +1821,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                     tempValid = false;
                 }
-                if (!tempValid && baseChunkData['objects'].hasOwnProperty(object) && baseChunkData['objects'][object].hasOwnProperty(chunk.split('-')[0])) {
-                    !!baseChunkData['objects'][object] && delete baseChunkData['objects'][object][chunk.split('-')[0]];
+                if (!tempValid && baseChunkData['objects'].hasOwnProperty(object) && baseChunkData['objects'][object].hasOwnProperty(chunk)) {
+                    !!baseChunkData['objects'][object] && delete baseChunkData['objects'][object][chunk];
                     if (!!baseChunkData['objects'][object] && Object.keys(baseChunkData['objects'][object]).length === 0) {
                         delete baseChunkData['objects'][object];
                     }
@@ -1830,7 +1830,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['objects'].hasOwnProperty(object)) {
                         baseChunkData['objects'][object] = {};
                     }
-                    baseChunkData['objects'][object][chunk.split('-')[0]] = true;
+                    baseChunkData['objects'][object][chunk] = true;
                 }
             });
         });
@@ -1840,8 +1840,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
                     tempValid = false;
                 }
-                if (!tempValid && baseChunkData['shops'].hasOwnProperty(shop) && baseChunkData['shops'][shop].hasOwnProperty(chunk.split('-')[0])) {
-                    !!baseChunkData['shops'][shop] && delete baseChunkData['shops'][shop][chunk.split('-')[0]];
+                if (!tempValid && baseChunkData['shops'].hasOwnProperty(shop) && baseChunkData['shops'][shop].hasOwnProperty(chunk)) {
+                    !!baseChunkData['shops'][shop] && delete baseChunkData['shops'][shop][chunk];
                     if (!!baseChunkData['shops'][shop] && Object.keys(baseChunkData['shops'][shop]).length === 0) {
                         delete baseChunkData['shops'][shop];
                         !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).filter((item) => { return !!baseChunkData['items'][item] }).forEach((item) => {
@@ -1855,7 +1855,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['shops'].hasOwnProperty(shop)) {
                         baseChunkData['shops'][shop] = {};
                     }
-                    baseChunkData['shops'][shop][chunk.split('-')[0]] = true;
+                    baseChunkData['shops'][shop][chunk] = true;
                     !!chunkInfo['shopItems'][shop] && Object.keys(chunkInfo['shopItems'][shop]).filter((item) => { return (!minigameShops[shop] || rules['Minigame']) && (!backloggedSources['items'] || !backloggedSources['items'][item]) }).forEach((item) => {
                         if (!baseChunkData['items'][item]) {
                             baseChunkData['items'][item] = {};
@@ -7569,7 +7569,7 @@ let gatherChunksInfo = function(chunksIn) {
                         if (!items[spawn]) {
                             items[spawn] = {};
                         }
-                        items[spawn][num] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
+                        items[spawn][num + '-' + section] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
                     }
                 });
 
@@ -7578,7 +7578,7 @@ let gatherChunksInfo = function(chunksIn) {
                         if (!objects[object]) {
                             objects[object] = {};
                         }
-                        objects[object][num] = true;
+                        objects[object][num + '-' + section] = true;
                     }
                 });
 
@@ -7587,7 +7587,7 @@ let gatherChunksInfo = function(chunksIn) {
                         if (!monsters[monster]) {
                             monsters[monster] = {};
                         }
-                        monsters[monster][num] = true;
+                        monsters[monster][num + '-' + section] = true;
                     }
                 });
 
@@ -7596,7 +7596,7 @@ let gatherChunksInfo = function(chunksIn) {
                         if (!npcs[npc]) {
                             npcs[npc] = {};
                         }
-                        npcs[npc][num] = true;
+                        npcs[npc][num + '-' + section] = true;
                     }
                 });
 
@@ -7605,7 +7605,7 @@ let gatherChunksInfo = function(chunksIn) {
                         if (!shops[shop]) {
                             shops[shop] = {};
                         }
-                        shops[shop][num] = true;
+                        shops[shop][num + '-' + section] = true;
                     }
                 });
             }
