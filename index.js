@@ -1072,6 +1072,7 @@ let areasStructure = {};
 let highestCurrent = {};
 let savedChunks = {};
 let chunkNotes = null;
+let doesPluginOutputExist = false;
 
 let universalPrimary = {
     "Slayer": ["Primary[+]"],
@@ -1340,9 +1341,10 @@ let signInAttempts = 0;
 let expandChallengeStr = '';
 let detailsStack = [];
 let touchTime = 0;
+let listOfTasksPlugin = [];
 let pluginOutput = null;
 
-let currentVersion = '6.2.30.1';
+let currentVersion = '6.2.31';
 let patchNotesVersion = '6.0.0';
 
 // Patreon Test Server Data
@@ -1483,7 +1485,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.2.30.1";
+mapImg.src = "osrs_world_map.png?v=6.2.31";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3118,7 +3120,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.2.30.1");
+        myWorker = new Worker("./worker.js?v=6.2.31");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill]);
         workerOut = 1;
@@ -3401,8 +3403,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.2.30.1");
-let myWorker2 = new Worker("./worker.js?v=6.2.30.1");
+let myWorker = new Worker("./worker.js?v=6.2.31");
+let myWorker2 = new Worker("./worker.js?v=6.2.31");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -4563,6 +4565,7 @@ let unlockEntry = function() {
                         mapIntroOpenSoon && openMapIntroModal(justStartingChunkSet);
                         unlockChallenges();
                         setRecentLogin();
+                        !doesPluginOutputExist && setData();
                     }, 500);
                 }).catch((error) => {
                     $('.pin.entry').addClass('animated shake wrong').select();
@@ -4749,6 +4752,7 @@ let accessMap = function() {
                             $('.open-manual-outer-container').css('opacity', 1).show();
                             rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
                             setRecentLogin();
+                            !doesPluginOutputExist && setData();
                             setupMap();
                         }).catch((error) => {
                             $('.pin-err').css('visibility', 'visible');
@@ -5901,51 +5905,8 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData, wantMethods) {
 // Finds the current challenge in each skill 2
 let calcCurrentChallenges2 = function(tempChallengeArr) {
     !tempChallengeArr && (tempChallengeArr = tempChallengeArrSaved);
-    let listOfTasks = setupCurrentChallenges(tempChallengeArr);
+    listOfTasksPlugin = setupCurrentChallenges(tempChallengeArr);
     infoPanelVis['challenges'] && updateChunkInfo();
-
-    // Plugin
-    pluginOutput = [];
-    listOfTasks.forEach((el) => {
-        let name = Object.keys(el)[0];
-        let skill = el[Object.keys(el)[0]];
-        let group;
-        if (skillNames.includes(skill)) {
-            group = 'SKILL';
-        } else if (skill === 'Quest' || skill === 'Diary' || skill === 'BiS') {
-            group = skill.toUpperCase();
-        } else {
-            group = 'OTHER';
-        }
-        let itemList = [];
-        chunkInfo['challenges'][skill][name].hasOwnProperty('ItemsDetails') && chunkInfo['challenges'][skill][name]['ItemsDetails'].forEach((item) => {
-            if (itemsPlus.hasOwnProperty(item.replaceAll(/\*/g, ''))) {
-                itemsPlus[item.replaceAll(/\*/g, '')].forEach((plus) => {
-                    itemList.push(plus);
-                });
-            } else {
-                itemList.push(item.replaceAll(/\*/g, ''));
-            }
-        });
-        if (itemList.length === 0) itemList = null;
-        let skillsObj = {};
-        if (group === 'SKILL') {
-            skillsObj[skill.toUpperCase()] = chunkInfo['challenges'][skill][name]['Level'];
-        }
-        chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && Object.keys(chunkInfo['challenges'][skill][name]['Skills']).forEach((subSkill) => {
-            skillsObj[subSkill.toUpperCase()] = chunkInfo['challenges'][skill][name]['Skills'][subSkill];
-        });
-        if (Object.keys(skillsObj).length === 0) skillsObj = null;
-        let rowObj = {
-            name: name,
-            isComplete: checkedChallenges.hasOwnProperty(skill) && checkedChallenges[skill].hasOwnProperty(name),
-            taskGroup: group,
-            items: itemList,
-            output: chunkInfo['challenges'][skill][name]['Output'] || null,
-            skills: skillsObj
-        };
-        pluginOutput.push(rowObj);
-    });
     setData();
 };
 
@@ -6158,7 +6119,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.2.30.1");
+    myWorker2 = new Worker("./worker.js?v=6.2.31");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill]);
     workerOut++;
@@ -8376,7 +8337,7 @@ let encodeObject = function(obj, forFirebase) {
         outputObj = [];
         !!obj && obj.forEach((el) => {
             if (typeof el === 'object') {
-                outputObj.push(encodeObject(el), forFirebase);
+                outputObj.push(encodeObject(el, forFirebase));
             } else if (typeof el === 'string') {
                 outputObj.push(encodeRFC5987ValueChars(el, forFirebase));
             } else {
@@ -10543,6 +10504,7 @@ let loadData = function(startup) {
             let picking = false;
             let settingsTemp = snap.val()['settings'];
             let rulesTemp = snap.val()['rules'] || {};
+            doesPluginOutputExist = !!snap.val()['pluginOutput'] || false;
             randomLoot = decodeObject(snap.val()['randomLoot']) || {};
             let chunks = decodeObject(snap.val()['chunks']);
             tempChunks = chunks || {};
@@ -10814,6 +10776,50 @@ let setUsername = function(old) {
     });
 }
 
+let createPluginOutput = function() {
+    pluginOutput = [];
+    listOfTasksPlugin.forEach((el) => {
+        let name = Object.keys(el)[0];
+        let skill = el[Object.keys(el)[0]];
+        let group;
+        if (skillNames.includes(skill)) {
+            group = 'SKILL';
+        } else if (skill === 'Quest' || skill === 'Diary' || skill === 'BiS') {
+            group = skill.toUpperCase();
+        } else {
+            group = 'OTHER';
+        }
+        let itemList = [];
+        chunkInfo['challenges'][skill][name].hasOwnProperty('ItemsDetails') && chunkInfo['challenges'][skill][name]['ItemsDetails'].forEach((item) => {
+            if (itemsPlus.hasOwnProperty(item.replaceAll(/\*/g, ''))) {
+                itemsPlus[item.replaceAll(/\*/g, '')].forEach((plus) => {
+                    itemList.push(plus);
+                });
+            } else {
+                itemList.push(item.replaceAll(/\*/g, ''));
+            }
+        });
+        if (itemList.length === 0) itemList = null;
+        let skillsObj = {};
+        if (group === 'SKILL') {
+            skillsObj[skill.toUpperCase()] = chunkInfo['challenges'][skill][name]['Level'];
+        }
+        chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && Object.keys(chunkInfo['challenges'][skill][name]['Skills']).forEach((subSkill) => {
+            skillsObj[subSkill.toUpperCase()] = chunkInfo['challenges'][skill][name]['Skills'][subSkill];
+        });
+        if (Object.keys(skillsObj).length === 0) skillsObj = null;
+        let rowObj = {
+            name: name,
+            isComplete: checkedChallenges.hasOwnProperty(skill) && checkedChallenges[skill].hasOwnProperty(name),
+            taskGroup: group,
+            items: itemList,
+            output: chunkInfo['challenges'][skill][name]['Output'] || null,
+            skills: skillsObj
+        };
+        pluginOutput.push(rowObj);
+    });
+}
+
 // Stores data in Firebase
 let setData = function() {
     if (onTestServer || testMode || recentlyTestMode) {
@@ -10832,7 +10838,8 @@ let setData = function() {
                         rules[rule] = false;
                     }
                 });
-                myRef.update({ rules: rules, recent: encodeObject(recent, true), recentTime: encodeObject(recentTime, true), randomLoot: encodeObject(randomLoot, true), friends: encodeObject(friends, true), friendsAlt: encodeObject(friendsAlt, true), chunkNotes: encodeObject(chunkNotes, true), pluginOutput: encodeObject(pluginOutput, true) });
+                createPluginOutput();
+                myRef.update({ rules: rules, recent: encodeObject(recent, true), recentTime: encodeObject(recentTime, true), randomLoot: encodeObject(randomLoot, true), friends: encodeObject(friends, true), friendsAlt: encodeObject(friendsAlt, true), chunkNotes: encodeObject(chunkNotes, true), pluginOutput });
                 myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'walkableRollable': settings['walkableRollable'], 'autoWalkableRollable': settings['autoWalkableRollable'], 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'randomStartAlways': settings['randomStartAlways'], 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'topButtons': topButtonsOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'allTasks': settings['allTasks'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? patchNotesVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon, 'theme': theme, 'newTasks': settings['newTasks'], 'hideChecked': settings['hideChecked'], 'shiftUnlock': settings['shiftUnlock'], rollWarning: settings['rollWarning'], optOutSections: settings['optOutSections'], info: chunkInfoOn });
                 myRef.child('chunkinfo').update({ checkedChallenges: encodeObject(checkedChallenges, true), completedChallenges: encodeObject(completedChallenges, true), backlog: encodeObject(backlog, true), possibleAreas: encodeObject(possibleAreas, true), manualTasks: encodeObject(manualTasks, true), manualEquipment: encodeObject(manualEquipment, true), backloggedSources: encodeObject(backloggedSources, true), altChallenges: encodeObject(altChallenges, true), manualMonsters: encodeObject(manualMonsters, true), slayerLocked: encodeObject(slayerLocked, true), constructionLocked: encodeObject(constructionLocked, true), passiveSkill: encodeObject(passiveSkill, true), maxSkill: encodeObject(maxSkill, true), oldSavedChallengeArr: encodeObject(oldSavedChallengeArr, true), assignedXpRewards: encodeObject(assignedXpRewards, true), manualAreas: encodeObject(manualAreas, true), manualSections: encodeObject(manualSections, true), prevValueLevelInput: encodeObject(prevValueLevelInput, true), checkedAllTasks: encodeObject(checkedAllTasks, true) });
 
@@ -10891,7 +10898,8 @@ let setData = function() {
                     rules[rule] = false;
                 }
             });
-            myRef.update({ rules: rules, recent: encodeObject(recent, true), recentTime: encodeObject(recentTime, true), randomLoot: encodeObject(randomLoot, true), friends: encodeObject(friends, true), friendsAlt: encodeObject(friendsAlt, true), chunkNotes: encodeObject(chunkNotes, true), pluginOutput: encodeObject(pluginOutput, true) });
+            createPluginOutput();
+            myRef.update({ rules: rules, recent: encodeObject(recent, true), recentTime: encodeObject(recentTime, true), randomLoot: encodeObject(randomLoot, true), friends: encodeObject(friends, true), friendsAlt: encodeObject(friendsAlt, true), chunkNotes: encodeObject(chunkNotes, true), pluginOutput });
             myRef.child('settings').update({ 'neighbors': autoSelectNeighbors, 'walkableRollable': settings['walkableRollable'], 'autoWalkableRollable': settings['autoWalkableRollable'], 'remove': autoRemoveSelected, 'roll2': roll2On, 'unpick': unpickOn, 'randomStartAlways': settings['randomStartAlways'], 'recent': recentOn, 'cinematicRoll': settings['cinematicRoll'], 'highscoreEnabled': highscoreEnabled, 'chunkTasks': chunkTasksOn, 'topButtons': topButtonsOn, 'completedTaskColor': settings['completedTaskColor'], 'completedTaskStrikethrough': settings['completedTaskStrikethrough'], 'taskSidebar': settings['taskSidebar'], 'allTasks': settings['allTasks'], 'startingChunk': settings['startingChunk'], 'numTasksPercent': settings['numTasksPercent'], 'help': !(!helpMenuOpen && !helpMenuOpenSoon), 'patchNotes': (!patchNotesOpen && !patchNotesOpenSoon) ? patchNotesVersion : settings['patchNotes'], 'mapIntro': !mapIntroOpen && !mapIntroOpenSoon, 'theme': theme, 'newTasks': settings['newTasks'], 'hideChecked': settings['hideChecked'], 'shiftUnlock': settings['shiftUnlock'], rollWarning: settings['rollWarning'], optOutSections: settings['optOutSections'], info: chunkInfoOn });
             myRef.child('chunkinfo').update({ checkedChallenges: encodeObject(checkedChallenges, true), completedChallenges: encodeObject(completedChallenges, true), backlog: encodeObject(backlog, true), possibleAreas: encodeObject(possibleAreas, true), manualTasks: encodeObject(manualTasks, true), manualEquipment: encodeObject(manualEquipment, true), backloggedSources: encodeObject(backloggedSources, true), altChallenges: encodeObject(altChallenges, true), manualMonsters: encodeObject(manualMonsters, true), slayerLocked: encodeObject(slayerLocked, true), constructionLocked: encodeObject(constructionLocked, true), passiveSkill: encodeObject(passiveSkill, true), maxSkill: encodeObject(maxSkill, true), oldSavedChallengeArr: encodeObject(oldSavedChallengeArr, true), assignedXpRewards: encodeObject(assignedXpRewards, true), manualAreas: encodeObject(manualAreas, true), manualSections: encodeObject(manualSections, true), prevValueLevelInput: encodeObject(prevValueLevelInput, true), checkedAllTasks: encodeObject(checkedAllTasks, true) });
 
@@ -11042,6 +11050,7 @@ let changeLocked = function() {
                     rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
                     $('.lock-box').animate({ 'opacity': 0 });
                     setRecentLogin();
+                    !doesPluginOutputExist && setData();
                     setTimeout(function() {
                         $('.lock-box').css('opacity', 1).hide();
                         $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist').animate({ 'opacity': 1 });
