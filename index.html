@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.2.30" />
+  <link rel="stylesheet" href="./index.css?v=6.2.30.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -42,12 +42,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.2.30' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.2.30.1' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.2.30"></script>
+  <script src="./index.js?v=6.2.30.1"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -703,7 +703,7 @@
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeClipboard()"></i>
       <div id="clipboard-title" class="clipboard-title noscroll">Copy to clipboard:</div>
       <div id="clipboard-data" class="clipboard-data noscroll"><button id='chunks-clipboard-button' class='modal-button' onclick='exportFunc("chunks")'>Chunks</button><button id='tasks-clipboard-button' class='modal-button' onclick='exportFunc("tasks")'>Tasks</button><button id='rules-clipboard-button' class='modal-button' onclick='exportFunc("rules")'>Rules</button></div>
-      <div id="clipboard-data-2" class="clipboard-data-2 noscroll"><button id='plugin-clipboard-button' class='modal-button' onclick='exportFunc("plugin")'>Chunk Tasks Plugin</button><i class="fas fa-info-circle" title="Info Coming Soon"></i></div>
+      <div id="clipboard-data-2" class="clipboard-data-2 noscroll"><button id='plugin-clipboard-button' class='modal-button' onclick='exportFunc("plugin")'>Chunk Tasks Plugin</button><a href="https://github.com/nathanreidok/chunk-tasks" target="_blank" ><i class="fas fa-info-circle" title="Visit the plugin on Github"></i></a></div>
     </div>
   </div>
   <div id="myModal39" class="modal">
