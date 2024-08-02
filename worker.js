@@ -451,7 +451,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if (!baseChunkData['items'][item]) {
                     baseChunkData['items'][item] = {};
                 }
-                let primaryRunes = ((telegrabTask['Primary'] && (!telegrabTask['Secondary'] || rules['Secondary Primary'])) && (telegrabTask['Level'] === 1 || (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && telegrabTask['Level'] <= passiveSkill[skill] + bestBoost) || ((skillQuestXp.hasOwnProperty(skill) && telegrabTask['Level'] <= skillQuestXp[skill]['level'] + bestBoost)) || wantMethods) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || telegrabTask['Manual'];
+                let primaryRunes = ((telegrabTask['Primary'] && (!telegrabTask['Secondary'] || rules['Secondary Primary'])) && (!backlog['Magic'] || !backlog['Magic'].hasOwnProperty('Cast ~|telekinetic grab|~'))) || telegrabTask['Manual'];
                 baseChunkData['items'][item][chunk] = rules['Primary Spawns'] && primaryRunes ? 'primary-spawn' : 'secondary-spawn';
             }
         });
@@ -1726,7 +1726,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!baseChunkData['items'][item]) {
                         baseChunkData['items'][item] = {};
                     }
-                    let primaryRunes = ((telegrabTask['Primary'] && (!telegrabTask['Secondary'] || rules['Secondary Primary'])) && (!backlog['Magic'] || !backlog['Magic'].hasOwnProperty(challenge))) || telegrabTask['Manual'];
+                    let primaryRunes = ((telegrabTask['Primary'] && (!telegrabTask['Secondary'] || rules['Secondary Primary'])) && (!backlog['Magic'] || !backlog['Magic'].hasOwnProperty('Cast ~|telekinetic grab|~'))) || telegrabTask['Manual'];
                     baseChunkData['items'][item][chunk] = rules['Primary Spawns'] && primaryRunes ? 'primary-spawn' : 'secondary-spawn';
                 }
             });
