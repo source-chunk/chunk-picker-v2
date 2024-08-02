@@ -435,6 +435,27 @@ let calcChallenges = function(chunks, baseChunkData) {
             }
         });
     });
+    const telegrabTask = chunkInfo['challenges']['Magic']['Cast ~|telekinetic grab|~'];
+    !!chunkInfo && !!chunkInfo['codeItems'] && !!chunkInfo['codeItems']['telegrabSpawns'] && Object.keys(chunkInfo['codeItems']['telegrabSpawns']).forEach((item) => {
+        Object.keys(chunkInfo['codeItems']['telegrabSpawns'][item]).forEach((chunk) => {
+            let tempValid = !(newValids && !(chunkInfo['codeItems']['telegrabSpawns'][item][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || (!backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0].replaceAll('#', '/')))) }).length === chunkInfo['codeItems']['telegrabSpawns'][item][chunk].length));
+            if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
+                tempValid = false;
+            }
+            if (!tempValid && baseChunkData['items'].hasOwnProperty(item) && baseChunkData['items'][item].hasOwnProperty(chunk)) {
+                !!baseChunkData['items'][item] && delete baseChunkData['items'][item][chunk];
+                if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
+                    delete baseChunkData['items'][item];
+                }
+            } else if (tempValid && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                if (!baseChunkData['items'][item]) {
+                    baseChunkData['items'][item] = {};
+                }
+                let primaryRunes = ((telegrabTask['Primary'] && (!telegrabTask['Secondary'] || rules['Secondary Primary'])) && (telegrabTask['Level'] === 1 || (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && telegrabTask['Level'] <= passiveSkill[skill] + bestBoost) || ((skillQuestXp.hasOwnProperty(skill) && telegrabTask['Level'] <= skillQuestXp[skill]['level'] + bestBoost)) || wantMethods) && (!backlog[skill] || !backlog[skill].hasOwnProperty(challenge))) || telegrabTask['Manual'];
+                baseChunkData['items'][item][chunk] = rules['Primary Spawns'] && primaryRunes ? 'primary-spawn' : 'secondary-spawn';
+            }
+        });
+    });
     !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Monsters'] && Object.keys(chunkInfo['taskUnlocks']['Monsters']).forEach((monster) => {
         Object.keys(chunkInfo['taskUnlocks']['Monsters'][monster]).forEach((chunk) => {
             let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Monsters'][monster][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || (!backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0].replaceAll('#', '/')))) }).length === chunkInfo['taskUnlocks']['Monsters'][monster][chunk].length));
@@ -1686,6 +1707,27 @@ let calcChallenges = function(chunks, baseChunkData) {
                         baseChunkData['items'][item] = {};
                     }
                     baseChunkData['items'][item][chunk] = rules['Primary Spawns'] ? 'primary-spawn' : 'secondary-spawn';
+                }
+            });
+        });
+        const telegrabTask = chunkInfo['challenges']['Magic']['Cast ~|telekinetic grab|~'];
+        !!chunkInfo && !!chunkInfo['codeItems'] && !!chunkInfo['codeItems']['telegrabSpawns'] && Object.keys(chunkInfo['codeItems']['telegrabSpawns']).forEach((item) => {
+            Object.keys(chunkInfo['codeItems']['telegrabSpawns'][item]).forEach((chunk) => {
+                let tempValid = !(newValids && !(chunkInfo['codeItems']['telegrabSpawns'][item][chunk].filter((task) => { return newValids[Object.values(task)[0]] && newValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && (!backlog[Object.values(task)[0]] || (!backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0]) && !backlog[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0].replaceAll('#', '/')))) }).length === chunkInfo['codeItems']['telegrabSpawns'][item][chunk].length));
+                if ((!chunk.includes('-') && !chunks.hasOwnProperty(chunk)) || (chunk.includes('-') && (!chunks.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections.hasOwnProperty(chunk.split('-')[0]) || !unlockedSections[chunk.split('-')[0]].hasOwnProperty(chunk.split('-')[1])))) {
+                    tempValid = false;
+                }
+                if (!tempValid && baseChunkData['items'].hasOwnProperty(item) && baseChunkData['items'][item].hasOwnProperty(chunk)) {
+                    !!baseChunkData['items'][item] && delete baseChunkData['items'][item][chunk];
+                    if (!!baseChunkData['items'][item] && Object.keys(baseChunkData['items'][item]).length <= 0) {
+                        delete baseChunkData['items'][item];
+                    }
+                } else if (tempValid && (!backloggedSources['items'] || !backloggedSources['items'][item])) {
+                    if (!baseChunkData['items'][item]) {
+                        baseChunkData['items'][item] = {};
+                    }
+                    let primaryRunes = ((telegrabTask['Primary'] && (!telegrabTask['Secondary'] || rules['Secondary Primary'])) && (!backlog['Magic'] || !backlog['Magic'].hasOwnProperty(challenge))) || telegrabTask['Manual'];
+                    baseChunkData['items'][item][chunk] = rules['Primary Spawns'] && primaryRunes ? 'primary-spawn' : 'secondary-spawn';
                 }
             });
         });
