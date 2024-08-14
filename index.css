@@ -40,14 +40,14 @@ body::-webkit-scrollbar {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
-body:not(.about):not(.change-password) {
+body:not(.about):not(.patch):not(.change-password) {
     background-color: black;
     color: var(--colorText);
     overflow: hidden !important;
 }
 
 @-moz-document url-prefix() {
-    html:not(.about):not(.change-password),body:not(.about):not(.change-password){overflow: hidden !important;}
+    html:not(.about):not(.patch):not(.change-password),body:not(.about):not(.patch):not(.change-password){overflow: hidden !important;}
 }
 
 a, a:visited {
@@ -601,7 +601,7 @@ button.menu2 {
     height: 2vw;
 }
 
-.menu13 {
+.menu13, .menu14 {
     position: fixed;
     z-index: 999 !important;
     top: 0;
@@ -1906,7 +1906,7 @@ input#searchPlayerMaps {
     pointer-events: none;
 }
 
-.test-hint {
+.test-hint, .mobile-chunk-hint {
     display: none;
     position: absolute;
     top: 10vh;
@@ -1922,18 +1922,16 @@ input#searchPlayerMaps {
     width: 100%;
 }
 
-.test-hint .subtext {
+.test-hint .subtext,.mobile-chunk-hint .subtext {
     display: block;
-    font-size: min(2vw, 18px);
+    font-size: min(3vw, 18px);
 }
 
 .settings {
     display: none;
-    position: absolute;
     transition-duration: .5s;
     cursor: pointer;
     top: 4px;
-    right: 8px;
     font-size: 44px;
 }
 
@@ -2197,64 +2195,27 @@ input#searchPlayerMaps {
     color: var(--colorLink);
 }
 
-.gohighscore {
-    position: absolute;
+.topbar-item {
     transition-duration: .5s;
     cursor: pointer;
-    top: 4px;
-    right: 60px;
     font-size: 44px;
+    float: right;
+    text-align: center;
+    padding: 0px 5px;
 }
 
-.gohighscore:hover {
-    color: var(--colorLink);
-}
-
-.gobugreport {
-    position: absolute;
+.topbar-item i {
     transition-duration: .5s;
-    cursor: pointer;
-    top: 4px;
-    right: 120px;
-    font-size: 44px;
 }
 
-.gobugreport:hover {
-    color: var(--colorLink);
-}
-
-.godocumentation {
-    position: absolute;
-    transition-duration: .5s;
-    cursor: pointer;
-    top: 4px;
-    right: 240px;
-    font-size: 44px;
-}
-
-.godocumentation:hover {
-    color: var(--colorLink);
-}
-
-.gonotes {
-    position: absolute;
-    transition-duration: .5s;
-    cursor: pointer;
-    top: 4px;
-    right: 285px;
-    font-size: 44px;
-}
-
-.gonotes:hover {
+.topbar-item:hover {
     color: var(--colorLink);
 }
 
 .godiscord {
-    position: absolute;
     transition-duration: .5s;
     cursor: pointer;
     top: 4px;
-    right: 175px;
     font-size: 44px;
 }
 
@@ -2263,11 +2224,9 @@ input#searchPlayerMaps {
 }
 
 .gopatreon {
-    position: absolute;
     transition-duration: .5s;
     cursor: pointer;
     top: 4px;
-    right: 335px;
     font-size: 44px;
     color: #f96854;
     -webkit-text-fill-color: #f96854 !important;
@@ -2893,18 +2852,18 @@ input#searchPlayerMaps {
     margin-top: -2.5%;
 }
 
-#myModal18:not(.mobile) {
+#myModal18:not(.mobile), #myModal46:not(.mobile) {
     padding-top: 16vh !important;
 }
 
-#myModal18 > .modal-content {
+#myModal18 > .modal-content, #myModal46 > .modal-content {
     height: 60%;
     width: 45%;
     background-color: var(--color1);
     color: var(--colorText);
 }
 
-#myModal18 > .modal-content:not(.mobile) {
+#myModal18 > .modal-content:not(.mobile), #myModal46 > .modal-content:not(.mobile) {
     min-width: 650px;
 }
 
@@ -4183,6 +4142,45 @@ input#searchChunkSections {
     text-align: center;
     margin-bottom: 25px;
     font-size: 24px;
+}
+
+.cutomize-topbar-title {
+    font-size: 4.5vh;
+    padding-left: 10px;
+    max-height: 9%;
+    min-height: 9%;
+    text-align: center;
+    background-color: var(--color2);
+    overflow-y: hidden;
+}
+
+.cutomize-topbar-subtitle {
+    padding: 0px 15px;
+    background-color: var(--color2);
+    font-size: 1.65vh;
+    text-align: center;
+    max-height: 10%;
+    min-height: 10%;
+}
+
+.cutomize-topbar-data {
+    overflow-y: auto;
+    height: 80.5%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: solid 1px;
+}
+
+#cutomize-topbar-data-inner {
+    text-align: center;
+    font-size: 24px;
+}
+
+#cutomize-topbar-data-inner select {
+    font-size: 24px;
+    width: 45%;
+    text-align: center;
+    margin: 10px;
 }
 
 #myModal7 > .modal-content {
@@ -7870,6 +7868,26 @@ input#searchMonsters {
     font-size: 44px;
 }
 
+.menu8.mobile {
+    width: 100%;
+    left: 0;
+    top: 52px;
+    height: 100%;
+    background-color: var(--color2);
+}
+
+.menu8.mobile .panel-close {
+    font-size: min(6vw, 36px) !important;
+}
+
+.mobile .infoid {
+    font-size: 6vw;
+}
+
+.mobile .infocontribute {
+    font-size: 4vw;
+}
+
 .menu9.mobile {
     width: 100%;
     right: 0;
@@ -7952,4 +7970,20 @@ input#searchMonsters {
 
 .canvasDiv > canvas {
     background-color: black;
+}
+
+.patch-notes-section {
+    border: solid #bbb 1px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.patch-notes-section.dark-patch-notes-section {
+    border-color: black;
+    border-width: 2px;
+}
+
+.patch-notes-section h1, .patch-notes-section h3 {
+    margin: 0px;
 }

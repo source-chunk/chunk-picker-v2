@@ -2309,6 +2309,36 @@ let calcChallenges = function(chunks, baseChunkData) {
                             if (!outputs[item]) {
                                 outputs[item] = {};
                             }
+                            if (challenge === 'Pickpocket a ~|master farmer|~') {
+                                const specialSeeds = {
+                                    'Guam seed': {
+                                        'numerator': 1,
+                                        'denom': 65.1
+                                    },
+                                    'Ranarr seed': {
+                                        'numerator': 70,
+                                        'denom': 81
+                                    },
+                                    'Snapdragon seed': {
+                                        'numerator': 10,
+                                        'denom': 81
+                                    },
+                                    'Torstol seed': {
+                                        'numerator': 2,
+                                        'denom': 81
+                                    }
+                                };
+                                const farmingLevel = checkPrimaryMethod('Farming', newValids, baseChunkData) ? 99 : Math.max(!!passiveSkill && passiveSkill.hasOwnProperty('Farming') ? passiveSkill['Farming'] : 1, !!newValids['Farming'] ? Math.max(...Object.values(newValids['Farming'])) : 1);
+                                if (specialSeeds.hasOwnProperty(item)) {
+                                    let seedChance;
+                                    if (item === 'Guam seed') {
+                                        seedChance = '1/' + (Math.round((specialSeeds[item].denom / (specialSeeds[item].numerator + (0.003888 - (((6 + Math.min(85, farmingLevel)) * 48) / 1000000))))*100)/100);
+                                    } else {
+                                        seedChance = '1/' + (Math.round((specialSeeds[item].denom / (specialSeeds[item].numerator * (((6 + Math.min(85, farmingLevel)) * 48) / 1000000)))*100)/100);
+                                    }
+                                    chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] = seedChance;
+                                }
+                            }
                             if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Source')) {
                                 if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop' && (!backloggedSources['shops'] || !backloggedSources['shops'][challenge])) {
                                     outputs[item][challenge] = chunkInfo['challenges'][skill][challenge]['Source'];

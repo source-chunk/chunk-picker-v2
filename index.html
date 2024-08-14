@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.2.34" />
+  <link rel="stylesheet" href="./index.css?v=6.3.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -42,12 +42,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.2.34' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.3.0' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.2.34"></script>
+  <script src="./index.js?v=6.3.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -67,6 +67,7 @@
   </ul>
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='test-hint'><b><i class="fas fa-exclamation-triangle"></i> Sandbox Mode <i class="fas fa-exclamation-triangle"></i></b><span class='subtext'>All changes made inside sandbox mode are temporary</span></div>
+  <div class='mobile-chunk-hint'><b><i class="fas fa-exclamation-triangle"></i> Tap a Chunk <i class="fas fa-exclamation-triangle"></i></b><span class='subtext'>Then select an action</span></div>
   <div class='topnav'>
     <div>
       <a href='?about' target="_blank" class="about-button" title='About Me'>
@@ -76,26 +77,19 @@
       </a>
     </div>
     <div><a href='./'><span class="gohome" title='Home'>Chunk Picker V2</span></a></div>
-    <div><a href='https://chunk-stats.web.app' target='_blank' title='Chunk Stats'><i
-          class="gohighscore fas fa-trophy"></i></a></div>
     <div class='toptitle2-outer'><span class='toptitle2'>---</span></div>
     <!--<div><span><i class="help-button fas fa-question" onclick='helpFunc()' title='Help'></i></span></div>-->
-    <div><a
-        href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link'
-        target='_blank'><i class="gobugreport fas fa-bug" title='Report a Bug'></i></a></div>
-    <div><span
-      class='noscroll'
-      onclick="openPatchNotesModal(true)"><i class="godocumentation fas fa-file-alt" title='Patch Notes'></i></span></div>
-    <div><span
-      class='noscroll'
-      onclick="openChunkNotesModal()"><i class="gonotes fas fa-sticky-note" title='Notes'></i></span></div>
-    <div><a
-      href='https://www.patreon.com/bePatron?u=56906793'
-      target='_blank'><i class="gopatreon fab fa-patreon" title='Support me on Patreon'></i></a></div>
-    <div><a
+    <span class='topbar-item'><div><i class="settings fas fa-cog" onclick='settingsMenu()' title='Settings'></i></div></span>
+    <span class='topbar-item topbar-item-5'></span>
+    <span class='topbar-item topbar-item-4'></span>
+    <span class='topbar-item'><div><a
       href='https://discord.gg/kXRgpxnBxu'
-      target='_blank'><i class="godiscord fab fa-discord" title='Join the Discord'></i></a></div>
-    <div><i class="settings fas fa-cog" onclick='settingsMenu()' title='Settings'></i></div>
+      target='_blank'><i class="godiscord fab fa-discord" title='Join the Discord'></i></a></div></span>
+    <span class='topbar-item topbar-item-2'></span>
+    <span class='topbar-item topbar-item-1'></span>
+    <span class='topbar-item'><div><a
+      href='https://www.patreon.com/bePatron?u=56906793'
+      target='_blank'><i class="gopatreon fab fa-patreon" title='Support me on Patreon'></i></a></div></span>
     <div><span onclick='openSearch()'><i class="gosearch fas fa-search" title='Search My Chunks'></i></span></div>
     <div><span
       class='noscroll'
@@ -470,63 +464,26 @@
   <div id="myModal24" class="modal">
     <div class="modal-content noscroll">
       <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">2/20/2024 (6.0.0)</div>
+      <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">08/12/2024 (6.3.0)</div>
       <div id="patch-notes-data" class="patch-notes-data noscroll">
         <h2 class='noscroll'>Major Changes & New Features</h2>
         <ul class='noscroll'>
-          <li class='noscroll'><b>Chunk Sections</b> - Chunk Sections are the parts that make up a whole chunk, created by a river or fence separating a chunk into pieces. Now that we are able to determine not just what chunks you have access to, but what part of those chunks you have access to, we can much more accurately generate tasks and more! (This feature was a very big undertaking, and surely will have some issues. Report any you find using the Bug Report link in the top bar).<br /><img style="width: 50%;display: flex;margin: auto;" src="https://i.imgur.com/dddnn67.gif" /><br /><i style="display:block;text-align: center;">An example of Chunk Sections in chunk 12596</i></li>
-          <li class='noscroll'><b>Mobile Support</b> - Added much better support for the Chunk Picker on mobile, allowing for nearly everything that can be done on the desktop site to be done on the mobile site too!</li>
-          <li class='noscroll'><b>BiS Images</b> - Added equipment images to the BiS Equipment window, to more easily check out what gear is listed there visually.</li>
-          <li class='noscroll'><b>Map Overlays</b> - Added an Overlays button at the bottom-left of the map, to show different overlays overtop your chunk map.</li>
-          <li class='noscroll'><b>Chunk Notes Markdown</b> - Changed the Chunk Notes window to have basic support for markdown, allowing more options to customize what you want to display there.</li>
-          <li class='noscroll'><b>Chunk Numbering</b> - Changed the way that Selected chunk numbering works, so now it stays the same between reloads of the page. This will cut out confusion when other people look at your map also, since the numbers will be the same for you and them.</li>
-          <li class='noscroll'><b>RS3 Friends</b> - Added the ability to add both OSRS and RS3 Chunk Maps to your Chunk Picker Friends List.</li>
-          <li class='noscroll'><b>Backend Logic</b> - Overhauled the underlying logic for handling special characters in task and item names.</li>
+          <li class='noscroll'><b>Group Map Support</b> - Ever try to watch your friend roll their next chunk on their chunk picker map, but it doesn't update until you reload the page? Playing a group-ironman chunk account with others and using the same map? With today's update, the chunk picker map will now stay updated in realtime with any changes happening on the map, including what others are doing!</li>
+          <li class='noscroll'><b>Patch Notes Archive</b> - There now exists an archive of all previous patch notes! They'll always be linked at the bottom of the current patch notes, or you can find it at <a href='?patch-notes' target="_blank">https://source-chunk.github.io/chunk-picker-v2/?patch-notes</a></li>
+          <li class='noscroll'><b>Mobile Chunk Info</b> - Support has now been added for checking chunk info, blacklisting chunks, and adding stickers to chunks on mobile! Just load up the site on your mobile device, open the mobile-menu, tap the 'Select Chunk for Action' button, and tap the chunk you want to interact with!</li>
+          <li class='noscroll'><b>Customizable Topbar</b> - The topbar (that toolbar-looking-thing at the top of every map) now has support for customizing which actions are displayed on it! Open the settings dropdown and click on the 'Customize Topbar' option to get started!</li>
         </ul>
         <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
         <ul class='noscroll'>
-          <li class='noscroll'>Added a way to select the number of doable clue steps already obtained within the Clue window.</li>
-          <li class='noscroll'>Added support for pressing the Esc key to exit windows within the Chunk Picker (thanks Happery).</li>
-          <li class='noscroll'>Added pre-loading for chunk images before a fancy roll, to prevent them from being partially loaded as the roll happens.</li>
-          <li class='noscroll'>Added support for double-searching shops to see their chunk location.</li>
-          <li class='noscroll'>Added a task for raking the Keldagrim farming patch once (thanks ChunkDwarf).</li>
-          <li class='noscroll'>Added the ability to get anti poison from Sigmund's chest in Lumbridge.</li>
-          <li class='noscroll'>Added Scrubfoot's Cave as an Accessible Area.</li>
-          <li class='noscroll'>Added the ability to get uncut red topaz from special crates and boxes.</li>
-          <li class='noscroll'>Added the ability to search partial data before tasks load in the Search window.</li>
-          <li class='noscroll'>Added console info output of the current version number.</li>
-          <li class='noscroll'>Added new quest Children of the Sun, and removed Zeah favour.</li>
-          <li class='noscroll'>Added new boss Scurrius, the Rat King.</li>
-          <li class='noscroll'>Added Combat Achievemnts for Scurrius and Desert Treasure II bosses.</li>
-          <li class='noscroll'>Added the Poll 80 changes.</li>
-          <li class='noscroll'>Added Forestry Part 3 changes, including the removal of forestry event-spawning items.</li>
-          <li class='noscroll'>Added a setting to enable warnings when clicking the 'Pick Chunk' button (thanks Kono Tyran).</li>
-          <li class='noscroll'>Added the ability to get Rocky from Sorceress' Garden.</li>
-          <li class='noscroll'>Added Camdozaal lockbox loot to task calculation.</li>
-          <li class='noscroll'>Added wiki links to the Methods and All Tasks lists.</li>
-          <li class='noscroll'>Added various barrels throughout the game that can fill an empty glass with beer.</li>
-          <li class='noscroll'>Added bird nest loot to the All Droptables rule.</li>
-          <li class='noscroll'>Added partial product skills tasks for Xtreme-type accounts.</li>
-          <li class='noscroll'>Added missing burnt tree tasks.</li>
-          <li class='noscroll'>Added music and max icon options for Chunk Stickers (thanks ChunkLok9090).</li>
-          <li class='noscroll'>Added a permanent unlockables task to buy a POH (thanks Streammz).</li>
-          <li class='noscroll'>Locked the ore rocks within the Desert Mining Camp underground behind completion of The Tourist Trap.</li>
-          <li class='noscroll'>Locked aberrant sepctres and bloodvelds within the Stronghold Slayer Cave behind completion of Priest in Peril.</li>
-          <li class='noscroll'>Changed the logic with how level 1 woodcutting and mining tools are handled.</li>
-          <li class='noscroll'>Changed the fire in the Ruins of Unkah to be classified as a range for cooking.</li>
-          <li class='noscroll'>Overhauled many tasks to refer to NPCs or Objects instead of Chunks, where possible, to help with Backlogging.</li>
-          <li class='noscroll'>Renamed 'Connections' to 'Connected Areas' in the Chunk Info sidebar.</li>
-          <li class='noscroll'>Fixed Slayer-monster drops not working with double-search.</li>
-          <li class='noscroll'>Fixed an issue with special characters in the Search window.</li>
-          <li class='noscroll'>Fixed an issue with Every Drop tasks not including the correct title if the task name has special characters.</li>
-          <li class='noscroll'>Fixed an issue where Future Tasks were calculated too often.</li>
-          <li class='noscroll'>Fixed an issue with earth impling loot.</li>
-          <li class='noscroll'>Fixed an error in the 'Giant rat#Stronghold of Security' droptable.</li>
-          <li class='noscroll'>Fixed the dark wizard tower wizards not being excluded from f2p maps.</li>
-          <li class='noscroll'>Fixed an issue with missing items from slayer monsters in All Droptables and Every Drop rules.</li>
-          <li class='noscroll'>Fixed an issue with Inquisitor armour showing the wrong wielding requirements (thanks CmwCaelin1).</li>
+          <li class='noscroll'>Added a link to the quest steps window on tasks for completing a quest</li>
+          <li class='noscroll'>Added scaling droprates in accordance with passive-leveled Farming for Master Farmer seed droprates</li>
+          <li class='noscroll'>Fixed the high level bandit droptable being out of date</li>
+          <li class='noscroll'>Fixed the small furnace in Piscatoris not requiring quest progress to use</li>
+          <li class='noscroll'>Removed a small fishing net spawn in Varlamore since it cannot be obtained by ironmen</li>
+          <li class='noscroll'>Locked the normal trees outside the Mage Training Arena for f2p maps</li>
         </ul>
         <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack')">whitecatblack  <i class="fas fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
+        <h4><a href='?patch-notes' target="_blank">Patch Notes Archive</a></h4>
       </div>
       <div id="patch-notes-footer" class="patch-notes-footer noscroll">
         <button id='submit-patch-notes-button' class='modal-button' onclick='dismissPatchNotes()'>Dismiss</button>
@@ -787,6 +744,16 @@
       </div>
     </div>
   </div>
+  <div id="myModal46" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeCustomizeTopbar()"></i>
+      <div id="cutomize-topbar-title" class="cutomize-topbar-title noscroll">Customize Topbar</div>
+      <div id="cutomize-topbar-subtitle" class="cutomize-topbar-subtitle noscroll">Customize which icons appear in the topbar at the top-right of your map. All other icons will instead appear in the cog-wheel dropdown menu.</div>
+      <div id="cutomize-topbar-data" class="cutomize-topbar-data noscroll">
+        <div id="cutomize-topbar-data-inner" class="cutomize-topbar-data-inner noscroll"></div>
+      </div>
+    </div>
+  </div>
   <div id='entry-menu'>
     <div class='entry-content'>
       <div class='block'>
@@ -1000,6 +967,7 @@
       <div class='mobile-item noscroll' onclick="openSearch()">Search Within My Chunks</div>
       <div class='mobile-item noscroll open-manual-outer-container' onclick="openManualAddOuter()">Manually Add To My Chunks</div>
       <div class='mobile-item noscroll' onclick="showOverlays()">Show Overlays</div>
+      <div class='mobile-item noscroll' onclick="enterMobileChunkMode()">Select Chunk for Action</div>
       <div class='mobile-item noscroll' onclick="openClipboard()">Export to Clipboard</div>
       <div class='mobile-item noscroll' onclick="showChunkHistory()">Chunk-roll History</div>
       <div class='mobile-item noscroll friendslist' onclick="openFriendsList()">Friends list</div>
@@ -1015,6 +983,15 @@
       <div class='mobile-item mobile-item-cancel noscroll' onclick="hideMobileMenu()">Cancel</div>
     </div>
   </div>
+  <div class='menu14'>
+    <div>
+      <div class='mobile-item-header noscroll'>Select Option</div>
+      <div class='mobile-item noscroll' onclick="updateChunkInfo()">Show Chunk Info</div>
+      <div class='mobile-item noscroll blacklist-mobile' onclick="blacklistCanvasMobile()">Blacklist/Unblacklist Chunk</div>
+      <div class='mobile-item noscroll open-sticker-mobile' onclick="openStickersMobile()">Add/Edit Chunk Sticker</div>
+      <div class='mobile-item mobile-item-cancel noscroll' onclick="hideMobileChunkMenu(true)">Cancel</div>
+    </div>
+  </div>
   <div class='hiddenInfo' onclick='showChunkInfo()'><i class="pic fas fa-plus"></i></div>
   <div class="canvasDiv">
     <canvas id="canvas" width=1000 height=500></canvas>
@@ -1026,10 +1003,19 @@
     <a class='none' href='?change-password'>
       <div class='item'>Change Password<i class="pic fas fa-pen"></i></div>
     </a>
-    <div class='item' onclick="showChunkHistory()">Chunk-roll history<i class="pic fas fa-history"></i></div>
+    <a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank' onclick='settingsMenu()'>
+      <div class='item dropdown-item-report-a-bug'>Report a Bug<i class="pic fas fa-bug"></i></div>
+    </a>
+    <a href='https://chunk-stats.web.app' target='_blank' onclick='settingsMenu()'>
+      <div class='item dropdown-item-chunk-stats'>Chunk Stats<i class="pic fas fa-trophy"></i></div>
+    </a>
+    <div class='item dropdown-item-map-notes' onclick="openChunkNotesModal(); settingsMenu();">Notes<i class="pic fas fa-sticky-note"></i></div>
+    <div class='item dropdown-item-patch-notes' onclick="openPatchNotesModal(); settingsMenu();">Patch Notes<i class="pic fas fa-file-alt"></i></div>
+    <div class='item dropdown-item-chunk-roll-history' onclick="showChunkHistory(); settingsMenu();">Chunk-roll history<i class="pic fas fa-history"></i></div>
+    <div class='item dropdown-item-customize-topbar' onclick="openCustomizeTopbar()">Customize Topbar<i class="pic fas fa-cogs"></i></div>
     <div class='item friendslist' onclick="openFriendsList()">Friends list<i class="pic fas fa-user-friends"></i></div>
-    <div class='item' onclick="enableScreenshotMode()">Screenshot mode<i class="pic fas fa-camera"></i></div>
-    <div class='item' onclick="enableTestMode()">Sandbox mode<i class="pic fas fa-flask"></i><br /></div>
+    <div class='item dropdown-item-screenshot-mode' onclick="enableScreenshotMode(); settingsMenu();">Screenshot mode<i class="pic fas fa-camera"></i></div>
+    <div class='item dropdown-item-sandbox-mode' onclick="enableTestMode(); settingsMenu();">Sandbox mode<i class="pic fas fa-flask"></i><br /></div>
     <div class='item settingstoggle' onclick="showSettings()">Settings<i class="pic fas fa-cog"></i></div>
   </div>
 </div>
@@ -1162,6 +1148,709 @@
       </p>
       <div class='patreon-link'>
         <a href='https://www.patreon.com/sourcechunk' target='_blank'>Visit My Patreon</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id='patch-menu' style="display:none">
+  <div id='page9' class='content9'>
+    <div class='block'>
+      <div class='title'>Patch Notes Archive</div>
+    </div>
+    <div class='inner-content9'>
+      <div class='patch-notes-section'>
+        <h1>v6.3.0</h1>
+        <h3>August 12, 2024</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'><b>Group Map Support</b> - Ever try to watch your friend roll their next chunk on their chunk picker map, but it doesn't update until you reload the page? Playing a group-ironman chunk account with others and using the same map? With today's update, the chunk picker map will now stay updated in realtime with any changes happening on the map, including what others are doing!</li>
+          <li class='noscroll'><b>Patch Notes Archive</b> - There now exists an archive of all previous patch notes! They'll always be linked at the bottom of the current patch notes, or you can find it at <a href='?patch-notes' target="_blank">https://source-chunk.github.io/chunk-picker-v2/?patch-notes</a></li>
+          <li class='noscroll'><b>Mobile Chunk Info</b> - Support has now been added for checking chunk info, blacklisting chunks, and adding stickers to chunks on mobile! Just load up the site on your mobile device, open the mobile-menu, tap the 'Select Chunk for Action' button, and tap the chunk you want to interact with!</li>
+          <li class='noscroll'><b>Customizable Topbar</b> - The topbar (that toolbar-looking-thing at the top of every map) now has support for customizing which actions are displayed on it! Open the settings dropdown and click on the 'Customize Topbar' option to get started!</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a link to the quest steps window on tasks for completing a quest</li>
+          <li class='noscroll'>Added scaling droprates in accordance with passive-leveled Farming for Master Farmer seed droprates</li>
+          <li class='noscroll'>Fixed the high level bandit droptable being out of date</li>
+          <li class='noscroll'>Fixed the small furnace in Piscatoris not requiring quest progress to use</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v6.0.0</h1>
+        <h3>February 20, 2024</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'><b>Chunk Sections</b> - Chunk Sections are the parts that make up a whole chunk, created by a river or fence separating a chunk into pieces. Now that we are able to determine not just what chunks you have access to, but what part of those chunks you have access to, we can much more accurately generate tasks and more! (This feature was a very big undertaking, and surely will have some issues. Report any you find using the Bug Report link in the top bar).<br /><img style="width: 50%;display: flex;margin: auto;" src="https://i.imgur.com/dddnn67.gif" /><br /><i style="display:block;text-align: center;">An example of Chunk Sections in chunk 12596</i></li>
+          <li class='noscroll'><b>Mobile Support</b> - Added much better support for the Chunk Picker on mobile, allowing for nearly everything that can be done on the desktop site to be done on the mobile site too!</li>
+          <li class='noscroll'><b>BiS Images</b> - Added equipment images to the BiS Equipment window, to more easily check out what gear is listed there visually.</li>
+          <li class='noscroll'><b>Map Overlays</b> - Added an Overlays button at the bottom-left of the map, to show different overlays overtop your chunk map.</li>
+          <li class='noscroll'><b>Chunk Notes Markdown</b> - Changed the Chunk Notes window to have basic support for markdown, allowing more options to customize what you want to display there.</li>
+          <li class='noscroll'><b>Chunk Numbering</b> - Changed the way that Selected chunk numbering works, so now it stays the same between reloads of the page. This will cut out confusion when other people look at your map also, since the numbers will be the same for you and them.</li>
+          <li class='noscroll'><b>RS3 Friends</b> - Added the ability to add both OSRS and RS3 Chunk Maps to your Chunk Picker Friends List.</li>
+          <li class='noscroll'><b>Backend Logic</b> - Overhauled the underlying logic for handling special characters in task and item names.</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a way to select the number of doable clue steps already obtained within the Clue window.</li>
+          <li class='noscroll'>Added support for pressing the Esc key to exit windows within the Chunk Picker (thanks Happery).</li>
+          <li class='noscroll'>Added pre-loading for chunk images before a fancy roll, to prevent them from being partially loaded as the roll happens.</li>
+          <li class='noscroll'>Added support for double-searching shops to see their chunk location.</li>
+          <li class='noscroll'>Added a task for raking the Keldagrim farming patch once (thanks ChunkDwarf).</li>
+          <li class='noscroll'>Added the ability to get anti poison from Sigmund's chest in Lumbridge.</li>
+          <li class='noscroll'>Added Scrubfoot's Cave as an Accessible Area.</li>
+          <li class='noscroll'>Added the ability to get uncut red topaz from special crates and boxes.</li>
+          <li class='noscroll'>Added the ability to search partial data before tasks load in the Search window.</li>
+          <li class='noscroll'>Added console info output of the current version number.</li>
+          <li class='noscroll'>Added new quest Children of the Sun, and removed Zeah favour.</li>
+          <li class='noscroll'>Added new boss Scurrius, the Rat King.</li>
+          <li class='noscroll'>Added Combat Achievemnts for Scurrius and Desert Treasure II bosses.</li>
+          <li class='noscroll'>Added the Poll 80 changes.</li>
+          <li class='noscroll'>Added Forestry Part 3 changes, including the removal of forestry event-spawning items.</li>
+          <li class='noscroll'>Added a setting to enable warnings when clicking the 'Pick Chunk' button (thanks Kono Tyran).</li>
+          <li class='noscroll'>Added the ability to get Rocky from Sorceress' Garden.</li>
+          <li class='noscroll'>Added Camdozaal lockbox loot to task calculation.</li>
+          <li class='noscroll'>Added wiki links to the Methods and All Tasks lists.</li>
+          <li class='noscroll'>Added various barrels throughout the game that can fill an empty glass with beer.</li>
+          <li class='noscroll'>Added bird nest loot to the All Droptables rule.</li>
+          <li class='noscroll'>Added partial product skills tasks for Xtreme-type accounts.</li>
+          <li class='noscroll'>Added missing burnt tree tasks.</li>
+          <li class='noscroll'>Added music and max icon options for Chunk Stickers (thanks ChunkLok9090).</li>
+          <li class='noscroll'>Added a permanent unlockables task to buy a POH (thanks Streammz).</li>
+          <li class='noscroll'>Locked the ore rocks within the Desert Mining Camp underground behind completion of The Tourist Trap.</li>
+          <li class='noscroll'>Locked aberrant sepctres and bloodvelds within the Stronghold Slayer Cave behind completion of Priest in Peril.</li>
+          <li class='noscroll'>Changed the logic with how level 1 woodcutting and mining tools are handled.</li>
+          <li class='noscroll'>Changed the fire in the Ruins of Unkah to be classified as a range for cooking.</li>
+          <li class='noscroll'>Overhauled many tasks to refer to NPCs or Objects instead of Chunks, where possible, to help with Backlogging.</li>
+          <li class='noscroll'>Renamed 'Connections' to 'Connected Areas' in the Chunk Info sidebar.</li>
+          <li class='noscroll'>Fixed Slayer-monster drops not working with double-search.</li>
+          <li class='noscroll'>Fixed an issue with special characters in the Search window.</li>
+          <li class='noscroll'>Fixed an issue with Every Drop tasks not including the correct title if the task name has special characters.</li>
+          <li class='noscroll'>Fixed an issue where Future Tasks were calculated too often.</li>
+          <li class='noscroll'>Fixed an issue with earth impling loot.</li>
+          <li class='noscroll'>Fixed an error in the 'Giant rat#Stronghold of Security' droptable.</li>
+          <li class='noscroll'>Fixed the dark wizard tower wizards not being excluded from f2p maps.</li>
+          <li class='noscroll'>Fixed an issue with missing items from slayer monsters in All Droptables and Every Drop rules.</li>
+          <li class='noscroll'>Fixed an issue with Inquisitor armour showing the wrong wielding requirements (thanks CmwCaelin1).</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v5.5.0</h1>
+        <h3>July 16, 2023</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added the All Tasks option, which creates a list of all intermediate skill tasks to be checked off. The list can be turned on in the Settings window, and can be used in the Activity Info window.</li>
+          <li class='noscroll'>Added a setting to prevent accidentally unlocking chunks. Turn this setting on, and now chunks can only be click-unlocked when holding the Shift key! If you find yourself accidentally unlocking chunks, this might be the setting for you.</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Changed the 5 recently rolled chunks panel to use the same data as the Chunk Roll History window, instead of its own separate data.</li>
+          <li class='noscroll'>Added Shooting Star spawn location in the Chunk Info panel.</li>
+          <li class='noscroll'>Added a green-highlight to primary sources of items in the Task Details window (thanks Cinni).</li>
+          <li class='noscroll'>Fixed a bug where the Backlog Source button would appear multiple times.</li>
+          <li class='noscroll'>Fixed a bug where task headers would become broken and hide tasks until the page was reloaded (thanks Shadefang & Cinni)</li>
+          <li class='noscroll'>Fixed a bug where some shops in the All Shops rule didn't have subheaders.</li>
+          <li class='noscroll'>Fixed a bug where the Forestry Shop couldn't be Backlog Sourced (thanks West).</li>
+          <li class='noscroll'>Fixed a visual bug with the theme buttons.</li>
+          <li class='noscroll'>Fixed a visual bug with the spacing of the color pickers in the Settings window.</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v5.2.0</h1>
+        <h3>January 11, 2023</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>No major changes this week. <a class='link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>Let me know if you have any suggestions for a new feature!</a></li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added subheaders on the Active Tasks List for each shop in the Must Buy All Shop Items rule (thanks Makker).</li>
+          <li class='noscroll'>Added an info icon to the Quest Steps window that opens the Details window for that step (thanks TheBusyBard).</li>
+          <li class='noscroll'>Added a "~light" tag to the Search Within My Chunks window to search for any light-source items.</li>
+          <li class='noscroll'>Added the option to hide/show your pin on the Change Pin screen.</li>
+          <li class='noscroll'>Increased the clickbox size of the checkbox and burger icon in the Active Task List to help with misclicking (thanks Irchonkyman).</li>
+          <li class='noscroll'>Fixed a bug with Jogre drop tables overwriting other droptables.</li>
+          <li class='noscroll'>Fixed a bug with task Priority for tasks of the same level.</li>
+          <li class='noscroll'>Fixed a bug with collapsed subheaders in the Active Tasks List not saving on task calculation.</li>
+          <li class='noscroll'>Fixed a bug with the Must Buy All Shop Items rule where shops with a period/full stop in their name caused errors.</li>
+          <li class='noscroll'>Fixed the Rewards Guardian at MTA linking to the wrong wiki page (thanks Edgeville Nun).</li>
+          <li class='noscroll'>Added additional backup sorting to the ChunkInfo Panel data.</li>
+          <li class='noscroll'>Fixed parts of the Hand in the Sand quest not requiring the Wizards' Guild chunk.</li>
+          <li class='noscroll'>Fixed Uglug's shop and the surface-level ogre coffins not being locked behind starting Zogre Flesh Eaters (thanks West).</li>
+          <li class='noscroll'>Fixed a bug where any notes saved with a backlogged task weren't shown when attempting to view them.</li>
+          <li class='noscroll'>Fixed a bug with Quest Steps not properly highlighting for certain quests with special characters.</li>
+          <li class='noscroll'>Fixed a bug with the Mourning's End Part I quest where the Mourners were listed in the wrong chunk (thanks TheBusyBard).</li>
+          <li class='noscroll'>Fixed an issue with special characters in task subheaders (thanks Cherry Mix).</li>
+          <li class='noscroll'>Fixed a bug with the Stronghold of Security Zombie droptable (thanks Cherry Mix).</li>
+          <li class='noscroll'>Fixed a bug with the Task Details window not showing missing chunks correctly for not-possible tasks.</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v5.1.0</h1>
+        <h3>November 17, 2022</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>New Themes - Just in time for the end of Autumn, there is now an Autumn theme, alongside a Winter theme, that can enhance your chunk map! Try them out in the Setting window.</li>
+          <li class='noscroll'>Notepad - There is now a notepad on the website, perfect for jotting down any notes you might have related to your map, both for yourself and for others to see! Access the notepad on the top bar, next to the Discord and Patreon icons.</li>
+          <li class='noscroll'>New Tasks for This Chunk - Do you have a long list of tasks, and want to know what tasks are new every time you roll a chunk? Now you can know! Turn the option on in the Settings window and see any new tasks you have after rolling your next chunk.</li>
+          <li class='noscroll'>Lock Mahogany Homes - When you unlock the Mahogany Homes minigame, and are assigned a task outside of your chunks, now you can lock those tasks from appearing until you gain access to that chunk. Try it out via the Activity Info window in the Mahogany Homes tab.</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Changed the way the Shooting Star tab works to account for special requirements, like access to the Crafting Guild (thanks Frozen).</li>
+          <li class='noscroll'>Added the ability to see what specific clue steps are doable in your chunk, via the Clues tab.</li>
+          <li class='noscroll'>Added the ability to see what chunks are needed to complete all clues of a given tier, via the Clues tab (thanks Marstead).</li>
+          <li class='noscroll'>Added customization for the Secondary Primary chunk rule, allowing you to specify how rare a drop can be and still count as primary for training purposes (thanks KingLagalot).</li>
+          <li class='noscroll'>Added tasks for casting spells with blighted sacks (thanks Entrana Bro).</li>
+          <li class='noscroll'>Added Thieving loot as part of the All Droptables and Every Drop chunk rules (thanks Chunky Beb)</li>
+          <li class='noscroll'>Added a way to obtain POH stat-boosting teas.</li>
+          <li class='noscroll'>Added a way to show multiple possible chunks for a quest in the quest panel (thanks Marstead).</li>
+          <li class='noscroll'>Added collapsable headers for each monster for the Every Droptable rule to condense the amount of room it takes up on the task list (thanks KingLagalot).</li>
+          <li class='noscroll'>Added a way to uncommonly get seeds from picking crops fields (thanks Chunk Nub).</li>
+          <li class='noscroll'>Added a missing knife in the sack by the mage bank.</li>
+          <li class='noscroll'>Added the mining glove variants and the fish sack barrel to the Fill Costume Room chunk rule.</li>
+          <li class='noscroll'>Updated the droprate of the jar of darkness from the Poll changes.</li>
+          <li class='noscroll'>Fixed the number of trees near the Fairy Ring south of Ardougne.</li>
+          <li class='noscroll'>Fixed previously missing Woodcutting tasks in the Brimhaven Dungeon.</li>
+          <li class='noscroll'>Fixed a bug where the area in Manual Areas weren't highlighted in green when unlocked.</li>
+          <li class='noscroll'>Fixed the cattleprod being obtainable before starting Sheep Herder (thanks invalidCards).</li>
+          <li class='noscroll'>Fixed a bug with noted drops and the All Droptables rule (thanks KingLagalot).</li>
+          <li class='noscroll'>Fixed an issue with the number of guards in Falador (thanks Marstead).</li>
+          <li class='noscroll'>Fixed the way that the Brimhaven Dungeon was being processed to now correctly account for your ability to access different sections of it.</li>
+          <li class='noscroll'>Fixed a bug with ale yeast being obtainable without ecto-tokens (thanks ChunkiCinni).</li>
+          <li class='noscroll'>Fixed the sorting with some Other Tasks in the task list.</li>
+          <li class='noscroll'>Fixed an issue where skewering meat with an iron spit didn't require Firemaking (thanks Chunkifer).</li>
+          <li class='noscroll'>Fixed a bug with a ghost variant near ZMI (thanks KingLagalot).</li>
+          <li class='noscroll'>Fixed a bug with wiki links on quests with apostrophes.</li>
+          <li class='noscroll'>Fixed a bug with processing a chocolate bar through Cooking before 40 Cooking (thanks Chunk Nub).</li>
+          <li class='noscroll'>Fixed the task definition for making a chocolate cake to allow for chocolate dust too.</li>
+          <li class='noscroll'>Fixed the list of items that can slash a web to include missing items.</li>
+          <li class='noscroll'>Fixed Fishing Trawler giving incorrect requirements for players without primary Fishing training methods.</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v5.0.0</h1>
+        <h3>October 11, 2022</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Custom Themes - Now available in the settings window, custom themes for the website! Themes include the standard light and dark themes, as well as an old-school terminal theme, a neon 80's theme, a monochrome theme, and even a spooky pumpkin theme!</li>
+          <li class='noscroll'>Backlog Options - Replacing the previously available 'Backlog w/ Note' feature, Backlog Options can let you either backlog the single task, or directly backlog source any of the components, straight from the backlog window.</li>
+          <li class='noscroll'>Non-Auto Task Calculation - Chunk Tasks being automatically calculated on every change has been removed (in most cases). Now, when you backlog a task, or unlock an area, or change a rule, your tasks will not update until you click the 'Calculate Tasks' button at the top of your Active Chunk Tasks panel. This change has been added especially to help make backlogging multiple tasks smoother going forward.</li>
+          <li class='noscroll'>Fill POH Rule - This new Chunk Rule requires you to fill your POH Costume Room with all the possible non-quest gear that you can within your chunks. A perfect rule for any completionists out there!</li>
+          <li class='noscroll'>Small Calculation Optimization - Some small changes to the way tasks are calculated have been made to hopefully speed up medium-to-large map calculation times.</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added Krystilia and Konar to the Slayer Task Calculator.</li>
+          <li class='noscroll'>Added an option to tell the Slayer Task Calculator to ignore combat levels if you've done the same in-game.</li>
+          <li class='noscroll'>Fixed a bug where tasks that were un-backlogged or un-completed were not visually removed from the Backlog/Completed list right away.</li>
+          <li class='noscroll'>Fixed the frogspawn fishing loot to properly include swamp weed.</li>
+          <li class='noscroll'>Fixed an issue where the magic axe door Thieving task referenced the wrong chunk.</li>
+          <li class='noscroll'>Fixed an issue with Martin Thwait's shop being restricted wrongly.</li>
+          <li class='noscroll'>Fixed an issue with the All Drops rule and Slayer monsters.</li>
+          <li class='noscroll'>Fixed a miscategorizing of the goblins in chunk 10293.</li>
+          <li class='noscroll'>Fixed the cave goblin drop table to accurately reflect their drops after the Land of the Goblins update.</li>
+          <li class='noscroll'>Fixed a mispelling in a hot air balloon Firemaking task.</li>
+          <li class='noscroll'>Fixed the diary cape being unobtainable.</li>
+          <li class='noscroll'>Fixed graceful recolours being unobtainable.</li>
+          <li class='noscroll'>Fixed various other cosmetic changes to items being unobtainable.</li>
+          <li class='noscroll'>Fixed an issue with some Slayer tasks and Slayer Locking.</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.18.0</h1>
+        <h3>June 06, 2022</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Accessible Areas are now fully automatic! No more worrying about what underground areas you've unlocked every new chunk, as the website will now figure it out for you.</li>
+          <li class='noscroll'>Added a way to manually enable/disable specific accessible areas (in-case the automated way gets it wrong). This feature is found where the Accessible Areas tab used to be on the right sidebar.</li>
+          <li class='noscroll'>Added a counter for average days between chunk rolls, located in the Chunk-roll History window (accessible via the top-right dropdown).</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed the Wise Old Man tasks so that they would be backlogged when the Wise Old Man himself is backlogged (thanks Delumen).</li>
+          <li class='noscroll'>Fixed a minor misordering issue with the Search categories tooltip.</li>
+          <li class='noscroll'>Fixed some minor bugs for a few task calculation edge-cases.</li>
+          <li class='noscroll'>Fixed an incorrect chunk required for the "Unlock the Slepe teleport for the Drakan's medallion" task.</li>
+          <li class='noscroll'>Fixed an issue with crystal dust being obtainable before being able to access Prifddinas.</li>
+          <li class='noscroll'>Fixed an issue with the lower level barbarians and chickens outside the Barbarian Outpost.</li>
+          <li class='noscroll'>Fixed an issue with the Big Heist Lodge being accessible before Desert Treasure.</li>
+          <li class='noscroll'>Seperated the Kalphite Queen into her own, separate area from the upper layer of the Kalphite Lair.</li>
+          <li class='noscroll'>Removed some useless, unseen Accessible Areas from the list.</li>
+          <li class='noscroll'>Added better support for tracking lit versions of light sources.</li>
+          <li class='noscroll'>Slightly optimized the task calculation for maps with many completed tasks.</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.16.0</h1>
+        <h3>April 27, 2022</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added Combat Achievements! They can be turned on in Chunk Rules (they're off by default), under the Diary section near the top, and behave similarly to how any other Diary task would.</li>
+          <li class='noscroll'>Added stab/slash/crush options for melee BiS tasks. Replaces melee BiS tasks with specific tasks for each melee style instead. If you have flinch BiS or defensive BiS selected as well, they will also be replaced with stab/slash/crush variants.</li>
+          <li class='noscroll'>Added the new quest Beneath Cursed Sands, along with the quest rewards and newly accessible chunks in the southern desert that came with it.</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a total prayer bonus display to the Prayer BiS page.</li>
+          <li class='noscroll'>Added a progress bar for loading tasks for large maps.</li>
+          <li class='noscroll'>Added loot from turning in an unsired.</li>
+          <li class='noscroll'>Fixed crystal shards being obtainable outside of Prifddinas.</li>
+          <li class='noscroll'>Fixed items with multiple levels of rarity (e.g. monster -> 1/10 drop of casket -> 1/64 drop of uncut sapphire) not being computed properly with the Rare Drop Chunk Rule.</li>
+          <li class='noscroll'>Fixed bosses that require items to initiate the fight not requiring those items (Bryo, Obor, Skotizo).</li>
+          <li class='noscroll'>Fixed Krystilia needing you to get a normal Slayer task before assigning you Wilderness tasks (thanks Frozen).</li>
+          <li class='noscroll'>Fixed the 'Show New Tasks' button from appearing when performing multiple actions before they all finish.</li>
+          <li class='noscroll'>Fixed a bug that caused tasks not to load on iPhones.</li>
+          <li class='noscroll'>Fixed a bug that broke the map on Safari (thanks Han Tyumi).</li>
+          <li class='noscroll'>Fixed tasks being recalculated when the 'none' option was selected for xp rewards.</li>
+          <li class='noscroll'>Fixed noted items being incorrectly considered as unnotable when no banker/unnoting npc is present within unlocked chunks (thanks Kostrello).</li>
+          <li class='noscroll'>Fixed a bug with importing from an old map.</li>
+          <li class='noscroll'>Fixed a missing shooting star location in Lumbridge Swamp (thanks Ynybody1).</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'> 
+        <h1>v4.15.0</h1>
+        <h3>April 11, 2022</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a new tab in the Activity Info window for Shooting Stars! Check how many locations you have access to mine them, split per region.</li>
+          <li class='noscroll'>Added a new rule for allowing spells to count as chunk tasks. Most accounts will want to keep this rule *on*, and as such, it is ON by default for everyone.</li>
+          <li class='noscroll'>Added a new rule for buying all items from shops within your chunks, for those of you out there that are extra-completionist with your chunks!</li>
+          <li class='noscroll'>Added a new rule to require Quest skill reqs must be gotten when unlocking a quest starting point, regardless of ability to start said quest (for Xtreme+ type accounts mostly).</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed an issue where the Falador hard diary task for getting a Saradomin crest didn't consider your Construction level properly.</li>
+          <li class='noscroll'>Fixed an issue when doing a Backlog Source on the LMS shop (thanks JLo).</li>
+          <li class='noscroll'>Fixed a man inside the Fishing Guild not being locked behind 68 Fishing (thanks Frozen).</li>
+          <li class='noscroll'>Fixed F2P-only drops for Farmers appearing for Farmers that were in members-only areas.</li>
+          <li class='noscroll'>Fixed a bug where Active Diary Tasks showed multiple times while loading new Chunk Tasks.</li>
+          <li class='noscroll'>Fixed an issue where skill chunk-stickers weren't showing in Firefox (thanks Land Ender).</li>
+          <li class='noscroll'>Fixed an issue with Agility shortcuts not counting as a training method in particular situations (thanks MCFS).</li>
+          <li class='noscroll'>Fixed an issue where LMS tasks were required before being able to play competetive LMS (thanks Ynybody1).</li>
+          <li class='noscroll'>Fixed some minor issues with UI scaling when at half-screen (thanks MCFS).</li>
+          <li class='noscroll'>Fixed rock-shell/skeletal/spined boots & gloves being incorrectly locked behind completion of The Fremennik Trials quest (thanks buckinbroncos69).</li>
+          <li class='noscroll'>Fixed an issue where wielding broad ammo would appear as a Ranged task even when Slayer-locked.</li>
+          <li class='noscroll'>Fixed an issue where the Pick Chunk button would get stuck displayed as "Random Start?" sometimes.</li>
+          <li class='noscroll'>Fixed an issue with Safari and regex's (thanks Han Tyumi).</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.14.0</h1>
+        <h3>March 22, 2022</h3>
+        <h2 class='noscroll'>Major Changes & New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added Quest & Diary Progress tabs, where you can keep track of how far you've gotten in every quest and diary. You can even filter the quests to only see your completed ones, or only your in-progress ones, etc. Check out these new tabs in the 'Activity Info' window!</li>
+          <li class='noscroll'>Added quest xp rewards! Now when you're able to complete a quest in your chunks, the xp rewards from completing it are tracked, and might give you new, higher level tasks if they unlock a training method.</li>
+          <li class='noscroll'>In addition to normal quest xp rewards, some quest xp is given in the form of a choice between multiple skills, or a lamp to be used in any skill. These rewards are also tracked, and you'll be prompted to enter the choice you made after checking off relevant tasks.</li>
+          <li class='noscroll'>Overhauled the way that passive leveling works; now, setting a passively gained level in a skill will not only show tasks up to that level, but if you unlock a training method, now it'll show tasks above too!</li>
+          <li class='noscroll'>In addition to the previously mentioned change on passive leveling, now items that are produced at a level lower than your highest level task are tracked, and can now be used for things like quests/diaries/more.</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed maps not centering correctly if invalid chunks were unlocked.</li>
+          <li class='noscroll'>Fixed invalid chunks from being rollable if no chunks are selected (thanks Oponn).</li>
+          <li class='noscroll'>For darkmode users, added darkmode dropdown menus for backlogging a task and similar menus.</li>
+          <li class='noscroll'>Fixed some misnamed quests (you may have to re-complete these due to the renaming).</li>
+          <li class='noscroll'>Fixed Backlog Sources not showing when entering Sandbox mode.</li>
+          <li class='noscroll'>Added the plain thief variant to the Clock Tower Dungeon (thanks buckinbroncos69).</li>
+          <li class='noscroll'>Split the Witchaven Dungeon into a non-quest part, and a quest part (thanks Purityy).</li>
+          <li class='noscroll'>Locked Ava's store behind Animal Magnetism completion (thanks buckinbroncos69).</li>
+          <li class='noscroll'>Added Fishing Guild polled changes to store stock and spawn.</li>
+          <li class='noscroll'>Added missing walkable chunk by the Settlement Ruins in Zeah (thanks Slay Brother).</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.13.0</h1>
+        <h3>February 28, 2022</h3>
+        <h2 class='noscroll'>Optimization Changes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Completely overhauled the underlying map technology, to improve smoothness and reduce lag</li>
+          <li class='noscroll'>Changed behavior when right-clicking chunks by delaying potential chunk tasks, reducing lag</li>
+          <li class='noscroll'>Re-enabled Chunk Id's after disabling them due to lag reasons</li>
+          <li class='noscroll'>Added non-automatic task rendering for maps with many unlocked chunks or many active tasks. These maps can still display tasks after they are loaded manually</li>
+          <li class='noscroll'>Overhauled the way that chunk tasks are processed when being checked-off</li>
+        </ul>
+        <h2 class='noscroll'>Other Changes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Changed some of the coloring and thickness/opacity in high visibility mode and dark mode</li>
+          <li class='noscroll'>Removed unusable fires from a chunk in Lovakengj (thanks SkyChunkis))</li>
+          <li class='noscroll'>Fixed some circular logic between Yu'biusk and the Dorgesh-Kaan South Dungeon</li>
+          <li class='noscroll'>Fixed bronze arrow amounts from shayzien soldiers</li>
+          <li class='noscroll'>Fixed an issue with area-specific items being required without their respective areas</li>
+          <li class='noscroll'>Added borders to the chunk sticker options</li>
+          <li class='noscroll'>Fixed an issue with sinew incorrectly being able to made on a fire (thanks Ynybody1)</li>
+          <li class='noscroll'>Added a missing walkable chunk on the eastern side of Etceteria</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.12.8</h1>
+        <h3>February 10, 2022</h3>
+        <h2 class='noscroll'>Changes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'><b class='noscroll'>Added a F2P-only rule!</b> Turn the rule on to disable all tasks that are members-only</li>
+          <li class='noscroll'>Added a new Chunk Rule: Fill Stash's. This rule will require you to make and fill any STASH unit that you have access to the items for</li>
+          <li class='noscroll'>Added the ability to export a list of unlocked chunks to your clipboard, to paste into the Region Locker plugin on RuneLite. Find it in the Settings dropdown at the top-right</li>
+          <li class='noscroll'>Added caching to active chunk tasks, so that when initially loading into your map, or unlocking a new chunk, you're still able to see your previously saved tasks while new ones load</li>
+          <li class='noscroll'>Added Land of the Goblins & Hopespear's Will, as well as related tasks</li>
+          <li class='noscroll'>Added new Wilderness Slayer Cave tertiary drops</li>
+        </ul>
+        <h2 class='noscroll'>Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed an issue where shops/items locked by multiple requirements not functioning properly</li>
+          <li class='noscroll'>Fixed missing STASH units from some chunks</li>
+          <li class='noscroll'>Removed unkillable undead trees from monsters list</li>
+          <li class='noscroll'>Removed unreachable ruby ring in Varrock west bank basement (thanks jeffrey)</li>
+          <li class='noscroll'>Fixed black dye misnaming</li>
+          <li class='noscroll'>Fixed campfires not being counted as cookable fires</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.12.0</h1>
+        <h3>January 28, 2022</h3>
+        <h2 class='noscroll'>Changes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a new Chunk Rules preset - Supreme Chunker! This new ruleset is like Xtreme, but even harder, for those of you that want a even harder challenge. If things like required skilling pets, every single drop from every droptable, and more, definitely try it out! (And check out <a class='noscroll link' target='_blank' href='https://www.youtube.com/channel/UCVQ6zS9RXucM-kCd9XvHm5A'>BuzRS on Youtube</a>, who this rule exists thanks to)</li>
+          <li class='noscroll'>Added symbols within the Chunk Rules window to visually indicate if a rule is Xtreme or Supreme, to help with some clarity and confusion</li>
+          <li class='noscroll'>Reworked the way Ranged BIS gear is calculated, so now it considers a pairing of ranged weapon & ammo together rather than separately</li>
+          <li class='noscroll'>Changed the 'Manually Add Monsters' feature to includes Items, NPCs, and Objects</li>
+          <li class='noscroll'>Changed the Clue Scroll tab to be static instead of dynamically generated, so it will always be visible, even when a chunk is already unlocked</li>
+          <li class='noscroll'>Separated the Outer and Inner areas of Mor Ul Rek from each other into 2 distinct areas (you'll need to re-select them if you had access previously)</li>
+          <li class='noscroll'>Added tasks to get 70 Prayer to get a god crest in Falador</li>
+        </ul>
+        <h2 class='noscroll'>Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed a bug with improper task assignment on users with the 'Multi-step Processing' and 'Wield BIS' rules turned on, but the 'Highest Level Processing' turned off (thanks osrsmcfs)</li>
+          <li class='noscroll'>Fixed the Charge task showing before having access to a god staff</li>
+          <li class='noscroll'>Fixed collection log tasks for Mahogany Homes showing up before being able to do the minigame</li>
+          <li class='noscroll'>Fixed the chompy pet being obtainable before the diary was completable</li>
+          <li class='noscroll'>Fixed strung amulets not appearing properly</li>
+          <li class='noscroll'>Fixed missing skillcapes for the Falador Elite Diary task</li>
+          <li class='noscroll'>Fixed missing iron med helm spawn in Shayzien (thanks leerlingnummer2)</li>
+          <li class='noscroll'>Fixed a bug with exiting Sandbox mode while inside the Chunk Rules window</li>
+          <li class='noscroll'>Fixed the Amulet of the damned not correctly counting with Karil's for BIS calculations</li>
+          <li class='noscroll'>Fixed Prayer training methods that weren't bone-burying not being counted correctly</li>
+          <li class='noscroll'>Fixed the way training methods are shown for Ranged in the 'Activity Info' window</li>
+          <li class='noscroll'>Fixed many, many monster variants or area-specific drops being shown when actually inaccessible</li>
+          <li class='noscroll'>Fixed some minor issues around processing skill products</li>
+          <li class='noscroll'>Fixed the quest cape being unobtainable</li>
+          <li class='noscroll'>Fixed a spelling mistake in the Warriors' Guild Basement</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.11.0</h1>
+        <h3>January 14, 2022</h3>
+        <h2 class='noscroll'>Changes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added the ability to add 'passively' trained skills. This feature is useful for skills that you don't have access to a primary training method yet, but want to train the skill anyway to unlock something or for a quest requirement. You can add passively trained skills in the 'Activity Info' window.</li>
+          <li class='noscroll'>Added the option to fully expand the Chunk Tasks panel into a full-height sidebar. You can turn this setting on within the Settings window. As part of this change, the "Show Chunk ID's" button was moved to the settings menu as well, and allowed the default view of the Chunk Tasks panel to be larger as well.</li>
+          <li class='noscroll'>Added all levels of primary training methods within the Activity Info window, instead of only level 1 methods like before.</li>
+          <li class='noscroll'>Added more ~filters to the 'Search Within my Chunks' window, including most skills (~crafting, ~mining, ~construction, etc).</li>
+        </ul>
+        <h2 class='noscroll'>Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed the ankou droptable outside the Stronghold of Security (thanks Haegr)</li>
+          <li class='noscroll'>Fixed a bug where chunk id's would always be turned off when leaving Sandbox Mode (thanks Land Ender)</li>
+          <li class='noscroll'>Fixed a bug where some instances would cause Magic tasks to appear from the wrong spellbook before they were unlocked</li>
+          <li class='noscroll'>Fixed a bug where clicking on a quest step wouldn't scroll to the correct part of the page</li>
+          <li class='noscroll'>Fixed a bug where Magic primary methods were not being displayed fully</li>
+          <li class='noscroll'>Fixed a missing way to get flour from a barrel of flour</li>
+          <li class='noscroll'>Fixed a Fremennik Diary task that was bound by the incorrect area requirements</li>
+          <li class='noscroll'>Fixed New droprates after the drop rate nerf</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.10.0</h1>
+        <h3>January 03, 2022</h3>
+        <h2 class='noscroll'>Changes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Separated the 'Current BIS/Skill Info' button into 2 different buttons/windows. Check your current BIS gear and add new gear with the new 'Current BIS' button, and explore primary training methods, clue scroll statistics, and Slayer locking with the new 'Activity Info' button.</li>
+          <li class='noscroll'>Added a new Chunk Rule under the Collection Log Section: Clue Scrolls! The rule is for more extreme-type accounts, and will require you to fill all collection log slots within a given clue tier once you have all of that tier steps unlocked. (Once all beginner steps are doable, you need to get all beginner uniques, once all easy steps are doable you'll need all easy uniques, etc.)</li>
+          <li class='noscroll'>Added search categories to the 'Search Within my Chunks' window. Try searching for <b class='noscroll'>~food</b> or <b class='noscroll'>~boost</b> or <b class='noscroll'>~tool</b> or <b class='noscroll'>~herblore</b> to try it out (and please let me know of any other categories you'd like to see!)</li>
+          <li class='noscroll'>Changed the behavior when manually adding a skill task. Before, adding a skill task to a skill you didn't have access to would unlock the entire skill. Now, it will only do so if you add a task that counts as a primary way to train the skill too.</li>
+          <li class='noscroll'>Added a new Chunk Rule to determine whether building furniture inside your POH counts as a primary way to train Construction. This is now a separate rule from the already existing Rule about POH furniture counting as Chunk Tasks in general.</li>
+        </ul>
+        <h2 class='noscroll'>Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed the giant rat droptable in the Stronghold of Security</li>
+          <li class='noscroll'>Fixed the 'home' link linking to the incorrect page (thanks ChunkyWunky)</li>
+          <li class='noscroll'>Fixed Ranging Guild tasks showing before being able to access the Guild</li>
+          <li class='noscroll'>Fixed a missing bowl from eating a stew (thanks Land Ender)</li>
+          <li class='noscroll'>Fixed a step in the Corsair Curse tasks not requiring the Cove itself (thanks Boucr & DarkR41d3r)</li>
+          <li class='noscroll'>Fixed silk being missing as obtainable from the Al Kharid silk trader</li>
+          <li class='noscroll'>Fixed an inconsistency with the Minigames Chunk Rule</li>
+          <li class='noscroll'>Fixed arclight being missing from BIS tasks</li>
+          <li class='noscroll'>Fixed the Keldagrim tasks minigame so that it counts as a training method (for some niche accounts)</li>
+          <li class='noscroll'>Fixed mature ales being unobtainable from brewing</li>
+          <li class='noscroll'>Fixed polar kebbits being tied to the incorrect chunk</li>
+          <li class='noscroll'>Fixed the Molch Pearl shop being accessible without ability to get Molch Pearls (thanks Land Ender)</li>
+          <li class='noscroll'>Fixed evil chicken outfit pieces being required before Hosidius favour (thanks Land Ender)</li>
+          <li class='noscroll'>Fixed some incorrect connections within the Corsair Cove Dungeon</li>
+          <li class='noscroll'>Fixed some missing clay rocks and a bronze pickaxe spawn from the Kebos Mine</li>
+          <li class='noscroll'>Fixed an inaccesible willow tree causing undoable Chunk Tasks (thanks Divinor)</li>
+          <li class='noscroll'>Removed Holiday theming - Happy New Years :)</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.9.0</h1>
+        <h3>December 09, 2021</h3>
+        <h2 class='noscroll'>New Features</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'><b class='noscroll'>Quest & Diary Chunk Tasks</b>: Quest & Diary chunk tasks are finally here! Keep track of your quest and achievement diary progress as you unlock chunks. (Turn it on in the Chunk Rules window if it isn't already).</li>
+          <li class='noscroll'><b class='noscroll'>Quest, Diary, & Favour Unlocks</b>: Closely related to the Quest & Diary chunk tasks, now there is specific tracking on many quest-locked (and similar) shops (Heroes' Guild shop, White Knight Armoury), weapons/armour (dragon dagger, rune platebody), monsters (lizardman shamans, zogres), and more. These will no longer show up as chunk tasks *until* you're able to complete their respective quests.</li>
+          <li class='noscroll'><b class='noscroll'>Fancy Chunk Rolling</b>: A brand new, fancy way to roll chunks. Enable/disable it in the settings menu.</li>
+          <li class='noscroll'><b class='noscroll'>Friends List</b>: Tucked away in the top-right dropdown menu, the Friends List feature helps you keep track of your friends or your favorite content creators and their chunk maps! Create a list of quick-to-access maps of your friends, to quickly jump to their maps and see what they've been up to recently (just for convenience mostly).</li>
+        </ul>
+        <h2 class='noscroll'>Small Changes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added drop-rates to the monster drops within the Search My Chunks feature.</li>
+          <li class='noscroll'>Added a clue scroll data section to the left-side Chunk Info Panel, in place of the Diary Steps section. It shows how many new clue steps are possible when unlocking the selected chunk.</li>
+          <li class='noscroll'>Added a Construction task for the new Gold sink.</li>
+          <li class='noscroll'>Added the number of quest points earned in the Skill Info window.</li>
+          <li class='noscroll'>Added items from the mystery box (from the Quiz Master random event) to the list of random event items addable.</li>
+          <li class='noscroll'>Added a new chunk rule that lets the process of making sulphurous fertiliser count as a primary way to train Farming.</li>
+          <li class='noscroll'>Split the Corsair Cove Dungeon into a North and South Dungeon, since the north half requires Dragon Slayer I to access.</li>
+          <li class='noscroll'>Added patch notes :)</li>
+        </ul>
+        <h2 class='noscroll'>Bug Fixes</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed an issue where the Add-X button wasn't re-hidden after leaving sandbox mode.</li>
+          <li class='noscroll'>Fixed an issue where Taverley was being incorrectly referred to as Taverly.</li>
+          <li class='noscroll'>Fixed an issue with the Fire of Nourishment location.</li>
+          <li class='noscroll'>Fixed an issue with a missing gem stall in Keldagrim. (credit - Link & Rargh)</li>
+          <li class='noscroll'>Fixed an issue with incorrect goblin variants. (credit - Junebug)</li>
+          <li class='noscroll'>Fixed an issue with crocodiles being shown to drop long and curved bones. (credit - ShaduKat & The Castaways)</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section dark-patch-notes-section'>
+        <h3>NOTE: Patch Notes below this point are transcribed from Discord, as they were before in-app Patch Notes existed</h3>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.8.0</h1>
+        <h3>November 09, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>Slayer Locking: This feature is perfect for when you get an undoable Slayer task (within your current chunks), and you don't want to have to backlog every Slayer-related task between now and whenever you finally are able to do the Task you're stuck on. Set the Slayer task you're stuck on (or manually lock it) as well as your current Slayer level. Slayer will still locked until you roll into a chunk that lets you do your task. Alternatively, you can manually unlock Slayer at any time.</li>
+          <li class='noscroll'>Clue Stats: A simple feature, the Clue Stats shows you the number of clue steps you can complete within your chunks, as well as your chances of being able to complete each given clue tier within your chunks.</li>
+          <li class='noscroll'>Manually Add Monsters: If you're an account that allows luring monsters into your chunks from other chunks, then this feature is for you. It's as simple as it sounds; just add the monster to your chunks and any relevant tasks related to the monster will appear correctly.</li>
+          <li class='noscroll'>Missing Reqs: An add-on to the "Manually Add Tasks" feature, if you're ever not sure why a task isn't showing up for you, now you can check! Just navigate to the "Manually Add Tasks" window, find the task in question, and click the info-icon next to it to see what you're missing (highlighted in red).</li>
+          <li class='noscroll'>Task Alternatives: This feature is perfect for checking if a given task has equivalent alternatives at the same level (ex: wielding a willow longbow vs willow shortbow, or mining clay instead of mining tin, etc.). Find it in the same dropdown menu as "Backlog" and "Details". You can even set the alternative task as the one that shows by default instead!</li>
+          <li class='noscroll'>Only Mark Walkable Chunks: A little QOL feature, this setting will make it so that only valid walkable neighboring chunks will be automatically selected when rolling a chunk. No more having to unmark ocean chunks and more!</li>
+          <li class='noscroll'>Chunk-roll History: Found in the top-right settings menu, this window will show you a full history of all your previously rolled chunks, with Date and Time, in order. Note that if you've had your map for a while, it won't show chunks rolled before we started tracking it.</li>
+          <li class='noscroll'>Weight-Reducing BiS: Another option for BiS tasks, this one lets you require weight-reducing gear (like graceful, boots of lightness, etc.) be acquired.</li>
+          <li class='noscroll'>Ranged Ammo Fix: There has been a lot of confusion since the release of the BiS tasks about why the Ranged Ammo BiS tasks shows weird tasks sometimes, like showing rune javelins as BiS ammo, even without being able to use the javelins yet. With this change, that is finally fixed, and your BiS ammo will only count for ammo you can actually use with your currently available ranged weapons.</li>
+          <li class='noscroll'>Secondary MTA: A niche feature, this Chunk Rule lets you set MTA (Magic Training Arena) tasks to only appear when you have a Primary source of the necessary runes, rather than requiring the MTA tasks even with Secondary runes sources. The rule is set to off (only Primary sources) by default.</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.7.0</h1>
+        <h3>October 01, 2021</h3>
+        Introducing a brand new feature: the ability to Backlog Sources!<br />
+        Ever come across a monster in your chunks that you just physically can't kill with your current chunks (like the Kalphite Queen or metal dragons)? Ever finding yourself backlogging 10 different tasks just because of 1 shop or monster you can't reach yet? With the Backlog Sources panel, now you can backlog all of those things in a single swoop! Just search for the item, object, monster, npc, or shop you need backlogged, and then tick it off the list. Afterwards, drops from that monster/items from that shop/etc. won't affect your chunk tasks, until you decide to unbacklog it in the same way.<br />
+        The Backlog Sources panel can be opened from inside the 'Backlog' section, just below the 'Active Chunk Tasks'.
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.6.0</h1>
+        <h3>September 09, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>Overhaul of Sandbox Mode that now allows many more things to be edited now: chunk rules, checking off tasks, unlocking areas, backlogging tasks, etc.</li>
+          <li class='noscroll'>Upgraded checkboxes to fancy new checkboxes (which lets me do fun things with colors and animations)</li>
+          <li class='noscroll'>Chunk Stickers that have notes attached to them will now show the note when hovered over (when holding CTRL). This also works on other people's maps too</li>
+          <li class='noscroll'>Added a chunk rule for chunkers that want to keep the tools from tutorial island (axe, pickaxe, tinderbox, small net)</li>
+          <li class='noscroll'>Chunk Rules are now accessible when looking at other people's maps, so you can see what rules they're playing with</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.5.3</h1>
+        <h3>September 04, 2021</h3>
+        Colored chunk stickers
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.5.0</h1>
+        <h3>August 30, 2021</h3>
+        Dark Mode - turn it on in the settings panel
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.4.8</h1>
+        <h3>August 27, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a whole new section to the chunk stickers feature from last week: OSRS-themed stickers! Now you can mark a chunk with any skill icon in the game; maybe you want to show unlocking a chunk lets you start training Herblore finally? Or maybe you mark a chunk with Mining because there's a big Mining grind there? Lots of things to try out</li>
+          <li class='noscroll'>Adding stickers to chunks can be done be hovering over a chunk an holding the Control key, then clicking on the tag icon that appears</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.4.3</h1>
+        <h3>August 16, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added the ability to add stickers to your chunks! Now you can denote if a chunk is bad to roll, good to roll, time-consuming, and lots more. You can add stickers by holding the Control Key (Ctrl) on your keyboard and hovering over the chunk you want to add a sticker to. Clicking on the tag icon will let you assign a sticker then, and the same can be done to remove or change an existing sticker.</li>
+          <li class='noscroll'>Changed the way you blacklist chunks, so now a blacklist button appears when holding the Control Key (Ctrl) while hovering over a locked chunk. Clicking that button will blacklist and un-blacklist the chunk as usual.</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.4.0</h1>
+        <h3>August 11, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a Sandbox Mode that lets you mess around with your map (unlock/roll chunks, change rules, backlog tasks, etc), and as soon as sandbox mode is turned off, everything will switch back to the way it was before. Great for trying stuff out before committing to it, or for planning routes on your map. Turn it on in the settings menu, and turn it off again the same way (or by hitting the Esc cape). Oh, and you can mess around with other people's maps too, if you want to (none of it will save of course)</li>
+          <li class='noscroll'>Added Combat level skill tasks: Getting slayer tasks from masters and boarding landers for Pest Control. Slayer master tasks only require you to get the lowest combat level of any of your unlocked masters, while Pest Control landers require you to get 40 combat to access the minigame (or 100 combat if the new chunk rule is turned on)</li>
+          <li class='noscroll'>Added armour set effects to the BiS calculations for the chunk picker. Now things like Void armour, Obsidian armour, Crystal armour, and more will correctly be shown as BiS when their set effects make them BiS.</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.3.13</h1>
+        <h3>August 02, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added the ability to manually add additional BiS gear that outranks your current required BiS gear (black d'hide from clue scrolls, glory/fury/etc crafted gear, etc). Find it in the Current BIS window</li>
+          <li class='noscroll'>On the "Details" dropdown option for tasks, if there are items required that have many sources (think hammers, chisels, bones, etc), it will just list "Many sources" and link you to a list of them all in a new window. Large maps rejoice</li>
+          <li class='noscroll'>Lots of small stuff</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.3.12</h1>
+        <h3>July 31, 2021</h3>
+        <h2 class='noscroll'>Lots of small stuff today:</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a new Chunk Rule for Herblore that can be opted-in to if you want to consider snake weed a primary way to train the skill (thanks @Deleted User )</li>
+          <li class='noscroll'>Drop tables for all goblins updated to correctly reflect what the wiki has changed their data to (thanks @SnakyLizard )</li>
+          <li class='noscroll'>Skill tasks added for accessing each of the tiers of gardens in Sorceress's Garden (thanks @Father Martin (CZO) )</li>
+          <li class='noscroll'>Lots more small things that may affect droprate calculations and some tasks</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.3.0</h1>
+        <h3>July 01, 2021</h3>
+        Nothing hugely specific today in terms of what you'll experience on the Chunk Picker yourself, but I've done a big overhaul of the security of the project as a whole after someone pointed out a potential issue with it, so now going forward things will be a bit more secure. (I will continue to advise you not to use the same PIN as you have anywhere else though, just as a good practice in general).<br />
+        However, as an added bonus of revisiting the security side of things, I went ahead and extended the 4 digit PIN maximum length, so now PIN's can be any mix of alphanumeric characters between 4 and 8 long. You shouldn't have to change anything if you don't want to, your old PIN's should work fine.<br />
+        That being said, I'd recommend everyone take the chance to verify that you can still log-in to your maps, even if you don't intent on changing the pins or anything, just to be sure that this update to the security hasn't affected your ability to log-in. And please let me know if it has, and we can get right on fixing it.
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.2.0</h1>
+        <h3>June 29, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>New feature: Current BIS/Skills Info! Let you see a breakdown of the highest skill tasks so far for each skill, as well as your primary training methods for each. Also includes your current full BIS gear for each style, to easily keep track of your whole gear setup.</li>
+          <li class='noscroll'>Reworded a bunch of rules to be slightly more clear</li>
+          <li class='noscroll'>Added custom numbers for the Kill X and the Rare Drop rule (e.g. Kill 563 of every monster or allow drops higher than 1/512 to count)</li>
+          <li class='noscroll'>BIS skilling gear will no longer require you to obtain unusable items for skills you can't train (no rune pickaxe if you can't train mining, etc.)</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.1.2</h1>
+        <h3>June 21, 2021</h3>
+        The Shayzien rework is finally here! I've added the updated map image, as well as all the new/changed npcs and monsters (with the help of @Haerdalas Giantsbane (Batout) and @de chunk (EKU) ). I've also added the new spells from the quest, as well as the new Agility course in Shayzien, so between all of that there is a potential for new tasks for you, so look out<br />
+        Still waiting on some droptables to get filled in completely, namely the necromancer, but most things are in place well at this point
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.1.0</h1>
+        <h3>June 13, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added a Search Within my Chunks feature! Now you can search within your unlocked chunks for items, monsters, npcs, and objects/features!</li>
+          <li class='noscroll'>Separated intertwined areas in the areas tab! Things like the Taverly Dungeon & Entrana Dungeon or the Varrock Sewers & Edgeville Dungeon are now split into separate areas. Remember that since they are separate areas now, you'll need to go back and mark the new areas.</li>
+          <li class='noscroll'>Fixed some small visual bugs on dismissing the entry menu</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v4.0.0</h1>
+        <h3>June 09, 2021</h3>
+        <h2 class='noscroll'>Big Update today!</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Added the ability to select custom chunk-rules, to customize what chunk tasks you see and don't see, and how they are generated</li>
+          <li class='noscroll'>Added rule presets, which now allows Xtreme Chunkers to finally use the Chunk Picker fully! And I've worked with Limpwurt himself on these, he has confirmed it matches his ruleset preferences and that the correct tasks are being generated. Check out https://www.youtube.com/watch?v=_e4sWj7bCdU if you're an Xtreme Chunker and need help setting up your map and understanding the special features you get access to</li>
+          <li class='noscroll'>Added Best-in-Slot tasks, finally you can receive tasks for the best gear in each chunk</li>
+          <li class='noscroll'>Extra settings in an all new settings area</li>
+          <li class='noscroll'>Tons of optimization on the smoothness of generating tasks, especially on bigger maps</li>
+          <li class='noscroll'>A ton more!</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v3.2.1</h1>
+        <h3>March 23, 2021</h3>
+        <ul class='noscroll'>
+          <li class='noscroll'>Fixed large pieces of logic that calculated some tasks wrongly, resulting in more accurate task choosing now</li>
+          <li class='noscroll'>Fixed bug in Firefox where the backlog menu appeared at the top-right of the screen wrongly</li>
+          <li class='noscroll'>Fixed inconsistency with Mushroom & Onion giving xp, when they do not</li>
+          <li class='noscroll'>Updated map to include new Tempoross chunks in the desert and ocean (but still no Isle of Souls, Jagex)</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v3.2.0</h1>
+        <h3>March 13, 2021</h3>
+        Added task details, backlog w/ note, icon changeover, and more
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v3.1.0</h1>
+        <h3>February 26, 2021</h3>
+        Hugely optimized when task calcs are done (now faster on big maps)
+      </div>
+      <div class='patch-notes-section'>
+        <h1>v3.0.0</h1>
+        <h3>February 20, 2021</h3>
+        The Chunk Tasks Panel has released today on the Chunk Picker! It calculates skill tasks based on your map, and lets you check off challenges and get new ones as you roll more chunks
+      </div>
+      <div class='patch-notes-section dark-patch-notes-section'>
+        <h3>NOTE: Patch Notes below this point don't have version numbers</h3>
+      </div>
+      <div class='patch-notes-section'>
+        <h3>December 13, 2020</h3>
+        There was just an update to the chunk picker, adding the quest info feature! See what chunks you need for any quest, and what chunks you already have unlocked
+      </div>
+      <div class='patch-notes-section'>
+        <h3>November 20, 2020</h3>
+        New update to the Chunk Picker Info Panel: now includes connections to underground areas (which you can click and explore the connections from that underground area, and etc.), quest progression in each chunk, diary tasks that are chunk specific, and now, every chunk is named, for easy identifying!
+      </div>
+      <div class='patch-notes-section'>
+        <h3>November 07, 2020</h3>
+        If you don't pay attention to #chunk-req-tech then you might not be aware that I've been working on automatically generating information on every chunk from wiki data recently. That process is now (mostly) done, and you can check it out on your maps! Turn the Chunk Info Panel on in settings and explore unlocked chunks in a brand new way 
+      </div>
+      <div class='patch-notes-section'>
+        <h3>July 31, 2020</h3>
+        New update for the chunk picker, there is now a chunk info panel that shows information on specific chunks! Just right click on the chunk you'd like to see info on. Note: currently the data is basically non-existent (besides lumbridge castle chunk), which is where we'll all need to come together and work on building up the infobase of all the chunks. If you want to contribute anything, whether that be full data for a chunk or just a missing npc you noticed, please contribute your information at: (link removed).<br />
+        Also in the update, I added same caps on scaling for larger windows so the buttons don't get giant on bigger screens and you can see the map underneath easier. as always, please let me know of any issues you find and feel free to join us at #chunk-req-tech if you have any input or questions on the infobase mission
+      </div>
+      <div class='patch-notes-section'>
+        <h3>July 25, 2020</h3>
+        In 2 days it will be 6 months since the chunk picker has been in full release, and as a bit of a treat for 6 months, I've added in mobile support for the chunk picker! Just head to the normal site as you normally would and use it on your phone now! You can pick chunks, browse your map, and even see the leaderboard all from your phone. Due to the screen size however, just note that you won't be able to change any of your settings or even open the settings menu, and the recently unlocked section has been disabled on mobile only.
+      </div>
+      <div class='patch-notes-section'>
+        <h3>May 29, 2020</h3>
+        New update to the Chunk Picker (mostly a behind the scenes update). The main feature added is: 4-letter map ids now have the possibility to be rolled naturally if the 3-letter ids even begin to fill up (per @Alyx's suggestion).
+      </div>
+      <div class='patch-notes-section'>
+        <h3>May 13, 2020</h3>
+        <h2 class='noscroll'>New update to Chunk Picker! Features include:</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>Case-sensitive alphanumeric pins (your old pins will still work, no need to panic)</li>
+          <li class='noscroll'>View-only map urls. Just put -view on the end of your url to use! Perfect for content creators! (Example with my map https://source-chunk.github.io/chunk-picker-v2/?src-view )</li>
+          <li class='noscroll'>Updated the map with some features outside Prifddinas that weren't there before</li>
+          <li class='noscroll'>Fixed some bugs with browser cookies</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h3>May 11, 2020</h3>
+        Added a beta version of the leaderboard feature to the chunk picker! Pretty sure it will break because I haven't implemented a lot of style stuff but feel free to check it out if you want your map to show up on the leaderboard, you'll have to opt-in using the settings menu of your map
+      </div>
+      <div class='patch-notes-section'>
+        <h3>January 26, 2020</h3>
+        <h2 class='noscroll'>New features to Chunk Picker V2 1.0 (officially not in Beta anymore):</h2>
+        <ul class='noscroll'>
+          <li class='noscroll'>A recently unlocked chunks tab that lists the 5 last chunks you unlocked (from here on out). Never again will you forget what grind you were working on a month ago before you took a break! Clicking on each will highlight and zoom your window over to that chunk, so no need to know chunk ID's!</li>
+          <li class='noscroll'>Tab titles now also display the map ID for easy discerning if multiple maps are open.</li>
+          <li class='noscroll'>Some small bugs have been fixed with chunk numbering and button visibility. Please DM me on Discord if you find any bugs yourself so they can get fixed!</li>
+        </ul>
+      </div>
+      <div class='patch-notes-section'>
+        <h3>October 24, 2019</h3>
+        New version of https://source-chunk.github.io/chunk-picker-v2/ (been a while). Now with a change pin feature, and other small changes, including the title being replaced by your map id for ease of visibility (thanks @ChunkFrozen(FZN, GFZN) ) and thinner chunk borders on high visibility mode
+      </div>
+      <div class='patch-notes-section'>
+        <h3>September 24, 2019</h3>
+        New version of https://source-chunk.github.io/chunk-picker-v2/ now has vastly improved scroll-zooming (when chunk ids are turned OFF) ( @Pelipper aka ChunkManOnly let me know how your laptop handles it now). Also, @Grow to Glow 's Firefox bug should be fixed as well. @Tech Goblins
+      </div>
+      <div class='patch-notes-section'>
+        <h3>September 21, 2019</h3>
+        New version of https://source-chunk.github.io/chunk-picker-v2/ , now with screenshot mode (shout-out content creators), an unpick chunk button ( @Skitty ), and slightly less laggy zooming ( @Pelipper aka ChunkManOnly ). Screenshot mode and a toggle for Roll2/Unpick buttons all exist in the setting menu (top-right)
+      </div>
+      <div class='patch-notes-section'>
+        <h3>September 14, 2019</h3>
+        The BETA of the brand new Chunk Picker website is up and running, please give it a go and let me know what I can fix or improve/change to make things better before release. Website: https://source-chunk.github.io/chunk-picker-v2/
       </div>
     </div>
   </div>
