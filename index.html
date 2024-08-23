@@ -413,9 +413,11 @@
       <div id="add-data" class="add-data noscroll">
         <div class="add-item"><span class="open-manual" onclick="openManualAdd()">Tasks</span>
         </div>
-        <div class="add-item"><span class="open-monsters" onclick="openMonstersAdd()">Items/Monsters/NPCs/Objects</span>
+        <div class="add-item"><span class="open-monsters" onclick="openMonstersAdd()">Items/Monsters/NPCs/Objects/Shops</span>
         </div>
         <div class="add-item"><span class="open-random" onclick="openRandomAdd()">Random Event & Other Loot</span>
+        </div>
+        <div class="add-item"><span class="open-usertasks" onclick="openUserTasks()">Custom User-Inputted Tasks</span>
         </div>
       </div>
     </div>
@@ -424,7 +426,7 @@
     <div class="modal-content noscroll">
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeMonstersAdd()"></i>
       <div id="monsters-title" class="monsters-title noscroll">Manually Add Stuff</div>
-      <div id="monsters-subtitle" class="monsters-subtitle noscroll">Select the Item/Monster/NPC/Object you want to add to your chunks. Useful if your rules allow you to lure monsters/npcs from other chunks into your own, or to add items gained from clue scrolls or wandering implings.</div>
+      <div id="monsters-subtitle" class="monsters-subtitle noscroll">Select the Item/Monster/NPC/Object/Shop you want to add to your chunks. Useful if your rules allow you to lure monsters/npcs from other chunks into your own, or to add items gained from clue scrolls or wandering implings.</div>
       <div id="monsters-searchcontainer" class="monsters-searchcontainer noscroll">
         <input type="text" placeholder="Search..." id="searchMonsters" class="noscrollhard"
           oninput="searchMonsters()" autocomplete="off" />
@@ -754,6 +756,31 @@
       </div>
     </div>
   </div>
+  <div id="myModal47" class="modal">
+    <div class="modal-content noscroll">
+      <div id="usertasks-title" class="usertasks-title noscroll">Create A Custom Task</div>
+      <div id="usertasks-subtitle" class="usertasks-subtitle noscroll">Add a custom task to your map by defining the task type, the name of the task, and (if applicable) the skill and level of the task. Skill tasks will show in the Skill Tasks section of your Active Tasks if they are the highest level task for that skill, and Other tasks will always show in the Other Tasks section of your Active Tasks.</div>
+      <div id="usertasks-body" class="usertasks-body noscroll">
+        <div id="usertasks-dropdown-container" class="usertasks-dropdown-container noscroll" onchange="userTasksSkillChange()"><div>Skill:</div><select id="usertasks-skill-dropdown"></select></div>
+        <div id="usertasks-level-input" class="usertasks-level-input noscroll"><div>Skill Level:</div><input class='usertasks-input' onchange="userTasksLevelChange()" type="number" value="1" min="1" max="99" disabled /></div>
+        <div id="usertasks-name-input" class="usertasks-name-input noscroll"><div>Task Name:</div><input class='usertasks-input' oninput="userTasksNameChange()" placeholder='Task Name' /></div>
+      </div>
+      <div id="usertasks-data" class="usertasks-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal48" class="modal">
+    <div class="modal-content noscroll">
+      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeUserTasksList()"></i>
+      <div id="usertasks-list-data" class="usertasks-list-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal49" class="modal">
+    <div class="modal-content noscroll">
+      <div id="usertasks-delete-title" class="usertasks-delete-title noscroll">Delete the custom task?</div>
+      <div id="usertasks-delete-subtitle" class="usertasks-delete-subtitle noscroll">This action is not reversable.<div class="preset-warn"><b>Are you sure you wish to proceed?</b></div></div>
+      <div id="usertasks-delete-data" class="usertasks-delete-data noscroll"><div><div class="usertasks-delete-cancel" onclick="cancelUserTaskDelete()">Cancel</div><div class="usertasks-delete-proceed" onclick="deleteUserTask()">Yes, proceed</div></div></div>
+    </div>
+  </div>
   <div id='entry-menu'>
     <div class='entry-content'>
       <div class='block'>
@@ -1075,6 +1102,8 @@
       </p>
       <br />
       <span class='password-line'><input class='pin new' placeholder='Password' type='password' /><span class='show-eye' onclick="toggleChangePinCreateVis()"><i class="change-pin-eye0 fas fa-eye"></i></span></span>
+      <div class='home text'>Re-type Password</div>
+      <span class='password-line'><input class='pin2 new' placeholder='Re-type Password' type='password' /><span class='show-eye' onclick="toggleChangePinConfirmCreateVis()"><i class="change-pin-eye02 fas fa-eye"></i></span></span>
       <p class='password-reqs'>
         <b>Passwords must be between 4 and 16 letters long, and can consist of uppercase letters, lowercase letters, numbers, and special characters.</b>
       </p>
@@ -1114,6 +1143,8 @@
     <div class='pin-err'>Password is incorrect.</div>
     <div class='home text2'>New password:</div>
     <span class='password-line'><input class='pin old2 second' placeholder='Password' type='password' /><span class='show-eye' onclick="toggleChangePinNewVis()"><i class="change-pin-eye2 fas fa-eye"></i></span></span>
+    <div class='home text2'>Re-type new password:</div>
+    <span class='password-line'><input class='pin old2 third' placeholder='Re-type Password' type='password' /><span class='show-eye' onclick="toggleChangePin2NewVis()"><i class="change-pin-eye3 fas fa-eye"></i></span></span>
     <p class='password-reqs'>
       <b>Passwords must be between 4 and 16 letters long, and can consist of uppercase letters, lowercase letters, numbers, and special characters.</b>
     </p>

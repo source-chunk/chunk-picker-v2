@@ -1009,7 +1009,6 @@ button.menu2 {
     width: 100%;
     height: 100%;
     background-color: rgb(22, 27, 34);
-    pointer-events: none;
 }
 
 .loading-inner {
@@ -1222,7 +1221,7 @@ button.menu2 {
     font-size: 5vw;
 }
 
-.mobile .pin.new {
+.mobile .pin.new, .mobile .pin2.new {
     font-size: 8vw;
 }
 
@@ -1772,7 +1771,7 @@ input#searchPlayerMaps {
     font-size: 1.5vw;
 }
 
-.pin.new {
+.pin.new, .pin2.new {
     width: 70%;
     font-size: 2.5vw;
     text-align: center;
@@ -1806,14 +1805,14 @@ input#searchPlayerMaps {
     margin-top: 5px;
 }
 
+.content8 .mid, .content8 .pin.old, .content8 .mid-old, .content8 .pin.old2 {
+    font-size: 2vw;
+}
+
 .mid-err, .pin-err, .url-err {
     color: red;
     visibility: hidden;
     margin-bottom: 10px;
-}
-
-.pin.old2.second {
-    margin-bottom: 35px;
 }
 
 .link-outer {
@@ -2784,6 +2783,11 @@ input#searchPlayerMaps {
     width: 45%;
 }
 
+#myModal48 > .modal-content {
+    height: 60%;
+    width: 45%;
+}
+
 #myModal8 > .modal-content {
     height: 25%;
     width: 25%;
@@ -2973,6 +2977,38 @@ input#searchPlayerMaps {
     font-size: 2vh;
 }
 
+.usertasks-list-data {
+    overflow-y: auto;
+    height: 95%;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: min(2vw, 18px);
+    margin-top: 5%;
+}
+
+.usertasks-list-data > .result-item {
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    margin: 3px;
+    padding: 2px;
+    padding-left: 5px;
+    background-color: var(--color3);
+    margin-right: 15px;
+}
+
+.usertasks-list-data > .result-item > span {
+    float: right;
+    margin-right: 5px;
+}
+
+.usertasks-list-data .results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
 .open-manual-outer-outer-container {
     border-top: 1px solid;
     display: none;
@@ -3077,6 +3113,17 @@ input#searchPlayerMaps {
 
 .open-monsters > i {
     margin-right: 5px;
+}
+
+.open-usertasks {
+    cursor: pointer;
+    text-decoration: underline;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.open-usertasks:hover {
+    color: var(--colorLink);
 }
 
 .open-complete-container {
@@ -4216,9 +4263,19 @@ input#searchChunkSections {
     max-width: 400px;
 }
 
+#myModal49 > .modal-content {
+    max-width: 400px;
+}
+
 #myModal45 > .modal-content {
     max-width: 400px;
     height: 35%;
+}
+
+#myModal47 > .modal-content {
+    height: 60%;
+    width: 40%;
+    margin-top: -5%;
 }
 
 #myModal40 > .modal-content {
@@ -4288,6 +4345,62 @@ input#searchChunkSections {
 }
 
 .preset-proceed:hover {
+    background-color: rgb(50, 175, 50);
+}
+
+.usertasks-delete-title {
+    font-size: 24px;
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 20%;
+    min-height: 20%;
+    line-height: 50px;
+    text-align: center;
+    background-color: var(--color1);
+    overflow-y: hidden;
+}
+
+.usertasks-delete-subtitle {
+    padding: 0px 15px;
+    background-color: var(--color4);
+    font-size: 18px;
+    text-align: center;
+    border-top: solid 1px;
+    height: 72%;
+    padding-top: 5%;
+}
+
+.usertasks-delete-data > div {
+    float: right;
+    margin-right: 10px;
+    margin-top: -55px;
+    display: flex;
+}
+
+.usertasks-delete-warn {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.usertasks-delete-cancel {
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.usertasks-delete-proceed {
+    border: solid 1px black;
+    background-color: rgb(75, 200, 75);
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.usertasks-delete-proceed:hover {
     background-color: rgb(50, 175, 50);
 }
 
@@ -4545,6 +4658,107 @@ input#searchChunkSections {
 }
 
 .random-proceed:not(.disabled):hover {
+    background-color: rgb(50, 175, 50);
+}
+
+.usertasks-title {
+    font-size: min(3vw, 36px);
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 6vh;
+    min-height: 6vh;
+    line-height: 6vh;
+    text-align: center;
+    background-color: var(--color2);
+    overflow-y: hidden;
+    border-bottom: solid 1px;
+}
+
+.usertasks-subtitle {
+    margin: 5px 15px 15px 15px;
+    background-color: var(--color3);
+    font-size: max(1.7vh, 12px);
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.usertasks-data > div {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.usertasks-list {
+    left: 10px;
+    width: auto;
+    position: absolute;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.usertasks-body {
+    text-align: center;
+}
+
+#usertasks-dropdown-container {
+    font-size: min(2vw, 24px);
+}
+
+#usertasks-skill-dropdown {
+    font-size: min(2vw, 24px);
+    width: 200px;
+    text-align: center;
+}
+
+.usertasks-level-input {
+    font-size: min(2vw, 24px);
+    margin: 10px 0px;
+}
+
+.usertasks-level-input > input {
+    font-size: min(2vw, 24px);
+    text-align: center;
+}
+
+.usertasks-name-input {
+    font-size: min(2vw, 24px);
+    margin: 10px 0px;
+}
+
+.usertasks-name-input > input {
+    font-size: min(2vw, 24px);
+    width: 80%;
+    text-align: center;
+}
+
+.usertasks-cancel {
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.usertasks-proceed {
+    border: solid 1px black;
+    background-color: rgb(75, 200, 75);
+    padding: 10px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.usertasks-proceed.disabled {
+    background-color: rgb(125, 125, 125);
+    cursor: not-allowed;
+}
+
+.usertasks-proceed:not(.disabled):hover {
     background-color: rgb(50, 175, 50);
 }
 
