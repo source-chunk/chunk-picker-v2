@@ -1377,7 +1377,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fas fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.4.4';
+let currentVersion = '6.4.5';
 let patchNotesVersion = '6.4.0';
 
 // Patreon Test Server Data
@@ -1526,7 +1526,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.4.4";
+mapImg.src = "osrs_world_map.png?v=6.4.5";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1924,7 +1924,7 @@ let drawCanvas = function() {
     ctx.restore();
 
     if (selectedOverlay !== 'None') {
-        document.querySelector('#canvas').style.cursor = (hoveredOverlayIds.length !== 0 && !isHoveringOverlayMenu) || isHoveringClose || isHoveringLeft || isHoveringRight ? 'pointer' : 'auto';
+        $('#canvas').css('cursor', (hoveredOverlayIds.length !== 0 && !isHoveringOverlayMenu) || isHoveringClose || isHoveringLeft || isHoveringRight ? 'pointer' : 'auto');
     }
 
     if (manualMouseMoveCheck) {
@@ -1939,103 +1939,103 @@ document.body.addEventListener('mousedown', function (event) {
     let rect;
     let hasSet = false;
     if (searchDetailsModalOpen) {
-        rect = document.querySelector('#myModal11 .modal-content').getBoundingClientRect();
+        rect = $('#myModal11 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (detailsModalOpen) {
-        rect = document.querySelector('#myModal2 .modal-content').getBoundingClientRect();
+        rect = $('#myModal2 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualModalOpen) {
-        rect = document.querySelector('#myModal .modal-content').getBoundingClientRect();
+        rect = $('#myModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (rulesModalOpen) {
-        rect = document.querySelector('#myModal4 .modal-content').getBoundingClientRect();
+        rect = $('#myModal4 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (settingsModalOpen) {
-        rect = document.querySelector('#myModal7 .modal-content').getBoundingClientRect();
+        rect = $('#myModal7 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (randomListModalOpen) {
-        rect = document.querySelector('#myModal8 .modal-content').getBoundingClientRect();
+        rect = $('#myModal8 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (statsErrorModalOpen) {
-        rect = document.querySelector('#myModal9 .modal-content').getBoundingClientRect();
+        rect = $('#myModal9 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (searchModalOpen) {
-        rect = document.querySelector('#myModal10 .modal-content').getBoundingClientRect();
+        rect = $('#myModal10 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (addEquipmentModalOpen) {
-        rect = document.querySelector('#myModal15 .modal-content').getBoundingClientRect();
+        rect = $('#myModal15 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (highestModalOpen) {
-        rect = document.querySelector('#myModal12 .modal-content').getBoundingClientRect();
+        rect = $('#myModal12 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (questStepsModalOpen) {
-        rect = document.querySelector('#myModal25 .modal-content').getBoundingClientRect();
+        rect = $('#myModal25 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (methodsModalOpen) {
-        rect = document.querySelector('#myModal13 .modal-content').getBoundingClientRect();
+        rect = $('#myModal13 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (slayerMasterInfoModalOpen) {
-        rect = document.querySelector('#myModal32 .modal-content').getBoundingClientRect();
+        rect = $('#myModal32 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (doableClueStepsModalOpen) {
-        rect = document.querySelector('#myModal33 .modal-content').getBoundingClientRect();
+        rect = $('#myModal33 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (clueChunksModalOpen) {
-        rect = document.querySelector('#myModal34 .modal-content').getBoundingClientRect();
+        rect = $('#myModal34 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (notesOpen) {
-        rect = document.querySelector('#myModal35 .modal-content').getBoundingClientRect();
+        rect = $('#myModal35 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (highest2ModalOpen) {
-        rect = document.querySelector('#myModal12_2 .modal-content').getBoundingClientRect();
+        rect = $('#myModal12_2 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (completeModalOpen) {
-        rect = document.querySelector('#myModal14 .modal-content').getBoundingClientRect();
+        rect = $('#myModal14 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (stickerModalOpen) {
-        rect = document.querySelector('#myModal16 .modal-content').getBoundingClientRect();
+        rect = $('#myModal16 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (backlogSourcesModalOpen) {
-        rect = document.querySelector('#myModal17 .modal-content').getBoundingClientRect();
+        rect = $('#myModal17 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkHistoryModalOpen) {
-        rect = document.querySelector('#myModal18 .modal-content').getBoundingClientRect();
+        rect = $('#myModal18 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (challengeAltsModalOpen) {
-        rect = document.querySelector('#myModal19 .modal-content').getBoundingClientRect();
+        rect = $('#myModal19 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualOuterModalOpen) {
-        rect = document.querySelector('#myModal20 .modal-content').getBoundingClientRect();
+        rect = $('#myModal20 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (monsterModalOpen) {
-        rect = document.querySelector('#myModal21 .modal-content').getBoundingClientRect();
+        rect = $('#myModal21 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (patchNotesOpen) {
-        rect = document.querySelector('#myModal24 .modal-content').getBoundingClientRect();
+        rect = $('#myModal24 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (friendsListModalOpen) {
-        rect = document.querySelector('#myModal26 .modal-content').getBoundingClientRect();
+        rect = $('#myModal26 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualAreasModalOpen) {
-        rect = document.querySelector('#myModal31 .modal-content').getBoundingClientRect();
+        rect = $('#myModal31 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkSectionsModalOpen) {
-        rect = document.querySelector('#myModal42 .modal-content').getBoundingClientRect();
+        rect = $('#myModal42 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkSectionPickerModalOpen) {
-        rect = document.querySelector('#myModal43 .modal-content').getBoundingClientRect();
+        rect = $('#myModal43 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (clipboardModalOpen) {
-        rect = document.querySelector('#myModal38 .modal-content').getBoundingClientRect();
+        rect = $('#myModal38 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (overlaysModalOpen) {
-        rect = document.querySelector('#myModal39 .modal-content').getBoundingClientRect();
+        rect = $('#myModal39 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (customizeTopbarModalOpen) {
-        rect = document.querySelector('#myModal46 .modal-content').getBoundingClientRect();
+        rect = $('#myModal46 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (userTasksListModalOpen) {
-        rect = document.querySelector('#myModal48 .modal-content').getBoundingClientRect();
+        rect = $('#myModal48 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     }
     // ------
@@ -2052,107 +2052,107 @@ document.body.addEventListener('mouseup', function (event) {
     let rect;
     let hasSet = false;
     if (searchDetailsModalOpen) {
-        rect = document.querySelector('#myModal11 .modal-content').getBoundingClientRect();
+        rect = $('#myModal11 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (detailsModalOpen) {
-        rect = document.querySelector('#myModal2 .modal-content').getBoundingClientRect();
+        rect = $('#myModal2 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualModalOpen) {
-        rect = document.querySelector('#myModal .modal-content').getBoundingClientRect();
+        rect = $('#myModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (rulesModalOpen) {
-        rect = document.querySelector('#myModal4 .modal-content').getBoundingClientRect();
+        rect = $('#myModal4 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (settingsModalOpen) {
-        rect = document.querySelector('#myModal7 .modal-content').getBoundingClientRect();
+        rect = $('#myModal7 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (randomListModalOpen) {
-        rect = document.querySelector('#myModal8 .modal-content').getBoundingClientRect();
+        rect = $('#myModal8 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (statsErrorModalOpen) {
-        rect = document.querySelector('#myModal9 .modal-content').getBoundingClientRect();
+        rect = $('#myModal9 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (searchModalOpen) {
-        rect = document.querySelector('#myModal10 .modal-content').getBoundingClientRect();
+        rect = $('#myModal10 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (addEquipmentModalOpen) {
-        rect = document.querySelector('#myModal15 .modal-content').getBoundingClientRect();
+        rect = $('#myModal15 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (highestModalOpen) {
-        rect = document.querySelector('#myModal12 .modal-content').getBoundingClientRect();
+        rect = $('#myModal12 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (questStepsModalOpen) {
-        rect = document.querySelector('#myModal25 .modal-content').getBoundingClientRect();
+        rect = $('#myModal25 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (methodsModalOpen) {
-        rect = document.querySelector('#myModal13 .modal-content').getBoundingClientRect();
+        rect = $('#myModal13 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (slayerMasterInfoModalOpen) {
-        rect = document.querySelector('#myModal32 .modal-content').getBoundingClientRect();
+        rect = $('#myModal32 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (doableClueStepsModalOpen) {
-        rect = document.querySelector('#myModal33 .modal-content').getBoundingClientRect();
+        rect = $('#myModal33 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (clueChunksModalOpen) {
-        rect = document.querySelector('#myModal34 .modal-content').getBoundingClientRect();
+        rect = $('#myModal34 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (notesOpen) {
-        rect = document.querySelector('#myModal35 .modal-content').getBoundingClientRect();
+        rect = $('#myModal35 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (highest2ModalOpen) {
-        rect = document.querySelector('#myModal12_2 .modal-content').getBoundingClientRect();
+        rect = $('#myModal12_2 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (completeModalOpen) {
-        rect = document.querySelector('#myModal14 .modal-content').getBoundingClientRect();
+        rect = $('#myModal14 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (stickerModalOpen) {
-        rect = document.querySelector('#myModal16 .modal-content').getBoundingClientRect();
+        rect = $('#myModal16 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (backlogSourcesModalOpen) {
-        rect = document.querySelector('#myModal17 .modal-content').getBoundingClientRect();
+        rect = $('#myModal17 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkHistoryModalOpen) {
-        rect = document.querySelector('#myModal18 .modal-content').getBoundingClientRect();
+        rect = $('#myModal18 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (challengeAltsModalOpen) {
-        rect = document.querySelector('#myModal19 .modal-content').getBoundingClientRect();
+        rect = $('#myModal19 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualOuterModalOpen) {
-        rect = document.querySelector('#myModal20 .modal-content').getBoundingClientRect();
+        rect = $('#myModal20 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (monsterModalOpen) {
-        rect = document.querySelector('#myModal21 .modal-content').getBoundingClientRect();
+        rect = $('#myModal21 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (patchNotesOpen) {
-        rect = document.querySelector('#myModal24 .modal-content').getBoundingClientRect();
+        rect = $('#myModal24 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (friendsListModalOpen) {
-        rect = document.querySelector('#myModal26 .modal-content').getBoundingClientRect();
+        rect = $('#myModal26 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualAreasModalOpen) {
-        rect = document.querySelector('#myModal31 .modal-content').getBoundingClientRect();
+        rect = $('#myModal31 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkSectionsModalOpen) {
-        rect = document.querySelector('#myModal42 .modal-content').getBoundingClientRect();
+        rect = $('#myModal42 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkSectionPickerModalOpen) {
-        rect = document.querySelector('#myModal43 .modal-content').getBoundingClientRect();
+        rect = $('#myModal43 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (clipboardModalOpen) {
-        rect = document.querySelector('#myModal38 .modal-content').getBoundingClientRect();
+        rect = $('#myModal38 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (overlaysModalOpen) {
-        rect = document.querySelector('#myModal39 .modal-content').getBoundingClientRect();
+        rect = $('#myModal39 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (customizeTopbarModalOpen) {
-        rect = document.querySelector('#myModal46 .modal-content').getBoundingClientRect();
+        rect = $('#myModal46 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (userTasksListModalOpen) {
-        rect = document.querySelector('#myModal48 .modal-content').getBoundingClientRect();
+        rect = $('#myModal48 .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     }
     // ------
-    if (hasSet && !(event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom) && (modalOutsideTime + 100 < Date.now()) && readyToExitModal && event.target.nodeName.toLowerCase() !== 'option' && !event.target.classList.contains('context-menu-item')) {
+    if (hasSet && !(event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom) && (modalOutsideTime + 100 < Date.now()) && readyToExitModal && event.target.nodeName.toLowerCase() !== 'option' && !$(event.target).is('option')) {
         manualModalOpen && !detailsModalOpen && closeManualAdd();
         highest2ModalOpen && !detailsModalOpen && !methodsModalOpen && !questStepsModalOpen && !slayerMasterInfoModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !passiveSkillModalOpen && closeHighest2();
         highestModalOpen && !addEquipmentModalOpen && !searchDetailsModalOpen && !detailsModalOpen && closeHighest();
@@ -3201,7 +3201,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.4.4");
+        myWorker = new Worker("./worker.js?v=6.4.5");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
         workerOut = 1;
@@ -3503,8 +3503,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.4.4");
-let myWorker2 = new Worker("./worker.js?v=6.4.4");
+let myWorker = new Worker("./worker.js?v=6.4.5");
+let myWorker2 = new Worker("./worker.js?v=6.4.5");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -6278,7 +6278,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.4.4");
+    myWorker2 = new Worker("./worker.js?v=6.4.5");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
     workerOut++;
@@ -11449,7 +11449,14 @@ let loadData = async function(startup) {
             rules['Manually Complete Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
         }
         questFilterType = 'all';
-        
+    });
+    myRef.child('uid').once('value', function(snap) {
+        if (!chunkOrder || chunkOrder.length === 0) {
+            for (let count = 1; count <= 5; count++) {
+                $('#recentChunks' + count).html('<span class="chunknone" onclick="recentChunkCanvas(recentChunks' + count + ')">-</span>');
+            }
+        }
+        chunkTasksOn && calcCurrentChallengesCanvas(true, !initialLoaded || recentlyTestMode, !viewOnly);
         !initialLoaded && doneLoading();
         chunkTasksOn && $(`.challenge.clickable`).removeClass('clickable');
         recentlyTestMode = false;
