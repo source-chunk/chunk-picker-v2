@@ -1609,7 +1609,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                             taskIsRemoved = true;
                         }
                     }
-                    if (!taskIsRemoved && newValids.hasOwnProperty(skill) && checkPrimaryMethod(skill, newValids, baseChunkData) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(name) || !backlog[skill].hasOwnProperty(name.replaceAll('#', '/'))))) {
+                    if (!taskIsRemoved && newValids.hasOwnProperty(skill) && checkPrimaryMethod(skill, newValids, baseChunkData) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(name) && !backlog[skill].hasOwnProperty(name.replaceAll('#', '/'))))) {
                         if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
                             lowestItem = challenge;
                             lowestName = name;
@@ -7462,7 +7462,7 @@ let calcCurrentChallenges2 = function() {
             if (bestBoost > 0) {
                 let foundBetter = false;
                 Object.keys(globalValids[skill]).some(name => {
-                    if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost') && chunkInfo['challenges'][skill][name]['Level'] > (globalValids[skill][challenge] - (bestBoost + (ownsCrystalSaw ? 3 : 0))) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(name) || !backlog[skill].hasOwnProperty(name.replaceAll('#', '/'))))) {
+                    if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost') && chunkInfo['challenges'][skill][name]['Level'] > (globalValids[skill][challenge] - (bestBoost + (ownsCrystalSaw ? 3 : 0))) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(name) && !backlog[skill].hasOwnProperty(name.replaceAll('#', '/'))))) {
                         tempChallengeArr[skill] = name;
                         foundBetter = true;
                         return true;

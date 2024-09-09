@@ -1377,7 +1377,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fas fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.4.5';
+let currentVersion = '6.4.6';
 let patchNotesVersion = '6.4.0';
 
 // Patreon Test Server Data
@@ -1483,6 +1483,16 @@ let initialLoaded = false;
 let setSnap = {
     recentFancyRollTime: 0
 };
+let userTasks = {};
+let userTasksSkillValid = false;
+let userTasksLevelValid = true;
+let userTasksNameValid = false;
+let userTasksMaxLevel = 99;
+let userTaskSavedName;
+let userTaskSavedSkill;
+let searchDetailSortBy = 'Alphabetical';
+let searchDetailsParams = [];
+let recentFancyRollTimeout;
 let recentFancyRollTime = 0;
 let lastRegain = 0;
 let lastUpdated = 0;
@@ -1526,7 +1536,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.4.5";
+mapImg.src = "osrs_world_map.png?v=6.4.6";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2152,7 +2162,7 @@ document.body.addEventListener('mouseup', function (event) {
         hasSet = true;
     }
     // ------
-    if (hasSet && !(event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom) && (modalOutsideTime + 100 < Date.now()) && readyToExitModal && event.target.nodeName.toLowerCase() !== 'option' && !$(event.target).is('option')) {
+    if (hasSet && !(event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom) && (modalOutsideTime + 100 < Date.now()) && readyToExitModal && event.target.nodeName.toLowerCase() !== 'option' && !event.target.classList.contains('context-menu-item')) {
         manualModalOpen && !detailsModalOpen && closeManualAdd();
         highest2ModalOpen && !detailsModalOpen && !methodsModalOpen && !questStepsModalOpen && !slayerMasterInfoModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !passiveSkillModalOpen && closeHighest2();
         highestModalOpen && !addEquipmentModalOpen && !searchDetailsModalOpen && !detailsModalOpen && closeHighest();
@@ -3201,7 +3211,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.4.5");
+        myWorker = new Worker("./worker.js?v=6.4.6");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
         workerOut = 1;
@@ -3503,8 +3513,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.4.5");
-let myWorker2 = new Worker("./worker.js?v=6.4.5");
+let myWorker = new Worker("./worker.js?v=6.4.6");
+let myWorker2 = new Worker("./worker.js?v=6.4.6");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3680,6 +3690,7 @@ let logError = function(err) {
 
 // Prevent caching of json get
 $(document).ready(function() {
+    $.ajaxSetup({ cache: false });
     window.onresize = drawCanvas();
 });
 
@@ -6278,7 +6289,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.4.5");
+    myWorker2 = new Worker("./worker.js?v=6.4.6");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
     workerOut++;
@@ -7607,14 +7618,6 @@ let openUserTasksList = function() {
     modalOutsideTime = Date.now();
 }
 
-let userTasks = {};
-let userTasksSkillValid = false;
-let userTasksLevelValid = true;
-let userTasksNameValid = false;
-let userTasksMaxLevel = 99;
-let userTaskSavedName;
-let userTaskSavedSkill;
-
 // Shows confirmation modal for deleting usertask
 let showDeleteUserTaskConfirmation = function(challenge, skill) {
     userTaskDeleteConfirmationModalOpen = true;
@@ -7881,9 +7884,6 @@ let findFraction = function(fraction) {
     denominator = denominator / divisor;
     return 1 + '/' + (+(Math.round((denominator/numerator) + "e+2")  + "e-2")).toString().replace(/\B(?!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
-
-let searchDetailSortBy = 'Alphabetical';
-let searchDetailsParams = [];
 
 // Opens the search details modal
 let openSearchDetails = function(category, name, prevCategory, prevName) {
@@ -11020,8 +11020,6 @@ let preloadImages = async function(imgs) {
     });
     await Promise.all(load);
 }
-
-let recentFancyRollTimeout;
 
 // Helps with loadData
 let preloadHelper = function(snap, childName) {
