@@ -1377,7 +1377,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fas fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.4.3';
+let currentVersion = '6.4.4';
 let patchNotesVersion = '6.4.0';
 
 // Patreon Test Server Data
@@ -1480,7 +1480,9 @@ let readyToDrawImage = false;
 let readyToDrawIcons = stickerChoicesOsrs.length;
 let pageReady = false;
 let initialLoaded = false;
-let setSnap = {};
+let setSnap = {
+    recentFancyRollTime: 0
+};
 let recentFancyRollTime = 0;
 let lastRegain = 0;
 let lastUpdated = 0;
@@ -1524,7 +1526,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.4.3";
+mapImg.src = "osrs_world_map.png?v=6.4.4";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3199,7 +3201,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.4.3");
+        myWorker = new Worker("./worker.js?v=6.4.4");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
         workerOut = 1;
@@ -3501,8 +3503,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.4.3");
-let myWorker2 = new Worker("./worker.js?v=6.4.3");
+let myWorker = new Worker("./worker.js?v=6.4.4");
+let myWorker2 = new Worker("./worker.js?v=6.4.4");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -6276,7 +6278,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.4.3");
+    myWorker2 = new Worker("./worker.js?v=6.4.4");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
     workerOut++;
@@ -11021,6 +11023,37 @@ let preloadImages = async function(imgs) {
 
 let recentFancyRollTimeout;
 
+// Helps with loadData
+let preloadHelper = function(snap, childName) {
+    let snapDiff;
+    let childNameArr = childName.split('/');
+    let tempSetSnap = setSnap;
+    childNameArr.forEach((key) => {
+        if (!tempSetSnap.hasOwnProperty(key)) {
+            tempSetSnap[key] = {};
+        }
+        snapDiff = diff(snap.val(), tempSetSnap[key]);
+        if (typeof snap.val() !== 'object') {
+            snapDiff = snap.val() === tempSetSnap[key] ? null : snap.val();
+        }
+        tempSetSnap = tempSetSnap[key];
+    });
+    if ((testMode || snapDiff === null || snapDiff === undefined || Date.now() - recentFancyRollTime < 15000) && !recentlyTestMode) return false;
+    tempSetSnap = setSnap;
+    let key = childNameArr[0];
+    if (!setSnap.hasOwnProperty(key)) {
+        setSnap[key] = {};
+    }
+    if (childNameArr.length === 1)  {
+        setSnap[key] = snap.val();
+    } else {
+        let key2 = childNameArr[1];
+        setSnap[key][key2] = snap.val();
+    }
+    clearTimeout(recentFancyRollTimeout);
+    return snapDiff;
+}
+
 // Loads data from Firebase
 let loadData = async function(startup) {
     if (!myRef) {
@@ -11042,58 +11075,11 @@ let loadData = async function(startup) {
             questLastStep['~|' + chunkInfo['challenges']['Quest'][name]['BaseQuest'] + '|~ Complete the quest'] = name;
         }
     });
-    myRef.on('value', function(snap) {
-        let snapDiff = diff(snap.val(), setSnap);
-        const ignoreKeys = ['recentLoginTime', 'pluginOutput', 'oldSavedChallengeArr'];
-        let tempRecentFancyRollTime = snap.val()['recentFancyRollTime'] || 0;
-        if (Date.now() - tempRecentFancyRollTime < 15000 && !recentFancyRollTimeout) {
-            recentFancyRollTimeout = setTimeout(function() {
-                recentFancyRollTime = 0;
-                recentFancyRollTimeout = null;
-                loadData();
-            }, 15000);
-        }
-        if ((testMode || snapDiff === null || Date.now() - tempRecentFancyRollTime < 15000 || (Object.keys(snapDiff).filter((key) => !ignoreKeys.includes(key)).length === 0 && (!snapDiff.hasOwnProperty('chunkinfo') || Object.keys(snapDiff['chunkinfo']).filter((key) => !ignoreKeys.includes(key)).length === 0))) && !recentlyTestMode) return;
-        setSnap = snap.val();
-        clearTimeout(recentFancyRollTimeout);
-        let picking = false;
-        let settingsTemp = snap.val()['settings'];
-        let rulesTemp = snap.val()['rules'] || {};
-        topbarSelection = snap.val()['topbarSelection'] || ['Patreon', 'Map Notes', 'Patch Notes', 'Discord', 'Report a Bug', 'Chunk Stats', 'Settings'];
-        doesPluginOutputExist = !!snap.val()['pluginOutput'] || false;
-        randomLoot = decodeObject(snap.val()['randomLoot']) || {};
-        let chunks = decodeObject(snap.val()['chunks']);
-        tempChunks = chunks || {};
-        recent = decodeObject(snap.val()['recent']) || [];
-        recentTime = decodeObject(snap.val()['recentTime']) || [];
-        chunkOrder = decodeObject(snap.val()['chunkOrder']) || [];
-        friends = decodeObject(snap.val()['friends']) || {};
-        friendsAlt = decodeObject(snap.val()['friendsAlt']) || {};
-        chunkNotes = decodeObject(snap.val()['chunkNotes']) || null;
-        userTasks = decodeObject(snap.val()['userTasks']) || {};
-        manualPrimary = decodeObject(snap.val()['manualPrimary']) || {};
-        recentFancyRollTime = snap.val()['recentFancyRollTime'] || 0;
-        loadUserTasks();
-        settingsTemp['highvis'] = document.cookie.split(';').filter(function(item) {
-            return item.indexOf('highvis=true') >= 0
-        }).length > 0;
-        settingsTemp['ids'] = document.cookie.split(';').filter(function(item) {
-            return item.indexOf('ids=true') >= 0
-        }).length > 0;
-        settingsTemp['infocollapse'] = document.cookie.split(';').filter(function(item) {
-            return item.indexOf('infocollapse=true') >= 0
-        }).length > 0;
-        
-        Object.keys(tempChunks).forEach((section) => {
-            Object.keys(tempChunks[section]).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks[section][chunkId] === 'undefined' || tempChunks[section][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 }).forEach((chunkId) => {
-                delete tempChunks[section][chunkId];
-            });
-        });
-
-        if (!tempChunks['selected']) {
-            tempChunks['selected'] = {};
-        }
-        
+    myRef.child('chunkOrder').on('value', function(snap) {
+        let shouldScroll = setSnap.hasOwnProperty('chunkOrder');
+        let snapDiff = preloadHelper(snap, 'chunkOrder');
+        if (snapDiff === false) return;
+        chunkOrder = decodeObject(snap.val()) || [];
         let chunkOrderArr = Object.keys(chunkOrder).sort().reverse();
         let innerCount = 0;
         let notFound = true;
@@ -11112,27 +11098,31 @@ let loadData = async function(startup) {
                 $('#recentChunks' + count).html('<span class="chunknone" onclick="recentChunkCanvas(recentChunks' + count + ')">-</span>');
             }
         }
-        if (!!recentTime[0]) {
-            $('#recentChunksTitle > b').text(Math.max(Math.floor((new Date().getTime() - chunkOrderArr[0]) / (1000 * 3600 * 24)), 0) + ' days since last roll');
+        if (!!snapDiff && shouldScroll) {
+            scrollToChunkCanvas(Object.values(snapDiff)[0]);
         }
-
-        checkedChallenges = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['checkedChallenges'] ? decodeObject(snap.val()['chunkinfo']['checkedChallenges']) : {};
-        completedChallenges = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['completedChallenges'] ? decodeObject(snap.val()['chunkinfo']['completedChallenges']) : {};
-        backlog = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['backlog'] ? decodeObject(snap.val()['chunkinfo']['backlog']) : {};
-        possibleAreas = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['possibleAreas'] ? decodeObject(snap.val()['chunkinfo']['possibleAreas']) : {};
-        manualAreas = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualAreas'] ? decodeObject(snap.val()['chunkinfo']['manualAreas']) : {};
-        manualTasks = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualTasks'] ? decodeObject(snap.val()['chunkinfo']['manualTasks']) : {};
-        manualEquipment = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualEquipment'] ? decodeObject(snap.val()['chunkinfo']['manualEquipment']) : {};
-        manualSections = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualSections'] ? decodeObject(snap.val()['chunkinfo']['manualSections']) : {};
-        backloggedSources = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['backloggedSources'] ? decodeObject(snap.val()['chunkinfo']['backloggedSources']) : {};
-        altChallenges = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['altChallenges'] ? decodeObject(snap.val()['chunkinfo']['altChallenges']) : {};
-        manualMonsters = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['manualMonsters'] ? decodeObject(snap.val()['chunkinfo']['manualMonsters']) : {};
-        slayerLocked = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['slayerLocked'] ? decodeObject(snap.val()['chunkinfo']['slayerLocked']) : null;
-        constructionLocked = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['constructionLocked'] ? decodeObject(snap.val()['chunkinfo']['constructionLocked']) : null;
-        passiveSkill = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['passiveSkill'] ? decodeObject(snap.val()['chunkinfo']['passiveSkill']) : null;
-        maxSkill = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['maxSkill'] ? decodeObject(snap.val()['chunkinfo']['maxSkill']) : null;
-        prevValueLevelInput = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['prevValueLevelInput'] ? decodeObject(snap.val()['chunkinfo']['prevValueLevelInput']) : {'Combat': 3, 'Slayer': 1, 'ignoreCombatLevel': false, 'krystiliaSlayerCreatures': false, 'ClueSteps': 0};
-        checkedAllTasks = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['checkedAllTasks'] ? decodeObject(snap.val()['chunkinfo']['checkedAllTasks']) : {};
+        myRef.child('recentTime').on('value', function(snap) {
+            let snapDiff = preloadHelper(snap, 'recentTime');
+            if (snapDiff === false) return;
+            recentTime = decodeObject(snap.val()) || [];
+            if (!!recentTime[0]) {
+                $('#recentChunksTitle > b').text(Math.max(Math.floor((new Date().getTime() - chunkOrderArr[0]) / (1000 * 3600 * 24)), 0) + ' days since last roll');
+            }
+        });
+    });
+    myRef.child('settings').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'settings');
+        if (snapDiff === false) return;
+        let settingsTemp = snap.val();
+        settingsTemp['highvis'] = document.cookie.split(';').filter(function(item) {
+            return item.indexOf('highvis=true') >= 0
+        }).length > 0;
+        settingsTemp['ids'] = document.cookie.split(';').filter(function(item) {
+            return item.indexOf('ids=true') >= 0
+        }).length > 0;
+        settingsTemp['infocollapse'] = document.cookie.split(';').filter(function(item) {
+            return item.indexOf('infocollapse=true') >= 0
+        }).length > 0;
         settingsTemp['highscoreEnabled'] && enableHighscore('startup');
         settingsTemp['infocollapse'] && hideChunkInfo('startup');
         infoCollapse = settingsTemp['infocollapse'];
@@ -11156,11 +11146,248 @@ let loadData = async function(startup) {
             (!settingsTemp['patchNotes'] || (settingsTemp['patchNotes'] !== patchNotesVersion)) && (patchNotesOpenSoon = true);
         }
 
-        if (settingsTemp['highscoreEnabled']) {
-            userName = snap.val()['userName'];
-            $('.highscoretoggle').html('Change chunk stats username<i class="pic fas fa-trophy"></i>');
+        if (!settingsTemp.hasOwnProperty('info')) {
+            settingsTemp['info'] = true;
         }
 
+        Object.keys(settingsTemp).forEach((setting) => {
+            settings[setting] = settingsTemp[setting];
+        });
+        toggleIds(settings['ids']);
+        toggleVisibility(settings['highvis']);
+        toggleTheme(settings['theme']);
+        toggleNeighbors(settings['neighbors'], 'startup');
+        toggleRemove(settings['remove'], 'startup');
+        toggleRoll2(settings['roll2'], 'startup');
+        toggleUnpick(settings['unpick'], 'startup');
+        toggleRecent(settings['recent'], 'startup');
+        toggleChunkInfo(settings['info'], 'startup');
+        toggleChunkTasks(settings['chunkTasks'], 'startup');
+        toggleTopButtons(settings['topButtons'], 'startup');
+        toggleTaskSidebar(settings['taskSidebar'], 'startup');
+        settings['hideChecked'] ? $(`.tasks-checkmark`).show() : $(`.tasks-checkmark`).hide();
+    });
+    myRef.child('userName').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'userName');
+        if (snapDiff === false) return;
+        if (settings['highscoreEnabled']) {
+            userName = snap.val();
+            $('.highscoretoggle').html('Change chunk stats username<i class="pic fas fa-trophy"></i>');
+        }
+    });
+    myRef.child('recent').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'recent');
+        if (snapDiff === false) return;
+        recent = decodeObject(snap.val()) || [];
+    });
+    myRef.child('topbarSelection').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'topbarSelection');
+        topbarSelection = snap.val() || ['Patreon', 'Map Notes', 'Patch Notes', 'Discord', 'Report a Bug', 'Chunk Stats', 'Settings'];
+        manageTopbar();
+        if (snapDiff === false) return;
+    });
+    myRef.child('friends').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'friends');
+        if (snapDiff === false) return;
+        friends = decodeObject(snap.val()) || {};
+    });
+    myRef.child('friendsAlt').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'friendsAlt');
+        if (snapDiff === false) return;
+        friendsAlt = decodeObject(snap.val()) || {};
+    });
+    myRef.child('chunkNotes').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkNotes');
+        if (snapDiff === false) return;
+        chunkNotes = decodeObject(snap.val()) || null;
+    });
+    myRef.child('userTasks').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'userTasks');
+        if (snapDiff === false) return;
+        userTasks = decodeObject(snap.val()) || {};
+        loadUserTasks();
+    });
+    myRef.child('manualPrimary').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'manualPrimary');
+        if (snapDiff === false) return;
+        manualPrimary = decodeObject(snap.val()) || {};
+    });
+    myRef.child('randomLoot').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'randomLoot');
+        if (snapDiff === false) return;
+        randomLoot = decodeObject(snap.val()) || {};
+    });
+    myRef.child('chunks').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunks');
+        if (snapDiff === false) return;
+        let chunks = decodeObject(snap.val());
+        let picking = false;
+        tempChunks = chunks || {};
+        Object.keys(tempChunks).forEach((section) => {
+            Object.keys(tempChunks[section]).filter(chunkId => { let coords = convertToXY(chunkId); return tempChunks[section][chunkId] === 'undefined' || tempChunks[section][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0 }).forEach((chunkId) => {
+                delete tempChunks[section][chunkId];
+            });
+        });
+
+        if (!tempChunks['selected']) {
+            tempChunks['selected'] = {};
+        }
+        selectedChunks = 0;
+        unlockedChunks = 0;
+        selectedNum = 1;
+
+        $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
+        $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
+        picking = chunks && chunks['potential'];
+
+        stickered = (chunks ? chunks['stickered'] : {}) || {};
+        stickeredNotes = (chunks ? chunks['stickeredNotes'] : {}) || {};
+        stickeredColors = (chunks ? chunks['stickeredColors'] : {}) || {};
+        mid === roll5Mid && $('.roll2').text('Roll 5');
+        if (picking) {
+            $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
+            !settings['randomStartAlways'] ? $('.pick').text('Pick for me') : $('.pick').text('Random Start?');
+            $('.roll2').text('Unlock both');
+            mid === roll5Mid && $('.roll2').text('Unlock all');
+            isPicking = true;
+        } else {
+            $('.pick').text('Pick Chunk');
+            $('.roll2').text('Roll 2');
+            mid === roll5Mid && $('.roll2').text('Roll 5');
+            isPicking = false;
+        }
+        if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
+            $('.pick').text('Random Start?');
+        }
+        setUpSelected();
+    });
+    myRef.child('recentFancyRollTime').on('value', function(snap) {
+        if (snap.val() === 0) {
+            recentFancyRollTime = 0;
+        }
+        let snapDiff = preloadHelper(snap, 'recentFancyRollTime');
+        if (snapDiff === false) return;
+        recentFancyRollTime = snap.val() || 0;
+        if (Date.now() - recentFancyRollTime < 15000 && !recentFancyRollTimeout) {
+            recentFancyRollTimeout = setTimeout(function() {
+                recentFancyRollTime = 0;
+                recentFancyRollTimeout = null;
+                loadData();
+            }, 15000);
+        } else {
+            recentFancyRollTimeout = null;
+        }
+        if (recentFancyRollTime === 0) {
+            loadData();
+        }
+    });
+    myRef.child('pluginOutput').once('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'pluginOutput');
+        if (snapDiff === false) return;
+        doesPluginOutputExist = !!snap.val() || false;
+    });
+    myRef.child('chunkinfo/checkedChallenges').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/checkedChallenges');
+        if (snapDiff === false) return;
+        checkedChallenges = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/completedChallenges').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/completedChallenges');
+        if (snapDiff === false) return;
+        completedChallenges = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/backlog').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/backlog');
+        if (snapDiff === false) return;
+        backlog = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/possibleAreas').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/possibleAreas');
+        if (snapDiff === false) return;
+        possibleAreas = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/manualAreas').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/manualAreas');
+        if (snapDiff === false) return;
+        manualAreas = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/manualTasks').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/manualTasks');
+        if (snapDiff === false) return;
+        manualTasks = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/manualEquipment').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/manualEquipment');
+        if (snapDiff === false) return;
+        manualEquipment = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/manualSections').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/manualSections');
+        if (snapDiff === false) return;
+        manualSections = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/backloggedSources').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/backloggedSources');
+        if (snapDiff === false) return;
+        backloggedSources = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/altChallenges').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/altChallenges');
+        if (snapDiff === false) return;
+        altChallenges = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/manualMonsters').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/manualMonsters');
+        if (snapDiff === false) return;
+        manualMonsters = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/slayerLocked').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/slayerLocked');
+        if (snapDiff === false) return;
+        slayerLocked = !!snap.val() ? decodeObject(snap.val()) : null;
+    });
+    myRef.child('chunkinfo/constructionLocked').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/constructionLocked');
+        if (snapDiff === false) return;
+        constructionLocked = !!snap.val() ? decodeObject(snap.val()) : null;
+    });
+    myRef.child('chunkinfo/passiveSkill').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/passiveSkill');
+        if (snapDiff === false) return;
+        passiveSkill = !!snap.val() ? decodeObject(snap.val()) : null;
+    });
+    myRef.child('chunkinfo/maxSkill').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/maxSkill');
+        if (snapDiff === false) return;
+        maxSkill = !!snap.val() ? decodeObject(snap.val()) : null;
+    });
+    myRef.child('chunkinfo/prevValueLevelInput').once('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/prevValueLevelInput');
+        if (snapDiff === false) return;
+        prevValueLevelInput = !!snap.val() ? decodeObject(snap.val()) : {'Combat': 3, 'Slayer': 1, 'ignoreCombatLevel': false, 'krystiliaSlayerCreatures': false, 'ClueSteps': 0};
+    });
+    myRef.child('chunkinfo/checkedAllTasks').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/checkedAllTasks');
+        if (snapDiff === false) return;
+        checkedAllTasks = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('chunkinfo/oldSavedChallengeArr').once('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/oldSavedChallengeArr');
+        if (snapDiff === false) return;
+        oldSavedChallengeArr = !!snap.val() ? decodeObject(snap.val()) : [];
+        if (oldSavedChallengeArr.length > 0) {
+            !initialLoaded && chunkTasksOn && setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true);
+        }
+    });
+    myRef.child('chunkinfo/assignedXpRewards').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'chunkinfo/assignedXpRewards');
+        if (snapDiff === false) return;
+        assignedXpRewards = !!snap.val() ? decodeObject(snap.val()) : {};
+    });
+    myRef.child('rules').on('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'rules');
+        if (snapDiff === false) return;
+        let rulesTemp = snap.val() || {};
         // Rule extenders
 
         if (!rulesTemp.hasOwnProperty('Show Diary Tasks Any')) {
@@ -11216,77 +11443,17 @@ let loadData = async function(startup) {
         !!rulesTemp && Object.keys(rulesTemp).forEach((rule) => {
             rules[rule] = rulesTemp[rule];
         });
-
-        if (!settingsTemp.hasOwnProperty('info')) {
-            settingsTemp['info'] = true;
-        }
-
-        Object.keys(settingsTemp).forEach((setting) => {
-            settings[setting] = settingsTemp[setting];
-        });
-        toggleIds(settings['ids']);
-        toggleVisibility(settings['highvis']);
-        toggleTheme(settings['theme']);
-        toggleNeighbors(settings['neighbors'], 'startup');
-        toggleRemove(settings['remove'], 'startup');
-        toggleRoll2(settings['roll2'], 'startup');
-        toggleUnpick(settings['unpick'], 'startup');
-        toggleRecent(settings['recent'], 'startup');
-        toggleChunkInfo(settings['info'], 'startup');
-        toggleChunkTasks(settings['chunkTasks'], 'startup');
-        toggleTopButtons(settings['topButtons'], 'startup');
-        toggleTaskSidebar(settings['taskSidebar'], 'startup');
-        settings['hideChecked'] ? $(`.tasks-checkmark`).show() : $(`.tasks-checkmark`).hide();
-
-        selectedChunks = 0;
-        unlockedChunks = 0;
-        selectedNum = 1;
-
-        $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
-        $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
-        picking = chunks && chunks['potential'];
-
-        stickered = (chunks ? chunks['stickered'] : {}) || {};
-        stickeredNotes = (chunks ? chunks['stickeredNotes'] : {}) || {};
-        stickeredColors = (chunks ? chunks['stickeredColors'] : {}) || {};
-
-        mid === roll5Mid && $('.roll2').text('Roll 5');
-        if (picking) {
-            $('.unpick').css({ 'opacity': 0, 'cursor': 'default' }).prop('disabled', true).hide();
-            !settings['randomStartAlways'] ? $('.pick').text('Pick for me') : $('.pick').text('Random Start?');
-            $('.roll2').text('Unlock both');
-            mid === roll5Mid && $('.roll2').text('Unlock all');
-            isPicking = true;
-        } else {
-            $('.pick').text('Pick Chunk');
-            $('.roll2').text('Roll 2');
-            mid === roll5Mid && $('.roll2').text('Roll 5');
-            isPicking = false;
-        }
-        if (((!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length === 0) && (!tempChunks['selected'] || Object.keys(tempChunks['selected']).length === 0)) || settings['randomStartAlways']) {
-            $('.pick').text('Random Start?');
-        }
-        oldSavedChallengeArr = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['oldSavedChallengeArr'] ? decodeObject(snap.val()['chunkinfo']['oldSavedChallengeArr']) : [];
-        if (oldSavedChallengeArr.length > 0) {
-            !initialLoaded && chunkTasksOn && setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true);
-        }
-        assignedXpRewards = !!snap.val()['chunkinfo'] && !!snap.val()['chunkinfo']['assignedXpRewards'] ? decodeObject(snap.val()['chunkinfo']['assignedXpRewards']) : {};
-        chunkTasksOn && calcCurrentChallengesCanvas(true, !initialLoaded || recentlyTestMode, !viewOnly);
         rulesModalOpen && showRules();
+        chunkTasksOn && calcCurrentChallengesCanvas(true, !initialLoaded || recentlyTestMode, !viewOnly);
         if (!startup) {
             rules['Manually Complete Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
         }
         questFilterType = 'all';
         
         !initialLoaded && doneLoading();
-        setUpSelected();
         chunkTasksOn && $(`.challenge.clickable`).removeClass('clickable');
         recentlyTestMode = false;
         initialLoaded = true;
-        manageTopbar();
-        if (!!snapDiff && snapDiff.hasOwnProperty('chunkOrder') && !snapDiff.hasOwnProperty('uid')) {
-            scrollToChunkCanvas(Object.values(snapDiff['chunkOrder'])[0]);
-        }
     });
 }
 
