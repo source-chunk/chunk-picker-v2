@@ -7725,6 +7725,10 @@ input#searchMonsters {
     margin-bottom: 20px;
 }
 
+.Quests-body .row > .quest-info-button {
+    color: var(--colorText);
+}
+
 .Quests-body .row > .xp-button {
     position: absolute;
     right: 0px;
