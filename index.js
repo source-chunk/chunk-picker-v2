@@ -1366,19 +1366,19 @@ let touchTime = 0;
 let listOfTasksPlugin = [];
 let pluginOutput = null;
 let mobileChunkId = 0;
-let topbarSelection = ['Patreon', 'Map Notes', 'Patch Notes', 'Discord', 'Report a Bug', 'Chunk Stats', 'Settings'];
-let topbarChoices = ['Map Notes', 'Patch Notes', 'Report a Bug', 'Chunk Stats', 'Chunk-roll History', 'Screenshot Mode', 'Sandbox Mode'];
+let topbarSelection = ['Patreon', 'Map Notes', 'Patch Notes', 'Discord', 'Report a Bug', 'WiseOldMan', 'Settings'];
+let topbarChoices = ['Map Notes', 'Patch Notes', 'Report a Bug', 'WiseOldMan', 'Chunk-roll History', 'Screenshot Mode', 'Sandbox Mode'];
 let topbarElements = {
     'Map Notes': `<div><span class='noscroll' onclick="openChunkNotesModal()"><i class="gonotes fas fa-sticky-note" title='Notes'></i></span></div>`,
     'Patch Notes': `<div><span class='noscroll' onclick="openPatchNotesModal(true)"><i class="godocumentation fas fa-file-alt" title='Patch Notes'></i></span></div>`,
     'Report a Bug': `<div><a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><i class="gobugreport fas fa-bug" title='Report a Bug'></i></a></div>`,
-    'Chunk Stats': `<div><a href='https://chunk-stats.web.app' target='_blank' title='Chunk Stats'><i class="gohighscore fas fa-trophy"></i></a></div>`,
+    'WiseOldMan': `<div><a href='https://wiseoldman.net/groups/5841' target='_blank' title='WiseOldMan'><i class="gohighscore fas fa-trophy"></i></a></div>`,
     'Chunk-roll History': `<div><span class='noscroll' onclick="showChunkHistory()"><i class="gohistory fas fa-history" title='Chunk-roll History'></i></span></div>`,
     'Screenshot Mode': `<div><span class='noscroll' onclick="enableScreenshotMode()"><i class="goscreenshot fas fa-camera" title='Screenshot Mode'></i></span></div>`,
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fas fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.4.11';
+let currentVersion = '6.4.12';
 let patchNotesVersion = '6.4.0';
 
 // Patreon Test Server Data
@@ -1537,7 +1537,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.4.11";
+mapImg.src = "osrs_world_map.png?v=6.4.12";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3219,7 +3219,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.4.11");
+        myWorker = new Worker("./worker.js?v=6.4.12");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
         workerOut = 1;
@@ -3522,8 +3522,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.4.11");
-let myWorker2 = new Worker("./worker.js?v=6.4.11");
+let myWorker = new Worker("./worker.js?v=6.4.12");
+let myWorker2 = new Worker("./worker.js?v=6.4.12");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -6298,7 +6298,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.4.11");
+    myWorker2 = new Worker("./worker.js?v=6.4.12");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
     workerOut++;
@@ -11139,7 +11139,6 @@ let loadData = async function(startup) {
         settingsTemp['infocollapse'] = document.cookie.split(';').filter(function(item) {
             return item.indexOf('infocollapse=true') >= 0
         }).length > 0;
-        settingsTemp['highscoreEnabled'] && enableHighscore('startup');
         settingsTemp['infocollapse'] && hideChunkInfo('startup');
         infoCollapse = settingsTemp['infocollapse'];
         if (settingsTemp['recent'] === undefined) {
@@ -11186,10 +11185,6 @@ let loadData = async function(startup) {
     myRef.child('userName').on('value', function(snap) {
         let snapDiff = preloadHelper(snap, 'userName');
         if (snapDiff === false) return;
-        if (settings['highscoreEnabled']) {
-            userName = snap.val();
-            $('.highscoretoggle').html('Change chunk stats username<i class="pic fas fa-trophy"></i>');
-        }
     });
     myRef.child('recent').on('value', function(snap) {
         let snapDiff = preloadHelper(snap, 'recent');
@@ -11198,7 +11193,10 @@ let loadData = async function(startup) {
     });
     myRef.child('topbarSelection').on('value', function(snap) {
         let snapDiff = preloadHelper(snap, 'topbarSelection');
-        topbarSelection = snap.val() || ['Patreon', 'Map Notes', 'Patch Notes', 'Discord', 'Report a Bug', 'Chunk Stats', 'Settings'];
+        topbarSelection = snap.val() || ['Patreon', 'Map Notes', 'Patch Notes', 'Discord', 'Report a Bug', 'WiseOldMan', 'Settings'];
+        if (topbarSelection.includes('Chunk Stats')) {
+            topbarSelection[topbarSelection.indexOf('Chunk Stats')] = 'WiseOldMan';
+        }
         manageTopbar();
         if (snapDiff === false) return;
     });
@@ -11631,16 +11629,6 @@ let setData = function() {
                     blacklistedJson[chunkId] = chunkId;
                 });
 
-                highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
-                    mid: mid,
-                    name: userName.toLowerCase(),
-                    score: walkableUnlockedChunks,
-                });
-
-                highscoreEnabled && databaseRef.child('highscores/playerskills/' + mid + '/85').update({
-                    0: walkableUnlockedChunks
-                });
-
                 setSnap = {
                     ...setSnap,
                     rules: rules,
@@ -11697,16 +11685,6 @@ let setData = function() {
             let blacklistedJson = {};
             !!tempChunks['blacklisted'] && Object.keys(tempChunks['blacklisted']).filter(chunkId => { return tempChunks['blacklisted'][chunkId] !== 'undefined' && tempChunks['blacklisted'][chunkId] !== 'NaN' && chunkId !== 'undefined' && chunkId !== 'NaN' }).forEach((chunkId) => {
                 blacklistedJson[chunkId] = chunkId;
-            });
-
-            highscoreEnabled && databaseRef.child('highscores/skills/Unlocked Chunks/' + mid).update({
-                mid: mid,
-                name: userName.toLowerCase(),
-                score: walkableUnlockedChunks,
-            });
-
-            highscoreEnabled && databaseRef.child('highscores/playerskills/' + mid + '/85').update({
-                0: walkableUnlockedChunks
             });
 
             setSnap = {
