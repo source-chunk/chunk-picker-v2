@@ -1250,6 +1250,7 @@ let stickeredColors = {};
 let stickerChoices = ['unset', 'skull', 'skull-crossbones', 'bomb', 'exclamation-circle', 'dice', 'poo', 'frown', 'grin-alt', 'heart', 'star', 'gem', 'award', 'crown', 'flag', 'asterisk', 'clock', 'hourglass', 'link', 'map-marker-alt', 'radiation-alt', 'shoe-prints', 'thumbs-down', 'thumbs-up', 'crow', 'utensil-spoon', 'lock', 'unlock-alt'];
 let stickerChoicesOsrs = ['attack', 'hitpoints', 'mining', 'strength', 'agility', 'smithing', 'defence', 'herblore', 'fishing', 'ranged', 'thieving', 'cooking', 'prayer', 'fletching', 'firemaking', 'magic', 'crafting', 'woodcutting', 'runecraft', 'slayer', 'farming', 'construction', 'hunter', 'quest', 'diary', 'minigame', 'music', 'skills', 'clue'];
 let stickerChoicesNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+let stickerChoicesTiers = ['S', 'A', 'B', 'C', 'D', 'F'];
 let savedStickerId;
 let savedStickerSticker;
 let altChallenges = {};
@@ -1377,7 +1378,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fas fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.4.10';
+let currentVersion = '6.4.11';
 let patchNotesVersion = '6.4.0';
 
 // Patreon Test Server Data
@@ -1536,7 +1537,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.4.10";
+mapImg.src = "osrs_world_map.png?v=6.4.11";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1790,9 +1791,16 @@ let drawCanvas = function() {
         } else if (stickerChoicesNumbers.includes(tempChunks['stickered'][chunkId])) {
             ctx.font = '900 ' + (totalZoom * (imgW / rowSize) * (1 / 2.75)) + 'px Calibri, Roboto Condensed, sans-serif';
             ctx.fillStyle = tempChunks['stickeredColors'][chunkId];
-            ctx.fillText(numberStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.9) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            ctx.fillText(numberStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
             if (ctx.fillStyle !== '#000000') {
-                ctx.strokeText(numberStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.9) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+                ctx.strokeText(numberStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            }
+        } else if (stickerChoicesTiers.includes(tempChunks['stickered'][chunkId])) {
+            ctx.font = '900 ' + (totalZoom * (imgW / rowSize) * (1 / 2.75)) + 'px Calibri, Roboto Condensed, sans-serif';
+            ctx.fillStyle = tempChunks['stickeredColors'][chunkId];
+            ctx.fillText(tempChunks['stickered'][chunkId], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            if (ctx.fillStyle !== '#000000') {
+                ctx.strokeText(tempChunks['stickered'][chunkId], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
             }
         }
     });
@@ -3211,7 +3219,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.4.10");
+        myWorker = new Worker("./worker.js?v=6.4.11");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
         workerOut = 1;
@@ -3514,8 +3522,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.4.10");
-let myWorker2 = new Worker("./worker.js?v=6.4.10");
+let myWorker = new Worker("./worker.js?v=6.4.11");
+let myWorker2 = new Worker("./worker.js?v=6.4.11");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -6290,7 +6298,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.4.10");
+    myWorker2 = new Worker("./worker.js?v=6.4.11");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
     workerOut++;
@@ -8103,7 +8111,7 @@ let openHighest2 = function() {
             $('.highest2-data').append(`<div class='noscroll style-body ${combatStyle.replaceAll(' ', '_')}-body'><div class='highest-subtitle noscroll'>${combatStyle}</div></div>`);
             if (combatStyle === 'Skills') {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll qps'>Quest Points: ${questPointTotal}</div>`);
-                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll icon-table-header'>Skill</span><span class='noscroll text-table-header'>Highest Task</span><span class='noscroll button-table-header ${onMobile ? 'mobile' : ''}'>Skill Training</span>${settings['allTasks'] ? `<span class='noscroll button2-table-header'>All Tasks</span>` : ''}</div>`);
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll icon-table-header'>Skill</span><span class='noscroll text-table-header${settings['allTasks'] ? ' narrow' : ''}'>Highest Task</span><span class='noscroll button-table-header ${onMobile ? 'mobile' : ''}'>Skill Training</span>${settings['allTasks'] ? `<span class='noscroll button2-table-header'>All Tasks</span>` : ''}</div>`);
                 skillNames.filter(skill => { return skill !== 'Combat' }).sort().forEach((skill) => {
                     let skillTask = highestOverall[skill];
                     let boost = 0;
@@ -8112,7 +8120,7 @@ let openHighest2 = function() {
                         boost = highestOverall[skill].match(/\{[0-9]+\}/g)[0].match(/\d+/)[0];
                     }
                     let completedNum = checkedAllTasks.hasOwnProperty(skill) && globalValids.hasOwnProperty(skill) ? Math.min(Object.keys(checkedAllTasks[skill]).filter(task => globalValids[skill].hasOwnProperty(task) && (!backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task))).length, Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length) : 0;
-                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text'>${(testMode || !(viewOnly || inEntry || locked)) ? `<span class='noscroll edit-highest' onclick='openPassiveModal("${skill}")'><i class="noscroll fas fa-edit"></i></span>` : ''}${(!!skillTask ? '<b class="noscroll">[' + (boost > 0 ? (chunkInfo['challenges'][skill][skillTask]['Level'] - boost) + '] (+' + boost + ')' : chunkInfo['challenges'][skill][skillTask]['Level'] + ']') + '</b> ' : '') + (skillTask || 'None').replaceAll('~', '').replaceAll('|', '')} ${skillTask ? `<span class="task-info" onclick="showDetails('${encodeRFC5987ValueChars(skillTask)}', '${skill}', '')"><i class="info-icon fas fa-info-circle"></i></span>` : ''}</span><span class='noscroll skill-button ${onMobile ? 'mobile' : ''} ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll methods-button' onclick='viewPrimaryMethodsOrTasks("${skill}", false)'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}${settings['allTasks'] ? `<span class='noscroll skill-button2 ${(!!globalValids[skill] && Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > 0 ? 'active' : '')}'>${!!globalValids[skill] && Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > 0 ? `<div class='noscroll tasks-button ${skill}-tasks-button ${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > completedNum ? 'yellow' : 'green'}' onclick='viewPrimaryMethodsOrTasks("${skill}", true)'>Tasks <span class='noscroll'>(${completedNum}/${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length})</span></div></span>` : `<div class='noscroll'>None</div></span>`}` : ''}${(testMode || !(viewOnly || inEntry || locked)) ? `<span class='noscroll manualprimary-highest' onclick='openManualPrimaryContextMenu("${skill}")'><i class="noscroll fas fa-cogs"></i></span>` : ''}</div>`);
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll skill-icon-wrapper'><img class='noscroll skill-icon' src='./resources/${skill}_skill.png' title='${skill}' /></span><span class='noscroll skill-text${settings['allTasks'] ? ' narrow' : ''}'>${(testMode || !(viewOnly || inEntry || locked)) ? `<span class='noscroll edit-highest' onclick='openPassiveModal("${skill}")'><i class="noscroll fas fa-edit"></i></span>` : ''}${(!!skillTask ? '<b class="noscroll">[' + (boost > 0 ? (chunkInfo['challenges'][skill][skillTask]['Level'] - boost) + '] (+' + boost + ')' : chunkInfo['challenges'][skill][skillTask]['Level'] + ']') + '</b> ' : '') + (skillTask || 'None').replaceAll('~', '').replaceAll('|', '')} ${skillTask ? `<span class="task-info" onclick="showDetails('${encodeRFC5987ValueChars(skillTask)}', '${skill}', '')"><i class="info-icon fas fa-info-circle"></i></span>` : ''}</span><span class='noscroll skill-button ${onMobile ? 'mobile' : ''} ${(primarySkill[skill] ? 'active' : '')}'>${primarySkill[skill] ? `<div class='noscroll methods-button' onclick='viewPrimaryMethodsOrTasks("${skill}", false)'>View Methods</div></span>` : `<div class='noscroll'>None</div></span>`}${settings['allTasks'] ? `<span class='noscroll skill-button2 ${(!!globalValids[skill] && Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > 0 ? 'active' : '')}'>${!!globalValids[skill] && Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > 0 ? `<div class='noscroll tasks-button ${skill}-tasks-button ${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > completedNum ? 'yellow' : 'green'}' onclick='viewPrimaryMethodsOrTasks("${skill}", true)'>Tasks <span class='noscroll'>(${completedNum}/${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length})</span></div>` : `<div class='noscroll'>None</div>`}` : ''}${(testMode || !(viewOnly || inEntry || locked)) ? `<span class='noscroll manualprimary-highest' onclick='openManualPrimaryContextMenu("${skill}")'><i class="noscroll fas fa-cogs"></i></span>` : ''}</span></div>`);
                 });
             } else if (combatStyle === 'Slayer') {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-header'>Slayer is currently <b class='noscroll slayer-locked-status ${!!slayerLocked ? 'red' : 'green'}'>${!!slayerLocked ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-unlock"></i>'} ${!!slayerLocked ? 'LOCKED' : 'UNLOCKED'}</b> ${!!slayerLocked ? '(' + `<a class='noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(slayerLocked['monster'].replace(/[!'()*]/g, escape))}' target='_blank'>${slayerLocked['monster'].replaceAll(/~/g, '').replaceAll(/\|/g, '')}</a>` + ')' : ''} ${!!slayerLocked ? ' at Level ' + slayerLocked['level'] : ''}</div>`);
@@ -8677,6 +8685,11 @@ let openStickers = function(id) {
             let stickerName = sticker;
             $('.sticker-data').append(`<span style='color:${$('.sticker-color-picker').val()}' class='noscroll sticker-option-container color-sticker${$('.sticker-color-picker').val() !== '#000000' ? ' black-outline' : ''} ${sticker}-tag' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')">${numberStickers[sticker]}</span>`);
         });
+        $('.sticker-data').append(`<div class='noscroll sticker-data-subheader'>Tier stickers</div>`);
+        stickerChoicesTiers.forEach((sticker) => {
+            let stickerName = sticker;
+            $('.sticker-data').append(`<span style='color:${$('.sticker-color-picker').val()}' class='noscroll sticker-option-container color-sticker${$('.sticker-color-picker').val() !== '#000000' ? ' black-outline' : ''} ${sticker}-tag' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')">${sticker}</span>`);
+        });
         savedStickerId = id;
         if (stickered.hasOwnProperty(id)) {
             $(`.sticker-data > .sticker-option-container.${stickered[id]}-tag`).addClass('selected-sticker');
@@ -8851,7 +8864,7 @@ let viewPrimaryMethodsOrTasks = function(skill, showTasks) {
         let completedNum = checkedAllTasks.hasOwnProperty(skill) ? Math.min(Object.keys(checkedAllTasks[skill]).filter(task => globalValids[skill].hasOwnProperty(task) && (!backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task))).length, Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length) : 0;
         $('.methods-topbar').html(`${skill} Tasks <span class='noscroll ${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > completedNum ? 'yellow' : 'green'}'>(${completedNum}/${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length})</span><i class="manual-close pic fas fa-times noscrollhard" onclick="closeMethods()"></i>`);
         !!globalValids[skill] && Object.keys(globalValids[skill]).sort(function(a, b) { return globalValids[skill][a] - globalValids[skill][b] }).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).forEach((task) => {
-            $('.methods-data').append(`<div class='noscroll skill-method'><span><input class="noscroll" ${checkedAllTasks[skill] && checkedAllTasks[skill][task] && "checked"} ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''} type="checkbox" onclick="checkOffAllTask('${skill}', '${encodeRFC5987ValueChars(task)}')" /></span><span>[${globalValids[skill][task]}]: ${task.includes('~') ? `${task.replaceAll('*', '').split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((task.replaceAll('*', '').split('|')[1]))}" target="_blank">${task.replaceAll('*', '').split('~')[1].split('|').join('')}</a>${task.replaceAll('*', '').split('~')[2]}` : `${task.replaceAll('~', '').replaceAll('|', '').replaceAll('*', '')}`} ${chunkInfo['challenges'][skill].hasOwnProperty(task) ? `<span class='noscroll details-info' onclick="showDetails('${encodeRFC5987ValueChars(task)}', '${skill}', '')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span></span>` : ''}</div>`);
+            $('.methods-data').append(`<div class='noscroll skill-method'><span><input class="noscroll" ${checkedAllTasks[skill] && checkedAllTasks[skill][task] && "checked"} ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''} type="checkbox" onclick="checkOffAllTask('${skill}', '${encodeRFC5987ValueChars(task)}')" /></span><span class='skill-method-text'>[${globalValids[skill][task]}]: ${task.includes('~') ? `${task.replaceAll('*', '').split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((task.replaceAll('*', '').split('|')[1]))}" target="_blank">${task.replaceAll('*', '').split('~')[1].split('|').join('')}</a>${task.replaceAll('*', '').split('~')[2]}` : `${task.replaceAll('~', '').replaceAll('|', '').replaceAll('*', '')}`} ${chunkInfo['challenges'][skill].hasOwnProperty(task) ? `<span class='noscroll details-info' onclick="showDetails('${encodeRFC5987ValueChars(task)}', '${skill}', '')"><i class="challenge-icon fas fa-info-circle noscroll"></i></span></span>` : ''}</div>`);
         });
     } else {
         $('.methods-topbar').html(`<i class="manual-close pic fas fa-times noscrollhard" onclick="closeMethods()"></i>`);
@@ -11064,6 +11077,8 @@ let loadData = async function(startup) {
     const data = await response.json();
     gotData = true;
     chunkInfo = data;
+    highestOverall = {};
+    globalValids = {};
     setCodeItems();
 
     skillNames.forEach((skill) => {

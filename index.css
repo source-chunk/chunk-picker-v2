@@ -5927,6 +5927,11 @@ input#searchChunks {
     position: relative;
 }
 
+.skill-text.narrow {
+    min-width: 50%;
+    max-width: 50%;
+}
+
 .skill-icon-wrapper {
     width: 5%;
     min-width: 25px;
@@ -5967,6 +5972,12 @@ input#searchChunks {
     font-size: 18px;
     text-align: center;
     border-left: solid 1px var(--color8);
+    position: relative;
+    padding-right: 30px;
+}
+
+.skill-button2 > div {
+    display: inline-block;
 }
 
 .skill-button2.active > .tasks-button {
@@ -6007,6 +6018,11 @@ input#searchChunks {
     border-right: solid 1px var(--color8);
 }
 
+.text-table-header.narrow {
+    min-width: 50%;
+    max-width: 50%;
+}
+
 .button-table-header.mobile {
     width: 48.2%;
 }
@@ -6024,6 +6040,7 @@ input#searchChunks {
     text-align: center;
     width: 28.2%;
     border-left: solid 1px var(--color8);
+    padding-right: 30px;
 }
 
 .clue-possible {
@@ -6192,6 +6209,10 @@ input#searchChunks {
     padding: 2px 30px 2px 5px;
     background-color: var(--color3);
     position: relative;
+}
+
+.methods-data > .skill-method .skill-method-text {
+    margin-left: 10px;
 }
 
 .methods-data > .skill-method .details-info {
@@ -6534,6 +6555,12 @@ input#searchMonsters {
 .sticker-option-container.black-outline > i {
     -webkit-text-stroke-width: 0.05em;
     -webkit-text-stroke-color: black;
+}
+
+.sticker-option-container.black-outline {
+    -webkit-text-stroke: 1.5px;
+    -webkit-text-stroke-color: black;
+    font-weight: bold;
 }
 
 .sticker-option-container.unset-option {
@@ -7532,7 +7559,10 @@ input#searchMonsters {
 
 .manualprimary-highest {
     cursor: pointer;
-    margin-right: 5px;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .manualprimary-highest:hover {
