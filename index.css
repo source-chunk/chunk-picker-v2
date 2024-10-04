@@ -3549,6 +3549,12 @@ input#searchPlayerMaps {
     position: relative;
 }
 
+.setting-color {
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+}
+
 .setting > input {
     position: absolute;
 }
