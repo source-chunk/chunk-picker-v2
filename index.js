@@ -1378,7 +1378,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fas fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.4.13';
+let currentVersion = '6.4.14';
 let patchNotesVersion = '6.4.0';
 
 // Patreon Test Server Data
@@ -1537,7 +1537,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.4.13";
+mapImg.src = "osrs_world_map.png?v=6.4.14";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3219,7 +3219,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.4.13");
+        myWorker = new Worker("./worker.js?v=6.4.14");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
         workerOut = 1;
@@ -3522,8 +3522,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.4.13");
-let myWorker2 = new Worker("./worker.js?v=6.4.13");
+let myWorker = new Worker("./worker.js?v=6.4.14");
+let myWorker2 = new Worker("./worker.js?v=6.4.14");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -6298,7 +6298,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.4.13");
+    myWorker2 = new Worker("./worker.js?v=6.4.14");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
     workerOut++;
@@ -7086,10 +7086,19 @@ let searchingPlayerMaps = function() {
 
 // Searches for player maps by player username
 let searchPlayerMaps = function() {
-    databaseRef.child('highscores/players/' + $('#searchPlayerMaps').val().toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('[+]', ' ')).once('value', function(snap) {
-        if (!!snap.val()) {
+    let url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdsOtdI264xc_c4rXKnSr9SVyz3tn7IiJvd5OQzOU5TgnNjiW5vizAwtK5vJzoaAFVBbOdruPCtPRM/pub?gid=1831536443&single=true&output=csv';
+    fetch(url)
+    .then(response => response.text())
+    .then(data => {
+        let formattedData = {};
+        data.split('\n').forEach((row, i) => {
+            if (i !== 0) {
+                formattedData[row.split(',')[0].toLowerCase()] = { 'mapcode': row.split(',')[1], 'isInClan': row.split(',')[2].trim() === 'TRUE' };
+            }
+        });
+        if (formattedData.hasOwnProperty($('#searchPlayerMaps').val().toLowerCase())) {
             $('#searchPlayerMaps').removeClass('wrong');
-            window.location.assign(window.location.href.split('?')[0] + '?' + snap.val());
+            window.location.assign(window.location.href.split('?')[0] + '?' + formattedData[$('#searchPlayerMaps').val().toLowerCase()].mapcode);
         } else if (contentCreators.hasOwnProperty($('#searchPlayerMaps').val().toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('[+]', ' '))) {
             $('#searchPlayerMaps').removeClass('wrong');
             window.location.assign(window.location.href.split('?')[0] + '?' + contentCreators[$('#searchPlayerMaps').val().toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('[+]', ' ')]);
@@ -7600,6 +7609,40 @@ let openManualComplete = function() {
     completeModalOpen = true;
     $('#myModal14').show();
     modalOutsideTime = Date.now();
+}
+
+// Loads maps data from google sheet
+let loadMapsData = function() {
+    $('#searchMaps').val('').focus();
+    let url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdsOtdI264xc_c4rXKnSr9SVyz3tn7IiJvd5OQzOU5TgnNjiW5vizAwtK5vJzoaAFVBbOdruPCtPRM/pub?gid=1831536443&single=true&output=csv';
+    fetch(url)
+    .then(response => response.text())
+    .then(data => {
+        let formattedData = {};
+        data.split('\n').forEach((row, i) => {
+            if (i !== 0) {
+                formattedData[row.split(',')[0]] = { 'mapcode': row.split(',')[1].toUpperCase(), 'isInClan': row.split(',')[2].trim() === 'TRUE' };
+            }
+        });
+        mapsData = formattedData;
+        searchMaps();
+    });
+}
+
+// Searches the maps data
+let searchMaps = function() {
+    let searchTemp = $('#searchMaps').val().toLowerCase();
+    $('.maps-list').empty();
+    let tableData = '';
+    $('.maps-list-number').html(Object.keys(mapsData).filter((username) => username.toLowerCase().includes(searchTemp) || mapsData[username].mapcode.toLowerCase().includes(searchTemp)).length + ' users');
+    Object.keys(mapsData).filter((username) => username.toLowerCase().includes(searchTemp) || mapsData[username].mapcode.toLowerCase().includes(searchTemp)).forEach((username) => {
+        tableData += `<tr><td>${username}</td><td><a href="https://source-chunk.github.io/chunk-picker-v2/?${mapsData[username].mapcode}" target="_blank">${mapsData[username].mapcode}</a></td><td>${mapsData[username].isInClan ? `<a href="https://wiseoldman.net/players/${username}" target="_blank">Stats (WOM)</a>` : '-'}</td><td><a href="https://secure.runescape.com/m=hiscore_oldschool/a=13/hiscorepersonal?user1=${username}" target="_blank">Stats (Hiscores)</a></td></tr>`;
+    });
+    if (tableData.length === 0) {
+        $('.maps-list').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No results found (0)</span></span></div>`);
+    } else {
+        $('.maps-list').append(`<table><tr><th>Username</th><th>Chunk Picker Map</th><th>WiseOldMan</th><th>Hiscores</th></tr>${tableData}</table>`);
+    }
 }
 
 // Opens the user-inputted tasks modal
@@ -10877,7 +10920,14 @@ let checkMID = function(mid) {
         $('#patch-menu').show();
         $('html, body').addClass('patch');
     } else if (mid === 'maps-list') {
-        window.location.replace(`https://docs.google.com/spreadsheets/d/e/2PACX-1vRdsOtdI264xc_c4rXKnSr9SVyz3tn7IiJvd5OQzOU5TgnNjiW5vizAwtK5vJzoaAFVBbOdruPCtPRM/pubhtml?gid=1831536443&single=true`);
+        atHome = true;
+        $('.loading, .ui-loader-header').remove();
+        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv, .menu11, .menu12, .menu13, .menu14').hide();
+        $('#home-menu, .entry-home-menu-container, .entry-home-menu-extra').hide();
+        onMobile && $('#maps-menu').addClass('mobile');
+        $('#maps-menu').show();
+        $('html, body').addClass('maps');
+        loadMapsData();
     } else if (mid) {
         if (mid.split('-')[1] === 'view') {
             mid = mid.split('-')[0];
@@ -10893,9 +10943,18 @@ let checkMID = function(mid) {
             } else {
                 databaseRef.child('maps/' + mid).once('value', function(snap2) {
                     if (!snap2.val()) {
-                        databaseRef.child('highscores/players/' + mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('[+]', ' ')).once('value', function(snap3) {
-                            if (!!snap3.val()) {
-                                window.location.replace(window.location.href.split('?')[0] + '?' + snap3.val());
+                        let url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdsOtdI264xc_c4rXKnSr9SVyz3tn7IiJvd5OQzOU5TgnNjiW5vizAwtK5vJzoaAFVBbOdruPCtPRM/pub?gid=1831536443&single=true&output=csv';
+                        fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            let formattedData = {};
+                            data.split('\n').forEach((row, i) => {
+                                if (i !== 0) {
+                                    formattedData[row.split(',')[0].toLowerCase()] = { 'mapcode': row.split(',')[1], 'isInClan': row.split(',')[2].trim() === 'TRUE' };
+                                }
+                            });
+                            if (formattedData.hasOwnProperty(mid.toLowerCase())) {
+                                window.location.replace(window.location.href.split('?')[0] + '?' + formattedData[mid].mapcode);
                             } else if (contentCreators.hasOwnProperty(mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('[+]', ' '))) {
                                 window.location.assign(window.location.href.split('?')[0] + '?' + contentCreators[mid.toLowerCase().replaceAll('%20', ' ').replaceAll('_', ' ').replaceAll('-', ' ').replaceAll('[+]', ' ')]);
                             } else {

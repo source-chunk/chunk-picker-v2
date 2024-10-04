@@ -40,14 +40,14 @@ body::-webkit-scrollbar {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
-body:not(.about):not(.patch):not(.change-password) {
+body:not(.about):not(.patch):not(.change-password):not(.maps) {
     background-color: black;
     color: var(--colorText);
     overflow: hidden !important;
 }
 
 @-moz-document url-prefix() {
-    html:not(.about):not(.patch):not(.change-password),body:not(.about):not(.patch):not(.change-password){overflow: hidden !important;}
+    html:not(.about):not(.patch):not(.change-password):not(.maps),body:not(.about):not(.patch):not(.change-password):not(.maps){overflow: hidden !important;}
 }
 
 a, a:visited {
@@ -1183,6 +1183,49 @@ button.menu2 {
 .inner-content9 h2, .inner-content9 p {
     margin-block-start: 15px;
     margin-block-end: 15px;
+}
+
+.content10 {
+    border: solid;
+    width: 60%;
+    max-height: 100%;
+    min-width: 500px;
+    max-width: 750px;
+    margin: auto;
+    text-align: center;
+    margin-top: 2vh;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: var(--color6);
+    font-size: 18px;
+    overflow-y: auto;
+    margin-bottom: 100px;
+}
+
+#searchMaps {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 35%;
+    font-size: 2vh;
+}
+
+.maps-list-loading {
+    padding: 100px;
+}
+
+.maps-list > table {
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.maps-list tr:has(th) {
+    background-color: var(--color8);
+    border-top: solid 2px black;
+}
+
+.maps-list tr:nth-child(2n+1) {
+    background-color: var(--color1);
 }
 
 .mobile #page8 {
