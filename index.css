@@ -8160,8 +8160,8 @@ input#searchMonsters {
   
 .radio__control {
     display: inline-grid;
-    width: .825em;
-    height: .825em;
+    width: .855em;
+    height: .855em;
     margin: .15em .3em;
     border-radius: 0.5em;
     border: 0.1em solid currentColor;
