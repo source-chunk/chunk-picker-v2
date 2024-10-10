@@ -1378,7 +1378,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fas fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.4.21';
+let currentVersion = '6.4.22';
 let patchNotesVersion = '6.4.0';
 
 // Patreon Test Server Data
@@ -1538,7 +1538,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.4.21";
+mapImg.src = "osrs_world_map.png?v=6.4.22";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3223,7 +3223,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.4.21");
+        myWorker = new Worker("./worker.js?v=6.4.22");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
         workerOut = 1;
@@ -3526,8 +3526,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.4.21");
-let myWorker2 = new Worker("./worker.js?v=6.4.21");
+let myWorker = new Worker("./worker.js?v=6.4.22");
+let myWorker2 = new Worker("./worker.js?v=6.4.22");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -3714,7 +3714,10 @@ window.addEventListener('contextmenu', function(e) {
 }, false);
 
 window.addEventListener('error', e => {
-    if (parseInt(e.lineno) > 1 && typeof e.lineno === 'number' && !e.message.includes('Script error.')) {
+    e.lineno = 0;
+    if (parseInt(e.lineno) === 1 || e.message.includes('Script')) {
+        logError((parseInt(e.lineno) === 1 ? 1 : 2) + '$$$' + e.message + ';index.js;' + e.lineno + ';' + e.colno);
+    } else if (parseInt(e.lineno) > 1 && typeof e.lineno === 'number' && !e.message.includes('Script error.')) {
         logError(e.message + ';index.js;' + e.lineno + ';' + e.colno);
     }
 });
@@ -6309,7 +6312,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.4.21");
+    myWorker2 = new Worker("./worker.js?v=6.4.22");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
     workerOut++;
@@ -9474,12 +9477,14 @@ let showDetails = function(challenge, skill, dataType, isNested) {
             }
         }
         let challengeLabelLine = '';
-        if (skillNames.includes(skill)) {
+        if (skillNames.includes(skill) && !!chunkInfo['challenges'][skill][challenge]) {
             challengeLabelLine = `[${chunkInfo['challenges'][skill][challenge]['Level']}] ${skill}: `;
         } else if (skill === 'BiS' || skill === 'Extra') {
             challengeLabelLine = `[${chunkInfo['challenges'][skill][challenge]['Label']}]: `;
         } else if (skill === 'Quest' || skill === 'Diary') {
             challengeLabelLine = `[${skill}]: `;
+        } else {
+            challengeLabelLine = `${skill}: `;
         }
         if (isNested) {
             $('.details-back').show().html(`<i class="fas fa-arrow-left noscrollhard" onclick="goBackDetails('` + dataType + `')"></i>`);
