@@ -1378,7 +1378,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fas fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.4.24';
+let currentVersion = '6.4.25';
 let patchNotesVersion = '6.4.0';
 
 // Patreon Test Server Data
@@ -1538,7 +1538,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.4.24";
+mapImg.src = "osrs_world_map.png?v=6.4.25";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3223,7 +3223,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.4.24");
+        myWorker = new Worker("./worker.js?v=6.4.25");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
         workerOut = 1;
@@ -3526,8 +3526,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.4.24");
-let myWorker2 = new Worker("./worker.js?v=6.4.24");
+let myWorker = new Worker("./worker.js?v=6.4.25");
+let myWorker2 = new Worker("./worker.js?v=6.4.25");
 let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -6309,7 +6309,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.4.24");
+    myWorker2 = new Worker("./worker.js?v=6.4.25");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary]);
     workerOut++;
@@ -6426,7 +6426,7 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
                 bestBoost = bestBoost + (ownsCrystalSaw ? 3 : 0);
             }
             if (skill === 'Quest' || skill === 'Diary' || skill === 'BiS' || skill === 'Extra') {
-                if ((!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge)) && valids[skill][challenge] && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill][challenge])) {
+                if ((!globalValids.hasOwnProperty(skill) || !globalValids[skill].hasOwnProperty(challenge)) && valids[skill][challenge] && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill][challenge])) {
                     if ((skill === 'Quest' && rules["Show Quest Tasks"] && (chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') || !rules["Show Quest Tasks Complete"])) || (skill === 'Diary' && rules["Show Diary Tasks"] && (chunkInfo['challenges'][skill][challenge].hasOwnProperty('ManualShow') || !rules["Show Diary Tasks Complete"])) || (skill === 'BiS' && rules["Show Best in Slot Tasks"]) || (skill === 'Extra')) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
@@ -9437,7 +9437,7 @@ let showDetails = function(challenge, skill, dataType, isNested) {
     if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         let baseChunkDataIn = dataType === 'future' ? futureChunkData : baseChunkData;
         let unlockedSectionsIn = dataType === 'future' ? futureUnlockedSections : unlockedSections;
-        let chunksIn = JSON.parse(JSON.stringify(tempChunks['unlocked']));
+        let chunksIn = !!tempChunks['unlocked'] ? JSON.parse(JSON.stringify(tempChunks['unlocked'])) : {};
         dataType === 'future' && (chunksIn[infoLockedId] = infoLockedId);
         let possibleAreasIn = dataType === 'future' ? futurePossibleAreas : possibleAreas;
         challenge = decodeQueryParam(challenge);
