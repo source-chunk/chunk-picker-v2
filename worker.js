@@ -5434,7 +5434,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -5481,7 +5481,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs'];
             tempWeapons = ['Toktz-xil-ek', 'Toktz-xil-ak', 'Tzhaar-ket-em', 'Tzhaar-ket-om'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -5568,7 +5568,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
             tempWeapons = ["Inquisitor's mace"];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -5652,7 +5652,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -5699,7 +5699,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs'];
             tempWeapons = ['Toktz-xil-ek', 'Toktz-xil-ak'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -5786,7 +5786,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
             tempWeapons = ["Inquisitor's mace"];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -5870,7 +5870,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -5917,7 +5917,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs'];
             tempWeapons = ['Toktz-xil-ek', 'Toktz-xil-ak'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6014,7 +6014,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6061,7 +6061,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs'];
             tempWeapons = ['Tzhaar-ket-em', 'Tzhaar-ket-om'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6148,7 +6148,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ["Inquisitor's great helm", "Inquisitor's hauberk", "Inquisitor's plateskirt"];
             tempWeapons = ["Inquisitor's mace"];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6232,7 +6232,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6279,7 +6279,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs'];
             tempWeapons = ['Toktz-xil-ek', 'Toktz-xil-ak', 'Tzhaar-ket-em', 'Tzhaar-ket-om'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6376,7 +6376,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6423,7 +6423,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs'];
             tempWeapons = ['Toktz-xil-ek', 'Toktz-xil-ak'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6520,7 +6520,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6567,7 +6567,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs'];
             tempWeapons = ['Toktz-xil-ek', 'Toktz-xil-ak'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6664,7 +6664,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void melee helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6711,7 +6711,7 @@ let calcBIS = function(completedOnly) {
             tempEquipment = ['Obsidian helmet', 'Obsidian platebody', 'Obsidian platelegs'];
             tempWeapons = ['Tzhaar-ket-em', 'Tzhaar-ket-om'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6808,7 +6808,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void ranger helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6888,7 +6888,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Amulet of the damned (full)', "Karil's coif", "Karil's crossbow", "Karil's leatherskirt", "Karil's leathertop", 'Bolt rack'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -6934,7 +6934,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Crystal helm', 'Crystal body', 'Crystal legs', 'Crystal bow'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -7010,7 +7010,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ['Void mage helm', 'Void knight top', 'Void knight robe', 'Void knight gloves'];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
@@ -7102,7 +7102,7 @@ let calcBIS = function(completedOnly) {
             validWearable = true;
             tempEquipment = ["Verac's helm", "Verac's brassard", "Verac's plateskirt", "Verac's flail", "Amulet of the damned (full)"];
             tempEquipment.some(equip => {
-                if (!baseChunkData['items'].hasOwnProperty(equip)) {
+                if (!baseChunkData['items'].hasOwnProperty(equip) || !tempEquipmentObject.hasOwnProperty(equip)) {
                     validWearable = false;
                     return true;
                 }
