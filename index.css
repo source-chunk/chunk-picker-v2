@@ -2682,6 +2682,88 @@ input#searchPlayerMaps {
     visibility: visible;
 }
 
+.quest-question-outer {
+    text-align: center;
+    margin: 5px;
+}
+
+.quest-question .tooltiptext {
+    visibility: hidden;
+    width: 220px;
+    background-color: var(--color2);
+    color: var(--colorText);
+    text-align: center;
+    border: 1px var(--colorText) solid;
+    padding: 5px 0;
+    font-size: 14px;
+    position: absolute;
+    z-index: 1;
+    margin: 25px -15px;
+    padding: 5px;
+}
+
+.quest-question:hover {
+    cursor: pointer;
+    color: var(--colorLink);
+}
+
+.quest-question:hover .tooltiptext {
+    visibility: visible;
+}
+
+.diary-question-outer {
+    text-align: center;
+    margin: 5px;
+}
+
+.diary-question .tooltiptext {
+    visibility: hidden;
+    width: 220px;
+    background-color: var(--color2);
+    color: var(--colorText);
+    text-align: center;
+    border: 1px var(--colorText) solid;
+    padding: 5px 0;
+    font-size: 14px;
+    position: absolute;
+    z-index: 1;
+    margin: 25px -15px;
+    padding: 5px;
+}
+
+.diary-question:hover {
+    cursor: pointer;
+    color: var(--colorLink);
+}
+
+.diary-question:hover .tooltiptext {
+    visibility: visible;
+}
+
+.slayermasterinfo-question .tooltiptext {
+    visibility: hidden;
+    width: 220px;
+    background-color: var(--color2);
+    color: var(--colorText);
+    text-align: center;
+    border: 1px var(--colorText) solid;
+    padding: 5px 0;
+    font-size: 14px;
+    position: absolute;
+    z-index: 1;
+    margin: 25px -15px;
+    padding: 5px;
+}
+
+.slayermasterinfo-question:hover {
+    cursor: pointer;
+    color: var(--colorLink);
+}
+
+.slayermasterinfo-question:hover .tooltiptext {
+    visibility: visible;
+}
+
 .expand {
     position: relative;
     float: right;
@@ -5466,8 +5548,18 @@ input#searchChunks {
 .slayermasterinfo-title {
     font-size: 30px;
     text-align: center;
-    max-height: 15%;
-    min-height: 15%;
+    max-height: 9%;
+    min-height: 9%;
+    font-weight: bold;
+    padding: 0px 10px;
+    overflow-y: hidden;
+}
+
+.slayermasterinfo-subtitle {
+    font-size: 18px;
+    text-align: center;
+    max-height: 6%;
+    min-height: 6%;
     font-weight: bold;
     padding: 0px 10px;
     overflow-y: hidden;
@@ -6503,11 +6595,23 @@ input#searchMonsters {
     padding-left: 5px;
     background-color: var(--color3);
     margin-right: 15px;
+    position: relative;
 }
 
-.search-monsters-result > span {
+.search-monsters-result > .search-monsters-result-inner {
     margin-left: 5px;
     font-size: 24px;
+}
+
+.search-monsters-result > .search-monsters-result-inner.spacing-right {
+    padding-right: 95px;
+}
+
+.manualmonsters-dropdown-container {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .search-monsters-result input {
@@ -7774,7 +7878,6 @@ input#searchMonsters {
 }
 
 .Quests-body {
-    position: relative;
     height: 70%;
 }
 
@@ -7844,10 +7947,6 @@ input#searchMonsters {
 
 .diary-text {
     text-decoration: none;
-}
-
-.Diaries-body {
-    position: relative;
 }
 
 .Diaries-body .row {
