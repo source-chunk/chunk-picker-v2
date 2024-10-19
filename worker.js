@@ -2318,9 +2318,11 @@ let calcChallenges = function(chunks, baseChunkData) {
                                 !!itemsPlus[item.replaceAll(/\*/g, '')] && itemsPlus[item.replaceAll(/\*/g, '')].forEach((plus) => {
                                     !!baseChunkData['items'][plus] && Object.keys(baseChunkData['items'][plus]).forEach((source) => {
                                         if (baseChunkData['items'][plus][source] === 'secondary-drop') {
-                                            if (!!dropRatesGlobal[source] &&  !!dropRatesGlobal[source][plus] && !isNaN(dropRatesGlobal[source][plus].split('/')[0]) && ((parseFloat(dropRatesGlobal[source][plus].split('/')[0]) / parseFloat(dropRatesGlobal[source][plus].split('/')[1])) > lowestPlusRate)) {
-                                                lowestPlusRate = parseFloat(dropRatesGlobal[source][plus].split('/')[0]) / parseFloat(dropRatesGlobal[source][plus].split('/')[1]);
+                                            if (!!dropRatesGlobal[source] &&  !!dropRatesGlobal[source][plus] && !isNaN(dropRatesGlobal[source][plus].split('/')[0]) && ((parseFloat(dropRatesGlobal[source][plus].split('/')[0].replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][plus].split('/')[1].replaceAll(',', ''))) > lowestPlusRate)) {
+                                                lowestPlusRate = parseFloat(dropRatesGlobal[source][plus].split('/')[0].replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][plus].split('/')[1].replaceAll(',', ''));
                                             }
+                                        } else if (baseChunkData['items'][plus][source].split('-').length > 1 && !!chunkInfo['challenges'][baseChunkData['items'][plus][source].split('-')[1]] && !!chunkInfo['challenges'][baseChunkData['items'][plus][source].split('-')[1]][source] && !!chunkInfo['challenges'][baseChunkData['items'][plus][source].split('-')[1]][source].hasOwnProperty('highestDropRate')) {
+                                            lowestPlusRate = chunkInfo['challenges'][baseChunkData['items'][plus][source].split('-')[1]][source]['highestDropRate'];
                                         } else if (baseChunkData['items'][plus][source].split('-').length > 1 && [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'].includes(baseChunkData['items'][plus][source].split('-')[1])) {
                                             let lowestQuantityRate = 0;
                                             !!chunkInfo['skillItems'][baseChunkData['items'][plus][source].split('-')[1]] && !!chunkInfo['skillItems'][baseChunkData['items'][plus][source].split('-')[1]][source.replaceAll(/\*/g, '')] && chunkInfo['skillItems'][baseChunkData['items'][plus][source].split('-')[1]][source.replaceAll(/\*/g, '')][plus] && Object.keys(chunkInfo['skillItems'][baseChunkData['items'][plus][source].split('-')[1]][source.replaceAll(/\*/g, '')][plus]).forEach((quantity) => {
@@ -2334,15 +2336,17 @@ let calcChallenges = function(chunks, baseChunkData) {
                                         }
                                     });
                                 });
-                                if ((lowestPlusRate > highestDropRate) && (lowestPlusRate!== 0)) {
+                                if ((lowestPlusRate > highestDropRate) && (lowestPlusRate !== 0)) {
                                     highestDropRate = lowestPlusRate;
                                 }
                             } else {
                                 !!baseChunkData['items'][item.replaceAll(/\*/g, '')] && Object.keys(baseChunkData['items'][item.replaceAll(/\*/g, '')]).forEach((source) => {
-                                    if (baseChunkData['items'][item.replaceAll(/\*/g, '')][source] === 'secondary-drop') {
-                                        if (!!dropRatesGlobal[source] && !!dropRatesGlobal[source][item.replaceAll(/\*/g, '')] && !isNaN(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0]) && ((parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0]) / parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[1])) > highestDropRate)) {
-                                            highestDropRate = parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0]) / parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[1]);
+                                    if (baseChunkData['items'][item.replaceAll(/\*/g, '')][source].includes('-drop')) {
+                                        if (!!dropRatesGlobal[source] && !!dropRatesGlobal[source][item.replaceAll(/\*/g, '')] && !isNaN(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0]) && ((parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0].replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[1].replaceAll(',', ''))) > highestDropRate)) {
+                                            highestDropRate = parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0].replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[1].replaceAll(',', ''));
                                         }
+                                    } else if (baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-').length > 1 && !!chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] && !!chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source] && !!chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source].hasOwnProperty('highestDropRate')) {
+                                        highestDropRate = chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['highestDropRate'];
                                     } else if (baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-').length > 1 && [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'].includes(baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1])) {
                                         let lowestQuantityRate = 0;
                                         !!chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] && !!chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')] && chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')] && Object.keys(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')]).forEach((quantity) => {
@@ -2360,6 +2364,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                         if (highestDropRate <= 0) {
                             highestDropRate = 1;
                         }
+                        chunkInfo['challenges'][skill][challenge]['highestDropRate'] = highestDropRate;
                         !!chunkInfo['skillItems'][skill] && !!chunkInfo['skillItems'][skill][output] && Object.keys(chunkInfo['skillItems'][skill][output]).filter((item) => { return (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || isNaN(parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1])) || (parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) * highestDropRate) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossLogs.hasOwnProperty(output)) && (!shouldDelete[item] || !shouldDelete[item][challenge]) }).forEach((item) => {
                             if (!outputs[item]) {
                                 outputs[item] = {};
@@ -8061,10 +8066,10 @@ let gatherChunksInfo = function(chunksIn) {
             if (items.hasOwnProperty(keyItem)) {
                 let bestRate = 0;
                 Object.keys(items[keyItem]).filter((source) => dropRatesGlobal.hasOwnProperty(source) && dropRatesGlobal[source].hasOwnProperty(keyItem)).forEach((source) => {
-                    if (isNaN(parseFloat(dropRatesGlobal[source][keyItem].split('/')[0].replaceAll('~', '')) / parseFloat(dropRatesGlobal[source][keyItem].split('/')[1]))) {
+                    if (isNaN(parseFloat(dropRatesGlobal[source][keyItem].split('/')[0].replaceAll('~', '').replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][keyItem].split('/')[1].replaceAll(',', '')))) {
                         bestRate = 1;
-                    } else if (parseFloat(dropRatesGlobal[source][keyItem].split('/')[0].replaceAll('~', '')) / parseFloat(dropRatesGlobal[source][keyItem].split('/')[1]) > bestRate) {
-                        bestRate = parseFloat(dropRatesGlobal[source][keyItem].split('/')[0].replaceAll('~', '')) / parseFloat(dropRatesGlobal[source][keyItem].split('/')[1]);
+                    } else if (parseFloat(dropRatesGlobal[source][keyItem].split('/')[0].replaceAll('~', '').replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][keyItem].split('/')[1].replaceAll(',', '')) > bestRate) {
+                        bestRate = parseFloat(dropRatesGlobal[source][keyItem].split('/')[0].replaceAll('~', '').replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][keyItem].split('/')[1].replaceAll(',', ''));
                     }
                 });
                 if (totalBestRate === 0) {

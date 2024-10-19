@@ -5299,6 +5299,10 @@ input#searchChunkSections {
     margin-right: 20px;
 }
 
+.submarker-extra > span {
+    padding-right: 30px;
+}
+
 .expand-button {
     margin-left: 10px;
     position: absolute;
@@ -5307,6 +5311,24 @@ input#searchChunkSections {
 .expand-button.fa-caret-right {
     margin-left: 15px !important;
     margin-top: 2px;
+}
+
+.checkmark-all-btn {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    color: var(--colorTextAlt);
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.checkmark-all-btn-disabled {
+    display: none;
+}
+
+.checkmark-all-btn:hover {
+    color: var(--colorLink);
 }
 
 .challenge-data > .results {
