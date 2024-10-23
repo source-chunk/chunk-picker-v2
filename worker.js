@@ -177,6 +177,9 @@ let manualPrimary = {};
 let clueTasksPossible = {};
 let areasStructure = {};
 let tempChunkData = {};
+let craftedBisOverride = {};
+let bisOverrideMinLevel = {};
+let didRestart = false;
 
 onmessage = function(e) {
     try {
@@ -273,6 +276,33 @@ onmessage = function(e) {
         baseChunkData = tempChunkData;
         type === 'current' && postMessage('95%');
         highestOverall = calcBIS();
+
+        let restartCalcs = false;
+        let toManuallyAdd = {};
+        if (rules['Wield Crafted Items Override'] && !didRestart) {
+            let craftedBisHighestLevel = {};
+            !!craftedBisOverride && Object.keys(craftedBisOverride).forEach((skill) => {
+                craftedBisHighestLevel[skill] = 0;
+                !!craftedBisOverride[skill] && Object.keys(craftedBisOverride[skill]).forEach((name) => {
+                    if (Object.values(highestOverall).includes(chunkInfo['challenges'][skill][name]['Output']) && chunkInfo['challenges'][skill][name]['Level'] > bisOverrideMinLevel[skill] && craftedBisHighestLevel[skill] < chunkInfo['challenges'][skill][name]['Level']) {
+                        craftedBisHighestLevel[skill] = chunkInfo['challenges'][skill][name]['Level'];
+                        toManuallyAdd[skill] = name;
+                    }
+                });
+                craftedBisHighestLevel[skill] === 0 && (restartCalcs = true);
+            });
+        }
+        if (restartCalcs) {
+            Object.keys(toManuallyAdd).forEach((skill) => {
+                if (!manualTasks[skill]) {
+                    manualTasks[skill] = {};
+                }
+                manualTasks[skill][toManuallyAdd[skill]] = true;
+            });
+            didRestart = true;
+            onmessage(e);
+            return;
+        }
         let highestOverallCompleted = calcBIS(true);
         type === 'current' && postMessage('100%');
         //console.log(globalValids);
@@ -1282,6 +1312,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 });
             });
             leftoversCount++;
+            type === 'current' && postMessage(((i + 1 + (.2 * Math.min(leftoversCount, 5))) * 6) + '%');
         }
         Object.keys(newValids).filter((skill) => { return skill !== 'BiS' }).forEach((skill) => {
             let skillIsPrimary = checkPrimaryMethod(skill, newValids, baseChunkData);
@@ -1508,7 +1539,7 @@ let calcChallenges = function(chunks, baseChunkData) {
             });
         });
         let highestChanged;
-        let tempHighest = {}
+        let tempHighest = {};
         Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach((skill) => {
             tempHighest[skill] = Object.keys(newValids[skill]).sort((a, b) => newValids[skill][a] - newValids[skill][b]);
             Object.keys(newValids[skill]).filter(task => chunkInfo['challenges'][skill][task]['mustBeHighest'] && chunkInfo['challenges'][skill][task].hasOwnProperty('Tasks')).sort((a, b) => newValids[skill][b] - newValids[skill][a]).some(task => {
@@ -1625,6 +1656,15 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
             });
         });
+        bisOverrideMinLevel = {};
+        rules["Wield Crafted Items Override"] && !didRestart && Object.keys(tempItemSkill).filter((skill) => craftedBisOverride.hasOwnProperty(skill)).forEach((skill) => {
+            bisOverrideMinLevel[skill] = 0;
+            !!newValids[skill] && Object.keys(newValids[skill]).filter((challenge) => !craftedBisOverride[skill].hasOwnProperty(challenge)).forEach((challenge) => {
+                if ((!bisOverrideMinLevel[skill] || (bisOverrideMinLevel[skill] < newValids[skill][challenge])) && ((!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/')))))) {
+                    bisOverrideMinLevel[skill] = newValids[skill][challenge];
+                }
+            });
+        });
         Object.keys(tempItemSkill).forEach((skill) => {
             let lowestName;
             let lowestLevel;
@@ -1651,7 +1691,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (stillValid) {
                         !newValids[skill] && (newValids[skill] = {});
                         newValids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
-                        chunkInfo['challenges'][skill][name]['Priority'] = (chunkInfo['challenges'][skill][name].hasOwnProperty('Priority') ? chunkInfo['challenges'][skill][name]['Priority'] : -1) + 1000;
+                        //chunkInfo['challenges'][skill][name]['Priority'] = (chunkInfo['challenges'][skill][name].hasOwnProperty('Priority') ? chunkInfo['challenges'][skill][name]['Priority'] : -1) + 1000;
                     }
                 });
             });
@@ -2366,9 +2406,6 @@ let calcChallenges = function(chunks, baseChunkData) {
                         }
                         chunkInfo['challenges'][skill][challenge]['highestDropRate'] = highestDropRate;
                         !!chunkInfo['skillItems'][skill] && !!chunkInfo['skillItems'][skill][output] && Object.keys(chunkInfo['skillItems'][skill][output]).filter((item) => { return (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || isNaN(parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1])) || (parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) * highestDropRate) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossLogs.hasOwnProperty(output)) && (!shouldDelete[item] || !shouldDelete[item][challenge]) }).forEach((item) => {
-                            if (!outputs[item]) {
-                                outputs[item] = {};
-                            }
                             if (challenge === 'Pickpocket a ~|master farmer|~') {
                                 const specialSeeds = {
                                     'Guam seed': {
@@ -2399,24 +2436,43 @@ let calcChallenges = function(chunks, baseChunkData) {
                                     chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] = seedChance;
                                 }
                             }
-                            if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Source')) {
-                                if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop' && (!backloggedSources['shops'] || !backloggedSources['shops'][challenge])) {
-                                    outputs[item][challenge] = chunkInfo['challenges'][skill][challenge]['Source'];
-                                    if (!baseChunkData['shops'].hasOwnProperty(challenge.replaceAll(/\~\|/g, '').replaceAll(/\|\~/g, ''))) {
-                                        baseChunkData['shops'][challenge.replaceAll(/\~\|/g, '').replaceAll(/\|\~/g, '')] = {};
+                            if (!!dropTables[item] && ((item !== 'RareDropTable+' && item !== 'GemDropTable+') || rules['RDT'])) {
+                                Object.keys(dropTables[item]).forEach((tableItem) => {
+                                    if ((rules['Rare Drop'] || isNaN(parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[0].replaceAll('~', '')) / parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[1])) || ((parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[0].replaceAll('~', '')) / parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[1]) * parseFloat(dropTables[item][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[item][tableItem].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
+                                        (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][tableItem])) {
+                                        if (!outputs[tableItem]) {
+                                            outputs[tableItem] = {};
+                                        }
+                                        if ((Object.keys(chunkInfo['skillItems'][skill][output][item])[0] === 'Always' && dropTables[item][tableItem].split('@')[0] === 'Always') || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && (isNaN(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].replaceAll('/', '').replaceAll('@', '')) || isNaN(dropTables[item][tableItem].split('@')[0].replaceAll('/', '').replaceAll('@', '')))) || (parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[0].replaceAll('~', '') * dropTables[item][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[1] * dropTables[item][tableItem].split('@')[0].split('/')[1].replaceAll('~', '')) >= parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))) {
+                                            outputs[tableItem][challenge] = 'primary-' + skill;
+                                        } else {
+                                            outputs[tableItem][challenge] = 'primary-' + skill;
+                                        }
                                     }
-                                    baseChunkData['shops'][challenge.replaceAll(/\~\|/g, '').replaceAll(/\|\~/g, '')][chunkInfo['challenges'][skill][challenge].hasOwnProperty('Chunks') ? chunkInfo['challenges'][skill][challenge]['Chunks'][0] : 'Nonskill'] = true;
-                                } else if (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop' && (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
-                                    outputs[item][challenge] = 'primary-' + chunkInfo['challenges'][skill][challenge]['Source'];
-                                } else if (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop' && (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) <= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])))))) {
-                                    outputs[item][challenge] = 'secondary-' + chunkInfo['challenges'][skill][challenge]['Source'];
-                                } else {
-                                    delete outputs[item];
+                                });
+                            } else {
+                                if (!outputs[item]) {
+                                    outputs[item] = {};
                                 }
-                            } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) && !chunkInfo['challenges'][skill][challenge]['Secondary'] && !chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
-                                outputs[item][challenge] = 'primary-' + skill;
-                            } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) <= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) || chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
-                                outputs[item][challenge] = 'secondary-' + skill;
+                                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Source')) {
+                                    if (chunkInfo['challenges'][skill][challenge]['Source'] === 'shop' && (!backloggedSources['shops'] || !backloggedSources['shops'][challenge])) {
+                                        outputs[item][challenge] = chunkInfo['challenges'][skill][challenge]['Source'];
+                                        if (!baseChunkData['shops'].hasOwnProperty(challenge.replaceAll(/\~\|/g, '').replaceAll(/\|\~/g, ''))) {
+                                            baseChunkData['shops'][challenge.replaceAll(/\~\|/g, '').replaceAll(/\|\~/g, '')] = {};
+                                        }
+                                        baseChunkData['shops'][challenge.replaceAll(/\~\|/g, '').replaceAll(/\|\~/g, '')][chunkInfo['challenges'][skill][challenge].hasOwnProperty('Chunks') ? chunkInfo['challenges'][skill][challenge]['Chunks'][0] : 'Nonskill'] = true;
+                                    } else if (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop' && (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) && !chunkInfo['challenges'][skill][challenge]['Secondary']) {
+                                        outputs[item][challenge] = 'primary-' + chunkInfo['challenges'][skill][challenge]['Source'];
+                                    } else if (chunkInfo['challenges'][skill][challenge]['Source'] !== 'shop' && (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) <= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1])))))) {
+                                        outputs[item][challenge] = 'secondary-' + chunkInfo['challenges'][skill][challenge]['Source'];
+                                    } else {
+                                        delete outputs[item];
+                                    }
+                                } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) && !chunkInfo['challenges'][skill][challenge]['Secondary'] && !chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
+                                    outputs[item][challenge] = 'primary-' + skill;
+                                } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) <= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) || chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
+                                    outputs[item][challenge] = 'secondary-' + skill;
+                                }
                             }
                         });
                         if (!chunkInfo['skillItems'][skill] || !chunkInfo['skillItems'][skill][output]) {
@@ -2925,6 +2981,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
     let toolLevelChallenges = {};
     extraOutputItems = {};
     multiTasks = {};
+    craftedBisOverride = {};
     rules['Multi Step Processing'] && Object.keys(oldTempItemSkill).filter(skill => checkPrimaryMethod(skill, globalValids, baseChunkData)).forEach((skill) => {
         !!oldTempItemSkill[skill] && Object.keys(oldTempItemSkill[skill]).forEach((item) => {
             !!oldTempItemSkill[skill][item] && oldTempItemSkill[skill][item].filter(task => !!chunkInfo['challenges'][skill][task] && chunkInfo['challenges'][skill][task].hasOwnProperty('Output') && (!items.hasOwnProperty(chunkInfo['challenges'][skill][task]['Output']) || !items[chunkInfo['challenges'][skill][task]['Output']].hasOwnProperty(task))).forEach((task) => {
@@ -3903,6 +3960,13 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     } else if (lowestItem['Level'] === challenge['Level'] && (!lowestItem['Primary'] || lowestItem['Secondary']) && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem.hasOwnProperty('Priority'))) {
                         lowestItem = challenge;
                         lowestName = name;
+                    }
+                    if (rules['Wield Crafted Items Override'] && !didRestart && chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name].hasOwnProperty('Output') && chunkInfo['equipment'].hasOwnProperty(chunkInfo['challenges'][skill][name]['Output'])) {
+                        valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                        if (!craftedBisOverride[skill]) {
+                            craftedBisOverride[skill] = {};
+                        }
+                        craftedBisOverride[skill][name] = true;
                     }
                 });
                 if (!!lowestName) {

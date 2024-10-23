@@ -563,7 +563,7 @@ button.menu2 {
 
 .menu11 {
     position: fixed;
-    z-index: 99 !important;
+    z-index: 98 !important;
     bottom: min(7vw, 90px);
     left: 10px;
     width: auto;
