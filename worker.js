@@ -284,24 +284,25 @@ onmessage = function(e) {
             !!craftedBisOverride && Object.keys(craftedBisOverride).forEach((skill) => {
                 craftedBisHighestLevel[skill] = 0;
                 !!craftedBisOverride[skill] && Object.keys(craftedBisOverride[skill]).forEach((name) => {
-                    if (Object.values(highestOverall).includes(chunkInfo['challenges'][skill][name]['Output']) && chunkInfo['challenges'][skill][name]['Level'] > bisOverrideMinLevel[skill] && craftedBisHighestLevel[skill] < chunkInfo['challenges'][skill][name]['Level']) {
+                    if (Object.values(highestOverall).includes(chunkInfo['challenges'][skill][name]['Output']) && chunkInfo['challenges'][skill][name]['Level'] > bisOverrideMinLevel[skill] && craftedBisHighestLevel[skill] < chunkInfo['challenges'][skill][name]['Level'] && baseChunkData['items'].hasOwnProperty(chunkInfo['challenges'][skill][name]['Output']) && Object.values(baseChunkData['items'][chunkInfo['challenges'][skill][name]['Output']]).filter((source) => !source.includes(skill)).length === 0) {
                         craftedBisHighestLevel[skill] = chunkInfo['challenges'][skill][name]['Level'];
                         toManuallyAdd[skill] = name;
                     }
                 });
                 craftedBisHighestLevel[skill] === 0 && (restartCalcs = true);
             });
-        }
-        if (restartCalcs) {
-            Object.keys(toManuallyAdd).forEach((skill) => {
-                if (!manualTasks[skill]) {
-                    manualTasks[skill] = {};
-                }
-                manualTasks[skill][toManuallyAdd[skill]] = true;
-            });
-            didRestart = true;
-            onmessage(e);
-            return;
+            if (restartCalcs) {
+                Object.keys(toManuallyAdd).forEach((skill) => {
+                    if (!manualTasks[skill]) {
+                        manualTasks[skill] = {};
+                    }
+                    manualTasks[skill][toManuallyAdd[skill]] = craftedBisHighestLevel[skill];
+                    chunkInfo['challenges'][skill][toManuallyAdd[skill]]['Priority'] = -1
+                });
+                didRestart = true;
+                onmessage(e);
+                return;
+            }
         }
         let highestOverallCompleted = calcBIS(true);
         type === 'current' && postMessage('100%');

@@ -6118,6 +6118,9 @@ input#searchChunks {
     width: 28%;
     font-size: 18px;
     text-align: center;
+}
+
+.skill-button.extra-gear-room {    
     padding-right: 30px;
 }
 
@@ -6138,6 +6141,9 @@ input#searchChunks {
     text-align: center;
     border-left: solid 1px var(--color8);
     position: relative;
+}
+
+.skill-button2.extra-gear-room {    
     padding-right: 30px;
 }
 
@@ -6205,7 +6211,6 @@ input#searchChunks {
     text-align: center;
     width: 28.2%;
     border-left: solid 1px var(--color8);
-    padding-right: 30px;
 }
 
 .clue-possible {
