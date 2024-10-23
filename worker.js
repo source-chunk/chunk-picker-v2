@@ -2439,7 +2439,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                             if (!!dropTables[item] && ((item !== 'RareDropTable+' && item !== 'GemDropTable+') || rules['RDT'])) {
                                 Object.keys(dropTables[item]).forEach((tableItem) => {
                                     if ((rules['Rare Drop'] || isNaN(parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[0].replaceAll('~', '')) / parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[1])) || ((parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[0].replaceAll('~', '')) / parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[1]) * parseFloat(dropTables[item][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[item][tableItem].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) &&
-                                        (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backloggedSources['items'] || !backloggedSources['items'][tableItem])) {
+                                        (!backloggedSources['items'] || !backloggedSources['items'][tableItem])) {
                                         if (!outputs[tableItem]) {
                                             outputs[tableItem] = {};
                                         }
