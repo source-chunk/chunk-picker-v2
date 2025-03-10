@@ -27064,6 +27064,9 @@
 			"Slash a web": {
 				"Items": ["Web slasher[+]"]
 			},
+			"Light source": {
+				"Items": ["LightSource[+]"]
+			},
 			"Nerf Defence Weapon": {
 				"Items": ["NerfDefenceWeapon[+]"]
 			},
@@ -219476,6 +219479,9 @@
 			"Boots of lightness": {
 				"Temple of Ikov": [{
 					"Slash a web": "Nonskill"
+				},
+				{
+					"Light source": "Nonskill"
 				}]
 			},
 			"Bowl": {
