@@ -116887,6 +116887,9 @@
 			"Quest": {
 				"While Guthix Sleeps": "step"
 			},
+			"Spawn": {
+				"Knife": 1
+			},
 			"Clue": {
 				"master": 1
 			}
