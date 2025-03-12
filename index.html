@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.6.3" />
+  <link rel="stylesheet" href="./index.css?v=6.6.4" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -17,6 +17,7 @@
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.3/purify.min.js"></script>
   <script>
     var firebaseConfig = {
       apiKey: "AIzaSyDr94cgRwmo3glVTirQ9LPAA4HI9cyYUCg",
@@ -42,16 +43,16 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.3' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.4' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.6.3"></script>
+  <script src="./index.js?v=6.6.4"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
-    <li onclick="switchActiveContext(event, 'alternatives')">Alternatives</li>
+    <li class="active-context-menu-alternatives" onclick="switchActiveContext(event, 'alternatives')">Alternatives<span class="alteratives-star"><i class="fas fa-star noscroll"></i></span></li>
     <li onclick="switchActiveContext(event, 'details')">Details</li>
   </ul>
   <ul class='backlog-context-menu'>
@@ -252,26 +253,11 @@
       <div id="preset-data" class="preset-data noscroll"></div>
     </div>
   </div>
-  <div id="myModal6" class="modal">
-    <div class="modal-content noscroll">
-      <div id="random-title" class="random-title noscroll">Add Random Event & Other Loot</div>
-      <div id="random-subtitle" class="random-subtitle noscroll">Select the loot recieved from a random event/bird nest/mining gem/RareDropTable/GemDropTable and confirm to add the item into the calculation of chunk tasks.</div>
-      <div id="random-dropdown-container" class="random-dropdown-container noscroll" onchange="randomChange()"><select id="random-dropdown"></select></div>
-      <div id="random-data" class="random-data noscroll"></div>
-    </div>
-  </div>
   <div id="myModal7" class="modal">
     <div class="modal-content noscroll">
       <i class="manual-close pic fas fa-times noscrollhard" onclick="closeSettings()"></i>
       <div id="settings-title" class="settings-title noscroll">Settings</div>
       <div id="settings-data" class="settings-data noscroll"></div>
-    </div>
-  </div>
-  <div id="myModal8" class="modal">
-    <div class="modal-content noscroll">
-      <i class="manual-close pic fas fa-times noscrollhard" onclick="closeRandomList()"></i>
-      <div id="randomlist-title" class="randomlist-title noscroll">Added Items</div>
-      <div id="randomlist-data" class="randomlist-data noscroll"></div>
     </div>
   </div>
   <div id="myModal9" class="modal">
@@ -425,8 +411,6 @@
         <div class="add-item"><span class="open-manual" onclick="openManualAdd()">Tasks</span>
         </div>
         <div class="add-item"><span class="open-monsters" onclick="openMonstersAdd()">Items/Monsters/NPCs/Objects/Shops</span>
-        </div>
-        <div class="add-item"><span class="open-random" onclick="openRandomAdd()">Random Event & Other Loot</span>
         </div>
         <div class="add-item"><span class="open-usertasks" onclick="openUserTasks()">Custom User-Inputted Tasks</span>
         </div>
