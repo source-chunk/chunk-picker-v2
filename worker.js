@@ -7309,7 +7309,7 @@ let calcBIS = function(completedOnly) {
             article = (bestEquipment[slot].toLowerCase().charAt(bestEquipment[slot].toLowerCase().length - 1) === 's' || (bestEquipment[slot].toLowerCase().charAt(bestEquipment[slot].toLowerCase().length - 1) === ')' && bestEquipment[slot].toLowerCase().split('(')[0].trim().charAt(bestEquipment[slot].toLowerCase().split('(')[0].trim().length - 1) === 's')) ? ' ' : article;
             if (!completedOnly) {
                 if (!!globalValids['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~']) {
-                    globalValids['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~'] = skill + '/​' + globalValids['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~'];
+                    globalValids['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~'] = skill + '/​' + globalValids['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~'];
                 } else {
                     globalValids['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~'] = skill + ' BiS ' + slot;
                 }
@@ -7317,10 +7317,10 @@ let calcBIS = function(completedOnly) {
             if (!chunkInfo['challenges']['BiS']) {
                 chunkInfo['challenges']['BiS'] = {};
             }
-            if (!!chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~'] && notFresh['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~']) {
+            if (!!chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~'] && notFresh['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~']) {
                 chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~'] = {
                     'ItemsDetails': [bestEquipment[slot]],
-                    'Label': `<span class='noscroll ${skill}-bis-highlight'>` + skill + '</span>/​' + chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + bestEquipment[slot].toLowerCase() + '|~']['Label']
+                    'Label': `<span class='noscroll ${skill}-bis-highlight'>` + skill + '</span>/​' + chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~']['Label']
                 }
             } else {
                 chunkInfo['challenges']['BiS']['Obtain' + article + '~|' + formatEquip(bestEquipment[slot]) + '|~'] = {
