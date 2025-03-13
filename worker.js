@@ -147,6 +147,7 @@ let diaryProgress = {};
 let skillQuestXp = {};
 let kudosTotal = 0;
 let possibleSkillTotal = 0;
+let randomLoot;
 let magicTools;
 let bossLogs;
 let bossMonsters;
@@ -212,6 +213,7 @@ onmessage = function(e) {
             highestCurrent,
             dropTables,
             possibleAreas,
+            randomLoot,
             magicTools,
             bossLogs,
             bossMonsters,
