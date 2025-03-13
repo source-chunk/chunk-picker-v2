@@ -105087,33 +105087,41 @@
 			"Nickname": "Aldarin Coastal Magics"
 		},
 		"5174": {
-			"Monster": {
-				"Big frog#Level 24": 5,
-				"Goblin#Drop table 1": 6,
-				"Rabbit": 4,
-				"Rat": 1
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Big frog#Level 24": 5,
+						"Goblin#Drop table 1": 6,
+						"Rabbit": 4,
+						"Rat": 1
+					},
+					"Object": {
+						"Camping Equipment": 1,
+						"Dead tree": 59,
+						"Fairy ring": 1,
+						"Hole": 1,
+						"Tent": 1
+					},
+					"Quest": {
+						"The Garden of Death": "first"
+					},
+					"Spawn": {
+						"Bread": 1,
+						"Bronze dagger": 1,
+						"Wooden shield": 1
+					}
+				},
+				"2": {
+					"NPC": {
+						"Frog": 2
+					},
+					"Object": {
+						"Dead tree": 4,
+						"Onion": 3
+					}
+				}
 			},
-			"NPC": {
-				"Frog": 2
-			},
-			"Nickname": "Settlement Path",
-			"Object": {
-				"Camping Equipment": 1,
-				"Dead tree": 63,
-				"Hole": 1,
-				"Oak tree": 1,
-				"Onion": 3,
-				"Tent": 1,
-				"Tree": 7
-			},
-			"Quest": {
-				"The Garden of Death": "first"
-			},
-			"Spawn": {
-				"Bread": 1,
-				"Bronze dagger": 1,
-				"Wooden shield": 1
-			}
+			"Nickname": "Settlement Path"
 		},
 		"5175": {
 			"Sections": {
@@ -217723,6 +217731,11 @@
 					"~|Temple of Ikov|~ 4": "Quest"
 				}]
 			},
+			"Lizardman shaman": {
+				"Lizardman Caves": [{
+					"Lizardman task": "Nonskill"
+				}]
+			},
 			"Locust": {
 				"13099-1": [{
 					"~|Icthlarin's Little Helper|~ 2": "Quest"
@@ -224361,7 +224374,8 @@
 				"4662-1",
 				"4662-2",
 				"4919",
-				"5174"
+				"5174-1",
+				"5174-2"
 			]
 		},
 		"4919": {
@@ -224437,10 +224451,13 @@
 			]
 		},
 		"5174": {
-			"0": [
+			"1": [
 				"4918",
 				"5175-1",
 				"5430-1"
+			],
+			"2": [
+				"4918"
 			]
 		},
 		"5175": {
