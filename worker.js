@@ -264,6 +264,9 @@ onmessage = function(e) {
         if (secondaryPrimaryNum === "1/0") {
             secondaryPrimaryNum = "1/999999999999999";
         }
+        if (!secondaryPrimaryNum) {
+            secondaryPrimaryNum = "1/1";
+        }
         if (!chunkInfo) {
             return;
         }

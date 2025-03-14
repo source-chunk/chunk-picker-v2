@@ -92516,7 +92516,8 @@
 					"Slayer": 48,
 					"Thieving": 48
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"NoBoost": true
 			},
 			"~|The Heart of Darkness|~ 2": {
 				"BaseQuest": "The Heart of Darkness",
