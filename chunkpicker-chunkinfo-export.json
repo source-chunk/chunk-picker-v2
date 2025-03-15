@@ -27235,6 +27235,9 @@
 			"Wilderness ankou": {
 				"Chunks": ["11834"]
 			},
+			"12601 zombie": {
+				"Chunks": ["12601"]
+			},
 			"Wilderness Slayer Cave drops": {
 				"Chunks": ["Wilderness Slayer Cave"]
 			},
@@ -215915,6 +215918,9 @@
 			"Slayer's enchantment^Zombie#Wilderness": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}],
+			"Fishing bait^Zombie#Wilderness": [{
+				"12601 zombie": "Nonskill"
+			}],
 			"Larran's key^Ankou#Wilderness Slayer Cave": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}, {
@@ -218167,6 +218173,11 @@
 			"Zombie#Unarmed": {
 				"10035-1": [{
 					"~|Plague City|~ 5": "Quest"
+				}]
+			},
+			"Zombie#Wilderness": {
+				"12602": [{
+					"F2P Only": "Nonskill"
 				}]
 			},
 			"Zombie pirate": {
