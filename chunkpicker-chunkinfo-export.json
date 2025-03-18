@@ -61620,6 +61620,12 @@
 				"Items": ["Broken zombie helmet"],
 				"Not F2P": true
 			},
+			"Obtain a ~|Golden Gnome|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"ManualInvalid": true,
+				"Not F2P": true
+			},
 			"Obtain ~|gardening boots|~": {
 				"Category": ["Untracked Uniques"],
 				"Label": "Untracked Uniques",
@@ -130760,7 +130766,7 @@
 
 				}
 			},
-			"Nickname": "Varrock South Gate/Entrance"
+			"Nickname": "Varrock South Gate"
 		},
 		"12853": {
 			"Sections": {
@@ -218621,6 +218627,9 @@
 				"9772": [{
 					"~|Dragon Slayer II|~ Complete the quest": "Quest"
 				}],
+				"10035-1": [{
+					"~|Biohazard|~ 7": "Quest"
+				}],
 				"10291": [{
 					"Unlock the ~|door (Ross' House)|~": "Thieving"
 				}],
@@ -261956,6 +261965,25 @@
 			"requirements": {
 				"Defence": 40
 			}
+		},
+		"Wooden shield": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 3,
+			"defence_magic": 1,
+			"defence_ranged": 4,
+			"defence_slash": 5,
+			"defence_stab": 4,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "shield",
+			"requirements": {}
 		},
 		"Wooden shield (g)": {
 			"attack_speed": 0,
