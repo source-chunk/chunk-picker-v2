@@ -62018,7 +62018,7 @@
 			"Unlock free access to Dragontooth Isle from the ~|ghost captain|~ for 500 ecto-tokens": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
-				"Chunks": ["14646-1"],
+				"Chunks": ["14646-1", "15159"],
 				"NPCs": ["Ghost captain"],
 				"Not F2P": true
 			},
@@ -130258,7 +130258,8 @@
 			},
 			"Nickname": "Menaphos Desert",
 			"Object": {
-				"Banana Tree": 4
+				"Banana Tree": 4,
+				"Kharidian cactus (Healthy)": 5
 			},
 			"Clue": {
 				"elite": 1
@@ -131878,6 +131879,7 @@
 						"Banana Tree": 8,
 						"Fire": 1,
 						"Gold rocks": 5,
+						"Kharidian cactus (Healthy)": 2,
 						"Shooting star#landing site": 1
 					},
 					"Quest": {
@@ -133343,7 +133345,8 @@
 						"Wingstone": 1
 					},
 					"Object": {
-						"Crevice": 9
+						"Crevice": 9,
+						"Kharidian cactus (Healthy)": 2
 					},
 					"Quest": {
 						"Beneath Cursed Sands": "step",
@@ -134266,6 +134269,7 @@
 				"Cupboard": 2,
 				"Elidinis Statuette": 1,
 				"Fountain": 1,
+				"Kharidian cactus (Healthy)": 2,
 				"Shooting star#landing site": 1
 			},
 			"Quest": {
