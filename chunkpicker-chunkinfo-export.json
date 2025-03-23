@@ -24958,6 +24958,11 @@
 				"Output": "Forestry basket",
 				"Not F2P": true
 			},
+			"Buy a waterskin from ~|Ali the Carter|~*": {
+				"NPCs": ["Ali the Carter"],
+				"Output": "Waterskin(4)",
+				"Not F2P": true
+			},
 			"Buy a forestry kit from the ~|Forestry Shop|~*": {
 				"NPCs": ["Friendly Forester"],
 				"Source": "shop",
