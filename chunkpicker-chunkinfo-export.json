@@ -149324,6 +149324,15 @@
 				"Cow calf": true,
 				"Undead cow": true
 			},
+			"Crabs": {
+				"Ammonite Crab": true,
+				"Frost Crab": true,
+				"Rock Crab": true,
+				"Giant Rock Crab": true,
+				"Sand Crab": true,
+				"King Sand Crab": true,
+				"Swamp Crab": true
+			},
 			"Crawling Hands": {
 				"Crawling Hand": true
 			},
@@ -189551,6 +189560,7 @@
 			"Herb box": true,
 			"Herb sack": true,
 			"Seed box": true,
+			"Seed pack": true,
 			"Supercompost": true
 		},
 		"Farming Supplies": {
@@ -220384,6 +220394,10 @@
 				},
 				"Weight": 8
 			},
+			"Crabs": {
+				"CombatLevel": 1,
+				"Weight": 1
+			},
 			"Crawling Hands": {
 				"Level": 5,
 				"Tasks": {
@@ -220551,6 +220565,10 @@
 					"Defence": 20
 				},
 				"Weight": 7
+			},
+			"Crabs": {
+				"CombatLevel": 1,
+				"Weight": 1
 			},
 			"Crocodiles": {
 				"CombatLevel": 50,
@@ -220836,6 +220854,10 @@
 					"Magic": 50
 				},
 				"Weight": 12
+			},
+			"Crabs": {
+				"CombatLevel": 1,
+				"Weight": 1
 			},
 			"Dagannoths": {
 				"CombatLevel": 75,
