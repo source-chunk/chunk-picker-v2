@@ -220396,7 +220396,7 @@
 			},
 			"Crabs": {
 				"CombatLevel": 1,
-				"Weight": 1
+				"Weight": 8
 			},
 			"Crawling Hands": {
 				"Level": 5,
@@ -220568,7 +220568,7 @@
 			},
 			"Crabs": {
 				"CombatLevel": 1,
-				"Weight": 1
+				"Weight": 8
 			},
 			"Crocodiles": {
 				"CombatLevel": 50,
@@ -220857,7 +220857,7 @@
 			},
 			"Crabs": {
 				"CombatLevel": 1,
-				"Weight": 1
+				"Weight": 8
 			},
 			"Dagannoths": {
 				"CombatLevel": 75,
