@@ -197770,58 +197770,61 @@
 			},
 			"Moon chest": {
 				"Cabbage": {
-					"28": "1/104"
+					"28": "1/107"
 				},
 				"Coal": {
-					"1": "1/104"
+					"1": "1/107"
 				},
 				"Crystal key": {
-					"1": "1/104"
+					"1": "1/107"
 				},
 				"Dragon platelegs": {
-					"2 (noted)": "10/104"
+					"2 (noted)": "10/107"
 				},
 				"Dragonstone": {
-					"1": "20/104"
+					"1": "20/107"
 				},
 				"Gold ore": {
-					"500 (noted)": "1/104"
+					"500 (noted)": "1/107"
 				},
 				"Helmet of the moon": {
-					"1": "Very rare"
+					"1": "1/500.1"
 				},
 				"Huasca seed": {
-					"6": "10/104"
+					"6": "10/107"
 				},
 				"Moon key": {
-					"1": "1/104"
+					"1": "1/107"
 				},
 				"Nature rune": {
-					"500": "10/104"
+					"500": "10/107"
 				},
 				"Onyx bolts": {
-					"150": "1/104"
+					"150": "1/107"
 				},
 				"Raw monkfish": {
-					"300 (noted)": "10/104"
+					"300 (noted)": "10/107"
 				},
 				"Rune platebody": {
-					"6 (noted)": "10/104"
+					"6 (noted)": "10/107"
 				},
 				"Spinach roll": {
-					"1": "1/104"
+					"1": "1/107"
 				},
 				"Sun-kissed bones": {
-					"100 (noted)": "10/104"
+					"100 (noted)": "10/107"
 				},
 				"Sunfire splinters": {
 					"250": "Always"
 				},
 				"Uncut diamond": {
-					"50 (noted)": "7/104"
+					"50 (noted)": "10/107"
+				},
+				"Uncut onyx": {
+					"1": "1/5000"
 				},
 				"Watermelon seed": {
-					"100": "10/104"
+					"100": "10/107"
 				}
 			},
 			"Damaged armour loot": {
