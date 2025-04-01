@@ -29603,6 +29603,10 @@
 				"Items": ["Vial of water*"],
 				"Output": "Vial"
 			},
+			"Empty a plant cure*": {
+				"Items": ["Plant cure*"],
+				"Output": "Vial"
+			},
 			"Empty a bowl of water*": {
 				"Items": ["Bowl of water*"],
 				"Output": "Bowl"
