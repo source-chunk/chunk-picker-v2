@@ -2347,10 +2347,6 @@ input#searchPlayerMaps {
 }
 
 .gopatreon {
-    transition-duration: .5s;
-    cursor: pointer;
-    top: 4px;
-    font-size: 44px;
     color: #f96854;
     -webkit-text-fill-color: #f96854 !important;
     -webkit-text-stroke-width: 3px !important;
@@ -2359,7 +2355,7 @@ input#searchPlayerMaps {
 
 .gopatreon:hover {
     color: var(--colorLink);
-    -webkit-text-stroke-color: rgb(50, 50, 205) !important;
+    -webkit-text-stroke-color: var(--colorLink) !important;
 }
 
 .gosearch {
@@ -2523,8 +2519,12 @@ input#searchPlayerMaps {
     color: inherit;
 }
 
-.challenge.doubletab {
+.challenge.doubletab:not(.not-doubletab) {
     margin-left: 12px;
+}
+
+.challenge.searchhide {
+    display: none;
 }
 
 .panel-areas > div {
@@ -3232,6 +3232,14 @@ input#searchPlayerMaps {
     margin-bottom: 10px;
     width: 35%;
     font-size: 2vh;
+}
+
+#searchActiveTasks {
+    margin-bottom: 5px;
+    font-size: min(1.5vw, 14.5px);
+    padding: 3px;
+    width: 85%;
+    margin-right: 10px;
 }
 
 .usertasks-list-data {

@@ -20562,6 +20562,15 @@
 				"Level": 59,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
+				"Priority": 1,
+				"Priority": 1
+			},
+			"Cast ~|fire blast|~ from a rune pouch (Castle Wars)": {
+				"Category": ["Spells", "Combat and Teleport Spells", "Minigame"],
+				"Items": ["Rune pouch (Castle Wars)"],
+				"Level": 59,
+				"Primary": false,
+				"Priority": 198,
 				"Priority": 1
 			},
 			"Cast ~|fire bolt|~": {
@@ -20595,6 +20604,14 @@
 				"Chunks": ["WildernessChunks[+]"],
 				"Primary": true,
 				"Priority": 98,
+				"Not F2P": true
+			},
+			"Cast ~|fire surge|~ from a rune pouch (Castle Wars)": {
+				"Category": ["Spells", "Combat and Teleport Spells", "Minigame"],
+				"Items": ["Rune pouch (Castle Wars)"],
+				"Level": 95,
+				"Primary": false,
+				"Priority": 198,
 				"Not F2P": true
 			},
 			"Cast ~|fire wave|~": {
@@ -20742,6 +20759,17 @@
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
 				"Priority": 1,
+				"Tasks": {
+					"~|Desert Treasure I|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
+			"Cast ~|ice barrage|~ from a rune pouch (Castle Wars)": {
+				"Category": ["Spells", "Combat and Teleport Spells", "Minigame"],
+				"Items": ["Rune pouch (Castle Wars)"],
+				"Level": 94,
+				"Primary": false,
+				"Priority": 198,
 				"Tasks": {
 					"~|Desert Treasure I|~ Complete the quest": "Quest"
 				},
@@ -21729,6 +21757,18 @@
 				},
 				"Not F2P": true
 			},
+			"Cast ~|vile vigour|~ from a rune pouch (Castle Wars)": {
+				"Category": ["Spells", "Minigame"],
+				"NPCs": ["Tyss"],
+				"Items": ["Rune pouch (Castle Wars)"],
+				"Level": 66,
+				"Primary": false,
+				"Priority": 198,
+				"Tasks": {
+					"~|A Kingdom Divided|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
 			"Cast ~|degrime|~": {
 				"Category": ["Spells"],
 				"NPCs": ["Tyss"],
@@ -22488,6 +22528,13 @@
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
 				"NoBoost": true
+			},
+			"Cast ~|wind strike|~ from a rune pouch (Castle Wars)": {
+				"Category": ["Spells", "Combat and Teleport Spells", "Minigame"],
+				"Items": ["Rune pouch (Castle Wars)"],
+				"Level": 1,
+				"Primary": false,
+				"Priority": 198
 			},
 			"Cast ~|wind surge|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
@@ -24468,6 +24515,10 @@
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rocks",
 				"Not F2P": true
+			},
+			"Get a rune pouch (Castle Wars)*": {
+				"Chunks": ["9520"],
+				"Output": "Rune pouch (Castle Wars)"
 			},
 			"Loot desiccated pages from the Royal Titans*": {
 				"Category": ["Boss"],
@@ -32026,6 +32077,11 @@
 			"Casket (Reward pool) loot*": {
 				"Items": ["Casket (Reward pool)*"],
 				"Output": "Casket (Reward pool) loot",
+				"Not F2P": true
+			},
+			"Castle wars supply crate loot*": {
+				"Items": ["Castle wars supply crate*"],
+				"Output": "Castle wars supply crate loot",
 				"Not F2P": true
 			},
 			"Supply crate loot*": {
@@ -73034,7 +73090,6 @@
 			},
 			"~|Fremennik Diary#Medium|~ Task 6": {
 				"Description": "Catch a Snowy knight.",
-				"Chunks": ["10811"],
 				"Tasks": {
 					"~|Fremennik Diary#Easy|~ Complete the Easy Diary": "Diary",
 					"CatchSnowyKnight[+]": "Hunter"
@@ -199160,6 +199215,9 @@
 				"Castle wars ticket": {
 					"1": "Always"
 				},
+				"Castle wars supply crate": {
+					"1": "Always"
+				},
 				"Castlewars cloak (Saradomin)": {
 					"1": "Always"
 				},
@@ -201184,6 +201242,41 @@
 				},
 				"Teak plank": {
 					"15-16 (noted)": "20/144"
+				}
+			},
+			"Castle wars supply crate loot": {
+				"Blighted anglerfish": {
+					"25-34 (noted)": "1/11"
+				},
+				"Blighted karambwan": {
+					"35-40 (noted)": "1/11"
+				},
+				"Blighted manta ray": {
+					"16-38 (noted)": "1/11"
+				},
+				"Blighted super restore(4)": {
+					"4 (noted)": "1/11"
+				},
+				"Blood rune": {
+					"81-100": "1/11"
+				},
+				"Coins": {
+					"21687-27592": "1/11"
+				},
+				"Death rune": {
+					"113-136": "1/11"
+				},
+				"Nature rune": {
+					"175-217": "1/11"
+				},
+				"Rune arrow": {
+					"178-218": "1/11"
+				},
+				"Rune javelin": {
+					"101-113": "1/11"
+				},
+				"Soul rune": {
+					"104-139": "1/11"
 				}
 			},
 			"Supply crate loot": {
@@ -214436,6 +214529,9 @@
 			"Bottle of wine^": [{
 				"F2P Only": "Nonskill"
 			}],
+			"Castle wars supply crate^": [{
+				"F2P Only": "Nonskill"
+			}],
 			"Jug of vinegar^": [{
 				"~|Rag and Bone Man I|~ 1": "Quest"
 			}, {
@@ -217451,6 +217547,11 @@
 					"Access the ~|Woodcutting Guild|~": "Woodcutting"
 				}]
 			},
+			"Duckling": {
+				"4922": [{
+					"Access the ~|Farming Guild#Intermediate tier|~": "Farming"
+				}]
+			},
 			"Dust devil#Wilderness Slayer Cave": {
 				"Wilderness Slayer Cave": [{
 					"Dust devil wilderness task": "Nonskill"
@@ -218228,11 +218329,19 @@
 				}]
 			},
 			"Banker": {
+				"4922": [{
+					"Access the ~|Farming Guild#Advanced tier|~": "Farming"
+				}],
 				"6191-1": [{
 					"Access the ~|Hunter Guild|~": "Hunter"
 				}],
 				"10293": [{
 					"Access the ~|fishing guild|~": "Fishing"
+				}]
+			},
+			"Guildmaster Jane": {
+				"4922": [{
+					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
 				}]
 			},
 			"Leatherworker": {
@@ -218243,6 +218352,11 @@
 			"Master Crafter": {
 				"11571-1": [{
 					"Access the ~|Crafting Guild|~": "Crafting"
+				}]
+			},
+			"Master Farmer": {
+				"4922": [{
+					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
 				}]
 			},
 			"Moonlight moth": {
@@ -218263,6 +218377,11 @@
 			"Tanner": {
 				"11571-1": [{
 					"Access the ~|Crafting Guild|~": "Crafting"
+				}]
+			},
+			"Tool Leprechaun": {
+				"4922": [{
+					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
 				}]
 			},
 			"Trader Crewmember": {
@@ -219179,6 +219298,9 @@
 				}]
 			},
 			"Garden Centre": {
+				"4922": [{
+					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
+				}],
 				"12084-2": [{
 					"F2P Only": "Nonskill"
 				}]
@@ -219586,6 +219708,11 @@
 					"~|The Tourist Trap|~ 7": "Quest"
 				}]
 			},
+			"Bucket": {
+				"4922": [{
+					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
+				}]
+			},
 			"Burnt fish (anchovies)": {
 				"9772": [{
 					"~|Dragon Slayer II|~ Complete the quest": "Quest"
@@ -219784,6 +219911,11 @@
 			"Small fishing net": {
 				"10293": [{
 					"Access the ~|fishing guild|~": "Fishing"
+				}]
+			},
+			"Spade": {
+				"4922": [{
+					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
 				}]
 			},
 			"Staff of armadyl": {
