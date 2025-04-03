@@ -45176,21 +45176,23 @@
 				"Output": "Molanisk",
 				"NoBoost": true
 			},
-			"Slay a ~|mutated terrorbird|~": {
+			"Slay a ~|warped terrorbird|~": {
 				"Level": 56,
-				"Monsters": ["Mutated Terrorbird"],
+				"Items": ["Crystal chime"],
+				"Monsters": ["Warped Terrorbird"],
 				"Primary": false,
 				"Priority": 1,
 				"Source": "drop",
-				"Output": "Mutated Terrorbird"
+				"Output": "Warped Terrorbird"
 			},
-			"Slay a ~|mutated tortoise|~": {
+			"Slay a ~|warped tortoise|~": {
 				"Level": 56,
-				"Monsters": ["Mutated Tortoise"],
+				"Items": ["Crystal chime"],
+				"Monsters": ["Warped Tortoise"],
 				"Primary": false,
-				"Priority": 1,
+				"Priority": 2,
 				"Source": "drop",
-				"Output": "Mutated Tortoise"
+				"Output": "Warped Tortoise"
 			},
 			"Slay a mutated ~|zygomite#Level 74|~": {
 				"Level": 57,
