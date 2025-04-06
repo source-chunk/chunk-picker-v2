@@ -3242,6 +3242,10 @@ input#searchPlayerMaps {
     margin-right: 10px;
 }
 
+.mobile #searchActiveTasks {
+    font-size: 3vw;
+}
+
 .usertasks-list-data {
     overflow-y: auto;
     height: 95%;
