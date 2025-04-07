@@ -34697,7 +34697,7 @@
 				"ClueType": "Cipher",
 				"Not F2P": true
 			},
-			"00 degrees 42 minutes north, 27 degrees 25 minutes west": {
+			"00 degrees 41 minutes north, 27 degrees 35 minutes west": {
 				"Chunks": ["6193-1"],
 				"ClueTier": "elite",
 				"ClueType": "Coordinates",
@@ -187462,7 +187462,7 @@
 			{ "color": "#4c8587", "text": "00 degrees 30 minutes north, 24 degrees 16 minutes east", "type": "Medium", "x": 3217, "y": 3177 },
 			{ "color": "#4c8587", "text": "00 degrees 31 minutes south, 17 degrees 43 minutes east", "type": "Medium", "x": 3007, "y": 3144 },
 			{ "color": "#b19b15", "text": "00 degrees 35 minutes north, 35 degrees 50 minutes east", "type": "Elite", "x": 3587, "y": 3180 },
-			{ "color": "#b19b15", "text": "00 degrees 42 minutes north, 27 degrees 25 minutes west", "type": "Elite", "x": 1557, "y": 3183 },
+			{ "color": "#b19b15", "text": "00 degrees 41 minutes north, 27 degrees 35 minutes west", "type": "Elite", "x": 1557, "y": 3183 },
 			{ "color": "#8c2a22", "text": "01 degrees 30 minutes north, 08 degrees 11 minutes west", "type": "Master", "x": 2178, "y": 3209 },
 			{ "color": "#4c8587", "text": "01 degrees 18 minutes south, 14 degrees 15 minutes east", "type": "Medium", "x": 2896, "y": 3119 },
 			{ "color": "#763089", "text": "01 degrees 24 minutes north, 08 degrees 05 minutes west", "type": "Hard", "x": 2181, "y": 3206 },
