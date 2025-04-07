@@ -39500,7 +39500,8 @@
 				"ClueType": "Sherlock",
 				"Items": ["Ensouled abyssal head", "Soul rune", "Blood rune", "Nature rune"],
 				"Skills": {
-					"Magic": 90
+					"Magic": 90,
+					"Slayer": 85
 				},
 				"Not F2P": true
 			},
