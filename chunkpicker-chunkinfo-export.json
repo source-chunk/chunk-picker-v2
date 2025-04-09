@@ -20728,6 +20728,17 @@
 				},
 				"Not F2P": true
 			},
+			"Cast ~|humidify|~ from a rune pouch (Castle Wars)": {
+				"Category": ["Spells", "Minigame"],
+				"Items": ["Rune pouch (Castle Wars)"],
+				"Level": 68,
+				"Primary": false,
+				"Priority": 198,
+				"Tasks": {
+					"~|Dream Mentor|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
 			"Cast ~|hunter kit (spell)|~": {
 				"Category": ["Spells"],
 				"Items": ["Earth rune[+]*", "Astral rune*"],
@@ -43148,6 +43159,7 @@
 				"Items": ["Dragon crossbow"],
 				"Level": 64,
 				"Primary": false,
+				"Priority": 1,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -43715,6 +43727,22 @@
 				"Level": 61,
 				"Primary": false,
 				"Priority": 6,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wield ~|dragon bolts|~": {
+				"Items": ["Dragon bolts"],
+				"Level": 64,
+				"Primary": false,
+				"Priority": 2,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wield ~|castle wars bolts|~": {
+				"Items": ["Castle wars bolts"],
+				"Level": 64,
+				"Primary": false,
+				"Priority": 3,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -201248,38 +201276,38 @@
 				}
 			},
 			"Castle wars supply crate loot": {
+				"Blighted ancient ice sack": {
+					"10-15": "1/11"
+				},
 				"Blighted anglerfish": {
-					"25-34 (noted)": "1/11"
+					"25-35 (noted)": "1/11"
 				},
 				"Blighted karambwan": {
-					"35-40 (noted)": "1/11"
+					"35-45 (noted)": "1/11"
 				},
 				"Blighted manta ray": {
-					"16-38 (noted)": "1/11"
+					"15-25 (noted)": "1/11"
 				},
 				"Blighted super restore(4)": {
 					"4 (noted)": "1/11"
 				},
-				"Blood rune": {
-					"81-100": "1/11"
+				"Blighted vengeance sack": {
+					"20-30": "1/11"
 				},
-				"Coins": {
-					"21687-27592": "1/11"
+				"Castle wars arrow": {
+					"75-105": "1/11"
 				},
-				"Death rune": {
-					"113-136": "1/11"
+				"Castle wars bolts": {
+					"75-105": "1/11"
 				},
-				"Nature rune": {
-					"175-217": "1/11"
+				"Castle wars ticket": {
+					"2": "1/11"
 				},
 				"Rune arrow": {
-					"178-218": "1/11"
+					"175-225": "1/11"
 				},
 				"Rune javelin": {
-					"101-113": "1/11"
-				},
-				"Soul rune": {
-					"104-139": "1/11"
+					"100-120": "1/11"
 				}
 			},
 			"Supply crate loot": {

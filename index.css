@@ -3304,6 +3304,27 @@ input#searchPlayerMaps {
     margin-right: 5px;
 }
 
+.open-checkoff-container:not(.mobile-item) {
+    border-top: 1px solid;
+    display: none;
+    font-size: min(1.75vw, 2.75vh, 26px);
+}
+
+.open-checkoff {
+    cursor: pointer;
+    text-decoration: underline;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.open-checkoff:hover {
+    color: var(--colorLink);
+}
+
+.open-checkoff > i {
+    margin-right: 5px;
+}
+
 .open-manual-container {
     border-top: 1px solid;
     display: none;
@@ -5459,6 +5480,10 @@ input#searchChunkSections {
     position: relative;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+}
+
+.marker.hide-marker {
+    display: none !important;
 }
 
 .marker:hover {

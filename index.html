@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.6.12" />
+  <link rel="stylesheet" href="./index.css?v=6.6.13" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -43,12 +43,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.12' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.13' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.6.12"></script>
+  <script src="./index.js?v=6.6.13"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -997,6 +997,8 @@
       </div>
       <div class="open-complete-container"><span class="open-complete" onclick="openManualComplete()"><i class="fa-solid fa-check-square"></i>Manually Complete Tasks</span>
       </div>
+      <div class="open-checkoff-container"><span class="open-checkoff" onclick="submitCheckoffTasks()"><i class="fa-solid fa-circle-check"></i>Check-off All Active Tasks</span>
+      </div>
     </div>
   </div>
   <div class='menu10'>
@@ -1031,6 +1033,7 @@
       <div class='mobile-item noscroll friendslist' onclick="openFriendsList()">Friends list</div>
       <div class='mobile-item noscroll' onclick="enableScreenshotMode()">Screenshot mode</div>
       <div class='mobile-item noscroll' onclick="enableTestMode()">Sandbox mode</div>
+      <div class='mobile-item noscroll open-checkoff-container' onclick="submitCheckoffTasks()">Check-off All Active Tasks</div>
       <div class='mobile-item noscroll' onclick="openChunkNotesModal()">Notes</div>
       <div class='mobile-item noscroll patchnotes-mobile' onclick="openPatchNotesModal(true)">Patch Notes</div>
       <a href='https://www.patreon.com/bePatron?u=56906793' target='_blank'><div class='mobile-item noscroll'>Support me on Patreon<i class="external-link-icon fa-solid fa-external-link-alt"></i></div></a>
