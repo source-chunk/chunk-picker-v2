@@ -102248,7 +102248,7 @@
 			"~|Underground Pass|~ 2": {
 				"BaseQuest": "Underground Pass",
 				"Description": "Talk to Koftik",
-				"Chunks": ["9779-1"],
+				"Chunks": ["9779-2"],
 				"NPCs": ["Koftik"],
 				"Tasks": {
 					"~|Underground Pass|~ 1": "Quest"
@@ -116159,6 +116159,20 @@
 		"9779": {
 			"Sections": {
 				"1": {
+					"Monster": {
+						"Khazard trooper": 2,
+						"Khazard warlord": 1,
+						"Wolf": 6
+					},
+					"Object": {
+						"Dead tree": 35,
+						"Tree": 6
+					},
+					"Quest": {
+						"Tree Gnome Village": "step"
+					}
+				},
+				"2": {
 					"Connect": {
 						"9879": true
 					},
@@ -116187,7 +116201,6 @@
 					},
 					"Quest": {
 						"Song of the Elves": "step",
-						"Tree Gnome Village": "step",
 						"Underground Pass": "step"
 					},
 					"Shop": {
@@ -116195,17 +116208,6 @@
 					},
 					"Clue": {
 						"hard": 1
-					}
-				},
-				"2": {
-					"Monster": {
-						"Khazard trooper": 2,
-						"Khazard warlord": 1,
-						"Wolf": 6
-					},
-					"Object": {
-						"Dead tree": 35,
-						"Tree": 6
 					}
 				},
 				"3": {
