@@ -8009,7 +8009,7 @@
 				"Not F2P": true
 			},
 			"Bake a ~|tuna potato|~": {
-				"Items": ["Potato with butter", "Tuna", "Cooked sweetcorn[+]", "Bowl"],
+				"Items": ["Potato with butter*", "Tuna*", "Cooked sweetcorn[+]*", "Bowl", "Knife"],
 				"Level": 68,
 				"Output": "Tuna potato",
 				"Primary": true,
