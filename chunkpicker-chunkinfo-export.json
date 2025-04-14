@@ -53000,8 +53000,7 @@
 			"(Bryophyta) Obtain a ~|bryophyta's essence|~": {
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
-				"Items": ["Bryophyta's essence"],
-				"Not F2P": true
+				"Items": ["Bryophyta's essence"]
 			},
 			"(Callisto and Artio) Obtain a ~|callisto cub|~": {
 				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
