@@ -50736,6 +50736,60 @@
 				"Priority": 109,
 				"Not F2P": true
 			},
+			"Cut logs from an ~|ent|~": {
+				"Items": ["Axe[+]"],
+				"Level": 6,
+				"Monsters": ["Ent"],
+				"Output": "Logs",
+				"Primary": false,
+				"Not F2P": true,
+				"Priority": 99
+			},
+			"Cut oak logs from an ~|ent|~": {
+				"Items": ["Axe[+]"],
+				"Level": 31,
+				"Monsters": ["Ent"],
+				"Output": "Oak logs",
+				"Primary": false,
+				"Not F2P": true,
+				"Priority": 99
+			},
+			"Cut willow logs from an ~|ent|~": {
+				"Items": ["Axe[+]"],
+				"Level": 46,
+				"Monsters": ["Ent"],
+				"Output": "Willow logs",
+				"Primary": false,
+				"Not F2P": true,
+				"Priority": 99
+			},
+			"Cut maple logs from an ~|ent|~": {
+				"Items": ["Axe[+]"],
+				"Level": 46,
+				"Monsters": ["Ent"],
+				"Output": "Maple logs",
+				"Primary": false,
+				"Not F2P": true,
+				"Priority": 99
+			},
+			"Cut yew logs from an ~|ent|~": {
+				"Items": ["Axe[+]"],
+				"Level": 61,
+				"Monsters": ["Ent"],
+				"Output": "Yew logs",
+				"Primary": false,
+				"Not F2P": true,
+				"Priority": 99
+			},
+			"Cut magic logs from an ~|ent|~": {
+				"Items": ["Axe[+]"],
+				"Level": 75,
+				"Monsters": ["Ent"],
+				"Output": "Magic logs",
+				"Primary": false,
+				"Not F2P": true,
+				"Priority": 99
+			},
 			"Gain xp in the Friendly Ent ~|Forestry|~ event": {
 				"Category": ["ForestryXp"],
 				"Items": ["Forestry kit"],
@@ -155234,6 +155288,12 @@
 			"Bones": {
 				"1": "Always"
 			},
+			"Clue scroll (beginner)": {
+				"1": "Unknown"
+			},
+			"Clue scroll (easy)": {
+				"1": "Unknown"
+			},
 			"Raw beef": {
 				"1": "Always"
 			}
@@ -160343,24 +160403,6 @@
 			}
 		},
 		"Ent": {
-			"Logs": {
-				"1 (noted)": "Varies"
-			},
-			"Oak logs": {
-				"2 (noted)": "Varies"
-			},
-			"Willow logs": {
-				"2 (noted)": "Varies"
-			},
-			"Maple logs": {
-				"2 (noted)": "Varies"
-			},
-			"Yew logs": {
-				"2 (noted)": "Varies"
-			},
-			"Magic logs": {
-				"2 (noted)": "Varies"
-			},
 			"Slayer's enchantment": {
 				"1": "1/236"
 			}
