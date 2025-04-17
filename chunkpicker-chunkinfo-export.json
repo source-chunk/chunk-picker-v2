@@ -153017,6 +153017,9 @@
 		"Big frog#Level 10": {
 			"Bones": {
 				"1": "Always"
+			},
+			"Clue scroll (beginner)": {
+				"1": "1/70"
 			}
 		},
 		"Big frog#Level 24": {
@@ -161252,6 +161255,9 @@
 		"Frog": {
 			"Bones": {
 				"1": "Always"
+			},
+			"Clue scroll (beginner)": {
+				"1": "1/90"
 			}
 		},
 		"Frogeel": {
