@@ -1401,7 +1401,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.6.14';
+let currentVersion = '6.6.14.1';
 let patchNotesVersion = '6.4.0';
 let updateLevel = 'difference';
 
@@ -1565,7 +1565,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.6.14";
+mapImg.src = "osrs_world_map.png?v=6.6.14.1";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3263,7 +3263,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.6.14");
+        myWorker = new Worker("./worker.js?v=6.6.14.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workerOut = 1;
@@ -3566,8 +3566,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.6.14");
-let myWorker2 = new Worker("./worker.js?v=6.6.14");
+let myWorker = new Worker("./worker.js?v=6.6.14.1");
+let myWorker2 = new Worker("./worker.js?v=6.6.14.1");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6422,7 +6422,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.6.14");
+    myWorker2 = new Worker("./worker.js?v=6.6.14.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workerOut++;
@@ -7911,8 +7911,7 @@ let searchMaps = function() {
 
 // Formats date to pretty format
 let formatDate = function(dateStr) {
-    const [month, day, year] = dateStr.split('/').map(Number);
-    const date = new Date(year, month - 1, day);
+    const date = new Date(dateStr.replaceAll('"', '').replaceAll('|', ',').replace(/\u00A0/g, ' '));
     return date.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -7930,9 +7929,12 @@ let loadPoolsData = function() {
         let currentDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }));
         let splitData = data.split('\n');
         splitData.forEach((row, i) => {
+            let rowSplit = row.replace(/"([^"]*?),([^"]*?)"/g, (match, part1, part2) => {
+                return `"${part1}|${part2}"`;
+            }).split(',');
             if (i > 1) {
-                !!row.split(',')[0] && (formattedData['priority'][row.split(',')[0]] = { 'mapcode': row.split(',')[1], 'date': formatDate(row.split(',')[2]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(row.split(',')[2]).getTime()) / (1000 * 3600 * 24)) });
-                !!row.split(',')[5] && (formattedData['new'][row.split(',')[5]] = { 'mapcode': row.split(',')[6], 'date': formatDate(row.split(',')[7]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(row.split(',')[7]).getTime()) / (1000 * 3600 * 24)) });
+                !!rowSplit[0] && (formattedData['priority'][rowSplit[0]] = { 'mapcode': rowSplit[1], 'date': formatDate(rowSplit[3]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(rowSplit[3].replaceAll('"', '').replaceAll('|', ',').replace(/\u00A0/g, ' ')).getTime()) / (1000 * 3600 * 24)) });
+                !!rowSplit[6] && (formattedData['new'][rowSplit[6]] = { 'mapcode': rowSplit[7], 'date': formatDate(rowSplit[9]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(rowSplit[9].replaceAll('"', '').replaceAll('|', ',').replace(/\u00A0/g, ' ')).getTime()) / (1000 * 3600 * 24)) });
             }
         });
         $('.pools-list').empty();
@@ -7949,13 +7951,13 @@ let loadPoolsData = function() {
         Object.keys(formattedData['new']).forEach((username) => {
             tableData += `<tr><td>${username}</td><td><a href="https://source-chunk.github.io/chunk-picker-v2/?${formattedData['new'][username].mapcode}" target="_blank">${formattedData['new'][username].mapcode.toUpperCase()}</a></td><td>${formattedData['new'][username].date}</td><td>${formattedData['new'][username].daysWaiting}</td></tr>`;
         });
-        if (Object.keys(formattedData['priority']).length === 0) {
+        if (Object.keys(formattedData['new']).length === 0) {
             $('.pools-list-b').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No names currently in Waiting Pool</span></span></div>`);
         } else {
             $('.pools-list-b').append(`<table><tr><th>Username</th><th>Chunk Picker Map</th><th>Date Joined</th><th>Days Waiting</th></tr>${tableData}</table>`);
         }
-        $('.pools-period-b').text((splitData[7].split(',')[11] + ',' + splitData[7].split(',')[12]).replaceAll(/"/g, ''));
-        $('.pools-period-c').text((splitData[10].split(',')[11] + ',' + splitData[10].split(',')[12]).replaceAll(/"/g, ''));
+        $('.pools-period-b').text((splitData[7].split(',')[13] + ',' + splitData[7].split(',')[14]).replaceAll(/"/g, ''));
+        $('.pools-period-c').text((splitData[10].split(',')[13] + ',' + splitData[10].split(',')[14]).replaceAll(/"/g, ''));
         $('.content12a .subtitle, .content12b .subtitle').show();
     });
 }
