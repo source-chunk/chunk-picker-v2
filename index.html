@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.6.13" />
+  <link rel="stylesheet" href="./index.css?v=6.6.14" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -43,12 +43,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.13' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.14' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.6.13"></script>
+  <script src="./index.js?v=6.6.14"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -83,7 +83,6 @@
     </div>
     <div><a href='./'><span class="gohome" title='Home'>Chunk Picker V2</span></a></div>
     <div class='toptitle2-outer'><span class='toptitle2'>---</span></div>
-    <!--<div><span><i class="help-button fa-solid fa-question" onclick='helpFunc()' title='Help'></i></span></div>-->
     <span class='topbar-item'><div><i class="settings fa-solid fa-cog" onclick='settingsMenu()' title='Settings'></i></div></span>
     <span class='topbar-item topbar-item-6'></span>
     <span class='topbar-item topbar-item-5'></span>
@@ -534,9 +533,9 @@
     <div class="modal-content noscroll">
       <div id="passive-skill-title" class="passive-skill-title noscroll">Edit Passive Leveling/Highest Task</div>
       <div id="passive-skill-subtitle" class="passive-skill-subtitle noscroll">Enter the level passively reached in <span class='noscroll passive-skill-name'></span> (through lamps/Tears of Guthix/quest rewards/etc). Defining a passive skill this way will show Chunk Tasks for the skill up to your passively trained level, and will show Tasks for higher levels if you unlock a consistent training method.</div>
-      <div id="passive-skill-input-container" class="passive-skill-input-container noscroll">Current <span class='noscroll passive-skill-name'></span> Level: <input id="passive-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()"/></div>
+      <div id="passive-skill-input-container" class="passive-skill-input-container noscroll">Current <span class='noscroll passive-skill-name'></span> Level: <input id="passive-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()" autocomplete="off"/></div>
       <div id="passive-skill-subtitle2" class="passive-skill-subtitle2 noscroll"><b class="noscroll">[Meme Grind Limiter]</b> Use this to set a maximum level for tasks in <span class='noscroll passive-skill-name'></span>. Useful to turn meme grinds into a reasonable challenge without backlogging them. Entering a number lower than 99 will artificially stop the Chunk Picker from showing skill tasks for this skill above the inputted level.</div>
-      <div id="passive-skill-input-container2" class="passive-skill-input-container2 noscroll">Highest <span class='noscroll passive-skill-name'></span> task allowed: <input id="max-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()"/></div>
+      <div id="passive-skill-input-container2" class="passive-skill-input-container2 noscroll">Highest <span class='noscroll passive-skill-name'></span> task allowed: <input id="max-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()" autocomplete="off"/></div>
       <div id="passive-skill-data" class="passive-skill-data noscroll"></div>
     </div>
   </div>
@@ -1036,6 +1035,7 @@
       <div class='mobile-item noscroll open-checkoff-container' onclick="submitCheckoffTasks()">Check-off All Active Tasks</div>
       <div class='mobile-item noscroll' onclick="openChunkNotesModal()">Notes</div>
       <div class='mobile-item noscroll patchnotes-mobile' onclick="openPatchNotesModal(true)">Patch Notes</div>
+      <a href='https://github.com/source-chunk/chunk-picker-v2/wiki/Help' target='_blank'><div class='mobile-item noscroll'>Help<i class="external-link-icon fa-solid fa-external-link-alt"></i></div></a>
       <a href='https://www.patreon.com/bePatron?u=56906793' target='_blank'><div class='mobile-item noscroll'>Support me on Patreon<i class="external-link-icon fa-solid fa-external-link-alt"></i></div></a>
       <a href='https://discord.gg/kXRgpxnBxu' target='_blank'><div class='mobile-item noscroll'>Join the Discord<i class="external-link-icon fa-solid fa-external-link-alt"></i></div></a>
       <a href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'><div class='mobile-item noscroll'>Report a Bug<i class="external-link-icon fa-solid fa-external-link-alt"></i></div></a>
@@ -1989,6 +1989,28 @@
           <div><b><a class='noscroll link' href='?change-password'>/?change-password</a></b> - A page to change the password to your map</div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div id='pools-menu' style="display:none">
+  <div id='page12' class='content12a'>
+    <div>
+      <div class='title'>Priority Pool <a href="https://github.com/source-chunk/chunk-picker-v2/wiki/OneChunkClan#joining" target="_blank" ><i class="fa-solid fa-info-circle" title="Info on how the Joining Pools work"></i></a></div>
+      <div class='subtitle'>Names in the Priority Pool can join at any time there is an open slot in the clan.</div>
+      <div class='subtitle'>The next Inactivity Kick is <b class='pools-period pools-period-c'></b>.</div>
+    </div>
+    <div>
+      <div class='pools-list pools-list-a'><div class='pools-list-loading'>Loading data...</div></div>
+    </div>
+  </div>
+  <div id='page12' class='content12b'>
+    <div>
+      <div class='title'>Waiting Pool <a href="https://github.com/source-chunk/chunk-picker-v2/wiki/OneChunkClan#joining" target="_blank" ><i class="fa-solid fa-info-circle" title="Info on how the Joining Pools work"></i></a></div>
+      <div class='subtitle'>Names in the Waiting Pool will be upgraded to the Priority Pool on <b class='pools-period pools-period-b'></b>.</div>
+    </div>
+    <div>
+      <div class='pools-list pools-list-b'><div class='pools-list-loading'>Loading data...</div></div>
     </div>
   </div>
 </div>

@@ -8216,10 +8216,10 @@
 				"Not F2P": true
 			},
 			"Brew a ~|jug of wine|~": {
-				"Items": ["Grapes", "Jug of water"],
+				"Items": ["Grapes*", "Jug of water*"],
 				"Level": 35,
 				"Output": "Jug of wine",
-				"Primary": false,
+				"Primary": true,
 				"Priority": 3
 			},
 			"Brew a ~|moonlight mead|~": {
@@ -53477,7 +53477,6 @@
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Crystal weapon seed"],
-				"Chunks": ["Gauntlet Lobby"],
 				"Not F2P": true
 			},
 			"(The Gauntlet) Obtain an ~|enhanced crystal weapon seed|~": {
@@ -62243,6 +62242,13 @@
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
 				"NPCs": ["Ceto"],
+				"Items": ["Numulite"],
+				"Not F2P": true
+			},
+			"Unlock free ~|Volcanic Mine|~ access": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Petrified Pete"],
 				"Items": ["Numulite"],
 				"Not F2P": true
 			},
@@ -126962,7 +126968,7 @@
 			"Object": {
 				"Fishing spot (Tempoross Cove)": 4,
 				"Mast": 2,
-				"Shrine": 2,
+				"Shrine (Tempoross Cove)": 2,
 				"Totem pole": 2,
 				"Water pump": 4
 			},

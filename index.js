@@ -1401,7 +1401,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.6.13';
+let currentVersion = '6.6.14';
 let patchNotesVersion = '6.4.0';
 let updateLevel = 'difference';
 
@@ -1565,7 +1565,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.6.13";
+mapImg.src = "osrs_world_map.png?v=6.6.14";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3263,7 +3263,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.6.13");
+        myWorker = new Worker("./worker.js?v=6.6.14");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workerOut = 1;
@@ -3566,8 +3566,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.6.13");
-let myWorker2 = new Worker("./worker.js?v=6.6.13");
+let myWorker = new Worker("./worker.js?v=6.6.14");
+let myWorker2 = new Worker("./worker.js?v=6.6.14");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6422,7 +6422,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.6.13");
+    myWorker2 = new Worker("./worker.js?v=6.6.14");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workerOut++;
@@ -7907,6 +7907,57 @@ let searchMaps = function() {
     } else {
         $('.maps-list').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No results found (0)</span></span></div>`);
     }
+}
+
+// Formats date to pretty format
+let formatDate = function(dateStr) {
+    const [month, day, year] = dateStr.split('/').map(Number);
+    const date = new Date(year, month - 1, day);
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  }
+
+// Loads pools data from google sheet
+let loadPoolsData = function() {
+    let url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdsOtdI264xc_c4rXKnSr9SVyz3tn7IiJvd5OQzOU5TgnNjiW5vizAwtK5vJzoaAFVBbOdruPCtPRM/pub?gid=1428556181&single=true&output=csv';
+    fetch(url)
+    .then(response => response.text())
+    .then(data => {
+        let formattedData = {'priority': {}, 'new': {}};
+        let currentDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }));
+        let splitData = data.split('\n');
+        splitData.forEach((row, i) => {
+            if (i > 1) {
+                !!row.split(',')[0] && (formattedData['priority'][row.split(',')[0]] = { 'mapcode': row.split(',')[1], 'date': formatDate(row.split(',')[2]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(row.split(',')[2]).getTime()) / (1000 * 3600 * 24)) });
+                !!row.split(',')[5] && (formattedData['new'][row.split(',')[5]] = { 'mapcode': row.split(',')[6], 'date': formatDate(row.split(',')[7]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(row.split(',')[7]).getTime()) / (1000 * 3600 * 24)) });
+            }
+        });
+        $('.pools-list').empty();
+        let tableData = '';
+        Object.keys(formattedData['priority']).forEach((username) => {
+            tableData += `<tr><td>${username}</td><td><a href="https://source-chunk.github.io/chunk-picker-v2/?${formattedData['priority'][username].mapcode}" target="_blank">${formattedData['priority'][username].mapcode.toUpperCase()}</a></td><td>${formattedData['priority'][username].date}</td><td>${formattedData['priority'][username].daysWaiting}</td></tr>`;
+        });
+        if (Object.keys(formattedData['priority']).length === 0) {
+            $('.pools-list-a').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No names currently in Priority Pool</span></span></div>`);
+        } else {
+            $('.pools-list-a').append(`<table><tr><th>Username</th><th>Chunk Picker Map</th><th>Date Joined</th><th>Days Waiting</th></tr>${tableData}</table>`);
+        }
+        tableData = '';
+        Object.keys(formattedData['new']).forEach((username) => {
+            tableData += `<tr><td>${username}</td><td><a href="https://source-chunk.github.io/chunk-picker-v2/?${formattedData['new'][username].mapcode}" target="_blank">${formattedData['new'][username].mapcode.toUpperCase()}</a></td><td>${formattedData['new'][username].date}</td><td>${formattedData['new'][username].daysWaiting}</td></tr>`;
+        });
+        if (Object.keys(formattedData['priority']).length === 0) {
+            $('.pools-list-b').append(`<div class="noscroll results"><span class="noscroll holder"><span class="noscroll topline">No names currently in Waiting Pool</span></span></div>`);
+        } else {
+            $('.pools-list-b').append(`<table><tr><th>Username</th><th>Chunk Picker Map</th><th>Date Joined</th><th>Days Waiting</th></tr>${tableData}</table>`);
+        }
+        $('.pools-period-b').text((splitData[7].split(',')[11] + ',' + splitData[7].split(',')[12]).replaceAll(/"/g, ''));
+        $('.pools-period-c').text((splitData[10].split(',')[11] + ',' + splitData[10].split(',')[12]).replaceAll(/"/g, ''));
+        $('.content12a .subtitle, .content12b .subtitle').show();
+    });
 }
 
 // Opens the user-inputted tasks modal
@@ -11235,6 +11286,7 @@ let checkMID = function(mid) {
         $('#pin-menu').show();
         $('.mid-old').focus();
         $('html, body').addClass('change-password');
+        document.title = 'Change Password - Chunk Picker V2';
     } else if (mid === 'about') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
@@ -11243,6 +11295,7 @@ let checkMID = function(mid) {
         onMobile && $('#about-menu').addClass('mobile');
         $('#about-menu').show();
         $('html, body').addClass('about');
+        document.title = 'About - Chunk Picker V2';
     } else if (mid === 'patch-notes') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
@@ -11251,6 +11304,7 @@ let checkMID = function(mid) {
         onMobile && $('#patch-menu').addClass('mobile');
         $('#patch-menu').show();
         $('html, body').addClass('patch');
+        document.title = 'Patch Notes Archive - Chunk Picker V2';
     } else if (mid === 'maps-list') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
@@ -11259,7 +11313,18 @@ let checkMID = function(mid) {
         onMobile && $('#maps-menu').addClass('mobile');
         $('#maps-menu').show();
         $('html, body').addClass('maps');
+        document.title = 'Maps List - Chunk Picker V2';
         loadMapsData();
+    } else if (mid === 'joining-pools') {
+        atHome = true;
+        $('.loading, .ui-loader-header').remove();
+        $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv, .menu11, .menu12, .menu13, .menu14').hide();
+        $('#home-menu, .entry-home-menu-container, .entry-home-menu-extra').hide();
+        onMobile && $('#pools-menu').addClass('mobile');
+        $('#pools-menu').show();
+        $('html, body').addClass('pools');
+        document.title = 'Joining Pools - Chunk Picker V2';
+        loadPoolsData();
     } else if (mid === '404') {
         atHome = true;
         $('.loading, .ui-loader-header').remove();
@@ -11269,6 +11334,7 @@ let checkMID = function(mid) {
         $('#a404-menu').show();
         $('html, body').addClass('a404');
         $('.a404-address').text(window.location.href.split('?')[1]);
+        document.title = '404 - Chunk Picker V2';
     } else if (mid) {
         if (mid.split('-')[1] === 'view') {
             mid = mid.split('-')[0];

@@ -1252,6 +1252,17 @@ button.menu2 {
     margin-bottom: 100px;
 }
 
+.mobile .content10 {
+    min-width: 100vw;
+    box-shadow: none;
+    border: none;
+    top: 0px;
+    position: absolute;
+    margin: auto;
+    left: 0px;
+    min-height: 100vh;
+}
+
 #searchMaps {
     margin-top: 10px;
     margin-left: 20px;
@@ -1297,6 +1308,90 @@ button.menu2 {
 .a404-sub-body {
     text-align: left;
     padding: 0px 20px;
+}
+
+#pools-menu:not(.mobile) {
+    overflow-y: auto;
+    height: 100vh;
+    margin-top: 0px;
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    padding-top: 20px;
+}
+
+#pools-menu .title i {
+    font-size: 2.5vw;
+    transition-duration: .5s;
+}
+
+#pools-menu .title i:hover {
+    color: var(--colorLink);
+}
+
+.content12a, .content12b {
+    border: solid;
+    width: 60%;
+    max-height: 100%;
+    min-width: 500px;
+    max-width: 750px;
+    margin: auto;
+    text-align: center;
+    margin-top: 2vh;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 150);
+    background-color: var(--color6);
+    font-size: 18px;
+    overflow-y: auto;
+    margin-bottom: 50px;
+}
+
+.content12b {
+    margin-bottom: 100px;
+}
+
+.content12a .subtitle, .content12b .subtitle {
+    display: none;
+}
+
+.mobile .content12a {
+    min-width: 100vw;
+    box-shadow: none;
+    border-width: 2px 0px 2px 0px;
+    top: 0px;
+    position: absolute;
+    margin: auto;
+    left: 0px;
+    max-height: 50%;
+}
+
+.mobile .content12b {
+    min-width: 100vw;
+    box-shadow: none;
+    border-width: 2px 0px 2px 0px;
+    top: 50%;
+    position: absolute;
+    margin: auto;
+    left: 0px;
+    max-height: 50%;
+}
+
+.pools-list-loading {
+    padding: 100px;
+}
+
+.pools-list > table {
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pools-list tr:has(th) {
+    background-color: var(--color8);
+    border-top: solid 2px black;
+}
+
+.pools-list tr:nth-child(2n+1) {
+    background-color: var(--color1);
 }
 
 .mobile #page8 {
@@ -5551,6 +5646,14 @@ input#searchChunkSections {
 .results .topline {
     font-size: 32px;
 }
+
+.pools-list .results .topline {
+    border-top: solid 1px;
+    width: 100%;
+    display: block;
+    margin-top: 10px;
+    padding: 10px 0px;
+  }
 
 .results .bottomline {
     font-size: 18px;
