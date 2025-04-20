@@ -1325,7 +1325,7 @@ button.menu2 {
     transition-duration: .5s;
 }
 
-.mobile #pools-menu .title i {
+.mobile#pools-menu .title i {
     font-size: 7.5vw;
 }
 
