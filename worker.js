@@ -989,16 +989,20 @@ let calcChallenges = function(chunks, baseChunkData) {
     if (!!chunks && Object.keys(chunks).filter(chunk => { return chunkInfo['unnotingChunks'].includes(chunk) }).length === 0) {
         !!dropTablesGlobal && Object.keys(dropTablesGlobal).forEach((monster) => {
             !!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).forEach((item) => {
+                let noneUnnoted = true;
                 !!dropTablesGlobal[monster][item] && Object.keys(dropTablesGlobal[monster][item]).forEach((quantity) => {
-                    if (quantity.includes('(noted)')) {
-                        if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
-                            delete baseChunkData['items'][item][monster];
-                            if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
-                                delete baseChunkData['items'][item];
-                            }
-                        }
+                    if (!quantity.includes('(noted)')) {
+                        noneUnnoted = false;
                     }
                 });
+                if (noneUnnoted) {
+                    if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
+                        delete baseChunkData['items'][item][monster];
+                        if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
+                            delete baseChunkData['items'][item];
+                        }
+                    }
+                }
             });
         });
     }
@@ -2326,16 +2330,20 @@ let calcChallenges = function(chunks, baseChunkData) {
         if (!!chunks && Object.keys(chunks).filter(chunk => { return chunkInfo['unnotingChunks'].includes(chunk) }).length === 0) {
             !!dropTablesGlobal && Object.keys(dropTablesGlobal).forEach((monster) => {
                 !!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).forEach((item) => {
+                    let noneUnnoted = true;
                     !!dropTablesGlobal[monster][item] && Object.keys(dropTablesGlobal[monster][item]).forEach((quantity) => {
-                        if (quantity.includes('(noted)')) {
-                            if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
-                                delete baseChunkData['items'][item][monster];
-                                if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
-                                    delete baseChunkData['items'][item];
-                                }
-                            }
+                        if (!quantity.includes('(noted)')) {
+                            noneUnnoted = false;
                         }
                     });
+                    if (noneUnnoted) {
+                        if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
+                            delete baseChunkData['items'][item][monster];
+                            if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
+                                delete baseChunkData['items'][item];
+                            }
+                        }
+                    }
                 });
             });
         }
