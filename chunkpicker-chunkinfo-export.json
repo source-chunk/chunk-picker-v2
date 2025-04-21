@@ -18370,10 +18370,10 @@
 			},
 			"Mix an ~|antidote+|~": {
 				"Items": ["Coconut milk*", "Toadflax*", "Yew roots*"],
-				"Level": 66,
+				"Level": 68,
 				"Output": "Antidote+(3)",
 				"Primary": true,
-				"Priority": 3
+				"Priority": 1
 			},
 			"Mix an ~|antidote+ mix|~": {
 				"Items": ["Antidote++*", "Caviar*"],
@@ -128931,9 +128931,6 @@
 			"Connect": {
 				"12589": true
 			},
-			"Monster": {
-				"Pile of bones": 1
-			},
 			"NPC": {
 				"Akthanakos": 1,
 				"Crust of ice": 1,
@@ -140039,9 +140036,6 @@
 		"Enakhra's Temple": {
 			"Connect": {
 				"12589": true
-			},
-			"Monster": {
-				"Pile of bones": 1
 			},
 			"NPC": {
 				"Akthanakos": 1,
