@@ -61969,6 +61969,56 @@
 				"Label": "Untracked Uniques",
 				"Items": ["Perfected quetzal whistle blueprint"]
 			},
+			"Obtain a ~|rock-shell chunk|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Rock-shell chunk"]
+			},
+			"Obtain a ~|rock-shell shard|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Rock-shell shard"]
+			},
+			"Obtain a ~|rock-shell splinter|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Rock-shell splinter"]
+			},
+			"Obtain a ~|fibula piece|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Fibula piece"]
+			},
+			"Obtain a ~|ribcage piece|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Ribcage piece"]
+			},
+			"Obtain a ~|skull piece|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Skull piece"]
+			},
+			"Obtain a ~|circular hide|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Circular hide"]
+			},
+			"Obtain a ~|flattened hide|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Flattened hide"]
+			},
+			"Obtain a ~|stretched hide|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Stretched hide"]
+			},
+			"Obtain a ~|cursed amulet of magic|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Cursed amulet of magic"]
+			},
 			"Obtain a ~|big bass|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
@@ -239997,6 +240047,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "body",
+			"weight": -3,
 			"requirements": {}
 		},
 		"Jungle camo top": {
@@ -240016,6 +240067,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "body",
+			"weight": -3,
 			"requirements": {}
 		},
 		"Desert camo top": {
@@ -240035,6 +240087,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "body",
+			"weight": -3,
 			"requirements": {}
 		},
 		"Polar camo top": {
@@ -240054,6 +240107,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "body",
+			"weight": -3,
 			"requirements": {}
 		},
 		"3rd age range top": {
@@ -244815,7 +244869,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "cape",
-			"weight": -2.2,
+			"weight": -2.267,
 			"requirements": {
 				"Hunter": 40
 			}
@@ -244837,7 +244891,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "cape",
-			"weight": -4.5,
+			"weight": -4.535,
 			"requirements": {
 				"Hunter": 66
 			}
@@ -246214,7 +246268,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "feet",
-			"weight": -4.5,
+			"weight": -4.535,
 			"requirements": {}
 		},
 		"Pink boots": {
@@ -249329,7 +249383,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "hands",
-			"weight": -4.5,
+			"weight": -4.535,
 			"requirements": {
 				"Defence": 40
 			}
@@ -256811,6 +256865,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "legs",
+			"weight": -2,
 			"requirements": {}
 		},
 		"Jungle camo legs": {
@@ -256830,6 +256885,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "legs",
+			"weight": -2,
 			"requirements": {}
 		},
 		"Desert camo legs": {
@@ -256849,6 +256905,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "legs",
+			"weight": -2,
 			"requirements": {}
 		},
 		"Polar camo legs": {
@@ -256868,6 +256925,7 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "legs",
+			"weight": -2,
 			"requirements": {}
 		},
 		"3rd age range legs": {
