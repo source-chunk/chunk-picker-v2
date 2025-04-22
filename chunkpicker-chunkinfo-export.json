@@ -22971,7 +22971,8 @@
 					"Ranged": 80
 				},
 				"Priority": 20,
-				"Not F2P": true
+				"Not F2P": true,
+				"NoBoost": true
 			},
 			"Wield a ~|broodoo shield|~": {
 				"Items": ["Broodoo shield[+]"],
@@ -43028,7 +43029,8 @@
 					"Magic": 80
 				},
 				"Priority": 20,
-				"Not F2P": true
+				"Not F2P": true,
+				"NoBoost": true
 			},
 			"Wield a ~|blue d'hide shield|~": {
 				"Items": ["Blue d'hide shield"],
