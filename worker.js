@@ -3428,11 +3428,6 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                     if (!items[plus][source].includes('secondary-') || (items[plus][source].includes('primary-') && (!items[plus][source].includes('-Farming') || rules['Farming Primary'])) || items[plus][source] === 'shop') {
                                         secondary = false;
                                         return true;
-                                    } else if (xItem === 'Air rune+*') {
-                                        if (!!items['Staff of air']) {
-                                            secondary = false;
-                                            return true;
-                                        }
                                     }
                                 });
                                 if (combatSkills.includes(skill) || (chunkInfo['challenges'][skill][name].hasOwnProperty('Category') && chunkInfo['challenges'][skill][name]['Category'].includes('BIS Skilling'))) {
@@ -3497,11 +3492,6 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                 if (!items[plus][source].includes('secondary-') || (items[plus][source].includes('primary-') && (!items[item.replaceAll(/\*/g, '')][source].includes('-Farming') || rules['Farming Primary'])) || items[plus][source] === 'shop') {
                                     secondary = false;
                                     return true;
-                                } else if (item === 'Air rune+*') {
-                                    if (!!items['Staff of air']) {
-                                        secondary = false;
-                                        return true;
-                                    }
                                 }
                             });
                             if (combatSkills.includes(skill) || (chunkInfo['challenges'][skill][name].hasOwnProperty('Category') && chunkInfo['challenges'][skill][name]['Category'].includes('BIS Skilling'))) {
@@ -3536,7 +3526,6 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             wrongThings.push(item);
                             nonValids[name] = wrongThings;
                             chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
-                            return true;
                         } else {
                             chunkInfo['challenges'][skill][name]['ItemsDetails'].push(item.replaceAll(/\*/g, ''));
                         }
@@ -3547,8 +3536,11 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             return true;
                         }
                     }
-                    if ((skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) || ((skill === 'Quest' || skill === 'Diary') && (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic')) && (chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\+/g.test(e))))) {
+                    if ((skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) || (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic') && chunkInfo['challenges'][skill][name]['Primary'] && chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\[\+\]/g.test(e))) || ((skill === 'Quest' || skill === 'Diary') && (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic')) && (chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\[\+\]/g.test(e))))) {
                         missingItems.push(item);
+                        wrongThings = [];
+                    } else if (wrongThings.length > 0) {
+                        return true;
                     }
                 } else {
                     if ((!items[item.replaceAll(/\*/g, '')] && (!items[item.replaceAll(/\*/g, '') + '*'] || combatSkills.includes(skill))) || (chunkInfo['challenges'][skill][name].hasOwnProperty('NonShop') && chunkInfo['challenges'][skill][name]['NonShop'] && onlyShop(items[item.replaceAll(/\*/g, '')]))) {
@@ -3612,8 +3604,9 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             processingSource = true;
                         }
                     }
-                    if ((skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) || ((skill === 'Quest' || skill === 'Diary') && (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic')) && (chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\+/g.test(e))))) {
+                    if ((skill === 'Magic' && chunkInfo['challenges'][skill][name]['Primary']) || (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic') && chunkInfo['challenges'][skill][name]['Primary'] && chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\[\+\]/g.test(e))) || ((skill === 'Quest' || skill === 'Diary') && (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills') && chunkInfo['challenges'][skill][name]['Skills'].hasOwnProperty('Magic')) && (chunkInfo['challenges'][skill][name]['Items'].some(e => /.+ rune\[\+\]/g.test(e))))) {
                         missingItems.push(item);
+                        wrongThings = [];
                     }
                 }
                 !!secondary && (tempSecondary = true);
@@ -3637,27 +3630,34 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         let tempValid = false;
                         itemsPlus[it.replaceAll(/\*/g, '')].filter((plus) => { return !!items[plus] }).some(plus => {
                             tempValid = true;
+                            itSecondary = false;
                             if (it.includes('*') && Object.keys(items[plus]).filter((source) => { return !items[plus][source].includes('secondary-') || items[plus][source].includes('primary-') || items[plus][source] === 'shop' }).length > 0) {
-                                itSecondary = false;
                                 return true;
+                            } else {
+                                tempValid = false;
                             }
                         });
                         if (!tempValid) {
-                            if (elementalRunes.includes(it.replaceAll(/\*/g, '').replaceAll(/\+/g, ''))) {
+                            if (elementalRunes.includes(it.replaceAll(/\*/g, '').replaceAll(/\[\+\]/g, ''))) {
                                 missingRunes.push(it);
+                                itSecondary = false;
                             } else {
                                 potentialValid = false;
                             }
                         }
                     } else {
                         if (!items[it.replaceAll(/\*/g, '')]) {
-                            if (elementalRunes.includes(it.replaceAll(/\*/g, '').replaceAll(/\+/g, ''))) {
+                            if (elementalRunes.includes(it.replaceAll(/\*/g, '').replaceAll(/\[\+\]/g, ''))) {
                                 missingRunes.push(it);
+                                itSecondary = false;
                             } else {
                                 potentialValid = false;
                             }
                         } else {
                             if (it.includes('*') && Object.keys(items[it.replaceAll(/\*/g, '')]).filter((source) => { return !items[it.replaceAll(/\*/g, '')][source].includes('secondary-') || items[it.replaceAll(/\*/g, '')][source].includes('primary-') || items[it.replaceAll(/\*/g, '')][source] === 'shop' }).length > 0) {
+                                itSecondary = false;
+                            } else if (elementalRunes.includes(it.replaceAll(/\*/g, '').replaceAll(/\[\+\]/g, ''))) {
+                                missingRunes.push(it);
                                 itSecondary = false;
                             }
                         }
@@ -3665,15 +3665,12 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     itSecondary && (potentialSecondary = true);
                 });
                 if (missingRunes.length === 1) {
-                    let rune = missingRunes[0].replaceAll(/\*/g, '').replaceAll(/\+/g, '');
+                    let rune = missingRunes[0].replaceAll(/\*/g, '').replaceAll(/\[\+\]/g, '');
                     let foundStaff = false;
                     Object.keys(elementalStaves).filter((staff) => { return elementalStaves[staff].includes(rune) && !!items[staff] && !foundStaff }).forEach((staff) => {
                         staffItems[rune] = {};
                         staffItems[rune][staff] =  'primary-staff';
                         foundStaff = true;
-                        if (staff !== 'Staff of air') {
-                            potentialSecondary = true;
-                        }
                     });
                     if (!foundStaff) {
                         potentialValid = false;
@@ -3684,7 +3681,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     Object.keys(elementalStaves).some(staff => {
                         let matchingStaff = true;
                         missingRunes.some(rune => {
-                            rune = rune.replaceAll(/\*/g, '').replaceAll(/\+/g, '');
+                            rune = rune.replaceAll(/\*/g, '').replaceAll(/\[\+\]/g, '');
                             if (!elementalStaves[staff].includes(rune)) {
                                 matchingStaff = false;
                                 return true;
