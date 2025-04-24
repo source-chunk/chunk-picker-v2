@@ -3633,8 +3633,6 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             itSecondary = false;
                             if (it.includes('*') && Object.keys(items[plus]).filter((source) => { return !items[plus][source].includes('secondary-') || items[plus][source].includes('primary-') || items[plus][source] === 'shop' }).length > 0) {
                                 return true;
-                            } else if (it.includes('*')) {
-                                tempValid = false;
                             }
                         });
                         if (!tempValid) {
