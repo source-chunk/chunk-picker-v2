@@ -218609,6 +218609,11 @@
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
 				}]
 			},
+			"Cabbage": {
+				"11573-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Cactus patch": {
 				"4922": [{
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
@@ -218686,6 +218691,9 @@
 			"Dead tree": {
 				"11572-1": [{
 					"F2P Only": "Nonskill"
+				}],
+				"11573-1": [{
+					"F2P Only": "Nonskill"
 				}]
 			},
 			"Fire": {
@@ -218739,6 +218747,11 @@
 					"~|Swan Song|~ Complete the quest": "Quest"
 				}]
 			},
+			"Flax": {
+				"11573-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Flower Patch": {
 				"4922": [{
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
@@ -218750,6 +218763,9 @@
 				}],
 				"5677-3": [{
 					"~|Death on the Isle|~ Complete the quest": "Quest"
+				}],
+				"11573-1": [{
+					"F2P Only": "Nonskill"
 				}],
 				"14388-1": [{
 					"~|Sins of the Father|~ Complete the quest": "Quest"
@@ -218858,6 +218874,9 @@
 					"F2P Only": "Nonskill"
 				}],
 				"11572-1": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11573-1": [{
 					"F2P Only": "Nonskill"
 				}]
 			},
@@ -219107,6 +219126,9 @@
 				"11572-1": [{
 					"F2P Only": "Nonskill"
 				}],
+				"11573-1": [{
+					"F2P Only": "Nonskill"
+				}],
 				"13363": [{
 					"F2P Only": "Nonskill"
 				}]
@@ -219126,11 +219148,19 @@
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
 				}]
 			},
+			"Wheat": {
+				"11573-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Willow tree": {
 				"9776": [{
 					"F2P Only": "Nonskill"
 				}],
 				"11572-1": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11573-1": [{
 					"F2P Only": "Nonskill"
 				}]
 			},
