@@ -903,6 +903,14 @@
 				},
 				"NoPet": true
 			},
+			"Access the Varrock Palace Garden trellis ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Trellis (Varrock)"],
+				"Level": 35,
+				"Primary": false,
+				"Priority": 2,
+				"NoPet": true
+			},
 			"Access the Varrock south fence jump ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Fence (Varrock)"],
@@ -1293,6 +1301,7 @@
 				"Level": 35,
 				"Output": "Mark of grace",
 				"Primary": true,
+				"Priority": 1,
 				"Skills": {
 					"Strength": 1
 				},
