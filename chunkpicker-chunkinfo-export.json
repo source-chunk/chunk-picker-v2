@@ -62021,6 +62021,11 @@
 				"Label": "Untracked Uniques",
 				"Items": ["Cursed amulet of magic"]
 			},
+			"Obtain an ~|ancient tablet|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Ancient tablet"]
+			},
 			"Obtain a ~|big bass|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
@@ -62904,6 +62909,12 @@
 				"Tasks": {
 					"~|Desert Treasure II - The Fallen Empire|~ Complete the quest": "Quest"
 				},
+				"Not F2P": true
+			},
+			"Unlock Xeric's Honour teleport on the ~|Xeric's talisman|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Ancient tablet", "Xeric's talisman (inert)"],
 				"Not F2P": true
 			},
 			"~|STASH#Beginner|~: Gypsy Aris's tent (Varrock)": {
@@ -273862,7 +273873,7 @@
 			"defence_stab": 0,
 			"magic_damage": 0,
 			"melee_strength": 0,
-			"prayer": 1,
+			"prayer": 7,
 			"ranged_strength": 0,
 			"slot": "body",
 			"requirements": {}
@@ -273881,7 +273892,7 @@
 			"defence_stab": 0,
 			"magic_damage": 0,
 			"melee_strength": 0,
-			"prayer": 1,
+			"prayer": 6,
 			"ranged_strength": 0,
 			"slot": "legs",
 			"requirements": {}
