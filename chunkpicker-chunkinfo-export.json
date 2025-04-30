@@ -910,7 +910,7 @@
 				"Primary": false,
 				"Priority": 2,
 				"Tasks": {
-					"~|Garden of Tranquillity|~ Complete the quest": "Quest",
+					"~|Garden of Tranquillity|~ Complete the quest": "Quest"
 				},
 				"NoPet": true
 			},
