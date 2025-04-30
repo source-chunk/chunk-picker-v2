@@ -909,6 +909,9 @@
 				"Level": 35,
 				"Primary": false,
 				"Priority": 2,
+				"Tasks": {
+					"~|Garden of Tranquillity|~ Complete the quest": "Quest",
+				},
 				"NoPet": true
 			},
 			"Access the Varrock south fence jump ~|shortcut|~": {
@@ -131231,6 +131234,7 @@
 						"Sink": 1,
 						"Tree": 46,
 						"Tree patch": 1,
+						"Trellis (Varrock)": 1,
 						"Varrock Census": 1,
 						"Yew tree": 4
 					},
