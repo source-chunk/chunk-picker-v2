@@ -219696,6 +219696,16 @@
 					"Access the ~|Ranging Guild|~": "Ranged"
 				}]
 			},
+			"Razmire Builders Merchants.": {
+				"13875-1": [{
+					"~|Shades of Mort'ton|~ 2": "Quest"
+				}]
+			},
+			"Razmire General Store.": {
+				"13875-1": [{
+					"~|Shades of Mort'ton|~ 2": "Quest"
+				}]
+			},
 			"Rellekka Longhall Bar": {
 				"10553": [{
 					"~|The Fremennik Trials|~ Complete the quest": "Quest"
