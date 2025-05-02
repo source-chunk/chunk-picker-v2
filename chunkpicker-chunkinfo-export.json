@@ -10093,18 +10093,146 @@
 			},
 			"Craft a ~|clockwork|~ on a crafting table 2": {
 				"Chunks": ["Player-owned house"],
-				"Items": ["Steel bar"],
+				"Items": ["Steel bar*"],
 				"Level": 8,
 				"Output": "Clockwork",
-				"Primary": false,
+				"Primary": true,
 				"Priority": 4,
-				"Skills": {
+				"SkillsNeeded": {
 					"Construction": 25
 				},
 				"Tasks": {
 					"Crafting Table 2 materials": "Nonskill"
 				},
 				"AlwaysValid": true,
+				"Not F2P": true
+			},
+			"Craft a ~|toy horsey|~ on a crafting table 1": {
+				"Chunks": ["Player-owned house"],
+				"Items": ["Plank*"],
+				"Level": 10,
+				"Primary": true,
+				"Priority": 101,
+				"SkillsNeeded": {
+					"Construction": 16
+				},
+				"Tasks": {
+					"Crafting Table 1 materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Craft a ~|toy soldier|~ on a crafting table 3": {
+				"Chunks": ["Player-owned house"],
+				"Items": ["Plank*", "Clockwork*"],
+				"Level": 13,
+				"Primary": true,
+				"Priority": 102,
+				"SkillsNeeded": {
+					"Construction": 34
+				},
+				"Tasks": {
+					"Crafting Table 2 materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Craft a ~|wooden cat|~ on a crafting table 1": {
+				"Chunks": ["Player-owned house"],
+				"Items": ["Plank*", "CatFur[+]*"],
+				"Level": 16,
+				"Primary": true,
+				"Priority": 103,
+				"SkillsNeeded": {
+					"Construction": 16
+				},
+				"Tasks": {
+					"Crafting Table 1 materials": "Nonskill",
+					"~|The Great Brain Robbery|~ 6": "Quest"
+				},
+				"Not F2P": true
+			},
+			"Craft a ~|toy doll|~ on a crafting table 3": {
+				"Chunks": ["Player-owned house"],
+				"Items": ["Plank*", "Clockwork*"],
+				"Level": 18,
+				"Primary": true,
+				"Priority": 104,
+				"SkillsNeeded": {
+					"Construction": 34
+				},
+				"Tasks": {
+					"Crafting Table 2 materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Craft a ~|sextant|~ on a crafting table 4": {
+				"Chunks": ["9777-2", "10545", "Player-owned house"],
+				"Items": ["Steel bar*"],
+				"Level": 23,
+				"Primary": true,
+				"Priority": 105,
+				"SkillsNeeded": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Crafting Table 2 materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Craft a ~|watch|~ on a crafting table 4": {
+				"Chunks": ["9777-2", "10290", "Player-owned house"],
+				"Items": ["Steel bar*", "Clockwork*"],
+				"Level": 28,
+				"Primary": true,
+				"Priority": 106,
+				"SkillsNeeded": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Crafting Table 2 materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Craft a ~|clockwork suit|~ on a crafting table 3": {
+				"Chunks": ["Player-owned house"],
+				"Items": ["Clockwork*", "Plank*", "Silk*"],
+				"Level": 30,
+				"Primary": true,
+				"Priority": 107,
+				"SkillsNeeded": {
+					"Construction": 34
+				},
+				"Tasks": {
+					"Crafting Table 2 materials": "Nonskill",
+					"~|Cold War|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"Craft a ~|toy mouse|~ on a crafting table 4": {
+				"Chunks": ["Player-owned house"],
+				"Items": ["Clockwork*", "Plank*"],
+				"Level": 33,
+				"Primary": true,
+				"Priority": 108,
+				"SkillsNeeded": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Crafting Table 2 materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Craft a ~|toy cat|~ on a crafting table 4": {
+				"Chunks": ["Player-owned house"],
+				"Items": ["Clockwork*", "Plank*"],
+				"Level": 85,
+				"Primary": true,
+				"Priority": 109,
+				"SkillsNeeded": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Crafting Table 2 materials": "Nonskill"
+				},
 				"Not F2P": true
 			},
 			"Craft a ~|coif|~": {
@@ -27984,6 +28112,10 @@
 			},
 			"Teak larder materials": {
 				"Items": ["Hammer[+]", "Saw[+]", "Teak plank", "Bolt of cloth"],
+				"Not F2P": true
+			},
+			"Crafting Table 1 materials": {
+				"Items": ["Hammer[+]", "Saw[+]", "Oak plank"],
 				"Not F2P": true
 			},
 			"Crafting Table 2 materials": {
@@ -146523,7 +146655,8 @@
 			"Catalytic rune[+]": ["Mind rune", "Chaos rune", "Death rune", "Blood rune", "Wrath rune"],
 			"ShaikahanWeapon[+]": ["Adamant hasta(kp)", "Adamant spear(kp)", "Black spear(kp)", "Bronze hasta(kp)", "Bronze spear(kp)", "Dragon hasta(kp)", "Dragon spear(kp)", "Iron hasta(kp)", "Iron spear(kp)", "Mithril hasta(kp)", "Mithril spear(kp)", "Rune hasta(kp)", "Rune spear(kp)", "Steel hasta(kp)", "Steel spear(kp)"],
 			"ButterBase[+]": ["Bucket of milk", "Pot of cream"],
-			"CheeseBase[+]": ["Bucket of milk", "Pot of cream", "Pat of butter", "Pat of not garlic butter"]
+			"CheeseBase[+]": ["Bucket of milk", "Pot of cream", "Pat of butter", "Pat of not garlic butter"],
+			"CatFur[+]": ["Fur", "Bear fur", "Grey wolf fur"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -146888,7 +147021,8 @@
 			"Catalytic rune[+]": "Any catalytic rune",
 			"ShaikahanWeapon[+]": "Any karambwan-poisoned weapon",
 			"ButterBase[+]": "Any base ingredient that can be churned into a pat of butter",
-			"CheeseBase[+]": "Any base ingredient that can be churned into cheese"
+			"CheeseBase[+]": "Any base ingredient that can be churned into cheese",
+			"CatFur[+]": "Any fur used to craft a wooden cat"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
