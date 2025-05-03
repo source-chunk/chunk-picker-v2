@@ -219988,6 +219988,9 @@
 				}]
 			},
 			"Bones": {
+				"10031": [{
+					"~|Watchtower|~ 7": "Quest"
+				}],
 				"Temple of Ikov": [{
 					"~|Temple of Ikov|~ 1": "Quest"
 				}],
@@ -220142,6 +220145,9 @@
 				}]
 			},
 			"Knife": {
+				"10031": [{
+					"~|Watchtower|~ 7": "Quest"
+				}],
 				"10035-1": [{
 					"~|Plague City|~ 5": "Quest"
 				}],
