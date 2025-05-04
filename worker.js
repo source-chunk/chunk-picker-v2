@@ -3624,14 +3624,15 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 let potentialValid = true;
                 let potentialSecondary = false;
                 let missingRunes = [];
+                let secondaryRunes = [];
                 missingItems.forEach((it) => {
                     let itSecondary = true;
                     if (it.replaceAll(/\*/g, '').includes('[+]') && itemsPlus.hasOwnProperty(it.replaceAll(/\*/g, ''))) {
                         let tempValid = false;
                         itemsPlus[it.replaceAll(/\*/g, '')].filter((plus) => { return !!items[plus] }).some(plus => {
                             tempValid = true;
-                            itSecondary = false;
                             if (it.includes('*') && Object.keys(items[plus]).filter((source) => { return !items[plus][source].includes('secondary-') || items[plus][source].includes('primary-') || items[plus][source] === 'shop' }).length > 0) {
+                                itSecondary = false;
                                 return true;
                             }
                         });
@@ -3660,14 +3661,17 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             }
                         }
                     }
-                    itSecondary && (potentialSecondary = true);
+                    if (itSecondary) {
+                        potentialSecondary = true
+                        secondaryRunes.push(it.replaceAll(/\*/g, '').replaceAll(/\[\+\]/g, ''));
+                    }
                 });
                 if (missingRunes.length === 1) {
                     let rune = missingRunes[0].replaceAll(/\*/g, '').replaceAll(/\[\+\]/g, '');
                     let foundStaff = false;
                     Object.keys(elementalStaves).filter((staff) => { return elementalStaves[staff].includes(rune) && !!items[staff] && !foundStaff }).forEach((staff) => {
                         staffItems[rune] = {};
-                        staffItems[rune][staff] =  'primary-staff';
+                        staffItems[rune][staff] = 'primary-staff';
                         foundStaff = true;
                     });
                     if (!foundStaff) {
@@ -3688,7 +3692,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         if (matchingStaff && !!items[staff] && !foundStaff) {
                             missingRunes.forEach((rune) => {
                                 staffItems[rune] = {};
-                                staffItems[rune][staff] =  'primary-staff';
+                                staffItems[rune][staff] = 'primary-staff';
                             });
                             foundStaff = true;
                             return true;
@@ -3698,6 +3702,47 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         potentialValid = false;
                         potentialSecondary = true;
                     }
+                }
+                if (secondaryRunes.length === 1) {
+                    let rune = secondaryRunes[0];
+                    Object.keys(elementalStaves).filter((staff) => { return elementalStaves[staff].includes(rune) && !!items[staff] }).forEach((staff) => {
+                        staffItems[rune] = {};
+                        staffItems[rune][staff] = 'primary-staff';
+                        let runeIndex = secondaryRunes.indexOf(rune);
+                        if (runeIndex > -1) {
+                            secondaryRunes.splice(runeIndex, 1);
+                            if (secondaryRunes.length === 0) {
+                                potentialSecondary = false;
+                            }
+                        }
+                    });
+                } else if (secondaryRunes.length === 2) {
+                    let foundStaff = false;
+                    Object.keys(elementalStaves).some(staff => {
+                        let matchingStaff = true;
+                        secondaryRunes.some(rune => {
+                            rune = rune.replaceAll(/\*/g, '').replaceAll(/\[\+\]/g, '');
+                            if (!elementalStaves[staff].includes(rune)) {
+                                matchingStaff = false;
+                                return true;
+                            }
+                        });
+                        if (matchingStaff && !!items[staff] && !foundStaff) {
+                            secondaryRunes.forEach((rune) => {
+                                staffItems[rune] = {};
+                                staffItems[rune][staff] = 'primary-staff';
+                                let runeIndex = secondaryRunes.indexOf(rune);
+                                if (runeIndex > -1) {
+                                    secondaryRunes.splice(runeIndex, 1);
+                                    if (secondaryRunes.length === 0) {
+                                        potentialSecondary = false;
+                                    }
+                                }
+                            });
+                            foundStaff = true;
+                            return true;
+                        }
+                    });
                 }
                 !potentialValid ? (validChallenge = false) : (validChallenge = savedValid);
                 !potentialValid && wrongThings.push('potentialValid');
