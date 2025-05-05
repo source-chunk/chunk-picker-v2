@@ -50145,7 +50145,7 @@
 			"Pickpocket a ~|citizen|~": {
 				"Level": 1,
 				"Mix": ["Citizen[+]"],
-				"Output": "Man",
+				"Output": "Citizen",
 				"Primary": true,
 				"Priority": 1,
 				"NoBoost": true
@@ -213675,7 +213675,7 @@
 					"1": "1/5"
 				}
 			},
-			"Man": {
+			"Citizen": {
 				"Coins": {
 					"3": "Always"
 				}
