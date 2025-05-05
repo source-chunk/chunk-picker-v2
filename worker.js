@@ -7429,7 +7429,7 @@ let calcBIS = function(completedOnly) {
                 }
             });
         });
-        !!bestEquipment && Object.keys(bestEquipment).forEach((slot) => {
+        !completedOnly && !!bestEquipment && Object.keys(bestEquipment).forEach((slot) => {
             !!bestEquipmentAlts && bestEquipmentAlts.hasOwnProperty(slot) && Object.keys(bestEquipmentAlts[slot]).filter(itTemp => bestEquipmentAlts[slot][itTemp] === bestEquipment[slot]).forEach((itTemp) => {
                 if (!bestEquipmentAltsGlobal.hasOwnProperty(skill + ' BiS ' + slot)) {
                     bestEquipmentAltsGlobal[skill + ' BiS ' + slot] = [];
