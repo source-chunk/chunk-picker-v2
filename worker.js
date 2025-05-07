@@ -3554,6 +3554,12 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         if (items.hasOwnProperty(item.replaceAll(/\*/g, '') + '*') && !combatSkills.includes(skill)) {
                             tempItem += '*';
                         }
+                        if (chunkInfo['challenges'][skill][name].hasOwnProperty('RequiredMonsterSource') && !items[tempItem].hasOwnProperty(chunkInfo['challenges'][skill][name]['RequiredMonsterSource'])) {
+                            validChallenge = false;
+                            wrongThings.push(item);
+                            nonValids[name] = wrongThings;
+                            return true;
+                        }
                         chunkInfo['challenges'][skill][name]['ItemsDetails'].push(tempItem);
                         if (item.includes('*') && !!items[tempItem]) {
                             (Object.keys(items[tempItem]).filter((source) => { return (!items[tempItem][source].includes('-Farming') || rules['Farming Primary']) && (!items[tempItem][source].includes('secondary-') || (items[tempItem][source].includes('primary-') && !processingSkill[items[tempItem][source].split('-')[1]]) || items[tempItem][source] === 'shop' )}).length > 0) && (secondary = false);

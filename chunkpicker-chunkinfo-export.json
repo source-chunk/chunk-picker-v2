@@ -54427,6 +54427,7 @@
 				"Label": "Collection Log",
 				"Monsters": ["Skotizo"],
 				"Items": ["Dark totem"],
+				"RequiredMonsterSource": "Skotizo",
 				"Not F2P": true
 			},
 			"(Skotizo) Obtain an ~|uncut onyx|~": {
