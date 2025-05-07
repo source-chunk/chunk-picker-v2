@@ -4286,13 +4286,14 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 let monster = chunkInfo['challenges']['Thieving'][source]['Output'];
                 !!chunkInfo['skillItems']['Thieving'] && !!chunkInfo['skillItems']['Thieving'][monster] && Object.keys(chunkInfo['skillItems']['Thieving'][monster]).forEach((drop) => {
                     !!chunkInfo['skillItems']['Thieving'][monster][drop] && Object.keys(chunkInfo['skillItems']['Thieving'][monster][drop]).filter(quantityDrop => (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))).forEach((quantityDrop) => {
-                        if (!dropTablesGlobal['[Thieving] ' + monster]) {
-                            dropTablesGlobal['[Thieving] ' + monster] = {};
+                        let addon = chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Mix') ? '-mix' :chunkInfo['challenges']['Thieving'][source].hasOwnProperty('NPCs') ? '-npc' : chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Objects') ? '-object' : '';
+                        if (!dropTablesGlobal['[Thieving] ' + monster + addon]) {
+                            dropTablesGlobal['[Thieving] ' + monster + addon] = {};
                         }
-                        if (!dropTablesGlobal['[Thieving] ' + monster][drop]) {
-                            dropTablesGlobal['[Thieving] ' + monster][drop] = {};
+                        if (!dropTablesGlobal['[Thieving] ' + monster + addon][drop]) {
+                            dropTablesGlobal['[Thieving] ' + monster + addon][drop] = {};
                         }
-                        dropTablesGlobal['[Thieving] ' + monster][drop][quantityDrop] = (chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1].replaceAll('~', '')));
+                        dropTablesGlobal['[Thieving] ' + monster + addon][drop][quantityDrop] = (chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1].replaceAll('~', '')));
                     });
                 });
             });
@@ -4325,15 +4326,40 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         if (!chunkInfo['challenges']['Extra']) {
                             chunkInfo['challenges']['Extra'] = {};
                         }
-                        if (monster.includes('-npc')) {
+                        if (monster.includes('-mix')) {
+                            valids['Extra'][monster.replaceAll('-mix', '').replaceAll('[+]', '') + ': ~|' + item + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity] + ')'] = 'All Droptables';
+                            chunkInfo['challenges']['Extra'][monster.replaceAll('-mix', '').replaceAll('[+]', '') + ': ~|' + item + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity] + ')'] = {
+                                'Category': ['All Droptables'],
+                                'Items': [item],
+                                'ItemsDetails': [item],
+                                'Monsters': [monster.replaceAll('-mix', '')],
+                                'MonsterDetails': [monster.replaceAll('-mix', '')],
+                                'NPCs': [monster.replaceAll('-mix', '')],
+                                'NPCsDetails': [monster.replaceAll('-mix', '')],
+                                'Label': 'All Droptables',
+                                'Permanent': false
+                            }
+                        } else if (monster.includes('-npc')) {
                             valids['Extra'][monster.replaceAll('-npc', '').replaceAll('[+]', '') + ': ~|' + item + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity] + ')'] = 'All Droptables';
                             chunkInfo['challenges']['Extra'][monster.replaceAll('-npc', '').replaceAll('[+]', '') + ': ~|' + item + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity] + ')'] = {
                                 'Category': ['All Droptables'],
                                 'Items': [item],
                                 'ItemsDetails': [item],
-                                'Monsters': [monster.replaceAll('-npc', '')],
+                                'Monsters': [monster],
                                 'NPCs': [monster.replaceAll('-npc', '')],
                                 'NPCsDetails': [monster.replaceAll('-npc', '')],
+                                'Label': 'All Droptables',
+                                'Permanent': false
+                            }
+                        } else if (monster.includes('-object')) {
+                            valids['Extra'][monster.replaceAll('-object', '').replaceAll('[+]', '') + ': ~|' + item + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity] + ')'] = 'All Droptables';
+                            chunkInfo['challenges']['Extra'][monster.replaceAll('-object', '').replaceAll('[+]', '') + ': ~|' + item + '|~ (' + (quantity || 'N/A') + ') (' + dropTablesGlobal[monster][item][quantity] + ')'] = {
+                                'Category': ['All Droptables'],
+                                'Items': [item],
+                                'ItemsDetails': [item],
+                                'Monsters': [monster],
+                                'Objects': [monster.replaceAll('-object', '')],
+                                'ObjectsDetails': [monster.replaceAll('-object', '')],
                                 'Label': 'All Droptables',
                                 'Permanent': false
                             }
@@ -4367,8 +4393,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         'Category': ['All Droptables'],
                         'Items': [drop],
                         'ItemsDetails': [drop],
-                        'Monsters': [it],
-                        'MonstersDetails': [it],
+                        'Monsters': [it + '-object'],
                         'Label': 'All Droptables',
                         'Permanent': false
                     }

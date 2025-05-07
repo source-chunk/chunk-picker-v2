@@ -24668,6 +24668,11 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Pout nettle tea into a cup*": {
+				"Items": ["Empty cup*", "Nettle tea*"],
+				"Output": "Cup of tea (nettle)",
+				"Not F2P": true
+			},
 			"Get a rune pouch (Castle Wars)*": {
 				"Chunks": ["9520"],
 				"Output": "Rune pouch (Castle Wars)"
@@ -49987,7 +49992,7 @@
 			"Pickpocket a ~|Fremennik citizen|~": {
 				"Level": 45,
 				"Mix": ["Fremennik citizen[+]"],
-				"Output": "Fremennik citizen",
+				"Output": "Fremennik citizen[+]",
 				"Primary": true,
 				"Tasks": {
 					"~|The Fremennik Trials|~ Complete the quest": "Quest"
@@ -50004,7 +50009,7 @@
 			"Pickpocket a ~|H.A.M. Member|~": {
 				"Level": 15,
 				"NPCs": ["H.A.M. Member[+]"],
-				"Output": "H.A.M. Member",
+				"Output": "H.A.M. Member[+]",
 				"Primary": true,
 				"Priority": 1
 			},
@@ -50065,7 +50070,7 @@
 			"Pickpocket a ~|farmer|~": {
 				"Level": 10,
 				"Mix": ["Farmer[+]"],
-				"Output": "Farmer",
+				"Output": "Farmer[+]",
 				"Primary": true
 			},
 			"Pickpocket a ~|wealthy citizen|~": {
@@ -50086,14 +50091,14 @@
 			"Pickpocket a ~|gnome|~": {
 				"Level": 75,
 				"Monsters": ["Gnome[+]"],
-				"Output": "Gnome",
+				"Output": "Gnome[+]",
 				"Primary": true,
 				"Priority": 1
 			},
 			"Pickpocket a ~|guard|~": {
 				"Level": 40,
 				"Monsters": ["Guard[+]"],
-				"Output": "Guard",
+				"Output": "Guard[+]",
 				"Primary": true
 			},
 			"Pickpocket a ~|hero|~": {
@@ -50106,7 +50111,7 @@
 			"Pickpocket a ~|knight|~": {
 				"Level": 55,
 				"Monsters": ["Knight[+]"],
-				"Output": "Knight of Ardougne",
+				"Output": "Knight[+]",
 				"Primary": true,
 				"Priority": 2
 			},
@@ -50145,7 +50150,7 @@
 			"Pickpocket a ~|citizen|~": {
 				"Level": 1,
 				"Mix": ["Citizen[+]"],
-				"Output": "Citizen",
+				"Output": "Citizen[+]",
 				"Primary": true,
 				"Priority": 1,
 				"NoBoost": true
@@ -50165,14 +50170,14 @@
 			"Pickpocket a ~|rogue|~": {
 				"Level": 32,
 				"Monsters": ["Rogue[+]"],
-				"Output": "Rogue",
+				"Output": "Rogue[+]",
 				"Primary": true,
 				"Priority": 1
 			},
 			"Pickpocket a ~|vyre|~": {
 				"Level": 82,
 				"NPCs": ["Vyre[+]"],
-				"Output": "Vyre",
+				"Output": "Vyre[+]",
 				"Primary": true,
 				"Priority": 1
 			},
@@ -50207,13 +50212,13 @@
 			"Pickpocket a LLetya ~|elf|~": {
 				"Level": 85,
 				"NPCs": ["ElfLletya[+]"],
-				"Output": "Elf#Lletya (Thieving)",
+				"Output": "ElfLletya[+]",
 				"Primary": true
 			},
 			"Pickpocket a Prifddinas ~|elf|~": {
 				"Level": 85,
 				"NPCs": ["ElfPrifddinas[+]"],
-				"Output": "Elf#Prifddinas (Thieving)",
+				"Output": "ElfPrifddinas[+]",
 				"Primary": true
 			},
 			"Steal a ~|cave goblin wire|~": {
@@ -50317,8 +50322,8 @@
 			},
 			"Steal from a ~|bakery stall|~": {
 				"Level": 5,
-				"Objects": ["Baker's stall[+]"],
-				"Output": "Bakery stall",
+				"Objects": ["Bakery stall[+]"],
+				"Output": "Bakery stall[+]",
 				"Primary": true,
 				"Priority": 1
 			},
@@ -50341,7 +50346,7 @@
 			"Steal from a ~|crafting stall|~": {
 				"Level": 5,
 				"Objects": ["Crafting stall[+]"],
-				"Output": "Crafting stall",
+				"Output": "Crafting stall[+]",
 				"Primary": true,
 				"Priority": 2
 			},
@@ -88383,7 +88388,7 @@
 				"BaseQuest": "The Dig Site",
 				"Description": "Pan in the river in the digsite",
 				"Chunks": ["13364"],
-				"Items": ["Panning tray", "Cup of tea"],
+				"Items": ["Panning tray", "DigsiteTea[+]"],
 				"Tasks": {
 					"~|The Dig Site|~ 3": "Quest"
 				},
@@ -146656,7 +146661,8 @@
 			"ShaikahanWeapon[+]": ["Adamant hasta(kp)", "Adamant spear(kp)", "Black spear(kp)", "Bronze hasta(kp)", "Bronze spear(kp)", "Dragon hasta(kp)", "Dragon spear(kp)", "Iron hasta(kp)", "Iron spear(kp)", "Mithril hasta(kp)", "Mithril spear(kp)", "Rune hasta(kp)", "Rune spear(kp)", "Steel hasta(kp)", "Steel spear(kp)"],
 			"ButterBase[+]": ["Bucket of milk", "Pot of cream"],
 			"CheeseBase[+]": ["Bucket of milk", "Pot of cream", "Pat of butter", "Pat of not garlic butter"],
-			"CatFur[+]": ["Fur", "Bear fur", "Grey wolf fur"]
+			"CatFur[+]": ["Fur", "Bear fur", "Grey wolf fur"],
+			"DigsiteTea[+]": ["Cup of tea", "Cup of tea (nettle)"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -147022,7 +147028,8 @@
 			"ShaikahanWeapon[+]": "Any karambwan-poisoned weapon",
 			"ButterBase[+]": "Any base ingredient that can be churned into a pat of butter",
 			"CheeseBase[+]": "Any base ingredient that can be churned into cheese",
-			"CatFur[+]": "Any fur used to craft a wooden cat"
+			"CatFur[+]": "Any fur used to craft a wooden cat",
+			"DigsiteTea[+]": "Any tea for the panning guide"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
@@ -147137,7 +147144,7 @@
 		"objectsPlus": {
 			"Adamantite[+]": ["Adamantite rocks", "Adamantite vein"],
 			"Anvil[+]": ["Anvil"],
-			"Baker's stall[+]": ["Baker's stall", "Baker's Stall"],
+			"Bakery stall[+]": ["Baker's stall", "Baker's Stall"],
 			"Clay[+]": ["Clay rocks", "Clay vein"],
 			"Coal[+]": ["Coal rocks", "Coal vein"],
 			"Compost Bin[+]": ["Compost Bin", "Big Compost Bin"],
@@ -147177,7 +147184,7 @@
 		"objectsPlusNames": {
 			"Adamantite[+]": "Any adamantite rock",
 			"Anvil[+]": "Any anvil",
-			"Baker's stall[+]": "Any baker's stall",
+			"Bakery stall[+]": "Any baker's stall",
 			"Clay[+]": "Any clay rock",
 			"Coal[+]": "Any coal rock",
 			"Compost Bin[+]": "Any compost bin",
@@ -212524,7 +212531,7 @@
 					"3": "Always"
 				}
 			},
-			"Bakery stall": {
+			"Bakery stall[+]": {
 				"Bread": {
 					"1": "1/4"
 				},
@@ -213022,7 +213029,7 @@
 					"1": "Always"
 				}
 			},
-			"Crafting stall": {
+			"Crafting stall[+]": {
 				"Amulet mould": {
 					"1": "1/6"
 				},
@@ -213102,7 +213109,7 @@
 					"3": "Always"
 				}
 			},
-			"Elf#Lletya (Thieving)": {
+			"ElfLletya[+]": {
 				"Coins": {
 					"280-350": "105/128"
 				},
@@ -213125,7 +213132,7 @@
 					"3": "5/128"
 				}
 			},
-			"Elf#Prifddinas (Thieving)": {
+			"ElfPrifddinas[+]": {
 				"Coins": {
 					"280-350": "105/128"
 				},
@@ -213159,7 +213166,7 @@
 					"1": "Always"
 				}
 			},
-			"Farmer": {
+			"Farmer[+]": {
 				"Coins": {
 					"9": "1/1.041"
 				},
@@ -213188,7 +213195,7 @@
 					"40": "Always"
 				}
 			},
-			"Fremennik citizen": {
+			"Fremennik citizen[+]": {
 				"Coins": {
 					"40": "Always"
 				}
@@ -213263,7 +213270,7 @@
 					"1": "1/3"
 				}
 			},
-			"Gnome": {
+			"Gnome[+]": {
 				"Clue scroll (medium)": {
 					"1": "1/150"
 				},
@@ -213326,7 +213333,7 @@
 					"1": "28/128"
 				}
 			},
-			"Guard": {
+			"Guard[+]": {
 				"Coins": {
 					"30": "Always"
 				}
@@ -213470,7 +213477,7 @@
 					"1": "6/500"
 				}
 			},
-			"H.A.M. Member": {
+			"H.A.M. Member[+]": {
 				"Bronze arrow": {
 					"1-13": "3/100"
 				},
@@ -213643,7 +213650,7 @@
 					"40": "Always"
 				}
 			},
-			"Knight of Ardougne": {
+			"Knight[+]": {
 				"Coins": {
 					"50": "Always"
 				}
@@ -213675,7 +213682,7 @@
 					"1": "1/5"
 				}
 			},
-			"Citizen": {
+			"Citizen[+]": {
 				"Coins": {
 					"3": "Always"
 				}
@@ -214079,7 +214086,7 @@
 					"40": "Always"
 				}
 			},
-			"Rogue": {
+			"Rogue[+]": {
 				"Air rune": {
 					"8": "8/128"
 				},
@@ -214438,7 +214445,7 @@
 					"5": "Always"
 				}
 			},
-			"Vyre": {
+			"Vyre[+]": {
 				"Blood pint": {
 					"1": "6/132"
 				},
