@@ -147072,7 +147072,8 @@
 			"UncutOnyxMonsters[+]": ["Zulrah", "Skotizo", "Zalcano"],
 			"DT2Boss[+]": ["Duke Sucellus", "The Leviathan", "Vardorvis", "The Whisperer"],
 			"RoyalTitans[+]": ["Branda the Fire Queen", "Eldric the Ice King"],
-			"Hellhound[+]": ["Hellhound", "Hellhound#Wilderness Slayer Cave"]
+			"Hellhound[+]": ["Hellhound", "Hellhound#Wilderness Slayer Cave"],
+			"Farmer[+]": ["Farmer", "Farmer (Varlamore)"]
 		},
 		"monstersPlusNames": {
 			"Aberrant spectre[+]": "Any aberrant spectre",
@@ -147105,7 +147106,8 @@
 			"UncutOnyxMonsters[+]": "Any monster that drops an uncut onyx",
 			"DT2Boss[+]": "Any Desert Treasure II boss",
 			"RoyalTitans[+]": "Either Royal Titan",
-			"Hellhound[+]": "Any hellhound"
+			"Hellhound[+]": "Any hellhound",
+			"Farmer[+]": "Any pickpocketable farmer"
 		},
 		"npcsPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
@@ -147123,7 +147125,8 @@
 			"FishingContestDwarf[+]": ["Austri", "Vestri"],
 			"AdeptHunter[+]": ["Guild Hunter Cervus (Adept)", "Guild Hunter Ornus (Adept)"],
 			"ExpertHunter[+]": ["Guild Hunter Aco (Expert)", "Guild Hunter Teco (Expert)"],
-			"PointSlayerMasters[+]": ["Mazchna", "Vannaka", "Chaeldar", "Nieve", "Duradel", "Konar quo Maten", "Krystilia"]
+			"PointSlayerMasters[+]": ["Mazchna", "Vannaka", "Chaeldar", "Nieve", "Duradel", "Konar quo Maten", "Krystilia"],
+			"Farmer[+]": ["Farmer", "Farmer (Varlamore)"]
 		},
 		"npcsPlusNames": {
 			"Citizen[+]": "Any pickpocketable citizen",
@@ -147141,7 +147144,8 @@
 			"FishingContestDwarf[+]": "Either Fishing Contest dwarf brother",
 			"AdeptHunter[+]": "Any adept guild hunter",
 			"ExpertHunter[+]": "Any expert guild hunter",
-			"PointSlayerMasters[+]": "Any point-giving slayer master"
+			"PointSlayerMasters[+]": "Any point-giving slayer master",
+			"Farmer[+]": "Any pickpocketable farmer"
 		},
 		"objectsPlus": {
 			"Adamantite[+]": ["Adamantite rocks", "Adamantite vein"],
