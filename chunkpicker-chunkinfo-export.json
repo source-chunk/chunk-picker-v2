@@ -78795,7 +78795,7 @@
 			"~|Combat Achievements#Easy|~ A Demon's Best Friend": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill a Hellhound.",
-				"Monsters": ["Hellhound"],
+				"Monsters": ["Hellhound[+]"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 1
@@ -147071,7 +147071,8 @@
 			"DragonPickaxeDropper[+]": ["Artio", "Callisto", "Calvar'ion", "Chaos Elemental", "Kalphite Queen", "King Black Dragon", "Spindel", "Venenatis", "Vet'ion"],
 			"UncutOnyxMonsters[+]": ["Zulrah", "Skotizo", "Zalcano"],
 			"DT2Boss[+]": ["Duke Sucellus", "The Leviathan", "Vardorvis", "The Whisperer"],
-			"RoyalTitans[+]": ["Branda the Fire Queen", "Eldric the Ice King"]
+			"RoyalTitans[+]": ["Branda the Fire Queen", "Eldric the Ice King"],
+			"Hellhound[+]": ["Hellhound", "Hellhound#Wilderness Slayer Cave"]
 		},
 		"monstersPlusNames": {
 			"Aberrant spectre[+]": "Any aberrant spectre",
@@ -147103,7 +147104,8 @@
 			"DragonPickaxeDropper[+]": "Any monster that drops the dragon pickaxe",
 			"UncutOnyxMonsters[+]": "Any monster that drops an uncut onyx",
 			"DT2Boss[+]": "Any Desert Treasure II boss",
-			"RoyalTitans[+]": "Either Royal Titan"
+			"RoyalTitans[+]": "Either Royal Titan",
+			"Hellhound[+]": "Any hellhound"
 		},
 		"npcsPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
