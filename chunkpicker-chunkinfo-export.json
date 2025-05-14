@@ -9,6 +9,21 @@
 				"Priority": 2,
 				"NoPet": true
 			},
+			"Access the Chasm of Fire gap ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Gap (Chasm of Fire)"],
+				"Level": 73,
+				"Primary": true,
+				"Priority": 3,
+				"NoPet": true
+			},
+			"Access the Chasm of Fire chain ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Chain (Chasm of Fire)"],
+				"Level": 83,
+				"Primary": true,
+				"NoPet": true
+			},
 			"Access the Ralos' Rise rock climb ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Rocks (Ralos' Rise)"],
@@ -12421,6 +12436,7 @@
 				"Items": ["AncientWarriorArmour[+]"],
 				"Level": 78,
 				"Primary": false,
+				"Priority": 2,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -12768,6 +12784,33 @@
 			"Wear ~|bandos armour|~": {
 				"Items": ["Bandos armour[+]"],
 				"Level": 65,
+				"Primary": false,
+				"Priority": 1,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wear ~|zaryte vambraces|~": {
+				"Items": ["Zaryte vambraces"],
+				"Level": 45,
+				"Primary": false,
+				"Skills": {
+					"Ranged": 80
+				},
+				"Priority": 10,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wear ~|torva armour|~": {
+				"Items": ["Torva armour[+]"],
+				"Level": 80,
+				"Primary": false,
+				"Priority": 5,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wear ~|oathplate armour|~": {
+				"Items": ["Oathplate armour[+]"],
+				"Level": 78,
 				"Primary": false,
 				"Priority": 1,
 				"Not F2P": true,
@@ -15814,7 +15857,7 @@
 				"NoBoost": true
 			},
 			"Catch a ~|raw anglerfish|~": {
-				"Items": ["Fishing rod[+]", "Sandworms*"],
+				"Items": ["Fishing rod[+]", "AnglerfishWorms[+]*"],
 				"Level": 82,
 				"Objects": ["Fishing spot (anglerfish)"],
 				"Output": "Raw anglerfish",
@@ -17903,7 +17946,8 @@
 				"Items": ["Toadflax potion (unf)*", "Crushed nest*"],
 				"Level": 81,
 				"Output": "Saradomin brew(3)",
-				"Primary": true
+				"Primary": true,
+				"Priority": 1
 			},
 			"Mix a ~|goblin potion|~": {
 				"Items": ["Toadflax potion (unf)*", "Pharmakos berries*"],
@@ -17918,6 +17962,13 @@
 				"Items": ["Torstol potion (unf)*", "Jangerberries*"],
 				"Level": 78,
 				"Output": "Zamorak brew(3)",
+				"Primary": true,
+				"Priority": 2
+			},
+			"Mix a ~|surge potion|~": {
+				"Items": ["Torstol potion (unf)*", "Demonic tallow*"],
+				"Level": 81,
+				"Output": "Surge potion(3)",
 				"Primary": true,
 				"Priority": 2
 			},
@@ -20068,7 +20119,7 @@
 			},
 			"Participate in all parts of the ~|Magic Training Arena|~": {
 				"Chunks": ["13363"],
-				"Items": ["Air rune[+]*", "Water rune[+]*", "Earth rune[+]*", "Fire rune[+]*", "Law rune*", "Nature rune*", "Cosmic rune*"],
+				"Items": ["Air rune[+]*", "Water rune[+]*", "Earth rune[+]*", "Fire rune[+]*", "Law rune*", "Nature rune*", "Cosmic rune[+]*"],
 				"Level": 33,
 				"Output": "Progress hat",
 				"Primary": false,
@@ -20122,7 +20173,7 @@
 			"Cast ~|ape atoll teleport (arceuus)|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["6716-1", "Ape Atoll Dungeon"],
-				"Items": ["Soul rune*", "Blood rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Blood rune*", "Law rune*"],
 				"Level": 90,
 				"Primary": true,
 				"Priority": 5,
@@ -20178,7 +20229,7 @@
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["6716-1", "14131-1"],
 				"NPCs": ["Tyss"],
-				"Items": ["Soul rune*", "Blood rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Blood rune*", "Law rune*"],
 				"Level": 83,
 				"Primary": true,
 				"Priority": 1,
@@ -20212,7 +20263,7 @@
 			},
 			"Cast ~|blood barrage|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Soul rune*", "Blood rune*", "Death rune*"],
+				"Items": ["Soul rune[+]*", "Blood rune*", "Death rune*"],
 				"Level": 92,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -20297,7 +20348,7 @@
 			"Cast ~|carrallanger teleport|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["12601"],
-				"Items": ["Soul rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Law rune*"],
 				"Level": 84,
 				"Primary": true,
 				"Priority": 2,
@@ -20322,7 +20373,7 @@
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["6716-1", "11834"],
 				"NPCs": ["Tyss"],
-				"Items": ["Soul rune*", "Blood rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Blood rune*", "Law rune*"],
 				"Level": 71,
 				"Primary": true,
 				"Priority": 1,
@@ -20330,7 +20381,7 @@
 			},
 			"Cast ~|charge air orb|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Unpowered orb"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Unpowered orb"],
 				"Objects": ["Obelisk of Air"],
 				"Level": 66,
 				"Output": "Air orb",
@@ -20340,7 +20391,7 @@
 			},
 			"Cast ~|charge earth orb|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Unpowered orb"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Unpowered orb"],
 				"Objects": ["Obelisk of Earth"],
 				"Level": 60,
 				"Output": "Earth orb",
@@ -20350,7 +20401,7 @@
 			},
 			"Cast ~|charge fire orb|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Unpowered orb"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Unpowered orb"],
 				"Objects": ["Obelisk of Fire"],
 				"Level": 63,
 				"Output": "Fire orb",
@@ -20359,7 +20410,7 @@
 			},
 			"Cast ~|charge water orb|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Unpowered orb"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Unpowered orb"],
 				"Objects": ["Obelisk of Water"],
 				"Level": 56,
 				"Output": "Water orb",
@@ -20413,7 +20464,7 @@
 			},
 			"Cast ~|cure me|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Cosmic rune*", "Law rune*", "Astral rune*"],
+				"Items": ["Cosmic rune[+]*", "Law rune*", "Astral rune*"],
 				"Level": 71,
 				"Primary": true,
 				"Priority": 2,
@@ -20476,7 +20527,7 @@
 			},
 			"Cast ~|dream|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Body rune*", "Cosmic rune*", "Astral rune*"],
+				"Items": ["Body rune*", "Cosmic rune[+]*", "Astral rune*"],
 				"Level": 79,
 				"Primary": true,
 				"Priority": 2,
@@ -20545,7 +20596,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (diamond)|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Law rune*", "Diamond bolts"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Law rune*", "Diamond bolts"],
 				"Level": 57,
 				"Primary": true,
 				"Output": "Diamond bolts (e)",
@@ -20554,7 +20605,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (dragonstone)|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Soul rune*", "Dragonstone bolts"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Soul rune[+]*", "Dragonstone bolts"],
 				"Level": 68,
 				"Primary": true,
 				"Output": "Dragonstone bolts (e)",
@@ -20563,7 +20614,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (emerald)|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Nature rune*", "Emerald bolts"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Nature rune*", "Emerald bolts"],
 				"Level": 27,
 				"Primary": true,
 				"Output": "Emerald bolts (e)",
@@ -20572,7 +20623,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (jade)|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Jade bolts"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Jade bolts"],
 				"Level": 14,
 				"Primary": true,
 				"Output": "Jade bolts (e)",
@@ -20580,7 +20631,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (onyx)|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Death rune*", "Onyx bolts"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Death rune*", "Onyx bolts"],
 				"Level": 87,
 				"Primary": true,
 				"Output": "Onyx bolts (e)",
@@ -20589,7 +20640,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (opal)|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Opal bolts"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Opal bolts"],
 				"Level": 4,
 				"Primary": true,
 				"Output": "Opal bolts (e)",
@@ -20597,7 +20648,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (pearl)|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Pearl bolts"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Pearl bolts"],
 				"Level": 24,
 				"Primary": true,
 				"Output": "Pearl bolts (e)",
@@ -20605,7 +20656,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (red topaz)|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Topaz bolts"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Topaz bolts"],
 				"Level": 29,
 				"Primary": true,
 				"Output": "Topaz bolts (e)",
@@ -20614,7 +20665,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (ruby)|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Blood rune*", "Ruby bolts"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Blood rune*", "Ruby bolts"],
 				"Level": 49,
 				"Primary": true,
 				"Output": "Ruby bolts (e)",
@@ -20623,7 +20674,7 @@
 			},
 			"Cast ~|enchant crossbow bolt (sapphire)|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Mind rune*", "Sapphire bolts"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Mind rune*", "Sapphire bolts"],
 				"Level": 7,
 				"Primary": true,
 				"Output": "Sapphire bolts (e)",
@@ -20642,7 +20693,7 @@
 			},
 			"Cast ~|enfeeble|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Earth rune[+]*", "Water rune[+]*", "Soul rune*"],
+				"Items": ["Earth rune[+]*", "Water rune[+]*", "Soul rune[+]*"],
 				"Level": 73,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -20678,7 +20729,7 @@
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["6716-1", "14135"],
 				"NPCs": ["Tyss"],
-				"Items": ["Earth rune[+]*", "Soul rune*", "Law rune*"],
+				"Items": ["Earth rune[+]*", "Soul rune[+]*", "Law rune*"],
 				"Level": 48,
 				"Primary": true,
 				"Priority": 2,
@@ -20702,7 +20753,6 @@
 				"Level": 59,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
-				"Priority": 1,
 				"Priority": 1
 			},
 			"Cast ~|fire blast|~ from a rune pouch (Castle Wars)": {
@@ -20710,8 +20760,7 @@
 				"Items": ["Rune pouch (Castle Wars)"],
 				"Level": 59,
 				"Primary": false,
-				"Priority": 198,
-				"Priority": 1
+				"Priority": 198
 			},
 			"Cast ~|fire bolt|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
@@ -20822,7 +20871,7 @@
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["6716-1", "15148"],
 				"NPCs": ["Tyss"],
-				"Items": ["Soul rune*", "Nature rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Nature rune*", "Law rune*"],
 				"Level": 65,
 				"Primary": true,
 				"Priority": 4,
@@ -21094,7 +21143,7 @@
 			},
 			"Cast ~|lvl-1 enchant|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Sapphire Opal jewellery[+]"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Sapphire Opal jewellery[+]"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 1,
@@ -21102,7 +21151,7 @@
 			},
 			"Enchant an ~|opal ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Opal ring*"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Opal ring*"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 7,
@@ -21111,7 +21160,7 @@
 			},
 			"Enchant an ~|opal necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Opal necklace*"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Opal necklace*"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 8,
@@ -21120,7 +21169,7 @@
 			},
 			"Enchant an ~|opal bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Opal bracelet*"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Opal bracelet*"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 9,
@@ -21129,7 +21178,7 @@
 			},
 			"Enchant an ~|opal amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Opal amulet (u)*", "Ball of wool*"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Opal amulet (u)*", "Ball of wool*"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 10,
@@ -21138,7 +21187,7 @@
 			},
 			"Enchant a ~|sapphire ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Sapphire ring*"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Sapphire ring*"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 3,
@@ -21147,7 +21196,7 @@
 			},
 			"Enchant a ~|sapphire necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Sapphire necklace*"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Sapphire necklace*"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 4,
@@ -21156,7 +21205,7 @@
 			},
 			"Enchant a ~|sapphire bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Sapphire bracelet*"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Sapphire bracelet*"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 5,
@@ -21165,7 +21214,7 @@
 			},
 			"Enchant a ~|sapphire amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Cosmic rune*", "Sapphire amulet*"],
+				"Items": ["Water rune[+]*", "Cosmic rune[+]*", "Sapphire amulet*"],
 				"Level": 7,
 				"Primary": true,
 				"Priority": 6,
@@ -21173,7 +21222,7 @@
 			},
 			"Cast ~|lvl-2 enchant|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Emerald Jade jewellery[+]"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Emerald Jade jewellery[+]"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 1,
@@ -21181,7 +21230,7 @@
 			},
 			"Enchant a ~|jade ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Jade ring*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Jade ring*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 7,
@@ -21190,7 +21239,7 @@
 			},
 			"Enchant a ~|jade necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Jade necklace*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Jade necklace*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 8,
@@ -21199,7 +21248,7 @@
 			},
 			"Enchant a ~|jade bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Jade bracelet*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Jade bracelet*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 9,
@@ -21208,7 +21257,7 @@
 			},
 			"Enchant a ~|jade amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Jade amulet*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Jade amulet*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 10,
@@ -21217,7 +21266,7 @@
 			},
 			"Enchant an ~|emerald ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Emerald ring*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Emerald ring*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 3,
@@ -21226,7 +21275,7 @@
 			},
 			"Enchant an ~|emerald necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Emerald necklace*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Emerald necklace*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 4,
@@ -21235,7 +21284,7 @@
 			},
 			"Enchant an ~|emerald bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Emerald bracelet*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Emerald bracelet*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 5,
@@ -21244,7 +21293,7 @@
 			},
 			"Enchant an ~|emerald amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Emerald amulet (u)*", "Ball of wool*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Emerald amulet (u)*", "Ball of wool*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 6,
@@ -21252,7 +21301,7 @@
 			},
 			"Enchant a ~|pre-nature amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Emerald amulet (u)*", "Magic string*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Emerald amulet (u)*", "Magic string*"],
 				"Level": 27,
 				"Primary": true,
 				"Priority": 11,
@@ -21261,7 +21310,7 @@
 			},
 			"Cast ~|lvl-3 enchant|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Ruby Topaz jewellery[+]"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Ruby Topaz jewellery[+]"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 1,
@@ -21269,7 +21318,7 @@
 			},
 			"Enchant a ~|topaz ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Topaz ring*"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Topaz ring*"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 7,
@@ -21278,7 +21327,7 @@
 			},
 			"Enchant a ~|topaz necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Topaz necklace*"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Topaz necklace*"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 8,
@@ -21287,7 +21336,7 @@
 			},
 			"Enchant a ~|topaz bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Topaz bracelet*"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Topaz bracelet*"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 9,
@@ -21296,7 +21345,7 @@
 			},
 			"Enchant a ~|topaz amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Topaz amulet*"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Topaz amulet*"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 10,
@@ -21305,7 +21354,7 @@
 			},
 			"Enchant a ~|ruby ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Ruby ring*"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Ruby ring*"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 3,
@@ -21314,7 +21363,7 @@
 			},
 			"Enchant a ~|ruby necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Ruby necklace*"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Ruby necklace*"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 4,
@@ -21323,7 +21372,7 @@
 			},
 			"Enchant a ~|ruby bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Ruby bracelet*"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Ruby bracelet*"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 5,
@@ -21332,7 +21381,7 @@
 			},
 			"Enchant a ~|ruby amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Fire rune[+]*", "Cosmic rune*", "Ruby amulet*"],
+				"Items": ["Fire rune[+]*", "Cosmic rune[+]*", "Ruby amulet*"],
 				"Level": 49,
 				"Primary": true,
 				"Priority": 6,
@@ -21340,7 +21389,7 @@
 			},
 			"Cast ~|lvl-4 enchant|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Diamond jewellery[+]"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Diamond jewellery[+]"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 1,
@@ -21348,7 +21397,7 @@
 			},
 			"Enchant a ~|diamond ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Diamond ring*"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Diamond ring*"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 3,
@@ -21357,7 +21406,7 @@
 			},
 			"Enchant a ~|diamond necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Diamond necklace*"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Diamond necklace*"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 4,
@@ -21366,7 +21415,7 @@
 			},
 			"Enchant a ~|diamond bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Diamond bracelet*"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Diamond bracelet*"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 5,
@@ -21375,7 +21424,7 @@
 			},
 			"Enchant a ~|diamond amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Diamond amulet*"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Diamond amulet*"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 6,
@@ -21383,7 +21432,7 @@
 			},
 			"Cast ~|lvl-5 enchant|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune*", "Dragonstone jewellery[+]"],
+				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune[+]*", "Dragonstone jewellery[+]"],
 				"Level": 68,
 				"Primary": true,
 				"Priority": 1,
@@ -21391,7 +21440,7 @@
 			},
 			"Enchant a ~|dragonstone ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune*", "Dragonstone ring*"],
+				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune[+]*", "Dragonstone ring*"],
 				"Level": 68,
 				"Primary": true,
 				"Priority": 6,
@@ -21400,7 +21449,7 @@
 			},
 			"Enchant a ~|dragon necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune*", "Dragon necklace*"],
+				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune[+]*", "Dragon necklace*"],
 				"Level": 68,
 				"Primary": true,
 				"Priority": 7,
@@ -21409,7 +21458,7 @@
 			},
 			"Enchant a ~|dragonstone bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune*", "Dragonstone bracelet*"],
+				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune[+]*", "Dragonstone bracelet*"],
 				"Level": 68,
 				"Primary": true,
 				"Priority": 8,
@@ -21418,7 +21467,7 @@
 			},
 			"Enchant a ~|dragonstone amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune*", "Dragonstone amulet*"],
+				"Items": ["Earth rune[+]*", "Water rune[+]*", "Cosmic rune[+]*", "Dragonstone amulet*"],
 				"Level": 68,
 				"Primary": true,
 				"Priority": 9,
@@ -21427,7 +21476,7 @@
 			},
 			"Cast ~|lvl-6 enchant|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune*", "Onyx jewellery[+]"],
+				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune[+]*", "Onyx jewellery[+]"],
 				"Level": 87,
 				"Primary": true,
 				"Priority": 1,
@@ -21435,7 +21484,7 @@
 			},
 			"Enchant an ~|onyx ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune*", "Onyx ring*"],
+				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune[+]*", "Onyx ring*"],
 				"Level": 87,
 				"Primary": true,
 				"Priority": 4,
@@ -21444,7 +21493,7 @@
 			},
 			"Enchant an ~|onyx necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune*", "Onyx necklace*"],
+				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune[+]*", "Onyx necklace*"],
 				"Level": 87,
 				"Primary": true,
 				"Priority": 5,
@@ -21453,7 +21502,7 @@
 			},
 			"Enchant an ~|onyx bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune*", "Onyx bracelet*"],
+				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune[+]*", "Onyx bracelet*"],
 				"Level": 87,
 				"Primary": true,
 				"Priority": 6,
@@ -21462,7 +21511,7 @@
 			},
 			"Enchant an ~|onyx amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune*", "Onyx amulet (u)*", "Ball of wool*"],
+				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune[+]*", "Onyx amulet (u)*", "Ball of wool*"],
 				"Level": 87,
 				"Primary": true,
 				"Priority": 7,
@@ -21471,7 +21520,7 @@
 			},
 			"Cast ~|lvl-7 enchant|~": {
 				"Category": ["Spells"],
-				"Items": ["Blood rune*", "Soul rune*", "Cosmic rune*", "Zenyte jewellery[+]"],
+				"Items": ["Blood rune*", "Soul rune[+]*", "Cosmic rune[+]*", "Zenyte jewellery[+]"],
 				"Level": 93,
 				"Primary": true,
 				"Priority": 1,
@@ -21479,7 +21528,7 @@
 			},
 			"Enchant a ~|zenyte ring|~": {
 				"Category": ["Spells"],
-				"Items": ["Blood rune*", "Soul rune*", "Cosmic rune*", "Zenyte ring*"],
+				"Items": ["Blood rune*", "Soul rune[+]*", "Cosmic rune[+]*", "Zenyte ring*"],
 				"Level": 93,
 				"Primary": true,
 				"Priority": 3,
@@ -21488,7 +21537,7 @@
 			},
 			"Enchant a ~|zenyte necklace|~": {
 				"Category": ["Spells"],
-				"Items": ["Blood rune*", "Soul rune*", "Cosmic rune*", "Zenyte necklace*"],
+				"Items": ["Blood rune*", "Soul rune[+]*", "Cosmic rune[+]*", "Zenyte necklace*"],
 				"Level": 93,
 				"Primary": true,
 				"Priority": 4,
@@ -21497,7 +21546,7 @@
 			},
 			"Enchant a ~|zenyte bracelet|~": {
 				"Category": ["Spells"],
-				"Items": ["Blood rune*", "Soul rune*", "Cosmic rune*", "Zenyte bracelet*"],
+				"Items": ["Blood rune*", "Soul rune[+]*", "Cosmic rune[+]*", "Zenyte bracelet*"],
 				"Level": 93,
 				"Primary": true,
 				"Priority": 5,
@@ -21506,7 +21555,7 @@
 			},
 			"Enchant a ~|zenyte amulet|~": {
 				"Category": ["Spells"],
-				"Items": ["Blood rune*", "Soul rune*", "Cosmic rune*", "Zenyte amulet*"],
+				"Items": ["Blood rune*", "Soul rune[+]*", "Cosmic rune[+]*", "Zenyte amulet*"],
 				"Level": 93,
 				"Primary": true,
 				"Priority": 6,
@@ -21544,7 +21593,7 @@
 			},
 			"Cast ~|monster examine|~": {
 				"Category": ["Spells"],
-				"Items": ["Mind rune*", "Cosmic rune*", "Astral rune*"],
+				"Items": ["Mind rune*", "Cosmic rune[+]*", "Astral rune*"],
 				"Level": 66,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -21567,7 +21616,7 @@
 			},
 			"Cast ~|npc contact|~": {
 				"Category": ["Spells"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Astral rune*"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Astral rune*"],
 				"Level": 67,
 				"Primary": true,
 				"Tasks": {
@@ -21623,7 +21672,7 @@
 				"Category": ["Spells"],
 				"Chunks": ["6716-1"],
 				"NPCs": ["Tyss"],
-				"Items": ["Body rune*", "Nature rune*", "Soul rune*", "Adept head[+]"],
+				"Items": ["Body rune*", "Nature rune*", "Soul rune[+]*", "Adept head[+]"],
 				"Level": 41,
 				"Primary": true,
 				"Priority": 2,
@@ -21633,7 +21682,7 @@
 				"Category": ["Spells"],
 				"Chunks": ["6716-1"],
 				"NPCs": ["Tyss"],
-				"Items": ["Blood rune*", "Nature rune*", "Soul rune*", "Expert head[+]"],
+				"Items": ["Blood rune*", "Nature rune*", "Soul rune[+]*", "Expert head[+]"],
 				"Level": 72,
 				"Primary": true,
 				"Priority": 2,
@@ -21643,7 +21692,7 @@
 				"Category": ["Spells"],
 				"Chunks": ["6716-1"],
 				"NPCs": ["Tyss"],
-				"Items": ["Blood rune*", "Nature rune*", "Soul rune*", "Master head[+]"],
+				"Items": ["Blood rune*", "Nature rune*", "Soul rune[+]*", "Master head[+]"],
 				"Level": 90,
 				"Primary": true,
 				"Priority": 2,
@@ -21696,7 +21745,7 @@
 			"Cast ~|superior demonbane|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Fire rune[+]*", "Soul rune*"],
+				"Items": ["Fire rune[+]*", "Soul rune[+]*"],
 				"Level": 62,
 				"Monsters": ["Demonic[+]"],
 				"Primary": true,
@@ -21709,7 +21758,7 @@
 			"Cast ~|dark demonbane|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Fire rune[+]*", "Soul rune*"],
+				"Items": ["Fire rune[+]*", "Soul rune[+]*"],
 				"Level": 82,
 				"Monsters": ["Demonic[+]"],
 				"Primary": true,
@@ -21722,7 +21771,7 @@
 			"Cast ~|lesser corruption|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Death rune*", "Soul rune*"],
+				"Items": ["Death rune*", "Soul rune[+]*"],
 				"Level": 64,
 				"Primary": true,
 				"Priority": 3,
@@ -21734,7 +21783,7 @@
 			"Cast ~|greater corruption|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Blood rune*", "Soul rune*"],
+				"Items": ["Blood rune*", "Soul rune[+]*"],
 				"Level": 85,
 				"Primary": true,
 				"Priority": 4,
@@ -21746,7 +21795,7 @@
 			"Cast ~|resurrect lesser ghost|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Mind rune*", "Book of the dead"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Mind rune*", "Book of the dead"],
 				"Level": 38,
 				"Primary": true,
 				"Priority": 1,
@@ -21755,7 +21804,7 @@
 			"Cast ~|resurrect lesser skeleton|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Mind rune*", "Book of the dead"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Mind rune*", "Book of the dead"],
 				"Level": 38,
 				"Primary": true,
 				"Priority": 2,
@@ -21764,7 +21813,7 @@
 			"Cast ~|resurrect lesser zombie|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Air rune[+]*", "Cosmic rune*", "Mind rune*", "Book of the dead"],
+				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Mind rune*", "Book of the dead"],
 				"Level": 38,
 				"Primary": true,
 				"Priority": 3,
@@ -21773,7 +21822,7 @@
 			"Cast ~|resurrect superior ghost|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Death rune*", "Book of the dead"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Death rune*", "Book of the dead"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 7,
@@ -21782,7 +21831,7 @@
 			"Cast ~|resurrect superior skeleton|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Death rune*", "Book of the dead"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Death rune*", "Book of the dead"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 8,
@@ -21791,7 +21840,7 @@
 			"Cast ~|resurrect superior zombie|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Earth rune[+]*", "Cosmic rune*", "Death rune*", "Book of the dead"],
+				"Items": ["Earth rune[+]*", "Cosmic rune[+]*", "Death rune*", "Book of the dead"],
 				"Level": 57,
 				"Primary": true,
 				"Priority": 9,
@@ -21800,7 +21849,7 @@
 			"Cast ~|resurrect greater ghost|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Fire rune[+]*", "Blood rune*", "Cosmic rune*", "Book of the dead"],
+				"Items": ["Fire rune[+]*", "Blood rune*", "Cosmic rune[+]*", "Book of the dead"],
 				"Level": 76,
 				"Primary": true,
 				"Priority": 4,
@@ -21809,7 +21858,7 @@
 			"Cast ~|resurrect greater skeleton|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Fire rune[+]*", "Blood rune*", "Cosmic rune*", "Book of the dead"],
+				"Items": ["Fire rune[+]*", "Blood rune*", "Cosmic rune[+]*", "Book of the dead"],
 				"Level": 76,
 				"Primary": true,
 				"Priority": 5,
@@ -21818,7 +21867,7 @@
 			"Cast ~|resurrect greater zombie|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Fire rune[+]*", "Blood rune*", "Cosmic rune*", "Book of the dead"],
+				"Items": ["Fire rune[+]*", "Blood rune*", "Cosmic rune[+]*", "Book of the dead"],
 				"Level": 76,
 				"Primary": true,
 				"Priority": 6,
@@ -21827,7 +21876,7 @@
 			"Cast ~|mark of darkness|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Cosmic rune*", "Soul rune*"],
+				"Items": ["Cosmic rune[+]*", "Soul rune[+]*"],
 				"Level": 59,
 				"Primary": true,
 				"Priority": 2,
@@ -21839,7 +21888,7 @@
 			"Cast ~|ward of arceuus|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Cosmic rune*", "Nature rune*", "Soul rune*"],
+				"Items": ["Cosmic rune[+]*", "Nature rune*", "Soul rune[+]*"],
 				"Level": 73,
 				"Primary": true,
 				"Priority": 2,
@@ -21851,7 +21900,7 @@
 			"Cast ~|demonic offering|~": {
 				"Category": ["Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Soul rune*", "Wrath rune*"],
+				"Items": ["Soul rune[+]*", "Wrath rune*"],
 				"Level": 84,
 				"Primary": true,
 				"Priority": 3,
@@ -21875,7 +21924,7 @@
 			"Cast ~|shadow veil|~": {
 				"Category": ["Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune*"],
+				"Items": ["Earth rune[+]*", "Fire rune[+]*", "Cosmic rune[+]*"],
 				"Level": 47,
 				"Primary": true,
 				"Priority": 2,
@@ -21899,7 +21948,7 @@
 			"Cast ~|vile vigour|~": {
 				"Category": ["Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Air rune[+]*", "Soul rune*"],
+				"Items": ["Air rune[+]*", "Soul rune[+]*"],
 				"Level": 66,
 				"Primary": true,
 				"Priority": 7,
@@ -21935,7 +21984,7 @@
 			"Cast ~|death charge|~": {
 				"Category": ["Spells"],
 				"NPCs": ["Tyss"],
-				"Items": ["Blood rune*", "Death rune*", "Soul rune*"],
+				"Items": ["Blood rune*", "Death rune*", "Soul rune[+]*"],
 				"Level": 80,
 				"Primary": true,
 				"Priority": 5,
@@ -21946,7 +21995,7 @@
 			},
 			"Cast ~|recharge dragonstone|~": {
 				"Category": ["Spells"],
-				"Items": ["Water rune[+]*", "Soul rune*", "Astral rune*"],
+				"Items": ["Water rune[+]*", "Soul rune[+]*", "Astral rune*"],
 				"Level": 89,
 				"Primary": true,
 				"Priority": 2,
@@ -21960,7 +22009,7 @@
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["6716-1"],
 				"NPCs": ["Tyss"],
-				"Items": ["Soul rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Law rune*"],
 				"Level": 34,
 				"Primary": true,
 				"Not F2P": true
@@ -21969,7 +22018,7 @@
 				"Category": ["Spells"],
 				"Chunks": ["6716-1"],
 				"NPCs": ["Tyss"],
-				"Items": ["Earth rune[+]*", "Nature rune*", "Blood rune*", "Soul rune*"],
+				"Items": ["Earth rune[+]*", "Nature rune*", "Blood rune*", "Soul rune[+]*"],
 				"Level": 78,
 				"Objects": ["Patch[+]"],
 				"Primary": true,
@@ -21980,7 +22029,7 @@
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["6716-1", "13622-2"],
 				"NPCs": ["Tyss"],
-				"Items": ["Soul rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Law rune*"],
 				"Level": 40,
 				"Primary": true,
 				"Priority": 2,
@@ -22000,7 +22049,7 @@
 			"Cast ~|senntisten teleport|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["13364"],
-				"Items": ["Soul rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Law rune*"],
 				"Level": 60,
 				"Primary": true,
 				"Priority": 6,
@@ -22011,7 +22060,7 @@
 			},
 			"Cast ~|shadow barrage|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Soul rune*", "Air rune[+]*", "Blood rune*", "Death rune*"],
+				"Items": ["Soul rune[+]*", "Air rune[+]*", "Blood rune*", "Death rune*"],
 				"Level": 88,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -22023,7 +22072,7 @@
 			},
 			"Cast ~|shadow blitz|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Soul rune*", "Air rune[+]*", "Blood rune*", "Death rune*"],
+				"Items": ["Soul rune[+]*", "Air rune[+]*", "Blood rune*", "Death rune*"],
 				"Level": 76,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -22035,7 +22084,7 @@
 			},
 			"Cast ~|shadow burst|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Air rune[+]*", "Soul rune*", "Chaos rune*", "Death rune*"],
+				"Items": ["Air rune[+]*", "Soul rune[+]*", "Chaos rune*", "Death rune*"],
 				"Level": 64,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -22047,7 +22096,7 @@
 			},
 			"Cast ~|shadow rush|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Air rune[+]*", "Soul rune*", "Chaos rune*", "Death rune*"],
+				"Items": ["Air rune[+]*", "Soul rune[+]*", "Chaos rune*", "Death rune*"],
 				"Level": 52,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -22124,7 +22173,7 @@
 			},
 			"Cast ~|spellbook swap|~": {
 				"Category": ["Spells"],
-				"Items": ["Law rune*", "Cosmic rune*", "Astral rune*"],
+				"Items": ["Law rune*", "Cosmic rune[+]*", "Astral rune*"],
 				"Level": 96,
 				"Primary": true,
 				"Priority": 2,
@@ -22157,7 +22206,7 @@
 			},
 			"Cast ~|stat spy|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Body rune*", "Cosmic rune*", "Astral rune*"],
+				"Items": ["Body rune*", "Cosmic rune[+]*", "Astral rune*"],
 				"Level": 75,
 				"Primary": true,
 				"Priority": 3,
@@ -22179,7 +22228,7 @@
 			},
 			"Cast ~|stun|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Earth rune[+]*", "Water rune[+]*", "Soul rune*"],
+				"Items": ["Earth rune[+]*", "Water rune[+]*", "Soul rune[+]*"],
 				"Level": 80,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -22436,7 +22485,7 @@
 			},
 			"Cast ~|teleother camelot|~": {
 				"Category": ["Spells", "Combat and Teleport Spells", "PVP-Only Spells"],
-				"Items": ["Soul rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Law rune*"],
 				"Level": 90,
 				"Primary": true,
 				"Priority": 3,
@@ -22444,7 +22493,7 @@
 			},
 			"Cast ~|teleother falador|~": {
 				"Category": ["Spells", "Combat and Teleport Spells", "PVP-Only Spells"],
-				"Items": ["Water rune[+]*", "Soul rune*", "Law rune*"],
+				"Items": ["Water rune[+]*", "Soul rune[+]*", "Law rune*"],
 				"Level": 82,
 				"Primary": true,
 				"Priority": 3,
@@ -22452,7 +22501,7 @@
 			},
 			"Cast ~|teleother lumbridge|~": {
 				"Category": ["Spells", "Combat and Teleport Spells", "PVP-Only Spells"],
-				"Items": ["Earth rune[+]*", "Soul rune*", "Law rune*"],
+				"Items": ["Earth rune[+]*", "Soul rune[+]*", "Law rune*"],
 				"Level": 74,
 				"Primary": true,
 				"Priority": 3,
@@ -22551,7 +22600,7 @@
 			},
 			"Cast ~|vulnerability|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
-				"Items": ["Water rune[+]*", "Earth rune[+]*", "Soul rune*"],
+				"Items": ["Water rune[+]*", "Earth rune[+]*", "Soul rune[+]*"],
 				"Level": 66,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -22651,7 +22700,7 @@
 			"Cast ~|west ardougne teleport|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
 				"Chunks": ["6716-1", "10035-1"],
-				"Items": ["Soul rune*", "Law rune*"],
+				"Items": ["Soul rune[+]*", "Law rune*"],
 				"Level": 61,
 				"Primary": true,
 				"Priority": 2,
@@ -23010,6 +23059,14 @@
 				"Skills": {
 					"Defence": 50
 				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wield a ~|soulflame horn|~": {
+				"Items": ["Soulflame horn"],
+				"Level": 80,
+				"Primary": false,
+				"Priority": 10,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -23750,6 +23807,22 @@
 				"Output": "Calcified loot",
 				"Primary": true
 			},
+			"Mine an ~|infernal shale deposit|~ in the Chasm of Fire": {
+				"Items": ["Pickaxe[+]"],
+				"Objects": ["Infernal shale deposit"],
+				"Level": 78,
+				"Priority": 1,
+				"Output": "Infernal shale",
+				"Primary": true
+			},
+			"Mine ~|infernal shale rocks|~ in the Chasm of Fire": {
+				"Items": ["Pickaxe[+]"],
+				"Objects": ["Infernal shale rocks"],
+				"Level": 78,
+				"Priority": 2,
+				"Output": "Infernal shale",
+				"Primary": true
+			},
 			"Mine an ~|amalgamation|~ in the scar essence mine": {
 				"Chunks": ["Scar essence mine"],
 				"Items": ["Pickaxe[+]"],
@@ -23763,6 +23836,7 @@
 				"Chunks": ["Meiyerditch Laboratories"],
 				"Items": ["Pickaxe[+]"],
 				"Level": 78,
+				"Priority": 3,
 				"Primary": false,
 				"NoPet": true
 			},
@@ -24668,7 +24742,26 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
-			"Pout nettle tea into a cup*": {
+			"Forgotten lockbox loot*": {
+				"Items": ["Forgotten lockbox*"],
+				"Output": "Forgotten lockbox loot",
+				"Not F2P": true
+			},
+			"Dossier (Yama) loot*": {
+				"Items": ["Dossier (Yama)*"],
+				"Output": "Dossier (Yama) loot"
+			},
+			"Open a barrel of demonic tallow": {
+				"Items": ["Barrel of demonic tallow (full)"],
+				"Output": "Demonic tallow",
+				"Not F2P": true
+			},
+			"Crush infernal shale": {
+				"Items": ["Hammer[+]", "Chisel", "Infernal shale*"],
+				"Output": "Crushed infernal shale",
+				"Not F2P": true
+			},
+			"Pour nettle tea into a cup*": {
 				"Items": ["Empty cup*", "Nettle tea*"],
 				"Output": "Cup of tea (nettle)",
 				"Not F2P": true
@@ -39168,7 +39261,7 @@
 				"NPCs": ["Sherlock"],
 				"ClueTier": "elite",
 				"ClueType": "Sherlock",
-				"Items": ["Earth rune[+]", "Water rune[+]", "Cosmic rune", "Dragonstone jewellery[+]"],
+				"Items": ["Earth rune[+]", "Water rune[+]", "Cosmic rune[+]", "Dragonstone jewellery[+]"],
 				"Skills": {
 					"Magic": 68
 				},
@@ -39452,7 +39545,7 @@
 				"Chunks": ["6714"],
 				"ClueTier": "master",
 				"ClueType": "Sherlock",
-				"Items": ["Dark essence block", "Soul rune", "Law rune", "Blood rune"],
+				"Items": ["Dark essence block", "Soul rune[+]", "Law rune", "Blood rune"],
 				"Skills": {
 					"Magic": 83
 				},
@@ -39659,7 +39752,7 @@
 				"Chunks": ["6716-1"],
 				"ClueTier": "master",
 				"ClueType": "Sherlock",
-				"Items": ["Ensouled abyssal head", "Soul rune", "Blood rune", "Nature rune"],
+				"Items": ["Ensouled abyssal head", "Soul rune[+]", "Blood rune", "Nature rune"],
 				"Skills": {
 					"Magic": 90,
 					"Slayer": 85
@@ -40221,6 +40314,13 @@
 			},
 			"Chasm of Fire": {
 				"UnlocksArea": true,
+				"Not F2P": true
+			},
+			"Yama's Domain": {
+				"UnlocksArea": true,
+				"Tasks": {
+					"~|A Kingdom Divided|~ Complete the quest": "Quest"
+				},
 				"Not F2P": true
 			},
 			"Clock Tower Dungeon": {
@@ -42912,6 +43012,17 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"Wear ~|zaryte vambraces|~": {
+				"Items": ["Zaryte vambraces"],
+				"Level": 80,
+				"Primary": false,
+				"Skills": {
+					"Defence": 45
+				},
+				"Priority": 10,
+				"Not F2P": true,
+				"NoBoost": true
+			},
 			"Wear ~|blue dragonhide armour|~": {
 				"Items": ["Blue dragonhide armour[+]"],
 				"Level": 50,
@@ -43063,6 +43174,13 @@
 					"Defence": 50
 				},
 				"Priority": 7,
+				"Not F2P": true
+			},
+			"Wield a ~|zaryte crossbow|~": {
+				"Items": ["Zaryte crossbow"],
+				"Level": 80,
+				"Primary": false,
+				"Priority": 11,
 				"Not F2P": true
 			},
 			"Wield an ~|eclipse atlatl|~": {
@@ -44232,6 +44350,15 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"Craft an ~|aether rune|~ at the Cosmic altar": {
+				"Chunks": ["Cosmic altar"],
+				"Items": ["Pure essence*", "Soul rune*", "Aether catalyst*"],
+				"Level": 90,
+				"Output": "Aether rune",
+				"Primary": true,
+				"Priority": 2,
+				"Not F2P": true
+			},
 			"Craft a ~|death rune|~": {
 				"Chunks": ["Death altar"],
 				"Items": ["Pure essence*"],
@@ -44467,6 +44594,7 @@
 				"Level": 90,
 				"Output": "Soul rune",
 				"Primary": true,
+				"Priority": 1,
 				"Not F2P": true
 			},
 			"Craft a ~|steam rune|~ at the Fire altar": {
@@ -46694,6 +46822,42 @@
 					"Prayer": 90
 				},
 				"Priority": 5,
+				"Not F2P": true
+			},
+			"Smelt an ~|infernal plate|~": {
+				"Items": ["Hammer", "Crushed infernal shale*", "Oathplate shards*"],
+				"Level": 83,
+				"Objects": ["Furnace (Chasm of Fire)", "Anvil (Chasm of Fire)", "Pool of ichor"],
+				"Output": "Infernal plate",
+				"Primary": true,
+				"Priority": 3,
+				"Not F2P": true
+			},
+			"Smith an ~|oathplate helm|~": {
+				"Items": ["Hammer[+]", "Infernal plate*"],
+				"Level": 83,
+				"Objects": ["Anvil (Chasm of Fire)"],
+				"Output": "Oathplate helm",
+				"Primary": true,
+				"Priority": 4,
+				"Not F2P": true
+			},
+			"Smith an ~|oathplate chest|~": {
+				"Items": ["Hammer[+]", "Infernal plate*"],
+				"Level": 83,
+				"Objects": ["Anvil (Chasm of Fire)"],
+				"Output": "Oathplate chest",
+				"Primary": true,
+				"Priority": 5,
+				"Not F2P": true
+			},
+			"Smith ~|oathplate legs|~": {
+				"Items": ["Hammer[+]", "Infernal plate*"],
+				"Level": 83,
+				"Objects": ["Anvil (Chasm of Fire)"],
+				"Output": "Oathplate legs",
+				"Primary": true,
+				"Priority": 6,
 				"Not F2P": true
 			},
 			"Repair a ~|torva full helm|~": {
@@ -52517,6 +52681,15 @@
 				"Set": "BIS Fish Barrel",
 				"Not F2P": true
 			},
+			"Obtain ~|diabolic worms|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Diabolic worms"],
+				"Tasks": {
+					"Catch a ~|raw anglerfish|~": "Fishing"
+				},
+				"Not F2P": true
+			},
 			"Obtain the ~|pyromancer hood|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
@@ -54840,6 +55013,78 @@
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Dragon axe"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain ~|yami|~": {
+				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Yami"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain a ~|chasm teleport scroll|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Chasm teleport scroll"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain an ~|oathplate helm|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Oathplate helm"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain an ~|oathplate chest|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Oathplate chest"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain an ~|oathplate legs|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Oathplate legs"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain a ~|soulflame horn|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Soulflame horn"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain a ~|dragon chainbody|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Dragon chainbody"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain a ~|rite of vile transference|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Rite of vile transference"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain a ~|forgotten lockbox|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Forgotten lockbox"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain a ~|dossier (Yama)|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Dossier (Yama)"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain a ~|barrel of demonic tallow (full)|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Barrel of demonic tallow (full)"],
+				"Not F2P": true
+			},
+			"(Yama) Obtain ~|oathplate shards|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Oathplate shards"],
 				"Not F2P": true
 			},
 			"(Zalcano) Obtain a ~|smolcano|~": {
@@ -59668,6 +59913,12 @@
 				"Items": ["Bran"],
 				"Not F2P": true
 			},
+			"(All Pets) Obtain ~|yami|~": {
+				"Category": ["Collection Log", "Collection Log Other", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Yami"],
+				"Not F2P": true
+			},
 			"(Camdozaal) Obtain a ~|barronite mace|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
@@ -62176,6 +62427,61 @@
 				"Label": "Untracked Uniques",
 				"Items": ["Ancient tablet"]
 			},
+			"Obtain a ~|contract of bloodied blows|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of bloodied blows"]
+			},
+			"Obtain a ~|contract of catalytic acquisition|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of catalytic acquisition"]
+			},
+			"Obtain a ~|contract of divine severance|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of divine severance"]
+			},
+			"Obtain a ~|contract of familiar acquisition|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of familiar acquisition"]
+			},
+			"Obtain a ~|contract of forfeit breath|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of forfeit breath"]
+			},
+			"Obtain a ~|contract of glyphic attenuation|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of glyphic attenuation"]
+			},
+			"Obtain a ~|contract of harmony acquisition|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of harmony acquisition"]
+			},
+			"Obtain a ~|contract of oathplate acquisition|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of oathplate acquisition"]
+			},
+			"Obtain a ~|contract of sensory clouding|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of sensory clouding"]
+			},
+			"Obtain a ~|contract of shard acquisition|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of shard acquisition"]
+			},
+			"Obtain a ~|contract of worm acquisition|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Contract of worm acquisition"]
+			},
 			"Obtain a ~|big bass|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
@@ -63065,6 +63371,12 @@
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
 				"Items": ["Ancient tablet", "Xeric's talisman (inert)"],
+				"Not F2P": true
+			},
+			"Unlock upgraded Death Charge from the ~|rite of vile transference|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Rite of vile transference"],
 				"Not F2P": true
 			},
 			"~|STASH#Beginner|~: Gypsy Aris's tent (Varrock)": {
@@ -65930,6 +66242,45 @@
 				},
 				"Not F2P": true
 			},
+			"Armour Case: ~|Oathplate helm|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Oathplate helm"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Oathplate chest|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Oathplate chest"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Oathplate legs|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Oathplate legs"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
 			"Armour Case: ~|Obsidian helmet|~": {
 				"Category": ["Fill POH"],
 				"Label": "Fill POH",
@@ -66247,6 +66598,45 @@
 				"Label": "Fill POH",
 				"Chunks": ["Player-owned house"],
 				"Items": ["Golden prospector boots"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Radiant oathplate helm|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Oathplate helm"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Radiant oathplate chest|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Oathplate chest"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Radiant oathplate legs|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Oathplate legs"],
 				"Skills": {
 					"Construction": 46
 				},
@@ -74081,7 +74471,7 @@
 			"~|Kandarin Diary#Hard|~ Task 5": {
 				"Description": "Charge a water orb.",
 				"Chunks": ["11317-6", "Taverley Dungeon"],
-				"Items": ["Water rune[+]", "Cosmic rune", "Unpowered orb"],
+				"Items": ["Water rune[+]", "Cosmic rune[+]", "Unpowered orb"],
 				"Skills": {
 					"Magic": 56
 				},
@@ -75318,7 +75708,7 @@
 			"~|Kourend and Kebos Diary#Hard|~ Task 10": {
 				"Description": "Cast Monster Examine on a mountain troll south of Mount Quidamortem.",
 				"Chunks": ["KKHard10[+]"],
-				"Items": ["Astral rune", "Cosmic rune", "Mind rune"],
+				"Items": ["Astral rune", "Cosmic rune[+]", "Mind rune"],
 				"Monsters": ["Mountain troll"],
 				"Skills": {
 					"Magic": 66
@@ -75423,7 +75813,7 @@
 			"~|Kourend and Kebos Diary#Elite|~ Task 6": {
 				"Description": "Create an Ape Atoll teleport tablet.",
 				"NPCs": ["Tyss"],
-				"Items": ["Dark essence block", "Blood rune", "Law rune", "Soul rune"],
+				"Items": ["Dark essence block", "Blood rune", "Law rune", "Soul rune[+]"],
 				"Objects": ["Lectern (Arceuus)"],
 				"Skills": {
 					"Magic": 90
@@ -75927,7 +76317,7 @@
 			"~|Lumbridge and Draynor Diary#Hard|~ Task 11": {
 				"Description": "Craft, string and enchant an amulet of power in Lumbridge.",
 				"Chunks": ["12850-1"],
-				"Items": ["Gold bar", "Diamond", "Amulet mould", "Ball of wool", "Cosmic rune", "Earth rune[+]"],
+				"Items": ["Gold bar", "Diamond", "Amulet mould", "Ball of wool", "Cosmic rune[+]", "Earth rune[+]"],
 				"Objects": ["Furnace"],
 				"Skills": {
 					"Crafting": 70,
@@ -77990,7 +78380,7 @@
 			"~|Wilderness Diary#Medium|~ Task 7": {
 				"Description": "Charge an earth orb.",
 				"Objects": ["Obelisk of Earth"],
-				"Items": ["Unpowered orb", "Earth rune[+]", "Cosmic rune"],
+				"Items": ["Unpowered orb", "Earth rune[+]", "Cosmic rune[+]"],
 				"Skills": {
 					"Magic": 60
 				},
@@ -78090,7 +78480,7 @@
 			"~|Wilderness Diary#Hard|~ Task 2": {
 				"Description": "Charge an air orb.",
 				"Objects": ["Obelisk of Air"],
-				"Items": ["Unpowered orb", "Air rune[+]", "Cosmic rune"],
+				"Items": ["Unpowered orb", "Air rune[+]", "Cosmic rune[+]"],
 				"Skills": {
 					"Magic": 66
 				},
@@ -88027,7 +88417,7 @@
 				"BaseQuest": "Desert Treasure II - The Fallen Empire",
 				"Description": "Cast the 4 burst spells on the totems, then solve the puzzle",
 				"Chunks": ["13365"],
-				"Items": ["Air rune[+]", "Water rune[+]", "Fire rune[+]", "Chaos rune", "Death rune", "Blood rune", "Soul rune"],
+				"Items": ["Air rune[+]", "Water rune[+]", "Fire rune[+]", "Chaos rune", "Death rune", "Blood rune", "Soul rune[+]"],
 				"Tasks": {
 					"~|Desert Treasure II - The Fallen Empire|~ 3": "Quest"
 				},
@@ -93485,7 +93875,7 @@
 			"~|In Aid of the Myreque|~ 13": {
 				"BaseQuest": "In Aid of the Myreque",
 				"Description": "Enchant the rod",
-				"Items": ["Cosmic rune", "Water rune[+]"],
+				"Items": ["Cosmic rune[+]", "Water rune[+]"],
 				"Tasks": {
 					"~|In Aid of the Myreque|~ 12": "Quest"
 				},
@@ -94359,7 +94749,7 @@
 				"BaseQuest": "Legends' Quest",
 				"Description": "Obtain the binding book",
 				"Chunks": ["Viyeldi caves"],
-				"Items": ["Axe[+]", "Machete[+]", "Pickaxe[+]", "Lockpick", "Soul rune", "Mind rune", "Earth rune", "Law rune", "Sapphire", "Emerald", "Ruby", "Diamond", "Red topaz", "Jade", "Opal"],
+				"Items": ["Axe[+]", "Machete[+]", "Pickaxe[+]", "Lockpick", "Soul rune[+]", "Mind rune", "Earth rune", "Law rune", "Sapphire", "Emerald", "Ruby", "Diamond", "Red topaz", "Jade", "Opal"],
 				"Tasks": {
 					"~|Legends' Quest|~ 6": "Quest"
 				},
@@ -94434,7 +94824,7 @@
 				"BaseQuest": "Legends' Quest",
 				"Description": "Unblock the water source",
 				"Chunks": ["Viyeldi caves"],
-				"Items": ["Axe[+]", "Machete[+]", "Pickaxe[+]", "Lockpick", "Rope", "Unpowered orb", "Elemental rune[+]", "Cosmic rune"],
+				"Items": ["Axe[+]", "Machete[+]", "Pickaxe[+]", "Lockpick", "Rope", "Unpowered orb", "Elemental rune[+]", "Cosmic rune[+]"],
 				"Tasks": {
 					"~|Legends' Quest|~ 12": "Quest"
 				},
@@ -100133,7 +100523,7 @@
 			"~|Sins of the Father|~ 22": {
 				"BaseQuest": "Sins of the Father",
 				"Description": "Create a blisterwood flail",
-				"Items": ["Knife", "Chisel", "Ruby", "Ivandis flail", "Fire rune[+]", "Cosmic rune"],
+				"Items": ["Knife", "Chisel", "Ruby", "Ivandis flail", "Fire rune[+]", "Cosmic rune[+]"],
 				"Tasks": {
 					"~|Sins of the Father|~ 21": "Quest"
 				},
@@ -101539,7 +101929,7 @@
 			"~|A Taste of Hope|~ 9": {
 				"BaseQuest": "A Taste of Hope",
 				"Description": "Construct an Ivandis flail",
-				"Items": ["Emerald", "Chisel", "Air rune[+]", "Cosmic rune"],
+				"Items": ["Emerald", "Chisel", "Air rune[+]", "Cosmic rune[+]"],
 				"Tasks": {
 					"~|A Taste of Hope|~ 8": "Quest"
 				},
@@ -103262,7 +103652,7 @@
 			"~|While Guthix Sleeps|~ 14": {
 				"BaseQuest": "While Guthix Sleeps",
 				"Description": "NPC Contact Turael, Mazchna, Duradel, and Cyrisus",
-				"Items": ["Air rune[+]", "Cosmic rune", "Astral rune"],
+				"Items": ["Air rune[+]", "Cosmic rune[+]", "Astral rune"],
 				"Tasks": {
 					"~|While Guthix Sleeps|~ 13": "Quest"
 				},
@@ -103299,7 +103689,7 @@
 				"BaseQuest": "While Guthix Sleeps",
 				"Description": "Cast any orb spell on the tile and enter the trapdoor",
 				"Chunks": ["12086-1"],
-				"Items": ["Cosmic rune", "Elemental rune[+]", "Unpowered orb"],
+				"Items": ["Cosmic rune[+]", "Elemental rune[+]", "Unpowered orb"],
 				"Tasks": {
 					"~|While Guthix Sleeps|~ 17": "Quest"
 				},
@@ -106955,7 +107345,8 @@
 		},
 		"5789": {
 			"Connect": {
-				"5689": true
+				"5689": true,
+				"5790": true
 			},
 			"Monster": {
 				"Black demon": 17,
@@ -106971,6 +107362,23 @@
 				"Fire": 15,
 				"Lift": 8,
 				"Rope": 1
+			}
+		},
+		"5790": {
+			"Connect": {
+				"5789": true
+			},
+			"Monster": {
+				"Judge of Yama (Yama)": 1,
+				"Void flare": 1,
+				"Yama": 1
+			},
+			"NPC": {
+				"Yama": 1
+			},
+			"Name": "Yama's Domain",
+			"Object": {
+				"Glowing portal": 1
 			}
 		},
 		"5933": {
@@ -139339,7 +139747,8 @@
 		},
 		"Chasm of Fire": {
 			"Connect": {
-				"5689": true
+				"5689": true,
+				"5790": true
 			},
 			"Monster": {
 				"Black demon": 17,
@@ -139348,12 +139757,40 @@
 			},
 			"NPC": {
 				"Disciple of Yama": 1,
+				"Jim": 1,
 				"Voice of Yama": 1
 			},
 			"Object": {
+				"Anvil (Chasm of Fire)": 1,
+				"Chain (Chasm of Fire)": 1,
 				"Fire": 15,
+				"Furnace (Chasm of Fire)": 1,
+				"Gap (Chasm of Fire)": 2,
+				"Infernal shale deposit": 2,
+				"Infernal shale rocks": 15,
 				"Lift": 8,
+				"Pool of ichor": 1,
 				"Rope": 1
+			},
+			"Spawn": {
+				"Burnt bones": 8,
+				"Fire rune": 4
+			}
+		},
+		"Yama's Domain": {
+			"Connect": {
+				"5789": true
+			},
+			"Monster": {
+				"Judge of Yama (Yama)": 1,
+				"Void flare": 1,
+				"Yama": 1
+			},
+			"NPC": {
+				"Yama": 1
+			},
+			"Object": {
+				"Glowing portal": 1
 			}
 		},
 		"Clan Hall": {
@@ -146313,6 +146750,8 @@
 			"Axe[+]": ["Bronze axe", "Iron axe", "Steel axe", "Black axe", "Mithril axe", "Adamant axe", "Rune axe", "Dragon axe", "3rd age axe", "Infernal axe", "Crystal axe"],
 			"Rune axe[+]": ["Rune axe", "Dragon axe", "3rd age axe", "Infernal axe", "Crystal axe"],
 			"Bandos armour[+]": ["Bandos chestplate", "Bandos tassets", "Bandos boots"],
+			"Torva armour[+]": ["Torva full helm", "Torva platebody", "Torva platelegs"],
+			"Oathplate armour[+]": ["Oathplate helm", "Oathplate chest", "Oathplate legs"],
 			"Barbarian bait[+]": ["Feather", "Fishing bait", "Fish offcuts", "Roe", "Caviar"],
 			"Barbarian rod[+]": ["Barbarian rod", "Pearl barbarian rod"],
 			"BarbarianBow[+]": ["Training bow", "Shortbow", "Longbow", "Oak shortbow", "Oak longbow", "Willow shortbow", "Willow longbow", "Maple shortbow", "Maple longbow", "Yew shortbow", "Yew longbow", "Seercull", "Magic shortbow", "Magic longbow"],
@@ -146387,6 +146826,8 @@
 			"Enchanted zenyte[+]": ["Ring of suffering", "Necklace of anguish", "Tormented bracelet", "Amulet of torture"],
 			"Feather[+]": ["Feather", "Red feather", "Orange feather", "Yellow feather", "Blue feather", "Stripy feather"],
 			"Fire rune[+]": ["Fire rune", "Smoke rune", "Steam rune", "Lava rune", "Sunfire rune", "Tome of fire"],
+			"Cosmic rune[+]": ["Cosmic rune", "Aether rune"],
+			"Soul rune[+]": ["Soul rune", "Aether rune"],
 			"Fishing rod[+]": ["Fishing rod", "Pearl fishing rod"],
 			"Fiyr remains[+]": ["Loar remains", "Phrin remains", "Riyl remains", "Asyn remains", "Fiyr remains"],
 			"Flowers[+]": ["Assorted flowers", "Black flowers", "Blue flowers", "Mixed flowers", "Purple flowers", "Orange flowers", "Red flowers", "White flowers", "Yellow flowers", "Mithril seeds", "Adamant seeds"],
@@ -146395,7 +146836,7 @@
 			"Frog-leather armour[+]": ["Frog-leather body", "Frog-leather chaps", "Frog-leather boots"],
 			"Gloves[+]": ["Leather gloves", "Void knight gloves", "Snow imp costume gloves", "Bunny paws", "Ghostly gloves", "Penance gloves", "Ham gloves", "Canifis gloves", "Fremennik gloves", "Mourner gloves", "White gloves", "Gloves of silence", "Clue hunter gloves", "Holy wraps", "Spined gloves", "Skeletal gloves", "Rock-shell gloves", "Mining gloves", "Ornate gloves", "Spooky gloves", "Spookier gloves", "Graceful gloves"],
 			"God cape[+]": ["Saradomin cape", "Zamorak cape", "Guthix cape"],
-			"Godsword[+]": ["Saradomin godsword", "Zamorak godsword", "Armadyl godsword", "Bandos godsword"],
+			"Godsword[+]": ["Saradomin godsword", "Zamorak godsword", "Armadyl godsword", "Bandos godsword", "Ancient godsword"],
 			"God staff[+]": ["Saradomin staff", "Zamorak staff", "Guthix staff"],
 			"Gold[+]": ["Gold ore", "Gold bar"],
 			"Gold decorative armour[+]": ["Decorative armour (gold platebody)", "Decorative armour (gold platelegs)", "Decorative armour (gold plateskirt)", "Decorative boots (gold)", "Decorative full helm (gold)", "Decorative helm (gold)", "Decorative shield (gold)"],
@@ -146663,7 +147104,8 @@
 			"ButterBase[+]": ["Bucket of milk", "Pot of cream"],
 			"CheeseBase[+]": ["Bucket of milk", "Pot of cream", "Pat of butter", "Pat of not garlic butter"],
 			"CatFur[+]": ["Fur", "Bear fur", "Grey wolf fur"],
-			"DigsiteTea[+]": ["Cup of tea", "Cup of tea (nettle)"]
+			"DigsiteTea[+]": ["Cup of tea", "Cup of tea (nettle)"],
+			"AnglerfishWorms[+]": ["Sandworms", "Diabolic worms"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -146681,6 +147123,8 @@
 			"Axe[+]": "Any axe",
 			"Rune axe[+]": "Any rune axe or better",
 			"Bandos armour[+]": "Any bandos armour piece",
+			"Torva armour[+]": "Any torva armour piece",
+			"Oathplate armour[+]": "Any oathplate armour piece",
 			"Barbarian bait[+]": "Any barbarian bait",
 			"Barbarian rod[+]": "Any barbarian rod",
 			"BarbarianBow[+]": "Any bow able to be used in barbarian firemaking",
@@ -147030,7 +147474,8 @@
 			"ButterBase[+]": "Any base ingredient that can be churned into a pat of butter",
 			"CheeseBase[+]": "Any base ingredient that can be churned into cheese",
 			"CatFur[+]": "Any fur used to craft a wooden cat",
-			"DigsiteTea[+]": "Any tea for the panning guide"
+			"DigsiteTea[+]": "Any tea for the panning guide",
+			"AnglerfishWorms[+]": "Any worms used to catch anglerfish"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
@@ -147839,7 +148284,8 @@
 			"Amoxliatl": true,
 			"The Hueycoatl": true,
 			"Branda the Fire Queen": true,
-			"Eldric the Ice King": true
+			"Eldric the Ice King": true,
+			"Yama": true
 		},
 		"minigameShops": {
 			"Agility Arena Store": true,
@@ -184623,6 +185069,110 @@
 				"1": "Always"
 			}
 		},
+		"Yama": {
+			"Aether catalyst": {
+				"1": "Unknown"
+			},
+			"Barrel of demonic tallow": {
+				"1": "Unknown"
+			},
+			"Battlestaff": {
+				"1": "Unknown"
+			},
+			"Blood rune": {
+				"1": "Unknown"
+			},
+			"Chasm teleport scroll": {
+				"6": "Unknown"
+			},
+			"Diabolic worms": {
+				"1": "Unknown"
+			},
+			"Diamond": {
+				"1": "Unknown"
+			},
+			"Dossier (Yama)": {
+				"1": "Unknown"
+			},
+			"Dragon chainbody": {
+				"1": "Unknown"
+			},
+			"Dragon platelegs": {
+				"1": "Unknown"
+			},
+			"Dragone plateskirt": {
+				"1": "Unknown"
+			},
+			"Emerald": {
+				"1": "Unknown"
+			},
+			"Fire rune": {
+				"1": "Unknown"
+			},
+			"Forgotten lockbox": {
+				"1": "Unknown"
+			},
+			"Law rune": {
+				"1": "Unknown"
+			},
+			"Oathplate helm": {
+				"1": "Unknown"
+			},
+			"Oathplate chest": {
+				"1": "Unknown"
+			},
+			"Oathplate legs": {
+				"1": "Unknown"
+			},
+			"Oathplate shards": {
+				"1": "Unknown"
+			},
+			"Onyx bolt tips": {
+				"1": "Unknown"
+			},
+			"Pineapple pizza": {
+				"1": "Unknown"
+			},
+			"Prayer potion(3)": {
+				"1": "Unknown"
+			},
+			"Rite of vile transference": {
+				"1": "Unknown"
+			},
+			"Ruby": {
+				"1": "Unknown"
+			},
+			"Rune chainbody": {
+				"1": "Unknown"
+			},
+			"Rune platebody": {
+				"1": "Unknown"
+			},
+			"Smoke rune": {
+				"1": "Unknown"
+			},
+			"Soul rune": {
+				"1": "Unknown"
+			},
+			"Soulflame horn": {
+				"1": "Unknown"
+			},
+			"Super combat potion(1)": {
+				"1": "Unknown"
+			},
+			"Super restore mix(2)": {
+				"1": "Unknown"
+			},
+			"Wrath rune": {
+				"1": "Unknown"
+			},
+			"Yami": {
+				"1": "Unknown"
+			},
+			"Zamorak mix(2)": {
+				"1": "Unknown"
+			}
+		},
 		"Yuri": {
 			"Wolf bones": {
 				"1": "Always"
@@ -196479,6 +197029,17 @@
 				},
 				"Simple lockbox": {
 					"1": "Common"
+				}
+			},
+			"Forgotten lockbox loot": {
+				
+			},
+			"Dossier (Yama) loot": {
+				"Chasm teleport scroll": {
+					"1": "Unknown"
+				},
+				"Rite of vile transference": {
+					"1": "Unknown"
 				}
 			},
 			"Simple lockbox loot": {
@@ -218654,6 +219215,11 @@
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
 				}]
 			},
+			"Jim": {
+				"Chasm of Fire": [{
+					"~|A Kingdom Divided|~ Complete the quest": "Quest"
+				}]
+			},
 			"Leatherworker": {
 				"10549": [{
 					"Access the ~|Ranging Guild|~": "Ranged"
@@ -218753,6 +219319,11 @@
 				}],
 				"The Warrens": [{
 					"~|The Queen of Thieves|~ 5": "Quest"
+				}]
+			},
+			"Anvil (Chasm of Fire)": {
+				"Chasm of Fire": [{
+					"~|A Kingdom Divided|~ Complete the quest": "Quest"
 				}]
 			},
 			"Barrel (beer)": {
@@ -218966,6 +219537,11 @@
 					"~|Beneath Cursed Sands|~ 6a1": "Quest"
 				}]
 			},
+			"Furnace (Chasm of Fire)": {
+				"Chasm of Fire": [{
+					"~|A Kingdom Divided|~ Complete the quest": "Quest"
+				}]
+			},
 			"Gem rocks": {
 				"11310-1": [{
 					"~|Shilo Village|~ Complete the quest": "Quest"
@@ -218994,6 +219570,16 @@
 			"Hopper controls": {
 				"12597-1": [{
 					"Access the ~|Cooks' Guild|~": "Cooking"
+				}]
+			},
+			"Infernal shale deposit": {
+				"Chasm of Fire": [{
+					"~|A Kingdom Divided|~ Complete the quest": "Quest"
+				}]
+			},
+			"Infernal shale rocks": {
+				"Chasm of Fire": [{
+					"~|A Kingdom Divided|~ Complete the quest": "Quest"
 				}]
 			},
 			"Iron rocks": {
@@ -219060,6 +219646,11 @@
 			"Oven": {
 				"5677-3": [{
 					"~|Death on the Isle|~ Complete the quest": "Quest"
+				}]
+			},
+			"Pool of ichor": {
+				"Chasm of Fire": [{
+					"~|A Kingdom Divided|~ Complete the quest": "Quest"
 				}]
 			},
 			"Potter's Wheel": {
@@ -224051,7 +224642,9 @@
 			"Dragon harpoon": true,
 			"Crystal harpoon": true,
 			"Fishing bait": true,
-			"Karambwan vessel": true
+			"Karambwan vessel": true,
+			"Sandworms": true,
+			"Diabolic worms": true
 		},
 		"fishing|Objects": {
 			"Fishing spot (anglerfish)": true,
@@ -224291,7 +224884,9 @@
 			"Stalagmite": true,
 			"Lovakite rocks": true,
 			"Soft clay rocks": true,
-			"Calcified rocks": true
+			"Calcified rocks": true,
+			"Infernal shale deposit": true,
+			"Infernal shale rocks": true
 		},
 		"prayer|Items": {
 			"Bones": true,
@@ -224428,7 +225023,8 @@
 			"Hat of the eye": true,
 			"Robe top of the eye": true,
 			"Robe bottoms of the eye": true,
-			"Boots of the eye": true
+			"Boots of the eye": true,
+			"Aether catalyst": true
 		},
 		"slayer|Items": {
 			"Broad arrows": true,
@@ -224581,13 +225177,19 @@
 			"Lunar bar": true,
 			"Lunar ore": true,
 			"Elemental metal": true,
-			"Smithing catalyst": true
+			"Smithing catalyst": true,
+			"Infernal shale": true,
+			"Oathplate shards": true,
+			"Oathplate plate": true
 		},
 		"smithing|Objects": {
 			"Furnace": true,
 			"Blast Furnace": true,
 			"Anvil": true,
-			"Rusted anvil": true
+			"Rusted anvil": true,
+			"Furnace (Chasm of Fire)": true,
+			"Anvil (Chasm of Fire)": true,
+			"Pool of ichor": true
 		},
 		"thieving|Items": {
 			"Oak blackjack": true,
@@ -274489,6 +275091,29 @@
 				"Ranged": 80
 			}
 		},
+		"Zaryte vambraces": {
+			"attack_speed": 0,
+			"attack_crush": -8,
+			"attack_magic": 0,
+			"attack_ranged": 18,
+			"attack_slash": -8,
+			"attack_stab": -8,
+			"defence_crush": 8,
+			"defence_magic": 5,
+			"defence_ranged": 8,
+			"defence_slash": 8,
+			"defence_stab": 8,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 1,
+			"ranged_strength": 2,
+			"slot": "hands",
+			"formatted_name": "Zaryte vambraces",
+			"requirements": {
+				"Defence": 45,
+				"Ranged": 80
+			}
+		},
 		"Torva full helm": {
 			"attack_speed": 0,
 			"attack_crush": 0,
@@ -276742,6 +277367,93 @@
 			"slot": "weapon",
 			"requirements": {
 				"Magic": 60
+			}
+		},
+		"Oathplate helm": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -2,
+			"attack_ranged": -7,
+			"attack_slash": 10,
+			"attack_stab": 0,
+			"defence_crush": 45,
+			"defence_magic": 0,
+			"defence_ranged": 50,
+			"defence_slash": 72,
+			"defence_stab": 50,
+			"magic_damage": 0,
+			"melee_strength": 6,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "head",
+			"formatted_name": "Oathplate helm",
+			"requirements": {
+				"Defence": 78
+			}
+		},
+		"Oathplate chest": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -16,
+			"attack_ranged": -18,
+			"attack_slash": 16,
+			"attack_stab": 0,
+			"defence_crush": 100,
+			"defence_magic": -5,
+			"defence_ranged": 112,
+			"defence_slash": 128,
+			"defence_stab": 105,
+			"magic_damage": 0,
+			"melee_strength": 4,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "body",
+			"formatted_name": "Oathplate chest",
+			"requirements": {
+				"Defence": 78
+			}
+		},
+		"Oathplate legs": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -12,
+			"attack_ranged": -14,
+			"attack_slash": 12,
+			"attack_stab": 0,
+			"defence_crush": 73,
+			"defence_magic": -3,
+			"defence_ranged": 81,
+			"defence_slash": 100,
+			"defence_stab": 75,
+			"magic_damage": 0,
+			"melee_strength": 2,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "legs",
+			"formatted_name": "Oathplate legs",
+			"requirements": {
+				"Defence": 78
+			}
+		},
+		"Soulflame horn": {
+			"attack_speed": 5,
+			"attack_crush": 21,
+			"attack_magic": 7,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 2,
+			"defence_crush": 3,
+			"defence_magic": 11,
+			"defence_ranged": 0,
+			"defence_slash": 7,
+			"defence_stab": 0,
+			"magic_damage": 1,
+			"melee_strength": 23,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "weapon",
+			"requirements": {
+				"Magic": 80
 			}
 		}
 	}
