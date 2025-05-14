@@ -218254,9 +218254,6 @@
 				}]
 			},
 			"Black demon": {
-				"Chasm of Fire": [{
-					"Black demon task": "Nonskill"
-				}],
 				"Edgeville Dungeon#Wilderness": [{
 					"F2P Only": "Nonskill"
 				}]
@@ -218558,11 +218555,6 @@
 					"~|Temple of Ikov|~ 4": "Quest"
 				}]
 			},
-			"Greater demon": {
-				"Chasm of Fire": [{
-					"Greater demon task": "Nonskill"
-				}]
-			},
 			"Greater Nechryael#Wilderness Slayer Cave": {
 				"Wilderness Slayer Cave": [{
 					"Nechryael wilderness task": "Nonskill"
@@ -218733,9 +218725,6 @@
 				}]
 			},
 			"Lesser demon": {
-				"Chasm of Fire": [{
-					"Lesser demon task": "Nonskill"
-				}],
 				"Temple of Ikov": [{
 					"~|Temple of Ikov|~ 4": "Quest"
 				}]
