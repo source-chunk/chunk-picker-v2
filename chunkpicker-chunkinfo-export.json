@@ -27543,6 +27543,9 @@
 			"Lighthouse dagannoth": {
 				"Chunks": ["Lighthouse#Dungeon"]
 			},
+			"Chasm of fire demons": {
+				"Chunks": ["Chasm of Fire"]
+			},
 			"Wilderness chunks": {
 				"Chunks": ["WildernessChunks[+]"]
 			},
@@ -154283,6 +154286,21 @@
 			},
 			"Slayer's enchantment": {
 				"1": "1/195"
+			},
+			"Contract of bloodied blows": {
+				"1": "Unknown"
+			},
+			"Contract of divine severance": {
+				"1": "Unknown"
+			},
+			"Contract of forfeit breath": {
+				"1": "Unknown"
+			},
+			"Contract of glyphic attenuation": {
+				"1": "Unknown"
+			},
+			"Contract of sensory clouding": {
+				"1": "Unknown"
 			}
 		},
 		"Black demon#Wilderness Slayer Cave": {
@@ -163943,6 +163961,21 @@
 			},
 			"Slayer's enchantment": {
 				"1": "1/249"
+			},
+			"Contract of bloodied blows": {
+				"1": "Unknown"
+			},
+			"Contract of divine severance": {
+				"1": "Unknown"
+			},
+			"Contract of forfeit breath": {
+				"1": "Unknown"
+			},
+			"Contract of glyphic attenuation": {
+				"1": "Unknown"
+			},
+			"Contract of sensory clouding": {
+				"1": "Unknown"
 			}
 		},
 		"Greater demon#Wilderness Slayer Cave": {
@@ -169485,6 +169518,21 @@
 			},
 			"Slayer's enchantment": {
 				"1": "1/256"
+			},
+			"Contract of bloodied blows": {
+				"1": "Unknown"
+			},
+			"Contract of divine severance": {
+				"1": "Unknown"
+			},
+			"Contract of forfeit breath": {
+				"1": "Unknown"
+			},
+			"Contract of glyphic attenuation": {
+				"1": "Unknown"
+			},
+			"Contract of sensory clouding": {
+				"1": "Unknown"
 			}
 		},
 		"Lesser demon#Wilderness Slayer Cave": {
@@ -197070,43 +197118,43 @@
 			},
 			"Dossier (Yama) loot": {
 				"Chasm teleport scroll": {
-					"1": "Unknown"
+					"1": "18/69"
 				},
 				"Contract of bloodied blows": {
-					"1": "Unknown"
+					"1": "2/69"
 				},
 				"Contract of catalyst acquisition": {
-					"1": "Unknown"
+					"1": "3/69"
 				},
 				"Contract of divine severance": {
-					"1": "Unknown"
+					"1": "2/69"
 				},
 				"Contract of familiar acquisition": {
-					"1": "Unknown"
+					"1": "12/69"
 				},
 				"Contract of forfeit breath": {
-					"1": "Unknown"
+					"1": "2/69"
 				},
 				"Contract of glyphic attenuation": {
-					"1": "Unknown"
+					"1": "2/69"
 				},
 				"Contract of harmony acquisition": {
-					"1": "Unknown"
+					"1": "1/69"
 				},
 				"Contract of oathplate acquisition": {
-					"1": "Unknown"
+					"1": "1/69"
 				},
 				"Contract of sensory clouding": {
-					"1": "Unknown"
+					"1": "2/69"
 				},
 				"Contract of shard acquisition": {
-					"1": "Unknown"
+					"1": "3/69"
 				},
 				"Contract of worm acquisition": {
-					"1": "Unknown"
+					"1": "3/69"
 				},
 				"Rite of vile transference": {
-					"1": "Unknown"
+					"1": "18/69"
 				}
 			},
 			"Simple lockbox loot": {
@@ -218181,6 +218229,81 @@
 			}],
 			"Larran's key^Jelly#Wilderness Slayer Cave": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
+			}],
+			"Contract of bloodied blows^Black demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of divine severance^Black demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of forfeit breath^Black demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of glyphic attenuation^Black demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of sensory clouding^Black demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of bloodied blows^Greater demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of divine severance^Greater demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of forfeit breath^Greater demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of glyphic attenuation^Greater demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of sensory clouding^Greater demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of bloodied blows^Lesser demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of divine severance^Lesser demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of forfeit breath^Lesser demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of glyphic attenuation^Lesser demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
+			}],
+			"Contract of sensory clouding^Lesser demon": [{
+				"~|A Kingdom Divided|~ Complete the quest": "Quest"
+			}, {
+				"Chasm of fire demons": "Nonskill"
 			}]
 		},
 		"Monsters": {
