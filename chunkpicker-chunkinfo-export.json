@@ -696,7 +696,7 @@
 				},
 				"NoPet": true
 			},
-			"Access the Motherlode Mine wall ~|shortcut|~": {
+			"Access the Motherlode Mine eastern wall ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["Motherlode Mine"],
 				"Level": 54,
@@ -705,6 +705,14 @@
 					"~|Falador Diary#Medium|~ Complete the Medium Diary": "Diary"
 				},
 				"Priority": 1,
+				"NoPet": true
+			},
+			"Access the Motherlode Mine southern wall ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["Motherlode Mine"],
+				"Level": 54,
+				"Primary": false,
+				"Priority": 11,
 				"NoPet": true
 			},
 			"Access the Nature Spirit swampy bridge ~|shortcut|~": {
@@ -185071,106 +185079,104 @@
 		},
 		"Yama": {
 			"Aether catalyst": {
-				"1": "Unknown"
+				"850": "1/12.86"
 			},
 			"Barrel of demonic tallow": {
-				"1": "Unknown"
+				"1": "1/18"
 			},
 			"Battlestaff": {
-				"1": "Unknown"
+				"40 (noted)": "1/22.5"
 			},
 			"Blood rune": {
-				"1": "Unknown"
+				"400": "1/30"
 			},
 			"Chasm teleport scroll": {
-				"6": "Unknown"
+				"6": "1/22.5"
 			},
 			"Diabolic worms": {
-				"1": "Unknown"
+				"90": "1/12.86"
 			},
 			"Diamond": {
-				"1": "Unknown"
+				"40 (noted)": "1/30"
 			},
 			"Dossier (Yama)": {
-				"1": "Unknown"
-			},
-			"Dragon chainbody": {
-				"1": "Unknown"
+				"1": "1/40"
 			},
 			"Dragon platelegs": {
-				"1": "Unknown"
+				"1": "1/45"
 			},
 			"Dragone plateskirt": {
-				"1": "Unknown"
+				"1": "1/45"
 			},
 			"Emerald": {
-				"1": "Unknown"
+				"40 (noted)": "1/30"
 			},
 			"Fire rune": {
-				"1": "Unknown"
+				"15000": "1/90"
 			},
 			"Forgotten lockbox": {
-				"1": "Unknown"
+				"1": "1/30"
 			},
 			"Law rune": {
-				"1": "Unknown"
-			},
-			"Oathplate helm": {
-				"1": "Unknown"
+				"150": "1/30"
 			},
 			"Oathplate chest": {
-				"1": "Unknown"
+				"1": "Rare"
+			},
+			"Oathplate helm": {
+				"1": "Rare"
 			},
 			"Oathplate legs": {
-				"1": "Unknown"
+				"1": "Rare"
 			},
 			"Oathplate shards": {
-				"1": "Unknown"
+				"4-12": "1/16"
 			},
 			"Onyx bolt tips": {
-				"1": "Unknown"
+				"150": "1/90"
 			},
 			"Pineapple pizza": {
-				"1": "Unknown"
+				"3-4": "1/12"
 			},
 			"Prayer potion(3)": {
-				"1": "Unknown"
-			},
-			"Rite of vile transference": {
-				"1": "Unknown"
+				"2": "1/12"
 			},
 			"Ruby": {
-				"1": "Unknown"
+				"40 (noted)": "1/30"
 			},
 			"Rune chainbody": {
-				"1": "Unknown"
+				"8 (noted)": "1/18"
 			},
 			"Rune platebody": {
-				"1": "Unknown"
+				"8 (noted)": "1/30"
 			},
 			"Smoke rune": {
-				"1": "Unknown"
+				"350": "1/45"
 			},
 			"Soul rune": {
-				"1": "Unknown"
+				"500": "1/45",
+				"1000": "1/45"
 			},
 			"Soulflame horn": {
-				"1": "Unknown"
+				"1": "Rare"
 			},
 			"Super combat potion(1)": {
-				"1": "Unknown"
+				"1": "1/12"
 			},
 			"Super restore mix(2)": {
-				"1": "Unknown"
+				"2": "1/12"
+			},
+			"Wild pie": {
+				"3-4": "1/12"
 			},
 			"Wrath rune": {
-				"1": "Unknown"
+				"800": "1/90"
 			},
 			"Yami": {
-				"1": "Unknown"
+				"1": "Very rare"
 			},
 			"Zamorak mix(2)": {
-				"1": "Unknown"
+				"1": "1/12"
 			}
 		},
 		"Yuri": {
@@ -197032,10 +197038,71 @@
 				}
 			},
 			"Forgotten lockbox loot": {
-				
+				"Coins": {
+					"233333": "2/40"
+				},
+				"Dragon bolts (unf)": {
+					"125": "6/40"
+				},
+				"Dragon dart": {
+					"125": "6/40",
+					"80": "5/40"
+				},
+				"Dragon platelegs": {
+					"1": "5/40"
+				},
+				"Dragon plateskirt": {
+					"1": "5/40"
+				},
+				"Oathplate chest": {
+					"1": "1/360"
+				},
+				"Oathplate helm": {
+					"1": "1/360"
+				},
+				"Oathplate legs": {
+					"1": "1/360"
+				},
+				"Oathplate shards": {
+					"14": "6/40",
+					"11": "5/40"
+				}
 			},
 			"Dossier (Yama) loot": {
 				"Chasm teleport scroll": {
+					"1": "Unknown"
+				},
+				"Contract of bloodied blows": {
+					"1": "Unknown"
+				},
+				"Contract of catalyst acquisition": {
+					"1": "Unknown"
+				},
+				"Contract of divine severance": {
+					"1": "Unknown"
+				},
+				"Contract of familiar acquisition": {
+					"1": "Unknown"
+				},
+				"Contract of forfeit breath": {
+					"1": "Unknown"
+				},
+				"Contract of glyphic attenuation": {
+					"1": "Unknown"
+				},
+				"Contract of harmony acquisition": {
+					"1": "Unknown"
+				},
+				"Contract of oathplate acquisition": {
+					"1": "Unknown"
+				},
+				"Contract of sensory clouding": {
+					"1": "Unknown"
+				},
+				"Contract of shard acquisition": {
+					"1": "Unknown"
+				},
+				"Contract of worm acquisition": {
 					"1": "Unknown"
 				},
 				"Rite of vile transference": {
@@ -211601,7 +211668,7 @@
 				"Bones": {
 					"1": "Always"
 				},
-				"Mystic gloves (light": {
+				"Mystic gloves (light)": {
 					"1": "1/512"
 				},
 				"Earth rune": {
