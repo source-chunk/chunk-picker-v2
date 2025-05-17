@@ -24755,9 +24755,9 @@
 				"Output": "Forgotten lockbox loot",
 				"Not F2P": true
 			},
-			"Dossier (Yama) loot*": {
-				"Items": ["Dossier (Yama)*"],
-				"Output": "Dossier (Yama) loot"
+			"Dossier loot*": {
+				"Items": ["Dossier*"],
+				"Output": "Dossier loot"
 			},
 			"Open a barrel of demonic tallow": {
 				"Items": ["Barrel of demonic tallow (full)"],
@@ -55080,10 +55080,10 @@
 				"Items": ["Forgotten lockbox"],
 				"Not F2P": true
 			},
-			"(Yama) Obtain a ~|dossier (Yama)|~": {
+			"(Yama) Obtain a ~|dossier|~": {
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
-				"Items": ["Dossier (Yama)"],
+				"Items": ["Dossier"],
 				"Not F2P": true
 			},
 			"(Yama) Obtain a ~|barrel of demonic tallow (full)|~": {
@@ -74980,12 +74980,9 @@
 			"~|Karamja Diary#Medium|~ Task 15": {
 				"Description": "Chop the vines to gain deeper access to Brimhaven Dungeon.",
 				"Chunks": ["Brimhaven Dungeon"],
-				"Items": ["Axe[+]"],
-				"Skills": {
-					"Woodcutting": 10
-				},
 				"Tasks": {
-					"~|Karamja Diary#Easy|~ Complete the Easy Diary": "Diary"
+					"~|Karamja Diary#Easy|~ Complete the Easy Diary": "Diary",
+					"KaramjaMedium15[+]": "Nonskill"
 				},
 				"BaseQuest": "Karamja Diary",
 				"Not F2P": true
@@ -147771,6 +147768,7 @@
 		"tasksPlus": {
 			"KaramjaEasy7[+]": ["Catch ~|raw shrimps|~", "Catch ~|raw anchovies|~", "Catch a ~|raw herring|~", "Catch a ~|raw sardine|~", "Catch a ~|raw lobster|~", "Catch a ~|raw tuna|~", "Catch a ~|raw swordfish|~"],
 			"KaramjaMedium13[+]": ["Grow an ~|apple tree|~", "Grow a ~|banana tree|~", "Grow an ~|orange tree|~", "Grow a ~|curry tree|~", "Grow a ~|pineapple plant|~", "Grow a ~|papaya tree|~", "Grow a ~|palm tree|~", "Grow a ~|dragonfruit tree|~"],
+			"KaramjaMedium15[+]": ["Access Brimhaven Dungeon#Section 1 2", "Access Brimhaven Dungeon#Section 2 1", "Access Brimhaven Dungeon#Section 2 2", "Access Brimhaven Dungeon#Section 3 1", "Access Brimhaven Dungeon#Section 3 4", "Access Brimhaven Dungeon#Section 3 5", "Access Brimhaven Dungeon#Section 4 3", "Access Brimhaven Dungeon#Section 6 1", "Access Brimhaven Dungeon#Section 6 2", "Access Brimhaven Dungeon#Section 5 3"],
 			"MorytaniaElite2[+]": ["Burn ~|magic pyre logs|~", "Burn ~|redwood pyre logs|~"],
 			"WildernessMedium3[+]": ["Enter the ~|Wilderness God Wars Dungeon|~ via Strength", "Enter the ~|Wilderness God Wars Dungeon|~ via Agility"],
 			"EnterGodWars[+]": ["Enter the ~|God Wars Dungeon|~ via Strength", "Enter the ~|God Wars Dungeon|~ via Agility"],
@@ -185127,104 +185125,116 @@
 		},
 		"Yama": {
 			"Aether catalyst": {
-				"850": "1/12.86"
+				"850": "1/13.11"
 			},
 			"Barrel of demonic tallow": {
-				"1": "1/18"
+				"1": "1/18.35"
 			},
 			"Battlestaff": {
-				"40 (noted)": "1/22.5"
+				"40 (noted)": "1/22.94"
+			},
+			"Black bead": {
+				"1": "1/3.667"
 			},
 			"Blood rune": {
-				"400": "1/30"
+				"400": "1/30.59"
+			},
+			"Cabbage": {
+				"1": "1/3.667"
 			},
 			"Chasm teleport scroll": {
 				"6": "1/22.5"
 			},
+			"Demon dung": {
+				"1": "1/5.5"
+			},
 			"Diabolic worms": {
-				"90": "1/12.86"
+				"90": "1/13.11"
 			},
 			"Diamond": {
-				"40 (noted)": "1/30"
+				"40 (noted)": "1/30.59"
 			},
-			"Dossier (Yama)": {
-				"1": "1/40"
+			"Dossier": {
+				"1": "1/20.17"
 			},
 			"Dragon platelegs": {
-				"1": "1/45"
+				"1": "1/45.89"
 			},
 			"Dragone plateskirt": {
-				"1": "1/45"
+				"1": "1/45.89"
 			},
 			"Emerald": {
-				"40 (noted)": "1/30"
+				"40 (noted)": "1/30.59"
 			},
 			"Fire rune": {
-				"15000": "1/90"
+				"15000": "1/91.77"
 			},
 			"Forgotten lockbox": {
-				"1": "1/30"
+				"1": "1/31.84"
 			},
 			"Law rune": {
-				"150": "1/30"
+				"150": "1/30.59"
 			},
 			"Oathplate chest": {
-				"1": "Rare"
+				"1": "1/600"
 			},
 			"Oathplate helm": {
-				"1": "Rare"
+				"1": "1/600"
 			},
 			"Oathplate legs": {
-				"1": "Rare"
+				"1": "1/600"
 			},
 			"Oathplate shards": {
-				"4-12": "1/16"
+				"12": "1/16.47"
 			},
 			"Onyx bolt tips": {
-				"150": "1/90"
+				"150": "1/91.77"
 			},
 			"Pineapple pizza": {
-				"3-4": "1/12"
+				"3-4": "1/12.24"
 			},
 			"Prayer potion(3)": {
-				"2": "1/12"
+				"2": "1/12.24"
 			},
 			"Ruby": {
-				"40 (noted)": "1/30"
+				"40 (noted)": "1/30.59"
 			},
 			"Rune chainbody": {
-				"8 (noted)": "1/18"
+				"8 (noted)": "1/18.35"
 			},
 			"Rune platebody": {
-				"8 (noted)": "1/30"
+				"8 (noted)": "1/30.59"
 			},
 			"Smoke rune": {
-				"350": "1/45"
+				"350": "1/45.89"
 			},
 			"Soul rune": {
-				"500": "1/45",
-				"1000": "1/45"
+				"500": "1/45.89",
+				"1000": "1/45.89"
 			},
 			"Soulflame horn": {
-				"1": "Rare"
+				"1": "2/600"
+			},
+			"Spinach roll": {
+				"1": "1/3.667"
 			},
 			"Super combat potion(1)": {
-				"1": "1/12"
+				"1": "1/12.24"
 			},
 			"Super restore mix(2)": {
-				"2": "1/12"
+				"2": "1/12.24"
 			},
 			"Wild pie": {
-				"3-4": "1/12"
+				"3-4": "1/12.24"
 			},
 			"Wrath rune": {
-				"800": "1/90"
+				"800": "1/91.77"
 			},
 			"Yami": {
-				"1": "Very rare"
+				"1": "1/2500"
 			},
 			"Zamorak mix(2)": {
-				"1": "1/12"
+				"1": "1/12.24"
 			}
 		},
 		"Yuri": {
@@ -197087,74 +197097,74 @@
 			},
 			"Forgotten lockbox loot": {
 				"Coins": {
-					"233333": "2/40"
+					"233333": "20/403"
 				},
 				"Dragon bolts (unf)": {
-					"125": "6/40"
+					"125": "60/403"
 				},
 				"Dragon dart": {
-					"125": "6/40",
-					"80": "5/40"
+					"125": "60/403",
+					"80": "50/403"
 				},
 				"Dragon platelegs": {
-					"1": "5/40"
+					"1": "50/403"
 				},
 				"Dragon plateskirt": {
-					"1": "5/40"
+					"1": "50/403"
 				},
 				"Oathplate chest": {
-					"1": "1/360"
+					"1": "1/403"
 				},
 				"Oathplate helm": {
-					"1": "1/360"
+					"1": "1/403"
 				},
 				"Oathplate legs": {
-					"1": "1/360"
+					"1": "1/403"
 				},
 				"Oathplate shards": {
-					"14": "6/40",
-					"11": "5/40"
+					"14": "60/403",
+					"11": "50/403"
 				}
 			},
-			"Dossier (Yama) loot": {
+			"Dossier loot": {
 				"Chasm teleport scroll": {
-					"1": "18/69"
+					"1": "3/16"
 				},
 				"Contract of bloodied blows": {
-					"1": "2/69"
+					"1": "2/66"
 				},
 				"Contract of catalyst acquisition": {
-					"1": "3/69"
+					"1": "3/66"
 				},
 				"Contract of divine severance": {
-					"1": "2/69"
+					"1": "2/66"
 				},
 				"Contract of familiar acquisition": {
-					"1": "12/69"
+					"1": "12/66"
 				},
 				"Contract of forfeit breath": {
-					"1": "2/69"
+					"1": "2/66"
 				},
 				"Contract of glyphic attenuation": {
-					"1": "2/69"
+					"1": "2/66"
 				},
 				"Contract of harmony acquisition": {
-					"1": "1/69"
+					"1": "1/66"
 				},
 				"Contract of oathplate acquisition": {
-					"1": "1/69"
+					"1": "1/66"
 				},
 				"Contract of sensory clouding": {
-					"1": "2/69"
+					"1": "2/66"
 				},
 				"Contract of shard acquisition": {
-					"1": "3/69"
+					"1": "3/66"
 				},
 				"Contract of worm acquisition": {
-					"1": "3/69"
+					"1": "3/66"
 				},
 				"Rite of vile transference": {
-					"1": "18/69"
+					"1": "5/16"
 				}
 			},
 			"Simple lockbox loot": {
