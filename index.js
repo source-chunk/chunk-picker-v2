@@ -1401,7 +1401,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.6.24';
+let currentVersion = '6.6.24.1';
 let patchNotesVersion = '6.4.0';
 let updateLevel = 'difference';
 
@@ -1565,7 +1565,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.6.24";
+mapImg.src = "osrs_world_map.png?v=6.6.24.1";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3263,7 +3263,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.6.24");
+        myWorker = new Worker("./worker.js?v=6.6.24.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workerOut = 1;
@@ -3566,8 +3566,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.6.24");
-let myWorker2 = new Worker("./worker.js?v=6.6.24");
+let myWorker = new Worker("./worker.js?v=6.6.24.1");
+let myWorker2 = new Worker("./worker.js?v=6.6.24.1");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6422,7 +6422,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.6.24");
+    myWorker2 = new Worker("./worker.js?v=6.6.24.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workerOut++;
@@ -7933,8 +7933,8 @@ let loadPoolsData = function() {
                 return `"${part1}|${part2}"`;
             }).split(',');
             if (i > 1) {
-                !!rowSplit[0] && (formattedData['priority'][rowSplit[0]] = { 'mapcode': rowSplit[1], 'date': formatDate(rowSplit[3]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(rowSplit[3].replaceAll('"', '').replaceAll('|', ',').replace(/\u00A0/g, ' ')).getTime()) / (1000 * 3600 * 24)) });
-                !!rowSplit[6] && (formattedData['new'][rowSplit[6]] = { 'mapcode': rowSplit[7], 'date': formatDate(rowSplit[9]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(rowSplit[9].replaceAll('"', '').replaceAll('|', ',').replace(/\u00A0/g, ' ')).getTime()) / (1000 * 3600 * 24)) });
+                !!rowSplit[0] && (formattedData['priority'][rowSplit[0]] = { 'mapcode': rowSplit[3].includes('/?') ? rowSplit[3].split('/?')[1] : '', 'date': formatDate(rowSplit[2]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(rowSplit[2].replaceAll('"', '').replaceAll('|', ',').replace(/\u00A0/g, ' ')).getTime()) / (1000 * 3600 * 24)) });
+                !!rowSplit[6] && (formattedData['new'][rowSplit[6]] = { 'mapcode': rowSplit[9].includes('/?') ? rowSplit[9].split('/?')[1] : '', 'date': formatDate(rowSplit[8]), 'daysWaiting': Math.floor((currentDate.getTime() - new Date(rowSplit[8].replaceAll('"', '').replaceAll('|', ',').replace(/\u00A0/g, ' ')).getTime()) / (1000 * 3600 * 24)) });
             }
         });
         $('.pools-list').empty();
