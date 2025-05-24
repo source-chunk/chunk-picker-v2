@@ -24750,6 +24750,36 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Kill Yama after offering a contract of forfeit breath*": {
+				"Monsters": ["Yama"],
+				"Items": ["Contract of forfeit breath*"],
+				"Output": "Purifying sigil (top)",
+				"Not F2P": true
+			},
+			"Kill Yama after offering a contract of glyphic attenuation*": {
+				"Monsters": ["Yama"],
+				"Items": ["Contract of glyphic attenuation*"],
+				"Output": "Purifying sigil (bottom)",
+				"Not F2P": true
+			},
+			"Kill Yama after offering a contract of sensory clouding*": {
+				"Monsters": ["Yama"],
+				"Items": ["Contract of sensory clouding*"],
+				"Output": "Purifying sigil (left)",
+				"Not F2P": true
+			},
+			"Kill Yama after offering a contract of divine severance*": {
+				"Monsters": ["Yama"],
+				"Items": ["Contract of divine severance*"],
+				"Output": "Purifying sigil (right)",
+				"Not F2P": true
+			},
+			"Kill Yama after offering a contract of bloodied blows*": {
+				"Monsters": ["Yama"],
+				"Items": ["Contract of bloodied blows*"],
+				"Output": "Purifying sigil (middle)",
+				"Not F2P": true
+			},
 			"Forgotten lockbox loot*": {
 				"Items": ["Forgotten lockbox*"],
 				"Output": "Forgotten lockbox loot",
@@ -27351,6 +27381,16 @@
 			},
 			"Access Kalphite Lair via Dorgesh-Kaan South Dungeon": {
 				"Chunks": ["Dorgesh-Kaan South Dungeon"],
+				"Not F2P": true
+			},
+			"Access Keldagrim via quest": {
+				"Tasks": {
+					"~|The Giant Dwarf|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"Access Keldagrim via entrance": {
+				"Chunks": ["10810-1"],
 				"Not F2P": true
 			},
 			"Access Varrock Sewers via 12854": {
@@ -40827,7 +40867,9 @@
 			},
 			"Keldagrim": {
 				"UnlocksArea": true,
-				"Chunks": ["10810-1"],
+				"Tasks": {
+					"Access Keldagrim[+]": "Nonskill"
+				},
 				"Not F2P": true
 			},
 			"Keldagrim Rat Pits": {
@@ -44159,6 +44201,33 @@
 				"NoPet": true,
 				"NoXp": true,
 				"NoBoost": true
+			},
+			"Recolour a ~|radiant oathplate helm|~": {
+				"Items": ["Oathplate helm*", "Aether rune*", "Purifying sigil (top)", "Purifying sigil (bottom)", "Purifying sigil (left)", "Purifying sigil (right)", "Purifying sigil (middle)"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 601,
+				"Output": "Radiant oathplate helm",
+				"Not F2P": true,
+				"NoPet": true
+			},
+			"Recolour a ~|radiant oathplate chest|~": {
+				"Items": ["Oathplate chest*", "Aether rune*", "Purifying sigil (top)", "Purifying sigil (bottom)", "Purifying sigil (left)", "Purifying sigil (right)", "Purifying sigil (middle)"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 602,
+				"Output": "Radiant oathplate chest",
+				"Not F2P": true,
+				"NoPet": true
+			},
+			"Recolour ~|radiant oathplate legs|~": {
+				"Items": ["Oathplate legs*", "Aether rune*", "Purifying sigil (top)", "Purifying sigil (bottom)", "Purifying sigil (left)", "Purifying sigil (right)", "Purifying sigil (middle)"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 603,
+				"Output": "Radiant oathplate legs",
+				"Not F2P": true,
+				"NoPet": true
 			},
 			"Turn in ~|sulphurous essense|~ to Eyatlalli": {
 				"Chunks": ["Neypotzli"],
@@ -62492,6 +62561,31 @@
 				"Category": ["Untracked Uniques"],
 				"Label": "Untracked Uniques",
 				"Items": ["Contract of worm acquisition"]
+			},
+			"Obtain a ~|purifying sigil (top)|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Purifying sigil (top)"]
+			},
+			"Obtain a ~|purifying sigil (bottom)|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Purifying sigil (bottom)"]
+			},
+			"Obtain a ~|purifying sigil (left)|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Purifying sigil (left)"]
+			},
+			"Obtain a ~|purifying sigil (right)|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Purifying sigil (right)"]
+			},
+			"Obtain a ~|purifying sigil (middle)|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Purifying sigil (middle)"]
 			},
 			"Obtain a ~|big bass|~": {
 				"Category": ["Stuffables"],
@@ -147809,6 +147903,7 @@
 			"Access Blood altar[+]": ["Access an altar via Abyss", "Access Blood altar via Meiyerditch Laboratories"],
 			"Access Wrath altar[+]": ["Access an altar via Abyss", "Access Wrath altar via 9772"],
 			"Access Kalphite Lair[+]": ["Access Kalphite Lair via 12848", "Access Kalphite Lair via Dorgesh-Kaan South Dungeon"],
+			"Access Keldagrim[+]": ["Access Keldagrim via quest", "Access Keldagrim via entrance"],
 			"Access Varrock Sewers[+]": ["Access Varrock Sewers via 12854", "Access Varrock Sewers via ~|Edgeville Dungeon|~"],
 			"Access Edgeville Dungeon[+]": ["Access Edgeville Dungeon via 12342", "Access Edgeville Dungeon via ~|Varrock Sewers|~"],
 			"Mahogany Homes Task[+]": ["Complete a beginner contract for ~|Mahogany Homes|~", "Complete a novice contract for ~|Mahogany Homes|~", "Complete an adept contract for ~|Mahogany Homes|~", "Complete an expert contract for ~|Mahogany Homes|~"],
@@ -185125,55 +185220,55 @@
 		},
 		"Yama": {
 			"Aether catalyst": {
-				"850": "1/13.11"
+				"850": "1/13.59"
 			},
 			"Barrel of demonic tallow": {
-				"1": "1/18.35"
+				"1": "1/19.02"
 			},
 			"Battlestaff": {
-				"40 (noted)": "1/22.94"
+				"40 (noted)": "1/23.78"
 			},
 			"Black bead": {
 				"1": "1/3.667"
 			},
 			"Blood rune": {
-				"400": "1/30.59"
+				"400": "1/31.7"
 			},
 			"Cabbage": {
 				"1": "1/3.667"
 			},
 			"Chasm teleport scroll": {
-				"6": "1/22.5"
+				"6": "1/23.78"
 			},
 			"Demon dung": {
 				"1": "1/5.5"
 			},
 			"Diabolic worms": {
-				"90": "1/13.11"
+				"90": "1/13.59"
 			},
 			"Diamond": {
-				"40 (noted)": "1/30.59"
+				"40 (noted)": "1/31.7"
 			},
 			"Dossier": {
-				"1": "1/20.17"
+				"1": "1/12.1"
 			},
 			"Dragon platelegs": {
-				"1": "1/45.89"
+				"1": "1/47.56"
 			},
 			"Dragone plateskirt": {
-				"1": "1/45.89"
+				"1": "1/47.56"
 			},
 			"Emerald": {
-				"40 (noted)": "1/30.59"
+				"40 (noted)": "1/31.7"
 			},
 			"Fire rune": {
-				"15000": "1/91.77"
+				"75000": "1/95.11"
 			},
 			"Forgotten lockbox": {
-				"1": "1/31.84"
+				"1": "1/33"
 			},
 			"Law rune": {
-				"150": "1/30.59"
+				"150": "1/31.7"
 			},
 			"Oathplate chest": {
 				"1": "1/600"
@@ -185185,32 +185280,32 @@
 				"1": "1/600"
 			},
 			"Oathplate shards": {
-				"12": "1/16.47"
+				"12": "1/17.07"
 			},
 			"Onyx bolt tips": {
-				"150": "1/91.77"
+				"150": "1/95.11"
 			},
 			"Pineapple pizza": {
-				"3-4": "1/12.24"
+				"3-4": "1/12.68"
 			},
 			"Prayer potion(3)": {
-				"2": "1/12.24"
+				"2": "1/12.68"
 			},
 			"Ruby": {
-				"40 (noted)": "1/30.59"
+				"40 (noted)": "1/31.7"
 			},
 			"Rune chainbody": {
-				"8 (noted)": "1/18.35"
+				"8 (noted)": "1/19.02"
 			},
 			"Rune platebody": {
-				"8 (noted)": "1/30.59"
+				"8 (noted)": "1/31.7"
 			},
 			"Smoke rune": {
-				"350": "1/45.89"
+				"350": "1/47.56"
 			},
 			"Soul rune": {
-				"500": "1/45.89",
-				"1000": "1/45.89"
+				"500": "1/47.56",
+				"1000": "1/47.56"
 			},
 			"Soulflame horn": {
 				"1": "2/600"
@@ -185219,22 +185314,25 @@
 				"1": "1/3.667"
 			},
 			"Super combat potion(1)": {
-				"1": "1/12.24"
+				"1": "1/12.68"
 			},
 			"Super restore mix(2)": {
-				"2": "1/12.24"
+				"2": "1/12.68"
 			},
 			"Wild pie": {
-				"3-4": "1/12.24"
+				"3-4": "1/12.68"
 			},
 			"Wrath rune": {
-				"800": "1/91.77"
+				"800": "1/95.11"
 			},
 			"Yami": {
 				"1": "1/2500"
 			},
 			"Zamorak mix(2)": {
-				"1": "1/12.24"
+				"1": "1/12.68"
+			},
+			"Clue scroll (elite)": {
+				"1": "1/66"
 			}
 		},
 		"Yuri": {
@@ -197129,43 +197227,43 @@
 			},
 			"Dossier loot": {
 				"Chasm teleport scroll": {
-					"1": "3/16"
+					"15-18": "Unknown"
 				},
 				"Contract of bloodied blows": {
-					"1": "2/66"
+					"3": "18/128"
 				},
 				"Contract of catalyst acquisition": {
-					"1": "3/66"
+					"1": "3/128"
 				},
 				"Contract of divine severance": {
-					"1": "2/66"
+					"3": "18/128"
 				},
 				"Contract of familiar acquisition": {
-					"1": "12/66"
+					"2": "5/128"
 				},
 				"Contract of forfeit breath": {
-					"1": "2/66"
+					"3": "18/128"
 				},
 				"Contract of glyphic attenuation": {
-					"1": "2/66"
+					"3": "18/128"
 				},
 				"Contract of harmony acquisition": {
-					"1": "1/66"
+					"1": "1/128"
 				},
 				"Contract of oathplate acquisition": {
-					"1": "1/66"
+					"1": "1/128"
 				},
 				"Contract of sensory clouding": {
-					"1": "2/66"
+					"3": "18/128"
 				},
 				"Contract of shard acquisition": {
-					"1": "3/66"
+					"1": "3/128"
 				},
 				"Contract of worm acquisition": {
-					"1": "3/66"
+					"1": "3/128"
 				},
 				"Rite of vile transference": {
-					"1": "5/16"
+					"1": "Unknown"
 				}
 			},
 			"Simple lockbox loot": {
@@ -218565,6 +218663,11 @@
 					"F2P Only": "Nonskill"
 				}]
 			},
+			"City guard": {
+				"10031": [{
+					"~|Watchtower|~ 11": "Quest"
+				}]
+			},
 			"Crab": {
 				"11570": [{
 					"~|Recipe for Disaster/Freeing Pirate Pete|~ 4": "Quest"
@@ -218651,6 +218754,11 @@
 			"Eldric the Ice King": {
 				"Asgarnian Ice Dungeon": [{
 					"F2P Only": "Nonskill"
+				}]
+			},
+			"Enclave guard": {
+				"10031": [{
+					"~|Watchtower|~ 7": "Quest"
 				}]
 			},
 			"Ent": {
@@ -218744,6 +218852,11 @@
 			"Goblin#Drop table 2": {
 				"13108-1": [{
 					"F2P Only": "Nonskill"
+				}]
+			},
+			"Gorad": {
+				"10287-2": [{
+					"~|Watchtower|~ 5": "Quest"
 				}]
 			},
 			"Guard (Ranging Guild)": {
@@ -219036,6 +219149,11 @@
 			"Ogre": {
 				"10036-1": [{
 					"~|Biohazard|~ Complete the quest": "Quest"
+				}]
+			},
+			"Ogre chieftain": {
+				"10031": [{
+					"~|Watchtower|~ 7": "Quest"
 				}]
 			},
 			"Oomlie bird": {
@@ -224299,7 +224417,13 @@
 			"Zamorak d'hide boots": true,
 			"Unholy blessing": true,
 			"Unholy symbol": true,
-			"Zamorak stole": true
+			"Zamorak stole": true,
+			"Oathplate helm": true,
+			"Oathplate chest": true,
+			"Oathplate legs": true,
+			"Radiant oathplate helm": true,
+			"Radiant oathplate chest": true,
+			"Radiant oathplate legs": true
 		},
 		"bandos|Items": {
 			"Ancient mace": true,

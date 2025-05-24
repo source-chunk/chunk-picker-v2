@@ -1079,7 +1079,7 @@ let calcChallenges = function(chunks, baseChunkData) {
             tasksModified = false;
             savedValids = JSON.parse(JSON.stringify(newValids));
             Object.keys(savedValids).filter((skill) => { return skill !== 'BiS' }).forEach((skill) => {
-                Object.keys(savedValids[skill]).sort(function(a, b) { return skill === 'Diary' ? ((diaryTierOrder.indexOf(a.split('|')[1].split('#')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('#')[1]) === 0) ? (chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(a) && chunkInfo['challenges'][skill].hasOwnProperty(b) && chunkInfo['challenges'][skill][a].hasOwnProperty('ManualShow') !== chunkInfo['challenges'][skill][b].hasOwnProperty('ManualShow') ? chunkInfo['challenges'][skill][a].hasOwnProperty('ManualShow') - chunkInfo['challenges'][skill][b].hasOwnProperty('ManualShow') : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true })) : (diaryTierOrder.indexOf(a.split('|')[1].split('#')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('#')[1]))) : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) }).forEach((challenge) => {
+                Object.keys(savedValids[skill]).sort(function(a, b) { return skill === 'Diary' ? ((diaryTierOrder.indexOf(a.split('|')[1].split('#')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('#')[1]) === 0) ? (chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(a) && chunkInfo['challenges'][skill].hasOwnProperty(b) && chunkInfo['challenges'][skill][a].hasOwnProperty('ManualShow') !== chunkInfo['challenges'][skill][b].hasOwnProperty('ManualShow') ? chunkInfo['challenges'][skill][a].hasOwnProperty('ManualShow') - chunkInfo['challenges'][skill][b].hasOwnProperty('ManualShow') : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true })) : (diaryTierOrder.indexOf(a.split('|')[1].split('#')[1]) - diaryTierOrder.indexOf(b.split('|')[1].split('#')[1]))) : a.replaceAll('Task ', '').localeCompare(b.replaceAll('Task ', ''), 'en', { numeric: true }) }).filter((challenge) => !manualTasks.hasOwnProperty(skill) || !manualTasks[skill].hasOwnProperty(challenge)).forEach((challenge) => {
                     if (!passedByTasks[skill]) {
                         passedByTasks[skill] = {};
                     }
@@ -7636,7 +7636,7 @@ let calcCurrentChallenges2 = function() {
                 });
             }
         } else {
-            Object.keys(globalValids[skill]).filter(challenge => !!chunkInfo['challenges'][skill][challenge]['Skills']).forEach((challenge) => {
+            Object.keys(globalValids[skill]).filter(challenge => !!chunkInfo['challenges'][skill][challenge]['Skills'] && (!manualTasks.hasOwnProperty(skill) || !manualTasks[skill].hasOwnProperty(challenge))).forEach((challenge) => {
                 let tempValid = true;
                 Object.keys(chunkInfo['challenges'][skill][challenge]['Skills']).some(subSkill => {
                     let bestBoost = 0;
