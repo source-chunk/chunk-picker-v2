@@ -131949,7 +131949,7 @@
 		"12856": {
 			"Monster": {
 				"Elder Chaos druid": 13,
-				"Zombie pirate": 1
+				"Zombie pirate": 34
 			},
 			"NPC": {
 				"Simon": 1
@@ -134648,7 +134648,7 @@
 			"Sections": {
 				"1": {
 					"NPC": {
-						"Zombie pirate": 1
+						"Zombie pirate (NPC)": 1
 					},
 					"Object": {
 						"Zombie Pirate's Locker": 3
