@@ -26728,6 +26728,10 @@
 				"Chunks": ["Brimhaven Dungeon#Section 4"],
 				"Not F2P": true
 			},
+			"Access Brimhaven Dungeon#Section 3": {
+				"Chunks": ["Brimhaven Dungeon#Section 3"],
+				"Not F2P": true
+			},
 			"Access wilderness pirates": {
 				"Chunks": ["12093"],
 				"Tasks": {
@@ -75084,13 +75088,9 @@
 			"~|Karamja Diary#Medium|~ Task 16": {
 				"Description": "Cross the lava using the stepping stones within Brimhaven Dungeon.",
 				"Chunks": ["Brimhaven Dungeon"],
-				"Items": ["Axe[+]"],
-				"Skills": {
-					"Woodcutting": 10,
-					"Agility": 12
-				},
 				"Tasks": {
-					"~|Karamja Diary#Easy|~ Complete the Easy Diary": "Diary"
+					"~|Karamja Diary#Easy|~ Complete the Easy Diary": "Diary",
+					"KaramjaMedium16[+]": "Nonskill"
 				},
 				"BaseQuest": "Karamja Diary",
 				"Not F2P": true
@@ -147863,6 +147863,7 @@
 			"KaramjaEasy7[+]": ["Catch ~|raw shrimps|~", "Catch ~|raw anchovies|~", "Catch a ~|raw herring|~", "Catch a ~|raw sardine|~", "Catch a ~|raw lobster|~", "Catch a ~|raw tuna|~", "Catch a ~|raw swordfish|~"],
 			"KaramjaMedium13[+]": ["Grow an ~|apple tree|~", "Grow a ~|banana tree|~", "Grow an ~|orange tree|~", "Grow a ~|curry tree|~", "Grow a ~|pineapple plant|~", "Grow a ~|papaya tree|~", "Grow a ~|palm tree|~", "Grow a ~|dragonfruit tree|~"],
 			"KaramjaMedium15[+]": ["Access Brimhaven Dungeon#Section 1 2", "Access Brimhaven Dungeon#Section 2 1", "Access Brimhaven Dungeon#Section 2 2", "Access Brimhaven Dungeon#Section 3 1", "Access Brimhaven Dungeon#Section 3 4", "Access Brimhaven Dungeon#Section 3 5", "Access Brimhaven Dungeon#Section 4 3", "Access Brimhaven Dungeon#Section 6 1", "Access Brimhaven Dungeon#Section 6 2", "Access Brimhaven Dungeon#Section 5 3"],
+			"KaramjaMedium16[+]":["Access Brimhaven Dungeon#Section 3 3", "Access Brimhaven Dungeon#Section 3"],
 			"MorytaniaElite2[+]": ["Burn ~|magic pyre logs|~", "Burn ~|redwood pyre logs|~"],
 			"WildernessMedium3[+]": ["Enter the ~|Wilderness God Wars Dungeon|~ via Strength", "Enter the ~|Wilderness God Wars Dungeon|~ via Agility"],
 			"EnterGodWars[+]": ["Enter the ~|God Wars Dungeon|~ via Strength", "Enter the ~|God Wars Dungeon|~ via Agility"],
