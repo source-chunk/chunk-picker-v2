@@ -41847,10 +41847,20 @@
 				"UnlocksArea": true,
 				"Not F2P": true
 			},
+			"Access Zanaris via 12849": {
+				"Chunks": ["12849-1"]
+			},
+			"Access Zanaris via a fairy ring": {
+				"Objects": ["Fairy ring"],
+				"Tasks": {
+					"~|Fairytale II - Cure a Queen|~ 2": "Quest"
+				}
+			},
 			"Zanaris": {
 				"UnlocksArea": true,
 				"Tasks": {
-					"~|Lost City|~ Complete the quest": "Quest"
+					"~|Lost City|~ Complete the quest": "Quest",
+					"Access Zanaris[+]": "Nonskill"
 				},
 				"Not F2P": true
 			},
@@ -147934,7 +147944,8 @@
 			"ChopJungle[+]": ["Chop ~|dense jungle|~", "Chop ~|medium jungle|~", "Chop ~|light jungle|~"],
 			"WildernessPirateAccess[+]": ["Access wilderness pirates", "Access wilderness zombie pirates"],
 			"ConstructBed[+]": ["Build a ~|wooden bed|~", "Build an ~|oak bed|~", "Build a ~|large oak bed|~", "Build a ~|teak bed|~", "Build a ~|large teak bed|~", "Build a ~|4-poster|~", "Build a ~|gilded 4-poster|~"],
-			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Bag full of gems loot", "Fortis Colosseum loot", "Elven crystal chest loot"]
+			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Bag full of gems loot", "Fortis Colosseum loot", "Elven crystal chest loot"],
+			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"]
 		},
 		"forceTalisman": {
 			"Nature talisman": {
