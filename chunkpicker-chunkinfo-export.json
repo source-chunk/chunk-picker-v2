@@ -55121,6 +55121,12 @@
 				"Items": ["Chasm teleport scroll"],
 				"Not F2P": true
 			},
+			"(Yama) Obtain ~|oathplate shards|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Oathplate shards"],
+				"Not F2P": true
+			},
 			"(Yama) Obtain an ~|oathplate helm|~": {
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
@@ -55145,12 +55151,6 @@
 				"Items": ["Soulflame horn"],
 				"Not F2P": true
 			},
-			"(Yama) Obtain a ~|dragon chainbody|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
-				"Label": "Collection Log",
-				"Items": ["Dragon chainbody"],
-				"Not F2P": true
-			},
 			"(Yama) Obtain a ~|rite of vile transference|~": {
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
@@ -55173,12 +55173,6 @@
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Barrel of demonic tallow (full)"],
-				"Not F2P": true
-			},
-			"(Yama) Obtain ~|oathplate shards|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
-				"Label": "Collection Log",
-				"Items": ["Oathplate shards"],
 				"Not F2P": true
 			},
 			"(Zalcano) Obtain a ~|smolcano|~": {
@@ -81977,6 +81971,30 @@
 				"CombatPoints": 4,
 				"Monsters": ["The Whisperer"]
 			},
+			"~|Combat Achievements#Elite|~ Back so soon?": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama without the judge being attacked with the wrong style and without taking more than one instance of damage each time you are exiled from the arena.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Yama"]
+			},
+			"~|Combat Achievements#Elite|~ Yama Speed-Trialist": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama in an average time of under 3:38 over your last four kills.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Yama"]
+			},
+			"~|Combat Achievements#Elite|~ Yama Adept": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama once.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Yama"]
+			},
 			"~|Combat Achievements#Elite|~ The Spurned Hero": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill Zalcano as the player who has dealt the most damage to her.",
@@ -82053,7 +82071,7 @@
 					"Any": 25000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1014,
+				"CombatPointsNeeded": 1026,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -83372,6 +83390,46 @@
 				"CombatPoints": 5,
 				"Monsters": ["The Whisperer"]
 			},
+			"~|Combat Achievements#Master|~ Yama Speed-Chaser": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama in an average time of under 3:00 over your last four kills.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Yama"]
+			},
+			"~|Combat Achievements#Master|~ No toppings, no drinks, thanks": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama without anybody healing using anything other than plain pizza and without anybody drinking any potions.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Yama"]
+			},
+			"~|Combat Achievements#Master|~ Shadow dancer": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama without getting hit by shadows and without being more than one tile away from the center of his shadow crash attack.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Yama"]
+			},
+			"~|Combat Achievements#Master|~ Yama Veteran": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama 50 times.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Yama"]
+			},
+			"~|Combat Achievements#Master|~ Fire fighter": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama without getting hit by fire and having only killed void flares with special attacks.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Yama"]
+			},
 			"~|Combat Achievements#Master|~ Perfect Zulrah": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill Zulrah whilst taking no damage from the following: Snakelings, Venom Clouds, Zulrah's Green or Crimson phase.",
@@ -83397,7 +83455,7 @@
 					"Any": 35000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1804,
+				"CombatPointsNeeded": 1841,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -84302,6 +84360,30 @@
 				"CombatPoints": 6,
 				"Monsters": ["The Whisperer"]
 			},
+			"~|Combat Achievements#Grandmaster|~ Yama Speed-Runner": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama in an average time of under 2:34 over your last four kills.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Yama"]
+			},
+			"~|Combat Achievements#Grandmaster|~ Contract Choreographer": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama whilst completing 'Shadow Dancer', 'Fire Fighter', 'Back so soon?' and without taking any other avoidable damage.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Yama"]
+			},
+			"~|Combat Achievements#Grandmaster|~ Contractually Unbound": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat Yama under the elevated conditions of one of his non-standard contracts.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Yama"]
+			},
 			"~|Combat Achievements#Grandmaster|~ Zulrah Speed-Runner": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill Zulrah in less than 54 seconds, without a slayer task.",
@@ -84319,7 +84401,7 @@
 					"Any": 50000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 2470,
+				"CombatPointsNeeded": 2525,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			}
@@ -185344,7 +185426,7 @@
 				"1": "1/12.68"
 			},
 			"Clue scroll (elite)": {
-				"1": "1/66"
+				"1": "1/30"
 			}
 		},
 		"Yuri": {
@@ -216141,6 +216223,8 @@
 				"F2P Only": "Nonskill"
 			}],
 			"Rat's paper^": [{
+				"~|What Lies Below|~ 1": "Quest"
+			}, {
 				"F2P Only": "Nonskill"
 			}],
 			"Pure essence^": [{
@@ -277677,7 +277761,7 @@
 		"Twinflame staff": {
 			"attack_speed": 6,
 			"attack_crush": 28,
-			"attack_magic": 12,
+			"attack_magic": 19,
 			"attack_ranged": 0,
 			"attack_slash": -1,
 			"attack_stab": 7,
