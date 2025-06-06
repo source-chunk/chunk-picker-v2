@@ -74023,7 +74023,7 @@
 				"Not F2P": true
 			},
 			"~|Fremennik Diary#Hard|~ Task 5": {
-				"Description": "Craft a Fremennik shield on Neitiznot.",
+				"Description": "Craft a Neitiznot shield on Neitiznot.",
 				"Objects": ["Woodcutting stump"],
 				"Items": ["Axe[+]", "Arctic pine logs", "Hammer", "Rope", "Bronze nails"],
 				"Skills": {
@@ -218952,7 +218952,7 @@
 			},
 			"Gorad": {
 				"10287-2": [{
-					"~|Watchtower|~ 5": "Quest"
+					"~|Watchtower|~ 4": "Quest"
 				}]
 			},
 			"Guard (Ranging Guild)": {
