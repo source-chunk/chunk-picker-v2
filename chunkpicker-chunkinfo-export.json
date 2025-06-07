@@ -138305,6 +138305,7 @@
 						"Well": 1
 					},
 					"Quest": {
+						"Bone Voyage": "step",
 						"Dragon Slayer II": "step"
 					},
 					"Shop": {
@@ -187535,7 +187536,7 @@
 		"Between a Rock...": "10810, 11318, 12085, Dondakan's mine, Dwarven Mine, White Wolf Tunnel, Keldagrim",
 		"Big Chompy Bird Hunting": "10286, 10542, Rantz's cave",
 		"Biohazard": "10035, 10036, 10291, 10292, 11570, 13108",
-		"Bone Voyage": "6454, 12082, 12597, 12853, 13110, 13365, 13366",
+		"Bone Voyage": "6454, 12082, 12597, 12853, 13110, 13365, 13366, 14907",
 		"Cabin Fever": "14638, 14646, 14902",
 		"Children of the Sun": "12853, 12854",
 		"Client of Kourend": "6200, 6202, 6714, 6716, 6968, 7225, 7226",
