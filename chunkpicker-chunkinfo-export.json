@@ -30357,8 +30357,6 @@
 			"Unicow": {
 				"Chunks": ["Tower of Life#Basement"],
 				"Items": ["Cowhide*", "Unicorn horn*"],
-				"Source": "drop",
-				"Output": "Unicow loot",
 				"Not F2P": true
 			},
 			"Spidine": {
@@ -45240,7 +45238,7 @@
 				},
 				"NoBoost": true
 			},
-			"Slay a ~|spitting wyvern|~": {
+			"Slay a ~|Spitting Wyvern|~": {
 				"Level": 66,
 				"Monsters": ["Spitting Wyvern"],
 				"Primary": false,
@@ -45248,7 +45246,7 @@
 				"Source": "drop",
 				"Output": "Spitting Wyvern"
 			},
-			"Slay a ~|taloned wyvern|~": {
+			"Slay a ~|Taloned Wyvern|~": {
 				"Level": 66,
 				"Monsters": ["Taloned Wyvern"],
 				"Primary": false,
@@ -45256,7 +45254,7 @@
 				"Source": "drop",
 				"Output": "Taloned Wyvern"
 			},
-			"Slay a ~|long-tailed wyvern|~": {
+			"Slay a ~|Long-tailed Wyvern|~": {
 				"Level": 66,
 				"Monsters": ["Long-tailed Wyvern"],
 				"Primary": false,
@@ -45272,7 +45270,7 @@
 				"Source": "drop",
 				"Output": "Banshee"
 			},
-			"Slay a ~|twisted banshee|~": {
+			"Slay a ~|Twisted Banshee|~": {
 				"Level": 15,
 				"Monsters": ["Twisted Banshee"],
 				"Primary": false,
@@ -45280,7 +45278,7 @@
 				"Source": "drop",
 				"Output": "Twisted Banshee"
 			},
-			"Slay a ~|basilisk knight|~": {
+			"Slay a ~|Basilisk Knight|~": {
 				"Level": 60,
 				"Monsters": ["Basilisk Knight"],
 				"Primary": false,
@@ -45304,7 +45302,7 @@
 				"Source": "drop",
 				"Output": "Bloodveld"
 			},
-			"Slay a ~|mutated bloodveld|~": {
+			"Slay a ~|Mutated Bloodveld|~": {
 				"Level": 50,
 				"Monsters": ["Mutated Bloodveld"],
 				"Primary": false,
@@ -45381,7 +45379,7 @@
 				"Output": "Cockatrice",
 				"Priority": 1
 			},
-			"Slay a ~|moonlight cockatrice|~": {
+			"Slay a ~|Moonlight Cockatrice|~": {
 				"Level": 25,
 				"Monsters": ["Moonlight Cockatrice"],
 				"Primary": false,
@@ -45389,7 +45387,7 @@
 				"Output": "Moonlight Cockatrice",
 				"Priority": 2
 			},
-			"Slay a ~|crawling hand|~": {
+			"Slay a ~|Crawling Hand|~": {
 				"Level": 5,
 				"Monsters": ["Crawling Hand"],
 				"Primary": false,
@@ -45403,7 +45401,7 @@
 				"Source": "drop",
 				"Output": "Dark beast"
 			},
-			"Slay a ~|small lizard|~": {
+			"Slay a ~|Small Lizard|~": {
 				"Level": 22,
 				"Items": ["Ice cooler"],
 				"Monsters": ["Small Lizard"],
@@ -45412,7 +45410,7 @@
 				"Output": "Small Lizard",
 				"Priority": 1
 			},
-			"Slay a ~|desert lizard|~": {
+			"Slay a ~|Desert Lizard|~": {
 				"Level": 22,
 				"Items": ["Ice cooler"],
 				"Monsters": ["Desert Lizard"],
@@ -45469,7 +45467,7 @@
 				"Source": "drop",
 				"Output": "Gargoyle"
 			},
-			"Slay a ~|harpie bug swarm|~": {
+			"Slay a ~|Harpie Bug Swarm|~": {
 				"Level": 33,
 				"Items": ["Lit bug lantern"],
 				"Monsters": ["Harpie Bug Swarm"],
@@ -45502,7 +45500,7 @@
 				"Source": "drop",
 				"Output": "Hydra"
 			},
-			"Slay an ~|infernal mage|~": {
+			"Slay an ~|Infernal Mage|~": {
 				"Level": 45,
 				"Monsters": ["Infernal Mage"],
 				"Primary": false,
@@ -45533,7 +45531,7 @@
 				"Source": "drop",
 				"Output": "Chilled jelly"
 			},
-			"Slay a ~|warped jelly|~": {
+			"Slay a ~|Warped Jelly|~": {
 				"Level": 52,
 				"Monsters": ["Warped Jelly"],
 				"Primary": false,
@@ -45578,7 +45576,7 @@
 				"Output": "Molanisk",
 				"NoBoost": true
 			},
-			"Slay a ~|warped terrorbird|~": {
+			"Slay a ~|Warped Terrorbird|~": {
 				"Level": 56,
 				"Items": ["Crystal chime"],
 				"Monsters": ["Warped Terrorbird"],
@@ -45587,7 +45585,7 @@
 				"Source": "drop",
 				"Output": "Warped Terrorbird"
 			},
-			"Slay a ~|warped tortoise|~": {
+			"Slay a ~|Warped Tortoise|~": {
 				"Level": 56,
 				"Items": ["Crystal chime"],
 				"Monsters": ["Warped Tortoise"],
@@ -45612,7 +45610,7 @@
 				"Source": "drop",
 				"Output": "Zygomite#Level 86"
 			},
-			"Slay an ~|ancient zygomite|~": {
+			"Slay an ~|Ancient Zygomite|~": {
 				"Level": 57,
 				"Monsters": ["Ancient Zygomite"],
 				"Primary": false,
@@ -45628,7 +45626,7 @@
 				"Source": "drop",
 				"Output": "Nechryael"
 			},
-			"Slay a ~|greater nechryael|~": {
+			"Slay a ~|Greater Nechryael|~": {
 				"Level": 80,
 				"Monsters": ["Greater Nechryael"],
 				"Primary": false,
@@ -45636,7 +45634,7 @@
 				"Source": "drop",
 				"Output": "Greater Nechryael"
 			},
-			"Slay a ~|greater nechryael#Wilderness Slayer Cave|~": {
+			"Slay a ~|Greater Nechryael#Wilderness Slayer Cave|~": {
 				"Level": 80,
 				"Monsters": ["Greater Nechryael#Wilderness Slayer Cave"],
 				"Primary": false,
@@ -45668,7 +45666,7 @@
 				"Source": "drop",
 				"Output": "Rockslug"
 			},
-			"Slay a ~|sea snake hatchling|~": {
+			"Slay a ~|Sea Snake Hatchling|~": {
 				"Level": 40,
 				"Monsters": ["Sea Snake Hatchling"],
 				"Primary": false,
@@ -45676,7 +45674,7 @@
 				"Output": "Sea Snake Hatchling",
 				"Priority": 3
 			},
-			"Slay a ~|sea snake young|~": {
+			"Slay a ~|Sea Snake Young|~": {
 				"Level": 40,
 				"Monsters": ["Sea Snake Young"],
 				"Primary": false,
@@ -45684,7 +45682,7 @@
 				"Output": "Sea Snake Young",
 				"Priority": 4
 			},
-			"Slay a ~|skeletal wyvern|~": {
+			"Slay a ~|Skeletal Wyvern|~": {
 				"Level": 72,
 				"Monsters": ["Skeletal Wyvern"],
 				"Primary": false,
@@ -45748,7 +45746,7 @@
 				"Output": "Spiritual warrior#Ancient Prison",
 				"Priority": 2
 			},
-			"Slay a ~|sulphur lizard|~": {
+			"Slay a ~|Sulphur Lizard|~": {
 				"Level": 44,
 				"Monsters": ["Sulphur Lizard"],
 				"Primary": false,
@@ -45756,7 +45754,7 @@
 				"Output": "Sulphur Lizard",
 				"Priority": 1
 			},
-			"Slay a ~|grimy lizard|~": {
+			"Slay a ~|Grimy Lizard|~": {
 				"Level": 44,
 				"Monsters": ["Grimy Lizard"],
 				"Primary": false,
@@ -45764,7 +45762,7 @@
 				"Output": "Grimy Lizard",
 				"Priority": 2
 			},
-			"Slay a ~|sulphur nagua|~": {
+			"Slay a ~|Sulphur Nagua|~": {
 				"Level": 48,
 				"Monsters": ["Sulphur Nagua"],
 				"Primary": false,
@@ -45772,7 +45770,7 @@
 				"Output": "Sulphur Nagua",
 				"Priority": 1
 			},
-			"Slay a ~|frost nagua|~": {
+			"Slay a ~|Frost Nagua|~": {
 				"Level": 48,
 				"Monsters": ["Frost Nagua"],
 				"Primary": false,
@@ -45860,7 +45858,7 @@
 				"Source": "drop",
 				"Output": "Abyssal demon#Wilderness Slayer Cave"
 			},
-			"Slay an ~|ancient wyvern|~": {
+			"Slay an ~|Ancient Wyvern|~": {
 				"Level": 82,
 				"Monsters": ["Ancient Wyvern"],
 				"Primary": false,
