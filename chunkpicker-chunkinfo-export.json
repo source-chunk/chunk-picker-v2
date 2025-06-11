@@ -31085,7 +31085,7 @@
 				"Output": "Lunar Chest",
 				"Not F2P": true
 			},
-			"Fortis Colosseum loot": {
+			"Fortis Colosseum loot*": {
 				"Category": ["Boss"],
 				"Objects": ["Rewards Chest (Fortis Colosseum)"],
 				"Output": "Rewards Chest (Fortis Colosseum)",
@@ -148025,7 +148025,7 @@
 			"ChopJungle[+]": ["Chop ~|dense jungle|~", "Chop ~|medium jungle|~", "Chop ~|light jungle|~"],
 			"WildernessPirateAccess[+]": ["Access wilderness pirates", "Access wilderness zombie pirates"],
 			"ConstructBed[+]": ["Build a ~|wooden bed|~", "Build an ~|oak bed|~", "Build a ~|large oak bed|~", "Build a ~|teak bed|~", "Build a ~|large teak bed|~", "Build a ~|4-poster|~", "Build a ~|gilded 4-poster|~"],
-			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Bag full of gems loot", "Fortis Colosseum loot", "Elven crystal chest loot"],
+			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Bag full of gems loot", "Fortis Colosseum loot*", "Elven crystal chest loot"],
 			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"]
 		},
 		"forceTalisman": {
