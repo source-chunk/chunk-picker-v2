@@ -1605,6 +1605,13 @@
 				"NoPet": true,
 				"NoBoost": true
 			},
+			"Catch a ~|toy mouse|~": {
+				"Items": ["Toy mouse"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 103,
+				"NoPet": true
+			},
 			"~|The Dig Site|~ Agility skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["13364"],
@@ -10234,6 +10241,7 @@
 				"Chunks": ["Player-owned house"],
 				"Items": ["Clockwork*", "Plank*"],
 				"Level": 33,
+				"Output": "Toy mouse",
 				"Primary": true,
 				"Priority": 108,
 				"SkillsNeeded": {
@@ -97821,7 +97829,8 @@
 				"Tasks": {
 					"~|Twilight's Promise|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"NoBoost": true
 			},
 			"~|Perilous Moons|~ 2": {
 				"BaseQuest": "Perilous Moons",
@@ -106025,6 +106034,7 @@
 					},
 					"Object": {
 						"Fishing spot (small net, bait)": 2,
+						"Impling spawn#all-tier": 1,
 						"Magic tree": 3,
 						"Oak tree": 3,
 						"Tree": 9,
@@ -107053,6 +107063,7 @@
 				},
 				"3": {
 					"Object": {
+						"Impling spawn#all-tier": 1,
 						"Rocks (Ralos' Rise)": 1
 					},
 					"Quest": {
@@ -109134,7 +109145,8 @@
 						"Thief (Varlamore)": 2
 					},
 					"Object": {
-						"Dead tree": 22
+						"Dead tree": 22,
+						"Impling spawn#all-tier": 1
 					},
 					"Spawn": {
 						"Iron dart": 4
@@ -109884,6 +109896,7 @@
 			"Object": {
 				"Fire": 1,
 				"Hardwood tree patch": 1,
+				"Impling spawn#all-tier": 1,
 				"Teak tree": 6,
 				"Tree": 24,
 				"Well": 1
@@ -143351,12 +143364,15 @@
 		},
 		"Player-owned house": {
 			"Connect": {
-				"6968": true,
-				"10547": true,
-				"10806": true,
-				"11828": true,
-				"12854": true,
-				"12894": true
+				"5678": true,
+				"6966": true,
+				"10032": true,
+				"10552": true,
+				"11057": true,
+				"11574": true,
+				"11826": true,
+				"12894": true,
+				"13358": true
 			}
 		},
 		"Poison Waste Dungeon": {
@@ -186280,6 +186296,9 @@
 			"Long bone": {
 				"1": "1/400"
 			},
+			"Curved bone": {
+				"1": "Unknown"
+			},
 			"GemDropTable+": {
 				"1": "1/256"
 			}
@@ -188491,10 +188510,14 @@
 			{ "color": "#1978d2", "x": 3283, "y": 3428 },
 			{ "color": "#6bc71f", "x": 1254, "y": 3559 },
 			{ "color": "#6bc71f", "x": 1275, "y": 3749 },
+			{ "color": "#6bc71f", "x": 1328, "y": 2971 },
+			{ "color": "#6bc71f", "x": 1453, "y": 3130 },
 			{ "color": "#6bc71f", "x": 1525, "y": 3520 },
 			{ "color": "#6bc71f", "x": 1600, "y": 3837 },
 			{ "color": "#6bc71f", "x": 1616, "y": 3701 },
+			{ "color": "#6bc71f", "x": 1617, "y": 3182 },
 			{ "color": "#6bc71f", "x": 1705, "y": 3479 },
+			{ "color": "#6bc71f", "x": 1721, "y": 3001 },
 			{ "color": "#6bc71f", "x": 2198, "y": 2963 },
 			{ "color": "#6bc71f", "x": 2203, "y": 3236 },
 			{ "color": "#6bc71f", "x": 2331, "y": 3639 },
@@ -221123,6 +221146,11 @@
 			"Lobster pot": {
 				"10293": [{
 					"Access the ~|fishing guild|~": "Fishing"
+				}]
+			},
+			"Logs": {
+				"13110-1": [{
+					"F2P Only": "Nonskill"
 				}]
 			},
 			"Longbow": {
