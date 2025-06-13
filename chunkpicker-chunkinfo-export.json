@@ -114492,7 +114492,7 @@
 			},
 			"NPC": {
 				"Rachael": 1,
-				"Sam": 1
+				"Sam (barmaid)": 1
 			},
 			"Name": "Burthorpe Games Room",
 			"Object": {
@@ -139700,7 +139700,7 @@
 			},
 			"NPC": {
 				"Rachael": 1,
-				"Sam": 1
+				"Sam (barmaid)": 1
 			},
 			"Object": {
 				"Crate": 50,
