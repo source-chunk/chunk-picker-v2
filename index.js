@@ -1406,7 +1406,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.6.32';
+let currentVersion = '6.6.32.1';
 let patchNotesVersion = '6.4.0';
 let updateLevel = 'difference';
 
@@ -1570,7 +1570,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.6.32";
+mapImg.src = "osrs_world_map.png?v=6.6.32.1";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3268,7 +3268,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.6.32");
+        myWorker = new Worker("./worker.js?v=6.6.32.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3572,8 +3572,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.6.32");
-let myWorker2 = new Worker("./worker.js?v=6.6.32");
+let myWorker = new Worker("./worker.js?v=6.6.32.1");
+let myWorker2 = new Worker("./worker.js?v=6.6.32.1");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6432,7 +6432,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.6.32");
+    myWorker2 = new Worker("./worker.js?v=6.6.32.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -7951,7 +7951,7 @@ let loadPoolsData = function() {
         });
         $('.pools-list').empty();
         let tableData = '';
-        Object.keys(formattedData['priority']).forEach((username) => {
+        Object.keys(formattedData['priority']).sort((uA, uB) => formattedData['priority'][uB].daysWaiting - formattedData['priority'][uA].daysWaiting).forEach((username) => {
             tableData += `<tr><td>${username}</td><td><a href="https://source-chunk.github.io/chunk-picker-v2/?${formattedData['priority'][username].mapcode}" target="_blank">${formattedData['priority'][username].mapcode.toUpperCase()}</a></td><td>${formattedData['priority'][username].date}</td><td>${formattedData['priority'][username].daysWaiting}</td></tr>`;
         });
         if (Object.keys(formattedData['priority']).length === 0) {
@@ -7960,7 +7960,7 @@ let loadPoolsData = function() {
             $('.pools-list-a').append(`<table><tr><th>Username</th><th>Chunk Picker Map</th><th>Date Joined</th><th>Days Waiting</th></tr>${tableData}</table>`);
         }
         tableData = '';
-        Object.keys(formattedData['new']).forEach((username) => {
+        Object.keys(formattedData['new']).sort((uA, uB) => formattedData['new'][uB].daysWaiting - formattedData['new'][uA].daysWaiting).forEach((username) => {
             tableData += `<tr><td>${username}</td><td><a href="https://source-chunk.github.io/chunk-picker-v2/?${formattedData['new'][username].mapcode}" target="_blank">${formattedData['new'][username].mapcode.toUpperCase()}</a></td><td>${formattedData['new'][username].date}</td><td>${formattedData['new'][username].daysWaiting}</td></tr>`;
         });
         if (Object.keys(formattedData['new']).length === 0) {
