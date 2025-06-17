@@ -1805,8 +1805,10 @@ let calcChallenges = function(chunks, baseChunkData) {
             });
         });
         let sectionsAdded = false;
-        newValids.hasOwnProperty('Nonskill') && Object.keys(newValids['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ConnectsSections') }).forEach((task) => {
-            chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('Sections') && chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => section.includes('-') && chunks.hasOwnProperty(section.split('-')[0]) && (!unlockedSections[section.split('-')[0]] || !unlockedSections[section.split('-')[0]][section.split('-')[1]])).forEach((section) => {
+        newValids.hasOwnProperty('Nonskill') && Object.keys(newValids['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ConnectsSections') && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('Sections') }).forEach((task) => {
+            let chunksValid = chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => chunks.hasOwnProperty(section.split('-')[0])).length === chunkInfo['challenges']['Nonskill'][task]['Sections'].length;
+            let oneSectionValid = chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => !section.includes('-') || (unlockedSections[section.split('-')[0]] && unlockedSections[section.split('-')[0]][section.split('-')[1]])).length > 0;
+            chunksValid && oneSectionValid && chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => section.includes('-') && chunks.hasOwnProperty(section.split('-')[0]) && (!unlockedSections[section.split('-')[0]] || !unlockedSections[section.split('-')[0]][section.split('-')[1]])).forEach((section) => {
                 if (!unlockedSections[section.split('-')[0]]) {
                     unlockedSections[section.split('-')[0]] = {};
                 }

@@ -26090,6 +26090,21 @@
 				"Output": "Secateurs",
 				"Not F2P": true
 			},
+			"5176-1 to 5432-1": {
+				"Sections": ["5176-1", "5432-1"],
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"5433 to 5432-1": {
+				"Sections": ["5433", "5432-1"],
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"5688 to 5432-1": {
+				"Sections": ["5688", "5432-1"],
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
 			"13874-3 to 13874-1": {
 				"Sections": ["13874-1", "13874-3"],
 				"Tasks": {
@@ -186777,88 +186792,85 @@
 				"1": "Always"
 			},
 			"Blood rune": {
-				"30-60": "4/362"
+				"30-60": "4/1260"
 			},
 			"Death rune": {
-				"30-90": "4/362"
+				"30-90": "4/1260"
 			},
 			"Chaos rune": {
-				"30-90": "4/362"
+				"30-90": "4/1260"
 			},
 			"Mind rune": {
-				"30-90": "4/362"
+				"30-90": "4/1260"
 			},
 			"Battlestaff": {
-				"1-3": "8/362"
+				"1-3": "8/1260"
 			},
 			"Adamant platebody": {
-				"1": "6/362"
+				"1": "6/1260"
 			},
 			"Rune med helm": {
-				"1": "6/362"
+				"1": "6/1260"
 			},
 			"Rune warhammer": {
-				"1": "6/362"
+				"1": "6/1260"
 			},
 			"Rune battleaxe": {
-				"1": "6/362"
+				"1": "6/1260"
 			},
 			"Rune longsword": {
-				"1": "6/362"
+				"1": "6/1260"
 			},
 			"Rune sword": {
-				"1": "6/362"
+				"1": "6/1260"
 			},
 			"Rune mace": {
-				"1": "6/362"
+				"1": "6/1260"
 			},
 			"Dragon dagger": {
-				"1": "1/362"
+				"1": "1/1260"
 			},
 			"Dragon longsword": {
-				"1": "1/362"
+				"1": "1/1260"
 			},
 			"Dragon scimitar": {
-				"1": "1/362"
+				"1": "1/1260"
 			},
 			"Blighted ancient ice sack": {
-				"10-30": "12/362"
+				"10-30": "12/1260"
 			},
 			"Blighted anglerfish": {
-				"5-15 (noted)": "12/362"
+				"5-15 (noted)": "12/1260"
 			},
 			"Blighted manta ray": {
-				"5-15 (noted)": "12/362"
+				"5-15 (noted)": "12/1260"
 			},
 			"Blighted karambwan": {
-				"5-15 (noted)": "12/362"
+				"5-15 (noted)": "12/1260"
 			},
 			"Blighted super restore(4)": {
-				"1-3 (noted)": "12/362"
+				"1-3 (noted)": "12/1260"
 			},
 			"Nothing": {
-				"1": "1/2"
+				"1": "1071/1260"
 			},
 			"Coins": {
-				"250-8000": "12/362"
-			},
-			"Larran's key": {
-				"1": "1/362"
+				"1000-8000": "12/1260"
 			},
 			"Zombie pirate key": {
-				"1": "1/24"
+				"1": "16/1260"
 			},
 			"Adamant seeds": {
-				"5-10": "8/362"
+				"5-10": "8/1260"
 			},
 			"Teleport anchoring scroll": {
-				"1": "1/20000"
+				"1": "3/200000"
 			},
 			"Cannonball": {
-				"20-60": "12/362"
+				"20-60": "12/1260"
 			},
 			"Gold ore": {
-				"5-15 (noted)": "12/362"
+				"5-15 (noted)": "12/1260"
 			},
 			"Looting bag": {
 				"1": "1/3"
@@ -186866,8 +186878,11 @@
 			"Zombie champion scroll": {
 				"1": "1/5000"
 			},
+			"Larran's key": {
+				"1": "1/296"
+			},
 			"Slayer's enchantment": {
-				"1": "1/288"
+				"1": "1/1109"
 			}
 		},
 		"Zombie pirate#Braindeath Island": {
