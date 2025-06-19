@@ -28945,7 +28945,8 @@
 			},
 			"Participate in the PvP Arena": {
 				"Category": ["Minigame", "PvP Minigame"],
-				"Chunks": ["13362", "13363"]
+				"Chunks": ["13362", "13363"],
+				"Not F2P": true
 			},
 			"Champions Guild Questpoints": {
 				"QuestPointsNeeded": 32
@@ -104480,7 +104481,7 @@
 			"~|Barbarian Training|~ 2d4": {
 				"BaseQuest": "Barbarian Training",
 				"Description": "Smash a plant pot after planting any tree",
-				"Items": ["TreeSeed[+]", "Trowel", "Empty plant pot"],
+				"Items": ["TreeSeed[+]", "Gardening trowel", "Empty plant pot"],
 				"Objects": ["TreePatch[+]"],
 				"Tasks": {
 					"~|Barbarian Training|~ 2d3": "Quest"
@@ -117518,7 +117519,7 @@
 			"Monster": {
 				"TzHaar-Hur": 5,
 				"TzHaar-Ket": 35,
-				"TzHaar-Mej (monster)": 8,
+				"TzHaar-Mej": 8,
 				"TzHaar-Xil": 7
 			},
 			"NPC": {
@@ -117543,7 +117544,7 @@
 			"Monster": {
 				"TzHaar-Hur": 16,
 				"TzHaar-Ket": 25,
-				"TzHaar-Mej (monster)": 7,
+				"TzHaar-Mej": 7,
 				"TzHaar-Xil": 19
 			},
 			"NPC": {
@@ -117551,7 +117552,7 @@
 				"TzHaar-Hur-Tel": 1,
 				"TzHaar-Ket": 9,
 				"TzHaar-Ket-Zuh": 1,
-				"TzHaar-Mej": 1,
+				"TzHaar-Mej (Diary)": 1,
 				"TzHaar-Mej-Jal": 1,
 				"TzHaar-Mej-Roh": 1
 			},
@@ -118784,7 +118785,7 @@
 			"Monster": {
 				"TzHaar-Hur": 15,
 				"TzHaar-Ket": 31,
-				"TzHaar-Mej (monster)": 9,
+				"TzHaar-Mej": 9,
 				"TzHaar-Xil": 13
 			},
 			"NPC": {
@@ -118812,7 +118813,7 @@
 			"Monster": {
 				"TzHaar-Hur": 10,
 				"TzHaar-Ket": 25,
-				"TzHaar-Mej (monster)": 7,
+				"TzHaar-Mej": 7,
 				"TzHaar-Xil": 17
 			},
 			"NPC": {
@@ -134170,7 +134171,7 @@
 		},
 		"13211": {
 			"Monster": {
-				"Armoured zombie": 1
+				"Armoured zombie (Zemouregal's Base)": 1
 			},
 			"Object": {
 				"Balcony": 7
@@ -142815,7 +142816,7 @@
 			"Monster": {
 				"TzHaar-Hur": 12,
 				"TzHaar-Ket#Level 149": 19,
-				"TzHaar-Mej (monster)": 4,
+				"TzHaar-Mej": 4,
 				"TzHaar-Xil": 14
 			},
 			"NPC": {
@@ -142823,7 +142824,7 @@
 				"TzHaar-Hur-Tel": 1,
 				"TzHaar-Ket": 5,
 				"TzHaar-Ket-Zuh": 1,
-				"TzHaar-Mej": 1,
+				"TzHaar-Mej (Diary)": 1,
 				"TzHaar-Mej-Jal": 1,
 				"TzHaar-Mej-Kah": 1,
 				"TzHaar-Mej-Roh": 1
@@ -142860,7 +142861,7 @@
 			"Monster": {
 				"TzHaar-Hur": 34,
 				"TzHaar-Ket#Level 221": 97,
-				"TzHaar-Mej (monster)": 27,
+				"TzHaar-Mej": 27,
 				"TzHaar-Xil": 42
 			},
 			"NPC": {
@@ -146345,7 +146346,7 @@
 				"13366": true
 			},
 			"Monster": {
-				"Armoured zombie": 41
+				"Armoured zombie (Zemouregal's Base)": 41
 			},
 			"Object": {
 				"Balcony": 7,
@@ -150939,7 +150940,7 @@
 				"Zombie#Unarmed": true,
 				"Zombie#Wilderness": true,
 				"Zombie pirate": true,
-				"Armoured zombie": true,
+				"Armoured zombie (Zemouregal's Base)": true,
 				"Armoured zombie (Zemouregal's Fort)": true
 			},
 			"Zulrah": {
@@ -152531,7 +152532,7 @@
 				"1": "10/128"
 			}
 		},
-		"Armoured zombie": {
+		"Armoured zombie (Zemouregal's Base)": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -152604,8 +152605,72 @@
 			"Bones": {
 				"1": "Always"
 			},
+			"Pure essence": {
+				"20-50 (noted)": "11/128"
+			},
+			"Adamant arrow": {
+				"12": "8/128"
+			},
+			"Blood rune": {
+				"6-14": "4/128"
+			},
+			"Cosmic rune": {
+				"15-30": "3/128"
+			},
+			"Nature rune": {
+				"6-16": "2/128"
+			},
+			"Chaos rune": {
+				"15-30": "1/128"
+			},
+			"Death rune": {
+				"6-14": "1/128"
+			},
+			"Coins": {
+				"20-30": "3/128",
+				"200-600": "30/128"
+			},
+			"Oak plank": {
+				"6 (noted)": "6/128"
+			},
+			"Plank": {
+				"12 (noted)": "5/128"
+			},
+			"Teak plank": {
+				"3 (noted)": "2/128"
+			},
+			"Rune kiteshield": {
+				"1": "1/128"
+			},
+			"Rune mace": {
+				"1": "3/128"
+			},
+			"Eye of newt": {
+				"4-8 (noted)": "1/128"
+			},
+			"Fishing bait": {
+				"6": "1/128"
+			},
+			"Zombie bone": {
+				"1": "1/4"
+			},
 			"Broken zombie helmet": {
+				"1": "1/600"
+			},
+			"Broken zombie axe": {
+				"1": "1/600"
+			},
+			"Zombie champion scroll": {
+				"1": "1/5000"
+			},
+			"Clue scroll (hard)": {
 				"1": "Unknown"
+			},
+			"HerbDropTable+": {
+				"1": "45/128"
+			},
+			"GemDropTable+": {
+				"1": "1/128"
 			}
 		},
 		"Arrg": {
@@ -154505,19 +154570,19 @@
 				"1": "1/195"
 			},
 			"Contract of bloodied blows": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of divine severance": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of forfeit breath": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of glyphic attenuation": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of sensory clouding": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			}
 		},
 		"Black demon#Wilderness Slayer Cave": {
@@ -157594,146 +157659,218 @@
 		},
 		"Corrupted Bat": {
 			"Corrupted shards": {
-				"10-37": "Always"
+				"10-30": "Always",
+				"3-7": "9/24"
+			},
+			"Nothing": {
+				"1": "9/24"
 			},
 			"Raw paddlefish": {
-				"1,3": "Common"
+				"1-3": "3/24"
 			},
 			"Grym leaf (corrupted)": {
-				"1": "Common"
+				"1": "2/24"
 			},
 			"Weapon frame (corrupted)": {
-				"1": "Common"
+				"1": "1/4"
 			},
 			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+				"1": "1/24"
 			}
 		},
 		"Corrupted Bear": {
 			"Corrupted shards": {
-				"1": "Always"
+				"30-60": "Always",
+				"10-21": "9/18"
 			},
 			"Weapon frame (corrupted)": {
 				"1": "Always"
 			},
 			"Raw paddlefish": {
-				"5": "Common"
+				"3-5": "3/18"
+			},
+			"Grym leaf (corrupted)": {
+				"1": "2/18"
+			},
+			"Nothing": {
+				"1": "3/18"
 			},
 			"Corrupted spike": {
 				"1": "Varies"
 			},
+			"Corrupted bowstring": {
+				"1": "Varies"
+			},
+			"Corrupted orb": {
+				"1": "Varies"
+			},
 			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+				"1": "1/18"
 			}
 		},
 		"Corrupted Dark Beast": {
 			"Corrupted shards": {
-				"1": "Always"
+				"30-60": "Always",
+				"10-21": "9/18"
 			},
 			"Weapon frame (corrupted)": {
 				"1": "Always"
 			},
 			"Raw paddlefish": {
-				"5": "Common"
+				"3-5": "3/18"
 			},
-			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+			"Grym leaf (corrupted)": {
+				"1": "2/18"
+			},
+			"Nothing": {
+				"1": "3/18"
+			},
+			"Corrupted spike": {
+				"1": "Varies"
 			},
 			"Corrupted bowstring": {
-				"1": "Always"
+				"1": "Varies"
+			},
+			"Corrupted orb": {
+				"1": "Varies"
+			},
+			"Corrupted teleport crystal": {
+				"1": "1/18"
 			}
 		},
 		"Corrupted Dragon": {
 			"Corrupted shards": {
-				"1": "Always"
+				"30-60": "Always",
+				"10-21": "9/18"
 			},
 			"Weapon frame (corrupted)": {
 				"1": "Always"
 			},
 			"Raw paddlefish": {
-				"5": "Common"
+				"3-5": "3/18"
 			},
-			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+			"Grym leaf (corrupted)": {
+				"1": "2/18"
+			},
+			"Nothing": {
+				"1": "3/18"
+			},
+			"Corrupted spike": {
+				"1": "Varies"
+			},
+			"Corrupted bowstring": {
+				"1": "Varies"
 			},
 			"Corrupted orb": {
-				"1": "Always"
+				"1": "Varies"
+			},
+			"Corrupted teleport crystal": {
+				"1": "1/18"
 			}
 		},
 		"Corrupted Rat": {
 			"Corrupted shards": {
-				"10-37": "Always"
+				"10-30": "Always",
+				"3-7": "9/24"
+			},
+			"Nothing": {
+				"1": "9/24"
 			},
 			"Raw paddlefish": {
-				"1,3": "Common"
+				"1-3": "3/24"
 			},
 			"Grym leaf (corrupted)": {
-				"1": "Common"
+				"1": "2/24"
 			},
 			"Weapon frame (corrupted)": {
-				"1": "Common"
+				"1": "1/4"
 			},
 			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+				"1": "1/24"
 			}
 		},
 		"Corrupted Scorpion": {
 			"Corrupted shards": {
-				"50-105": "Always"
+				"50-100": "Always",
+				"7-14": "9/21"
+			},
+			"Nothing": {
+				"1": "6/21"
 			},
 			"Raw paddlefish": {
-				"3-4": "Common"
+				"2-4": "3/21"
+			},
+			"Grym leaf (corrupted)": {
+				"1": "2/21"
 			},
 			"Weapon frame (corrupted)": {
-				"1": "Common"
+				"1": "2/7"
 			},
 			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+				"1": "1/21"
 			}
 		},
 		"Corrupted Spider": {
 			"Corrupted shards": {
-				"10-37": "Always"
+				"10-30": "Always",
+				"3-7": "9/24"
+			},
+			"Nothing": {
+				"1": "9/24"
 			},
 			"Raw paddlefish": {
-				"1,3": "Common"
+				"1-3": "3/24"
 			},
 			"Grym leaf (corrupted)": {
-				"1": "Common"
+				"1": "2/24"
 			},
 			"Weapon frame (corrupted)": {
-				"1": "Common"
+				"1": "1/4"
 			},
 			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+				"1": "1/24"
 			}
 		},
 		"Corrupted Unicorn": {
 			"Corrupted shards": {
-				"50-105": "Always"
+				"50-100": "Always",
+				"7-14": "9/21"
+			},
+			"Nothing": {
+				"1": "6/21"
 			},
 			"Raw paddlefish": {
-				"4": "Common"
+				"2-4": "3/21"
+			},
+			"Grym leaf (corrupted)": {
+				"1": "2/21"
 			},
 			"Weapon frame (corrupted)": {
-				"1": "Common"
+				"1": "2/7"
 			},
 			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+				"1": "1/21"
 			}
 		},
 		"Corrupted Wolf": {
 			"Corrupted shards": {
-				"50-105": "Always"
+				"50-100": "Always",
+				"7-14": "9/21"
+			},
+			"Nothing": {
+				"1": "6/21"
 			},
 			"Raw paddlefish": {
-				"3-4": "Common"
+				"2-4": "3/21"
+			},
+			"Grym leaf (corrupted)": {
+				"1": "2/21"
 			},
 			"Weapon frame (corrupted)": {
-				"1": "Common"
+				"1": "2/7"
 			},
 			"Corrupted teleport crystal": {
-				"1": "Uncommon"
+				"1": "1/21"
 			}
 		},
 		"Cow": {
@@ -160998,27 +161135,27 @@
 				"1": "Rare"
 			},
 			"Coins": {
-				"22-100": "Common",
-				"153-250": "Common",
-				"677-1000": "Common"
+				"22-100": "15/117",
+				"153-250": "15/117",
+				"677-1000": "15/117"
 			},
 			"Diamond ring": {
-				"1": "Rare"
+				"1": "1/117"
 			},
 			"Lobster": {
-				"1-2": "Common"
+				"1-2": "16/117"
 			},
 			"Meat pie": {
-				"1": "Common"
+				"1": "7/117"
 			},
 			"Prayer potion(1)": {
-				"1": "Common"
+				"1": "16/117"
 			},
 			"Super attack(1)": {
-				"1": "Common"
+				"1": "16/117"
 			},
 			"Super strength(1)": {
-				"1": "Common"
+				"1": "16/117"
 			}
 		},
 		"Elite Dark Ranger": {
@@ -161029,27 +161166,27 @@
 				"1": "Rare"
 			},
 			"Coins": {
-				"22-100": "Common",
-				"153-250": "Common",
-				"677-1000": "Common"
+				"22-100": "15/117",
+				"153-250": "15/117",
+				"677-1000": "15/117"
 			},
 			"Diamond ring": {
-				"1": "Rare"
+				"1": "1/117"
 			},
 			"Lobster": {
-				"1-2": "Common"
+				"1-2": "16/117"
 			},
 			"Meat pie": {
-				"1": "Common"
+				"1": "7/117"
 			},
 			"Prayer potion(1)": {
-				"1": "Common"
+				"1": "16/117"
 			},
 			"Super attack(1)": {
-				"1": "Common"
+				"1": "16/117"
 			},
 			"Super strength(1)": {
-				"1": "Common"
+				"1": "16/117"
 			}
 		},
 		"Elite Dark Warrior": {
@@ -161060,27 +161197,27 @@
 				"1": "Rare"
 			},
 			"Coins": {
-				"22-100": "Common",
-				"153-250": "Common",
-				"677-1000": "Common"
+				"22-100": "15/117",
+				"153-250": "15/117",
+				"677-1000": "15/117"
 			},
 			"Diamond ring": {
-				"1": "Rare"
+				"1": "1/117"
 			},
 			"Lobster": {
-				"1-2": "Common"
+				"1-2": "16/117"
 			},
 			"Meat pie": {
-				"1": "Common"
+				"1": "7/117"
 			},
 			"Prayer potion(1)": {
-				"1": "Common"
+				"1": "16/117"
 			},
 			"Super attack(1)": {
-				"1": "Common"
+				"1": "16/117"
 			},
 			"Super strength(1)": {
-				"1": "Common"
+				"1": "16/117"
 			}
 		},
 		"Elvarg": {
@@ -161129,7 +161266,7 @@
 			"HerbDropTable+": {
 				"1": "15/128"
 			},
-			"GemDropTable": {
+			"GemDropTable+": {
 				"1": "3/128"
 			}
 		},
@@ -161174,7 +161311,7 @@
 			"HerbDropTable+": {
 				"1": "15/128"
 			},
-			"GemDropTable": {
+			"GemDropTable+": {
 				"1": "3/128"
 			}
 		},
@@ -164180,19 +164317,19 @@
 				"1": "1/249"
 			},
 			"Contract of bloodied blows": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of divine severance": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of forfeit breath": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of glyphic attenuation": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of sensory clouding": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			}
 		},
 		"Greater demon#Wilderness Slayer Cave": {
@@ -167449,7 +167586,7 @@
 			"Flyer": {
 				"1": "2/128"
 			},
-			"Potion": {
+			"Potion (Apothecary)": {
 				"1": "1/128"
 			},
 			"Ensouled imp head": {
@@ -169737,19 +169874,19 @@
 				"1": "1/256"
 			},
 			"Contract of bloodied blows": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of divine severance": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of forfeit breath": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of glyphic attenuation": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			},
 			"Contract of sensory clouding": {
-				"1": "Unknown"
+				"1": "Uncommon"
 			}
 		},
 		"Lesser demon#Wilderness Slayer Cave": {
@@ -181303,24 +181440,22 @@
 				"1": "Always"
 			},
 			"Death rune": {
-				"480": "Common",
-				"600": "Common"
+				"120-600": "243/1250"
 			},
 			"Blood rune": {
-				"400": "Common",
-				"500": "Common"
+				"100-500": "243/1250"
 			},
 			"Grimy ranarr weed": {
-				"25 (noted)": "Common"
+				"5-25 (noted)": "243/1250"
 			},
 			"Raw manta ray": {
-				"15 (noted)": "Common"
+				"3-15 (noted)": "243/1250"
 			},
 			"Wine of zamorak": {
-				"25 (noted)": "Common"
+				"5-25 (noted)": "243/1250"
 			},
 			"Ring of 3rd age": {
-				"1": "1/40"
+				"1": "6/250"
 			}
 		},
 		"The Nightmare": {
@@ -182130,58 +182265,61 @@
 				"1": "1/15000"
 			},
 			"Rune med helm": {
-				"1": "Uncommon"
+				"1": "41/1000"
 			},
 			"Rune scimitar": {
-				"1": "Uncommon"
+				"1": "22/1000"
 			},
 			"Adamant bolts": {
-				"1": "Common"
+				"1": "86/1000"
 			},
 			"Earth rune": {
-				"401-599": "Common"
+				"400-600": "41721000"
 			},
 			"Cosmic rune": {
-				"22-30": "Common"
+				"20-30": "76/1000"
 			},
 			"Death rune": {
-				"12-20": "Rare"
+				"10-20": "69/1000"
 			},
 			"Grimy cadantine": {
-				"1 (noted)": "Common"
+				"1 (noted)": "1/65.6"
 			},
 			"Grimy kwuarm": {
-				"1(noted)": "Common"
+				"1(noted)": "1/52.5"
 			},
 			"Grimy dwarf weed": {
-				"1 (noted)": "Common"
+				"1 (noted)": "1/65.6"
+			},
+			"Grimy lantadyme": {
+				"1 (noted)": "1/87.4"
 			},
 			"TreeHerbSeedDropTable+": {
-				"1": "3/100"
+				"1": "31/1000"
 			},
 			"Javelin shaft": {
-				"100-299": "Common"
+				"100-300": "86/1000"
 			},
 			"Adamantite bar": {
-				"1-2 (noted)": "Uncommon"
+				"1-2 (noted)": "54/1000"
 			},
 			"Ruby": {
-				"2-3(noted)": "Uncommon"
+				"2-3(noted)": "53/1000"
 			},
 			"Rune javelin heads": {
-				"10": "Uncommon"
+				"10": "46/1000"
 			},
 			"Dragon javelin heads": {
-				"5": "Rare"
+				"5": "46/1000"
 			},
 			"Shark": {
-				"1": "Uncommon"
+				"1": "92/1000"
 			},
 			"Prayer potion(1)": {
-				"1": "Uncommon"
+				"1": "61/1000"
 			},
 			"Coins": {
-				"1171-1969": "Common"
+				"1000-2000": "96/1000"
 			},
 			"Long bone": {
 				"1": "1/400"
@@ -182196,7 +182334,7 @@
 				"1": "1/1500"
 			},
 			"RareDropTable+": {
-				"1": "Rare"
+				"1": "7/1000"
 			}
 		},
 		"Tortured soul": {
@@ -182825,37 +182963,37 @@
 		},
 		"TzHaar-Hur": {
 			"Uncut sapphire": {
-				"1": "Rare"
+				"1": "16/2048"
 			},
 			"Uncut emerald": {
-				"1": "Rare"
+				"1": "8/2048"
 			},
 			"Uncut ruby": {
-				"1": "Rare"
+				"1": "4/2048"
 			},
 			"Uncut diamond": {
-				"1": "Very rare"
+				"1": "1/2048"
 			},
 			"Tokkul": {
-				"1-16": "Common"
+				"1-16": "64/128"
 			},
 			"Chisel": {
-				"1": "Uncommon"
+				"1": "8/128"
 			},
 			"Hammer": {
-				"1": "Uncommon"
+				"1": "8/128"
 			},
 			"Jug": {
-				"1": "Uncommon"
+				"1": "8/128"
 			},
 			"Knife": {
-				"1": "Uncommon"
+				"1": "8/128"
 			},
 			"Pot": {
-				"1": "Uncommon"
+				"1": "8/128"
 			},
 			"Nothing": {
-				"1": "Common"
+				"1": "355-2048"
 			}
 		},
 		"TzHaar-Ket#Level 149": {
@@ -182931,7 +183069,7 @@
 				"1": "274/512"
 			}
 		},
-		"TzHaar-Mej (monster)": {
+		"TzHaar-Mej": {
 			"Obsidian cape": {
 				"1": "1/4096"
 			},
@@ -182939,40 +183077,41 @@
 				"1": "1/4096"
 			},
 			"Earth rune": {
-				"25": "Common"
+				"25": "4/128"
 			},
 			"Fire rune": {
-				"25": "Common"
+				"25": "4/128"
 			},
 			"Air rune": {
-				"25": "Uncommon"
+				"25": "4/128"
 			},
 			"Chaos rune": {
-				"5": "Uncommon"
+				"5": "2/128"
 			},
 			"Nature rune": {
-				"2": "Uncommon"
+				"2": "2/128"
 			},
 			"Death rune": {
-				"2": "Rare"
+				"2": "2/128"
 			},
 			"Nothing": {
-				"1": "1/2.899"
+				"1": "707/2048"
 			},
 			"Tokkul": {
-				"1-71": "Common"
+				"1-21": "62/128",
+				"22": "2/128"
 			},
 			"Uncut diamond": {
-				"1": "Very rare"
+				"1": "1/2048"
 			},
 			"Uncut emerald": {
-				"1": "Rare"
+				"1": "8/2048"
 			},
 			"Uncut ruby": {
-				"1": "Rare"
+				"1": "4/2048"
 			},
 			"Uncut sapphire": {
-				"1": "Rare"
+				"1": "16/2048"
 			}
 		},
 		"TzHaar-Xil": {
@@ -182989,22 +183128,22 @@
 				"1": "3/1024"
 			},
 			"Tokkul": {
-				"1-59": "Common"
+				"1-32": "72/128"
 			},
 			"Nothing": {
-				"1": "1/2.632"
+				"1": "195/512"
 			},
 			"Uncut sapphire": {
-				"1": "Uncommon"
+				"1": "16/512"
 			},
 			"Uncut emerald": {
-				"1": "Uncommon"
+				"1": "8/512"
 			},
 			"Uncut ruby": {
-				"1": "Uncommon"
+				"1": "4/512"
 			},
 			"Uncut diamond": {
-				"1": "Rare"
+				"1": "1/512"
 			}
 		},
 		"TzKal-Zuk": {
@@ -186312,7 +186451,7 @@
 				"1": "1/400"
 			},
 			"Curved bone": {
-				"1": "Unknown"
+				"1": "1/5013"
 			},
 			"GemDropTable+": {
 				"1": "1/256"
@@ -187308,25 +187447,28 @@
 		},
 		"Fishing spot (Civitas illa Fortis)": {
 			"Old boot": {
-				"1": "Common"
+				"1": "2/10"
 			},
 			"Broken glass": {
-				"1": "Common"
+				"1": "3/10"
 			},
 			"Big fishing net": {
-				"1": "Common"
+				"1": "2/10"
 			},
 			"Casket": {
-				"1": "Common"
+				"1": "2/10"
 			},
 			"House keys": {
-				"1": "Uncommon"
+				"1": "1/10"
 			},
 			"Jade": {
-				"1": "Rare"
+				"1": "1/100"
 			},
 			"Red topaz": {
-				"1": "Rare"
+				"1": "1/500"
+			},
+			"Loop half of key (moon key)": {
+				"1": "1/1200"
 			}
 		},
 		"Fishing spot (Piscatoris Fishing Colony)": {
@@ -194447,7 +194589,7 @@
 			},
 			"Frog spawn": {
 				"Frog spawn": {
-					"1": "Common"
+					"1": "11/256"
 				},
 				"Swamp weed": {
 					"1": "43/1000"
@@ -194499,7 +194641,7 @@
 					"1": "1/500"
 				},
 				"Loop half of key (moon key)": {
-					"1": "Unknown"
+					"1": "1/1200"
 				}
 			},
 			"Fishing spot (The Stranglewood) loot": {
@@ -197358,43 +197500,43 @@
 			},
 			"Dossier loot": {
 				"Chasm teleport scroll": {
-					"15-18": "Unknown"
+					"15-18": "1/15"
 				},
 				"Contract of bloodied blows": {
-					"3": "18/128"
+					"3": "260/1740"
 				},
 				"Contract of catalyst acquisition": {
-					"1": "3/128"
+					"1": "39/1740"
 				},
 				"Contract of divine severance": {
-					"3": "18/128"
+					"3": "260/1740"
 				},
 				"Contract of familiar acquisition": {
-					"2": "5/128"
+					"2": "65/1740"
 				},
 				"Contract of forfeit breath": {
-					"3": "18/128"
+					"3": "260/1740"
 				},
 				"Contract of glyphic attenuation": {
-					"3": "18/128"
+					"3": "260/1740"
 				},
 				"Contract of harmony acquisition": {
-					"1": "1/128"
+					"1": "13/1740"
 				},
 				"Contract of oathplate acquisition": {
-					"1": "1/128"
+					"1": "13/1740"
 				},
 				"Contract of sensory clouding": {
-					"3": "18/128"
+					"3": "260/1740"
 				},
 				"Contract of shard acquisition": {
-					"1": "3/128"
+					"1": "39/1740"
 				},
 				"Contract of worm acquisition": {
-					"1": "3/128"
+					"1": "39/1740"
 				},
 				"Rite of vile transference": {
-					"1": "Unknown"
+					"1": "1/15"
 				}
 			},
 			"Simple lockbox loot": {
@@ -199386,67 +199528,55 @@
 			},
 			"Gnome Restaurant (any)": {
 				"Adamant bolts": {
-					"1": "Common"
+					"1": "Uncommon"
 				},
-				"Bird nest": {
-					"1": "Common"
-				},
-				"Calquat tree seed": {
-					"1": "Rare"
+				"Bird nest (seeds)": {
+					"1": "5/128"
 				},
 				"Coins": {
-					"1": "Common"
+					"2-500": "Common"
 				},
 				"Gnomeball": {
-					"1": "Common"
+					"1": "10/128"
 				},
 				"Loop half of key": {
-					"1": "Rare"
-				},
-				"Magic seed": {
-					"1": "Very rare"
+					"1": "23/640"
 				},
 				"Mithril bolts": {
 					"1": "Common"
-				},
-				"Pineapple seed": {
-					"1": "Rare"
 				},
 				"Runite bolts": {
 					"1": "Rare"
 				},
 				"Snapdragon": {
-					"1": "Uncommon"
+					"1": "10/128"
 				},
 				"Toadflax": {
-					"1": "Uncommon"
+					"3": "10/128"
 				},
 				"Tooth half of key": {
-					"1": "Rare"
+					"1": "23/640"
 				},
 				"Uncut diamond": {
-					"1": "Uncommon"
+					"1": "10/128"
 				},
 				"Uncut emerald": {
-					"1": "Common"
+					"3-5 (noted)": "10/128"
 				},
 				"Uncut jade": {
-					"1": "Common"
+					"2-3 (noted)": "10/128"
 				},
 				"Uncut opal": {
-					"1": "Common"
+					"3 (noted)": "10/128"
 				},
 				"Uncut red topaz": {
-					"1": "Common"
+					"1": "10/128"
 				},
 				"Uncut ruby": {
-					"1": "Common"
+					"2-4 (noted)": "10/128"
 				},
 				"Uncut sapphire": {
-					"1": "Common"
-				},
-				"Yew seed": {
-					"1": "Rare"
+					"6-16 (noted)": "10/128"
 				}
 			},
 			"Gnome Restaurant (Ninto)": {
@@ -201334,22 +201464,22 @@
 					"1": "Always"
 				},
 				"Blighted ancient ice sack": {
-					"25": "Unknown"
+					"25": "3/280"
 				},
 				"Blighted anglerfish": {
-					"15 (noted)": "Unknown"
+					"15 (noted)": "3/280"
 				},
 				"Blighted karambwan": {
-					"25 (noted)": "Unknown"
+					"25 (noted)": "3/280"
 				},
 				"Blighted manta ray": {
-					"25 (noted)": "Unknown"
+					"25 (noted)": "3/280"
 				},
 				"Blighted super restore(4)": {
-					"3 (noted)": "Unknown"
+					"3 (noted)": "3/280"
 				},
 				"Larran's key": {
-					"1": "Unknown"
+					"1": "6/280"
 				}
 			},
 			"Museum Camp loot": {
@@ -201456,8 +201586,8 @@
 				"Fire rune": {
 					"1": "1/27"
 				},
-				"Flyer": {
-					"1": "Common"
+				"Flyer (Iwan)": {
+					"1": "1/3"
 				},
 				"Gauntlet cape": {
 					"1": "Always"
@@ -201495,11 +201625,11 @@
 				"Nature rune": {
 					"1": "1/24"
 				},
-				"Potion": {
-					"1": "Common"
+				"Potion (Apothecary)": {
+					"1": "1/3"
 				},
 				"Rotten tomato": {
-					"1": "Common"
+					"1": "1/3"
 				},
 				"Rune arrow": {
 					"1": "1/24"
@@ -201954,31 +202084,37 @@
 			},
 			"Serum 207 loot": {
 				"Coins": {
-					"1": "Common"
+					"10-20": "59/256"
 				},
 				"Grimy tarromin": {
-					"1": "Common"
+					"1-3": "34/256"
 				},
 				"Hammer": {
-					"1": "Common"
+					"1": "3/256"
 				},
 				"Logs": {
-					"1": "Common"
+					"1-5": "40/256"
 				},
 				"Olive oil(1)": {
-					"1": "Common"
+					"1-3": "20/256"
 				},
 				"Olive oil(2)": {
-					"1": "Common"
+					"1-3": "15/256"
 				},
 				"Olive oil(3)": {
-					"1": "Uncommon"
+					"1": "8/256"
 				},
 				"Olive oil(4)": {
-					"1": "Uncommon"
+					"1": "11/256"
 				},
 				"Swamp paste": {
-					"1": "Common"
+					"1-20": "26/256"
+				},
+				"Vial": {
+					"1-3": "10/256"
+				},
+				"Vial of water": {
+					"1-3": "30/256"
 				}
 			},
 			"Serum 208 loot": {
@@ -203401,198 +203537,228 @@
 			},
 			"Vampyre Juvenile loot": {
 				"Adamant axe": {
-					"1": "Uncommon"
+					"1 (noted)": "10/256"
 				},
 				"Adamant mace": {
-					"1": "Rare"
+					"1 (noted)": "9/256"
 				},
 				"Adamant med helm": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
 				},
 				"Adamant scimitar": {
-					"1": "Rare"
+					"1 (noted)": "2/256"
 				},
 				"Adamant sword": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
+				},
+				"Amulet of magic": {
+					"1 (noted)": "3/256"
 				},
 				"Black 2h sword": {
-					"1": "Rare"
+					"1 (noted)": "4/256"
 				},
 				"Black battleaxe": {
-					"1": "Uncommon"
+					"1 (noted)": "4/256"
 				},
 				"Black chainbody": {
-					"1": "Uncommon"
+					"1 (noted)": "8/256"
 				},
 				"Black full helm": {
-					"1": "Common"
+					"1 (noted)": "14/256"
 				},
 				"Black kiteshield": {
-					"1": "Uncommon"
+					"1 (noted)": "9/256"
 				},
 				"Black platelegs": {
-					"1": "Uncommon"
+					"1 (noted)": "3/256"
+				},
+				"Black plateskirt": {
+					"1 (noted)": "3/256"
 				},
 				"Black spear": {
-					"1": "Rare"
+					"1 (noted)": "5/256"
 				},
 				"Black sq shield": {
-					"1": "Uncommon"
+					"1 (noted)": "15/256"
 				},
 				"Clue scroll (medium)": {
-					"1": "Rare"
+					"1": "2/256"
 				},
 				"Death rune": {
-					"1": "Rare"
+					"10": "8/256"
 				},
 				"Mithril 2h sword": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
 				},
 				"Mithril battleaxe": {
-					"1": "Uncommon"
+					"1 (noted)": "3/256"
 				},
 				"Mithril chainbody": {
-					"1": "Uncommon"
+					"1 (noted)": "3/256"
 				},
 				"Mithril full helm": {
-					"1": "Uncommon"
+					"1 (noted)": "8/256"
 				},
 				"Mithril longsword": {
-					"1": "Uncommon"
+					"1 (noted)": "10/256"
+				},
+				"Mithril kiteshield": {
+					"1 (noted)": "3/256"
 				},
 				"Mithril platelegs": {
-					"1": "Rare"
+					"1 (noted)": "22/256"
 				},
 				"Mithril scimitar": {
-					"1": "Uncommon"
+					"1 (noted)": "17/256"
 				},
 				"Mithril sq shield": {
-					"1": "Rare"
+					"1 (noted)": "7/256"
 				},
 				"Mithril warhammer": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
 				},
 				"Nature rune": {
-					"1": "Rare"
+					"10": "12/256"
 				},
 				"Ruby ring": {
-					"1": "Uncommon"
+					"1 (noted)": "9/256"
 				},
 				"Staff of air": {
-					"1": "Rare"
+					"1 (noted)": "1/256"
+				},
+				"Staff of earth": {
+					"1 (noted)": "1/256"
 				},
 				"Staff of fire": {
-					"1": "Rare"
+					"1 (noted)": "1/256"
+				},
+				"Staff of water": {
+					"1 (noted)": "1/256"
 				},
 				"Steel platebody": {
-					"1": "Common"
+					"1 (noted)": "3/256"
 				},
 				"Steel plateskirt": {
-					"1": "Common"
+					"1 (noted)": "16/256"
 				},
 				"Willow logs": {
-					"1": "Uncommon"
+					"5 (noted)": "16/256"
 				},
 				"Yew logs": {
-					"1": "Uncommon"
+					"5 (noted)": "10/256"
 				}
 			},
 			"Vampyre Juvinate loot": {
 				"Adamant axe": {
-					"1": "Uncommon"
+					"1 (noted)": "10/256"
 				},
 				"Adamant mace": {
-					"1": "Rare"
+					"1 (noted)": "9/256"
 				},
 				"Adamant med helm": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
 				},
 				"Adamant scimitar": {
-					"1": "Rare"
+					"1 (noted)": "2/256"
 				},
 				"Adamant sword": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
+				},
+				"Amulet of magic": {
+					"1 (noted)": "3/256"
 				},
 				"Black 2h sword": {
-					"1": "Rare"
+					"1 (noted)": "4/256"
 				},
 				"Black battleaxe": {
-					"1": "Uncommon"
+					"1 (noted)": "4/256"
 				},
 				"Black chainbody": {
-					"1": "Rare"
+					"1 (noted)": "8/256"
 				},
 				"Black full helm": {
-					"1": "Uncommon"
+					"1 (noted)": "14/256"
 				},
 				"Black kiteshield": {
-					"1": "Uncommon"
+					"1 (noted)": "9/256"
 				},
 				"Black platelegs": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
+				},
+				"Black plateskirt": {
+					"1 (noted)": "3/256"
 				},
 				"Black spear": {
-					"1": "Rare"
+					"1 (noted)": "5/256"
 				},
 				"Black sq shield": {
-					"1": "Uncommon"
+					"1 (noted)": "15/256"
 				},
 				"Clue scroll (medium)": {
-					"1": "Rare"
+					"1": "2/256"
 				},
 				"Death rune": {
-					"1": "Rare"
+					"10": "8/256"
 				},
 				"Mithril 2h sword": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
 				},
 				"Mithril battleaxe": {
-					"1": "Uncommon"
+					"1 (noted)": "3/256"
 				},
 				"Mithril chainbody": {
-					"1": "Uncommon"
+					"1 (noted)": "3/256"
 				},
 				"Mithril full helm": {
-					"1": "Uncommon"
+					"1 (noted)": "8/256"
 				},
 				"Mithril longsword": {
-					"1": "Uncommon"
+					"1 (noted)": "10/256"
+				},
+				"Mithril kiteshield": {
+					"1 (noted)": "3/256"
 				},
 				"Mithril platelegs": {
-					"1": "Rare"
+					"1 (noted)": "22/256"
 				},
 				"Mithril scimitar": {
-					"1": "Uncommon"
+					"1 (noted)": "17/256"
 				},
 				"Mithril sq shield": {
-					"1": "Rare"
+					"1 (noted)": "7/256"
 				},
 				"Mithril warhammer": {
-					"1": "Rare"
+					"1 (noted)": "3/256"
 				},
 				"Nature rune": {
-					"1": "Rare"
+					"10": "12/256"
 				},
 				"Ruby ring": {
-					"1": "Uncommon"
+					"1 (noted)": "9/256"
 				},
 				"Staff of air": {
-					"1": "Rare"
+					"1 (noted)": "1/256"
+				},
+				"Staff of earth": {
+					"1 (noted)": "1/256"
 				},
 				"Staff of fire": {
-					"1": "Rare"
+					"1 (noted)": "1/256"
+				},
+				"Staff of water": {
+					"1 (noted)": "1/256"
 				},
 				"Steel platebody": {
-					"1": "Common"
+					"1 (noted)": "3/256"
 				},
 				"Steel plateskirt": {
-					"1": "Common"
+					"1 (noted)": "16/256"
 				},
 				"Willow logs": {
-					"1": "Uncommon"
+					"5 (noted)": "16/256"
 				},
 				"Yew logs": {
-					"1": "Uncommon"
+					"5 (noted)": "10/256"
 				}
 			},
 			"Wise Old Man tasks": {
@@ -203798,10 +203964,10 @@
 			},
 			"Cabbage loot": {
 				"Cabbage": {
-					"1": "Common"
+					"1": "243/250"
 				},
 				"Cabbage seed": {
-					"1": "Uncommon"
+					"1": "7/250"
 				}
 			},
 			"Potato loot": {
@@ -203809,7 +203975,7 @@
 					"1": "Common"
 				},
 				"Potato seed": {
-					"1": "Uncommon"
+					"1": "Rare"
 				}
 			},
 			"Onion loot": {
@@ -203817,15 +203983,15 @@
 					"1": "Common"
 				},
 				"Onion seed": {
-					"1": "Uncommon"
+					"1": "Rare"
 				}
 			},
 			"Sweetcorn loot": {
 				"Sweetcorn": {
-					"1": "Common"
+					"1": "243/250"
 				},
 				"Sweetcorn seed": {
-					"1": "Uncommon"
+					"1": "7/250"
 				}
 			},
 			"Something nice": {
@@ -208754,7 +208920,7 @@
 					"1": "Rare"
 				},
 				"Tooth half of key (moon key)": {
-					"1": "Unknown"
+					"1": "1/5700"
 				}
 			},
 			"Killerwatt": {
@@ -213385,28 +213551,29 @@
 		"Smithing": {
 			"Barronite deposit loot": {
 				"Ancient astroscope": {
-					"1": "Uncommon"
+					"1": "1/350"
 				},
 				"Ancient carcanet": {
-					"1": "Uncommon"
+					"1": "1/350"
 				},
 				"Ancient globe": {
-					"1": "Uncommon"
+					"1": "1/350"
 				},
 				"Ancient ledger": {
-					"1": "Uncommon"
+					"1": "1/350"
 				},
 				"Ancient treatise": {
-					"1": "Uncommon"
+					"1": "1/350"
 				},
 				"Barronite head": {
-					"1": "Rare"
+					"1": "1/200"
 				},
 				"Barronite shards": {
-					"1": "Common"
+					"6-8": "12/13",
+					"15-35": "1/20"
 				},
 				"Imcando hammer (broken)": {
-					"1": "Rare"
+					"1": "1/300"
 				}
 			},
 			"Calcified deposit loot": {
@@ -214918,79 +215085,94 @@
 			},
 			"Ogre coffin": {
 				"Black nails": {
-					"1-11": "Common"
+					"1-11": "2/100"
 				},
 				"Bronze axe": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Bronze dagger": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Bronze nails": {
-					"1-11": "Common"
+					"1-11": "2/100"
 				},
 				"Bronze pickaxe": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Buttons": {
-					"1": "Rare"
+					"1": "2/100"
 				},
 				"Clue scroll (easy)": {
-					"1": "Rare"
+					"1": "1/100"
 				},
 				"Coins": {
-					"6-20": "Common"
+					"6-20": "15/100"
 				},
 				"Damaged armour": {
-					"1": "Uncommon"
+					"1": "4/100"
+				},
+				"Grimy dwarf weed": {
+					"1": "3/12800"
 				},
 				"Grimy lantadyme": {
-					"1": "Rare"
+					"1": "125/12800"
 				},
 				"Iron axe": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Iron dagger": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Iron nails": {
-					"1-11": "Common"
+					"1-11": "2/100"
 				},
 				"Iron pickaxe": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Knife": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Leather body": {
-					"1": "Uncommon"
+					"1": "3/100"
 				},
 				"Nothing": {
-					"1": "Uncommon"
+					"1": "24/100"
 				},
 				"Rusty sword": {
-					"1": "Uncommon"
+					"1": "4/100"
 				},
 				"Steel axe": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Steel dagger": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Steel nails": {
-					"1-11": "Common"
+					"1-11": "2/100"
 				},
 				"Steel pickaxe": {
-					"1": "Common"
+					"1": "3/100"
 				},
 				"Tinderbox": {
-					"1": "Uncommon"
+					"1": "2/100"
 				},
 				"Uncut jade": {
-					"1": "Rare"
+					"1": "3/100"
 				},
 				"Uncut opal": {
-					"1": "Rare"
+					"1": "3/100"
+				},
+				"Fayrg bones": {
+					"1": "14/28"
+				},
+				"Ourg bones": {
+					"1": "5/28"
+				},
+				"Raurg bones": {
+					"1": "10/28"
+				},
+				"Zogre bones": {
+					"1": "64/28"
 				}
 			},
 			"Paladin": {
@@ -215491,36 +215673,36 @@
 			},
 			"PheasantEvent": {
 				"Golden pheasant egg": {
-					"1": "Rare"
+					"1": "1/1500"
 				},
 				"Pheasant tail feathers": {
-					"1": "Common"
+					"1": "1/2"
 				}
 			},
 			"Sulliuscep": {
 				"Mort myre fungus": {
-					"1": "Rare"
+					"1": "9/100"
 				},
 				"Mushroom": {
-					"1": "Common"
+					"1": "90/100"
 				},
 				"Numulite": {
-					"1": "Uncommon"
+					"5-16": "45/175"
 				},
 				"Sulliuscep cap": {
 					"1": "1/100"
 				},
 				"Unidentified large fossil": {
-					"1": "Rare"
+					"1": "5/875"
 				},
 				"Unidentified medium fossil": {
-					"1": "Rare"
+					"1": "5/700"
 				},
 				"Unidentified rare fossil": {
-					"1": "Rare"
+					"1": "5/3500"
 				},
 				"Unidentified small fossil": {
-					"1": "Rare"
+					"1": "5/350"
 				}
 			},
 			"Supply crate (Mahogany logs)": {
