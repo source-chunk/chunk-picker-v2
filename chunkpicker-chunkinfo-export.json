@@ -431,6 +431,14 @@
 				"Priority": 2,
 				"NoPet": true
 			},
+			"Access the Mountain Camp boulder ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Boulder (Mountain Camp)"],
+				"Level": 10,
+				"Primary": true,
+				"Priority": 2,
+				"NoPet": true
+			},
 			"Access the Cosmic Temple medium narrow walkway ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Jutting wall (Zanaris)#Medium"],
@@ -924,6 +932,14 @@
 				"Tasks": {
 					"~|Beneath Cursed Sands|~ 3": "Quest"
 				},
+				"NoPet": true
+			},
+			"Access the Rellekka Hunter area rocky handholds ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Rocky handholds (Rellekka Hunter area)"],
+				"Level": 35,
+				"Primary": true,
+				"Priority": 49,
 				"NoPet": true
 			},
 			"Access the Varrock Palace Garden trellis ~|shortcut|~": {
@@ -2468,6 +2484,13 @@
 				"Level": 80,
 				"Primary": false,
 				"Priority": 8,
+				"Not F2P": true
+			},
+			"Wield a ~|keris partisan of amascut|~": {
+				"Items": ["Keris partisan of amascut"],
+				"Level": 80,
+				"Primary": false,
+				"Priority": 9,
 				"Not F2P": true
 			},
 			"Wield an ~|osmumten's fang|~": {
@@ -9973,33 +9996,34 @@
 			},
 			"Craft a ~|Hueycoatl hide body|~": {
 				"Items": ["Hueycoatl hide*", "Needle[+]", "Thread[+]*"],
-				"Level": 88,
+				"Level": 78,
 				"Output": "Hueycoatl hide body",
-				"Primary": true,
-				"Not F2P": true
-			},
-			"Craft a ~|Hueycoatl hide chaps|~": {
-				"Items": ["Hueycoatl hide*", "Needle[+]", "Thread[+]*"],
-				"Level": 87,
-				"Output": "Hueycoatl hide chaps",
 				"Primary": true,
 				"Priority": 4,
 				"Not F2P": true
 			},
-			"Craft a ~|Hueycoatl hide coif|~": {
+			"Craft a ~|Hueycoatl hide chaps|~": {
 				"Items": ["Hueycoatl hide*", "Needle[+]", "Thread[+]*"],
-				"Level": 86,
-				"Output": "Hueycoatl hide coif",
+				"Level": 77,
+				"Output": "Hueycoatl hide chaps",
 				"Primary": true,
 				"Priority": 2,
 				"Not F2P": true
 			},
+			"Craft a ~|Hueycoatl hide coif|~": {
+				"Items": ["Hueycoatl hide*", "Needle[+]", "Thread[+]*"],
+				"Level": 76,
+				"Output": "Hueycoatl hide coif",
+				"Primary": true,
+				"Priority": 5,
+				"Not F2P": true
+			},
 			"Craft a ~|Hueycoatl hide vambraces|~": {
 				"Items": ["Hueycoatl hide*", "Needle[+]", "Thread[+]*"],
-				"Level": 86,
+				"Level": 76,
 				"Output": "Hueycoatl hide vambraces",
 				"Primary": true,
-				"Priority": 3,
+				"Priority": 6,
 				"Not F2P": true
 			},
 			"Craft a ~|mixed hide top|~": {
@@ -10696,6 +10720,7 @@
 				"Level": 77,
 				"Output": "Red d'hide body",
 				"Primary": true,
+				"Priority": 1,
 				"Not F2P": true
 			},
 			"Craft a ~|red d'hide shield|~": {
@@ -17564,6 +17589,14 @@
 				"NoXp": true,
 				"NoBoost": true
 			},
+			"Prep the highest number of kills for ~|Duke Sucellus|~": {
+				"Category": ["Boss"],
+				"Chunks": ["Ghorrock Prison"],
+				"Level": 82,
+				"Primary": false,
+				"Not F2P": true,
+				"Priority": 2
+			},
 			"Participate in ~|Mastering Mixology|~": {
 				"Category": ["Minigame"],
 				"Chunks": ["Alchemical Society"],
@@ -18527,6 +18560,7 @@
 				"Items": ["Coconut milk*", "Cave nightshade*", "Poison ivy berries*"],
 				"Level": 82,
 				"Output": "Weapon poison(++)",
+				"Priority": 1,
 				"Primary": true
 			},
 			"Mix a ~|weapon poison(+)|~": {
@@ -18948,7 +18982,6 @@
 				"Priority": 106
 			},
 			"Trap a ~|moss lizard|~": {
-				"Category": ["CoX"],
 				"Level": 20,
 				"Chunks": ["Neypotzli"],
 				"Primary": true,
@@ -19896,10 +19929,13 @@
 				"ManualInvalid": true
 			},
 			"Use a ~|torch|~ to smoke a trap": {
-				"Items": ["Unlit torch", "Tinderbox"],
+				"Items": ["HunterTorch[+]"],
 				"Level": 39,
 				"Priority": 2,
-				"Primary": false
+				"Primary": false,
+				"Tasks": {
+					"SmokableTrapTask[+]": "Hunter"
+				}
 			},
 			"Use a ~|willow bird house|~": {
 				"Items": ["Willow bird house", "Birdhouse seed[+]"],
@@ -21140,6 +21176,14 @@
 				"Items": ["Fire rune[+]*", "Nature rune*"],
 				"Level": 21,
 				"Primary": true
+			},
+			"Cast ~|monster inspect|~": {
+				"Category": ["Spells"],
+				"Items": ["Mind rune*", "Cosmic rune[+]*"],
+				"Level": 42,
+				"Monsters": ["Monster[+]"],
+				"Primary": true,
+				"Priority": 1
 			},
 			"Cast ~|arceuus library teleport|~": {
 				"Category": ["Spells", "Combat and Teleport Spells"],
@@ -22869,6 +22913,7 @@
 				"Items": ["Void Knight equipment[+]"],
 				"Level": 42,
 				"Primary": false,
+				"Priority": 2,
 				"Skills": {
 					"Attack": 42,
 					"Defence": 42,
@@ -27105,6 +27150,11 @@
 				"Output": "Keris partisan of the sun",
 				"Not F2P": true
 			},
+			"Add a jewel of amascut to the keris partisan": {
+				"Items": ["Keris partisan*", "Jewel of amascut*"],
+				"Output": "Keris partisan of amascut",
+				"Not F2P": true
+			},
 			"Get a spade from Konoo": {
 				"Chunks": ["KonooChunks[+]"],
 				"Output": "Spade",
@@ -28908,6 +28958,11 @@
 			},
 			"Grab a bronze pickaxe from the Kebos Lowlands mine rocks*": {
 				"Chunks": ["4921-1"],
+				"Output": "Bronze pickaxe",
+				"Not F2P": true
+			},
+			"Grab a bronze pickaxe from the Desert Quarry rock*": {
+				"Chunks": ["12589"],
 				"Output": "Bronze pickaxe",
 				"Not F2P": true
 			},
@@ -31109,6 +31164,20 @@
 				"Output": "Lunar Chest",
 				"Not F2P": true
 			},
+			"Bryophyta's chest loot*": {
+				"Category": ["Boss"],
+				"Items": ["Mossy key"],
+				"Objects": ["Chest (Bryophyta's lair)"],
+				"Output": "Chest (Bryophyta's lair)",
+				"Not F2P": true
+			},
+			"Obor's chest loot*": {
+				"Category": ["Boss"],
+				"Items": ["Giant key"],
+				"Objects": ["Chest (Obor's lair)"],
+				"Output": "Chest (Obor's lair)",
+				"Not F2P": true
+			},
 			"Fortis Colosseum loot*": {
 				"Category": ["Boss"],
 				"Objects": ["Rewards Chest (Fortis Colosseum)"],
@@ -33072,6 +33141,7 @@
 				"Chunks": ["10044-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"23 degrees 03 minutes north, 02 degrees 01 minutes east": {
@@ -34289,6 +34359,7 @@
 				"Chunks": ["10296"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"South-east of the Lighthouse.": {
@@ -34903,6 +34974,7 @@
 				"Chunks": ["10294-1"],
 				"ClueTier": "easy",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"10 degrees 45 minutes north, 04 degrees 31 minutes east": {
@@ -36901,6 +36973,7 @@
 				"Chunks": ["11571-2"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"Outside the Crafting Guild cow pen.": {
@@ -37056,6 +37129,7 @@
 				"Chunks": ["13619-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"Right on the blessed border, cursed by the evil ones. On the spot inaccessible by both; I will be waiting. The bugs' imminent possession holds the answer.": {
@@ -37154,6 +37228,7 @@
 				"Chunks": ["9778-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"Grave of Scorpius": {
@@ -37207,6 +37282,7 @@
 				"Chunks": ["10546-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"1st floor inside the Necromancer Tower. Easily accessed by using fairy ring code D*J*P.": {
@@ -37328,6 +37404,7 @@
 				"Chunks": ["11570"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"Shrug in the mine near Rimmington. (Gold necklace, Gold ring, Bronze spear)": {
@@ -37443,6 +37520,7 @@
 				"Chunks": ["12338-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
+				"Items": ["Spade"],
 				"Not F2P": true
 			},
 			"Yawn in Draynor Marketplace. (Studded chaps, Iron kiteshield, Steel longsword)": {
@@ -41185,6 +41263,9 @@
 			},
 			"Polar eagle lair": {
 				"UnlocksArea": true,
+				"SkillsNeeded": {
+					"Agility": 35
+				},
 				"Tasks": {
 					"~|Eagles' Peak|~ Complete the quest": "Quest"
 				},
@@ -41266,6 +41347,7 @@
 			},
 			"Jungle eagle lair": {
 				"UnlocksArea": true,
+				"Items": ["YoungVineStick[+]"],
 				"Tasks": {
 					"~|Eagles' Peak|~ Complete the quest": "Quest"
 				},
@@ -46368,6 +46450,72 @@
 					"Prayer": 90
 				},
 				"Priority": 7,
+				"Not F2P": true
+			},
+			"Forge a bronze ~|preform|~ in the Giants' Foundry": {
+				"Chunks": ["Giants' Foundry"],
+				"Items": ["BronzeMats[+]*", "BucketOrGloves[+]"],
+				"Level": 15,
+				"Primary": true,
+				"Tasks": {
+					"~|Sleeping Giants|~ Complete the quest": "Quest"
+				},
+				"Priority": 201,
+				"Not F2P": true
+			},
+			"Forge an iron ~|preform|~ in the Giants' Foundry": {
+				"Chunks": ["Giants' Foundry"],
+				"Items": ["IronMats[+]*", "BucketOrGloves[+]"],
+				"Level": 15,
+				"Primary": true,
+				"Tasks": {
+					"~|Sleeping Giants|~ Complete the quest": "Quest"
+				},
+				"Priority": 202,
+				"Not F2P": true
+			},
+			"Forge a steel ~|preform|~ in the Giants' Foundry": {
+				"Chunks": ["Giants' Foundry"],
+				"Items": ["SteelMats[+]*", "BucketOrGloves[+]"],
+				"Level": 30,
+				"Primary": true,
+				"Tasks": {
+					"~|Sleeping Giants|~ Complete the quest": "Quest"
+				},
+				"Priority": 201,
+				"Not F2P": true
+			},
+			"Forge a mithril ~|preform|~ in the Giants' Foundry": {
+				"Chunks": ["Giants' Foundry"],
+				"Items": ["MithrilMats[+]*", "BucketOrGloves[+]"],
+				"Level": 50,
+				"Primary": true,
+				"Tasks": {
+					"~|Sleeping Giants|~ Complete the quest": "Quest"
+				},
+				"Priority": 201,
+				"Not F2P": true
+			},
+			"Forge an adamant ~|preform|~ in the Giants' Foundry": {
+				"Chunks": ["Giants' Foundry"],
+				"Items": ["AdamantMats[+]*", "BucketOrGloves[+]"],
+				"Level": 70,
+				"Primary": true,
+				"Tasks": {
+					"~|Sleeping Giants|~ Complete the quest": "Quest"
+				},
+				"Priority": 201,
+				"Not F2P": true
+			},
+			"Forge a rune ~|preform|~ in the Giants' Foundry": {
+				"Chunks": ["Giants' Foundry"],
+				"Items": ["RuneMats[+]*", "BucketOrGloves[+]"],
+				"Level": 85,
+				"Primary": true,
+				"Tasks": {
+					"~|Sleeping Giants|~ Complete the quest": "Quest"
+				},
+				"Priority": 201,
 				"Not F2P": true
 			},
 			"Craft a ~|noxious halberd|~": {
@@ -53780,6 +53928,12 @@
 				"Items": ["Mud battlestaff"],
 				"Not F2P": true
 			},
+			"(Deranged Archaeologist) Obtain a ~|steel ring|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Steel ring"],
+				"Not F2P": true
+			},
 			"(Duke Sucellus) Obtain a ~|baron|~": {
 				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
 				"Label": "Collection Log",
@@ -55550,6 +55704,11 @@
 				"Category": ["Collection Log", "Collection Log Raids"],
 				"Label": "Collection Log",
 				"Items": ["Jewel of the sun"]
+			},
+			"(ToA) Obtain a ~|jewel of amascut|~": {
+				"Category": ["Collection Log", "Collection Log Raids"],
+				"Label": "Collection Log",
+				"Items": ["Jewel of amascut"]
 			},
 			"(ToA) Obtain a ~|menaphite ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Raids"],
@@ -81017,12 +81176,12 @@
 			},
 			"~|Combat Achievements#Elite|~ Finding the Weak Spot": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Finish off the Corporeal Beast with a Crystal Halberd special attack.",
+				"Description": "Finish off the Corporeal Beast with a Halberd special attack.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 4,
 				"Monsters": ["Corporeal Beast"],
-				"Items": ["Crystal halberd"]
+				"Items": ["HalberdSpec[+]"]
 			},
 			"~|Combat Achievements#Elite|~ Hot on Your Feet": {
 				"Category": ["Combat Diary Tasks"],
@@ -81148,7 +81307,7 @@
 			},
 			"~|Combat Achievements#Elite|~ Duke Sucellus Speed-Trialist": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Kill Duke Sucellus in less than 1:45 minutes without a slayer task.",
+				"Description": "Kill Duke Sucellus in less than 1:00 minutes without a slayer task.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 4,
@@ -81686,12 +81845,12 @@
 			},
 			"~|Combat Achievements#Elite|~ Chally Time": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Defeat the Pestilent Bloat in the Theatre of Blood: Entry Mode by using a crystal halberd special attack as your final attack.",
+				"Description": "Defeat the Pestilent Bloat in the Theatre of Blood: Entry Mode by using a halberd special attack as your final attack.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 4,
 				"Chunks": ["Theatre of Blood"],
-				"Items": ["Crystal halberd"]
+				"Items": ["HalberdSpec[+]"]
 			},
 			"~|Combat Achievements#Elite|~ They Won't Expect This": {
 				"Category": ["Combat Diary Tasks"],
@@ -82615,7 +82774,7 @@
 			},
 			"~|Combat Achievements#Master|~ Duke Sucellus Speed-Chaser": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Kill Duke Sucellus in less than 1:35 minutes without a slayer task.",
+				"Description": "Kill Duke Sucellus in less than 50 seconds without a slayer task.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
@@ -82908,7 +83067,7 @@
 			},
 			"~|Combat Achievements#Master|~ Phosani's Speedchaser": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Defeat Phosani's Nighmare within 9 minutes.",
+				"Description": "Defeat Phosani's Nighmare within 7:30 minutes.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
@@ -83707,7 +83866,7 @@
 			},
 			"~|Combat Achievements#Grandmaster|~ Duke Sucellus Speed-Runner": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Kill Duke Sucellus in less than 1:25 minutes without a slayer task.",
+				"Description": "Kill Duke Sucellus in less than 40 seconds without a slayer task.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 6,
@@ -84016,7 +84175,7 @@
 			},
 			"~|Combat Achievements#Grandmaster|~ Phosani's Speedrunner": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Defeat Phosani's Nighmare within 7:30 minutes.",
+				"Description": "Defeat Phosani's Nighmare within 6 minutes.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 6,
@@ -96486,6 +96645,9 @@
 				"Description": "Talk to Hamal the Chieftain",
 				"NPCs": ["Hamal the Chieftain"],
 				"Items": ["Rope"],
+				"Skills": {
+					"Agility": 10
+				},
 				"Not F2P": true
 			},
 			"~|Mountain Daughter|~ 2": {
@@ -107263,6 +107425,7 @@
 			"Object": {
 				"Dead tree": 19,
 				"Oak tree": 1,
+				"Organized crime#spawn": 1,
 				"Range": 1,
 				"Water barrel": 1
 			},
@@ -107304,7 +107467,8 @@
 				"Chasm": 1,
 				"Dead tree": 11,
 				"Fairy ring": 1,
-				"Handholds": 3
+				"Handholds": 3,
+				"Organized crime#spawn": 1
 			},
 			"Quest": {
 				"A Kingdom Divided": "step"
@@ -107890,6 +108054,7 @@
 				"Flax": 5,
 				"Gangplank": 2,
 				"Oak tree": 5,
+				"Organized crime#spawn": 1,
 				"Range": 1,
 				"Redberry bush": 2,
 				"Shelf": 1,
@@ -107975,6 +108140,7 @@
 				"Altar": 1,
 				"Dead tree": 17,
 				"Impling spawn#all-tier": 1,
+				"Organized crime#spawn": 1,
 				"Range": 2,
 				"Sink": 1,
 				"Tree": 10,
@@ -108123,6 +108289,7 @@
 						"Furnace": 1,
 						"Iron rocks": 1,
 						"Minecart": 1,
+						"Organized crime#spawn": 1,
 						"Shooting star#landing site": 1,
 						"Sink": 2
 					},
@@ -108164,6 +108331,7 @@
 					"Object": {
 						"Anvil": 3,
 						"Lovakite furnace": 1,
+						"Organized crime#spawn": 1,
 						"Sink": 1
 					},
 					"Shop": {
@@ -108520,6 +108688,7 @@
 				"Fire": 1,
 				"Fishing spot (small net, bait)": 2,
 				"Oak tree": 4,
+				"Organized crime#spawn": 1,
 				"Tree": 18,
 				"Yew tree": 4
 			},
@@ -108650,6 +108819,7 @@
 						"Maple tree": 9,
 						"Minecart": 1,
 						"Monkeybars": 1,
+						"Organized crime#spawn": 1,
 						"Sack": 3,
 						"STASH (medium)": 1,
 						"Tightrope": 2,
@@ -108759,6 +108929,7 @@
 					},
 					"Object": {
 						"Dead tree": 92,
+						"Organized crime#spawn": 1,
 						"Sack": 2,
 						"Sink": 2,
 						"Tree": 3
@@ -108815,6 +108986,7 @@
 						"Tower Mage": 11
 					},
 					"Object": {
+						"Organized crime#spawn": 1,
 						"Stairs": 4
 					},
 					"Quest": {
@@ -109358,6 +109530,7 @@
 						"Minecart": 1,
 						"Noticeboard": 1,
 						"Oak tree": 15,
+						"Organized crime#spawn": 1,
 						"Pinboard": 1,
 						"Range": 1,
 						"Spinning wheel": 1,
@@ -109418,6 +109591,7 @@
 						"Maple tree": 12,
 						"Oak tree": 5,
 						"Onion": 10,
+						"Organized crime#spawn": 1,
 						"Potato": 10,
 						"STASH (hard)": 1,
 						"Sacks": 1,
@@ -109511,6 +109685,7 @@
 				"Fruit Stall": 1,
 				"Gem stall": 2,
 				"Impling spawn#all-tier": 1,
+				"Organized crime#spawn": 2,
 				"Poll booth": 1,
 				"Silk stall": 1,
 				"Silver stall": 1,
@@ -109555,6 +109730,7 @@
 				"Bank booth": 8,
 				"Dead tree": 23,
 				"Dead tree (burnt)": 22,
+				"Organized crime#spawn": 2,
 				"Stairs": 10
 			}
 		},
@@ -110288,6 +110464,7 @@
 						"Maple tree": 2,
 						"Mature juniper tree": 7,
 						"Oak tree": 2,
+						"Organized crime#spawn": 1,
 						"Saltpetre (deposit)": 2,
 						"Spirit Tree Patch": 1,
 						"Stepping stone": 1,
@@ -110456,6 +110633,7 @@
 				"Book of Eternal Flame": 1,
 				"Lectern (Arceuus)": 1,
 				"Magic tree": 4,
+				"Organized crime#spawn": 4,
 				"Stairs": 26
 			},
 			"Quest": {
@@ -110485,6 +110663,7 @@
 					},
 					"Object": {
 						"Altar": 1,
+						"Organized crime#spawn": 1,
 						"Stairs": 14
 					},
 					"Quest": {
@@ -111094,6 +111273,7 @@
 				"House Advertisement": 1,
 				"Iron rocks": 9,
 				"Oak tree": 6,
+				"Organized crime#spawn": 1,
 				"Portal": 1,
 				"Shooting star#landing site": 1,
 				"Silver rocks": 2,
@@ -111159,6 +111339,7 @@
 				"Magic tree": 2,
 				"Oak tree": 8,
 				"Onion": 28,
+				"Organized crime#spawn": 1,
 				"Potato": 65,
 				"Range": 2,
 				"Sink": 2,
@@ -111227,6 +111408,7 @@
 						"Dairy cow": 1,
 						"Fruit Stall": 1,
 						"Oak tree": 18,
+						"Organized crime#spawn": 3,
 						"Potential fire": 1,
 						"Range": 1,
 						"Roses": 6,
@@ -111296,6 +111478,7 @@
 				"Flax": 39,
 				"Minecart": 1,
 				"Oak tree": 14,
+				"Organized crime#spawn": 1,
 				"Shooting star#landing site": 1,
 				"Tree": 27,
 				"Willow tree": 14
@@ -111339,6 +111522,7 @@
 						"Broken lobster trap": 1,
 						"Broken table": 1,
 						"Drawers": 6,
+						"Organized crime#spawn": 2,
 						"Range": 9,
 						"Sink": 9
 					},
@@ -111939,6 +112123,7 @@
 				"Fishing Crane": 5,
 				"Fishing spot (anglerfish)": 3,
 				"Manhole": 1,
+				"Organized crime#spawn": 4,
 				"Range": 3,
 				"Sink": 4
 			},
@@ -122341,7 +122526,7 @@
 				"Dead tree": 14,
 				"Hole": 2,
 				"Hollow log": 3,
-				"Rocky handholds": 3,
+				"Rocky handholds (Rellekka Hunter area)": 3,
 				"Snow drift": 4,
 				"Spiked pit": 6,
 				"Steps": 4,
@@ -123643,7 +123828,7 @@
 			},
 			"Nickname": "Mountain Camp",
 			"Object": {
-				"Boulder": 1,
+				"Boulder (Mountain Camp)": 1,
 				"Clump of rocks": 1,
 				"Dead tree": 30,
 				"Fire": 1,
@@ -145382,6 +145567,7 @@
 			"Object": {
 				"Barrel": 1,
 				"Broken bars": 1,
+				"Chest (Bryophyta's lair)": 1,
 				"Crate": 7,
 				"Dead tree": 5,
 				"Fire#Forester's": 1,
@@ -145440,6 +145626,7 @@
 			"Object": {
 				"Adamantite rocks": 2,
 				"Barrel (beer)": 2,
+				"Chest (Obor's lair)": 1,
 				"Closed chest": 5,
 				"Coal rocks": 6,
 				"Copper rocks": 2,
@@ -146384,7 +146571,7 @@
 		}
 	},
 	"codeItems": {
-		"boneItems": ["Bones", "Burnt bones", "Wolf bones", "Bleached bones", "Monkey bones", "Bat bones", "Big bones", "Jogre bones", "Zogre bones", "Shaikahan bones", "Babydragon bones", "Wyrm bones", "Wyrmling bones", "Dragon bones", "Wyvern bones", "Drake bones", "Fayrg bones", "Lava dragon bones", "Raurg bones", "Hydra bones", "Dagannoth bones", "Ourg bones", "Fiendish ashes", "Vile ashes", "Malicious ashes", "Abyssal ashes", "Infernal ashes"],
+		"boneItems": ["Bones", "Burnt bones", "Wolf bones", "Bleached bones", "Monkey bones", "Bat bones", "Big bones", "Jogre bones", "Zogre bones", "Shaikahan bones", "Babydragon bones", "Wyrm bones", "Wyrmling bones", "Dragon bones", "Wyvern bones", "Drake bones", "Fayrg bones", "Lava dragon bones", "Raurg bones", "Hydra bones", "Dagannoth bones", "Ourg bones", "Fiendish ashes", "Vile ashes", "Malicious ashes", "Abyssal ashes", "Infernal ashes", "Giant bones"],
 		"chunksPlus": {
 			"10Coin[+]": ["10547-1", "10291", "12605", "10553"],
 			"50Coin[+]": ["10547-1", "Mourner Tunnels & Temple of Light"],
@@ -147177,6 +147364,7 @@
 			"Tetra fishing net[+]": ["Small fishing net", "Big fishing net"],
 			"Toad crunchies[+]": ["Toad crunchies", "Premade t'd crunch"],
 			"TorchOrCandle[+]": ["Lit torch", "Lit candle"],
+			"HunterTorch[+]": ["Lit torch", "Bruma torch"],
 			"Tranquility rod[+]": ["Fishing rod", "Fly fishing rod"],
 			"Unholy book[+]": ["Unholy book", "Book of balance"],
 			"Urium remains[+]": ["Loar remains", "Phrin remains", "Riyl remains", "Asyn remains", "Fiyr remains", "Urium remains"],
@@ -147330,7 +147518,15 @@
 			"CheeseBase[+]": ["Bucket of milk", "Pot of cream", "Pat of butter", "Pat of not garlic butter"],
 			"CatFur[+]": ["Fur", "Bear fur", "Grey wolf fur"],
 			"DigsiteTea[+]": ["Cup of tea", "Cup of tea (nettle)"],
-			"AnglerfishWorms[+]": ["Sandworms", "Diabolic worms"]
+			"AnglerfishWorms[+]": ["Sandworms", "Diabolic worms"],
+			"HalberdSpec[+]": ["Dragon halberd", "Crystal halberd"],
+			"BucketOrGloves[+]": ["Bucket of water", "Ice gloves"],
+			"BronzeMats[+]": ["Bronze bar", "Bronze scimitar", "Bronze longsword", "Bronze full helm", "Bronze sq shield", "Bronze claws", "Bronze warhammer", "Bronze battleaxe", "Bronze chainbody", "Bronze kiteshield", "Bronze 2h sword", "Bronze platelegs", "Bronze plateskirt", "Bronze platebody"],
+			"IronMats[+]": ["Iron bar", "Iron scimitar", "Iron longsword", "Iron full helm", "Iron sq shield", "Iron claws", "Iron warhammer", "Iron battleaxe", "Iron chainbody", "Iron kiteshield", "Iron 2h sword", "Iron platelegs", "Iron plateskirt", "Iron platebody"],
+			"SteelMats[+]": ["Steel bar", "Steel scimitar", "Steel longsword", "Steel full helm", "Steel sq shield", "Steel claws", "Steel warhammer", "Steel battleaxe", "Steel chainbody", "Steel kiteshield", "Steel 2h sword", "Steel platelegs", "Steel plateskirt", "Steel platebody"],
+			"MithrilMats[+]": ["Mithril bar", "Mithril scimitar", "Mithril longsword", "Mithril full helm", "Mithril sq shield", "Mithril claws", "Mithril warhammer", "Mithril battleaxe", "Mithril chainbody", "Mithril kiteshield", "Mithril 2h sword", "Mithril platelegs", "Mithril plateskirt", "Mithril platebody"],
+			"AdamantMats[+]": ["Adamantite bar", "Adamant scimitar", "Adamant longsword", "Adamant full helm", "Adamant sq shield", "Adamant claws", "Adamant warhammer", "Adamant battleaxe", "Adamant chainbody", "Adamant kiteshield", "Adamant 2h sword", "Adamant platelegs", "Adamant plateskirt", "Adamant platebody"],
+			"RuneMats[+]": ["Runite bar", "Rune scimitar", "Rune longsword", "Rune full helm", "Rune sq shield", "Rune claws", "Rune warhammer", "Rune battleaxe", "Rune chainbody", "Rune kiteshield", "Rune 2h sword", "Rune platelegs", "Rune plateskirt", "Rune platebody"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -147547,6 +147743,7 @@
 			"Tetra fishing net[+]": "Any fishing net",
 			"Toad crunchies[+]": "Any toad crunchies",
 			"TorchOrCandle[+]": "Any torch or candle",
+			"HunterTorch[+]": "Any torch for smoking hunter traps",
 			"Tranquility rod[+]": "Any fishing rod for Garden of Tranquillity",
 			"Unholy book[+]": "Any unholy book",
 			"Urium remains[+]": "Any urium remains or worse",
@@ -147700,7 +147897,15 @@
 			"CheeseBase[+]": "Any base ingredient that can be churned into cheese",
 			"CatFur[+]": "Any fur used to craft a wooden cat",
 			"DigsiteTea[+]": "Any tea for the panning guide",
-			"AnglerfishWorms[+]": "Any worms used to catch anglerfish"
+			"AnglerfishWorms[+]": "Any worms used to catch anglerfish",
+			"HalberdSpec[+]": "Any halberd with a damaging special attack",
+			"BucketOrGloves[+]": "Either a bucket of water or ice gloves",
+			"BronzeMats[+]": "Any bronze preform materials",
+			"IronMats[+]": "Any iron preform materials",
+			"SteelMats[+]": "Any steel preform materials",
+			"MithrilMats[+]": "Any mithril preform materials",
+			"AdamantMats[+]": "Any adamant preform materials",
+			"RuneMats[+]": "Any rune preform materials"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
@@ -148058,7 +148263,8 @@
 			"WildernessPirateAccess[+]": ["Access wilderness pirates", "Access wilderness zombie pirates"],
 			"ConstructBed[+]": ["Build a ~|wooden bed|~", "Build an ~|oak bed|~", "Build a ~|large oak bed|~", "Build a ~|teak bed|~", "Build a ~|large teak bed|~", "Build a ~|4-poster|~", "Build a ~|gilded 4-poster|~"],
 			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Bag full of gems loot", "Fortis Colosseum loot*", "Elven crystal chest loot"],
-			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"]
+			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"],
+			"SmokableTrapTask[+]": ["Catch an ~|embertailed jerboa|~", "Catch a ~|pyre fox|~", "Catch a ~|tecu salamander|~", "Catch a ~|barb-tailed kebbit|~", "Catch a ~|black chinchompa|~", "Catch a ~|black salamander|~", "Catch a ~|carnivorous chinchompa|~", "Catch a ~|chinchompa (Hunter)|~", "Catch a ~|copper longtail|~", "Catch a ~|crimson swift|~", "Catch a ~|ferret|~", "Catch a ~|golden warbler|~", "Catch a ~|maniacal monkey (Hunter)|~", "Catch a ~|red salamander|~", "Catch a ~|sabre-toothed kebbit|~", "Catch a ~|swamp lizard|~", "Catch a ~|tropical wagtail|~", "Catch a ~|wild kebbit|~", "Catch an ~|imp|~", "Catch an ~|orange salamander|~"]
 		},
 		"forceTalisman": {
 			"Nature talisman": {
@@ -148281,8 +148487,6 @@
 			}
 		},
 		"keyMonsters": {
-			"Bryophyta": ["Mossy key"],
-			"Obor": ["Giant key"],
 			"Skotizo": ["Dark totem top", "Dark totem middle", "Dark totem base"]
 		},
 		"droprateOverrides": {
@@ -156162,107 +156366,11 @@
 			}
 		},
 		"Bryophyta": {
-			"Big bones": {
+			"Giant bones": {
 				"1": "Always"
-			},
-			"Clue scroll (beginner)": {
-				"1": "Always"
-			},
-			"Ensouled giant head": {
-				"1": "Always"
-			},
-			"Rune longsword": {
-				"1": "6/118"
-			},
-			"Rune sword": {
-				"2": "5/118"
-			},
-			"Rune med helm": {
-				"1": "3/118",
-				"2": "6/118"
-			},
-			"Rune chainbody": {
-				"1": "6/118"
-			},
-			"Rune plateskirt": {
-				"1": "6/118"
-			},
-			"Rune platelegs": {
-				"1": "6/118"
-			},
-			"Rune sq shield": {
-				"1": "6/118"
-			},
-			"Adamant kiteshield": {
-				"3": "1/118"
-			},
-			"Adamant platebody": {
-				"5 (noted)": "3/118"
-			},
-			"Battlestaff": {
-				"3": "3/118"
-			},
-			"Cosmic rune": {
-				"100": "6/118"
-			},
-			"Law rune": {
-				"100": "6/118"
-			},
-			"Nature rune": {
-				"100": "8/118"
-			},
-			"Death rune": {
-				"100": "5/118"
-			},
-			"Chaos rune": {
-				"100": "5/118",
-				"200": "6/118"
-			},
-			"Blood rune": {
-				"100": "1/118"
-			},
-			"Adamant arrow": {
-				"100": "1/118"
-			},
-			"Steel bar": {
-				"25 (noted)": "3/118"
-			},
-			"Runite bar": {
-				"2": "6/118"
-			},
-			"Uncut ruby": {
-				"5 (noted)": "4/118"
-			},
-			"Uncut diamond": {
-				"5 (noted)": "4/118"
-			},
-			"Coins": {
-				"8000": "2/118",
-				"10000": "5/118"
-			},
-			"Strength potion(4)": {
-				"15 (noted)": "5/118"
-			},
-			"Bryophyta's essence": {
-				"1": "1/118"
 			},
 			"Mossy key": {
 				"1": "1/16"
-			},
-			"Long bone": {
-				"1": "1/400"
-			},
-			"Giant champion scroll": {
-				"1": "1/5000"
-			},
-			"Curved bone": {
-				"1": "1/5012.5"
-			},
-			"HerbDropTable+": {
-				"1": "5/118"
-			},
-			"UncommonSeedDropTable+": {
-				"1": "6/118"
 			}
 		},
 		"Buffalo": {
@@ -156348,7 +156456,7 @@
 				"900": "1/18"
 			},
 			"Soul rune": {
-				"600": "1/25.2"
+				"450": "1/25.2"
 			},
 			"Cannonball": {
 				"600": "1/31.5"
@@ -156363,10 +156471,10 @@
 				"225 (noted)": "1/25.2"
 			},
 			"Uncut ruby": {
-				"75 (noted)": "1/31.5"
+				"50 (noted)": "1/31.5"
 			},
 			"Uncut diamond": {
-				"35 (noted)": "1/42"
+				"25 (noted)": "1/42"
 			},
 			"Red dragonhide": {
 				"170 (noted)": "1/42"
@@ -156378,7 +156486,7 @@
 				"135 (noted)": "1/63"
 			},
 			"Grimy toadflax": {
-				"150 (noted)": "1/126"
+				"100 (noted)": "1/126"
 			},
 			"Grimy dwarf weed": {
 				"45 (noted)": "1/126"
@@ -156393,7 +156501,7 @@
 				"11": "1/25.2"
 			},
 			"Snapdragon seed": {
-				"8": "1/25.2"
+				"5": "1/25.2"
 			},
 			"Coins": {
 				"50000": "1/12.6"
@@ -158033,6 +158141,9 @@
 		"Crocodile": {
 			"Bones": {
 				"1": "Always"
+			},
+			"HerbDropTable+": {
+				"1": "1/20"
 			}
 		},
 		"Cruor": {
@@ -159898,6 +160009,9 @@
 			"Unidentified rare fossil": {
 				"1": "3/875"
 			},
+			"Steel ring": {
+				"1": "Unknown"
+			},
 			"Clue scroll (elite)": {
 				"1": "1/200"
 			},
@@ -160272,6 +160386,9 @@
 			},
 			"Frozen tablet": {
 				"1": "1/25"
+			},
+			"Gold ring": {
+				"1": "1/240"
 			},
 			"Ice quartz": {
 				"1": "1/200"
@@ -160778,7 +160895,7 @@
 		},
 		"Eldric the Ice King": {
 			"Avantoe seed": {
-				"1-4": "2/35.71"
+				"4": "2/35.71"
 			},
 			"Blood rune": {
 				"30-150": "2/27.78"
@@ -160787,7 +160904,7 @@
 				"1": "1/1500"
 			},
 			"Cadantine seed": {
-				"1-4": "2/35.71"
+				"4": "2/35.71"
 			},
 			"Chaos rune": {
 				"100-400": "2/27.78"
@@ -160808,7 +160925,7 @@
 				"1-24": "2/27.78"
 			},
 			"Dwarf weed seed": {
-				"1-4": "2/35.71"
+				"3": "2/35.71"
 			},
 			"Giantsoul amulet (uncharged)": {
 				"1": "1/16"
@@ -160820,19 +160937,19 @@
 				"1": "1/75"
 			},
 			"Irit seed": {
-				"1-4": "2/35.71"
+				"4": "2/35.71"
 			},
 			"Kwuarm seed": {
-				"1-4": "2/35.71"
+				"4": "2/35.71"
 			},
 			"Lantadyme seed": {
-				"1-4": "2/35.71"
+				"4": "2/35.71"
 			},
 			"Law rune": {
 				"30-150": "2/27.78"
 			},
 			"Maple seed": {
-				"1-6": "2/62.5"
+				"4-6": "2/62.5"
 			},
 			"Mystic water staff": {
 				"1-6 (noted)": "2/35.71"
@@ -160841,13 +160958,13 @@
 				"30-150": "2/27.78"
 			},
 			"Palm tree seed": {
-				"1-2": "2/62.5"
+				"2": "2/62.5"
 			},
 			"Prayer potion(4)": {
 				"1-4": "2/27.78"
 			},
 			"Ranarr seed": {
-				"1-4": "2/35.71"
+				"4": "2/35.71"
 			},
 			"Rune arrow": {
 				"40-300": "2/31.25"
@@ -160877,7 +160994,7 @@
 				"500-3000": "2/35.71"
 			},
 			"Yew seed": {
-				"1-2": "2/62.5"
+				"2": "2/62.5"
 			},
 			"Clue scroll (hard)": {
 				"1": "1/25"
@@ -162934,13 +163051,16 @@
 				"15": "5/128"
 			},
 			"Death rune": {
-				"7": "3/128"
+				"50": "3/128"
 			},
 			"Yew logs": {
 				"100 (noted)": "10/128"
 			},
 			"Shark": {
 				"4": "4/128"
+			},
+			"Ranarr seed": {
+				"1": "1/40"
 			},
 			"Mithril bar": {
 				"1": "3/128"
@@ -165532,6 +165652,11 @@
 			"Vile ashes": {
 				"1": "Always"
 			},
+			"Death rune": {
+				"10": "Unknown",
+				"20": "Unknown",
+				"50": "Unknown"
+			},
 			"Ensouled hellhound head": {
 				"1": "1/40"
 			},
@@ -165570,6 +165695,11 @@
 			"Vile ashes": {
 				"1": "Always"
 			},
+			"Death rune": {
+				"10": "Unknown",
+				"20": "Unknown",
+				"50": "Unknown"
+			},
 			"Ensouled hellhound head": {
 				"1": "1/40"
 			},
@@ -165583,6 +165713,11 @@
 		"Hellhound#Wilderness Slayer Cave": {
 			"Vile ashes": {
 				"1": "Always"
+			},
+			"Death rune": {
+				"10": "Unknown",
+				"20": "Unknown",
+				"50": "Unknown"
 			},
 			"Ensouled hellhound head": {
 				"1": "1/40"
@@ -169401,7 +169536,7 @@
 				"8-13 (noted)": "8/127"
 			},
 			"Dwarf weed seed": {
-				"3": "8/127"
+				"2": "8/127"
 			},
 			"Crystal key": {
 				"1": "1/127"
@@ -172141,58 +172276,58 @@
 				"1": "Always"
 			},
 			"Air rune": {
-				"20-30": "4/52"
+				"20-30": "4/65"
 			},
 			"Water rune": {
-				"20-30": "4/52"
+				"20-30": "4/65"
 			},
 			"Earth rune": {
-				"20-30": "4/52"
+				"20-30": "4/65"
 			},
 			"Fire rune": {
-				"20-30": "4/52"
+				"20-30": "4/65"
 			},
 			"Mind rune": {
-				"20-30": "4/52"
+				"20-30": "4/65"
 			},
 			"Body rune": {
-				"20-30": "4/52"
+				"20-30": "4/65"
 			},
 			"Cosmic rune": {
-				"10-15": "3/52"
+				"10-15": "3/65"
 			},
 			"Chaos rune": {
-				"10-15": "3/52"
+				"10-15": "3/65"
 			},
 			"Nature rune": {
-				"10-15": "3/52"
+				"10-15": "3/65"
 			},
 			"Law rune": {
-				"10-15": "3/52"
+				"10-15": "3/65"
 			},
 			"Death rune": {
-				"4-8": "2/52"
+				"4-8": "2/65"
 			},
 			"Blood rune": {
-				"4-8": "2/52"
+				"4-8": "2/65"
 			},
 			"Coins": {
-				"10-50": "2/52"
+				"10-50": "6/65"
 			},
 			"Staff": {
-				"1": "2/52"
+				"1": "2/65"
 			},
 			"Air talisman": {
-				"1": "1/52"
+				"1": "1/65"
 			},
 			"Water talisman": {
-				"1": "1/52"
+				"1": "1/65"
 			},
 			"Earth talisman": {
-				"1": "1/52"
+				"1": "1/65"
 			},
 			"Fire talisman": {
-				"1": "1/52"
+				"1": "1/65"
 			},
 			"Cursed amulet of magic": {
 				"1": "1/5"
@@ -172569,84 +172704,11 @@
 			}
 		},
 		"Obor": {
-			"Big bones": {
-				"1": "Always",
-				"50 (noted)": "8/118"
-			},
-			"Clue scroll (beginner)": {
+			"Giant bones": {
 				"1": "Always"
-			},
-			"Ensouled giant head": {
-				"1": "Always"
-			},
-			"Rune kiteshield": {
-				"1": "3/118"
-			},
-			"Rune full helm": {
-				"1": "5/118"
-			},
-			"Rune med helm": {
-				"1": "6/118"
-			},
-			"Rune chainbody": {
-				"1": "3/118"
-			},
-			"Rune platelegs": {
-				"1": "3/118"
-			},
-			"Rune plateskirt": {
-				"1": "3/118"
-			},
-			"Rune battleaxe": {
-				"1": "4/118"
-			},
-			"Rune longsword": {
-				"1": "5/118"
-			},
-			"Rune 2h sword": {
-				"1": "3/118"
-			},
-			"Hill giant club": {
-				"1": "1/118"
-			},
-			"Law rune": {
-				"50-99": "12/118"
-			},
-			"Cosmic rune": {
-				"60-119": "12/118"
-			},
-			"Chaos rune": {
-				"100-199": "10/118"
-			},
-			"Death rune": {
-				"40-79": "10/118"
-			},
-			"Nature rune": {
-				"40-79": "7/118"
-			},
-			"Coins": {
-				"10000-20000": "10/118"
-			},
-			"Limpwurt root": {
-				"20 (noted)": "8/118"
-			},
-			"Uncut ruby": {
-				"5 (noted)": "5/118"
-			},
-			"Uncut diamond": {
-				"5 (noted)": "5/118"
 			},
 			"Giant key": {
 				"1": "1/16"
-			},
-			"Long bone": {
-				"1": "1/400"
-			},
-			"Giant champion scroll": {
-				"1": "1/5000"
-			},
-			"Curved bone": {
-				"1": "1/5012.5"
 			}
 		},
 		"Ocga": {
@@ -173409,99 +173471,106 @@
 		},
 		"Phantom Muspah": {
 			"Adamantite ore": {
-				"22 (noted)": "2/22"
+				"22 (noted)": "20/220"
 			},
 			"Ancient brew(3)": {
 				"1-2": "1/9"
 			},
 			"Ancient essence": {
-				"540-599": "1/1.667",
-				"885-995": "1/4.348",
-				"1970-2060": "1/10"
+				"540-599": "60/100",
+				"885-995": "23/100",
+				"1970-2060": "10/100"
 			},
 			"Ancient icon": {
-				"1": "1/50"
+				"1": "1/100"
 			},
 			"Black d'hide body": {
-				"1": "2/44"
+				"1": "10/220"
+			},
+			"Brimstone key": {
+				"1": "1/50"
 			},
 			"Cannonball": {
-				"666": "2/44"
+				"666": "10/220"
 			},
 			"Chaos rune": {
-				"480": "2/44"
+				"480": "10/220"
 			},
 			"Charged ice": {
 				"1": "Always"
 			},
 			"Clue scroll (elite)": {
-				"1": "1/50"
+				"1": "1/45"
 			},
 			"Clue scroll (hard)": {
-				"1": "1/40"
+				"1": "1/30"
 			},
 			"Coal": {
-				"163 (noted)": "2/44"
+				"163 (noted)": "10/220"
 			},
 			"Death rune": {
-				"428": "2/22"
+				"428": "20/220"
 			},
 			"Dragon bolts (unf)": {
-				"89": "2/22"
+				"89": "20/220"
 			},
 			"Dragon platelegs": {
-				"2": "2/55"
+				"2": "8/220"
 			},
 			"Dragon plateskirt": {
-				"1": "2/44"
+				"1": "10/220"
 			},
 			"Fire rune": {
-				"1964": "2/44"
+				"1964": "10/220"
 			},
 			"Frozen cache": {
-				"1": "1/25"
+				"1": "4/100"
 			},
 			"Gold ore": {
-				"180 (noted)": "2/22"
+				"180 (noted)": "20/220"
 			},
 			"Grimy cadantine": {
-				"6 (noted)": "2/176"
+				"6 (noted)": "2.5/220"
 			},
 			"Grimy dwarf weed": {
-				"6 (noted)": "2/176"
+				"6 (noted)": "2.5/220"
 			},
 			"Grimy kwuarm": {
-				"6 (noted)": "2/140.8"
+				"6 (noted)": "3.125/220"
 			},
 			"Grimy lantadyme": {
-				"6 (noted)": "2/234.7"
+				"6 (noted)": "1.875/220"
 			},
 			"Grimy toadflax": {
-				"55 (noted)": "2/73.33"
+				"40 (noted)": "6/220"
 			},
 			"Law rune": {
-				"146": "2/22"
+				"146": "20/220"
 			},
 			"Limpwurt root": {
-				"21 (noted)": "2/73.33"
+				"21 (noted)": "6/220"
 			},
 			"Manta ray": {
-				"28 (noted)": "2/22"
+				"28 (noted)": "5/220"
 			},
 			"Molten glass": {
-				"89 (noted)": "2/22"
+				"89 (noted)": "20/220"
 			},
 			"Muphin": {
 				"1": "1/2500"
+			},
+			"Palm tree seed": {
+				"2": "10/220"
 			},
 			"Prayer potion(3)": {
 				"2-3": "1/9"
 			},
 			"Pure essence": {
-				"2314 (noted)": "2/44"
+				"2314 (noted)": "10/220"
 			},
 			"Ranaar seed": {
-				"8": "2/73.33"
+				"2": "10/220",
+				"5": "6/366.7"
 			},
 			"Ranging potion(3)": {
 				"1-2": "1/9"
@@ -173510,31 +173579,38 @@
 				"1": "10/220"
 			},
 			"Rune kiteshield": {
-				"3 (noted)": "2/22"
+				"3 (noted)": "20/220"
 			},
 			"Rune platelegs": {
-				"3 (noted)": "2/44"
+				"3 (noted)": "10/220"
 			},
 			"Rune sword": {
 				"1": "2/220"
 			},
 			"Runite ore": {
-				"18 (noted)": "2/73.33"
+				"18 (noted)": "6/220"
 			},
 			"Shark": {
-				"4-6": "1/9"
+				"4-6": "1/9",
+				"28 (noted)": "7.5/220"
+			},
+			"Shark lure": {
+				"56": "7.5/220"
 			},
 			"Silver ore": {
-				"101 (noted)": "2/110"
+				"101 (noted)": "4/220"
 			},
 			"Smoke rune": {
-				"314": "2/22"
+				"314": "20/220"
+			},
+			"Spirit seed": {
+				"1": "4/220"
 			},
 			"Snapdragon seed": {
-				"5": "2/55"
+				"5": "8/220"
 			},
 			"Soul rune": {
-				"466": "2/22"
+				"380": "20/220"
 			},
 			"Summer pie": {
 				"4-6": "1/9"
@@ -173542,11 +173618,11 @@
 			"Super restore(3)": {
 				"2-3": "1/9"
 			},
-			"Teak plant": {
-				"22 (noted)": "2/22"
+			"Teak plank": {
+				"22 (noted)": "20/220"
 			},
 			"Torstol seed": {
-				"4": "2/44"
+				"2": "10/220"
 			},
 			"TreeHerbSeedDropTable+": {
 				"1": "10/220"
@@ -173555,7 +173631,10 @@
 				"1": "1/100"
 			},
 			"Water orb": {
-				"21 (noted)": "2/22"
+				"21 (noted)": "20/220"
+			},
+			"Yew seed": {
+				"2": "10/220"
 			}
 		},
 		"Pheasant": {
@@ -173670,7 +173749,7 @@
 				"1": "1/35"
 			},
 			"Slepey tablet": {
-				"1": "1/100"
+				"1": "1/25"
 			},
 			"Parasitic egg": {
 				"1": "1/200"
@@ -181197,7 +181276,7 @@
 				"2-40 (noted)": "3/68"
 			},
 			"Dragon hunter wand": {
-				"1": "1/207"
+				"1": "1/103.5"
 			},
 			"Earth rune": {
 				"150-3000": "2/68"
@@ -181209,7 +181288,7 @@
 				"1": "1/400"
 			},
 			"Hueycoatl hide": {
-				"2-3": "1/34.5"
+				"3": "1/30"
 			},
 			"Kwuarm seed": {
 				"1-20": "3/68"
@@ -181254,7 +181333,7 @@
 				"2-40": "2/68"
 			},
 			"Tome of earth (empty)": {
-				"1": "1/92"
+				"1": "1/72"
 			},
 			"Tooth half of key (moon key)": {
 				"1": "1/150"
@@ -181282,6 +181361,10 @@
 			"Adamantite ore": {
 				"57 (noted)": "1/100",
 				"85 (noted)": "1/100"
+			},
+			"Aether catalyst": {
+				"1000": "1/100",
+				"1500": "1/100"
 			},
 			"Ancient blood onrament kit": {
 				"1": "Always"
@@ -181339,6 +181422,9 @@
 			"Gold ore": {
 				"67 (noted)": "1/12.5",
 				"101 (noted)": "1/12.5"
+			},
+			"Gold ring": {
+				"1": "1/256"
 			},
 			"Iron ore": {
 				"57 (noted)": "1/100",
@@ -181650,6 +181736,9 @@
 			"Gold ore": {
 				"88 (noted)": "1/100",
 				"132 (noted)": "1/100"
+			},
+			"Gold ring": {
+				"1": "1/170.66"
 			},
 			"Iron ore": {
 				"88 (noted)": "1/100",
@@ -183508,6 +183597,9 @@
 				"120": "1/100",
 				"180": "1/100"
 			},
+			"Gold ring": {
+				"1": "1/362.66"
+			},
 			"Iron ore": {
 				"38 (noted)": "1/100",
 				"57 (noted)": "1/100"
@@ -183664,7 +183756,7 @@
 				"600": "1/31.5"
 			},
 			"Uncut diamond": {
-				"35 (noted)": "1/15.75"
+				"25 (noted)": "1/15.75"
 			},
 			"Gold ore": {
 				"675 (noted)": "1/21"
@@ -183688,7 +183780,7 @@
 				"12 (noted)": "1/63"
 			},
 			"Uncut ruby": {
-				"75 (noted)": "1/126"
+				"50 (noted)": "1/126"
 			},
 			"Unicorn horn": {
 				"225 (noted)": "1/126"
@@ -183697,7 +183789,7 @@
 				"45 (noted)": "1/126"
 			},
 			"Grimy snapdragon": {
-				"150 (noted)": "1/126"
+				"100 (noted)": "1/126"
 			},
 			"Grimy toadflax": {
 				"45 (noted)": "1/126"
@@ -183952,10 +184044,10 @@
 				"400 (noted)": "1/25.2"
 			},
 			"Uncut ruby": {
-				"75 (noted)": "1/31.5"
+				"50 (noted)": "1/31.5"
 			},
 			"Uncut diamond": {
-				"35 (noted)": "1/42"
+				"25 (noted)": "1/42"
 			},
 			"Dragon bones": {
 				"150 (noted)": "1/42"
@@ -184073,10 +184165,10 @@
 				"1": "2/75"
 			},
 			"Chaos rune": {
-				"650-1000": "2/25"
+				"250-350": "2/25"
 			},
 			"Death rune": {
-				"300-500": "2/25"
+				"200-300": "2/25"
 			},
 			"Wrath rune": {
 				"30-60": "2/50"
@@ -184134,8 +184226,14 @@
 			"Magic logs": {
 				"50 (noted)": "2/30"
 			},
+			"Shark": {
+				"35-55 (noted)": "2/100"
+			},
+			"Shark lure": {
+				"70-110": "2/100"
+			},
 			"Manta ray": {
-				"35-55 (noted)": "2/37.5"
+				"35-55 (noted)": "2/150"
 			},
 			"Dragon bones": {
 				"15-20 (noted)": "2/37.5"
@@ -187256,13 +187354,13 @@
 				"1": "2/248"
 			},
 			"Death rune": {
-				"300": "12/248"
+				"250": "12/248"
 			},
 			"Law rune": {
 				"200": "12/248"
 			},
 			"Chaos rune": {
-				"500": "12/248"
+				"400": "12/248"
 			},
 			"Snapdragon": {
 				"10 (noted)": "2/248"
@@ -187334,7 +187432,13 @@
 				"4": "15/248"
 			},
 			"Manta ray": {
-				"35 (noted)": "12/248"
+				"35 (noted)": "3/248"
+			},
+			"Raw shark": {
+				"35 (noted)": "4.5/248"
+			},
+			"Shark lure": {
+				"70": "4.5/248"
 			},
 			"Antidote++(4)": {
 				"10 (noted)": "9/248"
@@ -188734,6 +188838,42 @@
 			{ "color": "#ffc719", "x": 3212, "y": 3345 },
 			{ "color": "#ffc719", "x": 2538, "y": 3845 },
 			{ "color": "#ffc719", "x": 1396, "y": 2902 }
+		],
+		"Organized Crime": [
+			{ "color": "#6bc71f", "x": 1650, "y": 3726 },
+			{ "color": "#6bc71f", "x": 1699, "y": 3793 },
+			{ "color": "#6bc71f", "x": 1686, "y": 3765 },
+			{ "color": "#6bc71f", "x": 1688, "y": 3721 },
+			{ "color": "#6bc71f", "x": 1720, "y": 3765 },
+			{ "color": "#6bc71f", "x": 1721, "y": 3727 },
+			{ "color": "#6bc71f", "x": 1629, "y": 3745 },
+			{ "color": "#6bc71f", "x": 1762, "y": 3593 },
+			{ "color": "#6bc71f", "x": 1641, "y": 3609 },
+			{ "color": "#6bc71f", "x": 1743, "y": 3616 },
+			{ "color": "#6bc71f", "x": 1776, "y": 3504 },
+			{ "color": "#6bc71f", "x": 1654, "y": 3549 },
+			{ "color": "#6bc71f", "x": 1755, "y": 3706 },
+			{ "color": "#6bc71f", "x": 1752, "y": 3549 },
+			{ "color": "#6bc71f", "x": 1756, "y": 3639 },
+			{ "color": "#6bc71f", "x": 1674, "y": 3575 },
+			{ "color": "#6bc71f", "x": 1564, "y": 3758 },
+			{ "color": "#6bc71f", "x": 1556, "y": 3785 },
+			{ "color": "#6bc71f", "x": 1517, "y": 3834 },
+			{ "color": "#6bc71f", "x": 1510, "y": 3770 },
+			{ "color": "#6bc71f", "x": 1840, "y": 3745 },
+			{ "color": "#6bc71f", "x": 1850, "y": 3735 },
+			{ "color": "#6bc71f", "x": 1794, "y": 3722 },
+			{ "color": "#6bc71f", "x": 1752, "y": 3761 },
+			{ "color": "#6bc71f", "x": 1805, "y": 3737 },
+			{ "color": "#6bc71f", "x": 1749, "y": 3732 },
+			{ "color": "#6bc71f", "x": 1428, "y": 3648 },
+			{ "color": "#6bc71f", "x": 1484, "y": 3555 },
+			{ "color": "#6bc71f", "x": 1436, "y": 3595 },
+			{ "color": "#6bc71f", "x": 1586, "y": 3595 },
+			{ "color": "#6bc71f", "x": 1649, "y": 3680 },
+			{ "color": "#6bc71f", "x": 1581, "y": 3435 },
+			{ "color": "#6bc71f", "x": 1617, "y": 3687 },
+			{ "color": "#6bc71f", "x": 1503, "y": 3432 }
 		],
 		"Clues": [
 			{ "color": "#763089", "text": "'A bag belt only?', he asked his balding brothers.", "type": "Hard", "x": 3058, "y": 3487 },
@@ -197057,13 +197197,19 @@
 			},
 			"Cache of runes loot": {
 				"Blood rune": {
-					"1000-3500": "1/3"
+					"500-1000": "1/5",
+					"1000-1500": "1/10",
+					"3000": "1/30"
 				},
 				"Death rune": {
-					"1000-3500": "1/3"
+					"500-1000": "1/5",
+					"1000-1500": "1/10",
+					"3000": "1/30"
 				},
 				"Soul rune": {
-					"1000-3500": "1/3"
+					"500-1000": "1/5",
+					"1000-1500": "1/10",
+					"3000": "1/30"
 				}
 			},
 			"Frozen cache loot": {
@@ -198825,6 +198971,187 @@
 					"1": "1/30"
 				}
 			},
+			"Chest (Bryophyta's lair)": {
+				"Clue scroll (beginner)": {
+					"1": "Always"
+				},
+				"Ensouled giant head": {
+					"1": "Always"
+				},
+				"Rune longsword": {
+					"1": "6/118"
+				},
+				"Rune sword": {
+					"2": "5/118"
+				},
+				"Rune med helm": {
+					"1": "3/118",
+					"2": "6/118"
+				},
+				"Rune chainbody": {
+					"1": "6/118"
+				},
+				"Rune plateskirt": {
+					"1": "6/118"
+				},
+				"Rune platelegs": {
+					"1": "6/118"
+				},
+				"Rune sq shield": {
+					"1": "6/118"
+				},
+				"Adamant kiteshield": {
+					"3": "1/118"
+				},
+				"Adamant platebody": {
+					"5 (noted)": "3/118"
+				},
+				"Battlestaff": {
+					"3": "3/118"
+				},
+				"Cosmic rune": {
+					"100": "6/118"
+				},
+				"Law rune": {
+					"100": "6/118"
+				},
+				"Nature rune": {
+					"100": "8/118"
+				},
+				"Death rune": {
+					"100": "5/118"
+				},
+				"Chaos rune": {
+					"100": "5/118",
+					"200": "6/118"
+				},
+				"Blood rune": {
+					"100": "1/118"
+				},
+				"Adamant arrow": {
+					"100": "1/118"
+				},
+				"Steel bar": {
+					"25 (noted)": "3/118"
+				},
+				"Runite bar": {
+					"2": "6/118"
+				},
+				"Uncut ruby": {
+					"5 (noted)": "4/118"
+				},
+				"Uncut diamond": {
+					"5 (noted)": "4/118"
+				},
+				"Coins": {
+					"8000": "2/118",
+					"10000": "5/118"
+				},
+				"Strength potion(4)": {
+					"15 (noted)": "5/118"
+				},
+				"Bryophyta's essence": {
+					"1": "1/118"
+				},
+				"Mossy key": {
+					"1": "1/16"
+				},
+				"Long bone": {
+					"1": "1/400"
+				},
+				"Giant champion scroll": {
+					"1": "1/5000"
+				},
+				"Curved bone": {
+					"1": "1/5012.5"
+				},
+				"HerbDropTable+": {
+					"1": "5/118"
+				},
+				"UncommonSeedDropTable+": {
+					"1": "6/118"
+				}
+			},
+			"Chest (Obor's lair)": {
+				"Big bones": {
+					"50 (noted)": "8/118"
+				},
+				"Clue scroll (beginner)": {
+					"1": "Always"
+				},
+				"Ensouled giant head": {
+					"1": "Always"
+				},
+				"Rune kiteshield": {
+					"1": "3/118"
+				},
+				"Rune full helm": {
+					"1": "5/118"
+				},
+				"Rune med helm": {
+					"1": "6/118"
+				},
+				"Rune chainbody": {
+					"1": "3/118"
+				},
+				"Rune platelegs": {
+					"1": "3/118"
+				},
+				"Rune plateskirt": {
+					"1": "3/118"
+				},
+				"Rune battleaxe": {
+					"1": "4/118"
+				},
+				"Rune longsword": {
+					"1": "5/118"
+				},
+				"Rune 2h sword": {
+					"1": "3/118"
+				},
+				"Hill giant club": {
+					"1": "1/118"
+				},
+				"Law rune": {
+					"50-99": "12/118"
+				},
+				"Cosmic rune": {
+					"60-119": "12/118"
+				},
+				"Chaos rune": {
+					"100-199": "10/118"
+				},
+				"Death rune": {
+					"40-79": "10/118"
+				},
+				"Nature rune": {
+					"40-79": "7/118"
+				},
+				"Coins": {
+					"10000-20000": "10/118"
+				},
+				"Limpwurt root": {
+					"20 (noted)": "8/118"
+				},
+				"Uncut ruby": {
+					"5 (noted)": "5/118"
+				},
+				"Uncut diamond": {
+					"5 (noted)": "5/118"
+				},
+				"Giant key": {
+					"1": "1/16"
+				},
+				"Long bone": {
+					"1": "1/400"
+				},
+				"Giant champion scroll": {
+					"1": "1/5000"
+				},
+				"Curved bone": {
+					"1": "1/5012.5"
+				}
+			},
 			"Rewards Chest (Fortis Colosseum)": {
 				"Rune platebody": {
 					"1": "5535/43400"
@@ -200090,25 +200417,28 @@
 					"1": "1/20"
 				},
 				"Raw tuna": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw lobster": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw swordfish": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw monkfish": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw shark": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw sea turtle": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw manta ray": {
-					"1": "1/20"
+					"1": "Varies"
+				},
+				"Shark lure": {
+					"1": "Varies"
 				},
 				"Pure essence": {
 					"1": "1/20"
@@ -200182,25 +200512,28 @@
 					"1": "1/20"
 				},
 				"Raw tuna": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw lobster": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw swordfish": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw monkfish": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw shark": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw sea turtle": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw manta ray": {
-					"1": "1/20"
+					"1": "Varies"
+				},
+				"Shark lure": {
+					"1": "Varies"
 				},
 				"Pure essence": {
 					"1": "1/20"
@@ -200283,25 +200616,28 @@
 					"1": "1/20"
 				},
 				"Raw tuna": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw lobster": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw swordfish": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw monkfish": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw shark": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw sea turtle": {
-					"1": "1/20"
+					"1": "Varies"
 				},
 				"Raw manta ray": {
-					"1": "1/20"
+					"1": "Varies"
+				},
+				"Shark lure": {
+					"1": "Varies"
 				},
 				"Runite ore": {
 					"1": "1/30"
@@ -202978,7 +203314,7 @@
 					"1-2": "3/27"
 				},
 				"Breach of the scarab": {
-					"1": "1/180"
+					"1": "1/50"
 				},
 				"Cache of runes": {
 					"1-2": "3/27"
@@ -203020,7 +203356,7 @@
 					"4-69 (noted)": "3/27"
 				},
 				"Eye of the corruptor": {
-					"1": "1/180"
+					"1": "1/50"
 				},
 				"Fossilised dung": {
 					"1": "Always"
@@ -203049,8 +203385,11 @@
 				"Icthlarin's shroud (tier 5)": {
 					"1": "1/2000"
 				},
+				"Jewel of amascut": {
+					"1": "1/50"
+				},
 				"Jewel of the sun": {
-					"1": "1/180"
+					"1": "1/50"
 				},
 				"Lightbearer": {
 					"1": "Varies"
@@ -203086,7 +203425,7 @@
 					"4-76 (noted)": "3/27"
 				},
 				"Ranarr seed": {
-					"1-9": "3/27"
+					"1-28": "3/27"
 				},
 				"Raw manta ray": {
 					"2-44 (noted)": "3/27"
@@ -203113,7 +203452,7 @@
 					"5-72 (noted)": "3/27"
 				},
 				"Snapdragon seed": {
-					"1-14": "3/27"
+					"1-23": "3/27"
 				},
 				"Soul rune": {
 					"28-386": "3/27"
@@ -203122,10 +203461,10 @@
 					"1": "1/10"
 				},
 				"Toadflax seed": {
-					"1-16": "3/27"
+					"1-36": "3/27"
 				},
 				"Torstol seed": {
-					"1-10": "3/27"
+					"1-23": "3/27"
 				},
 				"Tumeken's guardian": {
 					"1": "Varies"
@@ -204380,6 +204719,9 @@
 				"Abyssal ashes": {
 					"1": "Always"
 				},
+				"Aether catalyst": {
+					"242-250": "Uncommon"
+				},
 				"Battlestaff": {
 					"10 (noted)": "6/139"
 				},
@@ -204926,6 +205268,9 @@
 				"Gold ore": {
 					"20-30 (noted)": "5/56"
 				},
+				"Huasca seed": {
+					"1": "1/100"
+				},
 				"Moxi": {
 					"1": "1/3000"
 				},
@@ -204954,7 +205299,7 @@
 					"1 (noted)": "2/56"
 				},
 				"Soul rune": {
-					"15-30": "4/56"
+					"30-45": "4/56"
 				},
 				"Tooth half of key (moon key)": {
 					"1": "1/500"
@@ -205161,6 +205506,9 @@
 				},
 				"Grimy lantadyme": {
 					"1-2 (noted)": "9/472"
+				},
+				"Grimy snapdragon": {
+					"2 (noted)": "1/20"
 				},
 				"Mushroom spore": {
 					"1": "10/118"
@@ -206298,8 +206646,11 @@
 				"Uncut diamond": {
 					"5 (noted)": "3/128"
 				},
+				"Ranarr seed": {
+					"2": "1/50"
+				},
 				"Key master teleport": {
-					"3": "2/128"
+					"7": "2/128"
 				},
 				"Torstol seed": {
 					"3": "2/128"
@@ -207106,6 +207457,12 @@
 				"Swordfish": {
 					"1-2": "4/85"
 				},
+				"Shark": {
+					"5": "1/40"
+				},
+				"Shark lure": {
+					"10": "1/40"
+				},
 				"Brimstone key": {
 					"1": "1/64"
 				},
@@ -207245,13 +207602,13 @@
 					"300": "10/128"
 				},
 				"Chaos rune": {
-					"80": "7/128"
+					"65": "7/128"
 				},
 				"Rune arrow": {
 					"12": "5/128"
 				},
 				"Soul rune": {
-					"20": "4/128",
+					"15": "4/128",
 					"50": "1/128"
 				},
 				"Nothing": {
@@ -208088,6 +208445,12 @@
 				"Runite bar": {
 					"3-5 (noted)": "1/45.67"
 				},
+				"Raw shark": {
+					"20 (noted)": "1/120"
+				},
+				"Shark lure": {
+					"40": "1/120"
+				},
 				"Coins": {
 					"25000": "1/27.4",
 					"10000-20000": "1/13.7"
@@ -208099,7 +208462,7 @@
 					"1": "1/27.4"
 				},
 				"Death rune": {
-					"60-100": "1/27.4"
+					"90-130": "1/27.4"
 				},
 				"Dragon dart tip": {
 					"15-25": "1/34.25"
@@ -208111,7 +208474,10 @@
 					"20-40": "1/68.5"
 				},
 				"Onyx bolt tips": {
-					"5-10": "1/68.5"
+					"10-15": "1/68.5"
+				},
+				"Soul rune": {
+					"30": "Rare"
 				},
 				"Dragon arrowtips": {
 					"50-150": "1/137"
@@ -209089,7 +209455,7 @@
 					"100": "4/128"
 				},
 				"Chaos rune": {
-					"250": "10/128"
+					"200": "10/128"
 				},
 				"Death rune": {
 					"150": "10/128"
@@ -209861,7 +210227,7 @@
 					"30": "13/128"
 				},
 				"Soul rune": {
-					"4": "7/128"
+					"10": "7/128"
 				},
 				"Coins": {
 					"11": "3/128",
@@ -212246,13 +212612,13 @@
 					"40-60": "14/128"
 				},
 				"Chaos rune": {
-					"40-60": "11/128"
+					"40-60": "1/30"
 				},
 				"Nature rune": {
 					"5-10": "4/128"
 				},
 				"Death rune": {
-					"40-60": "2/128"
+					"40-60": "1/90"
 				},
 				"Iron ore": {
 					"5-10 (noted)": "27/128"
@@ -212712,7 +213078,7 @@
 					"300": "8/107"
 				},
 				"Soul rune": {
-					"60": "8/107"
+					"100": "8/107"
 				},
 				"Rune arrow": {
 					"100": "2/107"
@@ -212738,8 +213104,8 @@
 				"Mithril bar": {
 					"20 (noted)": "2/107"
 				},
-				"Coal": {
-					"150 (noted)": "2/107"
+				"Ranarr seed": {
+					"2": "2/107"
 				},
 				"Magic logs": {
 					"20 (noted)": "2/107"
@@ -212759,8 +213125,11 @@
 				"Fire talisman": {
 					"1": "1/107"
 				},
-				"Bullseye lantern": {
-					"1": "1/107"
+				"Raw shark": {
+					"30 (noted)": "1/200"
+				},
+				"Shark lure": {
+					"60": "1/200"
 				},
 				"Desert goat horn": {
 					"50 (noted)": "2/107"
@@ -213454,6 +213823,9 @@
 				"Grimy harralander": {
 					"1": "1/137"
 				},
+				"Grimy ranarr weed": {
+					"2 (noted)": "1/20"
+				},
 				"Strawberry seed": {
 					"4": "11/137"
 				},
@@ -213509,6 +213881,9 @@
 				},
 				"Grimy harralander": {
 					"1": "1/140"
+				},
+				"Grimy ranarr weed": {
+					"2 (noted)": "1/20"
 				},
 				"Strawberry seed": {
 					"4": "11/140"
@@ -216624,6 +216999,9 @@
 				"F2P Only": "Nonskill"
 			}],
 			"Guthix halo^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Giant bones^": [{
 				"F2P Only": "Nonskill"
 			}],
 			"Crystal shard^": [{
@@ -225230,7 +225608,8 @@
 			"Fishing bait": true,
 			"Karambwan vessel": true,
 			"Sandworms": true,
-			"Diabolic worms": true
+			"Diabolic worms": true,
+			"Shark lure": true
 		},
 		"fishing|Objects": {
 			"Fishing spot (anglerfish)": true,
@@ -261615,7 +261994,7 @@
 			"attack_stab": 0,
 			"defence_crush": 2,
 			"defence_magic": -2,
-			"defence_ranged": 8,
+			"defence_ranged": 12,
 			"defence_slash": 2,
 			"defence_stab": 2,
 			"magic_damage": 0,
@@ -261637,7 +262016,7 @@
 			"attack_stab": 0,
 			"defence_crush": 4,
 			"defence_magic": -4,
-			"defence_ranged": 16,
+			"defence_ranged": 24,
 			"defence_slash": 4,
 			"defence_stab": 4,
 			"magic_damage": 0,
@@ -278041,6 +278420,25 @@
 			"requirements": {
 				"Magic": 80
 			}
+		},
+		"Steel ring": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 2,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 24,
+			"defence_stab": 24,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "ring",
+			"requirements": {}
 		}
 	}
 }

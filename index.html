@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.6.34" />
+  <link rel="stylesheet" href="./index.css?v=6.6.35" />
   <meta charset="UTF-8">
   <meta name="description" content="The Chunk Picker V2 is an all-in-one companion tool to the Oldschool Runescape unofficial gamemode: OneChunkMan. The site allows you to randomly roll chunks, get chunk tasks, and track and share your progress with others.">
   <meta name="author" content="Source Chunk">
@@ -55,12 +55,12 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.34' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.35' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.6.34"></script>
+  <script src="./index.js?v=6.6.35"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -81,6 +81,10 @@
   <ul class='primarymethods-context-menu'>
     <li class='context-menu-item primarymethods-enable-opt' onclick="switchManualPrimaryContext('toggle')">Enable manual Primary training for this skill</li>
     <li class='context-menu-item' onclick="switchManualPrimaryContext('cancel')">Cancel</li>
+  </ul>
+  <ul class='trainingmethods-context-menu'>
+    <li class='context-menu-item trainingmethods-enable-opt' onclick="switchTrainingMethodsContext('backlog')">Backlog this training method</li>
+    <li class='context-menu-item' onclick="switchTrainingMethodsContext('cancel')">Cancel</li>
   </ul>
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='test-hint'><b><i class="fa-solid fa-exclamation-triangle"></i> Sandbox Mode <i class="fa-solid fa-exclamation-triangle"></i></b><span class='subtext'>All changes made inside sandbox mode are temporary</span></div>
@@ -302,6 +306,13 @@
       <i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeHighest()"></i>
       <div id="highest-title" class="highest-title noscroll"></div>
       <div id="highest-data" class="highest-data noscroll"></div>
+    </div>
+  </div>
+  <div id="myModal50" class="modal">
+    <div class="modal-content noscroll">
+      <div id="bis-upgrades-title" class="bis-upgrades-title noscroll"><span class="bis-upgrades-slot-name"></span> Slot Upgrade Chart</div>
+      <i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeBisUpgrades()"></i>
+      <div id="bis-upgrades-data" class="bis-upgrades-data noscroll"></div>
     </div>
   </div>
   <div id="myModal13" class="modal">

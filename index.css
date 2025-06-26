@@ -3166,6 +3166,12 @@ input#searchPlayerMaps {
     margin-top: -5%;
 }
 
+#myModal50 > .modal-content {
+    height: 85%;
+    width: 45%;
+    margin-top: -10%;
+}
+
 #myModal12_2 > .modal-content {
     height: 67%;
     width: 45%;
@@ -3663,6 +3669,35 @@ input#searchPlayerMaps {
 }
 
 .primarymethods-context-menu li:hover {
+    background-color: var(--color3);
+}
+
+.trainingmethods-context-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid var(--color2);
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: var(--color1);
+    color: var(--colorText);
+    border-radius: 5px;
+    padding: 0;
+    z-index: 99999;
+    max-width: 250px;
+}
+
+.trainingmethods-context-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+    transition: all .3s ease;
+    user-select: none;
+    white-space: initial;
+}
+
+.trainingmethods-context-menu li:hover {
     background-color: var(--color3);
 }
 
@@ -5867,6 +5902,26 @@ input#searchChunks {
     color: var(--colorTextAlt);
 }
 
+.double-bis-icon-container {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.double-bis-icon-container > span {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.bis-upgrades {
+  color: var(--colorLink);
+}
+
+.double-bis-icon-container > span:hover {
+    color: var(--colorTextAlt);
+}
+
 .searchdetails-back {
     font-size: 20px;
     position: absolute;
@@ -6103,7 +6158,7 @@ input#searchChunks {
     padding: 10px;
 }
 
-.highest-data .double-search-icon {
+.highest-data .double-bis-icon-container, .bis-upgrades-data .double-search-icon {
     font-size: 24px;
 }
 
@@ -6324,7 +6379,24 @@ input#searchChunks {
     grid-template-columns: min-content auto;
 }
 
-.style-body .row {
+.bis-upgrades-title {
+    font-size: 3.9vh;
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 7%;
+    min-height: 7%;
+    line-height: 5.5vh;
+    text-align: center;
+    background-color: var(--color2);
+}
+
+.bis-upgrades-data {
+    height: 90%;
+    overflow: auto;
+    margin-top: 3.75%;
+}
+
+.style-body .row, .bis-upgrades-data .row {
     display: flex;
     align-items: center;
     border: solid 1px var(--color1);
@@ -6333,14 +6405,28 @@ input#searchChunks {
     padding: 2px;
     padding-left: 5px;
     background-color: var(--color3);
-    width: 50%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
     position: relative;
 }
 
 .highest-data .style-body .row {
+    padding-right: 65px;
+}
+
+.bis-upgrades-data .row {
     padding-right: 30px;
+}
+
+.bis-upgrades-data .arrow-row {
+    text-align: center;
+    width: 24px;
+    margin: auto;
+    border: solid 1px;
+    border-radius: 5px;
+    background-color: var(--colorText);
+    color: var(--color1);
 }
 
 .Skills-body .row {
@@ -6376,7 +6462,7 @@ input#searchChunks {
     background-color: var(--color2);
 }
 
-#myModal12.mobile .row {
+#myModal12.mobile .row, #myModal50.mobile .row {
     width: 85%;
 }
 
@@ -6733,11 +6819,11 @@ input#searchChunks {
 }
 
 .methods-data > .skill-method .details-info {
-    position: absolute;
-    right: 0;
     margin: 5px;
-    top: 50%;
-    transform: translateY(-66%);
+}
+
+.methods-data > .skill-method .burger {
+    font-size: 24px;
 }
 
 .methods-data > .skill-method > input {
