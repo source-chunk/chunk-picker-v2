@@ -90322,12 +90322,6 @@
 				"Description": "Talk to Lazim",
 				"Chunks": ["12589"],
 				"NPCs": ["Lazim"],
-				"Skills": {
-					"Crafting": 50,
-					"Magic": 39,
-					"Firemaking": 45,
-					"Prayer": 43
-				},
 				"Not F2P": true,
 				"SkillsBoost": {
 					"Crafting": false,
@@ -90349,6 +90343,9 @@
 				"BaseQuest": "Enakhra's Lament",
 				"Description": "Chisel the base",
 				"Items": ["Chisel"],
+				"Skills": {
+					"Crafting": 50
+				},
 				"Tasks": {
 					"~|Enakhra's Lament|~ 2": "Quest"
 				},
@@ -90436,6 +90433,9 @@
 				"Description": "Solve the ice room",
 				"Chunks": ["Enakhra's Temple"],
 				"Items": ["Fire rune[+]", "Chaos rune[+]"],
+				"Skills": {
+					"Magic": 39
+				},
 				"Tasks": {
 					"~|Enakhra's Lament|~ 10": "Quest"
 				},
@@ -90446,6 +90446,9 @@
 				"Description": "Solve the shadow room",
 				"Chunks": ["Enakhra's Temple"],
 				"Items": ["Logs", "Oak logs", "Willow logs", "Maple logs", "Candle", "Coal", "Tinderbox"],
+				"Skills": {
+					"Firemaking": 45
+				},
 				"Tasks": {
 					"~|Enakhra's Lament|~ 10": "Quest"
 				},
@@ -90466,6 +90469,9 @@
 				"Description": "Defeat the first boneguard",
 				"Chunks": ["Enakhra's Temple"],
 				"Items": ["Chaos rune", "Air rune[+]", "Earth rune[+]"],
+				"Skills": {
+					"Prayer": 43
+				},
 				"Tasks": {
 					"~|Enakhra's Lament|~ 11a": "Quest",
 					"~|Enakhra's Lament|~ 11b": "Quest",
