@@ -1848,7 +1848,7 @@ let calcChallenges = function(chunks, baseChunkData) {
             if (chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('SkillsNeeded')) {
                 let tempValidNeeded = true;
                 Object.keys(chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded']).some(taskSkill => {
-                    if ((!checkPrimaryMethod(taskSkill, newValids, baseChunkData) || (taskSkill === 'Slayer' && (!!slayerLocked && chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded'][taskSkill] > slayerLocked['level']))) && !(!!passiveSkill && passiveSkill.hasOwnProperty(taskSkill) && passiveSkill[taskSkill] > 1 && chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded'][taskSkill] <= passiveSkill[taskSkill])) {
+                    if ((!checkPrimaryMethod(taskSkill, newValids, baseChunkData) || (taskSkill === 'Slayer' && (!!slayerLocked && chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded'][taskSkill] > slayerLocked['level'])) || !(!!maxSkill && maxSkill.hasOwnProperty(taskSkill) && chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded'][taskSkill] <= maxSkill[taskSkill])) && !(!!passiveSkill && passiveSkill.hasOwnProperty(taskSkill) && passiveSkill[taskSkill] > 1 && chunkInfo['challenges']['Nonskill'][task]['SkillsNeeded'][taskSkill] <= passiveSkill[taskSkill])) {
                         tempValidNeeded = false;
                         return true;
                     }
