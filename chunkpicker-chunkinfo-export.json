@@ -31168,15 +31168,13 @@
 				"Category": ["Boss"],
 				"Items": ["Mossy key"],
 				"Objects": ["Chest (Bryophyta's lair)"],
-				"Output": "Chest (Bryophyta's lair)",
-				"Not F2P": true
+				"Output": "Chest (Bryophyta's lair)"
 			},
 			"Obor's chest loot*": {
 				"Category": ["Boss"],
 				"Items": ["Giant key"],
 				"Objects": ["Chest (Obor's lair)"],
-				"Output": "Chest (Obor's lair)",
-				"Not F2P": true
+				"Output": "Chest (Obor's lair)"
 			},
 			"Fortis Colosseum loot*": {
 				"Category": ["Boss"],
@@ -156377,6 +156375,101 @@
 			},
 			"Mossy key": {
 				"1": "1/16"
+			},
+			"Big bones": {
+				"1": "Always"
+			},
+			"Black sq shield": {
+				"1": "5/128"
+			},
+			"Magic staff": {
+				"1": "2/128"
+			},
+			"Steel med helm": {
+				"1": "2/128"
+			},
+			"Mithril sword": {
+				"1": "2/128"
+			},
+			"Mithril spear": {
+				"1": "2/128"
+			},
+			"Steel kiteshield": {
+				"1": "1/128"
+			},
+			"Law rune": {
+				"3": "4/128"
+			},
+			"Air rune": {
+				"18": "3/128"
+			},
+			"Earth rune": {
+				"27": "3/128"
+			},
+			"Chaos rune": {
+				"7": "3/128"
+			},
+			"Nature rune": {
+				"6": "3/128"
+			},
+			"Cosmic rune": {
+				"3": "2/128"
+			},
+			"Iron arrow": {
+				"15": "2/128"
+			},
+			"Steel arrow": {
+				"30": "1/128"
+			},
+			"Death rune": {
+				"3": "1/128"
+			},
+			"Blood rune": {
+				"1": "1/128"
+			},
+			"Coins": {
+				"2": "11/128",
+				"5 (F2P)": "35/128",
+				"10 (F2P)": "5/128",
+				"37": "19/128",
+				"119": "10/128",
+				"300": "2/128"
+			},
+			"Steel bar": {
+				"1": "6/128"
+			},
+			"Coal": {
+				"1": "1/128"
+			},
+			"Spinach roll": {
+				"1": "1/128"
+			},
+			"Moss giant bone": {
+				"1": "1/4"
+			},
+			"Ensouled giant head": {
+				"1": "1/24"
+			},
+			"Clue scroll (beginner)": {
+				"1": "1/45"
+			},
+			"Long bone": {
+				"1": "1/400"
+			},
+			"Giant champion scroll": {
+				"1": "1/5000"
+			},
+			"Curved bone": {
+				"1": "1/5012.5"
+			},
+			"HerbDropTable+": {
+				"1": "5/128"
+			},
+			"UncommonSeedDropTable+": {
+				"1": "35/128"
+			},
+			"GemDropTable+": {
+				"1": "4/128"
 			}
 		},
 		"Buffalo": {
@@ -172715,6 +172808,96 @@
 			},
 			"Giant key": {
 				"1": "1/16"
+			},
+			"Big bones": {
+				"1": "Always"
+			},
+			"Iron dagger": {
+				"1": "4/128"
+			},
+			"Iron full helm": {
+				"1": "5/128"
+			},
+			"Iron kiteshield": {
+				"1": "3/128"
+			},
+			"Steel longsword": {
+				"1": "2/128"
+			},
+			"Iron arrow": {
+				"3": "6/128"
+			},
+			"Fire rune": {
+				"15": "3/128"
+			},
+			"Water rune": {
+				"7": "3/128"
+			},
+			"Law rune": {
+				"2": "3/128"
+			},
+			"Steel arrow": {
+				"10": "2/128"
+			},
+			"Mind rune": {
+				"3": "2/128"
+			},
+			"Cosmic rune": {
+				"2": "2/128"
+			},
+			"Nature rune": {
+				"6": "2/128"
+			},
+			"Chaos rune": {
+				"2": "1/128"
+			},
+			"Death rune": {
+				"2": "1/128"
+			},
+			"Coins": {
+				"5 (F2P)": "18/128",
+				"8": "6/128",
+				"10 (F2P)": "7/128",
+				"15": "8/128",
+				"38": "14/128",
+				"52": "10/128",
+				"88": "2/128"
+			},
+			"Limpwurt root": {
+				"1": "11/128"
+			},
+			"Beer": {
+				"1": "6/128"
+			},
+			"Body talisman": {
+				"1": "2/128"
+			},
+			"Nothing": {
+				"1": "1/128"
+			},
+			"Ensouled giant head": {
+				"1": "1/25"
+			},
+			"Clue scroll (beginner)": {
+				"1": "1/50"
+			},
+			"Long bone": {
+				"1": "1/400"
+			},
+			"Giant champion scroll": {
+				"1": "1/5000"
+			},
+			"Curved bone": {
+				"1": "1/5012.5"
+			},
+			"HerbDropTable+": {
+				"1": "7/128"
+			},
+			"GeneralSeedDropTable+": {
+				"1": "18/128"
+			},
+			"GemDropTable+": {
+				"1": "3/128"
 			}
 		},
 		"Ocga": {
