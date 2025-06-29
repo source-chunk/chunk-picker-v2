@@ -26929,6 +26929,12 @@
 				"Output": "Teak shelves 2",
 				"Not F2P": true
 			},
+			"Buy ale yeast from Lucrezia*": {
+				"NPCs": ["Lucrezia"],
+				"Items": ["Pot*"],
+				"Output": "Ale yeast",
+				"Not F2P": true
+			},
 			"Buy ale yeast from Blandebir*": {
 				"NPCs": ["Blandebir"],
 				"Items": ["Pot*"],
@@ -31166,13 +31172,13 @@
 			},
 			"Bryophyta's chest loot*": {
 				"Category": ["Boss"],
-				"Items": ["Mossy key"],
+				"Items": ["Mossy key*"],
 				"Objects": ["Chest (Bryophyta's lair)"],
 				"Output": "Chest (Bryophyta's lair)"
 			},
 			"Obor's chest loot*": {
 				"Category": ["Boss"],
-				"Items": ["Giant key"],
+				"Items": ["Giant key*"],
 				"Objects": ["Chest (Obor's lair)"],
 				"Output": "Chest (Obor's lair)"
 			},
@@ -148661,7 +148667,9 @@
 			"Supply crate loot": true,
 			"Reward pool loot": true,
 			"Lunar Chest": true,
-			"Rewards Chest (Fortis Colosseum)": true
+			"Rewards Chest (Fortis Colosseum)": true,
+			"Chest (Bryophyta's lair)": true,
+			"Chest (Obor's lair)": true
 		},
 		"bossMonsters": {
 			"Grotesque Guardians": true,
