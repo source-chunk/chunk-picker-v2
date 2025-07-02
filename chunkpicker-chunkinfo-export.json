@@ -21179,7 +21179,7 @@
 			},
 			"Cast ~|monster inspect|~": {
 				"Category": ["Spells"],
-				"Items": ["Mind rune*", "Cosmic rune[+]*"],
+				"Items": ["Mind rune*", "Body rune*"],
 				"Level": 42,
 				"Monsters": ["Monster[+]"],
 				"Primary": true,
@@ -55786,2523 +55786,3105 @@
 			},
 			"(Beginner Treasure Trails) Obtain ~|mole slippers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Mole slippers"
 			},
 			"(Beginner Treasure Trails) Obtain ~|frog slippers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Frog slippers"
 			},
 			"(Beginner Treasure Trails) Obtain ~|bear feet|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Bear feet"
 			},
 			"(Beginner Treasure Trails) Obtain ~|demon feet|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Demon feet"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|jester cape|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Jester cape"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|shoulder parrot|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Shoulder parrot"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|monk's robe top (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Monk's robe top (t)"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|monk's robe (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Monk's robe (t)"
 			},
 			"(Beginner Treasure Trails) Obtain an ~|amulet of defence (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Amulet of defence (t)"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|sandwich lady hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Sandwich lady hat"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|sandwich lady top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Sandwich lady top"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|sandwich lady bottom|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Sandwich lady bottom"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|rune scimitar ornament kit (guthix)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Rune scimitar ornament kit (guthix)"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|rune scimitar ornament kit (saradomin)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Rune scimitar ornament kit (saradomin)"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|rune scimitar ornament kit (zamorak)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Rune scimitar ornament kit (zamorak)"
 			},
 			"(Beginner Treasure Trails) Obtain a ~|black pickaxe|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
 				"Label": "Collection Log",
 				"Output": "Black pickaxe"
 			},
 			"(Easy Treasure Trails) Obtain a ~|team cape zero|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Team cape zero"
 			},
 			"(Easy Treasure Trails) Obtain a ~|team cape i|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Team cape i"
 			},
 			"(Easy Treasure Trails) Obtain a ~|team cape x|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Team cape x"
 			},
 			"(Easy Treasure Trails) Obtain a ~|cape of skulls|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Cape of skulls"
 			},
 			"(Easy Treasure Trails) Obtain a ~|golden chef's hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Golden chef's hat"
 			},
 			"(Easy Treasure Trails) Obtain a ~|golden apron|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Golden apron"
 			},
 			"(Easy Treasure Trails) Obtain a ~|wooden shield (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Wooden shield (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black full helm (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black full helm (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black platebody (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platebody (t)"
 			},
 			"(Easy Treasure Trails) Obtain ~|black platelegs (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platelegs (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black plateskirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black plateskirt (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black kiteshield (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black kiteshield (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black full helm (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black full helm (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black platebody (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platebody (g)"
 			},
 			"(Easy Treasure Trails) Obtain ~|black platelegs (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platelegs (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black plateskirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black plateskirt (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black kiteshield (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black kiteshield (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black shield (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black shield (h1)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black shield (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black shield (h2)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black shield (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black shield (h3)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black shield (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black shield (h4)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black shield (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black shield (h5)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black helm (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black helm (h1)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black helm (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black helm (h2)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black helm (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black helm (h3)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black helm (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black helm (h4)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black helm (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black helm (h5)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black platebody (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platebody (h1)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black platebody (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platebody (h2)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black platebody (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platebody (h3)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black platebody (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platebody (h4)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black platebody (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black platebody (h5)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|steel full helm (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel full helm (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|steel platebody (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel platebody (t)"
 			},
 			"(Easy Treasure Trails) Obtain ~|steel platelegs (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel platelegs (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|steel plateskirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel plateskirt (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|steel kiteshield (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel kiteshield (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|steel full helm (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel full helm (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|steel platebody (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel platebody (g)"
 			},
 			"(Easy Treasure Trails) Obtain ~|steel platelegs (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel platelegs (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|steel plateskirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel plateskirt (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|steel kiteshield (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Steel kiteshield (g)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|iron platebody (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron platebody (t)"
 			},
 			"(Easy Treasure Trails) Obtain ~|iron platelegs (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron platelegs (t)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|iron plateskirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron plateskirt (t)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|iron kiteshield (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron kiteshield (t)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|iron full helm (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron full helm (t)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|iron platebody (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron platebody (g)"
 			},
 			"(Easy Treasure Trails) Obtain ~|iron platelegs (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron platelegs (g)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|iron plateskirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron plateskirt (g)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|iron kiteshield (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron kiteshield (g)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|iron full helm (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Iron full helm (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bronze platebody (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze platebody (t)"
 			},
 			"(Easy Treasure Trails) Obtain ~|bronze platelegs (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze platelegs (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bronze plateskirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze plateskirt (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bronze kiteshield (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze kiteshield (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bronze full helm (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze full helm (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bronze platebody (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze platebody (g)"
 			},
 			"(Easy Treasure Trails) Obtain ~|bronze platelegs (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze platelegs (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bronze plateskirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze plateskirt (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bronze kiteshield (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze kiteshield (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bronze full helm (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bronze full helm (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|studded body (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Studded body (g)"
 			},
 			"(Easy Treasure Trails) Obtain ~|studded chaps (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Studded chaps (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|studded body (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Studded body (t)"
 			},
 			"(Easy Treasure Trails) Obtain ~|studded chaps (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Studded chaps (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|leather body (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Leather body (g)"
 			},
 			"(Easy Treasure Trails) Obtain ~|leather chaps (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Leather chaps (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue wizard hat (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue wizard hat (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue wizard robe (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue wizard robe (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue skirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue skirt (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue wizard hat (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue wizard hat (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue wizard robe (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue wizard robe (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue skirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue skirt (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black wizard hat (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black wizard hat (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black wizard robe (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black wizard robe (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black skirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black skirt (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black wizard hat (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black wizard hat (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black wizard robe (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black wizard robe (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black skirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black skirt (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|monk's robe top (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Monk's robe top (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|monk's robe (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Monk's robe (g)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|saradomin robe top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Saradomin robe top"
 			},
 			"(Easy Treasure Trails) Obtain ~|saradomin robe legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Saradomin robe legs"
 			},
 			"(Easy Treasure Trails) Obtain a ~|guthix robe top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Guthix robe top"
 			},
 			"(Easy Treasure Trails) Obtain ~|guthix robe legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Guthix robe legs"
 			},
 			"(Easy Treasure Trails) Obtain a ~|zamorak robe top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Zamorak robe top"
 			},
 			"(Easy Treasure Trails) Obtain ~|zamorak robe legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Zamorak robe legs"
 			},
 			"(Easy Treasure Trails) Obtain an ~|ancient robe top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Ancient robe top"
 			},
 			"(Easy Treasure Trails) Obtain ~|ancient robe legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Ancient robe legs"
 			},
 			"(Easy Treasure Trails) Obtain an ~|armadyl robe top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Armadyl robe top"
 			},
 			"(Easy Treasure Trails) Obtain ~|armadyl robe legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Armadyl robe legs"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bandos robe top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bandos robe top"
 			},
 			"(Easy Treasure Trails) Obtain ~|bandos robe legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bandos robe legs"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bob's red shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bob's red shirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bob's green shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bob's green shirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bob's blue shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bob's blue shirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bob's black shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bob's black shirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|bob's purple shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Bob's purple shirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|highwayman mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Highwayman mask"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue beret|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue beret"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black beret|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black beret"
 			},
 			"(Easy Treasure Trails) Obtain a ~|white beret|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "White beret"
 			},
 			"(Easy Treasure Trails) Obtain a ~|red beret|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Red beret"
 			},
 			"(Easy Treasure Trails) Obtain ~|a powdered wig|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "A powdered wig"
 			},
 			"(Easy Treasure Trails) Obtain a ~|beanie|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Beanie"
 			},
 			"(Easy Treasure Trails) Obtain an ~|imp mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Imp mask"
 			},
 			"(Easy Treasure Trails) Obtain a ~|goblin mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Goblin mask"
 			},
 			"(Easy Treasure Trails) Obtain a ~|sleeping cap|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Sleeping cap"
 			},
 			"(Easy Treasure Trails) Obtain ~|flared trousers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Flared trousers"
 			},
 			"(Easy Treasure Trails) Obtain ~|pantaloons|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Pantaloons"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black cane|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black cane"
 			},
 			"(Easy Treasure Trails) Obtain a ~|staff of bob the cat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Staff of bob the cat"
 			},
 			"(Easy Treasure Trails) Obtain a ~|red elegant shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Red elegant shirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|red elegant blouse|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Red elegant blouse"
 			},
 			"(Easy Treasure Trails) Obtain ~|red elegant legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Red elegant legs"
 			},
 			"(Easy Treasure Trails) Obtain a ~|red elegant skirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Red elegant skirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|green elegant shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Green elegant shirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|green elegant blouse|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Green elegant blouse"
 			},
 			"(Easy Treasure Trails) Obtain ~|green elegant legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Green elegant legs"
 			},
 			"(Easy Treasure Trails) Obtain a ~|green elegant skirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Green elegant skirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue elegant shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue elegant shirt"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue elegant blouse|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue elegant blouse"
 			},
 			"(Easy Treasure Trails) Obtain ~|blue elegant legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue elegant legs"
 			},
 			"(Easy Treasure Trails) Obtain a ~|blue elegant skirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Blue elegant skirt"
 			},
 			"(Easy Treasure Trails) Obtain an ~|amulet of magic (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Amulet of magic (t)"
 			},
 			"(Easy Treasure Trails) Obtain an ~|amulet of power (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Amulet of power (t)"
 			},
 			"(Easy Treasure Trails) Obtain a ~|black pickaxe|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Black pickaxe"
 			},
 			"(Easy Treasure Trails) Obtain a ~|ham joint|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Ham joint"
 			},
 			"(Easy Treasure Trails) Obtain a ~|rain bow|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Rain bow"
 			},
 			"(Easy Treasure Trails) Obtain a ~|willow comp bow|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
 				"Label": "Collection Log",
 				"Output": "Willow comp bow"
 			},
 			"(Medium Treasure Trails) Obtain ~|ranger boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Ranger boots"
 			},
 			"(Medium Treasure Trails) Obtain ~|wizard boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Wizard boots"
 			},
 			"(Medium Treasure Trails) Obtain ~|holy sandals|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Holy sandals"
 			},
 			"(Medium Treasure Trails) Obtain ~|climbing boots (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Climbing boots (g)"
 			},
 			"(Medium Treasure Trails) Obtain ~|spiked manacles|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Spiked manacles"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant full helm (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant full helm (t)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant platebody (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platebody (t)"
 			},
 			"(Medium Treasure Trails) Obtain ~|adamant platelegs (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platelegs (t)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant plateskirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant plateskirt (t)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant kiteshield (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant kiteshield (t)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant full helm (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant full helm (g)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant platebody (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platebody (g)"
 			},
 			"(Medium Treasure Trails) Obtain ~|adamant platelegs (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platelegs (g)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant plateskirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant plateskirt (g)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant kiteshield (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant kiteshield (g)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant shield (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant shield (h1)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant shield (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant shield (h2)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant shield (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant shield (h3)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant shield (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant shield (h4)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant shield (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant shield (h5)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant helm (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant helm (h1)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant helm (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant helm (h2)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant helm (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant helm (h3)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant helm (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant helm (h4)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant helm (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant helm (h5)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant platebody (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platebody (h1)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant platebody (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platebody (h2)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant platebody (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platebody (h3)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant platebody (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platebody (h4)"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant platebody (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant platebody (h5)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|mithril full helm (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril full helm (t)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|mithril platebody (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril platebody (t)"
 			},
 			"(Medium Treasure Trails) Obtain ~|mithril platelegs (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril platelegs (t)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|mithril plateskirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril plateskirt (t)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|mithril kiteshield (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril kiteshield (t)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|mithril full helm (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril full helm (g)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|mithril platebody (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril platebody (g)"
 			},
 			"(Medium Treasure Trails) Obtain ~|mithril platelegs (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril platelegs (g)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|mithril plateskirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril plateskirt (g)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|mithril kiteshield (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Mithril kiteshield (g)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|green d'hide body (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Green d'hide body (g)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|green d'hide body (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Green d'hide body (t)"
 			},
 			"(Medium Treasure Trails) Obtain ~|green d'hide chaps (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Green d'hide chaps (g)"
 			},
 			"(Medium Treasure Trails) Obtain ~|green d'hide chaps (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Green d'hide chaps (t)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|saradomin mitre|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Saradomin mitre"
 			},
 			"(Medium Treasure Trails) Obtain a ~|saradomin cloak|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Saradomin cloak"
 			},
 			"(Medium Treasure Trails) Obtain a ~|guthix mitre|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Guthix mitre"
 			},
 			"(Medium Treasure Trails) Obtain a ~|guthix cloak|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Guthix cloak"
 			},
 			"(Medium Treasure Trails) Obtain a ~|zamorak mitre|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Zamorak mitre"
 			},
 			"(Medium Treasure Trails) Obtain a ~|zamorak cloak|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Zamorak cloak"
 			},
 			"(Medium Treasure Trails) Obtain an ~|ancient mitre|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Ancient mitre"
 			},
 			"(Medium Treasure Trails) Obtain an ~|ancient cloak|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Ancient cloak"
 			},
 			"(Medium Treasure Trails) Obtain an ~|ancient stole|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Ancient stole"
 			},
 			"(Medium Treasure Trails) Obtain an ~|ancient crozier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Ancient crozier"
 			},
 			"(Medium Treasure Trails) Obtain an ~|armadyl mitre|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Armadyl mitre"
 			},
 			"(Medium Treasure Trails) Obtain an ~|armadyl cloak|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Armadyl cloak"
 			},
 			"(Medium Treasure Trails) Obtain an ~|armadyl stole|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Armadyl stole"
 			},
 			"(Medium Treasure Trails) Obtain an ~|armadyl crozier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Armadyl crozier"
 			},
 			"(Medium Treasure Trails) Obtain a ~|bandos mitre|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Bandos mitre"
 			},
 			"(Medium Treasure Trails) Obtain a ~|bandos cloak|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Bandos cloak"
 			},
 			"(Medium Treasure Trails) Obtain a ~|bandos stole|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Bandos stole"
 			},
 			"(Medium Treasure Trails) Obtain a ~|bandos crozier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Bandos crozier"
 			},
 			"(Medium Treasure Trails) Obtain a ~|red boater|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Red boater"
 			},
 			"(Medium Treasure Trails) Obtain a ~|green boater|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Green boater"
 			},
 			"(Medium Treasure Trails) Obtain an ~|orange boater|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Orange boater"
 			},
 			"(Medium Treasure Trails) Obtain a ~|black boater|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Black boater"
 			},
 			"(Medium Treasure Trails) Obtain a ~|blue boater|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Blue boater"
 			},
 			"(Medium Treasure Trails) Obtain a ~|pink boater|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Pink boater"
 			},
 			"(Medium Treasure Trails) Obtain a ~|purple boater|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Purple boater"
 			},
 			"(Medium Treasure Trails) Obtain a ~|white boater|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "White boater"
 			},
 			"(Medium Treasure Trails) Obtain a ~|red headband|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Red headband"
 			},
 			"(Medium Treasure Trails) Obtain a ~|black headband|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Black headband"
 			},
 			"(Medium Treasure Trails) Obtain a ~|brown headband|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Brown headband"
 			},
 			"(Medium Treasure Trails) Obtain a ~|white headband|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "White headband"
 			},
 			"(Medium Treasure Trails) Obtain a ~|blue headband|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Blue headband"
 			},
 			"(Medium Treasure Trails) Obtain a ~|gold headband|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Gold headband"
 			},
 			"(Medium Treasure Trails) Obtain a ~|pink headband|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Pink headband"
 			},
 			"(Medium Treasure Trails) Obtain a ~|green headband|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Green headband"
 			},
 			"(Medium Treasure Trails) Obtain a ~|crier hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Crier hat"
 			},
 			"(Medium Treasure Trails) Obtain a ~|crier coat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Crier coat"
 			},
 			"(Medium Treasure Trails) Obtain a ~|crier bell|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Crier bell"
 			},
 			"(Medium Treasure Trails) Obtain an ~|adamant cane|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Adamant cane"
 			},
 			"(Medium Treasure Trails) Obtain an ~|arceuus banner|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Arceuus banner"
 			},
 			"(Medium Treasure Trails) Obtain a ~|piscarilius banner|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Piscarilius banner"
 			},
 			"(Medium Treasure Trails) Obtain a ~|hosidius banner|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Hosidius banner"
 			},
 			"(Medium Treasure Trails) Obtain a ~|shayzien banner|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Shayzien banner"
 			},
 			"(Medium Treasure Trails) Obtain a ~|lovakengj banner|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Lovakengj banner"
 			},
 			"(Medium Treasure Trails) Obtain a ~|cabbage round shield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Cabbage round shield"
 			},
 			"(Medium Treasure Trails) Obtain a ~|black unicorn mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Black unicorn mask"
 			},
 			"(Medium Treasure Trails) Obtain a ~|white unicorn mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "White unicorn mask"
 			},
 			"(Medium Treasure Trails) Obtain a ~|cat mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Cat mask"
 			},
 			"(Medium Treasure Trails) Obtain a ~|penguin mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Penguin mask"
 			},
 			"(Medium Treasure Trails) Obtain a ~|leprechaun hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Leprechaun hat"
 			},
 			"(Medium Treasure Trails) Obtain a ~|black leprechaun hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Black leprechaun hat"
 			},
 			"(Medium Treasure Trails) Obtain a ~|wolf mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Wolf mask"
 			},
 			"(Medium Treasure Trails) Obtain a ~|wolf cloak|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Wolf cloak"
 			},
 			"(Medium Treasure Trails) Obtain a ~|purple elegant shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Purple elegant shirt"
 			},
 			"(Medium Treasure Trails) Obtain a ~|purple elegant blouse|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Purple elegant blouse"
 			},
 			"(Medium Treasure Trails) Obtain ~|purple elegant legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Purple elegant legs"
 			},
 			"(Medium Treasure Trails) Obtain a ~|purple elegant skirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Purple elegant skirt"
 			},
 			"(Medium Treasure Trails) Obtain a ~|black elegant shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Black elegant shirt"
 			},
 			"(Medium Treasure Trails) Obtain a ~|white elegant blouse|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "White elegant blouse"
 			},
 			"(Medium Treasure Trails) Obtain ~|black elegant legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Black elegant legs"
 			},
 			"(Medium Treasure Trails) Obtain a ~|white elegant skirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "White elegant skirt"
 			},
 			"(Medium Treasure Trails) Obtain a ~|pink elegant shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Pink elegant shirt"
 			},
 			"(Medium Treasure Trails) Obtain a ~|pink elegant blouse|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Pink elegant blouse"
 			},
 			"(Medium Treasure Trails) Obtain ~|pink elegant legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Pink elegant legs"
 			},
 			"(Medium Treasure Trails) Obtain a ~|pink elegant skirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Pink elegant skirt"
 			},
 			"(Medium Treasure Trails) Obtain a ~|gold elegant shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Gold elegant shirt"
 			},
 			"(Medium Treasure Trails) Obtain a ~|gold elegant blouse|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Gold elegant blouse"
 			},
 			"(Medium Treasure Trails) Obtain ~|gold elegant legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Gold elegant legs"
 			},
 			"(Medium Treasure Trails) Obtain a ~|gold elegant skirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Gold elegant skirt"
 			},
 			"(Medium Treasure Trails) Obtain a ~|gnomish firelighter|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Gnomish firelighter"
 			},
 			"(Medium Treasure Trails) Obtain a ~|strength amulet (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Strength amulet (t)"
 			},
 			"(Medium Treasure Trails) Obtain a ~|yew comp bow|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
 				"Label": "Collection Log",
 				"Output": "Yew comp bow"
 			},
 			"(Hard Treasure Trails) Obtain a ~|robin hood hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Robin hood hat"
 			},
 			"(Hard Treasure Trails) Obtain a ~|dragon boots ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Dragon boots ornament kit"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune defender ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune defender ornament kit"
 			},
 			"(Hard Treasure Trails) Obtain a ~|tzhaar-ket-om ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Tzhaar-ket-om ornament kit"
 			},
 			"(Hard Treasure Trails) Obtain a ~|berserker necklace ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Berserker necklace ornament kit"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune full helm (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune full helm (t)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune platebody (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platebody (t)"
 			},
 			"(Hard Treasure Trails) Obtain ~|rune platelegs (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platelegs (t)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune plateskirt (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune plateskirt (t)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune kiteshield (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune kiteshield (t)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune full helm (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune full helm (g)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune platebody (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platebody (g)"
 			},
 			"(Hard Treasure Trails) Obtain ~|rune platelegs (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platelegs (g)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune plateskirt (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune plateskirt (g)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune kiteshield (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune kiteshield (g)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak full helm|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak full helm"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak platebody|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak platebody"
 			},
 			"(Hard Treasure Trails) Obtain ~|zamorak platelegs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak platelegs"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak plateskirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak plateskirt"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak kiteshield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak kiteshield"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix full helm|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix full helm"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix platebody|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix platebody"
 			},
 			"(Hard Treasure Trails) Obtain ~|guthix platelegs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix platelegs"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix plateskirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix plateskirt"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix kiteshield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix kiteshield"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin full helm|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin full helm"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin platebody|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin platebody"
 			},
 			"(Hard Treasure Trails) Obtain ~|saradomin platelegs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin platelegs"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin plateskirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin plateskirt"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin kiteshield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin kiteshield"
 			},
 			"(Hard Treasure Trails) Obtain an ~|ancient full helm|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient full helm"
 			},
 			"(Hard Treasure Trails) Obtain an ~|ancient platebody|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient platebody"
 			},
 			"(Hard Treasure Trails) Obtain ~|ancient platelegs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient platelegs"
 			},
 			"(Hard Treasure Trails) Obtain an ~|ancient plateskirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient plateskirt"
 			},
 			"(Hard Treasure Trails) Obtain an ~|ancient kiteshield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient kiteshield"
 			},
 			"(Hard Treasure Trails) Obtain an ~|armadyl full helm|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl full helm"
 			},
 			"(Hard Treasure Trails) Obtain an ~|armadyl platebody|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl platebody"
 			},
 			"(Hard Treasure Trails) Obtain ~|armadyl platelegs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl platelegs"
 			},
 			"(Hard Treasure Trails) Obtain an ~|armadyl plateskirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl plateskirt"
 			},
 			"(Hard Treasure Trails) Obtain an ~|armadyl kiteshield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl kiteshield"
 			},
 			"(Hard Treasure Trails) Obtain a ~|bandos full helm|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos full helm"
 			},
 			"(Hard Treasure Trails) Obtain a ~|bandos platebody|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos platebody"
 			},
 			"(Hard Treasure Trails) Obtain ~|bandos platelegs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos platelegs"
 			},
 			"(Hard Treasure Trails) Obtain a ~|bandos plateskirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos plateskirt"
 			},
 			"(Hard Treasure Trails) Obtain a ~|bandos kiteshield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos kiteshield"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune shield (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune shield (h1)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune shield (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune shield (h2)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune shield (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune shield (h3)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune shield (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune shield (h4)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune shield (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune shield (h5)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune helm (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune helm (h1)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune helm (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune helm (h2)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune helm (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune helm (h3)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune helm (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune helm (h4)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune helm (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune helm (h5)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune platebody (h1)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platebody (h1)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune platebody (h2)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platebody (h2)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune platebody (h3)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platebody (h3)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune platebody (h4)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platebody (h4)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune platebody (h5)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune platebody (h5)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin coif|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin coif"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin d'hide body|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin d'hide body"
 			},
 			"(Hard Treasure Trails) Obtain ~|saradomin chaps|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin chaps"
 			},
 			"(Hard Treasure Trails) Obtain ~|saradomin bracers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin bracers"
 			},
 			"(Hard Treasure Trails) Obtain ~|saradomin d'hide boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin d'hide boots"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin d'hide shield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin d'hide shield"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix coif|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix coif"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix d'hide body|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix d'hide body"
 			},
 			"(Hard Treasure Trails) Obtain ~|guthix chaps|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix chaps"
 			},
 			"(Hard Treasure Trails) Obtain ~|guthix bracers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix bracers"
 			},
 			"(Hard Treasure Trails) Obtain ~|guthix d'hide boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix d'hide boots"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix d'hide shield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix d'hide shield"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak coif|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak coif"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak d'hide body|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak d'hide body"
 			},
 			"(Hard Treasure Trails) Obtain ~|zamorak chaps|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak chaps"
 			},
 			"(Hard Treasure Trails) Obtain ~|zamorak bracers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak bracers"
 			},
 			"(Hard Treasure Trails) Obtain ~|zamorak d'hide boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak d'hide boots"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak d'hide shield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak d'hide shield"
 			},
 			"(Hard Treasure Trails) Obtain a ~|bandos coif|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos coif"
 			},
 			"(Hard Treasure Trails) Obtain a ~|bandos d'hide body|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos d'hide body"
 			},
 			"(Hard Treasure Trails) Obtain ~|bandos chaps|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos chaps"
 			},
 			"(Hard Treasure Trails) Obtain ~|bandos bracers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos bracers"
 			},
 			"(Hard Treasure Trails) Obtain ~|bandos d'hide boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos d'hide boots"
 			},
 			"(Hard Treasure Trails) Obtain a ~|bandos d'hide shield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Bandos d'hide shield"
 			},
 			"(Hard Treasure Trails) Obtain an ~|armadyl coif|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl coif"
 			},
 			"(Hard Treasure Trails) Obtain an ~|armadyl d'hide body|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl d'hide body"
 			},
 			"(Hard Treasure Trails) Obtain ~|armadyl chaps|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl chaps"
 			},
 			"(Hard Treasure Trails) Obtain ~|armadyl bracers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl bracers"
 			},
 			"(Hard Treasure Trails) Obtain ~|armadyl d'hide boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl d'hide boots"
 			},
 			"(Hard Treasure Trails) Obtain an ~|armadyl d'hide shield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Armadyl d'hide shield"
 			},
 			"(Hard Treasure Trails) Obtain an ~|ancient coif|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient coif"
 			},
 			"(Hard Treasure Trails) Obtain an ~|ancient d'hide body|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient d'hide body"
 			},
 			"(Hard Treasure Trails) Obtain ~|ancient chaps|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient chaps"
 			},
 			"(Hard Treasure Trails) Obtain ~|ancient bracers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient bracers"
 			},
 			"(Hard Treasure Trails) Obtain ~|ancient d'hide boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient d'hide boots"
 			},
 			"(Hard Treasure Trails) Obtain an ~|ancient d'hide shield|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Ancient d'hide shield"
 			},
 			"(Hard Treasure Trails) Obtain a ~|red d'hide body (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Red d'hide body (t)"
 			},
 			"(Hard Treasure Trails) Obtain ~|red d'hide chaps (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Red d'hide chaps (t)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|red d'hide body (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Red d'hide body (g)"
 			},
 			"(Hard Treasure Trails) Obtain ~|red d'hide chaps (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Red d'hide chaps (g)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|blue d'hide body (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Blue d'hide body (t)"
 			},
 			"(Hard Treasure Trails) Obtain ~|blue d'hide chaps (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Blue d'hide chaps (t)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|blue d'hide body (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Blue d'hide body (g)"
 			},
 			"(Hard Treasure Trails) Obtain ~|blue d'hide chaps (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Blue d'hide chaps (g)"
 			},
 			"(Hard Treasure Trails) Obtain an ~|enchanted hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Enchanted hat"
 			},
 			"(Hard Treasure Trails) Obtain an ~|enchanted top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Enchanted top"
 			},
 			"(Hard Treasure Trails) Obtain an ~|enchanted robe|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Enchanted robe"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin stole|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin stole"
 			},
 			"(Hard Treasure Trails) Obtain a ~|saradomin crozier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Saradomin crozier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix stole|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix stole"
 			},
 			"(Hard Treasure Trails) Obtain a ~|guthix crozier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Guthix crozier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak stole|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak stole"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zamorak crozier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zamorak crozier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|zombie head (Treasure Trails)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Zombie head (Treasure Trails)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|cyclops head|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Cyclops head"
 			},
 			"(Hard Treasure Trails) Obtain a ~|pirate's hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Pirate's hat"
 			},
 			"(Hard Treasure Trails) Obtain a ~|red cavalier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Red cavalier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|white cavalier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "White cavalier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|navy cavalier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Navy cavalier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|tan cavalier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Tan cavalier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|dark cavalier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Dark cavalier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|black cavalier|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Black cavalier"
 			},
 			"(Hard Treasure Trails) Obtain a ~|pith helmet|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Pith helmet"
 			},
 			"(Hard Treasure Trails) Obtain an ~|explorer backpack|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Explorer backpack"
 			},
 			"(Hard Treasure Trails) Obtain a ~|thieving bag|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Thieving bag"
 			},
 			"(Hard Treasure Trails) Obtain a ~|green dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Green dragon mask"
 			},
 			"(Hard Treasure Trails) Obtain a ~|blue dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Blue dragon mask"
 			},
 			"(Hard Treasure Trails) Obtain a ~|red dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Red dragon mask"
 			},
 			"(Hard Treasure Trails) Obtain a ~|black dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Black dragon mask"
 			},
 			"(Hard Treasure Trails) Obtain a ~|nunchaku|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Nunchaku"
 			},
 			"(Hard Treasure Trails) Obtain a ~|dual sai|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Dual sai"
 			},
 			"(Hard Treasure Trails) Obtain a ~|rune cane|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Rune cane"
 			},
 			"(Hard Treasure Trails) Obtain an ~|amulet of glory (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Amulet of glory (t)"
 			},
 			"(Hard Treasure Trails) Obtain a ~|magic comp bow|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
 				"Label": "Collection Log",
 				"Output": "Magic comp bow"
 			},
 			"(Elite Treasure Trails) Obtain a ~|ring of 3rd age|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Ring of 3rd age"
 			},
 			"(Elite Treasure Trails) Obtain a ~|fury ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Fury ornament kit"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dragon chainbody ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dragon chainbody ornament kit"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dragon legs/skirt ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dragon legs/skirt ornament kit"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dragon sq shield ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dragon sq shield ornament kit"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dragon full helm ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dragon full helm ornament kit"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dragon scimitar ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dragon scimitar ornament kit"
 			},
 			"(Elite Treasure Trails) Obtain a ~|light infinity colour kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Light infinity colour kit"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dark infinity colour kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dark infinity colour kit"
 			},
 			"(Elite Treasure Trails) Obtain ~|holy wraps|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Holy wraps"
 			},
 			"(Elite Treasure Trails) Obtain ~|ranger gloves|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Ranger gloves"
 			},
 			"(Elite Treasure Trails) Obtain a ~|rangers' tunic|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Rangers' tunic"
 			},
 			"(Elite Treasure Trails) Obtain ~|rangers' tights|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Rangers' tights"
 			},
 			"(Elite Treasure Trails) Obtain a ~|black d'hide body (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Black d'hide body (g)"
 			},
 			"(Elite Treasure Trails) Obtain ~|black d'hide chaps (g)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Black d'hide chaps (g)"
 			},
 			"(Elite Treasure Trails) Obtain a ~|black d'hide body (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Black d'hide body (t)"
 			},
 			"(Elite Treasure Trails) Obtain ~|black d'hide chaps (t)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Black d'hide chaps (t)"
 			},
 			"(Elite Treasure Trails) Obtain a ~|royal crown|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Royal crown"
 			},
 			"(Elite Treasure Trails) Obtain a ~|royal sceptre|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Royal sceptre"
 			},
 			"(Elite Treasure Trails) Obtain a ~|royal gown top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Royal gown top"
 			},
 			"(Elite Treasure Trails) Obtain a ~|royal gown bottom|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Royal gown bottom"
 			},
 			"(Elite Treasure Trails) Obtain a ~|musketeer hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Musketeer hat"
 			},
 			"(Elite Treasure Trails) Obtain a ~|musketeer tabard|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Musketeer tabard"
 			},
 			"(Elite Treasure Trails) Obtain ~|musketeer pants|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Musketeer pants"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dark tuxedo jacket|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dark tuxedo jacket"
 			},
 			"(Elite Treasure Trails) Obtain ~|dark trousers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dark trousers"
 			},
 			"(Elite Treasure Trails) Obtain ~|dark tuxedo shoes|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dark tuxedo shoes"
 			},
 			"(Elite Treasure Trails) Obtain ~|dark tuxedo cuffs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dark tuxedo cuffs"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dark bow tie|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dark bow tie"
 			},
 			"(Elite Treasure Trails) Obtain a ~|light tuxedo jacket|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Light tuxedo jacket"
 			},
 			"(Elite Treasure Trails) Obtain ~|light trousers|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Light trousers"
 			},
 			"(Elite Treasure Trails) Obtain ~|light tuxedo shoes|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Light tuxedo shoes"
 			},
 			"(Elite Treasure Trails) Obtain ~|light tuxedo cuffs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Light tuxedo cuffs"
 			},
 			"(Elite Treasure Trails) Obtain a ~|light bow tie|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Light bow tie"
 			},
 			"(Elite Treasure Trails) Obtain an ~|arceuus scarf|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Arceuus scarf"
 			},
 			"(Elite Treasure Trails) Obtain a ~|hosidius scarf|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Hosidius scarf"
 			},
 			"(Elite Treasure Trails) Obtain a ~|piscarilius scarf|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Piscarilius scarf"
 			},
 			"(Elite Treasure Trails) Obtain a ~|shayzien scarf|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Shayzien scarf"
 			},
 			"(Elite Treasure Trails) Obtain a ~|lovakengj scarf|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Lovakengj scarf"
 			},
 			"(Elite Treasure Trails) Obtain a ~|bronze dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Bronze dragon mask"
 			},
 			"(Elite Treasure Trails) Obtain an ~|iron dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Iron dragon mask"
 			},
 			"(Elite Treasure Trails) Obtain a ~|steel dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Steel dragon mask"
 			},
 			"(Elite Treasure Trails) Obtain a ~|mithril dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Mithril dragon mask"
 			},
 			"(Elite Treasure Trails) Obtain an ~|adamant dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Adamant dragon mask"
 			},
 			"(Elite Treasure Trails) Obtain a ~|rune dragon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Rune dragon mask"
 			},
 			"(Elite Treasure Trails) Obtain a ~|katana|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Katana"
 			},
 			"(Elite Treasure Trails) Obtain a ~|dragon cane|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Dragon cane"
 			},
 			"(Elite Treasure Trails) Obtain a ~|briefcase|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Briefcase"
 			},
 			"(Elite Treasure Trails) Obtain a ~|bucket helm|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Bucket helm"
 			},
 			"(Elite Treasure Trails) Obtain a ~|blacksmith's helm|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Blacksmith's helm"
 			},
 			"(Elite Treasure Trails) Obtain a ~|deerstalker|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Deerstalker"
 			},
 			"(Elite Treasure Trails) Obtain an ~|afro|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Afro"
 			},
 			"(Elite Treasure Trails) Obtain a ~|big pirate hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Big pirate hat"
 			},
 			"(Elite Treasure Trails) Obtain a ~|top hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Top hat"
 			},
 			"(Elite Treasure Trails) Obtain a ~|monocle|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Monocle"
 			},
 			"(Elite Treasure Trails) Obtain ~|sagacious spectacles|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Sagacious spectacles"
 			},
 			"(Elite Treasure Trails) Obtain a ~|fremennik kilt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Fremennik kilt"
 			},
 			"(Elite Treasure Trails) Obtain a ~|giant boot|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Giant boot"
 			},
 			"(Elite Treasure Trails) Obtain an ~|uri's hat|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
 				"Label": "Collection Log",
 				"Output": "Uri's hat"
 			},
 			"(Master Treasure Trails) Obtain a ~|bloodhound|~": {
 				"Category": ["Collection Log", "Collection Log Clues", "Pets"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Bloodhound"
 			},
 			"(Master Treasure Trails) Obtain a ~|ring of 3rd age|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Ring of 3rd age"
 			},
 			"(Master Treasure Trails) Obtain an ~|armadyl godsword ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Armadyl godsword ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|bandos godsword ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Bandos godsword ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|saradomin godsword ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Saradomin godsword ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|zamorak godsword ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Zamorak godsword ornament kit"
 			},
 			"(Master Treasure Trails) Obtain an ~|occult ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Occult ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|torture ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Torture ornament kit"
 			},
 			"(Master Treasure Trails) Obtain an ~|anguish ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Anguish ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|dragon defender ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Dragon defender ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|dragon kiteshield ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Dragon kiteshield ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|dragon platebody ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Dragon platebody ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|tormented ornament kit|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Tormented ornament kit"
 			},
 			"(Master Treasure Trails) Obtain a ~|hood of darkness|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Hood of darkness"
 			},
 			"(Master Treasure Trails) Obtain a ~|robe top of darkness|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Robe top of darkness"
 			},
 			"(Master Treasure Trails) Obtain a ~|robe bottom of darkness|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Robe bottom of darkness"
 			},
 			"(Master Treasure Trails) Obtain ~|gloves of darkness|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Gloves of darkness"
 			},
 			"(Master Treasure Trails) Obtain ~|boots of darkness|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Boots of darkness"
 			},
 			"(Master Treasure Trails) Obtain a ~|samurai kasa|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Samurai kasa"
 			},
 			"(Master Treasure Trails) Obtain a ~|samurai shirt|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Samurai shirt"
 			},
 			"(Master Treasure Trails) Obtain ~|samurai greaves|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Samurai greaves"
 			},
 			"(Master Treasure Trails) Obtain ~|samurai boots|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Samurai boots"
 			},
 			"(Master Treasure Trails) Obtain ~|samurai gloves|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Samurai gloves"
 			},
 			"(Master Treasure Trails) Obtain an ~|ankou mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Ankou mask"
 			},
 			"(Master Treasure Trails) Obtain an ~|ankou top|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Ankou top"
 			},
 			"(Master Treasure Trails) Obtain ~|ankou gloves|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Ankou gloves"
 			},
 			"(Master Treasure Trails) Obtain ~|ankou socks|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Ankou socks"
 			},
 			"(Master Treasure Trails) Obtain ~|ankou's leggings|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Ankou's leggings"
 			},
 			"(Master Treasure Trails) Obtain a ~|mummy's head|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Mummy's head"
 			},
 			"(Master Treasure Trails) Obtain a ~|mummy's feet|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Mummy's feet"
 			},
 			"(Master Treasure Trails) Obtain ~|mummy's hands|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Mummy's hands"
 			},
 			"(Master Treasure Trails) Obtain ~|mummy's legs|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Mummy's legs"
 			},
 			"(Master Treasure Trails) Obtain a ~|mummy's body|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Mummy's body"
 			},
 			"(Master Treasure Trails) Obtain a ~|shayzien hood|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Shayzien hood"
 			},
 			"(Master Treasure Trails) Obtain a ~|hosidius hood|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Hosidius hood"
 			},
 			"(Master Treasure Trails) Obtain an ~|arceuus hood|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Arceuus hood"
 			},
 			"(Master Treasure Trails) Obtain a ~|piscarilius hood|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Piscarilius hood"
 			},
 			"(Master Treasure Trails) Obtain a ~|lovakengj hood|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Lovakengj hood"
 			},
 			"(Master Treasure Trails) Obtain a ~|lesser demon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Lesser demon mask"
 			},
 			"(Master Treasure Trails) Obtain a ~|greater demon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Greater demon mask"
 			},
 			"(Master Treasure Trails) Obtain a ~|black demon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Black demon mask"
 			},
 			"(Master Treasure Trails) Obtain a ~|jungle demon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Jungle demon mask"
 			},
 			"(Master Treasure Trails) Obtain an ~|old demon mask|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Old demon mask"
 			},
 			"(Master Treasure Trails) Obtain a ~|left eye patch|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Left eye patch"
 			},
 			"(Master Treasure Trails) Obtain a ~|bowl wig|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Bowl wig"
 			},
 			"(Master Treasure Trails) Obtain an ~|ale of the gods|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Ale of the gods"
 			},
 			"(Master Treasure Trails) Obtain an ~|obsidian cape (r)|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Obsidian cape (r)"
 			},
 			"(Master Treasure Trails) Obtain ~|half moon spectacles|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Half moon spectacles"
 			},
 			"(Master Treasure Trails) Obtain a ~|fancy tiara|~": {
 				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
 				"Label": "Collection Log",
 				"Output": "Fancy tiara"
+			},
+			"(Scroll Cases) Obtain a ~|minor beginner scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
+				"Label": "Collection Log",
+				"Output": "Minor beginner scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|major beginner scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "beginner",
+				"Label": "Collection Log",
+				"Output": "Major beginner scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|minor easy scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
+				"Label": "Collection Log",
+				"Output": "Minor easy scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|major easy scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "easy",
+				"Label": "Collection Log",
+				"Output": "Major easy scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|minor medium scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
+				"Label": "Collection Log",
+				"Output": "Minor medium scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|major medium scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "medium",
+				"Label": "Collection Log",
+				"Output": "Major medium scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|minor hard scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
+				"Label": "Collection Log",
+				"Output": "Minor hard scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|major hard scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "hard",
+				"Label": "Collection Log",
+				"Output": "Major hard scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|minor elite scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
+				"Label": "Collection Log",
+				"Output": "Minor elite scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|major elite scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "elite",
+				"Label": "Collection Log",
+				"Output": "Major elite scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|minor master scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
+				"Label": "Collection Log",
+				"Output": "Minor master scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|major master scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
+				"Label": "Collection Log",
+				"Output": "Major master scroll case"
+			},
+			"(Scroll Cases) Obtain a ~|mimic scroll case|~": {
+				"Category": ["Collection Log", "Collection Log Clues"],
+				"ClueRewardTier": "master",
+				"Label": "Collection Log",
+				"Output": "Mimic scroll case"
 			},
 			"(Barbarian Assault) Obtain a ~|pet penance queen|~": {
 				"Category": ["Collection Log", "Collection Log Minigames", "Pets"],
@@ -160117,7 +160699,7 @@
 				"1": "3/875"
 			},
 			"Steel ring": {
-				"1": "Unknown"
+				"1": "3/131"
 			},
 			"Clue scroll (elite)": {
 				"1": "1/200"
@@ -165760,9 +166342,9 @@
 				"1": "Always"
 			},
 			"Death rune": {
-				"10": "Unknown",
-				"20": "Unknown",
-				"50": "Unknown"
+				"10": "6/50",
+				"20": "3/50",
+				"50": "1/50"
 			},
 			"Ensouled hellhound head": {
 				"1": "1/40"
@@ -165802,11 +166384,6 @@
 			"Vile ashes": {
 				"1": "Always"
 			},
-			"Death rune": {
-				"10": "Unknown",
-				"20": "Unknown",
-				"50": "Unknown"
-			},
 			"Ensouled hellhound head": {
 				"1": "1/40"
 			},
@@ -165820,11 +166397,6 @@
 		"Hellhound#Wilderness Slayer Cave": {
 			"Vile ashes": {
 				"1": "Always"
-			},
-			"Death rune": {
-				"10": "Unknown",
-				"20": "Unknown",
-				"50": "Unknown"
 			},
 			"Ensouled hellhound head": {
 				"1": "1/40"
@@ -172821,67 +173393,67 @@
 				"1": "Always"
 			},
 			"Iron dagger": {
-				"1": "4/128"
+				"1": "4/135"
 			},
 			"Iron full helm": {
-				"1": "5/128"
+				"1": "5/135"
 			},
 			"Iron kiteshield": {
-				"1": "3/128"
+				"1": "3/135"
 			},
 			"Steel longsword": {
-				"1": "2/128"
+				"1": "2/135"
 			},
 			"Iron arrow": {
-				"3": "6/128"
+				"3": "6/135"
 			},
 			"Fire rune": {
-				"15": "3/128"
+				"15": "3/135"
 			},
 			"Water rune": {
-				"7": "3/128"
+				"7": "3/135"
 			},
 			"Law rune": {
-				"2": "3/128"
+				"2": "3/135"
 			},
 			"Steel arrow": {
-				"10": "2/128"
+				"10": "2/135"
 			},
 			"Mind rune": {
-				"3": "2/128"
+				"3": "2/135"
 			},
 			"Cosmic rune": {
-				"2": "2/128"
+				"2": "2/135"
 			},
 			"Nature rune": {
-				"6": "2/128"
+				"6": "2/135"
 			},
 			"Chaos rune": {
-				"2": "1/128"
+				"2": "1/135"
 			},
 			"Death rune": {
-				"2": "1/128"
+				"2": "1/135"
 			},
 			"Coins": {
-				"5 (F2P)": "18/128",
-				"8": "6/128",
-				"10 (F2P)": "7/128",
-				"15": "8/128",
-				"38": "14/128",
-				"52": "10/128",
-				"88": "2/128"
+				"5 (F2P)": "18/135",
+				"8": "6/135",
+				"10 (F2P)": "7/135",
+				"15": "8/135",
+				"38": "14/135",
+				"52": "10/135",
+				"88": "2/135"
 			},
 			"Limpwurt root": {
-				"1": "11/128"
+				"1": "11/135"
 			},
 			"Beer": {
-				"1": "6/128"
+				"1": "6/135"
 			},
 			"Body talisman": {
-				"1": "2/128"
+				"1": "2/135"
 			},
 			"Nothing": {
-				"1": "1/128"
+				"1": "1/135"
 			},
 			"Ensouled giant head": {
 				"1": "1/25"
@@ -172899,13 +173471,13 @@
 				"1": "1/5012.5"
 			},
 			"HerbDropTable+": {
-				"1": "7/128"
+				"1": "7/135"
 			},
 			"GeneralSeedDropTable+": {
-				"1": "18/128"
+				"1": "18/135"
 			},
 			"GemDropTable+": {
-				"1": "3/128"
+				"1": "3/135"
 			}
 		},
 		"Ocga": {
@@ -199199,184 +199771,157 @@
 				}
 			},
 			"Chest (Bryophyta's lair)": {
-				"Clue scroll (beginner)": {
-					"1": "Always"
-				},
-				"Ensouled giant head": {
-					"1": "Always"
-				},
 				"Rune longsword": {
-					"1": "6/118"
+					"1": "6/1888"
 				},
 				"Rune sword": {
-					"2": "5/118"
+					"2": "5/1888"
 				},
 				"Rune med helm": {
-					"1": "3/118",
-					"2": "6/118"
+					"1": "3/1888",
+					"2": "6/1888"
 				},
 				"Rune chainbody": {
-					"1": "6/118"
+					"1": "6/1888"
 				},
 				"Rune plateskirt": {
-					"1": "6/118"
+					"1": "6/1888"
 				},
 				"Rune platelegs": {
-					"1": "6/118"
+					"1": "6/1888"
 				},
 				"Rune sq shield": {
-					"1": "6/118"
+					"1": "6/1888"
 				},
 				"Adamant kiteshield": {
-					"3": "1/118"
+					"3": "1/1888"
 				},
 				"Adamant platebody": {
-					"5 (noted)": "3/118"
+					"5 (noted)": "3/1888"
 				},
 				"Battlestaff": {
-					"3": "3/118"
+					"3": "3/1888"
 				},
 				"Cosmic rune": {
-					"100": "6/118"
+					"100": "6/1888"
 				},
 				"Law rune": {
-					"100": "6/118"
+					"100": "6/1888"
 				},
 				"Nature rune": {
-					"100": "8/118"
+					"100": "8/1888"
 				},
 				"Death rune": {
-					"100": "5/118"
+					"100": "5/1888"
 				},
 				"Chaos rune": {
-					"100": "5/118",
-					"200": "6/118"
+					"100": "5/1888",
+					"200": "6/1888"
 				},
 				"Blood rune": {
-					"100": "1/118"
+					"100": "1/1888"
 				},
 				"Adamant arrow": {
-					"100": "1/118"
+					"100": "1/1888"
 				},
 				"Steel bar": {
-					"25 (noted)": "3/118"
+					"25 (noted)": "3/1888"
 				},
 				"Runite bar": {
-					"2": "6/118"
+					"2": "6/1888"
 				},
 				"Uncut ruby": {
-					"5 (noted)": "4/118"
+					"5 (noted)": "4/1888"
 				},
 				"Uncut diamond": {
-					"5 (noted)": "4/118"
+					"5 (noted)": "4/1888"
 				},
 				"Coins": {
-					"8000": "2/118",
-					"10000": "5/118"
+					"8000": "2/1888",
+					"10000": "5/1888"
 				},
 				"Strength potion(4)": {
-					"15 (noted)": "5/118"
+					"15 (noted)": "5/1888"
 				},
 				"Bryophyta's essence": {
-					"1": "1/118"
+					"1": "1/1888"
 				},
 				"Mossy key": {
 					"1": "1/16"
 				},
-				"Long bone": {
-					"1": "1/400"
-				},
-				"Giant champion scroll": {
-					"1": "1/5000"
-				},
-				"Curved bone": {
-					"1": "1/5012.5"
-				},
 				"HerbDropTable+": {
-					"1": "5/118"
+					"1": "5/1888"
 				},
 				"UncommonSeedDropTable+": {
-					"1": "6/118"
+					"1": "6/1888"
 				}
 			},
 			"Chest (Obor's lair)": {
 				"Big bones": {
-					"50 (noted)": "8/118"
-				},
-				"Clue scroll (beginner)": {
-					"1": "Always"
+					"50 (noted)": "8/1888"
 				},
 				"Ensouled giant head": {
 					"1": "Always"
 				},
 				"Rune kiteshield": {
-					"1": "3/118"
+					"1": "3/1888"
 				},
 				"Rune full helm": {
-					"1": "5/118"
+					"1": "5/1888"
 				},
 				"Rune med helm": {
-					"1": "6/118"
+					"1": "6/1888"
 				},
 				"Rune chainbody": {
-					"1": "3/118"
+					"1": "3/1888"
 				},
 				"Rune platelegs": {
-					"1": "3/118"
+					"1": "3/1888"
 				},
 				"Rune plateskirt": {
-					"1": "3/118"
+					"1": "3/1888"
 				},
 				"Rune battleaxe": {
-					"1": "4/118"
+					"1": "4/1888"
 				},
 				"Rune longsword": {
-					"1": "5/118"
+					"1": "5/1888"
 				},
 				"Rune 2h sword": {
-					"1": "3/118"
+					"1": "3/1888"
 				},
 				"Hill giant club": {
-					"1": "1/118"
+					"1": "1/1888"
 				},
 				"Law rune": {
-					"50-99": "12/118"
+					"50-99": "12/1888"
 				},
 				"Cosmic rune": {
-					"60-119": "12/118"
+					"60-119": "12/1888"
 				},
 				"Chaos rune": {
-					"100-199": "10/118"
+					"100-199": "10/1888"
 				},
 				"Death rune": {
-					"40-79": "10/118"
+					"40-79": "10/1888"
 				},
 				"Nature rune": {
-					"40-79": "7/118"
+					"40-79": "7/1888"
 				},
 				"Coins": {
-					"10000-20000": "10/118"
+					"10000-20000": "10/1888"
 				},
 				"Limpwurt root": {
-					"20 (noted)": "8/118"
+					"20 (noted)": "8/1888"
 				},
 				"Uncut ruby": {
-					"5 (noted)": "5/118"
+					"5 (noted)": "5/1888"
 				},
 				"Uncut diamond": {
-					"5 (noted)": "5/118"
+					"5 (noted)": "5/1888"
 				},
 				"Giant key": {
 					"1": "1/16"
-				},
-				"Long bone": {
-					"1": "1/400"
-				},
-				"Giant champion scroll": {
-					"1": "1/5000"
-				},
-				"Curved bone": {
-					"1": "1/5012.5"
 				}
 			},
 			"Rewards Chest (Fortis Colosseum)": {
@@ -202938,111 +203483,35 @@
 				}
 			},
 			"Spoils of war": {
-				"Adamant arrow": {
-					"200-400": "5/90"
-				},
 				"Adamant bolts": {
-					"200-400": "5/90"
+					"150-170": "1/9"
 				},
-				"Blood rune": {
-					"150-300": "5/90"
+				"Blighted ancient ice sack": {
+					"10-15": "1/9"
 				},
-				"Bones": {
-					"1": "1/150"
+				"Blighted anglerfish": {
+					"25-35 (noted)": "1/9"
 				},
-				"Cabbage": {
-					"1": "1/150"
+				"Blighted karambwan": {
+					"35-45 (noted)": "1/9"
 				},
-				"Coal": {
-					"150-300 (noted)": "5/90"
+				"Blighted manta ray": {
+					"15-25 (noted)": "1/9"
 				},
-				"Coins": {
-					"2000-3000": "49/1000",
-					"20000-30000": "49/1000",
-					"40000-60000": "1/500"
+				"Blighted super restore(4)": {
+					"4 (noted)": "1/9"
 				},
-				"Death rune": {
-					"150-300": "5/90"
+				"Blighted vengeance sack": {
+					"20-30": "1/9"
 				},
-				"Dragon dagger": {
-					"1": "1/600"
+				"Pure essence": {
+					"1000": "1/9"
 				},
-				"Dragon longsword": {
-					"1": "1/600"
-				},
-				"Dragon mace": {
-					"1": "1/600"
-				},
-				"Dragon med helm": {
-					"1": "1/600"
-				},
-				"Dragon scimitar": {
-					"1": "1/600"
+				"Runite bolts": {
+					"150-170": "1/9"
 				},
 				"Lil' creator": {
 					"1": "1/400"
-				},
-				"Loop half of key": {
-					"1": "1/90"
-				},
-				"Mithril ore": {
-					"80-100 (noted)": "5/90"
-				},
-				"Nature rune": {
-					"150-300": "5/90"
-				},
-				"Pure essence": {
-					"4000-6000 (noted)": "6/90"
-				},
-				"Ranarr seed": {
-					"1": "1/90"
-				},
-				"Raw lobster": {
-					"30-60 (noted)": "5/90"
-				},
-				"Raw shark": {
-					"30-60 (noted)": "5/90"
-				},
-				"Raw swordfish": {
-					"30-60 (noted)": "5/90"
-				},
-				"Rune arrow": {
-					"100-200": "5/90"
-				},
-				"Rune full helm": {
-					"1": "1/90"
-				},
-				"Rune platebody": {
-					"1": "1/90"
-				},
-				"Rune platelegs": {
-					"1": "1/90"
-				},
-				"Runite bolts": {
-					"100-200": "5/90"
-				},
-				"Runite ore": {
-					"4-8 (noted)": "1/90"
-				},
-				"Snapdragon seed": {
-					"1": "1/90"
-				},
-				"Soul rune": {
-					"1": "1/150",
-					"150-300": "1/18",
-					"500-600": "1/45"
-				},
-				"Tooth half of key": {
-					"1": "1/90"
-				},
-				"Torstol seed": {
-					"1": "1/90"
-				},
-				"Uncut diamond": {
-					"15-30 (noted)": "4/90"
-				},
-				"Uncut ruby": {
-					"15-30 (noted)": "4/90"
 				}
 			},
 			"Steel key loot": {
@@ -278655,7 +279124,7 @@
 			"attack_ranged": 0,
 			"attack_slash": 0,
 			"attack_stab": 0,
-			"defence_crush": 2,
+			"defence_crush": 24,
 			"defence_magic": 0,
 			"defence_ranged": 0,
 			"defence_slash": 24,

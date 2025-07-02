@@ -3332,8 +3332,8 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     wrongThings.push(rule);
                     return true;
                 }
-                if (rule === 'Collection Log Clues' && chunkInfo['challenges'][skill][name]['Category'].includes('Collection Log Clues') && rules[rule]) {
-                    if (!clueTasksPossible.hasOwnProperty(name.split(' ')[0].substring(1).toLowerCase()) || !clueTasksPossible[name.split(' ')[0].substring(1).toLowerCase()]) {
+                if (rule === 'Collection Log Clues' && chunkInfo['challenges'][skill][name]['Category'].includes('Collection Log Clues') && chunkInfo['challenges'][skill][name].includes('ClueRewardTier') && rules[rule]) {
+                    if (!clueTasksPossible.hasOwnProperty(chunkInfo['challenges'][skill][name]['ClueRewardTier']) || !clueTasksPossible[chunkInfo['challenges'][skill][name]['ClueRewardTier']]) {
                         validChallenge = false;
                         wrongThings.push('Collection Log Clues');
                         nonValids[name] = wrongThings;

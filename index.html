@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.6.38" />
+  <link rel="stylesheet" href="./index.css?v=6.7.0" />
   <meta charset="UTF-8">
   <meta name="description" content="The Chunk Picker V2 is an all-in-one companion tool to the Oldschool Runescape unofficial gamemode: OneChunkMan. The site allows you to randomly roll chunks, get chunk tasks, and track and share your progress with others.">
   <meta name="author" content="Source Chunk">
@@ -55,12 +55,13 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.6.38' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.7.0' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./index.js?v=6.6.38"></script>
+  <script src="./tooltip.js?v=6.7.0"></script>
+  <script src="./index.js?v=6.7.0"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -89,6 +90,7 @@
   <div class='escape-hint'>Press escape to exit screenshot mode</div>
   <div class='test-hint'><b><i class="fa-solid fa-exclamation-triangle"></i> Sandbox Mode <i class="fa-solid fa-exclamation-triangle"></i></b><span class='subtext'>All changes made inside sandbox mode are temporary</span></div>
   <div class='mobile-chunk-hint'><b><i class="fa-solid fa-exclamation-triangle"></i> Tap a Chunk <i class="fa-solid fa-exclamation-triangle"></i></b><span class='subtext'>Then select an action</span></div>
+  <span class="tooltiptext custom-tooltiptext"></span>
   <div class='topnav'>
     <div>
       <a href='?about' target="_blank" class="about-button" title='About Me'>
@@ -292,7 +294,7 @@
       <i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeSearch()"></i>
       <div id="searchchunks-title" class="searchchunks-title noscroll">Search within your chunks</div>
       <div id="searchchunks-subtitle" class="searchchunks-subtitle noscroll">Search for items, npcs, monsters, objects, and shops to see where you have access to each within your unlocked chunks. <span
-        class='help2'>~<span class="tooltiptext">~food, ~boost, ~tool, ~warm, ~light, ~saradomin, ~zamorak, ~bandos, ~armadyl, ~zaros, ~agility, ~construction, ~cooking, ~crafting, ~farming, ~firemaking, ~fishing, ~fletching, ~herblore, ~hunter, ~mining, ~prayer, ~runecraft, ~slayer, ~smithing, ~thieving, ~woodcutting, ~items, ~monsters, ~npcs, ~objects, ~shops</span></span></div>
+        class='help2'></span></div>
       <div id="searchchunks-searchcontainer" class="searchchunks-searchcontainer noscroll">
         <input type="text" placeholder="Search name..." id="searchChunks" class="noscrollhard"
           oninput="searchWithinChunks()" autocomplete="off" />
@@ -610,6 +612,8 @@
           <div id="intro-data-subtitle" class="intro-data-subtitle noscroll">Don't worry too much about your decisions, you can always change these settings via the settings menu in the top-right of the screen.</div>
         </div>
         <div id="intro-data-2" class="intro-data-2 noscroll">
+          <div id="intro-data-subtitle" class="intro-data-subtitle noscroll">Feeling overwhelmed, or not quite sure how to set up your map? <b>Check out the <a href='https://github.com/source-chunk/chunk-picker-v2/wiki/Getting-Started' target='_blank'>Getting Started Guide!</a></b></div>
+          <hr />
           <div id="intro-data-title" class="intro-data-title noscroll">Starting Chunk</div>
           <div id="intro-data-subtitle" class="intro-data-subtitle noscroll">
             <div id="intro-data-subtitle" class="intro-data-subtitle noscroll">Enter in the chunk ID of your starting chunk. This ID can be found in RuneLite, via the world map with the Region Locker plugin installed. (4 or 5 digits long)</div>
@@ -654,17 +658,7 @@
     <div class="modal-content noscroll">
       <i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeSlayerMasterInfo()"></i>
       <div id="slayermasterinfo-title" class="slayermasterinfo-title noscroll"></div>
-      <div id="slayermasterinfo-subtitle" class="slayermasterinfo-subtitle noscroll">
-        <span class="slayermasterinfo-question">What do the colors indicate? <i class="fa-solid fa-question-circle"></i>
-          <span class="tooltiptext">
-            <div>Slayer Tasks in <span style="color:green">green</span> indicate a task that can be both assigned to you and is completable within your chunks.</div>
-            <hr />
-            <div>Slayer Tasks in <span style="color:yellow">yellow</span> indicate a task that can be assigned to you, but isn't completable within your chunks.</div>
-            <hr />
-            <div>Slayer Tasks in <span style="color:grey">grey</span> indicate a task that cannot be assigned to you yet.</div>
-          </span>
-        </span>
-      </div>
+      <div id="slayermasterinfo-subtitle" class="slayermasterinfo-subtitle noscroll"></div>
       <div id="slayermasterinfo-data" class="slayermasterinfo-data noscroll"></div>
     </div>
   </div>
@@ -754,10 +748,7 @@
       <div id="chunk-section-picker-title" class="chunk-section-picker-title noscroll">Select Chunk Sections</div>
       <div id="chunk-section-picker-subtitle" class="chunk-section-picker-subtitle noscroll">
         Select the sections of the chunk you currently have access to. This helps the website be *much* more accurate at generating correct chunk tasks.
-        <span class="section-help noscroll">
-          <i class="fa-solid fa-info-circle"></i>
-          <span class="tooltiptext"><i><b>What are Chunk Sections?</b></i> Chunk Sections are the little pieces that make up a whole chunk, for when a chunk is not fully continous. When a fence or river cuts through a chunk and prevents you from being able to access parts of it, that's a Chunk Section. Indicating what parts of a chunk you have access to helps the Chunk Task calculation be as accurate as it can be, not giving you tasks for things in your chunk you can't access.<br /><br />The website automatically figures out what parts of all your chunks you have access to, but sometimes it will get stuck and ask you to indicate what parts of a chunk you can access. <b>It is not necessary for you to manually do this for every chunk, only if the website asks you for help or if you need to correct something it got wrong.</b></b></span>
-        </span>
+        <span class="section-help noscroll"></span>
       </div>
       <div id="chunk-section-picker-data" class="chunk-section-picker-data noscroll">
         <div class="chunk-section-picker-chunk-id noscroll"></div>
@@ -851,6 +842,9 @@
         <span class='or'>Or</span>
         <hr class='hr right' />
         <button id='proceed' class='button' onclick='proceed()'>Proceed to view-only map</button>
+      </div>
+      <div class='entry-content-2'>
+        <div><b>Check out the <a href='https://github.com/source-chunk/chunk-picker-v2/wiki' target='_blank'>Chunk Picker V2 Wiki</a></b> for a ton of info, including a <a href='https://github.com/source-chunk/chunk-picker-v2/wiki/Getting-Started' target='_blank'>Getting Started Guide</a>, an <a href='https://github.com/source-chunk/chunk-picker-v2/wiki/FAQ' target='_blank'>FAQ</a>, and a growing <a href='https://github.com/source-chunk/chunk-picker-v2/wiki/Features' target='_blank'>Feature Documentation</a> list!</div>
       </div>
     </div>
   </div>
@@ -978,7 +972,7 @@
       <div class="chunkinfo-divider">
         <span class='sidebar-hide' title='Hide sidebar' onclick='hideSidebar()'><i class="fa-solid fa-chevron-left"></i></span>
         <span class='divider-title'></span>
-        <span class='help'>?<span class="tooltiptext">Quests in <b>bold</b> indicate the quest is started in this chunk.</span></span>
+        <span class='help'></span>
         <span class='expand' title='Expand' onclick='expandFutureChallenges(event)'><i class="fa-solid fa-expand-alt"></i></span>
       </div>
       <div id="chunkinfo-main-container">
