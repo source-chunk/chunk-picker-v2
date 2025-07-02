@@ -3332,7 +3332,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     wrongThings.push(rule);
                     return true;
                 }
-                if (rule === 'Collection Log Clues' && chunkInfo['challenges'][skill][name]['Category'].includes('Collection Log Clues') && chunkInfo['challenges'][skill][name].includes('ClueRewardTier') && rules[rule]) {
+                if (rule === 'Collection Log Clues' && chunkInfo['challenges'][skill][name]['Category'].includes('Collection Log Clues') && chunkInfo['challenges'][skill][name].hasOwnProperty('ClueRewardTier') && rules[rule]) {
                     if (!clueTasksPossible.hasOwnProperty(chunkInfo['challenges'][skill][name]['ClueRewardTier']) || !clueTasksPossible[chunkInfo['challenges'][skill][name]['ClueRewardTier']]) {
                         validChallenge = false;
                         wrongThings.push('Collection Log Clues');
