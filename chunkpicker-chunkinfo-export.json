@@ -2183,6 +2183,13 @@
 				"Priority": 2,
 				"Not F2P": true
 			},
+			"Wield a ~|rapier|~": {
+				"Items": ["Rapier"],
+				"Level": 40,
+				"Primary": false,
+				"Priority": 9,
+				"Not F2P": true
+			},
 			"Wield a ~|Guthan's warspear|~": {
 				"Items": ["Guthan's warspear"],
 				"Level": 70,
