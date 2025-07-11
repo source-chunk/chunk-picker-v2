@@ -2213,7 +2213,7 @@ input#searchPlayerMaps {
 
 .theme-button-container {
   display: grid !important;
-  grid-template-columns: repeat(4, 20%);
+  grid-template-columns: repeat(5, 20%);
 }
 
 .setting .theme-button {
@@ -2299,6 +2299,15 @@ input#searchPlayerMaps {
 
 .setting .theme-button.autumn:hover {
     color: rgb(154, 15, 55);
+}
+
+.setting .theme-button.voyage {
+    color: rgb(167, 217, 239);
+    background-color: rgb(5, 20, 26);
+}
+
+.setting .theme-button.voyage:hover {
+    color: rgb(34, 182, 255);
 }
 
 .disabled-neighbors {
@@ -6233,12 +6242,23 @@ input#searchChunks {
     background-color: var(--color1);
 }
 
-.clipboard-data, .clipboard-data-2, .clipboard-data-3 {
+.clipboard-subtitle {
+    font-size: min(1vw, 14px);
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 5%;
+    min-height: 5%;
+    line-height: 2vh;
+    text-align: center;
+    background-color: var(--color1);
+}
+
+.clipboard-data, .clipboard-data-2, .clipboard-data-3, .clipboard-data-4 {
     margin: 0px 15px;
     font-size: 2vh;
     display: flex;
     align-items: center;
-    height: 20%;
+    height: 15%;
     justify-content: center;
     position: relative;
 }
@@ -6305,6 +6325,25 @@ input#searchChunks {
 
 #rules-clipboard-button:hover {
     background-color: rgb(195, 80, 80);
+}
+
+#equipment-clipboard-button {
+    background-color: rgb(175, 45, 185);
+    font-size: 2.2vh;
+    color: white;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 10px;
+    padding: 5px 10px;
+}
+
+#equipment-clipboard-button:hover {
+    background-color: rgb(140, 10, 150);
 }
 
 #plugin-clipboard-button {

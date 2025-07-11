@@ -9,6 +9,16 @@
 				"Priority": 2,
 				"NoPet": true
 			},
+			"Participate in ~|Trouble Brewing|~ for Agility xp": {
+				"Category": ["Minigame"],
+				"Chunks": ["15150", "15151-1"],
+				"Level": 1,
+				"Tasks": {
+					"Participate in ~|Trouble Brewing|~": "Cooking"
+				},
+				"Primary": true,
+				"Priority": 99
+			},
 			"Access the Chasm of Fire gap ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Gap (Chasm of Fire)"],
@@ -7675,6 +7685,14 @@
 				"Primary": false,
 				"Priority": 2
 			},
+			"Participate in ~|Trouble Brewing|~": {
+				"Category": ["Minigame"],
+				"Chunks": ["15150", "15151-1"],
+				"Level": 40,
+				"Primary": true,
+				"Not F2P": true,
+				"Priority": 4
+			},
 			"Cook a ~|cooked wild kebbit|~": {
 				"Items": ["Raw wild kebit*"],
 				"Level": 23,
@@ -9483,6 +9501,16 @@
 				"Primary": false,
 				"Priority": 1
 			},
+			"Participate in ~|Trouble Brewing|~ for Crafting xp": {
+				"Category": ["Minigame"],
+				"Chunks": ["15150", "15151-1"],
+				"Level": 1,
+				"Tasks": {
+					"Participate in ~|Trouble Brewing|~": "Cooking"
+				},
+				"Primary": true,
+				"Priority": 99
+			},
 			"Craft a ~|noxious halberd|~": {
 				"Items": ["Noxious point*", "Noxious blade*", "Noxious pommel*"],
 				"Level": 72,
@@ -9663,7 +9691,7 @@
 				"Items": ["Venator icon*", "Chromium ingot*", "Ring mould"],
 				"Level": 80,
 				"NPCs": ["Peer the Seer"],
-				"Object": ["Furnace[+]"],
+				"Objects": ["Furnace[+]"],
 				"Priority": 9,
 				"Not F2P": true,
 				"Primary": true,
@@ -9673,7 +9701,7 @@
 				"Items": ["Bellator icon*", "Chromium ingot*", "Ring mould"],
 				"Level": 80,
 				"NPCs": ["Peer the Seer"],
-				"Object": ["Furnace[+]"],
+				"Objects": ["Furnace[+]"],
 				"Priority": 10,
 				"Not F2P": true,
 				"Primary": true,
@@ -9683,7 +9711,7 @@
 				"Items": ["Ultor icon*", "Chromium ingot*", "Ring mould"],
 				"Level": 80,
 				"NPCs": ["Peer the Seer"],
-				"Object": ["Furnace[+]"],
+				"Objects": ["Furnace[+]"],
 				"Priority": 11,
 				"Not F2P": true,
 				"Primary": true,
@@ -9693,7 +9721,7 @@
 				"Items": ["Magus icon*", "Chromium ingot*", "Ring mould"],
 				"Level": 80,
 				"NPCs": ["Peer the Seer"],
-				"Object": ["Furnace[+]"],
+				"Objects": ["Furnace[+]"],
 				"Priority": 12,
 				"Not F2P": true,
 				"Primary": true,
@@ -10356,7 +10384,7 @@
 				"Not F2P": true
 			},
 			"Craft a ~|crystal body|~": {
-				"Items": ["Crystal armour seed", "Crystal shard"],
+				"Items": ["Crystal armour seed*", "Crystal shard*"],
 				"Level": 74,
 				"Objects": ["Singing bowl"],
 				"Output": "Crystal body",
@@ -10404,7 +10432,7 @@
 				"Not F2P": true
 			},
 			"Craft a ~|crystal helm|~": {
-				"Items": ["Crystal armour seed", "Crystal shard"],
+				"Items": ["Crystal armour seed*", "Crystal shard*"],
 				"Level": 70,
 				"Objects": ["Singing bowl"],
 				"Output": "Crystal helm",
@@ -11528,7 +11556,7 @@
 				"Not F2P": true
 			},
 			"Craft ~|crystal legs|~": {
-				"Items": ["Crystal armour seed", "Crystal shard"],
+				"Items": ["Crystal armour seed*", "Crystal shard*"],
 				"Level": 72,
 				"Objects": ["Singing bowl"],
 				"Output": "Crystal legs",
@@ -14779,6 +14807,16 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"Participate in ~|Trouble Brewing|~ for Firemaking xp": {
+				"Category": ["Minigame"],
+				"Chunks": ["15150", "15151-1"],
+				"Level": 1,
+				"Tasks": {
+					"Participate in ~|Trouble Brewing|~": "Cooking"
+				},
+				"Primary": true,
+				"Priority": 99
+			},
 			"Operate the stove at the ~|Blast Furnace|~": {
 				"Category": ["Minigame"],
 				"Chunks": ["Blast Furnace"],
@@ -16402,6 +16440,16 @@
 				"Priority": 1,
 				"NoXp": true,
 				"NoBoost": true
+			},
+			"Participate in ~|Trouble Brewing|~ for Fletching xp": {
+				"Category": ["Minigame"],
+				"Chunks": ["15150", "15151-1"],
+				"Level": 1,
+				"Tasks": {
+					"Participate in ~|Trouble Brewing|~": "Cooking"
+				},
+				"Primary": true,
+				"Priority": 99
 			},
 			"Gain xp in the Friendly Ent ~|Forestry|~ event": {
 				"Category": ["ForestryXp"],
@@ -18970,6 +19018,16 @@
 				"Tasks": {
 					"~|Eagles' Peak|~ Complete the quest": "Quest"
 				}
+			},
+			"Participate in ~|Trouble Brewing|~ for Hunter xp": {
+				"Category": ["Minigame"],
+				"Chunks": ["15150", "15151-1"],
+				"Level": 1,
+				"Tasks": {
+					"Participate in ~|Trouble Brewing|~": "Cooking"
+				},
+				"Primary": true,
+				"Priority": 99
 			},
 			"Access the ~|Hunter Guild|~": {
 				"Chunks": ["6191-1"],
@@ -24398,6 +24456,7 @@
 				"Objects": ["Shooting star#landing site"],
 				"Level": 10,
 				"Output": "Stardust",
+				"Primary": true,
 				"Priority": 3
 			},
 			"Mine a size-2 ~|shooting star|~": {
@@ -24406,6 +24465,7 @@
 				"Objects": ["Shooting star#landing site"],
 				"Level": 20,
 				"Output": "Stardust",
+				"Primary": true,
 				"Priority": 4
 			},
 			"Mine a size-3 ~|shooting star|~": {
@@ -24414,6 +24474,7 @@
 				"Objects": ["Shooting star#landing site"],
 				"Level": 30,
 				"Output": "Stardust",
+				"Primary": true,
 				"Priority": 5
 			},
 			"Mine a size-4 ~|shooting star|~": {
@@ -24422,6 +24483,7 @@
 				"Objects": ["Shooting star#landing site"],
 				"Level": 40,
 				"Output": "Stardust",
+				"Primary": true,
 				"Priority": 3
 			},
 			"Mine a size-5 ~|shooting star|~": {
@@ -24430,6 +24492,7 @@
 				"Objects": ["Shooting star#landing site"],
 				"Level": 50,
 				"Output": "Stardust",
+				"Primary": true,
 				"Priority": 2
 			},
 			"Mine a size-6 ~|shooting star|~": {
@@ -24438,6 +24501,7 @@
 				"Objects": ["Shooting star#landing site"],
 				"Level": 60,
 				"Output": "Stardust",
+				"Primary": true,
 				"Priority": 4
 			},
 			"Mine a size-7 ~|shooting star|~": {
@@ -24446,6 +24510,7 @@
 				"Objects": ["Shooting star#landing site"],
 				"Level": 70,
 				"Output": "Stardust",
+				"Primary": true,
 				"Priority": 4
 			},
 			"Mine a size-8 ~|shooting star|~": {
@@ -24453,14 +24518,16 @@
 				"Items": ["Pickaxe[+]"],
 				"Objects": ["Shooting star#landing site"],
 				"Level": 80,
-				"Output": "Stardust"
+				"Output": "Stardust",
+				"Primary": true
 			},
 			"Mine a size-9 ~|shooting star|~": {
 				"Category": ["Shooting Star"],
 				"Items": ["Pickaxe[+]"],
 				"Objects": ["Shooting star#landing site"],
 				"Level": 90,
-				"Output": "Stardust"
+				"Output": "Stardust",
+				"Primary": true
 			},
 			"Obtain ~|adamantite ore|~ from blasted ore": {
 				"Items": ["Chisel", "Tinderbox", "Dynamite*"],
@@ -30389,7 +30456,7 @@
 				"Output": "Climbing boots",
 				"Not F2P": true
 			},
-			"Buy a candle from the ~|candle seller|~*": {
+			"Buy a candle from the ~|Candle seller|~*": {
 				"NPCs": ["Candle seller"],
 				"Source": "shop",
 				"Output": "Candle",
@@ -31168,6 +31235,7 @@
 			"Chambers of Xeric loot*": {
 				"Category": ["Boss"],
 				"Chunks": ["Chambers of Xeric"],
+				"Objects": ["Ancient chest"],
 				"Output": "Chambers of Xeric",
 				"Not F2P": true
 			},
@@ -31650,6 +31718,9 @@
 				"Chunks": ["15150"],
 				"NPCs": ["Honest Jimmy"],
 				"Source": "shop",
+				"Tasks": {
+					"Participate in ~|Trouble Brewing|~": "Cooking"
+				},
 				"Output": "Pieces of eight loot",
 				"Not F2P": true
 			},
@@ -32513,12 +32584,16 @@
 				"Not F2P": true
 			},
 			"Theatre of Blood loot*": {
+				"Category": ["Boss"],
 				"Chunks": ["Theatre of Blood"],
+				"Objects": ["Monumental chest"],
 				"Output": "Theatre of Blood",
 				"Not F2P": true
 			},
 			"Tombs of Amascut loot*": {
+				"Category": ["Boss"],
 				"Chunks": ["Tombs of Amascut"],
+				"Objects": ["Chest (Tombs of Amascut)"],
 				"Output": "Tombs of Amascut",
 				"Not F2P": true
 			},
@@ -47186,7 +47261,7 @@
 				"Not F2P": true
 			},
 			"Craft a ~|crystal body|~": {
-				"Items": ["Crystal armour seed", "Crystal shard"],
+				"Items": ["Crystal armour seed*", "Crystal shard*"],
 				"Level": 74,
 				"Objects": ["Singing bowl"],
 				"Output": "Crystal body",
@@ -47234,7 +47309,7 @@
 				"Not F2P": true
 			},
 			"Craft a ~|crystal helm|~": {
-				"Items": ["Crystal armour seed", "Crystal shard"],
+				"Items": ["Crystal armour seed*", "Crystal shard*"],
 				"Level": 70,
 				"Objects": ["Singing bowl"],
 				"Output": "Crystal helm",
@@ -47270,7 +47345,7 @@
 				"Not F2P": true
 			},
 			"Craft ~|crystal legs|~": {
-				"Items": ["Crystal armour seed", "Crystal shard"],
+				"Items": ["Crystal armour seed*", "Crystal shard*"],
 				"Level": 72,
 				"Objects": ["Singing bowl"],
 				"Output": "Crystal legs",
@@ -49467,6 +49542,16 @@
 				"Not Equip": true,
 				"Not F2P": true
 			},
+			"Participate in ~|Trouble Brewing|~ for Strength xp": {
+				"Category": ["Minigame"],
+				"Chunks": ["15150", "15151-1"],
+				"Level": 1,
+				"Tasks": {
+					"Participate in ~|Trouble Brewing|~": "Cooking"
+				},
+				"Primary": true,
+				"Priority": 99
+			},
 			"Access the ~|Barbarian Outpost Agility Course|~": {
 				"Chunks": ["10039"],
 				"Level": 1,
@@ -51301,6 +51386,16 @@
 				"Priority": 2,
 				"Not F2P": true,
 				"NoPet": true
+			},
+			"Participate in ~|Trouble Brewing|~ for Woodcutting xp": {
+				"Category": ["Minigame"],
+				"Chunks": ["15150", "15151-1"],
+				"Level": 1,
+				"Tasks": {
+					"Participate in ~|Trouble Brewing|~": "Cooking"
+				},
+				"Primary": true,
+				"Priority": 99
 			},
 			"Obtain ~|mahogany logs|~ from a supply crate": {
 				"Items": ["Supply crate*"],
@@ -76514,7 +76609,7 @@
 			"~|Kourend and Kebos Diary#Hard|~ Task 4": {
 				"Description": "Mine some Lovakite ore.",
 				"Objects": ["Lovakite rocks"],
-				"Item": ["Pickaxe[+]"],
+				"Items": ["Pickaxe[+]"],
 				"Skills": {
 					"Mining": 65
 				},
@@ -140713,6 +140808,7 @@
 				"Vespula": 1
 			},
 			"Object": {
+				"Ancient chest": 1,
 				"Chest (Chambers of Xeric)": 1,
 				"Sapling (Chambers of Xeric)": 1
 			}
@@ -145682,6 +145778,7 @@
 				"Barrier": 24,
 				"Formidable passage": 8,
 				"Grand bookshelf": 4,
+				"Monumental chest": 5,
 				"Skeleton": 1,
 				"Small chest#Theatre of Blood": 6,
 				"Stairs": 1,
@@ -145736,6 +145833,7 @@
 				"Osmumten": 5
 			},
 			"Object": {
+				"Chest (Tombs of Amascut)": 8,
 				"Entry": 1,
 				"Exit": 1,
 				"Path of Apmeken": 1,
@@ -149250,9 +149348,9 @@
 		"bossLogs": {
 			"Chest (Barrows)": true,
 			"Reward Chest (The Gauntlet)": true,
-			"Theatre of Blood": true,
-			"Chambers of Xeric": true,
-			"Tombs of Amascut": true,
+			"Monumental chest": true,
+			"Ancient chest": true,
+			"Chest (Tombs of Amascut)": true,
 			"Supply crate loot": true,
 			"Reward pool loot": true,
 			"Lunar Chest": true,
@@ -162768,7 +162866,7 @@
 				"6-12": "1/16"
 			},
 			"Barronite guard": {
-				"1": "1/750"
+				"1": "1/800"
 			},
 			"Clue scroll (beginner)": {
 				"1": "Rare"
@@ -184496,7 +184594,7 @@
 				"1": "1/512"
 			},
 			"Rune pickaxe": {
-				"5 (noted)": "15.75"
+				"5 (noted)": "1/15.75"
 			},
 			"Rune knife": {
 				"150": "1/25.2"
@@ -199856,6 +199954,9 @@
 				"Mossy key": {
 					"1": "1/16"
 				},
+				"Clue scroll (beginner)": {
+					"1": "Always"
+				},
 				"HerbDropTable+": {
 					"1": "5/118"
 				},
@@ -199929,6 +200030,9 @@
 				},
 				"Giant key": {
 					"1": "1/16"
+				},
+				"Clue scroll (beginner)": {
+					"1": "Always"
 				}
 			},
 			"Rewards Chest (Fortis Colosseum)": {
@@ -236152,7 +236256,7 @@
 			"attack_speed": 7,
 			"attack_crush": 5,
 			"attack_magic": -4,
-			"attack_ranged": 2,
+			"attack_ranged": 0,
 			"attack_slash": 110,
 			"attack_stab": 85,
 			"defence_crush": 5,
