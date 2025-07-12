@@ -44641,6 +44641,9 @@
 				"Output": "Aether rune",
 				"Primary": true,
 				"Priority": 2,
+				"Tasks": {
+					"Cast ~|magic imbue|~": "Magic"
+				},
 				"Not F2P": true
 			},
 			"Craft a ~|death rune|~": {
