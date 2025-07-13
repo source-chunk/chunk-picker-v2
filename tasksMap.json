@@ -1,5 +1,6 @@
 {
   "Access the Ice Mountain western scramble ~|shortcut|~": "t_1",
+  "Participate in ~|Underwater Agility and Thieving|~ for Agility xp": "t_45430",
   "Participate in ~|Trouble Brewing|~ for Agility xp": "t_2",
   "Access the Chasm of Fire gap ~|shortcut|~": "t_3",
   "Access the Chasm of Fire chain ~|shortcut|~": "t_4",
@@ -3511,6 +3512,7 @@
   "Access the shortcut in the ~|Rogues' Den|~ maze": "t_3510",
   "Access the sixth room of ~|Pyramid Plunder|~": "t_3511",
   "Access the third room of ~|Pyramid Plunder|~": "t_3512",
+  "Participate in ~|Underwater Agility and Thieving|~ for Thieving xp": "t_45431",
   "Gain xp in the Pheasant ~|Forestry|~ event": "t_3513",
   "Climb the ~|crumbling wall (Grim Tales)|~ north of Falador": "t_3514",
   "Access the autumn room of the ~|Sorceress's Garden|~ minigame": "t_3515",
@@ -45428,5 +45430,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 45430
+  "currentNextIndex": 45432
 }
