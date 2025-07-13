@@ -9,6 +9,13 @@
 				"Priority": 2,
 				"NoPet": true
 			},
+			"Participate in ~|Underwater Agility and Thieving|~ for Agility xp": {
+				"Chunks": ["Underwater Fossil Island"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 98,
+				"NoPet": true
+			},
 			"Participate in ~|Trouble Brewing|~ for Agility xp": {
 				"Category": ["Minigame"],
 				"Chunks": ["15150", "15151-1"],
@@ -17,7 +24,8 @@
 					"Participate in ~|Trouble Brewing|~": "Cooking"
 				},
 				"Primary": true,
-				"Priority": 99
+				"Priority": 99,
+				"NoPet": true
 			},
 			"Access the Chasm of Fire gap ~|shortcut|~": {
 				"Category": ["Shortcut"],
@@ -50268,6 +50276,13 @@
 				"Level": 41,
 				"Primary": true,
 				"NoBoost": true
+			},
+			"Participate in ~|Underwater Agility and Thieving|~ for Thieving xp": {
+				"Chunks": ["Underwater Fossil Island"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 98,
+				"NoPet": true
 			},
 			"Access the ~|Rogues' Den|~ minigame": {
 				"Chunks": ["Rogues' Den"],
