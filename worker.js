@@ -4700,7 +4700,7 @@ let calcBIS = function(completedOnly) {
         globalValids['BiS'] = {};
     }
     let completedEquipment = {};
-    !!completedChallenges['BiS'] && Object.keys(completedChallenges['BiS']).forEach((equipLine) => {
+    !!completedChallenges['BiS'] && Object.keys(completedChallenges['BiS']).filter((equipLine) => equipLine.includes('|')).forEach((equipLine) => {
         let equip = equipLine.split('|')[1].charAt(0).toUpperCase() + equipLine.split('|')[1].slice(1);
         if (Object.keys(chunkInfo['equipment']).map((eq) => eq.toLowerCase()).indexOf(equipLine.split('|')[1].toLowerCase())) {
             let equipName = Object.keys(chunkInfo['equipment'])[Object.keys(chunkInfo['equipment']).map((eq) => eq.toLowerCase()).indexOf(equipLine.split('|')[1].toLowerCase())];
@@ -4709,7 +4709,7 @@ let calcBIS = function(completedOnly) {
             completedEquipment[equip] = chunkInfo['equipment'][equip];
         }
     });
-    !!checkedChallenges['BiS'] && Object.keys(checkedChallenges['BiS']).forEach((equipLine) => {
+    !!checkedChallenges['BiS'] && Object.keys(checkedChallenges['BiS']).filter((equipLine) => equipLine.includes('|')).forEach((equipLine) => {
         let equip = equipLine.split('|')[1].charAt(0).toUpperCase() + equipLine.split('|')[1].slice(1);
         if (Object.keys(chunkInfo['equipment']).map((eq) => eq.toLowerCase()).indexOf(equipLine.split('|')[1].toLowerCase())) {
             let equipName = Object.keys(chunkInfo['equipment'])[Object.keys(chunkInfo['equipment']).map((eq) => eq.toLowerCase()).indexOf(equipLine.split('|')[1].toLowerCase())];
