@@ -1408,7 +1408,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.8.1';
+let currentVersion = '6.8.2';
 let patchNotesVersion = '6.4.0';
 let updateLevel = 'difference';
 
@@ -1575,7 +1575,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.8.1";
+mapImg.src = "osrs_world_map.png?v=6.8.2";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1756,6 +1756,24 @@ let drawCanvas = function() {
         }
     }
 
+    // Slayer overlay
+    ctx.save();
+    !!chunkInfo['mapOverlays'] && selectedOverlay === 'Locked Slayer Task|Slayer task' && !!chunkInfo['mapOverlays'][selectedOverlay] && !!slayerLocked && slayerLocked.hasOwnProperty('monster') && !!chunkInfo['codeItems']['slayerTaskChunks'][slayerLocked.monster] && chunkInfo['codeItems']['slayerTaskChunks'][slayerLocked.monster].forEach((chunkId) => {
+        let {x, y} = convertToXY(chunkId);
+        if (highVisibilityMode) {
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.25)';
+        } else if (hoveredChunk === chunkId) {
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.25)';
+        } else {
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.33)';
+        }
+        ctx.strokeStyle = 'rgba(170, 0, 0, 1)';
+        ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        ctx.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        ctx.drawImage(osrsStickers['slayer'], (dragTotalX + (totalZoom * ((x + 0.2) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.2) * imgH / (fullSize / rowSize))), (totalZoom * (imgW / rowSize)) * (0.6), (totalZoom * (imgW / rowSize)) * (0.6));
+    });
+    ctx.restore();
+
     // Locked chunk
     if (infoLockedId !== -1) {
         let {x, y} = convertToXY(infoLockedId);
@@ -1880,7 +1898,7 @@ let drawCanvas = function() {
 
     // Overlays
     ctx.save();
-    !!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl, i) => {
+    !!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && selectedOverlay !== 'Locked Slayer Task|Slayer task' && !!chunkInfo['mapOverlays'][selectedOverlay] && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl, i) => {
         if ((selectedOverlay !== 'Clues' || selectedOverlayClues[overlayEl.type]) && (selectedOverlayIds.length === 0 || i !== selectedOverlayId) && overlayEl.x >= 1024 && overlayEl.x <= 3967 && overlayEl.y >= 2496 && overlayEl.y <= 4159 && (!unlockedOverlayOnly || (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(convertToChunkNum(Math.floor((overlayEl.x - 1024)/64), (fullSize / rowSize) - Math.floor((overlayEl.y - 2496)/64) - 1))))) {
             ctx.textAlign = 'center';
             ctx.font = '900 ' + 36 + 'px "Font Awesome 6 Free"';
@@ -1902,7 +1920,7 @@ let drawCanvas = function() {
     ctx.restore();
 
     ctx.save();
-    if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay] && selectedOverlayIds.length !== 0) {
+    if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && selectedOverlay !== 'Locked Slayer Task|Slayer task' && !!chunkInfo['mapOverlays'][selectedOverlay] && selectedOverlayIds.length !== 0) {
         let overlayEl = chunkInfo['mapOverlays'][selectedOverlay][selectedOverlayId];
         ctx.textAlign = 'center';
         ctx.font = '900 ' + 36 + 'px "Font Awesome 6 Free"';
@@ -1982,7 +2000,7 @@ let drawCanvas = function() {
     }
     ctx.restore();
 
-    if (selectedOverlay !== 'None') {
+    if (selectedOverlay !== 'None' && selectedOverlay !== 'Locked Slayer Task|Slayer task') {
         $('#canvas').css('cursor', (hoveredOverlayIds.length !== 0 && !isHoveringOverlayMenu) || isHoveringClose || isHoveringLeft || isHoveringRight ? 'pointer' : 'auto');
     }
 
@@ -2364,7 +2382,7 @@ let handleMouseMove = function(e) {
         isHoveringOverlayMenu = overlayMenuLocation.length === 4 && currentX >= overlayMenuLocation[0] && currentY >= overlayMenuLocation[1] && currentX <= overlayMenuLocation[2] && currentY <= overlayMenuLocation[3];
 
         // Overlay hover
-        if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && !!chunkInfo['mapOverlays'][selectedOverlay]) {
+        if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && selectedOverlay !== 'Locked Slayer Task|Slayer task' && !!chunkInfo['mapOverlays'][selectedOverlay]) {
             hoveredOverlayIds = [];
             let lowestDistance = 100;
             e.target.id === 'canvas' && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl, i) => {
@@ -3280,7 +3298,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.8.1");
+        myWorker = new Worker("./worker.js?v=6.8.2");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3584,8 +3602,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.8.1");
-let myWorker2 = new Worker("./worker.js?v=6.8.1");
+let myWorker = new Worker("./worker.js?v=6.8.2");
+let myWorker2 = new Worker("./worker.js?v=6.8.2");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6609,7 +6627,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.8.1");
+    myWorker2 = new Worker("./worker.js?v=6.8.2");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -8506,7 +8524,7 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
                     tempFormattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')}, qty: ${amount}, ${dropTablesGlobal[source][name][amount]})`;
                     tempFormattedSource += `<span class='double-search-icon' onclick='openSearchDetails("monsters", "${encodeRFC5987ValueChars(source)}", "${category}", "${encodeRFC5987ValueChars(name)}")'><i class="fa-solid fa-search"></i></span>`;
                     shouldRank = true;
-                    tempDroprate = dropTablesGlobal[source][name][amount].split('/')[0].replaceAll(',', '') / dropTablesGlobal[source][name][amount].split('/')[1].replaceAll(',', '');
+                    tempDroprate = dropTablesGlobal[source][name][amount].includes('/') ? dropTablesGlobal[source][name][amount].split('/')[0].replaceAll(',', '') / dropTablesGlobal[source][name][amount].split('/')[1].replaceAll(',', '') : (dropTablesGlobal[source][name][amount] === 'Always' ? 1 : 1/999999999999999);
                     formattedSources.push(tempFormattedSource);
                     rankings[tempFormattedSource] = {
                         shouldRank,
@@ -8517,7 +8535,7 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
                 });
             } else if (baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '') === 'drop' && dropRatesGlobal.hasOwnProperty(source) && dropRatesGlobal[source].hasOwnProperty(name)) {
                 formattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')}, ${dropRatesGlobal[source][name]})`;
-                tempDroprate = dropRatesGlobal[source][name].split('/')[0].replaceAll(',', '') / dropRatesGlobal[source][name].split('/')[1].replaceAll(',', '');
+                tempDroprate = dropRatesGlobal[source][name].includes('/') ? dropRatesGlobal[source][name].split('/')[0].replaceAll(',', '') / dropRatesGlobal[source][name].split('/')[1].replaceAll(',', '') : (dropRatesGlobal[source][name] === 'Always' ? 1 : 1/999999999999999);
             } else if (baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '') === 'drop' && chunkInfo['challenges']['Slayer'].hasOwnProperty(source) && chunkInfo['challenges']['Slayer'][source].hasOwnProperty('Output') && ((chunkInfo['skillItems']['Slayer'].hasOwnProperty(chunkInfo['challenges']['Slayer'][source]['Output']) && chunkInfo['skillItems']['Slayer'][chunkInfo['challenges']['Slayer'][source]['Output']].hasOwnProperty(name)) || (!!dropTablesGlobal[source.split('|')[1].charAt(0).toUpperCase() + source.split('|')[1].slice(1)] && !!dropTablesGlobal[source.split('|')[1].charAt(0).toUpperCase() + source.split('|')[1].slice(1)][name]))) {
                 let monster = source.split('|')[1].charAt(0).toUpperCase() + source.split('|')[1].slice(1);
                 if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][name]) {
@@ -8527,7 +8545,7 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
                         tempFormattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')}, qty: ${amount}, ${dropTablesGlobal[monster][name][amount]})`;
                         tempFormattedSource += `<span class='double-search-icon' onclick='openSearchDetails("monsters", "${encodeRFC5987ValueChars(monster)}", "${category}", "${encodeRFC5987ValueChars(name)}")'><i class="fa-solid fa-search"></i></span>`;
                         shouldRank = true;
-                        tempDroprate = dropTablesGlobal[monster][name][amount].split('/')[0].replaceAll(',', '') / dropTablesGlobal[monster][name][amount].split('/')[1].replaceAll(',', '');
+                        tempDroprate = dropTablesGlobal[monster][name][amount].includes('/') ? dropTablesGlobal[monster][name][amount].split('/')[0].replaceAll(',', '') / dropTablesGlobal[monster][name][amount].split('/')[1].replaceAll(',', '') : (dropTablesGlobal[monster][name][amount] === 'Always' ? 1 : 1/999999999999999);
                         formattedSources.push(tempFormattedSource);
                         rankings[tempFormattedSource] = {
                             shouldRank,
@@ -8541,7 +8559,7 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
                     formattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')}, ${dropRate})`;
                     formattedSource += `<span class='double-search-icon' onclick='openSearchDetails("monsters", "${encodeRFC5987ValueChars(source.split('|')[1].charAt(0).toUpperCase() + source.split('|')[1].slice(1))}", "${category}", "${encodeRFC5987ValueChars(name)}")'><i class="fa-solid fa-search"></i></span>`;
                     shouldRank = true;
-                    tempDroprate = dropRate.split('/')[0].replaceAll(',', '') / dropRate.split('/')[1].replaceAll(',', '');
+                    tempDroprate = dropRate.includes('/') ? dropRate.split('/')[0].replaceAll(',', '') / dropRate.split('/')[1].replaceAll(',', '') : (dropRate === 'Always' ? 1 : 1/999999999999999);
                 }
             } else {
                 formattedSource += ` (${baseChunkData[category][name][source].replaceAll('primary-', '').replaceAll('secondary-', '').replaceAll(/\*/g, '')})`;
@@ -10423,6 +10441,9 @@ let showOverlays = function(fromHelper) {
                 clueTiers.forEach((clueTier) => {
                     $('#overlays-data').append(`<div class="overlay noscroll ${clueTier.replaceAll(' ', '_') + '-overlay'} sub-overlay-entry"><label class="checkbox noscroll"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${selectedOverlayClues[clueTier] ? "checked" : ''} class='noscroll' onclick="selectedOverlay='${overlay}'; selectOverlayClues('${clueTier}');"><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="checkbox__label noscroll">${overlay === 'None' ? overlay : `<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(`${clueTier} ${overlay.toLowerCase()}`)}" target="_blank">${clueTier} ${overlay}</a>`}</span></label></div>`);
                 });
+            } else if (overlay === 'Locked Slayer Task') {
+                let tooltipBase = `<span class="neighbors-question"><i class="fa-solid fa-question-circle question-help"></i></span>`;
+                $('#overlays-data').append(`<div class="overlay noscroll ${overlay.replaceAll(' ', '_') + '-overlay'}"><label class="radio noscroll"><span class="radio__input noscroll"><input type="radio" name="radio" ${(selectedOverlay === overlayText) ? "checked" : ''} class='noscroll' onclick="selectedOverlay='${overlayText}'; clearOverlayClues();"><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll">${overlay === 'None' ? overlay : `<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(overlayLink)}" target="_blank">${overlay}</a>`}${tooltip.generate('slayerOverlayTooltip', tooltipBase, 'slayerOverlayTooltip', onMobile ? 'bottom' : 'right')}</span></label></div>`);
             } else {
                 $('#overlays-data').append(`<div class="overlay noscroll ${overlay.replaceAll(' ', '_') + '-overlay'}"><label class="radio noscroll"><span class="radio__input noscroll"><input type="radio" name="radio" ${(selectedOverlay === overlayText) ? "checked" : ''} class='noscroll' onclick="selectedOverlay='${overlayText}'; clearOverlayClues();"><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll">${overlay === 'None' ? overlay : `<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(overlayLink)}" target="_blank">${overlay}</a>`}</span></label></div>`);
             }

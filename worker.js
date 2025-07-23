@@ -1656,11 +1656,13 @@ let calcChallenges = function(chunks, baseChunkData) {
                 highestChanged = false;
                 Object.keys(chunkInfo['challenges'][skill][task]['Tasks']).filter(subTask => skillNames.includes(chunkInfo['challenges'][skill][task]['Tasks'][subTask])).some(subTask => {
                     if (subTask.split('--')[0] === task && !!tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] && tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]][tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].length - 1] !== task) {
-                        if (rules['Wield Crafted Items Override'] && !didRestart && chunkInfo['challenges'][skill].hasOwnProperty(task) && chunkInfo['challenges'][skill][task].hasOwnProperty('Output')) {
-                            if (!craftedBisOverride[skill]) {
-                                craftedBisOverride[skill] = {};
+                        if (rules['Wield Crafted Items'] && !didRestart && chunkInfo['challenges'][skill].hasOwnProperty(task) && chunkInfo['challenges'][skill][task].hasOwnProperty('Output')) {
+                            if (rules['Wield Crafted Items Override']) {
+                                if (!craftedBisOverride[skill]) {
+                                    craftedBisOverride[skill] = {};
+                                }
+                                craftedBisOverride[skill][task] = true;
                             }
-                            craftedBisOverride[skill][task] = true;
                             if (!readdedCraftedBisTasks[skill]) {
                                 readdedCraftedBisTasks[skill] = {};
                             }
@@ -2634,7 +2636,11 @@ let calcChallenges = function(chunks, baseChunkData) {
                                         delete outputs[item];
                                     }
                                 } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) && !chunkInfo['challenges'][skill][challenge]['Secondary'] && !chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
-                                    outputs[item][challenge] = 'primary-' + skill;
+                                    if ((highestDropRate * (parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]))) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))) {
+                                        outputs[item][challenge] = 'primary-' + skill;
+                                    } else {
+                                        outputs[item][challenge] = 'secondary-' + skill;
+                                    }
                                 } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) <= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) || chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
                                     outputs[item][challenge] = 'secondary-' + skill;
                                 }

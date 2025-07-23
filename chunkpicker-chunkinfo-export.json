@@ -18240,7 +18240,7 @@
 				"Priority": 4
 			},
 			"Mix a ~|guam tar|~": {
-				"Items": ["Guam leaf*", "Swamp tar*"],
+				"Items": ["Pestle and mortar", "Guam leaf*", "Swamp tar*"],
 				"Level": 19,
 				"Output": "Guam tar",
 				"Primary": true
@@ -18263,13 +18263,13 @@
 				"Priority": 1
 			},
 			"Mix a ~|harralander tar|~": {
-				"Items": ["Harralander*", "Swamp tar*"],
+				"Items": ["Pestle and mortar", "Harralander*", "Swamp tar*"],
 				"Level": 44,
 				"Output": "Harralander tar",
 				"Primary": true
 			},
 			"Mix an ~|irit tar|~": {
-				"Items": ["Irit*", "Swamp tar*"],
+				"Items": ["Pestle and mortar", "Irit*", "Swamp tar*"],
 				"Level": 55,
 				"Output": "Irit tar",
 				"Primary": true
@@ -18341,7 +18341,7 @@
 				"Priority": 2
 			},
 			"Mix a ~|marrentill tar|~": {
-				"Items": ["Marrentill*", "Swamp tar*"],
+				"Items": ["Pestle and mortar", "Marrentill*", "Swamp tar*"],
 				"Level": 31,
 				"Output": "Marrentill tar",
 				"Primary": true
@@ -18511,7 +18511,7 @@
 				"Priority": 2
 			},
 			"Mix a ~|super combat potion|~": {
-				"Items": ["Super attack(4)*", "Super strength(4)*", "Super defence(4)*", "Torstol*"],
+				"Items": ["Super attack[+]*", "Super strength[+]*", "Super defence[+]*", "Torstol*"],
 				"Level": 90,
 				"Output": "Super combat potion(3)",
 				"Primary": true,
@@ -18593,7 +18593,7 @@
 				"Priority": 1
 			},
 			"Mix a ~|tarromin tar|~": {
-				"Items": ["Tarromin*", "Swamp tar*"],
+				"Items": ["Pestle and mortar", "Tarromin*", "Swamp tar*"],
 				"Level": 39,
 				"Output": "Tarromin tar",
 				"Primary": true
@@ -19074,6 +19074,7 @@
 			"Catch implings in ~|Puro-Puro|~ after reaching 17 Hunter": {
 				"Category": ["Puro-Puro"],
 				"Chunks": ["Puro-Puro"],
+				"Items": ["Impling jar"],
 				"Level": 1,
 				"Primary": true,
 				"Priority": 1,
@@ -44260,6 +44261,14 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"Wield ~|onyx bolts (e)|~": {
+				"Items": ["Onyx bolts (e)"],
+				"Level": 61,
+				"Primary": false,
+				"Priority": 9,
+				"Not F2P": true,
+				"NoBoost": true
+			},
 			"Wield ~|dragonstone bolts (e)|~": {
 				"Items": ["Dragonstone bolts (e)"],
 				"Level": 61,
@@ -50980,7 +50989,7 @@
 			"Steal from a ~|silver stall#Keldagrim|~": {
 				"Level": 50,
 				"Objects": ["Silver stall#Keldagrim"],
-				"Output": "Keldagrim silver stall",
+				"Output": "Silver stall#Keldagrim",
 				"Primary": true,
 				"Priority": 5
 			},
@@ -64274,6 +64283,17 @@
 				"Label": "Permanent Unlockables",
 				"Chunks": ["6446"],
 				"Items": ["Spade"],
+				"Not F2P": true
+			},
+			"Retrieve ~|Copper's crimson collar|~ for Veos": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["7225-1"],
+				"NPCs": ["Veos"],
+				"Items": ["Copper's crimson collar"],
+				"Tasks": {
+					"~|Client of Kourend|~ Complete the quest": "Quest"
+				},
 				"Not F2P": true
 			},
 			"Unlock Colosseum bank access with ~|Glory|~": {
@@ -80192,7 +80212,7 @@
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill a Hill Giant, Moss Giant and Fire Giant in the Giant Cave within the Shayzien region.",
 				"Chunks": ["Giants' Den"],
-				"Monsters": ["Hill Giant (Kourend)", "Moss giant", "Fire giant"],
+				"Monsters": ["Hill Giant#Kourend", "Moss giant", "Fire giant"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 1
@@ -108072,7 +108092,7 @@
 				"1": {
 					"Monster": {
 						"Skeleton#Armed": 1,
-						"Skeleton#Naked": 4
+						"Skeleton#Plain": 4
 					},
 					"Object": {
 						"Dead tree": 36,
@@ -108235,7 +108255,7 @@
 				"5": {
 					"Monster": {
 						"Skeleton#Armed": 1,
-						"Skeleton#Naked": 1
+						"Skeleton#Plain": 1
 					},
 					"Object": {
 						"Dead tree": 5
@@ -108431,7 +108451,7 @@
 			},
 			"Monster": {
 				"Fire giant": 8,
-				"Hill Giant (Kourend)": 8,
+				"Hill Giant#Kourend": 8,
 				"Moss giant": 10
 			},
 			"Name": "Giants' Den",
@@ -108838,7 +108858,7 @@
 				"Man": 1,
 				"Necromancer (Great Kourend)": 1,
 				"Woman": 2,
-				"Zombie#Armed": 4
+				"Zombie (Kourend)": 4
 			},
 			"NPC": {
 				"Captain Bruce": 1,
@@ -109635,7 +109655,7 @@
 						"Necromancer (Great Kourend)": 2,
 						"Rat": 3,
 						"Spider": 7,
-						"Zombie#Armed": 4
+						"Zombie (Kourend)": 4
 					},
 					"NPC": {
 						"Fuggy": 1,
@@ -109884,7 +109904,7 @@
 		"6446": {
 			"Monster": {
 				"Embertailed jerboa": 2,
-				"Hill Giant (Varlamore)": 6,
+				"Hill Giant#Varlamore": 6,
 				"Imp": 1,
 				"Jaguar": 2,
 				"Jaguar cub": 1,
@@ -111426,7 +111446,7 @@
 					},
 					"Monster": {
 						"Bat": 3,
-						"Skeleton#Naked": 3,
+						"Skeleton#Plain": 3,
 						"Skeleton#Unarmed": 1
 					},
 					"NPC": {
@@ -112321,7 +112341,7 @@
 						"Bat": 3,
 						"Ghost": 2,
 						"Giant bat": 1,
-						"Skeleton#Naked": 1,
+						"Skeleton#Plain": 1,
 						"Skeleton#Unarmed": 1
 					},
 					"NPC": {
@@ -114011,7 +114031,7 @@
 				"Flesh Crawler": 26,
 				"Giant rat": 10,
 				"Rat": 60,
-				"Zombie#Stronghold of Security": 52
+				"Zombie (Stronghold of Security)": 52
 			},
 			"Name": "Stronghold of Security",
 			"Object": {
@@ -114864,7 +114884,7 @@
 			},
 			"Monster": {
 				"Fever spider": 11,
-				"Zombie pirate#Braindeath Island": 12,
+				"Zombie pirate (Braindeath Island)": 12,
 				"Zombie swab": 6
 			},
 			"NPC": {
@@ -118987,8 +119007,8 @@
 						"Black bear": 1,
 						"Giant rat": 2,
 						"Gnome": 7,
-						"Goblin#Drop table 2": 6,
 						"Goblin#Drop table 1": 4,
+						"Goblin#Drop table 2": 6,
 						"Hill Giant": 3,
 						"Ogre": 1,
 						"Rat": 9,
@@ -119103,8 +119123,8 @@
 						"Man (level 4)": 1,
 						"Paladin": 6,
 						"Woman (West Ardougne)": 11,
-						"Zombie#Armed": 2,
-						"Zombie#Unarmed": 3
+						"Zombie#Level 24": 2,
+						"Zombie#Level 13": 3
 					},
 					"NPC": {
 						"Bravek": 1,
@@ -120490,7 +120510,7 @@
 			},
 			"Monster": {
 				"Archer (Ardougne)": 6,
-				"Cyclops#Ardougne Zoo": 1,
+				"Cyclops (Ardougne Zoo)": 1,
 				"Jogre": 1,
 				"Knight of Ardougne": 1,
 				"Man#Cavalier man": 1,
@@ -120531,7 +120551,6 @@
 				"Mourner": 3,
 				"Parrots": 2,
 				"Parroty Pete": 1,
-				"Penguin (monster)": 1,
 				"Philipe Carnillean": 1,
 				"Priest": 1,
 				"Probita": 1,
@@ -121251,8 +121270,8 @@
 				"10290": true
 			},
 			"Monster": {
-				"Dungeon rat#Variant 1": 1,
-				"Dungeon rat#Variant 2": 11,
+				"Dungeon rat#Full tail": 1,
+				"Dungeon rat#Short tail": 11,
 				"Giant spider": 15,
 				"Goblin#Armed": 6,
 				"Goblin#Unarmed": 8,
@@ -121320,8 +121339,8 @@
 				"10292": true
 			},
 			"Monster": {
-				"Dungeon rat#Variant 1": 1,
-				"Dungeon rat#Variant 2": 4,
+				"Dungeon rat#Full tail": 1,
+				"Dungeon rat#Short tail": 4,
 				"Giant bat": 6,
 				"Goblin#Armed": 2,
 				"Goblin#Unarmed": 22,
@@ -125198,7 +125217,7 @@
 					"Monster": {
 						"Moss giant": 3,
 						"Skeleton#Armed": 3,
-						"Skeleton#Naked": 6
+						"Skeleton#Plain": 6
 					},
 					"NPC": {
 						"Captain Ned": 1
@@ -129253,7 +129272,7 @@
 			"Monster": {
 				"Dark warrior#Level 8": 15,
 				"Dark warrior#Level 145": 17,
-				"Skeleton#Naked": 10,
+				"Skeleton#Plain": 10,
 				"Skeleton#Unarmed": 3
 			},
 			"NPC": {
@@ -130441,7 +130460,7 @@
 					},
 					"Monster": {
 						"Skeleton#Armed": 2,
-						"Skeleton#Naked": 10,
+						"Skeleton#Plain": 10,
 						"Skeleton#Unarmed": 2
 					},
 					"NPC": {
@@ -131144,8 +131163,8 @@
 					"Monster": {
 						"Giant rat": 4,
 						"Giant spider": 8,
-						"Goblin#Drop table 2": 1,
 						"Goblin#Drop table 1": 21,
+						"Goblin#Drop table 2": 1,
 						"Mugger": 1,
 						"Rat": 4,
 						"Spider": 7,
@@ -131587,7 +131606,7 @@
 			},
 			"Monster": {
 				"Green dragon": 5,
-				"Zombie#Wilderness": 21
+				"Zombie (Wilderness)": 21
 			},
 			"NPC": {
 				"Mysterious ghost": 1
@@ -131613,7 +131632,7 @@
 				"Black chinchompa (Hunter)": 8,
 				"Deadly red spider": 11,
 				"Rat": 3,
-				"Zombie#Wilderness": 15
+				"Zombie (Wilderness)": 15
 			},
 			"Nickname": "Eastern Ruins",
 			"Object": {
@@ -131640,7 +131659,7 @@
 						"Black chinchompa (Hunter)": 3,
 						"Moss giant": 6,
 						"Skeleton#Armed": 1,
-						"Skeleton#Naked": 2
+						"Skeleton#Plain": 2
 					},
 					"Spawn": {
 						"Chaos rune": 1
@@ -133020,7 +133039,7 @@
 		"12858": {
 			"Monster": {
 				"Skeleton#Armed": 2,
-				"Skeleton#Naked": 7
+				"Skeleton#Plain": 7
 			},
 			"Nickname": "Bone Yard",
 			"Spawn": {
@@ -133601,7 +133620,7 @@
 			},
 			"Monster": {
 				"Greater Nechryael": 16,
-				"Moss giant#Iorwerth Dungeon": 6,
+				"Moss giant (Iorwerth Dungeon)": 6,
 				"Mutated Bloodveld": 11
 			},
 			"NPC": {
@@ -134459,7 +134478,7 @@
 			"Monster": {
 				"Black Knight": 7,
 				"Skeleton#Armed": 1,
-				"Skeleton#Naked": 4
+				"Skeleton#Plain": 4
 			},
 			"Nickname": "East Bone Yard",
 			"Object": {
@@ -135412,7 +135431,7 @@
 						"13491": true
 					},
 					"Monster": {
-						"Hill Giant (Desert Plateau)": 8
+						"Hill Giant#Plateau": 8
 					},
 					"NPC": {
 						"Dr Ford": 1
@@ -139465,7 +139484,7 @@
 			},
 			"Monster": {
 				"Sorebones": 14,
-				"Zombie pirate#Harmony Island": 20
+				"Zombie pirate (Harmony Island)": 20
 			},
 			"NPC": {
 				"Brother Tranquility": 1,
@@ -139683,7 +139702,7 @@
 				"15148": true
 			},
 			"Monster": {
-				"Zombie pirate#Harmony Island": 11
+				"Zombie pirate (Harmony Island)": 11
 			},
 			"NPC": {
 				"Brother Tranquility": 1,
@@ -140192,7 +140211,7 @@
 			"Monster": {
 				"Giant rat": 8,
 				"Rat": 5,
-				"Zombie#Armed": 3
+				"Zombie#Level 24": 3
 			},
 			"Object": {
 				"Coal rocks": 5,
@@ -140407,7 +140426,7 @@
 			},
 			"Monster": {
 				"Fever spider": 11,
-				"Zombie pirate#Braindeath Island": 12,
+				"Zombie pirate (Braindeath Island)": 12,
 				"Zombie swab": 6
 			},
 			"NPC": {
@@ -140738,7 +140757,7 @@
 				"Brutal black dragon": 4,
 				"Brutal blue dragon": 2,
 				"Brutal red dragon": 3,
-				"Cyclops": 6,
+				"Cyclops (Catacombs of Kourend)": 6,
 				"Dagannoth": 14,
 				"Deviant spectre": 12,
 				"Dust devil": 13,
@@ -140747,7 +140766,7 @@
 				"Greater Nechryael": 14,
 				"Greater demon": 10,
 				"Hellhound": 9,
-				"Hill Giant (Kourend)": 13,
+				"Hill Giant#Kourend": 13,
 				"Iron dragon": 2,
 				"King Sand Crab": 11,
 				"Lesser demon": 8,
@@ -140949,8 +140968,8 @@
 				"10290": true
 			},
 			"Monster": {
-				"Dungeon rat#Variant 1": 1,
-				"Dungeon rat#Variant 2": 11,
+				"Dungeon rat#Full tail": 1,
+				"Dungeon rat#Short tail": 11,
 				"Giant spider": 15,
 				"Goblin#Drop table 1": 8,
 				"Goblin#Drop table 2": 6,
@@ -141145,7 +141164,7 @@
 				"Lesser demon": 5,
 				"Rat": 2,
 				"Skeleton#Armed": 6,
-				"Skeleton#Naked": 8
+				"Skeleton#Plain": 8
 			},
 			"NPC": {
 				"Dallas Jones": 1
@@ -141175,7 +141194,7 @@
 				"Deadly red spider": 5,
 				"Giant bat": 3,
 				"Lesser demon": 6,
-				"Skeleton#Naked": 3,
+				"Skeleton#Plain": 3,
 				"Skeleton#Unarmed": 2
 			},
 			"Object": {
@@ -141392,7 +141411,7 @@
 				"13365": true
 			},
 			"Monster": {
-				"Skeleton#Naked": 16,
+				"Skeleton#Plain": 16,
 				"Skeleton#Unarmed": 3
 			},
 			"NPC": {
@@ -141604,10 +141623,10 @@
 			"Monster": {
 				"Rat": 10,
 				"Skeleton#Armed": 1,
-				"Skeleton#Naked": 2,
+				"Skeleton#Plain": 2,
 				"Skeleton#Unarmed": 1,
-				"Zombie#Armed": 4,
-				"Zombie#Unarmed": 3
+				"Zombie#Level 24": 4,
+				"Zombie#Level 13": 3
 			},
 			"NPC": {
 				"Ruantun": 1
@@ -142192,7 +142211,7 @@
 			},
 			"Monster": {
 				"Fire giant": 8,
-				"Hill Giant (Kourend)": 8,
+				"Hill Giant#Kourend": 8,
 				"Moss giant": 10
 			},
 			"NPC": {
@@ -142236,10 +142255,10 @@
 			"Monster": {
 				"Moss Guardian": 3,
 				"Skeleton#Armed": 1,
-				"Skeleton#Naked": 4,
+				"Skeleton#Plain": 4,
 				"Skeleton#Unarmed": 1,
-				"Zombie#Armed": 4,
-				"Zombie#Unarmed": 1
+				"Zombie#Level 24": 4,
+				"Zombie#Level 13": 1
 			},
 			"NPC": {
 				"Butterfly": 3
@@ -142279,11 +142298,11 @@
 			},
 			"Monster": {
 				"Chicken": 1,
-				"Dungeon rat#Variant 1": 1,
-				"Dungeon rat#Variant 2": 4,
+				"Dungeon rat#Full tail": 1,
+				"Dungeon rat#Short tail": 4,
 				"Giant bat": 6,
-				"Goblin#Drop table 2": 10,
 				"Goblin#Drop table 1": 14,
+				"Goblin#Drop table 2": 10,
 				"Rat": 19,
 				"Spider": 1
 			},
@@ -142323,7 +142342,7 @@
 				"Bloodveld": 14,
 				"Bree": 1,
 				"Commander Zilyana": 1,
-				"Cyclops": 13,
+				"Cyclops (God Wars Dungeon)": 13,
 				"Feral Vampyre": 13,
 				"Flight Kilisa": 1,
 				"Flockleader Geerin": 1,
@@ -142512,7 +142531,7 @@
 				"15148": true
 			},
 			"Monster": {
-				"Zombie pirate#Harmony Island": 11
+				"Zombie pirate (Harmony Island)": 11
 			},
 			"NPC": {
 				"Brother Tranquility": 1,
@@ -142701,7 +142720,7 @@
 				"Greater Nechryael": 16,
 				"Iorwerth Warrior#Iorwerth Dungeon": 13,
 				"Kurask": 14,
-				"Moss giant#Iorwerth Dungeon": 6,
+				"Moss giant (Iorwerth Dungeon)": 6,
 				"Mutated Bloodveld": 12,
 				"Waterfiend": 20
 			},
@@ -142727,7 +142746,7 @@
 				"Greater demon": 7,
 				"Iron dragon": 3,
 				"Lesser demon": 4,
-				"Skeleton#Naked": 3,
+				"Skeleton#Plain": 3,
 				"Skeleton#Armed": 1
 			},
 			"Object": {
@@ -144394,7 +144413,6 @@
 			"Monster": {
 				"Chicken": 4,
 				"Guard (Prifddinas)": 23,
-				"Moss giant": 1,
 				"Rabbit": 27
 			},
 			"NPC": {
@@ -145404,11 +145422,11 @@
 				"Rat": 116,
 				"Scorpion": 8,
 				"Shade": 4,
-				"Skeleton#Naked": 26,
+				"Skeleton#Plain": 26,
 				"Spider": 35,
 				"Wolf": 16,
 				"Zombie (Sepulchre of Death)": 1,
-				"Zombie#Stronghold of Security": 52
+				"Zombie (Stronghold of Security)": 52
 			},
 			"NPC": {
 				"Butterfly": 3,
@@ -145523,7 +145541,7 @@
 				"Poison spider": 8,
 				"Rat": 4,
 				"Skeleton#Armed": 1,
-				"Skeleton#Naked": 5,
+				"Skeleton#Plain": 5,
 				"Skeleton#Unarmed": 1,
 				"Spider": 3,
 				"Suit of armour": 2
@@ -145940,8 +145958,8 @@
 			"Monster": {
 				"Giant bat": 3,
 				"Hobgoblin#Unarmed": 9,
-				"Zombie#Armed": 1,
-				"Zombie#Unarmed": 2
+				"Zombie#Level 24": 1,
+				"Zombie#Level 13": 2
 			},
 			"NPC": {
 				"Golrie": 1
@@ -146063,14 +146081,14 @@
 				"Sir Harry": 1,
 				"Sir Jerro": 1,
 				"Skeleton#Armed": 2,
-				"Skeleton#Naked": 6,
+				"Skeleton#Plain": 6,
 				"Skeleton#Unarmed": 2,
 				"Soulless": 58,
 				"Spider": 98,
 				"Unicorn": 1,
 				"Wizard": 2,
-				"Zombie#Armed": 13,
-				"Zombie#Unarmed": 5
+				"Zombie#Level 24": 13,
+				"Zombie#Level 13": 5
 			},
 			"NPC": {
 				"Baxtorian": 1,
@@ -146272,11 +146290,11 @@
 				"Scorpion": 2,
 				"Scurrius": 1,
 				"Skeleton#Armed": 1,
-				"Skeleton#Naked": 5,
+				"Skeleton#Plain": 5,
 				"Skeleton#Unarmed": 4,
 				"Spider": 3,
-				"Zombie#Armed": 4,
-				"Zombie#Unarmed": 2
+				"Zombie#Level 24": 4,
+				"Zombie#Level 13": 2
 			},
 			"NPC": {
 				"Grimesquit": 1,
@@ -146334,10 +146352,10 @@
 				"Obor": 1,
 				"Rat": 2,
 				"Skeleton#Armed": 3,
-				"Skeleton#Naked": 13,
+				"Skeleton#Plain": 13,
 				"Skeleton#Unarmed": 3,
-				"Zombie#Armed": 4,
-				"Zombie#Plain": 10
+				"Zombie#Level 24": 4,
+				"Zombie#Level 18": 10
 			},
 			"NPC": {
 				"Vannaka": 1
@@ -146636,7 +146654,7 @@
 			},
 			"Monster": {
 				"Skeleton#Armed": 2,
-				"Skeleton#Naked": 6
+				"Skeleton#Plain": 6
 			},
 			"Spawn": {
 				"Bones": 1
@@ -146992,7 +147010,7 @@
 				"10288": true
 			},
 			"Monster": {
-				"Zombie#Armed": 8
+				"Zombie#Level 24": 8
 			},
 			"NPC": {
 				"Wizard Frumscone": 1
@@ -148654,12 +148672,12 @@
 			"Callisto[+]": ["Callisto", "Artio"],
 			"Venenatis[+]": ["Venenatis", "Spindel"],
 			"Vet'ion[+]": ["Vet'ion", "Calvar'ion"],
-			"HillGiant[+]": ["Hill Giant", "Hill Giant (Kourend)", "Hill Giant (Desert Plateau)"],
+			"HillGiant[+]": ["Hill Giant", "Hill Giant#Kourend", "Hill Giant#Plateau", "Hill Giant#Varlamore"],
 			"Rogue[+]": ["Rogue#Level 15", "Rogue#Level 135"],
 			"ElfMonster[+]": ["Elf Archer", "Elf Warrior", "Guard (Prifddinas)", "Iorwerth Archer", "Iorwerth Warrior#Iorwerth Camp", "Iorwerth Warrior#Iorwerth Dungeon", "Mourner#Level 108"],
 			"BrimhavenMetalDragon[+]": ["Bronze dragon", "Iron dragon", "Steel dragon"],
 			"ManOrWoman[+]": ["Man", "Woman"],
-			"ZombieDraynorSewers[+]": ["Zombie#Armed", "Zombie#Unarmed"],
+			"ZombieDraynorSewers[+]": ["Zombie#Level 24", "Zombie#Level 13"],
 			"WerewolfHuman[+]": ["Alexis", "Boris", "Eduard", "Galina", "Georgy", "Imre", "Irina", "Joseph", "Ksenia", "Lev", "Liliya", "Milla", "Nikita", "Nikolai", "Sofiya", "Svetlana", "Vera", "Yadviga", "Yuri", "Zoja"],
 			"Terror dog[+]": ["Terror dog#Level 100", "Terror dog#Level 110"],
 			"Knight[+]": ["Knight of Ardougne", "Knight of Varlamore"],
@@ -149008,7 +149026,7 @@
 				"Brutal red dragon": {
 					"Catacombs of Kourend": true
 				},
-				"Cyclops": {
+				"Cyclops (Catacombs of Kourend)": {
 					"Catacombs of Kourend": true
 				},
 				"Dagannoth": {
@@ -149030,7 +149048,7 @@
 				"Greater demon": {
 					"Catacombs of Kourend": true
 				},
-				"Hill Giant (Kourend)": {
+				"Hill Giant#Kourend": {
 					"Catacombs of Kourend": true,
 					"Giants' Den": true
 				},
@@ -151195,17 +151213,23 @@
 				"Death wing": true
 			},
 			"Bears": {
-				"Bear": true,
 				"Bear Cub": true,
 				"Black bear": true,
 				"Grizzly bear": true,
+				"Grizzly bear cub": true,
+				"Grizzly bear (Escape Caves)": true,
 				"Callisto": true,
 				"Artio": true
 			},
 			"Birds": {
 				"Bird": true,
 				"Chicken": true,
+				"Duck": true,
+				"Duckling": true,
+				"Entrana firebird": true,
 				"Mounted terrorbird gnome": true,
+				"Oomlie bird": true,
+				"Penguin (monster)": true,
 				"Rooster": true,
 				"Seagull": true,
 				"Terrorbird": true,
@@ -151313,7 +151337,8 @@
 			},
 			"Dagannoths": {
 				"Dagannoth": true,
-				"Dagannoth (Waterbirth Island)": true,
+				"Dagannoth (Waterbirth Island)#Level 88": true,
+				"Dagannoth (Waterbirth Island)#Level 90": true,
 				"Dagannoth fledgeling": true,
 				"Dagannoth spawn": true,
 				"Dagannoth Prime": true,
@@ -151335,7 +151360,8 @@
 			"Dogs": {
 				"Guard dog": true,
 				"Wild dog": true,
-				"Jackal": true
+				"Jackal": true,
+				"Shadow Hound": true
 			},
 			"Drakes": {
 				"Drake": true
@@ -151351,7 +151377,8 @@
 				"Black Guard#Level 25": true,
 				"Black Guard#Level 48": true,
 				"Black Guard Berserker": true,
-				"Chaos dwarf": true
+				"Chaos dwarf": true,
+				"Guard (dwarf)": true
 			},
 			"Earth warriors": {
 				"Earth warrior": true
@@ -151394,7 +151421,21 @@
 			"Ghosts": {
 				"Ghost": true,
 				"Ghost (Melzar's Maze)": true,
-				"Tortured soul": true
+				"Ghost (Grave of Scorpius)": true,
+				"Forgotten Soul": true,
+				"Tortured soul": true,
+				"Revenant cyclops": true,
+				"Revenant dark beast": true,
+				"Revenant demon": true,
+				"Revenant dragon": true,
+				"Revenant goblin": true,
+				"Revenant hellhound": true,
+				"Revenant hobgoblin": true,
+				"Revenant imp": true,
+				"Revenant knight": true,
+				"Revenant ork": true,
+				"Revenant pyrefiend": true,
+				"Death wing": true
 			},
 			"Ghouls": {
 				"Ghoul": true
@@ -151407,7 +151448,6 @@
 				"Goblin guard": true,
 				"Goblin (Goblin Village)": true,
 				"Goblin (Vault of War)": true,
-				"Goblin#Armed level 2": true,
 				"Goblin#Drop table 1": true,
 				"Goblin#Drop table 2": true,
 				"Cave goblin (monster)": true,
@@ -151440,6 +151480,7 @@
 			"Hellhounds": {
 				"Hellhound": true,
 				"Hellhound#Wilderness Slayer Cave": true,
+				"Hellhound#God Wars Dungeon": true,
 				"Cerberus": true,
 				"Skeleton Hellhound (Vet'ion)": true,
 				"Greater Skeleton Hellhound (Vet'ion)": true,
@@ -151448,11 +151489,14 @@
 			},
 			"Hill Giants": {
 				"Hill Giant": true,
-				"Hill Giant (Kourend)": true,
-				"Hill Giant (Desert Plateau)": true,
+				"Hill Giant#Kourend": true,
+				"Hill Giant#Plateau": true,
+				"Hill Giant#Varlamore": true,
 				"Cyclops#Warriors' Guild Basement": true,
 				"Cyclops": true,
-				"Cyclops#Ardougne Zoo": true,
+				"Cyclops (Ardougne Zoo)": true,
+				"Cyclops (Catacombs of Kourend)": true,
+				"Cyclops (God Wars Dungeon)": true,
 				"Obor": true
 			},
 			"Hobgoblins": {
@@ -151557,7 +151601,8 @@
 			"Minions of Scabaras": {
 				"Scarab swarm": true,
 				"Locust rider": true,
-				"Scarab mage": true
+				"Scarab mage": true,
+				"Small scarab": true
 			},
 			"Minotaurs": {
 				"Minotaur": true
@@ -151573,11 +151618,15 @@
 				"Monkey Guard": true,
 				"Monkey Archer": true,
 				"Monkey Zombie": true,
-				"Padulah": true
+				"Padulah": true,
+				"Maniacal monkey": true,
+				"Maniacal Monkey Archer": true,
+				"Tortured gorilla": true,
+				"Demonic gorilla": true
 			},
 			"Moss giants": {
 				"Moss giant": true,
-				"Moss giant#Iorwerth Dungeon": true,
+				"Moss giant (Iorwerth Dungeon)": true,
 				"Bryophyta": true
 			},
 			"Nechryaels": {
@@ -151613,13 +151662,14 @@
 			"Rats": {
 				"Rat": true,
 				"Giant rat": true,
-				"Dungeon rat#Variant 1": true,
-				"Dungeon rat#Variant 2": true,
+				"Dungeon rat#Full tail": true,
+				"Dungeon rat#Short tail": true,
 				"Crypt rat": true,
 				"Brine rat": true,
 				"Giant crypt rat": true,
 				"Scurrius": true,
-				"Giant rat (Scurrius)": true
+				"Giant rat (Scurrius)": true,
+				"Zombie rat": true
 			},
 			"Red dragons": {
 				"Red dragon": true,
@@ -151675,6 +151725,7 @@
 				"Loar Shade": true,
 				"Phrin Shade": true,
 				"Riyl Shade": true,
+				"Asyn Shade": true,
 				"Fiyr Shade": true,
 				"Urium Shade": true,
 				"Shade (Temple Trekking)": true,
@@ -151690,14 +151741,23 @@
 			"Skeletons": {
 				"Skeleton (Ape Atoll)": true,
 				"Skeleton (Barrows)": true,
+				"Skeleton (Catacombs of Kourend)": true,
+				"Skeleton (Draynor Manor)": true,
+				"Skeleton (Forthos Ruin)": true,
+				"Skeleton (Lucien's camp)": true,
 				"Skeleton (Melzar's Maze)": true,
 				"Skeleton (Shayzien Crypts)": true,
 				"Skeleton (Tarn's Lair)#Low level": true,
 				"Skeleton (Tarn's Lair)#Mid level": true,
 				"Skeleton (Tarn's Lair)#High level": true,
+				"Skeleton (Wilderness Agility Course)": true,
 				"Skeleton (mage)": true,
+				"Skeleton Mage#Level 16": true,
+				"Skeleton Mage#Level 83": true,
 				"Skeleton Hellhound (Vet'ion)": true,
+				"Greater Skeleton Hellhound (Vet'ion)": true,
 				"Skeleton Hellhound (Calvar'ion)": true,
+				"Greater Skeleton Hellhound (Calvar'ion)": true,
 				"Skeleton brute": true,
 				"Skeleton fremennik": true,
 				"Skeleton heavy": true,
@@ -151705,7 +151765,7 @@
 				"Skeleton thug": true,
 				"Skeleton warlord": true,
 				"Skeleton#Armed": true,
-				"Skeleton#Naked": true,
+				"Skeleton#Plain": true,
 				"Skeleton#Unarmed": true,
 				"Skogre": true,
 				"Undead one#Skeleton": true,
@@ -151728,6 +151788,7 @@
 				"Jungle spider": true,
 				"Deadly red spider": true,
 				"Poison spider": true,
+				"Poison spider (Escape Caves)": true,
 				"Blessed spider": true,
 				"Kalrag": true,
 				"Crypt spider": true,
@@ -151831,7 +151892,8 @@
 				"Dire Wolf": true,
 				"Jungle Wolf": true,
 				"Desert Wolf": true,
-				"Ice wolf": true
+				"Ice wolf": true,
+				"White wolf": true
 			},
 			"Wyrms": {
 				"Wyrm": true,
@@ -151845,8 +151907,8 @@
 				"Undead Lumberjack": true,
 				"Undead one#Zombie": true,
 				"Vorkath": true,
-				"Zombie pirate#Braindeath Island": true,
-				"Zombie pirate#Harmony Island": true,
+				"Zombie pirate (Braindeath Island)": true,
+				"Zombie pirate (Harmony Island)": true,
 				"Zombie rat": true,
 				"Zombie swab": true,
 				"Zogre": true,
@@ -151854,16 +151916,16 @@
 				"Zombie (Melzar's Maze)": true,
 				"Zombie (Sepulchre of Death)": true,
 				"Zombie (Shayzien Crypts)": true,
+				"Zombie (Stronghold of Security)": true,
 				"Zombie (Tarn's Lair)#Low level": true,
 				"Zombie (Tarn's Lair)#Mid level": true,
 				"Zombie (Tarn's Lair)#High level": true,
 				"Zombie (Temple Trekking)": true,
+				"Zombie (Wilderness)": true,
 				"Undead Zealot": true,
-				"Zombie#Armed": true,
-				"Zombie#Plain": true,
-				"Zombie#Stronghold of Security": true,
-				"Zombie#Unarmed": true,
-				"Zombie#Wilderness": true,
+				"Zombie#Level 24": true,
+				"Zombie#Level 18": true,
+				"Zombie#Level 13": true,
 				"Zombie pirate": true,
 				"Armoured zombie (Zemouregal's Base)": true,
 				"Armoured zombie (Zemouregal's Fort)": true
@@ -151876,6 +151938,149 @@
 				"Zygomite#Level 74": true,
 				"Zygomite#Level 86": true
 			}
+		},
+		"slayerTaskChunks": {
+			"Aberrant spectres": ["6457", "9525", "13623"],
+			"Abyssal demons": ["6457", "12849", "12857", "13114", "13623"],
+			"Abyssal Sire": ["12849"],
+			"Adamant dragons": ["14142"],
+			"Alchemical Hydra": ["5179"],
+			"Ankous": ["6457", "9525", "11834", "12341", "12857", "13114"],
+			"Aviansie": ["11578", "12090"],
+			"Araxytes": ["14645"],
+			"Bandits": ["12089"],
+			"Banshees": ["6457", "13623"],
+			"Barrows brothers": ["14131"],
+			"Basilisks": ["9790", "11064"],
+			"Bats": ["5165", "5179", "5180", "5435", "5943", "5946", "5947", "5948", "6202", "6203", "6458", "6460", "6713", "6714", "6715", "6716", "6966", "6972", "9779", "9782", "10031", "10033", "10037", "10288", "10292", "10294", "10549", "10804", "11053", "11061", "11313", "11573", "11574", "12349", "13366", "13618", "13623", "14134", "14390", "14894", "14899", "14901"],
+			"Bears": ["4918", "4921", "5166", "5177", "5178", "5941", "8500", "8753", "8754", "9009", "9524", "9777", "9778", "10033", "10287", "10547", "10804", "10808", "11060", "11830", "11833", "12344", "12345", "12854", "12859", "13108", "13114", "13115", "13116"],
+			"Birds": ["4921", "4922", "5165", "5166", "5421", "5422", "5677", "5678", "5934", "5942", "6192", "6447", "6454", "6712", "6959", "6961", "7225", "8237", "8491", "8492", "8494", "8747", "8750", "8753", "9004", "9006", "9012", "9261", "9525", "9780", "9781", "9782", "10028", "10033", "10034", "10039", "10044","10284", "10291", "10292", "10293", "10300", "10549", "10553", "10794", "10795", "10803", "10807", "11050", "11051", "11053", "11055", "11309", "11316", "11319", "11562", "11565", "11828", "12082", "12083", "12337", "12588", "12595", "12596", "12844", "12850", "12851", "13100", "13356", "13871", "14391"],
+			"Black demons": ["5689", "6457", "9783", "10801", "11573", "11578", "12342", "12857", "13114"],
+			"Black dragons": ["6457", "8501", "9772", "11573", "12092", "12849", "12857", "13114"],
+			"Black Knights": ["12092", "13114"],
+			"Bloodvelds": ["6457", "8755", "9525", "11578", "12090", "13623", "14387"],
+			"Blue dragons": ["6457", "6706", "9023", "9261", "9772", "10031", "11573", "11574"],
+			"Brine rats": ["10810"],
+			"Bronze dragons": ["6457", "10801"],
+			"Callisto": ["12345", "13116"],
+			"Catablepon": ["12341"],
+			"Cave bugs": ["12593", "12850"],
+			"Cave crawlers": ["11064", "12593", "12850"],
+			"Cave horrors": ["14894"],
+			"Cave slimes": ["12593", "12850"],
+			"Cave krakens": ["9016"],
+			"Cerberus": ["11573"],
+			"Chaos druids": ["12342", "12856"],
+			"Chaos Elemental": ["12861"],
+			"Chaos Fanatic": ["11836"],
+			"Cockatrices": ["5680", "11064"],
+			"Commander Zilyana": ["11578"],
+			"Cows": ["4921", "5178", "6968", "8491", "8757", "10288", "10548", "10807", "11571", "12083", "12595", "12596", "12849", "12850", "12851", "14391"],
+			"Crabs": ["4663", "6189", "6445", "6453", "6457", "6706", "6710", "6959", "6965", "6966", "7215", "7222", "7479", "9003", "10042", "10554", "10810", "14389", "14645", "14652", "14900", "14908", "15162"],
+			"Crawling Hands": ["13623", "14387"],
+			"Crazy archaeologist": ["11833"],
+			"Crocodiles": ["12588", "12844", "13100", "13101", "13357", "13611"],
+			"Dagannoths": ["6457", "9790", "10040", "10042"],
+			"Dagannoth Kings": ["10042"],
+			"Dark beasts": ["8755", "10035"],
+			"Dark warriors": ["12088"],
+			"Dogs": ["6457", "6968", "10037", "10547", "10550", "10801", "11057", "12844", "13100", "13101", "13355", "13357", "13614", "13615"],
+			"Drakes": ["5179"],
+			"Dust devils": ["6457", "12857", "13102", "13114"],
+			"Dwarves": ["5691", "5946", "5947", "6202", "6203", "10031", "10038", "10287", "10294", "10810", "11318", "11573", "11829", "12084", "12085", "12086", "12090", "12093", "12859"],
+			"Earth warriors": ["12342"],
+			"Elves": ["8754", "8755", "8756", "9011", "9012", "9265", "10035"],
+			"Ents": ["12857", "13112"],
+			"Fever spiders": ["14647"],
+			"Fire giants": ["5179", "5688", "6457", "9261", "9525", "10038", "10801", "12081", "12093", "13102"],
+			"Flesh Crawlers": ["12341"],
+			"Fossil Island Wyverns": ["14652", "14907"],
+			"Gargoyles": ["13623"],
+			"General Graardor": ["11578"],
+			"Ghosts": ["6457", "6972", "7228", "8494", "8501", "9778", "10035", "11053", "11570", "11573", "11834", "12340", "12341", "12345", "12347", "12854", "13113", "14646", "14647"],
+			"Ghouls": ["13622"],
+			"Giant Mole": ["11828"],
+			"Goblins": ["5174", "6966", "9524", "9777", "9779", "10033", "10290", "10292", "10293", "10294", "11578", "11826", "11830", "12090", "12339", "12341", "12593", "12594", "12595", "12850", "12851", "12852", "13108", "13877"],
+			"Greater demons": ["5179", "5689", "6457", "9261", "10031", "10801", "11316", "11578", "12092", "12593", "12857", "13114", "13116", "14899"],
+			"Green dragons": ["9772", "10038", "10801", "11832", "12347", "12601", "12857", "13114", "13369"],
+			"Grotesque Guardians": ["13623"],
+			"Harpie bug swarms": ["6701", "11312", "11568"],
+			"Hellhounds": ["5179", "6457", "9525", "10803", "11573", "11578", "12601", "12605", "12857", "12859", "13114"],
+			"Hill Giants": ["5688", "6446", "6457", "9525", "9778", "10033", "10291", "11319", "11573", "11578", "12093", "12342", "12348", "13113", "13361"],
+			"Hobgoblins": ["7224", "9780", "10033", "10042", "10290", "10554", "10803", "11055", "11315", "11571", "11578", "12081", "12342", "12346", "13877"],
+			"Hydras": ["5179"],
+			"Icefiends": ["5682", "5683", "6706", "11578", "11830", "12090"],
+			"Ice giants": ["6204", "6706", "11062", "11318", "11836", "11837", "12081", "12857", "13114"],
+			"Ice warriors": ["6706", "10558", "11318", "11836", "11837", "12081"],
+			"Infernal Mages": ["13623"],
+			"Iron dragons": ["6457", "9261", "10801"],
+			"Jellies": ["6457", "6706", "11064", "12857", "13114"],
+			"Jungle horrors": ["14639", "14894", "14895", "15151"],
+			"Kalphites": ["12848", "13104"],
+			"Kalphite Queen": ["12848"],
+			"Killerwatts": ["12340"],
+			"King Black Dragon": ["12092"],
+			"Kurasks": ["8755", "11064"],
+			"Kraken": ["9016"],
+			"Kree'arra": ["11578"],
+			"K'ril Tsutsaroth": ["11578"],
+			"Lava dragons": ["12603", "12859", "12860"],
+			"Lesser demons": ["5689", "6457", "6713", "9261", "10549", "11053", "11314", "11315", "11570", "11573", "11578", "12092", "12337", "12348", "12857", "13114", "13116", "14899"],
+			"Lesser Nagua": ["5680", "6706"],
+			"Lizardmen": ["4919", "5175", "5176", "5177", "5430", "5431", "5433", "5434", "5689", "5690", "5945", "5946"],
+			"Lizards": ["5179", "5680", "13355", "13359", "13615", "13871"],
+			"Magic axes": ["12605"],
+			"Mammoths": ["12600"],
+			"Mithril dragons": ["10038"],
+			"Minions of Scabaras": ["13099", "13871"],
+			"Minotaurs": ["12341"],
+			"Mogres": ["11824"],
+			"Molanisks": ["12850"],
+			"Monkeys": ["9783", "10291", "10795", "10801", "11050", "11051", "11054", "11057", "11311", "11313", "11567", "11568", "11821", "11822", "14639", "14894", "14895", "15151"],
+			"Moss giants": ["5424", "5688", "5942", "6457", "8748", "8755", "8763", "10037", "10801", "10802", "11314", "12603", "12854"],
+			"Nechryaels": ["6457", "8755", "12857", "13114", "13623"],
+			"Ogres": ["9773", "9775", "9779", "10028", "10030", "10031", "10032", "10033", "10036", "10286", "10287", "10290", "10292", "10803", "11578", "11824", "12090"],
+			"Otherworldly beings": ["12849"],
+			"Phantom Muspah": ["11325"],
+			"Pirates": ["6970", "7225", "7226", "8763", "11057", "12081", "12093", "12856"],
+			"Pyrefiends": ["9006", "11064", "11578", "12090", "13102", "14899"],
+			"Rats": ["4921", "5174", "5177", "5421", "5422", "5430", "5676", "5690", "5691", "5942", "5947", "6201", "6202", "6203", "6445", "6447", "6448", "6449", "6451", "6456", "6458", "6703", "6959", "6960", "6961", "6968", "6969", "6970", "6971", "7224", "7226", "8491", "8494", "8508", "8747", "8763", "9005", "9777", "9779", "9782", "10030", "10031", "10033", "10036", "10037", "10038", "10290", "10292", "10293", "10294", "10547", "10807", "10810", "11057", "11314", "11568", "11570", "11573", "11825", "11826", "11833", "12081", "12082", "12083", "12084", "12085", "12089", "12338", "12339", "12340", "12341", "12342", "12593", "12594", "12597", "12600", "12602", "12849", "12850", "12853", "12855", "12857", "13106", "13108", "13618", "13874", "13877", "14131", "14386", "14387", "14638", "14899", "14902"],
+			"Red dragons": ["6457", "6711", "9772", "10801"],
+			"Revenants": ["12345", "12347"],
+			"Rockslugs": ["11064", "12593", "12850"],
+			"Rogues": ["12349", "13117"],
+			"Rune dragons": ["14142"],
+			"Sarachnis": ["6711"],
+			"Scorpia": ["12861"],
+			"Scorpions": ["5691", "5936", "6701", "6702", "9778", "10031", "10291", "10549", "10795", "10802", "10804", "11050", "11051", "11054", "11313", "11315", "11562", "11573", "12084", "12085", "12087", "12091", "12341", "12348", "12588", "12854", "12861", "13105", "13107", "14908"],
+			"Sea snakes": ["10044"],
+			"Shades": ["6457", "12341", "13874", "13875"],
+			"Shadow warriors": ["10804"],
+			"Skeletal Wyverns": ["12081"],
+			"Skeletons": ["5686", "5690", "5943", "6457", "6711", "6716", "6972", "9261", "9273", "9775", "9779", "10031", "10037", "10038", "10288", "10549", "10810", "11050", "11313", "11314", "11566", "11568", "11570", "11573", "11579", "11834", "11837", "12088", "12338", "12339", "12340", "12341", "12342", "12343", "12601", "12603", "12854", "12858", "12859", "13114", "13365", "13612", "13618", "14131"],
+			"Smoke devils": ["9519"],
+			"Sourhogs": ["12596"],
+			"Spiders": ["5687", "5690", "5692", "5937", "5946", "5947", "5948", "6193", "6201", "6202", "6203", "6204", "6706", "6710", "6711", "6712", "6967", "6968", "6969", "7225", "7226", "8494", "9023", "9267", "9524", "9779", "10030", "10031", "10033", "10038", "10288", "10290", "10544", "10549", "10794", "10795", "11050", "11051", "11054", "11055", "11056", "11058", "11311", "11312", "11313", "11318", "11566", "11567", "11568", "11570", "11573", "11833", "11837", "12092", "12093", "12340", "12341", "12342", "12594", "12602", "12604", "12850", "12853", "12859", "13105", "13114", "13115", "13877", "14131", "14645", "14647", "14899", "14907"],
+			"Spiritual creatures": ["11578", "12090"],
+			"Steel dragons": ["6457", "10801"],
+			"Suqahs": ["8252", "8253", "8508", "8509"],
+			"Terror dogs": ["13618"],
+			"Thermonuclear smoke devil": ["9519"],
+			"Trolls": ["4918", "4919", "9275", "9276", "9531", "9532", "10810", "11320", "11321", "11322", "11576", "11577", "12849"],
+			"Turoths": ["11064"],
+			"Vampyres": ["11578", "12090", "13874", "14130", "14385", "14386", "14387", "14388", "14389", "14390", "14642", "14644", "14900"],
+			"Venenatis": ["12602", "13115"],
+			"Vet'ion": ["12601", "12859"],
+			"Vorkath": ["9023"],
+			"Wall beasts": ["12593"],
+			"Warped Creatures": ["9264"],
+			"Waterfiends": ["8755", "9016", "10038"],
+			"Werewolves": ["11578", "12090", "13878"],
+			"Wolves": ["5936", "5939", "6194", "6204", "6451", "6711", "8501", "9009", "9267", "9773", "9779", "9780", "10030", "10033", "10286", "10291", "10552", "10807", "11053", "11068", "11309", "11317", "11318", "11325", "11565", "11578", "11837", "12341", "12591", "12846", "12847", "12848", "12861", "13098", "13103", "13104"],
+			"Wyrms": ["5179", "5680"],
+			"Zombies": ["5943", "6711", "9023", "9775", "9779", "10033", "10035", "10037", "10288", "10547", "11050", "11051", "11068", "11310", "11316", "11566", "11568", "11570", "12338", "12339", "12341", "12342", "12601", "12602", "12854", "12856", "13366", "13618", "13874", "13875", "14391", "14647", "15148"],
+			"Zulrah": ["9007"],
+			"Zygomites": ["12849", "14651", "14652"]
 		},
 		"boostItems": {
 			"Agility": {
@@ -159305,6 +159510,228 @@
 			},
 			"GemDropTable+": {
 				"1": "2/128"
+			}
+		},
+		"Cyclops (Catacombs of Kourend)": {
+			"Big bones": {
+				"1": "Always"
+			},
+			"Black knife": {
+				"4-13": "16/100"
+			},
+			"Steel chainbody": {
+				"1": "2/100"
+			},
+			"Iron 2h sword": {
+				"1": "2/100"
+			},
+			"Iron chainbody": {
+				"1": "2/100"
+			},
+			"Steel dagger": {
+				"1": "2/100"
+			},
+			"Steel mace": {
+				"1": "2/100"
+			},
+			"Steel sword": {
+				"1": "2/100"
+			},
+			"Steel battleaxe": {
+				"1": "2/100"
+			},
+			"Steel 2h sword": {
+				"1": "2/100"
+			},
+			"Steel longsword": {
+				"1": "2/100"
+			},
+			"Steel med helm": {
+				"1": "2/100"
+			},
+			"Black 2h sword": {
+				"1": "1/100"
+			},
+			"Mithril dagger": {
+				"1": "1/100"
+			},
+			"Mithril longsword": {
+				"1": "1/100"
+			},
+			"Adamant mace": {
+				"1": "1/100"
+			},
+			"Black sword": {
+				"1": "1/100"
+			},
+			"Black longsword": {
+				"1": "1/100"
+			},
+			"Black dagger": {
+				"1": "1/100"
+			},
+			"Adamant 2h sword": {
+				"1": "1/100"
+			},
+			"Bronze defender": {
+				"1": "2/100"
+			},
+			"Iron defender": {
+				"1": "2/100"
+			},
+			"Steel defender": {
+				"1": "2/100"
+			},
+			"Black defender": {
+				"1": "2/100"
+			},
+			"Mithril defender": {
+				"1": "2/100"
+			},
+			"Adamant defender": {
+				"1": "2/100"
+			},
+			"Rune defender": {
+				"1": "2/100"
+			},
+			"Coins": {
+				"3-102": "31/100",
+				"5-204": "10/100"
+			},
+			"Long bone": {
+				"1": "1/400"
+			},
+			"Curved bone": {
+				"1": "1/5012.5"
+			},
+			"Clue scroll (hard)": {
+				"1": "1/512"
+			},
+			"HerbDropTable+": {
+				"1": "3/100"
+			},
+			"UncommonSeedDropTable+": {
+				"1": "1/100"
+			},
+			"GemDropTable+": {
+				"1": "2/128"
+			},
+			"Ancient shard": {
+				"1": "1/283"
+			},
+			"Dark totem base": {
+				"1": "1/425"
+			},
+			"Dark totem middle": {
+				"1": "1/425"
+			},
+			"Dark totem top": {
+				"1": "1/425"
+			}
+		},
+		"Cyclops (God Wars Dungeon)": {
+			"Big bones": {
+				"1": "Always"
+			},
+			"Black knife": {
+				"4-13": "16/100"
+			},
+			"Steel chainbody": {
+				"1": "2/100"
+			},
+			"Iron 2h sword": {
+				"1": "2/100"
+			},
+			"Iron chainbody": {
+				"1": "2/100"
+			},
+			"Steel dagger": {
+				"1": "2/100"
+			},
+			"Steel mace": {
+				"1": "2/100"
+			},
+			"Steel sword": {
+				"1": "2/100"
+			},
+			"Steel battleaxe": {
+				"1": "2/100"
+			},
+			"Steel 2h sword": {
+				"1": "2/100"
+			},
+			"Steel longsword": {
+				"1": "2/100"
+			},
+			"Steel med helm": {
+				"1": "2/100"
+			},
+			"Black 2h sword": {
+				"1": "1/100"
+			},
+			"Mithril dagger": {
+				"1": "1/100"
+			},
+			"Mithril longsword": {
+				"1": "1/100"
+			},
+			"Adamant mace": {
+				"1": "1/100"
+			},
+			"Black sword": {
+				"1": "1/100"
+			},
+			"Black longsword": {
+				"1": "1/100"
+			},
+			"Black dagger": {
+				"1": "1/100"
+			},
+			"Adamant 2h sword": {
+				"1": "1/100"
+			},
+			"Bronze defender": {
+				"1": "2/100"
+			},
+			"Iron defender": {
+				"1": "2/100"
+			},
+			"Steel defender": {
+				"1": "2/100"
+			},
+			"Black defender": {
+				"1": "2/100"
+			},
+			"Mithril defender": {
+				"1": "2/100"
+			},
+			"Adamant defender": {
+				"1": "2/100"
+			},
+			"Rune defender": {
+				"1": "2/100"
+			},
+			"Coins": {
+				"3-102": "31/100",
+				"5-204": "10/100"
+			},
+			"Long bone": {
+				"1": "1/400"
+			},
+			"Curved bone": {
+				"1": "1/5012.5"
+			},
+			"Clue scroll (hard)": {
+				"1": "1/512"
+			},
+			"HerbDropTable+": {
+				"1": "3/100"
+			},
+			"UncommonSeedDropTable+": {
+				"1": "1/100"
+			},
+			"GemDropTable+": {
+				"1": "2/128"
 			},
 			"Ancient shard": {
 				"1": "1/283"
@@ -159397,7 +159824,7 @@
 				"1": "2/128"
 			}
 		},
-		"Cyclops#Ardougne Zoo": {
+		"Cyclops (Ardougne Zoo)": {
 			"Big bones": {
 				"1": "Always"
 			},
@@ -161103,7 +161530,7 @@
 				"1": "Always"
 			}
 		},
-		"Dungeon rat#Variant 1": {
+		"Dungeon rat#Full tail": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -161120,7 +161547,7 @@
 				"1": "Always"
 			}
 		},
-		"Dungeon rat#Variant 2": {
+		"Dungeon rat#Short tail": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -166922,7 +167349,7 @@
 				"1": "1/292"
 			}
 		},
-		"Hill Giant (Kourend)": {
+		"Hill Giant#Kourend": {
 			"Big bones": {
 				"1": "Always"
 			},
@@ -167027,7 +167454,7 @@
 				"1": "1/465"
 			}
 		},
-		"Hill Giant (Desert Plateau)": {
+		"Hill Giant#Plateau": {
 			"Big bones": {
 				"1": "Always"
 			},
@@ -167122,7 +167549,7 @@
 				"1": "18/128"
 			}
 		},
-		"Hill Giant (Varlamore)": {
+		"Hill Giant#Varlamore": {
 			"Big bones": {
 				"1": "Always"
 			},
@@ -172496,7 +172923,7 @@
 				"1": "1/272"
 			}
 		},
-		"Moss giant#Iorwerth Dungeon": {
+		"Moss giant (Iorwerth Dungeon)": {
 			"Big bones": {
 				"1": "Always"
 			},
@@ -178906,7 +179333,7 @@
 				"1": "20/128"
 			}
 		},
-		"Skeleton#Naked": {
+		"Skeleton#Plain": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -187103,7 +187530,7 @@
 				"1": "2/512"
 			}
 		},
-		"Zombie#Plain": {
+		"Zombie#Level 18": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -187120,7 +187547,7 @@
 				"1": "1/1253"
 			}
 		},
-		"Zombie#Unarmed": {
+		"Zombie#Level 13": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -187178,7 +187605,7 @@
 				"1": "25/128"
 			}
 		},
-		"Zombie#Armed": {
+		"Zombie#Level 24": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -187244,7 +187671,7 @@
 				"1": "1/128"
 			}
 		},
-		"Zombie#Wilderness": {
+		"Zombie (Wilderness)": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -187317,7 +187744,7 @@
 				"1": "1/1253"
 			}
 		},
-		"Zombie#Stronghold of Security": {
+		"Zombie (Stronghold of Security)": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -187407,6 +187834,72 @@
 			},
 			"Zombie champion scroll": {
 				"1": "1/5000"
+			}
+		},
+		"Zombie (Kourend)": {
+			"Bones": {
+				"1": "Always"
+			},
+			"Zombie bone": {
+				"1": "1/4"
+			},
+			"Zombie champion scroll": {
+				"1": "1/5000"
+			},
+			"Body rune": {
+				"3": "2/128"
+			},
+			"Air rune": {
+				"3": "3/128"
+			},
+			"Coins": {
+				"1": "2/128",
+				"10": "40/128",
+				"18": "21/128",
+				"26": "8/128",
+				"35": "6/128"
+			},
+			"Fishing bait": {
+				"7": "26/128"
+			},
+			"Nothing": {
+				"1": "3/128"
+			},
+			"Iron mace": {
+				"1": "3/128"
+			},
+			"Iron dagger": {
+				"1": "2/128"
+			},
+			"Bronze kiteshield": {
+				"1": "1/128"
+			},
+			"Mithril arrow": {
+				"1": "3/128"
+			},
+			"Chaos rune": {
+				"4": "1/128"
+			},
+			"Cosmic rune": {
+				"2": "1/128"
+			},
+			"Fire rune": {
+				"7": "1/128"
+			},
+			"Tinderbox": {
+				"1": "2/128"
+			},
+			"Eye of newt": {
+				"1": "1/128"
+			},
+			"Tin ore": {
+				"1": "1/128"
+			},
+			"HerbDropTable+": {
+				"1": "30/128"
+			},
+			"GemDropTable+": {
+				"1": "1/128"
 			}
 		},
 		"Zombie (Sepulchre of Death)": {
@@ -188018,7 +188511,7 @@
 				"1": "1/1109"
 			}
 		},
-		"Zombie pirate#Braindeath Island": {
+		"Zombie pirate (Braindeath Island)": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -188082,7 +188575,7 @@
 				"1": "1/128"
 			}
 		},
-		"Zombie pirate#Harmony Island": {
+		"Zombie pirate (Harmony Island)": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -189771,6 +190264,7 @@
 			{ "color": "#6bc71f", "x": 1617, "y": 3687 },
 			{ "color": "#6bc71f", "x": 1503, "y": 3432 }
 		],
+		"Locked Slayer Task|Slayer task": [],
 		"Clues": [
 			{ "color": "#763089", "text": "'A bag belt only?', he asked his balding brothers.", "type": "Hard", "x": 3058, "y": 3487 },
 			{ "color": "#b19b15", "text": "'See you in your dreams' said the vegetable man.", "type": "Elite", "x": 2608, "y": 3116 },
@@ -218510,15 +219004,15 @@
 			}, {
 				"Wilderness skeleton": "Nonskill"
 			}],
-			"Looting bag^Skeleton#Naked": [{
+			"Looting bag^Skeleton#Plain": [{
 				"Wilderness skeleton": "Nonskill"
 			}],
-			"Larran's key^Skeleton#Naked": [{
+			"Larran's key^Skeleton#Plain": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}, {
 				"Wilderness skeleton": "Nonskill"
 			}],
-			"Slayer's enchantment^Skeleton#Naked": [{
+			"Slayer's enchantment^Skeleton#Plain": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}, {
 				"Wilderness skeleton": "Nonskill"
@@ -218607,13 +219101,13 @@
 			"Slayer's enchantment^Vet'ion": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}],
-			"Larran's key^Zombie#Wilderness": [{
+			"Larran's key^Zombie (Wilderness)": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}],
-			"Slayer's enchantment^Zombie#Wilderness": [{
+			"Slayer's enchantment^Zombie (Wilderness)": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}],
-			"Fishing bait^Zombie#Wilderness": [{
+			"Fishing bait^Zombie (Wilderness)": [{
 				"12601 zombie": "Nonskill"
 			}],
 			"Larran's key^Ankou#Wilderness Slayer Cave": [{
@@ -218901,18 +219395,6 @@
 			"Dark totem top^Choke devil": [{
 				"Catacombs drops": "Nonskill"
 			}],
-			"Ancient shard^Cyclops": [{
-				"Catacombs drops": "Nonskill"
-			}],
-			"Dark totem base^Cyclops": [{
-				"Catacombs drops": "Nonskill"
-			}],
-			"Dark totem middle^Cyclops": [{
-				"Catacombs drops": "Nonskill"
-			}],
-			"Dark totem top^Cyclops": [{
-				"Catacombs drops": "Nonskill"
-			}],
 			"Ancient shard^Dagannoth": [{
 				"Catacombs drops": "Nonskill"
 			}],
@@ -219009,16 +219491,16 @@
 			"Dark totem top^Hellhound": [{
 				"Catacombs drops": "Nonskill"
 			}],
-			"Ancient shard^Hill Giant (Kourend)": [{
+			"Ancient shard^Hill Giant#Kourend": [{
 				"Catacombs or Giants Den drops": "Nonskill"
 			}],
-			"Dark totem base^Hill Giant (Kourend)": [{
+			"Dark totem base^Hill Giant#Kourend": [{
 				"Catacombs or Giants Den drops": "Nonskill"
 			}],
-			"Dark totem middle^Hill Giant (Kourend)": [{
+			"Dark totem middle^Hill Giant#Kourend": [{
 				"Catacombs or Giants Den drops": "Nonskill"
 			}],
-			"Dark totem top^Hill Giant (Kourend)": [{
+			"Dark totem top^Hill Giant#Kourend": [{
 				"Catacombs or Giants Den drops": "Nonskill"
 			}],
 			"Ancient shard^Insatiable mutated Bloodveld": [{
@@ -219798,7 +220280,7 @@
 			"Larran's key^Venenatis": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}],
-			"Larran's key^Zombie#Plain": [{
+			"Larran's key^Zombie#Level 18": [{
 				"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
 			}],
 			"Larran's key^Abyssal demon#Wilderness Slayer Cave": [{
@@ -220291,7 +220773,16 @@
 				"13876-1": [{
 					"~|Nature Spirit|~ 6": "Quest"
 				}],
+				"13876-2": [{
+					"~|Nature Spirit|~ 6": "Quest"
+				}],
 				"13877-1": [{
+					"~|Nature Spirit|~ 6": "Quest"
+				}],
+				"13877-2": [{
+					"~|Nature Spirit|~ 6": "Quest"
+				}],
+				"13877-3": [{
 					"~|Nature Spirit|~ 6": "Quest"
 				}],
 				"14133-1": [{
@@ -220985,17 +221476,17 @@
 					"~|Zogre Flesh Eaters|~ 1": "Quest"
 				}]
 			},
-			"Zombie#Armed": {
+			"Zombie#Level 24": {
 				"10035-1": [{
 					"~|Plague City|~ 5": "Quest"
 				}]
 			},
-			"Zombie#Unarmed": {
+			"Zombie#Level 13": {
 				"10035-1": [{
 					"~|Plague City|~ 5": "Quest"
 				}]
 			},
-			"Zombie#Wilderness": {
+			"Zombie (Wilderness)": {
 				"12602": [{
 					"F2P Only": "Nonskill"
 				}]
@@ -221383,6 +221874,9 @@
 			"Herb patch": {
 				"4922": [{
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
+				}],
+				"15148": [{
+					"~|Morytania Diary#Elite|~ Complete the Elite Diary": "Diary"
 				}]
 			},
 			"Hopper controls": {
