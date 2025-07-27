@@ -7684,6 +7684,7 @@
 			},
 			"Participate in ~|Vale Totems|~ for Construction xp": {
 				"Category": ["Minigame", "Construction Minigame"],
+				"NPCs": ["Estate Agent[+]"],
 				"Objects": ["Totem site"],
 				"Level": 1,
 				"Tasks": {
@@ -33141,6 +33142,12 @@
 				"Items": ["Spade"],
 				"Not F2P": true
 			},
+			"He's been studying unusual tree migrations.": {
+				"NPCs": ["Ranulph"],
+				"ClueTier": "easy",
+				"ClueType": "Cryptic",
+				"Not F2P": true
+			},
 			"Jump for Joy in the mine near the Twilight Temple. Bow before you talk to me. (Maple longbow, Ruby amulet, Steel platelegs)": {
 				"Chunks": ["6707-1"],
 				"ClueTier": "medium",
@@ -34833,6 +34840,13 @@
 			"Go to this building to be illuminated, and check the drawers while you are there.": {
 				"Chunks": ["10040"],
 				"Monsters": ["Market Guard"],
+				"ClueTier": "medium",
+				"ClueType": "Cryptic",
+				"Not Skiller": true,
+				"Not F2P": true
+			},
+			"Search the crate abandoned in the shadow of a mountain's grace.": {
+				"Chunks": ["5426-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
@@ -37188,6 +37202,14 @@
 				"Not Skiller": true,
 				"Not F2P": true
 			},
+			"05 degrees 03 minutes north, 34 degrees 58 minutes west": {
+				"Chunks": ["5171-1"],
+				"ClueTier": "hard",
+				"ClueType": "Coordinates",
+				"Items": ["Spade"],
+				"Not Skiller": true,
+				"Not F2P": true
+			},
 			"BIP 7013": {
 				"Chunks": ["13620-2"],
 				"ClueTier": "hard",
@@ -37197,6 +37219,14 @@
 			},
 			"Inside the Mort Myre Swamp, north-west of the Nature Grotto.": {
 				"Chunks": ["13620-1"],
+				"ClueTier": "master",
+				"ClueType": "Hot/Cold",
+				"Items": ["Spade", "Strange device (master)"],
+				"Not Skiller": true,
+				"Not F2P": true
+			},
+			"Directly northeast of the pit in the Tlati Rainforest.": {
+				"Chunks": ["5168-1"],
 				"ClueTier": "master",
 				"ClueType": "Hot/Cold",
 				"Items": ["Spade", "Strange device (master)"],
@@ -109450,8 +109480,7 @@
 						"Achilka": 1
 					},
 					"Object": {
-						"Dead tree": 129,
-						"Magic tree": 3
+						"Dead tree": 129
 					},
 					"Spawn": {
 						"Iron dagger": 1
@@ -161956,27 +161985,6 @@
 			"Adamant 2h sword": {
 				"1": "1/100"
 			},
-			"Bronze defender": {
-				"1": "2/100"
-			},
-			"Iron defender": {
-				"1": "2/100"
-			},
-			"Steel defender": {
-				"1": "2/100"
-			},
-			"Black defender": {
-				"1": "2/100"
-			},
-			"Mithril defender": {
-				"1": "2/100"
-			},
-			"Adamant defender": {
-				"1": "2/100"
-			},
-			"Rune defender": {
-				"1": "2/100"
-			},
 			"Coins": {
 				"3-102": "31/100",
 				"5-204": "10/100"
@@ -162073,27 +162081,6 @@
 			"Adamant 2h sword": {
 				"1": "1/100"
 			},
-			"Bronze defender": {
-				"1": "2/100"
-			},
-			"Iron defender": {
-				"1": "2/100"
-			},
-			"Steel defender": {
-				"1": "2/100"
-			},
-			"Black defender": {
-				"1": "2/100"
-			},
-			"Mithril defender": {
-				"1": "2/100"
-			},
-			"Adamant defender": {
-				"1": "2/100"
-			},
-			"Rune defender": {
-				"1": "2/100"
-			},
 			"Coins": {
 				"3-102": "31/100",
 				"5-204": "10/100"
@@ -162115,18 +162102,6 @@
 			},
 			"GemDropTable+": {
 				"1": "2/128"
-			},
-			"Ancient shard": {
-				"1": "1/283"
-			},
-			"Dark totem base": {
-				"1": "1/425"
-			},
-			"Dark totem middle": {
-				"1": "1/425"
-			},
-			"Dark totem top": {
-				"1": "1/425"
 			}
 		},
 		"Cyclops#Warriors' Guild Basement": {
@@ -193606,7 +193581,11 @@
 			{ "color": "#4c8587", "text": "Nod your head where the River Ortus meets the Proudspire. Indicate 'no' before you talk to me. Equip a blue wizard hat, a blue wizard robe and wear nothing on your legs.", "type": "Medium", "x": 1626, "y": 3241 },
 			{ "color": "#763089", "text": "Panic outside the Twilight Temple. Beware of double agents! Equip a rune longsword, rune platebody, and a rune plateskirt.", "type": "Hard", "x": 1694, "y": 3247 },
 			{ "color": "#b19b15", "text": "02 degrees 37 minutes north, 27 degrees 09 minutes west", "type": "Elite", "x": 1571, "y": 3245 },
-			{ "color": "#8c2a22", "text": "Think on the western coast of Salvager Overlook. Beware of double agents! Equip a Hueycoatl hide coif and some Hueycoatl hide vambraces.", "type": "Master", "x": 1610, "y": 3302 }
+			{ "color": "#8c2a22", "text": "Think on the western coast of Salvager Overlook. Beware of double agents! Equip a Hueycoatl hide coif and some Hueycoatl hide vambraces.", "type": "Master", "x": 1610, "y": 3302 },
+			{ "color": "#09600d", "text": "He's been studying unusual tree migrations.", "type": "Easy", "x": 1366, "y": 3367 },
+			{ "color": "#4c8587", "text": "Search the crate abandoned in the shadow of a mountain's grace.", "type": "Medium", "x": 1388, "y": 3216 },
+			{ "color": "#8c2a22", "text": "Directly northeast of the pit in the Tlati Rainforest.", "type": "Master", "x": 1312, "y": 3105 },
+			{ "color": "#763089", "text": "05 degrees 03 minutes north, 34 degrees 58 minutes west ", "type": "Hard", "x": 1321, "y": 3323 }
 		]
 	},
 	"shopItems": {
@@ -201666,55 +201645,55 @@
 			},
 			"Chest (alchemist's signet)": {
 				"Aldarium": {
-					"1": "Always"
+					"1 (noted)": "Always"
 				},
 				"Avantoe seed": {
-					"1": "Unknown"
+					"2-3": "3/75"
 				},
 				"Grimy avantoe": {
-					"1": "Unknown"
+					"1 (noted)": "5/48"
 				},
 				"Grimy cadantine": {
-					"1": "Unknown"
+					"2 (noted)": "4/48"
 				},
 				"Grimy dwarf weed": {
-					"1": "Unknown"
+					"2 (noted)": "4/48"
 				},
 				"Grimy kwuarm": {
-					"1": "Unknown"
+					"2 (noted)": "5/48"
 				},
 				"Grimy lantadyme": {
-					"1": "Unknown"
+					"2 (noted)": "3/48"
 				},
 				"Grimy ranarr weed": {
-					"1": "Unknown"
+					"1 (noted)": "4/48"
 				},
 				"Grimy snapdragon": {
-					"1": "Unknown"
+					"1 (noted)": "4/48"
 				},
 				"Grimy torstol": {
-					"1": "Unknown"
+					"1 (noted)": "3/48"
 				},
 				"Harralander seed": {
-					"1": "Unknown"
+					"2-3": "3/75"
 				},
 				"Irit seed": {
-					"1": "Unknown"
+					"2-3": "3/75"
 				},
 				"Mort myre fungus": {
-					"1": "Unknown"
+					"5-8 (noted)": "5/75"
 				},
 				"Ranarr seed": {
-					"1": "Unknown"
+					"1-2": "1/75"
 				},
 				"Snape grass": {
-					"1": "Unknown"
+					"3-5 (noted)": "5/75"
 				},
 				"Toadflax seed": {
-					"1": "Unknown"
+					"2-3": "2/75"
 				},
 				"Wine of zamorak": {
-					"1": "Unknown"
+					"2-4 (noted)": "3/75"
 				}
 			},
 			"Chest (Gu'Tanoth)": {
@@ -201733,28 +201712,28 @@
 			},
 			"Gemstone Crab loot": {
 				"Uncut diamond": {
-					"1": "Unknown"
+					"1": "2/56"
 				},
 				"Uncut dragonstone": {
-					"1": "Unknown"
+					"1": "1/425"
 				},
 				"Uncut emerald": {
-					"1": "Unknown"
+					"1": "4/56"
 				},
 				"Uncut jade": {
-					"1": "Unknown"
+					"1": "15/56"
 				},
 				"Uncut opal": {
-					"1": "Unknown"
+					"1": "15/56"
 				},
 				"Uncut red topaz": {
-					"1": "Unknown"
+					"1": "10/56"
 				},
 				"Uncut ruby": {
-					"1": "Unknown"
+					"1": "4/56"
 				},
 				"Uncut sapphire": {
-					"1": "Unknown"
+					"1": "6/56"
 				}
 			},
 			"Camdozaal Vault loot": {
@@ -207910,19 +207889,19 @@
 			},
 			"Dirty arrowtips loot": {
 				"Adamant arrowtips": {
-					"1": "Unknown"
+					"1": "80/209"
 				},
 				"Dragon arrowtips": {
-					"1": "Unknown"
+					"1": "23/209"
 				},
 				"Mithril arrowtips": {
-					"1": "Unknown"
+					"1": "60/209"
 				},
 				"Rune arrowtips": {
-					"1": "Unknown"
+					"1": "45/209"
 				},
 				"Steel arrowtips": {
-					"1": "Unknown"
+					"1": "1/209"
 				}
 			},
 			"Adept potion pack loot": {
@@ -216925,87 +216904,92 @@
 			},
 			"Earthen Nagua": {
 				"Adamantite ore": {
-					"1 (noted)": "Unknown"
+					"1-2 (noted)": "2/32"
 				},
 				"Blessed bone shards": {
-					"1": "Unknown"
+					"20-40": "2/32"
 				},
 				"Chaos rune": {
-					"1": "Unknown"
+					"8-20": "3/32"
 				},
 				"Coal": {
-					"1 (noted)": "Unknown"
+					"8-15 (noted)": "3/32"
 				},
 				"Death rune": {
-					"1": "Unknown"
+					"8-13": "2/32"
 				},
 				"Earthbound tecpatl": {
-					"1": "Unknown"
+					"1": "1/400"
 				},
 				"Earth orb": {
-					"1 (noted)": "Unknown"
+					"1-2 (noted)": "1/32"
 				},
 				"Earth rune": {
-					"1": "Unknown"
+					"10-19": "18/304",
+					"20-30": "27/304",
+					"31-50": "12/304"
 				},
 				"Earth talisman": {
-					"1": "Unknown"
+					"1": "1/32"
 				},
 				"Gold ore": {
-					"1 (noted)": "Unknown"
+					"4-8 (noted)": "2/32"
 				},
 				"Iron ore": {
-					"1 (noted)": "Unknown"
+					"8-15 (noted)": "4/32"
 				},
 				"Nature rune": {
-					"1": "Unknown"
+					"8-15": "2/32"
 				},
 				"Soft clay": {
-					"1 (noted)": "Unknown"
+					"5-10 (noted)": "3/32"
 				},
 				"GemDropTable+": {
-					"1": "Unknown"
+					"1": "1/32"
 				},
 				"Clue scroll (hard)": {
-					"1": "Unknown"
+					"1": "1/128"
+				},
+				"Brimstone key": {
+					"1": "1/76"
 				}
 			},
 			"Juvenile custodian stalker": {
 				"Adamant scimitar": {
-					"1": "Unknown"
+					"1": "16/160"
 				},
 				"Air rune": {
-					"1": "Unknown"
+					"100": "20/160"
 				},
 				"Big bones": {
 					"1": "Always"
 				},
 				"Broken antler": {
-					"1": "Unknown"
+					"1": "11/160"
 				},
 				"Cannonball": {
-					"1": "Unknown"
+					"10-15": "20/160"
 				},
 				"Coins": {
-					"1": "Unknown"
+					"400-750": "20/160"
 				},
 				"Death rune": {
-					"1": "Unknown"
+					"10-26": "10/160"
 				},
 				"Fire rune": {
-					"1": "Unknown"
+					"50": "20/160"
 				},
 				"Pure essence": {
-					"1 (noted)": "Unknown"
+					"15 (noted)": "12/160"
 				},
 				"Raw beef": {
-					"1": "Unknown"
+					"1": "4/160"
 				},
 				"Rune arrow": {
-					"1": "Unknown"
+					"5-20": "12/160"
 				},
 				"Swordfish": {
-					"1": "Unknown"
+					"2-3": "8/160"
 				},
 				"Long bone": {
 					"1": "1/400"
@@ -217014,57 +216998,51 @@
 					"1": "1/5012.5"
 				},
 				"RareDropTable+": {
-					"1": "Unknown"
+					"1": "1/160"
 				}
 			},
 			"Mature custodian stalker": {
-				"Adamant scimitar": {
-					"1": "Unknown"
-				},
 				"Air rune": {
-					"1": "Unknown"
+					"150": "12/107"
 				},
 				"Antler guard": {
-					"1": "Unknown"
+					"1": "1/750"
 				},
 				"Big bones": {
 					"1": "Always"
 				},
 				"Broken antler": {
-					"1": "Unknown"
+					"1": "7/107"
 				},
 				"Cannonball": {
-					"1": "Unknown"
+					"15-30": "15/107"
 				},
 				"Coins": {
-					"1": "Unknown"
+					"800-1050": "10/107"
 				},
 				"Death rune": {
-					"1": "Unknown"
+					"25-40": "6/107"
 				},
 				"Fire rune": {
-					"1": "Unknown"
+					"100": "12/107"
 				},
 				"Huasca seed": {
-					"1": "Unknown"
+					"1": "1/107"
 				},
 				"Mithril bar": {
-					"1 (noted)": "Unknown"
+					"5-10 (noted)": "5/107"
 				},
 				"Monkfish": {
-					"1": "Unknown"
+					"2-3": "8/107"
 				},
 				"Pure essence": {
-					"1 (noted)": "Unknown"
+					"20 (noted)": "10/107"
 				},
 				"Raw beef": {
-					"1": "Unknown"
+					"1": "4/107"
 				},
 				"Rune arrow": {
-					"1": "Unknown"
-				},
-				"Swordfish": {
-					"1": "Unknown"
+					"10-25": "10/107"
 				},
 				"Long bone": {
 					"1": "1/400"
@@ -217073,60 +217051,54 @@
 					"1": "1/5012.5"
 				},
 				"RareDropTable+": {
-					"1": "Unknown"
+					"1": "1/107"
 				}
 			},
 			"Elder custodian stalker": {
-				"Adamant scimitar": {
-					"1": "Unknown"
-				},
 				"Air rune": {
-					"1": "Unknown"
+					"200": "12/124"
 				},
 				"Alchemist's signet": {
-					"1": "Unknown"
+					"1": "2/124"
 				},
 				"Antler guard": {
-					"1": "Unknown"
+					"1": "1/650"
 				},
 				"Big bones": {
 					"1": "Always"
 				},
 				"Broken antler": {
-					"1": "Unknown"
+					"1": "4/124"
 				},
 				"Cannonball": {
-					"1": "Unknown"
+					"20-30": "15/124"
 				},
 				"Coins": {
-					"1": "Unknown"
+					"1180-1300": "19/124"
 				},
 				"Death rune": {
-					"1": "Unknown"
+					"40-50": "6/124"
 				},
 				"Fire rune": {
-					"1": "Unknown"
+					"150": "12/124"
 				},
 				"Huasca seed": {
-					"1": "Unknown"
+					"2-3": "1/124"
 				},
 				"Mithril bar": {
-					"1 (noted)": "Unknown"
-				},
-				"Shark": {
-					"1": "Unknown"
+					"10-15 (noted)": "6/124"
 				},
 				"Pure essence": {
-					"1 (noted)": "Unknown"
+					"30 (noted)": "12/124"
 				},
 				"Raw beef": {
-					"1": "Unknown"
+					"1": "4/124"
 				},
 				"Rune arrow": {
-					"1": "Unknown"
+					"20-35": "12/124"
 				},
-				"Swordfish": {
-					"1": "Unknown"
+				"Shark": {
+					"1": "12/124"
 				},
 				"Long bone": {
 					"1": "1/400"
@@ -217135,7 +217107,7 @@
 					"1": "1/5012.5"
 				},
 				"RareDropTable+": {
-					"1": "Unknown"
+					"1": "12/124"
 				}
 			},
 			"Taloned Wyvern": {
@@ -220448,10 +220420,10 @@
 			},
 			"Infected root": {
 				"Demon tear": {
-					"1": "Unknown"
+					"1": "8/9"
 				},
 				"Logs": {
-					"1": "Unknown"
+					"1": "1/9"
 				}
 			},
 			"Jungle Cleanup light loot": {
