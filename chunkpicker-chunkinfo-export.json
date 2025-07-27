@@ -27,6 +27,22 @@
 				"Priority": 99,
 				"NoPet": true
 			},
+			"Access the Nemus Retreat wall climb ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Broken wall (Nemus Retreat)"],
+				"Level": 24,
+				"Primary": true,
+				"Priority": 1,
+				"NoPet": true
+			},
+			"Access the cave to the Stalker Den ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["5172-1", "Stalker Den"],
+				"Level": 59,
+				"Primary": false,
+				"Priority": 2,
+				"NoPet": true
+			},
 			"Access the Chasm of Fire gap ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Gap (Chasm of Fire)"],
@@ -56,6 +72,46 @@
 				"Level": 54,
 				"Primary": false,
 				"Priority": 2,
+				"NoPet": true
+			},
+			"Access the Tlati Rainforest rock climb ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Rocks (Tlati Rainforest)"],
+				"Level": 43,
+				"Primary": false,
+				"Priority": 2,
+				"NoPet": true
+			},
+			"Access The Darkfrost rock climb ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Rocks (The Darkfrost)"],
+				"Level": 76,
+				"Primary": false,
+				"Priority": 2,
+				"NoPet": true
+			},
+			"Access The Proudspire lower rock climb ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Rocks (The Proudspire, lower)"],
+				"Level": 45,
+				"Primary": false,
+				"Priority": 15,
+				"NoPet": true
+			},
+			"Access The Proudspire upper rock climb ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Rocks (The Proudspire, upper)"],
+				"Level": 71,
+				"Primary": false,
+				"Priority": 15,
+				"NoPet": true
+			},
+			"Access the Nemus Retreat rock climb ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Rocks (Nemus Retreat)"],
+				"Level": 41,
+				"Primary": true,
+				"Priority": 1,
 				"NoPet": true
 			},
 			"Operate the pedals at the ~|Blast Furnace|~": {
@@ -158,6 +214,38 @@
 				"Priority": 4,
 				"NoPet": true
 			},
+			"Access the Stalker Den stepping stone ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Stepping stone (Stalker Den)"],
+				"Level": 64,
+				"Primary": false,
+				"Priority": 3,
+				"NoPet": true
+			},
+			"Access the Nemus Retreat stepping stone ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Stepping stone (Nemus Retreat)"],
+				"Level": 36,
+				"Primary": true,
+				"Priority": 1,
+				"NoPet": true
+			},
+			"Access the Tonali Cavern stepping stone ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Stepping stone (Tonali Cavern)"],
+				"Level": 46,
+				"Primary": false,
+				"Priority": 3,
+				"NoPet": true
+			},
+			"Access the Nemus Retreat tunnel ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Tunnel (Nemus Retreat)"],
+				"Level": 33,
+				"Primary": true,
+				"Priority": 1,
+				"NoPet": true
+			},
 			"Access the Barrows dry stone wall ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Dry stone wall (Barrows)"],
@@ -211,6 +299,7 @@
 				"Items": ["Crossbow[+]", "Mith grapple"],
 				"Level": 36,
 				"Primary": false,
+				"Priority": 2,
 				"Skills": {
 					"Ranged": 39,
 					"Strength": 22
@@ -319,6 +408,7 @@
 				"Objects": ["Rocks (Tirannwn)#Easy"],
 				"Level": 59,
 				"Primary": false,
+				"Priority": 1,
 				"NoPet": true
 			},
 			"Access the Arandar medium cliffside scramble ~|shortcut|~": {
@@ -365,6 +455,31 @@
 				"Chunks": ["10292"],
 				"Level": 33,
 				"Primary": true,
+				"Priority": 2,
+				"NoPet": true
+			},
+			"Access the Tlati Rainforest log balance ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Log balance (Tlati Rainforest)"],
+				"Level": 40,
+				"Primary": false,
+				"Priority": 5,
+				"NoPet": true
+			},
+			"Access the Auburn Valley log balance ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Log balance (Auburn Valley)"],
+				"Level": 45,
+				"Primary": false,
+				"Priority": 16,
+				"NoPet": true
+			},
+			"Access the Tonali Cavern log balance ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Log balance (Tonali Cavern)"],
+				"Level": 46,
+				"Primary": false,
+				"Priority": 4,
 				"NoPet": true
 			},
 			"Access the Asgarnian Ice Dungeon frozen throne tunnel ~|shortcut|~": {
@@ -915,6 +1030,7 @@
 				"Chunks": ["11321-1"],
 				"Level": 41,
 				"Primary": false,
+				"Priority": 2,
 				"NoPet": true
 			},
 			"Access the Trollheim hard cliffside scramble ~|shortcut|~": {
@@ -1116,6 +1232,7 @@
 				"Chunks": ["ZulAndraCrossing[+]"],
 				"Level": 76,
 				"Primary": false,
+				"Priority": 1,
 				"NoPet": true
 			},
 			"Access the log balance to Fremennik Province ~|shortcut|~": {
@@ -1209,6 +1326,14 @@
 				"Level": 60,
 				"Primary": true,
 				"Priority": 5,
+				"NoPet": true
+			},
+			"Access the pillar jump in Tonali Cavern ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Pillar (Tonali Cavern)"],
+				"Level": 75,
+				"Primary": false,
+				"Priority": 3,
 				"NoPet": true
 			},
 			"Access the pipe from Edgeville Dungeon to Varrock Sewers ~|shortcut|~": {
@@ -2063,6 +2188,14 @@
 				"Not F2P": true,
 				"NoBoost": true,
 				"Priority": 2
+			},
+			"Wield ~|earthbound tecpatl|~": {
+				"Items": ["Earthbound tecpatl"],
+				"Level": 55,
+				"Primary": false,
+				"Not F2P": true,
+				"NoBoost": true,
+				"Priority": 3
 			},
 			"Wield a ~|zombie axe|~": {
 				"Items": ["Zombie axe"],
@@ -7549,6 +7682,16 @@
 				"Not F2P": true,
 				"Priority": 107
 			},
+			"Participate in ~|Vale Totems|~ for Construction xp": {
+				"Category": ["Minigame", "Construction Minigame"],
+				"Objects": ["Totem site"],
+				"Level": 1,
+				"Tasks": {
+					"~|Vale Totems (miniquest)|~ Complete the quest": "Quest"
+				},
+				"Primary": true,
+				"Priority": 99
+			},
 			"Repair broken bridges in the ~|Hallowed Sepulchre|~": {
 				"Category": ["Construction Minigame"],
 				"Chunks": ["Hallowed Sepulchre"],
@@ -7659,6 +7802,20 @@
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["Troll Stronghold"],
 				"Level": 35,
+				"Primary": false,
+				"Priority": 999
+			},
+			"~|Scrambled!|~ Construction skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["4913-1"],
+				"Level": 38,
+				"Primary": false,
+				"Priority": 999
+			},
+			"~|Shadows of Custodia|~ Construction skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["5428"],
+				"Level": 41,
 				"Primary": false,
 				"Priority": 999
 			},
@@ -8345,6 +8502,15 @@
 				"Output": "Nettle tea",
 				"Primary": true,
 				"Priority": 2,
+				"Not F2P": true
+			},
+			"Brew a ~|damiana tea|~": {
+				"Items": ["Bowl of water", "Damiana leaves"],
+				"Level": 36,
+				"Objects": ["Cooking object[+]"],
+				"Output": "Damiana tea",
+				"Primary": true,
+				"Priority": 1,
 				"Not F2P": true
 			},
 			"Brew a ~|slayer's respite|~": {
@@ -9459,6 +9625,13 @@
 				"Priority": 999,
 				"Not F2P": true,
 				"NoBoost": true
+			},
+			"~|Scrambled!|~ Cooking skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["4913-1"],
+				"Level": 36,
+				"Primary": false,
+				"Priority": 999
 			},
 			"~|Recipe for Disaster/Freeing the Lumbridge Guide|~ Cooking skill requirement": {
 				"Category": ["Quest Skill Reqs"],
@@ -11189,6 +11362,17 @@
 				"Output": "Yew bird house",
 				"Primary": true,
 				"Priority": 2,
+				"Not F2P": true
+			},
+			"Craft ~|confliction gauntlets|~": {
+				"Items": ["Tormented bracelet*", "Mokhaiotl cloth*", "Demon tear*"],
+				"Level": 83,
+				"Output": "Confliction gauntlets",
+				"Primary": true,
+				"Priority": 3,
+				"Skills": {
+					"Smithing": 70
+				},
 				"Not F2P": true
 			},
 			"Craft a ~|zenyte amulet (u)|~": {
@@ -13066,6 +13250,19 @@
 				"Level": 75,
 				"Primary": false,
 				"Priority": 19,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wear ~|avernic treads|~": {
+				"Items": ["AvernicTreads[+]"],
+				"Level": 80,
+				"Primary": false,
+				"Skills": {
+					"Strength": 80,
+					"Ranged": 80,
+					"Magic": 80
+				},
+				"Priority": 79,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -16399,6 +16596,13 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"~|Shadows of Custodia|~ Fishing skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["5428"],
+				"Level": 45,
+				"Primary": false,
+				"Priority": 999
+			},
 			"~|Rum Deal|~ Fishing skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["14647-1"],
@@ -16448,6 +16652,17 @@
 				"Priority": 1,
 				"NoXp": true,
 				"NoBoost": true
+			},
+			"Participate in ~|Vale Totems|~ for Fletching xp": {
+				"Category": ["Minigame"],
+				"Objects": ["Totem site", "Offering site"],
+				"Level": 20,
+				"Tasks": {
+					"~|Vale Totems (miniquest)|~ Complete the quest": "Quest"
+				},
+				"Output": "Vale offerings",
+				"Primary": true,
+				"Priority": 99
 			},
 			"Participate in ~|Trouble Brewing|~ for Fletching xp": {
 				"Category": ["Minigame"],
@@ -16517,6 +16732,30 @@
 				"Output": "Bone shortbow",
 				"Primary": true,
 				"Priority": 3,
+				"Not F2P": true
+			},
+			"Fletch an ~|atlatl dart shaft|~": {
+				"Items": ["Knife", "Ent branch*"],
+				"Output": "Atlatl dart shaft",
+				"Level": 74,
+				"Primary": true,
+				"Priority": 1,
+				"Not F2P": true
+			},
+			"Fletch a ~|greenman statue|~": {
+				"Items": ["Knife", "Ent branch*", "Greenman mask*", "Maple logs*"],
+				"Output": "Greenman statue",
+				"Level": 53,
+				"Primary": true,
+				"Priority": 1,
+				"Not F2P": true
+			},
+			"Fletch a ~|greenman carving|~": {
+				"Items": ["Knife", "Ent branch*", "Greenman mask*", "Yew logs*"],
+				"Output": "Greenman carving",
+				"Level": 79,
+				"Primary": true,
+				"Priority": 1,
 				"Not F2P": true
 			},
 			"Fletch ~|bruma kindling|~": {
@@ -16653,6 +16892,30 @@
 				"Priority": 2,
 				"NoBoost": true
 			},
+			"Fletch a ~|headless atlatl dart|~": {
+				"Items": ["Atlatl dart shaft*", "Feather[+]*"],
+				"Level": 74,
+				"Output": "Headless atlatl dart",
+				"Primary": true,
+				"Priority": 2,
+				"Not F2P": true
+			},
+			"Cut ~|atlatl dart tips|~": {
+				"Items": ["Chisel", "Broken antler*"],
+				"Output": "Atlatl dart tips",
+				"Level": 74,
+				"Primary": true,
+				"Priority": 3,
+				"Not F2P": true
+			},
+			"Fletch an ~|atlatl dart|~": {
+				"Items": ["Headless atlatl dart*", "Atlatl dart tips*"],
+				"Level": 74,
+				"Output": "Atlatl dart",
+				"Primary": true,
+				"Priority": 4,
+				"Not F2P": true
+			},
 			"Fletch a ~|heavy ballista|~": {
 				"Items": ["Ballista limbs*", "Heavy frame*", "Ballista spring*", "Monkey tail*"],
 				"Level": 72,
@@ -16784,6 +17047,13 @@
 				"Output": "Oak stock",
 				"Primary": true,
 				"Priority": 1
+			},
+			"Fletch a ~|redwood hiking staff|~": {
+				"Items": ["Knife", "Redwood logs*"],
+				"Level": 90,
+				"Output": "Redwood hiking staff",
+				"Primary": true,
+				"Priority": 3
 			},
 			"Fletch a ~|redwood shield|~": {
 				"Items": ["Knife", "Redwood logs*"],
@@ -17009,6 +17279,7 @@
 				"Items": ["Amethyst dart tip*", "Feather[+]*"],
 				"Level": 90,
 				"Primary": true,
+				"Priority": 4,
 				"Output": "Amethyst dart"
 			},
 			"Fletch an ~|amethyst javelin|~": {
@@ -17560,12 +17831,27 @@
 				"Primary": false,
 				"Priority": 999
 			},
+			"~|Vale Totems (miniquest)|~ Fletching skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["5428"],
+				"Level": 20,
+				"Primary": false,
+				"Priority": 999
+			},
 			"~|Devious Minds|~ Fletching skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["13622-1"],
 				"Level": 50,
 				"Primary": false,
 				"Priority": 999
+			},
+			"~|The Final Dawn|~ Fletching skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["6705-1"],
+				"Level": 52,
+				"Primary": false,
+				"Priority": 999,
+				"NoBoost": true
 			},
 			"~|Sins of the Father|~ Fletching skill requirement": {
 				"Category": ["Quest Skill Reqs"],
@@ -18943,6 +19229,14 @@
 			"Wear an ~|amulet of rancour|~": {
 				"Items": ["Amulet of rancour"],
 				"Level": 90,
+				"Priority": 1,
+				"Primary": false,
+				"Not F2P": true
+			},
+			"Wear ~|confliction gauntlets|~": {
+				"Items": ["Confliction gauntlets"],
+				"Level": 90,
+				"Priority": 2,
 				"Primary": false,
 				"Not F2P": true
 			},
@@ -20140,6 +20434,13 @@
 				"Primary": false,
 				"Priority": 999,
 				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ Hunter skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["5428"],
+				"Level": 36,
+				"Primary": false,
+				"Priority": 999
 			},
 			"~|At First Light|~ Hunter skill requirement": {
 				"Category": ["Quest Skill Reqs"],
@@ -23032,6 +23333,19 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"Wear ~|avernic treads|~": {
+				"Items": ["AvernicTreads[+]"],
+				"Level": 80,
+				"Primary": false,
+				"Skills": {
+					"Strength": 80,
+					"Ranged": 80,
+					"Defence": 80
+				},
+				"Priority": 79,
+				"Not F2P": true,
+				"NoBoost": true
+			},
 			"Wear ~|boots of brimstone|~": {
 				"Category": ["Slayer Equipment"],
 				"Items": ["Boots of brimstone"],
@@ -23538,6 +23852,14 @@
 				"Level": 78,
 				"Primary": false,
 				"Priority": 11,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wield an ~|eye of ayak|~": {
+				"Items": ["Eye of ayak (uncharged)"],
+				"Level": 83,
+				"Primary": false,
+				"Priority": 1,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -24886,6 +25208,17 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Gemstone Crab*": {
+				"Items": ["Pickaxe[+]"],
+				"Monsters": ["Gemstone Crab"],
+				"Output": "Gemstone Crab loot",
+				"Not F2P": true
+			},
+			"Get the orange (hat) from the capybara*": {
+				"Objects": ["Picnic"],
+				"Output": "Orange (hat)",
+				"Not F2P": true
+			},
 			"Kill Yama after offering a contract of forfeit breath*": {
 				"Monsters": ["Yama"],
 				"Items": ["Contract of forfeit breath*"],
@@ -25174,6 +25507,11 @@
 			"Hunters' loot sack (master) loot*": {
 				"Items": ["Hunters' loot sack (master)*"],
 				"Output": "Hunters' loot sack (master) loot"
+			},
+			"Open the chest (alchemist's signet)": {
+				"Items": ["Alchemist's signet"],
+				"Objects": ["Chest (alchemist's signet)"],
+				"Output": "Chest (alchemist's signet)"
 			},
 			"Open the chest in Gu'Tanoth*": {
 				"Objects": ["Chest (Gu'Tanoth)"],
@@ -26218,6 +26556,38 @@
 				"Output": "Secateurs",
 				"Not F2P": true
 			},
+			"5427-1 to 5427-2": {
+				"Sections": ["5427-1", "5427-2"],
+				"Tasks": {
+					"Access the Nemus Retreat rock climb ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"6194-2 to 6194-8": {
+				"Sections": ["6194-2", "6194-8"],
+				"Tasks": {
+					"Access The Proudspire lower rock climb ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"5939-2 to 5939-5": {
+				"Sections": ["5939-2", "5939-5"],
+				"Tasks": {
+					"Access The Darkfrost rock climb ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"4910-1 to 4910-2": {
+				"Sections": ["4910-1", "4910-2"],
+				"Tasks": {
+					"Access the Tlati Rainforest rock climb ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
 			"5176-1 to 5432-1": {
 				"Sections": ["5176-1", "5432-1"],
 				"ConnectsSections": true,
@@ -26237,6 +26607,14 @@
 				"Sections": ["13874-1", "13874-3"],
 				"Tasks": {
 					"~|In Aid of the Myreque|~ 2": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"4917-1 to 4917-2": {
+				"Sections": ["4917-1", "4917-2"],
+				"Tasks": {
+					"~|Children of the Sun|~ Complete the quest": "Quest"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -29059,6 +29437,11 @@
 				"Output": "Bronze pickaxe",
 				"Not F2P": true
 			},
+			"Grab a bronze axe from the Nemus Retreat logs*": {
+				"Chunks": ["5427-1"],
+				"Output": "Bronze axe",
+				"Not F2P": true
+			},
 			"Grab a bronze axe from the Prifddinas logs*": {
 				"Chunks": ["Prifddinas"],
 				"Output": "Bronze axe",
@@ -30186,6 +30569,10 @@
 				"Output": "Salve shard",
 				"Not F2P": true
 			},
+			"Pick damiana leaves from a damiana bush*": {
+				"Objects": ["Damiana"],
+				"Output": "Damiana leaves"
+			},
 			"Pick redberries from a bush*": {
 				"Objects": ["Redberry bush"],
 				"Output": "Redberries"
@@ -30852,6 +31239,11 @@
 				"Output": "Amulet of glory loot",
 				"Not F2P": true
 			},
+			"Open vale offerings*": {
+				"Items": ["Vale offerings*"],
+				"Output": "Vale offerings loot",
+				"Not F2P": true
+			},
 			"Open an adept potion pack*": {
 				"Items": ["Adept potion pack*"],
 				"Output": "Adept potion pack loot",
@@ -30867,9 +31259,19 @@
 				"Output": "Expert potion pack loot",
 				"Not F2P": true
 			},
-			"Open a giant egg sack": {
+			"Open a giant egg sack*": {
 				"Items": ["Giant egg sac(full)*", "Knife"],
 				"Output": "Red spiders' eggs",
+				"Not F2P": true
+			},
+			"Open a bale of flax*": {
+				"Items": ["Bale of flax*"],
+				"Output": "Flax",
+				"Not F2P": true
+			},
+			"Clean dirty arrowtips*": {
+				"Items": ["Dirty arrowtips*"],
+				"Output": "Dirty arrowtips loot",
 				"Not F2P": true
 			},
 			"Charge a scythe of vitur": {
@@ -39161,7 +39563,7 @@
 				"Not F2P": true
 			},
 			"North of Menaphos gate.": {
-				"Chunks": ["12843-1"],
+				"Chunks": ["12843"],
 				"ClueTier": "master",
 				"ClueType": "Hot/Cold",
 				"Items": ["Spade", "Strange device (master)"],
@@ -40730,6 +41132,10 @@
 				},
 				"Not F2P": true
 			},
+			"Dragon Nest": {
+				"UnlocksArea": true,
+				"Not F2P": true
+			},
 			"Draynor Sewers": {
 				"UnlocksArea": true
 			},
@@ -40994,6 +41400,10 @@
 				"Tasks": {
 					"~|The Fremennik Isles|~ 14": "Quest"
 				},
+				"Not F2P": true
+			},
+			"Imp Basement": {
+				"UnlocksArea": true,
 				"Not F2P": true
 			},
 			"Inferno": {
@@ -41593,6 +42003,13 @@
 				},
 				"Not F2P": true
 			},
+			"Stalker Den": {
+				"UnlocksArea": true,
+				"Tasks": {
+					"~|Shadows of Custodia|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
 			"Stronghold Slayer Cave": {
 				"UnlocksArea": true,
 				"Not F2P": true
@@ -41696,6 +42113,13 @@
 				},
 				"Not F2P": true
 			},
+			"Tonali Cavern": {
+				"UnlocksArea": true,
+				"Tasks": {
+					"~|The Final Dawn|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
 			"Tower of Life#Basement": {
 				"UnlocksArea": true,
 				"Tasks": {
@@ -41741,6 +42165,13 @@
 				"Items": ["Bronze pickaxe"],
 				"Tasks": {
 					"~|What Lies Below|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"Twilight Temple#Basement": {
+				"UnlocksArea": true,
+				"Tasks": {
+					"~|The Final Dawn|~ 2": "Quest"
 				},
 				"Not F2P": true
 			},
@@ -42817,6 +43248,14 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"Wield an ~|antler guard|~": {
+				"Items": ["Antler guard"],
+				"Level": 50,
+				"Primary": false,
+				"Priority": 4,
+				"Not F2P": true,
+				"NoBoost": true
+			},
 			"Wield a ~|blessed spirit shield|~": {
 				"Items": ["Blessed spirit shield"],
 				"Level": 60,
@@ -43298,6 +43737,19 @@
 				"Level": 50,
 				"Primary": false,
 				"Priority": 9,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wear ~|avernic treads|~": {
+				"Items": ["AvernicTreads[+]"],
+				"Level": 80,
+				"Primary": false,
+				"Skills": {
+					"Strength": 80,
+					"Defence": 80,
+					"Magic": 80
+				},
+				"Priority": 79,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -45144,6 +45596,83 @@
 				"NoPet": true,
 				"NoBoost": true
 			},
+			"Create ~|avernic treads (et)|~": {
+				"Items": ["Avernic treads", "Eternal boots", "Demon tear*"],
+				"Level": 60,
+				"Output": "Avernic treads (et)",
+				"Primary": true,
+				"Priority": 90,
+				"Skills": {
+					"Smithing": 80
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pe)|~": {
+				"Items": ["Avernic treads", "Pegasian boots", "Demon tear*"],
+				"Level": 60,
+				"Output": "Avernic treads (pe)",
+				"Primary": true,
+				"Priority": 91,
+				"Skills": {
+					"Smithing": 80
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pr)|~": {
+				"Items": ["Avernic treads", "Primordial boots", "Demon tear*"],
+				"Level": 60,
+				"Output": "Avernic treads (pr)",
+				"Primary": true,
+				"Priority": 92,
+				"Skills": {
+					"Smithing": 80
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pe)(et)|~": {
+				"Items": ["Avernic treads", "Pegasian boots", "Eternal boots", "Demon tear*"],
+				"Level": 60,
+				"Output": "Avernic treads (pe)(et)",
+				"Primary": true,
+				"Priority": 93,
+				"Skills": {
+					"Smithing": 80
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pr)(et)|~": {
+				"Items": ["Avernic treads", "Primordial boots", "Eternal boots", "Demon tear*"],
+				"Level": 60,
+				"Output": "Avernic treads (pr)(et)",
+				"Primary": true,
+				"Priority": 94,
+				"Skills": {
+					"Smithing": 80
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pr)(pe)|~": {
+				"Items": ["Avernic treads", "Primordial boots", "Pegasian boots", "Demon tear*"],
+				"Level": 60,
+				"Output": "Avernic treads (pr)(pe)",
+				"Primary": true,
+				"Priority": 95,
+				"Skills": {
+					"Smithing": 80
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (max)|~": {
+				"Items": ["Avernic treads", "Primordial boots", "Pegasian boots", "Eternal boots", "Demon tear*"],
+				"Level": 60,
+				"Output": "Avernic treads (max)",
+				"Primary": true,
+				"Priority": 96,
+				"Skills": {
+					"Smithing": 80
+				},
+				"Not F2P": true
+			},
 			"Infuse splitbark boots into ~|bloodbark boots|~": {
 				"Objects": ["Blood Altar (Kourend)"],
 				"Items": ["Splitbark boots*", "Bloody notes", "Blood rune*"],
@@ -45320,6 +45849,14 @@
 				"Priority": 999,
 				"Not F2P": true,
 				"NoPet": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ Runecraft skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["6705-1"],
+				"Level": 52,
+				"Primary": false,
+				"Priority": 999,
 				"NoBoost": true
 			},
 			"~|The Fremennik Exiles|~ Runecraft skill requirement": {
@@ -45994,6 +46531,38 @@
 				"Output": "Frost Nagua",
 				"Priority": 2
 			},
+			"Slay an ~|Earthen Nagua|~": {
+				"Level": 48,
+				"Monsters": ["Earthen Nagua"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Earthen Nagua",
+				"Priority": 3
+			},
+			"Slay a ~|juvenile custodian stalker|~": {
+				"Level": 54,
+				"Monsters": ["Juvenile custodian stalker"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Juvenile custodian stalker",
+				"Priority": 1
+			},
+			"Slay a ~|mature custodian stalker|~": {
+				"Level": 67,
+				"Monsters": ["Mature custodian stalker"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Mature custodian stalker",
+				"Priority": 1
+			},
+			"Slay an ~|elder custodian stalker|~": {
+				"Level": 76,
+				"Monsters": ["Elder custodian stalker"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Elder custodian stalker",
+				"Priority": 1
+			},
 			"Slay a ~|terror dog#Level 100|~": {
 				"Level": 40,
 				"Monsters": ["Terror dog#Level 100"],
@@ -46525,6 +47094,13 @@
 				"Priority": 999,
 				"NoBoost": true
 			},
+			"~|Shadows of Custodia|~ Slayer skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["5428"],
+				"Level": 54,
+				"Primary": false,
+				"Priority": 999
+			},
 			"~|The Path of Glouphrie|~ Slayer skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["10033-1"],
@@ -46831,6 +47407,17 @@
 				"Not F2P": true,
 				"Primary": true,
 				"Priority": 1010
+			},
+			"Craft ~|confliction gauntlets|~": {
+				"Items": ["Tormented bracelet*", "Mokhaiotl cloth*", "Demon tear*"],
+				"Level": 70,
+				"Output": "Confliction gauntlets",
+				"Primary": true,
+				"Priority": 3,
+				"Skills": {
+					"Crafting": 83
+				},
+				"Not F2P": true
 			},
 			"Make a ~|crystal felling axe|~": {
 				"Items": ["Hammer", "Felling axe handle*", "Crystal axe*"],
@@ -47232,6 +47819,83 @@
 				"Output": "Oathplate legs",
 				"Primary": true,
 				"Priority": 6,
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (et)|~": {
+				"Items": ["Avernic treads", "Eternal boots", "Demon tear*"],
+				"Level": 80,
+				"Output": "Avernic treads (et)",
+				"Primary": true,
+				"Priority": 90,
+				"Skills": {
+					"Runecraft": 60
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pe)|~": {
+				"Items": ["Avernic treads", "Pegasian boots", "Demon tear*"],
+				"Level": 80,
+				"Output": "Avernic treads (pe)",
+				"Primary": true,
+				"Priority": 91,
+				"Skills": {
+					"Runecraft": 60
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pr)|~": {
+				"Items": ["Avernic treads", "Primordial boots", "Demon tear*"],
+				"Level": 80,
+				"Output": "Avernic treads (pr)",
+				"Primary": true,
+				"Priority": 92,
+				"Skills": {
+					"Runecraft": 60
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pe)(et)|~": {
+				"Items": ["Avernic treads", "Pegasian boots", "Eternal boots", "Demon tear*"],
+				"Level": 80,
+				"Output": "Avernic treads (pe)(et)",
+				"Primary": true,
+				"Priority": 93,
+				"Skills": {
+					"Runecraft": 60
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pr)(et)|~": {
+				"Items": ["Avernic treads", "Primordial boots", "Eternal boots", "Demon tear*"],
+				"Level": 80,
+				"Output": "Avernic treads (pr)(et)",
+				"Primary": true,
+				"Priority": 94,
+				"Skills": {
+					"Runecraft": 60
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (pr)(pe)|~": {
+				"Items": ["Avernic treads", "Primordial boots", "Pegasian boots", "Demon tear*"],
+				"Level": 80,
+				"Output": "Avernic treads (pr)(pe)",
+				"Primary": true,
+				"Priority": 95,
+				"Skills": {
+					"Runecraft": 60
+				},
+				"Not F2P": true
+			},
+			"Create ~|avernic treads (max)|~": {
+				"Items": ["Avernic treads", "Primordial boots", "Pegasian boots", "Eternal boots", "Demon tear*"],
+				"Level": 80,
+				"Output": "Avernic treads (max)",
+				"Primary": true,
+				"Priority": 96,
+				"Skills": {
+					"Runecraft": 60
+				},
 				"Not F2P": true
 			},
 			"Repair a ~|torva full helm|~": {
@@ -49467,6 +50131,13 @@
 				"Priority": 999,
 				"Not F2P": true
 			},
+			"~|Scrambled!|~ Smithing skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["4913-1"],
+				"Level": 35,
+				"Primary": false,
+				"Priority": 999
+			},
 			"~|Family Crest|~ Smithing skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["13109-3"],
@@ -49846,6 +50517,19 @@
 				"Skills": {
 					"Defence": 50
 				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Wear ~|avernic treads|~": {
+				"Items": ["AvernicTreads[+]"],
+				"Level": 80,
+				"Primary": false,
+				"Skills": {
+					"Defence": 80,
+					"Ranged": 80,
+					"Magic": 80
+				},
+				"Priority": 79,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -51392,6 +52076,14 @@
 				"Priority": 999,
 				"Not F2P": true
 			},
+			"~|The Final Dawn|~ Thieving skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["6705-1"],
+				"Level": 66,
+				"Primary": false,
+				"Priority": 999,
+				"NoBoost": true
+			},
 			"~|Desert Treasure II - The Fallen Empire|~ Thieving skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["13870"],
@@ -51417,6 +52109,15 @@
 				"Priority": 2,
 				"Not F2P": true,
 				"NoPet": true
+			},
+			"Chop demon tears from ~|infected root|~": {
+				"Level": 80,
+				"Items": ["Axe[+]"],
+				"Objects": ["Infected root"],
+				"Output": "Infected root",
+				"Primary": true,
+				"Priority": 1,
+				"Not F2P": true
 			},
 			"Participate in ~|Trouble Brewing|~ for Woodcutting xp": {
 				"Category": ["Minigame"],
@@ -53421,6 +54122,18 @@
 				"Items": ["Reagent pouch"],
 				"Not F2P": true
 			},
+			"Obtain a fully upgraded ~|bow string spool|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Bow string spool"],
+				"Not F2P": true
+			},
+			"Obtain a ~|fletching knife|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Fletching knife"],
+				"Not F2P": true
+			},
 			"(Abyssal Sire) Obtain an ~|abyssal orphan|~": {
 				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
 				"Label": "Collection Log",
@@ -54069,6 +54782,43 @@
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Steel ring"],
+				"Not F2P": true
+			},
+			"(Doom of Mokhaiotl) Obtain ~|dom|~": {
+				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Dom"],
+				"Not F2P": true
+			},
+			"(Doom of Mokhaiotl) Obtain ~|avernic treads|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Avernic treads"],
+				"Not F2P": true
+			},
+			"(Doom of Mokhaiotl) Obtain an ~|eye of ayak (uncharged)|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Eye of ayak (uncharged)"],
+				"Not F2P": true
+			},
+			"(Doom of Mokhaiotl) Obtain a ~|mokhaiotl cloth|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Mokhaiotl cloth"],
+				"Not F2P": true
+			},
+			"(Doom of Mokhaiotl) Obtain a ~|mokhaiotl waystone|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Mokhaiotl waystone"],
+				"Not F2P": true
+			},
+			"(Doom of Mokhaiotl) Obtain a ~|demon tear|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Mokhaiotl cloth"],
+				"Monsters": ["Doom of Mokhaiotl"],
 				"Not F2P": true
 			},
 			"(Duke Sucellus) Obtain a ~|baron|~": {
@@ -60422,6 +61172,30 @@
 				"Items": ["Rum (Trouble Brewing)"],
 				"Not F2P": true
 			},
+			"(Vale Totems) Obtain a ~|fletching knife|~": {
+				"Category": ["Collection Log", "Collection Log Minigames"],
+				"Label": "Collection Log",
+				"Items": ["Fletching knife"],
+				"Not F2P": true
+			},
+			"(Vale Totems) Obtain a ~|bow string spool|~": {
+				"Category": ["Collection Log", "Collection Log Minigames"],
+				"Label": "Collection Log",
+				"Items": ["Bow string spool"],
+				"Not F2P": true
+			},
+			"(Vale Totems) Obtain an ~|ent branch|~": {
+				"Category": ["Collection Log", "Collection Log Minigames"],
+				"Label": "Collection Log",
+				"Items": ["Ent branch"],
+				"Not F2P": true
+			},
+			"(Vale Totems) Obtain a ~|greenman mask|~": {
+				"Category": ["Collection Log", "Collection Log Minigames"],
+				"Label": "Collection Log",
+				"Items": ["Greenman mask"],
+				"Not F2P": true
+			},
 			"(Volcanic Mine) Obtain an ~|ash covered tome|~": {
 				"Category": ["Collection Log", "Collection Log Minigames"],
 				"Label": "Collection Log",
@@ -60905,6 +61679,12 @@
 				"Category": ["Collection Log", "Collection Log Other", "Pets"],
 				"Label": "Collection Log",
 				"Items": ["Yami"],
+				"Not F2P": true
+			},
+			"(All Pets) Obtain ~|dom|~": {
+				"Category": ["Collection Log", "Collection Log Other", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Dom"],
 				"Not F2P": true
 			},
 			"(Camdozaal) Obtain a ~|barronite mace|~": {
@@ -62749,6 +63529,30 @@
 				"Items": ["Frozen tear"],
 				"Not F2P": true
 			},
+			"(Slayer) Obtain an ~|earthbound tecpatl|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Earthbound tecpatl"],
+				"Not F2P": true
+			},
+			"(Slayer) Obtain an ~|antler guard|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Antler guard"],
+				"Not F2P": true
+			},
+			"(Slayer) Obtain an ~|alchemist's signet|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Alchemist's signet"],
+				"Not F2P": true
+			},
+			"(Slayer) Obtain a ~|broken antler|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Broken antler"],
+				"Not F2P": true
+			},
 			"(Tormented Demons) Obtain a ~|tormented synapse|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
@@ -64174,6 +64978,17 @@
 				},
 				"Not F2P": true
 			},
+			"Build the ~|landing site|~ near Kastori": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["5423"],
+				"Objects": ["Unbuilt Landing Site"],
+				"Items": ["Quetzal feed", "Limestone brick", "Soft clay"],
+				"Tasks": {
+					"~|Twilight's Promise|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
 			"Unlock the ability to use ~|Preserve|~": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
@@ -64296,6 +65111,29 @@
 				},
 				"Not F2P": true
 			},
+			"Help ~|Viero|~ with his food request": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["5939-1"],
+				"NPCs": ["Viero"],
+				"Items": ["Raw sunlight antelope", "Redberries"],
+				"Not F2P": true
+			},
+			"Help ~|ghost (Bernina)|~ rest in peace": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["5939-6"],
+				"NPCs": ["Ghost (Bernina)", "Jasper", "Bernard"],
+				"Items": ["Ghostspeak amulet", "Tinderbox", "Logs[+]"],
+				"Not F2P": true
+			},
+			"Help unite ~|Fabia|~ with Xilo": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["5168"],
+				"NPCs": ["Fabia", "Xilo"],
+				"Not F2P": true
+			},
 			"Unlock Colosseum bank access with ~|Glory|~": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
@@ -64401,6 +65239,48 @@
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
 				"Items": ["Rite of vile transference"],
+				"Not F2P": true
+			},
+			"Fully upgrade the ~|bow string spool|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Bow string spool"],
+				"Not F2P": true
+			},
+			"Unlock the normal variant of the ~|greenman mask|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Greenman mask", "Leaves"],
+				"Not F2P": true
+			},
+			"Unlock the oak variant of the ~|greenman mask|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Greenman mask", "Oak leaves"],
+				"Not F2P": true
+			},
+			"Unlock the willow variant of the ~|greenman mask|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Greenman mask", "Willow leaves"],
+				"Not F2P": true
+			},
+			"Unlock the maple variant of the ~|greenman mask|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Greenman mask", "Maple leaves"],
+				"Not F2P": true
+			},
+			"Unlock the yew variant of the ~|greenman mask|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Greenman mask", "Yew leaves"],
+				"Not F2P": true
+			},
+			"Unlock the magic variant of the ~|greenman mask|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Greenman mask", "Magic leaves"],
 				"Not F2P": true
 			},
 			"~|STASH#Beginner|~: Gypsy Aris's tent (Varrock)": {
@@ -69294,6 +70174,19 @@
 				},
 				"Not F2P": true
 			},
+			"Magic Wardrobe: ~|Fletching knife|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Fletching knife"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
 			"Magic Wardrobe: ~|Forestry kit|~": {
 				"Category": ["Fill POH"],
 				"Label": "Fill POH",
@@ -70092,6 +70985,19 @@
 				"Label": "Fill POH",
 				"Chunks": ["Player-owned house"],
 				"Items": ["Graceful boots (Varlamore)"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Magic Wardrobe: ~|Greenman mask|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Greenman mask"],
 				"Skills": {
 					"Construction": 42
 				},
@@ -92150,6 +93056,118 @@
 				"Chunks": ["10289"],
 				"Not F2P": true
 			},
+			"~|The Final Dawn|~ 1": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Talk to Servius",
+				"Chunks": ["6705-1"],
+				"Skills": {
+					"Fletching": 52,
+					"Runecraft": 52,
+					"Thieving": 66
+				},
+				"Tasks": {
+					"~|The Heart of Darkness|~ Complete the quest": "Quest",
+					"~|Perilous Moons|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ 2": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Enter the temple, then go downstairs",
+				"Chunks": ["6706-1"],
+				"Tasks": {
+					"~|The Final Dawn|~ 1": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ 3": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Explore the temple basement and defeat the Emissary Enforcer",
+				"Chunks": ["Twilight Temple#Basement"],
+				"Tasks": {
+					"~|The Final Dawn|~ 2": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ 4": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Return to the queen",
+				"Chunks": ["6705-1"],
+				"Tasks": {
+					"~|The Final Dawn|~ 3": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ 5": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Talk to Captain Vibia and break open the window",
+				"Chunks": ["6448"],
+				"Tasks": {
+					"~|The Final Dawn|~ 4": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ 6": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Calm the dog, then search the house and knock out Janus",
+				"Chunks": ["6448"],
+				"Items": ["GusTreat[+]"],
+				"Tasks": {
+					"~|The Final Dawn|~ 5": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ 7": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Talk to Attala in Cam Torum market, then solve the beer puzzle",
+				"Chunks": ["Cam Torum"],
+				"Tasks": {
+					"~|The Final Dawn|~ 6": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ 8": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Talk to Eyatlalli, then defeat the cultist duo",
+				"Chunks": ["Neypotzli"],
+				"Tasks": {
+					"~|The Final Dawn|~ 7": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ 9": {
+				"BaseQuest": "The Final Dawn",
+				"Description": "Enter the Crypt of Tonali, make it through the cavern, and defeat Augur Metzli",
+				"Chunks": ["5167-1"],
+				"Tasks": {
+					"~|The Final Dawn|~ 8": "Quest"
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Final Dawn|~ Complete the quest": {
+				"Tasks": {
+					"~|The Final Dawn|~ 9": "Quest"
+				},
+				"QuestPoints": 3,
+				"XpReward": {
+					"Fletching": 25000,
+					"Runecraft": 25000,
+					"Thieving": 55000
+				},
+				"BaseQuest": "The Final Dawn",
+				"Reward": ["Arkan blade"],
+				"Chunks": ["5167-1"],
+				"Not F2P": true
+			},
 			"~|Fishing Contest|~ 1": {
 				"BaseQuest": "Fishing Contest",
 				"Description": "Talk to either dwarf at the entrance of White wolf tunnel",
@@ -101121,6 +102139,183 @@
 				"Chunks": ["10805"],
 				"Not F2P": true
 			},
+			"~|Scrambled!|~ 1": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Talk to Alan",
+				"NPCs": ["Alan (Scrambled!)"],
+				"Tasks": {
+					"~|Children of the Sun|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 2": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Talk to King, then all 3 of her men",
+				"Chunks": ["4912"],
+				"NPCs": ["King (Tal Teklan)"],
+				"Tasks": {
+					"~|Scrambled!|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 3a1": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Talk to the blacksmith, the repair the whetstone and axe",
+				"Chunks": ["4656-1"],
+				"NPCs": ["Blacksmith (Tal Teklan)"],
+				"Skills": {
+					"Smithing": 35
+				},
+				"Tasks": {
+					"~|Scrambled!|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 3a2": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Return to Acatzin",
+				"Chunks": ["4912"],
+				"NPCs": ["Acatzin"],
+				"Tasks": {
+					"~|Scrambled!|~ 3a1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 3b1": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Talk to Nezketi",
+				"NPCs": ["Nezketi"],
+				"Tasks": {
+					"~|Scrambled!|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 3b2": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Give Nezketi damiana tea",
+				"Items": ["Damiana tea"],
+				"NPCs": ["Nezketi"],
+				"Skills": {
+					"Cooking": 36
+				},
+				"Tasks": {
+					"~|Scrambled!|~ 3b1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 3c1": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Talk to Kauayotl",
+				"NPCs": ["Kauayotl"],
+				"Tasks": {
+					"~|Scrambled!|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 3c2": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Repair Kauayotl's cart",
+				"NPCs": ["Kauayotl"],
+				"Items": ["Saw", "Hammer", "Plank", "Nails[+]"],
+				"Skills": {
+					"Construction": 38
+				},
+				"Tasks": {
+					"~|Scrambled!|~ 3c1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 4": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Return to the temple",
+				"Chunks": ["4913-1"],
+				"Items": ["Saw[+]", "Hammer[+]", "Plank", "Nails[+]"],
+				"Tasks": {
+					"~|Scrambled!|~ 3a2": "Quest",
+					"~|Scrambled!|~ 3b2": "Quest",
+					"~|Scrambled!|~ 3c2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 5a1": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Fetch a large egg from the chicken pen",
+				"Chunks": ["4913-1"],
+				"Tasks": {
+					"~|Scrambled!|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 5a2": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Return to the temple with the large egg",
+				"Chunks": ["4913-1"],
+				"Tasks": {
+					"~|Scrambled!|~ 5a1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 5b1": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Fetch a dragon egg from the dragon nest",
+				"Chunks": ["Dragon Nest"],
+				"Tasks": {
+					"~|Scrambled!|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 5b2": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Return to the temple with the dragon egg",
+				"Chunks": ["4913-1"],
+				"Tasks": {
+					"~|Scrambled!|~ 5b1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 5c1": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Fetch a jaguar egg from the rainforest camp",
+				"Chunks": ["5168-1"],
+				"Tasks": {
+					"~|Scrambled!|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 5c2": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Return to the temple with the jaguar egg",
+				"Chunks": ["4913-1"],
+				"Tasks": {
+					"~|Scrambled!|~ 5c1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ 6": {
+				"BaseQuest": "Scrambled!",
+				"Description": "Return to the temple and solve the puzzle",
+				"Chunks": ["4913-1"],
+				"Tasks": {
+					"~|Scrambled!|~ 5a2": "Quest",
+					"~|Scrambled!|~ 5b2": "Quest",
+					"~|Scrambled!|~ 5c2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Scrambled!|~ Complete the quest": {
+				"Tasks": {
+					"~|Scrambled!|~ 6": "Quest"
+				},
+				"QuestPoints": 1,
+				"XpReward": {
+					"Construction": 5000,
+					"Cooking": 5000,
+					"Smithing": 5000
+				},
+				"BaseQuest": "Scrambled!",
+				"Chunks": ["4913-1"],
+				"Not F2P": true
+			},
 			"~|Sea Slug|~ 1": {
 				"BaseQuest": "Sea Slug",
 				"Description": "Talk to Caroline",
@@ -101303,6 +102498,116 @@
 				"BaseQuest": "Shadow of the Storm",
 				"Reward": ["Darklight"],
 				"Chunks": ["13872"],
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 1": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Read the noticeboard, talk to Ictus, then talk to the concerned couple",
+				"Objects": ["Noticeboard (Shadows of Custodia)"],
+				"Tasks": {
+					"~|Children of the Sun|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 2": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Follow the trail, fish the fabric off the plank, then return to the couple",
+				"Chunks": ["5428"],
+				"Skills": {
+					"Fishing": 45,
+					"Hunter": 36
+				},
+				"Items": ["Fishing rod"],
+				"Tasks": {
+					"~|Shadows of Custodia|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 3": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Follow more of the trail, then enter the cave",
+				"Chunks": ["5172-2", "5428"],
+				"Tasks": {
+					"~|Shadows of Custodia|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 4a1": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Talk to Captain Ariadna",
+				"NPCs": ["Captain Ariadna"],
+				"Tasks": {
+					"~|Shadows of Custodia|~ 3": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 4a2": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Bring the captain the willow longbows",
+				"Items": ["Willow longbow"],
+				"NPCs": ["Captain Ariadna"],
+				"Tasks": {
+					"~|Shadows of Custodia|~ 4a1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 4b": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Reinforce the wall of the house",
+				"Chunks": ["5428"],
+				"Items": ["Hammer[+]", "Maple logs"],
+				"Skills": {
+					"Construction": 41
+				},
+				"Tasks": {
+					"~|Shadows of Custodia|~ 3": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 5": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Talk to the boys upstairs",
+				"Chunks": ["5428"],
+				"Tasks": {
+					"~|Shadows of Custodia|~ 4a2": "Quest",
+					"~|Shadows of Custodia|~ 4b": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 6": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Return to the cave and rescue Antos",
+				"Chunks": ["5172-2", "5428"],
+				"Skills": {
+					"Slayer": 54
+				},
+				"Tasks": {
+					"~|Shadows of Custodia|~ 5": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ 7": {
+				"BaseQuest": "Shadows of Custodia",
+				"Description": "Return to Captain Ariadna",
+				"NPCs": ["Captain Ariadna"],
+				"Tasks": {
+					"~|Shadows of Custodia|~ 6": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Shadows of Custodia|~ Complete the quest": {
+				"Tasks": {
+					"~|Shadows of Custodia|~ 7": "Quest"
+				},
+				"QuestPoints": 2,
+				"XpReward": {
+					"Construction": 3000,
+					"Fishing": 3000,
+					"Hunter": 4000,
+					"Slayer": 10000
+				},
+				"BaseQuest": "Shadows of Custodia",
+				"Chunks": ["5428"],
 				"Not F2P": true
 			},
 			"~|Sheep Herder|~ 1": {
@@ -106392,6 +107697,60 @@
 				"BaseQuest": "Skippy and the Mogres",
 				"Chunks": ["11825-1"],
 				"Not F2P": true
+			},
+			"~|Vale Totems (miniquest)|~ 1": {
+				"BaseQuest": "Vale Totems (miniquest)",
+				"Description": "Talk to Ranulph",
+				"NPCs": ["Ranulph"],
+				"Tasks": {
+					"~|Children of the Sun|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Vale Totems (miniquest)|~ 2": {
+				"BaseQuest": "Vale Totems (miniquest)",
+				"Description": "Build the totem",
+				"Chunks": ["5428"],
+				"Items": ["Oak logs"],
+				"Tasks": {
+					"~|Vale Totems (miniquest)|~ 1": "Quest"
+				},
+				"Skills": {
+					"Fletching": 20
+				},
+				"Not F2P": true
+			},
+			"~|Vale Totems (miniquest)|~ 3": {
+				"BaseQuest": "Vale Totems (miniquest)",
+				"Description": "Carve the totem",
+				"Chunks": ["5428"],
+				"Items": ["Knife"],
+				"Tasks": {
+					"~|Vale Totems (miniquest)|~ 2": "Quest"
+				},
+				"Skills": {
+					"Fletching": 20
+				},
+				"Not F2P": true
+			},
+			"~|Vale Totems (miniquest)|~ 4": {
+				"BaseQuest": "Vale Totems (miniquest)",
+				"Description": "Decorate the totem",
+				"Chunks": ["5428"],
+				"Items": ["Oak logs", "Knife"],
+				"Tasks": {
+					"~|Vale Totems (miniquest)|~ 3": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Vale Totems (miniquest)|~ Complete the quest": {
+				"Tasks": {
+					"~|Vale Totems (miniquest)|~ 4": "Quest"
+				},
+				"QuestPoints": 0,
+				"BaseQuest": "Vale Totems (miniquest)",
+				"Chunks": ["5428"],
+				"Not F2P": true
 			}
 		}
 	},
@@ -106436,6 +107795,47 @@
 				}
 			},
 			"Nickname": "Stranglewood Ritual Site"
+		},
+		"4656": {
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Guard": 3
+					},
+					"NPC": {
+						"Arcuani": 1,
+						"Bard": 3,
+						"Blacksmith (Tal Teklan)": 1,
+						"Chiribaya": 1,
+						"Citizen": 4,
+						"Teicuh": 1,
+						"Xochitl": 1
+					},
+					"Object": {
+						"Anvil": 1,
+						"Furnace": 1,
+						"Oven": 1,
+						"Water pump": 1,
+						"Workbench": 1
+					},
+					"Quest": {
+						"Scrambled!": "step"
+					},
+					"Shop": {
+						"Arcuani's Archery Supplies": true,
+						"Dyes to Die For": true,
+						"Tal Teklan Rune Shop": true
+					},
+					"Spawn": {
+						"Bowl": 1,
+						"Chichilihui rose": 1,
+						"Hammer": 1,
+						"Saw": 1
+					}
+				},
+				"2": {}
+			},
+			"Nickname": "Tal Teklan Dock"
 		},
 		"4659": {
 			"Object": {
@@ -106593,6 +107993,170 @@
 				"Portcullis": 1
 			}
 		},
+		"4910": {
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Black jaguar": 1
+					},
+					"NPC": {
+						"Black warlock": 3,
+						"Felix": 1
+					},
+					"Object": {
+						"Rocks (Tlati Rainforest)": 1,
+						"Tree": 16
+					}
+				},
+				"2": {
+					"Monster": {
+						"Bird": 2
+					},
+					"Object": {
+						"Mahogany tree": 4,
+						"Picnic": 1,
+						"Rocks (Tlati Rainforest)": 1,
+						"Tree": 2
+					}
+				}
+			},
+			"Nickname": "Tlati Picnic Pond"
+		},
+		"4911": {
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Gemstone Crab": 1,
+						"Giant spider": 2
+					},
+					"NPC": {
+						"Black warlock": 1,
+						"Ru Merald": 1
+					},
+					"Object": {
+						"Cave": 1,
+						"Coal rocks": 7,
+						"Copper rocks": 13,
+						"Iron rocks": 10,
+						"Tree": 51
+					}
+				},
+				"2": {
+					"Monster": {
+						"Bird": 1
+					},
+					"Object": {
+						"Teak tree": 3,
+						"Tree": 1
+					}
+				},
+				"3": {
+					
+				}
+			},
+			"Nickname": "Southwest Gemstone Lair"
+		},
+		"4912": {
+			"Monster": {
+				"Guard": 11
+			},
+			"NPC": {
+				"Acatzin": 1,
+				"Achilka": 1,
+				"Banker": 1,
+				"Black warlock": 1,
+				"Child": 2,
+				"Citizen": 9,
+				"Farmer": 1,
+				"Kauayotl": 1,
+				"King (Tal Teklan)": 1,
+				"Molossus": 1,
+				"Nezketi": 1,
+				"Shopkeeper (Tal Teklan)": 1,
+				"Tropical wagtail": 7
+			},
+			"Nickname": "Tal Teklan",
+			"Object": {
+				"Altar": 1,
+				"Bank booth": 1,
+				"Bank deposit box": 1,
+				"Damiana": 2,
+				"Fishing spot (lure, bait)": 1,
+				"Fountain": 1,
+				"Landing Site": 1,
+				"Mahogany tree": 1,
+				"Oven": 1,
+				"Poll booth": 1,
+				"Tree": 19,
+				"Water pump": 1
+			},
+			"Quest": {
+				"Scrambled!": "step"
+			},
+			"Shop": {
+				"Tal Teklan General Store": true,
+				"The King's Inn": true
+			},
+			"Spawn": {
+				"Beer glass": 2,
+				"Bowl": 1,
+				"Bucket": 1,
+				"Egg": 1,
+				"Plank": 2,
+				"Pot": 1
+			}
+		},
+		"4913": {
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Bird": 1,
+						"Chicken": 5,
+						"Gemstone Crab": 1
+					},
+					"NPC": {
+						"Alan (Scrambled!)": 1,
+						"Humphrey Dumphrey": 1,
+						"Jatziri, Teoki of Talos": 1,
+						"Ru Merald": 1
+					},
+					"Object": {
+						"Cave": 1,
+						"Clay rocks": 8,
+						"Fishing spot (big net, harpoon)": 2,
+						"Silver rocks": 9,
+						"Tree": 11,
+						"Water Barrel": 1,
+						"Willow tree": 7
+					},
+					"Quest": {
+						"Scrambled!": "first"
+					},
+					"Spawn": {
+						"Egg": 2
+					}
+				},
+				"2": {}
+			},
+			"Nickname": "Tal Teok"
+		},
+		"4915": {
+			"Sections": {
+				"1": {
+					"Object": {
+						"Dead tree": 6,
+						"Oak tree": 1
+					}
+				},
+				"2": {
+					"Object": {
+						"Dead tree": 1,
+						"Oak tree": 1
+					}
+				}
+			},
+			"Nickname": "Northwest Tempestus"
+		},
 		"4916": {
 			"Sections": {
 				"1": {
@@ -106600,15 +108164,58 @@
 				},
 				"2": {
 					
+				},
+				"3": {
+					"Monster": {
+						"Lynx": 3,
+						"Rabbit": 4,
+						"Stag": 3
+					},
+					"Object": {
+						"Dead tree": 16
+					}
+				},
+				"4": {
+					"Monster": {
+						"Black bear": 1
+					}
 				}
 			},
-			"Nickname": "Stranglewood River Edge"
+			"Nickname": "Custodia Pass Path"
 		},
 		"4917": {
-			"Object": {
-				"Stone chest (The Stranglewood)": 1
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Bat": 5,
+						"Bear Cub": 2,
+						"Grizzly bear": 1
+					},
+					"Object": {
+						"Cave": 1,
+						"Coal rocks": 1,
+						"Dead tree": 3,
+						"Fishing spot (lure, bait)": 4,
+						"Iron rocks": 1,
+						"Rowboat": 1
+					}
+				},
+				"2": {
+					"NPC": {
+						"Border Guard": 3
+					},
+					"Object": {
+						"Cave": 1,
+						"Dead tree": 1
+					}
+				},
+				"3": {
+					"Object": {
+						"Stone chest (The Stranglewood)": 1
+					}
+				}
 			},
-			"Nickname": "Stranglewood River Dock"
+			"Nickname": "Custodia Mountains Lake"
 		},
 		"4918": {
 			"Monster": {
@@ -106965,9 +108572,177 @@
 						"Onion": 6,
 						"Potato": 7
 					}
-				}
+				},
+				"4": {}
 			},
 			"Nickname": "Aldarin Coastal Magics"
+		},
+		"5167": {
+			"Sections": {
+				"1": {
+					"Connect": {
+						"5267": true
+					},
+					"Monster": {
+						"Black jaguar": 2,
+						"Giant spider": 3,
+						"Imp": 1,
+						"Ocelot": 6
+					},
+					"NPC": {
+						"Black warlock": 11,
+						"Fabia": 1,
+						"Tonali Archer": 2,
+						"Tonali Warrior": 4
+					},
+					"Object": {
+						"Fishing spot (small net, bait)": 3,
+						"Magic tree": 7,
+						"Passageway": 1,
+						"Tree": 27
+					},
+					"Quest": {
+						"The Final Dawn": "step"
+					}
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {}
+			},
+			"Nickname": "Tonali Crypt Entrance"
+		},
+		"5168": {
+			"Sections": {
+				"1": {
+					"Connect": {
+						"5267": true
+					},
+					"Monster": {
+						"Bird": 2,
+						"Frog": 6,
+						"Giant spider": 2,
+						"Imp": 1,
+						"Jaguar": 3,
+						"Ocelot": 6
+					},
+					"NPC": {
+						"Black warlock": 5,
+						"Fabia": 1,
+						"Kiyahtla": 1,
+						"Xilo": 1
+					},
+					"Object": {
+						"Dead tree": 5,
+						"Lift Platform": 1,
+						"Tree": 25
+					},
+					"Quest": {
+						"Scrambled!": "step"
+					},
+					"Spawn": {
+						"Bronze axe": 1
+					}
+				},
+				"2": {
+					"Object": {
+						"Cave": 1
+					}
+				},
+				"3": {}
+			},
+			"Nickname": "Central Tlati Rainforest"
+		},
+		"5169": {
+			"Connect": {
+				"5268": true
+			},
+			"Monster": {
+				"Bird": 1,
+				"Carnivorous chinchompa": 6,
+				"Giant spider": 5,
+				"Imp": 1,
+				"Jaguar": 4,
+				"Jaguar cub": 2
+			},
+			"NPC": {
+				"Black warlock": 5
+			},
+			"Nickname": "Rainforest River Crossing",
+			"Object": {
+				"Dead tree": 3,
+				"Log balance (Tlati Rainforest)": 2,
+				"Teak tree": 3,
+				"Tree": 32
+			}
+		},
+		"5171": {
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Rabbit": 1
+					},
+					"Spawn": {
+						"Rope": 1,
+						"Tinderbox": 1
+					}
+				},
+				"2": {},
+				"3": {}
+			},
+			"Nickname": "Northeast Tempestus"
+		},
+		"5172": {
+			"Sections": {
+				"1": {
+					"Connect": {
+						"5527": true
+					},
+					"Monster": {
+						"Bear Cub": 2,
+						"Giant bat": 4,
+						"Grizzly bear": 2,
+						"Guard": 3,
+						"Rabbit": 7,
+						"Wolf": 3
+					},
+					"Object": {
+						"Cave": 1,
+						"Dead tree": 17,
+						"Tree": 1
+					},
+					"Spawn": {
+						"Fishing rod": 1
+					}
+				},
+				"2": {
+					"Connect": {
+						"5527": true
+					},
+					"Object": {
+						"Cave": 1,
+						"Dead tree": 2,
+						"Fishing spot (lure, bait)": 2,
+						"Rowboat": 1
+					},
+					"Quest": {
+						"Shadows of Custodia": "step"
+					}
+				}
+			},
+			"Nickname": "Custodia Pass Bridge"
+		},
+		"5173": {
+			"Monster": {
+				"Giant bat": 4
+			},
+			"Nickname": "Custodia Pass Mines",
+			"Object": {
+				"Coal rocks": 2,
+				"Iron rocks": 7,
+				"Mithril rocks": 6,
+				"Yew tree": 4
+			}
 		},
 		"5174": {
 			"Sections": {
@@ -107201,6 +108976,59 @@
 				"STASH (medium)": 1
 			}
 		},
+		"5267": {
+			"Connect": {
+				"5167": true,
+				"5168": true
+			},
+			"Monster": {
+				"Demonic larva": 1,
+				"Demonic magic larva": 1,
+				"Demonic melee larva": 1,
+				"Demonic range larva": 1,
+				"Doom of Mokhaiotl": 1,
+				"Earthen Nagua": 25,
+				"Giant Rock Crab": 9,
+				"Grimy Lizard": 15,
+				"Moss giant": 8,
+				"Rockslug": 6,
+				"Skeleton#Armed": 13
+			},
+			"Name": "Tonali Cavern",
+			"NPC": {
+				"Moonlight moth": 18,
+				"Nenetl, Teoki of Ranul": 1,
+				"Tonali Archer": 5,
+				"Tonali Warrior": 3,
+				"Xopanatl, Teoki of Ralos": 1
+			},
+			"Object": {
+				"Ancient fountainhead": 14,
+				"Infected root": 6,
+				"Lift Platform": 1,
+				"Log balance (Tonali Cavern)": 1,
+				"Scoreboard": 1,
+				"Statue": 2,
+				"Stepping stone (Tonali Cavern)": 1
+			}
+		},
+		"5268": {
+			"Connect": {
+				"5169": true
+			},
+			"Monster": {
+				"Baby blue dragon": 2,
+				"Baby red dragon": 2,
+				"Blue dragon": 5,
+				"Red dragon": 5
+			},
+			"Name": "Dragon Nest",
+			"Spawn": {
+				"Blue dragon scale": 4,
+				"Burnt bones": 16,
+				"Coins": 15
+			}
+		},
 		"5275": {
 			"Connect": {
 				"5175": true
@@ -107360,7 +109188,7 @@
 						"Antonius": 1,
 						"Banker": 2,
 						"Bartender": 1,
-						"Citizen": 7,
+						"Citizen (Aldarin)": 7,
 						"Clanila": 1,
 						"Ercos": 1,
 						"Farmer": 2,
@@ -107446,7 +109274,7 @@
 			},
 			"NPC": {
 				"Child": 1,
-				"Citizen": 11,
+				"Citizen (Aldarin)": 11,
 				"Copper longtail": 5,
 				"Farmer": 2,
 				"Techiti": 1,
@@ -107478,6 +109306,58 @@
 				"Sunbeam ale": 1
 			}
 		},
+		"5423": {
+			"Connect": {
+				"5523": true
+			},
+			"Monster": {
+				"Guard": 6,
+				"Imp": 3
+			},
+			"NPC": {
+				"Ameyalli": 1,
+				"Child": 2,
+				"Chiribaya": 1,
+				"Citizen (Kastori)": 9,
+				"Citlalli": 1,
+				"Dairy Buffalo": 1,
+				"Ecatl": 1,
+				"Farmer": 6,
+				"Fisher": 1,
+				"Master Farmer": 4,
+				"Molossus": 1,
+				"Shopkeeper (Kastori)": 1,
+				"Sulisal": 1,
+				"Tool Leprechaun": 2,
+				"Tziuhtla": 1
+			},
+			"Nickname": "Kastori",
+			"Object": {
+				"Calquat patch": 1,
+				"Fire": 1,
+				"Flower Patch": 1,
+				"Fruit Tree Patch": 1,
+				"Oven": 2,
+				"Sweetcorn": 214,
+				"Tree": 9,
+				"Unbuilt Landing Site": 1,
+				"Well": 1
+			},
+			"Shop": {
+				"Farming Supplies": true,
+				"Kastori General Store": true,
+				"Kastori Farming Supplies": true,
+				"Sulisal's Superb Fishing Store": true
+			},
+			"Spawn": {
+				"Bucket": 1,
+				"Chocolate bar": 3,
+				"Cooked sweetcorn": 1,
+				"Cup of tea": 1,
+				"Fishing bait": 1,
+				"Tinderbox": 1
+			}
+		},
 		"5424": {
 			"Sections": {
 				"1": {
@@ -107490,8 +109370,37 @@
 						"Mind rune": 6
 					}
 				},
-				"2": {
-					
+				"2": {},
+				"3": {
+					"Monster": {
+						"Gemstone Crab": 1,
+						"Imp": 1
+					},
+					"NPC": {
+						"Achilka": 1,
+						"Black warlock": 1,
+						"Ru Merald": 1
+					},
+					"Object": {
+						"Adamantite rocks": 4,
+						"Cave": 1,
+						"Coal rocks": 4,
+						"Gold rocks": 5,
+						"Iron rocks": 7,
+						"Mithril rocks": 4,
+						"Statue (Ates)": 1,
+						"Tree": 7
+					}
+				},
+				"4": {
+					"NPC": {
+						"Crimson swift": 3
+					}
+				},
+				"5": {
+					"Object": {
+						"Tree": 2
+					}
 				}
 			},
 			"Nickname": "River Varla Fork"
@@ -107507,11 +109416,193 @@
 						"Staff": 1
 					}
 				},
-				"2": {
-					
+				"2": {},
+				"3": {
+					"Monster": {
+						"Bear Cub": 1,
+						"Black unicorn": 3,
+						"Grizzly bear": 1,
+						"Imp": 4
+					},
+					"NPC": {
+						"Black warlock": 2,
+						"Crimson swift": 3
+					},
+					"Object": {
+						"Dead tree": 57,
+						"Teak tree": 4,
+						"Tree": 13
+					}
 				}
 			},
 			"Nickname": "Varla Magic Grove"
+		},
+		"5426": {
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Giant bat": 5,
+						"Giant spider": 9,
+						"Imp": 4,
+						"Wolf": 5
+					},
+					"NPC": {
+						"Achilka": 1
+					},
+					"Object": {
+						"Dead tree": 129,
+						"Magic tree": 3
+					},
+					"Spawn": {
+						"Iron dagger": 1
+					}
+				},
+				"2": {
+					"Object": {
+						"Dead tree": 2
+					}
+				},
+				"3": {},
+				"4": {}
+			},
+			"Nickname": "Gloomthorn Trail"
+		},
+		"5427": {
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Rabbit": 2
+					},
+					"NPC": {
+						"Aub": 1,
+						"Bank buffalo": 1,
+						"Bartender (Nemus Retreat)": 1,
+						"Chiribaya": 1,
+						"Citizen": 3,
+						"Friendly Forester": 1,
+						"Mountain Guide": 1,
+						"Taz": 1,
+						"Tool Leprechaun": 1,
+						"Tourist": 1
+					},
+					"Object": {
+						"Beautiful log": 1,
+						"Beautiful rock": 2,
+						"Beautiful tree stump": 2,
+						"Broken wall (Nemus Retreat)": 3,
+						"Dead tree": 14,
+						"Fire": 1,
+						"Fishing spot (lure, bait)": 3,
+						"Flax": 17,
+						"Log balance (Auburn Valley)": 2,
+						"Magic tree": 2,
+						"Maple tree": 8,
+						"Oak tree": 5,
+						"Offering site": 2,
+						"Oven": 1,
+						"Rocks (Nemus Retreat)": 1,
+						"Spinning wheel": 1,
+						"Statue (Ates)": 1,
+						"Stepping stone (Nemus Retreat)": 2,
+						"Totem site": 2,
+						"Tree patch": 1,
+						"Tunnel (Nemus Retreat)": 2,
+						"Water pump": 1,
+						"Willow tree": 9,
+						"Yew tree": 7
+					},
+					"Shop": {
+						"Farming Supplies": true,
+						"Forestry Shop": true,
+						"Nemus Retreat (pub)": true
+					},
+					"Spawn": {
+						"Beer": 1,
+						"Knife": 1
+					}
+				},
+				"2": {
+					"Object": {
+						"Rocks (Nemus Retreat)": 1,
+						"Willow tree": 2
+					}
+				}
+			},
+			"Nickname": "Nemus Retreat"
+		},
+		"5428": {
+			"Monster": {
+				"Guard": 8,
+				"Rabbit": 1
+			},
+			"NPC": {
+				"Aemilia": 1,
+				"Bartender (Auburnvale)": 1,
+				"Captain Ariadna": 1,
+				"Child": 2,
+				"Chouani": 1,
+				"Citizen": 4,
+				"Copper longertail": 5,
+				"Francis": 1,
+				"Isadora": 1,
+				"Lunami": 1,
+				"Marcus": 1,
+				"Molossus": 1,
+				"Ranulph": 1,
+				"Ruby harvest": 6,
+				"Sawmill Operator": 1,
+				"Shopkeeper (Auburnvale)": 1,
+				"Wild kebbit": 4
+			},
+			"Nickname": "Auburnvale West",
+			"Object": {
+				"Anvil": 1,
+				"Beautiful log": 2,
+				"Beautiful rock": 2,
+				"Beautiful tree stump": 2,
+				"Boulder": 2,
+				"Dead tree": 12,
+				"Furnace": 1,
+				"Loom": 1,
+				"Maple tree": 32,
+				"Noticeboard (Shadows of Custodia)": 1,
+				"Oak tree": 2,
+				"Offering site": 2,
+				"Oven": 2,
+				"Sawmill": 1,
+				"Totem site": 2,
+				"Water pump": 1
+			},
+			"Quest": {
+				"Shadows of Custodia": "first",
+				"Vale Totems (miniquest)": "first"
+			},
+			"Shop": {
+				"Auburnvale General Store": true,
+				"Construction supplies": true,
+				"Lunami's Axe Shop": true,
+				"The Auburn Pub": true,
+				"Vale Research Exchange": true
+			},
+			"Spawn": {
+				"Beer glass": 1,
+				"Cider": 1,
+				"Hammer": 2,
+				"Iron axe": 1,
+				"Jug": 1,
+				"Knife": 1,
+				"Needle": 1
+			}
+		},
+		"5429": {
+			"NPC": {
+				"Wild kebbit": 4
+			},
+			"Nickname": "Auburnvale Coast",
+			"Object": {
+				"Boulder": 4,
+				"Dead tree": 1
+			}
 		},
 		"5430": {
 			"Sections": {
@@ -107738,6 +109829,37 @@
 		"5522": {
 			"Name": "Alchemical Society"
 		},
+		"5523": {
+			"Connect": {
+				"5423": true
+			},
+			"Monster": {
+				"Imp": 4
+			},
+			"Name": "Imp Basement"
+		},
+		"5527": {
+			"Connect": {
+				"5172": true
+			},
+			"Monster": {
+				"Ancient Zygomite": 9,
+				"Elder custodian stalker": 20,
+				"Juvenile custodian stalker": 10,
+				"Mature custodian stalker": 18
+			},
+			"Name": "Stalker Den",
+			"Object": {
+				"Cave": 4,
+				"Fishing spot (lure, bait)": 2,
+				"Rope (Stalker Den)": 1,
+				"Stepping stone (Stalker Den)": 1
+			},
+			"Spawn": {
+				"Noose wand": 1,
+				"On migration patterns": 1
+			}
+		},
 		"5530": {
 			"Spawn": {
 				"Burnt bones": 1,
@@ -107816,7 +109938,7 @@
 					},
 					"NPC": {
 						"Adala": 1,
-						"Citizen": 1,
+						"Citizen (Aldarin)": 1,
 						"Head Butler": 1,
 						"Patzi": 1
 					},
@@ -107880,7 +110002,7 @@
 						"Antonia": 1,
 						"Child": 2,
 						"Chiribaya": 1,
-						"Citizen": 7,
+						"Citizen (Aldarin)": 7,
 						"Faustus": 1,
 						"Fisher": 1,
 						"Sailor": 2,
@@ -107895,7 +110017,7 @@
 						"Oak tree": 1,
 						"Oven": 1,
 						"Portal": 1,
-						"Statue of Ates": 1,
+						"Statue (Ates)": 1,
 						"Tree": 13,
 						"Well": 1,
 						"Willow tree": 5,
@@ -108023,7 +110145,7 @@
 				},
 				"2": {
 					"Object": {
-						"Statue of Ates": 1
+						"Statue (Ates)": 1
 					}
 				},
 				"3": {
@@ -108050,6 +110172,7 @@
 				},
 				"3": {
 					"Monster": {
+						"Giant spider": 2,
 						"Icefiend": 3,
 						"White jaguar": 1
 					},
@@ -108083,9 +110206,75 @@
 					"Monster": {
 						"Icefiend": 2
 					}
+				},
+				"3": {
+					"Monster": {
+						"Rabbit": 3
+					},
+					"NPC": {
+						"Diana": 1,
+						"Dominicus, Teoki of Ranul": 1,
+						"Litlihui, Teoki of Ralos": 1,
+						"Ruby harvest": 3
+					},
+					"Object": {
+						"Beautiful log": 3,
+						"Beautiful rock": 2,
+						"Beautiful tree stump": 2,
+						"Fairy ring": 1,
+						"Fire": 1,
+						"Magic tree": 2,
+						"Maple tree": 9,
+						"Offering site": 2,
+						"Totem site": 2,
+						"Yew tree": 3
+					},
+					"Spawn": {
+						"Jug": 1
+					}
 				}
 			},
-			"Nickname": "Mons Gratia North"
+			"Nickname": "Auburn Valley Stump"
+		},
+		"5684": {
+			"Monster": {
+				"Guard": 7
+			},
+			"NPC": {
+				"Banker": 4,
+				"Citizen": 8,
+				"Ruby harvest": 2,
+				"Sebamo": 1,
+				"Tool Leprechaun": 1
+			},
+			"Nickname": "Auburnvale East",
+			"Object": {
+				"Bank booth": 4,
+				"Bank Deposit Box": 1,
+				"Beautiful log": 2,
+				"Beautiful rock": 2,
+				"Beautiful tree stump": 2,
+				"Belladonna patch": 1,
+				"Dead tree": 8,
+				"Fishing spot (lure, bait)": 2,
+				"Landing Site": 1,
+				"Log balance (Auburn Valley)": 2,
+				"Maple tree": 14,
+				"Offering site": 1,
+				"Oven": 2,
+				"Poll booth": 1,
+				"Totem site": 1,
+				"Water pump": 1
+			},
+			"Shop": {
+				"Sebamo's Sublime Staffs": true
+			},
+			"Spawn": {
+				"Bucket": 1,
+				"Knife": 1,
+				"Letter": 1,
+				"Potato": 1
+			}
 		},
 		"5686": {
 			"Sections": {
@@ -108522,7 +110711,7 @@
 					"NPC": {
 						"Antonia": 1,
 						"Arnkel": 1,
-						"Citizen (Varlamore)": 6,
+						"Citizen (Civitas illa Fortis)": 6,
 						"Fisher": 4,
 						"Inga": 1,
 						"Molossus": 1,
@@ -108668,8 +110857,9 @@
 						"Banker": 2,
 						"Bartender": 1,
 						"Chiribaya": 1,
-						"Citizen (Varlamore)": 6,
+						"Citizen (Civitas illa Fortis)": 6,
 						"Master Farmer": 1,
+						"Mountain Guide": 1,
 						"Shopkeeper": 1,
 						"Worker": 1
 					},
@@ -108729,6 +110919,7 @@
 						"Manauia": 1,
 						"Seer": 1,
 						"Taala": 1,
+						"Viero": 1,
 						"Worker": 2
 					},
 					"Object": {
@@ -108736,7 +110927,7 @@
 						"Chain": 1,
 						"Scoreboard": 1,
 						"Slope": 1,
-						"Statue of Ates": 1
+						"Statue (Ates)": 1
 					},
 					"Spawn": {
 						"Bronze pickaxe": 1,
@@ -108747,19 +110938,51 @@
 					"Monster": {
 						"Rabbit": 1,
 						"Wolf": 4
+					},
+					"Object": {
+						"Rocks (The Darkfrost)": 1
 					}
 				},
-				"3": {
-					
+				"3": {},
+				"4": {},
+				"5": {
+					"Monster": {
+						"Rabbit": 1
+					},
+					"NPC": {
+						"Ruby harvest": 1
+					},
+					"Object": {
+						"Rocks (The Darkfrost)": 1
+					}
 				},
-				"4": {
-					
-				}
+				"6": {
+					"Monster": {
+						"Stag": 1
+					},
+					"NPC": {
+						"Ghost (Bernina)": 1,
+						"Ruby harvest": 1
+					}
+				},
+				"7": {}
 			},
 			"Nickname": "Darkfrost Peak"
 		},
 		"5940": {
-			"Nickname": "Redwood Forest Edge"
+			"Monster": {
+				"Fox": 2,
+				"Rabbit": 4,
+				"Stag": 1
+			},
+			"NPC": {
+				"Adrinus": 1
+			},
+			"Nickname": "Auburn Valley Path",
+			"Object": {
+				"Offering site": 1,
+				"Totem site": 1
+			}
 		},
 		"5941": {
 			"Monster": {
@@ -109258,7 +111481,7 @@
 				"Agelus": 1,
 				"Alba": 1,
 				"Alpaca": 7,
-				"Citizen (Varlamore)": 4,
+				"Citizen (Civitas illa Fortis)": 4,
 				"Dairy Buffalo": 1,
 				"Farmer (Varlamore)": 3,
 				"Harminia": 1,
@@ -109340,6 +111563,9 @@
 				"1": {
 					"Monster": {
 						"White wolf": 6
+					},
+					"NPC": {
+						"Bernard": 1
 					}
 				},
 				"2": {
@@ -109348,6 +111574,10 @@
 					},
 					"Monster": {
 						"White wolf": 6
+					},
+					"Object": {
+						"Rocks (The Proudspire, lower)": 1,
+						"Rocks (The Proudspire, upper)": 2
 					}
 				},
 				"3": {
@@ -109366,7 +111596,9 @@
 					
 				},
 				"8": {
-					
+					"Object": {
+						"Rocks (The Proudspire, lower)": 1
+					}
 				}
 			},
 			"Nickname": "The Proudspire"
@@ -109375,6 +111607,7 @@
 			"Sections": {
 				"1": {
 					"Monster": {
+						"Lynx": 3,
 						"Rabbit": 3
 					},
 					"NPC": {
@@ -109399,13 +111632,24 @@
 						"Seaweed": 14
 					}
 				},
-				"2": {
-					
-				}
+				"2": {}
 			},
 			"Nickname": "Shipwreck Cove"
 		},
 		"6196": {
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Lynx": 1
+					}
+				},
+				"2": {},
+				"3": {
+					"Object": {
+						"Fishing spot (small net, bait)": 1
+					}
+				}
+			},
 			"Nickname": "Shipwreck Cove Coast"
 		},
 		"6197": {
@@ -109939,7 +112183,7 @@
 			"Nickname": "Avium Savannah North",
 			"NPC": {
 				"Child": 2,
-				"Citizen (Varlamore)": 3,
+				"Citizen (Civitas illa Fortis)": 3,
 				"Farmer (Varlamore)": 4,
 				"Master Farmer": 1,
 				"Sunlight Moth": 15
@@ -109982,7 +112226,7 @@
 				"Banker": 4,
 				"Caius": 1,
 				"Child": 2,
-				"Citizen (Varlamore)": 12,
+				"Citizen (Civitas illa Fortis)": 12,
 				"Floria": 1,
 				"Molossus": 1,
 				"Oli": 1,
@@ -110001,6 +112245,9 @@
 				"Tree": 1,
 				"Water pump": 1,
 				"Wheat": 221
+			},
+			"Quest": {
+				"The Final Dawn": "step"
 			},
 			"Shop": {
 				"Floria's Fashion": true
@@ -110125,6 +112372,7 @@
 					},
 					"NPC": {
 						"Izel": 1,
+						"Jasper": 1,
 						"Salius": 1,
 						"Salvager": 7,
 						"Shopkeeper": 1
@@ -110858,7 +113106,7 @@
 			"Nickname": "Outer Fortis Farms",
 			"NPC": {
 				"Atza": 1,
-				"Citizen (Varlamore)": 13,
+				"Citizen (Civitas illa Fortis)": 13,
 				"Farmer (Varlamore)": 4,
 				"Master Farmer": 1,
 				"Molossus": 1,
@@ -110908,7 +113156,7 @@
 						"Baker": 1,
 						"Bartender": 1,
 						"Child": 3,
-						"Citizen (Varlamore)": 28,
+						"Citizen (Civitas illa Fortis)": 28,
 						"Cobado": 1,
 						"Estate agent": 1,
 						"Fur Merchant": 1,
@@ -111004,7 +113252,7 @@
 					},
 					"NPC": {
 						"Academic": 6,
-						"Citizen (Varlamore)": 10,
+						"Citizen (Civitas illa Fortis)": 10,
 						"Curator Herminius": 1,
 						"Ennius Tullus": 1,
 						"Furia Tullus": 1,
@@ -111041,6 +113289,7 @@
 					},
 					"Quest": {
 						"Ethically Acquired Antiquities": "first",
+						"The Final Dawn": "first",
 						"The Heart of Darkness": "step",
 						"Twilight's Promise": "first"
 					},
@@ -111074,6 +113323,7 @@
 						"hard": 1
 					},
 					"Connect": {
+						"6805": true,
 						"6806": true
 					},
 					"Monster": {
@@ -111092,6 +113342,7 @@
 						"Water pump": 1
 					},
 					"Quest": {
+						"The Final Dawn": "step",
 						"The Heart of Darkness": "step"
 					},
 					"Spawn": {
@@ -111102,7 +113353,7 @@
 				},
 				"2": {
 					"Object": {
-						"Statue of Ates": 1
+						"Statue (Ates)": 1
 					}
 				}
 			},
@@ -111621,6 +113872,21 @@
 			},
 			"Name": "Fortis Crypt"
 		},
+		"6805": {
+			"Connect": {
+				"6706": true
+			},
+			"Monster": {
+				"Emissary Acolyte": 6,
+				"Emissary Ascended": 2,
+				"Emissary Chosen": 7
+			},
+			"Name": "Twilight Temple#Basement",
+			"Object": {
+				"Altar": 1,
+				"Oven": 2
+			}
+		},
 		"6806": {
 			"Name": "Ruins of Tapoyauik"
 		},
@@ -111785,7 +114051,7 @@
 						"Sand Crab": 4
 					},
 					"NPC": {
-						"Citizen (Varlamore)": 8,
+						"Citizen (Civitas illa Fortis)": 8,
 						"Farmer (Varlamore)": 2,
 						"Fisher": 1,
 						"Master Farmer": 2,
@@ -111823,7 +114089,7 @@
 				},
 				"3": {
 					"NPC": {
-						"Citizen (Varlamore)": 1
+						"Citizen (Civitas illa Fortis)": 1
 					}
 				}
 			},
@@ -111843,7 +114109,7 @@
 						"Artima": 1,
 						"Banker": 4,
 						"Child": 2,
-						"Citizen (Varlamore)": 26,
+						"Citizen (Civitas illa Fortis)": 26,
 						"Emelio": 1,
 						"Fisher": 2,
 						"Sailor": 8,
@@ -111914,7 +114180,7 @@
 						"Thief (Varlamore)": 6
 					},
 					"NPC": {
-						"Citizen (Varlamore)": 2,
+						"Citizen (Civitas illa Fortis)": 2,
 						"Fisher": 2,
 						"Sailor": 2,
 						"Tourist": 1,
@@ -111946,7 +114212,7 @@
 						"Seagull": 7
 					},
 					"NPC": {
-						"Citizen (Varlamore)": 1,
+						"Citizen (Civitas illa Fortis)": 1,
 						"Fisher": 1,
 						"Molossus": 1,
 						"Sailor": 4,
@@ -130917,19 +133183,27 @@
 			"Sections": {
 				"1": {
 					"Monster": {
-						"Billy Goat": 5,
-						"Goat": 5
+						"Billy Goat": 3,
+						"Chicken": 4,
+						"Goat": 4
+					},
+					"NPC": {
+						"Faaid": 1
 					},
 					"Object": {
+						"Anvil": 1,
+						"Clay Oven": 1,
 						"Fishing spot (cage, harpoon)": 3,
-						"Kharidian cactus (Healthy)": 36
+						"Kharidian cactus (Healthy)": 10,
+						"Loom": 1,
+						"Spinning wheel": 1
 					}
 				},
 				"2": {
 
 				}
 			},
-			"Nickname": "South Unkah Ruins"
+			"Nickname": "Menaphos West Gate"
 		},
 		"12588": {
 			"Sections": {
@@ -131182,7 +133456,6 @@
 					"Object": {
 						"Barrel (beer)": 1,
 						"Dead tree": 9,
-						"Fire": 1,
 						"Impling spawn#all-tier": 1,
 						"Oak tree": 8,
 						"Swamp bubbles": 2,
@@ -132147,24 +134420,17 @@
 			"Name": "Iorwerth Dungeon"
 		},
 		"12843": {
-			"Sections": {
-				"1": {
-					"NPC": {
-						"Monkey": 1,
-						"Rug Merchant": 1
-					},
-					"Object": {
-						"Crate": 1
-					},
-					"Clue": {
-						"master": 1
-					}
-				},
-				"2": {
-
-				}
+			"NPC": {
+				"Monkey": 1,
+				"Rug Merchant": 1
 			},
-			"Nickname": "Menaphos"
+			"Nickname": "Menaphos",
+			"Object": {
+				"Crate": 1
+			},
+			"Clue": {
+				"master": 1
+			}
 		},
 		"12844": {
 			"Monster": {
@@ -132174,7 +134440,7 @@
 			},
 			"Nickname": "Menaphos Desert",
 			"Object": {
-				"Banana Tree": 4,
+				"Banana Tree#Empty": 4,
 				"Kharidian cactus (Healthy)": 5
 			},
 			"Clue": {
@@ -133739,7 +136005,6 @@
 					},
 					"Object": {
 						"Altar": 1,
-						"Banana Tree": 18,
 						"Boxes": 8,
 						"Broken logs": 1,
 						"Centre piece": 1,
@@ -133793,7 +136058,7 @@
 						"Wanderer": 1
 					},
 					"Object": {
-						"Banana Tree": 8,
+						"Banana Tree#Empty": 8,
 						"Fire": 1,
 						"Gold rocks": 5,
 						"Kharidian cactus (Healthy)": 2,
@@ -133816,7 +136081,7 @@
 			},
 			"Nickname": "Elid South Bridge",
 			"Object": {
-				"Banana Tree": 5
+				"Banana Tree#Empty": 5
 			}
 		},
 		"13102": {
@@ -136176,7 +138441,6 @@
 			"Nickname": "Nardah",
 			"Object": {
 				"Anvil": 1,
-				"Banana Tree": 5,
 				"Bank Deposit Box": 1,
 				"Bank booth": 4,
 				"Boxes": 11,
@@ -140071,6 +142335,7 @@
 				"Agitator": 1,
 				"Alembic": 1,
 				"Bank Chest": 1,
+				"Chest (alchemist's signet)": 1,
 				"Conveyor belt": 1,
 				"Hopper": 1,
 				"Lab books": 1,
@@ -140688,6 +142953,7 @@
 				"Water pump": 6
 			},
 			"Quest": {
+				"The Final Dawn": "step",
 				"Perilous Moons": "step"
 			},
 			"Shop": {
@@ -141610,6 +143876,25 @@
 				"Dwarf": 9,
 				"Ticket dwarf": 1,
 				"Ticket goblin": 1
+			}
+		},
+		"Dragon Nest": {
+			"Connect": {
+				"5169": true
+			},
+			"Monster": {
+				"Baby blue dragon": 2,
+				"Baby red dragon": 2,
+				"Blue dragon": 5,
+				"Red dragon": 5
+			},
+			"Quest": {
+				"Scrambled!": "step"
+			},
+			"Spawn": {
+				"Blue dragon scale": 4,
+				"Burnt bones": 16,
+				"Coins": 15
 			}
 		},
 		"Draynor Sewers": {
@@ -142698,6 +144983,14 @@
 			},
 			"Quest": {
 				"The Fremennik Isles": "step"
+			}
+		},
+		"Imp Basement": {
+			"Connect": {
+				"5423": true
+			},
+			"Monster": {
+				"Imp": 4
 			}
 		},
 		"Inferno": {
@@ -144152,6 +146445,7 @@
 				"Supply crates": 3
 			},
 			"Quest": {
+				"The Final Dawn": "step",
 				"Perilous Moons": "step"
 			},
 			"Spawn": {
@@ -145362,6 +147656,27 @@
 				"A Porcine of Interest": "step"
 			}
 		},
+		"Stalker Den": {
+			"Connect": {
+				"5172": true
+			},
+			"Monster": {
+				"Ancient Zygomite": 9,
+				"Elder custodian stalker": 20,
+				"Juvenile custodian stalker": 10,
+				"Mature custodian stalker": 18
+			},
+			"Object": {
+				"Cave": 4,
+				"Fishing spot (lure, bait)": 2,
+				"Rope (Stalker Den)": 1,
+				"Stepping stone (Stalker Den)": 1
+			},
+			"Spawn": {
+				"Noose wand": 1,
+				"On migration patterns": 1
+			}
+		},
 		"Stronghold Slayer Cave": {
 			"Connect": {
 				"9525": true
@@ -145908,6 +148223,39 @@
 				"Into the Tombs": "step"
 			}
 		},
+		"Tonali Cavern": {
+			"Connect": {
+				"5167": true,
+				"5168": true
+			},
+			"Monster": {
+				"Demonic larva": 1,
+				"Doom of Mokhaiotl": 1,
+				"Earthen Nagua": 25,
+				"Giant Rock Crab": 9,
+				"Grimy Lizard": 15,
+				"Moss giant": 8,
+				"Rockslug": 6,
+				"Skeleton#Armed": 13
+			},
+			"NPC": {
+				"Moonlight moth": 18,
+				"Nenetl, Teoki of Ranul": 1,
+				"Tonali Archer": 5,
+				"Tonali Warrior": 3,
+				"Xopanatl, Teoki of Ralos": 1
+			},
+			"Object": {
+				"Ancient fountainhead": 14,
+				"Infected root": 6,
+				"Lift Platform": 1,
+				"Log balance (Tonali Cavern)": 1,
+				"Pillar (Tonali Cavern)": 1,
+				"Scoreboard": 1,
+				"Statue": 2,
+				"Stepping stone (Tonali Cavern)": 1
+			}
+		},
 		"Tower of Life#Basement": {
 			"Connect": {
 				"10546": true
@@ -146056,6 +148404,23 @@
 			"Object": {
 				"Portal": 1,
 				"Stairs": 1
+			}
+		},
+		"Twilight Temple#Basement": {
+			"Connect": {
+				"6706": true
+			},
+			"Monster": {
+				"Emissary Acolyte": 6,
+				"Emissary Ascended": 2,
+				"Emissary Chosen": 7
+			},
+			"Object": {
+				"Altar": 1,
+				"Oven": 2
+			},
+			"Quest": {
+				"The Final Dawn": "step"
 			}
 		},
 		"Underground Pass": {
@@ -147324,7 +149689,7 @@
 			"X Marks the Spot 3[+]": ["12338-1", "12339"],
 			"ArdyHard9[+]": ["10545", "10288-1", "10036-2"],
 			"ShantayChunks[+]": ["13104", "12588-1"],
-			"DesertChunks[+]": ["12587-1", "12857", "12588-1", "12588-2", "12589", "12590-1", "12590-2", "12590-3", "12591", "12843-1", "12843-2", "12844", "12845-1", "12845-2", "12846-1", "12846-2", "12846-3", "12847", "12848", "13099-1", "13098-1", "13098-2", "13099-2", "13100-1", "13100-2", "13101", "13102-1", "13102-2", "13102-3", "13102-4", "13102-5", "13103", "13104", "13354-1", "13354-2", "13355", "13356-1", "13356-2", "13357-1", "13357-2", "13358-1", "13358-2", "13359-1", "13359-2", "13359-3", "13360", "13611", "13612-1", "13612-2", "13613", "13614", "13615", "13616", "13617-2", "13869", "13870", "13871", "13872", "13873-2"],
+			"DesertChunks[+]": ["12587-1", "12857", "12588-1", "12588-2", "12589", "12590-1", "12590-2", "12590-3", "12591", "12843", "12844", "12845-1", "12845-2", "12846-1", "12846-2", "12846-3", "12847", "12848", "13099-1", "13098-1", "13098-2", "13099-2", "13100-1", "13100-2", "13101", "13102-1", "13102-2", "13102-3", "13102-4", "13102-5", "13103", "13104", "13354-1", "13354-2", "13355", "13356-1", "13356-2", "13357-1", "13357-2", "13358-1", "13358-2", "13359-1", "13359-2", "13359-3", "13360", "13611", "13612-1", "13612-2", "13613", "13614", "13615", "13616", "13617-2", "13869", "13870", "13871", "13872", "13873-2"],
 			"FaladorChunks[+]": ["11827", "11828-1", "11829-1", "12084-1", "12084-2"],
 			"RockCrabChunks[+]": ["10042-1", "10554", "10810-1"],
 			"FremennikEasy10[+]": ["10296", "10552-1", "10808-1", "10809-1"],
@@ -147461,7 +149826,7 @@
 			"GoblinVillageWall[+]": ["11575-1", "11575-2"],
 			"NatureGrottoStone[+]": ["13619-1", "13619-2"],
 			"MorytaniaHard4[+]": ["15151-2", "15151-3"],
-			"SomethingNice[+]": ["5430-3", "5431-1", "5434", "6967", "9777-2", "10044-1", "10300", "10547-1", "10553", "11574-1", "11828-1", "11830-1", "12084-1", "12852-1", "13363", "13613", "13871", "14907-1", "Elemental Workshop", "Zanaris", "H.A.M. Store room", "Jaldraocht Pyramid", "Observatory Dungeon", "Grand Tree Tunnels", "Goblin Cave", "Witch's House#Basement", "H.A.M. Hideout", "Genie's Cave"],
+			"SomethingNice[+]": ["5426-1", "5430-3", "5431-1", "5434", "6967", "9777-2", "10044-1", "10300", "10547-1", "10553", "11574-1", "11828-1", "11830-1", "12084-1", "12852-1", "13363", "13613", "13871", "14907-1", "Elemental Workshop", "Zanaris", "H.A.M. Store room", "Jaldraocht Pyramid", "Observatory Dungeon", "Grand Tree Tunnels", "Goblin Cave", "Witch's House#Basement", "H.A.M. Hideout", "Genie's Cave"],
 			"VarlamoreThieving[+]": ["6448", "6704-1"],
 			"KandarinHard3[+]": ["10806-1"],
 			"WildernessMedium9[+]": ["12342-1", "12598"],
@@ -148263,7 +150628,9 @@
 			"SteelMats[+]": ["Steel bar", "Steel scimitar", "Steel longsword", "Steel full helm", "Steel sq shield", "Steel claws", "Steel warhammer", "Steel battleaxe", "Steel chainbody", "Steel kiteshield", "Steel 2h sword", "Steel platelegs", "Steel plateskirt", "Steel platebody"],
 			"MithrilMats[+]": ["Mithril bar", "Mithril scimitar", "Mithril longsword", "Mithril full helm", "Mithril sq shield", "Mithril claws", "Mithril warhammer", "Mithril battleaxe", "Mithril chainbody", "Mithril kiteshield", "Mithril 2h sword", "Mithril platelegs", "Mithril plateskirt", "Mithril platebody"],
 			"AdamantMats[+]": ["Adamantite bar", "Adamant scimitar", "Adamant longsword", "Adamant full helm", "Adamant sq shield", "Adamant claws", "Adamant warhammer", "Adamant battleaxe", "Adamant chainbody", "Adamant kiteshield", "Adamant 2h sword", "Adamant platelegs", "Adamant plateskirt", "Adamant platebody"],
-			"RuneMats[+]": ["Runite bar", "Rune scimitar", "Rune longsword", "Rune full helm", "Rune sq shield", "Rune claws", "Rune warhammer", "Rune battleaxe", "Rune chainbody", "Rune kiteshield", "Rune 2h sword", "Rune platelegs", "Rune plateskirt", "Rune platebody"]
+			"RuneMats[+]": ["Runite bar", "Rune scimitar", "Rune longsword", "Rune full helm", "Rune sq shield", "Rune claws", "Rune warhammer", "Rune battleaxe", "Rune chainbody", "Rune kiteshield", "Rune 2h sword", "Rune platelegs", "Rune plateskirt", "Rune platebody"],
+			"GusTreat[+]": ["Bones", "Wolf bones", "Bleached bones", "Bat bones", "Big bones", "Burnt bones", "Burnt jogre bones", "Babydragon bones", "Dragon bones", "Monkey bones", "Small ninja monkey bones", "Medium ninja monkey bones", "Gorilla bones", "Bearded gorilla bones", "Skeletal gorilla bones", "Small zombie monkey bones", "Large zombie monkey bones", "Jogre bones", "Zogre bones", "Fayrg bones", "Raurg bones", "Ourg bones", "Shaikahan bones", "Dagannoth bones", "Wyvern bones", "Lava dragon bones", "Superior dragon bones", "Wyrm bones", "Wyrmling bones", "Drake bones", "Hydra bones", "Raw bear meat", "Raw beast meat", "Raw beef", "Raw bird meat", "Raw boar meat", "Raw chicken", "Raw rabbit", "Raw rat meat", "Raw yak meat", "Cooked meat"],
+			"AvernicTreads[+]": ["Avernic treads", "Avernic treads (et)", "Avernic treads (pe)", "Avernic treads (pr)", "Avernic treads (pe)(et)", "Avernic treads (pr)(et)", "Avernic treads (pr)(pe)", "Avernic treads (max)"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -148642,10 +151009,12 @@
 			"SteelMats[+]": "Any steel preform materials",
 			"MithrilMats[+]": "Any mithril preform materials",
 			"AdamantMats[+]": "Any adamant preform materials",
-			"RuneMats[+]": "Any rune preform materials"
+			"RuneMats[+]": "Any rune preform materials",
+			"GusTreat[+]": "Any bone or meat to calm Gus",
+			"AvernicTreads[+]": "Any avernic treads variant"
 		},
 		"mixPlus": {
-			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
+			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen", "Citizen (Mistrock)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Cam Torum)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
 			"Farmer[+]": ["Farmer", "Farmer (Varlamore)"],
 			"Fremennik citizen[+]": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"]
 		},
@@ -148657,7 +151026,7 @@
 		"monstersPlus": {
 			"Aberrant spectre[+]": ["Aberrant spectre", "Deviant spectre"],
 			"Bloodveld[+]": ["Bloodveld", "Mutated Bloodveld"],
-			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
+			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen", "Citizen (Mistrock)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Cam Torum)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
 			"Demonic[+]": ["Abyssal Sire", "Abyssal demon", "Abyssal demon#Wilderness Slayer Cave", "Balfrug Kreeyath", "Black demon", "Black demon#Wilderness Slayer Cave", "Bloodveld", "Bouncer", "Cerberus", "Demonic gorilla", "Doomion", "Flaming pyrelord", "Greater Nechryael", "Greater Nechryael#Wilderness Slayer Cave", "Greater abyssal demon", "Greater demon", "Greater demon#Wilderness Slayer Cave", "Hellhound", "Holthion", "Icefiend", "Imp", "Infernal pyrelord", "Insatiable Bloodveld", "Insatiable mutated Bloodveld", "Judge of Yama", "Jungle Demon", "K'ril Tsutsaroth", "Lesser demon", "Lesser demon (Melzar's Maze)", "Lesser demon#Wilderness Slayer Cave", "Mutated Bloodveld", "Nechryael", "Nechryarch", "Othainian", "Porazdir", "Pyrefiend", "Pyrelord", "Skeleton Hellhound", "Skotizo", "Tstanon Karlak", "Waterfiend", "Zakl'n Gritch"],
 			"Desert lizard[+]": ["Desert Lizard", "Lizard", "Small Lizard"],
 			"Guard[+]": ["Guard", "Guard (Hosidius)", "Guard (Shayzien)", "Head Guard"],
@@ -148723,13 +151092,13 @@
 			"Farmer[+]": "Any pickpocketable farmer"
 		},
 		"npcsPlus": {
-			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Varlamore)", "Tourist", "Salvager"],
+			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen", "Citizen (Mistrock)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Cam Torum)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
 			"Elf[+]": ["Arvel", "Goreu", "Kelyn", "Mawrth", "Anaire", "Aranwe", "Aredhel", "Caranthir", "Celebrian", "Celegorm", "Cirdan", "Curufin", "Earwen", "Edrahil", "Elenwe", "Elladan", "Enel", "Erestor", "Enerdhil", "Enelye", "Feanor", "Findis", "Finduilas", "Fingolfin", "Fingon", "Galathil", "Gelmir", "Glorfindel", "Guilin", "Hendor (elf)", "Idril", "Imin", "Iminye", "Indis", "Ingwe", "Ingwion", "Lenwe", "Lindir", "Maeglin", "Mahtan", "Miriel", "Mithrellas", "Nellas", "Nerdanel", "Nimloth", "Oropher", "Orophin", "Saeros", "Salgant", "Tatie", "Thingol", "Turgon", "Vaire"],
 			"ElfLletya[+]": ["Arvel", "Goreu", "Kelyn", "Mawrth"],
 			"ElfPrifddinas[+]": ["Anaire", "Aranwe", "Aredhel", "Caranthir", "Celebrian", "Celegorm", "Cirdan", "Curufin", "Earwen", "Edrahil", "Elenwe", "Elladan", "Enel", "Erestor", "Enerdhil", "Enelye", "Feanor", "Findis", "Finduilas", "Fingolfin", "Fingon", "Galathil", "Gelmir", "Glorfindel", "Guilin", "Hendor (elf)", "Idril", "Imin", "Iminye", "Indis", "Ingwe", "Ingwion", "Lenwe", "Lindir", "Maeglin", "Mahtan", "Miriel", "Mithrellas", "Nellas", "Nerdanel", "Nimloth", "Oropher", "Orophin", "Saeros", "Salgant", "Tatie", "Thingol", "Turgon", "Vaire"],
 			"Vyre[+]": ["Caninelle Draynar", "Carnivus Belamorta", "Diphylla Bechstein", "Draconis Sanguine", "Lasenna Rasputin", "Mort Nightshade", "Mortina Daubenton", "Pipistrelle Draynar", "Remus Kaninus", "Valentin Rasputin", "Vallessia Dracyula", "Vallessia von Pitt", "Vampyressa van Von", "Vampyrus Diaemus", "Violetta Sanguine", "Vlad Bechstein", "Vlad Diaemus", "Vonnetta Varnis", "Crimsonette van Marr", "Grigor Rasputin", "Vormar Vakan", "Alek Constantine", "Episcula Helsing", "Haemas Lamescus", "Misdrievus Shadum", "Nakasa Jovkai", "Natalidae Shadum", "Noctillion Lugosi", "Valentina Diae"],
 			"Banker[+]": ["Banker", "Arnold Lydspor", "Cornelius", "Emerald Benedict", "Eniola", "Fadli", "Financial Wizard", "Financial Seer", "Ghost banker", "Gnome banker", "Gundai", "Jade (Warriors' Guild)", "Jumaane", "Magnus Gram", "Nardah Banker", "Odovacar", "Sirsal Banker", "Squire (Void Knights banker)", "TzHaar-Ket-Yil", "TzHaar-Ket-Zuh", "Yusuf"],
-			"Tanner[+]": ["Ellis", "Tanner", "Leatherworker", "Sbott", "Eodan"],
+			"Tanner[+]": ["Ellis", "Tanner", "Leatherworker", "Sbott", "Eodan", "Chouani"],
 			"Fremennik citizen[+]": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"],
 			"H.A.M. Member[+]": ["H.A.M. Member#Female", "H.A.M. Member#Male"],
 			"Estate Agent[+]": ["Estate agent", "Alwyn"],
@@ -149118,6 +151487,11 @@
 					"Cast ~|telekinetic grab|~": "Magic"
 				}]
 			},
+			"Cooked sweetcorn": {
+				"5423": [{
+					"Cast ~|telekinetic grab|~": "Magic"
+				}]
+			},
 			"Feather": {
 				"6968-1": [{
 					"Cast ~|telekinetic grab|~": "Magic"
@@ -149457,7 +151831,8 @@
 			"The Hueycoatl": true,
 			"Branda the Fire Queen": true,
 			"Eldric the Ice King": true,
-			"Yama": true
+			"Yama": true,
+			"Doom of Mokhaiotl": true
 		},
 		"minigameShops": {
 			"Agility Arena Store": true,
@@ -149474,7 +151849,8 @@
 			"Temple Supplies": true,
 			"Giants' Foundry Reward Shop": true,
 			"PvP Arena Rewards": true,
-			"Bounty Hunter Store": true
+			"Bounty Hunter Store": true,
+			"Vale Research Exchange": true
 		},
 		"ammoTools": {
 			"Bronze arrow": {
@@ -151335,6 +153711,11 @@
 			"Crocodiles": {
 				"Crocodile": true
 			},
+			"Custodian stalker": {
+				"Juvenile custodian stalker": true,
+				"Mature custodian stalker": true,
+				"Elder custodian stalker": true
+			},
 			"Dagannoths": {
 				"Dagannoth": true,
 				"Dagannoth (Waterbirth Island)#Level 88": true,
@@ -151573,6 +153954,7 @@
 			"Lesser Nagua": {
 				"Sulphur Nagua": true,
 				"Frost Nagua": true,
+				"Earthen Nagua": true,
 				"Amoxliatl": true
 			},
 			"Lizardmen": {
@@ -151952,14 +154334,14 @@
 			"Banshees": ["6457", "13623"],
 			"Barrows brothers": ["14131"],
 			"Basilisks": ["9790", "11064"],
-			"Bats": ["5165", "5179", "5180", "5435", "5943", "5946", "5947", "5948", "6202", "6203", "6458", "6460", "6713", "6714", "6715", "6716", "6966", "6972", "9779", "9782", "10031", "10033", "10037", "10288", "10292", "10294", "10549", "10804", "11053", "11061", "11313", "11573", "11574", "12349", "13366", "13618", "13623", "14134", "14390", "14894", "14899", "14901"],
-			"Bears": ["4918", "4921", "5166", "5177", "5178", "5941", "8500", "8753", "8754", "9009", "9524", "9777", "9778", "10033", "10287", "10547", "10804", "10808", "11060", "11830", "11833", "12344", "12345", "12854", "12859", "13108", "13114", "13115", "13116"],
-			"Birds": ["4921", "4922", "5165", "5166", "5421", "5422", "5677", "5678", "5934", "5942", "6192", "6447", "6454", "6712", "6959", "6961", "7225", "8237", "8491", "8492", "8494", "8747", "8750", "8753", "9004", "9006", "9012", "9261", "9525", "9780", "9781", "9782", "10028", "10033", "10034", "10039", "10044","10284", "10291", "10292", "10293", "10300", "10549", "10553", "10794", "10795", "10803", "10807", "11050", "11051", "11053", "11055", "11309", "11316", "11319", "11562", "11565", "11828", "12082", "12083", "12337", "12588", "12595", "12596", "12844", "12850", "12851", "13100", "13356", "13871", "14391"],
+			"Bats": ["4917", "5165", "5172", "5173", "5179", "5180", "5425", "5426", "5435", "5943", "5946", "5947", "5948", "6202", "6203", "6458", "6460", "6713", "6714", "6715", "6716", "6966", "6972", "9779", "9782", "10031", "10033", "10037", "10288", "10292", "10294", "10549", "10804", "11053", "11061", "11313", "11573", "11574", "12349", "13366", "13618", "13623", "14134", "14390", "14894", "14899", "14901"],
+			"Bears": ["4916", "4917", "4918", "4921", "5166", "5172", "5177", "5178", "5941", "8500", "8753", "8754", "9009", "9524", "9777", "9778", "10033", "10287", "10547", "10804", "10808", "11060", "11830", "11833", "12344", "12345", "12854", "12859", "13108", "13114", "13115", "13116"],
+			"Birds": ["4910", "4911", "4913", "4921", "4922", "5165", "5166", "5168", "5169", "5421", "5422", "5677", "5678", "5934", "5942", "6192", "6447", "6454", "6712", "6959", "6961", "7225", "8237", "8491", "8492", "8494", "8747", "8750", "8753", "9004", "9006", "9012", "9261", "9525", "9780", "9781", "9782", "10028", "10033", "10034", "10039", "10044","10284", "10291", "10292", "10293", "10300", "10549", "10553", "10794", "10795", "10803", "10807", "11050", "11051", "11053", "11055", "11309", "11316", "11319", "11562", "11565", "12587", "11828", "12082", "12083", "12337", "12588", "12595", "12596", "12844", "12850", "12851", "13100", "13356", "13871", "14391"],
 			"Black demons": ["5689", "6457", "9783", "10801", "11573", "11578", "12342", "12857", "13114"],
 			"Black dragons": ["6457", "8501", "9772", "11573", "12092", "12849", "12857", "13114"],
 			"Black Knights": ["12092", "13114"],
 			"Bloodvelds": ["6457", "8755", "9525", "11578", "12090", "13623", "14387"],
-			"Blue dragons": ["6457", "6706", "9023", "9261", "9772", "10031", "11573", "11574"],
+			"Blue dragons": ["5169", "6457", "6706", "9023", "9261", "9772", "10031", "11573", "11574"],
 			"Brine rats": ["10810"],
 			"Bronze dragons": ["6457", "10801"],
 			"Callisto": ["12345", "13116"],
@@ -151976,10 +154358,11 @@
 			"Cockatrices": ["5680", "11064"],
 			"Commander Zilyana": ["11578"],
 			"Cows": ["4921", "5178", "6968", "8491", "8757", "10288", "10548", "10807", "11571", "12083", "12595", "12596", "12849", "12850", "12851", "14391"],
-			"Crabs": ["4663", "6189", "6445", "6453", "6457", "6706", "6710", "6959", "6965", "6966", "7215", "7222", "7479", "9003", "10042", "10554", "10810", "14389", "14645", "14652", "14900", "14908", "15162"],
+			"Crabs": ["4663", "5167", "6189", "6445", "6453", "6457", "6706", "6710", "6959", "6965", "6966", "7215", "7222", "7479", "9003", "10042", "10554", "10810", "14389", "14645", "14652", "14900", "14908", "15162"],
 			"Crawling Hands": ["13623", "14387"],
 			"Crazy archaeologist": ["11833"],
 			"Crocodiles": ["12588", "12844", "13100", "13101", "13357", "13611"],
+			"Custodian stalker": ["5172"],
 			"Dagannoths": ["6457", "9790", "10040", "10042"],
 			"Dagannoth Kings": ["10042"],
 			"Dark beasts": ["8755", "10035"],
@@ -152026,9 +154409,9 @@
 			"K'ril Tsutsaroth": ["11578"],
 			"Lava dragons": ["12603", "12859", "12860"],
 			"Lesser demons": ["5689", "6457", "6713", "9261", "10549", "11053", "11314", "11315", "11570", "11573", "11578", "12092", "12337", "12348", "12857", "13114", "13116", "14899"],
-			"Lesser Nagua": ["5680", "6706"],
+			"Lesser Nagua": ["5167", "5680", "6706"],
 			"Lizardmen": ["4919", "5175", "5176", "5177", "5430", "5431", "5433", "5434", "5689", "5690", "5945", "5946"],
-			"Lizards": ["5179", "5680", "13355", "13359", "13615", "13871"],
+			"Lizards": ["5167", "5179", "5680", "13355", "13359", "13615", "13871"],
 			"Magic axes": ["12605"],
 			"Mammoths": ["12600"],
 			"Mithril dragons": ["10038"],
@@ -152045,9 +154428,9 @@
 			"Pirates": ["6970", "7225", "7226", "8763", "11057", "12081", "12093", "12856"],
 			"Pyrefiends": ["9006", "11064", "11578", "12090", "13102", "14899"],
 			"Rats": ["4921", "5174", "5177", "5421", "5422", "5430", "5676", "5690", "5691", "5942", "5947", "6201", "6202", "6203", "6445", "6447", "6448", "6449", "6451", "6456", "6458", "6703", "6959", "6960", "6961", "6968", "6969", "6970", "6971", "7224", "7226", "8491", "8494", "8508", "8747", "8763", "9005", "9777", "9779", "9782", "10030", "10031", "10033", "10036", "10037", "10038", "10290", "10292", "10293", "10294", "10547", "10807", "10810", "11057", "11314", "11568", "11570", "11573", "11825", "11826", "11833", "12081", "12082", "12083", "12084", "12085", "12089", "12338", "12339", "12340", "12341", "12342", "12593", "12594", "12597", "12600", "12602", "12849", "12850", "12853", "12855", "12857", "13106", "13108", "13618", "13874", "13877", "14131", "14386", "14387", "14638", "14899", "14902"],
-			"Red dragons": ["6457", "6711", "9772", "10801"],
+			"Red dragons": ["5169", "6457", "6711", "9772", "10801"],
 			"Revenants": ["12345", "12347"],
-			"Rockslugs": ["11064", "12593", "12850"],
+			"Rockslugs": ["5167", "11064", "12593", "12850"],
 			"Rogues": ["12349", "13117"],
 			"Rune dragons": ["14142"],
 			"Sarachnis": ["6711"],
@@ -152057,10 +154440,10 @@
 			"Shades": ["6457", "12341", "13874", "13875"],
 			"Shadow warriors": ["10804"],
 			"Skeletal Wyverns": ["12081"],
-			"Skeletons": ["5686", "5690", "5943", "6457", "6711", "6716", "6972", "9261", "9273", "9775", "9779", "10031", "10037", "10038", "10288", "10549", "10810", "11050", "11313", "11314", "11566", "11568", "11570", "11573", "11579", "11834", "11837", "12088", "12338", "12339", "12340", "12341", "12342", "12343", "12601", "12603", "12854", "12858", "12859", "13114", "13365", "13612", "13618", "14131"],
+			"Skeletons": ["5167", "5686", "5690", "5943", "6457", "6711", "6716", "6972", "9261", "9273", "9775", "9779", "10031", "10037", "10038", "10288", "10549", "10810", "11050", "11313", "11314", "11566", "11568", "11570", "11573", "11579", "11834", "11837", "12088", "12338", "12339", "12340", "12341", "12342", "12343", "12601", "12603", "12854", "12858", "12859", "13114", "13365", "13612", "13618", "14131"],
 			"Smoke devils": ["9519"],
 			"Sourhogs": ["12596"],
-			"Spiders": ["5687", "5690", "5692", "5937", "5946", "5947", "5948", "6193", "6201", "6202", "6203", "6204", "6706", "6710", "6711", "6712", "6967", "6968", "6969", "7225", "7226", "8494", "9023", "9267", "9524", "9779", "10030", "10031", "10033", "10038", "10288", "10290", "10544", "10549", "10794", "10795", "11050", "11051", "11054", "11055", "11056", "11058", "11311", "11312", "11313", "11318", "11566", "11567", "11568", "11570", "11573", "11833", "11837", "12092", "12093", "12340", "12341", "12342", "12594", "12602", "12604", "12850", "12853", "12859", "13105", "13114", "13115", "13877", "14131", "14645", "14647", "14899", "14907"],
+			"Spiders": ["4911", "5167", "5687", "5168", "5169", "5426", "5690", "5692", "5937", "5946", "5947", "5948", "6193", "6201", "6202", "6203", "6204", "6706", "6710", "6711", "6712", "6967", "6968", "6969", "7225", "7226", "8494", "9023", "9267", "9524", "9779", "10030", "10031", "10033", "10038", "10288", "10290", "10544", "10549", "10794", "10795", "11050", "11051", "11054", "11055", "11056", "11058", "11311", "11312", "11313", "11318", "11566", "11567", "11568", "11570", "11573", "11833", "11837", "12092", "12093", "12340", "12341", "12342", "12594", "12602", "12604", "12850", "12853", "12859", "13105", "13114", "13115", "13877", "14131", "14645", "14647", "14899", "14907"],
 			"Spiritual creatures": ["11578", "12090"],
 			"Steel dragons": ["6457", "10801"],
 			"Suqahs": ["8252", "8253", "8508", "8509"],
@@ -152076,11 +154459,11 @@
 			"Warped Creatures": ["9264"],
 			"Waterfiends": ["8755", "9016", "10038"],
 			"Werewolves": ["11578", "12090", "13878"],
-			"Wolves": ["5936", "5939", "6194", "6204", "6451", "6711", "8501", "9009", "9267", "9773", "9779", "9780", "10030", "10033", "10286", "10291", "10552", "10807", "11053", "11068", "11309", "11317", "11318", "11325", "11565", "11578", "11837", "12341", "12591", "12846", "12847", "12848", "12861", "13098", "13103", "13104"],
+			"Wolves": ["5172", "5426", "5936", "5939", "6194", "6204", "6451", "6711", "8501", "9009", "9267", "9773", "9779", "9780", "10030", "10033", "10286", "10291", "10552", "10807", "11053", "11068", "11309", "11317", "11318", "11325", "11565", "11578", "11837", "12341", "12591", "12846", "12847", "12848", "12861", "13098", "13103", "13104"],
 			"Wyrms": ["5179", "5680"],
 			"Zombies": ["5943", "6711", "9023", "9775", "9779", "10033", "10035", "10037", "10288", "10547", "11050", "11051", "11068", "11310", "11316", "11566", "11568", "11570", "12338", "12339", "12341", "12342", "12601", "12602", "12854", "12856", "13366", "13618", "13874", "13875", "14391", "14647", "15148"],
 			"Zulrah": ["9007"],
-			"Zygomites": ["12849", "14651", "14652"]
+			"Zygomites": ["5172", "12849", "14651", "14652"]
 		},
 		"boostItems": {
 			"Agility": {
@@ -161400,6 +163783,95 @@
 			},
 			"Amulet of doomion": {
 				"1": "Always"
+			}
+		},
+		"Doom of Mokhaiotl": {
+			"Aether catalyst": {
+				"1": "Unknown"
+			},
+			"Avernic treads": {
+				"1": "Unknown"
+			},
+			"Cannonball": {
+				"1": "Unknown"
+			},
+			"Celastrus seed": {
+				"1": "Unknown"
+			},
+			"Chaos rune": {
+				"1": "Unknown"
+			},
+			"Coal": {
+				"1 (noted)": "Unknown"
+			},
+			"Death rune": {
+				"1": "Unknown"
+			},
+			"Demon tear": {
+				"1": "Unknown"
+			},
+			"Dom": {
+				"1": "Unknown"
+			},
+			"Dragon darrt tip": {
+				"1": "Unknown"
+			},
+			"Dragon med helm": {
+				"1 (noted)": "Unknown"
+			},
+			"Dragon platelegs": {
+				"1": "Unknown"
+			},
+			"Earth rune": {
+				"1": "Unknown"
+			},
+			"Eye of ayak (uncharged)": {
+				"1": "Unknown"
+			},
+			"Fire rune": {
+				"1": "Unknown"
+			},
+			"Gold ore": {
+				"1 (noted)": "Unknown"
+			},
+			"Mokhaiotl cloth": {
+				"1": "Unknown"
+			},
+			"Mokhaiotl waystone": {
+				"1": "Unknown"
+			},
+			"Mystic earth staff": {
+				"1 (noted)": "Unknown"
+			},
+			"Onyx bolts": {
+				"1": "Unknown"
+			},
+			"Ranarr seed": {
+				"1": "Unknown"
+			},
+			"Raw shark": {
+				"1 (noted)": "Unknown"
+			},
+			"Rune pickaxe": {
+				"1 (noted)": "Unknown"
+			},
+			"Runite ore": {
+				"1 (noted)": "Unknown"
+			},
+			"Shark lure": {
+				"1": "Unknown"
+			},
+			"Spirit seed": {
+				"1": "Unknown"
+			},
+			"Sun-kissed bones": {
+				"1": "Unknown"
+			},
+			"Sunfire splinters": {
+				"1": "Unknown"
+			},
+			"Tooth half of key (moon key)": {
+				"1": "Unknown"
 			}
 		},
 		"Double agent": {
@@ -174032,6 +176504,11 @@
 			},
 			"GemDropTable+": {
 				"1": "3/135"
+			}
+		},
+		"Ocelot": {
+			"Bones": {
+				"1": "Always"
 			}
 		},
 		"Ocga": {
@@ -189242,6 +191719,7 @@
 		"Family Crest": "10803, 11317, 12342, 13106, 13107, 13109, 13110, Witchaven Dungeon, Edgeville Dungeon#Wilderness, Dwarven Mine",
 		"The Feud": "13106, 13358",
 		"Fight Arena": "10289",
+		"The Final Dawn": "5167, 6448, 6705, 6706, Cam Torum, Neypotzli, Twilight Temple#Basement",
 		"Fishing Contest": "10549, 10550, 11318",
 		"Forgettable Tale of a Drunken Dwarf": "10810, 11318, White Wolf Tunnel, Keldagrim",
 		"The Forsaken Tower": "5435, 5946, 6461",
@@ -189318,10 +191796,12 @@
 		"Royal Trouble": "10044, 10300, 10553, Miscellania and Etceteria Dungeon",
 		"Rum Deal": "14647, Braindeath Island",
 		"Scorpion Catcher": "10039, 10805, 10806, 11573, 12086, Taverley Dungeon",
+		"Scrambled!": "4656, 4912, 4913, 5168, Dragon Nest",
 		"Sea Slug": "10803, 11059",
 		"Secrets of the North": "10289, 10290, 10291, 10546, 11325, 11581, Salt Mine, Ghorrock Dungeon",
 		"Shades of Mort'ton": "13875",
 		"Shadow of the Storm": "13105, 13872",
+		"Shadows of Custodia": "5172, 5428",
 		"Sheep Herder": "10291, 10292",
 		"Shilo Village": "11054, 11056, 11566, 11568",
 		"Sins of the Father": "13622, 13874, 14129, 14135, 14386, 14388, 14641, 14899, 14898, Meiyerditch Laboratories",
@@ -189372,7 +191852,8 @@
 		"Lair of Tarn Razorlor": "13618, Tarn's Lair",
 		"Mage Arena I": "12349, Mage Arena bank",
 		"Mage Arena II": "12349, Mage Arena bank",
-		"Skippy and the Mogres": "11825"
+		"Skippy and the Mogres": "11825",
+		"Vale Totems (miniquest)": "5428"
 	},
 	"diaries": {
 		"Ardougne Diary": "Easy, Medium, Hard, Elite",
@@ -190160,7 +192641,9 @@
 			{ "color": "#1978d2", "x": 3283, "y": 3428 },
 			{ "color": "#6bc71f", "x": 1254, "y": 3559 },
 			{ "color": "#6bc71f", "x": 1275, "y": 3749 },
+			{ "color": "#6bc71f", "x": 1295, "y": 3166 },
 			{ "color": "#6bc71f", "x": 1328, "y": 2971 },
+			{ "color": "#6bc71f", "x": 1434, "y": 3330 },
 			{ "color": "#6bc71f", "x": 1453, "y": 3130 },
 			{ "color": "#6bc71f", "x": 1525, "y": 3520 },
 			{ "color": "#6bc71f", "x": 1600, "y": 3837 },
@@ -191344,6 +193827,22 @@
 			"Rune platelegs": true,
 			"Rune plateskirt": true
 		},
+		"Arcuani's Archery Supplies": {
+			"Adamant arrow": true,
+			"Bronze arrow": true,
+			"Iron arrow": true,
+			"Longbow": true,
+			"Maple longbow": true,
+			"Maple shortbow": true,
+			"Mithril arrow": true,
+			"Oak longbow": true,
+			"Oak shortbow": true,
+			"Rune arrow": true,
+			"Shortbow": true,
+			"Steel arrow": true,
+			"Willow longbow": true,
+			"Willow shortbow": true
+		},
 		"Ardougne Baker's Stall.": {
 			"Bread": true,
 			"Cake": true,
@@ -191453,6 +193952,23 @@
 			"Sunbeam ale": true,
 			"Vodka": true,
 			"Whisky": true
+		},
+		"Auburnvale General Store": {
+			"Bowl": true,
+			"Bronze axe": true,
+			"Bucket": true,
+			"Chisel": true,
+			"Hammer": true,
+			"Knife": true,
+			"Needle": true,
+			"Pestle and mortar": true,
+			"Pot": true,
+			"Rope": true,
+			"Spade": true,
+			"Thread": true,
+			"Tinderbox": true,
+			"Unlit torch": true,
+			"Vial": true
 		},
 		"Aubury's Rune Shop.": {
 			"Air rune": true,
@@ -192330,6 +194846,14 @@
 			"Pot": true,
 			"Shears": true,
 			"Tinderbox": true
+		},
+		"Dyes to Die For": {
+			"Blue dye": true,
+			"Green dye": true,
+			"Orange dye": true,
+			"Purple dye": true,
+			"Red dye": true,
+			"Yellow dye": true
 		},
 		"Edgeville General Store": {
 			"Bowl": true,
@@ -193311,6 +195835,44 @@
 			"Jug of wine": true,
 			"Karamjan rum": true
 		},
+		"Kastori Farming Supplies": {
+			"Basket": true,
+			"Basket pack": true,
+			"Bucket": true,
+			"Compost": true,
+			"Compost pack": true,
+			"Empty bucket pack": true,
+			"Empty sack": true,
+			"Filled plant pot": true,
+			"Gardening trowel": true,
+			"Plant cure": true,
+			"Plant pot pack": true,
+			"Rake": true,
+			"Sack pack": true,
+			"Secateurs": true,
+			"Seed dibber": true,
+			"Spade": true,
+			"Watering can": true
+		},
+		"Kastori General Store": {
+			"Bowl": true,
+			"Bronze axe": true,
+			"Bronze pickaxe": true,
+			"Bucket": true,
+			"Cake tin": true,
+			"Chisel": true,
+			"Empty bucket pack": true,
+			"Empty jug pack": true,
+			"Hammer": true,
+			"Jug": true,
+			"Knife": true,
+			"Needle": true,
+			"Pot": true,
+			"Rope": true,
+			"Spade": true,
+			"Thread": true,
+			"Tinderbox": true
+		},
 		"Keepa Kettilon's store": {
 			"Cod": true,
 			"Lobster": true,
@@ -193652,6 +196214,18 @@
 			"Spade": true,
 			"Tinderbox": true
 		},
+		"Lunami's Axe Shop": {
+			"Adamant axe": true,
+			"Adamant battleaxe": true,
+			"Bronze axe": true,
+			"Bronze battleaxe": true,
+			"Iron axe": true,
+			"Iron battleaxe": true,
+			"Mithril axe": true,
+			"Mithril battleaxe": true,
+			"Steel axe": true,
+			"Steel battleaxe": true
+		},
 		"Lundail's Arena-side Rune Shop.": {
 			"Air rune": true,
 			"Air rune pack": true,
@@ -193965,6 +196539,18 @@
 			"Knife": true,
 			"Needle": true,
 			"Thread": true
+		},
+		"Nemus Retreat (pub)": {
+			"Axeman's folly": true,
+			"Beer": true,
+			"Cider": true,
+			"Gin": true,
+			"Greenman's ale": true,
+			"Rum": true,
+			"Stew": true,
+			"Sunbeam ale": true,
+			"Vodka": true,
+			"Whisky": true
 		},
 		"Nurmof's Pickaxe Shop.": {
 			"Adamant pickaxe": true,
@@ -194565,6 +197151,14 @@
 			"Rune plateskirt": true,
 			"Rune sword": true
 		},
+		"Sebamo's Sublime Staffs": {
+			"Magic staff": true,
+			"Staff": true,
+			"Staff of air": true,
+			"Staff of earth": true,
+			"Staff of fire": true,
+			"Staff of water": true
+		},
 		"Seddu's Adventurer's Store.": {
 			"Black med helm": true,
 			"Green d'hide chaps": true,
@@ -194763,6 +197357,26 @@
 			"Marble block": true,
 			"Condensed gold": true
 		},
+		"Sulisal's Superb Fishing Store": {
+			"Bait pack": true,
+			"Big fishing net": true,
+			"Feather": true,
+			"Feather pack": true,
+			"Fishing bait": true,
+			"Fishing rod": true,
+			"Fly fishing rod": true,
+			"Harpoon": true,
+			"Lobster pot": true,
+			"Raw bass": true,
+			"Raw cod": true,
+			"Raw herring": true,
+			"Raw lobster": true,
+			"Raw mackerel": true,
+			"Raw sardine": true,
+			"Raw swordfish": true,
+			"Raw tuna": true,
+			"Small fishing net": true
+		},
 		"Sunlight's Sanctum": {
 			"Beer": true,
 			"Blackbird red": true,
@@ -194796,6 +197410,41 @@
 			"Tinderbox": true,
 			"Unlit torch": true
 		},
+		"Tal Teklan General Store": {
+			"Bowl": true,
+			"Bronze axe": true,
+			"Bronze pickaxe": true,
+			"Bucket": true,
+			"Chisel": true,
+			"Jug": true,
+			"Knife": true,
+			"Needle": true,
+			"Pestle and mortar": true,
+			"Pot": true,
+			"Rope": true,
+			"Spade": true,
+			"Thread": true,
+			"Tinderbox": true,
+			"Vial": true
+		},
+		"Tal Teklan Rune Shop": {
+			"Air rune": true,
+			"Air rune pack": true,
+			"Body rune": true,
+			"Chaos rune": true,
+			"Chaos rune pack": true,
+			"Cosmic rune": true,
+			"Death rune": true,
+			"Earth rune": true,
+			"Earth rune pack": true,
+			"Fire rune": true,
+			"Fire rune pack": true,
+			"Mind rune": true,
+			"Mind rune pack": true,
+			"Nature rune": true,
+			"Water rune": true,
+			"Water rune pack": true
+		},
 		"Tamayu's Spear Stall": {
 			"Bronze spear(kp)": true,
 			"Cleaning cloth": true,
@@ -194822,6 +197471,20 @@
 			"Law talisman": true,
 			"Death talisman": true,
 			"Blood talisman": true
+		},
+		"The Auburn Pub": {
+			"Axeman's folly": true,
+			"Beer": true,
+			"Cider": true,
+			"Gin": true,
+			"Jug of wine": true,
+			"Meat pie": true,
+			"Moon-lite": true,
+			"Rum": true,
+			"Stew": true,
+			"Sunbeam ale": true,
+			"Vodka": true,
+			"Whisky": true
 		},
 		"The Asp & Snake Bar.": {
 			"Beer": true,
@@ -194882,6 +197545,23 @@
 			"Cider": true,
 			"Cup of tea": true,
 			"Jug of wine": true
+		},
+		"The King's Inn": {
+			"Beer": true,
+			"Blackbird red": true,
+			"Cider": true,
+			"Cup of tea": true,
+			"Eclipse red": true,
+			"Gin": true,
+			"Jug of wine": true,
+			"Meat pie": true,
+			"Metztonalli white": true,
+			"Moon-lite": true,
+			"Rum": true,
+			"Stew": true,
+			"Sunbeam ale": true,
+			"Vodka": true,
+			"Whisky": true
 		},
 		"The Legless Faun": {
 			"Beer": true
@@ -195220,6 +197900,12 @@
 			"Black full helm": true,
 			"Black platelegs": true,
 			"Blue cape": true
+		},
+		"Vale Research Exchange": {
+			"Bow string spool": true,
+			"Ent branch": true,
+			"Fletching knife": true,
+			"Greenman mask": true
 		},
 		"Vanessa's Farming shop.": {
 			"Basket": true,
@@ -198978,6 +201664,59 @@
 					"1": "Always"
 				}
 			},
+			"Chest (alchemist's signet)": {
+				"Aldarium": {
+					"1": "Always"
+				},
+				"Avantoe seed": {
+					"1": "Unknown"
+				},
+				"Grimy avantoe": {
+					"1": "Unknown"
+				},
+				"Grimy cadantine": {
+					"1": "Unknown"
+				},
+				"Grimy dwarf weed": {
+					"1": "Unknown"
+				},
+				"Grimy kwuarm": {
+					"1": "Unknown"
+				},
+				"Grimy lantadyme": {
+					"1": "Unknown"
+				},
+				"Grimy ranarr weed": {
+					"1": "Unknown"
+				},
+				"Grimy snapdragon": {
+					"1": "Unknown"
+				},
+				"Grimy torstol": {
+					"1": "Unknown"
+				},
+				"Harralander seed": {
+					"1": "Unknown"
+				},
+				"Irit seed": {
+					"1": "Unknown"
+				},
+				"Mort myre fungus": {
+					"1": "Unknown"
+				},
+				"Ranarr seed": {
+					"1": "Unknown"
+				},
+				"Snape grass": {
+					"1": "Unknown"
+				},
+				"Toadflax seed": {
+					"1": "Unknown"
+				},
+				"Wine of zamorak": {
+					"1": "Unknown"
+				}
+			},
 			"Chest (Gu'Tanoth)": {
 				"Bones": {
 					"1": "1/8"
@@ -198990,6 +201729,32 @@
 				},
 				"Nothing": {
 					"1": "1/8"
+				}
+			},
+			"Gemstone Crab loot": {
+				"Uncut diamond": {
+					"1": "Unknown"
+				},
+				"Uncut dragonstone": {
+					"1": "Unknown"
+				},
+				"Uncut emerald": {
+					"1": "Unknown"
+				},
+				"Uncut jade": {
+					"1": "Unknown"
+				},
+				"Uncut opal": {
+					"1": "Unknown"
+				},
+				"Uncut red topaz": {
+					"1": "Unknown"
+				},
+				"Uncut ruby": {
+					"1": "Unknown"
+				},
+				"Uncut sapphire": {
+					"1": "Unknown"
 				}
 			},
 			"Camdozaal Vault loot": {
@@ -205037,6 +207802,127 @@
 				},
 				"Wooden stock": {
 					"1": "19/655"
+				}
+			},
+			"Vale offerings loot": {
+				"Acorn": {
+					"1": "Unknown"
+				},
+				"Anima-infused bark": {
+					"1": "Unknown"
+				},
+				"Apple tree seed": {
+					"1": "Unknown"
+				},
+				"Bale of flax": {
+					"1": "Unknown"
+				},
+				"Bird nest (egg)": {
+					"1": "Unknown"
+				},
+				"Bird nest (ring)": {
+					"1": "Unknown"
+				},
+				"Bird nest (seeds)": {
+					"1": "Unknown"
+				},
+				"Blessed bone shards": {
+					"1": "Unknown"
+				},
+				"Bow string spool": {
+					"1": "Unknown"
+				},
+				"Cadavaberry seed": {
+					"1": "Unknown"
+				},
+				"Clue scroll (beginner)": {
+					"1": "Unknown"
+				},
+				"Clue scroll (easy)": {
+					"1": "Unknown"
+				},
+				"Clue scroll (elite)": {
+					"1": "Unknown"
+				},
+				"Clue scroll (hard)": {
+					"1": "Unknown"
+				},
+				"Clue scroll (medium)": {
+					"1": "Unknown"
+				},
+				"Dirty arrowtips": {
+					"1": "Unknown"
+				},
+				"Dragonfruit tree seed": {
+					"1": "Unknown"
+				},
+				"Ent branch": {
+					"1": "Unknown"
+				},
+				"Feather": {
+					"1": "Unknown"
+				},
+				"Fletching knife": {
+					"1": "Unknown"
+				},
+				"Greenman mask": {
+					"1": "Unknown"
+				},
+				"Limpwurt seed": {
+					"1": "Unknown"
+				},
+				"Magic roots": {
+					"1": "Unknown"
+				},
+				"Magic seed": {
+					"1": "Unknown"
+				},
+				"Maple roots": {
+					"1": "Unknown"
+				},
+				"Maple seed": {
+					"1": "Unknown"
+				},
+				"Palm tree seed": {
+					"1": "Unknown"
+				},
+				"Papaya tree seed": {
+					"1": "Unknown"
+				},
+				"Pineapple seed": {
+					"1": "Unknown"
+				},
+				"Redwood tree seed": {
+					"1": "Unknown"
+				},
+				"Willow roots": {
+					"1": "Unknown"
+				},
+				"Willow seed": {
+					"1": "Unknown"
+				},
+				"Yew roots": {
+					"1": "Unknown"
+				},
+				"Yew seed": {
+					"1": "Unknown"
+				}
+			},
+			"Dirty arrowtips loot": {
+				"Adamant arrowtips": {
+					"1": "Unknown"
+				},
+				"Dragon arrowtips": {
+					"1": "Unknown"
+				},
+				"Mithril arrowtips": {
+					"1": "Unknown"
+				},
+				"Rune arrowtips": {
+					"1": "Unknown"
+				},
+				"Steel arrowtips": {
+					"1": "Unknown"
 				}
 			},
 			"Adept potion pack loot": {
@@ -214037,6 +216923,221 @@
 					"1": "Rare"
 				}
 			},
+			"Earthen Nagua": {
+				"Adamantite ore": {
+					"1 (noted)": "Unknown"
+				},
+				"Blessed bone shards": {
+					"1": "Unknown"
+				},
+				"Chaos rune": {
+					"1": "Unknown"
+				},
+				"Coal": {
+					"1 (noted)": "Unknown"
+				},
+				"Death rune": {
+					"1": "Unknown"
+				},
+				"Earthbound tecpatl": {
+					"1": "Unknown"
+				},
+				"Earth orb": {
+					"1 (noted)": "Unknown"
+				},
+				"Earth rune": {
+					"1": "Unknown"
+				},
+				"Earth talisman": {
+					"1": "Unknown"
+				},
+				"Gold ore": {
+					"1 (noted)": "Unknown"
+				},
+				"Iron ore": {
+					"1 (noted)": "Unknown"
+				},
+				"Nature rune": {
+					"1": "Unknown"
+				},
+				"Soft clay": {
+					"1 (noted)": "Unknown"
+				},
+				"GemDropTable+": {
+					"1": "Unknown"
+				},
+				"Clue scroll (hard)": {
+					"1": "Unknown"
+				}
+			},
+			"Juvenile custodian stalker": {
+				"Adamant scimitar": {
+					"1": "Unknown"
+				},
+				"Air rune": {
+					"1": "Unknown"
+				},
+				"Big bones": {
+					"1": "Always"
+				},
+				"Broken antler": {
+					"1": "Unknown"
+				},
+				"Cannonball": {
+					"1": "Unknown"
+				},
+				"Coins": {
+					"1": "Unknown"
+				},
+				"Death rune": {
+					"1": "Unknown"
+				},
+				"Fire rune": {
+					"1": "Unknown"
+				},
+				"Pure essence": {
+					"1 (noted)": "Unknown"
+				},
+				"Raw beef": {
+					"1": "Unknown"
+				},
+				"Rune arrow": {
+					"1": "Unknown"
+				},
+				"Swordfish": {
+					"1": "Unknown"
+				},
+				"Long bone": {
+					"1": "1/400"
+				},
+				"Curved bone": {
+					"1": "1/5012.5"
+				},
+				"RareDropTable+": {
+					"1": "Unknown"
+				}
+			},
+			"Mature custodian stalker": {
+				"Adamant scimitar": {
+					"1": "Unknown"
+				},
+				"Air rune": {
+					"1": "Unknown"
+				},
+				"Antler guard": {
+					"1": "Unknown"
+				},
+				"Big bones": {
+					"1": "Always"
+				},
+				"Broken antler": {
+					"1": "Unknown"
+				},
+				"Cannonball": {
+					"1": "Unknown"
+				},
+				"Coins": {
+					"1": "Unknown"
+				},
+				"Death rune": {
+					"1": "Unknown"
+				},
+				"Fire rune": {
+					"1": "Unknown"
+				},
+				"Huasca seed": {
+					"1": "Unknown"
+				},
+				"Mithril bar": {
+					"1 (noted)": "Unknown"
+				},
+				"Monkfish": {
+					"1": "Unknown"
+				},
+				"Pure essence": {
+					"1 (noted)": "Unknown"
+				},
+				"Raw beef": {
+					"1": "Unknown"
+				},
+				"Rune arrow": {
+					"1": "Unknown"
+				},
+				"Swordfish": {
+					"1": "Unknown"
+				},
+				"Long bone": {
+					"1": "1/400"
+				},
+				"Curved bone": {
+					"1": "1/5012.5"
+				},
+				"RareDropTable+": {
+					"1": "Unknown"
+				}
+			},
+			"Elder custodian stalker": {
+				"Adamant scimitar": {
+					"1": "Unknown"
+				},
+				"Air rune": {
+					"1": "Unknown"
+				},
+				"Alchemist's signet": {
+					"1": "Unknown"
+				},
+				"Antler guard": {
+					"1": "Unknown"
+				},
+				"Big bones": {
+					"1": "Always"
+				},
+				"Broken antler": {
+					"1": "Unknown"
+				},
+				"Cannonball": {
+					"1": "Unknown"
+				},
+				"Coins": {
+					"1": "Unknown"
+				},
+				"Death rune": {
+					"1": "Unknown"
+				},
+				"Fire rune": {
+					"1": "Unknown"
+				},
+				"Huasca seed": {
+					"1": "Unknown"
+				},
+				"Mithril bar": {
+					"1 (noted)": "Unknown"
+				},
+				"Shark": {
+					"1": "Unknown"
+				},
+				"Pure essence": {
+					"1 (noted)": "Unknown"
+				},
+				"Raw beef": {
+					"1": "Unknown"
+				},
+				"Rune arrow": {
+					"1": "Unknown"
+				},
+				"Swordfish": {
+					"1": "Unknown"
+				},
+				"Long bone": {
+					"1": "1/400"
+				},
+				"Curved bone": {
+					"1": "1/5012.5"
+				},
+				"RareDropTable+": {
+					"1": "Unknown"
+				}
+			},
 			"Taloned Wyvern": {
 				"Wyvern bones": {
 					"1": "Always"
@@ -217343,6 +220444,14 @@
 				},
 				"Bird nest (seeds)": {
 					"1": "65/100"
+				}
+			},
+			"Infected root": {
+				"Demon tear": {
+					"1": "Unknown"
+				},
+				"Logs": {
+					"1": "Unknown"
 				}
 			},
 			"Jungle Cleanup light loot": {
@@ -222872,6 +225981,11 @@
 					"Access Worm Tounge's Wares": "Nonskill"
 				}]
 			},
+			"Vale Research Exchange": {
+				"5428": [{
+					"~|Vale Totems (miniquest)|~ Complete the quest": "Quest"
+				}]
+			},
 			"Yrsa's Accoutrements": {
 				"10553": [{
 					"~|The Fremennik Trials|~ Complete the quest": "Quest"
@@ -223313,6 +226427,7 @@
 		"Jelly#Wilderness Slayer Cave": 52,
 		"Chilled jelly": 52,
 		"Warped Jelly": 52,
+		"Juvenile custodian stalker": 54,
 		"Turoth": 55,
 		"Warped Terrorbird": 56,
 		"Warped Tortoise": 56,
@@ -223332,12 +226447,14 @@
 		"Spitting Wyvern": 65,
 		"Taloned Wyvern": 65,
 		"Long-tailed Wyvern": 65,
+		"Mature custodian stalker": 67,
 		"Spiritual warrior": 68,
 		"Spiritual warrior#Ancient Prison": 68,
 		"Kurask": 70,
 		"Skeletal Wyvern": 72,
 		"Gargoyle": 75,
 		"Grotesque Guardians": 75,
+		"Elder custodian stalker": 76,
 		"Brutal black dragon": 77,
 		"Nechryael": 80,
 		"Greater Nechryael": 80,
@@ -224262,6 +227379,13 @@
 				"CombatLevel": 1,
 				"Weight": 8
 			},
+			"Custodian stalker": {
+				"Level": 54,
+				"Tasks": {
+					"~|Shadows of Custodia|~ Complete the quest": "Quest"
+				},
+				"Weight": 11
+			},
 			"Dagannoths": {
 				"CombatLevel": 75,
 				"Tasks": {
@@ -224935,6 +228059,14 @@
 				},
 				"Weight": 1
 			},
+			"Lesser Nagua - Tonali Cavern": {
+				"Chunks": ["Tonali Cavern"],
+				"Level": 48,
+				"Tasks": {
+					"~|Perilous Moons|~ Complete the quest": "Quest"
+				},
+				"Weight": 1
+			},
 			"Zygomites - Fossil Island": {
 				"Chunks": ["Fossil Island Task[+]"],
 				"Level": 57,
@@ -225167,6 +228299,13 @@
 					"Magic": 50
 				},
 				"Weight": 6
+			},
+			"Custodian stalker": {
+				"Level": 54,
+				"Tasks": {
+					"~|Shadows of Custodia|~ Complete the quest": "Quest"
+				},
+				"Weight": 8
 			},
 			"Dagannoths": {
 				"CombatLevel": 75,
@@ -225699,6 +228838,7 @@
 			"Orange": true,
 			"Orange chunks": true,
 			"Orange slices": true,
+			"Orange (hat)": true,
 			"Papaya fruit": true,
 			"Peach": true,
 			"Phluxia bat (3)": true,
@@ -227566,7 +230706,12 @@
 			"Celebrian": true,
 			"Celegorm": true,
 			"Cirdan": true,
-			"Citizen (Varlamore)": true,
+			"Citizen": true,
+			"Citizen (Mistrock)": true,
+			"Citizen (Aldarin)": true,
+			"Citizen (Kastori)": true,
+			"Citizen (Cam Torum)": true,
+			"Citizen (Civitas illa Fortis)": true,
 			"Crimsonette van Marr": true,
 			"Curufin": true,
 			"Digsite workman": true,
@@ -227751,6 +230896,14 @@
 				"4661"
 			]
 		},
+		"4656": {
+			"1": [
+				"4912"
+			],
+			"2": [
+				"4912"
+			]
+		},
 		"4659": {
 			"0": [
 				"4660-2",
@@ -227826,16 +230979,84 @@
 				"4923-1"
 			]
 		},
+		"4910": {
+			"1": [
+				"4911-1",
+				"5166-4"
+			],
+			"2": [
+				"4911-2"
+			]
+		},
+		"4911": {
+			"1": [
+				"4910-1",
+				"4912",
+				"5167-1"
+			],
+			"2": [
+				"4910-2"
+			],
+			"3": [
+				"4912",
+				"5167-1",
+				"5167-5"
+			]
+		},
+		"4912": {
+			"0": [
+				"4656-1",
+				"4656-2",
+				"4911-1",
+				"4911-3",
+				"4913-1",
+				"5168-1"
+			]
+		},
+		"4913": {
+			"1": [
+				"4912",
+				"5169"
+			],
+			"2": [
+				"5169"
+			]
+		},
+		"4915": {
+			"1": [
+				"4916-3",
+				"5171-2"
+			],
+			"2": [
+				"4916-3"
+			]
+		},
 		"4916": {
 			"1": [
 				"4917"
 			],
 			"2": [
 				"4660-2"
+			],
+			"3": [
+				"4915-1",
+				"4915-2",
+				"5172-2"
+			],
+			"4": [
+				"4917-1"
 			]
 		},
 		"4917": {
-			"0": [
+			"1": [
+				"4916-4",
+				"5172-2",
+				"5173"
+			],
+			"2": [
+				"4918"
+			],
+			"3": [
 				"4661",
 				"4916-1"
 			]
@@ -227844,6 +231065,7 @@
 			"0": [
 				"4662-1",
 				"4662-2",
+				"4917-2",
 				"4919",
 				"5174-1",
 				"5174-2"
@@ -227919,6 +231141,92 @@
 			],
 			"3": [
 				"5422"
+			],
+			"4": [
+				"4910-1",
+				"5167-1"
+			]
+		},
+		"5167": {
+			"1": [
+				"4911-1",
+				"4911-3",
+				"5166-4",
+				"5168-1",
+				"5423"
+			],
+			"2": [
+				"5168-1"
+			],
+			"3": [
+				"5168-1"
+			],
+			"4": [
+				"5168-1"
+			],
+			"5": [
+				"4911-3",
+				"5168-1"
+			]
+		},
+		"5168": {
+			"1": [
+				"4912",
+				"5167-1",
+				"5167-2",
+				"5167-3",
+				"5167-4",
+				"5167-5",
+				"5169",
+				"5424-3",
+				"5424-5"
+			],
+			"2": [
+				"5169"
+			],
+			"3": [
+				"5169"
+			]
+		},
+		"5169": {
+			"0": [
+				"4913-1",
+				"4913-2",
+				"5168-1",
+				"5168-2",
+				"5168-3",
+				"5425-3"
+			]
+		},
+		"5171": {
+			"1": [
+				"5172-1"
+			],
+			"2": [
+				"4915-1",
+				"5172-1"
+			],
+			"3": [
+				"5172-1",
+				"5427-1"
+			]
+		},
+		"5172": {
+			"1": [
+				"4916-3",
+				"5171-1",
+				"5171-2",
+				"5171-3",
+				"5428"
+			],
+			"2": [
+				"4916-3",
+				"4917-1"
+			]
+		},
+		"5173": {
+			"0": [
+				"4917-1"
 			]
 		},
 		"5174": {
@@ -228025,6 +231333,13 @@
 				"5678-1"
 			]
 		},
+		"5423": {
+			"0": [
+				"5167-1",
+				"5424-3",
+				"5424-5"
+			]
+		},
 		"5424": {
 			"1": [
 				"5425-1",
@@ -228032,6 +231347,17 @@
 			],
 			"2": [
 				"5680-1"
+			],
+			"3": [
+				"5168-1",
+				"5423"
+			],
+			"4": [
+				"5425-3"
+			],
+			"5": [
+				"5168-1",
+				"5423"
 			]
 		},
 		"5425": {
@@ -228040,6 +231366,56 @@
 			],
 			"2": [
 				"5681-1"
+			],
+			"3": [
+				"5169",
+				"5424-4",
+				"5426-1",
+				"5426-2"
+			]
+		},
+		"5426": {
+			"1": [
+				"5425-3",
+				"5427-1"
+			],
+			"2": [
+				"5425-3"
+			],
+			"3": [
+				"5427-1",
+				"5682-3"
+			],
+			"4": [
+				"5427-1"
+			]
+		},
+		"5427": {
+			"1": [
+				"5171-3",
+				"5426-1",
+				"5426-3",
+				"5426-4",
+				"5428",
+				"5683-1",
+				"5683-3"
+			],
+			"2": [
+				"5428"
+			]
+		},
+		"5428": {
+			"0": [
+				"5172-1",
+				"5427-1",
+				"5427-2",
+				"5429",
+				"5684"
+			]
+		},
+		"5429": {
+			"0": [
+				"5428"
 			]
 		},
 		"5430": {
@@ -228220,6 +231596,7 @@
 				"5681-1"
 			],
 			"3": [
+				"5426-3",
 				"5683-1",
 				"5683-2",
 				"5938-2"
@@ -228227,12 +231604,24 @@
 		},
 		"5683": {
 			"1": [
+				"5427-1",
 				"5682-3",
 				"5939-1",
 				"5939-2"
 			],
 			"2": [
 				"5682-3"
+			],
+			"3": [
+				"5427-1",
+				"5684",
+				"5939-5"
+			]
+		},
+		"5684": {
+			"0": [
+				"5428",
+				"5683-3"
 			]
 		},
 		"5686": {
@@ -228418,11 +231807,24 @@
 			"4": [
 				"5938-1",
 				"6195-1"
+			],
+			"5": [
+				"5683-3",
+				"5940"
+			],
+			"6": [
+				"5940"
+			],
+			"7": [
+				"5940"
 			]
 		},
 		"5940": {
 			"0": [
 				"5939-3",
+				"5939-5",
+				"5939-6",
+				"5939-7",
 				"6196"
 			]
 		},
@@ -231902,9 +235304,7 @@
 		},
 		"12587": {
 			"1": [
-				"12588-1",
-				"12843-1",
-				"12843-2"
+				"12588-1"
 			],
 			"2": [
 				"12588-1"
@@ -232103,26 +235503,21 @@
 			]
 		},
 		"12843": {
-			"1": [
-				"12587-1",
+			"0": [
 				"12844",
 				"13099-2"
-			],
-			"2": [
-				"12587-1"
 			]
 		},
 		"12844": {
 			"0": [
 				"12588-1",
-				"12843-1",
+				"12843",
 				"13100-2"
 			]
 		},
 		"12845": {
 			"1": [
 				"12589",
-				"12843-1",
 				"12846-1",
 				"13101"
 			],
@@ -232366,7 +235761,7 @@
 				"13355"
 			],
 			"2": [
-				"12843-1",
+				"12843",
 				"13100-2"
 			]
 		},
@@ -233525,11 +236920,11 @@
 			]
 		}
 	},
-	"walkableChunks": ["4403", "4404", "4405", "4659", "4660", "4661", "4662", "4663", "4664", "4665", "4666", "4667", "4916", "4917", "4918", "4919", "4920", "4921", "4922", "4923", "5165", "5166", "5174", "5175", "5176", "5177", "5178", "5179", "5180", "5420", "5421", "5422", "5424", "5425", "5430", "5431", "5432", "5433", "5434", "5435", "5676", "5677", "5678", "5679", "5680", "5681", "5682", "5683", "5686", "5687", "5688", "5689", "5690", "5691", "5692", "5933", "5934", "5935", "5936", "5937", "5938", "5939", "5940", "5941", "5942", "5943", "5944", "5945", "5946", "5947", "5948", "5949", "6189", "6190", "6191", "6192", "6193", "6194", "6195", "6196", "6197", "6198", "6199", "6200", "6201", "6202", "6203", "6204", "6205", "6445", "6446", "6447", "6448", "6449", "6450", "6451", "6453", "6454", "6455", "6456", "6457", "6458", "6459", "6460", "6461", "6462", "6701", "6702", "6703", "6704", "6705", "6706", "6707", "6710", "6711", "6712", "6713", "6714", "6715", "6716", "6717", "6957", "6958", "6959", "6960", "6961", "6965", "6966", "6967", "6968", "6969", "6970", "6971", "6972", "6973", "7215", "7216", "7217", "7221", "7222", "7223", "7224", "7225", "7226", "7227", "7228", "7472", "7478", "7479", "8236", "8237", "8238", "8252", "8253", "8491", "8492", "8493", "8494", "8495", "8496", "8497", "8498", "8499", "8500", "8501", "8508", "8509", "8747", "8748", "8749", "8750", "8751", "8752", "8753", "8754", "8755", "8756", "8757", "8763", "9003", "9004", "9005", "9006", "9007", "9008", "9009", "9010", "9011", "9012", "9013", "9014", "9015", "9016", "9023", "9260", "9261", "9262", "9263", "9264", "9265", "9266", "9267", "9268", "9269", "9270", "9271", "9272", "9273", "9275", "9276", "9519", "9520", "9521", "9523", "9524", "9525", "9526", "9527", "9528", "9531", "9532", "9772", "9773", "9774", "9775", "9776", "9777", "9778", "9779", "9780", "9781", "9782", "9783", "9790", "10028", "10029", "10030", "10031", "10032", "10033", "10034", "10035", "10036", "10037", "10038", "10039", "10040", "10042", "10043", "10044", "10284", "10285", "10286", "10287", "10288", "10289", "10290", "10291", "10292", "10293", "10294", "10296", "10297", "10300", "10536", "10537", "10542", "10543", "10544", "10545", "10546", "10547", "10548", "10549", "10550", "10551", "10552", "10553", "10554", "10556", "10558", "10559", "10794", "10795", "10801", "10802", "10803", "10804", "10805", "10806", "10807", "10808", "10809", "10810", "10811", "11050", "11051", "11053", "11054", "11055", "11056", "11057", "11058", "11059", "11060", "11061", "11062", "11063", "11064", "11065", "11066", "11067", "11068", "11309", "11310", "11311", "11312", "11313", "11314", "11315", "11316", "11317", "11318", "11319", "11320", "11321", "11322", "11323", "11325", "11326", "11562", "11565", "11566", "11567", "11568", "11569", "11570", "11571", "11572", "11573", "11574", "11575", "11576", "11577", "11578", "11579", "11581", "11821", "11822", "11823", "11824", "11825", "11826", "11827", "11828", "11829", "11830", "11831", "11832", "11833", "11834", "11835", "11836", "11837", "12078", "12081", "12082", "12083", "12084", "12085", "12086", "12087", "12088", "12089", "12090", "12091", "12092", "12093", "12332", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12344", "12345", "12346", "12347", "12348", "12349", "12587", "12588", "12589", "12590", "12591", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12600", "12601", "12602", "12603", "12604", "12605", "12843", "12844", "12845", "12846", "12847", "12848", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "12856", "12857", "12858", "12859", "12860", "12861", "13098", "13099", "13100", "13101", "13102", "13103", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13117", "13354", "13355", "13356", "13357", "13358", "13359", "13360", "13361", "13362", "13363", "13364", "13365", "13366", "13367", "13368", "13369", "13370", "13371", "13372", "13373", "13374", "13375", "13376", "13611", "13612", "13613", "13614", "13615", "13616", "13617", "13618", "13619", "13620", "13621", "13622", "13623", "13630", "13631", "13632", "13869", "13870", "13871", "13872", "13873", "13874", "13875", "13876", "13877", "13878", "13879", "13886", "13887", "13888", "14129", "14130", "14131", "14132", "14133", "14134", "14135", "14142", "14385", "14386", "14387", "14388", "14389", "14390", "14391", "14398", "14637", "14638", "14639", "14641", "14642", "14643", "14644", "14645", "14646", "14647", "14649", "14650", "14651", "14652", "14894", "14895", "14898", "14899", "14900", "14901", "14902", "14906", "14907", "14908", "15148", "15150", "15151", "15159", "15162", "15163", "15164", "15406", "15407", "11324"],
+	"walkableChunks": ["4403", "4404", "4405", "4656", "4659", "4660", "4661", "4662", "4663", "4664", "4665", "4666", "4667", "4910", "4911", "4912", "4913", "4915", "4916", "4917", "4918", "4919", "4920", "4921", "4922", "4923", "5165", "5166", "5167", "5168", "5169", "5171", "5172", "5173", "5174", "5175", "5176", "5177", "5178", "5179", "5180", "5420", "5421", "5422", "5423", "5424", "5425", "5426", "5427", "5428", "5429", "5430", "5431", "5432", "5433", "5434", "5435", "5676", "5677", "5678", "5679", "5680", "5681", "5682", "5683", "5684", "5686", "5687", "5688", "5689", "5690", "5691", "5692", "5933", "5934", "5935", "5936", "5937", "5938", "5939", "5940", "5941", "5942", "5943", "5944", "5945", "5946", "5947", "5948", "5949", "6189", "6190", "6191", "6192", "6193", "6194", "6195", "6196", "6197", "6198", "6199", "6200", "6201", "6202", "6203", "6204", "6205", "6445", "6446", "6447", "6448", "6449", "6450", "6451", "6453", "6454", "6455", "6456", "6457", "6458", "6459", "6460", "6461", "6462", "6701", "6702", "6703", "6704", "6705", "6706", "6707", "6710", "6711", "6712", "6713", "6714", "6715", "6716", "6717", "6957", "6958", "6959", "6960", "6961", "6965", "6966", "6967", "6968", "6969", "6970", "6971", "6972", "6973", "7215", "7216", "7217", "7221", "7222", "7223", "7224", "7225", "7226", "7227", "7228", "7472", "7478", "7479", "8236", "8237", "8238", "8252", "8253", "8491", "8492", "8493", "8494", "8495", "8496", "8497", "8498", "8499", "8500", "8501", "8508", "8509", "8747", "8748", "8749", "8750", "8751", "8752", "8753", "8754", "8755", "8756", "8757", "8763", "9003", "9004", "9005", "9006", "9007", "9008", "9009", "9010", "9011", "9012", "9013", "9014", "9015", "9016", "9023", "9260", "9261", "9262", "9263", "9264", "9265", "9266", "9267", "9268", "9269", "9270", "9271", "9272", "9273", "9275", "9276", "9519", "9520", "9521", "9523", "9524", "9525", "9526", "9527", "9528", "9531", "9532", "9772", "9773", "9774", "9775", "9776", "9777", "9778", "9779", "9780", "9781", "9782", "9783", "9790", "10028", "10029", "10030", "10031", "10032", "10033", "10034", "10035", "10036", "10037", "10038", "10039", "10040", "10042", "10043", "10044", "10284", "10285", "10286", "10287", "10288", "10289", "10290", "10291", "10292", "10293", "10294", "10296", "10297", "10300", "10536", "10537", "10542", "10543", "10544", "10545", "10546", "10547", "10548", "10549", "10550", "10551", "10552", "10553", "10554", "10556", "10558", "10559", "10794", "10795", "10801", "10802", "10803", "10804", "10805", "10806", "10807", "10808", "10809", "10810", "10811", "11050", "11051", "11053", "11054", "11055", "11056", "11057", "11058", "11059", "11060", "11061", "11062", "11063", "11064", "11065", "11066", "11067", "11068", "11309", "11310", "11311", "11312", "11313", "11314", "11315", "11316", "11317", "11318", "11319", "11320", "11321", "11322", "11323", "11325", "11326", "11562", "11565", "11566", "11567", "11568", "11569", "11570", "11571", "11572", "11573", "11574", "11575", "11576", "11577", "11578", "11579", "11581", "11821", "11822", "11823", "11824", "11825", "11826", "11827", "11828", "11829", "11830", "11831", "11832", "11833", "11834", "11835", "11836", "11837", "12078", "12081", "12082", "12083", "12084", "12085", "12086", "12087", "12088", "12089", "12090", "12091", "12092", "12093", "12332", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12344", "12345", "12346", "12347", "12348", "12349", "12587", "12588", "12589", "12590", "12591", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12600", "12601", "12602", "12603", "12604", "12605", "12843", "12844", "12845", "12846", "12847", "12848", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "12856", "12857", "12858", "12859", "12860", "12861", "13098", "13099", "13100", "13101", "13102", "13103", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13117", "13354", "13355", "13356", "13357", "13358", "13359", "13360", "13361", "13362", "13363", "13364", "13365", "13366", "13367", "13368", "13369", "13370", "13371", "13372", "13373", "13374", "13375", "13376", "13611", "13612", "13613", "13614", "13615", "13616", "13617", "13618", "13619", "13620", "13621", "13622", "13623", "13630", "13631", "13632", "13869", "13870", "13871", "13872", "13873", "13874", "13875", "13876", "13877", "13878", "13879", "13886", "13887", "13888", "14129", "14130", "14131", "14132", "14133", "14134", "14135", "14142", "14385", "14386", "14387", "14388", "14389", "14390", "14391", "14398", "14637", "14638", "14639", "14641", "14642", "14643", "14644", "14645", "14646", "14647", "14649", "14650", "14651", "14652", "14894", "14895", "14898", "14899", "14900", "14901", "14902", "14906", "14907", "14908", "15148", "15150", "15151", "15159", "15162", "15163", "15164", "15406", "15407", "11324"],
 	"walkableChunksF2P": ["9520", "9772", "9773", "9776", "10028", "10284", "11313", "11314", "11315", "11569", "11570", "11571", "11572", "11573", "11574", "11824", "11825", "11826", "11827", "11828", "11829", "11830", "11831", "11832", "11833", "11834", "11835", "11836", "12081", "12082", "12083", "12084", "12085", "12086", "12087", "12088", "12089", "12090", "12091", "12092", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12344", "12345", "12346", "12347", "12348", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12600", "12601", "12602", "12603", "12604", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "12856", "12857", "12858", "12859", "12860", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13361", "13362", "13363", "13367", "13368", "13369", "13370", "13371", "13372", "13617", "13618", "13619", "Crandor and Karamja Dungeon#South", "Crandor and Karamja Dungeon#North", "Melzar's Maze#Basement", "Air altar", "White Knights' Castle#Crypt", "Death's Office", "Mind altar", "Ruins of Camdozaal", "Scrubfoot's cave", "Asgarnian Ice Dungeon", "Dwarven Mine", "Old School Museum", "Mining Guild", "Body altar", "Rune essence mine", "Wizards' Tower#Basement", "Draynor Sewers", "Edgeville Dungeon", "Stronghold of Security", "Varrock Sewers", "Water altar", "H.A.M. Hideout", "Varrock West Bank#Basement", "Clan Hall", "Misthalin Manor", "Lumbridge Castle#Cellar", "Phoenix Gang Hideout", "Fire altar", "Earth altar"],
-	"unnotingChunks": ["4919", "4922", "5179", "5420", "5421", "5691", "5692", "5938", "5939", "5941", "5944", "5946", "5948", "6191", "6198", "6448", "6457", "6461", "6710", "6960", "6968", "7223", "7227", "8253", "8748", "9265", "9273", "9275", "9531", "9772", "9776", "9781", "9782", "10039", "10284", "10288", "10292", "10293", "10300", "10537", "10545", "10547", "10804", "10806", "11051", "11056", "11061", "11310", "11319", "11571", "11826", "11828", "11835", "12084", "12338", "12342", "12344", "12588", "12590", "12597", "12598", "12605", "12850", "12853", "13104", "13105", "13358", "13363", "13613", "13874", "13878", "14388", "14638", "14646", "14907", "14908", "15151", "15163", "13631", "Ruins of Camdozaal", "Prifddinas", "Keldagrim", "Blast Furnace", "Mor Ul Rek#Outer Area", "Mor Ul Rek#Inner Area", "Rogues' Den", "Mining Guild", "Motherlode Mine", "Mage Arena bank", "Sophanem Dungeon", "Tarn's Lair", "Hallowed Sepulchre", "Shilo Village mine#Underground", "Giants' Foundry", "Tombs of Amascut Lobby", "Ourania Cave", "Chambers of Xeric", "Cam Torum", "Fortis Colosseum Underground", "Alchemical Society"],
+	"unnotingChunks": ["4912", "4919", "4922", "5179", "5420", "5421", "5427", "5684", "5691", "5692", "5938", "5939", "5941", "5944", "5946", "5948", "6191", "6198", "6448", "6457", "6461", "6710", "6960", "6968", "7223", "7227", "8253", "8748", "9265", "9273", "9275", "9531", "9772", "9776", "9781", "9782", "10039", "10284", "10288", "10292", "10293", "10300", "10537", "10545", "10547", "10804", "10806", "11051", "11056", "11061", "11310", "11319", "11571", "11826", "11828", "11835", "12084", "12338", "12342", "12344", "12588", "12590", "12597", "12598", "12605", "12850", "12853", "13104", "13105", "13358", "13363", "13613", "13874", "13878", "14388", "14638", "14646", "14907", "14908", "15151", "15163", "13631", "Ruins of Camdozaal", "Prifddinas", "Keldagrim", "Blast Furnace", "Mor Ul Rek#Outer Area", "Mor Ul Rek#Inner Area", "Rogues' Den", "Mining Guild", "Motherlode Mine", "Mage Arena bank", "Sophanem Dungeon", "Tarn's Lair", "Hallowed Sepulchre", "Shilo Village mine#Underground", "Giants' Foundry", "Tombs of Amascut Lobby", "Ourania Cave", "Chambers of Xeric", "Cam Torum", "Fortis Colosseum Underground", "Alchemical Society"],
 	"rollingChunks": {
-		"bank": ["4919", "4922", "5179", "5420", "5421", "5691", "5692", "5938", "5939", "5941", "5946", "5948", "6191", "6198", "6448", "6457", "6461", "6710", "6960", "6968", "7223", "7227", "8253", "8748", "9265", "9273", "9275", "9531", "9772", "9776", "9781", "9782", "10039", "10284", "10288", "10292", "10293", "10300", "10537", "10545", "10547", "10804", "10806", "11051", "11061", "11310", "11319", "11571", "11828", "12084", "12338", "12342", "12344", "12588", "12597", "12598", "12850", "12853", "13104", "13105", "13363", "13613", "13874", "13878", "14388", "14638", "14646", "14907", "14908", "15151", "15163", "13631", "9011", "10810", "11313", "11575", "12085", "12349", "13099", "13618", "14644", "13361", "13354", "9778", "4919", "5680", "7216", "5421", "11830"],
+		"bank": ["4912", "4919", "4922", "5179", "5420", "5421", "5427", "5684", "5691", "5692", "5938", "5939", "5941", "5946", "5948", "6191", "6198", "6448", "6457", "6461", "6710", "6960", "6968", "7223", "7227", "8253", "8748", "9265", "9273", "9275", "9531", "9772", "9776", "9781", "9782", "10039", "10284", "10288", "10292", "10293", "10300", "10537", "10545", "10547", "10804", "10806", "11051", "11061", "11310", "11319", "11571", "11828", "12084", "12338", "12342", "12344", "12588", "12597", "12598", "12850", "12853", "13104", "13105", "13363", "13613", "13874", "13878", "14388", "14638", "14646", "14907", "14908", "15151", "15163", "13631", "9011", "10810", "11313", "11575", "12085", "12349", "13099", "13618", "14644", "13361", "13354", "9778", "4919", "5680", "7216", "5421", "11830"],
 		"noquest": ["4662", "4663", "4664", "4665", "4666", "4667", "4918", "4919", "4920", "4921", "4922", "4923", "5174", "5175", "5176", "5177", "5178", "5179", "5180", "5430", "5431", "5432", "5433", "5434", "5435", "5686", "5687", "5688", "5689", "5690", "5691", "5692", "5941", "5942", "5943", "5944", "5945", "5946", "5947", "5948", "5949", "6197", "6198", "6199", "6200", "6201", "6202", "6203", "6204", "6205", "6453", "6454", "6455", "6456", "6457", "6458", "6459", "6460", "6461", "6462", "6710", "6711", "6712", "6713", "6714", "6715", "6716", "6717", "6965", "6966", "6967", "6968", "6969", "6970", "6971", "6972", "6973", "7221", "7222", "7223", "7224", "7225", "7226", "7227", "7228", "7478", "7479", "8236", "8237", "8238", "8491", "8492", "8493", "8494", "8747", "8748", "8749", "8750", "9003", "9004", "9005", "9006", "9014", "9015", "9016", "9260", "9261", "9262", "9263", "9264", "9268", "9269", "9270", "9271", "9272", "9273", "9519", "9520", "9521", "9524", "9525", "9526", "9527", "9528", "9773", "9774", "9775", "9776", "9777", "9778", "9779", "9780", "9781", "9782", "9783", "10028", "10029", "10030", "10031", "10032", "10033", "10034", "10035", "10036", "10037", "10038", "10039", "10040", "10042", "10284", "10285", "10286", "10287", "10288", "10289", "10290", "10291", "10292", "10293", "10294", "10296", "10297", "10536", "10537", "10542", "10543", "10544", "10545", "10546", "10547", "10548", "10549", "10550", "10551", "10552", "10553", "10554", "10801", "10802", "10803", "10804", "10805", "10806", "10807", "10808", "10809", "10810", "10811", "11053", "11054", "11055", "11056", "11057", "11058", "11060", "11061", "11062", "11063", "11064", "11065", "11309", "11310", "11311", "11312", "11313", "11314", "11316", "11317", "11318", "11319", "11320", "11565", "11566", "11567", "11568", "11569", "11570", "11571", "11572", "11573", "11574", "11575", "11576", "11822", "11823", "11824", "11825", "11826", "11827", "11828", "11829", "11830", "11831", "11832", "11833", "11834", "11835", "11836", "11837", "12078", "12081", "12082", "12083", "12084", "12085", "12086", "12087", "12088", "12089", "12090", "12091", "12092", "12093", "12332", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12344", "12345", "12346", "12347", "12348", "12349", "12587", "12588", "12589", "12590", "12591", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12600", "12601", "12602", "12603", "12604", "12605", "12843", "12844", "12845", "12846", "12847", "12848", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "12856", "12857", "12858", "12859", "12860", "12861", "13099", "13100", "13101", "13102", "13103", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13117", "13355", "13356", "13357", "13358", "13359", "13360", "13361", "13362", "13363", "13364", "13365", "13366", "13367", "13368", "13369", "13370", "13371", "13372", "13373", "13374", "13375", "13376", "13611", "13612", "13613", "13614", "13615", "13616", "13617", "13618", "13619", "13620", "13621", "13622", "13630", "13631", "13632", "13869", "13870", "13871", "13872", "13873", "13886", "13887", "13888"],
 		"misthalin": ["12082", "12083", "12084", "12085", "12086", "12087", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "13106", "13107", "13108", "13109", "13110", "13111", "13364", "13365", "13366", "13367", "13620", "13621", "13622", "8236", "8237", "8238", "8491", "8492", "8493", "8494", "8747", "8748", "8749", "8750", "9003", "9004", "9005", "9006", "9260", "9261", "9262", "14649", "14650", "14651", "14652", "14906", "14907", "14908", "15162", "15163", "15164"],
 		"karamja": ["10801", "10802", "11053", "11054", "11055", "11056", "11057", "11058", "11059", "11309", "11310", "11311", "11312", "11313", "11314", "11315", "11565", "11566", "11567", "11568", "11569", "11821", "11822", "11823", "11825"],
@@ -233541,7 +236936,7 @@
 		"tirannwn": ["8495", "8496", "8497", "8498", "8499", "8500", "8501", "8751", "8752", "8753", "8754", "8755", "8756", "8757", "9007", "9008", "9009", "9010", "9011", "9012", "9013", "9265", "9266", "9267", "9268", "9523", "9524"],
 		"wilderness": ["11831", "11832", "11833", "11834", "11835", "11836", "11837", "12087", "12088", "12089", "12090", "12091", "12092", "12093", "12343", "12344", "12345", "12346", "12347", "12348", "12349", "12599", "12600", "12601", "12602", "12603", "12604", "12605", "12855", "12856", "12857", "12858", "12859", "12860", "12861", "13111", "13112", "13113", "13114", "13115", "13116", "13117", "13367", "13368", "13369", "13370", "13371", "13372", "13373", "13374", "13375", "13376", "13630", "13631", "13632", "13886", "13887", "13888"],
 		"kourend": ["4403", "4404", "4405", "4659", "4660", "4661", "4662", "4663", "4664", "4665", "4666", "4667", "4916", "4917", "4918", "4919", "4920", "4921", "4922", "4923", "5174", "5175", "5176", "5177", "5178", "5179", "5180", "5430", "5431", "5432", "5433", "5434", "5435", "5686", "5687", "5688", "5689", "5690", "5691", "5692", "5941", "5942", "5943", "5944", "5945", "5946", "5947", "5948", "5949", "6197", "6198", "6199", "6200", "6201", "6202", "6203", "6204", "6205", "6453", "6454", "6455", "6456", "6457", "6458", "6459", "6460", "6461", "6462", "6710", "6711", "6712", "6713", "6714", "6715", "6716", "6717", "6965", "6966", "6967", "6968", "6969", "6970", "6971", "6972", "6973", "7221", "7222", "7223", "7224", "7225", "7226", "7227", "7228", "7478", "7479"],
-		"varlamore": ["5165", "5166", "5420", "5421", "5422", "5424", "5425", "5676", "5677", "5678", "5679", "5680", "5681", "5682", "5683", "5933", "5934", "5935", "5936", "5937", "5938", "5939", "5940", "6189", "6190", "6191", "6192", "6193", "6194", "6195", "6196", "6445", "6446", "6447", "6448", "6449", "6450", "6451", "6701", "6702", "6703", "6704", "6705", "6706", "6707", "6957", "6958", "6959", "6960", "6961", "7215", "7216", "7217", "7472"]
+		"varlamore": ["4656", "4910", "4911", "4912", "4913", "4915", "4916", "4917", "5165", "5166", "5167", "5168", "5169", "5171", "5172", "5173", "5420", "5421", "5422", "5423", "5424", "5425", "5426", "5427", "5428", "5429", "5676", "5677", "5678", "5679", "5680", "5681", "5682", "5683", "5684", "5933", "5934", "5935", "5936", "5937", "5938", "5939", "5940", "6189", "6190", "6191", "6192", "6193", "6194", "6195", "6196", "6445", "6446", "6447", "6448", "6449", "6450", "6451", "6701", "6702", "6703", "6704", "6705", "6706", "6707", "6957", "6958", "6959", "6960", "6961", "7215", "7216", "7217", "7472"]
 	},
 	"equipment": {
 		"Unarmed": {
@@ -279798,6 +283193,301 @@
 			"ranged_strength": 0,
 			"slot": "ring",
 			"requirements": {}
+		},
+		"Redwood hiking staff": {
+			"attack_speed": 5,
+			"attack_crush": 10,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": -4,
+			"attack_stab": -4,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "weapon",
+			"requirements": {}
+		},
+		"Earthbound tecpatl": {
+			"attack_speed": 4,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 11,
+			"attack_stab": 72,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 64,
+			"prayer": 2,
+			"ranged_strength": 0,
+			"slot": "2h",
+			"requirements": {
+				"Attack": 55
+			}
+		},
+		"Avernic treads": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": 11,
+			"attack_ranged": 15,
+			"attack_slash": 5,
+			"attack_stab": 5,
+			"defence_crush": 25,
+			"defence_magic": 10,
+			"defence_ranged": 10,
+			"defence_slash": 25,
+			"defence_stab": 21,
+			"magic_damage": 1,
+			"melee_strength": 4,
+			"prayer": 0,
+			"ranged_strength": 2,
+			"slot": "feet",
+			"requirements": {
+				"Defence": 80,
+				"Strength": 80,
+				"Ranged": 80,
+				"Magic": 80
+			}
+		},
+		"Avernic treads (et)": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": 11,
+			"attack_ranged": 15,
+			"attack_slash": 5,
+			"attack_stab": 5,
+			"defence_crush": 25,
+			"defence_magic": 10,
+			"defence_ranged": 10,
+			"defence_slash": 25,
+			"defence_stab": 21,
+			"magic_damage": 2,
+			"melee_strength": 4,
+			"prayer": 0,
+			"ranged_strength": 2,
+			"slot": "feet",
+			"requirements": {
+				"Defence": 80,
+				"Strength": 80,
+				"Ranged": 80,
+				"Magic": 80
+			}
+		},
+		"Avernic treads (pe)": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": 11,
+			"attack_ranged": 15,
+			"attack_slash": 5,
+			"attack_stab": 5,
+			"defence_crush": 25,
+			"defence_magic": 10,
+			"defence_ranged": 10,
+			"defence_slash": 25,
+			"defence_stab": 21,
+			"magic_damage": 1,
+			"melee_strength": 4,
+			"prayer": 0,
+			"ranged_strength": 3,
+			"slot": "feet",
+			"requirements": {
+				"Defence": 80,
+				"Strength": 80,
+				"Ranged": 80,
+				"Magic": 80
+			}
+		},
+		"Avernic treads (pr)": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": 11,
+			"attack_ranged": 15,
+			"attack_slash": 5,
+			"attack_stab": 5,
+			"defence_crush": 25,
+			"defence_magic": 10,
+			"defence_ranged": 10,
+			"defence_slash": 25,
+			"defence_stab": 21,
+			"magic_damage": 1,
+			"melee_strength": 6,
+			"prayer": 0,
+			"ranged_strength": 2,
+			"slot": "feet",
+			"requirements": {
+				"Defence": 80,
+				"Strength": 80,
+				"Ranged": 80,
+				"Magic": 80
+			}
+		},
+		"Avernic treads (pe)(et)": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": 11,
+			"attack_ranged": 15,
+			"attack_slash": 5,
+			"attack_stab": 5,
+			"defence_crush": 25,
+			"defence_magic": 10,
+			"defence_ranged": 10,
+			"defence_slash": 25,
+			"defence_stab": 21,
+			"magic_damage": 2,
+			"melee_strength": 4,
+			"prayer": 0,
+			"ranged_strength": 3,
+			"slot": "feet",
+			"requirements": {
+				"Defence": 80,
+				"Strength": 80,
+				"Ranged": 80,
+				"Magic": 80
+			}
+		},
+		"Avernic treads (pr)(et)": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": 11,
+			"attack_ranged": 15,
+			"attack_slash": 5,
+			"attack_stab": 5,
+			"defence_crush": 25,
+			"defence_magic": 10,
+			"defence_ranged": 10,
+			"defence_slash": 25,
+			"defence_stab": 21,
+			"magic_damage": 2,
+			"melee_strength": 6,
+			"prayer": 0,
+			"ranged_strength": 2,
+			"slot": "feet",
+			"requirements": {
+				"Defence": 80,
+				"Strength": 80,
+				"Ranged": 80,
+				"Magic": 80
+			}
+		},
+		"Avernic treads (pr)(pe)": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": 11,
+			"attack_ranged": 15,
+			"attack_slash": 5,
+			"attack_stab": 5,
+			"defence_crush": 25,
+			"defence_magic": 10,
+			"defence_ranged": 10,
+			"defence_slash": 25,
+			"defence_stab": 21,
+			"magic_damage": 1,
+			"melee_strength": 6,
+			"prayer": 0,
+			"ranged_strength": 3,
+			"slot": "feet",
+			"requirements": {
+				"Defence": 80,
+				"Strength": 80,
+				"Ranged": 80,
+				"Magic": 80
+			}
+		},
+		"Avernic treads (max)": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": 11,
+			"attack_ranged": 15,
+			"attack_slash": 5,
+			"attack_stab": 5,
+			"defence_crush": 25,
+			"defence_magic": 10,
+			"defence_ranged": 10,
+			"defence_slash": 25,
+			"defence_stab": 21,
+			"magic_damage": 2,
+			"melee_strength": 6,
+			"prayer": 0,
+			"ranged_strength": 3,
+			"slot": "feet",
+			"requirements": {
+				"Defence": 80,
+				"Strength": 80,
+				"Ranged": 80,
+				"Magic": 80
+			}
+		},
+		"Eye of ayak (uncharged)": {
+			"attack_speed": 3,
+			"attack_crush": 0,
+			"attack_magic": 30,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 5,
+			"defence_magic": 10,
+			"defence_ranged": 0,
+			"defence_slash": 5,
+			"defence_stab": 1,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 2,
+			"ranged_strength": 0,
+			"slot": "weapon",
+			"requirements": {
+				"Magic": 83
+			}
+		},
+		"Confliction gauntlets": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 20,
+			"attack_ranged": -4,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 7,
+			"defence_magic": 5,
+			"defence_ranged": 5,
+			"defence_slash": 18,
+			"defence_stab": 15,
+			"magic_damage": 7,
+			"melee_strength": 0,
+			"prayer": 2,
+			"ranged_strength": 0,
+			"slot": "hands",
+			"requirements": {
+				"Hitpoints": 90
+			}
+		},
+		"Antler guard": {
+			"attack_speed": 0,
+			"attack_crush": 15,
+			"attack_magic": 9,
+			"attack_ranged": 9,
+			"attack_slash": 15,
+			"attack_stab": 15,
+			"defence_crush": -25,
+			"defence_magic": -25,
+			"defence_ranged": -25,
+			"defence_slash": -25,
+			"defence_stab": -25,
+			"magic_damage": 0,
+			"melee_strength": 5,
+			"prayer": 4,
+			"ranged_strength": 2,
+			"slot": "shield",
+			"requirements": {
+				"Prayer": 50
+			}
 		}
 	}
 }
