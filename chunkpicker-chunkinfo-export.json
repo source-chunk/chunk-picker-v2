@@ -102534,6 +102534,12 @@
 				"BaseQuest": "Shadows of Custodia",
 				"Description": "Read the noticeboard, talk to Ictus, then talk to the concerned couple",
 				"Objects": ["Noticeboard (Shadows of Custodia)"],
+				"Skills": {
+					"Construction": 41,
+					"Fishing": 45,
+					"Hunter": 36,
+					"Slayer": 54
+				},
 				"Tasks": {
 					"~|Children of the Sun|~ Complete the quest": "Quest"
 				},
@@ -102542,11 +102548,6 @@
 			"~|Shadows of Custodia|~ 2": {
 				"BaseQuest": "Shadows of Custodia",
 				"Description": "Follow the trail, fish the fabric off the plank, then return to the couple",
-				"Chunks": ["5428"],
-				"Skills": {
-					"Fishing": 45,
-					"Hunter": 36
-				},
 				"Items": ["Fishing rod"],
 				"Tasks": {
 					"~|Shadows of Custodia|~ 1": "Quest"
@@ -102586,9 +102587,6 @@
 				"Description": "Reinforce the wall of the house",
 				"Chunks": ["5428"],
 				"Items": ["Hammer[+]", "Maple logs"],
-				"Skills": {
-					"Construction": 41
-				},
 				"Tasks": {
 					"~|Shadows of Custodia|~ 3": "Quest"
 				},
@@ -102608,9 +102606,6 @@
 				"BaseQuest": "Shadows of Custodia",
 				"Description": "Return to the cave and rescue Antos",
 				"Chunks": ["5172-2", "5428"],
-				"Skills": {
-					"Slayer": 54
-				},
 				"Tasks": {
 					"~|Shadows of Custodia|~ 5": "Quest"
 				},
@@ -107837,7 +107832,7 @@
 						"Bard": 3,
 						"Blacksmith (Tal Teklan)": 1,
 						"Chiribaya": 1,
-						"Citizen": 4,
+						"Citizen (Tal Teklan)": 4,
 						"Teicuh": 1,
 						"Xochitl": 1
 					},
@@ -108096,7 +108091,7 @@
 				"Banker": 1,
 				"Black warlock": 1,
 				"Child": 2,
-				"Citizen": 9,
+				"Citizen (Tal Teklan)": 9,
 				"Farmer": 1,
 				"Kauayotl": 1,
 				"King (Tal Teklan)": 1,
@@ -109507,7 +109502,7 @@
 						"Bank buffalo": 1,
 						"Bartender (Nemus Retreat)": 1,
 						"Chiribaya": 1,
-						"Citizen": 3,
+						"Citizen (Auburnvale)": 3,
 						"Friendly Forester": 1,
 						"Mountain Guide": 1,
 						"Taz": 1,
@@ -109570,7 +109565,7 @@
 				"Captain Ariadna": 1,
 				"Child": 2,
 				"Chouani": 1,
-				"Citizen": 4,
+				"Citizen (Auburnvale)": 4,
 				"Copper longertail": 5,
 				"Francis": 1,
 				"Isadora": 1,
@@ -110271,7 +110266,7 @@
 			},
 			"NPC": {
 				"Banker": 4,
-				"Citizen": 8,
+				"Citizen (Auburnvale)": 8,
 				"Ruby harvest": 2,
 				"Sebamo": 1,
 				"Tool Leprechaun": 1
@@ -137449,7 +137444,7 @@
 						"13198": true
 					},
 					"NPC": {
-						"Citizen": 9,
+						"Citizen (Menaphos)": 9,
 						"Menaphite Guard": 4
 					},
 					"Object": {
@@ -151043,7 +151038,7 @@
 			"AvernicTreads[+]": "Any avernic treads variant"
 		},
 		"mixPlus": {
-			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen", "Citizen (Mistrock)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Cam Torum)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
+			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
 			"Farmer[+]": ["Farmer", "Farmer (Varlamore)"],
 			"Fremennik citizen[+]": ["Agnar", "Freygerd", "Inga", "Pontak", "Sassilik", "Borrokar", "Freidir", "Jennella", "Lanzig", "Lensa"]
 		},
@@ -151055,7 +151050,7 @@
 		"monstersPlus": {
 			"Aberrant spectre[+]": ["Aberrant spectre", "Deviant spectre"],
 			"Bloodveld[+]": ["Bloodveld", "Mutated Bloodveld"],
-			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen", "Citizen (Mistrock)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Cam Torum)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
+			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
 			"Demonic[+]": ["Abyssal Sire", "Abyssal demon", "Abyssal demon#Wilderness Slayer Cave", "Balfrug Kreeyath", "Black demon", "Black demon#Wilderness Slayer Cave", "Bloodveld", "Bouncer", "Cerberus", "Demonic gorilla", "Doomion", "Flaming pyrelord", "Greater Nechryael", "Greater Nechryael#Wilderness Slayer Cave", "Greater abyssal demon", "Greater demon", "Greater demon#Wilderness Slayer Cave", "Hellhound", "Holthion", "Icefiend", "Imp", "Infernal pyrelord", "Insatiable Bloodveld", "Insatiable mutated Bloodveld", "Judge of Yama", "Jungle Demon", "K'ril Tsutsaroth", "Lesser demon", "Lesser demon (Melzar's Maze)", "Lesser demon#Wilderness Slayer Cave", "Mutated Bloodveld", "Nechryael", "Nechryarch", "Othainian", "Porazdir", "Pyrefiend", "Pyrelord", "Skeleton Hellhound", "Skotizo", "Tstanon Karlak", "Waterfiend", "Zakl'n Gritch"],
 			"Desert lizard[+]": ["Desert Lizard", "Lizard", "Small Lizard"],
 			"Guard[+]": ["Guard", "Guard (Hosidius)", "Guard (Shayzien)", "Head Guard"],
@@ -151121,7 +151116,7 @@
 			"Farmer[+]": "Any pickpocketable farmer"
 		},
 		"npcsPlus": {
-			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen", "Citizen (Mistrock)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Cam Torum)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
+			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
 			"Elf[+]": ["Arvel", "Goreu", "Kelyn", "Mawrth", "Anaire", "Aranwe", "Aredhel", "Caranthir", "Celebrian", "Celegorm", "Cirdan", "Curufin", "Earwen", "Edrahil", "Elenwe", "Elladan", "Enel", "Erestor", "Enerdhil", "Enelye", "Feanor", "Findis", "Finduilas", "Fingolfin", "Fingon", "Galathil", "Gelmir", "Glorfindel", "Guilin", "Hendor (elf)", "Idril", "Imin", "Iminye", "Indis", "Ingwe", "Ingwion", "Lenwe", "Lindir", "Maeglin", "Mahtan", "Miriel", "Mithrellas", "Nellas", "Nerdanel", "Nimloth", "Oropher", "Orophin", "Saeros", "Salgant", "Tatie", "Thingol", "Turgon", "Vaire"],
 			"ElfLletya[+]": ["Arvel", "Goreu", "Kelyn", "Mawrth"],
 			"ElfPrifddinas[+]": ["Anaire", "Aranwe", "Aredhel", "Caranthir", "Celebrian", "Celegorm", "Cirdan", "Curufin", "Earwen", "Edrahil", "Elenwe", "Elladan", "Enel", "Erestor", "Enerdhil", "Enelye", "Feanor", "Findis", "Finduilas", "Fingolfin", "Fingon", "Galathil", "Gelmir", "Glorfindel", "Guilin", "Hendor (elf)", "Idril", "Imin", "Iminye", "Indis", "Ingwe", "Ingwion", "Lenwe", "Lindir", "Maeglin", "Mahtan", "Miriel", "Mithrellas", "Nellas", "Nerdanel", "Nimloth", "Oropher", "Orophin", "Saeros", "Salgant", "Tatie", "Thingol", "Turgon", "Vaire"],
@@ -230678,11 +230673,10 @@
 			"Celebrian": true,
 			"Celegorm": true,
 			"Cirdan": true,
-			"Citizen": true,
-			"Citizen (Mistrock)": true,
+			"Citizen (Tal Teklan)": true,
+			"Citizen (Auburnvale)": true,
 			"Citizen (Aldarin)": true,
 			"Citizen (Kastori)": true,
-			"Citizen (Cam Torum)": true,
 			"Citizen (Civitas illa Fortis)": true,
 			"Crimsonette van Marr": true,
 			"Curufin": true,
@@ -231571,6 +231565,7 @@
 				"5426-3",
 				"5683-1",
 				"5683-2",
+				"5938-1",
 				"5938-2"
 			]
 		},
