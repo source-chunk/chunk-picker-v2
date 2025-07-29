@@ -31412,6 +31412,10 @@
 			},
 			"Buy Arthur portrait*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|Merlin's Crystal|~ Complete the quest": "Quest",
+					"~|Holy Grail|~ Complete the quest": "Quest"
+				},
 				"Output": "Arthur portrait",
 				"Not F2P": true
 			},
@@ -31819,6 +31823,12 @@
 			},
 			"Buy desert painting*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|Prince Ali Rescue|~ Complete the quest": "Quest",
+					"~|The Tourist Trap|~ Complete the quest": "Quest",
+					"~|The Feud|~ Complete the quest": "Quest",
+					"~|The Golem|~ Complete the quest": "Quest"
+				},
 				"Output": "Desert painting",
 				"Not F2P": true
 			},
@@ -31838,6 +31848,9 @@
 			},
 			"Buy Elena portrait*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|Plague City|~ Complete the quest": "Quest"
+				},
 				"Output": "Elena portrait",
 				"Not F2P": true
 			},
@@ -32298,6 +32311,9 @@
 			},
 			"Buy Isafdar painting*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|Roving Elves|~ Complete the quest": "Quest"
+				},
 				"Output": "Isafdar painting",
 				"Not F2P": true
 			},
@@ -32330,6 +32346,11 @@
 			},
 			"Buy Karamja painting*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|Pirate's Treasure|~ Complete the quest": "Quest",
+					"~|Tai Bwo Wannai Trio|~ Complete the quest": "Quest",
+					"~|Shilo Village|~ Complete the quest": "Quest"
+				},
 				"Output": "Karamja painting",
 				"Not F2P": true
 			},
@@ -32340,6 +32361,9 @@
 			},
 			"Buy Keldagrim portrait*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|The Giant Dwarf|~ Complete the quest": "Quest"
+				},
 				"Output": "Keldagrim portrait",
 				"Not F2P": true
 			},
@@ -32368,6 +32392,7 @@
 			},
 			"Buy large map (item)*": {
 				"NPCs": ["Sir Renitee"],
+				"QuestPointsNeeded": 151,
 				"Output": "Large map (item)",
 				"Not F2P": true
 			},
@@ -32429,6 +32454,12 @@
 			},
 			"Buy Lumbridge painting*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|Cook's Assistant|~ Complete the quest": "Quest",
+					"~|Rune Mysteries|~ Complete the quest": "Quest",
+					"~|Sheep Shearer|~ Complete the quest": "Quest",
+					"~|The Restless Ghost|~ Complete the quest": "Quest"
+				},
 				"Output": "Lumbridge painting",
 				"Not F2P": true
 			},
@@ -32451,6 +32482,7 @@
 			},
 			"Buy medium map (item)*": {
 				"NPCs": ["Sir Renitee"],
+				"QuestPointsNeeded": 101,
 				"Output": "Medium map (item)",
 				"Not F2P": true
 			},
@@ -32460,6 +32492,9 @@
 			},
 			"Buy Misc. portrait*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|Throne of Miscellania|~ Complete the quest": "Quest"
+				},
 				"Output": "Misc. portrait",
 				"Not F2P": true
 			},
@@ -32496,6 +32531,12 @@
 			},
 			"Buy Morytania painting*": {
 				"NPCs": ["Sir Renitee"],
+				"Tasks": {
+					"~|Ghosts Ahoy|~ Complete the quest": "Quest",
+					"~|Shades of Mort'ton|~ Complete the quest": "Quest",
+					"~|Creature of Fenkenstrain|~ Complete the quest": "Quest",
+					"~|Haunted Mine|~ Complete the quest": "Quest"
+				},
 				"Output": "Morytania painting",
 				"Not F2P": true
 			},
@@ -32747,6 +32788,7 @@
 			},
 			"Buy small map (item)*": {
 				"NPCs": ["Sir Renitee"],
+				"QuestPointsNeeded": 51,
 				"Output": "Small map (item)",
 				"Not F2P": true
 			},
@@ -207780,106 +207822,106 @@
 			},
 			"Vale offerings loot": {
 				"Acorn": {
-					"1": "Unknown"
+					"3-6": "Varies"
 				},
 				"Anima-infused bark": {
-					"1": "Unknown"
+					"70-90": "10/160"
 				},
 				"Apple tree seed": {
-					"1": "Unknown"
+					"5-8": "Varies"
 				},
 				"Bale of flax": {
-					"1": "Unknown"
+					"5-6": "20/160"
 				},
 				"Bird nest (egg)": {
-					"1": "Unknown"
+					"1-2": "3/816"
 				},
 				"Bird nest (ring)": {
-					"1": "Unknown"
+					"1-2": "11/272"
 				},
 				"Bird nest (seeds)": {
-					"1": "Unknown"
+					"1-2": "22/272"
 				},
 				"Blessed bone shards": {
-					"1": "Unknown"
+					"70-90": "14/160"
 				},
 				"Bow string spool": {
-					"1": "Unknown"
+					"1": "5/1000"
 				},
 				"Cadavaberry seed": {
-					"1": "Unknown"
+					"7-11": "Varies"
 				},
 				"Clue scroll (beginner)": {
-					"1": "Unknown"
+					"1": "Rare"
 				},
 				"Clue scroll (easy)": {
-					"1": "Unknown"
+					"1": "Very rare"
 				},
 				"Clue scroll (elite)": {
-					"1": "Unknown"
+					"1": "Very rare"
 				},
 				"Clue scroll (hard)": {
-					"1": "Unknown"
+					"1": "Very rare"
 				},
 				"Clue scroll (medium)": {
-					"1": "Unknown"
+					"1": "Very rare"
 				},
 				"Dirty arrowtips": {
-					"1": "Unknown"
+					"26-32": "32/160"
 				},
 				"Dragonfruit tree seed": {
-					"1": "Unknown"
+					"1-2": "Varies"
 				},
 				"Ent branch": {
-					"1": "Unknown"
+					"1": "26/160"
 				},
 				"Feather": {
-					"1": "Unknown"
+					"400-500": "6/160"
 				},
 				"Fletching knife": {
-					"1": "Unknown"
+					"1": "3/1000"
 				},
 				"Greenman mask": {
-					"1": "Unknown"
+					"1": "2/1000"
 				},
 				"Limpwurt seed": {
-					"1": "Unknown"
+					"3-6": "Varies"
 				},
 				"Magic roots": {
-					"1": "Unknown"
+					"2-3": "3/160"
 				},
 				"Magic seed": {
-					"1": "Unknown"
+					"1-2": "Varies"
 				},
 				"Maple roots": {
-					"1": "Unknown"
+					"3-4": "2/160"
 				},
 				"Maple seed": {
-					"1": "Unknown"
+					"1-2": "Varies"
 				},
 				"Palm tree seed": {
-					"1": "Unknown"
+					"1-2": "Varies"
 				},
 				"Papaya tree seed": {
-					"1": "Unknown"
+					"1-2": "Varies"
 				},
 				"Pineapple seed": {
-					"1": "Unknown"
+					"1-2": "Varies"
 				},
-				"Redwood tree seed": {
-					"1": "Unknown"
+				"Watermelon seed": {
+					"5-8": "Varies"
 				},
 				"Willow roots": {
-					"1": "Unknown"
+					"3-4": "2/160"
 				},
 				"Willow seed": {
-					"1": "Unknown"
+					"1-2": "Varies"
 				},
 				"Yew roots": {
-					"1": "Unknown"
+					"3-4": "3/160"
 				},
 				"Yew seed": {
-					"1": "Unknown"
+					"1-2": "Varies"
 				}
 			},
 			"Dirty arrowtips loot": {

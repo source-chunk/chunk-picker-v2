@@ -1655,8 +1655,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
                 highestChanged = false;
                 Object.keys(chunkInfo['challenges'][skill][task]['Tasks']).filter(subTask => skillNames.includes(chunkInfo['challenges'][skill][task]['Tasks'][subTask])).some(subTask => {
-                    if (subTask.split('--')[0] === task && !!tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] && tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]][tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].length - 1] !== task) {
-                        if (rules['Wield Crafted Items'] && !didRestart && chunkInfo['challenges'][skill].hasOwnProperty(task) && chunkInfo['challenges'][skill][task].hasOwnProperty('Output')) {
+                    if (subTask.split('--')[0] === task && !!tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] && tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]][tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].length - 1] === task) {
+                        if (rules['Wield Crafted Items'] && !didRestart && chunkInfo['challenges'][skill].hasOwnProperty(task) && chunkInfo['challenges'][skill][task].hasOwnProperty('Output') && chunkInfo['equipment'].hasOwnProperty(chunkInfo['challenges'][skill][task]['Output'])) {
                             if (rules['Wield Crafted Items Override']) {
                                 if (!craftedBisOverride[skill]) {
                                     craftedBisOverride[skill] = {};
