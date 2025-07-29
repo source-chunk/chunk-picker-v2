@@ -7851,6 +7851,14 @@
 				"Primary": false,
 				"Priority": 2
 			},
+			"Cook fish at ~|Tempoross|~": {
+				"Category": ["Boss"],
+				"Chunks": ["12078"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 99,
+				"Not F2P": true
+			},
 			"Participate in ~|Trouble Brewing|~": {
 				"Category": ["Minigame"],
 				"Chunks": ["15150", "15151-1"],
@@ -15935,6 +15943,14 @@
 				"Priority": 2,
 				"Not F2P": true,
 				"NoBoost": true
+			},
+			"Catch fish at ~|Tempoross|~": {
+				"Category": ["Boss"],
+				"Chunks": ["12078"],
+				"Level": 35,
+				"Primary": true,
+				"Priority": 99,
+				"Not F2P": true
 			},
 			"Buy the ~|Fishing cape|~": {
 				"Category": ["Skillcape"],

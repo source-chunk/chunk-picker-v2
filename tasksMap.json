@@ -946,6 +946,7 @@
   "~|Song of the Elves|~ Construction skill requirement": "t_925",
   "~|Desert Treasure II - The Fallen Empire|~ Construction skill requirement": "t_926",
   "Access the ~|Cooks' Guild|~": "t_927",
+  "Cook fish at ~|Tempoross|~": "t_46385",
   "Participate in ~|Trouble Brewing|~": "t_928",
   "Cook a ~|cooked wild kebbit|~": "t_929",
   "Cook a ~|cooked larupia|~": "t_930",
@@ -1814,6 +1815,7 @@
   "Access the ~|fishing guild|~": "t_1789",
   "Access the ~|Tempoross|~": "t_1790",
   "Unlock the best rewards bracket from ~|Tempoross|~": "t_1791",
+  "Catch fish at ~|Tempoross|~": "t_46386",
   "Buy the ~|Fishing cape|~": "t_1792",
   "Obtain ~|raw shark|~ from a supply crate": "t_1793",
   "Obtain ~|raw swordfish|~ from a supply crate": "t_1794",
@@ -46145,5 +46147,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46385
+  "currentNextIndex": 46387
 }
