@@ -105156,7 +105156,7 @@
 			"~|Troll Romance|~ 5": {
 				"BaseQuest": "Troll Romance",
 				"Description": "Pick a Trollweiss flower",
-				"Chunks": ["11067"],
+				"Chunks": ["11067", "11068"],
 				"Tasks": {
 					"~|Troll Romance|~ 4": "Quest"
 				},
