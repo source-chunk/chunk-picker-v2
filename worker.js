@@ -7684,6 +7684,62 @@ let calcBIS = function(completedOnly) {
         });
         //console.log(bestEquipment);
     });
+
+    // Deletes partial duplicate bis items
+    let equipmentMapping = {};
+    let styleMapping = {};
+    let processedStyles = {};
+    let savedLines = {};
+    let overlap = false;
+    !!globalValids['BiS'] && Object.keys(globalValids['BiS']).filter((line) => !!chunkInfo['challenges']['BiS'] && !!chunkInfo['challenges']['BiS'][line] && chunkInfo['challenges']['BiS'][line].hasOwnProperty('ItemsDetails')).forEach((line) => {
+        let item = chunkInfo['challenges']['BiS'][line]['ItemsDetails'][0];
+        let split = globalValids['BiS'][line].split(' BiS ');
+        let slot = split[1];
+        let styles;
+        if (split[0].includes('/​')) {
+            styles = split[0].split('/​').map((style) => style + ' BiS ' + slot);
+        } else {
+            styles = [split[0] + ' BiS ' + slot];
+        }
+        equipmentMapping[item] = styles;
+        styles.forEach((style) => {
+            if (processedStyles[style]) {
+                overlap = true;
+            }
+            processedStyles[style] = true;
+            if (!styleMapping[style]) {
+                styleMapping[style] = [];
+            }
+            styleMapping[style].push(item);
+        });
+        savedLines[item] = line;
+    });
+    overlap && Object.keys(equipmentMapping).reverse().forEach((item) => {
+        let validReplacements = [];
+        !!equipmentMapping[item] && equipmentMapping[item].filter((style) => !!styleMapping[style]).some((style) => {
+            if (validReplacements.length === 0) {
+                validReplacements = styleMapping[style].filter((it) => it !== item);
+            } else {
+                validReplacements = validReplacements.filter((replacement) => styleMapping[style].includes(replacement));
+            }
+            if (validReplacements.length === 0) {
+                return true;
+            }
+        });
+        if (validReplacements.length > 0) {
+            delete globalValids['BiS'][savedLines[item]];
+            delete equipmentMapping[item];
+            Object.keys(styleMapping).filter((style) => styleMapping[style].includes(item)).forEach((style) => {
+                styleMapping[style] = styleMapping[style].filter((it) => it !== item);
+                if (styleMapping[style].length === 0) {
+                    delete styleMapping[style];
+                }
+            });
+            !!highestOverallLocal && Object.keys(highestOverallLocal).filter((style) => highestOverallLocal[style] === item).forEach((style) => {
+                highestOverallLocal[style] = validReplacements[0];
+            });
+        }
+    });
     return highestOverallLocal;
 }
 
