@@ -1628,8 +1628,10 @@ let calcChallenges = function(chunks, baseChunkData) {
         let highestChanged;
         let tempHighest = {};
         !rules["Highest Level"] && Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach((skill) => {
-            let tempItems = {};
             tempHighest[skill] = Object.keys(newValids[skill]).sort((a, b) => newValids[skill][a] - newValids[skill][b]);
+        });
+        !rules["Highest Level"] && Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach((skill) => {
+            let tempItems = {};
             Object.keys(newValids[skill]).filter(task => chunkInfo['challenges'][skill][task]['mustBeHighest'] && chunkInfo['challenges'][skill][task].hasOwnProperty('Tasks')).sort((a, b) => newValids[skill][a] - newValids[skill][b]).some(task => {
                 let uniqueItem = !tempItemSkill.hasOwnProperty(skill);
                 tempItemSkill.hasOwnProperty(skill) && chunkInfo['challenges'][skill][task].hasOwnProperty('Items') && chunkInfo['challenges'][skill][task]['Items'].some(item => {
@@ -4024,7 +4026,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 delete nonValids[name];
                 if (toolLevelChallenges.hasOwnProperty(skill) && toolLevelChallenges[skill].hasOwnProperty(name)) {
                     toolLevelChallenges[skill][name] = true;
-                } else if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || chunkInfo['challenges'][skill][name]['ManualNonProcessing']) {
+                } else if (!processingSkill.hasOwnProperty(skill) || !processingSkill[skill] || !chunkInfo['challenges'][skill][name]['Items'] || chunkInfo['challenges'][skill][name]['Items'].filter(item => { return !tools[item.replaceAll(/\*/g, '')] }).length === 0 || chunkInfo['challenges'][skill][name]['ManualNonProcessing'] || (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subTask) => subTask.includes('--') && subTask.split('--')[0] === name && ['Quest', 'Diary'].includes(chunkInfo['challenges'][skill][name]['Tasks'][subTask])).length > 0)) {
                     if (skill !== 'Quest' && skill !== 'Diary') {
                         valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'] || chunkInfo['challenges'][skill][name]['Label'] || true;
                     } else {
