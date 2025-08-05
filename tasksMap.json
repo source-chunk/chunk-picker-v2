@@ -3184,6 +3184,7 @@
   "Slay a ~|Grimy Lizard|~": "t_3133",
   "Slay a ~|Sulphur Nagua|~": "t_3134",
   "Slay a ~|Frost Nagua|~": "t_3135",
+  "Slay ~|Amoxliatl|~": "t_46387",
   "Slay an ~|Earthen Nagua|~": "t_45756",
   "Slay a ~|juvenile custodian stalker|~": "t_45757",
   "Slay a ~|mature custodian stalker|~": "t_45758",
@@ -46147,5 +46148,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46387
+  "currentNextIndex": 46388
 }

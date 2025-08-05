@@ -46624,6 +46624,15 @@
 				"Output": "Frost Nagua",
 				"Priority": 2
 			},
+			"Slay ~|Amoxliatl|~": {
+				"Category": ["Boss Level"],
+				"Level": 48,
+				"Monsters": ["Amoxliatl"],
+				"Primary": false,
+				"Source": "drop",
+				"Output": "Amoxliatl",
+				"Priority": 10
+			},
 			"Slay an ~|Earthen Nagua|~": {
 				"Level": 48,
 				"Monsters": ["Earthen Nagua"],
