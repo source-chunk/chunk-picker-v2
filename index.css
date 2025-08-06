@@ -517,6 +517,8 @@ button.menu2 {
     -ms-transition: background-color 1000ms ease-in-out;
     transition: background-color 1000ms ease-in-out;
     border-bottom: solid 1px;
+    height: 8.25%;
+    overflow: clip;
 }
 
 .infoid.new {

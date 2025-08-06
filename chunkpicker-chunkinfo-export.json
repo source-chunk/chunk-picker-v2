@@ -10027,7 +10027,7 @@
 				"NoBoost": true
 			},
 			"Burn a ~|magic pyre ship|~": {
-				"Items": ["Magic logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Magic logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 85,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10039,7 +10039,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|mahogany pyre ship|~": {
-				"Items": ["Mahogany logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Mahogany logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 60,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10051,7 +10051,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|maple pyre ship|~": {
-				"Items": ["Maple logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Maple logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 55,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10063,7 +10063,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|pyre ship|~": {
-				"Items": ["Logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 11,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10075,7 +10075,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|redwood pyre ship|~": {
-				"Items": ["Redwood logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Redwood logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 95,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10087,7 +10087,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|teak pyre ship|~": {
-				"Items": ["Teak logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Teak logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 45,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10099,7 +10099,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|willow pyre ship|~": {
-				"Items": ["Willow logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Willow logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 40,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10111,7 +10111,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|yew pyre ship|~": {
-				"Items": ["Yew logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Yew logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 70,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10123,7 +10123,7 @@
 				"Not F2P": true
 			},
 			"Burn an ~|achey pyre ship|~": {
-				"Items": ["Achey tree logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Achey tree logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 11,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10135,7 +10135,7 @@
 				"Not F2P": true
 			},
 			"Burn an ~|arctic pine pyre ship|~": {
-				"Items": ["Arctic pine logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Arctic pine logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 52,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10147,7 +10147,7 @@
 				"Not F2P": true
 			},
 			"Burn an ~|oak pyre ship|~": {
-				"Items": ["Oak logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Oak logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 25,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -10156,6 +10156,138 @@
 					"Firemaking": 25
 				},
 				"Priority": 5,
+				"Not F2P": true
+			},
+			"Burn a ~|magic pyre ship|~ (mangled bones)": {
+				"Items": ["Magic logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 85,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 85
+				},
+				"Priority": 102,
+				"Not F2P": true
+			},
+			"Burn a ~|mahogany pyre ship|~ (mangled bones)": {
+				"Items": ["Mahogany logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 60,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 60
+				},
+				"Priority": 106,
+				"Not F2P": true
+			},
+			"Burn a ~|maple pyre ship|~ (mangled bones)": {
+				"Items": ["Maple logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 55,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 55
+				},
+				"Priority": 104,
+				"Not F2P": true
+			},
+			"Burn a ~|pyre ship|~ (mangled bones)": {
+				"Items": ["Logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 11,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 11
+				},
+				"Priority": 102,
+				"Not F2P": true
+			},
+			"Burn a ~|redwood pyre ship|~ (mangled bones)": {
+				"Items": ["Redwood logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 95,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 95
+				},
+				"Priority": 102,
+				"Not F2P": true
+			},
+			"Burn a ~|teak pyre ship|~ (mangled bones)": {
+				"Items": ["Teak logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 45,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 45
+				},
+				"Priority": 104,
+				"Not F2P": true
+			},
+			"Burn a ~|willow pyre ship|~ (mangled bones)": {
+				"Items": ["Willow logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 40,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 40
+				},
+				"Priority": 103,
+				"Not F2P": true
+			},
+			"Burn a ~|yew pyre ship|~ (mangled bones)": {
+				"Items": ["Yew logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 70,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 70
+				},
+				"Priority": 104,
+				"Not F2P": true
+			},
+			"Burn an ~|achey pyre ship|~ (mangled bones)": {
+				"Items": ["Achey tree logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 11,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 11
+				},
+				"Priority": 103,
+				"Not F2P": true
+			},
+			"Burn an ~|arctic pine pyre ship|~ (mangled bones)": {
+				"Items": ["Arctic pine logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 52,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 52
+				},
+				"Priority": 102,
+				"Not F2P": true
+			},
+			"Burn an ~|oak pyre ship|~ (mangled bones)": {
+				"Items": ["Oak logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 25,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Firemaking": 25
+				},
+				"Priority": 105,
 				"Not F2P": true
 			},
 			"Buy the ~|Crafting cape|~": {
@@ -15082,7 +15214,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|magic pyre ship|~": {
-				"Items": ["Magic logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Magic logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 85,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15093,7 +15225,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|mahogany pyre ship|~": {
-				"Items": ["Mahogany logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Mahogany logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 60,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15105,7 +15237,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|maple pyre ship|~": {
-				"Items": ["Maple logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Maple logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 55,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15117,7 +15249,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|pyre ship|~": {
-				"Items": ["Logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 11,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15129,7 +15261,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|redwood pyre ship|~": {
-				"Items": ["Redwood logs*", "Pyre bones[+]*", "Tinderbox"],
+				"Items": ["Redwood logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 95,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15141,7 +15273,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|teak pyre ship|~": {
-				"Items": ["Teak logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Teak logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 45,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15153,7 +15285,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|willow pyre ship|~": {
-				"Items": ["Willow logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Willow logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 40,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15165,7 +15297,7 @@
 				"Not F2P": true
 			},
 			"Burn a ~|yew pyre ship|~": {
-				"Items": ["Yew logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Yew logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 70,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15176,7 +15308,7 @@
 				"Not F2P": true
 			},
 			"Burn an ~|achey pyre ship|~": {
-				"Items": ["Achey tree logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Achey tree logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 11,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15188,7 +15320,7 @@
 				"Not F2P": true
 			},
 			"Burn an ~|arctic pine pyre ship|~": {
-				"Items": ["Arctic pine logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Arctic pine logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 52,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15200,7 +15332,7 @@
 				"Not F2P": true
 			},
 			"Burn an ~|oak pyre ship|~": {
-				"Items": ["Oak logs", "Pyre bones[+]", "Tinderbox"],
+				"Items": ["Oak logs*", "Chewed bones*", "Tinderbox"],
 				"Level": 25,
 				"Objects": ["Pyre site"],
 				"Output": "Chewed bones loot",
@@ -15208,6 +15340,138 @@
 				"Skills": {
 					"Crafting": 25
 				},
+				"Not F2P": true
+			},
+			"Burn a ~|magic pyre ship|~ (mangled bones)": {
+				"Items": ["Magic logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 85,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 85
+				},
+				"Priority": 102,
+				"Not F2P": true
+			},
+			"Burn a ~|mahogany pyre ship|~ (mangled bones)": {
+				"Items": ["Mahogany logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 60,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 60
+				},
+				"Priority": 106,
+				"Not F2P": true
+			},
+			"Burn a ~|maple pyre ship|~ (mangled bones)": {
+				"Items": ["Maple logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 55,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 55
+				},
+				"Priority": 104,
+				"Not F2P": true
+			},
+			"Burn a ~|pyre ship|~ (mangled bones)": {
+				"Items": ["Logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 11,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 11
+				},
+				"Priority": 102,
+				"Not F2P": true
+			},
+			"Burn a ~|redwood pyre ship|~ (mangled bones)": {
+				"Items": ["Redwood logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 95,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 95
+				},
+				"Priority": 102,
+				"Not F2P": true
+			},
+			"Burn a ~|teak pyre ship|~ (mangled bones)": {
+				"Items": ["Teak logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 45,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 45
+				},
+				"Priority": 104,
+				"Not F2P": true
+			},
+			"Burn a ~|willow pyre ship|~ (mangled bones)": {
+				"Items": ["Willow logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 40,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 40
+				},
+				"Priority": 103,
+				"Not F2P": true
+			},
+			"Burn a ~|yew pyre ship|~ (mangled bones)": {
+				"Items": ["Yew logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 70,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 70
+				},
+				"Priority": 104,
+				"Not F2P": true
+			},
+			"Burn an ~|achey pyre ship|~ (mangled bones)": {
+				"Items": ["Achey tree logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 11,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 11
+				},
+				"Priority": 103,
+				"Not F2P": true
+			},
+			"Burn an ~|arctic pine pyre ship|~ (mangled bones)": {
+				"Items": ["Arctic pine logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 52,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 52
+				},
+				"Priority": 102,
+				"Not F2P": true
+			},
+			"Burn an ~|oak pyre ship|~ (mangled bones)": {
+				"Items": ["Oak logs*", "Mangled bones*", "Tinderbox"],
+				"Level": 25,
+				"Objects": ["Pyre site"],
+				"Output": "Mangled bones loot",
+				"Primary": false,
+				"Skills": {
+					"Crafting": 25
+				},
+				"Priority": 105,
 				"Not F2P": true
 			},
 			"Burn ~|achey tree logs|~": {
@@ -72135,6 +72399,19 @@
 				},
 				"Not F2P": true
 			},
+			"Magic Wardrobe: ~|Orange (hat)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Orange (hat)"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
 			"Magic Wardrobe: ~|Pearl barbarian rod|~": {
 				"Category": ["Fill POH"],
 				"Label": "Fill POH",
@@ -110840,6 +111117,7 @@
 						"Iron bar": 1,
 						"Lobster pot": 1,
 						"Rope": 1,
+						"Small fishing net": 1,
 						"Tinderbox": 1,
 						"Unlit torch": 1
 					},
@@ -111726,7 +112004,8 @@
 						"Knife": 1,
 						"Plank": 6,
 						"Rope": 3,
-						"Seaweed": 14
+						"Seaweed": 14,
+						"Small fishing net": 1
 					}
 				},
 				"2": {}
@@ -148345,6 +148624,7 @@
 			},
 			"Object": {
 				"Ancient fountainhead": 14,
+				"Chest": 1,
 				"Infected root": 6,
 				"Lift Platform": 1,
 				"Log balance (Tonali Cavern)": 1,
@@ -150516,7 +150796,6 @@
 			"Plant cure[+]": ["Supercompost", "Plant cure"],
 			"Polar camo[+]": ["Polar camo top", "Polar camo legs"],
 			"Proselyte[+]": ["Proselyte sallet", "Proselyte hauberk", "Proselyte cuisse", "Proselyte tasset"],
-			"Pyre bones[+]": ["Mangled bones", "Chewed bones"],
 			"Ranging potion[+]": ["Ranging potion(1)", "Ranging potion(2)", "Ranging potion(3)", "Ranging potion(4)"],
 			"Raw meat[+]": ["Raw beef", "Raw bear meat", "Raw rat meat", "Raw yak meat", "Raw boar meat"],
 			"Raw shark[+]": ["Raw shark", "Raw manta ray", "Raw sea turtle"],
@@ -150899,7 +151178,6 @@
 			"Plant cure[+]": "Any plant cure",
 			"Polar camo[+]": "Any polar camo piece",
 			"Proselyte[+]": "Any proselyte piece",
-			"Pyre bones[+]": "Any pyre ship bones",
 			"Ranging potion[+]": "Any ranging potion",
 			"Raw meat[+]": "Any raw meat",
 			"Raw shark[+]": "Any raw fish for the lyre",
@@ -156276,7 +156554,7 @@
 				"1": "1/5000"
 			},
 			"Clue scroll (hard)": {
-				"1": "Unknown"
+				"1": "1/100"
 			},
 			"HerbDropTable+": {
 				"1": "45/128"
@@ -163832,91 +164110,94 @@
 		},
 		"Doom of Mokhaiotl": {
 			"Aether catalyst": {
-				"1": "Unknown"
+				"75-200": "5/105"
 			},
 			"Avernic treads": {
-				"1": "Unknown"
+				"1": "1/160"
 			},
 			"Cannonball": {
-				"1": "Unknown"
+				"100-300": "5/105"
 			},
 			"Celastrus seed": {
-				"1": "Unknown"
+				"1": "3/105"
 			},
 			"Chaos rune": {
-				"1": "Unknown"
+				"25-35": "5/105"
 			},
 			"Coal": {
-				"1 (noted)": "Unknown"
+				"8-25 (noted)": "5/105"
 			},
 			"Death rune": {
-				"1": "Unknown"
+				"25-35": "5/105"
 			},
 			"Demon tear": {
-				"1": "Unknown"
+				"50-150": "7/105"
 			},
 			"Dom": {
-				"1": "Unknown"
+				"1": "1/231"
 			},
-			"Dragon darrt tip": {
-				"1": "Unknown"
+			"Dragon dart tip": {
+				"15-45": "5/105"
 			},
 			"Dragon med helm": {
-				"1 (noted)": "Unknown"
+				"1 (noted)": "5/105"
 			},
 			"Dragon platelegs": {
-				"1": "Unknown"
+				"1": "1/105"
 			},
 			"Earth rune": {
-				"1": "Unknown"
+				"250-500": "5/105"
 			},
 			"Eye of ayak (uncharged)": {
-				"1": "Unknown"
+				"1": "1/148"
 			},
 			"Fire rune": {
-				"1": "Unknown"
+				"250-500": "5/105"
 			},
 			"Gold ore": {
-				"1 (noted)": "Unknown"
+				"10-30 (noted)": "5/105"
 			},
 			"Mokhaiotl cloth": {
-				"1": "Unknown"
+				"1": "1/140"
 			},
 			"Mokhaiotl waystone": {
-				"1": "Unknown"
+				"1-2": "7/105"
 			},
 			"Mystic earth staff": {
-				"1 (noted)": "Unknown"
+				"1 (noted)": "5/105"
 			},
 			"Onyx bolts": {
-				"1": "Unknown"
+				"3-8": "5/105"
 			},
 			"Ranarr seed": {
-				"1": "Unknown"
+				"1-2": "2/105"
 			},
 			"Raw shark": {
-				"1 (noted)": "Unknown"
+				"10-18 (noted)": "3/105"
 			},
 			"Rune pickaxe": {
-				"1 (noted)": "Unknown"
+				"1-2 (noted)": "5/105"
 			},
 			"Runite ore": {
-				"1 (noted)": "Unknown"
+				"2-3 (noted)": "5/105"
 			},
 			"Shark lure": {
-				"1": "Unknown"
+				"20-36": "2/105"
 			},
 			"Spirit seed": {
-				"1": "Unknown"
+				"1": "3/105"
 			},
 			"Sun-kissed bones": {
-				"1": "Unknown"
+				"13-38": "5/105"
 			},
 			"Sunfire splinters": {
-				"1": "Unknown"
+				"250-750": "1/105"
 			},
 			"Tooth half of key (moon key)": {
-				"1": "Unknown"
+				"1": "1/105"
+			},
+			"Clue scroll (elite)": {
+				"1": "1/50"
 			}
 		},
 		"Double agent": {
@@ -198535,10 +198816,10 @@
 			},
 			"Chewed bones loot": {
 				"Adamant dart(p)": {
-					"1": "6/128"
+					"20": "6/128"
 				},
 				"Adamant knife": {
-					"1": "6/128"
+					"20": "6/128"
 				},
 				"Anti-poison supermix(2)": {
 					"1": "4/128"
@@ -198550,13 +198831,13 @@
 					"1": "4/128"
 				},
 				"Blood rune": {
-					"1": "10/128"
+					"4-7": "10/128"
 				},
 				"Death rune": {
-					"1": "18/128"
+					"8-15": "18/128"
 				},
 				"Diamond": {
-					"1": "8/128"
+					"2 (noted)": "8/128"
 				},
 				"Dragon full helm": {
 					"1": "1/256"
@@ -198565,7 +198846,7 @@
 					"1": "4/128"
 				},
 				"Mith grapple": {
-					"1": "6/128"
+					"2": "6/128"
 				},
 				"Prayer mix(1)": {
 					"1": "4/128"
@@ -198574,16 +198855,16 @@
 					"1": "4/128"
 				},
 				"Ranarr potion (unf)": {
-					"1": "8/128"
+					"2 (noted)": "8/128"
 				},
 				"Rune arrow": {
-					"1": "6/128"
+					"10": "6/128"
 				},
 				"Runite bolts": {
-					"1": "6/128"
+					"10": "6/128"
 				},
 				"Silver bolts": {
-					"1": "6/128"
+					"5": "6/128"
 				},
 				"Super def. mix(1)": {
 					"1": "4/128"
@@ -198602,6 +198883,101 @@
 				},
 				"Superattack mix(2)": {
 					"1": "4/128"
+				}
+			},
+			"Mangled bones loot": {
+				"Adamant dart(p)": {
+					"20": "4/128"
+				},
+				"Adamant knife": {
+					"20": "4/128"
+				},
+				"Adamant mace": {
+					"1": "4/128"
+				},
+				"Adamantite bar": {
+					"1 (noted)": "1/128"
+				},
+				"Anti-poison supermix(2)": {
+					"1": "1/128"
+				},
+				"Antifire mix(1)": {
+					"1": "4/128"
+				},
+				"Antifire mix(2)": {
+					"1": "4/128"
+				},
+				"Big bones": {
+					"10 (noted)": "7/128"
+				},
+				"Death rune": {
+					"5-9": "8/128"
+				},
+				"Fishing mix(2)": {
+					"1": "1/128"
+				},
+				"Mithril bar": {
+					"2 (noted)": "2/128"
+				},
+				"Mithril hasta": {
+					"1": "2/128"
+				},
+				"Mithril mace": {
+					"1": "5/128"
+				},
+				"Prayer mix(1)": {
+					"1": "16/128"
+				},
+				"Prayer mix(2)": {
+					"1": "8/128"
+				},
+				"Ranarr seed": {
+					"1": "5/128"
+				},
+				"Rune arrow": {
+					"10": "4/128"
+				},
+				"Rune mace": {
+					"1": "1/128"
+				},
+				"Runite bar": {
+					"1 (noted)": "1/128"
+				},
+				"Runite bolts": {
+					"10": "4/128"
+				},
+				"Shark": {
+					"3": "6/128"
+				},
+				"Steel bar": {
+					"2 (noted)": "2/128"
+				},
+				"Super def. mix(1)": {
+					"1": "2/128"
+				},
+				"Super def. mix(2)": {
+					"1": "3/128"
+				},
+				"Super str. mix(1)": {
+					"1": "2/128"
+				},
+				"Super str. mix(2)": {
+					"1": "2/128"
+				},
+				"Superattack mix(1)": {
+					"1": "2/128"
+				},
+				"Superattack mix(2)": {
+					"1": "3/128"
+				},
+				"Yew logs": {
+					"3": "2/128"
+				},
+				"HerbDropTable+": {
+					"1": "10/128"
+				},
+				"GemDropTable+": {
+					"1": "8/128"
 				}
 			},
 			"Fiyr remains loot": {
@@ -217035,7 +217411,7 @@
 					"1": "Always"
 				},
 				"Broken antler": {
-					"1": "11/160"
+					"1": "1/15"
 				},
 				"Cannonball": {
 					"10-15": "20/160"
@@ -217076,13 +217452,13 @@
 					"150": "12/107"
 				},
 				"Antler guard": {
-					"1": "1/750"
+					"1": "1/800"
 				},
 				"Big bones": {
 					"1": "Always"
 				},
 				"Broken antler": {
-					"1": "7/107"
+					"1": "1/16"
 				},
 				"Cannonball": {
 					"15-30": "15/107"

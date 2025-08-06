@@ -1795,9 +1795,38 @@ let calcChallenges = function(chunks, baseChunkData) {
             let lowestName;
             let lowestLevel;
             !!newValids[skill] && Object.keys(newValids[skill]).forEach((challenge) => {
-                if ((!lowestLevel || (lowestLevel < newValids[skill][challenge])) && ((!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/')))))) {
+                let tempLevel = newValids[skill][challenge];
+                if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost')) {
+                    let bestBoost = 0;
+                    let ownsCrystalSaw = false;
+                    Object.keys(chunkInfo['codeItems']['boostItems'][skill]).forEach((boost) => {
+                        if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]))) {
+                            if (boost !== 'Crystal saw') {
+                                if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
+                                    let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
+                                    let possibleBoost = Math.floor(chunkInfo['challenges'][skill][challenge]['Level'] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                    possibleBoost = Math.floor((chunkInfo['challenges'][skill][challenge]['Level'] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                    if (possibleBoost > bestBoost) {
+                                        bestBoost = possibleBoost;
+                                    }
+                                } else if (chunkInfo['codeItems']['boostItems'][skill][boost] > bestBoost) {
+                                    bestBoost = chunkInfo['codeItems']['boostItems'][skill][boost];
+                                }
+                            } else if (skill === 'Construction') {
+                                if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Items') && chunkInfo['challenges'][skill][challenge]['Items'].includes('Saw[+]')) {
+                                    ownsCrystalSaw = true;
+                                }
+                            }
+                        }
+                    });
+                    if (chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) < 1) {
+                        bestBoost = 0;
+                    }
+                    tempLevel = newValids[skill][challenge] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
+                }
+                if ((!lowestLevel || (lowestLevel < tempLevel)) && ((!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/')))))) {
                     lowestName = challenge;
-                    lowestLevel = newValids[skill][challenge];
+                    lowestLevel = tempLevel;
                 }
             });
             if (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] > 1 && passiveSkill[skill] > lowestLevel) {
@@ -1806,8 +1835,40 @@ let calcChallenges = function(chunks, baseChunkData) {
                 lowestLevel = skillQuestXp[skill]['level'];
             }
             !!lowestName && Object.keys(tempItemSkill[skill]).forEach((item) => {
-                !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (chunkInfo['challenges'][skill][name]['Level'] <= lowestLevel) && name !== lowestName}).forEach((name) => {
+                !!baseChunkData['items'][item] && tempItemSkill[skill][item].filter((name) => { return chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && name !== lowestName}).forEach((name) => {
                     let stillValid = true;
+                    let tempLevel = chunkInfo['challenges'][skill][name]['Level'];
+                    if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost')) {
+                        let bestBoost = 0;
+                        let ownsCrystalSaw = false;
+                        Object.keys(chunkInfo['codeItems']['boostItems'][skill]).forEach((boost) => {
+                            if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]))) {
+                                if (boost !== 'Crystal saw') {
+                                    if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
+                                        let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
+                                        let possibleBoost = Math.floor(chunkInfo['challenges'][skill][name]['Level'] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                        possibleBoost = Math.floor((chunkInfo['challenges'][skill][name]['Level'] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                        if (possibleBoost > bestBoost) {
+                                            bestBoost = possibleBoost;
+                                        }
+                                    } else if (chunkInfo['codeItems']['boostItems'][skill][boost] > bestBoost) {
+                                        bestBoost = chunkInfo['codeItems']['boostItems'][skill][boost];
+                                    }
+                                } else if (skill === 'Construction') {
+                                    if (chunkInfo['challenges'][skill][name].hasOwnProperty('Items') && chunkInfo['challenges'][skill][name]['Items'].includes('Saw[+]')) {
+                                        ownsCrystalSaw = true;
+                                    }
+                                }
+                            }
+                        });
+                        if (chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) < 1) {
+                            bestBoost = 0;
+                        }
+                        tempLevel = chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
+                    }
+                    if (tempLevel > lowestLevel) {
+                        stillValid = false;
+                    }
                     chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).some(subTask => {
                         if (!newValids.hasOwnProperty(chunkInfo['challenges'][skill][name]['Tasks'][subTask]) || !newValids[chunkInfo['challenges'][skill][name]['Tasks'][subTask]].hasOwnProperty(subTask)) {
                             stillValid = false;
@@ -2533,13 +2594,13 @@ let calcChallenges = function(chunks, baseChunkData) {
                                         }
                                     });
                                 });
-                                if ((lowestPlusRate > highestDropRate) && (lowestPlusRate !== 0)) {
+                                if ((lowestPlusRate < highestDropRate) && (lowestPlusRate !== 0)) {
                                     highestDropRate = lowestPlusRate;
                                 }
                             } else {
                                 !!baseChunkData['items'][item.replaceAll(/\*/g, '')] && Object.keys(baseChunkData['items'][item.replaceAll(/\*/g, '')]).forEach((source) => {
                                     if (baseChunkData['items'][item.replaceAll(/\*/g, '')][source].includes('-drop')) {
-                                        if (!!dropRatesGlobal[source] && !!dropRatesGlobal[source][item.replaceAll(/\*/g, '')] && !isNaN(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0]) && ((parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0].replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[1].replaceAll(',', ''))) > highestDropRate)) {
+                                        if (!!dropRatesGlobal[source] && !!dropRatesGlobal[source][item.replaceAll(/\*/g, '')] && !isNaN(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0]) && ((parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0].replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[1].replaceAll(',', ''))) < highestDropRate)) {
                                             highestDropRate = parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[0].replaceAll(',', '')) / parseFloat(dropRatesGlobal[source][item.replaceAll(/\*/g, '')].split('/')[1].replaceAll(',', ''));
                                         }
                                     } else if (baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-').length > 1 && !!chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] && !!chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source] && !!chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source].hasOwnProperty('highestDropRate')) {
@@ -2551,7 +2612,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                                                 lowestQuantityRate = parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')][quantity].split('/')[0]) / parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')][quantity].split('/')[1]);
                                             }
                                         });
-                                        if ((lowestQuantityRate > highestDropRate) && (lowestQuantityRate !== 0)) {
+                                        if ((lowestQuantityRate < highestDropRate) && (lowestQuantityRate !== 0)) {
                                             highestDropRate = lowestQuantityRate;
                                         }
                                     }
@@ -2659,7 +2720,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                                     } else {
                                         outputs[item][challenge] = 'secondary-' + skill;
                                     }
-                                } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) <= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) || chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
+                                } else if (((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/').length < 2 || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) <= (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) || chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) && (highestDropRate * (parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) {
                                     outputs[item][challenge] = 'secondary-' + skill;
                                 }
                             }
@@ -4191,6 +4252,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             } else {
                 let lowestItem;
                 let lowestName;
+                let lowestLevel;
                 rules['Multi Step Processing'] && !!items[item] && tempItemSkill[skill][item].length > 1 && tempItemSkill[skill][item].forEach((Xname) => {
                     if (skill === 'Fletching' && chunkInfo['challenges'][skill].hasOwnProperty(Xname) && chunkInfo['challenges'][skill][Xname].hasOwnProperty('Items')) {
                         chunkInfo['challenges'][skill][Xname]['Items'].filter(tempItem => !!items[tempItem]).forEach((tempItem) => {
@@ -4202,6 +4264,35 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 });
                 !!items[item] && tempItemSkill[skill][item].forEach((name) => {
                     let challenge = chunkInfo['challenges'][skill][name];
+                    let tempLevel = challenge['Level'];
+                    if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost')) {
+                        let bestBoost = 0;
+                        let ownsCrystalSaw = false;
+                        Object.keys(chunkInfo['codeItems']['boostItems'][skill]).forEach((boost) => {
+                            if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]))) {
+                                if (boost !== 'Crystal saw') {
+                                    if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
+                                        let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
+                                        let possibleBoost = Math.floor(chunkInfo['challenges'][skill][name]['Level'] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                        possibleBoost = Math.floor((chunkInfo['challenges'][skill][name]['Level'] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                        if (possibleBoost > bestBoost) {
+                                            bestBoost = possibleBoost;
+                                        }
+                                    } else if (chunkInfo['codeItems']['boostItems'][skill][boost] > bestBoost) {
+                                        bestBoost = chunkInfo['codeItems']['boostItems'][skill][boost];
+                                    }
+                                } else if (skill === 'Construction') {
+                                    if (chunkInfo['challenges'][skill][name].hasOwnProperty('Items') && chunkInfo['challenges'][skill][name]['Items'].includes('Saw[+]')) {
+                                        ownsCrystalSaw = true;
+                                    }
+                                }
+                            }
+                        });
+                        if (chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) < 1) {
+                            bestBoost = 0;
+                        }
+                        tempLevel = challenge['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
+                    }
                     if (!!challenge && challenge['AlwaysValid']) {
                         tempStorage.push(name);
                     }
@@ -4211,12 +4302,14 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         }
                         extraOutputItems[skill][name] = challenge['Output'];
                     }
-                    if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
+                    if (!lowestItem || lowestLevel > tempLevel) {
                         lowestItem = challenge;
                         lowestName = name;
-                    } else if (lowestItem['Level'] === challenge['Level'] && (!lowestItem['Primary'] || lowestItem['Secondary']) && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem.hasOwnProperty('Priority'))) {
+                        lowestLevel = tempLevel;
+                    } else if (lowestLevel === tempLevel && (!lowestItem['Primary'] || lowestItem['Secondary']) && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem.hasOwnProperty('Priority'))) {
                         lowestItem = challenge;
                         lowestName = name;
+                        lowestLevel = tempLevel;
                     }
                     if (rules['Wield Crafted Items Override'] && !didRestart && chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name].hasOwnProperty('Output')) {
                         valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
