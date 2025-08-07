@@ -64848,6 +64848,7 @@
 			"Unlock free access to boat rides from ~|Andras|~ for 1m": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
+				"Chunks": ["14647-1"],
 				"NPCs": ["Andras"],
 				"Not F2P": true
 			},
