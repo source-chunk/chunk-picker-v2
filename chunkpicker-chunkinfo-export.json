@@ -77919,7 +77919,8 @@
 					"Smithing": 70
 				},
 				"Tasks": {
-					"~|Kourend and Kebos Diary#Medium|~ Complete the Medium Diary": "Diary"
+					"~|Kourend and Kebos Diary#Medium|~ Complete the Medium Diary": "Diary",
+					"~|The Forsaken Tower|~ Complete the quest": "Quest"
 				},
 				"BaseQuest": "Kourend and Kebos Diary",
 				"Not F2P": true
