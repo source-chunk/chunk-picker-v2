@@ -183,6 +183,7 @@ let bisOverrideMinLevel = {};
 let readdedCraftedBisTasks = {};
 let didRestart = false;
 let bisUpgrades = {};
+let globalValidsBoosts = {};
 let bankMemoryFormat = 'Item id	Item name	Item quantity\n';
 
 onmessage = function(e) {
@@ -371,7 +372,7 @@ onmessage = function(e) {
         //console.log(nonValids);
         //console.log(baseChunkData);
 
-        postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 0, highestOverall, type === 'current' ? dropRatesGlobal : {}, questProgress, diaryProgress, skillQuestXp, chunks, type === 'current' ? dropTablesGlobal : {}, bestEquipmentAltsGlobal, unlockedSections, type === 'current' ? combatPointTotal : 0, highestOverallCompleted, bisUpgradesOutput, bankMemoryFormat]);
+        postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 0, highestOverall, type === 'current' ? dropRatesGlobal : {}, questProgress, diaryProgress, skillQuestXp, chunks, type === 'current' ? dropTablesGlobal : {}, bestEquipmentAltsGlobal, unlockedSections, type === 'current' ? combatPointTotal : 0, highestOverallCompleted, bisUpgradesOutput, bankMemoryFormat, globalValidsBoosts]);
     } catch (err) {
         postMessage(['error', err]);
     }
@@ -1820,7 +1821,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                         }
                     });
                     if (chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) < 1) {
-                        bestBoost = 0;
+                        bestBoost = chunkInfo['challenges'][skill][challenge]['Level'] - 1;
                     }
                     tempLevel = newValids[skill][challenge] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
                 }
@@ -1862,7 +1863,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                             }
                         });
                         if (chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) < 1) {
-                            bestBoost = 0;
+                            bestBoost = chunkInfo['challenges'][skill][name]['Level'] - 1;
                         }
                         tempLevel = chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
                     }
@@ -4289,7 +4290,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                             }
                         });
                         if (chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) < 1) {
-                            bestBoost = 0;
+                            bestBoost = chunkInfo['challenges'][skill][name]['Level'] - 1;
                         }
                         tempLevel = challenge['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
                     }
@@ -7913,7 +7914,7 @@ let calcCurrentChallenges2 = function() {
                             }
                         });
                         if (chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) < 1) {
-                            bestBoost = 0;
+                            bestBoost = chunkInfo['challenges'][skill][name]['Level'] - 1;
                         }
                         if (chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0)) > highestChallengeLevelArr[skill]) {
                             highestChallengeLevelArr[skill] = chunkInfo['challenges'][skill][name]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
@@ -7954,7 +7955,7 @@ let calcCurrentChallenges2 = function() {
                     realLevel[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'] - (bestBoost + (ownsCrystalSaw ? 3 : 0));
                     if (realLevel[skill][challenge] < 1) {
                         realLevel[skill][challenge] = 1;
-                        bestBoost = 0;
+                        bestBoost = chunkInfo['challenges'][skill][challenge]['Level'] - 1;
                     }
                 }
                 if (isPrimary || (manualTasks.hasOwnProperty(skill) && manualTasks[skill].hasOwnProperty(challenge)) || (userTasks.hasOwnProperty(skill) && userTasks[skill].hasOwnProperty(challenge))) {
@@ -8066,60 +8067,104 @@ let calcCurrentChallenges2 = function() {
     Object.keys(tempChallengeArr).forEach((skill) => {
         let challenge = tempChallengeArr[skill] || highestOverall[skill];
         !!challenge && (challenge = challenge.split('{')[0]);
-        if (!!challenge && rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost') && (!completedChallenges[skill] || (!completedChallenges[skill].hasOwnProperty(challenge) && !completedChallenges[skill][challenge.replaceAll('#', '/')]))) {
-            let bestBoost = 0;
-            let bestBoostSource;
-            let ownsCrystalSaw = false;
-            Object.keys(chunkInfo['codeItems']['boostItems'][skill]).forEach((boost) => {
-                if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]))) {
-                    if (boost !== 'Crystal saw') {
-                        if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
-                            let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
-                            let possibleBoost = Math.floor(globalValids[skill][challenge] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
-                            possibleBoost = Math.floor((globalValids[skill][challenge] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
-                            if (possibleBoost > bestBoost) {
-                                bestBoost = possibleBoost;
-                                bestBoostSource = boost;
+        if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill)) {
+            let foundBetter = false;
+            Object.keys(globalValids[skill]).filter((name) => !chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost')).some(name => {
+                let bestBoost2 = 0;
+                let bestBoostSource2;
+                let ownsCrystalSaw2 = false;
+                Object.keys(chunkInfo['codeItems']['boostItems'][skill]).forEach((boost) => {
+                    if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]))) {
+                        if (boost !== 'Crystal saw') {
+                            if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
+                                let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
+                                let possibleBoost = Math.floor(globalValids[skill][name] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                possibleBoost = Math.floor((globalValids[skill][name] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                if (possibleBoost > bestBoost2) {
+                                    bestBoost2 = possibleBoost;
+                                    bestBoostSource2 = boost;
+                                }
+                            } else if (chunkInfo['codeItems']['boostItems'][skill][boost] > bestBoost2) {
+                                bestBoost2 = chunkInfo['codeItems']['boostItems'][skill][boost];
+                                bestBoostSource2 = boost;
                             }
-                        } else if (chunkInfo['codeItems']['boostItems'][skill][boost] > bestBoost) {
-                            bestBoost = chunkInfo['codeItems']['boostItems'][skill][boost];
-                            bestBoostSource = boost;
+                        } else if (skill === 'Construction') {
+                            if (chunkInfo['challenges'][skill][name].hasOwnProperty('Items') && chunkInfo['challenges'][skill][name]['Items'].includes('Saw[+]')) {
+                                ownsCrystalSaw2 = true;
+                                chunkInfo['challenges'][skill][name]['ItemsDetails'].push('Crystal saw');
+                            }
                         }
-                    } else if (skill === 'Construction') {
-                        if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Items') && chunkInfo['challenges'][skill][challenge]['Items'].includes('Saw[+]')) {
-                            ownsCrystalSaw = true;
-                            chunkInfo['challenges'][skill][challenge]['ItemsDetails'].push('Crystal saw');
-                        }
-                    }
-                }
-            });
-            if (globalValids[skill][challenge] - bestBoost < 1) {
-                bestBoost = 0;
-                bestBoostSource = null;
-            }
-            if (bestBoost > 0) {
-                let foundBetter = false;
-                Object.keys(globalValids[skill]).some(name => {
-                    if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost') && chunkInfo['challenges'][skill][name]['Level'] > (globalValids[skill][challenge] - (bestBoost + (ownsCrystalSaw ? 3 : 0))) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(name) && !backlog[skill].hasOwnProperty(name.replaceAll('#', '/'))))) {
-                        tempChallengeArr[skill] = name;
-                        foundBetter = true;
-                        return true;
                     }
                 });
-                if (!foundBetter) {
-                    if (highestOverall[skill] !== challenge) {
-                        if (!chunkInfo['challenges'][skill][challenge].hasOwnProperty((bestBoostSource.includes('~') ? (bestBoostSource.split('~')[1].charAt(0).toUpperCase() + bestBoostSource.split('~')[1].slice(1)) : 'Items') + 'Details')) {
-                            chunkInfo['challenges'][skill][challenge][(bestBoostSource.includes('~') ? (bestBoostSource.split('~')[1].charAt(0).toUpperCase() + bestBoostSource.split('~')[1].slice(1)) : 'Items') + 'Details'] = [];
-                        }
-                        chunkInfo['challenges'][skill][challenge][(bestBoostSource.includes('~') ? (bestBoostSource.split('~')[1].charAt(0).toUpperCase() + bestBoostSource.split('~')[1].slice(1)) : 'Items') + 'Details'].push(bestBoostSource.replaceAll(/\*/g, ''));
-                        tempChallengeArr[skill] = challenge + `{${(bestBoost + (ownsCrystalSaw ? 3 : 0))}}`;
+                if (globalValids[skill][name] - bestBoost2 < 1) {
+                    bestBoost2 = globalValids[skill][name] - 1;
+                    if (bestBoost2 === 0) {
+                        bestBoostSource2 = null;
                     }
-                    highestOverall[skill] = challenge + `{${(bestBoost + (ownsCrystalSaw ? 3 : 0))}}`;
+                }
+                if (bestBoost2 > 0) {
+                    if (!chunkInfo['challenges'][skill][name].hasOwnProperty((bestBoostSource2.includes('~') ? (bestBoostSource2.split('~')[1].charAt(0).toUpperCase() + bestBoostSource2.split('~')[1].slice(1)) : 'Items') + 'Details')) {
+                        chunkInfo['challenges'][skill][name][(bestBoostSource2.includes('~') ? (bestBoostSource2.split('~')[1].charAt(0).toUpperCase() + bestBoostSource2.split('~')[1].slice(1)) : 'Items') + 'Details'] = [];
+                    }
+                    chunkInfo['challenges'][skill][name][(bestBoostSource2.includes('~') ? (bestBoostSource2.split('~')[1].charAt(0).toUpperCase() + bestBoostSource2.split('~')[1].slice(1)) : 'Items') + 'Details'].push(bestBoostSource2.replaceAll(/\*/g, ''));
+                    if (!globalValidsBoosts[skill]) {
+                        globalValidsBoosts[skill] = {};
+                    }
+                    globalValidsBoosts[skill][name] = (bestBoost2 + (ownsCrystalSaw2 ? 3 : 0));
+                }
+                if (chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost') && chunkInfo['challenges'][skill][name]['Level'] > (globalValids[skill][challenge] - (bestBoost2 + (ownsCrystalSaw2 ? 3 : 0))) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(name) && !backlog[skill].hasOwnProperty(name.replaceAll('#', '/'))))) {
+                    tempChallengeArr[skill] = name;
+                    foundBetter = true;
+                    return true;
+                }
+            });
+            if (!!challenge && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost') && (!completedChallenges[skill] || (!completedChallenges[skill].hasOwnProperty(challenge) && !completedChallenges[skill][challenge.replaceAll('#', '/')]))) {
+                let bestBoost = 0;
+                let bestBoostSource;
+                let ownsCrystalSaw = false;
+                Object.keys(chunkInfo['codeItems']['boostItems'][skill]).forEach((boost) => {
+                    if (baseChunkData.hasOwnProperty(boost.includes('~') ? boost.split('~')[1] : 'items') && (baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]) || baseChunkData[boost.includes('~') ? boost.split('~')[1] : 'items'].hasOwnProperty(boost.split('~')[0]))) {
+                        if (boost !== 'Crystal saw') {
+                            if (typeof chunkInfo['codeItems']['boostItems'][skill][boost] === 'string') {
+                                let stringSplit = chunkInfo['codeItems']['boostItems'][skill][boost].split('%+');
+                                let possibleBoost = Math.floor(globalValids[skill][challenge] * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                possibleBoost = Math.floor((globalValids[skill][challenge] - possibleBoost) * stringSplit[0] / 100 + parseInt(stringSplit[1]));
+                                if (possibleBoost > bestBoost) {
+                                    bestBoost = possibleBoost;
+                                    bestBoostSource = boost;
+                                }
+                            } else if (chunkInfo['codeItems']['boostItems'][skill][boost] > bestBoost) {
+                                bestBoost = chunkInfo['codeItems']['boostItems'][skill][boost];
+                                bestBoostSource = boost;
+                            }
+                        } else if (skill === 'Construction') {
+                            if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('Items') && chunkInfo['challenges'][skill][challenge]['Items'].includes('Saw[+]')) {
+                                ownsCrystalSaw = true;
+                                chunkInfo['challenges'][skill][challenge]['ItemsDetails'].push('Crystal saw');
+                            }
+                        }
+                    }
+                });
+                if (globalValids[skill][challenge] - bestBoost < 1) {
+                    bestBoost = globalValids[skill][challenge] - 1;
+                    if (bestBoost === 0) {
+                        bestBoostSource = null;
+                    }
+                }
+                if (bestBoost > 0) {
+                    if (!foundBetter) {
+                        if (highestOverall[skill] !== challenge) {
+                            tempChallengeArr[skill] = challenge + `{${(bestBoost + (ownsCrystalSaw ? 3 : 0))}}`;
+                        }
+                        highestOverall[skill] = challenge + `{${(bestBoost + (ownsCrystalSaw ? 3 : 0))}}`;
+                    } else if (!!tempChallengeArr[skill]) {
+                        highestOverall[skill] = tempChallengeArr[skill];
+                        if (!!completedChallenges[skill] && (completedChallenges[skill].hasOwnProperty(tempChallengeArr[skill]) || completedChallenges[skill][tempChallengeArr[skill].replaceAll('#', '/')])) {
+                            tempChallengeArr[skill] = null;
+                        }
+                    }
                 } else if (!!tempChallengeArr[skill]) {
                     highestOverall[skill] = tempChallengeArr[skill];
-                    if (!!completedChallenges[skill] && (completedChallenges[skill].hasOwnProperty(tempChallengeArr[skill]) || completedChallenges[skill][tempChallengeArr[skill].replaceAll('#', '/')])) {
-                        tempChallengeArr[skill] = null;
-                    }
                 }
             } else if (!!tempChallengeArr[skill]) {
                 highestOverall[skill] = tempChallengeArr[skill];
