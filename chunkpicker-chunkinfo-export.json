@@ -18661,13 +18661,19 @@
 				"Items": ["Ancient brew[+]*", "Caviar*"],
 				"Level": 92,
 				"Output": "Ancient mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|anti-poison supermix|~": {
 				"Items": ["Superantipoison[+]*", "Caviar*"],
 				"Level": 51,
 				"Output": "Anti-poison supermix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|bastion potion|~": {
 				"Items": ["Cadantine*", "Vial of blood*", "Wine of zamorak*"],
@@ -18695,7 +18701,10 @@
 				"Level": 40,
 				"Primary": true,
 				"Output": "Combat mix(2)",
-				"Priority": 2
+				"Priority": 2,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|combat potion|~": {
 				"Items": ["Harralander potion (unf)*", "Goat horn dust*"],
@@ -18714,7 +18723,10 @@
 				"Items": ["Defence potion[+]*", "Caviar*"],
 				"Level": 33,
 				"Output": "Defence mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|defence potion|~": {
 				"Items": ["Ranarr potion (unf)*", "White berries*"],
@@ -18790,7 +18802,10 @@
 				"Level": 53,
 				"Primary": true,
 				"Output": "Fishing mix(2)",
-				"Priority": 2
+				"Priority": 2,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|fishing potion|~": {
 				"Items": ["Avantoe potion (unf)*", "Snape grass*"],
@@ -18853,7 +18868,10 @@
 				"Level": 58,
 				"Output": "Hunting mix(2)",
 				"Primary": true,
-				"Priority": 4
+				"Priority": 4,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|irit potion (unf)|~": {
 				"Items": ["Irit leaf*", "Vial of water*"],
@@ -18880,7 +18898,10 @@
 				"Items": ["Magic essence[+]*", "Caviar*"],
 				"Level": 61,
 				"Output": "Magic essence mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|magic essence|~": {
 				"Items": ["Vial of water*", "Star flower*", "Gorak claw powder*"],
@@ -18892,7 +18913,10 @@
 				"Items": ["Magic potion[+]*", "Caviar*"],
 				"Level": 83,
 				"Output": "Magic mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|magic potion|~": {
 				"Items": ["Lantadyme potion (unf)*", "Potato cactus*"],
@@ -18923,7 +18947,10 @@
 				"Items": ["Prayer potion[+]*", "Caviar*"],
 				"Level": 42,
 				"Output": "Prayer mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|prayer potion|~": {
 				"Items": ["Ranarr potion (unf)*", "Snape grass*"],
@@ -18964,7 +18991,10 @@
 				"Level": 80,
 				"Primary": true,
 				"Output": "Ranging mix(2)",
-				"Priority": 3
+				"Priority": 3,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|ranging potion|~": {
 				"Items": ["Dwarf weed potion (unf)*", "Wine of zamorak*"],
@@ -18987,13 +19017,19 @@
 				"Items": ["Relicym's balm[+]*", "Roe*"],
 				"Level": 9,
 				"Output": "Relicym's mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|restore mix|~": {
 				"Items": ["Restore potion[+]*", "Roe*"],
 				"Level": 24,
 				"Output": "Restore mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|restore potion|~": {
 				"Items": ["Harralander potion (unf)*", "Red spiders' eggs*"],
@@ -19033,7 +19069,10 @@
 				"Level": 86,
 				"Primary": true,
 				"Output": "Stamina mix(2)",
-				"Priority": 1
+				"Priority": 1,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|stamina potion|~": {
 				"Items": ["Super energy[+]*", "Amylase crystal*"],
@@ -19045,7 +19084,10 @@
 				"Items": ["Strength potion[+]*", "Roe*"],
 				"Level": 14,
 				"Output": "Strength mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|strength potion|~": {
 				"Items": ["Tarromin potion (unf)*", "Limpwurt root*"],
@@ -19059,7 +19101,10 @@
 				"Level": 98,
 				"Primary": true,
 				"Output": "Super antifire mix(2)",
-				"Priority": 2
+				"Priority": 2,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|super antifire potion|~": {
 				"Items": ["Antifire potion(3)*", "Crushed superior dragon bones*"],
@@ -19088,7 +19133,10 @@
 				"Items": ["Super defence[+]*", "Caviar*"],
 				"Level": 71,
 				"Output": "Super def. mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|super defence|~": {
 				"Items": ["Cadantine potion (unf)*", "White berries*"],
@@ -19101,7 +19149,10 @@
 				"Items": ["Super energy[+]*", "Caviar*"],
 				"Level": 56,
 				"Output": "Super energy mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|super energy|~": {
 				"Items": ["Avantoe potion (unf)*", "Mort myre fungus*"],
@@ -19115,7 +19166,10 @@
 				"Level": 67,
 				"Primary": true,
 				"Output": "Super restore mix(2)",
-				"Priority": 2
+				"Priority": 2,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|super restore|~": {
 				"Items": ["Snapdragon potion (unf)*", "Red spiders' eggs*"],
@@ -19129,7 +19183,10 @@
 				"Level": 59,
 				"Primary": true,
 				"Output": "Super str. mix(2)",
-				"Priority": 3
+				"Priority": 3,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|super strength|~": {
 				"Items": ["Kwuarm potion (unf)*", "Limpwurt root*"],
@@ -19150,7 +19207,10 @@
 				"Level": 47,
 				"Primary": true,
 				"Output": "Superattack mix(2)",
-				"Priority": 3
+				"Priority": 3,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix a ~|tarromin potion (unf)|~": {
 				"Items": ["Tarromin*", "Vial of water*"],
@@ -19210,7 +19270,10 @@
 				"Items": ["Agility potion[+]*", "Caviar*"],
 				"Level": 37,
 				"Output": "Agility mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|agility potion|~": {
 				"Items": ["Toadflax potion (unf)*", "Toad's legs*"],
@@ -19251,7 +19314,10 @@
 				"Level": 74,
 				"Primary": true,
 				"Output": "Antidote+ mix(2)",
-				"Priority": 2
+				"Priority": 2,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|antidote++|~": {
 				"Items": ["Coconut milk*", "Irit leaf*", "Magic roots*"],
@@ -19264,7 +19330,10 @@
 				"Level": 75,
 				"Primary": true,
 				"Output": "Antifire mix(2)",
-				"Priority": 3
+				"Priority": 3,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|antifire potion|~": {
 				"Items": ["Lantadyme potion (unf)*", "Dragon scale dust*"],
@@ -19277,7 +19346,10 @@
 				"Items": ["Antipoison[+]*", "Roe*"],
 				"Level": 6,
 				"Output": "Antipoison mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|antipoison|~": {
 				"Items": ["Marrentill potion (unf)*", "Unicorn horn dust*"],
@@ -19290,7 +19362,10 @@
 				"Items": ["Attack potion[+]*", "Roe*"],
 				"Level": 4,
 				"Output": "Attack mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|attack potion|~": {
 				"Items": ["Guam potion (unf)*", "Eye of newt*"],
@@ -19310,7 +19385,10 @@
 				"Items": ["Energy potion[+]*", "Caviar*"],
 				"Level": 29,
 				"Output": "Energy mix(2)",
-				"Primary": true
+				"Primary": true,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|energy potion|~": {
 				"Items": ["Harralander potion (unf)*", "Chocolate dust*"],
@@ -19323,7 +19401,10 @@
 				"Level": 91,
 				"Output": "Extended antifire mix(2)",
 				"Primary": true,
-				"Priority": 1
+				"Priority": 1,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|extended antifire potion|~": {
 				"Items": ["Antifire potion[+]*", "Lava scale shard*"],
@@ -19336,7 +19417,10 @@
 				"Level": 99,
 				"Primary": true,
 				"Output": "Extended super antifire mix mix(2)",
-				"Priority": 2
+				"Priority": 2,
+				"Tasks": {
+					"~|Barbarian Training|~ 2c5b2": "Quest"
+				}
 			},
 			"Mix an ~|extended super antifire|~": {
 				"Items": ["Super antifire potion[+]*", "Lava scale shard*"],
@@ -65584,6 +65668,12 @@
 				"Tasks": {
 					"~|Death on the Isle|~ Complete the quest": "Quest"
 				},
+				"Not F2P": true
+			},
+			"Unlock the ~|potion storage|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Potion storage"],
 				"Not F2P": true
 			},
 			"Gain xp from forging your first ~|chromium ingot|~": {

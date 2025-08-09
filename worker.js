@@ -1661,7 +1661,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
                 highestChanged = false;
                 Object.keys(chunkInfo['challenges'][skill][task]['Tasks']).filter(subTask => skillNames.includes(chunkInfo['challenges'][skill][task]['Tasks'][subTask])).some(subTask => {
-                    if (subTask.split('--')[0] === task && !!tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] && tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]][tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].length - 1] === task) {
+                    if (subTask.split('--')[0] === task && !!tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]] && newValids[chunkInfo['challenges'][skill][task]['Tasks'][subTask]][tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]][tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].length - 1]] === newValids[skill][task]) {
                         if (rules['Wield Crafted Items'] && !didRestart && chunkInfo['challenges'][skill].hasOwnProperty(task) && chunkInfo['challenges'][skill][task].hasOwnProperty('Output') && chunkInfo['equipment'].hasOwnProperty(chunkInfo['challenges'][skill][task]['Output'])) {
                             if (rules['Wield Crafted Items Override']) {
                                 if (!craftedBisOverride[skill]) {
@@ -1676,7 +1676,9 @@ let calcChallenges = function(chunks, baseChunkData) {
                         } else if ((!manualTasks.hasOwnProperty(skill) || !manualTasks[skill].hasOwnProperty(task)) && (!manualTasks.hasOwnProperty(subTask.split('--')[1]) || !manualTasks[subTask.split('--')[1]].hasOwnProperty(task))) {
                             delete newValids[skill][task];
                             delete newValids[subTask.split('--')[1]][task];
-                            tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].splice(-1, 1);
+                            if (tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].includes(task)) {
+                                tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].splice(tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].indexOf(task), 1);
+                            }
                             highestChanged = true;
                             nonValids[task] = ['mustBeHighest'];
                             return true;

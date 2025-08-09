@@ -5796,6 +5796,7 @@
   "Activate the ~|Statue of Ates|~ by the Twilight Temple": "t_5702",
   "Activate the ~|Statue of Ates|~ by Ralos' Rise": "t_5703",
   "Activate the ~|Statue of Ates|~ on the Aldarin north coast": "t_5704",
+  "Unlock the ~|potion storage|~": "t_46401",
   "Gain xp from forging your first ~|chromium ingot|~": "t_5705",
   "Unlock Xeric's Honour teleport on the ~|Xeric's talisman|~": "t_5706",
   "Unlock upgraded Death Charge from the ~|rite of vile transference|~": "t_5707",
@@ -46160,5 +46161,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46401
+  "currentNextIndex": 46402
 }
