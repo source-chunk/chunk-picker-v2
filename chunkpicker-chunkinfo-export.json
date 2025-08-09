@@ -102524,6 +102524,11 @@
 				"BaseQuest": "Scrambled!",
 				"Description": "Talk to Alan",
 				"NPCs": ["Alan (Scrambled!)"],
+				"Skills": {
+					"Construction": 38,
+					"Cooking": 36,
+					"Smithing": 35
+				},
 				"Tasks": {
 					"~|Children of the Sun|~ Complete the quest": "Quest"
 				},
@@ -102544,9 +102549,6 @@
 				"Description": "Talk to the blacksmith, the repair the whetstone and axe",
 				"Chunks": ["4656-1"],
 				"NPCs": ["Blacksmith (Tal Teklan)"],
-				"Skills": {
-					"Smithing": 35
-				},
 				"Tasks": {
 					"~|Scrambled!|~ 2": "Quest"
 				},
@@ -102576,9 +102578,6 @@
 				"Description": "Give Nezketi damiana tea",
 				"Items": ["Damiana tea"],
 				"NPCs": ["Nezketi"],
-				"Skills": {
-					"Cooking": 36
-				},
 				"Tasks": {
 					"~|Scrambled!|~ 3b1": "Quest"
 				},
@@ -102598,9 +102597,6 @@
 				"Description": "Repair Kauayotl's cart",
 				"NPCs": ["Kauayotl"],
 				"Items": ["Saw", "Hammer", "Plank", "Nails[+]"],
-				"Skills": {
-					"Construction": 38
-				},
 				"Tasks": {
 					"~|Scrambled!|~ 3c1": "Quest"
 				},
