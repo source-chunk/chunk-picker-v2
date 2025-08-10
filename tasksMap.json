@@ -41107,12 +41107,12 @@
   "[Thieving] Chest (steel arrowtips): ~|Coins|~ (20) (Always)": "t_40548",
   "[Thieving] Chest (steel arrowtips): ~|Steel arrowtips|~ (5) (Always)": "t_40549",
   "[Thieving] Counter (Gu'Tanoth): ~|Rock cake|~ (1) (Always)": "t_40550",
-  "[Thieving] Crafting stall: ~|Amulet mould|~ (1) (1/6)": "t_40551",
-  "[Thieving] Crafting stall: ~|Bracelet mould|~ (1) (1/6)": "t_40552",
-  "[Thieving] Crafting stall: ~|Chisel|~ (1) (1/6)": "t_40553",
-  "[Thieving] Crafting stall: ~|Gold bar|~ (1) (1/6)": "t_40554",
-  "[Thieving] Crafting stall: ~|Necklace mould|~ (1) (1/6)": "t_40555",
-  "[Thieving] Crafting stall: ~|Ring mould|~ (1) (1/6)": "t_40556",
+  "[Thieving] Crafting stall: ~|Amulet mould|~ (1) (1/4.5)": "t_46402",
+  "[Thieving] Crafting stall: ~|Bracelet mould|~ (1) (1/4.5)": "t_46403",
+  "[Thieving] Crafting stall: ~|Chisel|~ (1) (1/9)": "t_46404",
+  "[Thieving] Crafting stall: ~|Gold bar|~ (1) (1/27)": "t_46405",
+  "[Thieving] Crafting stall: ~|Necklace mould|~ (1) (1/4.91)": "t_46406",
+  "[Thieving] Crafting stall: ~|Ring mould|~ (1) (1/4.91)": "t_46407",
   "[Thieving] Crossbow stall: ~|Bronze bolts|~ (3) (1/1.43)": "t_40557",
   "[Thieving] Crossbow stall: ~|Bronze limbs|~ (1) (1/5)": "t_40558",
   "[Thieving] Crossbow stall: ~|Mithril bolts|~ (3) (1/26.67)": "t_40559",
@@ -46161,5 +46161,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46402
+  "currentNextIndex": 46408
 }

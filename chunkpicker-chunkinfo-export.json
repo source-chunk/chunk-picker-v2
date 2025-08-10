@@ -151597,7 +151597,7 @@
 		"objectsPlus": {
 			"Adamantite[+]": ["Adamantite rocks", "Adamantite vein"],
 			"Anvil[+]": ["Anvil"],
-			"Bakery stall[+]": ["Baker's stall", "Baker's Stall"],
+			"Bakery stall[+]": ["Baker's stall", "Baker's Stall", "Bakery stall"],
 			"Clay[+]": ["Clay rocks", "Clay vein"],
 			"Coal[+]": ["Coal rocks", "Coal vein"],
 			"Compost Bin[+]": ["Compost Bin", "Big Compost Bin"],
@@ -219426,22 +219426,22 @@
 			},
 			"Crafting stall[+]": {
 				"Amulet mould": {
-					"1": "1/6"
+					"1": "12/54"
 				},
 				"Bracelet mould": {
-					"1": "1/6"
+					"1": "12/54"
 				},
 				"Chisel": {
-					"1": "1/6"
+					"1": "6/54"
 				},
 				"Gold bar": {
-					"1": "1/6"
+					"1": "2/54"
 				},
 				"Necklace mould": {
-					"1": "1/6"
+					"1": "11/54"
 				},
 				"Ring mould": {
-					"1": "1/6"
+					"1": "11/54"
 				}
 			},
 			"Crossbow stall": {
