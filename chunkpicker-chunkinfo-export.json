@@ -9968,9 +9968,6 @@
 				"Level": 1,
 				"Primary": true,
 				"Priority": 105,
-				"Tasks": {
-					"Train fishing on the ~|Fishing Trawler|~": "Fishing"
-				},
 				"Not F2P": true
 			},
 			"Repair barricades in ~|Pest Control|~": {
@@ -199374,26 +199371,32 @@
 				}
 			},
 			"Fishing spot (The Stranglewood) loot": {
+				"Newspaper": {
+					"1": "3/10"
+				},
 				"Raw pike": {
-					"1": "1207/6134"
+					"1": "2/10"
 				},
 				"Lobster pot": {
-					"1": "1187/6134"
-				},
-				"Newspaper": {
-					"1": "1854/6134"
+					"1": "2/10"
 				},
 				"Old boot": {
-					"1": "1232/6134"
+					"1": "2/10"
 				},
 				"Casket": {
-					"1": "611/6134"
+					"1": "1/10"
 				},
 				"Acorn": {
-					"1": "34/6134"
+					"1": "1/500"
+				},
+				"Red topaz": {
+					"1": "1/5000"
+				},
+				"Chromium ingot": {
+					"1": "1/500000"
 				},
 				"Loop half of key (moon key)": {
-					"1": "9/6134"
+					"1": "1/660"
 				}
 			},
 			"Supply crate (Raw shark)": {
