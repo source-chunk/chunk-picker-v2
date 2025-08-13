@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.8.13" />
+  <link rel="stylesheet" href="./index.css?v=6.8.14" />
   <meta charset="UTF-8">
   <meta name="description" content="The Chunk Picker V2 is an all-in-one companion tool to the Oldschool Runescape unofficial gamemode: OneChunkMan. The site allows you to randomly roll chunks, get chunk tasks, and track and share your progress with others.">
   <meta name="author" content="Source Chunk">
@@ -55,13 +55,13 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.8.13' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.8.14' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./tooltip.js?v=6.8.13"></script>
-  <script src="./index.js?v=6.8.13"></script>
+  <script src="./tooltip.js?v=6.8.14"></script>
+  <script src="./index.js?v=6.8.14"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -455,15 +455,6 @@
           <span><input type="checkbox" onclick="changeMonstersFilterBy()" />Show checked only</span>
       </div>
       <div id="monsters-data" class="monsters-data noscroll"></div>
-    </div>
-  </div>
-  <div id="myModal22" class="modal">
-    <div class="modal-content noscroll">
-      <div id="slayer-locked-title" class="slayer-locked-title noscroll">Select Slayer Task</div>
-      <div id="slayer-locked-subtitle" class="slayer-locked-subtitle noscroll">Select the Slayer task that locks your Slayer progress and enter your current Slayer level. You won't be shown Slayer tasks higher than your current Slayer level until you're able to train Slayer again.</div>
-      <div id="slayer-locked-dropdown-container" class="slayer-locked-dropdown-container noscroll" onchange="slayerLockedChange()"><select id="slayer-locked-dropdown"></select></div>
-      <div id="slayer-locked-input-container" class="slayer-locked-input-container noscroll">Current Slayer Level: <input id="slayer-locked-input" type="number" min="1" max="99" oninput="slayerLockedChange()"/></div>
-      <div id="slayer-locked-data" class="slayer-locked-data noscroll"></div>
     </div>
   </div>
   <div id="myModal23" class="modal">

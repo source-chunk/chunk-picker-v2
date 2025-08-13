@@ -244,6 +244,11 @@ button {
     50% { box-shadow: 0 0 30px black; }
 }
 
+@keyframes glowing-yellow {
+    0%, 100% { box-shadow: 0 0 10px yellow; }
+    50% { box-shadow: 0 0 30px yellow; }
+}
+
 .menu {
     position: fixed;
     top: 60px;
@@ -522,7 +527,7 @@ button.menu2 {
 }
 
 .infoid.new {
-    background-color:  var(--colorFlash);
+    background-color: var(--colorFlash);
 }
 
 #chunkinfo-sidebar-container {
@@ -642,6 +647,16 @@ button.menu2 {
     cursor: pointer;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+}
+
+.map-marker-btn.notice-me {
+    animation: glowing-yellow 750ms infinite;
+}
+
+.map-marker-btn.notice-me i {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    color: yellow;
 }
 
 .map-marker-btn:hover {
@@ -3011,6 +3026,10 @@ label .tooltip-base-el:active {
     color: var(--colorLink);
 }
 
+.slayerlock-question:hover {
+    color: var(--colorLink);
+}
+
 .expand {
     position: absolute;
     right: 0;
@@ -4759,11 +4778,6 @@ input#searchChunkSections {
     max-width: 750px;
 }
 
-#myModal22 > .modal-content {
-    max-width: 400px;
-    height: 35%;
-}
-
 #myModal37 > .modal-content {
     max-width: 400px;
     height: 35%;
@@ -5305,6 +5319,46 @@ input#searchChunkSections {
     height: 85%;
 }
 
+.slayer-locking-title {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.slayerlock-question-outer {
+  text-align: center;
+  color: var(--colorLink);
+}
+
+.slayer-section {
+  width: 90%;
+  display: block;
+  border: solid 1px var(--colorQuestBorderText);
+  border-radius: 5px;
+  padding: 2px;
+  background-color: var(--color3);
+  position: relative;
+  margin: auto;
+}
+
+.slayer-section-2 {
+    margin-bottom: 20px;
+}
+
+.slayer-section-split {
+    margin: 15px 0;
+}
+
+.slayer-locking-data {
+  margin: 10px;
+  font-size: 26px;
+  text-align: center;
+}
+
+.slayer-locking-task a {
+    color: var(--colorLink);
+}
+
 .slayer-locked-data > div {
     float: right;
     margin-right: 10px;
@@ -5313,16 +5367,13 @@ input#searchChunkSections {
     height: 15%;
 }
 
-#slayer-locked-dropdown-container {
-    text-align: center;
-    position: absolute;
-    width: 100%;
-    top: 45%;
-}
-
 #slayer-locked-dropdown {
     font-size: 2.65vh;
     width: 200px;
+}
+
+#slayer-locked-level-input, #slayer-locked-task-dropdown {
+    font-size: 20px;
 }
 
 #slayer-locked-input-container {
@@ -5394,8 +5445,13 @@ input#searchChunkSections {
 }
 
 .slayer-table-wrapper {
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 15px;
     display: block;
+}
+
+.slayer-table-wrapper .row {
+    border-color: var(--colorText) !important;
 }
 
 .calc-slayer-tasks-button {
@@ -7396,6 +7452,20 @@ input#searchMonsters {
 
 .slayer-lock-button > i {
     margin-right: 5px;
+}
+
+.slayer-lock-map {
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border: solid 1px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    background-color: var(--color2);
+}
+
+.slayer-lock-map:hover {
+    color: var(--colorLink);
 }
 
 .construction-header {

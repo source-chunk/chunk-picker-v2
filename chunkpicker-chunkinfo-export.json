@@ -58,6 +58,14 @@
 				"Primary": true,
 				"NoPet": true
 			},
+			"Access the Karamja wooden log ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["A wooden log"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 2,
+				"NoPet": true
+			},
 			"Access the Ralos' Rise rock climb ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Rocks (Ralos' Rise)"],
@@ -7460,14 +7468,16 @@
 				"Chunks": ["11828-1"],
 				"Level": 16,
 				"Primary": false,
-				"Priority": 458
+				"Priority": 458,
+				"NoBoost": true
 			},
 			"Change your house style to Basic Stone at an ~|Estate Agent|~": {
 				"Category": ["Construction Milestone"],
 				"NPCs": ["Estate Agent[+]"],
 				"Level": 10,
 				"Primary": false,
-				"Priority": 459
+				"Priority": 459,
+				"NoBoost": true
 			},
 			"Change your house style to Basic Wood at an ~|Estate Agent|~": {
 				"Category": ["Construction Milestone"],
@@ -7482,42 +7492,48 @@
 				"NPCs": ["Estate Agent[+]"],
 				"Level": 50,
 				"Primary": false,
-				"Priority": 461
+				"Priority": 461,
+				"NoBoost": true
 			},
 			"Change your house style to Fremennik-style Wood at an ~|Estate Agent|~": {
 				"Category": ["Construction Milestone"],
 				"NPCs": ["Estate Agent[+]"],
 				"Level": 30,
 				"Primary": false,
-				"Priority": 462
+				"Priority": 462,
+				"NoBoost": true
 			},
 			"Change your house style to Tropical Wood at an ~|Estate Agent|~": {
 				"Category": ["Construction Milestone"],
 				"NPCs": ["Estate Agent[+]"],
 				"Level": 40,
 				"Primary": false,
-				"Priority": 463
+				"Priority": 463,
+				"NoBoost": true
 			},
 			"Change your house style to Whitewashed Stone at an ~|Estate Agent|~": {
 				"Category": ["Construction Milestone"],
 				"NPCs": ["Estate Agent[+]"],
 				"Level": 20,
 				"Primary": false,
-				"Priority": 464
+				"Priority": 464,
+				"NoBoost": true
 			},
 			"Change your house style to Canifis at an ~|Estate Agent|~": {
 				"Category": ["Construction Milestone"],
 				"NPCs": ["Estate Agent[+]"],
 				"Level": 60,
 				"Primary": false,
-				"Priority": 464
+				"Priority": 464,
+				"NoBoost": true
 			},
 			"Change your house style to Civitas at an ~|Estate Agent|~": {
 				"Category": ["Construction Milestone"],
 				"NPCs": ["Estate Agent[+]"],
 				"Level": 70,
 				"Primary": false,
-				"Priority": 464
+				"Priority": 464,
+				"NoBoost": true
 			},
 			"Complete a beginner contract for ~|Mahogany Homes|~": {
 				"Chunks": ["11828-1"],
@@ -27162,6 +27178,14 @@
 				"Sections": ["5165-1", "5165-2"],
 				"Tasks": {
 					"Access the Aldarin rock climb ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"11567-1 to 11567-2": {
+				"Sections": ["11567-1", "11567-2"],
+				"Tasks": {
+					"Access the Karamja wooden log ~|shortcut|~": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -151830,7 +151854,7 @@
 			"ChopJungle[+]": ["Chop ~|dense jungle|~", "Chop ~|medium jungle|~", "Chop ~|light jungle|~"],
 			"WildernessPirateAccess[+]": ["Access wilderness pirates", "Access wilderness zombie pirates"],
 			"ConstructBed[+]": ["Build a ~|wooden bed|~", "Build an ~|oak bed|~", "Build a ~|large oak bed|~", "Build a ~|teak bed|~", "Build a ~|large teak bed|~", "Build a ~|4-poster|~", "Build a ~|gilded 4-poster|~"],
-			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Bag full of gems loot", "Fortis Colosseum loot*", "Elven crystal chest loot"],
+			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Fortis Colosseum loot*", "Elven crystal chest loot"],
 			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"],
 			"SmokableTrapTask[+]": ["Catch an ~|embertailed jerboa|~", "Catch a ~|pyre fox|~", "Catch a ~|tecu salamander|~", "Catch a ~|barb-tailed kebbit|~", "Catch a ~|black chinchompa|~", "Catch a ~|black salamander|~", "Catch a ~|carnivorous chinchompa|~", "Catch a ~|chinchompa (Hunter)|~", "Catch a ~|copper longtail|~", "Catch a ~|crimson swift|~", "Catch a ~|ferret|~", "Catch a ~|golden warbler|~", "Catch a ~|maniacal monkey (Hunter)|~", "Catch a ~|red salamander|~", "Catch a ~|sabre-toothed kebbit|~", "Catch a ~|swamp lizard|~", "Catch a ~|tropical wagtail|~", "Catch a ~|wild kebbit|~", "Catch an ~|imp|~", "Catch an ~|orange salamander|~"]
 		},

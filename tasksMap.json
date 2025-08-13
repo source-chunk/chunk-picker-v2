@@ -6,6 +6,7 @@
   "Access the cave to the Stalker Den ~|shortcut|~": "t_45711",
   "Access the Chasm of Fire gap ~|shortcut|~": "t_3",
   "Access the Chasm of Fire chain ~|shortcut|~": "t_4",
+  "Access the Karamja wooden log ~|shortcut|~": "t_46408",
   "Access the Ralos' Rise rock climb ~|shortcut|~": "t_5",
   "Access the Aldarin rock climb ~|shortcut|~": "t_6",
   "Access the Tlati Rainforest rock climb ~|shortcut|~": "t_45712",
@@ -46161,5 +46162,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46408
+  "currentNextIndex": 46409
 }

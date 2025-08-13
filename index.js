@@ -1409,7 +1409,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.8.13';
+let currentVersion = '6.8.14';
 let patchNotesVersion = '6.4.0';
 let updateLevel = 'difference';
 
@@ -1484,6 +1484,7 @@ let tempChunks = {};
 let tempSelectedChunks = [];
 let recentChunks = {};
 let animCount = 0;
+let isAnimating = false;
 let removedRecent = 0;
 let controlChunk = 0;
 let stickerChunk = 0;
@@ -1534,6 +1535,8 @@ let searchActiveTasksFocused = false;
 let removeCanvasDarkness = false;
 let tasksMap = {};
 let tasksMapReverse = {};
+let editingSlayerLock = false;
+let tempSlayerLocked = null;
 let lastRegain = 0;
 let lastUpdated = 0;
 
@@ -1576,7 +1579,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.8.13";
+mapImg.src = "osrs_world_map.png?v=6.8.14";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1636,6 +1639,23 @@ let getLines = function(ctx, text, maxWidth) {
     }
     lines.push(currentLine);
     return lines;
+}
+
+// Runs canvas animation frames
+let runAnim = function() {
+    isAnimating = true;
+    animCount++;
+
+    let interval = setInterval(function() {
+        if (animCount % 100 !== 0) {
+            animCount++;
+            drawCanvas();
+        } else {
+            isAnimating = false;
+            clearInterval(interval);
+            drawCanvas();
+        }
+    }, 10);
 }
 
 // Canvas animation
@@ -2009,7 +2029,9 @@ let drawCanvas = function() {
         manualMouseMoveCheck = false;
         handleMouseMove(manualMouseMoveCheck);
     }
-    animCount++;
+    if (!isAnimating && !!recentChunks && Object.keys(recentChunks).length > 0 && !onMobile) {
+        runAnim();
+    }
 }
 
 // Listen for click events on body for clicking out of modals
@@ -3312,7 +3334,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.8.13");
+        myWorker = new Worker("./worker.js?v=6.8.14");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3616,8 +3638,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.8.13");
-let myWorker2 = new Worker("./worker.js?v=6.8.13");
+let myWorker = new Worker("./worker.js?v=6.8.14");
+let myWorker2 = new Worker("./worker.js?v=6.8.14");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6643,7 +6665,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.8.13");
+    myWorker2 = new Worker("./worker.js?v=6.8.14");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -7725,55 +7747,54 @@ let removeFriend = function(friendMid, friendName) {
     openFriendsList();
 }
 
-// Opens the add locked slayer task modal
-let openSlayerLocked = function() {
-    slayerLockedModalOpen = true;
-    $('#slayer-locked-input').val(!!slayerLocked && slayerLocked.hasOwnProperty('level') ? slayerLocked['level'] : '');
-    $('#slayer-locked-data').html('<div><div class="slayer-locked-cancel" onclick="addSlayerLocked(true)">Cancel</div><div class="slayer-locked-proceed disabled" onclick="addSlayerLocked()">Lock Slayer</div></div>');
-    $('#slayer-locked-dropdown').empty().append(`<option value='${'Select a task'}'>${'Select a task'}</option>`);
-    $('#slayer-locked-dropdown').append(`<option value="${'Manually Locked'}">${"Manually Locked"}</option>`);
-    Object.keys(slayerTasks).forEach((task) => {
-        $('#slayer-locked-dropdown').append(`<option ${!!slayerLocked && slayerLocked.hasOwnProperty('monster') && slayerLocked['monster'] === task ? 'selected' : ''} value="${task}">${task}</option>`);
-    });
-    $('#myModal22').show();
+// Toggles the slayerLock editing interface
+let toggleEditSlayerLock = function() {
+    editingSlayerLock = !editingSlayerLock;
+    if (editingSlayerLock) {
+        tempSlayerLocked = slayerLocked;
+    }
+    openHighest2();
 }
 
-// Triggers onchange of slayer locked selection to validate submit button
+// Triggers onchange of slayer locked selection to validate slayerLocked value
 let slayerLockedChange = function() {
-    let val = $('#slayer-locked-dropdown').val();
-    let val2 = $('#slayer-locked-input').val();
-    if (val !== 'Select a task') {
-        if (!!val2 && !isNaN(parseInt(val2)) && parseInt(val2) >= 0 && parseInt(val2) <= 99 && parseInt(val2) % 1 === 0) {
-            $('.slayer-locked-proceed').removeClass('disabled');
+    let isSlayerLocked = $('#slayer-locked-dropdown').val() === 'locked';
+    let slayerLockedLevel = $('#slayer-locked-level-input').val();
+    let slayerLockedTask = $('#slayer-locked-task-dropdown').val();
+    let doNotUpdate = false;
+    let doRefresh = (tempSlayerLocked !== null) !== isSlayerLocked;
+    if (isSlayerLocked) {
+        tempSlayerLocked = {};
+        tempSlayerLocked['monster'] = slayerLockedTask;
+        tempSlayerLocked['level'] = slayerLockedLevel;
+        if (slayerLockedTask !== 'Select a task' && !!slayerLockedLevel && !isNaN(parseInt(slayerLockedLevel)) && parseInt(slayerLockedLevel) >= 0 && parseInt(slayerLockedLevel) <= 99 && parseInt(slayerLockedLevel) % 1 === 0) {
+            slayerLocked = {};
+            slayerLocked['monster'] = slayerLockedTask;
+            slayerLocked['level'] = slayerLockedLevel;
         } else {
-            $('.slayer-locked-proceed').addClass('disabled');
+            if (slayerLockedTask === 'Select a task') {
+                slayerLocked = null;
+            } else {
+                doNotUpdate = true;
+            }
         }
     } else {
-        $('.slayer-locked-proceed').addClass('disabled');
+        tempSlayerLocked = null;
+        slayerLocked = null;
     }
+    if (!doNotUpdate) {
+        calcCurrentChallengesCanvas(true);
+        setData();
+    }
+    doRefresh && openHighest2();
 }
 
-// Submits picked slayer task/level if one is chosen, then closes modal either way
-let addSlayerLocked = function(close) {
-    if (close) {
-        $('#myModal22').hide();
-        slayerLockedModalOpen = false;
-    } else {
-        let task = $('#slayer-locked-dropdown').val();
-        let level = !!$('#slayer-locked-input').val() ? parseInt($('#slayer-locked-input').val()) : NaN;
-        if (task !== 'Select a task' && !isNaN(level) && level >= 0 && level <= 99 && level % 1 === 0) {
-            if (task !== '') {
-                slayerLocked = {};
-                slayerLocked['monster'] = task;
-                slayerLocked['level'] = level;
-                calcCurrentChallengesCanvas(true);
-                setData();
-                openHighest2();
-            }
-            $('#myModal22').hide();
-            slayerLockedModalOpen = false;
-        }
-    }
+// Shows the slayer lock monster on map
+let showSlayerLockOnMap = function() {
+    highest2ModalOpen && closeHighest2();
+    selectedOverlay = 'Locked Slayer Task|Slayer task';
+    clearOverlayClues(true);
+    $('#map-marker-btn').addClass('notice-me');
 }
 
 // Opens the add locked construction chunk modal
@@ -8759,12 +8780,27 @@ let openHighest2 = function(notScrollTop) {
                 (testMode || !(viewOnly || inEntry || locked)) ? $(`.skill-button, .skill-button2, .button2-table-header`).addClass('extra-gear-room') : $(`.skill-button, .skill-button2, .button2-table-header`).removeClass('extra-gear-room');
                 settings['allTasks'] && $(`.skill-button`).removeClass('extra-gear-room');
             } else if (combatStyle === 'Slayer') {
-                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-header'>Slayer is currently <b class='noscroll slayer-locked-status ${!!slayerLocked ? 'red' : 'green'}'>${!!slayerLocked ? '<i class="fa-solid fa-lock"></i>' : '<i class="fa-solid fa-unlock"></i>'} ${!!slayerLocked ? 'LOCKED' : 'UNLOCKED'}</b> ${!!slayerLocked ? '(' + `<a class='noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeURI(slayerLocked['monster'].replace(/[!'()*]/g, escape))}' target='_blank'>${slayerLocked['monster'].replaceAll(/~/g, '').replaceAll(/\|/g, '')}</a>` + ')' : ''} ${!!slayerLocked ? ' at Level ' + slayerLocked['level'] : ''}</div>`);
-                (testMode || !(viewOnly || inEntry || locked)) && !!slayerLocked && $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-unlock-container'><span class='noscroll slayer-unlock-button' onclick='unlockSlayer()'><i class="fa-solid fa-unlock"></i>Manually Unlock</span></div>`);
-                (testMode || !(viewOnly || inEntry || locked)) && $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-lock-container'><span class='noscroll slayer-lock-button' onclick='openSlayerLocked()'>${!!slayerLocked ? '<i class="fa-solid fa-edit"></i>' : '<i class="fa-solid fa-lock"></i>'}${!!slayerLocked ? 'Change Locked Monster' : 'Lock Slayer'}</span></div>`);
-                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='noscroll'>`);
-                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-task-calc-title'>Slayer Task Calculator</div>`);
-                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll slayer-calc-container'><span class="noscroll"><span class="noscroll combat-level-label">Combat Level:</span> <input class="noscroll combat-level-input" value="${prevValueLevelInput['Combat']}" /></span><span class="noscroll"><span class="noscroll combat-level-label">Slayer Level:</span> <input class="noscroll slayer-level-input" value="${prevValueLevelInput['Slayer']}" /></span><br /><span class="checkboxes noscroll">Ignore Combat Level: <input type="checkbox" class="noscroll ignore-combat-level-input" checked="${prevValueLevelInput['ignoreCombatLevel']}" /></span><span class="checkboxes noscroll">Krystilia Slayer Creatures: <input type="checkbox" class="noscroll krystilia-slayer-creatures-input" checked="${prevValueLevelInput['krystiliaSlayerCreatures']}" /></span><button class="noscroll calc-slayer-tasks-button" onclick="calculateSlayerTasks()">Calculate Doable Tasks</button></div>`);
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='slayer-section slayer-section-1'></div>`);
+                let tooltipBase = `<span class="slayerlock-question">Slayer Locking <i class="fa-solid fa-question-circle question-help"></i></span>`;
+                $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class="slayer-locking-title">${tooltip.generate('slayerLockingTooltip', tooltipBase, 'slayerLockingTooltip', onMobile ? 'bottom' : 'right')}</div>`);
+                if (editingSlayerLock) {
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class='noscroll slayer-header'>Slayer is currently <span id="slayer-locked-dropdown-container" class="slayer-locked-dropdown-container noscroll" onchange="slayerLockedChange()"><select id="slayer-locked-dropdown"><option ${!!tempSlayerLocked ? 'selected' : ''} value="locked">Locked</option><option ${!tempSlayerLocked ? 'selected' : ''} value="unlocked">Unlocked</option></select></span></div>`);
+                    !!tempSlayerLocked && $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class='slayer-locking-data slayer-locking-level'><b>Slayer Level:</b> <input id="slayer-locked-level-input" type="number" min="1" max="99" onchange="slayerLockedChange()" value="${tempSlayerLocked['level'] || 1}"/></span></div>`);
+                    !!tempSlayerLocked && $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class='slayer-locking-data slayer-locking-task'><b>Task:</b> <span id="slayer-locked-dropdown-container" class="slayer-locked-dropdown-container noscroll" onchange="slayerLockedChange()"><select id="slayer-locked-task-dropdown"></select></span></div>`);
+                    ['Select a task', 'Manually Locked', ...Object.keys(slayerTasks)].forEach((task) => {
+                        $('#slayer-locked-task-dropdown').append(`<option ${!!tempSlayerLocked && tempSlayerLocked.hasOwnProperty('monster') && tempSlayerLocked['monster'] === task ? 'selected' : ''} value="${task}">${task}</option>`);
+                    });
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class='noscroll slayer-lock-container'><span class='noscroll slayer-lock-button' onclick='toggleEditSlayerLock()'><i class="fa-solid fa-circle-check"></i>Done Editing</span></div>`);
+                } else {
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class='noscroll slayer-header'>Slayer is currently <b class='noscroll slayer-locked-status ${!!slayerLocked ? 'red' : 'green'}'>${!!slayerLocked ? '<i class="fa-solid fa-lock"></i>' : '<i class="fa-solid fa-unlock"></i>'} ${!!slayerLocked ? 'LOCKED' : 'UNLOCKED'}</b></div>`);
+                    !!slayerLocked && $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class='slayer-locking-data slayer-locking-level'><b>Slayer Level:</b> <span>${slayerLocked['level']}</span></span></div>`);
+                    !!slayerLocked && $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class='slayer-locking-data slayer-locking-task'><b>Task:</b> <span><a class='noscroll' href='${"https://oldschool.runescape.wiki/w/Slayer_task/" + encodeURI(slayerLocked['monster'].replace(/[!'()*]/g, escape))}' target='_blank'>${slayerLocked['monster'].replaceAll(/~/g, '').replaceAll(/\|/g, '')}</a></span> <span class='noscroll slayer-lock-map' onclick='showSlayerLockOnMap()'><i class="fa-solid fa-map" title="Show on map"></i></span></div>`);
+                    (testMode || !(viewOnly || inEntry || locked)) && $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-1`).append(`<div class='noscroll slayer-lock-container'><span class='noscroll slayer-lock-button' onclick='toggleEditSlayerLock()'><i class="fa-solid fa-edit"></i>Edit Slayer Lock</span></div>`);
+                }
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='slayer-section-split noscroll'>`);
+                $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='slayer-section slayer-section-2'></div>`);
+                $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-2`).append(`<div class='noscroll slayer-task-calc-title'>Slayer Task Calculator</div>`);
+                $(`.${combatStyle.replaceAll(' ', '_')}-body .slayer-section-2`).append(`<div class='noscroll slayer-calc-container'><span class="noscroll"><span class="noscroll combat-level-label">Combat Level:</span> <input class="noscroll combat-level-input" value="${prevValueLevelInput['Combat']}" /></span><span class="noscroll"><span class="noscroll combat-level-label">Slayer Level:</span> <input class="noscroll slayer-level-input" value="${prevValueLevelInput['Slayer']}" /></span><br /><span class="checkboxes noscroll">Ignore Combat Level: <input type="checkbox" class="noscroll ignore-combat-level-input" checked="${prevValueLevelInput['ignoreCombatLevel']}" /></span><span class="checkboxes noscroll">Krystilia Slayer Creatures: <input type="checkbox" class="noscroll krystilia-slayer-creatures-input" checked="${prevValueLevelInput['krystiliaSlayerCreatures']}" /></span><button class="noscroll calc-slayer-tasks-button" onclick="calculateSlayerTasks()">Calculate Doable Tasks</button></div>`);
                 $('.combat-level-input').on('input', function(e) {
                     if (!e.target.value.match(/^[0-9]*$/i)) {
                         $(this).val(prevValueLevelInput['Combat']);
@@ -8998,7 +9034,7 @@ let calculateSlayerTasks = function() {
         'Duradel': 'Receive a Slayer assignment from ~|Duradel|~ in Shilo Village'
     };
     $(`.Slayer-body .row, .Slayer-body .slayer-table-wrapper`).remove();
-    $(`.Slayer-body`).append(`<div class='noscroll slayer-table-wrapper'></div>`);
+    $(`.Slayer-body .slayer-section-2`).append(`<div class='noscroll slayer-table-wrapper'></div>`);
     $(`.Slayer-body .slayer-table-wrapper`).append(`<div class='noscroll row row-header'><span class='noscroll master-table-header'>Slayer Master</span><span class='noscroll tasks-table-header'>Possible Tasks</span><span class='noscroll info-table-header'>Info</span></div>`);
     prevValueLevelInput['Combat'] = ((prevValueLevelInput['Combat'] || 3) > 126) ? 126 : (((prevValueLevelInput['Combat'] || 3) < 3) ? 3 : (prevValueLevelInput['Combat'] || 3));
     prevValueLevelInput['Slayer'] = ((prevValueLevelInput['Slayer'] || 1) > 99) ? 99 : (((prevValueLevelInput['Slayer'] || 1) < 1) ? 1 : (prevValueLevelInput['Slayer'] || 1));
@@ -9663,6 +9699,7 @@ let closeHighest2 = function() {
     highest2ModalOpen = false;
     modalOutsideTime = Date.now();
     $('#myModal12_2').hide();
+    editingSlayerLock = false;
 }
 
 // Closes the methods modal
@@ -10421,11 +10458,11 @@ let selectOverlayClues = function(clueTier) {
 }
 
 // Clears all overlay clues
-let clearOverlayClues = function() {
+let clearOverlayClues = function(justClear) {
     Object.keys(selectedOverlayClues).forEach((clueTier) => {
         selectedOverlayClues[clueTier] = false;
     });
-    showOverlays(true);
+    !justClear && showOverlays(true);
     drawCanvas();
 }
 
@@ -10438,6 +10475,7 @@ let changeOverlayFilterBy = function() {
 // Shows overlay options
 let showOverlays = function(fromHelper) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        $('#map-marker-btn').hasClass('notice-me') && $('#map-marker-btn').removeClass('notice-me');
         onMobile && hideMobileMenu();
         overlaysModalOpen = true;
         $('#overlays-data').empty();
