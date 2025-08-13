@@ -28212,6 +28212,12 @@
 				"Output": "Tomatoes(5)",
 				"Not F2P": true
 			},
+			"Collect a bucket of sand from Drew": {
+				"Items": ["Sandstone[+]"],
+				"NPCs": ["Drew"],
+				"Objects": ["Grinder"],
+				"Output": "Bucket of sand"
+			},
 			"Take a bucket from the Pile of Buckets in the Giants' Foundry": {
 				"Chunks": ["Giants' Foundry"],
 				"Objects": ["Pile of Buckets"],
