@@ -3676,6 +3676,8 @@
   "Steal from a ~|vegetable stall|~": "t_3605",
   "Steal from a ~|wine stall|~": "t_3606",
   "Steal ~|candles|~ in Entrana's church": "t_3607",
+  "Unlock the cage in the ~|Underground Pass|~": "t_46409",
+  "Unlock the ~|gate (Underground Pass Shortcut)|~": "t_46410",
   "Unlock the east ~|chest (10 coins)|~ door": "t_3608",
   "Unlock the ~|door (Ross' House)|~": "t_3609",
   "Unlock the ~|gate (Ardougne Sewers)|~": "t_3610",
@@ -46162,5 +46164,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46409
+  "currentNextIndex": 46411
 }
