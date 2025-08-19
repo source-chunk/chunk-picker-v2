@@ -529,6 +529,18 @@
 				"NoPet": true,
 				"NoBoost": true
 			},
+			"Access the Underground Pass pipe ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["Underground Pass"],
+				"Objects": ["Pipe (Underground Pass)"],
+				"Level": 1,
+				"Primary": true,
+				"NoPet": true,
+				"Tasks": {
+					"~|Underground Pass|~ 5": "Quest"
+				},
+				"NoBoost": true
+			},
 			"Access the Cairn Isle rock slide climb ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["11054-1"],
@@ -52195,6 +52207,9 @@
 				"Primary": true,
 				"Priority": 44,
 				"NoPet": true,
+				"Tasks": {
+					"~|Underground Pass|~ 5": "Quest"
+				},
 				"NoBoost": true
 			},
 			"Unlock the ~|gate (Underground Pass Shortcut)|~": {
@@ -52202,6 +52217,9 @@
 				"Level": 50,
 				"Primary": true,
 				"Priority": 44,
+				"Tasks": {
+					"~|Underground Pass|~ 5": "Quest"
+				},
 				"NoPet": true
 			},
 			"Unlock the east ~|chest (10 coins)|~ door": {
@@ -117131,6 +117149,7 @@
 						"The Fremennik Exiles": "step"
 					},
 					"Shop": {
+						"Baba Yaga's Magic Shop.": true,
 						"Moon Clan Fine Clothes.": true,
 						"Moon Clan General Store.": true
 					},
@@ -149013,7 +149032,8 @@
 				"Lever": 2,
 				"Odd markings": 5,
 				"Pile of rocks": 2,
-				"Pipe": 7,
+				"Pipe": 5,
+				"Pipe (Underground Pass)": 2,
 				"Protruding rocks": 17,
 				"Rockpile": 1,
 				"Rope swing": 1,
@@ -151877,7 +151897,7 @@
 			"ChopJungle[+]": ["Chop ~|dense jungle|~", "Chop ~|medium jungle|~", "Chop ~|light jungle|~"],
 			"WildernessPirateAccess[+]": ["Access wilderness pirates", "Access wilderness zombie pirates"],
 			"ConstructBed[+]": ["Build a ~|wooden bed|~", "Build an ~|oak bed|~", "Build a ~|large oak bed|~", "Build a ~|teak bed|~", "Build a ~|large teak bed|~", "Build a ~|4-poster|~", "Build a ~|gilded 4-poster|~"],
-			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Fortis Colosseum loot*", "Elven crystal chest loot"],
+			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
 			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"],
 			"SmokableTrapTask[+]": ["Catch an ~|embertailed jerboa|~", "Catch a ~|pyre fox|~", "Catch a ~|tecu salamander|~", "Catch a ~|barb-tailed kebbit|~", "Catch a ~|black chinchompa|~", "Catch a ~|black salamander|~", "Catch a ~|carnivorous chinchompa|~", "Catch a ~|chinchompa (Hunter)|~", "Catch a ~|copper longtail|~", "Catch a ~|crimson swift|~", "Catch a ~|ferret|~", "Catch a ~|golden warbler|~", "Catch a ~|maniacal monkey (Hunter)|~", "Catch a ~|red salamander|~", "Catch a ~|sabre-toothed kebbit|~", "Catch a ~|swamp lizard|~", "Catch a ~|tropical wagtail|~", "Catch a ~|wild kebbit|~", "Catch an ~|imp|~", "Catch an ~|orange salamander|~"]
 		},
@@ -226388,6 +226408,11 @@
 			"Perry's Chop-chop Shop": {
 				"6454": [{
 					"Access the ~|Woodcutting Guild|~": "Woodcutting"
+				}]
+			},
+			"Petrified Pete's Ore Shop": {
+				"15163-1": [{
+					"Access the ~|Volcanic Mine|~": "Mining"
 				}]
 			},
 			"Pie Shop": {

@@ -2999,6 +2999,10 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (!chunkInfo['challenges'][subSkill]) {
                         chunkInfo['challenges'][subSkill] = {};
                     }
+                    if (!newValids.hasOwnProperty(subSkill)) {
+                        newValids[subSkill] = {};
+                    }
+                    newValids[subSkill][name] = chunkInfo['challenges'][skill][name]['Skills'][subSkill];
                     if (chunkInfo['challenges'][subSkill].hasOwnProperty(name)) {
                         chunkInfo['challenges'][subSkill][name] = {
                             ...chunkInfo['challenges'][subSkill][name],
@@ -3016,10 +3020,6 @@ let calcChallenges = function(chunks, baseChunkData) {
                             }
                         }
                     } else {
-                        if (!newValids.hasOwnProperty(subSkill)) {
-                            newValids[subSkill] = {};
-                        }
-                        newValids[subSkill][name] = chunkInfo['challenges'][skill][name]['Skills'][subSkill];
                         chunkInfo['challenges'][subSkill][name] = {
                             ...chunkInfo['challenges'][skill][name],
                             'Level': chunkInfo['challenges'][skill][name]['Skills'][subSkill],
@@ -4110,7 +4110,6 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             chunkInfo['challenges'][skill][name]['ManualValid'] && (validChallenge = true);
             chunkInfo['challenges'][skill][name]['forcedPrimary'] && chunkInfo['challenges'][skill][name]['Secondary'] && (validChallenge = false);
             if (validChallenge) {
-                let mustBeHighestValid = true;
                 delete nonValids[name];
                 if (toolLevelChallenges.hasOwnProperty(skill) && toolLevelChallenges[skill].hasOwnProperty(name)) {
                     toolLevelChallenges[skill][name] = true;
@@ -4187,8 +4186,6 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                         tempItemSkill[skill][plus].push(name);
                                         thingsAdded = true;
                                     }
-                                } else {
-                                    mustBeHighestValid = false;
                                 }
                             });
                         } else {
@@ -4240,8 +4237,6 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                         tempItemSkill[skill][item.replaceAll(/\*/g, '')].push(name);
                                         thingsAdded = true;
                                     }
-                                } else {
-                                    mustBeHighestValid = false;
                                 }
                             }
                         }
@@ -4251,7 +4246,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         //valids[skill][name] = false;
                     }
                 }
-                if (mustBeHighestValid && processingSkill.hasOwnProperty(skill) && processingSkill[skill] && chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subChallenge) => { return subChallenge.includes('--') }).length > 0) {
+                if (processingSkill.hasOwnProperty(skill) && processingSkill[skill] && chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks') && Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((subChallenge) => { return subChallenge.includes('--') }).length > 0) {
                     chunkInfo['challenges'][skill][name]['mustBeHighest'] = true;
                     valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'] || chunkInfo['challenges'][skill][name]['Label'] || true;
                 }
@@ -7845,6 +7840,33 @@ let calcBIS = function(completedOnly) {
         //console.log(bestEquipment);
     });
 
+
+    let equipToAdd = {};
+    !completedOnly && Object.keys(bestEquipmentAltsGlobal).forEach((label) => {
+        !!bestEquipmentAltsGlobal[label] && bestEquipmentAltsGlobal[label].forEach((item) => {
+            let article = vowels.includes(item.toLowerCase().charAt(0)) ? ' an ' : ' a ';
+            article = (item.toLowerCase().charAt(item.toLowerCase().length - 1) === 's' || (item.toLowerCase().charAt(item.toLowerCase().length - 1) === ')' && item.toLowerCase().split('(')[0].trim().charAt(item.toLowerCase().split('(')[0].trim().length - 1) === 's')) ? ' ' : article;
+            if (!equipToAdd['Obtain' + article + '~|' + formatEquip(item) + '|~']) {
+                equipToAdd['Obtain' + article + '~|' + formatEquip(item) + '|~'] = [];
+            }
+            equipToAdd['Obtain' + article + '~|' + formatEquip(item) + '|~'].push(label);
+        });
+    });
+    !!equipToAdd && Object.keys(equipToAdd).filter((line) => !globalValids['BiS'].hasOwnProperty(line)).forEach((line) => {
+        let fullLabel = '';
+        !!equipToAdd[line] && equipToAdd[line].forEach((label) => {
+            if (fullLabel.length > 0) {
+                fullLabel = label.split(' BiS ')[0] + '/​' + fullLabel;
+            } else {
+                fullLabel = label.split(' BiS ')[0];
+            }
+        });
+        !!equipToAdd[line] && (fullLabel = fullLabel + ' BiS ' + equipToAdd[line][0].split(' BiS ')[1]);
+        if (fullLabel.length > 0) {
+            globalValids['BiS'][line] = fullLabel;
+        }
+    });
+
     // Deletes partial duplicate bis items
     let equipmentMapping = {};
     let styleMapping = {};
@@ -7887,7 +7909,6 @@ let calcBIS = function(completedOnly) {
             }
         });
         if (validReplacements.length > 0) {
-            delete globalValids['BiS'][savedLines[item]];
             delete equipmentMapping[item];
             Object.keys(styleMapping).filter((style) => styleMapping[style].includes(item)).forEach((style) => {
                 styleMapping[style] = styleMapping[style].filter((it) => it !== item);

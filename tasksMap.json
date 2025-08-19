@@ -59,6 +59,7 @@
   "Access the Brimhaven Dungeon eastern stepping stones ~|shortcut|~": "t_42",
   "Access the Brimhaven Dungeon vine to baby green dragons ~|shortcut|~": "t_43",
   "Access the Brimhaven Dungeon pipe to moss giants ~|shortcut|~": "t_44",
+  "Access the Underground Pass pipe ~|shortcut|~": "t_46411",
   "Access the Cairn Isle rock slide climb ~|shortcut|~": "t_45",
   "Access the Aldarin house window ~|shortcut|~": "t_46",
   "Access the Coal Trucks log balance ~|shortcut|~": "t_47",
@@ -46164,5 +46165,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46411
+  "currentNextIndex": 46412
 }
