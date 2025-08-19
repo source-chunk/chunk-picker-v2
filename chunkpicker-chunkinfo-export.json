@@ -28836,6 +28836,12 @@
 				},
 				"Not F2P": true
 			},
+			"Araxyte task": {
+				"Tasks": {
+					"LowHighMasters[+]x1": "Slayer"
+				},
+				"Not F2P": true
+			},
 			"Smoke devil task": {
 				"Tasks": {
 					"KonarBetterMasters[+]x1": "Slayer"
@@ -151843,6 +151849,7 @@
 			"VannakaChaeldarMasters[+]": ["Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris"],
 			"KonarDuradelMasters[+]": ["Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"KonarBetterMasters[+]": ["Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
+			"LowHighMasters[+]": ["Receive a Slayer assignment from ~|Turael|~ in Burthorpe", "Receive a Slayer assignment from ~|Spria|~ in Draynor Village", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"BloodRunecrafting[+]": ["Craft a ~|blood rune|~ at the false altar on Zeah", "Craft a ~|blood rune|~ at the true altar in Morytania"],
 			"LMSAccess[+]": ["Access LMS via Quest Points", "Access LMS via total level"],
 			"OtherMaster[+]": ["Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Mazchna|~ in Canifis", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Spria|~ in Draynor Village", "Receive a Slayer assignment from ~|Turael|~ in Burthorpe", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon"],
@@ -224140,6 +224147,11 @@
 			"Armoured zombie (Zemouregal's Fort)": {
 				"Zemouregal's Fortress#Basement": [{
 					"~|The Curse of Arrav|~ Complete the quest": "Quest"
+				}]
+			},
+			"Araxxor": {
+				"Morytania Spider Nest": [{
+					"Araxyte task": "Nonskill"
 				}]
 			},
 			"Baby black dragon": {
