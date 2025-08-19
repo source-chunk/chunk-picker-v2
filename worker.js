@@ -1631,6 +1631,7 @@ let calcChallenges = function(chunks, baseChunkData) {
         !rules["Highest Level"] && Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach((skill) => {
             tempHighest[skill] = Object.keys(newValids[skill]).sort((a, b) => newValids[skill][a] - newValids[skill][b]);
         });
+        let toBeDeleted = [];
         !rules["Highest Level"] && Object.keys(newValids).filter(skill => skillNames.includes(skill)).forEach((skill) => {
             let tempItems = {};
             Object.keys(newValids[skill]).filter(task => chunkInfo['challenges'][skill][task]['mustBeHighest'] && chunkInfo['challenges'][skill][task].hasOwnProperty('Tasks')).sort((a, b) => newValids[skill][a] - newValids[skill][b]).some(task => {
@@ -1674,8 +1675,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                             }
                             readdedCraftedBisTasks[skill][task] = true;
                         } else if ((!manualTasks.hasOwnProperty(skill) || !manualTasks[skill].hasOwnProperty(task)) && (!manualTasks.hasOwnProperty(subTask.split('--')[1]) || !manualTasks[subTask.split('--')[1]].hasOwnProperty(task))) {
-                            delete newValids[skill][task];
-                            delete newValids[subTask.split('--')[1]][task];
+                            toBeDeleted.push({skill, task});
                             if (tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].includes(task)) {
                                 tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].splice(tempHighest[chunkInfo['challenges'][skill][task]['Tasks'][subTask]].indexOf(task), 1);
                             }
@@ -1692,6 +1692,9 @@ let calcChallenges = function(chunks, baseChunkData) {
                     return false;
                 }
             });
+        });
+        toBeDeleted.forEach((entry) => {
+            delete newValids[entry.skill][entry.task];
         });
         rules["Highest Level"] && Object.keys(tempItemSkill).forEach((skill) => {
             Object.keys(tempItemSkill[skill]).filter((item) => { return !!baseChunkData['items'][item] }).forEach((item) => {
