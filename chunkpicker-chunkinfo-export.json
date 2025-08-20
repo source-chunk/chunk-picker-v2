@@ -27,6 +27,41 @@
 				"Priority": 99,
 				"NoPet": true
 			},
+			"Access the Slayer Tower ivy ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Ivy (Slayer Tower)"],
+				"Level": 81,
+				"Primary": true,
+				"Priority": 2,
+				"NoPet": true
+			},
+			"Access the Slayer Tower window ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Broken window (Slayer Tower)"],
+				"Level": 18,
+				"Primary": true,
+				"Priority": 2,
+				"NoPet": true
+			},
+			"Access the Castle Drakan wall rock climb ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Rocks (Castle Drakan wall)"],
+				"Level": 69,
+				"Tasks": {
+					"Access the Darkmeyer north-eastern wall ~|shortcut|~": "Agility"
+				},
+				"Primary": false,
+				"Priority": 2,
+				"NoPet": true
+			},
+			"Access the Fossil Island zip line ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Zip line (Fossil Island)"],
+				"Level": 74,
+				"Primary": false,
+				"Priority": 3,
+				"NoPet": true
+			},
 			"Access the Nemus Retreat wall climb ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Broken wall (Nemus Retreat)"],
@@ -192,7 +227,7 @@
 				"Chunks": ["Waterbirth Island Dungeon"],
 				"Level": 81,
 				"Primary": true,
-				"Priority": 2,
+				"Priority": 1,
 				"NoPet": true
 			},
 			"Access the Shilo Village rocks ~|shortcut|~": {
@@ -448,6 +483,7 @@
 				"Chunks": ["6972-1"],
 				"Level": 69,
 				"Primary": false,
+				"Priority": 1,
 				"NoPet": true
 			},
 			"Access the Arceuus essence mine western descent ~|shortcut|~": {
@@ -1127,6 +1163,7 @@
 				"Chunks": ["10032-2"],
 				"Level": 18,
 				"Primary": true,
+				"Priority": 1,
 				"NoPet": true
 			},
 			"Access the Wilderness from God Wars Dungeon area climb ~|shortcut|~": {
@@ -27190,6 +27227,14 @@
 				"Sections": ["5165-1", "5165-2"],
 				"Tasks": {
 					"Access the Aldarin rock climb ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"14908-1 to 14908-2": {
+				"Sections": ["14908-1", "14908-2"],
+				"Tasks": {
+					"Access the Fossil Island zip line ~|shortcut|~": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -139365,9 +139410,11 @@
 			},
 			"Nickname": "Slayer Tower",
 			"Object": {
+				"Broken window (Slayer Tower)": 2,
 				"Danger sign": 2,
 				"Dead tree": 7,
 				"Fire remains": 1,
+				"Ivy (Slayer Tower)": 1,
 				"Magical Chest": 1,
 				"STASH (elite)": 1,
 				"Spikey chain (Slayer Tower)#Advanced": 2,
@@ -140409,6 +140456,7 @@
 					},
 					"Object": {
 						"Fountain": 4,
+						"Rocks (Castle Drakan wall)": 1,
 						"STASH (master)": 1,
 						"Vyre well": 2
 					},
@@ -142129,7 +142177,8 @@
 						"Pile of Ancient Books": 1,
 						"Stairs": 2,
 						"Stone chest (House on the Hill)": 5,
-						"Strange Machine": 1
+						"Strange Machine": 1,
+						"Zip line (Fossil Island)": 1
 					}
 				}
 			},

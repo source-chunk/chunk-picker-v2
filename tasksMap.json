@@ -2,6 +2,10 @@
   "Access the Ice Mountain western scramble ~|shortcut|~": "t_1",
   "Participate in ~|Underwater Agility and Thieving|~ for Agility xp": "t_45430",
   "Participate in ~|Trouble Brewing|~ for Agility xp": "t_2",
+  "Access the Slayer Tower ivy ~|shortcut|~": "t_46412",
+  "Access the Slayer Tower window ~|shortcut|~": "t_46413",
+  "Access the Castle Drakan wall rock climb ~|shortcut|~": "t_46414",
+  "Access the Fossil Island zip line ~|shortcut|~": "t_46415",
   "Access the Nemus Retreat wall climb ~|shortcut|~": "t_45710",
   "Access the cave to the Stalker Den ~|shortcut|~": "t_45711",
   "Access the Chasm of Fire gap ~|shortcut|~": "t_3",
@@ -46165,5 +46169,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46412
+  "currentNextIndex": 46416
 }
