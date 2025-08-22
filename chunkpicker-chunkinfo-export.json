@@ -78291,9 +78291,8 @@
 			},
 			"~|Kourend and Kebos Diary#Elite|~ Task 4": {
 				"Description": "Catch an anglerfish and cook it whilst in Great Kourend.",
-				"Chunks": ["7226"],
 				"Items": ["Fishing rod[+]", "Sandworms"],
-				"Objects": ["Fishing spot (anglerfish)"],
+				"Objects": ["Fishing spot (anglerfish)", "Cooking object[+]"],
 				"Skills": {
 					"Fishing": 82,
 					"Cooking": 84
