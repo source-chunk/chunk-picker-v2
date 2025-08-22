@@ -2691,25 +2691,25 @@ let calcChallenges = function(chunks, baseChunkData) {
                                             } else {
                                                 delete outputs[tableItem];
                                             }
+                                            !!outputs[tableItem] && !!outputs[tableItem][challenge] && chunkInfo['challenges'][skill][challenge]['Source'] === 'drop' && Object.keys(chunkInfo['skillItems'][skill][output][item]).forEach((quantityDrop) => {
+                                                let thievingExtra = skill === 'Thieving' ? '[Thieving] ' : '';
+                                                if (!dropRatesGlobal[thievingExtra + output]) {
+                                                    dropRatesGlobal[thievingExtra + output] = {};
+                                                }
+                                                dropRatesGlobal[thievingExtra + output][tableItem] = findFraction(parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '') * dropTables[item][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1] * dropTables[item][tableItem].split('@')[0].split('/')[1].replaceAll('~', '')));
+                                                if (!dropTablesGlobal[thievingExtra + output]) {
+                                                    dropTablesGlobal[thievingExtra + output] = {};
+                                                }
+                                                if (!dropTablesGlobal[thievingExtra + output][tableItem]) {
+                                                    dropTablesGlobal[thievingExtra + output][tableItem] = {};
+                                                }
+                                                dropTablesGlobal[thievingExtra + output][tableItem][dropTables[item][tableItem].split('@')[1]] = findFraction(parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '') * dropTables[item][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1] * dropTables[item][tableItem].split('@')[0].split('/')[1].replaceAll('~', '')));
+                                            });
                                         } else if ((Object.keys(chunkInfo['skillItems'][skill][output][item])[0] === 'Always' && dropTables[item][tableItem].split('@')[0] === 'Always') || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && (isNaN(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].replaceAll('/', '').replaceAll('@', '')) || isNaN(dropTables[item][tableItem].split('@')[0].replaceAll('/', '').replaceAll('@', '')))) || (parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[0].replaceAll('~', '') * dropTables[item][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(Object.keys(chunkInfo['skillItems'][skill][output][item])[0].split('/')[1] * dropTables[item][tableItem].split('@')[0].split('/')[1].replaceAll('~', '')) >= parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))) {
                                             outputs[tableItem][challenge] = 'primary-' + skill;
                                         } else {
                                             outputs[tableItem][challenge] = 'secondary-' + skill;
                                         }
-                                        Object.keys(chunkInfo['skillItems'][skill][output][item]).forEach((quantityDrop) => {
-                                            let thievingExtra = skill === 'Thieving' ? '[Thieving] ' : '';
-                                            if (!dropRatesGlobal[thievingExtra + output]) {
-                                                dropRatesGlobal[thievingExtra + output] = {};
-                                            }
-                                            dropRatesGlobal[thievingExtra + output][tableItem] = findFraction(parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '') * dropTables[item][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1] * dropTables[item][tableItem].split('@')[0].split('/')[1].replaceAll('~', '')));
-                                            if (!dropTablesGlobal[thievingExtra + output]) {
-                                                dropTablesGlobal[thievingExtra + output] = {};
-                                            }
-                                            if (!dropTablesGlobal[thievingExtra + output][tableItem]) {
-                                                dropTablesGlobal[thievingExtra + output][tableItem] = {};
-                                            }
-                                            dropTablesGlobal[thievingExtra + output][tableItem][dropTables[item][tableItem].split('@')[1]] = findFraction(parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '') * dropTables[item][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1] * dropTables[item][tableItem].split('@')[0].split('/')[1].replaceAll('~', '')));
-                                        });
                                     }
                                 });
                             } else {
@@ -2730,6 +2730,20 @@ let calcChallenges = function(chunks, baseChunkData) {
                                     } else {
                                         delete outputs[item];
                                     }
+                                    !!outputs[item] && !!outputs[item][challenge] && chunkInfo['challenges'][skill][challenge]['Source'] === 'drop' && Object.keys(chunkInfo['skillItems'][skill][output][item]).forEach((quantityDrop) => {
+                                        let thievingExtra = skill === 'Thieving' ? '[Thieving] ' : '';
+                                        if (!dropRatesGlobal[thievingExtra + output]) {
+                                            dropRatesGlobal[thievingExtra + output] = {};
+                                        }
+                                        dropRatesGlobal[thievingExtra + output][item] = findFraction(parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1]));
+                                        if (!dropTablesGlobal[thievingExtra + output]) {
+                                            dropTablesGlobal[thievingExtra + output] = {};
+                                        }
+                                        if (!dropTablesGlobal[thievingExtra + output][item]) {
+                                            dropTablesGlobal[thievingExtra + output][item] = {};
+                                        }
+                                        dropTablesGlobal[thievingExtra + output][item][quantityDrop] = findFraction(parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1]));
+                                    });
                                 } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))))) && !chunkInfo['challenges'][skill][challenge]['Secondary'] && !chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
                                     if (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || (highestDropRate * (parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]))) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))) {
                                         outputs[item][challenge] = 'primary-' + skill;

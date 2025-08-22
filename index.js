@@ -1409,7 +1409,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.8.19';
+let currentVersion = '6.8.20';
 let patchNotesVersion = '6.4.0';
 let updateLevel = 'difference';
 
@@ -1483,8 +1483,6 @@ let moveAmountY = 0;
 let tempChunks = {};
 let tempSelectedChunks = [];
 let recentChunks = {};
-let animCount = 0;
-let isAnimating = false;
 let removedRecent = 0;
 let controlChunk = 0;
 let stickerChunk = 0;
@@ -1579,7 +1577,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.8.19";
+mapImg.src = "osrs_world_map.png?v=6.8.20";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1639,23 +1637,6 @@ let getLines = function(ctx, text, maxWidth) {
     }
     lines.push(currentLine);
     return lines;
-}
-
-// Runs canvas animation frames
-let runAnim = function() {
-    isAnimating = true;
-    animCount++;
-
-    let interval = setInterval(function() {
-        if (animCount % 100 !== 0) {
-            animCount++;
-            drawCanvas();
-        } else {
-            isAnimating = false;
-            clearInterval(interval);
-            drawCanvas();
-        }
-    }, 10);
 }
 
 // Canvas animation
@@ -1830,7 +1811,7 @@ let drawCanvas = function() {
         } else {
             ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
         }
-        ctx.shadowBlur = Math.abs((Math.floor(animCount / 1.5) % 50) - 25) + 5;
+        ctx.shadowBlur = 29;
         ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
     });
     ctx.restore();
@@ -1887,6 +1868,25 @@ let drawCanvas = function() {
     ctx.restore();
 
     chunkBordersCanvas();
+
+    // Recent chunks outline
+    ctx.save();
+    !!recentChunks && !onMobile && Object.keys(recentChunks).forEach((chunkId) => {
+        let {x, y} = convertToXY(chunkId);
+        if ((!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) || (!!tempChunks['potential'] && tempChunks['potential'][chunkId])) {
+            ctx.strokeStyle = 'rgba(255, 255, 0, 1)';
+        } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
+            ctx.strokeStyle = 'rgba(255, 0, 0, 1)';
+        } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'][chunkId]) {
+            ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
+        } else {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
+        }
+        ctx.setLineDash([10, 5]);
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+    });
+    ctx.restore();
 
     // Control sticker chunk
     ctx.save();
@@ -2028,9 +2028,6 @@ let drawCanvas = function() {
     if (manualMouseMoveCheck) {
         manualMouseMoveCheck = false;
         handleMouseMove(manualMouseMoveCheck);
-    }
-    if (!isAnimating && !!recentChunks && Object.keys(recentChunks).length > 0 && !onMobile) {
-        runAnim();
     }
 }
 
@@ -3330,7 +3327,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.8.19");
+        myWorker = new Worker("./worker.js?v=6.8.20");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3634,8 +3631,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.8.19");
-let myWorker2 = new Worker("./worker.js?v=6.8.19");
+let myWorker = new Worker("./worker.js?v=6.8.20");
+let myWorker2 = new Worker("./worker.js?v=6.8.20");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6663,7 +6660,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.8.19");
+    myWorker2 = new Worker("./worker.js?v=6.8.20");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
