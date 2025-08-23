@@ -32252,6 +32252,9 @@
 			"Cure yak-hide": {
 				"NPCs": ["Thakkrad Sigmundson"],
 				"Items": ["Yak-hide*"],
+				"Tasks": {
+					"~|The Fremennik Isles|~ 13": "Quest"
+				},
 				"Output": "Cured yak-hide",
 				"Not F2P": true
 			},
