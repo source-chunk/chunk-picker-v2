@@ -1,5 +1,6 @@
 {
   "Access the Ice Mountain western scramble ~|shortcut|~": "t_1",
+  "Read an ~|agility tome|~ from Temple Trekking": "t_46465",
   "Participate in ~|Underwater Agility and Thieving|~ for Agility xp": "t_45430",
   "Participate in ~|Trouble Brewing|~ for Agility xp": "t_2",
   "Access the Slayer Tower ivy ~|shortcut|~": "t_46412",
@@ -1745,6 +1746,7 @@
   "~|While Guthix Sleeps|~ Farming skill requirement": "t_1702",
   "~|Song of the Elves|~ Farming skill requirement": "t_1703",
   "Access the ~|Wintertodt|~": "t_1704",
+  "Read a ~|firemaking tome|~ from Temple Trekking": "t_46466",
   "Participate in ~|Trouble Brewing|~ for Firemaking xp": "t_1705",
   "Operate the stove at the ~|Blast Furnace|~": "t_1706",
   "Burn wood at ~|Wintertodt|~": "t_1707",
@@ -1831,6 +1833,7 @@
   "~|Making Friends with My Arm|~ Firemaking skill requirement": "t_1788",
   "Access the ~|fishing guild|~": "t_1789",
   "Access the ~|Tempoross|~": "t_1790",
+  "Read a ~|fishing tome|~ from Temple Trekking": "t_46467",
   "Unlock the best rewards bracket from ~|Tempoross|~": "t_1791",
   "Catch fish at ~|Tempoross|~": "t_46386",
   "Buy the ~|Fishing cape|~": "t_1792",
@@ -2732,6 +2735,7 @@
   "~|While Guthix Sleeps|~ Magic skill requirement": "t_2674",
   "~|Dragon Slayer II|~ Magic skill requirement": "t_2675",
   "Access the lower level of the ~|Motherlode Mine|~": "t_2676",
+  "Read a ~|mining tome|~ from Temple Trekking": "t_46468",
   "Obtain ~|mithril ore|~ from a supply crate": "t_2677",
   "Obtain ~|adamantite ore|~ from a supply crate": "t_2678",
   "Obtain ~|runite ore|~ from a supply crate": "t_2679",
@@ -3134,6 +3138,7 @@
   "~|The Fremennik Exiles|~ Runecraft skill requirement": "t_3066",
   "~|Desert Treasure II - The Fallen Empire|~ Runecraft skill requirement": "t_3067",
   "Buy the ~|Slayer cape|~": "t_3068",
+  "Read a ~|slayer tome|~ from Temple Trekking": "t_46469",
   "Slay a ~|Spitting Wyvern|~": "t_3069",
   "Slay a ~|Taloned Wyvern|~": "t_3070",
   "Slay a ~|Long-tailed Wyvern|~": "t_3071",
@@ -3585,6 +3590,7 @@
   "Access the shortcut in the ~|Rogues' Den|~ maze": "t_3510",
   "Access the sixth room of ~|Pyramid Plunder|~": "t_3511",
   "Access the third room of ~|Pyramid Plunder|~": "t_3512",
+  "Read a ~|thieving tome|~ from Temple Trekking": "t_46470",
   "Participate in ~|Underwater Agility and Thieving|~ for Thieving xp": "t_45431",
   "Gain xp in the Pheasant ~|Forestry|~ event": "t_3513",
   "Climb the ~|crumbling wall (Grim Tales)|~ north of Falador": "t_3514",
@@ -3729,6 +3735,7 @@
   "~|Desert Treasure II - The Fallen Empire|~ Thieving skill requirement": "t_3650",
   "~|While Guthix Sleeps|~ Thieving skill requirement": "t_3651",
   "Access the ~|Woodcutting Guild|~": "t_3652",
+  "Read a ~|woodcutting tome|~ from Temple Trekking": "t_46471",
   "Chop demon tears from ~|infected root|~": "t_45763",
   "Participate in ~|Trouble Brewing|~ for Woodcutting xp": "t_3653",
   "Obtain ~|mahogany logs|~ from a supply crate": "t_3654",
@@ -46218,5 +46225,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46465
+  "currentNextIndex": 46472
 }

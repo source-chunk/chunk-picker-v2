@@ -9,6 +9,13 @@
 				"Priority": 2,
 				"NoPet": true
 			},
+			"Read an ~|agility tome|~ from Temple Trekking": {
+				"Items": ["Agility tome*"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 111,
+				"NoPet": true
+			},
 			"Participate in ~|Underwater Agility and Thieving|~ for Agility xp": {
 				"Chunks": ["Underwater Fossil Island"],
 				"Level": 1,
@@ -15215,6 +15222,13 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"Read a ~|firemaking tome|~ from Temple Trekking": {
+				"Items": ["Firemaking tome*"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 111,
+				"NoPet": true
+			},
 			"Participate in ~|Trouble Brewing|~ for Firemaking xp": {
 				"Category": ["Minigame"],
 				"Chunks": ["15150", "15151-1"],
@@ -16260,6 +16274,13 @@
 				"Priority": 2,
 				"Not F2P": true,
 				"NoBoost": true
+			},
+			"Read a ~|fishing tome|~ from Temple Trekking": {
+				"Items": ["Fishing tome*"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 111,
+				"NoPet": true
 			},
 			"Unlock the best rewards bracket from ~|Tempoross|~": {
 				"Category": ["Boss"],
@@ -24639,6 +24660,13 @@
 				"NoPet": true,
 				"NoBoost": true
 			},
+			"Read a ~|mining tome|~ from Temple Trekking": {
+				"Items": ["Mining tome*"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 111,
+				"NoPet": true
+			},
 			"Obtain ~|mithril ore|~ from a supply crate": {
 				"Items": ["Supply crate*"],
 				"Level": 14,
@@ -31563,6 +31591,11 @@
 			"Claim the raw lobster reward from Temple Trekking*": {
 				"Chunks": ["Temple Trekking Routes"],
 				"Output": "Raw lobster",
+				"Not F2P": true
+			},
+			"Claim the xp tome reward from Temple Trekking*": {
+				"Chunks": ["Temple Trekking Routes"],
+				"Output": "Temple Trekking xp tome loot",
 				"Not F2P": true
 			},
 			"Add a candle to an empty candle lantern": {
@@ -46432,6 +46465,13 @@
 				"Priority": 1,
 				"NoBoost": true
 			},
+			"Read a ~|slayer tome|~ from Temple Trekking": {
+				"Items": ["Slayer tome*"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 111,
+				"NoPet": true
+			},
 			"Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris": {
 				"Level": 1,
 				"NPCs": ["Chaeldar"],
@@ -51520,6 +51560,13 @@
 				"Primary": true,
 				"NoBoost": true
 			},
+			"Read a ~|thieving tome|~ from Temple Trekking": {
+				"Items": ["Thieving tome*"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 111,
+				"NoPet": true
+			},
 			"Participate in ~|Underwater Agility and Thieving|~ for Thieving xp": {
 				"Chunks": ["Underwater Fossil Island"],
 				"Level": 1,
@@ -52679,6 +52726,13 @@
 				"Primary": false,
 				"Priority": 2,
 				"Not F2P": true,
+				"NoPet": true
+			},
+			"Read a ~|woodcutting tome|~ from Temple Trekking": {
+				"Items": ["Woodcutting tome*"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 111,
 				"NoPet": true
 			},
 			"Chop demon tears from ~|infected root|~": {
@@ -207931,6 +207985,29 @@
 				},
 				"Iron ore": {
 					"1": "Always"
+				}
+			},
+			"Temple Trekking xp tome loot": {
+				"Agility tome": {
+					"1": "1/7"
+				},
+				"Firemaking tome": {
+					"1": "1/7"
+				},
+				"Fishing tome": {
+					"1": "1/7"
+				},
+				"Mining tome": {
+					"1": "1/7"
+				},
+				"Slayer tome": {
+					"1": "1/7"
+				},
+				"Thieving tome": {
+					"1": "1/7"
+				},
+				"Woodcutting tome": {
+					"1": "1/7"
 				}
 			},
 			"Theatre of Blood": {
