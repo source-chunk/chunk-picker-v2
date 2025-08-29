@@ -46,7 +46,7 @@
 			"Access the Castle Drakan wall rock climb ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Rocks (Castle Drakan wall)"],
-				"Level": 69,
+				"Level": 86,
 				"Tasks": {
 					"Access the Darkmeyer north-eastern wall ~|shortcut|~": "Agility"
 				},
@@ -28616,6 +28616,12 @@
 			"Stronghold drops": {
 				"Chunks": ["Stronghold of Security"]
 			},
+			"Ruins of Tapoyauik drops": {
+				"Chunks": ["Ruins of Tapoyauik"]
+			},
+			"Varlamore icefiend drops": {
+				"Chunks": ["VarlamoreIcefiend[+]"]
+			},
 			"Forthos drops": {
 				"Chunks": ["Forthos Dungeon"]
 			},
@@ -28820,28 +28826,27 @@
 			},
 			"Abyssal demon wilderness task": {
 				"Tasks": {
-					"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer",
+					"KrystiliaVannakaBetterMasters[+]x1": "Slayer",
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
 				"Not F2P": true
 			},
 			"Dust devil wilderness task": {
 				"Tasks": {
-					"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer",
+					"KrystiliaVannakaBetterMasters[+]x1": "Slayer",
 					"~|Desert Treasure I|~ Complete the quest": "Quest"
 				},
 				"Not F2P": true
 			},
 			"Jelly wilderness task": {
 				"Tasks": {
-					"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer"
+					"JellyMasters[+]x1": "Slayer"
 				},
 				"Not F2P": true
 			},
 			"Nechryael wilderness task": {
 				"Tasks": {
-					"Receive a Slayer assignment from ~|Krystilia|~ in Edgeville": "Slayer",
-					"~|Priest in Peril|~ Complete the quest": "Quest"
+					"KrystiliaVannakaBetterMasters[+]x1": "Slayer"
 				},
 				"Not F2P": true
 			},
@@ -64529,6 +64534,12 @@
 				"Items": ["Broken zombie helmet"],
 				"Not F2P": true
 			},
+			"(Miscellaneous) Obtain a ~|helmet of the moon|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Helmet of the moon"],
+				"Not F2P": true
+			},
 			"Obtain a ~|Golden Gnome|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
@@ -65697,7 +65708,7 @@
 			"Help unite ~|Fabia|~ with Xilo": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
-				"Chunks": ["5168"],
+				"Chunks": ["5167-1", "5168"],
 				"NPCs": ["Fabia", "Xilo"],
 				"Not F2P": true
 			},
@@ -150357,7 +150368,7 @@
 			"SandCrabChunks[+]": ["6710", "6965", "6966", "7222", "7479-1", "Crabclaw Caves", "Catacombs of Kourend"],
 			"AnkousWildernessTask[+]": ["11834", "Wilderness Slayer Cave"],
 			"BanditsWildernessTask[+]": ["12089", "Wilderness Slayer Cave"],
-			"BearsWildernessTask[+]": ["11833", "12344", "12345, 13116"],
+			"BearsWildernessTask[+]": ["11833", "12344", "12345", "13116"],
 			"BlackdemonsWildernessTask[+]": ["Edgeville Dungeon#Wilderness", "Wilderness Slayer Cave"],
 			"BlackdragonsWildernessTask[+]": ["Lava Maze Dungeon", "Wilderness Slayer Cave"],
 			"BlackKnightsWildernessTask[+]": ["12092", "13114"],
@@ -150390,6 +150401,7 @@
 			"CurseOfTheEmptyLord5[+]": ["13117", "13623", "Edgeville Dungeon#Wilderness"],
 			"MournerChunks[+]": ["9267-1", "9523", "9524-2"],
 			"CatacombsOrGiantsDen[+]": ["Catacombs of Kourend", "Giants' Den"],
+			"VarlamoreIcefiend[+]": ["5682-1", "5682-3", "5683-2", "Ruins of Tapoyauik"],
 			"DragonSlayer7[+]": ["11314-3", "Crandor and Karamja Dungeon#South"],
 			"BankChunks[+]": ["4919", "4922", "5179", "5691-2", "5692-1", "5941", "5946-1", "5948-1", "6198-1", "6457", "6461", "6710", "6968-1", "7223", "7227", "8253-1", "8748-1", "9265", "9273", "9275", "9531-1", "9772", "9776", "9781-1", "9782", "10039", "10284-1", "10288-1", "10292", "10293", "10300", "10537", "10545", "10547-1", "10804", "10806-1", "11051", "11056", "11061", "11310-1", "11319-1", "11571-1", "11826", "11828-1", "11835", "12084-1", "12338-1", "12342-1", "12344", "12588-1", "12590-1", "12597-1", "12598", "12605", "12850-1", "12853-1", "13104", "13105-1", "13358-1", "13363", "13613", "13874-1", "13878-1", "14388-1", "14638-1", "14646-1", "14907-1", "14908-1", "15151-1", "15163-1", "Prifddinas", "Keldagrim", "Blast Furnace", "Mor Ul Rek#Outer Area", "Mor Ul Rek#Inner Area", "Rogues' Den", "Mining Guild", "Motherlode Mine", "Mage Arena bank", "Sophanem Dungeon", "Tarn's Lair", "Hallowed Sepulchre", "Shilo Village mine#Underground", "Giants' Foundry", "Tombs of Amascut Lobby", "Ourania Cave", "Chambers of Xeric"],
 			"BarbarianKeyChunk[+]": ["10039", "12341", "12853-1"],
@@ -150803,10 +150815,10 @@
 				"Wildblood seed": "83/1048@1"
 			},
 			"UsefulHerbDropTable+": {
-				"Grimy avantoe": "1/3.2@1 (noted)",
-				"Grimy ranarr weed": "1/4@1 (noted)",
-				"Grimy snapdragon": "1/4@1 (noted)",
-				"Grimy torstol": "1/5.333@1 (noted)"
+				"Grimy avantoe": "1/3.2@1",
+				"Grimy ranarr weed": "1/4@1",
+				"Grimy snapdragon": "1/4@1",
+				"Grimy torstol": "1/5.333@1"
 			}
 		},
 		"elementalRunes": ["Air rune", "Water rune", "Earth rune", "Fire rune"],
@@ -151898,6 +151910,8 @@
 			"FairyRings[+]": ["~|Fairytale II - Cure a Queen|~ 2", "~|Fairytale II - Cure a Queen|~ 3", "~|Fairytale II - Cure a Queen|~ 4", "~|Fairytale II - Cure a Queen|~ 5", "~|Fairytale II - Cure a Queen|~ 6", "~|Fairytale II - Cure a Queen|~ 7", "~|Fairytale II - Cure a Queen|~ 8", "~|Fairytale II - Cure a Queen|~ 9", "~|Fairytale II - Cure a Queen|~ 10", "~|Fairytale II - Cure a Queen|~ 11", "~|Fairytale II - Cure a Queen|~ Complete the quest"],
 			"AllNormalMasters[+]": ["Receive a Slayer assignment from ~|Turael|~ in Burthorpe", "Receive a Slayer assignment from ~|Spria|~ in Draynor Village", "Receive a Slayer assignment from ~|Mazchna|~ in Canifis", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"VannakaBetterMasters[+]": ["Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
+			"KrystiliaVannakaBetterMasters[+]": ["Receive a Slayer assignment from ~|Krystilia|~ in Edgeville", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
+			"JellyMasters[+]": ["Receive a Slayer assignment from ~|Krystilia|~ in Edgeville", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm"],
 			"AnkouMasters[+]": ["Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"ChaeldarBetterMasters[+]": ["Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"VannakaChaeldarMasters[+]": ["Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris"],
@@ -154129,9 +154143,6 @@
 			"Abyssal Sire": {
 				"Abyssal Sire": true
 			},
-			"Adamant dragons": {
-				"Adamant dragon": true
-			},
 			"Alchemical Hydra": {
 				"Alchemical Hydra": true
 			},
@@ -154230,9 +154241,6 @@
 			},
 			"Brine rats": {
 				"Brine rat": true
-			},
-			"Bronze dragons": {
-				"Bronze dragon": true
 			},
 			"Callisto": {
 				"Callisto": true,
@@ -154493,9 +154501,6 @@
 			"Infernal Mages": {
 				"Infernal Mage": true
 			},
-			"Iron dragons": {
-				"Iron dragon": true
-			},
 			"Jellies": {
 				"Jelly": true,
 				"Jelly#Wilderness Slayer Cave": true,
@@ -154567,8 +154572,13 @@
 			"Mammoths": {
 				"Mammoth": true
 			},
-			"Mithril dragons": {
-				"Mithril dragon": true
+			"Metal dragons": {
+				"Adamant dragon": true,
+				"Bronze dragon": true,
+				"Iron dragon": true,
+				"Mithril dragon": true,
+				"Rune dragon": true,
+				"Steel dragon": true
 			},
 			"Minions of Scabaras": {
 				"Scarab swarm": true,
@@ -154667,9 +154677,6 @@
 			"Rogues": {
 				"Rogue#Level 15": true,
 				"Rogue#Level 135": true
-			},
-			"Rune dragons": {
-				"Rune dragon": true
 			},
 			"Sarachnis": {
 				"Sarachnis": true
@@ -154785,9 +154792,6 @@
 				"Spiritual mage#Ancient Prison": true,
 				"Spiritual warrior#Ancient Prison": true,
 				"Spiritual ranger#Ancient Prison": true
-			},
-			"Steel dragons": {
-				"Steel dragon": true
 			},
 			"Suqahs": {
 				"Suqah": true
@@ -154915,7 +154919,6 @@
 			"Aberrant spectres": ["6457", "9525", "13623"],
 			"Abyssal demons": ["6457", "12849", "12857", "13114", "13623"],
 			"Abyssal Sire": ["12849"],
-			"Adamant dragons": ["14142"],
 			"Alchemical Hydra": ["5179"],
 			"Ankous": ["6457", "9525", "11834", "12341", "12857", "13114"],
 			"Aviansie": ["11578", "12090"],
@@ -154933,7 +154936,6 @@
 			"Bloodvelds": ["6457", "8755", "9525", "11578", "12090", "13623", "14387"],
 			"Blue dragons": ["5169", "6457", "6706", "9023", "9261", "9772", "10031", "11573", "11574"],
 			"Brine rats": ["10810"],
-			"Bronze dragons": ["6457", "10801"],
 			"Callisto": ["12345", "13116"],
 			"Catablepon": ["12341"],
 			"Cave bugs": ["12593", "12850"],
@@ -154986,7 +154988,6 @@
 			"Ice giants": ["6204", "6706", "11062", "11318", "11836", "11837", "12081", "12857", "13114"],
 			"Ice warriors": ["6706", "10558", "11318", "11836", "11837", "12081"],
 			"Infernal Mages": ["13623"],
-			"Iron dragons": ["6457", "9261", "10801"],
 			"Jellies": ["6457", "6706", "11064", "12857", "13114"],
 			"Jungle horrors": ["14639", "14894", "14895", "15151"],
 			"Kalphites": ["12848", "13104"],
@@ -155004,7 +155005,7 @@
 			"Lizards": ["5167", "5179", "5680", "13355", "13359", "13615", "13871"],
 			"Magic axes": ["12605"],
 			"Mammoths": ["12600"],
-			"Mithril dragons": ["10038"],
+			"Metal dragons": ["6457", "9261", "10038", "10801", "14142"],
 			"Minions of Scabaras": ["13099", "13871"],
 			"Minotaurs": ["12341"],
 			"Mogres": ["11824"],
@@ -155022,7 +155023,6 @@
 			"Revenants": ["12345", "12347"],
 			"Rockslugs": ["5167", "11064", "12593", "12850"],
 			"Rogues": ["12349", "13117"],
-			"Rune dragons": ["14142"],
 			"Sarachnis": ["6711"],
 			"Scorpia": ["12861"],
 			"Scorpions": ["5691", "5936", "6701", "6702", "9778", "10031", "10291", "10549", "10795", "10802", "10804", "11050", "11051", "11054", "11313", "11315", "11562", "11573", "12084", "12085", "12087", "12091", "12341", "12348", "12588", "12854", "12861", "13105", "13107", "14908"],
@@ -155035,7 +155035,6 @@
 			"Sourhogs": ["12596"],
 			"Spiders": ["4911", "5167", "5687", "5168", "5169", "5426", "5690", "5692", "5937", "5946", "5947", "5948", "6193", "6201", "6202", "6203", "6204", "6706", "6710", "6711", "6712", "6967", "6968", "6969", "7225", "7226", "8494", "9023", "9267", "9524", "9779", "10030", "10031", "10033", "10038", "10288", "10290", "10544", "10549", "10794", "10795", "11050", "11051", "11054", "11055", "11056", "11058", "11311", "11312", "11313", "11318", "11566", "11567", "11568", "11570", "11573", "11833", "11837", "12092", "12093", "12340", "12341", "12342", "12594", "12602", "12604", "12850", "12853", "12859", "13105", "13114", "13115", "13877", "14131", "14645", "14647", "14899", "14907"],
 			"Spiritual creatures": ["11578", "12090"],
-			"Steel dragons": ["6457", "10801"],
 			"Suqahs": ["8252", "8253", "8508", "8509"],
 			"Terror dogs": ["13618"],
 			"Thermonuclear smoke devil": ["9519"],
@@ -157100,6 +157099,9 @@
 			},
 			"Scaly blue dragonhide": {
 				"1": "1/100"
+			},
+			"Tooth half of key (moon key)": {
+				"1": "1/2290"
 			}
 		},
 		"Baby green dragon": {
@@ -159302,6 +159304,9 @@
 			},
 			"Scaly blue dragonhide": {
 				"1": "1/50"
+			},
+			"Tooth half of key (moon key)": {
+				"1": "1/1216"
 			}
 		},
 		"Boar": {
@@ -160046,6 +160051,9 @@
 			},
 			"Scaly blue dragonhide": {
 				"1": "1/33"
+			},
+			"Tooth half of key (moon key)": {
+				"1": "1/250"
 			}
 		},
 		"Brutal green dragon": {
@@ -166761,6 +166769,9 @@
 			"Clue scroll (easy)": {
 				"1": "1/128"
 			},
+			"Tooth half of key (moon key)": {
+				"1": "1/3011"
+			},
 			"GemDropTable+": {
 				"1": "1/128"
 			}
@@ -166898,16 +166909,16 @@
 				"30-60": "20/256"
 			},
 			"Grimy cadantine": {
-				"1 (noted)": "25/1024"
+				"1": "25/1024"
 			},
 			"Grimy dwarf weed": {
-				"1 (noted)": "25/1024"
+				"1": "25/1024"
 			},
 			"Grimy kwuarm": {
-				"1 (noted)": "31.25/1024"
+				"1": "31.25/1024"
 			},
 			"Grimy lantadyme": {
-				"1 (noted)": "18.75/1024"
+				"1": "18.75/1024"
 			},
 			"Gold bar": {
 				"8-16 (noted)": "15/256"
@@ -166957,16 +166968,16 @@
 				"30-60": "20/256"
 			},
 			"Grimy cadantine": {
-				"1 (noted)": "25/1024"
+				"1": "25/1024"
 			},
 			"Grimy dwarf weed": {
-				"1 (noted)": "25/1024"
+				"1": "25/1024"
 			},
 			"Grimy kwuarm": {
-				"1 (noted)": "31.25/1024"
+				"1": "31.25/1024"
 			},
 			"Grimy lantadyme": {
-				"1 (noted)": "18.75/1024"
+				"1": "18.75/1024"
 			},
 			"Gold bar": {
 				"8-16 (noted)": "15/256"
@@ -171012,6 +171023,9 @@
 			"Curved bone": {
 				"1": "1/5012.5"
 			},
+			"Tooth half of key (moon key)": {
+				"1": "1/2190"
+			},
 			"UncommonSeedDropTable+": {
 				"1": "8/128"
 			},
@@ -171187,6 +171201,12 @@
 		"Ice spider": {
 			"Looting bag": {
 				"1": "1/3"
+			},
+			"Frozen tear": {
+				"1": "Unknown"
+			},
+			"Tooth half of key (moon key)": {
+				"1": "1/2036"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/128"
@@ -171823,6 +171843,9 @@
 			},
 			"Slayer's enchantment": {
 				"1": "1/273"
+			},
+			"Tooth half of key (moon key)": {
+				"1": "1/2112"
 			}
 		},
 		"Ice wolf": {
@@ -171855,6 +171878,9 @@
 			},
 			"Ecumenical key": {
 				"1": "1/60"
+			},
+			"Tooth half of key (moon key)": {
+				"1": "1/3058"
 			}
 		},
 		"Icelord": {
@@ -174695,16 +174721,16 @@
 				"3-5 (noted)": "4/250"
 			},
 			"Grimy kwuarm": {
-				"2-3 (noted)": "1/35.56"
+				"2-3": "1/35.56"
 			},
 			"Grimy cadantine": {
-				"2-3 (noted)": "1/44.44"
+				"2-3": "1/44.44"
 			},
 			"Grimy dwarf weed": {
-				"2-3 (noted)": "1/44.44"
+				"2-3": "1/44.44"
 			},
 			"Grimy lantadyme": {
-				"2-3 (noted)": "1/59.26"
+				"2-3": "1/59.26"
 			},
 			"Coins": {
 				"100-6000": "35/250"
@@ -174785,16 +174811,16 @@
 				"10": "6/118"
 			},
 			"Grimy kwuarm": {
-				"1 (noted)": "15/944"
+				"1": "15/944"
 			},
 			"Grimy cadantine": {
-				"1 (noted)": "3/236"
+				"1": "3/236"
 			},
 			"Grimy lantadyme": {
-				"1 (noted)": "9/944"
+				"1": "9/944"
 			},
 			"Grimy dwarf weed": {
-				"1 (noted)": "3/326"
+				"1": "3/326"
 			},
 			"Seaweed spore": {
 				"5": "6/118"
@@ -185690,7 +185716,7 @@
 				"1": "1/72"
 			},
 			"Tooth half of key (moon key)": {
-				"1": "1/150"
+				"1": "1/75"
 			},
 			"Torstol seed": {
 				"1-20": "2/68"
@@ -205651,6 +205677,9 @@
 				"Bones to Peaches spell": {
 					"1": "Always"
 				},
+				"Rune pouch": {
+					"1": "Always"
+				},
 				"Mist rune": {
 					"1": "1/2"
 				},
@@ -210170,7 +210199,7 @@
 					"30-45": "4/56"
 				},
 				"Tooth half of key (moon key)": {
-					"1": "1/500"
+					"1": "1/150"
 				},
 				"Water orb": {
 					"10-20 (noted)": "2/56"
@@ -210238,16 +210267,16 @@
 					"30-60": "1/132"
 				},
 				"Grimy kwuarm": {
-					"3 (noted)": "5/264"
+					"3": "5/264"
 				},
 				"Grimy cadantine": {
-					"3 (noted)": "2/132"
+					"3": "2/132"
 				},
 				"Grimy lantadyme": {
-					"3 (noted)": "3/264"
+					"3": "3/264"
 				},
 				"Grimy dwarf weed": {
-					"3 (noted)": "2/132"
+					"3": "2/132"
 				},
 				"Grimy torstol": {
 					"1": "4/132"
@@ -211177,6 +211206,12 @@
 				},
 				"Nothing": {
 					"1": "29/128"
+				},
+				"Frozen tear": {
+					"1": "Unknown"
+				},
+				"Tooth half of key (moon key)": {
+					"1": "1/2260"
 				},
 				"GemDropTable+": {
 					"1": "1/128"
@@ -212292,28 +212327,28 @@
 					"35-65": "10/85"
 				},
 				"Grimy avantoe": {
-					"1-3 (noted)": "1/90.7"
+					"1-3": "1/90.7"
 				},
 				"Grimy kwuarm": {
-					"1-3 (noted)": "1/90.7"
+					"1-3": "1/90.7"
 				},
 				"Grimy ranarr weed": {
-					"1-3 (noted)": "1/113.3"
+					"1-3": "1/113.3"
 				},
 				"Grimy snapdragon": {
-					"1-3 (noted)": "1/113.3"
+					"1-3": "1/113.3"
 				},
 				"Grimy cadantine": {
-					"1-3 (noted)": "1/113.3"
+					"1-3": "1/113.3"
 				},
 				"Grimy dwarf weed": {
-					"1-3 (noted)": "1/113.3"
+					"1-3": "1/113.3"
 				},
 				"Grimy lantadyme": {
-					"1-3 (noted)": "1/151.1"
+					"1-3": "1/151.1"
 				},
 				"Grimy torstol": {
-					"1-3 (noted)": "1/151.1"
+					"1-3": "1/151.1"
 				},
 				"Coins": {
 					"1000-2000": "4/85",
@@ -214154,7 +214189,7 @@
 					"1": "Rare"
 				},
 				"Tooth half of key (moon key)": {
-					"1": "1/5700"
+					"1": "1/961"
 				}
 			},
 			"Killerwatt": {
@@ -214609,16 +214644,16 @@
 					"12-30": "1/123"
 				},
 				"Grimy kwuarm": {
-					"2 (noted)": "1/43.7"
+					"2": "1/43.7"
 				},
 				"Grimy cadantine": {
-					"2 (noted)": "1/54.7"
+					"2": "1/54.7"
 				},
 				"Grimy dwarf weed": {
-					"2 (noted)": "1/54.7"
+					"2": "1/54.7"
 				},
 				"Grimy lantadyme": {
-					"2 (noted)": "1/72.9"
+					"2": "1/72.9"
 				},
 				"Grimy ranarr weed": {
 					"1": "2/123"
@@ -217157,16 +217192,16 @@
 					"12-30": "1/123"
 				},
 				"Grimy kwuarm": {
-					"2 (noted)": "1/43.7"
+					"2": "1/43.7"
 				},
 				"Grimy cadantine": {
-					"2 (noted)": "1/54.7"
+					"2": "1/54.7"
 				},
 				"Grimy dwarf weed": {
-					"2 (noted)": "1/54.7"
+					"2": "1/54.7"
 				},
 				"Grimy lantadyme": {
-					"2 (noted)": "1/72.9"
+					"2": "1/72.9"
 				},
 				"Grimy ranarr weed": {
 					"1": "2/123"
@@ -217560,7 +217595,7 @@
 					"1": "1/34"
 				},
 				"Tooth half of key (moon key)": {
-					"1": "1/7000"
+					"1": "1/1052"
 				},
 				"Soft clay": {
 					"10-20 (noted)": "3/34"
@@ -217843,16 +217878,16 @@
 					"12-30": "1/123"
 				},
 				"Grimy kwuarm": {
-					"2 (noted)": "1/43.7"
+					"2": "1/43.7"
 				},
 				"Grimy cadantine": {
-					"2 (noted)": "1/54.7"
+					"2": "1/54.7"
 				},
 				"Grimy dwarf weed": {
-					"2 (noted)": "1/54.7"
+					"2": "1/54.7"
 				},
 				"Grimy lantadyme": {
-					"2 (noted)": "1/72.9"
+					"2": "1/72.9"
 				},
 				"Grimy ranarr weed": {
 					"1": "2/123"
@@ -221422,6 +221457,9 @@
 			"Limpwurt seed^": [{
 				"F2P Only": "Nonskill"
 			}],
+			"Guam seed^": [{
+				"F2P Only": "Nonskill"
+			}],
 			"Marrentill seed^": [{
 				"F2P Only": "Nonskill"
 			}],
@@ -221483,6 +221521,45 @@
 				"F2P Only": "Nonskill"
 			}],
 			"Torstol seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Asgarnian seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Barley seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Cadavaberry seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Dwellberry seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Hammerstone seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Jute seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Krandorian seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Marigold seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Nasturtium seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Redberry seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Rosemary seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Woad seed^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Yanillian seed^": [{
 				"F2P Only": "Nonskill"
 			}],
 			"Clue scroll (easy)^": [{
@@ -222231,6 +222308,36 @@
 			}],
 			"Silver bar^Flesh Crawler": [{
 				"F2P Only": "Nonskill"
+			}],
+			"Tooth half of key (moon key)^Ice giant": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Tooth half of key (moon key)^Ice spider": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Tooth half of key (moon key)^Ice warrior": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Tooth half of key (moon key)^Icefiend": [{
+				"Varlamore icefiend drops": "Nonskill"
+			}],
+			"Tooth half of key (moon key)^Brutal blue dragon": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Tooth half of key (moon key)^Blue dragon": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Tooth half of key (moon key)^Baby blue dragon": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Tooth half of key (moon key)^Cave crawler": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Frozen tear^Ice spider": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Frozen tear^Cave crawler": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
 			}],
 			"Looting bag^Ancient Wizard": [{
 				"Wilderness ancient wizard": "Nonskill"
@@ -224258,6 +224365,11 @@
 					"F2P Only": "Nonskill"
 				}]
 			},
+			"Big Wolf": {
+				"9773-2": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Billy Goat": {
 				"13617-2": [{
 					"F2P Only": "Nonskill"
@@ -225222,6 +225334,11 @@
 			"Wizard": {
 				"10288-1": [{
 					"Access the ~|Wizards' Guild|~": "Magic"
+				}]
+			},
+			"Wolf": {
+				"9773-2": [{
+					"F2P Only": "Nonskill"
 				}]
 			},
 			"Woman (West Ardougne)": {
@@ -228238,12 +228355,12 @@
 				},
 				"Weight": 3
 			},
-			"Adamant dragons - Lithkren Vault": {
+			"Metal dragons - Lithkren Vault": {
 				"Chunks": ["Lithkren Vault"],
 				"Tasks": {
 					"~|Dragon Slayer II|~ Complete the quest": "Quest"
 				},
-				"Weight": 5
+				"Weight": 3
 			},
 			"Ankous - Stronghold of Security": {
 				"Chunks": ["Stronghold of Security"],
@@ -228426,21 +228543,21 @@
 				},
 				"Weight": 2
 			},
-			"Bronze dragons - Catacombs of Kourend": {
+			"Metal dragons - Catacombs of Kourend": {
 				"Chunks": ["Catacombs of Kourend"],
 				"CombatLevel": 75,
 				"Tasks": {
 					"~|Dragon Slayer I|~ 1": "Quest"
 				},
-				"Weight": 2.5
+				"Weight": 3
 			},
-			"Bronze dragons - Brimhaven Dungeon": {
+			"Metal dragons - Brimhaven Dungeon": {
 				"Chunks": ["Brimhaven Dungeon"],
 				"CombatLevel": 75,
 				"Tasks": {
 					"~|Dragon Slayer I|~ 1": "Quest"
 				},
-				"Weight": 2.5
+				"Weight": 3
 			},
 			"Cave krakens - Kraken Cove": {
 				"Chunks": ["Kraken Cove"],
@@ -228634,29 +228751,13 @@
 				"Level": 95,
 				"Weight": 10
 			},
-			"Iron dragons - Brimhaven Dungeon": {
-				"Chunks": ["Brimhaven Dungeon"],
-				"CombatLevel": 80,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 1.67
-			},
-			"Iron dragons - Catacombs of Kourend": {
-				"Chunks": ["Catacombs of Kourend"],
-				"CombatLevel": 80,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 1.67
-			},
-			"Iron dragons - Isle of Souls Dungeon": {
+			"Metal dragons - Isle of Souls Dungeon": {
 				"Chunks": ["Isle of Souls Dungeon"],
 				"CombatLevel": 80,
 				"Tasks": {
 					"~|Dragon Slayer I|~ 1": "Quest"
 				},
-				"Weight": 1.67
+				"Weight": 3
 			},
 			"Jellies - Rellekka Slayer Cave": {
 				"Chunks": ["Rellekka Slayer Cave"],
@@ -228747,6 +228848,14 @@
 				},
 				"Weight": 1
 			},
+			"Metal dragons - Ancient Cavern": {
+				"Chunks": ["Ancient Cavern"],
+				"CombatLevel": 80,
+				"Tasks": {
+					"Ancient Cavern": "Nonskill"
+				},
+				"Weight": 3
+			},
 			"Nechryaels - Catacombs of Kourend": {
 				"Chunks": ["Catacombs of Kourend"],
 				"Level": 80,
@@ -228775,13 +228884,6 @@
 				},
 				"Weight": 2.33
 			},
-			"Rune dragons - Lithkren Vault": {
-				"Chunks": ["Lithkren Vault"],
-				"Tasks": {
-					"~|Dragon Slayer II|~ Complete the quest": "Quest"
-				},
-				"Weight": 5
-			},
 			"Skeletal Wyverns - Asgarnian Ice Dungeon": {
 				"Chunks": ["Asgarnian Ice Dungeon"],
 				"Level": 72,
@@ -228796,22 +228898,6 @@
 				"Level": 93,
 				"CombatLevel": 85,
 				"Weight": 7
-			},
-			"Steel dragons - Catacombs of Kourend": {
-				"Chunks": ["Catacombs of Kourend"],
-				"CombatLevel": 85,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 2.5
-			},
-			"Steel dragons - Brimhaven Dungeon": {
-				"Chunks": ["Brimhaven Dungeon"],
-				"CombatLevel": 85,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 2.5
 			},
 			"Trolls - Troll Stronghold": {
 				"Chunks": ["Troll Stronghold"],
@@ -228894,12 +228980,6 @@
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
 				"Weight": 9
-			},
-			"Adamant dragons": {
-				"Tasks": {
-					"~|Dragon Slayer II|~ Complete the quest": "Quest"
-				},
-				"Weight": 2
 			},
 			"Ankous": {
 				"CombatLevel": 40,
@@ -229032,12 +229112,12 @@
 				"CombatLevel": 75,
 				"Weight": 8
 			},
-			"Iron dragons": {
+			"Metal dragons": {
 				"CombatLevel": 80,
 				"Tasks": {
 					"~|Dragon Slayer I|~ 1": "Quest"
 				},
-				"Weight": 5
+				"Weight": 12
 			},
 			"Kalphites": {
 				"CombatLevel": 15,
@@ -229071,12 +229151,6 @@
 				},
 				"Weight": 7
 			},
-			"Rune dragons": {
-				"Tasks": {
-					"~|Dragon Slayer II|~ Complete the quest": "Quest"
-				},
-				"Weight": 2
-			},
 			"Skeletal Wyverns": {
 				"Level": 72,
 				"CombatLevel": 70,
@@ -229097,13 +229171,6 @@
 					"~|Death Plateau|~ Complete the quest": "Quest"
 				},
 				"Weight": 6
-			},
-			"Steel dragons": {
-				"CombatLevel": 85,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 5
 			},
 			"Suqahs": {
 				"CombatLevel": 60,
@@ -229142,12 +229209,6 @@
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
 				"Weight": 12
-			},
-			"Adamant dragons": {
-				"Tasks": {
-					"~|Dragon Slayer II|~ Complete the quest": "Quest"
-				},
-				"Weight": 2
 			},
 			"Ankous": {
 				"CombatLevel": 40,
@@ -229265,12 +229326,12 @@
 				"CombatLevel": 75,
 				"Weight": 10
 			},
-			"Iron dragons": {
+			"Metal dragons": {
 				"CombatLevel": 80,
 				"Tasks": {
 					"~|Dragon Slayer I|~ 1": "Quest"
 				},
-				"Weight": 5
+				"Weight": 14
 			},
 			"Kalphites": {
 				"CombatLevel": 15,
@@ -229297,12 +229358,6 @@
 				},
 				"Weight": 9
 			},
-			"Rune dragons": {
-				"Tasks": {
-					"~|Dragon Slayer II|~ Complete the quest": "Quest"
-				},
-				"Weight": 2
-			},
 			"Skeletal Wyverns": {
 				"Level": 72,
 				"CombatLevel": 70,
@@ -229321,13 +229376,6 @@
 				"CombatLevel": 60,
 				"Tasks": {
 					"~|Death Plateau|~ Complete the quest": "Quest"
-				},
-				"Weight": 7
-			},
-			"Steel dragons": {
-				"CombatLevel": 85,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
 				},
 				"Weight": 7
 			},
