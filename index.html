@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.8.23" />
+  <link rel="stylesheet" href="./index.css?v=6.8.24" />
   <meta charset="UTF-8">
   <meta name="description" content="The Chunk Picker V2 is an all-in-one companion tool to the Oldschool Runescape unofficial gamemode: OneChunkMan. The site allows you to randomly roll chunks, get chunk tasks, and track and share your progress with others.">
   <meta name="author" content="Source Chunk">
@@ -56,13 +56,13 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.8.23' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.8.24' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./tooltip.js?v=6.8.23"></script>
-  <script src="./index.js?v=6.8.23"></script>
+  <script src="./tooltip.js?v=6.8.24"></script>
+  <script src="./index.js?v=6.8.24"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -821,6 +821,14 @@
       <div id="usertasks-delete-title" class="usertasks-delete-title noscroll">Delete the custom task?</div>
       <div id="usertasks-delete-subtitle" class="usertasks-delete-subtitle noscroll">This action is not reversable.<div class="preset-warn"><b>Are you sure you wish to proceed?</b></div></div>
       <div id="usertasks-delete-data" class="usertasks-delete-data noscroll"><div><div class="usertasks-delete-cancel" onclick="cancelUserTaskDelete()">Cancel</div><div class="usertasks-delete-proceed" onclick="deleteUserTask()">Yes, proceed</div></div></div>
+    </div>
+  </div>
+  <div id="myModal51" class="modal">
+    <div class="modal-content noscroll">
+      <div id="questchunks-title" class="questchunks-title noscroll">Missing Quest</div>
+      <div id="questchunks-subtitle" class="questchunks-subtitle noscroll">One of your unlocked chunks requires a quest(s) to access. Did you mean to add this quest(s) as an exception to your map?</div>
+      <div id="questchunks-body" class="questchunks-body"><div id="questchunks-body-inner" class="questchunks-body-inner"></div></div>
+      <div id="questchunks-data" class="questchunks-data noscroll"></div>
     </div>
   </div>
   <div id='entry-menu'>

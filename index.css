@@ -4783,6 +4783,11 @@ input#searchChunkSections {
     height: 35%;
 }
 
+#myModal51 > .modal-content {
+    max-width: 400px;
+    height: 35%;
+}
+
 #myModal38 > .modal-content {
     height: 40%;
     width: 25%;
@@ -5557,6 +5562,87 @@ input#searchChunkSections {
 }
 
 .construction-locked-proceed:not(.disabled):hover {
+    background-color: rgb(50, 175, 50);
+}
+
+.questchunks-title {
+    font-size: min(8vw, 28px);
+    font-weight: bold;
+    padding-top: 0px;
+    max-height: 15%;
+    min-height: 15%;
+    line-height: 5vh;
+    text-align: center;
+    background-color: var(--color2);
+    overflow-y: hidden;
+}
+
+.questchunks-subtitle {
+    padding: 0px 15px;
+    background-color: var(--color1);
+    font-size: min(5vw, 16px);
+    text-align: center;
+    border-top: solid 1px;
+    height: 25%;
+}
+
+.questchunks-body {
+    padding: 0px 15px;
+    background-color: var(--color1);
+    font-size: min(5vw, 16px);
+    text-align: center;
+    height: 35%;
+    padding-bottom: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.questchunks-body-inner {
+    width: 100%;
+}
+
+.questchunks-prerow {
+    font-size: min(6vw, 22px);
+    font-weight: bold;
+}
+
+.questchunks-row {
+    border: solid 1px var(--color1);
+    border-radius: 5px;
+    margin: auto;
+    padding: 7px;
+    background-color: var(--color3);
+    width: 80%;
+}
+
+.questchunks-data > div {
+    float: right;
+    margin-right: 10px;
+    margin-top: -7vh;
+    display: flex;
+    height: 15%;
+}
+
+.questchunks-cancel {
+    padding: 10px;
+    font-size: 2vh;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.questchunks-proceed {
+    border: solid 1px black;
+    background-color: rgb(75, 200, 75);
+    padding: 1vh;
+    color: white;
+    font-size: 2vh;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.questchunks-proceed:not(.disabled):hover {
     background-color: rgb(50, 175, 50);
 }
 

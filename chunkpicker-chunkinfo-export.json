@@ -226954,6 +226954,11 @@
 					"~|Sheep Herder|~ 1": "Quest"
 				}]
 			},
+			"Cheese": {
+				"6448": [{
+					"~|The Final Dawn|~ 6": "Quest"
+				}]
+			},
 			"Chisel": {
 				"10035-1": [{
 					"~|Plague City|~ 5": "Quest"
@@ -227348,12 +227353,12 @@
 				"CombatLevel": 5,
 				"Weight": 7
 			},
-			"Birds": {
-				"Weight": 6
-			},
 			"Bears": {
 				"CombatLevel": 13,
 				"Weight": 7
+			},
+			"Birds": {
+				"Weight": 6
 			},
 			"Cave bugs": {
 				"Level": 7,
@@ -227450,12 +227455,12 @@
 				"CombatLevel": 5,
 				"Weight": 7
 			},
-			"Birds": {
-				"Weight": 6
-			},
 			"Bears": {
 				"CombatLevel": 13,
 				"Weight": 7
+			},
+			"Birds": {
+				"Weight": 6
 			},
 			"Cave bugs": {
 				"Level": 7,
@@ -227781,10 +227786,6 @@
 				},
 				"Weight": 8
 			},
-			"Lizards": {
-				"Level": 22,
-				"Weight": 8
-			},
 			"Dogs": {
 				"CombatLevel": 15,
 				"Weight": 7
@@ -227827,6 +227828,10 @@
 					"~|Ernest the Chicken|~ Complete the quest": "Quest"
 				},
 				"Weight": 6
+			},
+			"Lizards": {
+				"Level": 22,
+				"Weight": 8
 			},
 			"Mogres": {
 				"Level": 32,
@@ -227889,7 +227894,7 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Abyssal demons": {
 				"Level": 85,
@@ -227897,11 +227902,11 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 5
 			},
 			"Ankous": {
 				"CombatLevel": 40,
-				"Weight": 7
+				"Weight": 8
 			},
 			"Basilisks": {
 				"Level": 15,
@@ -227909,7 +227914,7 @@
 				"Skills": {
 					"Defence": 20
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Bloodvelds": {
 				"Level": 50,
@@ -227917,7 +227922,7 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Blue dragons": {
 				"CombatLevel": 65,
@@ -227940,7 +227945,7 @@
 				"Skills": {
 					"Defence": 20
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Crabs": {
 				"CombatLevel": 1,
@@ -227948,7 +227953,7 @@
 			},
 			"Crocodiles": {
 				"CombatLevel": 50,
-				"Weight": 7
+				"Weight": 6
 			},
 			"Dagannoths": {
 				"CombatLevel": 75,
@@ -227963,12 +227968,12 @@
 				"Tasks": {
 					"~|Desert Treasure I|~ 7c1": "Quest"
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Elves": {
 				"CombatLevel": 70,
 				"Tasks": {
-					"~|Regicide|~ 3": "Quest"
+					"~|Regicide|~ Complete the quest": "Quest"
 				},
 				"Weight": 7
 			},
@@ -227990,7 +227995,7 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 5
 			},
 			"Ghouls": {
 				"CombatLevel": 25,
@@ -228005,7 +228010,7 @@
 				"Skills": {
 					"Firemaking": 33
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Hellhounds": {
 				"CombatLevel": 75,
@@ -228033,19 +228038,19 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Jellies": {
 				"Level": 52,
 				"CombatLevel": 57,
-				"Weight": 7
+				"Weight": 8
 			},
 			"Jungle horrors": {
 				"CombatLevel": 65,
 				"Tasks": {
 					"~|Cabin Fever|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Kalphites": {
 				"CombatLevel": 15,
@@ -228086,7 +228091,7 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 5
 			},
 			"Ogres": {
 				"CombatLevel": 40,
@@ -228097,16 +228102,12 @@
 				"Tasks": {
 					"~|Lost City|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Pyrefiends": {
 				"Level": 30,
 				"CombatLevel": 25,
-				"Weight": 7
-			},
-			"Shades": {
-				"CombatLevel": 30,
-				"Weight": 7
+				"Weight": 8
 			},
 			"Sea snakes": {
 				"Level": 40,
@@ -228114,14 +228115,18 @@
 				"Tasks": {
 					"~|Royal Trouble|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 6
+			},
+			"Shades": {
+				"CombatLevel": 30,
+				"Weight": 8
 			},
 			"Shadow warriors": {
 				"CombatLevel": 60,
 				"Tasks": {
 					"~|Legends' Quest|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Spiritual creatures": {
 				"Level": 63,
@@ -228129,7 +228134,7 @@
 				"Tasks": {
 					"~|Death Plateau|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 8
 			},
 			"Terror dogs": {
 				"Level": 40,
@@ -228137,7 +228142,7 @@
 				"Tasks": {
 					"~|Haunted Mine|~ Complete the quest": "Quest"
 				},
-				"Weight": 7
+				"Weight": 6
 			},
 			"Trolls": {
 				"CombatLevel": 60,
@@ -228146,7 +228151,7 @@
 			"Turoths": {
 				"Level": 55,
 				"CombatLevel": 60,
-				"Weight": 7
+				"Weight": 8
 			},
 			"Vampyres": {
 				"CombatLevel": 35,
@@ -228260,7 +228265,7 @@
 			"Elves": {
 				"CombatLevel": 70,
 				"Tasks": {
-					"~|Regicide|~ 3": "Quest"
+					"~|Regicide|~ Complete the quest": "Quest"
 				},
 				"Weight": 8
 			},
@@ -228429,13 +228434,6 @@
 				"CombatLevel": 85,
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
-				},
-				"Weight": 3
-			},
-			"Metal dragons - Lithkren Vault": {
-				"Chunks": ["Lithkren Vault"],
-				"Tasks": {
-					"~|Dragon Slayer II|~ Complete the quest": "Quest"
 				},
 				"Weight": 3
 			},
@@ -228620,22 +228618,6 @@
 				},
 				"Weight": 2
 			},
-			"Metal dragons - Catacombs of Kourend": {
-				"Chunks": ["Catacombs of Kourend"],
-				"CombatLevel": 75,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 3
-			},
-			"Metal dragons - Brimhaven Dungeon": {
-				"Chunks": ["Brimhaven Dungeon"],
-				"CombatLevel": 75,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 3
-			},
 			"Cave krakens - Kraken Cove": {
 				"Chunks": ["Kraken Cove"],
 				"Level": 87,
@@ -228771,7 +228753,7 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Weight": 8
+				"Weight": 6
 			},
 			"Greater demons - Catacombs of Kourend": {
 				"Chunks": ["Catacombs of Kourend"],
@@ -228828,14 +228810,6 @@
 				"Level": 95,
 				"Weight": 10
 			},
-			"Metal dragons - Isle of Souls Dungeon": {
-				"Chunks": ["Isle of Souls Dungeon"],
-				"CombatLevel": 80,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 3
-			},
 			"Jellies - Rellekka Slayer Cave": {
 				"Chunks": ["Rellekka Slayer Cave"],
 				"Level": 52,
@@ -228888,7 +228862,7 @@
 				"Tasks": {
 					"~|Perilous Moons|~ Complete the quest": "Quest"
 				},
-				"Weight": 1
+				"Weight": 0.67
 			},
 			"Lesser Nagua - Ruins of Tapoyauik": {
 				"Chunks": ["Ruins of Tapoyauik"],
@@ -228897,15 +228871,54 @@
 					"~|Perilous Moons|~ Complete the quest": "Quest",
 					"~|The Heart of Darkness|~ Complete the quest": "Quest"
 				},
-				"Weight": 1
+				"Weight": 0.67
 			},
 			"Lesser Nagua - Tonali Cavern": {
 				"Chunks": ["Tonali Cavern"],
 				"Level": 48,
 				"Tasks": {
-					"~|Perilous Moons|~ Complete the quest": "Quest"
+					"~|The Final Dawn|~ Complete the quest": "Quest"
 				},
-				"Weight": 1
+				"Weight": 0.67
+			},
+			"Metal dragons - Ancient Cavern": {
+				"Chunks": ["Ancient Cavern"],
+				"CombatLevel": 80,
+				"Tasks": {
+					"Ancient Cavern": "Nonskill"
+				},
+				"Weight": 3
+			},
+			"Metal dragons - Brimhaven Dungeon": {
+				"Chunks": ["Brimhaven Dungeon"],
+				"CombatLevel": 75,
+				"Tasks": {
+					"~|Dragon Slayer I|~ 1": "Quest"
+				},
+				"Weight": 3
+			},
+			"Metal dragons - Catacombs of Kourend": {
+				"Chunks": ["Catacombs of Kourend"],
+				"CombatLevel": 75,
+				"Tasks": {
+					"~|Dragon Slayer I|~ 1": "Quest"
+				},
+				"Weight": 3
+			},
+			"Metal dragons - Lithkren Vault": {
+				"Chunks": ["Lithkren Vault"],
+				"Tasks": {
+					"~|Dragon Slayer II|~ Complete the quest": "Quest"
+				},
+				"Weight": 3
+			},
+			"Metal dragons - Isle of Souls Dungeon": {
+				"Chunks": ["Isle of Souls Dungeon"],
+				"CombatLevel": 80,
+				"Tasks": {
+					"~|Dragon Slayer I|~ 1": "Quest"
+				},
+				"Weight": 3
 			},
 			"Zygomites - Fossil Island": {
 				"Chunks": ["Fossil Island Task[+]"],
@@ -228924,14 +228937,6 @@
 					"~|Lost City|~ Complete the quest": "Quest"
 				},
 				"Weight": 1
-			},
-			"Metal dragons - Ancient Cavern": {
-				"Chunks": ["Ancient Cavern"],
-				"CombatLevel": 80,
-				"Tasks": {
-					"Ancient Cavern": "Nonskill"
-				},
-				"Weight": 3
 			},
 			"Nechryaels - Catacombs of Kourend": {
 				"Chunks": ["Catacombs of Kourend"],
@@ -229086,7 +229091,7 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Weight": 8
+				"Weight": 9
 			},
 			"Blue dragons": {
 				"CombatLevel": 65,
@@ -229156,7 +229161,7 @@
 			"Elves": {
 				"CombatLevel": 70,
 				"Tasks": {
-					"~|Regicide|~ 3": "Quest"
+					"~|Regicide|~ Complete the quest": "Quest"
 				},
 				"Weight": 4
 			},
@@ -229189,13 +229194,6 @@
 				"CombatLevel": 75,
 				"Weight": 8
 			},
-			"Metal dragons": {
-				"CombatLevel": 80,
-				"Tasks": {
-					"~|Dragon Slayer I|~ 1": "Quest"
-				},
-				"Weight": 12
-			},
 			"Kalphites": {
 				"CombatLevel": 15,
 				"Weight": 9
@@ -229204,6 +229202,13 @@
 				"Level": 70,
 				"CombatLevel": 65,
 				"Weight": 3
+			},
+			"Metal dragons": {
+				"CombatLevel": 80,
+				"Tasks": {
+					"~|Dragon Slayer I|~ 1": "Quest"
+				},
+				"Weight": 12
 			},
 			"Minions of Scabaras": {
 				"CombatLevel": 85,
@@ -229370,7 +229375,7 @@
 			"Elves": {
 				"CombatLevel": 70,
 				"Tasks": {
-					"~|Regicide|~ 3": "Quest"
+					"~|Regicide|~ Complete the quest": "Quest"
 				},
 				"Weight": 4
 			},
@@ -229385,7 +229390,7 @@
 					"~|Bone Voyage|~ Complete the quest": "Quest",
 					"~|Elemental Workshop I|~ Complete the quest": "Quest"
 				},
-				"Weight": 5
+				"Weight": 7
 			},
 			"Gargoyles": {
 				"Level": 75,
@@ -229409,15 +229414,6 @@
 					"~|Dragon Slayer I|~ 1": "Quest"
 				},
 				"Weight": 14
-			},
-			"Kalphites": {
-				"CombatLevel": 15,
-				"Weight": 9
-			},
-			"Kurasks": {
-				"Level": 70,
-				"CombatLevel": 65,
-				"Weight": 4
 			},
 			"Zygomites": {
 				"Level": 57,
@@ -237719,6 +237715,149 @@
 				"~|Cabin Fever|~ 1": "Quest"
 			}
 		}
+	},
+	"questSections": {
+		"4656": ["~|Children of the Sun|~ Complete the quest"],
+		"4910": ["~|Children of the Sun|~ Complete the quest"],
+		"4911": ["~|Children of the Sun|~ Complete the quest"],
+		"4912": ["~|Children of the Sun|~ Complete the quest"],
+		"4913": ["~|Children of the Sun|~ Complete the quest"],
+		"4915": ["~|Children of the Sun|~ Complete the quest"],
+		"4916-3": ["~|Children of the Sun|~ Complete the quest"],
+		"4916-4": ["~|Children of the Sun|~ Complete the quest"],
+		"4917-1": ["~|Children of the Sun|~ Complete the quest"],
+		"5165": ["~|Children of the Sun|~ Complete the quest"],
+		"5166": ["~|Children of the Sun|~ Complete the quest"],
+		"5167": ["~|Children of the Sun|~ Complete the quest"],
+		"5168": ["~|Children of the Sun|~ Complete the quest"],
+		"5169": ["~|Children of the Sun|~ Complete the quest"],
+		"5171": ["~|Children of the Sun|~ Complete the quest"],
+		"5172": ["~|Children of the Sun|~ Complete the quest"],
+		"5173": ["~|Children of the Sun|~ Complete the quest"],
+		"5420": ["~|Children of the Sun|~ Complete the quest"],
+		"5421": ["~|Children of the Sun|~ Complete the quest"],
+		"5422": ["~|Children of the Sun|~ Complete the quest"],
+		"5423": ["~|Children of the Sun|~ Complete the quest"],
+		"5424": ["~|Children of the Sun|~ Complete the quest"],
+		"5425": ["~|Children of the Sun|~ Complete the quest"],
+		"5426": ["~|Children of the Sun|~ Complete the quest"],
+		"5427": ["~|Children of the Sun|~ Complete the quest"],
+		"5428": ["~|Children of the Sun|~ Complete the quest"],
+		"5429": ["~|Children of the Sun|~ Complete the quest"],
+		"5676": ["~|Children of the Sun|~ Complete the quest"],
+		"5677": ["~|Children of the Sun|~ Complete the quest"],
+		"5678": ["~|Children of the Sun|~ Complete the quest"],
+		"5679": ["~|Children of the Sun|~ Complete the quest"],
+		"5680": ["~|Children of the Sun|~ Complete the quest"],
+		"5681": ["~|Children of the Sun|~ Complete the quest"],
+		"5682": ["~|Children of the Sun|~ Complete the quest"],
+		"5683": ["~|Children of the Sun|~ Complete the quest"],
+		"5684": ["~|Children of the Sun|~ Complete the quest"],
+		"5933": ["~|Children of the Sun|~ Complete the quest"],
+		"5934": ["~|Children of the Sun|~ Complete the quest"],
+		"5935": ["~|Children of the Sun|~ Complete the quest"],
+		"5936": ["~|Children of the Sun|~ Complete the quest"],
+		"5937": ["~|Children of the Sun|~ Complete the quest"],
+		"5938": ["~|Children of the Sun|~ Complete the quest"],
+		"5939": ["~|Children of the Sun|~ Complete the quest"],
+		"5940": ["~|Children of the Sun|~ Complete the quest"],
+		"6189": ["~|Children of the Sun|~ Complete the quest"],
+		"6190": ["~|Children of the Sun|~ Complete the quest"],
+		"6191": ["~|Children of the Sun|~ Complete the quest"],
+		"6192": ["~|Children of the Sun|~ Complete the quest"],
+		"6193": ["~|Children of the Sun|~ Complete the quest"],
+		"6194": ["~|Children of the Sun|~ Complete the quest"],
+		"6195": ["~|Children of the Sun|~ Complete the quest"],
+		"6196": ["~|Children of the Sun|~ Complete the quest"],
+		"6445": ["~|Children of the Sun|~ Complete the quest"],
+		"6446": ["~|Children of the Sun|~ Complete the quest"],
+		"6447": ["~|Children of the Sun|~ Complete the quest"],
+		"6448": ["~|Children of the Sun|~ Complete the quest"],
+		"6449": ["~|Children of the Sun|~ Complete the quest"],
+		"6450": ["~|Children of the Sun|~ Complete the quest"],
+		"6451": ["~|Children of the Sun|~ Complete the quest"],
+		"6701": ["~|Children of the Sun|~ Complete the quest"],
+		"6702": ["~|Children of the Sun|~ Complete the quest"],
+		"6703": ["~|Children of the Sun|~ Complete the quest"],
+		"6704": ["~|Children of the Sun|~ Complete the quest"],
+		"6705": ["~|Children of the Sun|~ Complete the quest"],
+		"6706": ["~|Children of the Sun|~ Complete the quest"],
+		"6707": ["~|Children of the Sun|~ Complete the quest"],
+		"6957": ["~|Children of the Sun|~ Complete the quest"],
+		"6958": ["~|Children of the Sun|~ Complete the quest"],
+		"6959": ["~|Children of the Sun|~ Complete the quest"],
+		"6960": ["~|Children of the Sun|~ Complete the quest"],
+		"6961": ["~|Children of the Sun|~ Complete the quest"],
+		"7215": ["~|Children of the Sun|~ Complete the quest"],
+		"7216": ["~|Children of the Sun|~ Complete the quest"],
+		"7217": ["~|Children of the Sun|~ Complete the quest"],
+		"7472": ["~|Children of the Sun|~ Complete the quest"],
+		"13618-2": ["~|Priest in Peril|~ Complete the quest"],
+		"13619-1": ["~|Priest in Peril|~ Complete the quest"],
+		"13619-2": ["~|Priest in Peril|~ Complete the quest"],
+		"13620-1": ["~|Priest in Peril|~ Complete the quest"],
+		"13620-2": ["~|Priest in Peril|~ Complete the quest"],
+		"13620-4": ["~|Priest in Peril|~ Complete the quest"],
+		"13621-1": ["~|Priest in Peril|~ Complete the quest"],
+		"13622-2": ["~|Priest in Peril|~ Complete the quest"],
+		"13622-3": ["~|Priest in Peril|~ Complete the quest"],
+		"13622-4": ["~|Priest in Peril|~ Complete the quest"],
+		"13622-5": ["~|Priest in Peril|~ Complete the quest"],
+		"13623": ["~|Priest in Peril|~ Complete the quest"],
+		"13873-1": ["~|Priest in Peril|~ Complete the quest"],
+		"13874": ["~|Priest in Peril|~ Complete the quest"],
+		"13875": ["~|Priest in Peril|~ Complete the quest"],
+		"13876": ["~|Priest in Peril|~ Complete the quest"],
+		"13877": ["~|Priest in Peril|~ Complete the quest"],
+		"13878": ["~|Priest in Peril|~ Complete the quest"],
+		"13879": ["~|Priest in Peril|~ Complete the quest"],
+		"14129": ["~|Priest in Peril|~ Complete the quest"],
+		"14130": ["~|Priest in Peril|~ Complete the quest"],
+		"14131": ["~|Priest in Peril|~ Complete the quest"],
+		"14132": ["~|Priest in Peril|~ Complete the quest"],
+		"14133": ["~|Priest in Peril|~ Complete the quest"],
+		"14134": ["~|Priest in Peril|~ Complete the quest"],
+		"14135": ["~|Priest in Peril|~ Complete the quest"],
+		"14385": ["~|Priest in Peril|~ Complete the quest"],
+		"14386": ["~|Priest in Peril|~ Complete the quest"],
+		"14387": ["~|Priest in Peril|~ Complete the quest"],
+		"14388": ["~|Priest in Peril|~ Complete the quest"],
+		"14389": ["~|Priest in Peril|~ Complete the quest"],
+		"14390": ["~|Priest in Peril|~ Complete the quest"],
+		"14391": ["~|Priest in Peril|~ Complete the quest"],
+		"14637": ["~|Cabin Fever|~ Complete the quest"],
+		"14638": ["~|Cabin Fever|~ Complete the quest"],
+		"14639": ["~|Cabin Fever|~ Complete the quest"],
+		"14641": ["~|Priest in Peril|~ Complete the quest"],
+		"14642": ["~|Priest in Peril|~ Complete the quest"],
+		"14643": ["~|Priest in Peril|~ Complete the quest"],
+		"14644": ["~|Priest in Peril|~ Complete the quest"],
+		"14645": ["~|Priest in Peril|~ Complete the quest"],
+		"14646": ["~|Priest in Peril|~ Complete the quest"],
+		"14647": ["~|Priest in Peril|~ Complete the quest"],
+		"14649": ["~|Bone Voyage|~ Complete the quest"],
+		"14650": ["~|Bone Voyage|~ Complete the quest"],
+		"14651": ["~|Bone Voyage|~ Complete the quest"],
+		"14652": ["~|Bone Voyage|~ Complete the quest"],
+		"14894": ["~|Cabin Fever|~ Complete the quest"],
+		"14895": ["~|Cabin Fever|~ Complete the quest"],
+		"14898": ["~|Priest in Peril|~ Complete the quest"],
+		"14899": ["~|Priest in Peril|~ Complete the quest"],
+		"14900": ["~|Priest in Peril|~ Complete the quest"],
+		"14901": ["~|Priest in Peril|~ Complete the quest"],
+		"14902": ["~|Priest in Peril|~ Complete the quest"],
+		"14906": ["~|Bone Voyage|~ Complete the quest"],
+		"14907": ["~|Bone Voyage|~ Complete the quest"],
+		"14908": ["~|Bone Voyage|~ Complete the quest"],
+		"15148": ["~|Cabin Fever|~ Complete the quest"],
+		"15150": ["~|Cabin Fever|~ Complete the quest"],
+		"15151": ["~|Cabin Fever|~ Complete the quest"],
+		"15159": ["~|Priest in Peril|~ Complete the quest"],
+		"15162": ["~|Bone Voyage|~ Complete the quest"],
+		"15163": ["~|Bone Voyage|~ Complete the quest"],
+		"15164": ["~|Bone Voyage|~ Complete the quest"],
+		"15406": ["~|Cabin Fever|~ Complete the quest"],
+		"15407": ["~|Cabin Fever|~ Complete the quest"]
 	},
 	"walkableChunks": ["4403", "4404", "4405", "4656", "4659", "4660", "4661", "4662", "4663", "4664", "4665", "4666", "4667", "4910", "4911", "4912", "4913", "4915", "4916", "4917", "4918", "4919", "4920", "4921", "4922", "4923", "5165", "5166", "5167", "5168", "5169", "5171", "5172", "5173", "5174", "5175", "5176", "5177", "5178", "5179", "5180", "5420", "5421", "5422", "5423", "5424", "5425", "5426", "5427", "5428", "5429", "5430", "5431", "5432", "5433", "5434", "5435", "5676", "5677", "5678", "5679", "5680", "5681", "5682", "5683", "5684", "5686", "5687", "5688", "5689", "5690", "5691", "5692", "5933", "5934", "5935", "5936", "5937", "5938", "5939", "5940", "5941", "5942", "5943", "5944", "5945", "5946", "5947", "5948", "5949", "6189", "6190", "6191", "6192", "6193", "6194", "6195", "6196", "6197", "6198", "6199", "6200", "6201", "6202", "6203", "6204", "6205", "6445", "6446", "6447", "6448", "6449", "6450", "6451", "6453", "6454", "6455", "6456", "6457", "6458", "6459", "6460", "6461", "6462", "6701", "6702", "6703", "6704", "6705", "6706", "6707", "6710", "6711", "6712", "6713", "6714", "6715", "6716", "6717", "6957", "6958", "6959", "6960", "6961", "6965", "6966", "6967", "6968", "6969", "6970", "6971", "6972", "6973", "7215", "7216", "7217", "7221", "7222", "7223", "7224", "7225", "7226", "7227", "7228", "7472", "7478", "7479", "8236", "8237", "8238", "8252", "8253", "8491", "8492", "8493", "8494", "8495", "8496", "8497", "8498", "8499", "8500", "8501", "8508", "8509", "8747", "8748", "8749", "8750", "8751", "8752", "8753", "8754", "8755", "8756", "8757", "8763", "9003", "9004", "9005", "9006", "9007", "9008", "9009", "9010", "9011", "9012", "9013", "9014", "9015", "9016", "9023", "9260", "9261", "9262", "9263", "9264", "9265", "9266", "9267", "9268", "9269", "9270", "9271", "9272", "9273", "9275", "9276", "9519", "9520", "9521", "9523", "9524", "9525", "9526", "9527", "9528", "9531", "9532", "9772", "9773", "9774", "9775", "9776", "9777", "9778", "9779", "9780", "9781", "9782", "9783", "9790", "10028", "10029", "10030", "10031", "10032", "10033", "10034", "10035", "10036", "10037", "10038", "10039", "10040", "10042", "10043", "10044", "10284", "10285", "10286", "10287", "10288", "10289", "10290", "10291", "10292", "10293", "10294", "10296", "10297", "10300", "10536", "10537", "10542", "10543", "10544", "10545", "10546", "10547", "10548", "10549", "10550", "10551", "10552", "10553", "10554", "10556", "10558", "10559", "10794", "10795", "10801", "10802", "10803", "10804", "10805", "10806", "10807", "10808", "10809", "10810", "10811", "11050", "11051", "11053", "11054", "11055", "11056", "11057", "11058", "11059", "11060", "11061", "11062", "11063", "11064", "11065", "11066", "11067", "11068", "11309", "11310", "11311", "11312", "11313", "11314", "11315", "11316", "11317", "11318", "11319", "11320", "11321", "11322", "11323", "11325", "11326", "11562", "11565", "11566", "11567", "11568", "11569", "11570", "11571", "11572", "11573", "11574", "11575", "11576", "11577", "11578", "11579", "11581", "11821", "11822", "11823", "11824", "11825", "11826", "11827", "11828", "11829", "11830", "11831", "11832", "11833", "11834", "11835", "11836", "11837", "12078", "12081", "12082", "12083", "12084", "12085", "12086", "12087", "12088", "12089", "12090", "12091", "12092", "12093", "12332", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12344", "12345", "12346", "12347", "12348", "12349", "12587", "12588", "12589", "12590", "12591", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12600", "12601", "12602", "12603", "12604", "12605", "12843", "12844", "12845", "12846", "12847", "12848", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "12856", "12857", "12858", "12859", "12860", "12861", "13098", "13099", "13100", "13101", "13102", "13103", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13117", "13354", "13355", "13356", "13357", "13358", "13359", "13360", "13361", "13362", "13363", "13364", "13365", "13366", "13367", "13368", "13369", "13370", "13371", "13372", "13373", "13374", "13375", "13376", "13611", "13612", "13613", "13614", "13615", "13616", "13617", "13618", "13619", "13620", "13621", "13622", "13623", "13630", "13631", "13632", "13869", "13870", "13871", "13872", "13873", "13874", "13875", "13876", "13877", "13878", "13879", "13886", "13887", "13888", "14129", "14130", "14131", "14132", "14133", "14134", "14135", "14142", "14385", "14386", "14387", "14388", "14389", "14390", "14391", "14398", "14637", "14638", "14639", "14641", "14642", "14643", "14644", "14645", "14646", "14647", "14649", "14650", "14651", "14652", "14894", "14895", "14898", "14899", "14900", "14901", "14902", "14906", "14907", "14908", "15148", "15150", "15151", "15159", "15162", "15163", "15164", "15406", "15407", "11324"],
 	"walkableChunksF2P": ["9520", "9772", "9773", "9776", "10028", "10284", "11313", "11314", "11315", "11569", "11570", "11571", "11572", "11573", "11574", "11824", "11825", "11826", "11827", "11828", "11829", "11830", "11831", "11832", "11833", "11834", "11835", "11836", "12081", "12082", "12083", "12084", "12085", "12086", "12087", "12088", "12089", "12090", "12091", "12092", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12344", "12345", "12346", "12347", "12348", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12600", "12601", "12602", "12603", "12604", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "12856", "12857", "12858", "12859", "12860", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13361", "13362", "13363", "13367", "13368", "13369", "13370", "13371", "13372", "13617", "13618", "13619", "Crandor and Karamja Dungeon#South", "Crandor and Karamja Dungeon#North", "Melzar's Maze#Basement", "Air altar", "White Knights' Castle#Crypt", "Death's Office", "Mind altar", "Ruins of Camdozaal", "Scrubfoot's cave", "Asgarnian Ice Dungeon", "Dwarven Mine", "Old School Museum", "Mining Guild", "Body altar", "Rune essence mine", "Wizards' Tower#Basement", "Draynor Sewers", "Edgeville Dungeon", "Stronghold of Security", "Varrock Sewers", "Water altar", "H.A.M. Hideout", "Varrock West Bank#Basement", "Clan Hall", "Misthalin Manor", "Lumbridge Castle#Cellar", "Phoenix Gang Hideout", "Fire altar", "Earth altar"],
