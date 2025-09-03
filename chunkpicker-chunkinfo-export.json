@@ -83568,6 +83568,30 @@
 				"Monsters": ["Demonic gorilla"],
 				"Items": ["Demonbane[+]"]
 			},
+			"~|Combat Achievements#Elite|~ Doom Adept": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl at level 3.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Elite|~ Doom Crawler": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Complete the Doom of Mokhaiotl level 1 in less than 30 seconds.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Elite|~ Exposed Doom": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl during its Melee Charge phase on any level.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
 			"~|Combat Achievements#Elite|~ Facing Jad Head-on": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Complete the Fight Caves with only melee.",
@@ -84539,7 +84563,7 @@
 					"Any": 25000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1026,
+				"CombatPointsNeeded": 1038,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -85050,6 +85074,47 @@
 				"Not F2P": true,
 				"CombatPoints": 5,
 				"Chunks": ["Gauntlet Lobby"]
+			},
+			"~|Combat Achievements#Master|~ Doom Chaser": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Complete the Doom of Mokhaiotl levels 1-8 in less than 10:00.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Master|~ Mine's Better": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl levels 1-8 whilst always wearing a shield.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Items": ["Shield[+]"],
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Master|~ Mokhaiotl Drift": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl at level 8 before he finishes his first burrow phase.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Master|~ Doom Veteran": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl at level 8.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Master|~ Grub Patrol": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl levels 1-8 whilst never letting a grub be absorbed by the boss.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Doom of Mokhaiotl"]
 			},
 			"~|Combat Achievements#Master|~ Perfect Duke Sucellus": {
 				"Category": ["Combat Diary Tasks"],
@@ -85923,7 +85988,7 @@
 					"Any": 35000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1841,
+				"CombatPointsNeeded": 1878,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -86134,6 +86199,62 @@
 				"Not F2P": true,
 				"CombatPoints": 6,
 				"Chunks": ["Gauntlet Lobby"]
+			},
+			"~|Combat Achievements#Grandmaster|~ Duel of Mokhaiotl": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl levels 1-8 whilst only damaging the boss with one-handed melee attacks.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Grandmaster|~ Darkness Is Your Ally?": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl levels 1-8 without equipping a demonbane weapon.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Grandmaster|~ Perfect Doom": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl levels 1-8 without taking any damage from the boss, letting any grubs be absorbed, or stepping in acid blood.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Grandmaster|~ The Praying Mantis": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl levels 1-8 without restoring your prayer points through any method.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Grandmaster|~ Doom Racer": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl levels 1-8 in less than 7:15.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Grandmaster|~ It's Dark Down Here": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Defeat the Doom of Mokhaiotl at delve level 16.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Doom of Mokhaiotl"]
+			},
+			"~|Combat Achievements#Grandmaster|~ Mopping up": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Clear at least 8 acid splats in a single Volatile Earth special attack.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Doom of Mokhaiotl"]
 			},
 			"~|Combat Achievements#Grandmaster|~ Duke Sucellus Sleeper": {
 				"Category": ["Combat Diary Tasks"],
@@ -86869,7 +86990,7 @@
 					"Any": 50000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 2525,
+				"CombatPointsNeeded": 2604,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			}
@@ -151285,7 +151406,8 @@
 			"AdamantMats[+]": ["Adamantite bar", "Adamant scimitar", "Adamant longsword", "Adamant full helm", "Adamant sq shield", "Adamant claws", "Adamant warhammer", "Adamant battleaxe", "Adamant chainbody", "Adamant kiteshield", "Adamant 2h sword", "Adamant platelegs", "Adamant plateskirt", "Adamant platebody"],
 			"RuneMats[+]": ["Runite bar", "Rune scimitar", "Rune longsword", "Rune full helm", "Rune sq shield", "Rune claws", "Rune warhammer", "Rune battleaxe", "Rune chainbody", "Rune kiteshield", "Rune 2h sword", "Rune platelegs", "Rune plateskirt", "Rune platebody"],
 			"GusTreat[+]": ["Bones", "Wolf bones", "Bleached bones", "Bat bones", "Big bones", "Burnt bones", "Burnt jogre bones", "Babydragon bones", "Dragon bones", "Monkey bones", "Small ninja monkey bones", "Medium ninja monkey bones", "Gorilla bones", "Bearded gorilla bones", "Skeletal gorilla bones", "Small zombie monkey bones", "Large zombie monkey bones", "Jogre bones", "Zogre bones", "Fayrg bones", "Raurg bones", "Ourg bones", "Shaikahan bones", "Dagannoth bones", "Wyvern bones", "Lava dragon bones", "Superior dragon bones", "Wyrm bones", "Wyrmling bones", "Drake bones", "Hydra bones", "Raw bear meat", "Raw beast meat", "Raw beef", "Raw bird meat", "Raw boar meat", "Raw chicken", "Raw rabbit", "Raw rat meat", "Raw yak meat", "Cooked meat"],
-			"AvernicTreads[+]": ["Avernic treads", "Avernic treads (et)", "Avernic treads (pe)", "Avernic treads (pr)", "Avernic treads (pe)(et)", "Avernic treads (pr)(et)", "Avernic treads (pr)(pe)", "Avernic treads (max)"]
+			"AvernicTreads[+]": ["Avernic treads", "Avernic treads (et)", "Avernic treads (pe)", "Avernic treads (pr)", "Avernic treads (pe)(et)", "Avernic treads (pr)(et)", "Avernic treads (pr)(pe)", "Avernic treads (max)"],
+			"Shield[+]": ["Broodoo shield (combat)", "Broodoo shield (poison)", "Broodoo shield (disease)", "Elemental shield", "Mind shield", "Mirror shield", "Neitiznot shield", "Toktz-ket-xil", "Wooden shield", "Adamant sq shield", "Anti-dragon shield", "Black sq shield", "Bronze sq shield", "Dragon sq shield", "Dragonfire shield", "Iron sq shield", "Mithril sq shield", "Rune sq shield", "Steel sq shield", "White sq shield", "Adamant kiteshield", "Black kiteshield", "Bronze kiteshield", "Corrupted kiteshield", "Dragon kiteshield", "Iron kiteshield", "Mithril kiteshield", "Rune kiteshield", "Runefest shield", "Steel kiteshield", "Training shield", "White kiteshield"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -151666,7 +151788,8 @@
 			"AdamantMats[+]": "Any adamant preform materials",
 			"RuneMats[+]": "Any rune preform materials",
 			"GusTreat[+]": "Any bone or meat to calm Gus",
-			"AvernicTreads[+]": "Any avernic treads variant"
+			"AvernicTreads[+]": "Any avernic treads variant",
+			"Shield[+]": "Any shield"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
