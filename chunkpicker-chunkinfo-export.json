@@ -30851,7 +30851,34 @@
 			"Be eligible to buy a ~|herb pack|~": {
 				"Chunks": ["10537"],
 				"Skills": {
-					"Herblore": 30
+					"Herblore": 25
+				},
+				"Not F2P": true
+			},
+			"Be eligible to buy a ~|mineral pack|~": {
+				"Chunks": ["10537"],
+				"Skills": {
+					"Mining": 25
+				},
+				"Not F2P": true
+			},
+			"Be eligible to buy a ~|seed pack (Pest Control)|~": {
+				"Chunks": ["10537"],
+				"Skills": {
+					"Farming": 25
+				},
+				"Not F2P": true
+			},
+			"Be eligible to buy ~|Void Knight equipment|~": {
+				"Chunks": ["10537"],
+				"Skills": {
+					"Attack": 42,
+					"Defence": 42,
+					"Hitpoints": 42,
+					"Magic": 42,
+					"Prayer": 22,
+					"Ranged": 42,
+					"Strength": 42
 				},
 				"Not F2P": true
 			},
@@ -221796,6 +221823,33 @@
 			}],
 			"Herb pack^": [{
 				"Be eligible to buy a ~|herb pack|~": "Nonskill"
+			}],
+			"Mineral pack^": [{
+				"Be eligible to buy a ~|mineral pack|~": "Nonskill"
+			}],
+			"Seed pack (Pest Control)^": [{
+				"Be eligible to buy a ~|seed pack (Pest Control)|~": "Nonskill"
+			}],
+			"Void knight mace^": [{
+				"Be eligible to buy ~|Void Knight equipment|~": "Nonskill"
+			}],
+			"Void knight top^": [{
+				"Be eligible to buy ~|Void Knight equipment|~": "Nonskill"
+			}],
+			"Void knight robe^": [{
+				"Be eligible to buy ~|Void Knight equipment|~": "Nonskill"
+			}],
+			"Void knight gloves^": [{
+				"Be eligible to buy ~|Void Knight equipment|~": "Nonskill"
+			}],
+			"Void mage helm^": [{
+				"Be eligible to buy ~|Void Knight equipment|~": "Nonskill"
+			}],
+			"Void ranger helm^": [{
+				"Be eligible to buy ~|Void Knight equipment|~": "Nonskill"
+			}],
+			"Void melee helm^": [{
+				"Be eligible to buy ~|Void Knight equipment|~": "Nonskill"
 			}],
 			"Giant rat bone^": [{
 				"~|Rag and Bone Man I|~ 1": "Quest"
