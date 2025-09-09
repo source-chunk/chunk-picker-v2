@@ -45507,9 +45507,9 @@
 				"Not F2P": true,
 				"NoPet": true
 			},
-			"Turn in ~|sulphurous essense|~ to Eyatlalli": {
+			"Turn in ~|sulphurous essence|~ to Eyatlalli": {
 				"Chunks": ["Neypotzli"],
-				"Items": ["Sulphurous essense"],
+				"Items": ["Sulphurous essence"],
 				"NPCs": ["Eyatlalli"],
 				"Level": 20,
 				"Primary": true,
