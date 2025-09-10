@@ -29032,6 +29032,11 @@
 				"Output": "Bandosian components",
 				"Not F2P": true
 			},
+			"Trade in an ent seed to an ent": {
+				"Items": ["Ent seed*"],
+				"Output": "Ent seed loot",
+				"Not F2P": true
+			},
 			"Combine both halves of the moon key": {
 				"Items": ["Tooth half of key (moon key)*", "Loop half of key (moon key)"],
 				"Output": "Moon key",
@@ -151436,7 +151441,7 @@
 			"RuneMats[+]": ["Runite bar", "Rune scimitar", "Rune longsword", "Rune full helm", "Rune sq shield", "Rune claws", "Rune warhammer", "Rune battleaxe", "Rune chainbody", "Rune kiteshield", "Rune 2h sword", "Rune platelegs", "Rune plateskirt", "Rune platebody"],
 			"GusTreat[+]": ["Bones", "Wolf bones", "Bleached bones", "Bat bones", "Big bones", "Burnt bones", "Burnt jogre bones", "Babydragon bones", "Dragon bones", "Monkey bones", "Small ninja monkey bones", "Medium ninja monkey bones", "Gorilla bones", "Bearded gorilla bones", "Skeletal gorilla bones", "Small zombie monkey bones", "Large zombie monkey bones", "Jogre bones", "Zogre bones", "Fayrg bones", "Raurg bones", "Ourg bones", "Shaikahan bones", "Dagannoth bones", "Wyvern bones", "Lava dragon bones", "Superior dragon bones", "Wyrm bones", "Wyrmling bones", "Drake bones", "Hydra bones", "Raw bear meat", "Raw beast meat", "Raw beef", "Raw bird meat", "Raw boar meat", "Raw chicken", "Raw rabbit", "Raw rat meat", "Raw yak meat", "Cooked meat"],
 			"AvernicTreads[+]": ["Avernic treads", "Avernic treads (et)", "Avernic treads (pe)", "Avernic treads (pr)", "Avernic treads (pe)(et)", "Avernic treads (pr)(et)", "Avernic treads (pr)(pe)", "Avernic treads (max)"],
-			"Shield[+]": ["Broodoo shield (combat)", "Broodoo shield (poison)", "Broodoo shield (disease)", "Elemental shield", "Mind shield", "Mirror shield", "Neitiznot shield", "Toktz-ket-xil", "Wooden shield", "Adamant sq shield", "Anti-dragon shield", "Black sq shield", "Bronze sq shield", "Dragon sq shield", "Dragonfire shield", "Iron sq shield", "Mithril sq shield", "Rune sq shield", "Steel sq shield", "White sq shield", "Adamant kiteshield", "Black kiteshield", "Bronze kiteshield", "Corrupted kiteshield", "Dragon kiteshield", "Iron kiteshield", "Mithril kiteshield", "Rune kiteshield", "Runefest shield", "Steel kiteshield", "Training shield", "White kiteshield"]
+			"Shield[+]": ["Broodoo shield (combat)", "Broodoo shield (poison)", "Broodoo shield (disease)", "Elemental shield", "Mind shield", "Mirror shield", "Neitiznot shield", "Toktz-ket-xil", "Wooden shield", "Adamant sq shield", "Anti-dragon shield", "Black sq shield", "Bronze sq shield", "Dragon sq shield", "Dragonfire shield", "Iron sq shield", "Mithril sq shield", "Rune sq shield", "Steel sq shield", "White sq shield", "Adamant kiteshield", "Black kiteshield", "Bronze kiteshield", "Corrupted kiteshield", "Dragon kiteshield", "Iron kiteshield", "Mithril kiteshield", "Rune kiteshield", "Runefest shield", "Steel kiteshield", "Training shield", "White kiteshield", "Crystal shield", "Arcane spirit shield", "Spectral spirit shield", "Elysian spirit shield"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -158293,6 +158298,9 @@
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/70"
+			},
+			"Big frog leg": {
+				"1": "Always"
 			}
 		},
 		"Big frog#Level 24": {
@@ -159512,7 +159520,7 @@
 				"1": "1/50"
 			},
 			"Tooth half of key (moon key)": {
-				"1": "1/1216"
+				"1": "1/635"
 			}
 		},
 		"Boar": {
@@ -166976,7 +166984,7 @@
 				"1": "1/128"
 			},
 			"Tooth half of key (moon key)": {
-				"1": "1/3011"
+				"1": "1/1354"
 			},
 			"GemDropTable+": {
 				"1": "1/128"
@@ -204575,6 +204583,17 @@
 				},
 				"Water rune": {
 					"50": "12/128"
+				}
+			},
+			"Ent seed loot": {
+				"Bird nest (egg)": {
+					"1": "Unknown"
+				},
+				"Bird nest (ring)": {
+					"1": "Unknown"
+				},
+				"Bird nest (seeds)": {
+					"1": "Unknown"
 				}
 			},
 			"Moon chest": {
