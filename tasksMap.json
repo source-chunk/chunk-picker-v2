@@ -25329,11 +25329,11 @@
   "Lesser demon: ~|Fire rune|~ (60) (1/16)": "t_24932",
   "Lesser demon: ~|Chaos rune|~ (12) (1/25.6)": "t_24933",
   "Lesser demon: ~|Death rune|~ (3) (1/42.67)": "t_24934",
+  "Lesser demon: ~|Coins|~ (10) (1/18.29)": "t_46490",
   "Lesser demon: ~|Coins|~ (40) (1/4.41)": "t_24935",
   "Lesser demon: ~|Coins|~ (120) (1/3.2)": "t_24936",
   "Lesser demon: ~|Coins|~ (200) (1/12.8)": "t_24937",
   "Lesser demon: ~|Coins|~ (450) (1/128)": "t_24938",
-  "Lesser demon: ~|Coins|~ (10 (F2P)) (1/18.29)": "t_24939",
   "Lesser demon: ~|Jug of wine|~ (1) (1/42.67)": "t_24940",
   "Lesser demon: ~|Gold ore|~ (1) (1/64)": "t_24941",
   "Lesser demon: ~|Looting bag|~ (1) (1/3)": "t_24942",
@@ -46240,5 +46240,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46490
+  "currentNextIndex": 46491
 }

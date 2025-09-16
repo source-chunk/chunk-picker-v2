@@ -7754,6 +7754,9 @@ let calcBIS = function(completedOnly) {
             bestEquipment[slot] = resultingAdditions[slot];
             delete bestEquipmentAlts[slot];
             delete bisUpgrades[skill.replaceAll(' ', '_') + '-' + slot];
+            if (!rules['Show Best in Slot 1H and 2H'] && slot === '2h') {
+                delete bestEquipment['weapon'];
+            }
         });
         if (bestEquipment.hasOwnProperty('weapon') && bestEquipment.hasOwnProperty('2h')) {
             delete bestEquipment['2h'];

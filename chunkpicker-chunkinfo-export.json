@@ -174447,7 +174447,7 @@
 				"3": "3/128"
 			},
 			"Coins": {
-				"10 (F2P)": "7/128",
+				"10": "7/128",
 				"40": "29/128",
 				"120": "40/128",
 				"200": "10/128",
@@ -229612,6 +229612,15 @@
 					"~|Dragon Slayer I|~ 1": "Quest"
 				},
 				"Weight": 14
+			},
+			"Kalphites": {
+				"CombatLevel": 15,
+				"Weight": 9
+			},
+			"Kurasks": {
+				"Level": 70,
+				"CombatLevel": 65,
+				"Weight": 4
 			},
 			"Zygomites": {
 				"Level": 57,
