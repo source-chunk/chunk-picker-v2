@@ -3,6 +3,7 @@
   "Read an ~|agility tome|~ from Temple Trekking": "t_46465",
   "Participate in ~|Underwater Agility and Thieving|~ for Agility xp": "t_45430",
   "Participate in ~|Trouble Brewing|~ for Agility xp": "t_2",
+  "Access the mausoleum bridge jump ~|shortcut|~": "t_46491",
   "Access the Slayer Tower ivy ~|shortcut|~": "t_46412",
   "Access the Slayer Tower window ~|shortcut|~": "t_46413",
   "Access the Castle Drakan wall rock climb ~|shortcut|~": "t_46414",
@@ -396,6 +397,7 @@
   "Build a master ~|STASH|~ unit": "t_371",
   "Build a medium ~|STASH|~ unit": "t_372",
   "Repair a crane at ~|Port Piscarilius|~": "t_373",
+  "Repair the ~|bridge (Mausoleum)|~ near Fenkenstrain's Castle": "t_46492",
   "Build the ~|potter's wheel|~ on the Isle of Souls": "t_374",
   "Build the ~|spinning wheel|~ on the Isle of Souls": "t_375",
   "Build the ~|bank chest|~ on Fossil Island": "t_376",
@@ -5781,6 +5783,7 @@
   "Build the ~|landing site|~ by the Cam Torum entrance": "t_5676",
   "Build the ~|landing site|~ at the Salvager Overlook": "t_5677",
   "Build the ~|landing site|~ near Kastori": "t_45781",
+  "Reinforce the ~|bridge (Mausoleum)|~ near Fenkenstrain's Castle": "t_46493",
   "Unlock the ability to use ~|Preserve|~": "t_5678",
   "Unlock the ability to use ~|Rigour|~": "t_5679",
   "Unlock the ability to use ~|Augury|~": "t_5680",
@@ -46240,5 +46243,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46491
+  "currentNextIndex": 46494
 }

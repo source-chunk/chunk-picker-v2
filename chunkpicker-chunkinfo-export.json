@@ -34,6 +34,17 @@
 				"Priority": 99,
 				"NoPet": true
 			},
+			"Access the mausoleum bridge jump ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Bridge (Mausoleum)"],
+				"Level": 69,
+				"Tasks": {
+					"Repair the ~|bridge (Mausoleum)|~ near Fenkenstrain's Castle": "Construction"
+				},
+				"Primary": false,
+				"Priority": 19,
+				"NoPet": true
+			},
 			"Access the Slayer Tower ivy ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Ivy (Slayer Tower)"],
@@ -3402,6 +3413,17 @@
 				},
 				"Priority": 3,
 				"Not F2P": true
+			},
+			"Repair the ~|bridge (Mausoleum)|~ near Fenkenstrain's Castle": {
+				"Items": ["Hammer[+]", "Saw[+]", "Teak plank", "Nails[+]"],
+				"Level": 59,
+				"Chunks": ["13879-1"],
+				"Objects": ["Bridge (Mausoleum)"],
+				"Primary": false,
+				"Tasks": {
+					"~|Creature of Fenkenstrain|~ 6": "Quest"
+				},
+				"Priority": 19
 			},
 			"Build the ~|potter's wheel|~ on the Isle of Souls": {
 				"Items": ["Hammer[+]", "Plank", "Iron bar", "Soft clay"],
@@ -27255,6 +27277,14 @@
 				"Sections": ["5165-1", "5165-2"],
 				"Tasks": {
 					"Access the Aldarin rock climb ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"13879-1 to 13879-2": {
+				"Sections": ["13879-1", "13879-2"],
+				"Tasks": {
+					"Access the mausoleum bridge jump ~|shortcut|~": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -65650,6 +65680,15 @@
 				"Items": ["Quetzal feed", "Limestone brick", "Soft clay"],
 				"Tasks": {
 					"~|Twilight's Promise|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
+			"Reinforce the ~|bridge (Mausoleum)|~ near Fenkenstrain's Castle": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["13879-1"],
+				"Tasks": {
+					"Repair the ~|bridge (Mausoleum)|~ near Fenkenstrain's Castle": "Construction"
 				},
 				"Not F2P": true
 			},
@@ -140386,7 +140425,7 @@
 						"Old crone": 1
 					},
 					"Object": {
-						"Bridge": 8,
+						"Bridge (Mausoleum)": 8,
 						"Crate": 2
 					},
 					"Quest": {
