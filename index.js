@@ -1216,12 +1216,9 @@ let settingsModalOpen = false;
 let chunkHistoryModalOpen = false;
 let challengeAltsModalOpen = false;
 let overlaysModalOpen = false;
-let randomModalOpen = false;
 let userTasksModalOpen = false;
 let userTasksListModalOpen = false;
 let userTaskDeleteConfirmationModalOpen = false;
-let randomListModalOpen = false;
-let statsErrorModalOpen = false;
 let searchModalOpen = false;
 let searchDetailsModalOpen = false;
 let highestModalOpen = false;
@@ -1411,8 +1408,8 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.8.25';
-let patchNotesVersion = '6.4.0';
+let currentVersion = '6.9.0';
+let patchNotesVersion = '6.9.0';
 let updateLevel = 'difference';
 
 // Patreon Test Server Data
@@ -1543,7 +1540,7 @@ let lastUpdated = 0;
 let hintTexts = [
     "Join the ClanChat: 'OneChunkClan'!",
     "Join the Chunk Chat Discord!",
-    "Celebrating over 5 years of Chunk Picking!",
+    "Celebrating over 6 years of Chunk Picking!",
     "Check out our RS3 Sister-site!",
     "Now with Custom Themes!"
 ];
@@ -1579,7 +1576,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.8.25";
+mapImg.src = "osrs_world_map.png?v=6.9.0";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1622,14 +1619,14 @@ let convertToXY = function(chunkId) {
 }
 
 // Converts canvas text into lines
-let getLines = function(ctx, text, maxWidth) {
+let getLines = function(ctxIn, text, maxWidth) {
     var words = text.split(' ');
     var lines = [];
     var currentLine = words[0];
 
     for (var i = 1; i < words.length; i++) {
         var word = words[i];
-        var width = ctx.measureText(currentLine + ' ' + word).width;
+        var width = ctxIn.measureText(currentLine + ' ' + word).width;
         if (width < maxWidth) {
             currentLine += ' ' + word;
         } else {
@@ -1641,8 +1638,36 @@ let getLines = function(ctx, text, maxWidth) {
     return lines;
 }
 
+// Creates and downloads canvas screenshot
+let createScreenshot = function() {
+    const exportCanvas = document.createElement('canvas');
+    exportCanvas.width = mapImg.naturalWidth;
+    exportCanvas.height = mapImg.naturalHeight;
+    const exportCtx = exportCanvas.getContext('2d');
+    const savedDragTotalX = dragTotalX;
+    const savedDragTotalY = dragTotalY;
+    const savedTotalZoom = totalZoom;
+    dragTotalX = 0;
+    dragTotalY = 0;
+    totalZoom = 1;
+    drawCanvas(exportCtx);
+    dragTotalX = savedDragTotalX;
+    dragTotalY = savedDragTotalY;
+    totalZoom = savedTotalZoom;
+    drawCanvas();
+    exportCanvas.toBlob(blob => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `${mid}-fullmap-export.webp`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+        $('#fullmap-clipboard-button').html('Download a .webp image of your full map');
+        closeClipboard();
+    }, 'image/webp');
+}
+
 // Canvas animation
-let drawCanvas = function() {
+let drawCanvas = function(ctxIn = ctx) {
     if (imgH === undefined) {
         console.warn('Backup image loaded');
         imgW = mapImg.width;
@@ -1650,7 +1675,7 @@ let drawCanvas = function() {
         dragTotalX = 0;
         dragTotalY = 0;
         setUpSelected();
-        drawCanvas();
+        drawCanvas(ctxIn);
         return;
     }
     if (!readyToDrawImage) {
@@ -1659,356 +1684,356 @@ let drawCanvas = function() {
     updateFutureMove();
     selectedNum = tempSelectedChunks.length;
 
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.drawImage(mapImg, dragTotalX, dragTotalY, totalZoom * imgW, totalZoom * imgH);
+    ctxIn.clearRect(0, 0, cw, ch);
+    ctxIn.drawImage(mapImg, dragTotalX, dragTotalY, totalZoom * imgW, totalZoom * imgH);
 
     // Chunks
-    ctx.beginPath();
-    ctx.strokeStyle = 'gray';
-    ctx.lineWidth = highVisibilityMode ? 1 : 2;
-    ctx.shadowColor = 'transparent';
-    ctx.shadowBlur = 0;
+    ctxIn.beginPath();
+    ctxIn.strokeStyle = 'gray';
+    ctxIn.lineWidth = highVisibilityMode ? 1 : 2;
+    ctxIn.shadowColor = 'transparent';
+    ctxIn.shadowBlur = 0;
     for (let i = 0; i < rowSize; i++) {
         for (let j = 0; j < (fullSize / rowSize); j++) {
             let chunkId = convertToChunkNum(i, j).toString();
             if (!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) {
                 if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = 'rgba(200, 200, 200, 0.25)';
-                    ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                    ctxIn.fillStyle = 'rgba(200, 200, 200, 0.25)';
+                    ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 }
-                ctx.strokeStyle = 'gray';
-                (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.strokeStyle = 'gray';
+                (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
                 if (highVisibilityMode) {
-                    ctx.fillStyle = 'rgba(100, 255, 100, 0.25)';
+                    ctxIn.fillStyle = 'rgba(100, 255, 100, 0.25)';
                 } else if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = 'rgba(100, 255, 100, 0.33)';
+                    ctxIn.fillStyle = 'rgba(100, 255, 100, 0.33)';
                 } else {
-                    ctx.fillStyle = 'rgba(100, 255, 100, 0.5)';
+                    ctxIn.fillStyle = 'rgba(100, 255, 100, 0.5)';
                 }
-                ctx.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
-                (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-                ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
+                (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
                 if (tempSelectedChunks.indexOf(chunkId) + 1 > 999) {
-                    ctx.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto Condensed, sans-serif';
+                    ctxIn.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.65;
                 } else if (tempSelectedChunks.indexOf(chunkId) + 1 > 99) {
-                    ctx.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto Condensed, sans-serif';
+                    ctxIn.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.7;
                 } else {
-                    ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto Condensed, sans-serif';
+                    ctxIn.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.825;
                 }
-                ctx.fillStyle = 'white';
-                ctx.textAlign = 'center';
-                ctx.fillText(tempSelectedChunks.indexOf(chunkId) + 1, dragTotalX + (totalZoom * ((i + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
+                ctxIn.fillStyle = 'white';
+                ctxIn.textAlign = 'center';
+                ctxIn.fillText(tempSelectedChunks.indexOf(chunkId) + 1, dragTotalX + (totalZoom * ((i + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
             } else if (!!tempChunks['potential'] && tempChunks['potential'][chunkId]) {
                 if (highVisibilityMode) {
-                    ctx.fillStyle = 'rgba(255, 255, 100, 0.25)';
+                    ctxIn.fillStyle = 'rgba(255, 255, 100, 0.25)';
                 } else if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = 'rgba(255, 255, 100, 0.33)';
+                    ctxIn.fillStyle = 'rgba(255, 255, 100, 0.33)';
                 } else {
-                    ctx.fillStyle = 'rgba(255, 255, 100, 0.5)';
+                    ctxIn.fillStyle = 'rgba(255, 255, 100, 0.5)';
                 }
-                ctx.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
-                (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-                ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
+                (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
                 if (selectedNum + 1 > 999) {
-                    ctx.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto Condensed, sans-serif';
+                    ctxIn.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.65;
                 } else if (selectedNum + 1 > 99) {
-                    ctx.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto Condensed, sans-serif';
+                    ctxIn.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.7;
                 } else {
-                    ctx.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto Condensed, sans-serif';
+                    ctxIn.font = (totalZoom * (imgW / rowSize)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.825;
                 }
-                ctx.fillStyle = 'black';
-                ctx.textAlign = 'center';
-                ctx.fillText(++selectedNum, dragTotalX + (totalZoom * ((i + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
+                ctxIn.fillStyle = 'black';
+                ctxIn.textAlign = 'center';
+                ctxIn.fillText(++selectedNum, dragTotalX + (totalZoom * ((i + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
             } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'][chunkId]) {
                 if (highVisibilityMode) {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                    ctxIn.fillStyle = 'rgba(0, 0, 0, 0.4)';
                 } else if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                    ctxIn.fillStyle = 'rgba(0, 0, 0, 0.4)';
                 } else {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                    ctxIn.fillStyle = 'rgba(0, 0, 0, 0.6)';
                 }
-                ctx.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
-                (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-                ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
+                (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             } else {
                 if (highVisibilityMode) {
-                    ctx.fillStyle = colorBoxLight;
+                    ctxIn.fillStyle = colorBoxLight;
                 } else if (hoveredChunk === chunkId) {
-                    ctx.fillStyle = colorBoxLight;
+                    ctxIn.fillStyle = colorBoxLight;
                 } else {
-                    ctx.fillStyle = colorBox;
+                    ctxIn.fillStyle = colorBox;
                 }
-                ctx.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
-                (!highVisibilityMode || totalZoom > 0.3) && ctx.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-                ctx.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
+                (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             }
             if (showChunkIds && !onMobile) {
-                ctx.fillStyle = 'white';
-                ctx.font = (totalZoom * (imgW / rowSize) * (1 / 5)) + 'px Calibri, Roboto Condensed, sans-serif';
-                ctx.textAlign = 'left';
-                ctx.fillText(chunkId, dragTotalX + (totalZoom * ((i) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + 0.15) * imgH / (fullSize / rowSize))));
+                ctxIn.fillStyle = 'white';
+                ctxIn.font = (totalZoom * (imgW / rowSize) * (1 / 5)) + 'px Calibri, Roboto Condensed, sans-serif';
+                ctxIn.textAlign = 'left';
+                ctxIn.fillText(chunkId, dragTotalX + (totalZoom * ((i) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + 0.15) * imgH / (fullSize / rowSize))));
             }
         }
     }
 
     // Slayer overlay
-    ctx.save();
+    ctxIn.save();
     !!chunkInfo['mapOverlays'] && selectedOverlay === 'Locked Slayer Task|Slayer task' && !!chunkInfo['mapOverlays'][selectedOverlay] && !!slayerLocked && slayerLocked.hasOwnProperty('monster') && !!chunkInfo['codeItems']['slayerTaskChunks'][slayerLocked.monster] && chunkInfo['codeItems']['slayerTaskChunks'][slayerLocked.monster].forEach((chunkId) => {
         let {x, y} = convertToXY(chunkId);
         if (highVisibilityMode) {
-            ctx.fillStyle = 'rgba(255, 0, 0, 0.25)';
+            ctxIn.fillStyle = 'rgba(255, 0, 0, 0.25)';
         } else if (hoveredChunk === chunkId) {
-            ctx.fillStyle = 'rgba(255, 0, 0, 0.25)';
+            ctxIn.fillStyle = 'rgba(255, 0, 0, 0.25)';
         } else {
-            ctx.fillStyle = 'rgba(255, 0, 0, 0.33)';
+            ctxIn.fillStyle = 'rgba(255, 0, 0, 0.33)';
         }
-        ctx.strokeStyle = 'rgba(170, 0, 0, 1)';
-        ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-        ctx.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-        ctx.drawImage(osrsStickers['slayer'], (dragTotalX + (totalZoom * ((x + 0.2) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.2) * imgH / (fullSize / rowSize))), (totalZoom * (imgW / rowSize)) * (0.6), (totalZoom * (imgW / rowSize)) * (0.6));
+        ctxIn.strokeStyle = 'rgba(170, 0, 0, 1)';
+        ctxIn.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        ctxIn.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        ctxIn.drawImage(osrsStickers['slayer'], (dragTotalX + (totalZoom * ((x + 0.2) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.2) * imgH / (fullSize / rowSize))), (totalZoom * (imgW / rowSize)) * (0.6), (totalZoom * (imgW / rowSize)) * (0.6));
     });
-    ctx.restore();
+    ctxIn.restore();
 
     // Locked chunk
     if (infoLockedId !== -1) {
         let {x, y} = convertToXY(infoLockedId);
         if (highVisibilityMode) {
-            ctx.fillStyle = 'rgba(0, 255, 255, 0.25)';
+            ctxIn.fillStyle = 'rgba(0, 255, 255, 0.25)';
         } else if (hoveredChunk === infoLockedId) {
-            ctx.fillStyle = 'rgba(0, 255, 255, 0.25)';
+            ctxIn.fillStyle = 'rgba(0, 255, 255, 0.25)';
         } else {
-            ctx.fillStyle = 'rgba(0, 255, 255, 0.33)';
+            ctxIn.fillStyle = 'rgba(0, 255, 255, 0.33)';
         }
-        ctx.strokeStyle = 'rgb(0, 170, 170)';
-        ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-        ctx.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-        ctx.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.9) + 'px "Font Awesome 6 Free"';
-        ctx.fillStyle = 'rgba(0, 255, 255, 0.75)';
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.75)';
-        ctx.textAlign = 'center';
-        ctx.fillText('\uf129', dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.825) * imgH / (fullSize / rowSize))));
-        ctx.strokeText('\uf129', dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.825) * imgH / (fullSize / rowSize))));
+        ctxIn.strokeStyle = 'rgb(0, 170, 170)';
+        ctxIn.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        ctxIn.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        ctxIn.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.9) + 'px "Font Awesome 6 Free"';
+        ctxIn.fillStyle = 'rgba(0, 255, 255, 0.75)';
+        ctxIn.strokeStyle = 'rgba(0, 0, 0, 0.75)';
+        ctxIn.textAlign = 'center';
+        ctxIn.fillText('\uf129', dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.825) * imgH / (fullSize / rowSize))));
+        ctxIn.strokeText('\uf129', dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.825) * imgH / (fullSize / rowSize))));
     }
 
     // Recent chunks
-    ctx.save();
+    ctxIn.save();
     !!recentChunks && !onMobile && Object.keys(recentChunks).forEach((chunkId) => {
         let {x, y} = convertToXY(chunkId);
-        ctx.shadowColor = 'white';
+        ctxIn.shadowColor = 'white';
         if ((!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) || (!!tempChunks['potential'] && tempChunks['potential'][chunkId])) {
-            ctx.fillStyle = 'rgba(255, 255, 0, 0.5)';
+            ctxIn.fillStyle = 'rgba(255, 255, 0, 0.5)';
         } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
-            ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+            ctxIn.fillStyle = 'rgba(255, 0, 0, 0.5)';
         } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'][chunkId]) {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+            ctxIn.fillStyle = 'rgba(0, 0, 0, 0.85)';
         } else {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctxIn.fillStyle = 'rgba(255, 255, 255, 0.5)';
         }
-        ctx.shadowBlur = 29;
-        ctx.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        ctxIn.shadowBlur = 29;
+        ctxIn.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
     });
-    ctx.restore();
+    ctxIn.restore();
 
     // Control chunk
-    ctx.save();
+    ctxIn.save();
     if (controlChunk !== 0 && (!locked || testMode) && !onMobile) {
         let {x, y} = convertToXY(controlChunk);
         let heightOff = 0.55;
         let blacklistText = (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(controlChunk)) ? 'Un-Blacklist' : 'Blacklist';
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
-        ctx.roundRect(dragTotalX + (totalZoom * ((x + 0.05) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.375) * imgH / (fullSize / rowSize))), totalZoom * ((0.9) * imgW / rowSize), totalZoom * ((0.25) * imgH / (fullSize / rowSize)), totalZoom * ((0.9) * imgW / rowSize)).fill();
-        ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto Condensed, sans-serif';
-        ctx.fillStyle = 'white';
-        ctx.textAlign = 'center';
-        ctx.fillText(blacklistText, dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + heightOff) * imgH / (fullSize / rowSize))));
+        ctxIn.fillStyle = 'rgba(0, 0, 0, 0.75)';
+        ctxIn.roundRect(dragTotalX + (totalZoom * ((x + 0.05) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + 0.375) * imgH / (fullSize / rowSize))), totalZoom * ((0.9) * imgW / rowSize), totalZoom * ((0.25) * imgH / (fullSize / rowSize)), totalZoom * ((0.9) * imgW / rowSize)).fill();
+        ctxIn.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto Condensed, sans-serif';
+        ctxIn.fillStyle = 'white';
+        ctxIn.textAlign = 'center';
+        ctxIn.fillText(blacklistText, dragTotalX + (totalZoom * ((x + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((y + heightOff) * imgH / (fullSize / rowSize))));
     }
-    ctx.restore();
+    ctxIn.restore();
 
     // Stickered chunks
-    ctx.save();
-    ctx.strokeStyle = 'black';
-    ctx.textAlign = 'center';
-    ctx.lineWidth = (totalZoom * (imgW / rowSize)) * (0.01);
+    ctxIn.save();
+    ctxIn.strokeStyle = 'black';
+    ctxIn.textAlign = 'center';
+    ctxIn.lineWidth = (totalZoom * (imgW / rowSize)) * (0.01);
     !!tempChunks['stickered'] && Object.keys(tempChunks['stickered']).forEach(function(chunkId) {
         let {x, y} = convertToXY(chunkId);
         if (stickerChoices.includes(tempChunks['stickered'][chunkId])) {
-            ctx.scale(-1, 1);
-            ctx.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.25) + 'px "Font Awesome 6 Free"';
-            ctx.fillStyle = tempChunks['stickeredColors'][chunkId];
-            ctx.fillText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
-            if (ctx.fillStyle !== '#000000') {
-                ctx.strokeText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            ctxIn.scale(-1, 1);
+            ctxIn.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.25) + 'px "Font Awesome 6 Free"';
+            ctxIn.fillStyle = tempChunks['stickeredColors'][chunkId];
+            ctxIn.fillText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            if (ctxIn.fillStyle !== '#000000') {
+                ctxIn.strokeText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
             }
-            ctx.scale(-1, 1);
+            ctxIn.scale(-1, 1);
         } else if (stickerChoicesOsrs.includes(tempChunks['stickered'][chunkId])) {
-            ctx.drawImage(osrsStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.725) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), (totalZoom * (imgW / rowSize)) * (0.25), (totalZoom * (imgW / rowSize)) * (0.25));
+            ctxIn.drawImage(osrsStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.725) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), (totalZoom * (imgW / rowSize)) * (0.25), (totalZoom * (imgW / rowSize)) * (0.25));
         } else if (stickerChoicesNumbers.includes(tempChunks['stickered'][chunkId])) {
-            ctx.font = '900 ' + (totalZoom * (imgW / rowSize) * (1 / 2.75)) + 'px Calibri, Roboto Condensed, sans-serif';
-            ctx.fillStyle = tempChunks['stickeredColors'][chunkId];
-            ctx.fillText(numberStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
-            if (ctx.fillStyle !== '#000000') {
-                ctx.strokeText(numberStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            ctxIn.font = '900 ' + (totalZoom * (imgW / rowSize) * (1 / 2.75)) + 'px Calibri, Roboto Condensed, sans-serif';
+            ctxIn.fillStyle = tempChunks['stickeredColors'][chunkId];
+            ctxIn.fillText(numberStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            if (ctxIn.fillStyle !== '#000000') {
+                ctxIn.strokeText(numberStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
             }
         } else if (stickerChoicesTiers.includes(tempChunks['stickered'][chunkId])) {
-            ctx.font = '900 ' + (totalZoom * (imgW / rowSize) * (1 / 2.75)) + 'px Calibri, Roboto Condensed, sans-serif';
-            ctx.fillStyle = tempChunks['stickeredColors'][chunkId];
-            ctx.fillText(tempChunks['stickered'][chunkId], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
-            if (ctx.fillStyle !== '#000000') {
-                ctx.strokeText(tempChunks['stickered'][chunkId], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            ctxIn.font = '900 ' + (totalZoom * (imgW / rowSize) * (1 / 2.75)) + 'px Calibri, Roboto Condensed, sans-serif';
+            ctxIn.fillStyle = tempChunks['stickeredColors'][chunkId];
+            ctxIn.fillText(tempChunks['stickered'][chunkId], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            if (ctxIn.fillStyle !== '#000000') {
+                ctxIn.strokeText(tempChunks['stickered'][chunkId], (dragTotalX + (totalZoom * ((x + 0.875) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
             }
         }
     });
-    ctx.restore();
+    ctxIn.restore();
 
-    chunkBordersCanvas();
+    chunkBordersCanvas(ctxIn);
 
     // Recent chunks outline
-    ctx.save();
+    ctxIn.save();
     !!recentChunks && !onMobile && Object.keys(recentChunks).forEach((chunkId) => {
         let {x, y} = convertToXY(chunkId);
         if ((!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) || (!!tempChunks['potential'] && tempChunks['potential'][chunkId])) {
-            ctx.strokeStyle = 'rgba(255, 255, 0, 1)';
+            ctxIn.strokeStyle = 'rgba(255, 255, 0, 1)';
         } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
-            ctx.strokeStyle = 'rgba(255, 0, 0, 1)';
+            ctxIn.strokeStyle = 'rgba(255, 0, 0, 1)';
         } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'][chunkId]) {
-            ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
+            ctxIn.strokeStyle = 'rgba(0, 0, 0, 1)';
         } else {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 1)';
+            ctxIn.strokeStyle = 'rgba(255, 255, 255, 1)';
         }
-        ctx.setLineDash([10, 5]);
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        ctxIn.setLineDash([10, 5]);
+        ctxIn.lineWidth = 1.5;
+        ctxIn.strokeRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
     });
-    ctx.restore();
+    ctxIn.restore();
 
     // Control sticker chunk
-    ctx.save();
+    ctxIn.save();
     if (stickerChunk !== 0) {
         if ((!tempChunks['stickered'] || !tempChunks['stickered'].hasOwnProperty(stickerChunk)) && (!locked || testMode)) {
             let {x, y} = convertToXY(stickerChunk);
-            ctx.strokeStyle = 'black';
-            ctx.textAlign = 'center';
-            ctx.lineWidth = (totalZoom * (imgW / rowSize)) * (0.01);
-            ctx.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.25) + 'px "Font Awesome 6 Free"';
-            ctx.fillStyle = 'rgb(201, 209, 217)';
-            ctx.scale(-1, 1);
-            ctx.fillText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
-            ctx.strokeText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            ctxIn.strokeStyle = 'black';
+            ctxIn.textAlign = 'center';
+            ctxIn.lineWidth = (totalZoom * (imgW / rowSize)) * (0.01);
+            ctxIn.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.25) + 'px "Font Awesome 6 Free"';
+            ctxIn.fillStyle = 'rgb(201, 209, 217)';
+            ctxIn.scale(-1, 1);
+            ctxIn.fillText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            ctxIn.strokeText(stickerChoicesContent['tag'], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
         }
         if (isHoveringSticker && !!tempChunks['stickeredNotes'] && tempChunks['stickeredNotes'].hasOwnProperty(stickerChunk) && tempChunks['stickeredNotes'][stickerChunk] !== '') {
             let {x, y} = convertToXY(stickerChunk);
-            ctx.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto Condensed, sans-serif';
-            ctx.fillStyle = 'rgb(201, 209, 217)';
-            ctx.strokeStyle = 'black';
-            ctx.lineWidth = 1;
-            ctx.fillRect((dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))) - 5, dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), ctx.measureText(tempChunks['stickeredNotes'][stickerChunk]).width + 10, (totalZoom * (0.25 * imgH / (fullSize / rowSize))));
-            ctx.strokeRect((dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))) - 5, dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), ctx.measureText(tempChunks['stickeredNotes'][stickerChunk]).width + 10, (totalZoom * (0.25 * imgH / (fullSize / rowSize))));
-            ctx.fillStyle = 'black';
-            ctx.textAlign = 'left';
-            ctx.fillText(tempChunks['stickeredNotes'][stickerChunk], (dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.2) * imgH / (fullSize / rowSize))));
+            ctxIn.font = (totalZoom * (imgW / rowSize) * (1 / 6)) + 'px Calibri, Roboto Condensed, sans-serif';
+            ctxIn.fillStyle = 'rgb(201, 209, 217)';
+            ctxIn.strokeStyle = 'black';
+            ctxIn.lineWidth = 1;
+            ctxIn.fillRect((dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))) - 5, dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), ctxIn.measureText(tempChunks['stickeredNotes'][stickerChunk]).width + 10, (totalZoom * (0.25 * imgH / (fullSize / rowSize))));
+            ctxIn.strokeRect((dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))) - 5, dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), ctxIn.measureText(tempChunks['stickeredNotes'][stickerChunk]).width + 10, (totalZoom * (0.25 * imgH / (fullSize / rowSize))));
+            ctxIn.fillStyle = 'black';
+            ctxIn.textAlign = 'left';
+            ctxIn.fillText(tempChunks['stickeredNotes'][stickerChunk], (dragTotalX + (totalZoom * ((x + 1.1) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.2) * imgH / (fullSize / rowSize))));
         }
     }
-    ctx.restore();
+    ctxIn.restore();
 
     // Overlays
-    ctx.save();
+    ctxIn.save();
     !!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && selectedOverlay !== 'Locked Slayer Task|Slayer task' && !!chunkInfo['mapOverlays'][selectedOverlay] && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl, i) => {
         if ((selectedOverlay !== 'Clues' || selectedOverlayClues[overlayEl.type]) && (selectedOverlayIds.length === 0 || i !== selectedOverlayId) && overlayEl.x >= 1024 && overlayEl.x <= 3967 && overlayEl.y >= 2496 && overlayEl.y <= 4159 && (!unlockedOverlayOnly || (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(convertToChunkNum(Math.floor((overlayEl.x - 1024)/64), (fullSize / rowSize) - Math.floor((overlayEl.y - 2496)/64) - 1))))) {
-            ctx.textAlign = 'center';
-            ctx.font = '900 ' + 36 + 'px "Font Awesome 6 Free"';
-            ctx.fillStyle = 'white';
-            ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
-            ctx.font = '900 ' + 32 + 'px "Font Awesome 6 Free"';
-            ctx.fillStyle = hoveredOverlayIds.includes(i) && !isHoveringOverlayMenu ? 'black' : overlayEl.color;
-            ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+            ctxIn.textAlign = 'center';
+            ctxIn.font = '900 ' + 36 + 'px "Font Awesome 6 Free"';
+            ctxIn.fillStyle = 'white';
+            ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
+            ctxIn.font = '900 ' + 32 + 'px "Font Awesome 6 Free"';
+            ctxIn.fillStyle = hoveredOverlayIds.includes(i) && !isHoveringOverlayMenu ? 'black' : overlayEl.color;
+            ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
             if (selectedOverlayIds.length !== 0 && selectedOverlayIds.includes(i)) {
-                ctx.fillStyle = 'rgba(30, 30, 30, 0.5)';
-                ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+                ctxIn.fillStyle = 'rgba(30, 30, 30, 0.5)';
+                ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
             }
-            ctx.beginPath();
-            ctx.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
-            ctx.fillStyle = 'white';
-            ctx.fill();
+            ctxIn.beginPath();
+            ctxIn.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
+            ctxIn.fillStyle = 'white';
+            ctxIn.fill();
         }
     });
-    ctx.restore();
+    ctxIn.restore();
 
-    ctx.save();
+    ctxIn.save();
     if (!!chunkInfo['mapOverlays'] && selectedOverlay !== 'None' && selectedOverlay !== 'Locked Slayer Task|Slayer task' && !!chunkInfo['mapOverlays'][selectedOverlay] && selectedOverlayIds.length !== 0) {
         let overlayEl = chunkInfo['mapOverlays'][selectedOverlay][selectedOverlayId];
-        ctx.textAlign = 'center';
-        ctx.font = '900 ' + 36 + 'px "Font Awesome 6 Free"';
-        ctx.fillStyle = 'white';
-        ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
-        ctx.font = '900 ' + 32 + 'px "Font Awesome 6 Free"';
-        ctx.fillStyle = hoveredOverlayIds.includes(selectedOverlayId) && !isHoveringOverlayMenu ? 'black' : overlayEl.color;
-        ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
-        ctx.fillStyle = 'rgba(200, 200, 200, 0.25)';
-        ctx.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
-        ctx.beginPath();
-        ctx.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
-        ctx.fillStyle = 'white';
-        ctx.fill();
-        ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--color1');
-        ctx.strokeStyle = 'black';
-        ctx.lineWidth = 1;
+        ctxIn.textAlign = 'center';
+        ctxIn.font = '900 ' + 36 + 'px "Font Awesome 6 Free"';
+        ctxIn.fillStyle = 'white';
+        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
+        ctxIn.font = '900 ' + 32 + 'px "Font Awesome 6 Free"';
+        ctxIn.fillStyle = hoveredOverlayIds.includes(selectedOverlayId) && !isHoveringOverlayMenu ? 'black' : overlayEl.color;
+        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+        ctxIn.fillStyle = 'rgba(200, 200, 200, 0.25)';
+        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+        ctxIn.beginPath();
+        ctxIn.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
+        ctxIn.fillStyle = 'white';
+        ctxIn.fill();
+        ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--color1');
+        ctxIn.strokeStyle = 'black';
+        ctxIn.lineWidth = 1;
         let topText = `${overlayEl.type} Step`;
         if (overlayEl.hasOwnProperty('img')) {
-            ctx.font = 'bold 24px Calibri, Roboto Condensed, sans-serif';
-            ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
-            ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
-            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--colorText');
-            ctx.textAlign = 'left';
-            ctx.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
-            ctx.font = '900 ' + 18 + 'px "Font Awesome 6 Free"';
-            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctx.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
-            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctx.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
-            ctx.font = '900 ' + 24 + 'px "Font Awesome 6 Free"';
-            ctx.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
-            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--color1');
-            ctx.strokeStyle = 'black';
+            ctxIn.font = 'bold 24px Calibri, Roboto Condensed, sans-serif';
+            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
+            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
+            ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--colorText');
+            ctxIn.textAlign = 'left';
+            ctxIn.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            ctxIn.font = '900 ' + 18 + 'px "Font Awesome 6 Free"';
+            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctxIn.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctxIn.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            ctxIn.font = '900 ' + 24 + 'px "Font Awesome 6 Free"';
+            ctxIn.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--color1');
+            ctxIn.strokeStyle = 'black';
             let overlayImg = new Image();
             overlayImg.src = overlayEl.img;
-            ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
-            ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
-            ctx.drawImage(overlayImg, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 170, 190, 190);
+            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
+            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
+            ctxIn.drawImage(overlayImg, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 170, 190, 190);
             overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180];
             overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
             overlayRightLocation = (selectedOverlayIndex < (selectedOverlayIds.length - 1) ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
             overlayMenuLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20 + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + 200];
         } else {
-            ctx.font = '18px Calibri, Roboto Condensed, sans-serif';
+            ctxIn.font = '18px Calibri, Roboto Condensed, sans-serif';
             let hoverText = `${overlayEl.text}`;
-            let hoverTextLines = getLines(ctx, hoverText, 190);
-            ctx.font = 'bold 24px Calibri, Roboto Condensed, sans-serif';
-            ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
-            ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
-            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--colorText');
-            ctx.textAlign = 'left';
-            ctx.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
-            ctx.font = '900 ' + 18 + 'px "Font Awesome 6 Free"';
-            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctx.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
-            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctx.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
-            ctx.font = '900 ' + 24 + 'px "Font Awesome 6 Free"';
-            ctx.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
-            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--color1');
-            ctx.strokeStyle = 'black';
-            ctx.font = '18px Calibri, Roboto Condensed, sans-serif';
-            ctx.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
-            ctx.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
-            ctx.fillStyle = getComputedStyle(ctx.canvas).getPropertyValue('--colorText');
-            ctx.textAlign = 'left';
+            let hoverTextLines = getLines(ctxIn, hoverText, 190);
+            ctxIn.font = 'bold 24px Calibri, Roboto Condensed, sans-serif';
+            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
+            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
+            ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--colorText');
+            ctxIn.textAlign = 'left';
+            ctxIn.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            ctxIn.font = '900 ' + 18 + 'px "Font Awesome 6 Free"';
+            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctxIn.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctxIn.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            ctxIn.font = '900 ' + 24 + 'px "Font Awesome 6 Free"';
+            ctxIn.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--color1');
+            ctxIn.strokeStyle = 'black';
+            ctxIn.font = '18px Calibri, Roboto Condensed, sans-serif';
+            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
+            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
+            ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--colorText');
+            ctxIn.textAlign = 'left';
             hoverTextLines.forEach((hoverTextLine, i) => {
-                ctx.fillText(hoverTextLine, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 155 + (19 * i) + (200 - (hoverTextLines.length * 19 + 10)));
+                ctxIn.fillText(hoverTextLine, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 155 + (19 * i) + (200 - (hoverTextLines.length * 19 + 10)));
             });
             overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))];
             overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))] : -1);
@@ -2021,7 +2046,7 @@ let drawCanvas = function() {
         overlayRightLocation = -1;
         overlayMenuLocation = -1;
     }
-    ctx.restore();
+    ctxIn.restore();
 
     if (selectedOverlay !== 'None' && selectedOverlay !== 'Locked Slayer Task|Slayer task') {
         $('#canvas').css('cursor', (hoveredOverlayIds.length !== 0 && !isHoveringOverlayMenu) || isHoveringClose || isHoveringLeft || isHoveringRight ? 'pointer' : 'auto');
@@ -2038,106 +2063,100 @@ document.body.addEventListener('mousedown', function (event) {
     let rect;
     let hasSet = false;
     if (searchDetailsModalOpen) {
-        rect = $('#myModal11 .modal-content')[0].getBoundingClientRect();
+        rect = $('#searchDetailsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (detailsModalOpen) {
-        rect = $('#myModal2 .modal-content')[0].getBoundingClientRect();
+        rect = $('#challengeDetailsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualModalOpen) {
-        rect = $('#myModal .modal-content')[0].getBoundingClientRect();
+        rect = $('#manualTasksModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (rulesModalOpen) {
-        rect = $('#myModal4 .modal-content')[0].getBoundingClientRect();
+        rect = $('#rulesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (settingsModalOpen) {
-        rect = $('#myModal7 .modal-content')[0].getBoundingClientRect();
-        hasSet = true;
-    } else if (randomListModalOpen) {
-        rect = $('#myModal8 .modal-content')[0].getBoundingClientRect();
-        hasSet = true;
-    } else if (statsErrorModalOpen) {
-        rect = $('#myModal9 .modal-content')[0].getBoundingClientRect();
+        rect = $('#settingsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (searchModalOpen) {
-        rect = $('#myModal10 .modal-content')[0].getBoundingClientRect();
+        rect = $('#searchModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (addEquipmentModalOpen) {
-        rect = $('#myModal15 .modal-content')[0].getBoundingClientRect();
+        rect = $('#addEquipmentModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (bisUpgradesModalOpen) {
-        rect = $('#myModal50 .modal-content')[0].getBoundingClientRect();
+        rect = $('#slotUpgradeModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (highestModalOpen) {
-        rect = $('#myModal12 .modal-content')[0].getBoundingClientRect();
+        rect = $('#highestModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (questStepsModalOpen) {
-        rect = $('#myModal25 .modal-content')[0].getBoundingClientRect();
+        rect = $('#questStepsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (methodsModalOpen) {
-        rect = $('#myModal13 .modal-content')[0].getBoundingClientRect();
+        rect = $('#methodsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (slayerMasterInfoModalOpen) {
-        rect = $('#myModal32 .modal-content')[0].getBoundingClientRect();
+        rect = $('#slayerMasterInfoModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (doableClueStepsModalOpen) {
-        rect = $('#myModal33 .modal-content')[0].getBoundingClientRect();
+        rect = $('#doableClueStepsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (clueChunksModalOpen) {
-        rect = $('#myModal34 .modal-content')[0].getBoundingClientRect();
+        rect = $('#clueChunksModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (notesOpen) {
-        rect = $('#myModal35 .modal-content')[0].getBoundingClientRect();
+        rect = $('#chunkNotesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (highest2ModalOpen) {
-        rect = $('#myModal12_2 .modal-content')[0].getBoundingClientRect();
+        rect = $('#highest2Modal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (completeModalOpen) {
-        rect = $('#myModal14 .modal-content')[0].getBoundingClientRect();
+        rect = $('#manualCompleteModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (stickerModalOpen) {
-        rect = $('#myModal16 .modal-content')[0].getBoundingClientRect();
+        rect = $('#stickerModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (backlogSourcesModalOpen) {
-        rect = $('#myModal17 .modal-content')[0].getBoundingClientRect();
+        rect = $('#backlogSourcesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkHistoryModalOpen) {
-        rect = $('#myModal18 .modal-content')[0].getBoundingClientRect();
+        rect = $('#chunkHistoryModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (challengeAltsModalOpen) {
-        rect = $('#myModal19 .modal-content')[0].getBoundingClientRect();
+        rect = $('#altChallengesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualOuterModalOpen) {
-        rect = $('#myModal20 .modal-content')[0].getBoundingClientRect();
+        rect = $('#manuallyAddOuterModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (monsterModalOpen) {
-        rect = $('#myModal21 .modal-content')[0].getBoundingClientRect();
+        rect = $('#manuallyAddStuffModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (patchNotesOpen) {
-        rect = $('#myModal24 .modal-content')[0].getBoundingClientRect();
+        rect = $('#patchNotesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (friendsListModalOpen) {
-        rect = $('#myModal26 .modal-content')[0].getBoundingClientRect();
+        rect = $('#friendsListModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualAreasModalOpen) {
-        rect = $('#myModal31 .modal-content')[0].getBoundingClientRect();
+        rect = $('#manualAreasModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkSectionsModalOpen) {
-        rect = $('#myModal42 .modal-content')[0].getBoundingClientRect();
+        rect = $('#chunkSectionsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkSectionPickerModalOpen) {
-        rect = $('#myModal43 .modal-content')[0].getBoundingClientRect();
+        rect = $('#chunkSectionPickerModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (clipboardModalOpen) {
-        rect = $('#myModal38 .modal-content')[0].getBoundingClientRect();
+        rect = $('#miscellaneousActionsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (overlaysModalOpen) {
-        rect = $('#myModal39 .modal-content')[0].getBoundingClientRect();
+        rect = $('#mapOverlaysModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (customizeTopbarModalOpen) {
-        rect = $('#myModal46 .modal-content')[0].getBoundingClientRect();
+        rect = $('#customizeTopbarModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (userTasksListModalOpen) {
-        rect = $('#myModal48 .modal-content')[0].getBoundingClientRect();
+        rect = $('#userTasksListModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     }
     // ------
@@ -2154,106 +2173,100 @@ document.body.addEventListener('mouseup', function (event) {
     let rect;
     let hasSet = false;
     if (searchDetailsModalOpen) {
-        rect = $('#myModal11 .modal-content')[0].getBoundingClientRect();
+        rect = $('#searchDetailsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (detailsModalOpen) {
-        rect = $('#myModal2 .modal-content')[0].getBoundingClientRect();
+        rect = $('#challengeDetailsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualModalOpen) {
-        rect = $('#myModal .modal-content')[0].getBoundingClientRect();
+        rect = $('#manualTasksModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (rulesModalOpen) {
-        rect = $('#myModal4 .modal-content')[0].getBoundingClientRect();
+        rect = $('#rulesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (settingsModalOpen) {
-        rect = $('#myModal7 .modal-content')[0].getBoundingClientRect();
-        hasSet = true;
-    } else if (randomListModalOpen) {
-        rect = $('#myModal8 .modal-content')[0].getBoundingClientRect();
-        hasSet = true;
-    } else if (statsErrorModalOpen) {
-        rect = $('#myModal9 .modal-content')[0].getBoundingClientRect();
+        rect = $('#settingsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (searchModalOpen) {
-        rect = $('#myModal10 .modal-content')[0].getBoundingClientRect();
+        rect = $('#searchModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (addEquipmentModalOpen) {
-        rect = $('#myModal15 .modal-content')[0].getBoundingClientRect();
+        rect = $('#addEquipmentModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (bisUpgradesModalOpen) {
-        rect = $('#myModal50 .modal-content')[0].getBoundingClientRect();
+        rect = $('#slotUpgradeModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (highestModalOpen) {
-        rect = $('#myModal12 .modal-content')[0].getBoundingClientRect();
+        rect = $('#highestModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (questStepsModalOpen) {
-        rect = $('#myModal25 .modal-content')[0].getBoundingClientRect();
+        rect = $('#questStepsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (methodsModalOpen) {
-        rect = $('#myModal13 .modal-content')[0].getBoundingClientRect();
+        rect = $('#methodsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (slayerMasterInfoModalOpen) {
-        rect = $('#myModal32 .modal-content')[0].getBoundingClientRect();
+        rect = $('#slayerMasterInfoModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (doableClueStepsModalOpen) {
-        rect = $('#myModal33 .modal-content')[0].getBoundingClientRect();
+        rect = $('#doableClueStepsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (clueChunksModalOpen) {
-        rect = $('#myModal34 .modal-content')[0].getBoundingClientRect();
+        rect = $('#clueChunksModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (notesOpen) {
-        rect = $('#myModal35 .modal-content')[0].getBoundingClientRect();
+        rect = $('#chunkNotesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (highest2ModalOpen) {
-        rect = $('#myModal12_2 .modal-content')[0].getBoundingClientRect();
+        rect = $('#highest2Modal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (completeModalOpen) {
-        rect = $('#myModal14 .modal-content')[0].getBoundingClientRect();
+        rect = $('#manualCompleteModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (stickerModalOpen) {
-        rect = $('#myModal16 .modal-content')[0].getBoundingClientRect();
+        rect = $('#stickerModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (backlogSourcesModalOpen) {
-        rect = $('#myModal17 .modal-content')[0].getBoundingClientRect();
+        rect = $('#backlogSourcesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkHistoryModalOpen) {
-        rect = $('#myModal18 .modal-content')[0].getBoundingClientRect();
+        rect = $('#chunkHistoryModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (challengeAltsModalOpen) {
-        rect = $('#myModal19 .modal-content')[0].getBoundingClientRect();
+        rect = $('#altChallengesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualOuterModalOpen) {
-        rect = $('#myModal20 .modal-content')[0].getBoundingClientRect();
+        rect = $('#manuallyAddOuterModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (monsterModalOpen) {
-        rect = $('#myModal21 .modal-content')[0].getBoundingClientRect();
+        rect = $('#manuallyAddStuffModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (patchNotesOpen) {
-        rect = $('#myModal24 .modal-content')[0].getBoundingClientRect();
+        rect = $('#patchNotesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (friendsListModalOpen) {
-        rect = $('#myModal26 .modal-content')[0].getBoundingClientRect();
+        rect = $('#friendsListModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (manualAreasModalOpen) {
-        rect = $('#myModal31 .modal-content')[0].getBoundingClientRect();
+        rect = $('#manualAreasModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkSectionsModalOpen) {
-        rect = $('#myModal42 .modal-content')[0].getBoundingClientRect();
+        rect = $('#chunkSectionsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (chunkSectionPickerModalOpen) {
-        rect = $('#myModal43 .modal-content')[0].getBoundingClientRect();
+        rect = $('#chunkSectionPickerModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (clipboardModalOpen) {
-        rect = $('#myModal38 .modal-content')[0].getBoundingClientRect();
+        rect = $('#miscellaneousActionsModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (overlaysModalOpen) {
-        rect = $('#myModal39 .modal-content')[0].getBoundingClientRect();
+        rect = $('#mapOverlaysModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (customizeTopbarModalOpen) {
-        rect = $('#myModal46 .modal-content')[0].getBoundingClientRect();
+        rect = $('#customizeTopbarModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     } else if (userTasksListModalOpen) {
-        rect = $('#myModal48 .modal-content')[0].getBoundingClientRect();
+        rect = $('#userTasksListModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
     }
     // ------
@@ -2268,8 +2281,6 @@ document.body.addEventListener('mouseup', function (event) {
         detailsModalOpen && !searchDetailsModalOpen && closeChallengeDetails();
         rulesModalOpen && !presetWarningModalOpen && closeRules();
         settingsModalOpen && !mapIntroOpen && closeSettings();
-        randomListModalOpen && closeRandomList();
-        statsErrorModalOpen && closeStatsError();
         searchDetailsModalOpen && closeSearchDetails();
         completeModalOpen && closeComplete();
         addEquipmentModalOpen && closeAddEquipment();
@@ -2288,7 +2299,7 @@ document.body.addEventListener('mouseup', function (event) {
         clueChunksModalOpen && closeClueChunks();
         clipboardModalOpen && closeClipboard();
         overlaysModalOpen && closeOverlays();
-        userTasksListModalOpen && closeUserTasksList();
+        userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && closeUserTasksList();
         notesOpen && !notesEditing && closeChunkNotes();
         customizeTopbarModalOpen && closeCustomizeTopbar();
         rect = null;
@@ -2307,7 +2318,7 @@ let handleMouseDown = function(e) {
         removeCanvasDarkness = true;
         return;
     }
-    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || userTasksModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || e.target.nodeName.toLowerCase() === 'select' || e.target.nodeName.toLowerCase() === 'option') {
+    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || e.target.nodeName.toLowerCase() === 'select' || e.target.nodeName.toLowerCase() === 'option') {
         drawCanvas();
         return;
     }
@@ -2333,7 +2344,7 @@ let handleMouseDown = function(e) {
 
 // Handles mouse move event
 let handleMouseMove = function(e) {
-    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || userTasksModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen) {
+    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || pickChunkWarningModalOpen || roll2ChunkWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen) {
         drawCanvas();
         return;
     }
@@ -2516,7 +2527,7 @@ let handleKeyUp = function(e) {
 
 // Handles the mouse up event
 let handleMouseUp = function(e) {
-    if ((e.button !== 0 && e.button !== 2 && e.type !== 'touchend') || (onMobile && e.type !== 'touchend') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || userTasksModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen) {
+    if ((e.button !== 0 && e.button !== 2 && e.type !== 'touchend') || (onMobile && e.type !== 'touchend') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen) {
         drawCanvas();
         return;
     }
@@ -2796,13 +2807,14 @@ let sortSelectedChunks = function() {
 
 // Opens the roll chunk modal
 let openRollChunkCanvas = async function(el, rand, sNum, rand2, sNum2, isUnpick) {
+    modal.generate('fancyRollModal');
     isPreloading = true;
-    $('#myModal23, .roll-chunk-spinner').show();
-    $('#myModal23 .modal-content').hide();
+    $('#fancyRollModal, .roll-chunk-spinner').show();
+    $('#fancyRollModal .modal-content').hide();
     await preloadChunkImages(el);
     isPreloading = false;
     $('.roll-chunk-spinner').hide();
-    $('#myModal23 .modal-content').show();
+    $('#fancyRollModal .modal-content').show();
     let pickText;
     let roll2Text;
     let rolling2 = typeof rand2 !== 'undefined' && typeof sNum2 !== 'undefined';
@@ -2949,7 +2961,7 @@ let takeMeToChunkCanvas = function() {
     $('.roll-chunk-window-outer2').remove();
     $('.roll-chunk-window-outer').css('left', '');
     $('#submit-roll-chunk-button').hide();
-    $('#myModal23').hide();
+    $('#fancyRollModal').remove();
 }
 
 // Sets the recent roll in data
@@ -2993,7 +3005,7 @@ let setRecentRoll = function(chunkId) {
 
 // Pick button: picks a random chunk from selected/potential
 let pickCanvas = function(both, override) {
-    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || userTasksModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways']))) {
+    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways']))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -3169,7 +3181,7 @@ let pickCanvas = function(both, override) {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 let roll2Canvas = function(override) {
-    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || userTasksModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (((!tempChunks['selected'] || Object.keys(tempChunks['selected']).length < 1) && !isPicking) || ((!tempChunks['potential'] || Object.keys(tempChunks['potential']).length < 1) && isPicking)))) {
+    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (((!tempChunks['selected'] || Object.keys(tempChunks['selected']).length < 1) && !isPicking) || ((!tempChunks['potential'] || Object.keys(tempChunks['potential']).length < 1) && isPicking)))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -3235,7 +3247,7 @@ let roll2Canvas = function(override) {
 
 // Unpicks a random unlocked chunk
 let unpickCanvas = function() {
-    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || randomModalOpen || userTasksModalOpen || randomListModalOpen || statsErrorModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 1))) {
+    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 1))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -3329,7 +3341,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.8.25");
+        myWorker = new Worker("./worker.js?v=6.9.0");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3566,30 +3578,30 @@ let redirectPanelCanvas = function(name) {
 }
 
 // Highlights outside borders of unlocked areas
-let chunkBordersCanvas = function() {
-    ctx.beginPath();
-    ctx.strokeStyle = settings['unlockedBorderColor'] ? settings['unlockedBorderColor'] : '#FF0000';
-    ctx.lineWidth = 3;
+let chunkBordersCanvas = function(ctxIn) {
+    ctxIn.beginPath();
+    ctxIn.strokeStyle = settings['unlockedBorderColor'] ? settings['unlockedBorderColor'] : '#FF0000';
+    ctxIn.lineWidth = 3;
     !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach((chunkId) => {
         chunkCoords = convertToXY(chunkId);
         if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) + 1)) {
-            ctx.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
-            ctx.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
+            ctxIn.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
         }
         if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) - 1)) {
-            ctx.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
-            ctx.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
+            ctxIn.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
         }
         if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) + skip + rowSize)) {
-            ctx.moveTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
-            ctx.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
+            ctxIn.moveTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
         }
         if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) - skip - rowSize)) {
-            ctx.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
-            ctx.lineTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
+            ctxIn.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * ((chunkCoords.y + 1) * imgH / (fullSize / rowSize))));
         }
     });
-    ctx.stroke();
+    ctxIn.stroke();
 }
 
 // Loaded when page is ready
@@ -3633,8 +3645,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.8.25");
-let myWorker2 = new Worker("./worker.js?v=6.8.25");
+let myWorker = new Worker("./worker.js?v=6.9.0");
+let myWorker2 = new Worker("./worker.js?v=6.9.0");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -4044,14 +4056,6 @@ $(document).ready(function() {
         }
     });
 
-    $('.username').on('input', function(e) {
-        if (e.target.value.length < 1) {
-            $('#highscoreoptin').prop('disabled', true);
-        } else {
-            $('#highscoreoptin').prop('disabled', false);
-        }
-    });
-
     $('.mid').on('keypress', function(e) {
         let keycode = (e.keyCode ? e.keyCode : e.which);
         if (keycode == '13') {
@@ -4102,13 +4106,6 @@ $(document).ready(function() {
         }
     });
 
-    $('.username').on('keypress', function(e) {
-        let keycode = (e.keyCode ? e.keyCode : e.which);
-        if (keycode == '13' && !$('#highscoreoptin').prop('disabled')) {
-            $('#highscoreoptin').click();
-        }
-    });
-
     $('#searchPlayerMaps').on('keypress', function(e) {
         let keycode = (e.keyCode ? e.keyCode : e.which);
         if (keycode == '13' && !$('#searchPlayerMapsButton').prop('disabled')) {
@@ -4121,38 +4118,11 @@ $(document).ready(function() {
     }, function() {
         $(this).removeClass('fa-unlock-alt').addClass('fa-lock');
     });
-
-    $('.mid-friend').on('input', function(e) {
-        if ((!(/^[a-zA-Z]+$/).test(e.target.value) && e.target.value !== '') || e.target.value.length > 4) {
-            $(this).val(prevValueMidFriend);
-        } else {
-            $(this).val(e.target.value.toUpperCase());
-            prevValueMidFriend = e.target.value;
-            if (e.target.value.length === 3 || e.target.value.length === 4) {
-                midFriendGood = true;
-                checkIfGoodFriend();
-            } else {
-                midFriendGood = false;
-                $('#submit-friend-button').prop('disabled', true);
-            }
-        }
-    });
-
-    $('.name-friend').on('input', function(e) {
-        prevValueMidFriend = e.target.value;
-        if (e.target.value.length > 0) {
-            nameFriendGood = true;
-            checkIfGoodFriend();
-        } else {
-            nameFriendGood = false;
-            $('#submit-friend-button').prop('disabled', true);
-        }
-    });
 });
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 $('body').on('touchstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !userTasksModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !exitSandboxWarningModalOpen && !mobileMenuOpen && !mobileTasksOpen && !mobileChunkMenuOpen && !customizeTopbarModalOpen && !questChunksModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !exitSandboxWarningModalOpen && !mobileMenuOpen && !mobileTasksOpen && !mobileChunkMenuOpen && !customizeTopbarModalOpen && !questChunksModalOpen) {
         clickX = ev.changedTouches[0].pageX;
         clickY = ev.changedTouches[0].pageY;
     }
@@ -4160,7 +4130,7 @@ $('body').on('touchstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 $('body').on('touchend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !userTasksModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !exitSandboxWarningModalOpen && !mobileMenuOpen && !mobileTasksOpen && !mobileChunkMenuOpen && !customizeTopbarModalOpen && !questChunksModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !exitSandboxWarningModalOpen && !mobileMenuOpen && !mobileTasksOpen && !mobileChunkMenuOpen && !customizeTopbarModalOpen && !questChunksModalOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -4214,8 +4184,6 @@ $(document).on({
             if (searchModalOpen && !searchDetailsModalOpen && !detailsModalOpen) { closeSearch(); modalJustClosed = true; }
             if (rulesModalOpen && !presetWarningModalOpen) { closeRules(); modalJustClosed = true; }
             if (settingsModalOpen && !mapIntroOpen) { closeSettings(); modalJustClosed = true; }
-            if (randomListModalOpen) { closeRandomList(); modalJustClosed = true; }
-            if (statsErrorModalOpen) { closeStatsError(); modalJustClosed = true; }
             if (highestModalOpen && !addEquipmentModalOpen && !searchDetailsModalOpen && !detailsModalOpen && !bisUpgradesModalOpen) { closeHighest(); modalJustClosed = true; }
             if (detailsModalOpen && !searchDetailsModalOpen) { closeChallengeDetails(); modalJustClosed = true; }
             if (searchDetailsModalOpen) { closeSearchDetails(); modalJustClosed = true; }
@@ -4241,10 +4209,10 @@ $(document).on({
             if (customizeTopbarModalOpen) { closeCustomizeTopbar(); modalJustClosed = true; }
             if (userTasksListModalOpen) { closeUserTasksList(); modalJustClosed = true; }
 
-            if (testMode && !modalJustClosed && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !userTasksModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !questChunksModalOpen) {
+            if (testMode && !modalJustClosed && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !questChunksModalOpen) {
                 warnExitSandbox();
             }
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !randomModalOpen && !userTasksModalOpen && !randomListModalOpen && !statsErrorModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !questChunksModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !questChunksModalOpen) {
             e.preventDefault();
         }
     }
@@ -4292,6 +4260,10 @@ let exportFunc = function(type) {
         calcCurrentChallengesCanvas(true, true);
     } else if (type === 'assign' && (testMode || !(viewOnly || inEntry || locked))) {
         selectAllNeighborsCanvas();
+    } else if (type === 'fullmap') {
+        $('#fullmap-clipboard-button').html('<i class="spin fa-solid fa-spinner"></i>');
+        createScreenshot();
+        return;
     }
     closeClipboard();
 }
@@ -4403,64 +4375,6 @@ let exitImportMenu = function() {
     }, 500);
 }
 
-// Opens the highscores menu
-let highscoreFunc = function() {
-    $('.username').focus();
-    highscoreMenuOpen = true;
-    $('#highscore-menu').css('opacity', 1).show();
-    settingsOpen = false;
-    $('.settings-menu').hide();
-    $('.settings').css({ 'color': 'var(--colorText)' });
-}
-
-// Sets username for the highscores
-let highscoreOptIn = function() {
-    $('#highscoreoptin').prop('disabled', true).html('<i class="spin fa-solid fa-spinner"></i>');
-    let oldUsername = userName;
-    userName = $('.username').val();
-    databaseRef.child('highscores/players').once('value', function(snap) {
-        if (snap.val().hasOwnProperty(userName.toLowerCase())) {
-            $('#myModal9').show();
-            $('#highscoreoptin').prop('disabled', true).text('Save Username');
-        } else {
-            setTimeout(function() {
-                setUsername(oldUsername);
-                $('.highscoretoggle').html('Change chunk stats username<i class="pic fa-solid fa-trophy"></i>');
-                $('#highscore-menu').css({ 'opacity': 0 }).hide();
-                $('#highscore-menu2').css({ 'opacity': 1 }).show();
-                $('#populateButton').attr({ 'href': 'https://chunk-stats.web.app/user/' + userName });
-                setTimeout(function() {
-                    $('#highscore-menu').css('opacity', 1);
-                    $('#highscoreoptin').prop('disabled', true).text('Save Username');
-                    $('.username').val('');
-                }, 500);
-            }, 1000);
-        }
-    });
-}
-
-// Exits the highscores menu
-let exitHighscoreMenu = function() {
-    $('#highscore-menu').css({ 'opacity': 0 }).hide();
-    setTimeout(function() {
-        $('#highscore-menu').css('opacity', 1);
-        $('#highscoreoptin').prop('disabled', true).text('Save Username');
-        $('.username').val('');
-        highscoreMenuOpen = false;
-    }, 500);
-}
-
-// Exits the highscores menu2
-let exitHighscoreMenu2 = function() {
-    $('#highscore-menu2').css({ 'opacity': 0 }).hide();
-    setTimeout(function() {
-        $('#highscore-menu2').css('opacity', 1);
-        $('#highscoreoptin').prop('disabled', true).text('Save Username');
-        $('.username').val('');
-        highscoreMenuOpen = false;
-    }, 500);
-}
-
 // Opens the help menu
 let helpFunc = function() {
     helpMenuOpen = true;
@@ -4478,13 +4392,13 @@ let dismissHelp = function() {
 // Exits the pick warning window
 let cancelPickWarning = function() {
     pickChunkWarningModalOpen = false;
-    $('#myModal41').hide();
+    $('#rollWarningModal').remove();
 }
 
 // Exits the roll 2 warning window
 let cancelRoll2Warning = function() {
     roll2ChunkWarningModalOpen = false;
-    $('#myModal44').hide();
+    $('#roll2WarningModal').remove();
 }
 
 // Opens the patch notes
@@ -4492,16 +4406,17 @@ let openPatchNotesModal = function(fromClick) {
     if (hasUpdate && fromClick) {
         location.reload();
     } else if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('patchNotesModal');
         onMobile && hideMobileMenu();
         patchNotesOpen = true;
-        $('#myModal24').show();
+        $('#patchNotesModal').show();
         modalOutsideTime = Date.now();
     }
 }
 
 // Exits the patch notes
 let dismissPatchNotes = function() {
-    $('#myModal24').hide();
+    $('#patchNotesModal').remove();
     patchNotesOpen = false;
     patchNotesOpenSoon = false;
     !locked && setData();
@@ -4510,12 +4425,13 @@ let dismissPatchNotes = function() {
 // Opens the chunk notes modal
 let openChunkNotesModal = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('chunkNotesModal');
         onMobile && hideMobileMenu();
         notesOpen = true;
         $('#save-chunk-notes-button').text((signedIn || testMode) ? (notesEditing ? 'Save' : 'Edit') : 'Exit');
         $('#chunk-notes-data textarea').attr('disabled', !(signedIn || testMode)).val((!!chunkNotes && Object.keys(chunkNotes).length > 0) ? chunkNotes : "").hide();
         $('#chunk-notes-markdown-text').html(DOMPurify.sanitize(marked.parse(chunkNotes || '')));
-        $('#myModal35').show();
+        $('#chunkNotesModal').show();
         modalOutsideTime = Date.now();
         document.getElementById('chunk-notes-data').scrollTop = 0;
     }
@@ -4524,19 +4440,19 @@ let openChunkNotesModal = function() {
 // Saves the chunk notes
 let saveChunkNotes = function() {
     if (!(signedIn || testMode)) {
-        $('#myModal35').hide();
+        $('#chunkNotesModal').remove();
         notesOpen = false;
         !locked && setData();
     } else {
         notesEditing = !notesEditing;
         if (notesEditing) {
             $('#save-chunk-notes-button').text('Save');
-            $('#myModal35 .manual-close').hide();
+            $('#chunkNotesModal .manual-close').hide();
             $('#chunk-notes-data textarea').show();
             $('#chunk-notes-markdown-text').hide();
         } else {
             $('#save-chunk-notes-button').text('Edit');
-            $('#myModal35 .manual-close').show();
+            $('#chunkNotesModal .manual-close').show();
             $('#chunk-notes-data textarea').hide();
             $('#chunk-notes-markdown-text').show();
             chunkNotes = $('#chunk-notes-data textarea').val() || '';
@@ -4549,16 +4465,17 @@ let saveChunkNotes = function() {
 
 // Opens the new chunk tasks modal
 let openNewTasksModal = function(data, expandFuture) {
+    modal.generate('newTasksModal');
     newTasksOpen = true;
     $('.new-tasks-title').text(expandFuture ? 'Potential Chunk Tasks' : 'New Chunk Tasks');
     $('.new-tasks-data').html(data);
-    $('#myModal36').show();
+    $('#newTasksModal').show();
     modalOutsideTime = Date.now();
 }
 
 // Closes the new chunk tasks modal
 let closeNewTasks = function() {
-    $('#myModal36').hide();
+    $('#newTasksModal').remove();
     newTasksOpen = false;
     modalOutsideTime = Date.now();
 }
@@ -4608,8 +4525,9 @@ let openXpRewardModal = function(skill, line, xpArr, num) {
             }
             setData();
             toggleHiddenTasks(settings['hideChecked'] && actuallyHideChecked);
-            $('#myModal30').hide();
+            $('#xpRewardModal').remove();
         } else {
+            modal.generate('xpRewardModal');
             if (num === 0) {
                 xpRewardOpen = true;
                 tempXpChoices = [];
@@ -4634,7 +4552,7 @@ let openXpRewardModal = function(skill, line, xpArr, num) {
                     $(this).css({'left': -$(this).width() / 2, 'top': -$(this).height() / 2});
                 });
             });
-            $('#myModal30').show();
+            $('#xpRewardModal').show();
         }
     }
 }
@@ -4673,23 +4591,24 @@ let closeXpRewardModal = function() {
     xpRewardOpen = false;
     tempXpArr = null;
     tempSkillChoice = null;
-    $('#myModal30').hide();
+    $('#xpRewardModal').remove();
 }
 
 // Opens the map intro modal
 let openMapIntroModal = function(justStartingChunk) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('introModal');
         mapIntroOpen = true;
         $('.intro-data-2').hide();
         $('#cancel-intro-button').hide();
-        $('#myModal29').show();
+        $('#introModal').show();
         justStartingChunk && nextIntroPage(justStartingChunk);
     }
 }
 
 // Exits the map intro modal
 let closeMapIntroModal = function() {
-    $('#myModal29').hide();
+    $('#introModal').remove();
     mapIntroOpen = false;
     mapIntroOpenSoon = false;
     settings['mapIntro'] = true;
@@ -5232,7 +5151,7 @@ let enableTestMode = async function(close, fromConfirm) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         onMobile && hideMobileMenu();
         if (fromConfirm) {
-            $('#myModal40').hide();
+            $('#exitSandboxWarningModal').remove();
             exitSandboxWarningModalOpen = false;
             if (close) {
                 return;
@@ -6663,7 +6582,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.8.25");
+    myWorker2 = new Worker("./worker.js?v=6.9.0");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -7193,12 +7112,13 @@ let setCalculating = function(panelClass, useOld) {
 // Opens the manual areas modal
 let openManualAreas = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('manualAreasModal');
         manualAreasModalOpen = true;
         $('#searchManualAreas').val('');
         filterByUnlockedManualAreas = false;
         $('.changeManualAreasFilterBy').prop('checked', false);
         searchManualAreas();
-        $('#myModal31').show();
+        $('#manualAreasModal').show();
         modalOutsideTime = Date.now();
         $('#searchManualAreas').focus();
     }
@@ -7242,10 +7162,11 @@ let setManualArea = function(area, value) {
 // Opens the chunk sections modal
 let openChunkSections = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('chunkSectionsModal');
         chunkSectionsModalOpen = true;
         $('#searchChunkSections').val('');
         searchChunkSections();
-        $('#myModal42').show();
+        $('#chunkSectionsModal').show();
         modalOutsideTime = Date.now();
         $('#searchChunkSections').focus();
         document.getElementById('chunk-sections-data').scrollTop = 0;
@@ -7340,6 +7261,7 @@ let resetSectionVars = async function(chunkId) {
 // Opens the chunk section picker modal
 let openChunkSectionPicker = async function(chunkId, calculateAfter) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('chunkSectionPickerModal');
         await resetSectionVars(chunkId);
         chunkSectionPickerModalOpen = true;
         chunkSectionCalculateAfter = calculateAfter;
@@ -7369,7 +7291,7 @@ let openChunkSectionPicker = async function(chunkId, calculateAfter) {
         });
         $('#chunk-section-picker-selectall-btn').prop('checked', Object.keys(selectedSections).filter(num => selectedSections[num]).length === Object.keys(sectionUrls).length);
         $('.section-help').html(`${tooltip.generate('sectionHelpTooltip', '<i class="fa-solid fa-question-circle question-help"></i>', 'sectionHelpTooltip', onMobile ? 'bottom' : 'right', '350px')}`);
-        $('#myModal43').show();
+        $('#chunkSectionPickerModal').show();
         modalOutsideTime = Date.now();
     }
 }
@@ -7568,9 +7490,10 @@ let selectTopbarChoice = function(index) {
 
 // Opens the customize topbar modal
 let openCustomizeTopbar = function() {
+    modal.generate('customizeTopbarModal');
     $('#cutomize-topbar-data-inner').empty();
     customizeTopbarModalOpen = true;
-    $('#myModal46').show();
+    $('#customizeTopbarModal').show();
     for (let i = 0; i < 8; i++) {
         let tempSelect;
         if (!topbarChoices.includes(topbarSelection[i])) {
@@ -7635,6 +7558,7 @@ let shuffle = function(array) {
 // Opens the quest steps modal
 let openQuestSteps = function(skill, challenge) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('questStepsModal');
         onMobile && hideMobileMenu();
         challenge = decodeQueryParam(challenge);
         let tier = null;
@@ -7689,7 +7613,7 @@ let openQuestSteps = function(skill, challenge) {
         } else {
             $('.quest-steps-data').removeClass('combat-achievements');
         }
-        $('#myModal25').show();
+        $('#questStepsModal').show();
         modalOutsideTime = Date.now();
         if (tier !== null) {
             !!$('.quest-steps-data .diary-start')[0] && $('.quest-steps-data .diary-start')[0].scrollIntoView({
@@ -7707,6 +7631,7 @@ let openQuestSteps = function(skill, challenge) {
 
 // Opens the friends list modal
 let openFriendsList = function() {
+    modal.generate('friendsListModal');
     onMobile && hideMobileMenu();
     friendsListModalOpen = true;
     $('.friends-list-data').empty();
@@ -7717,7 +7642,7 @@ let openFriendsList = function() {
     Object.keys(friendsAlt).sort((a, b) => { return friendsAlt[a].toLowerCase().localeCompare(friendsAlt[b].toLowerCase()) }).forEach((friendMid) => {
         $('.friends-list-data').append(`<div class='noscroll friend-item'><a class='noscroll link' href='https://source-chunk.github.io/chunk-picker-rs3/?${friendMid.toLowerCase()}-view' target='_blank'>${DOMPurify.sanitize(friendsAlt[friendMid], { ALLOWED_TAGS: [], ALLOWED_ATTR: [] })} (${friendMid})</a><i class="friend-item-x fa-solid fa-times noscrollhard" onclick="removeFriend('${friendMid}', '${friendsAlt[friendMid]}')"></i></div>`);
     });
-    $('#myModal26').show();
+    $('#friendsListModal').show();
     modalOutsideTime = Date.now();
     document.getElementById('friends-list-data').scrollTop = 0;
     settingsOpen && settingsMenu();
@@ -7725,14 +7650,42 @@ let openFriendsList = function() {
 
 // Opens the friends add modal
 let openFriendsListAdd = function() {
+    modal.generate('addFriendMapModal');
     friendsAddModalOpen = true;
     $('#submit-friend-button').prop('disabled', true);
     $('.mid-friend').val('');
     $('.name-friend').val('');
     $(".altsite-friend-checkbox").prop("checked", false);
-    $('#myModal27').show();
+    $('#addFriendMapModal').show();
     modalOutsideTime = Date.now();
     $('.mid-friend').focus();
+
+    $('.mid-friend').on('input', function(e) {
+        if ((!(/^[a-zA-Z]+$/).test(e.target.value) && e.target.value !== '') || e.target.value.length > 4) {
+            $(this).val(prevValueMidFriend);
+        } else {
+            $(this).val(e.target.value.toUpperCase());
+            prevValueMidFriend = e.target.value;
+            if (e.target.value.length === 3 || e.target.value.length === 4) {
+                midFriendGood = true;
+                checkIfGoodFriend();
+            } else {
+                midFriendGood = false;
+                $('#submit-friend-button').prop('disabled', true);
+            }
+        }
+    });
+
+    $('.name-friend').on('input', function(e) {
+        prevValueMidFriend = e.target.value;
+        if (e.target.value.length > 0) {
+            nameFriendGood = true;
+            checkIfGoodFriend();
+        } else {
+            nameFriendGood = false;
+            $('#submit-friend-button').prop('disabled', true);
+        }
+    });
 }
 
 let removeFriend = function(friendMid, friendName) {
@@ -7797,6 +7750,7 @@ let showSlayerLockOnMap = function() {
 
 // Opens the add locked construction chunk modal
 let openConstructionLocked = function() {
+    modal.generate('constructionLockModal');
     constructionLockedModalOpen = true;
     $('#construction-locked-input').val('');
     $('#construction-locked-data').html('<div><div class="construction-locked-cancel" onclick="addConstructionLocked(true)">Cancel</div><div class="construction-locked-proceed disabled" onclick="addConstructionLocked()">Lock Mahogany Homes</div></div>');
@@ -7805,7 +7759,7 @@ let openConstructionLocked = function() {
     Object.keys(constructionChunks).forEach((chunk) => {
         $('#construction-locked-dropdown').append(`<option value="${chunk}">${constructionChunks[chunk]} (${chunk})</option>`);
     });
-    $('#myModal37').show();
+    $('#constructionLockModal').show();
 }
 
 // Triggers onchange of construction locked selection to validate submit button
@@ -7821,7 +7775,7 @@ let constructionLockedChange = function() {
 // Submits picked construction chunk/level if one is chosen, then closes modal either way
 let addConstructionLocked = function(close) {
     if (close) {
-        $('#myModal37').hide();
+        $('#constructionLockModal').remove();
         constructionLockedModalOpen = false;
     } else {
         let chunk = $('#construction-locked-dropdown').val();
@@ -7833,7 +7787,7 @@ let addConstructionLocked = function(close) {
                 setData();
                 openHighest2();
             }
-            $('#myModal37').hide();
+            $('#constructionLockModal').remove();
             constructionLockedModalOpen = false;
         }
     }
@@ -7841,18 +7795,20 @@ let addConstructionLocked = function(close) {
 
 // Opens the outer manual modal
 let openManualAddOuter = function() {
+    modal.generate('manuallyAddOuterModal');
     onMobile && hideMobileMenu();
     manualOuterModalOpen = true;
-    $('#myModal20').show();
+    $('#manuallyAddOuterModal').show();
     modalOutsideTime = Date.now();
 }
 
 // Opens the manual add monsters modal
 let openMonstersAdd = function() {
+    modal.generate('manuallyAddStuffModal');
     manualOuterModalOpen = false;
-    $('#myModal20').hide();
+    $('#manuallyAddOuterModal').remove();
     monsterModalOpen = true;
-    $('#myModal21').show();
+    $('#manuallyAddStuffModal').show();
     modalOutsideTime = Date.now();
     $('#searchMonsters').val('').focus();
     searchMonsters();
@@ -7989,7 +7945,8 @@ let selectManualItemPrimary = function(type, item, num) {
 // Opens the manual add tasks modal
 let openManualAdd = function() {
     manualOuterModalOpen = false;
-    $('#myModal20').hide();
+    modal.generate('manualTasksModal');
+    $('#manuallyAddOuterModal').remove();
     fullChallengeArr = {};
     Object.keys(chunkInfo['challenges']).forEach((skill) => {
         if (skill !== 'Nonskill' && skill !== 'BiS') {
@@ -8002,7 +7959,7 @@ let openManualAdd = function() {
         }
     });
     manualModalOpen = true;
-    $('#myModal').show();
+    $('#manualTasksModal').show();
     modalOutsideTime = Date.now();
     $('#searchManual').val('').focus();
     $('.challenge-title span input').prop('checked', filterByChecked);
@@ -8058,8 +8015,9 @@ let addManualTask = function(challenge) {
 
 // Opens the manual complete tasks modal
 let openManualComplete = function() {
+    modal.generate('manualCompleteModal');
     completeModalOpen = true;
-    $('#myModal14').show();
+    $('#manualCompleteModal').show();
     modalOutsideTime = Date.now();
 }
 
@@ -8213,8 +8171,9 @@ let loadPoolsData = function() {
 
 // Opens the user-inputted tasks modal
 let openUserTasks = function() {
+    modal.generate('userTaskModal');
     manualOuterModalOpen = false;
-    $('#myModal20').hide();
+    $('#manuallyAddOuterModal').remove();
     userTasksModalOpen = true;
     $('#usertasks-data').html('<span class="usertasks-list" onclick="openUserTasksList()">Show Added Tasks</span><div><div class="usertasks-cancel" onclick="addUserTask(true)">Cancel</div><div class="usertasks-proceed disabled" onclick="addUserTask()">Add task</div></div>');
     $('#usertasks-skill-dropdown').empty().append(`<option value='${'Select a skill'}'>${'Select a skill'}</option>`);
@@ -8224,24 +8183,26 @@ let openUserTasks = function() {
     });
     $('#usertasks-level-input > input').val(1);
     $('#usertasks-name-input > input').val('');
-    $('#myModal47').show();
+    $('#userTaskModal').show();
     modalOutsideTime = Date.now();
 }
 
 // Opens the usertasks list modal
 let openUserTasksList = function() {
+    modal.generate('userTasksListModal');
     userTasksListModalOpen = true;
     showUserTasksList();
-    $('#myModal48').show();
+    $('#userTasksListModal').show();
     modalOutsideTime = Date.now();
 }
 
 // Shows confirmation modal for deleting usertask
 let showDeleteUserTaskConfirmation = function(challenge, skill) {
+    modal.generate('deleteUserTaskWarningModal');
     userTaskDeleteConfirmationModalOpen = true;
     userTaskSavedName = decodeQueryParam(challenge);
     userTaskSavedSkill = skill;
-    $('#myModal49').show();
+    $('#deleteUserTaskWarningModal').show();
     modalOutsideTime = Date.now();
 }
 
@@ -8251,7 +8212,7 @@ let cancelUserTaskDelete = function() {
     userTaskSavedName = null;
     userTaskSavedSkill = null;
     modalOutsideTime = Date.now();
-    $('#myModal49').hide();
+    $('#deleteUserTaskWarningModal').remove();
 }
 
 // Deletes the saved usertask
@@ -8266,7 +8227,7 @@ let deleteUserTask = function() {
     userTaskSavedName = null;
     userTaskSavedSkill = null;
     modalOutsideTime = Date.now();
-    $('#myModal49').hide();
+    $('#deleteUserTaskWarningModal').remove();
     showUserTasksList();
     calcCurrentChallengesCanvas(true);
     setData();
@@ -8320,7 +8281,7 @@ let checkUserTasksValid = function() {
 // Submits user task if added, then closes modal either way
 let addUserTask = function(close) {
     if (close) {
-        $('#myModal47').hide();
+        $('#userTaskModal').remove();
         userTasksModalOpen = false;
     } else {
         if ($('.usertasks-proceed').hasClass('disabled')) {
@@ -8351,7 +8312,7 @@ let addUserTask = function(close) {
                 calcCurrentChallengesCanvas(true);
                 setData();
             }
-            $('#myModal47').hide();
+            $('#userTaskModal').remove();
             userTasksModalOpen = false;
         }
     }
@@ -8378,9 +8339,10 @@ let loadUserTasks = function() {
 
 // Opens the clipboard modal
 let openClipboard = function() {
+    modal.generate('miscellaneousActionsModal');
     onMobile && hideMobileMenu();
     clipboardModalOpen = true;
-    $('#myModal38').show();
+    $('#miscellaneousActionsModal').show();
     settingsOpen = false;
     $('.settings-menu').hide();
     $('.settings').css({ 'color': 'var(--colorText)' });
@@ -8391,10 +8353,11 @@ let openClipboard = function() {
 // Opens the search within my chunks modal
 let openSearch = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('searchModal');
         onMobile && hideMobileMenu();
         searchModalOpen = true;
         $('.help2').html(`${tooltip.generate('searchTermsTooltips', '<span>~</span>', 'searchTermsTooltips', onMobile ? 'bottom' : 'right')}`);
-        $('#myModal10').show();
+        $('#searchModal').show();
         modalOutsideTime = Date.now();
         $('#searchChunks').val('').focus();
         searchWithinChunks();
@@ -8506,6 +8469,7 @@ let findFraction = function(fraction) {
 
 // Opens the search details modal
 let openSearchDetails = function(category, name, prevCategory, prevName) {
+    modal.generate('searchDetailsModal');
     searchDetailsParams = [category, name, prevCategory, prevName];
     name = decodeQueryParam(name);
     searchDetailsModalOpen = true;
@@ -8625,7 +8589,7 @@ let openSearchDetails = function(category, name, prevCategory, prevName) {
     formattedSources.sort((a, b) => (rankings[b]['shouldRank'] - rankings[a]['shouldRank'] !== 0) ? (rankings[b]['shouldRank'] - rankings[a]['shouldRank']) : (searchDetailSortBy === 'Alphabetical' ? (rankings[a]['name'].localeCompare(rankings[b]['name'])) : (rankings[b]['droprate'] - rankings[a]['droprate']))).forEach((formattedSource) => {
         $('.searchdetails-data').append(`<div class="noscroll results">${formattedSource.replaceAll(/\|~/g, '').replaceAll(/~\|/g, '').replaceAll(/\*/g, '').replaceAll('\~\\', '~').replaceAll('\|\\', '|')}</div>`);
     });
-    $('#myModal11').show();
+    $('#searchDetailsModal').show();
     modalOutsideTime = Date.now();
     document.getElementById('searchdetails-data').scrollTop = 0;
 }
@@ -8640,6 +8604,7 @@ let searchDetailsSorterChange = function() {
 let openHighest = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         onMobile && hideMobileMenu();
+        modal.generate('highestModal');
         highestModalOpen = true;
         let combatStyles = [];
         combatStyles.push('Melee');
@@ -8709,7 +8674,7 @@ let openHighest = function() {
         $('.style-body').hide();
         $(`.${highestTab}-button`).addClass('active-tab');
         $(`.${highestTab}-body`).show();
-        $('#myModal12').show();
+        $('#highestModal').show();
         modalOutsideTime = Date.now();
         document.getElementById('highest-data').scrollTop = 0;
     }
@@ -8724,6 +8689,7 @@ let changeBiSFilterBy = function() {
 // Opens the bis upgrades modal
 let openBisUpgrades = function(key) {
     bisUpgradesModalOpen = true;
+    modal.generate('slotUpgradeModal');
     $('.bis-upgrades-data').empty();
     $('.bis-upgrades-slot-name').text(`[${key.replaceAll('_', ' ').replaceAll('-', ' ')}]`);
     let slot = key.split('-')[1];
@@ -8731,7 +8697,7 @@ let openBisUpgrades = function(key) {
         $(`.bis-upgrades-data`).append(`<div class='noscroll row'><span class='noscroll item-pic'><img class='noscroll slot-icon' src='./resources/Clean_slot.png' title="${equip}" /><img class='noscroll' src="./resources/equipment_icons/${equip.replaceAll(/ /g, '_')}.png" onError='this.onerror=null;this.src="./resources/${slot}_slot.png"' title="${equip}" /></span><span class='noscroll slot-text'><a class='link' href="${"https://oldschool.runescape.wiki/w/" + encodeURI(equip)}" target="_blank">${equip}</a></span><span class='double-search-icon' onclick='openSearchDetails("items", "${encodeRFC5987ValueChars(equip)}")'><i class="fa-solid fa-search"></i></span></div>`);
         (i < (bisUpgrades[key].length - 1)) && $(`.bis-upgrades-data`).append(`<div class='noscroll arrow-row' title='Upgrades to'><i class="fa-solid fa-angles-up"></i></div>`);
     });
-    $('#myModal50').show();
+    $('#slotUpgradeModal').show();
     modalOutsideTime = Date.now();
     document.getElementById('bis-upgrades-data').scrollTop = 0;
 }
@@ -8739,6 +8705,7 @@ let openBisUpgrades = function(key) {
 // Opens the highest2 modal
 let openHighest2 = function(notScrollTop) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('highest2Modal');
         onMobile && hideMobileMenu();
         highest2ModalOpen = true;
         let combatStyles = [];
@@ -8912,7 +8879,7 @@ let openHighest2 = function(notScrollTop) {
         $('.style-body').hide();
         $(`.${highestTab2}-button`).addClass('active-tab');
         $(`.${highestTab2}-body`).show();
-        $('#myModal12_2').show();
+        $('#highest2Modal').show();
         modalOutsideTime = Date.now();
         !notScrollTop && (document.getElementById('highest2-data').scrollTop = 0);
     }
@@ -8926,12 +8893,13 @@ let filterQuests = function(opt) {
 
 // Opens the add passive skill modal
 let openPassiveModal = function(skill) {
+    modal.generate('passiveLevelModal');
     passiveSkillModalOpen = true;
     $('#passive-skill-input').val((!!passiveSkill && passiveSkill.hasOwnProperty(skill)) ? passiveSkill[skill] : 1);
     $('#max-skill-input').val((!!maxSkill && maxSkill.hasOwnProperty(skill)) ? maxSkill[skill] : 99);
     $('.passive-skill-name').text(skill);
     $('#passive-skill-data').html(`<div><div class="passive-skill-cancel" onclick="addPassiveSkill(true)">Cancel</div><div class="passive-skill-proceed disabled" onclick="addPassiveSkill(false, '${skill}')">Save Levels</div></div>`);
-    $('#myModal28').show();
+    $('#passiveLevelModal').show();
     $('#passive-skill-input').focus();
 }
 
@@ -8949,23 +8917,18 @@ let passiveLockedChange = function() {
 // Adds passive skill
 let addPassiveSkill = function(close, skill) {
     if (close) {
-        $('#myModal28').hide();
+        $('#passiveLevelModal').remove();
         passiveSkillModalOpen = false;
     } else {
+        let passiveLevelChanged = false;
+        let maxLevelChanged = false;
         let level = !!$('#passive-skill-input').val() ? parseInt($('#passive-skill-input').val()) : NaN;
         if (!isNaN(level) && level >= 0 && level <= 99 && level % 1 === 0) {
             if (!passiveSkill) {
                 passiveSkill = {};
             }
             passiveSkill[skill] = level;
-            if (skill === 'Slayer' && !!slayerLocked && slayerLocked.hasOwnProperty('level')) {
-                slayerLocked['level'] = level;
-                openHighest2(true);
-            }
-            calcCurrentChallengesCanvas(true);
-            setData();
-            $('#myModal28').hide();
-            passiveSkillModalOpen = false;
+            passiveLevelChanged = true;
         }
         let level2 = !!$('#max-skill-input').val() ? parseInt($('#max-skill-input').val()) : NaN;
         if (!isNaN(level2) && level2 >= 0 && level2 <= 99 && level2 % 1 === 0) {
@@ -8973,9 +8936,16 @@ let addPassiveSkill = function(close, skill) {
                 maxSkill = {};
             }
             maxSkill[skill] = level2;
+            maxLevelChanged = true;
+        }
+        if (passiveLevelChanged || maxLevelChanged) {
+            if (passiveLevelChanged && skill === 'Slayer' && !!slayerLocked && slayerLocked.hasOwnProperty('level')) {
+                slayerLocked['level'] = level;
+                openHighest2(true);
+            }
             calcCurrentChallengesCanvas(true);
             setData();
-            $('#myModal28').hide();
+            $('#passiveLevelModal').remove();
             passiveSkillModalOpen = false;
         }
     }
@@ -9025,7 +8995,7 @@ let checkConstructionLocked = function() {
 // Submits questchunks modal
 let addQuestChunk = function(close) {
     if (close) {
-        $('#myModal51').hide();
+        $('#missingQuestModal').remove();
         questChunksModalOpen = false;
         questChunksQuestTasks = [];
     } else {
@@ -9042,7 +9012,7 @@ let addQuestChunk = function(close) {
             calcCurrentChallengesCanvas(true, true);
             setData();
         }
-        $('#myModal51').hide();
+        $('#missingQuestModal').remove();
         questChunksModalOpen = false;
     }
 }
@@ -9069,6 +9039,7 @@ let checkQuestChunks = function() {
             });
         }
         if (questInvalid) {
+            modal.generate('missingQuestModal');
             questChunksModalOpen = true;
             questChunksQuestTasks = [];
             let chunkName = chunkInfo['chunks'][chunk].hasOwnProperty('Nickname') ? `${chunkInfo['chunks'][chunk]['Nickname']} (${chunk}${!!chunkSection ? ` - Section ${chunkSection}` : ''})` : `${chunk}${!!chunkSection ? ` - Section ${chunkSection}` : ''}`;
@@ -9079,7 +9050,7 @@ let checkQuestChunks = function() {
                 questChunksQuestTasks.push(quest);
             });
             $('#questchunks-data').html('<div><div class="questchunks-cancel" onclick="addQuestChunk(true)">Exit</div><div class="questchunks-proceed" onclick="addQuestChunk()">Yes, add quest(s) to my map</div></div>');
-            $('#myModal51').show();
+            $('#missingQuestModal').show();
             return true;
         }
     });
@@ -9193,6 +9164,7 @@ let calculateSlayerTasks = function() {
 
 // Shows specific task info on the given slayer master
 let openSlayerMasterInfo = function(master) {
+    modal.generate('slayerMasterInfoModal');
     slayerMasterInfoModalOpen = true;
     $('.slayermasterinfo-data').empty();
     $('.slayermasterinfo-title').text(master);
@@ -9205,12 +9177,13 @@ let openSlayerMasterInfo = function(master) {
             $('.slayermasterinfo-data').append(`<div class="noscroll results ${assignableSlayerTasks[master][monster]}"><a class='noscroll link' href='https://oldschool.runescape.wiki/w/Slayer_task/${monster}' target='_blank'>${monster}</a></div>`);
         }
     });
-    $('#myModal32').show();
+    $('#slayerMasterInfoModal').show();
     document.getElementById('slayermasterinfo-data').scrollTop = 0;
 }
 
 // Shows any doable clue steps of the given tier
 let openDoableClueSteps = function(tier) {
+    modal.generate('doableClueStepsModal');
     doableClueStepsModalOpen = true;
     $('.doablecluesteps-data').empty();
     $('.doablecluesteps-title').text(tier.charAt(0).toUpperCase() + tier.slice(1) + ' Clue Steps:');
@@ -9225,12 +9198,13 @@ let openDoableClueSteps = function(tier) {
     if (possibleClueTasks[tier].length === 0) {
         $('.doablecluesteps-data').append(`<div class="noscroll no-results">No doable steps</div>`);
     }
-    $('#myModal33').show();
+    $('#doableClueStepsModal').show();
     document.getElementById('doablecluesteps-data').scrollTop = 0;
 }
 
 // Shows all chunks needed for the given clue tier
 let openClueChunks = function(tier) {
+    modal.generate('clueChunksModal');
     clueChunksModalOpen = true;
     $('.cluechunks-data').empty();
     $('.cluechunks-title').text(tier.charAt(0).toUpperCase() + tier.slice(1) + ' Chunks:');
@@ -9255,14 +9229,15 @@ let openClueChunks = function(tier) {
         }
     });
     $('.cluechunks-subtitle').text('(' + doableChunks + '/' + Object.keys(chunkInfo['clues'][tier]).length + ')');
-    $('#myModal34').show();
+    $('#clueChunksModal').show();
     document.getElementById('cluechunks-data').scrollTop = 0;
 }
 
 // Opens the add equipment modal
 let addEquipment = function() {
+    modal.generate('addEquipmentModal');
     addEquipmentModalOpen = true;
-    $('#myModal15').show();
+    $('#addEquipmentModal').show();
     modalOutsideTime = Date.now();
     $('#searchAddEquipment').val('').focus();
     searchAddEquipment();
@@ -9304,8 +9279,9 @@ let addManualEquipment = function(equip) {
 
 // Opens the backlog sources modal
 let backlogSources = function() {
+    modal.generate('backlogSourcesModal');
     backlogSourcesModalOpen = true;
-    $('#myModal17').show();
+    $('#backlogSourcesModal').show();
     modalOutsideTime = Date.now();
     $('#searchBacklogSources').val('').focus();
     $('.backlog-sources-searchcontainer span input').prop('checked', filterByCheckedSources);
@@ -9406,9 +9382,10 @@ let backlogManualSource = function(category, source) {
 // Opens the sticker menu
 let openStickers = function(id) {
     if (signedIn || testMode) {
+        modal.generate('stickerModal');
         stickerModalOpen = true;
         $('.sticker-data').empty();
-        $('#myModal16').show();
+        $('#stickerModal').show();
         modalOutsideTime = Date.now();
         document.getElementById('sticker-data').scrollTop = 0;
         let chunkNickname = chunkInfo['chunks'].hasOwnProperty(id) ? chunkInfo['chunks'][id]['Nickname'] + ' ' : '';
@@ -9615,6 +9592,7 @@ let decodeObject = function(obj) {
 
 // Opens the methods modal
 let viewPrimaryMethodsOrTasks = function(skill, showTasks) {
+    modal.generate('methodsModal');
     methodsModalOpen = true;
     $('.methods-data').empty();
     if (showTasks) {
@@ -9630,7 +9608,7 @@ let viewPrimaryMethodsOrTasks = function(skill, showTasks) {
             $('.methods-data').append(`<div class='noscroll skill-method'><span>[${methods[method]}]: ${method.includes('~') ? `${method.replaceAll('*', '').split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((method.replaceAll('*', '').split('|')[1]))}" target="_blank">${method.replaceAll('*', '').split('~')[1].split('|').join('')}</a>${method.replaceAll('*', '').split('~')[2]}` : `${method.replaceAll('~', '').replaceAll('|', '').replaceAll('*', '')}`} ${chunkInfo['challenges'][skill].hasOwnProperty(method) ? `<span class='noscroll details-info' onclick="showDetails('${encodeRFC5987ValueChars(method)}', '${skill}', '')"><i class="challenge-icon fa-solid fa-info-circle noscroll"></i></span><span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openTrainingMethodsContextMenu('${encodeRFC5987ValueChars(method)}', '${skill}')"><i class="fa-solid fa-sliders-h noscroll"></i></span></span>` : ''}</div>`);
         });
     }
-    $('#myModal13').show();
+    $('#methodsModal').show();
     modalOutsideTime = Date.now();
     document.getElementById('methods-data').scrollTop = 0;
 }
@@ -9679,84 +9657,70 @@ let switchHighest2Tab = function(tab) {
 let closeManualAdd = function() {
     manualModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal').hide();
+    $('#manualTasksModal').remove();
 }
 
 // Closes the usertasks list modal
 let closeUserTasksList = function() {
     userTasksListModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal48').hide();
+    $('#userTasksListModal').remove();
 }
 
 // Closes the challenge details modal
 let closeChallengeDetails = function() {
     detailsModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal2').hide();
+    $('#challengeDetailsModal').remove();
 }
 
 // Closes the challenge notes modal
 let closeChallengeNotes = function() {
     notesModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal3').hide();
+    $('#backlogNotesModal').remove();
 }
 
 // Closes the rules modal
 let closeRules = function() {
     rulesModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal4').hide();
+    $('#rulesModal').remove();
 }
 
 // Closes the settings modal
 let closeSettings = function() {
     settingsModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal7').hide();
-}
-
-// Closes the random list modal
-let closeRandomList = function() {
-    randomListModalOpen = false;
-    modalOutsideTime = Date.now();
-    $('#myModal8').hide();
-}
-
-// Closes the stats error modal
-let closeStatsError = function() {
-    statsErrorModalOpen = false;
-    modalOutsideTime = Date.now();
-    $('#myModal9').hide();
+    $('#settingsModal').remove();
 }
 
 // Closes the search modal
 let closeSearch = function() {
     searchModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal10').hide();
+    $('#searchModal').remove();
 }
 
 // Closes the search details modal
 let closeSearchDetails = function() {
     searchDetailsModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal11').hide();
+    $('#searchDetailsModal').remove();
 }
 
 // Closes the highest modal
 let closeHighest = function() {
     highestModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal12').hide();
+    $('#highestModal').remove();
 }
 
 // Closes the bis upgrades modal
 let closeBisUpgrades = function() {
     bisUpgradesModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal50').hide();
+    $('#slotUpgradeModal').remove();
 }
 
 // Closes the highest modal
@@ -9764,7 +9728,7 @@ let closeHighest2 = function() {
     $(".primarymethods-context-menu").hide(100);
     highest2ModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal12_2').hide();
+    $('#highest2Modal').remove();
     editingSlayerLock = false;
 }
 
@@ -9773,119 +9737,119 @@ let closeMethods = function() {
     $(".trainingmethods-context-menu").hide(100);
     methodsModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal13').hide();
+    $('#methodsModal').remove();
 }
 
 // Closes the complete modal
 let closeComplete = function() {
     completeModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal14').hide();
+    $('#manualCompleteModal').remove();
 }
 
 // Closes the clipboard modal
 let closeClipboard = function() {
     clipboardModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal38').hide();
+    $('#miscellaneousActionsModal').remove();
 }
 
 // Closes the add equipment modal
 let closeAddEquipment = function() {
     addEquipmentModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal15').hide();
+    $('#addEquipmentModal').remove();
 }
 
 // Closes the sticker modal
 let closeSticker = function() {
     stickerModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal16').hide();
+    $('#stickerModal').remove();
 }
 
 // Closes the backlog sources modal
 let closeBacklogSources = function() {
     backlogSourcesModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal17').hide();
+    $('#backlogSourcesModal').remove();
 }
 
 // Closes the chunk history modal
 let closeChunkHistory = function() {
     chunkHistoryModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal18').hide();
+    $('#chunkHistoryModal').remove();
 }
 
 // Closes the challenge alts modal
 let closeChallengeAlts = function() {
     challengeAltsModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal19').hide();
+    $('#altChallengesModal').remove();
 }
 
 // Closes the overlays modal
 let closeOverlays = function() {
     overlaysModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal39').hide();
+    $('#mapOverlaysModal').remove();
 }
 
 // Closes the outer add modal
 let closeOuterAdd = function() {
     manualOuterModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal20').hide();
+    $('#manuallyAddOuterModal').remove();
 }
 
 // Closes the monsters add modal
 let closeMonstersAdd = function() {
     monsterModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal21').hide();
+    $('#manuallyAddStuffModal').remove();
 }
 
 // Closes the quest steps modal
 let closeQuestSteps = function() {
     questStepsModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal25').hide();
+    $('#questStepsModal').remove();
 }
 
 // Closes the friends list modal
 let closeFriendsList = function() {
     friendsListModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal26').hide();
+    $('#friendsListModal').remove();
 }
 
 // Closes the friends list add modal
 let closeFriendsListAdd = function() {
     friendsAddModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal27').hide();
+    $('#addFriendMapModal').remove();
 }
 
 // Closes the manual areas modal
 let closeManualAreas = function() {
     manualAreasModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal31').hide();
+    $('#manualAreasModal').remove();
 }
 
 // Closes the chunk sections modal
 let closeChunkSections = function() {
     chunkSectionsModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal42').hide();
+    $('#chunkSectionsModal').remove();
 }
 
 // Closes the customize topbar modal
 let closeCustomizeTopbar = function() {
     customizeTopbarModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal46').hide();
+    $('#customizeTopbarModal').remove();
 }
 
 // Closes the chunk section picker modal
@@ -9916,7 +9880,7 @@ let saveChunkSectionPicker = function() {
     unlockedSections = combineJSONs(unlockedSections, manualSectionsModified);
     unlockedSections = combineJSONs(unlockedSections, findConnectedSections((Object.keys(savedChunks).length > 0 ? savedChunks : {...tempChunks['unlocked'], ...manualAreas}) || {}, unlockedSections));
     modalOutsideTime = Date.now();
-    $('#myModal43').hide();
+    $('#chunkSectionPickerModal').remove();
     if (needsUpdating) {
         calcCurrentChallengesCanvas(true, chunkSectionCalculateAfter, false, JSON.parse(JSON.stringify(unlockedSections)));
         setData();
@@ -9927,28 +9891,28 @@ let saveChunkSectionPicker = function() {
 let closeSlayerMasterInfo = function() {
     slayerMasterInfoModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal32').hide();
+    $('#slayerMasterInfoModal').remove();
 }
 
 // Closes the doable clue steps modal
 let closeDoableClueSteps = function() {
     doableClueStepsModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal33').hide();
+    $('#doableClueStepsModal').remove();
 }
 
 // Closes the clue chunks modal
 let closeClueChunks = function() {
     clueChunksModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal34').hide();
+    $('#clueChunksModal').remove();
 }
 
 // Closes the chunk notes modal
 let closeChunkNotes = function() {
     notesOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal35').hide();
+    $('#chunkNotesModal').remove();
 }
 
 // Manually completes checked-off tasks
@@ -9956,7 +9920,7 @@ let submitCompleteTasks = function() {
     completeChallenges(true);
     completeModalOpen = false;
     modalOutsideTime = Date.now();
-    $('#myModal14').hide();
+    $('#manualCompleteModal').remove();
 }
 
 // Unlocks various parts of the chunk tasks panel
@@ -10174,6 +10138,7 @@ let goBackDetails = function(type) {
 // Shows challenge details
 let showDetails = function(challenge, skill, dataType, isNested) {
     if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('challengeDetailsModal');
         let baseChunkDataIn = dataType === 'future' ? futureChunkData : baseChunkData;
         let unlockedSectionsIn = dataType === 'future' ? futureUnlockedSections : unlockedSections;
         let chunksIn = !!tempChunks['unlocked'] ? JSON.parse(JSON.stringify(tempChunks['unlocked'])) : {};
@@ -10465,7 +10430,7 @@ let showDetails = function(challenge, skill, dataType, isNested) {
             detailsStack = [];
         }
         detailsStack.push([challenge, skill]);
-        $('#myModal2').show();
+        $('#challengeDetailsModal').show();
         modalOutsideTime = Date.now();
         document.getElementById('details-data').scrollTop = 0;
     }
@@ -10473,6 +10438,7 @@ let showDetails = function(challenge, skill, dataType, isNested) {
 
 // Shows challenge alternatives
 let showAlternatives = function(challenge, skill) {
+    modal.generate('altChallengesModal');
     challenge = decodeQueryParam(challenge);
     challengeAltsModalOpen = true;
     $('#alts-data').empty();
@@ -10492,7 +10458,7 @@ let showAlternatives = function(challenge, skill) {
         $('#alts-data').empty();
         $('#alts-data').append(`<div class='noscroll results'><span class='noscroll holder'><span class='noscroll topline'>No Alternatives</span></span></div>`);
     }
-    $('#myModal19').show();
+    $('#altChallengesModal').show();
     modalOutsideTime = Date.now();
 }
 
@@ -10541,6 +10507,7 @@ let changeOverlayFilterBy = function() {
 // Shows overlay options
 let showOverlays = function(fromHelper) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        !fromHelper && modal.generate('mapOverlaysModal');
         $('#map-marker-btn').hasClass('notice-me') && $('#map-marker-btn').removeClass('notice-me');
         onMobile && hideMobileMenu();
         overlaysModalOpen = true;
@@ -10568,7 +10535,7 @@ let showOverlays = function(fromHelper) {
                 $('#overlays-data').append(`<div class="overlay noscroll ${overlay.replaceAll(' ', '_') + '-overlay'}"><label class="radio noscroll"><span class="radio__input noscroll"><input type="radio" name="radio" ${(selectedOverlay === overlayText) ? "checked" : ''} class='noscroll' onclick="selectedOverlay='${overlayText}'; clearOverlayClues();"><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll">${overlay === 'None' ? overlay : `<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(overlayLink)}" target="_blank">${overlay}</a>`}</span></label></div>`);
             }
         });
-        $('#myModal39').show();
+        $('#mapOverlaysModal').show();
         !fromHelper && (document.getElementById('overlays-data').scrollTop = 0);
         modalOutsideTime = Date.now();
     }
@@ -10628,6 +10595,7 @@ let hideMobileMenu = function() {
 
 // Shows challenge notes
 let showNotes = function(challenge, skill, note) {
+    modal.generate('backlogNotesModal');
     let baseChunkDataIn = baseChunkData;
     let detailsKeys = ['ItemsDetails', 'ObjectsDetails', 'MonstersDetails', 'NPCsDetails'];
     challenge = decodeQueryParam(challenge);
@@ -10702,7 +10670,7 @@ let showNotes = function(challenge, skill, note) {
         });
     });
     notesModalOpen = true;
-    $('#myModal3').show();
+    $('#backlogNotesModal').show();
     $('#notes-data textarea').val(note).focus();
     saveNotesData('task', null);
     notesChallenge = challenge;
@@ -10741,7 +10709,7 @@ let submitFriend = function() {
 // Apply the given rule preset
 let applyPreset = function(preset) {
     presetWarningModalOpen = false;
-    $('#myModal5').hide();
+    $('#rulesPresetModal').remove();
     !!rulePresets && !!rulePresets[preset] && Object.keys(rules).forEach((rule) => {
         if (rule === 'Kill X Amount') {
             rules[rule] = rulePresets[preset][rule];
@@ -10762,39 +10730,44 @@ let applyPreset = function(preset) {
 
 // Shows warning modal for applying a preset
 let warnPreset = function(preset) {
+    modal.generate('rulesPresetModal');
     $('#preset-data').empty();
     $('#preset-title').text('Apply the ' + preset + ' preset?');
     $('.specific-preset').text(preset);
     $('#preset-data').html('<div><div class="preset-cancel" onclick="applyPreset(``)">Cancel</div><div class="preset-proceed" onclick="applyPreset(`' + preset + '`)">Yes, proceed</div></div>');
     presetWarningModalOpen = true;
-    $('#myModal5').show();
+    $('#rulesPresetModal').show();
 }
 
 // Shows warning modal for exiting sandbox mode
 let warnExitSandbox = function() {
+    modal.generate('exitSandboxWarningModal');
     exitSandboxWarningModalOpen = true;
-    $('#myModal40').show();
+    $('#exitSandboxWarningModal').show();
 }
 
 // Shows warning modal for picking a chunk
 let warnPickChunk = function(both) {
+    modal.generate('rollWarningModal');
     pickChunkWarningModalOpen = true;
     $('.rollwarning-proceed').attr('onClick', `pickCanvas(${both}, true)`);
-    $('#myModal41').show();
+    $('#rollWarningModal').show();
 }
 
 // Shows warning modal for rolling 2 chunks
 let warnRoll2Chunk = function() {
+    modal.generate('roll2WarningModal');
     roll2ChunkWarningModalOpen = true;
     $('.roll2warning-proceed').attr('onClick', `roll2Canvas(true)`);
-    $('#myModal44').show();
+    $('#roll2WarningModal').show();
 }
 
 // Shows import rules modal
 let importRules = function() {
+    modal.generate('rulesImportModal');
     $('.rules-import-error').hide();
     $('.rules-input').val('');
-    $('#myModal45').show();
+    $('#rulesImportModal').show();
 }
 
 // Applies imported rules
@@ -10808,12 +10781,12 @@ let applyImportRules = function(proceed) {
             });
             showRules();
             checkOffRules();
-            $('#myModal45').hide();
+            $('#rulesImportModal').remove();
         } catch (error) {
             $('.rules-import-error').show();
         }
     } else {
-        $('#myModal45').hide();
+        $('#rulesImportModal').remove();
     }
 }
 
@@ -10866,6 +10839,7 @@ let searchRules = function() {
 // Shows chunk rules
 let showRules = function(isPage2) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('rulesModal');
         rulesModalOpen = true;
         if (onMobile) {
             toggleRulesPanel(Object.keys(rulesPanelVis).filter(panel => { return rulesPanelVis[panel] })[0]);
@@ -10952,13 +10926,14 @@ let showRules = function(isPage2) {
             let tooltipTarget = onMobile ? $(`.rules-data > div:not(.rules-content) .${tooltipTargetSelector}`) : $(`.rules-data > .rules-content .${tooltipTargetSelector}`);
             tooltipTarget.html(tooltip.generate(tooltipTargetSelector, '<i class="fa-solid fa-question-circle question-help"></i>', tooltipTargetSelector, onMobile ? 'bottom' : 'right'));
         });
-        $('#myModal4').show();
+        $('#rulesModal').show();
         modalOutsideTime = Date.now();
     }
 }
 
 // Shows settings details
 let showSettings = function(keepSettingsClosed) {
+    modal.generate('settingsModal');
     onMobile && hideMobileMenu();
     settingsModalOpen = true;
     $('#settings-data').empty();
@@ -11022,7 +10997,7 @@ let showSettings = function(keepSettingsClosed) {
         });
     });
     checkOffSettings(false, 'startup');
-    $('#myModal7').show();
+    $('#settingsModal').show();
     document.getElementById('settings-data').scrollTop = 0;
     modalOutsideTime = Date.now();
     !keepSettingsClosed && settingsMenu();
@@ -11126,6 +11101,7 @@ let changeDefaultChunkinfo = function() {
 // Shows chunk history
 let showChunkHistory = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
+        modal.generate('chunkHistoryModal');
         onMobile && hideMobileMenu();
         chunkHistoryModalOpen = true;
         $('#chunkhistory-data-inner').empty();
@@ -11221,7 +11197,7 @@ let showChunkHistory = function() {
             $('.canvas-graph-outer').hide();
             $('.average-rolltime-title').hide().text('');
         }
-        $('#myModal18').show();
+        $('#chunkHistoryModal').show();
         document.getElementById('chunkhistory-data').scrollTop = 0;
         modalOutsideTime = Date.now();
     }

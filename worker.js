@@ -7996,7 +7996,7 @@ let calcCurrentChallenges2 = function() {
                     }
                 }
             });
-            let isPrimary = true || checkPrimaryMethod(skill, globalValids, baseChunkData);
+            let isPrimary = checkPrimaryMethod(skill, globalValids, baseChunkData);
             Object.keys(globalValids[skill]).forEach((challenge) => {
                 realLevel[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'];
                 if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost')) {
