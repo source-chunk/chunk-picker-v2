@@ -32185,6 +32185,31 @@
 				"Objects": ["Water bucket[+]"],
 				"Output": "Bucket of water"
 			},
+			"Fill bucket with water*": {
+				"Items": ["Bucket"],
+				"Objects": ["Water bucket[+]"],
+				"Output": "Bucket of water"
+			},
+			"Fill vial with water from item*": {
+				"Items": ["Vial*", "Water item vial[+]*"],
+				"Output": "Vial of water"
+			},
+			"Fill bucket with water from item*": {
+				"Items": ["Bucket*", "Water item vial[+]*"],
+				"Output": "Bucket of water"
+			},
+			"Fill jug with water from item*": {
+				"Items": ["Jug*", "Water item vial[+]*"],
+				"Output": "Jug of water"
+			},
+			"Fill cup with water from item*": {
+				"Items": ["Empty cup*", "Water item vial[+]*"],
+				"Output": "Cup of water"
+			},
+			"Fill bowl with water from item*": {
+				"Items": ["Bowl*", "Water item vial[+]*"],
+				"Output": "Bowl of water"
+			},
 			"Pick sweetcorn*": {
 				"Objects": ["Sweetcorn"],
 				"Output": "Sweetcorn loot"
@@ -32333,7 +32358,7 @@
 			},
 			"Fill cup with water": {
 				"Items": ["Empty cup*"],
-				"Objects": ["Water source[+]"],
+				"Objects": ["Water bucket[+]"],
 				"Output": "Cup of water",
 				"Not F2P": true
 			},
@@ -33393,7 +33418,7 @@
 				"Not F2P": true
 			},
 			"Wet clay with item": {
-				"Items": ["Clay*", "Water item[+]*"],
+				"Items": ["Clay*", "Water item vial[+]*"],
 				"Output": "Soft clay"
 			},
 			"Wet clay with object": {
@@ -151335,6 +151360,7 @@
 			"Void Knight equipment[+]": ["Void melee helm", "Void ranger helm", "Void mage helm", "Void knight gloves", "Void knight robe", "Void knight top", "Void knight mace", "Elite void robe", "Elite void top"],
 			"Waterskin[+]": ["Waterskin(4)", "Waterskin(3)", "Waterskin(2)", "Waterskin(1)", "Waterskin(0)"],
 			"Water item[+]": ["Bucket of water", "Jug of water", "Bowl of water"],
+			"Water item vial[+]": ["Bucket of water", "Jug of water", "Bowl of water", "Vial of water"],
 			"Water rune[+]": ["Water rune", "Mist rune", "Mud rune", "Steam rune"],
 			"Watering can[+]": ["Watering can", "Watering can(1)", "Watering can(2)", "Watering can(3)", "Watering can(4)", "Watering can(5)", "Watering can(6)", "Watering can(7)", "Watering can(8)", "Gricoller's can"],
 			"Web slasher[+]": ["Knife", "Wilderness sword 1", "Wilderness sword 2", "Wilderness sword 3", "Wilderness sword 4", "3rd age longsword", "Adamant 2h sword", "Ancient godsword", "Armadyl godsword", "Bandos godsword", "Black 2h sword", "Bronze 2h sword", "Colossal blade", "Dragon 2h sword", "Gilded 2h sword", "Iron 2h sword", "Mithril 2h sword", "Rune 2h sword", "Saradomin godsword", "Saradomin sword", "Saradomin's blessed sword", "Shadow sword", "Spatula", "Steel 2h sword", "White 2h sword", "Zamorak godsword", "3rd age axe", "Adamant axe", "Adamant battleaxe", "Black axe", "Black battleaxe", "Blessed axe", "Bronze axe", "Bronze battleaxe", "Crystal axe", "Dharok's greataxe", "Dragon axe", "Dragon battleaxe", "Gilded axe", "Infernal axe", "Iron axe", "Iron battleaxe", "Leaf-bladed battleaxe", "Mithril axe", "Mithril battleaxe", "Rune axe", "Rune battleaxe", "Steel axe", "Steel battleaxe", "White battleaxe", "Banner (Arrav)", "Banner (Asgarnia)", "Banner (Dorgeshuun)", "Banner (Dragon)", "Banner (Fairy)", "Banner (Guthix)", "Banner (HAM)", "Banner (Horse)", "Banner (Jogre)", "Banner (Kandarin)", "Banner (Misthalin)", "Banner (Money)", "Banner (Saradomin)", "Banner (Skull)", "Banner (Varrock)", "Banner (Zamorak)", "Bronze fist flag", "Clan vexillum", "Cutthroat flag", "Gilded smile flag", "Green banner", "Lucky shot flag", "Phasmatys flag", "Protest banner", "Saradomon banner", "Shattered banner", "Trailblazer banner", "Treasure flag", "Twisted banner", "Zamorak banner", "Adamant claws", "Beach boxing gloves (pink)", "Beach boxing gloves (yellow)", "Black claws", "Bronze claws", "Dragon claws", "Iron claws", "Mithril claws", "Rune claws", "Steel claws", "White claws", "Adamant halberd", "Black halberd", "Bronze halberd", "Crystal halberd", "Dragon halberd", "Iron halberd", "Mithril halberd", "Rune halberd", "Steel halberd", "White halberd", "Holy scythe of vitur", "Sanguine scythe of vitur", "Scythe", "Scythe of vitur", "Scythe of vitur (uncharged)", "Adamant longsword", "Adamant scimitar", "Amy's saw", "Arclight", "Black longsword", "Black scimitar", "Blade of saeldor", "Blade of saeldor (c)", "Blisterwood sickle", "Blurite sword", "Brine sabre", "Bronze longsword", "Bronze scimitar", "Cleaver", "Darklight", "Decorative sword (gold)", "Decorative sword (red)", "Decorative sword (white)", "Dragon longsword", "Dragon scimitar", "Dragon scimitar (or)", "Emerald sickle (b)", "Enchanted emerald sickle (b)", "Enchanted ruby sickle (b)", "Excalibur", "Fremennik blade", "Gilded scimitar", "Granite longsword", "Harry's cutlass", "Iron longsword", "Iron scimitar", "Iron sickle", "Jade machete", "Katana", "Lucky cutlass", "Machete", "Mithril longsword", "Mithril scimitar", "Opal machete", "Red topaz machete", "Ruby sickle (b)", "Rune longsword", "Rune scimitar", "Rune scimitar (guthix)", "Rune scimitar (saradomin)", "Rune scimitar (zamorak)", "Silver sickle", "Silver sickle (b)", "Silverlight", "Skewer", "Steel longsword", "Steel scimitar", "Toktz-xil-ek", "Vesta's blighted longsword", "Vesta's longsword", "White longsword", "White scimitar", "Wooden spoon", "Adamant hasta", "Adamant hasta(p)", "Adamant hasta(p+)", "Adamant hasta(p++)", "Adamant hasta(kp)", "Adamant spear", "Adamant spear(p)", "Adamant spear(p+)", "Adamant spear(p++)", "Adamant spear(kp)", "Black spear", "Black spear(p)", "Black spear(p+)", "Black spear(p++)", "Black spear(kp)", "Bone spear", "Bronze hasta", "Bronze hasta(p)", "Bronze hasta(p+)", "Bronze hasta(p++)", "Bronze hasta(kp)", "Bronze spear", "Bronze spear(p)", "Bronze spear(p+)", "Bronze spear(p++)", "Bronze spear(kp)", "Butterfly net", "Dragon hasta", "Dragon hasta(p)", "Dragon hasta(p+)", "Dragon hasta(p++)", "Dragon hasta(kp)", "Dragon hunter lance", "Dragon spear", "Dragon spear(p)", "Dragon spear(p+)", "Dragon spear(p++)", "Dragon spear(kp)", "Gilded hasta", "Gilded spear", "Guthan's warspear", "Iron hasta", "Iron hasta(p)", "Iron hasta(p+)", "Iron hasta(p++)", "Iron hasta(kp)", "Iron spear", "Iron spear(p)", "Iron spear(p+)", "Iron spear(p++)", "Iron spear(kp)", "Leaf-bladed spear", "Magic butterfly net", "Merfolk trident", "Mithril hasta", "Mithril hasta(p)", "Mithril hasta(p+)", "Mithril hasta(p++)", "Mithril hasta(kp)", "Mithril spear", "Mithril spear(p)", "Mithril spear(p+)", "Mithril spear(p++)", "Mithril spear(kp)", "Noose wand", "Rune hasta", "Rune hasta(p)", "Rune hasta(p+)", "Rune hasta(p++)", "Rune hasta(kp)", "Rune spear", "Rune spear(p)", "Rune spear(p+)", "Rune spear(p++)", "Rune spear(kp)", "Steel hasta", "Steel hasta(p)", "Steel hasta(p+)", "Steel hasta(p++)", "Steel hasta(kp)", "Steel spear", "Steel spear(p)", "Steel spear(p+)", "Steel spear(p++)", "Steel spear(kp)", "Zamorakian hasta", "Zamorakian spear", "Abyssal dagger", "Abyssal dagger(p)", "Abyssal dagger(p+)", "Abyssal dagger(p++)", "Adamant dagger", "Adamant dagger(p)", "Adamant dagger(p+)", "Adamant dagger(p++)", "Adamant sword", "Barb-tail harpoon", "Black dagger", "Black dagger(p)", "Black dagger(p+)", "Black dagger(p++)", "Black sword", "Bone dagger", "Bone dagger(p)", "Bone dagger(p+)", "Bone dagger(p++)", "Bronze dagger", "Bronze dagger(p)", "Bronze dagger(p+)", "Bronze dagger(p++)", "Bronze sword", "Cattleprod", "Crystal harpoon", "Dark dagger", "Dragon dagger", "Dragon dagger(p)", "Dragon dagger(p+)", "Dragon dagger(p++)", "Dragon harpoon", "Dragon sword", "Dual sai", "Egg whisk", "Ghrazi rapier", "Glowing dagger", "Holy ghrazi rapier", "Infernal harpoon", "Iron dagger", "Iron dagger(p)", "Iron dagger(p+)", "Iron dagger(p++)", "Iron sword", "Keris", "Keris(p)", "Keris(p+)", "Keris(p++)", "Kitchen knife", "Leaf-bladed sword", "Magic secateurs", "Mithril dagger", "Mithril dagger(p)", "Mithril dagger(p+)", "Mithril dagger(p++)", "Mithril sword", "Osmumten's fang", "Rapier", "Rune dagger", "Rune dagger(p)", "Rune dagger(p+)", "Rune dagger(p++)", "Rune sword", "Spork", "Steel dagger", "Steel dagger(p)", "Steel dagger(p+)", "Steel dagger(p++)", "Steel sword", "Swift blade", "Toktz-xil-ak", "Training sword", "White dagger", "White dagger(p)", "White dagger(p+)", "White dagger(p++)", "Wolfbane", "Wooden sword", "Abyssal tentacle", "Abyssal whip", "Staff of balance", "Staff of light", "Staff of the dead", "Toxic staff of the dead"],
