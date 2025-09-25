@@ -586,13 +586,13 @@ const modalContents = {
 };
 
 window.modal = {
-    generate(id) {
+    generate(id, onMobile) {
         $(`#${id}`).remove();
         let el;
         if (id === 'fancyRollModal') {
-            el = `<div id="${id}" class="modal">${modalContents[id]}</div>`;
+            el = `<div id="${id}" class="modal${onMobile ? ' mobile' : ''}">${modalContents[id]}</div>`;
         } else {
-            el = `<div id="${id}" class="modal"><div class="modal-content noscroll">${modalContents[id]}</div></div>`;
+            el = `<div id="${id}" class="modal${onMobile ? ' mobile' : ''}"><div class="modal-content noscroll">${modalContents[id]}</div></div>`;
         }
         $('.custom-modal').append(el);
     }

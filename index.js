@@ -1408,7 +1408,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.3';
+let currentVersion = '6.9.4';
 let patchNotesVersion = '6.9.0';
 let updateLevel = 'difference';
 
@@ -1576,7 +1576,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.3";
+mapImg.src = "osrs_world_map.png?v=6.9.4";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2807,7 +2807,7 @@ let sortSelectedChunks = function() {
 
 // Opens the roll chunk modal
 let openRollChunkCanvas = async function(el, rand, sNum, rand2, sNum2, isUnpick) {
-    modal.generate('fancyRollModal');
+    modal.generate('fancyRollModal', onMobile);
     isPreloading = true;
     $('#fancyRollModal, .roll-chunk-spinner').show();
     $('#fancyRollModal .modal-content').hide();
@@ -3341,7 +3341,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.3");
+        myWorker = new Worker("./worker.js?v=6.9.4");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3645,8 +3645,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.3");
-let myWorker2 = new Worker("./worker.js?v=6.9.3");
+let myWorker = new Worker("./worker.js?v=6.9.4");
+let myWorker2 = new Worker("./worker.js?v=6.9.4");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -4406,7 +4406,7 @@ let openPatchNotesModal = function(fromClick) {
     if (hasUpdate && fromClick) {
         location.reload();
     } else if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('patchNotesModal');
+        modal.generate('patchNotesModal', onMobile);
         onMobile && hideMobileMenu();
         patchNotesOpen = true;
         $('#patchNotesModal').show();
@@ -4425,7 +4425,7 @@ let dismissPatchNotes = function() {
 // Opens the chunk notes modal
 let openChunkNotesModal = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('chunkNotesModal');
+        modal.generate('chunkNotesModal', onMobile);
         onMobile && hideMobileMenu();
         notesOpen = true;
         $('#save-chunk-notes-button').text((signedIn || testMode) ? (notesEditing ? 'Save' : 'Edit') : 'Exit');
@@ -4465,7 +4465,7 @@ let saveChunkNotes = function() {
 
 // Opens the new chunk tasks modal
 let openNewTasksModal = function(data, expandFuture) {
-    modal.generate('newTasksModal');
+    modal.generate('newTasksModal', onMobile);
     newTasksOpen = true;
     $('.new-tasks-title').text(expandFuture ? 'Potential Chunk Tasks' : 'New Chunk Tasks');
     $('.new-tasks-data').html(data);
@@ -4527,7 +4527,7 @@ let openXpRewardModal = function(skill, line, xpArr, num) {
             toggleHiddenTasks(settings['hideChecked'] && actuallyHideChecked);
             $('#xpRewardModal').remove();
         } else {
-            modal.generate('xpRewardModal');
+            modal.generate('xpRewardModal', onMobile);
             if (num === 0) {
                 xpRewardOpen = true;
                 tempXpChoices = [];
@@ -4597,7 +4597,7 @@ let closeXpRewardModal = function() {
 // Opens the map intro modal
 let openMapIntroModal = function(justStartingChunk) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('introModal');
+        modal.generate('introModal', onMobile);
         mapIntroOpen = true;
         $('.intro-data-2').hide();
         $('#cancel-intro-button').hide();
@@ -6582,7 +6582,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.3");
+    myWorker2 = new Worker("./worker.js?v=6.9.4");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -7112,7 +7112,7 @@ let setCalculating = function(panelClass, useOld) {
 // Opens the manual areas modal
 let openManualAreas = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('manualAreasModal');
+        modal.generate('manualAreasModal', onMobile);
         manualAreasModalOpen = true;
         $('#searchManualAreas').val('');
         filterByUnlockedManualAreas = false;
@@ -7162,7 +7162,7 @@ let setManualArea = function(area, value) {
 // Opens the chunk sections modal
 let openChunkSections = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('chunkSectionsModal');
+        modal.generate('chunkSectionsModal', onMobile);
         chunkSectionsModalOpen = true;
         $('#searchChunkSections').val('');
         searchChunkSections();
@@ -7261,7 +7261,7 @@ let resetSectionVars = async function(chunkId) {
 // Opens the chunk section picker modal
 let openChunkSectionPicker = async function(chunkId, calculateAfter) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('chunkSectionPickerModal');
+        modal.generate('chunkSectionPickerModal', onMobile);
         await resetSectionVars(chunkId);
         chunkSectionPickerModalOpen = true;
         chunkSectionCalculateAfter = calculateAfter;
@@ -7490,7 +7490,7 @@ let selectTopbarChoice = function(index) {
 
 // Opens the customize topbar modal
 let openCustomizeTopbar = function() {
-    modal.generate('customizeTopbarModal');
+    modal.generate('customizeTopbarModal', onMobile);
     $('#cutomize-topbar-data-inner').empty();
     customizeTopbarModalOpen = true;
     $('#customizeTopbarModal').show();
@@ -7558,7 +7558,7 @@ let shuffle = function(array) {
 // Opens the quest steps modal
 let openQuestSteps = function(skill, challenge) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('questStepsModal');
+        modal.generate('questStepsModal', onMobile);
         onMobile && hideMobileMenu();
         challenge = decodeQueryParam(challenge);
         let tier = null;
@@ -7631,7 +7631,7 @@ let openQuestSteps = function(skill, challenge) {
 
 // Opens the friends list modal
 let openFriendsList = function() {
-    modal.generate('friendsListModal');
+    modal.generate('friendsListModal', onMobile);
     onMobile && hideMobileMenu();
     friendsListModalOpen = true;
     $('.friends-list-data').empty();
@@ -7650,7 +7650,7 @@ let openFriendsList = function() {
 
 // Opens the friends add modal
 let openFriendsListAdd = function() {
-    modal.generate('addFriendMapModal');
+    modal.generate('addFriendMapModal', onMobile);
     friendsAddModalOpen = true;
     $('#submit-friend-button').prop('disabled', true);
     $('.mid-friend').val('');
@@ -7750,7 +7750,7 @@ let showSlayerLockOnMap = function() {
 
 // Opens the add locked construction chunk modal
 let openConstructionLocked = function() {
-    modal.generate('constructionLockModal');
+    modal.generate('constructionLockModal', onMobile);
     constructionLockedModalOpen = true;
     $('#construction-locked-input').val('');
     $('#construction-locked-data').html('<div><div class="construction-locked-cancel" onclick="addConstructionLocked(true)">Cancel</div><div class="construction-locked-proceed disabled" onclick="addConstructionLocked()">Lock Mahogany Homes</div></div>');
@@ -7795,7 +7795,7 @@ let addConstructionLocked = function(close) {
 
 // Opens the outer manual modal
 let openManualAddOuter = function() {
-    modal.generate('manuallyAddOuterModal');
+    modal.generate('manuallyAddOuterModal', onMobile);
     onMobile && hideMobileMenu();
     manualOuterModalOpen = true;
     $('#manuallyAddOuterModal').show();
@@ -7804,7 +7804,7 @@ let openManualAddOuter = function() {
 
 // Opens the manual add monsters modal
 let openMonstersAdd = function() {
-    modal.generate('manuallyAddStuffModal');
+    modal.generate('manuallyAddStuffModal', onMobile);
     manualOuterModalOpen = false;
     $('#manuallyAddOuterModal').remove();
     monsterModalOpen = true;
@@ -7945,7 +7945,7 @@ let selectManualItemPrimary = function(type, item, num) {
 // Opens the manual add tasks modal
 let openManualAdd = function() {
     manualOuterModalOpen = false;
-    modal.generate('manualTasksModal');
+    modal.generate('manualTasksModal', onMobile);
     $('#manuallyAddOuterModal').remove();
     fullChallengeArr = {};
     Object.keys(chunkInfo['challenges']).forEach((skill) => {
@@ -8015,7 +8015,7 @@ let addManualTask = function(challenge) {
 
 // Opens the manual complete tasks modal
 let openManualComplete = function() {
-    modal.generate('manualCompleteModal');
+    modal.generate('manualCompleteModal', onMobile);
     completeModalOpen = true;
     $('#manualCompleteModal').show();
     modalOutsideTime = Date.now();
@@ -8171,7 +8171,7 @@ let loadPoolsData = function() {
 
 // Opens the user-inputted tasks modal
 let openUserTasks = function() {
-    modal.generate('userTaskModal');
+    modal.generate('userTaskModal', onMobile);
     manualOuterModalOpen = false;
     $('#manuallyAddOuterModal').remove();
     userTasksModalOpen = true;
@@ -8189,7 +8189,7 @@ let openUserTasks = function() {
 
 // Opens the usertasks list modal
 let openUserTasksList = function() {
-    modal.generate('userTasksListModal');
+    modal.generate('userTasksListModal', onMobile);
     userTasksListModalOpen = true;
     showUserTasksList();
     $('#userTasksListModal').show();
@@ -8198,7 +8198,7 @@ let openUserTasksList = function() {
 
 // Shows confirmation modal for deleting usertask
 let showDeleteUserTaskConfirmation = function(challenge, skill) {
-    modal.generate('deleteUserTaskWarningModal');
+    modal.generate('deleteUserTaskWarningModal', onMobile);
     userTaskDeleteConfirmationModalOpen = true;
     userTaskSavedName = decodeQueryParam(challenge);
     userTaskSavedSkill = skill;
@@ -8339,7 +8339,7 @@ let loadUserTasks = function() {
 
 // Opens the clipboard modal
 let openClipboard = function() {
-    modal.generate('miscellaneousActionsModal');
+    modal.generate('miscellaneousActionsModal', onMobile);
     onMobile && hideMobileMenu();
     clipboardModalOpen = true;
     $('#miscellaneousActionsModal').show();
@@ -8353,7 +8353,7 @@ let openClipboard = function() {
 // Opens the search within my chunks modal
 let openSearch = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('searchModal');
+        modal.generate('searchModal', onMobile);
         onMobile && hideMobileMenu();
         searchModalOpen = true;
         $('.help2').html(`${tooltip.generate('searchTermsTooltips', '<span>~</span>', 'searchTermsTooltips', onMobile ? 'bottom' : 'right')}`);
@@ -8469,7 +8469,7 @@ let findFraction = function(fraction) {
 
 // Opens the search details modal
 let openSearchDetails = function(category, name, prevCategory, prevName) {
-    modal.generate('searchDetailsModal');
+    modal.generate('searchDetailsModal', onMobile);
     searchDetailsParams = [category, name, prevCategory, prevName];
     name = decodeQueryParam(name);
     searchDetailsModalOpen = true;
@@ -8604,7 +8604,7 @@ let searchDetailsSorterChange = function() {
 let openHighest = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         onMobile && hideMobileMenu();
-        modal.generate('highestModal');
+        modal.generate('highestModal', onMobile);
         highestModalOpen = true;
         let combatStyles = [];
         combatStyles.push('Melee');
@@ -8689,7 +8689,7 @@ let changeBiSFilterBy = function() {
 // Opens the bis upgrades modal
 let openBisUpgrades = function(key) {
     bisUpgradesModalOpen = true;
-    modal.generate('slotUpgradeModal');
+    modal.generate('slotUpgradeModal', onMobile);
     $('.bis-upgrades-data').empty();
     $('.bis-upgrades-slot-name').text(`[${key.replaceAll('_', ' ').replaceAll('-', ' ')}]`);
     let slot = key.split('-')[1];
@@ -8705,7 +8705,7 @@ let openBisUpgrades = function(key) {
 // Opens the highest2 modal
 let openHighest2 = function(notScrollTop) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('highest2Modal');
+        modal.generate('highest2Modal', onMobile);
         onMobile && hideMobileMenu();
         highest2ModalOpen = true;
         let combatStyles = [];
@@ -8893,7 +8893,7 @@ let filterQuests = function(opt) {
 
 // Opens the add passive skill modal
 let openPassiveModal = function(skill) {
-    modal.generate('passiveLevelModal');
+    modal.generate('passiveLevelModal', onMobile);
     passiveSkillModalOpen = true;
     $('#passive-skill-input').val((!!passiveSkill && passiveSkill.hasOwnProperty(skill)) ? passiveSkill[skill] : 1);
     $('#max-skill-input').val((!!maxSkill && maxSkill.hasOwnProperty(skill)) ? maxSkill[skill] : 99);
@@ -9039,7 +9039,7 @@ let checkQuestChunks = function() {
             });
         }
         if (questInvalid) {
-            modal.generate('missingQuestModal');
+            modal.generate('missingQuestModal', onMobile);
             questChunksModalOpen = true;
             questChunksQuestTasks = [];
             let chunkName = chunkInfo['chunks'][chunk].hasOwnProperty('Nickname') ? `${chunkInfo['chunks'][chunk]['Nickname']} (${chunk}${!!chunkSection ? ` - Section ${chunkSection}` : ''})` : `${chunk}${!!chunkSection ? ` - Section ${chunkSection}` : ''}`;
@@ -9164,7 +9164,7 @@ let calculateSlayerTasks = function() {
 
 // Shows specific task info on the given slayer master
 let openSlayerMasterInfo = function(master) {
-    modal.generate('slayerMasterInfoModal');
+    modal.generate('slayerMasterInfoModal', onMobile);
     slayerMasterInfoModalOpen = true;
     $('.slayermasterinfo-data').empty();
     $('.slayermasterinfo-title').text(master);
@@ -9183,7 +9183,7 @@ let openSlayerMasterInfo = function(master) {
 
 // Shows any doable clue steps of the given tier
 let openDoableClueSteps = function(tier) {
-    modal.generate('doableClueStepsModal');
+    modal.generate('doableClueStepsModal', onMobile);
     doableClueStepsModalOpen = true;
     $('.doablecluesteps-data').empty();
     $('.doablecluesteps-title').text(tier.charAt(0).toUpperCase() + tier.slice(1) + ' Clue Steps:');
@@ -9204,7 +9204,7 @@ let openDoableClueSteps = function(tier) {
 
 // Shows all chunks needed for the given clue tier
 let openClueChunks = function(tier) {
-    modal.generate('clueChunksModal');
+    modal.generate('clueChunksModal', onMobile);
     clueChunksModalOpen = true;
     $('.cluechunks-data').empty();
     $('.cluechunks-title').text(tier.charAt(0).toUpperCase() + tier.slice(1) + ' Chunks:');
@@ -9235,7 +9235,7 @@ let openClueChunks = function(tier) {
 
 // Opens the add equipment modal
 let addEquipment = function() {
-    modal.generate('addEquipmentModal');
+    modal.generate('addEquipmentModal', onMobile);
     addEquipmentModalOpen = true;
     $('#addEquipmentModal').show();
     modalOutsideTime = Date.now();
@@ -9279,7 +9279,7 @@ let addManualEquipment = function(equip) {
 
 // Opens the backlog sources modal
 let backlogSources = function() {
-    modal.generate('backlogSourcesModal');
+    modal.generate('backlogSourcesModal', onMobile);
     backlogSourcesModalOpen = true;
     $('#backlogSourcesModal').show();
     modalOutsideTime = Date.now();
@@ -9382,7 +9382,7 @@ let backlogManualSource = function(category, source) {
 // Opens the sticker menu
 let openStickers = function(id) {
     if (signedIn || testMode) {
-        modal.generate('stickerModal');
+        modal.generate('stickerModal', onMobile);
         stickerModalOpen = true;
         $('.sticker-data').empty();
         $('#stickerModal').show();
@@ -9592,7 +9592,7 @@ let decodeObject = function(obj) {
 
 // Opens the methods modal
 let viewPrimaryMethodsOrTasks = function(skill, showTasks) {
-    modal.generate('methodsModal');
+    modal.generate('methodsModal', onMobile);
     methodsModalOpen = true;
     $('.methods-data').empty();
     if (showTasks) {
@@ -10138,7 +10138,7 @@ let goBackDetails = function(type) {
 // Shows challenge details
 let showDetails = function(challenge, skill, dataType, isNested) {
     if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('challengeDetailsModal');
+        modal.generate('challengeDetailsModal', onMobile);
         let baseChunkDataIn = dataType === 'future' ? futureChunkData : baseChunkData;
         let unlockedSectionsIn = dataType === 'future' ? futureUnlockedSections : unlockedSections;
         let chunksIn = !!tempChunks['unlocked'] ? JSON.parse(JSON.stringify(tempChunks['unlocked'])) : {};
@@ -10438,7 +10438,7 @@ let showDetails = function(challenge, skill, dataType, isNested) {
 
 // Shows challenge alternatives
 let showAlternatives = function(challenge, skill) {
-    modal.generate('altChallengesModal');
+    modal.generate('altChallengesModal', onMobile);
     challenge = decodeQueryParam(challenge);
     challengeAltsModalOpen = true;
     $('#alts-data').empty();
@@ -10507,7 +10507,7 @@ let changeOverlayFilterBy = function() {
 // Shows overlay options
 let showOverlays = function(fromHelper) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        !fromHelper && modal.generate('mapOverlaysModal');
+        !fromHelper && modal.generate('mapOverlaysModal', onMobile);
         $('#map-marker-btn').hasClass('notice-me') && $('#map-marker-btn').removeClass('notice-me');
         onMobile && hideMobileMenu();
         overlaysModalOpen = true;
@@ -10595,7 +10595,7 @@ let hideMobileMenu = function() {
 
 // Shows challenge notes
 let showNotes = function(challenge, skill, note) {
-    modal.generate('backlogNotesModal');
+    modal.generate('backlogNotesModal', onMobile);
     let baseChunkDataIn = baseChunkData;
     let detailsKeys = ['ItemsDetails', 'ObjectsDetails', 'MonstersDetails', 'NPCsDetails'];
     challenge = decodeQueryParam(challenge);
@@ -10730,7 +10730,7 @@ let applyPreset = function(preset) {
 
 // Shows warning modal for applying a preset
 let warnPreset = function(preset) {
-    modal.generate('rulesPresetModal');
+    modal.generate('rulesPresetModal', onMobile);
     $('#preset-data').empty();
     $('#preset-title').text('Apply the ' + preset + ' preset?');
     $('.specific-preset').text(preset);
@@ -10741,14 +10741,14 @@ let warnPreset = function(preset) {
 
 // Shows warning modal for exiting sandbox mode
 let warnExitSandbox = function() {
-    modal.generate('exitSandboxWarningModal');
+    modal.generate('exitSandboxWarningModal', onMobile);
     exitSandboxWarningModalOpen = true;
     $('#exitSandboxWarningModal').show();
 }
 
 // Shows warning modal for picking a chunk
 let warnPickChunk = function(both) {
-    modal.generate('rollWarningModal');
+    modal.generate('rollWarningModal', onMobile);
     pickChunkWarningModalOpen = true;
     $('.rollwarning-proceed').attr('onClick', `pickCanvas(${both}, true)`);
     $('#rollWarningModal').show();
@@ -10756,7 +10756,7 @@ let warnPickChunk = function(both) {
 
 // Shows warning modal for rolling 2 chunks
 let warnRoll2Chunk = function() {
-    modal.generate('roll2WarningModal');
+    modal.generate('roll2WarningModal', onMobile);
     roll2ChunkWarningModalOpen = true;
     $('.roll2warning-proceed').attr('onClick', `roll2Canvas(true)`);
     $('#roll2WarningModal').show();
@@ -10764,7 +10764,7 @@ let warnRoll2Chunk = function() {
 
 // Shows import rules modal
 let importRules = function() {
-    modal.generate('rulesImportModal');
+    modal.generate('rulesImportModal', onMobile);
     $('.rules-import-error').hide();
     $('.rules-input').val('');
     $('#rulesImportModal').show();
@@ -10839,7 +10839,7 @@ let searchRules = function() {
 // Shows chunk rules
 let showRules = function(isPage2) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('rulesModal');
+        modal.generate('rulesModal', onMobile);
         rulesModalOpen = true;
         if (onMobile) {
             toggleRulesPanel(Object.keys(rulesPanelVis).filter(panel => { return rulesPanelVis[panel] })[0]);
@@ -10933,7 +10933,7 @@ let showRules = function(isPage2) {
 
 // Shows settings details
 let showSettings = function(keepSettingsClosed) {
-    modal.generate('settingsModal');
+    modal.generate('settingsModal', onMobile);
     onMobile && hideMobileMenu();
     settingsModalOpen = true;
     $('#settings-data').empty();
@@ -11101,7 +11101,7 @@ let changeDefaultChunkinfo = function() {
 // Shows chunk history
 let showChunkHistory = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
-        modal.generate('chunkHistoryModal');
+        modal.generate('chunkHistoryModal', onMobile);
         onMobile && hideMobileMenu();
         chunkHistoryModalOpen = true;
         $('#chunkhistory-data-inner').empty();

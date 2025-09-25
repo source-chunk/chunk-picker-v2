@@ -35147,6 +35147,9 @@
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
+				"Tasks": {
+					"~|Swan Song|~ Complete the quest": "Quest"
+				},
 				"Not F2P": true
 			},
 			"Piscatoris Fishing Colony": {
@@ -35154,6 +35157,9 @@
 				"ClueTier": "master",
 				"ClueType": "Hot/Cold",
 				"Items": ["Spade", "Strange device (master)"],
+				"Tasks": {
+					"~|Swan Song|~ Complete the quest": "Quest"
+				},
 				"Not Skiller": true,
 				"Not F2P": true
 			},
@@ -79563,7 +79569,8 @@
 				},
 				"Tasks": {
 					"~|Morytania Diary#Hard|~ Complete the Hard Diary": "Diary",
-					"~|In Aid of the Myreque|~ Complete the quest": "Quest"
+					"~|In Aid of the Myreque|~ Complete the quest": "Quest",
+					"~|Barbarian Training|~ 2b2": "Quest"
 				},
 				"SkillsBoost": {
 					"Strength": false
