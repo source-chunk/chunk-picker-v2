@@ -3209,7 +3209,7 @@ label .tooltip-base-el:active {
     color: var(--colorText);
 }
 
-#chunkHistoryModal > .modal-content:not(.mobile), #customizeTopbarModal > .modal-content:not(.mobile) {
+#chunkHistoryModal:not(.mobile) > .modal-content, #customizeTopbarModal:not(.mobile) > .modal-content {
     min-width: 650px;
 }
 
@@ -4044,12 +4044,12 @@ label .tooltip-base-el:active {
     padding-right: 10px;
 }
 
-.modal-content:not(.mobile) .rules-subdata:not(.page2) {
+#rulesModal:not(.mobile) .rules-subdata:not(.page2) {
     width: 75%;
     margin: auto;
 }
 
-.modal-content:not(.mobile) .rules-subdata.page2 {
+#rulesModal:not(.mobile) .rules-subdata.page2 {
     width: 64%;
     right: 0px;
     position: absolute;
@@ -4668,6 +4668,10 @@ input#searchChunkSections {
     margin: 25px;
 }
 
+.mobile #canvas-graph {
+    width: 85%;
+}
+
 .average-rolltime-title {
     text-align: center;
     margin-bottom: 25px;
@@ -5146,6 +5150,10 @@ input#searchChunkSections {
     border-bottom: solid 1px;
 }
 
+.mobile .usertasks-title {
+    font-size: 3.5vh;
+}
+
 .usertasks-subtitle {
     margin: 5px 15px 15px 15px;
     background-color: var(--color3);
@@ -5153,6 +5161,10 @@ input#searchChunkSections {
     text-align: center;
     padding: 5px;
     border-radius: 5px;
+}
+
+.mobile .usertasks-subtitle {
+    font-size: 2.5vh;
 }
 
 .usertasks-data > div {
@@ -5180,10 +5192,18 @@ input#searchChunkSections {
     font-size: min(2vw, 24px);
 }
 
+.mobile #usertasks-dropdown-container {
+    font-size: 3.5vh;
+}
+
 #usertasks-skill-dropdown {
     font-size: min(2vw, 24px);
     width: 200px;
     text-align: center;
+}
+
+.mobile #usertasks-skill-dropdown {
+    font-size: 3vh;
 }
 
 .usertasks-level-input {
@@ -5191,9 +5211,17 @@ input#searchChunkSections {
     margin: 10px 0px;
 }
 
+.mobile .usertasks-level-input {
+    font-size: 3.5vh;
+}
+
 .usertasks-level-input > input {
     font-size: min(2vw, 24px);
     text-align: center;
+}
+
+.mobile .usertasks-level-input > input {
+    font-size: 3vh;
 }
 
 .usertasks-name-input {
@@ -5201,10 +5229,18 @@ input#searchChunkSections {
     margin: 10px 0px;
 }
 
+.mobile .usertasks-name-input {
+    font-size: 3.5vh;
+}
+
 .usertasks-name-input > input {
     font-size: min(2vw, 24px);
     width: 80%;
     text-align: center;
+}
+
+.mobile .usertasks-name-input > input {
+    font-size: 3vh;
 }
 
 .usertasks-cancel {
@@ -6609,7 +6645,7 @@ input#searchChunks {
 }
 
 #highestModal.mobile .row, #slotUpgradeModal.mobile .row {
-    width: 85%;
+    width: 75%;
 }
 
 .slot-text {

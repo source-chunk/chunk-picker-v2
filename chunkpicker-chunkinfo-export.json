@@ -14433,7 +14433,7 @@
 			},
 			"Grow a ~|cabbage|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Cabbage seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Cabbage seed*"],
 				"Level": 7,
 				"Objects": ["Allotment patch"],
 				"Output": "Cabbage",
@@ -14511,7 +14511,7 @@
 			},
 			"Grow a ~|goutweed|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Gout tuber*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Gout tuber*"],
 				"Level": 29,
 				"Objects": ["Herb patch"],
 				"Output": "Goutweed",
@@ -14519,7 +14519,7 @@
 			},
 			"Grow a ~|grimy avantoe|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Avantoe seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Avantoe seed*"],
 				"Level": 50,
 				"Priority": 1,
 				"Objects": ["Herb patch"],
@@ -14537,7 +14537,7 @@
 			},
 			"Grow a ~|grimy cadantine|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Cadantine seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Cadantine seed*"],
 				"Level": 67,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy cadantine",
@@ -14545,7 +14545,7 @@
 			},
 			"Grow a ~|grimy dwarf weed|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Dwarf weed seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Dwarf weed seed*"],
 				"Level": 79,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy dwarf weed",
@@ -14562,7 +14562,7 @@
 			},
 			"Grow a ~|grimy guam leaf|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Guam seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Guam seed*"],
 				"Level": 9,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy guam leaf",
@@ -14570,7 +14570,7 @@
 			},
 			"Grow a ~|grimy harralander|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Harralander seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Harralander seed*"],
 				"Level": 26,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy harralander",
@@ -14579,7 +14579,7 @@
 			},
 			"Grow a ~|grimy irit leaf|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Irit seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Irit seed*"],
 				"Level": 44,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy irit leaf",
@@ -14587,7 +14587,7 @@
 			},
 			"Grow a ~|grimy kwuarm|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Kwuarm seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Kwuarm seed*"],
 				"Level": 56,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy kwuarm",
@@ -14595,7 +14595,7 @@
 			},
 			"Grow a ~|grimy lantadyme|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Lantadyme seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Lantadyme seed*"],
 				"Level": 73,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy lantadyme",
@@ -14603,7 +14603,7 @@
 			},
 			"Grow a ~|grimy marrentill|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Marrentill seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Marrentill seed*"],
 				"Level": 14,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy marrentill",
@@ -14620,7 +14620,7 @@
 			},
 			"Grow a ~|grimy huasca|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Huasca seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Huasca seed*"],
 				"Level": 65,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy huasca",
@@ -14629,7 +14629,7 @@
 			},
 			"Grow a ~|grimy ranarr weed|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Ranarr seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Ranarr seed*"],
 				"Level": 32,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy ranarr weed",
@@ -14637,7 +14637,7 @@
 			},
 			"Grow a ~|grimy snapdragon|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Snapdragon seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Snapdragon seed*"],
 				"Level": 62,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy snapdragon",
@@ -14645,7 +14645,7 @@
 			},
 			"Grow a ~|grimy tarromin|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Tarromin seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Tarromin seed*"],
 				"Level": 19,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy tarromin",
@@ -14653,7 +14653,7 @@
 			},
 			"Grow a ~|grimy toadflax|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Toadflax seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Toadflax seed*"],
 				"Level": 38,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy toadflax",
@@ -14661,7 +14661,7 @@
 			},
 			"Grow a ~|grimy torstol|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Torstol seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Torstol seed*"],
 				"Level": 85,
 				"Objects": ["Herb patch"],
 				"Output": "Grimy torstol",
@@ -14680,13 +14680,13 @@
 				"Category": ["Normal Farming"],
 				"Items": ["Seed dibber", "Rake", "Kronos seed*"],
 				"Level": 76,
-				"Objects": ["Herb patch"],
+				"Objects": ["Anima patch"],
 				"Primary": true,
 				"Priority": 1
 			},
 			"Grow a ~|limpwurt root|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Limpwurt seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Limpwurt seed*"],
 				"Level": 26,
 				"Objects": ["Flower Patch"],
 				"Output": "Limpwurt root",
@@ -14730,7 +14730,7 @@
 			},
 			"Grow a ~|marigold|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Marigold seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Marigold seed*"],
 				"Level": 2,
 				"Objects": ["Flower Patch"],
 				"Output": "Marigolds",
@@ -14746,7 +14746,7 @@
 			},
 			"Grow a ~|nasturtium|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Nasturtium seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Nasturtium seed*"],
 				"Level": 24,
 				"Objects": ["Flower Patch"],
 				"Output": "Nasturtiums",
@@ -14786,7 +14786,7 @@
 			},
 			"Grow a ~|potato|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Potato seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Potato seed*"],
 				"Level": 1,
 				"Objects": ["Allotment patch"],
 				"Output": "Potato",
@@ -14804,7 +14804,7 @@
 			},
 			"Grow a ~|rosemary|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Rosemary seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Rosemary seed*"],
 				"Level": 11,
 				"Objects": ["Flower Patch"],
 				"Output": "Rosemary",
@@ -14819,7 +14819,7 @@
 			},
 			"Grow a ~|strawberry|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Strawberry seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Strawberry seed*"],
 				"Level": 31,
 				"Objects": ["Allotment patch"],
 				"Output": "Strawberry",
@@ -14827,7 +14827,7 @@
 			},
 			"Grow a ~|sweetcorn|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Sweetcorn seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Sweetcorn seed*"],
 				"Level": 20,
 				"Objects": ["Allotment patch"],
 				"Output": "Sweetcorn",
@@ -14844,7 +14844,7 @@
 			},
 			"Grow a ~|tomato|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Tomato seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Tomato seed*"],
 				"Level": 12,
 				"Objects": ["Allotment patch"],
 				"Output": "Tomato",
@@ -14852,7 +14852,7 @@
 			},
 			"Grow a ~|watermelon|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Watermelon seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Watermelon seed*"],
 				"Level": 47,
 				"Objects": ["Allotment patch"],
 				"Output": "Watermelon",
@@ -14860,7 +14860,7 @@
 			},
 			"Grow a ~|white lily|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "White lily seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "White lily seed*"],
 				"Level": 58,
 				"Objects": ["Flower Patch"],
 				"Output": "White lily",
@@ -14877,7 +14877,7 @@
 			},
 			"Grow a ~|woad leaf|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Woad seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Woad seed*"],
 				"Level": 25,
 				"Objects": ["Flower Patch"],
 				"Output": "Woad leaf",
@@ -14905,7 +14905,7 @@
 				"Category": ["Normal Farming"],
 				"Items": ["Seed dibber", "Rake", "Attas seed*"],
 				"Level": 76,
-				"Objects": ["Herb patch"],
+				"Objects": ["Anima patch"],
 				"Primary": true,
 				"Priority": 2
 			},
@@ -14913,7 +14913,7 @@
 				"Category": ["Normal Farming"],
 				"Items": ["Seed dibber", "Rake", "Iasor seed*"],
 				"Level": 76,
-				"Objects": ["Herb patch"],
+				"Objects": ["Anima patch"],
 				"Primary": true,
 				"Priority": 3
 			},
@@ -14928,7 +14928,7 @@
 			},
 			"Grow an ~|onion|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Onion seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Onion seed*"],
 				"Level": 5,
 				"Objects": ["Allotment patch"],
 				"Output": "Onion",
@@ -15052,7 +15052,7 @@
 			},
 			"Grow ~|snape grass|~": {
 				"Category": ["Normal Farming"],
-				"Items": ["Seed dibber", "Rake", "Snape grass seed*"],
+				"Items": ["Seed dibber", "Rake", "Spade", "Snape grass seed*"],
 				"Level": 61,
 				"Objects": ["Allotment patch"],
 				"Output": "Snape grass",
@@ -33094,22 +33094,22 @@
 				"Not F2P": true
 			},
 			"Bird nest (Wyson) loot": {
-				"Items": ["Bird nest (Wyson)"],
+				"Items": ["Bird nest (Wyson)*"],
 				"Output": "Bird nest (Wyson) loot",
 				"Not F2P": true
 			},
 			"Bird nest (seeds) loot": {
-				"Items": ["Bird nest (seeds)"],
+				"Items": ["Bird nest (seeds)*"],
 				"Output": "Bird nest (seeds) loot",
 				"Not F2P": true
 			},
 			"Bird nest (ring) loot": {
-				"Items": ["Bird nest (ring)"],
+				"Items": ["Bird nest (ring)*"],
 				"Output": "Bird nest (ring) loot",
 				"Not F2P": true
 			},
 			"Bird nest (egg) loot": {
-				"Items": ["Bird nest (egg)"],
+				"Items": ["Bird nest (egg)*"],
 				"Output": "Bird nest (egg) loot",
 				"Not F2P": true
 			},
@@ -76991,7 +76991,7 @@
 				"Description": "Pick some limpwurt root from the farming patch in Catherby.",
 				"Chunks": ["11062-1"],
 				"Objects": ["Flower Patch"],
-				"Items": ["Limpwurt seed", "Rake", "Seed dibber"],
+				"Items": ["Limpwurt seed", "Rake", "Spade", "Seed dibber"],
 				"Skills": {
 					"Farming": 26
 				},
@@ -208824,25 +208824,25 @@
 					"3-6": "Varies"
 				},
 				"Anima-infused bark": {
-					"70-90": "10/160"
+					"70-90": "25/399"
 				},
 				"Apple tree seed": {
 					"5-8": "Varies"
 				},
 				"Bale of flax": {
-					"5-6": "20/160"
+					"5-6": "50/399"
 				},
 				"Bird nest (egg)": {
-					"1-2": "3/816"
+					"1-2": "1.5/399"
 				},
 				"Bird nest (ring)": {
-					"1-2": "11/272"
+					"1-2": "16/399"
 				},
 				"Bird nest (seeds)": {
-					"1-2": "22/272"
+					"1-2": "32.5/399"
 				},
 				"Blessed bone shards": {
-					"70-90": "14/160"
+					"70-90": "35/399"
 				},
 				"Bow string spool": {
 					"1": "5/1000"
@@ -208866,16 +208866,16 @@
 					"1": "Very rare"
 				},
 				"Dirty arrowtips": {
-					"26-32": "32/160"
+					"26-32": "80/399"
 				},
 				"Dragonfruit tree seed": {
 					"1-2": "Varies"
 				},
 				"Ent branch": {
-					"1": "26/160"
+					"1": "65/399"
 				},
 				"Feather": {
-					"400-500": "6/160"
+					"400-500": "15/399"
 				},
 				"Fletching knife": {
 					"1": "3/1000"
@@ -208887,13 +208887,13 @@
 					"3-6": "Varies"
 				},
 				"Magic roots": {
-					"2-3": "3/160"
+					"2-3": "7.2/399"
 				},
 				"Magic seed": {
 					"1-2": "Varies"
 				},
 				"Maple roots": {
-					"3-4": "2/160"
+					"3-4": "4.8/399"
 				},
 				"Maple seed": {
 					"1-2": "Varies"
@@ -208911,13 +208911,13 @@
 					"5-8": "Varies"
 				},
 				"Willow roots": {
-					"3-4": "2/160"
+					"3-4": "4.8/399"
 				},
 				"Willow seed": {
 					"1-2": "Varies"
 				},
 				"Yew roots": {
-					"3-4": "3/160"
+					"3-4": "7.2/399"
 				},
 				"Yew seed": {
 					"1-2": "Varies"
