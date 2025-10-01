@@ -67850,6 +67850,240 @@
 				},
 				"Not F2P": true
 			},
+			"Armour Case: ~|Chompy bird hat (ogre bowman)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (bowman)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (ogre yeoman)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (yeoman)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (ogre marksman)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (marksman)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (ogre woodsman)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (woodsman)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (ogre forester)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (forester)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (ogre bowmaster)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (bowmaster)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (ogre expert)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (expert)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (ogre dragon archer)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (dragon archer)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (expert ogre dragon archer)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Armour Case: ~|Chompy bird hat (expert dragon archer)|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Monsters": ["Chompy bird"],
+				"Skills": {
+					"Construction": 46
+				},
+				"Tasks": {
+					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
 			"Armour Case: ~|Clue hunter garb|~": {
 				"Category": ["Fill POH"],
 				"Label": "Fill POH",
@@ -164702,9 +164936,6 @@
 			},
 			"Sun-kissed bones": {
 				"13-38": "5/105"
-			},
-			"Sunfire splinters": {
-				"250-750": "1/105"
 			},
 			"Tooth half of key (moon key)": {
 				"1": "1/105"
