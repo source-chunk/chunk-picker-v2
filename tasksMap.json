@@ -1167,6 +1167,7 @@
   "~|Recipe for Disaster/Freeing King Awowogei|~ Cooking skill requirement": "t_1134",
   "Access the ~|Crafting Guild|~": "t_1135",
   "Participate in ~|Trouble Brewing|~ for Crafting xp": "t_1136",
+  "Craft an ~|unstrung lyre|~": "t_46512",
   "Craft a ~|noxious halberd|~": "t_1137",
   "Make an ~|amulet of rancour|~": "t_1138",
   "Make the ~|purging staff|~": "t_1139",
@@ -3798,6 +3799,7 @@
   "Chop ~|bruma roots|~": "t_3709",
   "Chop ~|light jungle|~": "t_3710",
   "Chop ~|logs|~": "t_3711",
+  "Chop the ~|swaying tree|~": "t_46513",
   "Chop a ~|burnt tree|~": "t_3712",
   "Chop a ~|dead tree (burnt)|~": "t_3713",
   "Chop ~|magic logs|~": "t_3714",
@@ -46260,5 +46262,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46512
+  "currentNextIndex": 46514
 }
