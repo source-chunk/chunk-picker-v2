@@ -128637,6 +128637,9 @@
 					"Spawn": {
 						"Plank": 3
 					},
+					"Quest": {
+						"Dragon Slayer I": "step"
+					},
 					"Clue": {
 						"medium": 1
 					}
@@ -192784,7 +192787,7 @@
 		"The Corsair Curse": "10028, 10284, 11570, 12083, Corsair Cove Dungeon#South",
 		"Demon Slayer": "12337, 12852, 12853, 12854, Varrock Sewers",
 		"Doric's Quest": "11829",
-		"Dragon Slayer I": "11570, 12081, 12082, 12086, 12338, 12596, 12850, Crandor and Karamja Dungeon#North, Dwarven Mine, Melzar's Maze#Basement",
+		"Dragon Slayer I": "11314, 11570, 12081, 12082, 12086, 12338, 12596, 12850, Crandor and Karamja Dungeon#North, Dwarven Mine, Melzar's Maze#Basement",
 		"Ernest the Chicken": "12340",
 		"Goblin Diplomacy": "11830",
 		"Imp Catcher": "12337",
