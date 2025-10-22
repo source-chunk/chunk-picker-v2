@@ -372,7 +372,7 @@ onmessage = function(e) {
         //console.log(nonValids);
         //console.log(baseChunkData);
 
-        postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 0, highestOverall, type === 'current' ? dropRatesGlobal : {}, questProgress, diaryProgress, skillQuestXp, chunks, type === 'current' ? dropTablesGlobal : {}, bestEquipmentAltsGlobal, unlockedSections, type === 'current' ? combatPointTotal : 0, highestOverallCompleted, bisUpgradesOutput, bankMemoryFormat, globalValidsBoosts]);
+        postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 1, highestOverall, type === 'current' ? dropRatesGlobal : {}, questProgress, diaryProgress, skillQuestXp, chunks, type === 'current' ? dropTablesGlobal : {}, bestEquipmentAltsGlobal, unlockedSections, type === 'current' ? combatPointTotal : 0, highestOverallCompleted, bisUpgradesOutput, bankMemoryFormat, globalValidsBoosts]);
     } catch (err) {
         postMessage(['error', err]);
     }
@@ -3092,7 +3092,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 });
             });
         });
-        questPointTotal = 0;
+        questPointTotal = 1;
         questProgress = {};
         combatPointTotal = 0;
         diaryProgress = {};
