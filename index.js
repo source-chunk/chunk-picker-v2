@@ -1408,7 +1408,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.5';
+let currentVersion = '6.9.6';
 let patchNotesVersion = '6.9.0';
 let updateLevel = 'difference';
 
@@ -1576,7 +1576,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.5";
+mapImg.src = "osrs_world_map.png?v=6.9.6";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3341,7 +3341,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.5");
+        myWorker = new Worker("./worker.js?v=6.9.6");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3645,8 +3645,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.5");
-let myWorker2 = new Worker("./worker.js?v=6.9.5");
+let myWorker = new Worker("./worker.js?v=6.9.6");
+let myWorker2 = new Worker("./worker.js?v=6.9.6");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6582,7 +6582,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.5");
+    myWorker2 = new Worker("./worker.js?v=6.9.6");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -8157,13 +8157,9 @@ let loadPoolsData = function() {
         } else {
             $('.pools-list-b').append(`<table><tr><th>Username</th><th>Chunk Picker Map</th><th>Date Joined</th><th>Days Waiting</th></tr>${tableData}</table>`);
         }
-        let upgradeText = splitData[7].replace(/"([^"]*?),([^"]*?)"/g, (match, part1, part2) => {
-            return `"${part1}|${part2}"`;
-        }).split(',')[13].replaceAll('"', '').replaceAll('|', ',');
         let kickText = splitData[10].replace(/"([^"]*?),([^"]*?)"/g, (match, part1, part2) => {
             return `"${part1}|${part2}"`;
         }).split(',')[13].replaceAll('"', '').replaceAll('|', ',');
-        $('.pools-period-b').text(upgradeText);
         $('.pools-period-c').text(kickText);
         $('.content12a .subtitle, .content12b .subtitle').show();
     });
@@ -8702,6 +8698,46 @@ let openBisUpgrades = function(key) {
     document.getElementById('bis-upgrades-data').scrollTop = 0;
 }
 
+// Calculates clue chance (close approximation) for given starting amount of clues with given success probability and completion step weightings
+let calcClueChanceForTier = function(startNumClues, successProb, targetTotalsObj) {
+  // Compute the probability of getting exactly `k` total successes (reroll system)
+  const cluesRollingNum = startNumClues <= 0 ? 1 : startNumClues;
+  const totalSuccessProbability2 = (cluesRollingNum, successProb, k) => {
+    const combinations = (a, b) => {
+      let result = 1;
+      for (let i = 1; i <= b; i++) {
+        result *= (a - (b - i)) / i;
+      }
+      return result;
+    };
+    return combinations(k + cluesRollingNum - 1, k) * Math.pow(successProb, k) * Math.pow((1 - successProb), cluesRollingNum);
+  };
+
+  const entries = Object.entries(targetTotalsObj);
+  const totalWeight = entries.reduce((sum, [, w]) => sum + w, 0);
+  const weights = entries.map(([t, w]) => w / totalWeight);
+
+  return entries.reduce((sum, [totalStr, _], i) => {
+    const target = parseInt(totalStr) - startNumClues;
+
+    // Probability of at least `target` successes = 1 - sum of probabilities below target
+    let probAtLeast = 1;
+    for (let k = 0; k < target; k++) {
+      probAtLeast -= totalSuccessProbability2(cluesRollingNum, successProb, k);
+    }
+
+    return sum + weights[i] * probAtLeast;
+  }, 0);
+};
+
+// Calculates the completion chance per inputted clue tier
+let calcClueChances = function(tier) {
+    let chance = 0;
+    let baseChance = (numClueTasksPossible[tier.toLowerCase()] / numClueTasks[tier.toLowerCase()]) || 0;
+    chance = calcClueChanceForTier(parseInt(prevValueLevelInput['ClueSteps']), baseChance, clueStepAmounts[tier]);
+    return `<div class='noscroll row'><span class='noscroll clue-tier'><img class='noscroll tier-icon' src='./resources/${tier}_clue.png' title='${tier}' />${tier} <span onclick="openClueChunks('${tier.toLowerCase()}')"><i class="clue-info-icon fa-solid fa-info-circle"></i></span></span></span><span class='noscroll clue-possible'>${numClueTasksPossible[tier.toLowerCase()]} / ${numClueTasks[tier.toLowerCase()]} (${Math.round((baseChance * 100) * 100) / 100}%) <span onclick="openDoableClueSteps('${tier.toLowerCase()}')"><i class="clue-info-icon fa-solid fa-info-circle"></i></span></span><span class='noscroll clue-percent'> ${(Math.round((chance * 100) * 100) / 100).toLocaleString(undefined, {minimumIntegerDigits: 2, minimumFractionDigits: 2})}%</span></div>`;
+}
+
 // Opens the highest2 modal
 let openHighest2 = function(notScrollTop) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
@@ -8834,30 +8870,12 @@ let openHighest2 = function(notScrollTop) {
                         prevValueLevelInput['ClueSteps'] = e.target.value || 0;
                         $(`.${combatStyle.replaceAll(' ', '_')}-body .row:not(.row-header)`).remove();
                         clueTiers.forEach((tier) => {
-                            let chance = 0;
-                            let baseChance = (numClueTasksPossible[tier.toLowerCase()] / numClueTasks[tier.toLowerCase()]) || 0;
-                            Object.keys(clueStepAmounts[tier]).forEach((numSteps) => {
-                                if (parseInt(prevValueLevelInput['ClueSteps']) >= parseInt(numSteps)) {
-                                    chance += clueStepAmounts[tier][numSteps];
-                                } else {
-                                    chance += Math.pow(baseChance, (parseInt(numSteps) - parseInt(prevValueLevelInput['ClueSteps']))) * clueStepAmounts[tier][numSteps];
-                                }
-                            });
-                            $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll clue-tier'><img class='noscroll tier-icon' src='./resources/${tier}_clue.png' title='${tier}' />${tier} <span onclick="openClueChunks('${tier.toLowerCase()}')"><i class="clue-info-icon fa-solid fa-info-circle"></i></span></span></span><span class='noscroll clue-possible'>${numClueTasksPossible[tier.toLowerCase()]} / ${numClueTasks[tier.toLowerCase()]} (${Math.round((baseChance * 100) * 100) / 100}%) <span onclick="openDoableClueSteps('${tier.toLowerCase()}')"><i class="clue-info-icon fa-solid fa-info-circle"></i></span></span><span class='noscroll clue-percent'> ${(Math.round((chance * 100) * 100) / 100).toLocaleString(undefined, {minimumIntegerDigits: 2, minimumFractionDigits: 2})}%</span></div>`);
+                            $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(calcClueChances(tier));
                         });
                     }
                 });
                 clueTiers.forEach((tier) => {
-                    let chance = 0;
-                    let baseChance = (numClueTasksPossible[tier.toLowerCase()] / numClueTasks[tier.toLowerCase()]) || 0;
-                    Object.keys(clueStepAmounts[tier]).forEach((numSteps) => {
-                        if (parseInt(prevValueLevelInput['ClueSteps']) >= parseInt(numSteps)) {
-                            chance += clueStepAmounts[tier][numSteps];
-                        } else {
-                            chance += Math.pow(baseChance, parseInt(numSteps)) * clueStepAmounts[tier][numSteps];
-                        }
-                    });
-                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row'><span class='noscroll clue-tier'><img class='noscroll tier-icon' src='./resources/${tier}_clue.png' title='${tier}' />${tier} <span onclick="openClueChunks('${tier.toLowerCase()}')"><i class="clue-info-icon fa-solid fa-info-circle"></i></span></span></span><span class='noscroll clue-possible'>${numClueTasksPossible[tier.toLowerCase()]} / ${numClueTasks[tier.toLowerCase()]} (${Math.round((baseChance * 100) * 100) / 100}%) <span onclick="openDoableClueSteps('${tier.toLowerCase()}')"><i class="clue-info-icon fa-solid fa-info-circle"></i></span></span><span class='noscroll clue-percent'> ${(Math.round((chance * 100) * 100) / 100).toLocaleString(undefined, {minimumIntegerDigits: 2, minimumFractionDigits: 2})}%</span></div>`);
+                    $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(calcClueChances(tier));
                 });
             } else if (combatStyle === 'Shooting Stars') {
                 $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row row-header'><span class='noscroll region-table-header'>Region</span><span class='noscroll sites-table-header'>Possible Sites</span></div>`);
