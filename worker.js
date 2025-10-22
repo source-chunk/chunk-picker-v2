@@ -4410,7 +4410,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             }
             if (!!valids['Slayer'] && Object.keys(chunkInfo['challenges']['Slayer']).filter(name => (chunkInfo['challenges']['Slayer'][name].hasOwnProperty('Output') && chunkInfo['challenges']['Slayer'][name]['Output'] === monster) || (name.includes(`~|${monster}|~`))).length >= 1) {
                 chunkInfo['challenges']['Extra']['Kill X ~|' + monster + '|~']['Tasks'] = {};
-                chunkInfo['challenges']['Extra']['Kill X ~|' + monster + '|~']['Tasks'][Object.keys(chunkInfo['challenges']['Slayer']).filter(name => (chunkInfo['challenges']['Slayer'][name].hasOwnProperty('Output') && chunkInfo['challenges']['Slayer'][name]['Output'] === monster) || (name.includes(`~|${monster}|~`)))[0]] = 'Slayer';
+                chunkInfo['challenges']['Extra']['Kill X ~|' + monster + '|~']['Tasks'][Object.keys(chunkInfo['challenges']['Slayer']).filter(name => ((chunkInfo['challenges']['Slayer'][name].hasOwnProperty('Output') && chunkInfo['challenges']['Slayer'][name]['Output'] === monster) || (name.toLowerCase().includes(`~|${monster.toLowerCase()}|~`))) && !name.includes('|~ alt'))[0]] = 'Slayer';
             }
         });
     }
