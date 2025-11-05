@@ -179,12 +179,14 @@ let clueTasksPossible = {};
 let areasStructure = {};
 let tempChunkData = {};
 let craftedBisOverride = {};
+let craftedBisOverrideLinking = {};
 let bisOverrideMinLevel = {};
 let readdedCraftedBisTasks = {};
 let didRestart = false;
 let bisUpgrades = {};
 let globalValidsBoosts = {};
 let bankMemoryFormat = 'Item id	Item name	Item quantity\n';
+let unconnectedAreas = ['Zanaris', 'Puro-Puro', 'Player-owned house'];
 
 onmessage = function(e) {
     try {
@@ -297,7 +299,8 @@ onmessage = function(e) {
             !!craftedBisOverride && Object.keys(craftedBisOverride).forEach((skill) => {
                 craftedBisHighestLevel[skill] = 0;
                 !!craftedBisOverride[skill] && Object.keys(craftedBisOverride[skill]).forEach((name) => {
-                    if (Object.values(highestOverall).includes(chunkInfo['challenges'][skill][name]['Output']) && chunkInfo['challenges'][skill][name]['Level'] > bisOverrideMinLevel[skill] && baseChunkData['items'].hasOwnProperty(chunkInfo['challenges'][skill][name]['Output']) && Object.values(baseChunkData['items'][chunkInfo['challenges'][skill][name]['Output']]).filter((source) => !source.includes(skill)).length === 0) {
+                    let isHighestOverallIngredient = Object.values(highestOverall).filter((item) => craftedBisOverrideLinking.hasOwnProperty(item) && craftedBisOverrideLinking[item].hasOwnProperty(chunkInfo['challenges'][skill][name]['Output'])).length > 0;
+                    if ((Object.values(highestOverall).includes(chunkInfo['challenges'][skill][name]['Output']) || isHighestOverallIngredient) && chunkInfo['challenges'][skill][name]['Level'] > bisOverrideMinLevel[skill] && baseChunkData['items'].hasOwnProperty(chunkInfo['challenges'][skill][name]['Output']) && Object.values(baseChunkData['items'][chunkInfo['challenges'][skill][name]['Output']]).filter((source) => !source.includes(skill)).length === 0) {
                         craftedBisHighestLevel[skill] = chunkInfo['challenges'][skill][name]['Level'];
                         if (!toManuallyAdd[skill]) {
                             toManuallyAdd[skill] = {};
@@ -2623,9 +2626,9 @@ let calcChallenges = function(chunks, baseChunkData) {
                                         }
                                     } else if (baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-').length > 1 && [...skillNames, 'Nonskill', 'Quest', 'Diary', 'Extra'].includes(baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1])) {
                                         let lowestQuantityRate = 0;
-                                        !!chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] && !!chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')] && chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')] && Object.keys(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')]).forEach((quantity) => {
-                                            if (!isNaN(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')][quantity].split('/')[0]) && ((parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')][quantity].split('/')[0]) / parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')][quantity].split('/')[1])) > lowestQuantityRate)) {
-                                                lowestQuantityRate = parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')][quantity].split('/')[0]) / parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source.replaceAll(/\*/g, '')][item.replaceAll(/\*/g, '')][quantity].split('/')[1]);
+                                        !!chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source] && chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source].hasOwnProperty('Output') && !!chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]] && !!chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['Output']] && chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['Output']][item.replaceAll(/\*/g, '')] && Object.keys(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['Output']][item.replaceAll(/\*/g, '')]).forEach((quantity) => {
+                                            if (!isNaN(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['Output']][item.replaceAll(/\*/g, '')][quantity].split('/')[0]) && ((parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['Output']][item.replaceAll(/\*/g, '')][quantity].split('/')[0]) / parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['Output']][item.replaceAll(/\*/g, '')][quantity].split('/')[1])) > lowestQuantityRate)) {
+                                                lowestQuantityRate = parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['Output']][item.replaceAll(/\*/g, '')][quantity].split('/')[0]) / parseFloat(chunkInfo['skillItems'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][chunkInfo['challenges'][baseChunkData['items'][item.replaceAll(/\*/g, '')][source].split('-')[1]][source]['Output']][item.replaceAll(/\*/g, '')][quantity].split('/')[1]);
                                             }
                                         });
                                         if ((lowestQuantityRate > itemDropRate) && (lowestQuantityRate !== 0)) {
@@ -3286,6 +3289,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
     extraOutputItems = {};
     multiTasks = {};
     craftedBisOverride = {};
+    craftedBisOverrideLinking = {};
     rules['Multi Step Processing'] && Object.keys(oldTempItemSkill).filter(skill => checkPrimaryMethod(skill, globalValids, baseChunkData)).forEach((skill) => {
         !!oldTempItemSkill[skill] && Object.keys(oldTempItemSkill[skill]).forEach((item) => {
             !!oldTempItemSkill[skill][item] && oldTempItemSkill[skill][item].filter(task => !!chunkInfo['challenges'][skill][task] && chunkInfo['challenges'][skill][task].hasOwnProperty('Output') && (!items.hasOwnProperty(chunkInfo['challenges'][skill][task]['Output']) || !items[chunkInfo['challenges'][skill][task]['Output']].hasOwnProperty(task))).forEach((task) => {
@@ -4362,6 +4366,24 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     }
                     if (rules['Wield Crafted Items Override'] && !didRestart && chunkInfo['challenges'][skill].hasOwnProperty(name) && chunkInfo['challenges'][skill][name].hasOwnProperty('Output')) {
                         valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                        // If component item came from earlier skill
+                        chunkInfo['challenges'][skill][name].hasOwnProperty('ItemsDetails') && Object.keys(craftedBisOverride).forEach((chalSkill) => {
+                            Object.keys(craftedBisOverride[chalSkill]).filter((chal) => chunkInfo['challenges'][skill][name]['ItemsDetails'].includes(chunkInfo['challenges'][chalSkill][chal]['Output'])).forEach((chal) => {
+                                if (!craftedBisOverrideLinking[chunkInfo['challenges'][skill][name]['Output']]) {
+                                    craftedBisOverrideLinking[chunkInfo['challenges'][skill][name]['Output']] = {};
+                                }
+                                craftedBisOverrideLinking[chunkInfo['challenges'][skill][name]['Output']][chunkInfo['challenges'][chalSkill][chal]['Output']] = true;
+                            });
+                        });
+                        // If output item is used in earlier skill
+                        chunkInfo['challenges'][skill][name].hasOwnProperty('Output') && Object.keys(craftedBisOverride).forEach((chalSkill) => {
+                            Object.keys(craftedBisOverride[chalSkill]).filter((chal) => chunkInfo['challenges'][chalSkill][chal].hasOwnProperty('Output') && chunkInfo['challenges'][chalSkill][chal].hasOwnProperty('ItemsDetails') && chunkInfo['challenges'][chalSkill][chal]['ItemsDetails'].includes(chunkInfo['challenges'][skill][name]['Output'])).forEach((chal) => {
+                                if (!craftedBisOverrideLinking[chunkInfo['challenges'][chalSkill][chal]['Output']]) {
+                                    craftedBisOverrideLinking[chunkInfo['challenges'][chalSkill][chal]['Output']] = {};
+                                }
+                                craftedBisOverrideLinking[chunkInfo['challenges'][chalSkill][chal]['Output']][chunkInfo['challenges'][skill][name]['Output']] = true;
+                            });
+                        });
                         if (!craftedBisOverride[skill]) {
                             craftedBisOverride[skill] = {};
                         }
@@ -8373,7 +8395,7 @@ let findConnectedSections = function(chunksIn, sections) {
             if (sections.hasOwnProperty(chunk) && sections[chunk].hasOwnProperty(sec) && sections[chunk][sec] === false) {
                 delete sections[chunk][sec];
             } else if (!manualSections || !manualSections.hasOwnProperty(chunk) || !manualSections[chunk].hasOwnProperty(sec) || manualSections[chunk][sec] !== false) {
-                if (optOutSections || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1])) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && chunksIn[chunkInfo['chunks'][subChunk]['Name']] !== false && chunkInfo['chunks'][subChunk]['Name'] !== 'Zanaris' && chunkInfo['chunks'][subChunk]['Name'] !== 'Puro-Puro').length > 0)) {
+                if (optOutSections || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1])) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && chunksIn[chunkInfo['chunks'][subChunk]['Name']] !== false && !unconnectedAreas.includes(chunkInfo['chunks'][subChunk]['Name'])).length > 0)) {
                     if (!sections[chunk]) {
                         sections[chunk] = {};
                     }

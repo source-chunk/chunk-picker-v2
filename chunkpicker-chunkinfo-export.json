@@ -14883,7 +14883,16 @@
 				"Items": ["Empty plant pot", "Gardening trowel", "Rake", "Spade", "Willow seed*"],
 				"Level": 30,
 				"Objects": ["Tree patch"],
-				"Output": "Willow tree loot",
+				"Output": "Willow roots",
+				"Output Object": "Willow tree",
+				"Primary": true
+			},
+			"Grow a ~|willow tree|~ for roots": {
+				"Category": ["Normal Farming"],
+				"Items": ["Empty plant pot", "Gardening trowel", "Rake", "Spade", "Secateurs", "Willow seed*"],
+				"Level": 30,
+				"Objects": ["Tree patch"],
+				"Output": "Willow branch",
 				"Output Object": "Willow tree",
 				"Primary": true
 			},
@@ -32665,7 +32674,7 @@
 				"Not F2P": true
 			},
 			"Larran's small chest loot (non-slayer)*": {
-				"Items": ["Larran's key"],
+				"Items": ["Larran's key*"],
 				"Objects": ["Larran's small chest"],
 				"Tasks": {
 					"Muddy chest loot*": "Nonskill"
@@ -32674,7 +32683,7 @@
 				"Not F2P": true
 			},
 			"Larran's big chest loot (non-slayer)*": {
-				"Items": ["Larran's key"],
+				"Items": ["Larran's key*"],
 				"Objects": ["Larran's big chest"],
 				"Tasks": {
 					"Muddy chest loot*": "Nonskill"
@@ -32854,9 +32863,6 @@
 			"Hunter kit loot*": {
 				"Items": ["Hunter kit*"],
 				"Output": "Hunter kit loot",
-				"Tasks": {
-					"Cast ~|hunter kit (spell)|~": "Magic"
-				},
 				"Not F2P": true
 			},
 			"Craft impling jar*": {
@@ -50648,7 +50654,7 @@
 			},
 			"Smelt a ~|blurite bar|~": {
 				"Items": ["Blurite ore*"],
-				"Level": 8,
+				"Level": 13,
 				"Objects": ["Smelting Furnace[+]"],
 				"Output": "Blurite bar",
 				"Primary": true,
@@ -104607,8 +104613,7 @@
 			},
 			"~|Song of the Elves|~ 16": {
 				"BaseQuest": "Song of the Elves",
-				"Description": "Talk to the mysterious figure",
-				"Chunks": ["Enchanted Valley"],
+				"Description": "Talk to the mysterious figure in the Enchanted Valley",
 				"Tasks": {
 					"~|Song of the Elves|~ 15": "Quest"
 				},
@@ -111255,7 +111260,7 @@
 					"Monster": {
 						"Bandit (Varlamore)": 5,
 						"Black jaguar": 2,
-						"Snake": 7
+						"Snake (Varlamore)": 7
 					},
 					"Object": {
 						"Tree": 4
@@ -111972,7 +111977,7 @@
 					"Monster": {
 						"Embertailed jerboa": 11,
 						"Oryx": 4,
-						"Snake": 5
+						"Snake (Varlamore)": 5
 					},
 					"NPC": {
 						"Ru Merald": 1
@@ -112000,7 +112005,7 @@
 				"Dire Wolf": 5,
 				"Oryx": 2,
 				"Scorpion": 3,
-				"Snake": 1
+				"Snake (Varlamore)": 1
 			},
 			"Nickname": "Cam Torum Path",
 			"NPC": {
@@ -112608,7 +112613,7 @@
 			"Monster": {
 				"Jaguar": 3,
 				"Jaguar cub": 3,
-				"Snake": 2
+				"Snake (Varlamore)": 2
 			},
 			"Nickname": "Sunset Fishing Cove",
 			"NPC": {
@@ -112639,7 +112644,7 @@
 						"6291": true
 					},
 					"Monster": {
-						"Snake": 1
+						"Snake (Varlamore)": 1
 					},
 					"NPC": {
 						"Banker": 1,
@@ -112687,7 +112692,8 @@
 		"6192": {
 			"Monster": {
 				"Buffalo": 12,
-				"Chicken": 11
+				"Chicken": 11,
+				"Snake (Varlamore)": 1
 			},
 			"Nickname": "Ortus Farm",
 			"NPC": {
@@ -113392,7 +113398,7 @@
 				"Chicken": 1,
 				"Imp": 1,
 				"Rat": 2,
-				"Snake": 3
+				"Snake (Varlamore)": 3
 			},
 			"Nickname": "Avium Savannah North",
 			"NPC": {
@@ -114254,7 +114260,7 @@
 			"Monster": {
 				"Harpie Bug Swarm": 18,
 				"Scorpion": 6,
-				"Snake": 5
+				"Snake (Varlamore)": 5
 			},
 			"Nickname": "South Varlamore Coast",
 			"Object": {
@@ -114271,7 +114277,7 @@
 			"Monster": {
 				"Embertailed jerboa": 6,
 				"Scorpion": 5,
-				"Snake": 4
+				"Snake (Varlamore)": 4
 			},
 			"Nickname": "Locus Oasis",
 			"NPC": {
@@ -114313,7 +114319,7 @@
 				"Guard": 2,
 				"Mugger": 1,
 				"Oryx": 2,
-				"Snake": 2,
+				"Snake (Varlamore)": 2,
 				"Rat": 3,
 				"Thief (Varlamore)": 2
 			},
@@ -115221,7 +115227,7 @@
 		"6958": {
 			"Monster": {
 				"Imp": 1,
-				"Snake": 1
+				"Snake (Varlamore)": 1
 			},
 			"Nickname": "Stonecutter Outpost",
 			"NPC": {
@@ -115432,6 +115438,9 @@
 						"Molossus": 1,
 						"Sailor": 4,
 						"Worker": 1
+					},
+					"Object": {
+						"Bank Deposit Box": 1
 					},
 					"Quest": {
 						"Twilight's Promise": "step"
@@ -127847,7 +127856,7 @@
 			},
 			"Nickname": "West Catherby",
 			"Object": {
-				"Bank Deposit Box": 1,
+				"Bank Deposit Box": 2,
 				"Bank booth": 4,
 				"Barrel (beer)": 2,
 				"Beehive": 9,
@@ -132337,7 +132346,7 @@
 						"Wydin": 1
 					},
 					"Object": {
-						"Bank deposit box": 1,
+						"Bank deposit box": 2,
 						"Barrel (beer)": 1,
 						"Bookcase": 8,
 						"Boxes": 6,
@@ -142726,22 +142735,24 @@
 					},
 					"Object": {
 						"Adamantite rocks": 3,
-						"Broken Spinning Wheel": 1,
+						"Broken Spinning Wheel (Fossil Island)": 1,
 						"Burnt tree": 9,
+						"Chest pieces": 1,
 						"Coal rocks": 11,
-						"Cooking pot": 1,
 						"Crate": 1,
 						"Dead tree": 14,
+						"Fire pit (Museum Camp)": 1,
 						"Fossil Storage": 1,
+						"Half-built Loom": 1,
 						"Hole": 1,
 						"Impling spawn#all-tier": 1,
 						"Iron rocks": 7,
 						"Mithril rocks": 3,
 						"Notice board": 1,
+						"Ring of Stones": 1,
 						"Rowboat": 1,
 						"Shooting star#landing site": 1,
-						"Soil#Fossil Island": 172,
-						"Well": 1
+						"Soil#Fossil Island": 172
 					},
 					"Quest": {
 						"Bone Voyage": "step",
@@ -184921,6 +184932,11 @@
 				"1": "1/4"
 			}
 		},
+		"Snake (Varlamore)": {
+			"Bones": {
+				"1": "Always"
+			}
+		},
 		"Sofiya": {
 			"Wolf bones": {
 				"1": "Always"
@@ -199623,14 +199639,6 @@
 				},
 				"Tarromin": {
 					"1": "13/111"
-				}
-			},
-			"Willow tree loot": {
-				"Willow roots": {
-					"1": "Always"
-				},
-				"Willow branch": {
-					"1": "Always"
 				}
 			},
 			"Supply crate (Spirit seed)": {

@@ -1228,6 +1228,7 @@ let methodsModalOpen = false;
 let completeModalOpen = false;
 let addEquipmentModalOpen = false;
 let stickerModalOpen = false;
+let paintModalOpen = false;
 let backlogSourcesModalOpen = false;
 let manualOuterModalOpen = false;
 let monsterModalOpen = false;
@@ -1270,6 +1271,7 @@ let futurePossibleAreas = {};
 let highestOverall = {};
 let savedBox = null;
 let stickered = {};
+let painted = {};
 let stickeredNotes = {};
 let stickeredColors = {};
 let stickerChoices = ['unset', 'skull', 'skull-crossbones', 'bomb', 'exclamation-circle', 'dice', 'poo', 'frown', 'grin-alt', 'heart', 'star', 'gem', 'award', 'crown', 'flag', 'asterisk', 'clock', 'hourglass', 'link', 'map-marker-alt', 'radiation-alt', 'shoe-prints', 'thumbs-down', 'thumbs-up', 'crow', 'utensil-spoon', 'lock', 'unlock-alt', 'sailboat', 'anchor'];
@@ -1278,6 +1280,8 @@ let stickerChoicesNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six
 let stickerChoicesTiers = ['S', 'A', 'B', 'C', 'D', 'F'];
 let savedStickerId;
 let savedStickerSticker;
+let paintChoices = ['red', 'orange', 'yellow', 'green', 'blue', 'pink', 'purple', 'black'];
+let savedPaintedColors = [];
 let altChallenges = {};
 let numClueTasks = {
     'beginner': 0,
@@ -1408,7 +1412,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.8';
+let currentVersion = '6.9.9';
 let patchNotesVersion = '6.9.0';
 let updateLevel = 'difference';
 
@@ -1487,6 +1491,7 @@ let controlChunk = 0;
 let stickerChunk = 0;
 let isHoveringBlacklist = false;
 let isHoveringSticker = false;
+let isHoveringPaint = false;
 let hoveredOverlayIds = [];
 let selectedOverlayIds = [];
 let selectedOverlayId = -1;
@@ -1576,7 +1581,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.8";
+mapImg.src = "osrs_world_map.png?v=6.9.9";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1687,6 +1692,93 @@ let drawCanvas = function(ctxIn = ctx) {
     ctxIn.clearRect(0, 0, cw, ch);
     ctxIn.drawImage(mapImg, dragTotalX, dragTotalY, totalZoom * imgW, totalZoom * imgH);
 
+    // Painted chunks
+    ctxIn.save();
+    !!tempChunks['painted'] && Object.keys(tempChunks['painted']).forEach(function(chunkId) {
+        let {x, y} = convertToXY(chunkId);
+        ctxIn.globalAlpha = highVisibilityMode ? .35 : .45;
+        if (tempChunks['painted'][chunkId].length === 1) {
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][0];
+            ctxIn.fillRect(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+        } else if (tempChunks['painted'][chunkId].length === 2) {
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][0];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][1];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+        } else if (tempChunks['painted'][chunkId].length === 3) {
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][0];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (2 * (totalZoom * (imgW / rowSize)) / 3), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + ((totalZoom * (imgW / rowSize)) / 2), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + ((totalZoom * (imgH / (fullSize / rowSize))) / 2));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (2 * (totalZoom * (imgH / (fullSize / rowSize))) / 3));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][1];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (2 * (totalZoom * (imgW / rowSize)) / 3), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + ((totalZoom * (imgW / rowSize)) / 2), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + ((totalZoom * (imgH / (fullSize / rowSize))) / 2));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (2 * (totalZoom * (imgW / rowSize)) / 3), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][2];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (2 * (totalZoom * (imgH / (fullSize / rowSize))) / 3));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + ((totalZoom * (imgW / rowSize)) / 2), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + ((totalZoom * (imgH / (fullSize / rowSize))) / 2));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+        } else if (tempChunks['painted'][chunkId].length === 4) {
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][0];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + ((totalZoom * (imgW / rowSize)) / 2), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + ((totalZoom * (imgH / (fullSize / rowSize))) / 2));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][1];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + ((totalZoom * (imgW / rowSize)) / 2), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + ((totalZoom * (imgH / (fullSize / rowSize))) / 2));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][2];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + ((totalZoom * (imgW / rowSize)) / 2), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + ((totalZoom * (imgH / (fullSize / rowSize))) / 2));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + (totalZoom * (imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + (totalZoom * (imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+
+            ctxIn.fillStyle = tempChunks['painted'][chunkId][3];
+            ctxIn.beginPath();
+            ctxIn.moveTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize)) + (totalZoom * (imgH / (fullSize / rowSize)))));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)) + ((totalZoom * (imgW / rowSize)) / 2), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))) + ((totalZoom * (imgH / (fullSize / rowSize))) / 2));
+            ctxIn.lineTo(dragTotalX + (totalZoom * (x * imgW / rowSize)), dragTotalY + (totalZoom * (y * imgH / (fullSize / rowSize))));
+            ctxIn.fill();
+        }
+    });
+    ctxIn.restore();
+
     // Chunks
     ctxIn.beginPath();
     ctxIn.strokeStyle = 'gray';
@@ -1696,6 +1788,7 @@ let drawCanvas = function(ctxIn = ctx) {
     for (let i = 0; i < rowSize; i++) {
         for (let j = 0; j < (fullSize / rowSize); j++) {
             let chunkId = convertToChunkNum(i, j).toString();
+            let isPainted = !!tempChunks['painted'] && tempChunks['painted'].hasOwnProperty(chunkId);
             if (!!tempChunks['unlocked'] && tempChunks['unlocked'][chunkId]) {
                 if (hoveredChunk === chunkId) {
                     ctxIn.fillStyle = 'rgba(200, 200, 200, 0.25)';
@@ -1713,7 +1806,7 @@ let drawCanvas = function(ctxIn = ctx) {
                 }
                 ctxIn.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
                 (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
-                ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                !isPainted && ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
                 if (tempSelectedChunks.indexOf(chunkId) + 1 > 999) {
                     ctxIn.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto Condensed, sans-serif';
@@ -1772,9 +1865,13 @@ let drawCanvas = function(ctxIn = ctx) {
                 } else {
                     ctxIn.fillStyle = colorBox;
                 }
+                if (isPainted) {
+                    ctxIn.globalAlpha = .25;
+                }
                 ctxIn.strokeStyle = highVisibilityMode ? 'rgba(0, 0, 0, 0.5)' : 'black';
                 (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
+                ctxIn.globalAlpha = 1;
             }
             if (showChunkIds && !onMobile) {
                 ctxIn.fillStyle = 'white';
@@ -1918,6 +2015,18 @@ let drawCanvas = function(ctxIn = ctx) {
     // Control sticker chunk
     ctxIn.save();
     if (stickerChunk !== 0) {
+        if (!locked || testMode) {
+            let {x, y} = convertToXY(stickerChunk);
+            ctxIn.strokeStyle = 'black';
+            ctxIn.textAlign = 'center';
+            ctxIn.lineWidth = (totalZoom * (imgW / rowSize)) * (0.01);
+            ctxIn.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.25) + 'px "Font Awesome 6 Free"';
+            ctxIn.fillStyle = 'rgb(201, 209, 217)';
+            ctxIn.scale(-1, -1);
+            ctxIn.fillText('\uf53f', -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), -(dragTotalY + (totalZoom * ((y + 0.75) * imgH / (fullSize / rowSize)))));
+            ctxIn.strokeText('\uf53f', -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), -(dragTotalY + (totalZoom * ((y + 0.75) * imgH / (fullSize / rowSize)))));
+            ctxIn.scale(-1, -1);
+        }
         if ((!tempChunks['stickered'] || !tempChunks['stickered'].hasOwnProperty(stickerChunk)) && (!locked || testMode)) {
             let {x, y} = convertToXY(stickerChunk);
             ctxIn.strokeStyle = 'black';
@@ -2116,6 +2225,9 @@ document.body.addEventListener('mousedown', function (event) {
     } else if (stickerModalOpen) {
         rect = $('#stickerModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
+    } else if (paintModalOpen) {
+        rect = $('#paintModal .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
     } else if (backlogSourcesModalOpen) {
         rect = $('#backlogSourcesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
@@ -2226,6 +2338,9 @@ document.body.addEventListener('mouseup', function (event) {
     } else if (stickerModalOpen) {
         rect = $('#stickerModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
+    } else if (paintModalOpen) {
+        rect = $('#paintModal .modal-content')[0].getBoundingClientRect();
+        hasSet = true;
     } else if (backlogSourcesModalOpen) {
         rect = $('#backlogSourcesModal .modal-content')[0].getBoundingClientRect();
         hasSet = true;
@@ -2285,6 +2400,7 @@ document.body.addEventListener('mouseup', function (event) {
         completeModalOpen && closeComplete();
         addEquipmentModalOpen && closeAddEquipment();
         stickerModalOpen && closeSticker();
+        paintModalOpen && closePaint();
         backlogSourcesModalOpen && closeBacklogSources();
         chunkHistoryModalOpen && closeChunkHistory();
         challengeAltsModalOpen && closeChallengeAlts();
@@ -2318,7 +2434,7 @@ let handleMouseDown = function(e) {
         removeCanvasDarkness = true;
         return;
     }
-    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || e.target.nodeName.toLowerCase() === 'select' || e.target.nodeName.toLowerCase() === 'option') {
+    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || e.target.nodeName.toLowerCase() === 'select' || e.target.nodeName.toLowerCase() === 'option') {
         drawCanvas();
         return;
     }
@@ -2344,7 +2460,7 @@ let handleMouseDown = function(e) {
 
 // Handles mouse move event
 let handleMouseMove = function(e) {
-    if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || pickChunkWarningModalOpen || roll2ChunkWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen) {
+    if ((e.button !== 0 && !e.touches) || (e.type === 'touchmove' && e.target.id !== 'canvas') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || pickChunkWarningModalOpen || roll2ChunkWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen) {
         drawCanvas();
         return;
     }
@@ -2447,10 +2563,17 @@ let handleMouseMove = function(e) {
             } else {
                 isHoveringSticker = false;
             }
+            if ((currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) >= 0.7 && (currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) <= 0.95 &&
+                ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) >= 0.7 && ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) <= .95) {
+                isHoveringPaint = true;
+            } else {
+                isHoveringPaint = false;
+            }
         } else {
             isHoveringSticker = false;
+            isHoveringPaint = false;
         }
-        if ((isHoveringBlacklist || isHoveringSticker) && (!locked || testMode)) {
+        if ((isHoveringBlacklist || isHoveringSticker || isHoveringPaint) && (!locked || testMode)) {
             canvas.style.cursor = "pointer";
         } else {
             canvas.style.cursor = "default";
@@ -2497,14 +2620,21 @@ let handleKeyDown = function(e) {
             } else {
                 isHoveringSticker = false;
             }
+            if ((currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) >= 0.7 && (currentX - dragTotalX) / (totalZoom * (imgW / rowSize)) - Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))) <= 0.95 &&
+                ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) >= 0.7 && ((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) - Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))) <= 0.95) {
+                isHoveringPaint = true;
+            } else {
+                isHoveringPaint = false;
+            }
         } else {
             isHoveringSticker = false;
+            isHoveringPaint = false;
         }
     } else {
         controlChunk = 0;
         stickerChunk = 0;
     }
-    if ((isHoveringBlacklist || isHoveringSticker) && (!locked || testMode)) {
+    if ((isHoveringBlacklist || isHoveringSticker || isHoveringPaint) && (!locked || testMode)) {
         canvas.style.cursor = "pointer";
     } else {
         canvas.style.cursor = "default";
@@ -2520,6 +2650,7 @@ let handleKeyUp = function(e) {
         stickerChunk = 0;
         isHoveringBlacklist = false;
         isHoveringSticker = false;
+        isHoveringPaint = false;
         canvas.style.cursor = "default";
     }
     drawCanvas();
@@ -2527,7 +2658,7 @@ let handleKeyUp = function(e) {
 
 // Handles the mouse up event
 let handleMouseUp = function(e) {
-    if ((e.button !== 0 && e.button !== 2 && e.type !== 'touchend') || (onMobile && e.type !== 'touchend') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen) {
+    if ((e.button !== 0 && e.button !== 2 && e.type !== 'touchend') || (onMobile && e.type !== 'touchend') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileTasksOpen || customizeTopbarModalOpen || questChunksModalOpen) {
         drawCanvas();
         return;
     }
@@ -2639,6 +2770,10 @@ let handleMouseUp = function(e) {
                 blacklistCanvas(chunkId);
             } else if (isHoveringSticker) {
                 openStickers(chunkId);
+                drawCanvas();
+                return;
+            } else if (isHoveringPaint) {
+                openPaint(chunkId);
                 drawCanvas();
                 return;
             } else if (settings['shiftUnlock'] && !e.shiftKey && (!testMode || !locked) && (!onMobile || (Date.now() - touchTime) < 500)) {
@@ -3005,7 +3140,7 @@ let setRecentRoll = function(chunkId) {
 
 // Pick button: picks a random chunk from selected/potential
 let pickCanvas = function(both, override) {
-    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways']))) {
+    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (unlockedChunks !== 0 && selectedChunks === 0 && !settings['randomStartAlways']))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -3181,7 +3316,7 @@ let pickCanvas = function(both, override) {
 
 // Roll 2 button: rolls 2 chunks from all selected chunks
 let roll2Canvas = function(override) {
-    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (((!tempChunks['selected'] || Object.keys(tempChunks['selected']).length < 1) && !isPicking) || ((!tempChunks['potential'] || Object.keys(tempChunks['potential']).length < 1) && isPicking)))) {
+    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (((!tempChunks['selected'] || Object.keys(tempChunks['selected']).length < 1) && !isPicking) || ((!tempChunks['potential'] || Object.keys(tempChunks['potential']).length < 1) && isPicking)))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -3247,7 +3382,7 @@ let roll2Canvas = function(override) {
 
 // Unpicks a random unlocked chunk
 let unpickCanvas = function() {
-    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 1))) {
+    if (!testMode && (locked || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 1))) {
         return;
     }
     if (checkFalseRules() && chunkTasksOn) {
@@ -3341,7 +3476,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.8");
+        myWorker = new Worker("./worker.js?v=6.9.9");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3645,8 +3780,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.8");
-let myWorker2 = new Worker("./worker.js?v=6.9.8");
+let myWorker = new Worker("./worker.js?v=6.9.9");
+let myWorker2 = new Worker("./worker.js?v=6.9.9");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -4122,7 +4257,7 @@ $(document).ready(function() {
 
 // [Mobile] Mobile equivalent to 'mousedown', starts drag sequence
 $('body').on('touchstart', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !exitSandboxWarningModalOpen && !mobileMenuOpen && !mobileTasksOpen && !mobileChunkMenuOpen && !customizeTopbarModalOpen && !questChunksModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !paintModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !exitSandboxWarningModalOpen && !mobileMenuOpen && !mobileTasksOpen && !mobileChunkMenuOpen && !customizeTopbarModalOpen && !questChunksModalOpen) {
         clickX = ev.changedTouches[0].pageX;
         clickY = ev.changedTouches[0].pageY;
     }
@@ -4130,7 +4265,7 @@ $('body').on('touchstart', function(ev) {
 
 // [Mobile] Mobile equivalent to 'mouseup', ends drag sequence
 $('body').on('touchend', function(ev) {
-    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !exitSandboxWarningModalOpen && !mobileMenuOpen && !mobileTasksOpen && !mobileChunkMenuOpen && !customizeTopbarModalOpen && !questChunksModalOpen) {
+    if (onMobile && !atHome && !inEntry && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !paintModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !exitSandboxWarningModalOpen && !mobileMenuOpen && !mobileTasksOpen && !mobileChunkMenuOpen && !customizeTopbarModalOpen && !questChunksModalOpen) {
         prevScrollLeft = prevScrollLeft + scrollLeft;
         prevScrollTop = prevScrollTop + scrollTop;
     }
@@ -4191,6 +4326,7 @@ $(document).on({
             if (completeModalOpen) { closeComplete(); modalJustClosed = true; }
             if (addEquipmentModalOpen) { closeAddEquipment(); modalJustClosed = true; }
             if (stickerModalOpen) { closeSticker(); modalJustClosed = true; }
+            if (paintModalOpen) { closePaint(); modalJustClosed = true; }
             if (backlogSourcesModalOpen) { closeBacklogSources(); modalJustClosed = true; }
             if (chunkHistoryModalOpen) { closeChunkHistory(); modalJustClosed = true; }
             if (challengeAltsModalOpen) { closeChallengeAlts(); modalJustClosed = true; }
@@ -4209,10 +4345,10 @@ $(document).on({
             if (customizeTopbarModalOpen) { closeCustomizeTopbar(); modalJustClosed = true; }
             if (userTasksListModalOpen) { closeUserTasksList(); modalJustClosed = true; }
 
-            if (testMode && !modalJustClosed && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !questChunksModalOpen) {
+            if (testMode && !modalJustClosed && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !paintModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !questChunksModalOpen) {
                 warnExitSandbox();
             }
-        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !questChunksModalOpen) {
+        } else if ((e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) && !importMenuOpen && !highscoreMenuOpen && !helpMenuOpen && !patchNotesOpen && !manualModalOpen && !detailsModalOpen && !rulesModalOpen && !settingsModalOpen && !userTasksModalOpen && !searchModalOpen && !searchDetailsModalOpen && !highestModalOpen && !highest2ModalOpen && !methodsModalOpen && !completeModalOpen && !notesModalOpen && !addEquipmentModalOpen && !stickerModalOpen && !paintModalOpen && !backlogSourcesModalOpen && !chunkHistoryModalOpen && !challengeAltsModalOpen && !manualOuterModalOpen && !monsterModalOpen && !slayerLockedModalOpen && !constructionLockedModalOpen && !rollChunkModalOpen && !questStepsModalOpen && !friendsListModalOpen && !friendsAddModalOpen && !passiveSkillModalOpen && !mapIntroOpen && !xpRewardOpen && !manualAreasModalOpen && !chunkSectionsModalOpen && !chunkSectionPickerModalOpen && !slayerMasterInfoModalOpen && !doableClueStepsModalOpen && !clueChunksModalOpen && !notesOpen && !newTasksOpen && !clipboardModalOpen && !overlaysModalOpen && !userTasksListModalOpen && !userTaskDeleteConfirmationModalOpen && !questChunksModalOpen) {
             e.preventDefault();
         }
     }
@@ -4736,7 +4872,7 @@ let unlockEntry = function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                     signedIn = true;
                     $('.center').css('margin-top', '15px');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .taskstoggle').css('opacity', 0).show();
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').css('opacity', 0).show();
                     roll2On && $('.roll2').css('opacity', 0).show();
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                     $('.open-manual-outer-container').css('opacity', 0).show();
@@ -4751,7 +4887,7 @@ let unlockEntry = function() {
                     setTimeout(function() {
                         $('#entry-menu').css('opacity', 1).hide();
                         $('.pin.entry').val('');
-                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .taskstoggle').animate({ 'opacity': 1 });
+                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').animate({ 'opacity': 1 });
                         roll2On && $('.roll2').animate({ 'opacity': 1 });
                         !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                         $('.open-manual-outer-container').animate({ 'opacity': 1 });
@@ -4798,7 +4934,7 @@ let unlockEntry = function() {
                             });
                             databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime());
                             $('.center').css('margin-top', '15px');
-                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .taskstoggle').css('opacity', 0).show();
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').css('opacity', 0).show();
                             roll2On && $('.roll2').css('opacity', 0).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                             $('.open-manual-outer-container').css('opacity', 0).show();
@@ -4808,7 +4944,7 @@ let unlockEntry = function() {
                             setTimeout(function() {
                                 $('#entry-menu').css('opacity', 1).hide();
                                 $('.pin.entry').val('');
-                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .taskstoggle').animate({ 'opacity': 1 });
+                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').animate({ 'opacity': 1 });
                                 roll2On && $('.roll2').animate({ 'opacity': 1 });
                                 !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                                 $('.open-manual-outer-container').animate({ 'opacity': 1 });
@@ -4948,7 +5084,7 @@ let accessMap = function() {
                             $('#page2b, .entry-home-menu-container, .entry-home-menu-extra').hide();
                             $('.background-img').hide();
                             $('.center').css('margin-top', '15px');
-                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .taskstoggle').css('opacity', 1).show();
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').css('opacity', 1).show();
                             $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
                             roll2On && $('.roll2').css('opacity', 1).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
@@ -5009,7 +5145,7 @@ let accessMap = function() {
                                     $('#page2b, .entry-home-menu-container, .entry-home-menu-extra').hide();
                                     $('.background-img').hide();
                                     $('.center').css('margin-top', '15px');
-                                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .taskstoggle').css('opacity', 1).show();
+                                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').css('opacity', 1).show();
                                     $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu8, .menu9, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv').show();
                                     roll2On && $('.roll2').css('opacity', 1).show();
                                     !isPicking && unpickOn && $('.unpick').css('opacity', 1).show();
@@ -5696,7 +5832,7 @@ let setupMap = async function() {
         $('.body').show();
         $('#page1, #page1extra, #page1search, #import-menu, #highscore-menu, #highscore-menu2, #help-menu, .entry-home-menu-container, .entry-home-menu-extra').hide();
         if (locked) {
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .taskstoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').css('opacity', 0).hide();
             $('.roll2, .unpick').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
@@ -5711,7 +5847,7 @@ let setupMap = async function() {
         if (locked === undefined || locked) {
             locked = true;
             $('.lock-closed, .lock-opened').hide();
-            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .taskstoggle').css('opacity', 0).hide();
+            $('.pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').css('opacity', 0).hide();
             $('.center').css('margin-top', '0px');
             $('.roll2, .unpick').css('opacity', 0).hide();
             $('.open-manual-outer-container').css('opacity', 0).hide();
@@ -6582,7 +6718,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.8");
+    myWorker2 = new Worker("./worker.js?v=6.9.9");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -7232,6 +7368,19 @@ let resetSectionVars = async function(chunkId) {
         imgSection.crossOrigin = 'anonymous';
         imgSection.src = sectionUrls[section];
         sectionImgs[section] = imgSection;
+        sectionImgs[section].onload = async function() {
+            document.body.offsetHeight;
+            await new Promise(resolve => setTimeout(resolve, 0));
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => {
+                    redrawSectionCanvas();
+                });
+            } else {
+                setTimeout(() => {
+                    redrawSectionCanvas();
+                }, 0);
+            }
+        }
         if (manualSections[chunkId] && manualSections[chunkId].hasOwnProperty(section)) {
             selectedSections[section] = manualSections[chunkId][section];
         }
@@ -7240,7 +7389,7 @@ let resetSectionVars = async function(chunkId) {
     sectionImgMain.crossOrigin = 'anonymous';
     sectionImgMain.src = sectionMainUrl;
     canvasSection = document.getElementById('chunk-section-picker-canvas');
-    contextSection = canvasSection.getContext('2d');
+    contextSection = canvasSection.getContext('2d', { willReadFrequently: true });
     $('.chunk-section-canvas-spinner').show();
     contextSection.clearRect(0, 0, canvasSection.width, canvasSection.height);
     sectionImgMain.onload = async function() {
@@ -7334,10 +7483,7 @@ let calculateSectionPixels = function(inputNum) {
         }
         contextSection.fillStyle = "rgba(0, 0, 0, 1)";
         contextSection.fillRect(0, 0, 192, 192);
-        let imgSection = new Image();
-        imgSection.crossOrigin = 'anonymous';
-        imgSection.src = sectionUrls[inputNum];
-        contextSection.drawImage(imgSection, 0, 0);
+        contextSection.drawImage(sectionImgs[inputNum], 0, 0);
         imageData = contextSection.getImageData(0, 0, 192, 192).data;
         for (let y = 0; y < 192; y++) {
             for (let x = 0; x < 192; x++) {
@@ -7491,6 +7637,7 @@ let selectTopbarChoice = function(index) {
 // Opens the customize topbar modal
 let openCustomizeTopbar = function() {
     modal.generate('customizeTopbarModal', onMobile);
+    onMobile && hideMobileMenu();
     $('#cutomize-topbar-data-inner').empty();
     customizeTopbarModalOpen = true;
     $('#customizeTopbarModal').show();
@@ -7811,6 +7958,7 @@ let openMonstersAdd = function() {
     $('#manuallyAddStuffModal').show();
     modalOutsideTime = Date.now();
     $('#searchMonsters').val('').focus();
+    $('.monsters-searchcontainer span input').prop('checked', filterByCheckedMonsters);
     searchMonsters();
 }
 
@@ -9493,6 +9641,82 @@ let changeCurrentStickerColor = function() {
     }
 }
 
+// Opens the paint menu
+let openPaint = function(id) {
+    if (signedIn || testMode) {
+        modal.generate('paintModal', onMobile);
+        paintModalOpen = true;
+        $('.paint-data').empty();
+        $('#paintModal').show();
+        modalOutsideTime = Date.now();
+        document.getElementById('paint-data').scrollTop = 0;
+        let chunkNickname = chunkInfo['chunks'].hasOwnProperty(id) ? chunkInfo['chunks'][id]['Nickname'] + ' ' : '';
+        $('.paint-chunk').text(chunkNickname + '(' + id + ')');
+        paintChoices.forEach((color) => {
+            $('.paint-data').append(`<span style='background-color:${color}' class='noscroll paint-option-container color-paint black-outline ${color}-tag' title='${color.charAt(0).toUpperCase() + color.slice(1)}' onclick="setPaint('${id}', '${color.charAt(0).toUpperCase() + color.slice(1)}')"></span>`);
+        });
+        savedStickerId = id;
+        if (painted.hasOwnProperty(id)) {
+            painted[id].forEach((color) => {
+                $(`.paint-data > .paint-option-container.${color.toLowerCase()}-tag`).addClass('selected-paint');
+            });
+            savedPaintedColors = painted[id];
+        } else {
+            savedPaintedColors = [];
+        }
+        savedPaintedColors.length < 4 ? $('.paint-option-container:not(.selected-paint)').removeClass('disabled') : $('.paint-option-container:not(.selected-paint)').addClass('disabled');
+        $('.paint-color-data-2').text(!!painted[id] && painted[id].length > 0 ? painted[id].join(', ') : 'None');
+    }
+}
+
+// Submits the paint modal
+let submitPaint = function() {
+    let id = savedStickerId;
+    let colors = savedPaintedColors;
+    if (colors.length !== 0) {
+        painted[id] = colors;
+    } else if (!!id && id.length > 0) {
+        delete painted[id];
+    }
+    tempChunks = {
+        ...tempChunks,
+        painted: painted,
+        stickeredNotes: stickeredNotes,
+        stickeredColors: stickeredColors
+    };
+    setData();
+    closePaint();
+    drawCanvas();
+}
+
+// Sets the given paint color on the given chunk
+let setPaint = function(id, color) {
+    savedStickerId = id;
+    if (savedPaintedColors.includes(color)) {
+        savedPaintedColors.splice(savedPaintedColors.indexOf(color), 1);
+    } else if (savedPaintedColors.length < 4) {
+        savedPaintedColors.push(color);
+    }
+    $('.selected-paint').removeClass('selected-paint');
+    if (savedPaintedColors.length !== 0) {
+        savedPaintedColors.forEach((color) => {
+            $(`.paint-data > .paint-option-container.${color.toLowerCase()}-tag`).addClass('selected-paint');
+        });
+    }
+    savedPaintedColors.length < 4 ? $('.paint-option-container:not(.selected-paint)').removeClass('disabled') : $('.paint-option-container:not(.selected-paint)').addClass('disabled');
+    $('.paint-color-data-2').text(!!savedPaintedColors && savedPaintedColors.length > 0 ? savedPaintedColors.join(', ') : 'None');
+}
+
+// Changes the paint options color
+let changeCurrentPaintColor = function() {
+    $('.paint-option-container:not(.unset-option)').css('color', $('.paint-color-picker').val());
+    if ($('.paint-color-picker').val() !== '#000000') {
+        $('.paint-option-container.color-paint').addClass('black-outline');
+    } else {
+        $('.paint-option-container.color-paint').removeClass('black-outline');
+    }
+}
+
 // Encode string for urls
 let encodeForUrl = function(str) {
     return (encodeURIComponent(str).replace(/['()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`).replace(/%(7C|60|5E)/g, (str, hex) => String.fromCharCode(parseInt(hex, 16))).replaceAll('%25', '%'));
@@ -9784,6 +10008,13 @@ let closeSticker = function() {
     stickerModalOpen = false;
     modalOutsideTime = Date.now();
     $('#stickerModal').remove();
+}
+
+// Closes the paint modal
+let closePaint = function() {
+    paintModalOpen = false;
+    modalOutsideTime = Date.now();
+    $('#paintModal').remove();
 }
 
 // Closes the backlog sources modal
@@ -10597,6 +10828,14 @@ let openStickersMobile = function() {
     drawCanvas();
 }
 
+// Mobile paint helper
+let openPaintMobile = function() {
+    onMobile && hideMobileChunkMenu();
+    infoLockedId = -1;
+    openPaint(mobileChunkId);
+    drawCanvas();
+}
+
 // Shows mobile-only menu
 let showMobileMenu = function() {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
@@ -11153,31 +11392,31 @@ let showChunkHistory = function() {
             $('.canvas-graph-outer').show();
             let canvasGraph = document.getElementById('canvas-graph');
             let ctxGraph = canvasGraph.getContext('2d');
-            let padding = 35;
+            let padding = [60, 35, 35, 60]; // top, right, bottom, left
             ctxGraph.fillStyle = "white";
             ctxGraph.fillRect(0, 0, canvasGraph.width, canvasGraph.height);
             let startingWidth = Object.keys(chunkOrder).sort(function(a, b) { return a - b })[0];
             let fullWidth = Date.now() - Object.keys(chunkOrder).sort(function(a, b) { return a - b })[0];
             let fullHeight = Object.keys(newChunkOrder).length * 1.1;
             let count = 0;
-            let prevY = canvasGraph.height - padding - 2;
+            let prevY = canvasGraph.height - padding[2] - 2;
             ctxGraph.beginPath();
             ctxGraph.strokeStyle = 'black';
             ctxGraph.lineWidth = 3;
-            ctxGraph.moveTo(padding, padding);
-            ctxGraph.lineTo(padding, canvasGraph.height - padding);
-            ctxGraph.lineTo(canvasGraph.width - padding, canvasGraph.height - padding);
+            ctxGraph.moveTo(padding[3], padding[0]);
+            ctxGraph.lineTo(padding[3], canvasGraph.height - padding[2]);
+            ctxGraph.lineTo(canvasGraph.width - padding[1], canvasGraph.height - padding[2]);
             ctxGraph.stroke();
             ctxGraph.beginPath();
             ctxGraph.strokeStyle = "grey";
             ctxGraph.lineWidth = 1;
             for (let lineNum = 1; lineNum <= 3; lineNum++) {
-                ctxGraph.moveTo(padding, canvasGraph.height - padding - ((canvasGraph.height - padding * 2) * (Math.floor(fullHeight / 3) * lineNum / fullHeight)));
-                ctxGraph.lineTo(canvasGraph.width - padding, canvasGraph.height - padding - ((canvasGraph.height - padding * 2) * (Math.floor(fullHeight / 3) * lineNum / fullHeight)));
+                ctxGraph.moveTo(padding[3], canvasGraph.height - padding[2] - ((canvasGraph.height - (padding[0] + padding[2])) * (Math.floor(fullHeight / 3) * lineNum / fullHeight)));
+                ctxGraph.lineTo(canvasGraph.width - padding[1], canvasGraph.height - padding[2] - ((canvasGraph.height - (padding[0] + padding[2])) * (Math.floor(fullHeight / 3) * lineNum / fullHeight)));
             }
             for (let lineNum = 0; lineNum <= 5; lineNum++) {
-                ctxGraph.moveTo(canvasGraph.width - padding - ((canvasGraph.width - padding * 2) * (Math.floor(fullWidth / 6) * lineNum / fullWidth)), padding);
-                ctxGraph.lineTo(canvasGraph.width - padding - ((canvasGraph.width - padding * 2) * (Math.floor(fullWidth / 6) * lineNum / fullWidth)), canvasGraph.height - padding);
+                ctxGraph.moveTo(canvasGraph.width - padding[1] - ((canvasGraph.width - (padding[1] + padding[3])) * (Math.floor(fullWidth / 6) * lineNum / fullWidth)), padding[0]);
+                ctxGraph.lineTo(canvasGraph.width - padding[1] - ((canvasGraph.width - (padding[1] + padding[3])) * (Math.floor(fullWidth / 6) * lineNum / fullWidth)), canvasGraph.height - padding[2]);
             }
             ctxGraph.stroke();
             ctxGraph.font = '16px Calibri, Roboto Condensed, sans-serif';
@@ -11185,29 +11424,38 @@ let showChunkHistory = function() {
             ctxGraph.textAlign = "right";
             let offset = Object.keys(tempChunks['unlocked']).length - Object.keys(newChunkOrder).length;
             for (let lineNum = 0; lineNum <= 3; lineNum++) {
-                ctxGraph.fillText(Math.floor(fullHeight / 3) * lineNum + offset, padding - 5, canvasGraph.height - padding + 4 - ((canvasGraph.height - padding * 2) * (Math.floor(fullHeight / 3) * lineNum / fullHeight)));
+                ctxGraph.fillText(Math.floor(fullHeight / 3) * lineNum + offset, padding[3] - 5, canvasGraph.height - padding[2] + 4 - ((canvasGraph.height - (padding[0] + padding[2])) * (Math.floor(fullHeight / 3) * lineNum / fullHeight)));
             }
             ctxGraph.textAlign = 'center';
             for (let lineNum = 1; lineNum <= 6; lineNum++) {
                 let tempDate = new Date();
                 tempDate.setTime(parseInt(startingWidth) + (Math.floor(fullWidth / 6) * lineNum));
-                ctxGraph.fillText(tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2], padding + ((canvasGraph.width - padding * 2) * (Math.floor(fullWidth / 6) * lineNum / fullWidth)), canvasGraph.height - 20);
+                ctxGraph.fillText(tempDate.toDateString().split(' ')[1] + ' ' + tempDate.toDateString().split(' ')[2], padding[3] + ((canvasGraph.width - (padding[1] + padding[3])) * (Math.floor(fullWidth / 6) * lineNum / fullWidth)), canvasGraph.height - padding[2] + 15);
+                ctxGraph.fillText(tempDate.toDateString().split(' ')[3], padding[3] + ((canvasGraph.width - (padding[1] + padding[3])) * (Math.floor(fullWidth / 6) * lineNum / fullWidth)), canvasGraph.height - padding[2] + 30);
             }
+            ctxGraph.font = '18px Calibri, Roboto Condensed, sans-serif';
+            ctxGraph.save();
+            ctxGraph.translate(15, canvasGraph.height / 2);
+            ctxGraph.rotate(Math.PI/2);
+            ctxGraph.fillText('Total Unlocked Chunks', 0, 0);
+            ctxGraph.restore();
+            ctxGraph.font = '24px Calibri, Roboto Condensed, sans-serif';
+            ctxGraph.fillText('Total Unlocked Chunks vs Time', canvasGraph.width / 2, 25);
             ctxGraph.beginPath();
             ctxGraph.strokeStyle = "rgb(66, 133, 244)";
             ctxGraph.lineWidth = 3;
-            ctxGraph.moveTo((((Object.keys(chunkOrder).sort(function(a, b) { return a - b })[0] - startingWidth) / fullWidth) * canvasGraph.width) + padding + 3, prevY);
+            ctxGraph.moveTo((((Object.keys(chunkOrder).sort(function(a, b) { return a - b })[0] - startingWidth) / fullWidth) * canvasGraph.width) + padding[3] + 3, prevY);
             newChunkOrder = {};
             Object.keys(chunkOrder).sort(function(a, b) { return a - b }).forEach((time) => {
                 if (!newChunkOrder.hasOwnProperty(chunkOrder[time]) && tempChunks['unlocked'].hasOwnProperty(chunkOrder[time])) {
                     newChunkOrder[chunkOrder[time]] = time;
                     count++;
-                    ctxGraph.lineTo((((time - startingWidth) / fullWidth) * (canvasGraph.width - (padding * 2) - 3)) + padding + 3, prevY);
-                    ctxGraph.lineTo((((time - startingWidth) / fullWidth) * (canvasGraph.width - (padding * 2) - 3)) + padding + 3, (canvasGraph.height - ((count / fullHeight) * (canvasGraph.height - (padding * 2) - 2))) - padding - 2);
-                    prevY = (canvasGraph.height - ((count / fullHeight) * (canvasGraph.height - (padding * 2) - 2))) - padding - 2;
+                    ctxGraph.lineTo((((time - startingWidth) / fullWidth) * (canvasGraph.width - (padding[1] + padding[3]) - 3)) + padding[3] + 3, prevY);
+                    ctxGraph.lineTo((((time - startingWidth) / fullWidth) * (canvasGraph.width - (padding[1] + padding[3]) - 3)) + padding[3] + 3, (canvasGraph.height - ((count / fullHeight) * (canvasGraph.height - (padding[0] + padding[2]) - 2))) - padding[2] - 2);
+                    prevY = (canvasGraph.height - ((count / fullHeight) * (canvasGraph.height - (padding[0] + padding[2]) - 2))) - padding[2] - 2;
                 }
             });
-            ctxGraph.lineTo((((Date.now() - startingWidth) / fullWidth) * (canvasGraph.width - (padding * 2) - 3)) + padding + 3, prevY);
+            ctxGraph.lineTo((((Date.now() - startingWidth) / fullWidth) * (canvasGraph.width - (padding[1] + padding[3]) - 3)) + padding[3] + 3, prevY);
             ctxGraph.stroke();
             let numDays = Math.round((((fullWidth / Object.keys(newChunkOrder).length) / (1000 * 3600 * 24)) + Number.EPSILON) * 100) / 100;
             $('.average-rolltime-title').show().text(`Average time between chunk rolls: ${numDays} days`);
@@ -12242,6 +12490,7 @@ let loadData = async function(startup) {
         stickered = (chunks ? chunks['stickered'] : {}) || {};
         stickeredNotes = (chunks ? chunks['stickeredNotes'] : {}) || {};
         stickeredColors = (chunks ? chunks['stickeredColors'] : {}) || {};
+        painted = (chunks ? chunks['painted'] : {}) || {};
         mid === roll5Mid && $('.roll2').text('Roll 5');
         if (isPicking && !settings['randomStartAlways']) {
             $('.pick').text('Pick for me');
@@ -12725,7 +12974,8 @@ let setData = function() {
             blacklisted: blacklistedJson,
             stickered,
             stickeredNotes: encodeObject(stickeredNotes, true),
-            stickeredColors
+            stickeredColors,
+            painted
         },
     };
     let databaseObject = JSON.parse(JSON.stringify(setSnap));
@@ -12844,7 +13094,7 @@ let changeLocked = function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
                     signedIn = true;
                     $('.center').css('margin-top', '15px');
-                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile').css('opacity', 0).show();
+                    $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile').css('opacity', 0).show();
                     roll2On && $('.roll2').css('opacity', 0).show();
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                     $('.open-manual-outer-container').css('opacity', 0).show();
@@ -12860,7 +13110,7 @@ let changeLocked = function() {
                     });
                     setTimeout(function() {
                         $('.lock-box').css('opacity', 1).hide();
-                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile').animate({ 'opacity': 1 });
+                        $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile').animate({ 'opacity': 1 });
                         roll2On && $('.roll2').animate({ 'opacity': 1 });
                         !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                         $('.open-manual-outer-container').animate({ 'opacity': 1 });
@@ -12903,7 +13153,7 @@ let changeLocked = function() {
                             });
                             databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime());
                             $('.center').css('margin-top', '15px');
-                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile').css('opacity', 0).show();
+                            $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile').css('opacity', 0).show();
                             roll2On && $('.roll2').css('opacity', 0).show();
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                             $('.open-manual-outer-container').css('opacity', 0).show();
@@ -12912,7 +13162,7 @@ let changeLocked = function() {
                             $('.lock-box').animate({ 'opacity': 0 });
                             setTimeout(function() {
                                 $('.lock-box').css('opacity', 1).hide();
-                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile').animate({ 'opacity': 1 });
+                                $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile').animate({ 'opacity': 1 });
                                 roll2On && $('.roll2').animate({ 'opacity': 1 });
                                 !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                                 $('.open-manual-outer-container').animate({ 'opacity': 1 });

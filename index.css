@@ -3181,6 +3181,11 @@ label .tooltip-base-el:active {
     width: 35%;
 }
 
+#paintModal > .modal-content {
+    height: 50%;
+    width: 35%;
+}
+
 #xpRewardModal > .modal-content {
     height: 40%;
     width: 35%;
@@ -4665,7 +4670,7 @@ input#searchChunkSections {
 
 #canvas-graph {
     border: solid black;
-    margin: 25px;
+    margin: 25px 0;
 }
 
 .mobile #canvas-graph {
@@ -7418,6 +7423,120 @@ input#searchMonsters {
 }
 
 #submit-sticker-button:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+.paint-chunk {
+    font-weight: bold;
+    display: block;
+}
+
+.paint-title {
+    font-size: 30px;
+    text-align: center;
+    max-height: 25%;
+    min-height: 25%;
+    padding: 0px 10px;
+    border-bottom: 1px solid;
+}
+
+.paint-data-container {
+    font-size: 30px;
+    text-align: center;
+    max-height: 63%;
+    min-height: 63%;
+    padding: 0px 10px;
+    overflow-y: auto;
+    background-color: var(--color4);
+}
+
+.paint-color-data, .paint-color-data-2 {
+    font-size: 24px;
+}
+
+.paint-data {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+}
+
+.paint-option-container {
+    padding: 10px;
+    border: solid 3px;
+    margin: 10px auto 10px auto;
+    cursor: pointer;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-color: var(--colorText);
+    border-radius: 10px;
+    outline: 2px solid black;
+    outline-offset: -4px;
+}
+
+.paint-option-container.disabled {
+    cursor: not-allowed;
+    filter: brightness(30%);
+}
+
+.paint-option-container > img {
+    max-width: 35px;
+}
+
+.paint-option-container.black-outline > i {
+    -webkit-text-stroke-width: 0.05em;
+    -webkit-text-stroke-color: black;
+}
+
+.paint-option-container.black-outline {
+    -webkit-text-stroke: 1.5px;
+    -webkit-text-stroke-color: black;
+    font-weight: bold;
+}
+
+.paint-option-container.unset-option {
+    color: rgb(100, 100, 100);
+    border: dashed;
+}
+
+.selected-paint {
+    border-color: rgb(50, 175, 50);
+}
+
+.paint-option-container:not(.disabled):hover {
+    border-color: rgb(75, 75, 225);
+}
+
+.stickpainter-footer {
+    height: 13%;
+    border-top: 1px solid;
+}
+
+#cancel-paint-button {
+    float: right;
+    padding: 20px 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#submit-paint-button {
+    background-color: gray;
+    width: 100px;
+    font-size: 20px;
+    color: white;
+    float: right;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 20px 10px;
+}
+
+#submit-paint-button:hover {
     background-color: rgb(80, 80, 80);
 }
 

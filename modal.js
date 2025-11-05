@@ -197,17 +197,29 @@ const modalContents = {
         <div id="sticker-title" class="sticker-title noscroll">Pick a sticker for <span class='sticker-chunk noscroll'></span></div>
         <div id="sticker-data-container" class="sticker-data-container noscroll">
             <div id="sticker-notes-data" class="sticker-notes-data noscroll">
-            <textarea maxlength="128" placeholder="Add notes here..."></textarea>
+                <textarea maxlength="128" placeholder="Add notes here..."></textarea>
             </div>
             <div id="sticker-color-data" class="sticker-color-data noscroll">
-            <input type="color" class="sticker-color-picker noscroll" onchange="changeCurrentStickerColor()" />
-            <span class='sticker-color-picker-label noscroll'>Sticker color</span>
+                <input type="color" class="sticker-color-picker noscroll" onchange="changeCurrentStickerColor()" />
+                <span class='sticker-color-picker-label noscroll'>Sticker color</span>
             </div>
             <div id="sticker-data" class="sticker-data noscroll"></div>
         </div>
         <div id="sticker-footer" class="sticker-footer noscroll">
             <button id='submit-sticker-button' class='modal-button' onclick='submitSticker()'>Save</button>
             <span id='cancel-sticker-button' onclick='closeSticker()'>Cancel</span>
+        </div>
+    `,
+    'paintModal': `
+        <div id="paint-title" class="paint-title noscroll">Pick up to four colors for <span class='paint-chunk noscroll'></span></div>
+        <div id="paint-data-container" class="paint-data-container noscroll">
+            <div id="paint-color-data" class="paint-color-data noscroll">Selected colors: </div>
+            <div id="paint-color-data-2" class="paint-color-data-2 noscroll">None</div>
+            <div id="paint-data" class="paint-data noscroll"></div>
+        </div>
+        <div id="paint-footer" class="paint-footer noscroll">
+            <button id='submit-paint-button' class='modal-button' onclick='submitPaint()'>Save</button>
+            <span id='cancel-paint-button' onclick='closePaint()'>Cancel</span>
         </div>
     `,
     'backlogSourcesModal': `
@@ -227,7 +239,7 @@ const modalContents = {
         <div id="chunkhistory-subtitle" class="chunkhistory-subtitle noscroll">Explore the entire list of your previously rolled chunks. Useful for helping track the order your map unlocked in or remember what chunks you unlocked last week.</div>
         <div id="chunkhistory-data" class="chunkhistory-data noscroll">
             <div class="canvas-graph-outer">
-            <canvas id="canvas-graph" width=550 height=300></canvas>
+            <canvas id="canvas-graph" width=575 height=325></canvas>
             </div>
             <div class="average-rolltime-title"></div>
             <div id="chunkhistory-data-inner" class="chunkhistory-data-inner noscroll"></div>

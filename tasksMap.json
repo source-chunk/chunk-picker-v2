@@ -1706,6 +1706,7 @@
   "Grow a ~|watermelon|~": "t_1659",
   "Grow a ~|white lily|~": "t_1660",
   "Grow a ~|willow tree|~": "t_1661",
+  "Grow a ~|willow tree|~ for roots": "t_46533",
   "Grow a ~|woad leaf|~": "t_1662",
   "Grow a ~|yew tree|~": "t_1663",
   "Grow an ~|apple tree|~": "t_1664",
@@ -12115,7 +12116,7 @@
   "Kill X ~|Giant rat|~": "t_11869",
   "Kill X ~|Seagull|~": "t_11870",
   "Kill X ~|Bandit (Varlamore)|~": "t_11871",
-  "Kill X ~|Snake|~": "t_11873",
+  "Kill X ~|Snake (Varlamore)|~": "t_46534",
   "Kill X ~|Icefiend|~": "t_11874",
   "Kill X ~|White jaguar|~": "t_11875",
   "Kill X ~|Skeleton#Plain|~": "t_11877",
@@ -12241,6 +12242,7 @@
   "Kill X ~|Serpent shaman|~": "t_12002",
   "Kill X ~|Shockwave Colossus|~": "t_12003",
   "Kill X ~|Sol Heredit|~": "t_12004",
+  "Kill X ~|Snake|~": "t_11873",
   "Kill X ~|Hobgoblin#Armed|~": "t_12005",
   "Kill X ~|Hobgoblin#Unarmed|~": "t_12006",
   "Kill X ~|Dagannoth fledgeling|~": "t_12007",
@@ -30522,6 +30524,7 @@
   "Snake (Ape Atoll): ~|Snake spine|~ (1) (1/4)": "t_30064",
   "Snake (Mos Le'Harmless): ~|Snake hide|~ (1) (Always)": "t_30065",
   "Snake (Mos Le'Harmless): ~|Snake spine|~ (1) (1/4)": "t_30066",
+  "Snake (Varlamore): ~|Bones|~ (1) (Always)": "t_46535",
   "Sofiya: ~|Wolf bones|~ (1) (Always)": "t_30067",
   "Sofiya: ~|Steel axe|~ (1) (1/51.2)": "t_30068",
   "Sofiya: ~|Steel arrow|~ (50) (1/51.2)": "t_30069",
@@ -46264,5 +46267,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46533
+  "currentNextIndex": 46536
 }
