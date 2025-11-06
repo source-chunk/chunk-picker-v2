@@ -31641,6 +31641,11 @@
 				"Output": "Avernic defender",
 				"Not F2P": true
 			},
+			"Claim the one-time hunter kit from a hunting expert*": {
+				"NPCs": ["HuntingExpert[+]"],
+				"Output": "Hunter kit",
+				"Not F2P": true
+			},
 			"Claim the pure essence reward from Temple Trekking*": {
 				"Chunks": ["Temple Trekking Routes"],
 				"Output": "Pure essence",
@@ -111954,7 +111959,6 @@
 						"Iron bar": 1,
 						"Lobster pot": 1,
 						"Rope": 1,
-						"Small fishing net": 1,
 						"Tinderbox": 1,
 						"Unlit torch": 1
 					},
@@ -152351,7 +152355,8 @@
 			"AdeptHunter[+]": ["Guild Hunter Cervus (Adept)", "Guild Hunter Ornus (Adept)"],
 			"ExpertHunter[+]": ["Guild Hunter Aco (Expert)", "Guild Hunter Teco (Expert)"],
 			"PointSlayerMasters[+]": ["Mazchna", "Vannaka", "Chaeldar", "Nieve", "Duradel", "Konar quo Maten", "Krystilia"],
-			"Farmer[+]": ["Farmer", "Farmer (Varlamore)"]
+			"Farmer[+]": ["Farmer", "Farmer (Varlamore)"],
+			"HuntingExpert[+]": ["Hunting expert", "Hunting expert (Rellekka Hunter area)"]
 		},
 		"npcsPlusNames": {
 			"Citizen[+]": "Any pickpocketable citizen",
@@ -152370,7 +152375,8 @@
 			"AdeptHunter[+]": "Any adept guild hunter",
 			"ExpertHunter[+]": "Any expert guild hunter",
 			"PointSlayerMasters[+]": "Any point-giving slayer master",
-			"Farmer[+]": "Any pickpocketable farmer"
+			"Farmer[+]": "Any pickpocketable farmer",
+			"HuntingExpert[+]": "Any hunting expert"
 		},
 		"objectsPlus": {
 			"Adamantite[+]": ["Adamantite rocks", "Adamantite vein"],
