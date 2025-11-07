@@ -25712,6 +25712,11 @@
 				"Output": "Gemstone Crab loot",
 				"Not F2P": true
 			},
+			"Pick up a tomato thrown at the recruiter in West Ardougne*": {
+				"NPCs": ["Recruiter"],
+				"Output": "Tomato",
+				"Not F2P": true
+			},
 			"Get the orange (hat) from the capybara*": {
 				"Objects": ["Picnic"],
 				"Output": "Orange (hat)",
@@ -65396,12 +65401,17 @@
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
 				"NPCs": ["Ceto"],
+				"Skills": {
+					"Fishing": 47,
+					"Hunter": 44
+				},
 				"Items": ["Numulite"],
 				"Not F2P": true
 			},
 			"Unlock free ~|Volcanic Mine|~ access": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
+				"Chunks": ["Volcanic Mine"],
 				"NPCs": ["Petrified Pete"],
 				"Items": ["Numulite"],
 				"Not F2P": true
