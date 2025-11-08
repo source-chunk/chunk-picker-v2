@@ -12913,6 +12913,14 @@
   "Kill X ~|Gorak#Gorak Plane|~": "t_12681",
   "Kill X ~|Grotesque Guardians|~": "t_12682",
   "Kill X ~|Hespori|~": "t_12683",
+  "Kill X ~|Jal-Ak|~": "t_46536",
+  "Kill X ~|Jal-ImKot|~": "t_46537",
+  "Kill X ~|Jal-MejJak|~": "t_46538",
+  "Kill X ~|Jal-MejRah|~": "t_46539",
+  "Kill X ~|Jal-Nib|~": "t_46540",
+  "Kill X ~|Jal-Xil|~": "t_46541",
+  "Kill X ~|Jal-Zek|~": "t_46542",
+  "Kill X ~|JalTok-Jad|~": "t_46543",
   "Kill X ~|TzKal-Zuk|~": "t_12684",
   "Kill X ~|Cave kraken|~": "t_12685",
   "Kill X ~|Kraken|~": "t_12686",
@@ -46267,5 +46275,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46536
+  "currentNextIndex": 46544
 }

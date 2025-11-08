@@ -84290,7 +84290,7 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 4,
-				"Monsters": ["TzKal-Zuk"]
+				"Monsters": ["Jal-Zek"]
 			},
 			"~|Combat Achievements#Elite|~ Demonic Defence": {
 				"Category": ["Combat Diary Tasks"],
@@ -86244,7 +86244,8 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
-				"Chunks": ["Mor Ul Rek#Inner Area"]
+				"Chunks": ["Mor Ul Rek#Inner Area"],
+				"Monsters": ["TzKal-Zuk"]
 			},
 			"~|Combat Achievements#Master|~ Supplies? Who Needs 'em?": {
 				"Category": ["Combat Diary Tasks"],
@@ -86252,7 +86253,8 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
-				"Chunks": ["Mor Ul Rek#Inner Area"]
+				"Chunks": ["Mor Ul Rek#Inner Area"],
+				"Monsters": ["TzKal-Zuk"]
 			},
 			"~|Combat Achievements#Master|~ Facing Jad Head-on IV": {
 				"Category": ["Combat Diary Tasks"],
@@ -86260,7 +86262,8 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
-				"Chunks": ["Mor Ul Rek#Inner Area"]
+				"Chunks": ["Mor Ul Rek#Inner Area"],
+				"Monsters": ["TzKal-Zuk"]
 			},
 			"~|Combat Achievements#Master|~ TzHaar-Ket-Rak's Speed-Chaser": {
 				"Category": ["Combat Diary Tasks"],
@@ -86268,7 +86271,8 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
-				"Chunks": ["Mor Ul Rek#Inner Area"]
+				"Chunks": ["Mor Ul Rek#Inner Area"],
+				"Monsters": ["TzKal-Zuk"]
 			},
 			"~|Combat Achievements#Master|~ The IV Jad Challenge": {
 				"Category": ["Combat Diary Tasks"],
@@ -86276,7 +86280,8 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
-				"Chunks": ["Mor Ul Rek#Inner Area"]
+				"Chunks": ["Mor Ul Rek#Inner Area"],
+				"Monsters": ["TzKal-Zuk"]
 			},
 			"~|Combat Achievements#Master|~ Vardorvis Speed-Chaser": {
 				"Category": ["Combat Diary Tasks"],
@@ -86869,7 +86874,7 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 6,
-				"Monsters": ["TzKal-Zuk"]
+				"Monsters": ["JalTok-Jad"]
 			},
 			"~|Combat Achievements#Grandmaster|~ The Floor Is Lava": {
 				"Category": ["Combat Diary Tasks"],
@@ -87318,7 +87323,8 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 6,
-				"Chunks": ["Mor Ul Rek#Inner Area"]
+				"Chunks": ["Mor Ul Rek#Inner Area"],
+				"Monsters": ["TzKal-Zuk"]
 			},
 			"~|Combat Achievements#Grandmaster|~ TzHaar-Ket-Rak's Speed-Runner": {
 				"Category": ["Combat Diary Tasks"],
@@ -87326,7 +87332,8 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 6,
-				"Chunks": ["Mor Ul Rek#Inner Area"]
+				"Chunks": ["Mor Ul Rek#Inner Area"],
+				"Monsters": ["TzKal-Zuk"]
 			},
 			"~|Combat Achievements#Grandmaster|~ The VI Jad Challenge": {
 				"Category": ["Combat Diary Tasks"],
@@ -87334,7 +87341,8 @@
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 6,
-				"Chunks": ["Mor Ul Rek#Inner Area"]
+				"Chunks": ["Mor Ul Rek#Inner Area"],
+				"Monsters": ["TzKal-Zuk"]
 			},
 			"~|Combat Achievements#Grandmaster|~ Vardorvis Sleeper": {
 				"Category": ["Combat Diary Tasks"],
@@ -146249,7 +146257,16 @@
 				"10063": true
 			},
 			"Monster": {
-				"TzKal-Zuk": 1
+				"Jal-Ak": 1,
+				"Jal-ImKot": 1,
+				"Jal-MejJak": 1,
+				"Jal-MejRah": 1,
+				"Jal-Nib": 1,
+				"Jal-Xil": 1,
+				"Jal-Zek": 1,
+				"JalTok-Jad": 1,
+				"TzKal-Zuk": 1,
+				"Yt-HurKot": 1
 			},
 			"Object": {
 				"Cave exit": 1
