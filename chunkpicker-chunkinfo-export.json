@@ -32280,14 +32280,14 @@
 				"Output": "Lunar Chest",
 				"Not F2P": true
 			},
-			"Bryophyta's chest loot*": {
+			"Chest (Bryophyta's lair)*": {
 				"Category": ["Boss"],
 				"Items": ["Mossy key*"],
 				"Source": "drop",
 				"Objects": ["Chest (Bryophyta's lair)"],
 				"Output": "Chest (Bryophyta's lair)"
 			},
-			"Obor's chest loot*": {
+			"Chest (Obor's lair)*": {
 				"Category": ["Boss"],
 				"Items": ["Giant key*"],
 				"Source": "drop",
