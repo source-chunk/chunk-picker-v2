@@ -12420,7 +12420,7 @@
   "Kill X ~|Archer (Ardougne)|~": "t_12185",
   "Kill X ~|Cyclops (Ardougne Zoo)|~": "t_45435",
   "Kill X ~|Jogre|~": "t_12187",
-  "Kill X ~|Man#Cavalier man|~": "t_12188",
+  "Kill X ~|Man (East Ardougne)|~": "t_46544",
   "Kill X ~|Pit Scorpion|~": "t_12189",
   "Kill X ~|Warrior (Thieving)|~": "t_12190",
   "Kill X ~|Woman (East Ardougne)|~": "t_12191",
@@ -26091,7 +26091,7 @@
   "Man: ~|Grimy marrentill|~ (1) (1/29.68)": "t_25660",
   "Man: ~|Grimy ranarr weed|~ (1) (1/64.78)": "t_25661",
   "Man: ~|Grimy tarromin|~ (1) (1/39.57)": "t_25662",
-  "Man#Cavalier man: ~|Bones|~ (1) (Always)": "t_25663",
+  "Man (East Ardougne): ~|Bones|~ (1) (Always)": "t_46545",
   "Man (level 4): ~|Bones|~ (1) (Always)": "t_25664",
   "Maniacal Monkey Archer: ~|Small ninja monkey bones|~ (1) (Always)": "t_25665",
   "Maniacal Monkey Archer: ~|Steel scimitar|~ (1) (1/10)": "t_25666",
@@ -46275,5 +46275,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 46544
+  "currentNextIndex": 46546
 }
