@@ -29,8 +29,8 @@ let zoom = 350;                                                                 
 let fontZoom = 16;                                                              // Font size zoom
 let labelZoom = 96;                                                             // Selected label font size zoom
 let scale = 30;                                                                 // Amount zoomed every 'zoom' action
-let fullSize = 1196;                                                            // Amount of chunks present
-let rowSize = 46;                                                               // Amount of chunks per row
+let fullSize = 1632;                                                            // Amount of chunks present
+let rowSize = 48;                                                               // Amount of chunks per row
 let scrollLeft = 0;                                                             // Amount the board is scrolled left offscreen
 let prevScrollLeft = 0;                                                         // Amount the board was previously scrolled left offscreen
 let scrollTop = 0;                                                              // Amount the board is scrolled up offscreen
@@ -41,13 +41,13 @@ let chunkInfo = {};                                                             
 let infoLockedId = -1;                                                          // Id of chunk locked for info
 let userName = '';                                                              // Runescape Username of user
 
-let ratio = 4992 / 8832;                                                        // Image ratio
+let ratio = 6528 / 9216;                                                        // Image ratio
 let movedNum = 0;                                                               // Amount of times mouse is moved while dragging
 let selectedNum = 1;                                                            // Current index of selected chunks
 let unlockedChunks = 0;                                                         // Number of unlocked chunks
 let selectedChunks = 0;                                                         // Number of selected chunks
-let startingIndex = 4160;                                                       // Index to start chunk numbering at (based on ChunkLite numbers)
-let skip = 210;                                                                 // Number of indices to skip between columns for chunk numbering
+let startingIndex = 3905;                                                       // Index to start chunk numbering at (based on ChunkLite numbers)
+let skip = 208;                                                                 // Number of indices to skip between columns for chunk numbering
 
 let prevValueMid = '';                                                          // Previous value of map id at login
 let prevValuePinNew = '';                                                       // Previous value of pin at signup
@@ -1412,7 +1412,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.10';
+let currentVersion = '6.9.11';
 let patchNotesVersion = '6.9.0';
 let updateLevel = 'difference';
 
@@ -1581,7 +1581,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.10";
+mapImg.src = "osrs_world_map.png?v=6.9.11";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2060,16 +2060,16 @@ let drawCanvas = function(ctxIn = ctx) {
             ctxIn.textAlign = 'center';
             ctxIn.font = '900 ' + 36 + 'px "Font Awesome 6 Free"';
             ctxIn.fillStyle = 'white';
-            ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
+            ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))), dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
             ctxIn.font = '900 ' + 32 + 'px "Font Awesome 6 Free"';
             ctxIn.fillStyle = hoveredOverlayIds.includes(i) && !isHoveringOverlayMenu ? 'black' : overlayEl.color;
-            ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+            ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))), dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
             if (selectedOverlayIds.length !== 0 && selectedOverlayIds.includes(i)) {
                 ctxIn.fillStyle = 'rgba(30, 30, 30, 0.5)';
-                ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+                ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))), dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
             }
             ctxIn.beginPath();
-            ctxIn.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
+            ctxIn.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))), dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
             ctxIn.fillStyle = 'white';
             ctxIn.fill();
         }
@@ -2082,14 +2082,14 @@ let drawCanvas = function(ctxIn = ctx) {
         ctxIn.textAlign = 'center';
         ctxIn.font = '900 ' + 36 + 'px "Font Awesome 6 Free"';
         ctxIn.fillStyle = 'white';
-        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
+        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))), dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 4);
         ctxIn.font = '900 ' + 32 + 'px "Font Awesome 6 Free"';
         ctxIn.fillStyle = hoveredOverlayIds.includes(selectedOverlayId) && !isHoveringOverlayMenu ? 'black' : overlayEl.color;
-        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))), dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
         ctxIn.fillStyle = 'rgba(200, 200, 200, 0.25)';
-        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
+        ctxIn.fillText(stickerChoicesContent['map-marker-alt'], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))), dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6);
         ctxIn.beginPath();
-        ctxIn.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))), dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
+        ctxIn.arc((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))), dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 22, 5, 0, 2 * Math.PI, false);
         ctxIn.fillStyle = 'white';
         ctxIn.fill();
         ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--color1');
@@ -2098,56 +2098,56 @@ let drawCanvas = function(ctxIn = ctx) {
         let topText = `${overlayEl.type} Step`;
         if (overlayEl.hasOwnProperty('img')) {
             ctxIn.font = 'bold 24px Calibri, Roboto Condensed, sans-serif';
-            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
-            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
+            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
+            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, 200, 24);
             ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--colorText');
             ctxIn.textAlign = 'left';
-            ctxIn.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            ctxIn.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
             ctxIn.font = '900 ' + 18 + 'px "Font Awesome 6 Free"';
-            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctxIn.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
-            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctxIn.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctxIn.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctxIn.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
             ctxIn.font = '900 ' + 24 + 'px "Font Awesome 6 Free"';
-            ctxIn.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
+            ctxIn.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
             ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--color1');
             ctxIn.strokeStyle = 'black';
             let overlayImg = new Image();
             overlayImg.src = overlayEl.img;
-            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
-            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
-            ctxIn.drawImage(overlayImg, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 170, 190, 190);
-            overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180];
-            overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
-            overlayRightLocation = (selectedOverlayIndex < (selectedOverlayIds.length - 1) ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
-            overlayMenuLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20 + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + 200];
+            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
+            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
+            ctxIn.drawImage(overlayImg, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 170, 190, 190);
+            overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180];
+            overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
+            overlayRightLocation = (selectedOverlayIndex < (selectedOverlayIds.length - 1) ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
+            overlayMenuLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20 + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + 200];
         } else {
             ctxIn.font = '18px Calibri, Roboto Condensed, sans-serif';
             let hoverText = `${overlayEl.text}`;
             let hoverTextLines = getLines(ctxIn, hoverText, 190);
             ctxIn.font = 'bold 24px Calibri, Roboto Condensed, sans-serif';
-            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
-            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
+            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
+            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), 200, 24);
             ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--colorText');
             ctxIn.textAlign = 'left';
-            ctxIn.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            ctxIn.fillText(topText, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 22, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
             ctxIn.font = '900 ' + 18 + 'px "Font Awesome 6 Free"';
-            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctxIn.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
-            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctxIn.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 && ctxIn.fillText('\uf053', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            selectedOverlayIndex < (selectedOverlayIds.length - 1) && ctxIn.fillText('\uf054', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
             ctxIn.font = '900 ' + 24 + 'px "Font Awesome 6 Free"';
-            ctxIn.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
+            ctxIn.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10)));
             ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--color1');
             ctxIn.strokeStyle = 'black';
             ctxIn.font = '18px Calibri, Roboto Condensed, sans-serif';
-            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
-            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
+            ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
+            ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)), 200, (hoverTextLines.length * 19 + 10));
             ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--colorText');
             ctxIn.textAlign = 'left';
             hoverTextLines.forEach((hoverTextLine, i) => {
-                ctxIn.fillText(hoverTextLine, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 155 + (19 * i) + (200 - (hoverTextLines.length * 19 + 10)));
+                ctxIn.fillText(hoverTextLine, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 155 + (19 * i) + (200 - (hoverTextLines.length * 19 + 10)));
             });
-            overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))];
-            overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))] : -1);
-            overlayRightLocation = (selectedOverlayIndex < (selectedOverlayIds.length - 1) ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))] : -1);
-            overlayMenuLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), (dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) + 20 + 200, dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)) + (hoverTextLines.length * 19 + 10)];
+            overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))];
+            overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))] : -1);
+            overlayRightLocation = (selectedOverlayIndex < (selectedOverlayIds.length - 1) ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180 + (200 - (hoverTextLines.length * 19 + 10))] : -1);
+            overlayMenuLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 199 + (200 - (hoverTextLines.length * 19 + 10)), (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20 + 200, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175 + (200 - (hoverTextLines.length * 19 + 10)) + (hoverTextLines.length * 19 + 10)];
         }
     } else {
         overlayCloseLocation = -1;
@@ -2158,7 +2158,7 @@ let drawCanvas = function(ctxIn = ctx) {
     ctxIn.restore();
 
     if (selectedOverlay !== 'None' && selectedOverlay !== 'Locked Slayer Task|Slayer task') {
-        $('#canvas').css('cursor', (hoveredOverlayIds.length !== 0 && !isHoveringOverlayMenu) || isHoveringClose || isHoveringLeft || isHoveringRight ? 'pointer' : 'auto');
+        $('#canvas').css('cursor', (hoveredOverlayIds.length !== 0 && !isHoveringOverlayMenu) || isHoveringClose || isHoveringLeft || isHoveringRight || ((isHoveringBlacklist || isHoveringSticker || isHoveringPaint) && (!locked || testMode)) ? 'pointer' : 'auto');
     }
 
     if (manualMouseMoveCheck) {
@@ -2536,7 +2536,7 @@ let handleMouseMove = function(e) {
             let lowestDistance = 100;
             e.target.id === 'canvas' && chunkInfo['mapOverlays'][selectedOverlay].forEach((overlayEl, i) => {
                 if ((overlayEl.text || overlayEl.img) && (selectedOverlay !== 'Clues' || selectedOverlayClues[overlayEl.type]) && overlayEl.x >= 1024 && overlayEl.x <= 3967 && overlayEl.y >= 2496 && overlayEl.y <= 4159 && (!unlockedOverlayOnly || (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(convertToChunkNum(Math.floor((overlayEl.x - 1024)/64), (fullSize / rowSize) - Math.ceil((overlayEl.y - 2495)/64)))))) {
-                    let distance = Math.sqrt(Math.pow((dragTotalX + (totalZoom * (((overlayEl.x/64) - 16) * imgW / rowSize))) - currentX, 2) + Math.pow((dragTotalY + (totalZoom * ((65 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6 - 15) - currentY, 2));
+                    let distance = Math.sqrt(Math.pow((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) - currentX, 2) + Math.pow((dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 6 - 15) - currentY, 2));
                     if (distance < 15 && distance < lowestDistance) {
                         hoveredOverlayIds.push(i);
                         distance = distance;
@@ -2995,22 +2995,22 @@ let openRollChunkCanvas = async function(el, rand, sNum, rand2, sNum2, isUnpick)
     let tempVar = false;
     chosenFromCinematic = el[rand];
     elArr = shuffle(elArr);
-    xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 15;
-    yCoord = 65 - (parseInt(elArr[elArr.length - 1]) % 256);
+    xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 14;
+    yCoord = 66 - (parseInt(elArr[elArr.length - 1]) % 256);
     $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
         for (let j = 0; j < elArr.length; j++) {
             let num = elArr[j];
-            xCoord = Math.floor(parseInt(elArr[j]) / 256) - 15;
-            yCoord = 65 - (parseInt(elArr[j]) % 256);
+            xCoord = Math.floor(parseInt(elArr[j]) / 256) - 14;
+            yCoord = 66 - (parseInt(elArr[j]) % 256);
             $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
             if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
                 topNum = (-15.999 * ((i * elArr.length) + j)) + 'vh';
             }
         };
     };
-    xCoord = Math.floor(parseInt(elArr[0]) / 256) - 15;
-    yCoord = 65 - (parseInt(elArr[0]) % 256);
+    xCoord = Math.floor(parseInt(elArr[0]) / 256) - 14;
+    yCoord = 66 - (parseInt(elArr[0]) % 256);
     let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
     $('.roll-chunk-outer').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
     setTimeout(function() {
@@ -3042,22 +3042,22 @@ let openRollChunkCanvas = async function(el, rand, sNum, rand2, sNum2, isUnpick)
         chosenFromCinematic = el[rand2];
         elArr = shuffle(elArr);
         let topNum2;
-        xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 15;
-        yCoord = 65 - (parseInt(elArr[elArr.length - 1]) % 256);
+        xCoord = Math.floor(parseInt(elArr[elArr.length - 1]) / 256) - 14;
+        yCoord = 66 - (parseInt(elArr[elArr.length - 1]) % 256);
         $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[elArr.length - 1]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
         for (let i = 0; i < Math.ceil(numSlots / elArr.length); i++) {
             for (let j = 0; j < elArr.length; j++) {
                 let num = elArr[j];
-                xCoord = Math.floor(parseInt(elArr[j]) / 256) - 15;
-                yCoord = 65 - (parseInt(elArr[j]) % 256);
+                xCoord = Math.floor(parseInt(elArr[j]) / 256) - 14;
+                yCoord = 66 - (parseInt(elArr[j]) % 256);
                 $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${num}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
                 if (num === chosenFromCinematic && i + 1 >= Math.ceil(numSlots / elArr.length)) {
                     topNum2 = (-15.998 * ((i * elArr.length) + j)) + 'vh';
                 }
             };
         };
-        xCoord = Math.floor(parseInt(elArr[0]) / 256) - 15;
-        yCoord = 65 - (parseInt(elArr[0]) % 256);
+        xCoord = Math.floor(parseInt(elArr[0]) / 256) - 14;
+        yCoord = 66 - (parseInt(elArr[0]) % 256);
         let randomDuration = (3 + Math.floor(Math.random() * 6)) * 1000;
         $('.roll-chunk-outer2').append(`<div class='noscroll roll-chunk-inner roll-chunk-${elArr[0]}'><span class='noscroll roll-chunk-num'><img class='noscroll' src='${'./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png'}'/></span></div>`);
         setTimeout(function() {
@@ -3476,7 +3476,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.10");
+        myWorker = new Worker("./worker.js?v=6.9.11");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3696,7 +3696,7 @@ let centerCanvas = function(extra) {
 // Re-update chunk info panel
 let redirectPanelCanvas = function(name) {
     let realName = decodeQueryParam(name);
-    ((realName % 256) < 65) && scrollToPosCanvas(convertToXY(parseInt(realName)).x, convertToXY(parseInt(realName)).y, 0, 0);
+    ((realName % 256) < 66) && scrollToPosCanvas(convertToXY(parseInt(realName)).x, convertToXY(parseInt(realName)).y, 0, 0);
     infoLockedId = encodeRFC5987ValueChars(realName.toString());
     updateChunkInfo();
     drawCanvas();
@@ -3780,8 +3780,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.10");
-let myWorker2 = new Worker("./worker.js?v=6.9.10");
+let myWorker = new Worker("./worker.js?v=6.9.11");
+let myWorker2 = new Worker("./worker.js?v=6.9.11");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6722,7 +6722,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.10");
+    myWorker2 = new Worker("./worker.js?v=6.9.11");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -12223,8 +12223,8 @@ let preloadChunkImages = async function(elArr) {
     let xCoord;
     let yCoord;
     !!elArr && elArr.forEach((chunkId) => {
-        xCoord = Math.floor(parseInt(chunkId) / 256) - 15;
-        yCoord = 65 - (parseInt(chunkId) % 256);
+        xCoord = Math.floor(parseInt(chunkId) / 256) - 14;
+        yCoord = 66 - (parseInt(chunkId) % 256);
         imgs.push('./resources/chunk_images/row-' + yCoord + '-column-' + xCoord + '.png');
     });
     await preloadImages(imgs);
