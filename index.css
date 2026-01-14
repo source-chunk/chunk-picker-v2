@@ -2663,7 +2663,13 @@ input#searchPlayerMaps {
 .arrow {
     font-weight: bold;
     cursor: pointer;
-    color: #2d2d79;
+    transition: color .5s;
+    margin-left: 5px;
+    pointer-events: all;
+}
+
+.arrow:hover {
+    color: gray;
 }
 
 .burger {
@@ -8215,6 +8221,14 @@ input#searchMonsters {
     text-align: center;
     background-color: var(--color2);
     overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.quest-steps-title a {
+    display: block;
 }
 
 .quest-steps-data {

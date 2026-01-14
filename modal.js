@@ -66,6 +66,9 @@ const modalContents = {
             <div id='rulesrunecraft' class='accordion' onclick="toggleRulesPanel('runecraft')"><span class='exp'><i
             class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Runecraft</span></div>
             <div class="panel panel-runecraft"></div>
+            <div id='rulessailing' class='accordion' onclick="toggleRulesPanel('sailing')"><span class='exp'><i
+            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Sailing</span></div>
+            <div class="panel panel-sailing"></div>
             <div id='rulesslayer' class='accordion' onclick="toggleRulesPanel('slayer')"><span class='exp'><i
             class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Slayer</span></div>
             <div class="panel panel-slayer"></div>
@@ -95,6 +98,7 @@ const modalContents = {
             <div id='rulesmining' class='accordion-sidebar' onclick="toggleRulesPanel('mining')"><span class="accordion-title">Mining</span></div>
             <div id='rulesprayer' class='accordion-sidebar' onclick="toggleRulesPanel('prayer')"><span class="accordion-title">Prayer</span></div>
             <div id='rulesrunecraft' class='accordion-sidebar' onclick="toggleRulesPanel('runecraft')"><span class="accordion-title">Runecraft</span></div>
+            <div id='rulessailing' class='accordion-sidebar' onclick="toggleRulesPanel('sailing')"><span class="accordion-title">Sailing</span></div>
             <div id='rulesslayer' class='accordion-sidebar' onclick="toggleRulesPanel('slayer')"><span class="accordion-title">Slayer</span></div>
             <div id='rulessmithing' class='accordion-sidebar' onclick="toggleRulesPanel('smithing')"><span class="accordion-title">Smithing</span></div>
             <div id='ruleswoodcutting' class='accordion-sidebar' onclick="toggleRulesPanel('woodcutting')"><span class="accordion-title">Woodcutting</span></div>
@@ -114,6 +118,7 @@ const modalContents = {
             <div class="panel panel-mining"></div>
             <div class="panel panel-prayer"></div>
             <div class="panel panel-runecraft"></div>
+            <div class="panel panel-sailing"></div>
             <div class="panel panel-slayer"></div>
             <div class="panel panel-smithing"></div>
             <div class="panel panel-woodcutting"></div>
@@ -298,19 +303,70 @@ const modalContents = {
     `,
     'patchNotesModal': `
         <div id="patch-notes-title" class="patch-notes-title noscroll">Patch Notes</div>
-        <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">September 23, 2025 (6.9.0)</div>
+        <div id="patch-notes-subtitle" class="patch-notes-subtitle noscroll">January 14, 2026 (6.9.12)</div>
         <div id="patch-notes-data" class="patch-notes-data noscroll">
             <div><i>Note that not every update to the Chunk Picker has a corresponding Patch Notes entry. Check out the <a class='noscroll link' href='https://github.com/source-chunk/chunk-picker-v2/commits/gh-pages/' target='_blank'>Github Repository</a> to see when the Chunk Picker was last updated.</i></div>
             <br />
             <h2 class='noscroll'>Major Changes & New Features</h2>
             <ul class='noscroll'>
-                <li class='noscroll'><b>High-res Map Screenshots</b> - Newly added to the Chunk Picker is the ability to generate high resolution screenshots of your entire chunk map! This feature is great for sharing your map in image-form with others, especially for content creators. You can generate your map screenshot via the top-right cogwheel dropdown, then click 'Miscellaneous Actions', then download the image.</li>
-                <li class='noscroll'><b>Behind-the-scenes Modal Revamp</b> - The underlying code in control of the various modals in the Chunk Picker has been reworked to be more reusable and separated. If all goes well, there should be no noticable changes as a user for this one!</li>
+                <li class='noscroll'><b>Sailing</b> - Sailing was added to Oldschool Runescape in late November, and now that update is (mostly) here in the Chunk Picker! Sailing is started via the quest Pandemonium, in Port Sarim (and is similar to how Herblore is locked fully behind Druidic Ritual).<br /><br />Remember to manually add things to your map if you decide to make exceptions for Sailing! If you decide to complete the quest outside your chunks, or buy a boat, or anything like that, be sure to add it to your map so that the Chunk Picker knows and can assign you the correct tasks.<br /><br />This is the largest update that OSRS has seen in its history, which is why this has taken so long, and also why there are sure to be plenty of bugs in my data for it. Please let me know if you find any issues with the new update via the Bug Report link at the bottom of the Patch Notes.</li>
+                <li class='noscroll'>Some things are not yet added for Sailing, and will be added in the near future (but I wanted to get out everything that I had so far)! These things are: all parts of the Shrouded Ocean requiring an adamant helm or better to navigate (including islands), all parts of the Northern Ocean requiring an eternal brazier to navigate (including islands), and any Sea Charting tasks or rewards.</li>
+                <li class='noscroll'>The world map image has been updated to re-introduce the missing map icons!</li>
+                <li class='noscroll'>Although the world map was updated previously when Sailing came out, a reminder that the Tempoross chunk has moved because of the Sailing update (and you might need to manually change your map to compensate for that if you had Tempoross unlocked!)</li>
             </ul>
             <h2 class='noscroll'>Other Changes & Bug Fixes</h2>
             <ul class='noscroll'>
-                <li class='noscroll'>Added a missing shooting star location in Custodia</li>
-                <li class='noscroll'>Locked the leather gloves spawn in south varrock behind partial completion of Shield of Arrav</li>
+                <li class='noscroll'>Added a ~boss special search term to see bosses in your chunks</li>
+                <li class='noscroll'>Fixed an issue with the quest steps window not populating correctly for quests with names that contain special characters</li>
+                <li class='noscroll'>Fixed an issue with a Morytania Diary task requiring the wrong skill</li>
+                <li class='noscroll'>Fixed an issue where crafting using dessicated pages was incorrectly boostable</li>
+                <li class='noscroll'>Fixed an issue where it was assumed Konar could assign your very first Slayer task</li>
+                <li class='noscroll'>Fixed an issue with a missing Rev Caves entrance</li>
+                <li class='noscroll'>Fixed an issue with extra requirements on a Fossil Island Diary task</li>
+                <li class='noscroll'>Fixed an issue with harvesting celastrus bark</li>
+                <li class='noscroll'>Fixed the base Ali Morrisane store not being accessible to F2P</li>
+                <li class='noscroll'>Fixed tasks related to equipping void not requiring the minigame chunk itself</li>
+                <li class='noscroll'>Fixed an issue with a few demonbane Combat Achievement not considering demonbane spells as valid options</li>
+                <li class='noscroll'>Fixed a typo with the plural of Nechryael</li>
+                <li class='noscroll'>Fixed the styling of the un-complete task button to make it easier to see</li>
+                <li class='noscroll'>Fixed an issue with switching to an alternative task for BiS tasks</li>
+                <li class='noscroll'>Fixed the droprate for Wilderness Slayer Cave droptable drops</li>
+                <li class='noscroll'>Added a way to Backlog Source the Warriors' Guild if needed (via Door#Warriors' Guild)</li>
+                <li class='noscroll'>Tweaked the Easy Ardougne Diary task for traveling to Ardougne from Brimhaven to require different chunks (due to Sailing changes)</li>
+                <li class='noscroll'>Fixed an issue with being able to claim harder diary rewards before completing an easier diary tier first</li>
+                <li class='noscroll'>Fixed an issue with brewing tasks</li>
+                <li class='noscroll'>Fixed an issue with drops from Obor's and Bryophyta's chest were considered primary incorrectly</li>
+                <li class='noscroll'>Fixed another issue with alternative tasks</li>
+                <li class='noscroll'>Added Skotizo as a greater demon for the "Not So Great After All" Combat Achievement</li>
+                <li class='noscroll'>Fixed an issue requiring some Slayer monsters be killed without the correct equipment</li>
+                <li class='noscroll'>Added a missing key (medium) drop to Rellekka guards</li>
+                <li class='noscroll'>Fixed an issue with some Arandar Pass chunk sections</li>
+                <li class='noscroll'>Fixed some NPC names for similarly-named NPCs</li>
+                <li class='noscroll'>Fixed required chunks for Restless Ghost and The Fremennik Trials</li>
+                <li class='noscroll'>Added fishing spot (cage, harpoon) in the Wilderness where dark crab fishing spots are (they are cage/harpoon spots in F2P worlds)</li>
+                <li class='noscroll'>Added the Tempoross NPC to its related tasks, for ease of backlogging if needed</li>
+                <li class='noscroll'>Fixed an issue with the chunk sections in the Warriors' Guild chunk</li>
+                <li class='noscroll'>Fixed an issue with accessing the Cosmic Altar before Lost City quest</li>
+                <li class='noscroll'>Fixed the spelling of Teoki of Ralos NPC</li>
+                <li class='noscroll'>Fixed an issue with showing overlays only in unlocked chunks</li>
+                <li class='noscroll'>Added missing requirements for wielding the tome of water and tome of earth</li>
+                <li class='noscroll'>Fixed an issue with the tome of fire not being considered BiS</li>
+                <li class='noscroll'>Fixed an issue with already obtained BiS drops when ties happen in BiS calculation</li>
+                <li class='noscroll'>Adjusted the Stronghold of Security's zombie droptable to reflect the wiki</li>
+                <li class='noscroll'>Fixed waterfiends being assignable as a Slayer task before partial completiong of Barbarian Training</li>
+                <li class='noscroll'>Removed some talismans from the Guardians of the Rift reward shop before certain quests are completed</li>
+                <li class='noscroll'>Added a missing shortcut by the Troll Arena that gave xp</li>
+                <li class='noscroll'>Prevented Forestry events from giving other skilling pets (tangleroot/rocky)</li>
+                <li class='noscroll'>Added a level 1 method for Farming training via bagged plant 1 (didn't add them all to prevent unecessary tasks being added)</li>
+                <li class='noscroll'>Changed how drops are considered from wandering implings to always be Secondary</li>
+                <li class='noscroll'>Fixed an issue with compound droprate calculation</li>
+                <li class='noscroll'>Removed a small fishing net spawn in Shipwreck Cove since it is currently bugged and cannot be picked up</li>
+                <li class='noscroll'>Removed a fire in Pollnivneach since it is not usable as a normal fire</li>
+                <li class='noscroll'>Corrected some of the pirates in the Asgarnian Ice Dungeon to their plain variant (there are still a few non-plain variants there, though)</li>
+                <li class='noscroll'>Removed Ru Merald from his previous locations in Varlamore (but his gems can still be dug up)</li>
+                <li class='noscroll'>Fixed pirates in the Pirates' Hideout chunk from contributing towards tasks via their drops before they can be actually accessed</li>
+                <li class='noscroll'>Fixed the skeleton variant outside the Wilderness Agility Course</li>
+                <li class='noscroll'>Changed a quest step in the Porcine of Interest quest from "Investigate the cart" to "Investigate the hole"</li>
             </ul>
             <h3 class='noscroll'>As always, if you experience any issues with your map or anything wrong related to this update, please contact me on Discord at <i class='noscroll hover-copy' onclick="navigator.clipboard.writeText('whitecatblack')">whitecatblack  <i class="fa-solid fa-copy noscroll"></i></i> or submit a bug report <a class='noscroll link' href='https://docs.google.com/forms/d/e/1FAIpQLSdmSyeMPMjuDxPrDKQHbCjJe0bXQOUwPYvyTeY_mrF-UrtmCQ/viewform?usp=sf_link' target='_blank'>here</a>.</h3>
             <h4><a href='?patch-notes' target="_blank">Patch Notes Archive</a></h4>
