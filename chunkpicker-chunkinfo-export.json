@@ -15269,7 +15269,8 @@
 				},
 				"Priority": 10,
 				"Not F2P": true,
-				"NoBoost": true
+				"NoBoost": true,
+				"Not Processing": true
 			},
 			"Wear ~|frog-leather armour|~": {
 				"Items": ["Frog-leather armour[+]"],
@@ -26262,7 +26263,8 @@
 				},
 				"Priority": 5,
 				"Not F2P": true,
-				"NoBoost": true
+				"NoBoost": true,
+				"Not Processing": true
 			},
 			"Wear ~|infinity robes|~": {
 				"Items": ["Infinity robes[+]"],
@@ -28853,30 +28855,6 @@
 				"NPCs": ["Ali the Carter"],
 				"Output": "Waterskin(4)",
 				"Not F2P": true
-			},
-			"Buy a law talisman from ~|Temple Supplies|~*": {
-				"NPCs": ["Apprentice Felix"],
-				"Source": "shop",
-				"Tasks": {
-					"~|Troll Stronghold|~ Complete the quest": "Quest"
-				},
-				"Output": "Death talisman"
-			},
-			"Buy a death talisman from ~|Temple Supplies|~*": {
-				"NPCs": ["Apprentice Felix"],
-				"Source": "shop",
-				"Tasks": {
-					"~|Mourning's End Part II|~ Complete the quest": "Quest"
-				},
-				"Output": "Death talisman"
-			},
-			"Buy a blood talisman from ~|Temple Supplies|~*": {
-				"NPCs": ["Apprentice Felix"],
-				"Source": "shop",
-				"Tasks": {
-					"~|Sins of the Father|~ Complete the quest": "Quest"
-				},
-				"Output": "Blood talisman"
 			},
 			"Buy a forestry kit from the ~|Forestry Shop|~*": {
 				"NPCs": ["Friendly Forester"],
@@ -32544,14 +32522,6 @@
 					"Hunter": 1000
 				}
 			},
-			"~|Raetul and Co's Cloth Store.#Post-Contact!|~*": {
-				"Tasks": {
-					"~|Contact!|~ Complete the quest": "Quest"
-				},
-				"Source": "shop",
-				"Output": "Desert boots",
-				"Not F2P": true
-			},
 			"Get a bronze pickaxe from Anna Jones": {
 				"NPCs": ["Anna Jones"],
 				"Tasks": {
@@ -34313,15 +34283,6 @@
 				"Output": "Torstol potion (unf)",
 				"Tasks": {
 					"~|Desert Diary#Hard|~ Complete the Hard Diary": "Diary"
-				},
-				"Not F2P": true
-			},
-			"~|Zaff's Superior Staffs!|~*": {
-				"Chunks": ["12853-1"],
-				"Source": "shop",
-				"Reward": ["Battlestaff"],
-				"Tasks": {
-					"~|What Lies Below|~ Complete the quest": "Quest"
 				},
 				"Not F2P": true
 			},
@@ -39890,17 +39851,6 @@
 				"Not Skiller": true,
 				"Not F2P": true
 			},
-			"Dig in the middle of the Warriors' Guild entrance hall": {
-				"Chunks": ["11319-1"],
-				"ClueTier": "elite",
-				"ClueType": "Cryptic",
-				"Not Skiller": true,
-				"Items": ["Spade"],
-				"Tasks": {
-					"Access the Warriors' Guild": "Nonskill"
-				},
-				"Not F2P": true
-			},
 			"I am the one who watches the giants. The giants in turn watch me. I watch with two while they watch with one. Come seek where I may be.": {
 				"NPCs": ["Kamfreena"],
 				"ClueTier": "elite",
@@ -39913,6 +39863,9 @@
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
+				"Tasks": {
+					"Access the Warriors' Guild": "Nonskill"
+				},
 				"Not Skiller": true,
 				"Not F2P": true
 			},
@@ -50938,6 +50891,7 @@
 			"Take ~|port tasks|~ from Port Sarim": {
 				"Chunks": ["12081-2"],
 				"Level": 1,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -50947,6 +50901,7 @@
 			"Take ~|port tasks|~ from The Pandemonium": {
 				"Chunks": ["12078-1"],
 				"Level": 1,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 10,
@@ -50956,6 +50911,7 @@
 			"Take ~|port tasks|~ from Land's End": {
 				"Chunks": ["5941-1"],
 				"Level": 5,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -50965,6 +50921,7 @@
 			"Take ~|port tasks|~ from Musa Point": {
 				"Chunks": ["11569-1"],
 				"Level": 10,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -50974,6 +50931,7 @@
 			"Take ~|port tasks|~ from Port Piscarilius": {
 				"Chunks": ["7225-1"],
 				"Level": 15,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -50983,6 +50941,7 @@
 			"Take ~|port tasks|~ from Catherby": {
 				"Chunks": ["11061-1"],
 				"Level": 20,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -50992,6 +50951,7 @@
 			"Take ~|port tasks|~ from Brimhaven": {
 				"Chunks": ["11058-1"],
 				"Level": 25,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51001,6 +50961,7 @@
 			"Take ~|port tasks|~ from Port Khazard": {
 				"Chunks": ["10545-1"],
 				"Level": 30,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51010,6 +50971,7 @@
 			"Take ~|port tasks|~ from Civitas illa Fortis": {
 				"Chunks": ["6961-1"],
 				"Level": 38,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51022,6 +50984,7 @@
 			"Take ~|port tasks|~ from Corsair Cove": {
 				"Chunks": ["10284-1"],
 				"Level": 40,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51034,6 +50997,7 @@
 			"Take ~|port tasks|~ from The Summer Shore": {
 				"Chunks": ["12581-1"],
 				"Level": 45,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51046,6 +51010,7 @@
 			"Take ~|port tasks|~ from Aldarin": {
 				"Chunks": ["5678-1"],
 				"Level": 46,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51058,6 +51023,7 @@
 			"Take ~|port tasks|~ from Ruins of Unkah": {
 				"Chunks": ["12588-1"],
 				"Level": 48,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51067,6 +51033,7 @@
 			"Take ~|port tasks|~ from Void Knights' Outpost": {
 				"Chunks": ["10537-1"],
 				"Level": 50,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51076,6 +51043,7 @@
 			"Take ~|port tasks|~ from Port Roberts": {
 				"Chunks": ["7475-1"],
 				"Level": 50,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 10,
@@ -51085,6 +51053,7 @@
 			"Take ~|port tasks|~ from Rellekka": {
 				"Chunks": ["10553-1"],
 				"Level": 62,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51097,6 +51066,7 @@
 			"Take ~|port tasks|~ from Etceteria": {
 				"Chunks": ["10300-1"],
 				"Level": 65,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51109,6 +51079,7 @@
 			"Take ~|port tasks|~ from Port Tyras": {
 				"Chunks": ["8496-1"],
 				"Level": 66,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51121,6 +51092,7 @@
 			"Take ~|port tasks|~ from Deepfin Point": {
 				"Chunks": ["7723-1"],
 				"Level": 67,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51130,6 +51102,7 @@
 			"Take ~|port tasks|~ from Prifddinas": {
 				"Chunks": ["8499-2"],
 				"Level": 70,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51142,6 +51115,7 @@
 			"Take ~|port tasks|~ from Lunar Isle": {
 				"Chunks": ["8508-1"],
 				"Level": 76,
+				"Items": ["AnyBoat[+]"],
 				"Object": ["Notice board"],
 				"Primary": false,
 				"Priority": 9,
@@ -51511,7 +51485,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Sasha|~": {
 				"Level": 5,
-				"NPCs": ["Shipwright Sasha"],
+				"Chunks": ["5941-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
@@ -51522,7 +51496,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Sally|~": {
 				"Level": 10,
-				"NPCs": ["Shipwright Sally"],
+				"Chunks": ["11825-2"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
@@ -51533,7 +51507,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Spencer|~": {
 				"Level": 15,
-				"NPCs": ["Shipwright Spencer"],
+				"Chunks": ["7225-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
@@ -51544,7 +51518,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Sophie|~": {
 				"Level": 20,
-				"NPCs": ["Shipwright Sophie"],
+				"Chunks": ["11061-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
@@ -51555,7 +51529,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Steve|~": {
 				"Level": 25,
-				"NPCs": ["Shipwright Steve"],
+				"Chunks": ["11058-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
@@ -51566,7 +51540,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Sarah|~": {
 				"Level": 30,
-				"NPCs": ["Shipwright Sarah"],
+				"Chunks": ["10545-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
@@ -51577,7 +51551,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Sennia|~": {
 				"Level": 38,
-				"NPCs": ["Shipwright Sennia"],
+				"Chunks": ["6960-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest",
@@ -51589,7 +51563,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Soraya|~": {
 				"Level": 40,
-				"NPCs": ["Shipwright Soraya"],
+				"Chunks": ["10284-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest",
@@ -51601,7 +51575,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Silas|~": {
 				"Level": 46,
-				"NPCs": ["Shipwright Silas"],
+				"Chunks": ["5678-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest",
@@ -51613,7 +51587,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Scott|~": {
 				"Level": 50,
-				"NPCs": ["Shipwright Scott"],
+				"Chunks": ["7475-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
@@ -51624,7 +51598,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Sigrun|~": {
 				"Level": 62,
-				"NPCs": ["Shipwright Sigrun"],
+				"Chunks": ["10553-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest",
@@ -51636,7 +51610,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Sornik|~": {
 				"Level": 67,
-				"NPCs": ["Shipwright Sornik"],
+				"Chunks": ["7723-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
@@ -51647,7 +51621,7 @@
 			},
 			"Have the ability to buy a boat from ~|Shipwright Silrien|~": {
 				"Level": 70,
-				"NPCs": ["Shipwright Silrien"],
+				"Chunks": ["8500-1"],
 				"Primary": false,
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest",
@@ -53894,9 +53868,18 @@
 				"Primary": false,
 				"Source": "drop",
 				"Output": "Mogre",
+				"Priority": 1,
 				"Tasks": {
 					"~|Skippy and the Mogres|~ Complete the quest": "Quest"
 				}
+			},
+			"Slay a ~|mogre (Sailing)|~": {
+				"Level": 32,
+				"Monsters": ["Mogre (Sailing)"],
+				"Primary": false,
+				"Source": "drop",
+				"Priority": 2,
+				"Output": "Mogre (Sailing)"
 			},
 			"Slay a ~|molanisk|~": {
 				"Chunks": ["Dorgesh-Kaan South Dungeon"],
@@ -57626,7 +57609,7 @@
 				"Items": ["Lead ore*"],
 				"Level": 25,
 				"Objects": ["Smelting Furnace[+]"],
-				"Output": "Steel bar",
+				"Output": "Lead bar",
 				"Primary": true,
 				"Priority": 1
 			},
@@ -61373,16 +61356,36 @@
 				"Items": ["Smiths trousers"],
 				"Not F2P": true
 			},
-			"Obtain the ~|smiths gloves|~": {
-				"Category": ["BIS Skilling"],
-				"Label": "BIS Skilling",
-				"Items": ["Smiths gloves"],
-				"Not F2P": true
-			},
 			"Obtain the ~|smiths boots|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
 				"Items": ["Smiths boots"],
+				"Not F2P": true
+			},
+			"Obtain the ~|smiths gloves (i)|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Chunks": ["BlastFurnaceOrFoundry[+]"],
+				"Items": ["Smiths gloves", "Ice gloves"],
+				"Priority": 1,
+				"Set": "BIS Smithing Gloves",
+				"Not F2P": true
+			},
+			"Obtain the ~|smiths gloves|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Smiths gloves"],
+				"Priority": 2,
+				"Set": "BIS Smithing Gloves",
+				"Not F2P": true
+			},
+			"Obtain the ~|ice gloves|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Chunks": ["BlastFurnaceOrFoundry[+]"],
+				"Items": ["Ice gloves"],
+				"Priority": 3,
+				"Set": "BIS Smithing Gloves",
 				"Not F2P": true
 			},
 			"Obtain ~|Amy's saw|~": {
@@ -129853,7 +129856,7 @@
 				"Durrik": 1
 			},
 			"Object": {
-				"Adamantite rock": 10,
+				"Adamantite rocks": 10,
 				"Coal rocks": 42,
 				"Iron rocks": 13,
 				"Lead rocks": 7,
@@ -159985,7 +159988,7 @@
 				"Dwarf (Deepfin Point)": 5
 			},
 			"Object": {
-				"Adamantite rock": 10,
+				"Adamantite rocks": 10,
 				"Bank chest space": 2,
 				"Coal rocks": 42,
 				"Crevice (Deepfin Mine)": 2,
@@ -166377,7 +166380,8 @@
 			"FetidWaters[+]": ["8494-W2", "8495-W2", "8750-W2", "8750-W3", "8751-W1", "9003-W2", "9004-W1", "9006-W1", "9007-W1", "9258-W2", "9259-W3", "9260-W1", "9261-W1", "9262-W1", "9263-W1", "9514-W2", "9515-W2", "9516", "9517", "9518", "9519-W1", "9769-W2", "9770-W2", "9771", "9772-W1", "9772-W2", "9773-W1", "9774-W1", "9775-W1", "10025-W2", "10026-W2", "10027-W2", "10028-W1", "10283-W2", "10284-W2"],
 			"CrystalFleckedWaters[+]": ["7985-W2", "7986-W2", "8240-W2", "8241-W2", "8242-W2", "8243-W2", "8244-W2", "8245-W2", "8246-W2", "8246-W3", "8247-W2", "8248-W2", "8495-W3", "8496-W2", "8497-W1", "8498-W1", "8499-W2", "8500-W2", "8501-W1", "8501-W2", "8502-W1", "8502-W2", "8502-W3", "8502-W4", "8502-W5", "8503-W1", "8503-W2", "8503-W3", "8504-W2", "8504-W3", "8504-W4", "8757-W1", "8758-W1", "8758-W2", "8759-W1", "8759-W2", "8759-W3", "8759-W4", "8760-W2", "8760-W3", "8760-W4", "9013-W1", "9013-W2", "9014-W1", "9014-W2", "9014-W3", "9014-W4", "9015-W1", "9016-W2"],
 			"TangledKelp[+]": ["6438-W2", "6694-W2", "6695-W2", "6951-W2", "7207-W2", "7463-W2", "7718-W2", "7719-W2", "7974-W1", "8230-W2", "8485-W2", "8741-W2", "8996-W2", "8997-W2", "9252-W2", "9504-W2", "9505-W2", "9506-W2", "9507-W2"],
-			"IcySeas[+]": ["7229-W2", "7229-W3", "7485-W2", "7741-W2", "7997-W2", "8253-W2", "8509-W2", "8765-W2", "9020-W2", "9021-W2", "9276-W3", "9532-W3", "9788-W2", "10044-W4", "10044-W5", "10300-W5", "10556-W2", "10812-W2"]
+			"IcySeas[+]": ["7229-W2", "7229-W3", "7485-W2", "7741-W2", "7997-W2", "8253-W2", "8509-W2", "8765-W2", "9020-W2", "9021-W2", "9276-W3", "9532-W3", "9788-W2", "10044-W4", "10044-W5", "10300-W5", "10556-W2", "10812-W2"],
+			"BlastFurnaceOrFoundry[+]": ["Blast Furnace", "Giants' Foundry"]
 		},
 		"chunksPlusNames": {
 			"10Coin[+]": "Any chunk with a 10-coin chest",
@@ -166603,7 +166607,8 @@
 			"FetidWaters[+]": "Any chunk with fetid waters",
 			"CrystalFleckedWaters[+]": "Any chunk with crystal-flecked waters",
 			"TangledKelp[+]": "Any chunk with tangled kelp",
-			"IcySeas[+]": "Any chunk with icy seas"
+			"IcySeas[+]": "Any chunk with icy seas",
+			"BlastFurnaceOrFoundry[+]": "Either the Blast Furnace or the Giants' Foundry"
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {
@@ -214714,6 +214719,7 @@
 			"Unlit torch": true
 		},
 		"Raetul and Co's Cloth Store.": {
+			"Desert boots": true,
 			"Desert robe": true,
 			"Desert shirt": true,
 			"Linen": true,
@@ -216683,7 +216689,7 @@
 					"1": "1/2000"
 				},
 				"Angler's paint": {
-					"1": "Very rare"
+					"1": "1/18000"
 				}
 			},
 			"Haddock shoal": {
@@ -216694,7 +216700,7 @@
 					"1": "1/2000"
 				},
 				"Angler's paint": {
-					"1": "Very rare"
+					"1": "1/18000"
 				}
 			},
 			"Yellowfin shoal": {
@@ -216705,7 +216711,7 @@
 					"1": "1/4000"
 				},
 				"Angler's paint": {
-					"1": "Very rare"
+					"1": "1/18000"
 				}
 			},
 			"Halibut shoal": {
@@ -216716,7 +216722,7 @@
 					"1": "1/4000"
 				},
 				"Angler's paint": {
-					"1": "Very rare"
+					"1": "1/18000"
 				}
 			},
 			"Bluefin shoal": {
@@ -216727,7 +216733,7 @@
 					"1": "1/6000"
 				},
 				"Angler's paint": {
-					"1": "Very rare"
+					"1": "1/18000"
 				}
 			},
 			"Marlin shoal": {
@@ -216738,7 +216744,7 @@
 					"1": "1/6000"
 				},
 				"Angler's paint": {
-					"1": "Very rare"
+					"1": "1/18000"
 				}
 			},
 			"Raw catfish loot": {
@@ -242997,6 +243003,29 @@
 					"~|The Heart of Darkness|~ Complete the quest": "Quest"
 				}]
 			},
+			"Bull shark": {
+				"11059-W1": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11313-W2": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11314-W1": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11315-W1": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11569-W1": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11570-W1": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11571-W1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Bush snake": {
 				"11055-1": [{
 					"Chop any type of jungle": "Nonskill"
@@ -243111,6 +243140,11 @@
 			},
 			"Desert Wolf": {
 				"13104-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
+			"Dolphin": {
+				"12081-W1": [{
 					"F2P Only": "Nonskill"
 				}]
 			},
@@ -243528,6 +243562,11 @@
 					"F2P Only": "Nonskill"
 				}]
 			},
+			"Mogre (Sailing)": {
+				"11824-W1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Monk of Zamorak": {
 				"13622-1": [{
 					"~|Priest in Peril|~ 3": "Quest"
@@ -243743,6 +243782,14 @@
 			"Taloned Wyvern": {
 				"Task Only Wyvern Cave": [{
 					"Fossil Island Wyvern task": "Nonskill"
+				}]
+			},
+			"Tern": {
+				"11059-W1": [{
+					"F2P Only": "Nonskill"
+				}],
+				"11824-W1": [{
+					"F2P Only": "Nonskill"
 				}]
 			},
 			"Thermonuclear smoke devil": {
@@ -244840,6 +244887,36 @@
 					"Access Ali's shop": "Nonskill"
 				}]
 			},
+			"Ali's Discount Wares.^Waterskin(3)": {
+				"13106-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
+			"Ali's Discount Wares.^Desert shirt": {
+				"13106-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
+			"Ali's Discount Wares.^Desert boots": {
+				"13106-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
+			"Ali's Discount Wares.^Fake beard": {
+				"13106-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
+			"Ali's Discount Wares.^Kharidian headpiece": {
+				"13106-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
+			"Ali's Discount Wares.^Papyrus": {
+				"13106-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Allanna's Farming Shop": {
 				"4922": [{
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
@@ -245350,6 +245427,11 @@
 					"~|Icthlarin's Little Helper|~ 2": "Quest"
 				}]
 			},
+			"Raetul and Co's Cloth Store.^Desert boots": {
+				"13099-1": [{
+					"~|Contact!|~ Complete the quest": "Quest"
+				}]
+			},
 			"Ranging Guild Ticket Exchange": {
 				"10549": [{
 					"Access the ~|Ranging Guild|~": "Ranged"
@@ -245431,6 +245513,21 @@
 					"Participate in ~|Guardians of the Rift|~": "Runecraft"
 				}]
 			},
+			"Temple Supplies^Law talisman": {
+				"Temple of the Eye": [{
+					"~|Troll Stronghold|~ Complete the quest": "Quest"
+				}]
+			},
+			"Temple Supplies^Death talisman": {
+				"Temple of the Eye": [{
+					"~|Mourning's End Part II|~ Complete the quest": "Quest"
+				}]
+			},
+			"Temple Supplies^Blood talisman": {
+				"Temple of the Eye": [{
+					"~|Sins of the Father|~ Complete the quest": "Quest"
+				}]
+			},
 			"Tiadeche's Karambwan Stall": {
 				"11055-2": [{
 					"~|Tai Bwo Wannai Trio|~ Complete the quest": "Quest"
@@ -245503,6 +245600,11 @@
 			"Yrsa's Accoutrements": {
 				"10553-1": [{
 					"~|The Fremennik Trials|~ Complete the quest": "Quest"
+				}]
+			},
+			"Zaff's Superior Staffs!^Battlestaff": {
+				"12853-1": [{
+					"~|What Lies Below|~ 9": "Quest"
 				}]
 			}
 		},
@@ -245928,6 +246030,7 @@
 		"Pyrefiend": 30,
 		"Pyrelord": 30,
 		"Mogre": 32,
+		"Mogre (Sailing)": 32,
 		"Harpie Bug Swarm": 33,
 		"Wall beast": 35,
 		"Killerwatt": 37,
@@ -250246,6 +250349,7 @@
 			"Pyrefiend": true,
 			"Pyrelord": true,
 			"Mogre": true,
+			"Mogre (Sailing)": true,
 			"Harpie Bug Swarm": true,
 			"Wall beast": true,
 			"Killerwatt": true,
