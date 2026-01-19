@@ -3051,13 +3051,13 @@ label .tooltip-base-el:active {
 .highlightAllQuest > span {
     font-size: 14px;
     cursor: pointer;
-    color: rgb(61, 61, 61);
+    color: var(--colorTextAlt);
     transition: color .5s;
     text-decoration: underline;
 }
 
 .highlightAllQuest >span:hover {
-    color: var(--colorText);
+    color: var(--colorLink);
 }
 
 .modal {

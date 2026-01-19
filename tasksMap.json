@@ -2503,6 +2503,9 @@
   "~|Dragon Slayer II|~ Hitpoints skill requirement": "t_2210",
   "Access the ~|Eagle transportation system|~": "t_2211",
   "Participate in ~|Trouble Brewing|~ for Hunter xp": "t_2212",
+  "Catch a ~|red crab (Hunter)|~": "t_48887",
+  "Catch a ~|blue crab (Hunter)|~": "t_48888",
+  "Catch a ~|rainbow crab (Hunter)|~": "t_48889",
   "Access the ~|Hunter Guild|~": "t_2213",
   "Gain xp in the Poacher ~|Forestry|~ event": "t_2214",
   "Trap a ~|moss lizard|~": "t_2215",
@@ -12972,6 +12975,7 @@
   "Kill X ~|Brutal red dragon|~": "t_11974",
   "Kill X ~|Iron dragon|~": "t_11975",
   "Kill X ~|Steel dragon|~": "t_11976",
+  "Kill X ~|Manta ray (monster)|~": "t_47299",
   "Kill X ~|Harpie Bug Swarm|~": "t_11977",
   "Kill X ~|Mugger|~": "t_11978",
   "Kill X ~|Skeleton (Forthos Ruin)|~": "t_11979",
@@ -13021,7 +13025,6 @@
   "Kill X ~|Minotaur|~": "t_12024",
   "Kill X ~|Baby black dragon|~": "t_12025",
   "Kill X ~|Baby green dragon|~": "t_12027",
-  "Kill X ~|Manta ray (monster)|~": "t_47299",
   "Kill X ~|Giant ant|~": "t_47300",
   "Kill X ~|Giant wasp|~": "t_47301",
   "Kill X ~|Gnome guard|~": "t_12028",
@@ -48588,5 +48591,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 48887
+  "currentNextIndex": 48890
 }
