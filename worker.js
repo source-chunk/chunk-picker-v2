@@ -1780,7 +1780,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                         });
                     }
                     if (challenge.hasOwnProperty('Skills')) {
-                        let subSkillValid = !(Object.keys(challenge['Skills']).filter((subSkill) => { return !checkPrimaryMethod(subSkill, newValids, baseChunkData) || (subSkill === 'Slayer' && !!slayerLocked && challenge['Skills'][subSkill] > slayerLocked['level']) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && challenge['Skills'][subSkill] > maxSkill[subSkill]) }).length > 0);
+                        let subSkillValid = !(Object.keys(challenge['Skills']).filter((subSkill) => { return !checkPrimaryMethod(subSkill, newValids, baseChunkData) && (subSkill !== 'Slayer' || !slayerLocked || challenge['Skills'][subSkill] > slayerLocked['level']) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || challenge['Skills'][subSkill] > passiveSkill[subSkill]) && (!maxSkill || !maxSkill.hasOwnProperty(subSkill) || challenge['Skills'][subSkill] > maxSkill[subSkill]) }).length > 0);
                         if (!subSkillValid) {
                             !!newValids[skill] && delete newValids[skill][name];
                             !!valids[skill] && delete valids[skill][name];
@@ -3139,8 +3139,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                             'Tasks': {
                                 ...chunkInfo['challenges'][skill][name]['Tasks'],
                                 [name + '--' + subSkill]: subSkill
-                            },
-                            "Primary": chunkInfo['challenges'][skill][name]['NotOtherskillPrimary'] ? false : chunkInfo['challenges'][skill][name]['Primary']
+                            }
                         }
                     } else {
                         chunkInfo['challenges'][subSkill][name] = {
@@ -3156,8 +3155,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                             'Tasks': {
                                 ...chunkInfo['challenges'][skill][name]['Tasks'],
                                 [name + '--' + subSkill]: subSkill
-                            },
-                            "Primary": chunkInfo['challenges'][skill][name]['NotOtherskillPrimary'] ? false : chunkInfo['challenges'][skill][name]['Primary']
+                            }
                         }
                     }
                     if (skill === 'Quest' || skill === 'Diary') {
