@@ -440,6 +440,7 @@ let rules = {
     "KeyItem Bosses": false,
     "Sail Trimming": false,
     "Crewmates": false,
+    "Sea Charting": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -539,7 +540,8 @@ let ruleNames = {
     "POH Rooms": "Allow building rooms to count as Construction skill tasks",
     "KeyItem Bosses": "For bosses that require keys to kill (Skotizo), factor in the droprate of the key as part of the droprate of each drop",
     "Sail Trimming": "Allow trimming the sails on your boat to count as a primary training method for training Sailing <span class='rule-asterisk noscroll'>*</span>",
-    "Crewmates": "Getting the Sailing level to recruit crewmates to your ship can be a skill task"
+    "Crewmates": "Getting the Sailing level to recruit crewmates to your ship can be a skill task",
+    "Sea Charting": "Require Sea Charting tasks be completed"
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -591,6 +593,7 @@ let rulePresets = {
         "Show Diary Tasks": true,
         "Show Diary Tasks Any": true,
         "Fossil Island Tasks": true,
+        "Sea Charting": true,
         "Show Best in Slot Tasks": true,
         "Show Best in Slot Prayer Tasks": true,
         "Highest Level": true,
@@ -656,6 +659,7 @@ let rulePresets = {
         "Show Diary Tasks": true,
         "Show Diary Tasks Any": true,
         "Fossil Island Tasks": true,
+        "Sea Charting": true,
         "Show Best in Slot Tasks": true,
         "Show Best in Slot Prayer Tasks": true,
         "Highest Level": true,
@@ -718,7 +722,7 @@ let ruleStructure = {
     "Visible Tasks": {
         "Show Skill Tasks": true,
         "Show Quest Tasks": ["Show Quest Tasks Complete"],
-        "Show Diary Tasks": ["Show Diary Tasks Complete", "Show Diary Tasks Any", "Fossil Island Tasks", "Combat Diary Tasks"],
+        "Show Diary Tasks": ["Show Diary Tasks Complete", "Show Diary Tasks Any", "Fossil Island Tasks", "Combat Diary Tasks", "Sea Charting"],
         "Show Best in Slot Tasks": ["Show Best in Slot Prayer Tasks", "Show Best in Slot Defensive Tasks", "Show Best in Slot Flinching Tasks", "Show Best in Slot Weight Tasks", "Show Best in Slot Melee Style Tasks", "Show Best in Slot 1H and 2H", "Consumable Primary BiS"]
     },
     "Overall Skill": {
@@ -861,6 +865,7 @@ let taskGeneratingRules = {
     "Stuffables": true,
     "Every Drop": true,
     "Fossil Island Tasks": true,
+    "Sea Charting": true,
     "Combat Diary Tasks": true,
     "Skilling Pets": true,
     "Money Unlockables": true,
@@ -1195,7 +1200,78 @@ let diaryTierAbr = {
     'Museum Camp': 'MC',
     'Northern Reaches': 'NR',
     'Southern Swamps': 'SS',
-    'Mountainous East': 'ME'
+    'Mountainous East': 'ME',
+    "Anglerfish's Light": 'AL',
+    'Arrow Passage': 'AP',
+    'Aureum Coast': 'AC',
+    'Backwater': 'B',
+    'Barracuda Belt': 'BB',
+    'Bay of Elidinis': 'BoE',
+    'Bay of Sarim': 'BoS',
+    'Bonus charts': 'BC',
+    'Breakbone Strait': 'BS',
+    'Brimhaven Passage': 'BP',
+    'Catherby Bay': 'CaB',
+    'Crabclaw Bay': 'CrB',
+    'Crystal Sea': 'CS',
+    "Dusk's Maw": 'DM',
+    'Everwinter Sea': 'ES',
+    'Feldip Gulf': 'FG',
+    'Fortis Bay': 'FB',
+    'Fremennik Strait': 'FS',
+    'Fremensund': 'F',
+    'Grandroot Bay': 'GB',
+    'Great Sound': 'GS',
+    "Gu'tanoth Bay": 'GtB',
+    'Gulf of Kourend': 'GoK',
+    'Hosidian Sea': 'HS',
+    'Idestia Strait': 'IS',
+    'Kannski Tides': 'KT',
+    'Kharazi Strait': 'KzS',
+    'Kharidian Sea': 'KrS',
+    'Litus Lucis': 'LL',
+    'Lumbridge Basin': 'LbB',
+    'Lunar Bay': 'LB',
+    'Lunar Sea': 'LS',
+    'Menaphite Sea': 'MeS',
+    'Misty Sea': 'MiS',
+    'Moonshadow': 'M',
+    'Mudskipper Sound': 'MuS',
+    'Mythic Sea': 'MyS',
+    "Oo'glog Channel": 'OC',
+    'Pearl Bank': 'PB',
+    "Pilgrims' Passage": 'PP',
+    'Piscatoris Sea': 'PS',
+    'Porth Gwenith': 'PG',
+    'Porth Neigwl': 'PN',
+    'Rainbow Reef': 'RaR',
+    'Red Reef': 'ReR',
+    'Rimmington Strait': 'RS',
+    'Sapphire Sea': 'SaS',
+    'Sea of Shells': 'SoSh',
+    'Sea of Souls': 'SoSo',
+    'Shiverwake Expanse': 'ShE',
+    'Soul Bay': 'SoB',
+    'Southern Expanse': 'SoE',
+    'Stoneheart Sea': 'StS',
+    'Strait of Khazard': 'SoK',
+    'Sunset Bay': 'SuB',
+    'The Everdeep': 'TE',
+    'The Lonely Sea': 'TLS',
+    'The Simian Sea': 'TSS',
+    'The Skullhorde': 'TS',
+    'The Storm Tempor': 'TST',
+    'Tirannwn Bight': 'TiB',
+    'Tortugan Sea': 'TS',
+    'Turtle Belt': 'TuB',
+    "V's Belt": 'VB',
+    'Vagabonds Rest': 'VR',
+    'Weiss Melt': 'WM',
+    'Weissmere': 'W',
+    'Western Gate': 'WG',
+    "Winter's Edge": 'WE',
+    "Wyrm's Waters": 'WW',
+    'Zul-Egil': 'Z'
 };                                                                                  // Abbreviations for diary tiers
 
 let taskSections = [
@@ -1431,7 +1507,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.16';
+let currentVersion = '6.9.17';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'difference';
 
@@ -1600,7 +1676,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.16";
+mapImg.src = "osrs_world_map.png?v=6.9.17";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3507,7 +3583,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.16");
+        myWorker = new Worker("./worker.js?v=6.9.17");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3811,8 +3887,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.16");
-let myWorker2 = new Worker("./worker.js?v=6.9.16");
+let myWorker = new Worker("./worker.js?v=6.9.17");
+let myWorker2 = new Worker("./worker.js?v=6.9.17");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6753,7 +6829,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.16");
+    myWorker2 = new Worker("./worker.js?v=6.9.17");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -7770,6 +7846,7 @@ let openQuestSteps = function(skill, challenge) {
         if (skill === 'Diary' && challenge.includes('/')) {
             challenge = challenge.split('/').join('#');
         }
+        console.log(tier, challenge);
         questStepsModalOpen = true;
         let quest = skill === 'Diary' ? challenge.split('~')[1].split('|').join('').split('#')[0] : challenge.split('~')[1].split('|').join('');
         $('.quest-steps-title').html(`<a class='noscroll link' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(quest)}" target='_blank'>${quest.includes('Disaster/') ? quest.split('Disaster/')[1] : quest}</a>`);
@@ -9052,18 +9129,25 @@ let openHighest2 = function(notScrollTop) {
                         $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='noscroll' />`);
                         $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row ${diary.replaceAll(' ', '_')}'><span class='noscroll outer-diary-text'>${diary.replaceAll(/~/g, '').replaceAll(/\|/g, '')}</div>`);
                         chunkInfo['diaries'][diary].split(', ').forEach((tier) => {
-                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll fossil${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${encodeRFC5987ValueChars(diary)}#XX${tier}|~')">${tier}</span></div>`);
+                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll diary-tier-button fossil${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${encodeRFC5987ValueChars(diary)}#XX${encodeRFC5987ValueChars(tier)}|~')">${tier}</span></div>`);
                         });
                     } else if (diary === 'Combat Achievements' && rules['Combat Diary Tasks']) {
                         $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='noscroll' />`);
                         $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row ${diary.replaceAll(' ', '_')}'><span class='noscroll outer-diary-text'>${diary.replaceAll(/~/g, '').replaceAll(/\|/g, '')}</div>`);
                         chunkInfo['diaries'][diary].split(', ').forEach((tier) => {
-                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll combat${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${encodeRFC5987ValueChars(diary)}#XX${tier}|~')">${tier}</span></div>`);
+                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll diary-tier-button combat${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${encodeRFC5987ValueChars(diary)}#XX${encodeRFC5987ValueChars(tier)}|~')">${tier}</span></div>`);
                         });
-                    } else if (diary !== 'Fossil Island Diary' && diary !== 'Combat Achievements') {
+                    } else if (diary === 'Sea Charting' && rules['Sea Charting']) {
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<hr class='noscroll' />`);
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row ${diary.replaceAll(' ', '_')}'><span class='noscroll outer-diary-text'>${diary.replaceAll(/~/g, '').replaceAll(/\|/g, '')}</div>`);
+                        $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll charting-diary-container'></div>`);
+                        chunkInfo['diaries'][diary].split(', ').forEach((tier) => {
+                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')} .charting-diary-container`).append(`<div class='noscroll diary-tier-button charting${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${encodeRFC5987ValueChars(diary)}#XX${encodeRFC5987ValueChars(tier)}|~')">${tier}</span></div>`);
+                        });
+                    } else if (diary !== 'Fossil Island Diary' && diary !== 'Combat Achievements' && diary !== 'Sea Charting') {
                         $(`.${combatStyle.replaceAll(' ', '_')}-body`).append(`<div class='noscroll row ${diary.replaceAll(' ', '_')}'><span class='noscroll outer-diary-text'>${diary.replaceAll(/~/g, '').replaceAll(/\|/g, '')}</div>`);
                         chunkInfo['diaries'][diary].split(', ').forEach((tier) => {
-                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${encodeRFC5987ValueChars(diary)}#XX${tier}|~')">${tier}</span>${(testMode || !(viewOnly || inEntry || locked)) && (diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier) && diaryProgress[diary][tier]['done']) ? `<span class='noscroll xp-button${(!assignedXpRewards.hasOwnProperty('Diary') || !assignedXpRewards['Diary'].hasOwnProperty(`~|${diary}#${tier}|~ Complete the ${tier} Diary`) || Object.keys(assignedXpRewards['Diary'][`~|${diary}#${tier}|~ Complete the ${tier} Diary`]).includes('None')) ? ' unset' : ''}' onclick="openXpRewardModalWithFormat('Diary', '~|${diary}#${tier}|~ Complete the ${tier} Diary')">xp</span>` : ''}</div>`);
+                            $(`.${combatStyle.replaceAll(' ', '_')}-body > .${diary.replaceAll(' ', '_')}`).append(`<div class='noscroll diary-tier-button${(diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier)) ? (diaryProgress[diary][tier]['done'] ? ' complete' : ' incomplete') : ''}'><span class='noscroll diary-text internal-link' onclick="openQuestSteps('Diary', '~|${encodeRFC5987ValueChars(diary)}#XX${encodeRFC5987ValueChars(tier)}|~')">${tier}</span>${(testMode || !(viewOnly || inEntry || locked)) && (diaryProgress.hasOwnProperty(diary) && diaryProgress[diary].hasOwnProperty(tier) && diaryProgress[diary][tier]['done']) ? `<span class='noscroll xp-button${(!assignedXpRewards.hasOwnProperty('Diary') || !assignedXpRewards['Diary'].hasOwnProperty(`~|${diary}#${tier}|~ Complete the ${tier} Diary`) || Object.keys(assignedXpRewards['Diary'][`~|${diary}#${tier}|~ Complete the ${tier} Diary`]).includes('None')) ? ' unset' : ''}' onclick="openXpRewardModalWithFormat('Diary', '~|${diary}#${tier}|~ Complete the ${tier} Diary')">xp</span>` : ''}</div>`);
                         });
                     }
                 });
@@ -10510,7 +10594,7 @@ let showDetails = function(challenge, skill, dataType, isNested) {
             chunkInfo['challenges'][skill][challenge] = {};
         }
         $('#details-title').html(`<b class="noscroll">${challengeLabelLine}${challenge.split('~').length > 1 ? `${challenge.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${challenge.split('~')[2]}` : `${challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}`}${chunkInfo['challenges'][skill][challenge].hasOwnProperty('InfoLink') ? ` (<a class='link external-info-link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(chunkInfo['challenges'][skill][challenge]['InfoLink'])}" target="_blank">Wiki <i class="fa-solid fa-external-link-alt"></i></a>)` : ''}</b>`);
-        chunkInfo['challenges'][skill][challenge].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge]['Description']}</i></span><br />`);
+        chunkInfo['challenges'][skill][challenge].hasOwnProperty('Description') && $('#details-data').append(`<span class="details-subtitle details-description noscroll"><i class="noscroll">${chunkInfo['challenges'][skill][challenge]['Description']}</i></span><br />`);
         detailsKeys.forEach((key) => {
             if (key === 'Skill RequirementsDetails' && skill !== 'Quest' && skill !== 'Diary') {
                 return;
@@ -12770,6 +12854,10 @@ let loadData = async function(startup) {
 
         if (!rulesTemp.hasOwnProperty('Crewmates')) {
             rulesTemp['Crewmates'] = true;
+        }
+
+        if (!rulesTemp.hasOwnProperty('Sea Charting')) {
+            rulesTemp['Sea Charting'] = rulesTemp.hasOwnProperty('Show Diary Tasks') ? rulesTemp['Show Diary Tasks'] && (rulesTemp['Fossil Island Tasks'] || rulesTemp['Combat Diary Tasks'] || rulesTemp['Crewmates'] || rulesTemp['Sail Trimming'] || rulesTemp['Money Unlockables']) : false;
         }
 
         !!rulesTemp && Object.keys(rulesTemp).forEach((rule) => {

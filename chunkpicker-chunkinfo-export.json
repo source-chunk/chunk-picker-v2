@@ -28245,6 +28245,124 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Buy kraken ink stout from Chartin' Charles McAtless": {
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"ArdentOceanCharting[+]x5": "Diary",
+					"UnquietOceanCharting[+]x5": "Diary"
+				},
+				"Output": "Kraken ink stout",
+				"Not F2P": true
+			},
+			"Buy perildance bitter from Chartin' Charles McAtless": {
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"WesternOceanCharting[+]x8": "Diary",
+					"ShroudedOceanCharting[+]x8": "Diary"
+				},
+				"Output": "Perildance bitter",
+				"Not F2P": true
+			},
+			"Buy trawler's trust from Chartin' Charles McAtless": {
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"AllOceanCharting[+]x50": "Diary"
+				},
+				"Output": "Trawler's trust",
+				"Not F2P": true
+			},
+			"Buy horizon's lure from Chartin' Charles McAtless": {
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"AllOceanCharting[+]x70": "Diary"
+				},
+				"Output": "Horizon's lure",
+				"Not F2P": true
+			},
+			"Receive the Saradominist paint from the High Priest": {
+				"NPCs": ["Gerardus", "High Priest (Entrana)"],
+				"Tasks": {
+					"~|Sea Charting#Arrow Passage|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Bay of Sarim|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Brimhaven Passage|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Catherby Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Feldip Gulf|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Gu'tanoth Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Kharazi Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Kharidian Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Lumbridge Basin|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Menaphite Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Mudskipper Sound|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Oo'glog Channel|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Rimmington Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Strait of Khazard|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Simian Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Storm Tempor|~ Completely chart the sea": "Diary"
+				},
+				"Output": "Saradominist paint",
+				"Not F2P": true
+			},
+			"Receive the Zamorakian paint from the old chest": {
+				"NPCs": ["Gerardus"],
+				"Objects": ["Old chest"],
+				"Tasks": {
+					"~|Sea Charting#Anglerfish's Light|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Bay of Elidinis|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Pearl Bank|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Red Reef|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Sea of Shells|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Lonely Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Tortugan Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Turtle Belt|~ Completely chart the sea": "Diary"
+				},
+				"Output": "Zamorakian paint",
+				"Not F2P": true
+			},
+			"Receive the Guthixian paint from the High Priest": {
+				"NPCs": ["Gerardus", "Elite Void Knight"],
+				"Tasks": {
+					"~|Sea Charting#Aureum Coast|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Backwater|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Barracuda Belt|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Breakbone Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Fortis Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Mythic Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Rainbow Reef|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Sapphire Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Sea of Souls|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Soul Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Southern Expanse|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Everdeep|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Skullhorde|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Western Gate|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Wyrm's Waters|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Zul-Egil|~ Completely chart the sea": "Diary"
+				},
+				"Output": "Guthixian paint",
+				"Not F2P": true
+			},
+			"Receive the Armadylean paint from the High Priest": {
+				"NPCs": ["Gerardus", "Larrissa"],
+				"Tasks": {
+					"~|Horror from the Deep|~ Complete the quest": "Quest",
+					"~|Sea Charting#Everwinter Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Fremennik Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Fremensund|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Grandroot Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Idestia Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Kannski Tides|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Lunar Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Lunar Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Shiverwake Expanse|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Stoneheart Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#V's Belt|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Weiss Melt|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Weissmere|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Winter's Edge|~ Completely chart the sea": "Diary"
+				},
+				"Output": "Armadylean paint",
+				"Not F2P": true
+			},
 			"Albatross beak tasks": {
 				"Tasks": {
 					"Albatross beak tasks[+]": "Sailing"
@@ -28429,6 +28547,9 @@
 				"Tasks": {
 					"Vampyre kraken tentacle tasks[+]": "Sailing"
 				}
+			},
+			"Crab dance emote": {
+				"Chunks": ["8232-1"]
 			},
 			"Access stormy seas": {
 				"Items": ["AnyBoat[+]"],
@@ -33261,6 +33382,12 @@
 			"Araxyte task": {
 				"Tasks": {
 					"LowHighMasters[+]x1": "Slayer"
+				},
+				"Not F2P": true
+			},
+			"Gryphon task": {
+				"Tasks": {
+					"VannakaBetterMasters[+]x1": "Slayer"
 				},
 				"Not F2P": true
 			},
@@ -46227,6 +46354,11 @@
 				"UnlocksArea": true,
 				"Not F2P": true
 			},
+			"Coral Nurseries": {
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"UnlocksArea": true,
+				"Not F2P": true
+			},
 			"Corporeal Beast's Lair": {
 				"UnlocksArea": true,
 				"Not F2P": true
@@ -46562,6 +46694,13 @@
 					"~|The Grand Tree|~ 7": "Quest"
 				},
 				"Not F2P": true
+			},
+			"Grimstone Dungeon": {
+				"UnlocksArea": true,
+				"Not F2P": true,
+				"Tasks": {
+					"Dock at ~|Grimstone|~": "Sailing"
+				}
 			},
 			"Grotesque Guardians' Lair": {
 				"UnlocksArea": true,
@@ -74807,6 +74946,133 @@
 				},
 				"Not F2P": true
 			},
+			"Receive training from ~|Chartin' Charles McAtless|~ after charting the entire Sunset Ocean": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"~|Sea Charting#Dusk's Maw|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Misty Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Sunset Bay|~ Completely chart the sea": "Diary"
+				},
+				"Not F2P": true
+			},
+			"Receive training from ~|Chartin' Charles McAtless|~ after charting the entire Ardent Ocean": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"~|Sea Charting#Arrow Passage|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Bay of Sarim|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Brimhaven Passage|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Catherby Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Feldip Gulf|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Gu'tanoth Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Kharazi Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Kharidian Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Lumbridge Basin|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Menaphite Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Mudskipper Sound|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Oo'glog Channel|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Rimmington Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Strait of Khazard|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Simian Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Storm Tempor|~ Completely chart the sea": "Diary"
+				},
+				"Not F2P": true
+			},
+			"Receive training from ~|Chartin' Charles McAtless|~ after charting the entire Unquiet Ocean": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"~|Sea Charting#Anglerfish's Light|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Bay of Elidinis|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Pearl Bank|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Red Reef|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Sea of Shells|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Lonely Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Tortugan Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Turtle Belt|~ Completely chart the sea": "Diary"
+				},
+				"Not F2P": true
+			},
+			"Receive training from ~|Chartin' Charles McAtless|~ after charting the entire Western Ocean": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"~|Sea Charting#Crabclaw Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Crystal Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Great Sound|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Gulf of Kourend|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Hosidian Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Litus Lucis|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Moonshadow|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Pilgrims' Passage|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Piscatoris Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Porth Gwenith|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Porth Neigwl|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Tirannwn Bight|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Vagabonds Rest|~ Completely chart the sea": "Diary"
+				},
+				"Not F2P": true
+			},
+			"Receive training from ~|Chartin' Charles McAtless|~ after charting the entire Shrouded Ocean": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"~|Sea Charting#Aureum Coast|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Backwater|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Barracuda Belt|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Breakbone Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Fortis Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Mythic Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Rainbow Reef|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Sapphire Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Sea of Souls|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Soul Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Southern Expanse|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Everdeep|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#The Skullhorde|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Western Gate|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Wyrm's Waters|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Zul-Egil|~ Completely chart the sea": "Diary"
+				},
+				"Not F2P": true
+			},
+			"Receive training from ~|Chartin' Charles McAtless|~ after charting the entire Northern Ocean": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"~|Sea Charting#Everwinter Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Fremennik Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Fremensund|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Grandroot Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Idestia Strait|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Kannski Tides|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Lunar Bay|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Lunar Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Shiverwake Expanse|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Stoneheart Sea|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#V's Belt|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Weiss Melt|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Weissmere|~ Completely chart the sea": "Diary",
+					"~|Sea Charting#Winter's Edge|~ Completely chart the sea": "Diary"
+				},
+				"Not F2P": true
+			},
+			"Receive training from ~|Chartin' Charles McAtless|~ after charting all miscellaneous spots": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Chartin' Charles McAtless"],
+				"Tasks": {
+					"~|Sea Charting#Bonus charts|~ Completely chart the sea": "Diary"
+				},
+				"Not F2P": true
+			},
 			"~|STASH#Beginner|~: Gypsy Aris's tent (Varrock)": {
 				"Category": ["Fill Stash"],
 				"Label": "Fill Stashes",
@@ -96355,6 +96621,4577 @@
 				"CombatPointsNeeded": 2604,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
+			},
+			"~|Sea Charting#Anglerfish's Light|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10787"],
+				"Description": "Find an odd light south west of Last Light.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Anglerfish's Light|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11556"],
+				"Description": "Use your spyglass to get a good view of Last Light from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Anglerfish's Light|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11299"],
+				"Description": "Find a Sealed crate near Last Light and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Anglerfish's Light|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11045"],
+				"Description": "With help from a mermaid guide, document the water depth in the middle of Anglerfish's Light.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Anglerfish's Light|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Anglerfish's Light|~ Task 1": "Diary",
+					"~|Sea Charting#Anglerfish's Light|~ Task 2": "Diary",
+					"~|Sea Charting#Anglerfish's Light|~ Task 3": "Diary",
+					"~|Sea Charting#Anglerfish's Light|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Arrow Passage|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11562-W1"],
+				"Description": "Find some interesting aquatic life north west of Crash Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Arrow Passage|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11307"],
+				"Description": "Use your spyglass to get a good view of the temple on Ape Atoll from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Arrow Passage|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11306"],
+				"Description": "Find a Sealed crate off the eastern coast of Ape Atoll and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Arrow Passage|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11563"],
+				"Description": "With help from a mermaid guide, document the water depth north of Crash Island.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Arrow Passage|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Arrow Passage|~ Task 1": "Diary",
+					"~|Sea Charting#Arrow Passage|~ Task 2": "Diary",
+					"~|Sea Charting#Arrow Passage|~ Task 3": "Diary",
+					"~|Sea Charting#Arrow Passage|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Aureum Coast|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7212"],
+				"Description": "Find the wreck of the Counterweight north west of Deepfin Point.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Aureum Coast|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6957-W1"],
+				"Description": "Use your spyglass to get a good view of the south eastern temple in the Avium Savannah from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Aureum Coast|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6956"],
+				"Description": "Find a Sealed crate in the middle of the Aureum Coast and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Aureum Coast|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7469"],
+				"Description": "With help from a mermaid guide, document the water depth south of Vatrachos Island.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Aureum Coast|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Aureum Coast|~ Task 1": "Diary",
+					"~|Sea Charting#Aureum Coast|~ Task 2": "Diary",
+					"~|Sea Charting#Aureum Coast|~ Task 3": "Diary",
+					"~|Sea Charting#Aureum Coast|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Backwater|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9262-W1"],
+				"Description": "Find a Sealed crate off the north eastern coast of the Isle of Souls and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Backwater|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9774-W1"],
+				"Description": "Find a Sealed crate off the western coast of the Feldip Hills and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Backwater|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9007-W1"],
+				"Description": "Find some interesting coral south east of the Poison Waste.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Backwater|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9263-W1", "8751-W1"],
+				"Description": "Test the currents at the mouth of the River Dougne west of Chompy Marsh.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Backwater|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9519-W1"],
+				"Description": "Use your spyglass to get a good view of Chompy Marsh from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Backwater|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9774-W1"],
+				"Description": "With help from a mermaid guide, document the water depth south of Jiggig.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Backwater|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Backwater|~ Task 1": "Diary",
+					"~|Sea Charting#Backwater|~ Task 2": "Diary",
+					"~|Sea Charting#Backwater|~ Task 3": "Diary",
+					"~|Sea Charting#Backwater|~ Task 4": "Diary",
+					"~|Sea Charting#Backwater|~ Task 5": "Diary",
+					"~|Sea Charting#Backwater|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Barracuda Belt|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8488"],
+				"Description": "Find a spool of Barracuda grade rope east of Wintumber Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Barracuda Belt|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8232[+]"],
+				"Description": "Find an odd statue on Wintumber Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Barracuda Belt|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8998"],
+				"Description": "Find the wreck of a Barracuda ship north east of Sunbleak Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Barracuda Belt|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8999"],
+				"Description": "Find a Sealed crate near the bank boat in the Barracuda Belt and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Barracuda Belt|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9000"],
+				"Description": "With help from a mermaid guide, document the water depth north of the bank boat in the Barracuda Belt.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Barracuda Belt|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8232-W1", "8486"],
+				"Description": "Help the meteorologist document the local weather on a small island south east of Wintumber Island.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Barracuda Belt|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Barracuda Belt|~ Task 1": "Diary",
+					"~|Sea Charting#Barracuda Belt|~ Task 2": "Diary",
+					"~|Sea Charting#Barracuda Belt|~ Task 3": "Diary",
+					"~|Sea Charting#Barracuda Belt|~ Task 4": "Diary",
+					"~|Sea Charting#Barracuda Belt|~ Task 5": "Diary",
+					"~|Sea Charting#Barracuda Belt|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Bay of Elidinis|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12842-W1"],
+				"Description": "Find a damaged golem east of Menaphos.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Bay of Elidinis|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12583-W1"],
+				"Description": "Use your spyglass to get a good view of the Abalone Cliffs from the north east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Bay of Elidinis|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12840"],
+				"Description": "Find a Sealed crate south of Menaphos and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Bay of Elidinis|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12842-W1", "13098-W1"],
+				"Description": "Test the currents to the south west of the Elid Delta.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Bay of Elidinis|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13352"],
+				"Description": "With help from a mermaid guide, document the water depth in the south east of the Bay of Elidinis.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bay of Elidinis|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Bay of Elidinis|~ Task 1": "Diary",
+					"~|Sea Charting#Bay of Elidinis|~ Task 2": "Diary",
+					"~|Sea Charting#Bay of Elidinis|~ Task 3": "Diary",
+					"~|Sea Charting#Bay of Elidinis|~ Task 4": "Diary",
+					"~|Sea Charting#Bay of Elidinis|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Bay of Sarim|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12338-W1"],
+				"Description": "Find a treacherous rock formation near Draynor Village.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Bay of Sarim|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12338-W2"],
+				"Description": "Find the wreck of the Grandyozenaym north east of the Wizards' Tower.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Bay of Sarim|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12082-1"],
+				"Description": "Interact with the salvaging station in Port Sarim.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Bay of Sarim|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12081-2"],
+				"Description": "Look at the port task board in Port Sarim.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Bay of Sarim|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Bay of Sarim|~ Task 1": "Diary",
+					"~|Sea Charting#Bay of Sarim|~ Task 2": "Diary",
+					"~|Sea Charting#Bay of Sarim|~ Task 3": "Diary",
+					"~|Sea Charting#Bay of Sarim|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12078-W1"],
+				"Description": "Find a Sealed crate near the Pandemonium and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12590-W1", "12078-W1"],
+				"Description": "Test the currents south west of the Kharidian Bandit Camp.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11822-W1"],
+				"Description": "With help from a mermaid guide, document the water depth south west of the Pandemonium.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12337-W1"],
+				"Description": "Use your spyglass to get a good view of the Wizards' Tower from the north.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Bonus charts|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12338-W1", "12081-W1"],
+				"Description": "Test the currents south of the small island in the Bay of Sarim.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13104-W1"],
+				"Description": "Find a Sealed crate in the Lum Lagoon and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 7": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12848-W1", "12591-W1"],
+				"Description": "Test the currents west of the Lum Lagoon.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 8": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11824-W1"],
+				"Description": "Find a Sealed crate near Mudskipper Point and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 9": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11568-W1", "11823-W1"],
+				"Description": "Test the currents at the mouth of the River Amja south of Musa Point.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 10": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11824-W1"],
+				"Description": "With help from a mermaid guide, document the water depth south of Mudskipper Point.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 11": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11570-W1", "11315-W1"],
+				"Description": "Help the meteorologist document the local weather on a small island west of Rimmington.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 12": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11317-W1", "11059-W1"],
+				"Description": "Test the currents south west of the Obelisk of Water.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 13": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11317-W1"],
+				"Description": "With help from a mermaid guide, document the water depth west of the entrance to Taverley Dungeon.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 14": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11057-W2"],
+				"Description": "With help from a mermaid guide, document the water depth south west of Brimhaven.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 15": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10545-W1", "10800"],
+				"Description": "Help the meteorologist document the local weather on a small island north of Port Khazard.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 16": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10543-W1", "10284-W1"],
+				"Description": "Help the meteorologist document the local weather north east of Rantz's cave.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 17": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11562-W1", "11307"],
+				"Description": "Help the meteorologist document the local weather on a small island south of Crash Island.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 18": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11821-W2", "12076-W1"],
+				"Description": "Help the meteorologist document the local weather on a small island east of the Kharazi Jungle.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 19": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11300", "11042"],
+				"Description": "Help the meteorologist document the local weather on a small island south of Last Light.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 20": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13092[+]", "12582-1"],
+				"Description": "Help the meteorologist document the local weather at the south east tip of Cape Conch.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 21": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6957-W1", "7211"],
+				"Description": "Help the meteorologist document the local weather south east of Stonecutter Outpost.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 22": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9261-W1", "9770-W2"],
+				"Description": "Help the meteorologist document the local weather on the eastern coast of the Isle of Souls.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 23": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10023[+]", "10793"],
+				"Description": "Help the meteorologist document the local weather on the Isle of Bones.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 24": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["4652", "4654"],
+				"Description": "Help the meteorologist document the local weather on a small island north of Laguna Aurorae.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 25": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5685"],
+				"Description": "Find a Sealed crate west of Land's End and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 26": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5430-W1", "5941-W1"],
+				"Description": "Test the currents south of Lacerta Falls.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 27": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6708"],
+				"Description": "With help from a mermaid guide, document the water depth in the south of Crabclaw Bay.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 28": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6454-W1", "6196-W1"],
+				"Description": "Help the meteorologist document the local weather on a small island south of the Woodcutting Guild.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 29": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7225-W1"],
+				"Description": "With help from a mermaid guide, document the water depth north of the Dibber.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 30": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7736"],
+				"Description": "With help from a mermaid guide, document the water depth in the east of the Hosidian Sea.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 31": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7476"],
+				"Description": "With help from a mermaid guide, document the water depth north of Port Roberts.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 32": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7478-W1", "7223-W1"],
+				"Description": "Help the meteorologist document the local weather on a small island south east of the Tithe Farm.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Task 33": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6705-W1", "7473"],
+				"Description": "Help the meteorologist document the local weather on a small island north of Civitas illa Fortis.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Bonus charts|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Bonus charts|~ Task 1": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 2": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 3": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 4": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 5": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 6": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 7": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 8": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 9": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 10": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 11": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 12": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 13": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 14": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 15": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 16": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 17": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 18": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 19": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 20": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 21": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 22": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 23": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 24": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 25": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 26": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 27": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 28": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 29": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 30": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 31": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 32": "Diary",
+					"~|Sea Charting#Bonus charts|~ Task 33": "Diary"
+				}
+			},
+			"~|Sea Charting#Breakbone Strait|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9773-W1"],
+				"Description": "Find a chest of equipment north of the Myths' Guild.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Breakbone Strait|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9259-W3"],
+				"Description": "Find a Sealed crate near the Tear of the Soul and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Breakbone Strait|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9261-W1", "9773-W1"],
+				"Description": "Test the currents off the eastern coast of the Isle of Souls.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Breakbone Strait|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9516"],
+				"Description": "Use your spyglass to get a good view of the Myths' Guild from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Breakbone Strait|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Breakbone Strait|~ Task 1": "Diary",
+					"~|Sea Charting#Breakbone Strait|~ Task 2": "Diary",
+					"~|Sea Charting#Breakbone Strait|~ Task 3": "Diary",
+					"~|Sea Charting#Breakbone Strait|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Brimhaven Passage|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11059-W1"],
+				"Description": "Find a set of someone else's charts south of the Fishing Platform and copy them.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Brimhaven Passage|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10803-W1"],
+				"Description": "Find the wreck of the Shelled Snail east of Witchaven.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Brimhaven Passage|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11059-W1"],
+				"Description": "Use your spyglass to get a good view of the Fishing Platform from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Brimhaven Passage|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10546-W1", "10802-W1"],
+				"Description": "Test the currents south east of Ardougne Zoo.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Brimhaven Passage|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Brimhaven Passage|~ Task 1": "Diary",
+					"~|Sea Charting#Brimhaven Passage|~ Task 2": "Diary",
+					"~|Sea Charting#Brimhaven Passage|~ Task 3": "Diary",
+					"~|Sea Charting#Brimhaven Passage|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Catherby Bay|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11060-W1"],
+				"Description": "Find evidence of megashrimp activity east of the Legends' Guild.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Catherby Bay|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11572-W1"],
+				"Description": "Find some odd aquatic plant life west of the Dark Wizards' Tower.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Catherby Bay|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11061-W1"],
+				"Description": "Use your spyglass to get a good view of Keep le Faye from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Catherby Bay|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11316-W1"],
+				"Description": "Find a Sealed crate near Entrana and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Catherby Bay|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Catherby Bay|~ Task 1": "Diary",
+					"~|Sea Charting#Catherby Bay|~ Task 2": "Diary",
+					"~|Sea Charting#Catherby Bay|~ Task 3": "Diary",
+					"~|Sea Charting#Catherby Bay|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Crabclaw Bay|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6965-W1"],
+				"Description": "Find a sabotaged mooring point on Crabclaw Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Crabclaw Bay|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6451-W1"],
+				"Description": "Use your spyglass to get a good view of Salvager Overlook from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Crabclaw Bay|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6965-W1"],
+				"Description": "Use your spyglass to get a good view of Crabclaw Island from the south west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Crabclaw Bay|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Crabclaw Bay|~ Task 1": "Diary",
+					"~|Sea Charting#Crabclaw Bay|~ Task 2": "Diary",
+					"~|Sea Charting#Crabclaw Bay|~ Task 3": "Diary"
+				}
+			},
+			"~|Sea Charting#Crystal Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7730"],
+				"Description": "Find an elven shipwreck in the middle of the Crystal Sea.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Crystal Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7475-1"],
+				"Description": "Find the visitors book for the Port Roberts jail.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Crystal Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7475-W1"],
+				"Description": "Use your spyglass to get a good view of Port Roberts from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Crystal Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7986-W1"],
+				"Description": "Find a Sealed crate in the middle of the Crystal Sea and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Crystal Sea|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7731", "8243-W1"],
+				"Description": "Test the currents east of Port Roberts.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Crystal Sea|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7730"],
+				"Description": "With help from a mermaid guide, document the water depth in the middle of the Crystal Sea.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Crystal Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Crystal Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Crystal Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Crystal Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Crystal Sea|~ Task 4": "Diary",
+					"~|Sea Charting#Crystal Sea|~ Task 5": "Diary",
+					"~|Sea Charting#Crystal Sea|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Dusk's Maw|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["4910-W1"],
+				"Description": "Find a collapsed cave on a small island south west of the Tlati Rainforest.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Dusk's Maw|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["4141"],
+				"Description": "Find a Sealed crate in the far west of Dusk's Maw and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Dusk's Maw|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["4908", "4397"],
+				"Description": "Test the currents south west of the Darkmoon Ravine.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Dusk's Maw|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5165-W3"],
+				"Description": "With help from a mermaid guide, document the water depth north of the Darkmoon Ravine.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Dusk's Maw|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Dusk's Maw|~ Task 1": "Diary",
+					"~|Sea Charting#Dusk's Maw|~ Task 2": "Diary",
+					"~|Sea Charting#Dusk's Maw|~ Task 3": "Diary",
+					"~|Sea Charting#Dusk's Maw|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Everwinter Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6976"],
+				"Description": "Find a Sealed crate in the far north of the Everwinter Sea and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Everwinter Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6974"],
+				"Description": "Find some odd eggs north east of the Fishing Hamlet.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Everwinter Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7743-W1", "8000"],
+				"Description": "Help the meteorologist document the local weather on Brittle Isle.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Everwinter Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7232", "6975"],
+				"Description": "Test the currents near the shipwrecks in the Everwinter Sea.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Everwinter Sea|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7230"],
+				"Description": "Use your spyglass to get a good view of the area north of the River of Souls from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Everwinter Sea|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7230"],
+				"Description": "With help from a mermaid guide, document the water depth north of the River of Souls.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Everwinter Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Everwinter Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Everwinter Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Everwinter Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Everwinter Sea|~ Task 4": "Diary",
+					"~|Sea Charting#Everwinter Sea|~ Task 5": "Diary",
+					"~|Sea Charting#Everwinter Sea|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Feldip Gulf|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10798-W1"],
+				"Description": "Find an odd geological phenomenon in the middle of the Feldip Gulf.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Feldip Gulf|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10797"],
+				"Description": "Find a Sealed crate in the middle of the Feldip Gulf and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Feldip Gulf|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10542-W1", "10798-W1"],
+				"Description": "Test the currents south east of Rantz's cave.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Feldip Gulf|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Feldip Gulf|~ Task 1": "Diary",
+					"~|Sea Charting#Feldip Gulf|~ Task 2": "Diary",
+					"~|Sea Charting#Feldip Gulf|~ Task 3": "Diary"
+				}
+			},
+			"~|Sea Charting#Fortis Bay|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7470[+]"],
+				"Description": "Find a nest on Vatrachos Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Fortis Bay|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7215-W1"],
+				"Description": "Use your spyglass to get a good view of the Fortis Colosseum from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Fortis Bay|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7214"],
+				"Description": "Find a Sealed crate east of Stonecutter Outpost and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Fortis Bay|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6958-W1", "7470-W1"],
+				"Description": "Test the currents north east of Stonecutter Outpost.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Fortis Bay|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7471"],
+				"Description": "With help from a mermaid guide, document the water depth north of Vatrachos Island.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Fortis Bay|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Fortis Bay|~ Task 1": "Diary",
+					"~|Sea Charting#Fortis Bay|~ Task 2": "Diary",
+					"~|Sea Charting#Fortis Bay|~ Task 3": "Diary",
+					"~|Sea Charting#Fortis Bay|~ Task 4": "Diary",
+					"~|Sea Charting#Fortis Bay|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Fremennik Strait|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9530"],
+				"Description": "Find a discarded book south of Jatizso.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Fremennik Strait|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9276-W1"],
+				"Description": "Use your spyglass to get a good view of the towers on the Fremennik Isles from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Fremennik Strait|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9018"],
+				"Description": "Find a Sealed crate north west of the Piscatoris Fishing Colony and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Fremennik Strait|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9275-W3", "9276-W1"],
+				"Description": "Test the currents west of Neitiznot.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Fremennik Strait|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9275-W1", "9532-W1"],
+				"Description": "Help the meteorologist document the local weather on the southern coast of Neitiznot.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Fremennik Strait|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Fremennik Strait|~ Task 1": "Diary",
+					"~|Sea Charting#Fremennik Strait|~ Task 2": "Diary",
+					"~|Sea Charting#Fremennik Strait|~ Task 3": "Diary",
+					"~|Sea Charting#Fremennik Strait|~ Task 4": "Diary",
+					"~|Sea Charting#Fremennik Strait|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Fremensund|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10297-W1"],
+				"Description": "Find some suspicious eyes west of Rellekka.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Fremensund|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10553-W1"],
+				"Description": "Use your spyglass to get a good view of the market in Rellekka from the north.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Fremensund|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10810-W1"],
+				"Description": "Find a Sealed crate north of Rellekka and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Fremensund|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10296-W1", "9784"],
+				"Description": "Test the currents north of Rower's Arm.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Fremensund|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10041"],
+				"Description": "With help from a mermaid guide, document the water depth south of Waterbirth Island.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Fremensund|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10296-W1", "10042-W1"],
+				"Description": "Help the meteorologist document the local weather on a small island south west of Rellekka.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Fremensund|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Fremensund|~ Task 1": "Diary",
+					"~|Sea Charting#Fremensund|~ Task 2": "Diary",
+					"~|Sea Charting#Fremensund|~ Task 3": "Diary",
+					"~|Sea Charting#Fremensund|~ Task 4": "Diary",
+					"~|Sea Charting#Fremensund|~ Task 5": "Diary",
+					"~|Sea Charting#Fremensund|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Grandroot Bay|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9783-W1"],
+				"Description": "Find the roots of the Grand Tree in Grandroot Bay.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Grandroot Bay|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10040-W1"],
+				"Description": "Use your spyglass to get a good view of the lighthouse on Rower's Arm from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Grandroot Bay|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9784"],
+				"Description": "Find a Sealed crate in the middle of Grandroot Bay and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Grandroot Bay|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9526-W1", "9528-W1"],
+				"Description": "Test the currents in the River Crannmor.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Grandroot Bay|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10039-W1"],
+				"Description": "With help from a mermaid guide, document the water depth west of the Barbarian Outpost.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Grandroot Bay|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10039-W1", "9784"],
+				"Description": "Help the meteorologist document the local weather west of the Barbarian Outpost.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Grandroot Bay|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Grandroot Bay|~ Task 1": "Diary",
+					"~|Sea Charting#Grandroot Bay|~ Task 2": "Diary",
+					"~|Sea Charting#Grandroot Bay|~ Task 3": "Diary",
+					"~|Sea Charting#Grandroot Bay|~ Task 4": "Diary",
+					"~|Sea Charting#Grandroot Bay|~ Task 5": "Diary",
+					"~|Sea Charting#Grandroot Bay|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Great Sound|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5685"],
+				"Description": "Use your spyglass to get a good view of Auburnvale from the north.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Great Sound|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6451-W1"],
+				"Description": "Find an advert on a small island north east of Salvager Overlook.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Great Sound|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5941-W1"],
+				"Description": "Find an interesting sign south east of Land's End.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Great Sound|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Great Sound|~ Task 1": "Diary",
+					"~|Sea Charting#Great Sound|~ Task 2": "Diary",
+					"~|Sea Charting#Great Sound|~ Task 3": "Diary"
+				}
+			},
+			"~|Sea Charting#Gu'tanoth Bay|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10543-W1"],
+				"Description": "Find the wreck of an ogre ship in Gu'tanoth Bay.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Gu'tanoth Bay|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10287-W1"],
+				"Description": "Use your spyglass to get a good view of the island in Gu'tanoth Bay from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Gu'tanoth Bay|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10543-W1"],
+				"Description": "Find a Sealed crate near Yanille and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Gu'tanoth Bay|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10543-W1"],
+				"Description": "With help from a mermaid guide, document the water depth south of the Yanille Chain.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Gu'tanoth Bay|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Gu'tanoth Bay|~ Task 1": "Diary",
+					"~|Sea Charting#Gu'tanoth Bay|~ Task 2": "Diary",
+					"~|Sea Charting#Gu'tanoth Bay|~ Task 3": "Diary",
+					"~|Sea Charting#Gu'tanoth Bay|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Gulf of Kourend|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7227-W1"],
+				"Description": "Find something in desperate need of repair north east of Port Piscarilius.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Gulf of Kourend|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7226-W1"],
+				"Description": "Use your spyglass to get a good view of Port Piscarilius from north of the Foodhall.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Gulf of Kourend|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7738"],
+				"Description": "Find a Sealed crate in the middle of the Gulf of Kourend and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Gulf of Kourend|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7225-W1"],
+				"Description": "Test the currents north west of the Dibber.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Gulf of Kourend|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Gulf of Kourend|~ Task 1": "Diary",
+					"~|Sea Charting#Gulf of Kourend|~ Task 2": "Diary",
+					"~|Sea Charting#Gulf of Kourend|~ Task 3": "Diary",
+					"~|Sea Charting#Gulf of Kourend|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Hosidian Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7224-W2"],
+				"Description": "Find some discarded farming equipment east of Hosidius.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Hosidian Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7479-W1"],
+				"Description": "Use your spyglass to get a good view of the Tithe Farm from the north east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Hosidian Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7479-W1"],
+				"Description": "Find a Sealed crate off the eastern coast of Hosidius and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Hosidian Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Hosidian Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Hosidian Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Hosidian Sea|~ Task 3": "Diary"
+				}
+			},
+			"~|Sea Charting#Idestia Strait|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10556-W1"],
+				"Description": "Use your spyglass to get a good view of the castle on Etceteria from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Idestia Strait|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10555"],
+				"Description": "Find a Sealed crate south east of Etceteria and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Idestia Strait|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10811-W1", "10810-W1"],
+				"Description": "Test the currents west of the hunter area near Trollweiss Mountain.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Idestia Strait|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10812-W2"],
+				"Description": "Find a hunter free haven on a small island west of Trollweiss Mountain.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Idestia Strait|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10301", "10555"],
+				"Description": "Help the meteorologist document the local weather on a small island north of Etceteria.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Idestia Strait|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10557"],
+				"Description": "With help from a mermaid guide, document the water depth south of the Iceberg.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Idestia Strait|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Idestia Strait|~ Task 1": "Diary",
+					"~|Sea Charting#Idestia Strait|~ Task 2": "Diary",
+					"~|Sea Charting#Idestia Strait|~ Task 3": "Diary",
+					"~|Sea Charting#Idestia Strait|~ Task 4": "Diary",
+					"~|Sea Charting#Idestia Strait|~ Task 5": "Diary",
+					"~|Sea Charting#Idestia Strait|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Kannski Tides|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9276-W2"],
+				"Description": "Find a Sealed crate in the waters of the Fremennik Isles and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Kannski Tides|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9533"],
+				"Description": "Find the wreck of the Fearless Fremennik south west of the Island of Stone.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Kannski Tides|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9276-W1", "9022"],
+				"Description": "Test the currents north of the western cave on the Fremennik Isles.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Kannski Tides|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9277"],
+				"Description": "Use your spyglass to get a good view of the ice trolls of the Fremennik Isles from the north.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Kannski Tides|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9278"],
+				"Description": "With help from a mermaid guide, document the water depth north of the Fremennik Isles.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Kannski Tides|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Kannski Tides|~ Task 1": "Diary",
+					"~|Sea Charting#Kannski Tides|~ Task 2": "Diary",
+					"~|Sea Charting#Kannski Tides|~ Task 3": "Diary",
+					"~|Sea Charting#Kannski Tides|~ Task 4": "Diary",
+					"~|Sea Charting#Kannski Tides|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Kharazi Strait|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11051-W1"],
+				"Description": "Find a crashed glider north of Ape Atoll.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Kharazi Strait|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11053-W1"],
+				"Description": "Find a map south west of the Kharazi Jungle and copy it.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Kharazi Strait|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11308"],
+				"Description": "Find some curious rapids west of Rock Island Prison.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Kharazi Strait|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11053-W1", "11054-W1"],
+				"Description": "Test the currents off the south western coast of the Kharazi Jungle.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Kharazi Strait|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11564-W1"],
+				"Description": "Find a Sealed crate near Rock Island Prison and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Kharazi Strait|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11820"],
+				"Description": "Use your spyglass to get a good view of a cave in the Kharazi Jungle from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 24
+				}
+			},
+			"~|Sea Charting#Kharazi Strait|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Kharazi Strait|~ Task 1": "Diary",
+					"~|Sea Charting#Kharazi Strait|~ Task 2": "Diary",
+					"~|Sea Charting#Kharazi Strait|~ Task 3": "Diary",
+					"~|Sea Charting#Kharazi Strait|~ Task 4": "Diary",
+					"~|Sea Charting#Kharazi Strait|~ Task 5": "Diary",
+					"~|Sea Charting#Kharazi Strait|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Kharidian Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11823-W1"],
+				"Description": "Find a crashed glider south of the Karamja Shipyard.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Kharidian Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11822-W1"],
+				"Description": "Find the wreck of the Pandemonium II west of the Pandemonium.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Kharidian Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12590-W1"],
+				"Description": "Find the wreck of the Pandemonium III west of the Kharidian Bandit Camp.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Kharidian Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["Pandemonium Cave"],
+				"Description": "Use your spyglass to admire Chartin' Charles McAtless in the cave on the Pandemonium.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Kharidian Sea|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12078-1"],
+				"Description": "Use your spyglass to get a good view of the Pandemonium from the cave entrance on the island.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Kharidian Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Kharidian Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Kharidian Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Kharidian Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Kharidian Sea|~ Task 4": "Diary",
+					"~|Sea Charting#Kharidian Sea|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Litus Lucis|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7473"],
+				"Description": "Find a strange corpse north east of Civitas illa Fortis.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Litus Lucis|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6962"],
+				"Description": "Find a Sealed crate in the middle of Litus Lucis and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Litus Lucis|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6706-W1", "6961-W1"],
+				"Description": "Test the currents east of the Twilight Temple.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Litus Lucis|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7217-W1"],
+				"Description": "With help from a mermaid guide, document the water depth north of the Fortis Colosseum.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Litus Lucis|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Litus Lucis|~ Task 1": "Diary",
+					"~|Sea Charting#Litus Lucis|~ Task 2": "Diary",
+					"~|Sea Charting#Litus Lucis|~ Task 3": "Diary",
+					"~|Sea Charting#Litus Lucis|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Lumbridge Basin|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12593-W2"],
+				"Description": "Find a treacherous rock formation south of Lumbridge Swamp.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Lumbridge Basin|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12335-W2"],
+				"Description": "Find an unfortunate corpse on a small island south east of Tutorial Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Lumbridge Basin|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12592-W1"],
+				"Description": "Use your spyglass to get a good view of the western mine in Lumbridge Swamp from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Lumbridge Basin|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Lumbridge Basin|~ Task 1": "Diary",
+					"~|Sea Charting#Lumbridge Basin|~ Task 2": "Diary",
+					"~|Sea Charting#Lumbridge Basin|~ Task 3": "Diary"
+				}
+			},
+			"~|Sea Charting#Lunar Bay|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8764"],
+				"Description": "Find evidence of some strong magical spells east of Lunar Isle.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Lunar Bay|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8508-W1"],
+				"Description": "Use your spyglass to get a good view of the pirate galleon docked at Lunar Isle from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Lunar Bay|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8508-W1"],
+				"Description": "Find a Sealed crate near the Lunar Isle docks and sample the contents. Reverse into the pier to reach it.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Lunar Bay|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8508-W1", "8763-W1"],
+				"Description": "Test the currents south of the Astral Altar on Lunar Isle.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Lunar Bay|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8763-W1"],
+				"Description": "With help from a mermaid guide, document the water depth north east of Pirates' Cove.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Lunar Bay|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Lunar Bay|~ Task 1": "Diary",
+					"~|Sea Charting#Lunar Bay|~ Task 2": "Diary",
+					"~|Sea Charting#Lunar Bay|~ Task 3": "Diary",
+					"~|Sea Charting#Lunar Bay|~ Task 4": "Diary",
+					"~|Sea Charting#Lunar Bay|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Lunar Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8512"],
+				"Description": "Find a Sealed crate in the far north of the Lunar Sea and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Lunar Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8511"],
+				"Description": "Find some cleaning supplies north of Lunar Isle.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Lunar Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8767"],
+				"Description": "Use your spyglass to get a good view of Ungael from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Lunar Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8256"],
+				"Description": "With help from a mermaid guide, document the water depth in the north west of the Lunar Sea.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Lunar Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Lunar Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Lunar Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Lunar Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Lunar Sea|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Menaphite Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12587-W1"],
+				"Description": "Find some collected sand on an island west of Menaphos.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Menaphite Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12586"],
+				"Description": "Use your spyglass to get a good view of the pyramid in Menaphos from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Menaphite Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12586"],
+				"Description": "Find a Sealed crate near Menaphos and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Menaphite Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12585", "12584"],
+				"Description": "Test the currents north of the island south of Menaphos.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Menaphite Sea|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12074"],
+				"Description": "With help from a mermaid guide, document the water depth in the middle of the Menaphite Sea.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Menaphite Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Menaphite Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Menaphite Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Menaphite Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Menaphite Sea|~ Task 4": "Diary",
+					"~|Sea Charting#Menaphite Sea|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Misty Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5674"],
+				"Description": "Find some discarded fishing equipment in the middle of the Misty Sea.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Misty Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5420-W1"],
+				"Description": "Use your spyglass to get a good view of Mistrock from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Misty Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6185"],
+				"Description": "Find a Sealed crate near some shipwrecks in the Misty Sea and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Misty Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5161"],
+				"Description": "With help from a mermaid guide, document the water depth in the south west of the Misty Sea.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Misty Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Misty Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Misty Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Misty Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Misty Sea|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Moonshadow|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8506"],
+				"Description": "Find the wreck of the Lunar Longship south west of Pirates' Cove.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Moonshadow|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7995"],
+				"Description": "Find a Sealed crate south west of Lunar Isle and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Moonshadow|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8507", "8505"],
+				"Description": "Test the currents west of Pirates' Cove.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Moonshadow|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7995"],
+				"Description": "With help from a mermaid guide, document the water depth in the south west of Lunar Isle.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Moonshadow|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Moonshadow|~ Task 1": "Diary",
+					"~|Sea Charting#Moonshadow|~ Task 2": "Diary",
+					"~|Sea Charting#Moonshadow|~ Task 3": "Diary",
+					"~|Sea Charting#Moonshadow|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Mudskipper Sound|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11825-W1"],
+				"Description": "Find a strange stone tablet south east of Musa Point.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Mudskipper Sound|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12079"],
+				"Description": "Find the wreck of the Salty Grouper south west of Tutorial Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Mudskipper Sound|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12079"],
+				"Description": "Use your spyglass to get a good view of the Karamja Shipyard from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Mudskipper Sound|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Mudskipper Sound|~ Task 1": "Diary",
+					"~|Sea Charting#Mudskipper Sound|~ Task 2": "Diary",
+					"~|Sea Charting#Mudskipper Sound|~ Task 3": "Diary"
+				}
+			},
+			"~|Sea Charting#Mythic Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10025-W1"],
+				"Description": "Find a Sealed crate west of the Void Knights' Outpost and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Mythic Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9770-1"],
+				"Description": "Find an abandoned camp on Anglers' Retreat.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 51
+				}
+			},
+			"~|Sea Charting#Mythic Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9770-W2", "10026-W1"],
+				"Description": "Test the currents east of Anglers' Retreat.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Mythic Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9771"],
+				"Description": "With help from a mermaid guide, document the water depth south of the Myths' Guild.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Mythic Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Mythic Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Mythic Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Mythic Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Mythic Sea|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Oo'glog Channel|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10541"],
+				"Description": "Find the corpse of a sea monster north east of Corsair Cove.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Oo'glog Channel|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10795-W1"],
+				"Description": "Find the wreck of the bananaless boat west of Ape Atoll.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Oo'glog Channel|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10284-W1"],
+				"Description": "Use your spyglass to get a good view of the throne in Corsair Cove from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Oo'glog Channel|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10283-W1"],
+				"Description": "Find a Sealed crate south of Corsair Cove and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Oo'glog Channel|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10028-W1"],
+				"Description": "With help from a mermaid guide, document the water depth south west of Corsair Cove.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Oo'glog Channel|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Oo'glog Channel|~ Task 1": "Diary",
+					"~|Sea Charting#Oo'glog Channel|~ Task 2": "Diary",
+					"~|Sea Charting#Oo'glog Channel|~ Task 3": "Diary",
+					"~|Sea Charting#Oo'glog Channel|~ Task 4": "Diary",
+					"~|Sea Charting#Oo'glog Channel|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Pearl Bank|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13345"],
+				"Description": "Find a ship in a bottle south of the Little Pearl.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Pearl Bank|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13089"],
+				"Description": "Find a Sealed crate south west of the Little Pearl and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Pearl Bank|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13346-W1", "13601"],
+				"Description": "Test the currents to the south west of the Little Pearl.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Pearl Bank|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13089"],
+				"Description": "With help from a mermaid guide, document the water depth in the south of the Pearl Bank.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Pearl Bank|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Pearl Bank|~ Task 1": "Diary",
+					"~|Sea Charting#Pearl Bank|~ Task 2": "Diary",
+					"~|Sea Charting#Pearl Bank|~ Task 3": "Diary",
+					"~|Sea Charting#Pearl Bank|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Pilgrims' Passage|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7477[+]"],
+				"Description": "Find evidence of an experiment on Chinchompa Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Pilgrims' Passage|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7733"],
+				"Description": "Find a Sealed crate in the middle of Pilgrims' Passage and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Pilgrims' Passage|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7477-W1", "6965-W1"],
+				"Description": "Test the currents west of Chinchompa Island.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Pilgrims' Passage|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Pilgrims' Passage|~ Task 1": "Diary",
+					"~|Sea Charting#Pilgrims' Passage|~ Task 2": "Diary",
+					"~|Sea Charting#Pilgrims' Passage|~ Task 3": "Diary"
+				}
+			},
+			"~|Sea Charting#Piscatoris Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9017"],
+				"Description": "Find evidence of kraken activity south west of the Piscatoris Fishing Colony.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Piscatoris Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9017"],
+				"Description": "Use your spyglass to get a good view of the Piscatoris Fishing Colony from the north west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Piscatoris Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9018"],
+				"Description": "Find a Sealed crate north west of the Piscatoris Fishing Colony and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Piscatoris Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8760-W2"],
+				"Description": "With help from a mermaid guide, document the water depth south west of Kraken Cove.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Piscatoris Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Piscatoris Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Piscatoris Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Piscatoris Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Piscatoris Sea|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Porth Gwenith|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8758-W1"],
+				"Description": "Find a Sealed crate near Ynysdail and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Gwenith|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8757-W1"],
+				"Description": "Find an unusual boat north of Gwenith.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Gwenith|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9015-W1", "8504-W4"],
+				"Description": "Help the meteorologist document the local weather on a small island north west of Eagles' Peak.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Gwenith|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8757-W1", "8758-W1"],
+				"Description": "Test the currents north of Gwenith.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Gwenith|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9014-W1"],
+				"Description": "With help from a mermaid guide, document the water depth north of Gorlah.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Gwenith|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Porth Gwenith|~ Task 1": "Diary",
+					"~|Sea Charting#Porth Gwenith|~ Task 2": "Diary",
+					"~|Sea Charting#Porth Gwenith|~ Task 3": "Diary",
+					"~|Sea Charting#Porth Gwenith|~ Task 4": "Diary",
+					"~|Sea Charting#Porth Gwenith|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Porth Neigwl|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8498-W1"],
+				"Description": "Find a Sealed crate off the western coast of Isafdar and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Neigwl|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8497-W1"],
+				"Description": "Find some lost cargo south east of Lledrith Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Neigwl|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8495[+]", "9006-W1"],
+				"Description": "Help the meteorologist document the local weather on a small island west of Zul-Andra.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Neigwl|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8497-W1", "7986-W1"],
+				"Description": "Help the meteorologist document the local weather on a small island west of the Tyras Camp.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Neigwl|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8241-W1", "8497-W1"],
+				"Description": "Test the currents west of Lledrith Island.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Neigwl|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8497-W1"],
+				"Description": "Use your spyglass to get a good view of the Tyras Camp from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Neigwl|~ Task 7": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8496-W2"],
+				"Description": "With help from a mermaid guide, document the water depth west of Port Tyras.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Porth Neigwl|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Porth Neigwl|~ Task 1": "Diary",
+					"~|Sea Charting#Porth Neigwl|~ Task 2": "Diary",
+					"~|Sea Charting#Porth Neigwl|~ Task 3": "Diary",
+					"~|Sea Charting#Porth Neigwl|~ Task 4": "Diary",
+					"~|Sea Charting#Porth Neigwl|~ Task 5": "Diary",
+					"~|Sea Charting#Porth Neigwl|~ Task 6": "Diary",
+					"~|Sea Charting#Porth Neigwl|~ Task 7": "Diary"
+				}
+			},
+			"~|Sea Charting#Rainbow Reef|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9251-1"],
+				"Description": "Find a lost friend on Rainbow's End.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Rainbow Reef|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9249"],
+				"Description": "Find a rowboat to the far south of Rainbow's End.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Rainbow Reef|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8739"],
+				"Description": "Find a Sealed crate near Sunbleak Island and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Rainbow Reef|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9251-W1"],
+				"Description": "Test the currents north of Rainbow's End.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Rainbow Reef|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8996-W2"],
+				"Description": "With help from a mermaid guide, document the water depth in the middle of Rainbow Reef.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Rainbow Reef|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Rainbow Reef|~ Task 1": "Diary",
+					"~|Sea Charting#Rainbow Reef|~ Task 2": "Diary",
+					"~|Sea Charting#Rainbow Reef|~ Task 3": "Diary",
+					"~|Sea Charting#Rainbow Reef|~ Task 4": "Diary",
+					"~|Sea Charting#Rainbow Reef|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Red Reef|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11046"],
+				"Description": "Find the corpse of a wayward shifter on a small island south of Red Rock.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Red Reef|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11047"],
+				"Description": "Find a Sealed crate near Red Rock and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Red Reef|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11559", "11558"],
+				"Description": "Test the currents north east of Red Rock.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Red Reef|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11047"],
+				"Description": "With help from a mermaid guide, document the water depth north of Red Rock.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Red Reef|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Red Reef|~ Task 1": "Diary",
+					"~|Sea Charting#Red Reef|~ Task 2": "Diary",
+					"~|Sea Charting#Red Reef|~ Task 3": "Diary",
+					"~|Sea Charting#Red Reef|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Rimmington Strait|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11571-W1"],
+				"Description": "Find a treacherous rock formation west of the Crafting Guild.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Rimmington Strait|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11314-W1"],
+				"Description": "Find a warning about dragons east of Crandor.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Rimmington Strait|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11314-W1"],
+				"Description": "Use your spyglass to get a good view of the Karamja Volcano from the north.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Rimmington Strait|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11571-W1", "11315-W1"],
+				"Description": "Test the currents south west of the Makeover Mage's home.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Rimmington Strait|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Rimmington Strait|~ Task 1": "Diary",
+					"~|Sea Charting#Rimmington Strait|~ Task 2": "Diary",
+					"~|Sea Charting#Rimmington Strait|~ Task 3": "Diary",
+					"~|Sea Charting#Rimmington Strait|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Sapphire Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6952"],
+				"Description": "Find some odd sea life in the middle of the Sapphire Sea.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Sapphire Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7209"],
+				"Description": "Use your spyglass to get a good view of the Crown Jewel from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Sapphire Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6694-W1"],
+				"Description": "Find a Sealed crate where three waters meet in the Sapphire Sea and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Sapphire Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6953-W1", "6697"],
+				"Description": "Test the currents west of the Crown Jewel.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Sapphire Sea|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6952"],
+				"Description": "With help from a mermaid guide, document the water depth south of the Crown Jewel.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Sapphire Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Sapphire Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Sapphire Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Sapphire Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Sapphire Sea|~ Task 4": "Diary",
+					"~|Sea Charting#Sapphire Sea|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Sea of Shells|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11811-1"],
+				"Description": "Find the nest of a fearless bird on the Onyx Crest.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 47
+				}
+			},
+			"~|Sea Charting#Sea of Shells|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12581-2"],
+				"Description": "Use your spyglass to get a good view of the Summer Shore from the cliffs above it on the Great Conch.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 45
+				}
+			},
+			"~|Sea Charting#Sea of Shells|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12326-W1"],
+				"Description": "Find a Sealed crate off the western coast of the Great Conch and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Sea of Shells|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12836-W1", "13093-W1"],
+				"Description": "Test the currents near the Summer Shore docks on the Great Conch.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Sea of Shells|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11810"],
+				"Description": "With help from a mermaid guide, document the water depth south of the Onyx Crest.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Sea of Shells|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Sea of Shells|~ Task 1": "Diary",
+					"~|Sea Charting#Sea of Shells|~ Task 2": "Diary",
+					"~|Sea Charting#Sea of Shells|~ Task 3": "Diary",
+					"~|Sea Charting#Sea of Shells|~ Task 4": "Diary",
+					"~|Sea Charting#Sea of Shells|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Sea of Souls|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9002"],
+				"Description": "Find the wreck of the Soul Searcher south west of the Tear of the Soul.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Sea of Souls|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8747-W1"],
+				"Description": "Find a Sealed crate off the southern coast of the Isle of Souls and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Sea of Souls|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8490"],
+				"Description": "With help from a mermaid guide, document the water depth east of the shipyard in the Sea of Souls.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Sea of Souls|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9259-1"],
+				"Description": "Use your spyglass to get a good view of the surrounding sea from the Tear of the Soul.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 61
+				}
+			},
+			"~|Sea Charting#Sea of Souls|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Sea of Souls|~ Task 1": "Diary",
+					"~|Sea Charting#Sea of Souls|~ Task 2": "Diary",
+					"~|Sea Charting#Sea of Souls|~ Task 3": "Diary",
+					"~|Sea Charting#Sea of Souls|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Shiverwake Expanse|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11071"],
+				"Description": "Find a Sealed crate near the large rock formations in Weissmere and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Shiverwake Expanse|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10816"],
+				"Description": "Find evidence of spying north east of the Iceberg.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Shiverwake Expanse|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11070", "11072"],
+				"Description": "Help the meteorologist document the local weather on the large rock formations in Weissmere.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Shiverwake Expanse|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11327"],
+				"Description": "Use your spyglass to get a good view of Grimstone from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Shiverwake Expanse|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11327"],
+				"Description": "With help from a mermaid guide, document the water depth in the east of the Shiverwake Expanse.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Shiverwake Expanse|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Shiverwake Expanse|~ Task 1": "Diary",
+					"~|Sea Charting#Shiverwake Expanse|~ Task 2": "Diary",
+					"~|Sea Charting#Shiverwake Expanse|~ Task 3": "Diary",
+					"~|Sea Charting#Shiverwake Expanse|~ Task 4": "Diary",
+					"~|Sea Charting#Shiverwake Expanse|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Soul Bay|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8235"],
+				"Description": "Find some interesting sea life in the middle of Soul Bay.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Soul Bay|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8237-W1"],
+				"Description": "Find a Sealed crate off the western coast of the Isle of Souls and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Soul Bay|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8236-W1"],
+				"Description": "Test the currents off the western coast of the Isle of Souls.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Soul Bay|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7980"],
+				"Description": "With help from a mermaid guide, document the water depth west of the Isle of Souls.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Soul Bay|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8491-W1", "7977"],
+				"Description": "Help the meteorologist document the local weather on the south western coast of the Isle of Souls.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#Soul Bay|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Soul Bay|~ Task 1": "Diary",
+					"~|Sea Charting#Soul Bay|~ Task 2": "Diary",
+					"~|Sea Charting#Soul Bay|~ Task 3": "Diary",
+					"~|Sea Charting#Soul Bay|~ Task 4": "Diary",
+					"~|Sea Charting#Soul Bay|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Southern Expanse|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7206"],
+				"Description": "Find a Sealed crate near the Isle of Serpents and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Southern Expanse|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7201"],
+				"Description": "Find a useful sign to the far south of the Isle of Serpents.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Southern Expanse|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7462", "7202"],
+				"Description": "Help the meteorologist document the local weather on a small islandssic east of the Isle of Serpents.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Southern Expanse|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8228"],
+				"Description": "With help from a mermaid guide, document the water depth west of Sunbleak Island.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 72
+				}
+			},
+			"~|Sea Charting#Southern Expanse|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Southern Expanse|~ Task 1": "Diary",
+					"~|Sea Charting#Southern Expanse|~ Task 2": "Diary",
+					"~|Sea Charting#Southern Expanse|~ Task 3": "Diary",
+					"~|Sea Charting#Southern Expanse|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Stoneheart Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10304"],
+				"Description": "Find a Sealed crate in the far north of the Stoneheart Sea and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Stoneheart Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10301"],
+				"Description": "Find a shark corpse on a small island north west of Etceteria.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Stoneheart Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9790-W1", "9535"],
+				"Description": "Help the meteorologist document the local weather on a small island south west of the Island of Stone.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Stoneheart Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9790-W1"],
+				"Description": "Test the currents west of the Island of Stone.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Stoneheart Sea|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10303"],
+				"Description": "Use your spyglass to get a good view of the KGP training area from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Stoneheart Sea|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9792"],
+				"Description": "With help from a mermaid guide, document the water depth north of the Island of Stone.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Stoneheart Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Stoneheart Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Stoneheart Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Stoneheart Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Stoneheart Sea|~ Task 4": "Diary",
+					"~|Sea Charting#Stoneheart Sea|~ Task 5": "Diary",
+					"~|Sea Charting#Stoneheart Sea|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Strait of Khazard|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10544-W1"],
+				"Description": "Find a notice from General Khazard south east of Port Khazard.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Strait of Khazard|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10801-W1"],
+				"Description": "Find a rowboat off the west coast of Karamja near Port Khazard.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Strait of Khazard|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10800"],
+				"Description": "Find what remains of Colbansea Island in the middle of the Strait of Khazard.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Strait of Khazard|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10546-W1"],
+				"Description": "Use your spyglass to get a good view of the Tower of Life from the east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Strait of Khazard|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10544-W2"],
+				"Description": "Find a Sealed crate near the Yanille Chain and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Strait of Khazard|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10545-W1", "10544-W1"],
+				"Description": "Test the currents west of the trawler in Port Khazard.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Strait of Khazard|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Strait of Khazard|~ Task 1": "Diary",
+					"~|Sea Charting#Strait of Khazard|~ Task 2": "Diary",
+					"~|Sea Charting#Strait of Khazard|~ Task 3": "Diary",
+					"~|Sea Charting#Strait of Khazard|~ Task 4": "Diary",
+					"~|Sea Charting#Strait of Khazard|~ Task 5": "Diary",
+					"~|Sea Charting#Strait of Khazard|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Sunset Bay|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5677-W1"],
+				"Description": "Find a wrecked shiplike thing south of Villa Lucens.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Sunset Bay|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5678-W1"],
+				"Description": "Use your spyglass to get a good view of Sunset Coast from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Sunset Bay|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5676-W1"],
+				"Description": "Find a Sealed crate near Mistrock and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Sunset Bay|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["5679-W1", "5425-W1"],
+				"Description": "Test the currents at the mouth of the River Varla.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Sunset Bay|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6189-W1"],
+				"Description": "With help from a mermaid guide, document the water depth west of the Colossal Wyrm Remains.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Sunset Bay|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Sunset Bay|~ Task 1": "Diary",
+					"~|Sea Charting#Sunset Bay|~ Task 2": "Diary",
+					"~|Sea Charting#Sunset Bay|~ Task 3": "Diary",
+					"~|Sea Charting#Sunset Bay|~ Task 4": "Diary",
+					"~|Sea Charting#Sunset Bay|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#The Everdeep|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7721"],
+				"Description": "Find an odd shadow south of Deepfin Point.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#The Everdeep|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7722-W1"],
+				"Description": "Use your spyglass to get a good view of Deepfin Point from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#The Everdeep|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7211"],
+				"Description": "Find a Sealed crate west of Deepfin Point and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#The Everdeep|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7721"],
+				"Description": "With help from a mermaid guide, document the water depth in the far south east of the Everdeep.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#The Everdeep|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7723[+]", "7465"],
+				"Description": "Help the meteorologist document the local weather on the western coast of Deepfin Point.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 57
+				}
+			},
+			"~|Sea Charting#The Everdeep|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#The Everdeep|~ Task 1": "Diary",
+					"~|Sea Charting#The Everdeep|~ Task 2": "Diary",
+					"~|Sea Charting#The Everdeep|~ Task 3": "Diary",
+					"~|Sea Charting#The Everdeep|~ Task 4": "Diary",
+					"~|Sea Charting#The Everdeep|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#The Lonely Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10533[+]"],
+				"Description": "Find some dragon scales on Charred Island. It is not necessary to dock onto the island to chart this.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#The Lonely Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10019"],
+				"Description": "Find a Sealed crate near some shipwrecks in the Lonely Sea and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#The Lonely Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10533-W1", "10023-W1"],
+				"Description": "Test the currents west of Charred Island.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#The Lonely Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10017"],
+				"Description": "With help from a mermaid guide, document the water depth in the far south of the Lonely Sea.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#The Lonely Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#The Lonely Sea|~ Task 1": "Diary",
+					"~|Sea Charting#The Lonely Sea|~ Task 2": "Diary",
+					"~|Sea Charting#The Lonely Sea|~ Task 3": "Diary",
+					"~|Sea Charting#The Lonely Sea|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#The Simian Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10538"],
+				"Description": "Find a makeshift flag near Cape Atoll.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#The Simian Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10537-W1"],
+				"Description": "Use your spyglass to get a good view of the Void Knights' Outpost from the north.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#The Simian Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10537-W1"],
+				"Description": "Find a Sealed crate near the Void Knights' Outpost and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#The Simian Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10536-W1", "10536-W6"],
+				"Description": "Test the currents south of the pest-filled island near the Void Knights' Outpost.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#The Simian Sea|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10794-W1", "11050-W1"],
+				"Description": "Test the currents south west of Cape Atoll.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#The Simian Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#The Simian Sea|~ Task 1": "Diary",
+					"~|Sea Charting#The Simian Sea|~ Task 2": "Diary",
+					"~|Sea Charting#The Simian Sea|~ Task 3": "Diary",
+					"~|Sea Charting#The Simian Sea|~ Task 4": "Diary",
+					"~|Sea Charting#The Simian Sea|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#The Skullhorde|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10280"],
+				"Description": "Find the wreck of the Balanced Ballast south west of the Void Knights' Outpost.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#The Skullhorde|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9510"],
+				"Description": "Find a Sealed crate in the middle of the Skullhorde and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#The Skullhorde|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9767", "9255"],
+				"Description": "Test the currents west of the Isle of Bones.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#The Skullhorde|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9766"],
+				"Description": "With help from a mermaid guide, document the water depth south west of the Isle of Bones.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#The Skullhorde|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#The Skullhorde|~ Task 1": "Diary",
+					"~|Sea Charting#The Skullhorde|~ Task 2": "Diary",
+					"~|Sea Charting#The Skullhorde|~ Task 3": "Diary",
+					"~|Sea Charting#The Skullhorde|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#The Storm Tempor|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12077-W2"],
+				"Description": "Find something trying to leech power from the Storm Tempor.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 24
+				}
+			},
+			"~|Sea Charting#The Storm Tempor|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12075-W2"],
+				"Description": "Find the wreck of the Desert Trout south of Tempoross Cove.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 24
+				}
+			},
+			"~|Sea Charting#The Storm Tempor|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11820", "12076-W1"],
+				"Description": "Test the currents west of Tempoross Cove.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 24
+				}
+			},
+			"~|Sea Charting#The Storm Tempor|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12588-W2"],
+				"Description": "Use your spyglass to get a good view of the Ruins of Unkah from north of the docks.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 24
+				}
+			},
+			"~|Sea Charting#The Storm Tempor|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#The Storm Tempor|~ Task 1": "Diary",
+					"~|Sea Charting#The Storm Tempor|~ Task 2": "Diary",
+					"~|Sea Charting#The Storm Tempor|~ Task 3": "Diary",
+					"~|Sea Charting#The Storm Tempor|~ Task 4": "Diary"
+				}
+			},
+			"~|Sea Charting#Tirannwn Bight|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8499-W2"],
+				"Description": "Find a deadly trap west of the Iorwerth Camp.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Tirannwn Bight|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8501-W1"],
+				"Description": "Find a Sealed crate near Mynydd and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Tirannwn Bight|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8501-W1", "7988"],
+				"Description": "Help the meteorologist document the local weather south west of Mynydd.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Tirannwn Bight|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8498-W1", "8500-W2"],
+				"Description": "Test the currents at the mouth of the Afon Ganol west of the Iorwerth Camp.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Tirannwn Bight|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8499-W2"],
+				"Description": "Use your spyglass to get a good view of Prifddinas' western gates from the south west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Tirannwn Bight|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8500-W1"],
+				"Description": "With help from a mermaid guide, document the water depth in the middle of the Tirannwn Bight.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 66
+				}
+			},
+			"~|Sea Charting#Tirannwn Bight|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Tirannwn Bight|~ Task 1": "Diary",
+					"~|Sea Charting#Tirannwn Bight|~ Task 2": "Diary",
+					"~|Sea Charting#Tirannwn Bight|~ Task 3": "Diary",
+					"~|Sea Charting#Tirannwn Bight|~ Task 4": "Diary",
+					"~|Sea Charting#Tirannwn Bight|~ Task 5": "Diary",
+					"~|Sea Charting#Tirannwn Bight|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Tortugan Sea|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13095"],
+				"Description": "Find a notable small shell north east of the Great Conch.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Tortugan Sea|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12838-1"],
+				"Description": "Find a strange apple tree somewhere on the Great Conch.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 45
+				}
+			},
+			"~|Sea Charting#Tortugan Sea|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12839-W1"],
+				"Description": "Use your spyglass to get a good view of the coast of the Great Conch from the north east.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Tortugan Sea|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13094-W1", "13607"],
+				"Description": "Test the currents to the east of the eastern pier on the Great Conch.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Tortugan Sea|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["13094-W1"],
+				"Description": "With help from a mermaid guide, document the water depth east of the Great Conch.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Tortugan Sea|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Tortugan Sea|~ Task 1": "Diary",
+					"~|Sea Charting#Tortugan Sea|~ Task 2": "Diary",
+					"~|Sea Charting#Tortugan Sea|~ Task 3": "Diary",
+					"~|Sea Charting#Tortugan Sea|~ Task 4": "Diary",
+					"~|Sea Charting#Tortugan Sea|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Turtle Belt|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12328"],
+				"Description": "Find a treasure chest south east of Dognose Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Turtle Belt|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12073-W1"],
+				"Description": "Find a Sealed crate near Dognose Island and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Turtle Belt|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11816-W1"],
+				"Description": "Test the currents south west of the remote island in the Turtle Belt.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Turtle Belt|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12071"],
+				"Description": "With help from a mermaid guide, document the water depth in the middle of the Turtle Belt.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Turtle Belt|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["12073-W1"],
+				"Description": "Use your spyglass to get a good view of the surrounding sea from Dognose Island.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Turtle Belt|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Turtle Belt|~ Task 1": "Diary",
+					"~|Sea Charting#Turtle Belt|~ Task 2": "Diary",
+					"~|Sea Charting#Turtle Belt|~ Task 3": "Diary",
+					"~|Sea Charting#Turtle Belt|~ Task 4": "Diary",
+					"~|Sea Charting#Turtle Belt|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#V's Belt|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10043-W1"],
+				"Description": "Find an informative sign on a small island south of Miscellania.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#V's Belt|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9788-W1"],
+				"Description": "Use your spyglass to get a good view of the castle on Miscellania from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#V's Belt|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9787"],
+				"Description": "Find a Sealed crate in the middle of V's Belt and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#V's Belt|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9531-W2", "10042-W1"],
+				"Description": "Test the currents north east of Jatizso.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#V's Belt|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["10044-W4"],
+				"Description": "With help from a mermaid guide, document the water depth north west of Miscellania.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#V's Belt|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#V's Belt|~ Task 1": "Diary",
+					"~|Sea Charting#V's Belt|~ Task 2": "Diary",
+					"~|Sea Charting#V's Belt|~ Task 3": "Diary",
+					"~|Sea Charting#V's Belt|~ Task 4": "Diary",
+					"~|Sea Charting#V's Belt|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Vagabonds Rest|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8504-W1"],
+				"Description": "Find a crate of discarded goods north of Drumstick Isle.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Vagabonds Rest|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7993"],
+				"Description": "Find a half-built ship west of Buccaneers' Haven.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Vagabonds Rest|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8249-W1"],
+				"Description": "Use your spyglass to get a good view of Buccaneers' Haven from the north.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Vagabonds Rest|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8249-W1"],
+				"Description": "Find a Sealed crate near Buccaneers' Haven and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Vagabonds Rest|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7993"],
+				"Description": "With help from a mermaid guide, document the water depth west of Buccaneers' Haven.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Vagabonds Rest|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Vagabonds Rest|~ Task 1": "Diary",
+					"~|Sea Charting#Vagabonds Rest|~ Task 2": "Diary",
+					"~|Sea Charting#Vagabonds Rest|~ Task 3": "Diary",
+					"~|Sea Charting#Vagabonds Rest|~ Task 4": "Diary",
+					"~|Sea Charting#Vagabonds Rest|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Weiss Melt|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11581-W2"],
+				"Description": "Find a failing boat north east of Weiss.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weiss Melt|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11584"],
+				"Description": "Find a Sealed crate north of Grimstone and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weiss Melt|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11837-W1", "11326-W1"],
+				"Description": "Help the meteorologist document the local weather on a small island north of the Frozen Waste Plateau.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weiss Melt|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11582", "11583-W1"],
+				"Description": "Test the currents north of Weiss.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weiss Melt|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11838"],
+				"Description": "Use your spyglass to get a good view of the agility course in the Wilderness from the north.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weiss Melt|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Weiss Melt|~ Task 1": "Diary",
+					"~|Sea Charting#Weiss Melt|~ Task 2": "Diary",
+					"~|Sea Charting#Weiss Melt|~ Task 3": "Diary",
+					"~|Sea Charting#Weiss Melt|~ Task 4": "Diary",
+					"~|Sea Charting#Weiss Melt|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Weissmere|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11069"],
+				"Description": "Find a Sealed crate in the middle of Weissmere and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weissmere|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11068-W1"],
+				"Description": "Find some missing mountaineering equipment north of Trollweiss Mountain.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weissmere|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11325-W1", "11068-W1"],
+				"Description": "Test the currents north west of Weiss.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weissmere|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11070"],
+				"Description": "Use your spyglass to get a good view of the large rock formations in Weissmere from their centre.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weissmere|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["11326-W1"],
+				"Description": "With help from a mermaid guide, document the water depth north west of Weiss.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Weissmere|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Weissmere|~ Task 1": "Diary",
+					"~|Sea Charting#Weissmere|~ Task 2": "Diary",
+					"~|Sea Charting#Weissmere|~ Task 3": "Diary",
+					"~|Sea Charting#Weissmere|~ Task 4": "Diary",
+					"~|Sea Charting#Weissmere|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Western Gate|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7726"],
+				"Description": "Find evidence of the Sharhai east of Vatrachos Island.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Western Gate|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7982"],
+				"Description": "Find some some interesting sea life in the middle of the Western Gate.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Western Gate|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7982"],
+				"Description": "Find a Sealed crate in the middle of the Western Gate and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Western Gate|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7728-W1", "7727"],
+				"Description": "Test the currents east of Minotaurs' Rest.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Western Gate|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7983"],
+				"Description": "With help from a mermaid guide, document the water depth in the middle of the Western Gate.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Western Gate|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Western Gate|~ Task 1": "Diary",
+					"~|Sea Charting#Western Gate|~ Task 2": "Diary",
+					"~|Sea Charting#Western Gate|~ Task 3": "Diary",
+					"~|Sea Charting#Western Gate|~ Task 4": "Diary",
+					"~|Sea Charting#Western Gate|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Winter's Edge|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8253-W1"],
+				"Description": "Use your spyglass to get a good view of the town on Lunar Isle from the west.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Winter's Edge|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7487"],
+				"Description": "Find a Sealed crate near Brittle Isle and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Winter's Edge|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8253-W2"],
+				"Description": "Find an odd dead plant on a small island north west of Lunar Isle.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Winter's Edge|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7229-W2", "7483"],
+				"Description": "Help the meteorologist document the local weather on a small island north of the River of Souls.",
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Winter's Edge|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7485-W1", "8252-W1"],
+				"Description": "Test the currents north east of the River of Souls.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Winter's Edge|~ Task 6": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["7741-W2"],
+				"Description": "With help from a mermaid guide, document the water depth in the middle of Winter's Edge.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 78
+				}
+			},
+			"~|Sea Charting#Winter's Edge|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Winter's Edge|~ Task 1": "Diary",
+					"~|Sea Charting#Winter's Edge|~ Task 2": "Diary",
+					"~|Sea Charting#Winter's Edge|~ Task 3": "Diary",
+					"~|Sea Charting#Winter's Edge|~ Task 4": "Diary",
+					"~|Sea Charting#Winter's Edge|~ Task 5": "Diary",
+					"~|Sea Charting#Winter's Edge|~ Task 6": "Diary"
+				}
+			},
+			"~|Sea Charting#Wyrm's Waters|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6187-1"],
+				"Description": "Find an interesting book on the Shimmering Atoll.",
+				"Items": ["Captain's log"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Wyrm's Waters|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6445-W1"],
+				"Description": "Use your spyglass to get a good view of the Colossal Wyrm Remains from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Wyrm's Waters|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6187-W1"],
+				"Description": "Find a Sealed crate near the Shimmering Atoll and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 12
+				}
+			},
+			"~|Sea Charting#Wyrm's Waters|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6187-W1"],
+				"Description": "Test the currents within the Shimmering Atoll.",
+				"Items": ["Current duck"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 22
+				}
+			},
+			"~|Sea Charting#Wyrm's Waters|~ Task 5": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["6700"],
+				"Description": "With help from a mermaid guide, document the water depth east of the Shimmering Atoll.",
+				"Items": ["Fishbowl helmet", "Diving apparatus"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 38
+				}
+			},
+			"~|Sea Charting#Wyrm's Waters|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Wyrm's Waters|~ Task 1": "Diary",
+					"~|Sea Charting#Wyrm's Waters|~ Task 2": "Diary",
+					"~|Sea Charting#Wyrm's Waters|~ Task 3": "Diary",
+					"~|Sea Charting#Wyrm's Waters|~ Task 4": "Diary",
+					"~|Sea Charting#Wyrm's Waters|~ Task 5": "Diary"
+				}
+			},
+			"~|Sea Charting#Zul-Egil|~ Task 1": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8494-W1"],
+				"Description": "Use your spyglass to get a good view of the ruined tower on the Isle of Souls from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true
+			},
+			"~|Sea Charting#Zul-Egil|~ Task 2": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["9007-W1"],
+				"Description": "Find a Sealed crate south of the poison waste and sample the contents.",
+				"Items": ["Crowbar"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Zul-Egil|~ Task 3": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8495-W2"],
+				"Description": "Find a toxic hazard in the middle of Zul-Egil.",
+				"Items": ["Captain's log"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Zul-Egil|~ Task 4": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"Chunks": ["8751-W1"],
+				"Description": "Use your spyglass to get a good view of Zul-Andra from the south.",
+				"Items": ["Spyglass"],
+				"Not F2P": true,
+				"Skills": {
+					"Sailing": 40
+				}
+			},
+			"~|Sea Charting#Zul-Egil|~ Completely chart the sea": {
+				"BaseQuest": "Sea Charting",
+				"Category": ["Sea Charting"],
+				"ManualShow": true,
+				"Not F2P": true,
+				"Reward": [],
+				"Tasks": {
+					"~|Sea Charting#Zul-Egil|~ Task 1": "Diary",
+					"~|Sea Charting#Zul-Egil|~ Task 2": "Diary",
+					"~|Sea Charting#Zul-Egil|~ Task 3": "Diary",
+					"~|Sea Charting#Zul-Egil|~ Task 4": "Diary"
+				}
 			}
 		},
 		"Quest": {
@@ -105221,7 +110058,7 @@
 				"BaseQuest": "The Great Brain Robbery",
 				"Description": "Head to Harmony Island, and spy on the enemy. Report back to Brother Tranquility",
 				"Chunks": ["15148"],
-				"Items": ["Plank", "Nails[+]", "Hammer", "Fishbowl", "Diving apparatus"],
+				"Items": ["Plank", "Nails[+]", "Hammer", "Fishbowl helmet", "Diving apparatus"],
 				"Tasks": {
 					"~|The Great Brain Robbery|~ 1": "Quest"
 				},
@@ -105284,7 +110121,7 @@
 				"BaseQuest": "The Great Brain Robbery",
 				"Description": "Return to Harmony Island, and finish up the quest",
 				"Chunks": ["15148"],
-				"Items": ["Hammer", "Fishbowl", "Diving apparatus"],
+				"Items": ["Hammer", "Fishbowl helmet", "Diving apparatus"],
 				"Tasks": {
 					"~|The Great Brain Robbery|~ 7": "Quest"
 				},
@@ -110044,7 +114881,7 @@
 					"Sailing": 400
 				},
 				"BaseQuest": "Pandemonium",
-				"Reward": ["Raft", "Spyglass"],
+				"Reward": ["Raft", "Captain's log", "Spyglass"],
 				"Chunks": ["12078-1"],
 				"Not F2P": true
 			},
@@ -111288,7 +116125,7 @@
 				"Tasks": {
 					"~|Recipe for Disaster/Freeing Pirate Pete|~ 2": "Quest"
 				},
-				"Reward": ["Diving apparatus"],
+				"Reward": ["Fishbowl helmet", "Diving apparatus"],
 				"Not F2P": true
 			},
 			"~|Recipe for Disaster/Freeing Pirate Pete|~ 4": {
@@ -126622,11 +131459,9 @@
 						"Kourend & Kebos": "HD5"
 					},
 					"Monster": {
-						"Fox": 1,
 						"Imp": 1,
 						"Rabbit": 5,
-						"Sand Crab": 11,
-						"Snake": 1
+						"Sand Crab": 11
 					},
 					"NPC": {
 						"Bologa": 1,
@@ -139948,7 +144783,7 @@
 			"Object": {
 				"Adamantite rocks": 3,
 				"Coal rocks": 10,
-				"Old chest (Charred Dungeon)": 1,
+				"Old chest": 1,
 				"Runite rocks": 2
 			},
 			"Spawn": {
@@ -148728,7 +153563,7 @@
 			},
 			"Name": "Pandemonium Cave",
 			"NPC": {
-				"Chartin Charles McAtless": 1
+				"Chartin' Charles McAtless": 1
 			},
 			"Object": {
 				"Coal rocks": 3,
@@ -160905,7 +165740,7 @@
 			"Object": {
 				"Adamantite rocks": 3,
 				"Coal rocks": 10,
-				"Old chest (Charred Dungeon)": 1,
+				"Old chest": 1,
 				"Runite rocks": 2
 			},
 			"Spawn": {
@@ -164430,7 +169265,7 @@
 				"Spider": 8
 			},
 			"NPC": {
-				"Chartin Charles McAtless": 1
+				"Chartin' Charles McAtless": 1
 			},
 			"Object": {
 				"Coal rocks": 3,
@@ -167847,7 +172682,15 @@
 			"IcySeas[+]": ["6973-W1", "6974", "6975", "6976", "6977", "7229-W2", "7229-W3", "7230", "7231", "7232", "7233", "7485-W2", "7486-W1", "7486-W2", "7487", "7488", "7489", "7741-W2", "7742", "7743-W1", "7744", "7745", "7997-W2", "7998", "7999", "8000", "8001", "8253-W2", "8254", "8255", "8256", "8257", "8509-W2", "8510", "8511", "8512", "8513", "8765-W2", "8766", "8767", "8768", "8769", "9020-W2", "9021-W2", "9022", "9023-W1", "9023-W2", "9023-W3", "9024", "9025", "9276-W3", "9277", "9278", "9279", "9280", "9281", "9532-W3", "9533", "9534", "9535", "9536", "9537", "9788-W2", "9789", "9790-W1", "9791", "9792", "9793", "10044-W4", "10044-W5", "10045", "10046", "10047", "10048", "10049", "10300-W5", "10301", "10302", "10303", "10304", "10305", "10556-W2", "10557", "10558-W1", "10559-W1", "10559-W2", "10559-W3", "10559-W4", "10559-W5", "10559-W6", "10560", "10561", "10812-W2", "10813", "10814", "10815", "10816", "10817", "11068-W1", "11069", "11070", "11071", "11072", "11073", "11325-W1", "10325-W2", "11326-W1", "11327", "11328", "11329", "11581-W1", "11581-W2", "11582", "11583-W1", "11584", "11585", "11837-W1", "11837-W2", "11838", "11839", "11840"],
 			"BlastFurnaceOrFoundry[+]": ["Blast Furnace", "Giants' Foundry"],
 			"12848[+]": ["12848-1", "12848-W1"],
-			"12849[+]": ["12849-1", "12849-2", "12849-3", "12849-4", "12849-5", "12849-W1"]
+			"12849[+]": ["12849-1", "12849-2", "12849-3", "12849-4", "12849-5", "12849-W1"],
+			"8232[+]": ["8232-1", "8232-W1"],
+			"13092[+]": ["13092-1", "13092-W1"],
+			"10023[+]": ["10023-1", "10023-W1"],
+			"7470[+]": ["7470-1", "7470-W1"],
+			"7477[+]": ["7477-1", "7477-W1"],
+			"8495[+]": ["8495-1", "8495-W3"],
+			"7723[+]": ["7723-1", "7723-W1"],
+			"10533[+]": ["10533-1", "10533-W1"]
 		},
 		"chunksPlusNames": {
 			"10Coin[+]": "Any chunk with a 10-coin chest",
@@ -169567,7 +174410,7 @@
 			"Armoured kraken tentacle tasks[+]": ["Take ~|port tasks|~ from Civitas illa Fortis", "Take ~|port tasks|~ from Lunar Isle", "Take ~|port tasks|~ from Port Roberts", "Take ~|port tasks|~ from Port Tyras", "Take ~|port tasks|~ from Prifddinas", "Take ~|port tasks|~ from Rellekka"],
 			"Bull shark jaw tasks[+]": ["Take ~|port tasks|~ from Ardougne", "Take ~|port tasks|~ from Brimhaven", "Take ~|port tasks|~ from Catherby", "Take ~|port tasks|~ from Civitas illa Fortis", "Take ~|port tasks|~ from Land's End", "Take ~|port tasks|~ from Musa Point", "Take ~|port tasks|~ from Port Khazard", "Take ~|port tasks|~ from Port Piscarilius", "Take ~|port tasks|~ from Port Sarim", "Take ~|port tasks|~ from Port Tyras", "Take ~|port tasks|~ from Ruins of Unkah", "Take ~|port tasks|~ from The Pandemonium"],
 			"Bull shark liver tasks[+]": ["Take ~|port tasks|~ from Musa Point", "Take ~|port tasks|~ from Port Sarim"],
-			"Butterfly ray fin tasks[+]": ["Take ~|port tasks|~ from Aldarin", "Take ~|port tasks|~ from Musa Point", "Take ~|port tasks|~ from Port Tyras", "Take ~|port tasks|~ from Ruins of Unkah","Take ~|port tasks|~ from The Pandemonium", "Take ~|port tasks|~ from The Summer Shore"],
+			"Butterfly ray fin tasks[+]": ["Take ~|port tasks|~ from Aldarin", "Take ~|port tasks|~ from Musa Point", "Take ~|port tasks|~ from Port Tyras", "Take ~|port tasks|~ from Ruins of Unkah", "Take ~|port tasks|~ from The Pandemonium", "Take ~|port tasks|~ from The Summer Shore"],
 			"Butterfly ray skin tasks[+]": ["Take ~|port tasks|~ from Land's End", "Take ~|port tasks|~ from Port Piscarilius"],
 			"Eagle ray fin tasks[+]": ["Take ~|port tasks|~ from Deepfin Point", "Take ~|port tasks|~ from The Summer Shore"],
 			"Eagle ray skin tasks[+]": ["Take ~|port tasks|~ from Civitas illa Fortis", "Take ~|port tasks|~ from Musa Point", "Take ~|port tasks|~ from Port Khazard", "Take ~|port tasks|~ from Ruins of Unkah", "Take ~|port tasks|~ from Void Knights' Outpost"],
@@ -169597,7 +174440,12 @@
 			"Tiger shark jaw tasks[+]": ["Take ~|port tasks|~ from Port Sarim", "Take ~|port tasks|~ from Ruins of Unkah"],
 			"Tiger shark liver tasks[+]": ["Take ~|port tasks|~ from Brimhaven", "Take ~|port tasks|~ from Corsair Cove", "Take ~|port tasks|~ from Deepfin Point", "Take ~|port tasks|~ from Port Piscarilius", "Take ~|port tasks|~ from The Summer Shore"],
 			"Vampyre kraken ink sac tasks[+]": ["Take ~|port tasks|~ from Lunar Isle", "Take ~|port tasks|~ from Rellekka"],
-			"Vampyre kraken tentacle tasks[+]": ["Take ~|port tasks|~ from Etceteria", "Take ~|port tasks|~ from Lunar Isle"]
+			"Vampyre kraken tentacle tasks[+]": ["Take ~|port tasks|~ from Etceteria", "Take ~|port tasks|~ from Lunar Isle"],
+			"ArdentOceanCharting[+]": ["~|Sea Charting#Arrow Passage|~ Completely chart the sea", "~|Sea Charting#Bay of Sarim|~ Completely chart the sea", "~|Sea Charting#Brimhaven Passage|~ Completely chart the sea", "~|Sea Charting#Catherby Bay|~ Completely chart the sea", "~|Sea Charting#Feldip Gulf|~ Completely chart the sea", "~|Sea Charting#Gu'tanoth Bay|~ Completely chart the sea", "~|Sea Charting#Kharazi Strait|~ Completely chart the sea", "~|Sea Charting#Kharidian Sea|~ Completely chart the sea", "~|Sea Charting#Lumbridge Basin|~ Completely chart the sea", "~|Sea Charting#Menaphite Sea|~ Completely chart the sea", "~|Sea Charting#Mudskipper Sound|~ Completely chart the sea", "~|Sea Charting#Oo'glog Channel|~ Completely chart the sea", "~|Sea Charting#Rimmington Strait|~ Completely chart the sea", "~|Sea Charting#Strait of Khazard|~ Completely chart the sea", "~|Sea Charting#The Simian Sea|~ Completely chart the sea", "~|Sea Charting#The Storm Tempor|~ Completely chart the sea"],
+			"UnquietOceanCharting[+]": ["~|Sea Charting#Anglerfish's Light|~ Completely chart the sea", "~|Sea Charting#Bay of Elidinis|~ Completely chart the sea", "~|Sea Charting#Pearl Bank|~ Completely chart the sea", "~|Sea Charting#Red Reef|~ Completely chart the sea", "~|Sea Charting#Sea of Shells|~ Completely chart the sea", "~|Sea Charting#The Lonely Sea|~ Completely chart the sea", "~|Sea Charting#Tortugan Sea|~ Completely chart the sea", "~|Sea Charting#Turtle Belt|~ Completely chart the sea"],
+			"WesternOceanCharting[+]": ["~|Sea Charting#Crabclaw Bay|~ Completely chart the sea", "~|Sea Charting#Crystal Sea|~ Completely chart the sea", "~|Sea Charting#Great Sound|~ Completely chart the sea", "~|Sea Charting#Gulf of Kourend|~ Completely chart the sea", "~|Sea Charting#Hosidian Sea|~ Completely chart the sea", "~|Sea Charting#Litus Lucis|~ Completely chart the sea", "~|Sea Charting#Moonshadow|~ Completely chart the sea", "~|Sea Charting#Pilgrims' Passage|~ Completely chart the sea", "~|Sea Charting#Piscatoris Sea|~ Completely chart the sea", "~|Sea Charting#Porth Gwenith|~ Completely chart the sea", "~|Sea Charting#Porth Neigwl|~ Completely chart the sea", "~|Sea Charting#Tirannwn Bight|~ Completely chart the sea", "~|Sea Charting#Vagabonds Rest|~ Completely chart the sea"],
+			"ShroudedOceanCharting[+]": ["~|Sea Charting#Aureum Coast|~ Completely chart the sea", "~|Sea Charting#Backwater|~ Completely chart the sea", "~|Sea Charting#Barracuda Belt|~ Completely chart the sea", "~|Sea Charting#Breakbone Strait|~ Completely chart the sea", "~|Sea Charting#Fortis Bay|~ Completely chart the sea", "~|Sea Charting#Mythic Sea|~ Completely chart the sea", "~|Sea Charting#Rainbow Reef|~ Completely chart the sea", "~|Sea Charting#Sapphire Sea|~ Completely chart the sea", "~|Sea Charting#Sea of Souls|~ Completely chart the sea", "~|Sea Charting#Soul Bay|~ Completely chart the sea", "~|Sea Charting#Southern Expanse|~ Completely chart the sea", "~|Sea Charting#The Everdeep|~ Completely chart the sea", "~|Sea Charting#The Skullhorde|~ Completely chart the sea", "~|Sea Charting#Western Gate|~ Completely chart the sea", "~|Sea Charting#Wyrm's Waters|~ Completely chart the sea", "~|Sea Charting#Zul-Egil|~ Completely chart the sea"],
+			"AllOceanCharting[+]": ["~|Sea Charting#Kharidian Sea|~ Completely chart the sea", "~|Sea Charting#Bay of Sarim|~ Completely chart the sea", "~|Sea Charting#Lumbridge Basin|~ Completely chart the sea", "~|Sea Charting#Mudskipper Sound|~ Completely chart the sea", "~|Sea Charting#Rimmington Strait|~ Completely chart the sea", "~|Sea Charting#Catherby Bay|~ Completely chart the sea", "~|Sea Charting#Brimhaven Passage|~ Completely chart the sea", "~|Sea Charting#Strait of Khazard|~ Completely chart the sea", "~|Sea Charting#Gu'tanoth Bay|~ Completely chart the sea", "~|Sea Charting#Feldip Gulf|~ Completely chart the sea", "~|Sea Charting#Kharazi Strait|~ Completely chart the sea", "~|Sea Charting#Oo'glog Channel|~ Completely chart the sea", "~|Sea Charting#Arrow Passage|~ Completely chart the sea", "~|Sea Charting#Menaphite Sea|~ Completely chart the sea", "~|Sea Charting#The Simian Sea|~ Completely chart the sea", "~|Sea Charting#The Storm Tempor|~ Completely chart the sea", "~|Sea Charting#Turtle Belt|~ Completely chart the sea", "~|Sea Charting#Sea of Shells|~ Completely chart the sea", "~|Sea Charting#Red Reef|~ Completely chart the sea", "~|Sea Charting#Anglerfish's Light|~ Completely chart the sea", "~|Sea Charting#Bay of Elidinis|~ Completely chart the sea", "~|Sea Charting#Tortugan Sea|~ Completely chart the sea", "~|Sea Charting#Pearl Bank|~ Completely chart the sea", "~|Sea Charting#The Lonely Sea|~ Completely chart the sea", "~|Sea Charting#Fortis Bay|~ Completely chart the sea", "~|Sea Charting#Aureum Coast|~ Completely chart the sea", "~|Sea Charting#Wyrm's Waters|~ Completely chart the sea", "~|Sea Charting#Mythic Sea|~ Completely chart the sea", "~|Sea Charting#Breakbone Strait|~ Completely chart the sea", "~|Sea Charting#Backwater|~ Completely chart the sea", "~|Sea Charting#Zul-Egil|~ Completely chart the sea", "~|Sea Charting#The Skullhorde|~ Completely chart the sea", "~|Sea Charting#Sea of Souls|~ Completely chart the sea", "~|Sea Charting#Soul Bay|~ Completely chart the sea", "~|Sea Charting#Barracuda Belt|~ Completely chart the sea", "~|Sea Charting#The Everdeep|~ Completely chart the sea", "~|Sea Charting#Sapphire Sea|~ Completely chart the sea", "~|Sea Charting#Western Gate|~ Completely chart the sea", "~|Sea Charting#Rainbow Reef|~ Completely chart the sea", "~|Sea Charting#Southern Expanse|~ Completely chart the sea", "~|Sea Charting#Sunset Bay|~ Completely chart the sea", "~|Sea Charting#Misty Sea|~ Completely chart the sea", "~|Sea Charting#Dusk's Maw|~ Completely chart the sea", "~|Sea Charting#Great Sound|~ Completely chart the sea", "~|Sea Charting#Crabclaw Bay|~ Completely chart the sea", "~|Sea Charting#Gulf of Kourend|~ Completely chart the sea", "~|Sea Charting#Hosidian Sea|~ Completely chart the sea", "~|Sea Charting#Pilgrims' Passage|~ Completely chart the sea", "~|Sea Charting#Litus Lucis|~ Completely chart the sea", "~|Sea Charting#Porth Neigwl|~ Completely chart the sea", "~|Sea Charting#Tirannwn Bight|~ Completely chart the sea", "~|Sea Charting#Crystal Sea|~ Completely chart the sea", "~|Sea Charting#Porth Gwenith|~ Completely chart the sea", "~|Sea Charting#Piscatoris Sea|~ Completely chart the sea", "~|Sea Charting#Vagabonds Rest|~ Completely chart the sea", "~|Sea Charting#Moonshadow|~ Completely chart the sea", "~|Sea Charting#Fremensund|~ Completely chart the sea", "~|Sea Charting#Grandroot Bay|~ Completely chart the sea", "~|Sea Charting#V's Belt|~ Completely chart the sea", "~|Sea Charting#Fremennik Strait|~ Completely chart the sea", "~|Sea Charting#Idestia Strait|~ Completely chart the sea", "~|Sea Charting#Lunar Bay|~ Completely chart the sea", "~|Sea Charting#Winter's Edge|~ Completely chart the sea", "~|Sea Charting#Lunar Sea|~ Completely chart the sea", "~|Sea Charting#Everwinter Sea|~ Completely chart the sea", "~|Sea Charting#Kannski Tides|~ Completely chart the sea", "~|Sea Charting#Weissmere|~ Completely chart the sea", "~|Sea Charting#Stoneheart Sea|~ Completely chart the sea", "~|Sea Charting#Shiverwake Expanse|~ Completely chart the sea", "~|Sea Charting#Weiss Melt|~ Completely chart the sea"]
 		},
 		"forceTalisman": {
 			"Nature talisman": {
@@ -172403,6 +177251,9 @@
 			"Shadow warriors": {
 				"Shadow warrior": true
 			},
+			"Shellbane gryphon": {
+				"Shellbane gryphon": true
+			},
 			"Skeletal Wyverns": {
 				"Skeletal Wyvern": true
 			},
@@ -172619,7 +177470,7 @@
 			"Basilisks": ["9790", "11064"],
 			"Bats": ["4917", "5165", "5172", "5173", "5179", "5180", "5425", "5426", "5435", "5943", "5946", "5947", "5948", "6202", "6203", "6458", "6460", "6713", "6714", "6715", "6716", "6966", "6972", "9779", "9782", "10031", "10033", "10037", "10288", "10292", "10294", "10549", "10804", "11053", "11061", "11313", "11573", "11574", "12349", "13366", "13618", "13623", "14134", "14390", "14894", "14899", "14901"],
 			"Bears": ["4916", "4917", "4918", "4921", "5166", "5172", "5177", "5178", "5941", "8500", "8753", "8754", "9009", "9524", "9777", "9778", "10033", "10287", "10547", "10804", "10808", "11060", "11830", "11833", "12344", "12345", "12854", "12859", "13108", "13114", "13115", "13116"],
-			"Birds": ["4910", "4911", "4913", "4921", "4922", "5165", "5166", "5168", "5169", "5421", "5422", "5677", "5678", "5934", "5942", "6187", "6192", "6447", "6454", "6712", "6959", "6961", "7225", "8237", "8491", "8492", "8494", "8747", "8750", "8753", "9004", "9006", "9012", "9261", "9525", "9780", "9781", "9782", "10028", "10033", "10034", "10039", "10044","10284", "10291", "10292", "10293", "10300", "10549", "10553", "10794", "10795", "10803", "10807", "11050", "11051", "11053", "11055", "11309", "11316", "11319", "11562", "11565", "12587", "11828", "12078", "12082", "12083", "12325", "12326", "12337", "12581", "12582", "12583", "12588", "12595", "12596", "12837", "12838", "12844", "12850", "12851", "13092", "13100", "13356", "13871", "14391"],
+			"Birds": ["4910", "4911", "4913", "4921", "4922", "5165", "5166", "5168", "5169", "5421", "5422", "5677", "5678", "5934", "5942", "6187", "6192", "6447", "6454", "6712", "6959", "6961", "7225", "8237", "8491", "8492", "8494", "8747", "8750", "8753", "9004", "9006", "9012", "9261", "9525", "9780", "9781", "9782", "10028", "10033", "10034", "10039", "10044", "10284", "10291", "10292", "10293", "10300", "10549", "10553", "10794", "10795", "10803", "10807", "11050", "11051", "11053", "11055", "11309", "11316", "11319", "11562", "11565", "12587", "11828", "12078", "12082", "12083", "12325", "12326", "12337", "12581", "12582", "12583", "12588", "12595", "12596", "12837", "12838", "12844", "12850", "12851", "13092", "13100", "13356", "13871", "14391"],
 			"Black demons": ["5689", "6457", "9783", "10533", "10801", "11573", "11578", "12342", "12857", "13114"],
 			"Black dragons": ["6457", "8501", "9772", "10533", "11573", "12092", "12849", "12857", "13114"],
 			"Black Knights": ["12092", "13114"],
@@ -172721,6 +177572,7 @@
 			"Sea snakes": ["10044"],
 			"Shades": ["6457", "12341", "13874", "13875"],
 			"Shadow warriors": ["10804"],
+			"Shellbane gryphon": ["12582"],
 			"Skeletal Wyverns": ["12081"],
 			"Skeletons": ["5167", "5686", "5690", "5943", "6457", "6711", "6716", "6972", "8249", "9261", "9273", "9775", "9779", "10023", "10031", "10037", "10038", "10288", "10533", "10549", "10810", "11050", "11313", "11314", "11566", "11568", "11570", "11573", "11579", "11834", "11837", "12088", "12338", "12339", "12340", "12341", "12342", "12343", "12601", "12603", "12854", "12858", "12859", "13114", "13365", "13612", "13618", "14131"],
 			"Smoke devils": ["9519"],
@@ -188051,6 +192903,82 @@
 			},
 			"HerbDropTable+": {
 				"1": "23/128"
+			}
+		},
+		"Hermit crab": {
+			"Big fishing net": {
+				"1": "2/128"
+			},
+			"Casket": {
+				"1": "1/128"
+			},
+			"Coconut shell": {
+				"1": "1/128"
+			},
+			"Coins": {
+				"4": "29/128",
+				"8": "18/128",
+				"36": "8/128"
+			},
+			"Edible seaweed": {
+				"2": "2/128"
+			},
+			"Empty oyster": {
+				"1": "3/128"
+			},
+			"Fishing bait": {
+				"10": "2/128"
+			},
+			"Fishing rod": {
+				"1": "2/128"
+			},
+			"Giant seaweed": {
+				"1": "2/128"
+			},
+			"Iron cannonball": {
+				"5-9": "6/128"
+			},
+			"Iron claws": {
+				"1": "2/128"
+			},
+			"Nothing": {
+				"1": "13/128"
+			},
+			"Opal bolt tips": {
+				"5": "2/128"
+			},
+			"Raw anchovies": {
+				"1": "1/128"
+			},
+			"Raw herring": {
+				"1": "9/128"
+			},
+			"Raw sardine": {
+				"1": "6/128"
+			},
+			"Raw shrimps": {
+				"1": "6/128"
+			},
+			"Seaweed": {
+				"1": "2/128"
+			},
+			"Seaweed spore": {
+				"1": "4/128"
+			},
+			"Small fishing net": {
+				"1": "5/128"
+			},
+			"SailingFragDropTable+": {
+				"1": "1/128"
+			},
+			"GemDropTable+": {
+				"1": "1/128"
+			},
+			"Sandy paint": {
+				"1": "Always"
+			},
+			"Clue scroll (easy)": {
+				"1": "Unknown"
 			}
 		},
 		"Hero": {
@@ -210954,7 +215882,8 @@
 		"Western Provinces Diary": "Easy, Medium, Hard, Elite",
 		"Wilderness Diary": "Easy, Medium, Hard, Elite",
 		"Fossil Island Diary": "Museum Camp, Northern Reaches, Southern Swamps, Mountainous East",
-		"Combat Achievements": "Easy, Medium, Hard, Elite, Master, Grandmaster"
+		"Combat Achievements": "Easy, Medium, Hard, Elite, Master, Grandmaster",
+		"Sea Charting": "Anglerfish's Light, Arrow Passage, Aureum Coast, Backwater, Barracuda Belt, Bay of Elidinis, Bay of Sarim, Bonus charts, Breakbone Strait, Brimhaven Passage, Catherby Bay, Crabclaw Bay, Crystal Sea, Dusk's Maw, Everwinter Sea, Feldip Gulf, Fortis Bay, Fremennik Strait, Fremensund, Grandroot Bay, Great Sound, Gu'tanoth Bay, Gulf of Kourend, Hosidian Sea, Idestia Strait, Kannski Tides, Kharazi Strait, Kharidian Sea, Litus Lucis, Lumbridge Basin, Lunar Bay, Lunar Sea, Menaphite Sea, Misty Sea, Moonshadow, Mudskipper Sound, Mythic Sea, Oo'glog Channel, Pearl Bank, Pilgrims' Passage, Piscatoris Sea, Porth Gwenith, Porth Neigwl, Rainbow Reef, Red Reef, Rimmington Strait, Sapphire Sea, Sea of Shells, Sea of Souls, Shiverwake Expanse, Soul Bay, Southern Expanse, Stoneheart Sea, Strait of Khazard, Sunset Bay, The Everdeep, The Lonely Sea, The Simian Sea, The Skullhorde, The Storm Tempor, Tirannwn Bight, Tortugan Sea, Turtle Belt, V's Belt, Vagabonds Rest, Weiss Melt, Weissmere, Western Gate, Winter's Edge, Wyrm's Waters, Zul-Egil"
 	},
 	"clues": {
 		"beginner": {
@@ -244445,6 +249374,9 @@
 			}],
 			"Vampyre kraken tentacle^Vampyre kraken": [{
 				"Vampyre kraken tentacle tasks": "Nonskill"
+			}],
+			"Sandy paint^Hermit crab": [{
+				"Crab dance emote": "Nonskill"
 			}]
 		},
 		"Monsters": {
@@ -245360,6 +250292,11 @@
 			"The Shaikahan": {
 				"11568-2": [{
 					"Shaikahan weapon": "Nonskill"
+				}]
+			},
+			"Shellbane gryphon": {
+				"Shellbane Gryphon Cave": [{
+					"Gryphon task": "Nonskill"
 				}]
 			},
 			"Shipyard worker": {

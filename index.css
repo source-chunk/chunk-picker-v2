@@ -3721,8 +3721,11 @@ label .tooltip-base-el:active {
 }
 
 .details-subtitle {
-    text-transform: capitalize;
     font-size: 20px;
+}
+
+.details-subtitle:not(.details-description) {
+    text-transform: capitalize;
 }
 
 .details-data {
@@ -8748,11 +8751,16 @@ input#searchMonsters {
     color: var(--colorQuestBorderText);
 }
 
-.modal-content.mobile .Diaries-body .row > div {
+.charting-diary-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.modal-content.mobile .Diaries-body .row .diary-tier-button {
     width: 30vw;
 }
 
-.Diaries-body .row > div {
+.Diaries-body .row .diary-tier-button {
     display: inline-block;
     width: 8vw;
     border-radius: 5px;
@@ -8761,18 +8769,25 @@ input#searchMonsters {
     position: relative;
 }
 
-.Diaries-body .row > div.fossil {
+.Diaries-body .row .diary-tier-button.charting {
+    height: 48px;
+    align-items: center;
+    display: flex !important;
+    justify-content: center;
+}
+
+.Diaries-body .row .diary-tier-button.fossil {
     width: 110px;
     overflow-wrap: anywhere;
 }
 
-.Diaries-body .row > div.complete {
+.Diaries-body .row .diary-tier-button.complete {
     background-color: var(--colorQuestCompleteBackground);
     color: var(--colorQuestCompleteBorderText);
     border: solid 1px var(--colorQuestCompleteBorderText);
 }
 
-.Diaries-body .row > div.incomplete {
+.Diaries-body .row .diary-tier-button.incomplete {
     background-color: var(--colorQuestIncompleteBackground);
     color: var(--colorQuestIncompleteBorderText);
     border: solid 1px var(--colorQuestIncompleteBorderText);
