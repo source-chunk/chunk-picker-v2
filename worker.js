@@ -4609,7 +4609,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                                     if (!dropRatesGlobal[realSource]) {
                                         dropRatesGlobal[realSource] = {};
                                     }
-                                    dropRatesGlobal[realSource][drop] = findFraction(parseFloat(dropTables[lootItem][drop].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[lootItem][drop].split('@')[0].split('/')[1].split('@')[0]), lootItem.includes('GeneralSeedDropTable'));
+                                    dropRatesGlobal[realSource][drop] = findFraction((parseFloat(chunkInfo['skillItems']['Thieving'][monster][lootItem.replaceAll('*', '')][quantityDrop].split('/')[0].replaceAll('~', '')) * parseFloat(dropTables[lootItem][drop].split('@')[0].split('/')[0].replaceAll('~', ''))) / (parseFloat(chunkInfo['skillItems']['Thieving'][monster][lootItem.replaceAll('*', '')][quantityDrop].split('/')[1].replaceAll('~', '')) * parseFloat(dropTables[lootItem][drop].split('@')[0].split('/')[1].split('@')[0])), lootItem.includes('GeneralSeedDropTable'));
                                     if (!drops[drop] && !!dropRatesGlobal[realSource] && !!dropRatesGlobal[realSource][drop] && !dropTables.hasOwnProperty(drop) && !drop.includes('^')) {
                                         drops[drop] = true;
                                         valids['Extra'][realSource.replaceAll('[+]', '') + ': ~|' + drop + '|~ (' + dropRatesGlobal[realSource][drop] + ')'] = 'Every Drop';
