@@ -4278,6 +4278,7 @@
   "Cut maple logs from an ~|ent|~": "t_3660",
   "Cut yew logs from an ~|ent|~": "t_3661",
   "Cut magic logs from an ~|ent|~": "t_3662",
+  "Participate in the Friendly Ent ~|Forestry|~ event": "t_49372",
   "Participate in the Bee Hive ~|Forestry|~ event": "t_3663",
   "Participate in the Poacher ~|Forestry|~ event": "t_3664",
   "Participate in the Ritual ~|Forestry|~ event": "t_3665",
@@ -49073,5 +49074,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49372
+  "currentNextIndex": 49373
 }

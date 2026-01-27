@@ -60908,6 +60908,18 @@
 				"Not F2P": true,
 				"Priority": 109
 			},
+			"Participate in the Friendly Ent ~|Forestry|~ event": {
+				"Category": ["Forestry"],
+				"Items": ["Forestry kit"],
+				"Level": 1,
+				"Skills": {
+					"Fletching": 1
+				},
+				"Primary": false,
+				"Not F2P": true,
+				"Priority": 127,
+				"Output": "Friendly Ent loot"
+			},
 			"Gain xp in the Struggling Sapling ~|Forestry|~ event": {
 				"Category": ["ForestryXp"],
 				"Items": ["Forestry kit"],
@@ -246335,6 +246347,29 @@
 				},
 				"Pheasant tail feathers": {
 					"1": "1/2"
+				}
+			},
+			"Friendly Ent loot": {
+				"Bird nest (egg)": {
+					"1": "1/5"
+				},
+				"Leaves": {
+					"1": "1/6"
+				},
+				"Magic leaves": {
+					"1": "1/6"
+				},
+				"Maple leaves": {
+					"1": "1/6"
+				},
+				"Oak leaves": {
+					"1": "1/6"
+				},
+				"Willow leaves": {
+					"1": "1/6"
+				},
+				"Yew leaves": {
+					"1": "1/6"
 				}
 			},
 			"Sulliuscep": {
