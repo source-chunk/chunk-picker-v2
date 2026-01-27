@@ -28363,6 +28363,66 @@
 				"Output": "Armadylean paint",
 				"Not F2P": true
 			},
+			"Access any dock by land": {
+				"Items": ["Boat bottle (empty)"]
+			},
+			"Access Hosidius Dock by sea": {
+				"Chunks": ["6709-W1"]
+			},
+			"Access Rimmington Dock by sea": {
+				"Chunks": ["11570-W1"]
+			},
+			"Access Ardougne Dock by sea": {
+				"Chunks": ["10547-W1"]
+			},
+			"Access Witchaven Dock by sea": {
+				"Chunks": ["10803-W1"]
+			},
+			"Access Entrana Dock by sea": {
+				"Chunks": ["11572-W1"]
+			},
+			"Access Civitas illa Fortis Dock by sea": {
+				"Chunks": ["6961-W1"]
+			},
+			"Access Cairn Isle Dock by sea": {
+				"Chunks": ["10798-W1"]
+			},
+			"Access Sunset Coast Dock by sea": {
+				"Chunks": ["5934-W1"]
+			},
+			"Access Ruins of Unkah Dock by sea": {
+				"Chunks": ["12588-W1"]
+			},
+			"Access Void Knights' Outpost Dock by sea": {
+				"Chunks": ["10537-W1"]
+			},
+			"Access Isle of Souls Dock by sea": {
+				"Chunks": ["9004-W1"]
+			},
+			"Access Etceteria Dock by sea": {
+				"Chunks": ["10299"]
+			},
+			"Access Port Tyras Dock by sea": {
+				"Chunks": ["8496-W2"]
+			},
+			"Access Jatizso Dock by sea": {
+				"Chunks": ["9531-W2"]
+			},
+			"Access Neitiznot Dock by sea": {
+				"Chunks": ["9274-W1"]
+			},
+			"Access Waterbirth Island Dock by sea": {
+				"Chunks": ["10042-W1"]
+			},
+			"Access Piscatoris Dock by sea": {
+				"Chunks": ["9273-W1"]
+			},
+			"Access Lunar Isle Dock by sea": {
+				"Chunks": ["8508-W1"]
+			},
+			"Access Weiss Dock by sea": {
+				"Chunks": ["11326-W1"]
+			},
 			"Albatross beak tasks": {
 				"Tasks": {
 					"Albatross beak tasks[+]": "Sailing"
@@ -30087,6 +30147,86 @@
 			"Search the camping equipment south of the Lizardman Settlement for secateurs": {
 				"Chunks": ["5174-1"],
 				"Output": "Secateurs",
+				"Not F2P": true
+			},
+			"11569-W1 to 11313-W2": {
+				"Sections": ["11569-W1", "11313-W2"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"11569-W4 to 11313-W3": {
+				"Sections": ["11569-W4", "11313-W3"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"11569-W1 to 11570-W1": {
+				"Sections": ["11569-W1", "11570-W1"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"11568-W1 to 11312-W1": {
+				"Sections": ["11568-W1", "11312-W1"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"11822-W1 to 11821-W1": {
+				"Sections": ["11822-W1", "11821-W1"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"12078-W1 to 12077-W1": {
+				"Sections": ["12078-W1", "12077-W1"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"12334 to 12333-W1": {
+				"Sections": ["12334", "12333-W1"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"12590-W1 to 12589-W1": {
+				"Sections": ["12590-W1", "12589-W1"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"12848-W1 to 13104-W1": {
+				"Sections": ["12848-W1", "13104-W1"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"12849-W1 to 13105-W1": {
+				"Sections": ["12849-W1", "13105-W1"],
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
 				"Not F2P": true
 			},
 			"11564-W1 to 11564-W2": {
@@ -52997,6 +53137,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 18,
+				"Tasks": {
+					"HosidiusDockAccess[+]": "Nonskill"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -53027,6 +53170,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 17,
+				"Tasks": {
+					"RimmingtonDockAccess[+]": "Nonskill"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -53057,6 +53203,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 17,
+				"Tasks": {
+					"ArdougneDockAccess[+]": "Nonskill"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -53077,6 +53226,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 17,
+				"Tasks": {
+					"WitchavenDockAccess[+]": "Nonskill"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -53087,6 +53239,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 17,
+				"Tasks": {
+					"EntranaDockAccess[+]": "Nonskill"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -53098,7 +53253,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"~|Children of the Sun|~ Complete the quest": "Quest"
+					"~|Children of the Sun|~ Complete the quest": "Quest",
+					"CivitasillaFortisDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53133,6 +53289,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 17,
+				"Tasks": {
+					"CairnIsleDockAccess[+]": "Nonskill"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -53154,7 +53313,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"~|Children of the Sun|~ Complete the quest": "Quest"
+					"~|Children of the Sun|~ Complete the quest": "Quest",
+					"SunsetCoastDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53236,7 +53396,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"Access stormy seas": "Nonskill"
+					"Access stormy seas": "Nonskill",
+					"RuinsofUnkahDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53258,6 +53419,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 17,
+				"Tasks": {
+					"VoidKnightsOutpostDockAccess[+]": "Nonskill"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -53302,7 +53466,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"Access fetid waters": "Nonskill"
+					"Access fetid waters": "Nonskill",
+					"IselofSoulsDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53391,7 +53556,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"~|Royal Trouble|~ Complete the quest": "Quest"
+					"~|Royal Trouble|~ Complete the quest": "Quest",
+					"EtceteriaDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53417,7 +53583,8 @@
 				"Primary": false,
 				"Priority": 18,
 				"Tasks": {
-					"~|Regicide|~ Complete the quest": "Quest"
+					"~|Regicide|~ Complete the quest": "Quest",
+					"PortTyrasDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53440,7 +53607,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"~|The Fremennik Trials|~ Complete the quest": "Quest"
+					"~|The Fremennik Trials|~ Complete the quest": "Quest",
+					"JatizsoDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53453,7 +53621,8 @@
 				"Primary": false,
 				"Priority": 18,
 				"Tasks": {
-					"~|The Fremennik Trials|~ Complete the quest": "Quest"
+					"~|The Fremennik Trials|~ Complete the quest": "Quest",
+					"NeitiznotDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53519,7 +53688,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"~|The Fremennik Trials|~ Complete the quest": "Quest"
+					"~|The Fremennik Trials|~ Complete the quest": "Quest",
+					"WaterbirthIslandDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53532,7 +53702,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"~|Swan Song|~ Complete the quest": "Quest"
+					"~|Swan Song|~ Complete the quest": "Quest",
+					"PiscatorisDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53545,7 +53716,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"~|Lunar Diplomacy|~ Complete the quest": "Quest"
+					"~|Lunar Diplomacy|~ Complete the quest": "Quest",
+					"LunarIsleDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -53581,7 +53753,8 @@
 				"Primary": false,
 				"Priority": 17,
 				"Tasks": {
-					"Access icy seas": "Nonskill"
+					"Access icy seas": "Nonskill",
+					"WeissDockAccess[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -174445,7 +174618,26 @@
 			"UnquietOceanCharting[+]": ["~|Sea Charting#Anglerfish's Light|~ Completely chart the sea", "~|Sea Charting#Bay of Elidinis|~ Completely chart the sea", "~|Sea Charting#Pearl Bank|~ Completely chart the sea", "~|Sea Charting#Red Reef|~ Completely chart the sea", "~|Sea Charting#Sea of Shells|~ Completely chart the sea", "~|Sea Charting#The Lonely Sea|~ Completely chart the sea", "~|Sea Charting#Tortugan Sea|~ Completely chart the sea", "~|Sea Charting#Turtle Belt|~ Completely chart the sea"],
 			"WesternOceanCharting[+]": ["~|Sea Charting#Crabclaw Bay|~ Completely chart the sea", "~|Sea Charting#Crystal Sea|~ Completely chart the sea", "~|Sea Charting#Great Sound|~ Completely chart the sea", "~|Sea Charting#Gulf of Kourend|~ Completely chart the sea", "~|Sea Charting#Hosidian Sea|~ Completely chart the sea", "~|Sea Charting#Litus Lucis|~ Completely chart the sea", "~|Sea Charting#Moonshadow|~ Completely chart the sea", "~|Sea Charting#Pilgrims' Passage|~ Completely chart the sea", "~|Sea Charting#Piscatoris Sea|~ Completely chart the sea", "~|Sea Charting#Porth Gwenith|~ Completely chart the sea", "~|Sea Charting#Porth Neigwl|~ Completely chart the sea", "~|Sea Charting#Tirannwn Bight|~ Completely chart the sea", "~|Sea Charting#Vagabonds Rest|~ Completely chart the sea"],
 			"ShroudedOceanCharting[+]": ["~|Sea Charting#Aureum Coast|~ Completely chart the sea", "~|Sea Charting#Backwater|~ Completely chart the sea", "~|Sea Charting#Barracuda Belt|~ Completely chart the sea", "~|Sea Charting#Breakbone Strait|~ Completely chart the sea", "~|Sea Charting#Fortis Bay|~ Completely chart the sea", "~|Sea Charting#Mythic Sea|~ Completely chart the sea", "~|Sea Charting#Rainbow Reef|~ Completely chart the sea", "~|Sea Charting#Sapphire Sea|~ Completely chart the sea", "~|Sea Charting#Sea of Souls|~ Completely chart the sea", "~|Sea Charting#Soul Bay|~ Completely chart the sea", "~|Sea Charting#Southern Expanse|~ Completely chart the sea", "~|Sea Charting#The Everdeep|~ Completely chart the sea", "~|Sea Charting#The Skullhorde|~ Completely chart the sea", "~|Sea Charting#Western Gate|~ Completely chart the sea", "~|Sea Charting#Wyrm's Waters|~ Completely chart the sea", "~|Sea Charting#Zul-Egil|~ Completely chart the sea"],
-			"AllOceanCharting[+]": ["~|Sea Charting#Kharidian Sea|~ Completely chart the sea", "~|Sea Charting#Bay of Sarim|~ Completely chart the sea", "~|Sea Charting#Lumbridge Basin|~ Completely chart the sea", "~|Sea Charting#Mudskipper Sound|~ Completely chart the sea", "~|Sea Charting#Rimmington Strait|~ Completely chart the sea", "~|Sea Charting#Catherby Bay|~ Completely chart the sea", "~|Sea Charting#Brimhaven Passage|~ Completely chart the sea", "~|Sea Charting#Strait of Khazard|~ Completely chart the sea", "~|Sea Charting#Gu'tanoth Bay|~ Completely chart the sea", "~|Sea Charting#Feldip Gulf|~ Completely chart the sea", "~|Sea Charting#Kharazi Strait|~ Completely chart the sea", "~|Sea Charting#Oo'glog Channel|~ Completely chart the sea", "~|Sea Charting#Arrow Passage|~ Completely chart the sea", "~|Sea Charting#Menaphite Sea|~ Completely chart the sea", "~|Sea Charting#The Simian Sea|~ Completely chart the sea", "~|Sea Charting#The Storm Tempor|~ Completely chart the sea", "~|Sea Charting#Turtle Belt|~ Completely chart the sea", "~|Sea Charting#Sea of Shells|~ Completely chart the sea", "~|Sea Charting#Red Reef|~ Completely chart the sea", "~|Sea Charting#Anglerfish's Light|~ Completely chart the sea", "~|Sea Charting#Bay of Elidinis|~ Completely chart the sea", "~|Sea Charting#Tortugan Sea|~ Completely chart the sea", "~|Sea Charting#Pearl Bank|~ Completely chart the sea", "~|Sea Charting#The Lonely Sea|~ Completely chart the sea", "~|Sea Charting#Fortis Bay|~ Completely chart the sea", "~|Sea Charting#Aureum Coast|~ Completely chart the sea", "~|Sea Charting#Wyrm's Waters|~ Completely chart the sea", "~|Sea Charting#Mythic Sea|~ Completely chart the sea", "~|Sea Charting#Breakbone Strait|~ Completely chart the sea", "~|Sea Charting#Backwater|~ Completely chart the sea", "~|Sea Charting#Zul-Egil|~ Completely chart the sea", "~|Sea Charting#The Skullhorde|~ Completely chart the sea", "~|Sea Charting#Sea of Souls|~ Completely chart the sea", "~|Sea Charting#Soul Bay|~ Completely chart the sea", "~|Sea Charting#Barracuda Belt|~ Completely chart the sea", "~|Sea Charting#The Everdeep|~ Completely chart the sea", "~|Sea Charting#Sapphire Sea|~ Completely chart the sea", "~|Sea Charting#Western Gate|~ Completely chart the sea", "~|Sea Charting#Rainbow Reef|~ Completely chart the sea", "~|Sea Charting#Southern Expanse|~ Completely chart the sea", "~|Sea Charting#Sunset Bay|~ Completely chart the sea", "~|Sea Charting#Misty Sea|~ Completely chart the sea", "~|Sea Charting#Dusk's Maw|~ Completely chart the sea", "~|Sea Charting#Great Sound|~ Completely chart the sea", "~|Sea Charting#Crabclaw Bay|~ Completely chart the sea", "~|Sea Charting#Gulf of Kourend|~ Completely chart the sea", "~|Sea Charting#Hosidian Sea|~ Completely chart the sea", "~|Sea Charting#Pilgrims' Passage|~ Completely chart the sea", "~|Sea Charting#Litus Lucis|~ Completely chart the sea", "~|Sea Charting#Porth Neigwl|~ Completely chart the sea", "~|Sea Charting#Tirannwn Bight|~ Completely chart the sea", "~|Sea Charting#Crystal Sea|~ Completely chart the sea", "~|Sea Charting#Porth Gwenith|~ Completely chart the sea", "~|Sea Charting#Piscatoris Sea|~ Completely chart the sea", "~|Sea Charting#Vagabonds Rest|~ Completely chart the sea", "~|Sea Charting#Moonshadow|~ Completely chart the sea", "~|Sea Charting#Fremensund|~ Completely chart the sea", "~|Sea Charting#Grandroot Bay|~ Completely chart the sea", "~|Sea Charting#V's Belt|~ Completely chart the sea", "~|Sea Charting#Fremennik Strait|~ Completely chart the sea", "~|Sea Charting#Idestia Strait|~ Completely chart the sea", "~|Sea Charting#Lunar Bay|~ Completely chart the sea", "~|Sea Charting#Winter's Edge|~ Completely chart the sea", "~|Sea Charting#Lunar Sea|~ Completely chart the sea", "~|Sea Charting#Everwinter Sea|~ Completely chart the sea", "~|Sea Charting#Kannski Tides|~ Completely chart the sea", "~|Sea Charting#Weissmere|~ Completely chart the sea", "~|Sea Charting#Stoneheart Sea|~ Completely chart the sea", "~|Sea Charting#Shiverwake Expanse|~ Completely chart the sea", "~|Sea Charting#Weiss Melt|~ Completely chart the sea"]
+			"AllOceanCharting[+]": ["~|Sea Charting#Kharidian Sea|~ Completely chart the sea", "~|Sea Charting#Bay of Sarim|~ Completely chart the sea", "~|Sea Charting#Lumbridge Basin|~ Completely chart the sea", "~|Sea Charting#Mudskipper Sound|~ Completely chart the sea", "~|Sea Charting#Rimmington Strait|~ Completely chart the sea", "~|Sea Charting#Catherby Bay|~ Completely chart the sea", "~|Sea Charting#Brimhaven Passage|~ Completely chart the sea", "~|Sea Charting#Strait of Khazard|~ Completely chart the sea", "~|Sea Charting#Gu'tanoth Bay|~ Completely chart the sea", "~|Sea Charting#Feldip Gulf|~ Completely chart the sea", "~|Sea Charting#Kharazi Strait|~ Completely chart the sea", "~|Sea Charting#Oo'glog Channel|~ Completely chart the sea", "~|Sea Charting#Arrow Passage|~ Completely chart the sea", "~|Sea Charting#Menaphite Sea|~ Completely chart the sea", "~|Sea Charting#The Simian Sea|~ Completely chart the sea", "~|Sea Charting#The Storm Tempor|~ Completely chart the sea", "~|Sea Charting#Turtle Belt|~ Completely chart the sea", "~|Sea Charting#Sea of Shells|~ Completely chart the sea", "~|Sea Charting#Red Reef|~ Completely chart the sea", "~|Sea Charting#Anglerfish's Light|~ Completely chart the sea", "~|Sea Charting#Bay of Elidinis|~ Completely chart the sea", "~|Sea Charting#Tortugan Sea|~ Completely chart the sea", "~|Sea Charting#Pearl Bank|~ Completely chart the sea", "~|Sea Charting#The Lonely Sea|~ Completely chart the sea", "~|Sea Charting#Fortis Bay|~ Completely chart the sea", "~|Sea Charting#Aureum Coast|~ Completely chart the sea", "~|Sea Charting#Wyrm's Waters|~ Completely chart the sea", "~|Sea Charting#Mythic Sea|~ Completely chart the sea", "~|Sea Charting#Breakbone Strait|~ Completely chart the sea", "~|Sea Charting#Backwater|~ Completely chart the sea", "~|Sea Charting#Zul-Egil|~ Completely chart the sea", "~|Sea Charting#The Skullhorde|~ Completely chart the sea", "~|Sea Charting#Sea of Souls|~ Completely chart the sea", "~|Sea Charting#Soul Bay|~ Completely chart the sea", "~|Sea Charting#Barracuda Belt|~ Completely chart the sea", "~|Sea Charting#The Everdeep|~ Completely chart the sea", "~|Sea Charting#Sapphire Sea|~ Completely chart the sea", "~|Sea Charting#Western Gate|~ Completely chart the sea", "~|Sea Charting#Rainbow Reef|~ Completely chart the sea", "~|Sea Charting#Southern Expanse|~ Completely chart the sea", "~|Sea Charting#Sunset Bay|~ Completely chart the sea", "~|Sea Charting#Misty Sea|~ Completely chart the sea", "~|Sea Charting#Dusk's Maw|~ Completely chart the sea", "~|Sea Charting#Great Sound|~ Completely chart the sea", "~|Sea Charting#Crabclaw Bay|~ Completely chart the sea", "~|Sea Charting#Gulf of Kourend|~ Completely chart the sea", "~|Sea Charting#Hosidian Sea|~ Completely chart the sea", "~|Sea Charting#Pilgrims' Passage|~ Completely chart the sea", "~|Sea Charting#Litus Lucis|~ Completely chart the sea", "~|Sea Charting#Porth Neigwl|~ Completely chart the sea", "~|Sea Charting#Tirannwn Bight|~ Completely chart the sea", "~|Sea Charting#Crystal Sea|~ Completely chart the sea", "~|Sea Charting#Porth Gwenith|~ Completely chart the sea", "~|Sea Charting#Piscatoris Sea|~ Completely chart the sea", "~|Sea Charting#Vagabonds Rest|~ Completely chart the sea", "~|Sea Charting#Moonshadow|~ Completely chart the sea", "~|Sea Charting#Fremensund|~ Completely chart the sea", "~|Sea Charting#Grandroot Bay|~ Completely chart the sea", "~|Sea Charting#V's Belt|~ Completely chart the sea", "~|Sea Charting#Fremennik Strait|~ Completely chart the sea", "~|Sea Charting#Idestia Strait|~ Completely chart the sea", "~|Sea Charting#Lunar Bay|~ Completely chart the sea", "~|Sea Charting#Winter's Edge|~ Completely chart the sea", "~|Sea Charting#Lunar Sea|~ Completely chart the sea", "~|Sea Charting#Everwinter Sea|~ Completely chart the sea", "~|Sea Charting#Kannski Tides|~ Completely chart the sea", "~|Sea Charting#Weissmere|~ Completely chart the sea", "~|Sea Charting#Stoneheart Sea|~ Completely chart the sea", "~|Sea Charting#Shiverwake Expanse|~ Completely chart the sea", "~|Sea Charting#Weiss Melt|~ Completely chart the sea"],
+			"HosidiusDockAccess[+]": ["Access Hosidius Dock by sea", "Access any dock by land"],
+			"RimmingtonDockAccess[+]": ["Access Rimmington Dock by sea", "Access any dock by land"],
+			"ArdougneDockAccess[+]": ["Access Ardougne Dock by sea", "Access any dock by land"],
+			"WitchavenDockAccess[+]": ["Access Witchaven Dock by sea", "Access any dock by land"],
+			"EntranaDockAccess[+]": ["Access Entrana Dock by sea", "Access any dock by land"],
+			"CivitasillaFortisDockAccess[+]": ["Access Civitas illa Fortis Dock by sea", "Access any dock by land"],
+			"CairnIsleDockAccess[+]": ["Access Cairn Isle Dock by sea", "Access any dock by land"],
+			"SunsetCoastDockAccess[+]": ["Access Sunset Coast Dock by sea", "Access any dock by land"],
+			"RuinsofUnkahDockAccess[+]": ["Access Ruins of Unkah Dock by sea", "Access any dock by land"],
+			"VoidKnightsOutpostDockAccess[+]": ["Access Void Knights' Outpost Dock by sea", "Access any dock by land"],
+			"IselofSoulsDockAccess[+]": ["Access Isle of Souls Dock by sea", "Access any dock by land"],
+			"EtceteriaDockAccess[+]": ["Access Etceteria Dock by sea", "Access any dock by land"],
+			"PortTyrasDockAccess[+]": ["Access Port Tyras Dock by sea", "Access any dock by land"],
+			"JatizsoDockAccess[+]": ["Access Jatizso Dock by sea", "Access any dock by land"],
+			"NeitiznotDockAccess[+]": ["Access Neitiznot Dock by sea", "Access any dock by land"],
+			"WaterbirthIslandDockAccess[+]": ["Access Waterbirth Island Dock by sea", "Access any dock by land"],
+			"PiscatorisDockAccess[+]": ["Access Piscatoris Dock by sea", "Access any dock by land"],
+			"LunarIsleDockAccess[+]": ["Access Lunar Isle Dock by sea", "Access any dock by land"],
+			"WeissDockAccess[+]": ["Access Weiss Dock by sea", "Access any dock by land"]
 		},
 		"forceTalisman": {
 			"Nature talisman": {
@@ -266229,8 +266421,7 @@
 			"W1": [
 				"11056-W1",
 				"11313-W1",
-				"11313-W3",
-				"11568-W1"
+				"11313-W3"
 			]
 		},
 		"11313": {
@@ -266244,12 +266435,10 @@
 				"11312-W1"
 			],
 			"W2": [
-				"11314-W1",
-				"11569-W1"
+				"11314-W1"
 			],
 			"W3": [
-				"11312-W1",
-				"11569-W4"
+				"11312-W1"
 			]
 		},
 		"11314": {
@@ -266644,7 +266833,6 @@
 				"11567-2"
 			],
 			"W1": [
-				"11312-W1",
 				"11569-W2",
 				"11569-W3",
 				"11569-W4",
@@ -266667,8 +266855,6 @@
 				"11825-1"
 			],
 			"W1": [
-				"11313-W2",
-				"11570-W1",
 				"11825-W1"
 			],
 			"W2": [
@@ -266679,7 +266865,6 @@
 				"11568-W1"
 			],
 			"W4": [
-				"11313-W3",
 				"11568-W1"
 			]
 		},
@@ -266693,7 +266878,6 @@
 			],
 			"W1": [
 				"11314-W1",
-				"11569-W1",
 				"11571-W1"
 			]
 		},
@@ -266964,7 +267148,6 @@
 				"11822-2"
 			],
 			"W1": [
-				"11822-W1",
 				"12077-W1"
 			],
 			"W2": [
@@ -266982,7 +267165,6 @@
 				"11821-1"
 			],
 			"W1": [
-				"11821-W1",
 				"11823-W1",
 				"12078-W1"
 			]
@@ -267303,7 +267485,6 @@
 		"12077": {
 			"W1": [
 				"11821-W1",
-				"12078-W1",
 				"12333-W1"
 			],
 			"W2": [
@@ -267318,7 +267499,6 @@
 			],
 			"W1": [
 				"11822-W1",
-				"12077-W1",
 				"12079",
 				"12334"
 			],
@@ -267667,7 +267847,6 @@
 		"12333": {
 			"W1": [
 				"12077-W1",
-				"12334",
 				"12589-W1",
 				"12589-W2"
 			],
@@ -267680,7 +267859,6 @@
 		"12334": {
 			"0": [
 				"12078-W1",
-				"12333-W1",
 				"12335-W1",
 				"12335-W2",
 				"12590-W1"
@@ -268011,8 +268189,7 @@
 				"12845-2"
 			],
 			"W1": [
-				"12333-W1",
-				"12590-W1"
+				"12333-W1"
 			],
 			"W2": [
 				"12333-W1"
@@ -268034,8 +268211,7 @@
 				"12846-1"
 			],
 			"W1": [
-				"12334",
-				"12589-W1"
+				"12334"
 			]
 		},
 		"12591": {
@@ -268415,8 +268591,7 @@
 			],
 			"W1": [
 				"12592-W1",
-				"12849-W1",
-				"13104-W1"
+				"12849-W1"
 			]
 		},
 		"12849": {
@@ -268438,8 +268613,7 @@
 				"12850-1"
 			],
 			"W1": [
-				"12848-W1",
-				"13105-W1"
+				"12848-W1"
 			]
 		},
 		"12850": {
@@ -268788,7 +268962,6 @@
 				"13360"
 			],
 			"W1": [
-				"12848-W1",
 				"13105-W1"
 			]
 		},
@@ -268804,7 +268977,6 @@
 				"13361-3"
 			],
 			"W1": [
-				"12849-W1",
 				"13104-W1"
 			]
 		},
@@ -271336,7 +271508,7 @@
 		"7728-1": ["~|Pandemonium|~ Complete the quest"],
 		"7743-1": ["~|Pandemonium|~ Complete the quest"],
 		"8232-1": ["~|Pandemonium|~ Complete the quest"],
-		"8234-1": ["~|Pandemonium|~ Complete the quest"],
+		"8234-1": ["~|Pandemonium|~ 4"],
 		"8241-1": ["~|Pandemonium|~ Complete the quest"],
 		"8249-1": ["~|Pandemonium|~ Complete the quest"],
 		"8503-1": ["~|Pandemonium|~ Complete the quest"],

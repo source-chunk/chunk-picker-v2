@@ -524,13 +524,13 @@ let calcChallenges = function(chunks, baseChunkData) {
                     }
                     chunkInfo['codeItems']['tasksPlus'].hasOwnProperty(subTask) && chunkInfo['codeItems']['tasksPlus'][subTask].forEach((plusTask) => {
                         if (!!chunkInfo['challenges']['Quest'][plusTask] && chunkInfo['challenges']['Quest'][currNameArr[i]]['BaseQuest'] === chunkInfo['challenges']['Quest'][plusTask]['BaseQuest']) {
-                            manualTasks['Quest'][plusTask] = true;
+                            manualTasks['Quest'][plusTask] = false;
                             currNameArr.push(plusTask);
                         }
                     });
                 } else {
                     if (!!chunkInfo['challenges']['Quest'][subTask] && chunkInfo['challenges']['Quest'][currNameArr[i]]['BaseQuest'] === chunkInfo['challenges']['Quest'][subTask]['BaseQuest']) {
-                        manualTasks['Quest'][subTask] = true;
+                        manualTasks['Quest'][subTask] = false;
                         currNameArr.push(subTask);
                     }
                 }
@@ -2848,8 +2848,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                                         }
                                         dropTablesGlobal[thievingExtra + output][item][quantityDrop] = findFraction(parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1]));
                                     });
-                                } else if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(rareDropNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) && !chunkInfo['challenges'][skill][challenge]['Secondary'] && !chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
-                                    if (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || (highestDropRate * (parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]))) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))) {
+                                } else if (chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(rareDropNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))))) {
+                                    if ((chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]] === 'Always' || (parseInt(secondaryPrimaryNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].replaceAll('/', '').replaceAll('@', ''))) || (highestDropRate * (parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][Object.keys(chunkInfo['skillItems'][skill][output][item])[0]].split('/')[1]))) > (parseFloat(secondaryPrimaryNum.split('/')[0].replaceAll('~', '')) / parseFloat(secondaryPrimaryNum.split('/')[1]))) && !chunkInfo['challenges'][skill][challenge]['Secondary'] && !chunkInfo['challenges'][skill][challenge]['ForcedSecondary']) {
                                         outputs[item][challenge] = 'primary-' + skill;
                                     } else {
                                         outputs[item][challenge] = 'secondary-' + skill;
