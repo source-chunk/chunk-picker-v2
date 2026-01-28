@@ -28245,6 +28245,14 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Shantay Pass access": {
+				"Chunks": ["13104-1"],
+				"Not F2P": true
+			},
+			"Unkah boat trip access": {
+				"Chunks": ["12588-1", "13105-1"],
+				"Not F2P": true
+			},
 			"Buy kraken ink stout from Chartin' Charles McAtless": {
 				"NPCs": ["Chartin' Charles McAtless"],
 				"Tasks": {
@@ -46901,7 +46909,7 @@
 			"Hunter's End": {
 				"UnlocksArea": true,
 				"Tasks": {
-					"~|Wilderness Diary#Medium|~ Complete the Medium Diary": "Diary"
+					"~|Wilderness Diary#Hard|~ Complete the Hard Diary": "Diary"
 				},
 				"Not F2P": true
 			},
@@ -46915,6 +46923,9 @@
 			"Callisto's Den": {
 				"UnlocksArea": true,
 				"Chunks": ["Escape Caves"],
+				"Tasks": {
+					"~|Wilderness Diary#Medium|~ Complete the Medium Diary": "Diary"
+				},
 				"Not F2P": true
 			},
 			"Ice Queen's Lair": {
@@ -47527,13 +47538,16 @@
 			"Skeletal Tomb": {
 				"UnlocksArea": true,
 				"Tasks": {
-					"~|Wilderness Diary#Medium|~ Complete the Medium Diary": "Diary"
+					"~|Wilderness Diary#Hard|~ Complete the Hard Diary": "Diary"
 				},
 				"Not F2P": true
 			},
 			"Vet'ion's Rest": {
 				"UnlocksArea": true,
 				"Chunks": ["Escape Caves"],
+				"Tasks": {
+					"~|Wilderness Diary#Medium|~ Complete the Medium Diary": "Diary"
+				},
 				"Not F2P": true
 			},
 			"Sophanem Dungeon": {
@@ -47831,13 +47845,16 @@
 			"Web Chasm": {
 				"UnlocksArea": true,
 				"Tasks": {
-					"~|Wilderness Diary#Medium|~ Complete the Medium Diary": "Diary"
+					"~|Wilderness Diary#Hard|~ Complete the Hard Diary": "Diary"
 				},
 				"Not F2P": true
 			},
 			"Silk Chasm": {
 				"UnlocksArea": true,
 				"Chunks": ["Escape Caves"],
+				"Tasks": {
+					"~|Wilderness Diary#Medium|~ Complete the Medium Diary": "Diary"
+				},
 				"Not F2P": true
 			},
 			"Werewolf Agility Dungeon": {
@@ -59799,11 +59816,22 @@
 				"Priority": 1,
 				"NoPet": true
 			},
+			"Loot a ~|chest (Rogues' Castle)|~ without the diary": {
+				"Objects": ["Chest (Rogues' Castle)"],
+				"Level": 84,
+				"Primary": true,
+				"Priority": 1,
+				"NoPet": true
+			},
 			"Loot a ~|chest (Rogues' Castle)|~": {
 				"Objects": ["Chest (Rogues' Castle)"],
 				"Level": 84,
 				"Output": "Chest (Rogues' Castle)",
 				"Primary": true,
+				"Priority": 2,
+				"Tasks": {
+					"~|Wilderness Diary#Medium|~ Complete the Medium Diary": "Diary"
+				},
 				"NoPet": true
 			},
 			"Loot a ~|chest (Rogues' Castle, inside)|~": {
@@ -71988,6 +72016,12 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Boat bottle (empty)"],
+				"Not F2P": true
+			},
+			"(Sailing Miscellaneous) Obtain a ~|facility bottle (empty)|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Facility bottle (empty)"],
 				"Not F2P": true
 			},
 			"(Sea Treasures) Obtain a ~|medallion fragment#1|~": {
@@ -84859,9 +84893,11 @@
 				"Not F2P": true
 			},
 			"~|Desert Diary#Easy|~ Task 4": {
-				"Description": "Enter the Desert with a set of desert robes equipped.",
-				"Chunks": ["ShantayChunks[+]"],
+				"Description": "Enter the Desert with a set of desert robes equipped (or take the boat from Al Kharid to the Ruins of Unkah with the robes equipped).",
 				"Items": ["Desert shirt", "Desert robe", "Desert boots"],
+				"Tasks": {
+					"Desert Diary Easy 4[+]": "Nonskill"
+				},
 				"BaseQuest": "Desert Diary",
 				"Not F2P": true
 			},
@@ -172649,7 +172685,6 @@
 			"Woodcutting guild[+]": ["6198-1", "6454-1"],
 			"X Marks the Spot 3[+]": ["12338-1", "12339"],
 			"ArdyHard9[+]": ["10545-1", "10288-1", "10036-2"],
-			"ShantayChunks[+]": ["13104-1", "12588-1"],
 			"DesertChunks[+]": ["12587-1", "12857", "12588-1", "12588-2", "12589-1", "12590-1", "12590-2", "12590-3", "12591-1", "12843", "12844", "12845-1", "12845-2", "12846-1", "12846-2", "12846-3", "12847-1", "12848-1", "13099-1", "13098-1", "13098-2", "13099-2", "13100-1", "13100-2", "13101", "13102-1", "13102-2", "13102-3", "13102-4", "13102-5", "13103", "13104-1", "13354-1", "13354-2", "13355", "13356-1", "13356-2", "13357-1", "13357-2", "13358-1", "13358-2", "13359-1", "13359-2", "13359-3", "13360", "13611", "13612-1", "13612-2", "13613", "13614", "13615", "13616", "13617-2", "13869", "13870", "13871", "13872", "13873-2"],
 			"FaladorChunks[+]": ["11827", "11828-1", "11829-1", "12084-1", "12084-2"],
 			"RockCrabChunks[+]": ["10042-1", "10554-1", "10810-1"],
@@ -172891,7 +172926,6 @@
 			"Woodcutting guild[+]": "Any woodcutting guild chunk",
 			"X Marks the Spot 3[+]": "Either chunk for X Marks the Spot 3",
 			"ArdyHard9[+]": "Any chunk for Ardougne Hard Diary task 9",
-			"ShantayChunks[+]": "Any chunk with a Shantay entrance",
 			"DesertChunks[+]": "Any desert chunk",
 			"FaladorChunks[+]": "Any chunk with a Falador guard",
 			"RockCrabChunks[+]": "Any Fremennik chunk with a rock crab",
@@ -174649,7 +174683,8 @@
 			"WaterbirthIslandDockAccess[+]": ["Access Waterbirth Island Dock by sea", "Access any dock by land"],
 			"PiscatorisDockAccess[+]": ["Access Piscatoris Dock by sea", "Access any dock by land"],
 			"LunarIsleDockAccess[+]": ["Access Lunar Isle Dock by sea", "Access any dock by land"],
-			"WeissDockAccess[+]": ["Access Weiss Dock by sea", "Access any dock by land"]
+			"WeissDockAccess[+]": ["Access Weiss Dock by sea", "Access any dock by land"],
+			"Desert Diary Easy 4[+]": ["Shantay Pass access", "Unkah boat trip access"]
 		},
 		"forceTalisman": {
 			"Nature talisman": {
@@ -221867,10 +221902,12 @@
 		"Sunlight's Sanctum": {
 			"Beer": true,
 			"Blackbird red": true,
+			"Brandy": true,
 			"Cider": true,
 			"Cup of tea": true,
 			"Eclipse red": true,
 			"Gin": true,
+			"Greenman's ale": true,
 			"Jug of wine": true,
 			"Meat pie": true,
 			"Metztonalli white": true,
@@ -233689,6 +233726,9 @@
 				"Emerald ring": {
 					"1": "300/2218"
 				},
+				"Facility bottle (empty)": {
+					"1": "Unknown"
+				},
 				"Giant seaweed": {
 					"1": "50/2218"
 				},
@@ -233750,6 +233790,9 @@
 				},
 				"Emerald ring": {
 					"1": "50/1036"
+				},
+				"Facility bottle (empty)": {
+					"1": "Unknown"
 				},
 				"Gold ring": {
 					"1": "200/1036"
@@ -233825,6 +233868,9 @@
 				"Dragon cannonball": {
 					"1": "1/3000"
 				},
+				"Facility bottle (empty)": {
+					"1": "Unknown"
+				},
 				"Green d'hide body": {
 					"1": "100/2431"
 				},
@@ -233883,6 +233929,9 @@
 				},
 				"Ensouled troll head": {
 					"1": "50/2661"
+				},
+				"Facility bottle (empty)": {
+					"1": "Unknown"
 				},
 				"Farseer helm": {
 					"1": "8/2661"

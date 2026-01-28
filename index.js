@@ -915,7 +915,7 @@ let settings = {
 let settingNames = {
     "highvis": "Display the chunk map with higher visibility, allowing you to see better into locked chunks, with thinner chunk borders, more see-through chunk coloring, and more",
     "roll2": "Enable the roll 2 button, allowing you to roll two chunks and pick between the two",
-    "unpick": "Enable the unpick chunk button, allowing you to unpick, and therefore re-lock, a randomly selected unlocked chunk (useful for forfeits)",
+    "unpick": "Enable the unpick chunk button, allowing you to unpick, and therefore re-lock, a randomly selected unlocked chunk (useful for forfeits). <b>NOTE: This button does not undo a chunk roll</b>",
     "recent": "<b class='noscroll'>[Recent Chunks]</b> The recent chunks panel shows you the 5 most recently rolled chunks on your map, the dates you rolled them, how long it's been (in days) since your last roll, and more",
     "info": "<b class='noscroll'>[Chunk Info]</b> The chunk info panel shows you an array of information on every chunk in the game (monsters, npcs, item spawns, shops, and more). Hint: Right-click a chunk to bring up info on that chunk",
     "chunkTasks": "<b class='noscroll'>[Chunk Tasks]</b> The chunk tasks panel shows you an automatically made list of active tasks you need to do to finish your chunk. This is essential for any Chunker to keep track of what needs to get done",
@@ -1507,7 +1507,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.20';
+let currentVersion = '6.9.21';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'difference';
 
@@ -1676,7 +1676,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.20";
+mapImg.src = "osrs_world_map.png?v=6.9.21";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3588,7 +3588,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.20");
+        myWorker = new Worker("./worker.js?v=6.9.21");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3892,8 +3892,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.20");
-let myWorker2 = new Worker("./worker.js?v=6.9.20");
+let myWorker = new Worker("./worker.js?v=6.9.21");
+let myWorker2 = new Worker("./worker.js?v=6.9.21");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -3939,8 +3939,8 @@ let workerOnMessage = function(e) {
                 Object.keys(e.data[12]).filter(area => { return e.data[12][area] === true }).forEach((area) => {
                     futurePossibleAreas[area] = true;
                 });
-                let challengeStr = calcFutureChallenges2(e.data[1], e.data[2]);
-                expandChallengeStr = challengeStr;
+                let [challengeStr, challengeStrFormatted] = calcFutureChallenges2(e.data[1], e.data[2]);
+                expandChallengeStr = challengeStrFormatted.replaceAll('No new chunk tasks', 'No potential chunk tasks');
                 $('.panel-challenges').html(challengeStr || 'None');
                 $('.expand').show();
             }
@@ -3950,7 +3950,7 @@ let workerOnMessage = function(e) {
             workersOut['current'] = false;
             workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
             if (settings['newTasks'] && chunkJustRolled) {
-                openNewTasksModal(calcFutureChallenges2(e.data[1], e.data[2]).replaceAll(", 'future'", ", ''").replaceAll('</span>,', '</span><br />') || 'None');
+                openNewTasksModal(calcFutureChallenges2(e.data[1], e.data[2])[1].replaceAll(", 'future'", ", ''"));
             }
             globalValids = e.data[1];
             baseChunkData = e.data[2];
@@ -4718,6 +4718,7 @@ let openNewTasksModal = function(data, expandFuture) {
     $('.new-tasks-title').text(expandFuture ? 'Potential Chunk Tasks' : 'New Chunk Tasks');
     $('.new-tasks-data').html(data);
     $('#newTasksModal').show();
+    document.getElementById('new-tasks-data').scrollTop = 0;
     modalOutsideTime = Date.now();
 }
 
@@ -6598,10 +6599,12 @@ let setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
                 if (!activeTasks['Extra']) {
                     activeTasks['Extra'] = {};
                 }
-                if (chunkInfo['challenges']['Extra'][challenge]['Label'] === 'Every Drop') {
+                if (!!chunkInfo['challenges']['Extra'][challenge] && chunkInfo['challenges']['Extra'][challenge]['Label'] === 'Every Drop') {
                     activeTasks['Extra'][challenge.split('|')[1]] = chunkInfo['challenges']['Extra'][challenge]['Label'];
-                } else {
+                } else if (!!chunkInfo['challenges']['Extra'][challenge] && chunkInfo['challenges']['Extra'][challenge]['Label'] !== 'Every Drop') {
                     activeTasks['Extra'][challenge] = chunkInfo['challenges']['Extra'][challenge]['Label'];
+                } else {
+                    activeTasks['Extra'][challenge] = '???';
                 }
             }
         }
@@ -6834,7 +6837,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.20");
+    myWorker2 = new Worker("./worker.js?v=6.9.21");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -6845,6 +6848,7 @@ let calcFutureChallenges = function() {
 let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
     let highestChallenge = {};
     let challengeStr = '';
+    let challengeStrFormatted = '';
     let clueData = {
         'beginner': 0,
         'easy': 0,
@@ -6853,8 +6857,8 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
         'elite': 0,
         'master': 0
     };
-
-    Object.keys(valids).forEach((skill) => {
+    let skillOrder = [...skillNames.sort(), 'BiS', 'Quest', 'Diary', 'Extra', 'Nonskill'];
+    Object.keys(valids).sort((a, b) => skillOrder.indexOf(a) - skillOrder.indexOf(b)).forEach((skill) => {
         let highestCompletedLevel = 0;
         let highestCompletedLevelBoost = 0;
         !!completedChallenges[skill] && Object.keys(completedChallenges[skill]).forEach((name) => {
@@ -6926,6 +6930,36 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
             }
         }
         checkPrimaryMethod(skill, valids, baseChunkDataLocal) && Object.keys(valids[skill]).forEach((challenge) => {
+            if (!chunkInfo['challenges'][skill].hasOwnProperty(challenge)) {
+                if (skill === 'BiS') {
+                    chunkInfo['challenges'][skill][challenge] = {
+                        'ItemsDetails': [challenge.split('|')[1].charAt(0).toUpperCase() + challenge.split('|')[1].slice(1)],
+                        'Label': skill
+                    }
+                } else if (skill === 'Extra') {
+                    if (challenge.includes('Kill X')) {
+                        chunkInfo['challenges'][skill][challenge] = {
+                            'MonstersDetails': [challenge.split('|')[1].charAt(0).toUpperCase() + challenge.split('|')[1].slice(1)],
+                            'Label': skill
+                        }
+                    } else if (challenge.match(/.*: ~\|.*\|~ \(.*\)/g)) {
+                        chunkInfo['challenges'][skill][challenge] = {
+                            'ItemsDetails': [challenge.split('|')[1].charAt(0).toUpperCase() + challenge.split('|')[1].slice(1)],
+                            'Label': skill
+                        }
+                    }
+                }
+            }
+            let challengeLabelLine = '';
+            if (skillNames.includes(skill) && !!chunkInfo['challenges'][skill][challenge]) {
+                challengeLabelLine = `[${chunkInfo['challenges'][skill][challenge]['Level']}] ${skill}: `;
+            } else if (skill === 'BiS' || skill === 'Extra') {
+                challengeLabelLine = `[${chunkInfo['challenges'][skill][challenge]['Label']}]: `;
+            } else if (skill === 'Quest' || skill === 'Diary') {
+                challengeLabelLine = `[${skill}]: `;
+            } else {
+                challengeLabelLine = `${skill}: `;
+            }
             let bestBoost = 0;
             if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][challenge].hasOwnProperty('NoBoost')) {
                 let ownsCrystalSaw = false;
@@ -6963,6 +6997,7 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
                             });
                             if (tempValid) {
                                 challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">${challenge.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${(chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', '${skill}', 'future')"><i class="challenge-icon fa-solid fa-info-circle noscroll"></i></span></span>, `;
+                                challengeStrFormatted += `<div class="new-task-row challenge ${skill + '-challenge'} noscroll"><b>${challengeLabelLine}</b>${challenge.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${(chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', '${skill}', 'future')"><i class="challenge-icon fa-solid fa-info-circle noscroll"></i></span></div>`;
                             }
                         } else {
                             let tempTempValid;
@@ -6973,6 +7008,7 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
                             }
                             if (tempTempValid) {
                                 challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">${challenge.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${(chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', '${skill}', 'future')"><i class="challenge-icon fa-solid fa-info-circle noscroll"></i></span></span>, `;
+                                challengeStrFormatted += `<div class="new-task-row challenge ${skill + '-challenge'} noscroll"><b>${challengeLabelLine}</b>${challenge.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${(chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') ? ' complete quest' : challenge.split('~')[2])} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', '${skill}', 'future')"><i class="challenge-icon fa-solid fa-info-circle noscroll"></i></span></div>`;
                             }
                         }
                     }
@@ -7020,18 +7056,52 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
         !highestChallenge[skill] || (chunkInfo['challenges'][skill][highestChallenge[skill]]['Level'] <= 1 && !chunkInfo['challenges'][skill][highestChallenge[skill]]['Primary']) && (highestChallenge[skill] = undefined);
         if (!!highestChallenge[skill] && skill !== 'Quest' && skill !== 'Nonskill') {
             if (skill !== 'Quest' && skill !== 'Diary' && skill !== 'BiS' && skill !== 'Extra' && rules["Show Skill Tasks"]) {
+                if (!chunkInfo['challenges'][skill].hasOwnProperty(highestChallenge[skill])) {
+                    if (skill === 'BiS') {
+                        chunkInfo['challenges'][skill][highestChallenge[skill]] = {
+                            'ItemsDetails': [highestChallenge[skill].split('|')[1].charAt(0).toUpperCase() + highestChallenge[skill].split('|')[1].slice(1)],
+                            'Label': skill
+                        }
+                    } else if (skill === 'Extra') {
+                        if (highestChallenge[skill].includes('Kill X')) {
+                            chunkInfo['challenges'][skill][highestChallenge[skill]] = {
+                                'MonstersDetails': [highestChallenge[skill].split('|')[1].charAt(0).toUpperCase() + highestChallenge[skill].split('|')[1].slice(1)],
+                                'Label': skill
+                            }
+                        } else if (highestChallenge[skill].match(/.*: ~\|.*\|~ \(.*\)/g)) {
+                            chunkInfo['challenges'][skill][highestChallenge[skill]] = {
+                                'ItemsDetails': [highestChallenge[skill].split('|')[1].charAt(0).toUpperCase() + highestChallenge[skill].split('|')[1].slice(1)],
+                                'Label': skill
+                            }
+                        }
+                    }
+                }
+                let challengeLabelLine = '';
+                if (skillNames.includes(skill) && !!chunkInfo['challenges'][skill][highestChallenge[skill]]) {
+                    challengeLabelLine = `[${chunkInfo['challenges'][skill][highestChallenge[skill]]['Level']}] ${skill}: `;
+                } else if (skill === 'BiS' || skill === 'Extra') {
+                    challengeLabelLine = `[${chunkInfo['challenges'][skill][highestChallenge[skill]]['Label']}]: `;
+                } else if (skill === 'Quest' || skill === 'Diary') {
+                    challengeLabelLine = `[${skill}]: `;
+                } else {
+                    challengeLabelLine = `${skill}: `;
+                }
                 challengeStr += `<span class="challenge ${skill + '-challenge'} noscroll">${highestChallenge[skill].split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((highestChallenge[skill].split('|')[1]))}" target="_blank">${highestChallenge[skill].split('~')[1].split('|').join('')}</a>${highestChallenge[skill].split('~')[2]} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(highestChallenge[skill])}', '${skill}', 'future')"><i class="challenge-icon fa-solid fa-info-circle noscroll"></i></span></span>, `;
+                challengeStrFormatted += `<div class="new-task-row challenge ${skill + '-challenge'} noscroll"><b>${challengeLabelLine}</b>${highestChallenge[skill].split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((highestChallenge[skill].split('|')[1]))}" target="_blank">${highestChallenge[skill].split('~')[1].split('|').join('')}</a>${highestChallenge[skill].split('~')[2]} <span class='noscroll' onclick="showDetails('${encodeRFC5987ValueChars(highestChallenge[skill])}', '${skill}', 'future')"><i class="challenge-icon fa-solid fa-info-circle noscroll"></i></span></div>`;
             }
         }
     });
     challengeStr.length > 0 && (challengeStr = challengeStr.substring(0, challengeStr.length - 2));
-    return challengeStr;
+    if (challengeStrFormatted.length === 0) {
+        challengeStrFormatted = `<div class="noscroll results">No new chunk tasks</div>`;
+    }
+    return [challengeStr, challengeStrFormatted];
 }
 
 // Opens the expanded future challenges window
 let expandFutureChallenges = function(event) {
     event.stopPropagation();
-    openNewTasksModal(expandChallengeStr.replaceAll('</span>,', '</span><br />') || 'None', true);
+    openNewTasksModal(expandChallengeStr.replaceAll('<span class="challenge', '<div class="new-task-row challenge').replaceAll('</span>,', '</div>'), true);
 }
 
 // Hides the chunkinfo sidebar
@@ -8476,6 +8546,7 @@ let openUserTasks = function() {
     });
     $('#usertasks-level-input > input').val(1);
     $('#usertasks-name-input > input').val('');
+    $('#usertasks-boost-dropdown').val('yes');
     $('#userTaskModal').show();
     modalOutsideTime = Date.now();
 }
@@ -8531,7 +8602,7 @@ let showUserTasksList = function() {
     $('.usertasks-list-data').empty();
     !!userTasks && Object.keys(userTasks).forEach((skill) => {
         !!userTasks[skill] && Object.keys(userTasks[skill]).forEach((challenge) => {
-            $('.usertasks-list-data').append(`<div class="noscroll result-item"><b>${skill === 'Extra' ? '[Custom Tasks]' : `[${userTasks[skill][challenge]}] ${skill}:`}</b> ${challenge.replaceAll(/~/g, '').replaceAll(/\|/g, '')}<span onclick="showDeleteUserTaskConfirmation('${encodeRFC5987ValueChars(challenge)}', '${skill}', '')"><i class="info-icon fa-solid fa-trash-alt"></i></span></div>`);
+            $('.usertasks-list-data').append(`<div class="noscroll result-item"><b>${skill === 'Extra' ? '[Custom Tasks]' : `[${userTasks[skill][challenge].toString().split('~')[0]}] ${skill}:`}</b> ${challenge.replaceAll(/~/g, '').replaceAll(/\|/g, '')}<span onclick="showDeleteUserTaskConfirmation('${encodeRFC5987ValueChars(challenge)}', '${skill}', '')"><i class="info-icon fa-solid fa-trash-alt"></i></span></div>`);
         });
     });
     if ($('.usertasks-list-data').children().length === 0) {
@@ -8545,6 +8616,7 @@ let userTasksSkillChange = function() {
     userTasksSkillValid = val !== 'Select a skill';
     userTasksMaxLevel = val === 'Combat' ? 126 : 99;
     $('#usertasks-level-input > input').attr({ 'disabled': !(val !== 'Select a skill' && val !== 'Other'), 'max': userTasksMaxLevel });
+    $('#usertasks-boost-dropdown').attr({ 'disabled': !(val !== 'Select a skill' && val !== 'Other') });
     checkUserTasksValid();
 }
 
@@ -8582,6 +8654,7 @@ let addUserTask = function(close) {
         }
         let skill = $('#usertasks-skill-dropdown').val();
         let level = parseInt($('#usertasks-level-input > input').val());
+        let canBoost = $('#usertasks-boost-dropdown').val() === 'yes';
         let name = DOMPurify.sanitize($('#usertasks-name-input > input').val() + '~||~', { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
         if (skill === 'Other') {
             skill = 'Extra';
@@ -8591,7 +8664,7 @@ let addUserTask = function(close) {
                 if (!userTasks[skill]) {
                     userTasks[skill] = {};
                 }
-                userTasks[skill][name] = skill !== 'Extra' ? level : true;
+                userTasks[skill][name] = skill !== 'Extra' ? (level + (canBoost ? '' : '~')) : true;
                 if (!chunkInfo['challenges'][skill]) {
                     chunkInfo['challenges'][skill] = {};
                 }
@@ -8601,6 +8674,7 @@ let addUserTask = function(close) {
                 }
                 if (skill !== 'Extra') {
                     chunkInfo['challenges'][skill][name]['Level'] = level;
+                    !canBoost && (chunkInfo['challenges'][skill][name]['NoBoost'] = true);
                 }
                 calcCurrentChallengesCanvas(true);
                 setData();
@@ -8624,7 +8698,9 @@ let loadUserTasks = function() {
                 'Permanent': false
             }
             if (skill !== 'Extra') {
-                chunkInfo['challenges'][skill][name]['Level'] = userTasks[skill][name];
+                let levelSplit = userTasks[skill][name].toString().split('~');
+                chunkInfo['challenges'][skill][name]['Level'] = parseInt(levelSplit[0]);
+                levelSplit.length > 1 && (chunkInfo['challenges'][skill][name]['NoBoost'] = true);
             }
         });
     });

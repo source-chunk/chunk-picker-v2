@@ -4140,6 +4140,7 @@
   "Loot a ~|chest (Dorgesh-Kaan Average)|~": "t_3530",
   "Loot a ~|chest (Dorgesh-Kaan Rich)|~": "t_3531",
   "Loot a ~|chest (Isle of Souls Dungeon)|~": "t_3532",
+  "Loot a ~|chest (Rogues' Castle)|~ without the diary": "t_49373",
   "Loot a ~|chest (Rogues' Castle)|~": "t_3533",
   "Loot a ~|chest (Rogues' Castle, inside)|~": "t_3534",
   "Loot a ~|chest (nature runes)|~": "t_3535",
@@ -6035,6 +6036,7 @@
   "(Sailing Miscellaneous) Obtain a ~|bottled storm|~": "t_47132",
   "(Sailing Miscellaneous) Obtain a ~|dragon cannon barrel|~": "t_47133",
   "(Sailing Miscellaneous) Obtain a ~|boat bottle (empty)|~": "t_47134",
+  "(Sailing Miscellaneous) Obtain a ~|facility bottle (empty)|~": "t_49374",
   "(Sea Treasures) Obtain a ~|medallion fragment#1|~": "t_47135",
   "(Sea Treasures) Obtain a ~|medallion fragment#2|~": "t_47136",
   "(Sea Treasures) Obtain a ~|medallion fragment#3|~": "t_47137",
@@ -48097,10 +48099,12 @@
   "Sulisal's Superb Fishing Store: ~|Small fishing net|~": "t_46173",
   "Sunlight's Sanctum: ~|Beer|~": "t_44533",
   "Sunlight's Sanctum: ~|Blackbird red|~": "t_44534",
+  "Sunlight's Sanctum: ~|Brandy|~": "t_49375",
   "Sunlight's Sanctum: ~|Cider|~": "t_44535",
   "Sunlight's Sanctum: ~|Cup of tea|~": "t_44536",
   "Sunlight's Sanctum: ~|Eclipse red|~": "t_44537",
   "Sunlight's Sanctum: ~|Gin|~": "t_44538",
+  "Sunlight's Sanctum: ~|Greenman's ale|~": "t_49376",
   "Sunlight's Sanctum: ~|Jug of wine|~": "t_44539",
   "Sunlight's Sanctum: ~|Meat pie|~": "t_44540",
   "Sunlight's Sanctum: ~|Metztonalli white|~": "t_44541",
@@ -49074,5 +49078,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49373
+  "currentNextIndex": 49377
 }

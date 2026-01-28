@@ -627,6 +627,7 @@ const modalContents = {
         <div id="usertasks-body" class="usertasks-body noscroll">
             <div id="usertasks-dropdown-container" class="usertasks-dropdown-container noscroll" onchange="userTasksSkillChange()"><div>Skill:</div><select id="usertasks-skill-dropdown"></select></div>
             <div id="usertasks-level-input" class="usertasks-level-input noscroll"><div>Skill Level:</div><input class='usertasks-input' onchange="userTasksLevelChange()" type="number" value="1" min="1" max="99" disabled /></div>
+            <div id="usertasks-dropdown-container" class="usertasks-dropdown-container noscroll" onchange="userTasksSkillChange()"><div>Is task boostable:</div><select id="usertasks-boost-dropdown" disabled><option value="yes">Yes</option><option value="no">No</option></select></div>
             <div id="usertasks-name-input" class="usertasks-name-input noscroll"><div>Task Name:</div><input class='usertasks-input' oninput="userTasksNameChange()" placeholder='Task Name' autocomplete="off" /></div>
         </div>
         <div id="usertasks-data" class="usertasks-data noscroll"></div>
