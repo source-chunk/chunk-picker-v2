@@ -1507,7 +1507,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.21';
+let currentVersion = '6.9.22';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'difference';
 
@@ -1676,7 +1676,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.21";
+mapImg.src = "osrs_world_map.png?v=6.9.22";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3588,7 +3588,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.21");
+        myWorker = new Worker("./worker.js?v=6.9.22");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3892,8 +3892,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.21");
-let myWorker2 = new Worker("./worker.js?v=6.9.21");
+let myWorker = new Worker("./worker.js?v=6.9.22");
+let myWorker2 = new Worker("./worker.js?v=6.9.22");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6779,6 +6779,7 @@ let expandActive = function(subTab, isSub) {
         $('.challenge.' + subTab + '-challenge').addClass(!isSub ? 'stay-hidden' : 'stay-hidden-sub');
         !isSub && $('.submarker-' + subTab).addClass('stay-hidden-sub');
     }
+    setData();
 }
 
 // Toggles the checkbox state of subtasks
@@ -6837,7 +6838,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.21");
+    myWorker2 = new Worker("./worker.js?v=6.9.22");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -10077,12 +10078,14 @@ let viewPrimaryMethodsOrTasks = function(skill, showTasks) {
     methodsModalOpen = true;
     $('.methods-data').empty();
     if (showTasks) {
+        $('.methods-topbar').addClass('show-tasks');
         let completedNum = checkedAllTasks.hasOwnProperty(skill) ? Math.min(Object.keys(checkedAllTasks[skill]).filter(task => globalValids[skill].hasOwnProperty(task) && (!backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task))).length, Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length) : 0;
         $('.methods-topbar').html(`${skill} Tasks <span class='noscroll ${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > completedNum ? 'yellow' : 'green'}'>(${completedNum}/${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length})</span><i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeMethods()"></i>`);
         !!globalValids[skill] && Object.keys(globalValids[skill]).sort(function(a, b) { return globalValids[skill][a] - globalValids[skill][b] }).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).forEach((task) => {
             $('.methods-data').append(`<div class='noscroll skill-method'><span><input class="noscroll" ${checkedAllTasks[skill] && checkedAllTasks[skill][task] && "checked"} ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''} type="checkbox" onclick="checkOffAllTask('${skill}', '${encodeRFC5987ValueChars(task)}')" /></span><span class='skill-method-text'>[${globalValids[skill][task]}]: ${task.includes('~') ? `${task.replaceAll('*', '').split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((task.replaceAll('*', '').split('|')[1]))}" target="_blank">${task.replaceAll('*', '').split('~')[1].split('|').join('')}</a>${task.replaceAll('*', '').split('~')[2]}` : `${task.replaceAll('~', '').replaceAll('|', '').replaceAll('*', '')}`} ${chunkInfo['challenges'][skill].hasOwnProperty(task) ? `<span class='noscroll details-info' onclick="showDetails('${encodeRFC5987ValueChars(task)}', '${skill}', '')"><i class="challenge-icon fa-solid fa-info-circle noscroll"></i></span></span>` : ''}</div>`);
         });
     } else {
+        $('.methods-topbar').removeClass('show-tasks');
         $('.methods-topbar').html(`<i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeMethods()"></i>`);
         let methods = checkPrimaryMethod(skill, globalValids, baseChunkData, true);
         Object.keys(methods).sort(function(a, b) { return methods[a] - methods[b] }).forEach((method) => {
@@ -11403,13 +11406,13 @@ let showRules = function(isPage2) {
             });
         }
         if (isPage2) {
-            $('.intro-category, .presets-category, #rules-presets, .show-rule-details-btn, .intro-subcategory, .presets-subcategory, .rules-import-btn').hide();
+            $('.intro-category, .presets-category, #rules-presets, .show-rule-details-btn, .intro-subcategory, .presets-subcategory, .rules-import-btn, .bottom-spacing').hide();
             $('.rules-main-header, .rule-key, .rule-search, .rule-minicategory, #rules-data > .accordion, .rules-names, .rules-content').show();
             !onMobile && $('#rules-data > .accordion, #rules-data > .panel').hide();
             onMobile && $('.rules-names, .rules-content').hide();
             $('.rules-subdata').addClass('page2');
         } else {
-            $('.intro-category, .presets-category, #rules-presets, .show-rule-details-btn, .intro-subcategory, .presets-subcategory, .rules-import-btn').show();
+            $('.intro-category, .presets-category, #rules-presets, .show-rule-details-btn, .intro-subcategory, .presets-subcategory, .rules-import-btn, .bottom-spacing').show();
             $('.rules-main-header, .rule-key, .rule-search, .rule-minicategory, #rules-data > .accordion, .rules-names, .rules-content').hide();
             !onMobile && $('#rules-data > .accordion, #rules-data > .panel').hide();
             onMobile && $('.rules-names, .rules-content').hide();
@@ -12961,6 +12964,12 @@ let loadData = async function(startup) {
         questFilterType = 'all';
         !initialLoaded && chunkTasksOn && setupCurrentChallengesFromSaved();
     });
+    myRef.child('activeSubTabs').once('value', function(snap) {
+        if (!!snap.val()) {
+            activeSubTabs = snap.val();
+            toggleHiddenTasks();
+        }
+    });
     myRef.child('uid').once('value', function(snap) {
         if (!chunkOrder || chunkOrder.length === 0) {
             for (let count = 1; count <= 5; count++) {
@@ -13230,6 +13239,7 @@ let setData = function() {
             stickeredColors,
             painted
         },
+        activeSubTabs,
     };
     let databaseObject = JSON.parse(JSON.stringify(setSnap));
     delete databaseObject['chunkOrder'];

@@ -2579,6 +2579,7 @@ input#searchPlayerMaps {
 
 .rules-content .panel.visible {
     max-height: 100%;
+    padding-bottom: 0;
 }
 
 .menu8 .panel.visible {
@@ -3090,6 +3091,8 @@ label .tooltip-base-el:active {
     width: 45%;
     height: 30%;
     border: solid black;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal .topbar {
@@ -3707,10 +3710,7 @@ label .tooltip-base-el:active {
 
 .details-title {
     font-size: 2.6vh;
-    padding-left: 10px;
-    max-height: 20%;
-    min-height: 20%;
-    overflow-y: hidden;
+    padding: 5px 10px;
 }
 
 .details-title .external-info-link i {
@@ -3730,8 +3730,7 @@ label .tooltip-base-el:active {
 }
 
 .details-data {
-    overflow-y: scroll;
-    height: 73%;
+    overflow-y: auto;
     padding-left: 10px;
 }
 
@@ -3790,15 +3789,13 @@ label .tooltip-base-el:active {
 .overlays-title {
     font-size: min(10vw, 40px);
     padding-left: 10px;
-    max-height: 20%;
-    min-height: 20%;
     text-align: center;
     font-weight: bold;
     overflow-y: hidden;
 }
 
-.mobile .overlays-title .overlays-title-checkbox {
-    top: 100px;
+.overlays-title-checkbox {
+    margin: 5px 10px;
 }
 
 .overlays-title .overlays-title-checkbox {
@@ -3871,16 +3868,15 @@ label .tooltip-base-el:active {
 .notes-title {
     font-size: min(6vw, 28px);
     padding: 0px 10px;
-    height: 20%;
-    overflow-y: hidden;
     text-align: center;
+    border-bottom: solid 1px;
 }
 
 .notes-data {
-    height: 67%;
     overflow-y: auto;
-    padding: 0px 20px;
+    padding: 5px 20px;
     background-color: var(--color2);
+    height: 100%;
 }
 
 .notes-subtitle {
@@ -3927,10 +3923,6 @@ label .tooltip-base-el:active {
     color: var(--colorText);
     font-size: 16px;
     font-weight: bold;
-}
-
-.notes-footer {
-    height: 13%;
 }
 
 .settings-title {
@@ -4031,27 +4023,21 @@ label .tooltip-base-el:active {
 
 .rules-title {
     font-size: min(10vw, 40px);
-    padding-left: 10px;
-    max-height: 9%;
-    min-height: 9%;
     text-align: center;
     background-color: var(--color2);
-    overflow-y: hidden;
 }
 
 .rules-subtitle {
-    padding: 0px 15px;
+    padding: 0px 15px 5px;
     background-color: var(--color2);
     font-size: min(3.25vw, 14px);
     text-align: center;
-    max-height: 10%;
-    min-height: 10%;
 }
 
 .rules-data {
-    height: 80.5%;
     padding-left: 10px;
     border-top: solid 1px;
+    overflow-y: auto;
 }
 
 .mobile .rules-data {
@@ -4100,7 +4086,7 @@ label .tooltip-base-el:active {
 }
 
 .show-rule-back-btn {
-    padding: 10px 0px;
+    padding: 0.5rem 0;
 }
 
 .show-rule-back-btn > span {
@@ -4205,7 +4191,7 @@ label .tooltip-base-el:active {
 
 .rules-names {
     float: left;
-    height: 97.25%;
+    height: 96%;
     overflow: auto;
     width: 30%;
     padding-right: 10px;
@@ -4224,16 +4210,12 @@ label .tooltip-base-el:active {
 .manual-areas-title {
     font-size: 4.5vh;
     padding-left: 10px;
-    max-height: 10%;
-    min-height: 10%;
     text-align: center;
     background-color: var(--color2);
-    overflow-y: hidden;
 }
 
 .manual-areas-searchcontainer {
-    height: 8%;
-    padding: 0px 15px;
+    padding: 10px 15px;
     font-size: 1.7vh;
     background-color: var(--color2);
 }
@@ -4243,8 +4225,7 @@ input#searchManualAreas {
 }
 
 .manual-areas-data {
-    overflow-y: scroll;
-    height: 81.5%;
+    overflow-y: auto;
     padding-left: 10px;
     padding-right: 10px;
     border-top: solid 1px;
@@ -4267,22 +4248,20 @@ input#searchManualAreas {
     padding: 2px;
     background-color: var(--color3);
     position: relative;
-    display: flow-root;
+    display: flex;
 }
 
 .manual-area-text {
-    float: right;
     font-weight: normal;
     border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 5px;
     padding: 2px;
     background-color: var(--color3);
-    max-width: 59%;
+    margin-left: auto;
 }
 
 .manual-area-btn {
-    float: left;
     font-weight: normal;
     border: solid 1px var(--color1);
     color: black;
@@ -4291,6 +4270,8 @@ input#searchManualAreas {
     cursor: pointer;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    display: flex;
+    align-items: center;
 }
 
 .manual-area-btn.locked {
@@ -4410,16 +4391,12 @@ input#searchChunkSections {
 
 .chunk-section-picker-title {
     font-size: 4.5vh;
-    max-height: 10%;
-    min-height: 10%;
     text-align: center;
     background-color: var(--color2);
-    overflow-y: hidden;
 }
 
 .chunk-section-picker-subtitle {
-    height: 10%;
-    padding: 0px 15px;
+    padding: 0px 15px 5px;
     background-color: var(--color2);
     font-size: min(4vw, 16px);
     text-align: center;
@@ -4427,7 +4404,7 @@ input#searchChunkSections {
 
 .chunk-section-picker-data {
     overflow-y: scroll;
-    height: 66.5%;
+    height: 100%;
     padding-left: 10px;
     padding-right: 10px;
     border-top: solid 1px;
@@ -4539,15 +4516,14 @@ input#searchChunkSections {
 }
 
 .chunk-section-picker-footer {
-    height: 13%;
     text-align: center;
     background-color: var(--color2);
+    border-top: solid 1px;
 }
 
 #save-chunk-section-picker-button {
     background-color: rgb(30, 100, 30);
     width: 200px;
-    height: 5vh;
     font-size: 24px;
     color: white;
     border-width: 1px 1px 1px 1px;
@@ -4557,7 +4533,7 @@ input#searchChunkSections {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    margin: 20px 10px;
+    margin: 10px;
 }
 
 #save-chunk-section-picker-button.disabled {
@@ -4750,7 +4726,7 @@ input#searchChunkSections {
 }
 
 #miscellaneousActionsModal > .modal-content {
-    height: 50%;
+    height: 53%;
     width: 25%;
 }
 
@@ -4787,12 +4763,9 @@ input#searchChunkSections {
     font-size: 24px;
     font-weight: bold;
     padding-top: 0px;
-    max-height: 20%;
-    min-height: 20%;
     line-height: 50px;
     text-align: center;
     background-color: var(--color1);
-    overflow-y: hidden;
 }
 
 .preset-subtitle {
@@ -4801,14 +4774,14 @@ input#searchChunkSections {
     font-size: 18px;
     text-align: center;
     border-top: solid 1px;
-    height: 72%;
+    height: 100%;
     padding-top: 5%;
+    overflow-y: auto;
 }
 
 .preset-data > div {
     float: right;
-    margin-right: 10px;
-    margin-top: -55px;
+    margin: 10px;
     display: flex;
 }
 
@@ -4817,8 +4790,12 @@ input#searchChunkSections {
     font-size: 20px;
 }
 
+.preset-data {
+    border-top: solid 1px;
+}
+
 .preset-cancel {
-    padding: 10px;
+    padding: 5px;
     font-size: 18px;
     margin-right: 10px;
     cursor: pointer;
@@ -4827,7 +4804,7 @@ input#searchChunkSections {
 .preset-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
-    padding: 10px;
+    padding: 5px;
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -4843,12 +4820,9 @@ input#searchChunkSections {
     font-size: 24px;
     font-weight: bold;
     padding-top: 0px;
-    max-height: 20%;
-    min-height: 20%;
-    line-height: 50px;
+    line-height: 40px;
     text-align: center;
     background-color: var(--color1);
-    overflow-y: hidden;
 }
 
 .usertasks-delete-subtitle {
@@ -4857,14 +4831,18 @@ input#searchChunkSections {
     font-size: 18px;
     text-align: center;
     border-top: solid 1px;
-    height: 72%;
+    height: 100%;
     padding-top: 5%;
+    overflow-y: auto;
+}
+
+.usertasks-delete-data {
+    border-top: solid 1px;
 }
 
 .usertasks-delete-data > div {
     float: right;
-    margin-right: 10px;
-    margin-top: -55px;
+    margin: 10px;
     display: flex;
 }
 
@@ -4874,7 +4852,7 @@ input#searchChunkSections {
 }
 
 .usertasks-delete-cancel {
-    padding: 10px;
+    padding: 5px;
     font-size: 18px;
     margin-right: 10px;
     cursor: pointer;
@@ -4883,7 +4861,7 @@ input#searchChunkSections {
 .usertasks-delete-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
-    padding: 10px;
+    padding: 5px;
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -4899,12 +4877,9 @@ input#searchChunkSections {
     font-size: 24px;
     font-weight: bold;
     padding-top: 0px;
-    max-height: 20%;
-    min-height: 20%;
     line-height: 50px;
     text-align: center;
     background-color: var(--color1);
-    overflow-y: hidden;
 }
 
 .rules-import-subtitle {
@@ -4913,14 +4888,18 @@ input#searchChunkSections {
     font-size: 18px;
     text-align: center;
     border-top: solid 1px;
-    height: 72%;
+    height: 100%;
     padding-top: 5%;
+    overflow-y: auto;
+}
+
+.rules-import-data {
+    border-top: solid 1px;
 }
 
 .rules-import-data > div {
     float: right;
-    margin-right: 10px;
-    margin-top: -55px;
+    margin: 10px;
     display: flex;
 }
 
@@ -4974,12 +4953,9 @@ input#searchChunkSections {
     font-size: 24px;
     font-weight: bold;
     padding-top: 0px;
-    max-height: 20%;
-    min-height: 20%;
     line-height: 50px;
     text-align: center;
     background-color: var(--color1);
-    overflow-y: hidden;
 }
 
 .exitsandbox-subtitle {
@@ -4988,14 +4964,14 @@ input#searchChunkSections {
     font-size: 18px;
     text-align: center;
     border-top: solid 1px;
-    height: 72%;
+    height: 100%;
     padding-top: 5%;
+    overflow-y: auto;
 }
 
 .exitsandbox-data > div {
     float: right;
-    margin-right: 10px;
-    margin-top: -55px;
+    margin: 10px;
     display: flex;
 }
 
@@ -5004,8 +4980,12 @@ input#searchChunkSections {
     font-size: 20px;
 }
 
+.exitsandbox-data {
+    border-top: solid 1px;
+}
+
 .exitsandbox-cancel {
-    padding: 10px;
+    padding: 5px;
     font-size: 18px;
     margin-right: 10px;
     cursor: pointer;
@@ -5014,7 +4994,7 @@ input#searchChunkSections {
 .exitsandbox-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
-    padding: 10px;
+    padding: 5px;
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -5030,12 +5010,9 @@ input#searchChunkSections {
     font-size: 24px;
     font-weight: bold;
     padding-top: 0px;
-    max-height: 20%;
-    min-height: 20%;
-    line-height: 50px;
+    line-height: 40px;
     text-align: center;
     background-color: var(--color1);
-    overflow-y: hidden;
 }
 
 .rollwarning-subtitle, .roll2warning-subtitle {
@@ -5044,17 +5021,21 @@ input#searchChunkSections {
     font-size: 18px;
     text-align: center;
     border-top: solid 1px;
-    height: 79.75%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .rollwarning-firsttext, .roll2warning-firsttext {
     margin-top: 7%;
 }
 
+.rollwarning-data, .roll2warning-data {
+    border-top: solid 1px;
+}
+
 .rollwarning-data > div, .roll2warning-data > div {
     float: right;
-    margin-right: 10px;
-    margin-top: -55px;
+    margin: 10px;
     display: flex;
 }
 
@@ -5064,7 +5045,7 @@ input#searchChunkSections {
 }
 
 .rollwarning-cancel, .roll2warning-cancel {
-    padding: 10px;
+    padding: 5px;
     font-size: 18px;
     margin-right: 10px;
     cursor: pointer;
@@ -5073,7 +5054,7 @@ input#searchChunkSections {
 .rollwarning-proceed, .roll2warning-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
-    padding: 10px;
+    padding: 5px;
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -5156,12 +5137,8 @@ input#searchChunkSections {
     font-size: min(3vw, 36px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 6vh;
-    min-height: 6vh;
-    line-height: 6vh;
     text-align: center;
     background-color: var(--color2);
-    overflow-y: hidden;
     border-bottom: solid 1px;
 }
 
@@ -5182,25 +5159,36 @@ input#searchChunkSections {
     font-size: 2.5vh;
 }
 
-.usertasks-data > div {
-    margin-right: 10px;
-    margin-bottom: 10px;
+.usertasks-data {
     display: flex;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
+    margin-top: auto;
+    border-top: solid 1px;
+    background-color: var(--color2);
+}
+
+.usertasks-data > div {
+    margin: 5px 10px;
+    display: flex;
+    margin-left: auto;
 }
 
 .usertasks-list {
-    left: 10px;
+    margin-left: 10px;
     width: auto;
-    position: absolute;
-    bottom: 10px;
     cursor: pointer;
+    height: 24px;
+    margin-top: auto;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.usertasks-list:hover {
+    color: var(--colorLink);
 }
 
 .usertasks-body {
     text-align: center;
+    overflow-y: auto;
 }
 
 #usertasks-dropdown-container {
@@ -5264,7 +5252,7 @@ input#searchChunkSections {
 }
 
 .usertasks-cancel {
-    padding: 10px;
+    padding: 7px;
     font-size: 18px;
     margin-right: 10px;
     cursor: pointer;
@@ -5273,7 +5261,7 @@ input#searchChunkSections {
 .usertasks-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
-    padding: 10px;
+    padding: 7px;
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -5480,8 +5468,6 @@ input#searchChunkSections {
     font-size: min(8vw, 28px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 15%;
-    min-height: 15%;
     line-height: 5vh;
     text-align: center;
     background-color: var(--color2);
@@ -5494,22 +5480,18 @@ input#searchChunkSections {
     font-size: min(5vw, 16px);
     text-align: center;
     border-top: solid 1px;
-    height: 85%;
 }
 
 .construction-locked-data > div {
-    float: right;
-    margin-right: 10px;
-    margin-top: -7vh;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
     display: flex;
-    height: 15%;
 }
 
 #construction-locked-dropdown-container {
     text-align: center;
-    position: absolute;
-    width: 100%;
-    top: 45%;
+    margin: 10px;
 }
 
 #construction-locked-dropdown {
@@ -5526,7 +5508,7 @@ input#searchChunkSections {
 }
 
 .construction-locked-cancel {
-    padding: 10px;
+    padding: 7px;
     font-size: 2vh;
     margin-right: 10px;
     cursor: pointer;
@@ -5556,12 +5538,9 @@ input#searchChunkSections {
     font-size: min(8vw, 28px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 15%;
-    min-height: 15%;
     line-height: 5vh;
     text-align: center;
     background-color: var(--color2);
-    overflow-y: hidden;
 }
 
 .questchunks-subtitle {
@@ -5570,7 +5549,6 @@ input#searchChunkSections {
     font-size: min(5vw, 16px);
     text-align: center;
     border-top: solid 1px;
-    height: 25%;
 }
 
 .questchunks-body {
@@ -5578,8 +5556,7 @@ input#searchChunkSections {
     background-color: var(--color1);
     font-size: min(5vw, 16px);
     text-align: center;
-    height: 35%;
-    padding-bottom: 20%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -5603,16 +5580,19 @@ input#searchChunkSections {
     width: 80%;
 }
 
+.questchunks-data {
+    border-top: solid 1px;
+    background-color: var(--color2);
+}
+
 .questchunks-data > div {
     float: right;
-    margin-right: 10px;
-    margin-top: -7vh;
+    margin: 10px;
     display: flex;
-    height: 15%;
 }
 
 .questchunks-cancel {
-    padding: 10px;
+    padding: 5px;
     font-size: 2vh;
     margin-right: 10px;
     cursor: pointer;
@@ -5621,7 +5601,7 @@ input#searchChunkSections {
 .questchunks-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
-    padding: 1vh;
+    padding: 5px;
     color: white;
     font-size: 2vh;
     cursor: pointer;
@@ -5637,12 +5617,16 @@ input#searchChunkSections {
     font-size: min(8vw, 28px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 15%;
-    min-height: 15%;
-    line-height: 5vh;
+    padding-bottom: 10px;
     text-align: center;
     background-color: var(--color2);
-    overflow-y: hidden;
+}
+
+.passive-skill-container {
+    overflow-y: auto;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+    height: 100%;
 }
 
 .passive-skill-subtitle {
@@ -5650,7 +5634,6 @@ input#searchChunkSections {
     background-color: var(--color1);
     font-size: min(4vw, 16px);
     text-align: center;
-    border-top: solid 1px;
 }
 
 .passive-skill-subtitle2 {
@@ -5664,10 +5647,10 @@ input#searchChunkSections {
 }
 
 .passive-skill-data {
-    height: 17%;
     display: flex;
     justify-content: right;
     align-items: center;
+    padding: 5px 0;
 }
 
 .passive-skill-data > div {
@@ -5689,7 +5672,6 @@ input#searchChunkSections {
     font-size: 20px;
     margin-top: 20px;
     padding-bottom: 20px;
-    border-bottom: solid 1px;
 }
 
 #passive-skill-input, #max-skill-input {
@@ -5697,7 +5679,7 @@ input#searchChunkSections {
 }
 
 .passive-skill-cancel {
-    padding: 10px;
+    padding: 7px;
     font-size: 2vh;
     margin-right: 10px;
     cursor: pointer;
@@ -5723,9 +5705,13 @@ input#searchChunkSections {
     background-color: rgb(50, 175, 50);
 }
 
+.notes-footer {
+    border-top: solid 1px;
+}
+
 #cancel-notes-button {
     float: right;
-    padding: 20px 10px;
+    padding: 10px;
     cursor: pointer;
     font-size: 20px;
 }
@@ -5743,7 +5729,7 @@ input#searchChunkSections {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    margin: 20px 10px;
+    margin: 10px;
 }
 
 #submit-notes-button:hover {
@@ -5827,7 +5813,7 @@ input#searchChunkSections {
 }
 
 .results .holder {
-    margin-top: -50px;
+    margin-top: -10%;
 }
 
 .results .topline {
@@ -5942,24 +5928,19 @@ input#searchChunkSections {
 .searchchunks-title {
     font-size: min(6.25vw, 30px);
     text-align: center;
-    max-height: 10%;
-    min-height: 10%;
     font-weight: bold;
-    padding: 0px 10px;
+    padding: 5px 10px;
     background-color: var(--color2);
-    overflow-y: hidden;
 }
 
 .searchchunks-subtitle {
-    height: 10%;
-    padding: 0px 15px;
+    padding: 5px 15px;
     background-color: var(--color2);
     font-size: min(4vw, 16px);
 }
 
 .searchchunks-searchcontainer {
-    height: 8%;
-    padding: 0px 15px;
+    padding: 5px 15px;
     background-color: var(--color2);
     font-size: 1.7vh;
 }
@@ -6006,17 +5987,13 @@ input#searchChunks {
 .searchdetails-title {
     font-size: 30px;
     text-align: center;
-    max-height: 25%;
-    min-height: 25%;
     font-weight: bold;
-    padding: 0px 10px;
-    overflow-y: hidden;
+    padding: 0 10px 10px;
 }
 
 .searchdetails-sorter {
-    position: absolute;
-    margin-top: -30px;
     margin-left: 10px;
+    margin-bottom: 5px;
     font-size: 18px;
 }
 
@@ -6362,12 +6339,14 @@ input#searchChunks {
     background-color: rgb(50, 175, 50);
 }
 
+.clipboard-container {
+    overflow-y: auto;
+}
+
 .clipboard-title {
     font-size: min(10vw, 36px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 10%;
-    min-height: 10%;
     line-height: 5.5vh;
     text-align: center;
     background-color: var(--color1);
@@ -6377,8 +6356,6 @@ input#searchChunks {
     font-size: min(1vw, 14px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 5%;
-    min-height: 5%;
     line-height: 2vh;
     text-align: center;
     background-color: var(--color1);
@@ -6389,7 +6366,6 @@ input#searchChunks {
     font-size: 2vh;
     display: flex;
     align-items: center;
-    height: 14%;
     justify-content: center;
     position: relative;
 }
@@ -6585,8 +6561,6 @@ input#searchChunks {
     font-size: 3.9vh;
     font-weight: bold;
     padding-top: 0px;
-    max-height: 7%;
-    min-height: 7%;
     line-height: 5.5vh;
     text-align: center;
     background-color: var(--color2);
@@ -6984,7 +6958,11 @@ input#searchChunks {
     font-size: 32px;
     font-weight: bold;
     text-align: center;
-    height: 9% !important;
+    border-bottom-color: unset !important;
+}
+
+.methods-topbar.show-tasks {
+    height: unset !important;
 }
 
 .methods-topbar > .yellow {
@@ -7062,22 +7040,18 @@ input#searchChunks {
     font-size: min(5.25vw, 30px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 7%;
-    min-height: 7%;
     line-height: 5vh;
     text-align: center;
 }
 
 .add-equipment-subtitle {
-    padding: 0px 15px;
+    padding: 5px 15px;
     font-size: min(3.25vw, 16px);
     text-align: center;
-    height: 15%;
 }
 
 .add-equipment-searchcontainer {
-    height: 8%;
-    padding: 0px 15px;
+    padding: 5px 15px;
     font-size: 1.7vh;
 }
 
@@ -7145,8 +7119,6 @@ input#searchAddEquipment {
     font-size: min(10vw, 36px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 7%;
-    min-height: 7%;
     line-height: 5vh;
     text-align: center;
 }
@@ -7155,12 +7127,10 @@ input#searchAddEquipment {
     padding: 0px 15px;
     font-size: min(3.25vw, 16px);
     text-align: center;
-    height: 10%;
 }
 
 .backlog-sources-searchcontainer {
-    height: 8%;
-    padding: 0px 15px;
+    padding: 5px 15px;
     font-size: 1.7vh;
 }
 
@@ -7169,7 +7139,6 @@ input#searchBacklogSources {
 }
 
 .backlog-sources-data {
-    height: 75%;
     padding: 0px 25px;
     overflow-y: auto;
 }
@@ -7205,8 +7174,6 @@ input#searchBacklogSources {
     font-size: min(9vw, 36px);
     font-weight: bold;
     padding-top: 0px;
-    max-height: 7%;
-    min-height: 7%;
     line-height: 50px;
     text-align: center;
 }
@@ -7215,12 +7182,10 @@ input#searchBacklogSources {
     padding: 0px 15px;
     font-size: min(3.5vw, 16px);
     text-align: center;
-    height: 12%;
 }
 
 .monsters-searchcontainer {
-    height: 8%;
-    padding: 0px 15px;
+    padding: 5px 15px;
     font-size: 1.7vh;
 }
 
@@ -7336,8 +7301,6 @@ input#searchMonsters {
 .sticker-title {
     font-size: 30px;
     text-align: center;
-    max-height: 25%;
-    min-height: 25%;
     padding: 0px 10px;
     border-bottom: 1px solid;
 }
@@ -7345,8 +7308,6 @@ input#searchMonsters {
 .sticker-data-container {
     font-size: 30px;
     text-align: center;
-    max-height: 63%;
-    min-height: 63%;
     padding: 0px 10px;
     overflow-y: auto;
     background-color: var(--color4);
@@ -7410,13 +7371,12 @@ input#searchMonsters {
 }
 
 .sticker-footer {
-    height: 13%;
     border-top: 1px solid;
 }
 
 #cancel-sticker-button {
     float: right;
-    padding: 20px 10px;
+    padding: 10px;
     cursor: pointer;
     font-size: 20px;
 }
@@ -7434,7 +7394,7 @@ input#searchMonsters {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    margin: 20px 10px;
+    margin: 10px;
 }
 
 #submit-sticker-button:hover {
@@ -7449,8 +7409,6 @@ input#searchMonsters {
 .paint-title {
     font-size: 30px;
     text-align: center;
-    max-height: 25%;
-    min-height: 25%;
     padding: 0px 10px;
     border-bottom: 1px solid;
 }
@@ -7458,11 +7416,10 @@ input#searchMonsters {
 .paint-data-container {
     font-size: 30px;
     text-align: center;
-    max-height: 63%;
-    min-height: 63%;
     padding: 0px 10px;
     overflow-y: auto;
     background-color: var(--color4);
+    height: 100%;
 }
 
 .paint-color-data, .paint-color-data-2 {
@@ -7523,14 +7480,14 @@ input#searchMonsters {
     border-color: rgb(75, 75, 225);
 }
 
-.stickpainter-footer {
-    height: 13%;
-    border-top: 1px solid;
+.paint-footer {
+    border-top: solid 1px;
+    margin-top: auto;
 }
 
 #cancel-paint-button {
     float: right;
-    padding: 20px 10px;
+    padding: 10px;
     cursor: pointer;
     font-size: 20px;
 }
@@ -7548,7 +7505,7 @@ input#searchMonsters {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    margin: 20px 10px;
+    margin: 10px;
 }
 
 #submit-paint-button:hover {
@@ -7746,8 +7703,6 @@ input#searchMonsters {
 .roll-chunk-title {
     font-size: 36px;
     padding-left: 10px;
-    max-height: 8%;
-    min-height: 8%;
     text-align: center;
     font-weight: bold;
 }
@@ -7755,8 +7710,6 @@ input#searchMonsters {
 .roll-chunk-subtitle {
     font-size: 28px;
     padding-left: 10px;
-    max-height: 7%;
-    min-height: 7%;
     text-align: center;
     font-weight: bold;
 }
@@ -7999,7 +7952,7 @@ input#searchMonsters {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    margin: 20px 10px;
+    margin: 10px;
 }
 
 #submit-roll-chunk-button:disabled {
@@ -8014,8 +7967,6 @@ input#searchMonsters {
 .patch-notes-title {
     font-size: 36px;
     padding-left: 10px;
-    max-height: 8%;
-    min-height: 8%;
     text-align: center;
     font-weight: bold;
     background-color: var(--color2);
@@ -8025,17 +7976,12 @@ input#searchMonsters {
     padding: 0px 15px;
     font-size: min(3.25vw, 16px);
     text-align: center;
-    max-height: 4%;
-    min-height: 4%;
     background-color: var(--color2);
 }
 
 .patch-notes-data {
     border-top: solid 1px;
     border-bottom: solid 1px;
-    max-height: 72%;
-    min-height: 72%;
-    top: 10%;
     overflow-y: auto;
     padding: 10px;
 }
@@ -8078,8 +8024,6 @@ input#searchMonsters {
 .chunk-notes-title {
     font-size: 36px;
     padding-left: 10px;
-    max-height: 8%;
-    min-height: 8%;
     text-align: center;
     font-weight: bold;
     background-color: var(--color2);
@@ -8097,10 +8041,6 @@ input#searchMonsters {
 
 .chunk-notes-data {
     border-top: solid 1px;
-    border-bottom: solid 1px;
-    max-height: 75.5%;
-    min-height: 75.5%;
-    height: 75.5%;
     overflow-y: auto;
     padding: 10px;
 }
@@ -8116,9 +8056,10 @@ input#searchMonsters {
 }
 
 .chunk-notes-footer {
-    height: 13%;
     text-align: center;
     background-color: var(--color2);
+    margin-top: auto;
+    border-top: solid 1px;
 }
 
 #save-chunk-notes-button {
@@ -8144,8 +8085,6 @@ input#searchMonsters {
 .new-tasks-title {
     font-size: 36px;
     padding-left: 10px;
-    max-height: 10%;
-    min-height: 10%;
     text-align: center;
     font-weight: bold;
     background-color: var(--color2);
@@ -8154,12 +8093,10 @@ input#searchMonsters {
 .new-tasks-data {
     border-top: solid 1px;
     border-bottom: solid 1px;
-    max-height: 70%;
-    min-height: 70%;
-    height: 70%;
     overflow-y: auto;
     padding: 10px;
     text-align: center;
+    height: 100%;
 }
 
 .new-tasks-data .results {
@@ -8172,7 +8109,7 @@ input#searchMonsters {
 }
 
 .new-task-row {
-    width: 90%;
+    width: 88%;
     display: block;
     font-size: 20px;
     border: solid 1px var(--colorQuestBorderText);
@@ -8201,7 +8138,6 @@ input#searchMonsters {
 }
 
 .new-tasks-footer {
-    height: 16%;
     text-align: center;
     background-color: var(--color2);
 }
@@ -8209,7 +8145,6 @@ input#searchMonsters {
 #close-new-tasks-button {
     background-color: gray;
     width: 200px;
-    height: 5vh;
     font-size: 24px;
     color: white;
     border-width: 1px 1px 1px 1px;
@@ -8219,7 +8154,7 @@ input#searchMonsters {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    margin: 20px 10px;
+    margin: 10px;
 }
 
 #close-new-tasks-button:not(:disabled):hover {
@@ -8811,6 +8746,7 @@ input#searchMonsters {
     border: solid 1px;
     margin: 10px 5px 10px 5px;
     position: relative;
+    font-size: min(1.5vw, 20px);
 }
 
 .Diaries-body .row .diary-tier-button.charting {
@@ -8882,11 +8818,8 @@ input#searchMonsters {
 .xp-reward-title {
     font-size: 32px;
     text-align: center;
-    max-height: 25%;
-    min-height: 25%;
     padding: 0px 10px;
     border-bottom: 1px solid;
-    overflow-y: hidden;
 }
 
 .xp-reward-data {
@@ -8897,11 +8830,10 @@ input#searchMonsters {
 .xp-reward-data-container {
     font-size: 30px;
     text-align: center;
-    max-height: 63%;
-    min-height: 63%;
     padding: 0px 10px;
     overflow-y: auto;
     background-color: var(--color4);
+    height: 100%;
 }
 
 .xp-reward-option-container {
@@ -8950,7 +8882,6 @@ input#searchMonsters {
 }
 
 .xp-reward-footer {
-    height: 13%;
     border-top: 1px solid;
 }
 

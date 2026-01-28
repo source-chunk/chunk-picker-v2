@@ -31,99 +31,99 @@ const modalContents = {
         <div id="rules-data" class="rules-data noscroll">
             <div id="rules-subdata" class="rules-subdata noscroll"></div>
             <div id='rulesvisibletasks' class='accordion' onclick="toggleRulesPanel('visibletasks')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Visible Tasks</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Visible Tasks</span></div>
             <div class="panel panel-visibletasks"></div>
             <div id='rulesoverallskill' class='accordion' onclick="toggleRulesPanel('overallskill')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Overall Skill</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Overall Skill</span></div>
             <div class="panel panel-overallskill"></div>
             <div id='rulesagility' class='accordion' onclick="toggleRulesPanel('agility')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Agility</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Agility</span></div>
             <div class="panel panel-agility"></div>
             <div id='rulescombat' class='accordion' onclick="toggleRulesPanel('combat')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Combat</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Combat</span></div>
             <div class="panel panel-combat"></div>
             <div id='rulesconstruction' class='accordion' onclick="toggleRulesPanel('construction')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Construction</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Construction</span></div>
             <div class="panel panel-construction"></div>
             <div id='rulesfarming' class='accordion' onclick="toggleRulesPanel('farming')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Farming</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Farming</span></div>
             <div class="panel panel-farming"></div>
             <div id='rulesherblore' class='accordion' onclick="toggleRulesPanel('herblore')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Herblore</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Herblore</span></div>
             <div class="panel panel-herblore"></div>
             <div id='ruleshunter' class='accordion' onclick="toggleRulesPanel('hunter')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Hunter</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Hunter</span></div>
             <div class="panel panel-hunter"></div>
             <div id='rulesmagic' class='accordion' onclick="toggleRulesPanel('magic')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Magic</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Magic</span></div>
             <div class="panel panel-magic"></div>
             <div id='rulesmining' class='accordion' onclick="toggleRulesPanel('mining')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Mining</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Mining</span></div>
             <div class="panel panel-mining"></div>
             <div id='rulesprayer' class='accordion' onclick="toggleRulesPanel('prayer')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Prayer</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Prayer</span></div>
             <div class="panel panel-prayer"></div>
             <div id='rulesrunecraft' class='accordion' onclick="toggleRulesPanel('runecraft')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Runecraft</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Runecraft</span></div>
             <div class="panel panel-runecraft"></div>
             <div id='rulessailing' class='accordion' onclick="toggleRulesPanel('sailing')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Sailing</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Sailing</span></div>
             <div class="panel panel-sailing"></div>
             <div id='rulesslayer' class='accordion' onclick="toggleRulesPanel('slayer')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Slayer</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Slayer</span></div>
             <div class="panel panel-slayer"></div>
             <div id='rulessmithing' class='accordion' onclick="toggleRulesPanel('smithing')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Smithing</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Smithing</span></div>
             <div class="panel panel-smithing"></div>
             <div id='ruleswoodcutting' class='accordion' onclick="toggleRulesPanel('woodcutting')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Woodcutting</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Woodcutting</span></div>
             <div class="panel panel-woodcutting"></div>
             <div id='rulesitemsources' class='accordion' onclick="toggleRulesPanel('itemsources')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Item Sources</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Item Sources</span></div>
             <div class="panel panel-itemsources"></div>
             <div id='rulesmiscellaneous' class='accordion' onclick="toggleRulesPanel('miscellaneous')"><span class='exp'><i
-            class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Miscellaneous</span></div>
+                class="acc pic fa-solid fa-plus"></i></span><span class="accordion-title">Miscellaneous</span></div>
             <div class="panel panel-miscellaneous"></div>
             <div class="panel panel-search"></div>
             <div class="rules-names">
-            <div id='rulesvisibletasks' class='accordion-sidebar' onclick="toggleRulesPanel('visibletasks')"><span class="accordion-title">Visible Tasks</span></div>
-            <div id='rulesoverallskill' class='accordion-sidebar' onclick="toggleRulesPanel('overallskill')"><span class="accordion-title">Overall Skill</span></div>
-            <div id='rulesagility' class='accordion-sidebar' onclick="toggleRulesPanel('agility')"><span class="accordion-title">Agility</span></div>
-            <div id='rulescombat' class='accordion-sidebar' onclick="toggleRulesPanel('combat')"><span class="accordion-title">Combat</span></div>
-            <div id='rulesconstruction' class='accordion-sidebar' onclick="toggleRulesPanel('construction')"><span class="accordion-title">Construction</span></div>
-            <div id='rulesfarming' class='accordion-sidebar' onclick="toggleRulesPanel('farming')"><span class="accordion-title">Farming</span></div>
-            <div id='rulesherblore' class='accordion-sidebar' onclick="toggleRulesPanel('herblore')"><span class="accordion-title">Herblore</span></div>
-            <div id='ruleshunter' class='accordion-sidebar' onclick="toggleRulesPanel('hunter')"><span class="accordion-title">Hunter</span></div>
-            <div id='rulesmagic' class='accordion-sidebar' onclick="toggleRulesPanel('magic')"><span class="accordion-title">Magic</span></div>
-            <div id='rulesmining' class='accordion-sidebar' onclick="toggleRulesPanel('mining')"><span class="accordion-title">Mining</span></div>
-            <div id='rulesprayer' class='accordion-sidebar' onclick="toggleRulesPanel('prayer')"><span class="accordion-title">Prayer</span></div>
-            <div id='rulesrunecraft' class='accordion-sidebar' onclick="toggleRulesPanel('runecraft')"><span class="accordion-title">Runecraft</span></div>
-            <div id='rulessailing' class='accordion-sidebar' onclick="toggleRulesPanel('sailing')"><span class="accordion-title">Sailing</span></div>
-            <div id='rulesslayer' class='accordion-sidebar' onclick="toggleRulesPanel('slayer')"><span class="accordion-title">Slayer</span></div>
-            <div id='rulessmithing' class='accordion-sidebar' onclick="toggleRulesPanel('smithing')"><span class="accordion-title">Smithing</span></div>
-            <div id='ruleswoodcutting' class='accordion-sidebar' onclick="toggleRulesPanel('woodcutting')"><span class="accordion-title">Woodcutting</span></div>
-            <div id='rulesitemsources' class='accordion-sidebar' onclick="toggleRulesPanel('itemsources')"><span class="accordion-title">Item Sources</span></div>
-            <div id='rulesmiscellaneous' class='accordion-sidebar' onclick="toggleRulesPanel('miscellaneous')"><span class="accordion-title">Miscellaneous</span></div>
+                <div id='rulesvisibletasks' class='accordion-sidebar' onclick="toggleRulesPanel('visibletasks')"><span class="accordion-title">Visible Tasks</span></div>
+                <div id='rulesoverallskill' class='accordion-sidebar' onclick="toggleRulesPanel('overallskill')"><span class="accordion-title">Overall Skill</span></div>
+                <div id='rulesagility' class='accordion-sidebar' onclick="toggleRulesPanel('agility')"><span class="accordion-title">Agility</span></div>
+                <div id='rulescombat' class='accordion-sidebar' onclick="toggleRulesPanel('combat')"><span class="accordion-title">Combat</span></div>
+                <div id='rulesconstruction' class='accordion-sidebar' onclick="toggleRulesPanel('construction')"><span class="accordion-title">Construction</span></div>
+                <div id='rulesfarming' class='accordion-sidebar' onclick="toggleRulesPanel('farming')"><span class="accordion-title">Farming</span></div>
+                <div id='rulesherblore' class='accordion-sidebar' onclick="toggleRulesPanel('herblore')"><span class="accordion-title">Herblore</span></div>
+                <div id='ruleshunter' class='accordion-sidebar' onclick="toggleRulesPanel('hunter')"><span class="accordion-title">Hunter</span></div>
+                <div id='rulesmagic' class='accordion-sidebar' onclick="toggleRulesPanel('magic')"><span class="accordion-title">Magic</span></div>
+                <div id='rulesmining' class='accordion-sidebar' onclick="toggleRulesPanel('mining')"><span class="accordion-title">Mining</span></div>
+                <div id='rulesprayer' class='accordion-sidebar' onclick="toggleRulesPanel('prayer')"><span class="accordion-title">Prayer</span></div>
+                <div id='rulesrunecraft' class='accordion-sidebar' onclick="toggleRulesPanel('runecraft')"><span class="accordion-title">Runecraft</span></div>
+                <div id='rulessailing' class='accordion-sidebar' onclick="toggleRulesPanel('sailing')"><span class="accordion-title">Sailing</span></div>
+                <div id='rulesslayer' class='accordion-sidebar' onclick="toggleRulesPanel('slayer')"><span class="accordion-title">Slayer</span></div>
+                <div id='rulessmithing' class='accordion-sidebar' onclick="toggleRulesPanel('smithing')"><span class="accordion-title">Smithing</span></div>
+                <div id='ruleswoodcutting' class='accordion-sidebar' onclick="toggleRulesPanel('woodcutting')"><span class="accordion-title">Woodcutting</span></div>
+                <div id='rulesitemsources' class='accordion-sidebar' onclick="toggleRulesPanel('itemsources')"><span class="accordion-title">Item Sources</span></div>
+                <div id='rulesmiscellaneous' class='accordion-sidebar' onclick="toggleRulesPanel('miscellaneous')"><span class="accordion-title">Miscellaneous</span></div>
             </div>
             <div class="rules-content">
-            <div class="panel panel-visibletasks"></div>
-            <div class="panel panel-overallskill"></div>
-            <div class="panel panel-agility"></div>
-            <div class="panel panel-combat"></div>
-            <div class="panel panel-construction"></div>
-            <div class="panel panel-farming"></div>
-            <div class="panel panel-herblore"></div>
-            <div class="panel panel-hunter"></div>
-            <div class="panel panel-magic"></div>
-            <div class="panel panel-mining"></div>
-            <div class="panel panel-prayer"></div>
-            <div class="panel panel-runecraft"></div>
-            <div class="panel panel-sailing"></div>
-            <div class="panel panel-slayer"></div>
-            <div class="panel panel-smithing"></div>
-            <div class="panel panel-woodcutting"></div>
-            <div class="panel panel-itemsources"></div>
-            <div class="panel panel-miscellaneous"></div>
+                <div class="panel panel-visibletasks"></div>
+                <div class="panel panel-overallskill"></div>
+                <div class="panel panel-agility"></div>
+                <div class="panel panel-combat"></div>
+                <div class="panel panel-construction"></div>
+                <div class="panel panel-farming"></div>
+                <div class="panel panel-herblore"></div>
+                <div class="panel panel-hunter"></div>
+                <div class="panel panel-magic"></div>
+                <div class="panel panel-mining"></div>
+                <div class="panel panel-prayer"></div>
+                <div class="panel panel-runecraft"></div>
+                <div class="panel panel-sailing"></div>
+                <div class="panel panel-slayer"></div>
+                <div class="panel panel-smithing"></div>
+                <div class="panel panel-woodcutting"></div>
+                <div class="panel panel-itemsources"></div>
+                <div class="panel panel-miscellaneous"></div>
             </div>
             <div class="bottom-spacing"></div>
         </div>
@@ -400,10 +400,12 @@ const modalContents = {
     `,
     'passiveLevelModal': `
         <div id="passive-skill-title" class="passive-skill-title noscroll">Edit Passive Leveling/Highest Task</div>
-        <div id="passive-skill-subtitle" class="passive-skill-subtitle noscroll">Enter the level passively reached in <span class='noscroll passive-skill-name'></span> (through lamps/Tears of Guthix/quest rewards/etc). Defining a passive skill this way will show Chunk Tasks for the skill up to your passively trained level, and will show Tasks for higher levels if you unlock a consistent training method.</div>
-        <div id="passive-skill-input-container" class="passive-skill-input-container noscroll">Current <span class='noscroll passive-skill-name'></span> Level: <input id="passive-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()" autocomplete="off"/></div>
-        <div id="passive-skill-subtitle2" class="passive-skill-subtitle2 noscroll"><b class="noscroll">[Meme Grind Limiter]</b> Use this to set a maximum level for tasks in <span class='noscroll passive-skill-name'></span>. Useful to turn meme grinds into a reasonable challenge without backlogging them. Entering a number lower than 99 will artificially stop the Chunk Picker from showing skill tasks for this skill above the inputted level.</div>
-        <div id="passive-skill-input-container2" class="passive-skill-input-container2 noscroll">Highest <span class='noscroll passive-skill-name'></span> task allowed: <input id="max-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()" autocomplete="off"/></div>
+        <div class="passive-skill-container">
+            <div id="passive-skill-subtitle" class="passive-skill-subtitle noscroll">Enter the level passively reached in <span class='noscroll passive-skill-name'></span> (through lamps/Tears of Guthix/quest rewards/etc). Defining a passive skill this way will show Chunk Tasks for the skill up to your passively trained level, and will show Tasks for higher levels if you unlock a consistent training method.</div>
+            <div id="passive-skill-input-container" class="passive-skill-input-container noscroll">Current <span class='noscroll passive-skill-name'></span> Level: <input id="passive-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()" autocomplete="off"/></div>
+            <div id="passive-skill-subtitle2" class="passive-skill-subtitle2 noscroll"><b class="noscroll">[Meme Grind Limiter]</b> Use this to set a maximum level for tasks in <span class='noscroll passive-skill-name'></span>. Useful to turn meme grinds into a reasonable challenge without backlogging them. Entering a number lower than 99 will artificially stop the Chunk Picker from showing skill tasks for this skill above the inputted level.</div>
+            <div id="passive-skill-input-container2" class="passive-skill-input-container2 noscroll">Highest <span class='noscroll passive-skill-name'></span> task allowed: <input id="max-skill-input" type="number" min="0" max="99" oninput="passiveLockedChange()" autocomplete="off"/></div>
+        </div>
         <div id="passive-skill-data" class="passive-skill-data noscroll"></div>
     `,
     'introModal': `
@@ -535,20 +537,23 @@ const modalContents = {
     `,
     'miscellaneousActionsModal': `
         <i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeClipboard()"></i>
-        <div id="clipboard-title" class="clipboard-title noscroll">Copy to clipboard:</div>
-        <div id="clipboard-data" class="clipboard-data noscroll"><button id='chunks-clipboard-button' class='modal-button' onclick='exportFunc("chunks")'>Chunks</button><button id='tasks-clipboard-button' class='modal-button' onclick='exportFunc("tasks")'>Tasks</button><button id='rules-clipboard-button' class='modal-button' onclick='exportFunc("rules")'>Rules</button></div>
-        <div id="clipboard-data-4" class="clipboard-data-4 noscroll"><button id='equipment-clipboard-button' class='modal-button' onclick='exportFunc("equipment")'>Equipment (Bank Memory format)</button></div>
-        <div id="clipboard-subtitle" class="clipboard-subtitle noscroll">For use in <a href="https://gearscape.net/calculators/best" target="_blank" >GearScape's Best Setup calculator</a></div>
-        <div id="clipboard-title2" class="clipboard-title noscroll">Other Actions:</div>
-        <div id="clipboard-data-2" class="clipboard-data-2 noscroll"><button id='plugin-clipboard-button' class='modal-button' onclick='exportFunc("plugin")'>Refresh Tasks</button><a href="https://github.com/nathanreidok/chunk-tasks" target="_blank" ><i class="fa-solid fa-info-circle" title="Visit the plugin on Github"></i></a></div>
-        <div id="clipboard-data-3" class="clipboard-data-3 noscroll"><button id='assign-clipboard-button' class='modal-button' onclick='exportFunc("assign")'>Assign Numbers to Neighboring Chunks</button></div>
-        <div id="clipboard-data-5" class="clipboard-data-5 noscroll"><button id='fullmap-clipboard-button' class='modal-button' onclick='exportFunc("fullmap")'>Download a .webp image of your full map</button></div>
+        <div class="clipboard-container">
+            <div id="clipboard-title" class="clipboard-title noscroll">Copy to clipboard:</div>
+            <div id="clipboard-data" class="clipboard-data noscroll"><button id='chunks-clipboard-button' class='modal-button' onclick='exportFunc("chunks")'>Chunks</button><button id='tasks-clipboard-button' class='modal-button' onclick='exportFunc("tasks")'>Tasks</button><button id='rules-clipboard-button' class='modal-button' onclick='exportFunc("rules")'>Rules</button></div>
+            <div id="clipboard-data-4" class="clipboard-data-4 noscroll"><button id='equipment-clipboard-button' class='modal-button' onclick='exportFunc("equipment")'>Equipment (Bank Memory format)</button></div>
+            <div id="clipboard-subtitle" class="clipboard-subtitle noscroll">For use in <a href="https://gearscape.net/calculators/best" target="_blank" >GearScape's Best Setup calculator</a></div>
+            <div id="clipboard-title2" class="clipboard-title noscroll">Other Actions:</div>
+            <div id="clipboard-data-2" class="clipboard-data-2 noscroll"><button id='plugin-clipboard-button' class='modal-button' onclick='exportFunc("plugin")'>Refresh Tasks</button><a href="https://github.com/nathanreidok/chunk-tasks" target="_blank" ><i class="fa-solid fa-info-circle" title="Visit the plugin on Github"></i></a></div>
+            <div id="clipboard-data-3" class="clipboard-data-3 noscroll"><button id='assign-clipboard-button' class='modal-button' onclick='exportFunc("assign")'>Assign Numbers to Neighboring Chunks</button></div>
+            <div id="clipboard-data-5" class="clipboard-data-5 noscroll"><button id='fullmap-clipboard-button' class='modal-button' onclick='exportFunc("fullmap")'>Download a .webp image of your full map</button></div>
+        </div>
     `,
     'mapOverlaysModal': `
         <div class="topbar noscroll">
             <i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeOverlays()"></i>
         </div>
-        <div id="overlays-title" class="overlays-title noscroll"><span class="overlays-title-span">Map Overlays</span><span class="overlays-title-checkbox"><input type="checkbox" onclick="changeOverlayFilterBy()" />Within unlocked chunks only</span></div>
+        <div id="overlays-title" class="overlays-title noscroll"><span class="overlays-title-span">Map Overlays</span></div>
+        <div class="overlays-title-checkbox"><input type="checkbox" onclick="changeOverlayFilterBy()" />Within unlocked chunks only</div>
         <div id="overlays-data" class="overlays-data noscroll"></div>
     `,
     'exitSandboxWarningModal': `
