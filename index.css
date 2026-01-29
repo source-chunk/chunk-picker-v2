@@ -4726,7 +4726,7 @@ input#searchChunkSections {
 }
 
 #miscellaneousActionsModal > .modal-content {
-    height: 53%;
+    height: 55%;
     width: 25%;
 }
 
@@ -5287,7 +5287,6 @@ input#searchChunkSections {
     line-height: 5vh;
     text-align: center;
     background-color: var(--color2);
-    overflow-y: hidden;
 }
 
 .slayer-locked-subtitle {
@@ -6347,6 +6346,7 @@ input#searchChunks {
     font-size: min(10vw, 36px);
     font-weight: bold;
     padding-top: 0px;
+    padding-bottom: 5px;
     line-height: 5.5vh;
     text-align: center;
     background-color: var(--color1);
@@ -8746,7 +8746,7 @@ input#searchMonsters {
     border: solid 1px;
     margin: 10px 5px 10px 5px;
     position: relative;
-    font-size: min(1.5vw, 20px);
+    font-size: min(1.25rem, 20px);
 }
 
 .Diaries-body .row .diary-tier-button.charting {
