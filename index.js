@@ -1507,7 +1507,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.25';
+let currentVersion = '6.9.26';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'difference';
 
@@ -1676,7 +1676,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.25";
+mapImg.src = "osrs_world_map.png?v=6.9.26";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3588,7 +3588,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.25");
+        myWorker = new Worker("./worker.js?v=6.9.26");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3892,8 +3892,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.25");
-let myWorker2 = new Worker("./worker.js?v=6.9.25");
+let myWorker = new Worker("./worker.js?v=6.9.26");
+let myWorker2 = new Worker("./worker.js?v=6.9.26");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -5752,10 +5752,11 @@ let toggleTaskSidebar = function(value, extra) {
 }
 
 // Toggles checked-off task hiding
-let toggleHiddenTasks = function(value, fromSearch) {
+let toggleHiddenTasks = function(value, fromSearch, subTabs) {
+    subTabs = !!subTabs ? subTabs : Object.keys(activeSubTabs);
     $('.no-current').remove();
     value ? $('.hide-backlog').hide() : $('.hide-backlog:not(.searchhide)').show();
-    Object.keys(activeSubTabs).forEach((section) => {
+    subTabs.forEach((section) => {
         if (value) {
             $(`.${section}-challenge:not(.hide-backlog)`).length <= 0 ? $('.marker-' + section).hide() : $('.marker-' + section).show();
         } else {
@@ -5767,8 +5768,8 @@ let toggleHiddenTasks = function(value, fromSearch) {
             $('.panel-active').append(`<span class="no-current">No current chunk tasks.</span>`);
         }
     }
-    Object.keys(activeSubTabs).forEach((subTab) => {
-        settings['hideChecked'] && actuallyHideChecked && $('.challenge.' + subTab + '-challenge').filter($(':not(.hide-backlog)')).length === 0 ? $('.marker-' + subTab).addClass('hide-marker') : $('.marker-' + subTab).removeClass('hide-marker');
+    settings['hideChecked'] && actuallyHideChecked && subTabs.forEach((subTab) => {
+        $('.challenge.' + subTab + '-challenge:not(.hide-backlog)').length === 0 ? $('.marker-' + subTab).addClass('hide-marker') : $('.marker-' + subTab).removeClass('hide-marker');
     });
     !fromSearch && searchActiveTasksFunc();
 }
@@ -6838,7 +6839,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.25");
+    myWorker2 = new Worker("./worker.js?v=6.9.26");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -12012,14 +12013,23 @@ let checkOffChallenge = function(skill, line, skip) {
         if (!skip) {
             $('.panel-active .challenge:has(input:checked)').addClass('hide-backlog');
             $('.panel-active .challenge:not(:has(input:checked))').removeClass('hide-backlog');
-            Object.keys(activeSubTabs).forEach((subTab) => {
-                settings['hideChecked'] && actuallyHideChecked && $('.challenge.' + subTab + '-challenge').filter($(':not(.hide-backlog)')).length === 0 ? $('.marker-' + subTab).addClass('hide-marker') : $('.marker-' + subTab).removeClass('hide-marker');
-            });
             setupCurrentChallenges(tempChallengeArrSaved, true);
             changeChallengeColor();
             setData();
             setTaskNum();
-            toggleHiddenTasks(settings['hideChecked'] && actuallyHideChecked);
+            let challengeLine;
+            let subTabs = [];
+            if (skillNames.includes(skill)) {
+                challengeLine = $('.' + skill + '-challenge');
+                subTabs.push('skill');
+            } else {
+                challengeLine = $('.' + skill + '-' + line.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-challenge');
+                subTabs.push(skill.toLowerCase());
+                if (skill === 'Extra' && $(challengeLine).attr("class").split(/\s+/).filter((className) => className.includes('AllDroptables-') || className.includes('AllShops-')).length > 0) {
+                    subTabs.push($(challengeLine).attr("class").split(/\s+/).filter((className) => className.includes('AllDroptables-') || className.includes('AllShops-'))[0].split('-challenge')[0]);
+                }
+            }
+            toggleHiddenTasks(settings['hideChecked'] && actuallyHideChecked, false, subTabs);
             searchActiveTasksFunc();
         }
     }

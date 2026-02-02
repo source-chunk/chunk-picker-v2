@@ -110050,10 +110050,6 @@
 				"BaseQuest": "The Golem",
 				"Description": "Talk to the clay golem",
 				"NPCs": ["Clay golem"],
-				"Skills": {
-					"Crafting": 20,
-					"Thieving": 25
-				},
 				"Not F2P": true
 			},
 			"~|The Golem|~ 2": {
@@ -110061,6 +110057,9 @@
 				"Description": "Repair the golem then talk to him. Read the letter and take the strange implement.",
 				"Chunks": ["13872"],
 				"Items": ["Soft clay"],
+				"Skills": {
+					"Crafting": 20
+				},
 				"Tasks": {
 					"~|The Golem|~ 1": "Quest"
 				},
@@ -110088,6 +110087,9 @@
 				"BaseQuest": "The Golem",
 				"Description": "Talk to Curator Haig Halen and steal the key.",
 				"Chunks": ["12853-1"],
+				"Skills": {
+					"Thieving": 25
+				},
 				"Tasks": {
 					"~|The Golem|~ 4": "Quest"
 				},
