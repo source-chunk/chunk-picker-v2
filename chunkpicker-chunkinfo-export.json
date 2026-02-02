@@ -251946,6 +251946,21 @@
 					"~|Sins of the Father|~ Complete the quest": "Quest"
 				}]
 			},
+			"Dommik's Crafting Store.^Bolt mould": {
+				"13105-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
+			"Dommik's Crafting Store.^Bracelet mould": {
+				"13105-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
+			"Dommik's Crafting Store.^Sickle mould": {
+				"13105-1": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Draynor Seed Market": {
 				"12338-1": [{
 					"F2P Only": "Nonskill"

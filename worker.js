@@ -8505,6 +8505,11 @@ let calcCurrentChallenges2 = function() {
             }
         });
     });
+    !!manualTasks && Object.keys(manualTasks).forEach((skill) => {
+        Object.keys(manualTasks[skill]).forEach((challenge) => {
+            delete chunkInfo['challenges'][skill][challenge]['ManualValid'];
+        });
+    });
     return tempChallengeArr;
 }
 
