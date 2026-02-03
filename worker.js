@@ -8520,8 +8520,8 @@ let calcCurrentChallenges2 = function() {
             }
         });
     });
-    !!manualTasks && Object.keys(manualTasks).forEach((skill) => {
-        Object.keys(manualTasks[skill]).forEach((challenge) => {
+    !!manualTasks && Object.keys(manualTasks).filter((skill) => chunkInfo['challenges'].hasOwnProperty(skill)).forEach((skill) => {
+        Object.keys(manualTasks[skill]).filter((challenge) => chunkInfo['challenges'][skill].hasOwnProperty(challenge) && chunkInfo['challenges'][skill][challenge].hasOwnProperty('ManualValid')).forEach((challenge) => {
             delete chunkInfo['challenges'][skill][challenge]['ManualValid'];
         });
     });
