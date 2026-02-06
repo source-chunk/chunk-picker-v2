@@ -72022,6 +72022,9 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Facility bottle (empty)"],
+				"Tasks": {
+					"FacilityBottleSource[+]": "Sailing"
+				},
 				"Not F2P": true
 			},
 			"(Sea Treasures) Obtain a ~|medallion fragment#1|~": {
@@ -74923,6 +74926,12 @@
 				"Label": "Permanent Unlockables",
 				"Chunks": ["5167-1", "5168-1"],
 				"NPCs": ["Fabia", "Xilo"],
+				"Not F2P": true
+			},
+			"Complete the ~|Natural History Quiz|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["Varrock Museum#Natural History Exhibit"],
 				"Not F2P": true
 			},
 			"Unlock Colosseum bank access with ~|Glory|~": {
@@ -91695,6 +91704,22 @@
 				"Not F2P": true,
 				"CombatPoints": 1
 			},
+			"~|Combat Achievements#Easy|~ Dry Cleaning": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Shellbane Gryphon after clearing its corrosive spit from your armour.",
+				"Monsters": ["Shellbane Gryphon"],
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 1
+			},
+			"~|Combat Achievements#Easy|~ Shellbane Adept": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Shellbane Gryphon 25 times.",
+				"Monsters": ["Shellbane Gryphon"],
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 1
+			},
 			"~|Combat Achievements#Easy|~ Sit Rat": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Finish off Scurrius with a ratbane weapon in a private instance.",
@@ -91797,7 +91822,7 @@
 					"Any": 5000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 38
+				"CombatPointsNeeded": 40
 			},
 			"~|Combat Achievements#Medium|~ Amoxliatl Champion": {
 				"Category": ["Combat Diary Tasks"],
@@ -92162,6 +92187,30 @@
 				"CombatPoints": 2,
 				"Monsters": ["Scurrius"]
 			},
+			"~|Combat Achievements#Medium|~ Shellbane Veteran": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Shellbane Gryphon 50 times.",
+				"Monsters": ["Shellbane Gryphon"],
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 2
+			},
+			"~|Combat Achievements#Medium|~ Shellbane Speedrunner": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Shellbane Gryphon 10 times within 12:30 minutes of entering the cave.",
+				"Monsters": ["Shellbane Gryphon"],
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 2
+			},
+			"~|Combat Achievements#Medium|~ Perfect Shellbane": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Shellbane Gryphon without taking damage.",
+				"Monsters": ["Shellbane Gryphon"],
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 2
+			},
 			"~|Combat Achievements#Medium|~ A Frozen Foe from the Past": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill a Skeletal Wyvern",
@@ -92276,7 +92325,7 @@
 					"Any": 10000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 148,
+				"CombatPointsNeeded": 156,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -92863,6 +92912,22 @@
 				"CombatPoints": 3,
 				"Monsters": ["Scorpia"]
 			},
+			"~|Combat Achievements#Hard|~ Featherweight Fighter": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Shellbane Gryphon 5 times without leaving the cave, while wearing gear weighing less than 40kg.",
+				"Monsters": ["Shellbane Gryphon"],
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 3
+			},
+			"~|Combat Achievements#Hard|~ Shellbane Survivor": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Shellbane Gryphon 25 times without leaving the cave.",
+				"Monsters": ["Shellbane Gryphon"],
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 3
+			},
 			"~|Combat Achievements#Hard|~ Skotizo Adept": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill Skotizo 5 times.",
@@ -92993,7 +93058,7 @@
 					"Any": 15000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 394,
+				"CombatPointsNeeded": 408,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -94404,7 +94469,7 @@
 					"Any": 25000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1038,
+				"CombatPointsNeeded": 1052,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -95834,7 +95899,7 @@
 					"Any": 35000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1878,
+				"CombatPointsNeeded": 1892,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -96839,7 +96904,7 @@
 					"Any": 50000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 2604,
+				"CombatPointsNeeded": 2618,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -174617,6 +174682,7 @@
 			"WildernessPirateAccess[+]": ["Access wilderness pirates", "Access wilderness zombie pirates"],
 			"ConstructBed[+]": ["Build a ~|wooden bed|~", "Build an ~|oak bed|~", "Build a ~|large oak bed|~", "Build a ~|teak bed|~", "Build a ~|large teak bed|~", "Build a ~|4-poster|~", "Build a ~|gilded 4-poster|~"],
 			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
+			"FacilityBottleSource[+]": ["Process some ~|large salvage|~ at a salvaging station", "Process some ~|plundered salvage|~ at a salvaging station", "Process some ~|martial salvage|~ at a salvaging station", "Process some ~|fremennik salvage|~ at a salvaging station", "Process some ~|opulent salvage|~ at a salvaging station"],
 			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"],
 			"SmokableTrapTask[+]": ["Catch an ~|embertailed jerboa|~", "Catch a ~|pyre fox|~", "Catch a ~|tecu salamander|~", "Catch a ~|barb-tailed kebbit|~", "Catch a ~|black chinchompa|~", "Catch a ~|black salamander|~", "Catch a ~|carnivorous chinchompa|~", "Catch a ~|chinchompa (Hunter)|~", "Catch a ~|copper longtail|~", "Catch a ~|crimson swift|~", "Catch a ~|ferret|~", "Catch a ~|golden warbler|~", "Catch a ~|maniacal monkey (Hunter)|~", "Catch a ~|red salamander|~", "Catch a ~|sabre-toothed kebbit|~", "Catch a ~|swamp lizard|~", "Catch a ~|tropical wagtail|~", "Catch a ~|wild kebbit|~", "Catch an ~|imp|~", "Catch an ~|orange salamander|~"],
 			"Access Ali's shop task[+]": ["Access Ali's shop in f2p", "F2P Only"],
@@ -221670,6 +221736,7 @@
 		},
 		"Seb's Shipyard Supplies": {
 			"Bronze nails": true,
+			"Facility bottle (empty)": true,
 			"Iron nails": true,
 			"Swamp paste": true,
 			"Repair kit": true
@@ -233728,7 +233795,7 @@
 					"1": "300/2218"
 				},
 				"Facility bottle (empty)": {
-					"1": "Unknown"
+					"1": "1/1000"
 				},
 				"Giant seaweed": {
 					"1": "50/2218"
@@ -233793,7 +233860,7 @@
 					"1": "50/1036"
 				},
 				"Facility bottle (empty)": {
-					"1": "Unknown"
+					"1": "1/900"
 				},
 				"Gold ring": {
 					"1": "200/1036"
@@ -233834,67 +233901,73 @@
 			},
 			"Martial salvage loot": {
 				"Adamant 2h sword": {
-					"1": "100/2431"
+					"1": "100/2440"
 				},
 				"Adamant arrow": {
-					"1-3": "200/2431"
+					"1-3": "200/2440"
 				},
 				"Adamant arrowtips": {
-					"1-5": "300/2431"
+					"1-5": "300/2440"
 				},
 				"Adamant bolts(unf)": {
-					"1-3": "100/2431"
+					"1-3": "100/2440"
 				},
 				"Adamant cannonball": {
-					"1-3": "100/2431"
+					"1-3": "100/2440"
 				},
 				"Adamant dart tip": {
-					"1-3": "200/2431"
+					"1-3": "200/2440"
 				},
 				"Adamant longsword": {
-					"1": "200/2431"
+					"1": "200/2440"
 				},
 				"Adamantite nails": {
-					"1-3": "50/2431"
+					"1-3": "50/2440"
 				},
 				"Amulet of power": {
-					"1": "200/2431"
+					"1": "200/2440"
 				},
 				"Broken sextant": {
 					"1": "1/3000"
 				},
+				"Camphor logs": {
+					"1": "6/2440"
+				},
 				"Camphor seed": {
-					"1": "10/2431"
+					"1": "10/2440"
 				},
 				"Dragon cannonball": {
 					"1": "1/3000"
 				},
 				"Facility bottle (empty)": {
-					"1": "Unknown"
+					"1": "1/700"
 				},
 				"Green d'hide body": {
-					"1": "100/2431"
+					"1": "100/2440"
+				},
+				"Ironwood logs": {
+					"1": "3/2440"
 				},
 				"Ironwood seed": {
-					"1": "1/2431"
+					"1": "1/2440"
 				},
 				"Mahogany logs": {
-					"1": "100/2431"
+					"1": "100/2440"
 				},
 				"Mithril dart tip": {
-					"1-5": "300/2431"
+					"1-5": "300/2440"
 				},
 				"Mithril longsword": {
-					"1": "300/2431"
+					"1": "300/2440"
 				},
 				"Rune arrow": {
-					"1-3": "100/2431"
+					"1-3": "100/2440"
 				},
 				"Rune cannonball": {
-					"1-2": "50/2431"
+					"1-2": "50/2440"
 				},
 				"Rune longsword": {
-					"1": "10/2431"
+					"1": "10/2440"
 				},
 				"Sailors' amulet (inert)": {
 					"1": "1/400"
@@ -233903,7 +233976,7 @@
 					"1": "1/24000"
 				},
 				"Umbral frag": {
-					"1": "10/2431"
+					"1": "10/2440"
 				},
 				"Clue scroll (hard)": {
 					"1": "1/500"
@@ -233911,64 +233984,70 @@
 			},
 			"Fremennik salvage loot": {
 				"Adamantite nails": {
-					"1-3": "100/2661"
+					"1-3": "100/2670"
 				},
 				"Archer helm": {
-					"1": "8/2661"
+					"1": "8/2670"
 				},
 				"Arctic pine logs": {
-					"1": "200/2661"
+					"1": "200/2670"
 				},
 				"Astral rune": {
-					"1-3": "200/2661"
+					"1-3": "200/2670"
 				},
 				"Berserker helm": {
-					"1": "8/2661"
+					"1": "8/2670"
 				},
 				"Cotton seed": {
-					"1-3": "10/2661"
+					"1-3": "10/2670"
 				},
 				"Ensouled troll head": {
-					"1": "50/2661"
+					"1": "50/2670"
 				},
 				"Facility bottle (empty)": {
-					"1": "Unknown"
+					"1": "1/500"
 				},
 				"Farseer helm": {
-					"1": "8/2661"
+					"1": "8/2670"
 				},
 				"Fremennik helm": {
-					"1": "8/2661"
+					"1": "8/2670"
+				},
+				"Ironwood logs": {
+					"1": "6/2670"
 				},
 				"Ironwood seed": {
-					"1": "5/2661"
+					"1": "5/2670"
 				},
 				"Mahogany plank": {
-					"1": "50/2661"
+					"1": "50/2670"
 				},
 				"Mithril ore": {
-					"1": "300/2661"
+					"1": "300/2670"
 				},
 				"Raw lobster": {
-					"1": "400/2661"
+					"1": "400/2670"
 				},
 				"Raw monkfish": {
-					"1": "400/2661"
+					"1": "400/2670"
 				},
 				"Raw salmon": {
-					"1": "400/2661"
+					"1": "400/2670"
 				},
 				"Raw tuna": {
-					"1": "400/2661"
+					"1": "400/2670"
+				},
+				"Rosewood logs": {
+					"1": "3/2670"
 				},
 				"Rosewood seed": {
-					"1": "1/2661"
+					"1": "1/2670"
 				},
 				"Rune cannonball": {
-					"1-3": "50/2661"
+					"1-3": "50/2670"
 				},
 				"Rune nails": {
-					"1-3": "50/2661"
+					"1-3": "50/2670"
 				},
 				"Sailors' amulet (inert)": {
 					"1": "1/350"
@@ -233977,10 +234056,10 @@
 					"1": "1/3000"
 				},
 				"Umbral frag": {
-					"1": "5/2661"
+					"1": "5/2670"
 				},
 				"Warrior helm": {
-					"1": "8/2661"
+					"1": "8/2670"
 				}
 			},
 			"Opulent salvage loot": {
@@ -233995,6 +234074,9 @@
 				},
 				"Dragon nails": {
 					"1-3": "1/2000"
+				},
+				"Facility bottle (empty)": {
+					"1": "1/300"
 				},
 				"Fish offcuts": {
 					"1-10": "30/424"
@@ -241208,7 +241290,7 @@
 					"1": "3/128"
 				},
 				"Belle's folly (tarnished)": {
-					"1": "1/400"
+					"1": "1/256"
 				},
 				"Big bones": {
 					"1": "Always"
@@ -252474,6 +252556,11 @@
 					"~|Vale Totems (miniquest)|~ Complete the quest": "Quest"
 				}]
 			},
+			"Ye olde Tea Shoppe.": {
+				"13109-2": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Yrsa's Accoutrements": {
 				"10553-1": [{
 					"~|The Fremennik Trials|~ Complete the quest": "Quest"
@@ -253659,7 +253746,7 @@
 				"Skills": {
 					"Sailing": 45
 				},
-				"Weight": 7
+				"Weight": 10
 			},
 			"Harpie bug swarms": {
 				"Level": 33,
@@ -253967,7 +254054,7 @@
 				"Skills": {
 					"Sailing": 45
 				},
-				"Weight": 5
+				"Weight": 10
 			},
 			"Hellhounds": {
 				"CombatLevel": 75,
