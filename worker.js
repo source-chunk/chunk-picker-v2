@@ -1387,8 +1387,8 @@ let calcChallenges = function(chunks, baseChunkData) {
                                     highestLevel = chunkInfo['challenges'][req][task]['Level'];
                                 }
                             });
-                            return !checkPrimaryMethod(req, newValids, baseChunkData) && !chunkInfo['challenges'][skill][challenge]['ManualValid'] && (!passiveSkill || !passiveSkill.hasOwnProperty(req) || passiveSkill[req] <= 1 || passiveSkill[req] < chunkInfo['challenges'][req][chunkInfo['challenges'][skill][challenge]['Requirements'][req]]) && (highestLevel <= 1 || highestLevel < chunkInfo['challenges'][req][chunkInfo['challenges'][skill][challenge]['Requirements'][req]]);
-                        }).some(req => {
+                            return !checkPrimaryMethod(req, newValids, baseChunkData) && !chunkInfo['challenges'][skill][challenge]['ManualValid'] && (!passiveSkill || !passiveSkill.hasOwnProperty(req) || passiveSkill[req] <= 1 || passiveSkill[req] < chunkInfo['challenges'][skill][challenge]['Requirements'][req]) && (highestLevel <= 1 || highestLevel < chunkInfo['challenges'][skill][challenge]['Requirements'][req]);
+                        }).some((req) => {
                             if (!nonValids.hasOwnProperty(challenge)) {
                                 nonValids[challenge] = [];
                             }
