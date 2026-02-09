@@ -72022,9 +72022,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Facility bottle (empty)"],
-				"Tasks": {
-					"FacilityBottleSource[+]": "Sailing"
-				},
+				"NonShop": true,
 				"Not F2P": true
 			},
 			"(Sea Treasures) Obtain a ~|medallion fragment#1|~": {
@@ -174683,7 +174681,6 @@
 			"WildernessPirateAccess[+]": ["Access wilderness pirates", "Access wilderness zombie pirates"],
 			"ConstructBed[+]": ["Build a ~|wooden bed|~", "Build an ~|oak bed|~", "Build a ~|large oak bed|~", "Build a ~|teak bed|~", "Build a ~|large teak bed|~", "Build a ~|4-poster|~", "Build a ~|gilded 4-poster|~"],
 			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
-			"FacilityBottleSource[+]": ["Process some ~|large salvage|~ at a salvaging station", "Process some ~|plundered salvage|~ at a salvaging station", "Process some ~|martial salvage|~ at a salvaging station", "Process some ~|fremennik salvage|~ at a salvaging station", "Process some ~|opulent salvage|~ at a salvaging station"],
 			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"],
 			"SmokableTrapTask[+]": ["Catch an ~|embertailed jerboa|~", "Catch a ~|pyre fox|~", "Catch a ~|tecu salamander|~", "Catch a ~|barb-tailed kebbit|~", "Catch a ~|black chinchompa|~", "Catch a ~|black salamander|~", "Catch a ~|carnivorous chinchompa|~", "Catch a ~|chinchompa (Hunter)|~", "Catch a ~|copper longtail|~", "Catch a ~|crimson swift|~", "Catch a ~|ferret|~", "Catch a ~|golden warbler|~", "Catch a ~|maniacal monkey (Hunter)|~", "Catch a ~|red salamander|~", "Catch a ~|sabre-toothed kebbit|~", "Catch a ~|swamp lizard|~", "Catch a ~|tropical wagtail|~", "Catch a ~|wild kebbit|~", "Catch an ~|imp|~", "Catch an ~|orange salamander|~"],
 			"Access Ali's shop task[+]": ["Access Ali's shop in f2p", "F2P Only"],
