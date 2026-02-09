@@ -170,6 +170,7 @@ let bestEquipmentAltsGlobal = {};
 let manualSections = {};
 let unlockedSections = {};
 let optOutSections = false;
+let optOutSectionsWater = false;
 let maxSkill;
 let userTasks = {};
 let manualPrimary = {};
@@ -242,6 +243,7 @@ onmessage = function(e) {
             isOnlyManualAreas,
             manualSections,
             optOutSections,
+            optOutSectionsWater,
             maxSkill,
             userTasks,
             manualPrimary,
@@ -8565,7 +8567,7 @@ let findConnectedSections = function(chunksIn, sections) {
             if (sections.hasOwnProperty(chunk) && sections[chunk].hasOwnProperty(sec) && sections[chunk][sec] === false) {
                 delete sections[chunk][sec];
             } else if (!manualSections || !manualSections.hasOwnProperty(chunk) || !manualSections[chunk].hasOwnProperty(sec) || manualSections[chunk][sec] !== false) {
-                if (optOutSections || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1]) && sections[connection.split('-')[0]][connection.split('-')[1]]) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && chunksIn[chunkInfo['chunks'][subChunk]['Name']] !== false && !unconnectedAreas.includes(chunkInfo['chunks'][subChunk]['Name'])).length > 0)) {
+                if (optOutSectionsWater || (optOutSections && !sec.includes('W')) || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1]) && sections[connection.split('-')[0]][connection.split('-')[1]]) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && chunksIn[chunkInfo['chunks'][subChunk]['Name']] !== false && !unconnectedAreas.includes(chunkInfo['chunks'][subChunk]['Name'])).length > 0)) {
                     if (!sections[chunk]) {
                         sections[chunk] = {};
                     }

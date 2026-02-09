@@ -85764,7 +85764,7 @@
 			"~|Falador Diary#Hard|~ Task 3": {
 				"Description": "Kill the Giant Mole beneath Falador Park.",
 				"Monsters": ["Giant Mole"],
-				"Items": ["Spade"],
+				"Items": ["Spade", "LightSource[+]"],
 				"Tasks": {
 					"~|Falador Diary#Medium|~ Complete the Medium Diary": "Diary"
 				},
@@ -122160,7 +122160,6 @@
 				},
 				"Skills": {
 					"Fishing": 55,
-					"Agility": 15,
 					"Strength": 35
 				},
 				"Not F2P": true
@@ -124098,7 +124097,9 @@
 			"Monster": {
 				"Bear Cub": 6,
 				"Grizzly bear": 4,
-				"Mountain troll": 12
+				"Mountain troll": 12,
+				"Soldier (Shayzien)": 2,
+				"Sergeant (Shayzien)": 1
 			},
 			"NPC": {
 				"Mountain Guide": 1,
@@ -127289,7 +127290,6 @@
 				"Skull (item)": 1
 			},
 			"Clue": {
-				"easy": 1,
 				"medium": 1,
 				"master": 2
 			}
@@ -129181,7 +129181,7 @@
 				"Bank Deposit Box": 1,
 				"Bank chest": 1,
 				"Bonfire": 1,
-				"Dead tree": 22,
+				"Dead tree": 3,
 				"Minecart": 1,
 				"Poll booth": 1,
 				"Reward Pile": 1
@@ -129852,6 +129852,7 @@
 						"Emissary Chosen": 3
 					},
 					"Object": {
+						"Altar": 1,
 						"Dead tree": 2
 					},
 					"Spawn": {
@@ -266193,6 +266194,7 @@
 		},
 		"11054": {
 			"1": [
+				"10798-1",
 				"11053-1",
 				"11055-1",
 				"11310-2",
@@ -266202,13 +266204,13 @@
 				"???"
 			],
 			"W1": [
-				"10798-1"
+				"10798-W1"
 			],
 			"W2": [
-				"10798-1"
+				"10798-W1"
 			],
 			"W3": [
-				"10798-1",
+				"10798-W1",
 				"11053-W1"
 			]
 		},

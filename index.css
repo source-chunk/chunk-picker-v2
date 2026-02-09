@@ -7727,7 +7727,7 @@ input#searchMonsters {
 .roll-chunk-data {
     max-height: 72%;
     min-height: 72%;
-    top: 10%;
+    margin-top: 10px;
 }
 
 .roll-chunk-outer {

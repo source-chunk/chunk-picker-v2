@@ -905,6 +905,7 @@ let settings = {
     "shiftUnlock": false,
     "rollWarning": false,
     "optOutSections": false,
+    "optOutSectionsWater": false,
     "unlockedBorderColor": '#FF0000',
     "rollingChunksOptions": { "karamja": true, "fremennik_province": true, "kharidian_desert": true, "tirannwn": true, "kourend": true, "varlamore": true, "wilderness": true, "morytania": true, "kandarin": true, "asgarnia": true, "misthalin": true, "ocean": true, "noquest": false, "bank": false },
     "chunkNeighboursOptions": { "neighbors": true, "walkableRollable": true, "autoWalkableRollable": false, "remove": false },
@@ -936,6 +937,7 @@ let settingNames = {
     "shiftUnlock": "Prevent click-to-unlock chunks unless holding down the Shift-key (or long-pressing on mobile)",
     "rollWarning": "Show a confirmation window after clicking the Pick Chunk or Roll 2 button",
     "optOutSections": "Always assume all chunks are entirely accessible (opt out of chunk sections)",
+    "optOutSectionsWater": "Include water sections, typically only accessible through Sailing",
     "unlockedBorderColor": "Change the color of the border surrounding your unlocked chunks",
     "defaultChunkinfo": "Select the default tab when first opening the Chunk Info Panel",
     "taskSearchbar": "Show a searchbar at the top of your Active Tasks to allow filtering. Useful for maps with large task lists that have trouble finding specific tasks"
@@ -968,7 +970,7 @@ let settingStructure = {
         "startingChunk": true,
         "ids": true,
         "cinematicRoll": true,
-        "optOutSections": true,
+        "optOutSections": ["optOutSectionsWater"],
         "newTasks": true,
         "highvis": true,
         "numTasksPercent": true,
@@ -981,7 +983,8 @@ let settingStructure = {
 
 let subSettingDefault = {
     "neighbors": true,
-    "chunkTasks": false
+    "chunkTasks": false,
+    "optOutSections": false
 };                                                                              // Default value of sub-setting when parent is checked
 
 let settingsStructureConflict = {
@@ -1507,7 +1510,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.30';
+let currentVersion = '6.9.31';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'difference';
 
@@ -1676,7 +1679,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.30";
+mapImg.src = "osrs_world_map.png?v=6.9.31";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3588,9 +3591,9 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.30");
+        myWorker = new Worker("./worker.js?v=6.9.31");
         myWorker.onmessage = workerOnMessage;
-        myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
+        myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
         workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
     }
@@ -3892,8 +3895,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.30");
-let myWorker2 = new Worker("./worker.js?v=6.9.30");
+let myWorker = new Worker("./worker.js?v=6.9.31");
+let myWorker2 = new Worker("./worker.js?v=6.9.31");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -3939,7 +3942,7 @@ let workerOnMessage = function(e) {
                 Object.keys(e.data[12]).filter(area => { return e.data[12][area] === true }).forEach((area) => {
                     futurePossibleAreas[area] = true;
                 });
-                let [challengeStr, challengeStrFormatted] = calcFutureChallenges2(e.data[1], e.data[2]);
+                let [challengeStr, challengeStrFormatted] = calcFutureChallenges2(e.data[1], e.data[2], e.data[7]);
                 expandChallengeStr = challengeStrFormatted.replaceAll('No new chunk tasks', 'No potential chunk tasks');
                 $('.panel-challenges').html(challengeStr || 'None');
                 $('.expand').show();
@@ -3950,7 +3953,7 @@ let workerOnMessage = function(e) {
             workersOut['current'] = false;
             workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
             if (settings['newTasks'] && chunkJustRolled) {
-                openNewTasksModal(calcFutureChallenges2(e.data[1], e.data[2])[1].replaceAll(", 'future'", ", ''"));
+                openNewTasksModal(calcFutureChallenges2(e.data[1], e.data[2], e.data[7])[1].replaceAll(", 'future'", ", ''"));
             }
             globalValids = e.data[1];
             baseChunkData = e.data[2];
@@ -6839,15 +6842,15 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.30");
+    myWorker2 = new Worker("./worker.js?v=6.9.31");
     myWorker2.onmessage = workerOnMessage;
-    myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], maxSkill, userTasks, manualPrimary, updateLevel]);
+    myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
     workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
 }
 
 // Finds the future challenge in each skill given a possible new chunk 2
-let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
+let calcFutureChallenges2 = function(valids, baseChunkDataLocal, localHighestOverall) {
     let highestChallenge = {};
     let challengeStr = '';
     let challengeStrFormatted = '';
@@ -6988,7 +6991,7 @@ let calcFutureChallenges2 = function(valids, baseChunkDataLocal) {
                 bestBoost = bestBoost + (ownsCrystalSaw ? 3 : 0);
             }
             if (skill === 'Quest' || skill === 'Diary' || skill === 'BiS' || skill === 'Extra') {
-                if ((!globalValids.hasOwnProperty(skill) || !globalValids[skill].hasOwnProperty(challenge)) && valids[skill][challenge] && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill][challenge])) {
+                if ((!globalValids.hasOwnProperty(skill) || !globalValids[skill].hasOwnProperty(challenge)) && valids[skill][challenge] && !chunkInfo['challenges'][skill][challenge]['NeverShow'] && (!completedChallenges[skill] || !completedChallenges[skill][challenge]) && (skill !== 'BiS' || Object.values(localHighestOverall).map(function(y) { return y.toLowerCase() }).includes(challenge.split('|')[1].toLowerCase()))) {
                     if ((skill === 'Quest' && rules["Show Quest Tasks"] && (chunkInfo['challenges'][skill][challenge].hasOwnProperty('QuestPoints') || !rules["Show Quest Tasks Complete"])) || (skill === 'Diary' && rules["Show Diary Tasks"] && (chunkInfo['challenges'][skill][challenge].hasOwnProperty('ManualShow') || !rules["Show Diary Tasks Complete"])) || (skill === 'BiS' && rules["Show Best in Slot Tasks"]) || (skill === 'Extra')) {
                         if (!!chunkInfo['challenges'][skill][challenge]['Skills']) {
                             let tempValid = true;
@@ -7531,7 +7534,7 @@ let findConnectedSections = function(chunksIn, sections) {
     let added = false;
     Object.keys(chunkInfo['sections']).filter((chunk) => chunksIn.hasOwnProperty(chunk)).forEach((chunk) => {
         Object.keys(chunkInfo['sections'][chunk]).filter((sec) => sec !== "0" && (!sections.hasOwnProperty(chunk) || !sections[chunk].hasOwnProperty(sec))).forEach((sec) => {
-            if (settings['optOutSections'] || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1]) && sections[connection.split('-')[0]][connection.split('-')[1]]) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && chunksIn[chunkInfo['chunks'][subChunk]['Name']] !== false && chunkInfo['chunks'][subChunk]['Name'] !== 'Zanaris').length > 0)) {
+            if (settings['optOutSectionsWater'] || (settings['optOutSections'] && !sec.includes('W')) || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1]) && sections[connection.split('-')[0]][connection.split('-')[1]]) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && chunksIn[chunkInfo['chunks'][subChunk]['Name']] !== false && chunkInfo['chunks'][subChunk]['Name'] !== 'Zanaris').length > 0)) {
                 if (!sections[chunk]) {
                     sections[chunk] = {};
                 }
@@ -12625,6 +12628,10 @@ let loadData = async function(startup) {
         if (settingsTemp['topButtons'] === undefined) {
             settingsTemp['topButtons'] = true;
         }
+
+        if (!settingsTemp.hasOwnProperty('optOutSectionsWater')) {
+            settingsTemp['optOutSectionsWater'] = settingsTemp.hasOwnProperty('optOutSections') ? settingsTemp['optOutSections'] : false;
+        }
         
         (!settingsTemp['mapIntro'] || (!settingsTemp['startingChunk'] || settingsTemp['startingChunk'] === '0000' || settingsTemp['startingChunk'] === '00000')) && (mapIntroOpenSoon = true);
         justStartingChunkSet = (settingsTemp['mapIntro'] && (!settingsTemp['startingChunk'] || settingsTemp['startingChunk'] === '0000' || settingsTemp['startingChunk'] === '00000'));
@@ -13213,6 +13220,7 @@ let setData = function() {
             'shiftUnlock': settings['shiftUnlock'],
             rollWarning: settings['rollWarning'],
             optOutSections: settings['optOutSections'],
+            optOutSectionsWater: settings['optOutSectionsWater'],
             info: chunkInfoOn,
             'rollingChunksOptions': settings['rollingChunksOptions'],
             'defaultChunkinfo': settings['defaultChunkinfo'],
