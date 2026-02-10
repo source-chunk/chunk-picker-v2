@@ -181627,19 +181627,19 @@
 				"1": "1/195"
 			},
 			"Contract of bloodied blows": {
-				"1": "Uncommon"
+				"1": "1/53"
 			},
 			"Contract of divine severance": {
-				"1": "Uncommon"
+				"1": "1/53"
 			},
 			"Contract of forfeit breath": {
-				"1": "Uncommon"
+				"1": "1/53"
 			},
 			"Contract of glyphic attenuation": {
-				"1": "Uncommon"
+				"1": "1/53"
 			},
 			"Contract of sensory clouding": {
-				"1": "Uncommon"
+				"1": "1/53"
 			}
 		},
 		"Black demon#Wilderness Slayer Cave": {
@@ -182284,13 +182284,13 @@
 				"1": "70/512"
 			},
 			"Fremennik blade": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik shield": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik helm": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Copper ore": {
 				"5": "10/512"
@@ -188412,7 +188412,7 @@
 				"1": "Always"
 			},
 			"Clue scroll (hard)": {
-				"1": "Unknown"
+				"1": "Rare"
 			},
 			"Coins": {
 				"545-2500": "19/122"
@@ -188433,13 +188433,13 @@
 				"1": "1/122"
 			},
 			"Elite black full helm": {
-				"1": "Varies"
+				"1": "Always"
 			},
 			"Elite black platebody": {
-				"1": "Varies"
+				"1": "Always"
 			},
 			"Elite black platelegs": {
-				"1": "Varies"
+				"1": "Always"
 			},
 			"Emerald": {
 				"5-8 (noted)": "3/122"
@@ -189618,13 +189618,13 @@
 				"1": "70/512"
 			},
 			"Fremennik blade": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik shield": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik helm": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Copper ore": {
 				"5": "10/512"
@@ -190805,17 +190805,6 @@
 				"1": "1/128"
 			}
 		},
-		"Giant lobster (Ghosts Ahoy)": {
-			"Seaweed": {
-				"1": "Always"
-			},
-			"Ensouled scorpion head": {
-				"1": "1/25"
-			},
-			"Clue scroll (beginner)": {
-				"1": "Rare"
-			}
-		},
 		"Giant rat": {
 			"Bones": {
 				"1": "Always"
@@ -190892,7 +190881,7 @@
 				"1": "5/128"
 			},
 			"Clue scroll (medium)": {
-				"1": "Rare"
+				"1": "1/128"
 			},
 			"Long bone": {
 				"1": "1/400"
@@ -191925,19 +191914,19 @@
 				"1": "1/249"
 			},
 			"Contract of bloodied blows": {
-				"1": "Uncommon"
+				"1": "1/81"
 			},
 			"Contract of divine severance": {
-				"1": "Uncommon"
+				"1": "1/81"
 			},
 			"Contract of forfeit breath": {
-				"1": "Uncommon"
+				"1": "1/81"
 			},
 			"Contract of glyphic attenuation": {
-				"1": "Uncommon"
+				"1": "1/81"
 			},
 			"Contract of sensory clouding": {
-				"1": "Uncommon"
+				"1": "1/81"
 			}
 		},
 		"Greater demon#Wilderness Slayer Cave": {
@@ -195704,13 +195693,13 @@
 				"1": "70/512"
 			},
 			"Fremennik blade": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik shield": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik helm": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Copper ore": {
 				"5": "10/512"
@@ -197028,13 +197017,13 @@
 				"1": "70/512"
 			},
 			"Fremennik blade": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik shield": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik helm": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Copper ore": {
 				"5": "10/512"
@@ -197227,13 +197216,13 @@
 				"1": "70/512"
 			},
 			"Fremennik blade": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik shield": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Fremennik helm": {
-				"1": "Very rare"
+				"1": "1/512"
 			},
 			"Copper ore": {
 				"5": "10/512"
@@ -197376,19 +197365,19 @@
 				"1": "1/256"
 			},
 			"Contract of bloodied blows": {
-				"1": "Uncommon"
+				"1": "1/123"
 			},
 			"Contract of divine severance": {
-				"1": "Uncommon"
+				"1": "1/123"
 			},
 			"Contract of forfeit breath": {
-				"1": "Uncommon"
+				"1": "1/123"
 			},
 			"Contract of glyphic attenuation": {
-				"1": "Uncommon"
+				"1": "1/123"
 			},
 			"Contract of sensory clouding": {
-				"1": "Uncommon"
+				"1": "1/123"
 			}
 		},
 		"Lesser demon#Wilderness Slayer Cave": {
@@ -201598,20 +201587,6 @@
 				"1": "1/269"
 			}
 		},
-		"Poison spider (Escape Caves)": {
-			"Looting bag": {
-				"1": "1/3"
-			},
-			"Clue scroll (beginner)": {
-				"1": "rare"
-			},
-			"Larran's key": {
-				"1": "1/176"
-			},
-			"Slayer's enchantment": {
-				"1": "1/269"
-			}
-		},
 		"Poltenip": {
 			"Bones": {
 				"1": "Always"
@@ -201637,29 +201612,6 @@
 			},
 			"Clue scroll (beginner)": {
 				"1": "Unknown"
-			}
-		},
-		"Possessed Priest": {
-			"Bones": {
-				"1": "Always"
-			},
-			"Agility potion(4)": {
-				"1": "Random"
-			},
-			"Attack potion(4)": {
-				"1": "Random"
-			},
-			"Defence potion(4)": {
-				"1": "Random"
-			},
-			"Magic potion(4)": {
-				"1": "Random"
-			},
-			"Strength potion(4)": {
-				"1": "Random"
-			},
-			"Coins": {
-				"1 - 1260": "Uncommon"
 			}
 		},
 		"Possessed pickaxe#Haunted Mine": {
@@ -204105,12 +204057,6 @@
 		"Rock lobster": {
 			"Raw lobster": {
 				"1": "Always"
-			},
-			"Fremennik brown shirt": {
-				"1": "Rare"
-			},
-			"Fremennik blade": {
-				"1": "Rare"
 			},
 			"Earth rune": {
 				"1-20": "10/128"
@@ -208178,7 +208124,7 @@
 				"1": "5/110"
 			},
 			"Clue scroll (easy)": {
-				"1": "Rare"
+				"1": "1/128"
 			},
 			"Long bone": {
 				"1": "1/400"
@@ -211619,7 +211565,7 @@
 				"1": "1/120"
 			},
 			"Clue scroll (elite)": {
-				"1": "Rare"
+				"1": "1/150"
 			}
 		},
 		"Vanguard": {
@@ -222980,7 +222926,7 @@
 					"1": "Always"
 				},
 				"Haddock eye": {
-					"1": "Varies"
+					"1": "Always"
 				}
 			},
 			"Jumbo squid loot": {
@@ -222996,7 +222942,7 @@
 					"1": "Always"
 				},
 				"Marlin scales": {
-					"3": "Varies"
+					"3": "Always"
 				}
 			},
 			"Swordtip squid loot": {
@@ -223012,7 +222958,7 @@
 					"1": "Always"
 				},
 				"Yellow fin": {
-					"3": "Varies"
+					"3": "Always"
 				}
 			}
 		},
@@ -223383,7 +223329,7 @@
 		"Fishing": {
 			"Fish shoal": {
 				"Clue bottle (medium)": {
-					"1": "Rare"
+					"1": "1/600"
 				},
 				"Oyster": {
 					"1": "Varies"
@@ -223487,7 +223433,7 @@
 					"1": "Always"
 				},
 				"Barronite handle": {
-					"1": "Rare"
+					"1": "1/512"
 				}
 			},
 			"Raw cavefish loot": {
@@ -223495,7 +223441,7 @@
 					"1": "Always"
 				},
 				"Barronite handle": {
-					"1": "Rare"
+					"1": "1/512"
 				}
 			},
 			"Raw guppy loot": {
@@ -223503,7 +223449,7 @@
 					"1": "Always"
 				},
 				"Barronite handle": {
-					"1": "Rare"
+					"1": "1/512"
 				}
 			},
 			"Raw tetra loot": {
@@ -223511,7 +223457,7 @@
 					"1": "Always"
 				},
 				"Barronite handle": {
-					"1": "Rare"
+					"1": "1/512"
 				}
 			},
 			"Bluegill loot": {
@@ -223522,7 +223468,7 @@
 					"1": "1/20000"
 				},
 				"Molch pearl": {
-					"1": "Varies"
+					"1": "1/75"
 				}
 			},
 			"Common tench loot": {
@@ -223533,7 +223479,7 @@
 					"1": "1/20000"
 				},
 				"Molch pearl": {
-					"1": "Varies"
+					"1": "1/75"
 				}
 			},
 			"Mottled eel loot": {
@@ -223544,7 +223490,7 @@
 					"1": "1/20000"
 				},
 				"Molch pearl": {
-					"1": "Varies"
+					"1": "1/75"
 				}
 			},
 			"Greater siren loot": {
@@ -223555,7 +223501,7 @@
 					"1": "1/20000"
 				},
 				"Molch pearl": {
-					"1": "Varies"
+					"1": "1/75"
 				}
 			},
 			"Raw shark loot": {
@@ -223870,7 +223816,7 @@
 					"1": "Varies"
 				},
 				"Feather": {
-					"1": "Varies"
+					"1": "Always"
 				},
 				"Raw bird meat": {
 					"1": "Always"
@@ -224610,7 +224556,7 @@
 			},
 			"Fish shoal": {
 				"Clue bottle (medium)": {
-					"1": "Rare"
+					"1": "1/600"
 				},
 				"Oyster": {
 					"1": "Varies"
@@ -225512,7 +225458,7 @@
 					"1": "1/20000"
 				},
 				"Molch pearl": {
-					"1": "Varies"
+					"1": "1/75"
 				}
 			},
 			"Common tench loot": {
@@ -225523,7 +225469,7 @@
 					"1": "1/20000"
 				},
 				"Molch pearl": {
-					"1": "Varies"
+					"1": "1/75"
 				}
 			},
 			"Mottled eel loot": {
@@ -225534,7 +225480,7 @@
 					"1": "1/20000"
 				},
 				"Molch pearl": {
-					"1": "Varies"
+					"1": "1/75"
 				}
 			},
 			"Greater siren loot": {
@@ -225545,7 +225491,7 @@
 					"1": "1/20000"
 				},
 				"Molch pearl": {
-					"1": "Varies"
+					"1": "1/75"
 				}
 			},
 			"Pyre fox": {
@@ -225625,35 +225571,35 @@
 			},
 			"Granite": {
 				"Granite (2kg)": {
-					"1": "Common"
+					"1": "22.15/100"
 				},
 				"Granite (500g)": {
-					"1": "Common"
+					"1": "20.7/100"
 				},
 				"Granite (5kg)": {
-					"1": "Common"
+					"1": "25.39/100"
 				}
 			},
 			"Rocks (Barronite)": {
 				"Barronite deposit": {
-					"1": "Rare"
+					"1": "24/100"
 				},
 				"Barronite shards": {
-					"1": "Always"
+					"4-6": "76/100"
 				}
 			},
 			"Sandstone": {
 				"Sandstone (10kg)": {
-					"1": "Common"
+					"1": "19.92/100"
 				},
 				"Sandstone (1kg)": {
-					"1": "Common"
+					"1": "26.77/100"
 				},
 				"Sandstone (2kg)": {
-					"1": "Common"
+					"1": "22.21/100"
 				},
 				"Sandstone (5kg)": {
-					"1": "Common"
+					"1": "23.77/100"
 				}
 			},
 			"Soil#Level 1 loot": {
@@ -225833,10 +225779,10 @@
 			},
 			"Calcified loot": {
 				"Blessed bone shards": {
-					"1-3": "Always"
+					"5-15": "3/4"
 				},
 				"Calcified deposit": {
-					"1": "Uncommon"
+					"1": "1/4"
 				}
 			},
 			"Supply crate (Mithril ore)": {
@@ -226561,13 +226507,13 @@
 			},
 			"Camdozaal Vault loot": {
 				"Elaborate lockbox": {
-					"1": "Common"
+					"1": "1/3"
 				},
 				"Ornate lockbox": {
-					"1": "Common"
+					"1": "1/3"
 				},
 				"Simple lockbox": {
-					"1": "Common"
+					"1": "1/3"
 				}
 			},
 			"Forgotten lockbox loot": {
@@ -227355,148 +227301,142 @@
 			},
 			"Black key loot": {
 				"Adamant axe": {
-					"1": "Uncommon"
+					"1": "6/140.98"
 				},
 				"Adamant mace": {
-					"1": "Uncommon"
+					"1": "6/140.98"
 				},
 				"Adamant med helm": {
-					"1": "Rare"
+					"1": "2/140.98"
 				},
 				"Adamant scimitar": {
-					"1": "Rare"
+					"1": "2/140.98"
 				},
 				"Adamant sword": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Amulet of magic": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Black 2h sword": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Black battleaxe": {
-					"1": "Uncommon"
+					"1": "3/140.98"
 				},
 				"Black chainbody": {
-					"1": "Uncommon"
+					"1": "5/140.98"
 				},
 				"Black full helm": {
-					"1": "Common"
+					"1": "3/140.98"
 				},
 				"Black kiteshield": {
-					"1": "Uncommon"
+					"1": "6/140.98"
 				},
 				"Black locks": {
-					"1": "Uncommon"
+					"1": "1/63"
 				},
 				"Black platelegs": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Black plateskirt": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Black spear": {
-					"1": "Uncommon"
+					"1": "4/140.98"
 				},
 				"Black sq shield": {
-					"1": "Uncommon"
+					"1": "9/140.98"
 				},
 				"Bloody notes": {
-					"1": "Rare"
+					"1": "1/378"
 				},
 				"Clue scroll (medium)": {
-					"1": "Rare"
+					"1": "4/140.98"
 				},
 				"Coins": {
-					"1": "Common"
+					"1-1000": "Common"
 				},
 				"Death rune": {
-					"1": "Rare"
+					"10-29": "4.4/140.98"
 				},
 				"Fine cloth": {
-					"1": "Common"
+					"1": "7/140.98"
 				},
 				"Flamtaer bag": {
-					"1": "Common"
+					"1": "1/2"
 				},
 				"Flamtaer hammer": {
-					"1": "Rare"
+					"1": "1/140.98"
 				},
 				"Mithril 2h sword": {
-					"1": "Rare"
+					"1": "2/140.98"
 				},
 				"Mithril battleaxe": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Mithril chainbody": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Mithril full helm": {
-					"1": "Uncommon"
+					"1": "6/140.98"
 				},
 				"Mithril kiteshield": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Mithril longsword": {
-					"1": "Uncommon"
-				},
-				"Mithril mace": {
-					"1": "Uncommon"
+					"1": "6/140.98"
 				},
 				"Mithril platelegs": {
-					"1": "Rare"
-				},
-				"Mithril plateskirt": {
-					"1": "Rare"
+					"1": "2/140.98"
 				},
 				"Mithril scimitar": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Mithril sq shield": {
-					"1": "Uncommon"
+					"1": "4/140.98"
 				},
 				"Mithril warhammer": {
-					"1": "Uncommon"
+					"1": "2/140.98"
 				},
 				"Nature rune": {
-					"1": "Uncommon"
+					"10-29": "6.6/140.98"
 				},
 				"Ruby ring": {
-					"1": "Rare"
+					"1": "7/140.98"
 				},
 				"Runescroll of bloodbark": {
-					"1": "Rare"
+					"1": "1/378"
 				},
 				"Runescroll of swampbark": {
-					"1": "Rare"
+					"1": "1/378"
 				},
 				"Staff of air": {
-					"1": "Uncommon"
+					"1": "1/140.98"
 				},
 				"Staff of earth": {
-					"1": "Uncommon"
+					"1": "1/140.98"
 				},
 				"Staff of fire": {
-					"1": "Uncommon"
+					"1": "1/140.98"
 				},
 				"Staff of water": {
-					"1": "Uncommon"
+					"1": "1/140.98"
 				},
-				"Steel plateskirt": {
-					"1": "Uncommon"
+				"Steel platebody": {
+					"1": "2/140.98"
 				},
 				"Swamp paste": {
-					"1": "Common"
+					"25-40": "Always"
 				},
 				"Tree wizards' journal": {
-					"1": "Rare"
+					"1": "1/378"
 				},
 				"Willow logs": {
-					"1": "Uncommon"
+					"5-14 (noted)": "9.6/140.98"
 				},
 				"Yew logs": {
-					"1": "Rare"
+					"5-14 (noted)": "6.4/140.98"
 				}
 			},
 			"Bowl of fish loot": {
@@ -227568,94 +227508,82 @@
 			},
 			"Bronze key loot": {
 				"Amulet of defence": {
-					"1": "Common"
+					"1": "7/98.56"
 				},
 				"Black axe": {
-					"1": "Uncommon"
+					"1": "1/98.56"
 				},
 				"Black dagger": {
-					"1": "Uncommon"
+					"1": "6/98.56"
 				},
 				"Black dagger(p)": {
-					"1": "Common"
+					"1": "5/98.56"
 				},
 				"Black mace": {
-					"1": "Uncommon"
+					"1": "2/98.56"
 				},
 				"Black spear": {
-					"1": "Uncommon"
-				},
-				"Bloody notes": {
-					"1": "Rare"
+					"1": "1/3055.5"
 				},
 				"Bronze locks": {
-					"1": "Uncommon"
+					"1": "1/63"
 				},
 				"Chaos rune": {
-					"1": "Rare"
+					"12-29": "14/98.56"
 				},
 				"Clue scroll (easy)": {
-					"1": "3/99"
+					"1": "2/98.56"
 				},
 				"Coins": {
-					"1": "Common"
-				},
-				"Fine cloth": {
-					"1": "Rare"
+					"1-270": "Common"
 				},
 				"Gold bar": {
-					"1": "Uncommon"
+					"3": "5/98.56"
 				},
 				"Magic staff": {
-					"1": "Uncommon"
+					"1": "6/98.56"
 				},
 				"Mithril bar": {
-					"1": "Rare"
+					"3": "5/98.56"
 				},
 				"Mithril dagger": {
-					"1": "Uncommon"
+					"1": "5/98.56"
 				},
 				"Mithril dagger(p)": {
-					"1": "Common"
-				},
-				"Runescroll of bloodbark": {
-					"1": "Rare"
-				},
-				"Runescroll of swampbark": {
-					"1": "Rare"
+					"1": "4/98.56"
 				},
 				"Sapphire ring": {
-					"1": "Rare"
+					"1": "2/98.56"
 				},
 				"Silver bar": {
-					"1": "Uncommon"
+					"3": "6/98.56"
 				},
 				"Steel axe": {
-					"1": "Common"
+					"1": "6/98.56"
 				},
 				"Steel longsword": {
-					"1": "Uncommon"
+					"1": "1/3055.5"
 				},
 				"Steel mace": {
-					"1": "Uncommon"
+					"1": "3/98.56"
 				},
 				"Steel med helm": {
-					"1": "Uncommon"
+					"1": "5/98.56"
 				},
 				"Steel scimitar": {
-					"1": "Uncommon"
+					"1": "3/98.56"
 				},
 				"Steel spear": {
-					"1": "Uncommon"
+					"1": "4/98.56"
+				},
+				"Steel spear(p)": {
+					"1": "4/98.56"
 				},
 				"Steel sword": {
-					"1": "Uncommon"
+					"1": "4/98.56"
 				},
 				"Swamp paste": {
-					"1": "Common"
-				},
-				"Tree wizards' journal": {
-					"1": "Rare"
+					"5-10": "Always"
 				}
 			},
 			"Casket loot": {
@@ -227689,19 +227617,19 @@
 					"1": "1/33"
 				},
 				"Ancestral hat": {
-					"1": "Rare"
+					"1": "10.5/6900"
 				},
 				"Ancestral robe bottom": {
-					"1": "Rare"
+					"1": "10.5/6900"
 				},
 				"Ancestral robe top": {
-					"1": "Rare"
+					"1": "10.5/6900"
 				},
 				"Ancient tablet": {
 					"1": "1/10"
 				},
 				"Arcane prayer scroll": {
-					"1": "Rare"
+					"1": "70/6900"
 				},
 				"Blood rune": {
 					"1": "1/33"
@@ -227722,25 +227650,25 @@
 					"1": "1/33"
 				},
 				"Dexterous prayer scroll": {
-					"1": "Rare"
+					"1": "70/6900"
 				},
 				"Dinh's bulwark": {
-					"1": "Rare"
+					"1": "10.5/6900"
 				},
 				"Dragon arrow": {
 					"1": "1/33"
 				},
 				"Dragon claws": {
-					"1": "Rare"
+					"1": "10.5/6900"
 				},
 				"Dragon hunter crossbow": {
-					"1": "Rare"
+					"1": "14/6900"
 				},
 				"Dynamite": {
 					"1": "1/33"
 				},
 				"Elder maul": {
-					"1": "Very rare"
+					"1": "7/6900"
 				},
 				"Gold ore": {
 					"1": "1/33"
@@ -227776,7 +227704,7 @@
 					"1": "1/33"
 				},
 				"Kodai insignia": {
-					"1": "Very rare"
+					"1": "7/6900"
 				},
 				"Lizardman fang": {
 					"1": "1/33"
@@ -227821,10 +227749,10 @@
 					"1": "1/75"
 				},
 				"Twisted bow": {
-					"1": "Very rare"
+					"1": "7/6900"
 				},
 				"Twisted buckler": {
-					"1": "Rare"
+					"1": "14/6900"
 				},
 				"Uncut diamond": {
 					"1": "1/33"
@@ -227869,19 +227797,19 @@
 					"1": "1/33"
 				},
 				"Xeric's champion": {
-					"1": "1/2000"
+					"1": "Always"
 				},
 				"Xeric's general": {
-					"1": "1/1500"
+					"1": "Always"
 				},
 				"Xeric's guard": {
-					"1": "1/100"
+					"1": "Always"
 				},
 				"Xeric's sentinel": {
-					"1": "1/1000"
+					"1": "Always"
 				},
 				"Xeric's warrior": {
-					"1": "1/500"
+					"1": "Always"
 				}
 			},
 			"Lunar Chest": {
@@ -228788,16 +228716,16 @@
 					"1": "Varies"
 				},
 				"Angler boots": {
-					"1": "Uncommon"
+					"1": "1/12"
 				},
 				"Angler hat": {
-					"1": "Uncommon"
+					"1": "1/12"
 				},
 				"Angler top": {
-					"1": "Uncommon"
+					"1": "1/12"
 				},
 				"Angler waders": {
-					"1": "Uncommon"
+					"1": "1/12"
 				}
 			},
 			"Fishing Trawler loot 2": {
@@ -228997,133 +228925,136 @@
 			},
 			"Gold key loot": {
 				"Adamant chainbody": {
-					"1": "Uncommon"
+					"1": "4/143.91"
 				},
 				"Adamant full helm": {
-					"1": "Common"
+					"1": "8/143.91"
 				},
 				"Adamant kiteshield": {
-					"1": "Uncommon"
+					"1": "2/143.91"
 				},
 				"Adamant longsword": {
-					"1": "Uncommon"
+					"1": "3/143.91"
 				},
 				"Adamant platebody": {
-					"1": "Uncommon"
+					"1": "3/143.91"
 				},
 				"Adamant platelegs": {
-					"1": "Uncommon"
+					"1": "3/143.91"
 				},
 				"Adamant plateskirt": {
-					"1": "Uncommon"
+					"1": "3/143.91"
 				},
 				"Adamant spear": {
-					"1": "Common"
+					"1": "7/143.91"
 				},
 				"Adamant spear(p)": {
-					"1": "Common"
+					"1": "6/143.91"
 				},
 				"Amulet of the damned (full)": {
-					"1": "Common"
+					"1": "6/143.91"
 				},
 				"Battlestaff": {
-					"1": "Common"
+					"3 (noted)": "11/143.91"
 				},
 				"Bloody notes": {
-					"1": "Rare"
+					"1": "1/109.74"
 				},
 				"Clue scroll (elite)": {
-					"1": "Rare"
+					"1": "1/139"
 				},
 				"Coins": {
-					"1": "Common"
+					"1-3160": "Common"
 				},
 				"Death rune": {
-					"1": "Common"
+					"10-29": "9/143.91"
 				},
 				"Dragon dagger": {
-					"1": "Rare"
+					"1": "2/143.91"
 				},
 				"Dragon longsword": {
-					"1": "Rare"
+					"1": "1/143.91"
 				},
 				"Dragon mace": {
-					"1": "Rare"
+					"1": "1/143.91"
 				},
 				"Dragonstone": {
-					"1": "Uncommon"
+					"1": "2/143.91"
 				},
 				"Dragonstone ring": {
-					"1": "Uncommon"
+					"1": "3/143.91"
 				},
 				"Fine cloth": {
-					"1": "Common"
+					"1": "21/143.91"
+				},
+				"Flamtaer bag": {
+					"1": "1/2"
 				},
 				"Flamtaer hammer": {
-					"1": "Uncommon"
+					"1": "4/143.91"
 				},
 				"Gold locks": {
-					"1": "Uncommon"
+					"1": "1/63"
 				},
 				"Mithril plateskirt": {
-					"1": "Uncommon"
+					"1": "5/143.91"
 				},
 				"Redwood logs": {
-					"1": "Rare"
+					"5-14 (noted)": "2.4/143.91"
 				},
 				"Rune chainbody": {
-					"1": "Rare"
+					"1": "2/143.91"
 				},
 				"Rune longsword": {
-					"1": "Rare"
+					"1": "5/143.91"
 				},
 				"Rune med helm": {
-					"1": "Uncommon"
+					"1": "3/143.91"
 				},
 				"Rune platebody": {
-					"1": "Rare"
+					"1": "2/143.91"
 				},
 				"Rune platelegs": {
-					"1": "Rare"
+					"1": "2/143.91"
 				},
 				"Rune plateskirt": {
-					"1": "Rare"
+					"1": "2/143.91"
 				},
 				"Rune scimitar": {
-					"1": "Uncommon"
+					"1": "3/143.91"
 				},
 				"Rune sword": {
-					"1": "Uncommon"
+					"1": "3/143.91"
 				},
 				"Runescroll of bloodbark": {
-					"1": "Rare"
+					"1": "1/109.74"
 				},
 				"Runescroll of swampbark": {
-					"1": "Rare"
+					"1": "1/109.74"
 				},
 				"Soul rune": {
-					"1": "Uncommon"
+					"10-29": "6/143.91"
 				},
 				"Swamp paste": {
-					"1": "Common"
+					"1": "Always"
 				},
 				"Tree wizards' journal": {
-					"1": "Rare"
+					"1": "1/109.74"
 				},
 				"Yew logs": {
-					"1": "Uncommon"
+					"5-15 (noted)": "3.6/143.91"
 				},
 				"Zealot's boots": {
-					"1": "Rare"
+					"1": "1/128"
 				},
 				"Zealot's helm": {
-					"1": "Rare"
+					"1": "1/128"
 				},
 				"Zealot's robe bottom": {
-					"1": "Rare"
+					"1": "1/128"
 				},
 				"Zealot's robe top": {
-					"1": "Rare"
+					"1": "1/128"
 				}
 			},
 			"Goutweed loot": {
@@ -230179,22 +230110,22 @@
 			},
 			"Ore pack (Volcanic Mine) loot": {
 				"Adamantite ore": {
-					"1-30 (noted)": "Common"
+					"1-6 (noted)": "Always"
 				},
 				"Dragon pickaxe (broken)": {
 					"1": "1/100"
 				},
 				"Coal": {
-					"1-30 (noted)": "Common"
+					"1-10 (noted)": "Always"
 				},
 				"Iron ore": {
-					"1-30 (noted)": "Common"
+					"1-71 (noted)": "Always"
 				},
 				"Mithril ore": {
-					"1-30 (noted)": "Common"
+					"1-7 (noted)": "Always"
 				},
 				"Runite ore": {
-					"1-30 (noted)": "Common"
+					"1-3 (noted)": "45/100"
 				}
 			},
 			"Intricate pouch loot": {
@@ -231054,7 +230985,7 @@
 					"1": "1/700"
 				},
 				"Abyssal protector": {
-					"1": "Very rare"
+					"1": "1/4000"
 				},
 				"Abyssal red dye": {
 					"1": "1/1200"
@@ -231179,37 +231110,37 @@
 					"1": "2/160"
 				},
 				"Raw manta ray": {
-					"1": "Common"
+					"5-10 (noted)": "540/6400"
 				},
 				"Raw sea turtle": {
-					"1": "Common"
+					"5-12 (noted)": "630/6400"
 				},
 				"Raw shark": {
-					"1": "Common"
+					"5-20 (noted)": "720/6400"
 				},
 				"Raw swordfish": {
-					"1": "Common"
+					"5-30 (noted)": "810/6400"
 				},
 				"Raw bass": {
-					"1": "Common"
+					"5-40 (noted)": "900/6400"
 				},
 				"Raw lobster": {
-					"1": "Common"
+					"5-40 (noted)": "900/6400"
 				},
 				"Raw tuna": {
-					"1": "Common"
+					"5-40 (noted)": "900/6400"
 				},
 				"Raw salmon": {
-					"1": "Common"
+					"7-40 (noted)": "900/6400"
 				},
 				"Raw pike": {
-					"1": "Common"
+					"10-40 (noted)": "900/6400"
 				},
 				"Raw mackerel": {
-					"1": "Common"
+					"20-40 (noted)": "900/6400"
 				},
 				"Raw herring": {
-					"1": "Common"
+					"30-40 (noted)": "900/6400"
 				},
 				"Soaked page": {
 					"1": "149/8000"
@@ -231221,7 +231152,7 @@
 					"1": "1/400"
 				},
 				"Tiny tempor": {
-					"1": "Very rare"
+					"1": "1/8000"
 				},
 				"Big harpoonfish": {
 					"1": "1/1600"
@@ -231523,124 +231454,124 @@
 			},
 			"Silver key loot": {
 				"Adamant 2h sword": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Adamant battleaxe": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Adamant chainbody": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Adamant full helm": {
-					"1": "7/153"
+					"1": "7/152.39"
 				},
 				"Adamant kiteshield": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Adamant longsword": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Adamant platebody": {
-					"1": "2/153"
+					"1": "2/152.39"
 				},
 				"Adamant platelegs": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Adamant plateskirt": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Adamant spear": {
-					"1": "11/153"
+					"1": "11/152.39"
 				},
 				"Adamant spear(p)": {
-					"1": "11/153"
+					"1": "11/152.39"
 				},
 				"Adamant sq shield": {
-					"1": "2/153"
+					"1": "2/152.39"
 				},
 				"Adamant warhammer": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Amulet of power": {
-					"1": "2/153"
+					"1": "2/152.39"
 				},
 				"Amulet of the damned (full)": {
-					"1": "10/153"
+					"1": "10/152.39"
 				},
 				"Battlestaff": {
-					"1": "9/153"
+					"1": "9/152.39"
 				},
 				"Black platebody": {
-					"1": "4/153"
+					"1": "4/152.39"
 				},
 				"Black spear": {
-					"1": "7/153"
+					"1": "7/152.39"
 				},
 				"Blood rune": {
-					"1": "6/153"
+					"10-30": "6/152.39"
 				},
 				"Bloody notes": {
-					"1": "Rare"
+					"1": "1/154.45"
 				},
 				"Clue scroll (hard)": {
-					"1": "2/153"
+					"1": "2/152.39"
 				},
 				"Coins": {
-					"1": "Common"
+					"1-2326": "Common"
 				},
 				"Death rune": {
-					"1": "9/153"
+					"10-30": "9/152.39"
 				},
 				"Diamond ring": {
-					"1": "4/153"
+					"1": "4/152.39"
 				},
 				"Fine cloth": {
-					"1": "21/153"
+					"1": "21/152.39"
 				},
 				"Flamtaer hammer": {
-					"1": "4/153"
+					"1": "4/152.39"
 				},
 				"Magic logs": {
-					"1": "0.8/153"
+					"5-14 (noted)": "0.8/152.39"
 				},
 				"Mithril platebody": {
-					"1": "2/153"
+					"1": "2/152.39"
 				},
 				"Mithril plateskirt": {
-					"1": "4/153"
+					"1": "4/152.39"
 				},
 				"Rune chainbody": {
-					"1": "1/153"
+					"1": "1/152.39"
 				},
 				"Rune longsword": {
-					"1": "1/153"
+					"1": "1/152.39"
 				},
 				"Rune med helm": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Rune scimitar": {
-					"1": "2/153"
+					"1": "2/152.39"
 				},
 				"Rune sword": {
-					"1": "3/153"
+					"1": "3/152.39"
 				},
 				"Runescroll of bloodbark": {
-					"1": "Rare"
+					"1": "1/154.45"
 				},
 				"Runescroll of swampbark": {
-					"1": "Rare"
+					"1": "1/154.45"
 				},
 				"Silver locks": {
-					"1": "Uncommon"
+					"1": "1/63"
 				},
 				"Swamp paste": {
-					"1": "Common"
+					"25-40": "Always"
 				},
 				"Tree wizards' journal": {
-					"1": "Rare"
+					"1": "1/154.45"
 				},
 				"Yew logs": {
-					"1": "1.2/153"
+					"5-14 (noted)": "1.2/152.39"
 				}
 			},
 			"Sinister chest": {
@@ -231759,103 +231690,109 @@
 			},
 			"Steel key loot": {
 				"Adamant dagger": {
-					"1": "Uncommon"
+					"1": "4/134.35"
+				},
+				"Adamant dagger(p)": {
+					"1": "1/134.35"
 				},
 				"Adamantite bar": {
-					"1": "Rare"
+					"3": "6/134.35"
 				},
 				"Amulet of strength": {
-					"1": "Rare"
+					"1": "6/134.35"
 				},
 				"Black longsword": {
-					"1": "Uncommon"
+					"1": "2/134.35"
 				},
 				"Black med helm": {
-					"1": "Uncommon"
+					"1": "7/134.35"
 				},
 				"Black scimitar": {
-					"1": "Uncommon"
+					"1": "10/134.35"
 				},
 				"Black spear": {
-					"1": "Uncommon"
+					"1": "1/134.35"
 				},
 				"Black sword": {
-					"1": "Uncommon"
+					"1": "3/134.35"
 				},
 				"Black warhammer": {
-					"1": "Uncommon"
+					"1": "6/134.35"
 				},
 				"Bloody notes": {
-					"1": "Rare"
+					"1": "1/1217.32"
 				},
 				"Chaos rune": {
-					"1": "Uncommon"
+					"10-29": "11/134.35"
 				},
 				"Clue scroll (medium)": {
-					"1": "Rare"
+					"1": "3/134.35"
 				},
 				"Coins": {
-					"1": "Common"
+					"1-700": "Common"
 				},
 				"Emerald ring": {
-					"1": "Rare"
+					"1": "2/134.35"
 				},
 				"Fine cloth": {
-					"1": "Rare"
+					"1": "1/1679.42"
 				},
 				"Flamtaer bag": {
-					"1": "Uncommon"
+					"1": "1/2"
 				},
 				"Mithril mace": {
-					"1": "Uncommon"
+					"1": "7/134.35"
 				},
 				"Mithril med helm": {
-					"1": "Rare"
+					"1": "3/134.35"
 				},
 				"Mithril spear": {
-					"1": "Uncommon"
+					"1": "4/134.35"
+				},
+				"Mithril spear(p)": {
+					"1": "4/134.35"
 				},
 				"Mithril sword": {
-					"1": "Uncommon"
+					"1": "3/134.35"
 				},
 				"Nature rune": {
-					"1": "Rare"
+					"10-29": "15/134.35"
 				},
 				"Runescroll of bloodbark": {
-					"1": "Rare"
+					"1": "1/1217.32"
 				},
 				"Runescroll of swampbark": {
-					"1": "Rare"
+					"1": "1/1217.32"
 				},
 				"Steel 2h sword": {
-					"1": "Rare"
+					"1": "1/134.35"
 				},
 				"Steel battleaxe": {
-					"1": "Uncommon"
+					"1": "5/134.35"
 				},
 				"Steel chainbody": {
-					"1": "Uncommon"
+					"1": "5/134.35"
 				},
 				"Steel kiteshield": {
-					"1": "Uncommon"
+					"1": "2/134.35"
 				},
 				"Steel locks": {
-					"1": "Uncommon"
+					"1": "1/63"
 				},
 				"Steel warhammer": {
-					"1": "Uncommon"
+					"1": "6/134.35"
 				},
 				"Studded chaps": {
-					"1": "Uncommon"
+					"1": "5/134.35"
 				},
 				"Swamp paste": {
-					"1": "Common"
+					"15-30": "Always"
 				},
 				"Tree wizards' journal": {
-					"1": "Rare"
+					"1": "1/1217.32"
 				},
 				"Willow logs": {
-					"1": "Uncommon"
+					"5-14 (noted)": "10/134.35"
 				}
 			},
 			"Supply crate (Mahogany Homes) loot": {
@@ -232285,7 +232222,7 @@
 					"1-26 (noted)": "3/27"
 				},
 				"Clue scroll (elite)": {
-					"1": "Varies"
+					"1": "1/4"
 				},
 				"Coconut milk": {
 					"1-16 (noted)": "3/27"
@@ -232312,7 +232249,7 @@
 					"1-43 (noted)": "3/27"
 				},
 				"Elidinis' ward": {
-					"1": "Varies"
+					"1": "48/2400"
 				},
 				"Emerald": {
 					"4-69 (noted)": "3/27"
@@ -232354,7 +232291,7 @@
 					"1": "1/50"
 				},
 				"Lightbearer": {
-					"1": "Varies"
+					"1": "112/2400"
 				},
 				"Lily of the sands": {
 					"1-18 (noted)": "3/27"
@@ -232366,22 +232303,22 @@
 					"6-94 (noted)": "3/27"
 				},
 				"Masori body": {
-					"1": "Varies"
+					"1": "32/2400"
 				},
 				"Masori chaps": {
-					"1": "Varies"
+					"1": "32/2400"
 				},
 				"Masori crafting kit": {
 					"1": "Always"
 				},
 				"Masori mask": {
-					"1": "Varies"
+					"1": "32/2400"
 				},
 				"Menaphite ornament kit": {
 					"1": "Always"
 				},
 				"Osmumten's fang": {
-					"1": "Varies"
+					"1": "112/2400"
 				},
 				"Potato cactus": {
 					"4-76 (noted)": "3/27"
@@ -232429,10 +232366,10 @@
 					"1-23": "3/27"
 				},
 				"Tumeken's guardian": {
-					"1": "Varies"
+					"1": "1/500"
 				},
 				"Tumeken's shadow (uncharged)": {
-					"1": "Varies"
+					"1": "16/2400"
 				}
 			},
 			"Tool store 1": {
@@ -232680,13 +232617,13 @@
 			},
 			"Vale offerings loot": {
 				"Acorn": {
-					"3-6": "Varies"
+					"3-6": "1/73.15"
 				},
 				"Anima-infused bark": {
 					"70-90": "25/399"
 				},
 				"Apple tree seed": {
-					"5-8": "Varies"
+					"5-8": "1/36.9"
 				},
 				"Bale of flax": {
 					"5-6": "50/399"
@@ -232707,28 +232644,13 @@
 					"1": "5/1000"
 				},
 				"Cadavaberry seed": {
-					"7-11": "Varies"
-				},
-				"Clue scroll (beginner)": {
-					"1": "Rare"
-				},
-				"Clue scroll (easy)": {
-					"1": "Very rare"
-				},
-				"Clue scroll (elite)": {
-					"1": "Very rare"
-				},
-				"Clue scroll (hard)": {
-					"1": "Very rare"
-				},
-				"Clue scroll (medium)": {
-					"1": "Very rare"
+					"7-11": "1/28.87"
 				},
 				"Dirty arrowtips": {
 					"26-32": "80/399"
 				},
 				"Dragonfruit tree seed": {
-					"1-2": "Varies"
+					"1-2": "1/4103.14"
 				},
 				"Ent branch": {
 					"1": "65/399"
@@ -232743,43 +232665,43 @@
 					"1": "2/1000"
 				},
 				"Limpwurt seed": {
-					"3-6": "Varies"
+					"3-6": "1/48.34"
 				},
 				"Magic roots": {
 					"2-3": "7.2/399"
 				},
 				"Magic seed": {
-					"1-2": "Varies"
+					"1-2": "1/145.04"
 				},
 				"Maple roots": {
 					"3-4": "4.8/399"
 				},
 				"Maple seed": {
-					"1-2": "Varies"
+					"1-2": "1/43.87"
 				},
 				"Palm tree seed": {
-					"1-2": "Varies"
+					"1-2": "1/73.46"
 				},
 				"Papaya tree seed": {
-					"1-2": "Varies"
+					"1-2": "1/43.93"
 				},
 				"Pineapple seed": {
-					"1-2": "Varies"
+					"1-2": "1/72.93"
 				},
 				"Watermelon seed": {
-					"5-8": "Varies"
+					"5-8": "1/44.67"
 				},
 				"Willow roots": {
 					"3-4": "4.8/399"
 				},
 				"Willow seed": {
-					"1-2": "Varies"
+					"1-2": "1/29.08"
 				},
 				"Yew roots": {
 					"3-4": "7.2/399"
 				},
 				"Yew seed": {
-					"1-2": "Varies"
+					"1-2": "1/72.4"
 				}
 			},
 			"Dirty arrowtips loot": {
@@ -233318,7 +233240,7 @@
 					"1": "Uncommon"
 				},
 				"Uncut red topaz": {
-					"1": "Uncommon"
+					"1": "2/25"
 				},
 				"Uncut ruby": {
 					"1": "Uncommon"
@@ -233394,26 +233316,26 @@
 			},
 			"Potato loot": {
 				"Potato": {
-					"1": "Common"
+					"1": "100/103"
 				},
 				"Potato seed": {
-					"1": "Rare"
+					"1": "3/103"
 				}
 			},
 			"Onion loot": {
 				"Onion": {
-					"1": "Common"
+					"1": "100/103"
 				},
 				"Onion seed": {
-					"1": "Rare"
+					"1": "3/103"
 				}
 			},
 			"Sweetcorn loot": {
 				"Sweetcorn": {
-					"1": "243/250"
+					"1": "100/103"
 				},
 				"Sweetcorn seed": {
-					"1": "7/250"
+					"1": "3/103"
 				}
 			},
 			"Something nice": {
@@ -233485,23 +233407,17 @@
 		"Sailing": {
 			"Port tasks loot": {
 				"Shark paint": {
-					"1": "Common"
+					"1": "1/36"
 				}
 			},
 			"The Tempor Tantrum Swordfish rank loot": {
 				"Stormy key": {
 					"1": "Always"
-				},
-				"Barracuda paint": {
-					"1": "Rare"
 				}
 			},
 			"The Tempor Tantrum Shark rank loot": {
 				"Barrel stand": {
 					"1": "Always"
-				},
-				"Barracuda paint": {
-					"1": "Rare"
 				}
 			},
 			"The Tempor Tantrum Marlin rank loot": {
@@ -233509,23 +233425,17 @@
 					"1": "Always"
 				},
 				"Barracuda paint": {
-					"1": "Rare"
+					"1": "1/240"
 				}
 			},
 			"The Jubbly Jive Swordfish rank loot": {
 				"Fetid key": {
 					"1": "Always"
-				},
-				"Barracuda paint": {
-					"1": "Rare"
 				}
 			},
 			"The Jubbly Jive Shark rank loot": {
 				"Captured wind mote": {
 					"1": "Always"
-				},
-				"Barracuda paint": {
-					"1": "Rare"
 				}
 			},
 			"The Jubbly Jive Marlin rank loot": {
@@ -233533,23 +233443,17 @@
 					"1": "Always"
 				},
 				"Barracuda paint": {
-					"1": "Rare"
+					"1": "1/220"
 				}
 			},
 			"The Gwenith Glide Swordfish rank loot": {
 				"Serrated key": {
 					"1": "Always"
-				},
-				"Barracuda paint": {
-					"1": "Rare"
 				}
 			},
 			"The Gwenith Glide Shark rank loot": {
 				"Heart of ithell": {
 					"1": "Always"
-				},
-				"Barracuda paint": {
-					"1": "Rare"
 				}
 			},
 			"The Gwenith Glide Marlin rank loot": {
@@ -233557,7 +233461,7 @@
 					"1": "Always"
 				},
 				"Barracuda paint": {
-					"1": "Rare"
+					"1": "1/400"
 				}
 			},
 			"Small salvage loot": {
@@ -234605,7 +234509,7 @@
 					"1": "Always"
 				},
 				"Aether catalyst": {
-					"242-250": "Uncommon"
+					"220-270": "2/139"
 				},
 				"Battlestaff": {
 					"10 (noted)": "6/139"
@@ -238076,107 +237980,110 @@
 					"1": "1/1000"
 				},
 				"Rune pickaxe": {
-					"1": "1/22.83"
+					"1": "6/142"
 				},
 				"Rune full helm": {
-					"1": "1/27.4"
+					"1": "5/142"
 				},
 				"Rune platelegs": {
-					"1": "1/27.4"
+					"1": "5/142"
 				},
 				"Rune 2h sword": {
-					"1": "1/34.25"
+					"1": "4/142"
 				},
 				"Rune battleaxe": {
-					"1": "1/45.67"
+					"1": "3/142"
 				},
 				"Dragon longsword": {
-					"1": "1/137"
+					"1": "2/142"
 				},
 				"Adamant boots": {
-					"1": "1/137"
+					"1": "2/142"
 				},
 				"Dragon med helm": {
-					"1": "1/137"
+					"1": "1/142"
 				},
 				"Mushroom potato": {
-					"4-6": "1/13.7"
+					"4-6": "10/142"
 				},
 				"Saradomin brew(4)": {
-					"2": "1/17.13"
+					"2": "8/142"
 				},
 				"Magic potion(2)": {
-					"2": "1/22.83"
+					"2": "6/142"
 				},
 				"Ranging potion(2)": {
-					"2": "1/22.83"
+					"2": "6/142"
 				},
 				"Super combat potion(2)": {
-					"2": "1/22.83"
+					"2": "6/142"
 				},
 				"Prayer potion(4)": {
-					"1-2": "1/34.25"
+					"1-2": "4/142"
 				},
 				"Gold ore": {
-					"40-75 (noted)": "1/19.57"
+					"40-75 (noted)": "7/142"
 				},
 				"Adamantite bar": {
-					"25-40 (noted)": "1/22.83"
+					"25-40 (noted)": "6/142"
 				},
 				"Coal": {
-					"180-250 (noted)": "1/22.83"
+					"180-250 (noted)": "5/142"
 				},
 				"Gold bar": {
-					"37-50 (noted)": "1/22.83"
+					"37-50 (noted)": "6/142"
 				},
 				"Mithril bar": {
-					"35-45 (noted)": "1/22.83"
+					"35-45 (noted)": "6/142"
 				},
 				"Runite ore": {
-					"3-6 (noted)": "1/34.25"
+					"3-6 (noted)": "4/142"
 				},
 				"Runite bar": {
-					"3-5 (noted)": "1/45.67"
+					"3-5 (noted)": "3/142"
 				},
 				"Raw shark": {
-					"20 (noted)": "1/120"
+					"20 (noted)": "1.5/142"
 				},
 				"Shark lure": {
-					"40": "1/120"
+					"40": "1.5/142"
+				},
+				"Raw sea turtle": {
+					"20 (noted)": "1/142"
 				},
 				"Coins": {
-					"25000": "1/27.4",
-					"10000-20000": "1/13.7"
+					"25000": "5/142",
+					"10000-20000": "10/142"
 				},
 				"Chaos rune": {
-					"100-150": "1/17.13"
+					"100-150": "8/142"
 				},
 				"Crystal key": {
-					"1": "1/27.4"
+					"1": "5/142"
 				},
 				"Death rune": {
-					"90-130": "1/27.4"
+					"90-130": "5/142"
 				},
 				"Dragon dart tip": {
-					"15-25": "1/34.25"
+					"15-25": "5/142"
 				},
 				"Diamond bolt tips": {
-					"100-150": "1/45.67"
+					"100-150": "3/142"
 				},
 				"Dragonstone bolt tips": {
-					"20-40": "1/68.5"
+					"20-40": "2/142"
 				},
 				"Onyx bolt tips": {
-					"10-15": "1/68.5"
+					"10-15": "2/142"
 				},
 				"Soul rune": {
-					"30": "Rare"
+					"20-40": "1/142"
 				},
 				"Dragon arrowtips": {
-					"50-150": "1/137"
+					"50-150": "1/142"
 				},
 				"Brimstone key": {
-					"1": "1/43"
+					"1": "1/44"
 				},
 				"Clue scroll (elite)": {
 					"1": "1/230"
@@ -238982,7 +238889,7 @@
 					"1": "4/128"
 				},
 				"Frozen tear": {
-					"1": "Rare"
+					"8": "Rare"
 				},
 				"Tooth half of key (moon key)": {
 					"1": "1/961"
@@ -241873,7 +241780,7 @@
 					"5-9": "1/128"
 				},
 				"Clue scroll (hard)": {
-					"1": "Uncommon"
+					"1": "1/96"
 				},
 				"GemDropTable+": {
 					"1": "1/128"
@@ -242625,7 +242532,7 @@
 					"1": "4/128"
 				},
 				"Clue scroll (hard)": {
-					"1": "Rare"
+					"1": "1/256"
 				},
 				"Brimstone key": {
 					"1": "5/504"
@@ -247713,10 +247620,16 @@
 			"Tooth half of key (moon key)^Cave crawler": [{
 				"Ruins of Tapoyauik drops": "Nonskill"
 			}],
+			"Tooth half of key (moon key)^Chilled jelly": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
 			"Frozen tear^Ice spider": [{
 				"Ruins of Tapoyauik drops": "Nonskill"
 			}],
 			"Frozen tear^Cave crawler": [{
+				"Ruins of Tapoyauik drops": "Nonskill"
+			}],
+			"Frozen tear^Chilled jelly": [{
 				"Ruins of Tapoyauik drops": "Nonskill"
 			}],
 			"Looting bag^Ancient Wizard": [{
