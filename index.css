@@ -7145,6 +7145,7 @@ input#searchBacklogSources {
 .backlog-sources-data {
     padding: 0px 25px;
     overflow-y: auto;
+    height: 100%;
 }
 
 .backlog-sources-data > .results {

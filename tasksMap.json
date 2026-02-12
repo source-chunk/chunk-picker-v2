@@ -13160,6 +13160,7 @@
   "Obtain ~|twitcher's gloves|~": "t_11770",
   "Obtain a ~|zombie axe|~": "t_11771",
   "Obtain ~|sulphur blades|~": "t_11772",
+  "Obtain an ~|atlatl dart|~": "t_49387",
   "Obtain an ~|eclipse atlatl|~": "t_11773",
   "Obtain an ~|eclipse moon helm|~": "t_11774",
   "Obtain an ~|eclipse moon chestplate|~": "t_11775",
@@ -49067,5 +49068,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49387
+  "currentNextIndex": 49388
 }
