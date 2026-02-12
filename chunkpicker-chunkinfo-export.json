@@ -60940,9 +60940,6 @@
 				"Category": ["Forestry"],
 				"Items": ["Forestry kit"],
 				"Level": 1,
-				"Skills": {
-					"Fletching": 1
-				},
 				"Primary": false,
 				"Not F2P": true,
 				"Priority": 127,
@@ -169396,9 +169393,7 @@
 			},
 			"Object": {
 				"Altar": 1,
-				"Oak tree": 44,
-				"Portal": 1,
-				"Tree": 103
+				"Portal": 1
 			},
 			"Clue": {
 				"elite": 1
