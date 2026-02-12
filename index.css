@@ -3786,6 +3786,10 @@ label .tooltip-base-el:active {
     pointer-events: all;
 }
 
+#mapOverlaysModal > .modal-content {
+    height: 40%;
+}
+
 .overlays-title {
     font-size: min(10vw, 40px);
     padding-left: 10px;
