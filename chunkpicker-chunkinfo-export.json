@@ -36930,7 +36930,7 @@
 				"Not F2P": true
 			},
 			"Crush bird nest": {
-				"Items": ["Pestle and mortar", "Bird nest*"],
+				"Items": ["Pestle and mortar", "Bird nest (empty)*"],
 				"Output": "Crushed nest",
 				"Not F2P": true
 			},
@@ -223807,7 +223807,7 @@
 				}
 			},
 			"Bird house trapping": {
-				"Bird nest": {
+				"Bird nest (empty)": {
 					"1": "Varies"
 				},
 				"Feather": {
