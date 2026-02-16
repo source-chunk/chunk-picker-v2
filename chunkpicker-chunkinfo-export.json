@@ -28996,6 +28996,10 @@
 				"NPCs": ["Pellem"],
 				"Output": "Mixed hide cape"
 			},
+			"Search the crate at the Crash Site for a monkey*": {
+				"Chunks": ["Crash Site (MM2)"],
+				"Output": "Monkey (Monkey Madness II)"
+			},
 			"Search the crate at the Shipyard for a hammer*": {
 				"Chunks": ["8234-1"],
 				"Output": "Hammer"
@@ -71412,6 +71416,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["11050-3", "10794-3"],
+				"Items": ["Monkey (Monkey Madness II)"],
 				"Tasks": {
 					"~|Monkey Madness II|~ Complete the quest": "Quest"
 				},
@@ -71421,6 +71426,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["11050-3", "10794-3"],
+				"Items": ["Monkey (Monkey Madness II)"],
 				"Tasks": {
 					"~|Monkey Madness II|~ Complete the quest": "Quest"
 				},
@@ -71430,6 +71436,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["11050-3", "10794-3"],
+				"Items": ["Monkey (Monkey Madness II)"],
 				"Tasks": {
 					"~|Monkey Madness II|~ Complete the quest": "Quest"
 				},
@@ -71439,6 +71446,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["11050-3", "10794-3"],
+				"Items": ["Monkey (Monkey Madness II)"],
 				"Tasks": {
 					"~|Monkey Madness II|~ Complete the quest": "Quest"
 				},
@@ -71448,6 +71456,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["11050-3", "10794-3"],
+				"Items": ["Monkey (Monkey Madness II)"],
 				"Tasks": {
 					"~|Monkey Madness II|~ Complete the quest": "Quest"
 				},
@@ -71457,6 +71466,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Chunks": ["11050-3", "10794-3"],
+				"Items": ["Monkey (Monkey Madness II)"],
 				"Tasks": {
 					"~|Monkey Madness II|~ Complete the quest": "Quest"
 				},
