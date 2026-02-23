@@ -6993,9 +6993,13 @@ input#searchChunks {
     border: solid 1px var(--color1);
     border-radius: 5px;
     margin: 10px;
-    padding: 2px 30px 2px 5px;
+    padding: 2px 5px;
     background-color: var(--color3);
     position: relative;
+}
+
+.methods-data > .skill-method.with-burger {
+    padding-right: 40px;
 }
 
 .methods-data > .skill-method .skill-method-text {

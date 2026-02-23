@@ -1836,7 +1836,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 let lowestItem;
                 let lowestName;
                 let taskIsRemoved;
-                tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] && !chunkInfo['challenges'][skill][name].hasOwnProperty('NoXp') && !chunkInfo['challenges'][skill][name].hasOwnProperty('AllowMulti') }).forEach((name) => {
+                tempItemSkill[skill][item].filter((name) => { return !!chunkInfo['challenges'][skill][name] && !chunkInfo['challenges'][skill][name].hasOwnProperty('NoXp') && !chunkInfo['challenges'][skill][name].hasOwnProperty('AllowMulti') && !chunkInfo['challenges'][skill][name]['NeverShow'] }).forEach((name) => {
                     taskIsRemoved = false;
                     let challenge = chunkInfo['challenges'][skill][name];
                     if (challenge.hasOwnProperty('Tasks')) {
@@ -4485,7 +4485,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                         });
                     }
                 });
-                !!items[item] && tempItemSkill[skill][item].forEach((name) => {
+                !!items[item] && tempItemSkill[skill][item].filter((name) => !chunkInfo['challenges'][skill][name]['NeverShow']).forEach((name) => {
                     let challenge = chunkInfo['challenges'][skill][name];
                     let tempLevel = challenge['Level'];
                     if (rules["Boosting"] && chunkInfo['codeItems']['boostItems'].hasOwnProperty(skill) && !chunkInfo['challenges'][skill][name].hasOwnProperty('NoBoost')) {
