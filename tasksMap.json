@@ -3947,7 +3947,7 @@
   "Smith an ~|adamant spear|~": "t_3367",
   "Smith an ~|adamant hasta|~": "t_3368",
   "Smith ~|adamant arrowtips|~": "t_3369",
-  "Smith ~|adamant limbs|~": "t_3370",
+  "Smith ~|adamantite limbs|~": "t_3370",
   "Smith an ~|adamant longsword|~": "t_3371",
   "Smith ~|adamant javelin heads|~": "t_3372",
   "Smith an ~|adamant full helm|~": "t_3373",
@@ -3974,7 +3974,7 @@
   "Smith a ~|rune spear|~": "t_3394",
   "Smith a ~|rune hasta|~": "t_3395",
   "Smith ~|rune arrowtips|~": "t_3396",
-  "Smith ~|rune limbs|~": "t_3397",
+  "Smith ~|runite limbs|~": "t_3397",
   "Smith a ~|rune longsword|~": "t_3398",
   "Smith ~|rune javelin heads|~": "t_3399",
   "Smith a ~|rune full helm|~": "t_3400",
@@ -14084,6 +14084,8 @@
   "Kill X ~|Phosani's Nightmare|~": "t_12625",
   "Kill X ~|The Nightmare|~": "t_12626",
   "Kill X ~|Lobstrosity|~": "t_12627",
+  "Kill X ~|Haze#Ghost|~": "t_49388",
+  "Kill X ~|Skeletal miner|~": "t_49389",
   "Kill X ~|Skeleton heavy|~": "t_12628",
   "Kill X ~|Skeleton hero|~": "t_12629",
   "Kill X ~|Skeleton (Ape Atoll)|~": "t_12630",
@@ -30485,6 +30487,7 @@
   "River troll: ~|Oyster|~ (1) (1/10.67)": "t_27987",
   "River troll: ~|Fishing potion(3)|~ (1) (1/42.67)": "t_27988",
   "River troll: ~|Casket|~ (1) (1/25.6)": "t_27989",
+  "River troll: ~|Troll bone|~ (1) (1/4)": "t_49390",
   "Riyl Shade: ~|Riyl remains|~ (1) (Always)": "t_27990",
   "Riyl shadow (Temple Trekking): ~|Riyl remains|~ (1) (Always)": "t_27991",
   "Rock (Troll): ~|Big bones|~ (1) (Always)": "t_27992",
@@ -49068,5 +49071,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49388
+  "currentNextIndex": 49391
 }

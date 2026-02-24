@@ -19803,7 +19803,7 @@
 				}
 			},
 			"Fletch a ~|rune crossbow (u)|~": {
-				"Items": ["Hammer", "Yew stock*", "Rune limbs*"],
+				"Items": ["Hammer", "Yew stock*", "Runite limbs*"],
 				"Level": 69,
 				"Output": "Rune crossbow (u)",
 				"Primary": true,
@@ -19994,7 +19994,7 @@
 				}
 			},
 			"Fletch an ~|adamant crossbow (u)|~": {
-				"Items": ["Hammer", "Mahogany stock*", "Adamant limbs*"],
+				"Items": ["Hammer", "Mahogany stock*", "Adamantite limbs*"],
 				"Level": 61,
 				"Output": "Adamant crossbow (u)",
 				"Primary": true,
@@ -57573,11 +57573,11 @@
 				"Priority": 2,
 				"Not F2P": true
 			},
-			"Smith ~|adamant limbs|~": {
+			"Smith ~|adamantite limbs|~": {
 				"Items": ["Hammer[+]", "Adamantite bar*"],
 				"Level": 76,
 				"Objects": ["Anvil[+]"],
-				"Output": "Adamant limbs",
+				"Output": "Adamantite limbs",
 				"Primary": true,
 				"Priority": 2,
 				"Not F2P": true
@@ -57810,11 +57810,11 @@
 				"Priority": 2,
 				"Not F2P": true
 			},
-			"Smith ~|rune limbs|~": {
+			"Smith ~|runite limbs|~": {
 				"Items": ["Hammer[+]", "Runite bar*"],
 				"Level": 91,
 				"Objects": ["Anvil[+]"],
-				"Output": "Rune limbs",
+				"Output": "Runite limbs",
 				"Primary": true,
 				"Priority": 2,
 				"Not F2P": true
@@ -112981,6 +112981,7 @@
 				"Description": "Talk to Jorral",
 				"NPCs": ["Jorral"],
 				"Tasks": {
+					"~|The Restless Ghost|~ Complete the quest": "Quest",
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
 				"Not F2P": true
@@ -164996,9 +164997,11 @@
 			"Monster": {
 				"Animated spade": 2,
 				"Bat": 18,
+				"Haze#Ghost": 1,
 				"Giant bat": 6,
 				"Possessed pickaxe#Haunted Mine": 1,
 				"Rat": 12,
+				"Skeletal miner": 1,
 				"Skeleton (Tarn's Lair)#Mid level": 2
 			},
 			"NPC": {
@@ -177596,7 +177599,8 @@
 				"Skogre": true,
 				"Undead one#Skeleton": true,
 				"Vet'ion": true,
-				"Calvar'ion": true
+				"Calvar'ion": true,
+				"Skeletal miner": true
 			},
 			"Smoke devils": {
 				"Smoke devil": true,
@@ -203852,6 +203856,9 @@
 			},
 			"Casket": {
 				"1": "5/128"
+			},
+			"Troll bone": {
+				"1": "1/4"
 			}
 		},
 		"Riyl Shade": {
