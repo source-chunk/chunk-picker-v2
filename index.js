@@ -1510,7 +1510,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.35';
+let currentVersion = '6.9.36';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'difference';
 
@@ -1609,6 +1609,7 @@ let osrsStickers = {};
 let numberStickers = {'zero': '0', 'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9'};
 let chosenFromCinematic = null;
 let imgNotLoaded = false;
+let clueImgs = {};
 let hoveredChunk = 0;
 let colorBox = "rgba(150, 150, 150, 0.6)";
 let colorBoxLight = "rgba(150, 150, 150, 0.4)";
@@ -1679,7 +1680,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.35";
+mapImg.src = "osrs_world_map.png?v=6.9.36";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2220,11 +2221,17 @@ let drawCanvas = function(ctxIn = ctx) {
             ctxIn.fillText('\uf00d', (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180);
             ctxIn.fillStyle = getComputedStyle(ctxIn.canvas).getPropertyValue('--color1');
             ctxIn.strokeStyle = 'black';
-            let overlayImg = new Image();
-            overlayImg.src = overlayEl.img;
             ctxIn.fillRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
             ctxIn.strokeRect((dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 20, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 175, 200, 200);
-            ctxIn.drawImage(overlayImg, (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 170, 190, 190);
+            if (!clueImgs[overlayEl.img]) {
+                clueImgs[overlayEl.img] = new Image();
+                clueImgs[overlayEl.img].src = overlayEl.img;
+                clueImgs[overlayEl.img].onload = () => {
+                    drawCanvas();
+                };
+            } else {
+                ctxIn.drawImage(clueImgs[overlayEl.img], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 170, 190, 190);
+            }
             overlayCloseLocation = [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 200, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180];
             overlayLeftLocation = (selectedOverlayIndex > 0 && selectedOverlayIds.length > 1 ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 165, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
             overlayRightLocation = (selectedOverlayIndex < (selectedOverlayIds.length - 1) ? [(dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 180, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 180] : -1);
@@ -3591,7 +3598,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.35");
+        myWorker = new Worker("./worker.js?v=6.9.36");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3895,8 +3902,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.35");
-let myWorker2 = new Worker("./worker.js?v=6.9.35");
+let myWorker = new Worker("./worker.js?v=6.9.36");
+let myWorker2 = new Worker("./worker.js?v=6.9.36");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6842,7 +6849,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.35");
+    myWorker2 = new Worker("./worker.js?v=6.9.36");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
