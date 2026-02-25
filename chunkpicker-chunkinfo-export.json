@@ -10516,6 +10516,14 @@
 				"Priority": 5,
 				"Not F2P": true
 			},
+			"Cook a ~|cooked t-bone steak|~": {
+				"Items": ["Raw t-bone steak*"],
+				"Level": 13,
+				"Objects": ["Cooking object[+]"],
+				"Output": "Cooked t-bone steak",
+				"Primary": true,
+				"Priority": 2
+			},
 			"Cook a ~|cooked meat|~": {
 				"Items": ["Raw meat[+]*"],
 				"Level": 1,
@@ -10942,7 +10950,8 @@
 				"Objects": ["Cooking range[+]"],
 				"Output": "Scrambled egg",
 				"Primary": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"Priority": 1
 			},
 			"Cook a ~|sea turtle|~": {
 				"Items": ["Raw sea turtle*"],
@@ -28245,6 +28254,11 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Create a silklined herb sack": {
+				"Items": ["Herb sack", "Pristine sider silk"],
+				"Output": "Silklined herb sack",
+				"Not F2P": true
+			},
 			"Shantay Pass access": {
 				"Chunks": ["13104-1"],
 				"Not F2P": true
@@ -33410,6 +33424,9 @@
 			},
 			"F2P Farmer": {
 				"Chunks": ["F2PFarmer[+]"]
+			},
+			"Unlock demonic brutus": {
+				"Chunks": ["The Scar"]
 			},
 			"Kalphite task": {
 				"Tasks": {
@@ -46440,6 +46457,12 @@
 					"~|Olaf's Quest|~ 4": "Quest"
 				},
 				"Not F2P": true
+			},
+			"Brutus' Arena": {
+				"UnlocksArea": true,
+				"Tasks": {
+					"~|The Ides of Milk|~ Complete the quest": "Quest"
+				}
 			},
 			"Buccaneers' Laboratory": {
 				"UnlocksArea": true,
@@ -62311,6 +62334,17 @@
 				"Items": ["Seed box"],
 				"Not F2P": true
 			},
+			"Obtain a ~|silklined herb sack|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Silklined herb sack"],
+				"Requirements": {
+					"Herblore": 58
+				},
+				"Priority": 2,
+				"Set": "BIS Herb Sack",
+				"Not F2P": true
+			},
 			"Obtain a ~|herb sack|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
@@ -62318,6 +62352,8 @@
 				"Requirements": {
 					"Herblore": 58
 				},
+				"Priority": 2,
+				"Set": "BIS Herb Sack",
 				"Not F2P": true
 			},
 			"Obtain a ~|crystal pickaxe|~": {
@@ -63341,6 +63377,29 @@
 				"Label": "Collection Log",
 				"Items": ["Bolt rack"],
 				"NonShop": true,
+				"Not F2P": true
+			},
+			"(Brutus) Obtain ~|beef|~": {
+				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Beef"],
+				"Not F2P": true
+			},
+			"(Brutus) Obtain a ~|mooleta|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Mooleta"]
+			},
+			"(Brutus) Obtain a ~|bottomless milk bucket (empty)|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Bottomless milk bucket (empty)"],
+				"Not F2P": true
+			},
+			"(Brutus) Obtain ~|cow slippers|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Cow slippers"],
 				"Not F2P": true
 			},
 			"(Bryophyta) Obtain a ~|bryophyta's essence|~": {
@@ -64550,6 +64609,12 @@
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Sarachnis cudgel"],
+				"Not F2P": true
+			},
+			"(Sarachnis) Obtain a ~|pristine spider silk|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Pristine spider silk"],
 				"Not F2P": true
 			},
 			"(Scorpia) Obtain a ~|scorpia's offspring|~": {
@@ -70631,6 +70696,12 @@
 				"Items": ["Gull (pet)"],
 				"Not F2P": true
 			},
+			"(All Pets) Obtain ~|beef|~": {
+				"Category": ["Collection Log", "Collection Log Other", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Beef"],
+				"Not F2P": true
+			},
 			"(Boat Paints) Obtain a ~|barracuda paint|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
@@ -73672,6 +73743,12 @@
 				"Label": "Untracked Uniques",
 				"Items": ["Purifying sigil (middle)"]
 			},
+			"Obtain ~|Brutus slippers|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Brutus slippers"],
+				"Not F2P": true
+			},
 			"Obtain a ~|big bass|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
@@ -73925,6 +74002,13 @@
 					"~|The Fremennik Trials|~ Complete the quest": "Quest"
 				},
 				"Output": "Enchanted lyre(i)",
+				"Not F2P": true
+			},
+			"Charge a ~|perfected quetzal whistle|~ with unlimited charges": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Soar Leader Pitri"],
+				"Items": ["Perfected quetzal whistle blueprint", "Redwood logs", "Enhanced quetzal whistle blueprint", "Yew logs", "Willow logs", "QuetzalWhistleMeat[+]"],
 				"Not F2P": true
 			},
 			"Unlock access to the ~|Crypt of the Moon|~ in the Forthos Dungeon": {
@@ -91525,6 +91609,13 @@
 				"Not F2P": true,
 				"CombatPoints": 1
 			},
+			"~|Combat Achievements#Easy|~ Brutus Novice": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill Brutus.",
+				"Monsters": ["Brutus"],
+				"BaseQuest": "Combat Achievements",
+				"CombatPoints": 1
+			},
 			"~|Combat Achievements#Easy|~ Fighting as Intended II": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill Bryophyta on a free to play world.",
@@ -91827,7 +91918,7 @@
 					"Any": 5000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 40
+				"CombatPointsNeeded": 41
 			},
 			"~|Combat Achievements#Medium|~ Amoxliatl Champion": {
 				"Category": ["Combat Diary Tasks"],
@@ -91880,6 +91971,20 @@
 				"Tasks": {
 					"Slay a ~|brutal black dragon|~": "Slayer"
 				}
+			},
+			"~|Combat Achievements#Medium|~ Brutus Champion": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill Brutus 10 times.",
+				"Monsters": ["Brutus"],
+				"BaseQuest": "Combat Achievements",
+				"CombatPoints": 2
+			},
+			"~|Combat Achievements#Medium|~ Beef vs Beef": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill Brutus whilst neither equipping nor consuming anything.",
+				"Monsters": ["Brutus"],
+				"BaseQuest": "Combat Achievements",
+				"CombatPoints": 2
 			},
 			"~|Combat Achievements#Medium|~ Quick Cutter": {
 				"Category": ["Combat Diary Tasks"],
@@ -92330,7 +92435,7 @@
 					"Any": 10000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 156,
+				"CombatPointsNeeded": 161,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -92433,6 +92538,13 @@
 				"Not F2P": true,
 				"CombatPoints": 3,
 				"Chunks": ["Barrows Crypts"]
+			},
+			"~|Combat Achievements#Hard|~ Smarter than a Cow": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill Brutus without being attacked.",
+				"Monsters": ["Brutus"],
+				"BaseQuest": "Combat Achievements",
+				"CombatPoints": 3
 			},
 			"~|Combat Achievements#Hard|~ Callisto Adept": {
 				"Category": ["Combat Diary Tasks"],
@@ -93063,7 +93175,7 @@
 					"Any": 15000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 408,
+				"CombatPointsNeeded": 416,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -93182,6 +93294,13 @@
 				"Tasks": {
 					"Slay a ~|basilisk knight|~": "Slayer"
 				}
+			},
+			"~|Combat Achievements#Elite|~ Brutus Speed-Trialist": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill Brutus in less than 2 seconds.",
+				"Monsters": ["Brutus"],
+				"BaseQuest": "Combat Achievements",
+				"CombatPoints": 4
 			},
 			"~|Combat Achievements#Elite|~ Callisto Veteran": {
 				"Category": ["Combat Diary Tasks"],
@@ -94474,7 +94593,7 @@
 					"Any": 25000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1052,
+				"CombatPointsNeeded": 1064,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -95904,7 +96023,7 @@
 					"Any": 35000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1892,
+				"CombatPointsNeeded": 1904,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -96909,7 +97028,7 @@
 					"Any": 50000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 2618,
+				"CombatPointsNeeded": 2630,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -102099,6 +102218,64 @@
 				},
 				"BaseQuest": "Goblin Diplomacy",
 				"Chunks": ["11830-1"]
+			},
+			"~|The Ides of Milk|~ 1": {
+				"BaseQuest": "The Ides of Milk",
+				"Description": "Talk to Cassius",
+				"NPCs": ["Cassius"]
+			},
+			"~|The Ides of Milk|~ 2": {
+				"BaseQuest": "The Ides of Milk",
+				"Description": "Talk to Gillie Groats and Seth Groats, then read the book",
+				"NPCs": ["Gillie Groats", "Seth Groats"],
+				"Tasks": {
+					"~|The Ides of Milk|~ 1": "Quest"
+				}
+			},
+			"~|The Ides of Milk|~ 3": {
+				"BaseQuest": "The Ides of Milk",
+				"Description": "Return to Cassius after reading the book",
+				"NPCs": ["Cassius"],
+				"Tasks": {
+					"~|The Ides of Milk|~ 2": "Quest"
+				}
+			},
+			"~|The Ides of Milk|~ 4": {
+				"BaseQuest": "The Ides of Milk",
+				"Description": "Talk to Duke Horacio",
+				"NPCs": ["Duke Horacio"],
+				"Tasks": {
+					"~|The Ides of Milk|~ 3": "Quest"
+				}
+			},
+			"~|The Ides of Milk|~ 5": {
+				"BaseQuest": "The Ides of Milk",
+				"Description": "Talk to Gillie Groats, kill Brutus, then return to Gillie",
+				"Chunks": ["12851-1"],
+				"NPCs": ["Gillie Groats"],
+				"Tasks": {
+					"~|The Ides of Milk|~ 4": "Quest"
+				}
+			},
+			"~|The Ides of Milk|~ 6": {
+				"BaseQuest": "The Ides of Milk",
+				"Description": "Return to Cassius after killing Brutus",
+				"NPCs": ["Cassius"],
+				"Tasks": {
+					"~|The Ides of Milk|~ 5": "Quest"
+				}
+			},
+			"~|The Ides of Milk|~ Complete the quest": {
+				"Tasks": {
+					"~|The Ides of Milk|~ 6": "Quest"
+				},
+				"QuestPoints": 1,
+				"XpReward": {
+					"Attack|Strength|Defence|Hitpoints|Ranged|Magic|Prayer": 1000
+				},
+				"BaseQuest": "The Ides of Milk",
+				"Reward": ["Cow bell amulet"],
+				"Chunks": ["12595"]
 			},
 			"~|Imp Catcher|~ 1": {
 				"BaseQuest": "Imp Catcher",
@@ -155867,6 +156044,7 @@
 				"Ram": 3
 			},
 			"NPC": {
+				"Cassius": 1,
 				"Drake (bird)": 2,
 				"Duck": 1,
 				"Farmer#non-thievable": 1,
@@ -155905,6 +156083,7 @@
 			},
 			"Quest": {
 				"Cold War": "step",
+				"The Ides of Milk": "first",
 				"One Small Favour": "step",
 				"Sheep Shearer": "first"
 			},
@@ -157301,6 +157480,7 @@
 						"Death to the Dorgeshuun": "first",
 						"Dragon Slayer I": "step",
 						"Garden of Tranquillity": "step",
+						"The Ides of Milk": "step",
 						"Recipe for Disaster/Defeating the Culinaromancer": "first",
 						"Rune Mysteries": "first",
 						"The Lost Tribe": "first",
@@ -157350,6 +157530,9 @@
 		"12851": {
 			"Sections": {
 				"1": {
+					"Connect": {
+						"12951": true
+					},
 					"Monster": {
 						"Chicken": 14,
 						"Cow": 18,
@@ -157392,6 +157575,7 @@
 					},
 					"Quest": {
 						"Death to the Dorgeshuun": "step",
+						"The Ides of Milk": "step",
 						"One Small Favour": "step"
 					},
 					"Shop": {
@@ -158321,9 +158505,13 @@
 			"Connect": {
 				"12851": true
 			},
+			"Monster": {
+				"Brutus": 1,
+				"Demonic Brutus": 1
+			},
+			"Name": "Brutus' Arena",
 			"Object": {
-				"Broken drilling machine": 1,
-				"Crate": 13
+				"Dairy cow": 2
 			}
 		},
 		"12952": {
@@ -165743,6 +165931,18 @@
 				"Rotten barrel": 1
 			}
 		},
+		"Brutus' Arena": {
+			"Connect": {
+				"12851": true
+			},
+			"Monster": {
+				"Brutus": 1,
+				"Demonic Brutus": 1
+			},
+			"Object": {
+				"Dairy cow": 2
+			}
+		},
 		"Buccaneers' Laboratory": {
 			"Connect": {
 				"8249": true
@@ -172741,7 +172941,7 @@
 		}
 	},
 	"codeItems": {
-		"boneItems": ["Bones", "Burnt bones", "Wolf bones", "Bleached bones", "Monkey bones", "Bat bones", "Big bones", "Jogre bones", "Zogre bones", "Shaikahan bones", "Babydragon bones", "Wyrm bones", "Wyrmling bones", "Dragon bones", "Wyvern bones", "Drake bones", "Fayrg bones", "Lava dragon bones", "Raurg bones", "Hydra bones", "Dagannoth bones", "Ourg bones", "Fiendish ashes", "Vile ashes", "Malicious ashes", "Abyssal ashes", "Infernal ashes", "Giant bones", "Frost dragon bones", "Strykwyrm bones"],
+		"boneItems": ["Bones", "Burnt bones", "Wolf bones", "Bleached bones", "Monkey bones", "Bat bones", "Big bones", "Jogre bones", "Zogre bones", "Shaikahan bones", "Babydragon bones", "Wyrm bones", "Wyrmling bones", "Dragon bones", "Wyvern bones", "Drake bones", "Fayrg bones", "Lava dragon bones", "Raurg bones", "Hydra bones", "Dagannoth bones", "Ourg bones", "Fiendish ashes", "Vile ashes", "Malicious ashes", "Abyssal ashes", "Infernal ashes", "Giant bones", "Frost dragon bones", "Strykwyrm bones", "Bull bones"],
 		"chunksPlus": {
 			"10Coin[+]": ["10547-1", "10291", "12605", "10553-1"],
 			"50Coin[+]": ["10547-1", "Mourner Tunnels & Temple of Light"],
@@ -173896,7 +174096,8 @@
 			"Rune cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball", "Rune cannonball"],
 			"Dragon cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball", "Rune cannonball", "Dragon cannonball"],
 			"VatrachosRaccoonFood[+]": ["Banana", "Coconut", "Dragonfruit", "Jangerberries", "Papaya fruit", "Peach", "Strawberry", "Watermelon", "Watermelon slice", "White tree fruit"],
-			"Fletching knife[+]": ["Knife", "Narwhal horn knife"]
+			"Fletching knife[+]": ["Knife", "Narwhal horn knife"],
+			"QuetzalWhistleMeat[+]": ["Quetzal feed", "Raw barb-tailed kebbit", "Raw dashing kebbit", "Raw graahk", "Raw kyatt", "Raw larupia", "Raw moonlight antelope", "Raw pyre fox", "Raw sunlight antelope", "Raw wild kebbit"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -174291,7 +174492,8 @@
 			"FabricRoll[+]": "Any fabric roll",
 			"BoatPaint[+]": "Any boat paint",
 			"VatrachosRaccoonFood[+]": "Any food for the Vatrachos Raccoon",
-			"Fletching knife[+]": "Any knife for Fletching"
+			"Fletching knife[+]": "Any knife for Fletching",
+			"QuetzalWhistleMeat[+]": "Any meat used to charge a quetzal whistle"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Man (East Ardougne)", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
@@ -175226,7 +175428,9 @@
 			"Eldric the Ice King": true,
 			"Yama": true,
 			"Doom of Mokhaiotl": true,
-			"Shellbane gryphon": true
+			"Shellbane gryphon": true,
+			"Brutus": true,
+			"Demonic Brutus": true
 		},
 		"minigameShops": {
 			"Agility Arena Store": true,
@@ -177126,7 +177330,8 @@
 			"Cows": {
 				"Cow": true,
 				"Cow calf": true,
-				"Undead cow": true
+				"Undead cow": true,
+				"Brutus": true
 			},
 			"Crabs": {
 				"Ammonite Crab": true,
@@ -178154,6 +178359,7 @@
 				"Jangerberries": 1,
 				"Sunbeam ale": 1,
 				"Moon-lite": 1,
+				"Cooked t-bone steak": 2,
 				"Perildance bitter": 2,
 				"Beer": "4%",
 				"Kebab": 3,
@@ -183099,6 +183305,76 @@
 				"1": "1/215"
 			}
 		},
+		"Brutus": {
+			"Acorn": {
+				"2": "5/81"
+			},
+			"Air rune": {
+				"29": "10/81"
+			},
+			"Beef": {
+				"1": "1/1000"
+			},
+			"Bottomless milk bucket (empty)": {
+				"1": "4/150"
+			},
+			"Bull bones": {
+				"1": "Always"
+			},
+			"Chaos rune": {
+				"12": "2/81"
+			},
+			"Coins": {
+				"60-80": "Unknown",
+				"80-120": "Unknown"
+			},
+			"Cowhide": {
+				"1": "10/81"
+			},
+			"Cow slippers": {
+				"1": "1/150"
+			},
+			"Iron arrow": {
+				"14": "10/81"
+			},
+			"Iron full helm": {
+				"1": "2/81"
+			},
+			"Iron platebody": {
+				"1": "2/81"
+			},
+			"Iron platelegs": {
+				"1": "1/81"
+			},
+			"Iron plateskirt": {
+				"1": "1/81"
+			},
+			"Logs": {
+				"2": "5/81"
+			},
+			"Mind rune": {
+				"18": "8/81"
+			},
+			"Mooleta": {
+				"1": "5/150"
+			},
+			"Oak logs": {
+				"2": "5/81"
+			},
+			"Potato seed": {
+				"3": "10/81"
+			},
+			"Raw t-bone steak": {
+				"1": "Always",
+				"3 (noted)": "10/81"
+			},
+			"Clue scroll (beginner)": {
+				"1": "Common"
+			},
+			"Clue scroll (easy)": {
+				"1": "Uncommon"
+			}
+		},
 		"Bryophyta": {
 			"Giant bones": {
 				"1": "Always"
@@ -186933,6 +187209,14 @@
 			},
 			"Looting bag": {
 				"1": "1/30"
+			}
+		},
+		"Demonic Brutus": {
+			"Beef": {
+				"1": "1/1000"
+			},
+			"Brutus slippers": {
+				"1": "Always"
 			}
 		},
 		"Demonic gorilla": {
@@ -193413,12 +193697,6 @@
 			}
 		},
 		"Highwayman#Hood": {
-			"Black cape": {
-				"1": "Always"
-			},
-			"Iron bolts": {
-				"2-12": "5/100"
-			},
 			"Bones": {
 				"1": "Always"
 			}
@@ -204494,6 +204772,9 @@
 			},
 			"Sarachnis cudgel": {
 				"1": "1/384"
+			},
+			"Pristine spider silk": {
+				"1": "Unknown"
 			},
 			"Battlestaff": {
 				"8-10 (noted)": "2/100"
@@ -215929,6 +216210,7 @@
 		"Dragon Slayer I": "11314, 11570, 12081, 12082, 12086, 12338, 12596, 12850, Crandor and Karamja Dungeon#North, Dwarven Mine, Melzar's Maze#Basement",
 		"Ernest the Chicken": "12340",
 		"Goblin Diplomacy": "11830",
+		"The Ides of Milk": "12595, 12850, 12851",
 		"Imp Catcher": "12337",
 		"The Knight's Sword": "11825, 11828, 12854, Asgarnian Ice Dungeon",
 		"Misthalin Mystery": "12849, Misthalin Manor",
@@ -247447,6 +247729,18 @@
 			"Giant bones^": [{
 				"F2P Only": "Nonskill"
 			}],
+			"Bottomless milk bucket (empty)^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Cow slippers^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Acorn^": [{
+				"F2P Only": "Nonskill"
+			}],
+			"Beef^": [{
+				"F2P Only": "Nonskill"
+			}],
 			"Crystal shard^": [{
 				"~|Song of the Elves|~ Complete the quest": "Quest"
 			}],
@@ -250001,6 +250295,11 @@
 					"F2P Only": "Nonskill"
 				}]
 			},
+			"Demonic Brutus": {
+				"Brutus' Arena": [{
+					"Unlock demonic brutus": "Nonskill"
+				}]
+			},
 			"Desert Wolf": {
 				"13104-1": [{
 					"F2P Only": "Nonskill"
@@ -250912,6 +251211,11 @@
 			"Guildmaster Jane": {
 				"4922": [{
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
+				}]
+			},
+			"Jade (Warriors' Guild)": {
+				"11319-3": [{
+					"Access the Warriors' Guild": "Nonskill"
 				}]
 			},
 			"Jim": {
@@ -255523,7 +255827,8 @@
 			"Jumbo squid": true,
 			"Red crab meat": true,
 			"Blue crab meat": true,
-			"Raindbow crab meat": true
+			"Rainbow crab meat": true,
+			"Cooked t-bone steak": true
 		},
 		"boost|Items": {
 			"Kebab": true,
@@ -318431,6 +318736,24 @@
 			"requirements": {
 				"Attack": 65
 			}
+		},
+		"Mooleta": {
+			"attack_speed": 0,
+			"attack_crush": 5,
+			"attack_magic": -1,
+			"attack_ranged": -1,
+			"attack_slash": 7,
+			"attack_stab": 7,
+			"defence_crush": 8,
+			"defence_magic": -2,
+			"defence_ranged": -1,
+			"defence_slash": 8,
+			"defence_stab": 4,
+			"magic_damage": 0,
+			"melee_strength": 1,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "shield"
 		}
 	}
 }
