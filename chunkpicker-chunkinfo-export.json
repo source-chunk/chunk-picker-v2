@@ -52177,9 +52177,6 @@
 				"NPCs": ["Brass Hand Harry"],
 				"Output": "Sailing cape(t)",
 				"Primary": false,
-				"Tasks": {
-					"~|Pandemonium|~ Complete the quest": "Quest"
-				},
 				"Priority": 1,
 				"NoBoost": true
 			},
@@ -172177,6 +172174,7 @@
 				"Dagannoth spawn": 33,
 				"Giant Rock Crab": 3,
 				"Rock Crab": 18,
+				"Rock lobster": 38,
 				"Spinolyp": 10,
 				"Suspicious water": 15,
 				"Wallasalki": 47

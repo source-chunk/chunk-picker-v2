@@ -14230,6 +14230,7 @@
   "Kill X ~|Dagannoth (Waterbirth Island)#Level 88|~": "t_12736",
   "Kill X ~|Dagannoth (Waterbirth Island)#Level 90|~": "t_12737",
   "Kill X ~|Dagannoth spawn|~": "t_12738",
+  "Kill X ~|Rock lobster|~": "t_49458",
   "Kill X ~|Abyssal demon#Wilderness Slayer Cave|~": "t_12739",
   "Kill X ~|Ankou#Wilderness Slayer Cave|~": "t_12740",
   "Kill X ~|Black demon#Wilderness Slayer Cave|~": "t_12741",
@@ -49136,5 +49137,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49458
+  "currentNextIndex": 49459
 }
