@@ -85050,6 +85050,9 @@
 				"Chunks": ["13617-2"],
 				"Objects": ["Clay rocks"],
 				"Items": ["Pickaxe[+]"],
+				"Skills": {
+					"Mining": 1
+				},
 				"BaseQuest": "Desert Diary",
 				"Not F2P": true
 			},
@@ -87680,6 +87683,10 @@
 					"~|Karamja Diary#Medium|~ Complete the Medium Diary": "Diary",
 					"~|Legends' Quest|~ 5": "Quest"
 				},
+				"Skills": {
+					"Mining": 1,
+					"Woodcutting": 1
+				},
 				"BaseQuest": "Karamja Diary",
 				"Not F2P": true
 			},
@@ -87731,6 +87738,9 @@
 				"Chunks": ["Brimhaven Dungeon"],
 				"Monsters": ["BrimhavenMetalDragon[+]"],
 				"Items": ["Axe[+]"],
+				"Skills": {
+					"Woodcutting": 1
+				},
 				"Tasks": {
 					"~|Karamja Diary#Medium|~ Complete the Medium Diary": "Diary"
 				},
@@ -88399,7 +88409,8 @@
 				"Objects": ["Celastrus patch"],
 				"Skills": {
 					"Farming": 85,
-					"Fletching": 40
+					"Fletching": 40,
+					"Woodcutting": 1
 				},
 				"Tasks": {
 					"~|Kourend and Kebos Diary#Hard|~ Complete the Hard Diary": "Diary"
@@ -89623,6 +89634,9 @@
 				"Chunks": ["13110-1"],
 				"Items": ["Axe[+]"],
 				"Objects": ["Dying tree"],
+				"Skills": {
+					"Woodcutting": 1
+				},
 				"BaseQuest": "Varrock Diary",
 				"Not F2P": true
 			},
@@ -103670,6 +103684,9 @@
 				"Description": "Gather the 3 pages from the Dwarven Mine",
 				"Chunks": ["Dwarven Mine"],
 				"Items": ["Pickaxe[+]"],
+				"Skills": {
+					"Mining": 1
+				},
 				"Tasks": {
 					"~|Between a Rock...|~ 2": "Quest"
 				},
@@ -109058,6 +109075,9 @@
 				"Description": "Mine lunar ore for the sigil",
 				"Chunks": ["Lunar Isle mine"],
 				"Items": ["Pickaxe[+]"],
+				"Skills": {
+					"Mining": 60
+				},
 				"Tasks": {
 					"~|The Fremennik Exiles|~ 2": "Quest"
 				},
@@ -111523,6 +111543,9 @@
 				"Description": "Clear the pub cellar then talk to Razvan",
 				"Chunks": ["13874-1"],
 				"Items": ["Pickaxe[+]", "Spade", "Bucket"],
+				"Skills": {
+					"Mining": 15
+				},
 				"Tasks": {
 					"~|In Aid of the Myreque|~ 2": "Quest"
 				},
@@ -112443,7 +112466,8 @@
 					"~|Legends' Quest|~ 1": "Quest"
 				},
 				"Skills": {
-					"Crafting": 50
+					"Crafting": 50,
+					"Woodcutting": 1
 				},
 				"Not F2P": true
 			},
@@ -112499,7 +112523,8 @@
 					"Agility": 50,
 					"Thieving": 50,
 					"Mining": 52,
-					"Strength": 50
+					"Strength": 50,
+					"Woodcutting": 1
 				},
 				"Not F2P": true
 			},
@@ -112525,7 +112550,8 @@
 					"~|Legends' Quest|~ 8": "Quest"
 				},
 				"Skills": {
-					"Prayer": 42
+					"Prayer": 42,
+					"Woodcutting": 1
 				},
 				"Not F2P": true
 			},
@@ -112548,6 +112574,9 @@
 				"Description": "Refill the golden bowl, germinate the seeds, and talk to Gujuo",
 				"Chunks": ["11309-1"],
 				"Items": ["Axe[+]", "Machete[+]"],
+				"Skills": {
+					"Woodcutting": 1
+				},
 				"Tasks": {
 					"~|Legends' Quest|~ 10": "Quest"
 				},
@@ -112573,7 +112602,8 @@
 				"Skills": {
 					"Agility": 50,
 					"Magic": 56,
-					"Crafting": 50
+					"Crafting": 50,
+					"Woodcutting": 1
 				},
 				"Not F2P": true
 			},
@@ -112623,6 +112653,9 @@
 				"Description": "Talk to the Leprechaun",
 				"Chunks": ["12594-1"],
 				"Items": ["Axe[+]"],
+				"Skills": {
+					"Woodcutting": 1
+				},
 				"Tasks": {
 					"~|Lost City|~ 1": "Quest"
 				},
@@ -112681,6 +112714,9 @@
 				"Description": "Break through the hole in the wall",
 				"Chunks": ["Lumbridge Castle#Cellar"],
 				"Items": ["Pickaxe[+]"],
+				"Skills": {
+					"Mining": 1
+				},
 				"Tasks": {
 					"~|The Lost Tribe|~ 1": "Quest"
 				},
@@ -112942,6 +112978,9 @@
 				"Description": "Mine a piece of lunar ore",
 				"Chunks": ["Lunar Isle mine"],
 				"Items": ["Pickaxe[+]"],
+				"Skills": {
+					"Mining": 60
+				},
 				"Tasks": {
 					"~|Lunar Diplomacy|~ 15": "Quest"
 				},
@@ -113129,7 +113168,8 @@
 					"~|Making Friends with My Arm|~ 4": "Quest"
 				},
 				"Skills": {
-					"Agility": 68
+					"Agility": 68,
+					"Mining": 1
 				},
 				"Not F2P": true
 			},
@@ -113863,7 +113903,8 @@
 				},
 				"Skills": {
 					"Thieving": 55,
-					"Agility": 55
+					"Agility": 55,
+					"Mining": 1
 				},
 				"Not F2P": true,
 				"NoBoost": true
@@ -114119,6 +114160,9 @@
 				"Description": "Defeat the Kendal",
 				"Chunks": ["11065"],
 				"Items": ["Axe[+]", "Plank"],
+				"Skills": {
+					"Mining": 1
+				},
 				"Tasks": {
 					"~|Mountain Daughter|~ 3a6": "Quest",
 					"~|Mountain Daughter|~ 3b3": "Quest"
@@ -114779,6 +114823,9 @@
 				"Description": "Defeat the Hespori",
 				"Chunks": ["13876-1"],
 				"Items": ["Axe[+]"],
+				"Skills": {
+					"Woodcutting": 1
+				},
 				"Tasks": {
 					"~|A Night at the Theatre|~ 7": "Quest"
 				},
@@ -117080,6 +117127,9 @@
 				"Description": "Talk to Rantz and make a boat",
 				"Chunks": ["10542-1"],
 				"Items": ["Axe[+]"],
+				"Skills": {
+					"Woodcutting": 1
+				},
 				"Tasks": {
 					"~|Recipe for Disaster/Freeing Skrach Uglogwee|~ 1": "Quest"
 				},
@@ -117419,6 +117469,9 @@
 				"Description": "Cut down the orange tree and make a peace deal",
 				"Chunks": ["6702"],
 				"Items": ["Axe[+]"],
+				"Skills": {
+					"Woodcutting": 1
+				},
 				"Tasks": {
 					"~|The Ribbiting Tale of a Lily Pad Labour Dispute|~ 1": "Quest"
 				},
@@ -118674,6 +118727,9 @@
 				"Description": "Chop some blisterwood logs",
 				"Chunks": ["14388-1"],
 				"Items": ["Axe[+]"],
+				"Skills": {
+					"Woodcutting": 62
+				},
 				"Tasks": {
 					"~|Sins of the Father|~ 18": "Quest"
 				},
@@ -119183,6 +119239,9 @@
 				"Description": "Talk to the elderly elf",
 				"Chunks": ["Underground Pass"],
 				"Items": ["Pickaxe[+]", "Hammer", "Runite bar"],
+				"Skills": {
+					"Mining": 70
+				},
 				"Tasks": {
 					"~|Song of the Elves|~ 17": "Quest"
 				},
@@ -119202,6 +119261,9 @@
 				"Description": "Talk to Lord Crwys",
 				"Chunks": ["8754-1"],
 				"Items": ["Axe[+]"],
+				"Skills": {
+					"Woodcutting": 70
+				},
 				"Tasks": {
 					"~|Song of the Elves|~ 19": "Quest"
 				},
@@ -119971,6 +120033,9 @@
 				"Description": "Enter Quidamortem Cave",
 				"Chunks": ["4663-3"],
 				"Items": ["Rope", "Pickaxe[+]"],
+				"Skills": {
+					"Mining": 10
+				},
 				"Tasks": {
 					"~|Tale of the Righteous|~ 5": "Quest"
 				},
@@ -121003,6 +121068,9 @@
 				"Description": "Unblock the cave entrance and kill the gryphon",
 				"Chunks": ["12582-1"],
 				"Items": ["Axe[+]"],
+				"Skills": {
+					"Woodcutting": 1
+				},
 				"Tasks": {
 					"~|Troubled Tortugans|~ 6": "Quest"
 				},
@@ -122457,7 +122525,8 @@
 				},
 				"Skills": {
 					"Firemaking": 11,
-					"Crafting": 11
+					"Crafting": 11,
+					"Woodcutting": 1
 				},
 				"Not F2P": true
 			},
