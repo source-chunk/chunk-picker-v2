@@ -8070,7 +8070,6 @@
 			},
 			"Craft a ~|repair kit|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Plank*", "Bronze nails*", "Swamp paste*"],
-				"Objects": ["Shipwrights' Workbench"],
 				"Level": 1,
 				"Output": "Repair kit",
 				"Primary": true,
@@ -28252,6 +28251,12 @@
 			"Kill a runite golem*": {
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rocks",
+				"Not F2P": true
+			},
+			"Trade termites for marks of grace via amylase packs": {
+				"Items": ["Termites*"],
+				"NPCs": ["Grace"],
+				"Output": "Mark of grace",
 				"Not F2P": true
 			},
 			"Create a silklined herb sack": {
@@ -71989,6 +71994,9 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Mark of grace"],
+				"Tasks": {
+					"MarkOfGraceSource[+]": "Agility"
+				},
 				"Not F2P": true
 			},
 			"(Rooftop Agility) Obtain a ~|graceful hood|~": {
@@ -80250,6 +80258,71 @@
 				"Label": "Fill POH",
 				"Chunks": ["Player-owned house"],
 				"Items": ["Carpenter's boots"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Magic Wardrobe: ~|Cow slippers#1|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Cow slippers"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Magic Wardrobe: ~|Cow slippers#2|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Cow slippers"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Magic Wardrobe: ~|Cow slippers#3|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Cow slippers"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Magic Wardrobe: ~|Cow slippers#4|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Cow slippers"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Magic Wardrobe: ~|Brutus slippers|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Brutus slippers"],
 				"Skills": {
 					"Construction": 42
 				},
@@ -172995,7 +173068,7 @@
 			"RoyalTrouble3[+]": ["10044-1", "10300-1"],
 			"SOTE30[+]": ["8755-2", "9011-1"],
 			"SolusLocation[+]": ["10553-1", "11569-1", "12337-1", "Dorgesh-Kaan mine", "10547-1", "12596-1", "9776", "9782", "13623", "11057-1", "13106-1", "Lumbridge Swamp Caves", "11830-1", "10032-1", "10550", "12338-1", "9778-1"],
-			"MageArenaII2[+]": ["12091-1", "12604-1", "12603-1", "12860", "12859-1", "13116", "12861", "13117", "13372"],
+			"MageArenaII2[+]": ["12091-1", "12604-1", "12603-1", "12860", "12859-1", "13117", "13116", "13115", "13372"],
 			"EnterTheAbyss3[+]": ["12853-1", "Wizards' Tower#Basement", "10288-1", "10547-1", "Brimstail's cave"],
 			"FairyTaleI2[+]": ["11573-1", "13106-1", "11317-1", "12596-1", "11062-1", "12083-1", "12594-1", "11060-1", "11058-1", "9777-1", "11828-1", "11056-1", "10548-1", "14391", "6967", "10300-1", "10551-1", "10288-1", "11570-1", "10290", "12854-1", "12851-1", "9781-1", "12082-1", "6711-1", "11321-2", "9265", "14651", "14907-3", "11325-1", "6192", "6702", "5421-1", "Underwater Fossil Island"],
 			"CreatureOfFenkenstrain1[+]": ["13878-1", "14135"],
@@ -174887,6 +174960,7 @@
 			"WildernessPirateAccess[+]": ["Access wilderness pirates", "Access wilderness zombie pirates"],
 			"ConstructBed[+]": ["Build a ~|wooden bed|~", "Build an ~|oak bed|~", "Build a ~|large oak bed|~", "Build a ~|teak bed|~", "Build a ~|large teak bed|~", "Build a ~|4-poster|~", "Build a ~|gilded 4-poster|~"],
 			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
+			"MarkOfGraceSource[+]": ["Access the ~|Al Kharid Rooftop Course|~", "Access the ~|Ape Atoll Agility Course|~", "Access the ~|Ardougne Rooftop Course|~", "Access the ~|Barbarian Outpost Agility Course|~", "Access the ~|Canafis Rooftop Course|~", "Access the ~|Dorgesh-Kaan Agility Course|~", "Access the ~|Dorgesh-Kaan Agility Course|~ (grapple route)", "Access the ~|Draynor Village Rooftop Course|~", "Access the ~|Falador Rooftop Course|~", "Access the ~|Gnome Stronghold Agility Course|~", "Access the ~|Pollnivneach Rooftop Course|~", "Access the ~|Rellekka Rooftop Course|~", "Access the ~|Seers' Village Rooftop Course|~", "Access the ~|Shayzien Basic Course|~", "Access the ~|Shayzien Advanced Course|~", "Access the ~|Varrock Rooftop Course|~", "Access the ~|Werewolf Agility Course|~"],
 			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"],
 			"SmokableTrapTask[+]": ["Catch an ~|embertailed jerboa|~", "Catch a ~|pyre fox|~", "Catch a ~|tecu salamander|~", "Catch a ~|barb-tailed kebbit|~", "Catch a ~|black chinchompa|~", "Catch a ~|black salamander|~", "Catch a ~|carnivorous chinchompa|~", "Catch a ~|chinchompa (Hunter)|~", "Catch a ~|copper longtail|~", "Catch a ~|crimson swift|~", "Catch a ~|ferret|~", "Catch a ~|golden warbler|~", "Catch a ~|maniacal monkey (Hunter)|~", "Catch a ~|red salamander|~", "Catch a ~|sabre-toothed kebbit|~", "Catch a ~|swamp lizard|~", "Catch a ~|tropical wagtail|~", "Catch a ~|wild kebbit|~", "Catch an ~|imp|~", "Catch an ~|orange salamander|~"],
 			"Access Ali's shop task[+]": ["Access Ali's shop in f2p", "F2P Only"],
@@ -183367,10 +183441,10 @@
 				"3 (noted)": "10/81"
 			},
 			"Clue scroll (beginner)": {
-				"1": "Common"
+				"1": "1/15"
 			},
 			"Clue scroll (easy)": {
-				"1": "Uncommon"
+				"1": "1/40"
 			}
 		},
 		"Bryophyta": {

@@ -6939,6 +6939,11 @@
   "Magic Wardrobe: ~|Carpenter's shirt|~": "t_6085",
   "Magic Wardrobe: ~|Carpenter's trousers|~": "t_6086",
   "Magic Wardrobe: ~|Carpenter's boots|~": "t_6087",
+  "Magic Wardrobe: ~|Cow slippers#1|~": "t_49459",
+  "Magic Wardrobe: ~|Cow slippers#2|~": "t_49460",
+  "Magic Wardrobe: ~|Cow slippers#3|~": "t_49461",
+  "Magic Wardrobe: ~|Cow slippers#4|~": "t_49462",
+  "Magic Wardrobe: ~|Brutus slippers|~": "t_49463",
   "Magic Wardrobe: ~|Crystal glider's hat|~": "t_47227",
   "Magic Wardrobe: ~|Crystal glider's jacket|~": "t_47228",
   "Magic Wardrobe: ~|Crystal glider's trousers|~": "t_47229",
@@ -19042,8 +19047,8 @@
   "Brutus: ~|Potato seed|~ (3) (1/8.1)": "t_49450",
   "Brutus: ~|Raw t-bone steak|~ (1) (Always)": "t_49451",
   "Brutus: ~|Raw t-bone steak|~ (3 (noted)) (1/8.1)": "t_49452",
-  "Brutus: ~|Clue scroll (beginner)|~ (1) (Common)": "t_49453",
-  "Brutus: ~|Clue scroll (easy)|~ (1) (Uncommon)": "t_49454",
+  "Brutus: ~|Clue scroll (beginner)|~ (1) (1/15)": "t_49453",
+  "Brutus: ~|Clue scroll (easy)|~ (1) (1/40)": "t_49454",
   "Bryophyta: ~|Giant bones|~ (1) (Always)": "t_17296",
   "Bryophyta: ~|Mossy key|~ (1) (1/16)": "t_17297",
   "Bryophyta: ~|Big bones|~ (1) (Always)": "t_17298",
@@ -49137,5 +49142,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49459
+  "currentNextIndex": 49464
 }
