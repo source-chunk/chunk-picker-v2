@@ -2035,8 +2035,8 @@ let calcChallenges = function(chunks, baseChunkData) {
         let sectionsAdded = false;
         newValids.hasOwnProperty('Nonskill') && Object.keys(newValids['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ConnectsSections') && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('Sections') }).forEach((task) => {
             let chunksValid = chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => chunks.hasOwnProperty(section.split('-')[0])).length === chunkInfo['challenges']['Nonskill'][task]['Sections'].length;
-            let oneSectionValid = chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => !section.includes('-') || (unlockedSections[section.split('-')[0]] && unlockedSections[section.split('-')[0]][section.split('-')[1]])).length > 0;
-            chunksValid && oneSectionValid && chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => section.includes('-') && chunks.hasOwnProperty(section.split('-')[0]) && (!unlockedSections[section.split('-')[0]] || !unlockedSections[section.split('-')[0]][section.split('-')[1]]) && (!manualSections[section.split('-')[0]] || manualSections[section.split('-')[0]][section.split('-')[1]])).forEach((section) => {
+            let oneSectionValid = chunkInfo['challenges']['Nonskill'][task]['Sections'].length === 1 || chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => !section.includes('-') || (unlockedSections[section.split('-')[0]] && unlockedSections[section.split('-')[0]][section.split('-')[1]])).length > 0;
+            chunksValid && oneSectionValid && chunkInfo['challenges']['Nonskill'][task]['Sections'].filter((section) => section.includes('-') && chunks.hasOwnProperty(section.split('-')[0]) && (!unlockedSections[section.split('-')[0]] || !unlockedSections[section.split('-')[0]][section.split('-')[1]]) && (!manualSections[section.split('-')[0]] || manualSections[section.split('-')[0]][section.split('-')[1]] !== false)).forEach((section) => {
                 if (!unlockedSections[section.split('-')[0]]) {
                     unlockedSections[section.split('-')[0]] = {};
                 }
@@ -3713,26 +3713,26 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             if (!doneTempSkillItems && chunkInfo['challenges'][skill][name].hasOwnProperty('Description')) {
                 Object.keys(tempItemSkill[skill]).forEach((item) => {
                     if (rules["Highest Level"]) {
-                        !!items[item] && tempItemSkill[skill][item].forEach((name) => {
-                            valids[skill][name] = chunkInfo['challenges'][skill][name]['Level'];
+                        !!items[item] && tempItemSkill[skill][item].filter((name2) => !chunkInfo['challenges'][skill][name2]['NeverShow']).forEach((name2) => {
+                            valids[skill][name2] = chunkInfo['challenges'][skill][name2]['Level'];
                         });
                     } else {
                         let lowestItem;
                         let lowestName;
-                        !!items[item] && tempItemSkill[skill][item].forEach((name) => {
-                            let challenge = chunkInfo['challenges'][skill][name];
+                        !!items[item] && tempItemSkill[skill][item].filter((name2) => !chunkInfo['challenges'][skill][name2]['NeverShow']).forEach((name2) => {
+                            let challenge = chunkInfo['challenges'][skill][name2];
                             if (!!challenge && !!challenge['Output']) {
                                 if (!extraOutputItems[skill]) {
                                     extraOutputItems[skill] = {};
                                 }
-                                extraOutputItems[skill][name] = challenge['Output'];
+                                extraOutputItems[skill][name2] = challenge['Output'];
                             }
                             if (!lowestItem || lowestItem['Level'] > challenge['Level']) {
                                 lowestItem = challenge;
-                                lowestName = name;
+                                lowestName = name2;
                             } else if (lowestItem['Level'] === challenge['Level'] && ((!!challenge['Priority'] && (challenge['Priority'] < lowestItem['Priority'])) || !lowestItem['Priority'])) {
                                 lowestItem = challenge;
-                                lowestName = name;
+                                lowestName = name2;
                             }
                         });
                         !!lowestName && (valids[skill][lowestName] = chunkInfo['challenges'][skill][lowestName]['Level']);

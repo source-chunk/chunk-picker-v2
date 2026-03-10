@@ -441,6 +441,7 @@ let rules = {
     "Sail Trimming": false,
     "Crewmates": false,
     "Sea Charting": false,
+    "Fish Offcuts Valid Processing": false,
 };                                                                              // List of rules and their on/off state
 
 let ruleNames = {
@@ -541,7 +542,8 @@ let ruleNames = {
     "KeyItem Bosses": "For bosses that require keys to kill (Skotizo), factor in the droprate of the key as part of the droprate of each drop",
     "Sail Trimming": "Allow trimming the sails on your boat to count as a primary training method for training Sailing <span class='rule-asterisk noscroll'>*</span>",
     "Crewmates": "Getting the Sailing level to recruit crewmates to your ship can be a skill task",
-    "Sea Charting": "Require Sea Charting tasks be completed"
+    "Sea Charting": "Require Sea Charting tasks be completed",
+    "Fish Offcuts Valid Processing": "Creating fish offcuts and fine fish offcuts counts as a valid way to process raw fish via Cooking (otherwise, most raw fish will require they be cooked to process them)",
 };                                                                              // List of rule definitions
 
 let rulePresets = {
@@ -570,6 +572,7 @@ let rulePresets = {
         "Cleaning Herbs": true,
         "Forestry": true,
         "Crewmates": true,
+        "Fish Offcuts Valid Processing": true,
     },
     "Xtreme Chunker": {
         "Skillcape": true,
@@ -636,6 +639,7 @@ let rulePresets = {
         "POH Rooms": true,
         "Crewmates": true,
         "Sail Trimming": true,
+        "Fish Offcuts Valid Processing": true,
     },
     "Supreme Chunker": {
         "Skillcape": true,
@@ -709,6 +713,7 @@ let rulePresets = {
         "POH Rooms": true,
         "Crewmates": true,
         "Sail Trimming": true,
+        "Fish Offcuts Valid Processing": true,
     },
 };                                                                              // List of rules that are part of each preset
 
@@ -750,6 +755,9 @@ let ruleStructure = {
         "Construction Milestone": true,
         "Construction Minigame": true,
         "POH Rooms": true
+    },
+    "Cooking": {
+        "Fish Offcuts Valid Processing": true
     },
     "Farming": {
         "Normal Farming": true,
@@ -1510,7 +1518,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.37';
+let currentVersion = '6.9.38';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'difference';
 
@@ -1680,7 +1688,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.37";
+mapImg.src = "osrs_world_map.png?v=6.9.38";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3598,7 +3606,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.37");
+        myWorker = new Worker("./worker.js?v=6.9.38");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3902,8 +3910,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.37");
-let myWorker2 = new Worker("./worker.js?v=6.9.37");
+let myWorker = new Worker("./worker.js?v=6.9.38");
+let myWorker2 = new Worker("./worker.js?v=6.9.38");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -6849,7 +6857,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.37");
+    myWorker2 = new Worker("./worker.js?v=6.9.38");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -13006,6 +13014,10 @@ let loadData = async function(startup) {
 
         if (!rulesTemp.hasOwnProperty('Sea Charting')) {
             rulesTemp['Sea Charting'] = rulesTemp.hasOwnProperty('Show Diary Tasks') ? rulesTemp['Show Diary Tasks'] && (rulesTemp['Fossil Island Tasks'] || rulesTemp['Combat Diary Tasks'] || rulesTemp['Crewmates'] || rulesTemp['Sail Trimming'] || rulesTemp['Money Unlockables']) : false;
+        }
+        
+        if (!rulesTemp.hasOwnProperty('Fish Offcuts Valid Processing')) {
+            rulesTemp['Fish Offcuts Valid Processing'] = true;
         }
 
         !!rulesTemp && Object.keys(rulesTemp).forEach((rule) => {

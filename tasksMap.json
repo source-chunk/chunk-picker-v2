@@ -1199,6 +1199,8 @@
   "Cut an aerial fishing fish into ~|fish offcuts|~": "t_46689",
   "Cut raw fish into ~|fish offcuts|~": "t_46690",
   "Cut raw fish into ~|fine fish offcuts|~": "t_46691",
+  "Cut raw fish into ~|fish offcuts|~ (alt)": "t_49464",
+  "Cut raw fish into ~|fine fish offcuts|~ (alt)": "t_49465",
   "Cut up a ~|raw swordtip squid|~": "t_46692",
   "Cut up a ~|raw jumbo squid|~": "t_46693",
   "Cut up a ~|raw haddock|~": "t_46694",
@@ -49142,5 +49144,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49464
+  "currentNextIndex": 49466
 }

@@ -10406,6 +10406,7 @@
 				"NoBoost": true
 			},
 			"Cut raw fish into ~|fish offcuts|~": {
+				"Category": ["Fish Offcuts Valid Processing"],
 				"Items": ["Knife", "RawFishOffcuts[+]*"],
 				"Level": 1,
 				"Output": "Fish offcuts",
@@ -10414,12 +10415,31 @@
 				"NoBoost": true
 			},
 			"Cut raw fish into ~|fine fish offcuts|~": {
+				"Category": ["Fish Offcuts Valid Processing"],
 				"Items": ["Knife", "RawFishFineOffcuts[+]*"],
 				"Level": 1,
 				"Output": "Fine fish offcuts",
 				"Primary": true,
 				"Priority": 27,
 				"NoBoost": true
+			},
+			"Cut raw fish into ~|fish offcuts|~ (alt)": {
+				"Items": ["Knife", "RawFishOffcuts[+]"],
+				"Level": 1,
+				"Output": "Fish offcuts",
+				"Primary": true,
+				"Priority": 26,
+				"NoBoost": true,
+				"ManualNonProcessing": true
+			},
+			"Cut raw fish into ~|fine fish offcuts|~ (alt)": {
+				"Items": ["Knife", "RawFishFineOffcuts[+]"],
+				"Level": 1,
+				"Output": "Fine fish offcuts",
+				"Primary": true,
+				"Priority": 27,
+				"NoBoost": true,
+				"ManualNonProcessing": true
 			},
 			"Cut up a ~|raw swordtip squid|~": {
 				"Items": ["Knife", "Raw swordtip squid*"],
@@ -30180,6 +30200,12 @@
 				"Output": "Secateurs",
 				"Not F2P": true
 			},
+			"10038-1 via Fishing cape": {
+				"Sections": ["10038-1"],
+				"Items": ["FishingCape[+]"],
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
 			"11569-W1 to 11313-W2": {
 				"Sections": ["11569-W1", "11313-W2"],
 				"Tasks": {
@@ -33419,7 +33445,7 @@
 				"Chunks": ["Deep Wilderness Dungeon"]
 			},
 			"Wilderness hobgoblin": {
-				"Chunks": ["12605"]
+				"Chunks": ["12346"]
 			},
 			"Karamja hobgoblin": {
 				"Chunks": ["11055-1"]
@@ -50113,7 +50139,7 @@
 			},
 			"Wield a ~|steel dart|~": {
 				"Items": ["Steel dart"],
-				"Level": 1,
+				"Level": 5,
 				"Primary": false,
 				"Priority": 9,
 				"Not F2P": true,
@@ -50121,7 +50147,7 @@
 			},
 			"Wield a ~|steel knife|~": {
 				"Items": ["Steel knife"],
-				"Level": 1,
+				"Level": 5,
 				"Primary": false,
 				"Priority": 8,
 				"Not F2P": true,
@@ -50129,7 +50155,7 @@
 			},
 			"Wield a ~|steel thrownaxe|~": {
 				"Items": ["Steel thrownaxe"],
-				"Level": 1,
+				"Level": 5,
 				"Primary": false,
 				"Priority": 7,
 				"Not F2P": true,
@@ -174237,7 +174263,8 @@
 			"Dragon cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball", "Rune cannonball", "Dragon cannonball"],
 			"VatrachosRaccoonFood[+]": ["Banana", "Coconut", "Dragonfruit", "Jangerberries", "Papaya fruit", "Peach", "Strawberry", "Watermelon", "Watermelon slice", "White tree fruit"],
 			"Fletching knife[+]": ["Knife", "Narwhal horn knife"],
-			"QuetzalWhistleMeat[+]": ["Quetzal feed", "Raw barb-tailed kebbit", "Raw dashing kebbit", "Raw graahk", "Raw kyatt", "Raw larupia", "Raw moonlight antelope", "Raw pyre fox", "Raw sunlight antelope", "Raw wild kebbit"]
+			"QuetzalWhistleMeat[+]": ["Quetzal feed", "Raw barb-tailed kebbit", "Raw dashing kebbit", "Raw graahk", "Raw kyatt", "Raw larupia", "Raw moonlight antelope", "Raw pyre fox", "Raw sunlight antelope", "Raw wild kebbit"],
+			"FishingCape[+]": ["Fishing cape", "Fishing cape(t)"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -174633,7 +174660,8 @@
 			"BoatPaint[+]": "Any boat paint",
 			"VatrachosRaccoonFood[+]": "Any food for the Vatrachos Raccoon",
 			"Fletching knife[+]": "Any knife for Fletching",
-			"QuetzalWhistleMeat[+]": "Any meat used to charge a quetzal whistle"
+			"QuetzalWhistleMeat[+]": "Any meat used to charge a quetzal whistle",
+			"FishingCape[+]": "Any Fishing cape variant"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Man (East Ardougne)", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
