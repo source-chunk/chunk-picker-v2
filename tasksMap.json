@@ -7263,6 +7263,8 @@
   "Cape Rack: ~|Strength cape(t)|~": "t_6387",
   "Cape Rack: ~|Thieving cape(t)|~": "t_6388",
   "Cape Rack: ~|Woodcut. cape(t)|~": "t_6389",
+  "Fancy Dress Box: ~|Shade robe top|~": "t_49466",
+  "Fancy Dress Box: ~|Shade robe|~": "t_49467",
   "~|Ardougne Diary#Easy|~ Task 1": "t_6390",
   "~|Ardougne Diary#Easy|~ Task 2": "t_6391",
   "~|Ardougne Diary#Easy|~ Task 3": "t_6392",
@@ -49144,5 +49146,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49466
+  "currentNextIndex": 49468
 }

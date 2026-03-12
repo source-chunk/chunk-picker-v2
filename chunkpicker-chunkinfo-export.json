@@ -34484,6 +34484,10 @@
 				"Items": ["Hammer[+]", "Saw[+]", "Oak plank", "Teak plank"],
 				"Not F2P": true
 			},
+			"Oak fancy dress box materials": {
+				"Items": ["Hammer[+]", "Saw[+]", "Oak plank"],
+				"Not F2P": true
+			},
 			"Access LMS via Quest Points": {
 				"Category": ["Minigame"],
 				"Chunks": ["12600"],
@@ -84475,6 +84479,32 @@
 				},
 				"Tasks": {
 					"Teak cape rack materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Fancy Dress Box: ~|Shade robe top|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Shade robe top"],
+				"Skills": {
+					"Construction": 44
+				},
+				"Tasks": {
+					"Oak fancy dress box materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Fancy Dress Box: ~|Shade robe|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Shade robe"],
+				"Skills": {
+					"Construction": 44
+				},
+				"Tasks": {
+					"Oak fancy dress box materials": "Nonskill"
 				},
 				"Not F2P": true
 			}
