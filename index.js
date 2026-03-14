@@ -4,6 +4,11 @@
  * With help from Slay to Stay for chunk Ids and Amehzyn for smoother zooming/url decoding
  */
 
+// Validates a map ID: only alphanumeric, hyphens, underscores; max 64 chars
+let isValidMapId = function(id) {
+    return typeof id === 'string' && id.length > 0 && id.length <= 64 && /^[a-zA-Z0-9\-_]+$/.test(id);
+};
+
 let onMobile = false;                                                           // Is user on a mobile device
 let viewOnly = false;                                                           // View only mode active
 let isPicking = false;                                                          // Has the user just rolled 2 chunks and is currently picking
@@ -5178,6 +5183,14 @@ let accessMap = function() {
     $('#access').prop('disabled', true).html('<i class="spin fa-solid fa-spinner"></i>');
     mid = $('.mid').removeClass('wrong').val().toLowerCase();
     savedPin = $('.pin.old').removeClass('wrong').val();
+    if (!isValidMapId(mid)) {
+        setTimeout(function() {
+            $('.mid-err').css('visibility', 'visible');
+            $('.mid').addClass('wrong').select();
+            $('#access').text('Access my map');
+        }, 1000);
+        return;
+    }
     databaseRef.child('mapids/' + mid).once('value', function(snap) {
         if (!snap.val()) {
             databaseRef.child('maps/' + mid).once('value', function(snap) {
@@ -5329,6 +5342,14 @@ let changePin = function() {
     let mid = $('.mid-old').removeClass('wrong').val().toLowerCase();
     let pinOld = $('.pin.old2.first').removeClass('wrong').val();
     let pinNew = $('.pin.old2.second').val();
+    if (!isValidMapId(mid)) {
+        setTimeout(function() {
+            $('.mid-err').css('visibility', 'visible');
+            $('.mid-old').addClass('wrong').select();
+            $('#change-pin').text('Change Password');
+        }, 1000);
+        return;
+    }
     databaseRef.child('maps/' + mid).once('value', function(snap) {
         if (!snap.val()) {
             setTimeout(function() {
@@ -12365,7 +12386,7 @@ let checkMID = function(mid) {
         $('html, body').addClass('a404');
         $('.a404-address').text(window.location.href.split('?')[1]);
         document.title = '404 - Chunk Picker V2';
-    } else if (mid && !['.', '#', '$', '[', ']'].some((char) => mid.includes(char))) {
+    } else if (mid && isValidMapId(mid)) {
         if (mid.split('-')[1] === 'view') {
             mid = mid.split('-')[0];
             viewOnly = true;
@@ -12423,7 +12444,7 @@ let checkMID = function(mid) {
             setupMap();
         });
     } else if (mid) {
-        window.location.replace(window.location.href.split('?')[0] + '?' + mid.toLowerCase().replace(/\.|\#|$|\[|\]/g, '') + (viewOnly ? '-view' : ''));
+        window.location.replace(window.location.href.split('?')[0] + '?' + mid.toLowerCase().replace(/[^a-z0-9\-_]/g, '') + (viewOnly ? '-view' : ''));
     } else {
         atHome = true;
         $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .menu11, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv, .gomobiletasks, .menu12, .menu13, .menu14').hide();
