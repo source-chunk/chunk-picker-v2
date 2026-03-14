@@ -9,6 +9,14 @@ let isValidMapId = function(id) {
     return typeof id === 'string' && id.length > 0 && id.length <= 64 && /^[a-zA-Z0-9\-_]+$/.test(id);
 };
 
+// Firebase auth helpers
+let firebaseSignIn = function(mid, pin) {
+    return firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pin + mid);
+};
+let firebaseCreateAccount = function(mid, pin) {
+    return firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pin + mid);
+};
+
 let onMobile = false;                                                           // Is user on a mobile device
 let viewOnly = false;                                                           // View only mode active
 let isPicking = false;                                                          // Has the user just rolled 2 chunks and is currently picking
@@ -5005,7 +5013,7 @@ let unlockEntry = function() {
             }, (1500 + signInAttempts * 10));
         } else if (!!methods && methods.length > 0) {
             setTimeout(function() {
-                firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                firebaseSignIn(mid, savedPin).then((userCredential) => {
                     signedIn = true;
                     $('.center').css('margin-top', '15px');
                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').css('opacity', 0).show();
@@ -5053,7 +5061,7 @@ let unlockEntry = function() {
             myRef.child('pin').once('value', function(snap) {
                 if ((snap.val() && snap.val() === savedPin)) {
                     setTimeout(function() {
-                        firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                        firebaseCreateAccount(mid, savedPin).then((userCredential) => {
                             signedIn = true;
                             setSnap['uid'] = userCredential.user.uid;
                             myRef.child('uid').set(userCredential.user.uid, function(error) {
@@ -5212,7 +5220,7 @@ let accessMap = function() {
                 myRef = firebase.database().ref('maps/' + mid);
                 if (!!methods && methods.length > 0) {
                     setTimeout(function() {
-                        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                        firebaseSignIn(mid, savedPin).then((userCredential) => {
                             signedIn = true;
                             window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
                             document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
@@ -5258,7 +5266,7 @@ let accessMap = function() {
                     myRef.child('pin').once('value', function(snap) {
                         if ((snap.val() && snap.val() === savedPin)) {
                             setTimeout(function() {
-                                firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                                firebaseCreateAccount(mid, savedPin).then((userCredential) => {
                                     signedIn = true;
                                     setSnap['uid'] = userCredential.user.uid;
                                     myRef.child('uid').set(userCredential.user.uid, function(error) {
@@ -5369,7 +5377,7 @@ let changePin = function() {
             }, (1500 + signInAttempts * 10));
         } else {
             setTimeout(function() {
-                firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pinOld + mid).then((userCredential) => {
+                firebaseSignIn(mid, pinOld).then((userCredential) => {
                     if (onTestServer || testMode) {
                         return;
                     }
@@ -12462,7 +12470,7 @@ let regainConnectivity = function(_callback) {
     if (Date.now() > lastRegain + 1000) {
         lastRegain = Date.now();
         firebase.auth().signOut();
-        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(() => {
+        firebaseSignIn(mid, savedPin).then(() => {
             _callback();
         });
     }
@@ -13102,7 +13110,7 @@ let setRecentLogin = function() {
         return;
     }
     let timeNow = new Date().getTime();
-    signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+    signedIn && firebaseSignIn(mid, savedPin).then(function() {
         setSnap['recentLoginTime'] = timeNow;
         myRef.child('recentLoginTime').set(timeNow);
     }).catch(function(error) {
@@ -13118,7 +13126,7 @@ let setUsername = function(old) {
     if (onTestServer || testMode) {
         return;
     }
-    signedIn && firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+    signedIn && firebaseSignIn(mid, savedPin).then(function() {
         setSnap['userName'] = userName.toLowerCase();
         myRef.child('userName').set(userName.toLowerCase());
         if (!!old && old !== '') {
@@ -13344,7 +13352,7 @@ let setData = function() {
             }
         });
     } else {
-        firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
+        firebaseSignIn(mid, savedPin).then(function() {
             myRef.update({...databaseObject});
         }).catch(function(error) { console.error(error) });
     }
@@ -13377,7 +13385,7 @@ let rollMID = function(count) {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
         firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then(providers => {
             if (providers.length === 0) {
-                firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                firebaseCreateAccount(mid, savedPin).then((userCredential) => {
                     signedIn = true;
                     userCredential.user.updateProfile({
                         displayName: mid
@@ -13443,7 +13451,7 @@ let changeLocked = function() {
     firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
         if (!!methods && methods.length > 0) {
             setTimeout(function() {
-                firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                firebaseSignIn(mid, savedPin).then((userCredential) => {
                     signedIn = true;
                     $('.center').css('margin-top', '15px');
                     $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile').css('opacity', 0).show();
@@ -13488,7 +13496,7 @@ let changeLocked = function() {
             myRef.child('pin').once('value', function(snap) {
                 if ((snap.val() && snap.val() === savedPin)) {
                     setTimeout(function() {
-                        firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
+                        firebaseCreateAccount(mid, savedPin).then((userCredential) => {
                             signedIn = true;
                             signedIn && (setSnap['uid'] = userCredential.user.uid);
                             signedIn && myRef.child('uid').set(userCredential.user.uid, function(error) {
