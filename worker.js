@@ -376,13 +376,9 @@ onmessage = function(e) {
             });
         });
         type === 'current' && postMessage('100%');
-        //console.log(globalValids);
 
         let tempChallengeArr;
         type === 'current' && (tempChallengeArr = calcCurrentChallenges2());
-
-        //console.log(nonValids);
-        //console.log(baseChunkData);
 
         postMessage([type, globalValids, baseChunkData, chunkInfo, highestCurrent, tempChallengeArr, type === 'current' ? questPointTotal : 1, highestOverall, type === 'current' ? dropRatesGlobal : {}, questProgress, diaryProgress, skillQuestXp, chunks, type === 'current' ? dropTablesGlobal : {}, bestEquipmentAltsGlobal, unlockedSections, type === 'current' ? combatPointTotal : 0, highestOverallCompleted, bisUpgradesOutput, bankMemoryFormat, globalValidsBoosts]);
     } catch (err) {
@@ -3378,10 +3374,8 @@ let calcChallenges = function(chunks, baseChunkData) {
             delete baseChunkData['items'][item];
         });
         globalValids = {...newValids};
-        //console.log(i);
     } while ((Object.keys(diff(valids, newValids) || {}).length !== 0 && i < 15) || i < 3);
     valids = newValids;
-    //console.log(baseChunkData);
     tempChunkData = baseChunkData;
     return valids;
 }
@@ -4941,8 +4935,6 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
         });
     }
 
-    //console.log(JSON.parse(JSON.stringify(tempItemSkill)));
-    //console.log(JSON.parse(JSON.stringify(valids)));
     return [valids, tempItemSkill, tempMultiStepSkill];
 }
 
@@ -8159,7 +8151,6 @@ let calcBIS = function(completedOnly) {
                 bestEquipmentAltsGlobal[skill + ' BiS ' + slot].unshift(bestEquipment[slot]);
             }
         });
-        //console.log(bestEquipment);
     });
 
 
