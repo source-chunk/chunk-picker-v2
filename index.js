@@ -3246,7 +3246,7 @@ let setRecentRoll = function(chunkId) {
     if (signedIn && !onTestServer && !testMode) {
         let timeNow = new Date().getTime();
         setSnap['chunkOrder'] = { ...setSnap['chunkOrder'], [timeNow]: parseInt(chunkId) };
-        myRef.child('recentFancyRollTime').set(recentFancyRollTime);
+        myRef.child('recentFancyRollTime').set(recentFancyRollTime).catch(err => console.error('Firebase write failed:', err));
         const setRoll = firebase.functions().httpsCallable('setRoll');
         setRoll({ mapCode: mid, chunkId: parseInt(chunkId) });
     }
@@ -5025,7 +5025,7 @@ let unlockEntry = function() {
                     $('#entry-menu').animate({ 'opacity': 0 });
                     myRef.child('mapCreationTimes/' + mid).once('value', function(snap) {
                         if (!snap.val()) {
-                            databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime());
+                            databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime()).catch(err => console.error('Firebase write failed:', err));
                         }
                     });
                     setTimeout(function() {
@@ -5067,16 +5067,16 @@ let unlockEntry = function() {
                             myRef.child('uid').set(userCredential.user.uid, function(error) {
                                 if (error) {
                                     regainConnectivity(() => {
-                                        myRef.child('pin').remove();
+                                        myRef.child('pin').remove().catch(err => console.error('Firebase write failed:', err));
                                     });
                                 } else {
-                                    myRef.child('pin').remove();
+                                    myRef.child('pin').remove().catch(err => console.error('Firebase write failed:', err));
                                 }
                             });
                             userCredential.user.updateProfile({
                                 displayName: mid
                             });
-                            databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime());
+                            databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime()).catch(err => console.error('Firebase write failed:', err));
                             $('.center').css('margin-top', '15px');
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile, .taskstoggle').css('opacity', 0).show();
                             roll2On && $('.roll2').css('opacity', 0).show();
@@ -5210,7 +5210,7 @@ let accessMap = function() {
                     }, 1000);
                     return;
                 } else {
-                    databaseRef.child('mapids/' + mid).set(true);
+                    databaseRef.child('mapids/' + mid).set(true).catch(err => console.error('Firebase write failed:', err));
                 }
             });
         }
@@ -5249,7 +5249,7 @@ let accessMap = function() {
                             setupMap();
                             myRef.child('mapCreationTimes/' + mid).once('value', function(snap) {
                                 if (!snap.val()) {
-                                    databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime());
+                                    databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime()).catch(err => console.error('Firebase write failed:', err));
                                 }
                             });
                         }).catch((error) => {
@@ -5272,16 +5272,16 @@ let accessMap = function() {
                                     myRef.child('uid').set(userCredential.user.uid, function(error) {
                                         if (error) {
                                             regainConnectivity(() => {
-                                                myRef.child('pin').remove();
+                                                myRef.child('pin').remove().catch(err => console.error('Firebase write failed:', err));
                                             });
                                         } else {
-                                            myRef.child('pin').remove();
+                                            myRef.child('pin').remove().catch(err => console.error('Firebase write failed:', err));
                                         }
                                     });
                                     userCredential.user.updateProfile({
                                         displayName: mid
                                     });
-                                    databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime());
+                                    databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime()).catch(err => console.error('Firebase write failed:', err));
                                     window.history.replaceState(window.location.href.split('?')[0], mid.toUpperCase() + ' - Chunk Picker V2', '?' + mid);
                                     document.title = mid.split('-')[0].toUpperCase() + ' - Chunk Picker V2';
                                     $('#entry-menu').hide();
@@ -12445,7 +12445,7 @@ let checkMID = function(mid) {
                         atHome = false;
                         $('.background-img').hide();
                         inEntry = true && !viewOnly;
-                        databaseRef.child('mapids/' + mid).set(true);
+                        databaseRef.child('mapids/' + mid).set(true).catch(err => console.error('Firebase write failed:', err));
                     }
                 });
             }
@@ -13112,11 +13112,11 @@ let setRecentLogin = function() {
     let timeNow = new Date().getTime();
     signedIn && firebaseSignIn(mid, savedPin).then(function() {
         setSnap['recentLoginTime'] = timeNow;
-        myRef.child('recentLoginTime').set(timeNow);
+        myRef.child('recentLoginTime').set(timeNow).catch(err => console.error('Firebase write failed:', err));
     }).catch(function(error) {
         regainConnectivity(() => {
             setSnap['recentLoginTime'] = timeNow;
-            myRef.child('recentLoginTime').set(timeNow);
+            myRef.child('recentLoginTime').set(timeNow).catch(err => console.error('Firebase write failed:', err));
         });
     });
 }
@@ -13128,21 +13128,21 @@ let setUsername = function(old) {
     }
     signedIn && firebaseSignIn(mid, savedPin).then(function() {
         setSnap['userName'] = userName.toLowerCase();
-        myRef.child('userName').set(userName.toLowerCase());
+        myRef.child('userName').set(userName.toLowerCase()).catch(err => console.error('Firebase write failed:', err));
         if (!!old && old !== '') {
-            databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
+            databaseRef.child('highscores/players/' + old.toLowerCase()).set(null).catch(err => console.error('Firebase write failed:', err));
         }
-        databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid);
+        databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid).catch(err => console.error('Firebase write failed:', err));
         highscoreEnabled = true;
         setData();
     }).catch(function(error) {
         regainConnectivity(() => {
             setSnap['userName'] = userName.toLowerCase();
-            myRef.child('userName').set(userName.toLowerCase());
+            myRef.child('userName').set(userName.toLowerCase()).catch(err => console.error('Firebase write failed:', err));
             if (!!old && old !== '') {
-                databaseRef.child('highscores/players/' + old.toLowerCase()).set(null);
+                databaseRef.child('highscores/players/' + old.toLowerCase()).set(null).catch(err => console.error('Firebase write failed:', err));
             }
-            databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid);
+            databaseRef.child('highscores/players/' + userName.toLowerCase()).set(mid).catch(err => console.error('Firebase write failed:', err));
             highscoreEnabled = true;
             setData();
         });
@@ -13348,12 +13348,12 @@ let setData = function() {
                     return;
                 });
             } else {
-                myRef.update({...databaseObject});
+                myRef.update({...databaseObject}).catch(err => console.error('Firebase write failed:', err));
             }
         });
     } else {
         firebaseSignIn(mid, savedPin).then(function() {
-            myRef.update({...databaseObject});
+            myRef.update({...databaseObject}).catch(err => console.error('Firebase write failed:', err));
         }).catch(function(error) { console.error(error) });
     }
 }
@@ -13393,9 +13393,9 @@ let rollMID = function(count) {
                         databaseRef.child('template').once('value', function(snap2) {
                             let temp = snap2.val();
                             temp.uid = userCredential.user.uid;
-                            databaseRef.child('maps/' + charSet).set(temp);
-                            databaseRef.child('mapids/' + charSet).set(true);
-                            databaseRef.child('mapCreationTimes/' + charSet).set(new Date(userCredential.user.metadata.creationTime).getTime());
+                            databaseRef.child('maps/' + charSet).set(temp).catch(err => console.error('Firebase write failed:', err));
+                            databaseRef.child('mapids/' + charSet).set(true).catch(err => console.error('Firebase write failed:', err));
+                            databaseRef.child('mapCreationTimes/' + charSet).set(new Date(userCredential.user.metadata.creationTime).getTime()).catch(err => console.error('Firebase write failed:', err));
                             $('#newmid').text(charSet.toUpperCase());
                             $('.link').prop('href', 'https://source-chunk.github.io/chunk-picker-v2/?' + charSet).text('https://source-chunk.github.io/chunk-picker-v2/?' + charSet);
                         });
@@ -13465,7 +13465,7 @@ let changeLocked = function() {
                     !doesPluginOutputExist && setData();
                     myRef.child('mapCreationTimes/' + mid).once('value', function(snap) {
                         if (!snap.val()) {
-                            databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime());
+                            databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime()).catch(err => console.error('Firebase write failed:', err));
                         }
                     });
                     setTimeout(function() {
@@ -13502,16 +13502,16 @@ let changeLocked = function() {
                             signedIn && myRef.child('uid').set(userCredential.user.uid, function(error) {
                                 if (error) {
                                     regainConnectivity(() => {
-                                        myRef.child('pin').remove();
+                                        myRef.child('pin').remove().catch(err => console.error('Firebase write failed:', err));
                                     });
                                 } else {
-                                    myRef.child('pin').remove();
+                                    myRef.child('pin').remove().catch(err => console.error('Firebase write failed:', err));
                                 }
                             });
                             userCredential.user.updateProfile({
                                 displayName: mid
                             });
-                            databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime());
+                            databaseRef.child('mapCreationTimes/' + mid).set(new Date(userCredential.user.metadata.creationTime).getTime()).catch(err => console.error('Firebase write failed:', err));
                             $('.center').css('margin-top', '15px');
                             $('.lock-opened, .pick, #toggleNeighbors, #toggleRemove, .toggleNeighbors.text, .toggleRemove.text, .import, .pinchange, .toggleNeighbors, .toggleRemove, .roll2toggle, .unpicktoggle, .recenttoggle, .taskstoggle, .highscoretoggle, .settingstoggle, .friendslist, .blacklist-mobile, .open-sticker-mobile, .open-paint-mobile').css('opacity', 0).show();
                             roll2On && $('.roll2').css('opacity', 0).show();
