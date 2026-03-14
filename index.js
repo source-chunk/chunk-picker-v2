@@ -3932,7 +3932,7 @@ let workerOnMessage = function(e) {
     if (lastUpdated + 2000000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
         databaseRef.child('version').once('value', function(snap) {
-            if (snap.val() !== currentVersion && false) {
+            if (snap.val() !== currentVersion) {
                 hasUpdate = true;
                 $(`.godocumentation`).addClass('hasupdate').removeClass('fa-file-alt').addClass('fa-sync').prop('title', 'New version available');
                 $(`.patchnotes-mobile`).addClass('hasupdate').text('New version available');
