@@ -10,11 +10,14 @@ let isValidMapId = function(id) {
 };
 
 // Firebase auth helpers
+let firebaseEmail = function(mid) {
+    return 'sourcechunk+' + mid + '@yandex.com';
+};
 let firebaseSignIn = function(mid, pin) {
-    return firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pin + mid);
+    return firebase.auth().signInWithEmailAndPassword(firebaseEmail(mid), pin + mid);
 };
 let firebaseCreateAccount = function(mid, pin) {
-    return firebase.auth().createUserWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pin + mid);
+    return firebase.auth().createUserWithEmailAndPassword(firebaseEmail(mid), pin + mid);
 };
 
 let onMobile = false;                                                           // Is user on a mobile device
@@ -5001,7 +5004,7 @@ let unlockEntry = function() {
     savedPin = $('.pin.entry').val();
     $('#unlock-entry').prop('disabled', true).html('<i class="spin fa-solid fa-spinner"></i>');
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
-    firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
+    firebase.auth().fetchSignInMethodsForEmail(firebaseEmail(mid)).then((methods) => {
         if (signInAttempts > 15) {
             setTimeout(function() {
                 $('.pin.entry').addClass('animated shake wrong').select();
@@ -5216,7 +5219,7 @@ let accessMap = function() {
         }
         if ($('.pin.old').val()) {
             firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
-            firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
+            firebase.auth().fetchSignInMethodsForEmail(firebaseEmail(mid)).then((methods) => {
                 myRef = firebase.database().ref('maps/' + mid);
                 if (!!methods && methods.length > 0) {
                     setTimeout(function() {
@@ -12398,6 +12401,7 @@ let checkMID = function(mid) {
         if (mid.split('-')[1] === 'view') {
             mid = mid.split('-')[0];
             viewOnly = true;
+            if (!isValidMapId(mid)) return;
             proceed();
         }
         databaseRef.child('mapids/' + mid).once('value', function(snap) {
@@ -13383,7 +13387,7 @@ let rollMID = function(count) {
         }
         mid = charSet;
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
-        firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then(providers => {
+        firebase.auth().fetchSignInMethodsForEmail(firebaseEmail(mid)).then(providers => {
             if (providers.length === 0) {
                 firebaseCreateAccount(mid, savedPin).then((userCredential) => {
                     signedIn = true;
@@ -13448,7 +13452,7 @@ let checkIfGoodFriend = function() {
 let changeLocked = function() {
     $('#lock-unlock').prop('disabled', true).html('<i class="spin fa-solid fa-spinner"></i>');
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
-    firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
+    firebase.auth().fetchSignInMethodsForEmail(firebaseEmail(mid)).then((methods) => {
         if (!!methods && methods.length > 0) {
             setTimeout(function() {
                 firebaseSignIn(mid, savedPin).then((userCredential) => {
