@@ -173,6 +173,8 @@ let activeSubTabs = {
 let subCheckboxNames = {};
 let toggleSubCheckboxTime = 0;
 
+firebase.appCheck().activate('6LcL0owsAAAAACXiZo8-5vv3rW3qbaBeX-SHwBSv');
+
 let databaseRef = firebase.database().ref();                                    // Firebase database reference
 let myRef;                                                                      // Firebase database reference for this map ID
 
