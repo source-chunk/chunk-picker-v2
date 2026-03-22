@@ -250,7 +250,7 @@ onmessage = function(e) {
             updateLevel,
         ] = eGlobal.data;
 
-        if (updateLevel !== 'difference') {
+        if (updateLevel !== 'app-check') {
             postMessage(['reload']);
         }
 
