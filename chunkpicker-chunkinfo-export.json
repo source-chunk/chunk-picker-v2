@@ -45,6 +45,22 @@
 				"Priority": 19,
 				"NoPet": true
 			},
+			"Climb the upper climbing rocks by the entrance to the ~|Agility Pyramid|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Climbing rocks (Agility Pyramid entrance)#To Simon Templeton"],
+				"Level": 1,
+				"Primary": true,
+				"Priority": 27,
+				"NoPet": true
+			},
+			"Climb the lower climbing rocks by the entrance to the ~|Agility Pyramid|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Climbing rocks (Agility Pyramid entrance)#To Agility Pyramid"],
+				"Level": 30,
+				"Primary": true,
+				"Priority": 27,
+				"NoPet": true
+			},
 			"Access the Summer Shore rock scramble ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["12581-1", "12582-1"],
@@ -1618,9 +1634,9 @@
 				"Priority": 3,
 				"NoBoost": true
 			},
-			"Access the ~|Agility Pyramid Course|~": {
+			"Access the ~|Agility Pyramid|~": {
 				"Chunks": ["13356-1"],
-				"Level": 20,
+				"Level": 30,
 				"Primary": true,
 				"Priority": 4
 			},
@@ -31742,6 +31758,14 @@
 				"ConnectsSections": true,
 				"Not F2P": true
 			},
+			"9772-1 to 9773-1": {
+				"Sections": ["9772-1", "9773-1"],
+				"Tasks": {
+					"~|Dragon Slayer I|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
 			"10042-1 to 10042-2": {
 				"Sections": ["10042-1", "10042-2"],
 				"Tasks": {
@@ -33301,13 +33325,13 @@
 				"Chunks": ["Evil Chicken's Lair"]
 			},
 			"Dognose drops": {
-				"Chunks": ["12078-1", "12073-1"]
+				"Chunks": ["12073-1"]
 			},
 			"The Onyx Crest drops": {
-				"Chunks": ["12078-1", "11811-1"]
+				"Chunks": ["11811-1"]
 			},
 			"Port Roberts drops": {
-				"Chunks": ["12078-1", "7475-1"]
+				"Chunks": ["7475-1"]
 			},
 			"Warriors' Guild drops": {
 				"Chunks": ["11319-1"],
@@ -42015,7 +42039,7 @@
 				"ClueType": "Charlie",
 				"Items": ["Leather chaps"]
 			},
-			"Blow a raspberry at Gypsy Aris in her tent. (Gold ring, Gold necklace)": {
+			"Blow a raspberry at Aris in her tent. (Gold ring, Gold necklace)": {
 				"Chunks": ["12853-1"],
 				"ClueTier": "beginner",
 				"ClueType": "Emote",
@@ -42101,7 +42125,7 @@
 				"Not F2P": true
 			},
 			"Varrock is where I reside, not the land of the dead, but I am so old, I should be there instead. Let's hope your reward is as good as it says, just 1 gold one and you can have it read.": {
-				"NPCs": ["Gypsy Aris"],
+				"NPCs": ["Aris"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not F2P": true
@@ -52161,6 +52185,9 @@
 				"NPCs": ["Gwyna"],
 				"Objects": ["SkiffAdamantKeel[+]"],
 				"Primary": false,
+				"Tasks": {
+					"~|Regicide|~ Complete the quest": "Quest"
+				},
 				"Priority": 38,
 				"NoBoost": true
 			},
@@ -75425,7 +75452,7 @@
 				},
 				"Not F2P": true
 			},
-			"~|STASH#Beginner|~: Gypsy Aris's tent (Varrock)": {
+			"~|STASH#Beginner|~: Aris's tent (Varrock)": {
 				"Category": ["Fill Stash"],
 				"Label": "Fill Stashes",
 				"Chunks": ["12853-1"],
@@ -102053,8 +102080,8 @@
 			},
 			"~|Demon Slayer|~ 1": {
 				"BaseQuest": "Demon Slayer",
-				"Description": "Talk to Gypsy Aris",
-				"NPCs": ["Gypsy Aris"]
+				"Description": "Talk to Aris",
+				"NPCs": ["Aris"]
 			},
 			"~|Demon Slayer|~ 2": {
 				"BaseQuest": "Demon Slayer",
@@ -133278,7 +133305,6 @@
 				"Evil Dave": 1,
 				"General Bentnoze": 1,
 				"General Wartface": 1,
-				"Gypsy": 1,
 				"Lumbridge Guide": 1,
 				"Mountain Dwarf": 1,
 				"Pirate Pete": 1,
@@ -157615,7 +157641,6 @@
 						"Financial Wizard": 1,
 						"Gee": 2,
 						"Gelin": 1,
-						"Gypsy": 1,
 						"Hans": 1,
 						"Hatius Cosaintus": 1,
 						"Iron Man tutor": 1,
@@ -157948,7 +157973,7 @@
 						"Emma": 1,
 						"Financial Wizard": 1,
 						"Guard": 1,
-						"Gypsy Aris": 1,
+						"Aris": 1,
 						"Horvik": 1,
 						"Iffie": 1,
 						"Information clerk": 1,
@@ -160675,7 +160700,8 @@
 						"Simon Templeton": 1
 					},
 					"Object": {
-						"Climbing rocks": 14,
+						"Climbing rocks (Agility Pyramid entrance)#To Agility Pyramid": 6,
+						"Climbing rocks (Agility Pyramid entrance)#To Simon Templeton": 8,
 						"Gap": 15,
 						"Kharidian cactus (Healthy)": 3,
 						"Ledge": 8,
@@ -161128,6 +161154,7 @@
 			"Nickname": "South East Wildy",
 			"Object": {
 				"Dead tree": 47,
+				"Tree": 1,
 				"Wilderness Ditch": 2
 			}
 		},
@@ -170401,7 +170428,6 @@
 				"Evil Dave": 1,
 				"General Bentnoze": 1,
 				"General Wartface": 1,
-				"Gypsy": 1,
 				"Lumbridge Guide": 1,
 				"Mountain Dwarf": 1,
 				"Pirate Pete": 1,
@@ -247979,52 +248005,7 @@
 			"Whirlpool surprise^": [{
 				"Complete ~|The Tempor Tantrum|~ at Shark rank": "Sailing"
 			}],
-			"Dragon javelin heads^Adamant dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Black dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Black dragon#Wilderness Slayer Cave": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Brutal black dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Brutal blue dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Brutal green dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Brutal red dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Demonic gorilla": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Dragon impling-npc": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^King Black Dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Lava dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Mithril dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Red dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Rune dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Steel dragon": [{
-				"~|Monkey Madness II|~ Complete the quest": "Quest"
-			}],
-			"Dragon javelin heads^Tortured gorilla": [{
+			"Dragon javelin heads^": [{
 				"~|Monkey Madness II|~ Complete the quest": "Quest"
 			}],
 			"Crest part (Johnathon)^Chronozon": [{
@@ -264700,8 +264681,7 @@
 		},
 		"9772": {
 			"1": [
-				"10028-1",
-				"9773-1"
+				"10028-1"
 			],
 			"W1": [
 				"9771",
@@ -264715,7 +264695,7 @@
 		},
 		"9773": {
 			"1": [
-				"9772-1"
+				"???"
 			],
 			"2": [
 				"10029",
@@ -265435,8 +265415,7 @@
 		},
 		"10284": {
 			"1": [
-				"10028-1",
-				"10285-1"
+				"10028-1"
 			],
 			"2": [
 				"10285-1"
@@ -265458,7 +265437,6 @@
 		"10285": {
 			"1": [
 				"10029",
-				"10284-1",
 				"10284-2",
 				"10284-3",
 				"10286"

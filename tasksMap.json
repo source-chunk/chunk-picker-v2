@@ -4,6 +4,8 @@
   "Participate in ~|Underwater Agility and Thieving|~ for Agility xp": "t_45430",
   "Participate in ~|Trouble Brewing|~ for Agility xp": "t_2",
   "Access the mausoleum bridge jump ~|shortcut|~": "t_46491",
+  "Climb the upper climbing rocks by the entrance to the ~|Agility Pyramid|~": "t_49468",
+  "Climb the lower climbing rocks by the entrance to the ~|Agility Pyramid|~": "t_49469",
   "Access the Summer Shore rock scramble ~|shortcut|~": "t_46546",
   "Access the Anglers' Retreat stepping stones ~|shortcut|~": "t_46547",
   "Access the Great Conch eastern plateau rock scramble (south-west side) ~|shortcut|~": "t_46548",
@@ -188,7 +190,7 @@
   "Access the stepping stone by Miscellania docks ~|shortcut|~": "t_153",
   "Access the stepping stone into Morytania west of the Nature Grotto ~|shortcut|~": "t_154",
   "Access the third floor of the ~|Hallowed Sepulchre|~": "t_155",
-  "Access the ~|Agility Pyramid Course|~": "t_156",
+  "Access the ~|Agility Pyramid|~": "t_156",
   "Access the ~|Al Kharid Rooftop Course|~": "t_157",
   "Access the ~|Ape Atoll Agility Course|~": "t_158",
   "Access the ~|Ardougne Rooftop Course|~": "t_159",
@@ -6540,7 +6542,7 @@
   "Receive training from ~|Chartin' Charles McAtless|~ after charting the entire Shrouded Ocean": "t_48898",
   "Receive training from ~|Chartin' Charles McAtless|~ after charting the entire Northern Ocean": "t_48899",
   "Receive training from ~|Chartin' Charles McAtless|~ after charting all miscellaneous spots": "t_48900",
-  "~|STASH#Beginner|~: Gypsy Aris's tent (Varrock)": "t_5708",
+  "~|STASH#Beginner|~: Aris's tent (Varrock)": "t_5708",
   "~|STASH#Beginner|~: Bob's Brilliant Axes in Lumbridge": "t_5709",
   "~|STASH#Beginner|~: Iffie Nitter in Varrock": "t_5710",
   "~|STASH#Easy|~: Near a shed in Lumbridge Swamp": "t_5711",
@@ -49146,5 +49148,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49468
+  "currentNextIndex": 49470
 }
