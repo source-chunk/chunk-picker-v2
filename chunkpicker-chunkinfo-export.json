@@ -9432,6 +9432,17 @@
 				"Primary": true,
 				"Priority": 10034
 			},
+			"Build a ~|ballistic attractor|~": {
+				"Chunks": ["8234-1"],
+				"Items": ["AnyBigBoat[+]", "Mahogany plank*", "Lead bar*", "Steel bar*", "Water rune*", "Law rune*", "Ballistic attractor schematic"],
+				"Level": 44,
+				"NotOtherskillPrimary": true,
+				"Skills": {
+					"Sailing": 50
+				},
+				"Primary": true,
+				"Priority": 10034
+			},
 			"~|Darkness of Hallowvale|~ Construction skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["Myreque hideout#Burgh De Rott Hideout"],
@@ -28671,6 +28682,16 @@
 					"Vampyre kraken tentacle tasks[+]": "Sailing"
 				}
 			},
+			"Veiled kraken ink sac tasks": {
+				"Tasks": {
+					"Veiled kraken ink sac tasks[+]": "Sailing"
+				}
+			},
+			"Veiled kraken tentacle tasks": {
+				"Tasks": {
+					"Veiled kraken tentacle tasks[+]": "Sailing"
+				}
+			},
 			"Crab dance emote": {
 				"Chunks": ["8232-1"]
 			},
@@ -28824,6 +28845,15 @@
 				"Items": ["Spade"],
 				"Objects": ["Lockbox (Grimstone)"],
 				"Output": "Dragon keel schematic",
+				"Not F2P": true
+			},
+			"Receive the ballistic attractor schematic from Ava*": {
+				"NPCs": ["Ava"],
+				"Tasks": {
+					"~|Animal Magnetism|~ Complete the quest": "Quest",
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"Output": "Ballistic attractor schematic",
 				"Not F2P": true
 			},
 			"Create a fish crate (empty)*": {
@@ -71542,6 +71572,12 @@
 				"Items": ["Dragon cannon schematic"],
 				"Not F2P": true
 			},
+			"(Lost Schematics) Obtain a ~|ballistic attractor schematic|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Ballistic attractor schematic"],
+				"Not F2P": true
+			},
 			"(Monkey Backpacks) Obtain a ~|karamja monkey|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
@@ -74980,6 +75016,12 @@
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
 				"Items": ["Dragon keel schematic"],
+				"Not F2P": true
+			},
+			"Unlock the ability to build a ~|ballistic attractor|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Ballistic attractor schematic"],
 				"Not F2P": true
 			},
 			"Unlock access to ~|Haris|~' resource area in Corsair Cove": {
@@ -91818,7 +91860,7 @@
 			},
 			"~|Combat Achievements#Easy|~ Bryophyta Novice": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Kill Bryophyta once.",
+				"Description": "Open Bryophyta's chest once.",
 				"Monsters": ["Bryophyta"],
 				"BaseQuest": "Combat Achievements",
 				"CombatPoints": 1
@@ -91925,7 +91967,7 @@
 			},
 			"~|Combat Achievements#Easy|~ Obor Novice": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Kill Obor once.",
+				"Description": "Open Obor's chest once.",
 				"Monsters": ["Obor"],
 				"BaseQuest": "Combat Achievements",
 				"CombatPoints": 1
@@ -92162,7 +92204,7 @@
 			},
 			"~|Combat Achievements#Medium|~ Bryophyta Champion": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Kill Bryophyta 5 times.",
+				"Description": "Open Bryophyta's chest 5 times.",
 				"BaseQuest": "Combat Achievements",
 				"CombatPoints": 2,
 				"Monsters": ["Bryophyta"]
@@ -92419,7 +92461,7 @@
 			},
 			"~|Combat Achievements#Medium|~ Obor Champion": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Kill Obor 5 times.",
+				"Description": "Open Obor's chest 5 times.",
 				"BaseQuest": "Combat Achievements",
 				"CombatPoints": 2,
 				"Monsters": ["Obor"]
@@ -129830,6 +129872,9 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"6691": {
+			"Monster": {
+				"Veiled kraken": 17
+			},
 			"Nickname": "Ocean Chunk"
 		},
 		"6692": {
@@ -132727,6 +132772,9 @@
 			}
 		},
 		"7459": {
+			"Monster": {
+				"Veiled kraken": 19
+			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7460": {
@@ -134253,6 +134301,9 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7970": {
+			"Monster": {
+				"Veiled kraken": 19
+			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7971": {
@@ -137864,6 +137915,9 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9249": {
+			"Monster": {
+				"Veiled kraken": 9
+			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Empty rowboat": 1
@@ -138856,7 +138910,11 @@
 		"9505": {
 			"Sections": {
 				"W1": {},
-				"W2": {}
+				"W2": {
+					"Monster": {
+						"Veiled kraken": 13
+					}
+				}
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -166457,6 +166515,7 @@
 			"Object": {
 				"Adamantite rocks": 3,
 				"Coal rocks": 10,
+				"Fishing spot (lava eel)": 1,
 				"Old chest": 1,
 				"Runite rocks": 2
 			},
@@ -174763,7 +174822,7 @@
 			"Hellhound[+]": ["Hellhound", "Hellhound#Wilderness Slayer Cave"],
 			"Farmer[+]": ["Farmer", "Farmer (Varlamore)"],
 			"GreaterDemon[+]": ["Greater demon", "Greater demon#Wilderness Slayer Cave", "K'ril Tsutsaroth", "Tstanon Karlak", "Skotizo", "Tormented Demon"],
-			"BountyMonster[+]": ["Albatross", "Armoured kraken", "Bull shark", "Butterfly ray", "Eagle ray", "Frigatebird", "Great white shark", "Hammerhead shark", "Manta ray", "Mogre (Sailing)", "Narwhal", "Orca", "Osprey", "Pygmy kraken", "Spined kraken", "Stingray", "Tern", "Tiger shark", "Vampyre kraken"]
+			"BountyMonster[+]": ["Albatross", "Armoured kraken", "Bull shark", "Butterfly ray", "Eagle ray", "Frigatebird", "Great white shark", "Hammerhead shark", "Manta ray", "Mogre (Sailing)", "Narwhal", "Orca", "Osprey", "Pygmy kraken", "Spined kraken", "Stingray", "Tern", "Tiger shark", "Vampyre kraken", "Veiled kraken"]
 		},
 		"monstersPlusNames": {
 			"Aberrant spectre[+]": "Any aberrant spectre",
@@ -175158,6 +175217,8 @@
 			"Tiger shark liver tasks[+]": ["Take ~|port tasks|~ from Brimhaven", "Take ~|port tasks|~ from Corsair Cove", "Take ~|port tasks|~ from Deepfin Point", "Take ~|port tasks|~ from Port Piscarilius", "Take ~|port tasks|~ from The Summer Shore"],
 			"Vampyre kraken ink sac tasks[+]": ["Take ~|port tasks|~ from Lunar Isle", "Take ~|port tasks|~ from Rellekka"],
 			"Vampyre kraken tentacle tasks[+]": ["Take ~|port tasks|~ from Etceteria", "Take ~|port tasks|~ from Lunar Isle"],
+			"Veiled kraken ink sac tasks[+]": ["Take ~|port tasks|~ from Port Tyras"],
+			"Veiled kraken tentacle tasks[+]": ["Take ~|port tasks|~ from Deepfin Point"],
 			"ArdentOceanCharting[+]": ["~|Sea Charting#Arrow Passage|~ Completely chart the sea", "~|Sea Charting#Bay of Sarim|~ Completely chart the sea", "~|Sea Charting#Brimhaven Passage|~ Completely chart the sea", "~|Sea Charting#Catherby Bay|~ Completely chart the sea", "~|Sea Charting#Feldip Gulf|~ Completely chart the sea", "~|Sea Charting#Gu'tanoth Bay|~ Completely chart the sea", "~|Sea Charting#Kharazi Strait|~ Completely chart the sea", "~|Sea Charting#Kharidian Sea|~ Completely chart the sea", "~|Sea Charting#Lumbridge Basin|~ Completely chart the sea", "~|Sea Charting#Menaphite Sea|~ Completely chart the sea", "~|Sea Charting#Mudskipper Sound|~ Completely chart the sea", "~|Sea Charting#Oo'glog Channel|~ Completely chart the sea", "~|Sea Charting#Rimmington Strait|~ Completely chart the sea", "~|Sea Charting#Strait of Khazard|~ Completely chart the sea", "~|Sea Charting#The Simian Sea|~ Completely chart the sea", "~|Sea Charting#The Storm Tempor|~ Completely chart the sea"],
 			"UnquietOceanCharting[+]": ["~|Sea Charting#Anglerfish's Light|~ Completely chart the sea", "~|Sea Charting#Bay of Elidinis|~ Completely chart the sea", "~|Sea Charting#Pearl Bank|~ Completely chart the sea", "~|Sea Charting#Red Reef|~ Completely chart the sea", "~|Sea Charting#Sea of Shells|~ Completely chart the sea", "~|Sea Charting#The Lonely Sea|~ Completely chart the sea", "~|Sea Charting#Tortugan Sea|~ Completely chart the sea", "~|Sea Charting#Turtle Belt|~ Completely chart the sea"],
 			"WesternOceanCharting[+]": ["~|Sea Charting#Crabclaw Bay|~ Completely chart the sea", "~|Sea Charting#Crystal Sea|~ Completely chart the sea", "~|Sea Charting#Great Sound|~ Completely chart the sea", "~|Sea Charting#Gulf of Kourend|~ Completely chart the sea", "~|Sea Charting#Hosidian Sea|~ Completely chart the sea", "~|Sea Charting#Litus Lucis|~ Completely chart the sea", "~|Sea Charting#Moonshadow|~ Completely chart the sea", "~|Sea Charting#Pilgrims' Passage|~ Completely chart the sea", "~|Sea Charting#Piscatoris Sea|~ Completely chart the sea", "~|Sea Charting#Porth Gwenith|~ Completely chart the sea", "~|Sea Charting#Porth Neigwl|~ Completely chart the sea", "~|Sea Charting#Tirannwn Bight|~ Completely chart the sea", "~|Sea Charting#Vagabonds Rest|~ Completely chart the sea"],
@@ -179991,7 +180052,7 @@
 				"1": "12/119"
 			},
 			"Rune cannonball": {
-				"20-30": "4/119"
+				"24-36": "4/119"
 			},
 			"Teak plank": {
 				"2-4": "8/119"
@@ -183764,7 +183825,7 @@
 				"1": "5/100"
 			},
 			"Steel cannonball": {
-				"40-50": "4/100"
+				"48-60": "4/100"
 			},
 			"Water battlestaff": {
 				"1": "3/100"
@@ -187706,7 +187767,7 @@
 				"1": "Always"
 			},
 			"Bronze cannonball": {
-				"30-45": "6/50"
+				"36-54": "6/50"
 			},
 			"Casket": {
 				"1": "1/50"
@@ -187724,7 +187785,7 @@
 				"1": "1/50"
 			},
 			"Iron cannonball": {
-				"20-40": "8/50"
+				"30-42": "8/50"
 			},
 			"Seaweed": {
 				"3-5 (noted)": "10/50"
@@ -192254,7 +192315,7 @@
 				"1": "12/100"
 			},
 			"Dragon cannonball": {
-				"10-15": "2/100"
+				"12-18": "2/100"
 			},
 			"Dragon dart tip": {
 				"15-25": "3/100"
@@ -192296,7 +192357,7 @@
 				"50-65": "8/100"
 			},
 			"Rune cannonball": {
-				"20-30": "4/100"
+				"24-36": "4/100"
 			},
 			"Rune sword": {
 				"1": "5/100"
@@ -193442,7 +193503,7 @@
 				"1": "1/10"
 			},
 			"Mithril cannonball": {
-				"40-50": "4/100"
+				"48-60": "4/100"
 			},
 			"Mithril platebody": {
 				"1": "8/100"
@@ -198581,9 +198642,6 @@
 			"Looting bag": {
 				"1": "1/3"
 			},
-			"Clue scroll (medium)": {
-				"1": "1/256"
-			},
 			"Slayer's enchantment": {
 				"1": "1/284"
 			},
@@ -200124,7 +200182,7 @@
 				"1": "108120"
 			},
 			"Adamant cannonball": {
-				"30-45": "8/120"
+				"36-54": "8/120"
 			},
 			"Big bones": {
 				"1": "Always"
@@ -200154,7 +200212,7 @@
 				"1": "8/120"
 			},
 			"Rune cannonball": {
-				"20-40": "4/120"
+				"30-42": "4/120"
 			},
 			"Rune mace": {
 				"1": "2/120"
@@ -201082,7 +201140,7 @@
 				"15005-20000": "12/92"
 			},
 			"Dragon cannonball": {
-				"15-20": "2/92"
+				"18-24": "2/92"
 			},
 			"Echo pearl": {
 				"1": "1/65.5"
@@ -201106,7 +201164,7 @@
 				"50-75": "10/92"
 			},
 			"Rune cannonball": {
-				"20-35": "5/92"
+				"24-42": "5/92"
 			},
 			"Rune longsword": {
 				"1": "8/92"
@@ -202163,7 +202221,7 @@
 		},
 		"Pygmy kraken": {
 			"Adamant cannonball": {
-				"10-25": "2/101"
+				"18-24": "2/101"
 			},
 			"Battlestaff": {
 				"1": "3/101"
@@ -208944,7 +209002,7 @@
 				"1": "14/107"
 			},
 			"Rune cannonball": {
-				"10-25": "2/107"
+				"18-24": "2/107"
 			},
 			"Spined kraken ink sac": {
 				"1": "1/10"
@@ -210563,7 +210621,7 @@
 				"1": "5/100"
 			},
 			"Steel cannonball": {
-				"40-50": "4/100"
+				"48-60": "4/100"
 			},
 			"Tiger shark jaw": {
 				"1": "1/2"
@@ -212012,7 +212070,7 @@
 				"50-75": "10/120"
 			},
 			"Dragon cannonball": {
-				"25-35": "2/120"
+				"30-42": "2/120"
 			},
 			"Dragon keel parts": {
 				"1": "1/1024"
@@ -212051,7 +212109,7 @@
 				"1": "12/120"
 			},
 			"Rune cannonball": {
-				"40-50": "4/120"
+				"48-60": "4/120"
 			},
 			"Rune chainbody": {
 				"1": "3/120"
@@ -212278,6 +212336,113 @@
 			},
 			"Twisted (+)(4)": {
 				"2": "Always"
+			}
+		},
+		"Veiled kraken": {
+			"Blood rune": {
+				"30-40": "5/272"
+			},
+			"Camphor plank": {
+				"1": "3/272"
+			},
+			"Death rune": {
+				"50-75": "8/272"
+			},
+			"Dragon cannonball": {
+				"25-35": "3/272"
+			},
+			"Dragon cannon barrel": {
+				"1": "1/1000"
+			},
+			"Dragon keel parts": {
+				"1": "1/1850"
+			},
+			"Dragon metal sheet": {
+				"1-2": "1/1150"
+			},
+			"Earth battlestaff": {
+				"1": "30/272"
+			},
+			"Earth rune": {
+				"500-750": "10/272"
+			},
+			"Giant seaweed": {
+				"1": "5/272"
+			},
+			"Inky paint": {
+				"1": "1/1900"
+			},
+			"Ironwood repair kit": {
+				"1": "5/272"
+			},
+			"Large dragon keel parts": {
+				"1": "1/2100"
+			},
+			"Mystic boots": {
+				"1": "3/272"
+			},
+			"Mystic earth staff": {
+				"1": "30/272"
+			},
+			"Mystic gloves": {
+				"1": "3/272"
+			},
+			"Mystic hat": {
+				"1": "3/272"
+			},
+			"Mystic water staff": {
+				"1": "30/272"
+			},
+			"Onyx bolts": {
+				"10-20": "2/272"
+			},
+			"Opulent salvage": {
+				"1": "5/272"
+			},
+			"Oyster pearls": {
+				"1": "10/272"
+			},
+			"Raw bluefin": {
+				"1": "5/272"
+			},
+			"Raw halibut": {
+				"1": "5/272"
+			},
+			"Rosewood repair kit": {
+				"1": "1/272"
+			},
+			"Rune cannonball": {
+				"80-100": "10/272"
+			},
+			"Rune full helm": {
+				"1": "20/272"
+			},
+			"Rune platelegs": {
+				"1": "20/272"
+			},
+			"Snake hide": {
+				"1": "5/272"
+			},
+			"Water battlestaff": {
+				"1": "30/272"
+			},
+			"Water rune": {
+				"500-750": "10/272"
+			},
+			"HerbDropTable+": {
+				"1": "9/272"
+			},
+			"HighLevelSailingSeedDropTable+": {
+				"1": "2/272"
+			},
+			"Veiled kraken ink sac": {
+				"1": "1/10"
+			},
+			"Veiled kraken tentacle": {
+				"1": "1/5"
+			},
+			"Clue scroll (elite)": {
+				"1": "1/150"
 			}
 		},
 		"Venenatis": {
@@ -233995,7 +234160,7 @@
 					"1": "200/1721"
 				},
 				"Bronze cannonball": {
-					"1-5": "100/1721"
+					"2-7": "100/1721"
 				},
 				"Bronze nails": {
 					"1-5": "200/1721"
@@ -234007,7 +234172,7 @@
 					"1": "50/1721"
 				},
 				"Iron cannonball": {
-					"1-5": "50/1721"
+					"2-7": "50/1721"
 				},
 				"Iron nails": {
 					"1-5": "100/1721"
@@ -234054,7 +234219,7 @@
 					"1": "1/750"
 				},
 				"Bronze cannonball": {
-					"1-5": "40/467"
+					"2-7": "40/467"
 				},
 				"Feather": {
 					"15-200": "40/467"
@@ -234167,7 +234332,7 @@
 					"1": "1/1000"
 				},
 				"Steel cannonball": {
-					"1-5": "1250/28401"
+					"2-7": "1250/28401"
 				},
 				"Steel nails": {
 					"1-5": "2500/28401"
@@ -234226,7 +234391,7 @@
 					"1-5": "10/2218"
 				},
 				"Mithril cannonball": {
-					"1-3": "50/2218"
+					"2-5": "50/2218"
 				},
 				"Mithril nails": {
 					"1-5": "30/2218"
@@ -234258,7 +234423,7 @@
 			},
 			"Plundered salvage loot": {
 				"Adamant cannonball": {
-					"1-3": "25/1036"
+					"2-5": "25/1036"
 				},
 				"Casket": {
 					"1": "50/1036"
@@ -234270,7 +234435,7 @@
 					"1": "25/1036"
 				},
 				"Dragon cannonball": {
-					"1": "1/3000"
+					"2-3": "1/3000"
 				},
 				"Emerald bracelet": {
 					"1": "100/1036"
@@ -234288,7 +234453,7 @@
 					"1": "25/1036"
 				},
 				"Mithril cannonball": {
-					"1-3": "50/1036"
+					"2-5": "50/1036"
 				},
 				"Mithril scimitar": {
 					"1": "100/1036"
@@ -234303,7 +234468,7 @@
 					"1": "100/1036"
 				},
 				"Rune cannonball": {
-					"1-2": "10/1036"
+					"2-4": "10/1036"
 				},
 				"Rune scimitar": {
 					"1": "1/1036"
@@ -234332,7 +234497,7 @@
 					"1-3": "100/2440"
 				},
 				"Adamant cannonball": {
-					"1-3": "100/2440"
+					"2-5": "100/2440"
 				},
 				"Adamant dart tip": {
 					"1-3": "200/2440"
@@ -234356,7 +234521,7 @@
 					"1": "10/2440"
 				},
 				"Dragon cannonball": {
-					"1": "1/3000"
+					"2-3": "1/3000"
 				},
 				"Facility bottle (empty)": {
 					"1": "1/700"
@@ -234383,7 +234548,7 @@
 					"1-3": "100/2440"
 				},
 				"Rune cannonball": {
-					"1-2": "50/2440"
+					"2-4": "50/2440"
 				},
 				"Rune longsword": {
 					"1": "10/2440"
@@ -234463,7 +234628,7 @@
 					"1": "1/2670"
 				},
 				"Rune cannonball": {
-					"1-3": "50/2670"
+					"2-5": "50/2670"
 				},
 				"Rune nails": {
 					"1-3": "50/2670"
@@ -234489,7 +234654,7 @@
 					"1": "1/20000"
 				},
 				"Dragon cannonball": {
-					"1-3": "1/424"
+					"2-5": "1/424"
 				},
 				"Dragon nails": {
 					"1-3": "1/2000"
@@ -234516,7 +234681,7 @@
 					"1-5": "20/424"
 				},
 				"Rune cannonball": {
-					"1-3": "3/424"
+					"2-5": "3/424"
 				},
 				"Sailors' amulet (inert)": {
 					"1": "1/300"
@@ -245106,7 +245271,7 @@
 			},
 			"Cannonball stall": {
 				"Bronze cannonball": {
-					"1": "24/64"
+					"1": "79/256"
 				},
 				"Iron cannonball": {
 					"1": "16/64"
@@ -245118,10 +245283,13 @@
 					"1": "6/64"
 				},
 				"Adamant cannonball": {
-					"1": "3/64"
+					"1": "24/256"
 				},
 				"Rune cannonball": {
-					"1": "1/64"
+					"1": "8/256"
+				},
+				"Dragon cannonball": {
+					"1": "1/256"
 				}
 			},
 			"Counter (Gu'Tanoth)": {
@@ -250131,6 +250299,12 @@
 			}],
 			"Vampyre kraken tentacle^Vampyre kraken": [{
 				"Vampyre kraken tentacle tasks": "Nonskill"
+			}],
+			"Veiled kraken ink sac^Veiled kraken": [{
+				"Veiled kraken ink sac tasks": "Nonskill"
+			}],
+			"Veiled kraken tentacle^Veiled kraken": [{
+				"Veiled kraken tentacle tasks": "Nonskill"
 			}],
 			"Sandy paint^Hermit crab": [{
 				"Crab dance emote": "Nonskill"
