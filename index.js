@@ -1128,6 +1128,7 @@ let randomLoot = {};
 let friends = {};
 let friendsAlt = {};
 let globalValids = {};
+let globalSectionsValid = true;
 let challengeArr = [];
 let checkedChallenges = {};
 let backlog = {};
@@ -1519,7 +1520,8 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.39.1';
+let currentVersion = '6.9.40';
+let currentEnforcedVersion = '6.9.39.1';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'app-check';
 
@@ -1689,7 +1691,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.39.1";
+mapImg.src = "osrs_world_map.png?v=6.9.40";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3582,9 +3584,11 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
             if (fromLoadData) {
                 calcCurrentChallengesCanvas(useOld);
                 sectionsValid = false;
+                globalSectionsValid = false;
             } else if (testMode || !(viewOnly || locked)) {
                 openChunkSectionPicker(chunk, true);
                 sectionsValid = false;
+                globalSectionsValid = false;
                 $(`.calculating .display-button`).text('Select Accessible Sections');
             } else if (inEntry) {
                 sectionsValid = false;
@@ -3597,17 +3601,21 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
                 });
                 calcCurrentChallengesCanvas(useOld, proceed, fromLoadData, tempSections);
                 sectionsValid = false;
+                globalSectionsValid = true;
             }
             return true;
         }
     });
     tempSections = combineJSONs(tempSections, manualSections);
+    if (sectionsValid) {
+        globalSectionsValid = true;
+    }
 
     if (gotData && sectionsValid) {
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.39.1");
+        myWorker = new Worker("./worker.js?v=6.9.40");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3911,8 +3919,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.39.1");
-let myWorker2 = new Worker("./worker.js?v=6.9.39.1");
+let myWorker = new Worker("./worker.js?v=6.9.40");
+let myWorker2 = new Worker("./worker.js?v=6.9.40");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -3921,7 +3929,22 @@ let workerOnMessage = function(e) {
         lastUpdated = Date.now();
         databaseRef.child('versionEnforced').once('value', function(snap) {
             snap.val() && databaseRef.child('version').once('value', function(snap2) {
-                if (snap2.val() !== currentVersion) {
+                let firebaseVersionSplit = snap2.val().split('.');
+                let localVersionSplit = currentEnforcedVersion.split('.');
+                let biggerSplit = firebaseVersionSplit.length >= localVersionSplit.length ? firebaseVersionSplit : localVersionSplit;
+                let isLocalBigEnough = true;
+                biggerSplit.some((el, i) => {
+                    let firebaseVersionNum = parseInt(firebaseVersionSplit[i]);
+                    let localVersionNum = parseInt(localVersionSplit[i]);
+                    if (localVersionNum > firebaseVersionNum) {
+                        return true;
+                    } else if (localVersionNum < firebaseVersionNum || isNaN(localVersionNum)) {
+                        isLocalBigEnough = false;
+                        return true;
+                    }
+                    return false;
+                });
+                if (!isLocalBigEnough) {
                     hasUpdate = true;
                     $(`.godocumentation`).addClass('hasupdate').removeClass('fa-file-alt').addClass('fa-sync').prop('title', 'New version available');
                     $(`.patchnotes-mobile`).addClass('hasupdate').text('New version available');
@@ -4993,7 +5016,7 @@ let unlockEntry = function() {
     $('#unlock-entry').prop('disabled', true).html('<i class="spin fa-solid fa-spinner"></i>');
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
     firebase.auth().fetchSignInMethodsForEmail('sourcechunk+' + mid + '@yandex.com').then((methods) => {
-        if (signInAttempts > 15) {
+        if (signInAttempts > 5) {
             setTimeout(function() {
                 $('.pin.entry').addClass('animated shake wrong').select();
                 $('#unlock-entry').prop('disabled', true).text('Unlock');
@@ -5001,7 +5024,7 @@ let unlockEntry = function() {
                 setTimeout(function() {
                     $('.pin.entry').removeClass('animated shake');
                 }, 500);
-            }, (1500 + signInAttempts * 10));
+            }, (500 + signInAttempts * 20));
         } else if (!!methods && methods.length > 0) {
             setTimeout(function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then((userCredential) => {
@@ -5047,7 +5070,7 @@ let unlockEntry = function() {
                 setTimeout(function() {
                     $('.pin.entry').removeClass('animated shake');
                 }, 500);
-            }, 1000);
+            }, 250);
         } else {
             myRef.child('pin').once('value', function(snap) {
                 if ((snap.val() && snap.val() === savedPin)) {
@@ -5099,7 +5122,7 @@ let unlockEntry = function() {
                             console.error('Incorrect map password');
                             signInAttempts++;
                         });
-                    }, 1000);
+                    }, 250);
                     setTimeout(function() {
                         $('.pin.entry').removeClass('animated shake');
                     }, 500);
@@ -5343,13 +5366,13 @@ let changePin = function() {
             return;
         }
 
-        if (signInAttempts > 15) {
+        if (signInAttempts > 5) {
             setTimeout(function() {
                 $('.pin-err').css('visibility', 'visible');
                 $('.pin.old2.first').addClass('wrong').select();
                 $('#change-pin').text('Change Password');
                 signInAttempts++;
-            }, (1500 + signInAttempts * 10));
+            }, (500 + signInAttempts * 20));
         } else {
             setTimeout(function() {
                 firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', pinOld + mid).then((userCredential) => {
@@ -5790,8 +5813,8 @@ let toggleHiddenTasks = function(value, fromSearch, subTabs) {
             $('.panel-active').append(`<span class="no-current">No current chunk tasks.</span>`);
         }
     }
-    settings['hideChecked'] && actuallyHideChecked && subTabs.forEach((subTab) => {
-        $('.challenge.' + subTab + '-challenge:not(.hide-backlog)').length === 0 ? $('.marker-' + subTab).addClass('hide-marker') : $('.marker-' + subTab).removeClass('hide-marker');
+    settings['hideChecked'] && subTabs.forEach((subTab) => {
+        $('.challenge.' + subTab + '-challenge:not(.hide-backlog)').length === 0 && actuallyHideChecked ? $('.marker-' + subTab).addClass('hide-marker') : $('.marker-' + subTab).removeClass('hide-marker');
     });
     !fromSearch && searchActiveTasksFunc();
 }
@@ -6266,6 +6289,7 @@ let updateChunkInfo = function() {
             clueStr.length > 0 && (clueStr = clueStr.substring(0, clueStr.length - 2));
         }
         $('.infoid-content').html((!!chunkInfo['chunks'][id] && !!chunkInfo['chunks'][id]['Nickname']) ? (chunkInfo['chunks'][id]['Nickname'] + ' (' + id + ')') : decodeQueryParam(id));
+        $('.infoid').css({'fontSize': ''});
         $('.infoid').css({'fontSize': $('.infoid-content').height() > 50 ? 'min(2vw, 20px)' : ''});
         $('.panel-monsters').html(monsterStr || 'None');
         $('.panel-npcs').html(npcStr || 'None');
@@ -6682,6 +6706,7 @@ let setupCurrentChallengesFromSaved = function() {
     Object.keys(activeTasks).filter((skill) => skillNames.includes(skill)).length > 0 && challengeArr.push(`<div class="marker marker-skill noscroll" onclick="expandActive('skill')"><i class="expand-button fa-solid ${activeSubTabs['skill'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Skill Tasks</span></div>`);
     Object.keys(activeTasks).filter((skill) => skillNames.includes(skill)).sort().forEach((skill) => {
         let skillTask = Object.keys(activeTasks[skill])[0];
+        if (!skillTask) return;
         let level;
         let boost;
         if (activeTasks[skill][skillTask].match(/\{[0-9]+\}/g)) {
@@ -6861,7 +6886,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.39.1");
+    myWorker2 = new Worker("./worker.js?v=6.9.40");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -8353,7 +8378,7 @@ let openManualAdd = function() {
                 if (!fullChallengeArr[challenge]) {
                     fullChallengeArr[challenge] = [];
                 }
-                if (skill === 'Quest' || skill === 'Diary') {
+                if (skill === 'Quest' || skill === 'Diary' || skill === 'Extra') {
                     fullChallengeArr[challenge].unshift(skill);
                 } else {
                     fullChallengeArr[challenge].push(skill);
@@ -8376,7 +8401,7 @@ let searchManualTasks = function() {
     if (Object.keys(fullChallengeArr).filter(challenge => challenge.toLowerCase().replaceAll('~', '').replaceAll('|', '').includes(searchTemp)).length <= 100 || filterByChecked) {
         Object.keys(fullChallengeArr).filter(challenge => challenge.toLowerCase().replaceAll('~', '').replaceAll('|', '').includes(searchTemp)).sort().forEach((challenge) => {
             if (!filterByChecked || (!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge])) {
-                $('.challenge-data').append(`<div class="noscroll result-item"><input class="noscroll" ${!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge] && "checked"} type="checkbox" onclick="addManualTask('${encodeRFC5987ValueChars(challenge)}')" />${challenge.replaceAll(/~/g, '').replaceAll(/\|/g, '')}<span onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', '${fullChallengeArr[challenge][0]}', '')"><i class="info-icon fa-solid fa-info-circle"></i></span></div>`);
+                $('.challenge-data').append(`<div class="noscroll result-item"><input class="noscroll" ${!!manualTasks[fullChallengeArr[challenge][0]] && !!manualTasks[fullChallengeArr[challenge][0]][challenge] && "checked"} type="checkbox" onclick="addManualTask(this, '${encodeRFC5987ValueChars(challenge)}')" />${challenge.replaceAll(/~/g, '').replaceAll(/\|/g, '')}<span onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', '${fullChallengeArr[challenge][0]}', '')"><i class="info-icon fa-solid fa-info-circle"></i></span></div>`);
             }
         });
     } else {
@@ -8394,16 +8419,17 @@ let changeFilterBy = function() {
 }
 
 // Adds the given challenge to the manual list
-let addManualTask = function(challenge) {
+let addManualTask = function(checkbox, challenge) {
+    let isChecked = $(checkbox).prop('checked');
     challenge = decodeQueryParam(challenge);
     fullChallengeArr[challenge].forEach((skill) => {
-        if (skill !== 'BiS' && (!manualTasks[skill] || !manualTasks[skill][challenge])) {
+        if (skill !== 'BiS' && (!manualTasks[skill] || !manualTasks[skill][challenge]) && isChecked) {
             if (!manualTasks[skill]) {
                 manualTasks[skill] = {};
             }
             manualTasks[skill][challenge] = chunkInfo['challenges'][skill][challenge]['Level'] || true;
             chunkInfo['challenges'][skill][challenge]['Manual'] = true;
-        } else if (skill !== 'BiS') {
+        } else if (skill !== 'BiS' && !!manualTasks[skill] && !!manualTasks[skill][challenge] && !isChecked) {
             delete manualTasks[skill][challenge];
             delete chunkInfo['challenges'][skill][challenge]['Manual'];
             delete chunkInfo['challenges'][skill][challenge]['ManualValid'];
@@ -9954,7 +9980,7 @@ let openPaint = function(id) {
             painted[id].forEach((color) => {
                 $(`.paint-data > .paint-option-container.${color.toLowerCase()}-tag`).addClass('selected-paint');
             });
-            savedPaintedColors = painted[id];
+            savedPaintedColors = [...painted[id]];
         } else {
             savedPaintedColors = [];
         }
@@ -9966,7 +9992,7 @@ let openPaint = function(id) {
 // Submits the paint modal
 let submitPaint = function() {
     let id = savedStickerId;
-    let colors = savedPaintedColors;
+    let colors = [...savedPaintedColors];
     if (colors.length !== 0) {
         painted[id] = colors;
     } else if (!!id && id.length > 0) {
@@ -10470,7 +10496,7 @@ let submitCompleteTasks = function() {
 
 // Unlocks various parts of the chunk tasks panel
 let unlockChallenges = function() {
-    if (workerOut === 0) {
+    if (workerOut === 0 && globalSectionsValid) {
         $('.panel-active span.burger, .panel-backlog span.burger, .panel-completed span.arrow').removeClass('hidden-burger');
         $('.panel-active label.checkbox, .panel-areas label.checkbox').removeClass('checkbox--disabled');
         $('.panel-active label.checkbox input, .panel-areas label.checkbox input').attr('disabled', false);
@@ -10694,7 +10720,7 @@ let showDetails = function(challenge, skill, dataType, isNested) {
             return;
         }
         searchDetailsModalOpen && closeSearchDetails();
-        let detailsKeys = ['ItemsDetails', 'ObjectsDetails', 'MonstersDetails', 'NPCsDetails', 'ChunksDetails', 'Skill RequirementsDetails'];
+        let detailsKeys = ['ItemsDetails', 'ObjectsDetails', 'MonstersDetails', 'NPCsDetails', 'ChunksDetails', 'Skill RequirementsDetails', 'Task RequirementsDetails'];
         let skills = [...skillNames];
         skills.push('Nonskill');
         detailsModalOpen = true;
@@ -10853,6 +10879,16 @@ let showDetails = function(challenge, skill, dataType, isNested) {
                         } else {
                             $('#details-data').append(`<span class="noscroll red"><b class="noscroll">${formattedSource}</b></span><br />`);
                         }
+                    }
+                } else if (key === 'Task RequirementsDetails') {
+                    written = true;
+                    let taskSkill = el.split('||')[1];
+                    let taskName = el.split('||')[0];
+                    formattedSource = `<b class="noscroll">${(taskName).replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</b> [${taskSkill}]`;
+                    if (!!globalValids[taskSkill] && globalValids[taskSkill].hasOwnProperty(taskName)) {
+                        $('#details-data').append(`<span class="noscroll">${formattedSource}</span><br />`);
+                    } else {
+                        $('#details-data').append(`<span class="noscroll red">${formattedSource}</span><br />`);
                     }
                 } else if (!!baseChunkDataIn[type]) {
                     let els = [];
@@ -11198,6 +11234,40 @@ let showNotes = function(challenge, skill, note) {
                                 shownSource = shownSource.split('|')[1].charAt(0).toUpperCase() + shownSource.split('|')[1].slice(1);
                             }
                             $('#notes-data').append(`<div class="notes-row double-indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData(` + "`" + 'monsters' + "`, " + "`" + shownSource + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${shownSource}</b></span></label></div>`);
+                        } else if (typeof baseChunkDataIn[type][element][source] === 'string' && baseChunkDataIn[type][element][source] === 'shop') {
+                            let shownSource = source;
+                            if (shownSource.includes('|')) {
+                                shownSource = shownSource.split('|')[1].charAt(0).toUpperCase() + shownSource.split('|')[1].slice(1);
+                            }
+                            $('#notes-data').append(`<div class="notes-row double-indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData(` + "`" + 'shops' + "`, " + "`" + shownSource + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${shownSource}</b></span></label></div>`);
+                        } else if (typeof baseChunkDataIn[type][element][source] === 'string' && baseChunkDataIn[type][element][source].includes('-Nonskill') && !!chunkInfo['challenges']['Nonskill'][source]) {
+                            detailsKeys.forEach((key) => {
+                                let type = key.split('Details')[0].toLowerCase();
+                                if ((!chunkInfo['challenges']['Nonskill'][source][key] || chunkInfo['challenges']['Nonskill'][source][key].length < 1) && !!chunkInfo['challenges']['Nonskill'][source][key.split('Details')[0]]) {
+                                    chunkInfo['challenges']['Nonskill'][source][key.split('Details')[0]].forEach((typeEl) => {
+                                        chunkInfo['challenges']['Nonskill'][source][key].push(typeEl);
+                                    });
+                                }
+                                !!chunkInfo['challenges']['Nonskill'][source][key] && chunkInfo['challenges']['Nonskill'][source][key].forEach((el) => {
+                                    let els = [];
+                                    if (!!chunkInfo['codeItems'][type + 'Plus'] && !!chunkInfo['codeItems'][type + 'Plus'][el]) {
+                                        let validElem = false;
+                                        chunkInfo['codeItems'][type + 'Plus'][el].forEach((elem) => {
+                                            if (!!baseChunkDataIn[type][elem]) {
+                                                els.push(elem);
+                                                validElem = true;
+                                            }
+                                        });
+                                        !validElem && els.push(el);
+                                        $('#notes-data').append(`<div class="noscroll"><b class="noscroll">${chunkInfo['codeItems'][type + 'PlusNames'][el]}:</b></div>`);
+                                        els.length > 0 && els.forEach((element) => {
+                                            $('#notes-data').append(`<div class="notes-row double-indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData(` + "`" + type + "`, " + "`" + element + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${element}</b></span></label></div>`);
+                                        });
+                                    } else {
+                                        $('#notes-data').append(`<div class="notes-row double-indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData(` + "`" + type + "`, " + "`" + el + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${el}</b></span></label></div>`);
+                                    }
+                                });
+                            });
                         }
                     });
                 });
@@ -11218,6 +11288,40 @@ let showNotes = function(challenge, skill, note) {
                             shownSource = shownSource.split('|')[1].charAt(0).toUpperCase() + shownSource.split('|')[1].slice(1);
                         }
                         $('#notes-data').append(`<div class="notes-row double-indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData(` + "`" + 'monsters' + "`, " + "`" + shownSource + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${shownSource}</b></span></label></div>`);
+                    } else if (typeof baseChunkDataIn[type][el][source] === 'string' && baseChunkDataIn[type][el][source] === 'shop' && !source.includes('*')) {
+                        let shownSource = source;
+                        if (shownSource.includes('|')) {
+                            shownSource = shownSource.split('|')[1].charAt(0).toUpperCase() + shownSource.split('|')[1].slice(1);
+                        }
+                        $('#notes-data').append(`<div class="notes-row double-indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData(` + "`" + 'shops' + "`, " + "`" + shownSource + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${shownSource}</b></span></label></div>`);
+                    } else if (typeof baseChunkDataIn[type][el][source] === 'string' && baseChunkDataIn[type][el][source].includes('-Nonskill') && !!chunkInfo['challenges']['Nonskill'][source]) {
+                        detailsKeys.forEach((key) => {
+                            let type = key.split('Details')[0].toLowerCase();
+                            if ((!chunkInfo['challenges']['Nonskill'][source][key] || chunkInfo['challenges']['Nonskill'][source][key].length < 1) && !!chunkInfo['challenges']['Nonskill'][source][key.split('Details')[0]]) {
+                                chunkInfo['challenges']['Nonskill'][source][key.split('Details')[0]].forEach((typeEl) => {
+                                    chunkInfo['challenges']['Nonskill'][source][key].push(typeEl);
+                                });
+                            }
+                            !!chunkInfo['challenges']['Nonskill'][source][key] && chunkInfo['challenges']['Nonskill'][source][key].forEach((el) => {
+                                let els = [];
+                                if (!!chunkInfo['codeItems'][type + 'Plus'] && !!chunkInfo['codeItems'][type + 'Plus'][el]) {
+                                    let validElem = false;
+                                    chunkInfo['codeItems'][type + 'Plus'][el].forEach((elem) => {
+                                        if (!!baseChunkDataIn[type][elem]) {
+                                            els.push(elem);
+                                            validElem = true;
+                                        }
+                                    });
+                                    !validElem && els.push(el);
+                                    $('#notes-data').append(`<div class="noscroll"><b class="noscroll">${chunkInfo['codeItems'][type + 'PlusNames'][el]}:</b></div>`);
+                                    els.length > 0 && els.forEach((element) => {
+                                        $('#notes-data').append(`<div class="notes-row double-indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData(` + "`" + type + "`, " + "`" + element + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${element}</b></span></label></div>`);
+                                    });
+                                } else {
+                                    $('#notes-data').append(`<div class="notes-row double-indent noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" class='noscroll' onclick="saveNotesData(` + "`" + type + "`, " + "`" + el + "`" + `)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">${el}</b></span></label></div>`);
+                                }
+                            });
+                        });
                     }
                 });
             }
@@ -13466,7 +13570,7 @@ let changeLocked = function() {
                 setTimeout(function() {
                     $('.lock-pin').removeClass('animated shake');
                 }, 500);
-            }, 1000);
+            }, 250);
         } else {
             myRef.child('pin').once('value', function(snap) {
                 if ((snap.val() && snap.val() === savedPin)) {

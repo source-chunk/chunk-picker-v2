@@ -33336,6 +33336,12 @@
 			"Iorwerth Dungeon drops": {
 				"Chunks": ["Iorwerth Dungeon"]
 			},
+			"Fossil Island drops": {
+				"Chunks": ["AncientZygomiteFossilIslandChunks[+]"]
+			},
+			"Stalker Den drops": {
+				"Chunks": ["Stalker Den"]
+			},
 			"Wilderness GWD Drops": {
 				"Chunks": ["Wilderness God Wars Dungeon"]
 			},
@@ -35701,6 +35707,34 @@
 			"Eat a summer pie*": {
 				"Items": ["Summer pie*"],
 				"Output": "Pie dish"
+			},
+			"Drink a premade blurb' sp.*": {
+				"Items": ["Premade blurb' sp.*"],
+				"Output": "Cocktail glass"
+			},
+			"Drink a premade choc s'dy*": {
+				"Items": ["Premade choc s'dy*"],
+				"Output": "Cocktail glass"
+			},
+			"Drink a premade dr' dragon*": {
+				"Items": ["Premade dr' dragon*"],
+				"Output": "Cocktail glass"
+			},
+			"Drink a premade fr' blast*": {
+				"Items": ["Premade fr' blast*"],
+				"Output": "Cocktail glass"
+			},
+			"Drink a premade p' punch*": {
+				"Items": ["Premade p' punch*"],
+				"Output": "Cocktail glass"
+			},
+			"Drink a premade sgg*": {
+				"Items": ["Premade sgg*"],
+				"Output": "Cocktail glass"
+			},
+			"Drink a premade wiz blz'd*": {
+				"Items": ["Premade wiz blz'd*"],
+				"Output": "Cocktail glass"
 			},
 			"Search the crate in Wintertodt for a bronze axe*": {
 				"Chunks": ["6462"],
@@ -132179,7 +132213,7 @@
 		"7221": {
 			"Sections": {
 				"1": {
-					"Spawns": {
+					"Spawn": {
 						"Seaweed": 10
 					}
 				},
@@ -137957,7 +137991,7 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9253": {
-			"Monsters": {
+			"Monster": {
 				"Great white shark": 1
 			},
 			"Nickname": "Ocean Chunk"
@@ -138941,13 +138975,13 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9508": {
-			"Monsters": {
+			"Monster": {
 				"Great white shark": 1
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9509": {
-			"Monsters": {
+			"Monster": {
 				"Great white shark": 10
 			},
 			"Nickname": "Ocean Chunk"
@@ -138965,13 +138999,13 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9512": {
-			"Monsters": {
+			"Monster": {
 				"Eagle ray": 13
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9513": {
-			"Monsters": {
+			"Monster": {
 				"Eagle ray": 1
 			},
 			"Nickname": "Ocean Chunk"
@@ -139199,7 +139233,7 @@
 					},
 					"NPC": {
 						"Anita": 1,
-						"Barman": 1,
+						"Barman (Blurberry Bar)": 1,
 						"Burkor": 1,
 						"Butterfly": 2,
 						"Carado": 1,
@@ -139225,6 +139259,9 @@
 						"Monkey Madness II": "step",
 						"The Eyes of Glouphrie": "step",
 						"The Grand Tree": "step"
+					},
+					"Shop": {
+						"Blurberry Bar": true
 					},
 					"Spawn": {
 						"King worm": 1,
@@ -139319,7 +139356,7 @@
 			"Nickname": "Falconry Area"
 		},
 		"9529": {
-			"Monsters": {
+			"Monster": {
 				"Spined kraken": 16
 			},
 			"Nickname": "Ocean Chunk"
@@ -139982,7 +140019,7 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9763": {
-			"Monsters": {
+			"Monster": {
 				"Eagle ray": 2
 			},
 			"Nickname": "Ocean Chunk",
@@ -139991,13 +140028,13 @@
 			}
 		},
 		"9764": {
-			"Monsters": {
+			"Monster": {
 				"Great white shark": 1
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9765": {
-			"Monsters": {
+			"Monster": {
 				"Great white shark": 11
 			},
 			"Nickname": "Ocean Chunk"
@@ -140049,7 +140086,7 @@
 						"Rowboat space": 1,
 						"Spinning wheel space": 1,
 						"Tree": 7,
-						"Tree patch": 1,
+						"Hardwood tree patch": 1,
 						"Willow tree": 3,
 						"Yew tree": 2
 					},
@@ -140658,7 +140695,7 @@
 				"Aluft Gianne snr.": 1,
 				"Assistant Le Smith": 1,
 				"Assistant Lori": 1,
-				"Barman": 2,
+				"Barman (Blurberry Bar)": 2,
 				"Blurberry": 1,
 				"Bunkdo": 1,
 				"Bunkwicket": 1,
@@ -144007,7 +144044,7 @@
 			}
 		},
 		"10340": {
-			"Conenct": {
+			"Connect": {
 				"11866": true
 			},
 			"Monster": {
@@ -150574,7 +150611,7 @@
 						"Karamja": "EA1, EA7"
 					},
 					"Monster": {
-						"Man": 1,
+						"Man": 2,
 						"Snake": 2
 					},
 					"NPC": {
@@ -152152,9 +152189,6 @@
 					"Diary": {
 						"Karamja": "EA4"
 					},
-					"Monster": {
-						"Man": 1
-					},
 					"NPC": {
 						"Customs officer": 1,
 						"Gull": 1,
@@ -152489,7 +152523,8 @@
 						"Falador": "EA7"
 					},
 					"Monster": {
-						"Goblin (Goblin Village)": 23
+						"Goblin (Goblin Village)#Green": 11,
+						"Goblin (Goblin Village)#Red": 12
 					},
 					"NPC": {
 						"General Bentnoze": 1,
@@ -152528,7 +152563,7 @@
 					},
 					"Monster": {
 						"Black bear": 4,
-						"Goblin (Goblin Village)": 2,
+						"Goblin (Goblin Village)#Red": 1,
 						"Man": 1
 					},
 					"NPC": {
@@ -154724,7 +154759,9 @@
 
 				},
 				"W1": {
-					"Barracuda shipwreck": 3
+					"Object": {
+						"Barracuda shipwreck": 3
+					}
 				}
 			},
 			"Nickname": "Sea Spirit Boat"
@@ -173348,6 +173385,7 @@
 			"CurseOfTheEmptyLord5[+]": ["13117", "13623", "Edgeville Dungeon#Wilderness"],
 			"MournerChunks[+]": ["9267-1", "9523", "9524-2"],
 			"CatacombsOrGiantsDen[+]": ["Catacombs of Kourend", "Giants' Den"],
+			"AncientZygomiteFossilIslandChunks[+]": ["14651", "14652"],
 			"VarlamoreIcefiend[+]": ["5682-1", "5682-3", "5683-2", "Ruins of Tapoyauik"],
 			"DragonSlayer7[+]": ["11314-3", "Crandor and Karamja Dungeon#South"],
 			"BankChunks[+]": ["4919", "4922", "5179", "5691-2", "5692-1", "5941-1", "5946-1", "5948-1", "6198-1", "6457", "6461", "6710-1", "6968-1", "7223-1", "7227-1", "8253-1", "8748-1", "9265", "9273-1", "9275-1", "9531-1", "9772-1", "9776", "9781-1", "9782", "10039-1", "10284-1", "10288-1", "10292", "10293", "10300-1", "10537-1", "10545-1", "10547-1", "10804-1", "10806-1", "11051-1", "11056-1", "11061-1", "11310-1", "11319-1", "11571-1", "11826", "11828-1", "11835", "12084-1", "12338-1", "12342-1", "12344", "12588-1", "12590-1", "12597-1", "12598", "12605", "12850-1", "12853-1", "13104-1", "13105-1", "13358-1", "13363", "13613", "13874-1", "13878-1", "14388-1", "14638-1", "14646-1", "14907-1", "14908-1", "15151-1", "15163-1", "Prifddinas", "Keldagrim", "Blast Furnace", "Mor Ul Rek#Outer Area", "Mor Ul Rek#Inner Area", "Rogues' Den", "Mining Guild", "Motherlode Mine", "Mage Arena bank", "Sophanem Dungeon", "Tarn's Lair", "Hallowed Sepulchre", "Shilo Village mine#Underground", "Giants' Foundry", "Tombs of Amascut Lobby", "Ourania Cave", "Chambers of Xeric"],
@@ -173589,6 +173627,7 @@
 			"CurseOfTheEmptyLord5[+]": "Any chunk for Curse of the Empty Lord step 5",
 			"MournerChunks[+]": "Any chunk for Mourning's End Part I step 3",
 			"CatacombsOrGiantsDen[+]": "Either the Catacombs of Kourend or the Giants' Den chunks",
+			"AncientZygomiteFossilIslandChunks[+]": "Either Fossil Island chunk with Ancient Zygomites",
 			"DragonSlayer7[+]": "Either entrance chunk to the Crandor Dungeon",
 			"BankChunks[+]": "Any chunk with a bank",
 			"BarbarianKeyChunk[+]": "Any chunk with barbarians that drop the key (medium)",
@@ -177757,7 +177796,8 @@
 			"Goblins": {
 				"Goblin (God Wars Dungeon)": true,
 				"Goblin guard": true,
-				"Goblin (Goblin Village)": true,
+				"Goblin (Goblin Village)#Green": true,
+				"Goblin (Goblin Village)#Red": true,
 				"Goblin (Vault of War)": true,
 				"Goblin#Drop table 1": true,
 				"Goblin#Drop table 2": true,
@@ -191864,7 +191904,86 @@
 				"1": "2/128"
 			}
 		},
-		"Goblin (Goblin Village)": {
+		"Goblin (Goblin Village)#Green": {
+			"Bones": {
+				"1": "Always"
+			},
+			"Bronze axe": {
+				"1": "3/128"
+			},
+			"Bronze scimitar": {
+				"1": "1/128"
+			},
+			"Bronze spear": {
+				"1": "9/128"
+			},
+			"Bronze arrow": {
+				"7": "3/128"
+			},
+			"Mind rune": {
+				"2": "3/128"
+			},
+			"Earth rune": {
+				"4": "3/128"
+			},
+			"Body rune": {
+				"2": "3/128"
+			},
+			"Bronze javelin": {
+				"5": "2/128"
+			},
+			"Chaos rune": {
+				"1": "1/128"
+			},
+			"Nature rune": {
+				"1": "1/128"
+			},
+			"Coins": {
+				"1": "34/128",
+				"3": "13/128",
+				"5": "8/128",
+				"10 (F2P)": "2/128",
+				"16": "7/128",
+				"24": "3/128"
+			},
+			"Hammer": {
+				"1": "9/128"
+			},
+			"Goblin book": {
+				"1": "2/128"
+			},
+			"Green goblin mail": {
+				"1": "10/128"
+			},
+			"Grapes": {
+				"1": "1/128"
+			},
+			"Red cape": {
+				"1": "1/128"
+			},
+			"Tin ore": {
+				"1": "1/128"
+			},
+			"Goblin skull": {
+				"1": "1/4"
+			},
+			"Ensouled goblin head": {
+				"1": "1/30"
+			},
+			"Clue scroll (beginner)": {
+				"1": "1/80"
+			},
+			"Goblin champion scroll": {
+				"1": "1/5000"
+			},
+			"Clue scroll (easy)": {
+				"1": "1/128"
+			},
+			"HerbDropTable+": {
+				"1": "2/128"
+			}
+		},
+		"Goblin (Goblin Village)#Red": {
 			"Bones": {
 				"1": "Always"
 			},
@@ -191913,9 +192032,6 @@
 				"1": "2/128"
 			},
 			"Red goblin mail": {
-				"1": "10/128"
-			},
-			"Green goblin mail": {
 				"1": "10/128"
 			},
 			"Grapes": {
@@ -250308,6 +250424,27 @@
 			}],
 			"Sandy paint^Hermit crab": [{
 				"Crab dance emote": "Nonskill"
+			}],
+			"Volcanic ash^Ancient Zygomite": [{
+				"Fossil Island drops": "Nonskill"
+			}],
+			"Calcite^Ancient Zygomite": [{
+				"Fossil Island drops": "Nonskill"
+			}],
+			"Pyrophosphite^Ancient Zygomite": [{
+				"Fossil Island drops": "Nonskill"
+			}],
+			"Grimy kwuarm^Ancient Zygomite": [{
+				"Stalker Den drops": "Nonskill"
+			}],
+			"Grimy dwarf weed^Ancient Zygomite": [{
+				"Stalker Den drops": "Nonskill"
+			}],
+			"Grimy cadantine^Ancient Zygomite": [{
+				"Stalker Den drops": "Nonskill"
+			}],
+			"Grimy lantadyme^Ancient Zygomite": [{
+				"Stalker Den drops": "Nonskill"
 			}]
 		},
 		"Monsters": {
@@ -251278,6 +251415,11 @@
 			"Snake": {
 				"11565-1": [{
 					"~|Legends' Quest|~ 1": "Quest"
+				}]
+			},
+			"Sourhog": {
+				"Sourhog Cave": [{
+					"~|A Porcine of Interest|~ Complete the quest": "Quest"
 				}]
 			},
 			"Spider": {

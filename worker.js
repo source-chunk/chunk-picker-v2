@@ -1854,7 +1854,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                         });
                     }
                     if (challenge.hasOwnProperty('Skills')) {
-                        let subSkillValid = !(Object.keys(challenge['Skills']).filter((subSkill) => { return !checkPrimaryMethod(subSkill, newValids, baseChunkData) || (subSkill === 'Slayer' && !!slayerLocked && challenge['Skills'][subSkill] > slayerLocked['level']) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && challenge['Skills'][subSkill] > maxSkill[subSkill]) }).length > 0);
+                        let subSkillValid = !(Object.keys(challenge['Skills']).filter((subSkill) => { return (!checkPrimaryMethod(subSkill, newValids, baseChunkData) || (subSkill === 'Slayer' && !!slayerLocked && challenge['Skills'][subSkill] > slayerLocked['level']) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && challenge['Skills'][subSkill] > maxSkill[subSkill])) && challenge['Skills'][subSkill] > 1 }).length > 0);
                         if (!subSkillValid) {
                             !!newValids[skill] && delete newValids[skill][name];
                             !!valids[skill] && delete valids[skill][name];
@@ -3583,11 +3583,16 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             chunkInfo['challenges'][skill][name]['ChunksDetails'] = [];
             chunkInfo['challenges'][skill][name]['Skill RequirementsDetails'] = [];
             chunkInfo['challenges'][skill][name]['Skill Requirements'] = [];
+            chunkInfo['challenges'][skill][name]['Task RequirementsDetails'] = [];
 
             
             if (chunkInfo['challenges'][skill][name].hasOwnProperty('Skills')) {
                 chunkInfo['challenges'][skill][name]['Skill Requirements'].push(...Object.keys(chunkInfo['challenges'][skill][name]['Skills']).map((key) => chunkInfo['challenges'][skill][name]['Skills'][key] + ' ' + key));
-                chunkInfo['challenges'][skill][name]['Skill RequirementsDetails'].push(...Object.keys(chunkInfo['challenges'][skill][name]['Skills']).map((key) => chunkInfo['challenges'][skill][name]['Skills'][key] + ' ' + key))
+                chunkInfo['challenges'][skill][name]['Skill RequirementsDetails'].push(...Object.keys(chunkInfo['challenges'][skill][name]['Skills']).map((key) => chunkInfo['challenges'][skill][name]['Skills'][key] + ' ' + key));
+            }
+
+            if (chunkInfo['challenges'][skill][name].hasOwnProperty('Tasks')) {
+                chunkInfo['challenges'][skill][name]['Task RequirementsDetails'].push(...Object.keys(chunkInfo['challenges'][skill][name]['Tasks']).filter((key) => key !== name && !key.includes('[+]') && chunkInfo['challenges'][skill][name]['Tasks'][key] !== 'Nonskill').map((key) => key + '||' + chunkInfo['challenges'][skill][name]['Tasks'][key]));
             }
 
             delete chunkInfo['challenges'][skill][name]['NeverShow'];
