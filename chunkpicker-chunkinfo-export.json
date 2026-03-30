@@ -114740,7 +114740,7 @@
 			"~|My Arm's Big Adventure|~ 6": {
 				"BaseQuest": "My Arm's Big Adventure",
 				"Description": "Go to Karamja with My Arm",
-				"Chunks": ["11058-1"],
+				"Chunks": ["10547-1", "11058-1"],
 				"Tasks": {
 					"~|My Arm's Big Adventure|~ 5": "Quest"
 				},
@@ -144844,6 +144844,7 @@
 					"Quest": {
 						"King's Ransom": "step",
 						"Making History": "step",
+						"My Arm's Big Adventure": "step",
 						"One Small Favour": "step",
 						"Song of the Elves": "step",
 						"Tribal Totem": "step"
@@ -216823,7 +216824,7 @@
 		"Mourning's End Part I": "8753, 9009, 9265, 9524, 9780, 10035, 10292, 11573, Mourner Headquarters",
 		"Mourning's End Part II": "9265, 10035, Mourner Tunnels & Temple of Light, Death altar",
 		"Murder Mystery": "10806, 10807",
-		"My Arm's Big Adventure": "11056, 11320, 11321, Troll Stronghold, DungChunks[+]",
+		"My Arm's Big Adventure": "10547, 11056, 11320, 11321, Troll Stronghold, DungChunks[+]",
 		"Nature Spirit": "13620, 13622, Nature Grotto Cave",
 		"A Night at the Theatre": "13876, 14642, 14645, Morytania Spider Nest, Nature Grotto Cave, Sisterhood Sanctuary, Theatre of Blood",
 		"Observatory Quest": "9777, Observatory Dungeon",
