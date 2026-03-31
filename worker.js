@@ -5188,7 +5188,7 @@ let calcBIS = function(completedOnly) {
             chunkInfo['taskUnlocks']['Items'].hasOwnProperty(equip) && chunkInfo['taskUnlocks']['Items'][equip].filter(task => !globalValids || !globalValids[Object.values(task)[0]] || !globalValids[Object.values(task)[0]].hasOwnProperty(Object.keys(task)[0])).length > 0 && (validWearable = false);
             rules['Consumable Primary BiS'] && chunkInfo['equipment'][equip].is_consumable && Object.keys(baseChunkData['items'][equip]).filter(source => !baseChunkData['items'][equip][source].includes('secondary-')).length === 0 && (validWearable = false);
             let bestAmmo = null;
-            Object.keys(chunkInfo['codeItems']['ammoTools']).filter(ammo => { return chunkInfo['codeItems']['ammoTools'][ammo].hasOwnProperty(equip) && baseChunkData['items'].hasOwnProperty(ammo) && (!rules['Consumable Primary BiS'] || !chunkInfo['equipment'][ammo].is_consumable || Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('secondary-')).length > 0) }).forEach((ammo) => {
+            Object.keys(chunkInfo['codeItems']['ammoTools']).filter(ammo => { return chunkInfo['codeItems']['ammoTools'][ammo].hasOwnProperty(equip) && (!rules['Consumable Primary BiS'] || !chunkInfo['equipment'][ammo].is_consumable || Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('secondary-')).length > 0) }).forEach((ammo) => {
                 if (ammo === 'No ammo') {
                     //
                 } else {
@@ -5497,7 +5497,7 @@ let calcBIS = function(completedOnly) {
                 } else if (skill === 'Ranged') {
                     if (chunkInfo['equipment'][equip].attack_speed > 1) {
                         let bestAmmo = null;
-                        Object.keys(chunkInfo['codeItems']['ammoTools']).filter(ammo => { return chunkInfo['codeItems']['ammoTools'][ammo].hasOwnProperty(equip) && baseChunkData['items'].hasOwnProperty(ammo) && (!rules['Consumable Primary BiS'] || !chunkInfo['equipment'][ammo].is_consumable || Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('secondary-')).length > 0) }).forEach((ammo) => {
+                        Object.keys(chunkInfo['codeItems']['ammoTools']).filter(ammo => { return chunkInfo['codeItems']['ammoTools'][ammo].hasOwnProperty(equip) && (!rules['Consumable Primary BiS'] || !chunkInfo['equipment'][ammo].is_consumable || Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('secondary-')).length > 0) }).forEach((ammo) => {
                             if (ammo === 'No ammo') {
                                 //
                             } else {
