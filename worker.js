@@ -5213,7 +5213,7 @@ let calcBIS = function(completedOnly) {
                                 }
                             }
                         });
-                    } else if (chunkInfo['equipment'].hasOwnProperty(ammo) && (!rules['Consumable Primary BiS'] || !chunkInfo['equipment'][ammo].is_consumable || Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('secondary-')).length > 0)) {
+                    } else if (chunkInfo['equipment'].hasOwnProperty(ammo) && !!baseChunkData['items'][ammo] && (!rules['Consumable Primary BiS'] || !chunkInfo['equipment'][ammo].is_consumable || Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('secondary-')).length > 0)) {
                         if (bestAmmo === null || chunkInfo['equipment'][ammo].ranged_strength > chunkInfo['equipment'][bestAmmo].ranged_strength) {
                             let tempTempValidAmmo = false;
                             !!baseChunkData['items'][ammo] && Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('-') || !processingSkill[baseChunkData['items'][ammo][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][ammo][source].split('-')[1] === 'Slayer').length > 0 && (tempTempValidAmmo = true);
@@ -5522,7 +5522,7 @@ let calcBIS = function(completedOnly) {
                                             }
                                         }
                                     });
-                                } else if (chunkInfo['equipment'].hasOwnProperty(ammo) && (!rules['Consumable Primary BiS'] || !chunkInfo['equipment'][ammo].is_consumable || Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('secondary-')).length > 0)) {
+                                } else if (chunkInfo['equipment'].hasOwnProperty(ammo) && !!baseChunkData['items'][ammo] && (!rules['Consumable Primary BiS'] || !chunkInfo['equipment'][ammo].is_consumable || Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('secondary-')).length > 0)) {
                                     if (bestAmmo === null || chunkInfo['equipment'][ammo].ranged_strength > chunkInfo['equipment'][bestAmmo].ranged_strength) {
                                         let tempTempValidAmmo = false;
                                         !!baseChunkData['items'][ammo] && Object.keys(baseChunkData['items'][ammo]).filter(source => !baseChunkData['items'][ammo][source].includes('-') || !processingSkill[baseChunkData['items'][ammo][source].split('-')[1]] || rules['Wield Crafted Items'] || baseChunkData['items'][ammo][source].split('-')[1] === 'Slayer').length > 0 && (tempTempValidAmmo = true);
