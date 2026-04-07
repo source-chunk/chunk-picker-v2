@@ -919,6 +919,7 @@ let settings = {
     "chunkNeighboursOptions": { "neighbors": true, "walkableRollable": true, "autoWalkableRollable": false, "remove": false },
     "defaultChunkinfo": 'monsters',
     "taskSearchbar": false,
+    "generatePluginData": false,
 };                                                                              // Current state of all settings
 
 let settingNames = {
@@ -948,7 +949,8 @@ let settingNames = {
     "optOutSectionsWater": "Include water sections, typically only accessible through Sailing",
     "unlockedBorderColor": "Change the color of the border surrounding your unlocked chunks",
     "defaultChunkinfo": "Select the default tab when first opening the Chunk Info Panel",
-    "taskSearchbar": "Show a searchbar at the top of your Active Tasks to allow filtering. Useful for maps with large task lists that have trouble finding specific tasks"
+    "taskSearchbar": "Show a searchbar at the top of your Active Tasks to allow filtering. Useful for maps with large task lists that have trouble finding specific tasks",
+    "generatePluginData": "Opt-in to generate data used in the Chunk Tasks plugin"
 };                                                                              // Descriptions of the settings
 
 let settingStructure = {
@@ -973,19 +975,22 @@ let settingStructure = {
         "shiftUnlock": true,
         "rollWarning": true
     },
-    "Customization": {
+    "Visual Customization": {
         "theme": true,
-        "startingChunk": true,
-        "ids": true,
         "cinematicRoll": true,
-        "optOutSections": ["optOutSectionsWater"],
-        "newTasks": true,
+        "ids": true,
         "highvis": true,
         "numTasksPercent": true,
         "completedTaskStrikethrough": true,
         "completedTaskColor": true,
         "defaultStickerColor": true,
         "unlockedBorderColor": true
+    },
+    "Miscellaneous": {
+        "startingChunk": true,
+        "optOutSections": ["optOutSectionsWater"],
+        "newTasks": true,
+        "generatePluginData": true
     }
 };                                                                              // Structure of the settings
 
@@ -1503,8 +1508,10 @@ let chunkInfoOpen = false;
 let detailsStack = [];
 let touchTime = 0;
 let listOfTasksPlugin = [];
+let listOfTasksSaved = [];
 let activeTasks = {};
 let pluginOutput = null;
+let isGeneratingPluginData = false;
 let mobileChunkId = 0;
 let sidebarHidden = false;
 let topbarSelection = ['Help', 'Patreon', 'Map Notes', 'Patch Notes', 'Discord', 'Report a Bug', 'WiseOldMan', 'Settings'];
@@ -1519,10 +1526,10 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.44';
-let currentEnforcedVersion = '6.9.44';
+let currentVersion = '6.9.45';
+let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
-let updateLevel = 'no-app-check';
+let updateLevel = 'maintenance-mode';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -1656,7 +1663,8 @@ let hintTexts = [
     "Join the Chunk Chat Discord!",
     "Celebrating over 6 years of Chunk Picking!",
     "Check out our RS3 Sister-site!",
-    "Now with Custom Themes!"
+    "Now with Custom Themes!",
+    "Fire Team best team!"
 ];
 let hintNum = Math.floor(Math.random() * hintTexts.length);
 $('.loading-hint-2').text(hintTexts[hintNum]);
@@ -1690,7 +1698,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.44";
+mapImg.src = "osrs_world_map.png?v=6.9.45";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3275,7 +3283,7 @@ let pickCanvas = function(both, override) {
         helpFunc();
         return;
     }
-    if (settings['rollWarning'] && !override) {
+    if (settings['rollWarning'] && !override && !testMode) {
         warnPickChunk(both);
         return;
     }
@@ -3614,7 +3622,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.44");
+        myWorker = new Worker("./worker.js?v=6.9.45");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
         workersOut['current'] = true;
@@ -3918,8 +3926,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.44");
-let myWorker2 = new Worker("./worker.js?v=6.9.44");
+let myWorker = new Worker("./worker.js?v=6.9.45");
+let myWorker2 = new Worker("./worker.js?v=6.9.45");
 let workerOnMessage = function(e) {
     if (e.data[0] === 'reload') {
         window.location.reload();
@@ -5774,6 +5782,14 @@ let toggleTaskSearchbar = function(value, extra) {
     extra !== 'startup' && !locked && setData();
 }
 
+// Toggles generate pluginOutput variable
+let togglePluginDataGeneration = function(value, extra) {
+    if (extra !== 'startup' && value && !isGeneratingPluginData) {
+        createPluginOutput();
+    }
+    isGeneratingPluginData = value;
+}
+
 // Toggles the top buttons
 let toggleTopButtons = function(value, extra) {
     topButtonsOn = value;
@@ -6490,6 +6506,7 @@ let calcCurrentChallenges2 = function(tempChallengeArr) {
     !tempChallengeArr && (tempChallengeArr = tempChallengeArrSaved);
     listOfTasksPlugin = setupCurrentChallenges(tempChallengeArr);
     setData();
+    settings['generatePluginData'] && createPluginOutput();
 };
 
 // Sets up data for displaying
@@ -6701,6 +6718,7 @@ let setupCurrentChallengesFromSaved = function() {
     if (!activeTasks) {
         return;
     }
+    listOfTasksSaved = [];
     challengeArr = [];
     Object.keys(activeTasks).filter((skill) => skillNames.includes(skill)).length > 0 && challengeArr.push(`<div class="marker marker-skill noscroll" onclick="expandActive('skill')"><i class="expand-button fa-solid ${activeSubTabs['skill'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Skill Tasks</span></div>`);
     Object.keys(activeTasks).filter((skill) => skillNames.includes(skill)).sort().forEach((skill) => {
@@ -6715,15 +6733,18 @@ let setupCurrentChallengesFromSaved = function() {
             level = activeTasks[skill][skillTask];
             boost = 0;
         }
+        listOfTasksSaved.push({ [skillTask]: skill, prefix: `[${(boost > 0 ? (((level - boost) <= 0 ? 1 : (level - boost)) + '] (+' + boost + ')') : level + ']')} ${skill}:` });
         challengeArr.push(`<div class="challenge skill-challenge noscroll clickable ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][skillTask]) ? "hide-backlog" : ''} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll checkbox--disabled"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][skillTask]) ? "checked" : ''} class='noscroll' disabled><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[${(boost > 0 ? (((level - boost) <= 0 ? 1 : (level - boost)) + '] (+' + boost + ')') : level + ']')} <span class="inner noscroll">${skill}</b>: ${decodeQueryParam(skillTask.split('~')[0])}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(skillTask.split('|')[1])}" target="_blank">${decodeQueryParam(skillTask.split('~')[1].split('|').join(''))}</a>${decodeQueryParam(skillTask.split('~')[2])}</span></span></label></div>`);
     });
     challengeArr = challengeArr.filter(line => !line.includes('Extra-') && !line.includes('BiS-') && !line.includes('Quest-') && !line.includes('marker-extra') && !line.includes('marker-bis') && !line.includes('marker-quest'));
     !!activeTasks['BiS'] && Object.keys(activeTasks['BiS']).length > 0 && challengeArr.push(`<div class="marker marker-bis noscroll" onclick="expandActive('bis')"><i class="expand-button fa-solid ${activeSubTabs['bis'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">BiS Tasks</span></div>`);
     !!activeTasks['BiS'] && Object.keys(activeTasks['BiS']).forEach((challenge) => {
+        listOfTasksSaved.push({ [challenge]: 'BiS', prefix: `[${$(`<span>${activeTasks['BiS'][challenge]}</span>`).text()}]` });
         challengeArr.push(`<div class="challenge bis-challenge noscroll clickable ${'BiS-' + challenge.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-challenge'} ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge]) && 'hide-backlog'} ${!activeSubTabs['bis'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll checkbox--disabled"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['BiS'] && !!checkedChallenges['BiS'][challenge]) ? "checked" : ''} class='noscroll' disabled><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[${activeTasks['BiS'][challenge]}]</b> <span class="inner noscroll">${challenge.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((challenge.split('|')[1]))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${challenge.split('~')[2]}</span></span></label></span></div>`);
     });
     !!activeTasks['Quest'] && Object.keys(activeTasks['Quest']).length > 0 && challengeArr.push(`<div class="marker marker-quest noscroll" onclick="expandActive('quest')"><i class="expand-button fa-solid ${activeSubTabs['quest'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Quest Tasks</span></div>`);
     !!activeTasks['Quest'] && Object.keys(activeTasks['Quest']).sort(function(a, b) { return a.replaceAll(/ /g, '_').replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll('A_', '').replaceAll('The_', '').localeCompare(b.replaceAll(/ /g, '_').replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/%/g, '').replaceAll(/\(/g, '').replaceAll(/\)/g, '').replaceAll(/'/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').replaceAll('A_', '').replaceAll('The_', '')) }).forEach((challenge) => {
+        listOfTasksSaved.push({ [challenge]: 'Quest', prefix: `[Quest]` });
         if (!!chunkInfo['challenges']['Quest'][challenge] && chunkInfo['challenges']['Quest'][challenge].hasOwnProperty('QuestPoints')) {
             challengeArr.push(`<div class="challenge quest-challenge noscroll clickable ${'Quest-' + challenge.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-challenge'} ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) && 'hide-backlog'} ${!activeSubTabs['quest'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll checkbox--disabled"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Quest'] && !!checkedChallenges['Quest'][challenge]) ? "checked" : ''} class='noscroll' disabled><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Quest] <span class="inner noscroll"><a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(challenge.split('~')[1].split('|').join(''))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a></b>: ${challenge.split('~')[2].substring(1)}</span></span></label></span></div>`);
         } else {
@@ -6732,12 +6753,14 @@ let setupCurrentChallengesFromSaved = function() {
     });
     !!activeTasks['Diary'] && Object.keys(activeTasks['Diary']).length > 0  && challengeArr.push(`<div class="marker marker-diary noscroll" onclick="expandActive('diary')"><i class="expand-button fa-solid ${activeSubTabs['diary'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Diary Tasks</span></div>`);
     !!activeTasks['Diary'] && Object.keys(activeTasks['Diary']).forEach((challenge) => {
+        listOfTasksSaved.push({ [challenge]: 'Diary', prefix: `[Diary]` });
         challengeArr.push(`<div class="challenge diary-challenge noscroll clickable ${'Diary-' + challenge.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-challenge'} ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) && 'hide-backlog'} ${!activeSubTabs['diary'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll checkbox--disabled"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Diary'] && !!checkedChallenges['Diary'][challenge]) ? "checked" : ''} class='noscroll' disabled><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[Diary] <span class="inner noscroll"><a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(challenge.split('~')[1].split('|').join(''))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a></b>: ${challenge.split('~')[2]}</span></span></label></span></div>`);
     });
     let doneSubMarker = {};
     subCheckboxNames = {};
     !!activeTasks['Extra'] && Object.keys(activeTasks['Extra']).length > 0 && challengeArr.push(`<div class="marker marker-extra noscroll" onclick="expandActive('extra')"><i class="expand-button fa-solid ${activeSubTabs['extra'] ? 'fa-caret-down' : 'fa-caret-right'} noscroll"></i><span class="noscroll">Other Tasks</span></div>`);
     !!activeTasks['Extra'] && Object.keys(activeTasks['Extra']).sort(function(a, b) { return (activeTasks['Extra'][a] + a).split(/\([0-9]/)[0].localeCompare((activeTasks['Extra'][b] + b).split(/\([0-9]/)[0]) }).forEach((challenge) => {
+        listOfTasksSaved.push({ [challenge]: 'Extra', prefix: `${(!!activeTasks['Extra'][challenge] ? ('[' + activeTasks['Extra'][challenge] + ']') : '')}` });
         if (activeTasks['Extra'][challenge] === 'Kill X') {
             challengeArr.push(`<div class="challenge extra-challenge noscroll clickable ${'Extra-' + challenge.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}"><label class="checkbox noscroll checkbox--disabled"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' disabled><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[${activeTasks['Extra'][challenge]}]</b> <span class="inner noscroll">${challenge.split('~')[0].replaceAll(' X ', ' ' + (rules['Kill X Amount'] || 'X') + ' ')}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(challenge.split('~')[1].split('|').join(''))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${challenge.split('~')[2]}</span></span></label></span></div>`);
         } else if (activeTasks['Extra'][challenge] === 'All Droptables') {
@@ -6885,7 +6908,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.44");
+    myWorker2 = new Worker("./worker.js?v=6.9.45");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
     workersOut['future'] = infoLockedId;
@@ -12104,7 +12127,7 @@ let unbacklogChallenge = function(challenge, skill) {
         $(`.panel-backlog .challenge.${skill + '-' + challenge.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-challenge'}`).remove();
     } else {
         $(`.panel-backlog .challenge.${skill}-challenge`).each(function(index) {
-            if ($(this).text().includes(challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, ''))) {
+            if ($(this).text().replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, '').includes(challenge.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\./g, '').replaceAll(/\:/g, '').replaceAll(/\//g, ''))) {
                 $(this).remove();
             }
         });
@@ -12291,6 +12314,7 @@ let checkOffSettings = function(didRedo, startup) {
     toggleTaskSidebar(settings['taskSidebar'], startup);
     toggleHiddenTasks(settings['hideChecked'] && actuallyHideChecked);
     toggleTaskSearchbar(settings['taskSearchbar'], startup);
+    togglePluginDataGeneration(settings['generatePluginData'], startup);
     settings['hideChecked'] ? $(`.tasks-checkmark`).show() : $(`.tasks-checkmark`).hide();
     changeChallengeColor();
     if (!startup) {
@@ -12410,6 +12434,18 @@ let toggleChangePinNewVis = function() {
 let toggleChangePin2NewVis = function() {
     $('.change-pin-eye3').toggleClass('fa-eye fa-eye-slash');
     $('.pin.old2.third').attr('type', $('.pin.old2.third').attr('type') === 'text' ? 'password' : 'text');
+}
+
+// Set the site to maintenance mode
+let setUnderMaintenance = function() {
+    atHome = true;
+    $('.loading, .ui-loader-header').remove();
+    $('.menu, .menu2, .menu3, .menu4, .menu5, .menu6, .menu7, .menu8, .menu9, .menu10, .settings-menu, .topnav, #beta, .hiddenInfo, #entry-menu, #highscore-menu, #highscore-menu2, #import-menu, #help-menu, .canvasDiv, .menu11, .menu12, .menu13, .menu14').hide();
+    $('#home-menu, .entry-home-menu-container, .entry-home-menu-extra').hide();
+    onMobile && $('#amaintenance-menu').addClass('mobile');
+    $('.background-img').show();
+    $('#amaintenance-menu').show();
+    $('html, body').addClass('amaintenance');
 }
 
 // Checks the MID from the url
@@ -12722,6 +12758,11 @@ let loadData = async function(startup) {
             questLastStep['~|' + chunkInfo['challenges']['Quest'][name]['BaseQuest'] + '|~ Complete the quest'] = name;
         }
     });
+    databaseRef.child('underMaintenance').on('value', function(snap) {
+        if (snap.val()) {
+            setUnderMaintenance();
+        }
+    });
     myRef.child('chunkOrder').once('value', function(snap) {
         let shouldScroll = setSnap.hasOwnProperty('chunkOrder');
         let snapDiff = preloadHelper(snap, 'chunkOrder');
@@ -12829,6 +12870,7 @@ let loadData = async function(startup) {
         toggleTopButtons(settings['topButtons'], 'startup');
         toggleTaskSidebar(settings['taskSidebar'], 'startup');
         toggleTaskSearchbar(settings['taskSearchbar'], 'startup');
+        togglePluginDataGeneration(settings['generatePluginData'], 'startup');
         settings['hideChecked'] ? $(`.tasks-checkmark`).show() : $(`.tasks-checkmark`).hide();
     });
     myRef.child('userName').once('value', function(snap) {
@@ -13229,6 +13271,9 @@ let setUsername = function(old) {
 
 // Generates the plugin output object
 let createPluginOutput = function() {
+    if (onTestServer || testMode || recentlyTestMode || !signedIn) {
+        return;
+    }
     pluginOutput = [];
     listOfTasksPlugin.forEach((el) => {
         let name = Object.keys(el).filter((key) => key !== 'prefix')[0];
@@ -13273,6 +13318,13 @@ let createPluginOutput = function() {
             pluginOutput.push(rowObj);
         }
     });
+    listOfTasksSaved.sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0]);
+    listOfTasksPlugin.sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0]);
+    if (diff(listOfTasksSaved, listOfTasksPlugin) && firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.uid) {
+        listOfTasksSaved = JSON.parse(JSON.stringify(listOfTasksPlugin));
+        const userRef = firebase.storage().ref(`pluginOutputs/${firebase.auth().currentUser.uid}.json`);
+        userRef.putString(JSON.stringify(pluginOutput), 'raw', { contentType: 'application/json' });
+    }
 }
 
 // Converts given list of tasks into id-denotation
@@ -13301,7 +13353,6 @@ let setData = function() {
     if (onTestServer || testMode || recentlyTestMode || !signedIn) {
         return;
     }
-    createPluginOutput();
     Object.keys(rules).forEach((rule) => {
         if (rules[rule] === undefined) {
             rules[rule] = false;
@@ -13381,7 +13432,8 @@ let setData = function() {
             info: chunkInfoOn,
             'rollingChunksOptions': settings['rollingChunksOptions'],
             'defaultChunkinfo': settings['defaultChunkinfo'],
-            'taskSearchbar': settings['taskSearchbar']
+            'taskSearchbar': settings['taskSearchbar'],
+            'generatePluginData': settings['generatePluginData']
         },
         chunkinfo: {
             checkedChallenges: encodeObject(convertToIds(checkedChallenges), true),

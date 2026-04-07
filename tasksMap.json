@@ -6332,6 +6332,7 @@
   "Obtain a ~|purifying sigil (right)|~": "t_5579",
   "Obtain a ~|purifying sigil (middle)|~": "t_5580",
   "Obtain ~|Brutus slippers|~": "t_49406",
+  "Obtain a ~|granite shield|~": "t_11109",
   "Obtain a ~|big bass|~": "t_5581",
   "Obtain a ~|big swordfish|~": "t_5582",
   "Obtain a ~|big harpoonfish|~": "t_5583",
@@ -12532,7 +12533,6 @@
   "Obtain a ~|Saradomin kiteshield|~": "t_11106",
   "Obtain a ~|Guthix kiteshield|~": "t_11107",
   "Obtain an ~|elemental shield|~": "t_11108",
-  "Obtain a ~|granite shield|~": "t_11109",
   "Obtain a ~|gilded kiteshield|~": "t_11110",
   "Obtain a ~|fremennik shield|~": "t_11111",
   "Obtain a ~|damaged book|~": "t_11112",
@@ -13365,6 +13365,7 @@
   "Kill X ~|Snake (Varlamore)|~": "t_46534",
   "Kill X ~|Icefiend|~": "t_11874",
   "Kill X ~|White jaguar|~": "t_11875",
+  "Kill X ~|Fox|~": "t_11981",
   "Kill X ~|Bull shark|~": "t_47294",
   "Kill X ~|Skeleton#Plain|~": "t_11877",
   "Kill X ~|Guard (Shayzien)|~": "t_11879",
@@ -13394,7 +13395,6 @@
   "Kill X ~|Hueycoatl tail|~": "t_11907",
   "Kill X ~|The Hueycoatl|~": "t_11908",
   "Kill X ~|Boar|~": "t_11933",
-  "Kill X ~|Fox|~": "t_11981",
   "Kill X ~|Chinchompa (Hunter)|~": "t_11910",
   "Kill X ~|Dark warrior#Zeah|~": "t_11911",
   "Kill X ~|Man|~": "t_11912",
@@ -48591,6 +48591,7 @@
   "Toothy's Pickaxes: ~|Steel pickaxe|~": "t_44776",
   "Trader Stan's Trading Post: ~|Banana|~": "t_44777",
   "Trader Stan's Trading Post: ~|Bowl|~": "t_44778",
+  "Trader Stan's Trading Post: ~|Bronze cannonball|~": "t_49610",
   "Trader Stan's Trading Post: ~|Bucket|~": "t_44779",
   "Trader Stan's Trading Post: ~|Bucket of sand|~": "t_44780",
   "Trader Stan's Trading Post: ~|Bucket of slime|~": "t_44781",
@@ -49246,5 +49247,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49610
+  "currentNextIndex": 49611
 }

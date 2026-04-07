@@ -8,7 +8,7 @@
     gtag('js', new Date());
     gtag('config', 'G-N76CGCCD4N');
   </script>
-  <link rel="stylesheet" href="./index.css?v=6.9.44" />
+  <link rel="stylesheet" href="./index.css?v=6.9.45" />
   <meta charset="UTF-8">
   <meta name="description" content="The Chunk Picker V2 is an all-in-one companion tool to the Oldschool Runescape unofficial gamemode: OneChunkMan. The site allows you to randomly roll chunks, get chunk tasks, and track and share your progress with others.">
   <meta name="author" content="Source Chunk">
@@ -29,6 +29,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.3/purify.min.js"></script>
   <script>
@@ -56,14 +57,14 @@
 <span style="font-family: Roboto Condensed; visibility: hidden">Roboto Condensed</span>
 
 <img class='background-img' draggable='false' src='./Background-chunk.PNG' />
-<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.9.44' />
+<img id='mapImg' style="display:none" src='./osrs_world_map.png?v=6.9.45' />
 
 <div class='loading'><div class='loading-inner'></div><div class='loading-hint-1'>Chunk Picker V2</div><div class='loading-hint-2'></div></div>
 
 <div class='body' data-role="page" ondragstart="() => {return false;}" ondrop="() => {return false;}">
-  <script src="./tooltip.js?v=6.9.44"></script>
-  <script src="./modal.js?v=6.9.44"></script>
-  <script src="./index.js?v=6.9.44"></script>
+  <script src="./tooltip.js?v=6.9.45"></script>
+  <script src="./modal.js?v=6.9.45"></script>
+  <script src="./index.js?v=6.9.45"></script>
   <ul class='active-context-menu'>
     <li onclick="switchActiveContext(event, 'backlog')">Backlog</li>
     <li onclick="switchActiveContext(event, 'backlog note')">Backlog Options</li>
@@ -1377,6 +1378,20 @@
     </div>
     <div>
       <div class='pools-list pools-list-b'><div class='pools-list-loading'>Loading data...</div></div>
+    </div>
+  </div>
+</div>
+
+<div id='amaintenance-menu' style="display:none">
+  <div id='page13' class='content13'>
+    <div>
+      <div class='title'><i class="fa-solid fa-screwdriver-wrench noscroll"></i> Maintenance <i class="fa-solid fa-screwdriver-wrench noscroll"></i></div>
+    </div>
+    <div>
+      <div class='amaintenance-body'>
+        <h4>The Chunk Picker is currently down for maintenance.</h4>
+        <p>We'll try to get the site up and working again as soon as we can.<br />Thank you for your patience!</p>
+      </div>
     </div>
   </div>
 </div>

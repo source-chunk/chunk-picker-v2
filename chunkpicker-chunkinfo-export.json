@@ -32885,6 +32885,11 @@
 				"Output": "Beer glass",
 				"Not F2P": true
 			},
+			"Drink a jug of wine for a jug*": {
+				"Items": ["Jug of wine*"],
+				"Output": "Jug",
+				"Not F2P": true
+			},
 			"Empty cabbages(2) for a sack*": {
 				"Items": ["Cabbages(2)*"],
 				"Output": "Empty sack",
@@ -73879,6 +73884,12 @@
 				"Category": ["Untracked Uniques"],
 				"Label": "Untracked Uniques",
 				"Items": ["Brutus slippers"],
+				"Not F2P": true
+			},
+			"Obtain a ~|granite shield|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Granite shield"],
 				"Not F2P": true
 			},
 			"Obtain a ~|big bass|~": {
@@ -126751,6 +126762,7 @@
 				},
 				"3": {
 					"Monster": {
+						"Fox": 1,
 						"Rabbit": 3
 					},
 					"NPC": {
@@ -170774,7 +170786,8 @@
 				"Barronite Crusher": 1,
 				"Clay rocks": 3,
 				"Copper rocks": 3,
-				"Fishing spot (Camdozaal)": 4,
+				"Fishing spot (Camdozaal)": 3,
+				"Fishing spot (frogspawn)": 1,
 				"Preperation Table": 2,
 				"Rocks (Barronite)": 18,
 				"Rubble": 26,
@@ -223143,6 +223156,7 @@
 		"Trader Stan's Trading Post": {
 			"Banana": true,
 			"Bowl": true,
+			"Bronze cannonball": true,
 			"Bucket": true,
 			"Bucket of sand": true,
 			"Bucket of slime": true,

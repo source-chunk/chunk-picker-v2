@@ -250,7 +250,7 @@ onmessage = function(e) {
             updateLevel,
         ] = eGlobal.data;
 
-        if (updateLevel !== 'no-app-check') {
+        if (updateLevel !== 'maintenance-mode') {
             postMessage(['reload']);
         }
 
@@ -275,6 +275,9 @@ onmessage = function(e) {
         }
         if (!secondaryPrimaryNum) {
             secondaryPrimaryNum = "1/1";
+        }
+        if (!secondaryPrimaryNum.includes("/")) {
+            secondaryPrimaryNum = secondaryPrimaryNum.length > 0 ? (secondaryPrimaryNum + "/1") : "1/1";
         }
         if (!chunkInfo) {
             return;
@@ -4808,15 +4811,28 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             Object.keys(items[item]).filter((source) => { return items[item][source].includes('-Thieving') && chunkInfo['challenges']['Thieving'].hasOwnProperty(source) && chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Output') }).forEach((source) => {
                 let monster = chunkInfo['challenges']['Thieving'][source]['Output'];
                 !!chunkInfo['skillItems']['Thieving'] && !!chunkInfo['skillItems']['Thieving'][monster] && Object.keys(chunkInfo['skillItems']['Thieving'][monster]).filter((drop) => !items.hasOwnProperty(drop + '*^^')).forEach((drop) => {
-                    !!chunkInfo['skillItems']['Thieving'][monster][drop] && Object.keys(chunkInfo['skillItems']['Thieving'][monster][drop]).filter(quantityDrop => (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1])))).forEach((quantityDrop) => {
-                        let addon = chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Mix') ? '-mix' :chunkInfo['challenges']['Thieving'][source].hasOwnProperty('NPCs') ? '-npc' : chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Objects') ? '-object' : '';
-                        if (!dropTablesGlobal['[Thieving] ' + monster + addon]) {
-                            dropTablesGlobal['[Thieving] ' + monster + addon] = {};
+                    !!chunkInfo['skillItems']['Thieving'][monster][drop] && Object.keys(chunkInfo['skillItems']['Thieving'][monster][drop]).forEach((quantityDrop) => {
+                        if (!!dropTables[drop] && ((drop !== 'RareDropTable+' && drop !== 'GemDropTable+') || rules['RDT'])) {
+                            Object.keys(dropTables[drop]).filter((tableItem) => { return (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) || ((parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1]) * parseFloat(dropTables[drop][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][tableItem].split('@')[0].split('/')[1]))) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) && (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) }).forEach((tableItem) => {
+                                let addon = chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Mix') ? '-mix' :chunkInfo['challenges']['Thieving'][source].hasOwnProperty('NPCs') ? '-npc' : chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Objects') ? '-object' : '';
+                                if (!dropTablesGlobal['[Thieving] ' + monster + addon]) {
+                                    dropTablesGlobal['[Thieving] ' + monster + addon] = {};
+                                }
+                                if (!dropTablesGlobal['[Thieving] ' + monster + addon][tableItem]) {
+                                    dropTablesGlobal['[Thieving] ' + monster + addon][tableItem] = {};
+                                }
+                                dropTablesGlobal['[Thieving] ' + monster + addon][tableItem][quantityDrop] = (chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop] : findFraction(((parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1]) * parseFloat(dropTables[drop][tableItem].split('@')[0].split('/')[0].replaceAll('~', '')) / parseFloat(dropTables[drop][tableItem].split('@')[0].split('/')[1]))));
+                            });
+                        } else if (rules['Rare Drop'] || isNaN(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) || (parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1])) > (parseFloat(rareDropNum.split('/')[0].replaceAll('~', '')) / parseFloat(rareDropNum.split('/')[1]))) {
+                            let addon = chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Mix') ? '-mix' :chunkInfo['challenges']['Thieving'][source].hasOwnProperty('NPCs') ? '-npc' : chunkInfo['challenges']['Thieving'][source].hasOwnProperty('Objects') ? '-object' : '';
+                            if (!dropTablesGlobal['[Thieving] ' + monster + addon]) {
+                                dropTablesGlobal['[Thieving] ' + monster + addon] = {};
+                            }
+                            if (!dropTablesGlobal['[Thieving] ' + monster + addon][drop]) {
+                                dropTablesGlobal['[Thieving] ' + monster + addon][drop] = {};
+                            }
+                            dropTablesGlobal['[Thieving] ' + monster + addon][drop][quantityDrop] = (chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1].replaceAll('~', '')));
                         }
-                        if (!dropTablesGlobal['[Thieving] ' + monster + addon][drop]) {
-                            dropTablesGlobal['[Thieving] ' + monster + addon][drop] = {};
-                        }
-                        dropTablesGlobal['[Thieving] ' + monster + addon][drop][quantityDrop] = (chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/').length <= 1) ? chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop] : findFraction(parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems']['Thieving'][monster][drop][quantityDrop].split('/')[1].replaceAll('~', '')));
                     });
                 });
             });
