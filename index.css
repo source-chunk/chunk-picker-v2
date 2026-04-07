@@ -1279,6 +1279,10 @@ button.menu2 {
     padding: 0px 20px;
 }
 
+.mobile .content11 {
+    width: 95%;
+}
+
 #pools-menu:not(.mobile) {
     overflow-y: auto;
     height: 100vh;
@@ -1379,6 +1383,10 @@ button.menu2 {
     overflow-y: auto;
     margin-bottom: 100px;
     padding-bottom: 20px;
+}
+
+.mobile .content13 {
+    width: 95%;
 }
 
 .mobile #page8 {
