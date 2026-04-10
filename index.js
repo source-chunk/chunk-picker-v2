@@ -1376,6 +1376,7 @@ let highestOverallCompleted = {};
 let bisUpgrades = {};
 let bankMemoryFormat = '';
 let globalValidsBoosts = {};
+let globalEveryDropAltMap = {};
 let oldChallengeArr = {};
 let futureChunkData = {};
 let futureUnlockedSections = {};
@@ -1509,6 +1510,7 @@ let detailsStack = [];
 let touchTime = 0;
 let listOfTasksPlugin = [];
 let listOfTasksSaved = [];
+let forceUpdatePluginOutput = false;
 let activeTasks = {};
 let pluginOutput = null;
 let isGeneratingPluginData = false;
@@ -1527,7 +1529,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.46';
+let currentVersion = '6.9.47';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'maintenance-mode';
@@ -1699,7 +1701,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.46";
+mapImg.src = "osrs_world_map.png?v=6.9.47";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3623,9 +3625,64 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.46");
+        myWorker = new Worker("./worker.js?v=6.9.47");
         myWorker.onmessage = workerOnMessage;
-        myWorker.postMessage(['current', tempChunks['unlocked'], rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
+        myWorker.postMessage({
+            type: 'current',
+            chunks: tempChunks['unlocked'],
+            rules,
+            chunkInfo,
+            skillNames,
+            processingSkill,
+            maybePrimary,
+            combatSkills,
+            monstersPlus,
+            objectsPlus,
+            chunksPlus,
+            itemsPlus,
+            mixPlus,
+            npcsPlus,
+            tasksPlus,
+            tools,
+            elementalRunes,
+            manualTasks,
+            completedChallenges,
+            backlog,
+            rareDropNum: "1/" + rules['Rare Drop Amount'],
+            universalPrimary,
+            elementalStaves,
+            rangedItems,
+            boneItems,
+            highestCurrent,
+            dropTables,
+            possibleAreas,
+            randomLoot,
+            magicTools,
+            bossLogs,
+            bossMonsters,
+            minigameShops,
+            manualEquipment,
+            checkedChallenges,
+            backloggedSources,
+            altChallenges,
+            manualMonsters,
+            slayerLocked,
+            passiveSkill,
+            f2pSkills,
+            assignedXpRewards,
+            isDiary2Tier: mid === diary2Tier,
+            manualAreas,
+            secondaryPrimaryNum: "1/" + rules['Secondary Primary Amount'],
+            constructionLocked,
+            isOnlyManualAreas: mid === manualAreasOnly,
+            manualSections: tempSections,
+            optOutSections: settings['optOutSections'],
+            optOutSectionsWater: settings['optOutSectionsWater'],
+            maxSkill,
+            userTasks,
+            manualPrimary,
+            updateLevel
+        });
         workersOut['current'] = true;
         workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
     }
@@ -3927,10 +3984,10 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.46");
-let myWorker2 = new Worker("./worker.js?v=6.9.46");
+let myWorker = new Worker("./worker.js?v=6.9.47");
+let myWorker2 = new Worker("./worker.js?v=6.9.47");
 let workerOnMessage = function(e) {
-    if (e.data[0] === 'reload') {
+    if (e.data.type === 'reload') {
         window.location.reload();
     }
     if (lastUpdated + 200000 < Date.now() && !hasUpdate) {
@@ -3961,74 +4018,81 @@ let workerOnMessage = function(e) {
             });
         });
     }
-    if (e.data[0] === 'error') {
+    if (e.data.type === 'error') {
+        let { err } = e.data;
         $('.panel-active > .calculating > .inner-loading-bar').css('background-color', 'red');
         $('.panel-active > .outer-loading-bar').css('color', 'yellow');
         $('.loading-bar-text').css('color', 'yellow').text('Error');
         $('.panel-active > .calculating').css('color', 'red');
         $('.panel-active > .calculating > i').removeClass('fa-spin');
-        logError(e.data[1].toString() + ';' + e.data[1].stack);
-        throw e.data[1];
-    } else if (e.data[0] === 'initial-data') {
-        baseChunkData = e.data[1];
+        logError(err.toString() + ';' + err.stack);
+        throw err;
+    } else if (e.data.type === 'initial-data') {
+        ({ baseChunkData } = e.data);
         onlyInitialData = true;
-    } else if (!Array.isArray(e.data)) {
+    } else if (e.data.type === 'loading-update') {
+        let { percentage } = e.data;
         if (!!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).length >= 100) {
-            let barVal = parseInt(e.data) > 100 ? '94%' : e.data;
+            let barVal = parseInt(percentage) > 100 ? '94%' : percentage;
             $('.panel-active > .calculating > .inner-loading-bar').css('width', barVal);
         }
     } else {
         workerOut--;
         workerOut < 0 && (workerOut = 0);
-        if (e.data[0] === 'current') {
+        if (e.data.type === 'current') {
             workerOut = 0;
         }
-        chunkInfo = e.data[3];
-        if (e.data[0] === 'future') {
+        ({ chunkInfo } = e.data);
+        if (e.data.type === 'future') {
             if (workersOut['future'] === infoLockedId) {
-                futureChunkData = e.data[2];
-                futureUnlockedSections = e.data[15];
+                ({
+                    baseChunkData: futureChunkData,
+                    unlockedSections: futureUnlockedSections
+                } = e.data);
                 futurePossibleAreas = {};
-                Object.keys(e.data[12]).filter(area => { return e.data[12][area] === true }).forEach((area) => {
+                Object.keys(savedChunks).filter(area => { return savedChunks[area] === true }).forEach((area) => {
                     futurePossibleAreas[area] = true;
                 });
-                let [challengeStr, challengeStrFormatted] = calcFutureChallenges2(e.data[1], e.data[2], e.data[7]);
+                let [challengeStr, challengeStrFormatted] = calcFutureChallenges2(e.data.globalValids, e.data.baseChunkData, e.data.highestOverall);
                 expandChallengeStr = challengeStrFormatted.replaceAll('No new chunk tasks', 'No potential chunk tasks');
                 $('.panel-challenges').html(challengeStr || 'None');
                 $('.expand').show();
             }
             workersOut['future'] = false;
             workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
-        } else if (e.data[0] === 'current') {
+        } else if (e.data.type === 'current') {
             workersOut['current'] = false;
             workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
-            if (settings['newTasks'] && chunkJustRolled) {
-                openNewTasksModal(calcFutureChallenges2(e.data[1], e.data[2], e.data[7])[1].replaceAll(", 'future'", ", ''"));
-            }
-            globalValids = e.data[1];
-            baseChunkData = e.data[2];
-            onlyInitialData = false;
-            highestCurrent = e.data[4];
-            questPointTotal = e.data[6];
-            highestOverall = e.data[7];
-            dropRatesGlobal = e.data[8];
-            questProgress = e.data[9];
-            diaryProgress = e.data[10];
-            skillQuestXp = e.data[11];
-            savedChunks = e.data[12];
-            dropTablesGlobal = e.data[13];
-            bestEquipmentAltsGlobal = e.data[14];
-            unlockedSections = e.data[15];
-            combatPointTotal = e.data[16];
-            highestOverallCompleted = e.data[17];
-            bisUpgrades = e.data[18];
-            bankMemoryFormat = e.data[19];
-            globalValidsBoosts = e.data[20];
             possibleAreas = {};
-            Object.keys(e.data[12]).filter(area => { return e.data[12][area] === true }).forEach((area) => {
+            onlyInitialData = false;
+            ({
+                globalValids,
+                baseChunkData,
+                highestCurrent,
+                tempChallengeArrSaved,
+                questPointTotal,
+                highestOverall,
+                dropRatesGlobal,
+                questProgress,
+                diaryProgress,
+                skillQuestXp,
+                savedChunks,
+                dropTablesGlobal,
+                bestEquipmentAltsGlobal,
+                unlockedSections,
+                combatPointTotal,
+                highestOverallCompleted,
+                bisUpgrades,
+                bankMemoryFormat,
+                globalValidsBoosts,
+                globalEveryDropAltMap
+            } = e.data);
+            if (settings['newTasks'] && chunkJustRolled) {
+                openNewTasksModal(calcFutureChallenges2(globalValids, baseChunkData, highestOverall)[1].replaceAll(", 'future'", ", ''"));
+            }
+            Object.keys(savedChunks).filter(area => { return savedChunks[area] === true }).forEach((area) => {
                 possibleAreas[area] = true;
             });
-            tempChallengeArrSaved = e.data[5];
             numClueTasks = {
                 'beginner': 0,
                 'easy': 0,
@@ -4101,7 +4165,7 @@ let workerOnMessage = function(e) {
                 }
             });
             if (!tempChunks['unlocked'] || Object.keys(tempChunks['unlocked']).length < 100) {
-                calcCurrentChallenges2(e.data[5]);
+                calcCurrentChallenges2(tempChallengeArrSaved);
             } else {
                 $('.panel-active.calculating > i').remove();
                 $('.panel-active > .calculating').removeClass('outer-loading-bar').html(`<div class='noscroll display-button' onclick='calcCurrentChallenges2()'>Show New Tasks</div>`);
@@ -6508,7 +6572,6 @@ let calcCurrentChallenges2 = function(tempChallengeArr) {
     !tempChallengeArr && (tempChallengeArr = tempChallengeArrSaved);
     listOfTasksPlugin = setupCurrentChallenges(tempChallengeArr);
     setData();
-    settings['generatePluginData'] && createPluginOutput();
 };
 
 // Sets up data for displaying
@@ -6659,7 +6722,13 @@ let setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
                 activeTasks['Extra'][challenge] = chunkInfo['challenges']['Extra'][challenge]['Label'];
                 subCheckboxNames[`AllShops-${challenge.split(':')[0].replaceAll(/'/g, '').replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase().replaceAll('(', '').replaceAll(')', '').replaceAll("'", '').replaceAll('!', '').replaceAll(/,/g, '')}`][challenge] = true;
             } else {
-                challengeArr.push(`<div class="challenge extra-challenge noscroll clickable ${'Extra-' + challenge.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}" onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', 'Extra', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', '${encodeRFC5987ValueChars(challenge)}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge]['Label'] + ']</b> ') : '')} <span class="inner noscroll">${challenge.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(challenge.split('~')[1].split('|').join(''))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${challenge.split('~')[2]}</span></span></label></span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu('${encodeRFC5987ValueChars(challenge)}', 'Extra')"><i class="fa-solid fa-sliders-h noscroll"></i></span></div>`);
+                let hasAlts = false;
+                if (!!chunkInfo['challenges']['Extra'][challenge] && chunkInfo['challenges']['Extra'][challenge]['Label'] === 'Every Drop') {
+                    if (!!altChallenges['Extra'] && !!altChallenges['Extra']['Every Drop ' + challenge.split('|')[1]] && altChallenges['Extra']['Every Drop ' + challenge.split('|')[1]] !== challenge) return;
+                    if ((!altChallenges['Extra'] || !altChallenges['Extra']['Every Drop ' + challenge.split('|')[1]]) && globalEveryDropAltMap[challenge.split('|')[1]].indexOf(challenge) !== 0) return;
+                    hasAlts = globalEveryDropAltMap[challenge.split('|')[1]].length > 1;
+                }
+                challengeArr.push(`<div class="challenge extra-challenge noscroll clickable ${'Extra-' + challenge.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-challenge'} ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) && 'hide-backlog'} ${!activeSubTabs['extra'] ? 'stay-hidden' : ''}" onclick="showDetails('${encodeRFC5987ValueChars(challenge)}', 'Extra', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges['Extra'] && !!checkedChallenges['Extra'][challenge]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('Extra', '${encodeRFC5987ValueChars(challenge)}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll">${(!!chunkInfo['challenges']['Extra'][challenge] ? ('<b class="noscroll">[' + chunkInfo['challenges']['Extra'][challenge]['Label'] + ']</b> ') : '')} <span class="inner noscroll">${challenge.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl(challenge.split('~')[1].split('|').join(''))}" target="_blank">${challenge.split('~')[1].split('|').join('')}</a>${challenge.split('~')[2]}</span></span></label></span> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu('${encodeRFC5987ValueChars(challenge)}', 'Extra', ${hasAlts})"><i class="fa-solid fa-sliders-h noscroll">${hasAlts ? `<i class="fa-solid fa-star burger-star noscroll"></i>` : ''}</i></span></div>`);
                 listOfTasks.push({ [challenge]: 'Extra', prefix: `${(!!chunkInfo['challenges']['Extra'][challenge] ? ('[' + chunkInfo['challenges']['Extra'][challenge]['Label'] + ']') : '')}` });
                 if (!activeTasks['Extra']) {
                     activeTasks['Extra'] = {};
@@ -6910,9 +6979,64 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.46");
+    myWorker2 = new Worker("./worker.js?v=6.9.47");
     myWorker2.onmessage = workerOnMessage;
-    myWorker2.postMessage(['future', chunks, rules, chunkInfo, skillNames, processingSkill, maybePrimary, combatSkills, monstersPlus, objectsPlus, chunksPlus, itemsPlus, mixPlus, npcsPlus, tasksPlus, tools, elementalRunes, manualTasks, completedChallenges, backlog, "1/" + rules['Rare Drop Amount'], universalPrimary, elementalStaves, rangedItems, boneItems, highestCurrent, dropTables, possibleAreas, randomLoot, magicTools, bossLogs, bossMonsters, minigameShops, manualEquipment, checkedChallenges, backloggedSources, altChallenges, manualMonsters, slayerLocked, passiveSkill, f2pSkills, assignedXpRewards, mid === diary2Tier, manualAreas, "1/" + rules['Secondary Primary Amount'], constructionLocked, mid === manualAreasOnly, tempSections, settings['optOutSections'], settings['optOutSectionsWater'], maxSkill, userTasks, manualPrimary, updateLevel]);
+    myWorker2.postMessage({
+        type: 'future',
+        chunks,
+        rules,
+        chunkInfo,
+        skillNames,
+        processingSkill,
+        maybePrimary,
+        combatSkills,
+        monstersPlus,
+        objectsPlus,
+        chunksPlus,
+        itemsPlus,
+        mixPlus,
+        npcsPlus,
+        tasksPlus,
+        tools,
+        elementalRunes,
+        manualTasks,
+        completedChallenges,
+        backlog,
+        rareDropNum: "1/" + rules['Rare Drop Amount'],
+        universalPrimary,
+        elementalStaves,
+        rangedItems,
+        boneItems,
+        highestCurrent,
+        dropTables,
+        possibleAreas,
+        randomLoot,
+        magicTools,
+        bossLogs,
+        bossMonsters,
+        minigameShops,
+        manualEquipment,
+        checkedChallenges,
+        backloggedSources,
+        altChallenges,
+        manualMonsters,
+        slayerLocked,
+        passiveSkill,
+        f2pSkills,
+        assignedXpRewards,
+        isDiary2Tier: mid === diary2Tier,
+        manualAreas,
+        secondaryPrimaryNum: "1/" + rules['Secondary Primary Amount'],
+        constructionLocked,
+        isOnlyManualAreas: mid === manualAreasOnly,
+        manualSections: tempSections,
+        optOutSections: settings['optOutSections'],
+        optOutSectionsWater: settings['optOutSectionsWater'],
+        maxSkill,
+        userTasks,
+        manualPrimary,
+        updateLevel
+    });
     workersOut['future'] = infoLockedId;
     workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
 }
@@ -10219,6 +10343,7 @@ let checkOffAllTask = function(skill, task) {
     $('.methods-topbar').html(`${skill} Tasks <span class='noscroll ${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > completedNum ? 'yellow' : 'green'}'>(${completedNum}/${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length})</span><i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeMethods()"></i>`);
     $(`.${skill}-tasks-button`).removeClass('yellow green').addClass(Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > completedNum ? 'yellow' : 'green');
     $(`.${skill}-tasks-button > span`).text(`(${completedNum}/${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length})`);
+    forceUpdatePluginOutput = true
     setData();
 }
 
@@ -11047,12 +11172,16 @@ let showAlternatives = function(challenge, skill) {
     challenge = decodeQueryParam(challenge);
     challengeAltsModalOpen = true;
     $('#alts-data').empty();
-    !!globalValids[skill] && Object.keys(globalValids[skill]).filter(chal => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(chal)).forEach((chal) => {
+    !!globalValids[skill] && Object.keys(globalValids[skill]).filter(chal => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(chal)).sort().forEach((chal) => {
         if (skill === 'BiS' && globalValids[skill][chal] === globalValids[skill][challenge]) {
             $('#alts-data').append(`<div class="alt-challenge noscroll ${skill + '-alt-challenge'}"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" ${(!!highestOverall && Object.values(highestOverall).map(function(y) { return y.toLowerCase() }).includes(chal.split('|')[1].toLowerCase())) ? "checked" : ''} class='noscroll' onclick="checkOffAltChallenge('${skill}', '${encodeRFC5987ValueChars(chal)}', '${encodeRFC5987ValueChars(challenge)}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll"><span class="inner noscroll">${skill}</b>: ${chal.split('~')[0]} <a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((chal.split('|')[1]))}" target="_blank">${chal.split('~')[1].split('|').join('')}</a> ${chal.split('~')[2]}</span></span></label></div>`);
         } else if (skill !== 'Quest' && skill !== 'Diary' && skill !== 'Extra') {
             if ((globalValids[skill][chal] - (globalValidsBoosts.hasOwnProperty(skill) && globalValidsBoosts[skill].hasOwnProperty(chal) ? globalValidsBoosts[skill][chal] : 0)) === (globalValids[skill][challenge] - (globalValidsBoosts.hasOwnProperty(skill) && globalValidsBoosts[skill].hasOwnProperty(challenge) ? globalValidsBoosts[skill][challenge] : 0)) && (!backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(chal))) {
                 $('#alts-data').append(`<div class="alt-challenge noscroll ${skill + '-alt-challenge'}"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" ${(chal === challenge) ? "checked" : ''} class='noscroll' onclick="checkOffAltChallenge('${skill}', '${encodeRFC5987ValueChars(chal)}', '${encodeRFC5987ValueChars(challenge)}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll"><span class="inner noscroll">${skill}</b>: ${chal.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((chal.split('|')[1]))}" target="_blank">${chal.split('~')[1].split('|').join('')}</a>${chal.split('~')[2]}</span></span></label></div>`);
+            }
+        } else if (skill === 'Extra' && !!chunkInfo['challenges']['Extra'][challenge] && chunkInfo['challenges']['Extra'][challenge]['Label'] === 'Every Drop') {
+            if (globalEveryDropAltMap[challenge.split('|')[1]].includes(chal)) {
+                $('#alts-data').append(`<div class="alt-challenge noscroll ${skill + '-alt-challenge'}"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" ${(chal === challenge) ? "checked" : ''} class='noscroll' onclick="checkOffAltChallenge('${skill}', '${encodeRFC5987ValueChars(chal)}', '${encodeRFC5987ValueChars(challenge)}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll"><span class="inner noscroll">${'Other Tasks'}</b>: ${chal.split('~')[0]}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((chal.split('|')[1]))}" target="_blank">${chal.split('~')[1].split('|').join('')}</a>${chal.split('~')[2]}</span></span></label></div>`);
             }
         } else if (globalValids[skill][chal] === globalValids[skill][challenge]) {
             $('#alts-data').empty();
@@ -11078,9 +11207,12 @@ let checkOffAltChallenge = function(skill, chal, originalChallenge) {
         !!globalValids[skill][chal] && globalValids[skill][chal].split(' BiS ')[0].split('/​').forEach((bit) => {
             altChallenges[skill][bit + ' BiS ' + globalValids[skill][chal].split(' BiS ')[1]] = chal;
         });
+    } else if (skill === 'Extra' && !!chunkInfo['challenges']['Extra'][originalChallenge] && chunkInfo['challenges']['Extra'][originalChallenge]['Label'] === 'Every Drop') {
+        altChallenges[skill]['Every Drop ' + originalChallenge.split('|')[1]] = chal;
     } else {
         !!chunkInfo['challenges'][skill][originalChallenge] && (altChallenges[skill][chunkInfo['challenges'][skill][originalChallenge]['Level'] - (globalValidsBoosts.hasOwnProperty(skill) && globalValidsBoosts[skill].hasOwnProperty(originalChallenge) ? globalValidsBoosts[skill][originalChallenge] : 0)] = chal);
     }
+    forceUpdatePluginOutput = true;
     setupCurrentChallenges(tempChallengeArrSaved, false, true);
     setData();
 }
@@ -12194,6 +12326,7 @@ let checkOffChallenge = function(skill, line, skip) {
         if (!skip) {
             $('.panel-active .challenge:has(input:checked)').addClass('hide-backlog');
             $('.panel-active .challenge:not(:has(input:checked))').removeClass('hide-backlog');
+            forceUpdatePluginOutput = true;
             setupCurrentChallenges(tempChallengeArrSaved, true);
             changeChallengeColor();
             setData();
@@ -13322,10 +13455,9 @@ let createPluginOutput = function() {
             pluginOutput.push(rowObj);
         }
     });
-    listOfTasksSaved.sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0]);
-    listOfTasksPlugin.sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0]);
-    if (diff(listOfTasksSaved, listOfTasksPlugin) && firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.uid) {
+    if ((diff([...listOfTasksSaved].sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0]), [...listOfTasksPlugin].sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0])) || forceUpdatePluginOutput) && firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.uid) {
         listOfTasksSaved = JSON.parse(JSON.stringify(listOfTasksPlugin));
+        forceUpdatePluginOutput = false;
         const userRef = firebase.storage().ref(`pluginOutputs/${firebase.auth().currentUser.uid}.json`);
         userRef.putString(JSON.stringify(pluginOutput), 'raw', { contentType: 'application/json' });
     }
@@ -13357,6 +13489,7 @@ let setData = function() {
     if (onTestServer || testMode || recentlyTestMode || !signedIn) {
         return;
     }
+    settings['generatePluginData'] && createPluginOutput();
     Object.keys(rules).forEach((rule) => {
         if (rules[rule] === undefined) {
             rules[rule] = false;
