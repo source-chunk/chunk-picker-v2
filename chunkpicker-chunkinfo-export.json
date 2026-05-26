@@ -8658,6 +8658,17 @@
 				"Primary": true,
 				"Priority": 10007
 			},
+			"Build a ~|Bosun's workbench|~": {
+				"Chunks": ["8234-1"],
+				"Items": ["AnyBoat[+]", "Camphor plank*", "Adamantite nails*", "Lead bar*", "Bosun's workbench schematic"],
+				"Level": 54,
+				"NotOtherskillPrimary": true,
+				"Skills": {
+					"Sailing": 63
+				},
+				"Primary": true,
+				"Priority": 10007
+			},
 			"Build a ~|wooden mast and linen sails|~": {
 				"Chunks": ["8234-1"],
 				"Items": ["AnyBoat[+]", "Logs*", "Bronze nails*", "Bolt of linen*"],
@@ -8931,6 +8942,17 @@
 				},
 				"Primary": true,
 				"Priority": 10018
+			},
+			"Apply a ~|sail colour|~ to a sail": {
+				"Chunks": ["8234-1"],
+				"Items": ["AnyBoat[+]", "SailsDye[+]"],
+				"Level": 27,
+				"NotOtherskillPrimary": true,
+				"Skills": {
+					"Sailing": 41
+				},
+				"Primary": true,
+				"Priority": 10019
 			},
 			"Build a ~|basic cargo hold|~": {
 				"Chunks": ["8234-1"],
@@ -10469,6 +10491,7 @@
 				"ManualNonProcessing": true
 			},
 			"Cut up a ~|raw swordtip squid|~": {
+				"Category": ["Fish Offcuts Valid Processing"],
 				"Items": ["Knife", "Raw swordtip squid*"],
 				"Level": 1,
 				"Output": "Swordtip squid loot",
@@ -10476,7 +10499,17 @@
 				"Priority": 28,
 				"NoBoost": true
 			},
+			"Cut up a ~|raw swordtip squid|~ (alt)": {
+				"Items": ["Knife", "Raw swordtip squid*"],
+				"Level": 1,
+				"Output": "Swordtip squid loot",
+				"Primary": true,
+				"Priority": 128,
+				"NoBoost": true,
+				"ManualNonProcessing": true
+			},
 			"Cut up a ~|raw jumbo squid|~": {
+				"Category": ["Fish Offcuts Valid Processing"],
 				"Items": ["Knife", "Raw jumbo squid*"],
 				"Level": 1,
 				"Output": "Jumbo squid loot",
@@ -10484,7 +10517,17 @@
 				"Priority": 29,
 				"NoBoost": true
 			},
+			"Cut up a ~|raw jumbo squid|~ (alt)": {
+				"Items": ["Knife", "Raw jumbo squid*"],
+				"Level": 1,
+				"Output": "Jumbo squid loot",
+				"Primary": true,
+				"Priority": 129,
+				"NoBoost": true,
+				"ManualNonProcessing": true
+			},
 			"Cut up a ~|raw haddock|~": {
+				"Category": ["Fish Offcuts Valid Processing"],
 				"Items": ["Knife", "Raw haddock*"],
 				"Level": 1,
 				"Output": "Haddock loot",
@@ -10492,7 +10535,17 @@
 				"Priority": 30,
 				"NoBoost": true
 			},
+			"Cut up a ~|raw haddock|~ (alt)": {
+				"Items": ["Knife", "Raw haddock*"],
+				"Level": 1,
+				"Output": "Haddock loot",
+				"Primary": true,
+				"Priority": 130,
+				"NoBoost": true,
+				"ManualNonProcessing": true
+			},
 			"Cut up a ~|raw yellowfin|~": {
+				"Category": ["Fish Offcuts Valid Processing"],
 				"Items": ["Knife", "Raw yellowfin*"],
 				"Level": 1,
 				"Output": "Yellowfin loot",
@@ -10500,13 +10553,32 @@
 				"Priority": 31,
 				"NoBoost": true
 			},
+			"Cut up a ~|raw yellowfin|~ (alt)": {
+				"Items": ["Knife", "Raw yellowfin*"],
+				"Level": 1,
+				"Output": "Yellowfin loot",
+				"Primary": true,
+				"Priority": 131,
+				"NoBoost": true,
+				"ManualNonProcessing": true
+			},
 			"Cut up a ~|raw marlin|~": {
+				"Category": ["Fish Offcuts Valid Processing"],
 				"Items": ["Knife", "Raw marlin*"],
 				"Level": 1,
 				"Output": "Marlin loot",
 				"Primary": true,
 				"Priority": 32,
 				"NoBoost": true
+			},
+			"Cut up a ~|raw marlin|~ (alt)": {
+				"Items": ["Knife", "Raw marlin*"],
+				"Level": 1,
+				"Output": "Marlin loot",
+				"Primary": true,
+				"Priority": 132,
+				"NoBoost": true,
+				"ManualNonProcessing": true
 			},
 			"Cook a ~|cooked chicken|~": {
 				"Items": ["Raw chicken*"],
@@ -11633,6 +11705,38 @@
 				},
 				"Primary": true,
 				"Priority": 99
+			},
+			"Craft a ~|gem pouch|~": {
+				"Items": ["Needle[+]", "Thread[+]*", "Bolt of linen*", "Silk*"],
+				"Level": 12,
+				"Output": "Gem pouch",
+				"Primary": true,
+				"Priority": 43,
+				"Not F2P": true
+			},
+			"Craft a ~|gem satchel|~": {
+				"Items": ["Needle[+]", "Thread[+]*", "Bolt of canvas*", "Silk*", "Gem pouch"],
+				"Level": 39,
+				"Output": "Gem satchel",
+				"Primary": true,
+				"Priority": 43,
+				"Not F2P": true
+			},
+			"Craft a ~|gem tote|~": {
+				"Items": ["Needle[+]", "Thread[+]*", "Bolt of cotton*", "Silk*", "Gem satchel"],
+				"Level": 81,
+				"Output": "Gem tote",
+				"Primary": true,
+				"Priority": 43,
+				"Not F2P": true
+			},
+			"Craft a ~|gem sack|~": {
+				"Items": ["Needle[+]", "Thread[+]*", "Gem bag", "Gem tote", "Immaculate mole skin*"],
+				"Level": 81,
+				"Output": "Gem sack",
+				"Primary": true,
+				"Priority": 43,
+				"Not F2P": true
 			},
 			"Craft an ~|unstrung lyre|~": {
 				"Items": ["Knife", "Branch*"],
@@ -27326,6 +27430,21 @@
 				"Priority": 77,
 				"Not F2P": true
 			},
+			"Mine ~|rubium rocks|~": {
+				"Items": ["Pickaxe[+]"],
+				"Objects": ["Rubium rocks"],
+				"Level": 48,
+				"Output": "Rubium splinters",
+				"Primary": true
+			},
+			"Mine a ~|rubium deposit|~": {
+				"Items": ["Pickaxe[+]"],
+				"Objects": ["Rubium deposit"],
+				"Level": 68,
+				"Priority": 1,
+				"Output": "Rubium geode",
+				"Primary": true
+			},
 			"Mine ~|soft clay rocks|~ in the Cam Torum mine": {
 				"Items": ["Pickaxe[+]"],
 				"Objects": ["Soft clay rocks"],
@@ -28298,6 +28417,19 @@
 			"Kill a runite golem*": {
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rocks",
+				"Not F2P": true
+			},
+			"Crack open a rubium geode*": {
+				"Items": ["Hammer[+]", "Chisel", "Rubium geode*"],
+				"Output": "Rubium splinters",
+				"Not F2P": true
+			},
+			"Take a chain from the crate in the hideout": {
+				"Chunks": ["Myreque hideout#Burgh De Rott Hideout"],
+				"Tasks": {
+					"~|A Taste of Hope|~ 8": "Quest"
+				},
+				"Output": "Chain",
 				"Not F2P": true
 			},
 			"Trade termites for marks of grace via amylase packs": {
@@ -30252,6 +30384,14 @@
 				"ConnectsSections": true,
 				"Not F2P": true
 			},
+			"12582-1 to 12582-5": {
+				"Sections": ["12582-1", "12582-5"],
+				"Tasks": {
+					"~|The Red Reef|~ Complete the quest": "Quest"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
 			"11569-W1 to 11313-W2": {
 				"Sections": ["11569-W1", "11313-W2"],
 				"Tasks": {
@@ -31400,6 +31540,22 @@
 				"Sections": ["9770-1", "9770-W2"],
 				"Tasks": {
 					"Use the mooring point at ~|Anglers' Retreat|~": "Sailing"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"11047-1 to 11047-W1": {
+				"Sections": ["11047-1", "11047-W1"],
+				"Tasks": {
+					"Use the mooring point at ~|Red Rock|~": "Sailing"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"11300-1 to 11300-W1": {
+				"Sections": ["11300-1", "11300-W1"],
+				"Tasks": {
+					"Use the mooring point at ~|Last Light|~": "Sailing"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -33144,6 +33300,14 @@
 					"Use the mooring point at ~|The Pandemonium|~": "Sailing"
 				},
 				"Not F2P": true
+			},
+			"Access Black Knights' Fortress with guard disguise": {
+				"Chunks": ["12086-1"],
+				"Items": ["Bronze med helm", "Iron chainbody"]
+			},
+			"Access Black Knights' Fortress with knight disguise": {
+				"Chunks": ["12086-1"],
+				"Items": ["Black full helm[+]", "Black platebody[+]", "Black legs[+]"]
 			},
 			"Slash a web": {
 				"Items": ["Web slasher[+]"]
@@ -46545,6 +46709,13 @@
 				},
 				"Not F2P": true
 			},
+			"Black Knights' Fortress#Basement": {
+				"UnlocksArea": true,
+				"Tasks": {
+					"Access Black Knights' Fortress[+]": "Nonskill"
+				},
+				"Not F2P": true
+			},
 			"Blast Furnace": {
 				"UnlocksArea": true,
 				"Not F2P": true
@@ -52941,6 +53112,32 @@
 				"NoBoost": true,
 				"NoPet": true
 			},
+			"Dock at ~|Red Rock|~": {
+				"Chunks": ["11047-W1"],
+				"Level": 52,
+				"Items": ["AnyBoat[+]"],
+				"Object": ["Buoy (Sailing)"],
+				"Primary": false,
+				"Priority": 7,
+				"Tasks": {
+					"~|The Red Reef|~ 3": "Quest"
+				},
+				"NoBoost": true,
+				"NoPet": true
+			},
+			"Dock at ~|Last Light|~": {
+				"Chunks": ["11300-W1"],
+				"Level": 52,
+				"Items": ["AnyBoat[+]"],
+				"Object": ["Buoy (Sailing)"],
+				"Primary": false,
+				"Priority": 8,
+				"Tasks": {
+					"~|The Red Reef|~ 4": "Quest"
+				},
+				"NoBoost": true,
+				"NoPet": true
+			},
 			"Dock at ~|Minotaurs' Rest|~": {
 				"Chunks": ["7728-W1"],
 				"Level": 54,
@@ -53620,6 +53817,32 @@
 				"NoBoost": true,
 				"NoPet": true
 			},
+			"Use the mooring point at ~|Red Rock|~": {
+				"Chunks": ["MooringRedRock[+]"],
+				"Level": 52,
+				"Items": ["AnyBoat[+]"],
+				"Object": ["MooringPoint[+]"],
+				"Primary": false,
+				"Priority": 17,
+				"Tasks": {
+					"~|The Red Reef|~ 3": "Quest"
+				},
+				"NoBoost": true,
+				"NoPet": true
+			},
+			"Use the mooring point at ~|Last Light|~": {
+				"Chunks": ["MooringLastLight[+]"],
+				"Level": 52,
+				"Items": ["AnyBoat[+]"],
+				"Object": ["MooringPoint[+]"],
+				"Primary": false,
+				"Priority": 18,
+				"Tasks": {
+					"~|The Red Reef|~ 4": "Quest"
+				},
+				"NoBoost": true,
+				"NoPet": true
+			},
 			"Use the mooring point at ~|Minotaurs' Rest|~": {
 				"Chunks": ["MooringMinotaursRest[+]"],
 				"Level": 54,
@@ -54253,6 +54476,14 @@
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["11816-1"],
 				"Level": 45,
+				"Primary": false,
+				"Priority": 999,
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ Sailing skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["12581-1"],
+				"Level": 52,
 				"Primary": false,
 				"Priority": 999,
 				"Not F2P": true
@@ -57192,6 +57423,14 @@
 				"Primary": true,
 				"Priority": 2
 			},
+			"Smith a ~|chain|~": {
+				"Items": ["Hammer[+]", "Steel bar*"],
+				"Level": 34,
+				"Objects": ["Anvil[+]"],
+				"Output": "Chain",
+				"Primary": true,
+				"Priority": 12
+			},
 			"Smith a ~|steel scimitar|~": {
 				"Items": ["Hammer[+]", "Steel bar*"],
 				"Level": 35,
@@ -58581,7 +58820,7 @@
 			"Smith ~|bronze keel parts|~": {
 				"Items": ["Hammer[+]", "Bronze bar*"],
 				"Level": 10,
-				"Objects": ["Anvil[+]"],
+				"Objects": ["Rusted anvil[+]"],
 				"Output": "Bronze keel parts",
 				"Primary": true,
 				"Priority": 205,
@@ -58593,7 +58832,7 @@
 			"Smith ~|large bronze keel parts|~": {
 				"Items": ["Hammer[+]", "Bronze keel parts*"],
 				"Level": 10,
-				"Objects": ["Anvil[+]"],
+				"Objects": ["Rusted anvil[+]"],
 				"Output": "Large bronze keel parts",
 				"Primary": true,
 				"Priority": 206,
@@ -58773,6 +59012,24 @@
 				},
 				"Not F2P": true
 			},
+			"Smith a ~|bronze chainshot cannonball|~": {
+				"Items": ["Hammer[+]", "Bronze cannonball*", "Chain*"],
+				"Level": 5,
+				"Objects": ["Rusted anvil[+]"],
+				"Output": "Bronze chainshot cannonball",
+				"Primary": true,
+				"Priority": 106,
+				"Not F2P": true
+			},
+			"Smith a ~|bronze incendiary cannonball|~": {
+				"Items": ["Hammer[+]", "Bronze cannonball*", "Rubium splinters*"],
+				"Level": 5,
+				"Objects": ["Rusted anvil[+]"],
+				"Output": "Bronze incendiary cannonball",
+				"Primary": true,
+				"Priority": 107,
+				"Not F2P": true
+			},
 			"Smith an ~|iron cannonball|~": {
 				"Items": ["Ammo mould", "Iron bar*"],
 				"Level": 20,
@@ -58785,6 +59042,24 @@
 				},
 				"Not F2P": true
 			},
+			"Smith an ~|iron chainshot cannonball|~": {
+				"Items": ["Hammer[+]", "Iron cannonball*", "Chain*"],
+				"Level": 20,
+				"Objects": ["Anvil[+]"],
+				"Output": "Iron chainshot cannonball",
+				"Primary": true,
+				"Priority": 106,
+				"Not F2P": true
+			},
+			"Smith an ~|iron incendiary cannonball|~": {
+				"Items": ["Hammer[+]", "Iron cannonball*", "Chain*"],
+				"Level": 20,
+				"Objects": ["Anvil[+]"],
+				"Output": "Iron incendiary cannonball",
+				"Primary": true,
+				"Priority": 107,
+				"Not F2P": true
+			},
 			"Smith a ~|steel cannonball|~": {
 				"Items": ["Ammo mould", "Steel bar*"],
 				"Level": 35,
@@ -58795,6 +59070,24 @@
 				"Tasks": {
 					"~|Dwarf Cannon|~ Complete the quest": "Quest"
 				},
+				"Not F2P": true
+			},
+			"Smith a ~|steel chainshot cannonball|~": {
+				"Items": ["Hammer[+]", "Steel cannonball*", "Chain*"],
+				"Level": 35,
+				"Objects": ["Anvil[+]"],
+				"Output": "Steel chainshot cannonball",
+				"Primary": true,
+				"Priority": 106,
+				"Not F2P": true
+			},
+			"Smith a ~|steel incendiary cannonball|~": {
+				"Items": ["Hammer[+]", "Steel cannonball*", "Chain*"],
+				"Level": 35,
+				"Objects": ["Anvil[+]"],
+				"Output": "Steel incendiary cannonball",
+				"Primary": true,
+				"Priority": 107,
 				"Not F2P": true
 			},
 			"Create a ~|granite cannonball|~": {
@@ -58817,6 +59110,24 @@
 				},
 				"Not F2P": true
 			},
+			"Smith a ~|mithril chainshot cannonball|~": {
+				"Items": ["Hammer[+]", "Mithril cannonball*", "Chain*"],
+				"Level": 55,
+				"Objects": ["Anvil[+]"],
+				"Output": "Mithril chainshot cannonball",
+				"Primary": true,
+				"Priority": 106,
+				"Not F2P": true
+			},
+			"Smith a ~|mithril incendiary cannonball|~": {
+				"Items": ["Hammer[+]", "Mithril cannonball*", "Chain*"],
+				"Level": 55,
+				"Objects": ["Anvil[+]"],
+				"Output": "Mithril incendiary cannonball",
+				"Primary": true,
+				"Priority": 107,
+				"Not F2P": true
+			},
 			"Smith an ~|adamant cannonball|~": {
 				"Items": ["Ammo mould", "Adamantite bar*"],
 				"Level": 75,
@@ -58829,6 +59140,24 @@
 				},
 				"Not F2P": true
 			},
+			"Smith an ~|adamant chainshot cannonball|~": {
+				"Items": ["Hammer[+]", "Adamant cannonball*", "Chain*"],
+				"Level": 75,
+				"Objects": ["Anvil[+]"],
+				"Output": "Adamant chainshot cannonball",
+				"Primary": true,
+				"Priority": 106,
+				"Not F2P": true
+			},
+			"Smith an ~|adamant incendiary cannonball|~": {
+				"Items": ["Hammer[+]", "Adamant cannonball*", "Chain*"],
+				"Level": 75,
+				"Objects": ["Anvil[+]"],
+				"Output": "Adamant incendiary cannonball",
+				"Primary": true,
+				"Priority": 107,
+				"Not F2P": true
+			},
 			"Smith a ~|rune cannonball|~": {
 				"Items": ["Ammo mould", "Runite bar*"],
 				"Level": 90,
@@ -58839,6 +59168,24 @@
 				"Tasks": {
 					"~|Dwarf Cannon|~ Complete the quest": "Quest"
 				},
+				"Not F2P": true
+			},
+			"Smith a ~|rune chainshot cannonball|~": {
+				"Items": ["Hammer[+]", "Rune cannonball*", "Chain*"],
+				"Level": 90,
+				"Objects": ["Anvil[+]"],
+				"Output": "Rune chainshot cannonball",
+				"Primary": true,
+				"Priority": 106,
+				"Not F2P": true
+			},
+			"Smith a ~|rune incendiary cannonball|~": {
+				"Items": ["Hammer[+]", "Rune cannonball*", "Chain*"],
+				"Level": 90,
+				"Objects": ["Anvil[+]"],
+				"Output": "Rune incendiary cannonball",
+				"Primary": true,
+				"Priority": 107,
 				"Not F2P": true
 			},
 			"Craft an ~|eternal teleport crystal|~": {
@@ -58933,6 +59280,14 @@
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["9273-1"],
 				"Level": 45,
+				"Primary": false,
+				"Priority": 999,
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ Smithing skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["12581-1"],
+				"Level": 48,
 				"Primary": false,
 				"Priority": 999,
 				"Not F2P": true
@@ -62611,10 +62966,44 @@
 				"Items": ["Celestial ring"],
 				"Not F2P": true
 			},
+			"Obtain a ~|gem sack|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Gem sack"],
+				"Priority": 1,
+				"Set": "BIS Gem Bag",
+				"Not F2P": true
+			},
 			"Obtain a ~|gem bag|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
 				"Items": ["Gem bag"],
+				"Priority": 2,
+				"Set": "BIS Gem Bag",
+				"Not F2P": true
+			},
+			"Obtain a ~|gem tote|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Gem tote"],
+				"Priority": 3,
+				"Set": "BIS Gem Bag",
+				"Not F2P": true
+			},
+			"Obtain a ~|gem satchel|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Gem satchel"],
+				"Priority": 4,
+				"Set": "BIS Gem Bag",
+				"Not F2P": true
+			},
+			"Obtain a ~|gem pouch|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Gem pouch"],
+				"Priority": 5,
+				"Set": "BIS Gem Bag",
 				"Not F2P": true
 			},
 			"Obtain a ~|coal bag|~": {
@@ -64078,6 +64467,13 @@
 				"Label": "Collection Log",
 				"Monsters": ["Giant Mole"],
 				"Items": ["Mole claw"],
+				"Not F2P": true
+			},
+			"(Giant Mole) Obtain an ~|immaculate mole skin|~": {
+				"Category": ["Collection Log", "Collection Log Bosses", "Boss"],
+				"Label": "Collection Log",
+				"Monsters": ["Giant Mole"],
+				"Items": ["Immaculate mole skin"],
 				"Not F2P": true
 			},
 			"(Grotesque Guardians) Obtain ~|noon|~": {
@@ -71617,6 +72013,12 @@
 				"Items": ["Ballistic attractor schematic"],
 				"Not F2P": true
 			},
+			"(Lost Schematics) Obtain a ~|Bosun's workbench schematic|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Bosun's workbench schematic"],
+				"Not F2P": true
+			},
 			"(Monkey Backpacks) Obtain a ~|karamja monkey|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
@@ -74468,6 +74870,27 @@
 				"Items": ["Drakan's medallion", "Slepey tablet"],
 				"Not F2P": true
 			},
+			"Unlock the Port Roberts teleport for the ~|sailors' amulet|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Objects": ["Sailors' Marker#Port Roberts"],
+				"Items": ["Sailors' amulet"],
+				"Not F2P": true
+			},
+			"Unlock the Red Rock teleport for the ~|sailors' amulet|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Objects": ["Sailors' Marker#Red Rock"],
+				"Items": ["Sailors' amulet"],
+				"Not F2P": true
+			},
+			"Unlock the Deepfin Point teleport for the ~|sailors' amulet|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Objects": ["Sailors' Marker#Deepfin Point"],
+				"Items": ["Sailors' amulet"],
+				"Not F2P": true
+			},
 			"Unlock access to the ~|Jungle Eagle|~ Lair by growing the young vine": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
@@ -75067,6 +75490,12 @@
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
 				"Items": ["Ballistic attractor schematic"],
+				"Not F2P": true
+			},
+			"Unlock the ability to build a ~|Bosun's workbench|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Items": ["Bosun's workbench schematic"],
 				"Not F2P": true
 			},
 			"Unlock access to ~|Haris|~' resource area in Corsair Cove": {
@@ -117432,6 +117861,106 @@
 				"Chunks": ["11828-1"],
 				"Not F2P": true
 			},
+			"~|The Red Reef|~ 1": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Talk to Elder Raley",
+				"NPCs": ["Elder Raley"],
+				"Tasks": {
+					"~|Troubled Tortugans|~ Complete the quest": "Quest"
+				},
+				"Skills": {
+					"Sailing": 52,
+					"Smithing": 48
+				},
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"~|The Red Reef|~ 2": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Talk to Elder Katt",
+				"NPCs": ["Elder Katt"],
+				"Tasks": {
+					"~|The Red Reef|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ 3": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Talk to Floopa inside the grove",
+				"Chunks": ["12582-2"],
+				"Tasks": {
+					"~|The Red Reef|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ 4": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Talk to the Receptionist on Red Rock, study the displays, then talk to Theodor Paxton",
+				"Chunks": ["11047-1"],
+				"Tasks": {
+					"~|The Red Reef|~ 3": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ 5": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Sink the pirate ships, then dock on the island",
+				"Chunks": ["11300-W1"],
+				"Tasks": {
+					"~|The Red Reef|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ 6": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Kill the pirates on the island",
+				"Chunks": ["11300-1"],
+				"Tasks": {
+					"~|The Red Reef|~ 5": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ 7": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Return to Theodore",
+				"NPCs": ["Theodore Paxton"],
+				"Tasks": {
+					"~|The Red Reef|~ 6": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ 8": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Board the Zenith, talk to Spencer Brentwood, then help him underwater",
+				"Chunks": ["11303"],
+				"Tasks": {
+					"~|The Red Reef|~ 7": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ 9": {
+				"BaseQuest": "The Red Reef",
+				"Description": "Return to Elder Raley and Floopa",
+				"NPCs": ["Elder Raley"],
+				"Tasks": {
+					"~|The Red Reef|~ 8": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Red Reef|~ Complete the quest": {
+				"Tasks": {
+					"~|The Red Reef|~ 9": "Quest"
+				},
+				"QuestPoints": 2,
+				"XpReward": {
+					"Sailing": 15000,
+					"Smithing": 5000
+				},
+				"BaseQuest": "The Red Reef",
+				"Reward": ["Bosun's workbench schematic"],
+				"Chunks": ["12581-1"],
+				"Not F2P": true
+			},
 			"~|Regicide|~ 1": {
 				"BaseQuest": "Regicide",
 				"Description": "Talk to King Lathas",
@@ -123890,7 +124419,7 @@
 		},
 		"4140": {
 			"Monster": {
-				"Great white shark": 1
+				"Great white shark": 2
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -123932,7 +124461,7 @@
 				"W1": {
 					"Monster": {
 						"Frigatebird": 2,
-						"Great white shark": 4
+						"Great white shark": 3
 					}
 				}
 			},
@@ -123940,7 +124469,7 @@
 		},
 		"4396": {
 			"Monster": {
-				"Great white shark": 5
+				"Great white shark": 2
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -123951,10 +124480,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"4398": {
-			"Monster": {
-				"Eagle ray": 1,
-				"Hammerhead shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Merchant shipwreck": 1
@@ -124028,7 +124553,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Frigatebird": 4,
+						"Frigatebird": 3,
 						"Pygmy kraken": 6
 					}
 				}
@@ -124068,20 +124593,10 @@
 						"Rocky outcrop (Laguna Aurorae)": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Frigatebird": 1
-					}
-				},
-				"W2": {
-					
-				},
-				"W3": {
-					
-				},
-				"W4": {
-					
-				}
+				"W1": {},
+				"W2": {},
+				"W3": {},
+				"W4": {}
 			},
 			"Nickname": "Laguna Aurorae Main"
 		},
@@ -124093,13 +124608,13 @@
 		},
 		"4653": {
 			"Monster": {
-				"Hammerhead shark": 10
+				"Hammerhead shark": 9
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"4654": {
 			"Monster": {
-				"Eagle ray": 7
+				"Eagle ray": 8
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -124313,9 +124828,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"4904": {
-			"Monster": {
-				"Albatross": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"4905": {
@@ -124323,7 +124835,7 @@
 		},
 		"4906": {
 			"Monster": {
-				"Pygmy kraken": 7
+				"Pygmy kraken": 6
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -124351,9 +124863,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"4909": {
-			"Monster": {
-				"Hammerhead shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"4910": {
@@ -124382,11 +124891,7 @@
 						"Tree": 2
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Osprey": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Tlati Picnic Pond"
 		},
@@ -124899,15 +125404,9 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"5162": {
-			"Monster": {
-				"Great white shark": 2
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"5163": {
-			"Monster": {
-				"Pygmy kraken": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"5164": {
@@ -125543,14 +126042,11 @@
 		},
 		"5416": {
 			"Monster": {
-				"Spined kraken": 2
+				"Spined kraken": 1
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"5417": {
-			"Monster": {
-				"Eagle ray": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Haddock shoal": 1
@@ -125566,10 +126062,6 @@
 			}
 		},
 		"5419": {
-			"Monster": {
-				"Great white shark": 2,
-				"Hammerhead shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"5420": {
@@ -125619,12 +126111,7 @@
 						"Steamforge brew": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Butterfly ray": 1,
-						"Hammerhead shark": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Mistrock Center"
 		},
@@ -126134,11 +126621,7 @@
 						"Dead tree": 5
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Osprey": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Lacerta Falls"
 		},
@@ -126397,7 +126880,7 @@
 		},
 		"5673": {
 			"Monster": {
-				"Eagle ray": 13
+				"Eagle ray": 14
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -126412,7 +126895,7 @@
 		},
 		"5675": {
 			"Monster": {
-				"Hammerhead shark": 3
+				"Hammerhead shark": 2
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -126450,7 +126933,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Hammerhead shark": 13
+						"Hammerhead shark": 12
 					},
 					"Object": {
 						"Sealed crate": 1
@@ -126610,11 +127093,7 @@
 				"2": {
 					
 				},
-				"W1": {
-					"Monster": {
-						"Dolphin": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Black Jaguar Peninsula"
 		},
@@ -126832,17 +127311,13 @@
 						"Potato": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Bull shark": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Auburnvale East"
 		},
 		"5685": {
 			"Monster": {
-				"Osprey": 4
+				"Osprey": 5
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -127267,9 +127742,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"5928": {
-			"Monster": {
-				"Eagle ray": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Haddock shoal": 1
@@ -127277,7 +127749,6 @@
 		},
 		"5929": {
 			"Monster": {
-				"Eagle ray": 1,
 				"Great white shark": 6
 			},
 			"Nickname": "Ocean Chunk"
@@ -127293,8 +127764,7 @@
 		},
 		"5931": {
 			"Monster": {
-				"Hammerhead shark": 1,
-				"Pygmy kraken": 1
+				"Hammerhead shark": 1
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -127303,7 +127773,7 @@
 		},
 		"5932": {
 			"Monster": {
-				"Hammerhead shark": 3
+				"Hammerhead shark": 1
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -127389,9 +127859,6 @@
 					
 				},
 				"W1": {
-					"Monster": {
-						"Dolphin": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1,
 						"Giant krill shoal": 1
@@ -128064,7 +128531,7 @@
 		},
 		"6185": {
 			"Monster": {
-				"Great white shark": 2
+				"Great white shark": 1
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -128100,9 +128567,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Tiger shark": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1,
 						"Sealed crate": 1
@@ -128114,7 +128578,7 @@
 		},
 		"6188": {
 			"Monster": {
-				"Tiger shark": 5
+				"Tiger shark": 4
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -128415,9 +128879,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Bull shark": 1
-					},
 					"Object": {
 						"Giant krill shoal": 1,
 						"Small shipwreck": 3
@@ -128921,9 +129382,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"6440": {
-			"Monster": {
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Yellowfin shoal": 1
@@ -128939,9 +129397,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"6443": {
-			"Monster": {
-				"Tiger shark": 2
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"6444": {
@@ -129964,9 +130419,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"6697": {
-			"Monster": {
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Yellowfin shoal": 1
@@ -129983,7 +130435,7 @@
 		},
 		"6700": {
 			"Monster": {
-				"Tiger shark": 3
+				"Tiger shark": 2
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -130362,9 +130814,6 @@
 			"Nickname": "Twilight Temple North"
 		},
 		"6708": {
-			"Monster": {
-				"Bull shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
 				"Gloria Kebbit-Monkfish": 1
@@ -131078,16 +131527,9 @@
 			}
 		},
 		"6955": {
-			"Monster": {
-				"Eagle ray": 2,
-				"Spined kraken": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"6956": {
-			"Monster": {
-				"Eagle ray": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Pirate shipwreck": 1,
@@ -131110,9 +131552,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Osprey": 1
-					},
 					"NPC": {
 						"Meaty Aura Logist": 1
 					}
@@ -131159,11 +131598,7 @@
 						"medium": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Osprey": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Stonecutter Outpost"
 		},
@@ -131390,14 +131825,13 @@
 		},
 		"6963": {
 			"Monster": {
-				"Hammerhead shark": 1,
-				"Osprey": 4
+				"Osprey": 3
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"6964": {
 			"Monster": {
-				"Hammerhead shark": 7
+				"Hammerhead shark": 6
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -131835,9 +132269,6 @@
 			}
 		},
 		"6975": {
-			"Monster": {
-				"Narwhal": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Fremennik shipwreck": 2
@@ -132037,9 +132468,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7203": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7204": {
@@ -132065,9 +132493,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7208": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7209": {
@@ -132081,7 +132506,7 @@
 		},
 		"7211": {
 			"Monster": {
-				"Eagle ray": 8
+				"Eagle ray": 11
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -132091,7 +132516,7 @@
 		},
 		"7212": {
 			"Monster": {
-				"Eagle ray": 5
+				"Eagle ray": 2
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -132102,7 +132527,7 @@
 		},
 		"7213": {
 			"Monster": {
-				"Osprey": 3
+				"Osprey": 2
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -132111,7 +132536,7 @@
 		},
 		"7214": {
 			"Monster": {
-				"Osprey": 8
+				"Osprey": 10
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -132133,11 +132558,7 @@
 						"Seaweed": 8
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Bull shark": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Colosseum South Shore"
 		},
@@ -132544,9 +132965,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Osprey": 1
-					},
 					"Object": {
 						"Broken crane (Sea charting)": 1
 					}
@@ -132598,14 +133016,11 @@
 		},
 		"7231": {
 			"Monster": {
-				"Narwhal": 9
+				"Narwhal": 10
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7232": {
-			"Monster": {
-				"Narwhal": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Fremennik shipwreck": 2
@@ -132809,9 +133224,6 @@
 			}
 		},
 		"7458": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Merchant shipwreck": 1
@@ -132833,9 +133245,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7462": {
-			"Monster": {
-				"Dolphin": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
 				"Meaty Aura Logist": 1
@@ -132851,17 +133260,13 @@
 						"Large shipwreck": 6
 					}
 				},
-				"W2": {
-					"Monster": {
-						"Dolphin": 1
-					}
-				}
+				"W2": {}
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7464": {
 			"Monster": {
-				"Great white shark": 12
+				"Great white shark": 13
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -132888,8 +133293,7 @@
 		},
 		"7469": {
 			"Monster": {
-				"Dolphin": 5,
-				"Osprey": 1
+				"Dolphin": 5
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -132929,8 +133333,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Bull shark": 1,
-						"Osprey": 4
+						"Osprey": 5
 					},
 					"Object": {
 						"Buoy (Sailing)": 1
@@ -132960,11 +133363,7 @@
 						"Tree": 2
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Bull shark": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Colosseum Rear Dock"
 		},
@@ -132979,9 +133378,6 @@
 			}
 		},
 		"7474": {
-			"Monster": {
-				"Pygmy kraken": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Halibut shoal": 1
@@ -133040,7 +133436,7 @@
 						"Poll booth": 1,
 						"Port roberts jail visitors book": 1,
 						"Range": 3,
-						"Sailors' Marker": 1,
+						"Sailors' Marker#Port Roberts": 1,
 						"Salvaging station": 1,
 						"Shipwrights' Workbench": 1,
 						"Silk stall": 1,
@@ -133103,7 +133499,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Osprey": 12,
+						"Osprey": 10,
 						"Tern": 2
 					},
 					"Object": {
@@ -133118,7 +133514,7 @@
 				"1": {},
 				"W1": {
 					"Monster": {
-						"Tern": 16
+						"Tern": 18
 					},
 					"NPC": {
 						"Meaty Aura Logist": 1
@@ -133148,8 +133544,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Bull shark": 7,
-						"Tern": 1
+						"Bull shark": 10
 					},
 					"Object": {
 						"Sealed crate": 1
@@ -133172,7 +133567,7 @@
 		},
 		"7483": {
 			"Monster": {
-				"Osprey": 18
+				"Osprey": 20
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -133187,11 +133582,7 @@
 		},
 		"7485": {
 			"Sections": {
-				"W1": {
-					"Monster": {
-						"Orca": 1
-					}
-				},
+				"W1": {},
 				"W2": {
 					"Monster": {
 						"Orca": 3
@@ -133216,9 +133607,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7487": {
-			"Monster": {
-				"Narwhal": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Marlin shoal": 1,
@@ -133649,25 +134037,15 @@
 		"7719": {
 			"Sections": {
 				"W1": {
-					"Monster": {
-						"Dolphin": 1
-					},
 					"Object": {
 						"Large shipwreck": 1
 					}
 				},
-				"W2": {
-					"Monster": {
-						"Dolphin": 1
-					}
-				}
+				"W2": {}
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7720": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7721": {
@@ -133686,11 +134064,7 @@
 		"7722": {
 			"Sections": {
 				"1": {},
-				"W1": {
-					"Monster": {
-						"Manta ray (monster)": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -133733,7 +134107,7 @@
 						"Oak tree": 6,
 						"Range": 1,
 						"Salvaging station": 1,
-						"Sailors' Marker": 1,
+						"Sailors' Marker#Deepfin Point": 1,
 						"Shipwrights' Workbench": 1,
 						"Silver rocks": 5,
 						"Tin rocks": 3,
@@ -133771,9 +134145,6 @@
 			}
 		},
 		"7725": {
-			"Monster": {
-				"Dolphin": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7726": {
@@ -133786,9 +134157,6 @@
 			}
 		},
 		"7727": {
-			"Monster": {
-				"Bull shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7728": {
@@ -133817,9 +134185,6 @@
 			"Nickname": "Minotaurs' Rest"
 		},
 		"7729": {
-			"Monster": {
-				"Pygmy kraken": 3
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7730": {
@@ -133844,9 +134209,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7733": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Halibut shoal": 1,
@@ -133857,10 +134219,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7735": {
-			"Monster": {
-				"Bull shark": 1,
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7736": {
@@ -133877,7 +134235,7 @@
 		},
 		"7738": {
 			"Monster": {
-				"Great white shark": 18
+				"Great white shark": 19
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -133886,8 +134244,7 @@
 		},
 		"7739": {
 			"Monster": {
-				"Great white shark": 18,
-				"Osprey": 1
+				"Great white shark": 16
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -133944,7 +134301,7 @@
 		},
 		"7744": {
 			"Monster": {
-				"Vampyre kraken": 12
+				"Vampyre kraken": 14
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -134360,7 +134717,7 @@
 		},
 		"7972": {
 			"Monster": {
-				"Manta ray (monster)": 12
+				"Manta ray (monster)": 13
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -134388,9 +134745,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7977": {
-			"Monster": {
-				"Manta ray (monster)": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7978": {
@@ -134400,9 +134754,6 @@
 			}
 		},
 		"7979": {
-			"Monster": {
-				"Pygmy kraken": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Yellowfin shoal": 1
@@ -134421,9 +134772,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7982": {
-			"Monster": {
-				"Tiger shark": 2
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Floating eggs": 1,
@@ -134457,7 +134805,7 @@
 			"Sections": {
 				"W1": {
 					"Monster": {
-						"Armoured kraken": 12
+						"Armoured kraken": 10
 					},
 					"Object": {
 						"Halibut shoal": 1,
@@ -134469,10 +134817,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7987": {
-			"Monster": {
-				"Armoured kraken": 1,
-				"Hammerhead shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Halibut shoal": 1
@@ -134488,10 +134832,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7990": {
-			"Monster": {
-				"Great white shark": 1,
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"7991": {
@@ -134501,9 +134841,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7992": {
-			"Monster": {
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Bluefin shoal": 1
@@ -134511,7 +134848,7 @@
 		},
 		"7993": {
 			"Monster": {
-				"Pygmy kraken": 30
+				"Pygmy kraken": 40
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -134522,18 +134859,12 @@
 			}
 		},
 		"7994": {
-			"Monster": {
-				"Great white shark": 2
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Bluefin shoal": 1
 			}
 		},
 		"7995": {
-			"Monster": {
-				"Great white shark": 3
-			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
 				"Gloria Kebbit-Monkfish": 1
@@ -134565,9 +134896,6 @@
 			}
 		},
 		"8000": {
-			"Monster": {
-				"Vampyre kraken": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"8001": {
@@ -134959,9 +135287,6 @@
 			}
 		},
 		"8228": {
-			"Monster": {
-				"Manta ray (monster)": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
 				"Selina Kebbit-Monkfish": 1
@@ -135054,9 +135379,6 @@
 			"Nickname": "Shipyard"
 		},
 		"8235": {
-			"Monster": {
-				"Pygmy kraken": 2
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Jellyfish": 1
@@ -135071,7 +135393,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Pygmy kraken": 11
+						"Pygmy kraken": 10
 					}
 				}
 			},
@@ -135110,7 +135432,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Butterfly ray": 7
+						"Butterfly ray": 6
 					}
 				}
 			},
@@ -135187,11 +135509,7 @@
 		},
 		"8245": {
 			"Sections": {
-				"W1": {
-					"Monster": {
-						"Great white shark": 2
-					}
-				},
+				"W1": {},
 				"W2": {
 					"Object": {
 						"Crystal mote": 2,
@@ -135259,9 +135577,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Pygmy kraken": 1
-					},
 					"Object": {
 						"Bluefin shoal": 1,
 						"Buoy (Sailing)": 1,
@@ -135273,9 +135588,6 @@
 			"Nickname": "Buccaneers' Haven"
 		},
 		"8250": {
-			"Monster": {
-				"Armoured kraken": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Bluefin shoal": 1
@@ -135391,13 +135703,13 @@
 		},
 		"8255": {
 			"Monster": {
-				"Albatross": 6
+				"Albatross": 8
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"8256": {
 			"Monster": {
-				"Albatross": 4
+				"Albatross": 3
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -135515,9 +135827,6 @@
 			"Name": "Buccaneers' Laboratory"
 		},
 		"8480": {
-			"Monster": {
-				"Albatross": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"8481": {
@@ -135566,7 +135875,7 @@
 		},
 		"8490": {
 			"Monster": {
-				"Tiger shark": 4
+				"Tiger shark": 2
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -135595,9 +135904,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Tiger shark": 2
-					},
 					"NPC": {
 						"Meaty Aura Logist": 1
 					}
@@ -135971,9 +136277,6 @@
 		"8504": {
 			"Sections": {
 				"W1": {
-					"Monster": {
-						"Hammerhead shark": 1
-					},
 					"Object": {
 						"Bluefin shoal": 1
 					}
@@ -135991,7 +136294,7 @@
 		"8505": {
 			"Monster": {
 				"Armoured kraken": 5,
-				"Hammerhead shark": 2
+				"Hammerhead shark": 3
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -136001,7 +136304,7 @@
 		},
 		"8506": {
 			"Monster": {
-				"Armoured kraken": 9
+				"Armoured kraken": 12
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -136011,7 +136314,7 @@
 		},
 		"8507": {
 			"Monster": {
-				"Armoured kraken": 5
+				"Armoured kraken": 4
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -136399,9 +136702,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Frigatebird": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1,
 						"Sealed crate": 1
@@ -136939,7 +137239,7 @@
 			"Sections": {
 				"W1": {
 					"Monster": {
-						"Hammerhead shark": 2
+						"Hammerhead shark": 1
 					}
 				},
 				"W2": {
@@ -136965,7 +137265,7 @@
 		},
 		"8761": {
 			"Monster": {
-				"Hammerhead shark": 3
+				"Hammerhead shark": 1
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -137036,9 +137336,6 @@
 			"Nickname": "Pirates' Cove"
 		},
 		"8764": {
-			"Monster": {
-				"Armoured kraken": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Magical wards": 1,
@@ -137054,7 +137351,7 @@
 				},
 				"W2": {
 					"Monster": {
-						"Armoured kraken": 12
+						"Armoured kraken": 9
 					}
 				}
 			},
@@ -137062,13 +137359,13 @@
 		},
 		"8766": {
 			"Monster": {
-				"Armoured kraken": 2
+				"Armoured kraken": 3
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"8767": {
 			"Monster": {
-				"Narwhal": 8
+				"Narwhal": 9
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -137225,7 +137522,7 @@
 				},
 				"W2": {
 					"Monster": {
-						"Frigatebird": 2
+						"Frigatebird": 1
 					}
 				}
 			},
@@ -137728,9 +138025,6 @@
 			}
 		},
 		"9019": {
-			"Monster": {
-				"Orca": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9020": {
@@ -137774,11 +138068,7 @@
 						"Dragon bitter": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Narwhal": 1
-					}
-				},
+				"W1": {},
 				"W2": {},
 				"W3": {}
 			},
@@ -137984,9 +138274,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Dolphin": 1
-					},
 					"Object": {
 						"Bluefin shoal": 1,
 						"Buoy (Sailing)": 1
@@ -138003,9 +138290,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9253": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9254": {
@@ -138065,20 +138349,9 @@
 						"hard": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Stingray": 1
-					}
-				},
-				"W2": {
-					"Monster": {
-						"Stingray": 1
-					}
-				},
+				"W1": {},
+				"W2": {},
 				"W3": {
-					"Monster": {
-						"Stingray": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1,
 						"Sealed crate": 1
@@ -138630,9 +138903,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9278": {
-			"Monster": {
-				"Orca": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
 				"Gloria Kebbit-Monkfish": 1
@@ -138958,7 +139228,7 @@
 				"W1": {},
 				"W2": {
 					"Monster": {
-						"Veiled kraken": 13
+						"Veiled kraken": 3
 					}
 				}
 			},
@@ -138987,21 +139257,15 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9508": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9509": {
 			"Monster": {
-				"Great white shark": 10
+				"Great white shark": 11
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9510": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Sealed crate": 1
@@ -139017,18 +139281,11 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9513": {
-			"Monster": {
-				"Eagle ray": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9514": {
 			"Sections": {
-				"W1": {
-					"Monster": {
-						"Stingray": 1
-					}
-				},
+				"W1": {},
 				"W2": {}
 			},
 			"Nickname": "Ocean Chunk"
@@ -139369,7 +139626,7 @@
 		},
 		"9529": {
 			"Monster": {
-				"Spined kraken": 16
+				"Spined kraken": 15
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -139519,21 +139776,15 @@
 			}
 		},
 		"9534": {
-			"Monster": {
-				"Orca": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9535": {
 			"Monster": {
-				"Orca": 3
+				"Orca": 2
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9536": {
-			"Monster": {
-				"Albatross": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9537": {
@@ -140031,18 +140282,12 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9763": {
-			"Monster": {
-				"Eagle ray": 2
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Large shipwreck": 1
 			}
 		},
 		"9764": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9765": {
@@ -140052,9 +140297,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9766": {
-			"Monster": {
-				"Greate white shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
 				"Christina Kebbit-Monkfish": 1
@@ -140845,7 +141087,7 @@
 		},
 		"9789": {
 			"Monster": {
-				"Spined kraken": 2
+				"Spined kraken": 4
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -140871,9 +141113,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Spined kraken": 1
-					},
 					"NPC": {
 						"Meaty Aura Logist": 1
 					}
@@ -140883,13 +141122,13 @@
 		},
 		"9791": {
 			"Monster": {
-				"Albatross": 5
+				"Albatross": 7
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"9792": {
 			"Monster": {
-				"Albatross": 14
+				"Albatross": 12
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -141387,9 +141626,6 @@
 			}
 		},
 		"10021": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"10022": {
@@ -141416,7 +141652,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Frigatebird": 5
+						"Frigatebird": 3
 					},
 					"NPC": {
 						"Meaty Aura Logist": 1
@@ -141460,7 +141696,7 @@
 			"Sections": {
 				"W1": {
 					"Monster": {
-						"Pygmy kraken": 3
+						"Pygmy kraken": 2
 					}
 				},
 				"W2": {}
@@ -142408,7 +142644,7 @@
 		},
 		"10046": {
 			"Monster": {
-				"Orca": 1
+				"Orca": 2
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -142923,9 +143159,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"10275": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Large shipwreck": 1
@@ -142936,14 +143169,11 @@
 		},
 		"10277": {
 			"Monster": {
-				"Stingray": 13
+				"Stingray": 14
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"10278": {
-			"Monster": {
-				"Stingray": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"10279": {
@@ -142974,7 +143204,7 @@
 			"Sections": {
 				"W1": {
 					"Monster": {
-						"Pygmy kraken": 1
+						"Pygmy kraken": 3
 					},
 					"Object": {
 						"Sealed crate": 1
@@ -143799,7 +144029,7 @@
 		},
 		"10299": {
 			"Monster": {
-				"Albatross": 10
+				"Albatross": 9
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -143899,7 +144129,7 @@
 		},
 		"10302": {
 			"Monster": {
-				"Orca": 9
+				"Orca": 8
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -143908,7 +144138,7 @@
 		},
 		"10303": {
 			"Monster": {
-				"Orca": 7
+				"Orca": 6
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -144390,9 +144620,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"10530": {
-			"Monster": {
-				"Great white shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"10531": {
@@ -144402,10 +144629,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"10532": {
-			"Monster": {
-				"Great white shark": 1,
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"10533": {
@@ -144436,9 +144659,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Stingray": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1
 					}
@@ -144516,9 +144736,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Stingray": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1,
 						"Sealed crate": 1
@@ -144528,9 +144745,6 @@
 			"Nickname": "Void Knights' Outpost"
 		},
 		"10538": {
-			"Monster": {
-				"Stingray": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Atoll cape flag": 1
@@ -144543,9 +144757,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"10540": {
-			"Monster": {
-				"Hammerhead shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"10541": {
@@ -144597,8 +144808,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Bull shark": 2,
-						"Hammerhead shark": 1
+						"Bull shark": 1
 					}
 				}
 			},
@@ -145370,9 +145580,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Albatross": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1
 					}
@@ -145890,10 +146097,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"10786": {
-			"Monster": {
-				"Eagle ray": 1,
-				"Great white shark": 2
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"10787": {
@@ -145915,9 +146118,6 @@
 			}
 		},
 		"10789": {
-			"Monster": {
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Haddock shoal": 1
@@ -145989,7 +146189,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Stingray": 6
+						"Stingray": 4
 					}
 				}
 			},
@@ -146047,9 +146247,6 @@
 				},
 				"W1": {},
 				"W2": {
-					"Monster": {
-						"Dolphin": 1
-					},
 					"Object": {
 						"Bananaless boat": 1
 					}
@@ -146090,7 +146287,7 @@
 		},
 		"10799": {
 			"Monster": {
-				"Bull shark": 5
+				"Bull shark": 4
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -146136,7 +146333,6 @@
 				},
 				"W1": {
 					"Monster": {
-						"Mogre (Sailing)": 1,
 						"Osprey": 3
 					},
 					"Object": {
@@ -146763,23 +146959,17 @@
 			}
 		},
 		"10814": {
-			"Monster": {
-				"Armoured kraken": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Marlin shoal": 1
 			}
 		},
 		"10815": {
-			"Monster": {
-				"Narwhal": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"10816": {
 			"Monster": {
-				"Narwhal": 11
+				"Narwhal": 10
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -147288,14 +147478,11 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"11041": {
-			"Monster": {
-				"Eagle ray": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11042": {
 			"Monster": {
-				"Eagle ray": 26
+				"Eagle ray": 24
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -147312,9 +147499,6 @@
 			}
 		},
 		"11045": {
-			"Monster": {
-				"Frigatebird": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
 				"Victoria Kebbit-Monkfish": 1
@@ -147330,14 +147514,56 @@
 			}
 		},
 		"11047": {
-			"Nickname": "Red Rock",
-			"NPC": {
-				"Christina Kebbit-Monkfish": 1
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Seagull": 3
+					},
+					"NPC": {
+						"Captain Maclean": 1,
+						"Chief Engineer Greyson": 1,
+						"Port master": 1,
+						"Receptionist": 1,
+						"Sailor": 4,
+						"Shipwright Sylvia": 1,
+						"Theodore Paxton": 1,
+						"Trader Crewmember": 2,
+						"Worker": 4
+					},
+					"Object": {
+						"Bank chest": 1,
+						"Display": 4,
+						"Gangplank (Sailing)": 1,
+						"Ledger table": 1,
+						"Notice board": 1,
+						"Sailors' Marker#Red Rock": 1,
+						"Salvaging station": 1,
+						"Shipwrights' Workbench": 1
+					},
+					"Quest": {
+						"The Red Reef": "step"
+					},
+					"Shop": {
+						"Trader Stan's Trading Post": true
+					},
+					"Spawn": {
+						"Hammer": 1,
+						"Rope": 1,
+						"Saw": 1
+					}
+				},
+				"W1": {
+					"NPC": {
+						"Christina Kebbit-Monkfish": 1
+					},
+					"Object": {
+						"Buoy (Sailing)": 1,
+						"Giant krill shoal": 1,
+						"Sealed crate": 1
+					}
+				}
 			},
-			"Object": {
-				"Giant krill shoal": 1,
-				"Sealed crate": 1
-			}
+			"Nickname": "Red Rock"
 		},
 		"11048": {
 			"Nickname": "Ocean Chunk",
@@ -147346,9 +147572,6 @@
 			}
 		},
 		"11049": {
-			"Monster": {
-				"Stingray": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Giant krill shoal": 1
@@ -147554,7 +147777,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Mogre (Sailing)": 4
+						"Mogre (Sailing)": 3
 					},
 					"Object": {
 						"Map in a bottle": 1
@@ -147968,8 +148191,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Bull shark": 1,
-						"Tern": 3
+						"Tern": 2
 					},
 					"Object": {
 						"Charts in a bottle": 1,
@@ -148386,9 +148608,6 @@
 			}
 		},
 		"11072": {
-			"Monster": {
-				"Narwhal": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11073": {
@@ -148768,9 +148987,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"11298": {
-			"Monster": {
-				"Eagle ray": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11299": {
@@ -148780,18 +148996,37 @@
 			}
 		},
 		"11300": {
-			"Monster": {
-				"Albatross": 1
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Spider": 2
+					},
+					"Object": {
+						"Mooring point (scenery)": 1,
+						"Water pump": 1
+					},
+					"Quest": {
+						"The Red Reef": "step"
+					},
+					"Spawn": {
+						"Saw": 1
+					}
+				},
+				"W1": {
+					"NPC": {
+						"Meaty Aura Logist": 1
+					},
+					"Object": {
+						"Buoy (Sailing)": 1
+					},
+					"Quest": {
+						"The Red Reef": "step"
+					}
+				}
 			},
-			"Nickname": "Last Light",
-			"NPC": {
-				"Meaty Aura Logist": 1
-			}
+			"Nickname": "Last Light"
 		},
 		"11301": {
-			"Monster": {
-				"Albatross": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Haddock shoal": 1
@@ -148804,12 +149039,14 @@
 			"Monster": {
 				"Eagle ray": 3
 			},
-			"Nickname": "Ocean Chunk"
+			"Nickname": "Ocean Chunk",
+			"Quest": {
+				"The Red Reef": "step"
+			}
 		},
 		"11304": {
 			"Monster": {
-				"Eagle ray": 7,
-				"Tiger shark": 1
+				"Eagle ray": 6
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -148818,7 +149055,7 @@
 		},
 		"11305": {
 			"Monster": {
-				"Tiger Shark": 12
+				"Tiger Shark": 11
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -148832,9 +149069,6 @@
 			}
 		},
 		"11307": {
-			"Monster": {
-				"Hammerhead shark": 2
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11308": {
@@ -148878,11 +149112,7 @@
 						"hard": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Mogre (Sailing)": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Central Kharazi Jungle"
 		},
@@ -149052,11 +149282,7 @@
 					}
 				},
 				"W1": {},
-				"W2": {
-					"Monster": {
-						"Bull shark": 1
-					}
-				},
+				"W2": {},
 				"W3": {}
 			},
 			"Nickname": "Karamja Volcano"
@@ -149149,7 +149375,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Bull shark": 2
+						"Bull shark": 3
 					}
 				}
 			},
@@ -150390,9 +150616,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"11556": {
-			"Monster": {
-				"Albatross": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11557": {
@@ -150402,9 +150625,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"11558": {
-			"Monster": {
-				"Eagle ray": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11559": {
@@ -150418,13 +150638,13 @@
 		},
 		"11560": {
 			"Monster": {
-				"Eagle ray": 6
+				"Eagle ray": 7
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11561": {
 			"Monster": {
-				"Tiger shark": 4
+				"Tiger shark": 2
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -150455,8 +150675,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Osprey": 4,
-						"Tiger shark": 1
+						"Osprey": 1
 					},
 					"NPC": {
 						"Meaty Aura Logist": 1
@@ -150467,7 +150686,7 @@
 		},
 		"11563": {
 			"Monster": {
-				"Hammerhead shark": 12
+				"Hammerhead shark": 13
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -150634,11 +150853,7 @@
 					}
 				},
 				"W1": {},
-				"W2": {
-					"Monster": {
-						"Mogre (Sailing)": 1
-					}
-				},
+				"W2": {},
 				"W3": {}
 			},
 			"Nickname": "Karambwan Shore"
@@ -150699,11 +150914,7 @@
 					}
 				},
 				"2": {},
-				"W1": {
-					"Monster": {
-						"Bull shark": 1
-					}
-				},
+				"W1": {},
 				"W2": {},
 				"W3": {},
 				"W4": {}
@@ -150773,7 +150984,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Bull shark": 4
+						"Bull shark": 1
 					},
 					"NPC": {
 						"Meaty Aura Logist": 1
@@ -150869,7 +151080,7 @@
 				"4": {},
 				"W1": {
 					"Monster": {
-						"Bull shark": 5
+						"Bull shark": 2
 					}
 				}
 			},
@@ -151941,9 +152152,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Butterfly ray": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1
 					}
@@ -151953,7 +152161,7 @@
 		},
 		"11812": {
 			"Monster": {
-				"Eagle ray": 8
+				"Butterfly ray": 8
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -151993,9 +152201,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Tiger shark": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1,
 						"Giant krill shoal": 1
@@ -152012,17 +152217,13 @@
 		},
 		"11818": {
 			"Monster": {
-				"Tiger shark": 12
+				"Tiger shark": 13
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11819": {
 			"Sections": {
-				"W1": {
-					"Monster": {
-						"Tiger shark": 1
-					}
-				},
+				"W1": {},
 				"W2": {}
 			},
 			"Nickname": "Ocean Chunk"
@@ -152141,9 +152342,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Bull shark": 1,
-						"Mogre (Sailing)": 2,
-						"Tern": 1
+						"Mogre (Sailing)": 1
 					},
 					"Object": {
 						"Crashed glider (Sea charting)": 1
@@ -152181,7 +152380,7 @@
 				},
 				"W1": {
 					"Monster": {
-						"Mogre (Sailing)": 9,
+						"Mogre (Sailing)": 8,
 						"Tern": 4
 					},
 					"NPC": {
@@ -152838,9 +153037,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"11840": {
-			"Monster": {
-				"Albatross": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"11842": {
@@ -153098,9 +153294,6 @@
 			}
 		},
 		"12067": {
-			"Monster": {
-				"Spined kraken": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"12068": {
@@ -153113,9 +153306,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"12070": {
-			"Monster": {
-				"Butterfly ray": 2
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"12071": {
@@ -153152,10 +153342,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Butterfly ray": 1,
-						"Tiger shark": 2
-					},
 					"Object": {
 						"Buoy (Sailing)": 1,
 						"Sealed crate": 1
@@ -153166,7 +153352,7 @@
 		},
 		"12074": {
 			"Monster": {
-				"Hammerhead shark": 1
+				"Hammerhead shark": 2
 			},
 			"Nickname": "Ocean Chunk",
 			"NPC": {
@@ -153298,9 +153484,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Bull shark": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1,
 						"Sealed crate": 1
@@ -153313,7 +153496,7 @@
 		},
 		"12079": {
 			"Monster": {
-				"Bull shark": 7,
+				"Bull shark": 8,
 				"Tern": 3
 			},
 			"Nickname": "Ocean Chunk",
@@ -153401,9 +153584,6 @@
 					}
 				},
 				"W1": {
-					"Monster": {
-						"Dolphin": 1
-					},
 					"Object": {
 						"Buoy (Sailing)": 1
 					}
@@ -153771,7 +153951,8 @@
 			"Sections": {
 				"1": {
 					"Connect": {
-						"7491": true
+						"7491": true,
+						"12188": true
 					},
 					"Monster": {
 						"Black Knight": 16,
@@ -154542,6 +154723,15 @@
 				"Ornate Jewellery Box": 1
 			}
 		},
+		"12188": {
+			"Connect": {
+				"12086": true
+			},
+			"Monster": {
+				"Rat": 4
+			},
+			"Name": "Black Knights' Fortress#Basement"
+		},
 		"12190": {
 			"Connect": {
 				"12090": true
@@ -154623,7 +154813,7 @@
 		},
 		"12323": {
 			"Monster": {
-				"Spined kraken": 12
+				"Spined kraken": 13
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -154631,9 +154821,6 @@
 			}
 		},
 		"12324": {
-			"Monster": {
-				"Spined kraken": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"Haddock shoal": 1
@@ -154755,14 +154942,11 @@
 			}
 		},
 		"12329": {
-			"Monster": {
-				"Hammerhead shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"12330": {
 			"Monster": {
-				"Hammerhead shark": 14
+				"Hammerhead shark": 12
 			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
@@ -154772,9 +154956,6 @@
 		"12331": {
 			"Sections": {
 				"W1": {
-					"Monster": {
-						"Hammerhead shark": 1
-					},
 					"Object": {
 						"Barracuda shipwreck": 3
 					}
@@ -155813,9 +155994,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"12579": {
-			"Monster": {
-				"Spined kraken": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"12580": {
@@ -155875,6 +156053,7 @@
 						"Well": 1
 					},
 					"Quest": {
+						"The Red Reef": "first",
 						"Troubled Tortugans": "step"
 					},
 					"Spawn": {
@@ -155936,6 +156115,7 @@
 						"Rocks (The Great Conch#Town)": 2
 					},
 					"Quest": {
+						"The Red Reef": "step",
 						"Troubled Tortugans": "step"
 					},
 					"Spawn": {
@@ -155960,6 +156140,14 @@
 				"4": {
 					"Monster": {
 						"Snake": 1
+					}
+				},
+				"5": {
+					"Object": {
+						"Camphor tree": 5
+					},
+					"Quest": {
+						"The Red Reef": "step"
 					}
 				}
 			},
@@ -155995,11 +156183,10 @@
 						"Tortugan scute": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Eagle ray": 1
-					}
-				}
+				"2": {
+					
+				},
+				"W1": {}
 			},
 			"Nickname": "Great Conch Mine"
 		},
@@ -157334,9 +157521,6 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"12835": {
-			"Monster": {
-				"Frigatebird": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"12836": {
@@ -157474,6 +157658,13 @@
 						"Tortugan scute": 2
 					}
 				},
+				"2": {
+					"Object": {
+						"Bank Deposit Box": 1,
+						"Camphor tree": 3,
+						"Shrine": 1
+					}
+				},
 				"W1": {}
 			},
 			"Nickname": "Sacred Grove East"
@@ -157488,6 +157679,9 @@
 						"Fishing spot (big net, harpoon)": 1,
 						"Hole (Crab trapping)": 5
 					}
+				},
+				"2": {
+					
 				},
 				"W1": {}
 			},
@@ -157645,11 +157839,7 @@
 						"hard": 1
 					}
 				},
-				"W1": {
-					"Monster": {
-						"Osprey": 1
-					}
-				}
+				"W1": {}
 			},
 			"Nickname": "Kalphite Coast"
 		},
@@ -159053,9 +159243,6 @@
 			}
 		},
 		"13088": {
-			"Monster": {
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"13089": {
@@ -159142,9 +159329,6 @@
 			"Nickname": "Coral Nursery Dock"
 		},
 		"13095": {
-			"Monster": {
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk",
 			"Object": {
 				"The Minor Conch": 1
@@ -160729,16 +160913,9 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"13349": {
-			"Monster": {
-				"Albatross": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"13350": {
-			"Monster": {
-				"Albatross": 1,
-				"Tiger shark": 1
-			},
 			"Nickname": "Ocean Chunk"
 		},
 		"13351": {
@@ -161709,13 +161886,13 @@
 		},
 		"13605": {
 			"Monster": {
-				"Albatross": 10
+				"Albatross": 11
 			},
 			"Nickname": "Ocean Chunk"
 		},
 		"13606": {
 			"Monster": {
-				"Albatross": 3
+				"Albatross": 1
 			},
 			"Nickname": "Ocean Chunk"
 		},
@@ -166019,6 +166196,14 @@
 				"While Guthix Sleeps": "step"
 			}
 		},
+		"Black Knights' Fortress#Basement": {
+			"Connect": {
+				"12086": true
+			},
+			"Monster": {
+				"Rat": 4
+			}
+		},
 		"Blast Furnace": {
 			"Connect": {
 				"11679": true
@@ -166593,6 +166778,8 @@
 				"Coal rocks": 10,
 				"Fishing spot (lava eel)": 1,
 				"Old chest": 1,
+				"Rubium deposit": 2,
+				"Rubium rocks": 24,
 				"Runite rocks": 2
 			},
 			"Spawn": {
@@ -173496,6 +173683,8 @@
 			"MooringVoidKnightsOutpost[+]": ["10537-W1", "10537-1"],
 			"MooringPortRoberts[+]": ["7475-W1", "7475-1"],
 			"MooringAnglersRetreat[+]": ["9770-W2", "9770-1"],
+			"MooringRedRock[+]": ["11047-W1", "11047-1"],
+			"MooringLastLight[+]": ["11300-W1", "11300-1"],
 			"MooringMinotaursRest[+]": ["7728-W1", "7728-1"],
 			"MooringIsleofSouls[+]": ["9004-W1", "9004-1"],
 			"MooringIsleofBones[+]": ["10023-W1", "10023-1"],
@@ -173735,6 +173924,8 @@
 			"MooringVoidKnightsOutpost[+]": "Either side of the mooring point at Void Knights' Outpost",
 			"MooringPortRoberts[+]": "Either side of the mooring point at Port Roberts",
 			"MooringAnglersRetreat[+]": "Either side of the mooring point at Anglers' Retreat",
+			"MooringRedRock[+]": "Either side of the mooring point at Red Rock",
+			"MooringRedRock[+]": "Either side of the mooring point at Last Light",
 			"MooringMinotaursRest[+]": "Either side of the mooring point at Minotaurs' Rest",
 			"MooringIsleofBones[+]": "Either side of the mooring point at Isle of Bones",
 			"MooringLagunaAurorae[+]": "Either side of the mooring point at Laguna Aurorae",
@@ -174314,6 +174505,7 @@
 			"Wizard robes[+]": ["Blue wizard hat", "Blue wizard robe", "Wizard hat", "Black robe"],
 			"Cape[+]": ["Black cape", "Blue cape", "Green cape", "Orange cape", "Pink cape", "Purple cape", "Red cape", "Yellow cape"],
 			"Dye[+]": ["Black dye", "Blue dye", "Green dye", "Orange dye", "Pink dye", "Purple dye", "Red dye", "Yellow dye"],
+			"SailsDye[+]": ["Black dye", "Blue dye", "Green dye", "Orange dye", "Pink dye", "Purple dye", "Red dye", "Yellow dye"],
 			"LegendsJewellery[+]": ["Skills necklace", "Combat bracelet"],
 			"Facemask[+]": ["Facemask", "Gas mask", "Slayer helmet"],
 			"TannableHide[+]": ["Cowhide", "Snake hide", "Snake hide (swamp)", "Green dragonhide", "Blue dragonhide", "Red dragonhide", "Black dragonhide"],
@@ -174449,16 +174641,19 @@
 			"Oyster pearl[+]": ["Oyster pearl", "Oyster pearls"],
 			"FabricRoll[+]": ["Ralph's fabric roll", "Gurtob's fabric roll", "Gwyna's fabric roll"],
 			"BoatPaint[+]": ["Shark paint", "Inky paint", "Barracuda paint", "Salvor's paint", "Guthixian paint", "Saradominist paint", "Zamorakian paint", "Armadylean paint", "Merchant's paint", "Angler's paint", "Sandy paint"],
-			"Iron cannonball[+]": ["Bronze cannonball", "Iron cannonball"],
-			"Steel cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball"],
-			"Mithril cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball"],
-			"Adamant cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball"],
-			"Rune cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball", "Rune cannonball"],
-			"Dragon cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball", "Rune cannonball", "Dragon cannonball"],
+			"Iron cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Bronze chainshot cannonball", "Iron chainshot cannonball", "Bronze incendiary cannonball", "Iron incendiary cannonball"],
+			"Steel cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Bronze chainshot cannonball", "Iron chainshot cannonball", "Steel chainshot cannonball", "Bronze incendiary cannonball", "Iron incendiary cannonball", "Steel incendiary cannonball"],
+			"Mithril cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Bronze chainshot cannonball", "Iron chainshot cannonball", "Steel chainshot cannonball", "Mithril chainshot cannonball", "Bronze incendiary cannonball", "Iron incendiary cannonball", "Steel incendiary cannonball", "Mithril incendiary cannonball"],
+			"Adamant cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball", "Bronze chainshot cannonball", "Iron chainshot cannonball", "Steel chainshot cannonball", "Mithril chainshot cannonball", "Adamant chainshot cannonball", "Bronze incendiary cannonball", "Iron incendiary cannonball", "Steel incendiary cannonball", "Mithril incendiary cannonball", "Adamant incendiary cannonball"],
+			"Rune cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball", "Rune cannonball", "Bronze chainshot cannonball", "Iron chainshot cannonball", "Steel chainshot cannonball", "Mithril chainshot cannonball", "Adamant chainshot cannonball", "Rune chainshot cannonball", "Bronze incendiary cannonball", "Iron incendiary cannonball", "Steel incendiary cannonball", "Mithril incendiary cannonball", "Adamant incendiary cannonball", "Rune incendiary cannonball"],
+			"Dragon cannonball[+]": ["Bronze cannonball", "Iron cannonball", "Steel cannonball", "Mithril cannonball", "Granite cannonball", "Adamant cannonball", "Rune cannonball", "Bronze chainshot cannonball", "Iron chainshot cannonball", "Steel chainshot cannonball", "Mithril chainshot cannonball", "Adamant chainshot cannonball", "Rune chainshot cannonball", "Bronze incendiary cannonball", "Iron incendiary cannonball", "Steel incendiary cannonball", "Mithril incendiary cannonball", "Adamant incendiary cannonball", "Rune incendiary cannonball", "Dragon cannonball"],
 			"VatrachosRaccoonFood[+]": ["Banana", "Coconut", "Dragonfruit", "Jangerberries", "Papaya fruit", "Peach", "Strawberry", "Watermelon", "Watermelon slice", "White tree fruit"],
 			"Fletching knife[+]": ["Knife", "Narwhal horn knife"],
 			"QuetzalWhistleMeat[+]": ["Quetzal feed", "Raw barb-tailed kebbit", "Raw dashing kebbit", "Raw graahk", "Raw kyatt", "Raw larupia", "Raw moonlight antelope", "Raw pyre fox", "Raw sunlight antelope", "Raw wild kebbit"],
-			"FishingCape[+]": ["Fishing cape", "Fishing cape(t)"]
+			"FishingCape[+]": ["Fishing cape", "Fishing cape(t)"],
+			"Black full helm[+]": ["Black full helm", "Black full helm (t)", "Black full helm (g)"],
+			"Black platebody[+]": ["Black platebody", "Black platebody (t)", "Black platebody (g)"],
+			"Black legs[+]": ["Black platelegs", "Black platelegs (t)", "Black platelegs (g)", "Black plateskirt", "Black plateskirt (t)", "Black plateskirt (g)"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -174717,6 +174912,7 @@
 			"Wizard robes[+]": "Any wizard robes piece",
 			"Cape[+]": "Any cape",
 			"Dye[+]": "Any dye",
+			"SailsDye[+]": "Any dye for sails",
 			"LegendsJewellery[+]": "Any jewellery rechargable at the Legends' Guild",
 			"Facemask[+]": "Any facemask type item",
 			"TannableHide[+]": "Any tannable item",
@@ -174855,7 +175051,10 @@
 			"VatrachosRaccoonFood[+]": "Any food for the Vatrachos Raccoon",
 			"Fletching knife[+]": "Any knife for Fletching",
 			"QuetzalWhistleMeat[+]": "Any meat used to charge a quetzal whistle",
-			"FishingCape[+]": "Any Fishing cape variant"
+			"FishingCape[+]": "Any Fishing cape variant",
+			"Black full helm[+]": "Any black full helm",
+			"Black platebody[+]": "Any black platebody",
+			"Black legs[+]": "Any black platelegs/skirt"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Man (East Ardougne)", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
@@ -174901,7 +175100,7 @@
 			"Hellhound[+]": ["Hellhound", "Hellhound#Wilderness Slayer Cave"],
 			"Farmer[+]": ["Farmer", "Farmer (Varlamore)"],
 			"GreaterDemon[+]": ["Greater demon", "Greater demon#Wilderness Slayer Cave", "K'ril Tsutsaroth", "Tstanon Karlak", "Skotizo", "Tormented Demon"],
-			"BountyMonster[+]": ["Albatross", "Armoured kraken", "Bull shark", "Butterfly ray", "Eagle ray", "Frigatebird", "Great white shark", "Hammerhead shark", "Manta ray", "Mogre (Sailing)", "Narwhal", "Orca", "Osprey", "Pygmy kraken", "Spined kraken", "Stingray", "Tern", "Tiger shark", "Vampyre kraken", "Veiled kraken"]
+			"BountyMonster[+]": ["Albatross", "Armoured kraken", "Bull shark", "Butterfly ray", "Eagle ray", "Frigatebird", "Great white shark", "Hammerhead shark", "Manta ray (monster)", "Mogre (Sailing)", "Narwhal", "Orca", "Osprey", "Pygmy kraken", "Spined kraken", "Stingray", "Tern", "Tiger shark", "Vampyre kraken", "Veiled kraken"]
 		},
 		"monstersPlusNames": {
 			"Aberrant spectre[+]": "Any aberrant spectre",
@@ -175223,6 +175422,7 @@
 			"Access Keldagrim[+]": ["Access Keldagrim via quest", "Access Keldagrim via entrance"],
 			"Access Varrock Sewers[+]": ["Access Varrock Sewers via 12854", "Access Varrock Sewers via ~|Edgeville Dungeon|~"],
 			"Access Edgeville Dungeon[+]": ["Access Edgeville Dungeon via 12342", "Access Edgeville Dungeon via ~|Varrock Sewers|~"],
+			"Access Black Knights' Fortress[+]": ["Access Black Knights' Fortress with guard disguise", "Access Black Knights' Fortress with knight disguise"],
 			"Mahogany Homes Task[+]": ["Complete a beginner contract for ~|Mahogany Homes|~", "Complete a novice contract for ~|Mahogany Homes|~", "Complete an adept contract for ~|Mahogany Homes|~", "Complete an expert contract for ~|Mahogany Homes|~"],
 			"Clay cup task[+]": ["Wooden shelves 1 materials", "Wooden shelves 2 materials", "Oak shelves 1 materials"],
 			"Porcelain cup task[+]": ["Wooden shelves 3 materials", "Oak shelves 2 materials", "Teak shelves 1 materials"],
@@ -177534,6 +177734,84 @@
 			},
 			"Dragon cannonball": {
 				"Dragon cannon": true
+			},
+			"Bronze chainshot cannonball": {
+				"Bronze cannon": true,
+				"Iron cannon": true,
+				"Steel cannon": true,
+				"Mithril cannon": true,
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Iron chainshot cannonball": {
+				"Iron cannon": true,
+				"Steel cannon": true,
+				"Mithril cannon": true,
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Steel chainshot cannonball": {
+				"Steel cannon": true,
+				"Mithril cannon": true,
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Mithril chainshot cannonball": {
+				"Mithril cannon": true,
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Adamant chainshot cannonball": {
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Rune chainshot cannonball": {
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Bronze incendiary cannonball": {
+				"Bronze cannon": true,
+				"Iron cannon": true,
+				"Steel cannon": true,
+				"Mithril cannon": true,
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Iron incendiary cannonball": {
+				"Iron cannon": true,
+				"Steel cannon": true,
+				"Mithril cannon": true,
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Steel incendiary cannonball": {
+				"Steel cannon": true,
+				"Mithril cannon": true,
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Mithril incendiary cannonball": {
+				"Mithril cannon": true,
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Adamant incendiary cannonball": {
+				"Adamant cannon": true,
+				"Rune cannon": true,
+				"Dragon cannon": true
+			},
+			"Rune incendiary cannonball": {
+				"Rune cannon": true,
+				"Dragon cannon": true
 			}
 		},
 		"slayerTasks": {
@@ -178793,6 +179071,16 @@
 				"3rd age axe": 3,
 				"Crystal axe": 3,
 				"Spicy stew#brown": 5
+			}
+		},
+		"boostTaskBans": {
+			"Thieving": {
+				"Access the spring room of the ~|Sorceress's Garden|~ minigame": ["Spring sq'irkjuice", "Autumn sq'irkjuice", "Summer sq'irkjuice"],
+				"Access the autumn room of the ~|Sorceress's Garden|~ minigame": ["Autumn sq'irkjuice", "Summer sq'irkjuice"],
+				"Access the summer room of the ~|Sorceress's Garden|~ minigame": ["Summer sq'irkjuice"],
+				"Steal a ~|spring sq'irk|~ from the Sorceress's Garden minigame": ["Spring sq'irkjuice", "Autumn sq'irkjuice", "Summer sq'irkjuice"],
+				"Steal a ~|autumn sq'irk|~ from the Sorceress's Garden minigame": ["Autumn sq'irkjuice", "Summer sq'irkjuice"],
+				"Steal a ~|summer sq'irk|~ from the Sorceress's Garden minigame": ["Summer sq'irkjuice"]
 			}
 		}
 	},
@@ -191075,6 +191363,9 @@
 		"Giant Mole": {
 			"Big bones": {
 				"1": "Always"
+			},
+			"Immaculate mole skin": {
+				"1": "1/50"
 			},
 			"Mole claw": {
 				"1": "Always"
@@ -216890,6 +217181,7 @@
 		"Recipe for Disaster/Freeing the Lumbridge Guide": "12337",
 		"Recipe for Disaster/Freeing the Mountain Dwarf": "11318, 11828, White Wolf Tunnel",
 		"Recruitment Drive": "11828",
+		"The Red Reef": "11047, 11300, 11303, 12581, 12582",
 		"Regicide": "8753, 8754, 9008, 9009, 9010, 10291, 10292, 11570, Underground Pass",
 		"The Ribbiting Tale of a Lily Pad Labour Dispute": "6702",
 		"Roving Elves": "8753, 9009, 10037, 10038, Waterfall Dungeon, Glarial's Tomb",
@@ -245696,6 +245988,9 @@
 				}
 			},
 			"Gnome[+]": {
+				"Arrow shaft": {
+					"2-4": "56/128"
+				},
 				"Clue scroll (medium)": {
 					"1": "1/150"
 				},
@@ -245712,13 +246007,19 @@
 					"1": "8/128"
 				},
 				"King worm": {
-					"1": "55/128"
+					"1": "3/128"
 				},
 				"Swamp toad (item)": {
-					"1": "28/128"
+					"1": "24/128"
 				}
 			},
 			"Gnome child": {
+				"Arrow shaft": {
+					"2-4": "56/128"
+				},
+				"Clue scroll (medium)": {
+					"1": "1/150"
+				},
 				"Coins": {
 					"300": "30/128"
 				},
@@ -245732,13 +246033,19 @@
 					"1": "8/128"
 				},
 				"King worm": {
-					"1": "55/128"
+					"1": "3/128"
 				},
 				"Swamp toad (item)": {
-					"1": "28/128"
+					"1": "24/128"
 				}
 			},
 			"Gnome woman": {
+				"Arrow shaft": {
+					"2-4": "56/128"
+				},
+				"Clue scroll (medium)": {
+					"1": "1/150"
+				},
 				"Coins": {
 					"300": "30/128"
 				},
@@ -245752,10 +246059,10 @@
 					"1": "8/128"
 				},
 				"King worm": {
-					"1": "55/128"
+					"1": "3/128"
 				},
 				"Swamp toad (item)": {
-					"1": "28/128"
+					"1": "24/128"
 				}
 			},
 			"Guard[+]": {
@@ -256091,6 +256398,7 @@
 			"Cooked rabbit": true,
 			"Cooked sweetcorn": true,
 			"Sweetcorn (bowl)": true,
+			"Cup of tea": true,
 			"Cup of tea (milky nettle)": true,
 			"Cup of tea (nettle)": true,
 			"Curry": true,
@@ -266867,7 +267175,10 @@
 			]
 		},
 		"11047": {
-			"0": [
+			"1": [
+				"???"
+			],
+			"W1": [
 				"10791",
 				"11046",
 				"11048",
@@ -267253,7 +267564,10 @@
 			]
 		},
 		"11300": {
-			"0": [
+			"1": [
+				"???"
+			],
+			"W1": [
 				"11044",
 				"11299",
 				"11301",
@@ -269066,6 +269380,10 @@
 			],
 			"4": [
 				"12583-1"
+			],
+			"5": [
+				"12583-2",
+				"12838-2"
 			]
 		},
 		"12583": {
@@ -269073,6 +269391,9 @@
 				"12327-1",
 				"12582-1",
 				"12839-1"
+			],
+			"2": [
+				"12582-5"
 			],
 			"W1": [
 				"12327-W1",
@@ -269447,6 +269768,10 @@
 				"12839-1",
 				"13094-1"
 			],
+			"2": [
+				"12582-5",
+				"12839-2"
+			],
 			"W1": [
 				"12839-W1",
 				"13094-W1"
@@ -269456,6 +269781,9 @@
 			"1": [
 				"12583-1",
 				"12838-1"
+			],
+			"2": [
+				"12838-2"
 			],
 			"W1": [
 				"12583-W1",
