@@ -28630,196 +28630,235 @@
 				"Chunks": ["11326-W1"]
 			},
 			"Albatross beak tasks": {
+				"Monsters": ["Albatross"],
 				"Tasks": {
 					"Albatross beak tasks[+]": "Sailing"
 				}
 			},
 			"Albatross feather tasks": {
+				"Monsters": ["Albatross"],
 				"Tasks": {
 					"Albatross feather tasks[+]": "Sailing"
 				}
 			},
 			"Armoured kraken ink sac tasks": {
+				"Monsters": ["Armoured kraken"],
 				"Tasks": {
 					"Armoured kraken ink sac tasks[+]": "Sailing"
 				}
 			},
 			"Armoured kraken tentacle tasks": {
+				"Monsters": ["Armoured kraken"],
 				"Tasks": {
 					"Armoured kraken tentacle tasks[+]": "Sailing"
 				}
 			},
 			"Bull shark jaw tasks": {
+				"Monsters": ["Bull shark"],
 				"Tasks": {
 					"Bull shark jaw tasks[+]": "Sailing"
 				}
 			},
 			"Bull shark liver tasks": {
+				"Monsters": ["Bull shark"],
 				"Tasks": {
 					"Bull shark liver tasks[+]": "Sailing"
 				}
 			},
 			"Butterfly ray fin tasks": {
+				"Monsters": ["Butterfly ray"],
 				"Tasks": {
 					"Butterfly ray fin tasks[+]": "Sailing"
 				}
 			},
 			"Butterfly ray skin tasks": {
+				"Monsters": ["Butterfly ray"],
 				"Tasks": {
 					"Butterfly ray skin tasks[+]": "Sailing"
 				}
 			},
 			"Eagle ray fin tasks": {
+				"Monsters": ["Eagle ray"],
 				"Tasks": {
 					"Eagle ray fin tasks[+]": "Sailing"
 				}
 			},
 			"Eagle ray skin tasks": {
+				"Monsters": ["Eagle ray"],
 				"Tasks": {
 					"Eagle ray skin tasks[+]": "Sailing"
 				}
 			},
 			"Frigatebird beak tasks": {
+				"Monsters": ["Frigatebird"],
 				"Tasks": {
 					"Frigatebird beak tasks[+]": "Sailing"
 				}
 			},
 			"Frigatebird feather tasks": {
+				"Monsters": ["Frigatebird"],
 				"Tasks": {
 					"Frigatebird feather tasks[+]": "Sailing"
 				}
 			},
 			"Great white shark jaw tasks": {
+				"Monsters": ["Great white shark"],
 				"Tasks": {
 					"Great white shark jaw tasks[+]": "Sailing"
 				}
 			},
 			"Great white shark liver tasks": {
+				"Monsters": ["Great white shark"],
 				"Tasks": {
 					"Great white shark liver tasks[+]": "Sailing"
 				}
 			},
 			"Hammerhead shark jaw tasks": {
+				"Monsters": ["Hammerhead shark"],
 				"Tasks": {
 					"Hammerhead shark jaw tasks[+]": "Sailing"
 				}
 			},
 			"Hammerhead shark liver tasks": {
+				"Monsters": ["Hammerhead shark"],
 				"Tasks": {
 					"Hammerhead shark liver tasks[+]": "Sailing"
 				}
 			},
 			"Manta ray skin tasks": {
+				"Monsters": ["Manta ray (monster)"],
 				"Tasks": {
 					"Manta ray skin tasks[+]": "Sailing"
 				}
 			},
 			"Mogre head tasks": {
+				"Monsters": ["Mogre (Sailing)"],
 				"Tasks": {
 					"Mogre head tasks[+]": "Sailing"
 				}
 			},
 			"Mogre mace tasks": {
+				"Monsters": ["Mogre (Sailing)"],
 				"Tasks": {
 					"Mogre mace tasks[+]": "Sailing"
 				}
 			},
 			"Narwhal blubber tasks": {
+				"Monsters": ["Narwhal"],
 				"Tasks": {
 					"Narwhal blubber tasks[+]": "Sailing"
 				}
 			},
 			"Narwhal tusk tasks": {
+				"Monsters": ["Narwhal"],
 				"Tasks": {
 					"Narwhal tusk tasks[+]": "Sailing"
 				}
 			},
 			"Orca blubber tasks": {
+				"Monsters": ["Orca"],
 				"Tasks": {
 					"Orca blubber tasks[+]": "Sailing"
 				}
 			},
 			"Orca teeth tasks": {
+				"Monsters": ["Orca"],
 				"Tasks": {
 					"Orca teeth tasks[+]": "Sailing"
 				}
 			},
 			"Osprey beak tasks": {
+				"Monsters": ["Osprey"],
 				"Tasks": {
 					"Osprey beak tasks[+]": "Sailing"
 				}
 			},
 			"Osprey feather tasks": {
+				"Monsters": ["Osprey"],
 				"Tasks": {
 					"Osprey feather tasks[+]": "Sailing"
 				}
 			},
 			"Pygmy kraken ink sac tasks": {
+				"Monsters": ["Pygmy kraken"],
 				"Tasks": {
 					"Pygmy kraken ink sac tasks[+]": "Sailing"
 				}
 			},
 			"Pygmy kraken tentacle tasks": {
+				"Monsters": ["Pygmy kraken"],
 				"Tasks": {
 					"Pygmy kraken tentacle tasks[+]": "Sailing"
 				}
 			},
 			"Spined kraken ink sac tasks": {
+				"Monsters": ["Spined kraken"],
 				"Tasks": {
 					"Spined kraken ink sac tasks[+]": "Sailing"
 				}
 			},
 			"Spined kraken tentacle tasks": {
+				"Monsters": ["Spined kraken"],
 				"Tasks": {
 					"Spined kraken tentacle tasks[+]": "Sailing"
 				}
 			},
 			"Stingray fin tasks": {
+				"Monsters": ["Stingray"],
 				"Tasks": {
 					"Stingray fin tasks[+]": "Sailing"
 				}
 			},
 			"Stingray skin tasks": {
+				"Monsters": ["Stingray"],
 				"Tasks": {
 					"Stingray skin tasks[+]": "Sailing"
 				}
 			},
 			"Tern beak tasks": {
+				"Monsters": ["Tern"],
 				"Tasks": {
 					"Tern beak tasks[+]": "Sailing"
 				}
 			},
 			"Tern feather tasks": {
+				"Monsters": ["Tern"],
 				"Tasks": {
 					"Tern feather tasks[+]": "Sailing"
 				}
 			},
 			"Tiger shark jaw tasks": {
+				"Monsters": ["Tiger shark"],
 				"Tasks": {
 					"Tiger shark jaw tasks[+]": "Sailing"
 				}
 			},
 			"Tiger shark liver tasks": {
+				"Monsters": ["Tiger shark"],
 				"Tasks": {
 					"Tiger shark liver tasks[+]": "Sailing"
 				}
 			},
 			"Vampyre kraken ink sac tasks": {
+				"Monsters": ["Vampyre kraken"],
 				"Tasks": {
 					"Vampyre kraken ink sac tasks[+]": "Sailing"
 				}
 			},
 			"Vampyre kraken tentacle tasks": {
+				"Monsters": ["Vampyre kraken"],
 				"Tasks": {
 					"Vampyre kraken tentacle tasks[+]": "Sailing"
 				}
 			},
 			"Veiled kraken ink sac tasks": {
+				"Monsters": ["Veiled kraken"],
 				"Tasks": {
 					"Veiled kraken ink sac tasks[+]": "Sailing"
 				}
 			},
 			"Veiled kraken tentacle tasks": {
+				"Monsters": ["Veiled kraken"],
 				"Tasks": {
 					"Veiled kraken tentacle tasks[+]": "Sailing"
 				}
@@ -33465,6 +33504,12 @@
 			},
 			"Ardougne monk": {
 				"Chunks": ["10290-1"]
+			},
+			"Brimhaven pirate": {
+				"Chunks": ["11057-1"]
+			},
+			"Yanille man": {
+				"Chunks": ["10288-1"]
 			},
 			"Lighthouse dagannoth": {
 				"Chunks": ["Lighthouse#Dungeon"]
@@ -52144,7 +52189,8 @@
 				"Primary": true,
 				"Priority": 3,
 				"Tasks": {
-					"PortTaskLocations[+]": "Sailing"
+					"PortTaskLocations[+]": "Sailing",
+					"BountyTasks[+]": "Nonskill"
 				},
 				"NoBoost": true,
 				"NoPet": true
@@ -175522,7 +175568,8 @@
 			"PiscatorisDockAccess[+]": ["Access Piscatoris Dock by sea", "Access any dock by land"],
 			"LunarIsleDockAccess[+]": ["Access Lunar Isle Dock by sea", "Access any dock by land"],
 			"WeissDockAccess[+]": ["Access Weiss Dock by sea", "Access any dock by land"],
-			"Desert Diary Easy 4[+]": ["Shantay Pass access", "Unkah boat trip access"]
+			"Desert Diary Easy 4[+]": ["Shantay Pass access", "Unkah boat trip access"],
+			"BountyTasks[+]": ["Albatross beak tasks", "Albatross feather tasks", "Armoured kraken ink sac tasks", "Armoured kraken tentacle tasks", "Bull shark jaw tasks", "Bull shark liver tasks", "Butterfly ray fin tasks", "Butterfly ray skin tasks", "Eagle ray fin tasks", "Eagle ray skin tasks", "Frigatebird beak tasks", "Frigatebird feather tasks", "Great white shark jaw tasks", "Great white shark liver tasks", "Hammerhead shark jaw tasks", "Hammerhead shark liver tasks", "Manta ray skin tasks", "Mogre head tasks", "Mogre mace tasks", "Narwhal blubber tasks", "Narwhal tusk tasks", "Orca blubber tasks", "Orca teeth tasks", "Osprey beak tasks", "Osprey feather tasks", "Pygmy kraken ink sac tasks", "Pygmy kraken tentacle tasks", "Spined kraken ink sac tasks", "Spined kraken tentacle tasks", "Stingray fin tasks", "Stingray skin tasks", "Tern beak tasks", "Tern feather tasks", "Tiger shark jaw tasks", "Tiger shark liver tasks", "Vampyre kraken ink sac tasks", "Vampyre kraken tentacle tasks", "Veiled kraken ink sac tasks", "Veiled kraken tentacle tasks"]
 		},
 		"forceTalisman": {
 			"Nature talisman": {
@@ -246822,7 +246869,7 @@
 					"2": "Always"
 				},
 				"Clue scroll (hard)": {
-					"1": "1/1000"
+					"1": "1/500"
 				},
 				"Coins": {
 					"80": "Always"
@@ -250391,6 +250438,12 @@
 			}],
 			"Key (medium)^Guard dog": [{
 				"Ardougne guard dog": "Nonskill"
+			}],
+			"Key (medium)^Pirate": [{
+				"Brimhaven pirate": "Nonskill"
+			}],
+			"Key (medium)^Man": [{
+				"Yanille man": "Nonskill"
 			}],
 			"Unholy mould^Chaos druid": [{
 				"~|Observatory Quest|~ Complete the quest": "Quest"
