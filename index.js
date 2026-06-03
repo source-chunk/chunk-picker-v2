@@ -457,7 +457,7 @@ let ruleNames = {
     "Slayer Equipment": "Using Slayer equipment can count for chunk tasks",
     "Normal Farming": "Allow normal farming to count as a primary method for training Farming",
     "Raking": "Allow raking patches to count as a primary method for training Farming <span class='rule-asterisk noscroll'>*</span>",
-    "Sulphurous Fertiliser": "Allow making supercompost via saltpetre (2xp each) to count as a primary method for training Farming",
+    "Sulphurous Fertiliser": "Allow making sulphurous fertiliser/supercompost via saltpetre (1xp/2xp each) to count as a primary method for training Farming",
     "CoX": "Allow methods inside the Chambers of Xeric/Neypotzli to count for chunk tasks/primary training methods (Fishing, Hunter, Cooking, Woodcutting, etc.)",
     "Tithe Farm": "Allow Tithe Farm to count as a primary method for training Farming",
     "Kill X": "Kill X-amount of every new, unique monster you encounter",
@@ -1529,7 +1529,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.51';
+let currentVersion = '6.9.51.1';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'maintenance-mode';
@@ -1701,7 +1701,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.51";
+mapImg.src = "osrs_world_map.png?v=6.9.51.1";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3627,7 +3627,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.51");
+        myWorker = new Worker("./worker.js?v=6.9.51.1");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -3986,8 +3986,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.51");
-let myWorker2 = new Worker("./worker.js?v=6.9.51");
+let myWorker = new Worker("./worker.js?v=6.9.51.1");
+let myWorker2 = new Worker("./worker.js?v=6.9.51.1");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -6981,7 +6981,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.51");
+    myWorker2 = new Worker("./worker.js?v=6.9.51.1");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
