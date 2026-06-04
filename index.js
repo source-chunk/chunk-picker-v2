@@ -1529,7 +1529,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.51.1';
+let currentVersion = '6.9.52';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'maintenance-mode';
@@ -1701,7 +1701,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.51.1";
+mapImg.src = "osrs_world_map.png?v=6.9.52";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3627,7 +3627,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.51.1");
+        myWorker = new Worker("./worker.js?v=6.9.52");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -3986,8 +3986,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.51.1");
-let myWorker2 = new Worker("./worker.js?v=6.9.51.1");
+let myWorker = new Worker("./worker.js?v=6.9.52");
+let myWorker2 = new Worker("./worker.js?v=6.9.52");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -6981,7 +6981,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.51.1");
+    myWorker2 = new Worker("./worker.js?v=6.9.52");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -11249,6 +11249,10 @@ let showOverlays = function(fromHelper) {
     if (!inEntry && !importMenuOpen && !manualModalOpen && !detailsModalOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         !fromHelper && modal.generate('mapOverlaysModal', onMobile);
         $('#map-marker-btn').hasClass('notice-me') && $('#map-marker-btn').removeClass('notice-me');
+        selectedOverlayIds = [];
+        selectedOverlayIndex = 0;
+        overlayCloseLocation = -1;
+        drawCanvas();
         onMobile && hideMobileMenu();
         overlaysModalOpen = true;
         $('#overlays-data').empty();
