@@ -545,6 +545,7 @@ const modalContents = {
         <div class="clipboard-container">
             <div id="clipboard-title" class="clipboard-title noscroll">Copy to clipboard:</div>
             <div id="clipboard-data" class="clipboard-data noscroll"><button id='chunks-clipboard-button' class='modal-button' onclick='exportFunc("chunks")'>Chunks</button><button id='tasks-clipboard-button' class='modal-button' onclick='exportFunc("tasks")'>Tasks</button><button id='rules-clipboard-button' class='modal-button' onclick='exportFunc("rules")'>Rules</button></div>
+            <div id="clipboard-data-4" class="clipboard-data-6 noscroll"><button id='clues-clipboard-button' class='modal-button' onclick='exportFunc("clues")'>Doable Clue Steps (Clue Details format)</button></div>
             <div id="clipboard-data-4" class="clipboard-data-4 noscroll"><button id='equipment-clipboard-button' class='modal-button' onclick='exportFunc("equipment")'>Equipment (Bank Memory format)</button></div>
             <div id="clipboard-subtitle" class="clipboard-subtitle noscroll">For use in <a href="https://gearscape.net/calculators/best" target="_blank" >GearScape's Best Setup calculator</a></div>
             <div id="clipboard-title2" class="clipboard-title noscroll">Other Actions:</div>

@@ -4753,8 +4753,9 @@ input#searchChunkSections {
 }
 
 #miscellaneousActionsModal > .modal-content {
-    height: 55%;
+    height: 65%;
     width: 25%;
+    margin-top: -5%;
 }
 
 #passiveLevelModal > .modal-content {
@@ -6388,7 +6389,7 @@ input#searchChunks {
     background-color: var(--color1);
 }
 
-.clipboard-data, .clipboard-data-2, .clipboard-data-3, .clipboard-data-4, .clipboard-data-5 {
+.clipboard-data, .clipboard-data-2, .clipboard-data-3, .clipboard-data-4, .clipboard-data-5, .clipboard-data-6 {
     margin: 0px 15px;
     font-size: 2vh;
     display: flex;
@@ -6459,6 +6460,25 @@ input#searchChunks {
 
 #rules-clipboard-button:hover {
     background-color: rgb(195, 80, 80);
+}
+
+#clues-clipboard-button {
+    background-color: rgb(100, 74, 35);
+    font-size: 2.2vh;
+    color: white;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
+    outline: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 10px;
+    padding: 5px 10px;
+}
+
+#clues-clipboard-button:hover {
+    background-color: rgb(75, 55, 25);
 }
 
 #equipment-clipboard-button {

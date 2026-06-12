@@ -309,6 +309,11 @@ let selectedOverlayClues = {
 
 // Imported data
 let boneItems = [];
+let unconnectedAreas = [
+    'Zanaris',
+    'Puro-Puro',
+    'Player-owned house',
+];
 let rangedItems = [];
 let elementalRunes = [];
 let itemsPlus = {};
@@ -1529,7 +1534,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.52';
+let currentVersion = '6.9.53';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'maintenance-mode';
@@ -1701,7 +1706,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.52";
+mapImg.src = "osrs_world_map.png?v=6.9.53";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3573,7 +3578,7 @@ let setUpSelected = function() {
 }
 
 // Finds the current challenge in each skill
-let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputTempSections) {
+let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputTempSections, fromSectionPicker) {
     if (!proceed) {
         $('.panel-active .calculating').remove();
         $('.panel-active').prepend(`<div class="noscroll calculating"><div class='noscroll display-button' onclick='calcCurrentChallengesCanvas(${useOld}, true)'>Calculate Tasks</div></div>`);
@@ -3598,7 +3603,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
                 sectionsValid = false;
                 globalSectionsValid = false;
             } else if (testMode || !(viewOnly || locked)) {
-                openChunkSectionPicker(chunk, true);
+                !fromSectionPicker && openChunkSectionPicker(chunk, true);
                 sectionsValid = false;
                 globalSectionsValid = false;
                 $(`.calculating .display-button`).text('Select Accessible Sections');
@@ -3627,7 +3632,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.52");
+        myWorker = new Worker("./worker.js?v=6.9.53");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -3683,7 +3688,8 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
             maxSkill,
             userTasks,
             manualPrimary,
-            updateLevel
+            updateLevel,
+            unconnectedAreas
         });
         workersOut['current'] = true;
         workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
@@ -3986,8 +3992,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.52");
-let myWorker2 = new Worker("./worker.js?v=6.9.52");
+let myWorker = new Worker("./worker.js?v=6.9.53");
+let myWorker2 = new Worker("./worker.js?v=6.9.53");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -4621,6 +4627,17 @@ let exportFunc = function(type) {
         navigator.clipboard.writeText(tasksTemp);
     } else if (type === 'rules') {
         navigator.clipboard.writeText(JSON.stringify(rules));
+    } else if (type === 'clues') {
+        let outputArr = [];
+        Object.keys(possibleClueTasks).forEach((tier) => {
+            possibleClueTasks[tier].filter((name) => chunkInfo['challenges']['Nonskill'].hasOwnProperty(name) && chunkInfo['challenges']['Nonskill'][name].hasOwnProperty('ClueId')).forEach((name) => {
+                outputArr.push({
+                    id: parseInt(chunkInfo['challenges']['Nonskill'][name]['ClueId']),
+                    color: '#30FF00'
+                });
+            });
+        });
+        navigator.clipboard.writeText(JSON.stringify(outputArr));
     } else if (type === 'equipment') {
         navigator.clipboard.writeText(bankMemoryFormat);
     } else if (type === 'plugin' && (testMode || !(viewOnly || inEntry || locked))) {
@@ -6981,7 +6998,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.52");
+    myWorker2 = new Worker("./worker.js?v=6.9.53");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -7037,7 +7054,8 @@ let calcFutureChallenges = function() {
         maxSkill,
         userTasks,
         manualPrimary,
-        updateLevel
+        updateLevel,
+        unconnectedAreas
     });
     workersOut['future'] = infoLockedId;
     workerOut = Object.keys(workersOut).filter((key) => workersOut[key] !== false).length;
@@ -7728,7 +7746,7 @@ let findConnectedSections = function(chunksIn, sections) {
     let added = false;
     Object.keys(chunkInfo['sections']).filter((chunk) => chunksIn.hasOwnProperty(chunk)).forEach((chunk) => {
         Object.keys(chunkInfo['sections'][chunk]).filter((sec) => sec !== "0" && (!sections.hasOwnProperty(chunk) || !sections[chunk].hasOwnProperty(sec))).forEach((sec) => {
-            if (settings['optOutSectionsWater'] || (settings['optOutSections'] && !sec.includes('W')) || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1]) && sections[connection.split('-')[0]][connection.split('-')[1]]) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && chunksIn[chunkInfo['chunks'][subChunk]['Name']] !== false && chunkInfo['chunks'][subChunk]['Name'] !== 'Zanaris').length > 0)) {
+            if (settings['optOutSectionsWater'] || (settings['optOutSections'] && !sec.includes('W')) || (chunkInfo['sections'][chunk][sec].filter((connection) => (connection.includes('-') ? (sections.hasOwnProperty(connection.split('-')[0]) && sections[connection.split('-')[0]].hasOwnProperty(connection.split('-')[1]) && sections[connection.split('-')[0]][connection.split('-')[1]]) : chunksIn.hasOwnProperty(connection))).length > 0) || (!!chunkInfo['chunks'][chunk] && chunkInfo['chunks'][chunk].hasOwnProperty('Sections') && !!chunkInfo['chunks'][chunk]['Sections'][sec] && chunkInfo['chunks'][chunk]['Sections'][sec].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][chunk]['Sections'][sec]['Connect']).filter((subChunk) => !!chunkInfo['chunks'][subChunk] && chunkInfo['chunks'][subChunk].hasOwnProperty('Name') && chunksIn.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && chunksIn[chunkInfo['chunks'][subChunk]['Name']] !== false && (!Object.keys(chunkInfo['chunks'][chunkInfo['chunks'][subChunk]['Name']]['Connect']).includes(chunk) || (manualAreas.hasOwnProperty(chunkInfo['chunks'][subChunk]['Name']) && manualAreas[chunkInfo['chunks'][subChunk]['Name']])) && !unconnectedAreas.includes(chunkInfo['chunks'][subChunk]['Name'])).length > 0)) {
                 if (!sections[chunk]) {
                     sections[chunk] = {};
                 }
@@ -10585,14 +10603,6 @@ let saveChunkSectionPicker = function() {
     if (Object.keys(manualSections[sectionChunkId]).length === 0) {
         delete manualSections[sectionChunkId];
     }
-    if (Object.keys(selectedSections).length === 0 && chunkSectionCalculateAfter) {
-        Object.keys(chunkInfo['sections'][sectionChunkId]).forEach((sec) => {
-            if (!unlockedSections[sectionChunkId]) {
-                unlockedSections[sectionChunkId] = {};
-            }
-            unlockedSections[sectionChunkId][sec] = true;
-        });
-    }
     let manualSectionsModified = {};
     !!manualSections && Object.keys(manualSections).forEach((chunk) => {
         if (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(chunk)) {
@@ -10604,7 +10614,7 @@ let saveChunkSectionPicker = function() {
     modalOutsideTime = Date.now();
     $('#chunkSectionPickerModal').remove();
     if (needsUpdating) {
-        calcCurrentChallengesCanvas(true, chunkSectionCalculateAfter, false, JSON.parse(JSON.stringify(unlockedSections)));
+        calcCurrentChallengesCanvas(true, chunkSectionCalculateAfter, false, JSON.parse(JSON.stringify(unlockedSections)), true);
         setData();
     }
 }

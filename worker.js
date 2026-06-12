@@ -189,7 +189,7 @@ let globalValidsBoosts = {};
 let bringAlongTasks = {};
 let globalEveryDropAltMap = {};
 let bankMemoryFormat = 'Item id	Item name	Item quantity\n';
-let unconnectedAreas = ['Zanaris', 'Puro-Puro', 'Player-owned house'];
+let unconnectedAreas;
 
 onmessage = function(e) {
     try {
@@ -248,7 +248,8 @@ onmessage = function(e) {
             maxSkill,
             userTasks,
             manualPrimary,
-            updateLevel
+            updateLevel,
+            unconnectedAreas
         } = eGlobal.data);
 
         if (updateLevel !== 'maintenance-mode') {

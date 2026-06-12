@@ -28763,7 +28763,8 @@
 				"Monsters": ["Narwhal"],
 				"Tasks": {
 					"Narwhal tusk tasks[+]": "Sailing"
-				}
+				},
+				"ClueId": "2858"
 			},
 			"Orca blubber tasks": {
 				"Monsters": ["Orca"],
@@ -29091,7 +29092,8 @@
 			"Forgotten lockbox loot*": {
 				"Items": ["Forgotten lockbox*"],
 				"Output": "Forgotten lockbox loot",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23140"
 			},
 			"Dossier loot*": {
 				"Items": ["Dossier*"],
@@ -29418,7 +29420,8 @@
 			"Grab a spade from the ground in Fortis park*": {
 				"Chunks": ["6960-1"],
 				"Output": "Spade",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3613"
 			},
 			"Grab a bronze axe from the stump west of The Summer Shore*": {
 				"Chunks": ["12325-1"],
@@ -29477,7 +29480,8 @@
 				"Tasks": {
 					"~|The Dig Site|~ Complete the quest": "Quest"
 				},
-				"Output": "Leather gloves"
+				"Output": "Leather gloves",
+				"ClueId": "19793"
 			},
 			"Grab leather boots from the tool rack in the Varrock Museum*": {
 				"Chunks": ["12853-1"],
@@ -32898,7 +32902,7 @@
 			"Obtain the ornate top*": {
 				"Description": "Perform the Shrug and Cheer emotes in succession east of the Black Knights' Fortress.",
 				"InfoLink": "Ornate_armour#Obtaining_the_outfit",
-				"Chunks": ["12086-1"],				
+				"Chunks": ["12086-1"],
 				"Output": "Ornate top"
 			},
 			"Obtain the ornate cape*": {
@@ -35437,7 +35441,8 @@
 					"~|What Lies Below|~ Complete the quest": "Quest"
 				},
 				"Kudos": 5,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2847"
 			},
 			"Curse of the Empty Lord kudos": {
 				"Chunks": ["13109-5"],
@@ -38795,20 +38800,23 @@
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "29854"
 			},
 			"Dig outside the bank on Aldarin.": {
 				"Chunks": ["5421-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "29853"
 			},
 			"He's been studying unusual tree migrations.": {
 				"NPCs": ["Ranulph"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "30928"
 			},
 			"Jump for Joy in the mine near the Twilight Temple. Bow before you talk to me. (Maple longbow, Ruby amulet, Steel platelegs)": {
 				"Chunks": ["6707-1"],
@@ -38819,14 +38827,16 @@
 					"Ranged": 30
 				},
 				"Items": ["Maple longbow", "Ruby amulet", "Steel platelegs"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "29857"
 			},
 			"Nod your head where the River Ortus meets the Proudspire. Indicate 'no' before you talk to me. (Blue wizard hat, Blue wizard robe)": {
 				"Chunks": ["6450-1"],
 				"ClueTier": "medium",
 				"ClueType": "Emote",
 				"Items": ["Blue wizard hat", "Blue wizard robe"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "29858"
 			},
 			"Panic outside the Twilight Temple. Beware of double agents! (Rune longsword, Rune platebody, Rune plateskirt)": {
 				"Chunks": ["6706-1"],
@@ -38838,7 +38848,8 @@
 				},
 				"Items": ["Rune longsword", "Rune platebody", "Rune plateskirt"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "29859"
 			},
 			"02 degrees 37 minutes north, 27 degrees 09 minutes west": {
 				"Chunks": ["6194-2"],
@@ -38846,7 +38857,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "29855"
 			},
 			"Banish a chilling spirit.": {
 				"Monsters": ["Frost Nagua"],
@@ -38856,7 +38868,19 @@
 					"Slayer": 48
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "29856"
+			},
+			"Crush the spirited earth.": {
+				"Monsters": ["Earthen Nagua"],
+				"ClueTier": "elite",
+				"ClueType": "Cryptic",
+				"Skills": {
+					"Slayer": 48
+				},
+				"Not Skiller": true,
+				"Not F2P": true,
+				"ClueId": "29856"
 			},
 			"Think on the western coast of Salvager Overlook. Beware of double agents! (Hueycoatl hide coif, Hueycoatl hide vambraces)": {
 				"Chunks": ["6451-1"],
@@ -38883,7 +38907,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "24253"
 			},
 			"25 degrees 48 minutes north, 35 degrees 00 minutes east": {
 				"Chunks": ["14142"],
@@ -38891,7 +38916,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "22000"
 			},
 			"23 degrees 48 minutes north, 11 degrees 43 minutes west": {
 				"Chunks": ["8253-2"],
@@ -38899,7 +38925,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12092"
 			},
 			"Lunar Isle, inside the village.": {
 				"Chunks": ["8253-1"],
@@ -38937,7 +38964,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23147"
 			},
 			"23 degrees 30 minutes north, 16 degrees 33 minutes east": {
 				"Chunks": ["11837-1"],
@@ -38945,7 +38973,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23169"
 			},
 			"25 degrees 03 minutes north, 17 degrees 05 minutes east": {
 				"Chunks": ["11837-1"],
@@ -38953,7 +38982,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2725"
 			},
 			"24 degrees 20 minutes north, 18 degrees 50 minutes east": {
 				"Chunks": ["12093"],
@@ -38961,7 +38991,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12097"
 			},
 			"23 degrees 58 minutes north, 18 degrees 22 minutes east": {
 				"Chunks": ["12093"],
@@ -38985,14 +39016,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2739"
 			},
 			"https://oldschool.runescape.wiki/images/3/3b/Map_clue_small_volcanoes.png?3e678": {
 				"Chunks": ["12093"],
 				"ClueTier": "hard",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7239"
 			},
 			"Faint sounds of 'Arr', fire giants found deep, the eastern tip of a lake, are the rewards you could reap.": {
 				"Chunks": ["Deep Wilderness Dungeon"],
@@ -39014,7 +39047,15 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2727"
+			},
+			"Cirr Jad": {
+				"NPCs": ["Jardric"],
+				"ClueTier": "elite",
+				"ClueType": "Anagram",
+				"Not F2P": true,
+				"ClueId": "21524"
 			},
 			"25 degrees 03 minutes north, 23 degrees 24 minutes east": {
 				"Chunks": ["12605"],
@@ -39022,13 +39063,15 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2729"
 			},
 			"Dr Hitman": {
 				"NPCs": ["Mandrith"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12134"
 			},
 			"24 degrees 07 minutes north, 23 degrees 22 minutes east": {
 				"Chunks": ["12605"],
@@ -39036,14 +39079,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12095"
 			},
 			"More resources than I can handle, but in a very dangerous area. Can't wait to strike gold!": {
 				"Chunks": ["12605"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23144"
 			},
 			"Dim Tharn": {
 				"NPCs": ["Mandrith"],
@@ -39087,7 +39132,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3558"
 			},
 			"Ded War": {
 				"NPCs": ["Edward"],
@@ -39112,7 +39158,8 @@
 				},
 				"Items": ["Headband[+]", "Crozier[+]"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12546"
 			},
 			"25 degrees 03 minutes north, 29 degrees 22 minutes east": {
 				"Chunks": ["13373"],
@@ -39120,7 +39167,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12093"
 			},
 			"24 degrees 00 minutes north, 29 degrees 22 minutes east": {
 				"Chunks": ["13373"],
@@ -39139,7 +39187,8 @@
 					"Strength": 30
 				},
 				"Items": ["Adamant warhammer", "Mithril boots", "Ring of life"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23046"
 			},
 			"22 degrees 24 minutes north, 31 degrees 11 minutes west": {
 				"Chunks": ["5692-1"],
@@ -39178,7 +39227,8 @@
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19880"
 			},
 			"North-west of the Arceuus Library.": {
 				"Chunks": ["6460-1"],
@@ -39200,7 +39250,8 @@
 				"NPCs": ["Clerris"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19740"
 			},
 			"21 degrees 37 minutes north, 21 degrees 13 minutes west": {
 				"Chunks": ["6972-1"],
@@ -39230,14 +39281,16 @@
 				"NPCs": ["Aretha"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19758"
 			},
 			"https://oldschool.runescape.wiki/images/e/e2/Map_clue_soul_altar.png?c4e82": {
 				"Chunks": ["7228"],
 				"ClueTier": "elite",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19784"
 			},
 			"Spin in front of the Soul altar. Beware of double agents! (Dragon pickaxe, Helm of neitiznot, Rune boots)": {
 				"Chunks": ["7228"],
@@ -39263,7 +39316,8 @@
 				"NPCs": ["Oneiromancer"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12132"
 			},
 			"Astral altar": {
 				"Chunks": ["8508-1"],
@@ -39290,7 +39344,8 @@
 					"Prayer": 20
 				},
 				"Items": ["Rune boots", "Proselyte hauberk", "Dragonstone ring"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12074"
 			},
 			"Central Fremennik Isles mine.": {
 				"Chunks": ["9532-2"],
@@ -39305,14 +39360,16 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7305"
 			},
 			"https://oldschool.runescape.wiki/images/c/cb/Map_clue_Miscellania.png?ee5fc": {
 				"Chunks": ["10044-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7286"
 			},
 			"23 degrees 03 minutes north, 02 degrees 01 minutes east": {
 				"Chunks": ["10044-2"],
@@ -39320,20 +39377,23 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12556"
 			},
 			"I sit on the beach and cry for those that have passed on": {
 				"Chunks": ["9259-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "31272"
 			},
 			"Come have a cip with this great soot covered denizen.": {
 				"Chunks": ["10044-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19846"
 			},
 			"Forlun": {
 				"NPCs": ["Runolf"],
@@ -39360,7 +39420,8 @@
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7243"
 			},
 			"Inside Etceteria's castle, in the southern staircase.": {
 				"Chunks": ["10300-1"],
@@ -39374,7 +39435,8 @@
 				"NPCs": ["Brambickle"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19894"
 			},
 			"21 degrees 24 minutes north, 17 degrees 54 minutes east": {
 				"Chunks": ["12092-3"],
@@ -39382,7 +39444,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2737"
 			},
 			"22 degrees 35 minutes north, 19 degrees 18 minutes east": {
 				"Chunks": ["12092-2"],
@@ -39390,7 +39453,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2723"
 			},
 			"Blow a kiss in the heart of the lava maze. (Spotted cape, Back d'hide chaps, Rolling pin)": {
 				"Chunks": ["12092-5"],
@@ -39401,7 +39465,8 @@
 					"Ranged": 70
 				},
 				"Items": ["Spotted cape", "Black d'hide chaps", "Rolling pin"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12075"
 			},
 			"Great demons, dragons, and spiders protect this blue rock, beneath which, you may find what you seek.": {
 				"Chunks": ["Lava Maze Dungeon"],
@@ -39426,7 +39491,8 @@
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2788"
 			},
 			"22 degrees 45 minutes north, 26 degrees 33 minutes east": {
 				"Chunks": ["13116"],
@@ -39434,7 +39500,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2731"
 			},
 			"Pentagrams and demons, burnt bones and remains, I wonder what the blood contains.": {
 				"Chunks": ["13116"],
@@ -39449,7 +39516,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "31275"
 			},
 			"22 degrees 54 minutes north, 29 degrees 01 minutes east": {
 				"Chunks": ["13372"],
@@ -39457,22 +39525,25 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12101"
 			},
-			"23 degrees 01 minutes north, 41 degrees 33 minutes east": {
+			"23 degrees 05 minutes north, 41 degrees 22 minutes east": {
 				"Chunks": ["14908-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23137"
 			},
-			"23 degrees 00 minutes north, 41 degrees 33 minutes east": {
+			"23 degrees 03 minutes north, 41 degrees 24 minutes east": {
 				"Chunks": ["14908-1"],
 				"ClueTier": "hard",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "21527"
 			},
 			"19 degrees 24 minutes north, 30 degrees 37 minutes west": {
 				"Chunks": ["5691-2"],
@@ -39480,7 +39551,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19842"
 			},
 			"She's small but can build both literally and figuratively, as long as you have their favour": {
 				"Chunks": ["5947-1"],
@@ -39509,19 +39581,22 @@
 				"NPCs": ["Elder Torgan"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "31274"
 			},
 			"His Phor": {
 				"NPCs": ["Horphis"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19742"
 			},
 			"QSPGFTTPS HSBDLMFCPOF": {
 				"NPCs": ["Professor Gracklebone"],
 				"ClueTier": "medium",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19762"
 			},
 			"Darkness wanders around me, but fills my mind with knowledge.": {
 				"NPCs": ["Biblia"],
@@ -39555,26 +39630,30 @@
 				"NPCs": ["Tynan"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19821"
 			},
 			"Search the boxes in the house near the south entrance to Varrock.": {
 				"Chunks": ["12852-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2685"
 			},
 			"Search upstairs in the houses of Seers' Village for some drawers.": {
 				"Chunks": ["10806-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3508"
 			},
 			"Cecilia: Alone": {
 				"Chunks": ["Alone[+]"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "easy",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23160"
 			},
 			"Cecilia: One the Shore": {
 				"Chunks": ["OntheShore[+]"],
@@ -39588,56 +39667,64 @@
 				"NPCs": ["Cecilia"],
 				"ClueTier": "easy",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23158"
 			},
 			"Cecilia: The Forlorn Homestead": {
 				"Chunks": ["TheForlornHomestead[+]"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "easy",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23156"
 			},
 			"Cecilia: Tiptoe": {
 				"Chunks": ["12340-1"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "easy",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23157"
 			},
 			"Cecilia: Vision": {
 				"Chunks": ["12337-1"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "easy",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23155"
 			},
 			"Cecilia: Catch Me If You Can": {
 				"Chunks": ["Ardougne Rat Pits"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3611"
 			},
 			"Cecilia: Cave of Beasts": {
 				"Chunks": ["11065"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23142"
 			},
 			"Cecilia: Devils May Care": {
 				"Chunks": ["Smoke Devil Dungeon"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23143"
 			},
 			"Cecilia: Faerie": {
 				"Chunks": ["Zanaris"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23139"
 			},
 			"Cecilia: Forgotten": {
 				"Chunks": ["13872"],
@@ -39651,63 +39738,72 @@
 				"NPCs": ["Cecilia"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23138"
 			},
 			"Cecilia: Scorpia Dances (medium)": {
 				"Chunks": ["Scorpia's Lair"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23174"
 			},
 			"Cecilia: Subterranea (medium)": {
 				"Chunks": ["Subterranea[+]"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23176"
 			},
 			"Cecilia: Complication": {
 				"Chunks": ["Chaos altar"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23175"
 			},
 			"Cecilia: Fossilised": {
 				"Chunks": ["Wyvern Cave"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23180"
 			},
 			"Cecilia: Hells Bells": {
 				"Chunks": ["HellsBells[+]"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23181"
 			},
 			"Cecilia: La Mort": {
 				"Chunks": ["Death altar"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23179"
 			},
 			"Cecilia: Little Cave of Horrors": {
 				"Chunks": ["Mos Le'Harmless Cave"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23177"
 			},
 			"Cecilia: Regal Pomp": {
 				"Chunks": ["6457"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25792"
 			},
 			"Cecilia: Roc and Roll": {
 				"Chunks": ["11321-2"],
@@ -39717,7 +39813,8 @@
 				"Tasks": {
 					"~|My Arm's Big Adventure|~ 10": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23178"
 			},
 			"Cecilia: Scorpia Dances (hard)": {
 				"Chunks": ["Scorpia's Lair"],
@@ -39738,7 +39835,8 @@
 				"NPCs": ["Cecilia"],
 				"ClueTier": "elite",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "24773"
 			},
 			"Cecilia: The Pharaoh": {
 				"NPCs": ["Cecilia"],
@@ -39747,13 +39845,22 @@
 				"Tasks": {
 					"~|Beneath Cursed Sands|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "26943"
+			},
+			"Cute Hi": {
+				"NPCs": ["Teicuh"],
+				"ClueTier": "medium",
+				"ClueType": "Anagram",
+				"Not F2P": true,
+				"ClueId": "30933"
 			},
 			"Clash Ion": {
 				"NPCs": ["Nicholas"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23131"
 			},
 			"20 degrees 11 minutes north, 07 degrees 41 minutes west": {
 				"Chunks": ["8763-1"],
@@ -39761,9 +39868,10 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12105"
 			},
-			"20 degrees 45 minutes north, 7 degrees 26 degrees west": {
+			"20 degrees 45 minutes north, 07 degrees 26 degrees west": {
 				"Chunks": ["8763-1"],
 				"ClueTier": "master",
 				"ClueType": "Coordinates",
@@ -39783,13 +39891,15 @@
 				"NPCs": ["Mawnis Burowgar"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19856"
 			},
 			"Snakes So I Sail": {
 				"NPCs": ["Lisse Isaakson"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19795"
 			},
 			"19 degrees 56 minutes north, 02 degrees 31 minutes west": {
 				"Chunks": ["9275-1"],
@@ -39797,7 +39907,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12094"
 			},
 			"20 degrees 24 minutes north, 03 degrees 52 minutes west": {
 				"Chunks": ["9275-1"],
@@ -39805,7 +39916,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23148"
 			},
 			"West of the Jatizso mine entrance.": {
 				"Chunks": ["9531-1"],
@@ -39821,7 +39933,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12087"
 			},
 			"At the Rellekka Hunter area, near the hunter training icon.": {
 				"Chunks": ["10811-1"],
@@ -39836,7 +39949,8 @@
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Sled", "Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12141"
 			},
 			"Do the crab dance by the monument on Wintumber Island. (Crab helmet, Crab claw)": {
 				"Chunks": ["8232-1"],
@@ -39844,7 +39958,8 @@
 				"ClueType": "Emote",
 				"Items": ["Crab helmet", "Crab claw"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "31269"
 			},
 			"Panic at the area flowers meet snow. (Blue d'hide vambraces, Dragons spear, Rune plateskirt)": {
 				"Chunks": ["11067"],
@@ -39856,7 +39971,8 @@
 					"Ranged": 50
 				},
 				"Items": ["Blue d'hide vambraces", "Dragon spear", "Rune plateskirt", "Sled"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19787"
 			},
 			"20 degrees 33 minutes north, 15 degrees 48 minutes east": {
 				"Chunks": ["11835"],
@@ -39864,7 +39980,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2735"
 			},
 			"20 degrees 35 minutes north, 15 degrees 58 minutes east": {
 				"Chunks": ["11835"],
@@ -39888,7 +40005,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2733"
 			},
 			"East of the Wilderness canoe exit, level 35 Wilderness.": {
 				"Chunks": ["12603-1"],
@@ -39904,7 +40022,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2741"
 			},
 			"21 degrees 03 minutes north, 24 degrees 13 minutes east": {
 				"Chunks": ["12859-2"],
@@ -39912,7 +40031,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12109"
 			},
 			"Panic by the big egg where no one dare goes and the ground is burnt. Beware of double agents! (Dragon med helm, Toktz-ket-xil, Rune platebody, Brine sabre, Amulet of glory)": {
 				"Chunks": ["12859-2"],
@@ -39940,14 +40060,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "21526"
 			},
 			"Does one really need a fire to stay warm here?": {
 				"Chunks": ["15163-1"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "21525"
 			},
 			"West of the Farming Guild.": {
 				"Chunks": ["4666"],
@@ -39965,7 +40087,8 @@
 				"Tasks": {
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23135"
 			},
 			"18 degrees 26 minutes north, 37 degrees 15 minutes west": {
 				"Chunks": ["4922"],
@@ -40003,27 +40126,31 @@
 				"NPCs": ["Dockmaster"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19744"
 			},
 			"ECRVCKP MJCNGF": {
 				"NPCs": ["Captain Khaled"],
 				"ClueTier": "medium",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19766"
 			},
 			"A ring of water surrounds 4 powerful rings, dig above the ladder located there.": {
 				"Chunks": ["Waterbirth Island Dungeon"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19809"
 			},
 			"Three rule below and three sit at top. Come dig at my entrance.": {
 				"Chunks": ["10042-1"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12142"
 			},
 			"18 degrees 03 minutes north, 03 degrees 03 minutes east": {
 				"Chunks": ["10042-2"],
@@ -40037,7 +40164,8 @@
 				"NPCs": ["Drunken Dwarf"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19890"
 			},
 			"17 degrees 50 minutes north, 08 degrees 30 minutes east": {
 				"Chunks": ["10810-1"],
@@ -40045,14 +40173,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7266"
 			},
 			"DKS 2310": {
 				"Chunks": ["10810-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19878"
 			},
 			"18 degrees 05 minutes north, 12 degrees 05 minutes east": {
 				"Chunks": ["11322-1"],
@@ -40060,7 +40190,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12090"
 			},
 			"Dig in front of the icy arena where 1 of 4 was fought.": {
 				"Chunks": ["11322-2"],
@@ -40100,7 +40231,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7260"
 			},
 			"17 degrees 58 minutes north, 19 degrees 05 minutes east": {
 				"Chunks": ["12090"],
@@ -40108,7 +40240,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23146"
 			},
 			"18 degrees 50 minutes north, 20 degrees 26 minutes east": {
 				"Chunks": ["12346"],
@@ -40116,7 +40249,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3556"
 			},
 			"19 degrees 09 minutes north, 21 degrees 58 minutes east": {
 				"Chunks": ["12602"],
@@ -40124,7 +40258,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23168"
 			},
 			"Inside the Ruins north of the Graveyard of Shadows, level 27 Wilderness.": {
 				"Chunks": ["12602"],
@@ -40140,7 +40275,8 @@
 				"ClueType": "Anagram",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2747"
 			},
 			"South of the Silk Chasm, level 32 Wilderness.": {
 				"Chunks": ["13114"],
@@ -40172,7 +40308,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19840"
 			},
 			"Within Lizardman Canyon, east of the ladder.": {
 				"Chunks": ["5945"],
@@ -40187,7 +40324,8 @@
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19826"
 			},
 			"Bow in front of the cave on Brittle Island. Beware of double agents! (Medallion of the deep, Rosewood blowpipe)": {
 				"Chunks": ["7743-1"],
@@ -40231,7 +40369,8 @@
 				"NPCs": ["Charles"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23161"
 			},
 			"16 degrees 45 minutes north, 03 degrees 05 minutes west": {
 				"Chunks": ["9273-1"],
@@ -40242,7 +40381,8 @@
 					"~|Swan Song|~ Complete the quest": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23167"
 			},
 			"The beasts retreat, for their Queen is gone; the song of this town still plays on. Dig near the birthplace of a blade, be careful not to melt your spade.": {
 				"Chunks": ["9273-1"],
@@ -40252,7 +40392,8 @@
 				"Tasks": {
 					"~|Swan Song|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12143"
 			},
 			"Piscatoris Fishing Colony": {
 				"Chunks": ["9273-1"],
@@ -40278,20 +40419,23 @@
 				"NPCs": ["Brundt the Chieftain"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7274"
 			},
 			"15 degrees 22 minutes north, 07 degrees 31 minutes east": {
 				"Chunks": ["10553-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12039"
 			},
 			"Unleash Night Mist": {
 				"NPCs": ["Sigli the Huntsman"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12137"
 			},
 			"West of the Keldagrim entrance mine.": {
 				"Chunks": ["10809-1"],
@@ -40313,7 +40457,8 @@
 				},
 				"Items": ["Rune full helm", "Blue d'hide chaps", "Fire battlestaff"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10248"
 			},
 			"16 degrees 09 minutes north, 10 degrees 33 minutes east": {
 				"Chunks": ["11065"],
@@ -40321,7 +40466,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12104"
 			},
 			"At the Mountain Camp.": {
 				"Chunks": ["11065"],
@@ -40337,7 +40483,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3528"
 			},
 			"16 degrees 03 minutes north, 14 degrees 07 minutes east": {
 				"Chunks": ["11577"],
@@ -40345,7 +40492,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3526"
 			},
 			"Yawn at the top of Trollheim. (Lava battlestaff, Black d'hide vambraces, Mind shield)": {
 				"Chunks": ["11577"],
@@ -40357,7 +40505,8 @@
 					"Ranged": 70
 				},
 				"Items": ["Lava battlestaff", "Black d'hide vambraces", "Mind shield"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12081"
 			},
 			"16 degrees 43 minutes north, 19 degrees 13 minutes east": {
 				"Chunks": ["12089"],
@@ -40365,7 +40514,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2745"
 			},
 			"Yawn in the rogues' general store. Beware of double agents! (Adamant sq shield, rune pickaxe, Blue d'hide vambraces)": {
 				"Chunks": ["12089"],
@@ -40378,7 +40528,8 @@
 				},
 				"Items": ["Adamant sq shield", "Rune pickaxe", "Blue d'hide vambraces"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10244"
 			},
 			"16 degrees 07 minutes north, 22 degrees 45 minutes east": {
 				"Chunks": ["12601"],
@@ -40386,14 +40537,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2743"
 			},
 			"I lie lonely and forgotten in mid wilderness, where the dead rise from their beds. Feel free to quarrel and wind me up and dig while you shoot their heads.": {
 				"Chunks": ["12601"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2786"
 			},
 			"East of the Corporeal Beast's lair, level 20 Wilderness.": {
 				"Chunks": ["12857"],
@@ -40409,7 +40562,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7264"
 			},
 			"16 degrees 43 minutes north, 26 degrees 56 minutes east": {
 				"Chunks": ["13113"],
@@ -40417,27 +40571,31 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12564"
 			},
 			"The effects of this fire are magnified.": {
 				"Chunks": ["4664"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23045"
 			},
 			"Dig by the Giants' Den entrance, looking out over Lake Molch.": {
 				"Chunks": ["5688"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25788"
 			},
 			"Pacinng a taie": {
 				"NPCs": ["Captain Ginea"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19734"
 			},
 			"A graceful man of many colours, his crates must be full of many delights.": {
 				"Chunks": ["5944-1"],
@@ -40445,13 +40603,15 @@
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19760"
 			},
 			"Our Own Needs": {
 				"NPCs": ["Nurse Wooned"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19794"
 			},
 			"Shrug in the Shayzien command tent. (Mystic robe bottom, Rune kiteshield, Any bob shirt)": {
 				"Chunks": ["5944-1"],
@@ -40462,7 +40622,8 @@
 					"Magic": 40
 				},
 				"Items": ["Mystic robe bottom", "Rune kiteshield", "Bob shirt[+]"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19788"
 			},
 			"South-east of the War Tent in the Shayzien Encampment.": {
 				"Chunks": ["5944-1"],
@@ -40488,7 +40649,8 @@
 					"Defence": 30
 				},
 				"Items": ["Adamant platebody", "Adamant full helm", "Adamant platelegs"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19776"
 			},
 			"Shayzien, east of the Combat Ring.": {
 				"Chunks": ["6200-1"],
@@ -40509,7 +40671,8 @@
 				},
 				"Items": ["Rune halberd", "Rune platebody", "Amulet of strength"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12552"
 			},
 			"This place sure is a mess.": {
 				"NPCs": ["Ewesey"],
@@ -40529,13 +40692,15 @@
 				"Chunks": ["6712-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19829"
 			},
 			"Search the basket of apples in an orchard, south of the unknown grave surrounded by white roses.": {
 				"Chunks": ["6712-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25783"
 			},
 			"South of the gravestone in Kingstown.": {
 				"Chunks": ["6712-1"],
@@ -40549,7 +40714,8 @@
 				"Chunks": ["7224-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25789"
 			},
 			"Go to this building to be illuminated, and check the drawers while you are there.": {
 				"Chunks": ["10040-1"],
@@ -40560,21 +40726,24 @@
 					"~|Horror from the Deep|~ 4": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7298"
 			},
 			"Search the crate abandoned in the shadow of a mountain's grace.": {
 				"Chunks": ["5426-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "30935"
 			},
 			"ALP 1140": {
 				"Chunks": ["10040-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19866"
 			},
 			"Bow at the top of the lighthouse. Beware of double agents! (Blue d'hide body, BLue d'hide vambraces)": {
 				"Chunks": ["10040-1"],
@@ -40588,7 +40757,8 @@
 					"~|Horror from the Deep|~ 4": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10238"
 			},
 			"https://oldschool.runescape.wiki/images/4/4c/Map_clue_Lighthouse_peninsula.png?eaa10": {
 				"Chunks": ["10296-1"],
@@ -40603,14 +40773,16 @@
 				"ClueType": "Hot/Cold",
 				"Items": ["Spade", "Strange device (master)"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7292"
 			},
-			"14 degrees 54 minutes north, 9 degrees 13 minutes east": {
+			"14 degrees 54 minutes north, 09 degrees 13 minutes east": {
 				"Chunks": ["10808-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7315"
 			},
 			"North-west of the Sinclair Mansion, near the log balance shortcut.": {
 				"Chunks": ["10808-2"],
@@ -40632,7 +40804,8 @@
 				"Chunks": ["12088"],
 				"ClueTier": "hard",
 				"ClueType": "Map",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3525"
 			},
 			"South-east of the Dark Warriors' Fortress, level 12 Wilderness.": {
 				"Chunks": ["12088"],
@@ -40648,7 +40821,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7262"
 			},
 			"Shrug in the woods east of the Level 19 Wilderness Obelisk. Beware of double agents! (Rune platelegs, Iron platebody, BLue d'hide vambraces)": {
 				"Chunks": ["12857"],
@@ -40660,7 +40834,8 @@
 				},
 				"Items": ["Rune platelegs", "Iron platebody", "Blue d'hide vambraces"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10234"
 			},
 			"South-west corner of the Kebos Swamp.": {
 				"Chunks": ["4663-1"],
@@ -40675,7 +40850,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19774"
 			},
 			"Brucie Catnap": {
 				"NPCs": ["Captain Bruce"],
@@ -40693,7 +40869,8 @@
 				"NPCs": ["Drunken soldier"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25784"
 			},
 			"East of Watson's house.": {
 				"Chunks": ["6455-1"],
@@ -40707,38 +40884,44 @@
 				"NPCs": ["Konoo"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19825"
 			},
 			"My Mangle Lal": {
 				"NPCs": ["Lammy Langle"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19896"
 			},
 			"Dig in the lair of red wings, within the temple of the Sun and moon.": {
 				"Chunks": ["Forthos Dungeon"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25791"
 			},
 			"I wouldn't wear this jean on my legs.": {
 				"NPCs": ["Father Jean"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19820"
 			},
 			"I Am Sir": {
 				"NPCs": ["Marisi"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19756"
 			},
 			"Low Lag": {
 				"NPCs": ["Gallow"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19738"
 			},
 			"North-west of Eagles' Peak.": {
 				"Chunks": ["9271-1"],
@@ -40753,7 +40936,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12047"
 			},
 			"Eastern part of Piscatoris Hunter area, south-west of the Piscatoris falconry area.": {
 				"Chunks": ["9271-1"],
@@ -40775,7 +40959,8 @@
 				"Tasks": {
 					"~|Alfred Grimhand's Barcrawl|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10264"
 			},
 			"Inside the Barbarian Agility Course. Completion of Alfred Grimhand's Barcrawl is required.": {
 				"Chunks": ["10039-1"],
@@ -40793,33 +40978,38 @@
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7294"
 			},
-			"Dance a jig behind the bar on Pandemonium. (Right eye patch, Bronze scimitar)": {
+			"Dance a jig behind the bar on the Pandemonium. (Right eye patch, Bronze scimitar)": {
 				"Chunks": ["12078-1"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Right eye patch", "Bronze scimitar"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "31268"
 			},
 			"Laugh at the crossroads south of the Sinclair Mansion. (Leather cowl, Iron Scimitar, Blue wizard robe)": {
 				"Chunks": ["10807-1"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Leather cowl", "Iron scimitar", "Blue wizard robe"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10226"
 			},
 			"Speak to the staff of Sinclair mansion.": {
 				"NPCs": ["Louisa"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3513"
 			},
 			"Speak to Donovan, the Family Handyman.": {
 				"NPCs": ["Donovan the Family Handyman"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2855"
 			},
 			"A Bas": {
 				"Chunks": ["11319-1"],
@@ -40862,7 +41052,8 @@
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12144"
 			},
 			"W marks the spot.": {
 				"Chunks": ["11319-1"],
@@ -40873,7 +41064,8 @@
 					"Access the Warriors' Guild": "Nonskill"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12148"
 			},
 			"Salute in the warriors' guild bank. (Black salamander)": {
 				"Chunks": ["11319-1"],
@@ -40889,68 +41081,79 @@
 					"Access the Warriors' Guild": "Nonskill"
 				},
 				"Items": ["Black salamander"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12077"
 			},
 			"Cheer at the games room.": {
 				"Chunks": ["Burthorpe Games Room"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10212"
 			},
 			"Search the crate in the Toad and Chicken pub.": {
 				"Chunks": ["11575-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12185"
 			},
 			"Search the drawers of houses in Burthorpe.": {
 				"Chunks": ["11575-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3490"
 			},
 			"Search the tents in the Imperial Guard camp in Burthorpe for some boxes.": {
 				"Chunks": ["11575-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3503"
 			},
-			"Talk to Turael in Burthorpe.": {
+			"Talk to the Slayer Master in Burthorpe.": {
 				"NPCs": ["Turael"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23165"
 			},
 			"Heoric": {
 				"NPCs": ["Eohric"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12071"
 			},
 			"Sand Nut": {
 				"NPCs": ["Dunstan"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19748"
 			},
 			"Go to the village being attacked by trolls, search the drawers in one of the houses.": {
 				"Chunks": ["11575-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3607"
 			},
 			"11 degrees 41 minutes north, 14 degrees 58 minutes east": {
 				"Chunks": ["11575-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3586"
 			},
 			"Rat Mat Within": {
 				"NPCs": ["Martin Thwait"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12570"
 			},
 			"Fiendish cooks probably won’t dig the dirty dishes.": {
 				"Chunks": ["Rogues' Den"],
@@ -40963,21 +41166,24 @@
 				"NPCs": ["Dark Mage (Abyss)"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19888"
 			},
 			"DIP 8511": {
 				"Chunks": ["Abyssal Nexus"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19876"
 			},
 			"Dig where the forces of Zamorak and Saradomin collide.": {
 				"Chunks": ["Abyss"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12150"
 			},
 			"12 degrees 45 minutes north, 20 degrees 09 minutes east": {
 				"Chunks": ["12343-2"],
@@ -41000,7 +41206,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12053"
 			},
 			"Headbang at the top of the Slayer Tower. (Seercull, Combat bracelet, helm of neitiznot)": {
 				"Chunks": ["13623"],
@@ -41011,7 +41218,8 @@
 					"Ranged": 50
 				},
 				"Items": ["Seercull", "Combat bracelet(4)", "Helm of neitiznot"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12080"
 			},
 			"Panic by the mausoleum in Morytania. Wave before you speak to me. (Mithril plateskirt, Maple longbow)": {
 				"Chunks": ["13879-2"],
@@ -41022,13 +41230,15 @@
 					"Ranged": 30
 				},
 				"Items": ["Mithril plateskirt", "Maple longbow"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10256"
 			},
 			"Cool Nerd": {
 				"NPCs": ["Old crone"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12138"
 			},
 			"South of the Mausoleum.": {
 				"Chunks": ["13879-1"],
@@ -41043,7 +41253,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12037"
 			},
 			"12 degrees 35 minutes north, 36 degrees 20 minutes east": {
 				"Chunks": ["14391"],
@@ -41051,7 +41262,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12108"
 			},
 			"12 degrees 35 minutes north, 36 degrees 22 minutes east": {
 				"Chunks": ["14391"],
@@ -41067,7 +41279,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12085"
 			},
 			"Northern part of Dragontooth Island.": {
 				"Chunks": ["15159"],
@@ -41091,7 +41304,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25790"
 			},
 			"10 degrees 52 minutes north, 30 degrees 54 minutes west": {
 				"Chunks": ["5686-1"],
@@ -41099,7 +41313,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25787"
 			},
 			"Slam Duster Grail": {
 				"NPCs": ["Guildmaster Lars"],
@@ -41118,13 +41333,15 @@
 					"Defence": 20
 				},
 				"Items": ["Farmer's strawhat", "Shayzien body (5)", "Pyromancer robe"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25786"
 			},
 			"Monk's residence in the far west. See robe storage device.": {
 				"Chunks": ["6966-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19818"
 			},
 			"10 degrees 54 minutes north, 20 degrees 50 minutes west": {
 				"Chunks": ["6966-1"],
@@ -41132,7 +41349,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19813"
 			},
 			"North of the Tithe Farm.": {
 				"Chunks": ["7222-1"],
@@ -41147,33 +41365,38 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12045"
 			},
 			"11 degrees 05 minutes north, 00 degrees 45 minutes west": {
 				"Chunks": ["9526-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3594"
 			},
 			"C On Game Hoc": {
 				"NPCs": ["Gnome Coach"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7268"
 			},
 			"Dig near some giant mushrooms, behind the Grand Tree.": {
 				"Chunks": ["9782"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3510"
 			},
 			"Citric cellar.": {
 				"NPCs": ["Heckel Funch"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3575"
 			},
 			"Grand Tree, just east of the terrorchick gnome enclosure.": {
 				"Chunks": ["9782"],
@@ -41187,20 +41410,23 @@
 				"NPCs": ["Otto Godblessed"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12055"
 			},
 			"09 degrees 33 minutes north, 02 degrees 15 minutes east": {
 				"Chunks": ["10038-2"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2811"
 			},
 			"A great view - watch the rapidly drying hides get splashed. Check the box you are sitting on.": {
 				"Chunks": ["10038-2"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3573"
 			},
 			"Jump for joy in the Ancient Cavern. (Granite shield, Splitbark body, Any rune heraldic helm)": {
 				"Chunks": ["Ancient Cavern"],
@@ -41212,7 +41438,8 @@
 					"Strength": 50
 				},
 				"Items": ["Granite shield", "Splitbark body", "HeraldicRuneHelm[+]"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12083"
 			},
 			"South-east of Almera's house on Baxtorian Falls.": {
 				"Chunks": ["10038-2"],
@@ -41227,26 +41454,30 @@
 				"ClueTier": "easy",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3516"
 			},
 			"10 degrees 45 minutes north, 04 degrees 31 minutes east": {
 				"Chunks": ["10294-2"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12049"
 			},
 			"Must be full of railings.": {
 				"Chunks": ["10294-2"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3574"
 			},
 			"https://oldschool.runescape.wiki/images/3/30/Map_clue_McGrubors.png?0a25a": {
 				"Chunks": ["10550"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3598"
 			},
 			"McGrubor's Wood": {
 				"Chunks": ["10550"],
@@ -41260,19 +41491,22 @@
 				"Chunks": ["10806-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3509"
 			},
 			"Search the chest in the left-hand tower of Camelot Castle.": {
 				"Chunks": ["10806-2"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2703"
 			},
 			"Search the chests in the Dwarven Mine.": {
 				"Chunks": ["Dwarven Mine"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3493"
 			},
 			"In a town where everyone has perfect vision, seek some locked drawers in a house that sits opposite a workshop.": {
 				"Chunks": ["10806-1"],
@@ -41280,7 +41514,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2837"
 			},
 			"Clap in Seers court house. Spin before you talk to me. (Adamant halberd, Diamond ring, Mystic robe bottom)": {
 				"Chunks": ["10806-1"],
@@ -41293,41 +41528,47 @@
 					"Strength": 15
 				},
 				"Items": ["Adamant halberd", "Diamond ring", "Mystic robe bottom"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12025"
 			},
 			"Search the food barrel at the top of the Hunter Guild.": {
 				"Chunks": ["6191-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28913"
 			},
 			"Yawn in the Fortis Grand Museum. (Emerald necklace, Blue skirt, Turquoise robe top)": {
 				"Chunks": ["6705-1"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Emerald necklace", "Blue skirt", "Turquoise robe top"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28914"
 			},
 			"LAME T": {
 				"Chunks": ["6958-1"],
 				"NPCs": ["Metla"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28907"
 			},
 			"01 degrees 33 minutes south, 24 degrees 24 minutes west": {
 				"Chunks": ["6448"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28909"
 			},
 			"Are you somewhat entertained?": {
 				"Chunks": ["Fortis Colosseum Underground"],
 				"NPCs": ["Gloria"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28908"
 			},
 			"Cecilia: The Moons of Ruin": {
 				"NPCs": ["Cecilia"],
@@ -41336,21 +41577,24 @@
 				"Tasks": {
 					"~|Perilous Moons|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28918"
 			},
 			"AJP 3015": {
 				"Chunks": ["6447"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28915"
 			},
 			"BXJA UNJMNA YRCAR": {
 				"Chunks": ["6191-1"],
 				"NPCs": ["Soar Leader Pitri"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28916"
 			},
 			"00 degrees 43 minutes north, 11 degrees 13 minutes west": {
 				"Chunks": ["8241-1"],
@@ -41358,7 +41602,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "31271"
 			},
 			"00 degrees 41 minutes north, 27 degrees 35 minutes west": {
 				"Chunks": ["6193-1"],
@@ -41366,14 +41611,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28912"
 			},
 			"With drinks and dwarves I make my way, upon my head a glass will stay.": {
 				"Chunks": ["Cam Torum"],
 				"NPCs": ["Funbo"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28911"
 			},
 			"Bow within the temple in Civitas illa Fortis. (Sunfire fanatic armour piece)": {
 				"Chunks": ["6704-1"],
@@ -41385,7 +41632,8 @@
 				},
 				"Items": ["Sunfire fanatic armour[+]"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "28910"
 			},
 			"Salute outside the gates of Cam Torum. Beware of double agents! (Blue moon helm, Blue moon chestplate, Blue moon tassets, Blue moon spear)": {
 				"Chunks": ["5680-1"],
@@ -41438,7 +41686,8 @@
 				"Chunks": ["Elemental Workshop"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7250"
 			},
 			"Even the seers say this clue goes right over their heads.": {
 				"Chunks": ["10806-1"],
@@ -41447,7 +41696,8 @@
 				"Skills": {
 					"Agility": 60
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12145"
 			},
 			"Between the Seers' Village bank and Camelot.": {
 				"Chunks": ["10806-1"],
@@ -41461,20 +41711,23 @@
 				"Chunks": ["11062-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2702"
 			},
 			"Kay Sir": {
 				"Chunks": ["11062-1"],
 				"NPCs": ["Sir Kay"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12069"
 			},
 			"This aviator is at the peak of his profession.": {
 				"NPCs": ["Captain Bleemadge"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3570"
 			},
 			"Panic by the pilot on White Wolf Mountain. Beware of double agents! (Mithril platelegs, Ring of life, Rune axe)": {
 				"Chunks": ["11318-2"],
@@ -41486,20 +41739,23 @@
 				},
 				"Items": ["Mithril platelegs", "Ring of life", "Rune axe"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10250"
 			},
 			"Cheer at the Druids' Circle. (Blue wizard hat, Bronze 2h sword, Ham boots)": {
 				"Chunks": ["11574-1"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Blue wizard hat", "Bronze 2h sword", "Ham boots"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10210"
 			},
 			"A Guthixian ring lies between two peaks. Search the stones and you'll find what you seek.": {
 				"Chunks": ["11574-1"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12156"
 			},
 			"Laugh by the fountain of heroes. (Splitbark legs, Dragon boots, Rune longsword)": {
 				"Chunks": ["Heroes' Guild#Basement"],
@@ -41511,7 +41767,8 @@
 					"Magic": 40
 				},
 				"Items": ["Splitbark legs", "Dragon boots", "Rune longsword"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12082"
 			},
 			"Atop Ice Mountain": {
 				"Chunks": ["11830-3"],
@@ -41524,14 +41781,16 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7311"
 			},
 			"Generally speaking, his nose was very bent.": {
 				"Chunks": ["11830-1"],
 				"NPCs": ["General Bentnoze"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2799"
 			},
 			"Goblin Salute at the Goblin Village. Beware of double agents! (Bandos platebody, Bandos cloak, Bandos godsword)": {
 				"Chunks": ["11830-1"],
@@ -41558,32 +41817,37 @@
 				"Chunks": ["12086-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12177"
 			},
 			"Are Col": {
 				"NPCs": ["Oracle"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2851"
 			},
 			"'A bag belt only?', he asked his balding brothers.": {
 				"NPCs": ["Abbot Langley"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2793"
 			},
 			"The keeper of Melzars...Spare? Skeleton? Anar?": {
 				"NPCs": ["Oziach"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2794"
 			},
 			"Bow upstairs in the Edgeville Monastery. (Any completed god book)": {
 				"Chunks": ["12086-1"],
 				"ClueTier": "elite",
 				"ClueType": "Emote",
 				"Items": ["God book[+]"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12078"
 			},
 			"Anger Abbot Langley.": {
 				"NPCs": ["Abbot Langley"],
@@ -41597,53 +41861,61 @@
 				"NPCs": ["Vannaka"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19816"
 			},
 			"Search the Coffin in Edgeville.": {
 				"Chunks": ["12342-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12174"
 			},
 			"Talk to the mother of a basement dwelling son.": {
 				"NPCs": ["Doris"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12173"
 			},
 			"Cheer in the Edgeville general store. Dance before you talk to me. (Brown apron, Leather boots, Leather gloves)": {
 				"Chunks": ["12342-1"],
 				"ClueTier": "medium",
 				"ClueType": "Emote",
 				"Items": ["Brown apron", "Leather boots", "Leather gloves"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12031"
 			},
 			"Veil Veda": {
 				"Chunks": ["Basement of Doom"],
 				"NPCs": ["Evil Dave"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19882"
 			},
 			"Come to the evil ledge, Yew know yew want to. Try not to get stung.": {
 				"Chunks": ["12342-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2774"
 			},
 			"My giant guardians below the market streets would be fans of rock and roll, if only they could grab hold of it. Dig near my green bubbles!": {
 				"Chunks": ["Varrock Sewers"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2790"
 			},
 			"You were 3 and I was the 6th. Come speak to me.": {
 				"NPCs": ["Vannaka"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12147"
 			},
 			"Bow to Brugsen Bursen at the Grand Exchange.": {
 				"Chunks": ["12598"],
@@ -41655,7 +41927,8 @@
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Pink skirt", "Pink robe top", "Body tiara"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19831"
 			},
 			"Spin in the Varrock Castle courtyard. (Coif, Black axe, Ruby ring)": {
 				"Chunks": ["12854-1"],
@@ -41666,38 +41939,44 @@
 					"Ranged": 20
 				},
 				"Items": ["Coif", "Black axe", "Ruby ring"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12162"
 			},
 			"Yawn in the Varrock library. (Ham robe, Green robe top, Iron warhammer)": {
 				"Chunks": ["12854-1"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Ham robe", "Green robe top", "Iron warhammer"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10204"
 			},
 			"Search for a crate in Varrock Castle.": {
 				"Chunks": ["12854-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3515"
 			},
 			"Lark In Dog": {
 				"NPCs": ["King Roald"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7284"
 			},
 			"You'll need to look for a town with a central fountain. Look for a locked chest in the town's chapel.": {
 				"Chunks": ["12854-1", "10290-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2831"
 			},
 			"Surprising? I bet he is...": {
 				"NPCs": ["Sir Prysin"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2796"
 			},
 			"Show your anger towards the Statue of Saradomin in Ellamaria's garden. (Zamorak godsword)": {
 				"Chunks": ["12854-1"],
@@ -41717,13 +41996,15 @@
 					"Defence": 10
 				},
 				"Items": ["Hardleather body", "Leather chaps", "Bronze axe"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10230"
 			},
 			"https://oldschool.runescape.wiki/images/6/68/Map_clue_Lumberyard.png?985cc": {
 				"Chunks": ["13110-1"],
 				"ClueTier": "hard",
 				"ClueType": "Map",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2722"
 			},
 			"South of Lumber Yard, east of Assistant Serf.": {
 				"Chunks": ["13110-1"],
@@ -41742,7 +42023,8 @@
 					"Defence": 5
 				},
 				"Items": ["Bronze platelegs", "Steel med helm", "Steel pickaxe"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10186"
 			},
 			"The treasure is buried in a small building full of bones. Here is a hint: it's not near a graveyard.": {
 				"Chunks": ["13366"],
@@ -41755,38 +42037,44 @@
 				"NPCs": ["Ulizius"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3614"
 			},
 			"11 degrees 03 minutes north, 31 degrees 20 minutes east": {
 				"Chunks": ["13622-2"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3582"
 			},
 			"GUHCHO": {
 				"NPCs": ["Drezel"],
 				"ClueTier": "medium",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19772"
 			},
 			"Search the crates in Canifis.": {
 				"Chunks": ["13878-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7238"
 			},
 			"A town with a different sort of night-life is your destination.": {
 				"Chunks": ["13878-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3609"
 			},
 			"Speak to Roavar.": {
 				"NPCs": ["Roavar"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3615"
 			},
 			"Dance in the centre of Canifis. Bow before you talk to me. (Green robe top, Mithril platelegs, Iron 2h sowrd)": {
 				"Chunks": ["13878-1"],
@@ -41796,20 +42084,23 @@
 					"Defence": 20
 				},
 				"Items": ["Green robe top", "Mithril platelegs", "Iron 2h sword"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10254"
 			},
 			"His bark is worse than his bite.": {
 				"NPCs": ["Barker"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12155"
 			},
 			"Panic in the heart of the Haunted Woods. Beware of double agents!": {
 				"Chunks": ["14390-1"],
 				"ClueTier": "hard",
 				"ClueType": "Emote",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10240"
 			},
 			"West of Port Phasmatys, south-east of fairy ring.": {
 				"Chunks": ["14390-1"],
@@ -41850,20 +42141,23 @@
 				"NPCs": ["Brimstail"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3612"
 			},
 			"I Even": {
 				"NPCs": ["Nieve"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12059"
 			},
 			"08 degrees 33 minutes north, 01 degrees 39 minutes west": {
 				"Chunks": ["9525-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3592"
 			},
 			"South-west Tree Gnome Stronghold": {
 				"Chunks": ["9525-1"],
@@ -41877,7 +42171,8 @@
 				"NPCs": ["Ermin"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19828"
 			},
 			"Cry on top of the western tree in the Gnome Agility Arena. Indicate 'no' before you talk to me. (Steel kiteshield, Ring of forging, Green d'hide chaps)": {
 				"Chunks": ["9781-1"],
@@ -41888,19 +42183,22 @@
 					"Ranged": 40
 				},
 				"Items": ["Steel kiteshield", "Ring of forging", "Green d'hide chaps"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10266"
 			},
 			"'Small shoe.' Often found with rod on mushroom.": {
 				"NPCs": ["Gnome trainer"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3577"
 			},
 			"Ladder Memo Guv": {
 				"NPCs": ["Guard Vemmeldo"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19792"
 			},
 			"Cheer in the Shadow dungeon. (Rune crossbow, Climbing boots, Any mitre)": {
 				"Chunks": ["Shadow Dungeon"],
@@ -41912,7 +42210,8 @@
 					"Ranged": 61
 				},
 				"Items": ["Rune crossbow", "Climbing boots", "Mitre[+]", "Ring of visibility"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12076"
 			},
 			"The far north eastern corner where 1 of 4 was defeated, the shadows still linger.": {
 				"Chunks": ["Shadow Dungeon"],
@@ -41926,7 +42225,8 @@
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Bronze chainbody", "Sapphire amulet", "Emerald ring"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10220"
 			},
 			"Blow a raspberry in the Fishing Guild bank. Beware of double agents! (Elemental shield, Blue d'hide chaps, Rune warhammer)": {
 				"Chunks": ["10293"],
@@ -41938,37 +42238,43 @@
 				},
 				"Items": ["Elemental shield", "Blue d'hide chaps", "Rune warhammer"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10236"
 			},
 			"Search for a crate in a building in Hemenster.": {
 				"Chunks": ["10549"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3506"
 			},
 			"This crate holds a better reward than a broken arrow.": {
 				"Chunks": ["10549"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7304"
 			},
 			"If you look closely enough, it seems that the archers have lost more than their needles.": {
 				"Chunks": ["10549"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7254"
 			},
 			"Peak Reflex": {
 				"NPCs": ["Flax keeper"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19752"
 			},
 			"Read 'How to breed scorpions.' By O.W.Thathurt.": {
 				"Chunks": ["10805"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3572"
 			},
 			"Blow raspberries outside the entrance to Keep Le Faye. (Coif, Iron platebody, Leather gloves)": {
 				"Chunks": ["11061-1"],
@@ -41978,7 +42284,8 @@
 					"Ranged": 20
 				},
 				"Items": ["Coif", "Iron platebody", "Leather gloves"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10222"
 			},
 			"Jump for joy at the beehives. (Desert shirt, Steel axe, Green robe bottoms)": {
 				"Chunks": ["11061-1"],
@@ -41988,19 +42295,22 @@
 					"Attack": 5
 				},
 				"Items": ["Desert shirt", "Steel axe", "Green robe bottoms"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10214"
 			},
 			"Search the drawers in the upstairs of a house in Catherby.": {
 				"Chunks": ["11061-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3507"
 			},
 			"Speak to Arhein in Catherby.": {
 				"NPCs": ["Arhein"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2701"
 			},
 			"Shrug in Catherby bank. Yawn before you talk to me. (Maple longbow, Green d'hide chaps, Iron med helm)": {
 				"Chunks": ["11061-1"],
@@ -42010,13 +42320,15 @@
 					"Ranged": 40
 				},
 				"Items": ["Maple longbow", "Green d'hide chaps", "Iron med helm"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12023"
 			},
 			"I burn between heroes and legends.": {
 				"NPCs": ["Candle maker"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12152"
 			},
 			"Catherby, between the bank and the beehives, near small rock formation.": {
 				"Chunks": ["11061-1"],
@@ -42030,13 +42342,15 @@
 				"Chunks": ["11317-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2700"
 			},
 			"Thickno": {
 				"NPCs": ["Hickton"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12067"
 			},
 			"Cry in the Catherby Ranging shop. Bow before you talk to me. (Blue boots, Hardleather body, Silver sickle)": {
 				"Chunks": ["11317-1"],
@@ -42046,7 +42360,8 @@
 					"Defence": 10
 				},
 				"Items": ["Blue boots", "Hardleather body", "Silver sickle"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10276"
 			},
 			"Cry on the shore of Catherby beach. Laugh before you talk to me. (Adamant sq shield, Bone dagger, Mithril platebody)": {
 				"Chunks": ["11317-1"],
@@ -42056,13 +42371,15 @@
 					"Defence": 30
 				},
 				"Items": ["Adamant sq shield", "Bone dagger", "Mithril platebody"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12027"
 			},
 			"I watch the sea. I watch you fish. I watch your tree.": {
 				"NPCs": ["Ellena"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12581"
 			},
 			"08 degrees 11 minutes north, 12 degrees 30 minutes east": {
 				"Chunks": ["11317-1", "Taverley Dungeon"],
@@ -42076,50 +42393,58 @@
 				"Chunks": ["11573-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3499"
 			},
 			"Search the boxes next to a chest that needs a crystal key": {
 				"Chunks": ["11573-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23149"
 			},
 			"Search the crates in the outhouse of the long building in Taverley.": {
 				"Chunks": ["11573-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12191"
 			},
 			"Search through some drawers found in Taverley's houses.": {
 				"Chunks": ["11573-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3500"
 			},
 			"Speak to Gaius in Taverley.": {
 				"NPCs": ["Gaius"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2699"
 			},
 			"Speak to Jatix in Taverley.": {
 				"NPCs": ["Jatix"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12184"
 			},
 			"Speak to the Lady of the Lake.": {
 				"NPCs": ["The Lady of the Lake"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12190"
 			},
 			"07 degrees 33 minutes north, 15 degrees 00 minutes east": {
 				"Chunks": ["11573-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2821"
 			},
 			"My life was spared but these voices remain, now guarding these iron gates is my bane.": {
 				"NPCs": ["Key Master"],
@@ -42144,13 +42469,15 @@
 				"NPCs": ["Doric"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2698"
 			},
 			"Speak to Rusty north of Falador.": {
 				"Monsters": ["Rusty"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12187"
 			},
 			"https://oldschool.runescape.wiki/images/f/ff/Map_clue_Falador_statue_crossroads.png?01058": {
 				"Chunks": ["11829-1"],
@@ -42171,19 +42498,22 @@
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12170"
 			},
 			"Copper Ore Crypts": {
 				"NPCs": ["Prospector Percy"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12566"
 			},
 			"It seems to have reached the end of the line, and it's still empty.": {
 				"Chunks": ["Dwarven Mine"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7251"
 			},
 			"West of Barbarian Village.": {
 				"Chunks": ["12085-1"],
@@ -42202,13 +42532,15 @@
 				"Chunks": ["12341"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12172"
 			},
 			"Search the crates in the Barbarian Village helmet shop.": {
 				"Chunks": ["12341"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2690"
 			},
 			"Spin on the bridge by the Barbarian Village. Salute before you talk to me. (Purple gloves, Steel kiteshield, Mithril full helm)": {
 				"Chunks": ["12341"],
@@ -42218,14 +42550,16 @@
 					"Defence": 20
 				},
 				"Items": ["Purple gloves", "Steel kiteshield", "Mithril full helm"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10258"
 			},
 			"THEY'RE EVERYWHERE!!!! But they were here first. Dig for treasure where the ground is rich with ore.": {
 				"Chunks": ["12341"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12590"
 			},
 			"Carpet Ahoy": {
 				"NPCs": ["Apothecary"],
@@ -42241,26 +42575,30 @@
 				"Chunks": ["Varrock West Bank#Basement"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12176"
 			},
 			"Search the drawers in one of Gertrude's bedrooms.": {
 				"Chunks": ["12597-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2689"
 			},
 			"Strength potions with red spiders' eggs? He is quite a herbalist.": {
 				"NPCs": ["Apothecary"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19817"
 			},
 			"I am a token of the greatest love. I have no beginning or end. My eye is red, I can fit like a glove. Go to the place where it's money they lend, And dig by the gate to be my friend.": {
 				"Chunks": ["Varrock West Bank#Basement"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2776"
 			},
 			"In the city where merchants are said to have lived, talk to a man with a splendid cape, but a hat dropped by goblins.": {
 				"NPCs": ["Head chef"],
@@ -42269,7 +42607,8 @@
 				"Tasks": {
 					"Access the ~|Cooks' Guild|~": "Cooking"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19853"
 			},
 			"Nort-east of Gertrude's house west of Varrock.": {
 				"Chunks": ["12597-1"],
@@ -42344,61 +42683,71 @@
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Air tiara", "Staff of water"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19833"
 			},
 			"Search the crates in Horvik's armoury.": {
 				"Chunks": ["12853-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2688"
 			},
 			"Search the single crate in Horvik's smithy in Varrock.": {
 				"Chunks": ["12853-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23152"
 			},
 			"Search the drawers above Varrock's shops.": {
 				"Chunks": ["12853-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2708"
 			},
 			"Search the crates near a cart in Varrock.": {
 				"Chunks": ["12853-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2709"
 			},
 			"Search the drawers, upstairs in the bank to the East of Varrock.": {
 				"Chunks": ["12853-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2687"
 			},
 			"Speak to the bartender of the Blue Moon Inn in Varrock.": {
 				"NPCs": ["Bartender (Blue Moon Inn)"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2686"
 			},
 			"Talk to the cook in the Blue Moon Inn in Varrock.": {
 				"NPCs": ["Cook (Blue Moon Inn)"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23166"
 			},
 			"A Baker": {
 				"NPCs": ["Baraek"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12057"
 			},
 			"Armchair The Pelt": {
 				"NPCs": ["Charlie the Tramp"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19750"
 			},
 			"El Ow": {
 				"NPCs": ["Lowe"],
@@ -42410,13 +42759,15 @@
 				"NPCs": ["Wilough"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2797"
 			},
 			"Varrock is where I reside, not the land of the dead, but I am so old, I should be there instead. Let's hope your reward is as good as it says, just 1 gold one and you can have it read.": {
 				"NPCs": ["Aris"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12149"
 			},
 			"Under a giant robotic bird that cannot fly.": {
 				"Chunks": ["Varrock Museum#Natural History Exhibit"],
@@ -42434,7 +42785,8 @@
 					"Ranged": 30
 				},
 				"Items": ["Green hat", "Snakeskin boots", "Iron pickaxe"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10274"
 			},
 			"08 degrees 03 minutes north, 31 degrees 16 minutes east": {
 				"Chunks": ["13621-1"],
@@ -42442,7 +42794,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3544"
 			},
 			"Inside The Hollows, south of the bridge which was repaired in a quest.": {
 				"Chunks": ["13877-1"],
@@ -42458,7 +42811,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12103"
 			},
 			"07 degrees 37 minutes north, 35 degrees 18 minutes east": {
 				"Chunks": ["14133-1"],
@@ -42468,13 +42822,14 @@
 				"Not Skiller": true,
 				"Not F2P": true
 			},
-			"05 degrees 18 minutes north, 6 degrees 48 minutes west": {
+			"05 degrees 18 minutes north, 06 degrees 48 minutes west": {
 				"Chunks": ["Prifddinas"],
 				"ClueTier": "elite",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23770"
 			},
 			"Elvish onions.": {
 				"Chunks": ["Prifddinas"],
@@ -42488,7 +42843,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2807"
 			},
 			"Me If": {
 				"NPCs": ["Femi"],
@@ -42516,19 +42872,22 @@
 				"Tasks": {
 					"~|Biohazard|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10272"
 			},
 			"Search the crates in the shed just north of East Ardougne.": {
 				"Chunks": ["10292"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2707"
 			},
 			"Nod Med": {
 				"NPCs": ["Edmond"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7282"
 			},
 			"South of Fishing Guild": {
 				"Chunks": ["10292"],
@@ -42543,13 +42902,15 @@
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Blue robe top", "Tiara", "Ham robe"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10206"
 			},
 			"Search the crates in the guard house of the northern gate of East Ardougne.": {
 				"Chunks": ["10548-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2704"
 			},
 			"Bow outside the entrance to the Legends' Guild. (Emerald amulet, Iron platelegs, Oak longbow)": {
 				"Chunks": ["10804-1"],
@@ -42559,7 +42920,8 @@
 					"Ranged": 5
 				},
 				"Items": ["Emerald amulet", "Iron platelegs", "Oak longbow"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10188"
 			},
 			"https://oldschool.runescape.wiki/images/Map_clue_Champions_guild.png?3bdf1": {
 				"Chunks": ["12596-1"],
@@ -42571,7 +42933,8 @@
 				"Chunks": ["12085-1"],
 				"ClueTier": "beginner",
 				"ClueType": "Map",
-				"Items": ["Spade"]
+				"Items": ["Spade"],
+				"ClueId": "2719"
 			},
 			"https://oldschool.runescape.wiki/images/Map_clue_Draynor_willows.png?bb604": {
 				"Chunks": ["12338-1"],
@@ -42589,14 +42952,16 @@
 				"Chunks": ["12337-1"],
 				"ClueTier": "beginner",
 				"ClueType": "Map",
-				"Items": ["Spade"]
+				"Items": ["Spade"],
+				"ClueId": "3518"
 			},
 			"https://oldschool.runescape.wiki/images/7/7e/Map_clue_Picnic_tables.png?788d4": {
 				"Chunks": ["10804-1"],
 				"ClueTier": "hard",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7241"
 			},
 			"06 degrees 35 minutes north, 09 degrees 07 minutes east": {
 				"Chunks": ["10804-1"],
@@ -42607,7 +42972,8 @@
 					"~|Legends' Quest|~ 1": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12102"
 			},
 			"Bow on the ground floor of the Legends' guild. (Cape of legends, Dragon battleaxe, Amulet of glory)": {
 				"Chunks": ["10804-1"],
@@ -42620,7 +42986,8 @@
 				"Tasks": {
 					"~|Legends' Quest|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19789"
 			},
 			"Mus Kil Reader": {
 				"NPCs": ["Radimus Erkle"],
@@ -42635,7 +43002,8 @@
 				"Chunks": ["11316-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3579"
 			},
 			"Come brave adventurer, your sense is on fire. If you talk to me, it's an old god you desire.": {
 				"NPCs": ["Viggora"],
@@ -42657,7 +43025,8 @@
 				"NPCs": ["Hairdresser"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12183"
 			},
 			"Spin at Flynn's Mace Shop.": {
 				"Chunks": ["11828-1"],
@@ -42673,67 +43042,78 @@
 					"Defence": 10
 				},
 				"Items": ["Mithril pickaxe", "Black platebody", "Iron kiteshield"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12164"
 			},
 			"Search the boxes of Falador's general store.": {
 				"Chunks": ["11828-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2692"
 			},
 			"Search the crates in Falador General store.": {
 				"Chunks": ["11828-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23154"
 			},
 			"Search the drawers upstairs in Falador's shield shop.": {
 				"Chunks": ["11828-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2691"
 			},
 			"Surrounded by white walls and gems.": {
 				"NPCs": ["Herquin"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19819"
 			},
 			"Talk to Ambassador Spanfipple in the White Knights Castle.": {
 				"NPCs": ["Ambassador Spanfipple"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12182"
 			},
 			"Talk to Cassie in Falador.": {
 				"NPCs": ["Cassie"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12181"
 			},
 			"Talk to the Squire in the White Knights' castle in Falador.": {
 				"NPCs": ["Squire"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2693"
 			},
 			"Leakey": {
 				"NPCs": ["Kaylee"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12065"
 			},
 			"Que Sir": {
 				"NPCs": ["Squire"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19754"
 			},
 			"Surviving.": {
 				"NPCs": ["Sir Vyvin"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12584"
 			},
 			"Hopefully this set of armour will help you to keep surviving.": {
 				"NPCs": ["Sir Vyvin"],
@@ -42751,49 +43131,57 @@
 					"Defence": 5
 				},
 				"Items": ["Steel full helm", "Steel platebody", "Iron plateskirt"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10208"
 			},
 			"Look in the ground floor crates of houses in Falador.": {
 				"Chunks": ["12084-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2712"
 			},
 			"Search the crates in the Dwarven Mine.": {
 				"Chunks": ["Dwarven Mine"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12178"
 			},
 			"Search the drawers downstairs of houses in the eastern part of Falador.": {
 				"Chunks": ["12084-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3498"
 			},
 			"Search through chests found in the upstairs of houses in eastern Falador.": {
 				"Chunks": ["12084-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3497"
 			},
 			"Talk to a party-goer in Falador.": {
 				"NPCs": ["Lucy"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12169"
 			},
 			"Peaty Pert": {
 				"NPCs": ["Party Pete"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2856"
 			},
 			"Speak to a Wyse man.": {
 				"NPCs": ["Wyson the gardener"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12159"
 			},
 			"Outside the Falador Party Room.": {
 				"Chunks": ["12084-1"],
@@ -42822,27 +43210,31 @@
 					"Ranged": 20
 				},
 				"Items": ["Bronze full helm", "Iron platebody", "Studded chaps"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10196"
 			},
 			"Belladonna, my dear. If only I had gloves, then I could hold you at last.": {
 				"Chunks": ["12340-1"],
 				"NPCs": ["Tool Leprechaun"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19823"
 			},
 			"Search the crates in Draynor Manor.": {
 				"Chunks": ["12340-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3502"
 			},
 			"06 degrees 58 minutes north, 21 degrees 16 minutes east": {
 				"Chunks": ["12340-2"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12043"
 			},
 			"Cow field north of Lumbridge": {
 				"Chunks": ["12596-3"],
@@ -42855,14 +43247,16 @@
 				"ClueTier": "easy",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2713"
 			},
 			"05 degrees 43 minutes north, 23 degrees 05 minutes east": {
 				"Chunks": ["12596-3"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2825"
 			},
 			"Dig where 4 siblings and I all live with our evil overlord.": {
 				"Chunks": ["12596-1"],
@@ -42870,7 +43264,8 @@
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
 				"QuestPointsNeeded": 32,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19848"
 			},
 			"Where safe to speak, the man who offers the pouch of smallest size wishes to see your alignment.": {
 				"Chunks": ["12852-1"],
@@ -42897,39 +43292,45 @@
 				"NPCs": ["Ali the Leaflet Dropper"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23164"
 			},
 			"06 degrees 41 minutes north, 27 degrees 15 minutes east": {
 				"Chunks": ["13108-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12051"
 			},
 			"Clap in the main exam room in the Exam Centre. (White apron, Green boots, Leather gloves)": {
 				"Chunks": ["13364"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["White apron", "Green boots", "Leather gloves"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10228"
 			},
 			"Search the bush at the digsite centre.": {
 				"Chunks": ["13364"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12175"
 			},
 			"The dead, red dragon watches over this chest. He must really dig the view.": {
 				"Chunks": ["13364", "BarbarianKeyChunk[+]"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7296"
 			},
 			"Often sought out by scholars of histories past, find me where words of wisdom speak volumes.": {
 				"NPCs": ["Examiner"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3566"
 			},
 			"Headbang at the exam centre. Beware of double agents! (Mystic fire staff, Diamond bracelet, Rune boots)": {
 				"Chunks": ["13364"],
@@ -42942,14 +43343,16 @@
 				},
 				"Items": ["Mystic fire staff", "Diamond bracelet", "Rune boots"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12542"
 			},
 			"07 degrees 05 minutes north, 30 degrees 56 minutes east": {
 				"Chunks": ["13620-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3584"
 			},
 			"05 degrees 37 minutes north, 31 degrees 15 minutes east": {
 				"Chunks": ["13620-4"],
@@ -42957,7 +43360,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3542"
 			},
 			"05 degrees 03 minutes north, 34 degrees 58 minutes west": {
 				"Chunks": ["5171-1"],
@@ -42965,14 +43369,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "30931"
 			},
 			"BIP 7013": {
 				"Chunks": ["13620-2"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19868"
 			},
 			"Inside the Mort Myre Swamp, north-west of the Nature Grotto.": {
 				"Chunks": ["13620-1"],
@@ -42980,7 +43386,8 @@
 				"ClueType": "Hot/Cold",
 				"Items": ["Spade", "Strange device (master)"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7288"
 			},
 			"Directly northeast of the pit in the Tlati Rainforest.": {
 				"Chunks": ["5168-1"],
@@ -43024,7 +43431,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12111"
 			},
 			"04 degrees 41 minutes north, 03 degrees 09 minutes west": {
 				"Chunks": ["9267-1"],
@@ -43032,7 +43440,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7256"
 			},
 			"05 degrees 13 minutes north, 04 degrees 16 minutes west": {
 				"Chunks": ["9012-3"],
@@ -43055,7 +43464,8 @@
 				"ClueTier": "hard",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3522"
 			},
 			"Dance in Iban's temple. Beware of double agents! (Iban's staff, Mystic robe top (dark), Mystic robe bottom (dark)": {
 				"Chunks": ["Underground Pass"],
@@ -43074,7 +43484,8 @@
 				"NPCs": ["Jethick"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7278"
 			},
 			"Spin in West Ardougne Church. (Dragon spear, Red d'hide chaps)": {
 				"Chunks": ["10035-1"],
@@ -43085,7 +43496,8 @@
 					"Ranged": 60
 				},
 				"Items": ["Dragon spear", "Red d'hide chaps"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12073"
 			},
 			"A dwarf, approaching death, but very much in the light.": {
 				"Chunks": ["Mourner Tunnels & Temple of Light"],
@@ -43119,75 +43531,87 @@
 					"Ranged": 20
 				},
 				"Items": ["Studded body", "Bronze platelegs", "Staff"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10216"
 			},
 			"A crate found in the tower of a church is your next location.": {
 				"Chunks": ["10291"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2711"
 			},
 			"Search the crates in East Ardougne's general store.": {
 				"Chunks": ["10291"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2706"
 			},
 			"Search the drawers found upstairs in East Ardougne's houses.": {
 				"Chunks": ["10291"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2710"
 			},
 			"Eek Zero Op": {
 				"NPCs": ["Zoo keeper"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2845"
 			},
 			"In a town where the guards are armed with maces, search the upstairs rooms of the Public House.": {
 				"Chunks": ["10291", "10547-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2833"
 			},
 			"In a town where thieves steal from stalls, search for some drawers in the upstairs of a house near the bank.": {
 				"Chunks": ["10291", "10547-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2835"
 			},
 			"The beasts to my east snap claws and tails, The rest to my west can slide and eat fish. The force to my north will jump and they'll wail, Come dig by my fire and make a wish.": {
 				"Chunks": ["10291"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2783"
 			},
 			"Search the boxes just outside the Armour shop in East Ardougne.": {
 				"Chunks": ["10547-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2705"
 			},
 			"Search the drawers on the ground floor of a building facing Ardougne's Market.": {
 				"Chunks": ["10547-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3505"
 			},
 			"Dobson is my last name, and with gardening I seek fame.": {
 				"NPCs": ["Horacio"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12154"
 			},
 			"Laugh in front of the gem store in Ardougne market. (Castle wars bracelet, Dragonstone amulet, Ring of forging)": {
 				"Chunks": ["10547-1"],
 				"ClueTier": "elite",
 				"ClueType": "Emote",
 				"Items": ["Castle wars bracelet", "Dragonstone amulet", "Ring of forging"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19790"
 			},
 			"A chisel and hammer reside in his home, strange for one of magic. Impress him with your magical equipment.": {
 				"NPCs": ["Wizard Cromperty"],
@@ -43200,7 +43624,8 @@
 				"NPCs": ["Caroline"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7280"
 			},
 			"03 degrees 50 minutes north, 09 degrees 07 minutes east": {
 				"Chunks": ["10803-1"],
@@ -43222,7 +43647,8 @@
 				"Chunks": ["11059-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7300"
 			},
 			"Dance on the Fishing Platform. (Barrows gloves, Amulet of glory, Dragon med helm)": {
 				"Chunks": ["11059-1"],
@@ -43232,14 +43658,16 @@
 					"Defence": 60
 				},
 				"Items": ["Barrows gloves", "Amulet of glory", "Dragon med helm"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12079"
 			},
 			"04 degrees 13 minutes north, 12 degrees 45 minutes east": {
 				"Chunks": ["11315-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2815"
 			},
 			"03 degrees 18 minutes north, 12 degrees 31 minutes east": {
 				"Chunks": ["11315-1"],
@@ -43247,7 +43675,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12560"
 			},
 			"03 degrees 26 minutes north, 12 degrees 18 minutes east": {
 				"Chunks": ["11315-1"],
@@ -43262,7 +43691,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3596"
 			},
 			"Outside the Crafting Guild cow pen.": {
 				"Chunks": ["11571-1"],
@@ -43277,25 +43707,29 @@
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Leather chaps", "Cream robe top", "Green hat"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10218"
 			},
 			"Search the drawers in Falador's chain mail shop.": {
 				"Chunks": ["11827"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2694"
 			},
 			"Talk to Wayne at Wayne's Chains in Falador.": {
 				"NPCs": ["Wayne"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23163"
 			},
 			"Speak to Sarah at Falador farm.": {
 				"NPCs": ["Sarah"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12186"
 			},
 			"In the cow pen north of Sarah's Farming Shop.": {
 				"Chunks": ["12083-1"],
@@ -43316,19 +43750,22 @@
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Iron chainbody", "Sapphire ring", "Longbow"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10200"
 			},
 			"Search the drawers in a house in Draynor Village.": {
 				"Chunks": ["12339"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3512"
 			},
 			"Talk to Morgan in his house at Draynor Village.": {
 				"NPCs": ["Morgan"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23162"
 			},
 			"Think in the middle of the wheat field by the lumbridge mill. (Blue robe top, Turquoise robe bottoms, Oak shortbow)": {
 				"Chunks": ["12595"],
@@ -43338,19 +43775,22 @@
 					"Ranged": 5
 				},
 				"Items": ["Blue robe top", "Turquoise robe bottoms", "Oak shortbow"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10198"
 			},
 			"Search the chest in Fred the Farmer's bedroom.": {
 				"Chunks": ["12595"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23151"
 			},
 			"Four blades I have, yet draw no blood; Still I turn my prey to powder. If you are brave, come search my roof; It is there my blades are louder.": {
 				"Chunks": ["12595"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2785"
 			},
 			"North of the pond between Lumbridge and Draynor Village.": {
 				"Chunks": ["12595"],
@@ -43370,7 +43810,8 @@
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Desert shirt", "Leather boots", "Leather gloves"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10194"
 			},
 			"https://oldschool.runescape.wiki/images/a/ae/Map_clue_Al_Kharid_mines.png?e9990": {
 				"Chunks": ["13107-1"],
@@ -43397,13 +43838,15 @@
 				"NPCs": ["Jaraah"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3616"
 			},
 			"Identify the back of this over-acting brother. (He's a long way from home.)": {
 				"NPCs": ["Hamid"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3568"
 			},
 			"Next to Mage Training Arena.": {
 				"Chunks": ["13363"],
@@ -43425,20 +43868,23 @@
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12146"
 			},
 			"Covered in shadows, the centre of the circle is where you will find the answer.": {
 				"Chunks": ["13875-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7245"
 			},
 			"Dragons Lament": {
 				"NPCs": ["Strange Old Man"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12568"
 			},
 			"Do a jig at the barrow's chest. Beware of double agents! (Any full barrows set)": {
 				"Chunks": ["Barrows Crypts"],
@@ -43474,7 +43920,8 @@
 				"NPCs": ["Daer Krand"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "24493"
 			},
 			"01 degrees 24 minutes north, 08 degrees 05 minutes west": {
 				"Chunks": ["8754-1"],
@@ -43482,7 +43929,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3562"
 			},
 			"01 degrees 30 minutes north, 08 degrees 11 minutes west": {
 				"Chunks": ["8754-1"],
@@ -43517,7 +43965,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7290"
 			},
 			"Grave of Scorpius": {
 				"Chunks": ["9778-1"],
@@ -43539,39 +43988,45 @@
 				"Chunks": ["10290-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3610"
 			},
 			"https://oldschool.runescape.wiki/images/c/cb/Map_clue_Clocktower.png?7fd42": {
 				"Chunks": ["10290-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3601"
 			},
 			"Motherboard": {
 				"NPCs": ["Brother Omad"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12574"
 			},
 			"He knows just how easy it is to lose track of time.": {
 				"NPCs": ["Brother Kojo"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19854"
 			},
 			"02 degrees 50 minutes north, 06 degrees 20 minutes east": {
 				"Chunks": ["10546-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2813"
 			},
 			"https://oldschool.runescape.wiki/images/8/82/Map_clue_Tower_of_Life.png?99b21": {
 				"Chunks": ["10546-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3599"
 			},
 			"1st floor inside the Necromancer Tower. Easily accessed by using fairy ring code D*J*P.": {
 				"Chunks": ["10546-1"],
@@ -43586,7 +44041,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2805"
 			},
 			"02 degrees 48 minutes north, 08 degrees 05 minutes east": {
 				"Chunks": ["10802-3"],
@@ -43594,27 +44050,31 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12558"
 			},
 			"AIR 2331": {
 				"Chunks": ["10802-3"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19864"
 			},
 			"BJR 1123": {
 				"Chunks": ["Fisher Realm"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19870"
 			},
 			"Speak to Hajedy.": {
 				"NPCs": ["Hajedy"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2848"
 			},
 			"Brimhaven, east of the fruit tree patch.": {
 				"Chunks": ["11058-1"],
@@ -43635,35 +44095,40 @@
 					"Ranged": 50
 				},
 				"Items": ["Steel longsword", "Blue d'hide body", "Mystic gloves"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12029"
 			},
 			"02 degrees 16 minutes north, 12 degrees 07 minutes east": {
 				"Chunks": ["11314-2"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23136"
 			},
 			"BLP 6200": {
 				"Chunks": ["Mor Ul Rek#Outer Area"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19872"
 			},
 			"CKP 0224": {
 				"Chunks": ["Cosmic entity's plane"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19874"
 			},
 			"Mine was the strangest birth under the sun. I left the crimson sack, yet life had not begun. Entered the world, and yet was seen by none.": {
 				"Chunks": ["Crandor and Karamja Dungeon#South"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3580"
 			},
 			"Cry in the Tzhaar gem store. Beware of the double agents! (Fire cape, Toktz-xil-ul)": {
 				"Chunks": ["Mor Ul Rek#Outer Area"],
@@ -43680,45 +44145,52 @@
 				"NPCs": ["Chemist"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19822"
 			},
 			"Ratai": {
 				"NPCs": ["Taria"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12063"
 			},
 			"https://oldschool.runescape.wiki/images/d/d0/Map_clue_Chemist_house.png?efe67": {
 				"Chunks": ["11570-1"],
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3602"
 			},
 			"Shrug in the mine near Rimmington. (Gold necklace, Gold ring, Bronze spear)": {
 				"Chunks": ["11826"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Gold necklace", "Gold ring", "Bronze spear"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10202"
 			},
 			"Search the crate in Rommiks crafting shop in Rimmington.": {
 				"Chunks": ["11826"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23153"
 			},
 			"Search the wheelbarrow in Rimmington mine.": {
 				"Chunks": ["11826"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12189"
 			},
 			"Search through some drawers in the upstairs of a house in Rimmington.": {
 				"Chunks": ["11826"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3494"
 			},
 			"In the centre of the Rimmington mine.": {
 				"Chunks": ["11826"],
@@ -43742,55 +44214,64 @@
 					"Ranged": 20
 				},
 				"Items": ["Coif", "Steel plateskirt", "Sapphire necklace"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10192"
 			},
 			"One of the sailors in Port Sarim is your next destination.": {
 				"NPCs": ["Captain Tobias"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3496"
 			},
 			"Search chests found in the upstairs of shops in Port Sarim.": {
 				"Chunks": ["12082-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3495"
 			},
 			"Search the crates in the Port Sarim Fishing shop.": {
 				"Chunks": ["12082-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2695"
 			},
 			"Search the drawers in the house next to the Port Sarim mage shop.": {
 				"Chunks": ["12082-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12188"
 			},
 			"Talk to the bartender of the Rusty Anchor in Port Sarim.": {
 				"NPCs": ["Bartender (Rusty Anchor Inn)"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2696"
 			},
 			"The hand ain't listening.": {
 				"NPCs": ["The Face"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19824"
 			},
 			"A Basic Anti Pot": {
 				"NPCs": ["Captain Tobias"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12061"
 			},
 			"If a man carried my burden, he would break his back. I am not rich, but leave silver in my track. Speak to the keeper of my trail.": {
 				"NPCs": ["Gerrant"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2778"
 			},
 			"Anger those who adhere to Saradomin's edicts to prevent travel.": {
 				"Chunks": ["12082-1"],
@@ -43820,19 +44301,22 @@
 					"Ranged": 20
 				},
 				"Items": ["Studded chaps", "Iron kiteshield", "Steel longsword"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10184"
 			},
 			"Search a wardrobe in Draynor.": {
 				"Chunks": ["12338-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12168"
 			},
 			"Speak to Ned in Draynor Village.": {
 				"NPCs": ["Ned"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2697"
 			},
 			"Cry in the Draynor Village jail. Jump for joy before you talk to me. (Adamant sword, Adamant plateskirt, Sapphire amulet)": {
 				"Chunks": ["12338-1"],
@@ -43843,14 +44327,16 @@
 					"Defence": 30
 				},
 				"Items": ["Adamant sword", "Adamant plateskirt", "Sapphire amulet"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19780"
 			},
 			"Slide Woman": {
 				"Chunks": ["12338-1"],
 				"NPCs": ["Wise Old Man"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12572"
 			},
 			"01 degrees 30 minutes north, 20 degrees 01 minutes east": {
 				"Chunks": ["12338-2"],
@@ -43858,14 +44344,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12554"
 			},
 			"Aggie I see, Lonely and southern I feel I am neither inside nor outside the house yet no house would be complete without me. The treasure lies beneath me!": {
 				"Chunks": ["12338-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2780"
 			},
 			"Show your anger at the Wise old man. Beware of double agents! (Abyssal whip, Cape of legends, Spined chaps)": {
 				"Chunks": ["12338-1"],
@@ -43886,7 +44374,8 @@
 				"ClueType": "Hot/Cold",
 				"Items": ["Spade", "Strange device (master)"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2827"
 			},
 			"Always walking around the castle grounds and somehow knows everyone's age.": {
 				"NPCs": ["Hans"],
@@ -43897,20 +44386,23 @@
 				"NPCs": ["Hans"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2681"
 			},
 			"02 degrees 48 minutes north, 22 degrees 30 minutes east": {
 				"Chunks": ["12594-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2801"
 			},
 			"Snah? I feel all confused, like one of those cakes...": {
 				"NPCs": ["Hans"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2792"
 			},
 			"In the place Duke Horacio calls home, talk to a man with a hat dropped by goblins.": {
 				"NPCs": ["Cook (Lumbridge)"],
@@ -43923,173 +44415,199 @@
 				"ClueType": "Emote",
 				"Items": ["Bronze axe", "Leather boots"]
 			},
-			"Dig where only the skilled, the wealthy, or the brave can choose not to visit again.": {
+			"Dig where only the skilled, wealthy, or brave can choose not to visit again.": {
 				"Chunks": ["12850-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19814"
 			},
 			"Search the boxes in the goblin house near Lumbridge.": {
 				"Chunks": ["12850-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2679"
 			},
 			"Search the chest in the Duke of Lumbridge's bedroom.": {
 				"Chunks": ["12850-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2677"
 			},
 			"Search the crate in the left-hand tower of Lumbridge Castle.": {
 				"Chunks": ["12850-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2678"
 			},
 			"Talk to the Doomsayer.": {
 				"NPCs": ["Doomsayer"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19830"
 			},
 			"Area Chef Trek": {
 				"NPCs": ["Father Aereck"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19746"
 			},
 			"Ok Co": {
 				"NPCs": ["Cook (Lumbridge)"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2843"
 			},
 			"HQNM LZM STSNQ": {
 				"NPCs": ["Iron Man tutor"],
 				"ClueTier": "medium",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19770"
 			},
 			"Blue Grim Guided": {
 				"Chunks": ["12850-1"],
 				"NPCs": ["Lumbridge Guide"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19886"
 			},
 			"Do Say More": {
 				"NPCs": ["Doomsayer"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12576"
 			},
 			"My home is grey, and made of stone; A castle with a search for a meal. Hidden in some drawers I am, across from a wooden wheel.": {
 				"Chunks": ["12850-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2782"
 			},
 			"You will need to under-cook to solve this one.": {
 				"Chunks": ["Lumbridge Castle#Cellar"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2773"
 			},
 			"Majors Lava Bads Air": {
 				"NPCs": ["Ambassador Alvijar"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12133"
 			},
 			"A demon's best friend holds the next step of this clue.": {
 				"Monsters": ["Hellhound"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19797"
 			},
 			"Ghostly bones.": {
 				"Monsters": ["Ankou[+]"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19805"
 			},
 			"In a while...": {
 				"Monsters": ["Crocodile"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19804"
 			},
 			"Let's hope you don't meet a watery death when you encounter this fiend.": {
 				"Monsters": ["Waterfiend"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19798"
 			},
 			"Mix yellow with blue and add heat, make sure you bring protection.": {
 				"Monsters": ["Green dragon"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19799"
 			},
 			"Reflection is the weakness for these eyes of evil.": {
 				"Monsters": ["Basilisk[+]"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19800"
 			},
 			"You'll get licked.": {
 				"Monsters": ["Bloodveld[+]"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19801"
 			},
 			"You'll have to plug your nose if you use this source of herbs.": {
 				"Monsters": ["Aberrant spectre[+]"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19802"
 			},
 			"You might have to turn over a few stones to progress.": {
 				"Monsters": ["Rock Crab"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19796"
 			},
 			"You will have to fly high where a sword cannot help you.": {
 				"Monsters": ["Aviansie"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19803"
 			},
 			"Surround my bones in fire, ontop the wooden pyre. Finally lay me to rest, before my one last test.": {
 				"Chunks": ["Ancient Cavern", "10038-1"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19806"
 			},
 			"Scattered coins and gems fill the floor. The chest you seek is in the north east.": {
 				"Chunks": ["King Black Dragon's Lair"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19807"
 			},
 			"A reck you say; let's pray there aren't any ghosts.": {
 				"NPCs": ["Father Aereck"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12151"
 			},
 			"Here, there are tears, but nobody is crying. Speak to the guardian and show off your alignment to balance.": {
 				"NPCs": ["Juna"],
@@ -44113,44 +44631,51 @@
 					"Ranged": 20
 				},
 				"Items": ["Coif", "Iron chainbody", "Leather chaps"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10232"
 			},
 			"Search the boxes in one of the tents in Al Kharid.": {
 				"Chunks": ["13106-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3501"
 			},
 			"Search the crates in the most north-western house in Al Kharid.": {
 				"Chunks": ["13106-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2682"
 			},
 			"Machete Clam": {
 				"NPCs": ["Cam the Camel"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12136"
 			},
 			"Someone watching the fights in the Emir's Arena is your next destination.": {
 				"NPCs": ["Jeed"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3514"
 			},
 			"02 degrees 39 minutes north, 29 degrees 58 minutes east": {
 				"Chunks": ["13618-1"],
 				"ClueTier": "hard",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3554"
 			},
 			"Dig under Razorlor's toad batta.": {
 				"Chunks": ["Tarn's Lair"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19810"
 			},
 			"At Haunted Mine quest start.": {
 				"Chunks": ["13618-2"],
@@ -44172,7 +44697,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19844"
 			},
 			"02 degrees 58 minutes north, 34 degrees 30 minutes east": {
 				"Chunks": ["14130-1"],
@@ -44180,14 +44706,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12562"
 			},
 			"https://oldschool.runescape.wiki/images/8/85/Map_clue_Burgh_de_Rott_furnace.png?fca9c": {
 				"Chunks": ["14130-1"],
 				"ClueTier": "elite",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19785"
 			},
 			"In the north-east area of Burgh de Rott, by the reverse-L-shaped ruins.": {
 				"Chunks": ["14130-1"],
@@ -44209,14 +44737,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3560"
 			},
 			"A general who sets a 'shining' example.": {
 				"Chunks": ["8753-3"],
 				"NPCs": ["General Hining"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3564"
 			},
 			"Near Tyras Camp.": {
 				"Chunks": ["8753-3"],
@@ -44230,7 +44760,8 @@
 				"NPCs": ["Oronwen"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12135"
 			},
 			"00 degrees 18 minutes south, 02 degrees 35 minutes west": {
 				"Chunks": ["9265"],
@@ -44238,13 +44769,15 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12089"
 			},
 			"Has no one told you it is rude to ask a lady her age?": {
 				"NPCs": ["Mawrth"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12140"
 			},
 			"Rue Go": {
 				"NPCs": ["Goreu"],
@@ -44269,32 +44802,37 @@
 					"Ranged": 40
 				},
 				"Items": ["Mithril chainbody", "Green d'hide chaps", "Ruby amulet"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10270"
 			},
 			"00 degrees 05 minutes south, 01 degrees 13 minutes east": {
 				"Chunks": ["9777-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2809"
 			},
 			"https://oldschool.runescape.wiki/images/5/50/Map_clue_observatory.png?c6867": {
 				"Chunks": ["9777-2"],
 				"ClueTier": "hard",
 				"ClueType": "Map",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3524"
 			},
 			"Goblin Kern": {
 				"NPCs": ["King Bolren"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2857"
 			},
 			"By Look": {
 				"NPCs": ["Bolkoy"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7270"
 			},
 			"I have many arms but legs, I have just one, I have little family but my seed, You can grow on, I am not dead, yet I am but a spirit, and my power on your quests, you will earn the right to free it.": {
 				"Chunks": ["10033-1"],
@@ -44303,7 +44841,8 @@
 				"Tasks": {
 					"~|Tree Gnome Village|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19858"
 			},
 			"Tree Gnome Village, near the general store icon.": {
 				"Chunks": ["10033-1"],
@@ -44321,7 +44860,8 @@
 					"Ranged": 50
 				},
 				"Items": ["Pirate bandana[+]", "Dragon necklace", "Magic longbow"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19791"
 			},
 			"South of the Fight Arena, north-west of the Nightmare Zone.": {
 				"Chunks": ["10288-1"],
@@ -44335,33 +44875,38 @@
 				"Chunks": ["10545-1"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10224"
 			},
 			"Search the crate near a cart in Port Khazard.": {
 				"Chunks": ["10545-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3504"
 			},
 			"https://oldschool.runescape.wiki/images/2/2a/Map_clue_Mogre_Camp.png?25cfd": {
 				"Chunks": ["Mogre Camp"],
 				"ClueTier": "elite",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19782"
 			},
 			"00 degrees 18 minutes south, 09 degrees 28 minutes east": {
 				"Chunks": ["10801-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3590"
 			},
 			"Gold I see, yet gold I require. Give me 875 if death you desire.": {
 				"NPCs": ["Saniboch"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12578"
 			},
 			"West of Brimhaven.": {
 				"Chunks": ["10801-1"],
@@ -44375,19 +44920,22 @@
 				"Chunks": ["11057-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3605"
 			},
 			"Speak to Kangai Mau.": {
 				"NPCs": ["Kangai Mau"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3617"
 			},
 			"O Birdz A Zany En Pc": {
 				"NPCs": ["Cap'n Izzy No-Beard"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7272"
 			},
 			"Halt Us": {
 				"NPCs": ["Luthas"],
@@ -44400,7 +44948,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3588"
 			},
 			"Salute in the banana plantation. Beware of double agents! (Diamond ring, Amulet of power)": {
 				"Chunks": ["11569-1"],
@@ -44408,7 +44957,8 @@
 				"ClueType": "Emote",
 				"Items": ["Diamond ring", "Amulet of power"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10246"
 			},
 			"Musa Point, banana plantation.": {
 				"Chunks": ["11569-1"],
@@ -44423,13 +44973,15 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2819"
 			},
 			"Search the bucket in the Port Sarim jail.": {
 				"Chunks": ["12081-1", "13104-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12192"
 			},
 			"https://oldschool.runescape.wiki/images/1/1b/Map_clue_Wizard_tower.png?e1c87": {
 				"Chunks": ["12337-1"],
@@ -44443,132 +44995,153 @@
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["White apron", "Emerald ring", "Iron med helm"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10182"
 			},
 			"Search a bookcase in the Wizards tower.": {
 				"Chunks": ["12337-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12167"
 			},
 			"Probably filled with wizards socks.": {
 				"Chunks": ["Wizards' Tower#Basement"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7301"
 			},
 			"XJABSE USBJCPSO": {
 				"NPCs": ["Wizard Traiborn"],
 				"ClueTier": "medium",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19764"
 			},
 			"GBJSZ RVFFO": {
 				"NPCs": ["Fairy Queen"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19910"
 			},
 			"HCKTA IQFHCVJGT": {
 				"NPCs": ["Fairy Godfather"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19908"
 			},
 			"OVEXON": {
 				"NPCs": ["Eluned"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19898"
 			},
 			"UZZU MUJHRKYYKJ": {
 				"NPCs": ["Otto Godblessed"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19900"
 			},
 			"VTYR APCNTGLW": {
 				"NPCs": ["King Percival"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19906"
 			},
 			"ZHLUG ROG PDQ": {
 				"NPCs": ["Weird Old Man"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19904"
 			},
 			"ZSBKDO ZODO": {
 				"Chunks": ["14647-1"],
 				"NPCs": ["Pirate Pete"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19902"
 			},
 			"IWPPLQTP": {
 				"NPCs": ["Gunnjorn"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23172"
 			},
 			"BSOPME MZETQPS": {
 				"NPCs": ["Arnold Lydspor"],
 				"ClueTier": "hard",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23170"
 			},
 			"Probably filled with books on magic.": {
 				"Chunks": ["Wizards' Tower#Basement"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7249"
 			},
 			"The magic of 4 colours, an early experience you could learn. The large beast caged up top, rages, as his demised kin's loot now returns.": {
 				"NPCs": ["Wizard Mizgog"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19857"
 			},
 			"Search a bookcase in Lumbridge swamp.": {
 				"Chunks": ["12593-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12166"
 			},
 			"Search the eastern bookcase in Father Urhney's house.": {
 				"Chunks": ["12593-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23150"
 			},
 			"Dance in the dark caves beneath Lumbridge Swamp. Blow a kiss before you talk to me. (Staff of air, Bronze full helm, Amulet of power)": {
 				"Chunks": ["Lumbridge Swamp Caves"],
 				"ClueTier": "medium",
 				"ClueType": "Emote",
 				"Items": ["Staff of air", "Bronze full helm", "Amulet of power"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12021"
 			},
 			"00 degrees 20 minutes south, 23 degrees 15 minutes east": {
 				"Chunks": ["12593-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7313"
 			},
 			"Dance in the shack in Lumbridge Swamp. (Bronze dagger, Iron full helm, Gold ring)": {
 				"Chunks": ["12849-1"],
 				"ClueTier": "easy",
 				"ClueType": "Emote",
 				"Items": ["Bronze dagger", "Iron full helm", "Gold ring"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10180"
 			},
 			"00 degrees 30 minutes north, 24 degrees 16 minutes east": {
 				"Chunks": ["12849-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2823"
 			},
 			"Stamp in the Enchanted valley west of the waterfall. Beware of double agents! (Dragon axe)": {
 				"Chunks": ["Enchanted Valley"],
@@ -44598,39 +45171,52 @@
 				"Chunks": ["13105-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2680"
 			},
 			"Speak to Ellis in Al Kharid.": {
 				"NPCs": ["Ellis"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2684"
 			},
 			"Talk to Zeke in Al Kharid.": {
 				"NPCs": ["Zeke"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2683"
 			},
 			"R Ak Mi": {
 				"NPCs": ["Karim"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2849"
 			},
 			"Where the best are commemorated, and a celebratory cup, not just for beer.": {
 				"Chunks": ["13361-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19860"
+			},
+			"Yaroygr": {
+				"NPCs": ["Sulisal"],
+				"ClueTier": "hard",
+				"ClueType": "Cipher",
+				"Not F2P": true,
+				"ClueId": "30929"
 			},
 			"Rotting next to a ditch. Dig next to the fish.": {
 				"Chunks": ["14129"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19850"
 			},
 			"00 degrees 35 minutes north, 35 degrees 50 minutes east": {
 				"Chunks": ["14385"],
@@ -44638,7 +45224,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12091"
 			},
 			"01 degrees 54 minutes south, 08 degrees 54 minutes west": {
 				"Chunks": ["8496-1"],
@@ -44653,7 +45240,8 @@
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23145"
 			},
 			"02 degrees 09 minutes south, 06 degrees 58 minutes west": {
 				"Chunks": ["8752-2"],
@@ -44671,14 +45259,16 @@
 					"Attack": 20
 				},
 				"Items": ["Mithril scimitar", "Ruby amulet", "TeamCape[+]"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10262"
 			},
 			"https://oldschool.runescape.wiki/images/8/81/Map_clue_Castle_Wars.png?aabae": {
 				"Chunks": ["9776"],
 				"ClueTier": "elite",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12130"
 			},
 			"Directly west of the Castle Wars balloon.": {
 				"Chunks": ["9776"],
@@ -44703,19 +45293,22 @@
 				"Chunks": ["10288-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3491"
 			},
 			"Search the drawers in the ground floor of a shop in Yanille.": {
 				"Chunks": ["10288-1"],
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3492"
 			},
 			"I Doom Icon Inn": {
 				"NPCs": ["Dominic Onion"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19736"
 			},
 			"In a town where wizards are known to gather, search upstairs in a large house to the north.": {
 				"Chunks": ["10288-1"],
@@ -44724,7 +45317,8 @@
 				"Tasks": {
 					"Access the ~|Wizards' Guild|~": "Magic"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2839"
 			},
 			"Jump for joy in Yanille bank. Dance a jig before you talk to me. (Brown apron, Adamant med helm, Snakeskin chaps)": {
 				"Chunks": ["10288-1"],
@@ -44735,45 +45329,52 @@
 					"Ranged": 30
 				},
 				"Items": ["Brown apron", "Adamant med helm", "Snakeskin chaps"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10268"
 			},
 			"When you get tired of fighting, go deep, deep down until you need an antidote.": {
 				"Chunks": ["Yanille Agility Dungeon#Section 7"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7252"
 			},
 			"https://oldschool.runescape.wiki/images/f/f2/Map_clue_Yanille_anvil.png?253bb": {
 				"Chunks": ["10288-1"],
 				"ClueTier": "hard",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3520"
 			},
 			"'See you in your dreams' said the vegetable man.": {
 				"NPCs": ["Dominic Onion"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12157"
 			},
 			"Speak to Uglug Nar": {
 				"NPCs": ["Uglug Nar"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2841"
 			},
 			"01 degrees 35 minutes south, 07 degrees 28 minutes east": {
 				"Chunks": ["10544-1"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2803"
 			},
 			"In a village made of bamboo, look for some crates under one of the houses.": {
 				"Chunks": ["11056-1"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3604"
 			},
 			"02 degrees 35 minutes south, 11 degrees 52 minutes east": {
 				"Chunks": ["11312-1"],
@@ -44781,14 +45382,16 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12110"
 			},
 			"01 degrees 18 minutes south, 14 degrees 15 minutes east": {
 				"Chunks": ["11568-2"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7309"
 			},
 			"Wave on Mudskipper Point. (Black cape, Steel mace, Leather chaps)": {
 				"Chunks": ["11824-1"],
@@ -44798,14 +45401,16 @@
 					"Attack": 5
 				},
 				"Items": ["Black cape", "Steel mace", "Leather chaps"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10190"
 			},
 			"AIQ 0440": {
 				"Chunks": ["11824-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19862"
 			},
 			"Mudskipper Point, on the starfish in the south-west corner.": {
 				"Chunks": ["11824-1"],
@@ -44825,14 +45430,16 @@
 				"ClueTier": "medium",
 				"ClueType": "Emote",
 				"Items": ["Bruise blue snelm (pointed)", "Staff of air", "Bronze sq shield"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10278"
 			},
 			"Desert insects is what I see, Taking care of them was my responsibility. Your solution is found by digging near me.": {
 				"Chunks": ["Kalphite Cave"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12158"
 			},
 			"South-west of Shantay Pass.": {
 				"Chunks": ["13104-1"],
@@ -44855,19 +45462,22 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12035"
 			},
 			"His head might be hollow, but the crates nearby are filled with surprises.": {
 				"Chunks": ["13872"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7253"
 			},
 			"The mother of the reptilian sacrifice.": {
 				"NPCs": ["Zul-Cheray"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19852"
 			},
 			"Car If Ices": {
 				"NPCs": ["Sacrifice"],
@@ -44885,7 +45495,8 @@
 				},
 				"Items": ["Dragon 2h sword", "Bandos boots", "Obsidian cape"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19783"
 			},
 			"The northern house at Zul-Andra.": {
 				"Chunks": ["8751-1"],
@@ -44907,7 +45518,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12041"
 			},
 			"West of Jiggig, east of the fairy ring B*K*P.": {
 				"Chunks": ["9519-1"],
@@ -44930,7 +45542,8 @@
 					"~|Zogre Flesh Eaters|~ 1": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12548"
 			},
 			"04 degrees 03 minutes south, 03 degrees 11 minutes east": {
 				"Chunks": ["10031"],
@@ -44941,7 +45554,8 @@
 				"Tasks": {
 					"~|Watchtower|~ 9": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3546"
 			},
 			"04 degrees 05 minutes south, 04 degrees 24 minutes east": {
 				"Chunks": ["10287-2"],
@@ -44949,13 +45563,15 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3548"
 			},
 			"Got A Boy": {
 				"NPCs": ["Gabooty"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7276"
 			},
 			"Beckon in Tai Bwo Wannai. Clap before you talk to me. (Green d'hide chaps, Ring of dueling, Mithril med helm)": {
 				"Chunks": ["11055-2"],
@@ -44966,21 +45582,24 @@
 					"Ranged": 40
 				},
 				"Items": ["Green d'hide chaps", "Ring of dueling(8)", "Mithril med helm"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10260"
 			},
 			"03 degrees 35 minutes south, 13 degrees 35 minutes east": {
 				"Chunks": ["11311"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7317"
 			},
 			"04 degrees 00 minutes south, 12 degrees 46 minutes east": {
 				"Chunks": ["11311"],
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2817"
 			},
 			"04 degrees 16 minutes south, 16 degrees 16 minutes east": {
 				"Chunks": ["11823-1"],
@@ -44991,7 +45610,8 @@
 					"~|The Grand Tree|~ 4": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3538"
 			},
 			"03 degrees 45 minutes south, 22 degrees 45 minutes east": {
 				"Chunks": ["12591-1"],
@@ -44999,7 +45619,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3552"
 			},
 			"Bedabin Camp, dig around the north tent.": {
 				"Chunks": ["12591-1"],
@@ -45013,13 +45634,15 @@
 				"Chunks": ["13103"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7303"
 			},
 			"Speak to a referee.": {
 				"NPCs": ["Gnome ball referee"],
 				"ClueTier": "medium",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2853"
 			},
 			"Northern area of Mos Le'Harmless, between the lakes.": {
 				"Chunks": ["14895"],
@@ -45035,7 +45658,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12086"
 			},
 			"03 degrees 09 minutes south, 43 degrees 26 minutes east": {
 				"Chunks": ["15151-3"],
@@ -45051,7 +45675,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25499"
 			},
 			"South of Jiggig.": {
 				"Chunks": ["9774-1"],
@@ -45067,7 +45692,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12098"
 			},
 			"East of the gnome glider (Lemantolly Undri).": {
 				"Chunks": ["10030"],
@@ -45082,7 +45708,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7307"
 			},
 			"South of Rantz, six steps west of the empty glass bottles.": {
 				"Chunks": ["10286"],
@@ -45096,7 +45723,8 @@
 				"NPCs": ["Fycie"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3618"
 			},
 			"05 degrees 50 minutes south, 10 degrees 05 minutes east": {
 				"Chunks": ["11054-2"],
@@ -45104,7 +45732,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3530"
 			},
 			"This village has a problem with cartloads of the undead. Try checking the bookcase to find an answer.": {
 				"Chunks": ["11310-1"],
@@ -45113,7 +45742,8 @@
 				"Tasks": {
 					"~|Shilo Village|~ Complete the quest": "Quest"
 				},
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7247"
 			},
 			"Blow a kiss between the tables in Shilo Village bank. Beware of double agents! (Mystic hat, Bone spear, Rune platebody)": {
 				"Chunks": ["11310-1"],
@@ -45128,7 +45758,8 @@
 					"~|Shilo Village|~ Complete the quest": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10252"
 			},
 			"05 degrees 07 minutes south, 13 degrees 26 minutes east": {
 				"Chunks": ["11310-1"],
@@ -45139,7 +45770,8 @@
 					"~|Shilo Village|~ Complete the quest": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12107"
 			},
 			"South of a river in a town surrounded by the undead, what lies beneath the furnace?": {
 				"Chunks": ["11310-1"],
@@ -45157,7 +45789,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3540"
 			},
 			"West of the gnome glider.": {
 				"Chunks": ["11822-1"],
@@ -45173,13 +45806,15 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7258"
 			},
 			"The cheapest water for miles around, but they react badly to religious icons.": {
 				"Chunks": ["12590-1"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7248"
 			},
 			"05 degrees 24 minutes south, 26 degrees 56 minutes east": {
 				"Chunks": ["13102-2"],
@@ -45187,7 +45822,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12100"
 			},
 			"West of Pollnivneach.": {
 				"Chunks": ["13102-1"],
@@ -45201,13 +45837,15 @@
 				"NPCs": ["Ali the Kebab seller"],
 				"ClueTier": "medium",
 				"ClueType": "Cipher",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19768"
 			},
 			"Quit Horrible Tyrant": {
 				"NPCs": ["Brother Tranquility"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19892"
 			},
 			"Near Mos Le'Harmless southern bar.": {
 				"Chunks": ["14638-1"],
@@ -45223,7 +45861,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "25498"
 			},
 			"Outside the red chinchompa hunting ground entrance, south of the Hunting expert's hut.": {
 				"Chunks": ["10029"],
@@ -45238,7 +45877,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12033"
 			},
 			"West of the southeasternmost lake in Feldip Hills.": {
 				"Chunks": ["10285-1"],
@@ -45265,7 +45905,8 @@
 					"~|Legends' Quest|~ 1": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3532"
 			},
 			"South-western part of Kharazi Jungle.": {
 				"Chunks": ["11053-1"],
@@ -45284,7 +45925,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "31273"
 			},
 			"07 degrees 43 minutes south, 12 degrees 26 minutes east": {
 				"Chunks": ["11309-1"],
@@ -45295,7 +45937,8 @@
 					"~|Legends' Quest|~ 1": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3534"
 			},
 			"North-eastern part of Kharazi Jungle.": {
 				"Chunks": ["11565-1"],
@@ -45317,7 +45960,8 @@
 					"~|Legends' Quest|~ 1": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3536"
 			},
 			"Beckon on the east coast of the Kharazi Jungle. Beware of double agents! (Any rune heraldic shield, Any stole)": {
 				"Chunks": ["11821-1"],
@@ -45332,13 +45976,15 @@
 					"~|Legends' Quest|~ 1": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12544"
 			},
 			"I live in a deserted crack collecting soles.": {
 				"NPCs": ["Genie"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12153"
 			},
 			"Ten Wigs On": {
 				"NPCs": ["Wingstone"],
@@ -45368,13 +46014,15 @@
 				"ClueTier": "easy",
 				"ClueType": "Cryptic",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "22001"
 			},
 			"Calamari Made Mud": {
 				"NPCs": ["Madame Caldarium"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23133"
 			},
 			"10 degrees 05 minutes south, 24 degrees 31 minutes east": {
 				"Chunks": ["12844"],
@@ -45382,7 +46030,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12099"
 			},
 			"North of Menaphos gate.": {
 				"Chunks": ["12843"],
@@ -45405,7 +46054,8 @@
 					"Access the ~|Agility Pyramid Course|~": "Agility"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12550"
 			},
 			"09 degrees 46 minutes south, 43 degrees 22 minutes east": {
 				"Chunks": ["15148"],
@@ -45413,7 +46063,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12088"
 			},
 			"On the Isle of Souls, by the entrance to the mine.": {
 				"Chunks": ["8747-1"],
@@ -45428,31 +46079,36 @@
 				"Objects": ["Awowogei"],
 				"ClueTier": "hard",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19884"
 			},
 			"With a name like that, you'd expect a little more than just a few scimitars.": {
 				"NPCs": ["Daga"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19808"
 			},
 			"The King's magic shouldn't be wasted by me.": {
 				"NPCs": ["Guardian mummy"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12587"
 			},
 			"The Big High War God left his mark on this place.": {
 				"Chunks": ["Yu'biusk"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "26566"
 			},
 			"Try not to let yourself be dazzled when you search these drawers.": {
 				"Chunks": ["10291"],
 				"ClueTier": "hard",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7255"
 			},
 			"Dance at the cat-doored pyramid in Sophanem. Beware of double agents! (Amulet of glory, Adamant 2h sword, Ring of life)": {
 				"Chunks": ["13099-1"],
@@ -45466,7 +46122,8 @@
 					"~|Icthlarin's Little Helper|~ 2": "Quest"
 				},
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "10242"
 			},
 			"Yawn in the 7th room of Pyramid Plunder. Beware of double agents! (Pharaoh's sceptre, Any menaphite clothing set)": {
 				"Chunks": ["Pyramid Plunder"],
@@ -45486,7 +46143,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12096"
 			},
 			"14 degrees 13 minutes south, 27 degrees 26 minutes east": {
 				"Chunks": ["13098-1"],
@@ -45494,13 +46152,15 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "26944"
 			},
 			"https://oldschool.runescape.wiki/images/6/68/Map_clue_ape_atoll_shack.png?47f13": {
 				"Chunks": ["10794-1"],
 				"ClueTier": "elite",
 				"ClueType": "Map",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19786"
 			},
 			"Duo Plug": {
 				"NPCs": ["Dugopul"],
@@ -45514,7 +46174,8 @@
 				"ClueType": "Coordinates",
 				"Items": ["Spade"],
 				"Not Skiller": true,
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12106"
 			},
 			"13 degrees 33 minutes south, 15 degrees 26 minutes east": {
 				"Chunks": ["11562-1"],
@@ -45560,13 +46221,15 @@
 				"Monsters": ["Shellbane Gryphon"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "31270"
 			},
 			"You must be 100 to play with me.": {
 				"NPCs": ["Squire (Veteran)"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19811"
 			},
 			"A blood red weapon, a strong curved sword, found on the island of primate lords.": {
 				"NPCs": ["Falo the Bard"],
@@ -45767,6 +46430,11 @@
 				},
 				"Items": ["Dragon keel parts"],
 				"Not F2P": true
+			},
+			"Show this to Sherlock": {
+				"NPCs": ["Sherlock"],
+				"Not F2P": true,
+				"ClueId": "12127"
 			},
 			"Sherlock: Equip a Dragon Scimitar.": {
 				"NPCs": ["Sherlock"],
@@ -46533,7 +47201,8 @@
 			},
 			"Shooting Stars: South-east Varrock mine": {
 				"StarRegion": "Misthalin",
-				"Chunks": ["13108-1"]
+				"Chunks": ["13108-1"],
+				"ClueId": "2716"
 			},
 			"Shooting Stars: South-west Varrock mine": {
 				"StarRegion": "Misthalin",
@@ -124704,6 +125373,9 @@
 						"Dyes to Die For": true,
 						"Tal Teklan Rune Shop": true
 					},
+					"Clue": {
+						"medium": 1
+					},
 					"Spawn": {
 						"Bowl": 1,
 						"Chichilihui rose": 1,
@@ -125613,6 +126285,9 @@
 					},
 					"Spawn": {
 						"Bronze axe": 1
+					},
+					"Clue": {
+						"master": 1
 					}
 				},
 				"2": {
@@ -125657,6 +126332,9 @@
 					"Spawn": {
 						"Rope": 1,
 						"Tinderbox": 1
+					},
+					"Clue": {
+						"hard": 1
 					}
 				},
 				"2": {},
@@ -126368,6 +127046,9 @@
 						"Cup of tea": 1,
 						"Fishing bait": 1,
 						"Tinderbox": 1
+					},
+					"Clue": {
+						"hard": 1
 					}
 				},
 				"W1": {},
@@ -126473,6 +127154,9 @@
 					},
 					"Spawn": {
 						"Iron dagger": 1
+					},
+					"Clue": {
+						"medium": 1
 					}
 				},
 				"2": {
@@ -126610,6 +127294,9 @@
 				"Jug": 1,
 				"Knife": 1,
 				"Needle": 1
+			},
+			"Clue": {
+				"easy": 1
 			}
 		},
 		"5429": {
@@ -218268,7 +218955,7 @@
 			{ "color": "#8c2a22", "text": "04 degrees 58 minutes north, 36 degrees 56 minutes east", "type": "Master", "x": 3622, "y": 3320 },
 			{ "color": "#b19b15", "text": "05 degrees 07 minutes south, 13 degrees 26 minutes east", "type": "Elite", "x": 2870, "y": 2997 },
 			{ "color": "#8c2a22", "text": "05 degrees 13 minutes north, 04 degrees 16 minutes west", "type": "Master", "x": 2303, "y": 3328 },
-			{ "color": "#b19b15", "text": "05 degrees 18 minutes north, 6 degrees 48 minutes west", "type": "Elite", "x": 2222, "y": 3331 },
+			{ "color": "#b19b15", "text": "05 degrees 18 minutes north, 06 degrees 48 minutes west", "type": "Elite", "x": 2222, "y": 3331 },
 			{ "color": "#4c8587", "text": "05 degrees 20 minutes south, 04 degrees 28 minutes east", "type": "Medium", "x": 2583, "y": 2990 },
 			{ "color": "#b19b15", "text": "05 degrees 24 minutes south, 26 degrees 56 minutes east", "type": "Elite", "x": 3302, "y": 2988 },
 			{ "color": "#763089", "text": "05 degrees 37 minutes north, 31 degrees 15 minutes east", "type": "Hard", "x": 3440, "y": 3341 },
@@ -218321,7 +219008,7 @@
 			{ "color": "#763089", "text": "13 degrees 46 minutes north, 21 degrees 01 minutes east", "type": "Hard", "x": 3113, "y": 3602 },
 			{ "color": "#b19b15", "text": "14 degrees 13 minutes south, 27 degrees 26 minutes east", "type": "Elite", "x": 3318, "y": 2706 },
 			{ "color": "#b19b15", "text": "14 degrees 15 minutes south, 08 degrees 01 minutes east", "type": "Elite", "x": 2697, "y": 2705 },
-			{ "color": "#4c8587", "text": "14 degrees 54 minutes north, 9 degrees 13 minutes east", "type": "Medium", "x": 2735, "y": 3638 },
+			{ "color": "#4c8587", "text": "14 degrees 54 minutes north, 09 degrees 13 minutes east", "type": "Medium", "x": 2735, "y": 3638 },
 			{ "color": "#4c8587", "text": "15 degrees 22 minutes north, 07 degrees 31 minutes east", "type": "Medium", "x": 2681, "y": 3653 },
 			{ "color": "#763089", "text": "16 degrees 03 minutes north, 14 degrees 07 minutes east", "type": "Hard", "x": 2892, "y": 3675 },
 			{ "color": "#763089", "text": "16 degrees 07 minutes north, 22 degrees 45 minutes east", "type": "Hard", "x": 3168, "y": 3677 },
@@ -218355,7 +219042,7 @@
 			{ "color": "#763089", "text": "20 degrees 33 minutes north, 15 degrees 48 minutes east", "type": "Hard", "x": 2946, "y": 3819 },
 			{ "color": "#8c2a22", "text": "20 degrees 35 minutes north, 15 degrees 58 minutes east", "type": "Master", "x": 2951, "y": 3820 },
 			{ "color": "#763089", "text": "20 degrees 45 minutes north, 41 degrees 35 minutes east", "type": "Hard", "x": 3771, "y": 3825 },
-			{ "color": "#8c2a22", "text": "20 degrees 45 minutes north, 7 degrees 26 degrees west", "type": "Master", "x": 2202, "y": 3825 },
+			{ "color": "#8c2a22", "text": "20 degrees 45 minutes north, 07 degrees 26 degrees west", "type": "Master", "x": 2202, "y": 3825 },
 			{ "color": "#b19b15", "text": "21 degrees 03 minutes north, 24 degrees 13 minutes east", "type": "Elite", "x": 3215, "y": 3835 },
 			{ "color": "#763089", "text": "21 degrees 24 minutes north, 17 degrees 54 minutes east", "type": "Hard", "x": 3013, "y": 3846 },
 			{ "color": "#8c2a22", "text": "21 degrees 37 minutes north, 21 degrees 13 minutes west", "type": "Master", "x": 1761, "y": 3853 },
@@ -218366,8 +219053,8 @@
 			{ "color": "#763089", "text": "22 degrees 45 minutes north, 26 degrees 33 minutes east", "type": "Hard", "x": 3290, "y": 3889 },
 			{ "color": "#4c8587", "text": "22 degrees 07 minutes south, 23 degrees 13 minutes east", "type": "Medium", "x": 3183, "y": 2453 },
 			{ "color": "#b19b15", "text": "22 degrees 54 minutes north, 29 degrees 01 minutes east", "type": "Elite", "x": 3369, "y": 3894 },
-			{ "color": "#763089", "text": "23 degrees 00 minutes north, 41 degrees 33 minutes east", "type": "Hard", "x": 3770, "y": 3897 },
-			{ "color": "#4c8587", "text": "23 degrees 01 minutes north, 41 degrees 33 minutes east", "type": "Medium", "x": 3770, "y": 3898 },
+			{ "color": "#763089", "text": "23 degrees 03 minutes north, 41 degrees 24 minutes east", "type": "Hard", "x": 3765, "y": 3899 },
+			{ "color": "#4c8587", "text": "23 degrees 05 minutes north, 41 degrees 22 minutes east", "type": "Medium", "x": 3764, "y": 3900 },
 			{ "color": "#763089", "text": "23 degrees 03 minutes north, 02 degrees 01 minutes east", "type": "Hard", "x": 2505, "y": 3899 },
 			{ "color": "#763089", "text": "23 degrees 30 minutes north, 16 degrees 33 minutes east", "type": "Hard", "x": 2970, "y": 3913 },
 			{ "color": "#b19b15", "text": "23 degrees 48 minutes north, 11 degrees 43 minutes west", "type": "Elite", "x": 2065, "y": 3923 },
@@ -218488,6 +219175,7 @@
 			{ "color": "#09600d", "text": "Clap on the causeway to the Wizards' Tower. Equip an iron medium helmet, emerald ring and a white apron.", "type": "Easy", "x": 3113, "y": 3196 },
 			{ "color": "#09600d", "text": "Clap on the top level of the mill, north of East Ardougne. Equip a blue gnome robe top, HAM robe bottom and an unenchanted tiara.", "type": "Easy", "x": 2635, "y": 3385 },
 			{ "color": "#4c8587", "text": "Clap your hands north of Mount Karuulm Spin before you talk to me. Equip an adamant warhammer, a ring of life and a pair of mithril boots.", "type": "Medium", "x": 1306, "y": 3839 },
+			{ "color": "#4c8587", "text": "CUTE HI", "type": "Medium", "x": 1212, "y": 3119 },
 			{ "color": "#4c8587", "text": "CLASH ION", "type": "Medium", "x": 1841, "y": 3803 },
 			{ "color": "#8c2a22", "text": "Come brave adventurer, your sense is on fire. If you talk to me, it's an old god you desire.", "type": "Master", "x": 3295, "y": 3934 },
 			{ "color": "#8c2a22", "text": "Come brave adventurer, your sense is on fire. If you talk to me, it's an old god you desire.", "type": "Master", "x": 3447, "y": 3547 },
@@ -218529,7 +219217,7 @@
 			{ "color": "#09600d", "text": "Dig under Ithoi's cabin.", "type": "Easy", "x": 2529, "y": 2838 },
 			{ "color": "#b19b15", "text": "Dig under Razorlor's toad batta.", "type": "Elite", "x": 3139, "y": 4554 },
 			{ "color": "#763089", "text": "Dig where 4 siblings and I all live with our evil overlord.", "type": "Hard", "x": 3195, "y": 3357 },
-			{ "color": "#09600d", "text": "Dig where only the skilled, the wealthy, or the brave can choose not to visit again.", "type": "Easy", "x": 3221, "y": 3219 },
+			{ "color": "#09600d", "text": "Dig where only the skilled, wealthy, or brave can choose not to visit again.", "type": "Easy", "x": 3221, "y": 3219 },
 			{ "color": "#b19b15", "text": "Dig where the forces of Zamorak and Saradomin collide.", "type": "Elite", "x": 3049, "y": 4839 },
 			{ "color": "#8c2a22", "text": "DIM THARN", "type": "Master", "x": 3182, "y": 3946 },
 			{ "color": "#763089", "text": "DIP 8511", "type": "Hard", "x": 3041, "y": 4770 },
@@ -218538,6 +219226,7 @@
 			{ "color": "#09600d", "text": "Do a jig in Varrock's rune store. Equip an air tiara and a staff of water.", "type": "Easy", "x": 3253, "y": 3401 },
 			{ "color": "#763089", "text": "DO SAY MORE", "type": "Hard", "x": 3230, "y": 3230 },
 			{ "color": "#b19b15", "text": "Dobson is my last name, and with gardening I seek fame.", "type": "Elite", "x": 2635, "y": 3310 },
+			{ "color": "#b19b15", "text": "CIRR JAD", "type": "Elite", "x": 3718, "y": 3811 },
 			{ "color": "#b19b15", "text": "Does one really need a fire to stay warm here?", "type": "Elite", "x": 3816, "y": 3810 },
 			{ "color": "#b19b15", "text": "DR HITMAN", "type": "Elite", "x": 3182, "y": 3946 },
 			{ "color": "#763089", "text": "DR WARDEN FUNK", "type": "Hard", "x": 2913, "y": 10221 },
@@ -218778,7 +219467,7 @@
 			{ "color": "#b19b15", "text": "LADDER MEMO GUV", "type": "Elite", "x": 2447, "y": 3418 },
 			{ "color": "#4c8587", "text": "LAME T", "type": "Medium", "x": 1742, "y": 2977 },
 			{ "color": "#4c8587", "text": "LARK IN DOG", "type": "Medium", "x": 3220, "y": 3476 },
-			{ "color": "#09600d", "text": "Dance a jig behind the bar on Pandemonium. Equip a right eye patch and a bronze scimitar.", "type": "Easy", "x": 3049, "y": 2966 },
+			{ "color": "#09600d", "text": "Dance a jig behind the bar on the Pandemonium. Equip a right eye patch and a bronze scimitar.", "type": "Easy", "x": 3049, "y": 2966 },
 			{ "color": "#09600d", "text": "Laugh at the crossroads south of the Sinclair Mansion. Equip a cowl, a blue wizard robe top and an iron scimitar.", "type": "Easy", "x": 2741, "y": 3536 },
 			{ "color": "#b19b15", "text": "Laugh by the fountain of heroes. Equip splitbark legs, dragon boots and a Rune longsword.", "type": "Elite", "x": 2920, "y": 9893 },
 			{ "color": "#b19b15", "text": "Laugh in front of the gem store in Ardougne market. Equip a Castlewars bracelet, a dragonstone amulet and a ring of forging.", "type": "Elite", "x": 2666, "y": 3304 },
@@ -219003,7 +219692,7 @@
 			{ "color": "#09600d", "text": "Talk to the Doomsayer.", "type": "Easy", "x": 3232, "y": 3228 },
 			{ "color": "#09600d", "text": "Talk to the mother of a basement dwelling son.", "type": "Easy", "x": 3079, "y": 3493 },
 			{ "color": "#09600d", "text": "Talk to the Squire in the White Knights' castle in Falador.", "type": "Easy", "x": 2977, "y": 3343 },
-			{ "color": "#09600d", "text": "Talk to Turael in Burthorpe.", "type": "Easy", "x": 2930, "y": 3536 },
+			{ "color": "#09600d", "text": "Talk to the Slayer Master in Burthorpe.", "type": "Easy", "x": 2930, "y": 3536 },
 			{ "color": "#09600d", "text": "Talk to Wayne at Wayne's Chains in Falador.", "type": "Easy", "x": 2972, "y": 3312 },
 			{ "color": "#09600d", "text": "Talk to Zeke in Al Kharid.", "type": "Easy", "x": 3287, "y": 3190 },
 			{ "color": "#4c8587", "text": "TAMED ROCKS", "type": "Medium", "x": 1822, "y": 3739 },
@@ -219045,7 +219734,6 @@
 			{ "color": "#8f8585", "img": "./resources/clue_maps/Map_clue_South-eastern_Varrock_Mine.png", "text": "Varrock East Mine map", "type": "Beginner", "x": 3290, "y": 3374 },
 			{ "color": "#b19b15", "text": "Varrock is where I reside, not the land of the dead, but I am so old, I should be there instead. Let's hope your reward is as good as it says, just 1 gold one and you can have it read.", "type": "Elite", "x": 3203, "y": 3424 },
 			{ "color": "#763089", "text": "VEIL VEDA", "type": "Hard", "x": 3079, "y": 9892 },
-			{ "color": "#4c8587", "text": "VESTE", "type": "Medium", "x": 2432, "y": 3423 },
 			{ "color": "#763089", "text": "VTYR APCNTGLW", "type": "Hard", "x": 2634, "y": 4682 },
 			{ "color": "#b19b15", "text": "W marks the spot.", "type": "Elite", "x": 2867, "y": 3546 },
 			{ "color": "#09600d", "text": "Wave along the south fence of the Lumber Yard. Equip a hard leather body, leather chaps and a bronze axe.", "type": "Easy", "x": 3307, "y": 3491 },
@@ -219058,6 +219746,7 @@
 			{ "color": "#763089", "text": "When you get tired of fighting, go deep, deep down until you need an antidote.", "type": "Hard", "x": 2576, "y": 9583 },
 			{ "color": "#8c2a22", "text": "Where safe to speak, the man who offers the pouch of smallest size wishes to see your alignment.", "type": "Master", "x": 3260, "y": 3385 },
 			{ "color": "#763089", "text": "Where the best are commemorated, and a celebratory cup, not just for beer.", "type": "Hard", "x": 3388, "y": 3152 },
+			{ "color": "#763089", "text": "YAROYGR", "type": "Hard", "x": 1376, "y": 3037 },
 			{ "color": "#b19b15", "text": "With a name like that, you'd expect a little more than just a few scimitars.", "type": "Elite", "x": 2759, "y": 2775 },
 			{ "color": "#b19b15", "text": "With drinks and dwarves I make my way, upon my head a glass will stay.", "type": "Elite", "x": 1432, "y": 9584 },
 			{ "color": "#8f8585", "img": "./resources/clue_maps/Map_clue_Wizard_tower.png", "text": "Wizards' Tower DIS map", "type": "Beginner", "x": 3110, "y": 3152 },
