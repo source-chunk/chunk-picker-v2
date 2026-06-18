@@ -8298,6 +8298,14 @@ input#searchMonsters {
     background-color: var(--color6);
 }
 
+.quest-steps-data .step.extra-highlighted {
+    padding: 15px;
+    border: solid 2px var(--colorFlash);
+    outline: solid 2px var(--colorText);
+    outline-offset: -8px;
+    border-radius: 10px;
+}
+
 .quest-steps-info {
     font-size: 18px;
     margin: 0px 5px;

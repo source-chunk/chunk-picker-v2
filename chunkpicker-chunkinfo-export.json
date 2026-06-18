@@ -37229,6 +37229,7 @@
 			"Chest (Bryophyta's lair)*": {
 				"Category": ["Boss"],
 				"Items": ["Mossy key*"],
+				"Monsters": ["Bryophyta"],
 				"Source": "drop",
 				"Objects": ["Chest (Bryophyta's lair)"],
 				"Output": "Chest (Bryophyta's lair)"
@@ -37236,6 +37237,7 @@
 			"Chest (Obor's lair)*": {
 				"Category": ["Boss"],
 				"Items": ["Giant key*"],
+				"Monsters": ["Obor"],
 				"Source": "drop",
 				"Objects": ["Chest (Obor's lair)"],
 				"Output": "Chest (Obor's lair)"
@@ -88614,7 +88616,7 @@
 			},
 			"~|Karamja Diary#Easy|~ Task 4": {
 				"Description": "Travel to Port Sarim via the dock, east of Musa Point.",
-				"Chunks": ["11825-2", "12082-1"],
+				"Chunks": ["KaramjaEasy4[+]", "12082-1"],
 				"BaseQuest": "Karamja Diary",
 				"Not F2P": true
 			},
@@ -174251,6 +174253,7 @@
 			"FremmyHard3[+]": ["10296-1", "10297-1", "10297-2", "10552-1", "10553-1", "10554-1", "10808-1", "10809-1", "10809-2", "10809-3", "10809-4", "10809-5", "11064-1"],
 			"KandarinDiaryArea[+]": ["10806-1", "10806-2", "10806-3", "11061-1", "11062-1", "11062-4", "11317-1", "11318-1"],
 			"KaramjaChunks[+]": ["10801-1", "10802-1", "10802-2", "11053-1", "11054-1", "11054-2", "11055-1", "11055-2", "11056-1", "11057-1", "11058-1", "11309-1", "11310-1", "11310-2", "11310-3", "11310-4", "11310-5", "11311", "11312-1", "11312-1", "11313-1", "11565-1", "11566-1", "11566-2", "11566-3", "11567-1", "11567-2", "11568-1", "11568-2", "11569-1", "11821-1", "11822-1", "11822-2", "11823-1"],
+			"KaramjaEasy4[+]": ["11825-2", "12078-1"],
 			"KaramjaMedium18[+]": ["8496-1", "8500-1", "10284-1", "10545-1", "11058-1", "11061-1", "11825-2", "12081-2", "14637", "14646-1"],
 			"KaramjaMedium19[+]": ["11056-1", "11310-1"],
 			"KKEasy1[+]": ["4923-2", "5179"],
@@ -174495,6 +174498,7 @@
 			"FremmyHard3[+]": "Any Fremennik chunk",
 			"KandarinDiaryArea[+]": "Any Kandarin chunk",
 			"KaramjaChunks[+]": "Any Karamja chunk",
+			"KaramjaEasy4[+]": "Either the Musa Point dock chunk or The Pandemonium dock chunk",
 			"KaramjaMedium18[+]": "Any valid charter location chunk from the Shipyard",
 			"KaramjaMedium19[+]": "Any Karamjan chunk with a gem rock",
 			"KKEasy1[+]": "Any Mount Karuulm mine chunk",
@@ -254070,6 +254074,11 @@
 			"Jukat (shop)": {
 				"Zanaris": [{
 					"Access Zanaris Marketplace": "Nonskill"
+				}]
+			},
+			"King Narnode's Royal Seed Pods": {
+				"9782": [{
+					"~|Monkey Madness II|~ Complete the quest": "Quest"
 				}]
 			},
 			"Leagues Reward Shop": {
