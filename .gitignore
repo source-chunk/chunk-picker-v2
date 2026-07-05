@@ -74,3 +74,4 @@ package-lock.json
 package.json
 save_file.json
 /functions
+start-server.bat

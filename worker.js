@@ -133,6 +133,7 @@ let elementalRunes;
 let manualTasks;
 let completeChallenges;
 let backlog;
+let clueCompleteNum;
 let rareDropNum;
 let universalPrimary;
 let elementalStaves;
@@ -249,7 +250,8 @@ onmessage = function(e) {
             userTasks,
             manualPrimary,
             updateLevel,
-            unconnectedAreas
+            unconnectedAreas,
+            clueCompleteNum
         } = eGlobal.data);
 
         if (updateLevel !== 'unconnected-areas') {
@@ -3427,16 +3429,31 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
             }
         });
-        clueTasksPossible = {
-            'beginner': true,
-            'easy': true,
-            'medium': true,
-            'hard': true,
-            'elite': true,
-            'master': true
+        let tempClueTasksPossible = {
+            'beginner': 0,
+            'easy': 0,
+            'medium': 0,
+            'hard': 0,
+            'elite': 0,
+            'master': 0
         };
-        !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier') && !newValids.hasOwnProperty('Nonskill') || !newValids['Nonskill'].hasOwnProperty(task) }).forEach((task) => {
-            clueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']] = false;
+        let tempClueTasksNotPossible = {
+            'beginner': 0,
+            'easy': 0,
+            'medium': 0,
+            'hard': 0,
+            'elite': 0,
+            'master': 0
+        };
+        !!chunkInfo['challenges']['Nonskill'] && Object.keys(chunkInfo['challenges']['Nonskill']).filter((task) => { return !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('ClueTier') }).forEach((task) => {
+            if (!newValids.hasOwnProperty('Nonskill') || !newValids['Nonskill'].hasOwnProperty(task)) {
+                tempClueTasksNotPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
+            } else {
+                tempClueTasksPossible[chunkInfo['challenges']['Nonskill'][task]['ClueTier']]++;
+            }
+        });
+        Object.keys(tempClueTasksPossible).forEach((tier) => {
+            clueTasksPossible[tier] = (tempClueTasksPossible[tier] / (tempClueTasksPossible[tier] + tempClueTasksNotPossible[tier])) * 100;
         });
         !!baseChunkData && !!baseChunkData['items'] && Object.keys(baseChunkData['items']).filter(item => { return Object.keys(baseChunkData['items'][item]).length === 0 }).forEach((item) => {
             delete baseChunkData['items'][item];
@@ -3739,7 +3756,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     return true;
                 }
                 if (rule === 'Collection Log Clues' && chunkInfo['challenges'][skill][name]['Category'].includes('Collection Log Clues') && chunkInfo['challenges'][skill][name].hasOwnProperty('ClueRewardTier') && rules[rule]) {
-                    if (!clueTasksPossible.hasOwnProperty(chunkInfo['challenges'][skill][name]['ClueRewardTier']) || !clueTasksPossible[chunkInfo['challenges'][skill][name]['ClueRewardTier']]) {
+                    if (!clueTasksPossible.hasOwnProperty(chunkInfo['challenges'][skill][name]['ClueRewardTier']) || (clueTasksPossible[chunkInfo['challenges'][skill][name]['ClueRewardTier']] < clueCompleteNum)) {
                         validChallenge = false;
                         wrongThings.push('Collection Log Clues');
                         nonValids[name] = wrongThings;
@@ -3751,6 +3768,9 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                     wrongThings.push('Shortcut');
                     nonValids[name] = wrongThings;
                     return true;*/
+                    chunkInfo['challenges'][skill][name]['NeverShow'] = true;
+                }
+                if (rule === 'Combat and Teleport Spells' && chunkInfo['challenges'][skill][name]['Category'].includes('Combat and Teleport Spells Task') && !rules[rule] && chunkInfo['challenges'][skill][name]['Level'] > 1) {
                     chunkInfo['challenges'][skill][name]['NeverShow'] = true;
                 }
                 if (rule === 'InsidePOH' && chunkInfo['challenges'][skill][name]['Category'].includes('InsidePOH Primary') && !rules[rule] && chunkInfo['challenges'][skill][name]['Level'] > 1) {
