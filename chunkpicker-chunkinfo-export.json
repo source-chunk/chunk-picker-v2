@@ -11809,12 +11809,20 @@
 				"Priority": 997,
 				"Not F2P": true
 			},
+			"Etch an ~|araxyte fang|~": {
+				"Items": ["Chisel", "Araxyte fang*"],
+				"Level": 86,
+				"Output": "Etched araxyte fang",
+				"Primary": false,
+				"Priority": 1,
+				"Not F2P": true
+			},
 			"Make an ~|amulet of rancour|~": {
-				"Items": ["Amulet of torture*", "Araxyte fang*"],
+				"Items": ["Amulet of torture*", "Etched araxyte fang*"],
 				"Level": 86,
 				"Output": "Amulet of rancour",
 				"Primary": true,
-				"Priority": 1,
+				"Priority": 2,
 				"Not F2P": true
 			},
 			"Etch an ~|elder venator fang|~": {

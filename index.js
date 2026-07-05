@@ -1538,7 +1538,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.58';
+let currentVersion = '6.9.59';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'unconnected-areas';
@@ -1710,7 +1710,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.58";
+mapImg.src = "osrs_world_map.png?v=6.9.59";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3637,7 +3637,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.58");
+        myWorker = new Worker("./worker.js?v=6.9.59");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -3998,8 +3998,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.58");
-let myWorker2 = new Worker("./worker.js?v=6.9.58");
+let myWorker = new Worker("./worker.js?v=6.9.59");
+let myWorker2 = new Worker("./worker.js?v=6.9.59");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -6631,10 +6631,10 @@ let setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
                 if (!!skillTask && !!altChallenges[skill] && altChallenges[skill].hasOwnProperty(chunkInfo['challenges'][skill][skillTask]['Level'] - boost) && globalValids.hasOwnProperty(skill) && globalValids[skill].hasOwnProperty(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]) && (globalValids[skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]] - (globalValidsBoosts.hasOwnProperty(skill) && globalValidsBoosts[skill].hasOwnProperty(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]) ? globalValidsBoosts[skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]] : 0)) === (chunkInfo['challenges'][skill][skillTask]['Level'] - boost) && (!backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost])) && !!altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]) {
                     let newBoost = (globalValidsBoosts.hasOwnProperty(skill) && globalValidsBoosts[skill].hasOwnProperty(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]) ? globalValidsBoosts[skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]] : 0);
                     let taskEl = `<div class="challenge skill-challenge noscroll clickable ${skill + '-challenge'} ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]) && 'hide-backlog'} ${!activeSubTabs['skill'] ? 'stay-hidden' : ''}" onclick="showDetails('${encodeRFC5987ValueChars(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost])}', '${skill}', 'current')"><label class="checkbox noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "checkbox--disabled" : ''}"><span class="checkbox__input noscroll"><input type="checkbox" name="checkbox" ${(!!checkedChallenges[skill] && !!checkedChallenges[skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]) ? "checked" : ''} class='noscroll' onclick="checkOffChallenge('${skill}', '${encodeRFC5987ValueChars(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost])}')" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="checkbox__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">[${(newBoost > 0 ? (((chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]['Level'] - newBoost) <= 0 ? 1 : (chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]['Level'] - newBoost)) + '] (+' + newBoost + ')') : chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]['Level'] + ']')} <span class="inner noscroll">${skill}</b>: ${decodeQueryParam(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost].split('~')[0])}<a class='link noscroll' href="${"https://oldschool.runescape.wiki/w/" + encodeForUrl((altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost].split('|')[1]))}" target="_blank">${decodeQueryParam(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost].split('~')[1].split('|').join(''))}</a>${decodeQueryParam(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost].split('~')[2])}</span></span></label> <span class="burger noscroll${!testMode && (viewOnly || inEntry || locked) ? ' hidden-burger' : ''}" onclick="openActiveContextMenu('${encodeRFC5987ValueChars(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost])}', '${skill}', ${hasAlts})"><i class="fa-solid fa-sliders-h noscroll">${hasAlts ? `<i class="fa-solid fa-star burger-star noscroll"></i>` : ''}</i></span></div>`;
-                    !!favoriteTasks[skill] && favoriteTasks[skill].hasOwnProperty(skillTask) ? favoriteTasksArr.push(taskEl.replaceAll('skill-challenge', 'favorite-challenge')) : challengeArr.push(taskEl);
+                    !!favoriteTasks[skill] && favoriteTasks[skill].hasOwnProperty(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]) ? favoriteTasksArr.push(taskEl.replaceAll('skill-challenge', 'favorite-challenge')) : challengeArr.push(taskEl);
                     listOfTasks.push({ [altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]: skill, prefix: `[${(newBoost > 0 ? (((chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]['Level'] - newBoost) <= 0 ? 1 : (chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]['Level'] - newBoost)) + '] (+' + newBoost + ')') : chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]['Level'] + ']')} ${skill}:` });
                     let activeTasksEl = { [altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]: `${chunkInfo['challenges'][skill][altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost]]['Level']}${newBoost > 0 ? `{${newBoost}}` : ''}` };
-                    if (!!favoriteTasks[skill] && favoriteTasks[skill].hasOwnProperty(skillTask)) {
+                    if (!!favoriteTasks[skill] && favoriteTasks[skill].hasOwnProperty(altChallenges[skill][chunkInfo['challenges'][skill][skillTask]['Level'] - boost])) {
                         if (!activeTasks['Favorite']) {
                             activeTasks['Favorite'] = {};
                         }
@@ -7173,7 +7173,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.58");
+    myWorker2 = new Worker("./worker.js?v=6.9.59");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',

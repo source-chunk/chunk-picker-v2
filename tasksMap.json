@@ -1358,6 +1358,7 @@
   "Craft a ~|gem sack|~": "t_49621",
   "Craft an ~|unstrung lyre|~": "t_46512",
   "Craft a ~|noxious halberd|~": "t_1137",
+  "Etch an ~|araxyte fang|~": "t_49876",
   "Make an ~|amulet of rancour|~": "t_1138",
   "Etch an ~|elder venator fang|~": "t_49685",
   "Make a ~|necklace of rupture|~": "t_49686",
@@ -49505,5 +49506,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 49876
+  "currentNextIndex": 49877
 }
