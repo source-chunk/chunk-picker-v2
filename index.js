@@ -1396,7 +1396,7 @@ let stickered = {};
 let painted = {};
 let stickeredNotes = {};
 let stickeredColors = {};
-let stickerChoices = ['unset', 'skull', 'skull-crossbones', 'bomb', 'exclamation-circle', 'dice', 'poo', 'frown', 'grin-alt', 'heart', 'star', 'gem', 'award', 'crown', 'flag', 'asterisk', 'clock', 'hourglass', 'link', 'map-marker-alt', 'radiation-alt', 'shoe-prints', 'thumbs-down', 'thumbs-up', 'crow', 'utensil-spoon', 'lock', 'unlock-alt', 'sailboat', 'anchor'];
+let stickerChoices = ['unset', 'skull', 'skull-crossbones', 'bomb', 'exclamation-circle', 'dice', 'poo', 'frown', 'grin-alt', 'heart', 'star', 'gem', 'award', 'crown', 'flag', 'asterisk', 'clock', 'hourglass', 'link', 'map-marker-alt', 'radiation-alt', 'shoe-prints', 'thumbs-down', 'thumbs-up', 'crow', 'utensil-spoon', 'lock', 'unlock-alt', 'sailboat', 'anchor', 'circle-question'];
 let stickerChoicesOsrs = ['attack', 'hitpoints', 'mining', 'strength', 'agility', 'smithing', 'defence', 'herblore', 'fishing', 'ranged', 'thieving', 'cooking', 'prayer', 'fletching', 'firemaking', 'magic', 'crafting', 'woodcutting', 'runecraft', 'sailing', 'slayer', 'farming', 'construction', 'hunter', 'quest', 'diary', 'minigame', 'music', 'skills', 'clue'];
 let stickerChoicesNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 let stickerChoicesTiers = ['S', 'A', 'B', 'C', 'D', 'F'];
@@ -1538,7 +1538,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.59';
+let currentVersion = '6.9.60';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'unconnected-areas';
@@ -1633,7 +1633,7 @@ let isHoveringRight = false;
 let isHoveringOverlayMenu = false;
 let manualMouseMoveCheck = false;
 let unlockedOverlayOnly = false;
-let stickerChoicesContent = {'tag': '\uf02b', 'skull': '\uf54c', 'skull-crossbones': '\uf714', 'bomb': '\uf1e2', 'exclamation-circle': '\uf06a', 'dice': '\uf522', 'poo': '\uf2fe', 'frown': '\uf119', 'grin-alt': '\uf581', 'heart': '\uf004', 'star': '\uf005', 'gem': '\uf3a5', 'award': '\uf559', 'crown': '\uf521', 'flag': '\uf024', 'asterisk': '\uf069', 'clock': '\uf017', 'hourglass': '\uf254', 'link': '\uf0c1', 'map-marker-alt': '\uf3c5', 'radiation-alt': '\uf7ba', 'shoe-prints': '\uf54b', 'thumbs-down': '\uf165', 'thumbs-up': '\uf164', 'crow': '\uf520', 'utensil-spoon': '\uf2e5', 'lock': '\uf023', 'unlock-alt': '\uf13e', 'sailboat': '\ue445', 'anchor': '\uf13d'};
+let stickerChoicesContent = {'tag': '\uf02b', 'skull': '\uf54c', 'skull-crossbones': '\uf714', 'bomb': '\uf1e2', 'exclamation-circle': '\uf06a', 'dice': '\uf522', 'poo': '\uf2fe', 'frown': '\uf119', 'grin-alt': '\uf581', 'heart': '\uf004', 'star': '\uf005', 'gem': '\uf3a5', 'award': '\uf559', 'crown': '\uf521', 'flag': '\uf024', 'asterisk': '\uf069', 'clock': '\uf017', 'hourglass': '\uf254', 'link': '\uf0c1', 'map-marker-alt': '\uf3c5', 'radiation-alt': '\uf7ba', 'shoe-prints': '\uf54b', 'thumbs-down': '\uf165', 'thumbs-up': '\uf164', 'crow': '\uf520', 'utensil-spoon': '\uf2e5', 'lock': '\uf023', 'unlock-alt': '\uf13e', 'sailboat': '\ue445', 'anchor': '\uf13d', 'circle-question': '\uf059'};
 let osrsStickers = {};
 let numberStickers = {'zero': '0', 'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9'};
 let chosenFromCinematic = null;
@@ -1710,7 +1710,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.59";
+mapImg.src = "osrs_world_map.png?v=6.9.60";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2092,14 +2092,15 @@ let drawCanvas = function(ctxIn = ctx) {
     !!tempChunks['stickered'] && Object.keys(tempChunks['stickered']).forEach(function(chunkId) {
         let {x, y} = convertToXY(chunkId);
         if (stickerChoices.includes(tempChunks['stickered'][chunkId])) {
-            ctxIn.scale(-1, 1);
+            let direction = tempChunks['stickered'][chunkId] === 'circle-question' ? 1 : -1;
+            ctxIn.scale(direction * 1, 1);
             ctxIn.font = '900 ' + (totalZoom * (imgW / rowSize)) * (0.25) + 'px "Font Awesome 6 Free"';
             ctxIn.fillStyle = tempChunks['stickeredColors'][chunkId];
-            ctxIn.fillText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+            ctxIn.fillText(stickerChoicesContent[tempChunks['stickered'][chunkId]], direction * (dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
             if (ctxIn.fillStyle !== '#000000') {
-                ctxIn.strokeText(stickerChoicesContent[tempChunks['stickered'][chunkId]], -(dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
+                ctxIn.strokeText(stickerChoicesContent[tempChunks['stickered'][chunkId]], direction * (dragTotalX + (totalZoom * ((x + 0.85) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.25) * imgH / (fullSize / rowSize))));
             }
-            ctxIn.scale(-1, 1);
+            ctxIn.scale(direction * 1, 1);
         } else if (stickerChoicesOsrs.includes(tempChunks['stickered'][chunkId])) {
             ctxIn.drawImage(osrsStickers[tempChunks['stickered'][chunkId]], (dragTotalX + (totalZoom * ((x + 0.725) * imgW / rowSize))), dragTotalY + (totalZoom * ((y + 0.025) * imgH / (fullSize / rowSize))), (totalZoom * (imgW / rowSize)) * (0.25), (totalZoom * (imgW / rowSize)) * (0.25));
         } else if (stickerChoicesNumbers.includes(tempChunks['stickered'][chunkId])) {
@@ -3637,7 +3638,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.59");
+        myWorker = new Worker("./worker.js?v=6.9.60");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -3998,8 +3999,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.59");
-let myWorker2 = new Worker("./worker.js?v=6.9.59");
+let myWorker = new Worker("./worker.js?v=6.9.60");
+let myWorker2 = new Worker("./worker.js?v=6.9.60");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -7173,7 +7174,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.59");
+    myWorker2 = new Worker("./worker.js?v=6.9.60");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -10224,7 +10225,9 @@ let openStickers = function(id) {
         $('.sticker-color-picker').val(stickeredColors[id] || settings['defaultStickerColor']);
         stickerChoices.forEach((sticker) => {
             let stickerName = sticker.split('-alt').join('').split('-').join(' ');
-            if (sticker !== 'unset') {
+            if (sticker === 'circle-question') {
+                $('.sticker-data').append(`<span style='color:${$('.sticker-color-picker').val()}' class='noscroll sticker-option-container color-sticker${$('.sticker-color-picker').val() !== '#000000' ? ' black-outline' : ''} ${sticker}-tag' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fa-solid fa-${sticker}"></i></span>`);
+            } else if (sticker !== 'unset') {
                 $('.sticker-data').append(`<span style='color:${$('.sticker-color-picker').val()}' class='noscroll sticker-option-container color-sticker${$('.sticker-color-picker').val() !== '#000000' ? ' black-outline' : ''} ${sticker}-tag' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fa-solid fa-${sticker}" style="transform: scaleX(-1)"></i></span>`);
             } else {
                 $('.sticker-data').append(`<span class='noscroll sticker-option-container black-outline unset-option' title='${stickerName.charAt(0).toUpperCase() + stickerName.slice(1)}' onclick="setSticker('${id}', '${sticker}')"><i class="noscroll fa-solid fa-ban" style="transform: scaleX(-1)"></i></span>`);

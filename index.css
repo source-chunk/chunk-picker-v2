@@ -1515,6 +1515,12 @@ button.menu2 {
     left: 10px;
 }
 
+.entry-home-menu-img3-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
 .entry-home-about {
     position: absolute;
     z-index: 999;
@@ -1617,6 +1623,22 @@ button.menu2 {
 }
 
 .entry-home3-login a {
+    text-decoration: none;
+    color: white;
+}
+
+.entry-home4-login {
+    position: absolute;
+    right: 15px;
+    bottom: 17px;
+    margin: 0px !important;
+    width: 198px !important;
+    height: 69px !important;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.entry-home4-login a {
     text-decoration: none;
     color: white;
 }

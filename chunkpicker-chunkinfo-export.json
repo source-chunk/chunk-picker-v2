@@ -8059,7 +8059,7 @@
 			},
 			"Gain xp in the Bee Hive ~|Forestry|~ event": {
 				"Category": ["ForestryXp"],
-				"NPCs": ["Estate Agent[+]"],
+				"Chunks": ["Player-owned house"],
 				"Items": ["Forestry kit", "Logs[+]"],
 				"Level": 1,
 				"Skills": {
@@ -8071,7 +8071,7 @@
 			},
 			"Participate in ~|Vale Totems|~ for Construction xp": {
 				"Category": ["Minigame", "Construction Minigame"],
-				"NPCs": ["Estate Agent[+]"],
+				"Chunks": ["Player-owned house"],
 				"Objects": ["Totem site"],
 				"Level": 1,
 				"Tasks": {
@@ -8082,8 +8082,7 @@
 			},
 			"Repair broken bridges in the ~|Hallowed Sepulchre|~": {
 				"Category": ["Construction Minigame"],
-				"Chunks": ["Hallowed Sepulchre"],
-				"NPCs": ["Estate Agent[+]"],
+				"Chunks": ["Hallowed Sepulchre", "Player-owned house"],
 				"Items": ["Hammer[+]", "Saw[+]", "Plank[+]", "Nails[+]"],
 				"Level": 56,
 				"Primary": false,
@@ -8091,8 +8090,7 @@
 			},
 			"Repair braziers at ~|Wintertodt|~": {
 				"Category": ["Boss", "Construction Minigame"],
-				"Chunks": ["6462"],
-				"NPCs": ["Estate Agent[+]"],
+				"Chunks": ["6462", "Player-owned house"],
 				"Items": ["Hammer"],
 				"Level": 1,
 				"Primary": true,
@@ -8101,8 +8099,8 @@
 			},
 			"Repair masts and totem poles at ~|Tempoross|~": {
 				"Category": ["Boss", "Construction Minigame"],
-				"Chunks": ["12076-1"],
-				"NPCs": ["Tempoross", "Estate Agent[+]"],
+				"Chunks": ["12076-1", "Player-owned house"],
+				"NPCs": ["Tempoross"],
 				"Items": ["Hammer"],
 				"Level": 1,
 				"Primary": true,
@@ -8111,8 +8109,7 @@
 			},
 			"Fill holes on ~|Fishing Trawler|~": {
 				"Category": ["Minigame", "Construction Minigame"],
-				"Chunks": ["10545-1"],
-				"NPCs": ["Estate Agent[+]"],
+				"Chunks": ["10545-1", "Player-owned house"],
 				"Items": ["Swamp paste"],
 				"Objects": ["Trawler boat"],
 				"Level": 1,
@@ -11747,6 +11744,78 @@
 				"Level": 40,
 				"Primary": false,
 				"Priority": 1
+			},
+			"Polish a ~|tarnished 2h sword|~": {
+				"Items": ["Tarnished 2h sword*"],
+				"Level": 64,
+				"Output": "Tarnished 2h sword loot",
+				"Primary": true,
+				"Priority": 121,
+				"Not F2P": true
+			},
+			"Polish a ~|tarnished amulet|~": {
+				"Items": ["Tarnished amulet*"],
+				"Level": 64,
+				"Output": "Tarnished amulet loot",
+				"Primary": true,
+				"Priority": 122,
+				"Not F2P": true
+			},
+			"Polish a ~|tarnished battleaxe|~": {
+				"Items": ["Tarnished battleaxe*"],
+				"Level": 64,
+				"Output": "Tarnished battleaxe loot",
+				"Primary": true,
+				"Priority": 123,
+				"Not F2P": true
+			},
+			"Polish a ~|tarnished bracelet|~": {
+				"Items": ["Tarnished bracelet*"],
+				"Level": 64,
+				"Output": "Tarnished bracelet loot",
+				"Primary": true,
+				"Priority": 124,
+				"Not F2P": true
+			},
+			"Polish a ~|tarnished halberd|~": {
+				"Items": ["Tarnished halberd*"],
+				"Level": 64,
+				"Output": "Tarnished halberd loot",
+				"Primary": true,
+				"Priority": 125,
+				"Not F2P": true
+			},
+			"Polish a ~|tarnished longsword|~": {
+				"Items": ["Tarnished longsword*"],
+				"Level": 64,
+				"Output": "Tarnished longsword loot",
+				"Primary": true,
+				"Priority": 126,
+				"Not F2P": true
+			},
+			"Polish a ~|tarnished necklace|~": {
+				"Items": ["Tarnished necklace*"],
+				"Level": 64,
+				"Output": "Tarnished necklace loot",
+				"Primary": true,
+				"Priority": 127,
+				"Not F2P": true
+			},
+			"Polish a ~|tarnished ring|~": {
+				"Items": ["Tarnished ring*"],
+				"Level": 64,
+				"Output": "Tarnished ring loot",
+				"Primary": true,
+				"Priority": 128,
+				"Not F2P": true
+			},
+			"Polish a ~|tarnished spear|~": {
+				"Items": ["Tarnished spear*"],
+				"Level": 64,
+				"Output": "Tarnished spear loot",
+				"Primary": true,
+				"Priority": 129,
+				"Not F2P": true
 			},
 			"Participate in ~|Trouble Brewing|~ for Crafting xp": {
 				"Category": ["Minigame"],
@@ -28675,51 +28744,6 @@
 			"Squeeze blood sacs into a vial*": {
 				"Items": ["Vial", "Blood sac*"],
 				"Output": "Vial of blood",
-				"Not F2P": true
-			},
-			"Polish a tarnished 2h sword*": {
-				"Items": ["Tarnished 2h sword*"],
-				"Output": "Tarnished 2h sword loot",
-				"Not F2P": true
-			},
-			"Polish a tarnished amulet*": {
-				"Items": ["Tarnished amulet*"],
-				"Output": "Tarnished amulet loot",
-				"Not F2P": true
-			},
-			"Polish a tarnished battleaxe*": {
-				"Items": ["Tarnished battleaxe*"],
-				"Output": "Tarnished battleaxe loot",
-				"Not F2P": true
-			},
-			"Polish a tarnished halberd*": {
-				"Items": ["Tarnished halberd*"],
-				"Output": "Tarnished halberd loot",
-				"Not F2P": true
-			},
-			"Polish a tarnished longsword*": {
-				"Items": ["Tarnished longsword*"],
-				"Output": "Tarnished longsword loot",
-				"Not F2P": true
-			},
-			"Polish a tarnished necklace*": {
-				"Items": ["Tarnished necklace*"],
-				"Output": "Tarnished necklace loot",
-				"Not F2P": true
-			},
-			"Polish a tarnished bracelet*": {
-				"Items": ["Tarnished bracelet*"],
-				"Output": "Tarnished bracelet loot",
-				"Not F2P": true
-			},
-			"Polish a tarnished ring*": {
-				"Items": ["Tarnished ring*"],
-				"Output": "Tarnished ring loot",
-				"Not F2P": true
-			},
-			"Polish a tarnished spear*": {
-				"Items": ["Tarnished spear*"],
-				"Output": "Tarnished spear loot",
 				"Not F2P": true
 			},
 			"Create blisterwood stakes*": {
@@ -62607,7 +62631,7 @@
 			},
 			"Gain xp in the Bee Hive ~|Forestry|~ event": {
 				"Category": ["ForestryXp"],
-				"NPCs": ["Estate Agent[+]"],
+				"Chunks": ["Player-owned house"],
 				"Items": ["Forestry kit", "Logs[+]"],
 				"Level": 1,
 				"Skills": {
@@ -63179,7 +63203,7 @@
 			"Chop a ~|bloodwood tree|~": {
 				"Items": ["Axe[+]", "Bucket"],
 				"Level": 77,
-				"Objects": ["Bloodwood tree"],
+				"Objects": ["Bloodwood tree[+]"],
 				"Output": "Bucket of bloodwood sap",
 				"Primary": true
 			},
@@ -76128,6 +76152,9 @@
 				"Label": "Permanent Unlockables",
 				"Chunks": ["10029"],
 				"Items": ["YoungVineStick[+]"],
+				"Tasks": {
+					"~|Eagles' Peak|~ Complete the quest": "Quest"
+				},
 				"Not F2P": true
 			},
 			"Unlock the ~|hot air balloon|~ to the Crafting Guild": {
@@ -93766,10 +93793,8 @@
 			"~|Combat Achievements#Easy|~ Calm Before the Storm": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Repair either a mast or a totem pole.",
+				"Items": ["Hammer"],
 				"NPCs": ["Tempoross"],
-				"Tasks": {
-					"Repair masts and totem poles at ~|Tempoross|~": "Construction"
-				},
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 1
@@ -144353,6 +144378,7 @@
 				"Bush (stymphike)": 4,
 				"Bush (Vampyrium)": 2,
 				"Darkwood trees": 1,
+				"Engorged bloodwood tree": 1,
 				"Fishing spot (Leechfin)": 2,
 				"Iron rocks": 14,
 				"Pile of makeshift spears": 1,
@@ -173974,6 +174000,7 @@
 				"Bush (stymphike)": 4,
 				"Bush (Vampyrium)": 2,
 				"Darkwood trees": 1,
+				"Engorged bloodwood tree": 1,
 				"Fishing spot (Leechfin)": 2,
 				"Iron rocks": 14,
 				"Pile of makeshift spears": 1,
@@ -176849,7 +176876,8 @@
 			"AdamantKeel[+]": ["Adamant keel#Skiff", "Rune keel#Skiff", "Dragon keel#Skiff", "Adamant keel#Sloop", "Rune keel#Sloop", "Dragon keel#Sloop"],
 			"Trawling net[+]": ["Rope trawling net", "Linen trawling net#Skiff", "Linen trawling net#Sloop", "Hemp trawling net#Skiff", "Hemp trawling net#Sloop", "Cotton trawling net"],
 			"Salvaging station[+]": ["Salvaging station", "Salvaging station (facility)"],
-			"MooringPoint[+]": ["Mooring point (scenery)", "Gangplank (Sailing)"]
+			"MooringPoint[+]": ["Mooring point (scenery)", "Gangplank (Sailing)"],
+			"Bloodwood tree[+]": ["Bloodwood tree", "Engorged bloodwood tree"]
 		},
 		"objectsPlusNames": {
 			"Adamantite[+]": "Any adamantite rock",
@@ -176899,7 +176927,8 @@
 			"AdamantKeel[+]": "Any adamant keel or better",
 			"Trawling net[+]": "Any trawling net",
 			"Salvaging station[+]": "Any salvaging station",
-			"MooringPoint[+]": "Any mooring point or sailing gangplank"
+			"MooringPoint[+]": "Any mooring point or sailing gangplank",
+			"Bloodwood tree[+]": "Any bloodwood tree variant"
 		},
 		"rangedItems": {
 			"Iron thrownaxe": 1,
@@ -189911,7 +189940,7 @@
 				"1": "1/50"
 			},
 			"Echo pearl": {
-				"1": "1/927"
+				"1": "1/1200"
 			},
 			"Elkhorn frag": {
 				"1": "1/50"
@@ -189935,7 +189964,7 @@
 				"50-80": "15/50"
 			},
 			"Clue scroll (easy)": {
-				"1": "Uncommon"
+				"1": "1/55"
 			}
 		},
 		"Donny the lad": {
@@ -199257,7 +199286,7 @@
 		},
 		"Kamil": {
 			"Chocolate cake": {
-				"1,2": "Always"
+				"2": "Always"
 			},
 			"Super restore(4)": {
 				"1": "Always"
@@ -200861,8 +200890,11 @@
 			}
 		},
 		"Maggot King": {
+			"Adamantite ore": {
+				"30-40 (noted)": "10/159"
+			},
 			"Blood sac": {
-				"2-5": "5/159"
+				"8-11": "5/159"
 			},
 			"Crimson kisten": {
 				"1": "1/520"
@@ -200871,52 +200903,49 @@
 				"1": "41/159"
 			},
 			"Elder venator fang": {
-				"1": "1/333"
+				"1": "1/340"
 			},
 			"Gold ore": {
-				"14-22 (noted)": "5/159"
-			},
-			"Leechfin": {
-				"7-15": "10/159"
+				"24-32 (noted)": "5/159"
 			},
 			"Letvek": {
 				"23-34": "10/159"
 			},
 			"Maggot egg (base)": {
-				"1": "Common"
+				"1": "300/1500"
 			},
 			"Maggot egg (pulsating)": {
-				"1": "Rare"
+				"1": "6/1500"
 			},
 			"Maggot egg (sickly)": {
-				"1": "Common"
+				"1": "150/1500"
 			},
 			"Maggot egg (warm)": {
-				"1": "Uncommon"
+				"1": "33/1500"
 			},
 			"Maggot egg (wriggling)": {
-				"1": "Rare"
+				"1": "3/1500"
 			},
 			"Maggot egg (writhing)": {
-				"1": "Rare"
+				"1": "1/1500"
 			},
 			"Maggot marquess": {
 				"1": "1/3500"
 			},
 			"Mithril ore": {
-				"16-21 (noted)": "5/159"
+				"39-41 (noted)": "5/159"
 			},
 			"Mort myre fungus": {
 				"50-76 (noted)": "10/159"
 			},
 			"Orikalkum gravel": {
-				"3-5": "4/159"
+				"4-5": "4/159"
 			},
 			"Runite ore": {
-				"8-15 (noted)": "5/159"
+				"12-15 (noted)": "5/159"
 			},
 			"Stymphike feather": {
-				"11-34": "10/159"
+				"51-74": "10/159"
 			},
 			"Stymphike tartare": {
 				"2-4": "41/159"
@@ -200930,6 +200959,9 @@
 			"Tarnished battleaxe": {
 				"1": "2/159"
 			},
+			"Tarnished bracelet": {
+				"1": "3/159"
+			},
 			"Tarnished halberd": {
 				"1": "2/159"
 			},
@@ -200939,9 +200971,6 @@
 			"Tarnished necklace": {
 				"1": "3/159"
 			},
-			"Tarnished bracelet": {
-				"1": "3/159"
-			},
 			"Tarnished ring": {
 				"1": "6/159"
 			},
@@ -200949,13 +200978,19 @@
 				"1": "12/159"
 			},
 			"Uncut ruby": {
-				"6-9 (noted)": "15/159"
+				"6-13 (noted)": "15/159"
 			},
 			"Venator fang": {
 				"112-179": "2/159"
 			},
 			"Venator tooth": {
 				"178-219": "2/159"
+			},
+			"Brimstone key": {
+				"1": "1/50"
+			},
+			"Clue scroll (elite)": {
+				"1": "1/40"
 			}
 		},
 		"Magic axe": {
@@ -211621,7 +211656,7 @@
 			"SailingFragDropTable+": {
 				"1": "6/100"
 			},
-			"SailingSeedDropTable+": {
+			"HighLevelSailingSeedDropTable+": {
 				"1": "5/100"
 			},
 			"UncommonSeedDropTable+": {
@@ -213957,7 +213992,7 @@
 				"1": "8/128"
 			},
 			"Nothing": {
-				"1": "355-2048"
+				"1": "355/2048"
 			}
 		},
 		"TzHaar-Ket#Level 149": {
@@ -226001,6 +226036,107 @@
 				}
 			}
 		},
+		"Crafting": {
+			"Tarnished 2h sword loot": {
+				"Adamant 2h sword": {
+					"1": "4/10"
+				},
+				"Mithril 2h sword": {
+					"1": "1/10"
+				},
+				"Rune 2h sword": {
+					"1": "5/10"
+				}
+			},
+			"Tarnished amulet loot": {
+				"Diamond amulet (u)": {
+					"1": "1/10"
+				},
+				"Ruby amulet (u)": {
+					"1": "6/10"
+				},
+				"Sapphire amulet (u)": {
+					"1": "3/10"
+				}
+			},
+			"Tarnished battleaxe loot": {
+				"Adamant battleaxe": {
+					"1": "4/10"
+				},
+				"Dragon battleaxe": {
+					"1": "1/10"
+				},
+				"Rune battleaxe": {
+					"1": "5/10"
+				}
+			},
+			"Tarnished bracelet loot": {
+				"Diamond bracelet": {
+					"1": "4/10"
+				},
+				"Ruby bracelet": {
+					"1": "5/10"
+				},
+				"Topaz bracelet": {
+					"1": "1/10"
+				}
+			},
+			"Tarnished halberd loot": {
+				"Adamant halberd": {
+					"1": "4/10"
+				},
+				"Dragon halberd": {
+					"1": "1/10"
+				},
+				"Rune halberd": {
+					"1": "5/10"
+				}
+			},
+			"Tarnished longsword loot": {
+				"Adamant longsword": {
+					"1": "4/10"
+				},
+				"Dragon longsword": {
+					"1": "1/10"
+				},
+				"Rune longsword": {
+					"1": "5/10"
+				}
+			},
+			"Tarnished necklace loot": {
+				"Diamond necklace": {
+					"1": "4/10"
+				},
+				"Jade necklace": {
+					"1": "1/10"
+				},
+				"Ruby necklace": {
+					"1": "5/10"
+				}
+			},
+			"Tarnished ring loot": {
+				"Ruby ring": {
+					"1": "7/10"
+				},
+				"Sapphire ring": {
+					"1": "1/10"
+				},
+				"Topaz ring": {
+					"1": "2/10"
+				}
+			},
+			"Tarnished spear loot": {
+				"Adamant spear": {
+					"1": "2/10"
+				},
+				"Mithril spear": {
+					"1": "1/10"
+				},
+				"Rune spear": {
+					"1": "7/10"
+				}
+			}
+		},
 		"Farming": {
 			"Sorceress's Garden": {
 				"Avantoe": {
@@ -228591,7 +228727,7 @@
 					"1": "Always"
 				},
 				"Stymphike feather": {
-					"5": "Always"
+					"15": "Always"
 				}
 			}
 		},
@@ -236451,102 +236587,6 @@
 				},
 				"Uncut ruby": {
 					"8 (noted)": "Always"
-				}
-			},
-			"Tarnished 2h sword loot": {
-				"Adamant 2h sword": {
-					"1": "Unknown"
-				},
-				"Bronze 2h sword": {
-					"1": "Unknown"
-				},
-				"Rune 2h sword": {
-					"1": "Unknown"
-				}
-			},
-			"Tarnished amulet loot": {
-				"Diamond amulet (u)": {
-					"1": "Unknown"
-				},
-				"Ruby amulet (u)": {
-					"1": "Unknown"
-				},
-				"Sapphire amulet (u)": {
-					"1": "Unknown"
-				}
-			},
-			"Tarnished battleaxe loot": {
-				"Adamant battleaxe": {
-					"1": "Unknown"
-				},
-				"Bronze battleaxe": {
-					"1": "Unknown"
-				},
-				"Rune battleaxe": {
-					"1": "Unknown"
-				}
-			},
-			"Tarnished halberd loot": {
-				"Bronze battleaxe": {
-					"1": "Unknown"
-				},
-				"Rune battleaxe": {
-					"1": "Unknown"
-				}
-			},
-			"Tarnished longsword loot": {
-				"Adamant longsword": {
-					"1": "Unknown"
-				},
-				"Bronze longsword": {
-					"1": "Unknown"
-				},
-				"Rune longsword": {
-					"1": "Unknown"
-				}
-			},
-			"Tarnished necklace loot": {
-				"Diamond necklace": {
-					"1": "Unknown"
-				},
-				"Jade necklace": {
-					"1": "Unknown"
-				},
-				"Ruby necklace": {
-					"1": "Unknown"
-				}
-			},
-			"Tarnished bracelet loot": {
-				"Diamond bracelet": {
-					"1": "Unknown"
-				},
-				"Ruby bracelet": {
-					"1": "Unknown"
-				},
-				"Topaz bracelet": {
-					"1": "Unknown"
-				}
-			},
-			"Tarnished ring loot": {
-				"Ruby ring": {
-					"1": "Unknown"
-				},
-				"Sapphire ring": {
-					"1": "Unknown"
-				},
-				"Topaz ring": {
-					"1": "Unknown"
-				}
-			},
-			"Tarnished spear loot": {
-				"Adamant spear": {
-					"1": "Unknown"
-				},
-				"Bronze spear": {
-					"1": "Unknown"
-				},
-				"Rune spear": {
-					"1": "Unknown"
 				}
 			}
 		},
@@ -246556,10 +246596,10 @@
 			},
 			"Venator": {
 				"Adamantite ore": {
-					"3-5 (noted)": "10/117"
+					"3-5 (noted)": "17/131"
 				},
 				"Blood sac": {
-					"2-4": "3/117"
+					"6-8": "3/131"
 				},
 				"Blood shard": {
 					"1": "1/860"
@@ -246568,88 +246608,85 @@
 					"1": "Always"
 				},
 				"Coins": {
-					"3016-6953": "15/117"
+					"3000-7000": "19/131"
 				},
 				"Fine fish offcuts": {
-					"2": "8/117"
+					"2": "3/131"
 				},
 				"Fish offcuts": {
-					"3-5": "9/117"
+					"3-5": "5/131"
 				},
 				"Grapevine (item)": {
-					"1": "4/117"
+					"1": "5/131"
 				},
 				"Hard leather": {
-					"1": "8/117"
+					"1": "6/131"
 				},
 				"Jug of wine": {
-					"1": "6/117"
+					"1": "1/131"
 				},
 				"Letvek": {
-					"1": "1/117"
+					"1": "2/131"
 				},
 				"Mithril ore": {
-					"6-7": "9/117"
+					"6-7": "12/131"
 				},
 				"Mort myre fungus": {
-					"5 (noted)": "7/117"
+					"5 (noted)": "10/131"
 				},
 				"Orikalkum gravel": {
-					"1": "1/117"
+					"1": "1/131"
 				},
 				"Runite ore": {
-					"1 (noted)": "1/117"
+					"1 (noted)": "1/131"
 				},
 				"Stymphike feather": {
-					"4-8": "9/117"
+					"15-22": "12/131"
 				},
 				"Tarnished 2h sword": {
-					"1": "1/117"
+					"1": "1/131"
 				},
 				"Tarnished amulet": {
-					"1": "2/117"
+					"1": "2/131"
 				},
 				"Tarnished battleaxe": {
-					"1": "1/117"
+					"1": "1/131"
 				},
 				"Tarnished halberd": {
-					"1": "1/117"
+					"1": "1/131"
 				},
 				"Tarnished longsword": {
-					"1": "1/117"
+					"1": "1/131"
 				},
 				"Tarnished necklace": {
-					"1": "2/117"
+					"1": "2/131"
 				},
 				"Tarnished bracelet": {
-					"1": "2/117"
+					"1": "2/131"
 				},
 				"Tarnished ring": {
-					"1": "4/117"
+					"1": "4/131"
 				},
 				"Tarnished spear": {
-					"1": "6/117"
-				},
-				"Uncut emerald": {
-					"1": "Very rare"
-				},
-				"Uncut ruby": {
-					"1": "Very rare"
-				},
-				"Uncut sapphire": {
-					"1": "Very rare"
+					"1": "6/131"
 				},
 				"Venator fang": {
-					"10-20": "3/117"
+					"10-20": "7/131"
 				},
 				"Venator heart": {
 					"1": "Always"
 				},
 				"Venator tooth": {
-					"15-30": "3/117"
+					"15-30": "7/131"
+				},
+				"Brimstone key": {
+					"1": "1/56"
 				},
 				"Clue scroll (elite)": {
 					"1": "Unknown"
+				},
+				"GemDropTable+": {
+					"1": "1/131"
 				}
 			},
 			"Vitreous Jelly": {
