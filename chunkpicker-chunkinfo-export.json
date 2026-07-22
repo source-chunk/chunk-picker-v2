@@ -8315,7 +8315,7 @@
 			"Craft ~|ironwood hull parts|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Ironwood plank*"],
 				"Objects": ["Shipwrights' Workbench"],
-				"Level": 77,
+				"Level": 75,
 				"Output": "Ironwood hull parts",
 				"Primary": true,
 				"Tasks": {
@@ -8326,7 +8326,7 @@
 			"Craft ~|large ironwood hull parts|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Ironwood hull parts*"],
 				"Objects": ["Shipwrights' Workbench"],
-				"Level": 77,
+				"Level": 75,
 				"Output": "Large ironwood hull parts",
 				"Primary": true,
 				"Tasks": {
@@ -94842,6 +94842,14 @@
 				"CombatPoints": 3,
 				"Monsters": ["Kree'arra"]
 			},
+			"~|Combat Achievements#Hard|~ Maggot Squasher": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 3,
+				"Monsters": ["Maggot King"]
+			},
 			"~|Combat Achievements#Hard|~ Fortified": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Defeat a Moon without consuming any supplies.",
@@ -95131,7 +95139,7 @@
 					"Any": 15000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 416,
+				"CombatPointsNeeded": 419,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -95909,6 +95917,22 @@
 				"CombatPoints": 4,
 				"Monsters": ["The Leviathan"]
 			},
+			"~|Combat Achievements#Elite|~ Trying to fit in": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King using only weapons that can be found in Vampyrium.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Maggot King"]
+			},
+			"~|Combat Achievements#Elite|~ Maggot Exterminator": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King 25 times.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Maggot King"]
+			},
 			"~|Combat Achievements#Elite|~ Mimic Veteran": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Mimic once.",
@@ -96549,7 +96573,7 @@
 					"Any": 25000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1064,
+				"CombatPointsNeeded": 1075,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -96918,7 +96942,7 @@
 			},
 			"~|Combat Achievements#Master|~ Corrupted Gauntlet Speed-Chaser": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Complete a Corrupted Gauntlet in less than 7 minutes and 30 seconds.",
+				"Description": "Complete a Corrupted Gauntlet in less than 7 minutes and 5 seconds.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
@@ -97031,7 +97055,7 @@
 			},
 			"~|Combat Achievements#Master|~ Gauntlet Speed-Chaser": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Complete the Gauntlet in less than 5 minutes.",
+				"Description": "Complete the Gauntlet in less than 4 minutes and 45 seconds.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
@@ -97241,6 +97265,54 @@
 				"Not F2P": true,
 				"CombatPoints": 5,
 				"Monsters": ["The Leviathan"]
+			},
+			"~|Combat Achievements#Master|~ King-sized clobbering": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King without missing a single melee punish.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Maggot King"]
+			},
+			"~|Combat Achievements#Master|~ Cordoned Off": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King without moving beyond the back row of tiles.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Maggot King"]
+			},
+			"~|Combat Achievements#Master|~ Digging in": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King without moving more than 40 tiles.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Maggot King"]
+			},
+			"~|Combat Achievements#Master|~ Maggot King Speed Chaser": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King 5 times in 9 minutes.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Maggot King"]
+			},
+			"~|Combat Achievements#Master|~ Perfect Maggot King": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King without taking any avoidable damage or him ever being healed.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Maggot King"]
+			},
+			"~|Combat Achievements#Master|~ Camping the King": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Maggot King 12 times without leaving the arena.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 5,
+				"Monsters": ["Maggot King"]
 			},
 			"~|Combat Achievements#Master|~ Nex Master": {
 				"Category": ["Combat Diary Tasks"],
@@ -97979,7 +98051,7 @@
 					"Any": 35000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1904,
+				"CombatPointsNeeded": 1945,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -98161,7 +98233,7 @@
 			},
 			"~|Combat Achievements#Grandmaster|~ Corrupted Gauntlet Speed-Runner": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Complete a Corrupted Gauntlet in less than 6 minutes and 30 seconds.",
+				"Description": "Complete a Corrupted Gauntlet in less than 6 minutes and 5 seconds.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 6,
@@ -98297,7 +98369,7 @@
 			},
 			"~|Combat Achievements#Grandmaster|~ Gauntlet Speed-Runner": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Complete the Gauntlet in less than 4 minutes.",
+				"Description": "Complete the Gauntlet in less than 3 minutes and 45 seconds.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 6,
@@ -98984,7 +99056,7 @@
 					"Any": 50000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 2630,
+				"CombatPointsNeeded": 2671,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -244381,7 +244453,7 @@
 					"1": "3/128"
 				},
 				"Belle's folly (tarnished)": {
-					"1": "1/256"
+					"1": "1/75"
 				},
 				"Big bones": {
 					"1": "Always"
@@ -286929,11 +287001,11 @@
 		},
 		"Inquisitor's hauberk": {
 			"attack_speed": 0,
-			"attack_crush": 12,
+			"attack_crush": 16,
 			"attack_magic": -11,
 			"attack_ranged": -10,
-			"attack_slash": -3,
-			"attack_stab": -3,
+			"attack_slash": 0,
+			"attack_stab": 0,
 			"defence_crush": 71,
 			"defence_magic": 0,
 			"defence_ranged": 35,
@@ -292354,7 +292426,7 @@
 			"magic_damage": 0,
 			"melee_strength": 0,
 			"prayer": 0,
-			"ranged_strength": 0,
+			"ranged_strength": 1,
 			"slot": "feet",
 			"requirements": {
 				"Ranged": 75,
@@ -299134,7 +299206,7 @@
 		"Shaman mask": {
 			"attack_speed": 0,
 			"attack_crush": 0,
-			"attack_magic": -6,
+			"attack_magic": 2,
 			"attack_ranged": -2,
 			"attack_slash": 0,
 			"attack_stab": 0,
@@ -299546,18 +299618,18 @@
 		},
 		"Inquisitor's great helm": {
 			"attack_speed": 0,
-			"attack_crush": 8,
+			"attack_crush": 10,
 			"attack_magic": -5,
 			"attack_ranged": -5,
-			"attack_slash": -2,
-			"attack_stab": -2,
+			"attack_slash": 0,
+			"attack_stab": 0,
 			"defence_crush": 21,
 			"defence_magic": 0,
 			"defence_ranged": 12,
 			"defence_slash": 10,
 			"defence_stab": 19,
 			"magic_damage": 0,
-			"melee_strength": 4,
+			"melee_strength": 6,
 			"prayer": 1,
 			"ranged_strength": 0,
 			"slot": "head",
@@ -303626,8 +303698,8 @@
 			"attack_crush": 12,
 			"attack_magic": -9,
 			"attack_ranged": -5,
-			"attack_slash": -3,
-			"attack_stab": -3,
+			"attack_slash": 0,
+			"attack_stab": 0,
 			"defence_crush": 49,
 			"defence_magic": 0,
 			"defence_ranged": 22,
@@ -313309,7 +313381,7 @@
 			"defence_ranged": 0,
 			"defence_slash": 0,
 			"defence_stab": 0,
-			"magic_damage": 0,
+			"magic_damage": 10,
 			"melee_strength": 0,
 			"prayer": 0,
 			"ranged_strength": 0,
@@ -317184,14 +317256,14 @@
 			"attack_magic": 0,
 			"attack_ranged": 0,
 			"attack_slash": 55,
-			"attack_stab": 94,
+			"attack_stab": 100,
 			"defence_crush": 0,
 			"defence_magic": 0,
 			"defence_ranged": 0,
 			"defence_slash": 0,
 			"defence_stab": 0,
 			"magic_damage": 0,
-			"melee_strength": 89,
+			"melee_strength": 93,
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "weapon",
@@ -317983,7 +318055,7 @@
 			"attack_crush": 0,
 			"attack_magic": 0,
 			"attack_ranged": 0,
-			"attack_slash": 94,
+			"attack_slash": 100,
 			"attack_stab": 55,
 			"defence_crush": 0,
 			"defence_magic": 0,
@@ -317991,7 +318063,7 @@
 			"defence_slash": 0,
 			"defence_stab": 0,
 			"magic_damage": 0,
-			"melee_strength": 89,
+			"melee_strength": 93,
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "weapon",
@@ -318100,7 +318172,7 @@
 		},
 		"Inquisitor's mace": {
 			"attack_speed": 4,
-			"attack_crush": 95,
+			"attack_crush": 102,
 			"attack_magic": 0,
 			"attack_ranged": 0,
 			"attack_slash": -4,
@@ -318111,7 +318183,7 @@
 			"defence_slash": 0,
 			"defence_stab": 0,
 			"magic_damage": 0,
-			"melee_strength": 89,
+			"melee_strength": 96,
 			"prayer": 2,
 			"ranged_strength": 0,
 			"slot": "weapon",
@@ -319694,7 +319766,7 @@
 			"defence_ranged": 0,
 			"defence_slash": 3,
 			"defence_stab": 2,
-			"magic_damage": 5,
+			"magic_damage": 10,
 			"melee_strength": 60,
 			"prayer": -1,
 			"ranged_strength": 0,
@@ -319888,7 +319960,7 @@
 			"defence_slash": 0,
 			"defence_stab": 0,
 			"magic_damage": 0,
-			"melee_strength": 121,
+			"melee_strength": 125,
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "2h",
@@ -319909,7 +319981,7 @@
 			"defence_ranged": 0,
 			"defence_slash": 3,
 			"defence_stab": 2,
-			"magic_damage": 5,
+			"magic_damage": 10,
 			"melee_strength": 60,
 			"prayer": -1,
 			"ranged_strength": 0,
@@ -319932,7 +320004,7 @@
 			"defence_ranged": 0,
 			"defence_slash": 3,
 			"defence_stab": 2,
-			"magic_damage": 5,
+			"magic_damage": 10,
 			"melee_strength": 60,
 			"prayer": -1,
 			"ranged_strength": 0,
@@ -319955,7 +320027,7 @@
 			"defence_ranged": 0,
 			"defence_slash": 3,
 			"defence_stab": 2,
-			"magic_damage": 5,
+			"magic_damage": 10,
 			"melee_strength": 60,
 			"prayer": -1,
 			"ranged_strength": 0,
@@ -319978,7 +320050,7 @@
 			"defence_ranged": 0,
 			"defence_slash": 3,
 			"defence_stab": 2,
-			"magic_damage": 5,
+			"magic_damage": 10,
 			"melee_strength": 60,
 			"prayer": -1,
 			"ranged_strength": 0,
