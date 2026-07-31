@@ -34,6 +34,43 @@
 				"Priority": 99,
 				"NoPet": true
 			},
+			"Access the Wyrmscraig cathedral cliffside scramble ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["10018-1", "10018-3"],
+				"Items": ["Pickaxe[+]"],
+				"Objects": ["Rocks (Ardeaglais)"],
+				"Level": 54,
+				"Tasks": {
+					"~|Fallen From Grace|~ 5": "Quest"
+				},
+				"Primary": true,
+				"Priority": 19,
+				"NoPet": true
+			},
+			"Access the basalt stepping stone ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Basalt stepping stone"],
+				"Level": 58,
+				"Primary": true,
+				"Priority": 19,
+				"NoPet": true
+			},
+			"Access the slippery basalt stepping stone ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Slippery basalt stepping stone"],
+				"Level": 62,
+				"Primary": true,
+				"Priority": 19,
+				"NoPet": true
+			},
+			"Access the extra slippery basalt stepping stone ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Extra slippery basalt stepping stone"],
+				"Level": 72,
+				"Primary": true,
+				"Priority": 19,
+				"NoPet": true
+			},
 			"Access the mausoleum bridge jump ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Objects": ["Bridge (Mausoleum)"],
@@ -2423,6 +2460,14 @@
 				"Not F2P": true,
 				"NoBoost": true
 			},
+			"Wield ~|hallowfell|~": {
+				"Items": ["Hallowfell"],
+				"Level": 75,
+				"Primary": false,
+				"Priority": 36,
+				"Not F2P": true,
+				"NoBoost": true
+			},
 			"Wield a ~|soulreaper axe|~": {
 				"Items": ["Soulreaper axe"],
 				"Level": 80,
@@ -3470,6 +3515,16 @@
 				},
 				"Not F2P": true
 			},
+			"Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern": {
+				"Level": 100,
+				"NPCs": ["Mortimer"],
+				"Primary": true,
+				"Priority": 9,
+				"Skills": {
+					"Slayer": 70
+				},
+				"Not F2P": true
+			},
 			"Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold": {
 				"Level": 85,
 				"NPCs": ["Nieve"],
@@ -3730,6 +3785,16 @@
 				"Primary": false,
 				"Priority": 1,
 				"Output Object": "Loom"
+			},
+			"Build the ~|bank chest|~ on Wyrmscraig": {
+				"Items": ["Hammer[+]", "Mahogany plank", "Lead bar", "Mithril nails"],
+				"Level": 48,
+				"Chunks": ["10275-1"],
+				"Primary": false,
+				"Priority": 12,
+				"Tasks": {
+					"~|Fallen From Grace|~ Complete the quest": "Quest"
+				}
 			},
 			"Build a ~|4-poster|~": {
 				"Category": ["InsidePOH Primary"],
@@ -8137,8 +8202,7 @@
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
 				},
-				"Priority": 2008,
-				"NoBoost": true
+				"Priority": 2008
 			},
 			"Craft a ~|teak repair kit|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Teak plank*", "Steel nails*", "Swamp paste*"],
@@ -8149,8 +8213,7 @@
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
 				},
-				"Priority": 2008,
-				"NoBoost": true
+				"Priority": 2008
 			},
 			"Craft a ~|mahogany repair kit|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Mahogany plank*", "Mithril nails*", "Swamp paste*"],
@@ -8161,8 +8224,7 @@
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
 				},
-				"Priority": 2008,
-				"NoBoost": true
+				"Priority": 2008
 			},
 			"Craft a ~|camphor repair kit|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Camphor plank*", "Adamantite nails*", "Swamp paste*"],
@@ -8173,8 +8235,7 @@
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
 				},
-				"Priority": 2008,
-				"NoBoost": true
+				"Priority": 2008
 			},
 			"Craft an ~|ironwood repair kit|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Ironwood plank*", "Rune nails*", "Swamp paste*"],
@@ -8185,8 +8246,7 @@
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
 				},
-				"Priority": 2008,
-				"NoBoost": true
+				"Priority": 2008
 			},
 			"Craft a ~|rosewood repair kit|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Rosewood plank*", "Dragon nails*", "Swamp paste*"],
@@ -8197,8 +8257,7 @@
 				"Tasks": {
 					"~|Pandemonium|~ Complete the quest": "Quest"
 				},
-				"Priority": 2008,
-				"NoBoost": true
+				"Priority": 2008
 			},
 			"Craft ~|wooden hull parts|~": {
 				"Items": ["Hammer[+]", "Saw[+]", "Plank*"],
@@ -11817,6 +11876,24 @@
 				"Priority": 129,
 				"Not F2P": true
 			},
+			"Craft a ~|sunstone core|~": {
+				"Items": ["Chisel", "Sunstone*"],
+				"Level": 60,
+				"Output": "Sunstone core",
+				"Primary": true,
+				"Priority": 14
+			},
+			"Participate in ~|golem crafting|~": {
+				"Items": ["Hammer", "Chisel", "Sunstone*", "GolemFur[+]"],
+				"Objects": ["Empty plinth"],
+				"Level": 60,
+				"Output": "Golem crafting loot",
+				"Tasks": {
+					"~|Fallen From Grace|~ Complete the quest": "Quest"
+				},
+				"Primary": true,
+				"Priority": 15
+			},
 			"Participate in ~|Trouble Brewing|~ for Crafting xp": {
 				"Category": ["Minigame"],
 				"Chunks": ["15150", "15151-1"],
@@ -14425,6 +14502,14 @@
 				"Priority": 1,
 				"Not F2P": true
 			},
+			"Reach the level to guaranteed cut a ~|jade|~ with a jeweller's chisel": {
+				"Items": ["Jeweller's chisel", "Uncut jade*"],
+				"Level": 71,
+				"Primary": false,
+				"Priority": 11,
+				"Not F2P": true,
+				"NoBoost": true
+			},
 			"Cut a ~|red topaz|~": {
 				"Items": ["Chisel", "Uncut red topaz*"],
 				"Level": 16,
@@ -14432,6 +14517,14 @@
 				"Primary": true,
 				"Priority": 1,
 				"Not F2P": true
+			},
+			"Reach the level to guaranteed cut a ~|red topaz|~ with a jeweller's chisel": {
+				"Items": ["Jeweller's chisel", "Uncut red topaz*"],
+				"Level": 76,
+				"Primary": false,
+				"Priority": 11,
+				"Not F2P": true,
+				"NoBoost": true
 			},
 			"Cut a ~|ruby|~": {
 				"Items": ["Chisel", "Uncut ruby*"],
@@ -14476,6 +14569,14 @@
 				"Output": "Opal",
 				"Primary": true,
 				"Priority": 4,
+				"Not F2P": true,
+				"NoBoost": true
+			},
+			"Reach the level to guaranteed cut an ~|opal|~ with a jeweller's chisel": {
+				"Items": ["Jeweller's chisel", "Uncut opal*"],
+				"Level": 62,
+				"Primary": false,
+				"Priority": 11,
 				"Not F2P": true,
 				"NoBoost": true
 			},
@@ -14995,6 +15096,14 @@
 				"Priority": 999,
 				"Not F2P": true,
 				"NoBoost": true
+			},
+			"~|Fallen From Grace|~ Crafting skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["10275-1"],
+				"Level": 60,
+				"Primary": false,
+				"Priority": 999,
+				"Not F2P": true
 			},
 			"~|Lunar Diplomacy|~ Crafting skill requirement": {
 				"Category": ["Quest Skill Reqs"],
@@ -22653,6 +22762,27 @@
 				"Primary": true,
 				"Priority": 99
 			},
+			"Catch a ~|wyrmscraig goat|~": {
+				"Items": ["Cattleprod", "Wooden spikes*"],
+				"Level": 60,
+				"NPCs": ["Wyrmscraig goat"],
+				"Objects": ["Goat Pit"],
+				"Primary": true,
+				"Priority": 15,
+				"Tasks": {
+					"~|Sheep Herder|~ Complete the quest": "Quest"
+				},
+				"Output": "Wyrmscraig goat loot"
+			},
+			"Unlock the highest goat pit capacity for ~|goat hunting|~": {
+				"Level": 93,
+				"Primary": false,
+				"Priority": 11,
+				"Tasks": {
+					"Catch a ~|wyrmscraig goat|~": "Hunter"
+				},
+				"NoBoost": true
+			},
 			"Catch a ~|red crab (Hunter)|~": {
 				"Items": ["Fish offcuts*"],
 				"Level": 21,
@@ -25490,7 +25620,7 @@
 				},
 				"Not F2P": true
 			},
-			"Cast ~|npc contact|~": {
+			"Cast ~|astral contact|~": {
 				"Category": ["Spells"],
 				"Items": ["Air rune[+]*", "Cosmic rune[+]*", "Astral rune*"],
 				"Level": 67,
@@ -27722,6 +27852,22 @@
 				"Priority": 77,
 				"Not F2P": true
 			},
+			"Mine ~|sunstone rocks|~": {
+				"Items": ["Pickaxe[+]"],
+				"Objects": ["Sunstone rocks"],
+				"Level": 50,
+				"Output": "Sunstone",
+				"Priority": 5,
+				"Primary": true
+			},
+			"Mine the ~|sunstone monolith|~": {
+				"Items": ["Pickaxe[+]"],
+				"Objects": ["Sunstone monolith"],
+				"Level": 50,
+				"Output": "Sunstone",
+				"Priority": 6,
+				"Primary": true
+			},
 			"Mine ~|rubium rocks|~": {
 				"Items": ["Pickaxe[+]"],
 				"Objects": ["Rubium rocks"],
@@ -28645,6 +28791,14 @@
 				"Not F2P": true,
 				"NoPet": true
 			},
+			"~|Fallen From Grace|~ Mining skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["10275-1"],
+				"Level": 53,
+				"Primary": false,
+				"Priority": 999,
+				"Not F2P": true
+			},
 			"~|The Heart of Darkness|~ Mining skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["5681-1"],
@@ -28717,6 +28871,16 @@
 			"Kill a runite golem*": {
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rocks",
+				"Not F2P": true
+			},
+			"Take wooden spikes from the supply": {
+				"Objects": ["Spikes supply"],
+				"Output": "Wooden spikes",
+				"Not F2P": true
+			},
+			"Take a cattleprod from the supply": {
+				"Objects": ["Cattle prod supply"],
+				"Output": "Cattleprod",
 				"Not F2P": true
 			},
 			"Take grapes from a grapevine*": {
@@ -29612,6 +29776,18 @@
 			"Search the crate at the Shipyard for a saw*": {
 				"Chunks": ["8234-1"],
 				"Output": "Saw"
+			},
+			"Search the tent on Wyrmscraig for a bronze pickaxe*": {
+				"Objects": ["Tent (Wyrmscraig)"],
+				"Output": "Bronze pickaxe"
+			},
+			"Search the tent on Wyrmscraig for a hammer*": {
+				"Objects": ["Tent (Wyrmscraig)"],
+				"Output": "Hammer"
+			},
+			"Search the tent on Wyrmscraig for a chisel*": {
+				"Objects": ["Tent (Wyrmscraig)"],
+				"Output": "Chisel"
 			},
 			"Search the crate in the Ruins of Tapoyauik for a bronze pickaxe*": {
 				"Chunks": ["Ruins of Tapoyauik"],
@@ -32006,6 +32182,14 @@
 				"ConnectsSections": true,
 				"Not F2P": true
 			},
+			"10275-1 to 10275-W1": {
+				"Sections": ["10275-1", "10275-W1"],
+				"Tasks": {
+					"Use the mooring point at ~|Wyrmscraig|~": "Sailing"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
 			"8232-1 to 8232-W1": {
 				"Sections": ["8232-1", "8232-W1"],
 				"Tasks": {
@@ -32418,6 +32602,22 @@
 				"Sections": ["5165-1", "5165-2"],
 				"Tasks": {
 					"Access the Aldarin rock climb ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"10018-1 to 10018-3": {
+				"Sections": ["10018-1", "10018-3"],
+				"Tasks": {
+					"Access the Wyrmscraig cathedral cliffside scramble ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"10275-1 to 10275-2": {
+				"Sections": ["10275-1", "10275-2"],
+				"Tasks": {
+					"Access the extra slippery basalt stepping stone ~|shortcut|~": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -34098,7 +34298,7 @@
 			},
 			"Aberrant spectre task": {
 				"Tasks": {
-					"VannakaBetterMasters[+]x1": "Slayer",
+					"VannakaBetterMastersAndMortimer[+]x1": "Slayer",
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
 				"Not F2P": true
@@ -34111,7 +34311,7 @@
 			},
 			"Bloodveld task": {
 				"Tasks": {
-					"VannakaBetterMasters[+]x1": "Slayer",
+					"VannakaBetterMastersAndMortimer[+]x1": "Slayer",
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
 				"Not F2P": true
@@ -34130,20 +34330,20 @@
 			},
 			"Gargoyle task": {
 				"Tasks": {
-					"VannakaBetterMasters[+]x1": "Slayer",
+					"VannakaBetterMastersAndMortimer[+]x1": "Slayer",
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
 				"Not F2P": true
 			},
 			"Nechryael task": {
 				"Tasks": {
-					"VannakaBetterMasters[+]x1": "Slayer"
+					"VannakaBetterMastersAndMortimer[+]x1": "Slayer"
 				},
 				"Not F2P": true
 			},
 			"Abyssal demon task": {
 				"Tasks": {
-					"VannakaBetterMasters[+]x1": "Slayer",
+					"VannakaBetterMastersAndMortimer[+]x1": "Slayer",
 					"AbyssalDemonQuest[+]": "Quest"
 				},
 				"Not F2P": true
@@ -34218,13 +34418,13 @@
 			},
 			"Gryphon task": {
 				"Tasks": {
-					"VannakaBetterMasters[+]x1": "Slayer"
+					"VannakaBetterMastersAndMortimer[+]x1": "Slayer"
 				},
 				"Not F2P": true
 			},
 			"Smoke devil task": {
 				"Tasks": {
-					"KonarBetterMasters[+]x1": "Slayer"
+					"KonarBetterMastersAndMortimer[+]x1": "Slayer"
 				},
 				"Not F2P": true
 			},
@@ -49346,6 +49546,20 @@
 				},
 				"Not F2P": true
 			},
+			"Wyrmscraig Cavern": {
+				"UnlocksArea": true,
+				"Tasks": {
+					"~|Fallen From Grace|~ 3": "Quest"
+				},
+				"Not F2P": true
+			},
+			"Wyrmscraig Cavern#Water": {
+				"UnlocksArea": true,
+				"Tasks": {
+					"~|Fallen From Grace|~ 3": "Quest"
+				},
+				"Not F2P": true
+			},
 			"Wyvern Cave": {
 				"UnlocksArea": true,
 				"Not F2P": true
@@ -52921,6 +53135,14 @@
 				"NoPet": true,
 				"NoBoost": true
 			},
+			"~|Fallen From Grace|~ Runecraft skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["10275-1"],
+				"Level": 47,
+				"Primary": false,
+				"Priority": 999,
+				"Not F2P": true
+			},
 			"~|Devious Minds|~ Runecraft skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["13622-1"],
@@ -54308,6 +54530,16 @@
 				"NoBoost": true,
 				"NoPet": true
 			},
+			"Dock at ~|Wyrmscraig|~": {
+				"Chunks": ["10275-W1"],
+				"Level": 62,
+				"Items": ["AnyBoat[+]"],
+				"Object": ["Buoy (Sailing)"],
+				"Primary": false,
+				"Priority": 8,
+				"NoBoost": true,
+				"NoPet": true
+			},
 			"Dock at ~|Wintumber Island|~": {
 				"Chunks": ["8232-W1"],
 				"Level": 63,
@@ -55014,6 +55246,16 @@
 				"NoBoost": true,
 				"NoPet": true
 			},
+			"Use the mooring point at ~|Wyrmscraig|~": {
+				"Chunks": ["MooringWyrmscraig[+]"],
+				"Level": 62,
+				"Items": ["AnyBoat[+]"],
+				"Object": ["MooringPoint[+]"],
+				"Primary": false,
+				"Priority": 18,
+				"NoBoost": true,
+				"NoPet": true
+			},
 			"Use the mooring point at ~|Wintumber Island|~": {
 				"Chunks": ["MooringWintumberIsland[+]"],
 				"Level": 63,
@@ -55578,6 +55820,14 @@
 				"Primary": false,
 				"Priority": 999,
 				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ Sailing skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["10275-1"],
+				"Level": 62,
+				"Primary": false,
+				"Priority": 999,
+				"Not F2P": true
 			}
 		},
 		"Slayer": {
@@ -55653,6 +55903,16 @@
 				"Priority": 4,
 				"Skills": {
 					"Combat": 20
+				},
+				"NoBoost": true
+			},
+			"Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern": {
+				"Level": 70,
+				"NPCs": ["Mortimer"],
+				"Primary": true,
+				"Priority": 9,
+				"Skills": {
+					"Combat": 100
 				},
 				"NoBoost": true
 			},
@@ -64718,6 +64978,12 @@
 				"Items": ["Fletching knife"],
 				"Not F2P": true
 			},
+			"Obtain a ~|jeweller's chisel|~": {
+				"Category": ["BIS Skilling"],
+				"Label": "BIS Skilling",
+				"Items": ["Jeweller's chisel"],
+				"Not F2P": true
+			},
 			"(Abyssal Sire) Obtain an ~|abyssal orphan|~": {
 				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
 				"Label": "Collection Log",
@@ -66011,6 +66277,36 @@
 				"Items": ["Awakener's orb"],
 				"Not F2P": true
 			},
+			"(The Mad Angel) Obtain ~|hallowfell|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Hallowfell"],
+				"Not F2P": true
+			},
+			"(The Mad Angel) Obtain an ~|ardeaglais teleport|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Ardeaglais teleport"],
+				"Not F2P": true
+			},
+			"(The Mad Angel) Obtain ~|granite dust|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Granite dust"],
+				"Not F2P": true
+			},
+			"(The Mad Angel) Obtain ~|aggy|~": {
+				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Aggy"],
+				"Not F2P": true
+			},
+			"(The Mad Angel) Obtain a ~|jar of light|~": {
+				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Label": "Collection Log",
+				"Items": ["Jar of light"],
+				"Not F2P": true
+			},
 			"(Maggot King) Obtain a ~|maggot marquess|~": {
 				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
 				"Label": "Collection Log",
@@ -66427,9 +66723,7 @@
 				"Label": "Collection Log",
 				"Items": ["Uncut onyx"],
 				"NonShop": true,
-				"Tasks": {
-					"UncutOnyxSource[+]": "Nonskill"
-				},
+				"AllowedSources": ["Zulrah", "Skotizo", "Zalcano", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
 				"Not F2P": true
 			},
 			"(Skotizo) Obtain an ~|ancient shard|~": {
@@ -66923,9 +67217,7 @@
 				"Label": "Collection Log",
 				"Items": ["Uncut onyx"],
 				"NonShop": true,
-				"Tasks": {
-					"UncutOnyxSource[+]": "Nonskill"
-				},
+				"AllowedSources": ["Zulrah", "Skotizo", "Zalcano", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
 				"Not F2P": true
 			},
 			"(Zulrah) Obtain a ~|pet snakeling|~": {
@@ -66981,9 +67273,7 @@
 				"Label": "Collection Log",
 				"Items": ["Uncut onyx"],
 				"NonShop": true,
-				"Tasks": {
-					"UncutOnyxSource[+]": "Nonskill"
-				},
+				"AllowedSources": ["Zulrah", "Skotizo", "Zalcano", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
 				"Not F2P": true
 			},
 			"(Zulrah) Obtain ~|zulrah's scales|~": {
@@ -72427,6 +72717,18 @@
 				"Items": ["Maggot marquess"],
 				"Not F2P": true
 			},
+			"(All Pets) Obtain ~|mr mcgroot|~": {
+				"Category": ["Collection Log", "Collection Log Other", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Mr mcgroot"],
+				"Not F2P": true
+			},
+			"(All Pets) Obtain ~|aggy|~": {
+				"Category": ["Collection Log", "Collection Log Other", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Aggy"],
+				"Not F2P": true
+			},
 			"(Boat Paints) Obtain a ~|barracuda paint|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
@@ -73786,6 +74088,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Dragon cannonball"],
+				"AllowedSources": ["Frost dragon", "Great white shark", "Orca", "Vampyre kraken", "Veiled kraken", "Slay an ~|aquanite|~", "Process some ~|martial salvage|~ at a salvaging station", "Process some ~|opulent salvage|~ at a salvaging station", "Process some ~|plundered salvage|~ at a salvaging station"],
 				"Not F2P": true
 			},
 			"(Sailing Miscellaneous) Obtain an ~|echo pearl|~": {
@@ -74153,6 +74456,12 @@
 				"Category": ["Collection Log", "Collection Log Other", "Pets"],
 				"Label": "Collection Log",
 				"Items": ["Rift guardian"],
+				"Not F2P": true
+			},
+			"(Skilling Pets) Obtain ~|mr mcgroot|~": {
+				"Category": ["Collection Log", "Collection Log Other", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Mr mcgroot"],
 				"Not F2P": true
 			},
 			"(Skilling Pets) Obtain a ~|soup|~": {
@@ -75112,9 +75421,7 @@
 				"Label": "Collection Log",
 				"Items": ["Uncut onyx"],
 				"NonShop": true,
-				"Tasks": {
-					"UncutOnyxSource[+]": "Nonskill"
-				},
+				"AllowedSources": ["Zulrah", "Skotizo", "Zalcano", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
 				"Not F2P": true
 			},
 			"(Miscellaneous) Obtain a ~|merfolk trident|~": {
@@ -75157,6 +75464,12 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Squid beak"],
+				"Not F2P": true
+			},
+			"(Miscellaneous) Obtain a ~|jeweller's chisel|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Jeweller's chisel"],
 				"Not F2P": true
 			},
 			"Obtain a ~|Golden Gnome|~": {
@@ -76394,6 +76707,15 @@
 				},
 				"Not F2P": true
 			},
+			"Rebuild the ~|bank chest|~ on Wyrmscraig": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["10275-1"],
+				"Tasks": {
+					"Build the ~|bank chest|~ on Wyrmscraig": "Construction"
+				},
+				"Not F2P": true
+			},
 			"Build an ~|anvil (amenity)|~ on Buccaneers' Haven": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
@@ -77240,6 +77562,42 @@
 				"NPCs": ["Chartin' Charles McAtless"],
 				"Tasks": {
 					"~|Sea Charting#Bonus charts|~ Completely chart the sea": "Diary"
+				},
+				"Not F2P": true
+			},
+			"Unlock the third modifier for ~|Mortimer|~'s tasks at 15 tasks": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Mortimer"],
+				"Tasks": {
+					"Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern": "Slayer"
+				},
+				"Not F2P": true
+			},
+			"Unlock the fourth modifier for ~|Mortimer|~'s tasks at 25 tasks": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Mortimer"],
+				"Tasks": {
+					"Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern": "Slayer"
+				},
+				"Not F2P": true
+			},
+			"Unlock the fifth modifier for ~|Mortimer|~'s tasks at 40 tasks": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Mortimer"],
+				"Tasks": {
+					"Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern": "Slayer"
+				},
+				"Not F2P": true
+			},
+			"Unlock the sixth modifier for ~|Mortimer|~'s tasks at 50 tasks": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Mortimer"],
+				"Tasks": {
+					"Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern": "Slayer"
 				},
 				"Not F2P": true
 			},
@@ -102688,7 +103046,7 @@
 			"~|Sea Charting#The Lonely Sea|~ Task 2": {
 				"BaseQuest": "Sea Charting",
 				"Category": ["Sea Charting"],
-				"Chunks": ["10019"],
+				"Chunks": ["10019-W1"],
 				"Description": "Find a Sealed crate near some shipwrecks in the Lonely Sea and sample the contents.",
 				"Items": ["Crowbar"],
 				"Not F2P": true,
@@ -110542,6 +110900,92 @@
 				},
 				"BaseQuest": "Fairytale II - Cure a Queen",
 				"Chunks": ["Zanaris"],
+				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ 1": {
+				"BaseQuest": "Fallen From Grace",
+				"Description": "Talk to Cormac, then Muriel, then inspect the sunstone monolith",
+				"Chunks": ["10275-1"],
+				"NPCs": ["Cormac"],
+				"Skills": {
+					"Sailing": 62,
+					"Crafting": 60,
+					"Mining": 53,
+					"Runecraft": 47
+				},
+				"Tasks": {
+					"~|Pandemonium|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ 2": {
+				"BaseQuest": "Fallen From Grace",
+				"Description": "Investigate the large hat",
+				"Chunks": ["10018-2"],
+				"Tasks": {
+					"~|Fallen From Grace|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ 3": {
+				"BaseQuest": "Fallen From Grace",
+				"Description": "Return to Cormac",
+				"NPCs": ["Cormac"],
+				"Tasks": {
+					"~|Fallen From Grace|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ 4": {
+				"BaseQuest": "Fallen From Grace",
+				"Description": "Enter the cavern via boat, then help Mortimer",
+				"Chunks": ["10018-W1", "Wyrmscraig Cavern"],
+				"Tasks": {
+					"~|Fallen From Grace|~ 3": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ 5": {
+				"BaseQuest": "Fallen From Grace",
+				"Description": "Repair the golem with a core, open the chest, and use the key to unlock the staircase",
+				"Chunks": ["Wyrmscraig Cavern"],
+				"Items": ["Sunstone core"],
+				"Tasks": {
+					"~|Fallen From Grace|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ 6": {
+				"BaseQuest": "Fallen From Grace",
+				"Description": "Defeat the angel, search the body, then open the front door",
+				"Chunks": ["10018-3"],
+				"Tasks": {
+					"~|Fallen From Grace|~ 5": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ 7": {
+				"BaseQuest": "Fallen From Grace",
+				"Description": "Return to Cormac",
+				"NPCs": ["Cormac"],
+				"Tasks": {
+					"~|Fallen From Grace|~ 6": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Fallen From Grace|~ Complete the quest": {
+				"Tasks": {
+					"~|Fallen From Grace|~ 7": "Quest"
+				},
+				"QuestPoints": 2,
+				"BaseQuest": "Fallen From Grace",
+				"Chunks": ["10275-1"],
+				"XpReward": {
+					"Crafting": 10000,
+					"Sailing": 12000,
+					"Mining": 5000,
+					"Runecraft": 5000
+				},
 				"Not F2P": true
 			},
 			"~|Family Crest|~ 1": {
@@ -124219,7 +124663,7 @@
 			},
 			"~|While Guthix Sleeps|~ 14": {
 				"BaseQuest": "While Guthix Sleeps",
-				"Description": "NPC Contact Turael, Mazchna, Duradel, and Cyrisus",
+				"Description": "Astral Contact Turael, Mazchna, Duradel, and Cyrisus",
 				"Items": ["Air rune[+]", "Cosmic rune[+]", "Astral rune"],
 				"Tasks": {
 					"~|While Guthix Sleeps|~ 13": "Quest"
@@ -143129,17 +143573,65 @@
 			}
 		},
 		"10018": {
-			"Nickname": "Ocean Chunk",
-			"Object": {
-				"Large shipwreck": 1
-			}
+			"Sections": {
+				"1": {
+					"Object": {
+						"Rocks (Ardeaglais)": 1
+					},
+					"Quest": {
+						"Fallen From Grace": "step"
+					}
+				},
+				"2": {
+					"Monster": {
+						"Bunny": 4
+					},
+					"Object": {
+						"Dead tree": 2,
+						"Maple tree": 3,
+						"Tree": 6,
+						"Yew tree": 2
+					},
+					"Quest": {
+						"Fallen From Grace": "step"
+					}
+				},
+				"3": {
+					"Connect": {
+						"11142": true
+					},
+					"Monster": {
+						"Mad Angel": 1
+					},
+					"Object": {
+						"Cathedral door": 1,
+						"Rocks (Ardeaglais)": 1
+					},
+					"Quest": {
+						"Fallen From Grace": "step"
+					}
+				},
+				"W1": {
+					"Quest": {
+						"Fallen From Grace": "step"
+					}
+				},
+				"W2": {},
+				"W3": {}
+			},
+			"Nickname": "Ardeaglais"
 		},
 		"10019": {
-			"Nickname": "Ocean Chunk",
-			"Object": {
-				"Large shipwreck": 6,
-				"Sealed crate": 1
-			}
+			"Sections": {
+				"1": {},
+				"W1": {
+					"Object": {
+						"Large shipwreck": 6,
+						"Sealed crate": 1
+					}
+				}
+			},
+			"Nickname": "Auchrie Shore"
 		},
 		"10020": {
 			"Monster": {
@@ -144751,13 +145243,130 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"10274": {
-			"Nickname": "Ocean Chunk"
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Seagull": 1,
+						"Wyrmling": 6
+					},
+					"NPC": {
+						"Geoff": 1,
+						"Wyrmscraig goat": 21
+					},
+					"Object": {
+						"Cattle prod supply": 1,
+						"Coal rocks": 4,
+						"Dead tree": 26,
+						"Goat Pit": 1,
+						"Fishing spot (big net, harpoon)": 2,
+						"Fishing spot (cage, harpoon)": 2,
+						"Iron rocks": 4,
+						"Maple tree": 9,
+						"Slippery basalt stepping stone": 1,
+						"Spikes supply": 1,
+						"Sunstone rocks": 1,
+						"Tent (Wyrmscraig)": 1,
+						"Tree": 19
+					},
+					"Quest": {
+						"Fallen From Grace": "step"
+					}
+				},
+				"2": {
+					"Object": {
+						"Coal rocks": 5,
+						"Mithril rocks": 2,
+						"Runite rocks": 1,
+						"Sunstone rocks": 3
+					}
+				},
+				"W1": {},
+				"W2": {},
+				"W3": {
+					"Connect": {
+						"11143": true
+					}
+				}
+			},
+			"Nickname": "Wyrmscraig Goat Pasture"
 		},
 		"10275": {
-			"Nickname": "Ocean Chunk",
-			"Object": {
-				"Large shipwreck": 1
-			}
+			"Sections": {
+				"1": {
+					"Monster": {
+						"Chicken": 3,
+						"Yak": 1
+					},
+					"NPC": {
+						"Angus": 1,
+						"Baldwin": 1,
+						"Catriona": 1,
+						"Cormac": 1,
+						"Declan": 1,
+						"Ffion": 1,
+						"Mr Supplies Jnr": 1,
+						"Muriel": 1,
+						"Oisin": 1,
+						"Rian": 1
+					},
+					"Object": {
+						"Anvil": 2,
+						"Basalt stepping stone": 2,
+						"Cabbage": 3,
+						"Chest pieces (Wyrmscraig)": 1,
+						"Coal rocks": 4,
+						"Dairy churn": 1,
+						"Dead tree": 24,
+						"Empty plinth": 2,
+						"Evergreen tree": 11,
+						"Extra slippery basalt stepping stone": 1,
+						"Furnace": 1,
+						"Gangplank (Sailing)": 1,
+						"Iron rocks": 1,
+						"Loom": 1,
+						"Nettles": 5,
+						"Onion": 4,
+						"Potato": 3,
+						"Range": 4,
+						"Salvaging station": 1,
+						"Spinning wheel": 1,
+						"Stile": 1,
+						"Sunstone monolith": 1,
+						"Sunstone rocks": 11,
+						"Well": 1,
+						"Wheat": 6
+					},
+					"Shop": {
+						"Supplies's Supplies": true,
+						"Where Wyrmscraig's Wear Wares Were": true
+					},
+					"Spawn": {
+						"Bucket of milk": 1,
+						"Candle": 2,
+						"Needle": 1,
+						"Spade": 1,
+						"Thread": 1
+					},
+					"Quest": {
+						"Fallen From Grace": "first"
+					}
+				},
+				"2": {
+					"Object": {
+						"Extra slippery basalt stepping stone": 1,
+						"Sunstone rocks": 6
+					}
+				},
+				"W1": {
+					"Object": {
+						"Buoy (Sailing)": 1,
+						"Large shipwreck": 1
+					}
+				},
+				"W2": {},
+				"W3": {}
+			},
+			"Nickname": "Auchrie"
 		},
 		"10276": {
 			"Nickname": "Ocean Chunk"
@@ -150415,6 +151024,40 @@
 			"Object": {
 				"Rocks": 2,
 				"Tree": 27
+			}
+		},
+		"11142": {
+			"Connect": {
+				"10018": true,
+				"11143": true
+			},
+			"Monster": {
+				"Bat": 3,
+				"Lava Strykewyrm": 3,
+				"Mountain troll": 7,
+				"Wyrm": 5
+			},
+			"Name": "Wyrmscraig Cavern",
+			"NPC": {
+				"Mortimer": 1
+			},
+			"Object": {
+				"Fishing spot (lava eel)": 1,
+				"Gangplank (Sailing)": 1,
+				"Lead rocks": 7,
+				"Nickel rocks": 6,
+				"Runite rocks": 1,
+				"Silver rocks": 10
+			}
+		},
+		"11143": {
+			"Connect": {
+				"10274": true,
+				"11142": true
+			},
+			"Name": "Wyrmscraig Cavern#Water",
+			"Object": {
+				"Buoy (Sailing)": 1
 			}
 		},
 		"11150": {
@@ -166694,7 +167337,7 @@
 						"Adamantite rocks": 3,
 						"Broken Spinning Wheel (Fossil Island)": 1,
 						"Burnt tree": 9,
-						"Chest pieces": 1,
+						"Chest pieces (Fossil Island)": 1,
 						"Coal rocks": 11,
 						"Crate": 1,
 						"Dead tree": 14,
@@ -174739,6 +175382,47 @@
 				"Portal": 1
 			}
 		},
+		"Wyrmscraig Cavern": {
+			"Connect": {
+				"10018": true,
+				"11143": true
+			},
+			"Monster": {
+				"Bat": 3,
+				"Lava Strykewyrm": 3,
+				"Mountain troll": 7,
+				"Wyrm": 5
+			},
+			"NPC": {
+				"Mortimer": 1
+			},
+			"Object": {
+				"Fishing spot (lava eel)": 1,
+				"Gangplank (Sailing)": 1,
+				"Lead rocks": 7,
+				"Nickel rocks": 6,
+				"Runite rocks": 1,
+				"Silver rocks": 10
+			},
+			"Quest": {
+				"Fallen From Grace": "step"
+			},
+			"Shop": {
+				"Slayer Equipment (shop)": true
+			}
+		},
+		"Wyrmscraig Cavern#Water": {
+			"Connect": {
+				"10274": true,
+				"11142": true
+			},
+			"Object": {
+				"Buoy (Sailing)": 1
+			},
+			"Quest": {
+				"Fallen From Grace": "step"
+			}
+		},
 		"Wyvern Cave": {
 			"Connect": {
 				"14907": true
@@ -175408,6 +176092,7 @@
 			"MooringCharredIsland[+]": ["10533-W1", "10533-1"],
 			"MooringTearoftheSoul[+]": ["9259-W3", "9259-1"],
 			"MooringRellekka[+]": ["10553-W1", "10553-1"],
+			"MooringWyrmscraig[+]": ["10275-W1", "10275-1"],
 			"MooringWintumberIsland[+]": ["8232-W1", "8232-1"],
 			"MooringTheCrownJewel[+]": ["6953-W1", "6953-1"],
 			"MooringEtceteria[+]": ["10299", "10300-1"],
@@ -175649,6 +176334,7 @@
 			"MooringCharredIsland[+]": "Either side of the mooring point at Charred Island",
 			"MooringTearoftheSoul[+]": "Either side of the mooring point at Tear of the Soul",
 			"MooringRellekka[+]": "Either side of the mooring point at Rellekka",
+			"MooringWyrmscraig[+]": "Either side of the mooring point at Wyrmscraig",
 			"MooringWintumberIsland[+]": "Either side of the mooring point at Wintumber Island",
 			"MooringTheCrownJewel[+]": "Either side of the mooring point at The Crown Jewel",
 			"MooringEtceteria[+]": "Either side of the mooring point at Etceteria",
@@ -176283,7 +176969,7 @@
 			"Extended super antifire[+]": ["Extended super antifire(1)", "Extended super antifire(2)", "Extended super antifire(3)", "Extended super antifire(4)"],
 			"AnyPortalCentrepieceMaterial[+]": ["Limestone brick", "Marble block"],
 			"AnyPortalMaterial[+]": ["Teak plank", "Mahogany plank", "Marble block"],
-			"LightSource[+]": ["Lit torch", "Lit candle", "Lit black candle", "Lit white candle lantern", "Lit black candle lantern", "Lit oil lamp", "Lit oil lantern", "Lit bullseye lantern", "Lit sapphire lantern", "Lit emerald lantern", "Lit mining helmet", "Firemaking cape", "Firemaking cape(t)", "Max cape", "Kandarin headgear 1", "Kandarin headgear 2", "Kandarin headgear 3", "Kandarin headgear 4", "Bruma torch", "Abyssal lantern#Normal", "Abyssal lantern#Oak", "Abyssal lantern#Willow", "Abyssal lantern#Maple", "Abyssal lantern#Yew", "Abyssal lantern#Blisterwood", "Abyssal lantern#Magic", "Abyssal lantern#Redwood"],
+			"LightSource[+]": ["Lit torch", "Lit candle", "Lit black candle", "Lit white candle lantern", "Lit black candle lantern", "Lit oil lamp", "Lit oil lantern", "Lit bullseye lantern", "Lit sapphire lantern", "Lit emerald lantern", "Lit mining helmet", "Firemaking cape", "Firemaking cape(t)", "Max cape", "Kandarin headgear 1", "Kandarin headgear 2", "Kandarin headgear 3", "Kandarin headgear 4", "Bruma torch", "Abyssal lantern#Normal", "Abyssal lantern#Oak", "Abyssal lantern#Willow", "Abyssal lantern#Maple", "Abyssal lantern#Yew", "Abyssal lantern#Blisterwood", "Abyssal lantern#Magic", "Abyssal lantern#Redwood", "Jar of light"],
 			"Masori armour[+]": ["Masori body", "Masori chaps", "Masori mask"],
 			"Fortified masori armour[+]": ["Masori body (f)", "Masori chaps (f)", "Masori mask (f)"],
 			"Chinchompa[+]": ["Chinchompa", "Red chinchompa", "Black chinchompa"],
@@ -176371,7 +177057,8 @@
 			"Black full helm[+]": ["Black full helm", "Black full helm (t)", "Black full helm (g)"],
 			"Black platebody[+]": ["Black platebody", "Black platebody (t)", "Black platebody (g)"],
 			"Black legs[+]": ["Black platelegs", "Black platelegs (t)", "Black platelegs (g)", "Black plateskirt", "Black plateskirt (t)", "Black plateskirt (g)"],
-			"StymphikeSpear[+]": ["Makeshift spear", "Hunter's spear"]
+			"StymphikeSpear[+]": ["Makeshift spear", "Hunter's spear"],
+			"GolemFur[+]": ["Moonlight antelope fur", "Sunlight antelope fur", "Dashing kebbit fur", "Kyatt fur", "Dark kebbit fur", "Fox fur", "Spotted kebbit fur", "Graahk fur", "Larupia fur", "Feldip weasel fur", "Common kebbit fur", "Desert devil fur", "Polar kebbit fur", "Wyrmscraig goat fur"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -176466,6 +177153,7 @@
 			"Feather[+]": "Any feather",
 			"Fire rune[+]": "Any fire rune equivalent",
 			"Cosmic rune[+]": "Any cosmic rune equivalent",
+			"Soul rune[+]": "Any soul rune equivalent",
 			"Fishing rod[+]": "Any fishing rod",
 			"Fiyr remains[+]": "Any fiyr remains or worse",
 			"Flowers[+]": "Any flowers",
@@ -176773,7 +177461,8 @@
 			"Black full helm[+]": "Any black full helm",
 			"Black platebody[+]": "Any black platebody",
 			"Black legs[+]": "Any black platelegs/skirt",
-			"StymphikeSpear[+]": "Any spear used when catching a stymphike"
+			"StymphikeSpear[+]": "Any spear used when catching a stymphike",
+			"GolemFur[+]": "Any fur used in golem crafting"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Man (East Ardougne)", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
@@ -177108,19 +177797,19 @@
 			"RFDSubquest[+]": ["~|Recipe for Disaster/Freeing the Mountain Dwarf|~ Complete the quest", "~|Recipe for Disaster/Freeing the Goblin generals|~ Complete the quest", "~|Recipe for Disaster/Freeing Pirate Pete|~ Complete the quest", "~|Recipe for Disaster/Freeing the Lumbridge Guide|~ Complete the quest", "~|Recipe for Disaster/Freeing Evil Dave|~ Complete the quest", "~|Recipe for Disaster/Freeing King Awowogei|~ Complete the quest", "~|Recipe for Disaster/Freeing Sir Amik Varze|~ Complete the quest", "~|Recipe for Disaster/Freeing Skrach Uglogwee|~ Complete the quest"],
 			"FairyRings[+]": ["~|Fairytale II - Cure a Queen|~ 2", "~|Fairytale II - Cure a Queen|~ 3", "~|Fairytale II - Cure a Queen|~ 4", "~|Fairytale II - Cure a Queen|~ 5", "~|Fairytale II - Cure a Queen|~ 6", "~|Fairytale II - Cure a Queen|~ 7", "~|Fairytale II - Cure a Queen|~ 8", "~|Fairytale II - Cure a Queen|~ 9", "~|Fairytale II - Cure a Queen|~ 10", "~|Fairytale II - Cure a Queen|~ 11", "~|Fairytale II - Cure a Queen|~ Complete the quest"],
 			"AllNormalMasters[+]": ["Receive a Slayer assignment from ~|Turael|~ in Burthorpe", "Receive a Slayer assignment from ~|Spria|~ in Draynor Village", "Receive a Slayer assignment from ~|Mazchna|~ in Canifis", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
-			"AllNormalMastersButKonar[+]": ["Receive a Slayer assignment from ~|Turael|~ in Burthorpe", "Receive a Slayer assignment from ~|Spria|~ in Draynor Village", "Receive a Slayer assignment from ~|Mazchna|~ in Canifis", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"VannakaBetterMasters[+]": ["Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
-			"KrystiliaVannakaBetterMasters[+]": ["Receive a Slayer assignment from ~|Krystilia|~ in Edgeville", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
-			"JellyMasters[+]": ["Receive a Slayer assignment from ~|Krystilia|~ in Edgeville", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm"],
+			"VannakaBetterMastersAndMortimer[+]": ["Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village", "Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern"],
+			"KrystiliaVannakaBetterMasters[+]": ["Receive a Slayer assignment from ~|Krystilia|~ in Edgeville", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village", "Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern"],
+			"JellyMasters[+]": ["Receive a Slayer assignment from ~|Krystilia|~ in Edgeville", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern"],
 			"AnkouMasters[+]": ["Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"ChaeldarBetterMasters[+]": ["Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"VannakaChaeldarMasters[+]": ["Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon", "Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris"],
 			"KonarDuradelMasters[+]": ["Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
 			"KonarBetterMasters[+]": ["Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
-			"LowHighMasters[+]": ["Receive a Slayer assignment from ~|Turael|~ in Burthorpe", "Receive a Slayer assignment from ~|Spria|~ in Draynor Village", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village"],
+			"KonarBetterMastersAndMortimer[+]": ["Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village", "Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern"],
+			"LowHighMasters[+]": ["Receive a Slayer assignment from ~|Turael|~ in Burthorpe", "Receive a Slayer assignment from ~|Spria|~ in Draynor Village", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village", "Receive a Slayer assignment from ~|Mortimer|~ in Wyrmscraig Cavern"],
 			"BloodRunecrafting[+]": ["Craft a ~|blood rune|~ at the false altar on Zeah", "Craft a ~|blood rune|~ at the true altar in Morytania"],
 			"LMSAccess[+]": ["Access LMS via Quest Points", "Access LMS via total level"],
-			"OtherMaster[+]": ["Receive a Slayer assignment from ~|Chaeldar|~ in Zanaris", "Receive a Slayer assignment from ~|Duradel|~ in Shilo Village", "Receive a Slayer assignment from ~|Konar quo Maten|~ in Mount Karuulm", "Receive a Slayer assignment from ~|Mazchna|~ in Canifis", "Receive a Slayer assignment from ~|Nieve|~ in Tree Gnome Stronghold", "Receive a Slayer assignment from ~|Spria|~ in Draynor Village", "Receive a Slayer assignment from ~|Turael|~ in Burthorpe", "Receive a Slayer assignment from ~|Vannaka|~ in Edgeville Dungeon"],
 			"Bind[+]": ["Cast ~|bind|~", "Cast ~|snare|~", "Cast ~|entangle|~", "Cast ~|bind|~ from a spell sack", "Cast ~|snare|~ from a spell sack", "Cast ~|entangle|~ from a spell sack", "Cast ~|ice rush|~", "Cast ~|ice burst|~", "Cast ~|ice blitz|~", "Cast ~|ice barrage|~", "Cast ~|ice rush|~ from a spell sack", "Cast ~|ice burst|~ from a spell sack", "Cast ~|ice blitz|~ from a spell sack", "Cast ~|ice barrage|~ from a spell sack"],
 			"Thrall[+]": ["Cast ~|resurrect lesser ghost|~", "Cast ~|resurrect lesser skeleton|~", "Cast ~|resurrect lesser zombie|~", "Cast ~|resurrect superior ghost|~", "Cast ~|resurrect superior skeleton|~", "Cast ~|resurrect superior zombie|~", "Cast ~|resurrect greater ghost|~", "Cast ~|resurrect greater skeleton|~", "Cast ~|resurrect greater zombie|~"],
 			"Nerf Defence[+]": ["Nerf Defence Weapon", "Nerf Defence Spell"],
@@ -177720,7 +178409,8 @@
 			"Shellbane gryphon": true,
 			"Brutus": true,
 			"Demonic Brutus": true,
-			"Maggot King": true
+			"Maggot King": true,
+			"Mad Angel": true
 		},
 		"minigameShops": {
 			"Agility Arena Store": true,
@@ -179702,6 +180392,9 @@
 				"Araxyte#Level 96": true,
 				"Araxyte#Level 146": true
 			},
+			"Aquanites": {
+				"Aquanite": true
+			},
 			"Bandits": {
 				"Bandit#Level 130": true,
 				"Bandit#Level 22": true,
@@ -179819,7 +180512,7 @@
 			"Chaos Fanatic": {
 				"Chaos Fanatic": true
 			},
-			"Cockatrices": {
+			"Cockatrice": {
 				"Cockatrice": true,
 				"Moonlight Cockatrice": true
 			},
@@ -179851,7 +180544,7 @@
 			"Crocodiles": {
 				"Crocodile": true
 			},
-			"Custodian stalker": {
+			"Custodian stalkers": {
 				"Juvenile custodian stalker": true,
 				"Mature custodian stalker": true,
 				"Elder custodian stalker": true
@@ -180075,7 +180768,7 @@
 			"King Black Dragon": {
 				"King Black Dragon": true
 			},
-			"Kurasks": {
+			"Kurask": {
 				"Kurask": true
 			},
 			"Kraken": {
@@ -180115,6 +180808,9 @@
 				"Small Lizard": true,
 				"Sulphur Lizard": true,
 				"Grimy Lizard": true
+			},
+			"Mad Angel": {
+				"Mad Angel": true
 			},
 			"Maggot King": {
 				"Maggot King": true
@@ -180398,6 +181094,9 @@
 				"Vyrewatch Sentinel": true,
 				"Venator": true
 			},
+			"Venators": {
+				"Venator": true
+			},
 			"Venenatis": {
 				"Venenatis": true,
 				"Spindel": true
@@ -180483,14 +181182,15 @@
 			"Alchemical Hydra": ["5179"],
 			"Ankous": ["6457", "7723", "9525", "11834", "12341", "12857", "13114"],
 			"Aviansie": ["11578", "12090"],
+			"Aquanites": ["8758"],
 			"Araxytes": ["14645"],
 			"Bandits": ["12089"],
 			"Banshees": ["6457", "13623"],
 			"Barrows brothers": ["14131"],
 			"Basilisks": ["9790", "11064"],
-			"Bats": ["4917", "5165", "5172", "5173", "5179", "5180", "5425", "5426", "5435", "5943", "5946", "5947", "5948", "6202", "6203", "6458", "6460", "6713", "6714", "6715", "6716", "6966", "6972", "9779", "9782", "10031", "10033", "10037", "10288", "10292", "10294", "10549", "10804", "11053", "11061", "11313", "11573", "11574", "12349", "13366", "13618", "13623", "14134", "14390", "14894", "14899", "14901"],
+			"Bats": ["4917", "5165", "5172", "5173", "5179", "5180", "5425", "5426", "5435", "5943", "5946", "5947", "5948", "6202", "6203", "6458", "6460", "6713", "6714", "6715", "6716", "6966", "6972", "9779", "9782", "10018", "10031", "10033", "10037", "10288", "10292", "10294", "10549", "10804", "11053", "11061", "11313", "11573", "11574", "12349", "13366", "13618", "13623", "14134", "14390", "14894", "14899", "14901"],
 			"Bears": ["4916", "4917", "4918", "4921", "5166", "5172", "5177", "5178", "5941", "8500", "8753", "8754", "9009", "9524", "9777", "9778", "10033", "10287", "10547", "10804", "10808", "11060", "11830", "11833", "12344", "12345", "12854", "12859", "13108", "13114", "13115", "13116"],
-			"Birds": ["4910", "4911", "4913", "4921", "4922", "5165", "5166", "5168", "5169", "5421", "5422", "5677", "5678", "5934", "5942", "6187", "6192", "6447", "6454", "6712", "6959", "6961", "7225", "8237", "8491", "8492", "8494", "8747", "8750", "8753", "9004", "9006", "9012", "9261", "9525", "9780", "9781", "9782", "10028", "10033", "10034", "10039", "10044", "10284", "10291", "10292", "10293", "10300", "10549", "10553", "10794", "10795", "10803", "10807", "11050", "11051", "11053", "11055", "11309", "11316", "11319", "11562", "11565", "12587", "11828", "12078", "12082", "12083", "12325", "12326", "12337", "12581", "12582", "12583", "12588", "12595", "12596", "12837", "12838", "12844", "12850", "12851", "13092", "13100", "13356", "13871", "14391"],
+			"Birds": ["4910", "4911", "4913", "4921", "4922", "5165", "5166", "5168", "5169", "5421", "5422", "5677", "5678", "5934", "5942", "6187", "6192", "6447", "6454", "6712", "6959", "6961", "7225", "8237", "8491", "8492", "8494", "8747", "8750", "8753", "9004", "9006", "9012", "9261", "9525", "9780", "9781", "9782", "10028", "10033", "10034", "10039", "10044", "10274", "10275", "10284", "10291", "10292", "10293", "10300", "10549", "10553", "10794", "10795", "10803", "10807", "11050", "11051", "11053", "11055", "11309", "11316", "11319", "11562", "11565", "12587", "11828", "12078", "12082", "12083", "12325", "12326", "12337", "12581", "12582", "12583", "12588", "12595", "12596", "12837", "12838", "12844", "12850", "12851", "13092", "13100", "13356", "13871", "14391"],
 			"Black demons": ["5689", "6457", "9783", "10533", "10801", "11573", "11578", "12342", "12857", "13114"],
 			"Black dragons": ["6457", "8501", "9772", "10533", "11573", "12092", "12849", "12857", "13114"],
 			"Black Knights": ["12092", "13114"],
@@ -180508,14 +181208,14 @@
 			"Chaos druids": ["12342", "12856"],
 			"Chaos Elemental": ["12861"],
 			"Chaos Fanatic": ["11836"],
-			"Cockatrices": ["5680", "11064"],
+			"Cockatrice": ["5680", "11064"],
 			"Commander Zilyana": ["11578"],
 			"Cows": ["4921", "5178", "6968", "8491", "8757", "10288", "10548", "10807", "11571", "12083", "12595", "12596", "12849", "12850", "12851", "14391"],
 			"Crabs": ["4663", "5167", "6189", "6445", "6453", "6457", "6706", "6710", "6959", "6965", "6966", "7215", "7222", "7479", "8232", "9003", "9259", "10042", "10533", "10554", "10810", "12836", "13092", "14389", "14645", "14652", "14900", "14908", "15162"],
 			"Crawling Hands": ["13623", "14387"],
 			"Crazy archaeologist": ["11833"],
 			"Crocodiles": ["12588", "12844", "13100", "13101", "13357", "13611"],
-			"Custodian stalker": ["5172"],
+			"Custodian stalkers": ["5172"],
 			"Dagannoths": ["6457", "9790", "10040", "10042"],
 			"Dagannoth Kings": ["10042"],
 			"Dark beasts": ["8755", "10035"],
@@ -180557,7 +181257,7 @@
 			"Kalphite Queen": ["12848"],
 			"Killerwatts": ["12340"],
 			"King Black Dragon": ["12092"],
-			"Kurasks": ["4651", "8755", "11064"],
+			"Kurask": ["4651", "8755", "11064"],
 			"Kraken": ["9016"],
 			"Kree'arra": ["11578"],
 			"K'ril Tsutsaroth": ["11578"],
@@ -180566,6 +181266,7 @@
 			"Lesser Nagua": ["5167", "5680", "6706"],
 			"Lizardmen": ["4919", "5175", "5176", "5177", "5430", "5431", "5433", "5434", "5689", "5690", "5945", "5946"],
 			"Lizards": ["5167", "5179", "5680", "13355", "13359", "13615", "13871"],
+			"Mad Angel": ["10018"],
 			"Maggot King": ["14132"],
 			"Magic axes": ["12605"],
 			"Mammoths": ["12600"],
@@ -180603,9 +181304,10 @@
 			"Suqah": ["8252", "8253", "8508", "8509"],
 			"Terror dogs": ["13618"],
 			"Thermonuclear smoke devil": ["9519"],
-			"Trolls": ["4918", "4919", "9275", "9276", "9531", "9532", "10810", "11320", "11321", "11322", "11576", "11577", "12849"],
+			"Trolls": ["4918", "4919", "9275", "9276", "9531", "9532", "10018", "10810", "11320", "11321", "11322", "11576", "11577", "12849"],
 			"Turoths": ["11064"],
 			"Vampyres": ["11578", "12090", "13874", "14130", "14385", "14386", "14387", "14388", "14389", "14390", "14642", "14644", "14900"],
+			"Venators": ["14132"],
 			"Venenatis": ["12602", "13115"],
 			"Vet'ion": ["12601", "12859"],
 			"Vorkath": ["9023"],
@@ -180614,7 +181316,7 @@
 			"Waterfiends": ["8755", "9016", "10038"],
 			"Werewolves": ["11578", "12090", "13878"],
 			"Wolves": ["5172", "5426", "5936", "5939", "6194", "6204", "6451", "6711", "8501", "9009", "9267", "9773", "9779", "9780", "10030", "10033", "10286", "10291", "10552", "10807", "11053", "11068", "11309", "11317", "11318", "11325", "11565", "11578", "11837", "12341", "12591", "12846", "12847", "12848", "12861", "13098", "13103", "13104"],
-			"Wyrms": ["5179", "5680", "10533"],
+			"Wyrms": ["5179", "5680", "10018", "10274", "10533"],
 			"Zombies": ["5943", "6711", "9023", "9775", "9779", "10033", "10035", "10037", "10288", "10547", "11050", "11051", "11068", "11310", "11316", "11566", "11568", "11570", "12338", "12339", "12341", "12342", "12601", "12602", "12854", "12856", "13366", "13618", "13874", "13875", "14391", "14647", "15148"],
 			"Zulrah": ["9007"],
 			"Zygomites": ["5172", "12849", "14651", "14652"]
@@ -182780,7 +183482,7 @@
 				"1": "1/640"
 			},
 			"Scaly blue dragonhide": {
-				"1": "1/100"
+				"1": "1/200"
 			},
 			"Tooth half of key (moon key)": {
 				"1": "1/2290"
@@ -200961,6 +201663,98 @@
 				"1": "18/128"
 			}
 		},
+		"Mad Angel": {
+			"Adamant longsword": {
+				"1": "6/156"
+			},
+			"Aggy": {
+				"1": "Very rare"
+			},
+			"Air rune": {
+				"110-120": "4/156"
+			},
+			"Ardeaglais teleport": {
+				"2": "7/156"
+			},
+			"Coins": {
+				"8000-10000": "8/156"
+			},
+			"Cupronickel bar": {
+				"1": "1/156"
+			},
+			"Death rune": {
+				"40-50": "8/156"
+			},
+			"Dragon battleaxe": {
+				"1": "2/156"
+			},
+			"Dragon med helm": {
+				"1": "2/156"
+			},
+			"Emerald": {
+				"7-8 (noted)": "6/156"
+			},
+			"Granite dust": {
+				"25-35": "Always"
+			},
+			"Hallowfell": {
+				"1": "7/896"
+			},
+			"Jar of light": {
+				"1": "1/896"
+			},
+			"Law rune": {
+				"28-30": "12/156"
+			},
+			"Nature rune": {
+				"20-25": "8/156"
+			},
+			"Papyrus": {
+				"1": "1/156"
+			},
+			"Prayer potion(2)": {
+				"1": "1/10"
+			},
+			"Prayer potion(4)": {
+				"1": "12/156"
+			},
+			"Raw monkfish": {
+				"18-22 (noted)": "8/156"
+			},
+			"Rune full helm": {
+				"1": "12/156"
+			},
+			"Rune kiteshield": {
+				"1": "12/156"
+			},
+			"Sapphire": {
+				"7-8 (noted)": "6/156"
+			},
+			"Shark": {
+				"2": "8/156"
+			},
+			"Steel cannonball": {
+				"90-100": "16/156"
+			},
+			"Sunstone crystal": {
+				"1": "Always"
+			},
+			"Super combat potion(1)": {
+				"1": "1/10"
+			},
+			"Super combat potion(3)": {
+				"2-3 (noted)": "8/156"
+			},
+			"Yellowfin": {
+				"2": "8/156"
+			},
+			"RareDropTable+": {
+				"1": "2/156"
+			},
+			"Clue scroll (hard)": {
+				"1": "1/24"
+			}
+		},
 		"Maggot King": {
 			"Adamantite ore": {
 				"30-40 (noted)": "10/159"
@@ -219095,6 +219889,7 @@
 		"The Path of Glouphrie": "9264, 9782, 10033, 10544, Poison Waste Dungeon, Tree Gnome Village dungeon",
 		"Fairytale I - Growing Pains": "11572, 11827, 12338, 12340, 13620, Zanaris, Nature Grotto Cave, FairyTaleI2[+]x5",
 		"Fairytale II - Cure a Queen": "8752, 10802, 12338, Zanaris, Cosmic entity's plane, Gorak Plane",
+		"Fallen From Grace": "10018, 10274, 10275, Wyrmscraig Cavern, Wyrmscraig Cavern#Water",
 		"Family Crest": "10803, 11317, 12342, 13106, 13107, 13109, 13110, Witchaven Dungeon, Edgeville Dungeon#Wilderness, Dwarven Mine",
 		"The Feud": "13106, 13358",
 		"Fight Arena": "10289",
@@ -225086,6 +225881,20 @@
 			"Tinderbox": true,
 			"Unlit torch": true
 		},
+		"Supplies's Supplies": {
+			"Bucket": true,
+			"Chisel": true,
+			"Empty bucket pack": true,
+			"Empty jug pack": true,
+			"Hammer": true,
+			"Jug": true,
+			"Needle": true,
+			"Pot": true,
+			"Rope": true,
+			"Shears": true,
+			"Thread": true,
+			"Tinderbox": true
+		},
 		"Tal Teklan General Store": {
 			"Bowl": true,
 			"Bronze axe": true,
@@ -225851,6 +226660,68 @@
 			"Salmon": true,
 			"Tinderbox": true
 		},
+		"Where Wyrmscraig's Wear Wares Were": {
+			"Noble robe top#Black": true,
+			"Noble robe top#Blue": true,
+			"Noble robe top#Green": true,
+			"Noble robe top#Pink": true,
+			"Noble robe top#Red": true,
+			"Noble robe top#White": true,
+			"Noble robe top#Yellow": true,
+			"Wyrmscraig boots": true,
+			"Wyrmscraig noble skirt#Black": true,
+			"Wyrmscraig noble skirt#Blue": true,
+			"Wyrmscraig noble skirt#Green": true,
+			"Wyrmscraig noble skirt#Pink": true,
+			"Wyrmscraig noble skirt#Red": true,
+			"Wyrmscraig noble skirt#White": true,
+			"Wyrmscraig noble skirt#Yellow": true,
+			"Wyrmscraig shoes": true,
+			"Wyrmscraig villager robe bottom (A)#Black": true,
+			"Wyrmscraig villager robe bottom (A)#Blue": true,
+			"Wyrmscraig villager robe bottom (A)#Green": true,
+			"Wyrmscraig villager robe bottom (A)#Pink": true,
+			"Wyrmscraig villager robe bottom (A)#Red": true,
+			"Wyrmscraig villager robe bottom (A)#White": true,
+			"Wyrmscraig villager robe bottom (A)#Yellow": true,
+			"Wyrmscraig villager robe bottom (B)#Black": true,
+			"Wyrmscraig villager robe bottom (B)#Blue": true,
+			"Wyrmscraig villager robe bottom (B)#Green": true,
+			"Wyrmscraig villager robe bottom (B)#Pink": true,
+			"Wyrmscraig villager robe bottom (B)#Red": true,
+			"Wyrmscraig villager robe bottom (B)#White": true,
+			"Wyrmscraig villager robe bottom (B)#Yellow": true,
+			"Wyrmscraig villager robe top (A)#Beige": true,
+			"Wyrmscraig villager robe top (A)#Black": true,
+			"Wyrmscraig villager robe top (A)#Blue": true,
+			"Wyrmscraig villager robe top (A)#Green": true,
+			"Wyrmscraig villager robe top (A)#Pink": true,
+			"Wyrmscraig villager robe top (A)#Red": true,
+			"Wyrmscraig villager robe top (A)#White": true,
+			"Wyrmscraig villager robe top (A)#Yellow": true,
+			"Wyrmscraig villager robe top (B)#Black": true,
+			"Wyrmscraig villager robe top (B)#Blue": true,
+			"Wyrmscraig villager robe top (B)#Green": true,
+			"Wyrmscraig villager robe top (B)#Pink": true,
+			"Wyrmscraig villager robe top (B)#Red": true,
+			"Wyrmscraig villager robe top (B)#White": true,
+			"Wyrmscraig villager robe top (B)#Yellow": true,
+			"Wyrmscraig villager skirt#Black": true,
+			"Wyrmscraig villager skirt#Blue": true,
+			"Wyrmscraig villager skirt#Green": true,
+			"Wyrmscraig villager skirt#Pink": true,
+			"Wyrmscraig villager skirt#Red": true,
+			"Wyrmscraig villager skirt#White": true,
+			"Wyrmscraig villager skirt#Yellow": true,
+			"Wyrmscraig villager work skirt#Beige": true,
+			"Wyrmscraig villager work skirt#Black": true,
+			"Wyrmscraig villager work skirt#Blue": true,
+			"Wyrmscraig villager work skirt#Green": true,
+			"Wyrmscraig villager work skirt#Pink": true,
+			"Wyrmscraig villager work skirt#Red": true,
+			"Wyrmscraig villager work skirt#White": true,
+			"Wyrmscraig villager work skirt#Yellow": true
+		},
 		"White Knight Armoury": {
 			"White 2h sword": true,
 			"White battleaxe": true,
@@ -226206,6 +227077,23 @@
 				},
 				"Rune spear": {
 					"1": "7/10"
+				}
+			},
+			"Golem crafting loot": {
+				"Jeweller's chisel": {
+					"1": "1/315"
+				},
+				"Uncut diamond": {
+					"1": "5/110"
+				},
+				"Uncut emerald": {
+					"1": "24/110"
+				},
+				"Uncut ruby": {
+					"1": "10/110"
+				},
+				"Uncut sapphire": {
+					"1": "71/110"
 				}
 			}
 		},
@@ -228800,6 +229688,17 @@
 				},
 				"Stymphike feather": {
 					"15": "Always"
+				}
+			},
+			"Wyrmscraig goat loot": {
+				"Goat horn": {
+					"1": "3/4"
+				},
+				"Mr mcgroot": {
+					"1": "Very rare"
+				},
+				"Wyrmscraig goat fur": {
+					"1": "1/4"
 				}
 			}
 		},
@@ -232479,7 +233378,7 @@
 					"1": "10/100"
 				},
 				"Blue egg sac": {
-					"1": "1/100"
+					"1": "1/25"
 				},
 				"Coins": {
 					"1": "8/100"
@@ -232518,7 +233417,7 @@
 					"1": "10/100"
 				},
 				"Orange egg sac": {
-					"1": "1/100"
+					"1": "1/25"
 				},
 				"Prayer potion(3)": {
 					"1": "3/20"
@@ -253748,6 +254647,11 @@
 					"~|Temple of Ikov|~ 4": "Quest"
 				}]
 			},
+			"Mad Angel": {
+				"10018-3": [{
+					"~|Fallen From Grace|~ Complete the quest": "Quest"
+				}]
+			},
 			"Magic axe": {
 				"12605": [{
 					"Unlock the ~|door (Magic axe hut)|~": "Thieving"
@@ -255851,6 +256755,11 @@
 					"~|Plague City|~ 5": "Quest"
 				}]
 			},
+			"Where Wyrmscraig's Wear Wares Were": {
+				"10275-1": [{
+					"~|Fallen From Grace|~ Complete the quest": "Quest"
+				}]
+			},
 			"White Knight Armoury": {
 				"11828-1": [{
 					"~|Wanted!|~ Complete the quest": "Quest"
@@ -256812,7 +257721,7 @@
 				"CombatLevel": 15,
 				"Weight": 8
 			},
-			"Cockatrices": {
+			"Cockatrice": {
 				"Level": 25,
 				"CombatLevel": 25,
 				"Skills": {
@@ -256984,7 +257893,7 @@
 				},
 				"Weight": 7
 			},
-			"Cockatrices": {
+			"Cockatrice": {
 				"Level": 25,
 				"CombatLevel": 25,
 				"Skills": {
@@ -257111,7 +258020,7 @@
 				"CombatLevel": 15,
 				"Weight": 7
 			},
-			"Kurasks": {
+			"Kurask": {
 				"Level": 70,
 				"CombatLevel": 65,
 				"Weight": 7
@@ -257295,7 +258204,7 @@
 				"CombatLevel": 1,
 				"Weight": 8
 			},
-			"Custodian stalker": {
+			"Custodian stalkers": {
 				"Level": 54,
 				"Tasks": {
 					"~|Shadows of Custodia|~ Complete the quest": "Quest"
@@ -257387,7 +258296,7 @@
 				"CombatLevel": 15,
 				"Weight": 11
 			},
-			"Kurasks": {
+			"Kurask": {
 				"Level": 70,
 				"CombatLevel": 65,
 				"Weight": 12
@@ -257906,13 +258815,13 @@
 				"CombatLevel": 15,
 				"Weight": 4.5
 			},
-			"Kurasks - Rellekka Slayer Cave": {
+			"Kurask - Rellekka Slayer Cave": {
 				"Chunks": ["Rellekka Slayer Cave"],
 				"Level": 70,
 				"CombatLevel": 65,
 				"Weight": 1.5
 			},
-			"Kurasks - Iorwerth Dungeon": {
+			"Kurask - Iorwerth Dungeon": {
 				"Chunks": ["Iorwerth Dungeon"],
 				"Level": 70,
 				"CombatLevel": 65,
@@ -258197,7 +259106,7 @@
 				},
 				"Weight": 6
 			},
-			"Custodian stalker": {
+			"Custodian stalkers": {
 				"Level": 54,
 				"Tasks": {
 					"~|Shadows of Custodia|~ Complete the quest": "Quest"
@@ -258278,7 +259187,7 @@
 				"CombatLevel": 15,
 				"Weight": 9
 			},
-			"Kurasks": {
+			"Kurask": {
 				"Level": 70,
 				"CombatLevel": 65,
 				"Weight": 3
@@ -258506,7 +259415,7 @@
 				"CombatLevel": 15,
 				"Weight": 9
 			},
-			"Kurasks": {
+			"Kurask": {
 				"Level": 70,
 				"CombatLevel": 65,
 				"Weight": 4
@@ -258569,6 +259478,204 @@
 			"Wyrms": {
 				"Level": 62,
 				"Weight": 8
+			}
+		},
+		"Mortimer": {
+			"Aberrant spectres": {
+				"Level": 60,
+				"CombatLevel": 65,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Abyssal demons": {
+				"Level": 85,
+				"CombatLevel": 85,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 8
+			},
+			"Aquanites": {
+				"Level": 78,
+				"Skills": {
+					"Sailing": 73
+				},
+				"Weight": 10
+			},
+			"Araxytes": {
+				"Level": 92,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 8
+			},
+			"Banshees": {
+				"CombatLevel": 20,
+				"Level": 15,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Basilisks": {
+				"Level": 15,
+				"CombatLevel": 40,
+				"Skills": {
+					"Defence": 20
+				},
+				"Weight": 10
+			},
+			"Bloodvelds": {
+				"Level": 50,
+				"CombatLevel": 50,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Cave crawlers": {
+				"CombatLevel": 10,
+				"Level": 10,
+				"Weight": 10
+			},
+			"Cave horrors": {
+				"Level": 58,
+				"CombatLevel": 85,
+				"Tasks": {
+					"~|Cabin Fever|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Cockatrice": {
+				"Level": 25,
+				"CombatLevel": 25,
+				"Skills": {
+					"Defence": 20
+				},
+				"Weight": 10
+			},
+			"Crawling Hands": {
+				"Level": 5,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Custodian stalkers": {
+				"Level": 54,
+				"Tasks": {
+					"~|Shadows of Custodia|~ Complete the quest": "Quest"
+				},
+				"Weight": 8
+			},
+			"Dark beasts": {
+				"Level": 90,
+				"CombatLevel": 90,
+				"Tasks": {
+					"~|Mourning's End Part II|~ 2": "Quest"
+				},
+				"Weight": 10
+			},
+			"Drakes": {
+				"Level": 84,
+				"Weight": 10
+			},
+			"Dust devils": {
+				"Level": 65,
+				"CombatLevel": 70,
+				"Tasks": {
+					"~|Desert Treasure I|~ 7c1": "Quest"
+				},
+				"Weight": 8
+			},
+			"Gargoyles": {
+				"Level": 75,
+				"CombatLevel": 80,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Gryphons": {
+				"Level": 51,
+				"Tasks": {
+					"~|Troubled Tortugans|~ Complete the quest": "Quest"
+				},
+				"Skills": {
+					"Sailing": 45
+				},
+				"Weight": 10
+			},
+			"Hydras": {
+				"Level": 95,
+				"Weight": 10
+			},
+			"Infernal Mages": {
+				"Level": 45,
+				"CombatLevel": 40,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Jellies": {
+				"Level": 52,
+				"CombatLevel": 57,
+				"Weight": 10
+			},
+			"Kurask": {
+				"Level": 70,
+				"CombatLevel": 65,
+				"Weight": 10
+			},
+			"Nechryael": {
+				"Level": 80,
+				"CombatLevel": 85,
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Weight": 8
+			},
+			"Pyrefiends": {
+				"Level": 30,
+				"CombatLevel": 25,
+				"Weight": 10
+			},
+			"Rockslugs": {
+				"Level": 20,
+				"CombatLevel": 20,
+				"Weight": 10
+			},
+			"Smoke devils": {
+				"Level": 93,
+				"CombatLevel": 85,
+				"Weight": 8
+			},
+			"Turoths": {
+				"Level": 55,
+				"CombatLevel": 60,
+				"Weight": 10
+			},
+			"Venators": {
+				"Level": 80,
+				"CombatLevel": 85,
+				"Tasks": {
+					"~|The Blood Moon Rises|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Warped creatures": {
+				"Level": 56,
+				"Tasks": {
+					"~|The Path of Glouphrie|~ Complete the quest": "Quest"
+				},
+				"Weight": 10
+			},
+			"Wyrms": {
+				"Level": 62,
+				"Weight": 10
 			}
 		}
 	},
@@ -259362,7 +260469,8 @@
 			"Abyssal lantern#Yew": true,
 			"Abyssal lantern#Blisterwood": true,
 			"Abyssal lantern#Magic": true,
-			"Abyssal lantern#Redwood": true
+			"Abyssal lantern#Redwood": true,
+			"Jar of light": true
 		},
 		"boss|Monsters": {
 			"Grotesque Guardians": true,
@@ -259424,7 +260532,8 @@
 			"Shellbane gryphon": true,
 			"Brutus": true,
 			"Demonic Brutus": true,
-			"Maggot King": true
+			"Maggot King": true,
+			"Mad Angel": true
 		},
 		"boss|NPCs": {
 			"Howling Snow Storm": true,
@@ -260263,7 +261372,8 @@
 			"Mahogany bird house": true,
 			"Yew bird house": true,
 			"Magic bird house": true,
-			"Redwood bird house": true
+			"Redwood bird house": true,
+			"Wooden spikes": true
 		},
 		"hunter|NPCs": {
 			"Baby impling": true,
@@ -260308,7 +261418,8 @@
 			"Pyre fox": true,
 			"Red crab (Hunter)": true,
 			"Blue crab (Hunter)": true,
-			"Rainbow crab (Hunter)": true
+			"Rainbow crab (Hunter)": true,
+			"Wyrmscraig goat": true
 		},
 		"hunter|Monsters": {
 			"Chinchompa (Hunter)": true,
@@ -260377,7 +261488,9 @@
 			"Infernal shale deposit": true,
 			"Infernal shale rocks": true,
 			"Lead rocks": true,
-			"Nickel rocks": true
+			"Nickel rocks": true,
+			"Sunstone rocks": true,
+			"Sunstone monolith": true
 		},
 		"prayer|Items": {
 			"Bones": true,
@@ -260624,7 +261737,8 @@
 			"Spria": true,
 			"Steve": true,
 			"Turael": true,
-			"Vannaka": true
+			"Vannaka": true,
+			"Mortimer": true
 		},
 		"slayer|Monsters": {
 			"Crawling Hand": true,
@@ -267496,7 +268610,7 @@
 				"9506-W1",
 				"9761",
 				"9763",
-				"10018"
+				"10018-W1"
 			]
 		},
 		"9763": {
@@ -267504,7 +268618,7 @@
 				"9507-W1",
 				"9762",
 				"9764",
-				"10019"
+				"10019-W1"
 			]
 		},
 		"9764": {
@@ -267834,30 +268948,51 @@
 			"0": [
 				"9761",
 				"10016",
-				"10018",
+				"10018-W1",
 				"10273"
 			]
 		},
 		"10018": {
-			"0": [
+			"1": [
+				"10274-1"
+			],
+			"2": [
+				"10274-1"
+			],
+			"3": [
+				"???"
+			],
+			"W1": [
 				"9762",
 				"10017",
-				"10019",
-				"10274"
+				"10019-W1",
+				"10274-W3",
+				"10274-W4"
+			],
+			"W2": [
+				"10019-W1"
+			],
+			"W3": [
+				"10019-W1"
 			]
 		},
 		"10019": {
-			"0": [
+			"1": [
+				"10275-1"
+			],
+			"W1": [
 				"9763",
-				"10018",
+				"10018-W1",
+				"10018-W2",
+				"10018-W3",
 				"10020",
-				"10275"
+				"10275-W1"
 			]
 		},
 		"10020": {
 			"0": [
 				"9764",
-				"10019",
+				"10019-W1",
 				"10021",
 				"10276"
 			]
@@ -268230,30 +269365,62 @@
 			"0": [
 				"10017",
 				"10272",
-				"10274",
+				"10274-W2",
+				"10274-W3",
 				"10529"
 			]
 		},
 		"10274": {
-			"0": [
-				"10018",
-				"10273",
-				"10275",
+			"1": [
+				"10018-1",
+				"10018-2",
+				"10275-1"
+			],
+			"2": [
+				"10275-2"
+			],
+			"W1": [
+				"10275-W3",
 				"10530"
+			],
+			"W2": [
+				"10273",
+				"10530"
+			],
+			"W3": [
+				"10018-W1",
+				"10273"
+			],
+			"W4": [
+				"10018-W1"
 			]
 		},
 		"10275": {
-			"0": [
-				"10019",
-				"10274",
+			"1": [
+				"10019-1",
+				"10274-1"
+			],
+			"2": [
+				"10274-2"
+			],
+			"W1": [
+				"10019-W1",
+				"10276"
+			],
+			"W2": [
 				"10276",
+				"10531"
+			],
+			"W3": [
+				"10274-W1",
 				"10531"
 			]
 		},
 		"10276": {
 			"0": [
 				"10020",
-				"10275",
+				"10275-W1",
+				"10275-W2",
 				"10277",
 				"10532"
 			]
@@ -268590,7 +269757,8 @@
 		},
 		"10530": {
 			"0": [
-				"10274",
+				"10274-W1",
+				"10274-W2",
 				"10529",
 				"10531",
 				"10786"
@@ -268598,7 +269766,8 @@
 		},
 		"10531": {
 			"0": [
-				"10275",
+				"10275-W2",
+				"10275-W3",
 				"10530",
 				"10532",
 				"10787"
@@ -275088,7 +276257,7 @@
 	"walkableChunksF2P": ["9520", "9772", "9773", "9776", "10028", "10284", "11313", "11314", "11315", "11569", "11570", "11571", "11572", "11573", "11574", "11824", "11825", "11826", "11827", "11828", "11829", "11830", "11831", "11832", "11833", "11834", "11835", "11836", "12081", "12082", "12083", "12084", "12085", "12086", "12087", "12088", "12089", "12090", "12091", "12092", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12344", "12345", "12346", "12347", "12348", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12600", "12601", "12602", "12603", "12604", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "12856", "12857", "12858", "12859", "12860", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13361", "13362", "13363", "13367", "13368", "13369", "13370", "13371", "13372", "13617", "13618", "13619", "Crandor and Karamja Dungeon#South", "Crandor and Karamja Dungeon#North", "Melzar's Maze#Basement", "Air altar", "White Knights' Castle#Crypt", "Death's Office", "Mind altar", "Ruins of Camdozaal", "Scrubfoot's cave", "Asgarnian Ice Dungeon", "Dwarven Mine", "Old School Museum", "Mining Guild", "Body altar", "Rune essence mine", "Wizards' Tower#Basement", "Draynor Sewers", "Edgeville Dungeon", "Stronghold of Security", "Varrock Sewers", "Water altar", "H.A.M. Hideout", "Varrock West Bank#Basement", "Clan Hall", "Misthalin Manor", "Lumbridge Castle#Cellar", "Phoenix Gang Hideout", "Fire altar", "Earth altar"],
 	"unnotingChunks": ["4912", "4919", "4922", "5179", "5420", "5421", "5427", "5684", "5691", "5692", "5938", "5939", "5941", "5944", "5946", "5948", "6191", "6198", "6448", "6457", "6461", "6710", "6960", "6968", "7223", "7227", "7475", "7723", "8249", "8253", "8740", "8748", "9259", "9265", "9273", "9275", "9531", "9772", "9776", "9781", "9782", "10039", "10284", "10288", "10292", "10293", "10300", "10533", "10537", "10545", "10547", "10804", "10806", "11051", "11056", "11061", "11310", "11319", "11571", "11811", "11826", "11828", "11835", "12078", "12084", "12338", "12342", "12344", "12581", "12588", "12590", "12597", "12598", "12605", "12850", "12853", "13104", "13105", "13358", "13631", "13363", "13613", "13874", "13878", "14388", "14638", "14642", "14646", "14907", "14908", "15151", "15163", "Ruins of Camdozaal", "Prifddinas", "Keldagrim", "Blast Furnace", "Mor Ul Rek#Outer Area", "Mor Ul Rek#Inner Area", "Rogues' Den", "Mining Guild", "Motherlode Mine", "Mage Arena bank", "Sophanem Dungeon", "Tarn's Lair", "Hallowed Sepulchre", "Shilo Village mine#Underground", "Giants' Foundry", "Tombs of Amascut Lobby", "Ourania Cave", "Chambers of Xeric", "Cam Torum", "Fortis Colosseum Underground", "Alchemical Society", "Deepfin Mine", "Vampyrium"],
 	"rollingChunks": {
-		"bank": ["4912", "4919", "4922", "5179", "5420", "5421", "5427", "5684", "5691", "5692", "5938", "5939", "5941", "5944", "5946", "5948", "6191", "6198", "6448", "6457", "6461", "6710", "6960", "6968", "7223", "7227", "7475", "7723", "8249", "8253", "8740", "8748", "9265", "9273", "9275", "9531", "9772", "9776", "9781", "9782", "10039", "10284", "10288", "10292", "10293", "10300", "10533", "10537", "10545", "10547", "10804", "10806", "11051", "11061", "11310", "11319", "11571", "11811", "11828", "12078", "12084", "12338", "12342", "12344", "12581", "12588", "12597", "12598", "12850", "12853", "13104", "13105", "13363", "13613", "13874", "13878", "14388", "14638", "14642", "14646", "14907", "14908", "15151", "15163", "13631", "9011", "10810", "11313", "11575", "12085", "12349", "13099", "13618", "14644", "13361", "13354", "9778", "4919", "5680", "7216", "5421", "11830"],
+		"bank": ["4912", "4919", "4922", "5179", "5420", "5421", "5427", "5684", "5691", "5692", "5938", "5939", "5941", "5944", "5946", "5948", "6191", "6198", "6448", "6457", "6461", "6710", "6960", "6968", "7223", "7227", "7475", "7723", "8249", "8253", "8740", "8748", "9265", "9273", "9275", "9531", "9772", "9776", "9781", "9782", "10039", "10284", "10288", "10292", "10293", "10300", "10533", "10537", "10545", "10547", "10804", "10806", "11051", "11061", "11310", "11319", "11571", "11811", "11828", "12078", "12084", "12338", "12342", "12344", "12581", "12588", "12597", "12598", "12850", "12853", "13104", "13105", "13363", "13613", "13874", "13878", "14388", "14638", "14642", "14646", "14907", "14908", "15151", "15163", "13631", "9011", "10810", "11313", "11575", "12085", "12349", "13099", "13618", "14644", "13361", "13354", "9778", "4919", "5680", "7216", "5421", "11830", "10275"],
 		"noquest": ["4662", "4663", "4664", "4665", "4666", "4667", "4918", "4919", "4920", "4921", "4922", "4923", "5174", "5175", "5176", "5177", "5178", "5179", "5180", "5430", "5431", "5432", "5433", "5434", "5435", "5686", "5687", "5688", "5689", "5690", "5691", "5692", "5941", "5942", "5943", "5944", "5945", "5946", "5947", "5948", "5949", "6197", "6198", "6199", "6200", "6201", "6202", "6203", "6204", "6205", "6453", "6454", "6455", "6456", "6457", "6458", "6459", "6460", "6461", "6462", "6710", "6711", "6712", "6713", "6714", "6715", "6716", "6717", "6965", "6966", "6967", "6968", "6969", "6970", "6971", "6972", "6973", "7221", "7222", "7223", "7224", "7225", "7226", "7227", "7228", "7478", "7479", "8236", "8237", "8238", "8491", "8492", "8493", "8494", "8747", "8748", "8749", "8750", "9003", "9004", "9005", "9006", "9014", "9015", "9016", "9260", "9261", "9262", "9263", "9264", "9268", "9269", "9270", "9271", "9272", "9273", "9519", "9520", "9521", "9524", "9525", "9526", "9527", "9528", "9773", "9774", "9775", "9776", "9777", "9778", "9779", "9780", "9781", "9782", "9783", "10028", "10029", "10030", "10031", "10032", "10033", "10034", "10035", "10036", "10037", "10038", "10039", "10040", "10042", "10284", "10285", "10286", "10287", "10288", "10289", "10290", "10291", "10292", "10293", "10294", "10296", "10297", "10536", "10537", "10542", "10543", "10544", "10545", "10546", "10547", "10548", "10549", "10550", "10551", "10552", "10553", "10554", "10801", "10802", "10803", "10804", "10805", "10806", "10807", "10808", "10809", "10810", "10811", "11053", "11054", "11055", "11056", "11057", "11058", "11060", "11061", "11062", "11063", "11064", "11065", "11309", "11310", "11311", "11312", "11313", "11314", "11316", "11317", "11318", "11319", "11320", "11565", "11566", "11567", "11568", "11569", "11570", "11571", "11572", "11573", "11574", "11575", "11576", "11822", "11823", "11824", "11825", "11826", "11827", "11828", "11829", "11830", "11831", "11832", "11833", "11834", "11835", "11836", "11837", "12076", "12081", "12082", "12083", "12084", "12085", "12086", "12087", "12088", "12089", "12090", "12091", "12092", "12093", "12332", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12344", "12345", "12346", "12347", "12348", "12349", "12587", "12588", "12589", "12590", "12591", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12600", "12601", "12602", "12603", "12604", "12605", "12843", "12844", "12845", "12846", "12847", "12848", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "12856", "12857", "12858", "12859", "12860", "12861", "13099", "13100", "13101", "13102", "13103", "13104", "13105", "13106", "13107", "13108", "13109", "13110", "13111", "13112", "13113", "13114", "13115", "13116", "13117", "13355", "13356", "13357", "13358", "13359", "13360", "13361", "13362", "13363", "13364", "13365", "13366", "13367", "13368", "13369", "13370", "13371", "13372", "13373", "13374", "13375", "13376", "13611", "13612", "13613", "13614", "13615", "13616", "13617", "13618", "13619", "13620", "13621", "13622", "13630", "13631", "13632", "13869", "13870", "13871", "13872", "13873", "13886", "13887", "13888"],
 		"misthalin": ["12082", "12083", "12084", "12085", "12086", "12087", "12337", "12338", "12339", "12340", "12341", "12342", "12343", "12593", "12594", "12595", "12596", "12597", "12598", "12599", "12849", "12850", "12851", "12852", "12853", "12854", "12855", "13106", "13107", "13108", "13109", "13110", "13111", "13364", "13365", "13366", "13367", "13620", "13621", "13622", "8236", "8237", "8238", "8491", "8492", "8493", "8494", "8747", "8748", "8749", "8750", "9003", "9004", "9005", "9006", "9260", "9261", "9262", "14649", "14650", "14651", "14652", "14906", "14907", "14908", "15162", "15163", "15164"],
 		"karamja": ["10801", "10802", "11053", "11054", "11055", "11056", "11057", "11058", "11059", "11309", "11310", "11311", "11312", "11313", "11314", "11315", "11565", "11566", "11567", "11568", "11569", "11821", "11822", "11823", "11825"],
@@ -322176,6 +323345,28 @@
 			"ranged_strength": 0,
 			"slot": "weapon",
 			"requirements": {}
+		},
+		"Hallowfell": {
+			"attack_speed": 6,
+			"attack_crush": 25,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 117,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 110,
+			"prayer": 4,
+			"ranged_strength": 0,
+			"slot": "2h",
+			"formatted_name": "Hallowfell",
+			"requirements": {
+				"Attack": 75
+			}
 		}
 	}
 }
