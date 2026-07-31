@@ -3595,6 +3595,7 @@
   "Dock at ~|Tear of the Soul|~": "t_46914",
   "Dock at ~|Rellekka|~": "t_46915",
   "Dock at ~|Wyrmscraig|~": "t_49934",
+  "Dock at ~|Wyrmscraig Cavern|~": "t_50099",
   "Dock at ~|Wintumber Island|~": "t_46916",
   "Dock at ~|The Crown Jewel|~": "t_46917",
   "Dock at ~|Etceteria|~": "t_46918",
@@ -3655,6 +3656,7 @@
   "Use the mooring point at ~|Tear of the Soul|~": "t_46971",
   "Use the mooring point at ~|Rellekka|~": "t_46972",
   "Use the mooring point at ~|Wyrmscraig|~": "t_49935",
+  "Use the mooring point at ~|Wyrmscraig Cavern|~": "t_50100",
   "Use the mooring point at ~|Wintumber Island|~": "t_46973",
   "Use the mooring point at ~|The Crown Jewel|~": "t_46974",
   "Use the mooring point at ~|Etceteria|~": "t_46975",
@@ -6636,6 +6638,7 @@
   "Help ~|ghost (Bernina)|~ rest in peace": "t_45783",
   "Help unite ~|Fabia|~ with Xilo": "t_45784",
   "Save the ~|Aranei scout|~ from the sanguidae": "t_49725",
+  "Bring a ~|Wyrmscraig goat|~ to Port Sarim": "t_50101",
   "Complete the ~|Natural History Quiz|~": "t_49377",
   "Unlock Colosseum bank access with ~|Glory|~": "t_5692",
   "Unlock Fortis respawn point with ~|Glory|~": "t_5693",
@@ -49717,5 +49720,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 50099
+  "currentNextIndex": 50102
 }

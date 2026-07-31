@@ -11887,7 +11887,6 @@
 				"Items": ["Hammer", "Chisel", "Sunstone*", "GolemFur[+]"],
 				"Objects": ["Empty plinth"],
 				"Level": 60,
-				"Output": "Golem crafting loot",
 				"Tasks": {
 					"~|Fallen From Grace|~ Complete the quest": "Quest"
 				},
@@ -28873,6 +28872,12 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Gole crafting loot": {
+				"Tasks": {
+					"Participate in ~|golem crafting|~": "Crafting"
+				},
+				"Output": "Golem crafting loot"
+			},
 			"Take wooden spikes from the supply": {
 				"Objects": ["Spikes supply"],
 				"Output": "Wooden spikes",
@@ -32186,6 +32191,14 @@
 				"Sections": ["10275-1", "10275-W1"],
 				"Tasks": {
 					"Use the mooring point at ~|Wyrmscraig|~": "Sailing"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"Wyrmscraig Cavern to Wyrmscraig Cavern#Water": {
+				"Sections": ["Wyrmscraig Cavern", "Wyrmscraig Cavern#Water"],
+				"Tasks": {
+					"Use the mooring point at ~|Wyrmscraig Cavern|~": "Sailing"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -54540,6 +54553,16 @@
 				"NoBoost": true,
 				"NoPet": true
 			},
+			"Dock at ~|Wyrmscraig Cavern|~": {
+				"Chunks": ["Wyrmscraig Cavern#Water"],
+				"Level": 62,
+				"Items": ["AnyBoat[+]"],
+				"Object": ["Buoy (Sailing)"],
+				"Primary": false,
+				"Priority": 9,
+				"NoBoost": true,
+				"NoPet": true
+			},
 			"Dock at ~|Wintumber Island|~": {
 				"Chunks": ["8232-W1"],
 				"Level": 63,
@@ -55253,6 +55276,16 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 18,
+				"NoBoost": true,
+				"NoPet": true
+			},
+			"Use the mooring point at ~|Wyrmscraig Cavern|~": {
+				"Chunks": ["MooringWyrmscraigCavern[+]"],
+				"Level": 62,
+				"Items": ["AnyBoat[+]"],
+				"Object": ["MooringPoint[+]"],
+				"Primary": false,
+				"Priority": 19,
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -77190,6 +77223,16 @@
 				"Label": "Permanent Unlockables",
 				"Chunks": ["Vampyrium"],
 				"NPCs": ["Aranei scout"],
+				"Not F2P": true
+			},
+			"Bring a ~|Wyrmscraig goat|~ to Port Sarim": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"Chunks": ["10275-1", "12081-2"],
+				"NPCs": ["Wyrmscraig goat"],
+				"Tasks": {
+					"Catch a ~|wyrmscraig goat|~": "Hunter"
+				},
 				"Not F2P": true
 			},
 			"Complete the ~|Natural History Quiz|~": {
@@ -176093,6 +176136,7 @@
 			"MooringTearoftheSoul[+]": ["9259-W3", "9259-1"],
 			"MooringRellekka[+]": ["10553-W1", "10553-1"],
 			"MooringWyrmscraig[+]": ["10275-W1", "10275-1"],
+			"MooringWyrmscraigCavern[+]": ["Wyrmscraig Cavern#Water", "Wyrmscraig Cavern"],
 			"MooringWintumberIsland[+]": ["8232-W1", "8232-1"],
 			"MooringTheCrownJewel[+]": ["6953-W1", "6953-1"],
 			"MooringEtceteria[+]": ["10299", "10300-1"],
@@ -176335,6 +176379,7 @@
 			"MooringTearoftheSoul[+]": "Either side of the mooring point at Tear of the Soul",
 			"MooringRellekka[+]": "Either side of the mooring point at Rellekka",
 			"MooringWyrmscraig[+]": "Either side of the mooring point at Wyrmscraig",
+			"MooringWyrmscraigCavern": "Either side of the mooring point at Wyrmscraig Cavern",
 			"MooringWintumberIsland[+]": "Either side of the mooring point at Wintumber Island",
 			"MooringTheCrownJewel[+]": "Either side of the mooring point at The Crown Jewel",
 			"MooringEtceteria[+]": "Either side of the mooring point at Etceteria",
@@ -178287,7 +178332,9 @@
 			"Plant cure": true,
 			"Raft": true,
 			"Skiff": true,
-			"Sloop": true
+			"Sloop": true,
+			"Fletching knife": true,
+			"Jeweller's chisel": true
 		},
 		"magicTools": {
 			"Zenyte ring": true,
@@ -227078,23 +227125,6 @@
 				"Rune spear": {
 					"1": "7/10"
 				}
-			},
-			"Golem crafting loot": {
-				"Jeweller's chisel": {
-					"1": "1/315"
-				},
-				"Uncut diamond": {
-					"1": "5/110"
-				},
-				"Uncut emerald": {
-					"1": "24/110"
-				},
-				"Uncut ruby": {
-					"1": "10/110"
-				},
-				"Uncut sapphire": {
-					"1": "71/110"
-				}
 			}
 		},
 		"Farming": {
@@ -237558,6 +237588,23 @@
 				},
 				"Uncut ruby": {
 					"8 (noted)": "Always"
+				}
+			},
+			"Golem crafting loot": {
+				"Jeweller's chisel": {
+					"1": "1/315"
+				},
+				"Uncut diamond": {
+					"1": "5/110"
+				},
+				"Uncut emerald": {
+					"1": "24/110"
+				},
+				"Uncut ruby": {
+					"1": "10/110"
+				},
+				"Uncut sapphire": {
+					"1": "71/110"
 				}
 			}
 		},
