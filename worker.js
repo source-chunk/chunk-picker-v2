@@ -1301,6 +1301,27 @@ let calcChallenges = function(chunks, baseChunkData) {
                             return;
                         }
                     }
+                    if (chunkInfo['challenges'][skill][challenge].hasOwnProperty('SkillsNeededSub')) {
+                        let skillsNeededInvalid = false;
+                        Object.keys(chunkInfo['challenges'][skill][challenge]['SkillsNeededSub']).some(taskSkill => {
+                            if ((!checkPrimaryMethod(taskSkill, newValids, baseChunkData) || (taskSkill === 'Slayer' && (!!slayerLocked && chunkInfo['challenges'][skill][challenge]['SkillsNeededSub'][taskSkill] > slayerLocked['level'])) || (!!maxSkill && maxSkill.hasOwnProperty(taskSkill) && chunkInfo['challenges'][skill][challenge]['SkillsNeededSub'][taskSkill] > maxSkill[taskSkill])) && !(!!passiveSkill && passiveSkill.hasOwnProperty(taskSkill) && passiveSkill[taskSkill] > 1 && chunkInfo['challenges'][skill][challenge]['SkillsNeededSub'][taskSkill] <= passiveSkill[taskSkill])) {
+                                skillsNeededInvalid = true;
+                                return true;
+                            }
+                        });
+                        if (skillsNeededInvalid) {
+                            if (!nonValids.hasOwnProperty(challenge)) {
+                                nonValids[challenge] = [];
+                            }
+                            nonValids[challenge] = [...nonValids[challenge], 'SkillsNeededSub'];
+                            !!newValids[skill] && delete newValids[skill][challenge];
+                            !!valids[skill] && delete valids[skill][challenge];
+                            tasksModified = true;
+                        }
+                        if ((!newValids.hasOwnProperty(skill) || !newValids[skill].hasOwnProperty(challenge)) && (!valids.hasOwnProperty(skill) || !valids[skill].hasOwnProperty(challenge))) {
+                            return;
+                        }
+                    }
                     if ((skill !== 'Extra' || chunkInfo['challenges'][skill][challenge].hasOwnProperty('Requirements')) && savedValids.hasOwnProperty(skill) && savedValids[skill].hasOwnProperty(challenge)) {
                         fullyValid = true;
                         !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach((subTask) => {

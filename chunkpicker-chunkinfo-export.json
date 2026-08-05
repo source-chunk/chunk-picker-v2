@@ -21886,7 +21886,7 @@
 				"Priority": 1
 			},
 			"Mix a ~|super hunter potion|~": {
-				"Items": ["Hunter potion[+]*", "Crab paste*"],
+				"Items": ["Pillar potion (unf)*", "Crab paste*"],
 				"Level": 67,
 				"Output": "Super hunter potion(3)",
 				"Primary": true,
@@ -28426,6 +28426,9 @@
 				"Level": 42,
 				"Objects": ["Volcanic sulphur rock"],
 				"Output": "Volcanic sulphur",
+				"Tasks": {
+					"WearableFacemask[+]": "Nonskill"
+				},
 				"Primary": true,
 				"Not F2P": true
 			},
@@ -28870,6 +28873,17 @@
 			"Kill a runite golem*": {
 				"Monsters": ["Runite Golem"],
 				"Output Object": "Runite rocks",
+				"Not F2P": true
+			},
+			"Wearable facemask": {
+				"Items": ["Facemask"],
+				"SkillsNeededSub": {
+					"Slayer": 10
+				},
+				"Not F2P": true
+			},
+			"Other facemask types": {
+				"Items": ["OtherFacemask[+]"],
 				"Not F2P": true
 			},
 			"Gole crafting loot": {
@@ -66310,6 +66324,12 @@
 				"Items": ["Awakener's orb"],
 				"Not F2P": true
 			},
+			"(The Mad Angel) Obtain ~|aggy|~": {
+				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
+				"Label": "Collection Log",
+				"Items": ["Aggy"],
+				"Not F2P": true
+			},
 			"(The Mad Angel) Obtain ~|hallowfell|~": {
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
@@ -66326,12 +66346,6 @@
 				"Category": ["Collection Log", "Collection Log Bosses"],
 				"Label": "Collection Log",
 				"Items": ["Granite dust"],
-				"Not F2P": true
-			},
-			"(The Mad Angel) Obtain ~|aggy|~": {
-				"Category": ["Collection Log", "Collection Log Bosses", "Pets"],
-				"Label": "Collection Log",
-				"Items": ["Aggy"],
 				"Not F2P": true
 			},
 			"(The Mad Angel) Obtain a ~|jar of light|~": {
@@ -90294,7 +90308,8 @@
 					"Mining": 42
 				},
 				"Tasks": {
-					"~|Kourend and Kebos Diary#Easy|~ Complete the Easy Diary": "Diary"
+					"~|Kourend and Kebos Diary#Easy|~ Complete the Easy Diary": "Diary",
+					"WearableFacemask[+]": "Nonskill"
 				},
 				"BaseQuest": "Kourend and Kebos Diary",
 				"Not F2P": true
@@ -97693,7 +97708,7 @@
 			},
 			"~|Combat Achievements#Master|~ Maggot King Speed Chaser": {
 				"Category": ["Combat Diary Tasks"],
-				"Description": "Kill the Maggot King 5 times in 9 minutes.",
+				"Description": "Complete the first 5 kills of the Maggot King within 9 minutes after entering the arena.",
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 5,
@@ -108412,7 +108427,8 @@
 				"Chunks": ["13102-1"],
 				"Items": ["Facemask[+]"],
 				"Tasks": {
-					"~|Desert Treasure I|~ 6": "Quest"
+					"~|Desert Treasure I|~ 6": "Quest",
+					"WearableFacemask[+]": "Nonskill"
 				},
 				"Not F2P": true
 			},
@@ -135575,7 +135591,10 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"7482": {
-			"Nickname": "Ocean Chunk"
+			"Nickname": "Ocean Chunk",
+			"Object": {
+				"Fishing spot (anglerfish)": 1
+			}
 		},
 		"7483": {
 			"Monster": {
@@ -140805,7 +140824,11 @@
 						"Salvaging station": 1
 					}
 				},
-				"W1": {}
+				"W1": {
+					"Object": {
+						"Fishing spot (Piscatoris Fishing Colony)": 1
+					}
+				}
 			},
 			"Nickname": "Neitiznot Dock"
 		},
@@ -151834,6 +151857,9 @@
 				"W1": {
 					"NPC": {
 						"Selina Kebbit-Monkfish": 1
+					},
+					"Object": {
+						"Fishing spot (cage, harpoon)": 1
 					}
 				}
 			},
@@ -153133,7 +153159,11 @@
 						"medium": 1
 					}
 				},
-				"W1": {},
+				"W1": {
+					"Object": {
+						"Fishing spot (karambwan)": 1
+					}
+				},
 				"W2": {},
 				"W3": {}
 			},
@@ -153195,10 +153225,18 @@
 					}
 				},
 				"2": {},
-				"W1": {},
+				"W1": {
+					"Object": {
+						"Fishing spot (big net, harpoon)": 1
+					}
+				},
 				"W2": {},
 				"W3": {},
-				"W4": {}
+				"W4": {
+					"Object": {
+						"Fishing spot (karambwan)": 1
+					}
+				}
 			},
 			"Nickname": "Musa Point"
 		},
@@ -157351,7 +157389,11 @@
 						"hard": 2
 					}
 				},
-				"W1": {}
+				"W1": {
+					"Object": {
+						"Fishing spot (small net, bait)": 1
+					}
+				}
 			},
 			"Nickname": "Wizards' Tower"
 		},
@@ -176956,6 +176998,7 @@
 			"SailsDye[+]": ["Black dye", "Blue dye", "Green dye", "Orange dye", "Pink dye", "Purple dye", "Red dye", "Yellow dye"],
 			"LegendsJewellery[+]": ["Skills necklace", "Combat bracelet"],
 			"Facemask[+]": ["Facemask", "Gas mask", "Slayer helmet"],
+			"OtherFacemask[+]": ["Gas mask", "Slayer helmet"],
 			"TannableHide[+]": ["Cowhide", "Snake hide", "Snake hide (swamp)", "Green dragonhide", "Blue dragonhide", "Red dragonhide", "Black dragonhide"],
 			"Void helm[+]": ["Void mage helm", "Void ranger helm", "Void melee helm"],
 			"TeamCape[+]": ["Team-1 cape", "Team-2 cape", "Team-3 cape", "Team-4 cape", "Team-5 cape", "Team-6 cape", "Team-7 cape", "Team-8 cape", "Team-9 cape", "Team-10 cape", "Team-11 cape", "Team-12 cape", "Team-13 cape", "Team-14 cape", "Team-15 cape", "Team-16 cape", "Team-17 cape", "Team-18 cape", "Team-19 cape", "Team-20 cape", "Team-21 cape", "Team-22 cape", "Team-23 cape", "Team-24 cape", "Team-25 cape", "Team-26 cape", "Team-27 cape", "Team-28 cape", "Team-29 cape", "Team-30 cape", "Team-31 cape", "Team-32 cape", "Team-33 cape", "Team-34 cape", "Team-35 cape", "Team-36 cape", "Team-37 cape", "Team-38 cape", "Team-39 cape", "Team-40 cape", "Team-41 cape", "Team-42 cape", "Team-43 cape", "Team-44 cape", "Team-45 cape", "Team-46 cape", "Team-47 cape", "Team-48 cape", "Team-49 cape", "Team-50 cape"],
@@ -177980,7 +178023,8 @@
 			"LunarIsleDockAccess[+]": ["Access Lunar Isle Dock by sea", "Access any dock by land"],
 			"WeissDockAccess[+]": ["Access Weiss Dock by sea", "Access any dock by land"],
 			"Desert Diary Easy 4[+]": ["Shantay Pass access", "Unkah boat trip access"],
-			"BountyTasks[+]": ["Albatross beak tasks", "Albatross feather tasks", "Armoured kraken ink sac tasks", "Armoured kraken tentacle tasks", "Bull shark jaw tasks", "Bull shark liver tasks", "Butterfly ray fin tasks", "Butterfly ray skin tasks", "Eagle ray fin tasks", "Eagle ray skin tasks", "Frigatebird beak tasks", "Frigatebird feather tasks", "Great white shark jaw tasks", "Great white shark liver tasks", "Hammerhead shark jaw tasks", "Hammerhead shark liver tasks", "Manta ray skin tasks", "Mogre head tasks", "Mogre mace tasks", "Narwhal blubber tasks", "Narwhal tusk tasks", "Orca blubber tasks", "Orca teeth tasks", "Osprey beak tasks", "Osprey feather tasks", "Pygmy kraken ink sac tasks", "Pygmy kraken tentacle tasks", "Spined kraken ink sac tasks", "Spined kraken tentacle tasks", "Stingray fin tasks", "Stingray skin tasks", "Tern beak tasks", "Tern feather tasks", "Tiger shark jaw tasks", "Tiger shark liver tasks", "Vampyre kraken ink sac tasks", "Vampyre kraken tentacle tasks", "Veiled kraken ink sac tasks", "Veiled kraken tentacle tasks"]
+			"BountyTasks[+]": ["Albatross beak tasks", "Albatross feather tasks", "Armoured kraken ink sac tasks", "Armoured kraken tentacle tasks", "Bull shark jaw tasks", "Bull shark liver tasks", "Butterfly ray fin tasks", "Butterfly ray skin tasks", "Eagle ray fin tasks", "Eagle ray skin tasks", "Frigatebird beak tasks", "Frigatebird feather tasks", "Great white shark jaw tasks", "Great white shark liver tasks", "Hammerhead shark jaw tasks", "Hammerhead shark liver tasks", "Manta ray skin tasks", "Mogre head tasks", "Mogre mace tasks", "Narwhal blubber tasks", "Narwhal tusk tasks", "Orca blubber tasks", "Orca teeth tasks", "Osprey beak tasks", "Osprey feather tasks", "Pygmy kraken ink sac tasks", "Pygmy kraken tentacle tasks", "Spined kraken ink sac tasks", "Spined kraken tentacle tasks", "Stingray fin tasks", "Stingray skin tasks", "Tern beak tasks", "Tern feather tasks", "Tiger shark jaw tasks", "Tiger shark liver tasks", "Vampyre kraken ink sac tasks", "Vampyre kraken tentacle tasks", "Veiled kraken ink sac tasks", "Veiled kraken tentacle tasks"],
+			"WearableFacemask[+]": ["Wearable facemask", "Other facemask types"]
 		},
 		"forceTalisman": {
 			"Nature talisman": {
@@ -220763,23 +220807,6 @@
 			"Enchanted Valley": true,
 			"Pyramid Plunder": true
 		}
-	},
-	"starRegions": {
-		"Asgarnia": ["12085", "12084", "11572", "11574", "11571", "11826"],
-		"Crandor and Karamja": ["11314", "11315", "10802", "10801", "11311", "11310"],
-		"Feldip Hills and the Isle of Souls": ["10542", "10286", "9773", "9772", "10284", "8747"],
-		"Fossil Island and Mos Le'Harmless": ["14907", "15163", "14638"],
-		"Fremennik Lands and Lunar Isle": ["10553", "10809", "10044", "9531", "9531", "8509"],
-		"Great Kourend": ["6966", "6969", "6201", "6972", "5946", "5692"],
-		"Kandarin": ["11061", "10804", "10294", "10290", "10545", "10288"],
-		"Kebos Lowlands": ["5179", "4923", "4665", "4919"],
-		"Kharidian Desert": ["13107", "13363", "13105", "13617", "13613", "13100", "12589"],
-		"Misthalin": ["12849", "12593", "12338", "12596", "13108", "12853"],
-		"Morytania": ["13878", "13618", "13874", "14642", "14388"],
-		"Piscatoris and the Gnome Stronghold": ["9272", "9782", "9781"],
-		"Tirannwn": ["9265", "9009", "9267", "9011", "8501"],
-		"Varlamore": ["5173", "5676", "5936", "6451", "6958", "6960"],
-		"Wilderness": ["12343", "12088", "12346", "12092", "12093", "12349", "12605"]
 	},
 	"mapOverlays": {
 		"Shooting Stars": [
