@@ -9,6 +9,88 @@
 				"Priority": 2,
 				"NoPet": true
 			},
+			"Access the Draynor Manor fence ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["DraynorManorFence[+]"],
+				"Level": 49,
+				"Primary": true,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the Lumbridge cow pen stones to Champions' Guild ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Stepping stone (Champions' Guild south)"],
+				"Level": 52,
+				"Primary": true,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the Giant's Plateau rock scramble ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["13361-1", "13617-2"],
+				"Objects": ["Rocks (Giant's Plateau)"],
+				"Level": 54,
+				"Primary": true,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the pipe within Edgeville Dungeon ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Obstacle pipe (Edgeville Dungeon south)"],
+				"Level": 60,
+				"Primary": true,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the Arceuus Library middle level railing jump ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Railing (Arceuus Library, middle level)"],
+				"Level": 52,
+				"Primary": true,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the Arceuus Library top level railing jump ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Railing (Arceuus Library, top level)"],
+				"Level": 62,
+				"Primary": true,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the Sophanem stepping stones ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Chunks": ["12844", "13100-1"],
+				"Objects": ["Stepping stone (Sophanem)"],
+				"Level": 79,
+				"Primary": true,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the Mos Le'Harmless north stepping stones ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Stepping stone (Mos Le'Harmless north)"],
+				"Level": 82,
+				"Primary": false,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the west Pollnivneach scramble ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Slope (Pollnivneach)"],
+				"Level": 83,
+				"Primary": true,
+				"Priority": 12,
+				"NoPet": true
+			},
+			"Access the west Pollnivneach ditch ~|shortcut|~": {
+				"Category": ["Shortcut"],
+				"Objects": ["Ditch (Pollnivneach)"],
+				"Level": 83,
+				"Primary": true,
+				"Priority": 13,
+				"NoPet": true
+			},
 			"Read an ~|agility tome|~ from Temple Trekking": {
 				"Items": ["Agility tome*"],
 				"Level": 1,
@@ -509,6 +591,14 @@
 				},
 				"NoPet": true
 			},
+			"Access the (mith grapple) Karamja volcano ~|shortcut|~ barehanded": {
+				"Category": ["Shortcut"],
+				"Chunks": ["11313-1", "11312-1"],
+				"Level": 78,
+				"Primary": false,
+				"Priority": 51,
+				"NoPet": true
+			},
 			"Access the (mith grapple) escape from the Water Obelisk Island ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["11317-6"],
@@ -520,6 +610,14 @@
 					"Ranged": 39,
 					"Strength": 22
 				},
+				"NoPet": true
+			},
+			"Access the (mith grapple) escape from the Water Obelisk Island ~|shortcut|~ barehanded": {
+				"Category": ["Shortcut"],
+				"Chunks": ["11317-6"],
+				"Level": 72,
+				"Primary": false,
+				"Priority": 51,
 				"NoPet": true
 			},
 			"Access the (mith grapple) over the River Lum to Al Kharid ~|shortcut|~": {
@@ -534,6 +632,14 @@
 				"Primary": false,
 				"NoPet": true
 			},
+			"Access the (mith grapple) over the River Lum to Al Kharid ~|shortcut|~ barehanded": {
+				"Category": ["Shortcut"],
+				"Objects": ["Broken Raft"],
+				"Level": 48,
+				"Primary": false,
+				"Priority": 51,
+				"NoPet": true
+			},
 			"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["11317-1"],
@@ -545,6 +651,14 @@
 					"Strength": 35
 				},
 				"Priority": 2,
+				"NoPet": true
+			},
+			"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~ barehanded": {
+				"Category": ["Shortcut"],
+				"Chunks": ["11317-1"],
+				"Level": 68,
+				"Primary": false,
+				"Priority": 51,
 				"NoPet": true
 			},
 			"Access the jump down from Falador Wall ~|shortcut|~": {
@@ -566,6 +680,14 @@
 				},
 				"NoPet": true
 			},
+			"Access the (mith grapple) scale Falador Wall ~|shortcut|~ barehanded": {
+				"Category": ["Shortcut"],
+				"Chunks": ["FaladorNorthWall[+]"],
+				"Level": 52,
+				"Primary": false,
+				"Priority": 51,
+				"NoPet": true
+			},
 			"Access the (mith grapple) scale Yanille wall ~|shortcut|~": {
 				"Category": ["Shortcut"],
 				"Chunks": ["10032-1"],
@@ -576,6 +698,14 @@
 					"Ranged": 21,
 					"Strength": 38
 				},
+				"NoPet": true
+			},
+			"Access the (mith grapple) scale Yanille wall ~|shortcut|~ barehanded": {
+				"Category": ["Shortcut"],
+				"Chunks": ["10032-1"],
+				"Level": 69,
+				"Primary": false,
+				"Priority": 51,
 				"NoPet": true
 			},
 			"Access the (mith grapple) scale the Observatory cliff ~|shortcut|~": {
@@ -1443,9 +1573,8 @@
 			},
 			"Access the fifth floor of the ~|Hallowed Sepulchre|~": {
 				"Chunks": ["Hallowed Sepulchre"],
-				"Level": 92,
-				"Primary": true,
-				"NoBoost": true
+				"Level": 87,
+				"Primary": true
 			},
 			"Access the first floor of the ~|Hallowed Sepulchre|~": {
 				"Chunks": ["Hallowed Sepulchre"],
@@ -1456,10 +1585,9 @@
 			},
 			"Access the fourth floor of the ~|Hallowed Sepulchre|~": {
 				"Chunks": ["Hallowed Sepulchre"],
-				"Level": 82,
+				"Level": 77,
 				"Primary": true,
-				"Priority": 2,
-				"NoBoost": true
+				"Priority": 2
 			},
 			"Access the high-level obstacles at the ~|Brimhaven Agility Arena|~": {
 				"Chunks": ["Brimhaven Agility Arena"],
@@ -1655,8 +1783,7 @@
 				"Chunks": ["Hallowed Sepulchre"],
 				"Level": 62,
 				"Primary": true,
-				"Priority": 4,
-				"NoBoost": true
+				"Priority": 4
 			},
 			"Access the squeeze through to God Wars Dungeon surface access ~|shortcut|~": {
 				"Category": ["Shortcut"],
@@ -1693,8 +1820,7 @@
 				"Chunks": ["Hallowed Sepulchre"],
 				"Level": 72,
 				"Primary": true,
-				"Priority": 3,
-				"NoBoost": true
+				"Priority": 3
 			},
 			"Access the ~|Agility Pyramid|~": {
 				"Chunks": ["13356-1"],
@@ -32521,6 +32647,62 @@
 				"ConnectsSections": true,
 				"Not F2P": true
 			},
+			"12340-1 to 12340-3": {
+				"Sections": ["12340-1", "12340-3"],
+				"Tasks": {
+					"Access the Draynor Manor fence ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"12596-1 to 12596-3": {
+				"Sections": ["12596-1", "12596-3"],
+				"Tasks": {
+					"Access the Lumbridge cow pen stones to Champions' Guild ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"13361-1 to 13617-2": {
+				"Sections": ["13361-1", "13617-2"],
+				"Tasks": {
+					"Access the Giant's Plateau rock scramble ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"12844 to 13100-1": {
+				"Sections": ["12844", "13100-1"],
+				"Tasks": {
+					"Access the Sophanem stepping stones ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"15151-1 to 15151-2": {
+				"Sections": ["15151-1", "15151-2"],
+				"Tasks": {
+					"Access the Mos Le'Harmless north stepping stones ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"13358-1 to 13358-3": {
+				"Sections": ["13358-1", "13358-3"],
+				"Tasks": {
+					"Access the west Pollnivneach scramble ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
+			"13358-3 to 13358-4": {
+				"Sections": ["13358-3", "13358-4"],
+				"Tasks": {
+					"Access the west Pollnivneach ditch ~|shortcut|~": "Agility"
+				},
+				"ConnectsSections": true,
+				"Not F2P": true
+			},
 			"10028-1 to 10028-2": {
 				"Sections": ["10028-1", "10028-2"],
 				"Tasks": {
@@ -32729,10 +32911,10 @@
 				"ConnectsSections": true,
 				"Not F2P": true
 			},
-			"11312 to 11313": {
+			"11312-1 to 11313-1": {
 				"Sections": ["11313-1", "11312-1"],
 				"Tasks": {
-					"Access the (mith grapple) Karamja volcano ~|shortcut|~": "Agility"
+					"Access the (mith grapple) Karamja volcano ~|shortcut|~[+]": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -32740,7 +32922,7 @@
 			"11317-6 to 11317-1": {
 				"Sections": ["11317-1", "11317-6"],
 				"Tasks": {
-					"Access the (mith grapple) escape from the Water Obelisk Island ~|shortcut|~": "Agility"
+					"Access the (mith grapple) escape from the Water Obelisk Island ~|shortcut|~[+]": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -32748,7 +32930,7 @@
 			"12849-1 to 12849-2": {
 				"Sections": ["12849-1", "12849-2"],
 				"Tasks": {
-					"Access the (mith grapple) over the River Lum to Al Kharid ~|shortcut|~": "Agility"
+					"Access the (mith grapple) over the River Lum to Al Kharid ~|shortcut|~[+]": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -32756,7 +32938,7 @@
 			"11317-1 to 11317-2": {
 				"Sections": ["11317-1", "11317-2"],
 				"Tasks": {
-					"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~": "Agility"
+					"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~[+]": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -32772,7 +32954,7 @@
 			"12084-3 to 12084-1": {
 				"Sections": ["12084-1", "12084-3"],
 				"Tasks": {
-					"Access the (mith grapple) scale Falador Wall ~|shortcut|~": "Agility"
+					"Access the (mith grapple) scale Falador Wall ~|shortcut|~[+]": "Agility"
 				},
 				"ConnectsSections": true,
 				"Not F2P": true
@@ -32841,7 +33023,7 @@
 				"ConnectsSections": true,
 				"Not F2P": true
 			},
-			"9782 to 9783": {
+			"9782 to 9783-1": {
 				"Sections": ["9782", "9783-1"],
 				"Tasks": {
 					"Access the Gnome Stronghold ~|shortcut|~": "Agility"
@@ -62235,6 +62417,12 @@
 				"Primary": true,
 				"NoPet": true
 			},
+			"Steal from the ~|Grand Hallowed Coffin|~": {
+				"Objects": ["Grand Hallowed Coffin"],
+				"Level": 84,
+				"Primary": true,
+				"NoPet": true
+			},
 			"Steal from a ~|counter (Gu'Tanoth)|~": {
 				"Objects": ["Counter (Gu'Tanoth)"],
 				"Level": 15,
@@ -72764,10 +72952,10 @@
 				"Items": ["Maggot marquess"],
 				"Not F2P": true
 			},
-			"(All Pets) Obtain ~|mr mcgroot|~": {
+			"(All Pets) Obtain ~|Mr McGroot|~": {
 				"Category": ["Collection Log", "Collection Log Other", "Pets"],
 				"Label": "Collection Log",
-				"Items": ["Mr mcgroot"],
+				"Items": ["Mr McGroot"],
 				"Not F2P": true
 			},
 			"(All Pets) Obtain ~|aggy|~": {
@@ -74505,12 +74693,6 @@
 				"Items": ["Rift guardian"],
 				"Not F2P": true
 			},
-			"(Skilling Pets) Obtain ~|mr mcgroot|~": {
-				"Category": ["Collection Log", "Collection Log Other", "Pets"],
-				"Label": "Collection Log",
-				"Items": ["Mr mcgroot"],
-				"Not F2P": true
-			},
 			"(Skilling Pets) Obtain a ~|soup|~": {
 				"Category": ["Collection Log", "Collection Log Other", "Pets"],
 				"Label": "Collection Log",
@@ -75901,6 +76083,12 @@
 				"Category": ["Untracked Uniques"],
 				"Label": "Untracked Uniques",
 				"Items": ["Maggot egg (writhing)"],
+				"Not F2P": true
+			},
+			"Obtain a ~|vampyre snelm|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"Items": ["Vampyre snelm"],
 				"Not F2P": true
 			},
 			"Obtain a ~|big bass|~": {
@@ -97706,14 +97894,6 @@
 				"CombatPoints": 5,
 				"Monsters": ["Maggot King"]
 			},
-			"~|Combat Achievements#Master|~ Maggot King Speed Chaser": {
-				"Category": ["Combat Diary Tasks"],
-				"Description": "Complete the first 5 kills of the Maggot King within 9 minutes after entering the arena.",
-				"BaseQuest": "Combat Achievements",
-				"Not F2P": true,
-				"CombatPoints": 5,
-				"Monsters": ["Maggot King"]
-			},
 			"~|Combat Achievements#Master|~ Perfect Maggot King": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Maggot King without taking any avoidable damage or him ever being healed.",
@@ -98467,7 +98647,7 @@
 					"Any": 35000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1945,
+				"CombatPointsNeeded": 1940,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -98963,6 +99143,14 @@
 				"Not F2P": true,
 				"CombatPoints": 6,
 				"Monsters": ["The Leviathan"]
+			},
+			"~|Combat Achievements#Grandmaster|~ Maggot King Speed Chaser": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Complete the first 5 kills of the Maggot King within 9 minutes after entering the arena.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 6,
+				"Monsters": ["Maggot King"]
 			},
 			"~|Combat Achievements#Grandmaster|~ Nex Duo": {
 				"Category": ["Combat Diary Tasks"],
@@ -132092,6 +132280,8 @@
 					"Object": {
 						"Bookshelf": 554,
 						"Impling spawn#all-tier": 1,
+						"Railing (Arceuus Library, middle level)": 1,
+						"Railing (Arceuus Library, top level)": 1,
 						"STASH (medium)": 1,
 						"Stairs": 20
 					},
@@ -158992,6 +159182,7 @@
 						"Shooting star#landing site": 1,
 						"Silver rocks": 3,
 						"Stepping stone": 2,
+						"Stepping stone (Champions' Guild south)": 1,
 						"Tin rocks": 8,
 						"Tree": 27
 					},
@@ -159036,6 +159227,7 @@
 						"Farmer": 2
 					},
 					"Object": {
+						"Stepping stone (Champions' Guild south)": 1,
 						"Tree": 8
 					},
 					"Clue": {
@@ -161814,7 +162006,8 @@
 						"Fire": 1,
 						"Gold rocks": 5,
 						"Kharidian cactus (Healthy)": 2,
-						"Shooting star#landing site": 1
+						"Shooting star#landing site": 1,
+						"Stepping stone (Sophanem)": 2
 					},
 					"Quest": {
 						"Icthlarin's Little Helper": "first"
@@ -163451,6 +163644,7 @@
 						"Market stall": 1,
 						"Monkeybars": 1,
 						"Portal": 1,
+						"Slope (Pollnivneach)": 1,
 						"Stepping stone (Pollnivneach)": 1,
 						"Study desk": 1,
 						"Tree (Pollnivneach Rooftop Course)": 2,
@@ -163475,6 +163669,17 @@
 				"2": {
 					"Object": {
 						"Stepping stone (Pollnivneach)": 1
+					}
+				},
+				"3": {
+					"Object": {
+						"Ditch (Pollnivneach)": 1,
+						"Slope (Pollnivneach)": 1
+					}
+				},
+				"4": {
+					"Object": {
+						"Ditch (Pollnivneach)": 1
 					}
 				}
 			},
@@ -164432,6 +164637,7 @@
 						"Cave": 1,
 						"Clay rocks": 10,
 						"Kharidian cactus (Healthy)": 3,
+						"Rocks (Giant's Plateau)": 2,
 						"Shooting star#landing site": 1
 					},
 					"Quest": {
@@ -167738,7 +167944,8 @@
 						"San Fan": 1
 					},
 					"Object": {
-						"Deposit Box": 1
+						"Deposit Box": 1,
+						"Stepping stone (Mos Le'Harmless north)": 1
 					},
 					"Shop": {
 						"Honest Jimmy's House of Stuff.": true
@@ -167759,6 +167966,7 @@
 					},
 					"Object": {
 						"Mahogany tree": 1,
+						"Stepping stone (Mos Le'Harmless north)": 1,
 						"Teak tree": 1
 					},
 					"Spawn": {
@@ -170909,6 +171117,7 @@
 				"Broken bridge": 6,
 				"Coffin (Hallowed Sepulchre)": 8,
 				"Fire": 260,
+				"Grand Hallowed Coffin": 1,
 				"Magical Obelisk": 19,
 				"Noticeboard": 2,
 				"Open chest": 3,
@@ -174781,6 +174990,7 @@
 				"Maggot King": 1,
 				"Sanguidae": 13,
 				"Ur-maggot larvae": 1,
+				"Vampyre Snail": 1,
 				"Venator": 18
 			},
 			"NPC": {
@@ -174978,6 +175188,7 @@
 				"Iron rocks": 3,
 				"Mithril rocks": 1,
 				"Obstacle pipe (Edgeville Dungeon)": 1,
+				"Obstacle pipe (Edgeville Dungeon south)": 2,
 				"Open chest": 2,
 				"Rock Pile": 1,
 				"Rocks": 4,
@@ -176216,7 +176427,8 @@
 			"7477[+]": ["7477-1", "7477-W1"],
 			"8495[+]": ["8495-1", "8495-W3"],
 			"7723[+]": ["7723-1", "7723-W1"],
-			"10533[+]": ["10533-1", "10533-W1"]
+			"10533[+]": ["10533-1", "10533-W1"],
+			"DraynorManorFence[+]": ["12340-1", "12340-3"]
 		},
 		"chunksPlusNames": {
 			"10Coin[+]": "Any chunk with a 10-coin chest",
@@ -176450,7 +176662,8 @@
 			"IcySeas[+]": "Any chunk with icy seas",
 			"BlastFurnaceOrFoundry[+]": "Either the Blast Furnace or the Giants' Foundry",
 			"12848[+]": "Any section of chunk 12848",
-			"12849[+]": "Any section of chunk 12849"
+			"12849[+]": "Any section of chunk 12849",
+			"DraynorManorFence[+]": "Either side of the Draynor Manor broken fence"
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {
@@ -178024,7 +178237,12 @@
 			"WeissDockAccess[+]": ["Access Weiss Dock by sea", "Access any dock by land"],
 			"Desert Diary Easy 4[+]": ["Shantay Pass access", "Unkah boat trip access"],
 			"BountyTasks[+]": ["Albatross beak tasks", "Albatross feather tasks", "Armoured kraken ink sac tasks", "Armoured kraken tentacle tasks", "Bull shark jaw tasks", "Bull shark liver tasks", "Butterfly ray fin tasks", "Butterfly ray skin tasks", "Eagle ray fin tasks", "Eagle ray skin tasks", "Frigatebird beak tasks", "Frigatebird feather tasks", "Great white shark jaw tasks", "Great white shark liver tasks", "Hammerhead shark jaw tasks", "Hammerhead shark liver tasks", "Manta ray skin tasks", "Mogre head tasks", "Mogre mace tasks", "Narwhal blubber tasks", "Narwhal tusk tasks", "Orca blubber tasks", "Orca teeth tasks", "Osprey beak tasks", "Osprey feather tasks", "Pygmy kraken ink sac tasks", "Pygmy kraken tentacle tasks", "Spined kraken ink sac tasks", "Spined kraken tentacle tasks", "Stingray fin tasks", "Stingray skin tasks", "Tern beak tasks", "Tern feather tasks", "Tiger shark jaw tasks", "Tiger shark liver tasks", "Vampyre kraken ink sac tasks", "Vampyre kraken tentacle tasks", "Veiled kraken ink sac tasks", "Veiled kraken tentacle tasks"],
-			"WearableFacemask[+]": ["Wearable facemask", "Other facemask types"]
+			"WearableFacemask[+]": ["Wearable facemask", "Other facemask types"],
+			"Access the (mith grapple) Karamja volcano ~|shortcut|~[+]": ["Access the (mith grapple) Karamja volcano ~|shortcut|~", "Access the (mith grapple) Karamja volcano ~|shortcut|~ barehanded"],
+			"Access the (mith grapple) escape from the Water Obelisk Island ~|shortcut|~[+]": ["Access the (mith grapple) escape from the Water Obelisk Island ~|shortcut|~", "Access the (mith grapple) escape from the Water Obelisk Island ~|shortcut|~ barehanded"],
+			"Access the (mith grapple) over the River Lum to Al Kharid ~|shortcut|~[+]": ["Access the (mith grapple) over the River Lum to Al Kharid ~|shortcut|~", "Access the (mith grapple) over the River Lum to Al Kharid ~|shortcut|~ barehanded"],
+			"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~[+]": ["Access the (mith grapple) scale Catherby cliffside ~|shortcut|~", "Access the (mith grapple) scale Catherby cliffside ~|shortcut|~ barehanded"],
+			"Access the (mith grapple) scale Falador Wall ~|shortcut|~[+]": ["Access the (mith grapple) scale Falador Wall ~|shortcut|~", "Access the (mith grapple) scale Falador Wall ~|shortcut|~ barehanded"]
 		},
 		"forceTalisman": {
 			"Nature talisman": {
@@ -181779,16 +181997,16 @@
 				"1": "1/256"
 			},
 			"Small pouch": {
-				"1": "1/42"
+				"1": "1/8"
 			},
 			"Medium pouch": {
-				"1": "1/42"
+				"1": "1/8"
 			},
 			"Large pouch": {
-				"1": "1/42"
+				"1": "1/8"
 			},
 			"Giant pouch": {
-				"1": "1/42"
+				"1": "1/8"
 			},
 			"Pure essence": {
 				"1": "34/256",
@@ -181899,16 +182117,16 @@
 				"1": "1/256"
 			},
 			"Small pouch": {
-				"1": "1/42"
+				"1": "1/5"
 			},
 			"Medium pouch": {
-				"1": "1/42"
+				"1": "1/5"
 			},
 			"Large pouch": {
-				"1": "1/42"
+				"1": "1/5"
 			},
 			"Giant pouch": {
-				"1": "1/42"
+				"1": "1/5"
 			},
 			"Pure essence": {
 				"1": "34/256",
@@ -201756,94 +201974,94 @@
 		},
 		"Mad Angel": {
 			"Adamant longsword": {
-				"1": "6/156"
+				"1": "6/150"
 			},
 			"Aggy": {
-				"1": "Very rare"
+				"1": "1/2000"
 			},
 			"Air rune": {
-				"110-120": "4/156"
+				"110-120": "4/150"
 			},
 			"Ardeaglais teleport": {
-				"2": "7/156"
+				"2": "1/25"
 			},
 			"Coins": {
-				"8000-10000": "8/156"
+				"8000-10000": "8/150"
 			},
 			"Cupronickel bar": {
-				"1": "1/156"
+				"1": "1/150"
 			},
 			"Death rune": {
-				"40-50": "8/156"
+				"40-50": "8/150"
 			},
 			"Dragon battleaxe": {
-				"1": "2/156"
+				"1": "2/150"
 			},
 			"Dragon med helm": {
-				"1": "2/156"
+				"1": "2/150"
 			},
 			"Emerald": {
-				"7-8 (noted)": "6/156"
+				"7-8 (noted)": "6/150"
 			},
 			"Granite dust": {
 				"25-35": "Always"
 			},
 			"Hallowfell": {
-				"1": "7/896"
+				"1": "1/127"
 			},
 			"Jar of light": {
-				"1": "1/896"
+				"1": "1/1000"
 			},
 			"Law rune": {
-				"28-30": "12/156"
+				"28-30": "12/150"
 			},
 			"Nature rune": {
-				"20-25": "8/156"
+				"20-25": "8/150"
 			},
 			"Papyrus": {
-				"1": "1/156"
+				"1": "1/150"
 			},
 			"Prayer potion(2)": {
-				"1": "1/10"
+				"1": "16/150"
 			},
 			"Prayer potion(4)": {
-				"1": "12/156"
+				"1": "12/150"
 			},
 			"Raw monkfish": {
-				"18-22 (noted)": "8/156"
+				"18-22 (noted)": "8/150"
 			},
 			"Rune full helm": {
-				"1": "12/156"
+				"1": "12/150"
 			},
 			"Rune kiteshield": {
-				"1": "12/156"
+				"1": "12/150"
 			},
 			"Sapphire": {
-				"7-8 (noted)": "6/156"
+				"7-8 (noted)": "6/150"
 			},
 			"Shark": {
-				"2": "8/156"
+				"2": "8/150"
 			},
 			"Steel cannonball": {
-				"90-100": "16/156"
+				"90-100": "16/150"
 			},
 			"Sunstone crystal": {
 				"1": "Always"
 			},
 			"Super combat potion(1)": {
-				"1": "1/10"
+				"1": "16/150"
 			},
 			"Super combat potion(3)": {
-				"2-3 (noted)": "8/156"
+				"2-3 (noted)": "8/150"
 			},
 			"Yellowfin": {
-				"2": "8/156"
+				"2": "8/150"
 			},
 			"RareDropTable+": {
-				"1": "2/156"
+				"1": "2/150"
 			},
-			"Clue scroll (hard)": {
-				"1": "1/24"
+			"Clue scroll (medium)": {
+				"1": "1/25"
 			}
 		},
 		"Maggot King": {
@@ -215461,6 +215679,11 @@
 			},
 			"Clue scroll (elite)": {
 				"1": "1/150"
+			}
+		},
+		"Vampyre Snail": {
+			"Vampyre snelm": {
+				"1": "Unknown"
 			}
 		},
 		"Vanguard": {
@@ -229751,8 +229974,8 @@
 				"Goat horn": {
 					"1": "3/4"
 				},
-				"Mr mcgroot": {
-					"1": "Very rare"
+				"Mr McGroot": {
+					"1": "1/40000"
 				},
 				"Wyrmscraig goat fur": {
 					"1": "1/4"
@@ -231831,19 +232054,19 @@
 					"1": "1/33"
 				},
 				"Ancestral hat": {
-					"1": "10.5/6900"
+					"1": "14/6000"
 				},
 				"Ancestral robe bottom": {
-					"1": "10.5/6900"
+					"1": "14/6000"
 				},
 				"Ancestral robe top": {
-					"1": "10.5/6900"
+					"1": "14/6000"
 				},
 				"Ancient tablet": {
 					"1": "1/10"
 				},
 				"Arcane prayer scroll": {
-					"1": "70/6900"
+					"1": "49/6000"
 				},
 				"Blood rune": {
 					"1": "1/33"
@@ -231864,25 +232087,25 @@
 					"1": "1/33"
 				},
 				"Dexterous prayer scroll": {
-					"1": "70/6900"
+					"1": "49/6000"
 				},
 				"Dinh's bulwark": {
-					"1": "10.5/6900"
+					"1": "10.5/6000"
 				},
 				"Dragon arrow": {
 					"1": "1/33"
 				},
 				"Dragon claws": {
-					"1": "10.5/6900"
+					"1": "10.5/6000"
 				},
 				"Dragon hunter crossbow": {
-					"1": "14/6900"
+					"1": "14/6000"
 				},
 				"Dynamite": {
 					"1": "1/33"
 				},
 				"Elder maul": {
-					"1": "7/6900"
+					"1": "7/6000"
 				},
 				"Gold ore": {
 					"1": "1/33"
@@ -231918,7 +232141,7 @@
 					"1": "1/33"
 				},
 				"Kodai insignia": {
-					"1": "7/6900"
+					"1": "7/6000"
 				},
 				"Lizardman fang": {
 					"1": "1/33"
@@ -231963,10 +232186,10 @@
 					"1": "1/75"
 				},
 				"Twisted bow": {
-					"1": "7/6900"
+					"1": "7/6000"
 				},
 				"Twisted buckler": {
-					"1": "14/6900"
+					"1": "14/6000"
 				},
 				"Uncut diamond": {
 					"1": "1/33"
@@ -237619,7 +237842,7 @@
 			},
 			"Golem crafting loot": {
 				"Jeweller's chisel": {
-					"1": "1/315"
+					"1": "1/300"
 				},
 				"Uncut diamond": {
 					"1": "5/110"
@@ -253677,7 +253900,7 @@
 			"Blamish oil^Zoja": [{
 				"~|Heroes' Quest|~ Complete the quest": "Quest"
 			}],
-			"Fox^Copper's crimson collar": [{
+			"Copper's crimson collar^": [{
 				"Help Veos look for his pet wolf": "Nonskill"
 			}],
 			"Larran's key^Artio": [{
@@ -253994,6 +254217,15 @@
 			}],
 			"Grimy lantadyme^Ancient Zygomite": [{
 				"Stalker Den drops": "Nonskill"
+			}],
+			"Adamant hasta^Brutal blue dragon": [{
+				"~|Barbarian Training|~ 2c5a4": "Quest"
+			}],
+			"Rune hasta^Brutal red dragon": [{
+				"~|Barbarian Training|~ 2c5a4": "Quest"
+			}],
+			"Rune hasta^Brutal black dragon": [{
+				"~|Barbarian Training|~ 2c5a4": "Quest"
 			}]
 		},
 		"Monsters": {
@@ -273702,7 +273934,8 @@
 				"13101"
 			],
 			"2": [
-				"12846-1"
+				"12846-1",
+				"13358-4"
 			],
 			"3": [
 				"12846-2",
@@ -274030,6 +274263,12 @@
 				"13357-1",
 				"13359-3",
 				"13614"
+			],
+			"3": [
+				"???"
+			],
+			"4": [
+				"13102-2"
 			]
 		},
 		"13359": {
@@ -323441,6 +323680,25 @@
 			"requirements": {
 				"Attack": 75
 			}
+		},
+		"Vampyre snelm": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -3,
+			"attack_ranged": -1,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 6,
+			"defence_magic": -1,
+			"defence_ranged": 7,
+			"defence_slash": 8,
+			"defence_stab": 7,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "head",
+			"requirements": {}
 		}
 	}
 }

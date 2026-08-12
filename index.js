@@ -1538,7 +1538,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.63';
+let currentVersion = '6.9.64';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'unconnected-areas';
@@ -1660,6 +1660,7 @@ let searchDetailSortBy = 'Alphabetical';
 let searchDetailsParams = [];
 let recentFancyRollTimeout;
 let recentFancyRollTime = 0;
+let createdPOF = undefined;
 let mapsData = [];
 let searchActiveTasksFocused = false;
 let removeCanvasDarkness = false;
@@ -1710,7 +1711,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.63";
+mapImg.src = "osrs_world_map.png?v=6.9.64";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3638,7 +3639,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.63");
+        myWorker = new Worker("./worker.js?v=6.9.64");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -3999,8 +4000,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.63");
-let myWorker2 = new Worker("./worker.js?v=6.9.63");
+let myWorker = new Worker("./worker.js?v=6.9.64");
+let myWorker2 = new Worker("./worker.js?v=6.9.64");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -7174,7 +7175,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.63");
+    myWorker2 = new Worker("./worker.js?v=6.9.64");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -9553,8 +9554,8 @@ let openHighest2 = function(notScrollTop) {
         }
         combatStyles.push('Quests');
         combatStyles.push('Diaries');
+        combatStyles.push('Slayer');
         if (rules['Show Skill Tasks']) {
-            combatStyles.push('Slayer');
             combatStyles.push('Construction');
         }
         combatStyles.push('Clues');
@@ -13375,6 +13376,11 @@ let loadData = async function(startup) {
             loadData();
         }
     });
+    myRef.child('createdPOF').once('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'createdPOF');
+        if (snapDiff === false) return;
+        createdPOF = !!snap.val() ? snap.val() : false;
+    });
     myRef.child('pluginOutput').once('value', function(snap) {
         let snapDiff = preloadHelper(snap, 'pluginOutput');
         if (snapDiff === false) return;
@@ -13719,11 +13725,13 @@ let createPluginOutput = function() {
             pluginOutput.push(rowObj);
         }
     });
-    if ((diff([...listOfTasksSaved].sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0]), [...listOfTasksPlugin].sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0])) || forceUpdatePluginOutput) && firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.uid) {
+    if ((diff([...listOfTasksSaved].sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0]), [...listOfTasksPlugin].sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0])) || forceUpdatePluginOutput || (createdPOF === false)) && firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.uid) {
         listOfTasksSaved = JSON.parse(JSON.stringify(listOfTasksPlugin));
         forceUpdatePluginOutput = false;
         const userRef = firebase.storage().ref(`pluginOutputs/${firebase.auth().currentUser.uid}.json`);
         userRef.putString(JSON.stringify(pluginOutput), 'raw', { contentType: 'application/json' });
+        createdPOF = true;
+        setData(true);
     }
 }
 
@@ -13749,11 +13757,11 @@ let convertToIds = function(obj) {
 }
 
 // Stores data in Firebase
-let setData = function() {
+let setData = function(skipCreatePluginOutput) {
     if (onTestServer || testMode || recentlyTestMode || !signedIn) {
         return;
     }
-    settings['generatePluginData'] && createPluginOutput();
+    settings['generatePluginData'] && !skipCreatePluginOutput && createPluginOutput();
     Object.keys(rules).forEach((rule) => {
         if (rules[rule] === undefined) {
             rules[rule] = false;
@@ -13869,6 +13877,7 @@ let setData = function() {
             painted
         },
         activeSubTabs,
+        createdPOF,
     };
     let databaseObject = JSON.parse(JSON.stringify(setSnap));
     delete databaseObject['chunkOrder'];
