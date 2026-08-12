@@ -38433,9 +38433,10 @@
 				"Output": "Hallowed sack loot",
 				"Not F2P": true
 			},
-			"Trade in stardust*": {
+			"~|Dusuri's Star Shop|~*": {
 				"NPCs": ["Dusuri"],
 				"Items": ["Stardust*"],
+				"Source": "shop",
 				"Output": "Stardust loot",
 				"Not F2P": true
 			},

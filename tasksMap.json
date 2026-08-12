@@ -49622,6 +49622,10 @@
   "Ali's Discount Wares.#Clothing: ~|Menaphite red kilt|~": "t_45321",
   "Ali's Discount Wares.#Clothing: ~|Menaphite red robe|~": "t_45322",
   "Ali's Discount Wares.#Clothing: ~|Menaphite red top|~": "t_45323",
+  "Dusuri's Star Shop: ~|Celestial ring|~": "t_50132",
+  "Dusuri's Star Shop: ~|Star fragment|~": "t_50133",
+  "Dusuri's Star Shop: ~|Bag full of gems|~": "t_50134",
+  "Dusuri's Star Shop: ~|Soft clay pack|~": "t_50135",
   "Pizazz points: ~|Infinity gloves|~": "t_45324",
   "Pizazz points: ~|Infinity hat|~": "t_45325",
   "Pizazz points: ~|Infinity top|~": "t_45326",
@@ -49740,5 +49744,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 50132
+  "currentNextIndex": 50136
 }
