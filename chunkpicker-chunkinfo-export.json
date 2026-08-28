@@ -642,7 +642,7 @@
 			},
 			"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["11317-1"],
+				"Chunks": ["CatherbyCliffside[+]"],
 				"Items": ["Crossbow[+]", "Mith grapple"],
 				"Level": 32,
 				"Primary": false,
@@ -655,7 +655,7 @@
 			},
 			"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~ barehanded": {
 				"Category": ["Shortcut"],
-				"Chunks": ["11317-1"],
+				"Chunks": ["CatherbyCliffside[+]"],
 				"Level": 68,
 				"Primary": false,
 				"Priority": 51,
@@ -19431,7 +19431,7 @@
 			"Catch a ~|raw lobster|~": {
 				"Items": ["Lobster pot"],
 				"Level": 40,
-				"Objects": ["Fishing spot (cage, harpoon)"],
+				"Objects": ["Fishing spot (cage, harpoon)[+]"],
 				"Output": "Raw lobster",
 				"Primary": true,
 				"Priority": 1
@@ -19652,7 +19652,7 @@
 			"Catch a ~|raw swordfish|~": {
 				"Items": ["Harpoon[+]"],
 				"Level": 50,
-				"Objects": ["Fishing spot (cage, harpoon)"],
+				"Objects": ["Fishing spot (cage, harpoon)[+]"],
 				"Output": "Raw swordfish loot",
 				"Primary": true,
 				"Priority": 1
@@ -19676,7 +19676,7 @@
 			"Catch a ~|raw tuna|~": {
 				"Items": ["Harpoon[+]"],
 				"Level": 35,
-				"Objects": ["Fishing spot (cage, harpoon)"],
+				"Objects": ["Fishing spot (cage, harpoon)[+]"],
 				"Output": "Raw tuna",
 				"Primary": true,
 				"Priority": 1
@@ -29012,7 +29012,7 @@
 				"Items": ["OtherFacemask[+]"],
 				"Not F2P": true
 			},
-			"Gole crafting loot": {
+			"Golem crafting loot": {
 				"Tasks": {
 					"Participate in ~|golem crafting|~": "Crafting"
 				},
@@ -29409,8 +29409,7 @@
 				"Monsters": ["Narwhal"],
 				"Tasks": {
 					"Narwhal tusk tasks[+]": "Sailing"
-				},
-				"ClueId": "2858"
+				}
 			},
 			"Orca blubber tasks": {
 				"Monsters": ["Orca"],
@@ -29735,11 +29734,35 @@
 				"Output": "Purifying sigil (middle)",
 				"Not F2P": true
 			},
+			"Tiny port reward bag loot*": {
+				"Items": ["Tiny port reward bag*"],
+				"Output": "Tiny port reward bag loot",
+				"Not F2P": true
+			},
+			"Small port reward bag loot*": {
+				"Items": ["Small port reward bag*"],
+				"Output": "Small port reward bag loot",
+				"Not F2P": true
+			},
+			"Medium port reward bag loot*": {
+				"Items": ["Medium port reward bag*"],
+				"Output": "Medium port reward bag loot",
+				"Not F2P": true
+			},
+			"Large port reward bag loot*": {
+				"Items": ["Large port reward bag*"],
+				"Output": "Large port reward bag loot",
+				"Not F2P": true
+			},
+			"Huge port reward bag loot*": {
+				"Items": ["Huge port reward bag*"],
+				"Output": "Huge port reward bag loot",
+				"Not F2P": true
+			},
 			"Forgotten lockbox loot*": {
 				"Items": ["Forgotten lockbox*"],
 				"Output": "Forgotten lockbox loot",
-				"Not F2P": true,
-				"ClueId": "23140"
+				"Not F2P": true
 			},
 			"Dossier loot*": {
 				"Items": ["Dossier*"],
@@ -30078,8 +30101,7 @@
 			"Grab a spade from the ground in Fortis park*": {
 				"Chunks": ["6960-1"],
 				"Output": "Spade",
-				"Not F2P": true,
-				"ClueId": "3613"
+				"Not F2P": true
 			},
 			"Grab a bronze axe from the stump west of The Summer Shore*": {
 				"Chunks": ["12325-1"],
@@ -30138,8 +30160,7 @@
 				"Tasks": {
 					"~|The Dig Site|~ Complete the quest": "Quest"
 				},
-				"Output": "Leather gloves",
-				"ClueId": "19793"
+				"Output": "Leather gloves"
 			},
 			"Grab leather boots from the tool rack in the Varrock Museum*": {
 				"Chunks": ["12853-1"],
@@ -32399,8 +32420,8 @@
 				"ConnectsSections": true,
 				"Not F2P": true
 			},
-			"9275-1 to 9275-W1": {
-				"Sections": ["9275-1", "9275-W1"],
+			"9275-1 to 9275-W3": {
+				"Sections": ["9275-1", "9275-W3"],
 				"Tasks": {
 					"Use the mooring point at ~|Neitiznot|~": "Sailing"
 				},
@@ -34349,6 +34370,9 @@
 			"Port Roberts drops": {
 				"Chunks": ["7475-1"]
 			},
+			"Non-f2p swordfish spot": {
+				"Objects": ["Fishing spot (cage, harpoon)"]
+			},
 			"Warriors' Guild drops": {
 				"Chunks": ["11319-1"],
 				"Tasks": {
@@ -36193,8 +36217,7 @@
 					"~|What Lies Below|~ Complete the quest": "Quest"
 				},
 				"Kudos": 5,
-				"Not F2P": true,
-				"ClueId": "2847"
+				"Not F2P": true
 			},
 			"Curse of the Empty Lord kudos": {
 				"Chunks": ["13109-5"],
@@ -38003,6 +38026,10 @@
 			"Chaos rune pack": {
 				"Items": ["Chaos rune pack*"],
 				"Output": "Chaos rune"
+			},
+			"Shark lure pack": {
+				"Items": ["Shark lure pack*"],
+				"Output": "Shark lure"
 			},
 			"Chest Barrows loot*": {
 				"Category": ["Boss"],
@@ -40410,12 +40437,13 @@
 				"Not F2P": true,
 				"ClueId": "23160"
 			},
-			"Cecilia: One the Shore": {
+			"Cecilia: On the Shore": {
 				"Chunks": ["OntheShore[+]"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "easy",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23159"
 			},
 			"Cecilia: Rugged Terrain": {
 				"Chunks": ["5943"],
@@ -40486,7 +40514,8 @@
 				"NPCs": ["Cecilia"],
 				"ClueTier": "medium",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23140"
 			},
 			"Cecilia: Karamja Jam": {
 				"Chunks": ["Brimhaven Dungeon"],
@@ -40576,14 +40605,16 @@
 				"NPCs": ["Cecilia"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23174"
 			},
 			"Cecilia: Subterranea (hard)": {
 				"Chunks": ["Subterranea[+]"],
 				"NPCs": ["Cecilia"],
 				"ClueTier": "hard",
 				"ClueType": "Cecilia",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "23176"
 			},
 			"Cecilia: Lament for the Hallowed": {
 				"Chunks": ["14641"],
@@ -40875,7 +40906,8 @@
 				"NPCs": ["Regath"],
 				"ClueTier": "elite",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19793"
 			},
 			"Tamed Rocks": {
 				"NPCs": ["Dockmaster"],
@@ -41520,7 +41552,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7292"
 			},
 			"South-east of the Lighthouse.": {
 				"Chunks": ["10296-1"],
@@ -41770,7 +41803,8 @@
 				"Chunks": ["11319-1"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3613"
 			},
 			"Ghommal wishes to be impressed by how strong your equipment is.": {
 				"NPCs": ["Ghommal"],
@@ -42781,13 +42815,6 @@
 				"Not F2P": true,
 				"ClueId": "10186"
 			},
-			"The treasure is buried in a small building full of bones. Here is a hint: it's not near a graveyard.": {
-				"Chunks": ["13366"],
-				"ClueTier": "medium",
-				"ClueType": "Cryptic",
-				"Items": ["Spade"],
-				"Not F2P": true
-			},
 			"Speak to Ulizius.": {
 				"NPCs": ["Ulizius"],
 				"ClueTier": "medium",
@@ -43239,14 +43266,16 @@
 				"ClueTier": "easy",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7236"
 			},
 			"https://oldschool.runescape.wiki/images/2/2e/Map_clue_Falador_stones.png?1d2b6": {
 				"Chunks": ["12085-1"],
 				"ClueTier": "easy",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2719"
 			},
 			"Dig between some ominous stones in Falador.": {
 				"Chunks": ["12085-1"],
@@ -43508,7 +43537,8 @@
 				"NPCs": ["Lowe"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2847"
 			},
 			"My name is like a tree, yet it is spelt with a 'g'. Come see the fur which is right near me.": {
 				"NPCs": ["Wilough"],
@@ -43605,7 +43635,8 @@
 				"NPCs": ["Femi"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "3611"
 			},
 			"South of the Tree Gnome Stronghold, north-east of the Outpost.": {
 				"Chunks": ["9780-1"],
@@ -44041,7 +44072,8 @@
 				"ClueTier": "easy",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2716"
 			},
 			"Talk to Ali the Leaflet Dropper north of the Al Kharid mine.": {
 				"NPCs": ["Ali the Leaflet Dropper"],
@@ -44573,7 +44605,8 @@
 				"ClueTier": "easy",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "12179"
 			},
 			"West of Al Kharid mine.": {
 				"Chunks": ["13107-1"],
@@ -44616,7 +44649,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "7288"
 			},
 			"Right on the blessed border, cursed by the evil ones. On the spot inaccessible by both; I will be waiting. The bugs' imminent possession holds the answer.": {
 				"Chunks": ["13619-2"],
@@ -45045,7 +45079,8 @@
 				"ClueTier": "medium",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2827"
 			},
 			"Yawn in Draynor Marketplace. (Studded chaps, Iron kiteshield, Steel longsword)": {
 				"Chunks": ["12338-1"],
@@ -45696,7 +45731,8 @@
 				"NPCs": ["Luthas"],
 				"ClueTier": "medium",
 				"ClueType": "Anagram",
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "2858"
 			},
 			"00 degrees 13 minutes south, 13 degrees 58 minutes east": {
 				"Chunks": ["11569-1"],
@@ -46266,7 +46302,8 @@
 				"ClueTier": "elite",
 				"ClueType": "Map",
 				"Items": ["Spade"],
-				"Not F2P": true
+				"Not F2P": true,
+				"ClueId": "19783"
 			},
 			"03 degrees 07 minutes south, 03 degrees 41 minutes west": {
 				"Chunks": ["9263-1"],
@@ -46973,7 +47010,7 @@
 				"Not F2P": true
 			},
 			"Their bane awaits.": {
-				"Monsters": ["Shellbane Gryphon"],
+				"Monsters": ["Shellbane gryphon"],
 				"ClueTier": "elite",
 				"ClueType": "Cryptic",
 				"Not F2P": true,
@@ -47956,8 +47993,7 @@
 			},
 			"Shooting Stars: South-east Varrock mine": {
 				"StarRegion": "Misthalin",
-				"Chunks": ["13108-1"],
-				"ClueId": "2716"
+				"Chunks": ["13108-1"]
 			},
 			"Shooting Stars: South-west Varrock mine": {
 				"StarRegion": "Misthalin",
@@ -49716,7 +49752,7 @@
 			"Witch's House#Manhole": {
 				"UnlocksArea": true,
 				"Tasks": {
-					"~|Grim Tales|~ 2b2": "Quest"
+					"~|Grim Tales|~ 1": "Quest"
 				},
 				"Not F2P": true
 			},
@@ -50863,7 +50899,7 @@
 			},
 			"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["11317-1"],
+				"Chunks": ["CatherbyCliffside[+]"],
 				"Items": ["Crossbow[+]", "Mith grapple"],
 				"Level": 35,
 				"Primary": false,
@@ -53649,7 +53685,7 @@
 			"Complete ~|courier tasks|~": {
 				"Items": ["AnyBoat[+]"],
 				"Level": 1,
-				"Output": "Port tasks loot",
+				"Output": "Courier tasks loot",
 				"Primary": true,
 				"Priority": 3,
 				"Tasks": {
@@ -53662,7 +53698,7 @@
 				"Items": ["AnyBoat[+]"],
 				"Level": 30,
 				"Monsters": ["BountyMonster[+]"],
-				"Output": "Port tasks loot",
+				"Output": "Bounty tasks loot",
 				"Primary": true,
 				"Priority": 3,
 				"Tasks": {
@@ -54566,6 +54602,9 @@
 				"Object": ["Buoy (Sailing)"],
 				"Primary": false,
 				"Priority": 8,
+				"Tasks": {
+					"~|Children of the Sun|~ Complete the quest": "Quest"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -54668,6 +54707,9 @@
 				"Object": ["Buoy (Sailing)"],
 				"Primary": false,
 				"Priority": 7,
+				"Tasks": {
+					"~|Children of the Sun|~ Complete the quest": "Quest"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -54843,7 +54885,7 @@
 				"NoPet": true
 			},
 			"Dock at ~|Neitiznot|~": {
-				"Chunks": ["9275-W1"],
+				"Chunks": ["9275-W3"],
 				"Level": 68,
 				"Items": ["AnyBoat[+]"],
 				"Object": ["Buoy (Sailing)"],
@@ -55287,6 +55329,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 18,
+				"Tasks": {
+					"~|Children of the Sun|~ Complete the quest": "Quest"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -55393,6 +55438,9 @@
 				"Object": ["MooringPoint[+]"],
 				"Primary": false,
 				"Priority": 17,
+				"Tasks": {
+					"~|Children of the Sun|~ Complete the quest": "Quest"
+				},
 				"NoBoost": true,
 				"NoPet": true
 			},
@@ -61075,7 +61123,7 @@
 			},
 			"Access the (mith grapple) scale Catherby cliffside ~|shortcut|~": {
 				"Category": ["Shortcut"],
-				"Chunks": ["11317-1"],
+				"Chunks": ["CatherbyCliffside[+]"],
 				"Items": ["Crossbow[+]", "Mith grapple"],
 				"Level": 35,
 				"Primary": false,
@@ -77356,6 +77404,13 @@
 				"Items": ["Abyssal pearls"],
 				"Not F2P": true
 			},
+			"Unlock the ability for the cormorany to eat whole fish from ~|Alry the Angler|~": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Alry the Angler"],
+				"Items": ["Molch pearl"],
+				"Not F2P": true
+			},
 			"Chip the gems from the ~|throne (Thammaron's throne room)|~": {
 				"Category": ["Money Unlockables"],
 				"Label": "Permanent Unlockables",
@@ -84114,6 +84169,19 @@
 				"Label": "Fill POH",
 				"Chunks": ["Player-owned house"],
 				"Items": ["Light infinity bottoms"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Magic Wardrobe: ~|Jeweller's chisel|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Jeweller's chisel"],
 				"Skills": {
 					"Construction": 42
 				},
@@ -94366,7 +94434,7 @@
 			"~|Combat Achievements#Easy|~ Dry Cleaning": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Shellbane Gryphon after clearing its corrosive spit from your armour.",
-				"Monsters": ["Shellbane Gryphon"],
+				"Monsters": ["Shellbane gryphon"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 1
@@ -94374,7 +94442,7 @@
 			"~|Combat Achievements#Easy|~ Shellbane Adept": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Shellbane Gryphon 25 times.",
-				"Monsters": ["Shellbane Gryphon"],
+				"Monsters": ["Shellbane gryphon"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 1
@@ -94740,6 +94808,41 @@
 					"Slay a ~|kurask|~": "Slayer"
 				}
 			},
+			"~|Combat Achievements#Medium|~ Mad Angel Adept": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel 25 times.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 2,
+				"Monsters": ["Mad Angel"]
+			},
+			"~|Combat Achievements#Medium|~ Juggling Act": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel after attacking her between each bounce of the blast attack during her enrage phase.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 2,
+				"Monsters": ["Mad Angel"]
+			},
+			"~|Combat Achievements#Medium|~ Smite Fight": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel after getting 3 consecutive enhanced attacks by successfully praying against the smite attacks during her enrage phase.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 2,
+				"Monsters": ["Mad Angel"],
+				"Skills": {
+					"Prayer": 37
+				}
+			},
+			"~|Combat Achievements#Medium|~ Dancing Queen": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel after getting 6 consecutive enhanced attacks by dodging the sweep attack successfully during her enrage phase.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 2,
+				"Monsters": ["Mad Angel"]
+			},
 			"~|Combat Achievements#Medium|~ Back to Our Roots": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Defeat all three Moons in one run using only a Dragon Scimitar.",
@@ -94861,7 +94964,7 @@
 			"~|Combat Achievements#Medium|~ Shellbane Veteran": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Shellbane Gryphon 50 times.",
-				"Monsters": ["Shellbane Gryphon"],
+				"Monsters": ["Shellbane gryphon"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 2
@@ -94869,7 +94972,7 @@
 			"~|Combat Achievements#Medium|~ Shellbane Speedrunner": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Shellbane Gryphon 10 times within 12:30 minutes of entering the cave.",
-				"Monsters": ["Shellbane Gryphon"],
+				"Monsters": ["Shellbane gryphon"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 2
@@ -94877,7 +94980,7 @@
 			"~|Combat Achievements#Medium|~ Perfect Shellbane": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Shellbane Gryphon without taking damage.",
-				"Monsters": ["Shellbane Gryphon"],
+				"Monsters": ["Shellbane gryphon"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 2
@@ -94890,7 +94993,7 @@
 				"CombatPoints": 2,
 				"Monsters": ["Skeletal Wyvern"],
 				"Tasks": {
-					"Slay a ~|skeletal wyvern|~": "Slayer"
+					"Slay a ~|Skeletal Wyvern|~": "Slayer"
 				}
 			},
 			"~|Combat Achievements#Medium|~ Demonbane Weaponry": {
@@ -94996,7 +95099,7 @@
 					"Any": 10000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 161,
+				"CombatPointsNeeded": 169,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -95447,6 +95550,30 @@
 				"CombatPoints": 3,
 				"Monsters": ["Kree'arra"]
 			},
+			"~|Combat Achievements#Hard|~ Perfect Mad Angel": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel without taking any avoidable damage.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 3,
+				"Monsters": ["Mad Angel"]
+			},
+			"~|Combat Achievements#Hard|~ Mad Angel Speed-Runner": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel 5 times within 10 minutes of entering her arena.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 3,
+				"Monsters": ["Mad Angel"]
+			},
+			"~|Combat Achievements#Hard|~ Mad Angel Veteran": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel 50 times.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 3,
+				"Monsters": ["Mad Angel"]
+			},
 			"~|Combat Achievements#Hard|~ Maggot Squasher": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Maggot King.",
@@ -95601,7 +95728,7 @@
 			"~|Combat Achievements#Hard|~ Featherweight Fighter": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Shellbane Gryphon 5 times without leaving the cave, while wearing gear weighing less than 40kg.",
-				"Monsters": ["Shellbane Gryphon"],
+				"Monsters": ["Shellbane gryphon"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 3
@@ -95609,7 +95736,7 @@
 			"~|Combat Achievements#Hard|~ Shellbane Survivor": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Shellbane Gryphon 25 times without leaving the cave.",
-				"Monsters": ["Shellbane Gryphon"],
+				"Monsters": ["Shellbane gryphon"],
 				"BaseQuest": "Combat Achievements",
 				"Not F2P": true,
 				"CombatPoints": 3
@@ -95744,7 +95871,7 @@
 					"Any": 15000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 419,
+				"CombatPointsNeeded": 436,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -95861,7 +95988,7 @@
 				"CombatPoints": 4,
 				"Monsters": ["Basilisk Knight"],
 				"Tasks": {
-					"Slay a ~|basilisk knight|~": "Slayer"
+					"Slay a ~|Basilisk Knight|~": "Slayer"
 				}
 			},
 			"~|Combat Achievements#Elite|~ Brutus Speed-Trialist": {
@@ -96522,6 +96649,22 @@
 				"CombatPoints": 4,
 				"Monsters": ["The Leviathan"]
 			},
+			"~|Combat Achievements#Elite|~ This Is Madness": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel 15 times without leaving her arena.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Mad Angel"]
+			},
+			"~|Combat Achievements#Elite|~ The Pen Is Mightier": {
+				"Category": ["Combat Diary Tasks"],
+				"Description": "Kill the Mad Angel without equipping any weapon.",
+				"BaseQuest": "Combat Achievements",
+				"Not F2P": true,
+				"CombatPoints": 4,
+				"Monsters": ["Mad Angel"]
+			},
 			"~|Combat Achievements#Elite|~ Trying to fit in": {
 				"Category": ["Combat Diary Tasks"],
 				"Description": "Kill the Maggot King using only weapons that can be found in Vampyrium.",
@@ -97178,7 +97321,7 @@
 					"Any": 25000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1075,
+				"CombatPointsNeeded": 1100,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -98648,7 +98791,7 @@
 					"Any": 35000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 1940,
+				"CombatPointsNeeded": 1965,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -99661,7 +99804,7 @@
 					"Any": 50000
 				},
 				"ManualShow": true,
-				"CombatPointsNeeded": 2671,
+				"CombatPointsNeeded": 2697,
 				"Chunks": ["11319-1"],
 				"NPCs": ["Ghommal"]
 			},
@@ -113720,15 +113863,15 @@
 				"Tasks": {
 					"~|Priest in Peril|~ Complete the quest": "Quest"
 				},
-				"Skills": {
-					"Crafting": 35
-				},
 				"Not F2P": true
 			},
 			"~|Haunted Mine|~ 2": {
 				"BaseQuest": "Haunted Mine",
 				"Description": "Make your way through the abandoned mine and cut a salve shard.",
 				"Chunks": ["Abandoned Mine"],
+				"Skills": {
+					"Crafting": 35
+				},
 				"Tasks": {
 					"~|Haunted Mine|~ 1": "Quest"
 				},
@@ -142502,16 +142645,16 @@
 			"Nickname": "Ocean Chunk"
 		},
 		"9761": {
-			"Nickname": "Ocean Chunk"
+			"Nickname": "Ocean Chunk",
+			"Object": {
+				"Large shipwreck": 6
+			}
 		},
 		"9762": {
 			"Nickname": "Ocean Chunk"
 		},
 		"9763": {
-			"Nickname": "Ocean Chunk",
-			"Object": {
-				"Large shipwreck": 1
-			}
+			"Nickname": "Ocean Chunk"
 		},
 		"9764": {
 			"Nickname": "Ocean Chunk"
@@ -143883,7 +144026,6 @@
 				"1": {},
 				"W1": {
 					"Object": {
-						"Large shipwreck": 6,
 						"Sealed crate": 1
 					}
 				}
@@ -143894,10 +144036,7 @@
 			"Monster": {
 				"Albatross": 12
 			},
-			"Nickname": "Ocean Chunk",
-			"Object": {
-				"Large shipwreck": 1
-			}
+			"Nickname": "Ocean Chunk"
 		},
 		"10021": {
 			"Nickname": "Ocean Chunk"
@@ -148740,7 +148879,7 @@
 					},
 					"Object": {
 						"Buoy (Sailing)": 1,
-						"Mid Feldip Redige": 1
+						"Mid Feldip Ridge": 1
 					}
 				}
 			},
@@ -164030,7 +164169,7 @@
 			"Nickname": "Wilderness Crabs",
 			"Object": {
 				"Dead tree": 4,
-				"Fishing spot (cage, harpoon)": 2,
+				"Fishing spot (cage, harpoon)#F2P": 2,
 				"Fishing spot (dark crab)": 2
 			}
 		},
@@ -176398,7 +176537,7 @@
 			"MooringLledrithIsland[+]": ["8241-W2", "8241-1"],
 			"MooringDeepfinPoint[+]": ["7723-W2", "7723-1"],
 			"MooringJatizso[+]": ["9531-W2", "9531-1"],
-			"MooringNeitiznot[+]": ["9275-W1", "9275-1"],
+			"MooringNeitiznot[+]": ["9275-W3", "9275-1"],
 			"MooringRainbowsEnd[+]": ["9251-W1", "9251-1"],
 			"MooringPrifddinas[+]": ["8499-W2", "8499-2"],
 			"MooringSunbleakIsland[+]": ["8740-W1", "8740-1"],
@@ -176429,7 +176568,8 @@
 			"8495[+]": ["8495-1", "8495-W3"],
 			"7723[+]": ["7723-1", "7723-W1"],
 			"10533[+]": ["10533-1", "10533-W1"],
-			"DraynorManorFence[+]": ["12340-1", "12340-3"]
+			"DraynorManorFence[+]": ["12340-1", "12340-3"],
+			"CatherbyCliffside[+]": ["11317-1", "11317-2"]
 		},
 		"chunksPlusNames": {
 			"10Coin[+]": "Any chunk with a 10-coin chest",
@@ -176664,7 +176804,8 @@
 			"BlastFurnaceOrFoundry[+]": "Either the Blast Furnace or the Giants' Foundry",
 			"12848[+]": "Any section of chunk 12848",
 			"12849[+]": "Any section of chunk 12849",
-			"DraynorManorFence[+]": "Either side of the Draynor Manor broken fence"
+			"DraynorManorFence[+]": "Either side of the Draynor Manor broken fence",
+			"CatherbyCliffside[+]": "Either side of the Catherby cliffside"
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {
@@ -177925,7 +178066,7 @@
 			"Lampstill[+]": ["Lamp still", "Lamp oil still"],
 			"CraftingOrBakeryStall[+]": ["Bakery stall", "Crafting stall"],
 			"NestTree[+]": ["Oak tree", "Willow tree", "Teak tree", "Mature juniper tree", "Maple tree", "Hollow tree", "Mahogany tree", "Arctic pine tree", "Yew tree", "Magic tree", "Redwood tree"],
-			"HarpoonSpot[+]": ["Fishing spot (cage, harpoon)", "Fishing spot (Piscatoris Fishing Colony)", "Fishing spot (big net, harpoon)", "Fishing spot (Tempoross Cove)"],
+			"HarpoonSpot[+]": ["Fishing spot (cage, harpoon)", "Fishing spot (cage, harpoon)#F2P", "Fishing spot (Piscatoris Fishing Colony)", "Fishing spot (big net, harpoon)", "Fishing spot (Tempoross Cove)"],
 			"ForesterFire[+]": ["Forester's Campfire", "Fire#Forester's"],
 			"Coop[+]": ["Coop", "Chicken coop"],
 			"AnyTree[+]": ["Tree", "Dead tree", "Dying tree", "Evergreen tree", "Jungle tree", "Achey Tree", "Oak tree", "Willow tree", "Teak tree", "Mature juniper tree", "Maple tree", "Hollow tree", "Mahogany tree", "Arctic pine tree", "Yew tree", "Magic tree", "Redwood tree", "Evergreen tree (Mac)", "Sulliuscep", "Blisterwood Tree", "Bruma roots", "Burnt tree", "Dead tree (burnt)", "Mahogany#Etceteria", "Maple tree#Miscellania", "Teak#Etceteria"],
@@ -177940,7 +178081,8 @@
 			"Trawling net[+]": ["Rope trawling net", "Linen trawling net#Skiff", "Linen trawling net#Sloop", "Hemp trawling net#Skiff", "Hemp trawling net#Sloop", "Cotton trawling net"],
 			"Salvaging station[+]": ["Salvaging station", "Salvaging station (facility)"],
 			"MooringPoint[+]": ["Mooring point (scenery)", "Gangplank (Sailing)"],
-			"Bloodwood tree[+]": ["Bloodwood tree", "Engorged bloodwood tree"]
+			"Bloodwood tree[+]": ["Bloodwood tree", "Engorged bloodwood tree"],
+			"Fishing spot (cage, harpoon)[+]": ["Fishing spot (cage, harpoon)", "Fishing spot (cage, harpoon)#F2P"]
 		},
 		"objectsPlusNames": {
 			"Adamantite[+]": "Any adamantite rock",
@@ -177991,7 +178133,8 @@
 			"Trawling net[+]": "Any trawling net",
 			"Salvaging station[+]": "Any salvaging station",
 			"MooringPoint[+]": "Any mooring point or sailing gangplank",
-			"Bloodwood tree[+]": "Any bloodwood tree variant"
+			"Bloodwood tree[+]": "Any bloodwood tree variant",
+			"Fishing spot (cage, harpoon)[+]": "Any fishing spot (cage, harpoon) variant"
 		},
 		"rangedItems": {
 			"Iron thrownaxe": 1,
@@ -178251,7 +178394,8 @@
 					"Catacombs of Kourend": true
 				},
 				"Ankou": {
-					"Catacombs of Kourend": true
+					"Catacombs of Kourend": true,
+					"Stronghold of Security": true
 				},
 				"Black demon": {
 					"Catacombs of Kourend": true
@@ -178267,6 +178411,9 @@
 				},
 				"Brutal red dragon": {
 					"Catacombs of Kourend": true
+				},
+				"Catablepon": {
+					"Stronghold of Security": true
 				},
 				"Cyclops (Catacombs of Kourend)": {
 					"Catacombs of Kourend": true
@@ -178284,6 +178431,9 @@
 					"Catacombs of Kourend": true,
 					"Giants' Den": true
 				},
+				"Flesh Crawler": {
+					"Stronghold of Security": true
+				},
 				"Greater Nechryael": {
 					"Catacombs of Kourend": true
 				},
@@ -178297,11 +178447,17 @@
 				"Iron dragon": {
 					"Catacombs of Kourend": true
 				},
+				"Killerwatt": {
+					"Killerwatt plane": true
+				},
 				"King Sand Crab": {
 					"Catacombs of Kourend": true
 				},
 				"Lesser demon": {
 					"Catacombs of Kourend": true
+				},
+				"Minotaur": {
+					"Stronghold of Security": true
 				},
 				"Moss giant": {
 					"Catacombs of Kourend": true,
@@ -178330,6 +178486,12 @@
 				},
 				"Warped Jelly": {
 					"Catacombs of Kourend": true
+				},
+				"Zombie (Sepulchre of Death)": {
+					"Stronghold of Security": true
+				},
+				"Zombie (Stronghold of Security)": {
+					"Stronghold of Security": true
 				}
 			},
 			"Chaos talisman": {}
@@ -222285,7 +222447,8 @@
 			"Fish sack": true,
 			"Pearl barbarian rod": true,
 			"Pearl fishing rod": true,
-			"Pearl fly fishing rod": true
+			"Pearl fly fishing rod": true,
+			"Shark lure pack": true
 		},
 		"Amelia's Seed Shop": {
 			"Asgarnian seed": true,
@@ -226242,6 +226405,8 @@
 			"Boots of the eye": true,
 			"Ring of the elements": true,
 			"Guardian's eye": true,
+			"Abyssal lantern": true,
+			"Abyssal needle": true,
 			"Air talisman": true,
 			"Water talisman": true,
 			"Earth talisman": true,
@@ -230953,6 +231118,21 @@
 				"Simple lockbox": {
 					"1": "1/3"
 				}
+			},
+			"Tiny port reward bag loot": {
+				
+			},
+			"Small port reward bag loot": {
+				
+			},
+			"Medium port reward bag loot": {
+				
+			},
+			"Large port reward bag loot": {
+				
+			},
+			"Huge port reward bag loot": {
+				
 			},
 			"Forgotten lockbox loot": {
 				"Coins": {
@@ -237860,7 +238040,42 @@
 			}
 		},
 		"Sailing": {
-			"Port tasks loot": {
+			"Courier tasks loot": {
+				"Tiny port coin bag": {
+					"1": "4/5"
+				},
+				"Small port coin bag": {
+					"1": "4/5"
+				},
+				"Medium port coin bag": {
+					"1": "4/5"
+				},
+				"Large port coin bag": {
+					"1": "4/5"
+				},
+				"Huge port coin bag": {
+					"1": "4/5"
+				},
+				"Tiny port reward bag": {
+					"1": "1/5"
+				},
+				"Small port reward bag": {
+					"1": "1/5"
+				},
+				"Medium port reward bag": {
+					"1": "1/5"
+				},
+				"Large port reward bag": {
+					"1": "1/5"
+				},
+				"Huge port reward bag": {
+					"1": "1/5"
+				},
+				"Shark paint": {
+					"1": "1/36"
+				}
+			},
+			"Bounty tasks loot": {
 				"Shark paint": {
 					"1": "1/36"
 				}
@@ -249765,7 +249980,7 @@
 					"1": "5/128"
 				},
 				"Clue scroll (elite)": {
-					"1": "1/1400"
+					"1": "1/900"
 				},
 				"Coins": {
 					"20-300": "105/128"
@@ -250665,185 +250880,185 @@
 			},
 			"Rusty chest": {
 				"Medallion fragment#1": {
-					"1": "24/100"
+					"1": "1/4"
 				},
 				"Clue scroll (medium)": {
 					"1": "1/200"
 				},
 				"Steel cannonball": {
-					"5-10": "2/117"
+					"5-10": "1/60"
 				},
 				"Steel dagger": {
-					"1": "6/117"
+					"1": "3/60"
 				},
 				"Steel scimitar": {
-					"1": "6/117"
+					"1": "3/60"
 				},
 				"Iron cannonball": {
-					"5-10": "4/117"
+					"5-10": "2/60"
 				},
 				"Bronze cannonball": {
-					"5-10": "6/117"
+					"5-10": "3/60"
 				},
 				"Uncut sapphire": {
-					"1": "4/90"
+					"1": "4/75"
 				},
 				"Uncut emerald": {
-					"1": "3/90"
+					"1": "3/75"
 				},
 				"Uncut ruby": {
-					"1": "2/90"
+					"1": "2/75"
 				},
 				"Uncut diamond": {
-					"1": "1/90"
+					"1": "1/75"
 				},
 				"Elkhorn frag": {
-					"1": "6/585",
-					"2": "8/117"
+					"1": "6/600",
+					"2": "3/60"
 				},
 				"Pillar frag": {
-					"1": "3/585"
+					"1": "3/600"
 				},
 				"Umbral frag": {
-					"1": "1/585"
+					"1": "1/600"
 				},
 				"Coins": {
-					"100-200": "40/117"
+					"100-200": "20/60"
 				},
 				"Mind rune": {
-					"5-10": "6/117"
+					"5-10": "3/60"
 				},
 				"Emerald necklace": {
-					"1": "4/117"
+					"1": "2/60"
 				},
 				"Gold bar": {
-					"1": "8/117"
+					"1": "4/60"
 				},
 				"Sapphire necklace": {
-					"1": "4/117"
+					"1": "2/60"
 				},
 				"Silver bar": {
-					"1": "8/117"
+					"1": "4/60"
 				}
 			},
 			"Tarnished chest": {
 				"Clue scroll (medium)": {
-					"1": "Unknown"
+					"1": "1/150"
 				},
 				"Mithril cannonball": {
-					"5-10": "2/117"
+					"5-10": "1/60"
 				},
 				"Mithril dagger": {
-					"1": "6/117"
+					"1": "3/60"
 				},
 				"Mithril scimitar": {
-					"1": "6/117"
+					"1": "3/60"
 				},
 				"Steel cannonball": {
-					"5-10": "4/117"
+					"5-10": "2/60"
 				},
 				"Iron cannonball": {
-					"5-10": "6/117"
+					"5-10": "3/60"
 				},
 				"Uncut sapphire": {
-					"1": "4/90"
+					"1": "4/75"
 				},
 				"Uncut emerald": {
-					"1": "3/90"
+					"1": "3/75"
 				},
 				"Uncut ruby": {
-					"1": "2/90"
+					"1": "2/75"
 				},
 				"Uncut diamond": {
-					"1": "1/90"
+					"1": "1/75"
 				},
 				"Elkhorn frag": {
-					"1": "6/585"
+					"1": "6/600"
 				},
 				"Pillar frag": {
-					"1": "3/585",
-					"2": "8/117"
+					"1": "3/600",
+					"2": "3/60"
 				},
 				"Umbral frag": {
-					"1": "1/585"
+					"1": "1/600"
 				},
 				"Coins": {
-					"200-400": "40/117"
+					"200-400": "20/60"
 				},
 				"Chaos rune": {
-					"5-10": "6/117"
+					"5-10": "3/60"
 				},
 				"Ruby necklace": {
-					"1": "4/117"
+					"1": "2/60"
 				},
 				"Gold bar": {
-					"1": "8/117"
+					"1": "4/60"
 				},
 				"Emerald necklace": {
-					"1": "4/117"
+					"1": "2/60"
 				},
 				"Silver bar": {
-					"1": "8/117"
+					"1": "4/60"
 				}
 			},
 			"Reinforced chest": {
 				"Clue scroll (hard)": {
-					"1": "Unknown"
+					"1": "1/140"
 				},
 				"Adamant cannonball": {
-					"5-10": "2/117"
+					"5-10": "1/60"
 				},
 				"Adamant dagger": {
-					"1": "6/117"
+					"1": "3/60"
 				},
 				"Adamant scimitar": {
-					"1": "6/117"
+					"1": "3/60"
 				},
 				"Mithril cannonball": {
-					"5-10": "4/117"
+					"5-10": "2/60"
 				},
 				"Steel cannonball": {
-					"5-10": "6/117"
+					"5-10": "3/60"
 				},
 				"Uncut sapphire": {
-					"1": "4/90"
+					"1": "4/75"
 				},
 				"Uncut emerald": {
-					"1": "3/90"
+					"1": "3/75"
 				},
 				"Uncut ruby": {
-					"1": "2/90"
+					"1": "2/75"
 				},
 				"Uncut diamond": {
-					"1": "1/90"
+					"1": "1/75"
 				},
 				"Elkhorn frag": {
-					"1": "6/585"
+					"1": "6/600"
 				},
 				"Pillar frag": {
-					"1": "3/585"
+					"1": "3/600"
 				},
 				"Umbral frag": {
-					"1": "1/585",
-					"2": "8/117"
+					"1": "1/600",
+					"2": "3/60"
 				},
 				"Coins": {
-					"500-1000": "40/117"
+					"500-1000": "20/60"
 				},
 				"Death rune": {
-					"5-10": "6/117"
+					"5-10": "3/60"
 				},
 				"Diamond necklace": {
-					"1": "4/117"
+					"1": "2/60"
 				},
 				"Gold bar": {
-					"1": "8/117"
+					"1": "4/60"
 				},
 				"Ruby necklace": {
-					"1": "4/117"
+					"1": "2/60"
 				},
 				"Silver bar": {
-					"1": "8/117"
+					"1": "4/60"
 				}
 			},
 			"Wall safe": {
@@ -252058,6 +252273,9 @@
 			}],
 			"Dragon javelin heads^": [{
 				"~|Monkey Madness II|~ Complete the quest": "Quest"
+			}],
+			"Big swordfish^": [{
+				"Non-f2p swordfish spot": "Nonskill"
 			}],
 			"Crest part (Johnathon)^Chronozon": [{
 				"~|Family Crest|~ 11": "Quest"
@@ -254207,6 +254425,18 @@
 			"Pyrophosphite^Ancient Zygomite": [{
 				"Fossil Island drops": "Nonskill"
 			}],
+			"Unidentified small fossil^Ancient Zygomite": [{
+				"Fossil Island drops": "Nonskill"
+			}],
+			"Unidentified medium fossil^Ancient Zygomite": [{
+				"Fossil Island drops": "Nonskill"
+			}],
+			"Unidentified large fossil^Ancient Zygomite": [{
+				"Fossil Island drops": "Nonskill"
+			}],
+			"Unidentified rare fossil^Ancient Zygomite": [{
+				"Fossil Island drops": "Nonskill"
+			}],
 			"Grimy kwuarm^Ancient Zygomite": [{
 				"Stalker Den drops": "Nonskill"
 			}],
@@ -255407,7 +255637,7 @@
 			},
 			"Weaponsmaster": {
 				"12852-1": [{
-					"~|Shield of Arrav|~ 2a3": "Quest"
+					"~|Shield of Arrav|~ 2a2": "Quest"
 				}]
 			},
 			"White Knight (Burthorpe)": {
@@ -261543,6 +261773,7 @@
 			"Fishing spot (barbarian)": true,
 			"Fishing spot (big net, harpoon)": true,
 			"Fishing spot (cage, harpoon)": true,
+			"Fishing spot (cage, harpoon)#F2P": true,
 			"Fishing spot (Camdozaal)": true,
 			"Fishing spot (Civitas illa Fortis)": true,
 			"Fishing spot (dark crab)": true,
