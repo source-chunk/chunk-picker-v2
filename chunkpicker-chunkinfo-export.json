@@ -20300,8 +20300,20 @@
 				"Primary": true,
 				"Priority": 1
 			},
-			"Fletch a ~|mith grapple|~": {
+			"Fletch a ~|mith grapple (unf)|~": {
 				"Items": ["Mithril bolts*", "Mith grapple tip*"],
+				"Level": 59,
+				"Primary": true,
+				"Output": "Mith grapple (unf)"
+			},
+			"Fletch a ~|mith grapple|~": {
+				"Items": ["Rope*", "Mith grapple (unf)*"],
+				"Level": 59,
+				"Primary": false,
+				"Output": "Mith grapple"
+			},
+			"Fletch a ~|mith grapple|~ (alt)": {
+				"Items": ["Mithril bolts*", "Mith grapple tip*", "Rope*"],
 				"Level": 59,
 				"Primary": true,
 				"Output": "Mith grapple"
@@ -53059,6 +53071,56 @@
 				"Primary": true,
 				"Priority": 3
 			},
+			"Infuse an ~|amulet of air|~": {
+				"Chunks": ["Air altar"],
+				"Items": ["Amulet of magic*", "Air diamond*", "Air rune*"],
+				"Level": 18,
+				"Output": "Amulet of air",
+				"Primary": true,
+				"Priority": 11,
+				"Not F2P": true,
+				"NoPet": true
+			},
+			"Infuse an ~|amulet of water|~": {
+				"Chunks": ["Water altar"],
+				"Items": ["Amulet of magic*", "Water sapphire*", "Water rune*"],
+				"Level": 19,
+				"Output": "Amulet of water",
+				"Primary": true,
+				"Priority": 11,
+				"Not F2P": true,
+				"NoPet": true
+			},
+			"Infuse an ~|amulet of earth|~": {
+				"Chunks": ["Earth altar"],
+				"Items": ["Amulet of magic*", "Earth emerald*", "Earth rune*"],
+				"Level": 20,
+				"Output": "Amulet of earth",
+				"Primary": true,
+				"Priority": 11,
+				"Not F2P": true,
+				"NoPet": true
+			},
+			"Infuse an ~|amulet of fire|~": {
+				"Chunks": ["Fire altar"],
+				"Items": ["Amulet of magic*", "Fire diamond*", "Fire rune*"],
+				"Level": 21,
+				"Output": "Amulet of fire",
+				"Primary": true,
+				"Priority": 11,
+				"Not F2P": true,
+				"NoPet": true
+			},
+			"Infuse an ~|elemental amulet|~": {
+				"Chunks": ["ElementalAltar[+]"],
+				"Items": ["Amulet of air*", "Amulet of water*", "Amulet of earth*", "Amulet of fire*", "Air rune*", "Water rune*", "Earth rune*", "Fire rune*"],
+				"Level": 30,
+				"Output": "Elemental amulet",
+				"Primary": true,
+				"Priority": 11,
+				"Not F2P": true,
+				"NoPet": true
+			},
 			"Infuse a splitbark body into a ~|bloodbark body|~": {
 				"Objects": ["Blood Altar (Kourend)"],
 				"Items": ["Splitbark body*", "Bloody notes", "Blood rune*"],
@@ -74838,6 +74900,12 @@
 				"Items": ["Leaf-bladed sword"],
 				"Not F2P": true
 			},
+			"(Slayer) Obtain a ~|necklace of fangs|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Necklace of fangs"],
+				"Not F2P": true
+			},
 			"(Slayer) Obtain a ~|leaf-bladed battleaxe|~": {
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
@@ -75286,6 +75354,30 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Venator fang"],
+				"Not F2P": true
+			},
+			"(Slayer) Obtain an ~|air diamond|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Air diamond"],
+				"Not F2P": true
+			},
+			"(Slayer) Obtain a ~|water sapphire|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Water sapphire"],
+				"Not F2P": true
+			},
+			"(Slayer) Obtain an ~|earth emerald|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Earth emerald"],
+				"Not F2P": true
+			},
+			"(Slayer) Obtain a ~|fire ruby|~": {
+				"Category": ["Collection Log", "Collection Log Other"],
+				"Label": "Collection Log",
+				"Items": ["Fire ruby"],
 				"Not F2P": true
 			},
 			"(Tormented Demons) Obtain a ~|tormented synapse|~": {
@@ -82471,6 +82563,19 @@
 				},
 				"Tasks": {
 					"Oak armour case materials": "Nonskill"
+				},
+				"Not F2P": true
+			},
+			"Magic Wardrobe: ~|Abyssal lantern|~": {
+				"Category": ["Fill POH"],
+				"Label": "Fill POH",
+				"Chunks": ["Player-owned house"],
+				"Items": ["Abyssal lantern"],
+				"Skills": {
+					"Construction": 42
+				},
+				"Tasks": {
+					"Oak magic wardrobe materials": "Nonskill"
 				},
 				"Not F2P": true
 			},
@@ -243166,6 +243271,9 @@
 					"2": "14/128",
 					"4": "8/128",
 					"29": "3/128"
+				},
+				"Fire ruby": {
+					"1": "1/64"
 				}
 			},
 			"Infernal pyrelord": {
@@ -243620,6 +243728,9 @@
 				},
 				"Soda ash": {
 					"4": "1/140"
+				},
+				"Air diamond": {
+					"1": "1/64"
 				},
 				"GemDropTable+": {
 					"1": "5/140"
@@ -244559,6 +244670,9 @@
 				},
 				"Mole claw": {
 					"1": "1/128"
+				},
+				"Earth emerald": {
+					"1": "1/64"
 				},
 				"Clue scroll (easy)": {
 					"1": "1/128"
@@ -245690,6 +245804,9 @@
 				"Casket": {
 					"1": "1/128"
 				},
+				"Water sapphire": {
+					"1": "1/64"
+				},
 				"Clue scroll (medium)": {
 					"1": "1/128"
 				},
@@ -246261,6 +246378,9 @@
 					"44": "29/128",
 					"132": "12/128",
 					"440": "1/128"
+				},
+				"Necklace of fangs": {
+					"1": "1/128"
 				},
 				"Brimstone key": {
 					"1": "1/56"
@@ -247981,6 +248101,9 @@
 					"44": "29/128",
 					"132": "12/128",
 					"440": "1/128"
+				},
+				"Necklace of fangs": {
+					"1": "1/128"
 				},
 				"Brimstone key": {
 					"1": "1/125"
@@ -323930,6 +324053,120 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "head",
+			"requirements": {}
+		},
+		"Necklace of fangs": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 12,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 1,
+			"slot": "neck",
+			"requirements": {}
+		},
+		"Amulet of air": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 10,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 2,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "neck",
+			"requirements": {}
+		},
+		"Amulet of water": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 10,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 2,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "neck",
+			"requirements": {}
+		},
+		"Amulet of earth": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 10,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 2,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "neck",
+			"requirements": {}
+		},
+		"Amulet of fire": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 10,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 2,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "neck",
+			"requirements": {}
+		},
+		"Elemental amulet": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": 10,
+			"attack_ranged": 0,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 3,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "neck",
 			"requirements": {}
 		}
 	}
