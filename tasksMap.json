@@ -23893,6 +23893,7 @@
   "Goblin#Drop table 1: ~|Air talisman|~ (1) (1/128)": "t_21382",
   "Goblin#Drop table 1: ~|Energy potion(1)|~ (1) (Common)": "t_50216",
   "Goblin#Drop table 1: ~|Energy potion(2)|~ (1) (Common)": "t_50217",
+  "Goblin#Drop table 1: ~|Energy potion(4)|~ (1) (Common)": "t_50256",
   "Goblin#Drop table 1: ~|Goblin skull|~ (1) (1/4)": "t_21383",
   "Goblin#Drop table 1: ~|Ensouled goblin head|~ (1) (1/35)": "t_21384",
   "Goblin#Drop table 1: ~|Clue scroll (beginner)|~ (1) (1/64)": "t_21385",
@@ -49864,5 +49865,5 @@
   "Honest Jimmy's House of Stuff.: ~|Rum (Trouble Brewing)|~": "t_45427",
   "Honest Jimmy's House of Stuff.: ~|The stuff|~": "t_45428",
   "Honest Jimmy's House of Stuff.: ~|Treasure flag|~": "t_45429",
-  "currentNextIndex": 50256
+  "currentNextIndex": 50257
 }
