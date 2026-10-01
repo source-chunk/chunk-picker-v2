@@ -11305,7 +11305,7 @@
 			"Cook a ~|scrambled egg|~": {
 				"Items": ["Egg*", "Bowl"],
 				"Level": 13,
-				"Objects": ["Cooking range[+]"],
+				"Objects": ["Cooking object[+]"],
 				"Output": "Scrambled egg",
 				"Primary": true,
 				"Not F2P": true,
@@ -29155,6 +29155,9 @@
 			"Unkah boat trip access": {
 				"Chunks": ["12588-1", "13105-1"],
 				"Not F2P": true
+			},
+			"Enakhra's Temple access": {
+				"Chunks": ["12589-1", "Enakhra's Temple"]
 			},
 			"Buy kraken ink stout from Chartin' Charles McAtless": {
 				"NPCs": ["Chartin' Charles McAtless"],
@@ -66695,7 +66698,7 @@
 				"Not F2P": true
 			},
 			"(The Mad Angel) Obtain a ~|jar of light|~": {
-				"Category": ["Collection Log", "Collection Log Bosses"],
+				"Category": ["Collection Log", "Collection Log Bosses", "Jars"],
 				"Label": "Collection Log",
 				"Items": ["Jar of light"],
 				"Not F2P": true
@@ -143474,6 +143477,7 @@
 					},
 					"Object": {
 						"Dead tree": 35,
+						"Oak tree": 1,
 						"Tree": 6
 					},
 					"Quest": {
@@ -143504,7 +143508,6 @@
 						"Broken cart": 1,
 						"Dead tree": 99,
 						"Drawers": 3,
-						"Oak tree": 1,
 						"Sacks": 6
 					},
 					"Quest": {
@@ -178749,7 +178752,7 @@
 			"PiscatorisDockAccess[+]": ["Access Piscatoris Dock by sea", "Access any dock by land"],
 			"LunarIsleDockAccess[+]": ["Access Lunar Isle Dock by sea", "Access any dock by land"],
 			"WeissDockAccess[+]": ["Access Weiss Dock by sea", "Access any dock by land"],
-			"Desert Diary Easy 4[+]": ["Shantay Pass access", "Unkah boat trip access"],
+			"Desert Diary Easy 4[+]": ["Shantay Pass access", "Unkah boat trip access", "Enakhra's Temple access"],
 			"BountyTasks[+]": ["Albatross beak tasks", "Albatross feather tasks", "Armoured kraken ink sac tasks", "Armoured kraken tentacle tasks", "Bull shark jaw tasks", "Bull shark liver tasks", "Butterfly ray fin tasks", "Butterfly ray skin tasks", "Eagle ray fin tasks", "Eagle ray skin tasks", "Frigatebird beak tasks", "Frigatebird feather tasks", "Great white shark jaw tasks", "Great white shark liver tasks", "Hammerhead shark jaw tasks", "Hammerhead shark liver tasks", "Manta ray skin tasks", "Mogre head tasks", "Mogre mace tasks", "Narwhal blubber tasks", "Narwhal tusk tasks", "Orca blubber tasks", "Orca teeth tasks", "Osprey beak tasks", "Osprey feather tasks", "Pygmy kraken ink sac tasks", "Pygmy kraken tentacle tasks", "Spined kraken ink sac tasks", "Spined kraken tentacle tasks", "Stingray fin tasks", "Stingray skin tasks", "Tern beak tasks", "Tern feather tasks", "Tiger shark jaw tasks", "Tiger shark liver tasks", "Vampyre kraken ink sac tasks", "Vampyre kraken tentacle tasks", "Veiled kraken ink sac tasks", "Veiled kraken tentacle tasks"],
 			"WearableFacemask[+]": ["Wearable facemask", "Other facemask types"],
 			"Access the (mith grapple) Karamja volcano ~|shortcut|~[+]": ["Access the (mith grapple) Karamja volcano ~|shortcut|~", "Access the (mith grapple) Karamja volcano ~|shortcut|~ barehanded"],
@@ -195588,6 +195591,9 @@
 			},
 			"Energy potion(2)": {
 				"1": "Common"
+			},
+			"Energy potion(3)": {
+				"1": "Unknown"
 			},
 			"Energy potion(4)": {
 				"1": "Common"
@@ -257637,19 +257643,10 @@
 				}]
 			},
 			"Bull shark": {
-				"11059-W1": [{
-					"F2P Only": "Nonskill"
-				}],
-				"11313-W2": [{
-					"F2P Only": "Nonskill"
-				}],
 				"11314-W1": [{
 					"F2P Only": "Nonskill"
 				}],
 				"11315-W1": [{
-					"F2P Only": "Nonskill"
-				}],
-				"11569-W1": [{
 					"F2P Only": "Nonskill"
 				}],
 				"11570-W1": [{
