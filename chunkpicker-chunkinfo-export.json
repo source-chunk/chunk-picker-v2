@@ -19169,7 +19169,8 @@
 					"Mining": 1
 				},
 				"Priority": 77,
-				"Not F2P": true
+				"Not F2P": true,
+				"NoPet": true
 			},
 			"Catch a ~|raw bream|~": {
 				"Category": ["CoX"],
@@ -22920,6 +22921,13 @@
 					"~|Eagles' Peak|~ Complete the quest": "Quest"
 				}
 			},
+			"Create a ~|net trap (item)|~": {
+				"Items": ["Small fishing net", "Rope"],
+				"Level": 29,
+				"Output": "Net trap (item)",
+				"Primary": false,
+				"Priority": 100
+			},
 			"Participate in ~|Trouble Brewing|~ for Hunter xp": {
 				"Category": ["Minigame"],
 				"Chunks": ["15150", "15151-1"],
@@ -23168,7 +23176,7 @@
 				"Priority": 3
 			},
 			"Catch a ~|tecu salamander|~": {
-				"Items": ["Small fishing net", "Rope"],
+				"Items": ["Net trap (item)"],
 				"Level": 79,
 				"NPCs": ["Tecu salamander (Hunter)"],
 				"Output": "Tecu salamander loot",
@@ -23226,7 +23234,7 @@
 				}
 			},
 			"Catch a ~|black salamander|~": {
-				"Items": ["Small fishing net", "Rope"],
+				"Items": ["Net trap (item)"],
 				"Level": 67,
 				"NPCs": ["Black salamander"],
 				"Output": "Black salamander",
@@ -23629,7 +23637,7 @@
 				"Primary": true
 			},
 			"Catch a ~|red salamander|~": {
-				"Items": ["Small fishing net", "Rope"],
+				"Items": ["Net trap (item)"],
 				"Level": 59,
 				"NPCs": ["Red salamander"],
 				"Output": "Red salamander",
@@ -23734,7 +23742,7 @@
 				"Primary": true
 			},
 			"Catch a ~|swamp lizard|~": {
-				"Items": ["Small fishing net", "Rope"],
+				"Items": ["Net trap (item)"],
 				"Level": 29,
 				"NPCs": ["Swamp lizard"],
 				"Output": "Swamp lizard",
@@ -23876,7 +23884,7 @@
 				"Primary": true
 			},
 			"Catch an ~|orange salamander|~": {
-				"Items": ["Small fishing net", "Rope"],
+				"Items": ["Net trap (item)"],
 				"Level": 47,
 				"NPCs": ["Orange salamander"],
 				"Output": "Orange salamander",
@@ -34425,6 +34433,9 @@
 			"Non-f2p swordfish spot": {
 				"Objects": ["Fishing spot (cage, harpoon)"]
 			},
+			"Trawling net access": {
+				"Objects": ["Trawling net[+]"]
+			},
 			"Warriors' Guild drops": {
 				"Chunks": ["11319-1"],
 				"Tasks": {
@@ -42494,7 +42505,7 @@
 				"NPCs": ["Sherlock", "Tecu salamander (Hunter)"],
 				"ClueTier": "master",
 				"ClueType": "Sherlock",
-				"Items": ["Small fishing net", "Rope"],
+				"Items": ["Net trap (item)"],
 				"Skills": {
 					"Hunter": 79
 				},
@@ -76292,6 +76303,12 @@
 				"Items": ["Vampyre snelm"],
 				"Not F2P": true
 			},
+			"Obtain an ~|ancient fabric|~": {
+				"Category": ["Untracked Uniques"],
+				"Label": "Untracked Uniques",
+				"NPCs": ["Pete Kayer"],
+				"Not F2P": true
+			},
 			"Obtain a ~|big bass|~": {
 				"Category": ["Stuffables"],
 				"Label": "Stuffables",
@@ -78133,6 +78150,12 @@
 				"Tasks": {
 					"~|A Ruff Situation|~ Complete the quest": "Quest"
 				},
+				"Not F2P": true
+			},
+			"Complete all of ~|Pete Kayer|~'s challenges for the first time": {
+				"Category": ["Money Unlockables"],
+				"Label": "Permanent Unlockables",
+				"NPCs": ["Pete Kayer"],
 				"Not F2P": true
 			},
 			"~|STASH#Beginner|~: Aris's tent (Varrock)": {
@@ -87577,7 +87600,7 @@
 			"~|Ardougne Diary#Hard|~ Task 6": {
 				"Description": "Catch a Red Salamander.",
 				"NPCs": ["Red salamander"],
-				"Items": ["Small fishing net", "Rope"],
+				"Items": ["Net trap (item)"],
 				"Tasks": {
 					"~|Ardougne Diary#Medium|~ Complete the Medium Diary": "Diary"
 				},
@@ -93874,7 +93897,7 @@
 			"~|Wilderness Diary#Hard|~ Task 3": {
 				"Description": "Catch a black salamander.",
 				"NPCs": ["Black salamander"],
-				"Items": ["Small fishing net", "Rope"],
+				"Items": ["Net trap (item)"],
 				"Objects": ["Young tree"],
 				"Skills": {
 					"Hunter": 67
@@ -132338,11 +132361,9 @@
 						"medium": 1
 					},
 					"Monster": {
-						"Emissary Chosen": 6,
-						"Emissary Acolyte": 4
-					},
-					"NPC": {
-						"Emissary Ascended": 2
+						"Emissary Acolyte": 4,
+						"Emissary Ascended": 2,
+						"Emissary Chosen": 6
 					},
 					"Object": {
 						"Dead tree": 41,
@@ -133452,11 +133473,9 @@
 					},
 					"Monster": {
 						"Emissary Acolyte": 8,
+						"Emissary Ascended": 4,
 						"Emissary Chosen": 10,
 						"Spider": 2
-					},
-					"NPC": {
-						"Emissary Ascended": 4
 					},
 					"Object": {
 						"Dead tree": 41,
@@ -159932,6 +159951,7 @@
 				"Justine": 1,
 				"Lisa": 1,
 				"Marten": 1,
+				"Pete Kayer": 1,
 				"Phabelle Bile": 1,
 				"Refugee": 1,
 				"Skully": 1,
@@ -178821,6 +178841,9 @@
 				"Iron dragon": {
 					"Catacombs of Kourend": true
 				},
+				"Kalphite worker": {
+					"Kalphite Lair": true
+				},
 				"Killerwatt": {
 					"Killerwatt plane": true
 				},
@@ -193004,6 +193027,51 @@
 			}
 		},
 		"Emissary Acolyte": {
+			"Air rune": {
+				"8": "5/128"
+			},
+			"Bones": {
+				"1": "Always"
+			},
+			"Chaos rune": {
+				"6": "5/128"
+			},
+			"Coins": {
+				"1": "13/128",
+				"10": "27/128",
+				"35": "26/128",
+				"50": "11/128",
+				"100": "3/128"
+			},
+			"Mind rune": {
+				"2": "1/128"
+			},
+			"Nothing": {
+				"1": "2/128"
+			},
+			"Steel longsword": {
+				"1": "2/128"
+			},
+			"Steel pickaxe": {
+				"1": "1/128"
+			},
+			"Steel scimitar": {
+				"1": "9/128"
+			},
+			"Water rune": {
+				"1": "5/128"
+			},
+			"Clue scroll (medium)": {
+				"1": "1/128"
+			},
+			"HerbDropTable+": {
+				"1": "15/128"
+			},
+			"GemDropTable+": {
+				"1": "3/128"
+			}
+		},
+		"Emissary Ascended": {
 			"Air rune": {
 				"8": "5/128"
 			},
@@ -222832,6 +222900,7 @@
 			"Butterfly net": true,
 			"Magic box": true,
 			"Magic imp box pack": true,
+			"Net trap (item)": true,
 			"Noose wand": true,
 			"Rabbit snare": true,
 			"Teasing stick": true,
@@ -224150,6 +224219,7 @@
 			"Butterfly net": true,
 			"Magic box": true,
 			"Magic imp box pack": true,
+			"Net trap (item)": true,
 			"Noose wand": true,
 			"Rabbit snare": true,
 			"Teasing stick": true,
@@ -224901,6 +224971,7 @@
 			"Butterfly net": true,
 			"Magic box": true,
 			"Magic imp box pack": true,
+			"Net trap (item)": true,
 			"Noose wand": true,
 			"Rabbit snare": true,
 			"Teasing stick": true,
@@ -225796,6 +225867,7 @@
 			"Butterfly net": true,
 			"Magic box": true,
 			"Magic imp box pack": true,
+			"Net trap (item)": true,
 			"Noose wand": true,
 			"Rabbit snare": true,
 			"Teasing stick": true,
@@ -253962,6 +254034,9 @@
 			}],
 			"Big swordfish^": [{
 				"Non-f2p swordfish spot": "Nonskill"
+			}],
+			"Angler's paint^": [{
+				"Trawling net access": "Nonskill"
 			}],
 			"Crest part (Johnathon)^Chronozon": [{
 				"~|Family Crest|~ 11": "Quest"
