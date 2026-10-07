@@ -258806,6 +258806,11 @@
 					"~|Beneath Cursed Sands|~ 3": "Quest"
 				}]
 			},
+			"Pete Kayer": {
+				"12600": [{
+					"F2P Only": "Nonskill"
+				}]
+			},
 			"Shipwright Sasha": {
 				"5941-1": [{
 					"Have the ability to buy a boat from ~|Shipwright Sasha|~": "Sailing"
