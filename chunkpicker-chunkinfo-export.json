@@ -30068,6 +30068,11 @@
 				"Objects": ["Barrel (beer)"],
 				"Output": "Beer"
 			},
+			"Fill a tankard with beer from a barrel*": {
+				"Items": ["Tankard*"],
+				"Objects": ["Barrel (beer)"],
+				"Output": "Beer tankard"
+			},
 			"Loot the Camdozaal Vault*": {
 				"Chunks": ["Ruins of Camdozaal"],
 				"Objects": ["Vault Door"],
@@ -34162,6 +34167,9 @@
 			},
 			"Access the Warriors' Guild": {
 				"Objects": ["Door#Warriors' Guild"]
+			},
+			"Access Varrock Museum upstairs": {
+				"Chunks": ["12853-1", "13109-5"]
 			},
 			"Access 12081-W1 via quest": {
 				"Tasks": {
@@ -92305,7 +92313,7 @@
 				},
 				"Tasks": {
 					"~|Morytania Diary#Hard|~ Complete the Hard Diary": "Diary",
-					"~|In Aid of the Myreque|~ Complete the quest": "Quest",
+					"~|In Aid of the Myreque|~ 2": "Quest",
 					"~|Barbarian Training|~ 2b2": "Quest"
 				},
 				"SkillsBoost": {
@@ -110216,7 +110224,7 @@
 				"XpReward": {
 					"Hitpoints": 15000,
 					"Magic": 10000,
-					"Strength|Ranged|Magic|Hitpoints|Defence": 150000
+					"Strength|Ranged|Magic|Hitpoints|Defence": 15000
 				},
 				"BaseQuest": "Dream Mentor",
 				"Chunks": ["8508-1"],
@@ -159972,6 +159980,7 @@
 				"High Stakes": 2,
 				"Lift Platform": 1,
 				"Obelisk": 4,
+				"Pete's crate": 1,
 				"Scoreboard": 1,
 				"Stairs": 17,
 				"Twisted Crate": 1
@@ -259068,6 +259077,11 @@
 				}],
 				"11573-1": [{
 					"F2P Only": "Nonskill"
+				}]
+			},
+			"Display case#30": {
+				"12853-1": [{
+					"Access Varrock Museum upstairs": "Nonskill"
 				}]
 			},
 			"Evergreen tree (Mac)": {
