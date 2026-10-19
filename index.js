@@ -354,7 +354,6 @@ let rules = {
     "Construction Milestone": false,
     "Construction Minigame": false,
     "Boss": false,
-    "Boss Level": false,
     "Slayer Equipment": false,
     "Normal Farming": false,
     "Raking": false,
@@ -362,7 +361,6 @@ let rules = {
     "CoX": false,
     "Tithe Farm": false,
     "Kill X": false,
-    "Kill X Boss": false,
     "Sorceress's Garden": false,
     "Spells": false,
     "Show Skill Tasks": false,
@@ -389,6 +387,7 @@ let rules = {
     "Wield Crafted Items": false,
     "Wield Crafted Items Override": false,
     "Multi Step Processing": false,
+    "Shooting Star Tiered": false,
     "Shooting Star": false,
     "Forestry": false,
     "ForestryXp": false,
@@ -399,7 +398,6 @@ let rules = {
     "Collection Log Clues": false,
     "Collection Log Minigames": false,
     "Collection Log Other": false,
-    "Herblore Unlocked": false,
     "Farming Primary": false,
     "Tertiary Keys": false,
     "Wandering implings": false,
@@ -412,13 +410,10 @@ let rules = {
     "Smithing by Smelting": false,
     "Pets": false,
     "Jars": false,
-    "Stuffables": false,
     "Kill X Amount": "1",
     "Rare Drop Amount": "1000",
     "Collection Log Clues Amount": "100",
-    "Manually Complete Tasks": false,
     "Every Drop": false,
-    "Herblore Unlocked Snake Weed": false,
     "HigherLander": false,
     "Starting Items": false,
     "Tutor Ammo": false,
@@ -453,103 +448,98 @@ let rules = {
 
 let ruleNames = {
     "Skillcape": "Must obtain skillcapes <span class='rule-asterisk noscroll'>*</span>",
-    "Rare Drop": "Chunk tasks only use drops more common than 1/X (not inclusive, set to 0 to include all drops)",
+    "Rare Drop": "Chunk tasks can use drops more common than 1/X (not inclusive, set to 0 to include all drops)<span class='rareDropRuleTooltip'></span>",
     "Pouch": "Using Runecraft pouches count as chunk tasks",
-    "InsidePOH": "Crafting furniture inside a POH can count as a chunk task",
-    "InsidePOH Primary": "Crafting furniture inside a POH counts as a primary training method for Construction",
+    "InsidePOH": "Crafting furniture inside your POH counts as a Construction skill task",
+    "InsidePOH Primary": "...and counts as a primary Construction training method",
     "Construction Milestone": "Miscellaneous Construction milestones (e.g. House style, servants, etc) can count for chunk tasks",
-    "Construction Minigame": "Xp from minigames/bosses (Fishing Trawler, Tempoross) can count as a primary way to train Construction",
+    "Construction Minigame": "Xp from minigames/bosses (Fishing Trawler, Tempoross) counts as a primary Construction training method",
     "Boss": "Killing a boss can be used for a chunk task (item on droptable, activity within boss fight, etc.)",
-    "Boss Level": "Must get the Slayer level to kill Slayer Bosses (Cerberus, Abyssal Sire, etc.)",
-    "Slayer Equipment": "Using Slayer equipment can count for chunk tasks",
-    "Normal Farming": "Allow normal farming to count as a primary method for training Farming",
-    "Raking": "Allow raking patches to count as a primary method for training Farming <span class='rule-asterisk noscroll'>*</span>",
-    "Sulphurous Fertiliser": "Allow making sulphurous fertiliser/supercompost via saltpetre (1xp/2xp each) to count as a primary method for training Farming",
-    "CoX": "Allow methods inside the Chambers of Xeric/Neypotzli to count for chunk tasks/primary training methods (Fishing, Hunter, Cooking, Woodcutting, etc.)",
-    "Tithe Farm": "Allow Tithe Farm to count as a primary method for training Farming",
+    "Slayer Equipment": "Using Slayer equipment counts for chunk tasks",
+    "Normal Farming": "Normal Farming",
+    "Raking": "Raking patches <span class='rule-asterisk noscroll'>*</span>",
+    "Sulphurous Fertiliser": "Making sulphurous fertiliser/supercompost via saltpetre",
+    "CoX": "Skilling methods inside the Chambers of Xeric/Neypotzli count for chunk tasks/primary training methods (Fishing, Hunter, Cooking, Woodcutting, etc.)",
+    "Tithe Farm": "Tithe Farm",
     "Kill X": "Kill X-amount of every new, unique monster you encounter",
-    "Kill X Boss": "Include bosses for these tasks",
-    "Sorceress's Garden": "Allow Sorceress's Garden to count as primary training for training Farming",
-    "Spells": "Spells count as a way to process runes via Magic, and therefore can count as chunk tasks",
-    "Show Skill Tasks": "Show Skill Tasks (e.g. Get 43 Crafting to cut a diamond)",
+    "Sorceress's Garden": "Sorceress's Garden",
+    "Spells": "Casting spells count as chunk tasks",
+    "Show Skill Tasks": "Show Skill Tasks",
     "Show Quest Tasks": "Show Quest Tasks",
-    "Show Diary Tasks": "Show Diary Tasks",
-    "Show Best in Slot Tasks": "Show Best in Slot (Accuracy + Strength, or secondarily Defence) Tasks",
-    "Show Best in Slot Prayer Tasks": "Show Best in Slot Tasks for Prayer-boosting gear",
-    "Show Best in Slot Defensive Tasks": "Show Best in Slot Tasks for Tank gear (highest defence-only against Melee/Ranged/Magic)",
-    "Show Best in Slot Flinching Tasks": "Show Best in Slot Tasks for Flinching weapons (pure offensive stats and strength, no speed)",
-    "Show Best in Slot Weight Tasks": "Show Best in Slot Tasks for weight-reducing gear (only pieces with negative weight)",
-    "Show Best in Slot Melee Style Tasks": "Show Best in Slot Tasks for stab/slash/crush instead of overall melee",
-    "Show Best in Slot 1H and 2H": "Show Best in Slot Tasks for both 2-handed and 1-handed/shield, rather than just the better of the two",
+    "Show Diary Tasks": "Show Achievement Diary Tasks",
+    "Show Best in Slot Tasks": "Show tasks for standard Best in Slot (Accuracy + Strength, secondarily Defence)",
+    "Show Best in Slot Prayer Tasks": "...and for Prayer-boosting gear",
+    "Show Best in Slot Defensive Tasks": "...and for Tank gear (Defence-only against each style)",
+    "Show Best in Slot Flinching Tasks": "...and for Flinching weapons (Accuracy + Strength only)",
+    "Show Best in Slot Weight Tasks": "...and for Weight-reducing gear (negative weight only)",
+    "Show Best in Slot Melee Style Tasks": "...and split Melee into Stab/Slash/Crush instead",
+    "Show Best in Slot 1H and 2H": "...and split weapon-slot into both 2-handed and 1-handed/shield, rather than just the better of the two",
     "Consumable Primary BiS": "For consumable items (arrows, darts, etc.), only count them as Best in Slot if you have primary access to them",
-    "Show Quest Tasks Complete": "Show Quest Tasks only when the whole quest is completable",
-    "Show Diary Tasks Complete": "Show Diary Tasks only when the whole diary tier (easy, medium, etc.) is completable",
-    "Show Diary Tasks Any": "Show all diary tasks possible, regardless of tier <span class='rule-asterisk noscroll'>*</span>",
-    "Highest Level": "Require processing skill tasks to be the highest level of processing, rather than the lowest (e.g. must smith a rune bar fully into a platebody rather than just into a dagger) <span class='rule-asterisk noscroll'>*</span>",
+    "Show Quest Tasks Complete": "...only when the whole quest is completable",
+    "Show Diary Tasks Complete": "...only when all tasks of a given tier are completable (per Region)",
+    "Show Diary Tasks Any": "...regardless of tier (only lowest incomplete tier otherwise) <span class='rule-asterisk noscroll'>*</span>",
+    "Highest Level": "Processing skill tasks require the highest level of processing, rather than the lowest <span class='rule-asterisk noscroll'>*</span><span class='highestLevelRuleTooltip'></span>",
     "BIS Skilling": "Must obtain items that are best-in-slot/add quality-of-life for skilling (e.g. Dragon Pickaxe, Angler Outfit, wieldable saw, etc.)",
-    "Collection Log": "Must obtain items with slots in the collection log (works in conjuction with the Rare Drop rule and the Boss Drops rule)",
-    "Minigame": "Allow items obtained from minigame rewards to count towards chunk tasks",
-    "PvP Minigame": "Allow items obtained from PvP-heavy minigames (LMS, PvP Arena, Bounty Hunter) to count towards chunk tasks",
-    "Shortcut Task": "Allow agility shortcuts to count as an Agility skill task",
-    "Shortcut": "Allow agility shortcuts to count as a primary method for training Agility",
-    "Wield Crafted Items": "Crafted items (e.g. bows, metal armour/weapons, etc.) can be wielded as part of chunks tasks (as BiS gear, wielding requirements, training methods, etc.) <span class='rule-asterisk noscroll'>*</span>",
+    "Collection Log": "Must obtain items with slots in the collection log",
+    "Minigame": "Items obtained from minigame rewards count towards chunk tasks",
+    "PvP Minigame": "...including from PvP-heavy minigames (LMS, PvP Arena, Bounty Hunter)",
+    "Shortcut Task": "Traversing agility shortcuts counts as an Agility skill task",
+    "Shortcut": "...and counts as a primary Agility training method",
+    "Wield Crafted Items": "Crafted items count towards chunk tasks <span class='rule-asterisk noscroll'>*</span><span class='wieldCraftedItemsRuleTooltip'></span>",
     "Wield Crafted Items Override": "Require higher level processing skill tasks if the resulting item would be a BiS (may require longer calculation times)<span class='wieldCraftedItemsOverrideRuleTooltip'></span>",
     "Multi Step Processing": `Allow higher level processing of resources to enable other processing tasks <span class='rule-asterisk noscroll'>*</span><span class='multiStepProcessingRuleTooltip'></span>`,
-    "Shooting Star": "Getting the level to mine all tiers of shooting stars count as Mining skill tasks <span class='rule-asterisk noscroll'>*</span>",
+    "Shooting Star Tiered": "Must get the Mining level to mine a new tier of shooting star per landing site unlocked<span class='shootingStarTieredRuleTooltip'></span>",
+    "Shooting Star": "The highest tier star (90 Mining) must be mined upon unlocking any shooting star landing site <span class='rule-asterisk noscroll'>*</span>",
     "Forestry": "Forestry events and rewards count as part of your chunks once you have access to the forestry kit",
     "ForestryXp": "Forestry events count as a primary way to gain xp in Woodcutting/Farming/Construction/Fletching/Hunter/Thieving <span class='rule-asterisk noscroll'>*</span>",
-    "Puro-Puro": "Allow implings from Puro-Puro & their drops to count towards chunk tasks",
-    "Extra implings": "Include implings that have non-guaranteed spawns in Puro-Puro as chunk tasks",
+    "Puro-Puro": "Implings from Puro-Puro & their drops count towards chunk tasks",
+    "Extra implings": "...including implings that have non-guaranteed spawns in Puro-Puro",
     "Collection Log Bosses": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Bosses' tab",
     "Collection Log Raids": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Raids' tab",
     "Collection Log Clues": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Clues' tab when each tier of clue is clue-amount% completable within your chunks <span class='rule-asterisk noscroll'>†</span>",
     "Collection Log Minigames": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Minigames' tab",
     "Collection Log Other": "<b class='noscroll'>[Collection log]</b> Obtain items in the 'Other' tab",
-    "Herblore Unlocked": "Herblore tasks are automatically required once Druidic Ritual is completable",
-    "Farming Primary": "Farming products (herbs, vegetables, etc.) can count as primary item sources for chunk tasks <span class='rule-asterisk noscroll'>*</span>",
-    "Tertiary Keys": "Allow loot from tertiary slayer keys (brimstone/larran's) to count towards chunk tasks <span class='rule-asterisk noscroll'>*</span>",
-    "Wandering implings": "Allow implings that randomly wander the world & their drops to count towards chunk tasks <span class='rule-asterisk noscroll'>*</span>",
-    "Secondary Primary": "Allow secondary training methods with drops/methods more common than 1/X (not inclusive, set to 0 to include all drops) to count as primary training methods (e.g. allow a 1/50 drop for a bronze bar be your required way to train Smithing) <span class='rule-asterisk noscroll'>*</span>",
-    "RDT": "Allow items from the Rare Drop Table and the Gem Drop Table to count towards chunk tasks",
-    "Untracked Uniques": "Must obtain extra uniques that are untracked on the collection log (e.g. gardening boots from Farmers, perfect shell from Tortoises, etc.)",
-    "Combat and Teleport Spells": "Allow all spells to count as possible Magic skill tasks (otherwise only 'utility' spells like High Alchemy or Telegrab will count)",
-    "Primary Spawns": "Item spawns count as primary access to an item, and can be used as a primary way to train a skill if needed <span class='rule-asterisk noscroll'>*</span>",
-    "Smithing by Smelting": "Smelting ores into bars counts as a primary method for training Smithing",
-    "Pets": "Obtaining pets is included in the collection log tasks <span class='rule-asterisk noscroll'>*</span>",
-    "Jars": "Obtaining jars is included in the collection log tasks <span class='rule-asterisk noscroll'>*</span>",
-    "Stuffables": "Must obtain stuffable items that can be mounted in the POH (big fish, slayer heads)",
-    "Manually Complete Tasks": "<b class='noscroll'>For maps that allow manually choosing new chunks</b>, allow the ability to manually move completed active tasks",
-    "Every Drop": "Must obtain every unique item drop from monsters (items that are dropped by multiple monsters only need to be obtained once)",
-    "Every Drop Implings": "Allow drops from implings to also count towards these tasks",
-    "Herblore Unlocked Snake Weed": "Herblore tasks are required once Druidic Ritual is completable & you have primary access to any level 3 herbs (Guam, Snake weed, Ardrigal, Sito foil, Rogue's purse, Volencia moss)",
+    "Farming Primary": "Farming products (herbs, vegetables, etc.) count as primary item sources for chunk tasks <span class='rule-asterisk noscroll'>*</span>",
+    "Tertiary Keys": "Loot from tertiary slayer keys (brimstone/larran's) counts towards chunk tasks <span class='rule-asterisk noscroll'>*</span>",
+    "Wandering implings": "Implings that randomly wander the world & their drops count towards chunk tasks <span class='rule-asterisk noscroll'>*</span>",
+    "Secondary Primary": "Training methods can use drops/methods more common than 1/X (not inclusive, set to 0 to include all drops) to count as primary training methods <span class='rule-asterisk noscroll'>*</span><span class='secondaryPrimaryRuleTooltip'></span>",
+    "RDT": "Items from the Rare Drop Table and the Gem Drop Table can count towards chunk tasks",
+    "Untracked Uniques": "Must obtain any unique items that are currently untracked on the collection log",
+    "Combat and Teleport Spells": "...including all spell types (otherwise only 'utility' spells like High Alchemy or Telegrab will count)",
+    "Primary Spawns": "Item spawns count as primary access to an item, and can be used as a primary way to train a skill <span class='rule-asterisk noscroll'>*</span>",
+    "Smithing by Smelting": "Smelting ores into bars counts as a primary Smithing training method",
+    "Pets": "...including pets <span class='rule-asterisk noscroll'>*</span>",
+    "Jars": "...including jars <span class='rule-asterisk noscroll'>*</span>",
+    "Every Drop": "Must obtain every new item drop from monsters (items that are dropped by multiple monsters only need to be obtained once)",
+    "Every Drop Implings": "...including drops from implings",
     "HigherLander": "Accessing the intermediate and veteran landers for Pest Control are required tasks (only novice lander is required otherwise)",
-    "Starting Items": "Allow tools gained from leaving Tutorial Island to be used within your chunks (aka not dropping your starting items). Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net, shortbow, bronze dagger, bronze sword, wooden shield",
-    "Tutor Ammo": "Items from the Magic/Ranged Combat Tutors in Lumbridge count as a way to train those respective skills (Air/Mind runes and Training bow/arrows)",
+    "Starting Items": "Allow keeping your starting items. Includes: bronze axe, bronze pickaxe, tinderbox, small fishing net, shortbow, bronze dagger, bronze sword, wooden shield",
+    "Tutor Ammo": "The Magic/Ranged Combat Tutors in Lumbridge count as a primary source for air/mind runes and training bow/arrows",
     "Secondary MTA": "Allow MTA to be required with secondary sources of nature/law/cosmic runes",
-    "Fossil Island Tasks": "Require the Fossil Island Mini-Task List be completed, similar to diary tasks",
-    "Combat Diary Tasks": "Require the Combat Achievements be completed",
-    "PVP-Only Spells": "Require spells that can only be cast on PVP Worlds/in the Wilderness (Teleother/Teleblock)",
-    "Skilling Pets": "Require skilling pets be obtained as soon as the relevant skill is trainable <span class='rule-asterisk noscroll'>†</span>",
-    "Money Unlockables": "Require permanently unlockable options be unlocked (angelic gravestone, infinitely charged lyre, Giants' Foundry moulds, etc.) <span class='rule-asterisk noscroll'>*</span>",
-    "Additional Money Unlockables": "Require additional permanently unlockable options be unlocked that are less chunk-specific or permanent (additional bank space, money crest, etc.) <span class='rule-asterisk noscroll'>†</span>",
+    "Fossil Island Tasks": "...including the Fossil Island notice board tasks",
+    "Combat Diary Tasks": "...including Combat Achievements",
+    "PVP-Only Spells": "...including spells that can only be cast on PVP Worlds/in the Wilderness (Teleother/Teleblock)",
+    "Skilling Pets": "Skilling pets must be obtained as soon as the relevant skill is trainable <span class='rule-asterisk noscroll'>†</span>",
+    "Money Unlockables": "Require all permanently unlockable options be unlocked <span class='rule-asterisk noscroll'>*</span>",
+    "Additional Money Unlockables": "...including some additional permanently unlockable options that are less chunk-specific or permanent (additional bank space, money crest, etc.) <span class='rule-asterisk noscroll'>†</span>",
     "Prayers": "Must be able to activate all prayers possible <span class='rule-asterisk noscroll'>†</span>",
     "All Droptables": "Must obtain every drop from every unique monster's droptable (duplicates included, all quantities) <span class='rule-asterisk noscroll'>†</span>",
-    "All Droptables Nest": "Must include every drop from bird nests <span class='rule-asterisk noscroll'>†</span>",
-    "F2P": "Restrict to F2P skills/items/tasks only",
+    "All Droptables Nest": "...including every drop from bird nests <span class='rule-asterisk noscroll'>†</span>",
+    "F2P": "Restrict tasks to only those doable in free-to-play",
     "Skiller": "Restrict tasks to only those doable on a level 3 skiller",
-    "Fill Stash": "Must build and fill S.T.A.S.H. units as soon as you're able to",
-    "Fill POH": "Must fill slots in the POH costume room",
-    "All Shops": "Must buy every item from every shop within your chunks once <span class='rule-asterisk noscroll'>⁺</span>",
+    "Fill Stash": "Must build and fill all S.T.A.S.H. units",
+    "Fill POH": "Must fill all slots in your POH costume room",
+    "All Shops": "Must buy every item from every shop within your chunks <span class='rule-asterisk noscroll'>⁺</span>",
     "Quest Skill Reqs": "Must get Quest skill requirements, regardless of if the Quest is startable or not <span class='rule-asterisk noscroll'>⁺</span>",
     "Cleaning Herbs": "Cleaning grimy herbs/making (unf) potions can count as chunk tasks",
-    "Boosting": "Allow skill boosts to be considered for skill tasks",
-    "Superheat Furnace": "Allow the Superheat Item spell to act as a furnace for training Smithing <span class='rule-asterisk noscroll'>*</span>",
+    "Boosting": "Skill boosts can be used for tasks",
+    "Superheat Furnace": "The Superheat Item spell counts as a furnace for training Smithing <span class='rule-asterisk noscroll'>*</span>",
     "Partial Products": "Require making of partial products as a skill task (partially assembling pies - requires a skill level to make, but gives no xp) <span class='rule-asterisk noscroll'>*</span>",
-    "POH Rooms": "Allow building rooms to count as Construction skill tasks",
-    "KeyItem Bosses": "For bosses that require keys to kill (Skotizo), factor in the droprate of the key as part of the droprate of each drop",
-    "Sail Trimming": "Allow trimming the sails on your boat to count as a primary training method for training Sailing <span class='rule-asterisk noscroll'>*</span>",
-    "Crewmates": "Getting the Sailing level to recruit crewmates to your ship can be a skill task",
-    "Sea Charting": "Require Sea Charting tasks be completed",
+    "POH Rooms": "Building rooms in your POH counts as chunk tasks",
+    "KeyItem Bosses": "For bosses that require keys to kill (Skotizo), factor in the droprate of the key as part of the droprate",
+    "Sail Trimming": "Trimming the sails on your boat counts as a primary Sailing training method <span class='rule-asterisk noscroll'>*</span>",
+    "Crewmates": "Recruiting crewmates counts as chunk tasks",
+    "Sea Charting": "...including Sea Charting",
     "Fish Offcuts Valid Processing": "Creating fish offcuts and fine fish offcuts counts as a valid way to process raw fish via Cooking (otherwise, most raw fish will require they be cooked to process them)",
 };                                                                              // List of rule definitions
 
@@ -559,7 +549,6 @@ let rulePresets = {
         "Construction Milestone": true,
         "Construction Minigame": true,
         "Boss": true,
-        "Boss Level": true,
         "Show Skill Tasks": true,
         "Show Quest Tasks": true,
         "Show Diary Tasks": true,
@@ -590,7 +579,6 @@ let rulePresets = {
         "Construction Milestone": true,
         "Construction Minigame": true,
         "Boss": true,
-        "Boss Level": true,
         "Slayer Equipment": true,
         "Normal Farming": true,
         "Raking": true,
@@ -613,10 +601,10 @@ let rulePresets = {
         "Shortcut": true,
         "Wield Crafted Items": true,
         "Multi Step Processing": true,
+        "Shooting Star Tiered": true,
         "Shooting Star": true,
         "Puro-Puro": true,
         "Extra implings": true,
-        "Herblore Unlocked": true,
         "Farming Primary": true,
         "Tertiary Keys": true,
         "Wandering implings": true,
@@ -657,7 +645,6 @@ let rulePresets = {
         "Construction Milestone": true,
         "Construction Minigame": true,
         "Boss": true,
-        "Boss Level": true,
         "Slayer Equipment": true,
         "Normal Farming": true,
         "Raking": true,
@@ -680,10 +667,10 @@ let rulePresets = {
         "Shortcut": true,
         "Wield Crafted Items": true,
         "Multi Step Processing": true,
+        "Shooting Star Tiered": true,
         "Shooting Star": true,
         "Puro-Puro": true,
         "Extra implings": true,
-        "Herblore Unlocked": true,
         "Farming Primary": true,
         "Tertiary Keys": true,
         "Wandering implings": true,
@@ -735,34 +722,32 @@ let ruleStructure = {
     "Visible Tasks": {
         "Show Skill Tasks": true,
         "Show Quest Tasks": ["Show Quest Tasks Complete"],
-        "Show Diary Tasks": ["Show Diary Tasks Complete", "Show Diary Tasks Any", "Fossil Island Tasks", "Combat Diary Tasks", "Sea Charting"],
-        "Show Best in Slot Tasks": ["Show Best in Slot Prayer Tasks", "Show Best in Slot Defensive Tasks", "Show Best in Slot Flinching Tasks", "Show Best in Slot Weight Tasks", "Show Best in Slot Melee Style Tasks", "Show Best in Slot 1H and 2H", "Consumable Primary BiS"]
+        "Show Diary Tasks": ["Combat Diary Tasks", "Show Diary Tasks Complete", "Show Diary Tasks Any", "Sea Charting", "Fossil Island Tasks"],
+        "Show Best in Slot Tasks": ["Show Best in Slot Prayer Tasks", "Show Best in Slot Defensive Tasks", "Show Best in Slot Melee Style Tasks", "Show Best in Slot 1H and 2H", "Show Best in Slot Flinching Tasks", "Show Best in Slot Weight Tasks", "Consumable Primary BiS"]
     },
     "Overall Skill": {
+        "Secondary Primary": true,
         "Starting Items": true,
         "Skillcape": true,
         "Highest Level": true,
         "Multi Step Processing": true,
         "Wield Crafted Items": ["Wield Crafted Items Override"],
-        "Secondary Primary": true,
         "CoX": true,
         "Quest Skill Reqs": true,
         "Partial Products": true,
         "Boosting": true
     },
     "Agility": {
-        "Shortcut": true,
-        "Shortcut Task": true
+        "Shortcut Task": ["Shortcut"]
     },
     "Combat": {
         "HigherLander": true
     },
     "Construction": {
-        "InsidePOH Primary": true,
-        "InsidePOH": true,
+        "InsidePOH": ["InsidePOH Primary"],
         "Construction Milestone": true,
-        "Construction Minigame": true,
-        "POH Rooms": true
+        "POH Rooms": true,
+        "Construction Minigame": true
     },
     "Cooking": {
         "Fish Offcuts Valid Processing": true
@@ -776,8 +761,6 @@ let ruleStructure = {
         "Farming Primary": true
     },
     "Herblore": {
-        "Herblore Unlocked Snake Weed": true,
-        "Herblore Unlocked": true,
         "Cleaning Herbs": true
     },
     "Hunter": {
@@ -789,7 +772,7 @@ let ruleStructure = {
         "Secondary MTA": true
     },
     "Mining": {
-        "Shooting Star": true
+        "Shooting Star Tiered": ["Shooting Star"]
     },
     "Prayer": {
         "Prayers": true
@@ -802,8 +785,7 @@ let ruleStructure = {
         "Crewmates": true
     },
     "Slayer": {
-        "Slayer Equipment": true,
-        "Boss Level": true
+        "Slayer Equipment": true
     },
     "Smithing": {
         "Smithing by Smelting": true,
@@ -813,28 +795,26 @@ let ruleStructure = {
         "Forestry": ["ForestryXp"]
     },
     "Item Sources": {
-        "Boss": true,
         "Rare Drop": ["KeyItem Bosses"],
+        "Boss": true,
+        "Minigame": ["PvP Minigame"],
         "RDT": true,
         "Tertiary Keys": true,
         "Primary Spawns": true,
         "Tutor Ammo": true
     },
     "Miscellaneous": {
-        "Minigame": ["PvP Minigame"],
-        "Kill X": ["Kill X Boss"],
-        "BIS Skilling": true,
         "Collection Log": ["Collection Log Bosses", "Collection Log Raids", "Collection Log Minigames", "Collection Log Other", "Pets", "Jars", "Collection Log Clues"],
         "Untracked Uniques": true,
-        "Skilling Pets": true,
-        "Stuffables": true,
-        "Fill Stash": true,
-        "Fill POH": true,
         "Money Unlockables": ["Additional Money Unlockables"],
-        "Manually Complete Tasks": true,
+        "BIS Skilling": true,
+        "Skilling Pets": true,
+        "Kill X": true,
         "Every Drop": ["Every Drop Implings"],
         "All Droptables": ["All Droptables Nest"],
         "All Shops": true,
+        "Fill Stash": true,
+        "Fill POH": true,
         "F2P": true,
         "Skiller": true
     }
@@ -878,7 +858,6 @@ let taskGeneratingRules = {
     "Untracked Uniques": true,
     "Pets": true,
     "Jars": true,
-    "Stuffables": true,
     "Every Drop": true,
     "Fossil Island Tasks": true,
     "Sea Charting": true,
@@ -893,9 +872,19 @@ let taskGeneratingRules = {
 };                                                                              // List of rule that generate tasks
 
 let ruleTooltips = [
+    'highestLevelRuleTooltip',
     'multiStepProcessingRuleTooltip',
-    'wieldCraftedItemsOverrideRuleTooltip'
+    'shootingStarTieredRuleTooltip',
+    'wieldCraftedItemsRuleTooltip',
+    'wieldCraftedItemsOverrideRuleTooltip',
+    'rareDropRuleTooltip',
+    'secondaryPrimaryRuleTooltip'
 ];
+
+let ruleInnerTitles = {
+    'Normal Farming': 'Primary Farming training methods:',
+    'Farming Primary': 'Other:'
+};
 
 let settings = {
     "highvis": false,
@@ -928,6 +917,7 @@ let settings = {
     "defaultChunkinfo": 'monsters',
     "taskSearchbar": false,
     "generatePluginData": false,
+    "manuallyCompleteTasks": false,
 };                                                                              // Current state of all settings
 
 let settingNames = {
@@ -958,7 +948,8 @@ let settingNames = {
     "unlockedBorderColor": "Change the color of the border surrounding your unlocked chunks",
     "defaultChunkinfo": "Select the default tab when first opening the Chunk Info Panel",
     "taskSearchbar": "Show a searchbar at the top of your Active Tasks to allow filtering. Useful for maps with large task lists that have trouble finding specific tasks",
-    "generatePluginData": "Opt-in to generate data used in the Chunk Tasks plugin"
+    "generatePluginData": "Opt-in to generate data used in the Chunk Tasks plugin",
+    "manuallyCompleteTasks": "Allow the ability to manually move completed active tasks to the Completed Tasks tab (useful for accounts that choose their own chunks)",
 };                                                                              // Descriptions of the settings
 
 let settingStructure = {
@@ -976,7 +967,7 @@ let settingStructure = {
     "Information Panels": {
         "recent": true,
         "info": ["defaultChunkinfo"],
-        "chunkTasks": ["taskSidebar", "hideChecked", "taskSearchbar"],
+        "chunkTasks": ["taskSidebar", "hideChecked", "taskSearchbar", "manuallyCompleteTasks"],
         "topButtons": ["allTasks"]
     },
     "Warnings": {
@@ -1368,6 +1359,7 @@ let doableClueStepsModalOpen = false;
 let clueChunksModalOpen = false;
 let clipboardModalOpen = false;
 let customizeTopbarModalOpen = false;
+let revisionSyncModalOpen = false;
 let notesOpen = false;
 let notesEditing = false;
 let newTasksOpen = false;
@@ -1538,10 +1530,10 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.68';
+let currentVersion = '6.9.69';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
-let updateLevel = 'unconnected-areas';
+let updateLevel = 'rule-rewording';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -1661,6 +1653,8 @@ let searchDetailsParams = [];
 let recentFancyRollTimeout;
 let recentFancyRollTime = 0;
 let createdPOF = undefined;
+let localRevision = -1;
+let saveTimeout = null;
 let mapsData = [];
 let searchActiveTasksFocused = false;
 let removeCanvasDarkness = false;
@@ -1711,7 +1705,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.68";
+mapImg.src = "osrs_world_map.png?v=6.9.69";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -2609,7 +2603,7 @@ let handleMouseDown = function(e) {
 
 // Handles mouse move event
 let handleMouseMove = function(e) {
-    if ((e.button !== 0 && !e.touches) || (e.type === 'touchmove' && e.target.id !== 'canvas') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || pickChunkWarningModalOpen || roll2ChunkWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen) {
+    if ((e.button !== 0 && !e.touches) || (e.type === 'touchmove' && e.target.id !== 'canvas') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || pickChunkWarningModalOpen || roll2ChunkWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || revisionSyncModalOpen) {
         drawCanvas();
         return;
     }
@@ -3639,7 +3633,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.68");
+        myWorker = new Worker("./worker.js?v=6.9.69");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -4000,8 +3994,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.68");
-let myWorker2 = new Worker("./worker.js?v=6.9.68");
+let myWorker = new Worker("./worker.js?v=6.9.69");
+let myWorker2 = new Worker("./worker.js?v=6.9.69");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -5134,7 +5128,7 @@ let unlockEntry = function() {
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                     $('.open-manual-outer-container').css('opacity', 0).show();
                     $('.dropdown-item-customize-topbar').css('opacity', 0).show();
-                    rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
+                    settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 0).show();
                     $('#entry-menu').animate({ 'opacity': 0 });
                     myRef.child('mapCreationTimes/' + mid).once('value', function(snap) {
                         if (!snap.val()) {
@@ -5149,7 +5143,7 @@ let unlockEntry = function() {
                         !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                         $('.open-manual-outer-container').animate({ 'opacity': 1 });
                         $('.dropdown-item-customize-topbar').animate({ 'opacity': 1 });
-                        rules['Manually Complete Tasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
+                        settings['manuallyCompleteTasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
                         $('#unlock-entry').prop('disabled', false).text('Unlock');
                         locked = false;
                         inEntry = false;
@@ -5196,7 +5190,7 @@ let unlockEntry = function() {
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                             $('.open-manual-outer-container').css('opacity', 0).show();
                             $('.dropdown-item-customize-topbar').css('opacity', 0).show();
-                            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
+                            settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 0).show();
                             $('#entry-menu').animate({ 'opacity': 0 });
                             setTimeout(function() {
                                 $('#entry-menu').css('opacity', 1).hide();
@@ -5206,7 +5200,7 @@ let unlockEntry = function() {
                                 !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                                 $('.open-manual-outer-container').animate({ 'opacity': 1 });
                                 $('.dropdown-item-customize-topbar').animate({ 'opacity': 1 });
-                                rules['Manually Complete Tasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
+                                settings['manuallyCompleteTasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
                                 $('#unlock-entry').prop('disabled', false).text('Unlock');
                                 locked = false;
                                 inEntry = false;
@@ -5348,7 +5342,7 @@ let accessMap = function() {
                             recentOn && !settings['taskSidebar'] && $('.menu7').show();
                             $('.open-manual-outer-container').css('opacity', 1).show();
                             $('.dropdown-item-customize-topbar').css('opacity', 1).show();
-                            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
+                            settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 1).show();
                             setRecentLogin();
                             !doesPluginOutputExist && setData();
                             setupMap();
@@ -5409,7 +5403,7 @@ let accessMap = function() {
                                     recentOn && !settings['taskSidebar'] && $('.menu7').show();
                                     $('.open-manual-outer-container').css('opacity', 1).show();
                                     $('.dropdown-item-customize-topbar').css('opacity', 1).show();
-                                    rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
+                                    settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 1).show();
                                     setupMap();
                                 }).catch((error) => {
                                     $('.pin-err').css('visibility', 'visible');
@@ -5568,7 +5562,7 @@ let enableTestMode = async function(close, fromConfirm) {
             $('.open-manual-outer-container').css('opacity', 1).show();
             $('.dropdown-item-customize-topbar').css('opacity', 1).show();
             $('.open-checkoff-container').css('opacity', 1).show();
-            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
+            settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 1).show();
             $('.center').css('margin-top', '15px');
             $('.pick').css('opacity', 1).show();
             roll2On && $('.roll2').css('opacity', 1).show();
@@ -6106,7 +6100,7 @@ let setupMap = async function() {
             $('.open-manual-outer-container').css('opacity', 0).hide();
             $('.open-checkoff-container').css('opacity', 0).hide();
             $('.dropdown-item-customize-topbar').css('opacity', 0).hide();
-            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
+            settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 0).hide();
             $('.pin.entry').focus();
         } else {
             $('.center').css('margin-top', '15px');
@@ -6120,7 +6114,7 @@ let setupMap = async function() {
             $('.open-manual-outer-container').css('opacity', 0).hide();
             $('.open-checkoff-container').css('opacity', 0).hide();
             $('.dropdown-item-customize-topbar').css('opacity', 0).hide();
-            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
+            settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 0).hide();
             $('.center, #toggleIds, .toggleIds.text').css('opacity', 1).show();
             $('.pin.entry').focus();
         }
@@ -7175,7 +7169,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.68");
+    myWorker2 = new Worker("./worker.js?v=6.9.69");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -11097,7 +11091,7 @@ let showDetails = function(challenge, skill, dataType, isNested) {
             }
         }
         let challengeLabelLine = '';
-        if (skillNames.includes(skill) && !!chunkInfo['challenges'][skill][challenge]) {
+        if (skillNames.includes(skill) && !!chunkInfo['challenges'][skill][challenge] && chunkInfo['challenges'][skill][challenge].hasOwnProperty('Level')) {
             challengeLabelLine = `[${chunkInfo['challenges'][skill][challenge]['Level']}] ${skill}: `;
         } else if (skill === 'BiS' || skill === 'Extra') {
             challengeLabelLine = `[${chunkInfo['challenges'][skill][challenge]['Label']}]: `;
@@ -11964,6 +11958,12 @@ let showRules = function(isPage2) {
             let tooltipTarget = onMobile ? $(`.rules-data > div:not(.rules-content) .${tooltipTargetSelector}`) : $(`.rules-data > .rules-content .${tooltipTargetSelector}`);
             tooltipTarget.html(tooltip.generate(tooltipTargetSelector, '<i class="fa-solid fa-question-circle question-help"></i>', tooltipTargetSelector, onMobile ? 'bottom' : 'right'));
         });
+        Object.keys(ruleInnerTitles).forEach((ruleName) => {
+            const formattedRuleName = ruleName.replaceAll(' ', '_').replace(/[!"#$%&'()*+,.\/:;<=>?@\[\\\]\^\`{|}~]/g, '').toLowerCase() + '-rule';
+            const titleTarget = onMobile ? $(`.rules-data > div:not(.rules-content) .${formattedRuleName}`) : $(`.rules-data > .rules-content .${formattedRuleName}`);
+            const innerTitle = `<div class='rule-innertitle'>${ruleInnerTitles[ruleName]}</div>`;
+            $(innerTitle).insertBefore(titleTarget);
+        });
         $('#rulesModal').show();
         modalOutsideTime = Date.now();
     }
@@ -12653,8 +12653,6 @@ let checkOffRules = function(didRedo, startup) {
     }
     if (!startup) {
         calcCurrentChallengesCanvas(true);
-        rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 1).show();
-        !rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).hide();
         setData();
     }
 }
@@ -12709,6 +12707,8 @@ let checkOffSettings = function(didRedo, startup) {
     settings['hideChecked'] ? $(`.tasks-checkmark`).show() : $(`.tasks-checkmark`).hide();
     changeChallengeColor();
     if (!startup) {
+        settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 1).show();
+        !settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 0).hide();
         setData();
     }
     if (isPicking && !settings['randomStartAlways']) {
@@ -13265,6 +13265,7 @@ let loadData = async function(startup) {
         toggleTaskSearchbar(settings['taskSearchbar'], 'startup');
         togglePluginDataGeneration(settings['generatePluginData'], 'startup');
         settings['hideChecked'] ? $(`.tasks-checkmark`).show() : $(`.tasks-checkmark`).hide();
+        settings['manuallyCompleteTasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
     });
     myRef.child('userName').once('value', function(snap) {
         let snapDiff = preloadHelper(snap, 'userName');
@@ -13380,6 +13381,13 @@ let loadData = async function(startup) {
         let snapDiff = preloadHelper(snap, 'createdPOF');
         if (snapDiff === false) return;
         createdPOF = !!snap.val() ? snap.val() : false;
+    });
+    myRef.child('revision').once('value', function(snap) {
+        let snapDiff = preloadHelper(snap, 'revision');
+        if (snapDiff === false) return;
+        if (localRevision === -1) {
+            localRevision = !!snap.val() ? snap.val() : 0;
+        }
     });
     myRef.child('pluginOutput').once('value', function(snap) {
         let snapDiff = preloadHelper(snap, 'pluginOutput');
@@ -13552,14 +13560,6 @@ let loadData = async function(startup) {
             rulesTemp['Additional Money Unlockables'] = rulesTemp.hasOwnProperty('Money Unlockables') ? rulesTemp['Money Unlockables'] : false;
         }
 
-        if (!rulesTemp.hasOwnProperty('Boss Level')) {
-            rulesTemp['Boss Level'] = rulesTemp.hasOwnProperty('Boss') ? rulesTemp['Boss'] : false;
-        }
-
-        if (!rulesTemp.hasOwnProperty('Kill X Boss')) {
-            rulesTemp['Kill X Boss'] = rulesTemp.hasOwnProperty('Kill X') ? rulesTemp['Kill X'] : false;
-        }
-
         if (!rulesTemp.hasOwnProperty('Sail Trimming')) {
             rulesTemp['Sail Trimming'] = rulesTemp.hasOwnProperty('Skillcape') ? rulesTemp['Skillcape'] : false;
         }
@@ -13576,14 +13576,15 @@ let loadData = async function(startup) {
             rulesTemp['Fish Offcuts Valid Processing'] = true;
         }
 
+        if (!rulesTemp.hasOwnProperty('Shooting Star Tiered')) {
+            rulesTemp['Shooting Star Tiered'] = rulesTemp.hasOwnProperty('Shooting Star') ? rulesTemp['Shooting Star'] : false;
+        }
+
         !!rulesTemp && Object.keys(rulesTemp).forEach((rule) => {
             rules[rule] = rulesTemp[rule];
         });
         rulesModalOpen && showRules();
         chunkTasksOn && calcCurrentChallengesCanvas(true, !initialLoaded || recentlyTestMode, !viewOnly);
-        if (!startup) {
-            rules['Manually Complete Tasks'] && !viewOnly && !inEntry && !locked ? $('.open-complete-container').css('opacity', 1).show() : $('.open-complete-container').css('opacity', 0).hide();
-        }
         questFilterType = 'all';
         !initialLoaded && chunkTasksOn && setupCurrentChallengesFromSaved();
     });
@@ -13730,8 +13731,10 @@ let createPluginOutput = function() {
         forceUpdatePluginOutput = false;
         const userRef = firebase.storage().ref(`pluginOutputs/${firebase.auth().currentUser.uid}.json`);
         userRef.putString(JSON.stringify(pluginOutput), 'raw', { contentType: 'application/json' });
-        createdPOF = true;
-        setData(true);
+        if (!createdPOF) {
+            createdPOF = true;
+            setData(true);
+        }
     }
 }
 
@@ -13756,9 +13759,36 @@ let convertToIds = function(obj) {
     return translatedObj;
 }
 
+// Checks if the revision number is correct to prevent overlapping data writes
+let revisionSync = function(skipCreatePluginOutput) {
+    myRef.child('revision').transaction((revision) => {
+        if (revision === null) return null;
+        if (revision !== localRevision) return;
+        localRevision = revision + 1;
+        return revision + 1;
+    },
+    (error, committed) => {
+        if (!error && committed) {
+            setData(skipCreatePluginOutput, true);
+        } else {
+            modal.generate('revisionSyncModal', onMobile);
+            revisionSyncModalOpen = true;
+            $('#revisionSyncModal').show();
+        }
+    });
+}
+
 // Stores data in Firebase
-let setData = function(skipCreatePluginOutput) {
+let setData = function(skipCreatePluginOutput, doneDebouncing) {
     if (onTestServer || testMode || recentlyTestMode || !signedIn) {
+        return;
+    }
+    if (!doneDebouncing) {
+        clearTimeout(saveTimeout);
+
+        saveTimeout = setTimeout(() => {
+            revisionSync(skipCreatePluginOutput);
+        }, 500);
         return;
     }
     settings['generatePluginData'] && !skipCreatePluginOutput && createPluginOutput();
@@ -13806,7 +13836,6 @@ let setData = function(skipCreatePluginOutput) {
         friends: encodeObject(friends, true),
         friendsAlt: encodeObject(friendsAlt, true),
         chunkNotes: encodeObject(chunkNotes, true),
-        pluginOutput,
         topbarSelection,
         recentFancyRollTime,
         userTasks: encodeObject(userTasks, true),
@@ -13835,14 +13864,15 @@ let setData = function(skipCreatePluginOutput) {
             'newTasks': settings['newTasks'],
             'hideChecked': settings['hideChecked'],
             'shiftUnlock': settings['shiftUnlock'],
-            rollWarning: settings['rollWarning'],
-            optOutSections: settings['optOutSections'],
-            optOutSectionsWater: settings['optOutSectionsWater'],
-            info: chunkInfoOn,
+            'rollWarning': settings['rollWarning'],
+            'optOutSections': settings['optOutSections'],
+            'optOutSectionsWater': settings['optOutSectionsWater'],
+            'info': chunkInfoOn,
             'rollingChunksOptions': settings['rollingChunksOptions'],
             'defaultChunkinfo': settings['defaultChunkinfo'],
             'taskSearchbar': settings['taskSearchbar'],
-            'generatePluginData': settings['generatePluginData']
+            'generatePluginData': settings['generatePluginData'],
+            'manuallyCompleteTasks': settings['manuallyCompleteTasks']
         },
         chunkinfo: {
             checkedChallenges: encodeObject(convertToIds(checkedChallenges), true),
@@ -13881,6 +13911,7 @@ let setData = function(skipCreatePluginOutput) {
     };
     let databaseObject = JSON.parse(JSON.stringify(setSnap));
     delete databaseObject['chunkOrder'];
+    delete databaseObject['revision'];
     if (firebase.auth().currentUser) {
         myRef.child('test').set(null, (error) => {
             if (error) {
@@ -14000,7 +14031,7 @@ let changeLocked = function() {
                     !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                     $('.open-manual-outer-container').css('opacity', 0).show();
                     $('.dropdown-item-customize-topbar').css('opacity', 0).show();
-                    rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
+                    settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 0).show();
                     $('.lock-box').animate({ 'opacity': 0 });
                     setRecentLogin();
                     !doesPluginOutputExist && setData();
@@ -14016,7 +14047,7 @@ let changeLocked = function() {
                         !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                         $('.open-manual-outer-container').animate({ 'opacity': 1 });
                         $('.dropdown-item-customize-topbar').animate({ 'opacity': 1 });
-                        rules['Manually Complete Tasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
+                        settings['manuallyCompleteTasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
                         $('#lock-unlock').prop('disabled', false).text('Unlock');
                         locked = false;
                         helpMenuOpenSoon && helpFunc();
@@ -14059,7 +14090,7 @@ let changeLocked = function() {
                             !isPicking && unpickOn && $('.unpick').css('opacity', 0).show();
                             $('.open-manual-outer-container').css('opacity', 0).show();
                             $('.dropdown-item-customize-topbar').css('opacity', 0).show();
-                            rules['Manually Complete Tasks'] && $('.open-complete-container').css('opacity', 0).show();
+                            settings['manuallyCompleteTasks'] && $('.open-complete-container').css('opacity', 0).show();
                             $('.lock-box').animate({ 'opacity': 0 });
                             setTimeout(function() {
                                 $('.lock-box').css('opacity', 1).hide();
@@ -14068,7 +14099,7 @@ let changeLocked = function() {
                                 !isPicking && unpickOn && $('.unpick').animate({ 'opacity': 1 });
                                 $('.open-manual-outer-container').animate({ 'opacity': 1 });
                                 $('.dropdown-item-customize-topbar').animate({ 'opacity': 1 });
-                                rules['Manually Complete Tasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
+                                settings['manuallyCompleteTasks'] && $('.open-complete-container').animate({ 'opacity': 1 });
                                 $('#lock-unlock').prop('disabled', false).text('Unlock');
                                 locked = false;
                                 helpMenuOpenSoon && helpFunc();

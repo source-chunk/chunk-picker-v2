@@ -178,6 +178,7 @@ let manualPrimary = {};
 let updateLevel;
 
 let clueTasksPossible = {};
+let unlockedLandingSites = 0;
 let areasStructure = {};
 let tempChunkData = {};
 let craftedBisOverride = {};
@@ -254,7 +255,7 @@ onmessage = function(e) {
             clueCompleteNum
         } = eGlobal.data);
 
-        if (updateLevel !== 'unconnected-areas') {
+        if (updateLevel !== 'rule-rewording') {
             postMessage({ type: 'reload' });
         }
 
@@ -3596,6 +3597,10 @@ let calcChallenges = function(chunks, baseChunkData) {
         Object.keys(tempClueTasksPossible).forEach((tier) => {
             clueTasksPossible[tier] = (tempClueTasksPossible[tier] / (tempClueTasksPossible[tier] + tempClueTasksNotPossible[tier])) * 100;
         });
+        unlockedLandingSites = 0;
+        if (newValids.hasOwnProperty('Nonskill')) {
+            unlockedLandingSites = Object.keys(newValids['Nonskill']).filter((task) => !!chunkInfo['challenges']['Nonskill'][task] && chunkInfo['challenges']['Nonskill'][task].hasOwnProperty('StarRegion')).length;
+        }
         !!baseChunkData && !!baseChunkData['items'] && Object.keys(baseChunkData['items']).filter(item => { return Object.keys(baseChunkData['items'][item]).length === 0 }).forEach((item) => {
             delete baseChunkData['items'][item];
         });
@@ -3897,7 +3902,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 return;
             }
             !!chunkInfo['challenges'][skill][name]['Category'] && Object.keys(rules).some(rule => {
-                if (chunkInfo['challenges'][skill][name]['Category'].includes(rule) && !maybePrimary.includes(rule) && !rules[rule] && (rule !== 'Secondary Primary' || secondaryPrimaryNum === "1/1")) {
+                if (chunkInfo['challenges'][skill][name]['Category'].includes(rule) && !maybePrimary.includes(rule) && !rules[rule] && (rule !== 'Secondary Primary' || secondaryPrimaryNum === "1/1") && rule !== 'Shooting Star') {
                     validChallenge = false;
                     wrongThings.push(rule);
                     return true;
@@ -3929,6 +3934,12 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
             });
             if (!rules['Cleaning Herbs'] && (name.includes('Clean a') || name.includes('(unf)')) && skill === 'Herblore' && chunkInfo['challenges'][skill][name]['Level'] > 1) {
                 chunkInfo['challenges'][skill][name]['NeverShow'] = true;
+            }
+            if (rules['Shooting Star Tiered'] && !rules['Shooting Star'] && chunkInfo['challenges'][skill][name].hasOwnProperty('Category') && chunkInfo['challenges'][skill][name]['Category'].includes('Shooting Star') && name.includes('size-')) {
+                if (unlockedLandingSites < parseInt(name.match(/size-(\d)/)[1])) {
+                    validChallenge = false;
+                    wrongThings.push('Shooting Star Tiered');
+                }
             }
             if (wrongThings.length > 0) {
                 nonValids[name] = wrongThings;
@@ -4851,7 +4862,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 }
             });
         }
-        Object.keys(monsters).filter((monster) => { return (!chunkInfo['slayerMonsters'].hasOwnProperty(monster) || (checkPrimaryMethod('Slayer', valids, baseChunkData) && (!slayerLocked || (chunkInfo['slayerMonsters'][monster] <= (slayerLocked['level'] + bestBoost)))) || (!!passiveSkill && passiveSkill.hasOwnProperty('Slayer') && (passiveSkill['Slayer'] + bestBoost) >= chunkInfo['slayerMonsters'][monster])) && (rules['Kill X Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backlog['Extra'] || (!backlog['Extra']['Kill X ~|' + monster + '|~'] && !backlog['Extra']['Kill X ~|' + monster.replaceAll('#', '/') + '|~'])) }).sort().forEach((monster) => {
+        Object.keys(monsters).filter((monster) => { return (!chunkInfo['slayerMonsters'].hasOwnProperty(monster) || (checkPrimaryMethod('Slayer', valids, baseChunkData) && (!slayerLocked || (chunkInfo['slayerMonsters'][monster] <= (slayerLocked['level'] + bestBoost)))) || (!!passiveSkill && passiveSkill.hasOwnProperty('Slayer') && (passiveSkill['Slayer'] + bestBoost) >= chunkInfo['slayerMonsters'][monster])) && (rules['Boss'] || !bossMonsters.hasOwnProperty(monster)) && (!backlog['Extra'] || (!backlog['Extra']['Kill X ~|' + monster + '|~'] && !backlog['Extra']['Kill X ~|' + monster.replaceAll('#', '/') + '|~'])) }).sort().forEach((monster) => {
             valids['Extra']['Kill X ~|' + monster + '|~'] = 'Kill X';
             if (!chunkInfo['challenges']['Extra']) {
                 chunkInfo['challenges']['Extra'] = {};

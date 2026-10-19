@@ -3334,6 +3334,11 @@ label .tooltip-base-el:active {
     height: 65%;
 }
 
+#revisionSyncModal > .modal-content {
+    width: 30%;
+    height: 25%;
+}
+
 .manual-close {
     cursor: pointer;
     margin-top: 0px;
@@ -4103,6 +4108,9 @@ label .tooltip-base-el:active {
     width: 64%;
     right: 0px;
     position: absolute;
+    border-bottom: solid 1px;
+    padding-left: 5%;
+    padding-bottom: 10px;
 }
 
 .show-rule-details-btn {
@@ -4250,6 +4258,12 @@ label .tooltip-base-el:active {
     padding-right: 10px;
     padding-top: 1%;
     padding-bottom: 1%;
+    position: relative;
+    background-color: var(--color1);
+}
+
+.rule-innertitle {
+    font-size: 20px;
 }
 
 .rules-content {
@@ -5060,7 +5074,7 @@ input#searchChunkSections {
     background-color: rgb(50, 175, 50);
 }
 
-.rollwarning-title, .roll2warning-title {
+.rollwarning-title, .roll2warning-title, .revisionsync-title {
     font-size: 24px;
     font-weight: bold;
     padding-top: 0px;
@@ -5069,7 +5083,7 @@ input#searchChunkSections {
     background-color: var(--color1);
 }
 
-.rollwarning-subtitle, .roll2warning-subtitle {
+.rollwarning-subtitle, .roll2warning-subtitle, .revisionsync-subtitle {
     padding: 0px 15px;
     background-color: var(--color4);
     font-size: 18px;
@@ -5079,15 +5093,21 @@ input#searchChunkSections {
     overflow-y: auto;
 }
 
+.revisionsync-subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .rollwarning-firsttext, .roll2warning-firsttext {
     margin-top: 7%;
 }
 
-.rollwarning-data, .roll2warning-data {
+.rollwarning-data, .roll2warning-data, .revisionsync-data {
     border-top: solid 1px;
 }
 
-.rollwarning-data > div, .roll2warning-data > div {
+.rollwarning-data > div, .roll2warning-data > div, .revisionsync-data > div {
     float: right;
     margin: 10px;
     display: flex;
@@ -5105,7 +5125,7 @@ input#searchChunkSections {
     cursor: pointer;
 }
 
-.rollwarning-proceed, .roll2warning-proceed {
+.rollwarning-proceed, .roll2warning-proceed, .revisionsync-proceed {
     border: solid 1px black;
     background-color: rgb(75, 200, 75);
     padding: 5px;
@@ -5116,7 +5136,7 @@ input#searchChunkSections {
     transition-duration: 0.4s;
 }
 
-.rollwarning-proceed:hover, .roll2warning-proceed:hover {
+.rollwarning-proceed:hover, .roll2warning-proceed:hover, .revisionsync-proceed:hover {
     background-color: rgb(50, 175, 50);
 }
 

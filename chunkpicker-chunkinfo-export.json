@@ -21288,17 +21288,7 @@
 			}
 		},
 		"Herblore": {
-			"Unlock ~|Herblore|~ after Druidic Ritual": {
-				"Category": ["Herblore Unlocked"],
-				"Level": 1,
-				"Primary": true,
-				"Tasks": {
-					"~|Druidic Ritual|~ Complete the quest": "Quest"
-				},
-				"NoBoost": true
-			},
 			"Unlock ~|Herblore|~ with rogue's purse": {
-				"Category": ["Herblore Unlocked Snake Weed"],
 				"Items": ["Grimy rogue's purse*"],
 				"Level": 3,
 				"Output": "Rogue's purse",
@@ -21307,7 +21297,6 @@
 				"Priority": 2
 			},
 			"Unlock ~|Herblore|~ with snake weed": {
-				"Category": ["Herblore Unlocked Snake Weed"],
 				"Items": ["Grimy snake weed*"],
 				"Level": 3,
 				"Output": "Snake weed",
@@ -21316,7 +21305,6 @@
 				"Priority": 3
 			},
 			"Unlock ~|Herblore|~ with ardrigal": {
-				"Category": ["Herblore Unlocked Snake Weed"],
 				"Items": ["Grimy ardrigal*"],
 				"Level": 3,
 				"Output": "Ardrigal",
@@ -21325,7 +21313,6 @@
 				"Priority": 3
 			},
 			"Unlock ~|Herblore|~ with sito foil": {
-				"Category": ["Herblore Unlocked Snake Weed"],
 				"Items": ["Grimy sito foil*"],
 				"Level": 3,
 				"Output": "Sito foil",
@@ -21334,7 +21321,6 @@
 				"Priority": 3
 			},
 			"Unlock ~|Herblore|~ with volencia moss": {
-				"Category": ["Herblore Unlocked Snake Weed"],
 				"Items": ["Grimy volencia moss*"],
 				"Level": 3,
 				"Output": "Volencia moss",
@@ -21343,7 +21329,7 @@
 				"Priority": 3
 			},
 			"Unlock ~|Herblore|~ with guam leaf": {
-				"Category": ["Herblore Unlocked Snake Weed", "Primary Spawns"],
+				"Category": ["Primary Spawns"],
 				"Chunks": ["Deep Wilderness Dungeon"],
 				"Level": 1,
 				"Primary": true,
@@ -56944,7 +56930,7 @@
 				"Priority": 2
 			},
 			"Slay ~|Amoxliatl|~": {
-				"Category": ["Boss Level"],
+				"Category": ["Boss"],
 				"Level": 48,
 				"Monsters": ["Amoxliatl"],
 				"Primary": false,
@@ -57081,16 +57067,7 @@
 				"Output": "Ancient Wyvern"
 			},
 			"Slay the ~|Abyssal Sire|~": {
-				"Category": ["Boss Level"],
-				"Chunks": ["Abyssal Nexus"],
-				"Level": 85,
-				"Monsters": ["Abyssal Sire"],
-				"Primary": false,
-				"Priority": 2,
-				"NoBoost": true
-			},
-			"Slay the ~|Abyssal Sire|~ alt": {
-				"Category": ["Boss", "Boss Level"],
+				"Category": ["Boss"],
 				"Chunks": ["Abyssal Nexus"],
 				"Level": 85,
 				"Monsters": ["Abyssal Sire"],
@@ -57101,16 +57078,7 @@
 				"NoBoost": true
 			},
 			"Slay ~|Araxxor|~": {
-				"Category": ["Boss Level"],
-				"Chunks": ["Morytania Spider Nest"],
-				"Level": 92,
-				"Monsters": ["Araxxor"],
-				"Primary": false,
-				"Priority": 3,
-				"NoBoost": true
-			},
-			"Slay ~|Araxxor|~ alt": {
-				"Category": ["Boss", "Boss Level"],
+				"Category": ["Boss"],
 				"Chunks": ["Morytania Spider Nest"],
 				"Level": 92,
 				"Monsters": ["Araxxor"],
@@ -57121,16 +57089,7 @@
 				"NoBoost": true
 			},
 			"Slay the ~|Alchemical Hydra|~": {
-				"Category": ["Boss Level"],
-				"Chunks": ["Karuulm Slayer Dungeon"],
-				"Level": 95,
-				"Monsters": ["Alchemical Hydra"],
-				"Primary": false,
-				"Priority": 2,
-				"NoBoost": true
-			},
-			"Slay the ~|Alchemical Hydra|~ alt": {
-				"Category": ["Boss", "Boss Level"],
+				"Category": ["Boss"],
 				"Chunks": ["Karuulm Slayer Dungeon"],
 				"Level": 95,
 				"Monsters": ["Alchemical Hydra"],
@@ -57141,17 +57100,7 @@
 				"NoBoost": true
 			},
 			"Slay the ~|Grotesque Guardians|~": {
-				"Category": ["Boss Level"],
-				"Chunks": ["Grotesque Guardians' Lair"],
-				"Level": 75,
-				"Items": ["RockHammer[+]"],
-				"Monsters": ["Grotesque Guardians"],
-				"Primary": false,
-				"Priority": 2,
-				"NoBoost": true
-			},
-			"Slay the ~|Grotesque Guardians|~ alt": {
-				"Category": ["Boss", "Boss Level"],
+				"Category": ["Boss"],
 				"Chunks": ["Grotesque Guardians' Lair"],
 				"Level": 75,
 				"Items": ["RockHammer[+]"],
@@ -57163,16 +57112,7 @@
 				"NoBoost": true
 			},
 			"Slay the ~|Kraken|~": {
-				"Category": ["Boss Level"],
-				"Chunks": ["Kraken Cove"],
-				"Level": 87,
-				"Monsters": ["Kraken"],
-				"Primary": false,
-				"Priority": 2,
-				"NoBoost": true
-			},
-			"Slay the ~|Kraken|~ alt": {
-				"Category": ["Boss", "Boss Level"],
+				"Category": ["Boss"],
 				"Chunks": ["Kraken Cove"],
 				"Level": 87,
 				"Monsters": ["Kraken"],
@@ -57183,16 +57123,7 @@
 				"NoBoost": true
 			},
 			"Slay the ~|shellbane gryphon|~": {
-				"Category": ["Boss Level"],
-				"Chunks": ["Shellbane Gryphon Cave"],
-				"Level": 51,
-				"Monsters": ["Shellbane gryphon"],
-				"Primary": false,
-				"Priority": 12,
-				"NoBoost": true
-			},
-			"Slay the ~|shellbane gryphon|~ alt": {
-				"Category": ["Boss", "Boss Level"],
+				"Category": ["Boss"],
 				"Chunks": ["Shellbane Gryphon Cave"],
 				"Level": 51,
 				"Monsters": ["Shellbane gryphon"],
@@ -57203,16 +57134,7 @@
 				"NoBoost": true
 			},
 			"Slay the ~|thermonuclear smoke devil|~": {
-				"Category": ["Boss Level"],
-				"Chunks": ["Smoke Devil Dungeon"],
-				"Level": 93,
-				"Monsters": ["Thermonuclear smoke devil"],
-				"Primary": false,
-				"Priority": 2,
-				"NoBoost": true
-			},
-			"Slay the ~|thermonuclear smoke devil|~ alt": {
-				"Category": ["Boss", "Boss Level"],
+				"Category": ["Boss"],
 				"Chunks": ["Smoke Devil Dungeon"],
 				"Level": 93,
 				"Monsters": ["Thermonuclear smoke devil"],
@@ -57223,15 +57145,7 @@
 				"NoBoost": true
 			},
 			"Slay ~|Cerberus|~": {
-				"Category": ["Boss Level"],
-				"Chunks": ["Cerberus' Lair"],
-				"Level": 91,
-				"Primary": false,
-				"Priority": 1,
-				"Monsters": ["Cerberus"]
-			},
-			"Slay ~|Cerberus|~ alt": {
-				"Category": ["Boss", "Boss Level"],
+				"Category": ["Boss"],
 				"Chunks": ["Cerberus' Lair"],
 				"Level": 91,
 				"Monsters": ["Cerberus"],
@@ -76315,120 +76229,6 @@
 				"Category": ["Untracked Uniques"],
 				"Label": "Untracked Uniques",
 				"NPCs": ["Pete Kayer"],
-				"Not F2P": true
-			},
-			"Obtain a ~|big bass|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Big bass"],
-				"Not F2P": true
-			},
-			"Obtain a ~|big swordfish|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Big swordfish"],
-				"Not F2P": true
-			},
-			"Obtain a ~|big harpoonfish|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Big harpoonfish"],
-				"Not F2P": true
-			},
-			"Obtain a ~|big shark|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Big shark"],
-				"Not F2P": true
-			},
-			"Obtain a ~|giant blue krill|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Giant blue krill"],
-				"Not F2P": true
-			},
-			"Obtain a ~|golden haddock|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Golden haddock"],
-				"Not F2P": true
-			},
-			"Obtain an ~|orangefin|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Orangefin"],
-				"Not F2P": true
-			},
-			"Obtain a ~|huge halibut|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Huge halibut"],
-				"Not F2P": true
-			},
-			"Obtain a ~|purplefin|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Purplefin"],
-				"Not F2P": true
-			},
-			"Obtain a ~|swift marlin|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Swift marlin"],
-				"Not F2P": true
-			},
-			"Obtain a ~|crawling hand (item)|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Crawling hand (item)"],
-				"Not F2P": true
-			},
-			"Obtain a ~|cockatrice head|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Cockatrice head"],
-				"Not F2P": true
-			},
-			"Obtain a ~|basilisk head|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Basilisk head"],
-				"Not F2P": true
-			},
-			"Obtain a ~|kurask head|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Kurask head"],
-				"Not F2P": true
-			},
-			"Obtain an ~|abyssal head|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Abyssal head"],
-				"Not F2P": true
-			},
-			"Obtain ~|kbd heads|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Kbd heads"],
-				"Not F2P": true
-			},
-			"Obtain a ~|kq head|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Kq head[+]"],
-				"Not F2P": true
-			},
-			"Obtain a ~|vorkath's head|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Vorkath's head"],
-				"Not F2P": true
-			},
-			"Obtain ~|alchemical hydra heads|~": {
-				"Category": ["Stuffables"],
-				"Label": "Stuffables",
-				"Items": ["Alchemical hydra heads"],
 				"Not F2P": true
 			},
 			"Change your family crest at ~|Sir Renitee|~ to a money crest": {
@@ -182825,7 +182625,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"15": "4/128",
 				"25": "1/128"
 			},
@@ -182844,11 +182643,17 @@
 			"Cabbage": {
 				"1": "1/128"
 			},
+			"Energy potion(3)": {
+				"1": "9/128"
+			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
 			},
 			"Clue scroll (easy)": {
 				"1": "1/128"
+			},
+			"Zombie champion scroll": {
+				"1": "1/5000"
 			},
 			"HerbDropTable+": {
 				"1": "23/128"
@@ -182947,7 +182752,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -182968,7 +182772,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -183514,7 +183318,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -183535,7 +183338,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -186910,7 +186713,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"15": "4/128",
 				"25": "1/128"
 			},
@@ -186928,6 +186730,9 @@
 			},
 			"Cabbage": {
 				"1": "1/128"
+			},
+			"Energy potion(3)": {
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -188237,7 +188042,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"15": "4/128",
 				"25": "1/128"
 			},
@@ -188255,6 +188059,9 @@
 			},
 			"Cabbage": {
 				"1": "1/128"
+			},
+			"Energy potion(3)": {
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -189671,7 +189478,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -189692,7 +189498,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -191165,9 +190971,7 @@
 			},
 			"Coins": {
 				"1": "17/128",
-				"2": "16/128",
 				"4": "7/128",
-				"29": "3/128",
 				"30": "1/128"
 			},
 			"Nothing": {
@@ -191180,13 +190984,10 @@
 				"1": "1/128"
 			},
 			"Energy potion(2)": {
-				"1": "Unknown"
-			},
-			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "16/128"
 			},
 			"Energy potion(4)": {
-				"1": "Unknown"
+				"1": "3/128"
 			},
 			"Looting bag": {
 				"1": "1/15"
@@ -191250,9 +191051,7 @@
 			},
 			"Coins": {
 				"1": "17/128",
-				"2": "16/128",
 				"4": "9/128",
-				"29": "3/128",
 				"30": "1/128"
 			},
 			"Nothing": {
@@ -191265,10 +191064,10 @@
 				"1": "2/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "16/128"
 			},
 			"Energy potion(4)": {
-				"1": "Unknown"
+				"1": "3/128"
 			},
 			"Looting bag": {
 				"1": "1/7"
@@ -191895,7 +191694,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -191916,7 +191714,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Key (medium)": {
 				"1": "Always"
@@ -193440,7 +193238,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5 (F2P)": "9/128",
 				"10 (F2P)": "23/128",
 				"15 (F2P)": "4/128",
 				"25": "1/128"
@@ -193479,7 +193276,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1 (F2P)": "9/128"
 			},
 			"Clue scroll (easy)": {
 				"1": "1/128"
@@ -195634,9 +195431,7 @@
 			},
 			"Coins": {
 				"1": "1/128",
-				"5": "28/128",
-				"9": "3/128",
-				"15": "3/128",
+				"15": "28/128",
 				"20": "2/128"
 			},
 			"Nothing": {
@@ -195663,20 +195458,14 @@
 			"Air talisman": {
 				"1": "1/128"
 			},
-			"Energy potion(1)": {
-				"1": "Common"
-			},
-			"Energy potion(2)": {
-				"1": "Common"
-			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "3/128"
 			},
 			"Energy potion(4)": {
-				"1": "Common"
+				"1": "3/128"
 			},
 			"Goblin skull": {
-				"1": "1/4"
+				"1": "Always"
 			},
 			"Ensouled goblin head": {
 				"1": "1/35"
@@ -195705,9 +195494,8 @@
 				"4": "3/128"
 			},
 			"Coins": {
-				"1": "34/128",
-				"3": "13/128",
 				"5": "8/128",
+				"8": "34/128",
 				"10 (F2P)": "2/128",
 				"16": "7/128",
 				"24": "3/128"
@@ -195725,7 +195513,7 @@
 				"1": "10/128"
 			},
 			"Goblin skull": {
-				"1": "1/4"
+				"1": "Always"
 			},
 			"Ensouled goblin head": {
 				"1": "1/30"
@@ -195766,11 +195554,8 @@
 			"Tin ore": {
 				"1": "1/128"
 			},
-			"Energy potion(1)": {
-				"1": "Common"
-			},
 			"Energy potion(2)": {
-				"1": "Common"
+				"1": "13/128"
 			},
 			"Clue scroll (easy)": {
 				"1": "1/128"
@@ -195814,9 +195599,8 @@
 				"1": "1/128"
 			},
 			"Coins": {
-				"1": "34/128",
-				"3": "13/128",
 				"5": "8/128",
+				"8": "34/128",
 				"10 (F2P)": "2/128",
 				"16": "7/128",
 				"24": "3/128"
@@ -195839,8 +195623,11 @@
 			"Tin ore": {
 				"1": "1/128"
 			},
+			"Energy potion(2)": {
+				"1": "13/128"
+			},
 			"Goblin skull": {
-				"1": "1/4"
+				"1": "Always"
 			},
 			"Ensouled goblin head": {
 				"1": "1/30"
@@ -195893,9 +195680,8 @@
 				"1": "1/128"
 			},
 			"Coins": {
-				"1": "34/128",
-				"3": "13/128",
 				"5": "8/128",
+				"8": "34/128",
 				"10 (F2P)": "2/128",
 				"16": "7/128",
 				"24": "3/128"
@@ -195918,8 +195704,11 @@
 			"Tin ore": {
 				"1": "1/128"
 			},
+			"Energy potion(2)": {
+				"1": "13/128"
+			},
 			"Goblin skull": {
-				"1": "1/4"
+				"1": "Always"
 			},
 			"Ensouled goblin head": {
 				"1": "1/30"
@@ -195997,7 +195786,7 @@
 				"1": "1/128"
 			},
 			"Goblin skull": {
-				"1": "1/4"
+				"1": "Always"
 			},
 			"Looting bag": {
 				"1": "1/11"
@@ -196056,9 +195845,8 @@
 				"1": "1/128"
 			},
 			"Coins": {
-				"1": "34/128",
-				"3": "13/128",
 				"5": "8/128",
+				"8": "34/128",
 				"10 (F2P)": "2/128",
 				"16": "7/128",
 				"24": "3/128"
@@ -196081,8 +195869,11 @@
 			"Tin ore": {
 				"1": "1/128"
 			},
+			"Energy potion(2)": {
+				"1": "13/128"
+			},
 			"Goblin skull": {
-				"1": "1/4"
+				"1": "Always"
 			},
 			"Ensouled goblin head": {
 				"1": "1/30"
@@ -196124,9 +195915,7 @@
 			},
 			"Coins": {
 				"1": "1/128",
-				"5": "28/128",
-				"9": "3/128",
-				"15": "3/128",
+				"15": "28/128",
 				"20": "2/128"
 			},
 			"Nothing": {
@@ -196153,8 +195942,11 @@
 			"Air talisman": {
 				"1": "1/128"
 			},
+			"Energy potion(3)": {
+				"1": "3/128"
+			},
 			"Goblin skull": {
-				"1": "1/4"
+				"1": "Always"
 			},
 			"Ensouled goblin head": {
 				"1": "1/35"
@@ -197736,7 +197528,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -197757,7 +197548,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -198610,7 +198401,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"15": "4/128",
 				"25": "1/128"
 			},
@@ -198628,6 +198418,9 @@
 			},
 			"Cabbage": {
 				"1": "1/128"
+			},
+			"Energy potion(3)": {
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -200225,7 +200018,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -200246,7 +200038,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -203044,7 +202836,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -203065,7 +202856,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Key (medium)": {
 				"1": "Always"
@@ -204351,7 +204142,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -204372,7 +204162,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -205040,7 +204830,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"15": "4/128",
 				"25": "1/128"
 			},
@@ -205058,6 +204847,9 @@
 			},
 			"Cabbage": {
 				"1": "1/128"
+			},
+			"Energy potion(3)": {
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -205844,7 +205636,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"15": "4/128",
 				"25": "1/128"
 			},
@@ -205864,7 +205655,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Key (medium)": {
 				"1": "Always"
@@ -208924,7 +208715,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"15": "4/128",
 				"25": "1/128"
 			},
@@ -208944,7 +208734,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Looting bag": {
 				"1": "1/10"
@@ -209118,7 +208908,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -209139,7 +208928,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -214566,7 +214355,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -214587,7 +214375,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -218400,7 +218188,6 @@
 			},
 			"Coins": {
 				"3": "38/128",
-				"5": "9/128",
 				"10 (F2P)": "23/128",
 				"15": "4/128",
 				"25": "1/128"
@@ -218421,7 +218208,7 @@
 				"1": "1/128"
 			},
 			"Energy potion(3)": {
-				"1": "Unknown"
+				"1": "9/128"
 			},
 			"Clue scroll (beginner)": {
 				"1": "1/90"
@@ -231656,1155 +231443,764 @@
 			},
 			"Tiny port reward bag loot": {
 				"Cake": {
-					"1": "Unknown"
-				},
-				"Chocolate cake": {
-					"1": "Unknown"
+					"1 (noted)": "1/96"
 				},
 				"Pineapple": {
-					"1": "Unknown"
-				},
-				"Uncut opal": {
-					"1": "Unknown"
-				},
-				"Uncut jade": {
-					"1": "Unknown"
-				},
-				"Uncut red topaz": {
-					"1": "Unknown"
+					"20-30 (noted)": "1/96"
 				},
 				"Uncut sapphire": {
-					"1": "Unknown"
-				},
-				"Uncut emerald": {
-					"1": "Unknown"
-				},
-				"Uncut ruby": {
-					"1": "Unknown"
-				},
-				"Uncut diamond": {
-					"1": "Unknown"
+					"1": "1/96"
 				},
 				"Raw cod": {
-					"1": "Unknown"
+					"12-18 (noted)": "1/96"
 				},
-				"Raw tuna": {
-					"1": "Unknown"
-				},
-				"Raw lobster": {
-					"1": "Unknown"
-				},
-				"Raw bass": {
-					"1": "Unknown"
-				},
-				"Raw shark": {
-					"1": "Unknown"
-				},
-				"Bones": {
-					"1": "Unknown"
+				"Big bones": {
+					"1": "1/96"
 				},
 				"Compost": {
-					"1": "Unknown"
-				},
-				"Supercompost": {
-					"1": "Unknown"
-				},
-				"Ultracompost": {
-					"1": "Unknown"
+					"18 (noted)": "1/96"
 				},
 				"Bird nest (empty)": {
-					"1": "Unknown"
+					"4 (noted)": "1/96"
 				},
 				"Banana": {
-					"1": "Unknown"
-				},
-				"Raw manta ray": {
-					"1": "Unknown"
-				},
-				"Raw sea turtle": {
-					"1": "Unknown"
+					"20-30 (noted)": "1/96"
 				},
 				"Raw anglerfish": {
-					"1": "Unknown"
+					"4 (noted)": "1/96"
 				},
 				"Casket": {
-					"1": "Unknown"
+					"1 (noted)": "1/96"
 				},
 				"Spirit flakes": {
-					"1": "Unknown"
+					"8-11": "1/96"
 				},
 				"Bucket of sand": {
-					"1": "Unknown"
+					"32-47 (noted)": "1/96"
 				},
-				"Adamant cannonball": {
-					"1": "Unknown"
+				"Raw manta ray": {
+					"4-6 (noted)": "1/192"
 				},
-				"Rune cannonball": {
-					"1": "Unknown"
+				"Raw sea turtle": {
+					"4-6 (noted)": "1/192"
 				},
-				"Dragon cannonball": {
-					"1": "Unknown"
+				"Barnacle blaster": {
+					"1 (noted)": "1/768"
+				},
+				"Gin": {
+					"1 (noted)": "1/768"
+				},
+				"Grog": {
+					"1 (noted)": "1/768"
+				},
+				"Kraken colada": {
+					"1 (noted)": "1/768"
+				},
+				"Rum": {
+					"1 (noted)": "1/768"
+				},
+				"Sailor's mirage": {
+					"1 (noted)": "1/768"
+				},
+				"Vodka": {
+					"1 (noted)": "1/768"
+				},
+				"Whisky": {
+					"1 (noted)": "1/768"
 				},
 				"Coins": {
-					"8875-11640": "Unknown"
+					"5000-12500": "6/96"
 				},
 				"Fish offcuts": {
-					"15-56": "Unknown"
-				},
-				"Bronze cannonball": {
-					"40-59": "Unknown"
-				},
-				"Iron cannonball": {
-					"41-59": "Unknown"
-				},
-				"Steel cannonball": {
-					"41-60": "Unknown"
-				},
-				"Mithril cannonball": {
-					"44-54": "Unknown"
+					"15-25": "4/96"
 				},
 				"Copper ore": {
-					"10-20 (noted)": "Unknown"
+					"10-20 (noted)": "4/96"
 				},
 				"Tin ore": {
-					"14-17 (noted)": "Unknown"
+					"10-20 (noted)": "4/96"
 				},
 				"Iron ore": {
-					"12-20 (noted)": "Unknown"
+					"10-20 (noted)": "4/96"
 				},
 				"Coal": {
-					"12-19 (noted)": "Unknown"
+					"10-20 (noted)": "4/96"
+				},
+				"Bronze cannonball": {
+					"40-60": "4/96"
+				},
+				"Iron cannonball": {
+					"40-60": "4/96"
+				},
+				"Steel cannonball": {
+					"40-60": "4/96"
+				},
+				"Mithril cannonball": {
+					"40-60": "4/96"
 				},
 				"Bronze nails": {
-					"21-30": "Unknown"
+					"20-30": "4/96"
 				},
 				"Iron nails": {
-					"20-30": "Unknown"
+					"20-30": "4/96"
 				},
 				"Steel nails": {
-					"20-30": "Unknown"
+					"20-30": "4/96"
 				},
 				"Mithril nails": {
-					"20-30": "Unknown"
-				},
-				"Bronze bar": {
-					"11-19 (noted)": "Unknown"
-				},
-				"Iron bar": {
-					"10-18 (noted)": "Unknown"
-				},
-				"Steel bar": {
-					"13-16 (noted)": "Unknown"
+					"20-30": "4/96"
 				},
 				"Sawmill coupon (wood plank)": {
-					"10-20": "Unknown"
+					"10-20": "4/96"
 				},
 				"Sawmill coupon (oak plank)": {
-					"5-15": "Unknown"
+					"5-15": "4/96"
 				},
 				"Plank": {
-					"13-20 (noted)": "Unknown"
+					"10-20 (noted)": "4/96"
 				},
 				"Oak plank": {
-					"10-20 (noted)": "Unknown"
+					"10-20 (noted)": "4/96"
 				},
 				"Teak plank": {
-					"9-20 (noted)": "Unknown"
+					"10-20 (noted)": "3/96"
+				},
+				"Bronze bar": {
+					"10-20 (noted)": "3/96"
+				},
+				"Iron bar": {
+					"10-20 (noted)": "3/96"
+				},
+				"Steel bar": {
+					"10-20 (noted)": "3/96"
 				},
 				"Repair kit": {
-					"6-14 (noted)": "Unknown"
+					"5-15 (noted)": "3/96"
 				},
 				"Oak repair kit": {
-					"6-14 (noted)": "Unknown"
+					"5-15 (noted)": "3/96"
 				},
 				"Teak repair kit": {
-					"5-13 (noted)": "Unknown"
+					"5-15 (noted)": "3/96"
 				}
 			},
 			"Small port reward bag loot": {
 				"Grapes": {
-					"1": "Unknown"
+					"30-50 (noted)": "2/168"
 				},
 				"Cake": {
-					"1": "Unknown"
-				},
-				"Chocolate cake": {
-					"1": "Unknown"
+					"1-2 (noted)": "2/168"
 				},
 				"Pineapple": {
-					"1": "Unknown"
-				},
-				"Uncut opal": {
-					"1": "Unknown"
-				},
-				"Uncut jade": {
-					"1": "Unknown"
-				},
-				"Uncut red topaz": {
-					"1": "Unknown"
+					"20-30 (noted)": "2/168"
 				},
 				"Uncut sapphire": {
-					"1": "Unknown"
-				},
-				"Uncut emerald": {
-					"1": "Unknown"
-				},
-				"Uncut ruby": {
-					"1": "Unknown"
-				},
-				"Uncut diamond": {
-					"1": "Unknown"
+					"10 (noted)": "2/168"
 				},
 				"Raw cod": {
-					"1": "Unknown"
+					"12-18 (noted)": "1/168"
 				},
 				"Raw tuna": {
-					"1": "Unknown"
-				},
-				"Raw lobster": {
-					"1": "Unknown"
-				},
-				"Raw bass": {
-					"1": "Unknown"
-				},
-				"Raw shark": {
-					"1": "Unknown"
+					"12-18 (noted)": "1/168"
 				},
 				"Varlamorian kebab": {
-					"1": "Unknown"
+					"2 (noted)": "2/168"
 				},
 				"Bronze scimitar": {
-					"1": "Unknown"
+					"1 (noted)": "2/504"
 				},
 				"Iron scimitar": {
-					"1": "Unknown"
+					"1 (noted)": "2/504"
 				},
-				"Mithril scimitar": {
-					"1": "Unknown"
-				},
-				"Adamant scimitar": {
-					"1": "Unknown"
-				},
-				"Rune scimitar": {
-					"1": "Unknown"
+				"Steel scimitar": {
+					"1 (noted)": "2/504"
 				},
 				"Teak logs": {
-					"1": "Unknown"
-				},
-				"Mahogany logs": {
-					"1": "Unknown"
-				},
-				"Copper ore": {
-					"1": "Unknown"
-				},
-				"Tin ore": {
-					"1": "Unknown"
-				},
-				"Silver ore": {
-					"1": "Unknown"
-				},
-				"Gold ore": {
-					"1": "Unknown"
-				},
-				"Adamantite ore": {
-					"1": "Unknown"
-				},
-				"Runite ore": {
-					"1": "Unknown"
+					"5-12 (noted)": "2/168"
 				},
 				"Bird nest (empty)": {
-					"1": "Unknown"
+					"4-6 (noted)": "2/168"
 				},
 				"Banana": {
-					"1": "Unknown"
+					"25 (noted)": "2/168"
 				},
 				"Raw manta ray": {
-					"1": "Unknown"
+					"5-10 (noted)": "1/168"
 				},
 				"Raw sea turtle": {
-					"1": "Unknown"
+					"5-10 (noted)": "1/168"
 				},
 				"Raw anglerfish": {
-					"1": "Unknown"
-				},
-				"Casket": {
-					"1": "Unknown"
-				},
-				"Elkhorn coral": {
-					"1": "Unknown"
-				},
-				"Pillar coral": {
-					"1": "Unknown"
-				},
-				"Umbral coral": {
-					"1": "Unknown"
-				},
-				"Archer helm": {
-					"1": "Unknown"
-				},
-				"Berserker helm": {
-					"1": "Unknown"
-				},
-				"Farseer helm": {
-					"1": "Unknown"
-				},
-				"Warrior helm": {
-					"1": "Unknown"
-				},
-				"Fremennik helm": {
-					"1": "Unknown"
-				},
-				"Spirit flakes": {
-					"1": "Unknown"
-				},
-				"Elkhorn frag": {
-					"1": "Unknown"
-				},
-				"Pillar frag": {
-					"1": "Unknown"
-				},
-				"Umbral frag": {
-					"1": "Unknown"
-				},
-				"Bronze full helm": {
-					"1": "Unknown"
-				},
-				"Bronze platebody": {
-					"1": "Unknown"
-				},
-				"Bronze platelegs": {
-					"1": "Unknown"
-				},
-				"Iron full helm": {
-					"1": "Unknown"
-				},
-				"Iron platebody": {
-					"1": "Unknown"
-				},
-				"Iron platelegs": {
-					"1": "Unknown"
-				},
-				"Steel full helm": {
-					"1": "Unknown"
-				},
-				"Steel platebody": {
-					"1": "Unknown"
-				},
-				"Steel platelegs": {
-					"1": "Unknown"
-				},
-				"Mithril full helm": {
-					"1": "Unknown"
-				},
-				"Mithril platebody": {
-					"1": "Unknown"
-				},
-				"Mithril platelegs": {
-					"1": "Unknown"
-				},
-				"Adamant full helm": {
-					"1": "Unknown"
-				},
-				"Adamant platebody": {
-					"1": "Unknown"
-				},
-				"Adamant platelegs": {
-					"1": "Unknown"
-				},
-				"Rune full helm": {
-					"1": "Unknown"
-				},
-				"Rune platebody": {
-					"1": "Unknown"
-				},
-				"Rune platelegs": {
-					"1": "Unknown"
-				},
-				"Bronze cannonball": {
-					"1": "Unknown"
+					"4-6 (noted)": "2/168"
 				},
 				"Iron cannonball": {
-					"1": "Unknown"
+					"30-40": "1/168"
 				},
 				"Steel cannonball": {
-					"1": "Unknown"
+					"30-40": "1/168"
 				},
-				"Adamant cannonball": {
-					"1": "Unknown"
+				"Casket": {
+					"1 (noted)": "2/168"
 				},
-				"Rune cannonball": {
-					"1": "Unknown"
+				"Elkhorn coral": {
+					"6-8": "2/168"
 				},
-				"Dragon cannonball": {
-					"1": "Unknown"
+				"Fremennik helm": {
+					"1": "2/168"
+				},
+				"Spirit flakes": {
+					"8-12": "2/168"
+				},
+				"Elkhorn frag": {
+					"3 (noted)": "2/168"
+				},
+				"Grog": {
+					"1 (noted)": "0.5/168"
+				},
+				"Barnacle blaster": {
+					"1 (noted)": "0.5/168"
+				},
+				"Sailor's mirage": {
+					"1 (noted)": "0.5/168"
+				},
+				"Vodka": {
+					"1 (noted)": "0.5/168"
+				},
+				"Iron platebody": {
+					"1 (noted)": "1/168"
+				},
+				"Steel platebody": {
+					"1 (noted)": "1/168"
+				},
+				"Coins": {
+					"10000-17500": "15/168"
+				},
+				"Fish offcuts": {
+					"40-60": "8/168"
 				},
 				"Iron ore": {
-					"10-20 (noted)": "Unknown"
+					"10-20 (noted)": "8/168",
+					"20-30 (noted)": "2/504"
 				},
 				"Coal": {
-					"16-18 (noted)": "Unknown"
+					"10-20 (noted)": "8/168",
+					"20-40 (noted)": "2/504"
 				},
-				"Mithril ore": {
-					"13 (noted)": "Unknown"
+				"Iron cannonball": {
+					"40-60": "8/168"
 				},
-				"Iron bar": {
-					"20 (noted)": "Unknown"
-				},
-				"Steel bar": {
-					"13-15 (noted)": "Unknown"
-				},
-				"Mithril bar": {
-					"19 (noted)": "Unknown"
-				},
-				"Oak plank": {
-					"12 (noted)": "Unknown"
-				},
-				"Teak plank": {
-					"11 (noted)": "Unknown"
-				},
-				"Mahogany plank": {
-					"7 (noted)": "Unknown"
-				},
-				"Oak repair kit": {
-					"7 (noted)": "Unknown"
-				},
-				"Teak repair kit": {
-					"10-15 (noted)": "Unknown"
-				},
-				"Mahogany repair kit": {
-					"12 (noted)": "Unknown"
-				},
-				"Mithril cannonball": {
-					"40": "Unknown"
+				"Steel cannonball": {
+					"40-60": "8/168"
 				},
 				"Iron nails": {
-					"25-29": "Unknown"
+					"20-30": "8/168"
 				},
 				"Steel nails": {
-					"22": "Unknown"
-				},
-				"Mithril nails": {
-					"22-26": "Unknown"
+					"20-30": "8/168"
 				},
 				"Sawmill coupon (oak plank)": {
-					"15": "Unknown"
+					"10-20": "8/168"
+				},
+				"Sawmill coupon (teak plank)": {
+					"10-20": "8/168"
+				},
+				"Oak plank": {
+					"10-20 (noted)": "8/168"
+				},
+				"Teak plank": {
+					"10-20 (noted)": "8/168"
+				},
+				"Mithril ore": {
+					"10-20 (noted)": "7/168",
+					"20-30 (noted)": "2/504"
+				},
+				"Mithril cannonball": {
+					"40-60": "7/168"
+				},
+				"Mithril nails": {
+					"20-30": "7/168"
+				},
+				"Iron bar": {
+					"10-20 (noted)": "6/168"
+				},
+				"Steel bar": {
+					"10-20 (noted)": "6/168"
+				},
+				"Mithril bar": {
+					"10-20 (noted)": "6/168"
+				},
+				"Mahogany plank": {
+					"5-15 (noted)": "6/168"
+				},
+				"Oak repair kit": {
+					"5-15 (noted)": "6/168"
+				},
+				"Teak repair kit": {
+					"5-15 (noted)": "6/168"
+				},
+				"Mahogany repair kit": {
+					"5-15 (noted)": "6/168"
 				}
 			},
 			"Medium port reward bag loot": {
 				"Grapes": {
-					"1": "Unknown"
+					"30-50 (noted)": "2/160"
 				},
 				"Cake": {
-					"1": "Unknown"
+					"1-2 (noted)": "1/160"
 				},
 				"Chocolate cake": {
-					"1": "Unknown"
+					"1 (noted)": "1/160"
 				},
 				"Pineapple": {
-					"1": "Unknown"
-				},
-				"Raw cod": {
-					"1": "Unknown"
-				},
-				"Raw tuna": {
-					"1": "Unknown"
+					"25-30 (noted)": "2/160"
 				},
 				"Raw lobster": {
-					"1": "Unknown"
-				},
-				"Raw bass": {
-					"1": "Unknown"
-				},
-				"Raw shark": {
-					"1": "Unknown"
+					"12-18 (noted)": "2/160"
 				},
 				"Varlamorian kebab": {
-					"1": "Unknown"
+					"2 (noted)": "2/160"
 				},
-				"Bronze scimitar": {
-					"1": "Unknown"
-				},
-				"Iron scimitar": {
-					"1": "Unknown"
-				},
-				"Mithril scimitar": {
-					"1": "Unknown"
-				},
-				"Adamant scimitar": {
-					"1": "Unknown"
-				},
-				"Rune scimitar": {
-					"1": "Unknown"
+				"Steel scimitar": {
+					"1 (noted)": "2/160"
 				},
 				"Lead ore": {
-					"1": "Unknown"
+					"10-18 (noted)": "1/160"
 				},
 				"Nickel ore": {
-					"1": "Unknown"
+					"10-17 (noted)": "1/160"
 				},
 				"Teak logs": {
-					"1": "Unknown"
-				},
-				"Mahogany logs": {
-					"1": "Unknown"
-				},
-				"Copper ore": {
-					"1": "Unknown"
-				},
-				"Tin ore": {
-					"1": "Unknown"
+					"5-17 (noted)": "2/160"
 				},
 				"Iron ore": {
-					"1": "Unknown"
-				},
-				"Silver ore": {
-					"1": "Unknown"
-				},
-				"Gold ore": {
-					"1": "Unknown"
-				},
-				"Runite ore": {
-					"1": "Unknown"
+					"25 (noted)": "2/160"
 				},
 				"Bird nest (empty)": {
-					"1": "Unknown"
+					"4-5 (noted)": "2/160"
 				},
 				"Astral rune": {
-					"1": "Unknown"
+					"23-25": "2/160"
 				},
 				"Yak-hide": {
-					"1": "Unknown"
+					"15 (noted)": "2/160"
+				},
+				"Grog": {
+					"1 (noted)": "0.5/160"
+				},
+				"Barnacle blaster": {
+					"1 (noted)": "0.5/160"
+				},
+				"Sailor's mirage": {
+					"1 (noted)": "0.5/160"
+				},
+				"Vodka": {
+					"1 (noted)": "0.5/160"
 				},
 				"Raw monkfish": {
-					"1": "Unknown"
+					"8-12 (noted)": "2/160"
 				},
 				"Raw manta ray": {
-					"1": "Unknown"
-				},
-				"Raw sea turtle": {
-					"1": "Unknown"
+					"10 (noted)": "2/160"
 				},
 				"Raw anglerfish": {
-					"1": "Unknown"
+					"4-6 (noted)": "2/160"
 				},
 				"Casket": {
-					"1": "Unknown"
+					"1 (noted)": "2/160"
 				},
 				"Zulrah's scales": {
-					"1": "Unknown"
+					"22-29": "2/160"
 				},
 				"Crystal shards": {
-					"1": "Unknown"
-				},
-				"Elkhorn coral": {
-					"1": "Unknown"
+					"9-12": "2/160"
 				},
 				"Pillar coral": {
-					"1": "Unknown"
-				},
-				"Umbral coral": {
-					"1": "Unknown"
+					"5": "2/160"
 				},
 				"Archer helm": {
-					"1": "Unknown"
+					"1 (noted)": "2/280"
 				},
 				"Berserker helm": {
-					"1": "Unknown"
-				},
-				"Farseer helm": {
-					"1": "Unknown"
-				},
-				"Warrior helm": {
-					"1": "Unknown"
+					"1 (noted)": "2/480"
 				},
 				"Fremennik helm": {
-					"1": "Unknown"
+					"1": "2/480"
 				},
 				"Spirit flakes": {
-					"1": "Unknown"
-				},
-				"Elkhorn frag": {
-					"1": "Unknown"
+					"8-12": "2/160"
 				},
 				"Pillar frag": {
-					"1": "Unknown"
-				},
-				"Umbral frag": {
-					"1": "Unknown"
+					"2": "2/160"
 				},
 				"Bucket of sand": {
-					"1": "Unknown"
-				},
-				"Bronze full helm": {
-					"1": "Unknown"
-				},
-				"Bronze platebody": {
-					"1": "Unknown"
-				},
-				"Bronze platelegs": {
-					"1": "Unknown"
-				},
-				"Iron full helm": {
-					"1": "Unknown"
-				},
-				"Iron platebody": {
-					"1": "Unknown"
-				},
-				"Iron platelegs": {
-					"1": "Unknown"
+					"40 (noted)": "2/160"
 				},
 				"Steel full helm": {
-					"1": "Unknown"
+					"1 (noted)": "Unknown"
 				},
 				"Steel platebody": {
-					"1": "Unknown"
+					"1 (noted)": "Unknown"
 				},
 				"Steel platelegs": {
-					"1": "Unknown"
-				},
-				"Mithril full helm": {
-					"1": "Unknown"
-				},
-				"Mithril platebody": {
-					"1": "Unknown"
-				},
-				"Mithril platelegs": {
-					"1": "Unknown"
-				},
-				"Adamant full helm": {
-					"1": "Unknown"
-				},
-				"Adamant platebody": {
-					"1": "Unknown"
-				},
-				"Adamant platelegs": {
-					"1": "Unknown"
-				},
-				"Rune full helm": {
-					"1": "Unknown"
-				},
-				"Rune platebody": {
-					"1": "Unknown"
-				},
-				"Rune platelegs": {
-					"1": "Unknown"
-				},
-				"Bronze cannonball": {
-					"1": "Unknown"
-				},
-				"Iron cannonball": {
-					"1": "Unknown"
-				},
-				"Rune cannonball": {
-					"1": "Unknown"
-				},
-				"Dragon cannonball": {
-					"1": "Unknown"
+					"1 (noted)": "Unknown"
 				},
 				"Coins": {
-					"23264-23514": "Unknown"
-				},
-				"Oak repair kit": {
-					"7-15 (noted)": "Unknown"
-				},
-				"Teak repair kit": {
-					"14 (noted)": "Unknown"
-				},
-				"Mahogany repair kit": {
-					"12 (noted)": "Unknown"
-				},
-				"Oak plank": {
-					"11 (noted)": "Unknown"
-				},
-				"Teak plank": {
-					"17 (noted)": "Unknown"
-				},
-				"Mahogany plank": {
-					"11 (noted)": "Unknown"
-				},
-				"Sawmill coupon (teak plank)": {
-					"19-20": "Unknown"
-				},
-				"Sawmill coupon (mahogany plank)": {
-					"1": "Unknown"
-				},
-				"Fine fish offcuts": {
-					"25": "Unknown"
-				},
-				"Mithril ore": {
-					"14-19 (noted)": "Unknown"
-				},
-				"Adamantite ore": {
-					"12-14 (noted)": "Unknown"
+					"15000-25000": "14/160"
 				},
 				"Coal": {
-					"14-20 (noted)": "Unknown"
+					"10-20 (noted)": "8/160"
+				},
+				"Mithril ore": {
+					"10-20 (noted)": "8/160"
 				},
 				"Steel cannonball": {
-					"46-60": "Unknown"
+					"40-60": "8/160",
+					"25-40": "1/160"
 				},
 				"Mithril cannonball": {
-					"40-59": "Unknown"
-				},
-				"Adamant cannonball": {
-					"40-52": "Unknown"
-				},
-				"Steel bar": {
-					"12 (noted)": "Unknown"
+					"40-60": "8/160",
+					"30-40": "1/160"
 				},
 				"Steel nails": {
-					"29": "Unknown"
+					"20-30": "8/160"
+				},
+				"Mithril nails": {
+					"20-30": "8/160"
+				},
+				"Sawmill coupon (teak plank)": {
+					"10-20": "8/160"
+				},
+				"Sawmill coupon (mahogany plank)": {
+					"10-20": "8/160"
+				},
+				"Oak plank": {
+					"10-20 (noted)": "8/160"
+				},
+				"Teak plank": {
+					"10-20 (noted)": "8/160"
+				},
+				"Mahogany plank": {
+					"5-15 (noted)": "6/160"
+				},
+				"Oak repair kit": {
+					"5-15 (noted)": "6/160"
+				},
+				"Teak repair kit": {
+					"5-15 (noted)": "6/160"
+				},
+				"Mahogany repair kit": {
+					"5-15 (noted)": "6/160"
+				},
+				"Steel bar": {
+					"10-20 (noted)": "6/160"
 				},
 				"Mithril bar": {
-					"11-20 (noted)": "Unknown"
+					"10-20 (noted)": "6/160"
 				},
-				"Adamantite bar": {
-					"11-20 (noted)": "Unknown"
+				"Adamantite ore": {
+					"10-20 (noted)": "5.5/160"
+				},
+				"Adamant cannonball": {
+					"40-60": "5.5/160"
 				},
 				"Adamantite nails": {
-					"22-25": "Unknown"
+					"20-30": "5.5/160"
+				},
+				"Fine fish offcuts": {
+					"20-30": "4.5/160"
+				},
+				"Fish offcuts": {
+					"40-60": "3.5/160"
+				},
+				"Adamantite bar": {
+					"10-20 (noted)": "3.5/160"
 				}
 			},
 			"Large port reward bag loot": {
 				"Grapes": {
-					"1": "Unknown"
+					"35-40 (noted)": "2/155"
 				},
 				"Cake": {
-					"1": "Unknown"
-				},
-				"Chocolate cake": {
-					"1": "Unknown"
+					"2 (noted)": "2/155"
 				},
 				"Pineapple": {
-					"1": "Unknown"
-				},
-				"Raw cod": {
-					"1": "Unknown"
-				},
-				"Raw tuna": {
-					"1": "Unknown"
-				},
-				"Raw lobster": {
-					"1": "Unknown"
+					"25 (noted)": "2/155"
 				},
 				"Raw bass": {
-					"1": "Unknown"
-				},
-				"Raw shark": {
-					"1": "Unknown"
+					"15-18 (noted)": "2/155"
 				},
 				"Varlamorian kebab": {
-					"1": "Unknown"
+					"2 (noted)": "2/155"
 				},
-				"Bronze scimitar": {
-					"1": "Unknown"
-				},
-				"Iron scimitar": {
-					"1": "Unknown"
-				},
-				"Mithril scimitar": {
-					"1": "Unknown"
-				},
-				"Adamant scimitar": {
-					"1": "Unknown"
-				},
-				"Rune scimitar": {
-					"1": "Unknown"
+				"Steel scimitar": {
+					"1 (noted)": "2/155"
 				},
 				"Lead ore": {
-					"1": "Unknown"
+					"10-24 (noted)": "1/155"
 				},
 				"Nickel ore": {
-					"1": "Unknown"
+					"21-24 (noted)": "1/155"
 				},
 				"Teak logs": {
-					"1": "Unknown"
-				},
-				"Mahogany logs": {
-					"1": "Unknown"
-				},
-				"Compost": {
-					"1": "Unknown"
+					"5-24 (noted)": "2/155"
 				},
 				"Supercompost": {
-					"1": "Unknown"
-				},
-				"Ultracompost": {
-					"1": "Unknown"
+					"25 (noted)": "2/155"
 				},
 				"Bird nest (empty)": {
-					"1": "Unknown"
+					"5-6 (noted)": "2/155"
 				},
 				"Astral rune": {
-					"1": "Unknown"
+					"20-30": "2/155"
 				},
 				"Raw monkfish": {
-					"1": "Unknown"
+					"10 (noted)": "2/155"
 				},
 				"Raw anglerfish": {
-					"1": "Unknown"
-				},
-				"Casket": {
-					"1": "Unknown"
-				},
-				"Zulrah's scales": {
-					"1": "Unknown"
-				},
-				"Crystal shards": {
-					"1": "Unknown"
-				},
-				"Elkhorn coral": {
-					"1": "Unknown"
-				},
-				"Pillar coral": {
-					"1": "Unknown"
-				},
-				"Umbral coral": {
-					"1": "Unknown"
-				},
-				"Archer helm": {
-					"1": "Unknown"
-				},
-				"Berserker helm": {
-					"1": "Unknown"
-				},
-				"Farseer helm": {
-					"1": "Unknown"
-				},
-				"Warrior helm": {
-					"1": "Unknown"
-				},
-				"Fremennik helm": {
-					"1": "Unknown"
-				},
-				"Elkhorn frag": {
-					"1": "Unknown"
-				},
-				"Pillar frag": {
-					"1": "Unknown"
-				},
-				"Umbral frag": {
-					"1": "Unknown"
-				},
-				"Bucket of sand": {
-					"1": "Unknown"
-				},
-				"Bronze full helm": {
-					"1": "Unknown"
-				},
-				"Bronze platebody": {
-					"1": "Unknown"
-				},
-				"Bronze platelegs": {
-					"1": "Unknown"
-				},
-				"Iron full helm": {
-					"1": "Unknown"
-				},
-				"Iron platebody": {
-					"1": "Unknown"
-				},
-				"Iron platelegs": {
-					"1": "Unknown"
-				},
-				"Steel full helm": {
-					"1": "Unknown"
-				},
-				"Steel platebody": {
-					"1": "Unknown"
-				},
-				"Steel platelegs": {
-					"1": "Unknown"
-				},
-				"Mithril full helm": {
-					"1": "Unknown"
-				},
-				"Mithril platebody": {
-					"1": "Unknown"
-				},
-				"Mithril platelegs": {
-					"1": "Unknown"
-				},
-				"Adamant full helm": {
-					"1": "Unknown"
-				},
-				"Adamant platebody": {
-					"1": "Unknown"
-				},
-				"Adamant platelegs": {
-					"1": "Unknown"
-				},
-				"Rune full helm": {
-					"1": "Unknown"
-				},
-				"Rune platebody": {
-					"1": "Unknown"
-				},
-				"Rune platelegs": {
-					"1": "Unknown"
-				},
-				"Bronze cannonball": {
-					"1": "Unknown"
-				},
-				"Iron cannonball": {
-					"1": "Unknown"
+					"4-6 (noted)": "2/155"
 				},
 				"Steel cannonball": {
-					"1": "Unknown"
-				},
-				"Dragon cannonball": {
-					"1": "Unknown"
-				},
-				"Teak plank": {
-					"14-18 (noted)": "Unknown"
-				},
-				"Mahogany plank": {
-					"19-20 (noted)": "Unknown"
-				},
-				"Camphor plank": {
-					"9-15 (noted)": "Unknown"
-				},
-				"Mithril nails": {
-					"21-24": "Unknown"
-				},
-				"Adamantite nails": {
-					"28-30": "Unknown"
-				},
-				"Rune nails": {
-					"22-26": "Unknown"
+					"25-52": "2/465"
 				},
 				"Mithril cannonball": {
-					"49-58": "Unknown"
+					"25": "2/465"
 				},
 				"Adamant cannonball": {
-					"42-59": "Unknown"
+					"32-40": "2/465"
 				},
-				"Rune cannonball": {
-					"49-60": "Unknown"
+				"Casket": {
+					"1 (noted)": "2/155"
 				},
-				"Fine fish offcuts": {
-					"51-53": "Unknown"
+				"Zulrah's scales": {
+					"23-25": "2/155"
 				},
-				"Coal": {
-					"14 (noted)": "Unknown"
+				"Crystal shards": {
+					"8-12": "2/155"
 				},
-				"Adamantite ore": {
-					"10-17 (noted)": "Unknown"
+				"Pillar coral": {
+					"8-9": "2/155"
 				},
-				"Runite ore": {
-					"11 (noted)": "Unknown"
+				"Archer helm": {
+					"1": "0.4/155"
 				},
-				"Mithril bar": {
-					"15-20 (noted)": "Unknown"
+				"Berserker helm": {
+					"1": "0.4/155"
 				},
-				"Adamantite bar": {
-					"15 (noted)": "Unknown"
+				"Farseer helm": {
+					"1": "0.4/155"
 				},
-				"Runite bar": {
-					"7-17 (noted)": "Unknown"
+				"Warrior helm": {
+					"1": "0.4/155"
 				},
-				"Teak repair kit": {
-					"7-10 (noted)": "Unknown"
+				"Fremennik helm": {
+					"1": "0.4/155"
 				},
-				"Sawmill coupon (mahogany plank)": {
-					"11-19": "Unknown"
+				"Pillar frag": {
+					"3": "2/155"
 				},
-				"Sawmill coupon (camphor plank)": {
-					"13-18": "Unknown"
+				"Bucket of sand": {
+					"40-48 (noted)": "2/155"
+				},
+				"Steel platebody": {
+					"1 (noted)": "2/465"
+				},
+				"Mithril platebody": {
+					"1 (noted)": "2/465"
+				},
+				"Mithril platelegs": {
+					"1 (noted)": "2/465"
 				},
 				"Coins": {
-					"26859": "Unknown"
+					"22500-32500": "15/155"
+				},
+				"Coal": {
+					"10-20 (noted)": "8/155"
+				},
+				"Adamantite ore": {
+					"10-20 (noted)": "8/155"
+				},
+				"Mithril cannonball": {
+					"40-60": "8/155"
+				},
+				"Adamant cannonball": {
+					"40-60": "8/155"
+				},
+				"Mithril nails": {
+					"20-30": "8/155"
+				},
+				"Adamantite nails": {
+					"20-30": "8/155"
+				},
+				"Sawmill coupon (mahogany plank)": {
+					"10-20": "8/155"
+				},
+				"Sawmill coupon (camphor plank)": {
+					"10-20": "8/155"
+				},
+				"Teak plank": {
+					"10-20 (noted)": "8/155"
+				},
+				"Mahogany plank": {
+					"10-20 (noted)": "8/155"
+				},
+				"Fine fish offcuts": {
+					"40-60": "7/155"
+				},
+				"Teak repair kit": {
+					"5-15 (noted)": "6/155"
+				},
+				"Mahogany repair kit": {
+					"5-15 (noted)": "6/155"
+				},
+				"Mithril bar": {
+					"10-20 (noted)": "6/155"
+				},
+				"Adamantite bar": {
+					"10-20 (noted)": "6/155"
+				},
+				"Camphor plank": {
+					"5-15 (noted)": "5.5/155"
+				},
+				"Camphor repair kit": {
+					"5-15 (noted)": "5.5/155"
+				},
+				"Rune cannonball": {
+					"40-60": "5.5/155"
+				},
+				"Rune nails": {
+					"20-30": "5.5/155"
+				},
+				"Runite ore": {
+					"10-20 (noted)": "3/155"
+				},
+				"Runite bar": {
+					"10-20 (noted)": "2/155"
 				}
 			},
 			"Huge port reward bag loot": {
 				"Grapes": {
-					"1": "Unknown"
+					"40 (noted)": "3/225"
 				},
 				"Cake": {
-					"1": "Unknown"
-				},
-				"Chocolate cake": {
-					"1": "Unknown"
+					"2 (noted)": "3/225"
 				},
 				"Lead ore": {
-					"1": "Unknown"
+					"10 (noted)": "1.5/225"
 				},
 				"Nickel ore": {
-					"1": "Unknown"
+					"27 (noted)": "1.5/225"
 				},
 				"Teak logs": {
-					"1": "Unknown"
+					"20-29 (noted)": "1.5/225"
 				},
 				"Mahogany logs": {
-					"1": "Unknown"
+					"21-27 (noted)": "1.5/225"
 				},
 				"Astral rune": {
-					"1": "Unknown"
-				},
-				"Zulrah's scales": {
-					"1": "Unknown"
-				},
-				"Crystal shards": {
-					"1": "Unknown"
-				},
-				"Elkhorn coral": {
-					"1": "Unknown"
-				},
-				"Pillar coral": {
-					"1": "Unknown"
-				},
-				"Umbral coral": {
-					"1": "Unknown"
-				},
-				"Archer helm": {
-					"1": "Unknown"
-				},
-				"Berserker helm": {
-					"1": "Unknown"
-				},
-				"Farseer helm": {
-					"1": "Unknown"
-				},
-				"Warrior helm": {
-					"1": "Unknown"
-				},
-				"Fremennik helm": {
-					"1": "Unknown"
-				},
-				"Elkhorn frag": {
-					"1": "Unknown"
-				},
-				"Pillar frag": {
-					"1": "Unknown"
-				},
-				"Umbral frag": {
-					"1": "Unknown"
-				},
-				"Bronze full helm": {
-					"1": "Unknown"
-				},
-				"Bronze platebody": {
-					"1": "Unknown"
-				},
-				"Bronze platelegs": {
-					"1": "Unknown"
-				},
-				"Iron full helm": {
-					"1": "Unknown"
-				},
-				"Iron platebody": {
-					"1": "Unknown"
-				},
-				"Iron platelegs": {
-					"1": "Unknown"
-				},
-				"Steel full helm": {
-					"1": "Unknown"
-				},
-				"Steel platebody": {
-					"1": "Unknown"
-				},
-				"Steel platelegs": {
-					"1": "Unknown"
-				},
-				"Mithril full helm": {
-					"1": "Unknown"
-				},
-				"Mithril platebody": {
-					"1": "Unknown"
-				},
-				"Mithril platelegs": {
-					"1": "Unknown"
-				},
-				"Adamant full helm": {
-					"1": "Unknown"
-				},
-				"Adamant platebody": {
-					"1": "Unknown"
-				},
-				"Adamant platelegs": {
-					"1": "Unknown"
-				},
-				"Rune full helm": {
-					"1": "Unknown"
-				},
-				"Rune platebody": {
-					"1": "Unknown"
-				},
-				"Rune platelegs": {
-					"1": "Unknown"
-				},
-				"Bronze cannonball": {
-					"1": "Unknown"
-				},
-				"Iron cannonball": {
-					"1": "Unknown"
+					"21-27": "3/225"
 				},
 				"Steel cannonball": {
-					"1": "Unknown"
+					"25": "3/225"
 				},
-				"Mithril cannonball": {
-					"1": "Unknown"
+				"Zulrah's scales": {
+					"25": "3/225"
 				},
-				"Rune cannonball": {
-					"1": "Unknown"
+				"Crystal shards": {
+					"8-10": "3/225"
+				},
+				"Umbral coral": {
+					"4-5": "3/225"
+				},
+				"Archer helm": {
+					"1": "0.6/225"
+				},
+				"Berserker helm": {
+					"1": "0.6/225"
+				},
+				"Farseer helm": {
+					"1": "0.6/225"
+				},
+				"Warrior helm": {
+					"1": "0.6/225"
+				},
+				"Fremennik helm": {
+					"1": "0.6/225"
+				},
+				"Umbral frag": {
+					"2": "3/225"
+				},
+				"Steel platebody": {
+					"1 (noted)": "3/225"
 				},
 				"Coins": {
-					"54849-57294": "Unknown"
-				},
-				"Mahogany repair kit": {
-					"8 (noted)": "Unknown"
-				},
-				"Ironwood repair kit": {
-					"7 (noted)": "Unknown"
-				},
-				"Mahogany plank": {
-					"14-18 (noted)": "Unknown"
-				},
-				"Camphor plank": {
-					"12 (noted)": "Unknown"
-				},
-				"Ironwood plank": {
-					"11 (noted)": "Unknown"
-				},
-				"Adamant cannonball": {
-					"59": "Unknown"
-				},
-				"Fine fish offcuts": {
-					"45-56": "Unknown"
-				},
-				"Coal": {
-					"39 (noted)": "Unknown"
-				},
-				"Mithril bar": {
-					"19 (noted)": "Unknown"
-				},
-				"Adamantite bar": {
-					"11-20 (noted)": "Unknown"
-				},
-				"Adamantite nails": {
-					"29-30": "Unknown"
-				},
-				"Adamantite ore": {
-					"18 (noted)": "Unknown"
-				},
-				"Runite ore": {
-					"7 (noted)": "Unknown"
+					"40000-60000": "22/225"
 				},
 				"Sawmill coupon (camphor plank)": {
-					"11-15": "Unknown"
+					"10-20": "13/225"
 				},
 				"Sawmill coupon (ironwood plank)": {
-					"10-17": "Unknown"
+					"10-20": "13/225"
 				},
-				"Dragon nails": {
-					"10-12": "Unknown"
+				"Fine fish offcuts": {
+					"40-60": "12/225"
 				},
-				"Dragon metal sheet": {
-					"1 (noted)": "Unknown"
+				"Adamant cannonball": {
+					"40-60": "12/225"
+				},
+				"Adamantite nails": {
+					"20-30": "12/225"
+				},
+				"Mahogany plank": {
+					"10-20 (noted)": "12/225"
+				},
+				"Camphor plank": {
+					"10-20 (noted)": "12/225"
+				},
+				"Ironwood plank": {
+					"5-15 (noted)": "9/225"
+				},
+				"Mahogany repair kit": {
+					"5-15 (noted)": "9/225"
+				},
+				"Camphor repair kit": {
+					"5-15 (noted)": "9/225"
+				},
+				"Ironwood repair kit": {
+					"5-15 (noted)": "9/225"
+				},
+				"Coal": {
+					"30-50 (noted)": "9/225"
+				},
+				"Adamantite ore": {
+					"10-20 (noted)": "9/225"
+				},
+				"Mithril bar": {
+					"10-20 (noted)": "9/225"
+				},
+				"Adamantite bar": {
+					"10-20 (noted)": "9/225"
+				},
+				"Rune cannonball": {
+					"40-60": "9/225"
+				},
+				"Rune nails": {
+					"20-30": "9/225"
+				},
+				"Runite ore": {
+					"5-10 (noted)": "8/225"
+				},
+				"Runite bar": {
+					"5-10 (noted)": "5/225"
 				},
 				"Dragon cannonball": {
-					"15-55": "Unknown"
+					"40-60": "6/225"
+				},
+				"Dragon nails": {
+					"10-15": "4/225"
+				},
+				"Dragon metal sheet": {
+					"1-2 (noted)": "1/225"
 				}
 			},
 			"Forgotten lockbox loot": {
@@ -239014,134 +238410,134 @@
 			},
 			"Adept potion pack loot": {
 				"Agility potion(3)": {
-					"2-3 (noted)": "4/62"
+					"2-3 (noted)": "6/93"
 				},
 				"Antifire potion(3)": {
-					"2-3 (noted)": "6/62"
+					"2-3 (noted)": "9/93"
 				},
 				"Antipoison(3)": {
-					"2-3 (noted)": "7/62"
+					"2-3 (noted)": "11/93"
 				},
 				"Combat potion(3)": {
-					"2-3 (noted)": "7/62"
+					"2-3 (noted)": "11/93"
 				},
 				"Energy potion(3)": {
-					"2-3 (noted)": "4/62"
+					"2-3 (noted)": "6/93"
 				},
 				"Hunter potion(3)": {
-					"2-3 (noted)": "4/62"
+					"2-3 (noted)": "4/93"
 				},
 				"Prayer potion(3)": {
-					"2-3 (noted)": "2/62"
+					"2-3 (noted)": "3/93"
 				},
 				"Prayer regeneration potion(3)": {
-					"2-3 (noted)": "2/62"
+					"2-3 (noted)": "3/93"
 				},
 				"Restore potion(3)": {
-					"2-3 (noted)": "8/62"
+					"2-3 (noted)": "11/93"
 				},
 				"Super attack potion(3)": {
-					"2-3 (noted)": "6/62"
+					"2-3 (noted)": "9/93"
 				},
 				"Super defence potion(3)": {
-					"2-3 (noted)": "2/62"
+					"2-3 (noted)": "3/93"
 				},
 				"Super energy potion(3)": {
-					"2-3 (noted)": "2/62"
+					"2-3 (noted)": "3/93"
 				},
 				"Super strength potion(3)": {
-					"2-3 (noted)": "2/62"
+					"2-3 (noted)": "3/93"
 				},
 				"Superantipoison(3)": {
-					"2-3 (noted)": "6/62"
+					"2-3 (noted)": "9/93"
 				}
 			},
 			"Apprentice potion pack loot": {
 				"Agility potion(3)": {
-					"2-4 (noted)": "4/85"
+					"2-4 (noted)": "5/90"
 				},
 				"Antipoison(3)": {
-					"2-4 (noted)": "6/85"
+					"2-4 (noted)": "6/90"
 				},
 				"Attack potion(3)": {
-					"2-4 (noted)": "11/85"
+					"2-4 (noted)": "11/90"
 				},
 				"Combat potion(3)": {
-					"2-4 (noted)": "4/85"
+					"2-4 (noted)": "4/90"
 				},
 				"Defence potion(3)": {
-					"2-4 (noted)": "7/85"
+					"2-4 (noted)": "7/90"
 				},
 				"Energy potion(3)": {
-					"2-4 (noted)": "5/85"
+					"2-4 (noted)": "5/90"
 				},
 				"Fishing potion(3)": {
-					"2-4 (noted)": "11/85"
+					"2-4 (noted)": "11/90"
 				},
 				"Hunter potion(3)": {
-					"2-4 (noted)": "2/85"
+					"2-4 (noted)": "2/90"
 				},
 				"Prayer potion(3)": {
-					"2-4 (noted)": "1/85"
+					"2-4 (noted)": "1/90"
 				},
 				"Restore potion(3)": {
-					"2-4 (noted)": "10/85"
+					"2-4 (noted)": "11/90"
 				},
 				"Strength potion(3)": {
-					"2-4 (noted)": "10/85"
+					"2-4 (noted)": "11/90"
 				},
 				"Super attack potion(3)": {
-					"2-4 (noted)": "6/85"
+					"2-4 (noted)": "7/90"
 				},
 				"Super strength potion(3)": {
-					"2-4 (noted)": "3/85"
+					"2-4 (noted)": "3/90"
 				},
 				"Superantipoison(3)": {
-					"2-4 (noted)": "5/85"
+					"2-4 (noted)": "5/90"
 				}
 			},
 			"Expert potion pack loot": {
 				"Ancient brew(3)": {
-					"2-4": "3/83"
+					"2-4": "3/79"
 				},
 				"Hunter potion(3)": {
-					"2-4": "6/83"
+					"2-4": "6/79"
 				},
 				"Magic potion(3)": {
-					"2-4": "11/83"
+					"2-4": "10/79"
 				},
 				"Prayer potion(3)": {
-					"2-4": "3/83"
+					"2-4": "3/79"
 				},
 				"Prayer regeneration potion(3)": {
-					"2-4": "4/83"
+					"2-4": "3/79"
 				},
 				"Ranging potion(3)": {
-					"2-4": "6/83"
+					"2-4": "6/79"
 				},
 				"Saradomin brew(3)": {
-					"2-4": "2/83"
+					"2-4": "2/79"
 				},
 				"Super attack(3)": {
-					"2-4": "10/83"
+					"2-4": "10/79"
 				},
 				"Super defence(3)": {
-					"2-4": "6/83"
+					"2-4": "6/79"
 				},
 				"Super energy(3)": {
-					"2-4": "4/83"
+					"2-4": "4/79"
 				},
 				"Super restore(3)": {
-					"2-4": "2/83"
+					"2-4": "2/79"
 				},
 				"Super strength(3)": {
-					"2-4": "6/83"
+					"2-4": "6/79"
 				},
 				"Superantipoison(3)": {
-					"2-4": "11/83"
+					"2-4": "10/79"
 				},
 				"Zamorak brew(3)": {
-					"2-4": "9/83"
+					"2-4": "8/79"
 				}
 			},
 			"Unsired loot": {
@@ -241652,22 +241048,20 @@
 					"1": "1/128"
 				},
 				"Coins": {
-					"13": "10/128",
 					"26": "8/128",
 					"35": "8/128"
 				},
 				"Fishing bait": {
-					"7": "5/128",
-					"15": "22/128"
+					"7": "5/128"
 				},
 				"Eye of newt": {
 					"1": "1/128"
 				},
 				"Energy potion(2)": {
-					"1": "Unknown"
+					"1": "10/128"
 				},
 				"Energy potion(4)": {
-					"2 (noted)": "Unknown"
+					"2 (noted)": "21/128"
 				},
 				"Clue scroll (easy)": {
 					"1": "1/128"
@@ -241676,7 +241070,7 @@
 					"1": "2/128"
 				},
 				"HerbDropTable+": {
-					"1": "34/128"
+					"1": "33/128"
 				}
 			},
 			"Basilisk": {
@@ -242344,7 +241738,7 @@
 					"1": "1/128"
 				},
 				"Nature rune": {
-					"3-4": "6/128"
+					"3": "6/128"
 				},
 				"Fire rune": {
 					"12": "5/128"
@@ -242353,7 +241747,7 @@
 					"9": "2/128"
 				},
 				"Vial of water": {
-					"1": "13/128"
+					"1": "3/128"
 				},
 				"White berries": {
 					"1": "5/128"
@@ -242374,31 +241768,29 @@
 					"1": "1/128"
 				},
 				"Coins": {
-					"3": "5/128",
-					"8": "3/128",
 					"10": "1/128",
 					"29": "3/128"
 				},
 				"Nothing": {
-					"1": "29/128"
+					"1": "28/128"
 				},
 				"Frozen tear": {
-					"1": "Unknown"
+					"1": "1/134"
 				},
 				"Energy potion(3)": {
-					"1": "Unknown"
+					"1": "13/128"
 				},
 				"Energy potion(4)": {
-					"1": "Unknown"
+					"1": "5/128"
 				},
 				"Tooth half of key (moon key)": {
-					"1": "1/2260"
+					"1": "1/1024"
 				},
 				"GemDropTable+": {
 					"1": "1/128"
 				},
 				"HerbDropTable+": {
-					"1": "22/128"
+					"1": "23/128"
 				},
 				"AllotmentSeedDropTable+": {
 					"1": "26/128"
@@ -242760,7 +242152,7 @@
 					"1": "1/128"
 				},
 				"Nature rune": {
-					"3-4": "6/128"
+					"3": "6/128"
 				},
 				"Fire rune": {
 					"12": "5/128"
@@ -242769,7 +242161,7 @@
 					"9": "2/128"
 				},
 				"Vial of water": {
-					"1": "13/128"
+					"1": "3/128"
 				},
 				"White berries": {
 					"1": "5/128"
@@ -242790,25 +242182,26 @@
 					"1": "1/128"
 				},
 				"Coins": {
-					"3": "5/128",
-					"8": "3/128",
 					"10": "1/128",
 					"29": "3/128"
 				},
 				"Nothing": {
-					"1": "29/128"
+					"1": "28/128"
 				},
 				"Energy potion(3)": {
-					"1": "Unknown"
+					"1": "13/128"
 				},
 				"Energy potion(4)": {
-					"1": "Unknown"
+					"1": "5/128"
+				},
+				"Tooth half of key (moon key)": {
+					"1": "1/1024"
 				},
 				"GemDropTable+": {
 					"1": "1/128"
 				},
 				"HerbDropTable+": {
-					"1": "22/128"
+					"1": "23/128"
 				},
 				"AllotmentSeedDropTable+": {
 					"1": "26/128"
@@ -242948,11 +242341,8 @@
 					"7": "2/128"
 				},
 				"Coins": {
-					"1": "1/128",
-					"5": "12/128",
 					"15": "16/128",
 					"28": "12/128",
-					"42": "3/128",
 					"62": "4/128"
 				},
 				"Limpwurt root": {
@@ -242962,10 +242352,10 @@
 					"1": "1/128"
 				},
 				"Energy potion(2)": {
-					"1": "Unknown"
+					"1": "12/128"
 				},
 				"Energy potion(4)": {
-					"1": "Unknown"
+					"1": "4/128"
 				},
 				"Cockatrice head": {
 					"1": "1/1000"
@@ -243032,11 +242422,8 @@
 					"7": "2/128"
 				},
 				"Coins": {
-					"1": "1/128",
-					"5": "12/128",
 					"15": "16/128",
 					"28": "12/128",
-					"42": "3/128",
 					"62": "4/128"
 				},
 				"Limpwurt root": {
@@ -243046,10 +242433,10 @@
 					"1": "1/128"
 				},
 				"Energy potion(2)": {
-					"1": "Unknown"
+					"1": "12/128"
 				},
 				"Energy potion(4)": {
-					"1": "Unknown"
+					"1": "4/128"
 				},
 				"Cockatrice head": {
 					"1": "1/1000"
@@ -243226,15 +242613,14 @@
 				"Emerald ring": {
 					"1": "2/128"
 				},
-				"Coins": {
-					"5": "21/128",
-					"8": "23/128"
+				"Nothing": {
+					"1": "53/128"
 				},
-				"Energy potion(2)": {
-					"1": "Unknown"
+				"Coins": {
+					"8": "24/128"
 				},
 				"Energy potion(4)": {
-					"1": "Unknown"
+					"1": "13/128"
 				},
 				"Crawling hand (item)": {
 					"1": "1/500"
@@ -243271,15 +242657,14 @@
 				"Emerald ring": {
 					"1": "2/128"
 				},
-				"Coins": {
-					"5": "21/128",
-					"8": "23/128"
+				"Nothing": {
+					"1": "53/128"
 				},
-				"Energy potion(2)": {
-					"1": "Unknown"
+				"Coins": {
+					"8": "24/128"
 				},
 				"Energy potion(4)": {
-					"1": "Unknown"
+					"1": "13/128"
 				},
 				"Crawling hand (item)": {
 					"1": "1/500"
@@ -243392,9 +242777,6 @@
 				"Nature rune": {
 					"5": "4/128"
 				},
-				"Coal": {
-					"1": "13/128"
-				},
 				"Copper ore": {
 					"1": "3/128"
 				},
@@ -243416,14 +242798,11 @@
 				"Kebab": {
 					"1": "13/128"
 				},
-				"Waterskin(0)": {
-					"2": "13/128"
-				},
 				"Energy potion(2)": {
-					"6 (noted)": "Unknown"
+					"6 (noted)": "13/128"
 				},
 				"Energy potion(3)": {
-					"1": "Unknown"
+					"1": "13/128"
 				},
 				"GemDropTable+": {
 					"1": "6/128"
@@ -245294,69 +244673,67 @@
 					"1": "Always"
 				},
 				"Staff of fire": {
-					"1": "2/140"
+					"1": "2/139"
 				},
 				"Staff of air": {
-					"1": "2/140"
+					"1": "2/139"
 				},
 				"Fire battlestaff": {
-					"1": "1/140"
+					"1": "1/139"
 				},
 				"Air battlestaff": {
-					"1": "1/140"
+					"1": "1/139"
 				},
 				"Mystic fire staff": {
 					"1": "1/512"
 				},
 				"Air rune": {
-					"5": "3/140",
-					"17": "2/140"
+					"5": "3/139",
+					"17": "2/139"
 				},
 				"Fire rune": {
-					"18": "5/140",
-					"45": "8/140"
+					"18": "5/139",
+					"45": "8/139"
 				},
 				"Nature rune": {
-					"8": "11/140",
-					"37": "1/140"
+					"8": "11/139",
+					"37": "1/139"
 				},
 				"Chaos rune": {
-					"4": "9/140"
+					"4": "9/139"
 				},
 				"Death rune": {
-					"2": "3/140"
+					"2": "3/139"
 				},
 				"Steam rune": {
-					"2": "2/140"
+					"2": "2/139"
 				},
 				"Steel cannonball": {
-					"3": "2/140"
+					"3": "2/139"
 				},
 				"Coins": {
-					"11": "23/140",
-					"44": "28/140",
-					"76": "1/140",
-					"127": "1/140",
-					"200": "11/140"
+					"11": "3/139",
+					"127": "1/139",
+					"200": "11/139"
 				},
 				"Fire orb": {
-					"2": "1/140"
+					"2": "1/139"
 				},
 				"Soda ash": {
-					"4": "1/140"
+					"4": "1/139"
 				},
 				"Air diamond": {
 					"1": "1/64"
 				},
 				"Energy potion(4)": {
-					"1": "1/16",
-					"10 (noted)": "1/40"
+					"1": "29/139",
+					"10 (noted)": "1/139"
 				},
 				"GemDropTable+": {
-					"1": "5/140"
+					"1": "5/139"
 				},
 				"HerbDropTable+": {
-					"1": "35/140"
+					"1": "35/139"
 				}
 			},
 			"King kurask": {
@@ -245766,9 +245143,6 @@
 				"Nature rune": {
 					"5": "4/128"
 				},
-				"Coal": {
-					"1": "13/128"
-				},
 				"Copper ore": {
 					"1": "3/128"
 				},
@@ -245790,14 +245164,11 @@
 				"Kebab": {
 					"1": "13/128"
 				},
-				"Waterskin(0)": {
-					"2": "13/128"
-				},
 				"Energy potion(2)": {
-					"6 (noted)": "Unknown"
+					"6 (noted)": "13/128"
 				},
 				"Energy potion(3)": {
-					"1": "Unknown"
+					"1": "13/128"
 				},
 				"Desert lizard bone": {
 					"1": "1/4"
@@ -246291,17 +245662,17 @@
 					"1-4": "37/128",
 					"5-8": "10/128"
 				},
-				"Coins": {
-					"1-75": "10/128"
-				},
 				"Mole claw": {
+					"1": "1/128"
+				},
+				"Nothing": {
 					"1": "1/128"
 				},
 				"Earth emerald": {
 					"1": "1/64"
 				},
 				"Energy potion(3)": {
-					"1": "Unknown"
+					"1": "10/128"
 				},
 				"Clue scroll (easy)": {
 					"1": "1/128"
@@ -247264,29 +246635,27 @@
 				"Fire rune": {
 					"7": "1/128"
 				},
-				"Coins": {
-					"13": "10/128",
-					"26": "8/128",
-					"35": "8/128"
-				},
 				"Pure essence": {
 					"13 (noted)": "22/128"
-				},
-				"Fishing bait": {
-					"7": "5/128",
-					"15": "22/128"
-				},
-				"Eye of newt": {
-					"1": "1/128"
 				},
 				"Iron ore": {
 					"1": "1/128"
 				},
+				"Coins": {
+					"26": "8/128",
+					"35": "8/128"
+				},
+				"Fishing bait": {
+					"7": "5/128"
+				},
+				"Eye of newt": {
+					"1": "1/128"
+				},
 				"Energy potion(2)": {
-					"1": "Unknown"
+					"1": "10/128"
 				},
 				"Energy potion(4)": {
-					"2 (noted)": "Unknown"
+					"2 (noted)": "21/128"
 				},
 				"Clue scroll (easy)": {
 					"1": "10/128"
@@ -247295,7 +246664,7 @@
 					"1": "2/128"
 				},
 				"HerbDropTable+": {
-					"1": "34/128"
+					"1": "33/128"
 				},
 				"SuperiorDropTable+": {
 					"1": "5/804"
@@ -247841,9 +247210,6 @@
 				"Nature rune": {
 					"5": "4/128"
 				},
-				"Coal": {
-					"1": "13/128"
-				},
 				"Copper ore": {
 					"1": "3/128"
 				},
@@ -247865,14 +247231,11 @@
 				"Kebab": {
 					"1": "13/128"
 				},
-				"Waterskin(0)": {
-					"2": "13/128"
-				},
 				"Energy potion(2)": {
-					"6 (noted)": "Unknown"
+					"6 (noted)": "13/128"
 				},
 				"Energy potion(3)": {
-					"1": "Unknown"
+					"1": "13/128"
 				},
 				"GemDropTable+": {
 					"1": "6/128"
@@ -256233,35 +255596,12 @@
 			}, {
 				"Use the mooring point at ~|Ardougne|~": "Sailing"
 			}],
-			"Chocolate cake^Tiny port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Ardougne": "Sailing"
-			}, {
-				"Use the mooring point at ~|Ardougne|~": "Sailing"
-			}],
 			"Pineapple^Tiny port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Brimhaven": "Sailing"
 			}, {
 				"Use the mooring point at ~|Brimhaven|~": "Sailing"
 			}],
-			"Uncut opal^Tiny port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut jade^Tiny port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut red topaz^Tiny port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
 			"Uncut sapphire^Tiny port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut emerald^Tiny port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut ruby^Tiny port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut diamond^Tiny port reward bag loot*-source": [{
 				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
 			}],
 			"Raw cod^Tiny port reward bag loot*-source": [{
@@ -256269,36 +255609,10 @@
 			}, {
 				"Use the mooring point at ~|Catherby|~": "Sailing"
 			}],
-			"Raw tuna^Tiny port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw lobster^Tiny port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw bass^Tiny port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw shark^Tiny port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Bones^Tiny port reward bag loot*-source": [{
+			"Big bones^Tiny port reward bag loot*-source": [{
 				"Use the mooring point at ~|Entrana|~": "Sailing"
 			}],
 			"Compost^Tiny port reward bag loot*-source": [{
-				"Use the mooring point at ~|Hosidius|~": "Sailing"
-			}],
-			"Supercompost^Tiny port reward bag loot*-source": [{
-				"Use the mooring point at ~|Hosidius|~": "Sailing"
-			}],
-			"Ultracompost^Tiny port reward bag loot*-source": [{
 				"Use the mooring point at ~|Hosidius|~": "Sailing"
 			}],
 			"Bird nest (empty)^Tiny port reward bag loot*-source": [{
@@ -256310,6 +255624,46 @@
 				"Take ~|port tasks|~ from Musa Point": "Sailing"
 			}, {
 				"Use the mooring point at ~|Musa Point|~": "Sailing"
+			}],
+			"Barnacle blaster^Tiny port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Gin^Tiny port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Grog^Tiny port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Kraken colada^Tiny port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Rum^Tiny port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Sailor's mirage^Tiny port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Vodka^Tiny port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Whisky^Tiny port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
 			}],
 			"Raw manta ray^Tiny port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Port Khazard": "Sailing"
@@ -256339,21 +255693,6 @@
 			"Bucket of sand^Tiny port reward bag loot*-source": [{
 				"Use the mooring point at ~|Sunset Coast|~": "Sailing"
 			}],
-			"Adamant cannonball^Tiny port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Rune cannonball^Tiny port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Dragon cannonball^Tiny port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
 			"Grapes^Small port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Aldarin": "Sailing"
 			}, {
@@ -256364,35 +255703,12 @@
 			}, {
 				"Use the mooring point at ~|Ardougne|~": "Sailing"
 			}],
-			"Chocolate cake^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Ardougne": "Sailing"
-			}, {
-				"Use the mooring point at ~|Ardougne|~": "Sailing"
-			}],
 			"Pineapple^Small port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Brimhaven": "Sailing"
 			}, {
 				"Use the mooring point at ~|Brimhaven|~": "Sailing"
 			}],
-			"Uncut opal^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut jade^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut red topaz^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
 			"Uncut sapphire^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut emerald^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut ruby^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
-			}],
-			"Uncut diamond^Small port reward bag loot*-source": [{
 				"Use the mooring point at ~|Cairn Isle|~": "Sailing"
 			}],
 			"Raw cod^Small port reward bag loot*-source": [{
@@ -256401,21 +255717,6 @@
 				"Use the mooring point at ~|Catherby|~": "Sailing"
 			}],
 			"Raw tuna^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw lobster^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw bass^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw shark^Small port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Catherby": "Sailing"
 			}, {
 				"Use the mooring point at ~|Catherby|~": "Sailing"
@@ -256435,17 +255736,7 @@
 			}, {
 				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
 			}],
-			"Mithril scimitar^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Adamant scimitar^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Rune scimitar^Small port reward bag loot*-source": [{
+			"Steel scimitar^Small port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
 			}, {
 				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
@@ -256454,29 +255745,6 @@
 				"Take ~|port tasks|~ from Etceteria": "Sailing"
 			}, {
 				"Use the mooring point at ~|Etceteria|~": "Sailing"
-			}],
-			"Mahogany logs^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Etceteria": "Sailing"
-			}, {
-				"Use the mooring point at ~|Etceteria|~": "Sailing"
-			}],
-			"Copper ore^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Tin ore^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Silver ore^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Gold ore^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Adamantite ore^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Runite ore^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
 			}],
 			"Bird nest (empty)^Small port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Catherby": "Sailing"
@@ -256511,32 +255779,6 @@
 			"Elkhorn coral^Small port reward bag loot*-source": [{
 				"Use the mooring point at ~|Red Rock|~": "Sailing"
 			}],
-			"Pillar coral^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Red Rock|~": "Sailing"
-			}],
-			"Umbral coral^Small port reward bag loot*-source": [{
-				"Use the mooring point at ~|Red Rock|~": "Sailing"
-			}],
-			"Archer helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Rellekka": "Sailing"
-			}, {
-				"Use the mooring point at ~|Rellekka|~": "Sailing"
-			}],
-			"Berserker helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Rellekka": "Sailing"
-			}, {
-				"Use the mooring point at ~|Rellekka|~": "Sailing"
-			}],
-			"Farseer helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Rellekka": "Sailing"
-			}, {
-				"Use the mooring point at ~|Rellekka|~": "Sailing"
-			}],
-			"Warrior helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Rellekka": "Sailing"
-			}, {
-				"Use the mooring point at ~|Rellekka|~": "Sailing"
-			}],
 			"Fremennik helm^Small port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Rellekka": "Sailing"
 			}, {
@@ -256547,52 +255789,32 @@
 			}, {
 				"Use the mooring point at ~|Ruins of Unkah|~": "Sailing"
 			}],
+			"Grog^Small port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Barnacle blaster^Small port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Sailor's mirage^Small port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Vodka^Small port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
 			"Elkhorn frag^Small port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
 			}, {
 				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
 			}],
-			"Pillar frag^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
-			}, {
-				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
-			}],
-			"Umbral frag^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
-			}, {
-				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
-			}],
-			"Bronze full helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze platebody^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze platelegs^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron full helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
 			"Iron platebody^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron platelegs^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Steel full helm^Small port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
 			}, {
 				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
@@ -256601,86 +255823,6 @@
 				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
 			}, {
 				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Steel platelegs^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril full helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril platebody^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril platelegs^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant full helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant platebody^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant platelegs^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune full helm^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune platebody^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune platelegs^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze cannonball^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Iron cannonball^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Steel cannonball^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Adamant cannonball^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Rune cannonball^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Dragon cannonball^Small port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
 			}],
 			"Grapes^Medium port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Aldarin": "Sailing"
@@ -256702,27 +255844,7 @@
 			}, {
 				"Use the mooring point at ~|Brimhaven|~": "Sailing"
 			}],
-			"Raw cod^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw tuna^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
 			"Raw lobster^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw bass^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw shark^Medium port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Catherby": "Sailing"
 			}, {
 				"Use the mooring point at ~|Catherby|~": "Sailing"
@@ -256732,27 +255854,7 @@
 			}, {
 				"Use the mooring point at ~|Civitas illa Fortis|~": "Sailing"
 			}],
-			"Bronze scimitar^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Iron scimitar^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Mithril scimitar^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Adamant scimitar^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Rune scimitar^Medium port reward bag loot*-source": [{
+			"Steel scimitar^Medium port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
 			}, {
 				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
@@ -256772,27 +255874,7 @@
 			}, {
 				"Use the mooring point at ~|Etceteria|~": "Sailing"
 			}],
-			"Mahogany logs^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Etceteria": "Sailing"
-			}, {
-				"Use the mooring point at ~|Etceteria|~": "Sailing"
-			}],
-			"Copper ore^Medium port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Tin ore^Medium port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
 			"Iron ore^Medium port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Silver ore^Medium port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Gold ore^Medium port reward bag loot*-source": [{
-				"Use the mooring point at ~|Jatizso|~": "Sailing"
-			}],
-			"Runite ore^Medium port reward bag loot*-source": [{
 				"Use the mooring point at ~|Jatizso|~": "Sailing"
 			}],
 			"Bird nest (empty)^Medium port reward bag loot*-source": [{
@@ -256808,15 +255890,30 @@
 			"Yak-hide^Medium port reward bag loot*-source": [{
 				"Use the mooring point at ~|Neitiznot|~": "Sailing"
 			}],
+			"Grog^Medium port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Barnacle blaster^Medium port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Sailor's mirage^Medium port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
+			"Vodka^Medium port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from The Pandemonium": "Sailing"
+			}, {
+				"Use the mooring point at ~|The Pandemonium|~": "Sailing"
+			}],
 			"Raw monkfish^Medium port reward bag loot*-source": [{
 				"Use the mooring point at ~|Piscatoris|~": "Sailing"
 			}],
 			"Raw manta ray^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Khazard": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Khazard|~": "Sailing"
-			}],
-			"Raw sea turtle^Medium port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Port Khazard": "Sailing"
 			}, {
 				"Use the mooring point at ~|Port Khazard|~": "Sailing"
@@ -256841,13 +255938,7 @@
 			}, {
 				"Use the mooring point at ~|Prifddinas|~": "Sailing"
 			}],
-			"Elkhorn coral^Medium port reward bag loot*-source": [{
-				"Use the mooring point at ~|Red Rock|~": "Sailing"
-			}],
 			"Pillar coral^Medium port reward bag loot*-source": [{
-				"Use the mooring point at ~|Red Rock|~": "Sailing"
-			}],
-			"Umbral coral^Medium port reward bag loot*-source": [{
 				"Use the mooring point at ~|Red Rock|~": "Sailing"
 			}],
 			"Archer helm^Medium port reward bag loot*-source": [{
@@ -256856,16 +255947,6 @@
 				"Use the mooring point at ~|Rellekka|~": "Sailing"
 			}],
 			"Berserker helm^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Rellekka": "Sailing"
-			}, {
-				"Use the mooring point at ~|Rellekka|~": "Sailing"
-			}],
-			"Farseer helm^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Rellekka": "Sailing"
-			}, {
-				"Use the mooring point at ~|Rellekka|~": "Sailing"
-			}],
-			"Warrior helm^Medium port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Rellekka": "Sailing"
 			}, {
 				"Use the mooring point at ~|Rellekka|~": "Sailing"
@@ -256880,53 +255961,13 @@
 			}, {
 				"Use the mooring point at ~|Ruins of Unkah|~": "Sailing"
 			}],
-			"Elkhorn frag^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
-			}, {
-				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
-			}],
 			"Pillar frag^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
-			}, {
-				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
-			}],
-			"Umbral frag^Medium port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
 			}, {
 				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
 			}],
 			"Bucket of sand^Medium port reward bag loot*-source": [{
 				"Use the mooring point at ~|Sunset Coast|~": "Sailing"
-			}],
-			"Bronze full helm^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze platebody^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze platelegs^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron full helm^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron platebody^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron platelegs^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
 			}],
 			"Steel full helm^Medium port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
@@ -256943,71 +255984,6 @@
 			}, {
 				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
 			}],
-			"Mithril full helm^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril platebody^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril platelegs^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant full helm^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant platebody^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant platelegs^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune full helm^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune platebody^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune platelegs^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze cannonball^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Iron cannonball^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Rune cannonball^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Dragon cannonball^Medium port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
 			"Grapes^Large port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Aldarin": "Sailing"
 			}, {
@@ -257018,37 +255994,12 @@
 			}, {
 				"Use the mooring point at ~|Ardougne|~": "Sailing"
 			}],
-			"Chocolate cake^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Ardougne": "Sailing"
-			}, {
-				"Use the mooring point at ~|Ardougne|~": "Sailing"
-			}],
 			"Pineapple^Large port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Brimhaven": "Sailing"
 			}, {
 				"Use the mooring point at ~|Brimhaven|~": "Sailing"
 			}],
-			"Raw cod^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw tuna^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw lobster^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
 			"Raw bass^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Catherby": "Sailing"
-			}, {
-				"Use the mooring point at ~|Catherby|~": "Sailing"
-			}],
-			"Raw shark^Large port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Catherby": "Sailing"
 			}, {
 				"Use the mooring point at ~|Catherby|~": "Sailing"
@@ -257058,27 +256009,7 @@
 			}, {
 				"Use the mooring point at ~|Civitas illa Fortis|~": "Sailing"
 			}],
-			"Bronze scimitar^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Iron scimitar^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Mithril scimitar^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Adamant scimitar^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
-			}, {
-				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
-			}],
-			"Rune scimitar^Large port reward bag loot*-source": [{
+			"Steel scimitar^Large port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Corsair Cove": "Sailing"
 			}, {
 				"Use the mooring point at ~|Corsair Cove|~": "Sailing"
@@ -257098,18 +256029,7 @@
 			}, {
 				"Use the mooring point at ~|Etceteria|~": "Sailing"
 			}],
-			"Mahogany logs^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Etceteria": "Sailing"
-			}, {
-				"Use the mooring point at ~|Etceteria|~": "Sailing"
-			}],
-			"Compost^Large port reward bag loot*-source": [{
-				"Use the mooring point at ~|Hosidius|~": "Sailing"
-			}],
 			"Supercompost^Large port reward bag loot*-source": [{
-				"Use the mooring point at ~|Hosidius|~": "Sailing"
-			}],
-			"Ultracompost^Large port reward bag loot*-source": [{
 				"Use the mooring point at ~|Hosidius|~": "Sailing"
 			}],
 			"Bird nest (empty)^Large port reward bag loot*-source": [{
@@ -257130,6 +256050,11 @@
 			}, {
 				"Use the mooring point at ~|Port Piscarilius|~": "Sailing"
 			}],
+			"Steel cannonball^Large port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from Port Roberts": "Sailing"
+			}, {
+				"Use the mooring point at ~|Port Roberts|~": "Sailing"
+			}],
 			"Casket^Large port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Port Sarim": "Sailing"
 			}, {
@@ -257145,13 +256070,7 @@
 			}, {
 				"Use the mooring point at ~|Prifddinas|~": "Sailing"
 			}],
-			"Elkhorn coral^Large port reward bag loot*-source": [{
-				"Use the mooring point at ~|Red Rock|~": "Sailing"
-			}],
 			"Pillar coral^Large port reward bag loot*-source": [{
-				"Use the mooring point at ~|Red Rock|~": "Sailing"
-			}],
-			"Umbral coral^Large port reward bag loot*-source": [{
 				"Use the mooring point at ~|Red Rock|~": "Sailing"
 			}],
 			"Archer helm^Large port reward bag loot*-source": [{
@@ -257179,17 +256098,7 @@
 			}, {
 				"Use the mooring point at ~|Rellekka|~": "Sailing"
 			}],
-			"Elkhorn frag^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
-			}, {
-				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
-			}],
 			"Pillar frag^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
-			}, {
-				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
-			}],
-			"Umbral frag^Large port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
 			}, {
 				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
@@ -257197,52 +256106,7 @@
 			"Bucket of sand^Large port reward bag loot*-source": [{
 				"Use the mooring point at ~|Sunset Coast|~": "Sailing"
 			}],
-			"Bronze full helm^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze platebody^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze platelegs^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron full helm^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron platebody^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron platelegs^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Steel full helm^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
 			"Steel platebody^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Steel platelegs^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril full helm^Large port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
 			}, {
 				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
@@ -257257,67 +256121,12 @@
 			}, {
 				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
 			}],
-			"Adamant full helm^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant platebody^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant platelegs^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune full helm^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune platebody^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune platelegs^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze cannonball^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Iron cannonball^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Steel cannonball^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Dragon cannonball^Large port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
 			"Grapes^Huge port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Aldarin": "Sailing"
 			}, {
 				"Use the mooring point at ~|Aldarin|~": "Sailing"
 			}],
 			"Cake^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Ardougne": "Sailing"
-			}, {
-				"Use the mooring point at ~|Ardougne|~": "Sailing"
-			}],
-			"Chocolate cake^Huge port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Ardougne": "Sailing"
 			}, {
 				"Use the mooring point at ~|Ardougne|~": "Sailing"
@@ -257347,6 +256156,11 @@
 			}, {
 				"Use the mooring point at ~|Lunar Isle|~": "Sailing"
 			}],
+			"Steel cannonball^Huge port reward bag loot*-source": [{
+				"Take ~|port tasks|~ from Port Roberts": "Sailing"
+			}, {
+				"Use the mooring point at ~|Port Roberts|~": "Sailing"
+			}],
 			"Zulrah's scales^Huge port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Port Tyras": "Sailing"
 			}, {
@@ -257356,12 +256170,6 @@
 				"Take ~|port tasks|~ from Prifddinas": "Sailing"
 			}, {
 				"Use the mooring point at ~|Prifddinas|~": "Sailing"
-			}],
-			"Elkhorn coral^Huge port reward bag loot*-source": [{
-				"Use the mooring point at ~|Red Rock|~": "Sailing"
-			}],
-			"Pillar coral^Huge port reward bag loot*-source": [{
-				"Use the mooring point at ~|Red Rock|~": "Sailing"
 			}],
 			"Umbral coral^Huge port reward bag loot*-source": [{
 				"Use the mooring point at ~|Red Rock|~": "Sailing"
@@ -257391,135 +256199,15 @@
 			}, {
 				"Use the mooring point at ~|Rellekka|~": "Sailing"
 			}],
-			"Elkhorn frag^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
-			}, {
-				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
-			}],
-			"Pillar frag^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
-			}, {
-				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
-			}],
 			"Umbral frag^Huge port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from The Summer Shore": "Sailing"
 			}, {
 				"Use the mooring point at ~|The Summer Shore|~": "Sailing"
 			}],
-			"Bronze full helm^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze platebody^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze platelegs^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron full helm^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron platebody^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Iron platelegs^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Steel full helm^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
 			"Steel platebody^Huge port reward bag loot*-source": [{
 				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
 			}, {
 				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Steel platelegs^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril full helm^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril platebody^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Mithril platelegs^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant full helm^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant platebody^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Adamant platelegs^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune full helm^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune platebody^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Rune platelegs^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Void Knights' Outpost": "Sailing"
-			}, {
-				"Use the mooring point at ~|Void Knights' Outpost|~": "Sailing"
-			}],
-			"Bronze cannonball^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Iron cannonball^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Steel cannonball^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Mithril cannonball^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
-			}],
-			"Rune cannonball^Huge port reward bag loot*-source": [{
-				"Take ~|port tasks|~ from Port Roberts": "Sailing"
-			}, {
-				"Use the mooring point at ~|Port Roberts|~": "Sailing"
 			}]
 		},
 		"Monsters": {

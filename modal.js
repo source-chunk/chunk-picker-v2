@@ -663,6 +663,11 @@ const modalContents = {
         <i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeBisUpgrades()"></i>
         <div id="bis-upgrades-data" class="bis-upgrades-data noscroll"></div>
     `,
+    'revisionSyncModal': `
+        <div id="revisionsync-title" class="revisionsync-title noscroll">Map Syncing Error</div>
+        <div id="revisionsync-subtitle" class="revisionsync-subtitle noscroll"><div><div>This map has been recently edited.</div><div>Please reload the page to continue.</div></div></div>
+        <div id="revisionsync-data" class="revisionsync-data noscroll"><div><div class="revisionsync-proceed" onclick="window.location.reload()">Reload page</div></div></div>
+    `,
 };
 
 window.modal = {
