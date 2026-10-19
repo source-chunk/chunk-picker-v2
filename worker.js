@@ -3902,7 +3902,7 @@ let calcChallengesWork = function(chunks, baseChunkData, oldTempItemSkill) {
                 return;
             }
             !!chunkInfo['challenges'][skill][name]['Category'] && Object.keys(rules).some(rule => {
-                if (chunkInfo['challenges'][skill][name]['Category'].includes(rule) && !maybePrimary.includes(rule) && !rules[rule] && (rule !== 'Secondary Primary' || secondaryPrimaryNum === "1/1") && rule !== 'Shooting Star') {
+                if (chunkInfo['challenges'][skill][name]['Category'].includes(rule) && !maybePrimary.includes(rule) && !rules[rule] && (rule !== 'Secondary Primary' || secondaryPrimaryNum === "1/1") && (rule !== 'Shooting Star' || !rules['Shooting Star Tiered'])) {
                     validChallenge = false;
                     wrongThings.push(rule);
                     return true;
