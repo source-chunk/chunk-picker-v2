@@ -48559,6 +48559,18 @@
 				},
 				"Not F2P": true
 			},
+			"Access Dorgesh-Kaan mine via 12851": {
+				"Chunks": ["12851-1"],
+				"Tasks": {
+					"~|Death to the Dorgeshuun|~ 9": "Quest"
+				}
+			},
+			"Access Dorgesh-Kaan mine via Lumbridge Castle#Cellar": {
+				"Chunks": ["Lumbridge Castle#Cellar"],
+				"Tasks": {
+					"~|The Lost Tribe|~ 2": "Quest"
+				}
+			},
 			"Dorgesh-Kaan mine": {
 				"UnlocksArea": true,
 				"Items": ["LightSource[+]"],
@@ -160916,7 +160928,8 @@
 			"Sections": {
 				"1": {
 					"Connect": {
-						"12951": true
+						"12951": true,
+						"13206": true
 					},
 					"Monster": {
 						"Chicken": 14,
@@ -163611,7 +163624,9 @@
 		},
 		"13206": {
 			"Connect": {
-				"10835": true
+				"10835": true,
+				"12851": true,
+				"12950": true
 			},
 			"Monster": {
 				"Cave goblin guard": 4,
@@ -178512,6 +178527,7 @@
 			"UncutOnyxSource[+]": ["Uncut onyx monster sources", "Fortis Colosseum loot*", "Bag full of gems loot", "Elven crystal chest loot", "Moon chest loot*"],
 			"MarkOfGraceSource[+]": ["Access the ~|Al Kharid Rooftop Course|~", "Access the ~|Ape Atoll Agility Course|~", "Access the ~|Ardougne Rooftop Course|~", "Access the ~|Barbarian Outpost Agility Course|~", "Access the ~|Canafis Rooftop Course|~", "Access the ~|Dorgesh-Kaan Agility Course|~", "Access the ~|Dorgesh-Kaan Agility Course|~ (grapple route)", "Access the ~|Draynor Village Rooftop Course|~", "Access the ~|Falador Rooftop Course|~", "Access the ~|Gnome Stronghold Agility Course|~", "Access the ~|Pollnivneach Rooftop Course|~", "Access the ~|Rellekka Rooftop Course|~", "Access the ~|Seers' Village Rooftop Course|~", "Access the ~|Shayzien Basic Course|~", "Access the ~|Shayzien Advanced Course|~", "Access the ~|Varrock Rooftop Course|~", "Access the ~|Werewolf Agility Course|~"],
 			"Access Zanaris[+]": ["Access Zanaris via 12849", "Access Zanaris via a fairy ring"],
+			"Access Dorgesh-Kaan mine[+]": ["Access Dorgesh-Kaan mine via 12851", "Access Dorgesh-Kaan mine via Lumbridge Castle#Cellar"],
 			"SmokableTrapTask[+]": ["Catch an ~|embertailed jerboa|~", "Catch a ~|pyre fox|~", "Catch a ~|tecu salamander|~", "Catch a ~|barb-tailed kebbit|~", "Catch a ~|black chinchompa|~", "Catch a ~|black salamander|~", "Catch a ~|carnivorous chinchompa|~", "Catch a ~|chinchompa (Hunter)|~", "Catch a ~|copper longtail|~", "Catch a ~|crimson swift|~", "Catch a ~|ferret|~", "Catch a ~|golden warbler|~", "Catch a ~|maniacal monkey (Hunter)|~", "Catch a ~|red salamander|~", "Catch a ~|sabre-toothed kebbit|~", "Catch a ~|swamp lizard|~", "Catch a ~|tropical wagtail|~", "Catch a ~|wild kebbit|~", "Catch an ~|imp|~", "Catch an ~|orange salamander|~"],
 			"Access Ali's shop task[+]": ["Access Ali's shop in f2p", "F2P Only"],
 			"DemonbaneWeaponOrSpell[+]": ["Demonbane weapon", "Demonbane spell"],
