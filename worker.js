@@ -679,6 +679,12 @@ let getMonstersWithItem = function(objIn, item) {
     return tempObj;
 }
 
+// Generates subTasksKeysFiltered
+let generateSubTaskKeysFiltered = function(nameIn) {
+    if (!chunkInfo['challenges']['Quest'].hasOwnProperty(nameIn) || !chunkInfo['challenges']['Quest'][nameIn].hasOwnProperty('Tasks')) return [];
+    return Object.keys(chunkInfo['challenges']['Quest'][nameIn]['Tasks']).filter(subTask => chunkInfo['challenges']['Quest'][nameIn]['Tasks'][subTask] === 'Quest');
+}
+
 // Calculates all the possible challenges
 let calcChallenges = function(chunks, baseChunkData) {
     if (!baseChunkData) {
@@ -692,14 +698,12 @@ let calcChallenges = function(chunks, baseChunkData) {
     let tempMultiStepSkill = {};
     let i = 0;
     !!manualTasks && !!manualTasks['Quest'] && Object.keys(manualTasks['Quest']).forEach((name) => {
+        if (!chunkInfo['challenges']['Quest'] || !chunkInfo['challenges']['Quest'][name] || !chunkInfo['challenges']['Quest'][name].hasOwnProperty('Tasks')) return;
         let i = 0;
         let currNameArr = [];
-        let subTaskKeysFiltered = [];
-        if (!!chunkInfo['challenges']['Quest'] && !!chunkInfo['challenges']['Quest'][currNameArr[i]] && chunkInfo['challenges']['Quest'][currNameArr[i]].hasOwnProperty('Tasks')) {
-            subTaskKeysFiltered = Object.keys(chunkInfo['challenges']['Quest'][currNameArr[i]]['Tasks']).filter(subTask => chunkInfo['challenges']['Quest'][currNameArr[i]]['Tasks'][subTask] === 'Quest');
-        }
         currNameArr.push(name);
-        while (subTaskKeysFiltered.length > 0) {
+        let subTaskKeysFiltered = generateSubTaskKeysFiltered(name);
+        while (!!chunkInfo['challenges']['Quest'][currNameArr[i]] && chunkInfo['challenges']['Quest'][currNameArr[i]].hasOwnProperty('Tasks') && subTaskKeysFiltered.length > 0) {
             subTaskKeysFiltered.forEach((subTask) => {
                 if (subTask.includes('[+]') && tasksPlus.hasOwnProperty(subTask.split('[+]x')[0].replaceAll('[+]', '') + '[+]')) {
                     if (subTask.includes('[+]x')) {
@@ -719,6 +723,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 }
             });
             i++;
+            subTaskKeysFiltered = generateSubTaskKeysFiltered(currNameArr[i]);
         }
     });
     !!manualTasks && Object.keys(manualTasks).forEach((skill) => {
@@ -1335,7 +1340,7 @@ let calcChallenges = function(chunks, baseChunkData) {
     let highestCompletedLevelObj = {};
     !!completedChallenges && Object.keys(completedChallenges).forEach((skill) => {
         completedChallenges.hasOwnProperty(skill) && Object.keys(completedChallenges[skill]).forEach((task) => {
-            if (!!chunkInfo['challenges'][skill] && !!chunkInfo['challenges'][skill][task] && !!chunkInfo['challenges'][skill][task]['Level'] && chunkInfo['challenges'][skill][task]['Level'] > highestCompletedLevelObj[skill]) {
+            if (!!chunkInfo['challenges'][skill] && !!chunkInfo['challenges'][skill][task] && !!chunkInfo['challenges'][skill][task]['Level'] && (!highestCompletedLevelObj[skill] || chunkInfo['challenges'][skill][task]['Level'] > highestCompletedLevelObj[skill])) {
                 highestCompletedLevelObj[skill] = chunkInfo['challenges'][skill][task]['Level'];
             }
         });
@@ -1402,7 +1407,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     passedByTasks[skill][challenge] = true;
                     let bestBoost = getBestBoost(skill, challenge, baseChunkData);
                     if ((!checkPrimaryMethod(skill, newValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(skill) || passiveSkill[skill] <= 1 || (chalObj['Level'] - bestBoost) > passiveSkill[skill]) && (!skillQuestXp || !skillQuestXp.hasOwnProperty(skill) || (chalObj['Level'] - bestBoost) > skillQuestXp[skill]['level'])) && !!chalObj && chalObj['Level'] > 1 && !chalObj['ManualValid']) {
-                        let highestCompletedLevel = highestCompletedLevelObj[skill];
+                        let highestCompletedLevel = highestCompletedLevelObj[skill] || 0;
                         if (highestCompletedLevel <= 1 || highestCompletedLevel < chunkInfo['challenges'][skill][challenge]['Level']) {
                             if (!nonValids.hasOwnProperty(challenge)) {
                                 nonValids[challenge] = [];
@@ -1419,7 +1424,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                     if (chalObj.hasOwnProperty('Skills')) {
                         Object.keys(chalObj['Skills']).forEach((subSkill) => {
                             let bestBoost = getBestBoost(subSkill, challenge, baseChunkData);
-                            let highestCompletedLevel = highestCompletedLevelObj[subSkill];
+                            let highestCompletedLevel = highestCompletedLevelObj[subSkill] || 0;
                             if ((!checkPrimaryMethod(subSkill, newValids, baseChunkData) && ((subSkill !== 'Slayer' || !slayerLocked || (chalObj['Skills'][subSkill] - bestBoost) > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || (chalObj['Skills'][subSkill] - bestBoost) > passiveSkill[subSkill]) && (highestCompletedLevel <= 1 || highestCompletedLevel <= chalObj['Skills'][subSkill]) && chalObj['Skills'][subSkill] > 1) || (subSkill === 'Slayer' && !!slayerLocked && chalObj['Skills'][subSkill] > slayerLocked['level']) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && chalObj['Skills'][subSkill] > maxSkill[subSkill])) {
                                 if (!nonValids.hasOwnProperty(challenge)) {
                                     nonValids[challenge] = [];
@@ -1545,7 +1550,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                                     }
                                 }
                             } else {
-                                let highestCompletedLevel = highestCompletedLevelObj[chalObj['Tasks'][subTask]];
+                                let highestCompletedLevel = highestCompletedLevelObj[chalObj['Tasks'][subTask]] || 0;
                                 if (!savedValids.hasOwnProperty(skill) || !savedValids[skill].hasOwnProperty(challenge) || (!checkPrimaryMethod(chalObj['Tasks'][subTask], savedValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(chalObj['Tasks'][subTask]) || passiveSkill[chalObj['Tasks'][subTask]] <= 1 || !chunkInfo['challenges'][chalObj['Tasks'][subTask]][subTask.split('--')[0]] || passiveSkill[chalObj['Tasks'][subTask]] + bestBoostSub < chunkInfo['challenges'][chalObj['Tasks'][subTask]][subTask.split('--')[0]]['Level']) && (highestCompletedLevel <= 1 || !chunkInfo['challenges'][chalObj['Tasks'][subTask]][subTask.split('--')[0]] || highestCompletedLevel < chunkInfo['challenges'][chalObj['Tasks'][subTask]][subTask.split('--')[0]]['Level']) && (!chunkInfo['challenges'][chalObj['Tasks'][subTask]][subTask.split('--')[0]] || chunkInfo['challenges'][chalObj['Tasks'][subTask]][subTask.split('--')[0]]['Level'] > 1)) || (!valids[chalObj['Tasks'][subTask]] || !savedValids[chalObj['Tasks'][subTask]] || (!valids[chalObj['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) && !savedValids[chalObj['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]))) || (backlog[chalObj['Tasks'][subTask]] && (backlog[chalObj['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) || backlog[chalObj['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0].replaceAll('#', '/'))))) {
                                     if (!(skill === 'Diary' && (chalObj['Tasks'][subTask] === 'Diary' || subTask.includes('--')) && chunkInfo['challenges'][chalObj['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) && !chalObj['ManualShow'] && (rules['Show Diary Tasks Any'] || chunkInfo['challenges'][chalObj['Tasks'][subTask]][subTask.split('--')[0]]['BaseQuest'] === 'Combat Achievements')) && !chalObj['ManualValid']) {
                                         if (!nonValids.hasOwnProperty(challenge)) {
@@ -1748,7 +1753,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                             }
                         }
                     } else {
-                        let highestCompletedLevel = highestCompletedLevelObj[chalObj['Tasks'][subTask]];
+                        let highestCompletedLevel = highestCompletedLevelObj[chalObj['Tasks'][subTask]] || 0;
                         let tempLevel = !!newValids[chalObj['Tasks'][subTask]] && newValids[chalObj['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) ? newValids[chalObj['Tasks'][subTask]][subTask.split('--')[0]] : chunkInfo['challenges'][chalObj['Tasks'][subTask]][subTask.split('--')[0]]['Level'];
                         let bestBoost = getBestBoost(chalObj['Tasks'][subTask], subTask.split('--')[0], baseChunkData);
                         tempLevel = tempLevel - bestBoost;
@@ -2125,7 +2130,7 @@ let calcChallenges = function(chunks, baseChunkData) {
                 if (!(chunkInfo['challenges'].hasOwnProperty(skill) && chunkInfo['challenges'][skill].hasOwnProperty(name) && (nameObj['Level'] <= lowestLevel))) return;
                 let stillValid = true;
                 nameObj.hasOwnProperty('Skills') && Object.keys(nameObj['Skills']).some(subSkill => {
-                    let highestCompletedLevel = highestCompletedLevelObj[subSkill];
+                    let highestCompletedLevel = highestCompletedLevelObj[subSkill] || 0;
                     if ((!checkPrimaryMethod(subSkill, newValids, baseChunkData) && ((subSkill !== 'Slayer' || !slayerLocked || nameObj['Skills'][subSkill] > slayerLocked['level'])) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] <= 1 || nameObj['Skills'][subSkill] > passiveSkill[subSkill]) && (highestCompletedLevel <= 1 || highestCompletedLevel <= nameObj['Skills'][subSkill])) || (subSkill === 'Slayer' && !!slayerLocked && nameObj['Skills'][subSkill] > slayerLocked['level']) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && nameObj['Skills'][subSkill] > maxSkill[subSkill])) {
                         stillValid = false;
                         return true;
