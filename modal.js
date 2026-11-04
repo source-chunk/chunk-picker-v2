@@ -1,3 +1,4 @@
+'use strict';
 const modalContents = {
     'manualTasksModal': `
         <i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeManualAdd()"></i>

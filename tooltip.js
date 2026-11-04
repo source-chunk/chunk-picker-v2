@@ -1,3 +1,4 @@
+'use strict';
 const tooltipTexts = {
     'neighborsTooltip': `When a chunk is rolled, after tasks finish calculating, all actually accessible chunks that neighbour one of your unlocked chunks will be marked as rollable. This method takes into account Chunk Sections and other pathing, and will only mark chunks as rollable if you can directly enter them from an unlocked chunk.<br /><br />This method will not mark any chunks that are accessible by means other than walking from your unlocked chunks (teleports, ships, canoes, etc.)`,
     'questsColorTooltip': `<div>Quests in <span style="color:green">green</span> indicate a quest that you can complete within your chunks.</div><hr /><div>Quests in <span style="color:yellow">yellow</span> indicate a quest that can be started, but not completed within your chunks.</div><hr /><div>Quests in <span style="color:grey">grey</span> indicate a quest that cannot be started yet.</div>`,

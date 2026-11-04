@@ -4,6 +4,7 @@
  * With help from Slay to Stay for chunk Ids and Amehzyn for smoother zooming/url decoding
  */
 
+'use strict';
 let onMobile = false;                                                           // Is user on a mobile device
 let viewOnly = false;                                                           // View only mode active
 let isPicking = false;                                                          // Has the user just rolled 2 chunks and is currently picking
@@ -94,6 +95,7 @@ let patchNotesOpen = false;                                                     
 let patchNotesOpenSoon = false;                                                 // Will the patch notes be opened once logged in
 let mapIntroOpen = false;                                                       // Is the map intro modal open
 let mapIntroOpenSoon = false;                                                   // Will the map intro be opened once logged in
+let justStartingChunkSet = false;
 let xpRewardOpen = false;
 let mobileChunkMode = false;
 let signedIn = false;                                                           // Is the user signed in
@@ -1533,10 +1535,10 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.9.70';
+let currentVersion = '6.10.0';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
-let updateLevel = 'rule-rewording';
+let updateLevel = 'task-optimization';
 
 // Patreon Test Server Data
 let onTestServer = false;
@@ -1596,6 +1598,8 @@ let currentX = 0;
 let currentY = 0;
 let dragTotalX = 0;
 let dragTotalY = 0;
+let offsetX = 0;
+let offsetY = 0;
 let mouseDown = false;
 let totalZoom = 0.5;
 let zoomAmount = 0.15;
@@ -1628,6 +1632,7 @@ let isHoveringRight = false;
 let isHoveringOverlayMenu = false;
 let manualMouseMoveCheck = false;
 let unlockedOverlayOnly = false;
+let drawQueued = false;
 let stickerChoicesContent = {'tag': '\uf02b', 'skull': '\uf54c', 'skull-crossbones': '\uf714', 'bomb': '\uf1e2', 'exclamation-circle': '\uf06a', 'dice': '\uf522', 'poo': '\uf2fe', 'frown': '\uf119', 'grin-alt': '\uf581', 'heart': '\uf004', 'star': '\uf005', 'gem': '\uf3a5', 'award': '\uf559', 'crown': '\uf521', 'flag': '\uf024', 'asterisk': '\uf069', 'clock': '\uf017', 'hourglass': '\uf254', 'link': '\uf0c1', 'map-marker-alt': '\uf3c5', 'radiation-alt': '\uf7ba', 'shoe-prints': '\uf54b', 'thumbs-down': '\uf165', 'thumbs-up': '\uf164', 'crow': '\uf520', 'utensil-spoon': '\uf2e5', 'lock': '\uf023', 'unlock-alt': '\uf13e', 'sailboat': '\ue445', 'anchor': '\uf13d', 'circle-question': '\uf059'};
 let osrsStickers = {};
 let numberStickers = {'zero': '0', 'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9'};
@@ -1665,6 +1670,10 @@ let tasksMap = {};
 let tasksMapReverse = {};
 let editingSlayerLock = false;
 let tempSlayerLocked = null;
+let firstChallengesLoaded = false;
+let maxChallengesBeforeBatching = 1000;
+let challengesRenderBatchSize = 500;
+let currentAllowedBatches = 1;
 let lastRegain = 0;
 let lastUpdated = 0;
 
@@ -1694,7 +1703,7 @@ stickerChoicesOsrs.forEach((sticker) => {
     osrsStickers[sticker].addEventListener("load", e => {
         readyToDrawIcons--;
         if (readyToDrawImage && readyToDrawIcons === 0 && pageReady) {
-            drawCanvas();
+            requestDraw();
         }
     });
 });
@@ -1708,7 +1717,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.9.70";
+mapImg.src = "osrs_world_map.png?v=6.10.0";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -1796,6 +1805,13 @@ let createScreenshot = function() {
         $('#fullmap-clipboard-button').html('Download a .webp image of your full map');
         closeClipboard();
     }, 'image/webp');
+}
+
+// Queues draw actions
+let requestDraw = function() {
+    if (drawQueued) return;
+    drawQueued = true;
+    requestAnimationFrame(() => { drawQueued = false; drawCanvas(); });
 }
 
 // Canvas animation
@@ -1924,6 +1940,7 @@ let drawCanvas = function(ctxIn = ctx) {
                 ctxIn.strokeStyle = 'gray';
                 (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
             } else if (!!tempChunks['selected'] && tempChunks['selected'][chunkId]) {
+                let selectedChunksIndex = tempSelectedChunks.indexOf(chunkId);
                 if (highVisibilityMode) {
                     ctxIn.fillStyle = 'rgba(100, 255, 100, 0.25)';
                 } else if (hoveredChunk === chunkId) {
@@ -1935,10 +1952,10 @@ let drawCanvas = function(ctxIn = ctx) {
                 (!highVisibilityMode || totalZoom > 0.3) && ctxIn.strokeRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 !isPainted && ctxIn.fillRect(dragTotalX + (totalZoom * (i * imgW / rowSize)), dragTotalY + (totalZoom * (j * imgH / (fullSize / rowSize))), totalZoom * (imgW / rowSize), totalZoom * (imgH / (fullSize / rowSize)));
                 let heightOff;
-                if (tempSelectedChunks.indexOf(chunkId) + 1 > 999) {
+                if (selectedChunksIndex + 1 > 999) {
                     ctxIn.font = (totalZoom * (imgW / rowSize) * (1 / 2)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.65;
-                } else if (tempSelectedChunks.indexOf(chunkId) + 1 > 99) {
+                } else if (selectedChunksIndex + 1 > 99) {
                     ctxIn.font = (totalZoom * (imgW / rowSize) * (2 / 3)) + 'px Calibri, Roboto Condensed, sans-serif';
                     heightOff = 0.7;
                 } else {
@@ -1947,7 +1964,7 @@ let drawCanvas = function(ctxIn = ctx) {
                 }
                 ctxIn.fillStyle = 'white';
                 ctxIn.textAlign = 'center';
-                ctxIn.fillText(tempSelectedChunks.indexOf(chunkId) + 1, dragTotalX + (totalZoom * ((i + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
+                ctxIn.fillText(selectedChunksIndex + 1, dragTotalX + (totalZoom * ((i + 0.5) * imgW / rowSize)), dragTotalY + (totalZoom * ((j + heightOff) * imgH / (fullSize / rowSize))));
             } else if (!!tempChunks['potential'] && tempChunks['potential'][chunkId]) {
                 if (highVisibilityMode) {
                     ctxIn.fillStyle = 'rgba(255, 255, 100, 0.25)';
@@ -2256,7 +2273,7 @@ let drawCanvas = function(ctxIn = ctx) {
                 clueImgs[overlayEl.img] = new Image();
                 clueImgs[overlayEl.img].src = overlayEl.img;
                 clueImgs[overlayEl.img].onload = () => {
-                    drawCanvas();
+                    requestDraw();
                 };
             } else {
                 ctxIn.drawImage(clueImgs[overlayEl.img], (dragTotalX + (totalZoom * (((overlayEl.x/64) - 15) * imgW / rowSize))) + 25, dragTotalY + (totalZoom * ((66 - (overlayEl.y/64)) * imgH / (fullSize / rowSize))) - 170, 190, 190);
@@ -2581,7 +2598,7 @@ let handleMouseDown = function(e) {
         return;
     }
     if ((e.button !== 0 && !e.touches) || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || e.target.nodeName.toLowerCase() === 'select' || e.target.nodeName.toLowerCase() === 'option') {
-        drawCanvas();
+        requestDraw();
         return;
     }
     if (!!e.touches) {
@@ -2601,13 +2618,12 @@ let handleMouseDown = function(e) {
     if (e.type === 'touchstart') {
         touchTime = Date.now();
     }
-    drawCanvas();
+    requestDraw();
 }
 
 // Handles mouse move event
 let handleMouseMove = function(e) {
     if ((e.button !== 0 && !e.touches) || (e.type === 'touchmove' && e.target.id !== 'canvas') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || pickChunkWarningModalOpen || roll2ChunkWarningModalOpen || mobileMenuOpen || mobileTasksOpen || mobileChunkMenuOpen || customizeTopbarModalOpen || questChunksModalOpen || revisionSyncModalOpen) {
-        drawCanvas();
         return;
     }
     if (!highVisibilityMode && !onMobile) {
@@ -2726,7 +2742,7 @@ let handleMouseMove = function(e) {
         }
     }
     fixMapEdgesCanvas();
-    drawCanvas();
+    requestDraw();
 }
 
 // Checks if chunk is locked
@@ -2785,7 +2801,7 @@ let handleKeyDown = function(e) {
     } else {
         canvas.style.cursor = "default";
     }
-    drawCanvas();
+    requestDraw();
 }
 
 // Handles the kup up event
@@ -2799,13 +2815,13 @@ let handleKeyUp = function(e) {
         isHoveringPaint = false;
         canvas.style.cursor = "default";
     }
-    drawCanvas();
+    requestDraw();
 }
 
 // Handles the mouse up event
 let handleMouseUp = function(e) {
     if ((e.button !== 0 && e.button !== 2 && e.type !== 'touchend') || (onMobile && e.type !== 'touchend') || atHome || inEntry || importMenuOpen || highscoreMenuOpen || helpMenuOpen || patchNotesOpen || manualModalOpen || detailsModalOpen || notesModalOpen || rulesModalOpen || settingsModalOpen || userTasksModalOpen || searchModalOpen || searchDetailsModalOpen || highestModalOpen || highest2ModalOpen || methodsModalOpen || completeModalOpen || addEquipmentModalOpen || stickerModalOpen || paintModalOpen || backlogSourcesModalOpen || chunkHistoryModalOpen || challengeAltsModalOpen || manualOuterModalOpen || monsterModalOpen || slayerLockedModalOpen || constructionLockedModalOpen || rollChunkModalOpen || questStepsModalOpen || friendsListModalOpen || friendsAddModalOpen || passiveSkillModalOpen || mapIntroOpen || xpRewardOpen || manualAreasModalOpen || chunkSectionsModalOpen || chunkSectionPickerModalOpen || slayerMasterInfoModalOpen || doableClueStepsModalOpen || clueChunksModalOpen || notesOpen || newTasksOpen || clipboardModalOpen || overlaysModalOpen || userTasksListModalOpen || userTaskDeleteConfirmationModalOpen || exitSandboxWarningModalOpen || mobileTasksOpen || customizeTopbarModalOpen || questChunksModalOpen) {
-        drawCanvas();
+        requestDraw();
         return;
     }
     if (removeCanvasDarkness) {
@@ -2832,7 +2848,7 @@ let handleMouseUp = function(e) {
         let chunkId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
         let coords = convertToXY(chunkId);
         if (coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) {
-            drawCanvas();
+            requestDraw();
             return;
         }
         if (infoLockedId === chunkId.toString()) {
@@ -2841,7 +2857,7 @@ let handleMouseUp = function(e) {
             infoLockedId = chunkId.toString();
         }
         updateChunkInfo();
-        drawCanvas();
+        requestDraw();
         return;
     } else if (e.button === 0 || e.type === 'touchend') {
         mouseDown = false;
@@ -2850,7 +2866,7 @@ let handleMouseUp = function(e) {
             selectedOverlayIndex = 0;
             overlayCloseLocation = -1;
             isHoveringClose = false;
-            drawCanvas();
+            requestDraw();
             return;
         } else if (movedNum <= 1 && isHoveringLeft) {
             if (selectedOverlayIndex > 0) {
@@ -2858,7 +2874,7 @@ let handleMouseUp = function(e) {
             }
             selectedOverlayId = selectedOverlayIds[selectedOverlayIndex];
             manualMouseMoveCheck = e;
-            drawCanvas();
+            requestDraw();
             return;
         } else if (movedNum <= 1 && isHoveringRight) {
             if (selectedOverlayIndex < (selectedOverlayIds.length - 1)) {
@@ -2866,10 +2882,10 @@ let handleMouseUp = function(e) {
             }
             selectedOverlayId = selectedOverlayIds[selectedOverlayIndex];
             manualMouseMoveCheck = e;
-            drawCanvas();
+            requestDraw();
             return;
         } else if (isHoveringOverlayMenu) {
-            drawCanvas();
+            requestDraw();
             return;
         } else if (movedNum <= 1 && hoveredOverlayIds.length !== 0 && e.target.id === 'canvas') {
             let selectedHoveredValid = selectedOverlayIds.filter((el) => hoveredOverlayIds.includes(el)).length > 0;
@@ -2879,15 +2895,15 @@ let handleMouseUp = function(e) {
             if (selectedOverlayIds.length === 0) {
                 overlayCloseLocation = -1;
             }
-            drawCanvas();
+            requestDraw();
             return;
         } else if (settingsOpen && !screenshotMode && e.target.id === 'canvas') {
             settingsMenu();
-            drawCanvas();
+            requestDraw();
             return;
         } else if (locked && !testMode && e.target.id === 'canvas') {
             if (movedNum > 1) {
-                drawCanvas();
+                requestDraw();
                 return;
             }
             if (lockBoxOpen) {
@@ -2897,11 +2913,11 @@ let handleMouseUp = function(e) {
             setTimeout(function() {
                 $('.lock-closed').removeClass('animated shake').addClass('').css({ 'color': 'black' });
             }, 500);
-            drawCanvas();
+            requestDraw();
             return;
         } else if (movedNum <= 1 && checkFalseRules() && chunkTasksOn && e.target.id === 'canvas') {
             helpFunc();
-            drawCanvas();
+            requestDraw();
             return;
         }
         if (movedNum <= 1 && e.target.id === 'canvas') {
@@ -2910,20 +2926,20 @@ let handleMouseUp = function(e) {
             let chunkId = convertToChunkNum(Math.floor((currentX - dragTotalX) / (totalZoom * (imgW / rowSize))), Math.floor((currentY - dragTotalY) / (totalZoom * (imgH / (fullSize / rowSize)))));
             let coords = convertToXY(chunkId);
             if (coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) {
-                drawCanvas();
+                requestDraw();
                 return;
             } else if (isHoveringBlacklist) {
                 blacklistCanvas(chunkId);
             } else if (isHoveringSticker) {
                 openStickers(chunkId);
-                drawCanvas();
+                requestDraw();
                 return;
             } else if (isHoveringPaint) {
                 openPaint(chunkId);
-                drawCanvas();
+                requestDraw();
                 return;
             } else if (settings['shiftUnlock'] && !e.shiftKey && (!testMode || !locked) && (!onMobile || (Date.now() - touchTime) < 500)) {
-                drawCanvas();
+                requestDraw();
                 return;
             } else if (!!tempChunks['unlocked'] && tempChunks['unlocked'].hasOwnProperty(chunkId)) {
                 if (!recentChunks.hasOwnProperty(chunkId)) {
@@ -2977,7 +2993,7 @@ let handleMouseUp = function(e) {
                 setCalculating('.panel-completed');
                 calcCurrentChallengesCanvas(true, true, true);
             } else if (!!tempChunks['blacklisted'] && tempChunks['blacklisted'].hasOwnProperty(chunkId)) {
-                drawCanvas();
+                requestDraw();
                 return;
             } else {
                 if (!tempChunks['selected']) {
@@ -2994,14 +3010,14 @@ let handleMouseUp = function(e) {
                 $('.pick').text('Pick Chunk');
             }
         } else {
-            drawCanvas();
+            requestDraw();
             return;
         }
         $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
         $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
     }
     setData();
-    drawCanvas();
+    requestDraw();
 }
 
 // Sets all neighbors of recently unlocked chunk to selected
@@ -3025,7 +3041,7 @@ let selectNeighborsCanvas = function(chunkId) {
             tempChunks['selected'][newChunkId] = tempSelectedChunks.indexOf(newChunkId.toString()) + 1;
         }
     }
-    drawCanvas();
+    requestDraw();
 }
 
 // Sets all neighbors of all chunks to selected
@@ -3078,7 +3094,7 @@ let selectAllNeighborsCanvas = function() {
     sortSelectedChunks();
     $('#chunkInfo2').text('Selected chunks: ' + ((!!tempChunks['selected'] ? Object.keys(tempChunks['selected']).length : 0) + (!!tempChunks['potential'] ? Object.keys(tempChunks['potential']).length : 0)));
     $('#chunkInfo1').text('Unlocked chunks: ' + (!!tempChunks['unlocked'] ? Object.keys(tempChunks['unlocked']).length : 0));
-    drawCanvas();
+    requestDraw();
 }
 
 // Resorts the order/numbering of selected chunks
@@ -3500,7 +3516,7 @@ let roll2Canvas = function(override) {
     let rands = [];
     let sNums = [];
     let savedEl = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
-    let savedTempSelectedChunks = JSON.parse(JSON.stringify(tempSelectedChunks));
+    let savedTempSelectedChunks = structuredClone(tempSelectedChunks);
     for (let i = 0; i < numToRoll; i++) {
         el = (!!tempChunks['selected'] && Object.keys(tempChunks['selected']).filter(chunkId => { let coords = convertToXY(chunkId); return !(tempChunks['selected'][chunkId] === 'undefined' || tempChunks['selected'][chunkId] === 'NaN' || chunkId === 'undefined' || chunkId === 'NaN' || coords.x >= rowSize || coords.y >= (fullSize / rowSize) || coords.x < 0 || coords.y < 0) })) || [];
         if (!el || el.length === 0) {
@@ -3530,7 +3546,7 @@ let roll2Canvas = function(override) {
         openRollChunkCanvas(savedEl, savedEl.indexOf(rands[0]), sNums[0], savedEl.indexOf(rands[1]), sNums[1]);
     }
     setData();
-    drawCanvas();
+    requestDraw();
 }
 
 // Unpicks a random unlocked chunk
@@ -3575,7 +3591,7 @@ let setUpSelected = function() {
         tempSelectedChunks.push(chunkId);
     });
     if (initialLoaded) {
-        drawCanvas();
+        requestDraw();
     } else {
         centerCanvas('quick');
     }
@@ -3597,7 +3613,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
             manualSectionsModified[chunk] = manualSections[chunk];
         }
     });
-    unlockedSections = JSON.parse(JSON.stringify(manualSectionsModified));
+    unlockedSections = structuredClone(manualSectionsModified);
     unlockedSections = combineJSONs(unlockedSections, findConnectedSections({...tempChunks['unlocked'], ...manualAreas} || {}, {...unlockedSections, ...tempSections}));
     let sectionsValid = true;
     !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).some((chunk) => {
@@ -3636,7 +3652,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.9.70");
+        myWorker = new Worker("./worker.js?v=6.10.0");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -3703,8 +3719,11 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
 
 // Handles mouse leaving the page
 let handleMouseOut = function(e) {
+    if (e.clientY > 0 && e.clientX > 0 && e.clientX < window.innerWidth && e.clientY < window.innerHeight) {
+        return;
+    }
     if (e.button !== 0) {
-        drawCanvas();
+        requestDraw();
         return
     }
     if (mouseDown) {
@@ -3712,7 +3731,7 @@ let handleMouseOut = function(e) {
         e.stopPropagation();
         handleMouseMove(e);
     }
-    drawCanvas();
+    requestDraw();
 }
 
 // Handles mouse scroll zooming
@@ -3748,7 +3767,7 @@ let handleMouseScroll = function(e) {
         manualMouseMoveCheck = e;
     }
     fixMapEdgesCanvas();
-    drawCanvas();
+    requestDraw();
 }
 
 // Handles mobile zooming
@@ -3768,7 +3787,7 @@ let handleMobileZoom = function(dir) {
         }
     }
     fixMapEdgesCanvas();
-    drawCanvas();
+    requestDraw();
 }
 
 // Blacklists the given chunk
@@ -3782,7 +3801,7 @@ let blacklistCanvas = function(chunkId) {
         tempChunks['blacklisted'][chunkId] = chunkId;
     }
     setData();
-    drawCanvas();
+    requestDraw();
 }
 
 // Prevents zooming from pulling map too off-center screen
@@ -3795,19 +3814,19 @@ let fixMapEdgesCanvas = function() {
     let margins = [450, 400, 400, 400];
     if (topNumber > margins[0]) {
         dragTotalY = margins[0];
-        drawCanvas();
+        requestDraw();
     }
     if (rightEdge < window.innerWidth - margins[1]) {
         dragTotalX = (window.innerWidth - margins[1]) - (totalZoom * imgW);
-        drawCanvas();
+        requestDraw();
     }
     if (bottomEdge < window.innerHeight - margins[2]) {
         dragTotalY = (window.innerHeight - margins[2]) - (totalZoom * imgH);
-        drawCanvas();
+        requestDraw();
     }
     if (leftNumber > margins[3]) {
         dragTotalX = margins[3];
-        drawCanvas();
+        requestDraw();
     }
 }
 
@@ -3833,7 +3852,7 @@ let updateFutureMove = function() {
         moveAmountY = 0;
     }
     didMove && setTimeout(function() {
-        drawCanvas();
+        requestDraw();
     }, 1);
 }
 
@@ -3867,7 +3886,7 @@ let scrollToPosCanvas = function(x, y, xPart, yPart, doQuick) {
     }
 
     fixMapEdgesCanvas();
-    drawCanvas();
+    requestDraw();
 }
 
 // Scrolls to chunk with given id
@@ -3881,7 +3900,7 @@ let highlightAllQuestCanvas = function() {
     questChunks.forEach((chunkId) => {
         recentChunks[chunkId] = chunkId;
     });
-    drawCanvas();
+    requestDraw();
 }
 
 // Centers on the clicked recent chunk and highlights it
@@ -3916,7 +3935,7 @@ let redirectPanelCanvas = function(name) {
     ((realName % 256) < 66) && scrollToPosCanvas(convertToXY(parseInt(realName)).x, convertToXY(parseInt(realName)).y, 0, 0);
     infoLockedId = encodeRFC5987ValueChars(realName.toString());
     updateChunkInfo();
-    drawCanvas();
+    requestDraw();
     $('.infoid').addClass('new');
     setTimeout(function() {
         $('.infoid').removeClass('new');
@@ -3935,7 +3954,7 @@ let chunkBordersCanvas = function(ctxIn) {
     ctxIn.strokeStyle = settings['unlockedBorderColor'] ? settings['unlockedBorderColor'] : '#FF0000';
     ctxIn.lineWidth = 3;
     !!tempChunks['unlocked'] && Object.keys(tempChunks['unlocked']).forEach((chunkId) => {
-        chunkCoords = convertToXY(chunkId);
+        let chunkCoords = convertToXY(chunkId);
         if (!tempChunks['unlocked'].hasOwnProperty(parseInt(chunkId) + 1)) {
             ctxIn.moveTo(dragTotalX + (totalZoom * (chunkCoords.x * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
             ctxIn.lineTo(dragTotalX + (totalZoom * ((chunkCoords.x + 1) * imgW / rowSize)), dragTotalY + (totalZoom * (chunkCoords.y * imgH / (fullSize / rowSize))));
@@ -3971,7 +3990,7 @@ $(document).ready(function() {
         cw = canvas.width;
         ch = canvas.height;
         fixMapEdgesCanvas();
-        drawCanvas();
+        requestDraw();
     });
 
     reOffset();
@@ -3997,11 +4016,12 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.9.70");
-let myWorker2 = new Worker("./worker.js?v=6.9.70");
+let myWorker = new Worker("./worker.js?v=6.10.0");
+let myWorker2 = new Worker("./worker.js?v=6.10.0");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
+        return;
     }
     if (lastUpdated + 200000 < Date.now() && !hasUpdate) {
         lastUpdated = Date.now();
@@ -4055,7 +4075,7 @@ let workerOnMessage = function(e) {
         if (e.data.type === 'current') {
             workerOut = 0;
         }
-        ({ chunkInfo } = e.data);
+        ({ challenges: chunkInfo['challenges'] } = e.data);
         if (e.data.type === 'future') {
             if (workersOut['future'] === infoLockedId) {
                 ({
@@ -4215,7 +4235,7 @@ let logError = function(err) {
 // Prevent caching of json get
 $(document).ready(function() {
     $.ajaxSetup({ cache: false });
-    window.onresize = drawCanvas();
+    window.onresize = requestDraw();
 });
 
 // Prevent right-click menu from showing
@@ -4883,7 +4903,7 @@ let openXpRewardModal = function(skill, line, xpArr, num) {
                 assignedXpRewards[skill] = {};
             }
             assignedXpRewards[skill][line] = {};
-            allNone = true;
+            let allNone = true;
             tempXpChoices.forEach((choice) => {
                 if (!assignedXpRewards[skill][line][choice.skill]) {
                     assignedXpRewards[skill][line][choice.skill] = 0;
@@ -5820,7 +5840,7 @@ let toggleTheme = function(value) {
         colorBoxLight = "rgba(50, 50, 50, 0.4)";
         $('#favicon-link').attr("href", "./resources/favicons/favicon-voyage.png");
     }
-    drawCanvas();
+    requestDraw();
 }
 
 // Toggles the chunk info panel
@@ -5842,7 +5862,7 @@ let hideChunkInfo = function(extra) {
     infoLockedId = -1;
     infoCollapse = true;
     extra !== 'startup' && setCookies();
-    drawCanvas();
+    requestDraw();
 }
 
 // Re-shows chunk info panel
@@ -6600,6 +6620,7 @@ let calcCurrentChallenges2 = function(tempChallengeArr) {
 
 // Sets up data for displaying
 let setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
+    firstChallengesLoaded = true;
     let listOfTasks = [];
     let favoriteTasksArr = [];
     activeTasks = {};
@@ -6880,6 +6901,8 @@ let setupCurrentChallenges = function(tempChallengeArr, noDisplay, noClear) {
             }
         }
     });
+    let defaultSubTabs = ['favorite', 'skill', 'bis', 'quest', 'diary', 'extra'];
+    activeSubTabs = Object.fromEntries(Object.entries(activeSubTabs).filter(([key]) => doneSubMarker.hasOwnProperty(key) || defaultSubTabs.includes(key)));
     if (challengeArr.length < 1) {
         challengeArr = [];
     }
@@ -7090,7 +7113,7 @@ let setupCurrentChallengesFromSaved = function() {
     if (completedArr.length < 1) {
         completedArr.push('No tasks currently completed.');
     }
-    setCurrentChallenges(backlogArr, completedArr, false, false, true);
+    setCurrentChallenges(backlogArr, completedArr, false, false);
     changeChallengeColor();
     $(`.panel-active .link, .panel-active .internal-link, .panel-active input, .panel-active .checkbox__control, .checkbox__input`).click(function(e) {
         e.stopPropagation();
@@ -7146,7 +7169,8 @@ let calcFutureChallenges = function() {
     chunks[infoLockedId] = true;
     let i = 0;
     while (i < Object.keys(chunks).length) {
-        !!chunkInfo['chunks'][Object.keys(chunks)[i]] && !!chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect'] && Object.keys(chunkInfo['chunks'][Object.keys(chunks)[i]]['Connect']).forEach((id) => {
+        let chunk = chunkInfo['chunks'][Object.keys(chunks)[i]];
+        !!chunk && !!chunk['Connect'] && Object.keys(chunk['Connect']).forEach((id) => {
             if (!!chunkInfo['chunks'][parseInt(id)]['Name'] && possibleAreas[chunkInfo['chunks'][parseInt(id)]['Name']]) {
                 chunks[chunkInfo['chunks'][parseInt(id)]['Name']] = true;
             }
@@ -7159,7 +7183,7 @@ let calcFutureChallenges = function() {
             manualSectionsModified[chunk] = manualSections[chunk];
         }
     });
-    tempUnlockedSections = JSON.parse(JSON.stringify(manualSectionsModified));
+    let tempUnlockedSections = structuredClone(manualSectionsModified);
     tempUnlockedSections = combineJSONs(tempUnlockedSections, findConnectedSections((Object.keys(chunks).length > 0 ? chunks : {...tempChunks['unlocked'], ...manualAreas}) || {}, tempUnlockedSections));
     let tempSections = {};
     if (!tempUnlockedSections.hasOwnProperty(infoLockedId) && chunkInfo['sections'].hasOwnProperty(infoLockedId) && Object.keys(chunkInfo['sections'][infoLockedId]).filter((section) => section !== "0").length > 0) {
@@ -7172,7 +7196,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.9.70");
+    myWorker2 = new Worker("./worker.js?v=6.10.0");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -7547,7 +7571,7 @@ let diff = function(obj1, obj2, isInner) {
         }
     });
     if (!isInner) {
-        result = JSON.parse(JSON.stringify((clearEmpties(result))));
+        result = structuredClone(clearEmpties(result));
     }
     return result;
 }
@@ -8435,7 +8459,6 @@ let openFriendsListAdd = function() {
     });
 
     $('.name-friend').on('input', function(e) {
-        prevValueMidFriend = e.target.value;
         if (e.target.value.length > 0) {
             nameFriendGood = true;
             checkIfGoodFriend();
@@ -8577,7 +8600,7 @@ let openMonstersAdd = function() {
 let searchMonsters = function() {
     let searchTemp = $('#searchMonsters').val().toLowerCase();
     $('.monsters-data').empty();
-    baseChunkDataTotal = {
+    let baseChunkDataTotal = {
         'Items': {},
         'Monsters': {},
         'NPCs': {},
@@ -8666,7 +8689,7 @@ let searchMonsters = function() {
         });
         Object.keys(baseChunkDataTotal['Shops']).filter(shop => shop.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase() === searchTemp && (!filterByCheckedMonsters || (!!manualMonsters['Shops'] && !!manualMonsters['Shops'][shop]))).length > 0 && $('.monsters-data').append(`<div class="search-header noscroll"><b class="noscroll">Shops</b></div>`);
         Object.keys(baseChunkDataTotal['Shops']).filter(shop => shop.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase() === searchTemp && (!filterByCheckedMonsters || (!!manualMonsters['Shops'] && !!manualMonsters['Shops'][shop]))).length > 0 && Object.keys(baseChunkDataTotal['Shops']).filter(shop => shop.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase() === searchTemp && (!filterByCheckedMonsters || (!!manualMonsters['Shops'] && !!manualMonsters['Shops'][shop]))).sort().forEach((shop) => {
-            $('.monsters-data').append(`<div class="search-monsters-result noscroll"><span class='noscroll search-monsters-result-inner'><input class="noscroll" ${!!manualMonsters && !!manualMonsters['Shops'] && !!manualMonsters['Shops'][object] && "checked"} type="checkbox" onclick="checkOffMonster('${encodeRFC5987ValueChars(shop.replaceAll(/~/g, '').replaceAll(/\|/g, ''))}', 'Shops')" /><a class='noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeForUrl(shop.replace(/[!'()*]/g, escape))}' target='_blank'>${shop}</a></span></div>`);
+            $('.monsters-data').append(`<div class="search-monsters-result noscroll"><span class='noscroll search-monsters-result-inner'><input class="noscroll" ${!!manualMonsters && !!manualMonsters['Shops'] && !!manualMonsters['Shops'][shop] && "checked"} type="checkbox" onclick="checkOffMonster('${encodeRFC5987ValueChars(shop.replaceAll(/~/g, '').replaceAll(/\|/g, ''))}', 'Shops')" /><a class='noscroll' href='${"https://oldschool.runescape.wiki/w/" + encodeForUrl(shop.replace(/[!'()*]/g, escape))}' target='_blank'>${shop}</a></span></div>`);
         });
         $('.monsters-data').append(`<div class="noscroll results ${Object.keys(baseChunkDataTotal['Items']).filter(item => item.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase() === searchTemp).length + Object.keys(baseChunkDataTotal['Monsters']).filter(monster => monster.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase() === searchTemp).length + Object.keys(baseChunkDataTotal['NPCs']).filter(npc => npc.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase() === searchTemp).length + Object.keys(baseChunkDataTotal['Objects']).filter(object => object.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase() === searchTemp).length + Object.keys(baseChunkDataTotal['Shops']).filter(shop => shop.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase() === searchTemp).length > 0 ? 'results-alt': ''}"><span class="noscroll holder"><span class="noscroll topline">Too many results (${Object.keys(baseChunkDataTotal['Items']).filter(item => item.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp)).length + Object.keys(baseChunkDataTotal['Monsters']).filter(monster => monster.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp)).length + Object.keys(baseChunkDataTotal['NPCs']).filter(npc => npc.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp)).length + Object.keys(baseChunkDataTotal['Objects']).filter(object => object.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp)).length + Object.keys(baseChunkDataTotal['Shops']).filter(shop => shop.replaceAll(/~/g, '').replaceAll(/\|/g, '').toLowerCase().includes(searchTemp)).length})</span><br /><span class="noscroll bottomline">Try refining your search to narrow down the results.</span></span></div>`);
     }
@@ -10287,7 +10310,7 @@ let submitSticker = function() {
     };
     setData();
     closeSticker();
-    drawCanvas();
+    requestDraw();
 }
 
 // Sets the given sticker on the given chunk
@@ -10355,7 +10378,7 @@ let submitPaint = function() {
     };
     setData();
     closePaint();
-    drawCanvas();
+    requestDraw();
 }
 
 // Sets the given paint color on the given chunk
@@ -10544,7 +10567,7 @@ let checkOffAllTask = function(skill, task) {
     $('.methods-topbar').html(`${skill} Tasks <span class='noscroll ${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > completedNum ? 'yellow' : 'green'}'>(${completedNum}/${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length})</span><i class="manual-close pic fa-solid fa-times noscrollhard" onclick="closeMethods()"></i>`);
     $(`.${skill}-tasks-button`).removeClass('yellow green').addClass(Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length > completedNum ? 'yellow' : 'green');
     $(`.${skill}-tasks-button > span`).text(`(${completedNum}/${Object.keys(globalValids[skill]).filter(task => !backlog.hasOwnProperty(skill) || !backlog[skill].hasOwnProperty(task)).length})`);
-    forceUpdatePluginOutput = true
+    forceUpdatePluginOutput = true;
     setData();
 }
 
@@ -10795,7 +10818,7 @@ let saveChunkSectionPicker = function() {
     modalOutsideTime = Date.now();
     $('#chunkSectionPickerModal').remove();
     if (needsUpdating) {
-        calcCurrentChallengesCanvas(true, chunkSectionCalculateAfter, false, JSON.parse(JSON.stringify(unlockedSections)), true);
+        calcCurrentChallengesCanvas(true, chunkSectionCalculateAfter, false, structuredClone(unlockedSections), true);
         setData();
     }
 }
@@ -10848,13 +10871,34 @@ let unlockChallenges = function() {
     !(signedIn && testMode) && $('.panel-backlog').prepend(`<div class='noscroll backlogSources-container'><span class='noscroll backlogSources' onclick='backlogSources()'><i class="fa-solid fa-archive"></i>Backlog Sources</span></div>`);
 }
 
+// Increases the number of allowed batches of challengeArr
+let increaseAllowedBatches = function() {
+    $('.panel-active .increase-batches').remove();
+    $('.panel-active').append(...createRenderableChallenges(currentAllowedBatches++));
+    $('.challenge:not(.hide-backlog) .checkbox').css({ 'color': 'var(--colorText)', 'text-decoration': 'none' });
+    !firstChallengesLoaded && $(`.challenge.clickable`).removeClass('clickable');
+    setTaskNum();
+}
+
+// Creates a list of renderable elements from arrIn
+let createRenderableChallenges = function(startingIndex = 0) {
+    let challengeArrLen = challengeArr.length;
+    if (challengeArrLen < maxChallengesBeforeBatching) return challengeArr;
+    let arrOut = challengeArr.slice(challengesRenderBatchSize * startingIndex, challengesRenderBatchSize * currentAllowedBatches);
+    if (arrOut.length !== challengeArrLen) {
+        arrOut.push(`<div class='increase-batches'><div class='display-button' onclick='increaseAllowedBatches()'>Show more tasks</div></div>`);
+    }
+    return arrOut;
+}
+
 // Displays the current challenges, areas, backlog, and completed challenges
 let setCurrentChallenges = function(backlogArr, completedArr, useOld, noClear) {
+    currentAllowedBatches = 1;
     if (useOld) {
         !noClear && (challengeArr.length > 0 || workerOut === 0) && $('.panel-active').css({ 'min-height': '', 'font-size': '' }).removeClass('calculating').empty();
         !noClear && (challengeArr.length > 0 || workerOut === 0) && $('.panel-active > i').css('line-height', '');
         $('#searchActiveTasks').val('');
-        $('.panel-active').append(...challengeArr);
+        $('.panel-active').append(...createRenderableChallenges());
         if ($('.panel-active .skill-challenge').length === 0) {
             $('.marker-skill').remove();
         }
@@ -10898,7 +10942,7 @@ let setCurrentChallenges = function(backlogArr, completedArr, useOld, noClear) {
                 });
             }
             toggleTaskSearchbar(settings['taskSearchbar']);
-            $('.panel-active').append(...challengeArr);
+            $('.panel-active').append(...createRenderableChallenges());
         }
         if ($('.panel-active .skill-challenge').length === 0) {
             $('.marker-skill').remove();
@@ -11057,7 +11101,7 @@ let showDetails = function(challenge, skill, dataType, isNested) {
         modal.generate('challengeDetailsModal', onMobile);
         let baseChunkDataIn = dataType === 'future' ? futureChunkData : baseChunkData;
         let unlockedSectionsIn = dataType === 'future' ? futureUnlockedSections : unlockedSections;
-        let chunksIn = !!tempChunks['unlocked'] ? JSON.parse(JSON.stringify(tempChunks['unlocked'])) : {};
+        let chunksIn = !!tempChunks['unlocked'] ? structuredClone(tempChunks['unlocked']) : {};
         dataType === 'future' && (chunksIn[infoLockedId] = infoLockedId);
         let possibleAreasIn = dataType === 'future' ? futurePossibleAreas : possibleAreas;
         challenge = decodeQueryParam(challenge);
@@ -11132,7 +11176,8 @@ let showDetails = function(challenge, skill, dataType, isNested) {
                     }
                 });
             }
-            !!chunkInfo['challenges'][skill][challenge][key] && chunkInfo['challenges'][skill][challenge][key].forEach((el) => {
+            let uniqueEntries = [...new Set(chunkInfo['challenges'][skill][challenge][key])];
+            !!uniqueEntries && uniqueEntries.forEach((el) => {
                 el.includes('[Thieving] ') && (el = el.split('[Thieving] ').join(''));
                 let formattedSource = '';
                 if (key === 'ChunksDetails') {
@@ -11420,7 +11465,7 @@ let selectOverlayClues = function(clueTier) {
         selectedOverlay = 'None';
     }
     showOverlays(true);
-    drawCanvas();
+    requestDraw();
 }
 
 // Clears all overlay clues
@@ -11429,13 +11474,13 @@ let clearOverlayClues = function(justClear) {
         selectedOverlayClues[clueTier] = false;
     });
     !justClear && showOverlays(true);
-    drawCanvas();
+    requestDraw();
 }
 
 // Toggle overlay within chunks only
 let changeOverlayFilterBy = function() {
     unlockedOverlayOnly = !unlockedOverlayOnly;
-    drawCanvas();
+    requestDraw();
 }
 
 // Shows overlay options
@@ -11446,7 +11491,7 @@ let showOverlays = function(fromHelper) {
         selectedOverlayIds = [];
         selectedOverlayIndex = 0;
         overlayCloseLocation = -1;
-        drawCanvas();
+        requestDraw();
         onMobile && hideMobileMenu();
         overlaysModalOpen = true;
         $('#overlays-data').empty();
@@ -11499,7 +11544,7 @@ let hideMobileChunkMenu = function(fromCancel) {
     $('.menu14').hide();
     mobileChunkMenuOpen = false;
     fromCancel && (infoLockedId = -1);
-    drawCanvas();
+    requestDraw();
 }
 
 // Mobile blacklist helper
@@ -11514,7 +11559,7 @@ let openStickersMobile = function() {
     onMobile && hideMobileChunkMenu();
     infoLockedId = -1;
     openStickers(mobileChunkId);
-    drawCanvas();
+    requestDraw();
 }
 
 // Mobile paint helper
@@ -11522,7 +11567,7 @@ let openPaintMobile = function() {
     onMobile && hideMobileChunkMenu();
     infoLockedId = -1;
     openPaint(mobileChunkId);
-    drawCanvas();
+    requestDraw();
 }
 
 // Shows mobile-only menu
@@ -12123,7 +12168,7 @@ let resetDefaultStickerColor = function() {
 let changeUnlockedBorderColor = function() {
     $('.border-color-rule').length && (settings['unlockedBorderColor'] = $('.border-color-rule').val());
     setData();
-    drawCanvas();
+    requestDraw();
 }
 
 // Resets the unlocked border color
@@ -12330,7 +12375,7 @@ let backlogChallenge = function(challenge, skill, note, noUpdate) {
             globalValids[skill][challenge] = true;
         });
         !!globalValids[skill] && Object.keys(globalValids[skill]).forEach((challenge) => {
-            fullyValid = true;
+            let fullyValid = true;
             !!chunkInfo['challenges'][skill][challenge]['Tasks'] && Object.keys(chunkInfo['challenges'][skill][challenge]['Tasks']).forEach((subTask) => {
                 if (!globalValids[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]) || (backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]] && backlog[chunkInfo['challenges'][skill][challenge]['Tasks'][subTask]].hasOwnProperty(subTask.split('--')[0]))) {
                     fullyValid = false;
@@ -12614,21 +12659,25 @@ let checkOffRules = function(didRedo, startup) {
             redo = true;
         }
         if (rule === 'Kill X Amount') {
+            if (extraFilter === '.panel-search ' && !$('.panel-search').has('.x-num-input').length) return;
             if ($(extraFilter + '.x-num-input').val() < 1 || !$(extraFilter + '.x-num-input').val()) {
                 $(extraFilter + '.x-num-input').val(1);
             }
             rules[rule] = $(extraFilter + '.x-num-input').val();
         } else if (rule === 'Collection Log Clues Amount') {
+            if (extraFilter === '.panel-search ' && !$('.panel-search').has('.clue-complete-num-input').length) return;
             if ($(extraFilter + '.clue-complete-num-input').val() < 0 || $(extraFilter + '.clue-complete-num-input').val() > 100 || !$(extraFilter + '.clue-complete-num-input').val()) {
                 $(extraFilter + '.clue-complete-num-input').val(100);
             }
             rules[rule] = $(extraFilter + '.clue-complete-num-input').val();
         } else if (rule === 'Rare Drop Amount') {
+            if (extraFilter === '.panel-search ' && !$('.panel-search').has('.rare-num-input').length) return;
             if ($(extraFilter + '.rare-num-input').val() < 0 || !$(extraFilter + '.rare-num-input').val()) {
                 $(extraFilter + '.rare-num-input').val(0);
             }
             rules[rule] = $(extraFilter + '.rare-num-input').val();
         } else if (rule === 'Secondary Primary Amount') {
+            if (extraFilter === '.panel-search ' && !$('.panel-search').has('.secondary-primary-input').length) return;
             if ($(extraFilter + '.secondary-primary-input').val() < 0 || !$(extraFilter + '.secondary-primary-input').val()) {
                 $(extraFilter + '.secondary-primary-input').val(0);
             }
@@ -12722,7 +12771,7 @@ let checkOffSettings = function(didRedo, startup) {
         $('.pick').text('Pick Chunk');
     }
     setTaskNum();
-    drawCanvas();
+    requestDraw();
 }
 
 // Moves checked off challenges to completed
@@ -13125,21 +13174,23 @@ let preloadHelper = function(snap, childName) {
     return snapDiff;
 }
 
+let jsonDataPromises = Promise.all([
+    fetch('./chunkpicker-chunkinfo-export.json').then(r => r.json()),
+    fetch('./tasksMap.json').then(r => r.json())
+]);
+
 // Loads data from Firebase
-let loadData = async function(startup) {
+let loadData = async function() {
     if (!myRef) {
         return;
     }
-    const response = await fetch('./chunkpicker-chunkinfo-export.json');
-    const data = await response.json();
+    let [data, data2] = await jsonDataPromises;
     gotData = true;
     chunkInfo = data;
     highestOverall = {};
     globalValids = {};
     setCodeItems();
 
-    const response2 = await fetch('./tasksMap.json');
-    const data2 = await response2.json();
     tasksMap = data2;
     tasksMapReverse = Object.fromEntries(Object.entries(data2).map(([name, id]) => [id, name]));
 
@@ -13729,8 +13780,8 @@ let createPluginOutput = function() {
             pluginOutput.push(rowObj);
         }
     });
-    if ((diff([...listOfTasksSaved].sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0]), [...listOfTasksPlugin].sort((a, b) => Object.keys(a)[0] < Object.keys(b)[0])) || forceUpdatePluginOutput || (createdPOF === false)) && firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.uid) {
-        listOfTasksSaved = JSON.parse(JSON.stringify(listOfTasksPlugin));
+    if ((diff([...listOfTasksSaved].sort((a, b) => Object.keys(a)[0] - Object.keys(b)[0]), [...listOfTasksPlugin].sort((a, b) => Object.keys(a)[0] - Object.keys(b)[0])) || forceUpdatePluginOutput || (createdPOF === false)) && firebase.auth() && firebase.auth().currentUser && firebase.auth().currentUser.uid) {
+        listOfTasksSaved = structuredClone(listOfTasksPlugin);
         forceUpdatePluginOutput = false;
         const userRef = firebase.storage().ref(`pluginOutputs/${firebase.auth().currentUser.uid}.json`);
         userRef.putString(JSON.stringify(pluginOutput), 'raw', { contentType: 'application/json' });
@@ -13830,6 +13881,8 @@ let setData = function(skipCreatePluginOutput, doneDebouncing) {
         blacklistedJson[chunkId] = chunkId;
     });
 
+    let savedSnap = structuredClone(setSnap);
+
     setSnap = {
         ...setSnap,
         rules: rules,
@@ -13912,9 +13965,11 @@ let setData = function(skipCreatePluginOutput, doneDebouncing) {
         activeSubTabs,
         createdPOF,
     };
-    let databaseObject = JSON.parse(JSON.stringify(setSnap));
+    let databaseObject = structuredClone(setSnap);
+    let diffKeys = Object.keys(diff(databaseObject, savedSnap) || {});
     delete databaseObject['chunkOrder'];
     delete databaseObject['revision'];
+    let databaseObjectSubset = Object.fromEntries(Object.entries(databaseObject).filter(([key]) => diffKeys.includes(key)));
     if (firebase.auth().currentUser) {
         myRef.child('test').set(null, (error) => {
             if (error) {
@@ -13923,15 +13978,23 @@ let setData = function(skipCreatePluginOutput, doneDebouncing) {
                     return;
                 });
             } else {
-                myRef.update({...databaseObject});
+                myRef.update({...databaseObjectSubset});
             }
         });
     } else {
         firebase.auth().signInWithEmailAndPassword('sourcechunk+' + mid + '@yandex.com', savedPin + mid).then(function() {
-            myRef.update({...databaseObject});
+            myRef.update({...databaseObjectSubset});
         }).catch(function(error) { console.error(error) });
     }
 }
+
+// Sets data when page is closing
+addEventListener('pagehide', () => {
+    if (saveTimeout) {
+        clearTimeout(saveTimeout);
+        setData(true);
+    }
+});
 
 // Rolls until a new, unique map id is found
 let rollMID = function(count) {

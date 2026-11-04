@@ -2803,7 +2803,7 @@ input#searchPlayerMaps {
     font-size: 16px !important;
 }
 
-.calculating {
+.calculating, .increase-batches {
     overflow-y: hidden !important;
     text-align: center !important;
     min-height: 20px;
