@@ -3074,14 +3074,14 @@ let calcChallenges = function(chunks, baseChunkData) {
                                         if (!dropRatesGlobal[thievingExtra + output]) {
                                             dropRatesGlobal[thievingExtra + output] = {};
                                         }
-                                        dropRatesGlobal[thievingExtra + output][item] = findFraction(parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1]));
+                                        let droprate = parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1]);
+                                        dropRatesGlobal[thievingExtra + output][item] = isNaN(droprate) ? chunkInfo['skillItems'][skill][output][item][quantityDrop] : findFraction(droprate);
                                         if (!dropTablesGlobal[thievingExtra + output]) {
                                             dropTablesGlobal[thievingExtra + output] = {};
                                         }
                                         if (!dropTablesGlobal[thievingExtra + output][item]) {
                                             dropTablesGlobal[thievingExtra + output][item] = {};
                                         }
-                                        let droprate = parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][quantityDrop].split('/')[1]);
                                         dropTablesGlobal[thievingExtra + output][item][quantityDrop] = isNaN(droprate) ? chunkInfo['skillItems'][skill][output][item][quantityDrop] : findFraction(droprate);
                                     });
                                 } else if (chunkInfo['skillItems'][skill][output][item][skillItemsItemSourceKeys[0]] === 'Always' || (parseInt(rareDropNum.split('/')[1]) > 50 && isNaN(chunkInfo['skillItems'][skill][output][item][skillItemsItemSourceKeys[0]].replaceAll('/', '').replaceAll('@', ''))) || ((parseFloat(chunkInfo['skillItems'][skill][output][item][skillItemsItemSourceKeys[0]].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['skillItems'][skill][output][item][skillItemsItemSourceKeys[0]].split('/')[1]) > rareDropNumCalced))) {
@@ -3488,6 +3488,35 @@ let calcChallenges = function(chunks, baseChunkData) {
                     }
                     baseChunkData['items'][reward][challenge] = 'secondary-' + skill;
                 });
+            });
+        });
+        !!chunkInfo['codeItems']['slayerUniques'] && Object.keys(chunkInfo['codeItems']['slayerUniques']).forEach((drop) => {
+            Object.keys(chunkInfo['codeItems']['slayerUniques'][drop]).forEach((monster) => {
+                if (!baseChunkData['items'][drop]) return;
+                let slayerTaskName = Object.keys(baseChunkData['items'][drop]).find((source) => source.toLowerCase().includes(monster.toLowerCase()));
+                if (!slayerTaskName) return;
+                let stillValid = true;
+                let tasksObj = chunkInfo['codeItems']['slayerUniques'][drop][monster]['Tasks'];
+                !!tasksObj && Object.keys(tasksObj).some(subTask => {
+                    if (!newValids.hasOwnProperty(tasksObj[subTask]) || !newValids[tasksObj[subTask]].hasOwnProperty(subTask)) {
+                        stillValid = false;
+                        return true;
+                    }
+                });
+                let selectedRate = stillValid ? 'OnTask' : 'OffTask';
+                if (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] === 'Always' || (secondaryPrimaryDenom > 50 && isNaN(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1 && secondaryPrimaryNumCalced < 1) || (!(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) && (parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')) >= secondaryPrimaryNumCalced)))) {
+                    baseChunkData['items'][drop][slayerTaskName] = 'primary-drop';
+                } else {
+                    baseChunkData['items'][drop][slayerTaskName] = 'secondary-drop';
+                }
+                if (!!dropRatesGlobal[monster] && dropRatesGlobal[monster].hasOwnProperty(drop)) {
+                    dropRatesGlobal[monster][drop] = (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) ? chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] : findFraction(parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')));
+                }
+                if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][drop]) {
+                    Object.keys(dropTablesGlobal[monster][drop]).forEach((quantity) => {
+                        dropTablesGlobal[monster][drop][quantity] = (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) ? chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] : findFraction(parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')));
+                    });
+                }
             });
         });
         questPointTotal = 1;
@@ -5265,8 +5294,9 @@ let getBestBoost = function(skill, challenge, baseChunkDataIn, wantsSource) {
                 ownsCrystalSaw = true;
                 if (!chalObj['ItemsDetails']) {
                     chalObj['ItemsDetails'] = [];
+                } else if (!chalObj['ItemsDetails'].includes('Crystal saw')) {
+                    chalObj['ItemsDetails'].push('Crystal saw');
                 }
-                chalObj['ItemsDetails'].push('Crystal saw');
             }
         }
     });
@@ -5320,7 +5350,6 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData) {
             }
         } else if (line === 'Ranged[+]') {
             let validRanged = false;
-            let itemsKeys = Object.keys(baseChunkData['items']);
             !!baseChunkData['items'] && Object.keys(chunkInfo['codeItems']['ammoTools']).every(ammoItem => {
                 if (validRanged) {
                     return false;
@@ -5340,7 +5369,7 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData) {
                             tempSecondary && (ammoValid = false);
                         }
                     } else {
-                        if (!!baseChunkData['items'] && !itemsKeys.includes(tempItem)) {
+                        if (!!baseChunkData['items'] && !baseChunkData['items'].hasOwnProperty(tempItem)) {
                             ammoValid = false;
                         } else {
                             let tempSecondary = !(!!baseChunkData['items'][tempItem] && Object.keys(baseChunkData['items'][tempItem]).some((source) => { return (!baseChunkData['items'][tempItem][source].includes('secondary-') && (!processingSkill[baseChunkData['items'][tempItem][source].split('-')[1]] || rules['Wield Crafted Items'])) || (baseChunkData['items'][tempItem][source]['Primary'] && (!processingSkill[baseChunkData['items'][tempItem][source].split('-')[1]] || rules['Wield Crafted Items'])) || baseChunkData['items'][tempItem][source] === 'shop' }));
@@ -5352,7 +5381,7 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData) {
                     let innerValid = false;
                     Object.keys(chunkInfo['codeItems']['ammoTools'][ammoItem]).every(item => {
                         let formattedItem = item.replaceAll(/\*/g, '');
-                        if (!!baseChunkData['items'] && itemsKeys.includes(formattedItem)) {
+                        if (!!baseChunkData['items'] && baseChunkData['items'].hasOwnProperty(formattedItem)) {
                             if (rangedItems.hasOwnProperty(formattedItem) && (rangedItems[formattedItem] === 1 || (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill['Ranged'] > 1 && rangedItems[formattedItem] <= passiveSkill['Ranged']) || ((!!skillQuestXp && skillQuestXp.hasOwnProperty('Ranged') && rangedItems[formattedItem] <= skillQuestXp['Ranged']['level'])))) {
                                 if (item.includes('*')) {
                                     let tempSecondary = !(!!baseChunkData['items'][formattedItem] && Object.keys(baseChunkData['items'][formattedItem]).some((source) => { return (!baseChunkData['items'][formattedItem][source].includes('secondary-') && (!processingSkill[baseChunkData['items'][formattedItem][source].split('-')[1]] || rules['Wield Crafted Items'])) || (baseChunkData['items'][formattedItem][source]['Primary'] && (!processingSkill[baseChunkData['items'][formattedItem][source].split('-')[1]] || rules['Wield Crafted Items'])) || baseChunkData['items'][formattedItem][source] === 'shop' }));
@@ -8730,7 +8759,7 @@ let calcCurrentChallenges2 = function() {
                     }
                     globalValidsBoosts[skill][name] = bestBoost2;
                 }
-                if (chunkInfo['challenges'][skill].hasOwnProperty(name) && nameObj.hasOwnProperty('NoBoost') && nameObj['Level'] > (globalValids[skill][challenge] - (bestBoost2 + (ownsCrystalSaw2 ? 3 : 0))) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(name) && !backlog[skill].hasOwnProperty(name.replaceAll('#', '/'))))) {
+                if (chunkInfo['challenges'][skill].hasOwnProperty(name) && nameObj.hasOwnProperty('NoBoost') && nameObj['Level'] > (globalValids[skill][challenge] - bestBoost2) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(name) && !backlog[skill].hasOwnProperty(name.replaceAll('#', '/'))))) {
                     tempChallengeArr[skill] = name;
                     foundBetter = true;
                     return true;

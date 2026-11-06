@@ -161545,7 +161545,7 @@
 						"Spinning wheel": 1,
 						"Tree": 24,
 						"Willow tree": 2,
-						"Yew tree": 1
+						"Yew tree": 2
 					},
 					"Quest": {
 						"Another Slice of H.A.M.": "first",
@@ -179608,6 +179608,7 @@
 				]
 			}
 		},
+		"slayerUniques": {},
 		"tools": {
 			"Ammo mould": true,
 			"Amulet mould": true,
