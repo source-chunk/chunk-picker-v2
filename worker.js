@@ -3504,18 +3504,34 @@ let calcChallenges = function(chunks, baseChunkData) {
                     }
                 });
                 let selectedRate = stillValid ? 'OnTask' : 'OffTask';
-                if (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] === 'Always' || (secondaryPrimaryDenom > 50 && isNaN(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1 && secondaryPrimaryNumCalced < 1) || (!(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) && (parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')) >= secondaryPrimaryNumCalced)))) {
-                    baseChunkData['items'][drop][slayerTaskName] = 'primary-drop';
+                let droprate = (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) ? chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] : findFraction(parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')));
+                if (droprate <= 0) {
+                    delete baseChunkData['items'][drop][slayerTaskName];
+                    if (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).length <= 0) {
+                        delete baseChunkData['items'][drop];
+                    }
+                    delete dropRatesGlobal[monster][drop];
+                    if (!!dropRatesGlobal[monster][drop] && Object.keys(dropRatesGlobal[monster][drop]).length <= 0) {
+                        delete dropRatesGlobal[monster][drop];
+                    }
+                    delete dropTablesGlobal[monster][drop];
+                    if (!!dropTablesGlobal[monster][drop] && Object.keys(dropTablesGlobal[monster][drop]).length <= 0) {
+                        delete dropTablesGlobal[monster][drop];
+                    }
                 } else {
-                    baseChunkData['items'][drop][slayerTaskName] = 'secondary-drop';
-                }
-                if (!!dropRatesGlobal[monster] && dropRatesGlobal[monster].hasOwnProperty(drop)) {
-                    dropRatesGlobal[monster][drop] = (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) ? chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] : findFraction(parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')));
-                }
-                if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][drop]) {
-                    Object.keys(dropTablesGlobal[monster][drop]).forEach((quantity) => {
-                        dropTablesGlobal[monster][drop][quantity] = (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) ? chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] : findFraction(parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')));
-                    });
+                    if (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] === 'Always' || (secondaryPrimaryDenom > 50 && isNaN(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1 && secondaryPrimaryNumCalced < 1) || (!(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) && (parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')) >= secondaryPrimaryNumCalced)))) {
+                        baseChunkData['items'][drop][slayerTaskName] = 'primary-drop';
+                    } else {
+                        baseChunkData['items'][drop][slayerTaskName] = 'secondary-drop';
+                    }
+                    if (!!dropRatesGlobal[monster] && dropRatesGlobal[monster].hasOwnProperty(drop)) {
+                        dropRatesGlobal[monster][drop] = droprate;
+                    }
+                    if (!!dropTablesGlobal[monster] && !!dropTablesGlobal[monster][drop]) {
+                        Object.keys(dropTablesGlobal[monster][drop]).forEach((quantity) => {
+                            dropTablesGlobal[monster][drop][quantity] = droprate;
+                        });
+                    }
                 }
             });
         });
