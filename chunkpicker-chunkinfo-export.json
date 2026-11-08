@@ -36664,6 +36664,13 @@
 				},
 				"Output": "Bronze shortsword"
 			},
+			"Get a staff from Captain Harlan": {
+				"NPCs": ["Captain Harlan"],
+				"Tasks": {
+					"~|Mudfoot's Big Adventure|~ 3": "Quest"
+				},
+				"Output": "Staff"
+			},
 			"Get a hammer from Feoras*": {
 				"NPCs": ["Feoras"],
 				"Output": "Hammer"
@@ -234377,7 +234384,7 @@
 					"5 (noted)": "3/118"
 				},
 				"Battlestaff": {
-					"3": "3/118"
+					"3 (noted)": "3/118"
 				},
 				"Cosmic rune": {
 					"100": "6/118"
