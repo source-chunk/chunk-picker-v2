@@ -1302,8 +1302,12 @@ let calcChallenges = function(chunks, baseChunkData) {
                     }
                 });
                 if (noneUnnoted) {
-                    if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
-                        delete baseChunkData['items'][item][monster];
+                    let monsterFormatted = monster;
+                    if (!!baseChunkData['items'][item] && baseChunkData['items'][item].hasOwnProperty(monster + '*')) {
+                        monsterFormatted = monster + '*';
+                    }
+                    if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monsterFormatted]) {
+                        delete baseChunkData['items'][item][monsterFormatted];
                         if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
                             delete baseChunkData['items'][item];
                         }
@@ -2760,50 +2764,6 @@ let calcChallenges = function(chunks, baseChunkData) {
                 });
             });
         }
-        if (!!chunks && !Object.keys(chunks).some(chunk => { return chunkInfo['unnotingChunks'].includes(chunk) })) {
-            !!dropTablesGlobal && Object.keys(dropTablesGlobal).forEach((monster) => {
-                !!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).forEach((item) => {
-                    let noneUnnoted = true;
-                    !!dropTablesGlobal[monster][item] && Object.keys(dropTablesGlobal[monster][item]).forEach((quantity) => {
-                        if (!quantity.includes('(noted)')) {
-                            noneUnnoted = false;
-                        }
-                    });
-                    if (noneUnnoted) {
-                        if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
-                            delete baseChunkData['items'][item][monster];
-                            if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
-                                delete baseChunkData['items'][item];
-                            }
-                        }
-                    }
-                });
-            });
-        }
-        if (!!chunks) {
-            !!dropTablesGlobal && Object.keys(dropTablesGlobal).forEach((monster) => {
-                !!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).forEach((item) => {
-                    !!dropTablesGlobal[monster][item] && Object.keys(dropTablesGlobal[monster][item]).forEach((quantity) => {
-                        if (quantity.includes('(F2P)') && baseChunkData['monsters'].hasOwnProperty(monster) && !Object.keys(baseChunkData['monsters'][monster]).some(chunk => { return chunkInfo['walkableChunksF2P'].includes(chunk.split('-')[0]) })) {
-                            delete dropTablesGlobal[monster][item][quantity];
-                            if (!dropTablesGlobal[monster][item] || Object.keys(dropTablesGlobal[monster][item]).length === 0) {
-                                delete dropTablesGlobal[monster][item];
-                                if (!dropTablesGlobal[monster] || Object.keys(dropTablesGlobal[monster]).length === 0) {
-                                    delete dropTablesGlobal[monster];
-                                }
-                                delete dropRatesGlobal[monster][item];
-                                if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
-                                    delete baseChunkData['items'][item][monster];
-                                    if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
-                                        delete baseChunkData['items'][item];
-                                    }
-                                }
-                            }
-                        }
-                    });
-                });
-            });
-        }
 
         if (rules['Skilling Pets']) {
             let skillingPets = {
@@ -3190,6 +3150,54 @@ let calcChallenges = function(chunks, baseChunkData) {
                 delete baseChunkData['items'][output];
             }
         });
+        if (!!chunks && !Object.keys(chunks).some(chunk => { return chunkInfo['unnotingChunks'].includes(chunk) })) {
+            !!dropTablesGlobal && Object.keys(dropTablesGlobal).forEach((monster) => {
+                !!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).forEach((item) => {
+                    let noneUnnoted = true;
+                    !!dropTablesGlobal[monster][item] && Object.keys(dropTablesGlobal[monster][item]).forEach((quantity) => {
+                        if (!quantity.includes('(noted)')) {
+                            noneUnnoted = false;
+                        }
+                    });
+                    if (noneUnnoted) {
+                        let monsterFormatted = monster;
+                        if (!!baseChunkData['items'][item] && baseChunkData['items'][item].hasOwnProperty(monster + '*')) {
+                            monsterFormatted = monster + '*';
+                        }
+                        if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monsterFormatted]) {
+                            delete baseChunkData['items'][item][monsterFormatted];
+                            if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
+                                delete baseChunkData['items'][item];
+                            }
+                        }
+                    }
+                });
+            });
+        }
+        if (!!chunks) {
+            !!dropTablesGlobal && Object.keys(dropTablesGlobal).forEach((monster) => {
+                !!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).forEach((item) => {
+                    !!dropTablesGlobal[monster][item] && Object.keys(dropTablesGlobal[monster][item]).forEach((quantity) => {
+                        if (quantity.includes('(F2P)') && baseChunkData['monsters'].hasOwnProperty(monster) && !Object.keys(baseChunkData['monsters'][monster]).some(chunk => { return chunkInfo['walkableChunksF2P'].includes(chunk.split('-')[0]) })) {
+                            delete dropTablesGlobal[monster][item][quantity];
+                            if (!dropTablesGlobal[monster][item] || Object.keys(dropTablesGlobal[monster][item]).length === 0) {
+                                delete dropTablesGlobal[monster][item];
+                                if (!dropTablesGlobal[monster] || Object.keys(dropTablesGlobal[monster]).length === 0) {
+                                    delete dropTablesGlobal[monster];
+                                }
+                                delete dropRatesGlobal[monster][item];
+                                if (!!baseChunkData['items'] && !!baseChunkData['items'][item] && !!baseChunkData['items'][item][monster]) {
+                                    delete baseChunkData['items'][item][monster];
+                                    if (!baseChunkData['items'][item] || Object.keys(baseChunkData['items'][item]).length === 0) {
+                                        delete baseChunkData['items'][item];
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+        }
         !!chunkInfo && !!chunkInfo['taskUnlocks'] && !!chunkInfo['taskUnlocks']['Items'] && Object.keys(chunkInfo['taskUnlocks']['Items']).forEach((item) => {
             let tempValid = !(newValids && !(chunkInfo['taskUnlocks']['Items'][item].filter((task) => { let firstTask = Object.entries(task)[0]; return newValids[firstTask[1]] && newValids[firstTask[1]].hasOwnProperty(firstTask[0]) && (!backlog[firstTask[1]] || (!backlog[firstTask[1]].hasOwnProperty(firstTask[0]) && !backlog[firstTask[1]].hasOwnProperty(firstTask[0].replaceAll('#', '/')))) }).length === chunkInfo['taskUnlocks']['Items'][item].length));
             let monster = '';
