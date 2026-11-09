@@ -74728,6 +74728,7 @@
 				"Category": ["Collection Log", "Collection Log Other"],
 				"Label": "Collection Log",
 				"Items": ["Dragon nails"],
+				"AllowedSources": ["Frost dragon", "Narwhal", "Orca", "Process some ~|opulent salvage|~ at a salvaging station"],
 				"Not F2P": true
 			},
 			"(Sailing Miscellaneous) Obtain a ~|dragon cannonball|~": {
