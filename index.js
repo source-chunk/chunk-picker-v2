@@ -1535,7 +1535,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.10.5';
+let currentVersion = '6.10.6';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'createdPOF-fix';
@@ -1717,7 +1717,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.10.5";
+mapImg.src = "osrs_world_map.png?v=6.10.6";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3652,7 +3652,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.10.5");
+        myWorker = new Worker("./worker.js?v=6.10.6");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -4016,8 +4016,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.10.5");
-let myWorker2 = new Worker("./worker.js?v=6.10.5");
+let myWorker = new Worker("./worker.js?v=6.10.6");
+let myWorker2 = new Worker("./worker.js?v=6.10.6");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -7196,7 +7196,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.10.5");
+    myWorker2 = new Worker("./worker.js?v=6.10.6");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -7531,9 +7531,7 @@ let hideSidebar = function() {
 // Clears empty subobjects from object
 let clearEmpties = function(obj) {
     typeof obj === 'object' && obj !== null && Object.keys(obj).forEach((subObj) => {
-        if (typeof obj[subObj] === 'object' && Object.keys(obj).length === 0) {
-            delete obj[subObj];
-        } else if (typeof obj[subObj] === 'object') {
+        if (typeof obj[subObj] === 'object' && obj[subObj] !== null) {
             obj[subObj] = clearEmpties(obj[subObj]);
             if (obj[subObj] === null) {
                 delete obj[subObj];
@@ -7559,11 +7557,11 @@ let diff = function(obj1, obj2, isInner) {
     if (!obj2 || typeof obj2 !== 'object') {
         return obj2;
     }
-    Object.keys(obj1 || {}).concat(Object.keys(obj2 || {})).forEach((key) => {
+    Object.keys(obj1).concat(Object.keys(obj2)).forEach((key) => {
         if (obj2[key] !== obj1[key] && !Object.is(obj1[key], obj2[key])) {
             result[key] = obj1[key] || obj2[key];
         }
-        if (typeof obj2[key] === 'object' && typeof obj1[key] === 'object') {
+        if (obj1[key] !== null && obj2[key] !== null && typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
             const value = diff(obj1[key], obj2[key], true);
             if (value !== undefined) {
                 result[key] = value;
@@ -13883,7 +13881,7 @@ let setData = function(skipCreatePluginOutput, doneDebouncing) {
 
     let savedSnap = structuredClone(setSnap);
 
-    setSnap = {
+    setSnap = structuredClone({
         ...setSnap,
         rules: rules,
         recent: encodeObject(recent, true),
@@ -13964,7 +13962,7 @@ let setData = function(skipCreatePluginOutput, doneDebouncing) {
         },
         activeSubTabs,
         createdPOF,
-    };
+    });
     let databaseObject = structuredClone(setSnap);
     let diffKeys = Object.keys(diff(databaseObject, savedSnap) || {});
     delete databaseObject['chunkOrder'];

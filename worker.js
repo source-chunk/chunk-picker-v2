@@ -3700,12 +3700,12 @@ let diff = function(obj1, obj2, isInner) {
     if (!obj2 || typeof obj2 !== 'object') {
         return obj2;
     }
-    Object.keys(obj1 || {}).concat(Object.keys(obj2 || {})).forEach((key) => {
+    Object.keys(obj1).concat(Object.keys(obj2)).forEach((key) => {
         if (obj2[key] !== obj1[key] && !Object.is(obj1[key], obj2[key])) {
             result[key] = obj1[key] || obj2[key];
         }
-        if (typeof obj2[key] === 'object' && typeof obj1[key] === 'object') {
-            let value = diff(obj1[key], obj2[key], true);
+        if (obj1[key] !== null && obj2[key] !== null && typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+            const value = diff(obj1[key], obj2[key], true);
             if (value !== undefined) {
                 result[key] = value;
             }
@@ -3719,15 +3719,16 @@ let diff = function(obj1, obj2, isInner) {
 
 // Clears empty subobjects from object
 let clearEmpties = function(obj) {
-    typeof obj === 'object' && Object.keys(obj).forEach((subObj) => {
-        if (typeof obj[subObj] === 'object' && Object.keys(obj[subObj]).length === 0) {
-            delete obj[subObj];
-        } else if (typeof obj[subObj] === 'object') {
+    typeof obj === 'object' && obj !== null && Object.keys(obj).forEach((subObj) => {
+        if (typeof obj[subObj] === 'object' && obj[subObj] !== null) {
             obj[subObj] = clearEmpties(obj[subObj]);
+            if (obj[subObj] === null) {
+                delete obj[subObj];
+            }
         }
     });
-    if (Object.keys(obj).length === 0) {
-        return undefined;
+    if (obj === null || Object.keys(obj).length === 0) {
+        return null;
     } else {
         return obj;
     }
