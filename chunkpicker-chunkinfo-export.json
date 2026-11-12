@@ -9747,6 +9747,14 @@
 				"Priority": 999,
 				"NoBoost": true
 			},
+			"~|A Shell of a Friend|~ Construction skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["14134"],
+				"Level": 15,
+				"Primary": false,
+				"Priority": 999,
+				"NoBoost": true
+			},
 			"~|The Fremennik Isles|~ Construction skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["10553-1"],
@@ -20001,6 +20009,20 @@
 				"NoXp": true,
 				"NoBoost": true
 			},
+			"Fletch a ~|wasp dart|~": {
+				"Items": ["Wasp sting*", "Feather[+]*"],
+				"Level": 1,
+				"Primary": true,
+				"Output": "Wasp dart",
+				"Priority": 53
+			},
+			"Fletch a ~|killer wasp dart|~": {
+				"Items": ["Killer wasp sting*", "Feather[+]*"],
+				"Level": 15,
+				"Primary": true,
+				"Output": "Killer wasp dart",
+				"Priority": 53
+			},
 			"Participate in ~|Vale Totems|~ for Fletching xp": {
 				"Category": ["Minigame"],
 				"Objects": ["Totem site", "Offering site"],
@@ -22745,6 +22767,13 @@
 				"Primary": false,
 				"Priority": 999
 			},
+			"~|A Shell of a Friend|~ Herblore skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["14134"],
+				"Level": 16,
+				"Primary": false,
+				"Priority": 999
+			},
 			"~|One Small Favour|~ Herblore skill requirement": {
 				"Category": ["Quest Skill Reqs"],
 				"Chunks": ["11310-1"],
@@ -22958,6 +22987,38 @@
 					"~|Eagles' Peak|~ Complete the quest": "Quest"
 				}
 			},
+			"Catch a ~|swarm of wasps|~": {
+				"Items": ["Insect net[+]", "Bee hunter's hat", "Insect repellent"],
+				"Level": 1,
+				"NPCs": ["Swarm of wasps"],
+				"Output": "Wasp sting",
+				"Primary": true,
+				"Priority": 53
+			},
+			"Catch a ~|swarm of killer wasps|~": {
+				"Items": ["Insect net[+]", "Bee hunter's hat", "Insect repellent"],
+				"Level": 12,
+				"NPCs": ["Swarm of killer wasps"],
+				"Output": "Killer wasp sting",
+				"Primary": true,
+				"Priority": 53
+			},
+			"Catch a ~|honey buzzard|~": {
+				"Items": ["Bird snare"],
+				"Level": 1,
+				"NPCs": ["Honey Buzzard"],
+				"Output": "Honey Buzzard",
+				"Primary": true,
+				"Priority": 53
+			},
+			"Catch a ~|black honey buzzard|~": {
+				"Items": ["Bird snare"],
+				"Level": 17,
+				"NPCs": ["Black Honey Buzzard"],
+				"Output": "Black Honey Buzzard",
+				"Primary": true,
+				"Priority": 53
+			},
 			"Create a ~|net trap (item)|~": {
 				"Items": ["Small fishing net", "Rope"],
 				"Level": 29,
@@ -23161,14 +23222,14 @@
 				"Primary": true
 			},
 			"Catch a ~|sunlight moth|~": {
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 65,
 				"NPCs": ["Sunlight Moth"],
 				"Primary": true,
 				"Priority": 3
 			},
 			"Catch a ~|sunlight moth|~ in a jar": {
-				"Items": ["Butterfly net[+]", "Butterfly jar"],
+				"Items": ["Insect net[+]", "Butterfly jar"],
 				"Level": 65,
 				"NPCs": ["Sunlight Moth"],
 				"Output": "Sunlight moth (item)",
@@ -23191,14 +23252,14 @@
 				"Primary": true
 			},
 			"Catch a ~|moonlight moth|~": {
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 75,
 				"NPCs": ["Moonlight moth"],
 				"Primary": true,
 				"Priority": 3
 			},
 			"Catch a ~|moonlight moth|~ in a jar": {
-				"Items": ["Butterfly net[+]", "Butterfly jar"],
+				"Items": ["Insect net[+]", "Butterfly jar"],
 				"Level": 75,
 				"NPCs": ["Moonlight moth"],
 				"Output": "Moonlight moth (item)",
@@ -23229,7 +23290,7 @@
 			},
 			"Catch a ~|baby impling|~": {
 				"NPCs": ["Baby impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 17,
 				"Output": "Baby impling jar",
 				"Primary": true,
@@ -23237,7 +23298,7 @@
 			},
 			"Catch a wandering ~|baby impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 17,
 				"Output": "Baby impling jar",
 				"Primary": false,
@@ -23278,14 +23339,14 @@
 				"Primary": true
 			},
 			"Catch a ~|black warlock|~": {
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 45,
 				"NPCs": ["Black warlock"],
 				"Primary": true,
 				"Priority": 1
 			},
 			"Catch a ~|black warlock|~ in a jar": {
-				"Items": ["Butterfly net[+]", "Butterfly jar"],
+				"Items": ["Insect net[+]", "Butterfly jar"],
 				"Level": 45,
 				"NPCs": ["Black warlock"],
 				"Output": "Black warlock (item)",
@@ -23365,7 +23426,7 @@
 			"Catch a ~|crystal impling|~": {
 				"Category": ["Wandering implings"],
 				"Chunks": ["Prifddinas"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 80,
 				"Output": "Crystal impling jar",
 				"Primary": false,
@@ -23387,7 +23448,7 @@
 			"Catch a ~|dragon impling|~": {
 				"Category": ["Extra implings"],
 				"NPCs": ["Dragon impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 83,
 				"Output": "Dragon impling jar",
 				"Primary": false,
@@ -23395,7 +23456,7 @@
 			},
 			"Catch a wandering ~|dragon impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 83,
 				"Output": "Dragon impling jar",
 				"Primary": false,
@@ -23450,7 +23511,7 @@
 			},
 			"Catch a ~|gourmet impling|~": {
 				"NPCs": ["Gourmet impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 28,
 				"Output": "Gourmet impling jar",
 				"Primary": true,
@@ -23458,7 +23519,7 @@
 			},
 			"Catch a wandering ~|gourmet impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 28,
 				"Output": "Gourmet impling jar",
 				"Primary": false,
@@ -23511,7 +23572,7 @@
 			"Catch a ~|lucky impling|~": {
 				"Category": ["Extra implings"],
 				"NPCs": ["Lucky impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 89,
 				"Output": "Lucky impling jar",
 				"Primary": false,
@@ -23519,7 +23580,7 @@
 			},
 			"Catch a wandering ~|lucky impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 89,
 				"Output": "Lucky impling jar",
 				"Primary": false,
@@ -23537,7 +23598,7 @@
 			"Catch a ~|magpie impling|~": {
 				"Category": ["Extra implings"],
 				"NPCs": ["Magpie impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 65,
 				"Output": "Magpie impling jar",
 				"Primary": false,
@@ -23545,7 +23606,7 @@
 			},
 			"Catch a wandering ~|magpie impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 65,
 				"Output": "Magpie impling jar",
 				"Primary": false,
@@ -23593,7 +23654,7 @@
 			"Catch a ~|nature impling|~": {
 				"Category": ["Extra implings"],
 				"NPCs": ["Nature impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 58,
 				"Output": "Nature impling jar",
 				"Primary": false,
@@ -23601,7 +23662,7 @@
 			},
 			"Catch a wandering ~|nature impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 58,
 				"Output": "Nature impling jar",
 				"Primary": false,
@@ -23620,7 +23681,7 @@
 			"Catch a ~|ninja impling|~": {
 				"Category": ["Extra implings"],
 				"NPCs": ["Ninja impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 74,
 				"Output": "Ninja impling jar",
 				"Primary": false,
@@ -23628,7 +23689,7 @@
 			},
 			"Catch a wandering ~|ninja impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 74,
 				"Output": "Ninja impling jar",
 				"Primary": false,
@@ -23682,14 +23743,14 @@
 				"Priority": 1
 			},
 			"Catch a ~|ruby harvest|~": {
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 15,
 				"NPCs": ["Ruby harvest"],
 				"Primary": true,
 				"Priority": 2
 			},
 			"Catch a ~|ruby harvest|~ in a jar": {
-				"Items": ["Butterfly net[+]", "Butterfly jar"],
+				"Items": ["Insect net[+]", "Butterfly jar"],
 				"Level": 15,
 				"NPCs": ["Ruby harvest"],
 				"Output": "Ruby harvest (item)",
@@ -23721,14 +23782,14 @@
 				"Primary": true
 			},
 			"Catch a ~|sapphire glacialis|~": {
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 25,
 				"NPCs": ["Sapphire glacialis"],
 				"Priority": 1,
 				"Primary": true
 			},
 			"Catch a ~|sapphire glacialis|~ in a jar": {
-				"Items": ["Butterfly net[+]", "Butterfly jar"],
+				"Items": ["Insect net[+]", "Butterfly jar"],
 				"Level": 25,
 				"NPCs": ["Sapphire glacialis"],
 				"Output": "Sapphire glacialis (item)",
@@ -23743,14 +23804,14 @@
 				"Primary": true
 			},
 			"Catch a ~|snowy knight|~": {
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 35,
 				"NPCs": ["Snowy knight"],
 				"Primary": true,
 				"Priority": 1
 			},
 			"Catch a ~|snowy knight|~ in a jar": {
-				"Items": ["Butterfly net[+]", "Butterfly jar"],
+				"Items": ["Insect net[+]", "Butterfly jar"],
 				"Level": 35,
 				"NPCs": ["Snowy knight"],
 				"Output": "Snowy knight (item)",
@@ -23812,7 +23873,7 @@
 			},
 			"Catch a wandering ~|young impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 22,
 				"Output": "Young impling jar",
 				"Primary": false,
@@ -23830,7 +23891,7 @@
 			},
 			"Catch a wandering ~|earth impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 36,
 				"Output": "Earth impling jar",
 				"Primary": false,
@@ -23848,7 +23909,7 @@
 			},
 			"Catch a wandering ~|eclectic impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 50,
 				"Output": "Eclectic impling jar",
 				"Primary": false,
@@ -23866,7 +23927,7 @@
 			},
 			"Catch a wandering ~|essence impling|~": {
 				"Category": ["Wandering implings"],
-				"Items": ["Butterfly net[+]"],
+				"Items": ["Insect net[+]"],
 				"Level": 42,
 				"Output": "Essence impling jar",
 				"Primary": false,
@@ -23884,7 +23945,7 @@
 			},
 			"Catch a ~|young impling|~": {
 				"NPCs": ["Young impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 22,
 				"Output": "Young impling jar",
 				"Primary": true,
@@ -23892,7 +23953,7 @@
 			},
 			"Catch an ~|earth impling|~": {
 				"NPCs": ["Earth impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 36,
 				"Output": "Earth impling jar",
 				"Primary": true,
@@ -23900,7 +23961,7 @@
 			},
 			"Catch an ~|eclectic impling|~": {
 				"NPCs": ["Eclectic impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 50,
 				"Output": "Eclectic impling jar",
 				"Primary": true,
@@ -23908,7 +23969,7 @@
 			},
 			"Catch an ~|essence impling|~": {
 				"NPCs": ["Essence impling"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Level": 42,
 				"Output": "Essence impling jar",
 				"Primary": true,
@@ -29105,6 +29166,32 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Trade Farmer Bea for Bea's supplies": {
+				"Items": ["Wasp dart[+]*"],
+				"NPCs": ["Farmer Bea"],
+				"Output": "Bea's supplies",
+				"Not F2P": true
+			},
+			"Bea's supplies loot": {
+				"Items": ["Bea's supplies*"],
+				"Output": "Bea's supplies loot",
+				"Not F2P": true
+			},
+			"Take an insect net from the equipment crate on Bea's farm": {
+				"Objects": ["Equipment crate"],
+				"Output": "Insect net",
+				"Not F2P": true
+			},
+			"Take a bee hunter's hat from the equipment crate on Bea's farm": {
+				"Objects": ["Equipment crate"],
+				"Output": "Bee hunter's hat",
+				"Not F2P": true
+			},
+			"Take an insect repellent from the equipment crate on Bea's farm": {
+				"Objects": ["Equipment crate"],
+				"Output": "Insect repellent",
+				"Not F2P": true
+			},
 			"POH Access": {
 				"Chunks": ["Player-owned house"]
 			},
@@ -30094,9 +30181,9 @@
 				"Chunks": ["Neypotzli"],
 				"Output": "Rope"
 			},
-			"Take a butterfly net from the supply crates in Neypotzli": {
+			"Take an insect net from the supply crates in Neypotzli": {
 				"Chunks": ["Neypotzli"],
-				"Output": "Butterfly net"
+				"Output": "Insect net"
 			},
 			"Take a pestle and mortar from the supply crates in Neypotzli": {
 				"Chunks": ["Neypotzli"],
@@ -37366,9 +37453,9 @@
 				"Output": "Box trap",
 				"Not F2P": true
 			},
-			"Search the crate in Land's End for a butterfly net*": {
+			"Search the crate in Land's End for an insect net*": {
 				"Chunks": ["5941-1"],
-				"Output": "Butterfly net",
+				"Output": "Insect net",
 				"Not F2P": true
 			},
 			"Search the shelves in the Sorceress's House for a beer glass*": {
@@ -38813,9 +38900,9 @@
 				"Output": "Impling jar",
 				"Not F2P": true
 			},
-			"Get a butterfly net from Elnock": {
+			"Get an insect net from Elnock": {
 				"NPCs": ["Elnock Inquisitor"],
-				"Output": "Butterfly net",
+				"Output": "Insect net",
 				"Not F2P": true
 			},
 			"Get impling jars from Elnock": {
@@ -38823,14 +38910,14 @@
 				"Output": "Impling jar",
 				"Not F2P": true
 			},
-			"Buy a magic butterfly net from Elnock": {
+			"Buy a magic insect net from Elnock": {
 				"NPCs": ["Elnock Inquisitor"],
 				"Tasks": {
 					"Catch a ~|gourmet impling|~": "Hunter",
 					"Catch an ~|earth impling|~": "Hunter",
 					"Catch an ~|essence impling|~": "Hunter"
 				},
-				"Output": "Magic butterfly net",
+				"Output": "Magic insect net",
 				"Not F2P": true
 			},
 			"Buy imp repellent from Elnock": {
@@ -65488,10 +65575,10 @@
 				"Items": ["Elven signet"],
 				"Not F2P": true
 			},
-			"Obtain a ~|magic butterfly net|~": {
+			"Obtain a ~|magic insect net|~": {
 				"Category": ["BIS Skilling"],
 				"Label": "BIS Skilling",
-				"Items": ["Magic butterfly net"],
+				"Items": ["Magic insect net"],
 				"Not F2P": true
 			},
 			"Obtain an ~|alchemist's amulet|~": {
@@ -91736,7 +91823,7 @@
 			"~|Lumbridge and Draynor Diary#Medium|~ Task 11": {
 				"Description": "Catch an essence or eclectic impling in Puro-Puro.",
 				"Chunks": ["Puro-Puro"],
-				"Items": ["Butterfly net[+]", "Impling jar"],
+				"Items": ["Insect net[+]", "Impling jar"],
 				"Skills": {
 					"Hunter": 42
 				},
@@ -107300,6 +107387,45 @@
 				"Chunks": ["10291"],
 				"Not F2P": true
 			},
+			"~|The Birds and the Wasps|~ 1": {
+				"BaseQuest": "The Birds and the Wasps",
+				"Description": "Talk to Farmer Bea",
+				"Chunks": ["13108-1"],
+				"NPCs": ["Farmer Bea"],
+				"Not F2P": true
+			},
+			"~|The Birds and the Wasps|~ 2": {
+				"BaseQuest": "The Birds and the Wasps",
+				"Description": "Talk to the bee dealer",
+				"NPCs": ["Bee dealer"],
+				"Tasks": {
+					"~|The Birds and the Wasps|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Birds and the Wasps|~ 3": {
+				"BaseQuest": "The Birds and the Wasps",
+				"Description": "Return to Farmer Bea, catch the wasps and birds, and fletch the darts",
+				"Chunks": ["13108-1"],
+				"NPCs": ["Farmer Bea"],
+				"Tasks": {
+					"~|The Birds and the Wasps|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|The Birds and the Wasps|~ Complete the quest": {
+				"Tasks": {
+					"~|The Birds and the Wasps|~ 3": "Quest"
+				},
+				"QuestPoints": 1,
+				"XpReward": {
+					"Hunter": 100,
+					"Fletching": 250
+				},
+				"BaseQuest": "The Birds and the Wasps",
+				"Chunks": ["13108-1"],
+				"Not F2P": true
+			},
 			"~|The Blood Moon Rises|~ 1": {
 				"BaseQuest": "The Blood Moon Rises",
 				"Description": "Talk to Sarius Guile in the Icyene Graveyard",
@@ -122265,6 +122391,44 @@
 				},
 				"BaseQuest": "Sheep Herder",
 				"Chunks": ["10291"],
+				"Not F2P": true
+			},
+			"~|A Shell of a Friend|~ 1": {
+				"BaseQuest": "A Shell of a Friend",
+				"Description": "Talk to the Juvenile Snail, then fetch the different items for it",
+				"Chunks": ["14134"],
+				"Skills": {
+					"Herblore": 16,
+					"Construction": 15
+				},
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Reward": ["Bronze axe"],
+				"Not F2P": true
+			},
+			"~|A Shell of a Friend|~ 2": {
+				"BaseQuest": "A Shell of a Friend",
+				"Description": "Build shelter for the snail, fetch more items, then defeat SnelmLover500",
+				"Chunks": ["14134"],
+				"Items": ["Axe[+]"],
+				"Tasks": {
+					"~|A Shell of a Friend|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A Shell of a Friend|~ Complete the quest": {
+				"Tasks": {
+					"~|A Shell of a Friend|~ 2": "Quest"
+				},
+				"QuestPoints": 2,
+				"XpReward": {
+					"Herblore": 2500,
+					"Construction": 2500
+				},
+				"Reward": ["Pink snelm"],
+				"BaseQuest": "A Shell of a Friend",
+				"Chunks": ["14134"],
 				"Not F2P": true
 			},
 			"~|Shilo Village|~ 1": {
@@ -152738,6 +152902,10 @@
 						"Scorpion": 7,
 						"Snake": 3
 					},
+					"NPC": {
+						"Crimson swift": 1,
+						"Tropical wagtail": 6
+					},
 					"Object": {
 						"Dead tree": 42,
 						"Impling spawn#all-tier": 1,
@@ -154345,6 +154513,7 @@
 						"Snake": 2
 					},
 					"NPC": {
+						"Crimson swift": 4,
 						"Dallas Jones": 1,
 						"Jack (Christmas 2013)": 1,
 						"Jeff (child)": 1,
@@ -156198,8 +156367,10 @@
 						"Rusty": 1
 					},
 					"NPC": {
+						"Copper longtail": 6,
 						"Doric": 1,
 						"Raccoon": 3,
+						"Ruby harvest": 6,
 						"Squirrel": 3,
 						"Willow (Below Ice Mountain)": 1
 					},
@@ -160328,6 +160499,7 @@
 				"Abigaila": 1,
 				"Arthur": 1,
 				"Banker": 3,
+				"Bee dealer": 1,
 				"Bob Barter (herbs)": 1,
 				"Brugsen Bursen": 1,
 				"Clerk (Clan Hall)": 1,
@@ -160359,6 +160531,7 @@
 				"Wheat": 38
 			},
 			"Quest": {
+				"The Birds and the Wasps": "step",
 				"The Enchanted Key": "step",
 				"A Ruff Situation": "step"
 			},
@@ -163363,7 +163536,8 @@
 					},
 					"NPC": {
 						"Avan": 1,
-						"Camel": 1
+						"Camel": 1,
+						"Golden warbler": 6
 					},
 					"Object": {
 						"Adamantite rocks": 2,
@@ -163422,24 +163596,41 @@
 					},
 					"NPC": {
 						"Ali the Leaflet Dropper": 1,
-						"Rat Burgiss": 1
+						"Black Honey Buzzard": 3,
+						"Farmer Bea": 1,
+						"Honey Buzzard": 10,
+						"Rat Burgiss": 1,
+						"Swarm of killer wasps": 3,
+						"Swarm of wasps": 3
 					},
 					"Object": {
 						"Broken cart": 1,
+						"Cabbage": 8,
 						"Cadava bush": 3,
 						"Copper rocks": 9,
 						"Dead tree": 4,
 						"Drawers": 2,
+						"Equipment crate": 1,
 						"Iron rocks": 4,
 						"Oak tree": 11,
+						"Onion": 6,
+						"Potato": 14,
 						"Redberry bush": 2,
 						"Shooting star#landing site": 1,
 						"Tin rocks": 6,
 						"Tree": 85
 					},
 					"Quest": {
+						"The Birds and the Wasps": "first",
 						"The Enchanted Key": "step",
 						"What Lies Below": "first"
+					},
+					"Shop": {
+						"Bea's Hunter Gear": true
+					},
+					"Spawn": {
+						"Bucket of water": 1,
+						"Spade": 1
 					},
 					"Clue": {
 						"beginner": 1,
@@ -163484,6 +163675,7 @@
 						"Varrock": "MD6"
 					},
 					"NPC": {
+						"Black Honey Buzzard": 7,
 						"Captain Errdo": 1,
 						"Ed Wood": 1,
 						"Launa": 1,
@@ -164849,6 +165041,7 @@
 				"Entrance Guardian": 1,
 				"Fadli": 1,
 				"Flying Book": 3,
+				"Golden warbler": 1,
 				"Hamid": 1,
 				"Jaraah": 1,
 				"Rewards Guardian (Mage Training Arena)": 1,
@@ -167058,6 +167251,7 @@
 			},
 			"NPC": {
 				"Ivan Strom": 1,
+				"Juvenile Snail": 1,
 				"Spider": 2,
 				"Tree": 4,
 				"Veliaf Hurtz": 1,
@@ -167068,7 +167262,11 @@
 				"Grave": 2,
 				"Hollow tree": 28,
 				"Nettles": 50,
+				"Stepping stone": 1,
 				"Swamp bubbles": 33
+			},
+			"Quest": {
+				"A Shell of a Friend": "first"
 			}
 		},
 		"14135": {
@@ -178094,7 +178292,7 @@
 			"Bronze key[+]": ["Bronze key red", "Bronze key brown", "Bronze key crimson", "Bronze key black", "Bronze key purple"],
 			"BronzeWep[+]": ["Bronze dagger", "Bronze pickaxe", "Bronze axe", "Bronze mace", "Bronze shortsword", "Bronze scimitar", "Bronze longsword", "Bronze battleaxe", "Bronze claws", "Bronze spear", "Bronze 2h sword"],
 			"Broodoo shield[+]": ["Broodoo shield (combat)", "Broodoo shield (poison)", "Broodoo shield (disease)"],
-			"Butterfly net[+]": ["Butterfly net", "Magic butterfly net"],
+			"Insect net[+]": ["Insect net", "Magic insect net"],
 			"Cake[+]": ["Cake", "Chocolate cake"],
 			"Clock Tower Cooling[+]": ["Bucket of water", "Ice gloves"],
 			"Chaos rune[+]": ["Chaos rune", "Death rune", "Blood rune"],
@@ -178134,7 +178332,7 @@
 			"Enakhra's Lament food[+]": ["Bread", "Cake", "Pie", "Chocolate Cake"],
 			"Enchanted robes[+]": ["Enchanted hat", "Enchanted top", "Enchanted robe"],
 			"Enchanted zenyte[+]": ["Ring of suffering", "Necklace of anguish", "Tormented bracelet", "Amulet of torture"],
-			"Feather[+]": ["Feather", "Red feather", "Orange feather", "Yellow feather", "Blue feather", "Stripy feather"],
+			"Feather[+]": ["Feather", "Red feather", "Orange feather", "Yellow feather", "Blue feather", "Stripy feather", "Brown feather", "Black feather"],
 			"Fire rune[+]": ["Fire rune", "Smoke rune", "Steam rune", "Lava rune", "Sunfire rune", "Tome of fire"],
 			"Cosmic rune[+]": ["Cosmic rune", "Aether rune"],
 			"Soul rune[+]": ["Soul rune", "Aether rune"],
@@ -178271,7 +178469,7 @@
 			"Water item vial[+]": ["Bucket of water", "Jug of water", "Bowl of water", "Vial of water"],
 			"Water rune[+]": ["Water rune", "Mist rune", "Mud rune", "Steam rune"],
 			"Watering can[+]": ["Watering can", "Watering can(1)", "Watering can(2)", "Watering can(3)", "Watering can(4)", "Watering can(5)", "Watering can(6)", "Watering can(7)", "Watering can(8)", "Gricoller's can"],
-			"Web slasher[+]": ["Knife", "Wilderness sword 1", "Wilderness sword 2", "Wilderness sword 3", "Wilderness sword 4", "3rd age longsword", "Adamant 2h sword", "Ancient godsword", "Armadyl godsword", "Bandos godsword", "Black 2h sword", "Bronze 2h sword", "Colossal blade", "Dragon 2h sword", "Gilded 2h sword", "Iron 2h sword", "Mithril 2h sword", "Rune 2h sword", "Saradomin godsword", "Saradomin sword", "Saradomin's blessed sword", "Shadow sword", "Spatula", "Steel 2h sword", "White 2h sword", "Zamorak godsword", "3rd age axe", "Adamant axe", "Adamant battleaxe", "Black axe", "Black battleaxe", "Blessed axe", "Bronze axe", "Bronze battleaxe", "Crystal axe", "Dharok's greataxe", "Dragon axe", "Dragon battleaxe", "Gilded axe", "Infernal axe", "Iron axe", "Iron battleaxe", "Leaf-bladed battleaxe", "Mithril axe", "Mithril battleaxe", "Rune axe", "Rune battleaxe", "Steel axe", "Steel battleaxe", "White battleaxe", "Banner (Arrav)", "Banner (Asgarnia)", "Banner (Dorgeshuun)", "Banner (Dragon)", "Banner (Fairy)", "Banner (Guthix)", "Banner (HAM)", "Banner (Horse)", "Banner (Jogre)", "Banner (Kandarin)", "Banner (Misthalin)", "Banner (Money)", "Banner (Saradomin)", "Banner (Skull)", "Banner (Varrock)", "Banner (Zamorak)", "Bronze fist flag", "Clan vexillum", "Cutthroat flag", "Gilded smile flag", "Green banner", "Lucky shot flag", "Phasmatys flag", "Protest banner", "Saradomon banner", "Shattered banner", "Trailblazer banner", "Treasure flag", "Twisted banner", "Zamorak banner", "Adamant claws", "Beach boxing gloves (pink)", "Beach boxing gloves (yellow)", "Black claws", "Bronze claws", "Dragon claws", "Iron claws", "Mithril claws", "Rune claws", "Steel claws", "White claws", "Adamant halberd", "Black halberd", "Bronze halberd", "Crystal halberd", "Dragon halberd", "Iron halberd", "Mithril halberd", "Rune halberd", "Steel halberd", "White halberd", "Holy scythe of vitur", "Sanguine scythe of vitur", "Scythe", "Scythe of vitur", "Scythe of vitur (uncharged)", "Adamant longsword", "Adamant scimitar", "Amy's saw", "Arclight", "Black longsword", "Black scimitar", "Blade of saeldor", "Blade of saeldor (c)", "Blisterwood sickle", "Blurite sword", "Brine sabre", "Bronze longsword", "Bronze scimitar", "Cleaver", "Darklight", "Decorative sword (gold)", "Decorative sword (red)", "Decorative sword (white)", "Dragon longsword", "Dragon scimitar", "Dragon scimitar (or)", "Emerald sickle (b)", "Enchanted emerald sickle (b)", "Enchanted ruby sickle (b)", "Excalibur", "Fremennik blade", "Gilded scimitar", "Granite longsword", "Harry's cutlass", "Iron longsword", "Iron scimitar", "Iron sickle", "Jade machete", "Katana", "Lucky cutlass", "Machete", "Mithril longsword", "Mithril scimitar", "Opal machete", "Red topaz machete", "Ruby sickle (b)", "Rune longsword", "Rune scimitar", "Rune scimitar (guthix)", "Rune scimitar (saradomin)", "Rune scimitar (zamorak)", "Silver sickle", "Silver sickle (b)", "Silverlight", "Skewer", "Steel longsword", "Steel scimitar", "Toktz-xil-ek", "Vesta's blighted longsword", "Vesta's longsword", "White longsword", "White scimitar", "Wooden spoon", "Adamant hasta", "Adamant hasta(p)", "Adamant hasta(p+)", "Adamant hasta(p++)", "Adamant hasta(kp)", "Adamant spear", "Adamant spear(p)", "Adamant spear(p+)", "Adamant spear(p++)", "Adamant spear(kp)", "Black spear", "Black spear(p)", "Black spear(p+)", "Black spear(p++)", "Black spear(kp)", "Bone spear", "Bronze hasta", "Bronze hasta(p)", "Bronze hasta(p+)", "Bronze hasta(p++)", "Bronze hasta(kp)", "Bronze spear", "Bronze spear(p)", "Bronze spear(p+)", "Bronze spear(p++)", "Bronze spear(kp)", "Butterfly net", "Dragon hasta", "Dragon hasta(p)", "Dragon hasta(p+)", "Dragon hasta(p++)", "Dragon hasta(kp)", "Dragon hunter lance", "Dragon spear", "Dragon spear(p)", "Dragon spear(p+)", "Dragon spear(p++)", "Dragon spear(kp)", "Gilded hasta", "Gilded spear", "Guthan's warspear", "Iron hasta", "Iron hasta(p)", "Iron hasta(p+)", "Iron hasta(p++)", "Iron hasta(kp)", "Iron spear", "Iron spear(p)", "Iron spear(p+)", "Iron spear(p++)", "Iron spear(kp)", "Leaf-bladed spear", "Magic butterfly net", "Merfolk trident", "Mithril hasta", "Mithril hasta(p)", "Mithril hasta(p+)", "Mithril hasta(p++)", "Mithril hasta(kp)", "Mithril spear", "Mithril spear(p)", "Mithril spear(p+)", "Mithril spear(p++)", "Mithril spear(kp)", "Noose wand", "Rune hasta", "Rune hasta(p)", "Rune hasta(p+)", "Rune hasta(p++)", "Rune hasta(kp)", "Rune spear", "Rune spear(p)", "Rune spear(p+)", "Rune spear(p++)", "Rune spear(kp)", "Steel hasta", "Steel hasta(p)", "Steel hasta(p+)", "Steel hasta(p++)", "Steel hasta(kp)", "Steel spear", "Steel spear(p)", "Steel spear(p+)", "Steel spear(p++)", "Steel spear(kp)", "Zamorakian hasta", "Zamorakian spear", "Abyssal dagger", "Abyssal dagger(p)", "Abyssal dagger(p+)", "Abyssal dagger(p++)", "Adamant dagger", "Adamant dagger(p)", "Adamant dagger(p+)", "Adamant dagger(p++)", "Adamant shortsword", "Barb-tail harpoon", "Black dagger", "Black dagger(p)", "Black dagger(p+)", "Black dagger(p++)", "Black shortsword", "Bone dagger", "Bone dagger(p)", "Bone dagger(p+)", "Bone dagger(p++)", "Bronze dagger", "Bronze dagger(p)", "Bronze dagger(p+)", "Bronze dagger(p++)", "Bronze shortsword", "Cattleprod", "Crystal harpoon", "Dark dagger", "Dragon dagger", "Dragon dagger(p)", "Dragon dagger(p+)", "Dragon dagger(p++)", "Dragon harpoon", "Dragon shortsword", "Dual sai", "Egg whisk", "Ghrazi rapier", "Glowing dagger", "Holy ghrazi rapier", "Infernal harpoon", "Iron dagger", "Iron dagger(p)", "Iron dagger(p+)", "Iron dagger(p++)", "Iron shortsword", "Keris", "Keris(p)", "Keris(p+)", "Keris(p++)", "Kitchen knife", "Leaf-bladed sword", "Magic secateurs", "Mithril dagger", "Mithril dagger(p)", "Mithril dagger(p+)", "Mithril dagger(p++)", "Mithril shortsword", "Osmumten's fang", "Rapier", "Rune dagger", "Rune dagger(p)", "Rune dagger(p+)", "Rune dagger(p++)", "Rune shortsword", "Spork", "Steel dagger", "Steel dagger(p)", "Steel dagger(p+)", "Steel dagger(p++)", "Steel shortsword", "Swift blade", "Toktz-xil-ak", "Training shortsword", "White dagger", "White dagger(p)", "White dagger(p+)", "White dagger(p++)", "Wolfbane", "Wooden shortsword", "Abyssal tentacle", "Abyssal whip", "Staff of balance", "Staff of light", "Staff of the dead", "Toxic staff of the dead"],
+			"Web slasher[+]": ["Knife", "Wilderness sword 1", "Wilderness sword 2", "Wilderness sword 3", "Wilderness sword 4", "3rd age longsword", "Adamant 2h sword", "Ancient godsword", "Armadyl godsword", "Bandos godsword", "Black 2h sword", "Bronze 2h sword", "Colossal blade", "Dragon 2h sword", "Gilded 2h sword", "Iron 2h sword", "Mithril 2h sword", "Rune 2h sword", "Saradomin godsword", "Saradomin sword", "Saradomin's blessed sword", "Shadow sword", "Spatula", "Steel 2h sword", "White 2h sword", "Zamorak godsword", "3rd age axe", "Adamant axe", "Adamant battleaxe", "Black axe", "Black battleaxe", "Blessed axe", "Bronze axe", "Bronze battleaxe", "Crystal axe", "Dharok's greataxe", "Dragon axe", "Dragon battleaxe", "Gilded axe", "Infernal axe", "Iron axe", "Iron battleaxe", "Leaf-bladed battleaxe", "Mithril axe", "Mithril battleaxe", "Rune axe", "Rune battleaxe", "Steel axe", "Steel battleaxe", "White battleaxe", "Banner (Arrav)", "Banner (Asgarnia)", "Banner (Dorgeshuun)", "Banner (Dragon)", "Banner (Fairy)", "Banner (Guthix)", "Banner (HAM)", "Banner (Horse)", "Banner (Jogre)", "Banner (Kandarin)", "Banner (Misthalin)", "Banner (Money)", "Banner (Saradomin)", "Banner (Skull)", "Banner (Varrock)", "Banner (Zamorak)", "Bronze fist flag", "Clan vexillum", "Cutthroat flag", "Gilded smile flag", "Green banner", "Lucky shot flag", "Phasmatys flag", "Protest banner", "Saradomon banner", "Shattered banner", "Trailblazer banner", "Treasure flag", "Twisted banner", "Zamorak banner", "Adamant claws", "Beach boxing gloves (pink)", "Beach boxing gloves (yellow)", "Black claws", "Bronze claws", "Dragon claws", "Iron claws", "Mithril claws", "Rune claws", "Steel claws", "White claws", "Adamant halberd", "Black halberd", "Bronze halberd", "Crystal halberd", "Dragon halberd", "Iron halberd", "Mithril halberd", "Rune halberd", "Steel halberd", "White halberd", "Holy scythe of vitur", "Sanguine scythe of vitur", "Scythe", "Scythe of vitur", "Scythe of vitur (uncharged)", "Adamant longsword", "Adamant scimitar", "Amy's saw", "Arclight", "Black longsword", "Black scimitar", "Blade of saeldor", "Blade of saeldor (c)", "Blisterwood sickle", "Blurite sword", "Brine sabre", "Bronze longsword", "Bronze scimitar", "Cleaver", "Darklight", "Decorative sword (gold)", "Decorative sword (red)", "Decorative sword (white)", "Dragon longsword", "Dragon scimitar", "Dragon scimitar (or)", "Emerald sickle (b)", "Enchanted emerald sickle (b)", "Enchanted ruby sickle (b)", "Excalibur", "Fremennik blade", "Gilded scimitar", "Granite longsword", "Harry's cutlass", "Iron longsword", "Iron scimitar", "Iron sickle", "Jade machete", "Katana", "Lucky cutlass", "Machete", "Mithril longsword", "Mithril scimitar", "Opal machete", "Red topaz machete", "Ruby sickle (b)", "Rune longsword", "Rune scimitar", "Rune scimitar (guthix)", "Rune scimitar (saradomin)", "Rune scimitar (zamorak)", "Silver sickle", "Silver sickle (b)", "Silverlight", "Skewer", "Steel longsword", "Steel scimitar", "Toktz-xil-ek", "Vesta's blighted longsword", "Vesta's longsword", "White longsword", "White scimitar", "Wooden spoon", "Adamant hasta", "Adamant hasta(p)", "Adamant hasta(p+)", "Adamant hasta(p++)", "Adamant hasta(kp)", "Adamant spear", "Adamant spear(p)", "Adamant spear(p+)", "Adamant spear(p++)", "Adamant spear(kp)", "Black spear", "Black spear(p)", "Black spear(p+)", "Black spear(p++)", "Black spear(kp)", "Bone spear", "Bronze hasta", "Bronze hasta(p)", "Bronze hasta(p+)", "Bronze hasta(p++)", "Bronze hasta(kp)", "Bronze spear", "Bronze spear(p)", "Bronze spear(p+)", "Bronze spear(p++)", "Bronze spear(kp)", "Insect net", "Dragon hasta", "Dragon hasta(p)", "Dragon hasta(p+)", "Dragon hasta(p++)", "Dragon hasta(kp)", "Dragon hunter lance", "Dragon spear", "Dragon spear(p)", "Dragon spear(p+)", "Dragon spear(p++)", "Dragon spear(kp)", "Gilded hasta", "Gilded spear", "Guthan's warspear", "Iron hasta", "Iron hasta(p)", "Iron hasta(p+)", "Iron hasta(p++)", "Iron hasta(kp)", "Iron spear", "Iron spear(p)", "Iron spear(p+)", "Iron spear(p++)", "Iron spear(kp)", "Leaf-bladed spear", "Magic insect net", "Merfolk trident", "Mithril hasta", "Mithril hasta(p)", "Mithril hasta(p+)", "Mithril hasta(p++)", "Mithril hasta(kp)", "Mithril spear", "Mithril spear(p)", "Mithril spear(p+)", "Mithril spear(p++)", "Mithril spear(kp)", "Noose wand", "Rune hasta", "Rune hasta(p)", "Rune hasta(p+)", "Rune hasta(p++)", "Rune hasta(kp)", "Rune spear", "Rune spear(p)", "Rune spear(p+)", "Rune spear(p++)", "Rune spear(kp)", "Steel hasta", "Steel hasta(p)", "Steel hasta(p+)", "Steel hasta(p++)", "Steel hasta(kp)", "Steel spear", "Steel spear(p)", "Steel spear(p+)", "Steel spear(p++)", "Steel spear(kp)", "Zamorakian hasta", "Zamorakian spear", "Abyssal dagger", "Abyssal dagger(p)", "Abyssal dagger(p+)", "Abyssal dagger(p++)", "Adamant dagger", "Adamant dagger(p)", "Adamant dagger(p+)", "Adamant dagger(p++)", "Adamant shortsword", "Barb-tail harpoon", "Black dagger", "Black dagger(p)", "Black dagger(p+)", "Black dagger(p++)", "Black shortsword", "Bone dagger", "Bone dagger(p)", "Bone dagger(p+)", "Bone dagger(p++)", "Bronze dagger", "Bronze dagger(p)", "Bronze dagger(p+)", "Bronze dagger(p++)", "Bronze shortsword", "Cattleprod", "Crystal harpoon", "Dark dagger", "Dragon dagger", "Dragon dagger(p)", "Dragon dagger(p+)", "Dragon dagger(p++)", "Dragon harpoon", "Dragon shortsword", "Dual sai", "Egg whisk", "Ghrazi rapier", "Glowing dagger", "Holy ghrazi rapier", "Infernal harpoon", "Iron dagger", "Iron dagger(p)", "Iron dagger(p+)", "Iron dagger(p++)", "Iron shortsword", "Keris", "Keris(p)", "Keris(p+)", "Keris(p++)", "Kitchen knife", "Leaf-bladed sword", "Magic secateurs", "Mithril dagger", "Mithril dagger(p)", "Mithril dagger(p+)", "Mithril dagger(p++)", "Mithril shortsword", "Osmumten's fang", "Rapier", "Rune dagger", "Rune dagger(p)", "Rune dagger(p+)", "Rune dagger(p++)", "Rune shortsword", "Spork", "Steel dagger", "Steel dagger(p)", "Steel dagger(p+)", "Steel dagger(p++)", "Steel shortsword", "Swift blade", "Toktz-xil-ak", "Training shortsword", "White dagger", "White dagger(p)", "White dagger(p+)", "White dagger(p++)", "Wolfbane", "Wooden shortsword", "Abyssal tentacle", "Abyssal whip", "Staff of balance", "Staff of light", "Staff of the dead", "Toxic staff of the dead"],
 			"White armour[+]": ["White gloves", "White boots", "White med helm", "White full helm", "White sq shield", "White plateskirt", "White kiteshield", "White platelegs", "White chainbody", "White platebody"],
 			"White decorative armour[+]": ["Decorative armour (white platebody)", "Decorative armour (white platelegs)", "Decorative armour (white plateskirt)", "Decorative boots (white)", "Decorative full helm (white)", "Decorative helm (white)", "Decorative shield (white)"],
 			"WhiteWep[+]": ["White dagger", "White mace", "White shortsword", "White scimitar", "White longsword", "White warhammer", "White battleaxe", "White claws", "White 2h sword"],
@@ -178456,7 +178654,8 @@
 			"Black platebody[+]": ["Black platebody", "Black platebody (t)", "Black platebody (g)"],
 			"Black legs[+]": ["Black platelegs", "Black platelegs (t)", "Black platelegs (g)", "Black plateskirt", "Black plateskirt (t)", "Black plateskirt (g)"],
 			"StymphikeSpear[+]": ["Makeshift spear", "Hunter's spear"],
-			"GolemFur[+]": ["Moonlight antelope fur", "Sunlight antelope fur", "Dashing kebbit fur", "Kyatt fur", "Dark kebbit fur", "Fox fur", "Spotted kebbit fur", "Graahk fur", "Larupia fur", "Feldip weasel fur", "Common kebbit fur", "Desert devil fur", "Polar kebbit fur", "Wyrmscraig goat fur"]
+			"GolemFur[+]": ["Moonlight antelope fur", "Sunlight antelope fur", "Dashing kebbit fur", "Kyatt fur", "Dark kebbit fur", "Fox fur", "Spotted kebbit fur", "Graahk fur", "Larupia fur", "Feldip weasel fur", "Common kebbit fur", "Desert devil fur", "Polar kebbit fur", "Wyrmscraig goat fur"],
+			"Wasp dart[+]": ["Wasp dart", "Killer wasp dart"]
 		},
 		"itemsPlusNames": {
 			"Adamant armour[+]": "Any adamant armour piece",
@@ -178508,7 +178707,7 @@
 			"Bronze key[+]": "Any bronze key",
 			"BronzeWep[+]": "Any bronze weapon",
 			"Broodoo shield[+]": "Any broodoo shield",
-			"Butterfly net[+]": "Any butterfly net",
+			"Insect net[+]": "Any insect net",
 			"Cake[+]": "Any cake",
 			"Clock Tower Cooling[+]": "Clock Tower cooling item",
 			"Chaos rune[+]": "Any chaos rune or better",
@@ -178860,7 +179059,8 @@
 			"Black platebody[+]": "Any black platebody",
 			"Black legs[+]": "Any black platelegs/skirt",
 			"StymphikeSpear[+]": "Any spear used when catching a stymphike",
-			"GolemFur[+]": "Any fur used in golem crafting"
+			"GolemFur[+]": "Any fur used in golem crafting",
+			"Wasp dart[+]": "Any wasp dart variant"
 		},
 		"mixPlus": {
 			"Citizen[+]": ["Man", "Drunken man", "Hengel", "Cuffs", "Narf", "Jeff", "Rusty", "Woman", "Anja", "Man (East Ardougne)", "Woman (East Ardougne)", "Citizen (Tal Teklan)", "Citizen (Auburnvale)", "Citizen (Aldarin)", "Citizen (Kastori)", "Citizen (Civitas illa Fortis)", "Tourist", "Salvager"],
@@ -179181,7 +179381,8 @@
 			"Adamant cannon": 30,
 			"Rune cannon": 40,
 			"Dragon cannon": 60,
-			"Ascension crossbows": 80
+			"Ascension crossbows": 80,
+			"Painted shortbow": 1
 		},
 		"tasksPlus": {
 			"KaramjaEasy7[+]": ["Catch ~|raw shrimps|~", "Catch ~|raw anchovies|~", "Catch a ~|raw herring|~", "Catch a ~|raw sardine|~", "Catch a ~|raw lobster|~", "Catch a ~|raw tuna|~", "Catch a ~|raw swordfish|~"],
@@ -179889,7 +180090,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Iron arrow": {
 				"Shortbow": true,
@@ -179914,7 +180116,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Steel arrow": {
 				"Oak shortbow": true,
@@ -180151,7 +180354,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Bronze javelin": {
 				"Light ballista": true,
@@ -180278,7 +180482,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Iron arrow(p)": {
 				"Shortbow": true,
@@ -180303,7 +180508,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Steel arrow(p)": {
 				"Oak shortbow": true,
@@ -180402,7 +180608,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Steel fire arrow": {
 				"Oak shortbow": true,
@@ -180541,7 +180748,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Iron arrow(p+)": {
 				"Shortbow": true,
@@ -180566,7 +180774,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Steel arrow(p+)": {
 				"Oak shortbow": true,
@@ -180665,7 +180874,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Iron arrow(p++)": {
 				"Shortbow": true,
@@ -180690,7 +180900,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Steel arrow(p++)": {
 				"Oak shortbow": true,
@@ -180793,7 +181004,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Seeking iron arrow": {
 				"Shortbow": true,
@@ -180818,7 +181030,8 @@
 				"3rd age bow": true,
 				"Twisted bow": true,
 				"Venator bow": true,
-				"Scorching bow": true
+				"Scorching bow": true,
+				"Painted shortbow": true
 			},
 			"Seeking steel arrow": {
 				"Oak shortbow": true,
@@ -210169,7 +210382,7 @@
 			"Iron axe": {
 				"1": "1/18"
 			},
-			"Butterfly net": {
+			"Insect net": {
 				"1": "1/18"
 			},
 			"Hammer": {
@@ -216938,7 +217151,7 @@
 		},
 		"Vampyre Snail": {
 			"Vampyre snelm": {
-				"1": "Unknown"
+				"1": "Always"
 			}
 		},
 		"Vanguard": {
@@ -221425,6 +221638,7 @@
 		"Between a Rock...": "10810, 11318, 12085, Dondakan's mine, Dwarven Mine, White Wolf Tunnel, Keldagrim",
 		"Big Chompy Bird Hunting": "10286, 10542, Rantz's cave",
 		"Biohazard": "10035, 10036, 10291, 10292, 11570, 13108",
+		"The Birds and the Wasps": "12598, 13108",
 		"The Blood Moon Rises": "13622, 14130, 14131, 14641, 14642, 14899, 14900, Myreque hideout#Burgh De Rott Hideout, Myreque hideout#Canifis/Mort Myre Hideout, Myreque hideout#Meiyerditch Hideout",
 		"Bone Voyage": "6454, 12082, 12597, 12853, 13110, 13365, 13366, 14907",
 		"Cabin Fever": "14638, 14646, 14902",
@@ -221554,6 +221768,7 @@
 		"Shadow of the Storm": "13105, 13872",
 		"Shadows of Custodia": "5172, 5428",
 		"Sheep Herder": "10291, 10292",
+		"A Shell of a Friend": "14134",
 		"Shilo Village": "11054, 11056, 11566, 11568",
 		"Sins of the Father": "13622, 13874, 14129, 14135, 14386, 14388, 14641, 14899, 14898, 14900, Meiyerditch Laboratories",
 		"Sleeping Giants": "13361, Giants' Foundry",
@@ -223474,7 +223689,7 @@
 			"Box trap": true,
 			"Box trap pack": true,
 			"Butterfly jar": true,
-			"Butterfly net": true,
+			"Insect net": true,
 			"Magic box": true,
 			"Magic imp box pack": true,
 			"Net trap (item)": true,
@@ -223929,6 +224144,20 @@
 			"Woven top (blue)": true,
 			"Woven top (brown)": true,
 			"Woven top (yellow)": true
+		},
+		"Bea's Hunter Gear": {
+			"Bird snare": true,
+			"Bird snare pack": true,
+			"Box trap": true,
+			"Box trap pack": true,
+			"Butterfly jar": true,
+			"Magic box": true,
+			"Magic imp box pack": true,
+			"Net trap (item)": true,
+			"Noose wand": true,
+			"Rabbit snare": true,
+			"Teasing stick": true,
+			"Unlit torch": true
 		},
 		"Bedabin Village Bartering": {
 			"Bowl of water": true,
@@ -224555,6 +224784,9 @@
 			"Hornwood helm": true,
 			"Lion toy": true,
 			"Mask of balance": true,
+			"Painted kitshield": true,
+			"Painted shortbow": true,
+			"Painted shortsword": true,
 			"Peaceful handegg": true,
 			"Rainbow scarf": true,
 			"Snow leopard toy": true,
@@ -224793,7 +225025,7 @@
 			"Box trap": true,
 			"Box trap pack": true,
 			"Butterfly jar": true,
-			"Butterfly net": true,
+			"Insect net": true,
 			"Magic box": true,
 			"Magic imp box pack": true,
 			"Net trap (item)": true,
@@ -225545,7 +225777,7 @@
 			"Box trap": true,
 			"Box trap pack": true,
 			"Butterfly jar": true,
-			"Butterfly net": true,
+			"Insect net": true,
 			"Magic box": true,
 			"Magic imp box pack": true,
 			"Net trap (item)": true,
@@ -226440,7 +226672,7 @@
 			"Box trap": true,
 			"Box trap pack": true,
 			"Butterfly jar": true,
-			"Butterfly net": true,
+			"Insect net": true,
 			"Magic box": true,
 			"Magic imp box pack": true,
 			"Net trap (item)": true,
@@ -231249,6 +231481,22 @@
 				},
 				"Wyrmscraig goat fur": {
 					"1": "1/4"
+				}
+			},
+			"Honey Buzzard": {
+				"Brown feather": {
+					"1": "Always"
+				},
+				"Bones": {
+					"1": "Always"
+				}
+			},
+			"Black Honey Buzzard": {
+				"Black feather": {
+					"1": "Always"
+				},
+				"Bones": {
+					"1": "Always"
 				}
 			}
 		},
@@ -236958,7 +237206,7 @@
 				"Box trap": {
 					"1": "Always"
 				},
-				"Butterfly net": {
+				"Insect net": {
 					"1": "Always"
 				},
 				"Impling jar": {
@@ -238536,10 +238784,10 @@
 					"1": "1/15"
 				},
 				"Ascension crossbows": {
-					"1": "2/210"
+					"1": "2/240"
 				},
 				"Ascension shards": {
-					"75-82": "11/330"
+					"91-93": "55/330"
 				},
 				"Astral rune": {
 					"301-385": "11/330"
@@ -238578,16 +238826,16 @@
 					"24-26": "11/330"
 				},
 				"Fragment of burning fire": {
-					"1": "1/80"
+					"1": "1/56"
 				},
 				"Fragment of deep water": {
-					"1": "1/80"
+					"1": "1/56"
 				},
 				"Fragment of living earth": {
-					"1": "1/80"
+					"1": "1/56"
 				},
 				"Fragment of whispering wind": {
-					"1": "1/80"
+					"1": "1/56"
 				},
 				"Grimy harralander": {
 					"60-66": "7/330"
@@ -238599,7 +238847,7 @@
 					"24-28": "7/330"
 				},
 				"Horn of Bran": {
-					"1": "3/210"
+					"1": "3/240"
 				},
 				"Iron ore": {
 					"851-915": "6/330"
@@ -238614,7 +238862,7 @@
 					"301-385": "11/330"
 				},
 				"Obligator (uncharged)": {
-					"1": "1/210"
+					"1": "1/240"
 				},
 				"Onyx bolt tips": {
 					"50-58": "11/330"
@@ -238629,7 +238877,7 @@
 					"80-92": "6/330"
 				},
 				"Rondache": {
-					"1": "5/210"
+					"1": "5/240"
 				},
 				"Ruby": {
 					"23-27": "11/330"
@@ -238659,7 +238907,7 @@
 					"4-5": "7/330"
 				},
 				"Zorya's tome (uncharged)": {
-					"1": "4/210"
+					"1": "4/240"
 				},
 				"Clue scroll (elite)": {
 					"1": "1/10"
@@ -240045,6 +240293,38 @@
 				},
 				"Uncut sapphire": {
 					"1": "71/110"
+				}
+			},
+			"Bea's supplies loot": {
+				"Bronze arrowtips": {
+					"60-140": "8/60"
+				},
+				"Bronze dart": {
+					"30-70": "8/60"
+				},
+				"Coins": {
+					"150-300": "8/60"
+				},
+				"Hard leather": {
+					"2-6": "3/60"
+				},
+				"Headless arrow": {
+					"60-140": "16/60"
+				},
+				"Iron arrowtips": {
+					"60-140": "5/60"
+				},
+				"Iron dart": {
+					"30-70": "5/60"
+				},
+				"Leather": {
+					"2-6": "5/60"
+				},
+				"Steel arrowtips": {
+					"60-140": "1/60"
+				},
+				"Steel dart": {
+					"30-70": "1/60"
 				}
 			}
 		},
@@ -258398,9 +258678,22 @@
 					"Access the ~|fishing guild|~": "Fishing"
 				}]
 			},
+			"Black Honey Buzzard": {
+				"13108-1": [{
+					"~|The Birds and the Wasps|~ 3": "Quest"
+				}],
+				"13109-1": [{
+					"~|The Birds and the Wasps|~ 3": "Quest"
+				}]
+			},
 			"Guildmaster Jane": {
 				"4922": [{
 					"Access the ~|Farming Guild#Beginner tier|~": "Farming"
+				}]
+			},
+			"Honey Buzzard": {
+				"13108-1": [{
+					"~|The Birds and the Wasps|~ 3": "Quest"
 				}]
 			},
 			"Jade (Warriors' Guild)": {
@@ -258511,6 +258804,16 @@
 			"Shipwright Silrien": {
 				"8500-1": [{
 					"Have the ability to buy a boat from ~|Shipwright Silrien|~": "Sailing"
+				}]
+			},
+			"Swarm of killer wasps": {
+				"13108-1": [{
+					"~|The Birds and the Wasps|~ 3": "Quest"
+				}]
+			},
+			"Swarm of wasps": {
+				"13108-1": [{
+					"~|The Birds and the Wasps|~ 3": "Quest"
 				}]
 			},
 			"Tanner": {
@@ -258710,6 +259013,11 @@
 			"Display case#30": {
 				"12853-1": [{
 					"Access Varrock Museum upstairs": "Nonskill"
+				}]
+			},
+			"Equipment crate": {
+				"13108-1": [{
+					"~|The Birds and the Wasps|~ 3": "Quest"
 				}]
 			},
 			"Evergreen tree (Mac)": {
@@ -264560,12 +264868,14 @@
 			"Redwood logs": true,
 			"Teak logs": true,
 			"Willow logs": true,
-			"Yew logs": true
+			"Yew logs": true,
+			"Wasp sting": true,
+			"Killer wasp sting": true
 		},
 		"hunter|Items": {
 			"Bird snare": true,
 			"Box trap": true,
-			"Butterfly net": true,
+			"Insect net": true,
 			"Desert camo legs": true,
 			"Desert camo top": true,
 			"Gloves of silence": true,
@@ -264581,7 +264891,7 @@
 			"Larupia legs": true,
 			"Larupia top": true,
 			"Magic box": true,
-			"Magic butterfly net": true,
+			"Magic insect net": true,
 			"Small fishing net": true,
 			"Rope": true,
 			"Noose wand": true,
@@ -264599,7 +264909,9 @@
 			"Yew bird house": true,
 			"Magic bird house": true,
 			"Redwood bird house": true,
-			"Wooden spikes": true
+			"Wooden spikes": true,
+			"Bee hunter's hat": true,
+			"Insect repellent": true
 		},
 		"hunter|NPCs": {
 			"Baby impling": true,
@@ -264645,7 +264957,11 @@
 			"Red crab (Hunter)": true,
 			"Blue crab (Hunter)": true,
 			"Rainbow crab (Hunter)": true,
-			"Wyrmscraig goat": true
+			"Wyrmscraig goat": true,
+			"Swarm of wasps": true,
+			"Swarm of kill wasps": true,
+			"Honey Buzzard": true,
+			"Black Honey Buzzard": true
 		},
 		"hunter|Monsters": {
 			"Chinchompa (Hunter)": true,
@@ -318614,7 +318930,7 @@
 			"slot": "weapon",
 			"requirements": {}
 		},
-		"Butterfly net": {
+		"Insect net": {
 			"attack_speed": 4,
 			"attack_crush": 0,
 			"attack_magic": 0,
@@ -319147,7 +319463,7 @@
 				"Ranged": 50
 			}
 		},
-		"Magic butterfly net": {
+		"Magic insect net": {
 			"attack_speed": 6,
 			"attack_crush": 0,
 			"attack_magic": 0,
@@ -326964,6 +327280,82 @@
 			"prayer": 0,
 			"ranged_strength": 0,
 			"slot": "neck",
+			"requirements": {}
+		},
+		"Pink snelm": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -3,
+			"attack_ranged": -1,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 6,
+			"defence_magic": -1,
+			"defence_ranged": 7,
+			"defence_slash": 8,
+			"defence_stab": 7,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "head",
+			"requirements": {}
+		},
+		"Painted shortsword": {
+			"attack_speed": 4,
+			"attack_crush": -2,
+			"attack_magic": 0,
+			"attack_ranged": 0,
+			"attack_slash": 3,
+			"attack_stab": 4,
+			"defence_crush": 1,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 2,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 5,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "weapon",
+			"requirements": {}
+		},
+		"Painted kiteshield": {
+			"attack_speed": 0,
+			"attack_crush": 0,
+			"attack_magic": -8,
+			"attack_ranged": -3,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 6,
+			"defence_magic": -1,
+			"defence_ranged": 6,
+			"defence_slash": 7,
+			"defence_stab": 5,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "shield",
+			"requirements": {}
+		},
+		"Painted shortbow": {
+			"attack_speed": 4,
+			"attack_crush": 0,
+			"attack_magic": 0,
+			"attack_ranged": 8,
+			"attack_slash": 0,
+			"attack_stab": 0,
+			"defence_crush": 0,
+			"defence_magic": 0,
+			"defence_ranged": 0,
+			"defence_slash": 0,
+			"defence_stab": 0,
+			"magic_damage": 0,
+			"melee_strength": 0,
+			"prayer": 0,
+			"ranged_strength": 0,
+			"slot": "2h",
 			"requirements": {}
 		}
 	}
