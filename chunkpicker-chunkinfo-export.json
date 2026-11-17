@@ -126188,6 +126188,10 @@
 				"BaseQuest": "The Writing's on the Wall",
 				"Description": "Talk to Betty, then complete the initial investigation",
 				"Chunks": ["5941-1"],
+				"Skills": {
+					"Agility": 22,
+					"Thieving": 20
+				},
 				"Not F2P": true
 			},
 			"~|The Writing's on the Wall|~ 2": {
