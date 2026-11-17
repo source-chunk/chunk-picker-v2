@@ -51,6 +51,10 @@ body:not(.about):not(.patch):not(.change-password):not(.maps):not(.home) {
     html:not(.about):not(.patch):not(.change-password):not(.maps):not(.home),body:not(.about):not(.patch):not(.change-password):not(.maps):not(.home){overflow: hidden !important;}
 }
 
+.italics {
+    font-style: italic;
+}
+
 a, a:visited {
     color: var(--colorText);
 }
@@ -2924,8 +2928,15 @@ input#searchPlayerMaps {
 }
 
 .tooltip-base-el {
-    margin: 5px;
     pointer-events: all;
+}
+
+.tooltip-base-el:not(.no-margin) {
+    margin: 5px;
+}
+
+[id^='chunkIdTooltip-']:hover {
+    color: var(--colorLink);
 }
 
 label .tooltip-base-el:active {

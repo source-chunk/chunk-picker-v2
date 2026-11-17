@@ -2188,19 +2188,20 @@ let calcChallenges = function(chunks, baseChunkData) {
         let startingSize = tempChunkArray.length;
         let deadChunkArray = [];
         while (indexCount < tempChunkArray.length && indexCount < (startingSize * 2)) {
-            if (!chunks.hasOwnProperty(tempChunkArray[indexCount]) && possibleAreas.hasOwnProperty(tempChunkArray[indexCount])) {
-                let areasStructureKeys = Object.keys(areasStructure[tempChunkArray[indexCount]]);
+            let tempChunk = tempChunkArray[indexCount];
+            if (!unconnectedAreas.includes(tempChunk) && !chunks.hasOwnProperty(tempChunk) && possibleAreas.hasOwnProperty(tempChunk)) {
+                let areasStructureKeys = Object.keys(areasStructure[tempChunk]);
                 if (areasStructureKeys.some(subArea => { return chunks.hasOwnProperty(subArea) })) {
                     areasStructureKeys.filter(subArea => { return chunks.hasOwnProperty(subArea) && (!chunkInfo['sections'].hasOwnProperty(subArea) || !Object.keys(chunkInfo['sections'][subArea]).some((section) => section !== "0") || unlockedSections.hasOwnProperty(subArea)) }).some(subArea => {
                         if (!chunkInfo['chunks'][subArea].hasOwnProperty('Sections')) {
-                            chunks[tempChunkArray[indexCount]] = true;
-                            areasAdded[tempChunkArray[indexCount]] = true;
+                            chunks[tempChunk] = true;
+                            areasAdded[tempChunk] = true;
                             return true;
                         } else {
                             let addedArea = false;
-                            Object.keys(chunkInfo['chunks'][subArea]['Sections']).filter(section => chunkInfo['chunks'][subArea]['Sections'][section].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][subArea]['Sections'][section]['Connect']).some(connect => chunkInfo['chunks'][connect]['Name'] === tempChunkArray[indexCount] && unlockedSections[subArea].hasOwnProperty(section))).some(section => {
-                                chunks[tempChunkArray[indexCount]] = true;
-                                areasAdded[tempChunkArray[indexCount]] = true;
+                            Object.keys(chunkInfo['chunks'][subArea]['Sections']).filter(section => chunkInfo['chunks'][subArea]['Sections'][section].hasOwnProperty('Connect') && Object.keys(chunkInfo['chunks'][subArea]['Sections'][section]['Connect']).some(connect => chunkInfo['chunks'][connect]['Name'] === tempChunk && unlockedSections[subArea].hasOwnProperty(section))).some(section => {
+                                chunks[tempChunk] = true;
+                                areasAdded[tempChunk] = true;
                                 addedArea = true;
                                 return true;
                             });
@@ -2209,9 +2210,9 @@ let calcChallenges = function(chunks, baseChunkData) {
                             }
                         }
                     });
-                } else if (areasStructureKeys.some(subArea => { return tempChunkArray.includes(subArea) && possibleAreas.hasOwnProperty(subArea) }) && !deadChunkArray.includes(tempChunkArray[indexCount])) {
-                    tempChunkArray.push(tempChunkArray[indexCount]);
-                    deadChunkArray.push(tempChunkArray[indexCount]);
+                } else if (areasStructureKeys.some(subArea => { return tempChunkArray.includes(subArea) && possibleAreas.hasOwnProperty(subArea) }) && !deadChunkArray.includes(tempChunk)) {
+                    tempChunkArray.push(tempChunk);
+                    deadChunkArray.push(tempChunk);
                 }
             }
             indexCount++;

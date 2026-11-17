@@ -1535,7 +1535,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.10.6';
+let currentVersion = '6.10.7';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'createdPOF-fix';
@@ -1680,7 +1680,7 @@ let lastUpdated = 0;
 let hintTexts = [
     "Join the ClanChat: 'OneChunkClan'!",
     "Join the Chunk Chat Discord!",
-    "Celebrating over 6 years of Chunk Picking!",
+    "Celebrating over 7 years of Chunk Picking!",
     "Check out our RS3 Sister-site!",
     "Now with Custom Themes!",
     "Fire Team best team!"
@@ -1717,7 +1717,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.10.6";
+mapImg.src = "osrs_world_map.png?v=6.10.7";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3652,7 +3652,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.10.6");
+        myWorker = new Worker("./worker.js?v=6.10.7");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -4016,8 +4016,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.10.6");
-let myWorker2 = new Worker("./worker.js?v=6.10.6");
+let myWorker = new Worker("./worker.js?v=6.10.7");
+let myWorker2 = new Worker("./worker.js?v=6.10.7");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -7196,7 +7196,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.10.6");
+    myWorker2 = new Worker("./worker.js?v=6.10.7");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -11097,6 +11097,7 @@ let goBackDetails = function(type) {
 let showDetails = function(challenge, skill, dataType, isNested) {
     if (!activeContextMenuOpen && (Date.now() > activeContextMenuOpenTime + 10) && !inEntry && !importMenuOpen && !notesModalOpen && !highscoreMenuOpen && !helpMenuOpen) {
         modal.generate('challengeDetailsModal', onMobile);
+        let tooltipCount = 0;
         let baseChunkDataIn = dataType === 'future' ? futureChunkData : baseChunkData;
         let unlockedSectionsIn = dataType === 'future' ? futureUnlockedSections : unlockedSections;
         let chunksIn = !!tempChunks['unlocked'] ? structuredClone(tempChunks['unlocked']) : {};
@@ -11299,14 +11300,19 @@ let showDetails = function(challenge, skill, dataType, isNested) {
                                     if (typeof baseChunkDataIn[type][element][source] === "boolean" || !skills.includes(baseChunkDataIn[type][element][source].split('-')[1])) {
                                         if (chunkInfo['chunks'].hasOwnProperty(source.split('-')[0])) {
                                             let realName = source.match(/^[0-9]+(-(W)?[0-9]+)?$/g) ? source.match(/^[0-9]+(-(W)?[0-9]+)?$/g)[0] : source;
+                                            let hoverText = '';
                                             if (source.match(/[0-9]+-(W)?[0-9]+/g)) {
-                                                realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname'] + '(' + source.match(/[0-9]+/g)[0] + ' - Section ' + source.split('-')[1] + ')';
+                                                realName = chunkInfo['chunks'][source.match(/[0-9]+/g)[0]]['Nickname'];
+                                                hoverText = source.match(/[0-9]+/g)[0] + ' - Section ' + source.split('-')[1];
                                             } else if (source.match(/^[0-9]+(-(W)?[0-9]+)?$/g) && !!chunkInfo['chunks'][source.match(/^[0-9]+(-(W)?[0-9]+)?$/g)[0]]['Name']) {
                                                 realName = chunkInfo['chunks'][source.match(/^[0-9]+(-(W)?[0-9]+)?$/g)[0]]['Name'];
                                             } else if (source.match(/^[0-9]+(-(W)?[0-9]+)?$/g) && !!chunkInfo['chunks'][source.match(/^[0-9]+(-(W)?[0-9]+)?$/g)[0]]['Nickname']) {
-                                                realName = chunkInfo['chunks'][source.match(/^[0-9]+(-(W)?[0-9]+)?$/g)[0]]['Nickname'] + '(' + source.match(/^[0-9]+(-(W)?[0-9]+)?$/g)[0] + ')';
+                                                realName = chunkInfo['chunks'][source.match(/^[0-9]+(-(W)?[0-9]+)?$/g)[0]]['Nickname'];
+                                                hoverText = source.match(/^[0-9]+(-(W)?[0-9]+)?$/g)[0];
                                             }
-                                            formattedSource += `<span class='noscroll ${typeof baseChunkDataIn[type][element][source] !== "boolean" && (baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop')) ? 'green' : ''}'>${realName.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</span>`;
+                                            let tooltipBase = `<span class='noscroll ${typeof baseChunkDataIn[type][element][source] !== "boolean" && (baseChunkDataIn[type][element][source].includes('primary-') || baseChunkDataIn[type][element][source].includes('shop')) ? 'green' : ''} ${hoverText.length > 0 ? 'italics' : ''}'>${realName.replaceAll(/\|/g, '').replaceAll(/~/g, '').replaceAll(/\*/g, '')}</span>`;
+                                            formattedSource += hoverText.length > 0 ? tooltip.generate(hoverText, tooltipBase, `chunkIdTooltip-${tooltipCount}`, 'top', '110px', true) : tooltipBase;
+                                            tooltipCount++;
                                         } else {
                                             let shownSource = source;
                                             if (shownSource.includes('|')) {
@@ -11596,7 +11602,7 @@ let showNotes = function(challenge, skill, note) {
     $('#notes-data').append(`<div class="notes-row noscroll"><label class="radio noscroll ${(!testMode && (viewOnly || inEntry || locked)) ? "radio--disabled" : ''}"><span class="radio__input noscroll"><input type="radio" name="radio" checked="true" class='noscroll' onclick="saveNotesData('task', null)" ${(!testMode && (viewOnly || inEntry || locked)) ? "disabled" : ''}><span class="radio__control noscroll"><svg viewBox='0 0 24 24' aria-hidden="true" focusable="false"><path fill='currentColor' stroke='currentColor' d='M 12 12 m -7.5 0 a 7.5 7.5 90 1 0 15 0 a 7.5 7.5 90 1 0 -15 0' /></svg></span></span><span class="radio__label noscroll"><b class="noscroll">Backlog just this task</b></span></label></div>`);
     $('#notes-data').append(`<div class="noscroll">(Optional) Add notes:</div><div class='backlog-textarea-wrapper noscroll'><textarea maxlength="128"></textarea></div>`);
     let sourceWritten = false;
-    detailsKeys.forEach((key) => {
+    !!chunkInfo['challenges'][skill][challenge] && detailsKeys.forEach((key) => {
         let keyWritten = false;
         let type = key.split('Details')[0].toLowerCase();
         if ((!chunkInfo['challenges'][skill][challenge][key] || chunkInfo['challenges'][skill][challenge][key].length < 1) && !!chunkInfo['challenges'][skill][challenge][key.split('Details')[0]]) {

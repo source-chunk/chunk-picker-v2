@@ -66,7 +66,7 @@ let hideTooltip = function() {
 }
 
 window.tooltip = {
-    generate(content, baseEl, id, position = 'top', width = '220px') {
-        return `<span id="${id}" class="tooltip-base-el" onmouseover="showTooltip('${content}', '${id}', '${position}', '${width}')" onmouseout="hideTooltip()" onclick="return">${baseEl}</span>`;
+    generate(content, baseEl, id, position = 'top', width = '220px', noMargin = false) {
+        return `<span id="${id}" class="tooltip-base-el${noMargin ? ' no-margin' : ''}" onmouseover="showTooltip('${content}', '${id}', '${position}', '${width}')" onmouseout="hideTooltip()" onclick="return">${baseEl}</span>`;
     }
 };
