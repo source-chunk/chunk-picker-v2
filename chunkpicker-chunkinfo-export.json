@@ -29166,6 +29166,14 @@
 				"Output Object": "Runite rocks",
 				"Not F2P": true
 			},
+			"Take bowls from the crate in Dishop Dennis's house": {
+				"Chunks": ["5178"],
+				"Tasks": {
+					"~|A New Leaf|~ 3a1": "Quest"
+				},
+				"Output": "Bowl",
+				"Not F2P": true
+			},
 			"Trade Farmer Bea for Bea's supplies": {
 				"Items": ["Wasp dart[+]*"],
 				"NPCs": ["Farmer Bea"],
@@ -57770,6 +57778,14 @@
 				"Level": 56,
 				"Primary": false,
 				"Priority": 999
+			},
+			"~|Rag and Bone Man III|~ Slayer skill requirement": {
+				"Category": ["Quest Skill Reqs"],
+				"Chunks": ["13366"],
+				"Level": 58,
+				"Primary": false,
+				"Priority": 999,
+				"NoBoost": true
 			},
 			"~|The Fremennik Exiles|~ Slayer skill requirement": {
 				"Category": ["Quest Skill Reqs"],
@@ -118512,6 +118528,198 @@
 				"Chunks": ["Nature Grotto Cave"],
 				"Not F2P": true
 			},
+			"~|A New Leaf|~ 1": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Pick and eat a cabbage from the Hosidius patch",
+				"Chunks": ["6967"],
+				"Skills": {
+					"Farming": 45,
+					"Cooking": 35,
+					"Herblore": 32
+				},
+				"Tasks": {
+					"~|Priest in Peril|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 2": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Talk to Dishop Dennis",
+				"NPCs": ["Dishop Dennis"],
+				"Tasks": {
+					"~|A New Leaf|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 3a1": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Grow the special crops, then make the stew",
+				"Chunks": ["4922", "5178"],
+				"Items": ["Spade", "Seed dibber"],
+				"Tasks": {
+					"~|A New Leaf|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 3a2a": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Deliver the stew to Guildmaster Jane",
+				"NPCs": ["Guildmaster Jane"],
+				"Tasks": {
+					"~|A New Leaf|~ 3a1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 3a2b": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Deliver the stew to Mary and the Seargant",
+				"Chunks": ["4921-1"],
+				"Tasks": {
+					"~|A New Leaf|~ 3a1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 3a2c": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Deliver the stew to Konar",
+				"NPCs": ["Konar quo Maten"],
+				"Tasks": {
+					"~|A New Leaf|~ 3a1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 3a3": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Return to Dennis",
+				"NPCs": ["Dishop Dennis"],
+				"Tasks": {
+					"~|A New Leaf|~ 3a2a": "Quest",
+					"~|A New Leaf|~ 3a2b": "Quest",
+					"~|A New Leaf|~ 3a2c": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 3b1": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Bring Dennis a cabbage",
+				"NPCs": ["Dishop Dennis"],
+				"Items": ["Cabbage"],
+				"Tasks": {
+					"~|A New Leaf|~ 2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 3b2": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Fetch the book from Allanna",
+				"NPCs": ["Allanna"],
+				"Tasks": {
+					"~|A New Leaf|~ 3b1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 3b3": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Make the potion, then return to Dennis",
+				"Chunks": ["5178"],
+				"Items": ["Vial of water", "Cabbage"],
+				"Tasks": {
+					"~|A New Leaf|~ 3b2": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 4": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Talk to Dennis for the next task",
+				"NPCs": ["Dishop Dennis"],
+				"Tasks": {
+					"~|A New Leaf|~ 3a3": "Quest",
+					"~|A New Leaf|~ 3b3": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 5a": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Plant a sprout spy at the ranges in Falador castle",
+				"Chunks": ["11828-1"],
+				"Tasks": {
+					"~|A New Leaf|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 5b": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Plant a sprout spy at the range in the Mess hall",
+				"Chunks": ["6456-1"],
+				"Tasks": {
+					"~|A New Leaf|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 5c": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Plant a sprout spy at the ranges in the Grand Tree",
+				"Chunks": ["9782"],
+				"Tasks": {
+					"~|A New Leaf|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 5d": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Plant a sprout spy at the range in Port Phasmatys",
+				"Chunks": ["14646-1"],
+				"Tasks": {
+					"~|A New Leaf|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 5e": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Plant a sprout spy at the range in Al Kharid",
+				"Chunks": ["13105-1"],
+				"Tasks": {
+					"~|A New Leaf|~ 4": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 6": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Return to Dennis",
+				"NPCs": ["Dishop Dennis"],
+				"Tasks": {
+					"~|A New Leaf|~ 5a": "Quest",
+					"~|A New Leaf|~ 5b": "Quest",
+					"~|A New Leaf|~ 5c": "Quest",
+					"~|A New Leaf|~ 5d": "Quest",
+					"~|A New Leaf|~ 5e": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ 7": {
+				"BaseQuest": "A New Leaf",
+				"Description": "Defeat the angry farmers, then return to Dennis",
+				"Chunks": ["5177", "5178"],
+				"Tasks": {
+					"~|A New Leaf|~ 6": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|A New Leaf|~ Complete the quest": {
+				"Tasks": {
+					"~|A New Leaf|~ 7": "Quest"
+				},
+				"QuestPoints": 2,
+				"XpReward": {
+					"Farming": 10000,
+					"Cooking": 2000,
+					"Herblore": 2000,
+					"Attack|Defence|Strength|Hitpoints|Ranged|Magic|Prayer": 2500
+				},
+				"BaseQuest": "A New Leaf",
+				"Chunks": ["5178"],
+				"Not F2P": true
+			},
 			"~|A Night at the Theatre|~ 1": {
 				"BaseQuest": "A Night at the Theatre",
 				"Description": "Talk to the Mysterious Stanger",
@@ -120162,6 +120370,67 @@
 				},
 				"BaseQuest": "Rag and Bone Man II",
 				"Reward": ["Bonesack", "Ram skull helm"],
+				"Chunks": ["13366"],
+				"Not F2P": true
+			},
+			"~|Rag and Bone Man III|~ 1": {
+				"BaseQuest": "Rag and Bone Man III",
+				"Description": "Talk to the Odd Old Man",
+				"NPCs": ["Odd Old Man"],
+				"Skills": {
+					"Slayer": 58
+				},
+				"Tasks": {
+					"~|Rag and Bone Man II|~ Complete the quest": "Quest",
+					"~|Dragon Slayer I|~ Complete the quest": "Quest",
+					"~|The Great Brain Robbery|~ Complete the quest": "Quest",
+					"~|Defender of Varrock|~ Complete the quest": "Quest",
+					"~|Tower of Life|~ Complete the quest": "Quest",
+					"~|A Soul's Bane|~ Complete the quest": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Rag and Bone Man III|~ 2": {
+				"BaseQuest": "Rag and Bone Man III",
+				"Description": "Collect any two bones, then return to the Odd Old Man",
+				"Chunks": ["13366"],
+				"NPCs": ["Odd Old Man"],
+				"Tasks": {
+					"~|Rag and Bone Man III|~ 1": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Rag and Bone Man III|~ 3": {
+				"BaseQuest": "Rag and Bone Man III",
+				"Description": "Continue through the time loop and kill the Skeletal Horror",
+				"Chunks": ["13366"],
+				"NPCs": ["Odd Old Man"],
+				"Tasks": {
+					"~|Rag and Bone Man III|~ 2": "Quest"
+				},
+				"Reward": ["Earmuffs"],
+				"Not F2P": true
+			},
+			"~|Rag and Bone Man III|~ 4": {
+				"BaseQuest": "Rag and Bone Man III",
+				"Description": "Talk to the Odd Old Man again",
+				"NPCs": ["Odd Old Man"],
+				"Tasks": {
+					"~|Rag and Bone Man III|~ 3": "Quest"
+				},
+				"Not F2P": true
+			},
+			"~|Rag and Bone Man III|~ Complete the quest": {
+				"Tasks": {
+					"~|Rag and Bone Man III|~ 4": "Quest"
+				},
+				"QuestPoints": 3,
+				"XpReward": {
+					"Prayer": 10000,
+					"Slayer": 10000
+				},
+				"BaseQuest": "Rag and Bone Man III",
+				"Reward": ["Heavy bonesack"],
 				"Chunks": ["13366"],
 				"Not F2P": true
 			},
@@ -127091,15 +127360,6 @@
 				},
 				"Not F2P": true
 			},
-			"~|The Fractured Archive (miniquest)|~ 2": {
-				"BaseQuest": "The Fractured Archive (miniquest)",
-				"Description": "Complete a Fractured Archive raid",
-				"Chunks": ["The Fractured Archive"],
-				"Tasks": {
-					"~|The Fractured Archive (miniquest)|~ 1": "Quest"
-				},
-				"Not F2P": true
-			},
 			"~|The Fractured Archive (miniquest)|~ 3": {
 				"BaseQuest": "The Fractured Archive (miniquest)",
 				"Description": "Talk to the others outside the raid",
@@ -128526,7 +128786,8 @@
 						"Yew tree": 3
 					},
 					"Quest": {
-						"Getting Ahead": "first"
+						"Getting Ahead": "first",
+						"A New Leaf": "step"
 					},
 					"Spawn": {
 						"Bucket": 2,
@@ -128621,6 +128882,9 @@
 				"Twisted bush": 1,
 				"Water barrel": 1,
 				"Water tap": 2
+			},
+			"Quest": {
+				"A New Leaf": "step"
 			},
 			"Shop": {
 				"Allanna's Farming Shop": true,
@@ -129113,6 +129377,9 @@
 				"Tree": 19,
 				"Wheat": 55,
 				"Willow tree": 6
+			},
+			"Quest": {
+				"A New Leaf": "step"
 			}
 		},
 		"5178": {
@@ -129129,6 +129396,7 @@
 				"Imp": 1
 			},
 			"NPC": {
+				"Dishop Dennis": 1,
 				"Keith": 1,
 				"Squirrel": 4
 			},
@@ -129136,7 +129404,6 @@
 			"Object": {
 				"Bookcase": 3,
 				"Broken cart wheel": 1,
-				"Cooking pot": 1,
 				"Crates": 1,
 				"Dairy cow": 1,
 				"Dead tree": 5,
@@ -129150,10 +129417,11 @@
 				"Willow tree": 7
 			},
 			"Quest": {
-				"A Kingdom Divided": "step"
+				"A Kingdom Divided": "step",
+				"A New Leaf": "step"
 			},
 			"Spawn": {
-				"Grain": 1,
+				"Grain": 3,
 				"Knife": 1,
 				"Rope": 1
 			},
@@ -129200,7 +129468,8 @@
 				"Volcanic Furnace": 1
 			},
 			"Quest": {
-				"The Ascent of Arceuus": "step"
+				"The Ascent of Arceuus": "step",
+				"A New Leaf": "step"
 			},
 			"Shop": {
 				"Mount Karuulm Weapon Shop": true,
@@ -133259,6 +133528,9 @@
 						"Tree": 16,
 						"Utensil cupboard": 1
 					},
+					"Quest": {
+						"A New Leaf": "step"
+					},
 					"Spawn": {
 						"Beer glass": 1,
 						"Candle": 2,
@@ -135324,6 +135596,7 @@
 			"Quest": {
 				"A Kingdom Divided": "step",
 				"The Depths of Despair": "first",
+				"A New Leaf": "step",
 				"The Writing's on the Wall": "step"
 			},
 			"Shop": {
@@ -144378,7 +144651,8 @@
 				"Monkey Madness II": "first",
 				"The Eyes of Glouphrie": "step",
 				"The Path of Glouphrie": "step",
-				"The Grand Tree": "first"
+				"The Grand Tree": "first",
+				"A New Leaf": "step"
 			},
 			"Shop": {
 				"Blurberry Bar": true,
@@ -156314,6 +156588,7 @@
 						"Devious Minds": "step",
 						"Dragon Slayer II": "step",
 						"Garden of Tranquillity": "step",
+						"A New Leaf": "step",
 						"Pirate's Treasure": "step",
 						"Recipe for Disaster/Freeing the Mountain Dwarf": "step",
 						"Recruitment Drive": "first",
@@ -163432,6 +163707,7 @@
 					},
 					"Quest": {
 						"Contact!": "step",
+						"A New Leaf": "step",
 						"Prince Ali Rescue": "first",
 						"Shadow of the Storm": "first"
 					},
@@ -165205,7 +165481,8 @@
 				"The Curse of Arrav": "step",
 				"Defender of Varrock": "step",
 				"Rag and Bone Man I": "first",
-				"Rag and Bone Man II": "first"
+				"Rag and Bone Man II": "first",
+				"Rag and Bone Man III": "first"
 			},
 			"Clue": {
 				"easy": 1,
@@ -168344,7 +168621,8 @@
 						"Cabin Fever": "first",
 						"Dragon Slayer II": "step",
 						"Ghosts Ahoy": "first",
-						"Making History": "step"
+						"Making History": "step",
+						"A New Leaf": "step"
 					},
 					"Shop": {
 						"Ak-Haranu's Exotic Shop.": true,
@@ -177508,7 +177786,7 @@
 			"PlantedSpiritTreeChunks[+]": ["10300-1", "12082-1", "11058-1", "6711-1", "4922", "Player-owned house"],
 			"Alone[+]": ["11830-2", "11830-3", "11830-4", "11831", "12086-1", "12087-2", "Clock Tower Dungeon"],
 			"OntheShore[+]": ["10028-1", "10284-1"],
-			"TheForlornHomestead[+]": ["6455-1", "6455-2", "6456-1", "6456-2", "6456-3", "6456-4", "6456-5", "6711-1", "6711-2", "6712-1", "6712-2", "6967", "6968-1", "6968-2", "7224-1", "7224-2"],
+			"TheForlornHomestead[+]": ["6711-2", "6712-1", "6712-2", "6967", "6968-1", "7223-1", "7224-1", "7224-2", "7224-3"],
 			"Subterranea[+]": ["Crabclaw Caves", "Waterbirth Island Dungeon"],
 			"HellsBells[+]": ["11066", "11067"],
 			"DungChunks[+]": ["13105-1", "13358-1"],
@@ -177915,7 +178193,7 @@
 			"MooringPortRoberts[+]": "Either side of the mooring point at Port Roberts",
 			"MooringAnglersRetreat[+]": "Either side of the mooring point at Anglers' Retreat",
 			"MooringRedRock[+]": "Either side of the mooring point at Red Rock",
-			"MooringRedRock[+]": "Either side of the mooring point at Last Light",
+			"MooringLastLight[+]": "Either side of the mooring point at Last Light",
 			"MooringMinotaursRest[+]": "Either side of the mooring point at Minotaurs' Rest",
 			"MooringIsleofBones[+]": "Either side of the mooring point at Isle of Bones",
 			"MooringLagunaAurorae[+]": "Either side of the mooring point at Laguna Aurorae",
@@ -178281,7 +178559,6 @@
 			"Black armour[+]": ["Black boots", "Black med helm", "Black full helm", "Black sq shield", "Black plateskirt", "Black kiteshield", "Black platelegs", "Black chainbody", "Black platebody"],
 			"Black dragonhide armour[+]": ["Black d'hide chaps", "Black d'hide vambraces", "Black d'hide body", "Black spiky vambraces"],
 			"Black key[+]": ["Black key red", "Black key brown", "Black key crimson", "Black key black", "Black key purple"],
-			"Black legs[+]": ["Black platelegs", "Black plateskirt"],
 			"BlackWep[+]": ["Black dagger", "Black pickaxe", "Black axe", "Black mace", "Black shortsword", "Black scimitar", "Black longsword", "Black battleaxe", "Black claws", "Black spear", "Black 2h sword"],
 			"Blackjack[+]": ["Oak blackjack", "Oak blackjack(o)", "Oak blackjack(d)", "Willow blackjack", "Willow blackjack(o)", "Willow blackjack(d)", "Maple blackjack", "Maple blackjack(o)", "Maple blackjack(d)"],
 			"Blessed dragonhide armour[+]": ["Saradomin coif", "Saradomin body", "Saradomin bracers", "Saradomin boots", "Saradomin shield", "Guthix coif", "Guthix body", "Guthix bracers", "Guthix boots", "Guthix shield", "Zamorak coif", "Zamorak body", "Zamorak bracers", "Zamorak boots", "Zamorak shield", "Armadyl coif", "Armadyl body", "Armadyl bracers", "Armadyl boots", "Armadyl shield", "Bandos coif", "Bandos body", "Bandos bracers", "Bandos boots", "Bandos shield", "Ancient coif", "Ancient body", "Ancient bracers", "Ancient boots", "Ancient shield"],
@@ -178696,7 +178973,6 @@
 			"Black armour[+]": "Any black armour piece",
 			"Black dragonhide armour[+]": "Any black dragonhide armour piece",
 			"Black key[+]": "Any black key",
-			"Black legs[+]": "Any black leg armour piece",
 			"BlackWep[+]": "Any black weapon",
 			"Blackjack[+]": "Any blackjack",
 			"Blessed dragonhide armour[+]": "Any blessed dragonhide armour piece",
@@ -221732,6 +222008,7 @@
 		"Murder Mystery": "10806, 10807",
 		"My Arm's Big Adventure": "10547, 11056, 11320, 11321, Troll Stronghold, DungChunks[+]",
 		"Nature Spirit": "13620, 13622, Nature Grotto Cave",
+		"A New Leaf": "4921, 4922, 5177, 5178, 5179, 6456, 6967, 9782, 11828, 13105, 14646",
 		"A Night at the Theatre": "13876, 14642, 14645, Morytania Spider Nest, Nature Grotto Cave, Sisterhood Sanctuary, Theatre of Blood",
 		"Observatory Quest": "9777, Observatory Dungeon",
 		"Olaf's Quest": "10553, 10810, Brine Rat Cavern",
@@ -221745,6 +222022,7 @@
 		"The Queen of Thieves": "6713, 7226, 7227, The Warrens",
 		"Rag and Bone Man I": "12338, 13366",
 		"Rag and Bone Man II": "12338, 13366",
+		"Rag and Bone Man III": "13366",
 		"Ratcatchers": "10291, 10810, 12082, 12597, 12854, 13108, 13109, 13358, Varrock Sewers, Keldagrim, Port Sarim Rat Pits",
 		"Recipe for Disaster/Another Cook's Quest": "12850",
 		"Recipe for Disaster/Defeating the Culinaromancer": "12850",
@@ -232668,10 +232946,12 @@
 					"4-6 (noted)": "2/168"
 				},
 				"Iron cannonball": {
-					"30-40": "1/168"
+					"30-40": "1/168",
+					"40-60": "8/168"
 				},
 				"Steel cannonball": {
-					"30-40": "1/168"
+					"30-40": "1/168",
+					"40-60": "8/168"
 				},
 				"Casket": {
 					"1 (noted)": "2/168"
@@ -232719,12 +232999,6 @@
 				"Coal": {
 					"10-20 (noted)": "8/168",
 					"20-40 (noted)": "2/504"
-				},
-				"Iron cannonball": {
-					"40-60": "8/168"
-				},
-				"Steel cannonball": {
-					"40-60": "8/168"
 				},
 				"Iron nails": {
 					"20-30": "8/168"
@@ -232998,10 +233272,12 @@
 					"25-52": "2/465"
 				},
 				"Mithril cannonball": {
-					"25": "2/465"
+					"25": "2/465",
+					"40-60": "8/155"
 				},
 				"Adamant cannonball": {
-					"32-40": "2/465"
+					"32-40": "2/465",
+					"40-60": "8/155"
 				},
 				"Casket": {
 					"1 (noted)": "2/155"
@@ -233053,12 +233329,6 @@
 				},
 				"Adamantite ore": {
 					"10-20 (noted)": "8/155"
-				},
-				"Mithril cannonball": {
-					"40-60": "8/155"
-				},
-				"Adamant cannonball": {
-					"40-60": "8/155"
 				},
 				"Mithril nails": {
 					"20-30": "8/155"
@@ -238788,7 +239058,7 @@
 					"1": "1/15"
 				},
 				"Ascension crossbows": {
-					"1": "2/240"
+					"1": "2/255"
 				},
 				"Ascension shards": {
 					"91-93": "55/330"
@@ -238851,7 +239121,7 @@
 					"24-28": "7/330"
 				},
 				"Horn of Bran": {
-					"1": "3/240"
+					"1": "3/255"
 				},
 				"Iron ore": {
 					"851-915": "6/330"
@@ -238866,7 +239136,7 @@
 					"301-385": "11/330"
 				},
 				"Obligator (uncharged)": {
-					"1": "1/240"
+					"1": "1/255"
 				},
 				"Onyx bolt tips": {
 					"50-58": "11/330"
@@ -238881,7 +239151,7 @@
 					"80-92": "6/330"
 				},
 				"Rondache": {
-					"1": "5/240"
+					"1": "5/255"
 				},
 				"Ruby": {
 					"23-27": "11/330"
@@ -238911,7 +239181,7 @@
 					"4-5": "7/330"
 				},
 				"Zorya's tome (uncharged)": {
-					"1": "4/240"
+					"1": "4/255"
 				},
 				"Clue scroll (elite)": {
 					"1": "1/10"

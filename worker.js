@@ -202,6 +202,7 @@ let fractionsCache = {};
 let rareDropNumCalced;
 let secondaryPrimaryNumCalced;
 let secondaryPrimaryDenom;
+let manualTaskLevel = {};
 
 onmessage = function(e) {
     try {
@@ -727,10 +728,13 @@ let calcChallenges = function(chunks, baseChunkData) {
         }
     });
     !!manualTasks && Object.keys(manualTasks).forEach((skill) => {
-        if (skill !== 'BiS') return;
         Object.keys(manualTasks[skill]).forEach((challenge) => {
             let chalObj = chunkInfo['challenges'][skill][challenge];
             if (!!chunkInfo['challenges'][skill] && !!chalObj) {
+                if (!manualTaskLevel[skill] || chalObj['Level'] > manualTaskLevel[skill]) {
+                    manualTaskLevel[skill] = chalObj['Level'];
+                }
+                if (skill !== 'BiS') return;
                 if (!valids[skill]) {
                     valids[skill] = {};
                 }
@@ -2189,10 +2193,11 @@ let calcChallenges = function(chunks, baseChunkData) {
         let deadChunkArray = [];
         while (indexCount < tempChunkArray.length && indexCount < (startingSize * 2)) {
             let tempChunk = tempChunkArray[indexCount];
-            if (!unconnectedAreas.includes(tempChunk) && !chunks.hasOwnProperty(tempChunk) && possibleAreas.hasOwnProperty(tempChunk)) {
+            if (!chunks.hasOwnProperty(tempChunk) && possibleAreas.hasOwnProperty(tempChunk)) {
                 let areasStructureKeys = Object.keys(areasStructure[tempChunk]);
                 if (areasStructureKeys.some(subArea => { return chunks.hasOwnProperty(subArea) })) {
                     areasStructureKeys.filter(subArea => { return chunks.hasOwnProperty(subArea) && (!chunkInfo['sections'].hasOwnProperty(subArea) || !Object.keys(chunkInfo['sections'][subArea]).some((section) => section !== "0") || unlockedSections.hasOwnProperty(subArea)) }).some(subArea => {
+                        if (unconnectedAreas.includes(tempChunk) && (!chunkInfo['chunks'][subArea] || !chunkInfo['chunks'][subArea].hasOwnProperty('Nickname'))) return true;
                         if (!chunkInfo['chunks'][subArea].hasOwnProperty('Sections')) {
                             chunks[tempChunk] = true;
                             areasAdded[tempChunk] = true;
@@ -3515,19 +3520,22 @@ let calcChallenges = function(chunks, baseChunkData) {
                 let selectedRate = stillValid ? 'OnTask' : 'OffTask';
                 let droprate = (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) ? chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] : findFraction(parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')));
                 if (droprate <= 0) {
-                    delete baseChunkData['items'][drop][slayerTaskName];
+                    !!baseChunkData['items'][drop] && delete baseChunkData['items'][drop][slayerTaskName];
                     if (!!baseChunkData['items'][drop] && Object.keys(baseChunkData['items'][drop]).length <= 0) {
                         delete baseChunkData['items'][drop];
                     }
-                    delete dropRatesGlobal[monster][drop];
-                    if (!!dropRatesGlobal[monster][drop] && Object.keys(dropRatesGlobal[monster][drop]).length <= 0) {
-                        delete dropRatesGlobal[monster][drop];
+                    !!dropRatesGlobal[monster] && delete dropRatesGlobal[monster][drop];
+                    if (!!dropRatesGlobal[monster] && Object.keys(dropRatesGlobal[monster]).length <= 0) {
+                        delete dropRatesGlobal[monster];
                     }
-                    delete dropTablesGlobal[monster][drop];
-                    if (!!dropTablesGlobal[monster][drop] && Object.keys(dropTablesGlobal[monster][drop]).length <= 0) {
-                        delete dropTablesGlobal[monster][drop];
+                    !!dropTablesGlobal[monster] && delete dropTablesGlobal[monster][drop];
+                    if (!!dropTablesGlobal[monster] && Object.keys(dropTablesGlobal[monster]).length <= 0) {
+                        delete dropTablesGlobal[monster];
                     }
                 } else {
+                    if (!baseChunkData['items'][drop]) {
+                        baseChunkData['items'][drop] = {};
+                    }
                     if (chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate] === 'Always' || (secondaryPrimaryDenom > 50 && isNaN(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].replaceAll('/', '').replaceAll('@', ''))) || ((chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1 && secondaryPrimaryNumCalced < 1) || (!(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/').length <= 1) && (parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[0].replaceAll('~', '')) / parseFloat(chunkInfo['codeItems']['slayerUniques'][drop][monster][selectedRate].split('/')[1].replaceAll('~', '')) >= secondaryPrimaryNumCalced)))) {
                         baseChunkData['items'][drop][slayerTaskName] = 'primary-drop';
                     } else {
@@ -5351,7 +5359,7 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData) {
             !!valids[skill] && Object.keys(valids[skill]).some((challenge) => {
                 let chalObj = chunkInfo['challenges'][skill][challenge];
                 let bestBoost = getBestBoost(skill, challenge, baseChunkData);
-                if ((((chalObj['Primary'] && (!chalObj['Secondary'])) && (chalObj['Level'] === 1 || (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] > 1 && chalObj['Level'] <= passiveSkill[skill] + bestBoost) || ((!!skillQuestXp && skillQuestXp.hasOwnProperty(skill) && chalObj['Level'] <= skillQuestXp[skill]['level'] + bestBoost))) && ((!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/')))))) || chalObj['Manual']) && (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil') || baseChunkData['objects'].hasOwnProperty('Rusted anvil'))) {
+                if (((chalObj['Primary'] && (!chalObj['Secondary'])) && (chalObj['Level'] === 1 || (!!passiveSkill && passiveSkill.hasOwnProperty(skill) && passiveSkill[skill] > 1 && chalObj['Level'] <= passiveSkill[skill] + bestBoost) || ((!!skillQuestXp && skillQuestXp.hasOwnProperty(skill) && chalObj['Level'] <= skillQuestXp[skill]['level'] + bestBoost)) || (!!manualTaskLevel[skill] && chalObj['Level'] <= manualTaskLevel[skill] + bestBoost)) && ((!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/')))))) && (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil') || baseChunkData['objects'].hasOwnProperty('Rusted anvil'))) {
                     primaryTasks = true;
                     return true;
                 }
@@ -5447,7 +5455,7 @@ let checkPrimaryMethod = function(skill, valids, baseChunkData) {
         manualTasksKeys.some((challenge) => {
             let chalObj = chunkInfo['challenges'][skill][challenge];
             let primaryValid = false;
-            if (((chalObj && chalObj['Primary'] && (!chalObj['Secondary'])) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/'))))) || (chalObj && chalObj['Manual'])) {
+            if (((chalObj && chalObj['Primary'] && (!chalObj['Secondary'])) && (!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/')))))) {
                 if (skill !== 'Smithing' || rules['Smithing by Smelting'] || baseChunkData['objects'].hasOwnProperty('Anvil') || baseChunkData['objects'].hasOwnProperty('Rusted anvil')) {
                     primaryValid = true;
                 }
@@ -8688,7 +8696,7 @@ let calcCurrentChallenges2 = function() {
                             if ((!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/'))))) {
                                 if (!!chalObj['Skills']) {
                                     let tempValid = true;
-                                    Object.keys(chalObj['Skills']).some(subSkill => (!checkPrimaryMethod(subSkill, globalValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] < chalObj['Skills'][subSkill]) && (subSkill !== 'Slayer' || !slayerLocked || chalObj['Skills'][subSkill] > slayerLocked['level'])) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && chalObj['Skills'][subSkill] > maxSkill[subSkill])) && (tempValid = false);
+                                    Object.keys(chalObj['Skills']).some(subSkill => (!checkPrimaryMethod(subSkill, globalValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] < chalObj['Skills'][subSkill]) && (subSkill !== 'Slayer' || !slayerLocked || chalObj['Skills'][subSkill] > slayerLocked['level']) && chalObj['Skills'][subSkill] > 1) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && chalObj['Skills'][subSkill] > maxSkill[subSkill])) && (tempValid = false);
                                     if (tempValid) {
                                         highestChallenge[skill] = challenge;
                                     }
@@ -8712,7 +8720,7 @@ let calcCurrentChallenges2 = function() {
                             if ((!backlog[skill] || (!backlog[skill].hasOwnProperty(challenge) && !backlog[skill].hasOwnProperty(challenge.replaceAll('#', '/'))))) {
                                 if (!!chalObj['Skills']) {
                                     let tempValid = true;
-                                    Object.keys(chalObj['Skills']).some(subSkill => (!checkPrimaryMethod(subSkill, globalValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] < chalObj['Skills'][subSkill]) && (subSkill !== 'Slayer' || !slayerLocked || chalObj['Skills'][subSkill] > slayerLocked['level'])) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && chalObj['Skills'][subSkill] > maxSkill[subSkill])) && (tempValid = false);
+                                    Object.keys(chalObj['Skills']).some(subSkill => (!checkPrimaryMethod(subSkill, globalValids, baseChunkData) && (!passiveSkill || !passiveSkill.hasOwnProperty(subSkill) || passiveSkill[subSkill] < chalObj['Skills'][subSkill]) && (subSkill !== 'Slayer' || !slayerLocked || chalObj['Skills'][subSkill] > slayerLocked['level']) && chalObj['Skills'][subSkill] > 1) || (!!maxSkill && maxSkill.hasOwnProperty(subSkill) && chalObj['Skills'][subSkill] > maxSkill[subSkill])) && (tempValid = false);
                                     if (tempValid) {
                                         highestChallenge[skill] = challenge;
                                     }
@@ -8775,7 +8783,7 @@ let calcCurrentChallenges2 = function() {
                 let nameObj = chunkInfo['challenges'][skill][name];
                 if (nameObj.hasOwnProperty('NoBoost')) return false;
                 let [bestBoost2, bestBoostSource2] = getBestBoost(skill, name, baseChunkData, true);
-                if (bestBoost2 > 0) {
+                if (bestBoost2 > 0 && !!bestBoostSource2) {
                     if (!nameObj.hasOwnProperty((bestBoostSource2.includes('~') ? (bestBoostSource2.split('~')[1].charAt(0).toUpperCase() + bestBoostSource2.split('~')[1].slice(1)) : 'Items') + 'Details')) {
                         nameObj[(bestBoostSource2.includes('~') ? (bestBoostSource2.split('~')[1].charAt(0).toUpperCase() + bestBoostSource2.split('~')[1].slice(1)) : 'Items') + 'Details'] = [];
                     }
