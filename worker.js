@@ -728,6 +728,7 @@ let calcChallenges = function(chunks, baseChunkData) {
         }
     });
     !!manualTasks && Object.keys(manualTasks).forEach((skill) => {
+        if (!chunkInfo['challenges'][skill]) return;
         Object.keys(manualTasks[skill]).forEach((challenge) => {
             let chalObj = chunkInfo['challenges'][skill][challenge];
             if (!!chunkInfo['challenges'][skill] && !!chalObj) {
