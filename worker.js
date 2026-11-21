@@ -2197,8 +2197,7 @@ let calcChallenges = function(chunks, baseChunkData) {
             if (!chunks.hasOwnProperty(tempChunk) && possibleAreas.hasOwnProperty(tempChunk)) {
                 let areasStructureKeys = Object.keys(areasStructure[tempChunk]);
                 if (areasStructureKeys.some(subArea => { return chunks.hasOwnProperty(subArea) })) {
-                    areasStructureKeys.filter(subArea => { return chunks.hasOwnProperty(subArea) && (!chunkInfo['sections'].hasOwnProperty(subArea) || !Object.keys(chunkInfo['sections'][subArea]).some((section) => section !== "0") || unlockedSections.hasOwnProperty(subArea)) }).some(subArea => {
-                        if (unconnectedAreas.includes(tempChunk) && (!chunkInfo['chunks'][subArea] || !chunkInfo['chunks'][subArea].hasOwnProperty('Nickname'))) return true;
+                    areasStructureKeys.filter(subArea => { return !unconnectedAreas.includes(subArea) && chunks.hasOwnProperty(subArea) && (!chunkInfo['sections'].hasOwnProperty(subArea) || !Object.keys(chunkInfo['sections'][subArea]).some((section) => section !== "0") || unlockedSections.hasOwnProperty(subArea)) }).some(subArea => {
                         if (!chunkInfo['chunks'][subArea].hasOwnProperty('Sections')) {
                             chunks[tempChunk] = true;
                             areasAdded[tempChunk] = true;

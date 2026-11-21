@@ -8365,7 +8365,7 @@ input#searchMonsters {
 
 .quest-steps-info {
     font-size: 18px;
-    margin: 0px 5px;
+    width: 6%;
 }
 
 .step-table-header {
@@ -8376,7 +8376,7 @@ input#searchMonsters {
 }
 
 .description-table-header {
-    padding-left: 10px;
+    padding-left: 1%;
     font-size: 18px;
     font-weight: bold;
     width: 88%;
@@ -8390,9 +8390,9 @@ input#searchMonsters {
 }
 
 .step-description {
-    padding-left: 10px;
+    padding-left: 1%;
     font-size: 20px;
-    width: 88%;
+    width: 82%;
     border-left: solid 1px var(--color8);
 }
 

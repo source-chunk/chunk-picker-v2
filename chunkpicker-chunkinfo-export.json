@@ -48782,6 +48782,7 @@
 			},
 			"Dorgesh-Kaan South Dungeon": {
 				"UnlocksArea": true,
+				"Chunks": ["Dorgesh-Kaan"],
 				"Items": ["LightSource[+]"],
 				"Tasks": {
 					"~|Death to the Dorgeshuun|~ Complete the quest": "Quest"
@@ -48903,6 +48904,7 @@
 			},
 			"Fisher Realm": {
 				"UnlocksArea": true,
+				"Chunks": ["10802-1"],
 				"Tasks": {
 					"~|Holy Grail|~ Complete the quest": "Quest"
 				},
@@ -49433,6 +49435,7 @@
 			},
 			"Myreque hideout#Canifis/Mort Myre Hideout": {
 				"UnlocksArea": true,
+				"Chunks": ["MortMyreHideout[+]"],
 				"Tasks": {
 					"~|In Search of the Myreque|~ 4": "Quest"
 				},
@@ -50285,6 +50288,7 @@
 			},
 			"Yu'biusk": {
 				"UnlocksArea": true,
+				"Chunks": ["Dorgesh-Kaan South Dungeon"],
 				"Tasks": {
 					"~|Land of the Goblins|~ 12": "Quest"
 				},
@@ -177996,7 +178000,8 @@
 			"Samoyed[+]": ["11055-1", "11055-2", "11056-1", "11311", "11312-1"],
 			"BerneseMountainDog[+]": ["10809-1", "10810-1"],
 			"Shiba[+]": ["6190-1", "6446"],
-			"Yorkie[+]": ["12325-1", "12325-2", "12326-1", "12326-2", "12581", "12582-2", "12582-3"]
+			"Yorkie[+]": ["12325-1", "12325-2", "12326-1", "12326-2", "12581", "12582-2", "12582-3"],
+			"MortMyreHideout[+]": ["13877-2", "13878-1"]
 		},
 		"chunksPlusNames": {
 			"10Coin[+]": "Any chunk with a 10-coin chest",
@@ -178240,7 +178245,8 @@
 			"Samoyed[+]": "Any chunk where the samoyed is wandering in",
 			"BerneseMountainDog[+]": "Any chunk where the bernese mountain dog is wandering in",
 			"Shiba[+]": "Any chunk where the shiba is wandering in",
-			"Yorkie[+]": "Any chunk where the yorkie is wandering in"
+			"Yorkie[+]": "Any chunk where the yorkie is wandering in",
+			"MortMyreHideout[+]": "Any chunk with access to the Mort Myre Hideout"
 		},
 		"dropTables": {
 			"AllotmentSeedDropTable+": {
