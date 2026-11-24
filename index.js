@@ -1535,7 +1535,7 @@ let topbarElements = {
     'Sandbox Mode': `<div><span class='noscroll' onclick="enableTestMode()"><i class="gosandbox fa-solid fa-flask" title='Sandbox Mode'></i></span></div>`,
 };
 
-let currentVersion = '6.10.11';
+let currentVersion = '6.10.12';
 let currentEnforcedVersion = '6.9.45';
 let patchNotesVersion = '6.9.12';
 let updateLevel = 'createdPOF-fix';
@@ -1717,7 +1717,7 @@ mapImg.addEventListener("load", e => {
         centerCanvas('quick');
     }
 });
-mapImg.src = "osrs_world_map.png?v=6.10.11";
+mapImg.src = "osrs_world_map.png?v=6.10.12";
 
 // Rounded rectangle
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -3652,7 +3652,7 @@ let calcCurrentChallengesCanvas = function(useOld, proceed, fromLoadData, inputT
         setCalculating('.panel-active', useOld);
         setCurrentChallenges(['No tasks currently backlogged.'], ['No tasks currently completed.'], true, true);
         myWorker.terminate();
-        myWorker = new Worker("./worker.js?v=6.10.11");
+        myWorker = new Worker("./worker.js?v=6.10.12");
         myWorker.onmessage = workerOnMessage;
         myWorker.postMessage({
             type: 'current',
@@ -4016,8 +4016,8 @@ $(document).ready(function() {
 // ------------------------------------------------------------
 
 // Recieve message from worker
-let myWorker = new Worker("./worker.js?v=6.10.11");
-let myWorker2 = new Worker("./worker.js?v=6.10.11");
+let myWorker = new Worker("./worker.js?v=6.10.12");
+let myWorker2 = new Worker("./worker.js?v=6.10.12");
 let workerOnMessage = function(e) {
     if (e.data.type === 'reload') {
         window.location.reload();
@@ -7196,7 +7196,7 @@ let calcFutureChallenges = function() {
     }
     tempSections = combineJSONs(tempSections, manualSections);
     myWorker2.terminate();
-    myWorker2 = new Worker("./worker.js?v=6.10.11");
+    myWorker2 = new Worker("./worker.js?v=6.10.12");
     myWorker2.onmessage = workerOnMessage;
     myWorker2.postMessage({
         type: 'future',
@@ -9811,7 +9811,7 @@ let checkSlayerLocked = function() {
             }
         });
         let slayerMethods = checkPrimaryMethod('Slayer', globalValids, baseChunkData, true);
-        if (!Object.keys(slayerMethods).some((name) => !name.includes('Receive a Slayer assignment from ') && (name !== 'Passive Leveling' || (passiveSkill.hasOwnProperty('Slayer') && passiveSkill['Slayer'] > slayerLocked['level'])) && name !== 'Quest Xp Rewards' && name !== 'Manually added skill')) {
+        if (Object.keys(slayerMethods).some((name) => !name.includes('Receive a Slayer assignment from ') && name !== 'Passive Leveling' && name !== 'Quest Xp Rewards' && name !== 'Manually added skill')) {
             unlockSlayer();
             return;
         }

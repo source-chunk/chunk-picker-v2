@@ -156400,14 +156400,14 @@
 				"10307": true
 			},
 			"Monster": {
-				"Anja": 1,
 				"Goblin#Drop table 1": 12,
-				"Hengel": 1,
 				"Rat": 4
 			},
 			"NPC": {
 				"Angel": 1,
+				"Anja": 1,
 				"Brian (Rimmington)": 1,
+				"Hengel": 1,
 				"Henja": 1,
 				"Hetty": 1,
 				"Phials": 1,
@@ -184559,68 +184559,6 @@
 				"1": "Always"
 			}
 		},
-		"Anja": {
-			"Bones": {
-				"1": "Always"
-			},
-			"Bronze med helm": {
-				"1": "2/128"
-			},
-			"Iron dagger": {
-				"1": "1/128"
-			},
-			"Bronze bolts": {
-				"2-12": "22/128"
-			},
-			"Bronze arrow": {
-				"7": "3/128"
-			},
-			"Earth rune": {
-				"4": "2/128"
-			},
-			"Fire rune": {
-				"6": "2/128"
-			},
-			"Mind rune": {
-				"9": "2/128"
-			},
-			"Chaos rune": {
-				"2": "1/128"
-			},
-			"Coins": {
-				"3": "38/128",
-				"10 (F2P)": "23/128",
-				"15": "4/128",
-				"25": "1/128"
-			},
-			"Nothing": {
-				"1": "8/128"
-			},
-			"Fishing bait": {
-				"1": "5/128"
-			},
-			"Copper ore": {
-				"1": "2/128"
-			},
-			"Earth talisman": {
-				"1": "2/128"
-			},
-			"Cabbage": {
-				"1": "1/128"
-			},
-			"Energy potion(3)": {
-				"1": "9/128"
-			},
-			"Clue scroll (beginner)": {
-				"1": "1/90"
-			},
-			"Clue scroll (easy)": {
-				"1": "1/128"
-			},
-			"HerbDropTable+": {
-				"1": "23/128"
-			}
-		},
 		"Ankou": {
 			"Bones": {
 				"1": "Always"
@@ -198767,68 +198705,6 @@
 			},
 			"WildernessSlayerCaveDropTable+": {
 				"1": "85/100"
-			}
-		},
-		"Hengel": {
-			"Bones": {
-				"1": "Always"
-			},
-			"Bronze med helm": {
-				"1": "2/128"
-			},
-			"Iron dagger": {
-				"1": "1/128"
-			},
-			"Bronze bolts": {
-				"2-12": "22/128"
-			},
-			"Bronze arrow": {
-				"7": "3/128"
-			},
-			"Earth rune": {
-				"4": "2/128"
-			},
-			"Fire rune": {
-				"6": "2/128"
-			},
-			"Mind rune": {
-				"9": "2/128"
-			},
-			"Chaos rune": {
-				"2": "1/128"
-			},
-			"Coins": {
-				"3": "38/128",
-				"10 (F2P)": "23/128",
-				"15": "4/128",
-				"25": "1/128"
-			},
-			"Nothing": {
-				"1": "8/128"
-			},
-			"Fishing bait": {
-				"1": "5/128"
-			},
-			"Copper ore": {
-				"1": "2/128"
-			},
-			"Earth talisman": {
-				"1": "2/128"
-			},
-			"Cabbage": {
-				"1": "1/128"
-			},
-			"Energy potion(3)": {
-				"1": "9/128"
-			},
-			"Clue scroll (beginner)": {
-				"1": "1/90"
-			},
-			"Clue scroll (easy)": {
-				"1": "1/128"
-			},
-			"HerbDropTable+": {
-				"1": "23/128"
 			}
 		},
 		"Hermit crab": {
@@ -254934,12 +254810,6 @@
 			"Bronze bolts^Thief": [{
 				"F2P Only": "Nonskill"
 			}],
-			"Bronze bolts^Anja": [{
-				"F2P Only": "Nonskill"
-			}],
-			"Bronze bolts^Hengel": [{
-				"F2P Only": "Nonskill"
-			}],
 			"Bronze bolts^Drunken man": [{
 				"F2P Only": "Nonskill"
 			}],
@@ -265750,6 +265620,7 @@
 		"thieving|NPCs": {
 			"Agnar": true,
 			"Anaire": true,
+			"Anja": true,
 			"Aranwe": true,
 			"Aredhel": true,
 			"Arvel": true,
@@ -265795,6 +265666,7 @@
 			"H.A.M. Member#Female": true,
 			"H.A.M. Member#Male": true,
 			"Haemas Lamescus": true,
+			"Hengel": true,
 			"Idril": true,
 			"Imin": true,
 			"Iminye": true,
@@ -265854,7 +265726,6 @@
 			"Vormar Vakan": true
 		},
 		"thieving|Monsters": {
-			"Anja": true,
 			"Al Kharid warrior": true,
 			"Alek Constantine": true,
 			"Bandit (Bandit Camp)": true,
@@ -265875,7 +265746,6 @@
 			"Knight of Ardougne": true,
 			"Knight of Varlamore": true,
 			"Man": true,
-			"Hengel": true,
 			"Menaphite Thug": true,
 			"Narf": true,
 			"Paladin": true,
