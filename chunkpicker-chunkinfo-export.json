@@ -258039,6 +258039,11 @@
 					"Abyssal demon task": "Nonskill"
 				}]
 			},
+			"Acidic Araxyte": {
+				"Morytania Spider Nest": [{
+					"Araxyte task": "Nonskill"
+				}]
+			},
 			"Adamant dragon": {
 				"Lithkren Vault": [{
 					"~|Dragon Slayer II|~ Complete the quest": "Quest"
@@ -258399,6 +258404,21 @@
 					"F2P Only": "Nonskill"
 				}, {
 					"Access the monkey bars under Edgeville ~|shortcut|~": "Agility"
+				}]
+			},
+			"Egg (Acidic)": {
+				"Morytania Spider Nest": [{
+					"Araxyte task": "Nonskill"
+				}]
+			},
+			"Egg (Mirrorback)": {
+				"Morytania Spider Nest": [{
+					"Araxyte task": "Nonskill"
+				}]
+			},
+			"Egg (Ruptura)": {
+				"Morytania Spider Nest": [{
+					"Araxyte task": "Nonskill"
 				}]
 			},
 			"Elder Chaos druid": {
@@ -258772,6 +258792,11 @@
 					"~|The Tourist Trap|~ Complete the quest": "Quest"
 				}]
 			},
+			"Mirrorback Araxyte": {
+				"Morytania Spider Nest": [{
+					"Araxyte task": "Nonskill"
+				}]
+			},
 			"Mogre": {
 				"11824-1": [{
 					"F2P Only": "Nonskill"
@@ -258909,6 +258934,11 @@
 			"Rune dragon": {
 				"Lithkren Vault": [{
 					"~|Dragon Slayer II|~ Complete the quest": "Quest"
+				}]
+			},
+			"Ruptura Araxyte": {
+				"Morytania Spider Nest": [{
+					"Araxyte task": "Nonskill"
 				}]
 			},
 			"Scorpion": {
